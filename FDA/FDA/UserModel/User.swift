@@ -14,6 +14,8 @@ enum UserType:Int{
     case FDAuser
 }
 
+
+//MARK: ApiConstants
 let kApiKeyFirstName = "firstName"
 let kApiKeyLastName = "lastName"
 let kApiKeyEmailId = "emailId"

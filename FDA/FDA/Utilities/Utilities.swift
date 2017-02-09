@@ -252,6 +252,9 @@ class Utilities: NSObject {
             else if someObject as? Bool != nil && someObject as! Bool{
                 return true
             }
+            else  if someObject as? Double != nil && (someObject as? Double)?.isFinite == true && (someObject as? Double)?.isZero == false && (someObject as? Double)! > 0 {
+                return true
+            }
             else{
                 Logger.sharedInstance.debug("Value is null:\(someObject)")
                 return false
@@ -272,7 +275,7 @@ class Utilities: NSObject {
         }
         
         if (someObject is NSNull) ==  false {
-            if someObject as? Dictionary<String, Any> != nil  &&  ((someObject as? Dictionary<String, Any>)?.count)! > 0{
+            if someObject as? Dictionary<String, Any> != nil  && (someObject as? Dictionary<String, Any>)?.isEmpty == false && ((someObject as? Dictionary<String, Any>)?.count)! > 0{
                 return true
             }
             else if someObject as? NSArray != nil && ((someObject as? NSArray)?.count)! > 0 {

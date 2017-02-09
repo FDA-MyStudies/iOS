@@ -15,19 +15,26 @@ enum UserType:Int{
 }
 
 
-//MARK: ApiConstants
-let kApiKeyFirstName = "firstName"
-let kApiKeyLastName = "lastName"
-let kApiKeyEmailId = "emailId"
-let kApiKeySettings = "settings"
-let kApiKeyUserId = "userId"
-let kApiKeyProfile = "profile"
-let kApiKeyInfo = "info"
-let kApiKeyOS = "os"
-let kApiKeyAppVersion = "appVersion"
+//MARK: UserApiConstants
+let kUserFirstName = "firstName"
+let kUserLastName = "lastName"
+let kUserEmailId = "emailId"
+let kUserSettings = "settings"
+let kUserUserId = "userId"
+let kUserProfile = "profile"
+let kUserInfo = "info"
+let kUserOS = "os"
+let kUserAppVersion = "appVersion"
 
 
-let kValueForOS = "ios"
+let kUserValueForOS = "ios"
+
+//MARK: Settings Api Constants
+
+let kSettingsRemoteNotifications = "remoteNotifications"
+let kSettingsLocalNotifications = "localNotifications"
+let kSettingsPassCode = "passCode"
+let kSettingsTouchId = "touchId"
 
 
 //MARK: User
@@ -77,21 +84,30 @@ class User{
     }
     
     func setUser(dict:NSDictionary)  {
-        if (dict["firstName"]) != nil{
-            self.firstName = dict["firstName"] as? String
+        
+        if Utilities.isValidObject(someObject: dict){
+            
+            if Utilities.isValidValue(someObject: dict[kUserFirstName] as AnyObject ){
+                self.firstName = dict[kUserFirstName] as? String
+            }
+            if Utilities.isValidValue(someObject: dict[kUserLastName] as AnyObject ){
+                self.lastName = dict[kUserLastName] as? String
+            }
+            if Utilities.isValidValue(someObject: dict[kUserEmailId] as AnyObject ){
+                self.emailId = dict[kUserEmailId] as? String
+            }
+            if Utilities.isValidObject(someObject: dict[kUserSettings] as AnyObject ) {
+                self.settings?.setSettings(dict: dict[kUserSettings] as! NSDictionary)
+            }
+            if Utilities.isValidValue(someObject: dict[kUserUserId] as AnyObject )  {
+                self.userId = dict[kUserUserId] as? String
+            }
         }
-        if (dict["lastName"]) != nil{
-             self.lastName = dict["lastName"] as? String
+        else{
+            Logger.sharedInstance.debug("User Dictionary is null:\(dict)")
         }
-        if (dict["emailId"]) != nil{
-            self.emailId = dict["emailId"] as? String
-        }
-        if (dict["settings"]) != nil {
-            self.settings?.setSettings(dict: dict["settings"] as! NSDictionary)
-        }
-        if (dict["userId"]) != nil {
-            self.userId = dict["userId"] as? String
-        }
+        
+        
         
     }
     func getUserProfileDict() -> NSMutableDictionary {
@@ -100,35 +116,35 @@ class User{
         if self.userType == .FDAuser {
             
             if self.userId != nil{
-                dataDict.setValue(self.userId, forKey:(kApiKeyUserId as NSCopying) as! String)
+                dataDict.setValue(self.userId, forKey:(kUserUserId as NSCopying) as! String)
             }
             let profileDict = NSMutableDictionary()
             
            
             if self.firstName != nil{
-                profileDict.setValue(self.firstName, forKey:(kApiKeyFirstName as NSCopying) as! String)
+                profileDict.setValue(self.firstName, forKey:(kUserFirstName as NSCopying) as! String)
             }
             else{
-                profileDict.setValue("", forKey:(kApiKeyFirstName as NSCopying) as! String)
+                profileDict.setValue("", forKey:(kUserFirstName as NSCopying) as! String)
             }
             if self.lastName != nil{
-                profileDict.setValue(self.lastName, forKey:(kApiKeyLastName as NSCopying) as! String)
+                profileDict.setValue(self.lastName, forKey:(kUserLastName as NSCopying) as! String)
             }
             else{
-                profileDict.setValue("", forKey:(kApiKeyLastName as NSCopying) as! String)
+                profileDict.setValue("", forKey:(kUserLastName as NSCopying) as! String)
             }
             
             let infoDict = NSMutableDictionary()
             
-            infoDict.setValue(kValueForOS, forKey:kApiKeyOS)
+            infoDict.setValue(kUserValueForOS, forKey:kUserOS)
            
             
             if let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String {
-                 infoDict.setValue(version, forKey:kApiKeyAppVersion)
+                 infoDict.setValue(version, forKey:kUserAppVersion)
             }
             
-            dataDict.setObject(profileDict, forKey:kApiKeyProfile as NSCopying)
-            dataDict.setObject(profileDict, forKey:kApiKeyInfo as NSCopying)
+            dataDict.setObject(profileDict, forKey:kUserProfile as NSCopying)
+            dataDict.setObject(profileDict, forKey:kUserInfo as NSCopying)
             
         }
         
@@ -175,17 +191,27 @@ class Settings{
     
     
     func setSettings(dict:NSDictionary)  {
-        if (dict["remoteNotifications"]) != nil{
-            self.remoteNotifications = dict["remoteNotifications"] as? Bool
+        
+        if Utilities.isValidObject(someObject: dict){
+            
+            if  Utilities.isValidValue(someObject: dict[kSettingsRemoteNotifications] as AnyObject){
+                self.remoteNotifications = dict[kSettingsRemoteNotifications] as? Bool
+            }
+            if Utilities.isValidValue(someObject: dict[kSettingsLocalNotifications] as AnyObject){
+                self.localNotifications = dict[kSettingsLocalNotifications] as? Bool
+            }
+            if Utilities.isValidValue(someObject: dict[kSettingsPassCode] as AnyObject){
+                self.passcode = dict[kSettingsPassCode] as? Bool
+            }
+            if Utilities.isValidValue(someObject: dict[kSettingsTouchId] as AnyObject){
+                self.touchId = dict[kSettingsTouchId] as? Bool
+            }
+            
         }
-        if (dict["localNotifications"]) != nil{
-            self.localNotifications = dict["localNotifications"] as? Bool
+        else{
+            Logger.sharedInstance.debug("Settings Dictionary is null:\(dict)")
         }
-        if (dict["passCode"]) != nil{
-            self.passcode = dict["passCode"] as? Bool
-        }
-        if (dict["touchId"]) != nil{
-            self.touchId = dict["touchId"] as? Bool
-        }
+        
+        
     }
 }

@@ -231,14 +231,69 @@ class Utilities: NSObject {
         
     }
     
-   class func isNull(someObject: AnyObject?) -> Bool {
+    class func isValidValue(someObject: AnyObject?) -> Bool {
+    
+    // this method checks validation of string, integer, bool
         guard let someObject = someObject else {
-            return true
+            // is null
+            
+            return false
         }
+        // is not null
         
-        return (someObject is NSNull)
+        if (someObject is NSNull) ==  false {
+            
+            if someObject as? Int != nil && (someObject as? Int)! > 0 {
+                return true
+            }
+            else if someObject as? String != nil && ((someObject as? String)?.characters.count)! > 0 && (someObject as? String) != ""{
+                return true
+            }
+            else if someObject as? Bool != nil && someObject as! Bool{
+                return true
+            }
+            else  if someObject as? Double != nil && (someObject as? Double)?.isFinite == true && (someObject as? Double)?.isZero == false && (someObject as? Double)! > 0 {
+                return true
+            }
+            else{
+                Logger.sharedInstance.debug("Value is null:\(someObject)")
+                return false
+            }
+            
+        }
+        else{
+            return false
+        }
     }
 
+    class func isValidObject(someObject: AnyObject?)-> Bool{
+       // this method validate dictionary and Array
+        guard let someObject = someObject else {
+            // is null
+            
+            return false
+        }
+        
+        if (someObject is NSNull) ==  false {
+            if someObject as? Dictionary<String, Any> != nil  && (someObject as? Dictionary<String, Any>)?.isEmpty == false && ((someObject as? Dictionary<String, Any>)?.count)! > 0{
+                return true
+            }
+            else if someObject as? NSArray != nil && ((someObject as? NSArray)?.count)! > 0 {
+               return true
+            }
+            else{
+                return false
+            }
+        }
+        else{
+            Logger.sharedInstance.debug("Object is null:\(someObject)")
+            return false
+        }
+        
+        
+    }
+    
+    
     
 }
 

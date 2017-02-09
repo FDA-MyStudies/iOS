@@ -35,8 +35,13 @@ enum MimeType:String{
     
 }
 
+//MARK: Api Constants
+let kFileMIMEType = "mimeType"
+let kFileName = "name"
+let kFileLink = "link"
 
 
+//MARK: File class
 class File{
     var mimeType : MimeType?
     var name : String?
@@ -67,28 +72,38 @@ class File{
     
     func setFile(dict:NSDictionary)  {
         
-        if (dict["mimeType"]) != nil &&  Utilities.isNull(someObject:dict["mimeType"]  as AnyObject?) == false    {
-            self.mimeType = dict["mimeType"] as? MimeType
+        if Utilities.isValidObject(someObject: dict){
+            
+            if Utilities.isValidValue(someObject: dict[kFileMIMEType] as AnyObject)   {
+                self.mimeType = dict[kFileMIMEType] as? MimeType
+            }
+            if Utilities.isValidValue(someObject: dict[kFileName] as AnyObject)  {
+                self.name = dict[kFileName] as? String
+            }
+            if Utilities.isValidValue(someObject: dict[kFileLink] as AnyObject)  {
+                self.link = dict[kFileLink] as? String
+            }
+            //download data
+            var fileData:NSData?
+            
+            fileData = NSData()
+            //save data
+            if fileData != nil{
+                if saveDataIntoDocuments(data: fileData!)  {
+                    NSLog("File saved successfully")
+                }
+                else{
+                    NSLog("File could not be saved")
+                }
+            }
+            
         }
-        if (dict["name"]) != nil &&  Utilities.isNull(someObject:dict["name"]  as AnyObject?) == false {
-            self.name = dict["name"] as? String
+        else{
+            Logger.sharedInstance.debug("File Dictionary is null:\(dict)")
         }
-        if (dict["link"]) != nil &&  Utilities.isNull(someObject:dict["link"]  as AnyObject?) == false {
-            self.link = dict["link"] as? String
-        }
-        //download data
-        var fileData:NSData?
         
-         fileData = NSData()
-        //save data
-        if fileData != nil{
-            if saveDataIntoDocuments(data: fileData!)  {
-                NSLog("File saved successfully")
-            }
-            else{
-                 NSLog("File could not be saved")
-            }
-        }
+        
+        
         
         
     }

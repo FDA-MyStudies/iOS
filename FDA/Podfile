@@ -7,7 +7,7 @@ target 'FDA' do
 
   # Pods for FDA
 
-pod 'ResearchKit'
+#pod 'ResearchKit'
 
   target 'FDATests' do
     inherit! :search_paths

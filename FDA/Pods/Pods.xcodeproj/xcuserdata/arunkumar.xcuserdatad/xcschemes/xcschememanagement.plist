@@ -19,11 +19,6 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>ResearchKit.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
@@ -32,12 +27,7 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>647839D56886268E576DECEDB593F7DA</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>7C94A2A25E73C63D57517FD247DDF3AE</key>
+		<key>7DD7354445ED73E05AFC011CCC6C53A6</key>
 		<dict>
 			<key>primary</key>
 			<true/>

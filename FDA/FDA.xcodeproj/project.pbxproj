@@ -26,6 +26,9 @@
 		6ECA92881E49F0CD00DA6287 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ECA92871E49F0CD00DA6287 /* Utilities.swift */; };
 		6ED8A2E61E447AA2004DEC01 /* Formatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ED8A2E31E447AA2004DEC01 /* Formatter.swift */; };
 		6ED8A2E71E447AA2004DEC01 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ED8A2E51E447AA2004DEC01 /* Logger.swift */; };
+		6EF05A941E4DAB0400CD7661 /* ResearchKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EF05A911E4DAAFB00CD7661 /* ResearchKit.framework */; };
+		6EF05A951E4DAB0400CD7661 /* ResearchKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6EF05A911E4DAAFB00CD7661 /* ResearchKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		6EF05A991E4DC36400CD7661 /* StepProvider.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6EF05A981E4DC36400CD7661 /* StepProvider.plist */; };
 		783BF4E8D79407893A004C3F /* Pods_FDA.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 77111DDCA5033C2FA7A5F7C8 /* Pods_FDA.framework */; };
 		F4AC5E62CD3F13025523AB4E /* Pods_FDATests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C7E9F55391795F1EBFD11F2 /* Pods_FDATests.framework */; };
 /* End PBXBuildFile section */
@@ -45,7 +48,42 @@
 			remoteGlobalIDString = 6E7D2D551E433E8700763D4C;
 			remoteInfo = FDA;
 		};
+		6EF05A901E4DAAFB00CD7661 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6EF05A8A1E4DAAFB00CD7661 /* ResearchKit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = B183A5951A8535D100C76870;
+			remoteInfo = ResearchKit;
+		};
+		6EF05A921E4DAAFB00CD7661 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6EF05A8A1E4DAAFB00CD7661 /* ResearchKit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 86CC8E9A1AC09332001CCD89;
+			remoteInfo = ResearchKitTests;
+		};
+		6EF05A961E4DAB0400CD7661 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6EF05A8A1E4DAAFB00CD7661 /* ResearchKit.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = B183A4731A8535D100C76870;
+			remoteInfo = ResearchKit;
+		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		6EF0570F1E4DA92C00CD7661 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				6EF05A951E4DAB0400CD7661 /* ResearchKit.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		081C20F9411D7D00FA1F5487 /* Pods-FDATests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FDATests.release.xcconfig"; path = "Pods/Target Support Files/Pods-FDATests/Pods-FDATests.release.xcconfig"; sourceTree = "<group>"; };
@@ -75,6 +113,8 @@
 		6ED8A2E31E447AA2004DEC01 /* Formatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Formatter.swift; sourceTree = "<group>"; };
 		6ED8A2E41E447AA2004DEC01 /* Logger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Logger.h; sourceTree = "<group>"; };
 		6ED8A2E51E447AA2004DEC01 /* Logger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
+		6EF05A8A1E4DAAFB00CD7661 /* ResearchKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = ResearchKit.xcodeproj; sourceTree = "<group>"; };
+		6EF05A981E4DC36400CD7661 /* StepProvider.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = StepProvider.plist; sourceTree = "<group>"; };
 		77111DDCA5033C2FA7A5F7C8 /* Pods_FDA.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FDA.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7E059BDA3C24219381C2DAD8 /* Pods-FDATests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FDATests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FDATests/Pods-FDATests.debug.xcconfig"; sourceTree = "<group>"; };
 		8C7E9F55391795F1EBFD11F2 /* Pods_FDATests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FDATests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -89,6 +129,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6EF05A941E4DAB0400CD7661 /* ResearchKit.framework in Frameworks */,
 				783BF4E8D79407893A004C3F /* Pods_FDA.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -138,6 +179,7 @@
 		6E7D2D4D1E433E8700763D4C = {
 			isa = PBXGroup;
 			children = (
+				6EF05A8A1E4DAAFB00CD7661 /* ResearchKit.xcodeproj */,
 				6E7D2D581E433E8700763D4C /* FDA */,
 				6E7D2D6D1E433E8800763D4C /* FDATests */,
 				6E7D2D781E433E8800763D4C /* FDAUITests */,
@@ -209,6 +251,7 @@
 			isa = PBXGroup;
 			children = (
 				6ECA927E1E499F8C00DA6287 /* StepProvider.swift */,
+				6EF05A981E4DC36400CD7661 /* StepProvider.plist */,
 			);
 			path = StepProvider;
 			sourceTree = "<group>";
@@ -248,6 +291,15 @@
 			path = Logger;
 			sourceTree = "<group>";
 		};
+		6EF05A8B1E4DAAFB00CD7661 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				6EF05A911E4DAAFB00CD7661 /* ResearchKit.framework */,
+				6EF05A931E4DAAFB00CD7661 /* ResearchKitTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -261,10 +313,12 @@
 				6E7D2D541E433E8700763D4C /* Resources */,
 				4F7E7DB7672068C53C399511 /* [CP] Embed Pods Frameworks */,
 				AAA08160BCD079B383EA5A29 /* [CP] Copy Pods Resources */,
+				6EF0570F1E4DA92C00CD7661 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				6EF05A971E4DAB0400CD7661 /* PBXTargetDependency */,
 			);
 			name = FDA;
 			productName = FDA;
@@ -347,10 +401,54 @@
 			knownRegions = (
 				en,
 				Base,
+				ar,
+				ca,
+				cs,
+				da,
+				de,
+				el,
+				en_AU,
+				en_GB,
+				es,
+				es_MX,
+				fi,
+				fr,
+				fr_CA,
+				he,
+				hi,
+				hr,
+				hu,
+				id,
+				it,
+				ja,
+				ko,
+				ms,
+				nl,
+				no,
+				pl,
+				pt,
+				pt_PT,
+				ro,
+				ru,
+				sk,
+				sv,
+				th,
+				tr,
+				uk,
+				vi,
+				zh_CN,
+				zh_HK,
+				zh_TW,
 			);
 			mainGroup = 6E7D2D4D1E433E8700763D4C;
 			productRefGroup = 6E7D2D571E433E8700763D4C /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 6EF05A8B1E4DAAFB00CD7661 /* Products */;
+					ProjectRef = 6EF05A8A1E4DAAFB00CD7661 /* ResearchKit.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				6E7D2D551E433E8700763D4C /* FDA */,
@@ -360,6 +458,23 @@
 		};
 /* End PBXProject section */
 
+/* Begin PBXReferenceProxy section */
+		6EF05A911E4DAAFB00CD7661 /* ResearchKit.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = ResearchKit.framework;
+			remoteRef = 6EF05A901E4DAAFB00CD7661 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		6EF05A931E4DAAFB00CD7661 /* ResearchKitTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = ResearchKitTests.xctest;
+			remoteRef = 6EF05A921E4DAAFB00CD7661 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
+
 /* Begin PBXResourcesBuildPhase section */
 		6E7D2D541E433E8700763D4C /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
@@ -368,6 +483,7 @@
 				6E7D2D8E1E43445600763D4C /* UserPreferences.plist in Resources */,
 				6E7D2D641E433E8800763D4C /* LaunchScreen.storyboard in Resources */,
 				6EAB39A91E4B0B4A003442B8 /* Resources.plist in Resources */,
+				6EF05A991E4DC36400CD7661 /* StepProvider.plist in Resources */,
 				6E7D2D611E433E8800763D4C /* Assets.xcassets in Resources */,
 				6E7D2D5F1E433E8800763D4C /* Main.storyboard in Resources */,
 				6E7D2D8C1E4340B200763D4C /* UserProfile.plist in Resources */,
@@ -575,6 +691,11 @@
 			target = 6E7D2D551E433E8700763D4C /* FDA */;
 			targetProxy = 6E7D2D761E433E8800763D4C /* PBXContainerItemProxy */;
 		};
+		6EF05A971E4DAB0400CD7661 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = ResearchKit;
+			targetProxy = 6EF05A961E4DAB0400CD7661 /* PBXContainerItemProxy */;
+		};
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
@@ -692,6 +813,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = C48C2144AE4C13F884F0B2A0 /* Pods-FDA.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 3485DDCN2M;
 				INFOPLIST_FILE = FDA/Info.plist;
@@ -707,6 +829,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 963CAB7313BD190F63FFA0BE /* Pods-FDA.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 3485DDCN2M;
 				INFOPLIST_FILE = FDA/Info.plist;

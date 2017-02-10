@@ -15,7 +15,7 @@
 //
 
 
-/*
+
 import Foundation
 import ResearchKit
 
@@ -25,7 +25,12 @@ import ResearchKit
 let kStepTitle = "title"
 let kStepQuestionTypeValue = "QuestionType"
 
+/*****************************************QUESTION STEP RESULT CONSTANTS*****************************************/
 
+
+
+
+/*********************************************************ENDS***************************************************/
 
 //Question Api Constants
 
@@ -270,7 +275,7 @@ class Step: ORKStep {
                 switch dataDict[kStepQuestionType] as! StepType {
                 case .scaleQuestionStep:
                     
-                   
+                    
                     
                     if  Utilities.isValidValue(someObject:formatDict?[kStepQuestionScaleMaxValue] as AnyObject?) &&  Utilities.isValidValue(someObject:formatDict?[kStepQuestionScaleMinValue] as AnyObject?) &&  Utilities.isValidValue(someObject:formatDict?[kStepQuestionScaleDefaultValue] as AnyObject?) &&  Utilities.isValidValue(someObject:formatDict?[kStepQuestionScaleStep] as AnyObject?) &&  Utilities.isValidValue(someObject:formatDict?[kStepQuestionScaleVertical] as AnyObject?) &&  Utilities.isValidValue(someObject:formatDict?[kStepQuestionScaleMaxDesc] as AnyObject?) &&  Utilities.isValidValue(someObject:formatDict?[kStepQuestionScaleMinDesc] as AnyObject?){
                         
@@ -280,7 +285,7 @@ class Step: ORKStep {
                         
                     }
                     else{
-                        //debug lines
+                       Logger.sharedInstance.debug("Scale Question Step has null values:\(formatDict)")
                     }
                 case .continuousScaleQuestionStep:
                     
@@ -294,7 +299,7 @@ class Step: ORKStep {
                         
                     }
                     else{
-                        //debug lines
+                        Logger.sharedInstance.debug("Continuous Scale Question Step has null values:\(formatDict)")
                     }
                 case .textScaleQuestionStep:
                     
@@ -310,7 +315,7 @@ class Step: ORKStep {
                         
                     }
                     else{
-                        //debug lines
+                         Logger.sharedInstance.debug("Text Scale Question Step has null values:\(formatDict)")
                     }
                 case .valuePickerChoiceQuestionStep:
                     
@@ -326,7 +331,7 @@ class Step: ORKStep {
                         
                     }
                     else{
-                        //debug lines
+                          Logger.sharedInstance.debug("valuePickerChoice Question Step has null values:\(formatDict)")
                     }
                 case .imageChoiceQuestionStep:
                     
@@ -341,7 +346,7 @@ class Step: ORKStep {
                         
                     }
                     else{
-                        //debug lines
+                         Logger.sharedInstance.debug("imageChoice Question Step has null values:\(formatDict)")
                     }
                 case .textChoiceQuestionStep:
                     // array(text choices) + int(selection Type)
@@ -361,11 +366,11 @@ class Step: ORKStep {
                             questionStepAnswerFormat = ORKTextChoiceAnswerFormat(style: ORKChoiceAnswerStyle.multipleChoice, textChoices: textChoiceArray!)
                         }
                         else{
-                            // debug line for invalid selection type
+                            Logger.sharedInstance.debug("kStepQuestionTextChoiceSelectionStyle has null value:\(formatDict)")
                         }
                     }
                     else{
-                        //debug lines
+                        Logger.sharedInstance.debug("textChoice Question Step has null values:\(formatDict)")
                     }
                 case .numericQuestionStep:
                     
@@ -381,14 +386,14 @@ class Step: ORKStep {
                         case .decimal:
                             questionStepAnswerFormat = ORKAnswerFormat.decimalAnswerFormat(withUnit: localizedQuestionStepAnswerFormatUnit)
                         default:
-                            // debug lines
+                            Logger.sharedInstance.debug("kStepQuestionNumericStyle Step has null values:\(formatDict)")
                             break
                         }
                         
                         
                     }
                     else{
-                        //debug lines
+                        Logger.sharedInstance.debug("numericQuestionStep has null values:\(formatDict)")
                     }
                 case .dateQuestionStep:
                     
@@ -418,12 +423,11 @@ class Step: ORKStep {
                             questionStepAnswerFormat = ORKAnswerFormat.dateTime(withDefaultDate: defaultDate as Date?, minimumDate: minimumDate as Date?, maximumDate: maximumDate as Date?, calendar: NSCalendar.current)
                             
                         default: break
-                            // debug lines
-                            
+                            //break
                         }
                         
                     }else{
-                        // debug lines
+                         Logger.sharedInstance.debug("dateQuestionStep has null values:\(formatDict)")
                         
                     }
                 case .textQuestionStep:
@@ -443,7 +447,7 @@ class Step: ORKStep {
                         
                     }
                     else{
-                        //debug lines
+                         Logger.sharedInstance.debug("textQuestionStep has null values:\(formatDict)")
                     }
                 case .validatedTextQuestionStepEmail:
                     
@@ -455,7 +459,7 @@ class Step: ORKStep {
                         
                     }
                     else{
-                        //debug lines
+                       Logger.sharedInstance.debug("validatedTextQuestionStepEmail has null values:\(formatDict)")
                     }
                 case .timeIntervalQuestionStep:
                     
@@ -467,7 +471,7 @@ class Step: ORKStep {
                         
                     }
                     else{
-                        //debug lines
+                        Logger.sharedInstance.debug("timeIntervalQuestionStep has null values:\(formatDict)")
                     }
                 case .heightQuestion:
                     
@@ -479,7 +483,7 @@ class Step: ORKStep {
                         
                     }
                     else{
-                        //debug lines
+                         Logger.sharedInstance.debug("heightQuestion has null values:\(formatDict)")
                     }
                 case .locationQuestionStep:
                     if  Utilities.isValidValue(someObject:formatDict?[kStepQuestionLocationUseCurrentLocation] as AnyObject?)
@@ -492,7 +496,7 @@ class Step: ORKStep {
                         
                     }
                     else{
-                        //debug lines
+                        Logger.sharedInstance.debug("locationQuestionStep has null values:\(formatDict)")
                     }
                 default:break
                     
@@ -544,17 +548,17 @@ class Step: ORKStep {
         
         textChoiceArray = [ORKTextChoice]()
         
-        if dataArray != nil {
+        if  Utilities.isValidObject(someObject:dataArray )  {
             
             for i  in 0 ..< dataArray.count {
                 
-                if ((dataArray[i] as? [Dictionary<String, Any>]) != nil)  {
+                if (Utilities.isValidObject(someObject:dataArray[i] as AnyObject?) && ((dataArray[i] as? NSDictionary) != nil)) {
                     // if it is array of dictionary used TextScale
                     let dict:NSDictionary = dataArray[i] as! NSDictionary
                     
-                    if dict != nil{
+                    if Utilities.isValidObject(someObject: dict){
                         
-                        if dict[kORKTextChoiceText] != nil && dict[kORKTextChoiceValue] != nil && dict[kORKTextChoiceDetailText] != nil && dict[kORKTextChoiceExclusive] != nil {
+                        if  Utilities.isValidValue(someObject:dict[kORKTextChoiceText] as AnyObject?) &&  Utilities.isValidValue(someObject:dict[kORKTextChoiceValue] as AnyObject?) &&  Utilities.isValidValue(someObject:dict[kORKTextChoiceDetailText] as AnyObject?) &&  Utilities.isValidValue(someObject:dict[kORKTextChoiceExclusive] as AnyObject?) {
                             
                             let  choice = ORKTextChoice(text: dict[kORKTextChoiceText] as! String, detailText: dict[kORKTextChoiceDetailText] as? String, value: dict[kORKTextChoiceValue] as? Int as! NSCoding & NSCopying & NSObjectProtocol, exclusive: (dict[kORKTextChoiceValue] as? Bool)!)
                             textChoiceArray?.append(choice)
@@ -562,19 +566,19 @@ class Step: ORKStep {
                         }
                         
                     }
-                }
-                else if dataArray[i] as? String != nil{
+                    }
+                    else if dataArray[i] as? String != nil && Utilities.isValidValue(someObject:dataArray[i] as AnyObject? ){
                     // if it is array of string used for Value Picker & TextChoice
                     let key:String = dataArray[i] as! String
                     
-                    if key != nil {
-                        
-                        let choice = ORKTextChoice(text: key, value: i as NSCoding & NSCopying & NSObjectProtocol )
-                        
-                        textChoiceArray?.append(choice)
+                    if Utilities.isValidValue(someObject: key as AnyObject?) {
+                    
+                    let choice = ORKTextChoice(text: key, value: i as NSCoding & NSCopying & NSObjectProtocol )
+                    
+                    textChoiceArray?.append(choice)
                     }
-                }
-                else{
+                    }
+                    else{
                     // Debug Lines
                 }
                 
@@ -593,17 +597,15 @@ class Step: ORKStep {
         let imageChoiceArray:[ORKImageChoice]?
         
         imageChoiceArray = [ORKImageChoice]()
-        if dataArray != nil {
+        if Utilities.isValidObject(someObject: dataArray){
             
             for i  in 0 ..< dataArray.count {
                 
-                if ((dataArray[i] as? [Dictionary<String, Any>]) != nil)  {
+                if Utilities.isValidObject(someObject: dataArray[i] as AnyObject ) {
                     // if it is array of dictionary
                     let dict:NSDictionary = dataArray[i] as! NSDictionary
                     
-                    if dict != nil{
-                        
-                        if dict[kStepQuestionImageChoiceImage] != nil && dict[kStepQuestionImageChoiceSelectedImage] != nil && dict[kStepQuestionImageChoiceText] != nil && dict[kStepQuestionImageChoiceValue] != nil {
+                        if  Utilities.isValidValue(someObject: dict[kStepQuestionImageChoiceImage] as AnyObject? ) &&  Utilities.isValidValue(someObject:dict[kStepQuestionImageChoiceSelectedImage] as AnyObject?) &&  Utilities.isValidValue(someObject:dict[kStepQuestionImageChoiceText] as AnyObject?) &&  Utilities.isValidValue(someObject:dict[kStepQuestionImageChoiceValue] as AnyObject?) {
                             
                             // check if file exist at local path
                             
@@ -622,14 +624,15 @@ class Step: ORKStep {
                             imageChoiceArray?.append(choice)
                             
                         }
-                        
-                    }
-                    else{
-                        // debug lines : dictionary is nil
-                    }
+                }
+                else{
+                    Logger.sharedInstance.debug("ORKImageChoice Dictionary is null :\(dataArray[i])")
                 }
                 
             }
+        }
+        else{
+             Logger.sharedInstance.debug("ORKImageChoice Array is null :\(dataArray)")
         }
         return imageChoiceArray!
     }
@@ -638,4 +641,4 @@ class Step: ORKStep {
     
     
 }
-*/
+

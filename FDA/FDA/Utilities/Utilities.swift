@@ -12,6 +12,12 @@ import UIKit
 let MAX_WIDTH = 1000
 let MAX_HEIGHT = 100
 
+
+enum DirectoryType : String{
+    case study = "Study"
+    case gateway = "Gateway"
+}
+
 struct ScreenSize {
     
     static let SCREEN_WIDTH         = UIScreen.main.bounds.size.width
@@ -266,6 +272,9 @@ class Utilities: NSObject {
         }
     }
 
+    
+    
+    
     class func isValidObject(someObject: AnyObject?)-> Bool{
        // this method validate dictionary and Array
         guard let someObject = someObject else {
@@ -308,4 +317,34 @@ extension FileManager {
         var paths = NSSearchPathForDirectoriesInDomains(.cachesDirectory, .userDomainMask, true) as [String]
         return paths[0]
     }
+    
+    
+    class func getStorageDirectory(type:DirectoryType) -> String{
+        // method to create study or gateway directory if not there or else will return directory path
+        
+        let fileManager = FileManager.default
+       
+        let fullPath = self.documentsDir() + "/" + "\(type)"
+        
+        var isDirectory : ObjCBool = false
+        if fileManager.fileExists(atPath: fullPath, isDirectory:&isDirectory) {
+            if isDirectory.boolValue {
+                // file exists and is a directory
+                return fullPath
+            } else {
+                // file exists and is not a directory
+                return ""
+            }
+        } else {
+            // file does not exist
+            do {
+                try FileManager.default.createDirectory(atPath: fullPath, withIntermediateDirectories: false, attributes: nil)
+                return fullPath
+            } catch let error as NSError {
+                print(error.localizedDescription);
+                return ""
+            }
+        }
+    }
+    
 }

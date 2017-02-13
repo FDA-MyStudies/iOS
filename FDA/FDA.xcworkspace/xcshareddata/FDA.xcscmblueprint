@@ -10,7 +10,7 @@
   "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "883A99A5-78EC-4AA5-8C18-3735ECE1251F",
   "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
     "9CF6181E3789E3853840089C16D4B9FDDB9B31E2" : "..\/THIRDPARTYLIBRARIES\/ResearchkitForHarward",
-    "FAC787CAF593B627D3E8264AE75835A2FE35821C" : "Harward_Git\/"
+    "FAC787CAF593B627D3E8264AE75835A2FE35821C" : "FDA_git\/"
   },
   "DVTSourceControlWorkspaceBlueprintNameKey" : "FDA",
   "DVTSourceControlWorkspaceBlueprintVersion" : 204,

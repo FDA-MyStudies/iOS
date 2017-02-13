@@ -27,6 +27,8 @@
 		6ED8A2E71E447AA2004DEC01 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ED8A2E51E447AA2004DEC01 /* Logger.swift */; };
 		9432C2F71E4C483D005984EC /* RegistrationServerConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9432C2F61E4C483D005984EC /* RegistrationServerConfiguration.swift */; };
 		9432C2F91E4C4993005984EC /* ResponseServerConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9432C2F81E4C4993005984EC /* ResponseServerConfiguration.swift */; };
+		9432C2FB1E4C9EF8005984EC /* UserServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9432C2FA1E4C9EF8005984EC /* UserServices.swift */; };
+		94C602311E51C7D500CB72F7 /* WCPServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94C602301E51C7D500CB72F7 /* WCPServices.swift */; };
 		94CD96E81E4AF61800946477 /* NetworkConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94CD96E41E4AF61800946477 /* NetworkConstants.swift */; };
 		94CD96E91E4AF61800946477 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94CD96E51E4AF61800946477 /* NetworkManager.swift */; };
 		94CD96EA1E4AF61800946477 /* NetworkWebServiceHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94CD96E61E4AF61800946477 /* NetworkWebServiceHandler.swift */; };
@@ -80,6 +82,8 @@
 		6ED8A2E51E447AA2004DEC01 /* Logger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		9432C2F61E4C483D005984EC /* RegistrationServerConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegistrationServerConfiguration.swift; sourceTree = "<group>"; };
 		9432C2F81E4C4993005984EC /* ResponseServerConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResponseServerConfiguration.swift; sourceTree = "<group>"; };
+		9432C2FA1E4C9EF8005984EC /* UserServices.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserServices.swift; sourceTree = "<group>"; };
+		94C602301E51C7D500CB72F7 /* WCPServices.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WCPServices.swift; sourceTree = "<group>"; };
 		94CD96E41E4AF61800946477 /* NetworkConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkConstants.swift; sourceTree = "<group>"; };
 		94CD96E51E4AF61800946477 /* NetworkManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		94CD96E61E4AF61800946477 /* NetworkWebServiceHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkWebServiceHandler.swift; sourceTree = "<group>"; };
@@ -236,6 +240,8 @@
 				94CD96EE1E4B16D900946477 /* WCPConfiguration.swift */,
 				9432C2F61E4C483D005984EC /* RegistrationServerConfiguration.swift */,
 				9432C2F81E4C4993005984EC /* ResponseServerConfiguration.swift */,
+				9432C2FA1E4C9EF8005984EC /* UserServices.swift */,
+				94C602301E51C7D500CB72F7 /* WCPServices.swift */,
 			);
 			path = NetworkModule;
 			sourceTree = "<group>";
@@ -389,9 +395,11 @@
 				6ECA92851E49B5CF00DA6287 /* File.swift in Sources */,
 				9432C2F91E4C4993005984EC /* ResponseServerConfiguration.swift in Sources */,
 				94CD96EA1E4AF61800946477 /* NetworkWebServiceHandler.swift in Sources */,
+				9432C2FB1E4C9EF8005984EC /* UserServices.swift in Sources */,
 				6ECA92881E49F0CD00DA6287 /* Utilities.swift in Sources */,
 				6E7D2D8A1E43400100763D4C /* User.swift in Sources */,
 				94CD96EF1E4B16D900946477 /* WCPConfiguration.swift in Sources */,
+				94C602311E51C7D500CB72F7 /* WCPServices.swift in Sources */,
 				94CD96ED1E4AFAFF00946477 /* NetworkConfiguration.swift in Sources */,
 				9432C2F71E4C483D005984EC /* RegistrationServerConfiguration.swift in Sources */,
 				6ECA92821E49B3BB00DA6287 /* Resource.swift in Sources */,

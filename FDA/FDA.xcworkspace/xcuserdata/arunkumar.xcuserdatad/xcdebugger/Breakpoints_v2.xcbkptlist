@@ -9,13 +9,29 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "FDA/StepProvider/StepProvider.swift"
-            timestampString = "508400078.645639"
+            filePath = "FDA/ActivityStep/ActivityQuestionStep.swift"
+            timestampString = "508668962.159815"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "472"
-            endingLineNumber = "472"
-            landmarkName = "getQuestionStep(dataDict:)"
+            startingLineNumber = "280"
+            endingLineNumber = "280"
+            landmarkName = "getQuestionStep()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "FDA/ActivityStep/ActivityQuestionStep.swift"
+            timestampString = "508668965.425242"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "282"
+            endingLineNumber = "282"
+            landmarkName = "getQuestionStep()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -25,14 +41,30 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "FDA/StepProvider/StepProvider.swift"
-            timestampString = "508411559.749779"
+            filePath = "FDA/ActivityStep/ActivityInstructionStep.swift"
+            timestampString = "508672821.87411"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "388"
-            endingLineNumber = "388"
-            landmarkName = "getQuestionStep(dataDict:)"
+            startingLineNumber = "59"
+            endingLineNumber = "59"
+            landmarkName = "getInstructionStep()"
             landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "FDA/ActivityStep/ActivityQuestionStep.swift"
+            timestampString = "508674171.934782"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "227"
+            endingLineNumber = "227"
+            landmarkName = "QuestionStep"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

@@ -12,7 +12,16 @@ import UIKit
 enum WCPMethods:String {
     
     //TODO : Write exact name for request method
-    case login
+    case gatewayInfo
+    case studyList
+    case eligibilityConsent
+    case resources
+    case studyInfo
+    case activityList
+    case activity
+    case studyDashboard
+    case termsPolicy
+    case notifications
     
     var method:Method{
         switch self {
@@ -48,7 +57,10 @@ class WCPConfiguration: NetworkConfiguration {
     }
     
     override func getDefaultHeaders() -> [String : String] {
-        return Dictionary()
+        
+        let headers = ["bundleId":Utilities.getBundleIdentifier(),
+                       "apptoken":""]
+        return headers
     }
     override func getDefaultRequestParameters() -> [String : Any] {
         return Dictionary()

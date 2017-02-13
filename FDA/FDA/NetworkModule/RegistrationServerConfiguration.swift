@@ -9,12 +9,35 @@
 import UIKit
 enum RegistrationMethods:String {
     //TODO : Write exact name for request method
+    case login
     case register
+    case confirmRegistration
+    case userProfile
+    case updateUserProfile
+    case userPreferences
+    case updatePreferences
+    case updateEligibilityConsentStatus
+    case consentPDF
+    case updateActivityState
+    case activityState
+    case withdraw
+    case forgotPassword
+    case logout
+    
+    
     
     var method:Method{
         switch self {
-        default:
+       
+        case .activityState,.consentPDF,.userPreferences,.userProfile,.forgotPassword,.confirmRegistration :
+            //GET Methods
             return Method(methodName:self.rawValue, methodType: .httpMethodGet, requestType: .requestTypeJSON)
+        case .withdraw,.logout:
+            //DELETE Methods
+            return Method(methodName:self.rawValue, methodType: .httpMethodDELETE, requestType: .requestTypeJSON)
+        default:
+            //POST Methods
+            return Method(methodName:self.rawValue, methodType: .httpMethodPOST, requestType: .requestTypeJSON)
             
             
         }

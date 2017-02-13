@@ -4,25 +4,7 @@
 <dict>
 	<key>format</key>
 	<dict>
-		<key>maxValue</key>
-		<integer>10</integer>
-		<key>minValue</key>
-		<integer>0</integer>
-        <key>default</key>
-        <integer>0</integer>
-        <key>step</key>
-        <integer>2</integer>
-        <key>vertical</key>
-        <Boolean>yes</Boolean>
-        <key>maxDesc</key>
-        <integer>0</integer>
-        <key>minDesc</key>
-        <integer>0</integer>
-        <key>maxImage</key>
-        <integer>0</integer>
-        <key>minImage</key>
-        <integer>0</integer>
-	</dict>
+			</dict>
 	<key>phi</key>
 	<string>NotPHI</string>
 	<key>destinations</key>

@@ -251,14 +251,14 @@ class UserServices: NSObject {
         let studies = response[kStudies] as! Array<Dictionary<String, Any>>
         
         for study in studies {
-            let participatedStudy = UserStudyStatus().initUserStudyStatus(study)
+            let participatedStudy = UserStudyStatus(detail: study)
             user.participatedStudies.append(participatedStudy)
         }
         
         //activities
         let activites = response[kActivites]  as! Array<Dictionary<String, Any>>
         for activity in activites {
-            let participatedActivity = UserActivityStatus().initUserActivityStatus(activity)
+            let participatedActivity = UserActivityStatus(detail: activity)
             user.participatedActivites.append(participatedActivity)
         }
     }
@@ -288,7 +288,7 @@ class UserServices: NSObject {
         //activities
         let activites = response[kActivites]  as! Array<Dictionary<String, Any>>
         for activity in activites {
-            let participatedActivity = UserActivityStatus().initUserActivityStatus(activity)
+            let participatedActivity = UserActivityStatus(detail: activity)
             user.participatedActivites.append(participatedActivity)
         }
     }

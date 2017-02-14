@@ -32,7 +32,6 @@ enum ActivityStepType:String{
     case instructionStep = "instruction"
     case questionStep = "question"
     case activeStep = "task" // active step
-    case noneStep = "none"
 }
 
 
@@ -42,7 +41,7 @@ class ActivityStep{
     var type:ActivityStepType?
     
     var resultType:Any?
-    var key:String?
+    var key:String? // Identifier
     var title:String?
     var text:String?
     var  skippable:Bool?
@@ -55,7 +54,7 @@ class ActivityStep{
     
     init() {
         self.activityId = ""
-        self.type = .noneStep
+        self.type = .questionStep
         self.resultType = ""
         self.key = ""
         self.title = ""

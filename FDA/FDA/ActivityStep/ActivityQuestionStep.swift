@@ -230,304 +230,362 @@ class QuestionStep: ActivityStep {
     override init() {
         
         super.init()
-       self.phi = .limited
+        self.phi = .limited
         self.formatDict? = Dictionary()
     }
     
     override func initWithDict(stepDict: Dictionary<String, Any>) {
-       
+        // Setter method with dictionary
         
         if Utilities.isValidObject(someObject: stepDict as AnyObject?){
             
-             super.initWithDict(stepDict: stepDict)
+            super.initWithDict(stepDict: stepDict)
             
-            if Utilities.isValidValue(someObject: stepDict[kActivityStepActivityId] as AnyObject ){
-                self.phi = stepDict[kActivityStepActivityId] as? PHIType
+            if Utilities.isValidValue(someObject: stepDict[kStepQuestionPhi] as AnyObject ){
+                self.phi = stepDict[kStepQuestionPhi] as? PHIType
             }
             
-            if Utilities.isValidValue(someObject: stepDict[kActivityStepType] as AnyObject ){
-                self.formatDict = (stepDict[kActivityStepType] as? Dictionary)!
+            if Utilities.isValidObject(someObject: stepDict[kStepQuestionTypeValue] as AnyObject ){
+                self.formatDict = (stepDict[kStepQuestionTypeValue] as? Dictionary)!
             }
         }
         else{
             Logger.sharedInstance.debug("Question Step Dictionary is null:\(stepDict)")
         }
-
+        
     }
     
     
-    //MARK: Step Creation
+    //MARK:Question Step Creation
     
-    func getQuestionStep() -> ORKQuestionStep {
+    func getQuestionStep() -> ORKQuestionStep? {
         
-            if Utilities.isValidObject(someObject: self.formatDict as AnyObject?) && Utilities.isValidValue(someObject:resultType  as AnyObject?)   {
+        //method to create question step
+        
+        if Utilities.isValidObject(someObject: self.formatDict as AnyObject?) && Utilities.isValidValue(someObject:resultType  as AnyObject?)   {
+            
+            var questionStepAnswerFormat:ORKAnswerFormat?
+            
+            var questionStep:ORKQuestionStep?
+            
+            switch resultType as! QuestionStepType {
+            case .scaleQuestionStep:
                 
-                var questionStepAnswerFormat:ORKAnswerFormat?
-                
-                var questionStep:ORKQuestionStep?
-                
-                switch resultType as! QuestionStepType {
-                case .scaleQuestionStep:
+                if  Utilities.isValidValue(someObject:formatDict?[kStepQuestionScaleMaxValue] as AnyObject?) &&  Utilities.isValidValue(someObject:formatDict?[kStepQuestionScaleMinValue] as AnyObject?)
+                    &&  Utilities.isValidValue(someObject:formatDict?[kStepQuestionScaleDefaultValue] as AnyObject?)
+                    &&  Utilities.isValidValue(someObject:formatDict?[kStepQuestionScaleStep] as AnyObject?)
+                    &&  Utilities.isValidValue(someObject:formatDict?[kStepQuestionScaleVertical] as AnyObject?)
+                    &&  Utilities.isValidValue(someObject:formatDict?[kStepQuestionScaleMaxDesc] as AnyObject?)
+                    &&  Utilities.isValidValue(someObject:formatDict?[kStepQuestionScaleMinDesc] as AnyObject?){
                     
-                    if  Utilities.isValidValue(someObject:formatDict?[kStepQuestionScaleMaxValue] as AnyObject?) &&  Utilities.isValidValue(someObject:formatDict?[kStepQuestionScaleMinValue] as AnyObject?) &&  Utilities.isValidValue(someObject:formatDict?[kStepQuestionScaleDefaultValue] as AnyObject?) &&  Utilities.isValidValue(someObject:formatDict?[kStepQuestionScaleStep] as AnyObject?) &&  Utilities.isValidValue(someObject:formatDict?[kStepQuestionScaleVertical] as AnyObject?) &&  Utilities.isValidValue(someObject:formatDict?[kStepQuestionScaleMaxDesc] as AnyObject?) &&  Utilities.isValidValue(someObject:formatDict?[kStepQuestionScaleMinDesc] as AnyObject?){
-                        
-                        questionStepAnswerFormat = ORKAnswerFormat.scale(withMaximumValue: (formatDict?[kStepQuestionScaleMaxValue] as? Int)!, minimumValue: (formatDict?[kStepQuestionScaleMinValue] as? Int)!, defaultValue: (formatDict?[kStepQuestionScaleDefaultValue] as? Int)!, step: (formatDict?[kStepQuestionScaleStep] as? Int)!, vertical: (formatDict?[kStepQuestionScaleVertical] as? Bool)!, maximumValueDescription: (formatDict?[kStepQuestionScaleMaxDesc] as? String)!, minimumValueDescription: (formatDict?[kStepQuestionScaleMinDesc] as? String)!)
-                        
-                        //questionStep?.placeholder =???
-                        
-                    }
-                    else{
-                        Logger.sharedInstance.debug("Scale Question Step has null values:\(formatDict)")
-                    }
-                case .continuousScaleQuestionStep:
+                    questionStepAnswerFormat = ORKAnswerFormat.scale(withMaximumValue: (formatDict?[kStepQuestionScaleMaxValue] as? Int)!,
+                                                                     minimumValue: (formatDict?[kStepQuestionScaleMinValue] as? Int)!,
+                                                                     defaultValue: (formatDict?[kStepQuestionScaleDefaultValue] as? Int)!,
+                                                                     step: (formatDict?[kStepQuestionScaleStep] as? Int)!,
+                                                                     vertical: (formatDict?[kStepQuestionScaleVertical] as? Bool)!,
+                                                                     maximumValueDescription: (formatDict?[kStepQuestionScaleMaxDesc] as? String)!,
+                                                                     minimumValueDescription: (formatDict?[kStepQuestionScaleMinDesc] as? String)!)
                     
-                    if  Utilities.isValidValue(someObject:formatDict?[kStepQuestionContinuosScaleMaxValue] as AnyObject?) &&  Utilities.isValidValue(someObject:formatDict?[kStepQuestionContinuosScaleMinValue] as AnyObject?) &&  Utilities.isValidValue(someObject:formatDict?[kStepQuestionContinuosScaleDefaultValue] as AnyObject?) &&  Utilities.isValidValue(someObject:formatDict?[kStepQuestionContinuosScaleMaxFractionDigits] as AnyObject?) && formatDict?[kStepQuestionContinuosScaleVertical] != nil && formatDict?[kStepQuestionContinuosScaleMaxDesc] != nil &&  Utilities.isValidValue(someObject:formatDict?[kStepQuestionScaleMinDesc] as AnyObject?){
-                        
-                        questionStepAnswerFormat = ORKAnswerFormat.continuousScale(withMaximumValue: (formatDict?[kStepQuestionContinuosScaleMaxValue] as? Double)!, minimumValue: (formatDict?[kStepQuestionContinuosScaleMinValue] as? Double)!, defaultValue: (formatDict?[kStepQuestionContinuosScaleDefaultValue] as? Double)!, maximumFractionDigits: (formatDict?[kStepQuestionContinuosScaleMaxFractionDigits] as? Int)!, vertical: (formatDict?[kStepQuestionContinuosScaleVertical] as? Bool)!, maximumValueDescription: (formatDict?[kStepQuestionContinuosScaleMaxDesc] as? String)!
-                            , minimumValueDescription: (formatDict?[kStepQuestionScaleMinDesc] as? String)!)
-                        
-                        
-                        
-                        
-                    }
-                    else{
-                        Logger.sharedInstance.debug("Continuous Scale Question Step has null values:\(formatDict)")
-                    }
-                case .textScaleQuestionStep:
-                    
-                    if  Utilities.isValidValue(someObject:formatDict?[kStepQuestionTextScaleTextChoices] as AnyObject?) &&  Utilities.isValidValue(someObject:formatDict?[kStepQuestionTextScaleDefault] as AnyObject?) &&  Utilities.isValidValue(someObject:formatDict?[kStepQuestionTextScaleVertical] as AnyObject?) {
-                        
-                        let textChoiceArray:[ORKTextChoice]?
-                        
-                        textChoiceArray = self.getTextChoices(dataArray: formatDict?[kStepQuestionScaleMaxValue] as! NSArray)
-                        
-                        questionStepAnswerFormat = ORKAnswerFormat.textScale(with: textChoiceArray!, defaultIndex: formatDict?[kStepQuestionTextScaleDefault] as! Int, vertical: formatDict?[kStepQuestionTextScaleVertical] as! Bool)
-                        
-                        
-                        
-                    }
-                    else{
-                        Logger.sharedInstance.debug("Text Scale Question Step has null values:\(formatDict)")
-                    }
-                case .valuePickerChoiceQuestionStep:
-                    
-                    if  Utilities.isValidValue(someObject:formatDict?[kStepQuestionTextScaleTextChoices] as AnyObject?)  {
-                        
-                        let textChoiceArray:[ORKTextChoice]?
-                        
-                        textChoiceArray = self.getTextChoices(dataArray: formatDict?[kStepQuestionTextScaleTextChoices] as! NSArray)
-                        
-                        
-                        questionStepAnswerFormat = ORKAnswerFormat.valuePickerAnswerFormat(with:textChoiceArray!)
-                        
-                        
-                    }
-                    else{
-                        Logger.sharedInstance.debug("valuePickerChoice Question Step has null values:\(formatDict)")
-                    }
-                case .imageChoiceQuestionStep:
-                    
-                    if  Utilities.isValidValue(someObject:formatDict?[kStepQuestionImageChoices] as AnyObject?)  {
-                        
-                        let imageChoiceArray:[ORKImageChoice]?
-                        
-                        imageChoiceArray = self.getImageChoices(dataArray: formatDict?[kStepQuestionImageChoices] as! NSArray)
-                        
-                        questionStepAnswerFormat = ORKAnswerFormat.choiceAnswerFormat(with: imageChoiceArray!)
-                        
-                        
-                    }
-                    else{
-                        Logger.sharedInstance.debug("imageChoice Question Step has null values:\(formatDict)")
-                    }
-                case .textChoiceQuestionStep:
-                    // array(text choices) + int(selection Type)
-                    if  Utilities.isValidValue(someObject:formatDict?[kStepQuestionTextChoiceTextChoices] as AnyObject?)  &&  Utilities.isValidValue(someObject:formatDict?[kStepQuestionTextChoiceSelectionStyle] as AnyObject?){
-                        
-                        let textChoiceArray:[ORKTextChoice]?
-                        
-                        textChoiceArray = self.getTextChoices(dataArray: (formatDict?[kStepQuestionTextChoiceTextChoices] as? NSArray)! )
-                        
-                        
-                        if (formatDict?[kStepQuestionTextChoiceSelectionStyle] as! ORKChoiceAnswerStyle) == ORKChoiceAnswerStyle.singleChoice{
-                            // single choice
-                            questionStepAnswerFormat = ORKTextChoiceAnswerFormat(style: ORKChoiceAnswerStyle.singleChoice, textChoices: textChoiceArray!)
-                        }
-                        else  if(formatDict?[kStepQuestionTextChoiceSelectionStyle] as! ORKChoiceAnswerStyle) == ORKChoiceAnswerStyle.multipleChoice{
-                            // multiple choice
-                            questionStepAnswerFormat = ORKTextChoiceAnswerFormat(style: ORKChoiceAnswerStyle.multipleChoice, textChoices: textChoiceArray!)
-                        }
-                        else{
-                            Logger.sharedInstance.debug("kStepQuestionTextChoiceSelectionStyle has null value:\(formatDict)")
-                        }
-                    }
-                    else{
-                        Logger.sharedInstance.debug("textChoice Question Step has null values:\(formatDict)")
-                    }
-                case .numericQuestionStep:
-                    
-                    if  Utilities.isValidValue(someObject:formatDict?[kStepQuestionNumericStyle] as AnyObject?) &&  Utilities.isValidValue(someObject:formatDict?[kStepQuestionNumericUnit] as AnyObject?) &&  Utilities.isValidValue(someObject:formatDict?[kStepQuestionNumericMinValue] as AnyObject?) &&  Utilities.isValidValue(someObject:formatDict?[kStepQuestionNumericMaxValue] as AnyObject?) &&  Utilities.isValidValue(someObject:formatDict?[kStepQuestionNumericPlaceholder] as AnyObject?){
-                        
-                        
-                        let localizedQuestionStepAnswerFormatUnit = NSLocalizedString(formatDict?[kStepQuestionNumericUnit] as! String , comment: "")
-                        
-                        switch formatDict?[kStepQuestionNumericStyle] as! ORKNumericAnswerStyle {
-                        case .integer:
-                            questionStepAnswerFormat = ORKAnswerFormat.integerAnswerFormat(withUnit:localizedQuestionStepAnswerFormatUnit)
-                            
-                        case .decimal:
-                            questionStepAnswerFormat = ORKAnswerFormat.decimalAnswerFormat(withUnit: localizedQuestionStepAnswerFormatUnit)
-                        default:
-                            Logger.sharedInstance.debug("kStepQuestionNumericStyle Step has null values:\(formatDict)")
-                            break
-                        }
-                        
-                        
-                    }
-                    else{
-                        Logger.sharedInstance.debug("numericQuestionStep has null values:\(formatDict)")
-                    }
-                case .dateQuestionStep:
-                    
-                    
-                    if  Utilities.isValidValue(someObject:formatDict?[kStepQuestionDateStyle] as AnyObject?) &&  Utilities.isValidValue(someObject:formatDict?[kStepQuestionDateMinDate] as AnyObject?)
-                        &&  Utilities.isValidValue(someObject:formatDict?[kStepQuestionDateMaxDate] as AnyObject?) &&  Utilities.isValidValue(someObject:formatDict?[kStepQuestionDateDefault] as AnyObject?) {
-                        
-                        // need to
-                        let dateFormatter = DateFormatter()
-                        dateFormatter.dateFormat = "MM-dd-yyyy"
-                        
-                        
-                        
-                        let defaultDate:NSDate? = dateFormatter.date(from: formatDict?[kStepQuestionDateDefault] as! String) as NSDate?
-                        let minimumDate:NSDate? = dateFormatter.date(from: formatDict?[kStepQuestionDateDefault] as! String) as NSDate?
-                        let maximumDate:NSDate? = dateFormatter.date(from: formatDict?[kStepQuestionDateDefault] as! String) as NSDate?
-                        
-                        
-                        switch formatDict?[kStepQuestionDateStyle] as! ORKDateAnswerStyle {
-                            
-                        case .date:
-                            
-                            questionStepAnswerFormat = ORKAnswerFormat.dateAnswerFormat(withDefaultDate: defaultDate as Date?, minimumDate: minimumDate as Date?, maximumDate: maximumDate as Date?, calendar: NSCalendar.current)
-                            
-                        case .dateAndTime:
-                            
-                            questionStepAnswerFormat = ORKAnswerFormat.dateTime(withDefaultDate: defaultDate as Date?, minimumDate: minimumDate as Date?, maximumDate: maximumDate as Date?, calendar: NSCalendar.current)
-                            
-                        default: break
-                            //break
-                        }
-                        
-                    }else{
-                        Logger.sharedInstance.debug("dateQuestionStep has null values:\(formatDict)")
-                        
-                    }
-                case .textQuestionStep:
-                    
-                    if  Utilities.isValidValue(someObject:formatDict?[kStepQuestionTextMaxLength] as AnyObject?) &&  Utilities.isValidValue(someObject:formatDict?[kStepQuestionTextValidationRegex] as AnyObject?) &&  Utilities.isValidValue(someObject:formatDict?[kStepQuestionTextInvalidMessage] as AnyObject?) &&  Utilities.isValidValue(someObject:formatDict?[kStepQuestionTextMultipleLines] as AnyObject?) &&  Utilities.isValidValue(someObject:formatDict?[kStepQuestionTextPlaceholder] as AnyObject?) {
-                        let answerFormat = ORKAnswerFormat.textAnswerFormat()
-                        
-                        answerFormat.maximumLength = formatDict?[kStepQuestionTextMaxLength] as! Int
-                        answerFormat.validationRegex = formatDict?[kStepQuestionTextMaxLength] as? String
-                        answerFormat.invalidMessage = formatDict?[kStepQuestionTextInvalidMessage] as? String
-                        answerFormat.multipleLines = formatDict?[kStepQuestionTextMultipleLines] as! Bool
-                        
-                        // placeholder  usage???
-                        
-                        questionStepAnswerFormat = answerFormat
-                        
-                        
-                    }
-                    else{
-                        Logger.sharedInstance.debug("textQuestionStep has null values:\(formatDict)")
-                    }
-                case .validatedTextQuestionStepEmail:
-                    
-                    if  Utilities.isValidValue(someObject:formatDict?[kStepQuestionEmailPlaceholder] as AnyObject?)
-                    {
-                        
-                        questionStepAnswerFormat = ORKAnswerFormat.emailAnswerFormat()
-                        // Place holder???
-                        
-                    }
-                    else{
-                        Logger.sharedInstance.debug("validatedTextQuestionStepEmail has null values:\(formatDict)")
-                    }
-                case .timeIntervalQuestionStep:
-                    
-                    if  Utilities.isValidValue(someObject:formatDict?[kStepQuestionTimeIntervalDefault] as AnyObject?) &&   Utilities.isValidValue(someObject:formatDict?[kStepQuestionTimeIntervalStep] as AnyObject?)
-                    {
-                        
-                        questionStepAnswerFormat = ORKAnswerFormat.timeIntervalAnswerFormat(withDefaultInterval: formatDict?[kStepQuestionTimeIntervalDefault] as! Double, step: formatDict?[kStepQuestionTimeIntervalStep] as! Int)
-                        
-                        
-                    }
-                    else{
-                        Logger.sharedInstance.debug("timeIntervalQuestionStep has null values:\(formatDict)")
-                    }
-                case .heightQuestion:
-                    
-                    if  Utilities.isValidValue(someObject:formatDict?[kStepQuestionHeightPlaceholder] as AnyObject?) &&   Utilities.isValidValue(someObject:formatDict?[kStepQuestionHeightMeasurementSystem] as AnyObject?)
-                    {
-                        questionStepAnswerFormat = ORKAnswerFormat.heightAnswerFormat(with:formatDict?[kStepQuestionHeightMeasurementSystem] as! ORKMeasurementSystem)
-                        
-                        // Place holder
-                        
-                    }
-                    else{
-                        Logger.sharedInstance.debug("heightQuestion has null values:\(formatDict)")
-                    }
-                case .locationQuestionStep:
-                    if  Utilities.isValidValue(someObject:formatDict?[kStepQuestionLocationUseCurrentLocation] as AnyObject?)
-                    {
-                        let answerFormat = ORKAnswerFormat.locationAnswerFormat()
-                        answerFormat.useCurrentLocation = formatDict?[kStepQuestionLocationUseCurrentLocation] as! Bool
-                        
-                        questionStepAnswerFormat = answerFormat
-                        
-                        
-                    }
-                    else{
-                        Logger.sharedInstance.debug("locationQuestionStep has null values:\(formatDict)")
-                    }
-                default:break
+                    //questionStep?.placeholder =???
                     
                 }
+                else{
+                    Logger.sharedInstance.debug("Scale Question Step has null values:\(formatDict)")
+                    return nil
+                    
+                }
+            case .continuousScaleQuestionStep:
                 
-                questionStep = ORKQuestionStep(identifier:key! , title: title!, answer: questionStepAnswerFormat)
+                if  Utilities.isValidValue(someObject:formatDict?[kStepQuestionContinuosScaleMaxValue] as AnyObject?)
+                    &&  Utilities.isValidValue(someObject:formatDict?[kStepQuestionContinuosScaleMinValue] as AnyObject?)
+                    &&  Utilities.isValidValue(someObject:formatDict?[kStepQuestionContinuosScaleDefaultValue] as AnyObject?)
+                    &&  Utilities.isValidValue(someObject:formatDict?[kStepQuestionContinuosScaleMaxFractionDigits] as AnyObject?)
+                    && formatDict?[kStepQuestionContinuosScaleVertical] != nil && formatDict?[kStepQuestionContinuosScaleMaxDesc] != nil
+                    &&  Utilities.isValidValue(someObject:formatDict?[kStepQuestionScaleMinDesc] as AnyObject?){
+                    
+                    questionStepAnswerFormat = ORKAnswerFormat.continuousScale(withMaximumValue: (formatDict?[kStepQuestionContinuosScaleMaxValue] as? Double)!,
+                                                                               minimumValue: (formatDict?[kStepQuestionContinuosScaleMinValue] as? Double)!, defaultValue: (formatDict?[kStepQuestionContinuosScaleDefaultValue] as? Double)!, maximumFractionDigits: (formatDict?[kStepQuestionContinuosScaleMaxFractionDigits] as? Int)!,
+                                                                               vertical: (formatDict?[kStepQuestionContinuosScaleVertical] as? Bool)!,
+                                                                               maximumValueDescription: (formatDict?[kStepQuestionContinuosScaleMaxDesc] as? String)!,
+                                                                               minimumValueDescription: (formatDict?[kStepQuestionScaleMinDesc] as? String)!)
+                    
+                    
+                    
+                    
+                }
+                else{
+                    Logger.sharedInstance.debug("Continuous Scale Question Step has null values:\(formatDict)")
+                    return nil
+                    
+                }
+            case .textScaleQuestionStep:
+                
+                if  Utilities.isValidValue(someObject:formatDict?[kStepQuestionTextScaleTextChoices] as AnyObject?)
+                    && Utilities.isValidValue(someObject:formatDict?[kStepQuestionTextScaleDefault] as AnyObject?)
+                    &&  Utilities.isValidValue(someObject:formatDict?[kStepQuestionTextScaleVertical] as AnyObject?) {
+                    
+                    let textChoiceArray:[ORKTextChoice]?
+                    
+                    textChoiceArray = self.getTextChoices(dataArray: formatDict?[kStepQuestionScaleMaxValue] as! NSArray)
+                    
+                    questionStepAnswerFormat = ORKAnswerFormat.textScale(with: textChoiceArray!,
+                                                                         defaultIndex: formatDict?[kStepQuestionTextScaleDefault] as! Int,
+                                                                         vertical: formatDict?[kStepQuestionTextScaleVertical] as! Bool)
+                    
+                    
+                    
+                }
+                else{
+                    Logger.sharedInstance.debug("Text Scale Question Step has null values:\(formatDict)")
+                    return nil
+                    
+                }
+            case .valuePickerChoiceQuestionStep:
+                
+                if  Utilities.isValidValue(someObject:formatDict?[kStepQuestionTextScaleTextChoices] as AnyObject?)  {
+                    
+                    let textChoiceArray:[ORKTextChoice]?
+                    
+                    textChoiceArray = self.getTextChoices(dataArray: formatDict?[kStepQuestionTextScaleTextChoices] as! NSArray)
+                    
+                    questionStepAnswerFormat = ORKAnswerFormat.valuePickerAnswerFormat(with:textChoiceArray!)
+                }
+                else{
+                    Logger.sharedInstance.debug("valuePickerChoice Question Step has null values:\(formatDict)")
+                    return nil
+                    
+                }
+            case .imageChoiceQuestionStep:
+                
+                if  Utilities.isValidValue(someObject:formatDict?[kStepQuestionImageChoices] as AnyObject?)  {
+                    
+                    let imageChoiceArray:[ORKImageChoice]?
+                    
+                    imageChoiceArray = self.getImageChoices(dataArray: formatDict?[kStepQuestionImageChoices] as! NSArray)
+                    
+                    questionStepAnswerFormat = ORKAnswerFormat.choiceAnswerFormat(with: imageChoiceArray!)
+                    
+                    
+                }
+                else{
+                    Logger.sharedInstance.debug("imageChoice Question Step has null values:\(formatDict)")
+                    return nil
+                    
+                }
+            case .textChoiceQuestionStep:
+                // array(text choices) + int(selection Type)
+                if  Utilities.isValidValue(someObject:formatDict?[kStepQuestionTextChoiceTextChoices] as AnyObject?)  &&
+                    Utilities.isValidValue(someObject:formatDict?[kStepQuestionTextChoiceSelectionStyle] as AnyObject?){
+                    
+                    let textChoiceArray:[ORKTextChoice]?
+                    
+                    textChoiceArray = self.getTextChoices(dataArray: (formatDict?[kStepQuestionTextChoiceTextChoices] as? NSArray)! )
+                    
+                    
+                    if (formatDict?[kStepQuestionTextChoiceSelectionStyle] as! ORKChoiceAnswerStyle) == ORKChoiceAnswerStyle.singleChoice{
+                        // single choice
+                        questionStepAnswerFormat = ORKTextChoiceAnswerFormat(style: ORKChoiceAnswerStyle.singleChoice, textChoices: textChoiceArray!)
+                    }
+                    else  if(formatDict?[kStepQuestionTextChoiceSelectionStyle] as! ORKChoiceAnswerStyle) == ORKChoiceAnswerStyle.multipleChoice{
+                        // multiple choice
+                        questionStepAnswerFormat = ORKTextChoiceAnswerFormat(style: ORKChoiceAnswerStyle.multipleChoice, textChoices: textChoiceArray!)
+                    }
+                    else{
+                        Logger.sharedInstance.debug("kStepQuestionTextChoiceSelectionStyle has null value:\(formatDict)")
+                        return nil
+                        
+                    }
+                }
+                else{
+                    Logger.sharedInstance.debug("textChoice Question Step has null values:\(formatDict)")
+                    return nil
+                    
+                }
+            case .numericQuestionStep:
+                
+                if  Utilities.isValidValue(someObject:formatDict?[kStepQuestionNumericStyle] as AnyObject?) &&  Utilities.isValidValue(someObject:formatDict?[kStepQuestionNumericUnit] as AnyObject?)
+                    &&  Utilities.isValidValue(someObject:formatDict?[kStepQuestionNumericMinValue] as AnyObject?)
+                    &&  Utilities.isValidValue(someObject:formatDict?[kStepQuestionNumericMaxValue] as AnyObject?)
+                    &&  Utilities.isValidValue(someObject:formatDict?[kStepQuestionNumericPlaceholder] as AnyObject?){
+                    
+                    
+                    let localizedQuestionStepAnswerFormatUnit = NSLocalizedString(formatDict?[kStepQuestionNumericUnit] as! String , comment: "")
+                    
+                    switch formatDict?[kStepQuestionNumericStyle] as! ORKNumericAnswerStyle {
+                    case .integer:
+                        questionStepAnswerFormat = ORKAnswerFormat.integerAnswerFormat(withUnit:localizedQuestionStepAnswerFormatUnit)
+                        
+                    case .decimal:
+                        questionStepAnswerFormat = ORKAnswerFormat.decimalAnswerFormat(withUnit: localizedQuestionStepAnswerFormatUnit)
+                    default:
+                        Logger.sharedInstance.debug("kStepQuestionNumericStyle Step has null values:\(formatDict)")
+                        return nil
+                        
+                        break
+                    }
+                    
+                    
+                }
+                else{
+                    Logger.sharedInstance.debug("numericQuestionStep has null values:\(formatDict)")
+                    return nil
+                    
+                }
+            case .dateQuestionStep:
                 
                 
-                questionStep?.text = text
+                if  Utilities.isValidValue(someObject:formatDict?[kStepQuestionDateStyle] as AnyObject?)
+                    &&  Utilities.isValidValue(someObject:formatDict?[kStepQuestionDateMinDate] as AnyObject?)
+                    &&  Utilities.isValidValue(someObject:formatDict?[kStepQuestionDateMaxDate] as AnyObject?)
+                    &&  Utilities.isValidValue(someObject:formatDict?[kStepQuestionDateDefault] as AnyObject?) {
+                    
+                    // need to
+                    let dateFormatter = DateFormatter()
+                    dateFormatter.dateFormat = "MM-dd-yyyy"
+                    
+                    
+                    
+                    let defaultDate:NSDate? = dateFormatter.date(from: formatDict?[kStepQuestionDateDefault] as! String) as NSDate?
+                    let minimumDate:NSDate? = dateFormatter.date(from: formatDict?[kStepQuestionDateDefault] as! String) as NSDate?
+                    let maximumDate:NSDate? = dateFormatter.date(from: formatDict?[kStepQuestionDateDefault] as! String) as NSDate?
+                    
+                    
+                    switch formatDict?[kStepQuestionDateStyle] as! ORKDateAnswerStyle {
+                        
+                    case .date:
+                        
+                        questionStepAnswerFormat = ORKAnswerFormat.dateAnswerFormat(withDefaultDate: defaultDate as Date?, minimumDate: minimumDate as Date?, maximumDate: maximumDate as Date?, calendar: NSCalendar.current)
+                        
+                    case .dateAndTime:
+                        
+                        questionStepAnswerFormat = ORKAnswerFormat.dateTime(withDefaultDate: defaultDate as Date?, minimumDate: minimumDate as Date?, maximumDate: maximumDate as Date?, calendar: NSCalendar.current)
+                        
+                    default:
+                        break
+                    }
+                    
+                }else{
+                    Logger.sharedInstance.debug("dateQuestionStep has null values:\(formatDict)")
+                    return nil
+                    
+                    
+                }
+            case .textQuestionStep:
                 
+                if  Utilities.isValidValue(someObject:formatDict?[kStepQuestionTextMaxLength] as AnyObject?) &&  Utilities.isValidValue(someObject:formatDict?[kStepQuestionTextValidationRegex] as AnyObject?)
+                    &&  Utilities.isValidValue(someObject:formatDict?[kStepQuestionTextInvalidMessage] as AnyObject?)
+                    &&  Utilities.isValidValue(someObject:formatDict?[kStepQuestionTextMultipleLines] as AnyObject?)
+                    &&  Utilities.isValidValue(someObject:formatDict?[kStepQuestionTextPlaceholder] as AnyObject?) {
+                    let answerFormat = ORKAnswerFormat.textAnswerFormat()
+                    
+                    answerFormat.maximumLength = formatDict?[kStepQuestionTextMaxLength] as! Int
+                    answerFormat.validationRegex = formatDict?[kStepQuestionTextMaxLength] as? String
+                    answerFormat.invalidMessage = formatDict?[kStepQuestionTextInvalidMessage] as? String
+                    answerFormat.multipleLines = formatDict?[kStepQuestionTextMultipleLines] as! Bool
+                    
+                    // placeholder  usage???
+                    
+                    questionStepAnswerFormat = answerFormat
+                    
+                    
+                }
+                else{
+                    Logger.sharedInstance.debug("textQuestionStep has null values:\(formatDict)")
+                    return nil
+                    
+                }
+            case .validatedTextQuestionStepEmail:
                 
-                return questionStep!
+                if  Utilities.isValidValue(someObject:formatDict?[kStepQuestionEmailPlaceholder] as AnyObject?)
+                {
+                    
+                    questionStepAnswerFormat = ORKAnswerFormat.emailAnswerFormat()
+                    // Place holder???
+                    
+                }
+                else{
+                    Logger.sharedInstance.debug("validatedTextQuestionStepEmail has null values:\(formatDict)")
+                    return nil
+                    
+                }
+            case .timeIntervalQuestionStep:
                 
+                if  Utilities.isValidValue(someObject:formatDict?[kStepQuestionTimeIntervalDefault] as AnyObject?)
+                    &&   Utilities.isValidValue(someObject:formatDict?[kStepQuestionTimeIntervalStep] as AnyObject?)
+                {
+                    
+                    questionStepAnswerFormat = ORKAnswerFormat.timeIntervalAnswerFormat(withDefaultInterval: formatDict?[kStepQuestionTimeIntervalDefault] as! Double, step: formatDict?[kStepQuestionTimeIntervalStep] as! Int)
+                    
+                    
+                }
+                else{
+                    Logger.sharedInstance.debug("timeIntervalQuestionStep has null values:\(formatDict)")
+                    return nil
+                    
+                }
+            case .heightQuestion:
                 
-                
-                
+                if  Utilities.isValidValue(someObject:formatDict?[kStepQuestionHeightPlaceholder] as AnyObject?)
+                    &&   Utilities.isValidValue(someObject:formatDict?[kStepQuestionHeightMeasurementSystem] as AnyObject?)
+                {
+                    questionStepAnswerFormat = ORKAnswerFormat.heightAnswerFormat(with:formatDict?[kStepQuestionHeightMeasurementSystem] as! ORKMeasurementSystem)
+                    
+                    // Place holder
+                    
+                }
+                else{
+                    Logger.sharedInstance.debug("heightQuestion has null values:\(formatDict)")
+                    return nil
+                    
+                    
+                }
+            case .locationQuestionStep:
+                if  Utilities.isValidValue(someObject:formatDict?[kStepQuestionLocationUseCurrentLocation] as AnyObject?)
+                {
+                    let answerFormat = ORKAnswerFormat.locationAnswerFormat()
+                    answerFormat.useCurrentLocation = formatDict?[kStepQuestionLocationUseCurrentLocation] as! Bool
+                    
+                    questionStepAnswerFormat = answerFormat
+                    
+                    
+                }
+                else{
+                    Logger.sharedInstance.debug("locationQuestionStep has null values:\(formatDict)")
+                    return nil
+                    
+                }
+            default:break
                 
             }
-            else{
-                //Debug lines QuestionFormat dict is empty
-                
-                return (formatDict as? ORKQuestionStep)!
-            }
+            
+            questionStep = ORKQuestionStep(identifier:key! , title: title!, answer: questionStepAnswerFormat)
+            
+            
+            questionStep?.text = text
+            
+            
+            return questionStep!
+            
+            
+            
+            
+            
+        }
+        else{
+            Logger.sharedInstance.debug("FormatDict has null values:\(formatDict)")
+            
+            return nil
+        }
         
         
     }
     
     
-    /*
-     func getFormStep(dict:NSDictionary) -> ORKFormStep {
-     
-     //let step = ORKFormStep(identifier: dict["key"] as! String, title: exampleQuestionText, text: exampleDetailText)
-     
-     
-     
-     }
-     */
+    
     
     func getTextChoices(dataArray:NSArray) -> [ORKTextChoice] {
+        
+        //Method to create ORKTextChoice Array
         
         let textChoiceArray:[ORKTextChoice]?
         
@@ -575,7 +633,10 @@ class QuestionStep: ActivityStep {
     
     
     
-    func getImageChoices(dataArray:NSArray) -> [ORKImageChoice] {
+    func getImageChoices(dataArray:NSArray) -> [ORKImageChoice]? {
+        
+        //Method to create ORKImageChoice Array
+        
         
         ///PENDING
         
@@ -612,12 +673,14 @@ class QuestionStep: ActivityStep {
                 }
                 else{
                     Logger.sharedInstance.debug("ORKImageChoice Dictionary is null :\(dataArray[i])")
+                    
                 }
                 
             }
         }
         else{
             Logger.sharedInstance.debug("ORKImageChoice Array is null :\(dataArray)")
+            return nil
         }
         return imageChoiceArray!
     }

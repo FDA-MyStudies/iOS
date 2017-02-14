@@ -9,7 +9,7 @@
 import Foundation
 import ResearchKit
 
-//Api Constants
+//MARK: Api Constants
 
 let kActivityStepType = "type"
 
@@ -26,7 +26,7 @@ let kActivityStepDestinations = "destinations"
 
 
 
-
+//MARK:Enum for ActivityStepType
 enum ActivityStepType:String{
     case formStep = "form"
     case instructionStep = "instruction"
@@ -65,27 +65,29 @@ class ActivityStep{
         self.repeatable = false
         self.repeatableText = ""
         self.destinations = Array()
-
+        
     }
     
     
     init(activityId:String,type:ActivityStepType,resultType:String,key:String,title:String,text:String,skippable:Bool,groupName:String,repeatable:Bool,repeatableText:String, destinations:Array<Any>) {
-        
+        // initializer method with all params
         
         self.activityId = activityId
-         self.type = type
-         self.resultType = resultType
-         self.key = key
-         self.title = title
-         self.text = text
-         self.skippable = skippable
-         self.groupName = groupName
-         self.repeatable = repeatable
-         self.repeatableText = repeatableText
-         self.destinations = destinations
+        self.type = type
+        self.resultType = resultType
+        self.key = key
+        self.title = title
+        self.text = text
+        self.skippable = skippable
+        self.groupName = groupName
+        self.repeatable = repeatable
+        self.repeatableText = repeatableText
+        self.destinations = destinations
     }
     
     func initWithDict(stepDict:Dictionary<String, Any>){
+        
+        // setter method with Dictionary
         if Utilities.isValidObject(someObject: stepDict as AnyObject?){
             
             if Utilities.isValidValue(someObject: stepDict[kActivityStepActivityId] as AnyObject ){
@@ -102,7 +104,7 @@ class ActivityStep{
                 self.key = stepDict[kActivityStepKey] as? String
             }
             if Utilities.isValidObject(someObject: stepDict[kActivityStepTitle] as AnyObject ) {
-                 self.title = stepDict[kActivityStepTitle] as? String
+                self.title = stepDict[kActivityStepTitle] as? String
             }
             if Utilities.isValidValue(someObject: stepDict[kActivityStepText] as AnyObject )  {
                 self.text = stepDict[kActivityStepText] as? String
@@ -122,12 +124,12 @@ class ActivityStep{
             if Utilities.isValidValue(someObject: stepDict[kActivityStepDestinations] as AnyObject )  {
                 self.destinations = stepDict[kActivityStepDestinations] as? Array
             }
-        
+            
         }
         else{
             Logger.sharedInstance.debug("Step Dictionary is null:\(stepDict)")
         }
-
+        
     }
     
     

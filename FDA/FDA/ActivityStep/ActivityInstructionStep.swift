@@ -12,18 +12,18 @@ class ActivityInstructionStep: ActivityStep {
     
     
     var image:UIImage?
-    var imagePath:String?
-    var imageURL:String?
+    var imageLocalPath:String?
+    var imageServerURL:String?
     
     
     override init() {
         super.init()
-        self.imagePath = ""
-        self.imageURL = ""
+        self.imageLocalPath = ""
+        self.imageServerURL = ""
         self.image = UIImage()
         
     }
-
+    
     override func initWithDict(stepDict: Dictionary<String, Any>) {
         
         
@@ -31,7 +31,8 @@ class ActivityInstructionStep: ActivityStep {
             
             super.initWithDict(stepDict: stepDict)
             
-            //set Image after downloading from URL
+            // load image from server
+            // save it locally and set the local path
             
             
         }
@@ -41,8 +42,8 @@ class ActivityInstructionStep: ActivityStep {
         
     }
     
-    func getInstructionStep() -> ORKInstructionStep {
-        
+    func getInstructionStep() -> ORKInstructionStep? {
+        //Getter method to return Instruction Step
         if  Utilities.isValidValue(someObject:resultType  as AnyObject?) && Utilities.isValidValue(someObject:title  as AnyObject?) && Utilities.isValidValue(someObject:text  as AnyObject?) && Utilities.isValidValue(someObject:key  as AnyObject?)   {
             
             let instructionStep = ORKInstructionStep(identifier: key!)
@@ -60,12 +61,12 @@ class ActivityInstructionStep: ActivityStep {
         else{
             //Debug lines QuestionFormat dict is empty
             
-            return NSNull() as! ORKInstructionStep
+            return nil
         }
         
         
     }
-
+    
     
     
 }

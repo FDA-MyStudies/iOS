@@ -8,8 +8,30 @@
 
 import UIKit
 
-
+//Api constants
 let kNotificationSkip = "skip"
+
+
+//study
+let kStudyTitle = "title"
+let kStudyCategory = "category"
+let kStudySponserName = "sponsorName"
+let kStudyDescription = "description"
+let kStudyStatus = "status"
+let kStudyLogoURL = "logo"
+
+//resources
+let kResources = "resources"
+
+
+//overview
+let kOverViewInfo = "info"
+let kOverviewType = "type"
+let kOverviewImageLink = "image"
+let kOverviewTitle = "title"
+let kOverviewText = "text"
+let kOverviewMediaLink = "link"
+
 
 
 class WCPServices: NSObject {
@@ -83,6 +105,39 @@ class WCPServices: NSObject {
     
     //MARK:Parsers
     func handleStudyList(response:Dictionary<String, Any>){
+        
+        let studies = response[kStudies] as! Array<Dictionary<String,Any>>
+        var listOfStudies:Array<Study>!
+        for study in studies{
+            let studyModelObj = Study(studyDetail: study)
+            listOfStudies.append(studyModelObj)
+        }
+        
+        //assgin to Gateway
+        Gateway.instance.studies = listOfStudies
+    }
+    
+    func handleResourceListForGateway(response:Dictionary<String, Any>){
+        
+        let resources = response[kResources] as! Array<Dictionary<String,Any>>
+        var listOfResources:Array<Resource>!
+        for resource in resources{
+            let resourceObj = Resource(detail: resource)
+            listOfResources.append(resourceObj)
+        }
+        
+        //assgin to Gateway
+        Gateway.instance.resources = listOfResources
+    }
+    
+    func handleStudyInfo(response:Dictionary<String, Any>){
+        
+        let overviewList = response[kOverViewInfo] as! Array<Dictionary<String,Any>>
+        var listOfOverviews:Array<Overview>!
+        for overview in overviewList{
+            let overviewObj = Overview(detail: overview)
+            listOfOverviews.append(overviewObj)
+        }
         
     }
     

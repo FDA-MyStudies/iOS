@@ -302,6 +302,26 @@ class Utilities: NSObject {
         
     }
     
+    class func getDateFromString(dateString:String)->Date?{
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
+        dateFormatter.timeZone = NSTimeZone(name: "UTC") as TimeZone!
+        
+        guard let date = dateFormatter.date(from: dateString) else {
+            assert(false, "no date from string")
+            return nil
+        }
+        
+        dateFormatter.dateFormat = "yyyy MMM EEEE HH:mm"
+       // dateFormatter.timeZone = NSTimeZone.local // NSTimeZone(name: "UTC") as TimeZone!
+        let finalString = dateFormatter.string(from: date)
+        let finalDate = dateFormatter.date(from: finalString)
+        return finalDate
+        
+        
+    }
+    
+    
     class func getAppVersion() -> String{
         if let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String {
             return version

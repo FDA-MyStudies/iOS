@@ -1,5 +1,5 @@
 //
-//  ActvityResult.swift
+//  ActivityResult.swift
 //  FDA
 //
 //  Created by Arun Kumar on 2/15/17.
@@ -11,6 +11,8 @@ import Foundation
 import ResearchKit
 
 
-class ActvityResult {
-    
+class ActivityResult {
+    init() {
+        
+    }
 }

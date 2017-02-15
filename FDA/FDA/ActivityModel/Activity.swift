@@ -25,7 +25,7 @@ class Activity{
     var name:String?
     var version:String?
     var lastModified:Date?
-    var userStatus:UserStudyStatus?
+    var userStatus:UserStudyStatus.StudyStatus?
     var startDate:Date?
     var endDate:Date?
     var branching:Bool?
@@ -48,22 +48,20 @@ class Activity{
         self.endDate = Date()
         self.branching = false
         self.randomization = false
-        self.schedule = schedule()
+        self.schedule = Schedule()
         self.steps = Array()
         self.result = ActivityResult()
     }
     
     func initWithInfo(infoDict:Dictionary<String,Any>) {
         if Utilities.isValidObject(someObject: infoDict as AnyObject?){
-            if Utilities.isValidValue(someObject: stepDict[kActivityStepType] as AnyObject ){
-                self.type = stepDict[kActivityStepType] as? ActivityStepType
+            if Utilities.isValidValue(someObject: infoDict[kActivityStepType] as AnyObject ){
+                self.type = infoDict[kActivityStepType] as? ActivityType
             }
-            if Utilities.isValidValue(someObject: stepDict[kActivityStepKey] as AnyObject ){
-                self.key = stepDict[kActivityStepKey] as? String
-            }
+            
         }
         else{
-            Logger.sharedInstance.debug("Step Result Dictionary is null:\(stepDict)")
+            Logger.sharedInstance.debug("Step Result Dictionary is null:\(infoDict)")
         }
     }
     

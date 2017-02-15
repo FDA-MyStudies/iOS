@@ -9,4 +9,7 @@
 import Foundation
 class Schedule{
     
+    init() {
+        
+    }
 }

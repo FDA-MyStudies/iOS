@@ -40,6 +40,31 @@ class Resource{
         self.configration = Dictionary()
     }
     
+    init(detail:Dictionary<String, Any>) {
+        
+        if Utilities.isValidObject(someObject: detail as AnyObject?){
+            
+            if (Utilities.isValidValue(someObject: (detail[kResourceLevel]) as AnyObject)) {
+                self.level = detail[kResourceLevel] as? ResourceLevel
+            }
+            if (Utilities.isValidValue(someObject: (detail[kResourceKey]) as AnyObject)){
+                self.key = detail[kResourceKey] as? String
+            }
+            if (Utilities.isValidValue(someObject: (detail[kResourceType]) as AnyObject)) {
+                self.type = detail[kResourceType] as? String
+            }
+            if (Utilities.isValidValue(someObject: (detail[kResourceFile]) as AnyObject)) {
+                self.file?.setFile(dict: detail[kResourceFile] as! NSDictionary)
+            }
+            if (Utilities.isValidObject(someObject: detail[kResourceConfigration] as AnyObject)) {
+                self.configration = detail[kResourceConfigration] as? Dictionary
+            }
+        }
+        else{
+            Logger.sharedInstance.debug("Resource Dictionary is null:\(detail)")
+        }
+    }
+    
     func setResource(dict:NSDictionary) {
         
         

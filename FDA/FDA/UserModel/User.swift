@@ -43,8 +43,8 @@ class User{
     var authToken: String!
     var participatedStudies:Array<UserStudyStatus>! = []
     var participatedActivites:Array<UserActivityStatus>! = []
-    var eligibilityStatus:Bool!
-    var consentStatus:String!
+    
+    
     var consent:String!
     var logoutReason : LogoutReason = .user_action
     
@@ -254,7 +254,7 @@ class UserStudyStatus{
     var studyId:String! = ""
     var status:StudyStatus? = .yetToJoin
     
-    func initUserStudyStatus(_ detail:Dictionary<String, Any>) -> UserStudyStatus{
+     init(detail:Dictionary<String, Any>){
         
         if Utilities.isValidObject(someObject: detail as AnyObject?){
             
@@ -288,7 +288,7 @@ class UserStudyStatus{
             Logger.sharedInstance.debug("UserStudyStatus Dictionary is null:\(detail)")
         }
         
-        return self
+       
 
     }
     
@@ -324,7 +324,7 @@ class UserActivityStatus{
     var activityVersion:String! = ""
     var status:ActivityStatus? = .yetToJoin
     
-    func initUserActivityStatus(_ detail:Dictionary<String, Any>) -> UserActivityStatus{
+    init(detail:Dictionary<String, Any>){
         
         if Utilities.isValidObject(someObject: detail as AnyObject?){
             
@@ -363,7 +363,7 @@ class UserActivityStatus{
             Logger.sharedInstance.debug("UserStudyStatus Dictionary is null:\(detail)")
         }
         
-        return self
+      
         
     }
     

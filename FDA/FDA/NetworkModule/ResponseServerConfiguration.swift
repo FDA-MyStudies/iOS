@@ -9,12 +9,18 @@
 import UIKit
 enum ResponseMethods:String {
     //TODO : Write exact name for request method
-    case getStudiesData
+    case enroll
+    case verifyEnrollmentToken
+    case processResponse
+    case withdrawFromStudy
+    case getParticipantResponse
     
     var method:Method{
         switch self {
-        default:
+        case .getParticipantResponse,.verifyEnrollmentToken:
             return Method(methodName:self.rawValue, methodType: .httpMethodGet, requestType: .requestTypeJSON)
+        default:
+            return Method(methodName:self.rawValue, methodType: .httpMethodPOST, requestType: .requestTypeJSON)
             
             
         }

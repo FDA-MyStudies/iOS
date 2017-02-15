@@ -221,7 +221,7 @@ enum PHIType:String{
     case phi = "PHI"
 }
 
-class QuestionStep: ActivityStep {
+class ActivityQuestionStep: ActivityStep {
     
     var phi:PHIType?
     var formatDict:Dictionary<String, Any>?
@@ -421,7 +421,6 @@ class QuestionStep: ActivityStep {
                         Logger.sharedInstance.debug("kStepQuestionNumericStyle Step has null values:\(formatDict)")
                         return nil
                         
-                        break
                     }
                     
                     

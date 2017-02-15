@@ -12,4 +12,9 @@ class Schedule{
     init() {
         
     }
+    
+    func setSchedule(ActivityDict:Dictionary<String, Any>)  {
+        
+    }
+    
 }

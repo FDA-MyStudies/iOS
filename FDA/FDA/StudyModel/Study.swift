@@ -16,7 +16,7 @@ enum StudyStatus:String{
 }
 class Study {
 
-     //MARK:Properties
+    //MARK:Properties
     var name:String?
     var version:String?
     var identifer:String?
@@ -28,7 +28,8 @@ class Study {
     var description:String?
     var brandingConfiguration:String?
     var logoURL:String?
-    var overviewList:Array<Overview>!
+    var overview:Overview!
+    var activities:Array<Activity>!
     
     static var currentStudy:Study? = nil
     
@@ -56,7 +57,6 @@ class Study {
                 self.status = StudyStatus.init(rawValue: studyDetail[kStudyStatus] as! String)!
             }
             
-            
         }
         else{
             Logger.sharedInstance.debug("Study Dictionary is null:\(studyDetail)")
@@ -64,10 +64,6 @@ class Study {
 
     }
     
-    
-    func setOverviewList(overviewList:Array<Overview>){
-        self.overviewList = overviewList
-    }
     
     func updateCurrentStudy(study:Study){
         Study.currentStudy = study

@@ -9,6 +9,14 @@
 import UIKit
 
 class Overview {
+    enum OverviewType:Int {
+        case gateway
+        case study
+    }
+    var sections:Array<OverviewSection>!
+    var type:OverviewType = .gateway
+}
+class OverviewSection {
     
     var title:String?       //title of overview
     var type:String?        //type of overview video/image

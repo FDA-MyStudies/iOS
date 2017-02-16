@@ -12,7 +12,7 @@ class Gateway: NSObject {
 
     var studies:Array<Study>?
     var resources:Array<Resource>?
-    //var notification:Array<Notification>?
+    var notification:Array<Notification>?
     
     static var instance = Gateway()
 }

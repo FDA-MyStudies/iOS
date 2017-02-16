@@ -32,6 +32,14 @@ let kOverviewTitle = "title"
 let kOverviewText = "text"
 let kOverviewMediaLink = "link"
 
+//notification
+let kNotifications = "notifications"
+let kNotificationId = "notificationId"
+let kNotificationType = "type"
+let kNotificationSubType = "subtype"
+let kNotificationAudience = "audience"
+let kNotificationTitle = "title"
+let kNotificationMessage = "message"
 
 
 class WCPServices: NSObject {
@@ -133,13 +141,49 @@ class WCPServices: NSObject {
     func handleStudyInfo(response:Dictionary<String, Any>){
         
         let overviewList = response[kOverViewInfo] as! Array<Dictionary<String,Any>>
-        var listOfOverviews:Array<Overview>!
+        var listOfOverviews:Array<OverviewSection>!
         for overview in overviewList{
-            let overviewObj = Overview(detail: overview)
+            let overviewObj = OverviewSection(detail: overview)
             listOfOverviews.append(overviewObj)
         }
         
+        //create new Overview object
+        let overview = Overview()
+        overview.type = .study
+        overview.sections = listOfOverviews
+        
+        //update overview object to current study
+        Study.currentStudy?.overview = overview
+        
     }
+    
+    func handleActivityList(response:Dictionary<String, Any>){
+        
+        let activities = response[kActivites] as! Array<Dictionary<String,Any>>
+        var listOfActivity:Array<Overview>!
+        for activity in activities{
+           // let overviewObj = Overview(detail: overview)
+           // listOfActivity.append(activity)
+        }
+        
+    }
+    
+    func handleGetStudyActivityMetadata(response:Dictionary<String, Any>){
+        
+    }
+    
+    func handleGetNotification(response:Dictionary<String, Any>){
+        
+        let notifications = response[kNotifications] as! Array<Dictionary<String,Any>>
+        var listOfNotifications:Array<Notification>!
+        for notification in notifications{
+             let overviewObj = Notification(detail: notification)
+             listOfNotifications.append(overviewObj)
+        }
+        
+        Gateway.instance.notification = listOfNotifications
+    }
+
     
     private func sendRequestWith(method:Method, params:Dictionary<String, Any>,headers:Dictionary<String, String>?){
         

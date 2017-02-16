@@ -62,6 +62,7 @@ class Activity{
     var steps:Array<Dictionary<String,Any>>?
     var result:ActivityResult?
     
+    var restortionData:Data?
     
     init() {
         //Default Initializer
@@ -86,6 +87,7 @@ class Activity{
         
         self.schedule = Schedule()
         self.result = ActivityResult()
+        self.restortionData = Data()
     }
     
     //MARK:Initializer Methods
@@ -226,6 +228,13 @@ class Activity{
         else{
             Logger.sharedInstance.debug("stepArray is null:\(stepArray)")
         }
+    }
+    
+    func getRestortionData() -> Data {
+       return self.restortionData!
+    }
+    func setRestortionData(restortionData:Data)  {
+        self.restortionData = restortionData
     }
     
     func getNativeTask() -> ORKTask? {

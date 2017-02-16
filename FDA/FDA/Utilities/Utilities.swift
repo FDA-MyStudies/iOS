@@ -261,6 +261,9 @@ class Utilities: NSObject {
             else  if someObject as? Double != nil && (someObject as? Double)?.isFinite == true && (someObject as? Double)?.isZero == false && (someObject as? Double)! > 0 {
                 return true
             }
+            else if someObject as? Date != nil {
+                return true
+            }
             else{
                 Logger.sharedInstance.debug("Value is null:\(someObject)")
                 return false
@@ -317,9 +320,21 @@ class Utilities: NSObject {
         let finalString = dateFormatter.string(from: date)
         let finalDate = dateFormatter.date(from: finalString)
         return finalDate
+    
+    }
+    
+    class func getStringFromDate(date:Date)->String?{
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
+        dateFormatter.timeZone = NSTimeZone(name: "UTC") as TimeZone!
         
+         let dateValue = dateFormatter.string(from: date)
+        
+        return dateValue
         
     }
+    
+    
     
     
     class func getAppVersion() -> String{

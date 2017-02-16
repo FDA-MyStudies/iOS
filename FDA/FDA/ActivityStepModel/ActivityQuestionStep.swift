@@ -401,6 +401,11 @@ class ActivityQuestionStep: ActivityStep {
                     return nil
                     
                 }
+                
+            case .booleanQuestionStep:
+                
+                   questionStepAnswerFormat = ORKBooleanAnswerFormat()
+                
             case .numericQuestionStep:
                 
                 if  Utilities.isValidValue(someObject:formatDict?[kStepQuestionNumericStyle] as AnyObject?) &&  Utilities.isValidValue(someObject:formatDict?[kStepQuestionNumericUnit] as AnyObject?)
@@ -430,6 +435,12 @@ class ActivityQuestionStep: ActivityStep {
                     return nil
                     
                 }
+                
+            case .timeOfDayQuestionStep:
+                
+                questionStepAnswerFormat = ORKAnswerFormat.timeOfDayAnswerFormat()
+                
+                
             case .dateQuestionStep:
                 
                 

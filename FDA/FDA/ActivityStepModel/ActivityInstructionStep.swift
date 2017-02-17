@@ -44,7 +44,7 @@ class ActivityInstructionStep: ActivityStep {
     
     func getInstructionStep() -> ORKInstructionStep? {
         //Getter method to return Instruction Step
-        if  Utilities.isValidValue(someObject:resultType  as AnyObject?) && Utilities.isValidValue(someObject:title  as AnyObject?) && Utilities.isValidValue(someObject:text  as AnyObject?) && Utilities.isValidValue(someObject:key  as AnyObject?)   {
+        if   Utilities.isValidValue(someObject:title  as AnyObject?) && Utilities.isValidValue(someObject:text  as AnyObject?) && Utilities.isValidValue(someObject:key  as AnyObject?)   {
             
             let instructionStep = ORKInstructionStep(identifier: key!)
             
@@ -52,8 +52,8 @@ class ActivityInstructionStep: ActivityStep {
             
             instructionStep.text = text!
             
-            let handSolidImage = UIImage(named: "hand_solid")!
-            instructionStep.image = handSolidImage.withRenderingMode(.alwaysTemplate)
+            //let handSolidImage = UIImage(named: "hand_solid")!
+            //instructionStep.image = handSolidImage.withRenderingMode(.alwaysTemplate)
             
             return instructionStep
             

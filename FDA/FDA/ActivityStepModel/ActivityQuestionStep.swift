@@ -119,7 +119,7 @@ let kStepQuestionEmailPlaceholder = "placeholder"
 let kStepQuestionTimeIntervalDefault = "default"
 let kStepQuestionTimeIntervalStep = "step"
 
-//HeightQuestion Type Api Constants
+//height Type Api Constants
 
 let kStepQuestionHeightMeasurementSystem = "measurementSystem"
 let kStepQuestionHeightPlaceholder = "placeholder"
@@ -132,53 +132,53 @@ enum QuestionStepType:String{
     
     
     // Step for  Boolean question.
-    case booleanQuestionStep = "boolean"
+    case boolean = "boolean"
     
     // Step for  example of date entry.
-    case dateQuestionStep = "date"
+    case date = "date"
     
     // Step for  example of date and time entry.
     case dateTimeQuestionStep
     
     // Step for  example of height entry.
-    case heightQuestion = "height"
+    case height = "height"
     
     // Step for  image choice question.
-    case imageChoiceQuestionStep = "imageChoice"
+    case imageChoice = "imageChoice"
     
     // Step for  location entry.
-    case locationQuestionStep = "location"
+    case location = "location"
     
     // Step with examples of numeric questions.
-    case numericQuestionStep = "numeric"
+    case numeric = "numeric"
     case numericNoUnitQuestionStep
     
     // Step with examples of questions with sliding scales.
-    case scaleQuestionStep = "scale"
-    case continuousScaleQuestionStep = "continuousScale"
-    case discreteVerticalScaleQuestionStep
-    case continuousVerticalScaleQuestionStep
-    case textScaleQuestionStep = "textScale"
-    case textVerticalScaleQuestionStep
+    case scale = "scale"
+    case continuousScale = "continuousScale"
+    case discreteVerticalscale
+    case continuousVerticalscale
+    case textscale = "textScale"
+    case textVerticalscale
     
     // Step for  example of free text entry.
-    case textQuestionStep = "text"
+    case text = "text"
     
     // Step for  example of a multiple choice question.
-    case textChoiceQuestionStep = "textChoice"
+    case textChoice = "textChoice"
     
     // Step for  example of time of day entry.
-    case timeOfDayQuestionStep = "timeOfDay"
+    case timeOfDay = "timeOfDay"
     
     // Step for  example of time interval entry.
-    case timeIntervalQuestionStep = "timeInterval"
+    case timeInterval = "timeInterval"
     
     // Step for  value picker.
-    case valuePickerChoiceQuestionStep = "valuePicker"
+    case valuePicker = "valuePicker"
     
     // Step for  example of validated text entry.
-    case validatedTextQuestionStepEmail = "email"
-    case validatedTextQuestionStepDomain
+    case email = "email"
+    case validatedtextDomain
     
     // Image capture Step specific identifiers.
     case imageCaptureStep
@@ -262,14 +262,16 @@ class ActivityQuestionStep: ActivityStep {
         
         //method to create question step
         
-        if Utilities.isValidObject(someObject: self.formatDict as AnyObject?) && Utilities.isValidValue(someObject:resultType  as AnyObject?)   {
+        //Utilities.isValidObject(someObject: self.formatDict as AnyObject?)
+        
+        if  Utilities.isValidValue(someObject:resultType  as AnyObject?)   {
             
             var questionStepAnswerFormat:ORKAnswerFormat?
             
             var questionStep:ORKQuestionStep?
             
-            switch resultType as! QuestionStepType {
-            case .scaleQuestionStep:
+            switch   QuestionStepType(rawValue:resultType as! String)! as QuestionStepType {
+            case .scale:
                 
                 if  Utilities.isValidValue(someObject:formatDict?[kStepQuestionScaleMaxValue] as AnyObject?) &&  Utilities.isValidValue(someObject:formatDict?[kStepQuestionScaleMinValue] as AnyObject?)
                     &&  Utilities.isValidValue(someObject:formatDict?[kStepQuestionScaleDefaultValue] as AnyObject?)
@@ -294,7 +296,7 @@ class ActivityQuestionStep: ActivityStep {
                     return nil
                     
                 }
-            case .continuousScaleQuestionStep:
+            case .continuousScale:
                 
                 if  Utilities.isValidValue(someObject:formatDict?[kStepQuestionContinuosScaleMaxValue] as AnyObject?)
                     &&  Utilities.isValidValue(someObject:formatDict?[kStepQuestionContinuosScaleMinValue] as AnyObject?)
@@ -318,7 +320,7 @@ class ActivityQuestionStep: ActivityStep {
                     return nil
                     
                 }
-            case .textScaleQuestionStep:
+            case .textscale:
                 
                 if  Utilities.isValidValue(someObject:formatDict?[kStepQuestionTextScaleTextChoices] as AnyObject?)
                     && Utilities.isValidValue(someObject:formatDict?[kStepQuestionTextScaleDefault] as AnyObject?)
@@ -340,7 +342,7 @@ class ActivityQuestionStep: ActivityStep {
                     return nil
                     
                 }
-            case .valuePickerChoiceQuestionStep:
+            case .valuePicker:
                 
                 if  Utilities.isValidValue(someObject:formatDict?[kStepQuestionTextScaleTextChoices] as AnyObject?)  {
                     
@@ -355,7 +357,7 @@ class ActivityQuestionStep: ActivityStep {
                     return nil
                     
                 }
-            case .imageChoiceQuestionStep:
+            case .imageChoice:
                 
                 if  Utilities.isValidValue(someObject:formatDict?[kStepQuestionImageChoices] as AnyObject?)  {
                     
@@ -372,7 +374,7 @@ class ActivityQuestionStep: ActivityStep {
                     return nil
                     
                 }
-            case .textChoiceQuestionStep:
+            case .textChoice:
                 // array(text choices) + int(selection Type)
                 if  Utilities.isValidValue(someObject:formatDict?[kStepQuestionTextChoiceTextChoices] as AnyObject?)  &&
                     Utilities.isValidValue(someObject:formatDict?[kStepQuestionTextChoiceSelectionStyle] as AnyObject?){
@@ -402,11 +404,11 @@ class ActivityQuestionStep: ActivityStep {
                     
                 }
                 
-            case .booleanQuestionStep:
+            case .boolean:
                 
-                   questionStepAnswerFormat = ORKBooleanAnswerFormat()
+                questionStepAnswerFormat = ORKBooleanAnswerFormat()
                 
-            case .numericQuestionStep:
+            case .numeric:
                 
                 if  Utilities.isValidValue(someObject:formatDict?[kStepQuestionNumericStyle] as AnyObject?) &&  Utilities.isValidValue(someObject:formatDict?[kStepQuestionNumericUnit] as AnyObject?)
                     &&  Utilities.isValidValue(someObject:formatDict?[kStepQuestionNumericMinValue] as AnyObject?)
@@ -431,17 +433,17 @@ class ActivityQuestionStep: ActivityStep {
                     
                 }
                 else{
-                    Logger.sharedInstance.debug("numericQuestionStep has null values:\(formatDict)")
+                    Logger.sharedInstance.debug("numeric has null values:\(formatDict)")
                     return nil
                     
                 }
                 
-            case .timeOfDayQuestionStep:
+            case .timeOfDay:
                 
                 questionStepAnswerFormat = ORKAnswerFormat.timeOfDayAnswerFormat()
                 
                 
-            case .dateQuestionStep:
+            case .date:
                 
                 
                 if  Utilities.isValidValue(someObject:formatDict?[kStepQuestionDateStyle] as AnyObject?)
@@ -475,12 +477,12 @@ class ActivityQuestionStep: ActivityStep {
                     }
                     
                 }else{
-                    Logger.sharedInstance.debug("dateQuestionStep has null values:\(formatDict)")
+                    Logger.sharedInstance.debug("date has null values:\(formatDict)")
                     return nil
                     
                     
                 }
-            case .textQuestionStep:
+            case .text:
                 
                 if  Utilities.isValidValue(someObject:formatDict?[kStepQuestionTextMaxLength] as AnyObject?) &&  Utilities.isValidValue(someObject:formatDict?[kStepQuestionTextValidationRegex] as AnyObject?)
                     &&  Utilities.isValidValue(someObject:formatDict?[kStepQuestionTextInvalidMessage] as AnyObject?)
@@ -500,11 +502,11 @@ class ActivityQuestionStep: ActivityStep {
                     
                 }
                 else{
-                    Logger.sharedInstance.debug("textQuestionStep has null values:\(formatDict)")
+                    Logger.sharedInstance.debug("text has null values:\(formatDict)")
                     return nil
                     
                 }
-            case .validatedTextQuestionStepEmail:
+            case .email:
                 
                 if  Utilities.isValidValue(someObject:formatDict?[kStepQuestionEmailPlaceholder] as AnyObject?)
                 {
@@ -514,11 +516,11 @@ class ActivityQuestionStep: ActivityStep {
                     
                 }
                 else{
-                    Logger.sharedInstance.debug("validatedTextQuestionStepEmail has null values:\(formatDict)")
+                    Logger.sharedInstance.debug("email has null values:\(formatDict)")
                     return nil
                     
                 }
-            case .timeIntervalQuestionStep:
+            case .timeInterval:
                 
                 if  Utilities.isValidValue(someObject:formatDict?[kStepQuestionTimeIntervalDefault] as AnyObject?)
                     &&   Utilities.isValidValue(someObject:formatDict?[kStepQuestionTimeIntervalStep] as AnyObject?)
@@ -529,11 +531,11 @@ class ActivityQuestionStep: ActivityStep {
                     
                 }
                 else{
-                    Logger.sharedInstance.debug("timeIntervalQuestionStep has null values:\(formatDict)")
+                    Logger.sharedInstance.debug("timeInterval has null values:\(formatDict)")
                     return nil
                     
                 }
-            case .heightQuestion:
+            case .height:
                 
                 if  Utilities.isValidValue(someObject:formatDict?[kStepQuestionHeightPlaceholder] as AnyObject?)
                     &&   Utilities.isValidValue(someObject:formatDict?[kStepQuestionHeightMeasurementSystem] as AnyObject?)
@@ -544,12 +546,12 @@ class ActivityQuestionStep: ActivityStep {
                     
                 }
                 else{
-                    Logger.sharedInstance.debug("heightQuestion has null values:\(formatDict)")
+                    Logger.sharedInstance.debug("height has null values:\(formatDict)")
                     return nil
                     
                     
                 }
-            case .locationQuestionStep:
+            case .location:
                 if  Utilities.isValidValue(someObject:formatDict?[kStepQuestionLocationUseCurrentLocation] as AnyObject?)
                 {
                     let answerFormat = ORKAnswerFormat.locationAnswerFormat()
@@ -560,7 +562,7 @@ class ActivityQuestionStep: ActivityStep {
                     
                 }
                 else{
-                    Logger.sharedInstance.debug("locationQuestionStep has null values:\(formatDict)")
+                    Logger.sharedInstance.debug("location has null values:\(formatDict)")
                     return nil
                     
                 }
@@ -568,7 +570,13 @@ class ActivityQuestionStep: ActivityStep {
                 
             }
             
+            
             questionStep = ORKQuestionStep(identifier:key! , title: title!, answer: questionStepAnswerFormat)
+            // By default a step is skippable
+            if (skippable == false) {
+                questionStep?.isOptional = false
+            }
+            
             
             
             questionStep?.text = text

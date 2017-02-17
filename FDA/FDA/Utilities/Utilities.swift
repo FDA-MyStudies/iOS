@@ -59,7 +59,7 @@ class Utilities: NSObject {
         return attributedString
         
     }
-      
+    
     
     class func getUIColorFromHex(_ hexInt: Int, alpha:CGFloat? = 1.0) -> UIColor {
         
@@ -73,10 +73,10 @@ class Utilities: NSObject {
         return color
     }
     
- class  func hexStringToUIColor(_ hex:String) -> UIColor {
-    
+    class  func hexStringToUIColor(_ hex:String) -> UIColor {
+        
         var cString:String =  hex.trimmingCharacters(in: NSCharacterSet.whitespacesAndNewlines)
-    //hex.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet() as NSCharacterSet).uppercased()
+        //hex.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet() as NSCharacterSet).uppercased()
         
         if (cString.hasPrefix("#")) {
             cString = cString.substring(from: cString.characters.index(cString.startIndex, offsetBy: 1))
@@ -97,7 +97,7 @@ class Utilities: NSObject {
         )
     }
     
-        
+    
     class func getDateStringWithFormat(_ dateFormatter:String,date:Date) ->String{
         
         let formatter = DateFormatter()
@@ -123,7 +123,7 @@ class Utilities: NSObject {
     }
     
     class func frameForText(_ text: String, font: UIFont) -> CGSize {
-    
+        
         let attrString = NSAttributedString.init(string: text, attributes: [NSFontAttributeName:font])
         let rect = attrString.boundingRect(with: CGSize(width: MAX_WIDTH,height: MAX_HEIGHT), options: NSStringDrawingOptions.usesLineFragmentOrigin, context: nil)
         let size = CGSize(width: rect.size.width, height: rect.size.height)
@@ -197,7 +197,7 @@ class Utilities: NSObject {
         
         return mobileNumber;
     }
-
+    
     
     class  func getLength( mobileNumber : NSString) -> Int
     {
@@ -213,11 +213,11 @@ class Utilities: NSObject {
         return length
     }
     
-  class func checkTextSufficientComplexity(password : String) -> Bool{
+    class func checkTextSufficientComplexity(password : String) -> Bool{
         
         //let capitalLetterRegEx  = ".*[A-Z]+.*"
-    
-       //€£• _-/:;.,?'|
+        
+        //€£• _-/:;.,?'|
         
         let capitalLetterRegEx  = ".*[~!@#$%^&*()_]+.*"
         
@@ -226,7 +226,7 @@ class Utilities: NSObject {
         
         print("\(capitalresult)")
         
-    
+        
         let numberRegEx  = ".*[a-z0-9A-Z]+.*"
         let texttest1 = NSPredicate(format:"SELF MATCHES %@", numberRegEx)
         let numberresult = texttest1.evaluate(with: password)
@@ -238,8 +238,8 @@ class Utilities: NSObject {
     }
     
     class func isValidValue(someObject: AnyObject?) -> Bool {
-    
-    // this method checks validation of string, integer, bool
+        
+        // this method checks validation of string, integer, bool
         guard let someObject = someObject else {
             // is null
             
@@ -274,12 +274,38 @@ class Utilities: NSObject {
             return false
         }
     }
-
+    
+    
+    class func isValidValueAndOfType(someValue:AnyObject? , type:AnyClass )->Bool{
+        
+        
+        guard let someObject = someValue else {
+            // is null
+            
+            return false
+        }
+        // is not null
+        
+        if (someObject is NSNull) ==  false {
+            
+            if (someValue?.isKind(of: type))! && someValue != nil {
+                return true
+            }
+            else{
+                return false
+            }
+        }
+        else{
+            Logger.sharedInstance.debug("Value is null:\(someObject)")
+            return false
+        }
+        
+    }
     
     
     
     class func isValidObject(someObject: AnyObject?)-> Bool{
-       // this method validate dictionary and Array
+        // this method validate dictionary and Array
         guard let someObject = someObject else {
             // is null
             
@@ -291,7 +317,7 @@ class Utilities: NSObject {
                 return true
             }
             else if someObject as? NSArray != nil && ((someObject as? NSArray)?.count)! > 0 {
-               return true
+                return true
             }
             else{
                 return false
@@ -307,8 +333,10 @@ class Utilities: NSObject {
     
     class func getDateFromString(dateString:String)->Date?{
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
-        dateFormatter.timeZone = NSTimeZone(name: "UTC") as TimeZone!
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
+        // dateFormatter.timeZone = NSTimeZone(name: "UTC") as TimeZone!
+        
+        //"2016-08-01T08:00:00+0900"
         
         guard let date = dateFormatter.date(from: dateString) else {
             assert(false, "no date from string")
@@ -316,19 +344,19 @@ class Utilities: NSObject {
         }
         
         dateFormatter.dateFormat = "yyyy MMM EEEE HH:mm"
-       // dateFormatter.timeZone = NSTimeZone.local // NSTimeZone(name: "UTC") as TimeZone!
+        // dateFormatter.timeZone = NSTimeZone.local // NSTimeZone(name: "UTC") as TimeZone!
         let finalString = dateFormatter.string(from: date)
         let finalDate = dateFormatter.date(from: finalString)
         return finalDate
-    
+        
     }
     
     class func getStringFromDate(date:Date)->String?{
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
         dateFormatter.timeZone = NSTimeZone(name: "UTC") as TimeZone!
         
-         let dateValue = dateFormatter.string(from: date)
+        let dateValue = dateFormatter.string(from: date)
         
         return dateValue
         
@@ -370,7 +398,7 @@ extension FileManager {
         // method to create study or gateway directory if not there or else will return directory path
         
         let fileManager = FileManager.default
-       
+        
         let fullPath = self.documentsDir() + "/" + "\(type)"
         
         var isDirectory : ObjCBool = false

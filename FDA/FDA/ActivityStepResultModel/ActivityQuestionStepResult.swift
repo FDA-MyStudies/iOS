@@ -17,7 +17,7 @@ class ActivityQuestionStepResult: ActivityStepResult {
     var value: Any?
     override init() {
         super.init()
-        resultType = .booleanQuestionStep
+        resultType = .boolean
         skipped = false
         value = 0
     }
@@ -38,42 +38,42 @@ class ActivityQuestionStepResult: ActivityStepResult {
                 
                 switch stepDict[kActivityStepResultType] as! QuestionStepType {
                     
-                case .scaleQuestionStep:
+                case .scale:
                     self.value = stepDict[kStepQuestionTypeValue] as? Double
-                case .continuousScaleQuestionStep:
+                case .continuousScale:
                     self.value = stepDict[kStepQuestionTypeValue] as? Double
                     
-                case .textScaleQuestionStep:
+                case .textscale:
                     self.value = stepDict[kStepQuestionTypeValue] as? String
                     
-                case .valuePickerChoiceQuestionStep:
+                case .valuePicker:
                     self.value = stepDict[kStepQuestionTypeValue] as? String
                     
-                case .imageChoiceQuestionStep:
+                case .imageChoice:
                     self.value = stepDict[kStepQuestionTypeValue] as? [String]
                     
-                case .textChoiceQuestionStep:
+                case .textChoice:
                     self.value = stepDict[kStepQuestionTypeValue] as? Bool
                     
-                case .numericQuestionStep:
+                case .numeric:
                     self.value = stepDict[kStepQuestionTypeValue] as? Double
                     
-                case .dateQuestionStep:
+                case .date:
                     self.value = stepDict[kStepQuestionTypeValue] as? String
                     
-                case .textQuestionStep:
+                case .text:
                     self.value = stepDict[kStepQuestionTypeValue] as? String
                     
-                case .validatedTextQuestionStepEmail:
+                case .email:
                     self.value = stepDict[kStepQuestionTypeValue] as? String
                     
-                case .timeIntervalQuestionStep:
+                case .timeInterval:
                     self.value = stepDict[kStepQuestionTypeValue] as? Double
                     
-                case .heightQuestion:
+                case .height:
                     self.value = stepDict[kStepQuestionTypeValue] as? Double
                     
-                case .locationQuestionStep:
+                case .location:
                     self.value = stepDict[kStepQuestionTypeValue] as? Dictionary<String,Any>
                     
                 default:break

@@ -37,7 +37,7 @@ let kActivityLastModified = "lastModified"
 
 
 enum ActivityType:String{
-    case questionnaire = "questionnaire"
+    case Questionnaire = "Questionnaire"
     case activeTask = "active task"
 }
 
@@ -66,27 +66,27 @@ class Activity{
     
     init() {
         //Default Initializer
-        self.type = .questionnaire
+        self.type = .Questionnaire
         
         self.actvityId = ""
         // info
         self.studyId = ""
         self.name = ""
         self.version = "0"
-        self.lastModified = Date()
+        self.lastModified = nil
         self.userStatus = .yetToJoin
-        self.startDate = Date()
-        self.endDate = Date()
+        self.startDate = nil
+        self.endDate = nil
         
-        // questionnaireConfiguration
+        // questionnaireConfigurations
         self.branching = false
         self.randomization = false
         
         // Steps
         self.steps = Array()
         
-        self.schedule = Schedule()
-        self.result = ActivityResult()
+        self.schedule = nil
+        self.result = nil
         self.restortionData = Data()
     }
     
@@ -145,7 +145,8 @@ class Activity{
         if Utilities.isValidObject(someObject: activityDict as AnyObject?){
             
             if Utilities.isValidValue(someObject: activityDict[kActivityType] as AnyObject ){
-                self.type = activityDict[kActivityType] as? ActivityType
+                self.type? =  ActivityType(rawValue:(activityDict[kActivityType] as? String)!)!
+                print("activity type ===\(self.type) && dict value =\(activityDict[kActivityType])")
             }
             
             
@@ -247,7 +248,7 @@ class Activity{
             
             switch self.type! as ActivityType{
                 
-            case .questionnaire:
+            case .Questionnaire:
                 
                 for var stepDict in self.steps! {
                     
@@ -256,19 +257,19 @@ class Activity{
                         if Utilities.isValidValue(someObject: stepDict[kActivityStepType] as AnyObject ){
                             
                             switch stepDict[kActivityStepType] as! ActivityStepType {
-                            case .instructionStep:
+                            case .instruction:
                                 
                                 let instructionStep:ActivityInstructionStep? = ActivityInstructionStep()
                                 instructionStep?.initWithDict(stepDict: stepDict)
                                 orkStepArray?.append((instructionStep?.getInstructionStep())!)
                                 
-                            case .questionStep:
+                            case .question:
                                 
                                 let questionStep:ActivityQuestionStep? = ActivityQuestionStep()
                                 questionStep?.initWithDict(stepDict: stepDict)
                                 orkStepArray?.append((questionStep?.getQuestionStep())!)
                                 
-                            case .formStep: break
+                            case .form: break
                                 
                                 
                             default: break

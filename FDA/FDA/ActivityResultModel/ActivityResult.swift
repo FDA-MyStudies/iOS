@@ -22,7 +22,7 @@ class ActivityResult {
     var result:Array<ActivityStepResult>?
 //MARK: Initializers
     init() {
-        self.type = .questionnaire
+        self.type = .Questionnaire
         self.activity = Activity()
         self.startTime = Date()
         self.endTime = Date()

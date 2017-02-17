@@ -28,10 +28,10 @@ let kActivityStepDestinations = "destinations"
 
 //MARK:Enum for ActivityStepType
 enum ActivityStepType:String{
-    case formStep = "form"
-    case instructionStep = "instruction"
-    case questionStep = "question"
-    case activeStep = "task" // active step
+    case form = "form"
+    case instruction = "instruction"
+    case question = "question"
+    case active = "task" // active step
 }
 
 
@@ -49,12 +49,12 @@ class ActivityStep{
     var repeatable:Bool?
     var repeatableText:String?
     
-    var destinations:Array<Any>?
+    var destinations:Dictionary<String,Any>?
     
     
     init() {
         self.activityId = ""
-        self.type = .questionStep
+        self.type = .question
         self.resultType = ""
         self.key = ""
         self.title = ""
@@ -63,12 +63,12 @@ class ActivityStep{
         self.groupName = ""
         self.repeatable = false
         self.repeatableText = ""
-        self.destinations = Array()
+        self.destinations = Dictionary()
         
     }
     
     
-    init(activityId:String,type:ActivityStepType,resultType:String,key:String,title:String,text:String,skippable:Bool,groupName:String,repeatable:Bool,repeatableText:String, destinations:Array<Any>) {
+    init(activityId:String,type:ActivityStepType,resultType:String,key:String,title:String,text:String,skippable:Bool,groupName:String,repeatable:Bool,repeatableText:String, destinations:Dictionary<String,Any>) {
         // initializer method with all params
         
         self.activityId = activityId
@@ -102,7 +102,7 @@ class ActivityStep{
             if Utilities.isValidValue(someObject: stepDict[kActivityStepKey] as AnyObject ){
                 self.key = stepDict[kActivityStepKey] as? String
             }
-            if Utilities.isValidObject(someObject: stepDict[kActivityStepTitle] as AnyObject ) {
+            if Utilities.isValidValue(someObject: stepDict[kActivityStepTitle] as AnyObject ) {
                 self.title = stepDict[kActivityStepTitle] as? String
             }
             if Utilities.isValidValue(someObject: stepDict[kActivityStepText] as AnyObject )  {
@@ -121,7 +121,7 @@ class ActivityStep{
                 self.repeatableText = stepDict[kActivityStepRepeatableText] as? String
             }
             if Utilities.isValidValue(someObject: stepDict[kActivityStepDestinations] as AnyObject )  {
-                self.destinations = stepDict[kActivityStepDestinations] as? Array
+                self.destinations = stepDict[kActivityStepDestinations] as? Dictionary<String, Any>
             }
             
         }
@@ -134,7 +134,7 @@ class ActivityStep{
     func getNativeStep() -> ORKStep? {
         
         if Utilities.isValidValue(someObject: self.key as AnyObject?){
-           return ORKStep(identifier:self.key! )
+            return ORKStep(identifier:self.key! )
         }
         else{
             return nil

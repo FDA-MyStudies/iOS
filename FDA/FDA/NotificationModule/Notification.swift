@@ -8,7 +8,7 @@
 
 import UIKit
 
-class Notification {
+class AppNotification {
     
     enum NotificationType:String{
         case Gateway

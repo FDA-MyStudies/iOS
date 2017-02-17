@@ -175,9 +175,9 @@ class WCPServices: NSObject {
     func handleGetNotification(response:Dictionary<String, Any>){
         
         let notifications = response[kNotifications] as! Array<Dictionary<String,Any>>
-        var listOfNotifications:Array<Notification>!
+        var listOfNotifications:Array<AppNotification>!
         for notification in notifications{
-             let overviewObj = Notification(detail: notification)
+             let overviewObj = AppNotification(detail: notification)
              listOfNotifications.append(overviewObj)
         }
         

@@ -7,13 +7,13 @@
 //
 
 import UIKit
-
+import ResearchKit
 
 let user = User()
 
 
 let resourceArray : Array<Any>? = nil
-class ViewController: UIViewController {
+class ViewController: UIViewController,ORKTaskViewControllerDelegate {
     
     
     override func viewDidLoad() {
@@ -23,9 +23,116 @@ class ViewController: UIViewController {
         self.userProfile()
         self.setPrefereneces()
         self.addResources()
+        
+        //self.buildTask()
+        
     }
 
+    
+    
+    //MARK:ORKTaskViewController Delegate
+    
+    
+    func taskViewControllerSupportsSaveAndRestore(_ taskViewController: ORKTaskViewController) -> Bool {
+        return true
+    }
+    
+    public func taskViewController(_ taskViewController: ORKTaskViewController, didFinishWith reason: ORKTaskViewControllerFinishReason, error: Error?) {
+        
+        var taskResult:Any?
+        
+        switch reason {
+            
+        case ORKTaskViewControllerFinishReason.completed:
+            print("completed")
+            taskResult = taskViewController.result
+        case ORKTaskViewControllerFinishReason.failed:
+            print("failed")
+            taskResult = taskViewController.result
+        case ORKTaskViewControllerFinishReason.discarded:
+            print("discarded")
+            taskResult = taskViewController.result
+        case ORKTaskViewControllerFinishReason.saved:
+            print("saved")
+            taskResult = taskViewController.restorationData
+        }
+        
+        taskViewController.dismiss(animated: true, completion: nil)
+        
+    }
+    
+    func taskViewController(_ taskViewController: ORKTaskViewController, stepViewControllerWillAppear stepViewController: ORKStepViewController) {
+        
+        
+    }
+    
+    //MARK:StepViewController Delegate
+    public func stepViewController(_ stepViewController: ORKStepViewController, didFinishWith direction: ORKStepViewControllerNavigationDirection){
+        
+    }
+    
+    public func stepViewControllerResultDidChange(_ stepViewController: ORKStepViewController){
+        
+    }
+    public func stepViewControllerDidFail(_ stepViewController: ORKStepViewController, withError error: Error?){
+        
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
     //MARK: methods
+    
+    func buildTask()  {
+        
+        
+        
+        
+        let filePath  = Bundle.main.path(forResource: "TaskSchema", ofType: "json")
+        
+        let data = NSData(contentsOfFile: filePath!)
+        
+        
+        do {
+            let dataDict = try JSONSerialization.jsonObject(with: data! as Data, options: []) as? Dictionary<String,Any>
+            
+            if  Utilities.isValidObject(someObject: dataDict as AnyObject?) && (dataDict?.count)! > 0 {
+                
+                let activitybuilder:ActivityBuilder? = ActivityBuilder()
+                let task:ORKTask?
+                let taskViewController:ORKTaskViewController?
+                
+                if Utilities.isValidObject(someObject: dataDict?["Result"] as? Dictionary<String, Any> as AnyObject?){
+                
+                
+                activitybuilder?.initWithDict(dict: dataDict?["Result"] as! Dictionary<String, Any>)
+                
+                task = activitybuilder?.createTask()
+                
+                
+                taskViewController = ORKTaskViewController(task:task, taskRun: nil)
+                taskViewController?.delegate = self
+                taskViewController?.outputDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+                present(taskViewController!, animated: true, completion: nil)
+                }
+            }
+            
+            // use anyObj here
+        } catch {
+            print("json error: \(error.localizedDescription)")
+        }
+
+       
+        
+        
+    }
+    
+    
     
     func addResources()  {
         

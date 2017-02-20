@@ -63,7 +63,7 @@ class ActivityBuilder {
                                 let formStep:ActivityFormStep? = ActivityFormStep()
                                 formStep?.initWithDict(stepDict: stepDict)
                                 
-                                 orkStepArray?.append((formStep?.getFormStep())!)
+                                orkStepArray?.append((formStep?.getFormStep())!)
                                 
                                 
                             default: break
@@ -80,7 +80,7 @@ class ActivityBuilder {
                 }
                 
                 
-        
+                
                 if (orkStepArray?.count)! > 0 {
                     
                     // checking if navigable or randomized or ordered
@@ -118,15 +118,39 @@ class ActivityBuilder {
                     else{
                         // ordered
                         
-                         task =  ORKOrderedTask(identifier: (activity?.actvityId!)!, steps: orkStepArray)
+                        task =  ORKOrderedTask(identifier: (activity?.actvityId!)!, steps: orkStepArray)
                         return task!
                         
                     }
-              
+                    
                 }
-
-            case .activeTask: break
                 
+            case .activeTask: break
+         
+            var stepDict = activity?.steps![0]
+            
+                if Utilities.isValidObject(someObject: stepDict as AnyObject?) {
+                    
+                    if Utilities.isValidValue(someObject: stepDict?[kActivityStepType] as AnyObject ){
+                        
+                        switch ActivityStepType(rawValue:stepDict?[kActivityStepType] as! String)! as  ActivityStepType {
+
+                        case .active:
+                            
+                            let activeStep:ActivityActiveStep? = ActivityActiveStep()
+                            activeStep?.initWithDict(stepDict: stepDict!)
+                            task = activeStep?.getActiveTask()
+                            
+                        default: break
+                            
+                        }
+                    }
+                }
+                else{
+                    Logger.sharedInstance.debug("Activity:stepDict is null:\(stepDict)")
+                    break;
+                }
+            
             default: break
                 
             }
@@ -138,7 +162,7 @@ class ActivityBuilder {
         return nil
     }
     
-   
+    
     
     
     

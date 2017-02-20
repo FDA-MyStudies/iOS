@@ -24,7 +24,7 @@ class ViewController: UIViewController,ORKTaskViewControllerDelegate {
         self.setPrefereneces()
         self.addResources()
         
-        //self.buildTask()
+       // self.buildTask()
         
     }
 

@@ -59,7 +59,11 @@ class ActivityBuilder {
                                 
                                 orkStepArray?.append((questionStep?.getQuestionStep())!)
                                 
-                            case .form: break
+                            case .form:
+                                let formStep:ActivityFormStep? = ActivityFormStep()
+                                formStep?.initWithDict(stepDict: stepDict)
+                                
+                                 orkStepArray?.append((formStep?.getFormStep())!)
                                 
                                 
                             default: break
@@ -103,6 +107,9 @@ class ActivityBuilder {
                          
                          }
                          */
+                        
+                        task =  ORKOrderedTask(identifier: (activity?.actvityId!)!, steps: orkStepArray)
+                        return task!
                     }
                     else if (activity?.randomization)! {
                         // randomization

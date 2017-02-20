@@ -20,15 +20,16 @@ class ActivityResult {
     var endTime:Date?
     
     var result:Array<ActivityStepResult>?
-//MARK: Initializers
+    //MARK: Initializers
     init() {
         self.type = .Questionnaire
         self.activity = Activity()
         self.startTime = Date()
         self.endTime = Date()
-      
+        
         self.result = Array()
     }
+    
     
     func initWithDict(activityDict:Dictionary<String, Any>){
         
@@ -67,21 +68,29 @@ class ActivityResult {
             Logger.sharedInstance.debug("activityDict Result Dictionary is null:\(activityDict)")
         }
     }
-//MARK: Setter & getter methods for Activity
+    
+    
+    //MARK: Setter & getter methods for Activity
     func setActivity(activity:Activity)  {
         self.activity = activity
     }
+    
+    
     func getActivity() -> Activity {
         return self.activity!
     }
-//MARK: Setter & getter methods for ActivityResult
+    
+    
+    //MARK: Setter & getter methods for ActivityResult
     func setActivityResult(activityStepResult:ActivityStepResult)  {
         self.result?.append(activityStepResult)
     }
+    
+    
     func getActivityResult() -> [ActivityStepResult] {
         return self.result!
     }
-
+    
     
     func getResultDictionary() -> Dictionary<String,Any>? {
         

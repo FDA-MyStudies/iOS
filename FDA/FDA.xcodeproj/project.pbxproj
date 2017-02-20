@@ -38,6 +38,7 @@
 		6ED1B2341E54256700BF463F /* ActivityStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ED1B22F1E54256700BF463F /* ActivityStep.swift */; };
 		6ED8A2E61E447AA2004DEC01 /* Formatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ED8A2E31E447AA2004DEC01 /* Formatter.swift */; };
 		6ED8A2E71E447AA2004DEC01 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ED8A2E51E447AA2004DEC01 /* Logger.swift */; };
+		6ED9D5DB1E5B2D5200A0719D /* ActiveTask.json in Resources */ = {isa = PBXBuildFile; fileRef = 6ED9D5DA1E5B2D5100A0719D /* ActiveTask.json */; };
 		6EF05A941E4DAB0400CD7661 /* ResearchKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EF05A911E4DAAFB00CD7661 /* ResearchKit.framework */; };
 		6EF05A951E4DAB0400CD7661 /* ResearchKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6EF05A911E4DAAFB00CD7661 /* ResearchKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		6EF05A991E4DC36400CD7661 /* StepProvider.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6EF05A981E4DC36400CD7661 /* StepProvider.plist */; };
@@ -152,6 +153,7 @@
 		6ED8A2E31E447AA2004DEC01 /* Formatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Formatter.swift; sourceTree = "<group>"; };
 		6ED8A2E41E447AA2004DEC01 /* Logger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Logger.h; sourceTree = "<group>"; };
 		6ED8A2E51E447AA2004DEC01 /* Logger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
+		6ED9D5DA1E5B2D5100A0719D /* ActiveTask.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = ActiveTask.json; sourceTree = "<group>"; };
 		6EF05A8A1E4DAAFB00CD7661 /* ResearchKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = ResearchKit.xcodeproj; sourceTree = "<group>"; };
 		6EF05A981E4DC36400CD7661 /* StepProvider.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = StepProvider.plist; sourceTree = "<group>"; };
 		77111DDCA5033C2FA7A5F7C8 /* Pods_FDA.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FDA.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -315,6 +317,7 @@
 		6E9B39BC1E55DFDA0037D09D /* ActivityBuilder */ = {
 			isa = PBXGroup;
 			children = (
+				6ED9D5DA1E5B2D5100A0719D /* ActiveTask.json */,
 				6EABD0321E56FE2000623D94 /* TaskSchema.json */,
 				6E9B39BF1E55DFF10037D09D /* ActivityBuilder.swift */,
 			);
@@ -651,6 +654,7 @@
 			files = (
 				6EABD0331E56FE2000623D94 /* TaskSchema.json in Resources */,
 				6E7D2D8E1E43445600763D4C /* UserPreferences.plist in Resources */,
+				6ED9D5DB1E5B2D5200A0719D /* ActiveTask.json in Resources */,
 				6E7D2D641E433E8800763D4C /* LaunchScreen.storyboard in Resources */,
 				6EAB39A91E4B0B4A003442B8 /* Resources.plist in Resources */,
 				6EF05A991E4DC36400CD7661 /* StepProvider.plist in Resources */,

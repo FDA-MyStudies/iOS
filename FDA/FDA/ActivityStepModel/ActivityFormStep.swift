@@ -8,6 +8,76 @@
 
 import Foundation
 import ResearchKit
+
+
+let kStepFormSteps = "steps"
+
 class ActivityFormStep: ActivityStep {
-    var isOptional:Bool?
+
+    var itemsArray:[Dictionary<String,Any>]
+    
+    override init() {
+        self.itemsArray = Array()
+        super.init()
+        
+        
+    }
+    override func initWithDict(stepDict: Dictionary<String, Any>) {
+        if Utilities.isValidObject(someObject: stepDict as AnyObject?){
+            
+            super.initWithDict(stepDict: stepDict)
+            
+            
+            if Utilities.isValidObject(someObject: stepDict[kStepFormSteps] as AnyObject ){
+                self.itemsArray = (stepDict[kStepFormSteps] as? [Dictionary<String,Any>])!
+            }
+
+            
+        }
+        else{
+            Logger.sharedInstance.debug("Instruction Step Dictionary is null:\(stepDict)")
+        }
+    }
+    
+    func getFormStep() -> ORKFormStep? {
+        
+        if   Utilities.isValidValue(someObject:title  as AnyObject?)
+            && Utilities.isValidValue(someObject:key  as AnyObject?)
+            && Utilities.isValidObject(someObject:self.itemsArray  as AnyObject?) {
+            
+             let step = ORKFormStep(identifier: key!, title: title, text: text)
+            step.formItems = [ORKFormItem]()
+            
+            for dict in self.itemsArray {
+                
+                if  Utilities.isValidObject(someObject:dict  as AnyObject?){
+                    
+                    let questionStep:ActivityQuestionStep? = ActivityQuestionStep()
+                    questionStep?.initWithDict(stepDict: dict)
+                    
+                    let orkQuestionStep:ORKQuestionStep = (questionStep?.getQuestionStep())!
+                    
+                    let formItem01 = ORKFormItem(identifier: orkQuestionStep.identifier, text: orkQuestionStep.title, answerFormat: orkQuestionStep.answerFormat)
+                    formItem01.placeholder = orkQuestionStep.text
+                    
+                    step.formItems?.append(formItem01)
+                    
+                }
+                else{
+                     Logger.sharedInstance.debug("item Dictionary is null :\(dict)")
+                }
+            }
+            return step
+            
+        }
+        else{
+            //Debug lines QuestionFormat dict is empty
+            
+            return nil
+        }
+        
+        
+    }
+    
+    
 }

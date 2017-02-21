@@ -125,32 +125,22 @@ class ActivityBuilder {
                     
                 }
                 
-            case .activeTask: break
-         
-            var stepDict = activity?.steps![0]
-            
-                if Utilities.isValidObject(someObject: stepDict as AnyObject?) {
+            case .activeTask:
+                
+                var stepDict = activity?.steps![10]
+                
+                if Utilities.isValidObject(someObject: stepDict as AnyObject?) && Utilities.isValidValue(someObject: stepDict?[kActivityStepType] as AnyObject ) {
                     
-                    if Utilities.isValidValue(someObject: stepDict?[kActivityStepType] as AnyObject ){
-                        
-                        switch ActivityStepType(rawValue:stepDict?[kActivityStepType] as! String)! as  ActivityStepType {
-
-                        case .active:
-                            
-                            let activeStep:ActivityActiveStep? = ActivityActiveStep()
-                            activeStep?.initWithDict(stepDict: stepDict!)
-                            task = activeStep?.getActiveTask()
-                            
-                        default: break
-                            
-                        }
-                    }
+                    let activeStep:ActivityActiveStep? = ActivityActiveStep()
+                    activeStep?.initWithDict(stepDict: stepDict!)
+                    task = activeStep?.getActiveTask()
+                    return task!
                 }
                 else{
                     Logger.sharedInstance.debug("Activity:stepDict is null:\(stepDict)")
                     break;
                 }
-            
+                
             default: break
                 
             }

@@ -24,7 +24,7 @@ class ViewController: UIViewController,ORKTaskViewControllerDelegate {
         self.setPrefereneces()
         self.addResources()
         
-       // self.buildTask()
+        //self.buildTask()
         
     }
 
@@ -93,7 +93,7 @@ class ViewController: UIViewController,ORKTaskViewControllerDelegate {
         
         
         
-        let filePath  = Bundle.main.path(forResource: "TaskSchema", ofType: "json")
+        let filePath  = Bundle.main.path(forResource: "ActiveTask", ofType: "json")
         
         let data = NSData(contentsOfFile: filePath!)
         

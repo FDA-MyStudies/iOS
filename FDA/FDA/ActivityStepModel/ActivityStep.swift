@@ -53,6 +53,8 @@ class ActivityStep{
     
     
     init() {
+        /* default Intalizer method */
+        
         self.activityId = ""
         self.type = .question
         self.resultType = ""
@@ -69,8 +71,8 @@ class ActivityStep{
     
     
     init(activityId:String,type:ActivityStepType,resultType:String,key:String,title:String,text:String,skippable:Bool,groupName:String,repeatable:Bool,repeatableText:String, destinations:Dictionary<String,Any>) {
-        // initializer method with all params
-        
+        /* initializer method with all params
+         */
         self.activityId = activityId
         self.type = type
         self.resultType = resultType
@@ -86,7 +88,10 @@ class ActivityStep{
     
     func initWithDict(stepDict:Dictionary<String, Any>){
         
-        // setter method with Dictionary
+        /* setter method which initializes all params
+         @stepDict:contains as key:Value pair for all the properties of ActiveStep
+         */
+        
         if Utilities.isValidObject(someObject: stepDict as AnyObject?){
             
             if Utilities.isValidValue(someObject: stepDict[kActivityStepActivityId] as AnyObject ){
@@ -132,6 +137,11 @@ class ActivityStep{
     }
     
     func getNativeStep() -> ORKStep? {
+        
+        /* method the create ORKStep
+         returns ORKstep
+         NOTE:Currently not in Use
+         */
         
         if Utilities.isValidValue(someObject: self.key as AnyObject?){
             return ORKStep(identifier:self.key! )

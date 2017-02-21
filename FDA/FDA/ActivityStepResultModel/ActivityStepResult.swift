@@ -41,7 +41,10 @@ class ActivityStepResult{
     //MARK: Method
     func initWithDict(stepDict:Dictionary<String, Any>){
         
-        // setter method with Dictionary
+        /* method create ActivityStepResult by initializing params
+         @stepDict:contains all ActivityResultStep properties
+         */
+        
         if Utilities.isValidObject(someObject: stepDict as AnyObject?){
             
             
@@ -85,7 +88,9 @@ class ActivityStepResult{
     
     
     func getActivityStepResultDict() -> Dictionary<String, Any>? {
-        // method to get the dictionary for Api
+        /* method creates a ActivityStepDictionary from step instance
+         returns ResultDictionary for storing data to Api/Local
+         */
         var stepDict:Dictionary<String,Any>?
         
         if (self.step != nil){
@@ -115,7 +120,10 @@ class ActivityStepResult{
     
     
     func setResultValue(stepResult:ORKResult)  {
-        // method to set Result from ORKResult
+        /* method saves the result of Current Step
+         @stepResult: stepResult which can be result of Questionstep/InstructionStep/ActiveTask
+         */
+        
         
         //Active task Pending
         
@@ -309,10 +317,17 @@ class ActivityStepResult{
     
     //MARK: Setter & Getter methods for Step
     func setStep(step:ActivityStep)  {
+        /* Method to Initialize step
+         @step:ActivityStep instance with all properties initialized priorly
+         */
+        
         self.step = step
     }
     
     func getStep()-> ActivityStep {
+        /* Method to get ActivityStep
+         returns current step
+         */
         return self.step!
     }
 }

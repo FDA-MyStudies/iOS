@@ -260,7 +260,10 @@ class ActivityQuestionStep: ActivityStep {
     
     func getQuestionStep() -> ORKQuestionStep? {
         
-        //method to create question step
+        /* method creates QuestionStep using ActivityStep data
+         return ORKQuestionStep
+         */
+        
         
         //Utilities.isValidObject(someObject: self.formatDict as AnyObject?)
         
@@ -489,9 +492,10 @@ class ActivityQuestionStep: ActivityStep {
                 if  Utilities.isValidValue(someObject:formatDict?[kStepQuestionTextMaxLength] as AnyObject?)
                     &&  Utilities.isValidValue(someObject:formatDict?[kStepQuestionTextValidationRegex] as AnyObject?)
                     &&  Utilities.isValidValue(someObject:formatDict?[kStepQuestionTextInvalidMessage] as AnyObject?)
-                    &&  Utilities.isValidValue(someObject:formatDict?[kStepQuestionTextPlaceholder] as AnyObject?) {
+                    &&  Utilities.isValidValue(someObject:formatDict?[kStepQuestionTextPlaceholder] as AnyObject?)
+                    &&  Utilities.isValidValue(someObject:formatDict?[kStepQuestionTextMultipleLines] as AnyObject?){
                     
-                    // &&  Utilities.isValidValue(someObject:formatDict?[kStepQuestionTextMultipleLines] as AnyObject?)
+                    
                     let answerFormat = ORKAnswerFormat.textAnswerFormat()
                     
                     answerFormat.maximumLength = formatDict?[kStepQuestionTextMaxLength] as! Int
@@ -607,7 +611,10 @@ class ActivityQuestionStep: ActivityStep {
     
     func getTextChoices(dataArray:NSArray) -> [ORKTextChoice] {
         
-        //Method to create ORKTextChoice Array
+        /* Method  creates ORKTextChoice Array
+         @dataArray: is either array of Dictionary or array of String
+         returns array of ORKTextChoice
+         */
         
         let textChoiceArray:[ORKTextChoice]?
         
@@ -644,7 +651,7 @@ class ActivityQuestionStep: ActivityStep {
                     }
                 }
                 else{
-                    // Debug Lines
+                    Logger.sharedInstance.debug("dataArray has Invalid data: null ")
                 }
                 
             }
@@ -657,7 +664,10 @@ class ActivityQuestionStep: ActivityStep {
     
     func getImageChoices(dataArray:NSArray) -> [ORKImageChoice]? {
         
-        //Method to create ORKImageChoice Array
+        /* Method  creates ORKImageChoice Array
+         @dataArray: is array of Dictionary
+         returns array of ORKImageChoice
+         */
         
         
         ///PENDING

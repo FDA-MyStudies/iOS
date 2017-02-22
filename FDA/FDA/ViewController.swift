@@ -10,7 +10,7 @@ import UIKit
 import ResearchKit
 
 let user = User()
-
+let activitybuilder:ActivityBuilder? = ActivityBuilder()
 
 let resourceArray : Array<Any>? = nil
 class ViewController: UIViewController,ORKTaskViewControllerDelegate {
@@ -24,7 +24,7 @@ class ViewController: UIViewController,ORKTaskViewControllerDelegate {
         self.setPrefereneces()
         self.addResources()
         
-        //self.buildTask()
+       // self.buildTask()
         
     }
 
@@ -55,7 +55,14 @@ class ViewController: UIViewController,ORKTaskViewControllerDelegate {
         case ORKTaskViewControllerFinishReason.saved:
             print("saved")
             taskResult = taskViewController.restorationData
+             activitybuilder?.activity?.restortionData = taskViewController.restorationData
         }
+        
+        
+       
+        activitybuilder?.actvityResult?.initWithORKTaskResult(taskResult: taskViewController.result)
+        
+       
         
         taskViewController.dismiss(animated: true, completion: nil)
         
@@ -78,20 +85,10 @@ class ViewController: UIViewController,ORKTaskViewControllerDelegate {
         
     }
     
-    
-    
-    
-    
-    
-    
-    
-    
+   
     //MARK: methods
     
     func buildTask()  {
-        
-        
-        
         
         let filePath  = Bundle.main.path(forResource: "ActiveTask", ofType: "json")
         
@@ -103,15 +100,17 @@ class ViewController: UIViewController,ORKTaskViewControllerDelegate {
             
             if  Utilities.isValidObject(someObject: dataDict as AnyObject?) && (dataDict?.count)! > 0 {
                 
-                let activitybuilder:ActivityBuilder? = ActivityBuilder()
+               
                 let task:ORKTask?
                 let taskViewController:ORKTaskViewController?
                 
                 if Utilities.isValidObject(someObject: dataDict?["Result"] as? Dictionary<String, Any> as AnyObject?){
                 
                 
-                activitybuilder?.initWithDict(dict: dataDict?["Result"] as! Dictionary<String, Any>)
+                activitybuilder?.initActivityWithDict(dict: dataDict?["Result"] as! Dictionary<String, Any>)
                 
+                    
+                    
                 task = activitybuilder?.createTask()
                 
                 
@@ -132,6 +131,8 @@ class ViewController: UIViewController,ORKTaskViewControllerDelegate {
         
     }
     
+    
+   
     
     
     func addResources()  {

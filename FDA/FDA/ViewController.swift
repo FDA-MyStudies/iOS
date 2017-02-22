@@ -9,7 +9,7 @@
 import UIKit
 import ResearchKit
 
-let user = User()
+let user = User.currentUser
 
 
 let resourceArray : Array<Any>? = nil
@@ -25,6 +25,14 @@ class ViewController: UIViewController,ORKTaskViewControllerDelegate {
         self.addResources()
         
         //self.buildTask()
+        
+        user.bookmarkStudy(studyId: "121")
+        
+        user.updateStudyStatus(studyId: "121", status:.yetToJoin)
+        
+        user.bookmarkActivity(studyId: "121", activityId: "151")
+        
+        print(user.getStudyStatus(studyId: "121").description)
         
     }
 
@@ -192,6 +200,22 @@ class ViewController: UIViewController,ORKTaskViewControllerDelegate {
         if let path = Bundle.main.path(forResource: "UserPreferences", ofType: "plist") {
             if let dict = NSDictionary(contentsOfFile: path) as? [String:Any] {
                 user.setUser(dict:dict as NSDictionary)
+                
+                //studies
+                let studies = dict[kStudies] as! Array<Dictionary<String, Any>>
+                
+                for study in studies {
+                    let participatedStudy = UserStudyStatus(detail: study)
+                    user.participatedStudies.append(participatedStudy)
+                }
+                
+                //activities
+                let activites = dict[kActivites]  as! Array<Dictionary<String, Any>>
+                for activity in activites {
+                    let participatedActivity = UserActivityStatus(detail: activity)
+                    user.participatedActivites.append(participatedActivity)
+                }
+                
             }
         }
         

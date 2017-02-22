@@ -33,8 +33,11 @@ class ActivityResult {
     func initWithORKTaskResult(taskResult:ORKTaskResult) {
         for stepResult in taskResult.results!{
             let activityStepResult:ActivityStepResult? = ActivityStepResult()
-            activityStepResult?.initWithORKStepResult(stepResult: stepResult as! ORKStepResult)
+            
+            
+            activityStepResult?.initWithORKStepResult(stepResult: stepResult as! ORKStepResult , activityType:(self.activity?.type)!)
              self.result?.append(activityStepResult!)
+            
         }
     }
     
@@ -81,6 +84,9 @@ class ActivityResult {
     //MARK: Setter & getter methods for Activity
     func setActivity(activity:Activity)  {
         self.activity = activity
+        
+        self.type = activity.type
+        
     }
     
     

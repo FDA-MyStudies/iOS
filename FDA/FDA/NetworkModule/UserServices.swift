@@ -273,7 +273,7 @@ class UserServices: NSObject {
         
         let user = User.currentUser
         if Utilities.isValidValue(someObject: response[kConsent] as AnyObject?) {
-            user.consent = response[kConsent] as! String
+           // user.consent = response[kConsent] as! String
         }
     }
     

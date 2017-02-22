@@ -43,9 +43,6 @@ class User{
     var authToken: String!
     var participatedStudies:Array<UserStudyStatus>! = []
     var participatedActivites:Array<UserActivityStatus>! = []
-    
-    
-    var consent:String!
     var logoutReason : LogoutReason = .user_action
     
     //sharedInstance
@@ -158,6 +155,149 @@ class User{
         
     }
     
+    //MARK:Study Bookmark
+    func isStudyBookmarked(studyId:String) -> Bool{
+        
+        let studies = self.participatedStudies as Array<UserStudyStatus>
+        if let study =   studies.filter({$0.studyId == studyId}).first {
+            return study.bookmarked
+        }
+        return false
+        
+    }
+    
+    
+    func bookmarkStudy(studyId:String){
+        
+      
+        let studies = self.participatedStudies as Array<UserStudyStatus>
+        if let study =   studies.filter({$0.studyId == studyId}).first {
+            study.bookmarked = true
+            Logger.sharedInstance.info("Bookmark: study is bookmarked : \(studyId)")
+        }
+        else {
+            Logger.sharedInstance.info("Bookmark: study not found : \(studyId)")
+            
+            let studyStatus = UserStudyStatus()
+            studyStatus.bookmarked = true
+            
+            self.participatedStudies.append(studyStatus)
+            
+            Logger.sharedInstance.info("Bookmark: study is bookmarked : \(studyId)")
+        }
+      
+    }
+    
+    func removeBookbarkStudy(studyId:String){
+        
+        let studies = self.participatedStudies as Array<UserStudyStatus>
+        if let study =   studies.filter({$0.studyId == studyId}).first {
+            study.bookmarked = false
+            Logger.sharedInstance.info("Bookmark: study is removed from bookmark : \(studyId)")
+        }
+    }
+    
+    
+    //MARK:Activity Bookmark
+    func isActivityBookmarked(studyId:String,activityId:String) -> Bool{
+        
+        let activityes = self.participatedActivites as Array<UserActivityStatus>
+        if let activity =   activityes.filter({$0.studyId == studyId && $0.activityId == activityId}).first {
+            return activity.bookmarked
+        }
+        return false
+        
+    }
+    
+    
+    func bookmarkActivity(studyId:String,activityId:String){
+        
+        
+        let activityes = self.participatedActivites as Array<UserActivityStatus>
+        if let activity =   activityes.filter({$0.studyId == studyId && $0.activityId == activityId}).first {
+            activity.bookmarked = true
+            Logger.sharedInstance.info("Bookmark: activity is bookmarked : \(studyId)")
+        }
+        else {
+            Logger.sharedInstance.info("Bookmark: activity not found : \(studyId)")
+            
+            let activityStatus = UserActivityStatus()
+            activityStatus.bookmarked = true
+            
+            self.participatedActivites.append(activityStatus)
+            
+            Logger.sharedInstance.info("Bookmark: activity is bookmarked : \(studyId)")
+        }
+        
+    }
+    
+    func removeBookbarkActivity(studyId:String,activityId:String){
+        
+        let activityes = self.participatedActivites as Array<UserActivityStatus>
+        if let activity =   activityes.filter({$0.studyId == studyId && $0.activityId == activityId}).first {
+            activity.bookmarked = true
+            Logger.sharedInstance.info("Bookmark: activity is removed from bookmarked : \(studyId)")
+        }
+    }
+    
+     //MARK:Study Status
+    func updateStudyStatus(studyId:String,status:UserStudyStatus.StudyStatus){
+        
+        let studies = self.participatedStudies as Array<UserStudyStatus>
+        if let study =   studies.filter({$0.studyId == studyId}).first {
+            study.status = status
+            Logger.sharedInstance.info("User Study Status: study is updated : \(studyId)")
+        }
+        else {
+            Logger.sharedInstance.info("User Study Status: study not found : \(studyId)")
+            
+            let studyStatus = UserStudyStatus()
+            studyStatus.status = status
+            
+            self.participatedStudies.append(studyStatus)
+            
+            Logger.sharedInstance.info("User Study Status: study is updated : \(studyId)")
+        }
+    }
+    
+    func getStudyStatus(studyId:String) -> UserStudyStatus.StudyStatus{
+        
+        let studies = self.participatedStudies as Array<UserStudyStatus>
+        if let study =   studies.filter({$0.studyId == studyId}).first {
+           return study.status
+        }
+        return .yetToJoin
+    }
+    
+    //MARK:Activity Status
+    func updateActivityStatus(studyId:String,activityId:String,status:UserActivityStatus.ActivityStatus){
+        
+        let activityes = self.participatedActivites as Array<UserActivityStatus>
+        if let activity =   activityes.filter({$0.studyId == studyId && $0.activityId == activityId}).first {
+            activity.status = status
+            Logger.sharedInstance.info("User Activity Status: activity is updated : \(studyId)")
+        }
+        else {
+            Logger.sharedInstance.info("User Activity Status: activity not found : \(studyId)")
+            
+            let activityStatus = UserActivityStatus()
+            activityStatus.status = status
+            self.participatedActivites.append(activityStatus)
+            
+            Logger.sharedInstance.info("User Activity Status: activity is updated : \(studyId)")
+        }
+    }
+    
+    func getActivityStatus(studyId:String,activityId:String) -> UserActivityStatus.ActivityStatus?{
+        
+        let activityes = self.participatedActivites as Array<UserActivityStatus>
+        if let activity =   activityes.filter({$0.studyId == studyId && $0.activityId == activityId}).first {
+            return activity.status
+        }
+        return .yetToJoin
+    }
+
+    
 }
 
 //MARK:User Settings
@@ -228,9 +368,9 @@ class UserStudyStatus{
     enum StudyStatus:Int {
         
         case yetToJoin
+        case notEligible
         case inProgress
         case completed
-        case notEligible
         case withdrawn
         
         var description:String {
@@ -252,7 +392,12 @@ class UserStudyStatus{
     
     var bookmarked:Bool = false
     var studyId:String! = ""
-    var status:StudyStatus? = .yetToJoin
+    var status:StudyStatus = .yetToJoin
+    var consent:String! = ""
+    
+    init() {
+        
+    }
     
      init(detail:Dictionary<String, Any>){
         
@@ -323,7 +468,9 @@ class UserActivityStatus{
     var studyId:String! = ""
     var activityVersion:String! = ""
     var status:ActivityStatus? = .yetToJoin
-    
+    init() {
+        
+    }
     init(detail:Dictionary<String, Any>){
         
         if Utilities.isValidObject(someObject: detail as AnyObject?){

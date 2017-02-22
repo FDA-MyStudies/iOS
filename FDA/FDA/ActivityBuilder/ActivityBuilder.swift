@@ -23,12 +23,15 @@ class ActivityBuilder {
         
         
         if Utilities.isValidObject(someObject: dict as AnyObject){
-            activity?.setActivityMetaData(activityDict: dict)
+            self.activity?.setActivityMetaData(activityDict: dict)
         }
-         actvityResult = ActivityResult()
+         self.actvityResult = ActivityResult()
+        self.actvityResult?.setActivity(activity: self.activity!)
+        NSLog("self.actvityResult? \(self.actvityResult?.activity)")
+        
     }
     
-    func initActivityResultWithORKResult(taskResult:ORKTaskResult) {
+    func setActivityResultWithORKResult(taskResult:ORKTaskResult) {
         actvityResult?.initWithORKTaskResult(taskResult:taskResult)
     }
     
@@ -134,7 +137,7 @@ class ActivityBuilder {
                 
             case .activeTask:
                 
-                var stepDict = activity?.steps![10]
+                var stepDict = activity?.steps![4]
                 
                 if Utilities.isValidObject(someObject: stepDict as AnyObject?) && Utilities.isValidValue(someObject: stepDict?[kActivityStepType] as AnyObject ) {
                     

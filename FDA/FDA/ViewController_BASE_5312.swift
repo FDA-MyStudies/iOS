@@ -10,8 +10,6 @@ import UIKit
 import ResearchKit
 
 let user = User()
-let activitybuilder:ActivityBuilder? = ActivityBuilder()
-let user = User.currentUser
 
 
 let resourceArray : Array<Any>? = nil
@@ -26,16 +24,7 @@ class ViewController: UIViewController,ORKTaskViewControllerDelegate {
         self.setPrefereneces()
         self.addResources()
         
-       // self.buildTask()
         //self.buildTask()
-        
-        user.bookmarkStudy(studyId: "121")
-        
-        user.updateStudyStatus(studyId: "121", status:.yetToJoin)
-        
-        user.bookmarkActivity(studyId: "121", activityId: "151")
-        
-        print(user.getStudyStatus(studyId: "121").description)
         
     }
 
@@ -66,14 +55,7 @@ class ViewController: UIViewController,ORKTaskViewControllerDelegate {
         case ORKTaskViewControllerFinishReason.saved:
             print("saved")
             taskResult = taskViewController.restorationData
-             activitybuilder?.activity?.restortionData = taskViewController.restorationData
         }
-        
-        
-       
-        activitybuilder?.actvityResult?.initWithORKTaskResult(taskResult: taskViewController.result)
-        
-       
         
         taskViewController.dismiss(animated: true, completion: nil)
         
@@ -96,12 +78,18 @@ class ViewController: UIViewController,ORKTaskViewControllerDelegate {
         
     }
     
-   
+    
+    
+    
+    
+    
+    
+    
+    
     //MARK: methods
     
     func buildTask()  {
         
-        let filePath  = Bundle.main.path(forResource: "ActiveTask", ofType: "json")
         
         
         
@@ -122,7 +110,7 @@ class ViewController: UIViewController,ORKTaskViewControllerDelegate {
                 if Utilities.isValidObject(someObject: dataDict?["Result"] as? Dictionary<String, Any> as AnyObject?){
                 
                 
-                activitybuilder?.initActivityWithDict(dict: dataDict?["Result"] as! Dictionary<String, Any>)
+                activitybuilder?.initWithDict(dict: dataDict?["Result"] as! Dictionary<String, Any>)
                 
                 task = activitybuilder?.createTask()
                 
@@ -204,22 +192,6 @@ class ViewController: UIViewController,ORKTaskViewControllerDelegate {
         if let path = Bundle.main.path(forResource: "UserPreferences", ofType: "plist") {
             if let dict = NSDictionary(contentsOfFile: path) as? [String:Any] {
                 user.setUser(dict:dict as NSDictionary)
-                
-                //studies
-                let studies = dict[kStudies] as! Array<Dictionary<String, Any>>
-                
-                for study in studies {
-                    let participatedStudy = UserStudyStatus(detail: study)
-                    user.participatedStudies.append(participatedStudy)
-                }
-                
-                //activities
-                let activites = dict[kActivites]  as! Array<Dictionary<String, Any>>
-                for activity in activites {
-                    let participatedActivity = UserActivityStatus(detail: activity)
-                    user.participatedActivites.append(participatedActivity)
-                }
-                
             }
         }
         

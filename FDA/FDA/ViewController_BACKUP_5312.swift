@@ -9,10 +9,13 @@
 import UIKit
 import ResearchKit
 
+<<<<<<< HEAD
 let user = User()
 let activitybuilder:ActivityBuilder? = ActivityBuilder()
+=======
 let user = User.currentUser
 
+>>>>>>> suri_develop
 
 let resourceArray : Array<Any>? = nil
 class ViewController: UIViewController,ORKTaskViewControllerDelegate {
@@ -27,7 +30,6 @@ class ViewController: UIViewController,ORKTaskViewControllerDelegate {
         self.addResources()
         
        // self.buildTask()
-        //self.buildTask()
         
         user.bookmarkStudy(studyId: "121")
         
@@ -103,10 +105,6 @@ class ViewController: UIViewController,ORKTaskViewControllerDelegate {
         
         let filePath  = Bundle.main.path(forResource: "ActiveTask", ofType: "json")
         
-        
-        
-        let filePath  = Bundle.main.path(forResource: "TaskSchema", ofType: "json")
-        
         let data = NSData(contentsOfFile: filePath!)
         
         
@@ -115,7 +113,7 @@ class ViewController: UIViewController,ORKTaskViewControllerDelegate {
             
             if  Utilities.isValidObject(someObject: dataDict as AnyObject?) && (dataDict?.count)! > 0 {
                 
-                let activitybuilder:ActivityBuilder? = ActivityBuilder()
+               
                 let task:ORKTask?
                 let taskViewController:ORKTaskViewController?
                 
@@ -124,6 +122,8 @@ class ViewController: UIViewController,ORKTaskViewControllerDelegate {
                 
                 activitybuilder?.initActivityWithDict(dict: dataDict?["Result"] as! Dictionary<String, Any>)
                 
+                    
+                    
                 task = activitybuilder?.createTask()
                 
                 
@@ -144,6 +144,8 @@ class ViewController: UIViewController,ORKTaskViewControllerDelegate {
         
     }
     
+    
+   
     
     
     func addResources()  {

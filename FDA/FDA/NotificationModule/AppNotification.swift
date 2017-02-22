@@ -61,7 +61,7 @@ class AppNotification {
             
         }
         else{
-            Logger.sharedInstance.debug("Overview Dictionary is null:\(detail)")
+            Logger.sharedInstance.debug("AppNotification Dictionary is null:\(detail)")
         }
     }
     

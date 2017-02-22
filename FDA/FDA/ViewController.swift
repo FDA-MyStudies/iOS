@@ -26,8 +26,7 @@ class ViewController: UIViewController,ORKTaskViewControllerDelegate {
         self.setPrefereneces()
         self.addResources()
         
-       // self.buildTask()
-        //self.buildTask()
+        self.buildTask()
         
         user.bookmarkStudy(studyId: "121")
         
@@ -103,8 +102,6 @@ class ViewController: UIViewController,ORKTaskViewControllerDelegate {
         
         let filePath  = Bundle.main.path(forResource: "ActiveTask", ofType: "json")
         
-        
-        
        // let filePath  = Bundle.main.path(forResource: "TaskSchema", ofType: "json")
         
         let data = NSData(contentsOfFile: filePath!)
@@ -115,7 +112,7 @@ class ViewController: UIViewController,ORKTaskViewControllerDelegate {
             
             if  Utilities.isValidObject(someObject: dataDict as AnyObject?) && (dataDict?.count)! > 0 {
                 
-                let activitybuilder:ActivityBuilder? = ActivityBuilder()
+               
                 let task:ORKTask?
                 let taskViewController:ORKTaskViewController?
                 
@@ -123,7 +120,7 @@ class ViewController: UIViewController,ORKTaskViewControllerDelegate {
                 
                 
                 activitybuilder?.initActivityWithDict(dict: dataDict?["Result"] as! Dictionary<String, Any>)
-                
+               
                 task = activitybuilder?.createTask()
                 
                 

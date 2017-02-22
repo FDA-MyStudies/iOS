@@ -9,7 +9,7 @@
 import UIKit
 import ResearchKit
 
-let user = User()
+//let user = User()
 let activitybuilder:ActivityBuilder? = ActivityBuilder()
 let user = User.currentUser
 
@@ -105,7 +105,7 @@ class ViewController: UIViewController,ORKTaskViewControllerDelegate {
         
         
         
-        let filePath  = Bundle.main.path(forResource: "TaskSchema", ofType: "json")
+       // let filePath  = Bundle.main.path(forResource: "TaskSchema", ofType: "json")
         
         let data = NSData(contentsOfFile: filePath!)
         

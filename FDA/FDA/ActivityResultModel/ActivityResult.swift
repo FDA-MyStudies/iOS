@@ -30,6 +30,14 @@ class ActivityResult {
         self.result = Array()
     }
     
+    func initWithORKTaskResult(taskResult:ORKTaskResult) {
+        for stepResult in taskResult.results!{
+            let activityStepResult:ActivityStepResult? = ActivityStepResult()
+            activityStepResult?.initWithORKStepResult(stepResult: stepResult as! ORKStepResult)
+             self.result?.append(activityStepResult!)
+        }
+    }
+    
     
     func initWithDict(activityDict:Dictionary<String, Any>){
         

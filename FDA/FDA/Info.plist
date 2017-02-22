@@ -21,7 +21,10 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
     <key>NSHealthShareUsageDescription</key>
-    <string>This App would like to access your health App data</string>
+    <string>$(PRODUCT_NAME) would like to access your health App data</string>
+    
+    <key>NSMotionUsageDescription</key>
+    <string>$(PRODUCT_NAME) would like to use Motion data</string>
     
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>

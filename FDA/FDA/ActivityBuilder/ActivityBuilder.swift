@@ -12,20 +12,25 @@ import ResearchKit
 class ActivityBuilder {
     
     var activity:Activity?
+    var actvityResult:ActivityResult?
     public var task: ORKTask?
     init() {
         activity = Activity()
+        actvityResult = ActivityResult()
     }
     
-    func initWithDict(dict:Dictionary<String,Any>) {
+    func initActivityWithDict(dict:Dictionary<String,Any>) {
         
         
         if Utilities.isValidObject(someObject: dict as AnyObject){
             activity?.setActivityMetaData(activityDict: dict)
         }
+         actvityResult = ActivityResult()
     }
     
-    
+    func initActivityResultWithORKResult(taskResult:ORKTaskResult) {
+        actvityResult?.initWithORKTaskResult(taskResult:taskResult)
+    }
     
     func createTask()->ORKTask?{
         
@@ -82,6 +87,8 @@ class ActivityBuilder {
                 
                 
                 if (orkStepArray?.count)! > 0 {
+                    
+                    self.activity?.setORKSteps(orkStepArray: orkStepArray!)
                     
                     // checking if navigable or randomized or ordered
                     if (activity?.branching)! {

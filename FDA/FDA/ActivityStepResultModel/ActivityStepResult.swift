@@ -39,7 +39,7 @@ class ActivityStepResult{
         
     }
     //MARK: Method
-    func initWithORKStepResult(stepResult:ORKStepResult) {
+    func initWithORKStepResult(stepResult:ORKStepResult,activityType:ActivityType) {
         
         if Utilities.isValidValue(someObject: stepResult.identifier as AnyObject?) {
             self.key = stepResult.identifier
@@ -50,20 +50,9 @@ class ActivityStepResult{
     
             self.endTime = stepResult.endDate
         
+        self.setResultValue(stepResult:stepResult ,activityType:activityType )
         
         
-        
-        
-        if Utilities.isValidValue(someObject: stepResult.identifier as AnyObject?) {
-            self.key = stepResult.identifier
-        }
-        if Utilities.isValidValue(someObject: stepResult.identifier as AnyObject?) {
-            self.key = stepResult.identifier
-        }
-        
-        self.setResultValue(stepResult:stepResult )
-        
-        self.type = self.step?.type
     }
     
     
@@ -147,7 +136,7 @@ class ActivityStepResult{
     
     
     
-    func setResultValue(stepResult:ORKStepResult)  {
+    func setResultValue(stepResult:ORKStepResult, activityType:ActivityType)  {
         /* method saves the result of Current Step
          @stepResult: stepResult which can be result of Questionstep/InstructionStep/ActiveTask
          */
@@ -157,7 +146,10 @@ class ActivityStepResult{
         
         if((stepResult.results?.count)! > 0){
         
-        if ( self.type == .question) {
+            
+            NSLog("step-Type: \( self.step?.type)")
+            //((  stepResult.results?[0] as? ORKQuestionResult?) != nil)
+        if  activityType == .Questionnaire{
             // for question Step
             
             let questionstepResult:ORKQuestionResult? = stepResult.results?[0] as! ORKQuestionResult?
@@ -245,12 +237,20 @@ class ActivityStepResult{
                 let stepTypeResult = questionstepResult as! ORKNumericQuestionResult
                 
                 if Utilities.isValidValue(someObject: stepTypeResult.numericAnswer as AnyObject?){
-                    self.value =  Double(stepTypeResult.numericAnswer!)
+                    self.value =  "\(Double(stepTypeResult.numericAnswer!))" + stepTypeResult.unit!
                 }
                 else{
                     self.value = 0.0
                 }
+            case ORKQuestionType.decimal.rawValue?: // numeric type
+                let stepTypeResult = questionstepResult as! ORKNumericQuestionResult
                 
+                if Utilities.isValidValue(someObject: stepTypeResult.numericAnswer as AnyObject?){
+                    self.value =  "\(Double(stepTypeResult.numericAnswer!))" + stepTypeResult.unit!
+                }
+                else{
+                    self.value = 0.0
+                }
             case  ORKQuestionType.timeOfDay.rawValue?:
                 
                 let stepTypeResult = questionstepResult as! ORKTimeOfDayQuestionResult
@@ -321,15 +321,35 @@ class ActivityStepResult{
             }
             
         }
-        else if (self.type == .active){
-            // for active Step
+        else if (activityType == .activeTask){
             
+            NSLog("Inside Activity")
             
-            // switch  ActiveStepType(rawValue: (self.type?.replacingOccurrences(of: "Result", with: ""))!)! as ActiveStepType{
+             let activityResult:ORKResult? = stepResult.results?[0] 
             
+                if (activityResult as? ORKSpatialSpanMemoryResult) != nil {
+                
+                let stepTypeResult:ORKSpatialSpanMemoryResult? = activityResult as? ORKSpatialSpanMemoryResult
+                
+                if Utilities.isValidValue(someObject: stepTypeResult?.score as AnyObject?){
+                    self.value = stepTypeResult?.score
+                }
+                else{
+                    self.value = 0
+                    }
+                }
+                else if (activityResult as? ORKTowerOfHanoiResult) != nil{
+                   let stepTypeResult:ORKTowerOfHanoiResult? = activityResult as? ORKTowerOfHanoiResult
+                    
+                    if (stepTypeResult?.puzzleWasSolved)! {
+                        self.value = stepTypeResult?.moves
+                        // moves is an array of ORKTowerOfHanoiMove, need to change in future
+                    }
+                    else{
+                         self.value = []
+                    }
+            }
             
-            
-            //}
         }
         else if (self.type == .form){
             // for form data

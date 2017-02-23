@@ -11,6 +11,7 @@ import ResearchKit
 
 //let user = User()
 let activitybuilder:ActivityBuilder? = ActivityBuilder()
+let consentbuilder:ConsentBuilder? = ConsentBuilder()
 let user = User.currentUser
 
 
@@ -26,7 +27,7 @@ class ViewController: UIViewController,ORKTaskViewControllerDelegate {
         self.setPrefereneces()
         self.addResources()
         
-        self.buildTask()
+        //self.buildTask()
         
         user.bookmarkStudy(studyId: "121")
         
@@ -100,9 +101,11 @@ class ViewController: UIViewController,ORKTaskViewControllerDelegate {
     
     func buildTask()  {
         
-        let filePath  = Bundle.main.path(forResource: "ActiveTask", ofType: "json")
+        //let filePath  = Bundle.main.path(forResource: "ActiveTask", ofType: "json")
         
        // let filePath  = Bundle.main.path(forResource: "TaskSchema", ofType: "json")
+        
+         let filePath  = Bundle.main.path(forResource: "Consent", ofType: "json")
         
         let data = NSData(contentsOfFile: filePath!)
         
@@ -119,11 +122,15 @@ class ViewController: UIViewController,ORKTaskViewControllerDelegate {
                 if Utilities.isValidObject(someObject: dataDict?["Result"] as? Dictionary<String, Any> as AnyObject?){
                 
                 
-                activitybuilder?.initActivityWithDict(dict: dataDict?["Result"] as! Dictionary<String, Any>)
+               // activitybuilder?.initActivityWithDict(dict: dataDict?["Result"] as! Dictionary<String, Any>)
                
-                task = activitybuilder?.createTask()
+               // task = activitybuilder?.createTask()
                 
                 
+                    consentbuilder?.initWithMetaData(metaDataDict:dataDict?["Result"] as! Dictionary<String, Any> )
+                    
+                     task = consentbuilder?.createConsentTask()
+                    
                 taskViewController = ORKTaskViewController(task:task, taskRun: nil)
                 taskViewController?.delegate = self
                 taskViewController?.outputDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
@@ -140,6 +147,8 @@ class ViewController: UIViewController,ORKTaskViewControllerDelegate {
         
         
     }
+    
+    
     
     
     

@@ -35,11 +35,17 @@ let kConsentReviewStepSignatureContent = "signatureContent"
 class ConsentBuilder{
     
 
+    //var consentIdentifier:String? // this id will be used to add to signature
+    
     var consentSectionArray:[ORKConsentSection]
     var consentStepArray:[ORKStep]
     
     var reviewConsent:ReviewConsent?
     var sharingConsent:SharingConsent?
+    
+    var consentDocument:ORKConsentDocument?
+    
+    var consentResult:ConsentResult?
     
     init() {
         /* Default Initializer method
@@ -51,6 +57,9 @@ class ConsentBuilder{
         self.consentStepArray = []
          self.reviewConsent = ReviewConsent()
         self.sharingConsent = SharingConsent()
+        self.consentResult = ConsentResult()
+        self.consentDocument = ORKConsentDocument()
+        
     }
     
     func initWithMetaData(metaDataDict:Dictionary<String, Any>)  {
@@ -96,16 +105,31 @@ class ConsentBuilder{
          */
 
         
-        let visualConsentStep = ORKVisualConsentStep(identifier: "visual", document: self.createConsentDocument())
+        let visualConsentStep = ORKVisualConsentStep(identifier: "visual", document: self.getConsentDocument())
         return visualConsentStep
     }
     
+    
+    func getConsentDocument() -> ORKConsentDocument {
+        
+        if self.consentDocument != nil && Utilities.isValidObject(someObject: self.consentDocument?.sections as AnyObject?)   {
+            return self.consentDocument!
+        }
+        else{
+            self.consentDocument = ORKConsentDocument()
+            self.consentDocument = self.createConsentDocument()
+            return self.consentDocument!
+        }
+        
+        
+    }
     
     
     func createConsentDocument() -> ORKConsentDocument? {
         /* Method to create ConsentDocument
          @returns a ORKConsentDocument for VisualConsentStep and Review Step
          */
+    
         
         let consentDocument = ORKConsentDocument()
         
@@ -113,12 +137,17 @@ class ConsentBuilder{
             && Utilities.isValidValue(someObject: "signaturePageTitle" as AnyObject )
             && Utilities.isValidValue(someObject: "signaturePageContent" as AnyObject ){
             
+            
+            
             consentDocument.title = "title"
             consentDocument.signaturePageTitle = "signaturePageTitle"
             consentDocument.signaturePageContent = "signaturePageContent"
             
-
-            consentDocument.sections? = self.consentSectionArray
+            consentDocument.sections = [ORKConsentSection]()
+            
+            consentDocument.sections?.append(contentsOf: self.consentSectionArray)
+            
+           // consentDocument.sections? = self.consentSectionArray
             
             
             let signatureImage = UIImage(named: "Bomb.png")!
@@ -130,6 +159,8 @@ class ConsentBuilder{
             
             let investigatorSignature = ORKConsentSignature(forPersonWithTitle: investigatorSignatureTitle, dateFormatString: nil, identifier:"Signature", givenName: investigatorSignatureGivenName, familyName: investigatorSignatureFamilyName, signatureImage: signatureImage, dateString: investigatorSignatureDateString)
 
+           
+                
              consentDocument.addSignature(investigatorSignature)
             return consentDocument
             
@@ -139,7 +170,6 @@ class ConsentBuilder{
             Logger.sharedInstance.debug("consent Step has null values:")
             return nil
         }
-        
         
     }
     
@@ -157,7 +187,7 @@ class ConsentBuilder{
             // identifier missing
             
             
-            let reviewConsentStep = ORKConsentReviewStep(identifier: "Review", signature: (self.createConsentDocument()! as ORKConsentDocument).signatures?[0], in: self.createConsentDocument()!)
+            let reviewConsentStep = ORKConsentReviewStep(identifier: "Review", signature: (self.getConsentDocument() as ORKConsentDocument).signatures?[0], in: self.getConsentDocument())
             
             // In a real application, you would supply your own localized text.
             reviewConsentStep.text = self.reviewConsent?.title

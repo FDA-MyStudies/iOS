@@ -15,6 +15,24 @@ let kActivityStepEndTime = "endTime"
 let kActivityStepSkipped = "skipped"
 let kActivityStepResultValue = "value"
 
+let kActivityActiveKeyResultType = "resultType" // to be used specifically for Active Task
+
+let kActivityActiveStepKey = "key"
+
+let kSpatialSpanMemoryKeyScore = "score"
+let kSpatialSpanMemoryKeyNumberOfGames = "numberOfGames"
+let kSpatialSpanMemoryKeyNumberOfFailures = "numberOfFailures"
+
+let kTowerOfHanoiKeyPuzzleWasSolved = "puzzleWasSolved"
+let kTowerOfHanoiKeyNumberOfMoves = "numberOfMoves"
+
+let kFetalKickCounterDuration = "duration" // not in use presentlly...Need to be used
+let kFetalKickCounterCount = "count" // not in use presentlly...Need to be used
+
+enum ActiveStepResultType:String{
+    case boolean = "boolean"
+    case numeric = "numeric"
+}
 
 
 
@@ -55,7 +73,7 @@ class ActivityStepResult{
         
     }
     
-    
+
     func initWithDict(stepDict:Dictionary<String, Any>){
         
         /* method create ActivityStepResult by initializing params
@@ -152,7 +170,11 @@ class ActivityStepResult{
         if  activityType == .Questionnaire{
             // for question Step
             
-            let questionstepResult:ORKQuestionResult? = stepResult.results?[0] as! ORKQuestionResult?
+            
+            if  let questionstepResult:ORKQuestionResult? = stepResult.results?[0] as? ORKQuestionResult?{
+            
+            
+           
             
             switch questionstepResult?.questionType.rawValue{
                 
@@ -319,20 +341,64 @@ class ActivityStepResult{
                 
             default:break
             }
-            
+            }
+            else{
+                
+                // for consent step result we are storing the ORKConsentSignatureResult
+                 let consentStepResult:ORKConsentSignatureResult? = (stepResult.results?[0] as? ORKConsentSignatureResult?)!
+                
+                self.value = consentStepResult;
+                
+            }
         }
         else if (activityType == .activeTask){
             
             NSLog("Inside Activity")
             
              let activityResult:ORKResult? = stepResult.results?[0] 
+             var resultArray:Array<Dictionary<String, Any>>? =  Array()
             
                 if (activityResult as? ORKSpatialSpanMemoryResult) != nil {
                 
                 let stepTypeResult:ORKSpatialSpanMemoryResult? = activityResult as? ORKSpatialSpanMemoryResult
                 
-                if Utilities.isValidValue(someObject: stepTypeResult?.score as AnyObject?){
-                    self.value = stepTypeResult?.score
+                   
+                    
+                    
+                if Utilities.isValidValue(someObject: stepTypeResult?.score as AnyObject?)
+                    && Utilities.isValidValue(someObject: stepTypeResult?.numberOfGames as AnyObject?)
+                    && Utilities.isValidValue(someObject: stepTypeResult?.numberOfFailures as AnyObject?){
+                    
+                    for i in 0..<3 {
+                        var resultDict:Dictionary<String, Any>? =  Dictionary()
+                    
+                        resultDict?[kActivityActiveKeyResultType] = ActiveStepResultType.numeric
+                        
+                        
+                        switch i {
+                        case 0: // score
+                            resultDict?[kActivityActiveStepKey] = kSpatialSpanMemoryKeyScore
+                            resultDict?[kActivityStepResultValue] = stepTypeResult?.score
+                            
+                        case 1: //numberOfGames
+                            resultDict?[kActivityActiveStepKey] = kSpatialSpanMemoryKeyNumberOfGames
+                            resultDict?[kActivityStepResultValue] = stepTypeResult?.numberOfGames
+                        case 2: // numberOfFailures
+                            resultDict?[kActivityActiveStepKey] = kSpatialSpanMemoryKeyNumberOfFailures
+                            resultDict?[kActivityStepResultValue] = stepTypeResult?.numberOfFailures
+                            
+                        default: break
+                            
+                        }
+                        resultDict?[kActivityStepStartTime] =  self.startTime
+                        resultDict?[kActivityStepEndTime] =  self.endTime
+                         resultDict?[kActivityStepSkipped] =  self.skipped
+                       
+                        resultArray?.append(resultDict!)
+                        
+                    }
+                    
+                    self.value = resultArray
                 }
                 else{
                     self.value = 0
@@ -341,19 +407,40 @@ class ActivityStepResult{
                 else if (activityResult as? ORKTowerOfHanoiResult) != nil{
                    let stepTypeResult:ORKTowerOfHanoiResult? = activityResult as? ORKTowerOfHanoiResult
                     
-                    if (stepTypeResult?.puzzleWasSolved)! {
-                        self.value = stepTypeResult?.moves
-                        // moves is an array of ORKTowerOfHanoiMove, need to change in future
+                    
+                    for i in 0..<2 {
+                        var resultDict:Dictionary<String, Any>? =  Dictionary()
+                        
+                        resultDict?[kActivityActiveKeyResultType] = ActiveStepResultType.numeric
+                        
+                        
+                        if i == 0{ //puzzleWasSolved
+                            resultDict?[kActivityActiveStepKey] = kTowerOfHanoiKeyPuzzleWasSolved
+                            resultDict?[kActivityStepResultValue] = stepTypeResult?.puzzleWasSolved
+                        }
+                        else{ // numberOfMoves
+                            resultDict?[kActivityActiveStepKey] = kTowerOfHanoiKeyNumberOfMoves
+                            resultDict?[kActivityStepResultValue] = stepTypeResult?.moves?.count
+
+                        }
+                        
+                        resultDict?[kActivityStepStartTime] =  self.startTime
+                        resultDict?[kActivityStepEndTime] =  self.endTime
+                        resultDict?[kActivityStepSkipped] =  self.skipped
+                        
+                        resultArray?.append(resultDict!)
+                        
                     }
-                    else{
-                         self.value = []
-                    }
-            }
+                    
+                    self.value = resultArray
+                    
+        }
             
         }
         else if (self.type == .form){
             // for form data
         }
+            
         else{
             // for others
         }

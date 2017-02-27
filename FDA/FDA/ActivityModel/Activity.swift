@@ -39,6 +39,8 @@ let kActivityLastModified = "lastModified"
 enum ActivityType:String{
     case Questionnaire = "Questionnaire"
     case activeTask = "active task"
+    
+    case questionnaireAndActiveTask = "QuestionnaireAndActiveTask"
 }
 
 

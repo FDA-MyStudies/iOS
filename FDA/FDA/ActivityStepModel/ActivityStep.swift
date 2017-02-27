@@ -32,7 +32,15 @@ enum ActivityStepType:String{
     case instruction = "instruction"
     case question = "question"
     case active = "task" // active step
+    
+    
+    case taskSpatialSpanMemory = "task-spatialSpanMemory"
+    case taskTowerOfHanoi = "task-towerOfHanoi"
+    
 }
+
+
+
 
 
 class ActivityStep{

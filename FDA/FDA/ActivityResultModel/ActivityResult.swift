@@ -34,10 +34,9 @@ class ActivityResult {
         for stepResult in taskResult.results!{
             let activityStepResult:ActivityStepResult? = ActivityStepResult()
             
-            
-            activityStepResult?.initWithORKStepResult(stepResult: stepResult as! ORKStepResult , activityType:(self.activity?.type)!)
-             self.result?.append(activityStepResult!)
-            
+                activityStepResult?.initWithORKStepResult(stepResult: stepResult as! ORKStepResult , activityType:(self.activity?.type)!)
+                self.result?.append(activityStepResult!)
+        
         }
     }
     

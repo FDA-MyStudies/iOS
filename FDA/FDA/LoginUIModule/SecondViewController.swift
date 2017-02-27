@@ -7,3 +7,30 @@
 //
 
 import Foundation
+import UIKit
+
+class SecondViewController : UIViewController{
+    
+    @IBOutlet var buttonGetStarted : UIButton?
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        //Used to set border color for bottom view
+        buttonGetStarted?.layer.borderColor = UIColor.init(colorLiteralRed: 73/255.0, green: 182/255.0, blue: 229/255.0, alpha: 1.0).cgColor
+        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        
+    }
+    
+}

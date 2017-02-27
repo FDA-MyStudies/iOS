@@ -38,7 +38,7 @@ class ViewController: UIViewController,ORKTaskViewControllerDelegate {
         print(user.getStudyStatus(studyId: "121").description)
         
     }
-
+    
     
     
     //MARK:ORKTaskViewController Delegate
@@ -49,6 +49,10 @@ class ViewController: UIViewController,ORKTaskViewControllerDelegate {
     }
     
     public func taskViewController(_ taskViewController: ORKTaskViewController, didFinishWith reason: ORKTaskViewControllerFinishReason, error: Error?) {
+        
+        
+        
+        
         
         var taskResult:Any?
         
@@ -66,14 +70,22 @@ class ViewController: UIViewController,ORKTaskViewControllerDelegate {
         case ORKTaskViewControllerFinishReason.saved:
             print("saved")
             taskResult = taskViewController.restorationData
-             activitybuilder?.activity?.restortionData = taskViewController.restorationData
+            
+            if taskViewController.task?.identifier == "ConsentTask"{
+                
+            }
+            else{
+                activitybuilder?.activity?.restortionData = taskViewController.restorationData
+            }
         }
         
+        if  taskViewController.task?.identifier == "ConsentTask"{
+            consentbuilder?.consentResult?.initWithORKTaskResult(taskResult:taskViewController.result )
+        }
+        else{
+            activitybuilder?.actvityResult?.initWithORKTaskResult(taskResult: taskViewController.result)
+        }
         
-       
-        activitybuilder?.actvityResult?.initWithORKTaskResult(taskResult: taskViewController.result)
-        
-       
         
         taskViewController.dismiss(animated: true, completion: nil)
         
@@ -96,16 +108,16 @@ class ViewController: UIViewController,ORKTaskViewControllerDelegate {
         
     }
     
-   
+    
     //MARK: methods
     
     func buildTask()  {
         
         //let filePath  = Bundle.main.path(forResource: "ActiveTask", ofType: "json")
         
-       // let filePath  = Bundle.main.path(forResource: "TaskSchema", ofType: "json")
+        // let filePath  = Bundle.main.path(forResource: "TaskSchema", ofType: "json")
         
-         let filePath  = Bundle.main.path(forResource: "Consent", ofType: "json")
+        let filePath  = Bundle.main.path(forResource: "Acivity_Question", ofType: "json")
         
         let data = NSData(contentsOfFile: filePath!)
         
@@ -115,26 +127,29 @@ class ViewController: UIViewController,ORKTaskViewControllerDelegate {
             
             if  Utilities.isValidObject(someObject: dataDict as AnyObject?) && (dataDict?.count)! > 0 {
                 
-               
+                
                 let task:ORKTask?
                 let taskViewController:ORKTaskViewController?
                 
                 if Utilities.isValidObject(someObject: dataDict?["Result"] as? Dictionary<String, Any> as AnyObject?){
-                
-                
-               // activitybuilder?.initActivityWithDict(dict: dataDict?["Result"] as! Dictionary<String, Any>)
-               
-               // task = activitybuilder?.createTask()
-                
-                
-                    consentbuilder?.initWithMetaData(metaDataDict:dataDict?["Result"] as! Dictionary<String, Any> )
                     
-                     task = consentbuilder?.createConsentTask()
                     
-                taskViewController = ORKTaskViewController(task:task, taskRun: nil)
-                taskViewController?.delegate = self
-                taskViewController?.outputDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
-                present(taskViewController!, animated: true, completion: nil)
+                     activitybuilder?.initActivityWithDict(dict: dataDict?["Result"] as! Dictionary<String, Any>)
+                    
+                     task = activitybuilder?.createTask()
+                    
+                    
+                   // consentbuilder?.initWithMetaData(metaDataDict:dataDict?["Result"] as! Dictionary<String, Any> )
+                   // task = consentbuilder?.createConsentTask()
+                    
+                    taskViewController = ORKTaskViewController(task:task, taskRun: nil)
+                    
+                   // consentbuilder?.consentResult =   ConsentResult()
+                   // consentbuilder?.consentResult?.consentDocument =  consentbuilder?.consentDocument
+                    
+                    taskViewController?.delegate = self
+                    taskViewController?.outputDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+                    present(taskViewController!, animated: true, completion: nil)
                 }
             }
             
@@ -142,8 +157,8 @@ class ViewController: UIViewController,ORKTaskViewControllerDelegate {
         } catch {
             print("json error: \(error.localizedDescription)")
         }
-
-       
+        
+        
         
         
     }
@@ -156,22 +171,22 @@ class ViewController: UIViewController,ORKTaskViewControllerDelegate {
         
         if let path = Bundle.main.path(forResource: "Resources", ofType: "plist") {
             
-           if let responseArray = NSArray(contentsOfFile: path) {
-            
-            if Utilities.isValidObject(someObject: responseArray) {
-            
-                for i in 0 ..< responseArray.count {
+            if let responseArray = NSArray(contentsOfFile: path) {
+                
+                if Utilities.isValidObject(someObject: responseArray) {
                     
-                    if Utilities.isValidObject(someObject:responseArray[i] as AnyObject? )  {
-                        let resource:Resource? = Resource()
+                    for i in 0 ..< responseArray.count {
                         
-                        resource?.setResource(dict:(responseArray[i] as? NSDictionary)! )
-                        responseArray.adding(resource as Any)
+                        if Utilities.isValidObject(someObject:responseArray[i] as AnyObject? )  {
+                            let resource:Resource? = Resource()
+                            
+                            resource?.setResource(dict:(responseArray[i] as? NSDictionary)! )
+                            responseArray.adding(resource as Any)
+                        }
+                        
                     }
-                    
                 }
-            }
-            
+                
             }
             
             if let dict = NSDictionary(contentsOfFile: path) as? [String:Any] {
@@ -186,7 +201,7 @@ class ViewController: UIViewController,ORKTaskViewControllerDelegate {
         }
         
     }
-
+    
     
     
     func userProfile()  {
@@ -194,11 +209,11 @@ class ViewController: UIViewController,ORKTaskViewControllerDelegate {
         if let path = Bundle.main.path(forResource: "UserProfile", ofType: "plist") {
             if let dict = NSDictionary(contentsOfFile: path) as? [String:Any] {
                 user.setUser(dict:dict as NSDictionary)
-            
+                
                 Logger.sharedInstance.debug(dict)
                 Logger.sharedInstance.info(dict)
                 Logger.sharedInstance.error(dict)
-              
+                
                 
             }
         }
@@ -230,19 +245,19 @@ class ViewController: UIViewController,ORKTaskViewControllerDelegate {
         }
         
     }
-
     
     
     
-
+    
+    
     
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
-
+    
+    
 }
 
 

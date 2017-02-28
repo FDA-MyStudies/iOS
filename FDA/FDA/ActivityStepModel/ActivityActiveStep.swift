@@ -12,7 +12,7 @@ import ResearchKit
 
 let kActivityStepActiveOptions = "options"
 let kActivityStepActiveFormat = "format"
-
+let kActivityStepActiveType = "type"
 
 //Active task Api constants
 
@@ -126,14 +126,21 @@ class ActivityActiveStep: ActivityStep {
     
     var formatDict:Dictionary<String, Any>?
     
+    var activeType:ActiveStepType?
+    
     override init() {
+        /* default Initializer Method */
+        
         super.init()
-        options = .excludeAudio
-        formatDict = Dictionary()
+        options = nil
+        formatDict = Dictionary<String, Any>()
+        activeType = .audioStep
     }
     
     override func initWithDict(stepDict: Dictionary<String, Any>) {
-        //Setter method to set Activity Active Steps
+        /* Setter method to set Activity Active Steps
+         @ stepDict should  should contains all params for ActivityStep
+         */
         if Utilities.isValidObject(someObject: stepDict as AnyObject?){
             
             super.initWithDict(stepDict: stepDict)
@@ -141,9 +148,17 @@ class ActivityActiveStep: ActivityStep {
             if Utilities.isValidObject(someObject: stepDict[kActivityStepActiveOptions] as AnyObject ){
                 
                 for  option:Int in stepDict[kActivityStepActiveOptions] as! [Int] {
-                    self.options?.formUnion(ORKPredefinedTaskOption(rawValue: UInt(option)))
-                    //?.append( ORKPredefinedTaskOption(rawValue: UInt(option)))
+                    
+                    self.options?.insert(ORKPredefinedTaskOption(rawValue: UInt(option)))
+                    
                 }
+            }
+            else{
+                self.options = []
+            }
+            
+            if Utilities.isValidValue(someObject: stepDict[kActivityStepActiveType] as AnyObject?){
+                self.activeType = ActiveStepType(rawValue: stepDict[kActivityStepActiveType] as! String)
             }
             
             if Utilities.isValidObject(someObject: stepDict[kActivityStepActiveFormat] as AnyObject ){
@@ -158,11 +173,15 @@ class ActivityActiveStep: ActivityStep {
     
     
     func getActiveTask() -> ORKTask? {
-        //Method to get Active Tasks
+        /* Method to get Active Tasks
+         @returns a ORTask for active step
+         */
         
-        if Utilities.isValidObject(someObject: self.formatDict as AnyObject?) && Utilities.isValidValue(someObject:resultType  as AnyObject?) && Utilities.isValidObject(someObject: self.options as AnyObject?)  {
-            
-            switch resultType as! ActiveStepType {
+        if Utilities.isValidObject(someObject: self.formatDict as AnyObject?)
+        {
+            // && Utilities.isValidValue(someObject:self.activeType   as AnyObject?)
+            //&& Utilities.isValidValue(someObject: self.options as AnyObject?)
+            switch self.activeType! as ActiveStepType {
                 
             case .audioStep :
                 
@@ -282,6 +301,9 @@ class ActivityActiveStep: ActivityStep {
                     
                     //Image data downloading pending ->  kActiveSpatialSpanMemoryCustomTargetImage
                     
+                    let image = UIImage(named:formatDict?[kActiveSpatialSpanMemoryCustomTargetImage] as! String)
+                    
+                    
                     return ORKOrderedTask.spatialSpanMemoryTask(withIdentifier:  key!, intendedUseDescription:
                         title!,
                                                                 initialSpan: formatDict?[kActiveSpatialSpanMemoryInitialSpan] as! Int,
@@ -290,7 +312,7 @@ class ActivityActiveStep: ActivityStep {
                                                                 playSpeed: formatDict?[kActiveSpatialSpanMemoryPlaySpeed] as! TimeInterval,
                                                                 maximumTests: formatDict?[kActiveSpatialSpanMemoryMaximumTests] as! Int,
                                                                 maximumConsecutiveFailures: formatDict?[kActiveSpatialSpanMemoryMaximumConsecutiveFailures] as! Int,
-                                                                customTargetImage: formatDict?[kActiveSpatialSpanMemoryCustomTargetImage] as! UIImage?,
+                                                                customTargetImage:image ,
                                                                 customTargetPluralName: formatDict?[kActiveSpatialSpanMemoryCustomTargetPluralName] as! String?,
                                                                 requireReversal: ((formatDict?[kActiveSpatialSpanMemoryRequireReversal]) != nil),
                                                                 options: self.options!)
@@ -368,6 +390,38 @@ class ActivityActiveStep: ActivityStep {
                     Logger.sharedInstance.debug("twoFingerTappingIntervalStep:formatDict has null values:\(formatDict)")
                     return nil
                 }
+                
+            case .tremorTestStep :
+                if  Utilities.isValidValue(someObject:formatDict?[kActiveTremorTestActiveStepDuration] as AnyObject?)
+                    &&  Utilities.isValidValue(someObject:formatDict?[kActiveTremorTestHandOptions] as AnyObject?){
+                    
+                    let activeOptions:ORKTremorActiveTaskOption?
+                    if Utilities.isValidObject(someObject: formatDict?[kActivityStepActiveOptions] as AnyObject ){
+                        activeOptions = nil
+                        for  option:Int in formatDict?[kActivityStepActiveOptions] as! [Int] {
+                            
+                            activeOptions?.insert(ORKTremorActiveTaskOption(rawValue: UInt(option)))
+                            
+                        }
+                    }
+                    else{
+                        activeOptions = []
+                    }
+                    
+                    
+                    return ORKOrderedTask.tremorTest(withIdentifier: key!,
+                                                     intendedUseDescription: title!,
+                                                     activeStepDuration: formatDict?[kActiveTremorTestActiveStepDuration] as! TimeInterval,
+                                                     activeTaskOptions: activeOptions! ,
+                                                     handOptions: ORKPredefinedTaskHandOption(rawValue: formatDict?[kActiveTremorTestHandOptions] as! UInt),
+                                                     options: self.options!)
+                }
+                else{
+                    Logger.sharedInstance.debug("twoFingerTappingIntervalStep:formatDict has null values:\(formatDict)")
+                    return nil
+                    
+                }
+                
                 
             case .fetalKickCounter :
                 

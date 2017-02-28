@@ -12,20 +12,28 @@ import ResearchKit
 class ActivityBuilder {
     
     var activity:Activity?
+    var actvityResult:ActivityResult?
     public var task: ORKTask?
     init() {
         activity = Activity()
+        actvityResult = ActivityResult()
     }
     
-    func initWithDict(dict:Dictionary<String,Any>) {
+    func initActivityWithDict(dict:Dictionary<String,Any>) {
         
         
         if Utilities.isValidObject(someObject: dict as AnyObject){
-            activity?.setActivityMetaData(activityDict: dict)
+            self.activity?.setActivityMetaData(activityDict: dict)
         }
+         self.actvityResult = ActivityResult()
+        self.actvityResult?.setActivity(activity: self.activity!)
+        NSLog("self.actvityResult? \(self.actvityResult?.activity)")
+        
     }
     
-    
+    func setActivityResultWithORKResult(taskResult:ORKTaskResult) {
+        actvityResult?.initWithORKTaskResult(taskResult:taskResult)
+    }
     
     func createTask()->ORKTask?{
         
@@ -59,7 +67,11 @@ class ActivityBuilder {
                                 
                                 orkStepArray?.append((questionStep?.getQuestionStep())!)
                                 
-                            case .form: break
+                            case .form:
+                                let formStep:ActivityFormStep? = ActivityFormStep()
+                                formStep?.initWithDict(stepDict: stepDict)
+                                
+                                orkStepArray?.append((formStep?.getFormStep())!)
                                 
                                 
                             default: break
@@ -76,8 +88,10 @@ class ActivityBuilder {
                 }
                 
                 
-        
+                
                 if (orkStepArray?.count)! > 0 {
+                    
+                    self.activity?.setORKSteps(orkStepArray: orkStepArray!)
                     
                     // checking if navigable or randomized or ordered
                     if (activity?.branching)! {
@@ -103,6 +117,9 @@ class ActivityBuilder {
                          
                          }
                          */
+                        
+                        task =  ORKOrderedTask(identifier: (activity?.actvityId!)!, steps: orkStepArray)
+                        return task!
                     }
                     else if (activity?.randomization)! {
                         // randomization
@@ -111,15 +128,87 @@ class ActivityBuilder {
                     else{
                         // ordered
                         
-                         task =  ORKOrderedTask(identifier: (activity?.actvityId!)!, steps: orkStepArray)
+                        task =  ORKOrderedTask(identifier: (activity?.actvityId!)!, steps: orkStepArray)
                         return task!
                         
                     }
-              
+                    
+                }
+                
+            case .activeTask:
+                
+                var stepDict = activity?.steps![0]
+                
+                if Utilities.isValidObject(someObject: stepDict as AnyObject?) && Utilities.isValidValue(someObject: stepDict?[kActivityStepType] as AnyObject ) {
+                    
+                    let activeStep:ActivityActiveStep? = ActivityActiveStep()
+                    activeStep?.initWithDict(stepDict: stepDict!)
+                    task = activeStep?.getActiveTask()
+                    return task!
+                }
+                else{
+                    Logger.sharedInstance.debug("Activity:stepDict is null:\(stepDict)")
+                    break;
+                }
+            case .questionnaireAndActiveTask:
+                
+            
+                
+                for var stepDict in (activity?.steps!)! {
+                    
+                    if Utilities.isValidObject(someObject: stepDict as AnyObject?) {
+                        
+                        if Utilities.isValidValue(someObject: stepDict[kActivityStepType] as AnyObject ){
+                            
+                            switch ActivityStepType(rawValue:stepDict[kActivityStepType] as! String)! as  ActivityStepType {
+                            case .instruction:
+                                
+                                let instructionStep:ActivityInstructionStep? = ActivityInstructionStep()
+                                instructionStep?.initWithDict(stepDict: stepDict)
+                                orkStepArray?.append((instructionStep?.getInstructionStep())!)
+                                
+                            case .question:
+                                
+                                let questionStep:ActivityQuestionStep? = ActivityQuestionStep()
+                                questionStep?.initWithDict(stepDict: stepDict)
+                                
+                                orkStepArray?.append((questionStep?.getQuestionStep())!)
+                            case   .active , .taskSpatialSpanMemory , .taskTowerOfHanoi :
+                                
+                                var localTask: ORKOrderedTask?
+                                
+                                let activeStep:ActivityActiveStep? = ActivityActiveStep()
+                                activeStep?.initWithDict(stepDict: stepDict)
+                                localTask = activeStep?.getActiveTask() as! ORKOrderedTask?
+                                
+                                
+                                for step  in (localTask?.steps)!{
+                                    orkStepArray?.append(step)
+                                }
+                               
+                            default: break
+                                
+                            }
+                        }
+                    }
+                    else{
+                        Logger.sharedInstance.debug("Activity:stepDict is null:\(stepDict)")
+                        break;
+                    }
                 }
 
-            case .activeTask: break
+                if (orkStepArray?.count)! > 0 {
+                    
+                    self.activity?.setORKSteps(orkStepArray: orkStepArray!)
+                    task =  ORKOrderedTask(identifier: (activity?.actvityId!)!, steps: orkStepArray)
+                    return task!
+                }
+                else{
+                    return nil
+                }
+
                 
+              
             default: break
                 
             }
@@ -131,7 +220,7 @@ class ActivityBuilder {
         return nil
     }
     
-   
+    
     
     
     

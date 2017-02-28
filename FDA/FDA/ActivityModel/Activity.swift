@@ -39,6 +39,8 @@ let kActivityLastModified = "lastModified"
 enum ActivityType:String{
     case Questionnaire = "Questionnaire"
     case activeTask = "active task"
+    
+    case questionnaireAndActiveTask = "QuestionnaireAndActiveTask"
 }
 
 
@@ -60,6 +62,8 @@ class Activity{
     
     var schedule:Schedule?
     var steps:Array<Dictionary<String,Any>>?
+    var orkSteps:Array<ORKStep> //Presently not in use need to check if we can use
+    
     var result:ActivityResult?
     
     var restortionData:Data?
@@ -88,6 +92,7 @@ class Activity{
         self.schedule = nil
         self.result = nil
         self.restortionData = Data()
+        self.orkSteps =  Array<ORKStep>()
     }
     
     //MARK:Initializer Methods
@@ -220,15 +225,25 @@ class Activity{
         }
     }
     
-    func setStepArray(stepArray:Array<Any>) {
+    func setStepArray(stepArray:Array<Dictionary<String,Any>>) {
         //method to set step array
         
         if Utilities.isValidObject(someObject: stepArray as AnyObject?){
-            self.steps? = stepArray as! Array<Dictionary<String,Any>>
+            self.steps? = stepArray 
         }
         else{
             Logger.sharedInstance.debug("stepArray is null:\(stepArray)")
         }
+    }
+    
+    func setORKSteps(orkStepArray:[ORKStep])  {
+        if Utilities.isValidObject(someObject: orkStepArray as AnyObject?){
+            self.orkSteps = orkStepArray 
+        }
+        else{
+            Logger.sharedInstance.debug("stepArray is null:\(orkStepArray)")
+        }
+ 
     }
     
     func getRestortionData() -> Data {

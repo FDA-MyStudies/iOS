@@ -1,45 +1,90 @@
 //
-//  ActivityResult.swift
+//  ConsentResult.swift
 //  FDA
 //
-//  Created by Arun Kumar on 2/15/17.
+//  Created by Arun Kumar on 2/27/17.
 //  Copyright © 2017 BTC. All rights reserved.
 //
 
 import Foundation
-
 import ResearchKit
 
-let kActivityResult = "result"
-
-class ActivityResult {
+class ConsentResult {
     
-    var type:ActivityType?
-    var activity:Activity?
+   
     var startTime:Date?
     var endTime:Date?
+    
+    var consentDocument:ORKConsentDocument?
     
     var result:Array<ActivityStepResult>?
     //MARK: Initializers
     init() {
-        self.type = .Questionnaire
-        self.activity = Activity()
+       
         self.startTime = Date()
         self.endTime = Date()
         
         self.result = Array()
+        
+        self.consentDocument = ORKConsentDocument()
+        
     }
     
     func initWithORKTaskResult(taskResult:ORKTaskResult) {
         for stepResult in taskResult.results!{
-            let activityStepResult:ActivityStepResult? = ActivityStepResult()
             
-                activityStepResult?.initWithORKStepResult(stepResult: stepResult as! ORKStepResult , activityType:(self.activity?.type)!)
-                self.result?.append(activityStepResult!)
-        
+            if   ((stepResult as! ORKStepResult).results?.count)! > 0{
+                
+                if  let questionstepResult:ORKChoiceQuestionResult? = (stepResult as! ORKStepResult).results?[0] as? ORKChoiceQuestionResult?{
+                  
+                        if Utilities.isValidValue(someObject: questionstepResult?.choiceAnswers?[0] as AnyObject?){
+                            /* sharing choice result either 1 selected or 2 seleceted
+                            */
+
+                            
+                            
+                        }
+                        else{
+                         
+                        }
+            }
+                else if let signatureStepResult:ORKConsentSignatureResult? = (stepResult as! ORKStepResult).results?[0] as? ORKConsentSignatureResult?{
+                    
+                    signatureStepResult?.apply(to: self.consentDocument!)
+                    
+                    self.consentDocument?.makePDF(completionHandler: { data,error in
+                        NSLog("data: \(data)    \n  error: \(error)")
+                        
+                        let dir = FileManager.getStorageDirectory(type: .study)
+                        
+                        let fullPath = dir + "/" + "Consent" + "\(arc4random())" + ".pdf"
+                    
+                        do {
+                            
+                            FileManager.default.createFile(atPath:fullPath , contents: data, attributes: [:])
+                            try data?.write(to: URL(string:fullPath)! , options: .noFileProtection)
+                            
+                            // writing to disk
+                        
+                            } catch let error as NSError {
+                                print("error writing to url \(fullPath)")
+                                print(error.localizedDescription)
+                            }
+                    })
+                    
+                }
+            
         }
     }
+    }
     
+    func setConsentDocument(consentDocument:ORKConsentDocument)  {
+        self.consentDocument = consentDocument;
+    }
+    
+    func getConsentDocument() -> ORKConsentDocument {
+        return self.consentDocument!
+    }
     
     func initWithDict(activityDict:Dictionary<String, Any>){
         
@@ -49,9 +94,7 @@ class ActivityResult {
         if Utilities.isValidObject(someObject: activityDict as AnyObject?){
             
             
-            if Utilities.isValidValue(someObject: activityDict[kActivityType] as AnyObject ){
-                self.type = activityDict[kActivityType] as? ActivityType
-            }
+            
             
             if Utilities.isValidValue(someObject: activityDict[kActivityStartTime] as AnyObject ) {
                 
@@ -80,20 +123,8 @@ class ActivityResult {
     }
     
     
-    //MARK: Setter & getter methods for Activity
-    func setActivity(activity:Activity)  {
-        self.activity = activity
-        
-        self.type = activity.type
-        
-    }
-    
-    
-    func getActivity() -> Activity {
-        return self.activity!
-    }
-    
-    
+   
+
     //MARK: Setter & getter methods for ActivityResult
     func setActivityResult(activityStepResult:ActivityStepResult)  {
         self.result?.append(activityStepResult)
@@ -110,10 +141,7 @@ class ActivityResult {
         // method to get the dictionary for Api
         var activityDict:Dictionary<String,Any>?
         
-        if Utilities.isValidValue(someObject: self.type as AnyObject?){
-            activityDict?[kActivityType] = self.type
-        }
-        
+
         if self.startTime != nil && (Utilities.getStringFromDate(date: self.startTime!) != nil){
             
             activityDict?[kActivityStartTime] = Utilities.getStringFromDate(date: self.startTime!)
@@ -140,5 +168,6 @@ class ActivityResult {
         
         return activityDict!
     }
+
     
 }

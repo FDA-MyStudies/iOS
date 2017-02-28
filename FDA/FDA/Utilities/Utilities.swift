@@ -238,8 +238,12 @@ class Utilities: NSObject {
     }
     
     class func isValidValue(someObject: AnyObject?) -> Bool {
-        
-        // this method checks validation of string, integer, bool
+      /*
+         Method to validate a value for Null condition
+         @someObject: can be String,Int or Bool
+         returns a Boolean on valid data
+        */
+    
         guard let someObject = someObject else {
             // is null
             
@@ -249,13 +253,13 @@ class Utilities: NSObject {
         
         if (someObject is NSNull) ==  false {
             
-            if someObject as? Int != nil && (someObject as? Int)! > 0 {
+            if someObject as? Int != nil && (someObject as? Int)! >= 0 {
                 return true
             }
             else if someObject as? String != nil && ((someObject as? String)?.characters.count)! > 0 && (someObject as? String) != ""{
                 return true
             }
-            else if someObject as? Bool != nil && someObject as! Bool{
+            else if someObject as? Bool != nil && (someObject as! Bool == true || someObject as! Bool == false){
                 return true
             }
             else  if someObject as? Double != nil && (someObject as? Double)?.isFinite == true && (someObject as? Double)?.isZero == false && (someObject as? Double)! > 0 {
@@ -277,7 +281,12 @@ class Utilities: NSObject {
     
     
     class func isValidValueAndOfType(someValue:AnyObject? , type:AnyClass )->Bool{
-        
+        /* Method to check if value is of specific Type
+         @someValue:can be any value
+         @type:must a specific class Type
+         returns boolean 
+         NOTE:current not in use, need modifications
+         */
         
         guard let someObject = someValue else {
             // is null
@@ -305,7 +314,12 @@ class Utilities: NSObject {
     
     
     class func isValidObject(someObject: AnyObject?)-> Bool{
-        // this method validate dictionary and Array
+        
+        /* Method to Validate Object and checks for Null
+         @someObject: can be either an Array or Dictionary
+         returns a Boolean if someObject is not null
+        */
+        
         guard let someObject = someObject else {
             // is null
             
@@ -332,6 +346,11 @@ class Utilities: NSObject {
     }
     
     class func getDateFromString(dateString:String)->Date?{
+        /* Method to get DateFromString for default dateFormatter
+         @dateString:a date String of format "yyyy-MM-dd'T'HH:mm:ssZ"
+         returns date for the specified dateString in same format
+        */
+        
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
         // dateFormatter.timeZone = NSTimeZone(name: "UTC") as TimeZone!
@@ -352,6 +371,10 @@ class Utilities: NSObject {
     }
     
     class func getStringFromDate(date:Date)->String?{
+        /* Method to get StringFromDate for default dateFormatter
+         @date:a date  of format "yyyy-MM-dd'T'HH:mm:ssZ"
+         returns dateString for the specified date in same format
+         */
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
         dateFormatter.timeZone = NSTimeZone(name: "UTC") as TimeZone!
@@ -384,18 +407,28 @@ class Utilities: NSObject {
 
 extension FileManager {
     class func documentsDir() -> String {
+        /* Method to get documentDirectory of Application
+         return path of documentDirectory
+        */
+        
         var paths = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true) as [String]
         return paths[0]
     }
     
     class func cachesDir() -> String {
+        /* Method to get CacheDirectory of Application
+         return path of CacheDirectory
+         */
         var paths = NSSearchPathForDirectoriesInDomains(.cachesDirectory, .userDomainMask, true) as [String]
         return paths[0]
     }
     
     
     class func getStorageDirectory(type:DirectoryType) -> String{
-        // method to create study or gateway directory if not there or else will return directory path
+        /* Method to create Study or gateway directory
+         @type:DirectoryType can be study or gateway
+         returns a directory path string if exists already or else create One and returns path
+        */
         
         let fileManager = FileManager.default
         

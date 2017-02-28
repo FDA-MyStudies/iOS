@@ -1,20 +1,18 @@
 //
-//  SignUpTableViewCell.swift
+//  SignInTableViewCell.swift
 //  FDA
 //
-//  Created by Ravishankar on 2/23/17.
+//  Created by Ravishankar on 2/28/17.
 //  Copyright © 2017 BTC. All rights reserved.
 //
 
 import UIKit
-import Foundation
 
-class SignUpTableViewCell: UITableViewCell {
+class SignInTableViewCell: UITableViewCell {
     
     @IBOutlet var labelType : UILabel?
     @IBOutlet var textFieldValue : UITextField?
 
-    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -26,6 +24,4 @@ class SignUpTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
 
-
-    
 }

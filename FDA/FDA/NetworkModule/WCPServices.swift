@@ -157,14 +157,10 @@ class WCPServices: NSObject {
         
     }
     
-    func handleActivityList(response:Dictionary<String, Any>){
+    func handleStudyActivityList(response:Dictionary<String, Any>){
         
         let activities = response[kActivites] as! Array<Dictionary<String,Any>>
-        var listOfActivity:Array<Overview>!
-        for activity in activities{
-           // let overviewObj = Overview(detail: overview)
-           // listOfActivity.append(activity)
-        }
+        
         
     }
     

@@ -28,6 +28,9 @@ class ViewController: UIViewController,ORKTaskViewControllerDelegate {
         self.addResources()
         
         //self.buildTask()
+        self.kickCounterTaskTest()
+        
+        
         
         user.bookmarkStudy(studyId: "121")
         
@@ -107,9 +110,44 @@ class ViewController: UIViewController,ORKTaskViewControllerDelegate {
     public func stepViewControllerDidFail(_ stepViewController: ORKStepViewController, withError error: Error?){
         
     }
-    
+    func taskViewController(_ taskViewController: ORKTaskViewController, viewControllerFor step: ORKStep) -> ORKStepViewController? {
+        
+        if step.identifier == "FetalKickCounter" {
+            
+             let ttController = self.storyboard?.instantiateViewController(withIdentifier: "FetalKickCounterStepViewController") as! FetalKickCounterStepViewController
+            ttController.step = step
+          
+            
+            return ttController
+        } else {
+            return nil
+        }
+    }
     
     //MARK: methods
+    
+    
+    func kickCounterTaskTest()   {
+        
+        let fetalKickCouterTask:FetalKickCounterTask? = FetalKickCounterTask()
+        let task:ORKTask?
+        let taskViewController:ORKTaskViewController?
+        
+        task = fetalKickCouterTask?.getTask()
+        taskViewController = ORKTaskViewController(task:task, taskRun: nil)
+        taskViewController?.delegate = self
+        taskViewController?.outputDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+        present(taskViewController!, animated: true, completion: nil)
+
+        
+    }
+    
+    
+    
+    
+    
+    
+    
     
     func buildTask()  {
         
@@ -134,9 +172,25 @@ class ViewController: UIViewController,ORKTaskViewControllerDelegate {
                 if Utilities.isValidObject(someObject: dataDict?["Result"] as? Dictionary<String, Any> as AnyObject?){
                     
                     
-                     activitybuilder?.initActivityWithDict(dict: dataDict?["Result"] as! Dictionary<String, Any>)
+                     //activitybuilder?.initActivityWithDict(dict: dataDict?["Result"] as! Dictionary<String, Any>)
                     
-                     task = activitybuilder?.createTask()
+                     //task = activitybuilder?.createTask()
+                    
+                    
+                    
+                    //------------------------
+                    var orkStepArray:[ORKStep]?
+                    
+                    orkStepArray = Array<ORKStep>()
+                    let countDownStep:ORKCountdownStep? = ORKCountdownStep.init(identifier: "countdown")
+                     countDownStep?.stepDuration = 30
+                    
+                    orkStepArray?.append(countDownStep!)
+                    task =  ORKOrderedTask(identifier: (countDownStep?.identifier)!, steps: orkStepArray)
+                    
+                    //---------------------------
+                    
+                    
                     
                     
                    // consentbuilder?.initWithMetaData(metaDataDict:dataDict?["Result"] as! Dictionary<String, Any> )

@@ -1,5 +1,5 @@
 //
-//  EligibilityStep.swift
+//  EligibilityBuilder.swift
 //  FDA
 //
 //  Created by Arun Kumar on 2/28/17.
@@ -40,6 +40,7 @@ class EligibilityBuilder{
     
     func getEligibilitySteps() -> [ORKStep]?{
         
+        
         if Utilities.isValidObject(someObject: self.testArray as AnyObject )
             && Utilities.isValidValue(someObject: self.tokenTitle as AnyObject )
             && Utilities.isValidValue(someObject: self.type as AnyObject ){
@@ -64,7 +65,7 @@ class EligibilityBuilder{
                 
             case .both:
                 // need to check if it is of question type ?? or pass code type
-                
+                // business logic needed to arrage passcode and questionary
                 break
             default:
                 break
@@ -73,6 +74,9 @@ class EligibilityBuilder{
             }
             if (stepsArray?.count)! > 0 {
                 return stepsArray!
+            }
+            else{
+                return nil
             }
         }
         else{

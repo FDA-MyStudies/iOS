@@ -7,3 +7,11 @@
 //
 
 import Foundation
+import ResearchKit
+
+class FetalKickCounterStep: ORKActiveStep {
+    
+    var counDownTimer:Int?
+    var totalCounts:Int?
+    
+}

@@ -8,6 +8,7 @@
 
 import Foundation
 import ResearchKit
+
 let kConsentStepType = "type"
 
 let kConsentStepTitle = "title"
@@ -16,7 +17,6 @@ let kConsentStepDescription = "description"
 let kConsentStepHTML = "html"
 let kConsentStepURL = "url"
 let kConsentStepVisualStep = "visualStep"
-
 
 
 enum ConsentStepSectionType:String{

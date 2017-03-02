@@ -25,6 +25,7 @@
 		6EC1291F1E64241200B90167 /* ConsentResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EC1291E1E64241200B90167 /* ConsentResult.swift */; };
 		6EC129221E64279100B90167 /* ConsentStepResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EC129211E64279100B90167 /* ConsentStepResult.swift */; };
 		6EC129241E64624F00B90167 /* Acivity_Question.json in Resources */ = {isa = PBXBuildFile; fileRef = 6EC129231E64624F00B90167 /* Acivity_Question.json */; };
+		6EC8019B1E67EF3400CC5966 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EC8019A1E67EF3400CC5966 /* Constants.swift */; };
 		6ECA927F1E499F8C00DA6287 /* StepProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ECA927E1E499F8C00DA6287 /* StepProvider.swift */; };
 		6ECA92821E49B3BB00DA6287 /* Resource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ECA92811E49B3BB00DA6287 /* Resource.swift */; };
 		6ECA92851E49B5CF00DA6287 /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ECA92841E49B5CF00DA6287 /* File.swift */; };
@@ -148,6 +149,7 @@
 		6EC1291E1E64241200B90167 /* ConsentResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConsentResult.swift; sourceTree = "<group>"; };
 		6EC129211E64279100B90167 /* ConsentStepResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConsentStepResult.swift; sourceTree = "<group>"; };
 		6EC129231E64624F00B90167 /* Acivity_Question.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Acivity_Question.json; sourceTree = "<group>"; };
+		6EC8019A1E67EF3400CC5966 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		6ECA927E1E499F8C00DA6287 /* StepProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StepProvider.swift; sourceTree = "<group>"; };
 		6ECA92811E49B3BB00DA6287 /* Resource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Resource.swift; sourceTree = "<group>"; };
 		6ECA92841E49B5CF00DA6287 /* File.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
@@ -287,6 +289,7 @@
 				6ED1B21C1E54252500BF463F /* ScheduleModel */,
 				94CD96E31E4AF61800946477 /* NetworkModule */,
 				6ECA92861E49F0BA00DA6287 /* Utilities */,
+				6EC801971E67EF2000CC5966 /* Constants */,
 				6ECA92831E49B5C000DA6287 /* FileModel */,
 				6ECA92801E49B39900DA6287 /* ResourceModel */,
 				6ECA927D1E499F6600DA6287 /* StepProvider */,
@@ -360,6 +363,14 @@
 				6EC129211E64279100B90167 /* ConsentStepResult.swift */,
 			);
 			path = ConsentStepResult;
+			sourceTree = "<group>";
+		};
+		6EC801971E67EF2000CC5966 /* Constants */ = {
+			isa = PBXGroup;
+			children = (
+				6EC8019A1E67EF3400CC5966 /* Constants.swift */,
+			);
+			path = Constants;
 			sourceTree = "<group>";
 		};
 		6ECA927D1E499F6600DA6287 /* StepProvider */ = {
@@ -949,6 +960,7 @@
 				6ED134361E5EB0370090C976 /* ConsentStep.swift in Sources */,
 				941909B81E5310D6001B01C5 /* Gateway.swift in Sources */,
 				6EED7B391E6574FE002C1FA3 /* FetalKickCounterStep.swift in Sources */,
+				6EC8019B1E67EF3400CC5966 /* Constants.swift in Sources */,
 				6EC129221E64279100B90167 /* ConsentStepResult.swift in Sources */,
 				6E7D2D5C1E433E8800763D4C /* ViewController.swift in Sources */,
 				94CD96E91E4AF61800946477 /* NetworkManager.swift in Sources */,

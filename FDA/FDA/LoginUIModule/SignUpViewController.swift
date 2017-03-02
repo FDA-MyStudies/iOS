@@ -18,6 +18,8 @@ class SignUpViewController : UIViewController{
     @IBOutlet var buttonAgree : UIButton?
     @IBOutlet var labelTermsAndConditions : FRHyperLabel?
     
+    var tableViewRowDetails : NSMutableArray?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -26,6 +28,12 @@ class SignUpViewController : UIViewController{
         
         self.agreeToTermsAndConditions()
         self.title = "SIGN UP"
+        
+        //load plist info
+        let plistPath = Bundle.main.path(forResource: "SignUpPlist", ofType: ".plist", inDirectory:nil)
+        tableViewRowDetails = NSMutableArray.init(contentsOfFile: plistPath!)
+        
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -93,19 +101,18 @@ class SignUpViewController : UIViewController{
 extension SignUpViewController : UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        return tableViewRowDetails!.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        var cell : UITableViewCell?
         
-        cell = tableView.dequeueReusableCell(withIdentifier: "CommonDetailsCell", for: indexPath) as! SignUpTableViewCell
-            
+        let tableViewData = tableViewRowDetails?.object(at: indexPath.row) as! NSDictionary
+        let cell = tableView.dequeueReusableCell(withIdentifier: "CommonDetailsCell", for: indexPath) as! SignUpTableViewCell
+        cell.populateCellData(data: tableViewData)
         
-        cell?.backgroundColor = UIColor.clear
-        return cell!
+        cell.backgroundColor = UIColor.clear
+        return cell
     }
-    
 }
 
 //MARK: TableView Delegates

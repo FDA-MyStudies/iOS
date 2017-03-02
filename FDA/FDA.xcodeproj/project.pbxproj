@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		108A76E0BBDF30BE4F49EB0B /* Pods_FDAUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C1A57F15C55319A5A1EA87C /* Pods_FDAUITests.framework */; };
 		2F2CF29CD5359B994C8987E7 /* Pods_FDA.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 09ABCB412CFB53694DC239AC /* Pods_FDA.framework */; };
+		060B87FE3398F9F887DFE24B /* Pods_FDAUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B450153B4B7BD903D1774E93 /* Pods_FDAUITests.framework */; };
+		482062491E6804E000C7A7AF /* SignUpPlist.plist in Resources */ = {isa = PBXBuildFile; fileRef = 482062481E6804E000C7A7AF /* SignUpPlist.plist */; };
 		48448C2D1E6552BD0085CC81 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48448C2C1E6552BD0085CC81 /* SignInViewController.swift */; };
 		48448C311E6553630085CC81 /* SignInTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48448C301E6553630085CC81 /* SignInTableViewCell.swift */; };
 		48448C331E65857A0085CC81 /* ForgotPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48448C321E65857A0085CC81 /* ForgotPasswordViewController.swift */; };
@@ -154,6 +156,7 @@
 		081C20F9411D7D00FA1F5487 /* Pods-FDATests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FDATests.release.xcconfig"; path = "Pods/Target Support Files/Pods-FDATests/Pods-FDATests.release.xcconfig"; sourceTree = "<group>"; };
 		09ABCB412CFB53694DC239AC /* Pods_FDA.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FDA.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		294A17E09870D2198653B56F /* Pods-FDAUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FDAUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-FDAUITests/Pods-FDAUITests.release.xcconfig"; sourceTree = "<group>"; };
+		482062481E6804E000C7A7AF /* SignUpPlist.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = SignUpPlist.plist; sourceTree = "<group>"; };
 		48448C2C1E6552BD0085CC81 /* SignInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SignInViewController.swift; path = LoginUIModule/SignInViewController.swift; sourceTree = "<group>"; };
 		48448C301E6553630085CC81 /* SignInTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SignInTableViewCell.swift; path = LoginUIModule/SignInTableViewCell.swift; sourceTree = "<group>"; };
 		48448C321E65857A0085CC81 /* ForgotPasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ForgotPasswordViewController.swift; path = LoginUIModule/ForgotPasswordViewController.swift; sourceTree = "<group>"; };
@@ -297,6 +300,7 @@
 		489636BF1E670D8000C718CF /* SignUp/SignInModule */ = {
 			isa = PBXGroup;
 			children = (
+				482062481E6804E000C7A7AF /* SignUpPlist.plist */,
 				48936B471E5EFFD300733A7C /* SignUpViewController.swift */,
 				48936B491E5F069F00733A7C /* SignUpTableViewCell.swift */,
 				48448C2C1E6552BD0085CC81 /* SignInViewController.swift */,
@@ -936,6 +940,7 @@
 				6EC129241E64624F00B90167 /* Acivity_Question.json in Resources */,
 				6E7D2D8C1E4340B200763D4C /* UserProfile.plist in Resources */,
 				6E7D2D901E43526100763D4C /* Register.plist in Resources */,
+				482062491E6804E000C7A7AF /* SignUpPlist.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

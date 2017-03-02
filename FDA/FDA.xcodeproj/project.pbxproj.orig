@@ -7,7 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+<<<<<<< Updated upstream
+		108A76E0BBDF30BE4F49EB0B /* Pods_FDAUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C1A57F15C55319A5A1EA87C /* Pods_FDAUITests.framework */; };
+		2F2CF29CD5359B994C8987E7 /* Pods_FDA.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 09ABCB412CFB53694DC239AC /* Pods_FDA.framework */; };
+=======
 		060B87FE3398F9F887DFE24B /* Pods_FDAUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B450153B4B7BD903D1774E93 /* Pods_FDAUITests.framework */; };
+		482062491E6804E000C7A7AF /* SignUpPlist.plist in Resources */ = {isa = PBXBuildFile; fileRef = 482062481E6804E000C7A7AF /* SignUpPlist.plist */; };
+>>>>>>> Stashed changes
 		48448C2D1E6552BD0085CC81 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48448C2C1E6552BD0085CC81 /* SignInViewController.swift */; };
 		48448C311E6553630085CC81 /* SignInTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48448C301E6553630085CC81 /* SignInTableViewCell.swift */; };
 		48448C331E65857A0085CC81 /* ForgotPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48448C321E65857A0085CC81 /* ForgotPasswordViewController.swift */; };
@@ -79,7 +85,7 @@
 		6EF05A941E4DAB0400CD7661 /* ResearchKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EF05A911E4DAAFB00CD7661 /* ResearchKit.framework */; };
 		6EF05A951E4DAB0400CD7661 /* ResearchKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6EF05A911E4DAAFB00CD7661 /* ResearchKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		6EF05A991E4DC36400CD7661 /* StepProvider.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6EF05A981E4DC36400CD7661 /* StepProvider.plist */; };
-		783BF4E8D79407893A004C3F /* Pods_FDA.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 77111DDCA5033C2FA7A5F7C8 /* Pods_FDA.framework */; };
+		74604306BE653DDFE2407EFF /* Pods_FDATests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7E309D273812BCB954E8968 /* Pods_FDATests.framework */; };
 		941909B51E52FA9B001B01C5 /* Study.swift in Sources */ = {isa = PBXBuildFile; fileRef = 941909B41E52FA9B001B01C5 /* Study.swift */; };
 		941909B81E5310D6001B01C5 /* Gateway.swift in Sources */ = {isa = PBXBuildFile; fileRef = 941909B71E5310D6001B01C5 /* Gateway.swift */; };
 		941909BB1E533AA9001B01C5 /* Overview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 941909BA1E533AA9001B01C5 /* Overview.swift */; };
@@ -95,7 +101,6 @@
 		94CD96EB1E4AF61800946477 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94CD96E71E4AF61800946477 /* Reachability.swift */; };
 		94CD96ED1E4AFAFF00946477 /* NetworkConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94CD96EC1E4AFAFF00946477 /* NetworkConfiguration.swift */; };
 		94CD96EF1E4B16D900946477 /* WCPConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94CD96EE1E4B16D900946477 /* WCPConfiguration.swift */; };
-		F4AC5E62CD3F13025523AB4E /* Pods_FDATests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C7E9F55391795F1EBFD11F2 /* Pods_FDATests.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -152,7 +157,9 @@
 
 /* Begin PBXFileReference section */
 		081C20F9411D7D00FA1F5487 /* Pods-FDATests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FDATests.release.xcconfig"; path = "Pods/Target Support Files/Pods-FDATests/Pods-FDATests.release.xcconfig"; sourceTree = "<group>"; };
+		09ABCB412CFB53694DC239AC /* Pods_FDA.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FDA.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		294A17E09870D2198653B56F /* Pods-FDAUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FDAUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-FDAUITests/Pods-FDAUITests.release.xcconfig"; sourceTree = "<group>"; };
+		482062481E6804E000C7A7AF /* SignUpPlist.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = SignUpPlist.plist; sourceTree = "<group>"; };
 		48448C2C1E6552BD0085CC81 /* SignInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SignInViewController.swift; path = LoginUIModule/SignInViewController.swift; sourceTree = "<group>"; };
 		48448C301E6553630085CC81 /* SignInTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SignInTableViewCell.swift; path = LoginUIModule/SignInTableViewCell.swift; sourceTree = "<group>"; };
 		48448C321E65857A0085CC81 /* ForgotPasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ForgotPasswordViewController.swift; path = LoginUIModule/ForgotPasswordViewController.swift; sourceTree = "<group>"; };
@@ -182,6 +189,7 @@
 		489873321E5D9AA4006B8F3A /* LoginAssets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = LoginAssets.xcassets; sourceTree = "<group>"; };
 		489873351E5DA224006B8F3A /* 02.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 02.png; sourceTree = "<group>"; };
 		489873371E5DAC2B006B8F3A /* 03.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 03.png; sourceTree = "<group>"; };
+		4C1A57F15C55319A5A1EA87C /* Pods_FDAUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FDAUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6E7D2D561E433E8700763D4C /* FDA.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FDA.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6E7D2D591E433E8800763D4C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6E7D2D5B1E433E8800763D4C /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -232,9 +240,7 @@
 		6EED7B3C1E65752C002C1FA3 /* FetalKickCounterTask.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FetalKickCounterTask.swift; sourceTree = "<group>"; };
 		6EF05A8A1E4DAAFB00CD7661 /* ResearchKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = ResearchKit.xcodeproj; sourceTree = "<group>"; };
 		6EF05A981E4DC36400CD7661 /* StepProvider.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = StepProvider.plist; sourceTree = "<group>"; };
-		77111DDCA5033C2FA7A5F7C8 /* Pods_FDA.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FDA.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7E059BDA3C24219381C2DAD8 /* Pods-FDATests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FDATests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FDATests/Pods-FDATests.debug.xcconfig"; sourceTree = "<group>"; };
-		8C7E9F55391795F1EBFD11F2 /* Pods_FDATests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FDATests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		941909B41E52FA9B001B01C5 /* Study.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Study.swift; sourceTree = "<group>"; };
 		941909B71E5310D6001B01C5 /* Gateway.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Gateway.swift; sourceTree = "<group>"; };
 		941909BA1E533AA9001B01C5 /* Overview.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Overview.swift; sourceTree = "<group>"; };
@@ -251,7 +257,7 @@
 		94CD96EC1E4AFAFF00946477 /* NetworkConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkConfiguration.swift; sourceTree = "<group>"; };
 		94CD96EE1E4B16D900946477 /* WCPConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WCPConfiguration.swift; sourceTree = "<group>"; };
 		963CAB7313BD190F63FFA0BE /* Pods-FDA.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FDA.release.xcconfig"; path = "Pods/Target Support Files/Pods-FDA/Pods-FDA.release.xcconfig"; sourceTree = "<group>"; };
-		B450153B4B7BD903D1774E93 /* Pods_FDAUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FDAUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B7E309D273812BCB954E8968 /* Pods_FDATests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FDATests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C48C2144AE4C13F884F0B2A0 /* Pods-FDA.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FDA.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FDA/Pods-FDA.debug.xcconfig"; sourceTree = "<group>"; };
 		F7DF4311A0D742E5E47D1A7B /* Pods-FDAUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FDAUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FDAUITests/Pods-FDAUITests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -262,7 +268,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6EF05A941E4DAB0400CD7661 /* ResearchKit.framework in Frameworks */,
-				783BF4E8D79407893A004C3F /* Pods_FDA.framework in Frameworks */,
+				2F2CF29CD5359B994C8987E7 /* Pods_FDA.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -270,7 +276,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F4AC5E62CD3F13025523AB4E /* Pods_FDATests.framework in Frameworks */,
+				74604306BE653DDFE2407EFF /* Pods_FDATests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -278,7 +284,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				060B87FE3398F9F887DFE24B /* Pods_FDAUITests.framework in Frameworks */,
+				108A76E0BBDF30BE4F49EB0B /* Pods_FDAUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -297,6 +303,7 @@
 		489636BF1E670D8000C718CF /* SignUp/SignInModule */ = {
 			isa = PBXGroup;
 			children = (
+				482062481E6804E000C7A7AF /* SignUpPlist.plist */,
 				48936B471E5EFFD300733A7C /* SignUpViewController.swift */,
 				48936B491E5F069F00733A7C /* SignUpTableViewCell.swift */,
 				48448C2C1E6552BD0085CC81 /* SignInViewController.swift */,
@@ -360,9 +367,9 @@
 		5E6053B2479953DCC93BD8D4 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				77111DDCA5033C2FA7A5F7C8 /* Pods_FDA.framework */,
-				8C7E9F55391795F1EBFD11F2 /* Pods_FDATests.framework */,
-				B450153B4B7BD903D1774E93 /* Pods_FDAUITests.framework */,
+				09ABCB412CFB53694DC239AC /* Pods_FDA.framework */,
+				B7E309D273812BCB954E8968 /* Pods_FDATests.framework */,
+				4C1A57F15C55319A5A1EA87C /* Pods_FDAUITests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -406,13 +413,9 @@
 		6E7D2D581E433E8700763D4C /* FDA */ = {
 			isa = PBXGroup;
 			children = (
-<<<<<<< HEAD
 				6EED7B341E65743D002C1FA3 /* FetalKickCounterModel */,
 				6EED7B2E1E6541FF002C1FA3 /* Eligibility */,
 				6ED1342E1E5EB0110090C976 /* Consent */,
-				6E9B39BC1E55DFDA0037D09D /* ActivityBuilder */,
-=======
->>>>>>> Ravi_develop
 				6ED1B22A1E54256700BF463F /* ActivityStepModel */,
 				6ED1B2251E54255900BF463F /* ActivityStepResultModel */,
 				6ED1B2221E54254900BF463F /* ActivityResultModel */,
@@ -940,6 +943,7 @@
 				6EC129241E64624F00B90167 /* Acivity_Question.json in Resources */,
 				6E7D2D8C1E4340B200763D4C /* UserProfile.plist in Resources */,
 				6E7D2D901E43526100763D4C /* Register.plist in Resources */,
+				482062491E6804E000C7A7AF /* SignUpPlist.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1117,20 +1121,14 @@
 				6E7D2D5C1E433E8800763D4C /* ViewController.swift in Sources */,
 				94CD96E91E4AF61800946477 /* NetworkManager.swift in Sources */,
 				6E7D2D5A1E433E8800763D4C /* AppDelegate.swift in Sources */,
-<<<<<<< HEAD
 				6ED134341E5EB0280090C976 /* ConsentBuilder.swift in Sources */,
-				9487102A1E546C3800246109 /* AppNotification.swift in Sources */,
-				6ED8A2E61E447AA2004DEC01 /* Formatter.swift in Sources */,
-				941909B51E52FA9B001B01C5 /* Study.swift in Sources */,
-				6EED7B3D1E65752C002C1FA3 /* FetalKickCounterTask.swift in Sources */,
-=======
 				48936B421E5EEF8E00733A7C /* FirstViewController.swift in Sources */,
 				48936B481E5EFFD300733A7C /* SignUpViewController.swift in Sources */,
 				9487102A1E546C3800246109 /* AppNotification.swift in Sources */,
 				6ED8A2E61E447AA2004DEC01 /* Formatter.swift in Sources */,
 				941909B51E52FA9B001B01C5 /* Study.swift in Sources */,
+				6EED7B3D1E65752C002C1FA3 /* FetalKickCounterTask.swift in Sources */,
 				489636BB1E67068D00C718CF /* StudyOverviewPageViewControllerFirst.swift in Sources */,
->>>>>>> Ravi_develop
 				6E9B39C01E55DFF10037D09D /* ActivityBuilder.swift in Sources */,
 				6ECA92851E49B5CF00DA6287 /* File.swift in Sources */,
 				9432C2F91E4C4993005984EC /* ResponseServerConfiguration.swift in Sources */,
@@ -1140,13 +1138,9 @@
 				6ED1B2241E54254900BF463F /* ActivityResult.swift in Sources */,
 				9432C2FB1E4C9EF8005984EC /* UserServices.swift in Sources */,
 				6ECA92881E49F0CD00DA6287 /* Utilities.swift in Sources */,
-<<<<<<< HEAD
-=======
 				48448C331E65857A0085CC81 /* ForgotPasswordViewController.swift in Sources */,
-				6ED1B2281E54255900BF463F /* ActivityQuestionStepResult.swift in Sources */,
 				489636BD1E6706D500C718CF /* StudyOverviewViewControllerSecond.swift in Sources */,
 				48936B441E5EEFC100733A7C /* SecondViewController.swift in Sources */,
->>>>>>> Ravi_develop
 				6E7D2D8A1E43400100763D4C /* User.swift in Sources */,
 				48448C311E6553630085CC81 /* SignInTableViewCell.swift in Sources */,
 				6ED1B21E1E54252500BF463F /* Schedule.swift in Sources */,
@@ -1154,11 +1148,8 @@
 				6ED1B2331E54256700BF463F /* ActivityQuestionStep.swift in Sources */,
 				6ED1B2211E54253800BF463F /* Activity.swift in Sources */,
 				6ED1B2341E54256700BF463F /* ActivityStep.swift in Sources */,
-<<<<<<< HEAD
 				6EC1291F1E64241200B90167 /* ConsentResult.swift in Sources */,
-=======
 				48936B4A1E5F069F00733A7C /* SignUpTableViewCell.swift in Sources */,
->>>>>>> Ravi_develop
 				94CD96EF1E4B16D900946477 /* WCPConfiguration.swift in Sources */,
 				489636B31E66C9F400C718CF /* NotificationTableViewCell.swift in Sources */,
 				941909BB1E533AA9001B01C5 /* Overview.swift in Sources */,
@@ -1328,7 +1319,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = C48C2144AE4C13F884F0B2A0 /* Pods-FDA.debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = 3485DDCN2M;
@@ -1347,7 +1338,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 963CAB7313BD190F63FFA0BE /* Pods-FDA.release.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = 3485DDCN2M;

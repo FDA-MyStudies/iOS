@@ -26,6 +26,10 @@ class SignUpTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
 
-
+    //Populate cell data coming in dictionary
+    func populateCellData(data : NSDictionary){
+        labelType?.text = data["helpText"] as? String
+        textFieldValue?.placeholder = data["placeHolder"] as? String
     
+    }
 }

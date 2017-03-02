@@ -12,6 +12,9 @@ import UIKit
 let MAX_WIDTH = 1000
 let MAX_HEIGHT = 100
 
+let alert = UIAlertView()
+
+public typealias AlertAction = () -> Void
 
 enum DirectoryType : String{
     case study = "Study"
@@ -400,7 +403,20 @@ class Utilities: NSObject {
         return Bundle.main.bundleIdentifier!
     }
     
+    class func showAlertWithMessage(alertMessage:String)->Void{
+        
+        self.showAlertWithTitleAndMessage(title:"", message: alertMessage as NSString)
+        
+    }
     
+    class func showAlertWithTitleAndMessage(title: NSString, message : NSString)->Void {
+        
+        
+        alert.title = title as String
+        alert.message = message as String
+        alert.addButton(withTitle: "OK")
+        alert.show()
+    }
     
 }
 

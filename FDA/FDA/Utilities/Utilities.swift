@@ -12,9 +12,9 @@ import UIKit
 let MAX_WIDTH = 1000
 let MAX_HEIGHT = 100
 
-let alert = UIAlertView()
+//let alert = UIAlertView()
 
-public typealias AlertAction = () -> Void
+//public typealias AlertAction = () -> Void
 
 enum DirectoryType : String{
     case study = "Study"

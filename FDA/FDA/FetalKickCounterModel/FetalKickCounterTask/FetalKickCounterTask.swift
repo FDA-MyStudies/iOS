@@ -32,12 +32,10 @@ class FetalKickCounterTask {
         kickStep.totalCounts = 0
         
         
-        
-        
         kickStep.stepDuration = 20
         kickStep.shouldShowDefaultTimer = false
         kickStep.shouldStartTimerAutomatically = true
-        kickStep.shouldContinueOnFinish = true
+        kickStep.shouldContinueOnFinish = false
         kickStep.title = "Please listen for 30 seconds."
         
         steps?.append(kickStep)

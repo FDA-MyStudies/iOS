@@ -63,7 +63,6 @@
 		6ED1B21E1E54252500BF463F /* Schedule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ED1B21D1E54252500BF463F /* Schedule.swift */; };
 		6ED1B2211E54253800BF463F /* Activity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ED1B2201E54253800BF463F /* Activity.swift */; };
 		6ED1B2241E54254900BF463F /* ActivityResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ED1B2231E54254900BF463F /* ActivityResult.swift */; };
-		6ED1B2281E54255900BF463F /* ActivityQuestionStepResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ED1B2261E54255900BF463F /* ActivityQuestionStepResult.swift */; };
 		6ED1B2291E54255900BF463F /* ActivityStepResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ED1B2271E54255900BF463F /* ActivityStepResult.swift */; };
 		6ED1B2301E54256700BF463F /* ActivityActiveStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ED1B22B1E54256700BF463F /* ActivityActiveStep.swift */; };
 		6ED1B2311E54256700BF463F /* ActivityFormStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ED1B22C1E54256700BF463F /* ActivityFormStep.swift */; };
@@ -77,8 +76,8 @@
 		6EED7B391E6574FE002C1FA3 /* FetalKickCounterStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EED7B381E6574FE002C1FA3 /* FetalKickCounterStep.swift */; };
 		6EED7B3B1E65751D002C1FA3 /* FetalKickCounterStepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EED7B3A1E65751D002C1FA3 /* FetalKickCounterStepViewController.swift */; };
 		6EED7B3D1E65752C002C1FA3 /* FetalKickCounterTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EED7B3C1E65752C002C1FA3 /* FetalKickCounterTask.swift */; };
-		6EF05A941E4DAB0400CD7661 /* ReferenceProxy in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EF05A911E4DAAFB00CD7661 /* ResearchKit.framework */; };
-		6EF05A951E4DAB0400CD7661 /* ReferenceProxy in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6EF05A911E4DAAFB00CD7661 /* ResearchKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		6EF05A941E4DAB0400CD7661 /* ResearchKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EF05A911E4DAAFB00CD7661 /* ResearchKit.framework */; };
+		6EF05A951E4DAB0400CD7661 /* ResearchKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6EF05A911E4DAAFB00CD7661 /* ResearchKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		6EF05A991E4DC36400CD7661 /* StepProvider.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6EF05A981E4DC36400CD7661 /* StepProvider.plist */; };
 		88E7D605B4A6AE3920F191B9 /* libPods-FDATests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 086C105CD7E18291CDDA91AE /* libPods-FDATests.a */; };
 		90FD91AF3B4DBBE485954DFC /* libPods-FDAUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CEC79E4ECEBAF0B47B295AB /* libPods-FDAUITests.a */; };
@@ -144,7 +143,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				6EF05A951E4DAB0400CD7661 /* ReferenceProxy in Embed Frameworks */,
+				6EF05A951E4DAB0400CD7661 /* ResearchKit.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -220,7 +219,6 @@
 		6ED1B21D1E54252500BF463F /* Schedule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Schedule.swift; sourceTree = "<group>"; };
 		6ED1B2201E54253800BF463F /* Activity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Activity.swift; sourceTree = "<group>"; };
 		6ED1B2231E54254900BF463F /* ActivityResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityResult.swift; sourceTree = "<group>"; };
-		6ED1B2261E54255900BF463F /* ActivityQuestionStepResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityQuestionStepResult.swift; sourceTree = "<group>"; };
 		6ED1B2271E54255900BF463F /* ActivityStepResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityStepResult.swift; sourceTree = "<group>"; };
 		6ED1B22B1E54256700BF463F /* ActivityActiveStep.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityActiveStep.swift; sourceTree = "<group>"; };
 		6ED1B22C1E54256700BF463F /* ActivityFormStep.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityFormStep.swift; sourceTree = "<group>"; };
@@ -263,7 +261,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6EF05A941E4DAB0400CD7661 /* ReferenceProxy in Frameworks */,
+				6EF05A941E4DAB0400CD7661 /* ResearchKit.framework in Frameworks */,
 				19372514B7FEADE963B71301 /* libPods-FDA.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -411,7 +409,6 @@
 				6EED7B341E65743D002C1FA3 /* FetalKickCounterModel */,
 				6EED7B2E1E6541FF002C1FA3 /* Eligibility */,
 				6ED1342E1E5EB0110090C976 /* Consent */,
-				6E9B39BC1E55DFDA0037D09D /* ActivityBuilder */,
 				6ED1B22A1E54256700BF463F /* ActivityStepModel */,
 				6ED1B2251E54255900BF463F /* ActivityStepResultModel */,
 				6ED1B2221E54254900BF463F /* ActivityResultModel */,
@@ -599,7 +596,6 @@
 		6ED1B2251E54255900BF463F /* ActivityStepResultModel */ = {
 			isa = PBXGroup;
 			children = (
-				6ED1B2261E54255900BF463F /* ActivityQuestionStepResult.swift */,
 				6ED1B2271E54255900BF463F /* ActivityStepResult.swift */,
 			);
 			path = ActivityStepResultModel;
@@ -1135,7 +1131,6 @@
 				9432C2FB1E4C9EF8005984EC /* UserServices.swift in Sources */,
 				6ECA92881E49F0CD00DA6287 /* Utilities.swift in Sources */,
 				48448C331E65857A0085CC81 /* ForgotPasswordViewController.swift in Sources */,
-				6ED1B2281E54255900BF463F /* ActivityQuestionStepResult.swift in Sources */,
 				489636BD1E6706D500C718CF /* StudyOverviewViewControllerSecond.swift in Sources */,
 				48936B441E5EEFC100733A7C /* SecondViewController.swift in Sources */,
 				6E7D2D8A1E43400100763D4C /* User.swift in Sources */,

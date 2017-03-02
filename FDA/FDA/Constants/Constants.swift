@@ -7,3 +7,7 @@
 //
 
 import Foundation
+
+//Mark: Alert Constants
+
+let kAlertPleaseEnterValidValue = "Please Enter Valid Value"

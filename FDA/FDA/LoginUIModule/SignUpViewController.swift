@@ -22,7 +22,7 @@ class SignUpViewController : UIViewController{
         super.viewDidLoad()
         
         //Used to set border color for bottom view
-        buttonSubmit?.layer.borderColor = UIColor.init(colorLiteralRed: 73/255.0, green: 182/255.0, blue: 229/255.0, alpha: 1.0).cgColor
+        buttonSubmit?.layer.borderColor = UIColor.init(colorLiteralRed: 0/255.0, green: 124/255.0, blue: 186/255.0, alpha: 1.0).cgColor
         
         self.agreeToTermsAndConditions()
         self.title = "SIGN UP"
@@ -40,7 +40,7 @@ class SignUpViewController : UIViewController{
         
     }
 
-
+    //MARK: Attributed string for Terms & Privacy Policy
     func agreeToTermsAndConditions(){
         
         labelTermsAndConditions?.numberOfLines = 0;
@@ -70,10 +70,27 @@ class SignUpViewController : UIViewController{
         labelTermsAndConditions?.setLinksForSubstrings(["Privacy Policy", "Terms"], withLinkHandler: handler)
         
     }
+    
+    //MARK: Submit Button Action and validation checks
+    @IBAction func submitButtonAction(_ sender: Any) {
+        
+        
+        
+        
+        
+    }
+    
+    //MARK: Agree to Aerms and Conditions checks
+    @IBAction func agreeButtonAction(_ sender: Any) {
+        
+        (sender as! UIButton).isSelected = !(sender as! UIButton).isSelected
+        
+        
+    }
 }
 
-//MARK: TableView Delegates
-extension SignUpViewController : UITableViewDataSource , UITableViewDelegate{
+//MARK: TableView Data source
+extension SignUpViewController : UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 5
@@ -82,33 +99,21 @@ extension SignUpViewController : UITableViewDataSource , UITableViewDelegate{
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         var cell : UITableViewCell?
         
-//        if indexPath.row == 5 {
-//            
-//            cell = tableView.dequeueReusableCell(withIdentifier: "TouchIdAccessCell", for: indexPath) as! SignUpTableViewCell
-//            
-//        }else if indexPath.row == 6 {
-//            
-//            cell = tableView.dequeueReusableCell(withIdentifier: "TermsAndPrivacyCell", for: indexPath) as! SignUpTableViewCell
-//            (cell as! SignUpTableViewCell).agreeToTermsAndConditions()
-//            
-//        }else{
-        
-            cell = tableView.dequeueReusableCell(withIdentifier: "CommonDetailsCell", for: indexPath) as! SignUpTableViewCell
+        cell = tableView.dequeueReusableCell(withIdentifier: "CommonDetailsCell", for: indexPath) as! SignUpTableViewCell
             
-//        }
         
         cell?.backgroundColor = UIColor.clear
         return cell!
     }
+    
+}
 
+//MARK: TableView Delegates
+extension SignUpViewController : UITableViewDelegate{
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
     }
-    
-    
-//    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-//        return tableViewFooterView
-//    }
-    
 }
+

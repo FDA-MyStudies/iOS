@@ -7,7 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		19372514B7FEADE963B71301 /* libPods-FDA.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F95A29FE997A9959B983F7E /* libPods-FDA.a */; };
+		108A76E0BBDF30BE4F49EB0B /* Pods_FDAUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C1A57F15C55319A5A1EA87C /* Pods_FDAUITests.framework */; };
+		2F2CF29CD5359B994C8987E7 /* Pods_FDA.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 09ABCB412CFB53694DC239AC /* Pods_FDA.framework */; };
 		48448C2D1E6552BD0085CC81 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48448C2C1E6552BD0085CC81 /* SignInViewController.swift */; };
 		48448C311E6553630085CC81 /* SignInTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48448C301E6553630085CC81 /* SignInTableViewCell.swift */; };
 		48448C331E65857A0085CC81 /* ForgotPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48448C321E65857A0085CC81 /* ForgotPasswordViewController.swift */; };
@@ -79,8 +80,7 @@
 		6EF05A941E4DAB0400CD7661 /* ResearchKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EF05A911E4DAAFB00CD7661 /* ResearchKit.framework */; };
 		6EF05A951E4DAB0400CD7661 /* ResearchKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6EF05A911E4DAAFB00CD7661 /* ResearchKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		6EF05A991E4DC36400CD7661 /* StepProvider.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6EF05A981E4DC36400CD7661 /* StepProvider.plist */; };
-		88E7D605B4A6AE3920F191B9 /* libPods-FDATests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 086C105CD7E18291CDDA91AE /* libPods-FDATests.a */; };
-		90FD91AF3B4DBBE485954DFC /* libPods-FDAUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CEC79E4ECEBAF0B47B295AB /* libPods-FDAUITests.a */; };
+		74604306BE653DDFE2407EFF /* Pods_FDATests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7E309D273812BCB954E8968 /* Pods_FDATests.framework */; };
 		941909B51E52FA9B001B01C5 /* Study.swift in Sources */ = {isa = PBXBuildFile; fileRef = 941909B41E52FA9B001B01C5 /* Study.swift */; };
 		941909B81E5310D6001B01C5 /* Gateway.swift in Sources */ = {isa = PBXBuildFile; fileRef = 941909B71E5310D6001B01C5 /* Gateway.swift */; };
 		941909BB1E533AA9001B01C5 /* Overview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 941909BA1E533AA9001B01C5 /* Overview.swift */; };
@@ -152,10 +152,8 @@
 
 /* Begin PBXFileReference section */
 		081C20F9411D7D00FA1F5487 /* Pods-FDATests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FDATests.release.xcconfig"; path = "Pods/Target Support Files/Pods-FDATests/Pods-FDATests.release.xcconfig"; sourceTree = "<group>"; };
-		086C105CD7E18291CDDA91AE /* libPods-FDATests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-FDATests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		09ABCB412CFB53694DC239AC /* Pods_FDA.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FDA.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		294A17E09870D2198653B56F /* Pods-FDAUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FDAUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-FDAUITests/Pods-FDAUITests.release.xcconfig"; sourceTree = "<group>"; };
-		2CEC79E4ECEBAF0B47B295AB /* libPods-FDAUITests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-FDAUITests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		3F95A29FE997A9959B983F7E /* libPods-FDA.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-FDA.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		48448C2C1E6552BD0085CC81 /* SignInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SignInViewController.swift; path = LoginUIModule/SignInViewController.swift; sourceTree = "<group>"; };
 		48448C301E6553630085CC81 /* SignInTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SignInTableViewCell.swift; path = LoginUIModule/SignInTableViewCell.swift; sourceTree = "<group>"; };
 		48448C321E65857A0085CC81 /* ForgotPasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ForgotPasswordViewController.swift; path = LoginUIModule/ForgotPasswordViewController.swift; sourceTree = "<group>"; };
@@ -185,6 +183,7 @@
 		489873321E5D9AA4006B8F3A /* LoginAssets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = LoginAssets.xcassets; sourceTree = "<group>"; };
 		489873351E5DA224006B8F3A /* 02.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 02.png; sourceTree = "<group>"; };
 		489873371E5DAC2B006B8F3A /* 03.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 03.png; sourceTree = "<group>"; };
+		4C1A57F15C55319A5A1EA87C /* Pods_FDAUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FDAUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6E7D2D561E433E8700763D4C /* FDA.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FDA.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6E7D2D591E433E8800763D4C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6E7D2D5B1E433E8800763D4C /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -252,6 +251,7 @@
 		94CD96EC1E4AFAFF00946477 /* NetworkConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkConfiguration.swift; sourceTree = "<group>"; };
 		94CD96EE1E4B16D900946477 /* WCPConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WCPConfiguration.swift; sourceTree = "<group>"; };
 		963CAB7313BD190F63FFA0BE /* Pods-FDA.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FDA.release.xcconfig"; path = "Pods/Target Support Files/Pods-FDA/Pods-FDA.release.xcconfig"; sourceTree = "<group>"; };
+		B7E309D273812BCB954E8968 /* Pods_FDATests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FDATests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C48C2144AE4C13F884F0B2A0 /* Pods-FDA.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FDA.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FDA/Pods-FDA.debug.xcconfig"; sourceTree = "<group>"; };
 		F7DF4311A0D742E5E47D1A7B /* Pods-FDAUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FDAUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FDAUITests/Pods-FDAUITests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -262,7 +262,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6EF05A941E4DAB0400CD7661 /* ResearchKit.framework in Frameworks */,
-				19372514B7FEADE963B71301 /* libPods-FDA.a in Frameworks */,
+				2F2CF29CD5359B994C8987E7 /* Pods_FDA.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -270,7 +270,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				88E7D605B4A6AE3920F191B9 /* libPods-FDATests.a in Frameworks */,
+				74604306BE653DDFE2407EFF /* Pods_FDATests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -278,7 +278,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				90FD91AF3B4DBBE485954DFC /* libPods-FDAUITests.a in Frameworks */,
+				108A76E0BBDF30BE4F49EB0B /* Pods_FDAUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -360,9 +360,9 @@
 		5E6053B2479953DCC93BD8D4 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				3F95A29FE997A9959B983F7E /* libPods-FDA.a */,
-				086C105CD7E18291CDDA91AE /* libPods-FDATests.a */,
-				2CEC79E4ECEBAF0B47B295AB /* libPods-FDAUITests.a */,
+				09ABCB412CFB53694DC239AC /* Pods_FDA.framework */,
+				B7E309D273812BCB954E8968 /* Pods_FDATests.framework */,
+				4C1A57F15C55319A5A1EA87C /* Pods_FDAUITests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -1311,7 +1311,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = C48C2144AE4C13F884F0B2A0 /* Pods-FDA.debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = 3485DDCN2M;
@@ -1330,7 +1330,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 963CAB7313BD190F63FFA0BE /* Pods-FDA.release.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = 3485DDCN2M;

@@ -4,7 +4,7 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
-		<key>IQKeyboardManager.xcscheme</key>
+		<key>IQKeyboardManagerSwift.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -27,22 +27,22 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>24361BCA69DFFFA6DE51730B508705D3</key>
+		<key>34FA3E2B45FE40A42BD30F93BDEA0232</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>7EDA1CFB12E56D8722A2645842C71BB1</key>
+		<key>4DC059E04CBA98AEDDB5C34E02D551E9</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>9650B5ADCE86F1A055FAFC635284BDB5</key>
+		<key>5DD260772D25FB845567FDA253948165</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>C475EF739A77A6649D9E604FC31B828C</key>
+		<key>C70A97A8A0FC7372771BB03B28252911</key>
 		<dict>
 			<key>primary</key>
 			<true/>

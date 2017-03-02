@@ -9,6 +9,7 @@
 import Foundation
 import ResearchKit
 
+
 class FetalKickCounterStepViewController:  ORKActiveStepViewController {
     
     //ORKStepViewController

@@ -54,9 +54,6 @@ class ViewController: UIViewController,ORKTaskViewControllerDelegate {
     public func taskViewController(_ taskViewController: ORKTaskViewController, didFinishWith reason: ORKTaskViewControllerFinishReason, error: Error?) {
         
         
-        
-        
-        
         var taskResult:Any?
         
         switch reason {

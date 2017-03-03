@@ -13,6 +13,9 @@ import ResearchKit
 let kActivityStepActiveOptions = "options"
 let kActivityStepActiveFormat = "format"
 let kActivityStepActiveType = "type"
+let kActivityStepActiveResultType = "resultType"
+
+
 
 //Active task Api constants
 
@@ -99,34 +102,34 @@ let kActiveFetalKickCounterDuration = "duration"
 
 enum ActiveStepType:String{
     // Active Steps.
-    case audioStep = "task-audio"
-    case fitnessStep = "task-fitnessCheck"
-    case holePegTestStep = "task-holePegTest"
-    case psatStep = "task-psat"
+    case audioStep = "audio"
+    case fitnessStep = "fitnessCheck"
+    case holePegTestStep = "holePegTest"
+    case psatStep = "psat"
     case reactionTime
-    case shortWalkStep = "task-shortWalk"
-    case spatialSpanMemoryStep = "task-spatialSpanMemory"
-    case timedWalkStep = "task-timedWalk"
+    case shortWalkStep = "shortWalk"
+    case spatialSpanMemoryStep = "spatialSpanMemory"
+    case timedWalkStep = "timedWalk"
     case timedWalkWithTurnAroundStep
-    case toneAudiometryStep = "task-toneAudiometry"
-    case towerOfHanoi = "task-towerOfHanoi"
-    case tremorTestStep = "task-tremorTest"
-    case twoFingerTappingIntervalStep = "task-twoFingerTappingInterval"
+    case toneAudiometryStep = "toneAudiometry"
+    case towerOfHanoi = "towerOfHanoi"
+    case tremorTestStep = "tremorTest"
+    case twoFingerTappingIntervalStep = "twoFingerTappingInterval"
     case walkBackAndForthStep
     case kneeRangeOfMotion
     case shoulderRangeOfMotion
-    case fetalKickCounter = "task-fetalKickCounter"
+    case fetalKickCounter = "fetalKickCounter"
 }
 
 
 
 class ActivityActiveStep: ActivityStep {
     
-    var options:ORKPredefinedTaskOption?
+    var options:ORKPredefinedTaskOption? // predefined task options
     
-    var formatDict:Dictionary<String, Any>?
+    var formatDict:Dictionary<String, Any>? // format dict holds data specific to question type
     
-    var activeType:ActiveStepType?
+    var activeType:ActiveStepType? // specifies type of activeType
     
     override init() {
         /* default Initializer Method */
@@ -137,10 +140,12 @@ class ActivityActiveStep: ActivityStep {
         activeType = .audioStep
     }
     
+    
+    /* Setter method to set Activity Active Steps
+     @ stepDict should  should contains all params for ActivityStep
+     */
     override func initWithDict(stepDict: Dictionary<String, Any>) {
-        /* Setter method to set Activity Active Steps
-         @ stepDict should  should contains all params for ActivityStep
-         */
+        
         if Utilities.isValidObject(someObject: stepDict as AnyObject?){
             
             super.initWithDict(stepDict: stepDict)
@@ -157,8 +162,8 @@ class ActivityActiveStep: ActivityStep {
                 self.options = []
             }
             
-            if Utilities.isValidValue(someObject: stepDict[kActivityStepActiveType] as AnyObject?){
-                self.activeType = ActiveStepType(rawValue: stepDict[kActivityStepActiveType] as! String)
+            if Utilities.isValidValue(someObject: stepDict[kActivityStepActiveResultType] as AnyObject?){
+                self.activeType = ActiveStepType(rawValue: stepDict[kActivityStepActiveResultType] as! String)
             }
             
             if Utilities.isValidObject(someObject: stepDict[kActivityStepActiveFormat] as AnyObject ){
@@ -171,11 +176,11 @@ class ActivityActiveStep: ActivityStep {
         
     }
     
-    
+    /* Method to get Active Tasks
+     @returns a ORTask for active step
+     */
     func getActiveTask() -> ORKTask? {
-        /* Method to get Active Tasks
-         @returns a ORTask for active step
-         */
+        
         
         if Utilities.isValidObject(someObject: self.formatDict as AnyObject?)
         {
@@ -183,7 +188,7 @@ class ActivityActiveStep: ActivityStep {
             //&& Utilities.isValidValue(someObject: self.options as AnyObject?)
             switch self.activeType! as ActiveStepType {
                 
-            case .audioStep :
+            case .audioStep : // creates an Audio step
                 
                 if  Utilities.isValidValue(someObject:formatDict?[kActiveAudioSpeechInstruction] as AnyObject?)
                     && Utilities.isValidValue(someObject:formatDict?[kActiveAudioShortSpeechInstruction] as AnyObject?)
@@ -205,7 +210,7 @@ class ActivityActiveStep: ActivityStep {
                     return nil
                 }
                 
-            case .fitnessStep :
+            case .fitnessStep : // creates an fitness check step
                 
                 if  Utilities.isValidValue(someObject:formatDict?[kActiveFitnessCheckWalkDuration] as AnyObject?)
                     && Utilities.isValidValue(someObject:formatDict?[kActiveFitnessCheckRestDuration] as AnyObject?)
@@ -224,7 +229,8 @@ class ActivityActiveStep: ActivityStep {
                     Logger.sharedInstance.debug("fitnessStep:formatDict has null values:\(formatDict)")
                     return nil
                 }
-            case .holePegTestStep :
+            case .holePegTestStep : // creates an hole peg test step
+                
                 if  Utilities.isValidValue(someObject:formatDict?[kActiveHolePegTestDominantHand] as AnyObject?)
                     && Utilities.isValidValue(someObject:formatDict?[kActiveHolePegTestNumberOfPegs] as AnyObject?)
                     && Utilities.isValidValue(someObject:formatDict?[kActiveHolePegTestThreshold] as AnyObject?)
@@ -247,7 +253,7 @@ class ActivityActiveStep: ActivityStep {
                     Logger.sharedInstance.debug("holePegTestStep:formatDict has null values:\(formatDict)")
                     return nil
                 }
-            case .psatStep :
+            case .psatStep : // creates an PSAT Step
                 
                 if  Utilities.isValidValue(someObject:formatDict?[kActivePSATPresentationMode] as AnyObject?)
                     && Utilities.isValidValue(someObject:formatDict?[kActivePSATInterStimulusInterval] as AnyObject?)
@@ -271,7 +277,7 @@ class ActivityActiveStep: ActivityStep {
                 }
                 
                 
-            case .shortWalkStep:
+            case .shortWalkStep: // creates an short walk step
                 
                 if  Utilities.isValidValue(someObject:formatDict?[kActiveShortWalkNumberOfStepsPerLeg] as AnyObject?)
                     && Utilities.isValidValue(someObject:formatDict?[kActiveShortWalkRestDuration] as AnyObject?)
@@ -286,7 +292,7 @@ class ActivityActiveStep: ActivityStep {
                 }
                 
                 
-            case .spatialSpanMemoryStep :
+            case .spatialSpanMemoryStep : // creates a spatial span memory step
                 
                 if  Utilities.isValidValue(someObject:formatDict?[kActiveSpatialSpanMemoryInitialSpan] as AnyObject?)
                     && Utilities.isValidValue(someObject:formatDict?[kActiveSpatialSpanMemoryMinimumSpan] as AnyObject?)
@@ -321,7 +327,7 @@ class ActivityActiveStep: ActivityStep {
                     Logger.sharedInstance.debug("spatialSpanMemoryStep:formatDict has null values:\(formatDict)")
                     return nil
                 }
-            case .timedWalkStep :
+            case .timedWalkStep : // creates a timed walk step
                 
                 if  Utilities.isValidValue(someObject:formatDict?[kActiveTimedWalkTistanceInMeters] as AnyObject?)
                     && Utilities.isValidValue(someObject:formatDict?[kActiveTimedWalkTimeLimit] as AnyObject?)
@@ -342,7 +348,7 @@ class ActivityActiveStep: ActivityStep {
                     Logger.sharedInstance.debug("timedWalkStep:formatDict has null values:\(formatDict)")
                     return nil
                 }
-            case .toneAudiometryStep :
+            case .toneAudiometryStep : // creates a tone audiometry step
                 
                 if  Utilities.isValidValue(someObject:formatDict?[kActiveToneAudiometrySpeechInstruction] as AnyObject?)
                     && Utilities.isValidValue(someObject:formatDict?[kActiveToneAudiometryShortSpeechInstruction] as AnyObject?)
@@ -361,7 +367,7 @@ class ActivityActiveStep: ActivityStep {
                     Logger.sharedInstance.debug("toneAudiometryStep:formatDict has null values:\(formatDict)")
                     return nil
                 }
-            case .towerOfHanoi :
+            case .towerOfHanoi : // creates a tower of honoi step
                 
                 if  Utilities.isValidValue(someObject:formatDict?[kActiveTowerOfHanoiNumberOfDisks] as AnyObject?)
                 {
@@ -374,7 +380,7 @@ class ActivityActiveStep: ActivityStep {
                     Logger.sharedInstance.debug("towerOfHanoi:formatDict has null values:\(formatDict)")
                     return nil
                 }
-            case .twoFingerTappingIntervalStep :
+            case .twoFingerTappingIntervalStep : // creates a two finger tapping step
                 
                 if  Utilities.isValidValue(someObject:formatDict?[kActiveTwoFingerTappingIntervalDuration] as AnyObject?)
                     &&  Utilities.isValidValue(someObject:formatDict?[kActiveTwoFingerTappingIntervalHandOptions] as AnyObject?)
@@ -391,7 +397,7 @@ class ActivityActiveStep: ActivityStep {
                     return nil
                 }
                 
-            case .tremorTestStep :
+            case .tremorTestStep : // creates a tremor test step
                 if  Utilities.isValidValue(someObject:formatDict?[kActiveTremorTestActiveStepDuration] as AnyObject?)
                     &&  Utilities.isValidValue(someObject:formatDict?[kActiveTremorTestHandOptions] as AnyObject?){
                     
@@ -423,13 +429,15 @@ class ActivityActiveStep: ActivityStep {
                 }
                 
                 
-            case .fetalKickCounter :
+            case .fetalKickCounter : // creates a fetal kick counter step
                 
                 if  Utilities.isValidValue(someObject:formatDict?[kActiveFetalKickCounterDuration] as AnyObject?)
                     
                 {
-                    // need to create new  one
-                    return nil
+                    let fetalKickTask:FetalKickCounterTask? = FetalKickCounterTask()
+                    fetalKickTask?.initWithFormatDuration(duration: formatDict?[kActiveFetalKickCounterDuration] as! Int)
+                    
+                    return fetalKickTask?.getTask()
                     
                 }
                 else{
@@ -437,9 +445,6 @@ class ActivityActiveStep: ActivityStep {
                     return nil
                     
                 }
-                
-                
-                
                 
                 
             default:

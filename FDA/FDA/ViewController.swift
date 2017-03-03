@@ -43,8 +43,8 @@ class ViewController: UIViewController,ORKTaskViewControllerDelegate {
         
         
         //run completed
-        let start = "2017-01-31 10:00:00"
-        let end = "2022-06-30"
+        let start = "2017-01-26 10:00:00"
+        let end = "2017-01-30"
         let runtime = "2017-03-12"
         
         
@@ -68,9 +68,11 @@ class ViewController: UIViewController,ORKTaskViewControllerDelegate {
         schedular.endTime = endDate
         schedular.lastRunTime = rendDate
         
-        schedular.setDailyRuns()
+        //schedular.setDailyRuns()
         //schedular.setWeeklyRuns()
         //schedular.setMonthlyRuns()
+        //schedular.setDailyFrequenyRuns()
+        schedular.setScheduledRuns()
         
     }
     

@@ -10,7 +10,7 @@ import UIKit
 import ResearchKit
 
 //let user = User()
-let activitybuilder:ActivityBuilder? = ActivityBuilder()
+let activitybuilder:ActivityBuilder? = ActivityBuilder.currentActivityBuilder
 let consentbuilder:ConsentBuilder? = ConsentBuilder()
 let user = User.currentUser
 
@@ -27,8 +27,9 @@ class ViewController: UIViewController,ORKTaskViewControllerDelegate {
         self.setPrefereneces()
         self.addResources()
         
-        //self.buildTask()
-        self.kickCounterTaskTest()
+        self.buildTask()
+       // self.kickCounterTaskTest()
+        
         
         
         
@@ -141,18 +142,15 @@ class ViewController: UIViewController,ORKTaskViewControllerDelegate {
     
     
     
-    
-    
-    
-    
-    
     func buildTask()  {
+        
+        // let filePath  = Bundle.main.path(forResource: "LatestActive_Taskdocument", ofType: "json")
         
         //let filePath  = Bundle.main.path(forResource: "ActiveTask", ofType: "json")
         
-        // let filePath  = Bundle.main.path(forResource: "TaskSchema", ofType: "json")
+         let filePath  = Bundle.main.path(forResource: "TaskSchema", ofType: "json")
         
-        let filePath  = Bundle.main.path(forResource: "Acivity_Question", ofType: "json")
+        //let filePath  = Bundle.main.path(forResource: "Acivity_Question", ofType: "json")
         
         let data = NSData(contentsOfFile: filePath!)
         
@@ -169,23 +167,12 @@ class ViewController: UIViewController,ORKTaskViewControllerDelegate {
                 if Utilities.isValidObject(someObject: dataDict?["Result"] as? Dictionary<String, Any> as AnyObject?){
                     
                     
-                     //activitybuilder?.initActivityWithDict(dict: dataDict?["Result"] as! Dictionary<String, Any>)
+                     activitybuilder?.initActivityWithDict(dict: dataDict?["Result"] as! Dictionary<String, Any>)
                     
-                     //task = activitybuilder?.createTask()
+                     task = activitybuilder?.createTask()
                     
                     
                     
-                    //------------------------
-                    var orkStepArray:[ORKStep]?
-                    
-                    orkStepArray = Array<ORKStep>()
-                    let countDownStep:ORKCountdownStep? = ORKCountdownStep.init(identifier: "countdown")
-                     countDownStep?.stepDuration = 30
-                    
-                    orkStepArray?.append(countDownStep!)
-                    task =  ORKOrderedTask(identifier: (countDownStep?.identifier)!, steps: orkStepArray)
-                    
-                    //---------------------------
                     
                     
                     
@@ -209,8 +196,7 @@ class ViewController: UIViewController,ORKTaskViewControllerDelegate {
             print("json error: \(error.localizedDescription)")
         }
         
-        
-        
+      
         
     }
     

@@ -30,16 +30,32 @@ class ActivityResult {
         self.result = Array()
     }
     
+    
+    /* Initializer method for the instance
+     @param taskResult  is the task Result
+     */
+    
     func initWithORKTaskResult(taskResult:ORKTaskResult) {
+        
         for stepResult in taskResult.results!{
             let activityStepResult:ActivityStepResult? = ActivityStepResult()
             
-                activityStepResult?.initWithORKStepResult(stepResult: stepResult as! ORKStepResult , activityType:(self.activity?.type)!)
-                self.result?.append(activityStepResult!)
-        
+            
+            activityStepResult?.initWithORKStepResult(stepResult: stepResult as! ORKStepResult , activityType:(self.activity?.type)!)
+            
+            
+            self.result?.append(activityStepResult!)
+            
+            print("###: \n  \(activityStepResult?.getActivityStepResultDict())")
+            
+            
         }
     }
     
+    
+    /* Initializer method
+     @param activityDict  contains all the activity related data
+     */
     
     func initWithDict(activityDict:Dictionary<String, Any>){
         
@@ -105,9 +121,13 @@ class ActivityResult {
     }
     
     
+    /*
+     getResultDictionary creates the dictionary for the step being used
+     returns the dictionary of activitysteps
+     */
     func getResultDictionary() -> Dictionary<String,Any>? {
         
-        // method to get the dictionary for Api
+        
         var activityDict:Dictionary<String,Any>?
         
         if Utilities.isValidValue(someObject: self.type as AnyObject?){

@@ -11,7 +11,7 @@ import ResearchKit
 
 //MARK:Api Constants
 let kActivityType = "type"
-let kActivityInfo = "info"
+let kActivityInfoMetaData = "metadata"
 
 let kActivityStudyId = "studyId"
 let kActivityActivityId = "qId"
@@ -38,7 +38,7 @@ let kActivityLastModified = "lastModified"
 
 enum ActivityType:String{
     case Questionnaire = "Questionnaire"
-    case activeTask = "active task"
+    case activeTask = "task"
     
     case questionnaireAndActiveTask = "QuestionnaireAndActiveTask"
 }
@@ -62,7 +62,8 @@ class Activity{
     
     var schedule:Schedule?
     var steps:Array<Dictionary<String,Any>>?
-    var orkSteps:Array<ORKStep> //Presently not in use need to check if we can use
+    var orkSteps:Array<ORKStep>?
+    var activitySteps:Array<ActivityStep>?
     
     var result:ActivityResult?
     
@@ -93,6 +94,8 @@ class Activity{
         self.result = nil
         self.restortionData = Data()
         self.orkSteps =  Array<ORKStep>()
+        
+        self.activitySteps = Array<ActivityStep>()
     }
     
     //MARK:Initializer Methods
@@ -155,7 +158,7 @@ class Activity{
             }
             
             
-            self.setInfo(infoDict: activityDict[kActivityInfo] as! Dictionary<String,Any>)
+            self.setInfo(infoDict: activityDict[kActivityInfoMetaData] as! Dictionary<String,Any>)
             
             self.setConfiguration(configurationDict:activityDict[kActivityConfiguration] as! Dictionary<String,Any> )
             self.setStepArray(stepArray:activityDict[kActivitySteps] as! Array )
@@ -246,6 +249,20 @@ class Activity{
  
     }
     
+    func setActivityStepArray(stepArray:Array<ActivityStep>) {
+        //method to set step array
+        
+        if Utilities.isValidObject(someObject: stepArray as AnyObject?){
+            self.activitySteps? = stepArray 
+        }
+        else{
+            Logger.sharedInstance.debug("stepArray is null:\(stepArray)")
+        }
+    }
+    
+    
+    
+    
     func getRestortionData() -> Data {
        return self.restortionData!
     }
@@ -253,77 +270,7 @@ class Activity{
         self.restortionData = restortionData
     }
     
-    func getNativeTask() -> ORKTask? {
-        
-        let orkTask:ORKTask?
-        
-        if Utilities.isValidObject(someObject: self.steps as AnyObject?) && Utilities.isValidValue(someObject: self.type as AnyObject?){
-            
-            var orkStepArray:[ORKStep]?
-            
-            switch self.type! as ActivityType{
-                
-            case .Questionnaire:
-                
-                for var stepDict in self.steps! {
-                    
-                    if Utilities.isValidObject(someObject: stepDict as AnyObject?) {
-                        
-                        if Utilities.isValidValue(someObject: stepDict[kActivityStepType] as AnyObject ){
-                            
-                            switch stepDict[kActivityStepType] as! ActivityStepType {
-                            case .instruction:
-                                
-                                let instructionStep:ActivityInstructionStep? = ActivityInstructionStep()
-                                instructionStep?.initWithDict(stepDict: stepDict)
-                                orkStepArray?.append((instructionStep?.getInstructionStep())!)
-                                
-                            case .question:
-                                
-                                let questionStep:ActivityQuestionStep? = ActivityQuestionStep()
-                                questionStep?.initWithDict(stepDict: stepDict)
-                                orkStepArray?.append((questionStep?.getQuestionStep())!)
-                                
-                            case .form: break
-                                
-                                
-                            default: break
-                                
-                            }
-                            
-                            
-                        }
-                    }
-                    else{
-                        Logger.sharedInstance.debug("Activity:stepDict is null:\(stepDict)")
-                        break;
-                    }
-                }
-                
-                if (orkStepArray?.count)! > 0 {
-                    
-                   
-                    
-                    
-                }
-                
-                
-                
-            case .activeTask: break
-                
-            default: break
-                
-            }
-            
-        }
-        else{
-            Logger.sharedInstance.debug("ActivityModel:steps Array is null:\(self.steps)")
-        }
-        
-        return nil
-    }
-    
-    
+ 
 }
 
 

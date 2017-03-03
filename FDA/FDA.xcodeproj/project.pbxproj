@@ -80,6 +80,7 @@
 		6EF05A941E4DAB0400CD7661 /* ResearchKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EF05A911E4DAAFB00CD7661 /* ResearchKit.framework */; };
 		6EF05A951E4DAB0400CD7661 /* ResearchKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6EF05A911E4DAAFB00CD7661 /* ResearchKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		6EF05A991E4DC36400CD7661 /* StepProvider.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6EF05A981E4DC36400CD7661 /* StepProvider.plist */; };
+		6EF748BF1E69645700F1E89E /* LatestActive_Taskdocument.json in Resources */ = {isa = PBXBuildFile; fileRef = 6EF748BE1E69645700F1E89E /* LatestActive_Taskdocument.json */; };
 		74604306BE653DDFE2407EFF /* Pods_FDATests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7E309D273812BCB954E8968 /* Pods_FDATests.framework */; };
 		941909B51E52FA9B001B01C5 /* Study.swift in Sources */ = {isa = PBXBuildFile; fileRef = 941909B41E52FA9B001B01C5 /* Study.swift */; };
 		941909B81E5310D6001B01C5 /* Gateway.swift in Sources */ = {isa = PBXBuildFile; fileRef = 941909B71E5310D6001B01C5 /* Gateway.swift */; };
@@ -234,6 +235,7 @@
 		6EED7B3C1E65752C002C1FA3 /* FetalKickCounterTask.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FetalKickCounterTask.swift; sourceTree = "<group>"; };
 		6EF05A8A1E4DAAFB00CD7661 /* ResearchKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = ResearchKit.xcodeproj; sourceTree = "<group>"; };
 		6EF05A981E4DC36400CD7661 /* StepProvider.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = StepProvider.plist; sourceTree = "<group>"; };
+		6EF748BE1E69645700F1E89E /* LatestActive_Taskdocument.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = LatestActive_Taskdocument.json; sourceTree = "<group>"; };
 		7E059BDA3C24219381C2DAD8 /* Pods-FDATests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FDATests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FDATests/Pods-FDATests.debug.xcconfig"; sourceTree = "<group>"; };
 		941909B41E52FA9B001B01C5 /* Study.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Study.swift; sourceTree = "<group>"; };
 		941909B71E5310D6001B01C5 /* Gateway.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Gateway.swift; sourceTree = "<group>"; };
@@ -413,6 +415,7 @@
 				6ED1B2251E54255900BF463F /* ActivityStepResultModel */,
 				6ED1B2221E54254900BF463F /* ActivityResultModel */,
 				6ED1B21F1E54253800BF463F /* ActivityModel */,
+				6E9B39BC1E55DFDA0037D09D /* ActivityBuilder */,
 				6ED1B21C1E54252500BF463F /* ScheduleModel */,
 				94CD96E31E4AF61800946477 /* NetworkModule */,
 				6ECA92861E49F0BA00DA6287 /* Utilities */,
@@ -432,7 +435,6 @@
 				489636BF1E670D8000C718CF /* SignUp/SignInModule */,
 				489636C01E670E2E00C718CF /* StudyOverviewModule */,
 				489636C11E670E4D00C718CF /* NotificationsModule */,
-				6E9B39BC1E55DFDA0037D09D /* ActivityBuilder */,
 				6E7D2D591E433E8800763D4C /* AppDelegate.swift */,
 				6E7D2D5B1E433E8800763D4C /* ViewController.swift */,
 				6E7D2D5D1E433E8800763D4C /* Main.storyboard */,
@@ -475,6 +477,7 @@
 		6E9B39BC1E55DFDA0037D09D /* ActivityBuilder */ = {
 			isa = PBXGroup;
 			children = (
+				6EF748BE1E69645700F1E89E /* LatestActive_Taskdocument.json */,
 				6EC129231E64624F00B90167 /* Acivity_Question.json */,
 				6ED9D5DA1E5B2D5100A0719D /* ActiveTask.json */,
 				6EABD0321E56FE2000623D94 /* TaskSchema.json */,
@@ -921,6 +924,7 @@
 				6E7D2D8E1E43445600763D4C /* UserPreferences.plist in Resources */,
 				6ED9D5DB1E5B2D5200A0719D /* ActiveTask.json in Resources */,
 				6E7D2D641E433E8800763D4C /* LaunchScreen.storyboard in Resources */,
+				6EF748BF1E69645700F1E89E /* LatestActive_Taskdocument.json in Resources */,
 				6EAB39A91E4B0B4A003442B8 /* Resources.plist in Resources */,
 				6EF05A991E4DC36400CD7661 /* StepProvider.plist in Resources */,
 				6ED134381E5F1B110090C976 /* Consent.json in Resources */,

@@ -394,6 +394,7 @@ class UserStudyStatus{
     var studyId:String! = ""
     var status:StudyStatus = .yetToJoin
     var consent:String! = ""
+    var joiningDate:Date!
     
     init() {
         

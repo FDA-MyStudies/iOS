@@ -11,6 +11,9 @@ import ResearchKit
 
 class ActivityBuilder {
     
+    
+     static var currentActivityBuilder = ActivityBuilder()
+    
     var activity:Activity?
     var actvityResult:ActivityResult?
     public var task: ORKTask?
@@ -42,6 +45,7 @@ class ActivityBuilder {
             
             orkStepArray = Array<ORKStep>()
             
+            var activityStepArray:[ActivityStep]? = Array<ActivityStep>()
             switch (activity?.type!)! as ActivityType{
                 
             case .Questionnaire:
@@ -59,6 +63,7 @@ class ActivityBuilder {
                                 let instructionStep:ActivityInstructionStep? = ActivityInstructionStep()
                                 instructionStep?.initWithDict(stepDict: stepDict)
                                 orkStepArray?.append((instructionStep?.getInstructionStep())!)
+                                activityStepArray?.append(instructionStep!)
                                 
                             case .question:
                                 
@@ -66,13 +71,14 @@ class ActivityBuilder {
                                 questionStep?.initWithDict(stepDict: stepDict)
                                 
                                 orkStepArray?.append((questionStep?.getQuestionStep())!)
+                                activityStepArray?.append(questionStep!)
                                 
                             case .form:
                                 let formStep:ActivityFormStep? = ActivityFormStep()
                                 formStep?.initWithDict(stepDict: stepDict)
                                 
                                 orkStepArray?.append((formStep?.getFormStep())!)
-                                
+                                activityStepArray?.append(formStep!)
                                 
                             default: break
                                 
@@ -92,6 +98,8 @@ class ActivityBuilder {
                 if (orkStepArray?.count)! > 0 {
                     
                     self.activity?.setORKSteps(orkStepArray: orkStepArray!)
+                    
+                    self.activity?.setActivityStepArray(stepArray: activityStepArray!)
                     
                     // checking if navigable or randomized or ordered
                     if (activity?.branching)! {
@@ -137,13 +145,19 @@ class ActivityBuilder {
                 
             case .activeTask:
                 
-                var stepDict = activity?.steps![0]
+                var stepDict = activity?.steps!.last
                 
                 if Utilities.isValidObject(someObject: stepDict as AnyObject?) && Utilities.isValidValue(someObject: stepDict?[kActivityStepType] as AnyObject ) {
                     
                     let activeStep:ActivityActiveStep? = ActivityActiveStep()
                     activeStep?.initWithDict(stepDict: stepDict!)
                     task = activeStep?.getActiveTask()
+                    activityStepArray?.append(activeStep!)
+                    
+                    if (activityStepArray?.count)! > 0 {
+                          self.activity?.setActivityStepArray(stepArray: activityStepArray!)
+                    }
+                    
                     return task!
                 }
                 else{
@@ -199,6 +213,10 @@ class ActivityBuilder {
 
                 if (orkStepArray?.count)! > 0 {
                     
+                    if (activityStepArray?.count)! > 0 {
+                          self.activity?.setActivityStepArray(stepArray: activityStepArray!)
+                    }
+                    
                     self.activity?.setORKSteps(orkStepArray: orkStepArray!)
                     task =  ORKOrderedTask(identifier: (activity?.actvityId!)!, steps: orkStepArray)
                     return task!
@@ -212,12 +230,19 @@ class ActivityBuilder {
             default: break
                 
             }
+            
+           
+            
         }
         else{
             Logger.sharedInstance.debug("activity is null:\(activity)")
         }
         
         return nil
+        
+        
+         self.actvityResult?.setActivity(activity: self.activity!)
+        
     }
     
     

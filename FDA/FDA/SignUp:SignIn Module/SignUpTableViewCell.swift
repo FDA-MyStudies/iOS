@@ -8,9 +8,8 @@
 
 import UIKit
 import Foundation
-import IQKeyboardManagerSwift
 
-enum TableViewTags : Int {
+enum SignUpTableViewTags : Int {
     case FirstNameTag = 0
     case LastName
     case EmailId

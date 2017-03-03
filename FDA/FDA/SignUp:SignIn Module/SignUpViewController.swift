@@ -27,10 +27,10 @@ class SignUpViewController : UIViewController{
         super.viewDidLoad()
         
         //Used to set border color for bottom view
-        buttonSubmit?.layer.borderColor = UIColor.init(colorLiteralRed: 0/255.0, green: 124/255.0, blue: 186/255.0, alpha: 1.0).cgColor
+        buttonSubmit?.layer.borderColor = kUicolorForButtonBackground
         
         self.agreeToTermsAndConditions()
-        self.title = "SIGN UP"
+        self.title = NSLocalizedString("SIGN UP", comment: "")
         
         //load plist info
         let plistPath = Bundle.main.path(forResource: "SignUpPlist", ofType: ".plist", inDirectory:nil)
@@ -38,6 +38,10 @@ class SignUpViewController : UIViewController{
         
         //Automatically takes care  of text field become first responder and scroll of tableview
         IQKeyboardManager.sharedManager().enable = true
+        
+        //Used for background tap dismiss keyboard
+        let gestureRecognizwe : UITapGestureRecognizer = UITapGestureRecognizer.init(target: self, action: #selector(SignUpViewController.dismissKeyboard))
+        self.tableView?.addGestureRecognizer(gestureRecognizwe)
         
     }
     
@@ -53,13 +57,13 @@ class SignUpViewController : UIViewController{
         
     }
 
-    //MARK: Attributed string for Terms & Privacy Policy
+    //Attributed string for Terms & Privacy Policy
     func agreeToTermsAndConditions(){
         
         labelTermsAndConditions?.numberOfLines = 0;
         
         //Step 1: Define a normal attributed string for non-link texts
-        let string = "I Agree to the Terms and Privacy Policy"
+        let string = NSLocalizedString("I Agree to the Terms and Privacy Policy", comment: "")
         
         let attributes = [NSForegroundColorAttributeName: UIColor.black,
                           NSFontAttributeName: UIFont.preferredFont(forTextStyle: UIFontTextStyle.caption1)]
@@ -70,11 +74,11 @@ class SignUpViewController : UIViewController{
         let handler = {
             (hyperLabel: FRHyperLabel?, substring: String?) -> Void in
             
-            if substring == "Terms"{
+            if substring == NSLocalizedString("Terms", comment: ""){
                 //self.performSegue(withIdentifier: "TermsOfUse", sender: nil)
                 
             }
-            else if substring == "Privacy Policy" {
+            else if substring == NSLocalizedString("Privacy Policy" , comment: ""){
                 //self.performSegue(withIdentifier: "TermsOfUse", sender: nil)
             }
         }
@@ -84,64 +88,51 @@ class SignUpViewController : UIViewController{
         
     }
     
+    //Dismiss key board when clicked on Background
+    func dismissKeyboard(){
+        self.view.endEditing(true)
+    }
+    
+    //All validation checks and Password,Email complexity checks
     func validateAllFields() -> Bool{
-        if user.firstName == "" {//(Utilities.isValidValue(someObject: user.firstName as AnyObject?)){
-            UIUtilities.showAlertWithMessage(alertMessage: "Please enter your first name.")
+        if user.firstName == "" {
+            self.showAlertMessages(textMessage: "Please enter your first name.")
             return false
-        }else if user.lastName == ""{//(Utilities.isValidValue(someObject: user.lastName as AnyObject?)){
-            UIUtilities.showAlertWithMessage(alertMessage: "Please enter your last name.")
+        }else if user.lastName == ""{
+            self.showAlertMessages(textMessage: "Please enter your last name.")
             return false
-        }else if user.emailId == "" {//(Utilities.isValidValue(someObject: user.emailId as AnyObject?)){
-            UIUtilities.showAlertWithMessage(alertMessage: "Please enter your email address.")
+        }else if user.emailId == "" {
+            self.showAlertMessages(textMessage: "Please enter your email address.")
             return false
-        }else if user.password == ""{//(Utilities.isValidValue(someObject: user.password as AnyObject?)){
-            UIUtilities.showAlertWithMessage(alertMessage: "Please enter your password.")
+        }else if !(Utilities.isValidEmail(testStr: user.emailId!)){
+            self.showAlertMessages(textMessage: "Please enter valid email address.")
             return false
-        }else if user.confirmPassword == ""{//(Utilities.isValidValue(someObject: user.confirmPassword as AnyObject?)){
-            UIUtilities.showAlertWithMessage(alertMessage: "Please enter confirm password.")
+        }else if user.password == ""{
+            self.showAlertMessages(textMessage: "Please enter your password.")
+            return false
+        }else if user.confirmPassword == ""{
+            self.showAlertMessages(textMessage: "Please enter confirm password.")
             return false
         }else if (user.password != user.confirmPassword){
-            UIUtilities.showAlertWithMessage(alertMessage: "New password and confirm password does not match.")
+            self.showAlertMessages(textMessage: "New password and confirm password does not match.")
             return false
             
         }else if ((user.password?.characters.count)! < 8 && (user.password?.characters.count)! != 0) || ((user.confirmPassword?.characters.count)! < 8 && user.confirmPassword?.characters.count != 0) {
-            UIUtilities.showAlertWithMessage(alertMessage: "Password should have minimum of 8 characters.")
+            self.showAlertMessages(textMessage: "Password should have minimum of 8 characters.")
             return false
         }
         
-        if self.checkTextSufficientComplexity(text: (user.password)!) == false || self.checkTextSufficientComplexity(text: (user.confirmPassword)!) == false {
-            UIUtilities.showAlertWithMessage(alertMessage: "Password should have minimum of 1 special character, 1 upper case letter and 1 numeric number.")
+        if Utilities.isPasswordValid(text: (user.password)!) == false || Utilities.isPasswordValid(text: (user.confirmPassword)!) == false {
+            self.showAlertMessages(textMessage: "Password should have minimum of 1 special character, 1 upper case letter and 1 numeric number.")
             return false
         }
         
         return true
-    
     }
     
-    //Used to check all the validations for password
-    func checkTextSufficientComplexity( text : String) -> Bool{
-        let text = text
-        let capitalLetterRegEx  = ".*[A-Z]+.*"
-        let texttest = NSPredicate(format:"SELF MATCHES %@", capitalLetterRegEx)
-        let capitalresult = texttest.evaluate(with: text)
-        print("\(capitalresult)")
-
-        let numberRegEx  = ".*[0-9]+.*"
-        let texttest1 = NSPredicate(format:"SELF MATCHES %@", numberRegEx)
-        let numberresult = texttest1.evaluate(with: text)
-        print("\(numberresult)")
-        
-        let specialCharacterRegEx  = ".*[!&^%$#@()/]+.*"
-        let texttest2 = NSPredicate(format:"SELF MATCHES %@", specialCharacterRegEx)
-        
-        let specialresult = texttest2.evaluate(with: text)
-        print("\(specialresult)")
-        
-        if capitalresult == false || numberresult == false || specialresult == false {
-            return false
-        }
-        
-        return true
+    //Used to show the alert using Utility
+    func showAlertMessages(textMessage : String){
+        UIUtilities.showAlertMessage("", errorMessage: NSLocalizedString(textMessage, comment: ""), errorAlertActionTitle: NSLocalizedString("OK", comment: ""), viewControllerUsed: self)
     }
     
     //MARK: Submit Button Action and validation checks
@@ -149,12 +140,13 @@ class SignUpViewController : UIViewController{
         
         if self.validateAllFields() == true {
             
-            if agreedToTerms{
+            if !(agreedToTerms){
+                self.showAlertMessages(textMessage: "Please agree to terms and conditions.")
+            }else{
                 //Call the Webservice
                 
                 
-            }else{
-                UIUtilities.showAlertWithMessage(alertMessage: "Please agree to terms and conditions")
+                
             }
         }
     }
@@ -184,7 +176,9 @@ extension SignUpViewController : UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "CommonDetailsCell", for: indexPath) as! SignUpTableViewCell
         
         var isSecuredEntry : Bool = false
-        if indexPath.row == 3 || indexPath.row == 4{
+        
+        if indexPath.row == SignUpTableViewTags.Password.rawValue ||
+            indexPath.row == SignUpTableViewTags.ConfirmPassword.rawValue{
             isSecuredEntry = true
         }
         
@@ -208,65 +202,39 @@ extension SignUpViewController : UITableViewDelegate{
 extension SignUpViewController : UITextFieldDelegate{
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        
         print(textField.tag)
         
-        //        if textField.tag == 3{
-        //            textField.isSecureTextEntry = true
-        //        }else if textField.tag == 4{
-        //            textField.isSecureTextEntry = true
-        //        }else{
-        //            textField.isSecureTextEntry = false
-        //        }
+
     }
-    
-    //    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-    //
-    //
-    //    }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
         print(textField.text!)
         switch textField.tag {
-        case TableViewTags.FirstNameTag.rawValue:
-            
+        case SignUpTableViewTags.FirstNameTag.rawValue:
             user.firstName = textField.text
-            
             break
             
-        case TableViewTags.LastName.rawValue:
-            
+        case SignUpTableViewTags.LastName.rawValue:
             user.lastName = textField.text
-            
             break
             
-        case TableViewTags.EmailId.rawValue:
-            
+        case SignUpTableViewTags.EmailId.rawValue:
             user.emailId = textField.text
-            
             break
             
-        case TableViewTags.Password.rawValue:
-            
+        case SignUpTableViewTags.Password.rawValue:
             user.password = textField.text
-            
             break
             
-        case TableViewTags.ConfirmPassword.rawValue:
-            
+        case SignUpTableViewTags.ConfirmPassword.rawValue:
             user.confirmPassword = textField.text
-            
             break
+            
         default:
             print("No Matching data Found")
             break
         }
-        
-        
-        
     }
-    
-    
 }
 
 

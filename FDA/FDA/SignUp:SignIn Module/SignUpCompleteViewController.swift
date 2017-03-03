@@ -1,24 +1,25 @@
 //
-//  VerificationStepViewController.swift
+//  SignUpCompleteViewController.swift
 //  FDA
 //
-//  Created by Ravishankar on 2/28/17.
+//  Created by Ravishankar on 3/1/17.
 //  Copyright © 2017 BTC. All rights reserved.
 //
 
 import Foundation
 import UIKit
 
-class VerificationViewController : UIViewController{
+
+class SignUpCompleteViewController : UIViewController{
     
-    @IBOutlet var buttonContinue : UIButton?
+    @IBOutlet var buttonNext : UIButton?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         //Used to set border color for bottom view
-        buttonContinue?.layer.borderColor = UIColor.init(colorLiteralRed: 0/255.0, green: 124/255.0, blue: 186/255.0, alpha: 1.0).cgColor
-        self.title = ""
+        buttonNext?.layer.borderColor = kUicolorForButtonBackground
+        self.title = NSLocalizedString("", comment: "")
         
     }
     
@@ -34,12 +35,14 @@ class VerificationViewController : UIViewController{
         
     }
     
+    
     //MARK: Submit Button Action and validation checks
-    @IBAction func continueButtonAction(_ sender: Any) {
+    @IBAction func nextButtonAction(_ sender: Any) {
         
         
         
         
         
     }
+    
 }

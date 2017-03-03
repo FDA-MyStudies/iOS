@@ -7,6 +7,12 @@
 //
 
 import UIKit
+import Foundation
+
+enum SignInTableViewTags : Int {
+    case EmailId = 0
+    case Password
+}
 
 class SignInTableViewCell: UITableViewCell {
     
@@ -24,4 +30,15 @@ class SignInTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
 
+    //Populate cell data coming in dictionary
+    func populateCellData(data : NSDictionary , securedText : Bool){
+        
+        textFieldValue?.isSecureTextEntry = false
+        if securedText == true {
+            textFieldValue?.isSecureTextEntry = true
+        }
+        labelType?.text = NSLocalizedString((data["helpText"] as? String)!, comment: "")
+        textFieldValue?.placeholder = NSLocalizedString((data["placeHolder"] as? String)!, comment: "")
+    }
+    
 }

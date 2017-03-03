@@ -181,6 +181,33 @@ class Utilities: NSObject {
         return emailTest.evaluate(with: testStr)
     }
     
+    //Used to check all the validations for password
+    class func isPasswordValid( text : String) -> Bool{
+        let text = text
+        let capitalLetterRegEx  = ".*[A-Z]+.*"
+        let texttest = NSPredicate(format:"SELF MATCHES %@", capitalLetterRegEx)
+        let capitalresult = texttest.evaluate(with: text)
+        print("\(capitalresult)")
+        
+        let numberRegEx  = ".*[0-9]+.*"
+        let texttest1 = NSPredicate(format:"SELF MATCHES %@", numberRegEx)
+        let numberresult = texttest1.evaluate(with: text)
+        print("\(numberresult)")
+        
+        let specialCharacterRegEx  = ".*[!&^%$#@()/]+.*"
+        let texttest2 = NSPredicate(format:"SELF MATCHES %@", specialCharacterRegEx)
+        
+        let specialresult = texttest2.evaluate(with: text)
+        print("\(specialresult)")
+        
+        if capitalresult == false || numberresult == false || specialresult == false {
+            return false
+        }
+        
+        return true
+    }
+    
+    
     class func formatNumber( mobileNumber: NSString)-> NSString
     {
         var mobileNumber = mobileNumber

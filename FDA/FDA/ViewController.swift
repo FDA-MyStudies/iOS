@@ -27,7 +27,7 @@ class ViewController: UIViewController,ORKTaskViewControllerDelegate {
         self.setPrefereneces()
         self.addResources()
         
-        self.buildTask()
+        //self.buildTask()
        // self.kickCounterTaskTest()
         
         
@@ -208,12 +208,7 @@ class ViewController: UIViewController,ORKTaskViewControllerDelegate {
                     
                      task = activitybuilder?.createTask()
                     
-                    
-                    
-                    
-                    
-                    
-                    
+                
                    // consentbuilder?.initWithMetaData(metaDataDict:dataDict?["Result"] as! Dictionary<String, Any> )
                    // task = consentbuilder?.createConsentTask()
                     

@@ -54,7 +54,7 @@ class Activity{
     var name:String?
     var version:String?
     var lastModified:Date?
-    var userStatus:UserStudyStatus.StudyStatus?
+    var userStatus:UserActivityStatus.ActivityStatus
     var startDate:Date?
     var endDate:Date?
     var branching:Bool?

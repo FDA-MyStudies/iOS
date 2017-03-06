@@ -41,6 +41,43 @@ class ViewController: UIViewController,ORKTaskViewControllerDelegate {
         
         print(user.getStudyStatus(studyId: "121").description)
         
+        //not available
+//        let start = "2017-03-01"
+//        let end = "2017-03-05"
+        
+        
+        //run completed
+        let start = "2017-01-26 10:00:00"
+        let end = "2017-01-30"
+        let runtime = "2017-03-12"
+        
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        let endDate:Date = dateFormatter.date(from: end)!
+        
+        
+        let sdateFormatter = DateFormatter()
+        sdateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        let startDate:Date = sdateFormatter.date(from: start)!
+        
+        
+        
+        let rdateFormatter = DateFormatter()
+        rdateFormatter.dateFormat = "yyyy-MM-dd"
+        let rendDate:Date = rdateFormatter.date(from: runtime)!
+        
+        let schedular = Schedule()
+        schedular.startTime = startDate
+        schedular.endTime = endDate
+        schedular.lastRunTime = rendDate
+        
+        //schedular.setDailyRuns()
+        //schedular.setWeeklyRuns()
+        //schedular.setMonthlyRuns()
+        //schedular.setDailyFrequenyRuns()
+        schedular.setScheduledRuns()
+        
     }
     
     

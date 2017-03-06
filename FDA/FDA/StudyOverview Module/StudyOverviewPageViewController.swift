@@ -48,7 +48,6 @@ class StudyOverviewPageViewController : UIPageViewController{
     
 }
 
-
 //MARK: Page View Controller delegates
 extension StudyOverviewPageViewController: UIPageViewControllerDataSource {
     func pageViewController(_ pageViewController: UIPageViewController,

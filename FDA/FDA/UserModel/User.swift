@@ -38,7 +38,8 @@ class User{
     var settings : Settings?
     var userType : UserType?
     var userId : String!
-    var password : String?
+    var password : String? = ""
+    var confirmPassword : String? = ""
     var verified : Bool!
     var authToken: String!
     var participatedStudies:Array<UserStudyStatus>! = []

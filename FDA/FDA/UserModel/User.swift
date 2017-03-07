@@ -308,12 +308,14 @@ class Settings{
     var localNotifications :Bool?
     var touchId :Bool?
     var passcode :Bool?
+    var leadTime :String?
     
     init() {
         self.remoteNotifications = false
         self.localNotifications = false
         self.touchId  = false
         self.passcode = false
+        self.leadTime = "00:00"
     }
     
     init(remoteNotifications:Bool?,localNotifications:Bool?,touchId: Bool?,passcode:Bool?){
@@ -334,6 +336,9 @@ class Settings{
     }
     func setPasscode(value : Bool){
         self.passcode = value
+    }
+    func setLeadTime(value:String) {
+        self.leadTime = value
     }
     
     

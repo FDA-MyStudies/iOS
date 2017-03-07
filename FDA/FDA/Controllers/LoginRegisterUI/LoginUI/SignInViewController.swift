@@ -34,6 +34,10 @@ class SignInViewController : UIViewController{
         //Used for background tap dismiss keyboard
         let gestureRecognizwe : UITapGestureRecognizer = UITapGestureRecognizer.init(target: self, action: #selector(SignInViewController.dismissKeyboard))
         self.tableView?.addGestureRecognizer(gestureRecognizwe)
+        
+        
+        //unhide navigationbar
+        self.navigationController?.setNavigationBarHidden(false, animated: true)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -46,6 +50,10 @@ class SignInViewController : UIViewController{
         super.viewDidAppear(animated)
         
         
+    }
+    override func viewWillDisappear(_ animated: Bool) {
+        //hide navigationbar
+        self.navigationController?.setNavigationBarHidden(true, animated: true)
     }
     
     //Used to show the alert using Utility
@@ -72,9 +80,17 @@ class SignInViewController : UIViewController{
             
         }else{
             print("Call the webservice")
-            
+            user.userType = .FDAUser
+            self.navigateToGatewayDashboard()
             
         }
+    }
+    
+    func navigateToGatewayDashboard(){
+        
+        let loginStoryboard = UIStoryboard.init(name: "Gateway", bundle:Bundle.main)
+        let tabbarController = loginStoryboard.instantiateViewController(withIdentifier:"TabbarViewController")
+        self.navigationController?.pushViewController(tabbarController, animated: true)
     }
 }
 

@@ -50,11 +50,13 @@ class StudyListCell: UITableViewCell {
     
     func populateCellWith(study:Study){
         
+        selectedStudy = study
+        
         labelStudyTitle?.text = study.name
         labelStudyShortDescription?.text = study.description
         labelStudySponserName?.text = study.sponserName
         labelStudyCategoryType?.text = study.category
-        
+        studyLogoImage?.image = #imageLiteral(resourceName: "welcomeBg")
         
         self.setStudyStatus(study: study)
         
@@ -62,7 +64,7 @@ class StudyListCell: UITableViewCell {
             
         }
         else {
-            self.setUserStatusForStudy(study: study)
+            //self.setUserStatusForStudy(study: study)
         }
     }
     

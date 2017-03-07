@@ -182,6 +182,9 @@ class ProfileViewController: UIViewController {
      Validation of Profile data
      */
     func validateAllFields() -> Bool{
+        
+        /*
+        
         if user.firstName == "" {
             self.showAlertMessages(textMessage: "Please enter your first name.")
             return false
@@ -213,7 +216,7 @@ class ProfileViewController: UIViewController {
             self.showAlertMessages(textMessage: "Password should have minimum of 1 special character, 1 upper case letter and 1 numeric number.")
             return false
         }
-        
+        */
         return true
     }
     
@@ -331,10 +334,6 @@ extension ProfileViewController : UITextFieldDelegate{
             
         case SignUpTableViewTags.Password.rawValue:
             user.password = textField.text
-            break
-            
-        case SignUpTableViewTags.ConfirmPassword.rawValue:
-            user.confirmPassword = textField.text
             break
             
         default:

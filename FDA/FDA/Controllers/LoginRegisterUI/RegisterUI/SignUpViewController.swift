@@ -44,6 +44,8 @@ class SignUpViewController : UIViewController{
         let gestureRecognizwe : UITapGestureRecognizer = UITapGestureRecognizer.init(target: self, action: #selector(SignUpViewController.dismissKeyboard))
         self.tableView?.addGestureRecognizer(gestureRecognizwe)
         
+        //unhide navigationbar
+        self.navigationController?.setNavigationBarHidden(false, animated: true)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -57,7 +59,7 @@ class SignUpViewController : UIViewController{
         
         
     }
-
+   
     //Attributed string for Terms & Privacy Policy
     func agreeToTermsAndConditions(){
         
@@ -146,6 +148,7 @@ class SignUpViewController : UIViewController{
             }else{
                 //Call the Webservice
                 
+                self.navigateToVerificationController()
                 
                 
             }
@@ -161,6 +164,12 @@ class SignUpViewController : UIViewController{
             agreedToTerms = true
             (sender as! UIButton).isSelected = !(sender as! UIButton).isSelected
         }
+    }
+    
+    
+    func navigateToVerificationController(){
+        
+        self.performSegue(withIdentifier: "verificationSegue", sender: nil)
     }
 }
 

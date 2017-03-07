@@ -35,14 +35,25 @@ class SignUpCompleteViewController : UIViewController{
         
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        //hide navigationbar
+        self.navigationController?.setNavigationBarHidden(true, animated: true)
+    }
+
+    
     
     //Next button Action
     @IBAction func nextButtonAction(_ sender: Any) {
         
+            self.navigateToGatewayDashboard()
+     
+    }
+    
+    func navigateToGatewayDashboard(){
         
-        
-        
-        
+        let loginStoryboard = UIStoryboard.init(name: "Gateway", bundle:Bundle.main)
+        let tabbarController = loginStoryboard.instantiateViewController(withIdentifier:"TabbarViewController")
+        self.navigationController?.pushViewController(tabbarController, animated: true)
     }
     
 }

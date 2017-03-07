@@ -48,6 +48,7 @@ class StudyListViewController: UIViewController {
 
         // Do any additional setup after loading the view.
         //self.addRightBarButton() //Phase2
+        self.navigationItem.hidesBackButton = true
         self.addLeftBarButton()
         
         self.loadTestData()

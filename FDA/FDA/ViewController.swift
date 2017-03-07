@@ -10,7 +10,7 @@ import UIKit
 import ResearchKit
 
 //let user = User()
-let activitybuilder:ActivityBuilder? = ActivityBuilder.currentActivityBuilder
+let activityBuilder:ActivityBuilder? = ActivityBuilder.currentActivityBuilder
 let consentbuilder:ConsentBuilder? = ConsentBuilder()
 let user = User.currentUser
 
@@ -113,7 +113,7 @@ class ViewController: UIViewController,ORKTaskViewControllerDelegate {
                 
             }
             else{
-                activitybuilder?.activity?.restortionData = taskViewController.restorationData
+                activityBuilder?.activity?.restortionData = taskViewController.restorationData
             }
         }
         
@@ -121,7 +121,7 @@ class ViewController: UIViewController,ORKTaskViewControllerDelegate {
             consentbuilder?.consentResult?.initWithORKTaskResult(taskResult:taskViewController.result )
         }
         else{
-            activitybuilder?.actvityResult?.initWithORKTaskResult(taskResult: taskViewController.result)
+            activityBuilder?.actvityResult?.initWithORKTaskResult(taskResult: taskViewController.result)
         }
         
         
@@ -204,9 +204,9 @@ class ViewController: UIViewController,ORKTaskViewControllerDelegate {
                 if Utilities.isValidObject(someObject: dataDict?["Result"] as? Dictionary<String, Any> as AnyObject?){
                     
                     
-                     activitybuilder?.initActivityWithDict(dict: dataDict?["Result"] as! Dictionary<String, Any>)
+                     activityBuilder?.initActivityWithDict(dict: dataDict?["Result"] as! Dictionary<String, Any>)
                     
-                     task = activitybuilder?.createTask()
+                     task = activityBuilder?.createTask()
                     
                 
                    // consentbuilder?.initWithMetaData(metaDataDict:dataDict?["Result"] as! Dictionary<String, Any> )

@@ -44,6 +44,9 @@
                                 <state key="normal" title="www.fda.gov">
                                     <color key="titleColor" red="0.84705882352941175" green="0.8901960784313725" blue="0.90196078431372551" alpha="0.5" colorSpace="calibratedRGB"/>
                                 </state>
+                                <connections>
+                                    <action selector="linkButtonAction:" destination="35J-FP-kDe" eventType="touchUpInside" id="bqh-6U-HP5"/>
+                                </connections>
                             </button>
                             <pageControl opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="2" translatesAutoresizingMaskIntoConstraints="NO" id="4Nk-cF-eK0">
                                 <rect key="frame" x="168" y="472" width="40" height="37"/>
@@ -53,7 +56,7 @@
                                 <color key="pageIndicatorTintColor" red="0.84705882352941175" green="0.8901960784313725" blue="0.90196078431372551" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="currentPageIndicatorTintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </pageControl>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vwF-hX-3DE">
+                            <view alpha="0.80000000000000004" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vwF-hX-3DE">
                                 <rect key="frame" x="0.0" y="607" width="375" height="60"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jyn-tg-ixg">
@@ -127,6 +130,7 @@
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="375" height="667"/>
                     <connections>
+                        <outlet property="buttonLink" destination="zqZ-PQ-IFe" id="z3R-qq-zOp"/>
                         <outlet property="container" destination="HFj-v4-1Yb" id="2gw-Xb-B21"/>
                         <outlet property="pageControlView" destination="4Nk-cF-eK0" id="G2V-re-bwd"/>
                     </connections>

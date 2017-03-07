@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		108A76E0BBDF30BE4F49EB0B /* Pods_FDAUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C1A57F15C55319A5A1EA87C /* Pods_FDAUITests.framework */; };
 		2F2CF29CD5359B994C8987E7 /* Pods_FDA.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 09ABCB412CFB53694DC239AC /* Pods_FDA.framework */; };
+		481DFA4C1E6EEB70004C39EF /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 481DFA4B1E6EEB70004C39EF /* WebViewController.swift */; };
 		482062521E68532300C7A7AF /* UIUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 482062511E68532300C7A7AF /* UIUtilities.swift */; };
 		486B51271E6951E400B98EBC /* 02.png in Resources */ = {isa = PBXBuildFile; fileRef = 486B511E1E6951E400B98EBC /* 02.png */; };
 		486B51281E6951E400B98EBC /* 03.png in Resources */ = {isa = PBXBuildFile; fileRef = 486B511F1E6951E400B98EBC /* 03.png */; };
@@ -173,6 +174,7 @@
 		081C20F9411D7D00FA1F5487 /* Pods-FDATests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FDATests.release.xcconfig"; path = "Pods/Target Support Files/Pods-FDATests/Pods-FDATests.release.xcconfig"; sourceTree = "<group>"; };
 		09ABCB412CFB53694DC239AC /* Pods_FDA.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FDA.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		294A17E09870D2198653B56F /* Pods-FDAUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FDAUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-FDAUITests/Pods-FDAUITests.release.xcconfig"; sourceTree = "<group>"; };
+		481DFA4B1E6EEB70004C39EF /* WebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 		482062511E68532300C7A7AF /* UIUtilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIUtilities.swift; sourceTree = "<group>"; };
 		486B511E1E6951E400B98EBC /* 02.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 02.png; sourceTree = "<group>"; };
 		486B511F1E6951E400B98EBC /* 03.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 03.png; sourceTree = "<group>"; };
@@ -419,6 +421,7 @@
 				6E7D2D601E433E8800763D4C /* Assets.xcassets */,
 				6E7D2D621E433E8800763D4C /* LaunchScreen.storyboard */,
 				6E7D2D651E433E8800763D4C /* Info.plist */,
+				481DFA4B1E6EEB70004C39EF /* WebViewController.swift */,
 			);
 			path = FDA;
 			sourceTree = "<group>";
@@ -1241,6 +1244,7 @@
 				9432C2F91E4C4993005984EC /* ResponseServerConfiguration.swift in Sources */,
 				94CD96EA1E4AF61800946477 /* NetworkWebServiceHandler.swift in Sources */,
 				6ED1B2301E54256700BF463F /* ActivityActiveStep.swift in Sources */,
+				481DFA4C1E6EEB70004C39EF /* WebViewController.swift in Sources */,
 				6ED1B2241E54254900BF463F /* ActivityResult.swift in Sources */,
 				9432C2FB1E4C9EF8005984EC /* UserServices.swift in Sources */,
 				94B3DD4F1E6ED8E500327AE5 /* PageViewController.swift in Sources */,

@@ -174,6 +174,47 @@
             </objects>
             <point key="canvasLocation" x="890.39999999999998" y="803.74812593703155"/>
         </scene>
+        <!--Web View Controller-->
+        <scene sceneID="Vey-62-Ozo">
+            <objects>
+                <viewController id="bUD-GQ-LvD" customClass="WebViewController" customModule="FDA" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="FBj-mA-7t7"/>
+                        <viewControllerLayoutGuide type="bottom" id="TRa-IR-i21"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" misplaced="YES" id="rXh-6o-G4I">
+                        <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hcg-Vp-i82">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            </webView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="hcg-Vp-i82" secondAttribute="trailing" id="8WP-dn-oJI"/>
+                            <constraint firstItem="TRa-IR-i21" firstAttribute="top" secondItem="hcg-Vp-i82" secondAttribute="bottom" id="QnQ-gJ-p5s"/>
+                            <constraint firstItem="hcg-Vp-i82" firstAttribute="leading" secondItem="rXh-6o-G4I" secondAttribute="leading" id="c6T-mo-qga"/>
+                            <constraint firstItem="hcg-Vp-i82" firstAttribute="top" secondItem="FBj-mA-7t7" secondAttribute="bottom" id="vzH-NB-pkw"/>
+                        </constraints>
+                    </view>
+                    <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
+                    <navigationItem key="navigationItem" id="a8h-MV-o3u">
+                        <barButtonItem key="rightBarButtonItem" title="Cancel" id="U5e-0P-U9P">
+                            <connections>
+                                <action selector="cancelButtonClicked:" destination="bUD-GQ-LvD" id="xFc-EM-Fx6"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="webView" destination="hcg-Vp-i82" id="Sy0-fh-koW"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="I56-S8-CRY" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-164" y="1557.5712143928038"/>
+        </scene>
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
@@ -554,6 +595,25 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Y7B-eH-YyD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-2450.4000000000001" y="521.28935532233891"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="352-ex-Z2w">
+            <objects>
+                <navigationController storyboardIdentifier="WebViewController" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="ixI-Sg-RXI" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="OLl-JJ-4y3">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="bUD-GQ-LvD" kind="relationship" relationship="rootViewController" id="oa0-6H-iX5"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="qBr-d4-S3R" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-962" y="1558"/>
         </scene>
     </scenes>
     <resources>

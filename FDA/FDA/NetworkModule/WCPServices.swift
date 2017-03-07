@@ -115,7 +115,7 @@ class WCPServices: NSObject {
     func handleStudyList(response:Dictionary<String, Any>){
         
         let studies = response[kStudies] as! Array<Dictionary<String,Any>>
-        var listOfStudies:Array<Study>!
+        var listOfStudies:Array<Study> = []
         for study in studies{
             let studyModelObj = Study(studyDetail: study)
             listOfStudies.append(studyModelObj)

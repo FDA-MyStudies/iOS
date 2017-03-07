@@ -17,7 +17,7 @@ class StudyOverviewViewControllerSecond : UIViewController{
         super.viewDidLoad()
         
         //Used to set border color for bottom view
-        buttonJoinStudy?.layer.borderColor = UIColor.init(colorLiteralRed: 0/255.0, green: 124/255.0, blue: 186/255.0, alpha: 1.0).cgColor
+        buttonJoinStudy?.layer.borderColor = kUicolorForButtonBackground
         
     }
     

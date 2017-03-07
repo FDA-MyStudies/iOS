@@ -16,7 +16,7 @@ class NotificationViewController : UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.title = "NOTIFICATIONS"
+        self.title = NSLocalizedString(kNotificationsTitleText, comment: "")
         
     }
     
@@ -31,16 +31,10 @@ class NotificationViewController : UIViewController{
         
         
     }
-    
-    @IBAction func closeButtonAction(_ sender: Any) {
-    
-    
-    
-    }
 }
 
-//MARK: TableView Delegates
-extension NotificationViewController : UITableViewDataSource , UITableViewDelegate{
+//MARK: TableView Datasource
+extension NotificationViewController : UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 2
@@ -49,15 +43,18 @@ extension NotificationViewController : UITableViewDataSource , UITableViewDelega
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         var cell : UITableViewCell?
         
-        cell = tableView.dequeueReusableCell(withIdentifier: "NotificationCell", for: indexPath) as! NotificationTableViewCell
+        cell = tableView.dequeueReusableCell(withIdentifier:kNotificationTableViewCellIdentifier , for: indexPath) as! NotificationTableViewCell
         
         cell?.backgroundColor = UIColor.clear
         return cell!
     }
+}
+
+//MARK: TableView Delegates
+extension NotificationViewController : UITableViewDelegate{
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
     }
-    
 }

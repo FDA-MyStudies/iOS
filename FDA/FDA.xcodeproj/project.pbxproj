@@ -11,6 +11,7 @@
 		2F2CF29CD5359B994C8987E7 /* Pods_FDA.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 09ABCB412CFB53694DC239AC /* Pods_FDA.framework */; };
 		482062521E68532300C7A7AF /* UIUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 482062511E68532300C7A7AF /* UIUtilities.swift */; };
 		48448C381E6597A20085CC81 /* FRHyperLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 48448C371E6597A20085CC81 /* FRHyperLabel.m */; };
+		484AF31B1E6D43F300EB3FEE /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 484AF31A1E6D43F300EB3FEE /* HomeViewController.swift */; };
 		486B51091E69510500B98EBC /* ForgotPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486B51011E69510500B98EBC /* ForgotPasswordViewController.swift */; };
 		486B510A1E69510500B98EBC /* SignInTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486B51021E69510500B98EBC /* SignInTableViewCell.swift */; };
 		486B510B1E69510600B98EBC /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486B51031E69510500B98EBC /* SignInViewController.swift */; };
@@ -35,8 +36,8 @@
 		486B512F1E6951E400B98EBC /* 16.png in Resources */ = {isa = PBXBuildFile; fileRef = 486B51261E6951E400B98EBC /* 16.png */; };
 		486B51311E696D0E00B98EBC /* SignInPlist.plist in Resources */ = {isa = PBXBuildFile; fileRef = 486B51301E696D0E00B98EBC /* SignInPlist.plist */; };
 		48936B3E1E5EE85700733A7C /* PageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48936B3D1E5EE85700733A7C /* PageViewController.swift */; };
-		48936B421E5EEF8E00733A7C /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48936B411E5EEF8E00733A7C /* FirstViewController.swift */; };
-		48936B441E5EEFC100733A7C /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48936B431E5EEFC100733A7C /* SecondViewController.swift */; };
+		48936B421E5EEF8E00733A7C /* FirstGatewayOverviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48936B411E5EEF8E00733A7C /* FirstGatewayOverviewViewController.swift */; };
+		48936B441E5EEFC100733A7C /* SecondGatewayOverviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48936B431E5EEFC100733A7C /* SecondGatewayOverviewViewController.swift */; };
 		489873311E5D9A3F006B8F3A /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 489873301E5D9A3F006B8F3A /* Login.storyboard */; };
 		489873331E5D9AA4006B8F3A /* LoginAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 489873321E5D9AA4006B8F3A /* LoginAssets.xcassets */; };
 		6E7D2D5A1E433E8800763D4C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E7D2D591E433E8800763D4C /* AppDelegate.swift */; };
@@ -165,6 +166,7 @@
 		48448C351E6597A10085CC81 /* FDA-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "FDA-Bridging-Header.h"; path = "LoginUIModule/FDA-Bridging-Header.h"; sourceTree = "<group>"; };
 		48448C361E6597A20085CC81 /* FRHyperLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FRHyperLabel.h; sourceTree = "<group>"; };
 		48448C371E6597A20085CC81 /* FRHyperLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FRHyperLabel.m; sourceTree = "<group>"; };
+		484AF31A1E6D43F300EB3FEE /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		486B51011E69510500B98EBC /* ForgotPasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForgotPasswordViewController.swift; sourceTree = "<group>"; };
 		486B51021E69510500B98EBC /* SignInTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignInTableViewCell.swift; sourceTree = "<group>"; };
 		486B51031E69510500B98EBC /* SignInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
@@ -189,8 +191,8 @@
 		486B51261E6951E400B98EBC /* 16.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 16.png; sourceTree = "<group>"; };
 		486B51301E696D0E00B98EBC /* SignInPlist.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = SignInPlist.plist; sourceTree = "<group>"; };
 		48936B3D1E5EE85700733A7C /* PageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageViewController.swift; sourceTree = "<group>"; };
-		48936B411E5EEF8E00733A7C /* FirstViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
-		48936B431E5EEFC100733A7C /* SecondViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SecondViewController.swift; sourceTree = "<group>"; };
+		48936B411E5EEF8E00733A7C /* FirstGatewayOverviewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirstGatewayOverviewViewController.swift; sourceTree = "<group>"; };
+		48936B431E5EEFC100733A7C /* SecondGatewayOverviewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SecondGatewayOverviewViewController.swift; sourceTree = "<group>"; };
 		489873301E5D9A3F006B8F3A /* Login.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
 		489873321E5D9AA4006B8F3A /* LoginAssets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = LoginAssets.xcassets; sourceTree = "<group>"; };
 		4C1A57F15C55319A5A1EA87C /* Pods_FDAUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FDAUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -337,8 +339,8 @@
 		486B51181E69516800B98EBC /* NotificationsModule */ = {
 			isa = PBXGroup;
 			children = (
-				486B51191E69516800B98EBC /* NotificationTableViewCell.swift */,
 				486B511A1E69516800B98EBC /* NotificationViewController.swift */,
+				486B51191E69516800B98EBC /* NotificationTableViewCell.swift */,
 			);
 			path = NotificationsModule;
 			sourceTree = "<group>";
@@ -365,9 +367,10 @@
 				48448C341E65976F0085CC81 /* Libraries */,
 				489873301E5D9A3F006B8F3A /* Login.storyboard */,
 				489873321E5D9AA4006B8F3A /* LoginAssets.xcassets */,
+				484AF31A1E6D43F300EB3FEE /* HomeViewController.swift */,
 				48936B3D1E5EE85700733A7C /* PageViewController.swift */,
-				48936B411E5EEF8E00733A7C /* FirstViewController.swift */,
-				48936B431E5EEFC100733A7C /* SecondViewController.swift */,
+				48936B411E5EEF8E00733A7C /* FirstGatewayOverviewViewController.swift */,
+				48936B431E5EEFC100733A7C /* SecondGatewayOverviewViewController.swift */,
 			);
 			path = LoginUIModule;
 			sourceTree = "<group>";
@@ -1166,12 +1169,13 @@
 				6E7D2D5A1E433E8800763D4C /* AppDelegate.swift in Sources */,
 				486B511B1E69516800B98EBC /* NotificationTableViewCell.swift in Sources */,
 				6ED134341E5EB0280090C976 /* ConsentBuilder.swift in Sources */,
-				48936B421E5EEF8E00733A7C /* FirstViewController.swift in Sources */,
+				48936B421E5EEF8E00733A7C /* FirstGatewayOverviewViewController.swift in Sources */,
 				9487102A1E546C3800246109 /* AppNotification.swift in Sources */,
 				6EEA9AFC1E6D312800CC3F94 /* ProfileViewController.swift in Sources */,
 				6ED8A2E61E447AA2004DEC01 /* Formatter.swift in Sources */,
 				941909B51E52FA9B001B01C5 /* Study.swift in Sources */,
 				6EED7B3D1E65752C002C1FA3 /* FetalKickCounterTask.swift in Sources */,
+				484AF31B1E6D43F300EB3FEE /* HomeViewController.swift in Sources */,
 				6E9B39C01E55DFF10037D09D /* ActivityBuilder.swift in Sources */,
 				6ECA92851E49B5CF00DA6287 /* File.swift in Sources */,
 				9432C2F91E4C4993005984EC /* ResponseServerConfiguration.swift in Sources */,
@@ -1184,7 +1188,7 @@
 				9432C2FB1E4C9EF8005984EC /* UserServices.swift in Sources */,
 				6ECA92881E49F0CD00DA6287 /* Utilities.swift in Sources */,
 				482062521E68532300C7A7AF /* UIUtilities.swift in Sources */,
-				48936B441E5EEFC100733A7C /* SecondViewController.swift in Sources */,
+				48936B441E5EEFC100733A7C /* SecondGatewayOverviewViewController.swift in Sources */,
 				486B510C1E69510600B98EBC /* SignUpCompleteViewController.swift in Sources */,
 				6E7D2D8A1E43400100763D4C /* User.swift in Sources */,
 				6ED1B21E1E54252500BF463F /* Schedule.swift in Sources */,

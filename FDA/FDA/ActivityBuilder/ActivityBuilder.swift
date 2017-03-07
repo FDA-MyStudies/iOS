@@ -164,9 +164,9 @@ class ActivityBuilder {
                     Logger.sharedInstance.debug("Activity:stepDict is null:\(stepDict)")
                     break;
                 }
-            case .questionnaireAndActiveTask:
+           // case .questionnaireAndActiveTask:
                 
-            
+            /*
                 
                 for var stepDict in (activity?.steps!)! {
                     
@@ -225,7 +225,7 @@ class ActivityBuilder {
                     return nil
                 }
 
-                
+             */
               
             default: break
                 

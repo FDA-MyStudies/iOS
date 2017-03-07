@@ -745,7 +745,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="73" sectionHeaderHeight="1" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="1M0-1l-Fkt">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="544"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="554"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <view key="tableFooterView" contentMode="scaleToFill" id="Bcy-Su-K3N">
                                     <rect key="frame" x="0.0" y="125" width="375" height="210"/>
@@ -901,74 +901,21 @@
                                     <outlet property="delegate" destination="UWn-lb-vfU" id="YGg-LT-2gR"/>
                                 </connections>
                             </tableView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nDr-rV-gha">
-                                <rect key="frame" x="0.0" y="544" width="375" height="266"/>
-                                <subviews>
-                                    <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="time" minuteInterval="1" useCurrentDate="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q7B-Gw-XvX">
-                                        <rect key="frame" x="0.0" y="50" width="375" height="216"/>
-                                        <date key="date" timeIntervalSinceReferenceDate="510490395.14935201">
-                                            <!--2017-03-06 10:53:15 +0000-->
-                                        </date>
-                                    </datePicker>
-                                    <button opaque="NO" tag="1101" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nTC-l5-EsI">
-                                        <rect key="frame" x="0.0" y="3" width="76" height="30"/>
-                                        <state key="normal" title="Cancel"/>
-                                        <connections>
-                                            <action selector="buttonActionLeadTime:" destination="UWn-lb-vfU" eventType="touchUpInside" id="rvl-c8-wXc"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" tag="1102" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kYo-Q6-mnW">
-                                        <rect key="frame" x="300" y="4" width="76" height="30"/>
-                                        <state key="normal" title="Done"/>
-                                        <connections>
-                                            <action selector="buttonActionLeadTime:" destination="UWn-lb-vfU" eventType="touchUpInside" id="asf-5P-bka"/>
-                                        </connections>
-                                    </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select Lead Time" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="13" translatesAutoresizingMaskIntoConstraints="NO" id="gFa-p3-EUH">
-                                        <rect key="frame" x="125" y="10" width="125" height="19"/>
-                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="trailing" secondItem="q7B-Gw-XvX" secondAttribute="trailing" id="0s7-hC-JSh"/>
-                                    <constraint firstItem="nTC-l5-EsI" firstAttribute="width" secondItem="nDr-rV-gha" secondAttribute="width" multiplier="76/375" id="1Bl-J0-7IB"/>
-                                    <constraint firstItem="nTC-l5-EsI" firstAttribute="leading" secondItem="nDr-rV-gha" secondAttribute="leading" id="2kA-2X-c0J"/>
-                                    <constraint firstItem="q7B-Gw-XvX" firstAttribute="top" secondItem="nDr-rV-gha" secondAttribute="top" constant="50" id="48m-oL-tKB"/>
-                                    <constraint firstItem="kYo-Q6-mnW" firstAttribute="top" secondItem="nDr-rV-gha" secondAttribute="top" constant="4" id="4Yp-Ws-7Xx"/>
-                                    <constraint firstItem="kYo-Q6-mnW" firstAttribute="width" secondItem="nDr-rV-gha" secondAttribute="width" multiplier="76/375" id="8u9-pD-sqx"/>
-                                    <constraint firstAttribute="trailing" secondItem="kYo-Q6-mnW" secondAttribute="trailing" constant="-1" id="9QQ-j5-sAt"/>
-                                    <constraint firstItem="gFa-p3-EUH" firstAttribute="centerY" secondItem="nDr-rV-gha" secondAttribute="centerY" multiplier="19/133" id="DEl-5J-Fte"/>
-                                    <constraint firstItem="nTC-l5-EsI" firstAttribute="top" secondItem="nDr-rV-gha" secondAttribute="top" constant="3" id="Dul-wp-1sP"/>
-                                    <constraint firstItem="gFa-p3-EUH" firstAttribute="centerX" secondItem="nDr-rV-gha" secondAttribute="centerX" id="Fa2-UQ-crC"/>
-                                    <constraint firstAttribute="bottom" secondItem="q7B-Gw-XvX" secondAttribute="bottom" id="Py5-7b-Xja"/>
-                                    <constraint firstItem="q7B-Gw-XvX" firstAttribute="leading" secondItem="nDr-rV-gha" secondAttribute="leading" id="Uia-t6-EzQ"/>
-                                </constraints>
-                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="1M0-1l-Fkt" firstAttribute="leading" secondItem="4E5-H9-mFm" secondAttribute="leading" id="1bL-hQ-dKv"/>
                             <constraint firstAttribute="trailing" secondItem="1M0-1l-Fkt" secondAttribute="trailing" id="3Tn-XX-GYN"/>
-                            <constraint firstItem="nDr-rV-gha" firstAttribute="leading" secondItem="4E5-H9-mFm" secondAttribute="leading" id="5ET-Qg-inn"/>
-                            <constraint firstItem="nDr-rV-gha" firstAttribute="top" secondItem="1M0-1l-Fkt" secondAttribute="bottom" id="BVH-y1-485"/>
                             <constraint firstItem="1M0-1l-Fkt" firstAttribute="top" secondItem="Dh8-Sx-2oB" secondAttribute="bottom" id="EnE-HW-zJb"/>
-                            <constraint firstItem="1M0-1l-Fkt" firstAttribute="height" secondItem="4E5-H9-mFm" secondAttribute="height" multiplier="602/667" id="FnN-fZ-dhI"/>
-                            <constraint firstItem="1M0-1l-Fkt" firstAttribute="width" secondItem="4E5-H9-mFm" secondAttribute="width" id="OTm-pU-DCW"/>
-                            <constraint firstAttribute="trailing" secondItem="nDr-rV-gha" secondAttribute="trailing" id="S69-7S-fIT"/>
-                            <constraint firstItem="nDr-rV-gha" firstAttribute="width" secondItem="4E5-H9-mFm" secondAttribute="width" id="f2Y-bv-BCU"/>
+                            <constraint firstItem="xLx-f5-o1W" firstAttribute="top" secondItem="1M0-1l-Fkt" secondAttribute="bottom" id="qUX-cv-zUy"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="jHf-nb-dhq"/>
                     <connections>
                         <outlet property="buttonLeadTime" destination="k3b-X7-wvN" id="k1E-za-Lid"/>
-                        <outlet property="datePicker" destination="q7B-Gw-XvX" id="MDl-eo-AYT"/>
                         <outlet property="tableTopConstraint" destination="EnE-HW-zJb" id="Q5S-hO-1ob"/>
                         <outlet property="tableViewFooterViewProfile" destination="Bcy-Su-K3N" id="7I7-uo-7bo"/>
                         <outlet property="tableViewProfile" destination="1M0-1l-Fkt" id="3ey-MN-YAw"/>
-                        <outlet property="viewDatePickerContainer" destination="nDr-rV-gha" id="YyZ-1L-6CL"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="EVy-Bf-QZZ" userLabel="First Responder" sceneMemberID="firstResponder"/>

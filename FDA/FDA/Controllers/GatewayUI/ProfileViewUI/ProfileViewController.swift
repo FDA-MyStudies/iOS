@@ -10,13 +10,12 @@ import UIKit
 import IQKeyboardManagerSwift
 
 let kProfileTableViewCellIdentifier = "ProfileTableViewCell"
-let signupCellLastIndex = 3
 
-enum PickerButtonTags:Int {
-    case leadTimeButtonTag = 1100
-    case cancelButtonTag = 1101
-    case doneButtonTag = 1102
-}
+let kLeadTimeSelectText = "Select Lead Time"
+let kActionSheetDoneButtonTitle = "Done"
+let kActionSheetCancelButtonTitle = "Cancel"
+
+let signupCellLastIndex = 3
 
 
 enum ToggelSwitchTags:Int{
@@ -29,17 +28,18 @@ enum ToggelSwitchTags:Int{
 class ProfileViewController: UIViewController {
     
     var tableViewRowDetails : NSMutableArray?
+    var datePickerView:UIDatePicker?
+    
     @IBOutlet var tableViewProfile : UITableView?
     @IBOutlet var tableViewFooterViewProfile : UIView?
     @IBOutlet var buttonLeadTime:UIButton?
     
-    @IBOutlet var viewDatePickerContainer:UIView?
-    @IBOutlet var datePicker:UIDatePicker?
+    
     
     @IBOutlet var tableTopConstraint:NSLayoutConstraint?
     
     
-//MARK: ViewController delegates
+    //MARK: ViewController delegates
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -74,7 +74,7 @@ class ProfileViewController: UIViewController {
         
     }
     
-//MARK:IBActions
+    //MARK:IBActions
     
     /*
      button action for LeadtimeButton, CancelButton & DoneButton
@@ -84,40 +84,53 @@ class ProfileViewController: UIViewController {
     
     @IBAction func buttonActionLeadTime(_ sender: UIButton) {
         
-        UIView.animate(withDuration: 0.7, delay: 0.0, usingSpringWithDamping: 0.5,
-                       initialSpringVelocity: 0.5, options: [], animations:
-            {
-                //self.yourView.transform = CGAffineTransformMakeScale(1, 1)
-                
-                if self.tableTopConstraint?.constant ==  45.0 {
-                    self.tableTopConstraint?.constant = (self.tableTopConstraint?.constant)! - 216.0
-                }
-                else{
-                    self.tableTopConstraint?.constant = (self.tableTopConstraint?.constant)! + 216.0
-                }
-                
-                
-        }, completion: nil)
+    
+        let alertView = UIAlertController(title: kLeadTimeSelectText, message: "\n\n\n\n\n\n\n\n\n\n\n", preferredStyle: UIAlertControllerStyle.actionSheet);
         
-        // for done button action
-        if PickerButtonTags(rawValue:sender.tag) == .doneButtonTag {
-            
+        
+        datePickerView = UIDatePicker.init(frame:CGRect(x: 10, y: 30, width: alertView.view.frame.size.width - 40, height: 216) )
+        
+        datePickerView?.datePickerMode = .countDownTimer
+        
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "HH:mm"
+        
+        datePickerView?.date = dateFormatter.date(from: "00:00")!
+        
+        alertView.view.addSubview(datePickerView!)
+        
+        let action =   UIAlertAction(title: kActionSheetDoneButtonTitle, style: UIAlertActionStyle.default, handler: {
+            action in
             
             let calender:Calendar? = Calendar.current
-            let dateComponent = calender?.dateComponents([.hour, .minute], from: (self.datePicker?.date)!)
             
-            
-            // title =  hour : minute,  if hour < 10, hour =  "0" + hour ,if minute < 10, minute =  "0" + minute
-            
-            let title:String! = (((dateComponent?.hour)! as Int) < 10 ? "0\((dateComponent?.hour)! as Int)" : "\((dateComponent?.hour)! as Int)") + ":"
+            if Utilities.isValidValue(someObject:self.datePickerView?.date as AnyObject? )  {
                 
-                + (((dateComponent?.minute)! as Int) < 10 ? "0\((dateComponent?.minute)! as Int)" : "\((dateComponent?.minute)! as Int)")
+                let dateComponent = calender?.dateComponents([.hour, .minute], from: (self.datePickerView?.date)!)
+                
+                
+                // title =  hour : minute,  if hour < 10, hour =  "0" + hour ,if minute < 10, minute =  "0" + minute
+                
+                let title:String! = (((dateComponent?.hour)! as Int) < 10 ? "0\((dateComponent?.hour)! as Int)" : "\((dateComponent?.hour)! as Int)") + ":"
+                    
+                    + (((dateComponent?.minute)! as Int) < 10 ? "0\((dateComponent?.minute)! as Int)" : "\((dateComponent?.minute)! as Int)")
+                
+                self.buttonLeadTime?.setTitle(title!, for: .normal)
+                
+                user.settings?.leadTime = title
+            }
             
-            self.buttonLeadTime?.setTitle(title!, for: .normal)
+        })
+        let actionCancel =   UIAlertAction(title: kActionSheetCancelButtonTitle, style: UIAlertActionStyle.default, handler: {
+            action in
             
-            user.settings?.leadTime = title
-            
-        }
+        })
+        
+        
+        alertView.addAction(action)
+        alertView.addAction(actionCancel)
+        present(alertView, animated: true, completion: nil)
         
     }
     
@@ -128,7 +141,7 @@ class ProfileViewController: UIViewController {
         
     }
     
-//MARK:Utility Methods
+    //MARK:Utility Methods
     /*
      Dismiss key board when clicked on Background
      */
@@ -137,17 +150,12 @@ class ProfileViewController: UIViewController {
     }
     
     func setInitialDate()  {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "HH:mm"
-        
-        datePicker?.datePickerMode = .countDownTimer
-        datePicker?.date = dateFormatter.date(from: "00:00")!
         
         if user.settings != nil &&  Utilities.isValidValue(someObject: user.settings?.leadTime as AnyObject?) {
             self.buttonLeadTime?.setTitle(user.settings?.leadTime, for: .normal)
         }
         else{
-             Logger.sharedInstance.debug("settings/LeadTime is null")
+            Logger.sharedInstance.debug("settings/LeadTime is null")
         }
         
     }
@@ -158,18 +166,18 @@ class ProfileViewController: UIViewController {
         
         if  user.settings != nil {
             
-        switch ToggelSwitchTags(rawValue:sender.tag)! as ToggelSwitchTags{
-        case .usePasscode:
-            user.settings?.passcode = toggle?.isOn
-        case .useTouchId:
-            user.settings?.touchId = toggle?.isOn
-        case .receivePush:
-            user.settings?.remoteNotifications = toggle?.isOn
-        case .receiveStudyActivityReminders:
-            user.settings?.localNotifications = toggle?.isOn
-        default: break
-            
-        }
+            switch ToggelSwitchTags(rawValue:sender.tag)! as ToggelSwitchTags{
+            case .usePasscode:
+                user.settings?.passcode = toggle?.isOn
+            case .useTouchId:
+                user.settings?.touchId = toggle?.isOn
+            case .receivePush:
+                user.settings?.remoteNotifications = toggle?.isOn
+            case .receiveStudyActivityReminders:
+                user.settings?.localNotifications = toggle?.isOn
+            default: break
+                
+            }
         }
         else{
             Logger.sharedInstance.debug("settings is null")
@@ -184,39 +192,39 @@ class ProfileViewController: UIViewController {
     func validateAllFields() -> Bool{
         
         /*
-        
-        if user.firstName == "" {
-            self.showAlertMessages(textMessage: "Please enter your first name.")
-            return false
-        }else if user.lastName == ""{
-            self.showAlertMessages(textMessage: "Please enter your last name.")
-            return false
-        }else if user.emailId == "" {
-            self.showAlertMessages(textMessage: "Please enter your email address.")
-            return false
-        }else if !(Utilities.isValidEmail(testStr: user.emailId!)){
-            self.showAlertMessages(textMessage: "Please enter valid email address.")
-            return false
-        }else if user.password == ""{
-            self.showAlertMessages(textMessage: "Please enter your password.")
-            return false
-        }else if user.confirmPassword == ""{
-            self.showAlertMessages(textMessage: "Please enter confirm password.")
-            return false
-        }else if (user.password != user.confirmPassword){
-            self.showAlertMessages(textMessage: "New password and confirm password does not match.")
-            return false
-            
-        }else if ((user.password?.characters.count)! < 8 && (user.password?.characters.count)! != 0) || ((user.confirmPassword?.characters.count)! < 8 && user.confirmPassword?.characters.count != 0) {
-            self.showAlertMessages(textMessage: "Password should have minimum of 8 characters.")
-            return false
-        }
-        
-        if Utilities.isPasswordValid(text: (user.password)!) == false || Utilities.isPasswordValid(text: (user.confirmPassword)!) == false {
-            self.showAlertMessages(textMessage: "Password should have minimum of 1 special character, 1 upper case letter and 1 numeric number.")
-            return false
-        }
-        */
+         
+         if user.firstName == "" {
+         self.showAlertMessages(textMessage: "Please enter your first name.")
+         return false
+         }else if user.lastName == ""{
+         self.showAlertMessages(textMessage: "Please enter your last name.")
+         return false
+         }else if user.emailId == "" {
+         self.showAlertMessages(textMessage: "Please enter your email address.")
+         return false
+         }else if !(Utilities.isValidEmail(testStr: user.emailId!)){
+         self.showAlertMessages(textMessage: "Please enter valid email address.")
+         return false
+         }else if user.password == ""{
+         self.showAlertMessages(textMessage: "Please enter your password.")
+         return false
+         }else if user.confirmPassword == ""{
+         self.showAlertMessages(textMessage: "Please enter confirm password.")
+         return false
+         }else if (user.password != user.confirmPassword){
+         self.showAlertMessages(textMessage: "New password and confirm password does not match.")
+         return false
+         
+         }else if ((user.password?.characters.count)! < 8 && (user.password?.characters.count)! != 0) || ((user.confirmPassword?.characters.count)! < 8 && user.confirmPassword?.characters.count != 0) {
+         self.showAlertMessages(textMessage: "Password should have minimum of 8 characters.")
+         return false
+         }
+         
+         if Utilities.isPasswordValid(text: (user.password)!) == false || Utilities.isPasswordValid(text: (user.confirmPassword)!) == false {
+         self.showAlertMessages(textMessage: "Password should have minimum of 1 special character, 1 upper case letter and 1 numeric number.")
+         return false
+         }
+         */
         return true
     }
     
@@ -285,9 +293,9 @@ extension ProfileViewController : UITableViewDataSource {
             //TODO: handle toggle Value based on user settings
             
             if (user.settings != nil) {
-               cell.setToggleValue(indexValue: indexPath.row)
+                cell.setToggleValue(indexValue: indexPath.row)
             }
-           
+            
             cell.switchToggle?.addTarget(self, action: #selector(ProfileViewController.toggleValueChanged), for: .valueChanged)
             
             return cell

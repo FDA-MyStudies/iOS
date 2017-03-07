@@ -93,6 +93,14 @@
 		9432C2FB1E4C9EF8005984EC /* UserServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9432C2FA1E4C9EF8005984EC /* UserServices.swift */; };
 		9487102A1E546C3800246109 /* AppNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 948710291E546C3800246109 /* AppNotification.swift */; };
 		9487102C1E54870000246109 /* LabKeyServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9487102B1E54870000246109 /* LabKeyServices.swift */; };
+		94B2B35B1E6D3D790037005D /* Gateway.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 94B2B35A1E6D3D790037005D /* Gateway.storyboard */; };
+		94B2B35D1E6D41060037005D /* Gateway.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 94B2B35C1E6D41060037005D /* Gateway.xcassets */; };
+		94B2B35F1E6D48A10037005D /* 12.png in Resources */ = {isa = PBXBuildFile; fileRef = 94B2B35E1E6D48A10037005D /* 12.png */; };
+		94B2B3611E6D69050037005D /* StudyListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B2B3601E6D69050037005D /* StudyListViewController.swift */; };
+		94B2B3631E6D6B830037005D /* StudyListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B2B3621E6D6B830037005D /* StudyListCell.swift */; };
+		94B2B3651E6D8BDE0037005D /* ResourcesListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B2B3641E6D8BDE0037005D /* ResourcesListCell.swift */; };
+		94B2B3671E6D8BF80037005D /* ResourcesListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B2B3661E6D8BF80037005D /* ResourcesListViewController.swift */; };
+		94B3DD031E6E840800327AE5 /* StudyList.json in Resources */ = {isa = PBXBuildFile; fileRef = 94B3DD021E6E840800327AE5 /* StudyList.json */; };
 		94C602311E51C7D500CB72F7 /* WCPServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94C602301E51C7D500CB72F7 /* WCPServices.swift */; };
 		94CD96E81E4AF61800946477 /* NetworkConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94CD96E41E4AF61800946477 /* NetworkConstants.swift */; };
 		94CD96E91E4AF61800946477 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94CD96E51E4AF61800946477 /* NetworkManager.swift */; };
@@ -251,6 +259,14 @@
 		9432C2FA1E4C9EF8005984EC /* UserServices.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserServices.swift; sourceTree = "<group>"; };
 		948710291E546C3800246109 /* AppNotification.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppNotification.swift; sourceTree = "<group>"; };
 		9487102B1E54870000246109 /* LabKeyServices.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LabKeyServices.swift; sourceTree = "<group>"; };
+		94B2B35A1E6D3D790037005D /* Gateway.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Gateway.storyboard; sourceTree = "<group>"; };
+		94B2B35C1E6D41060037005D /* Gateway.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Gateway.xcassets; sourceTree = "<group>"; };
+		94B2B35E1E6D48A10037005D /* 12.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 12.png; sourceTree = "<group>"; };
+		94B2B3601E6D69050037005D /* StudyListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudyListViewController.swift; sourceTree = "<group>"; };
+		94B2B3621E6D6B830037005D /* StudyListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudyListCell.swift; sourceTree = "<group>"; };
+		94B2B3641E6D8BDE0037005D /* ResourcesListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResourcesListCell.swift; sourceTree = "<group>"; };
+		94B2B3661E6D8BF80037005D /* ResourcesListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResourcesListViewController.swift; sourceTree = "<group>"; };
+		94B3DD021E6E840800327AE5 /* StudyList.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = StudyList.json; sourceTree = "<group>"; };
 		94C602301E51C7D500CB72F7 /* WCPServices.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WCPServices.swift; sourceTree = "<group>"; };
 		94CD96E41E4AF61800946477 /* NetworkConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkConstants.swift; sourceTree = "<group>"; };
 		94CD96E51E4AF61800946477 /* NetworkManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
@@ -340,6 +356,7 @@
 		486B511D1E6951E400B98EBC /* UIReference screens */ = {
 			isa = PBXGroup;
 			children = (
+				94B2B35E1E6D48A10037005D /* 12.png */,
 				486B511E1E6951E400B98EBC /* 02.png */,
 				486B511F1E6951E400B98EBC /* 03.png */,
 				486B51201E6951E400B98EBC /* 04.png */,
@@ -422,7 +439,6 @@
 				6ED1B2251E54255900BF463F /* ActivityStepResultModel */,
 				6ED1B2221E54254900BF463F /* ActivityResultModel */,
 				6ED1B21F1E54253800BF463F /* ActivityModel */,
-				6E9B39BC1E55DFDA0037D09D /* ActivityBuilder */,
 				6ED1B21C1E54252500BF463F /* ScheduleModel */,
 				94CD96E31E4AF61800946477 /* NetworkModule */,
 				6ECA92861E49F0BA00DA6287 /* Utilities */,
@@ -438,14 +454,12 @@
 				948710261E546C2200246109 /* NotificationModule */,
 				48448C351E6597A10085CC81 /* FDA-Bridging-Header.h */,
 				4898732F1E5D9A1A006B8F3A /* LoginUIModule */,
-				489636BF1E670D8000C718CF /* SignUp/SignInModule */,
-				489636C01E670E2E00C718CF /* StudyOverviewModule */,
-				489636C11E670E4D00C718CF /* NotificationsModule */,
 				486B511D1E6951E400B98EBC /* UIReference screens */,
 				486B51001E69510500B98EBC /* SignUp:SignIn Module */,
 				486B51111E69510E00B98EBC /* StudyOverview Module */,
 				486B51181E69516800B98EBC /* NotificationsModule */,
 				6E9B39BC1E55DFDA0037D09D /* ActivityBuilder */,
+				94B2B3571E6D3D520037005D /* GatewayUI */,
 				6E7D2D591E433E8800763D4C /* AppDelegate.swift */,
 				6E7D2D5B1E433E8800763D4C /* ViewController.swift */,
 				6E7D2D5D1E433E8800763D4C /* Main.storyboard */,
@@ -729,6 +743,20 @@
 			path = NotificationModule;
 			sourceTree = "<group>";
 		};
+		94B2B3571E6D3D520037005D /* GatewayUI */ = {
+			isa = PBXGroup;
+			children = (
+				94B2B35A1E6D3D790037005D /* Gateway.storyboard */,
+				94B2B35C1E6D41060037005D /* Gateway.xcassets */,
+				94B2B3601E6D69050037005D /* StudyListViewController.swift */,
+				94B2B3621E6D6B830037005D /* StudyListCell.swift */,
+				94B2B3661E6D8BF80037005D /* ResourcesListViewController.swift */,
+				94B2B3641E6D8BDE0037005D /* ResourcesListCell.swift */,
+				94B3DD021E6E840800327AE5 /* StudyList.json */,
+			);
+			path = GatewayUI;
+			sourceTree = "<group>";
+		};
 		94CD96E31E4AF61800946477 /* NetworkModule */ = {
 			isa = PBXGroup;
 			children = (
@@ -928,11 +956,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				94B3DD031E6E840800327AE5 /* StudyList.json in Resources */,
 				486B51311E696D0E00B98EBC /* SignInPlist.plist in Resources */,
 				489873331E5D9AA4006B8F3A /* LoginAssets.xcassets in Resources */,
 				6EABD0331E56FE2000623D94 /* TaskSchema.json in Resources */,
 				486B512D1E6951E400B98EBC /* 14.png in Resources */,
 				6E7D2D8E1E43445600763D4C /* UserPreferences.plist in Resources */,
+				94B2B35F1E6D48A10037005D /* 12.png in Resources */,
 				6ED9D5DB1E5B2D5200A0719D /* ActiveTask.json in Resources */,
 				6E7D2D641E433E8800763D4C /* LaunchScreen.storyboard in Resources */,
 				6EF748BF1E69645700F1E89E /* LatestActive_Taskdocument.json in Resources */,
@@ -941,6 +971,8 @@
 				486B512F1E6951E400B98EBC /* 16.png in Resources */,
 				6EAB39A91E4B0B4A003442B8 /* Resources.plist in Resources */,
 				6EF05A991E4DC36400CD7661 /* StepProvider.plist in Resources */,
+				94B2B35B1E6D3D790037005D /* Gateway.storyboard in Resources */,
+				94B2B35D1E6D41060037005D /* Gateway.xcassets in Resources */,
 				486B512C1E6951E400B98EBC /* 10.png in Resources */,
 				486B51281E6951E400B98EBC /* 03.png in Resources */,
 				6ED134381E5F1B110090C976 /* Consent.json in Resources */,
@@ -1129,11 +1161,13 @@
 				6EC129221E64279100B90167 /* ConsentStepResult.swift in Sources */,
 				486B51161E69510E00B98EBC /* StudyOverviewPageViewControllerFirst.swift in Sources */,
 				486B51091E69510500B98EBC /* ForgotPasswordViewController.swift in Sources */,
+				94B2B3631E6D6B830037005D /* StudyListCell.swift in Sources */,
 				486B51101E69510600B98EBC /* VerificationViewController.swift in Sources */,
 				6E7D2D5C1E433E8800763D4C /* ViewController.swift in Sources */,
 				94CD96E91E4AF61800946477 /* NetworkManager.swift in Sources */,
 				6E7D2D5A1E433E8800763D4C /* AppDelegate.swift in Sources */,
 				486B511B1E69516800B98EBC /* NotificationTableViewCell.swift in Sources */,
+				94B2B3651E6D8BDE0037005D /* ResourcesListCell.swift in Sources */,
 				6ED134341E5EB0280090C976 /* ConsentBuilder.swift in Sources */,
 				48936B421E5EEF8E00733A7C /* FirstViewController.swift in Sources */,
 				9487102A1E546C3800246109 /* AppNotification.swift in Sources */,
@@ -1164,9 +1198,11 @@
 				941909BB1E533AA9001B01C5 /* Overview.swift in Sources */,
 				94C602311E51C7D500CB72F7 /* WCPServices.swift in Sources */,
 				9487102C1E54870000246109 /* LabKeyServices.swift in Sources */,
+				94B2B3611E6D69050037005D /* StudyListViewController.swift in Sources */,
 				6ED1B2291E54255900BF463F /* ActivityStepResult.swift in Sources */,
 				48448C381E6597A20085CC81 /* FRHyperLabel.m in Sources */,
 				486B511C1E69516800B98EBC /* NotificationViewController.swift in Sources */,
+				94B2B3671E6D8BF80037005D /* ResourcesListViewController.swift in Sources */,
 				94CD96ED1E4AFAFF00946477 /* NetworkConfiguration.swift in Sources */,
 				9432C2F71E4C483D005984EC /* RegistrationServerConfiguration.swift in Sources */,
 				486B510F1E69510600B98EBC /* SignUpViewController.swift in Sources */,

@@ -149,6 +149,10 @@ class ProfileViewController: UIViewController {
         self.view.endEditing(true)
     }
     
+    /*
+     setInitialData sets lead Time
+    */
+    
     func setInitialDate()  {
         
         if user.settings != nil &&  Utilities.isValidValue(someObject: user.settings?.leadTime as AnyObject?) {
@@ -191,7 +195,7 @@ class ProfileViewController: UIViewController {
      */
     func validateAllFields() -> Bool{
         
-        /*
+        
          
          if user.firstName == "" {
          self.showAlertMessages(textMessage: "Please enter your first name.")
@@ -208,23 +212,17 @@ class ProfileViewController: UIViewController {
          }else if user.password == ""{
          self.showAlertMessages(textMessage: "Please enter your password.")
          return false
-         }else if user.confirmPassword == ""{
-         self.showAlertMessages(textMessage: "Please enter confirm password.")
-         return false
-         }else if (user.password != user.confirmPassword){
-         self.showAlertMessages(textMessage: "New password and confirm password does not match.")
-         return false
-         
-         }else if ((user.password?.characters.count)! < 8 && (user.password?.characters.count)! != 0) || ((user.confirmPassword?.characters.count)! < 8 && user.confirmPassword?.characters.count != 0) {
+            
+         }else if (user.password?.characters.count)! < 8 && (user.password?.characters.count)! != 0  {
          self.showAlertMessages(textMessage: "Password should have minimum of 8 characters.")
          return false
          }
          
-         if Utilities.isPasswordValid(text: (user.password)!) == false || Utilities.isPasswordValid(text: (user.confirmPassword)!) == false {
+         if Utilities.isPasswordValid(text: (user.password)!) == false  {
          self.showAlertMessages(textMessage: "Password should have minimum of 1 special character, 1 upper case letter and 1 numeric number.")
          return false
          }
-         */
+        
         return true
     }
     

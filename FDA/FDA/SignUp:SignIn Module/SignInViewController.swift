@@ -14,17 +14,15 @@ class SignInViewController : UIViewController{
     
     var tableViewRowDetails : NSMutableArray?
     
-    
     @IBOutlet var tableView : UITableView?
     @IBOutlet var buttonSignIn : UIButton?
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         //Used to set border color for bottom view
         buttonSignIn?.layer.borderColor = kUicolorForButtonBackground
-        self.title = NSLocalizedString("SIGN IN", comment: "")
+        self.title = NSLocalizedString(kSignInTitleText, comment: "")
         
         //load plist info
         let plistPath = Bundle.main.path(forResource: "SignInPlist", ofType: ".plist", inDirectory:nil)
@@ -64,13 +62,13 @@ class SignInViewController : UIViewController{
     @IBAction func signInButtonAction(_ sender: Any) {
         
         if user.emailId == "" {
-            self.showAlertMessages(textMessage: "Please enter your email address.")
+            self.showAlertMessages(textMessage: kMessageEmailBlank)
             
         }else if !(Utilities.isValidEmail(testStr: user.emailId!)) {
-            self.showAlertMessages(textMessage: "Please enter valid email address.")
+            self.showAlertMessages(textMessage: kMessageValidEmail)
             
         }else if user.password == ""{
-            self.showAlertMessages(textMessage: "Please enter your password.")
+            self.showAlertMessages(textMessage: kMessagePasswordBlank)
             
         }else{
             print("Call the webservice")
@@ -90,7 +88,7 @@ extension SignInViewController : UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let tableViewData = tableViewRowDetails?.object(at: indexPath.row) as! NSDictionary
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "DetailsCell", for: indexPath) as! SignInTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: kSignInTableViewCellIdentifier, for: indexPath) as! SignInTableViewCell
         
         var isSecuredEntry : Bool = false
         if indexPath.row == SignInTableViewTags.Password.rawValue{

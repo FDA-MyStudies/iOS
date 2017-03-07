@@ -36,7 +36,7 @@ class SignUpCompleteViewController : UIViewController{
     }
     
     
-    //MARK: Submit Button Action and validation checks
+    //Next button Action
     @IBAction func nextButtonAction(_ sender: Any) {
         
         

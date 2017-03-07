@@ -14,6 +14,7 @@ class SignUpViewController : UIViewController{
     
     var tableViewRowDetails : NSMutableArray?
     var agreedToTerms : Bool = false
+    var confirmPassword = ""
     
     @IBOutlet var tableView : UITableView?
     @IBOutlet var tableViewFooterView : UIView?
@@ -30,7 +31,7 @@ class SignUpViewController : UIViewController{
         buttonSubmit?.layer.borderColor = kUicolorForButtonBackground
         
         self.agreeToTermsAndConditions()
-        self.title = NSLocalizedString("SIGN UP", comment: "")
+        self.title = NSLocalizedString(kSignUpTitleText, comment: "")
         
         //load plist info
         let plistPath = Bundle.main.path(forResource: "SignUpPlist", ofType: ".plist", inDirectory:nil)
@@ -63,7 +64,7 @@ class SignUpViewController : UIViewController{
         labelTermsAndConditions?.numberOfLines = 0;
         
         //Step 1: Define a normal attributed string for non-link texts
-        let string = NSLocalizedString("I Agree to the Terms and Privacy Policy", comment: "")
+        let string = NSLocalizedString(kAgreeToTermsAndConditionsText, comment: "")
         
         let attributes = [NSForegroundColorAttributeName: UIColor.black,
                           NSFontAttributeName: UIFont.preferredFont(forTextStyle: UIFontTextStyle.caption1)]
@@ -74,17 +75,17 @@ class SignUpViewController : UIViewController{
         let handler = {
             (hyperLabel: FRHyperLabel?, substring: String?) -> Void in
             
-            if substring == NSLocalizedString("Terms", comment: ""){
+            if substring == NSLocalizedString(kTermsText, comment: ""){
                 //self.performSegue(withIdentifier: "TermsOfUse", sender: nil)
                 
             }
-            else if substring == NSLocalizedString("Privacy Policy" , comment: ""){
+            else if substring == NSLocalizedString(kPrivacyPolicyText , comment: ""){
                 //self.performSegue(withIdentifier: "TermsOfUse", sender: nil)
             }
         }
         
         //Step 3: Add link substrings
-        labelTermsAndConditions?.setLinksForSubstrings(["Privacy Policy", "Terms"], withLinkHandler: handler)
+        labelTermsAndConditions?.setLinksForSubstrings([kPrivacyPolicyText, kTermsText], withLinkHandler: handler)
         
     }
     
@@ -96,34 +97,34 @@ class SignUpViewController : UIViewController{
     //All validation checks and Password,Email complexity checks
     func validateAllFields() -> Bool{
         if user.firstName == "" {
-            self.showAlertMessages(textMessage: "Please enter your first name.")
+            self.showAlertMessages(textMessage: kMessageFirstNameBlank)
             return false
         }else if user.lastName == ""{
-            self.showAlertMessages(textMessage: "Please enter your last name.")
+            self.showAlertMessages(textMessage: kMessageLastNameBlank)
             return false
         }else if user.emailId == "" {
-            self.showAlertMessages(textMessage: "Please enter your email address.")
+            self.showAlertMessages(textMessage: kMessageEmailBlank)
             return false
         }else if !(Utilities.isValidEmail(testStr: user.emailId!)){
-            self.showAlertMessages(textMessage: "Please enter valid email address.")
+            self.showAlertMessages(textMessage: kMessageValidEmail)
             return false
         }else if user.password == ""{
-            self.showAlertMessages(textMessage: "Please enter your password.")
+            self.showAlertMessages(textMessage: kMessagePasswordBlank)
             return false
-        }else if user.confirmPassword == ""{
-            self.showAlertMessages(textMessage: "Please enter confirm password.")
+        }else if confirmPassword == ""{
+            self.showAlertMessages(textMessage: kMessageConfirmPasswordBlank)
             return false
-        }else if (user.password != user.confirmPassword){
-            self.showAlertMessages(textMessage: "New password and confirm password does not match.")
+        }else if (user.password != confirmPassword){
+            self.showAlertMessages(textMessage: kMessageValidatePasswords)
             return false
             
-        }else if ((user.password?.characters.count)! < 8 && (user.password?.characters.count)! != 0) || ((user.confirmPassword?.characters.count)! < 8 && user.confirmPassword?.characters.count != 0) {
-            self.showAlertMessages(textMessage: "Password should have minimum of 8 characters.")
+        }else if ((user.password?.characters.count)! < 8 && (user.password?.characters.count)! != 0) || ((confirmPassword.characters.count) < 8 && confirmPassword.characters.count != 0) {
+            self.showAlertMessages(textMessage: kMessageValidatePasswordCharacters)
             return false
         }
         
-        if Utilities.isPasswordValid(text: (user.password)!) == false || Utilities.isPasswordValid(text: (user.confirmPassword)!) == false {
-            self.showAlertMessages(textMessage: "Password should have minimum of 1 special character, 1 upper case letter and 1 numeric number.")
+        if Utilities.isPasswordValid(text: (user.password)!) == false || Utilities.isPasswordValid(text: (confirmPassword)) == false {
+            self.showAlertMessages(textMessage: kMessageValidatePasswordComplexity)
             return false
         }
         
@@ -141,7 +142,7 @@ class SignUpViewController : UIViewController{
         if self.validateAllFields() == true {
             
             if !(agreedToTerms){
-                self.showAlertMessages(textMessage: "Please agree to terms and conditions.")
+                self.showAlertMessages(textMessage: kMessageAgreeToTermsAndConditions)
             }else{
                 //Call the Webservice
                 
@@ -151,7 +152,7 @@ class SignUpViewController : UIViewController{
         }
     }
     
-    //MARK: Agree to Aerms and Conditions checks
+    //MARK: Agree to Terms and Conditions checks
     @IBAction func agreeButtonAction(_ sender: Any) {
         if (sender as! UIButton).isSelected{
             (sender as! UIButton).isSelected = !(sender as! UIButton).isSelected
@@ -173,7 +174,7 @@ extension SignUpViewController : UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let tableViewData = tableViewRowDetails?.object(at: indexPath.row) as! NSDictionary
-        let cell = tableView.dequeueReusableCell(withIdentifier: "CommonDetailsCell", for: indexPath) as! SignUpTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: kSignUpTableViewCellIdentifier, for: indexPath) as! SignUpTableViewCell
         
         var isSecuredEntry : Bool = false
         
@@ -227,7 +228,7 @@ extension SignUpViewController : UITextFieldDelegate{
             break
             
         case SignUpTableViewTags.ConfirmPassword.rawValue:
-            user.confirmPassword = textField.text
+            confirmPassword = textField.text!
             break
             
         default:

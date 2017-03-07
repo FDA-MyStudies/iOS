@@ -15,6 +15,7 @@ class ConsentResult {
     var startTime:Date?
     var endTime:Date?
     
+    var consentId:String?
     var consentDocument:ORKConsentDocument?
     
     var result:Array<ActivityStepResult>?
@@ -57,11 +58,17 @@ class ConsentResult {
                         
                         let dir = FileManager.getStorageDirectory(type: .study)
                         
-                        let fullPath = dir + "/" + "Consent" + "\(arc4random())" + ".pdf"
+                        let fullPath = dir + "/" + "Consent" + "\(self.consentId)" + ".pdf"
                     
                         do {
                             
+                            if FileManager.default.fileExists(atPath: fullPath){
+                                
+                               try FileManager.default.removeItem(atPath: fullPath)
+                                
+                            }
                             FileManager.default.createFile(atPath:fullPath , contents: data, attributes: [:])
+                            
                             try data?.write(to: URL(string:fullPath)! , options: .noFileProtection)
                             
                             // writing to disk

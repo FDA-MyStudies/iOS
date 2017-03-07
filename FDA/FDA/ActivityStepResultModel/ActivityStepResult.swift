@@ -23,6 +23,10 @@ let kSpatialSpanMemoryKeyScore = "score"
 let kSpatialSpanMemoryKeyNumberOfGames = "numberOfGames"
 let kSpatialSpanMemoryKeyNumberOfFailures = "numberOfFailures"
 
+
+
+
+
 let kTowerOfHanoiKeyPuzzleWasSolved = "puzzleWasSolved"
 let kTowerOfHanoiKeyNumberOfMoves = "numberOfMoves"
 
@@ -32,6 +36,17 @@ let kFetalKickCounterCount = "count" // not in use presentlly...Need to be used
 enum ActiveStepResultType:String{
     case boolean = "boolean"
     case numeric = "numeric"
+}
+
+enum SpatialSpanMemoryType:Int{
+    case score = 0
+    case numberOfGames = 1
+    case numberOfFailures = 2
+}
+
+enum TowerOfHanoiResultType:Int{
+    case puzzleWasSolved = 0
+    case numberOfMoves = 1
 }
 
 enum ActvityStepResultType:String{
@@ -196,12 +211,12 @@ class ActivityStepResult{
             
             
             NSLog("step-Type: \( self.step?.type)")
-            //((  stepResult.results?[0] as? ORKQuestionResult?) != nil)
+            //((  stepResult.results?.first as? ORKQuestionResult?) != nil)
             if  activityType == .Questionnaire{
                 // for question Step
                 
                 
-                if  let questionstepResult:ORKQuestionResult? = stepResult.results?[0] as? ORKQuestionResult?{
+                if  let questionstepResult:ORKQuestionResult? = stepResult.results?.first as? ORKQuestionResult?{
                     
                     
                     switch questionstepResult?.questionType.rawValue{
@@ -224,7 +239,7 @@ class ActivityStepResult{
                             let stepTypeResult = questionstepResult as! ORKChoiceQuestionResult
                             if Utilities.isValidObject(someObject:stepTypeResult.choiceAnswers as AnyObject?){
                                 if (stepTypeResult.choiceAnswers?.count)! > 0{
-                                    self.value = stepTypeResult.choiceAnswers?[0]
+                                    self.value = stepTypeResult.choiceAnswers?.first
                                 }
                                 else{
                                     self.value = ""
@@ -244,7 +259,7 @@ class ActivityStepResult{
                         let stepTypeResult = questionstepResult as! ORKChoiceQuestionResult
                         if Utilities.isValidObject(someObject:stepTypeResult.choiceAnswers as AnyObject?){
                             if (stepTypeResult.choiceAnswers?.count)! > 0{
-                                self.value = stepTypeResult.choiceAnswers?[0]
+                                self.value = stepTypeResult.choiceAnswers?.first
                             }
                             else{
                                 self.value = ""
@@ -262,7 +277,7 @@ class ActivityStepResult{
                                 self.value = stepTypeResult.choiceAnswers
                             }
                             else{
-                                self.value = stepTypeResult.choiceAnswers?[0]
+                                self.value = stepTypeResult.choiceAnswers?.first
                             }
                             
                         }
@@ -372,7 +387,7 @@ class ActivityStepResult{
                 else{
                     
                     // for consent step result we are storing the ORKConsentSignatureResult
-                    let consentStepResult:ORKConsentSignatureResult? = (stepResult.results?[0] as? ORKConsentSignatureResult?)!
+                    let consentStepResult:ORKConsentSignatureResult? = (stepResult.results?.first as? ORKConsentSignatureResult?)!
                     
                     self.value = consentStepResult;
                     
@@ -382,7 +397,7 @@ class ActivityStepResult{
                 
                 NSLog("Inside Activity")
                 
-                let activityResult:ORKResult? = stepResult.results?[0]
+                let activityResult:ORKResult? = stepResult.results?.first
                 var resultArray:Array<Dictionary<String, Any>>? =  Array()
                 
                 if (activityResult as? ORKSpatialSpanMemoryResult) != nil {
@@ -400,15 +415,15 @@ class ActivityStepResult{
                             resultDict?[kActivityActiveKeyResultType] = ActiveStepResultType.numeric
                             
                             
-                            switch i {
-                            case 0: // score
+                            switch SpatialSpanMemoryType(rawValue:i)! as SpatialSpanMemoryType {
+                            case .score: // score
                                 resultDict?[kActivityActiveStepKey] = kSpatialSpanMemoryKeyScore
                                 resultDict?[kActivityStepResultValue] = stepTypeResult?.score
                                 
-                            case 1: //numberOfGames
+                            case .numberOfGames: //numberOfGames
                                 resultDict?[kActivityActiveStepKey] = kSpatialSpanMemoryKeyNumberOfGames
                                 resultDict?[kActivityStepResultValue] = stepTypeResult?.numberOfGames
-                            case 2: // numberOfFailures
+                            case .numberOfFailures: // numberOfFailures
                                 resultDict?[kActivityActiveStepKey] = kSpatialSpanMemoryKeyNumberOfFailures
                                 resultDict?[kActivityStepResultValue] = stepTypeResult?.numberOfFailures
                                 
@@ -439,7 +454,7 @@ class ActivityStepResult{
                         resultDict?[kActivityActiveKeyResultType] = ActiveStepResultType.numeric
                         
                         
-                        if i == 0{ //puzzleWasSolved
+                        if  TowerOfHanoiResultType(rawValue:i) == .puzzleWasSolved{ //puzzleWasSolved
                             resultDict?[kActivityActiveStepKey] = kTowerOfHanoiKeyPuzzleWasSolved
                             resultDict?[kActivityStepResultValue] = stepTypeResult?.puzzleWasSolved
                         }

@@ -45,6 +45,50 @@ class SignUpTableViewCell: UITableViewCell {
         labelType?.text = NSLocalizedString((data["helpText"] as? String)!, comment: "")
         textFieldValue?.placeholder = NSLocalizedString((data["placeHolder"] as? String)!, comment: "")
     }
+    
+    /* 
+    Set cell data from User Object (for Profile Class)
+     @param tag    is the cell index 
+ */
+    func setCellData(tag:SignUpTableViewTags)  {
+        
+        switch tag {
+        case .FirstNameTag:
+            if Utilities.isValidValue(someObject: user.firstName as AnyObject?) {
+                self.textFieldValue?.text =  user.firstName
+            }
+            else{
+                 self.textFieldValue?.text = ""
+            }
+        case .LastName:
+            if Utilities.isValidValue(someObject: user.lastName as AnyObject?) {
+                self.textFieldValue?.text =  user.lastName
+            }
+            else{
+                self.textFieldValue?.text = ""
+            }
+        case .EmailId:
+            if Utilities.isValidValue(someObject: user.emailId as AnyObject?) {
+                self.textFieldValue?.text =  user.emailId
+            }
+            else{
+                self.textFieldValue?.text = ""
+            }
+        case .Password:
+            if Utilities.isValidValue(someObject: user.password as AnyObject?) {
+                self.textFieldValue?.text =  user.password
+            }
+            else{
+                self.textFieldValue?.text = ""
+            }
+            
+        default: break
+            
+        }
+        
+        
+    }
+    
 }
 
 

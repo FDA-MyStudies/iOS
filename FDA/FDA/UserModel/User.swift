@@ -26,7 +26,7 @@ enum LogoutReason:String{
 
 let kUserValueForOS = "ios"
 
-
+let kCFBundleShortVersionString = "CFBundleShortVersionString"
 
 
 //MARK: User
@@ -39,7 +39,7 @@ class User{
     var userType : UserType?
     var userId : String!
     var password : String? = ""
-    var confirmPassword : String? = ""
+    //var confirmPassword : String? = ""
     var verified : Bool!
     var authToken: String!
     var participatedStudies:Array<UserStudyStatus>! = []
@@ -143,7 +143,7 @@ class User{
             infoDict.setValue(kUserValueForOS, forKey:kUserOS)
             
             
-            if let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String {
+            if let version = Bundle.main.infoDictionary?[kCFBundleShortVersionString] as? String {
                 infoDict.setValue(version, forKey:kUserAppVersion)
             }
             
@@ -170,7 +170,7 @@ class User{
     
     func bookmarkStudy(studyId:String){
         
-      
+        
         let studies = self.participatedStudies as Array<UserStudyStatus>
         if let study =   studies.filter({$0.studyId == studyId}).first {
             study.bookmarked = true
@@ -186,7 +186,7 @@ class User{
             
             Logger.sharedInstance.info("Bookmark: study is bookmarked : \(studyId)")
         }
-      
+        
     }
     
     func removeBookbarkStudy(studyId:String){
@@ -241,7 +241,7 @@ class User{
         }
     }
     
-     //MARK:Study Status
+    //MARK:Study Status
     func updateStudyStatus(studyId:String,status:UserStudyStatus.StudyStatus){
         
         let studies = self.participatedStudies as Array<UserStudyStatus>
@@ -265,7 +265,7 @@ class User{
         
         let studies = self.participatedStudies as Array<UserStudyStatus>
         if let study =   studies.filter({$0.studyId == studyId}).first {
-           return study.status
+            return study.status
         }
         return .yetToJoin
     }
@@ -297,23 +297,25 @@ class User{
         }
         return .yetToJoin
     }
-
+    
     
 }
 
 //MARK:User Settings
 class Settings{
-
+    
     var remoteNotifications : Bool?
     var localNotifications :Bool?
     var touchId :Bool?
     var passcode :Bool?
+    var leadTime :String?
     
     init() {
         self.remoteNotifications = false
         self.localNotifications = false
         self.touchId  = false
         self.passcode = false
+        self.leadTime = "00:00"
     }
     
     init(remoteNotifications:Bool?,localNotifications:Bool?,touchId: Bool?,passcode:Bool?){
@@ -324,7 +326,7 @@ class Settings{
     }
     
     func setRemoteNotification(value : Bool){
-            self.remoteNotifications = value 
+        self.remoteNotifications = value
     }
     func setLocalNotification(value : Bool){
         self.localNotifications = value
@@ -334,6 +336,9 @@ class Settings{
     }
     func setPasscode(value : Bool){
         self.passcode = value
+    }
+    func setLeadTime(value:String) {
+        self.leadTime = value
     }
     
     
@@ -386,7 +391,7 @@ class UserStudyStatus{
                 return "Not Eligible"
             case .withdrawn:
                 return "Withdrawn"
-           
+                
             }
         }
     }
@@ -401,7 +406,7 @@ class UserStudyStatus{
         
     }
     
-     init(detail:Dictionary<String, Any>){
+    init(detail:Dictionary<String, Any>){
         
         if Utilities.isValidObject(someObject: detail as AnyObject?){
             
@@ -428,15 +433,15 @@ class UserStudyStatus{
                     self.status = .withdrawn
                 }
             }
-           
+            
             
         }
         else{
             Logger.sharedInstance.debug("UserStudyStatus Dictionary is null:\(detail)")
         }
         
-       
-
+        
+        
     }
     
 }
@@ -512,7 +517,7 @@ class UserActivityStatus{
             Logger.sharedInstance.debug("UserStudyStatus Dictionary is null:\(detail)")
         }
         
-      
+        
         
     }
     

@@ -9,15 +9,18 @@
 import Foundation
 import UIKit
 
-class SecondViewController : UIViewController{
+class SecondGatewayOverviewViewController : UIViewController{
     
+    @IBOutlet var imageViewBackgroundImage : UIImageView?
+    @IBOutlet var labelHeadingText : UILabel?
+    @IBOutlet var labelDescriptionText : UILabel?
     @IBOutlet var buttonGetStarted : UIButton?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         //Used to set border color for bottom view
-        buttonGetStarted?.layer.borderColor = UIColor.init(colorLiteralRed: 0/255.0, green: 124/255.0, blue: 186/255.0, alpha: 1.0).cgColor
+        buttonGetStarted?.layer.borderColor = kUicolorForButtonBackground
         
     }
     
@@ -33,4 +36,9 @@ class SecondViewController : UIViewController{
         
     }
     
+    //GetStarted Button Action
+    @IBAction func getStartedButtonClicked(_ sender: Any){
+        
+        
+    }
 }

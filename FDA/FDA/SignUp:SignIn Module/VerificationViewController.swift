@@ -34,7 +34,7 @@ class VerificationViewController : UIViewController{
         
     }
     
-    //MARK: Submit Button Action and validation checks
+    //Continue Button Action and validation checks
     @IBAction func continueButtonAction(_ sender: Any) {
         
         

@@ -19,7 +19,7 @@ class ForgotPasswordViewController : UIViewController{
         
         //Used to set border color for bottom view
         buttonSubmit?.layer.borderColor = kUicolorForButtonBackground
-        self.title = NSLocalizedString("Forgot Password", comment: "")
+        self.title = NSLocalizedString(kForgotPasswordTitleText, comment: "")
         
         //Used for background tap dismiss keyboard
         let gestureRecognizwe : UITapGestureRecognizer = UITapGestureRecognizer.init(target: self, action: #selector(SignInViewController.dismissKeyboard))

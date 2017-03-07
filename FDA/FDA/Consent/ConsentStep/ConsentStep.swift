@@ -34,21 +34,21 @@ enum ConsentStepSectionType:String{
         case .overview:
             return 0;
         case .dataGathering:
-            return 0;
+            return 1;
         case .privacy:
-            return 0;
+            return 2;
         case .timeCommitment:
-            return 0;
+            return 3;
         case .timeCommitment:
-            return 0;
+            return 4;
         case .studySurvey:
-            return 0;
+            return 5;
         case .overview:
-            return 0;
+            return 6;
         case .studyTasks:
-            return 0;
+            return 7;
         case .withdrawing:
-            return 0;
+            return 8;
             
         default:
             return -1

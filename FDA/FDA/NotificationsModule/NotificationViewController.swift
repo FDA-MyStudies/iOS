@@ -16,7 +16,7 @@ class NotificationViewController : UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.title = "NOTIFICATIONS"
+        self.navigationItem.title =  NSLocalizedString("NOTIFICATIONS", comment: "")
         
     }
     

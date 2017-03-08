@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<dict>
+		<key>title</key>
+		<string>Welcome!</string>
+		<key>text</key>
+		<string>This is a one-stop app that houses several Studies being conducted by the FDA. Check out the list of available Studies and join the ones that are relevant to you. We look forward to having you on board!</string>
+		<key>type</key>
+		<string>video</string>
+		<key>image</key>
+		<string></string>
+		<key>link</key>
+		<string></string>
+	</dict>
+	<dict>
+		<key>title</key>
+		<string>Improving Health Research Outcomes</string>
+		<key>text</key>
+		<string>This is a one-stop app that houses several Studies being conducted by the FDA. Check out the list of available Studies and join the ones that are relevant to you. We look forward to having you on board!</string>
+		<key>type</key>
+		<string></string>
+		<key>image</key>
+		<string></string>
+		<key>link</key>
+		<string></string>
+	</dict>
+	<dict>
+		<key>title</key>
+		<string>Get fit everyday</string>
+		<key>text</key>
+		<string>This is a one-stop app that houses several Studies being conducted by the FDA. Check out the list of available Studies and join the ones that are relevant to you. We look forward to having you on board!</string>
+		<key>type</key>
+		<string></string>
+		<key>image</key>
+		<string></string>
+		<key>link</key>
+		<string></string>
+	</dict>
+	<dict>
+		<key>title</key>
+		<string>Improving Health Research Outcomes</string>
+		<key>text</key>
+		<string>This is a one-stop app that houses several Studies being conducted by the FDA. Check out the list of available Studies and join the ones that are relevant to you. We look forward to having you on board!</string>
+		<key>type</key>
+		<string></string>
+		<key>image</key>
+		<string></string>
+		<key>link</key>
+		<string></string>
+	</dict>
+</array>
+</plist>

@@ -25,8 +25,12 @@ class PageViewController : UIPageViewController{
 
     weak var pageViewDelegate: PageViewControllerDelegate?
     
+    var overview = Overview()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.loadTestData()
         
         dataSource = self
         delegate =  self
@@ -47,6 +51,41 @@ class PageViewController : UIPageViewController{
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
+        
+    }
+    
+    func loadTestData(){
+        //        let filePath  = Bundle.main.path(forResource: "GatewayOverview", ofType: "json")
+        //        let data = NSData(contentsOfFile: filePath!)
+        
+        //load plist info
+        let plistPath = Bundle.main.path(forResource: "GatewayOverview", ofType: ".plist", inDirectory:nil)
+        let arrayContent = NSMutableArray.init(contentsOfFile: plistPath!)
+        
+        do {
+            //let response = try JSONSerialization.jsonObject(with: data! as Data, options: []) as? Dictionary<String,Any>
+            
+            
+            //let overviewList = response[kOverViewInfo] as! Array<Dictionary<String,Any>>
+            var listOfOverviews:Array<OverviewSection> = []
+            for overview in arrayContent!{
+                let overviewObj = OverviewSection(detail: overview as! Dictionary<String, Any>)
+                listOfOverviews.append(overviewObj)
+            }
+            
+            //create new Overview object
+            //overview = Overview()
+            overview.type = .gateway
+            overview.sections = listOfOverviews
+            
+            //assgin to Gateway
+            // Gateway.instance.overview = overview
+            
+            
+            
+        } catch {
+            print("json error: \(error.localizedDescription)")
+        }
         
     }
     
@@ -82,6 +121,9 @@ class PageViewController : UIPageViewController{
     
     //Scrolls to the view controller at the given index.
     func scrollToViewController(index newIndex: Int) {
+        
+        
+        
         if let firstViewController = viewControllers?.first,
             let currentIndex = orderedViewControllers.index(of: firstViewController) {
             let direction: UIPageViewControllerNavigationDirection = newIndex >= currentIndex ? .forward : .reverse
@@ -91,13 +133,40 @@ class PageViewController : UIPageViewController{
     }
     
     private(set) lazy var orderedViewControllers: [UIViewController] = {
-        return [self.newColoredViewController(ViewController: "First"),
-                self.newColoredViewController(ViewController: "Second")]
+      
+        return self.getOverviewViewControllers()
     }()
     
-    private func newColoredViewController(ViewController: String) -> UIViewController {
-        return UIStoryboard(name: "Login", bundle: nil) .
-            instantiateViewController(withIdentifier: "\(ViewController)ViewController")
+    private func getOverviewViewControllers() -> [UIViewController] {
+        
+        var controllers:Array<UIViewController> = []
+        var storyboard = UIStoryboard.init(name: "Login", bundle: Bundle.main)
+        if overview.type == .study {
+            storyboard = UIStoryboard.init(name: "Study", bundle: Bundle.main)
+            
+            
+            
+            
+            
+            
+            
+        }
+        else {
+            //get first overview controller
+           let firstController = storyboard.instantiateViewController(withIdentifier: "FirstViewController") as! FirstGatewayOverviewViewController
+            firstController.overviewSectionDetail = overview.sections[0]
+            controllers.append(firstController)
+            
+            let sections = overview.sections.count
+            for section in 1...(sections-1) {
+                
+                let restControllers = storyboard.instantiateViewController(withIdentifier: "SecondViewController") as! SecondGatewayOverviewViewController
+                restControllers.overviewSectionDetail = overview.sections[section]
+                controllers.append(restControllers)
+            }
+        }
+        
+        return controllers
     }
 }
 

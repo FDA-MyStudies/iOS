@@ -11,10 +11,15 @@ import UIKit
 
 class FirstGatewayOverviewViewController : UIViewController{
     
+    var tableViewRowDetails : NSMutableArray!
+    
     @IBOutlet var imageViewBackgroundImage : UIImageView?
     @IBOutlet var buttonWatchVideo : UIButton?
     @IBOutlet var buttonGetStarted : UIButton?
     @IBOutlet var labelDescriptionText : UILabel?
+    @IBOutlet var labelTitleText : UILabel?
+    
+    var overviewSectionDetail : OverviewSection!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,7 +37,8 @@ class FirstGatewayOverviewViewController : UIViewController{
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        
+        labelTitleText?.text = overviewSectionDetail.title
+
     }
     
     override func viewDidAppear(_ animated: Bool) {

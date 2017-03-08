@@ -11,6 +11,7 @@
 		2F2CF29CD5359B994C8987E7 /* Pods_FDA.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 09ABCB412CFB53694DC239AC /* Pods_FDA.framework */; };
 		481DFA4C1E6EEB70004C39EF /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 481DFA4B1E6EEB70004C39EF /* WebViewController.swift */; };
 		482062521E68532300C7A7AF /* UIUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 482062511E68532300C7A7AF /* UIUtilities.swift */; };
+		486304D61E6FE77C003CD406 /* GatewayOverview.plist in Resources */ = {isa = PBXBuildFile; fileRef = 486304D51E6FE77C003CD406 /* GatewayOverview.plist */; };
 		486B51271E6951E400B98EBC /* 02.png in Resources */ = {isa = PBXBuildFile; fileRef = 486B511E1E6951E400B98EBC /* 02.png */; };
 		486B51281E6951E400B98EBC /* 03.png in Resources */ = {isa = PBXBuildFile; fileRef = 486B511F1E6951E400B98EBC /* 03.png */; };
 		486B51291E6951E400B98EBC /* 04.png in Resources */ = {isa = PBXBuildFile; fileRef = 486B51201E6951E400B98EBC /* 04.png */; };
@@ -176,6 +177,7 @@
 		294A17E09870D2198653B56F /* Pods-FDAUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FDAUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-FDAUITests/Pods-FDAUITests.release.xcconfig"; sourceTree = "<group>"; };
 		481DFA4B1E6EEB70004C39EF /* WebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 		482062511E68532300C7A7AF /* UIUtilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIUtilities.swift; sourceTree = "<group>"; };
+		486304D51E6FE77C003CD406 /* GatewayOverview.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = GatewayOverview.plist; sourceTree = "<group>"; };
 		486B511E1E6951E400B98EBC /* 02.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 02.png; sourceTree = "<group>"; };
 		486B511F1E6951E400B98EBC /* 03.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 03.png; sourceTree = "<group>"; };
 		486B51201E6951E400B98EBC /* 04.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 04.png; sourceTree = "<group>"; };
@@ -762,10 +764,11 @@
 		94B3DD271E6ED8E500327AE5 /* GatewayOverviewUI */ = {
 			isa = PBXGroup;
 			children = (
-				94B3DD281E6ED8E500327AE5 /* FirstGatewayOverviewViewController.swift */,
 				94B3DD291E6ED8E500327AE5 /* HomeViewController.swift */,
 				94B3DD2A1E6ED8E500327AE5 /* PageViewController.swift */,
+				94B3DD281E6ED8E500327AE5 /* FirstGatewayOverviewViewController.swift */,
 				94B3DD2B1E6ED8E500327AE5 /* SecondGatewayOverviewViewController.swift */,
+				486304D51E6FE77C003CD406 /* GatewayOverview.plist */,
 			);
 			path = GatewayOverviewUI;
 			sourceTree = "<group>";
@@ -774,9 +777,9 @@
 			isa = PBXGroup;
 			children = (
 				94B3DD2F1E6ED8E500327AE5 /* ForgotPasswordViewController.swift */,
-				94B3DD301E6ED8E500327AE5 /* SignInPlist.plist */,
 				94B3DD311E6ED8E500327AE5 /* SignInTableViewCell.swift */,
 				94B3DD321E6ED8E500327AE5 /* SignInViewController.swift */,
+				94B3DD301E6ED8E500327AE5 /* SignInPlist.plist */,
 			);
 			path = LoginUI;
 			sourceTree = "<group>";
@@ -1026,6 +1029,7 @@
 				486B512A1E6951E400B98EBC /* 05.png in Resources */,
 				486B512F1E6951E400B98EBC /* 16.png in Resources */,
 				6EAB39A91E4B0B4A003442B8 /* Resources.plist in Resources */,
+				486304D61E6FE77C003CD406 /* GatewayOverview.plist in Resources */,
 				6EF05A991E4DC36400CD7661 /* StepProvider.plist in Resources */,
 				486B512C1E6951E400B98EBC /* 10.png in Resources */,
 				486B51281E6951E400B98EBC /* 03.png in Resources */,

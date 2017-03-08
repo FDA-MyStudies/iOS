@@ -15,6 +15,7 @@ class SecondGatewayOverviewViewController : UIViewController{
     @IBOutlet var labelHeadingText : UILabel?
     @IBOutlet var labelDescriptionText : UILabel?
     @IBOutlet var buttonGetStarted : UIButton?
+    var overviewSectionDetail : OverviewSection!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,7 +27,7 @@ class SecondGatewayOverviewViewController : UIViewController{
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
+        labelHeadingText?.text = overviewSectionDetail.title
         
     }
     

@@ -22,7 +22,7 @@ class WebViewController : UIViewController{
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        let url = "http://35.167.14.182:8080/events/images/help.html" as AnyObject
+        let url = "http://35.167.14.182:5080/live/viewer.jsp?host=35.167.14.182&stream=NoswMb" as AnyObject
         UIWebView.loadRequest(webView!)(NSURLRequest(url: NSURL(string: url as! String)! as URL) as URLRequest)
         
         //Used to add a loader
@@ -47,3 +47,10 @@ class WebViewController : UIViewController{
         self.dismiss(animated: true, completion: nil)
     }
 }
+
+
+
+
+
+
+

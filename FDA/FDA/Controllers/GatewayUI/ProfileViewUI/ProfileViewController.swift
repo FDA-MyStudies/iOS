@@ -76,12 +76,14 @@ class ProfileViewController: UIViewController {
     
     //MARK:IBActions
     
+    
+    
+    
+    
     /*
      button action for LeadtimeButton, CancelButton & DoneButton
      @param sender  UIButton
      */
-    
-    
     @IBAction func buttonActionLeadTime(_ sender: UIButton) {
         
     
@@ -135,10 +137,18 @@ class ProfileViewController: UIViewController {
     }
     
     @IBAction func buttonActionSignOut(_ sender: UIButton) {
-        
+        UIUtilities.showAlertMessageWithTwoActionsAndHandler("", errorMessage: "Are you sure? You want to Signout?", errorAlertActionTitle: "Ok", errorAlertActionTitle2: "Cancel", viewControllerUsed: self, action1: {
+            
+           // SignOut Action
+            
+            
+        }, action2: {
+            // Cancel action
+        })
+
     }
     @IBAction func buttonActionDeleteAccount(_ sender: UIButton) {
-        
+         self.performSegue(withIdentifier: kConfirmationSegueIdentifier, sender: nil)
     }
     
     //MARK:Utility Methods

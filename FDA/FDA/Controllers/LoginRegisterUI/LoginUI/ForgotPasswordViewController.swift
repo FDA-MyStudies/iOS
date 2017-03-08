@@ -25,6 +25,8 @@ class ForgotPasswordViewController : UIViewController{
         let gestureRecognizwe : UITapGestureRecognizer = UITapGestureRecognizer.init(target: self, action: #selector(SignInViewController.dismissKeyboard))
         self.view?.addGestureRecognizer(gestureRecognizwe)
         
+        
+        self.addBackBarButton()
     }
     
     override func viewWillAppear(_ animated: Bool) {

@@ -47,12 +47,16 @@ class StudyListViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        //self.addRightBarButton() //Phase2
-        self.navigationItem.hidesBackButton = true
-        self.addLeftBarButton()
         
+        //self.addRightBarButton() //Phase2
+        //self.addLeftBarButton()
+        self.title = NSLocalizedString("FDA LISTENS!", comment: "")
         self.loadTestData()
         
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        self.setNavigationBarItem()
     }
 
     override func didReceiveMemoryWarning() {

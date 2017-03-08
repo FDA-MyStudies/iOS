@@ -15,10 +15,15 @@ class SplashViewController: UIViewController {
 
         // Do any additional setup after loading the view.
         
+        
+        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        
         let loginStoryboard = UIStoryboard.init(name: "Login", bundle:Bundle.main)
         let homeViewController = loginStoryboard.instantiateViewController(withIdentifier:"HomeViewController")
         self.navigationController?.pushViewController(homeViewController, animated: true)
-        
     }
 
     override func didReceiveMemoryWarning() {

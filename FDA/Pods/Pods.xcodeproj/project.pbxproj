@@ -1,935 +1,2851 @@
-// !$*UTF8*$!
-{
-	archiveVersion = 1;
-	classes = {
-	};
-	objectVersion = 46;
-	objects = {
-
-/* Begin PBXBuildFile section */
-		03ADDB06C3BD3EF02468E9EB42CE33C5 /* Pods-FDA-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = D3554EBDD914424A247D668DEA0AC386 /* Pods-FDA-dummy.m */; };
-		08F70BDD45F0B73F1AD27507808FEC3B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 792165F2CA033667D6F57205316D40A1 /* Foundation.framework */; };
-		0B9FAA59E53F8381BAD75316E70145BE /* IQUIView+IQKeyboardToolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 091101C009469A4E49D41E8E2426943A /* IQUIView+IQKeyboardToolbar.swift */; };
-		123D28717B28730D7DDD56E56B646294 /* IQUITextFieldView+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6977B04CFD4EC1E9E8224AA89CB6B782 /* IQUITextFieldView+Additions.swift */; };
-		1C8F85A1033B5AE0FE8126CE2E937E9F /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D9AD02E9CEE9B012A246B3874CF4587 /* CoreGraphics.framework */; };
-		229E76A71ECCD0D7F794F9ACCD02438B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 792165F2CA033667D6F57205316D40A1 /* Foundation.framework */; };
-		22BF5066806248FBD63CD64193B95AB6 /* IQUIScrollView+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DAD48B5237605C364198308127FB553 /* IQUIScrollView+Additions.swift */; };
-		24ECBF2F91A87AA1C993955BE838D098 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 792165F2CA033667D6F57205316D40A1 /* Foundation.framework */; };
-		2BC48BA9EC7B6F6F334FB9CF2758D461 /* IQUIView+Hierarchy.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB50B2EA16B60164208491F69355110B /* IQUIView+Hierarchy.swift */; };
-		2EBD7B6D6EEBAD72870AECB44D1E3AE2 /* IQBarButtonItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5C2630FBC8756BEFC5DAD54F3DEF0D3 /* IQBarButtonItem.swift */; };
-		32D47B0AE0C145C1E9662CC2468FED0E /* IQTitleBarButtonItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DE1AEDD271C7C25BEFEA98E9DD262D7 /* IQTitleBarButtonItem.swift */; };
-		5B981698211292E1F92A21CC9F182675 /* IQKeyboardManagerSwift-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 86384945C21A960D2F697E5BDC40EAB3 /* IQKeyboardManagerSwift-dummy.m */; };
-		5C1B7FB4706A09F7E95F26B02797BE19 /* IQKeyboardReturnKeyHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6432154E24797B2D7AF2129EE657E550 /* IQKeyboardReturnKeyHandler.swift */; };
-		6C816954899F28E323FF581791E20B0B /* Pods-FDAUITests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = EB413D89C7AF0B6F412471992D364AF3 /* Pods-FDAUITests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		84DD3E29D80E5F29E8CF051AA2B2D948 /* Pods-FDA-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = AFE478DD98AA980C9DEA118A6C5CBDA5 /* Pods-FDA-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		89959176E9E2C981CE0A235B706E8AA7 /* IQKeyboardManagerConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3E4F223BF91A2EE436310232EC1EF85 /* IQKeyboardManagerConstants.swift */; };
-		8BFDF2E98AF75BEE97323FB0B13541D0 /* Pods-FDATests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 2A87580AD1DD7EF3B8BEFE96A7D18D08 /* Pods-FDATests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		A50218EC76648886FE767F1DCD9626DE /* IQPreviousNextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6D2054665CB08DB6C88DDBE3CE2ED90 /* IQPreviousNextView.swift */; };
-		A88CFE3F9DCE30C3AA3A2F6086C6EE84 /* IQKeyboardManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CFE1543D375F3657F0722C3946EE2AD /* IQKeyboardManager.swift */; };
-		A9F1A9CF01AF7F7A691A0A8C9E2D3A71 /* IQToolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 221F638AFD879930344CAFFE239806EF /* IQToolbar.swift */; };
-		B0E679FF770EE8E7073391580C373D92 /* IQTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D887C9AD67D2051D198022E1D8A6EC04 /* IQTextView.swift */; };
-		B49E26DF5871F564A7C9528173CE2D5F /* IQKeyboardManagerSwift-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 920E0B0CD4F92DCB6F99DE8C95BCC211 /* IQKeyboardManagerSwift-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		B61F8587602B021BDE34C13E06F55E32 /* Pods-FDATests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = A41E32ADC0470AA3B9DFE3F98285BD2D /* Pods-FDATests-dummy.m */; };
-		B9557585483AD395045D19F792D8BDE7 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 695DA86B20FEA7BF7EA40FA7DB65A479 /* UIKit.framework */; };
-		BCD6B3BA5E1132F0FD49AC39F2BF4D62 /* IQKeyboardManagerConstantsInternal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21DDAA7F709391D4C5AC42D5341336C0 /* IQKeyboardManagerConstantsInternal.swift */; };
-		BFCDDCC0D8CAF6E50CB28B561B2FD7E7 /* Pods-FDAUITests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = DAB0F40AFC6F7AF08F1F007E5EC916EE /* Pods-FDAUITests-dummy.m */; };
-		C759ACB2C97ED8A9EC91C2DF79C95F1D /* IQUIWindow+Hierarchy.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9CCF7D93C6248F9B8FE8E3134B41D58 /* IQUIWindow+Hierarchy.swift */; };
-		C92BC0B8E4CBCFD16762838B30654F29 /* IQUIViewController+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F1FA0F43B4E65CD29D57828C7EC07B3 /* IQUIViewController+Additions.swift */; };
-		D65B8481AFF5531FC2E4382CBA63C057 /* IQKeyboardManager.bundle in Resources */ = {isa = PBXBuildFile; fileRef = B7183B109708659884E4F687AA8504B8 /* IQKeyboardManager.bundle */; };
-		D73B4E8770E299C6A67DC3F0769C747E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 792165F2CA033667D6F57205316D40A1 /* Foundation.framework */; };
-		E9AD3D7B3B4B82CD4D9B817109239F55 /* IQNSArray+Sort.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DF7E038DC31A32B0117106F6F737DD1 /* IQNSArray+Sort.swift */; };
-/* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		5A9BFBA3BA100D6ECDC0156F0E99AE8E /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 4DC059E04CBA98AEDDB5C34E02D551E9;
-			remoteInfo = IQKeyboardManagerSwift;
-		};
-/* End PBXContainerItemProxy section */
-
-/* Begin PBXFileReference section */
-		091101C009469A4E49D41E8E2426943A /* IQUIView+IQKeyboardToolbar.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "IQUIView+IQKeyboardToolbar.swift"; path = "IQKeyboardManagerSwift/IQToolbar/IQUIView+IQKeyboardToolbar.swift"; sourceTree = "<group>"; };
-		0A10457984F5049577CBBD65D93AA47B /* Pods-FDATests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-FDATests.release.xcconfig"; sourceTree = "<group>"; };
-		0F1FA0F43B4E65CD29D57828C7EC07B3 /* IQUIViewController+Additions.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "IQUIViewController+Additions.swift"; path = "IQKeyboardManagerSwift/Categories/IQUIViewController+Additions.swift"; sourceTree = "<group>"; };
-		10B0988A8489D0CEBA5C899FFA2D964D /* Pods_FDA.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_FDA.framework; path = "Pods-FDA.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
-		17CA902897B80A9C58800D71129410C2 /* Pods-FDAUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-FDAUITests.debug.xcconfig"; sourceTree = "<group>"; };
-		1912B65E3A427451CF0B7B389AC7C6FF /* Pods-FDAUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-FDAUITests.release.xcconfig"; sourceTree = "<group>"; };
-		1DAD48B5237605C364198308127FB553 /* IQUIScrollView+Additions.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "IQUIScrollView+Additions.swift"; path = "IQKeyboardManagerSwift/Categories/IQUIScrollView+Additions.swift"; sourceTree = "<group>"; };
-		21DDAA7F709391D4C5AC42D5341336C0 /* IQKeyboardManagerConstantsInternal.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = IQKeyboardManagerConstantsInternal.swift; path = IQKeyboardManagerSwift/Constants/IQKeyboardManagerConstantsInternal.swift; sourceTree = "<group>"; };
-		221F638AFD879930344CAFFE239806EF /* IQToolbar.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = IQToolbar.swift; path = IQKeyboardManagerSwift/IQToolbar/IQToolbar.swift; sourceTree = "<group>"; };
-		2A87580AD1DD7EF3B8BEFE96A7D18D08 /* Pods-FDATests-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-FDATests-umbrella.h"; sourceTree = "<group>"; };
-		2B11263B168F88E7EE538C7A8B31E903 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		2DE1AEDD271C7C25BEFEA98E9DD262D7 /* IQTitleBarButtonItem.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = IQTitleBarButtonItem.swift; path = IQKeyboardManagerSwift/IQToolbar/IQTitleBarButtonItem.swift; sourceTree = "<group>"; };
-		33CFAD10705C6600EF1E30DF2C86CA3E /* Pods-FDATests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-FDATests.debug.xcconfig"; sourceTree = "<group>"; };
-		384973EE5B1F8C7D05B8071A0826AA2D /* Pods_FDATests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_FDATests.framework; path = "Pods-FDATests.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
-		384CD9372076D566E471CD5C61A376DB /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		3CFE1543D375F3657F0722C3946EE2AD /* IQKeyboardManager.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = IQKeyboardManager.swift; path = IQKeyboardManagerSwift/IQKeyboardManager.swift; sourceTree = "<group>"; };
-		4978AB25006428275DCDBBBF856B41F2 /* IQKeyboardManagerSwift-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "IQKeyboardManagerSwift-prefix.pch"; sourceTree = "<group>"; };
-		4D9AD02E9CEE9B012A246B3874CF4587 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.0.sdk/System/Library/Frameworks/CoreGraphics.framework; sourceTree = DEVELOPER_DIR; };
-		55170427A4435520D4BC59DE10121680 /* Pods-FDA-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-FDA-resources.sh"; sourceTree = "<group>"; };
-		5A2F9808D1E481D0A135D6237CAC70DC /* Pods-FDA.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-FDA.release.xcconfig"; sourceTree = "<group>"; };
-		5DF7E038DC31A32B0117106F6F737DD1 /* IQNSArray+Sort.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "IQNSArray+Sort.swift"; path = "IQKeyboardManagerSwift/Categories/IQNSArray+Sort.swift"; sourceTree = "<group>"; };
-		5E43062DECE42608209CCEBF9F48C5A9 /* IQKeyboardManagerSwift.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = IQKeyboardManagerSwift.modulemap; sourceTree = "<group>"; };
-		6432154E24797B2D7AF2129EE657E550 /* IQKeyboardReturnKeyHandler.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = IQKeyboardReturnKeyHandler.swift; path = IQKeyboardManagerSwift/IQKeyboardReturnKeyHandler.swift; sourceTree = "<group>"; };
-		695DA86B20FEA7BF7EA40FA7DB65A479 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.0.sdk/System/Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
-		6977B04CFD4EC1E9E8224AA89CB6B782 /* IQUITextFieldView+Additions.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "IQUITextFieldView+Additions.swift"; path = "IQKeyboardManagerSwift/Categories/IQUITextFieldView+Additions.swift"; sourceTree = "<group>"; };
-		792165F2CA033667D6F57205316D40A1 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
-		84B8F51C55543D7E038030BCBA174C00 /* Pods-FDA-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-FDA-frameworks.sh"; sourceTree = "<group>"; };
-		86384945C21A960D2F697E5BDC40EAB3 /* IQKeyboardManagerSwift-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "IQKeyboardManagerSwift-dummy.m"; sourceTree = "<group>"; };
-		8722F3DEE977789B662744240353D970 /* Pods-FDATests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-FDATests-acknowledgements.plist"; sourceTree = "<group>"; };
-		90C01423FCBC9E9236399341F3378BFD /* Pods-FDATests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-FDATests-acknowledgements.markdown"; sourceTree = "<group>"; };
-		920E0B0CD4F92DCB6F99DE8C95BCC211 /* IQKeyboardManagerSwift-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "IQKeyboardManagerSwift-umbrella.h"; sourceTree = "<group>"; };
-		93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		9454C1387C30B402731A39A7B366BA60 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		9F6962C5BF4D6FE22233C3994F5EDFDF /* IQKeyboardManagerSwift.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = IQKeyboardManagerSwift.xcconfig; sourceTree = "<group>"; };
-		9F8CAD423FF6DB46A9234790E1ABD88E /* Pods-FDA.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = "Pods-FDA.modulemap"; sourceTree = "<group>"; };
-		A41E32ADC0470AA3B9DFE3F98285BD2D /* Pods-FDATests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-FDATests-dummy.m"; sourceTree = "<group>"; };
-		AA202C1AF399D76B6D8F73F74E388238 /* Pods-FDA-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-FDA-acknowledgements.markdown"; sourceTree = "<group>"; };
-		ACC1B405AA3A657759119B30A2D6E872 /* Pods-FDAUITests-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-FDAUITests-frameworks.sh"; sourceTree = "<group>"; };
-		AFE478DD98AA980C9DEA118A6C5CBDA5 /* Pods-FDA-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-FDA-umbrella.h"; sourceTree = "<group>"; };
-		B6D2054665CB08DB6C88DDBE3CE2ED90 /* IQPreviousNextView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = IQPreviousNextView.swift; path = IQKeyboardManagerSwift/IQToolbar/IQPreviousNextView.swift; sourceTree = "<group>"; };
-		B7183B109708659884E4F687AA8504B8 /* IQKeyboardManager.bundle */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "wrapper.plug-in"; name = IQKeyboardManager.bundle; path = IQKeyboardManagerSwift/Resources/IQKeyboardManager.bundle; sourceTree = "<group>"; };
-		BB50B2EA16B60164208491F69355110B /* IQUIView+Hierarchy.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "IQUIView+Hierarchy.swift"; path = "IQKeyboardManagerSwift/Categories/IQUIView+Hierarchy.swift"; sourceTree = "<group>"; };
-		BFE30C61F2F15F538DB42A7A64A00228 /* Pods-FDATests-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-FDATests-resources.sh"; sourceTree = "<group>"; };
-		CAAF26EABC40CAA997B812DEF0972337 /* Pods-FDAUITests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-FDAUITests-acknowledgements.markdown"; sourceTree = "<group>"; };
-		CC07B17974DCBAF38B75F5235A6A86FC /* IQKeyboardManagerSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = IQKeyboardManagerSwift.framework; path = IQKeyboardManagerSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		D3554EBDD914424A247D668DEA0AC386 /* Pods-FDA-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-FDA-dummy.m"; sourceTree = "<group>"; };
-		D530EB155920CF4DE588F645C1E2D3EE /* Pods_FDAUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_FDAUITests.framework; path = "Pods-FDAUITests.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
-		D5C80B543F72D097D87C28C22751B09F /* Pods-FDATests-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-FDATests-frameworks.sh"; sourceTree = "<group>"; };
-		D887C9AD67D2051D198022E1D8A6EC04 /* IQTextView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = IQTextView.swift; path = IQKeyboardManagerSwift/IQTextView/IQTextView.swift; sourceTree = "<group>"; };
-		DAB0F40AFC6F7AF08F1F007E5EC916EE /* Pods-FDAUITests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-FDAUITests-dummy.m"; sourceTree = "<group>"; };
-		E0D5D7A22EC96EB94C1117B938D64596 /* Pods-FDA.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-FDA.debug.xcconfig"; sourceTree = "<group>"; };
-		E3E4F223BF91A2EE436310232EC1EF85 /* IQKeyboardManagerConstants.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = IQKeyboardManagerConstants.swift; path = IQKeyboardManagerSwift/Constants/IQKeyboardManagerConstants.swift; sourceTree = "<group>"; };
-		E95A3820FBAD3589C6FC2921EA170973 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		E9CCF7D93C6248F9B8FE8E3134B41D58 /* IQUIWindow+Hierarchy.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "IQUIWindow+Hierarchy.swift"; path = "IQKeyboardManagerSwift/Categories/IQUIWindow+Hierarchy.swift"; sourceTree = "<group>"; };
-		EB413D89C7AF0B6F412471992D364AF3 /* Pods-FDAUITests-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-FDAUITests-umbrella.h"; sourceTree = "<group>"; };
-		F0DF084741B3EE8823C02F1AA63F4242 /* Pods-FDAUITests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-FDAUITests-acknowledgements.plist"; sourceTree = "<group>"; };
-		F5C2630FBC8756BEFC5DAD54F3DEF0D3 /* IQBarButtonItem.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = IQBarButtonItem.swift; path = IQKeyboardManagerSwift/IQToolbar/IQBarButtonItem.swift; sourceTree = "<group>"; };
-		F72FB972EFFACF2D8D2DB8F7BAFB01FC /* Pods-FDA-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-FDA-acknowledgements.plist"; sourceTree = "<group>"; };
-		F9FAB7D214652132DC0645D482DEB453 /* Pods-FDATests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = "Pods-FDATests.modulemap"; sourceTree = "<group>"; };
-		FB00EC5589DD154FC7523EED99EB9315 /* Pods-FDAUITests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = "Pods-FDAUITests.modulemap"; sourceTree = "<group>"; };
-		FC3B78EEF2B03B08D13360B8534178C8 /* Pods-FDAUITests-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-FDAUITests-resources.sh"; sourceTree = "<group>"; };
-/* End PBXFileReference section */
-
-/* Begin PBXFrameworksBuildPhase section */
-		0EB91B07AFBA8BB1AB48903F7DC2D62C /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				D73B4E8770E299C6A67DC3F0769C747E /* Foundation.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		10062CC15DAEABE95D65862067E8682B /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				1C8F85A1033B5AE0FE8126CE2E937E9F /* CoreGraphics.framework in Frameworks */,
-				08F70BDD45F0B73F1AD27507808FEC3B /* Foundation.framework in Frameworks */,
-				B9557585483AD395045D19F792D8BDE7 /* UIKit.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		E880055C37FD55BDECB783C99DA3A55A /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				24ECBF2F91A87AA1C993955BE838D098 /* Foundation.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		FBE560CF0E285C864BAF564E2C76896C /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				229E76A71ECCD0D7F794F9ACCD02438B /* Foundation.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXFrameworksBuildPhase section */
-
-/* Begin PBXGroup section */
-		063844C0A78804EAE332FFE159CEC673 /* Targets Support Files */ = {
-			isa = PBXGroup;
-			children = (
-				F028E2664C761DBC7C01B95D6D5080E4 /* Pods-FDA */,
-				AF1CC768D134F353784142CC57638AC5 /* Pods-FDATests */,
-				380A940B0D2BAFAFFA5A7735DAFFD312 /* Pods-FDAUITests */,
-			);
-			name = "Targets Support Files";
-			sourceTree = "<group>";
-		};
-		122DA2E5084A4393C29BE363C764795C /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				2D185E38271E1279D6AC3E7A00CAF9BA /* iOS */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		2D185E38271E1279D6AC3E7A00CAF9BA /* iOS */ = {
-			isa = PBXGroup;
-			children = (
-				4D9AD02E9CEE9B012A246B3874CF4587 /* CoreGraphics.framework */,
-				792165F2CA033667D6F57205316D40A1 /* Foundation.framework */,
-				695DA86B20FEA7BF7EA40FA7DB65A479 /* UIKit.framework */,
-			);
-			name = iOS;
-			sourceTree = "<group>";
-		};
-		380A940B0D2BAFAFFA5A7735DAFFD312 /* Pods-FDAUITests */ = {
-			isa = PBXGroup;
-			children = (
-				E95A3820FBAD3589C6FC2921EA170973 /* Info.plist */,
-				FB00EC5589DD154FC7523EED99EB9315 /* Pods-FDAUITests.modulemap */,
-				CAAF26EABC40CAA997B812DEF0972337 /* Pods-FDAUITests-acknowledgements.markdown */,
-				F0DF084741B3EE8823C02F1AA63F4242 /* Pods-FDAUITests-acknowledgements.plist */,
-				DAB0F40AFC6F7AF08F1F007E5EC916EE /* Pods-FDAUITests-dummy.m */,
-				ACC1B405AA3A657759119B30A2D6E872 /* Pods-FDAUITests-frameworks.sh */,
-				FC3B78EEF2B03B08D13360B8534178C8 /* Pods-FDAUITests-resources.sh */,
-				EB413D89C7AF0B6F412471992D364AF3 /* Pods-FDAUITests-umbrella.h */,
-				17CA902897B80A9C58800D71129410C2 /* Pods-FDAUITests.debug.xcconfig */,
-				1912B65E3A427451CF0B7B389AC7C6FF /* Pods-FDAUITests.release.xcconfig */,
-			);
-			name = "Pods-FDAUITests";
-			path = "Target Support Files/Pods-FDAUITests";
-			sourceTree = "<group>";
-		};
-		584F8138EF2F895A1F55850C518A4C08 /* IQKeyboardManagerSwift */ = {
-			isa = PBXGroup;
-			children = (
-				F5C2630FBC8756BEFC5DAD54F3DEF0D3 /* IQBarButtonItem.swift */,
-				3CFE1543D375F3657F0722C3946EE2AD /* IQKeyboardManager.swift */,
-				E3E4F223BF91A2EE436310232EC1EF85 /* IQKeyboardManagerConstants.swift */,
-				21DDAA7F709391D4C5AC42D5341336C0 /* IQKeyboardManagerConstantsInternal.swift */,
-				6432154E24797B2D7AF2129EE657E550 /* IQKeyboardReturnKeyHandler.swift */,
-				5DF7E038DC31A32B0117106F6F737DD1 /* IQNSArray+Sort.swift */,
-				B6D2054665CB08DB6C88DDBE3CE2ED90 /* IQPreviousNextView.swift */,
-				D887C9AD67D2051D198022E1D8A6EC04 /* IQTextView.swift */,
-				2DE1AEDD271C7C25BEFEA98E9DD262D7 /* IQTitleBarButtonItem.swift */,
-				221F638AFD879930344CAFFE239806EF /* IQToolbar.swift */,
-				1DAD48B5237605C364198308127FB553 /* IQUIScrollView+Additions.swift */,
-				6977B04CFD4EC1E9E8224AA89CB6B782 /* IQUITextFieldView+Additions.swift */,
-				BB50B2EA16B60164208491F69355110B /* IQUIView+Hierarchy.swift */,
-				091101C009469A4E49D41E8E2426943A /* IQUIView+IQKeyboardToolbar.swift */,
-				0F1FA0F43B4E65CD29D57828C7EC07B3 /* IQUIViewController+Additions.swift */,
-				E9CCF7D93C6248F9B8FE8E3134B41D58 /* IQUIWindow+Hierarchy.swift */,
-				85860088B9C3398345BC184C3C1E31E8 /* Resources */,
-				9A0E3176B12C2A3E29D8B54DBD439049 /* Support Files */,
-			);
-			name = IQKeyboardManagerSwift;
-			path = IQKeyboardManagerSwift;
-			sourceTree = "<group>";
-		};
-		6A31A35F6700A8EF87EB49BE22C289BF /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				584F8138EF2F895A1F55850C518A4C08 /* IQKeyboardManagerSwift */,
-			);
-			name = Pods;
-			sourceTree = "<group>";
-		};
-		7DB346D0F39D3F0E887471402A8071AB = {
-			isa = PBXGroup;
-			children = (
-				93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */,
-				122DA2E5084A4393C29BE363C764795C /* Frameworks */,
-				6A31A35F6700A8EF87EB49BE22C289BF /* Pods */,
-				DF10A8C218A3FD1E38FBDD6D183C561C /* Products */,
-				063844C0A78804EAE332FFE159CEC673 /* Targets Support Files */,
-			);
-			sourceTree = "<group>";
-		};
-		85860088B9C3398345BC184C3C1E31E8 /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-				B7183B109708659884E4F687AA8504B8 /* IQKeyboardManager.bundle */,
-			);
-			name = Resources;
-			sourceTree = "<group>";
-		};
-		9A0E3176B12C2A3E29D8B54DBD439049 /* Support Files */ = {
-			isa = PBXGroup;
-			children = (
-				9454C1387C30B402731A39A7B366BA60 /* Info.plist */,
-				5E43062DECE42608209CCEBF9F48C5A9 /* IQKeyboardManagerSwift.modulemap */,
-				9F6962C5BF4D6FE22233C3994F5EDFDF /* IQKeyboardManagerSwift.xcconfig */,
-				86384945C21A960D2F697E5BDC40EAB3 /* IQKeyboardManagerSwift-dummy.m */,
-				4978AB25006428275DCDBBBF856B41F2 /* IQKeyboardManagerSwift-prefix.pch */,
-				920E0B0CD4F92DCB6F99DE8C95BCC211 /* IQKeyboardManagerSwift-umbrella.h */,
-			);
-			name = "Support Files";
-			path = "../Target Support Files/IQKeyboardManagerSwift";
-			sourceTree = "<group>";
-		};
-		AF1CC768D134F353784142CC57638AC5 /* Pods-FDATests */ = {
-			isa = PBXGroup;
-			children = (
-				384CD9372076D566E471CD5C61A376DB /* Info.plist */,
-				F9FAB7D214652132DC0645D482DEB453 /* Pods-FDATests.modulemap */,
-				90C01423FCBC9E9236399341F3378BFD /* Pods-FDATests-acknowledgements.markdown */,
-				8722F3DEE977789B662744240353D970 /* Pods-FDATests-acknowledgements.plist */,
-				A41E32ADC0470AA3B9DFE3F98285BD2D /* Pods-FDATests-dummy.m */,
-				D5C80B543F72D097D87C28C22751B09F /* Pods-FDATests-frameworks.sh */,
-				BFE30C61F2F15F538DB42A7A64A00228 /* Pods-FDATests-resources.sh */,
-				2A87580AD1DD7EF3B8BEFE96A7D18D08 /* Pods-FDATests-umbrella.h */,
-				33CFAD10705C6600EF1E30DF2C86CA3E /* Pods-FDATests.debug.xcconfig */,
-				0A10457984F5049577CBBD65D93AA47B /* Pods-FDATests.release.xcconfig */,
-			);
-			name = "Pods-FDATests";
-			path = "Target Support Files/Pods-FDATests";
-			sourceTree = "<group>";
-		};
-		DF10A8C218A3FD1E38FBDD6D183C561C /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				CC07B17974DCBAF38B75F5235A6A86FC /* IQKeyboardManagerSwift.framework */,
-				10B0988A8489D0CEBA5C899FFA2D964D /* Pods_FDA.framework */,
-				384973EE5B1F8C7D05B8071A0826AA2D /* Pods_FDATests.framework */,
-				D530EB155920CF4DE588F645C1E2D3EE /* Pods_FDAUITests.framework */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		F028E2664C761DBC7C01B95D6D5080E4 /* Pods-FDA */ = {
-			isa = PBXGroup;
-			children = (
-				2B11263B168F88E7EE538C7A8B31E903 /* Info.plist */,
-				9F8CAD423FF6DB46A9234790E1ABD88E /* Pods-FDA.modulemap */,
-				AA202C1AF399D76B6D8F73F74E388238 /* Pods-FDA-acknowledgements.markdown */,
-				F72FB972EFFACF2D8D2DB8F7BAFB01FC /* Pods-FDA-acknowledgements.plist */,
-				D3554EBDD914424A247D668DEA0AC386 /* Pods-FDA-dummy.m */,
-				84B8F51C55543D7E038030BCBA174C00 /* Pods-FDA-frameworks.sh */,
-				55170427A4435520D4BC59DE10121680 /* Pods-FDA-resources.sh */,
-				AFE478DD98AA980C9DEA118A6C5CBDA5 /* Pods-FDA-umbrella.h */,
-				E0D5D7A22EC96EB94C1117B938D64596 /* Pods-FDA.debug.xcconfig */,
-				5A2F9808D1E481D0A135D6237CAC70DC /* Pods-FDA.release.xcconfig */,
-			);
-			name = "Pods-FDA";
-			path = "Target Support Files/Pods-FDA";
-			sourceTree = "<group>";
-		};
-/* End PBXGroup section */
-
-/* Begin PBXHeadersBuildPhase section */
-		7B3C4FF5B96CDA880B000A2473158BFA /* Headers */ = {
-			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				84DD3E29D80E5F29E8CF051AA2B2D948 /* Pods-FDA-umbrella.h in Headers */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		855B098CBE6A243E430CF44C6275A6E2 /* Headers */ = {
-			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				6C816954899F28E323FF581791E20B0B /* Pods-FDAUITests-umbrella.h in Headers */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		D2868074027E5E98F4FB0D039C2B04B4 /* Headers */ = {
-			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				8BFDF2E98AF75BEE97323FB0B13541D0 /* Pods-FDATests-umbrella.h in Headers */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		E0594BC12C332F68CBA28F99391465D9 /* Headers */ = {
-			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				B49E26DF5871F564A7C9528173CE2D5F /* IQKeyboardManagerSwift-umbrella.h in Headers */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXHeadersBuildPhase section */
-
-/* Begin PBXNativeTarget section */
-		34FA3E2B45FE40A42BD30F93BDEA0232 /* Pods-FDATests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = AA3860C219F5363F04564F8D22EE2039 /* Build configuration list for PBXNativeTarget "Pods-FDATests" */;
-			buildPhases = (
-				307A67EA5EC6D603F3178D9E3A6F4104 /* Sources */,
-				E880055C37FD55BDECB783C99DA3A55A /* Frameworks */,
-				D2868074027E5E98F4FB0D039C2B04B4 /* Headers */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = "Pods-FDATests";
-			productName = "Pods-FDATests";
-			productReference = 384973EE5B1F8C7D05B8071A0826AA2D /* Pods_FDATests.framework */;
-			productType = "com.apple.product-type.framework";
-		};
-		4DC059E04CBA98AEDDB5C34E02D551E9 /* IQKeyboardManagerSwift */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 75B8C8837854098D8D911F8A3335DDAC /* Build configuration list for PBXNativeTarget "IQKeyboardManagerSwift" */;
-			buildPhases = (
-				AB0925B8AA80E6202908F358FE239182 /* Sources */,
-				10062CC15DAEABE95D65862067E8682B /* Frameworks */,
-				8913AFCA6CAEB5D9BF81A3A49E9CE1BE /* Resources */,
-				E0594BC12C332F68CBA28F99391465D9 /* Headers */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = IQKeyboardManagerSwift;
-			productName = IQKeyboardManagerSwift;
-			productReference = CC07B17974DCBAF38B75F5235A6A86FC /* IQKeyboardManagerSwift.framework */;
-			productType = "com.apple.product-type.framework";
-		};
-		5DD260772D25FB845567FDA253948165 /* Pods-FDA */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 6213D2150D2E9E9A9296B9E35295B958 /* Build configuration list for PBXNativeTarget "Pods-FDA" */;
-			buildPhases = (
-				A0A14BA6357B2AC187FE542B2039701A /* Sources */,
-				0EB91B07AFBA8BB1AB48903F7DC2D62C /* Frameworks */,
-				7B3C4FF5B96CDA880B000A2473158BFA /* Headers */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				597741DE72478E1F1987BB1FB03A59C7 /* PBXTargetDependency */,
-			);
-			name = "Pods-FDA";
-			productName = "Pods-FDA";
-			productReference = 10B0988A8489D0CEBA5C899FFA2D964D /* Pods_FDA.framework */;
-			productType = "com.apple.product-type.framework";
-		};
-		C70A97A8A0FC7372771BB03B28252911 /* Pods-FDAUITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 02035E28B2E3908E6FF07668E97A75F6 /* Build configuration list for PBXNativeTarget "Pods-FDAUITests" */;
-			buildPhases = (
-				4EB0E99F3793591CC4A250F30E893264 /* Sources */,
-				FBE560CF0E285C864BAF564E2C76896C /* Frameworks */,
-				855B098CBE6A243E430CF44C6275A6E2 /* Headers */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = "Pods-FDAUITests";
-			productName = "Pods-FDAUITests";
-			productReference = D530EB155920CF4DE588F645C1E2D3EE /* Pods_FDAUITests.framework */;
-			productType = "com.apple.product-type.framework";
-		};
-/* End PBXNativeTarget section */
-
-/* Begin PBXProject section */
-		D41D8CD98F00B204E9800998ECF8427E /* Project object */ = {
-			isa = PBXProject;
-			attributes = {
-				LastSwiftUpdateCheck = 0730;
-				LastUpgradeCheck = 0700;
-			};
-			buildConfigurationList = 2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */;
-			compatibilityVersion = "Xcode 3.2";
-			developmentRegion = English;
-			hasScannedForEncodings = 0;
-			knownRegions = (
-				en,
-			);
-			mainGroup = 7DB346D0F39D3F0E887471402A8071AB;
-			productRefGroup = DF10A8C218A3FD1E38FBDD6D183C561C /* Products */;
-			projectDirPath = "";
-			projectRoot = "";
-			targets = (
-				4DC059E04CBA98AEDDB5C34E02D551E9 /* IQKeyboardManagerSwift */,
-				5DD260772D25FB845567FDA253948165 /* Pods-FDA */,
-				34FA3E2B45FE40A42BD30F93BDEA0232 /* Pods-FDATests */,
-				C70A97A8A0FC7372771BB03B28252911 /* Pods-FDAUITests */,
-			);
-		};
-/* End PBXProject section */
-
-/* Begin PBXResourcesBuildPhase section */
-		8913AFCA6CAEB5D9BF81A3A49E9CE1BE /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				D65B8481AFF5531FC2E4382CBA63C057 /* IQKeyboardManager.bundle in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXResourcesBuildPhase section */
-
-/* Begin PBXSourcesBuildPhase section */
-		307A67EA5EC6D603F3178D9E3A6F4104 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				B61F8587602B021BDE34C13E06F55E32 /* Pods-FDATests-dummy.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		4EB0E99F3793591CC4A250F30E893264 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				BFCDDCC0D8CAF6E50CB28B561B2FD7E7 /* Pods-FDAUITests-dummy.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		A0A14BA6357B2AC187FE542B2039701A /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				03ADDB06C3BD3EF02468E9EB42CE33C5 /* Pods-FDA-dummy.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		AB0925B8AA80E6202908F358FE239182 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				2EBD7B6D6EEBAD72870AECB44D1E3AE2 /* IQBarButtonItem.swift in Sources */,
-				A88CFE3F9DCE30C3AA3A2F6086C6EE84 /* IQKeyboardManager.swift in Sources */,
-				89959176E9E2C981CE0A235B706E8AA7 /* IQKeyboardManagerConstants.swift in Sources */,
-				BCD6B3BA5E1132F0FD49AC39F2BF4D62 /* IQKeyboardManagerConstantsInternal.swift in Sources */,
-				5B981698211292E1F92A21CC9F182675 /* IQKeyboardManagerSwift-dummy.m in Sources */,
-				5C1B7FB4706A09F7E95F26B02797BE19 /* IQKeyboardReturnKeyHandler.swift in Sources */,
-				E9AD3D7B3B4B82CD4D9B817109239F55 /* IQNSArray+Sort.swift in Sources */,
-				A50218EC76648886FE767F1DCD9626DE /* IQPreviousNextView.swift in Sources */,
-				B0E679FF770EE8E7073391580C373D92 /* IQTextView.swift in Sources */,
-				32D47B0AE0C145C1E9662CC2468FED0E /* IQTitleBarButtonItem.swift in Sources */,
-				A9F1A9CF01AF7F7A691A0A8C9E2D3A71 /* IQToolbar.swift in Sources */,
-				22BF5066806248FBD63CD64193B95AB6 /* IQUIScrollView+Additions.swift in Sources */,
-				123D28717B28730D7DDD56E56B646294 /* IQUITextFieldView+Additions.swift in Sources */,
-				2BC48BA9EC7B6F6F334FB9CF2758D461 /* IQUIView+Hierarchy.swift in Sources */,
-				0B9FAA59E53F8381BAD75316E70145BE /* IQUIView+IQKeyboardToolbar.swift in Sources */,
-				C92BC0B8E4CBCFD16762838B30654F29 /* IQUIViewController+Additions.swift in Sources */,
-				C759ACB2C97ED8A9EC91C2DF79C95F1D /* IQUIWindow+Hierarchy.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		597741DE72478E1F1987BB1FB03A59C7 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = IQKeyboardManagerSwift;
-			target = 4DC059E04CBA98AEDDB5C34E02D551E9 /* IQKeyboardManagerSwift */;
-			targetProxy = 5A9BFBA3BA100D6ECDC0156F0E99AE8E /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
-
-/* Begin XCBuildConfiguration section */
-		0DCBCA9F47471FB2B2A3702CCAEE7EDB /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 17CA902897B80A9C58800D71129410C2 /* Pods-FDAUITests.debug.xcconfig */;
-			buildSettings = {
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_NO_COMMON_BLOCKS = YES;
-				INFOPLIST_FILE = "Target Support Files/Pods-FDAUITests/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MACH_O_TYPE = staticlib;
-				MODULEMAP_FILE = "Target Support Files/Pods-FDAUITests/Pods-FDAUITests.modulemap";
-				MTL_ENABLE_DEBUG_INFO = YES;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = Pods_FDAUITests;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
-		1C7A01BBFDCC71CBE281307F6C66B0F1 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0A10457984F5049577CBBD65D93AA47B /* Pods-FDATests.release.xcconfig */;
-			buildSettings = {
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_NO_COMMON_BLOCKS = YES;
-				INFOPLIST_FILE = "Target Support Files/Pods-FDATests/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MACH_O_TYPE = staticlib;
-				MODULEMAP_FILE = "Target Support Files/Pods-FDATests/Pods-FDATests.modulemap";
-				MTL_ENABLE_DEBUG_INFO = NO;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = Pods_FDATests;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
-		59B042A655B7C20CBAB90E385BF4E4C7 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
-				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_WARN_BOOL_CONVERSION = YES;
-				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES;
-				CLANG_WARN_EMPTY_BODY = YES;
-				CLANG_WARN_ENUM_CONVERSION = YES;
-				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES;
-				CLANG_WARN_UNREACHABLE_CODE = YES;
-				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGNING_REQUIRED = NO;
-				COPY_PHASE_STRIP = NO;
-				ENABLE_TESTABILITY = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"POD_CONFIGURATION_DEBUG=1",
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES;
-				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES;
-				GCC_WARN_UNUSED_FUNCTION = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE_SPECIFIER = NO_SIGNING/;
-				STRIP_INSTALLED_PRODUCT = NO;
-				SYMROOT = "${SRCROOT}/../build";
-			};
-			name = Debug;
-		};
-		7BECE7921ACFE5A493ACAA93232A541F /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = E0D5D7A22EC96EB94C1117B938D64596 /* Pods-FDA.debug.xcconfig */;
-			buildSettings = {
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_NO_COMMON_BLOCKS = YES;
-				INFOPLIST_FILE = "Target Support Files/Pods-FDA/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MACH_O_TYPE = staticlib;
-				MODULEMAP_FILE = "Target Support Files/Pods-FDA/Pods-FDA.modulemap";
-				MTL_ENABLE_DEBUG_INFO = YES;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = Pods_FDA;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
-		7D9A45D6C53217E40782C535A8F22DA6 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5A2F9808D1E481D0A135D6237CAC70DC /* Pods-FDA.release.xcconfig */;
-			buildSettings = {
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_NO_COMMON_BLOCKS = YES;
-				INFOPLIST_FILE = "Target Support Files/Pods-FDA/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MACH_O_TYPE = staticlib;
-				MODULEMAP_FILE = "Target Support Files/Pods-FDA/Pods-FDA.modulemap";
-				MTL_ENABLE_DEBUG_INFO = NO;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = Pods_FDA;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
-		8B057773120D53DBB692700549D84EAD /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 9F6962C5BF4D6FE22233C3994F5EDFDF /* IQKeyboardManagerSwift.xcconfig */;
-			buildSettings = {
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/IQKeyboardManagerSwift/IQKeyboardManagerSwift-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/IQKeyboardManagerSwift/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/IQKeyboardManagerSwift/IQKeyboardManagerSwift.modulemap";
-				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_NAME = IQKeyboardManagerSwift;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 3.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
-		A2ED5D07909FC9971ABEC4BB630EC6C8 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 9F6962C5BF4D6FE22233C3994F5EDFDF /* IQKeyboardManagerSwift.xcconfig */;
-			buildSettings = {
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/IQKeyboardManagerSwift/IQKeyboardManagerSwift-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/IQKeyboardManagerSwift/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/IQKeyboardManagerSwift/IQKeyboardManagerSwift.modulemap";
-				MTL_ENABLE_DEBUG_INFO = YES;
-				PRODUCT_NAME = IQKeyboardManagerSwift;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 3.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
-		B7324857C38B065FEB1EEE3105C2367A /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
-				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_WARN_BOOL_CONVERSION = YES;
-				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES;
-				CLANG_WARN_EMPTY_BODY = YES;
-				CLANG_WARN_ENUM_CONVERSION = YES;
-				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES;
-				CLANG_WARN_UNREACHABLE_CODE = YES;
-				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGNING_REQUIRED = NO;
-				COPY_PHASE_STRIP = YES;
-				ENABLE_NS_ASSERTIONS = NO;
-				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"POD_CONFIGURATION_RELEASE=1",
-					"$(inherited)",
-				);
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES;
-				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES;
-				GCC_WARN_UNUSED_FUNCTION = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				PROVISIONING_PROFILE_SPECIFIER = NO_SIGNING/;
-				STRIP_INSTALLED_PRODUCT = NO;
-				SYMROOT = "${SRCROOT}/../build";
-				VALIDATE_PRODUCT = YES;
-			};
-			name = Release;
-		};
-		E47EBAD735B1CA643F568D39706CC8A3 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 33CFAD10705C6600EF1E30DF2C86CA3E /* Pods-FDATests.debug.xcconfig */;
-			buildSettings = {
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_NO_COMMON_BLOCKS = YES;
-				INFOPLIST_FILE = "Target Support Files/Pods-FDATests/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MACH_O_TYPE = staticlib;
-				MODULEMAP_FILE = "Target Support Files/Pods-FDATests/Pods-FDATests.modulemap";
-				MTL_ENABLE_DEBUG_INFO = YES;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = Pods_FDATests;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
-		FA1DDAB67C771EE534C3D148F429E178 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 1912B65E3A427451CF0B7B389AC7C6FF /* Pods-FDAUITests.release.xcconfig */;
-			buildSettings = {
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_NO_COMMON_BLOCKS = YES;
-				INFOPLIST_FILE = "Target Support Files/Pods-FDAUITests/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MACH_O_TYPE = staticlib;
-				MODULEMAP_FILE = "Target Support Files/Pods-FDAUITests/Pods-FDAUITests.modulemap";
-				MTL_ENABLE_DEBUG_INFO = NO;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = Pods_FDAUITests;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
-/* End XCBuildConfiguration section */
-
-/* Begin XCConfigurationList section */
-		02035E28B2E3908E6FF07668E97A75F6 /* Build configuration list for PBXNativeTarget "Pods-FDAUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				0DCBCA9F47471FB2B2A3702CCAEE7EDB /* Debug */,
-				FA1DDAB67C771EE534C3D148F429E178 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				59B042A655B7C20CBAB90E385BF4E4C7 /* Debug */,
-				B7324857C38B065FEB1EEE3105C2367A /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		6213D2150D2E9E9A9296B9E35295B958 /* Build configuration list for PBXNativeTarget "Pods-FDA" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				7BECE7921ACFE5A493ACAA93232A541F /* Debug */,
-				7D9A45D6C53217E40782C535A8F22DA6 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		75B8C8837854098D8D911F8A3335DDAC /* Build configuration list for PBXNativeTarget "IQKeyboardManagerSwift" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				A2ED5D07909FC9971ABEC4BB630EC6C8 /* Debug */,
-				8B057773120D53DBB692700549D84EAD /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		AA3860C219F5363F04564F8D22EE2039 /* Build configuration list for PBXNativeTarget "Pods-FDATests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				E47EBAD735B1CA643F568D39706CC8A3 /* Debug */,
-				1C7A01BBFDCC71CBE281307F6C66B0F1 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-/* End XCConfigurationList section */
-	};
-	rootObject = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
-}
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>archiveVersion</key>
+	<string>1</string>
+	<key>classes</key>
+	<dict/>
+	<key>objectVersion</key>
+	<string>46</string>
+	<key>objects</key>
+	<dict>
+		<key>00DD2AAC2C8F5C5FD88CBC5EF0238445</key>
+		<dict>
+			<key>buildActionMask</key>
+			<string>2147483647</string>
+			<key>files</key>
+			<array>
+				<string>816F8F264CF242D9F9A6F521950E7474</string>
+			</array>
+			<key>isa</key>
+			<string>PBXSourcesBuildPhase</string>
+			<key>runOnlyForDeploymentPostprocessing</key>
+			<string>0</string>
+		</dict>
+		<key>0264E6DA5DAC8713C174F983B218D10D</key>
+		<dict>
+			<key>fileRef</key>
+			<string>A9D513C564BC88068DDFCA5361D3FFAE</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>02AA4B8552B5520C186AE923056561FB</key>
+		<dict>
+			<key>containerPortal</key>
+			<string>D41D8CD98F00B204E9800998ECF8427E</string>
+			<key>isa</key>
+			<string>PBXContainerItemProxy</string>
+			<key>proxyType</key>
+			<string>1</string>
+			<key>remoteGlobalIDString</key>
+			<string>0B19A578AC9B281329C1EC09FDAB0299</string>
+			<key>remoteInfo</key>
+			<string>SlideMenuControllerSwift</string>
+		</dict>
+		<key>034014829C1E4434983CF3A690C12017</key>
+		<dict>
+			<key>buildSettings</key>
+			<dict>
+				<key>ALWAYS_SEARCH_USER_PATHS</key>
+				<string>NO</string>
+				<key>CLANG_ANALYZER_NONNULL</key>
+				<string>YES</string>
+				<key>CLANG_CXX_LANGUAGE_STANDARD</key>
+				<string>gnu++0x</string>
+				<key>CLANG_CXX_LIBRARY</key>
+				<string>libc++</string>
+				<key>CLANG_ENABLE_MODULES</key>
+				<string>YES</string>
+				<key>CLANG_ENABLE_OBJC_ARC</key>
+				<string>YES</string>
+				<key>CLANG_WARN_BOOL_CONVERSION</key>
+				<string>YES</string>
+				<key>CLANG_WARN_CONSTANT_CONVERSION</key>
+				<string>YES</string>
+				<key>CLANG_WARN_DIRECT_OBJC_ISA_USAGE</key>
+				<string>YES</string>
+				<key>CLANG_WARN_EMPTY_BODY</key>
+				<string>YES</string>
+				<key>CLANG_WARN_ENUM_CONVERSION</key>
+				<string>YES</string>
+				<key>CLANG_WARN_INT_CONVERSION</key>
+				<string>YES</string>
+				<key>CLANG_WARN_OBJC_ROOT_CLASS</key>
+				<string>YES</string>
+				<key>CLANG_WARN_UNREACHABLE_CODE</key>
+				<string>YES</string>
+				<key>CLANG_WARN__DUPLICATE_METHOD_MATCH</key>
+				<string>YES</string>
+				<key>COPY_PHASE_STRIP</key>
+				<string>NO</string>
+				<key>ENABLE_TESTABILITY</key>
+				<string>YES</string>
+				<key>GCC_C_LANGUAGE_STANDARD</key>
+				<string>gnu99</string>
+				<key>GCC_DYNAMIC_NO_PIC</key>
+				<string>NO</string>
+				<key>GCC_OPTIMIZATION_LEVEL</key>
+				<string>0</string>
+				<key>GCC_PREPROCESSOR_DEFINITIONS</key>
+				<array>
+					<string>POD_CONFIGURATION_DEBUG=1</string>
+					<string>DEBUG=1</string>
+					<string>$(inherited)</string>
+				</array>
+				<key>GCC_SYMBOLS_PRIVATE_EXTERN</key>
+				<string>NO</string>
+				<key>GCC_WARN_64_TO_32_BIT_CONVERSION</key>
+				<string>YES</string>
+				<key>GCC_WARN_ABOUT_RETURN_TYPE</key>
+				<string>YES</string>
+				<key>GCC_WARN_UNDECLARED_SELECTOR</key>
+				<string>YES</string>
+				<key>GCC_WARN_UNINITIALIZED_AUTOS</key>
+				<string>YES</string>
+				<key>GCC_WARN_UNUSED_FUNCTION</key>
+				<string>YES</string>
+				<key>GCC_WARN_UNUSED_VARIABLE</key>
+				<string>YES</string>
+				<key>IPHONEOS_DEPLOYMENT_TARGET</key>
+				<string>9.0</string>
+				<key>ONLY_ACTIVE_ARCH</key>
+				<string>YES</string>
+				<key>STRIP_INSTALLED_PRODUCT</key>
+				<string>NO</string>
+				<key>SYMROOT</key>
+				<string>${SRCROOT}/../build</string>
+			</dict>
+			<key>isa</key>
+			<string>XCBuildConfiguration</string>
+			<key>name</key>
+			<string>Debug</string>
+		</dict>
+		<key>063844C0A78804EAE332FFE159CEC673</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>F028E2664C761DBC7C01B95D6D5080E4</string>
+				<string>AF1CC768D134F353784142CC57638AC5</string>
+				<string>380A940B0D2BAFAFFA5A7735DAFFD312</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>Targets Support Files</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>06EDB944284E74970F312CB7F2910C07</key>
+		<dict>
+			<key>fileRef</key>
+			<string>5798F91C6004D5ABD0A79606BE738268</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>07085BC33B6FA7755509075152DDB9B2</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXTargetDependency</string>
+			<key>name</key>
+			<string>SlideMenuControllerSwift</string>
+			<key>target</key>
+			<string>0B19A578AC9B281329C1EC09FDAB0299</string>
+			<key>targetProxy</key>
+			<string>02AA4B8552B5520C186AE923056561FB</string>
+		</dict>
+		<key>091DF997950D402B2ED9600BDDFCEDBE</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.swift</string>
+			<key>name</key>
+			<string>IQToolbar.swift</string>
+			<key>path</key>
+			<string>IQKeyboardManagerSwift/IQToolbar/IQToolbar.swift</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>0A10457984F5049577CBBD65D93AA47B</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>text.xcconfig</string>
+			<key>path</key>
+			<string>Pods-FDATests.release.xcconfig</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>0A68FE8A6158D395EC4CB10F8472F165</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>B4CCDF0ACEE37ED4308724E62FCDE939</string>
+				<string>3C9854452B704969D40D932335DEE0FF</string>
+				<string>0F2331BAF78D4EDDCD400CF6388C7978</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>iOS</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>0B19A578AC9B281329C1EC09FDAB0299</key>
+		<dict>
+			<key>buildConfigurationList</key>
+			<string>E5B8220E755DA8A33A6A52C323805F69</string>
+			<key>buildPhases</key>
+			<array>
+				<string>66E4964B0EEC2F609E8BA59A7E48B6DF</string>
+				<string>2D8E4F7F34CD2AF3EAEA5BB6DEC5FFE1</string>
+				<string>C3E19B6CA5A488515A9B02663516467B</string>
+			</array>
+			<key>buildRules</key>
+			<array/>
+			<key>dependencies</key>
+			<array/>
+			<key>isa</key>
+			<string>PBXNativeTarget</string>
+			<key>name</key>
+			<string>SlideMenuControllerSwift</string>
+			<key>productName</key>
+			<string>SlideMenuControllerSwift</string>
+			<key>productReference</key>
+			<string>FEE7C4F58D539C9EE9EBACB74037BF1E</string>
+			<key>productType</key>
+			<string>com.apple.product-type.framework</string>
+		</dict>
+		<key>0C4A23B65576C604C0FF1E3BA95CEBFB</key>
+		<dict>
+			<key>baseConfigurationReference</key>
+			<string>E0D5D7A22EC96EB94C1117B938D64596</string>
+			<key>buildSettings</key>
+			<dict>
+				<key>CODE_SIGN_IDENTITY[sdk=iphoneos*]</key>
+				<string>iPhone Developer</string>
+				<key>CURRENT_PROJECT_VERSION</key>
+				<string>1</string>
+				<key>DEBUG_INFORMATION_FORMAT</key>
+				<string>dwarf</string>
+				<key>DEFINES_MODULE</key>
+				<string>YES</string>
+				<key>DYLIB_COMPATIBILITY_VERSION</key>
+				<string>1</string>
+				<key>DYLIB_CURRENT_VERSION</key>
+				<string>1</string>
+				<key>DYLIB_INSTALL_NAME_BASE</key>
+				<string>@rpath</string>
+				<key>ENABLE_STRICT_OBJC_MSGSEND</key>
+				<string>YES</string>
+				<key>GCC_NO_COMMON_BLOCKS</key>
+				<string>YES</string>
+				<key>INFOPLIST_FILE</key>
+				<string>Target Support Files/Pods-FDA/Info.plist</string>
+				<key>INSTALL_PATH</key>
+				<string>$(LOCAL_LIBRARY_DIR)/Frameworks</string>
+				<key>IPHONEOS_DEPLOYMENT_TARGET</key>
+				<string>9.0</string>
+				<key>LD_RUNPATH_SEARCH_PATHS</key>
+				<array>
+					<string>$(inherited)</string>
+					<string>@executable_path/Frameworks</string>
+					<string>@loader_path/Frameworks</string>
+				</array>
+				<key>MACH_O_TYPE</key>
+				<string>staticlib</string>
+				<key>MODULEMAP_FILE</key>
+				<string>Target Support Files/Pods-FDA/Pods-FDA.modulemap</string>
+				<key>MTL_ENABLE_DEBUG_INFO</key>
+				<string>YES</string>
+				<key>OTHER_LDFLAGS</key>
+				<string></string>
+				<key>OTHER_LIBTOOLFLAGS</key>
+				<string></string>
+				<key>PODS_ROOT</key>
+				<string>$(SRCROOT)</string>
+				<key>PRODUCT_BUNDLE_IDENTIFIER</key>
+				<string>org.cocoapods.${PRODUCT_NAME:rfc1034identifier}</string>
+				<key>PRODUCT_NAME</key>
+				<string>Pods_FDA</string>
+				<key>SDKROOT</key>
+				<string>iphoneos</string>
+				<key>SKIP_INSTALL</key>
+				<string>YES</string>
+				<key>SWIFT_OPTIMIZATION_LEVEL</key>
+				<string>-Onone</string>
+				<key>SWIFT_VERSION</key>
+				<string>3.0</string>
+				<key>TARGETED_DEVICE_FAMILY</key>
+				<string>1,2</string>
+				<key>VERSIONING_SYSTEM</key>
+				<string>apple-generic</string>
+				<key>VERSION_INFO_PREFIX</key>
+				<string></string>
+			</dict>
+			<key>isa</key>
+			<string>XCBuildConfiguration</string>
+			<key>name</key>
+			<string>Debug</string>
+		</dict>
+		<key>0F2331BAF78D4EDDCD400CF6388C7978</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>wrapper.framework</string>
+			<key>name</key>
+			<string>UIKit.framework</string>
+			<key>path</key>
+			<string>Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.3.sdk/System/Library/Frameworks/UIKit.framework</string>
+			<key>sourceTree</key>
+			<string>DEVELOPER_DIR</string>
+		</dict>
+		<key>122DA2E5084A4393C29BE363C764795C</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>0A68FE8A6158D395EC4CB10F8472F165</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>Frameworks</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>139250EF8D4E404AD5019BA8966C0ED0</key>
+		<dict>
+			<key>fileRef</key>
+			<string>C4BDFDA7A284403A0D4621817B8F52EF</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>ATTRIBUTES</key>
+				<array>
+					<string>Public</string>
+				</array>
+			</dict>
+		</dict>
+		<key>1520003FEBEC114D6C84F832AFEDB994</key>
+		<dict>
+			<key>buildConfigurationList</key>
+			<string>8F787E77C0D561F29D856299FA55DC83</string>
+			<key>buildPhases</key>
+			<array>
+				<string>161601383DEA1F2FC6BB5588B4EE58C9</string>
+				<string>5F240EC2E1E7F76CA22386F9552295F0</string>
+				<string>F2ABA137ACF3E3B0178934EFFBA9007C</string>
+				<string>86158EF160C9C4B7AEFFCE7FC59E599B</string>
+			</array>
+			<key>buildRules</key>
+			<array/>
+			<key>dependencies</key>
+			<array/>
+			<key>isa</key>
+			<string>PBXNativeTarget</string>
+			<key>name</key>
+			<string>IQKeyboardManagerSwift</string>
+			<key>productName</key>
+			<string>IQKeyboardManagerSwift</string>
+			<key>productReference</key>
+			<string>721E9AC3C4CFEBACD251F1BC2481A74F</string>
+			<key>productType</key>
+			<string>com.apple.product-type.framework</string>
+		</dict>
+		<key>161601383DEA1F2FC6BB5588B4EE58C9</key>
+		<dict>
+			<key>buildActionMask</key>
+			<string>2147483647</string>
+			<key>files</key>
+			<array>
+				<string>06EDB944284E74970F312CB7F2910C07</string>
+				<string>B6DB24F02D71E5B838910D3CCD1723F9</string>
+				<string>0264E6DA5DAC8713C174F983B218D10D</string>
+				<string>879EDC2C7E8100C20DD5C06ACCF75467</string>
+				<string>B1709542A41A677BA835CEC032F4DB2D</string>
+				<string>A3FAEF9CA01F3716E2B562F58AFAA046</string>
+				<string>59D87C6DDEE038D47CC06ECFA3478F66</string>
+				<string>A2FF64B577CEAC43E765D9E4AF96F432</string>
+				<string>C2905200A0CEA22AF403EE0B5E244CEF</string>
+				<string>C66E57E618FD5536917D0052777CC8EB</string>
+				<string>91030AF37F93914AB64B6D95F55E762D</string>
+				<string>2641CD2EBD374904D2E5759683B97B76</string>
+				<string>C76E3B78D128469AB4CBF1B4D1708360</string>
+				<string>989EE4ED1C86991E81339AF1CBF3654A</string>
+				<string>BACEB4A1F7183C8A34C16333AA0CFC88</string>
+				<string>3B082E6ACCC2D096E28EE29CE82F89F6</string>
+				<string>5DCD12C2C139245388578C182CACC06D</string>
+			</array>
+			<key>isa</key>
+			<string>PBXSourcesBuildPhase</string>
+			<key>runOnlyForDeploymentPostprocessing</key>
+			<string>0</string>
+		</dict>
+		<key>17CA902897B80A9C58800D71129410C2</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>text.xcconfig</string>
+			<key>path</key>
+			<string>Pods-FDAUITests.debug.xcconfig</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>17D641B54474CB149265695AA92F12AF</key>
+		<dict>
+			<key>buildConfigurations</key>
+			<array>
+				<string>B5B7DBDF42D6F85F2BE8863B3A7EA8D3</string>
+				<string>192D3AE7268405BE61C08F532843DA19</string>
+			</array>
+			<key>defaultConfigurationIsVisible</key>
+			<string>0</string>
+			<key>defaultConfigurationName</key>
+			<string>Release</string>
+			<key>isa</key>
+			<string>XCConfigurationList</string>
+		</dict>
+		<key>18232900551F75476133D6CA8F6DB31B</key>
+		<dict>
+			<key>explicitFileType</key>
+			<string>wrapper.framework</string>
+			<key>includeInIndex</key>
+			<string>0</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>name</key>
+			<string>Pods_FDAUITests.framework</string>
+			<key>path</key>
+			<string>Pods-FDAUITests.framework</string>
+			<key>sourceTree</key>
+			<string>BUILT_PRODUCTS_DIR</string>
+		</dict>
+		<key>1912B65E3A427451CF0B7B389AC7C6FF</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>text.xcconfig</string>
+			<key>path</key>
+			<string>Pods-FDAUITests.release.xcconfig</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>192D3AE7268405BE61C08F532843DA19</key>
+		<dict>
+			<key>baseConfigurationReference</key>
+			<string>0A10457984F5049577CBBD65D93AA47B</string>
+			<key>buildSettings</key>
+			<dict>
+				<key>CODE_SIGN_IDENTITY[sdk=iphoneos*]</key>
+				<string>iPhone Developer</string>
+				<key>CURRENT_PROJECT_VERSION</key>
+				<string>1</string>
+				<key>DEBUG_INFORMATION_FORMAT</key>
+				<string>dwarf-with-dsym</string>
+				<key>DEFINES_MODULE</key>
+				<string>YES</string>
+				<key>DYLIB_COMPATIBILITY_VERSION</key>
+				<string>1</string>
+				<key>DYLIB_CURRENT_VERSION</key>
+				<string>1</string>
+				<key>DYLIB_INSTALL_NAME_BASE</key>
+				<string>@rpath</string>
+				<key>ENABLE_STRICT_OBJC_MSGSEND</key>
+				<string>YES</string>
+				<key>GCC_NO_COMMON_BLOCKS</key>
+				<string>YES</string>
+				<key>INFOPLIST_FILE</key>
+				<string>Target Support Files/Pods-FDATests/Info.plist</string>
+				<key>INSTALL_PATH</key>
+				<string>$(LOCAL_LIBRARY_DIR)/Frameworks</string>
+				<key>IPHONEOS_DEPLOYMENT_TARGET</key>
+				<string>9.0</string>
+				<key>LD_RUNPATH_SEARCH_PATHS</key>
+				<array>
+					<string>$(inherited)</string>
+					<string>@executable_path/Frameworks</string>
+					<string>@loader_path/Frameworks</string>
+				</array>
+				<key>MACH_O_TYPE</key>
+				<string>staticlib</string>
+				<key>MODULEMAP_FILE</key>
+				<string>Target Support Files/Pods-FDATests/Pods-FDATests.modulemap</string>
+				<key>MTL_ENABLE_DEBUG_INFO</key>
+				<string>NO</string>
+				<key>OTHER_LDFLAGS</key>
+				<string></string>
+				<key>OTHER_LIBTOOLFLAGS</key>
+				<string></string>
+				<key>PODS_ROOT</key>
+				<string>$(SRCROOT)</string>
+				<key>PRODUCT_BUNDLE_IDENTIFIER</key>
+				<string>org.cocoapods.${PRODUCT_NAME:rfc1034identifier}</string>
+				<key>PRODUCT_NAME</key>
+				<string>Pods_FDATests</string>
+				<key>SDKROOT</key>
+				<string>iphoneos</string>
+				<key>SKIP_INSTALL</key>
+				<string>YES</string>
+				<key>SWIFT_VERSION</key>
+				<string>3.0</string>
+				<key>TARGETED_DEVICE_FAMILY</key>
+				<string>1,2</string>
+				<key>VERSIONING_SYSTEM</key>
+				<string>apple-generic</string>
+				<key>VERSION_INFO_PREFIX</key>
+				<string></string>
+			</dict>
+			<key>isa</key>
+			<string>XCBuildConfiguration</string>
+			<key>name</key>
+			<string>Release</string>
+		</dict>
+		<key>1C130D50A4300A880327EBCC08BDD9D5</key>
+		<dict>
+			<key>explicitFileType</key>
+			<string>wrapper.framework</string>
+			<key>includeInIndex</key>
+			<string>0</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>name</key>
+			<string>Pods_FDA.framework</string>
+			<key>path</key>
+			<string>Pods-FDA.framework</string>
+			<key>sourceTree</key>
+			<string>BUILT_PRODUCTS_DIR</string>
+		</dict>
+		<key>1CC101965FD02A650251E892F3693D19</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.swift</string>
+			<key>name</key>
+			<string>IQTitleBarButtonItem.swift</string>
+			<key>path</key>
+			<string>IQKeyboardManagerSwift/IQToolbar/IQTitleBarButtonItem.swift</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>1EAEAD6DED83F1403FDD4CFFD0B9F721</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.swift</string>
+			<key>name</key>
+			<string>IQPreviousNextView.swift</string>
+			<key>path</key>
+			<string>IQKeyboardManagerSwift/IQToolbar/IQPreviousNextView.swift</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>1FACA7FEA3D43C7A0CD08D47FA8EDE0A</key>
+		<dict>
+			<key>fileRef</key>
+			<string>EB413D89C7AF0B6F412471992D364AF3</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>ATTRIBUTES</key>
+				<array>
+					<string>Public</string>
+				</array>
+			</dict>
+		</dict>
+		<key>203894730B81F081C861853B48255180</key>
+		<dict>
+			<key>fileRef</key>
+			<string>80F7437049D942C140E8A17D15210515</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>2641CD2EBD374904D2E5759683B97B76</key>
+		<dict>
+			<key>fileRef</key>
+			<string>88664BB5B0AB95E063B62BAEDE81C5C1</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>26C3425F45F1374791CB8B07AD01942D</key>
+		<dict>
+			<key>fileRef</key>
+			<string>995959CA6C582CC2851B5FED7B7CDA32</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>27CF5A7E60C5902F58C01A1A20F51F49</key>
+		<dict>
+			<key>fileRef</key>
+			<string>78E9B26C33DB51BED10B3CC0F0A87D25</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>ATTRIBUTES</key>
+				<array>
+					<string>Public</string>
+				</array>
+			</dict>
+		</dict>
+		<key>2A87580AD1DD7EF3B8BEFE96A7D18D08</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>path</key>
+			<string>Pods-FDATests-umbrella.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>2B11263B168F88E7EE538C7A8B31E903</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>text.plist.xml</string>
+			<key>path</key>
+			<string>Info.plist</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>2D8E4F7F34CD2AF3EAEA5BB6DEC5FFE1</key>
+		<dict>
+			<key>buildActionMask</key>
+			<string>2147483647</string>
+			<key>files</key>
+			<array>
+				<string>69EFF8D5CC92D942B5E034E51D75BF75</string>
+			</array>
+			<key>isa</key>
+			<string>PBXFrameworksBuildPhase</string>
+			<key>runOnlyForDeploymentPostprocessing</key>
+			<string>0</string>
+		</dict>
+		<key>2D8E8EC45A3A1A1D94AE762CB5028504</key>
+		<dict>
+			<key>buildConfigurations</key>
+			<array>
+				<string>034014829C1E4434983CF3A690C12017</string>
+				<string>C7E474A03CAE21F1CB6046E7344C59BD</string>
+			</array>
+			<key>defaultConfigurationIsVisible</key>
+			<string>0</string>
+			<key>defaultConfigurationName</key>
+			<string>Release</string>
+			<key>isa</key>
+			<string>XCConfigurationList</string>
+		</dict>
+		<key>330945877059CA4BD626E9E0574C1D4E</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>path</key>
+			<string>SlideMenuControllerSwift-prefix.pch</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>33CFAD10705C6600EF1E30DF2C86CA3E</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>text.xcconfig</string>
+			<key>path</key>
+			<string>Pods-FDATests.debug.xcconfig</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>351F2B97D8540B68CEAB483C0A14A9EF</key>
+		<dict>
+			<key>fileRef</key>
+			<string>AFE66129B61019B1A6BDBE1ECB7E2874</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>36FE804AE7938C3B88AF0C93EDF98D12</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.swift</string>
+			<key>name</key>
+			<string>IQUIWindow+Hierarchy.swift</string>
+			<key>path</key>
+			<string>IQKeyboardManagerSwift/Categories/IQUIWindow+Hierarchy.swift</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>380A940B0D2BAFAFFA5A7735DAFFD312</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>E95A3820FBAD3589C6FC2921EA170973</string>
+				<string>FB00EC5589DD154FC7523EED99EB9315</string>
+				<string>CAAF26EABC40CAA997B812DEF0972337</string>
+				<string>F0DF084741B3EE8823C02F1AA63F4242</string>
+				<string>DAB0F40AFC6F7AF08F1F007E5EC916EE</string>
+				<string>ACC1B405AA3A657759119B30A2D6E872</string>
+				<string>FC3B78EEF2B03B08D13360B8534178C8</string>
+				<string>EB413D89C7AF0B6F412471992D364AF3</string>
+				<string>17CA902897B80A9C58800D71129410C2</string>
+				<string>1912B65E3A427451CF0B7B389AC7C6FF</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>Pods-FDAUITests</string>
+			<key>path</key>
+			<string>Target Support Files/Pods-FDAUITests</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>384CD9372076D566E471CD5C61A376DB</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>text.plist.xml</string>
+			<key>path</key>
+			<string>Info.plist</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>3B082E6ACCC2D096E28EE29CE82F89F6</key>
+		<dict>
+			<key>fileRef</key>
+			<string>D420FADC17DFB86361C2E72863871EAE</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>3B42B98AD2ADAB8DA36C1D3A592CB9A0</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>C75B99A9B9B6630FF25464B6E049F06F</string>
+				<string>BF4348D53F7AA238E78562FAB206C238</string>
+				<string>963EE6145796E2422513C55BBFFE8971</string>
+				<string>AFE66129B61019B1A6BDBE1ECB7E2874</string>
+				<string>330945877059CA4BD626E9E0574C1D4E</string>
+				<string>78E9B26C33DB51BED10B3CC0F0A87D25</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>Support Files</string>
+			<key>path</key>
+			<string>../Target Support Files/SlideMenuControllerSwift</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>3B9F7A42AF33E925A1096A35C64F2B65</key>
+		<dict>
+			<key>buildConfigurationList</key>
+			<string>DED8474EEC7F65FD2A80AC6715A08352</string>
+			<key>buildPhases</key>
+			<array>
+				<string>FF4987589CA97F0D0B7A44C9E73E7378</string>
+				<string>D5B3FB233FEBA4C59180BFF309C39835</string>
+				<string>CE36B16D1AE22B282C4806F3A8851844</string>
+			</array>
+			<key>buildRules</key>
+			<array/>
+			<key>dependencies</key>
+			<array/>
+			<key>isa</key>
+			<string>PBXNativeTarget</string>
+			<key>name</key>
+			<string>Pods-FDAUITests</string>
+			<key>productName</key>
+			<string>Pods-FDAUITests</string>
+			<key>productReference</key>
+			<string>18232900551F75476133D6CA8F6DB31B</string>
+			<key>productType</key>
+			<string>com.apple.product-type.framework</string>
+		</dict>
+		<key>3C9854452B704969D40D932335DEE0FF</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>wrapper.framework</string>
+			<key>name</key>
+			<string>Foundation.framework</string>
+			<key>path</key>
+			<string>Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.3.sdk/System/Library/Frameworks/Foundation.framework</string>
+			<key>sourceTree</key>
+			<string>DEVELOPER_DIR</string>
+		</dict>
+		<key>3D23290F053A276B418E9A0B638226D1</key>
+		<dict>
+			<key>buildActionMask</key>
+			<string>2147483647</string>
+			<key>files</key>
+			<array>
+				<string>C36D3CABE7EC51808C1327C9D08A77A7</string>
+			</array>
+			<key>isa</key>
+			<string>PBXFrameworksBuildPhase</string>
+			<key>runOnlyForDeploymentPostprocessing</key>
+			<string>0</string>
+		</dict>
+		<key>4F6508F9246B3BF54058BEEE564108CA</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.swift</string>
+			<key>name</key>
+			<string>IQKeyboardManagerConstantsInternal.swift</string>
+			<key>path</key>
+			<string>IQKeyboardManagerSwift/Constants/IQKeyboardManagerConstantsInternal.swift</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>51C2BC99C5218225F33BA26D590DF312</key>
+		<dict>
+			<key>baseConfigurationReference</key>
+			<string>6481C287CDC50C6FE6722A51DF4C79C6</string>
+			<key>buildSettings</key>
+			<dict>
+				<key>CODE_SIGN_IDENTITY[sdk=iphoneos*]</key>
+				<string>iPhone Developer</string>
+				<key>CURRENT_PROJECT_VERSION</key>
+				<string>1</string>
+				<key>DEBUG_INFORMATION_FORMAT</key>
+				<string>dwarf</string>
+				<key>DEFINES_MODULE</key>
+				<string>YES</string>
+				<key>DYLIB_COMPATIBILITY_VERSION</key>
+				<string>1</string>
+				<key>DYLIB_CURRENT_VERSION</key>
+				<string>1</string>
+				<key>DYLIB_INSTALL_NAME_BASE</key>
+				<string>@rpath</string>
+				<key>ENABLE_STRICT_OBJC_MSGSEND</key>
+				<string>YES</string>
+				<key>GCC_NO_COMMON_BLOCKS</key>
+				<string>YES</string>
+				<key>GCC_PREFIX_HEADER</key>
+				<string>Target Support Files/IQKeyboardManagerSwift/IQKeyboardManagerSwift-prefix.pch</string>
+				<key>INFOPLIST_FILE</key>
+				<string>Target Support Files/IQKeyboardManagerSwift/Info.plist</string>
+				<key>INSTALL_PATH</key>
+				<string>$(LOCAL_LIBRARY_DIR)/Frameworks</string>
+				<key>IPHONEOS_DEPLOYMENT_TARGET</key>
+				<string>8.0</string>
+				<key>LD_RUNPATH_SEARCH_PATHS</key>
+				<array>
+					<string>$(inherited)</string>
+					<string>@executable_path/Frameworks</string>
+					<string>@loader_path/Frameworks</string>
+				</array>
+				<key>MODULEMAP_FILE</key>
+				<string>Target Support Files/IQKeyboardManagerSwift/IQKeyboardManagerSwift.modulemap</string>
+				<key>MTL_ENABLE_DEBUG_INFO</key>
+				<string>YES</string>
+				<key>PRODUCT_NAME</key>
+				<string>IQKeyboardManagerSwift</string>
+				<key>SDKROOT</key>
+				<string>iphoneos</string>
+				<key>SKIP_INSTALL</key>
+				<string>YES</string>
+				<key>SWIFT_OPTIMIZATION_LEVEL</key>
+				<string>-Onone</string>
+				<key>SWIFT_VERSION</key>
+				<string>3.0</string>
+				<key>TARGETED_DEVICE_FAMILY</key>
+				<string>1,2</string>
+				<key>VERSIONING_SYSTEM</key>
+				<string>apple-generic</string>
+				<key>VERSION_INFO_PREFIX</key>
+				<string></string>
+			</dict>
+			<key>isa</key>
+			<string>XCBuildConfiguration</string>
+			<key>name</key>
+			<string>Debug</string>
+		</dict>
+		<key>525EC7DFC589B14B8A28E2B83BF044A5</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>path</key>
+			<string>IQKeyboardManagerSwift-prefix.pch</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>55170427A4435520D4BC59DE10121680</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>text.script.sh</string>
+			<key>path</key>
+			<string>Pods-FDA-resources.sh</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>5798F91C6004D5ABD0A79606BE738268</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.swift</string>
+			<key>name</key>
+			<string>IQBarButtonItem.swift</string>
+			<key>path</key>
+			<string>IQKeyboardManagerSwift/IQToolbar/IQBarButtonItem.swift</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>59D87C6DDEE038D47CC06ECFA3478F66</key>
+		<dict>
+			<key>fileRef</key>
+			<string>AA782FB402D7D509B245F4A6B4CF2E41</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>5A2F9808D1E481D0A135D6237CAC70DC</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>text.xcconfig</string>
+			<key>path</key>
+			<string>Pods-FDA.release.xcconfig</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>5DCD12C2C139245388578C182CACC06D</key>
+		<dict>
+			<key>fileRef</key>
+			<string>36FE804AE7938C3B88AF0C93EDF98D12</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>5F240EC2E1E7F76CA22386F9552295F0</key>
+		<dict>
+			<key>buildActionMask</key>
+			<string>2147483647</string>
+			<key>files</key>
+			<array>
+				<string>DFB6413C6EE7A07F649FA2612A66FAE8</string>
+				<string>F0EC3920107562BEFAAA72F00B85BDD3</string>
+				<string>F39E6121BE9036ACFC1475198A549720</string>
+			</array>
+			<key>isa</key>
+			<string>PBXFrameworksBuildPhase</string>
+			<key>runOnlyForDeploymentPostprocessing</key>
+			<string>0</string>
+		</dict>
+		<key>6085498F330F9FFACA61C9DB5D2D9F02</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>path</key>
+			<string>IQKeyboardManagerSwift.modulemap</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>63310503A3DD43ED2539C5E6BB7654B2</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.swift</string>
+			<key>name</key>
+			<string>IQKeyboardManager.swift</string>
+			<key>path</key>
+			<string>IQKeyboardManagerSwift/IQKeyboardManager.swift</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>6481C287CDC50C6FE6722A51DF4C79C6</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>text.xcconfig</string>
+			<key>path</key>
+			<string>IQKeyboardManagerSwift.xcconfig</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>66E4964B0EEC2F609E8BA59A7E48B6DF</key>
+		<dict>
+			<key>buildActionMask</key>
+			<string>2147483647</string>
+			<key>files</key>
+			<array>
+				<string>203894730B81F081C861853B48255180</string>
+				<string>351F2B97D8540B68CEAB483C0A14A9EF</string>
+			</array>
+			<key>isa</key>
+			<string>PBXSourcesBuildPhase</string>
+			<key>runOnlyForDeploymentPostprocessing</key>
+			<string>0</string>
+		</dict>
+		<key>69EFF8D5CC92D942B5E034E51D75BF75</key>
+		<dict>
+			<key>fileRef</key>
+			<string>3C9854452B704969D40D932335DEE0FF</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>6E68B56A7084F019D86AD32AF3E7CDDC</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>FA194248E2C43D19151AAE3290E0A49C</string>
+				<string>6085498F330F9FFACA61C9DB5D2D9F02</string>
+				<string>6481C287CDC50C6FE6722A51DF4C79C6</string>
+				<string>D15E5744159AD7C8EB369BEA1FDE472C</string>
+				<string>525EC7DFC589B14B8A28E2B83BF044A5</string>
+				<string>C4BDFDA7A284403A0D4621817B8F52EF</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>Support Files</string>
+			<key>path</key>
+			<string>../Target Support Files/IQKeyboardManagerSwift</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>71A413F05868F90669F54BDFB55EE6DF</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>80F7437049D942C140E8A17D15210515</string>
+				<string>3B42B98AD2ADAB8DA36C1D3A592CB9A0</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>SlideMenuControllerSwift</string>
+			<key>path</key>
+			<string>SlideMenuControllerSwift</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>721E9AC3C4CFEBACD251F1BC2481A74F</key>
+		<dict>
+			<key>explicitFileType</key>
+			<string>wrapper.framework</string>
+			<key>includeInIndex</key>
+			<string>0</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>name</key>
+			<string>IQKeyboardManagerSwift.framework</string>
+			<key>path</key>
+			<string>IQKeyboardManagerSwift.framework</string>
+			<key>sourceTree</key>
+			<string>BUILT_PRODUCTS_DIR</string>
+		</dict>
+		<key>72DB35EE2CF581C07D841E7C92B1A5D8</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.swift</string>
+			<key>name</key>
+			<string>IQUITextFieldView+Additions.swift</string>
+			<key>path</key>
+			<string>IQKeyboardManagerSwift/Categories/IQUITextFieldView+Additions.swift</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>745A098583082D3E9D056BF015C5F8B4</key>
+		<dict>
+			<key>buildConfigurationList</key>
+			<string>FE6DF64F6E1845C508DB0BCAF27630E2</string>
+			<key>buildPhases</key>
+			<array>
+				<string>A1325D0603E2478E8D51B6FF6DC1CFD9</string>
+				<string>3D23290F053A276B418E9A0B638226D1</string>
+				<string>9F27F84B211D72AE3F7CC20C024605D7</string>
+			</array>
+			<key>buildRules</key>
+			<array/>
+			<key>dependencies</key>
+			<array>
+				<string>B83AC04F0AF9F43B3F2AF27942EA9678</string>
+				<string>07085BC33B6FA7755509075152DDB9B2</string>
+			</array>
+			<key>isa</key>
+			<string>PBXNativeTarget</string>
+			<key>name</key>
+			<string>Pods-FDA</string>
+			<key>productName</key>
+			<string>Pods-FDA</string>
+			<key>productReference</key>
+			<string>1C130D50A4300A880327EBCC08BDD9D5</string>
+			<key>productType</key>
+			<string>com.apple.product-type.framework</string>
+		</dict>
+		<key>780CCC3C0D05734EF8FDBE763AA80C7D</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.swift</string>
+			<key>name</key>
+			<string>IQKeyboardReturnKeyHandler.swift</string>
+			<key>path</key>
+			<string>IQKeyboardManagerSwift/IQKeyboardReturnKeyHandler.swift</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>78E9B26C33DB51BED10B3CC0F0A87D25</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>path</key>
+			<string>SlideMenuControllerSwift-umbrella.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>7DB346D0F39D3F0E887471402A8071AB</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>93A4A3777CF96A4AAC1D13BA6DCCEA73</string>
+				<string>122DA2E5084A4393C29BE363C764795C</string>
+				<string>8BB6EC7C7BC2EA35A8A08D1FEB2FE3E1</string>
+				<string>FFA6512770A769F96C4E5CC4E8D189C7</string>
+				<string>063844C0A78804EAE332FFE159CEC673</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>80F7437049D942C140E8A17D15210515</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.swift</string>
+			<key>name</key>
+			<string>SlideMenuController.swift</string>
+			<key>path</key>
+			<string>Source/SlideMenuController.swift</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>8158A76634367C72057EA998E719D970</key>
+		<dict>
+			<key>baseConfigurationReference</key>
+			<string>6481C287CDC50C6FE6722A51DF4C79C6</string>
+			<key>buildSettings</key>
+			<dict>
+				<key>CODE_SIGN_IDENTITY[sdk=iphoneos*]</key>
+				<string>iPhone Developer</string>
+				<key>CURRENT_PROJECT_VERSION</key>
+				<string>1</string>
+				<key>DEBUG_INFORMATION_FORMAT</key>
+				<string>dwarf-with-dsym</string>
+				<key>DEFINES_MODULE</key>
+				<string>YES</string>
+				<key>DYLIB_COMPATIBILITY_VERSION</key>
+				<string>1</string>
+				<key>DYLIB_CURRENT_VERSION</key>
+				<string>1</string>
+				<key>DYLIB_INSTALL_NAME_BASE</key>
+				<string>@rpath</string>
+				<key>ENABLE_STRICT_OBJC_MSGSEND</key>
+				<string>YES</string>
+				<key>GCC_NO_COMMON_BLOCKS</key>
+				<string>YES</string>
+				<key>GCC_PREFIX_HEADER</key>
+				<string>Target Support Files/IQKeyboardManagerSwift/IQKeyboardManagerSwift-prefix.pch</string>
+				<key>INFOPLIST_FILE</key>
+				<string>Target Support Files/IQKeyboardManagerSwift/Info.plist</string>
+				<key>INSTALL_PATH</key>
+				<string>$(LOCAL_LIBRARY_DIR)/Frameworks</string>
+				<key>IPHONEOS_DEPLOYMENT_TARGET</key>
+				<string>8.0</string>
+				<key>LD_RUNPATH_SEARCH_PATHS</key>
+				<array>
+					<string>$(inherited)</string>
+					<string>@executable_path/Frameworks</string>
+					<string>@loader_path/Frameworks</string>
+				</array>
+				<key>MODULEMAP_FILE</key>
+				<string>Target Support Files/IQKeyboardManagerSwift/IQKeyboardManagerSwift.modulemap</string>
+				<key>MTL_ENABLE_DEBUG_INFO</key>
+				<string>NO</string>
+				<key>PRODUCT_NAME</key>
+				<string>IQKeyboardManagerSwift</string>
+				<key>SDKROOT</key>
+				<string>iphoneos</string>
+				<key>SKIP_INSTALL</key>
+				<string>YES</string>
+				<key>SWIFT_VERSION</key>
+				<string>3.0</string>
+				<key>TARGETED_DEVICE_FAMILY</key>
+				<string>1,2</string>
+				<key>VERSIONING_SYSTEM</key>
+				<string>apple-generic</string>
+				<key>VERSION_INFO_PREFIX</key>
+				<string></string>
+			</dict>
+			<key>isa</key>
+			<string>XCBuildConfiguration</string>
+			<key>name</key>
+			<string>Release</string>
+		</dict>
+		<key>816F8F264CF242D9F9A6F521950E7474</key>
+		<dict>
+			<key>fileRef</key>
+			<string>A41E32ADC0470AA3B9DFE3F98285BD2D</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>84B8F51C55543D7E038030BCBA174C00</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>text.script.sh</string>
+			<key>path</key>
+			<string>Pods-FDA-frameworks.sh</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>86158EF160C9C4B7AEFFCE7FC59E599B</key>
+		<dict>
+			<key>buildActionMask</key>
+			<string>2147483647</string>
+			<key>files</key>
+			<array>
+				<string>139250EF8D4E404AD5019BA8966C0ED0</string>
+			</array>
+			<key>isa</key>
+			<string>PBXHeadersBuildPhase</string>
+			<key>runOnlyForDeploymentPostprocessing</key>
+			<string>0</string>
+		</dict>
+		<key>8722F3DEE977789B662744240353D970</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>text.plist.xml</string>
+			<key>path</key>
+			<string>Pods-FDATests-acknowledgements.plist</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>879EDC2C7E8100C20DD5C06ACCF75467</key>
+		<dict>
+			<key>fileRef</key>
+			<string>4F6508F9246B3BF54058BEEE564108CA</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>88664BB5B0AB95E063B62BAEDE81C5C1</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.swift</string>
+			<key>name</key>
+			<string>IQUIScrollView+Additions.swift</string>
+			<key>path</key>
+			<string>IQKeyboardManagerSwift/Categories/IQUIScrollView+Additions.swift</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>8963C1F4D9907D7E5B31BDF15262632A</key>
+		<dict>
+			<key>fileRef</key>
+			<string>DAB0F40AFC6F7AF08F1F007E5EC916EE</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>8BB6EC7C7BC2EA35A8A08D1FEB2FE3E1</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>B714A80B1106D6505B8D6998509D05A8</string>
+				<string>71A413F05868F90669F54BDFB55EE6DF</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>Pods</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>8E65A93A85A26A77C2F9D3D85012D608</key>
+		<dict>
+			<key>containerPortal</key>
+			<string>D41D8CD98F00B204E9800998ECF8427E</string>
+			<key>isa</key>
+			<string>PBXContainerItemProxy</string>
+			<key>proxyType</key>
+			<string>1</string>
+			<key>remoteGlobalIDString</key>
+			<string>1520003FEBEC114D6C84F832AFEDB994</string>
+			<key>remoteInfo</key>
+			<string>IQKeyboardManagerSwift</string>
+		</dict>
+		<key>8F787E77C0D561F29D856299FA55DC83</key>
+		<dict>
+			<key>buildConfigurations</key>
+			<array>
+				<string>51C2BC99C5218225F33BA26D590DF312</string>
+				<string>8158A76634367C72057EA998E719D970</string>
+			</array>
+			<key>defaultConfigurationIsVisible</key>
+			<string>0</string>
+			<key>defaultConfigurationName</key>
+			<string>Release</string>
+			<key>isa</key>
+			<string>XCConfigurationList</string>
+		</dict>
+		<key>90C01423FCBC9E9236399341F3378BFD</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>text</string>
+			<key>path</key>
+			<string>Pods-FDATests-acknowledgements.markdown</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>91030AF37F93914AB64B6D95F55E762D</key>
+		<dict>
+			<key>fileRef</key>
+			<string>091DF997950D402B2ED9600BDDFCEDBE</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>93A4A3777CF96A4AAC1D13BA6DCCEA73</key>
+		<dict>
+			<key>explicitFileType</key>
+			<string>text.script.ruby</string>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>text</string>
+			<key>name</key>
+			<string>Podfile</string>
+			<key>path</key>
+			<string>../Podfile</string>
+			<key>sourceTree</key>
+			<string>SOURCE_ROOT</string>
+			<key>xcLanguageSpecificationIdentifier</key>
+			<string>xcode.lang.ruby</string>
+		</dict>
+		<key>963EE6145796E2422513C55BBFFE8971</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>text.xcconfig</string>
+			<key>path</key>
+			<string>SlideMenuControllerSwift.xcconfig</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>989EE4ED1C86991E81339AF1CBF3654A</key>
+		<dict>
+			<key>fileRef</key>
+			<string>9EB01A82402675E1924AF158C626E8AB</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>98B7A04D77FCB147CD5AE9282F26CA73</key>
+		<dict>
+			<key>fileRef</key>
+			<string>3C9854452B704969D40D932335DEE0FF</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>995959CA6C582CC2851B5FED7B7CDA32</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>wrapper.plug-in</string>
+			<key>name</key>
+			<string>IQKeyboardManager.bundle</string>
+			<key>path</key>
+			<string>IQKeyboardManagerSwift/Resources/IQKeyboardManager.bundle</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>9AAEC4DC444BE76043DC8003592541BC</key>
+		<dict>
+			<key>fileRef</key>
+			<string>2A87580AD1DD7EF3B8BEFE96A7D18D08</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>ATTRIBUTES</key>
+				<array>
+					<string>Public</string>
+				</array>
+			</dict>
+		</dict>
+		<key>9EB01A82402675E1924AF158C626E8AB</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.swift</string>
+			<key>name</key>
+			<string>IQUIView+Hierarchy.swift</string>
+			<key>path</key>
+			<string>IQKeyboardManagerSwift/Categories/IQUIView+Hierarchy.swift</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>9EF599536292ABC7E3B2692B562EC437</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.swift</string>
+			<key>name</key>
+			<string>IQTextView.swift</string>
+			<key>path</key>
+			<string>IQKeyboardManagerSwift/IQTextView/IQTextView.swift</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>9F27F84B211D72AE3F7CC20C024605D7</key>
+		<dict>
+			<key>buildActionMask</key>
+			<string>2147483647</string>
+			<key>files</key>
+			<array>
+				<string>E2975BA6BA8850B6B925D27B4CD8B1F2</string>
+			</array>
+			<key>isa</key>
+			<string>PBXHeadersBuildPhase</string>
+			<key>runOnlyForDeploymentPostprocessing</key>
+			<string>0</string>
+		</dict>
+		<key>9F8CAD423FF6DB46A9234790E1ABD88E</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>path</key>
+			<string>Pods-FDA.modulemap</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>A1325D0603E2478E8D51B6FF6DC1CFD9</key>
+		<dict>
+			<key>buildActionMask</key>
+			<string>2147483647</string>
+			<key>files</key>
+			<array>
+				<string>D450E812CB24B48CB971DB72B592DBDD</string>
+			</array>
+			<key>isa</key>
+			<string>PBXSourcesBuildPhase</string>
+			<key>runOnlyForDeploymentPostprocessing</key>
+			<string>0</string>
+		</dict>
+		<key>A15149B35E5D4D0854C1E4B89FD090D3</key>
+		<dict>
+			<key>baseConfigurationReference</key>
+			<string>5A2F9808D1E481D0A135D6237CAC70DC</string>
+			<key>buildSettings</key>
+			<dict>
+				<key>CODE_SIGN_IDENTITY[sdk=iphoneos*]</key>
+				<string>iPhone Developer</string>
+				<key>CURRENT_PROJECT_VERSION</key>
+				<string>1</string>
+				<key>DEBUG_INFORMATION_FORMAT</key>
+				<string>dwarf-with-dsym</string>
+				<key>DEFINES_MODULE</key>
+				<string>YES</string>
+				<key>DYLIB_COMPATIBILITY_VERSION</key>
+				<string>1</string>
+				<key>DYLIB_CURRENT_VERSION</key>
+				<string>1</string>
+				<key>DYLIB_INSTALL_NAME_BASE</key>
+				<string>@rpath</string>
+				<key>ENABLE_STRICT_OBJC_MSGSEND</key>
+				<string>YES</string>
+				<key>GCC_NO_COMMON_BLOCKS</key>
+				<string>YES</string>
+				<key>INFOPLIST_FILE</key>
+				<string>Target Support Files/Pods-FDA/Info.plist</string>
+				<key>INSTALL_PATH</key>
+				<string>$(LOCAL_LIBRARY_DIR)/Frameworks</string>
+				<key>IPHONEOS_DEPLOYMENT_TARGET</key>
+				<string>9.0</string>
+				<key>LD_RUNPATH_SEARCH_PATHS</key>
+				<array>
+					<string>$(inherited)</string>
+					<string>@executable_path/Frameworks</string>
+					<string>@loader_path/Frameworks</string>
+				</array>
+				<key>MACH_O_TYPE</key>
+				<string>staticlib</string>
+				<key>MODULEMAP_FILE</key>
+				<string>Target Support Files/Pods-FDA/Pods-FDA.modulemap</string>
+				<key>MTL_ENABLE_DEBUG_INFO</key>
+				<string>NO</string>
+				<key>OTHER_LDFLAGS</key>
+				<string></string>
+				<key>OTHER_LIBTOOLFLAGS</key>
+				<string></string>
+				<key>PODS_ROOT</key>
+				<string>$(SRCROOT)</string>
+				<key>PRODUCT_BUNDLE_IDENTIFIER</key>
+				<string>org.cocoapods.${PRODUCT_NAME:rfc1034identifier}</string>
+				<key>PRODUCT_NAME</key>
+				<string>Pods_FDA</string>
+				<key>SDKROOT</key>
+				<string>iphoneos</string>
+				<key>SKIP_INSTALL</key>
+				<string>YES</string>
+				<key>SWIFT_VERSION</key>
+				<string>3.0</string>
+				<key>TARGETED_DEVICE_FAMILY</key>
+				<string>1,2</string>
+				<key>VERSIONING_SYSTEM</key>
+				<string>apple-generic</string>
+				<key>VERSION_INFO_PREFIX</key>
+				<string></string>
+			</dict>
+			<key>isa</key>
+			<string>XCBuildConfiguration</string>
+			<key>name</key>
+			<string>Release</string>
+		</dict>
+		<key>A2FF64B577CEAC43E765D9E4AF96F432</key>
+		<dict>
+			<key>fileRef</key>
+			<string>1EAEAD6DED83F1403FDD4CFFD0B9F721</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>A3FAEF9CA01F3716E2B562F58AFAA046</key>
+		<dict>
+			<key>fileRef</key>
+			<string>780CCC3C0D05734EF8FDBE763AA80C7D</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>A41E32ADC0470AA3B9DFE3F98285BD2D</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>path</key>
+			<string>Pods-FDATests-dummy.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>A80D4F2115EF3E73BC86833597571AC0</key>
+		<dict>
+			<key>buildConfigurationList</key>
+			<string>17D641B54474CB149265695AA92F12AF</string>
+			<key>buildPhases</key>
+			<array>
+				<string>00DD2AAC2C8F5C5FD88CBC5EF0238445</string>
+				<string>F3C784183EDD0BA9378414FA6DF2EC79</string>
+				<string>D9EB3525A0F30D428FC61FF3A93F7320</string>
+			</array>
+			<key>buildRules</key>
+			<array/>
+			<key>dependencies</key>
+			<array/>
+			<key>isa</key>
+			<string>PBXNativeTarget</string>
+			<key>name</key>
+			<string>Pods-FDATests</string>
+			<key>productName</key>
+			<string>Pods-FDATests</string>
+			<key>productReference</key>
+			<string>E628AAE6017A61B79B7B4A4E99CC1EE4</string>
+			<key>productType</key>
+			<string>com.apple.product-type.framework</string>
+		</dict>
+		<key>A9D513C564BC88068DDFCA5361D3FFAE</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.swift</string>
+			<key>name</key>
+			<string>IQKeyboardManagerConstants.swift</string>
+			<key>path</key>
+			<string>IQKeyboardManagerSwift/Constants/IQKeyboardManagerConstants.swift</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>AA202C1AF399D76B6D8F73F74E388238</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>text</string>
+			<key>path</key>
+			<string>Pods-FDA-acknowledgements.markdown</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>AA782FB402D7D509B245F4A6B4CF2E41</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.swift</string>
+			<key>name</key>
+			<string>IQNSArray+Sort.swift</string>
+			<key>path</key>
+			<string>IQKeyboardManagerSwift/Categories/IQNSArray+Sort.swift</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>AB5BA547C39A0089DAE1E408688EBB81</key>
+		<dict>
+			<key>fileRef</key>
+			<string>3C9854452B704969D40D932335DEE0FF</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>ACC1B405AA3A657759119B30A2D6E872</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>text.script.sh</string>
+			<key>path</key>
+			<string>Pods-FDAUITests-frameworks.sh</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>AEAB942E1F9628528B1CA5167B6CAF18</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.swift</string>
+			<key>name</key>
+			<string>IQUIView+IQKeyboardToolbar.swift</string>
+			<key>path</key>
+			<string>IQKeyboardManagerSwift/IQToolbar/IQUIView+IQKeyboardToolbar.swift</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>AF1CC768D134F353784142CC57638AC5</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>384CD9372076D566E471CD5C61A376DB</string>
+				<string>F9FAB7D214652132DC0645D482DEB453</string>
+				<string>90C01423FCBC9E9236399341F3378BFD</string>
+				<string>8722F3DEE977789B662744240353D970</string>
+				<string>A41E32ADC0470AA3B9DFE3F98285BD2D</string>
+				<string>D5C80B543F72D097D87C28C22751B09F</string>
+				<string>BFE30C61F2F15F538DB42A7A64A00228</string>
+				<string>2A87580AD1DD7EF3B8BEFE96A7D18D08</string>
+				<string>33CFAD10705C6600EF1E30DF2C86CA3E</string>
+				<string>0A10457984F5049577CBBD65D93AA47B</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>Pods-FDATests</string>
+			<key>path</key>
+			<string>Target Support Files/Pods-FDATests</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>AFE478DD98AA980C9DEA118A6C5CBDA5</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>path</key>
+			<string>Pods-FDA-umbrella.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>AFE66129B61019B1A6BDBE1ECB7E2874</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>path</key>
+			<string>SlideMenuControllerSwift-dummy.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>B1709542A41A677BA835CEC032F4DB2D</key>
+		<dict>
+			<key>fileRef</key>
+			<string>D15E5744159AD7C8EB369BEA1FDE472C</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>B33A5C01AC387D68EE7165DEFA4875D0</key>
+		<dict>
+			<key>baseConfigurationReference</key>
+			<string>17CA902897B80A9C58800D71129410C2</string>
+			<key>buildSettings</key>
+			<dict>
+				<key>CODE_SIGN_IDENTITY[sdk=iphoneos*]</key>
+				<string>iPhone Developer</string>
+				<key>CURRENT_PROJECT_VERSION</key>
+				<string>1</string>
+				<key>DEBUG_INFORMATION_FORMAT</key>
+				<string>dwarf</string>
+				<key>DEFINES_MODULE</key>
+				<string>YES</string>
+				<key>DYLIB_COMPATIBILITY_VERSION</key>
+				<string>1</string>
+				<key>DYLIB_CURRENT_VERSION</key>
+				<string>1</string>
+				<key>DYLIB_INSTALL_NAME_BASE</key>
+				<string>@rpath</string>
+				<key>ENABLE_STRICT_OBJC_MSGSEND</key>
+				<string>YES</string>
+				<key>GCC_NO_COMMON_BLOCKS</key>
+				<string>YES</string>
+				<key>INFOPLIST_FILE</key>
+				<string>Target Support Files/Pods-FDAUITests/Info.plist</string>
+				<key>INSTALL_PATH</key>
+				<string>$(LOCAL_LIBRARY_DIR)/Frameworks</string>
+				<key>IPHONEOS_DEPLOYMENT_TARGET</key>
+				<string>9.0</string>
+				<key>LD_RUNPATH_SEARCH_PATHS</key>
+				<array>
+					<string>$(inherited)</string>
+					<string>@executable_path/Frameworks</string>
+					<string>@loader_path/Frameworks</string>
+				</array>
+				<key>MACH_O_TYPE</key>
+				<string>staticlib</string>
+				<key>MODULEMAP_FILE</key>
+				<string>Target Support Files/Pods-FDAUITests/Pods-FDAUITests.modulemap</string>
+				<key>MTL_ENABLE_DEBUG_INFO</key>
+				<string>YES</string>
+				<key>OTHER_LDFLAGS</key>
+				<string></string>
+				<key>OTHER_LIBTOOLFLAGS</key>
+				<string></string>
+				<key>PODS_ROOT</key>
+				<string>$(SRCROOT)</string>
+				<key>PRODUCT_BUNDLE_IDENTIFIER</key>
+				<string>org.cocoapods.${PRODUCT_NAME:rfc1034identifier}</string>
+				<key>PRODUCT_NAME</key>
+				<string>Pods_FDAUITests</string>
+				<key>SDKROOT</key>
+				<string>iphoneos</string>
+				<key>SKIP_INSTALL</key>
+				<string>YES</string>
+				<key>SWIFT_VERSION</key>
+				<string>3.0</string>
+				<key>TARGETED_DEVICE_FAMILY</key>
+				<string>1,2</string>
+				<key>VERSIONING_SYSTEM</key>
+				<string>apple-generic</string>
+				<key>VERSION_INFO_PREFIX</key>
+				<string></string>
+			</dict>
+			<key>isa</key>
+			<string>XCBuildConfiguration</string>
+			<key>name</key>
+			<string>Debug</string>
+		</dict>
+		<key>B4CCDF0ACEE37ED4308724E62FCDE939</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>wrapper.framework</string>
+			<key>name</key>
+			<string>CoreGraphics.framework</string>
+			<key>path</key>
+			<string>Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.3.sdk/System/Library/Frameworks/CoreGraphics.framework</string>
+			<key>sourceTree</key>
+			<string>DEVELOPER_DIR</string>
+		</dict>
+		<key>B5B7DBDF42D6F85F2BE8863B3A7EA8D3</key>
+		<dict>
+			<key>baseConfigurationReference</key>
+			<string>33CFAD10705C6600EF1E30DF2C86CA3E</string>
+			<key>buildSettings</key>
+			<dict>
+				<key>CODE_SIGN_IDENTITY[sdk=iphoneos*]</key>
+				<string>iPhone Developer</string>
+				<key>CURRENT_PROJECT_VERSION</key>
+				<string>1</string>
+				<key>DEBUG_INFORMATION_FORMAT</key>
+				<string>dwarf</string>
+				<key>DEFINES_MODULE</key>
+				<string>YES</string>
+				<key>DYLIB_COMPATIBILITY_VERSION</key>
+				<string>1</string>
+				<key>DYLIB_CURRENT_VERSION</key>
+				<string>1</string>
+				<key>DYLIB_INSTALL_NAME_BASE</key>
+				<string>@rpath</string>
+				<key>ENABLE_STRICT_OBJC_MSGSEND</key>
+				<string>YES</string>
+				<key>GCC_NO_COMMON_BLOCKS</key>
+				<string>YES</string>
+				<key>INFOPLIST_FILE</key>
+				<string>Target Support Files/Pods-FDATests/Info.plist</string>
+				<key>INSTALL_PATH</key>
+				<string>$(LOCAL_LIBRARY_DIR)/Frameworks</string>
+				<key>IPHONEOS_DEPLOYMENT_TARGET</key>
+				<string>9.0</string>
+				<key>LD_RUNPATH_SEARCH_PATHS</key>
+				<array>
+					<string>$(inherited)</string>
+					<string>@executable_path/Frameworks</string>
+					<string>@loader_path/Frameworks</string>
+				</array>
+				<key>MACH_O_TYPE</key>
+				<string>staticlib</string>
+				<key>MODULEMAP_FILE</key>
+				<string>Target Support Files/Pods-FDATests/Pods-FDATests.modulemap</string>
+				<key>MTL_ENABLE_DEBUG_INFO</key>
+				<string>YES</string>
+				<key>OTHER_LDFLAGS</key>
+				<string></string>
+				<key>OTHER_LIBTOOLFLAGS</key>
+				<string></string>
+				<key>PODS_ROOT</key>
+				<string>$(SRCROOT)</string>
+				<key>PRODUCT_BUNDLE_IDENTIFIER</key>
+				<string>org.cocoapods.${PRODUCT_NAME:rfc1034identifier}</string>
+				<key>PRODUCT_NAME</key>
+				<string>Pods_FDATests</string>
+				<key>SDKROOT</key>
+				<string>iphoneos</string>
+				<key>SKIP_INSTALL</key>
+				<string>YES</string>
+				<key>SWIFT_VERSION</key>
+				<string>3.0</string>
+				<key>TARGETED_DEVICE_FAMILY</key>
+				<string>1,2</string>
+				<key>VERSIONING_SYSTEM</key>
+				<string>apple-generic</string>
+				<key>VERSION_INFO_PREFIX</key>
+				<string></string>
+			</dict>
+			<key>isa</key>
+			<string>XCBuildConfiguration</string>
+			<key>name</key>
+			<string>Debug</string>
+		</dict>
+		<key>B6DB24F02D71E5B838910D3CCD1723F9</key>
+		<dict>
+			<key>fileRef</key>
+			<string>63310503A3DD43ED2539C5E6BB7654B2</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>B714A80B1106D6505B8D6998509D05A8</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>5798F91C6004D5ABD0A79606BE738268</string>
+				<string>63310503A3DD43ED2539C5E6BB7654B2</string>
+				<string>A9D513C564BC88068DDFCA5361D3FFAE</string>
+				<string>4F6508F9246B3BF54058BEEE564108CA</string>
+				<string>780CCC3C0D05734EF8FDBE763AA80C7D</string>
+				<string>AA782FB402D7D509B245F4A6B4CF2E41</string>
+				<string>1EAEAD6DED83F1403FDD4CFFD0B9F721</string>
+				<string>9EF599536292ABC7E3B2692B562EC437</string>
+				<string>1CC101965FD02A650251E892F3693D19</string>
+				<string>091DF997950D402B2ED9600BDDFCEDBE</string>
+				<string>88664BB5B0AB95E063B62BAEDE81C5C1</string>
+				<string>72DB35EE2CF581C07D841E7C92B1A5D8</string>
+				<string>9EB01A82402675E1924AF158C626E8AB</string>
+				<string>AEAB942E1F9628528B1CA5167B6CAF18</string>
+				<string>D420FADC17DFB86361C2E72863871EAE</string>
+				<string>36FE804AE7938C3B88AF0C93EDF98D12</string>
+				<string>C1F05EE06CABAD5889155FE36F771CDE</string>
+				<string>6E68B56A7084F019D86AD32AF3E7CDDC</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>IQKeyboardManagerSwift</string>
+			<key>path</key>
+			<string>IQKeyboardManagerSwift</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>B83AC04F0AF9F43B3F2AF27942EA9678</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXTargetDependency</string>
+			<key>name</key>
+			<string>IQKeyboardManagerSwift</string>
+			<key>target</key>
+			<string>1520003FEBEC114D6C84F832AFEDB994</string>
+			<key>targetProxy</key>
+			<string>8E65A93A85A26A77C2F9D3D85012D608</string>
+		</dict>
+		<key>BACEB4A1F7183C8A34C16333AA0CFC88</key>
+		<dict>
+			<key>fileRef</key>
+			<string>AEAB942E1F9628528B1CA5167B6CAF18</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>BF4348D53F7AA238E78562FAB206C238</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>path</key>
+			<string>SlideMenuControllerSwift.modulemap</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>BFE30C61F2F15F538DB42A7A64A00228</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>text.script.sh</string>
+			<key>path</key>
+			<string>Pods-FDATests-resources.sh</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>C1F05EE06CABAD5889155FE36F771CDE</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>995959CA6C582CC2851B5FED7B7CDA32</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>Resources</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>C2905200A0CEA22AF403EE0B5E244CEF</key>
+		<dict>
+			<key>fileRef</key>
+			<string>9EF599536292ABC7E3B2692B562EC437</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>C36D3CABE7EC51808C1327C9D08A77A7</key>
+		<dict>
+			<key>fileRef</key>
+			<string>3C9854452B704969D40D932335DEE0FF</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>C3E19B6CA5A488515A9B02663516467B</key>
+		<dict>
+			<key>buildActionMask</key>
+			<string>2147483647</string>
+			<key>files</key>
+			<array>
+				<string>27CF5A7E60C5902F58C01A1A20F51F49</string>
+			</array>
+			<key>isa</key>
+			<string>PBXHeadersBuildPhase</string>
+			<key>runOnlyForDeploymentPostprocessing</key>
+			<string>0</string>
+		</dict>
+		<key>C452EF6611877E9B1AFCAA4A80333541</key>
+		<dict>
+			<key>baseConfigurationReference</key>
+			<string>963EE6145796E2422513C55BBFFE8971</string>
+			<key>buildSettings</key>
+			<dict>
+				<key>CODE_SIGN_IDENTITY[sdk=iphoneos*]</key>
+				<string>iPhone Developer</string>
+				<key>CURRENT_PROJECT_VERSION</key>
+				<string>1</string>
+				<key>DEBUG_INFORMATION_FORMAT</key>
+				<string>dwarf</string>
+				<key>DEFINES_MODULE</key>
+				<string>YES</string>
+				<key>DYLIB_COMPATIBILITY_VERSION</key>
+				<string>1</string>
+				<key>DYLIB_CURRENT_VERSION</key>
+				<string>1</string>
+				<key>DYLIB_INSTALL_NAME_BASE</key>
+				<string>@rpath</string>
+				<key>ENABLE_STRICT_OBJC_MSGSEND</key>
+				<string>YES</string>
+				<key>GCC_NO_COMMON_BLOCKS</key>
+				<string>YES</string>
+				<key>GCC_PREFIX_HEADER</key>
+				<string>Target Support Files/SlideMenuControllerSwift/SlideMenuControllerSwift-prefix.pch</string>
+				<key>INFOPLIST_FILE</key>
+				<string>Target Support Files/SlideMenuControllerSwift/Info.plist</string>
+				<key>INSTALL_PATH</key>
+				<string>$(LOCAL_LIBRARY_DIR)/Frameworks</string>
+				<key>IPHONEOS_DEPLOYMENT_TARGET</key>
+				<string>8.0</string>
+				<key>LD_RUNPATH_SEARCH_PATHS</key>
+				<array>
+					<string>$(inherited)</string>
+					<string>@executable_path/Frameworks</string>
+					<string>@loader_path/Frameworks</string>
+				</array>
+				<key>MODULEMAP_FILE</key>
+				<string>Target Support Files/SlideMenuControllerSwift/SlideMenuControllerSwift.modulemap</string>
+				<key>MTL_ENABLE_DEBUG_INFO</key>
+				<string>YES</string>
+				<key>PRODUCT_NAME</key>
+				<string>SlideMenuControllerSwift</string>
+				<key>SDKROOT</key>
+				<string>iphoneos</string>
+				<key>SKIP_INSTALL</key>
+				<string>YES</string>
+				<key>SWIFT_OPTIMIZATION_LEVEL</key>
+				<string>-Onone</string>
+				<key>SWIFT_VERSION</key>
+				<string>3.0</string>
+				<key>TARGETED_DEVICE_FAMILY</key>
+				<string>1,2</string>
+				<key>VERSIONING_SYSTEM</key>
+				<string>apple-generic</string>
+				<key>VERSION_INFO_PREFIX</key>
+				<string></string>
+			</dict>
+			<key>isa</key>
+			<string>XCBuildConfiguration</string>
+			<key>name</key>
+			<string>Debug</string>
+		</dict>
+		<key>C4BDFDA7A284403A0D4621817B8F52EF</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>path</key>
+			<string>IQKeyboardManagerSwift-umbrella.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>C66E57E618FD5536917D0052777CC8EB</key>
+		<dict>
+			<key>fileRef</key>
+			<string>1CC101965FD02A650251E892F3693D19</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>C75B99A9B9B6630FF25464B6E049F06F</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>text.plist.xml</string>
+			<key>path</key>
+			<string>Info.plist</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>C76E3B78D128469AB4CBF1B4D1708360</key>
+		<dict>
+			<key>fileRef</key>
+			<string>72DB35EE2CF581C07D841E7C92B1A5D8</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>C7E474A03CAE21F1CB6046E7344C59BD</key>
+		<dict>
+			<key>buildSettings</key>
+			<dict>
+				<key>ALWAYS_SEARCH_USER_PATHS</key>
+				<string>NO</string>
+				<key>CLANG_ANALYZER_NONNULL</key>
+				<string>YES</string>
+				<key>CLANG_CXX_LANGUAGE_STANDARD</key>
+				<string>gnu++0x</string>
+				<key>CLANG_CXX_LIBRARY</key>
+				<string>libc++</string>
+				<key>CLANG_ENABLE_MODULES</key>
+				<string>YES</string>
+				<key>CLANG_ENABLE_OBJC_ARC</key>
+				<string>YES</string>
+				<key>CLANG_WARN_BOOL_CONVERSION</key>
+				<string>YES</string>
+				<key>CLANG_WARN_CONSTANT_CONVERSION</key>
+				<string>YES</string>
+				<key>CLANG_WARN_DIRECT_OBJC_ISA_USAGE</key>
+				<string>YES</string>
+				<key>CLANG_WARN_EMPTY_BODY</key>
+				<string>YES</string>
+				<key>CLANG_WARN_ENUM_CONVERSION</key>
+				<string>YES</string>
+				<key>CLANG_WARN_INT_CONVERSION</key>
+				<string>YES</string>
+				<key>CLANG_WARN_OBJC_ROOT_CLASS</key>
+				<string>YES</string>
+				<key>CLANG_WARN_UNREACHABLE_CODE</key>
+				<string>YES</string>
+				<key>CLANG_WARN__DUPLICATE_METHOD_MATCH</key>
+				<string>YES</string>
+				<key>COPY_PHASE_STRIP</key>
+				<string>YES</string>
+				<key>ENABLE_NS_ASSERTIONS</key>
+				<string>NO</string>
+				<key>GCC_C_LANGUAGE_STANDARD</key>
+				<string>gnu99</string>
+				<key>GCC_PREPROCESSOR_DEFINITIONS</key>
+				<array>
+					<string>POD_CONFIGURATION_RELEASE=1</string>
+					<string>$(inherited)</string>
+				</array>
+				<key>GCC_WARN_64_TO_32_BIT_CONVERSION</key>
+				<string>YES</string>
+				<key>GCC_WARN_ABOUT_RETURN_TYPE</key>
+				<string>YES</string>
+				<key>GCC_WARN_UNDECLARED_SELECTOR</key>
+				<string>YES</string>
+				<key>GCC_WARN_UNINITIALIZED_AUTOS</key>
+				<string>YES</string>
+				<key>GCC_WARN_UNUSED_FUNCTION</key>
+				<string>YES</string>
+				<key>GCC_WARN_UNUSED_VARIABLE</key>
+				<string>YES</string>
+				<key>IPHONEOS_DEPLOYMENT_TARGET</key>
+				<string>9.0</string>
+				<key>STRIP_INSTALLED_PRODUCT</key>
+				<string>NO</string>
+				<key>SYMROOT</key>
+				<string>${SRCROOT}/../build</string>
+				<key>VALIDATE_PRODUCT</key>
+				<string>YES</string>
+			</dict>
+			<key>isa</key>
+			<string>XCBuildConfiguration</string>
+			<key>name</key>
+			<string>Release</string>
+		</dict>
+		<key>CAAF26EABC40CAA997B812DEF0972337</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>text</string>
+			<key>path</key>
+			<string>Pods-FDAUITests-acknowledgements.markdown</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>CE36B16D1AE22B282C4806F3A8851844</key>
+		<dict>
+			<key>buildActionMask</key>
+			<string>2147483647</string>
+			<key>files</key>
+			<array>
+				<string>1FACA7FEA3D43C7A0CD08D47FA8EDE0A</string>
+			</array>
+			<key>isa</key>
+			<string>PBXHeadersBuildPhase</string>
+			<key>runOnlyForDeploymentPostprocessing</key>
+			<string>0</string>
+		</dict>
+		<key>D15E5744159AD7C8EB369BEA1FDE472C</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>path</key>
+			<string>IQKeyboardManagerSwift-dummy.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>D3554EBDD914424A247D668DEA0AC386</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>path</key>
+			<string>Pods-FDA-dummy.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>D41D8CD98F00B204E9800998ECF8427E</key>
+		<dict>
+			<key>attributes</key>
+			<dict>
+				<key>LastSwiftUpdateCheck</key>
+				<string>0730</string>
+				<key>LastUpgradeCheck</key>
+				<string>0700</string>
+			</dict>
+			<key>buildConfigurationList</key>
+			<string>2D8E8EC45A3A1A1D94AE762CB5028504</string>
+			<key>compatibilityVersion</key>
+			<string>Xcode 3.2</string>
+			<key>developmentRegion</key>
+			<string>English</string>
+			<key>hasScannedForEncodings</key>
+			<string>0</string>
+			<key>isa</key>
+			<string>PBXProject</string>
+			<key>knownRegions</key>
+			<array>
+				<string>en</string>
+			</array>
+			<key>mainGroup</key>
+			<string>7DB346D0F39D3F0E887471402A8071AB</string>
+			<key>productRefGroup</key>
+			<string>FFA6512770A769F96C4E5CC4E8D189C7</string>
+			<key>projectDirPath</key>
+			<string></string>
+			<key>projectReferences</key>
+			<array/>
+			<key>projectRoot</key>
+			<string></string>
+			<key>targets</key>
+			<array>
+				<string>1520003FEBEC114D6C84F832AFEDB994</string>
+				<string>745A098583082D3E9D056BF015C5F8B4</string>
+				<string>A80D4F2115EF3E73BC86833597571AC0</string>
+				<string>3B9F7A42AF33E925A1096A35C64F2B65</string>
+				<string>0B19A578AC9B281329C1EC09FDAB0299</string>
+			</array>
+		</dict>
+		<key>D420FADC17DFB86361C2E72863871EAE</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.swift</string>
+			<key>name</key>
+			<string>IQUIViewController+Additions.swift</string>
+			<key>path</key>
+			<string>IQKeyboardManagerSwift/Categories/IQUIViewController+Additions.swift</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>D450E812CB24B48CB971DB72B592DBDD</key>
+		<dict>
+			<key>fileRef</key>
+			<string>D3554EBDD914424A247D668DEA0AC386</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>D5B3FB233FEBA4C59180BFF309C39835</key>
+		<dict>
+			<key>buildActionMask</key>
+			<string>2147483647</string>
+			<key>files</key>
+			<array>
+				<string>AB5BA547C39A0089DAE1E408688EBB81</string>
+			</array>
+			<key>isa</key>
+			<string>PBXFrameworksBuildPhase</string>
+			<key>runOnlyForDeploymentPostprocessing</key>
+			<string>0</string>
+		</dict>
+		<key>D5C80B543F72D097D87C28C22751B09F</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>text.script.sh</string>
+			<key>path</key>
+			<string>Pods-FDATests-frameworks.sh</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>D9EB3525A0F30D428FC61FF3A93F7320</key>
+		<dict>
+			<key>buildActionMask</key>
+			<string>2147483647</string>
+			<key>files</key>
+			<array>
+				<string>9AAEC4DC444BE76043DC8003592541BC</string>
+			</array>
+			<key>isa</key>
+			<string>PBXHeadersBuildPhase</string>
+			<key>runOnlyForDeploymentPostprocessing</key>
+			<string>0</string>
+		</dict>
+		<key>DA5489E2ADF0EB668A05D8069B251066</key>
+		<dict>
+			<key>baseConfigurationReference</key>
+			<string>1912B65E3A427451CF0B7B389AC7C6FF</string>
+			<key>buildSettings</key>
+			<dict>
+				<key>CODE_SIGN_IDENTITY[sdk=iphoneos*]</key>
+				<string>iPhone Developer</string>
+				<key>CURRENT_PROJECT_VERSION</key>
+				<string>1</string>
+				<key>DEBUG_INFORMATION_FORMAT</key>
+				<string>dwarf-with-dsym</string>
+				<key>DEFINES_MODULE</key>
+				<string>YES</string>
+				<key>DYLIB_COMPATIBILITY_VERSION</key>
+				<string>1</string>
+				<key>DYLIB_CURRENT_VERSION</key>
+				<string>1</string>
+				<key>DYLIB_INSTALL_NAME_BASE</key>
+				<string>@rpath</string>
+				<key>ENABLE_STRICT_OBJC_MSGSEND</key>
+				<string>YES</string>
+				<key>GCC_NO_COMMON_BLOCKS</key>
+				<string>YES</string>
+				<key>INFOPLIST_FILE</key>
+				<string>Target Support Files/Pods-FDAUITests/Info.plist</string>
+				<key>INSTALL_PATH</key>
+				<string>$(LOCAL_LIBRARY_DIR)/Frameworks</string>
+				<key>IPHONEOS_DEPLOYMENT_TARGET</key>
+				<string>9.0</string>
+				<key>LD_RUNPATH_SEARCH_PATHS</key>
+				<array>
+					<string>$(inherited)</string>
+					<string>@executable_path/Frameworks</string>
+					<string>@loader_path/Frameworks</string>
+				</array>
+				<key>MACH_O_TYPE</key>
+				<string>staticlib</string>
+				<key>MODULEMAP_FILE</key>
+				<string>Target Support Files/Pods-FDAUITests/Pods-FDAUITests.modulemap</string>
+				<key>MTL_ENABLE_DEBUG_INFO</key>
+				<string>NO</string>
+				<key>OTHER_LDFLAGS</key>
+				<string></string>
+				<key>OTHER_LIBTOOLFLAGS</key>
+				<string></string>
+				<key>PODS_ROOT</key>
+				<string>$(SRCROOT)</string>
+				<key>PRODUCT_BUNDLE_IDENTIFIER</key>
+				<string>org.cocoapods.${PRODUCT_NAME:rfc1034identifier}</string>
+				<key>PRODUCT_NAME</key>
+				<string>Pods_FDAUITests</string>
+				<key>SDKROOT</key>
+				<string>iphoneos</string>
+				<key>SKIP_INSTALL</key>
+				<string>YES</string>
+				<key>SWIFT_VERSION</key>
+				<string>3.0</string>
+				<key>TARGETED_DEVICE_FAMILY</key>
+				<string>1,2</string>
+				<key>VERSIONING_SYSTEM</key>
+				<string>apple-generic</string>
+				<key>VERSION_INFO_PREFIX</key>
+				<string></string>
+			</dict>
+			<key>isa</key>
+			<string>XCBuildConfiguration</string>
+			<key>name</key>
+			<string>Release</string>
+		</dict>
+		<key>DAB0F40AFC6F7AF08F1F007E5EC916EE</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>path</key>
+			<string>Pods-FDAUITests-dummy.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>DBF97FE8DFE66E7D5300388CAEA1C67C</key>
+		<dict>
+			<key>baseConfigurationReference</key>
+			<string>963EE6145796E2422513C55BBFFE8971</string>
+			<key>buildSettings</key>
+			<dict>
+				<key>CODE_SIGN_IDENTITY[sdk=iphoneos*]</key>
+				<string>iPhone Developer</string>
+				<key>CURRENT_PROJECT_VERSION</key>
+				<string>1</string>
+				<key>DEBUG_INFORMATION_FORMAT</key>
+				<string>dwarf-with-dsym</string>
+				<key>DEFINES_MODULE</key>
+				<string>YES</string>
+				<key>DYLIB_COMPATIBILITY_VERSION</key>
+				<string>1</string>
+				<key>DYLIB_CURRENT_VERSION</key>
+				<string>1</string>
+				<key>DYLIB_INSTALL_NAME_BASE</key>
+				<string>@rpath</string>
+				<key>ENABLE_STRICT_OBJC_MSGSEND</key>
+				<string>YES</string>
+				<key>GCC_NO_COMMON_BLOCKS</key>
+				<string>YES</string>
+				<key>GCC_PREFIX_HEADER</key>
+				<string>Target Support Files/SlideMenuControllerSwift/SlideMenuControllerSwift-prefix.pch</string>
+				<key>INFOPLIST_FILE</key>
+				<string>Target Support Files/SlideMenuControllerSwift/Info.plist</string>
+				<key>INSTALL_PATH</key>
+				<string>$(LOCAL_LIBRARY_DIR)/Frameworks</string>
+				<key>IPHONEOS_DEPLOYMENT_TARGET</key>
+				<string>8.0</string>
+				<key>LD_RUNPATH_SEARCH_PATHS</key>
+				<array>
+					<string>$(inherited)</string>
+					<string>@executable_path/Frameworks</string>
+					<string>@loader_path/Frameworks</string>
+				</array>
+				<key>MODULEMAP_FILE</key>
+				<string>Target Support Files/SlideMenuControllerSwift/SlideMenuControllerSwift.modulemap</string>
+				<key>MTL_ENABLE_DEBUG_INFO</key>
+				<string>NO</string>
+				<key>PRODUCT_NAME</key>
+				<string>SlideMenuControllerSwift</string>
+				<key>SDKROOT</key>
+				<string>iphoneos</string>
+				<key>SKIP_INSTALL</key>
+				<string>YES</string>
+				<key>SWIFT_VERSION</key>
+				<string>3.0</string>
+				<key>TARGETED_DEVICE_FAMILY</key>
+				<string>1,2</string>
+				<key>VERSIONING_SYSTEM</key>
+				<string>apple-generic</string>
+				<key>VERSION_INFO_PREFIX</key>
+				<string></string>
+			</dict>
+			<key>isa</key>
+			<string>XCBuildConfiguration</string>
+			<key>name</key>
+			<string>Release</string>
+		</dict>
+		<key>DED8474EEC7F65FD2A80AC6715A08352</key>
+		<dict>
+			<key>buildConfigurations</key>
+			<array>
+				<string>B33A5C01AC387D68EE7165DEFA4875D0</string>
+				<string>DA5489E2ADF0EB668A05D8069B251066</string>
+			</array>
+			<key>defaultConfigurationIsVisible</key>
+			<string>0</string>
+			<key>defaultConfigurationName</key>
+			<string>Release</string>
+			<key>isa</key>
+			<string>XCConfigurationList</string>
+		</dict>
+		<key>DFB6413C6EE7A07F649FA2612A66FAE8</key>
+		<dict>
+			<key>fileRef</key>
+			<string>B4CCDF0ACEE37ED4308724E62FCDE939</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>E0D5D7A22EC96EB94C1117B938D64596</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>text.xcconfig</string>
+			<key>path</key>
+			<string>Pods-FDA.debug.xcconfig</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>E2975BA6BA8850B6B925D27B4CD8B1F2</key>
+		<dict>
+			<key>fileRef</key>
+			<string>AFE478DD98AA980C9DEA118A6C5CBDA5</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>ATTRIBUTES</key>
+				<array>
+					<string>Public</string>
+				</array>
+			</dict>
+		</dict>
+		<key>E5B8220E755DA8A33A6A52C323805F69</key>
+		<dict>
+			<key>buildConfigurations</key>
+			<array>
+				<string>C452EF6611877E9B1AFCAA4A80333541</string>
+				<string>DBF97FE8DFE66E7D5300388CAEA1C67C</string>
+			</array>
+			<key>defaultConfigurationIsVisible</key>
+			<string>0</string>
+			<key>defaultConfigurationName</key>
+			<string>Release</string>
+			<key>isa</key>
+			<string>XCConfigurationList</string>
+		</dict>
+		<key>E628AAE6017A61B79B7B4A4E99CC1EE4</key>
+		<dict>
+			<key>explicitFileType</key>
+			<string>wrapper.framework</string>
+			<key>includeInIndex</key>
+			<string>0</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>name</key>
+			<string>Pods_FDATests.framework</string>
+			<key>path</key>
+			<string>Pods-FDATests.framework</string>
+			<key>sourceTree</key>
+			<string>BUILT_PRODUCTS_DIR</string>
+		</dict>
+		<key>E95A3820FBAD3589C6FC2921EA170973</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>text.plist.xml</string>
+			<key>path</key>
+			<string>Info.plist</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>EB413D89C7AF0B6F412471992D364AF3</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>path</key>
+			<string>Pods-FDAUITests-umbrella.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>F028E2664C761DBC7C01B95D6D5080E4</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>2B11263B168F88E7EE538C7A8B31E903</string>
+				<string>9F8CAD423FF6DB46A9234790E1ABD88E</string>
+				<string>AA202C1AF399D76B6D8F73F74E388238</string>
+				<string>F72FB972EFFACF2D8D2DB8F7BAFB01FC</string>
+				<string>D3554EBDD914424A247D668DEA0AC386</string>
+				<string>84B8F51C55543D7E038030BCBA174C00</string>
+				<string>55170427A4435520D4BC59DE10121680</string>
+				<string>AFE478DD98AA980C9DEA118A6C5CBDA5</string>
+				<string>E0D5D7A22EC96EB94C1117B938D64596</string>
+				<string>5A2F9808D1E481D0A135D6237CAC70DC</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>Pods-FDA</string>
+			<key>path</key>
+			<string>Target Support Files/Pods-FDA</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>F0DF084741B3EE8823C02F1AA63F4242</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>text.plist.xml</string>
+			<key>path</key>
+			<string>Pods-FDAUITests-acknowledgements.plist</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>F0EC3920107562BEFAAA72F00B85BDD3</key>
+		<dict>
+			<key>fileRef</key>
+			<string>3C9854452B704969D40D932335DEE0FF</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>F2ABA137ACF3E3B0178934EFFBA9007C</key>
+		<dict>
+			<key>buildActionMask</key>
+			<string>2147483647</string>
+			<key>files</key>
+			<array>
+				<string>26C3425F45F1374791CB8B07AD01942D</string>
+			</array>
+			<key>isa</key>
+			<string>PBXResourcesBuildPhase</string>
+			<key>runOnlyForDeploymentPostprocessing</key>
+			<string>0</string>
+		</dict>
+		<key>F39E6121BE9036ACFC1475198A549720</key>
+		<dict>
+			<key>fileRef</key>
+			<string>0F2331BAF78D4EDDCD400CF6388C7978</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>F3C784183EDD0BA9378414FA6DF2EC79</key>
+		<dict>
+			<key>buildActionMask</key>
+			<string>2147483647</string>
+			<key>files</key>
+			<array>
+				<string>98B7A04D77FCB147CD5AE9282F26CA73</string>
+			</array>
+			<key>isa</key>
+			<string>PBXFrameworksBuildPhase</string>
+			<key>runOnlyForDeploymentPostprocessing</key>
+			<string>0</string>
+		</dict>
+		<key>F72FB972EFFACF2D8D2DB8F7BAFB01FC</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>text.plist.xml</string>
+			<key>path</key>
+			<string>Pods-FDA-acknowledgements.plist</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>F9FAB7D214652132DC0645D482DEB453</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>path</key>
+			<string>Pods-FDATests.modulemap</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>FA194248E2C43D19151AAE3290E0A49C</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>text.plist.xml</string>
+			<key>path</key>
+			<string>Info.plist</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>FB00EC5589DD154FC7523EED99EB9315</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>path</key>
+			<string>Pods-FDAUITests.modulemap</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>FC3B78EEF2B03B08D13360B8534178C8</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>text.script.sh</string>
+			<key>path</key>
+			<string>Pods-FDAUITests-resources.sh</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>FE6DF64F6E1845C508DB0BCAF27630E2</key>
+		<dict>
+			<key>buildConfigurations</key>
+			<array>
+				<string>0C4A23B65576C604C0FF1E3BA95CEBFB</string>
+				<string>A15149B35E5D4D0854C1E4B89FD090D3</string>
+			</array>
+			<key>defaultConfigurationIsVisible</key>
+			<string>0</string>
+			<key>defaultConfigurationName</key>
+			<string>Release</string>
+			<key>isa</key>
+			<string>XCConfigurationList</string>
+		</dict>
+		<key>FEE7C4F58D539C9EE9EBACB74037BF1E</key>
+		<dict>
+			<key>explicitFileType</key>
+			<string>wrapper.framework</string>
+			<key>includeInIndex</key>
+			<string>0</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>name</key>
+			<string>SlideMenuControllerSwift.framework</string>
+			<key>path</key>
+			<string>SlideMenuControllerSwift.framework</string>
+			<key>sourceTree</key>
+			<string>BUILT_PRODUCTS_DIR</string>
+		</dict>
+		<key>FF4987589CA97F0D0B7A44C9E73E7378</key>
+		<dict>
+			<key>buildActionMask</key>
+			<string>2147483647</string>
+			<key>files</key>
+			<array>
+				<string>8963C1F4D9907D7E5B31BDF15262632A</string>
+			</array>
+			<key>isa</key>
+			<string>PBXSourcesBuildPhase</string>
+			<key>runOnlyForDeploymentPostprocessing</key>
+			<string>0</string>
+		</dict>
+		<key>FFA6512770A769F96C4E5CC4E8D189C7</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>721E9AC3C4CFEBACD251F1BC2481A74F</string>
+				<string>1C130D50A4300A880327EBCC08BDD9D5</string>
+				<string>E628AAE6017A61B79B7B4A4E99CC1EE4</string>
+				<string>18232900551F75476133D6CA8F6DB31B</string>
+				<string>FEE7C4F58D539C9EE9EBACB74037BF1E</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>Products</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+	</dict>
+	<key>rootObject</key>
+	<string>D41D8CD98F00B204E9800998ECF8427E</string>
+</dict>
+</plist>

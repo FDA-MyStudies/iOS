@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 import IQKeyboardManagerSwift
+import SlideMenuControllerSwift
 
 class SignInViewController : UIViewController{
     
@@ -43,7 +44,7 @@ class SignInViewController : UIViewController{
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        
+        self.addBackBarButton()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -88,10 +89,25 @@ class SignInViewController : UIViewController{
     
     func navigateToGatewayDashboard(){
         
-        let loginStoryboard = UIStoryboard.init(name: "Gateway", bundle:Bundle.main)
-        let tabbarController = loginStoryboard.instantiateViewController(withIdentifier:"TabbarViewController")
-        self.navigationController?.pushViewController(tabbarController, animated: true)
+        self.createMenuView()
     }
+    
+    func createMenuView() {
+        
+        // create viewController code...
+        let storyboard = UIStoryboard(name: "Gateway", bundle: nil)
+        
+        let mainViewController = storyboard.instantiateViewController(withIdentifier: "StudyListViewController") as! UINavigationController
+        let leftViewController = storyboard.instantiateViewController(withIdentifier: "LeftMenuViewController") as! LeftMenuViewController
+        
+        leftViewController.studyListViewController = mainViewController
+        
+        let slideMenuController = FDASlideMenuViewController(mainViewController:mainViewController, leftMenuViewController: leftViewController)
+        
+        slideMenuController.automaticallyAdjustsScrollViewInsets = true
+        self.navigationController?.pushViewController(slideMenuController, animated: true)
+    }
+
 }
 
 //MARK: TableView Data source

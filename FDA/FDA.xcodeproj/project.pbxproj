@@ -79,6 +79,12 @@
 		9432C2F71E4C483D005984EC /* RegistrationServerConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9432C2F61E4C483D005984EC /* RegistrationServerConfiguration.swift */; };
 		9432C2F91E4C4993005984EC /* ResponseServerConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9432C2F81E4C4993005984EC /* ResponseServerConfiguration.swift */; };
 		9432C2FB1E4C9EF8005984EC /* UserServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9432C2FA1E4C9EF8005984EC /* UserServices.swift */; };
+		94334F7C1E6FE60900755444 /* LeftMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94334F7B1E6FE60900755444 /* LeftMenuViewController.swift */; };
+		94334F801E6FE65600755444 /* FDASlideMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94334F7F1E6FE65600755444 /* FDASlideMenuViewController.swift */; };
+		94334F871E70055A00755444 /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94334F851E70055A00755444 /* UIViewController.swift */; };
+		94334F881E70055A00755444 /* UIApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94334F861E70055A00755444 /* UIApplication.swift */; };
+		94334F8A1E7005BF00755444 /* LeftMenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94334F891E7005BF00755444 /* LeftMenuCell.swift */; };
+		94334F8C1E701EB700755444 /* NavigationBackButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94334F8B1E701EB700755444 /* NavigationBackButton.swift */; };
 		9487102A1E546C3800246109 /* AppNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 948710291E546C3800246109 /* AppNotification.swift */; };
 		9487102C1E54870000246109 /* LabKeyServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9487102B1E54870000246109 /* LabKeyServices.swift */; };
 		94B2B35F1E6D48A10037005D /* 12.png in Resources */ = {isa = PBXBuildFile; fileRef = 94B2B35E1E6D48A10037005D /* 12.png */; };
@@ -258,6 +264,12 @@
 		9432C2F61E4C483D005984EC /* RegistrationServerConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegistrationServerConfiguration.swift; sourceTree = "<group>"; };
 		9432C2F81E4C4993005984EC /* ResponseServerConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResponseServerConfiguration.swift; sourceTree = "<group>"; };
 		9432C2FA1E4C9EF8005984EC /* UserServices.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserServices.swift; sourceTree = "<group>"; };
+		94334F7B1E6FE60900755444 /* LeftMenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LeftMenuViewController.swift; sourceTree = "<group>"; };
+		94334F7F1E6FE65600755444 /* FDASlideMenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FDASlideMenuViewController.swift; sourceTree = "<group>"; };
+		94334F851E70055A00755444 /* UIViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewController.swift; sourceTree = "<group>"; };
+		94334F861E70055A00755444 /* UIApplication.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIApplication.swift; sourceTree = "<group>"; };
+		94334F891E7005BF00755444 /* LeftMenuCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LeftMenuCell.swift; sourceTree = "<group>"; };
+		94334F8B1E701EB700755444 /* NavigationBackButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationBackButton.swift; sourceTree = "<group>"; };
 		948710291E546C3800246109 /* AppNotification.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppNotification.swift; sourceTree = "<group>"; };
 		9487102B1E54870000246109 /* LabKeyServices.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LabKeyServices.swift; sourceTree = "<group>"; };
 		94B2B35E1E6D48A10037005D /* 12.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 12.png; sourceTree = "<group>"; };
@@ -726,6 +738,26 @@
 			path = OverviewModule;
 			sourceTree = "<group>";
 		};
+		94334F771E6FE4A600755444 /* SlideMenu */ = {
+			isa = PBXGroup;
+			children = (
+				94334F7B1E6FE60900755444 /* LeftMenuViewController.swift */,
+				94334F7F1E6FE65600755444 /* FDASlideMenuViewController.swift */,
+				94334F891E7005BF00755444 /* LeftMenuCell.swift */,
+			);
+			path = SlideMenu;
+			sourceTree = "<group>";
+		};
+		94334F821E70054100755444 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				94334F851E70055A00755444 /* UIViewController.swift */,
+				94334F861E70055A00755444 /* UIApplication.swift */,
+				94334F8B1E701EB700755444 /* NavigationBackButton.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
 		948710261E546C2200246109 /* NotificationModule */ = {
 			isa = PBXGroup;
 			children = (
@@ -748,6 +780,8 @@
 		94B3DD141E6ED8E500327AE5 /* GatewayUI */ = {
 			isa = PBXGroup;
 			children = (
+				94334F821E70054100755444 /* Extension */,
+				94334F771E6FE4A600755444 /* SlideMenu */,
 				94B3DD151E6ED8E500327AE5 /* Gateway.storyboard */,
 				94B3DD161E6ED8E500327AE5 /* Gateway.xcassets */,
 				6EA889B81E6FD14000F160A1 /* ConfirmationViewUI */,
@@ -821,11 +855,11 @@
 		94B3DD331E6ED8E500327AE5 /* RegisterUI */ = {
 			isa = PBXGroup;
 			children = (
-				94B3DD341E6ED8E500327AE5 /* SignUpCompleteViewController.swift */,
 				94B3DD351E6ED8E500327AE5 /* SignUpPlist.plist */,
 				94B3DD361E6ED8E500327AE5 /* SignUpTableViewCell.swift */,
 				94B3DD371E6ED8E500327AE5 /* SignUpViewController.swift */,
 				94B3DD381E6ED8E500327AE5 /* VerificationViewController.swift */,
+				94B3DD341E6ED8E500327AE5 /* SignUpCompleteViewController.swift */,
 			);
 			path = RegisterUI;
 			sourceTree = "<group>";
@@ -1178,7 +1212,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		8519D695BAE863DEC88E428D /* [CP] Check Pods Manifest.lock */ = {
@@ -1193,7 +1227,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		AAA08160BCD079B383EA5A29 /* [CP] Copy Pods Resources */ = {
@@ -1223,7 +1257,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		F27896D5D0F3DBD93DAEB8F5 /* [CP] Copy Pods Resources */ = {
@@ -1248,8 +1282,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				94334F881E70055A00755444 /* UIApplication.swift in Sources */,
+				94334F871E70055A00755444 /* UIViewController.swift in Sources */,
 				94B3DD591E6ED8E500327AE5 /* SignUpTableViewCell.swift in Sources */,
 				94B3DD431E6ED8E500327AE5 /* NotificationViewController.swift in Sources */,
+				94334F8A1E7005BF00755444 /* LeftMenuCell.swift in Sources */,
 				94B3DD4C1E6ED8E500327AE5 /* FRHyperLabel.m in Sources */,
 				6ECA927F1E499F8C00DA6287 /* StepProvider.swift in Sources */,
 				6ED1B2321E54256700BF463F /* ActivityInstructionStep.swift in Sources */,
@@ -1271,12 +1308,14 @@
 				94B3DD571E6ED8E500327AE5 /* SignUpCompleteViewController.swift in Sources */,
 				94B3DD531E6ED8E500327AE5 /* ForgotPasswordViewController.swift in Sources */,
 				94CD96E91E4AF61800946477 /* NetworkManager.swift in Sources */,
+				94334F801E6FE65600755444 /* FDASlideMenuViewController.swift in Sources */,
 				6E7D2D5A1E433E8800763D4C /* AppDelegate.swift in Sources */,
 				6ED134341E5EB0280090C976 /* ConsentBuilder.swift in Sources */,
 				94B3DD4E1E6ED8E500327AE5 /* HomeViewController.swift in Sources */,
 				9487102A1E546C3800246109 /* AppNotification.swift in Sources */,
 				94B3DD421E6ED8E500327AE5 /* NotificationTableViewCell.swift in Sources */,
 				6ED8A2E61E447AA2004DEC01 /* Formatter.swift in Sources */,
+				94334F8C1E701EB700755444 /* NavigationBackButton.swift in Sources */,
 				941909B51E52FA9B001B01C5 /* Study.swift in Sources */,
 				94B3DD471E6ED8E500327AE5 /* ResourcesListCell.swift in Sources */,
 				6EA889BC1E6FD16B00F160A1 /* ConfirmationViewController.swift in Sources */,
@@ -1293,6 +1332,7 @@
 				9432C2FB1E4C9EF8005984EC /* UserServices.swift in Sources */,
 				94B3DD4F1E6ED8E500327AE5 /* PageViewController.swift in Sources */,
 				6ECA92881E49F0CD00DA6287 /* Utilities.swift in Sources */,
+				94334F7C1E6FE60900755444 /* LeftMenuViewController.swift in Sources */,
 				482062521E68532300C7A7AF /* UIUtilities.swift in Sources */,
 				6E7D2D8A1E43400100763D4C /* User.swift in Sources */,
 				94B3DD461E6ED8E500327AE5 /* ProfileViewController.swift in Sources */,

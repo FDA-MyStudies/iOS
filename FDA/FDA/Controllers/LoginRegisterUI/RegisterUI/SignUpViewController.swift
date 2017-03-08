@@ -46,6 +46,8 @@ class SignUpViewController : UIViewController{
         
         //unhide navigationbar
         self.navigationController?.setNavigationBarHidden(false, animated: true)
+        
+        self.addBackBarButton()
     }
     
     override func viewWillAppear(_ animated: Bool) {

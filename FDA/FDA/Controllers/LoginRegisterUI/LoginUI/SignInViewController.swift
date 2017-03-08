@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 import IQKeyboardManagerSwift
+import SlideMenuControllerSwift
 
 class SignInViewController : UIViewController{
     
@@ -43,7 +44,7 @@ class SignInViewController : UIViewController{
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        
+        self.addBackBarButton()
     }
     
     override func viewDidAppear(_ animated: Bool) {

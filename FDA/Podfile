@@ -9,6 +9,7 @@ target 'FDA' do
 
   # Pods for FDA
   pod 'IQKeyboardManagerSwift'
+  pod 'SlideMenuControllerSwift'
 
   target 'FDATests' do
     inherit! :search_paths

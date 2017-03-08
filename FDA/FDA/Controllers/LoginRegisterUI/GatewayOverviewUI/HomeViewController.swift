@@ -13,6 +13,8 @@ class HomeViewController : UIViewController{
     
     @IBOutlet weak var container : UIView!
     @IBOutlet var pageControlView : UIPageControl?
+    @IBOutlet var buttonLink : UIButton!
+    
     
     var pageViewController: PageViewController? {
         didSet {
@@ -50,6 +52,12 @@ class HomeViewController : UIViewController{
     //Fired when the user taps on the pageControl to change its current page (Commented as this is not working)
     func didChangePageControlValue() {
         pageViewController?.scrollToViewController(index: (pageControlView?.currentPage)!)
+    }
+    
+    @IBAction func linkButtonAction(_ sender: Any) {
+        let loginStoryboard = UIStoryboard.init(name: "Main", bundle:Bundle.main)
+        let webViewController = loginStoryboard.instantiateViewController(withIdentifier:"WebViewController")
+        self.navigationController?.present(webViewController, animated: true, completion: nil)
     }
     
 }

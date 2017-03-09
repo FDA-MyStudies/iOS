@@ -33,6 +33,7 @@ class ProfileViewController: UIViewController {
     
     var isCellEditable:Bool?
     
+    
     @IBOutlet var tableViewProfile : UITableView?
     @IBOutlet var tableViewFooterViewProfile : UIView?
     @IBOutlet var buttonLeadTime:UIButton?
@@ -82,14 +83,37 @@ class ProfileViewController: UIViewController {
     
     @IBAction func editBarButtonAction(_ sender:UIBarButtonItem){
         
-        if self.isCellEditable! == true {
-            self.isCellEditable =  false
+        if self.isCellEditable! == false  {
+            self.isCellEditable =  true
             
-             self.editBarButtonItem?.title = "Save"
+            self.buttonLeadTime?.isUserInteractionEnabled =  true
+            
+            self.editBarButtonItem?.title = "Save"
+            self.editBarButtonItem?.tintColor = UIColor.lightGray
         }
         else{
-            self.isCellEditable =  true
-             self.editBarButtonItem?.title = "Edit"
+            
+            //self.isCellEditable =  false
+            
+            //self.editBarButtonItem?.title = "Edit"
+            
+            if self.editBarButtonItem?.tintColor == UIColor.lightGray {
+                // it means no value have been changed
+            }
+            else{
+                // it means value have been changed
+                
+                
+                if self.validateAllFields() {
+                     UserServices().updateUserProfile(self)
+                }
+                
+                
+                
+               
+                
+            }
+            
         }
        
         
@@ -193,6 +217,8 @@ class ProfileViewController: UIViewController {
         
         self.title = NSLocalizedString(kProfileTitleText, comment: "")
         self.isCellEditable =  false
+        
+        self.buttonLeadTime?.isUserInteractionEnabled =  false
     }
     
     func toggleValueChanged(_ sender:UISwitch)  {
@@ -213,6 +239,8 @@ class ProfileViewController: UIViewController {
            
                 
             }
+            
+            self.editBarButtonItem?.tintColor = UIColor.black
         }
         else{
             Logger.sharedInstance.debug("settings is null")
@@ -226,8 +254,7 @@ class ProfileViewController: UIViewController {
      */
     func validateAllFields() -> Bool{
         
-        
-         
+
          if user.firstName == "" {
          self.showAlertMessages(textMessage: "Please enter your first name.")
          return false
@@ -383,6 +410,8 @@ extension ProfileViewController : UITextFieldDelegate{
             print("No Matching data Found")
             break
         }
+        
+        self.editBarButtonItem?.tintColor = UIColor.black
     }
 }
 

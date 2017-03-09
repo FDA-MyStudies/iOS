@@ -127,7 +127,8 @@ class UserServices: NSObject {
         self.delegate = delegate
         
         let user = User.currentUser
-        let params = [kUserId : user.userId]
+        
+        let params = [kUserId : user.userId! ]
         
         let method = RegistrationMethods.userProfile.method
         
@@ -254,8 +255,8 @@ class UserServices: NSObject {
         
         //TEMP : Need to save these values in Realm
         let ud = UserDefaults.standard
-        ud.set(user.authToken, forKey:kUserAuthToken)
-        ud.set(user.userId, forKey: kUserId)
+        ud.set(user.authToken!, forKey:kUserAuthToken)
+        ud.set(user.userId! , forKey: kUserId)
         ud.synchronize()
         
     }
@@ -271,7 +272,7 @@ class UserServices: NSObject {
         //TEMP : Need to save these values in Realm
         let ud = UserDefaults.standard
         ud.set(user.authToken, forKey:kUserAuthToken)
-        ud.set(user.userId, forKey: kUserId)
+        ud.set(user.userId!, forKey: kUserId)
         ud.synchronize()
     }
     

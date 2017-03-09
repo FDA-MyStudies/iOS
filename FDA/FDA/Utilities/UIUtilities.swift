@@ -19,15 +19,10 @@ class UIUtilities: NSObject {
     class func showAlertWithTitleAndMessage(title: NSString, message : NSString)->Void {
         
         
-        alert.title = title as String
-        alert.message = message as String
-        alert.addButton(withTitle: "OK")
-        alert.show()
-        
-        //  let alert = UIAlertController(title:"",message:message as String,preferredStyle: UIAlertControllerStyle.alert)
-        //  alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-        //  UIApplication.shared.keyWindow?.rootViewController?.present(alert, animated: true, completion: nil)
-        //  presentViewController(alert, animated: true, completion: nil)
+          let alert = UIAlertController(title:"",message:message as String,preferredStyle: UIAlertControllerStyle.alert)
+          alert.addAction(UIAlertAction(title:NSLocalizedString("OK", comment: ""), style: .default, handler: nil))
+          UIApplication.shared.keyWindow?.rootViewController?.present(alert, animated: true, completion: nil)
+         
         
         
     }

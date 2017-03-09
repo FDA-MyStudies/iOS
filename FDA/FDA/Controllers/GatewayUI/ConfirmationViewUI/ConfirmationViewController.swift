@@ -23,6 +23,8 @@ let kConfirmationPlaceholder = "placeHolder"
 
 let kConfirmationPlist = "Confirmation"
 
+let kConfirmationNavigationTitle = "DELETE ACCOUNT"
+
 let kPlistFileType = ".plist"
 
 
@@ -55,13 +57,15 @@ class ConfirmationViewController: UIViewController {
         // setting border color for footer buttons
         self.buttonDeleteAccount?.layer.borderColor = kUicolorForButtonBackground
         self.buttonDoNotDeleteAccount?.layer.borderColor = kUicolorForButtonBackground
-       
-         self.navigationController?.setNavigationBarHidden(false, animated: true)
-       
+        
+        self.navigationController?.setNavigationBarHidden(false, animated: true)
+        
+        self.title = NSLocalizedString(kConfirmationNavigationTitle, comment: "")
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
-         self.addBackBarButton()
+        self.addBackBarButton()
     }
     
     //MARK:IBActions

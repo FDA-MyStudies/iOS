@@ -17,7 +17,7 @@ let kActionSheetCancelButtonTitle = "Cancel"
 
 let signupCellLastIndex = 3
 
-let kProfileTitleText = "Profile"
+let kProfileTitleText = "PROFILE"
 
 enum ToggelSwitchTags:Int{
     case usePasscode = 4
@@ -179,15 +179,17 @@ class ProfileViewController: UIViewController {
     }
     
     @IBAction func buttonActionSignOut(_ sender: UIButton) {
-        UIUtilities.showAlertMessageWithTwoActionsAndHandler("", errorMessage: "Are you sure? You want to Signout?", errorAlertActionTitle: "Ok", errorAlertActionTitle2: "Cancel", viewControllerUsed: self, action1: {
-            
-           // SignOut Action
-            
-            
-        }, action2: {
-            // Cancel action
+        
+        
+        UIUtilities.showAlertMessageWithTwoActionsAndHandler(NSLocalizedString("Signout", comment: ""), errorMessage: NSLocalizedString("Are you sure you want to singout ?", comment: ""), errorAlertActionTitle: NSLocalizedString("Yes", comment: ""),
+                                                             errorAlertActionTitle2: NSLocalizedString("Cancel", comment: ""), viewControllerUsed: self,
+                                                             action1: {
+                                                                self.signout()
+        },
+                                                             action2: {
+                                                                
         })
-
+    
     }
     @IBAction func buttonActionDeleteAccount(_ sender: UIButton) {
          self.performSegue(withIdentifier: kConfirmationSegueIdentifier, sender: nil)
@@ -200,6 +202,12 @@ class ProfileViewController: UIViewController {
     func dismissKeyboard(){
         self.view.endEditing(true)
     }
+    
+    func signout(){
+        debugPrint("singout")
+       _ = self.navigationController?.popToRootViewController(animated: true)
+    }
+    
     
     /*
      setInitialData sets lead Time

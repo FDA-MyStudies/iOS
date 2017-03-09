@@ -21,9 +21,20 @@ class SplashViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         
-        let loginStoryboard = UIStoryboard.init(name: "Login", bundle:Bundle.main)
-        let homeViewController = loginStoryboard.instantiateViewController(withIdentifier:"HomeViewController")
-        self.navigationController?.pushViewController(homeViewController, animated: true)
+        
+        //TEMP : Need to get form Realm
+        let ud = UserDefaults.standard
+        if ud.object(forKey:kUserAuthToken) != nil {
+            
+            User.currentUser.authToken = ud.object(forKey: kUserAuthToken) as! String!
+            User.currentUser.userId = ud.object(forKey:kUserId) as! String!
+            self.navigateToGatewayDashboard()
+        }
+        else {
+            self.navigateToHomeController()
+        }
+        
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -31,7 +42,34 @@ class SplashViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    func navigateToHomeController(){
+        
+        let loginStoryboard = UIStoryboard.init(name: "Login", bundle:Bundle.main)
+        let homeViewController = loginStoryboard.instantiateViewController(withIdentifier:"HomeViewController")
+        self.navigationController?.pushViewController(homeViewController, animated: true)
+    }
+    
+    func navigateToGatewayDashboard(){
+        
+        self.createMenuView()
+    }
+    
 
+    func createMenuView() {
+        
+        // create viewController code...
+        let storyboard = UIStoryboard(name: "Gateway", bundle: nil)
+        
+        let mainViewController = storyboard.instantiateViewController(withIdentifier: "StudyListViewController") as! UINavigationController
+        let leftViewController = storyboard.instantiateViewController(withIdentifier: "LeftMenuViewController") as! LeftMenuViewController
+        
+        leftViewController.studyListViewController = mainViewController
+        
+        let slideMenuController = FDASlideMenuViewController(mainViewController:mainViewController, leftMenuViewController: leftViewController)
+        
+        slideMenuController.automaticallyAdjustsScrollViewInsets = true
+        self.navigationController?.pushViewController(slideMenuController, animated: true)
+    }
     /*
     // MARK: - Navigation
 

@@ -24,20 +24,27 @@ enum RegistrationMethods:String {
     case forgotPassword
     case logout
     
-    
+    var description:String{
+        switch self {
+        
+        default:
+            return self.rawValue+".api"
+        }
+    }
     
     var method:Method{
+        
         switch self {
        
         case .activityState,.consentPDF,.userPreferences,.userProfile,.forgotPassword,.confirmRegistration :
             //GET Methods
-            return Method(methodName:self.rawValue, methodType: .httpMethodGet, requestType: .requestTypeJSON)
+            return Method(methodName:(self.rawValue+".api"), methodType: .httpMethodGet, requestType: .requestTypeJSON)
         case .withdraw,.logout:
             //DELETE Methods
-            return Method(methodName:self.rawValue, methodType: .httpMethodDELETE, requestType: .requestTypeJSON)
+            return Method(methodName:(self.rawValue+".api"), methodType: .httpMethodDELETE, requestType: .requestTypeJSON)
         default:
             //POST Methods
-            return Method(methodName:self.rawValue, methodType: .httpMethodPOST, requestType: .requestTypeJSON)
+            return Method(methodName:(self.rawValue+".api"), methodType: .httpMethodPOST, requestType: .requestTypeJSON)
             
             
         }
@@ -47,8 +54,8 @@ enum RegistrationMethods:String {
 struct RegistrationServerURLConstants {
     //TODO: Set the server end points
     
-    static let ProductionURL = "production url not set"
-    static let DevelopmentURL = "development url not set"
+    static let ProductionURL = "http://192.168.0.6:8081/labkey/fdahpUserRegWS/home/"
+    static let DevelopmentURL = "http://192.168.0.6:8081/labkey/fdahpUserRegWS/home/"
     
 }
 class RegistrationServerConfiguration: NetworkConfiguration {

@@ -64,13 +64,23 @@ class ForgotPasswordViewController : UIViewController{
             
         }else{
             print("Call the Webservice")
-            
-            
-            
-        
+            User.currentUser.emailId = textFieldEmail?.text!
+            UserServices().forgotPassword(self)
         }
     }
 }
 
+extension ForgotPasswordViewController:NMWebServiceDelegate {
+    func startedRequest(_ manager: NetworkManager, requestName: NSString) {
+        Logger.sharedInstance.info("requestname : \(requestName)")
+    }
+    func finishedRequest(_ manager: NetworkManager, requestName: NSString, response: AnyObject?) {
+        Logger.sharedInstance.info("requestname : \(requestName)")
+    }
+    func failedRequest(_ manager: NetworkManager, requestName: NSString, error: NSError) {
+        Logger.sharedInstance.info("requestname : \(requestName)")
+        UIUtilities.showAlertWithTitleAndMessage(title:NSLocalizedString("Error", comment: "") as NSString, message: error.localizedDescription as NSString)
+    }
+}
 
 

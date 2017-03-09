@@ -20,6 +20,9 @@ class VerificationViewController : UIViewController{
         buttonContinue?.layer.borderColor = kUicolorForButtonBackground
         self.title = NSLocalizedString("", comment: "")
         
+        //hide navigationbar
+        self.navigationController?.setNavigationBarHidden(true, animated: true)
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -37,10 +40,12 @@ class VerificationViewController : UIViewController{
     //Continue Button Action and validation checks
     @IBAction func continueButtonAction(_ sender: Any) {
         
+        UserServices().confirmUserRegistration(self)
+    }
+    
+    func navigateToSignUpCompletionStep(){
         
-        
-        
-        
+        self.performSegue(withIdentifier: "signupCompletionSegue", sender: nil)
     }
 }
 
@@ -50,6 +55,15 @@ extension VerificationViewController:NMWebServiceDelegate {
     }
     func finishedRequest(_ manager: NetworkManager, requestName: NSString, response: AnyObject?) {
         Logger.sharedInstance.info("requestname : \(requestName)")
+        
+        if User.currentUser.verified == true{
+            self.navigateToSignUpCompletionStep()
+        }
+        else {
+            
+            UIUtilities.showAlertWithTitleAndMessage(title:NSLocalizedString("Message", comment: "") as NSString, message:NSLocalizedString("Please verify your email adderss.", comment: "") as NSString)
+        }
+        
     }
     func failedRequest(_ manager: NetworkManager, requestName: NSString, error: NSError) {
         Logger.sharedInstance.info("requestname : \(requestName)")

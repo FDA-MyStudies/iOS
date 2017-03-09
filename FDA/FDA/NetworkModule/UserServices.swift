@@ -115,7 +115,7 @@ class UserServices: NSObject {
         self.delegate = delegate
         
         let user = User.currentUser
-        let params = [kUserEmailId : user.emailId]
+        let params = [kUserEmailId : user.emailId!]
         
         let method = RegistrationMethods.forgotPassword.method
         
@@ -376,7 +376,10 @@ extension UserServices:NMWebServiceDelegate{
         
                 self.handleUserRegistrationResponse(response: response as! Dictionary<String, Any>)
         
-            case RegistrationMethods.confirmRegistration.description as String: break
+            case RegistrationMethods.confirmRegistration.description as String:
+        
+                self.handleConfirmRegistrationResponse(response: response as! Dictionary<String, Any>)
+        
             case RegistrationMethods.userProfile.description as String: break
             case RegistrationMethods.updateUserProfile.description as String: break
             case RegistrationMethods.userPreferences.description as String: break

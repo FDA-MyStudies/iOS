@@ -435,6 +435,7 @@
                         <outlet property="buttonWatchVideo" destination="N7H-ey-5oY" id="K5T-yj-KUP"/>
                         <outlet property="imageViewBackgroundImage" destination="WSD-iA-wVk" id="W99-om-0wG"/>
                         <outlet property="labelDescriptionText" destination="Mhn-wP-OGh" id="055-u0-kQR"/>
+                        <outlet property="labelTitleText" destination="Ciy-R8-Rn9" id="a96-so-SQF"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pV0-nB-Fl5" userLabel="First Responder" sceneMemberID="firstResponder"/>

@@ -16,6 +16,7 @@ class HomeViewController : UIViewController{
     @IBOutlet var buttonLink : UIButton!
     
     
+    
     var pageViewController: PageViewController? {
         didSet {
             pageViewController?.pageViewDelegate = self
@@ -25,8 +26,14 @@ class HomeViewController : UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
     
+       // self.loadTestData()
+        
         //Added to change next screen
         pageControlView?.addTarget(self, action:#selector(HomeViewController.didChangePageControlValue), for: .valueChanged)
+        
+        
+       // pageViewController?.overview = Gateway.instance.overview
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -40,6 +47,40 @@ class HomeViewController : UIViewController{
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
+        
+    }
+    
+    func loadTestData(){
+//        let filePath  = Bundle.main.path(forResource: "GatewayOverview", ofType: "json")
+//        let data = NSData(contentsOfFile: filePath!)
+
+        //load plist info
+        let plistPath = Bundle.main.path(forResource: "GatewayOverview", ofType: ".plist", inDirectory:nil)
+        let arrayContent = NSMutableArray.init(contentsOfFile: plistPath!)
+        
+        do {
+            //let response = try JSONSerialization.jsonObject(with: data! as Data, options: []) as? Dictionary<String,Any>
+            
+            
+            //let overviewList = response[kOverViewInfo] as! Array<Dictionary<String,Any>>
+            var listOfOverviews:Array<OverviewSection> = []
+            for overview in arrayContent!{
+                let overviewObj = OverviewSection(detail: overview as! Dictionary<String, Any>)
+                listOfOverviews.append(overviewObj)
+            }
+            
+            //create new Overview object
+            let overview = Overview()
+            overview.type = .study
+            overview.sections = listOfOverviews
+            
+            //assgin to Gateway
+            Gateway.instance.overview = overview
+            
+            
+        } catch {
+            print("json error: \(error.localizedDescription)")
+        }
         
     }
     

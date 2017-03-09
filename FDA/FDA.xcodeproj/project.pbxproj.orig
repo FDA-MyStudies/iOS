@@ -1100,8 +1100,11 @@
 				486B512A1E6951E400B98EBC /* 05.png in Resources */,
 				486B512F1E6951E400B98EBC /* 16.png in Resources */,
 				6EAB39A91E4B0B4A003442B8 /* Resources.plist in Resources */,
+<<<<<<< HEAD
 				6EA889C21E6FD37E00F160A1 /* 18.jpg in Resources */,
+=======
 				486304D61E6FE77C003CD406 /* GatewayOverview.plist in Resources */,
+>>>>>>> Ravi_develop
 				6EF05A991E4DC36400CD7661 /* StepProvider.plist in Resources */,
 				486B512C1E6951E400B98EBC /* 10.png in Resources */,
 				6ECF75D01E6EF140008C935E /* FetalKickCounter.storyboard in Resources */,

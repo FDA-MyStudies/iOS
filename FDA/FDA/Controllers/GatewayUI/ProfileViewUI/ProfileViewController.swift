@@ -17,6 +17,7 @@ let kActionSheetCancelButtonTitle = "Cancel"
 
 let signupCellLastIndex = 3
 
+let kProfileTitleText = "Profile"
 
 enum ToggelSwitchTags:Int{
     case usePasscode = 4
@@ -30,15 +31,16 @@ class ProfileViewController: UIViewController {
     var tableViewRowDetails : NSMutableArray?
     var datePickerView:UIDatePicker?
     
+    var isCellEditable:Bool?
+    
     @IBOutlet var tableViewProfile : UITableView?
     @IBOutlet var tableViewFooterViewProfile : UIView?
     @IBOutlet var buttonLeadTime:UIButton?
     
-    
-    
+    @IBOutlet var editBarButtonItem:UIBarButtonItem?
     @IBOutlet var tableTopConstraint:NSLayoutConstraint?
     
-    
+
     //MARK: ViewController delegates
     
     override func viewDidLoad() {
@@ -59,13 +61,15 @@ class ProfileViewController: UIViewController {
         //Initial data setup
         self.setInitialDate()
         
+       UserServices().getUserProfile(self as! NMWebServiceDelegate)
         
     }
     
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        
+         self.setNavigationBarItem()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -76,7 +80,21 @@ class ProfileViewController: UIViewController {
     
     //MARK:IBActions
     
-    
+    @IBAction func editBarButtonAction(_ sender:UIBarButtonItem){
+        
+        if self.isCellEditable! == true {
+            self.isCellEditable =  false
+            
+             self.editBarButtonItem?.title = "Save"
+        }
+        else{
+            self.isCellEditable =  true
+             self.editBarButtonItem?.title = "Edit"
+        }
+       
+        
+       self.tableViewProfile?.reloadData()
+    }
     
     
     
@@ -172,6 +190,9 @@ class ProfileViewController: UIViewController {
             Logger.sharedInstance.debug("settings/LeadTime is null")
         }
         
+        
+        self.title = NSLocalizedString(kProfileTitleText, comment: "")
+        self.isCellEditable =  false
     }
     
     func toggleValueChanged(_ sender:UISwitch)  {
@@ -290,6 +311,11 @@ extension ProfileViewController : UITableViewDataSource {
             
             cell.setCellData(tag: SignUpTableViewTags(rawValue: indexPath.row)!)
             
+          
+            cell.isUserInteractionEnabled = self.isCellEditable!
+            
+            
+            
             return cell
         }
         else{
@@ -306,6 +332,7 @@ extension ProfileViewController : UITableViewDataSource {
             
             cell.switchToggle?.addTarget(self, action: #selector(ProfileViewController.toggleValueChanged), for: .valueChanged)
             
+              cell.isUserInteractionEnabled = self.isCellEditable!
             return cell
         }
         
@@ -337,19 +364,19 @@ extension ProfileViewController : UITextFieldDelegate{
         print(textField.text!)
         switch textField.tag {
         case SignUpTableViewTags.FirstNameTag.rawValue:
-            user.firstName = textField.text
+            user.firstName! = textField.text!
             break
             
         case SignUpTableViewTags.LastName.rawValue:
-            user.lastName = textField.text
+            user.lastName! = textField.text!
             break
             
         case SignUpTableViewTags.EmailId.rawValue:
-            user.emailId = textField.text
+            user.emailId! = textField.text!
             break
             
         case SignUpTableViewTags.Password.rawValue:
-            user.password = textField.text
+            user.password! = textField.text!
             break
             
         default:
@@ -359,4 +386,17 @@ extension ProfileViewController : UITextFieldDelegate{
     }
 }
 
+//MARK:UserService Response handler
 
+extension ProfileViewController:NMWebServiceDelegate {
+    func startedRequest(_ manager: NetworkManager, requestName: NSString) {
+        Logger.sharedInstance.info("requestname : \(requestName)")
+    }
+    func finishedRequest(_ manager: NetworkManager, requestName: NSString, response: AnyObject?) {
+        Logger.sharedInstance.info("requestname : \(requestName)")
+    }
+    func failedRequest(_ manager: NetworkManager, requestName: NSString, error: NSError) {
+        Logger.sharedInstance.info("requestname : \(requestName)")
+        UIUtilities.showAlertWithTitleAndMessage(title:NSLocalizedString("Error", comment: "") as NSString, message: error.localizedDescription as NSString)
+    }
+}

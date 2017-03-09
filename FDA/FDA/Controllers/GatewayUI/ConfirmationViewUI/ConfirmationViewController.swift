@@ -55,9 +55,14 @@ class ConfirmationViewController: UIViewController {
         // setting border color for footer buttons
         self.buttonDeleteAccount?.layer.borderColor = kUicolorForButtonBackground
         self.buttonDoNotDeleteAccount?.layer.borderColor = kUicolorForButtonBackground
-        
+       
+         self.navigationController?.setNavigationBarHidden(false, animated: true)
+       
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+         self.addBackBarButton()
+    }
     
     //MARK:IBActions
     

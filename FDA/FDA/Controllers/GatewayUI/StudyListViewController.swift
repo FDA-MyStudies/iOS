@@ -9,8 +9,8 @@
 import UIKit
 
 class StudyListViewController: UIViewController {
-
-
+    
+    
     @IBOutlet var tableView:UITableView?
     
     
@@ -37,7 +37,7 @@ class StudyListViewController: UIViewController {
             Gateway.instance.studies = listOfStudies
             
             
-           
+            
         } catch {
             print("json error: \(error.localizedDescription)")
         }
@@ -45,7 +45,7 @@ class StudyListViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // Do any additional setup after loading the view.
         
         //self.addRightBarButton() //Phase2
@@ -57,15 +57,16 @@ class StudyListViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         self.setNavigationBarItem()
+        self.navigationController?.setNavigationBarHidden(false, animated: true)
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
     
-     //MARK:Custom Bar Buttons
+    //MARK:Custom Bar Buttons
     
     func addLeftBarButton(){
         
@@ -89,22 +90,22 @@ class StudyListViewController: UIViewController {
         //button.titleLabel?.font = UIFont.init(name: "HelveticaNeue-Medium", size: 18)
         button.frame = CGRect(x: 0, y: 0, width: 19, height: 22.5)
         //button.contentHorizontalAlignment = .left
-       // button.setTitleColor(Utilities.getUIColorFromHex(0x007cba), for: .normal)
+        // button.setTitleColor(Utilities.getUIColorFromHex(0x007cba), for: .normal)
         let barItem = UIBarButtonItem(customView: button)
         
         self.navigationItem.setRightBarButton(barItem, animated: true)
     }
-
+    
     /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+     // MARK: - Navigation
+     
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+     // Get the new view controller using segue.destinationViewController.
+     // Pass the selected object to the new view controller.
+     }
+     */
+    
 }
 //MARK: TableView Data source
 extension StudyListViewController : UITableViewDataSource {
@@ -137,6 +138,11 @@ extension StudyListViewController :  UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        
+        let studyStoryBoard = UIStoryboard.init(name: "Study", bundle: Bundle.main)
+        let studyHomeController = studyStoryBoard.instantiateViewController(withIdentifier: String(describing: StudyHomeViewController.classForCoder()))
+        
+        self.navigationController?.pushViewController(studyHomeController, animated: true)
         
     }
 }

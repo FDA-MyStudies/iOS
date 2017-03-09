@@ -15,13 +15,13 @@ class StudyHomeViewController : UIViewController{
     @IBOutlet var pageControlView : UIPageControl?
     @IBOutlet var buttonBack : UIButton!
     @IBOutlet var buttonStar : UIButton!
-
+    
     var pageViewController: PageViewController? {
         didSet {
             pageViewController?.pageViewDelegate = self
         }
     }
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -32,7 +32,7 @@ class StudyHomeViewController : UIViewController{
         
         
         // pageViewController?.overview = Gateway.instance.overview
-        
+        self.navigationController?.setNavigationBarHidden(true, animated: true)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -83,8 +83,8 @@ class StudyHomeViewController : UIViewController{
     }
     
     @IBAction func backButtonAction(_ sender: Any) {
-    
-    
+        
+        _ = self.navigationController?.popViewController(animated: true)
     }
     
     @IBAction func starButtonAction(_ sender: Any) {

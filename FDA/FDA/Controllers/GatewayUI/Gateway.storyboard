@@ -855,7 +855,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="73" sectionHeaderHeight="1" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="1M0-1l-Fkt">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="554"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <view key="tableFooterView" contentMode="scaleToFill" id="Bcy-Su-K3N">
                                     <rect key="frame" x="0.0" y="125" width="375" height="210"/>
@@ -1017,7 +1017,7 @@
                             <constraint firstItem="1M0-1l-Fkt" firstAttribute="leading" secondItem="4E5-H9-mFm" secondAttribute="leading" id="1bL-hQ-dKv"/>
                             <constraint firstAttribute="trailing" secondItem="1M0-1l-Fkt" secondAttribute="trailing" id="3Tn-XX-GYN"/>
                             <constraint firstItem="1M0-1l-Fkt" firstAttribute="top" secondItem="Dh8-Sx-2oB" secondAttribute="bottom" id="EnE-HW-zJb"/>
-                            <constraint firstItem="xLx-f5-o1W" firstAttribute="top" secondItem="1M0-1l-Fkt" secondAttribute="bottom" id="qUX-cv-zUy"/>
+                            <constraint firstAttribute="bottom" secondItem="1M0-1l-Fkt" secondAttribute="bottom" id="hY9-MZ-lwG"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="jHf-nb-dhq">
@@ -1058,7 +1058,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="73" sectionHeaderHeight="1" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="jkc-0v-3Yb">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="554"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <view key="tableHeaderView" contentMode="scaleToFill" id="L25-As-XPh">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="178"/>
@@ -1281,7 +1281,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="jkc-0v-3Yb" firstAttribute="leading" secondItem="olx-YB-iUs" secondAttribute="leading" id="VZL-KX-kIe"/>
-                            <constraint firstAttribute="bottom" secondItem="jkc-0v-3Yb" secondAttribute="bottom" constant="49" id="aer-LQ-Alm"/>
+                            <constraint firstAttribute="bottom" secondItem="jkc-0v-3Yb" secondAttribute="bottom" id="aer-LQ-Alm"/>
                             <constraint firstItem="jkc-0v-3Yb" firstAttribute="top" secondItem="lKO-kh-Nb3" secondAttribute="bottom" id="c05-7J-0wd"/>
                             <constraint firstAttribute="trailing" secondItem="jkc-0v-3Yb" secondAttribute="trailing" id="gvQ-6C-zOh"/>
                         </constraints>

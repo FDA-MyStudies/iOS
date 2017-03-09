@@ -18,7 +18,7 @@
         <!--Study Home View Controller-->
         <scene sceneID="VzS-PK-Dcj">
             <objects>
-                <viewController id="N5Y-rW-mwD" customClass="StudyHomeViewController" customModule="FDA" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="StudyHomeViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="N5Y-rW-mwD" customClass="StudyHomeViewController" customModule="FDA" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="0N0-It-5jQ"/>
                         <viewControllerLayoutGuide type="bottom" id="y8U-nc-Trc"/>

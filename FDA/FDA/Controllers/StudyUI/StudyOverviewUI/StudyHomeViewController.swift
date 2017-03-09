@@ -1,37 +1,37 @@
 //
-//  LoginViewController.swift
+//  StudyHomeViewController.swift
 //  FDA
 //
-//  Created by Ravishankar on 3/6/17.
+//  Created by Ravishankar on 3/9/17.
 //  Copyright © 2017 BTC. All rights reserved.
 //
 
 import Foundation
 import UIKit
 
-class HomeViewController : UIViewController{
+class StudyHomeViewController : UIViewController{
     
     @IBOutlet weak var container : UIView!
     @IBOutlet var pageControlView : UIPageControl?
-    @IBOutlet var buttonLink : UIButton!
-    
-    
+    @IBOutlet var buttonBack : UIButton!
+    @IBOutlet var buttonStar : UIButton!
+
     var pageViewController: PageViewController? {
         didSet {
             pageViewController?.pageViewDelegate = self
         }
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-    
-       // self.loadTestData()
+        
+        // self.loadTestData()
         
         //Added to change next screen
-        pageControlView?.addTarget(self, action:#selector(HomeViewController.didChangePageControlValue), for: .valueChanged)
+        pageControlView?.addTarget(self, action:#selector(StudyHomeViewController.didChangePageControlValue), for: .valueChanged)
         
         
-       // pageViewController?.overview = Gateway.instance.overview
+        // pageViewController?.overview = Gateway.instance.overview
         
     }
     
@@ -39,7 +39,7 @@ class HomeViewController : UIViewController{
         super.viewWillAppear(animated)
         
         //hide navigationbar
-        self.navigationController?.setNavigationBarHidden(true, animated: true)
+        //self.navigationController?.setNavigationBarHidden(true, animated: true)
         
     }
     
@@ -50,11 +50,11 @@ class HomeViewController : UIViewController{
     }
     
     func loadTestData(){
-//        let filePath  = Bundle.main.path(forResource: "GatewayOverview", ofType: "json")
-//        let data = NSData(contentsOfFile: filePath!)
-
+        //        let filePath  = Bundle.main.path(forResource: "GatewayOverview", ofType: "json")
+        //        let data = NSData(contentsOfFile: filePath!)
+        
         //load plist info
-        let plistPath = Bundle.main.path(forResource: "GatewayOverview", ofType: ".plist", inDirectory:nil)
+        let plistPath = Bundle.main.path(forResource: "StudyOverview", ofType: ".plist", inDirectory:nil)
         let arrayContent = NSMutableArray.init(contentsOfFile: plistPath!)
         
         do {
@@ -70,7 +70,7 @@ class HomeViewController : UIViewController{
             
             //create new Overview object
             let overview = Overview()
-            overview.type = .gateway
+            overview.type = .study
             overview.sections = listOfOverviews
             
             //assgin to Gateway
@@ -80,7 +80,20 @@ class HomeViewController : UIViewController{
         } catch {
             print("json error: \(error.localizedDescription)")
         }
-        
+    }
+    
+    @IBAction func backButtonAction(_ sender: Any) {
+    
+    
+    }
+    
+    @IBAction func starButtonAction(_ sender: Any) {
+        if (sender as! UIButton).isSelected{
+            (sender as! UIButton).isSelected = !(sender as! UIButton).isSelected
+            
+        }else{
+            (sender as! UIButton).isSelected = !(sender as! UIButton).isSelected
+        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -93,17 +106,10 @@ class HomeViewController : UIViewController{
     func didChangePageControlValue() {
         pageViewController?.scrollToViewController(index: (pageControlView?.currentPage)!)
     }
-    
-    @IBAction func linkButtonAction(_ sender: Any) {
-        let loginStoryboard = UIStoryboard.init(name: "Main", bundle:Bundle.main)
-        let webViewController = loginStoryboard.instantiateViewController(withIdentifier:"WebViewController")
-        self.navigationController?.present(webViewController, animated: true, completion: nil)
-    }
-    
 }
 
 //MARK: Page Control Delegates for handling Counts
-extension HomeViewController: PageViewControllerDelegate {
+extension StudyHomeViewController: PageViewControllerDelegate {
     
     func pageViewController(pageViewController: PageViewController, didUpdatePageCount count: Int){
         pageControlView?.numberOfPages = count

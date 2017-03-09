@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import MediaPlayer
 
 class FirstGatewayOverviewViewController : UIViewController{
     
@@ -20,6 +21,7 @@ class FirstGatewayOverviewViewController : UIViewController{
     @IBOutlet var labelTitleText : UILabel?
     
     var overviewSectionDetail : OverviewSection!
+    var moviePlayer:MPMoviePlayerViewController!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,9 +49,26 @@ class FirstGatewayOverviewViewController : UIViewController{
         
     }
     
+    func moviePlayBackDidFinish(notification: NSNotification) {
+        //  println("moviePlayBackDidFinish:")
+        moviePlayer.moviePlayer.stop()
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.MPMoviePlayerPlaybackDidFinish, object: nil)
+        moviePlayer.dismiss(animated: true, completion: nil)
+    }
+    
     //Watchvideo Button Action
     @IBAction func watchVideoButtonClicked(_ sender: Any){
-    
+        
+        let url : NSURL = NSURL(string: "https://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4")!
+        moviePlayer = MPMoviePlayerViewController(contentURL:url as URL!)
+        
+        moviePlayer.moviePlayer.movieSourceType = .streaming
+        
+        NotificationCenter.default.addObserver(self, selector:#selector(StudyOverviewViewControllerFirst.moviePlayBackDidFinish(notification:)),
+                                               name: NSNotification.Name.MPMoviePlayerPlaybackDidFinish,
+                                               object: moviePlayer.moviePlayer)
+        
+        self.present(moviePlayer, animated: true, completion: nil)
     
     }
     

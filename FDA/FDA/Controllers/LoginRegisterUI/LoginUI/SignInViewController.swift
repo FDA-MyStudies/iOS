@@ -93,6 +93,10 @@ class SignInViewController : UIViewController{
         self.createMenuView()
     }
     
+    func navigateToVerifyController(){
+        self.performSegue(withIdentifier: "verificationSegue", sender: nil)
+    }
+    
     func createMenuView() {
         
         // create viewController code...
@@ -177,7 +181,17 @@ extension SignInViewController:NMWebServiceDelegate {
     func finishedRequest(_ manager: NetworkManager, requestName: NSString, response: AnyObject?) {
         Logger.sharedInstance.info("requestname : \(requestName)")
         
-        self.navigateToGatewayDashboard()
+        
+        if User.currentUser.verified == true{
+             self.navigateToGatewayDashboard()
+        }
+        else {
+            
+           self.navigateToVerifyController()
+        }
+
+        
+       
         
     }
     func failedRequest(_ manager: NetworkManager, requestName: NSString, error: NSError) {

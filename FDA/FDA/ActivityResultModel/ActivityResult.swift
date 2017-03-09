@@ -37,19 +37,24 @@ class ActivityResult {
     
     func initWithORKTaskResult(taskResult:ORKTaskResult) {
         
-        for stepResult in taskResult.results!{
-            let activityStepResult:ActivityStepResult? = ActivityStepResult()
-            
-            
-            activityStepResult?.initWithORKStepResult(stepResult: stepResult as! ORKStepResult , activityType:(self.activity?.type)!)
-            
-            
-            self.result?.append(activityStepResult!)
-            
-            print("###: \n  \(activityStepResult?.getActivityStepResultDict())")
-            
-            
+        
+        if Utilities.isValidObject(someObject: self.result as AnyObject?) == false && self.result?.count == 0 {
+            for stepResult in taskResult.results!{
+                let activityStepResult:ActivityStepResult? = ActivityStepResult()
+                
+                
+                activityStepResult?.initWithORKStepResult(stepResult: stepResult as! ORKStepResult , activityType:(self.activity?.type)!)
+                
+                
+                self.result?.append(activityStepResult!)
+                
+                print("###: \n  \(activityStepResult?.getActivityStepResultDict())")
+                
+                
+            }
         }
+        
+        
     }
     
     

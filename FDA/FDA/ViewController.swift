@@ -16,7 +16,7 @@ let user = User.currentUser
 
 
 let resourceArray : Array<Any>? = nil
-class ViewController: UIViewController,ORKTaskViewControllerDelegate {
+class ViewController: UIViewController {
     
     
     override func viewDidLoad() {
@@ -27,7 +27,7 @@ class ViewController: UIViewController,ORKTaskViewControllerDelegate {
         self.setPrefereneces()
         self.addResources()
         
-        //self.buildTask()
+        self.buildTask()
        // self.kickCounterTaskTest()
         
         
@@ -82,83 +82,6 @@ class ViewController: UIViewController,ORKTaskViewControllerDelegate {
     
     
     
-    //MARK:ORKTaskViewController Delegate
-    
-    
-    func taskViewControllerSupportsSaveAndRestore(_ taskViewController: ORKTaskViewController) -> Bool {
-        return true
-    }
-    
-    public func taskViewController(_ taskViewController: ORKTaskViewController, didFinishWith reason: ORKTaskViewControllerFinishReason, error: Error?) {
-        
-        
-        var taskResult:Any?
-        
-        switch reason {
-            
-        case ORKTaskViewControllerFinishReason.completed:
-            print("completed")
-            taskResult = taskViewController.result
-        case ORKTaskViewControllerFinishReason.failed:
-            print("failed")
-            taskResult = taskViewController.result
-        case ORKTaskViewControllerFinishReason.discarded:
-            print("discarded")
-            taskResult = taskViewController.result
-        case ORKTaskViewControllerFinishReason.saved:
-            print("saved")
-            taskResult = taskViewController.restorationData
-            
-            if taskViewController.task?.identifier == "ConsentTask"{
-                
-            }
-            else{
-                activityBuilder?.activity?.restortionData = taskViewController.restorationData
-            }
-        }
-        
-        if  taskViewController.task?.identifier == "ConsentTask"{
-            consentbuilder?.consentResult?.initWithORKTaskResult(taskResult:taskViewController.result )
-        }
-        else{
-            activityBuilder?.actvityResult?.initWithORKTaskResult(taskResult: taskViewController.result)
-        }
-        
-        
-        taskViewController.dismiss(animated: true, completion: nil)
-        
-    }
-    
-    func taskViewController(_ taskViewController: ORKTaskViewController, stepViewControllerWillAppear stepViewController: ORKStepViewController) {
-        
-        
-    }
-    
-    //MARK:StepViewController Delegate
-    public func stepViewController(_ stepViewController: ORKStepViewController, didFinishWith direction: ORKStepViewControllerNavigationDirection){
-        
-    }
-    
-    public func stepViewControllerResultDidChange(_ stepViewController: ORKStepViewController){
-        
-    }
-    public func stepViewControllerDidFail(_ stepViewController: ORKStepViewController, withError error: Error?){
-        
-    }
-    func taskViewController(_ taskViewController: ORKTaskViewController, viewControllerFor step: ORKStep) -> ORKStepViewController? {
-        
-        if step.identifier == "FetalKickCounter" {
-            
-             let ttController = self.storyboard?.instantiateViewController(withIdentifier: "FetalKickCounterStepViewController") as! FetalKickCounterStepViewController
-            ttController.step = step
-          
-            
-            return ttController
-        } else {
-            return nil
-        }
-    }
-    
     //MARK: methods
     
     
@@ -205,6 +128,8 @@ class ViewController: UIViewController,ORKTaskViewControllerDelegate {
                     
                     
                      activityBuilder?.initActivityWithDict(dict: dataDict?["Result"] as! Dictionary<String, Any>)
+                    
+                   
                     
                      task = activityBuilder?.createTask()
                     
@@ -324,6 +249,106 @@ class ViewController: UIViewController,ORKTaskViewControllerDelegate {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    
+}
+
+
+extension ViewController:ORKTaskViewControllerDelegate{
+    //MARK:ORKTaskViewController Delegate
+    
+    
+    func taskViewControllerSupportsSaveAndRestore(_ taskViewController: ORKTaskViewController) -> Bool {
+        return true
+    }
+    
+    public func taskViewController(_ taskViewController: ORKTaskViewController, didFinishWith reason: ORKTaskViewControllerFinishReason, error: Error?) {
+        
+        
+        var taskResult:Any?
+        
+        switch reason {
+            
+        case ORKTaskViewControllerFinishReason.completed:
+            print("completed")
+            taskResult = taskViewController.result
+        case ORKTaskViewControllerFinishReason.failed:
+            print("failed")
+            taskResult = taskViewController.result
+        case ORKTaskViewControllerFinishReason.discarded:
+            print("discarded")
+            taskResult = taskViewController.result
+        case ORKTaskViewControllerFinishReason.saved:
+            print("saved")
+            taskResult = taskViewController.restorationData
+            
+            if taskViewController.task?.identifier == "ConsentTask"{
+                
+            }
+            else{
+                activityBuilder?.activity?.restortionData = taskViewController.restorationData
+            }
+        }
+        
+        if  taskViewController.task?.identifier == "ConsentTask"{
+            consentbuilder?.consentResult?.initWithORKTaskResult(taskResult:taskViewController.result )
+        }
+        else{
+            activityBuilder?.actvityResult?.initWithORKTaskResult(taskResult: taskViewController.result)
+        }
+        
+        
+        taskViewController.dismiss(animated: true, completion: nil)
+        
+    }
+    
+    func taskViewController(_ taskViewController: ORKTaskViewController, stepViewControllerWillAppear stepViewController: ORKStepViewController) {
+        
+        if (taskViewController.result.results?.count)! > 1{
+            
+            
+            if activityBuilder?.actvityResult?.result?.count == taskViewController.result.results?.count{
+                activityBuilder?.actvityResult?.result?.removeLast()
+            }
+            else{
+            
+            if (activityBuilder?.actvityResult?.result?.count)! < (taskViewController.result.results?.count)!{
+            
+            let orkStepResult:ORKStepResult? = taskViewController.result.results?[(taskViewController.result.results?.count)! - 2] as! ORKStepResult?
+            let activityStepResult:ActivityStepResult? = ActivityStepResult()
+            
+            activityStepResult?.initWithORKStepResult(stepResult: orkStepResult! as ORKStepResult , activityType:(activityBuilder?.actvityResult?.activity?.type)!)
+            activityBuilder?.actvityResult?.result?.append(activityStepResult!)
+           
+            }
+            }
+        }
+    }
+    
+    //MARK:StepViewController Delegate
+    public func stepViewController(_ stepViewController: ORKStepViewController, didFinishWith direction: ORKStepViewControllerNavigationDirection){
+        
+    }
+    
+    public func stepViewControllerResultDidChange(_ stepViewController: ORKStepViewController){
+        
+    }
+    public func stepViewControllerDidFail(_ stepViewController: ORKStepViewController, withError error: Error?){
+        
+    }
+    func taskViewController(_ taskViewController: ORKTaskViewController, viewControllerFor step: ORKStep) -> ORKStepViewController? {
+        
+        if step.identifier == "FetalKickCounter" {
+            
+            let ttController = self.storyboard?.instantiateViewController(withIdentifier: "FetalKickCounterStepViewController") as! FetalKickCounterStepViewController
+            ttController.step = step
+            
+            
+            return ttController
+        } else {
+            return nil
+        }
     }
     
     

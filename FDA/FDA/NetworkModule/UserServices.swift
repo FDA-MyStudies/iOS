@@ -53,11 +53,13 @@ class UserServices: NSObject {
     var delegate:NMWebServiceDelegate! = nil
     
      //MARK: Requests
-    func loginUser(_:NMWebServiceDelegate){
+    func loginUser(_ delegate:NMWebServiceDelegate){
+        
+        self.delegate = delegate
         
         let user = User.currentUser
-        let params = [kUserEmailId : user.emailId,
-                      kUserPassword: user.password]
+        let params = [kUserEmailId : user.emailId!,
+                      kUserPassword: user.password!]
         
         let method = RegistrationMethods.login.method
         
@@ -65,19 +67,29 @@ class UserServices: NSObject {
         
     }
     
-    func registerUser(_:NMWebServiceDelegate){
+    func registerUser(_ delegate:NMWebServiceDelegate){
+        
+        self.delegate = delegate
         
         let user = User.currentUser
-        let params = [kUserEmailId : user.emailId,
-                      kUserFirstName : user.firstName,
-                      kUserLastName : user.lastName,
-                      kUserPassword: user.password]
+        //let userSettings = user.settings
+        
+        let params = [kUserEmailId : user.emailId!,
+                      kUserFirstName : user.firstName!,
+                      kUserLastName : user.lastName!,
+                      kUserPassword: user.password!,
+                      "touchId":"true",
+                      "localNotification":"true"
+        ]
+        
         let method = RegistrationMethods.register.method
         self.sendRequestWith(method:method, params: params, headers: nil)
         
     }
     
-    func confirmUserRegistration(_:NMWebServiceDelegate){
+    func confirmUserRegistration(_ delegate:NMWebServiceDelegate){
+        
+        self.delegate = delegate
         
         let user = User.currentUser
         let params = [kUserId : user.userId]
@@ -86,7 +98,9 @@ class UserServices: NSObject {
         
     }
     
-    func logoutUser(_:NMWebServiceDelegate){
+    func logoutUser(_ delegate:NMWebServiceDelegate){
+        
+        self.delegate = delegate
         
         let user = User.currentUser
         let params = [kUserId : user.userId,
@@ -96,7 +110,9 @@ class UserServices: NSObject {
         
     }
     
-    func forgotPassword(_:NMWebServiceDelegate){
+    func forgotPassword(_ delegate:NMWebServiceDelegate){
+        
+        self.delegate = delegate
         
         let user = User.currentUser
         let params = [kUserEmailId : user.emailId]
@@ -106,7 +122,9 @@ class UserServices: NSObject {
         self.sendRequestWith(method:method, params: params, headers: nil)
     }
     
-    func getUserProfile(_:NMWebServiceDelegate){
+    func getUserProfile(_ delegate:NMWebServiceDelegate){
+        
+        self.delegate = delegate
         
         let user = User.currentUser
         let params = [kUserId : user.userId]
@@ -116,7 +134,9 @@ class UserServices: NSObject {
         self.sendRequestWith(method:method, params: params, headers: nil)
     }
 
-    func updateUserProfile(_:NMWebServiceDelegate){
+    func updateUserProfile(_ delegate:NMWebServiceDelegate){
+        
+        self.delegate = delegate
         
         let user = User.currentUser
         
@@ -136,7 +156,9 @@ class UserServices: NSObject {
         self.sendRequestWith(method:method, params: params, headers: nil)
     }
     
-    func getUserPreference(_:NMWebServiceDelegate){
+    func getUserPreference(_ delegate:NMWebServiceDelegate){
+        
+        self.delegate = delegate
         
         let user = User.currentUser
         let params = [kUserId : user.userId]
@@ -146,7 +168,9 @@ class UserServices: NSObject {
         self.sendRequestWith(method:method, params: params, headers: nil)
     }
     
-    func updateUserPreference(_:NMWebServiceDelegate){
+    func updateUserPreference(_ delegate:NMWebServiceDelegate){
+        
+        self.delegate = delegate
         
         //INCOMPLETE
         let user = User.currentUser
@@ -156,7 +180,10 @@ class UserServices: NSObject {
         self.sendRequestWith(method:method, params: params, headers: nil)
     }
     
-    func updateUserEligibilityConsentStatus(_:NMWebServiceDelegate){
+    func updateUserEligibilityConsentStatus(_ delegate:NMWebServiceDelegate){
+        
+        
+        self.delegate = delegate
         
         //INCOMPLETE
         let user = User.currentUser
@@ -168,6 +195,8 @@ class UserServices: NSObject {
     
     func getConsentPDFForStudy(studyId:String , delegate:NMWebServiceDelegate) {
         
+        self.delegate = delegate
+        
         let user = User.currentUser
         let params = [kUserId : user.userId,
                       kStudyId: studyId]
@@ -177,13 +206,17 @@ class UserServices: NSObject {
         self.sendRequestWith(method:method, params: params, headers: nil)
     }
     
-    func updateUserActivityState(){
+    func updateUserActivityState(_ delegate:NMWebServiceDelegate){
+        
+        self.delegate = delegate
         
         //INCOMPLETE
          let method = RegistrationMethods.updateActivityState.method
     }
     
     func getUserActivityState(studyId:String , delegate:NMWebServiceDelegate) {
+        
+        self.delegate = delegate
         
         let user = User.currentUser
         let params = [kUserId : user.userId,
@@ -195,6 +228,9 @@ class UserServices: NSObject {
     }
     
     func withdrawFromStudy(studyId:String ,shouldDeleteData:Bool, delegate:NMWebServiceDelegate){
+        
+        
+        self.delegate = delegate
         
         let user = User.currentUser
         let params = [kUserId : user.userId! as String,
@@ -211,18 +247,32 @@ class UserServices: NSObject {
     func handleUserLoginResponse(response:Dictionary<String, Any>){
         
         let user = User.currentUser
-        user.userId     = response[kUserId] as! String
+        user.userId     = String(describing: response[kUserId])
         user.verified   = response[kUserVerified] as! Bool
         user.authToken  = response[kUserAuthToken] as! String
+        
+        
+        //TEMP : Need to save these values in Realm
+        let ud = UserDefaults.standard
+        ud.set(user.authToken, forKey:kUserAuthToken)
+        ud.set(user.userId, forKey: kUserId)
+        ud.synchronize()
+        
     }
     
     func handleUserRegistrationResponse(response:Dictionary<String, Any>){
         
         let user = User.currentUser
-        user.userId     = response[kUserId] as! String
+        user.userId     = String(describing: response[kUserId])
         user.verified   = response[kUserVerified] as! Bool
         user.authToken  = response[kUserAuthToken] as! String
-
+        
+        
+        //TEMP : Need to save these values in Realm
+        let ud = UserDefaults.standard
+        ud.set(user.authToken, forKey:kUserAuthToken)
+        ud.set(user.userId, forKey: kUserId)
+        ud.synchronize()
     }
     
     func handleConfirmRegistrationResponse(response:Dictionary<String, Any>){
@@ -318,29 +368,38 @@ extension UserServices:NMWebServiceDelegate{
     func finishedRequest(_ manager: NetworkManager, requestName: NSString, response: AnyObject?) {
         
        switch requestName {
-            case RegistrationMethods.login.rawValue as String:
+            case RegistrationMethods.login.description as String:
                 
                 self.handleUserLoginResponse(response: response as! Dictionary<String, Any>)
         
-            case RegistrationMethods.register.rawValue as String: break
-            case RegistrationMethods.confirmRegistration.rawValue as String: break
-            case RegistrationMethods.userProfile.rawValue as String: break
-            case RegistrationMethods.updateUserProfile.rawValue as String: break
-            case RegistrationMethods.userPreferences.rawValue as String: break
-            case RegistrationMethods.updatePreferences.rawValue as String: break
-            case RegistrationMethods.updateEligibilityConsentStatus.rawValue as String: break
-            case RegistrationMethods.consentPDF.rawValue as String: break
-            case RegistrationMethods.updateActivityState.rawValue as String: break
-            case RegistrationMethods.activityState.rawValue as String: break
-            case RegistrationMethods.withdraw.rawValue as String: break
-            case RegistrationMethods.forgotPassword.rawValue as String: break
-            case RegistrationMethods.logout.rawValue as String: break
+            case RegistrationMethods.register.description as String:
+        
+                self.handleUserRegistrationResponse(response: response as! Dictionary<String, Any>)
+        
+            case RegistrationMethods.confirmRegistration.description as String: break
+            case RegistrationMethods.userProfile.description as String: break
+            case RegistrationMethods.updateUserProfile.description as String: break
+            case RegistrationMethods.userPreferences.description as String: break
+            case RegistrationMethods.updatePreferences.description as String: break
+            case RegistrationMethods.updateEligibilityConsentStatus.description as String: break
+            case RegistrationMethods.consentPDF.description as String: break
+            case RegistrationMethods.updateActivityState.description as String: break
+            case RegistrationMethods.activityState.description as String: break
+            case RegistrationMethods.withdraw.description as String: break
+            case RegistrationMethods.forgotPassword.description as String: break
+            case RegistrationMethods.logout.description as String: break
         default:
             print("Request was not sent proper method name")
         }
         
+        if delegate != nil {
+            delegate.finishedRequest(manager, requestName: requestName, response: response)
+        }
+        
     }
     func failedRequest(_ manager: NetworkManager, requestName: NSString, error: NSError) {
-        
+        if delegate != nil {
+            delegate.failedRequest(manager, requestName: requestName, error: error)
+        }
     }
 }

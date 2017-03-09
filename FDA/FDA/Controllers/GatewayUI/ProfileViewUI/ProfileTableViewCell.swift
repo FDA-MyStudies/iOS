@@ -81,7 +81,7 @@ class ProfileTableViewCell: UITableViewCell {
             else{
                 self.switchToggle?.isOn =  false
             }
-        default: break
+       
             
         }
         

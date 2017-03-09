@@ -227,8 +227,6 @@ class ActivityBuilder {
 
              */
               
-            default: break
-                
             }
             
            

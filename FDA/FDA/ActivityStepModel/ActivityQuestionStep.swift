@@ -429,9 +429,7 @@ class ActivityQuestionStep: ActivityStep {
                         
                     case .decimal:
                         questionStepAnswerFormat = ORKAnswerFormat.decimalAnswerFormat(withUnit: localizedQuestionStepAnswerFormatUnit)
-                    default:
-                        Logger.sharedInstance.debug("kStepQuestionNumericStyle Step has null values:\(formatDict)")
-                        return nil
+                   
                         
                     }
                     

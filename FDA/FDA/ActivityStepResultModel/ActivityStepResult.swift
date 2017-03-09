@@ -427,7 +427,7 @@ class ActivityStepResult{
                                 resultDict?[kActivityActiveStepKey] = kSpatialSpanMemoryKeyNumberOfFailures
                                 resultDict?[kActivityStepResultValue] = stepTypeResult?.numberOfFailures
                                 
-                            default: break
+                           
                                 
                             }
                             resultDict?[kActivityStepStartTime] =  self.startTime

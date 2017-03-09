@@ -67,8 +67,7 @@ class EligibilityBuilder{
                 // need to check if it is of question type ?? or pass code type
                 // business logic needed to arrage passcode and questionary
                 break
-            default:
-                break
+            
             }
             
             }

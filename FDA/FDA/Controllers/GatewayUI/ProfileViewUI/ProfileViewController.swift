@@ -61,7 +61,7 @@ class ProfileViewController: UIViewController {
         //Initial data setup
         self.setInitialDate()
         
-       UserServices().getUserProfile(self as! NMWebServiceDelegate)
+       UserServices().getUserProfile(self as NMWebServiceDelegate)
         
     }
     
@@ -210,7 +210,7 @@ class ProfileViewController: UIViewController {
                 user.settings?.remoteNotifications = toggle?.isOn
             case .receiveStudyActivityReminders:
                 user.settings?.localNotifications = toggle?.isOn
-            default: break
+           
                 
             }
         }

@@ -82,7 +82,8 @@ class SignInViewController : UIViewController{
         }else{
             print("Call the webservice")
             user.userType = .FDAUser
-            self.navigateToGatewayDashboard()
+            //self.navigateToGatewayDashboard()
+            UserServices().loginUser(self)
             
         }
     }
@@ -168,4 +169,21 @@ extension SignInViewController : UITextFieldDelegate{
         }
     }
 }
+
+extension SignInViewController:NMWebServiceDelegate {
+    func startedRequest(_ manager: NetworkManager, requestName: NSString) {
+        Logger.sharedInstance.info("requestname : \(requestName)")
+    }
+    func finishedRequest(_ manager: NetworkManager, requestName: NSString, response: AnyObject?) {
+        Logger.sharedInstance.info("requestname : \(requestName)")
+        
+        self.navigateToGatewayDashboard()
+        
+    }
+    func failedRequest(_ manager: NetworkManager, requestName: NSString, error: NSError) {
+        Logger.sharedInstance.info("requestname : \(requestName)")
+        UIUtilities.showAlertWithTitleAndMessage(title:NSLocalizedString("Error", comment: "") as NSString, message: error.localizedDescription as NSString)
+    }
+}
+
 

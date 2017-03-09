@@ -150,8 +150,8 @@ class SignUpViewController : UIViewController{
             }else{
                 //Call the Webservice
                 
-                self.navigateToVerificationController()
-                
+                //self.navigateToVerificationController()
+                UserServices().registerUser(self)
                 
             }
         }
@@ -221,24 +221,27 @@ extension SignUpViewController : UITextFieldDelegate{
     
     func textFieldDidEndEditing(_ textField: UITextField) {
         print(textField.text!)
-        switch textField.tag {
-        case SignUpTableViewTags.FirstNameTag.rawValue:
-            user.firstName = textField.text
+        
+        let tag:SignUpTableViewTags = SignUpTableViewTags(rawValue: textField.tag)!
+    
+        switch tag {
+        case .FirstNameTag:
+            user.firstName = textField.text!
             break
             
-        case SignUpTableViewTags.LastName.rawValue:
-            user.lastName = textField.text
+        case .LastName:
+            user.lastName = textField.text!
             break
             
-        case SignUpTableViewTags.EmailId.rawValue:
-            user.emailId = textField.text
+        case .EmailId:
+            user.emailId = textField.text!
             break
             
-        case SignUpTableViewTags.Password.rawValue:
-            user.password = textField.text
+        case .Password:
+            user.password = textField.text!
             break
             
-        case SignUpTableViewTags.ConfirmPassword.rawValue:
+        case .ConfirmPassword:
             confirmPassword = textField.text!
             break
             
@@ -246,7 +249,23 @@ extension SignUpViewController : UITextFieldDelegate{
             print("No Matching data Found")
             break
         }
+        
     }
+
 }
 
+//
+extension SignUpViewController:NMWebServiceDelegate {
+    
+    func startedRequest(_ manager: NetworkManager, requestName: NSString) {
+        Logger.sharedInstance.info("requestname : \(requestName)")
+    }
+    func finishedRequest(_ manager: NetworkManager, requestName: NSString, response: AnyObject?) {
+        Logger.sharedInstance.info("requestname : \(requestName)")
+    }
+    func failedRequest(_ manager: NetworkManager, requestName: NSString, error: NSError) {
+        Logger.sharedInstance.info("requestname : \(requestName)")
+        UIUtilities.showAlertWithTitleAndMessage(title:NSLocalizedString("Error", comment: "") as NSString, message: error.localizedDescription as NSString)
+    }
+}
 

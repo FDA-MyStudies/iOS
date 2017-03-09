@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import MediaPlayer
 
 class StudyOverviewViewControllerFirst : UIViewController{
     
@@ -18,6 +19,8 @@ class StudyOverviewViewControllerFirst : UIViewController{
     @IBOutlet var labelDescription : UILabel?
     
     var overviewSectionDetail : OverviewSection!
+    
+    var moviePlayer:MPMoviePlayerViewController!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,6 +41,28 @@ class StudyOverviewViewControllerFirst : UIViewController{
         
         
     }
+    @IBAction func watchVideoButtonAction(_ sender: Any) {
+        
+        let url : NSURL = NSURL(string: "https://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4")!
+        moviePlayer = MPMoviePlayerViewController(contentURL:url as URL!)
+        
+        moviePlayer.moviePlayer.movieSourceType = .streaming
+        
+        NotificationCenter.default.addObserver(self, selector:#selector(StudyOverviewViewControllerFirst.moviePlayBackDidFinish(notification:)),
+                                               name: NSNotification.Name.MPMoviePlayerPlaybackDidFinish,
+                                               object: moviePlayer.moviePlayer)
+        
+        self.present(moviePlayer, animated: true, completion: nil)
+        
+    }
+    
+    func moviePlayBackDidFinish(notification: NSNotification) {
+        //  println("moviePlayBackDidFinish:")
+        moviePlayer.moviePlayer.stop()
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.MPMoviePlayerPlaybackDidFinish, object: nil)
+        moviePlayer.dismiss(animated: true, completion: nil)
+    }
+    
     
     @IBAction func visitWebsiteButtonAction(_ sender: Any) {
         let loginStoryboard = UIStoryboard.init(name: "Main", bundle:Bundle.main)

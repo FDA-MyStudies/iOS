@@ -682,6 +682,7 @@
                     <connections>
                         <outlet property="buttonSignIn" destination="Les-Kl-pFS" id="3iX-wX-bnH"/>
                         <outlet property="tableView" destination="ss7-zA-DJ6" id="5c2-N8-WqJ"/>
+                        <segue destination="slw-Bf-fNL" kind="show" identifier="verificationSegue" id="Wsb-hw-1LK"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Hb9-ku-DtX" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -817,7 +818,7 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="93M-Fs-drd">
                                 <rect key="frame" x="112" y="455" width="150" height="40"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
-                                <state key="normal" title="Continue">
+                                <state key="normal" title="Verify">
                                     <color key="titleColor" red="0.0" green="0.48627450979999998" blue="0.72941176470000002" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <userDefinedRuntimeAttributes>
@@ -832,7 +833,7 @@
                                 </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="continueButtonAction:" destination="slw-Bf-fNL" eventType="touchUpInside" id="2cS-UH-ZO7"/>
-                                    <segue destination="3kT-ho-jWT" kind="show" id="qXC-KK-iWg"/>
+                                    <segue destination="3kT-ho-jWT" kind="show" identifier="signupCompletionSegue" id="qXC-KK-iWg"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -965,4 +966,7 @@
         <image name="watchVideo" width="119" height="27"/>
         <image name="welcomeBg" width="375" height="667"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="Wsb-hw-1LK"/>
+    </inferredMetricsTieBreakers>
 </document>

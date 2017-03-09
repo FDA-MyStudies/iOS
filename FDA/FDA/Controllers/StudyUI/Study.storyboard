@@ -15,10 +15,10 @@
         </array>
     </customFonts>
     <scenes>
-        <!--Page View Controller-->
+        <!--Study Home View Controller-->
         <scene sceneID="VzS-PK-Dcj">
             <objects>
-                <viewController id="N5Y-rW-mwD" customClass="PageViewController" customModule="FDA" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="N5Y-rW-mwD" customClass="StudyHomeViewController" customModule="FDA" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="0N0-It-5jQ"/>
                         <viewControllerLayoutGuide type="bottom" id="y8U-nc-Trc"/>
@@ -27,10 +27,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="15.png" translatesAutoresizingMaskIntoConstraints="NO" id="Kl7-io-Vz3">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XyM-as-imD">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <connections>
@@ -44,43 +40,67 @@
                                     <constraint firstAttribute="width" constant="50" id="tmx-Mb-S2J"/>
                                 </constraints>
                                 <state key="normal" image="backIconWhite"/>
+                                <connections>
+                                    <action selector="backButtonAction:" destination="N5Y-rW-mwD" eventType="touchUpInside" id="EJn-l3-oPw"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9vo-zr-UJ0">
-                                <rect key="frame" x="319" y="16" width="51" height="39"/>
+                                <rect key="frame" x="319" y="11" width="50" height="50"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="39" id="Vzb-sX-AoQ"/>
-                                    <constraint firstAttribute="width" constant="51" id="dDY-OL-YS1"/>
+                                    <constraint firstAttribute="height" constant="50" id="Vzb-sX-AoQ"/>
+                                    <constraint firstAttribute="width" constant="50" id="dDY-OL-YS1"/>
                                 </constraints>
-                                <state key="normal" image="starYellow">
+                                <state key="normal" image="starGreyBig">
                                     <color key="titleColor" red="0.84705882349999995" green="0.89019607840000003" blue="0.90196078430000004" alpha="0.5" colorSpace="calibratedRGB"/>
                                 </state>
+                                <state key="selected" image="starYellow"/>
+                                <connections>
+                                    <action selector="starButtonAction:" destination="N5Y-rW-mwD" eventType="touchUpInside" id="m7b-8W-DXh"/>
+                                </connections>
                             </button>
+                            <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="spx-SF-bV8">
+                                <rect key="frame" x="152" y="484" width="70" height="37"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="37" id="aSs-tP-fty"/>
+                                </constraints>
+                                <color key="pageIndicatorTintColor" red="0.84705882349999995" green="0.89019607840000003" blue="0.90196078430000004" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="currentPageIndicatorTintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </pageControl>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="p2D-fQ-5xZ" firstAttribute="leading" secondItem="EmZ-HA-ZIB" secondAttribute="leadingMargin" constant="-8" id="7aH-Gl-Hqc"/>
                             <constraint firstItem="XyM-as-imD" firstAttribute="top" secondItem="EmZ-HA-ZIB" secondAttribute="top" id="OXV-ir-VOG"/>
                             <constraint firstAttribute="trailing" secondItem="XyM-as-imD" secondAttribute="trailing" id="PAh-fY-VyR"/>
+                            <constraint firstItem="spx-SF-bV8" firstAttribute="width" secondItem="EmZ-HA-ZIB" secondAttribute="width" multiplier="70/375" id="QaN-TR-BW2"/>
                             <constraint firstItem="y8U-nc-Trc" firstAttribute="top" secondItem="XyM-as-imD" secondAttribute="bottom" id="Qzc-bK-EXq"/>
                             <constraint firstItem="XyM-as-imD" firstAttribute="leading" secondItem="EmZ-HA-ZIB" secondAttribute="leading" id="X1g-Mz-fDY"/>
                             <constraint firstItem="p2D-fQ-5xZ" firstAttribute="top" secondItem="0N0-It-5jQ" secondAttribute="bottom" constant="-9" id="bhy-W2-oti"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="9vo-zr-UJ0" secondAttribute="trailing" constant="-11" id="h0c-fu-IdX"/>
-                            <constraint firstItem="9vo-zr-UJ0" firstAttribute="top" secondItem="0N0-It-5jQ" secondAttribute="bottom" constant="-4" id="jwt-tU-50R"/>
+                            <constraint firstItem="spx-SF-bV8" firstAttribute="centerX" secondItem="EmZ-HA-ZIB" secondAttribute="centerX" id="gby-Fp-War"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="9vo-zr-UJ0" secondAttribute="trailing" constant="-10" id="h0c-fu-IdX"/>
+                            <constraint firstItem="9vo-zr-UJ0" firstAttribute="top" secondItem="0N0-It-5jQ" secondAttribute="bottom" constant="-9" id="jwt-tU-50R"/>
+                            <constraint firstItem="spx-SF-bV8" firstAttribute="centerY" secondItem="EmZ-HA-ZIB" secondAttribute="centerY" multiplier="1.50675" id="vgf-zN-kET"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="Cmi-5w-6zS"/>
                     <nil key="simulatedTopBarMetrics"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="375" height="667"/>
+                    <connections>
+                        <outlet property="buttonBack" destination="p2D-fQ-5xZ" id="VUN-DG-vWo"/>
+                        <outlet property="buttonStar" destination="9vo-zr-UJ0" id="FpR-f5-7Jg"/>
+                        <outlet property="container" destination="XyM-as-imD" id="zg6-NZ-qCM"/>
+                        <outlet property="pageControlView" destination="spx-SF-bV8" id="Tpx-Rw-4mV"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dbw-wT-OkS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="396" y="4520"/>
+            <point key="canvasLocation" x="396" y="4519.7901049475267"/>
         </scene>
-        <!--Study Overview Page View Controller-->
+        <!--Page View Controller-->
         <scene sceneID="oZ7-Yv-fUQ">
             <objects>
-                <pageViewController autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="150-x0-BlR" customClass="StudyOverviewPageViewController" customModule="FDA" customModuleProvider="target" sceneMemberID="viewController"/>
+                <pageViewController autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="150-x0-BlR" customClass="PageViewController" customModule="FDA" customModuleProvider="target" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="C2E-ei-N0W" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1258" y="4079"/>
@@ -88,8 +108,9 @@
         <!--Navigation Controller-->
         <scene sceneID="dfM-ha-eKb">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="m43-3P-pth" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="m43-3P-pth" sceneMemberID="viewController">
                     <toolbarItems/>
+                    <nil key="simulatedTopBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="1Sg-W7-ndU">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -106,7 +127,7 @@
         <!--Study Overview View Controller First-->
         <scene sceneID="Yb7-14-iTF">
             <objects>
-                <viewController storyboardIdentifier="FirstOverviewViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="BSo-U7-UDQ" customClass="StudyOverviewViewControllerFirst" customModule="FDA" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="FirstViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="BSo-U7-UDQ" customClass="StudyOverviewViewControllerFirst" customModule="FDA" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="ZSk-7T-YO9"/>
                         <viewControllerLayoutGuide type="bottom" id="TW2-AR-AdK"/>
@@ -159,6 +180,9 @@
                                 <state key="normal" title="Visit Website">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="visitWebsiteButtonAction:" destination="BSo-U7-UDQ" eventType="touchUpInside" id="yD7-RQ-N3L"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
@@ -191,6 +215,10 @@
                     </view>
                     <connections>
                         <outlet property="buttonJoinStudy" destination="5NQ-r5-mSz" id="73u-30-z4z"/>
+                        <outlet property="buttonVisitWebsite" destination="zeM-Up-qJV" id="ATr-Jq-lBc"/>
+                        <outlet property="buttonWatchVideo" destination="G9Y-IJ-Woi" id="yK6-5i-uQ8"/>
+                        <outlet property="labelDescription" destination="p79-PH-HnS" id="y7b-ds-QJQ"/>
+                        <outlet property="labelTitle" destination="w0M-Dz-kSR" id="Qkd-Oc-wCb"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="r3M-3Q-4Mx" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -200,7 +228,7 @@
         <!--Study Overview View Controller Second-->
         <scene sceneID="U4k-B6-hD2">
             <objects>
-                <viewController storyboardIdentifier="SecondOverviewViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="EBl-T5-UoM" customClass="StudyOverviewViewControllerSecond" customModule="FDA" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SecondViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="EBl-T5-UoM" customClass="StudyOverviewViewControllerSecond" customModule="FDA" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="NPB-9F-HR6"/>
                         <viewControllerLayoutGuide type="bottom" id="Xbm-nX-L0X"/>
@@ -262,8 +290,11 @@
                                         <state key="normal" title="Visit Website">
                                             <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <connections>
+                                            <action selector="visitWebsiteButtonAction:" destination="EBl-T5-UoM" eventType="touchUpInside" id="EO0-wW-Uhs"/>
+                                        </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mud-v9-9iS">
+                                    <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mud-v9-9iS">
                                         <rect key="frame" x="263" y="333" width="110" height="41"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="41" id="LbF-Ee-zaH"/>
@@ -273,6 +304,9 @@
                                         <state key="normal" title="Learn More">
                                             <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <connections>
+                                            <action selector="visitWebsiteButtonAction:" destination="EBl-T5-UoM" eventType="touchUpInside" id="cbs-pa-OsN"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -295,7 +329,7 @@
                                 </constraints>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="3EU-2E-MZV" firstAttribute="width" secondItem="rXI-xG-apb" secondAttribute="width" multiplier="240/375" id="ITF-Yv-Tpl"/>
                             <constraint firstItem="3EU-2E-MZV" firstAttribute="height" secondItem="rXI-xG-apb" secondAttribute="height" multiplier="85/667" id="IUj-zs-UEd"/>
@@ -309,6 +343,10 @@
                     </view>
                     <connections>
                         <outlet property="buttonJoinStudy" destination="lIT-J9-U7S" id="js6-wl-cso"/>
+                        <outlet property="buttonLearnMore" destination="mud-v9-9iS" id="3Co-DD-1zf"/>
+                        <outlet property="buttonVisitWebsite" destination="wIC-kn-yNP" id="Laq-iT-6dS"/>
+                        <outlet property="labelDescription" destination="cQm-5R-c9C" id="SNl-aY-2nJ"/>
+                        <outlet property="labelTitle" destination="3EU-2E-MZV" id="3vW-F5-GXh"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zXt-yf-Ky1" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -320,6 +358,7 @@
         <image name="15.png" width="750" height="1334"/>
         <image name="16.png" width="750" height="1334"/>
         <image name="backIconWhite" width="23" height="18"/>
+        <image name="starGreyBig" width="21" height="19"/>
         <image name="starYellow" width="21" height="19"/>
         <image name="watchVideo" width="119" height="27"/>
     </resources>

@@ -30,6 +30,12 @@ class PageViewController : UIPageViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         
+
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
         self.loadTestData()
         
         dataSource = self
@@ -40,11 +46,6 @@ class PageViewController : UIPageViewController{
         }
         
         pageViewDelegate?.pageViewController(pageViewController: self, didUpdatePageCount: orderedViewControllers.count)
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
         
     }
     
@@ -59,7 +60,8 @@ class PageViewController : UIPageViewController{
         //        let data = NSData(contentsOfFile: filePath!)
         
         //load plist info
-        let plistPath = Bundle.main.path(forResource: "GatewayOverview", ofType: ".plist", inDirectory:nil)
+        //let plistPath = Bundle.main.path(forResource: "GatewayOverview", ofType: ".plist", inDirectory:nil)
+        let plistPath = Bundle.main.path(forResource: "StudyOverview", ofType: ".plist", inDirectory:nil)
         let arrayContent = NSMutableArray.init(contentsOfFile: plistPath!)
         
         do {
@@ -75,7 +77,7 @@ class PageViewController : UIPageViewController{
             
             //create new Overview object
             //overview = Overview()
-            overview.type = .gateway
+            overview.type = .study
             overview.sections = listOfOverviews
             
             //assgin to Gateway
@@ -141,15 +143,22 @@ class PageViewController : UIPageViewController{
         
         var controllers:Array<UIViewController> = []
         var storyboard = UIStoryboard.init(name: "Login", bundle: Bundle.main)
+        
         if overview.type == .study {
             storyboard = UIStoryboard.init(name: "Study", bundle: Bundle.main)
             
+            //get first overview controller
+            let firstController = storyboard.instantiateViewController(withIdentifier: "FirstViewController") as! StudyOverviewViewControllerFirst
+            firstController.overviewSectionDetail = overview.sections[0]
+            controllers.append(firstController)
             
-            
-            
-            
-            
-            
+            let sections = overview.sections.count
+            for section in 1...(sections-1) {
+                
+                let restControllers = storyboard.instantiateViewController(withIdentifier: "SecondViewController") as! StudyOverviewViewControllerSecond
+                restControllers.overviewSectionDetail = overview.sections[section]
+                controllers.append(restControllers)
+            }
         }
         else {
             //get first overview controller

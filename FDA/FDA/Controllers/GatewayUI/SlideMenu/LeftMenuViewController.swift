@@ -62,6 +62,8 @@ class LeftMenuViewController : UIViewController, LeftMenuProtocol {
         self.notificationController = storyboard.instantiateViewController(withIdentifier:  String(describing: NotificationViewController.classForCoder())) as! UINavigationController
         
         
+        self.profileviewController = storyboard.instantiateViewController(withIdentifier:  String(describing: ProfileViewController.classForCoder())) as! UINavigationController
+        
 //        let goViewController = storyboard.instantiateViewController(withIdentifier: "GoViewController") as! ResourcesListViewController
 //        self.goViewController = UINavigationController(rootViewController: goViewController)
         
@@ -93,8 +95,8 @@ class LeftMenuViewController : UIViewController, LeftMenuProtocol {
             self.slideMenuController()?.changeMainViewController(self.notificationController, close: true)
         case .resources: break
             //self.slideMenuController()?.changeMainViewController(self.javaViewController, close: true)
-        case .profile: break
-            //self.slideMenuController()?.changeMainViewController(self.goViewController, close: true)
+        case .profile: 
+            self.slideMenuController()?.changeMainViewController(self.profileviewController, close: true)
         case .signout:
             //self.slideMenuController()?.changeMainViewController(self.nonMenuViewController, close: true)
             UIUtilities.showAlertMessageWithTwoActionsAndHandler(NSLocalizedString("Singout", comment: ""), errorMessage: NSLocalizedString("Are you sure you want to singout ?", comment: ""), errorAlertActionTitle: NSLocalizedString("Yes", comment: ""),

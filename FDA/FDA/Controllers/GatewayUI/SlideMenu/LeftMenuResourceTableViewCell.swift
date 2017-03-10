@@ -10,6 +10,10 @@ import UIKit
 
 class LeftMenuResourceTableViewCell: UITableViewCell {
 
+    @IBOutlet var menuIcon:UIImageView?
+    @IBOutlet var labelTitle:UILabel?
+    @IBOutlet var labelCounter:UILabel?
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -21,4 +25,9 @@ class LeftMenuResourceTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
 
+    func populateCellData(data:Dictionary<String,String>){
+        
+        menuIcon?.image = UIImage.init(named: data["iconName"]!)
+        labelTitle?.text = data["menuTitle"]!
+    }
 }

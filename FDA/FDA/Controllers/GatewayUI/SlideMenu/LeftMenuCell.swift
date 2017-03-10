@@ -12,6 +12,8 @@ class LeftMenuCell: UITableViewCell {
 
     @IBOutlet var menuIcon:UIImageView?
     @IBOutlet var labelTitle:UILabel?
+    @IBOutlet var labelSubTitle:UILabel?
+    
     
     override func awakeFromNib() {
         super.awakeFromNib()

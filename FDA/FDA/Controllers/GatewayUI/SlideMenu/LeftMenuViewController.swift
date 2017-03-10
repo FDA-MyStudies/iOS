@@ -9,13 +9,29 @@
 import UIKit
 import SlideMenuControllerSwift
 
+
+let kLeftMenuSubtitle = "subTitle"
+let kLeftMenuTitle = "menuTitle"
+let kLeftMenuIconName = "iconName"
+
+
+let kLeftMenuCellTitleHome = "Home"
+let kLeftMenuCellTitleResources = "Resources"
+let kLeftMenuCellTitleProfile = "Profile"
+let kLeftMenuCellTitleSignIn = "Sign In"
+let kLeftMenuCellTitleNewUser = "New User?"
+let kLeftMenuCellSubTitleValue = "Sign up"
+
 enum LeftMenu: Int {
     case studyList = 0
-    case notification
     case resources
     case profile
-    case signout
+    case signUp
+    case notification
 }
+
+
+
 
 protocol LeftMenuProtocol : class {
     func changeViewController(_ menu: LeftMenu)
@@ -25,25 +41,20 @@ class LeftMenuViewController : UIViewController, LeftMenuProtocol {
     
     @IBOutlet weak var tableView: UITableView!
     var menus = [ ["menuTitle":"Home",
-                   "iconName":"studies_white"],
-                  
-                  ["menuTitle":"Notification",
-                   "iconName":"notification_white"],
+                   "iconName":"home_menu1"],
                   
                   ["menuTitle":"Resources",
-                   "iconName":"resources_white"],
-                  
-                  ["menuTitle":"Profile",
-                   "iconName":"profile_white"],
-                  
-                  ["menuTitle":"Signout",
-                   "iconName":"studies_white"]
+                   "iconName":"resources_menu1"],
                 ]
     var studyListViewController: UINavigationController!
     var notificationController: UIViewController!
     var resourcesViewController: UIViewController!
     var profileviewController: UIViewController!
     var nonMenuViewController: UIViewController!
+    
+    var signInViewController:UIViewController!
+     var signUpViewController:UIViewController!
+    
     //var imageHeaderView: ImageHeaderView!
     
     required init?(coder aDecoder: NSCoder) {
@@ -53,9 +64,15 @@ class LeftMenuViewController : UIViewController, LeftMenuProtocol {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
+        self.setInitialData()
+        
         self.tableView.separatorColor = UIColor(red: 224/255, green: 224/255, blue: 224/255, alpha: 1.0)
         
         let storyboard = UIStoryboard(name: "Gateway", bundle: nil)
+         let loginStoryBoard = UIStoryboard(name: "Login", bundle: nil)
+        
+        
         self.studyListViewController = storyboard.instantiateViewController(withIdentifier: String(describing: StudyListViewController.classForCoder())) as! UINavigationController
         
         
@@ -63,6 +80,14 @@ class LeftMenuViewController : UIViewController, LeftMenuProtocol {
         
         
         self.profileviewController = storyboard.instantiateViewController(withIdentifier:  String(describing: ProfileViewController.classForCoder())) as! UINavigationController
+        
+        
+        //self.signInViewController = loginStoryBoard.instantiateViewController(withIdentifier:  String(describing: SignInViewController.classForCoder())) as! UINavigationController
+        
+        //self.signUpViewController = loginStoryBoard.instantiateViewController(withIdentifier:  String(describing: SignUpViewController.classForCoder())) as! UINavigationController
+
+        
+        
         
 //        let goViewController = storyboard.instantiateViewController(withIdentifier: "GoViewController") as! ResourcesListViewController
 //        self.goViewController = UINavigationController(rootViewController: goViewController)
@@ -87,6 +112,27 @@ class LeftMenuViewController : UIViewController, LeftMenuProtocol {
 //        self.view.layoutIfNeeded()
 //    }
     
+    
+    func setInitialData()  {
+        
+        if user.userType == .FDAUser {
+            menus.append(["menuTitle":"Profile",
+                          "iconName":"profile_menu1"])
+        }
+        else{
+            menus.append(["menuTitle":"Sign In",
+                          "iconName":"signin_menu1"])
+            
+            menus.append(["menuTitle":"New User?",
+                          "iconName":"newuser_menu1",
+                          "subTitle":"Sign up"])
+        }
+        
+        
+    }
+    
+    
+    
     func changeViewController(_ menu: LeftMenu) {
         switch menu {
         case .studyList:
@@ -95,25 +141,27 @@ class LeftMenuViewController : UIViewController, LeftMenuProtocol {
             self.slideMenuController()?.changeMainViewController(self.notificationController, close: true)
         case .resources: break
             //self.slideMenuController()?.changeMainViewController(self.javaViewController, close: true)
-        case .profile: 
-            self.slideMenuController()?.changeMainViewController(self.profileviewController, close: true)
-        case .signout:
-            //self.slideMenuController()?.changeMainViewController(self.nonMenuViewController, close: true)
-            UIUtilities.showAlertMessageWithTwoActionsAndHandler(NSLocalizedString("Singout", comment: ""), errorMessage: NSLocalizedString("Are you sure you want to singout ?", comment: ""), errorAlertActionTitle: NSLocalizedString("Yes", comment: ""),
-                                                                 errorAlertActionTitle2: NSLocalizedString("Cancel", comment: ""), viewControllerUsed: self,
-                                                                 action1: {
-                                                                    self.signout()
-            },
-                                                                 action2: {
-                                                                    
-            })
+        case .profile:
+            
+            if user.userType == .FDAUser {
+                 self.slideMenuController()?.changeMainViewController(self.profileviewController, close: true)
+            }
+            else{
+                break
+                 self.slideMenuController()?.changeMainViewController( self.signInViewController, close: true)
+            }
+           
+        case .signUp:break
+            self.slideMenuController()?.changeMainViewController(self.signUpViewController, close: true)
+            
+            
         }
     }
     
     
     func signout(){
         debugPrint("singout")
-        self.navigationController?.popToRootViewController(animated: true)
+       _ = self.navigationController?.popToRootViewController(animated: true)
     }
 }
 
@@ -121,8 +169,8 @@ extension LeftMenuViewController : UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if let menu = LeftMenu(rawValue: indexPath.row) {
             switch menu {
-            case .studyList, .notification, .resources, .profile, .signout:
-                return 44
+            case .studyList, .notification, .resources, .profile, .signUp:
+                return 78
             }
         }
         return 0
@@ -151,13 +199,28 @@ extension LeftMenuViewController : UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        var cell : LeftMenuCell?
+        let dict:Dictionary<String,Any>? = menus[indexPath.row]
         
-        cell = tableView.dequeueReusableCell(withIdentifier:"cell" , for: indexPath) as? LeftMenuCell
+        if dict?["subTitle"] != nil {
+            var cell : LeftMenuCell?
+            
+            cell = tableView.dequeueReusableCell(withIdentifier:"cell" , for: indexPath) as? LeftMenuCell
+            
+            cell?.populateCellData(data: menus[indexPath.row])
+            
+            return cell!
+        }
+        else{
+            var cell : LeftMenuResourceTableViewCell?
+            
+            cell = tableView.dequeueReusableCell(withIdentifier:"LeftMenuResourceCell" , for: indexPath) as? LeftMenuResourceTableViewCell
+            
+            cell?.populateCellData(data: menus[indexPath.row])
+            
+            return cell!
+        }
         
-        cell?.populateCellData(data: menus[indexPath.row])
-        
-        return cell!
+       
     }
     
     

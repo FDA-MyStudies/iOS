@@ -13,16 +13,16 @@ protocol PageViewControllerDelegate: class {
     
     //Parameter count: the total number of pages.
     func pageViewController(pageViewController: PageViewController,
-                                    didUpdatePageCount count: Int)
+                            didUpdatePageCount count: Int)
     
     //Parameter index: the index of the currently visible page.
     func pageViewController(pageViewController: PageViewController,
-                                    didUpdatePageIndex index: Int)
+                            didUpdatePageIndex index: Int)
     
 }
 
 class PageViewController : UIPageViewController{
-
+    
     weak var pageViewDelegate: PageViewControllerDelegate?
     
     var overview = Overview()
@@ -30,7 +30,7 @@ class PageViewController : UIPageViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         
-
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -60,8 +60,20 @@ class PageViewController : UIPageViewController{
         //        let data = NSData(contentsOfFile: filePath!)
         
         //load plist info
-        //let plistPath = Bundle.main.path(forResource: "GatewayOverview", ofType: ".plist", inDirectory:nil)
-        let plistPath = Bundle.main.path(forResource: "StudyOverview", ofType: ".plist", inDirectory:nil)
+        
+        
+        let plistPath:String?
+        
+        if overview.type == .study {
+            
+            
+            plistPath = Bundle.main.path(forResource: "StudyOverview", ofType: ".plist", inDirectory:nil)
+        }
+        else{
+            plistPath = Bundle.main.path(forResource: "GatewayOverview", ofType: ".plist", inDirectory:nil)
+        }
+        
+        
         let arrayContent = NSMutableArray.init(contentsOfFile: plistPath!)
         
         do {
@@ -77,7 +89,7 @@ class PageViewController : UIPageViewController{
             
             //create new Overview object
             //overview = Overview()
-            overview.type = .study
+            overview.type = .gateway
             overview.sections = listOfOverviews
             
             //assgin to Gateway
@@ -113,8 +125,8 @@ class PageViewController : UIPageViewController{
         })
     }
     
-     //Used to Notify that the current page index was updated.
-     func notifyTutorialDelegateOfNewIndex() {
+    //Used to Notify that the current page index was updated.
+    func notifyTutorialDelegateOfNewIndex() {
         if let firstViewController = viewControllers?.first,
             let index = orderedViewControllers.index(of: firstViewController) {
             pageViewDelegate?.pageViewController(pageViewController: self, didUpdatePageIndex: index)
@@ -135,7 +147,7 @@ class PageViewController : UIPageViewController{
     }
     
     private(set) lazy var orderedViewControllers: [UIViewController] = {
-      
+        
         return self.getOverviewViewControllers()
     }()
     
@@ -162,7 +174,7 @@ class PageViewController : UIPageViewController{
         }
         else {
             //get first overview controller
-           let firstController = storyboard.instantiateViewController(withIdentifier: "FirstViewController") as! FirstGatewayOverviewViewController
+            let firstController = storyboard.instantiateViewController(withIdentifier: "FirstViewController") as! FirstGatewayOverviewViewController
             firstController.overviewSectionDetail = overview.sections[0]
             controllers.append(firstController)
             
@@ -188,7 +200,7 @@ extension PageViewController: UIPageViewControllerDataSource {
         }
         
         let nextIndex = viewControllerIndex + 1
-
+        
         guard orderedViewControllers.count > nextIndex else {
             return nil
         }

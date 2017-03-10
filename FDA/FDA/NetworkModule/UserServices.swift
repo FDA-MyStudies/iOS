@@ -320,26 +320,35 @@ class UserServices: NSObject {
         
         let user = User.currentUser
         
-//        //settings
-//        let settings = response[kUserSettings] as! Dictionary<String, Any>
-//        let userSettings = Settings()
-//        userSettings.setSettings(dict: settings as NSDictionary)
-//        user.settings = userSettings
+        //        //settings
+        //        let settings = response[kUserSettings] as! Dictionary<String, Any>
+        //        let userSettings = Settings()
+        //        userSettings.setSettings(dict: settings as NSDictionary)
+        //        user.settings = userSettings
+        
+        
         
         //studies
-        let studies = response[kStudies] as! Array<Dictionary<String, Any>>
-        
-        for study in studies {
-            let participatedStudy = UserStudyStatus(detail: study)
-            user.participatedStudies.append(participatedStudy)
+        if let studies = response[kStudies] as? Array<Dictionary<String, Any>> {
+            
+            for study in studies {
+                let participatedStudy = UserStudyStatus(detail: study)
+                user.participatedStudies.append(participatedStudy)
+            }
         }
+        
+        
         
         //activities
-        let activites = response[kActivites]  as! Array<Dictionary<String, Any>>
-        for activity in activites {
-            let participatedActivity = UserActivityStatus(detail: activity)
-            user.participatedActivites.append(participatedActivity)
+        if let activites = response[kActivites]  as? Array<Dictionary<String, Any>> {
+            for activity in activites {
+                let participatedActivity = UserActivityStatus(detail: activity)
+                user.participatedActivites.append(participatedActivity)
+            }
         }
+      
+        
+        
     }
     
     func handleUpdateEligibilityConsentStatusResponse(response:Dictionary<String, Any>){

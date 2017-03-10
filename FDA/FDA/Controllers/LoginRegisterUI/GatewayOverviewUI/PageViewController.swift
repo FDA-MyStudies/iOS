@@ -116,14 +116,16 @@ class PageViewController : UIPageViewController{
             let firstController = storyboard.instantiateViewController(withIdentifier: "FirstViewController") as! StudyOverviewViewControllerFirst
             firstController.overviewSectionDetail = overview.sections[0]
             controllers.append(firstController)
-            
-            let sections = overview.sections.count
-            for section in 1...(sections-1) {
-                
-                let restControllers = storyboard.instantiateViewController(withIdentifier: "SecondViewController") as! StudyOverviewViewControllerSecond
-                restControllers.overviewSectionDetail = overview.sections[section]
-                controllers.append(restControllers)
+            if overview.sections.count >= 2 {
+                let sections = overview.sections.count
+                for section in 1...(sections-1) {
+                    
+                    let restControllers = storyboard.instantiateViewController(withIdentifier: "SecondViewController") as! StudyOverviewViewControllerSecond
+                    restControllers.overviewSectionDetail = overview.sections[section]
+                    controllers.append(restControllers)
+                }
             }
+            
         }
         else {
             //get first overview controller

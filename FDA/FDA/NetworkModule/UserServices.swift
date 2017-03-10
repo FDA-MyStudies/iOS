@@ -78,9 +78,7 @@ class UserServices: NSObject {
                       kUserFirstName : user.firstName!,
                       kUserLastName : user.lastName!,
                       kUserPassword: user.password!,
-                      "touchId":"true",
-                      "localNotification":"true"
-        ]
+                     ]
         
         let method = RegistrationMethods.register.method
         self.sendRequestWith(method:method, params: params, headers: nil)
@@ -128,7 +126,7 @@ class UserServices: NSObject {
         
         let user = User.currentUser
         
-        let params = [kUserId : user.userId! ]
+        let params = [kUserId : user.userId!]
         
         let method = RegistrationMethods.userProfile.method
         
@@ -162,9 +160,20 @@ class UserServices: NSObject {
         self.delegate = delegate
         
         let user = User.currentUser
-        let params = [kUserId : user.userId]
+        let params = [kUserId : user.userId!]
         
         let method = RegistrationMethods.userPreferences.method
+        
+        self.sendRequestWith(method:method, params: params, headers: nil)
+    }
+    
+    func updateStudyBookmarkStatus(studyStauts:UserStudyStatus , delegate:NMWebServiceDelegate){
+        self.delegate = delegate
+        
+        let user = User.currentUser
+        let params = [kUserId : user.userId,
+                      kStudies:[studyStauts.getBookmarkUserStudyStatus()]] as [String : Any]
+        let method = RegistrationMethods.updatePreferences.method
         
         self.sendRequestWith(method:method, params: params, headers: nil)
     }
@@ -248,7 +257,7 @@ class UserServices: NSObject {
     func handleUserLoginResponse(response:Dictionary<String, Any>){
         
         let user = User.currentUser
-        user.userId     = String(describing: response[kUserId])
+        user.userId     = String(response[kUserId] as! Int)
         user.verified   = response[kUserVerified] as! Bool
         user.authToken  = response[kUserAuthToken] as! String
         
@@ -264,7 +273,7 @@ class UserServices: NSObject {
     func handleUserRegistrationResponse(response:Dictionary<String, Any>){
         
         let user = User.currentUser
-        user.userId     = String(describing: response[kUserId])
+        user.userId     = String(response[kUserId] as! Int)
         user.verified   = response[kUserVerified] as! Bool
         user.authToken  = response[kUserAuthToken] as! String
         
@@ -282,13 +291,7 @@ class UserServices: NSObject {
         user.verified   = response[kUserVerified] as! Bool
     }
     
-    func handleUpdateUserProfileResponse(response:Dictionary<String, Any>){
-        //INCOMPLETE
-        
-
-    }
-    
-    func handleGetPreferenceResponse(response:Dictionary<String, Any>){
+    func handleGetUserProfileResponse(response:Dictionary<String, Any>){
         
         let user = User.currentUser
         
@@ -297,6 +300,31 @@ class UserServices: NSObject {
         let userSettings = Settings()
         userSettings.setSettings(dict: settings as NSDictionary)
         user.settings = userSettings
+        
+        //profile
+        let profile = response[kUserProfile] as! Dictionary<String, Any>
+        user.emailId = profile[kUserEmailId] as? String
+        user.firstName = profile[kUserFirstName] as? String
+        user.lastName = profile[kUserFirstName] as? String
+    }
+    
+    func handleUpdateUserProfileResponse(response:Dictionary<String, Any>){
+        //INCOMPLETE
+       
+
+    }
+    
+    
+    
+    func handleGetPreferenceResponse(response:Dictionary<String, Any>){
+        
+        let user = User.currentUser
+        
+//        //settings
+//        let settings = response[kUserSettings] as! Dictionary<String, Any>
+//        let userSettings = Settings()
+//        userSettings.setSettings(dict: settings as NSDictionary)
+//        user.settings = userSettings
         
         //studies
         let studies = response[kStudies] as! Array<Dictionary<String, Any>>
@@ -381,10 +409,19 @@ extension UserServices:NMWebServiceDelegate{
         
                 self.handleConfirmRegistrationResponse(response: response as! Dictionary<String, Any>)
         
-            case RegistrationMethods.userProfile.description as String: break
-            case RegistrationMethods.updateUserProfile.description as String: break
-            case RegistrationMethods.userPreferences.description as String: break
-            case RegistrationMethods.updatePreferences.description as String: break
+            case RegistrationMethods.userProfile.description as String:
+                
+                self.handleGetUserProfileResponse(response: response as! Dictionary<String, Any>)
+        
+            case RegistrationMethods.updateUserProfile.description as String:
+                
+                self.handleUpdateUserProfileResponse(response: response as! Dictionary<String, Any>)
+        
+            case RegistrationMethods.userPreferences.description as String:
+                
+                self.handleGetPreferenceResponse(response: response as! Dictionary<String, Any>)
+        
+            case RegistrationMethods.updatePreferences.description as String: break //did not handled response
             case RegistrationMethods.updateEligibilityConsentStatus.description as String: break
             case RegistrationMethods.consentPDF.description as String: break
             case RegistrationMethods.updateActivityState.description as String: break

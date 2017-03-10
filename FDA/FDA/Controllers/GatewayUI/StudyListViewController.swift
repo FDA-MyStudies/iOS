@@ -51,6 +51,16 @@ class StudyListViewController: UIViewController {
         //self.addRightBarButton() //Phase2
         //self.addLeftBarButton()
         self.title = NSLocalizedString("FDA LISTENS!", comment: "")
+        
+        //self.tableView?.rowHeight = UITableViewAutomaticDimension
+        if User.currentUser.userType == .FDAUser {
+            
+            self.tableView?.rowHeight = 156
+        }
+        else {
+            self.tableView?.rowHeight = 140
+        }
+        
         self.loadTestData()
         
     }

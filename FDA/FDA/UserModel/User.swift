@@ -168,34 +168,41 @@ class User{
     }
     
     
-    func bookmarkStudy(studyId:String){
+    func bookmarkStudy(studyId:String) -> UserStudyStatus{
         
         
         let studies = self.participatedStudies as Array<UserStudyStatus>
         if let study =   studies.filter({$0.studyId == studyId}).first {
             study.bookmarked = true
             Logger.sharedInstance.info("Bookmark: study is bookmarked : \(studyId)")
+            
+            return study
         }
         else {
             Logger.sharedInstance.info("Bookmark: study not found : \(studyId)")
             
             let studyStatus = UserStudyStatus()
             studyStatus.bookmarked = true
+            studyStatus.studyId = studyId
             
             self.participatedStudies.append(studyStatus)
             
             Logger.sharedInstance.info("Bookmark: study is bookmarked : \(studyId)")
+            
+            return studyStatus
         }
         
     }
     
-    func removeBookbarkStudy(studyId:String){
+    func removeBookbarkStudy(studyId:String) -> UserStudyStatus?{
         
         let studies = self.participatedStudies as Array<UserStudyStatus>
         if let study =   studies.filter({$0.studyId == studyId}).first {
             study.bookmarked = false
             Logger.sharedInstance.info("Bookmark: study is removed from bookmark : \(studyId)")
+            return study
         }
+        return nil
     }
     
     

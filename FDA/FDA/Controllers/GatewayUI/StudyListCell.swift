@@ -9,7 +9,7 @@
 import UIKit
 
 protocol StudyListDelegates {
-    func studyBookmark(_ cell:StudyListCell,didTapped button:UIButton,forStudy study:Study)
+    func studyBookmarked(_ cell:StudyListCell, bookmarked:Bool,forStudy study:Study)
 }
 
 class StudyListCell: UITableViewCell {
@@ -121,6 +121,6 @@ class StudyListCell: UITableViewCell {
             sender.isSelected = true
         }
         
-        delegate?.studyBookmark(self, didTapped:sender, forStudy:selectedStudy)
+        delegate?.studyBookmarked(self, bookmarked: sender.isSelected, forStudy: self.selectedStudy)
     }
 }

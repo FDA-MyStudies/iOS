@@ -17,6 +17,7 @@ enum StudyStatus:String{
 class Study {
 
     //MARK:Properties
+    var studyId:String!
     var name:String?
     var version:String?
     var identifer:String?
@@ -37,6 +38,10 @@ class Study {
         
         if Utilities.isValidObject(someObject: studyDetail as AnyObject?){
             
+            if Utilities.isValidValue(someObject: studyDetail[kStudyId] as AnyObject ){
+                self.studyId = studyDetail[kStudyId] as? String
+            }
+            
             if Utilities.isValidValue(someObject: studyDetail[kStudyTitle] as AnyObject ){
                 self.name = studyDetail[kStudyTitle] as? String
             }
@@ -54,7 +59,7 @@ class Study {
                 self.logoURL = studyDetail[kStudyLogoURL] as? String
             }
             if Utilities.isValidValue(someObject: studyDetail[kStudyStatus] as AnyObject )  {
-                self.status = StudyStatus.init(rawValue: studyDetail[kStudyStatus] as! String)!
+                self.status = .active //StudyStatus.init(rawValue: studyDetail[kStudyStatus] as! String)!
             }
             
         }
@@ -65,7 +70,7 @@ class Study {
     }
     
     
-    func updateCurrentStudy(study:Study){
+    class  func updateCurrentStudy(study:Study){
         Study.currentStudy = study
     }
     

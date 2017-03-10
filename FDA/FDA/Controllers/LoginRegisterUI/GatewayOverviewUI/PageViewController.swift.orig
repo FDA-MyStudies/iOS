@@ -56,6 +56,53 @@ class PageViewController : UIPageViewController{
     }
     
         
+<<<<<<< HEAD
+        //load plist info
+        
+        
+        let plistPath:String?
+        
+        if overview.type == .study {
+            
+            
+            plistPath = Bundle.main.path(forResource: "StudyOverview", ofType: ".plist", inDirectory:nil)
+        }
+        else{
+            plistPath = Bundle.main.path(forResource: "GatewayOverview", ofType: ".plist", inDirectory:nil)
+        }
+        
+        
+        let arrayContent = NSMutableArray.init(contentsOfFile: plistPath!)
+        
+        do {
+            //let response = try JSONSerialization.jsonObject(with: data! as Data, options: []) as? Dictionary<String,Any>
+            
+            
+            //let overviewList = response[kOverViewInfo] as! Array<Dictionary<String,Any>>
+            var listOfOverviews:Array<OverviewSection> = []
+            for overview in arrayContent!{
+                let overviewObj = OverviewSection(detail: overview as! Dictionary<String, Any>)
+                listOfOverviews.append(overviewObj)
+            }
+            
+            //create new Overview object
+            //overview = Overview()
+            overview.type = .gateway
+            overview.sections = listOfOverviews
+            
+            //assgin to Gateway
+            // Gateway.instance.overview = overview
+            
+            
+            
+        } catch {
+            print("json error: \(error.localizedDescription)")
+        }
+        
+    }
+    
+=======
+>>>>>>> suri_develop
     //Scrolls to the next view controller.
     func scrollToNextViewController() {
         if let visibleViewController = viewControllers?.first,

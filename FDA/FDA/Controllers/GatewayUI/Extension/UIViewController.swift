@@ -33,4 +33,31 @@ extension UIViewController {
          
           self.present(alert, animated: true, completion: nil)
     }
+    
+    func addProgressIndicator(){
+        
+        var view = self.view.viewWithTag(5000)
+        if view == nil {
+            view = UINib(nibName: "ProgressView", bundle: nil).instantiate(withOwner: nil, options: nil)[0] as? UIView
+            view?.frame = UIScreen.main.bounds
+            view?.tag = 5000
+            self.view.addSubview(view!)
+            view?.alpha = 0
+            UIView.animate(withDuration: 0.3) {
+                view?.alpha = 1
+            }
+        }
+        
+        
+    }
+    
+    func removeProgressIndicator(){
+        
+        let view = self.view.viewWithTag(5000) //as UIView
+        UIView.animate(withDuration: 0.2, animations: {
+            view?.alpha = 0
+        }) { (completed) in
+            view?.removeFromSuperview()
+        }
+    }
 }

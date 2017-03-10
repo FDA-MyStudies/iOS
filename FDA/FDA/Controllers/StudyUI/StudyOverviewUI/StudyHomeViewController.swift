@@ -99,6 +99,7 @@ class StudyHomeViewController : UIViewController{
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let pageViewController = segue.destination as? PageViewController {
             pageViewController.pageViewDelegate = self
+            pageViewController.overview = Study.currentStudy?.overview
         }
     }
     

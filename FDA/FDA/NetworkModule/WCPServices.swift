@@ -47,7 +47,9 @@ class WCPServices: NSObject {
     var delegate:NMWebServiceDelegate! = nil
     
      //MARK:Requests
-    func getStudyList(_:NMWebServiceDelegate){
+    func getStudyList(_ delegate:NMWebServiceDelegate){
+        
+        self.delegate = delegate
         
         let method = WCPMethods.studyList.method
         let params = Dictionary<String, Any>()
@@ -56,11 +58,16 @@ class WCPServices: NSObject {
     
     func getEligibilityConsentMetadata(studyId:String, delegate:NMWebServiceDelegate){
         
+        self.delegate = delegate
+        
+
         let method = WCPMethods.eligibilityConsent.method
         let params = [kStudyId:studyId]
         self.sendRequestWith(method:method, params: params, headers: nil)
     }
     func getResourcesForStudy(studyId:String, delegate:NMWebServiceDelegate){
+        
+        self.delegate = delegate
         
         let method = WCPMethods.resources.method
         let params = [kStudyId:studyId]
@@ -69,12 +76,18 @@ class WCPServices: NSObject {
     
     func getStudyInformation(studyId:String, delegate:NMWebServiceDelegate){
         
+        self.delegate = delegate
+        
         let method = WCPMethods.studyInfo.method
         let params = [kStudyId:studyId]
-        self.sendRequestWith(method:method, params: params, headers: nil)
+        self.sendRequestWith(method:method, params: nil, headers: params)
     }
     
     func getStudyActivityList(studyId:String, delegate:NMWebServiceDelegate){
+        
+        self.delegate = delegate
+        
+
         let method = WCPMethods.activityList.method
         let params = [kStudyId:studyId]
         self.sendRequestWith(method:method, params: params, headers: nil)
@@ -82,6 +95,9 @@ class WCPServices: NSObject {
     
     func getStudyActivityMetadata(studyId:String, activityId:String,activityVersion:String, delegate:NMWebServiceDelegate){
         
+        self.delegate = delegate
+        
+
         let method = WCPMethods.activity.method
         let params = [kStudyId:studyId,
                       kActivityId:activityId,
@@ -91,6 +107,9 @@ class WCPServices: NSObject {
     
     func getStudyDashboardInfo(studyId:String, delegate:NMWebServiceDelegate){
         
+        self.delegate = delegate
+        
+
         let method = WCPMethods.studyDashboard.method
         let params = [kStudyId:studyId]
         self.sendRequestWith(method:method, params: params, headers: nil)
@@ -98,6 +117,9 @@ class WCPServices: NSObject {
     
     func getTermsPolicy(studyId:String, delegate:NMWebServiceDelegate){
         
+        self.delegate = delegate
+        
+
         let method = WCPMethods.termsPolicy.method
         let params = [kStudyId:studyId]
         self.sendRequestWith(method:method, params: params, headers: nil)
@@ -105,6 +127,9 @@ class WCPServices: NSObject {
     
     func getNotification(skip:Int, delegate:NMWebServiceDelegate){
         
+        self.delegate = delegate
+        
+
         let method = WCPMethods.notifications.method
         let params = [kNotificationSkip:skip]
         self.sendRequestWith(method:method, params: params, headers: nil)
@@ -141,7 +166,7 @@ class WCPServices: NSObject {
     func handleStudyInfo(response:Dictionary<String, Any>){
         
         let overviewList = response[kOverViewInfo] as! Array<Dictionary<String,Any>>
-        var listOfOverviews:Array<OverviewSection>!
+        var listOfOverviews:Array<OverviewSection> = []
         for overview in overviewList{
             let overviewObj = OverviewSection(detail: overview)
             listOfOverviews.append(overviewObj)
@@ -181,9 +206,9 @@ class WCPServices: NSObject {
     }
 
     
-    private func sendRequestWith(method:Method, params:Dictionary<String, Any>,headers:Dictionary<String, String>?){
+    private func sendRequestWith(method:Method, params:Dictionary<String, Any>?,headers:Dictionary<String, String>?){
         
-        networkManager.composeRequest(RegistrationServerConfiguration.configuration,
+        networkManager.composeRequest(WCPConfiguration.configuration,
                                       method: method,
                                       params: params as NSDictionary?,
                                       headers: headers as NSDictionary?,
@@ -200,13 +225,34 @@ extension WCPServices:NMWebServiceDelegate{
     }
     func finishedRequest(_ manager: NetworkManager, requestName: NSString, response: AnyObject?) {
         
-        switch requestName {
+        let methodName = WCPMethods(rawValue: requestName as String)!
+        
+        switch methodName {
+        case .gatewayInfo:break
+        case .studyList:
+            self.handleStudyList(response: response as! Dictionary<String, Any>)
+        case .eligibilityConsent:break
+        case .resources:break
+        case .studyInfo:
+            self.handleStudyInfo(response: response as! Dictionary<String, Any>)
+        case .activityList:break
+        case .activity:break
+        case .studyDashboard:break
+        case .termsPolicy:break
+        case .notifications:break
         
         default:
             print("Request was not sent proper method name")
         }
+        
+        if delegate != nil {
+            delegate.finishedRequest(manager, requestName: requestName, response: response)
+        }
+        
     }
     func failedRequest(_ manager: NetworkManager, requestName: NSString, error: NSError) {
-        
+        if delegate != nil {
+            delegate.failedRequest(manager, requestName: requestName, error: error)
+        }
     }
 }

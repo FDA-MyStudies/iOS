@@ -62,7 +62,7 @@ class ProfileViewController: UIViewController {
         //Initial data setup
         self.setInitialDate()
         
-       UserServices().getUserProfile(self as NMWebServiceDelegate)
+        //UserServices().getUserProfile(self as NMWebServiceDelegate)
         
     }
     
@@ -70,6 +70,7 @@ class ProfileViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        UserServices().getUserProfile(self as NMWebServiceDelegate)
          self.setNavigationBarItem()
     }
     

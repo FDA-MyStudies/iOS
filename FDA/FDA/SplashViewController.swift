@@ -25,9 +25,10 @@ class SplashViewController: UIViewController {
         //TEMP : Need to get form Realm
         let ud = UserDefaults.standard
         if ud.object(forKey:kUserAuthToken) != nil {
-            
+           
             User.currentUser.authToken = ud.object(forKey: kUserAuthToken) as! String!
-            User.currentUser.userId! = (ud.object(forKey:kUserId) as! String!)!
+            User.currentUser.userId = ud.object(forKey:kUserId) as! String!
+            User.currentUser.userType = UserType.FDAUser
             self.navigateToGatewayDashboard()
         }
         else {

@@ -51,6 +51,16 @@ class StudyListViewController: UIViewController {
         //self.addRightBarButton() //Phase2
         //self.addLeftBarButton()
         self.title = NSLocalizedString("FDA LISTENS!", comment: "")
+        
+        //self.tableView?.rowHeight = UITableViewAutomaticDimension
+        if User.currentUser.userType == .FDAUser {
+            
+            self.tableView?.rowHeight = 156
+        }
+        else {
+            self.tableView?.rowHeight = 140
+        }
+        
         self.loadTestData()
         
     }
@@ -58,6 +68,9 @@ class StudyListViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         self.setNavigationBarItem()
         self.navigationController?.setNavigationBarHidden(false, animated: true)
+       
+        self.sendRequestToGetUserPreference()
+        
     }
     
     override func didReceiveMemoryWarning() {
@@ -96,7 +109,7 @@ class StudyListViewController: UIViewController {
         self.navigationItem.setRightBarButton(barItem, animated: true)
     }
     
-    /*
+    
      // MARK: - Navigation
      
      // In a storyboard-based application, you will often want to do a little preparation before navigation
@@ -104,7 +117,30 @@ class StudyListViewController: UIViewController {
      // Get the new view controller using segue.destinationViewController.
      // Pass the selected object to the new view controller.
      }
-     */
+    
+    func navigateToStudyHome(){
+        
+        let studyStoryBoard = UIStoryboard.init(name: "Study", bundle: Bundle.main)
+        let studyHomeController = studyStoryBoard.instantiateViewController(withIdentifier: String(describing: StudyHomeViewController.classForCoder()))
+        
+        self.navigationController?.pushViewController(studyHomeController, animated: true)
+
+    }
+    
+    // MARK: - Requests
+    func sendRequestToGetStudyList(){
+        WCPServices().getStudyList(self)
+    }
+    func sendRequestToGetStudyInfo(study:Study){
+        WCPServices().getStudyInformation(studyId: study.studyId, delegate: self)
+    }
+    func sendRequestToGetUserPreference(){
+         UserServices().getUserPreference(self)
+    }
+    func sendRequestToUpdateBookMarkStatus(userStudyStatus:UserStudyStatus){
+        UserServices().updateStudyBookmarkStatus(studyStauts: userStudyStatus, delegate: self)
+    }
+    
     
 }
 //MARK: TableView Data source
@@ -139,10 +175,10 @@ extension StudyListViewController :  UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
-        let studyStoryBoard = UIStoryboard.init(name: "Study", bundle: Bundle.main)
-        let studyHomeController = studyStoryBoard.instantiateViewController(withIdentifier: String(describing: StudyHomeViewController.classForCoder()))
+        let study = Gateway.instance.studies?[indexPath.row]
+        Study.updateCurrentStudy(study: study!)
+        self.sendRequestToGetStudyInfo(study: study!)
         
-        self.navigationController?.pushViewController(studyHomeController, animated: true)
         
     }
 }
@@ -150,7 +186,50 @@ extension StudyListViewController :  UITableViewDelegate {
 //MARK: StudyListDelegates
 extension StudyListViewController : StudyListDelegates {
     
-    func studyBookmark(_ cell: StudyListCell, didTapped button: UIButton, forStudy study: Study) {
+    func studyBookmarked(_ cell: StudyListCell, bookmarked: Bool, forStudy study: Study) {
         
+        var userStudyStatus:UserStudyStatus!
+        if bookmarked {
+            userStudyStatus =  user.bookmarkStudy(studyId: study.studyId!)
+        }
+        else {
+            userStudyStatus =  user.removeBookbarkStudy(studyId: study.studyId!)
+        }
+        
+        self.sendRequestToUpdateBookMarkStatus(userStudyStatus: userStudyStatus)
+    }
+}
+
+
+extension StudyListViewController:NMWebServiceDelegate {
+    func startedRequest(_ manager: NetworkManager, requestName: NSString) {
+        Logger.sharedInstance.info("requestname : \(requestName)")
+        
+        self.addProgressIndicator()
+    }
+    func finishedRequest(_ manager: NetworkManager, requestName: NSString, response: AnyObject?) {
+        Logger.sharedInstance.info("requestname : \(requestName)")
+        
+        self.removeProgressIndicator()
+        
+        if requestName as String == WCPMethods.studyList.rawValue{
+            self.tableView?.reloadData()
+        }
+        else if(requestName as String == WCPMethods.studyInfo.rawValue){
+            self.navigateToStudyHome()
+        }
+        else if (requestName as String == RegistrationMethods.userPreferences.description){
+            self.sendRequestToGetStudyList()
+        }
+       
+        
+        
+    }
+    func failedRequest(_ manager: NetworkManager, requestName: NSString, error: NSError) {
+        Logger.sharedInstance.info("requestname : \(requestName)")
+        
+        self.removeProgressIndicator()
+        
+        UIUtilities.showAlertWithTitleAndMessage(title:NSLocalizedString("Error", comment: "") as NSString, message: error.localizedDescription as NSString)
     }
 }

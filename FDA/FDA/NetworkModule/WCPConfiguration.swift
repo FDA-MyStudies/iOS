@@ -38,8 +38,8 @@ enum WCPMethods:String {
 struct WCPServerURLConstants {
     //TODO: Set the server end points
     
-    static let ProductionURL = "production url not set"
-    static let DevelopmentURL = "development url not set"
+    static let ProductionURL = "http://192.168.0.50:8080/StudyMetaData/"
+    static let DevelopmentURL = "http://192.168.0.50:8080/StudyMetaData/"
     
 }
 
@@ -58,8 +58,10 @@ class WCPConfiguration: NetworkConfiguration {
     
     override func getDefaultHeaders() -> [String : String] {
         
-        let headers = ["bundleId":Utilities.getBundleIdentifier(),
-                       "apptoken":""]
+        let token = Utilities.getBundleIdentifier() + ":" + "ee91a4f6-d9c4-4ee9-a0e2-5682c5b1c916"
+        let base64token = "Basic " + token.toBase64()
+        
+        let headers = ["Authorization":base64token]
         return headers
     }
     override func getDefaultRequestParameters() -> [String : Any] {

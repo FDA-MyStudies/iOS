@@ -331,8 +331,8 @@ extension ProfileViewController : UITableViewDataSource {
             
             var isSecuredEntry : Bool = false
             
-            if indexPath.row == SignUpTableViewTags.Password.rawValue ||
-                indexPath.row == SignUpTableViewTags.ConfirmPassword.rawValue{
+            if indexPath.row == TextFieldTags.Password.rawValue ||
+                indexPath.row == TextFieldTags.ConfirmPassword.rawValue{
                 isSecuredEntry = true
             }
             
@@ -344,7 +344,7 @@ extension ProfileViewController : UITableViewDataSource {
             cell.backgroundColor = UIColor.clear
             
             
-            cell.setCellData(tag: SignUpTableViewTags(rawValue: indexPath.row)!)
+            cell.setCellData(tag: TextFieldTags(rawValue: indexPath.row)!)
             
           
             cell.isUserInteractionEnabled = self.isCellEditable!
@@ -398,19 +398,19 @@ extension ProfileViewController : UITextFieldDelegate{
     func textFieldDidEndEditing(_ textField: UITextField) {
         print(textField.text!)
         switch textField.tag {
-        case SignUpTableViewTags.FirstNameTag.rawValue:
+        case TextFieldTags.FirstNameTag.rawValue:
             user.firstName! = textField.text!
             break
             
-        case SignUpTableViewTags.LastName.rawValue:
+        case TextFieldTags.LastName.rawValue:
             user.lastName! = textField.text!
             break
             
-        case SignUpTableViewTags.EmailId.rawValue:
+        case TextFieldTags.EmailId.rawValue:
             user.emailId! = textField.text!
             break
             
-        case SignUpTableViewTags.Password.rawValue:
+        case TextFieldTags.Password.rawValue:
             user.password! = textField.text!
             break
             

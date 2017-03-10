@@ -18,6 +18,8 @@ class SignInViewController : UIViewController{
     @IBOutlet var tableView : UITableView?
     @IBOutlet var buttonSignIn : UIButton?
     
+    @IBOutlet var buttonSignUp: UIButton?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -39,6 +41,20 @@ class SignInViewController : UIViewController{
         
         //unhide navigationbar
         self.navigationController?.setNavigationBarHidden(false, animated: true)
+        
+        
+       
+        
+        if let attributedTitle = buttonSignUp?.attributedTitle(for: .normal) {
+            let mutableAttributedTitle = NSMutableAttributedString(attributedString: attributedTitle)
+           
+             mutableAttributedTitle.addAttribute(NSForegroundColorAttributeName, value: UIColor.init(colorLiteralRed: 0/255.0, green: 124/255.0, blue: 186/255.0, alpha: 1.0), range: NSRange(location:10,length:7))
+            
+            buttonSignUp?.setAttributedTitle(mutableAttributedTitle, for: .normal)
+        }
+        
+    
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {

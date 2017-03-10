@@ -65,31 +65,31 @@ class SignUpViewController : UIViewController{
     //Attributed string for Terms & Privacy Policy
     func agreeToTermsAndConditions(){
         
-        labelTermsAndConditions?.numberOfLines = 0;
-        
-        //Step 1: Define a normal attributed string for non-link texts
-        let string = NSLocalizedString(kAgreeToTermsAndConditionsText, comment: "")
-        
-        let attributes = [NSForegroundColorAttributeName: UIColor.black,
-                          NSFontAttributeName: UIFont.preferredFont(forTextStyle: UIFontTextStyle.caption1)]
-        
-        labelTermsAndConditions?.attributedText = NSAttributedString(string: string, attributes: attributes)
-        
-        //Step 2: Define a selection handler block
-        let handler = {
-            (hyperLabel: FRHyperLabel?, substring: String?) -> Void in
-            
-            if substring == NSLocalizedString(kTermsText, comment: ""){
-                //self.performSegue(withIdentifier: "TermsOfUse", sender: nil)
-                
-            }
-            else if substring == NSLocalizedString(kPrivacyPolicyText , comment: ""){
-                //self.performSegue(withIdentifier: "TermsOfUse", sender: nil)
-            }
-        }
-        
-        //Step 3: Add link substrings
-        labelTermsAndConditions?.setLinksForSubstrings([kPrivacyPolicyText, kTermsText], withLinkHandler: handler)
+//        labelTermsAndConditions?.numberOfLines = 0;
+//        
+//        //Step 1: Define a normal attributed string for non-link texts
+//        let string = NSLocalizedString(kAgreeToTermsAndConditionsText, comment: "")
+//        
+//        let attributes = [NSForegroundColorAttributeName: UIColor.black,
+//                          NSFontAttributeName: UIFont.preferredFont(forTextStyle: UIFontTextStyle.caption1)]
+//        
+//        labelTermsAndConditions?.attributedText = NSAttributedString(string: string, attributes: attributes)
+//        
+//        //Step 2: Define a selection handler block
+//        let handler = {
+//            (hyperLabel: FRHyperLabel?, substring: String?) -> Void in
+//            
+//            if substring == NSLocalizedString(kTermsText, comment: ""){
+//                //self.performSegue(withIdentifier: "TermsOfUse", sender: nil)
+//                
+//            }
+//            else if substring == NSLocalizedString(kPrivacyPolicyText , comment: ""){
+//                //self.performSegue(withIdentifier: "TermsOfUse", sender: nil)
+//            }
+//        }
+//        
+//        //Step 3: Add link substrings
+//        labelTermsAndConditions?.setLinksForSubstrings([kPrivacyPolicyText, kTermsText], withLinkHandler: handler)
         
     }
     
@@ -189,8 +189,8 @@ extension SignUpViewController : UITableViewDataSource {
         
         var isSecuredEntry : Bool = false
         
-        if indexPath.row == SignUpTableViewTags.Password.rawValue ||
-            indexPath.row == SignUpTableViewTags.ConfirmPassword.rawValue{
+        if indexPath.row == TextFieldTags.Password.rawValue ||
+            indexPath.row == TextFieldTags.ConfirmPassword.rawValue{
             isSecuredEntry = true
         }
         
@@ -215,14 +215,16 @@ extension SignUpViewController : UITextFieldDelegate{
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
         print(textField.tag)
-        
+        if textField.tag == TextFieldTags.EmailId.rawValue{
+            textField.keyboardType = .emailAddress
+        }
 
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
         print(textField.text!)
         
-        let tag:SignUpTableViewTags = SignUpTableViewTags(rawValue: textField.tag)!
+        let tag:TextFieldTags = TextFieldTags(rawValue: textField.tag)!
     
         switch tag {
         case .FirstNameTag:

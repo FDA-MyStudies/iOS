@@ -9,7 +9,7 @@
 import UIKit
 import Foundation
 
-enum SignUpTableViewTags : Int {
+enum TextFieldTags : Int {
     case FirstNameTag = 0
     case LastName
     case EmailId
@@ -50,7 +50,7 @@ class SignUpTableViewCell: UITableViewCell {
     Set cell data from User Object (for Profile Class)
      @param tag    is the cell index 
  */
-    func setCellData(tag:SignUpTableViewTags)  {
+    func setCellData(tag:TextFieldTags)  {
         
         switch tag {
         case .FirstNameTag:

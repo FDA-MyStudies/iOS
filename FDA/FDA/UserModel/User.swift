@@ -451,6 +451,13 @@ class UserStudyStatus{
         
     }
     
+    func getBookmarkUserStudyStatus() -> Dictionary<String,Any>{
+        
+        let studyDetail = [kStudyId:self.studyId,
+                           kBookmarked:self.bookmarked] as [String : Any]
+        return studyDetail
+    }
+    
 }
 
 //MARK: ActivityStatus

@@ -25,7 +25,7 @@ class PageViewController : UIPageViewController{
 
     weak var pageViewDelegate: PageViewControllerDelegate?
     
-    var overview = Overview()
+    var overview : Overview!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,7 +36,7 @@ class PageViewController : UIPageViewController{
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        self.loadTestData()
+        //self.loadTestData()
         
         dataSource = self
         delegate =  self
@@ -55,42 +55,7 @@ class PageViewController : UIPageViewController{
         
     }
     
-    func loadTestData(){
-        //        let filePath  = Bundle.main.path(forResource: "GatewayOverview", ofType: "json")
-        //        let data = NSData(contentsOfFile: filePath!)
         
-        //load plist info
-        //let plistPath = Bundle.main.path(forResource: "GatewayOverview", ofType: ".plist", inDirectory:nil)
-        let plistPath = Bundle.main.path(forResource: "StudyOverview", ofType: ".plist", inDirectory:nil)
-        let arrayContent = NSMutableArray.init(contentsOfFile: plistPath!)
-        
-        do {
-            //let response = try JSONSerialization.jsonObject(with: data! as Data, options: []) as? Dictionary<String,Any>
-            
-            
-            //let overviewList = response[kOverViewInfo] as! Array<Dictionary<String,Any>>
-            var listOfOverviews:Array<OverviewSection> = []
-            for overview in arrayContent!{
-                let overviewObj = OverviewSection(detail: overview as! Dictionary<String, Any>)
-                listOfOverviews.append(overviewObj)
-            }
-            
-            //create new Overview object
-            //overview = Overview()
-            overview.type = .study
-            overview.sections = listOfOverviews
-            
-            //assgin to Gateway
-            // Gateway.instance.overview = overview
-            
-            
-            
-        } catch {
-            print("json error: \(error.localizedDescription)")
-        }
-        
-    }
-    
     //Scrolls to the next view controller.
     func scrollToNextViewController() {
         if let visibleViewController = viewControllers?.first,

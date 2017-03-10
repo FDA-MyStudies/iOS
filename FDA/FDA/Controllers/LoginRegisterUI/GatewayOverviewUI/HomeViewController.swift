@@ -19,7 +19,15 @@ class HomeViewController : UIViewController{
     var pageViewController: PageViewController? {
         didSet {
             pageViewController?.pageViewDelegate = self
+            //pageViewController?.overview = Gateway.instance.overview!
         }
+    }
+    
+    override func loadView() {
+        
+        super.loadView()
+        self.loadTestData()
+        
     }
     
     override func viewDidLoad() {
@@ -31,7 +39,6 @@ class HomeViewController : UIViewController{
         pageControlView?.addTarget(self, action:#selector(HomeViewController.didChangePageControlValue), for: .valueChanged)
         
         
-       // pageViewController?.overview = Gateway.instance.overview
         
     }
     
@@ -86,6 +93,7 @@ class HomeViewController : UIViewController{
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let pageViewController = segue.destination as? PageViewController {
             pageViewController.pageViewDelegate = self
+            pageViewController.overview = Gateway.instance.overview!
         }
     }
     

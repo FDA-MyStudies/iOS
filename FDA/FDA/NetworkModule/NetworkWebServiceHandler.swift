@@ -56,24 +56,24 @@ class NetworkWebServiceHandler: NSObject, URLSessionDelegate {
     
     fileprivate func getCombinedWithCommonParams(_ params : NSDictionary?) -> NSDictionary? {
         
-        let commonParams : NSDictionary? = NetworkConstants.getCommonRequestParameters()
+        let commonParams  = self.configuration.getDefaultRequestParameters() as NSDictionary?
         var mParams : NSMutableDictionary? = nil
         if commonParams != nil{
             mParams = NSMutableDictionary.init(dictionary: commonParams!)
         }
         if  params != nil {
             if mParams != nil{
-                mParams!.addEntries(from: params as! [AnyHashable: Any])
+                mParams!.addEntries(from:params! as! [AnyHashable : Any])
             }else{
                 mParams = NSMutableDictionary.init(dictionary: params!)
             }
         }
-        return mParams
+        return mParams!
     }
     
     fileprivate func getCombinedHeaders(_ userHeaders : NSDictionary?, defaultHeaders : NSDictionary?)-> NSDictionary? {
         
-        let commonParams: NSDictionary? = NetworkConstants.getCommonHeaderParameters()
+        let commonParams: NSDictionary? = self.configuration.getDefaultHeaders() as NSDictionary?
         
         var mParams : NSMutableDictionary? = nil
         if commonParams != nil{
@@ -217,7 +217,7 @@ class NetworkWebServiceHandler: NSObject, URLSessionDelegate {
             
             request.httpMethod=self.getRequestMethod(method) as String
             if httpHeaders != nil {
-                request.allHTTPHeaderFields = httpHeaders as? [String : String]
+                request.allHTTPHeaderFields = httpHeaders! as! [String : String]
             }
             self.fireRequest(request, requestName: requestName)
             

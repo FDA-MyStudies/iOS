@@ -52,8 +52,9 @@ let kMessageValidatePasswordComplexity = "Password should have minimum of 1 spec
 let kMessageAgreeToTermsAndConditions = "Please agree to terms and conditions."
 
 
-
-
+//MARK: ChangePassword Constants
+let kChangePasswordTitleText = "CHANGE PASSWORD"
+let kChangePawwordCellIdentifer = "changePasswordCell"
 
 
 

@@ -78,6 +78,8 @@
 		6EF2FCEF1E72CDE900B5F212 /* LeftMenuResourceTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EF2FCEE1E72CDE900B5F212 /* LeftMenuResourceTableViewCell.swift */; };
 		6EF748BF1E69645700F1E89E /* LatestActive_Taskdocument.json in Resources */ = {isa = PBXBuildFile; fileRef = 6EF748BE1E69645700F1E89E /* LatestActive_Taskdocument.json */; };
 		74604306BE653DDFE2407EFF /* Pods_FDATests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7E309D273812BCB954E8968 /* Pods_FDATests.framework */; };
+		940577A81E767AC60043215C /* ChangePasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 940577A71E767AC60043215C /* ChangePasswordViewController.swift */; };
+		940577AC1E767C8D0043215C /* ChangePasswordData.plist in Resources */ = {isa = PBXBuildFile; fileRef = 940577AB1E767C8D0043215C /* ChangePasswordData.plist */; };
 		941909B51E52FA9B001B01C5 /* Study.swift in Sources */ = {isa = PBXBuildFile; fileRef = 941909B41E52FA9B001B01C5 /* Study.swift */; };
 		941909B81E5310D6001B01C5 /* Gateway.swift in Sources */ = {isa = PBXBuildFile; fileRef = 941909B71E5310D6001B01C5 /* Gateway.swift */; };
 		941909BB1E533AA9001B01C5 /* Overview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 941909BA1E533AA9001B01C5 /* Overview.swift */; };
@@ -270,6 +272,8 @@
 		6EF2FCEE1E72CDE900B5F212 /* LeftMenuResourceTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LeftMenuResourceTableViewCell.swift; sourceTree = "<group>"; };
 		6EF748BE1E69645700F1E89E /* LatestActive_Taskdocument.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = LatestActive_Taskdocument.json; sourceTree = "<group>"; };
 		7E059BDA3C24219381C2DAD8 /* Pods-FDATests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FDATests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FDATests/Pods-FDATests.debug.xcconfig"; sourceTree = "<group>"; };
+		940577A71E767AC60043215C /* ChangePasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChangePasswordViewController.swift; sourceTree = "<group>"; };
+		940577AB1E767C8D0043215C /* ChangePasswordData.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = ChangePasswordData.plist; sourceTree = "<group>"; };
 		941909B41E52FA9B001B01C5 /* Study.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Study.swift; sourceTree = "<group>"; };
 		941909B71E5310D6001B01C5 /* Gateway.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Gateway.swift; sourceTree = "<group>"; };
 		941909BA1E533AA9001B01C5 /* Overview.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Overview.swift; sourceTree = "<group>"; };
@@ -810,6 +814,8 @@
 				94B3DD201E6ED8E500327AE5 /* StudyList.json */,
 				94B3DD211E6ED8E500327AE5 /* StudyListCell.swift */,
 				94B3DD221E6ED8E500327AE5 /* StudyListViewController.swift */,
+				940577A71E767AC60043215C /* ChangePasswordViewController.swift */,
+				940577AB1E767C8D0043215C /* ChangePasswordData.plist */,
 			);
 			path = GatewayUI;
 			sourceTree = "<group>";
@@ -1124,6 +1130,7 @@
 				946CA5ED1E72DCA300CC8535 /* ProgressView.xib in Resources */,
 				486B512C1E6951E400B98EBC /* 10.png in Resources */,
 				6ECF75D01E6EF140008C935E /* FetalKickCounter.storyboard in Resources */,
+				940577AC1E767C8D0043215C /* ChangePasswordData.plist in Resources */,
 				486B51281E6951E400B98EBC /* 03.png in Resources */,
 				6ED134381E5F1B110090C976 /* Consent.json in Resources */,
 				94B3DD541E6ED8E500327AE5 /* SignInPlist.plist in Resources */,
@@ -1374,6 +1381,7 @@
 				94CD96EF1E4B16D900946477 /* WCPConfiguration.swift in Sources */,
 				94B3DD5F1E6ED8E500327AE5 /* StudyOverviewPageViewControllerFirst.swift in Sources */,
 				941909BB1E533AA9001B01C5 /* Overview.swift in Sources */,
+				940577A81E767AC60043215C /* ChangePasswordViewController.swift in Sources */,
 				94B3DD5B1E6ED8E500327AE5 /* VerificationViewController.swift in Sources */,
 				94B3DD4D1E6ED8E500327AE5 /* FirstGatewayOverviewViewController.swift in Sources */,
 				94C602311E51C7D500CB72F7 /* WCPServices.swift in Sources */,

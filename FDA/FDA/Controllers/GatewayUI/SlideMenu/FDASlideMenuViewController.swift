@@ -24,6 +24,7 @@ class FDASlideMenuViewController: SlideMenuController {
         return false
     }
     
+    
     override func track(_ trackAction: TrackAction) {
         switch trackAction {
         case .leftTapOpen:
@@ -43,5 +44,9 @@ class FDASlideMenuViewController: SlideMenuController {
         case .rightFlickClose:
             print("TrackAction: right flick close.")
         }
+    }
+    
+    override func viewDidLoad() {
+        SlideMenuOptions.leftViewWidth = 300
     }
 }

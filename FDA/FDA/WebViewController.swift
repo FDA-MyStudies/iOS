@@ -12,7 +12,8 @@ import UIKit
 class WebViewController : UIViewController{
 
     @IBOutlet var webView : UIWebView?
-
+    var requestLink:String!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -22,8 +23,8 @@ class WebViewController : UIViewController{
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        let url = "http://35.167.14.182:5080/live/viewer.jsp?host=35.167.14.182&stream=NoswMb" as AnyObject
-        UIWebView.loadRequest(webView!)(NSURLRequest(url: NSURL(string: url as! String)! as URL) as URLRequest)
+        //let url = "http://35.167.14.182:5080/live/viewer.jsp?host=35.167.14.182&stream=NoswMb" as AnyObject
+        UIWebView.loadRequest(webView!)(NSURLRequest(url: NSURL(string: requestLink as String)! as URL) as URLRequest)
         
         //Used to add a loader
         let activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: .gray)

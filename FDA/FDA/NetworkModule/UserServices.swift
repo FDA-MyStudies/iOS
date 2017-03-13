@@ -52,7 +52,7 @@ class UserServices: NSObject {
     let networkManager = NetworkManager.sharedInstance()
     var delegate:NMWebServiceDelegate! = nil
     
-     //MARK: Requests
+    //MARK: Requests
     func loginUser(_ delegate:NMWebServiceDelegate){
         
         self.delegate = delegate
@@ -78,7 +78,7 @@ class UserServices: NSObject {
                       kUserFirstName : user.firstName!,
                       kUserLastName : user.lastName!,
                       kUserPassword: user.password!,
-                     ]
+                      ]
         
         let method = RegistrationMethods.register.method
         self.sendRequestWith(method:method, params: params, headers: nil)
@@ -108,6 +108,17 @@ class UserServices: NSObject {
         
     }
     
+    func deleteAccount(_ delegate:NMWebServiceDelegate)  {
+        
+        self.delegate = delegate
+        
+        let user = User.currentUser
+        let params = [kUserId : user.userId,
+                      kUserAuthToken: user.authToken]
+        let method = RegistrationMethods.deleteAccount.method
+        self.sendRequestWith(method:method, params: params, headers: nil)
+    }
+    
     func forgotPassword(_ delegate:NMWebServiceDelegate){
         
         self.delegate = delegate
@@ -132,7 +143,7 @@ class UserServices: NSObject {
         
         self.sendRequestWith(method:method, params: params, headers: nil)
     }
-
+    
     func updateUserProfile(_ delegate:NMWebServiceDelegate){
         
         self.delegate = delegate
@@ -221,7 +232,7 @@ class UserServices: NSObject {
         self.delegate = delegate
         
         //INCOMPLETE
-         let method = RegistrationMethods.updateActivityState.method
+        let method = RegistrationMethods.updateActivityState.method
     }
     
     func getUserActivityState(studyId:String , delegate:NMWebServiceDelegate) {
@@ -253,7 +264,7 @@ class UserServices: NSObject {
     }
     
     
-     //MARK:Parsers
+    //MARK:Parsers
     func handleUserLoginResponse(response:Dictionary<String, Any>){
         
         let user = User.currentUser
@@ -310,8 +321,8 @@ class UserServices: NSObject {
     
     func handleUpdateUserProfileResponse(response:Dictionary<String, Any>){
         //INCOMPLETE
-       
-
+        
+        
     }
     
     
@@ -346,14 +357,14 @@ class UserServices: NSObject {
                 user.participatedActivites.append(participatedActivity)
             }
         }
-      
+        
         
         
     }
     
     func handleUpdateEligibilityConsentStatusResponse(response:Dictionary<String, Any>){
         
-       
+        
         
     }
     
@@ -361,7 +372,7 @@ class UserServices: NSObject {
         
         let user = User.currentUser
         if Utilities.isValidValue(someObject: response[kConsent] as AnyObject?) {
-           // user.consent = response[kConsent] as! String
+            // user.consent = response[kConsent] as! String
         }
     }
     
@@ -384,7 +395,22 @@ class UserServices: NSObject {
     func handleWithdrawFromStudyResponse(response:Dictionary<String, Any>){
         
     }
+    
+    func handleLogoutResponse(response:Dictionary<String, Any>)  {
+        
+        let ud = UserDefaults.standard
+        
+        ud.removeObject(forKey: kUserAuthToken)
+         ud.removeObject(forKey: kUserId)
+        ud.synchronize()
+        user = User.currentUser
+        
+       
+        
 
+        
+        
+    }
     
     
     private func sendRequestWith(method:Method, params:Dictionary<String, Any>,headers:Dictionary<String, String>?){
@@ -405,39 +431,40 @@ extension UserServices:NMWebServiceDelegate{
     }
     func finishedRequest(_ manager: NetworkManager, requestName: NSString, response: AnyObject?) {
         
-       switch requestName {
-            case RegistrationMethods.login.description as String:
-                
-                self.handleUserLoginResponse(response: response as! Dictionary<String, Any>)
-        
-            case RegistrationMethods.register.description as String:
-        
-                self.handleUserRegistrationResponse(response: response as! Dictionary<String, Any>)
-        
-            case RegistrationMethods.confirmRegistration.description as String:
-        
-                self.handleConfirmRegistrationResponse(response: response as! Dictionary<String, Any>)
-        
-            case RegistrationMethods.userProfile.description as String:
-                
-                self.handleGetUserProfileResponse(response: response as! Dictionary<String, Any>)
-        
-            case RegistrationMethods.updateUserProfile.description as String:
-                
-                self.handleUpdateUserProfileResponse(response: response as! Dictionary<String, Any>)
-        
-            case RegistrationMethods.userPreferences.description as String:
-                
-                self.handleGetPreferenceResponse(response: response as! Dictionary<String, Any>)
-        
-            case RegistrationMethods.updatePreferences.description as String: break //did not handled response
-            case RegistrationMethods.updateEligibilityConsentStatus.description as String: break
-            case RegistrationMethods.consentPDF.description as String: break
-            case RegistrationMethods.updateActivityState.description as String: break
-            case RegistrationMethods.activityState.description as String: break
-            case RegistrationMethods.withdraw.description as String: break
-            case RegistrationMethods.forgotPassword.description as String: break
-            case RegistrationMethods.logout.description as String: break
+        switch requestName {
+        case RegistrationMethods.login.description as String:
+            
+            self.handleUserLoginResponse(response: response as! Dictionary<String, Any>)
+            
+        case RegistrationMethods.register.description as String:
+            
+            self.handleUserRegistrationResponse(response: response as! Dictionary<String, Any>)
+            
+        case RegistrationMethods.confirmRegistration.description as String:
+            
+            self.handleConfirmRegistrationResponse(response: response as! Dictionary<String, Any>)
+            
+        case RegistrationMethods.userProfile.description as String:
+            
+            self.handleGetUserProfileResponse(response: response as! Dictionary<String, Any>)
+            
+        case RegistrationMethods.updateUserProfile.description as String:
+            
+            self.handleUpdateUserProfileResponse(response: response as! Dictionary<String, Any>)
+            
+        case RegistrationMethods.userPreferences.description as String:
+            
+            self.handleGetPreferenceResponse(response: response as! Dictionary<String, Any>)
+            
+        case RegistrationMethods.updatePreferences.description as String: break //did not handled response
+        case RegistrationMethods.updateEligibilityConsentStatus.description as String: break
+        case RegistrationMethods.consentPDF.description as String: break
+        case RegistrationMethods.updateActivityState.description as String: break
+        case RegistrationMethods.activityState.description as String: break
+        case RegistrationMethods.withdraw.description as String: break
+        case RegistrationMethods.forgotPassword.description as String: break
+        case RegistrationMethods.logout.description as String:
+            self.handleGetPreferenceResponse(response: response as! Dictionary<String, Any>)
         default:
             print("Request was not sent proper method name")
         }

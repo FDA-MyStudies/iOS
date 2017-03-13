@@ -25,9 +25,8 @@ let kLeftMenuCellSubTitleValue = "Sign up"
 enum LeftMenu: Int {
     case studyList = 0
     case resources
-    case profile
-    case signUp
-    case notification
+    case profile_signin
+    case signup
 }
 
 
@@ -70,7 +69,7 @@ class LeftMenuViewController : UIViewController, LeftMenuProtocol {
         self.tableView.separatorColor = UIColor(red: 224/255, green: 224/255, blue: 224/255, alpha: 1.0)
         
         let storyboard = UIStoryboard(name: "Gateway", bundle: nil)
-         let loginStoryBoard = UIStoryboard(name: "Login", bundle: nil)
+        let loginStoryBoard = UIStoryboard(name: "Login", bundle: nil)
         
         
         self.studyListViewController = storyboard.instantiateViewController(withIdentifier: String(describing: StudyListViewController.classForCoder())) as! UINavigationController
@@ -118,6 +117,7 @@ class LeftMenuViewController : UIViewController, LeftMenuProtocol {
         if user.userType == .FDAUser {
             menus.append(["menuTitle":"Profile",
                           "iconName":"profile_menu1"])
+             self.tableView.tableFooterView?.isHidden = false
         }
         else{
             menus.append(["menuTitle":"Sign In",
@@ -126,6 +126,7 @@ class LeftMenuViewController : UIViewController, LeftMenuProtocol {
             menus.append(["menuTitle":"New User?",
                           "iconName":"newuser_menu1",
                           "subTitle":"Sign up"])
+            self.tableView.tableFooterView?.isHidden = true
         }
         
         
@@ -143,22 +144,19 @@ class LeftMenuViewController : UIViewController, LeftMenuProtocol {
         switch menu {
         case .studyList:
             self.slideMenuController()?.changeMainViewController(self.studyListViewController, close: true)
-        case .notification:
-            self.slideMenuController()?.changeMainViewController(self.notificationController, close: true)
         case .resources: break
             //self.slideMenuController()?.changeMainViewController(self.javaViewController, close: true)
-        case .profile:
+        case .profile_signin:
             
             if user.userType == .FDAUser {
-                 self.slideMenuController()?.changeMainViewController(self.profileviewController, close: true)
+                self.slideMenuController()?.changeMainViewController(self.profileviewController, close: true)
             }
             else{
-                break
-                 self.slideMenuController()?.changeMainViewController( self.signInViewController, close: true)
+               // go to signin screen
             }
            
-        case .signUp:break
-            self.slideMenuController()?.changeMainViewController(self.signUpViewController, close: true)
+        case .signup: break
+            //self.slideMenuController()?.changeMainViewController(self.signUpViewController, close: true)
             
             
         }
@@ -175,7 +173,7 @@ extension LeftMenuViewController : UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if let menu = LeftMenu(rawValue: indexPath.row) {
             switch menu {
-            case .studyList, .notification, .resources, .profile, .signUp:
+            case .studyList, .resources, .profile_signin, .signup:
                 return 78
             }
         }

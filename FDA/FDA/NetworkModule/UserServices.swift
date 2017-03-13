@@ -399,18 +399,22 @@ class UserServices: NSObject {
     func handleLogoutResponse(response:Dictionary<String, Any>)  {
         
         let ud = UserDefaults.standard
-        
         ud.removeObject(forKey: kUserAuthToken)
          ud.removeObject(forKey: kUserId)
         ud.synchronize()
         user = User.currentUser
         
-       
-        
-
-        
-        
     }
+    
+    func handleDeleteAccountResponse(response:Dictionary<String, Any>) {
+        let ud = UserDefaults.standard
+        ud.removeObject(forKey: kUserAuthToken)
+        ud.removeObject(forKey: kUserId)
+        ud.synchronize()
+        user = User.currentUser
+    }
+    
+    
     
     
     private func sendRequestWith(method:Method, params:Dictionary<String, Any>,headers:Dictionary<String, String>?){
@@ -464,7 +468,10 @@ extension UserServices:NMWebServiceDelegate{
         case RegistrationMethods.withdraw.description as String: break
         case RegistrationMethods.forgotPassword.description as String: break
         case RegistrationMethods.logout.description as String:
-            self.handleGetPreferenceResponse(response: response as! Dictionary<String, Any>)
+            self.handleLogoutResponse(response: response as! Dictionary<String, Any>)
+        case RegistrationMethods.deleteAccount.description as String:
+            self.handleDeleteAccountResponse(response: response as! Dictionary<String, Any>)
+            
         default:
             print("Request was not sent proper method name")
         }

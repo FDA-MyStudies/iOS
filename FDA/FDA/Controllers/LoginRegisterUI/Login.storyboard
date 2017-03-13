@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="QEr-gp-3T2">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="QEr-gp-3T2">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -187,7 +187,7 @@
                                                 <action selector="agreeButtonAction:" destination="0Vw-2B-bh0" eventType="touchUpInside" id="AWk-PU-8Q7"/>
                                             </connections>
                                         </button>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yNz-Vx-HhB" customClass="FRHyperLabel">
+                                        <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yNz-Vx-HhB" customClass="FRHyperLabel">
                                             <rect key="frame" x="56" y="94" width="285" height="44"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="44" id="6gm-i1-q0h"/>
@@ -224,9 +224,51 @@
                                             </attributedString>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <textView clipsSubviews="YES" contentMode="scaleToFill" editable="NO" usesAttributedText="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3tc-VH-6CI" customClass="LinkTextView" customModule="FDA" customModuleProvider="target">
+                                            <rect key="frame" x="49" y="97" width="307" height="64"/>
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="64" id="khz-CA-ovp"/>
+                                            </constraints>
+                                            <attributedString key="attributedText">
+                                                <fragment content="I Agree to the ">
+                                                    <attributes>
+                                                        <color key="NSColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                                        <font key="NSFont" size="16" name="HelveticaNeue"/>
+                                                        <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                    </attributes>
+                                                </fragment>
+                                                <fragment content="Terms">
+                                                    <attributes>
+                                                        <color key="NSColor" red="0.0" green="0.48627450980392156" blue="0.72941176470588232" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <font key="NSFont" size="16" name="HelveticaNeue-Medium"/>
+                                                        <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                    </attributes>
+                                                </fragment>
+                                                <fragment content=" and ">
+                                                    <attributes>
+                                                        <color key="NSColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                                        <font key="NSFont" size="16" name="HelveticaNeue"/>
+                                                        <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                    </attributes>
+                                                </fragment>
+                                                <fragment content="Privacy Policy">
+                                                    <attributes>
+                                                        <color key="NSColor" red="0.0" green="0.48627450980392156" blue="0.72941176470588232" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <font key="NSFont" size="16" name="HelveticaNeue-Medium"/>
+                                                        <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                    </attributes>
+                                                </fragment>
+                                            </attributedString>
+                                            <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                            <connections>
+                                                <outlet property="delegate" destination="0Vw-2B-bh0" id="pmc-ON-xL5"/>
+                                            </connections>
+                                        </textView>
                                     </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     <constraints>
+                                        <constraint firstItem="3tc-VH-6CI" firstAttribute="top" secondItem="r5s-LK-9jm" secondAttribute="bottom" constant="12" id="2oK-PL-0V6"/>
                                         <constraint firstItem="AoM-7x-NKO" firstAttribute="top" secondItem="tVl-gn-93V" secondAttribute="top" constant="25" id="3cM-Az-h0i"/>
                                         <constraint firstItem="yNz-Vx-HhB" firstAttribute="top" secondItem="r5s-LK-9jm" secondAttribute="bottom" constant="9" id="BU3-TY-hB7"/>
                                         <constraint firstItem="r5s-LK-9jm" firstAttribute="top" secondItem="ZIW-P9-7OI" secondAttribute="bottom" constant="23" id="HQ4-eZ-j81"/>
@@ -238,6 +280,8 @@
                                         <constraint firstItem="ZIW-P9-7OI" firstAttribute="top" secondItem="tVl-gn-93V" secondAttribute="top" constant="19" id="gwo-jp-nvu"/>
                                         <constraint firstAttribute="trailing" secondItem="r5s-LK-9jm" secondAttribute="trailing" constant="19" id="iGw-Zg-dvT"/>
                                         <constraint firstItem="iGT-v9-6UZ" firstAttribute="top" secondItem="r5s-LK-9jm" secondAttribute="bottom" constant="20" id="ila-aF-bcQ"/>
+                                        <constraint firstAttribute="trailing" secondItem="3tc-VH-6CI" secondAttribute="trailing" constant="19" id="j4r-f2-gUf"/>
+                                        <constraint firstItem="3tc-VH-6CI" firstAttribute="leading" secondItem="iGT-v9-6UZ" secondAttribute="trailing" constant="9" id="kZm-mu-UL6"/>
                                         <constraint firstAttribute="trailing" secondItem="AoM-7x-NKO" secondAttribute="trailing" constant="19" id="qtL-ZU-mF4"/>
                                         <constraint firstItem="ZIW-P9-7OI" firstAttribute="leading" secondItem="tVl-gn-93V" secondAttribute="leading" constant="22" id="rm5-EI-eLh"/>
                                     </constraints>
@@ -343,6 +387,7 @@
                         <outlet property="labelTermsAndConditions" destination="yNz-Vx-HhB" id="dEB-7m-LYO"/>
                         <outlet property="tableView" destination="WOc-sR-0iS" id="34m-Br-Qaz"/>
                         <outlet property="tableViewFooterView" destination="tVl-gn-93V" id="oLb-Gl-5KB"/>
+                        <outlet property="termsAndCondition" destination="3tc-VH-6CI" id="Lcu-Ws-WRe"/>
                         <segue destination="slw-Bf-fNL" kind="show" identifier="verificationSegue" id="EeA-Hk-jBe"/>
                     </connections>
                 </viewController>

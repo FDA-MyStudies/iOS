@@ -185,7 +185,11 @@ class ProfileViewController: UIViewController {
         UIUtilities.showAlertMessageWithTwoActionsAndHandler(NSLocalizedString("Signout", comment: ""), errorMessage: NSLocalizedString("Are you sure you want to singout ?", comment: ""), errorAlertActionTitle: NSLocalizedString("Yes", comment: ""),
                                                              errorAlertActionTitle2: NSLocalizedString("Cancel", comment: ""), viewControllerUsed: self,
                                                              action1: {
-                                                                self.signout()
+                                                                
+                                                                
+                                                                self.sendRequestToSignOut()
+                                                                
+                                                               
         },
                                                              action2: {
                                                                 
@@ -203,6 +207,12 @@ class ProfileViewController: UIViewController {
     func dismissKeyboard(){
         self.view.endEditing(true)
     }
+    
+    
+    func sendRequestToSignOut() {
+         UserServices().logoutUser(self)
+    }
+    
     
     func signout(){
         debugPrint("singout")
@@ -429,12 +439,24 @@ extension ProfileViewController : UITextFieldDelegate{
 extension ProfileViewController:NMWebServiceDelegate {
     func startedRequest(_ manager: NetworkManager, requestName: NSString) {
         Logger.sharedInstance.info("requestname : \(requestName)")
+        self.addProgressIndicator()
     }
     func finishedRequest(_ manager: NetworkManager, requestName: NSString, response: AnyObject?) {
         Logger.sharedInstance.info("requestname : \(requestName)")
+        
+        if requestName as String ==  RegistrationMethods.logout.description {
+            
+            self.signout()
+        }
+        
+        self.removeProgressIndicator()
     }
     func failedRequest(_ manager: NetworkManager, requestName: NSString, error: NSError) {
         Logger.sharedInstance.info("requestname : \(requestName)")
+         self.removeProgressIndicator()
         UIUtilities.showAlertWithTitleAndMessage(title:NSLocalizedString("Error", comment: "") as NSString, message: error.localizedDescription as NSString)
+        
+       
+        
     }
 }

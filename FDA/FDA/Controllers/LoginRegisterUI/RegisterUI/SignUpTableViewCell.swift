@@ -74,6 +74,9 @@ class SignUpTableViewCell: UITableViewCell {
             else{
                 self.textFieldValue?.text = ""
             }
+            
+            
+            
         case .Password:
             if Utilities.isValidValue(someObject: user.password as AnyObject?) {
                 self.textFieldValue?.text =  user.password

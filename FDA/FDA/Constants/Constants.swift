@@ -10,6 +10,9 @@ import Foundation
 
 //Mark: Alert Constants
 
+let kTermsAndConditionLink = "http://www.google.com"
+let kPrivacyPolicyLink = "http://www.facebook.com"
+
 let kAlertPleaseEnterValidValue = "Please Enter Valid Value"
 
 //Used for corner radius Color for sign in , sign up , forgot password etc screens

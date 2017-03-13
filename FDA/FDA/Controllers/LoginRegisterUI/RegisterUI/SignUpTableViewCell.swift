@@ -21,7 +21,8 @@ class SignUpTableViewCell: UITableViewCell {
     
     @IBOutlet var labelType : UILabel?
     @IBOutlet var textFieldValue : UITextField?
-
+    
+    @IBOutlet var buttonChangePassword : UIButton? // this button will be extensively used for profile screen
     
     override func awakeFromNib() {
         super.awakeFromNib()

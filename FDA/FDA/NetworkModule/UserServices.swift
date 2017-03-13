@@ -345,7 +345,7 @@ class UserServices: NSObject {
         
         
     }
-
+    
     
     func handleGetPreferenceResponse(response:Dictionary<String, Any>){
         
@@ -420,7 +420,7 @@ class UserServices: NSObject {
         
         let ud = UserDefaults.standard
         ud.removeObject(forKey: kUserAuthToken)
-         ud.removeObject(forKey: kUserId)
+        ud.removeObject(forKey: kUserId)
         ud.synchronize()
         user = User.currentUser
         
@@ -479,6 +479,9 @@ extension UserServices:NMWebServiceDelegate{
         case RegistrationMethods.userPreferences.description as String:
             
             self.handleGetPreferenceResponse(response: response as! Dictionary<String, Any>)
+        case RegistrationMethods.changePassword.description as String:
+            
+            self.handleChangePasswordResponse(response: response as! Dictionary<String, Any>)
             
         case RegistrationMethods.updatePreferences.description as String: break //did not handled response
         case RegistrationMethods.updateEligibilityConsentStatus.description as String: break
@@ -491,56 +494,17 @@ extension UserServices:NMWebServiceDelegate{
             self.handleLogoutResponse(response: response as! Dictionary<String, Any>)
         case RegistrationMethods.deleteAccount.description as String:
             self.handleDeleteAccountResponse(response: response as! Dictionary<String, Any>)
-            
-       switch requestName {
-            case RegistrationMethods.login.description as String:
-                
-                self.handleUserLoginResponse(response: response as! Dictionary<String, Any>)
-        
-            case RegistrationMethods.register.description as String:
-        
-                self.handleUserRegistrationResponse(response: response as! Dictionary<String, Any>)
-        
-            case RegistrationMethods.confirmRegistration.description as String:
-        
-                self.handleConfirmRegistrationResponse(response: response as! Dictionary<String, Any>)
-        
-            case RegistrationMethods.userProfile.description as String:
-                
-                self.handleGetUserProfileResponse(response: response as! Dictionary<String, Any>)
-        
-            case RegistrationMethods.updateUserProfile.description as String:
-                
-                self.handleUpdateUserProfileResponse(response: response as! Dictionary<String, Any>)
-        
-            case RegistrationMethods.userPreferences.description as String:
-                
-                self.handleGetPreferenceResponse(response: response as! Dictionary<String, Any>)
-        
-            case RegistrationMethods.changePassword.description as String:
-        
-                self.handleChangePasswordResponse(response: response as! Dictionary<String, Any>)
-        
-            case RegistrationMethods.updatePreferences.description as String: break //did not handled response
-            case RegistrationMethods.updateEligibilityConsentStatus.description as String: break
-            case RegistrationMethods.consentPDF.description as String: break
-            case RegistrationMethods.updateActivityState.description as String: break
-            case RegistrationMethods.activityState.description as String: break
-            case RegistrationMethods.withdraw.description as String: break
-            case RegistrationMethods.forgotPassword.description as String: break
-            case RegistrationMethods.logout.description as String: break
-        default:
-            print("Request was not sent proper method name")
+        default : break
         }
         
         if delegate != nil {
             delegate.finishedRequest(manager, requestName: requestName, response: response)
         }
-        
     }
     func failedRequest(_ manager: NetworkManager, requestName: NSString, error: NSError) {
         if delegate != nil {
             delegate.failedRequest(manager, requestName: requestName, error: error)
         }
     }
+    
 }

@@ -129,6 +129,12 @@ class LeftMenuViewController : UIViewController, LeftMenuProtocol {
         }
         
         
+    // Setting proportion height of the header and footer view
+        let height = UIScreen.main.bounds.size.height  * (220.0 / 667.0) //calculate new height
+        self.tableView.tableHeaderView?.frame.size = CGSize(width: self.tableView.tableHeaderView!.frame.size.width, height: height)
+         self.tableView.tableFooterView?.frame.size = CGSize(width: self.tableView.tableFooterView!.frame.size.width, height: height)
+        self.tableView.frame.size = CGSize(width:self.tableView.frame.width, height:UIScreen.main.bounds.size.height)
+        
     }
     
     

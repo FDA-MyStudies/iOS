@@ -42,6 +42,7 @@
 		6EA889C51E701E8200F160A1 /* Confirmation.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6EA889C41E701E8200F160A1 /* Confirmation.plist */; };
 		6EAB39A91E4B0B4A003442B8 /* Resources.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6EAB39A81E4B0B4A003442B8 /* Resources.plist */; };
 		6EABD0331E56FE2000623D94 /* TaskSchema.json in Resources */ = {isa = PBXBuildFile; fileRef = 6EABD0321E56FE2000623D94 /* TaskSchema.json */; };
+		6EC10B201E766D4E001EE0E1 /* menu_2.png in Resources */ = {isa = PBXBuildFile; fileRef = 6EC10B1F1E766D4E001EE0E1 /* menu_2.png */; };
 		6EC1291F1E64241200B90167 /* ConsentResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EC1291E1E64241200B90167 /* ConsentResult.swift */; };
 		6EC129221E64279100B90167 /* ConsentStepResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EC129211E64279100B90167 /* ConsentStepResult.swift */; };
 		6EC129241E64624F00B90167 /* Acivity_Question.json in Resources */ = {isa = PBXBuildFile; fileRef = 6EC129231E64624F00B90167 /* Acivity_Question.json */; };
@@ -233,6 +234,7 @@
 		6EA889C41E701E8200F160A1 /* Confirmation.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Confirmation.plist; sourceTree = "<group>"; };
 		6EAB39A81E4B0B4A003442B8 /* Resources.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Resources.plist; sourceTree = "<group>"; };
 		6EABD0321E56FE2000623D94 /* TaskSchema.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = TaskSchema.json; sourceTree = "<group>"; };
+		6EC10B1F1E766D4E001EE0E1 /* menu_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = menu_2.png; sourceTree = "<group>"; };
 		6EC1291E1E64241200B90167 /* ConsentResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConsentResult.swift; sourceTree = "<group>"; };
 		6EC129211E64279100B90167 /* ConsentStepResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConsentStepResult.swift; sourceTree = "<group>"; };
 		6EC129231E64624F00B90167 /* Acivity_Question.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Acivity_Question.json; sourceTree = "<group>"; };
@@ -366,6 +368,7 @@
 		486B511D1E6951E400B98EBC /* UIReference screens */ = {
 			isa = PBXGroup;
 			children = (
+				6EC10B1F1E766D4E001EE0E1 /* menu_2.png */,
 				6EA889C11E6FD37E00F160A1 /* 18.jpg */,
 				94B2B35E1E6D48A10037005D /* 12.png */,
 				486B511E1E6951E400B98EBC /* 02.png */,
@@ -1128,6 +1131,7 @@
 				4833E9E31E712C2B0032D244 /* StudyOverview.plist in Resources */,
 				94B3DD511E6ED8E500327AE5 /* Login.storyboard in Resources */,
 				94B3DD491E6ED8E500327AE5 /* StudyList.json in Resources */,
+				6EC10B201E766D4E001EE0E1 /* menu_2.png in Resources */,
 				6EA889C51E701E8200F160A1 /* Confirmation.plist in Resources */,
 				94B3DD521E6ED8E500327AE5 /* LoginAssets.xcassets in Resources */,
 				94B3DD411E6ED8E500327AE5 /* Gateway.xcassets in Resources */,

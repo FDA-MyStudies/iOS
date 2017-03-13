@@ -15,6 +15,9 @@ let kLeadTimeSelectText = "Select Lead Time"
 let kActionSheetDoneButtonTitle = "Done"
 let kActionSheetCancelButtonTitle = "Cancel"
 
+let kChangePasswordSegueIdentifier = "changePasswordSegue"
+
+
 let signupCellLastIndex = 3
 
 let kProfileTitleText = "PROFILE"
@@ -72,6 +75,7 @@ class ProfileViewController: UIViewController {
         
         UserServices().getUserProfile(self as NMWebServiceDelegate)
          self.setNavigationBarItem()
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -268,6 +272,13 @@ class ProfileViewController: UIViewController {
         
     }
     
+    func pushToChangePassword(_ sender:UIButton)  {
+        self.performSegue(withIdentifier: kChangePasswordSegueIdentifier, sender: nil)
+       
+
+    }
+    
+    
     /*
      Validation of Profile data
      */
@@ -342,9 +353,11 @@ extension ProfileViewController : UITableViewDataSource {
             
             var isSecuredEntry : Bool = false
             
-            if indexPath.row == TextFieldTags.Password.rawValue ||
-                indexPath.row == TextFieldTags.ConfirmPassword.rawValue{
-                isSecuredEntry = true
+            if indexPath.row == TextFieldTags.Password.rawValue {
+                cell.buttonChangePassword?.isUserInteractionEnabled =  true
+                cell.buttonChangePassword?.isHidden =  false
+                cell.buttonChangePassword?.addTarget(self, action:#selector(pushToChangePassword), for: .touchUpInside)
+                 cell.textFieldValue?.isHidden = true
             }
             
             cell.textFieldValue?.tag = indexPath.row
@@ -372,11 +385,14 @@ extension ProfileViewController : UITableViewDataSource {
             let cell = tableView.dequeueReusableCell(withIdentifier: kProfileTableViewCellIdentifier, for: indexPath) as! ProfileTableViewCell
             cell.setCellData(dict: tableViewData)
             
+
             //TODO: handle toggle Value based on user settings
             
             if (user.settings != nil) {
                 cell.setToggleValue(indexValue: indexPath.row)
             }
+            
+            cell.switchToggle?.tag =  indexPath.row
             
             cell.switchToggle?.addTarget(self, action: #selector(ProfileViewController.toggleValueChanged), for: .valueChanged)
             
@@ -410,20 +426,28 @@ extension ProfileViewController : UITextFieldDelegate{
     
     func textFieldDidEndEditing(_ textField: UITextField) {
         print(textField.text!)
+        
+       
+        
         switch textField.tag {
         case TextFieldTags.FirstNameTag.rawValue:
-            user.firstName! = textField.text!
+            
+            user.firstName! =  textField.text!
+            
             break
             
         case TextFieldTags.LastName.rawValue:
+            
             user.lastName! = textField.text!
             break
             
         case TextFieldTags.EmailId.rawValue:
             user.emailId! = textField.text!
+            
             break
             
         case TextFieldTags.Password.rawValue:
+            
             user.password! = textField.text!
             break
             
@@ -432,7 +456,11 @@ extension ProfileViewController : UITextFieldDelegate{
             break
         }
         
-        self.editBarButtonItem?.tintColor = UIColor.black
+        if (user.password?.characters.count)! > 0 && (user.firstName?.characters.count)! > 0 && (user.lastName?.characters.count)! > 0 && (user.emailId?.characters.count)! > 0{
+             self.editBarButtonItem?.tintColor = UIColor.black
+        }
+        
+        
     }
 }
 

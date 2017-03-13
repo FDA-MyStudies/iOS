@@ -22,6 +22,7 @@ class SignUpViewController : UIViewController{
     
     @IBOutlet var buttonAgree : UIButton?
     @IBOutlet var labelTermsAndConditions : FRHyperLabel?
+    @IBOutlet var termsAndCondition:LinkTextView?
     
     
     override func viewDidLoad() {
@@ -64,6 +65,40 @@ class SignUpViewController : UIViewController{
    
     //Attributed string for Terms & Privacy Policy
     func agreeToTermsAndConditions(){
+        
+        
+//        let info = NSMutableAttributedString()
+//        let firstPart:NSMutableAttributedString = NSMutableAttributedString(string: "Lorem ipsum dolor set amit ", attributes: [NSFontAttributeName: UIFont.systemFont(ofSize: 13)])
+//        
+//        firstPart.addAttribute(NSForegroundColorAttributeName, value: UIColor.black,
+//                               range: NSRange(location: 0, length: firstPart.length))
+//        info.append(firstPart)
+//        
+//        // The "Read More" string that should be touchable
+//        let secondPart:NSMutableAttributedString = NSMutableAttributedString(string: "READ MORE", attributes: [NSFontAttributeName: UIFont.systemFont(ofSize: 14)])
+//        secondPart.addAttribute(NSForegroundColorAttributeName, value: UIColor.black,
+//                                range: NSRange(location: 0, length: secondPart.length))
+//        info.append(secondPart)
+        
+        
+        self.termsAndCondition?.delegate = self
+        let attributedString =  termsAndCondition?.attributedText.mutableCopy() as! NSMutableAttributedString
+        //let str = "I Agree to the Terms and Privacy Policy"
+        //let attributedString = NSMutableAttributedString(string: str)
+        var foundRange = attributedString.mutableString.range(of: "Terms")
+        attributedString.addAttribute(NSLinkAttributeName, value:kTermsAndConditionLink, range: foundRange)
+        //attributedString.addAttribute(NSForegroundColorAttributeName, value:Utilities.getUIColorFromHex(0x007CBA), range: foundRange)
+        
+        
+        //attributedString.addAttributes([NSFontAttributeName: UIFont.], range: foundRange)
+
+        
+        foundRange = attributedString.mutableString.range(of: "Privacy Policy")
+        attributedString.addAttribute(NSLinkAttributeName, value:kPrivacyPolicyLink, range: foundRange)
+        //attributedString.addAttribute(NSForegroundColorAttributeName, value:Utilities.getUIColorFromHex(0x007CBA), range: foundRange)
+        termsAndCondition?.attributedText = attributedString
+        
+        termsAndCondition?.linkTextAttributes = [NSForegroundColorAttributeName:Utilities.getUIColorFromHex(0x007CBA)]
         
 //        labelTermsAndConditions?.numberOfLines = 0;
 //        
@@ -175,6 +210,77 @@ class SignUpViewController : UIViewController{
     }
 }
 
+extension SignUpViewController:UIGestureRecognizerDelegate{
+    func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
+        if gestureRecognizer.isKind(of: UITapGestureRecognizer.classForCoder()) {
+            if gestureRecognizer.numberOfTouches == 2 {
+                return false
+            }
+        }
+        return true
+    }
+}
+
+//MARK: UITextViewDelegate
+
+class LinkTextView:UITextView{
+    override func canPerformAction(_ action: Selector, withSender sender: Any?) -> Bool {
+        return false
+    }
+    override func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
+        if gestureRecognizer.isKind(of: UITapGestureRecognizer.classForCoder()) {
+            let tap = gestureRecognizer as! UITapGestureRecognizer
+            if tap.numberOfTapsRequired == 2 {
+                return false
+            }
+        }
+        if gestureRecognizer.isKind(of: UILongPressGestureRecognizer.classForCoder()){
+            return false
+        }
+        return true
+    }
+}
+
+extension SignUpViewController:UITextViewDelegate{
+    
+    func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange) -> Bool {
+       
+        var link:String = kTermsAndConditionLink
+        if (URL.absoluteString == kPrivacyPolicyLink) {
+            print("terms")
+            link = kPrivacyPolicyLink
+            
+        }
+        let loginStoryboard = UIStoryboard.init(name: "Main", bundle:Bundle.main)
+        let webViewController = loginStoryboard.instantiateViewController(withIdentifier:"WebViewController") as! UINavigationController
+        let webview = webViewController.viewControllers[0] as! WebViewController
+        webview.requestLink = link
+        self.navigationController?.present(webViewController, animated: true, completion: nil)
+        
+        return false
+    }
+   
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive press: UIPress) -> Bool {
+        return false
+    }
+    
+
+    
+    
+    
+//    override func gestureRecognizerShouldBegin(gestureRecognizer: UIGestureRecognizer!) -> Bool {
+//        if gestureRecognizer.isKindOfClass(UITapGestureRecognizer) && ((gestureRecognizer as UITapGestureRecognizer).numberOfTapsRequired == 1) {
+//            let touchPoint = gestureRecognizer.locationOfTouch(0, inView: self)
+//            let cursorPosition = closestPositionToPoint(touchPoint)
+//            selectedTextRange = textRangeFromPosition(cursorPosition, toPosition: cursorPosition)
+//            return true
+//        }
+//        else {
+//            return false
+//        }
+//    }
+    
+}
 //MARK: TableView Data source
 extension SignUpViewController : UITableViewDataSource {
     
@@ -256,7 +362,7 @@ extension SignUpViewController : UITextFieldDelegate{
 
 }
 
-//
+//MARK:
 extension SignUpViewController:NMWebServiceDelegate {
     
     func startedRequest(_ manager: NetworkManager, requestName: NSString) {
@@ -273,4 +379,5 @@ extension SignUpViewController:NMWebServiceDelegate {
         UIUtilities.showAlertWithTitleAndMessage(title:NSLocalizedString("Error", comment: "") as NSString, message: error.localizedDescription as NSString)
     }
 }
+
 

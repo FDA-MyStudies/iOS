@@ -20,7 +20,8 @@ enum CPTextFeildTags : Int {
 class ChangePasswordViewController: UIViewController {
     
     var tableViewRowDetails : NSMutableArray?
-    
+    var newPassword = ""
+    var oldPassword = ""
     @IBOutlet var tableView : UITableView?
     @IBOutlet var buttonSubmit : UIButton?
     
@@ -52,7 +53,7 @@ class ChangePasswordViewController: UIViewController {
         
         
         
-       
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -69,7 +70,7 @@ class ChangePasswordViewController: UIViewController {
     }
     override func viewWillDisappear(_ animated: Bool) {
         //hide navigationbar
-        self.navigationController?.setNavigationBarHidden(true, animated: true)
+        //self.navigationController?.setNavigationBarHidden(true, animated: true)
     }
     
     //Used to show the alert using Utility
@@ -85,25 +86,22 @@ class ChangePasswordViewController: UIViewController {
     //MARK: Signin Button Action and validation checks
     @IBAction func submitButtonAction(_ sender: Any) {
         
-        if user.emailId == "" {
-            self.showAlertMessages(textMessage: kMessageEmailBlank)
-            
-        }else if !(Utilities.isValidEmail(testStr: user.emailId!)) {
-            self.showAlertMessages(textMessage: kMessageValidEmail)
-            
-        }else if user.password == ""{
+        if self.oldPassword == ""{
             self.showAlertMessages(textMessage: kMessagePasswordBlank)
             
-        }else{
-            
+        }else if self.newPassword == ""{
+            self.showAlertMessages(textMessage: kMessageNewPasswordBlank)
+        }
+        else if self.newPassword == self.oldPassword{
+            self.showAlertMessages(textMessage: kMessageValidateChangePassword)
+        }
+        else if ((self.oldPassword.characters.count) < 8 && (self.oldPassword.characters.count) != 0) || ((self.newPassword.characters.count) < 8 && self.newPassword.characters.count != 0) {
+            self.showAlertMessages(textMessage: kMessageValidatePasswordCharacters)
             
         }
+        
     }
     
-   
-    
-
-
 }
 //MARK: TableView Data source
 extension ChangePasswordViewController : UITableViewDataSource {
@@ -115,7 +113,7 @@ extension ChangePasswordViewController : UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let tableViewData = tableViewRowDetails?.object(at: indexPath.row) as! NSDictionary
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: kChangePawwordCellIdentifer, for: indexPath) as! SignInTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: kSignInTableViewCellIdentifier, for: indexPath) as! SignInTableViewCell
         
         cell.textFieldValue?.tag = indexPath.row + 100
         cell.populateCellData(data: tableViewData, securedText: true)
@@ -148,21 +146,17 @@ extension ChangePasswordViewController : UITextFieldDelegate{
         
         switch tag {
         case .oldPassword:
-                       break
-            
+            self.oldPassword = textField.text!
         case .newPassword:
-            
+            self.newPassword = textField.text!
             break
-        case .confirmPassword:
-            
-            break
-       
+        default: break
         }
     }
 }
 
 //extension ChangePasswordViewController:NMWebServiceDelegate {
-//    
+//
 //    func startedRequest(_ manager: NetworkManager, requestName: NSString) {
 //        Logger.sharedInstance.info("requestname : \(requestName)")
 //        self.addProgressIndicator()
@@ -170,18 +164,18 @@ extension ChangePasswordViewController : UITextFieldDelegate{
 //    func finishedRequest(_ manager: NetworkManager, requestName: NSString, response: AnyObject?) {
 //        Logger.sharedInstance.info("requestname : \(requestName)")
 //        self.removeProgressIndicator()
-//        
-//       
-//        
-//        
-//        
-//        
+//
+//
+//
+//
+//
+//
 //    }
 //    func failedRequest(_ manager: NetworkManager, requestName: NSString, error: NSError) {
 //        Logger.sharedInstance.info("requestname : \(requestName)")
-//        
+//
 //        self.removeProgressIndicator()
-//        
+//
 //        UIUtilities.showAlertWithTitleAndMessage(title:NSLocalizedString("Error", comment: "") as NSString, message: error.localizedDescription as NSString)
 //    }
 //}

@@ -51,6 +51,8 @@ let kMessageValidatePasswordCharacters = "Password should have minimum of 8 char
 let kMessageValidatePasswordComplexity = "Password should have minimum of 1 special character, 1 upper case letter and 1 numeric number."
 let kMessageAgreeToTermsAndConditions = "Please agree to terms and conditions."
 
+let kMessageNewPasswordBlank = "Please enter your new password."
+let kMessageValidateChangePassword = "New password and old password are same."
 
 //MARK: ChangePassword Constants
 let kChangePasswordTitleText = "CHANGE PASSWORD"

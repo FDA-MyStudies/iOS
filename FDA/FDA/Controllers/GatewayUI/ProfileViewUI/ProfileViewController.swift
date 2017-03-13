@@ -360,7 +360,9 @@ extension ProfileViewController : UITableViewDataSource {
           
             cell.isUserInteractionEnabled = self.isCellEditable!
             
-            
+            if TextFieldTags(rawValue: indexPath.row) ==  .EmailId{
+                cell.textFieldValue?.isUserInteractionEnabled = false
+            }
             
             return cell
         }

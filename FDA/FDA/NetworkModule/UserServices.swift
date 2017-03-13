@@ -34,6 +34,8 @@ let kActivites = "activities"
 let kConsent = "consent"
 let kUserEligibilityStatus = "eligbibilityStatus"
 let kUserConsentStatus =  "consentStatus"
+let kUserOldPassword = "oldPassword"
+let kUserNewPassword = "newPassword"
 
 //MARK: Settings Api Constants
 let kSettingsRemoteNotifications = "remoteNotifications"
@@ -118,6 +120,19 @@ class UserServices: NSObject {
         let method = RegistrationMethods.forgotPassword.method
         
         self.sendRequestWith(method:method, params: params, headers: nil)
+    }
+    
+    func changePassword(oldPassword:String,newPassword:String,delegate:NMWebServiceDelegate){
+        
+        self.delegate = delegate
+        
+        let user = User.currentUser
+        let headerParams = [kUserId : user.userId] as [String : String]
+        let params = [kUserOldPassword:oldPassword,
+                      kUserNewPassword:newPassword]
+        
+        let method = RegistrationMethods.changePassword.method
+        self.sendRequestWith(method:method, params: params, headers: headerParams)
     }
     
     func getUserProfile(_ delegate:NMWebServiceDelegate){
@@ -314,7 +329,12 @@ class UserServices: NSObject {
 
     }
     
-    
+    func handleChangePasswordResponse(response:Dictionary<String, Any>){
+        //INCOMPLETE
+        
+        
+    }
+
     
     func handleGetPreferenceResponse(response:Dictionary<String, Any>){
         
@@ -429,6 +449,10 @@ extension UserServices:NMWebServiceDelegate{
             case RegistrationMethods.userPreferences.description as String:
                 
                 self.handleGetPreferenceResponse(response: response as! Dictionary<String, Any>)
+        
+            case RegistrationMethods.changePassword.description as String:
+        
+                self.handleChangePasswordResponse(response: response as! Dictionary<String, Any>)
         
             case RegistrationMethods.updatePreferences.description as String: break //did not handled response
             case RegistrationMethods.updateEligibilityConsentStatus.description as String: break

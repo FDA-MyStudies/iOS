@@ -23,6 +23,7 @@ enum RegistrationMethods:String {
     case withdraw
     case forgotPassword
     case logout
+    case changePassword
     
     var description:String{
         switch self {

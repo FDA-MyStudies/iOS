@@ -71,10 +71,10 @@ class ConfirmationViewController: UIViewController {
     //MARK:IBActions
     
     @IBAction func deleteAccountAction(_ sender:UIButton){
-        
+     UserServices().deleteAccount(self as NMWebServiceDelegate)
     }
     @IBAction func doNotDeleteAccountAction(_ sender:UIButton){
-        
+         _ = self.navigationController?.popViewController(animated: true)
     }
     
     
@@ -138,3 +138,32 @@ extension ConfirmationViewController : UITableViewDelegate{
         //print(indexPath.row)
     }
 }
+
+//MARK:UserService Response handler
+
+extension ConfirmationViewController:NMWebServiceDelegate {
+    func startedRequest(_ manager: NetworkManager, requestName: NSString) {
+        Logger.sharedInstance.info("requestname : \(requestName)")
+        self.addProgressIndicator()
+    }
+    func finishedRequest(_ manager: NetworkManager, requestName: NSString, response: AnyObject?) {
+        Logger.sharedInstance.info("requestname : \(requestName)")
+        
+        if requestName as String ==  RegistrationMethods.deleteAccount.description {
+            
+             _ = self.navigationController?.popToRootViewController(animated: true)
+        }
+        
+        self.removeProgressIndicator()
+    }
+    func failedRequest(_ manager: NetworkManager, requestName: NSString, error: NSError) {
+        Logger.sharedInstance.info("requestname : \(requestName)")
+        self.removeProgressIndicator()
+        UIUtilities.showAlertWithTitleAndMessage(title:NSLocalizedString("Error", comment: "") as NSString, message: error.localizedDescription as NSString)
+        
+        
+        
+    }
+}
+
+

@@ -12,7 +12,7 @@ import ResearchKit
 //let user = User()
 let activityBuilder:ActivityBuilder? = ActivityBuilder.currentActivityBuilder
 let consentbuilder:ConsentBuilder? = ConsentBuilder()
-let user = User.currentUser
+var user = User.currentUser
 
 
 let resourceArray : Array<Any>? = nil

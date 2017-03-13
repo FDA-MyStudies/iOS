@@ -23,6 +23,7 @@ enum RegistrationMethods:String {
     case withdraw
     case forgotPassword
     case logout
+    case deleteAccount
     
     var description:String{
         switch self {
@@ -36,7 +37,7 @@ enum RegistrationMethods:String {
         
         switch self {
        
-        case .activityState,.consentPDF,.forgotPassword :
+        case .activityState,.consentPDF,.forgotPassword ,.deleteAccount:
             //GET Methods
             return Method(methodName:(self.rawValue+".api"), methodType: .httpMethodGet, requestType: .requestTypeJSON)
         case .withdraw,.logout:

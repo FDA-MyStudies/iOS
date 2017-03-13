@@ -513,21 +513,25 @@
                                     <rect key="frame" x="0.0" y="382" width="375" height="220"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sign Out" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hYw-hB-Fjl">
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0DE-kF-2Xl">
                                             <rect key="frame" x="55" y="127" width="91" height="46"/>
                                             <constraints>
-                                                <constraint firstAttribute="height" constant="46" id="9La-ui-EIE"/>
-                                                <constraint firstAttribute="width" constant="91" id="TOm-yn-CXB"/>
+                                                <constraint firstAttribute="height" constant="46" id="V6n-6n-0iZ"/>
+                                                <constraint firstAttribute="width" constant="91" id="Zh2-o6-IEk"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="22"/>
-                                            <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
+                                            <state key="normal" title="Sign Out">
+                                                <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                            </state>
+                                            <connections>
+                                                <action selector="buttonActionSignOut:" destination="cb4-N4-R1j" eventType="touchUpInside" id="Axm-MB-tjF"/>
+                                            </connections>
+                                        </button>
                                     </subviews>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <constraints>
-                                        <constraint firstItem="hYw-hB-Fjl" firstAttribute="leading" secondItem="u0K-d2-T6j" secondAttribute="leading" constant="55" id="CZm-K1-TZn"/>
-                                        <constraint firstAttribute="bottom" secondItem="hYw-hB-Fjl" secondAttribute="bottom" constant="47" id="Vcu-nz-lac"/>
+                                        <constraint firstAttribute="bottom" secondItem="0DE-kF-2Xl" secondAttribute="bottom" constant="47" id="TDo-Dt-LGC"/>
+                                        <constraint firstItem="0DE-kF-2Xl" firstAttribute="leading" secondItem="u0K-d2-T6j" secondAttribute="leading" constant="55" id="VN8-mS-Pop"/>
                                     </constraints>
                                 </view>
                                 <prototypes>
@@ -648,7 +652,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kxa-ll-kLb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1962.4000000000001" y="-626.53673163418296"/>
+            <point key="canvasLocation" x="-1962.5" y="-627.5"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="0BS-CN-A64">
@@ -1027,6 +1031,16 @@
                                                         <action selector="reload" destination="EVy-Bf-QZZ" eventType="editingDidEndOnExit" id="veG-eD-tk4"/>
                                                     </connections>
                                                 </textField>
+                                                <button hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yrx-fB-aoa">
+                                                    <rect key="frame" x="138" y="4" width="219" height="40"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="40" id="Bue-El-GXQ"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="18"/>
+                                                    <state key="normal" title="Change Password">
+                                                        <color key="titleColor" red="0.0" green="0.48627450979999998" blue="0.72941176470000002" alpha="1" colorSpace="calibratedRGB"/>
+                                                    </state>
+                                                </button>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qzU-Kz-9Eh">
                                                     <rect key="frame" x="20" y="60" width="337" height="1"/>
                                                     <color key="backgroundColor" red="0.84705882349999995" green="0.89019607840000003" blue="0.90196078430000004" alpha="1" colorSpace="calibratedRGB"/>
@@ -1036,10 +1050,13 @@
                                                 </view>
                                             </subviews>
                                             <constraints>
+                                                <constraint firstAttribute="trailing" secondItem="yrx-fB-aoa" secondAttribute="trailing" constant="18" id="8TS-Ce-9Oo"/>
                                                 <constraint firstAttribute="bottomMargin" secondItem="tud-Fw-jEG" secondAttribute="bottom" constant="20.5" id="8hu-TT-5s0"/>
+                                                <constraint firstItem="qzU-Kz-9Eh" firstAttribute="top" secondItem="yrx-fB-aoa" secondAttribute="bottom" constant="16" id="E4V-Vf-fj5"/>
                                                 <constraint firstItem="tud-Fw-jEG" firstAttribute="leading" secondItem="oSF-ho-qdn" secondAttribute="leadingMargin" constant="15" id="Ht3-Z5-0QA"/>
                                                 <constraint firstAttribute="bottomMargin" secondItem="qzU-Kz-9Eh" secondAttribute="bottom" constant="-8" id="VRx-bT-LxD"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="FHg-Y2-WtR" secondAttribute="trailing" constant="10" id="ZZD-zS-Esc"/>
+                                                <constraint firstItem="yrx-fB-aoa" firstAttribute="leading" secondItem="tud-Fw-jEG" secondAttribute="trailing" constant="27" id="ZtH-9B-Azj"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="qzU-Kz-9Eh" secondAttribute="trailing" constant="10" id="nvr-Sh-7ks"/>
                                                 <constraint firstAttribute="bottomMargin" secondItem="FHg-Y2-WtR" secondAttribute="bottom" constant="10" id="pgL-HN-2NY"/>
                                                 <constraint firstItem="FHg-Y2-WtR" firstAttribute="leading" secondItem="tud-Fw-jEG" secondAttribute="trailing" constant="27" id="voI-zq-XoM"/>
@@ -1047,6 +1064,7 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="buttonChangePassword" destination="yrx-fB-aoa" id="hzq-WK-jup"/>
                                             <outlet property="labelType" destination="tud-Fw-jEG" id="QdY-Xb-jVv"/>
                                             <outlet property="textFieldValue" destination="FHg-Y2-WtR" id="H00-XQ-Y2p"/>
                                         </connections>

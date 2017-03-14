@@ -30,7 +30,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HFj-v4-1Yb">
-                                <rect key="frame" x="0.0" y="-20" width="375" height="687"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <connections>
                                     <segue destination="iKt-1T-sAG" kind="embed" id="GV9-Il-8Jc"/>
                                 </connections>
@@ -112,7 +112,7 @@
                             <constraint firstItem="4Nk-cF-eK0" firstAttribute="width" secondItem="KB9-1S-d5W" secondAttribute="width" multiplier="40/375" id="Q48-ka-av0"/>
                             <constraint firstItem="4Nk-cF-eK0" firstAttribute="centerX" secondItem="KB9-1S-d5W" secondAttribute="centerX" id="bhp-yy-DWw"/>
                             <constraint firstItem="vwF-hX-3DE" firstAttribute="leading" secondItem="KB9-1S-d5W" secondAttribute="leading" id="dRJ-yz-dxe"/>
-                            <constraint firstItem="HFj-v4-1Yb" firstAttribute="top" secondItem="KB9-1S-d5W" secondAttribute="top" constant="-20" id="hkg-6D-JNs"/>
+                            <constraint firstItem="HFj-v4-1Yb" firstAttribute="top" secondItem="KB9-1S-d5W" secondAttribute="top" id="hkg-6D-JNs"/>
                             <constraint firstItem="m6o-Mj-jRm" firstAttribute="top" secondItem="HFj-v4-1Yb" secondAttribute="bottom" id="nhY-sE-5vn"/>
                             <constraint firstItem="4Nk-cF-eK0" firstAttribute="centerY" secondItem="KB9-1S-d5W" secondAttribute="centerY" multiplier="1.65667" constant="-62.000000010699978" id="qCH-fx-QNK"/>
                             <constraint firstAttribute="trailingMargin" secondItem="zqZ-PQ-IFe" secondAttribute="trailing" constant="6" id="sXG-mx-9Xy"/>
@@ -127,13 +127,15 @@
                     <size key="freeformSize" width="375" height="667"/>
                     <connections>
                         <outlet property="buttonLink" destination="zqZ-PQ-IFe" id="z3R-qq-zOp"/>
+                        <outlet property="buttonRegister" destination="Jyn-tg-ixg" id="bb1-DP-Vzp"/>
+                        <outlet property="buttonSignin" destination="WsS-eE-w8m" id="e0f-bY-UFZ"/>
                         <outlet property="container" destination="HFj-v4-1Yb" id="2gw-Xb-B21"/>
                         <outlet property="pageControlView" destination="4Nk-cF-eK0" id="G2V-re-bwd"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Kgn-vk-PhT" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="95" y="1200"/>
+            <point key="canvasLocation" x="138" y="1200"/>
         </scene>
         <!--Sign Up View Controller-->
         <scene sceneID="3pS-vh-67E">
@@ -506,6 +508,7 @@
                             <constraint firstItem="N7H-ey-5oY" firstAttribute="centerX" secondItem="ZuF-Og-5eT" secondAttribute="centerX" constant="-1" id="z3x-lD-MSH"/>
                         </constraints>
                     </view>
+                    <nil key="simulatedStatusBarMetrics"/>
                     <nil key="simulatedTopBarMetrics"/>
                     <connections>
                         <outlet property="buttonGetStarted" destination="vIh-lT-4bl" id="g3V-wq-WIZ"/>
@@ -517,7 +520,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pV0-nB-Fl5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="892" y="379"/>
+            <point key="canvasLocation" x="958" y="378"/>
         </scene>
         <!--Second Gateway Overview View Controller-->
         <scene sceneID="lv7-bL-5k5">
@@ -601,6 +604,7 @@
                             </mask>
                         </variation>
                     </view>
+                    <nil key="simulatedStatusBarMetrics"/>
                     <nil key="simulatedTopBarMetrics"/>
                     <connections>
                         <outlet property="buttonGetStarted" destination="qls-nn-uxZ" id="gZy-71-Hhu"/>
@@ -1063,7 +1067,7 @@
         <image name="welcomeBg" width="375" height="667"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="VqN-my-PFn"/>
-        <segue reference="EeA-Hk-jBe"/>
+        <segue reference="Xbj-IV-jBd"/>
+        <segue reference="Wsb-hw-1LK"/>
     </inferredMetricsTieBreakers>
 </document>

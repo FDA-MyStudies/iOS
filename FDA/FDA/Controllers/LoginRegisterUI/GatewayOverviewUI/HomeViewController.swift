@@ -8,20 +8,23 @@
 
 import Foundation
 import UIKit
+import SlideMenuControllerSwift
 
 class HomeViewController : UIViewController{
     
     @IBOutlet weak var container : UIView!
     @IBOutlet var pageControlView : UIPageControl?
     @IBOutlet var buttonLink : UIButton!
+    @IBOutlet var buttonSignin : UIButton!
+    @IBOutlet var buttonRegister : UIButton!
     
     
-    var pageViewController: PageViewController? {
-        didSet {
-            pageViewController?.pageViewDelegate = self
-            //pageViewController?.overview = Gateway.instance.overview!
-        }
-    }
+//    var pageViewController: PageViewController? {
+//        didSet {
+//            pageViewController?.pageViewDelegate = self
+//            //pageViewController?.overview = Gateway.instance.overview!
+//        }
+//    }
     
     override func loadView() {
         
@@ -34,7 +37,7 @@ class HomeViewController : UIViewController{
         super.viewDidLoad()
     
        // self.loadTestData()
-        
+        self.automaticallyAdjustsScrollViewInsets = false;
         //Added to change next screen
         pageControlView?.addTarget(self, action:#selector(HomeViewController.didChangePageControlValue), for: .valueChanged)
         
@@ -99,15 +102,36 @@ class HomeViewController : UIViewController{
     
     //Fired when the user taps on the pageControl to change its current page (Commented as this is not working)
     func didChangePageControlValue() {
-        pageViewController?.scrollToViewController(index: (pageControlView?.currentPage)!)
+        //pageViewController?.scrollToViewController(index: (pageControlView?.currentPage)!)
     }
-    
+   
     @IBAction func linkButtonAction(_ sender: Any) {
+       
         let loginStoryboard = UIStoryboard.init(name: "Main", bundle:Bundle.main)
         let webViewController = loginStoryboard.instantiateViewController(withIdentifier:"WebViewController")
         self.navigationController?.present(webViewController, animated: true, completion: nil)
     }
     
+    @IBAction func unwindForLogout(_ segue:UIStoryboardSegue){
+        
+        //self.view.alpha = 0
+        
+       
+       
+    }
+    @IBAction func unwindForRegister(_ segue:UIStoryboardSegue){
+        DispatchQueue.main.asyncAfter(deadline: .now()) {
+            // your code here
+            self.buttonRegister.sendActions(for: .touchUpInside)
+        }
+    }
+    @IBAction func unwindForSignIn(_ segue:UIStoryboardSegue){
+        
+        DispatchQueue.main.asyncAfter(deadline: .now()) {
+            // your code here
+            self.buttonSignin.sendActions(for: .touchUpInside)
+        }
+    }
 }
 
 //MARK: Page Control Delegates for handling Counts

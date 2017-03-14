@@ -26,7 +26,7 @@ let kTitleError = "Error"
 let kTitleMessage = "Message"
 let kTitleOk = "Ok"
 let kTitleCancel = "Cancel"
-let kForgotPasswordResponseMessage = "We have sent reset password link to your registered email."
+
 
 
 
@@ -37,6 +37,7 @@ let kSignInTableViewCellIdentifier = "DetailsCell"
 
 //MARK: ForgotPassword Constants
 let kForgotPasswordTitleText = "FORGOT PASSWORD"
+let kForgotPasswordResponseMessage = "We have sent reset password link to your registered email."
 
 //MARK: SignUp Constants
 let kSignUpTitleText = "SIGN UP"
@@ -68,7 +69,7 @@ let kMessageValidateChangePassword = "New password and old password are same."
 //MARK: ChangePassword Constants
 let kChangePasswordTitleText = "CHANGE PASSWORD"
 let kChangePawwordCellIdentifer = "changePasswordCell"
-
+let kChangePasswordResponseMessage = "Your password changed successfully"
 
 
 

@@ -83,6 +83,10 @@ class ConfirmationViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    func handleDeleteAccountResponse(){
+        fdaSlideMenuController()?.navigateToHomeAfterSingout()
+    }
+    
     
 }
 
@@ -90,7 +94,7 @@ class ConfirmationViewController: UIViewController {
 extension ConfirmationViewController : UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return tableViewRowDetails!.count
+        return 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -148,13 +152,13 @@ extension ConfirmationViewController:NMWebServiceDelegate {
     }
     func finishedRequest(_ manager: NetworkManager, requestName: NSString, response: AnyObject?) {
         Logger.sharedInstance.info("requestname : \(requestName)")
-        
+         self.removeProgressIndicator()
         if requestName as String ==  RegistrationMethods.deleteAccount.description {
             
-             _ = self.navigationController?.popToRootViewController(animated: true)
+             self.handleDeleteAccountResponse()
         }
         
-        self.removeProgressIndicator()
+       
     }
     func failedRequest(_ manager: NetworkManager, requestName: NSString, error: NSError) {
         Logger.sharedInstance.info("requestname : \(requestName)")

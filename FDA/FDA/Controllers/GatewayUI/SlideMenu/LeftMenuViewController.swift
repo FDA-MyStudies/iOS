@@ -116,6 +116,7 @@ class LeftMenuViewController : UIViewController, LeftMenuProtocol {
     
     func setInitialData()  {
         
+        let user = User.currentUser
         if user.userType == .FDAUser {
             menus.append(["menuTitle":"Profile",
                           "iconName":"profile_menu1"])
@@ -150,7 +151,7 @@ class LeftMenuViewController : UIViewController, LeftMenuProtocol {
             //self.slideMenuController()?.changeMainViewController(self.javaViewController, close: true)
         case .profile_signin:
             
-            if user.userType == .FDAUser {
+            if User.currentUser.userType == .FDAUser {
                 self.slideMenuController()?.changeMainViewController(self.profileviewController, close: true)
                
             }

@@ -12,6 +12,9 @@ import Foundation
 
 let kTermsAndConditionLink = "http://www.google.com"
 let kPrivacyPolicyLink = "http://www.facebook.com"
+let kNavigationTitleTerms = "TERMS"
+let kNavigationTitlePrivacyPolicy = "PRIVACY POLICY"
+
 
 let kAlertPleaseEnterValidValue = "Please Enter Valid Value"
 
@@ -19,6 +22,14 @@ let kAlertPleaseEnterValidValue = "Please Enter Valid Value"
 let kUicolorForButtonBackground = UIColor.init(colorLiteralRed: 0/255.0, green: 124/255.0, blue: 186/255.0, alpha: 1.0).cgColor
 
 //Display Constants
+let kTitleError = "Error"
+let kTitleMessage = "Message"
+let kTitleOk = "Ok"
+let kTitleCancel = "Cancel"
+let kForgotPasswordResponseMessage = "We have sent reset password link to your registered email."
+
+
+
 
 //MARK: Signin Constants
 let kSignInTitleText = "SIGN IN"

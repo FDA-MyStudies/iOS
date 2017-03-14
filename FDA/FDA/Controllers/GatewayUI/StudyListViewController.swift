@@ -69,7 +69,8 @@ class StudyListViewController: UIViewController {
         self.setNavigationBarItem()
         self.navigationController?.setNavigationBarHidden(false, animated: true)
        
-        self.sendRequestToGetUserPreference()
+        self.sendRequestToGetStudyList()
+        //self.sendRequestToGetUserPreference()
         
     }
     

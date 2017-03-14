@@ -92,9 +92,9 @@ class UserServices: NSObject {
         self.delegate = delegate
         
         let user = User.currentUser
-        let params = [kUserId : user.userId]
+        let headerParams = [kUserId : user.userId!]
         let method = RegistrationMethods.confirmRegistration.method
-        self.sendRequestWith(method:method, params: params, headers: nil)
+        self.sendRequestWith(method:method, params: nil, headers:headerParams)
         
     }
     
@@ -118,7 +118,7 @@ class UserServices: NSObject {
         let params = [kUserId : user.userId,
                       kUserAuthToken: user.authToken]
         let method = RegistrationMethods.deleteAccount.method
-        self.sendRequestWith(method:method, params: params, headers: nil)
+        self.sendRequestWith(method:method, params: nil, headers: nil)
     }
     
     func forgotPassword(_ delegate:NMWebServiceDelegate){
@@ -126,11 +126,11 @@ class UserServices: NSObject {
         self.delegate = delegate
         
         let user = User.currentUser
-        let params = [kUserEmailId : user.emailId!]
+        let headerParams = [kUserEmailId : user.emailId!]
         
         let method = RegistrationMethods.forgotPassword.method
         
-        self.sendRequestWith(method:method, params: params, headers: nil)
+        self.sendRequestWith(method:method, params: nil, headers: headerParams)
     }
     
     func changePassword(oldPassword:String,newPassword:String,delegate:NMWebServiceDelegate){
@@ -138,12 +138,13 @@ class UserServices: NSObject {
         self.delegate = delegate
         
         let user = User.currentUser
-        let headerParams = [kUserId : user.userId] as [String : String]
+        
         let params = [kUserOldPassword:oldPassword,
-                      kUserNewPassword:newPassword]
+                      kUserNewPassword:newPassword,
+                      kUserId : user.userId]
         
         let method = RegistrationMethods.changePassword.method
-        self.sendRequestWith(method:method, params: params, headers: headerParams)
+        self.sendRequestWith(method:method, params: params, headers: nil)
     }
     
     func getUserProfile(_ delegate:NMWebServiceDelegate){
@@ -152,11 +153,11 @@ class UserServices: NSObject {
         
         let user = User.currentUser
         
-        let params = [kUserId : user.userId!]
+        let headerParams = [kUserId : user.userId!]
         
         let method = RegistrationMethods.userProfile.method
         
-        self.sendRequestWith(method:method, params: params, headers: nil)
+        self.sendRequestWith(method:method, params: nil, headers: headerParams)
     }
     
     func updateUserProfile(_ delegate:NMWebServiceDelegate){
@@ -186,11 +187,11 @@ class UserServices: NSObject {
         self.delegate = delegate
         
         let user = User.currentUser
-        let params = [kUserId : user.userId!]
+        let headerParams = [kUserId : user.userId!]
         
         let method = RegistrationMethods.userPreferences.method
         
-        self.sendRequestWith(method:method, params: params, headers: nil)
+        self.sendRequestWith(method:method, params: nil, headers: headerParams)
     }
     
     func updateStudyBookmarkStatus(studyStauts:UserStudyStatus , delegate:NMWebServiceDelegate){
@@ -283,38 +284,52 @@ class UserServices: NSObject {
     func handleUserLoginResponse(response:Dictionary<String, Any>){
         
         let user = User.currentUser
-        user.userId     = String(response[kUserId] as! Int)
+        user.userId     = response[kUserId] as! String
         user.verified   = response[kUserVerified] as! Bool
         user.authToken  = response[kUserAuthToken] as! String
         
         
-        //TEMP : Need to save these values in Realm
-        let ud = UserDefaults.standard
-        ud.set(user.authToken!, forKey:kUserAuthToken)
-        ud.set(user.userId! , forKey: kUserId)
-        ud.synchronize()
+       
+        if user.verified! {
+            
+            user.userType = UserType.FDAUser
+            
+            //TEMP : Need to save these values in Realm
+            let ud = UserDefaults.standard
+            ud.set(user.authToken, forKey:kUserAuthToken)
+            ud.set(user.userId!, forKey: kUserId)
+            ud.synchronize()
+        }
         
     }
     
     func handleUserRegistrationResponse(response:Dictionary<String, Any>){
         
         let user = User.currentUser
-        user.userId     = String(response[kUserId] as! Int)
+        user.userId     = response[kUserId] as! String
         user.verified   = response[kUserVerified] as! Bool
         user.authToken  = response[kUserAuthToken] as! String
         
         
-        //TEMP : Need to save these values in Realm
-        let ud = UserDefaults.standard
-        ud.set(user.authToken, forKey:kUserAuthToken)
-        ud.set(user.userId!, forKey: kUserId)
-        ud.synchronize()
+       
     }
     
     func handleConfirmRegistrationResponse(response:Dictionary<String, Any>){
         
         let user = User.currentUser
         user.verified   = response[kUserVerified] as! Bool
+        
+        if user.verified! {
+            
+            user.userType = UserType.FDAUser
+            
+            //TEMP : Need to save these values in Realm
+            let ud = UserDefaults.standard
+            ud.set(user.authToken, forKey:kUserAuthToken)
+            ud.set(user.userId!, forKey: kUserId)
+            ud.synchronize()
+        }
+        
     }
     
     func handleGetUserProfileResponse(response:Dictionary<String, Any>){
@@ -331,7 +346,7 @@ class UserServices: NSObject {
         let profile = response[kUserProfile] as! Dictionary<String, Any>
         user.emailId = profile[kUserEmailId] as? String
         user.firstName = profile[kUserFirstName] as? String
-        user.lastName = profile[kUserFirstName] as? String
+        user.lastName = profile[kUserLastName] as? String
     }
     
     func handleUpdateUserProfileResponse(response:Dictionary<String, Any>){
@@ -422,7 +437,9 @@ class UserServices: NSObject {
         ud.removeObject(forKey: kUserAuthToken)
         ud.removeObject(forKey: kUserId)
         ud.synchronize()
-        user = User.currentUser
+        
+        //reset user object
+        User.currentUser = User()
         
     }
     
@@ -431,13 +448,15 @@ class UserServices: NSObject {
         ud.removeObject(forKey: kUserAuthToken)
         ud.removeObject(forKey: kUserId)
         ud.synchronize()
-        user = User.currentUser
+        
+        //reset user object
+        User.currentUser = User()
     }
     
     
     
     
-    private func sendRequestWith(method:Method, params:Dictionary<String, Any>,headers:Dictionary<String, String>?){
+    private func sendRequestWith(method:Method, params:Dictionary<String, Any>?,headers:Dictionary<String, String>?){
         
         networkManager.composeRequest(RegistrationServerConfiguration.configuration,
                                       method: method,

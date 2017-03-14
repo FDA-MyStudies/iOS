@@ -933,7 +933,6 @@
                                 </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="continueButtonAction:" destination="slw-Bf-fNL" eventType="touchUpInside" id="2cS-UH-ZO7"/>
-                                    <segue destination="3kT-ho-jWT" kind="show" identifier="signupCompletionSegue" id="qXC-KK-iWg"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -963,6 +962,8 @@
                     </view>
                     <connections>
                         <outlet property="buttonContinue" destination="93M-Fs-drd" id="uy7-SB-2HH"/>
+                        <outlet property="labelVerificationMessage" destination="On0-dU-saR" id="Aa8-kK-rlZ"/>
+                        <segue destination="3kT-ho-jWT" kind="show" identifier="signupCompletionSegue" id="0lP-oe-drw"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xPG-Tx-RfJ" userLabel="First Responder" sceneMemberID="firstResponder"/>

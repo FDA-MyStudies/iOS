@@ -26,7 +26,7 @@ class StudyHomeViewController : UIViewController{
         super.viewDidLoad()
         
         // self.loadTestData()
-        
+        self.automaticallyAdjustsScrollViewInsets = false
         //Added to change next screen
         pageControlView?.addTarget(self, action:#selector(StudyHomeViewController.didChangePageControlValue), for: .valueChanged)
         

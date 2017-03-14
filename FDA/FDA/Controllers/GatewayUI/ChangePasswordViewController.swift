@@ -22,6 +22,7 @@ class ChangePasswordViewController: UIViewController {
     var tableViewRowDetails : NSMutableArray?
     var newPassword = ""
     var oldPassword = ""
+    var confirmPassword = ""
     @IBOutlet var tableView : UITableView?
     @IBOutlet var buttonSubmit : UIButton?
     
@@ -91,12 +92,12 @@ class ChangePasswordViewController: UIViewController {
         }else if self.newPassword == ""{
             self.showAlertMessages(textMessage: kMessageNewPasswordBlank)
         }
-        else if self.newPassword == self.oldPassword{
-            self.showAlertMessages(textMessage: kMessageValidateChangePassword)
-        }
-        else if ((self.oldPassword.characters.count) < 8 && (self.oldPassword.characters.count) != 0) || ((self.newPassword.characters.count) < 8 && self.newPassword.characters.count != 0) {
-            self.showAlertMessages(textMessage: kMessageValidatePasswordCharacters)
+        else if Utilities.isPasswordValid(text: self.newPassword) == false{
+            self.showAlertMessages(textMessage: kMessageValidatePasswordComplexity)
             
+        }
+        else if self.newPassword != self.confirmPassword{
+            self.showAlertMessages(textMessage: kMessageValidatePasswords)
         }
         else{
            self.requestToChangePassword()
@@ -109,7 +110,7 @@ class ChangePasswordViewController: UIViewController {
 extension ChangePasswordViewController : UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 2
+        return 3
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -151,6 +152,8 @@ extension ChangePasswordViewController : UITextFieldDelegate{
             self.oldPassword = textField.text!
         case .newPassword:
             self.newPassword = textField.text!
+        case .confirmPassword:
+            self.confirmPassword = textField.text!
             break
         default: break
         }

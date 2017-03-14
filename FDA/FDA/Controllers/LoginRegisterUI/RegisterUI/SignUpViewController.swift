@@ -246,15 +246,18 @@ extension SignUpViewController:UITextViewDelegate{
     func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange) -> Bool {
        
         var link:String = kTermsAndConditionLink
+        var title:String = kNavigationTitleTerms
         if (URL.absoluteString == kPrivacyPolicyLink) {
             print("terms")
             link = kPrivacyPolicyLink
+            title = kNavigationTitlePrivacyPolicy
             
         }
         let loginStoryboard = UIStoryboard.init(name: "Main", bundle:Bundle.main)
         let webViewController = loginStoryboard.instantiateViewController(withIdentifier:"WebViewController") as! UINavigationController
         let webview = webViewController.viewControllers[0] as! WebViewController
         webview.requestLink = link
+        webview.title = title
         self.navigationController?.present(webViewController, animated: true, completion: nil)
         
         return false
@@ -366,16 +369,20 @@ extension SignUpViewController : UITextFieldDelegate{
 extension SignUpViewController:NMWebServiceDelegate {
     
     func startedRequest(_ manager: NetworkManager, requestName: NSString) {
+        
         Logger.sharedInstance.info("requestname : \(requestName)")
+        self.addProgressIndicator()
     }
     func finishedRequest(_ manager: NetworkManager, requestName: NSString, response: AnyObject?) {
         Logger.sharedInstance.info("requestname : \(requestName)")
         
+        self.removeProgressIndicator()
         self.navigateToVerificationController()
         
     }
     func failedRequest(_ manager: NetworkManager, requestName: NSString, error: NSError) {
         Logger.sharedInstance.info("requestname : \(requestName)")
+        self.removeProgressIndicator()
         UIUtilities.showAlertWithTitleAndMessage(title:NSLocalizedString("Error", comment: "") as NSString, message: error.localizedDescription as NSString)
     }
 }

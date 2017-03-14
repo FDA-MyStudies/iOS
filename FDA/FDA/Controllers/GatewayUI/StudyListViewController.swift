@@ -197,7 +197,7 @@ extension StudyListViewController : StudyListDelegates {
             userStudyStatus =  user.removeBookbarkStudy(studyId: study.studyId!)
         }
         
-        self.sendRequestToUpdateBookMarkStatus(userStudyStatus: userStudyStatus)
+        //self.sendRequestToUpdateBookMarkStatus(userStudyStatus: userStudyStatus)
     }
 }
 

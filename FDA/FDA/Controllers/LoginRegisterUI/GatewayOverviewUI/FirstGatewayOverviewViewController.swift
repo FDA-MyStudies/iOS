@@ -81,18 +81,26 @@ class FirstGatewayOverviewViewController : UIViewController{
     
     func createMenuView() {
         
-        // create viewController code...
+        //self.performSegue(withIdentifier: "menuSegue", sender: self)
+        
+        //        // create viewController code...
         let storyboard = UIStoryboard(name: "Gateway", bundle: nil)
+        //
+        //        let mainViewController = storyboard.instantiateViewController(withIdentifier: "StudyListViewController") as! UINavigationController
+        //        let leftViewController = storyboard.instantiateViewController(withIdentifier: "LeftMenuViewController") as! LeftMenuViewController
+        //
+        //        leftViewController.studyListViewController = mainViewController
         
-        let mainViewController = storyboard.instantiateViewController(withIdentifier: "StudyListViewController") as! UINavigationController
-        let leftViewController = storyboard.instantiateViewController(withIdentifier: "LeftMenuViewController") as! LeftMenuViewController
         
-        leftViewController.studyListViewController = mainViewController
+        let fda = storyboard.instantiateViewController(withIdentifier: "FDASlideMenuViewController") as! FDASlideMenuViewController
+        // fda.mainViewController = mainViewController
+        // fda.leftViewController = leftViewController
         
-        let slideMenuController = FDASlideMenuViewController(mainViewController:mainViewController, leftMenuViewController: leftViewController)
+        //let slideMenuController = FDASlideMenuViewController(mainViewController:mainViewController, leftMenuViewController: leftViewController)
         
-        slideMenuController.automaticallyAdjustsScrollViewInsets = true
-        self.navigationController?.pushViewController(slideMenuController, animated: true)
+        fda.automaticallyAdjustsScrollViewInsets = true
+        self.navigationController?.pushViewController(fda, animated: true)
+
     }
 }
 

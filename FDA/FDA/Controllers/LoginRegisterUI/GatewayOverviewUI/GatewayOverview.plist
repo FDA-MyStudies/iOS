@@ -10,7 +10,7 @@
 		<key>type</key>
 		<string>video</string>
 		<key>image</key>
-		<string></string>
+		<string>welcomeBg</string>
 		<key>link</key>
 		<string></string>
 	</dict>
@@ -22,7 +22,7 @@
 		<key>type</key>
 		<string></string>
 		<key>image</key>
-		<string></string>
+		<string>img_01</string>
 		<key>link</key>
 		<string></string>
 	</dict>
@@ -34,7 +34,7 @@
 		<key>type</key>
 		<string></string>
 		<key>image</key>
-		<string></string>
+		<string>img_02</string>
 		<key>link</key>
 		<string></string>
 	</dict>
@@ -46,7 +46,7 @@
 		<key>type</key>
 		<string></string>
 		<key>image</key>
-		<string></string>
+		<string>img_03</string>
 		<key>link</key>
 		<string></string>
 	</dict>

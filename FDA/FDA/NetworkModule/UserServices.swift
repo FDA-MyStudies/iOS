@@ -40,8 +40,10 @@ let kUserNewPassword = "newPassword"
 //MARK: Settings Api Constants
 let kSettingsRemoteNotifications = "remoteNotifications"
 let kSettingsLocalNotifications = "localNotifications"
-let kSettingsPassCode = "passCode"
+let kSettingsPassCode = "passcode"
 let kSettingsTouchId = "touchId"
+let kSettingsLeadTime = "remindersTime"
+
 
 let kBookmarked = "bookmarked"
 let kStatus = "status"
@@ -166,8 +168,15 @@ class UserServices: NSObject {
         
         let user = User.currentUser
         
-        let profile = [kUserFirstName : user.firstName,
-                       kUserLastName : user.lastName]
+        let profile = [kUserFirstName : user.firstName!,
+                       kUserLastName : user.lastName!]
+        
+        let settings = [kSettingsRemoteNotifications: (user.settings?.remoteNotifications)! as Bool,
+                        kSettingsTouchId : (user.settings?.touchId)! as Bool,
+                        kSettingsPassCode : (user.settings?.passcode)! as Bool,
+                        kSettingsLocalNotifications : (user.settings?.localNotifications)! as Bool,
+                        kSettingsLeadTime : (user.settings?.leadTime)! as String
+        ] as [String : Any]
         
         let version = Utilities.getAppVersion()
         let info = [kAppVersion : version,
@@ -175,6 +184,7 @@ class UserServices: NSObject {
         
         let params = [kUserId : user.userId! as String,
                       kUserProfile:profile,
+                      kUserSettings:settings,
                       kBasicInfo:info] as [String : Any]
         
         let method = RegistrationMethods.updateUserProfile.method

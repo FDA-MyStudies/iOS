@@ -71,7 +71,11 @@ open class FDASlideMenuViewController: SlideMenuController {
 //        super.viewDidLoad()
 //        SlideMenuOptions.leftViewWidth = 300
 //    }
-    
+    func navigateToHomeAfterSingout(){
+        
+        self.leftViewController?.view.isHidden = true
+        _ = self.navigationController?.popToRootViewController(animated: true)
+    }
     
     func navigateToHomeControllerForSignin(){
         

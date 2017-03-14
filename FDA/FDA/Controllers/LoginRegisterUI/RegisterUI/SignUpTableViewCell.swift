@@ -37,7 +37,7 @@ class SignUpTableViewCell: UITableViewCell {
     }
 
     //Populate cell data coming in dictionary
-    func populateCellData(data : NSDictionary , securedText : Bool){
+    func populateCellData(data : NSDictionary , securedText : Bool, keyboardType:UIKeyboardType?){
         
         textFieldValue?.isSecureTextEntry = false
         if securedText == true {
@@ -45,6 +45,13 @@ class SignUpTableViewCell: UITableViewCell {
         }
         labelType?.text = NSLocalizedString((data["helpText"] as? String)!, comment: "")
         textFieldValue?.placeholder = NSLocalizedString((data["placeHolder"] as? String)!, comment: "")
+        
+        if keyboardType == nil {
+           textFieldValue?.keyboardType = .default
+        } else {
+            textFieldValue?.keyboardType = keyboardType!
+        }
+        
     }
     
     /* 

@@ -38,7 +38,7 @@ enum RegistrationMethods:String {
         
         switch self {
        
-        case .activityState,.consentPDF,.forgotPassword ,.deleteAccount,.confirmRegistration,.userProfile,.userPreferences:
+        case .activityState,.consentPDF,.deleteAccount,.confirmRegistration,.userProfile,.userPreferences:
             //GET Methods
             return Method(methodName:(self.rawValue+".api"), methodType: .httpMethodGet, requestType: .requestTypeJSON)
         case .withdraw,.logout:
@@ -74,9 +74,9 @@ class RegistrationServerConfiguration: NetworkConfiguration {
     
     override func getDefaultHeaders() -> [String : String] {
         
-        let ud = UserDefaults.standard
-        if (ud.object(forKey: kUserAuthToken) != nil) {
-            return [kUserAuthToken:ud.object(forKey: kUserAuthToken) as! String]
+        //let ud = UserDefaults.standard
+        if User.currentUser.authToken != nil {
+            return [kUserAuthToken:User.currentUser.authToken]
         }
         return Dictionary()
     }

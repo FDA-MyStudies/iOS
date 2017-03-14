@@ -170,7 +170,7 @@ class ProfileViewController: UIViewController {
     @IBAction func buttonActionSignOut(_ sender: UIButton) {
         
         
-        UIUtilities.showAlertMessageWithTwoActionsAndHandler(NSLocalizedString("Signout", comment: ""), errorMessage: NSLocalizedString("Are you sure you want to singout ?", comment: ""), errorAlertActionTitle: NSLocalizedString("Yes", comment: ""),
+        UIUtilities.showAlertMessageWithTwoActionsAndHandler(NSLocalizedString("Signout", comment: ""), errorMessage: NSLocalizedString("Are you sure you want to signout ?", comment: ""), errorAlertActionTitle: NSLocalizedString("Yes", comment: ""),
                                                              errorAlertActionTitle2: NSLocalizedString("Cancel", comment: ""), viewControllerUsed: self,
                                                              action1: {
                                                                 

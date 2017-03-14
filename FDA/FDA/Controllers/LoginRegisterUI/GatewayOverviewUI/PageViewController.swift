@@ -29,15 +29,7 @@ class PageViewController : UIPageViewController{
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        //self.loadTestData()
-        
+         self.automaticallyAdjustsScrollViewInsets = false;
         dataSource = self
         delegate =  self
         
@@ -46,13 +38,20 @@ class PageViewController : UIPageViewController{
         }
         
         pageViewDelegate?.pageViewController(pageViewController: self, didUpdatePageCount: orderedViewControllers.count)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        //self.loadTestData()
+        
+       
         
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
-        
+       
     }
     
         

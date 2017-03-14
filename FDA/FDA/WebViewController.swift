@@ -12,6 +12,7 @@ import UIKit
 class WebViewController : UIViewController{
 
     @IBOutlet var webView : UIWebView?
+    var activityIndicator:UIActivityIndicatorView!
     var requestLink:String!
     
     override func viewDidLoad() {
@@ -24,18 +25,21 @@ class WebViewController : UIViewController{
         super.viewWillAppear(animated)
         
         //let url = "http://35.167.14.182:5080/live/viewer.jsp?host=35.167.14.182&stream=NoswMb" as AnyObject
-        UIWebView.loadRequest(webView!)(NSURLRequest(url: NSURL(string: requestLink as String)! as URL) as URLRequest)
+        //UIWebView.loadRequest(webView!)(NSURLRequest(url: NSURL(string: requestLink as String)! as URL) as URLRequest)
         
         //Used to add a loader
-        let activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: .gray)
+        activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: .gray)
         activityIndicator.center = CGPoint(x: self.view.frame.midX, y: self.view.frame.midY-100)
         self.view.addSubview(activityIndicator)
         activityIndicator.startAnimating()
         
-        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + Double(Int64(1 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)) {
-            activityIndicator.stopAnimating()
-            activityIndicator.removeFromSuperview()
-        }
+        
+        
+        let url = URL.init(string: requestLink)
+        let urlRequest = URLRequest.init(url: url!)
+        webView?.loadRequest(urlRequest)
+        webView?.delegate = self
+       
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -49,7 +53,18 @@ class WebViewController : UIViewController{
     }
 }
 
-
+extension WebViewController:UIWebViewDelegate{
+    func webViewDidFinishLoad(_ webView: UIWebView) {
+        self.activityIndicator.stopAnimating()
+        self.activityIndicator.removeFromSuperview()
+    }
+    func webView(_ webView: UIWebView, didFailLoadWithError error: Error) {
+        self.activityIndicator.stopAnimating()
+        self.activityIndicator.removeFromSuperview()
+        
+        UIUtilities.showAlertWithTitleAndMessage(title:NSLocalizedString(kTitleError, comment: "") as NSString, message: error.localizedDescription as NSString)
+    }
+}
 
 
 

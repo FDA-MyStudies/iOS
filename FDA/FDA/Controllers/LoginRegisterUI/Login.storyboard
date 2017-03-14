@@ -541,6 +541,10 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="288"/>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                             </imageView>
+                            <view alpha="0.55000000000000004" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="e3m-lT-DyA">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="288"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Improving Health Research Outcomes" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="LIE-7a-UoQ">
                                 <rect key="frame" x="50" y="174" width="275" height="66"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="28"/>
@@ -582,8 +586,11 @@
                             <constraint firstItem="LC2-3W-qRB" firstAttribute="height" secondItem="srV-ZZ-1rU" secondAttribute="height" multiplier="175/667" constant="1.0000000000000284" id="7PK-1S-bfP"/>
                             <constraint firstItem="J1Z-IB-nv3" firstAttribute="height" secondItem="srV-ZZ-1rU" secondAttribute="height" multiplier="288/667" id="8UK-qZ-whJ"/>
                             <constraint firstItem="Mop-tL-hXD" firstAttribute="top" secondItem="fCc-Rp-bme" secondAttribute="bottom" id="AZD-EZ-giE"/>
+                            <constraint firstItem="e3m-lT-DyA" firstAttribute="width" secondItem="J1Z-IB-nv3" secondAttribute="width" id="Ghb-bz-6oa"/>
                             <constraint firstItem="LIE-7a-UoQ" firstAttribute="height" secondItem="srV-ZZ-1rU" secondAttribute="height" multiplier="66/667" id="MuM-uE-PJV"/>
                             <constraint firstItem="qls-nn-uxZ" firstAttribute="centerY" secondItem="srV-ZZ-1rU" secondAttribute="centerY" multiplier="1.68216" id="PFc-OY-oX9"/>
+                            <constraint firstItem="e3m-lT-DyA" firstAttribute="height" secondItem="J1Z-IB-nv3" secondAttribute="height" id="QIt-gb-Hfn"/>
+                            <constraint firstItem="e3m-lT-DyA" firstAttribute="leading" secondItem="J1Z-IB-nv3" secondAttribute="leading" id="SGn-90-nBh"/>
                             <constraint firstItem="J1Z-IB-nv3" firstAttribute="top" secondItem="srV-ZZ-1rU" secondAttribute="top" id="SXD-6h-Svb"/>
                             <constraint firstItem="LIE-7a-UoQ" firstAttribute="width" secondItem="srV-ZZ-1rU" secondAttribute="width" multiplier="275/375" id="TdA-Mb-CRB"/>
                             <constraint firstAttribute="trailing" secondItem="J1Z-IB-nv3" secondAttribute="trailing" id="Xpt-4B-BnA"/>
@@ -594,6 +601,7 @@
                             <constraint firstItem="LC2-3W-qRB" firstAttribute="width" secondItem="srV-ZZ-1rU" secondAttribute="width" multiplier="275/375" constant="15" id="hR9-8S-2cd"/>
                             <constraint firstItem="LC2-3W-qRB" firstAttribute="centerX" secondItem="srV-ZZ-1rU" secondAttribute="centerX" constant="7.5" id="ihF-Sn-fgx"/>
                             <constraint firstItem="qls-nn-uxZ" firstAttribute="width" secondItem="srV-ZZ-1rU" secondAttribute="width" multiplier="135/375" id="lMf-kd-ucK"/>
+                            <constraint firstItem="e3m-lT-DyA" firstAttribute="top" secondItem="J1Z-IB-nv3" secondAttribute="top" id="lig-Vd-PSu"/>
                             <constraint firstItem="fCc-Rp-bme" firstAttribute="leading" secondItem="srV-ZZ-1rU" secondAttribute="leading" id="oFx-iD-aXI"/>
                             <constraint firstItem="qls-nn-uxZ" firstAttribute="height" secondItem="srV-ZZ-1rU" secondAttribute="height" multiplier="40/667" id="tdC-jx-ZAn"/>
                             <constraint firstItem="qls-nn-uxZ" firstAttribute="centerX" secondItem="srV-ZZ-1rU" secondAttribute="centerX" id="vy8-Fp-PfO"/>
@@ -1069,6 +1077,6 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="Xbj-IV-jBd"/>
-        <segue reference="Wsb-hw-1LK"/>
+        <segue reference="EeA-Hk-jBe"/>
     </inferredMetricsTieBreakers>
 </document>

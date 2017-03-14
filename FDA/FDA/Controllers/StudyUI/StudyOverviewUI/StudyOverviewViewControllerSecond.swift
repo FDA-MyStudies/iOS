@@ -41,9 +41,11 @@ class StudyOverviewViewControllerSecond : UIViewController{
     }
     
     @IBAction func visitWebsiteButtonAction(_ sender: Any) {
+        
         let loginStoryboard = UIStoryboard.init(name: "Main", bundle:Bundle.main)
-        let webViewController = loginStoryboard.instantiateViewController(withIdentifier:"WebViewController")
-        self.navigationController?.present(webViewController, animated: true, completion: nil)
-    }
+        let webViewController = loginStoryboard.instantiateViewController(withIdentifier:"WebViewController") as! UINavigationController
+        let webView = webViewController.viewControllers[0] as! WebViewController
+        webView.requestLink = "http://www.fda.gov"
+        self.navigationController?.present(webViewController, animated: true, completion: nil)    }
     
 }

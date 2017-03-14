@@ -227,18 +227,35 @@ class LinkTextView:UITextView{
     override func canPerformAction(_ action: Selector, withSender sender: Any?) -> Bool {
         return false
     }
-    override func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
-        if gestureRecognizer.isKind(of: UITapGestureRecognizer.classForCoder()) {
-            let tap = gestureRecognizer as! UITapGestureRecognizer
-            if tap.numberOfTapsRequired == 2 {
-                return false
-            }
-        }
+   
+    override func addGestureRecognizer(_ gestureRecognizer: UIGestureRecognizer) {
+        
         if gestureRecognizer.isKind(of: UILongPressGestureRecognizer.classForCoder()){
-            return false
+           // gestureRecognizer.isEnabled = false
         }
-        return true
+        if gestureRecognizer.isKind(of: UITapGestureRecognizer.classForCoder()) {
+            //let tap = gestureRecognizer as! UITapGestureRecognizer
+            //if tap.numberOfTapsRequired == 2 {
+                gestureRecognizer.isEnabled = false
+            //}
+        }
+        
+        super.addGestureRecognizer(gestureRecognizer)
     }
+//    override func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
+//        if gestureRecognizer.isKind(of: UITapGestureRecognizer.classForCoder()) {
+//            let tap = gestureRecognizer as! UITapGestureRecognizer
+//            if tap.numberOfTapsRequired == 2 {
+//                return false
+//            }
+//        }
+////        if gestureRecognizer.isKind(of: UILongPressGestureRecognizer.classForCoder()) && !gestureRecognizer.delaysTouchesEnded{
+////            let long = gestureRecognizer as! UILongPressGestureRecognizer
+////            print(long.minimumPressDuration)
+////            return false
+////        }
+//        return true
+//    }
 }
 
 extension SignUpViewController:UITextViewDelegate{
@@ -268,7 +285,11 @@ extension SignUpViewController:UITextViewDelegate{
     }
     
 
-    
+    func textViewDidChangeSelection(_ textView: UITextView) {
+        if(!NSEqualRanges(textView.selectedRange, NSMakeRange(0, 0))) {
+            textView.selectedRange = NSMakeRange(0, 0);
+        }
+    }
     
     
 //    override func gestureRecognizerShouldBegin(gestureRecognizer: UIGestureRecognizer!) -> Bool {

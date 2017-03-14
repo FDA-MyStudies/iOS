@@ -150,13 +150,15 @@ class LeftMenuViewController : UIViewController, LeftMenuProtocol {
             
             if user.userType == .FDAUser {
                 self.slideMenuController()?.changeMainViewController(self.profileviewController, close: true)
+               
             }
             else{
                // go to signin screen
+               fdaSlideMenuController()?.navigateToHomeControllerForSignin()
             }
            
-        case .signup: break
-            //self.slideMenuController()?.changeMainViewController(self.signUpViewController, close: true)
+        case .signup:
+            fdaSlideMenuController()?.navigateToHomeControllerForRegister()
             
             
         }

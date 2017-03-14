@@ -218,9 +218,9 @@ class ProfileViewController: UIViewController {
     }
     
     
-    func signout(){
+    func handleSignoutResponse(){
         debugPrint("singout")
-       _ = self.navigationController?.popToRootViewController(animated: true)
+        fdaSlideMenuController()?.navigateToHomeAfterSingout()
     }
     
     
@@ -352,12 +352,14 @@ extension ProfileViewController : UITableViewDataSource {
             let  cell = tableView.dequeueReusableCell(withIdentifier: "CommonDetailsCell", for: indexPath) as! SignUpTableViewCell
             
             var isSecuredEntry : Bool = false
+            cell.isUserInteractionEnabled = self.isCellEditable!
             
             if indexPath.row == TextFieldTags.Password.rawValue {
                 cell.buttonChangePassword?.isUserInteractionEnabled =  true
                 cell.buttonChangePassword?.isHidden =  false
                 cell.buttonChangePassword?.addTarget(self, action:#selector(pushToChangePassword), for: .touchUpInside)
                  cell.textFieldValue?.isHidden = true
+                cell.isUserInteractionEnabled = true
             }
             
             cell.textFieldValue?.tag = indexPath.row
@@ -371,7 +373,7 @@ extension ProfileViewController : UITableViewDataSource {
             cell.setCellData(tag: TextFieldTags(rawValue: indexPath.row)!)
             
           
-            cell.isUserInteractionEnabled = self.isCellEditable!
+           
             
             if TextFieldTags(rawValue: indexPath.row) ==  .EmailId{
                 cell.textFieldValue?.isUserInteractionEnabled = false
@@ -474,12 +476,19 @@ extension ProfileViewController:NMWebServiceDelegate {
     func finishedRequest(_ manager: NetworkManager, requestName: NSString, response: AnyObject?) {
         Logger.sharedInstance.info("requestname : \(requestName)")
         
+        self.removeProgressIndicator()
         if requestName as String ==  RegistrationMethods.logout.description {
             
-            self.signout()
+            self.handleSignoutResponse()
+        }
+        else if requestName as String ==  RegistrationMethods.userProfile.description {
+            self.tableViewProfile?.reloadData()
+        }
+        else if requestName as String ==  RegistrationMethods.updateUserProfile.description {
+            //self.tableViewProfile?.reloadData()
         }
         
-        self.removeProgressIndicator()
+       
     }
     func failedRequest(_ manager: NetworkManager, requestName: NSString, error: NSError) {
         Logger.sharedInstance.info("requestname : \(requestName)")

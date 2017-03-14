@@ -12,6 +12,7 @@ import UIKit
 class VerificationViewController : UIViewController{
     
     @IBOutlet var buttonContinue : UIButton?
+    @IBOutlet var labelVerificationMessage : UILabel?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,6 +20,10 @@ class VerificationViewController : UIViewController{
         //Used to set border color for bottom view
         buttonContinue?.layer.borderColor = kUicolorForButtonBackground
         self.title = NSLocalizedString("", comment: "")
+        
+        let message = labelVerificationMessage?.text
+        let modifiedMessage = message?.replacingOccurrences(of: "xyz@gmail.com", with: User.currentUser.emailId!)
+        labelVerificationMessage?.text = modifiedMessage
         
         //hide navigationbar
         self.navigationController?.setNavigationBarHidden(true, animated: true)
@@ -51,11 +56,14 @@ class VerificationViewController : UIViewController{
 
 extension VerificationViewController:NMWebServiceDelegate {
     func startedRequest(_ manager: NetworkManager, requestName: NSString) {
+        
+        self.addProgressIndicator()
         Logger.sharedInstance.info("requestname : \(requestName)")
     }
     func finishedRequest(_ manager: NetworkManager, requestName: NSString, response: AnyObject?) {
         Logger.sharedInstance.info("requestname : \(requestName)")
         
+        self.removeProgressIndicator()
         if User.currentUser.verified == true{
             self.navigateToSignUpCompletionStep()
         }
@@ -67,6 +75,8 @@ extension VerificationViewController:NMWebServiceDelegate {
     }
     func failedRequest(_ manager: NetworkManager, requestName: NSString, error: NSError) {
         Logger.sharedInstance.info("requestname : \(requestName)")
+        
+        self.removeProgressIndicator()
         UIUtilities.showAlertWithTitleAndMessage(title:NSLocalizedString("Error", comment: "") as NSString, message: error.localizedDescription as NSString)
     }
 }

@@ -72,14 +72,26 @@ class ForgotPasswordViewController : UIViewController{
 
 extension ForgotPasswordViewController:NMWebServiceDelegate {
     func startedRequest(_ manager: NetworkManager, requestName: NSString) {
+        
         Logger.sharedInstance.info("requestname : \(requestName)")
+        self.addProgressIndicator()
     }
     func finishedRequest(_ manager: NetworkManager, requestName: NSString, response: AnyObject?) {
+        
         Logger.sharedInstance.info("requestname : \(requestName)")
+        self.removeProgressIndicator()
+        
+        UIUtilities.showAlertMessageWithActionHandler(NSLocalizedString(kTitleMessage, comment: ""), message: NSLocalizedString(kForgotPasswordResponseMessage, comment: "") , buttonTitle: NSLocalizedString(kTitleOk, comment: ""), viewControllerUsed: self) {
+            
+            _ = self.navigationController?.popViewController(animated: true)
+            
+        }
     }
     func failedRequest(_ manager: NetworkManager, requestName: NSString, error: NSError) {
+        
+        self.removeProgressIndicator()
         Logger.sharedInstance.info("requestname : \(requestName)")
-        UIUtilities.showAlertWithTitleAndMessage(title:NSLocalizedString("Error", comment: "") as NSString, message: error.localizedDescription as NSString)
+        UIUtilities.showAlertWithTitleAndMessage(title:NSLocalizedString(kTitleError, comment: "") as NSString, message: error.localizedDescription as NSString)
     }
 }
 

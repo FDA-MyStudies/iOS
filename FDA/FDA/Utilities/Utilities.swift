@@ -200,7 +200,10 @@ class Utilities: NSObject {
         let specialresult = texttest2.evaluate(with: text)
         print("\(specialresult)")
         
-        if capitalresult == false || numberresult == false || specialresult == false {
+        let textCountResult = text.characters.count > 8 ? true : false
+        
+        
+        if capitalresult == false || numberresult == false || specialresult == false || textCountResult ==  false{
             return false
         }
         

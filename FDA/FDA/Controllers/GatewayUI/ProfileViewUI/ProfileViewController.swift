@@ -16,6 +16,9 @@ let kActionSheetDoneButtonTitle = "Done"
 let kActionSheetCancelButtonTitle = "Cancel"
 
 let kChangePasswordSegueIdentifier = "changePasswordSegue"
+let kErrorTitle = "Error"
+let kProfileAlertTitleText = "Profile"
+let kProfileAlertUpdatedText = "Profile updated Successfully."
 
 
 let signupCellLastIndex = 3
@@ -44,7 +47,7 @@ class ProfileViewController: UIViewController {
     @IBOutlet var editBarButtonItem:UIBarButtonItem?
     @IBOutlet var tableTopConstraint:NSLayoutConstraint?
     
-
+    
     //MARK: ViewController delegates
     
     override func viewDidLoad() {
@@ -69,12 +72,12 @@ class ProfileViewController: UIViewController {
         
     }
     
-
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         UserServices().getUserProfile(self as NMWebServiceDelegate)
-         self.setNavigationBarItem()
+        self.setNavigationBarItem()
         
     }
     
@@ -94,35 +97,16 @@ class ProfileViewController: UIViewController {
             self.buttonLeadTime?.isUserInteractionEnabled =  true
             
             self.editBarButtonItem?.title = "Save"
-            self.editBarButtonItem?.tintColor = UIColor.lightGray
+            self.editBarButtonItem?.tintColor = UIColor.black
         }
         else{
-            
-            //self.isCellEditable =  false
-            
-            //self.editBarButtonItem?.title = "Edit"
-            
-            if self.editBarButtonItem?.tintColor == UIColor.lightGray {
-                // it means no value have been changed
+            if self.validateAllFields() {
+                UserServices().updateUserProfile(self)
             }
-            else{
-                // it means value have been changed
-                
-                
-                if self.validateAllFields() {
-                     UserServices().updateUserProfile(self)
-                }
-                
-                
-                
-               
-                
-            }
-            
         }
-       
         
-       self.tableViewProfile?.reloadData()
+        
+        self.tableViewProfile?.reloadData()
     }
     
     
@@ -133,7 +117,7 @@ class ProfileViewController: UIViewController {
      */
     @IBAction func buttonActionLeadTime(_ sender: UIButton) {
         
-    
+        
         let alertView = UIAlertController(title: kLeadTimeSelectText, message: "\n\n\n\n\n\n\n\n\n\n\n", preferredStyle: UIAlertControllerStyle.actionSheet);
         
         
@@ -193,15 +177,15 @@ class ProfileViewController: UIViewController {
                                                                 
                                                                 self.sendRequestToSignOut()
                                                                 
-                                                               
+                                                                
         },
                                                              action2: {
                                                                 
         })
-    
+        
     }
     @IBAction func buttonActionDeleteAccount(_ sender: UIButton) {
-         self.performSegue(withIdentifier: kConfirmationSegueIdentifier, sender: nil)
+        self.performSegue(withIdentifier: kConfirmationSegueIdentifier, sender: nil)
     }
     
     //MARK:Utility Methods
@@ -214,7 +198,7 @@ class ProfileViewController: UIViewController {
     
     
     func sendRequestToSignOut() {
-         UserServices().logoutUser(self)
+        UserServices().logoutUser(self)
     }
     
     
@@ -226,7 +210,7 @@ class ProfileViewController: UIViewController {
     
     /*
      setInitialData sets lead Time
-    */
+     */
     
     func setInitialDate()  {
         
@@ -259,7 +243,7 @@ class ProfileViewController: UIViewController {
                 user.settings?.remoteNotifications = toggle?.isOn
             case .receiveStudyActivityReminders:
                 user.settings?.localNotifications = toggle?.isOn
-           
+                
                 
             }
             
@@ -274,8 +258,8 @@ class ProfileViewController: UIViewController {
     
     func pushToChangePassword(_ sender:UIButton)  {
         self.performSegue(withIdentifier: kChangePasswordSegueIdentifier, sender: nil)
-       
-
+        
+        
     }
     
     
@@ -284,32 +268,20 @@ class ProfileViewController: UIViewController {
      */
     func validateAllFields() -> Bool{
         
-
-         if user.firstName == "" {
-         self.showAlertMessages(textMessage: "Please enter your first name.")
-         return false
-         }else if user.lastName == ""{
-         self.showAlertMessages(textMessage: "Please enter your last name.")
-         return false
-         }else if user.emailId == "" {
-         self.showAlertMessages(textMessage: "Please enter your email address.")
-         return false
-         }else if !(Utilities.isValidEmail(testStr: user.emailId!)){
-         self.showAlertMessages(textMessage: "Please enter valid email address.")
-         return false
-         }else if user.password == ""{
-         self.showAlertMessages(textMessage: "Please enter your password.")
-         return false
-            
-         }else if (user.password?.characters.count)! < 8 && (user.password?.characters.count)! != 0  {
-         self.showAlertMessages(textMessage: "Password should have minimum of 8 characters.")
-         return false
-         }
-         
-         if Utilities.isPasswordValid(text: (user.password)!) == false  {
-         self.showAlertMessages(textMessage: "Password should have minimum of 1 special character, 1 upper case letter and 1 numeric number.")
-         return false
-         }
+        
+        if user.firstName == "" {
+            self.showAlertMessages(textMessage: kMessageFirstNameBlank)
+            return false
+        }else if user.lastName == ""{
+            self.showAlertMessages(textMessage: kMessageLastNameBlank)
+            return false
+        }else if user.emailId == "" {
+            self.showAlertMessages(textMessage: kMessageEmailBlank)
+            return false
+        }else if !(Utilities.isValidEmail(testStr: user.emailId!)){
+            self.showAlertMessages(textMessage: kMessageValidEmail)
+            return false
+        }
         
         return true
     }
@@ -354,26 +326,43 @@ extension ProfileViewController : UITableViewDataSource {
             var isSecuredEntry : Bool = false
             cell.isUserInteractionEnabled = self.isCellEditable!
             
-            if indexPath.row == TextFieldTags.Password.rawValue {
-                cell.buttonChangePassword?.isUserInteractionEnabled =  true
-                cell.buttonChangePassword?.isHidden =  false
-                cell.buttonChangePassword?.addTarget(self, action:#selector(pushToChangePassword), for: .touchUpInside)
-                 cell.textFieldValue?.isHidden = true
-                cell.isUserInteractionEnabled = true
-            }
-            
             cell.textFieldValue?.tag = indexPath.row
             cell.textFieldValue?.delegate = self
             
-            cell.populateCellData(data: tableViewData, securedText: isSecuredEntry)
+            
+            
+            var keyBoardType:UIKeyboardType? =  UIKeyboardType.default
+            let textFieldTag = TextFieldTags(rawValue:indexPath.row)!
+            
+            switch  textFieldTag {
+            case .FirstNameTag,.LastName:
+                cell.textFieldValue?.autocapitalizationType = .sentences
+                
+                isSecuredEntry = false
+            case  .Password:
+                
+                cell.buttonChangePassword?.isUserInteractionEnabled =  true
+                cell.buttonChangePassword?.isHidden =  false
+                cell.buttonChangePassword?.addTarget(self, action:#selector(pushToChangePassword), for: .touchUpInside)
+                cell.textFieldValue?.isHidden = true
+                cell.isUserInteractionEnabled = true
+                
+                isSecuredEntry = true
+            case .EmailId :
+                keyBoardType = .emailAddress
+                isSecuredEntry = false
+            default: break
+            }
+            
+            cell.populateCellData(data: tableViewData, securedText: isSecuredEntry,keyboardType: keyBoardType)
             
             cell.backgroundColor = UIColor.clear
             
             
             cell.setCellData(tag: TextFieldTags(rawValue: indexPath.row)!)
             
-          
-           
+            
+            
             
             if TextFieldTags(rawValue: indexPath.row) ==  .EmailId{
                 cell.textFieldValue?.isUserInteractionEnabled = false
@@ -387,7 +376,7 @@ extension ProfileViewController : UITableViewDataSource {
             let cell = tableView.dequeueReusableCell(withIdentifier: kProfileTableViewCellIdentifier, for: indexPath) as! ProfileTableViewCell
             cell.setCellData(dict: tableViewData)
             
-
+            
             //TODO: handle toggle Value based on user settings
             
             if (user.settings != nil) {
@@ -398,7 +387,7 @@ extension ProfileViewController : UITableViewDataSource {
             
             cell.switchToggle?.addTarget(self, action: #selector(ProfileViewController.toggleValueChanged), for: .valueChanged)
             
-              cell.isUserInteractionEnabled = self.isCellEditable!
+            cell.isUserInteractionEnabled = self.isCellEditable!
             return cell
         }
         
@@ -429,7 +418,7 @@ extension ProfileViewController : UITextFieldDelegate{
     func textFieldDidEndEditing(_ textField: UITextField) {
         print(textField.text!)
         
-       
+        
         
         switch textField.tag {
         case TextFieldTags.FirstNameTag.rawValue:
@@ -458,11 +447,6 @@ extension ProfileViewController : UITextFieldDelegate{
             break
         }
         
-        if (user.password?.characters.count)! > 0 && (user.firstName?.characters.count)! > 0 && (user.lastName?.characters.count)! > 0 && (user.emailId?.characters.count)! > 0{
-             self.editBarButtonItem?.tintColor = UIColor.black
-        }
-        
-        
     }
 }
 
@@ -485,17 +469,23 @@ extension ProfileViewController:NMWebServiceDelegate {
             self.tableViewProfile?.reloadData()
         }
         else if requestName as String ==  RegistrationMethods.updateUserProfile.description {
-            //self.tableViewProfile?.reloadData()
+         
+            UIUtilities.showAlertWithTitleAndMessage(title:NSLocalizedString(kProfileAlertTitleText, comment: "") as NSString, message: NSLocalizedString(kProfileAlertUpdatedText, comment: "") as NSString)
+            self.isCellEditable = false
+            self.editBarButtonItem?.title = "Edit"
+            self.tableViewProfile?.reloadData()
+            self.buttonLeadTime?.isUserInteractionEnabled = self.isCellEditable!
+            
         }
         
-       
+        
     }
     func failedRequest(_ manager: NetworkManager, requestName: NSString, error: NSError) {
         Logger.sharedInstance.info("requestname : \(requestName)")
-         self.removeProgressIndicator()
-        UIUtilities.showAlertWithTitleAndMessage(title:NSLocalizedString("Error", comment: "") as NSString, message: error.localizedDescription as NSString)
+        self.removeProgressIndicator()
+        UIUtilities.showAlertWithTitleAndMessage(title:NSLocalizedString(kErrorTitle, comment: "") as NSString, message: error.localizedDescription as NSString)
         
-       
+        
         
     }
 }

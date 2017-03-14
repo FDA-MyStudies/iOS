@@ -49,11 +49,6 @@ class ChangePasswordViewController: UIViewController {
         //unhide navigationbar
         self.navigationController?.setNavigationBarHidden(false, animated: true)
         
-        
-        
-        
-        
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -83,6 +78,10 @@ class ChangePasswordViewController: UIViewController {
         self.view.endEditing(true)
     }
     
+    func requestToChangePassword() {
+         UserServices().changePassword(oldPassword: self.oldPassword, newPassword: self.newPassword, delegate: self)
+    }
+    
     //MARK: Signin Button Action and validation checks
     @IBAction func submitButtonAction(_ sender: Any) {
         
@@ -98,6 +97,9 @@ class ChangePasswordViewController: UIViewController {
         else if ((self.oldPassword.characters.count) < 8 && (self.oldPassword.characters.count) != 0) || ((self.newPassword.characters.count) < 8 && self.newPassword.characters.count != 0) {
             self.showAlertMessages(textMessage: kMessageValidatePasswordCharacters)
             
+        }
+        else{
+           self.requestToChangePassword()
         }
         
     }
@@ -155,27 +157,24 @@ extension ChangePasswordViewController : UITextFieldDelegate{
     }
 }
 
-//extension ChangePasswordViewController:NMWebServiceDelegate {
-//
-//    func startedRequest(_ manager: NetworkManager, requestName: NSString) {
-//        Logger.sharedInstance.info("requestname : \(requestName)")
-//        self.addProgressIndicator()
-//    }
-//    func finishedRequest(_ manager: NetworkManager, requestName: NSString, response: AnyObject?) {
-//        Logger.sharedInstance.info("requestname : \(requestName)")
-//        self.removeProgressIndicator()
-//
-//
-//
-//
-//
-//
-//    }
-//    func failedRequest(_ manager: NetworkManager, requestName: NSString, error: NSError) {
-//        Logger.sharedInstance.info("requestname : \(requestName)")
-//
-//        self.removeProgressIndicator()
-//
-//        UIUtilities.showAlertWithTitleAndMessage(title:NSLocalizedString("Error", comment: "") as NSString, message: error.localizedDescription as NSString)
-//    }
-//}
+extension ChangePasswordViewController:NMWebServiceDelegate {
+
+    func startedRequest(_ manager: NetworkManager, requestName: NSString) {
+        Logger.sharedInstance.info("requestname : \(requestName)")
+        self.addProgressIndicator()
+    }
+    func finishedRequest(_ manager: NetworkManager, requestName: NSString, response: AnyObject?) {
+        Logger.sharedInstance.info("requestname : \(requestName)")
+        self.removeProgressIndicator()
+        
+        user.password = self.newPassword
+
+    }
+    func failedRequest(_ manager: NetworkManager, requestName: NSString, error: NSError) {
+        Logger.sharedInstance.info("requestname : \(requestName)")
+
+        self.removeProgressIndicator()
+
+        UIUtilities.showAlertWithTitleAndMessage(title:NSLocalizedString("Error", comment: "") as NSString, message: error.localizedDescription as NSString)
+    }
+}

@@ -45,7 +45,7 @@ class User{
     var participatedStudies:Array<UserStudyStatus>! = []
     var participatedActivites:Array<UserActivityStatus>! = []
     var logoutReason : LogoutReason = .user_action
-    
+    var isLoginWithTempPassword:Bool = false
     //sharedInstance
     static var currentUser = User()
     

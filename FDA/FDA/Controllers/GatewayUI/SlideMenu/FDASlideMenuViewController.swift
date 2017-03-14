@@ -10,9 +10,30 @@ import UIKit
 import SlideMenuControllerSwift
 
 
-class FDASlideMenuViewController: SlideMenuController {
+open class FDASlideMenuViewController: SlideMenuController {
     
-    override func isTagetViewController() -> Bool {
+    
+    override open func awakeFromNib() {
+        
+       
+        SlideMenuOptions.leftViewWidth = 300
+        let storyboard = UIStoryboard(name: "Gateway", bundle: nil)
+        //kStreamerDashBoard
+        let controller = storyboard.instantiateViewController(withIdentifier: "StudyListViewController")
+        self.mainViewController = controller
+        
+        
+        
+        
+         let controller2 = storyboard.instantiateViewController(withIdentifier: "LeftMenuViewController")
+        self.leftViewController = controller2
+         super.awakeFromNib()
+         //
+       
+    }
+//
+    
+    override open func isTagetViewController() -> Bool {
         if let vc = UIApplication.topViewController() {
             if vc is StudyListViewController ||
                 vc is NotificationViewController ||
@@ -25,7 +46,7 @@ class FDASlideMenuViewController: SlideMenuController {
     }
     
     
-    override func track(_ trackAction: TrackAction) {
+    override open func track(_ trackAction: TrackAction) {
         switch trackAction {
         case .leftTapOpen:
             print("TrackAction: left tap open.")
@@ -46,7 +67,34 @@ class FDASlideMenuViewController: SlideMenuController {
         }
     }
     
-    override func viewDidLoad() {
-        SlideMenuOptions.leftViewWidth = 300
+//    override open func viewDidLoad() {
+//        super.viewDidLoad()
+//        SlideMenuOptions.leftViewWidth = 300
+//    }
+    
+    
+    func navigateToHomeControllerForSignin(){
+        
+        self.performSegue(withIdentifier: "unwindToHomeSignin", sender: self)
+        
+    }
+    func navigateToHomeControllerForRegister(){
+        
+        self.performSegue(withIdentifier: "unwindToHomeRegister", sender: self)
+        
+    }
+}
+
+extension UIViewController {
+    
+    public func fdaSlideMenuController() -> FDASlideMenuViewController? {
+        var viewController: UIViewController? = self
+        while viewController != nil {
+            if viewController is FDASlideMenuViewController {
+                return viewController as? FDASlideMenuViewController
+            }
+            viewController = viewController?.parent
+        }
+        return nil;
     }
 }

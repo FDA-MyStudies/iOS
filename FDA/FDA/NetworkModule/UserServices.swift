@@ -50,6 +50,9 @@ let kStatus = "status"
 let kActivityId = "activityId"
 let kActivityVersion = "activityVersion"
 
+//MARK: Logout Api constants
+let kLogoutReason = "reason"
+let kLogoutReasonValue = "Logout"
 
 class UserServices: NSObject {
     
@@ -105,10 +108,12 @@ class UserServices: NSObject {
         self.delegate = delegate
         
         let user = User.currentUser
-        let params = [kUserId : user.userId,
-                      kUserLogoutReason: user.logoutReason.rawValue]
+        let headerParams = [kUserId : user.userId!,
+                            kUserAuthToken: user.authToken] as Dictionary<String, String>
+        let params = [kUserLogoutReason: user.logoutReason.rawValue]
+        
         let method = RegistrationMethods.logout.method
-        self.sendRequestWith(method:method, params: params, headers: nil)
+        self.sendRequestWith(method:method, params: params, headers: headerParams)
         
     }
     
@@ -117,10 +122,9 @@ class UserServices: NSObject {
         self.delegate = delegate
         
         let user = User.currentUser
-        let params = [kUserId : user.userId,
-                      kUserAuthToken: user.authToken]
+        let headerParams = [kUserAuthToken: user.authToken] as Dictionary<String,String>
         let method = RegistrationMethods.deleteAccount.method
-        self.sendRequestWith(method:method, params: nil, headers: nil)
+        self.sendRequestWith(method:method, params: nil, headers: headerParams)
     }
     
     func forgotPassword(_ delegate:NMWebServiceDelegate){
@@ -128,11 +132,11 @@ class UserServices: NSObject {
         self.delegate = delegate
         
         let user = User.currentUser
-        let headerParams = [kUserEmailId : user.emailId!]
+        let params = [kUserEmailId : user.emailId!]
         
         let method = RegistrationMethods.forgotPassword.method
         
-        self.sendRequestWith(method:method, params: nil, headers: headerParams)
+        self.sendRequestWith(method:method, params: params, headers:nil )
     }
     
     func changePassword(oldPassword:String,newPassword:String,delegate:NMWebServiceDelegate){
@@ -141,12 +145,14 @@ class UserServices: NSObject {
         
         let user = User.currentUser
         
+        let headerParams = [kUserId : user.userId!,
+                            kUserAuthToken: user.authToken] as Dictionary<String, String>
+        
         let params = [kUserOldPassword:oldPassword,
-                      kUserNewPassword:newPassword,
-                      kUserId : user.userId]
+                      kUserNewPassword:newPassword]
         
         let method = RegistrationMethods.changePassword.method
-        self.sendRequestWith(method:method, params: params, headers: nil)
+        self.sendRequestWith(method:method, params: params, headers: headerParams)
     }
     
     func getUserProfile(_ delegate:NMWebServiceDelegate){
@@ -155,7 +161,8 @@ class UserServices: NSObject {
         
         let user = User.currentUser
         
-        let headerParams = [kUserId : user.userId!]
+        let headerParams = [kUserId : user.userId!,
+                            kUserAuthToken: user.authToken] as Dictionary<String, String>
         
         let method = RegistrationMethods.userProfile.method
         
@@ -167,6 +174,10 @@ class UserServices: NSObject {
         self.delegate = delegate
         
         let user = User.currentUser
+        
+        let headerParams = [kUserId : user.userId!,
+                            kUserAuthToken: user.authToken] as Dictionary<String, String>
+
         
         let profile = [kUserFirstName : user.firstName!,
                        kUserLastName : user.lastName!]
@@ -182,14 +193,13 @@ class UserServices: NSObject {
         let info = [kAppVersion : version,
                     kOSType :"ios"]
         
-        let params = [kUserId : user.userId! as String,
-                      kUserProfile:profile,
+        let params = [kUserProfile:profile,
                       kUserSettings:settings,
                       kBasicInfo:info] as [String : Any]
         
         let method = RegistrationMethods.updateUserProfile.method
         
-        self.sendRequestWith(method:method, params: params, headers: nil)
+        self.sendRequestWith(method:method, params: params, headers: headerParams)
     }
     
     func getUserPreference(_ delegate:NMWebServiceDelegate){
@@ -197,7 +207,8 @@ class UserServices: NSObject {
         self.delegate = delegate
         
         let user = User.currentUser
-        let headerParams = [kUserId : user.userId!]
+        let headerParams = [kUserId : user.userId!,
+                            kUserAuthToken: user.authToken] as Dictionary<String, String>
         
         let method = RegistrationMethods.userPreferences.method
         

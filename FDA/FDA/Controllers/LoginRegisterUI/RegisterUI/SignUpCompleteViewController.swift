@@ -13,6 +13,8 @@ import UIKit
 class SignUpCompleteViewController : UIViewController{
     
     @IBOutlet var buttonNext : UIButton?
+    var shouldCreateMenu:Bool = true
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -51,7 +53,16 @@ class SignUpCompleteViewController : UIViewController{
     
     func navigateToGatewayDashboard(){
         
-        self.createMenuView()
+        if shouldCreateMenu {
+            
+            self.createMenuView()
+        }
+        else {
+            let leftController = slideMenuController()?.leftViewController as! LeftMenuViewController
+            leftController.createLeftmenuItems()
+            leftController.changeViewController(.studyList)
+        }
+        
     }
     func createMenuView() {
         

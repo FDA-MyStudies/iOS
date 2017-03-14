@@ -10,6 +10,13 @@ import Foundation
 import UIKit
 import IQKeyboardManagerSwift
 
+enum SignUpLoadFrom:Int{
+    case gatewayOverview
+    case login
+    case menu
+}
+
+
 class SignUpViewController : UIViewController{
     
     var tableViewRowDetails : NSMutableArray?
@@ -23,6 +30,7 @@ class SignUpViewController : UIViewController{
     @IBOutlet var buttonAgree : UIButton?
     @IBOutlet var labelTermsAndConditions : FRHyperLabel?
     @IBOutlet var termsAndCondition:LinkTextView?
+    var viewLoadFrom:SignUpLoadFrom = .menu
     
     
     override func viewDidLoad() {
@@ -48,12 +56,17 @@ class SignUpViewController : UIViewController{
         //unhide navigationbar
         self.navigationController?.setNavigationBarHidden(false, animated: true)
         
-        self.addBackBarButton()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        if viewLoadFrom == .gatewayOverview || viewLoadFrom == .login {
+            self.addBackBarButton()
+        }
+        else {
+            self.setNavigationBarItem()
+        }
         
     }
     
@@ -198,6 +211,18 @@ class SignUpViewController : UIViewController{
         }
     }
     
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        if let verificationController = segue.destination as? VerificationViewController {
+            
+            if viewLoadFrom == .menu {
+                verificationController.shouldCreateMenu = false
+            }
+           
+            
+        }
+    }
     
     func navigateToVerificationController(){
         

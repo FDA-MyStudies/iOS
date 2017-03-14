@@ -98,6 +98,18 @@ class HomeViewController : UIViewController{
             pageViewController.pageViewDelegate = self
             pageViewController.overview = Gateway.instance.overview!
         }
+        
+        if let signInController = segue.destination as? SignInViewController {
+            signInController.viewLoadFrom = .gatewayOverview
+          
+        }
+        
+        if let signUpController = segue.destination as? SignUpViewController {
+            signUpController.viewLoadFrom = .gatewayOverview
+            
+        }
+        
+        
     }
     
     //Fired when the user taps on the pageControl to change its current page (Commented as this is not working)

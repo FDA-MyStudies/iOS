@@ -9,10 +9,13 @@
 import Foundation
 import UIKit
 
+
 class VerificationViewController : UIViewController{
     
     @IBOutlet var buttonContinue : UIButton?
     @IBOutlet var labelVerificationMessage : UILabel?
+    var shouldCreateMenu:Bool = true
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,6 +51,13 @@ class VerificationViewController : UIViewController{
         UserServices().confirmUserRegistration(self)
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        if let singupCompletion = segue.destination as? SignUpCompleteViewController {
+           
+            singupCompletion.shouldCreateMenu = self.shouldCreateMenu
+        }
+    }
     func navigateToSignUpCompletionStep(){
         
         self.performSegue(withIdentifier: "signupCompletionSegue", sender: nil)
@@ -65,6 +75,7 @@ extension VerificationViewController:NMWebServiceDelegate {
         
         self.removeProgressIndicator()
         if User.currentUser.verified == true{
+            
             self.navigateToSignUpCompletionStep()
         }
         else {

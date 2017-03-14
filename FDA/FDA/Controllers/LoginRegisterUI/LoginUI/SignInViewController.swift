@@ -11,6 +11,12 @@ import UIKit
 import IQKeyboardManagerSwift
 import SlideMenuControllerSwift
 
+
+enum SignInLoadFrom:Int{
+    case gatewayOverview
+    case menu
+}
+
 class SignInViewController : UIViewController{
     
     var tableViewRowDetails : NSMutableArray?
@@ -19,7 +25,7 @@ class SignInViewController : UIViewController{
     @IBOutlet var buttonSignIn : UIButton?
     
     @IBOutlet var buttonSignUp: UIButton?
-    
+    var viewLoadFrom:SignInLoadFrom = .menu
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -60,7 +66,13 @@ class SignInViewController : UIViewController{
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        self.addBackBarButton()
+        if viewLoadFrom == .gatewayOverview {
+            self.addBackBarButton()
+        }
+        else {
+            self.setNavigationBarItem()
+        }
+        
         
     }
     
@@ -71,7 +83,7 @@ class SignInViewController : UIViewController{
     }
     override func viewWillDisappear(_ animated: Bool) {
         //hide navigationbar
-        self.navigationController?.setNavigationBarHidden(true, animated: true)
+       // self.navigationController?.setNavigationBarHidden(true, animated: true)
     }
     
     //Used to show the alert using Utility
@@ -103,6 +115,18 @@ class SignInViewController : UIViewController{
             UserServices().loginUser(self)
             
         }
+    }
+    
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+       
+        
+        if let signUpController = segue.destination as? SignUpViewController {
+            signUpController.viewLoadFrom = .gatewayOverview
+            
+        }
+        
+        
     }
     
     func navigateToGatewayDashboard(){
@@ -195,7 +219,16 @@ extension SignInViewController:NMWebServiceDelegate {
         self.removeProgressIndicator()
         
         if User.currentUser.verified == true{
-             self.navigateToGatewayDashboard()
+            if viewLoadFrom == .gatewayOverview {
+                self.navigateToGatewayDashboard()
+            }
+            else {
+                
+                let leftController = slideMenuController()?.leftViewController as! LeftMenuViewController
+                leftController.createLeftmenuItems()
+                leftController.changeViewController(.studyList)
+            }
+            
         }
         else {
             

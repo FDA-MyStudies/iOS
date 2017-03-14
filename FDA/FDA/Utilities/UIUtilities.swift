@@ -230,6 +230,18 @@ class UIUtilities: NSObject {
         viewControllerUsed.present(alert, animated:true, completion: nil)
     }
     
+    class func showAlertMessageWithActionHandler(_ title : String,message : String,buttonTitle : String ,viewControllerUsed : UIViewController, action:@escaping AlertAction){
+        
+        let alert = UIAlertController(title: title, message: message, preferredStyle:UIAlertControllerStyle.alert)
+        
+        alert.addAction(UIAlertAction(title: buttonTitle, style: UIAlertActionStyle.default, handler: { (alertAction) in
+            action()
+        }))
+        
+        
+        viewControllerUsed.present(alert, animated:true, completion: nil)
+    }
+    
     class func showAlertMessage(_ errorTitle : String,errorMessage : String,errorAlertActionTitle : String ,viewControllerUsed : UIViewController?){
         let alert = UIAlertController(title: errorTitle, message: errorMessage, preferredStyle:UIAlertControllerStyle.alert)
         alert.addAction(UIAlertAction(title: errorAlertActionTitle, style: UIAlertActionStyle.default, handler: nil))

@@ -26,9 +26,11 @@ class SecondGatewayOverviewViewController : UIViewController{
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        
         super.viewWillAppear(animated)
         labelHeadingText?.text = overviewSectionDetail.title
-        
+        labelDescriptionText?.text = overviewSectionDetail.text
+        imageViewBackgroundImage?.image = UIImage.init(named: overviewSectionDetail.imageURL!)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -41,5 +43,16 @@ class SecondGatewayOverviewViewController : UIViewController{
     @IBAction func getStartedButtonClicked(_ sender: Any){
         
         
+        self.createMenuView()
     }
-}
+    
+    
+    func createMenuView() {
+        
+        let storyboard = UIStoryboard(name: "Gateway", bundle: nil)
+        
+        let fda = storyboard.instantiateViewController(withIdentifier: "FDASlideMenuViewController") as! FDASlideMenuViewController
+        fda.automaticallyAdjustsScrollViewInsets = true
+        self.navigationController?.pushViewController(fda, animated: true)
+        
+    }}

@@ -58,18 +58,11 @@ class SplashViewController: UIViewController {
 
     func createMenuView() {
         
-        // create viewController code...
         let storyboard = UIStoryboard(name: "Gateway", bundle: nil)
         
-        let mainViewController = storyboard.instantiateViewController(withIdentifier: "StudyListViewController") as! UINavigationController
-        let leftViewController = storyboard.instantiateViewController(withIdentifier: "LeftMenuViewController") as! LeftMenuViewController
-        
-        leftViewController.studyListViewController = mainViewController
-        
-        let slideMenuController = FDASlideMenuViewController(mainViewController:mainViewController, leftMenuViewController: leftViewController)
-        
-        slideMenuController.automaticallyAdjustsScrollViewInsets = true
-        self.navigationController?.pushViewController(slideMenuController, animated: true)
+        let fda = storyboard.instantiateViewController(withIdentifier: "FDASlideMenuViewController") as! FDASlideMenuViewController
+        fda.automaticallyAdjustsScrollViewInsets = true
+        self.navigationController?.pushViewController(fda, animated: true)
     }
     /*
     // MARK: - Navigation

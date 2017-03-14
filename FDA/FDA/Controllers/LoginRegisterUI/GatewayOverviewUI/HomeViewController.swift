@@ -37,7 +37,7 @@ class HomeViewController : UIViewController{
         super.viewDidLoad()
     
        // self.loadTestData()
-        self.automaticallyAdjustsScrollViewInsets = false;
+        self.automaticallyAdjustsScrollViewInsets = false
         //Added to change next screen
         pageControlView?.addTarget(self, action:#selector(HomeViewController.didChangePageControlValue), for: .valueChanged)
         
@@ -108,7 +108,9 @@ class HomeViewController : UIViewController{
     @IBAction func linkButtonAction(_ sender: Any) {
        
         let loginStoryboard = UIStoryboard.init(name: "Main", bundle:Bundle.main)
-        let webViewController = loginStoryboard.instantiateViewController(withIdentifier:"WebViewController")
+        let webViewController = loginStoryboard.instantiateViewController(withIdentifier:"WebViewController") as! UINavigationController
+        let webView = webViewController.viewControllers[0] as! WebViewController
+        webView.requestLink = "http://www.fda.gov"
         self.navigationController?.present(webViewController, animated: true, completion: nil)
     }
     

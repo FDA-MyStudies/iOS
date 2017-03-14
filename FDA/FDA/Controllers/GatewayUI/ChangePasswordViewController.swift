@@ -170,7 +170,13 @@ extension ChangePasswordViewController:NMWebServiceDelegate {
         Logger.sharedInstance.info("requestname : \(requestName)")
         self.removeProgressIndicator()
         
-        user.password = self.newPassword
+        //user.password = self.newPassword
+        
+        UIUtilities.showAlertMessageWithActionHandler(NSLocalizedString(kTitleMessage, comment: ""), message: NSLocalizedString(kForgotPasswordResponseMessage, comment: "") , buttonTitle: NSLocalizedString(kTitleOk, comment: ""), viewControllerUsed: self) {
+            
+            _ = self.navigationController?.popViewController(animated: true)
+            
+        }
 
     }
     func failedRequest(_ manager: NetworkManager, requestName: NSString, error: NSError) {

@@ -53,8 +53,8 @@ class LeftMenuViewController : UIViewController, LeftMenuProtocol {
     var profileviewController: UIViewController!
     var nonMenuViewController: UIViewController!
     
-    var signInViewController:UIViewController!
-     var signUpViewController:UIViewController!
+    var signInViewController:UINavigationController!
+     var signUpViewController:UINavigationController!
     
     //var imageHeaderView: ImageHeaderView!
     
@@ -66,7 +66,7 @@ class LeftMenuViewController : UIViewController, LeftMenuProtocol {
         super.viewDidLoad()
         
         
-        self.setInitialData()
+        self.createLeftmenuItems()
         
         self.tableView.separatorColor = UIColor(red: 224/255, green: 224/255, blue: 224/255, alpha: 1.0)
         
@@ -83,10 +83,12 @@ class LeftMenuViewController : UIViewController, LeftMenuProtocol {
         self.profileviewController = storyboard.instantiateViewController(withIdentifier:  String(describing: ProfileViewController.classForCoder())) as! UINavigationController
         
         
-        //self.signInViewController = loginStoryBoard.instantiateViewController(withIdentifier:  String(describing: SignInViewController.classForCoder())) as! UINavigationController
+        let signInController = loginStoryBoard.instantiateViewController(withIdentifier:  String(describing: SignInViewController.classForCoder())) as! SignInViewController
+        self.signInViewController = UINavigationController(rootViewController: signInController)
         
-        //self.signUpViewController = loginStoryBoard.instantiateViewController(withIdentifier:  String(describing: SignUpViewController.classForCoder())) as! UINavigationController
-
+        
+        let signUpController = loginStoryBoard.instantiateViewController(withIdentifier:  String(describing: SignUpViewController.classForCoder())) as! SignUpViewController
+        self.signUpViewController = UINavigationController(rootViewController: signUpController)
         
         
         
@@ -103,17 +105,51 @@ class LeftMenuViewController : UIViewController, LeftMenuProtocol {
        // self.view.addSubview(self.imageHeaderView)
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+         //self.setInitialData()
+    }
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
     }
     
-//    override func viewDidLayoutSubviews() {
-//        super.viewDidLayoutSubviews()
-//        self.imageHeaderView.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: 160)
-//        self.view.layoutIfNeeded()
-//    }
-    
-    
+    func createLeftmenuItems(){
+        
+        let user = User.currentUser
+        
+        menus = [ ["menuTitle":"Home",
+                   "iconName":"home_menu1"],
+                  
+                  ["menuTitle":"Resources",
+                   "iconName":"resources_menu1"],
+        ]
+        
+        if user.userType == .FDAUser {
+            menus.append(["menuTitle":"Profile",
+                          "iconName":"profile_menu1"])
+            self.tableView.tableFooterView?.isHidden = false
+        }
+        else{
+            menus.append(["menuTitle":"Sign In",
+                          "iconName":"signin_menu1"])
+            
+            menus.append(["menuTitle":"New User?",
+                          "iconName":"newuser_menu1",
+                          "subTitle":"Sign up"])
+            self.tableView.tableFooterView?.isHidden = true
+        }
+        
+        
+        // Setting proportion height of the header and footer view
+        let height = UIScreen.main.bounds.size.height  * (220.0 / 667.0) //calculate new height
+        self.tableView.tableHeaderView?.frame.size = CGSize(width: self.tableView.tableHeaderView!.frame.size.width, height: height)
+        self.tableView.tableFooterView?.frame.size = CGSize(width: self.tableView.tableFooterView!.frame.size.width, height: height)
+        self.tableView.frame.size = CGSize(width:self.tableView.frame.width, height:UIScreen.main.bounds.size.height)
+        
+        self.tableView.reloadData()
+        
+    }
+
     func setInitialData()  {
         
         let user = User.currentUser
@@ -139,6 +175,8 @@ class LeftMenuViewController : UIViewController, LeftMenuProtocol {
          self.tableView.tableFooterView?.frame.size = CGSize(width: self.tableView.tableFooterView!.frame.size.width, height: height)
         self.tableView.frame.size = CGSize(width:self.tableView.frame.width, height:UIScreen.main.bounds.size.height)
         
+        self.tableView.reloadData()
+        
     }
     
     
@@ -157,11 +195,12 @@ class LeftMenuViewController : UIViewController, LeftMenuProtocol {
             }
             else{
                // go to signin screen
-               fdaSlideMenuController()?.navigateToHomeControllerForSignin()
+               //fdaSlideMenuController()?.navigateToHomeControllerForSignin()
+                self.slideMenuController()?.changeMainViewController(self.signInViewController, close: true)
             }
            
         case .signup:
-            fdaSlideMenuController()?.navigateToHomeControllerForRegister()
+            self.slideMenuController()?.changeMainViewController(self.signUpViewController, close: true)
             
             
         }

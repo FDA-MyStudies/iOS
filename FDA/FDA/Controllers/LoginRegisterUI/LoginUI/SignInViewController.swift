@@ -83,7 +83,10 @@ class SignInViewController : UIViewController{
     }
     override func viewWillDisappear(_ animated: Bool) {
         //hide navigationbar
-       // self.navigationController?.setNavigationBarHidden(true, animated: true)
+        if viewLoadFrom == .gatewayOverview {
+             self.navigationController?.setNavigationBarHidden(true, animated: true)
+        }
+       
     }
     
     //Used to show the alert using Utility
@@ -132,6 +135,20 @@ class SignInViewController : UIViewController{
     func navigateToGatewayDashboard(){
         
         self.createMenuView()
+    }
+    
+    func navigateToChangePassword(){
+        
+        let storyboard = UIStoryboard(name: "Gateway", bundle: nil)
+        
+        let changePassword = storyboard.instantiateViewController(withIdentifier: "ChangePasswordViewController") as! ChangePasswordViewController
+        if viewLoadFrom == .menu {
+            changePassword.viewLoadFrom = .menu_login
+        }
+        else {
+            changePassword.viewLoadFrom = .login
+        }
+        self.navigationController?.pushViewController(changePassword, animated: true)
     }
     
     func navigateToVerifyController(){
@@ -218,16 +235,25 @@ extension SignInViewController:NMWebServiceDelegate {
         Logger.sharedInstance.info("requestname : \(requestName)")
         self.removeProgressIndicator()
         
-        if User.currentUser.verified == true{
-            if viewLoadFrom == .gatewayOverview {
-                self.navigateToGatewayDashboard()
+        if User.currentUser.verified == true {
+            
+            if User.currentUser.isLoginWithTempPassword {
+                self.navigateToChangePassword()
             }
             else {
                 
-                let leftController = slideMenuController()?.leftViewController as! LeftMenuViewController
-                leftController.createLeftmenuItems()
-                leftController.changeViewController(.studyList)
+                if viewLoadFrom == .gatewayOverview {
+                    self.navigateToGatewayDashboard()
+                }
+                else {
+                    
+                    let leftController = slideMenuController()?.leftViewController as! LeftMenuViewController
+                    leftController.createLeftmenuItems()
+                    leftController.changeViewController(.studyList)
+                }
             }
+            
+            
             
         }
         else {

@@ -256,6 +256,15 @@ class ProfileViewController: UIViewController {
         
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        if let changePassword = segue.destination as? ChangePasswordViewController {
+            changePassword.viewLoadFrom = .profile
+            
+        }
+      
+    }
+    
     func pushToChangePassword(_ sender:UIButton)  {
         self.performSegue(withIdentifier: kChangePasswordSegueIdentifier, sender: nil)
         

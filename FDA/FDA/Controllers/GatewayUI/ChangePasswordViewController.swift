@@ -17,6 +17,12 @@ enum CPTextFeildTags : Int {
     case confirmPassword
 }
 
+enum ChangePasswordLoadFrom:Int{
+    case login
+    case menu_login
+    case profile
+}
+
 class ChangePasswordViewController: UIViewController {
     
     var tableViewRowDetails : NSMutableArray?
@@ -26,6 +32,7 @@ class ChangePasswordViewController: UIViewController {
     @IBOutlet var tableView : UITableView?
     @IBOutlet var buttonSubmit : UIButton?
     
+    var viewLoadFrom:ChangePasswordLoadFrom = .profile
     
     
     override func viewDidLoad() {
@@ -66,7 +73,10 @@ class ChangePasswordViewController: UIViewController {
     }
     override func viewWillDisappear(_ animated: Bool) {
         //hide navigationbar
-        //self.navigationController?.setNavigationBarHidden(true, animated: true)
+        if viewLoadFrom == .login {
+            self.navigationController?.setNavigationBarHidden(true, animated: true)
+        }
+        
     }
     
     //Used to show the alert using Utility
@@ -103,6 +113,15 @@ class ChangePasswordViewController: UIViewController {
            self.requestToChangePassword()
         }
         
+    }
+    
+    func createMenuView() {
+        
+        let storyboard = UIStoryboard(name: "Gateway", bundle: nil)
+        
+        let fda = storyboard.instantiateViewController(withIdentifier: "FDASlideMenuViewController") as! FDASlideMenuViewController
+        fda.automaticallyAdjustsScrollViewInsets = true
+        self.navigationController?.pushViewController(fda, animated: true)
     }
     
 }
@@ -170,13 +189,28 @@ extension ChangePasswordViewController:NMWebServiceDelegate {
         Logger.sharedInstance.info("requestname : \(requestName)")
         self.removeProgressIndicator()
         
-        //user.password = self.newPassword
-        
-        UIUtilities.showAlertMessageWithActionHandler(NSLocalizedString(kTitleMessage, comment: ""), message: NSLocalizedString(kForgotPasswordResponseMessage, comment: "") , buttonTitle: NSLocalizedString(kTitleOk, comment: ""), viewControllerUsed: self) {
+        if viewLoadFrom == .profile {
             
-            _ = self.navigationController?.popViewController(animated: true)
-            
+            UIUtilities.showAlertMessageWithActionHandler(NSLocalizedString(kTitleMessage, comment: ""), message: NSLocalizedString(kForgotPasswordResponseMessage, comment: "") , buttonTitle: NSLocalizedString(kTitleOk, comment: ""), viewControllerUsed: self) {
+                
+                _ = self.navigationController?.popViewController(animated: true)
+                
+            }
         }
+        else if viewLoadFrom == .menu_login {
+            // do not create menu
+            
+            let leftController = slideMenuController()?.leftViewController as! LeftMenuViewController
+            leftController.createLeftmenuItems()
+            leftController.changeViewController(.studyList)
+        }
+        else if viewLoadFrom == .login {
+            //create menu
+            
+            self.createMenuView()
+        }
+        
+        
 
     }
     func failedRequest(_ manager: NetworkManager, requestName: NSString, error: NSError) {

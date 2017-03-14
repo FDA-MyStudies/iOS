@@ -1435,7 +1435,7 @@
         <!--Change Password View Controller-->
         <scene sceneID="nLa-qL-V7F">
             <objects>
-                <viewController storyboardIdentifier="SignInViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="8HM-Dc-eDB" customClass="ChangePasswordViewController" customModule="FDA" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ChangePasswordViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="8HM-Dc-eDB" customClass="ChangePasswordViewController" customModule="FDA" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="nGe-9t-XjL"/>
                         <viewControllerLayoutGuide type="bottom" id="oeM-5m-cuo"/>

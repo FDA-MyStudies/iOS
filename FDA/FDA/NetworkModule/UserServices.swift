@@ -34,8 +34,9 @@ let kActivites = "activities"
 let kConsent = "consent"
 let kUserEligibilityStatus = "eligbibilityStatus"
 let kUserConsentStatus =  "consentStatus"
-let kUserOldPassword = "oldPassword"
+let kUserOldPassword = "currentPassword"
 let kUserNewPassword = "newPassword"
+let kUserIsTempPassword = "isTempPassword"
 
 //MARK: Settings Api Constants
 let kSettingsRemoteNotifications = "remoteNotifications"
@@ -145,8 +146,7 @@ class UserServices: NSObject {
         
         let user = User.currentUser
         
-        let headerParams = [kUserId : user.userId!,
-                            kUserAuthToken: user.authToken] as Dictionary<String, String>
+        let headerParams = [kUserId : user.userId!]
         
         let params = [kUserOldPassword:oldPassword,
                       kUserNewPassword:newPassword]
@@ -161,8 +161,7 @@ class UserServices: NSObject {
         
         let user = User.currentUser
         
-        let headerParams = [kUserId : user.userId!,
-                            kUserAuthToken: user.authToken] as Dictionary<String, String>
+        let headerParams = [kUserId : user.userId!]
         
         let method = RegistrationMethods.userProfile.method
         
@@ -175,8 +174,7 @@ class UserServices: NSObject {
         
         let user = User.currentUser
         
-        let headerParams = [kUserId : user.userId!,
-                            kUserAuthToken: user.authToken] as Dictionary<String, String>
+        let headerParams = [kUserId : user.userId!]
 
         
         let profile = [kUserFirstName : user.firstName!,
@@ -309,9 +307,14 @@ class UserServices: NSObject {
         user.verified   = response[kUserVerified] as! Bool
         user.authToken  = response[kUserAuthToken] as! String
         
+        if let isTempPassword = response[kUserIsTempPassword] as? Bool {
+            user.isLoginWithTempPassword = isTempPassword
+        }
         
        
-        if user.verified! {
+        
+       
+        if user.verified! && !user.isLoginWithTempPassword {
             
             user.userType = UserType.FDAUser
             
@@ -331,25 +334,28 @@ class UserServices: NSObject {
         user.verified   = response[kUserVerified] as! Bool
         user.authToken  = response[kUserAuthToken] as! String
         
-        
-       
     }
     
     func handleConfirmRegistrationResponse(response:Dictionary<String, Any>){
         
         let user = User.currentUser
-        user.verified   = response[kUserVerified] as! Bool
-        
-        if user.verified! {
+        if let varified = response[kUserVerified] as? Bool {
             
-            user.userType = UserType.FDAUser
-            
-            //TEMP : Need to save these values in Realm
-            let ud = UserDefaults.standard
-            ud.set(user.authToken, forKey:kUserAuthToken)
-            ud.set(user.userId!, forKey: kUserId)
-            ud.synchronize()
+            user.verified = varified
+            if user.verified! {
+                
+                user.userType = UserType.FDAUser
+                
+                //TEMP : Need to save these values in Realm
+                let ud = UserDefaults.standard
+                ud.set(user.authToken, forKey:kUserAuthToken)
+                ud.set(user.userId!, forKey: kUserId)
+                ud.synchronize()
+            }
         }
+       
+        
+       
         
     }
     
@@ -379,6 +385,17 @@ class UserServices: NSObject {
     func handleChangePasswordResponse(response:Dictionary<String, Any>){
         //INCOMPLETE
         
+        let user = User.currentUser
+        if user.verified! {
+            
+            user.userType = UserType.FDAUser
+            
+            //TEMP : Need to save these values in Realm
+            let ud = UserDefaults.standard
+            ud.set(user.authToken, forKey:kUserAuthToken)
+            ud.set(user.userId!, forKey: kUserId)
+            ud.synchronize()
+        }
         
     }
     

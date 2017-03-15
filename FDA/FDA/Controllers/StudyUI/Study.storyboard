@@ -233,6 +233,7 @@
                         <outlet property="buttonJoinStudy" destination="5NQ-r5-mSz" id="73u-30-z4z"/>
                         <outlet property="buttonVisitWebsite" destination="zeM-Up-qJV" id="ATr-Jq-lBc"/>
                         <outlet property="buttonWatchVideo" destination="G9Y-IJ-Woi" id="yK6-5i-uQ8"/>
+                        <outlet property="imageViewStudy" destination="d2e-7Y-Ifc" id="47I-kg-kwD"/>
                         <outlet property="labelDescription" destination="p79-PH-HnS" id="y7b-ds-QJQ"/>
                         <outlet property="labelTitle" destination="w0M-Dz-kSR" id="Qkd-Oc-wCb"/>
                     </connections>
@@ -377,6 +378,7 @@
                         <outlet property="buttonJoinStudy" destination="lIT-J9-U7S" id="js6-wl-cso"/>
                         <outlet property="buttonLearnMore" destination="mud-v9-9iS" id="3Co-DD-1zf"/>
                         <outlet property="buttonVisitWebsite" destination="wIC-kn-yNP" id="Laq-iT-6dS"/>
+                        <outlet property="imageViewStudy" destination="yw2-aH-SLQ" id="QEU-LZ-zOP"/>
                         <outlet property="labelDescription" destination="cQm-5R-c9C" id="SNl-aY-2nJ"/>
                         <outlet property="labelTitle" destination="3EU-2E-MZV" id="3vW-F5-GXh"/>
                     </connections>

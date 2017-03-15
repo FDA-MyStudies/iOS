@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 import MediaPlayer
+import SDWebImage
 
 class StudyOverviewViewControllerFirst : UIViewController{
     
@@ -17,6 +18,7 @@ class StudyOverviewViewControllerFirst : UIViewController{
     @IBOutlet var buttonVisitWebsite : UIButton?
     @IBOutlet var labelTitle : UILabel?
     @IBOutlet var labelDescription : UILabel?
+    @IBOutlet var imageViewStudy : UIImageView?
     
     
     var overviewSectionDetail : OverviewSection!
@@ -28,6 +30,10 @@ class StudyOverviewViewControllerFirst : UIViewController{
         
         //Used to set border color for bottom view
         buttonJoinStudy?.layer.borderColor = kUicolorForButtonBackground
+        if overviewSectionDetail.imageURL != nil {
+            let url = URL.init(string:overviewSectionDetail.imageURL!)
+            imageViewStudy?.sd_setImage(with: url, placeholderImage:#imageLiteral(resourceName: "OverViewBg"))
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {

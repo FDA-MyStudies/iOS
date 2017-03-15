@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import SDWebImage
 
 class StudyOverviewViewControllerSecond : UIViewController{
     
@@ -16,6 +17,7 @@ class StudyOverviewViewControllerSecond : UIViewController{
     @IBOutlet var buttonVisitWebsite : UIButton?
     @IBOutlet var labelTitle : UILabel?
     @IBOutlet var labelDescription : UILabel?
+    @IBOutlet var imageViewStudy : UIImageView?
     
     var overviewSectionDetail : OverviewSection!
     
@@ -24,7 +26,10 @@ class StudyOverviewViewControllerSecond : UIViewController{
         
         //Used to set border color for bottom view
         buttonJoinStudy?.layer.borderColor = kUicolorForButtonBackground
-        
+        if overviewSectionDetail.imageURL != nil {
+            let url = URL.init(string:overviewSectionDetail.imageURL!)
+            imageViewStudy?.sd_setImage(with: url, placeholderImage:#imageLiteral(resourceName: "OverViewBg"))
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {

@@ -22,3 +22,20 @@ extension String {
         return Data(self.utf8).base64EncodedString()
     }
 }
+
+
+extension String {
+    var isAlphanumeric: Bool {
+        
+        
+        if (Int(self) != nil){
+            return false
+        }
+        else if !self.isEmpty && range(of: "[^a-zA-Z]", options: .regularExpression) == nil{
+           return true
+        }
+        else{
+        return !isEmpty && range(of: "[^a-zA-Z0-9]", options: .regularExpression) == nil
+        }
+    }
+}

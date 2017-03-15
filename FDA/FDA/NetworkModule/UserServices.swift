@@ -36,7 +36,7 @@ let kUserEligibilityStatus = "eligbibilityStatus"
 let kUserConsentStatus =  "consentStatus"
 let kUserOldPassword = "currentPassword"
 let kUserNewPassword = "newPassword"
-let kUserIsTempPassword = "isTempPassword"
+let kUserIsTempPassword = "resetPassword"
 
 //MARK: Settings Api Constants
 let kSettingsRemoteNotifications = "remoteNotifications"
@@ -108,9 +108,8 @@ class UserServices: NSObject {
         
         self.delegate = delegate
         
-        let user = User.currentUser
-        let headerParams = [kUserId : user.userId!,
-                            kUserAuthToken: user.authToken] as Dictionary<String, String>
+        let user = User.currentUser!
+        let headerParams = [kUserId : user.userId!]
         let params = [kUserLogoutReason: user.logoutReason.rawValue]
         
         let method = RegistrationMethods.logout.method

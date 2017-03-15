@@ -232,6 +232,14 @@ extension StudyListViewController:NMWebServiceDelegate {
         
         self.removeProgressIndicator()
         
-        UIUtilities.showAlertWithTitleAndMessage(title:NSLocalizedString("Error", comment: "") as NSString, message: error.localizedDescription as NSString)
+        if error.code == 401 { //unauthorized
+            UIUtilities.showAlertMessageWithActionHandler(kErrorTitle, message: error.localizedDescription, buttonTitle: kTitleOk, viewControllerUsed: self, action: {
+                self.fdaSlideMenuController()?.navigateToHomeAfterUnauthorizedAccess()
+            })
+        }
+        else {
+            
+            UIUtilities.showAlertWithTitleAndMessage(title:NSLocalizedString(kErrorTitle, comment: "") as NSString, message: error.localizedDescription as NSString)
+        }
     }
 }

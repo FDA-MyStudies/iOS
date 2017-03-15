@@ -77,6 +77,19 @@ open class FDASlideMenuViewController: SlideMenuController {
         _ = self.navigationController?.popToRootViewController(animated: true)
     }
     
+    func navigateToHomeAfterUnauthorizedAccess(){
+        
+        User.resetCurrentUser()
+        //TEMP
+        let ud = UserDefaults.standard
+        ud.removeObject(forKey: kUserAuthToken)
+        ud.removeObject(forKey: kUserId)
+        ud.synchronize()
+        
+        self.leftViewController?.view.isHidden = true
+        _ = self.navigationController?.popToRootViewController(animated: true)
+    }
+    
     func navigateToHomeControllerForSignin(){
         
         self.performSegue(withIdentifier: "unwindToHomeSignin", sender: self)

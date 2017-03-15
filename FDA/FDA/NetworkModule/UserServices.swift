@@ -129,12 +129,12 @@ class UserServices: NSObject {
         self.sendRequestWith(method:method, params: nil, headers: headerParams)
     }
     
-    func forgotPassword(_ delegate:NMWebServiceDelegate){
+    func forgotPassword(email:String, delegate:NMWebServiceDelegate){
         
         self.delegate = delegate
         
         let user = User.currentUser
-        let params = [kUserEmailId : user.emailId!]
+        let params = [kUserEmailId : email]
         
         let method = RegistrationMethods.forgotPassword.method
         

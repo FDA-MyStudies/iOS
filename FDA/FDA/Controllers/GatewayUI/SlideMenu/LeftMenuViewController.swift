@@ -71,7 +71,7 @@ class LeftMenuViewController : UIViewController, LeftMenuProtocol {
         self.tableView.separatorColor = UIColor(red: 224/255, green: 224/255, blue: 224/255, alpha: 1.0)
         
         let storyboard = UIStoryboard(name: "Gateway", bundle: nil)
-        let loginStoryBoard = UIStoryboard(name: "Login", bundle: nil)
+        
         
         
         self.studyListViewController = storyboard.instantiateViewController(withIdentifier: String(describing: StudyListViewController.classForCoder())) as! UINavigationController
@@ -83,26 +83,10 @@ class LeftMenuViewController : UIViewController, LeftMenuProtocol {
         self.profileviewController = storyboard.instantiateViewController(withIdentifier:  String(describing: ProfileViewController.classForCoder())) as! UINavigationController
         
         
-        let signInController = loginStoryBoard.instantiateViewController(withIdentifier:  String(describing: SignInViewController.classForCoder())) as! SignInViewController
-        self.signInViewController = UINavigationController(rootViewController: signInController)
+       
         
         
-        let signUpController = loginStoryBoard.instantiateViewController(withIdentifier:  String(describing: SignUpViewController.classForCoder())) as! SignUpViewController
-        self.signUpViewController = UINavigationController(rootViewController: signUpController)
-        
-        
-        
-//        let goViewController = storyboard.instantiateViewController(withIdentifier: "GoViewController") as! ResourcesListViewController
-//        self.goViewController = UINavigationController(rootViewController: goViewController)
-        
-//        let nonMenuController = storyboard.instantiateViewController(withIdentifier: "NonMenuController") as! ProfileViewController
-//        nonMenuController.delegate = self
-//        self.nonMenuViewController = UINavigationController(rootViewController: nonMenuController)
-        
-       // self.tableView.registerCellClass(BaseTableViewCell.self)
-        
-       // self.imageHeaderView = ImageHeaderView.loadNib()
-       // self.view.addSubview(self.imageHeaderView)
+    
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -113,7 +97,20 @@ class LeftMenuViewController : UIViewController, LeftMenuProtocol {
         super.viewDidAppear(animated)
     }
     
+    func createControllersForAnonymousUser(){
+        
+        let loginStoryBoard = UIStoryboard(name: "Login", bundle: nil)
+        let signInController = loginStoryBoard.instantiateViewController(withIdentifier:  String(describing: SignInViewController.classForCoder())) as! SignInViewController
+        self.signInViewController = UINavigationController(rootViewController: signInController)
+        
+        
+        let signUpController = loginStoryBoard.instantiateViewController(withIdentifier:  String(describing: SignUpViewController.classForCoder())) as! SignUpViewController
+        self.signUpViewController = UINavigationController(rootViewController: signUpController)
+    }
+    
     func createLeftmenuItems(){
+        
+        self.createControllersForAnonymousUser()
         
         let user = User.currentUser
         
@@ -322,7 +319,15 @@ extension LeftMenuViewController:NMWebServiceDelegate {
     func failedRequest(_ manager: NetworkManager, requestName: NSString, error: NSError) {
         Logger.sharedInstance.info("requestname : \(requestName)")
         self.removeProgressIndicator()
-        UIUtilities.showAlertWithTitleAndMessage(title:NSLocalizedString("Error", comment: "") as NSString, message: error.localizedDescription as NSString)
+        if error.code == 401 { //unauthorized
+            UIUtilities.showAlertMessageWithActionHandler(kErrorTitle, message: error.localizedDescription, buttonTitle: kTitleOk, viewControllerUsed: self, action: {
+                self.fdaSlideMenuController()?.navigateToHomeAfterUnauthorizedAccess()
+            })
+        }
+        else {
+            
+            UIUtilities.showAlertWithTitleAndMessage(title:NSLocalizedString(kErrorTitle, comment: "") as NSString, message: error.localizedDescription as NSString)
+        }
         
         
         

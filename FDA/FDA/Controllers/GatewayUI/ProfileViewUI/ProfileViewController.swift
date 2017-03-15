@@ -76,7 +76,7 @@ class ProfileViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
+        user = User.currentUser
         UserServices().getUserProfile(self as NMWebServiceDelegate)
         self.setNavigationBarItem()
         
@@ -445,10 +445,28 @@ extension ProfileViewController : UITextFieldDelegate{
         
     }
     
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        
+        let tag:TextFieldTags = TextFieldTags(rawValue: textField.tag)!
+        
+        if tag == .FirstNameTag || tag == .LastName || tag == .EmailId {
+            if string == " " {
+                return false
+            }
+            else{
+                return true
+            }
+        }
+        else{
+            return true
+        }
+        
+    }
+    
     func textFieldDidEndEditing(_ textField: UITextField) {
         print(textField.text!)
         
-        
+        textField.text =  textField.text?.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
         
         switch textField.tag {
         case TextFieldTags.FirstNameTag.rawValue:
@@ -518,9 +536,16 @@ extension ProfileViewController:NMWebServiceDelegate {
     func failedRequest(_ manager: NetworkManager, requestName: NSString, error: NSError) {
         Logger.sharedInstance.info("requestname : \(requestName)")
         self.removeProgressIndicator()
-        UIUtilities.showAlertWithTitleAndMessage(title:NSLocalizedString(kErrorTitle, comment: "") as NSString, message: error.localizedDescription as NSString)
         
-        
+        if error.code == 401 { //unauthorized
+            UIUtilities.showAlertMessageWithActionHandler(kErrorTitle, message: error.localizedDescription, buttonTitle: kTitleOk, viewControllerUsed: self, action: { 
+                self.fdaSlideMenuController()?.navigateToHomeAfterUnauthorizedAccess()
+            })
+        }
+        else {
+            
+             UIUtilities.showAlertWithTitleAndMessage(title:NSLocalizedString(kErrorTitle, comment: "") as NSString, message: error.localizedDescription as NSString)
+        }
         
     }
 }

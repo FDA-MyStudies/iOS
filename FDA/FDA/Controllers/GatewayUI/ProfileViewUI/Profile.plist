@@ -26,21 +26,5 @@
 		<key>placeHolder</key>
 		<string>add password</string>
 	</dict>
-	<dict>
-		<key>LabelName</key>
-		<string>Use Passcode to access app</string>
-	</dict>
-	<dict>
-		<key>LabelName</key>
-		<string>Use Touch ID to access or sign in to app</string>
-	</dict>
-	<dict>
-		<key>LabelName</key>
-		<string>Receive Push Notifications?</string>
-	</dict>
-	<dict>
-		<key>LabelName</key>
-		<string>Receive Study Activity Reminders?</string>
-	</dict>
 </array>
 </plist>

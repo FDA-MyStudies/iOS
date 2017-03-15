@@ -110,6 +110,9 @@ class ChangePasswordViewController: UIViewController {
             self.showAlertMessages(textMessage: kMessageValidatePasswordComplexity)
             
         }
+        else if  self.oldPassword == self.newPassword{
+             self.showAlertMessages(textMessage: kMessageValidateOldAndNewPasswords)
+        }
         else if self.newPassword != self.confirmPassword{
             self.showAlertMessages(textMessage: kMessageValidatePasswords)
         }
@@ -167,6 +170,7 @@ extension ChangePasswordViewController : UITextFieldDelegate{
     
     func textFieldDidEndEditing(_ textField: UITextField) {
         print(textField.text!)
+        textField.text =  textField.text?.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
         
         let tag = CPTextFeildTags(rawValue: textField.tag)!
         
@@ -195,7 +199,7 @@ extension ChangePasswordViewController:NMWebServiceDelegate {
         
         if viewLoadFrom == .profile {
             
-            UIUtilities.showAlertMessageWithActionHandler(NSLocalizedString(kTitleMessage, comment: ""), message: NSLocalizedString(kForgotPasswordResponseMessage, comment: "") , buttonTitle: NSLocalizedString(kTitleOk, comment: ""), viewControllerUsed: self) {
+            UIUtilities.showAlertMessageWithActionHandler(NSLocalizedString(kTitleMessage, comment: ""), message: NSLocalizedString(kChangePasswordResponseMessage, comment: "") , buttonTitle: NSLocalizedString(kTitleOk, comment: ""), viewControllerUsed: self) {
                 
                 _ = self.navigationController?.popViewController(animated: true)
                 
@@ -222,6 +226,13 @@ extension ChangePasswordViewController:NMWebServiceDelegate {
 
         self.removeProgressIndicator()
 
-        UIUtilities.showAlertWithTitleAndMessage(title:NSLocalizedString("Error", comment: "") as NSString, message: error.localizedDescription as NSString)
-    }
+        if error.code == 401 { //unauthorized
+            UIUtilities.showAlertMessageWithActionHandler(kErrorTitle, message: error.localizedDescription, buttonTitle: kTitleOk, viewControllerUsed: self, action: {
+                self.fdaSlideMenuController()?.navigateToHomeAfterUnauthorizedAccess()
+            })
+        }
+        else {
+            
+            UIUtilities.showAlertWithTitleAndMessage(title:NSLocalizedString(kErrorTitle, comment: "") as NSString, message: error.localizedDescription as NSString)
+        }    }
 }

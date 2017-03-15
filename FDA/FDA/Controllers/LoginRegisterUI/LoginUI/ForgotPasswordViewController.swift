@@ -65,7 +65,7 @@ class ForgotPasswordViewController : UIViewController{
         }else{
             print("Call the Webservice")
             User.currentUser.emailId = textFieldEmail?.text!
-            UserServices().forgotPassword(self)
+            UserServices().forgotPassword(email:(textFieldEmail?.text)!,delegate: self)
         }
     }
 }
@@ -95,4 +95,16 @@ extension ForgotPasswordViewController:NMWebServiceDelegate {
     }
 }
 
+
+extension ForgotPasswordViewController:UITextFieldDelegate{
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        
+        if string == " " {
+            return false
+        }
+        else{
+            return true
+        }
+    }
+}
 

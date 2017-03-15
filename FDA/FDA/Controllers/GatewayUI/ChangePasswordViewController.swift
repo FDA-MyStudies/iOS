@@ -96,7 +96,11 @@ class ChangePasswordViewController: UIViewController {
     //MARK: Signin Button Action and validation checks
     @IBAction func submitButtonAction(_ sender: Any) {
         
-        if self.oldPassword == ""{
+        
+        if self.oldPassword.isEmpty && self.newPassword.isEmpty && self.confirmPassword.isEmpty{
+             self.showAlertMessages(textMessage: kMessageAllFieldsAreEmpty)
+        }
+        else if self.oldPassword == ""{
             self.showAlertMessages(textMessage: kMessagePasswordBlank)
             
         }else if self.newPassword == ""{

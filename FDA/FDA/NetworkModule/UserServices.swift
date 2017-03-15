@@ -108,7 +108,7 @@ class UserServices: NSObject {
         
         self.delegate = delegate
         
-        let user = User.currentUser!
+        let user = User.currentUser
         let headerParams = [kUserId : user.userId!]
         let params = [kUserLogoutReason: user.logoutReason.rawValue]
         
@@ -476,7 +476,7 @@ class UserServices: NSObject {
         ud.synchronize()
         
         //reset user object
-        User.currentUser = User()
+        User.resetCurrentUser()
         
     }
     
@@ -487,7 +487,7 @@ class UserServices: NSObject {
         ud.synchronize()
         
         //reset user object
-        User.currentUser = User()
+        User.resetCurrentUser()
     }
     
     

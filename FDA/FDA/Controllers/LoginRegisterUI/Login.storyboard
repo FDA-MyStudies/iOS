@@ -926,7 +926,7 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="93M-Fs-drd">
                                 <rect key="frame" x="112" y="455" width="150" height="40"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
-                                <state key="normal" title="Verify">
+                                <state key="normal" title="Continue">
                                     <color key="titleColor" red="0.0" green="0.48627450979999998" blue="0.72941176470000002" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <userDefinedRuntimeAttributes>
@@ -1076,7 +1076,7 @@
         <image name="welcomeBg" width="375" height="667"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Xbj-IV-jBd"/>
-        <segue reference="EeA-Hk-jBe"/>
+        <segue reference="VqN-my-PFn"/>
+        <segue reference="Wsb-hw-1LK"/>
     </inferredMetricsTieBreakers>
 </document>

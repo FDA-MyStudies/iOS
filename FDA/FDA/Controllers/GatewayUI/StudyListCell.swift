@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SDWebImage
 
 protocol StudyListDelegates {
     func studyBookmarked(_ cell:StudyListCell, bookmarked:Bool,forStudy study:Study)
@@ -56,7 +57,7 @@ class StudyListCell: UITableViewCell {
         labelStudyShortDescription?.text = study.description
         labelStudySponserName?.text = study.sponserName
         labelStudyCategoryType?.text = study.category
-        studyLogoImage?.image = #imageLiteral(resourceName: "welcomeBg")
+        studyLogoImage?.image = #imageLiteral(resourceName: "placeholder")
         
         self.setStudyStatus(study: study)
         
@@ -66,6 +67,12 @@ class StudyListCell: UITableViewCell {
         else {
             //self.setUserStatusForStudy(study: study)
         }
+        if study.logoURL != nil {
+            
+            let url = URL.init(string: study.logoURL!)
+            studyLogoImage?.sd_setImage(with: url, placeholderImage: #imageLiteral(resourceName: "placeholder"))
+        }
+        
     }
     
     func setStudyStatus(study:Study){

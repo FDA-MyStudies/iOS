@@ -61,7 +61,7 @@ class StudyListViewController: UIViewController {
             self.tableView?.rowHeight = 140
         }
         
-        self.loadTestData()
+        //self.loadTestData()
         
     }
     
@@ -188,7 +188,8 @@ extension StudyListViewController :  UITableViewDelegate {
 extension StudyListViewController : StudyListDelegates {
     
     func studyBookmarked(_ cell: StudyListCell, bookmarked: Bool, forStudy study: Study) {
-        
+      
+        let user = User.currentUser
         var userStudyStatus:UserStudyStatus!
         if bookmarked {
             userStudyStatus =  user.bookmarkStudy(studyId: study.studyId!)

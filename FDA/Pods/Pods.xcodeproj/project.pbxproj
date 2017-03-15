@@ -23,25 +23,25 @@
 			<key>runOnlyForDeploymentPostprocessing</key>
 			<string>0</string>
 		</dict>
+		<key>01D2BF69649FB75F21F25CD05F4F63C2</key>
+		<dict>
+			<key>buildActionMask</key>
+			<string>2147483647</string>
+			<key>files</key>
+			<array>
+				<string>F93FE76450EA4450CBE9244B0D5B0500</string>
+			</array>
+			<key>isa</key>
+			<string>PBXFrameworksBuildPhase</string>
+			<key>runOnlyForDeploymentPostprocessing</key>
+			<string>0</string>
+		</dict>
 		<key>0264E6DA5DAC8713C174F983B218D10D</key>
 		<dict>
 			<key>fileRef</key>
-			<string>A9D513C564BC88068DDFCA5361D3FFAE</string>
+			<string>C823A511671ABE4A7641D63BD0A2C515</string>
 			<key>isa</key>
 			<string>PBXBuildFile</string>
-		</dict>
-		<key>02AA4B8552B5520C186AE923056561FB</key>
-		<dict>
-			<key>containerPortal</key>
-			<string>D41D8CD98F00B204E9800998ECF8427E</string>
-			<key>isa</key>
-			<string>PBXContainerItemProxy</string>
-			<key>proxyType</key>
-			<string>1</string>
-			<key>remoteGlobalIDString</key>
-			<string>0B19A578AC9B281329C1EC09FDAB0299</string>
-			<key>remoteInfo</key>
-			<string>SlideMenuControllerSwift</string>
 		</dict>
 		<key>034014829C1E4434983CF3A690C12017</key>
 		<dict>
@@ -121,6 +121,26 @@
 			<key>name</key>
 			<string>Debug</string>
 		</dict>
+		<key>037775677AC798F3499F74A88EE118C6</key>
+		<dict>
+			<key>fileRef</key>
+			<string>5876D673864588C86832C7CBD69142E0</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>05C1B282627C8D3EB44F0016B98436C5</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>text.plist.xml</string>
+			<key>path</key>
+			<string>Info.plist</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
 		<key>063844C0A78804EAE332FFE159CEC673</key>
 		<dict>
 			<key>children</key>
@@ -139,33 +159,20 @@
 		<key>06EDB944284E74970F312CB7F2910C07</key>
 		<dict>
 			<key>fileRef</key>
-			<string>5798F91C6004D5ABD0A79606BE738268</string>
+			<string>107E510260FE5C833F562D7F0B598B19</string>
 			<key>isa</key>
 			<string>PBXBuildFile</string>
 		</dict>
-		<key>07085BC33B6FA7755509075152DDB9B2</key>
+		<key>08C690DD54CC74B6AE5BDF083671D0CC</key>
 		<dict>
+			<key>children</key>
+			<array>
+				<string>212F85D0AB7DFEEEFC07BF6B07148C4B</string>
+			</array>
 			<key>isa</key>
-			<string>PBXTargetDependency</string>
+			<string>PBXGroup</string>
 			<key>name</key>
-			<string>SlideMenuControllerSwift</string>
-			<key>target</key>
-			<string>0B19A578AC9B281329C1EC09FDAB0299</string>
-			<key>targetProxy</key>
-			<string>02AA4B8552B5520C186AE923056561FB</string>
-		</dict>
-		<key>091DF997950D402B2ED9600BDDFCEDBE</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.swift</string>
-			<key>name</key>
-			<string>IQToolbar.swift</string>
-			<key>path</key>
-			<string>IQKeyboardManagerSwift/IQToolbar/IQToolbar.swift</string>
+			<string>Frameworks</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
@@ -182,50 +189,23 @@
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
-		<key>0A68FE8A6158D395EC4CB10F8472F165</key>
+		<key>0A842637E1585C7DCDB7A298A5645E57</key>
 		<dict>
-			<key>children</key>
-			<array>
-				<string>B4CCDF0ACEE37ED4308724E62FCDE939</string>
-				<string>3C9854452B704969D40D932335DEE0FF</string>
-				<string>0F2331BAF78D4EDDCD400CF6388C7978</string>
-			</array>
+			<key>includeInIndex</key>
+			<string>1</string>
 			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>iOS</string>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>path</key>
+			<string>SDWebImage-dummy.m</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
-		<key>0B19A578AC9B281329C1EC09FDAB0299</key>
-		<dict>
-			<key>buildConfigurationList</key>
-			<string>E5B8220E755DA8A33A6A52C323805F69</string>
-			<key>buildPhases</key>
-			<array>
-				<string>66E4964B0EEC2F609E8BA59A7E48B6DF</string>
-				<string>2D8E4F7F34CD2AF3EAEA5BB6DEC5FFE1</string>
-				<string>C3E19B6CA5A488515A9B02663516467B</string>
-			</array>
-			<key>buildRules</key>
-			<array/>
-			<key>dependencies</key>
-			<array/>
-			<key>isa</key>
-			<string>PBXNativeTarget</string>
-			<key>name</key>
-			<string>SlideMenuControllerSwift</string>
-			<key>productName</key>
-			<string>SlideMenuControllerSwift</string>
-			<key>productReference</key>
-			<string>FEE7C4F58D539C9EE9EBACB74037BF1E</string>
-			<key>productType</key>
-			<string>com.apple.product-type.framework</string>
-		</dict>
-		<key>0C4A23B65576C604C0FF1E3BA95CEBFB</key>
+		<key>0BBCF8E54029D5B021701C885884532D</key>
 		<dict>
 			<key>baseConfigurationReference</key>
-			<string>E0D5D7A22EC96EB94C1117B938D64596</string>
+			<string>48877F823DDECC376D7C402C52433D49</string>
 			<key>buildSettings</key>
 			<dict>
 				<key>CODE_SIGN_IDENTITY[sdk=iphoneos*]</key>
@@ -246,40 +226,30 @@
 				<string>YES</string>
 				<key>GCC_NO_COMMON_BLOCKS</key>
 				<string>YES</string>
+				<key>GCC_PREFIX_HEADER</key>
+				<string>Target Support Files/SDWebImage/SDWebImage-prefix.pch</string>
 				<key>INFOPLIST_FILE</key>
-				<string>Target Support Files/Pods-FDA/Info.plist</string>
+				<string>Target Support Files/SDWebImage/Info.plist</string>
 				<key>INSTALL_PATH</key>
 				<string>$(LOCAL_LIBRARY_DIR)/Frameworks</string>
 				<key>IPHONEOS_DEPLOYMENT_TARGET</key>
-				<string>9.0</string>
+				<string>8.0</string>
 				<key>LD_RUNPATH_SEARCH_PATHS</key>
 				<array>
 					<string>$(inherited)</string>
 					<string>@executable_path/Frameworks</string>
 					<string>@loader_path/Frameworks</string>
 				</array>
-				<key>MACH_O_TYPE</key>
-				<string>staticlib</string>
 				<key>MODULEMAP_FILE</key>
-				<string>Target Support Files/Pods-FDA/Pods-FDA.modulemap</string>
+				<string>Target Support Files/SDWebImage/SDWebImage.modulemap</string>
 				<key>MTL_ENABLE_DEBUG_INFO</key>
 				<string>YES</string>
-				<key>OTHER_LDFLAGS</key>
-				<string></string>
-				<key>OTHER_LIBTOOLFLAGS</key>
-				<string></string>
-				<key>PODS_ROOT</key>
-				<string>$(SRCROOT)</string>
-				<key>PRODUCT_BUNDLE_IDENTIFIER</key>
-				<string>org.cocoapods.${PRODUCT_NAME:rfc1034identifier}</string>
 				<key>PRODUCT_NAME</key>
-				<string>Pods_FDA</string>
+				<string>SDWebImage</string>
 				<key>SDKROOT</key>
 				<string>iphoneos</string>
 				<key>SKIP_INSTALL</key>
 				<string>YES</string>
-				<key>SWIFT_OPTIMIZATION_LEVEL</key>
-				<string>-Onone</string>
 				<key>SWIFT_VERSION</key>
 				<string>3.0</string>
 				<key>TARGETED_DEVICE_FAMILY</key>
@@ -294,24 +264,88 @@
 			<key>name</key>
 			<string>Debug</string>
 		</dict>
-		<key>0F2331BAF78D4EDDCD400CF6388C7978</key>
+		<key>107E510260FE5C833F562D7F0B598B19</key>
 		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
 			<key>isa</key>
 			<string>PBXFileReference</string>
 			<key>lastKnownFileType</key>
-			<string>wrapper.framework</string>
+			<string>sourcecode.swift</string>
 			<key>name</key>
-			<string>UIKit.framework</string>
+			<string>IQBarButtonItem.swift</string>
 			<key>path</key>
-			<string>Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.3.sdk/System/Library/Frameworks/UIKit.framework</string>
+			<string>IQKeyboardManagerSwift/IQToolbar/IQBarButtonItem.swift</string>
 			<key>sourceTree</key>
-			<string>DEVELOPER_DIR</string>
+			<string>&lt;group&gt;</string>
 		</dict>
-		<key>122DA2E5084A4393C29BE363C764795C</key>
+		<key>108AD0CBADB4CBA1FCA0E40C604E581C</key>
+		<dict>
+			<key>fileRef</key>
+			<string>2CF8E882EB1B80B1357E03E53F0FCCB8</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>11EFEAD8B6304BB87E70D7DF8065CE55</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>path</key>
+			<string>SDWebImage.modulemap</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>1354EC4190F4ACE805BE75FDEA4296DA</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>name</key>
+			<string>SDWebImagePrefetcher.m</string>
+			<key>path</key>
+			<string>SDWebImage/SDWebImagePrefetcher.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>139250EF8D4E404AD5019BA8966C0ED0</key>
+		<dict>
+			<key>fileRef</key>
+			<string>B1BBA6BD3F4BF6749A6507764647E3B3</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>ATTRIBUTES</key>
+				<array>
+					<string>Public</string>
+				</array>
+			</dict>
+		</dict>
+		<key>13F31FA1D4815DBAE89881BA11D86AB2</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.swift</string>
+			<key>name</key>
+			<string>IQKeyboardManager.swift</string>
+			<key>path</key>
+			<string>IQKeyboardManagerSwift/IQKeyboardManager.swift</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>14B8B9B15ECBE87983FF987239AB2D7B</key>
 		<dict>
 			<key>children</key>
 			<array>
-				<string>0A68FE8A6158D395EC4CB10F8472F165</string>
+				<string>582DD6E32860F945325877EC92D99B9A</string>
 			</array>
 			<key>isa</key>
 			<string>PBXGroup</string>
@@ -320,10 +354,10 @@
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
-		<key>139250EF8D4E404AD5019BA8966C0ED0</key>
+		<key>14B8BA18DAB6FE3E0FCEE873BAC9F7F2</key>
 		<dict>
 			<key>fileRef</key>
-			<string>C4BDFDA7A284403A0D4621817B8F52EF</string>
+			<string>C64D024BE933155D938AF2F41F55E504</string>
 			<key>isa</key>
 			<string>PBXBuildFile</string>
 			<key>settings</key>
@@ -356,9 +390,24 @@
 			<key>productName</key>
 			<string>IQKeyboardManagerSwift</string>
 			<key>productReference</key>
-			<string>721E9AC3C4CFEBACD251F1BC2481A74F</string>
+			<string>20A6354BF242110ED769E6280D3B5A3B</string>
 			<key>productType</key>
 			<string>com.apple.product-type.framework</string>
+		</dict>
+		<key>15F4F3DEBFD6F0CF3E63AA0CD57A5169</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>Crashlytics.h</string>
+			<key>path</key>
+			<string>iOS/Crashlytics.framework/Headers/Crashlytics.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
 		</dict>
 		<key>161601383DEA1F2FC6BB5588B4EE58C9</key>
 		<dict>
@@ -389,6 +438,34 @@
 			<key>runOnlyForDeploymentPostprocessing</key>
 			<string>0</string>
 		</dict>
+		<key>16AE3942B30853A79C81EEA57F8AE45C</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>name</key>
+			<string>UIView+WebCache.m</string>
+			<key>path</key>
+			<string>SDWebImage/UIView+WebCache.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>179478D96666DF4321C77DB4E0F2B965</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>path</key>
+			<string>SDWebImage-prefix.pch</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
 		<key>17CA902897B80A9C58800D71129410C2</key>
 		<dict>
 			<key>includeInIndex</key>
@@ -415,21 +492,6 @@
 			<string>Release</string>
 			<key>isa</key>
 			<string>XCConfigurationList</string>
-		</dict>
-		<key>18232900551F75476133D6CA8F6DB31B</key>
-		<dict>
-			<key>explicitFileType</key>
-			<string>wrapper.framework</string>
-			<key>includeInIndex</key>
-			<string>0</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>name</key>
-			<string>Pods_FDAUITests.framework</string>
-			<key>path</key>
-			<string>Pods-FDAUITests.framework</string>
-			<key>sourceTree</key>
-			<string>BUILT_PRODUCTS_DIR</string>
 		</dict>
 		<key>1912B65E3A427451CF0B7B389AC7C6FF</key>
 		<dict>
@@ -514,48 +576,58 @@
 			<key>name</key>
 			<string>Release</string>
 		</dict>
-		<key>1C130D50A4300A880327EBCC08BDD9D5</key>
-		<dict>
-			<key>explicitFileType</key>
-			<string>wrapper.framework</string>
-			<key>includeInIndex</key>
-			<string>0</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>name</key>
-			<string>Pods_FDA.framework</string>
-			<key>path</key>
-			<string>Pods-FDA.framework</string>
-			<key>sourceTree</key>
-			<string>BUILT_PRODUCTS_DIR</string>
-		</dict>
-		<key>1CC101965FD02A650251E892F3693D19</key>
+		<key>1A31C834A9B5612FFCE0F5EF4968C00B</key>
 		<dict>
 			<key>includeInIndex</key>
 			<string>1</string>
 			<key>isa</key>
 			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.swift</string>
-			<key>name</key>
-			<string>IQTitleBarButtonItem.swift</string>
 			<key>path</key>
-			<string>IQKeyboardManagerSwift/IQToolbar/IQTitleBarButtonItem.swift</string>
+			<string>SlideMenuControllerSwift.modulemap</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
-		<key>1EAEAD6DED83F1403FDD4CFFD0B9F721</key>
+		<key>1C48DFA086337CC9C53C9505D1096F01</key>
 		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
 			<key>isa</key>
 			<string>PBXFileReference</string>
 			<key>lastKnownFileType</key>
-			<string>sourcecode.swift</string>
+			<string>wrapper.framework</string>
 			<key>name</key>
-			<string>IQPreviousNextView.swift</string>
+			<string>UIKit.framework</string>
 			<key>path</key>
-			<string>IQKeyboardManagerSwift/IQToolbar/IQPreviousNextView.swift</string>
+			<string>Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.3.sdk/System/Library/Frameworks/UIKit.framework</string>
+			<key>sourceTree</key>
+			<string>DEVELOPER_DIR</string>
+		</dict>
+		<key>1D2D04A334F3DC067163BE7B32BCBA0C</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>20A6354BF242110ED769E6280D3B5A3B</string>
+				<string>FAF82FAEED3803BC0E6A9AA483BD729B</string>
+				<string>5DBB05B579540B2CE783128F2995548E</string>
+				<string>DF5306C14E27ED75865B0ECA2F1EE365</string>
+				<string>7C207B833CBFA2FABE1622AB8493B5F4</string>
+				<string>E96C6EC566B33E9FF69CC52454A5BA0C</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>Products</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>1EB8F187CEBD6791DA53E23E51C40146</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>339FCFD490F72F2458336CE8E2D35CDD</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>Resources</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
@@ -573,31 +645,85 @@
 				</array>
 			</dict>
 		</dict>
-		<key>203894730B81F081C861853B48255180</key>
+		<key>2056B88955E0B6F0EEE6CA947D2B2F5E</key>
+		<dict>
+			<key>buildConfigurations</key>
+			<array>
+				<string>0BBCF8E54029D5B021701C885884532D</string>
+				<string>52680C1D6B5611C2144E5F56250F5B79</string>
+			</array>
+			<key>defaultConfigurationIsVisible</key>
+			<string>0</string>
+			<key>defaultConfigurationName</key>
+			<string>Release</string>
+			<key>isa</key>
+			<string>XCConfigurationList</string>
+		</dict>
+		<key>20A6354BF242110ED769E6280D3B5A3B</key>
+		<dict>
+			<key>explicitFileType</key>
+			<string>wrapper.framework</string>
+			<key>includeInIndex</key>
+			<string>0</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>name</key>
+			<string>IQKeyboardManagerSwift.framework</string>
+			<key>path</key>
+			<string>IQKeyboardManagerSwift.framework</string>
+			<key>sourceTree</key>
+			<string>BUILT_PRODUCTS_DIR</string>
+		</dict>
+		<key>212F85D0AB7DFEEEFC07BF6B07148C4B</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>wrapper.framework</string>
+			<key>name</key>
+			<string>Crashlytics.framework</string>
+			<key>path</key>
+			<string>iOS/Crashlytics.framework</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>22BF379912F5530B73D84C8B9134FBF2</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>wrapper.framework</string>
+			<key>name</key>
+			<string>Fabric.framework</string>
+			<key>path</key>
+			<string>iOS/Fabric.framework</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>22CF44503F9D22517DB717E5E81646C0</key>
 		<dict>
 			<key>fileRef</key>
-			<string>80F7437049D942C140E8A17D15210515</string>
+			<string>3205F00372C6088F03D814A5D4E8637C</string>
 			<key>isa</key>
 			<string>PBXBuildFile</string>
 		</dict>
-		<key>2641CD2EBD374904D2E5759683B97B76</key>
+		<key>23F6DF3EB05A0E893C83487F9ED3E111</key>
 		<dict>
-			<key>fileRef</key>
-			<string>88664BB5B0AB95E063B62BAEDE81C5C1</string>
+			<key>includeInIndex</key>
+			<string>1</string>
 			<key>isa</key>
-			<string>PBXBuildFile</string>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>path</key>
+			<string>SlideMenuControllerSwift-prefix.pch</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
 		</dict>
-		<key>26C3425F45F1374791CB8B07AD01942D</key>
+		<key>257AC5AC629EFEA49777699210DE84D3</key>
 		<dict>
 			<key>fileRef</key>
-			<string>995959CA6C582CC2851B5FED7B7CDA32</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>27CF5A7E60C5902F58C01A1A20F51F49</key>
-		<dict>
-			<key>fileRef</key>
-			<string>78E9B26C33DB51BED10B3CC0F0A87D25</string>
+			<string>F033404B01E8A162E356EBCF67643DD7</string>
 			<key>isa</key>
 			<string>PBXBuildFile</string>
 			<key>settings</key>
@@ -607,6 +733,94 @@
 					<string>Public</string>
 				</array>
 			</dict>
+		</dict>
+		<key>2641CD2EBD374904D2E5759683B97B76</key>
+		<dict>
+			<key>fileRef</key>
+			<string>AC26B14860AF4CC4819D9E3349492F72</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>26585777B7E555D4D800EDDA85D3AD9B</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.swift</string>
+			<key>name</key>
+			<string>IQUIWindow+Hierarchy.swift</string>
+			<key>path</key>
+			<string>IQKeyboardManagerSwift/Categories/IQUIWindow+Hierarchy.swift</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>26C3425F45F1374791CB8B07AD01942D</key>
+		<dict>
+			<key>fileRef</key>
+			<string>339FCFD490F72F2458336CE8E2D35CDD</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>2758860BD8D8F24683ACBCE189D2CD43</key>
+		<dict>
+			<key>fileRef</key>
+			<string>CB50C84360B0ED0EA8778E9C4681D13D</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>ATTRIBUTES</key>
+				<array>
+					<string>Public</string>
+				</array>
+			</dict>
+		</dict>
+		<key>277219C294A966A35B61DE68DA1CF72D</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>SDWebImageDownloader.h</string>
+			<key>path</key>
+			<string>SDWebImage/SDWebImageDownloader.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>292025DBB8ADF0F293BA76DD04C2CFF9</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>UIImage+GIF.h</string>
+			<key>path</key>
+			<string>SDWebImage/UIImage+GIF.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>2A1F8D9E5DA4249343A4799F40D3ED9D</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.swift</string>
+			<key>name</key>
+			<string>IQToolbar.swift</string>
+			<key>path</key>
+			<string>IQKeyboardManagerSwift/IQToolbar/IQToolbar.swift</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
 		</dict>
 		<key>2A87580AD1DD7EF3B8BEFE96A7D18D08</key>
 		<dict>
@@ -618,6 +832,21 @@
 			<string>sourcecode.c.h</string>
 			<key>path</key>
 			<string>Pods-FDATests-umbrella.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>2A9B5AD1CDA068D9D91FDC32D053FC14</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>SDImageCache.h</string>
+			<key>path</key>
+			<string>SDWebImage/SDImageCache.h</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
@@ -634,18 +863,33 @@
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
-		<key>2D8E4F7F34CD2AF3EAEA5BB6DEC5FFE1</key>
+		<key>2B4BABF2646C9D8D0BC9EBECA58F85F8</key>
 		<dict>
-			<key>buildActionMask</key>
-			<string>2147483647</string>
-			<key>files</key>
-			<array>
-				<string>69EFF8D5CC92D942B5E034E51D75BF75</string>
-			</array>
+			<key>includeInIndex</key>
+			<string>1</string>
 			<key>isa</key>
-			<string>PBXFrameworksBuildPhase</string>
-			<key>runOnlyForDeploymentPostprocessing</key>
-			<string>0</string>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>path</key>
+			<string>IQKeyboardManagerSwift-dummy.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>2CF8E882EB1B80B1357E03E53F0FCCB8</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>name</key>
+			<string>SDImageCacheConfig.m</string>
+			<key>path</key>
+			<string>SDWebImage/SDImageCacheConfig.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
 		</dict>
 		<key>2D8E8EC45A3A1A1D94AE762CB5028504</key>
 		<dict>
@@ -661,7 +905,72 @@
 			<key>isa</key>
 			<string>XCConfigurationList</string>
 		</dict>
-		<key>330945877059CA4BD626E9E0574C1D4E</key>
+		<key>2DEF435E61145D04288FA6189313EA8A</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXTargetDependency</string>
+			<key>name</key>
+			<string>SlideMenuControllerSwift</string>
+			<key>target</key>
+			<string>A270C231F96166C253F1433A1B648838</string>
+			<key>targetProxy</key>
+			<string>C9DC1A733568491198D00795F8F6C54C</string>
+		</dict>
+		<key>3073EAA5159040CF5007FF545C9AFD08</key>
+		<dict>
+			<key>buildActionMask</key>
+			<string>2147483647</string>
+			<key>files</key>
+			<array>
+				<string>4E1EACAFB51FF16C7330C7BE76B4AE07</string>
+			</array>
+			<key>isa</key>
+			<string>PBXFrameworksBuildPhase</string>
+			<key>runOnlyForDeploymentPostprocessing</key>
+			<string>0</string>
+		</dict>
+		<key>30F0C36990391D1F90D7725021964DE2</key>
+		<dict>
+			<key>fileRef</key>
+			<string>F18019F046032BE474524A9C7688B1E0</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>ATTRIBUTES</key>
+				<array>
+					<string>Public</string>
+				</array>
+			</dict>
+		</dict>
+		<key>3205F00372C6088F03D814A5D4E8637C</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>wrapper.framework</string>
+			<key>name</key>
+			<string>ImageIO.framework</string>
+			<key>path</key>
+			<string>Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.3.sdk/System/Library/Frameworks/ImageIO.framework</string>
+			<key>sourceTree</key>
+			<string>DEVELOPER_DIR</string>
+		</dict>
+		<key>323AC11B0D2CDC9BC3811C87F23151A4</key>
+		<dict>
+			<key>fileRef</key>
+			<string>A2D4F99C09F1BC1D8FC7FC7A1BF835A5</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>ATTRIBUTES</key>
+				<array>
+					<string>Public</string>
+				</array>
+			</dict>
+		</dict>
+		<key>32F3CFE10446FFDD45BB65AC47A8FD1E</key>
 		<dict>
 			<key>includeInIndex</key>
 			<string>1</string>
@@ -669,8 +978,47 @@
 			<string>PBXFileReference</string>
 			<key>lastKnownFileType</key>
 			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>Answers.h</string>
 			<key>path</key>
-			<string>SlideMenuControllerSwift-prefix.pch</string>
+			<string>iOS/Crashlytics.framework/Headers/Answers.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>334ACDDD29D71CD18EB5E53F6EFC98B2</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>CLSStackFrame.h</string>
+			<key>path</key>
+			<string>iOS/Crashlytics.framework/Headers/CLSStackFrame.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>3386E78F9223A42A6E5059AE349C1446</key>
+		<dict>
+			<key>fileRef</key>
+			<string>A041F9F351D61D825F3164B7983C0D73</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>339FCFD490F72F2458336CE8E2D35CDD</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>wrapper.plug-in</string>
+			<key>name</key>
+			<string>IQKeyboardManager.bundle</string>
+			<key>path</key>
+			<string>IQKeyboardManagerSwift/Resources/IQKeyboardManager.bundle</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
@@ -687,25 +1035,65 @@
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
-		<key>351F2B97D8540B68CEAB483C0A14A9EF</key>
+		<key>34C5F89414992C550EDDB2614050C3FD</key>
 		<dict>
-			<key>fileRef</key>
-			<string>AFE66129B61019B1A6BDBE1ECB7E2874</string>
+			<key>children</key>
+			<array>
+				<string>107E510260FE5C833F562D7F0B598B19</string>
+				<string>13F31FA1D4815DBAE89881BA11D86AB2</string>
+				<string>C823A511671ABE4A7641D63BD0A2C515</string>
+				<string>463C1FE545D146AC9AA57C99FD5D367D</string>
+				<string>F71D2E341100BFBE8E913EA6D7B85DB1</string>
+				<string>D97920D64385806F86E5C4B8091D1D11</string>
+				<string>EB77DB68658F278FC43394A409A49B64</string>
+				<string>4B7F05E38B4CF082FFC170E3E236814C</string>
+				<string>F9F5D0DF1812A11B0161E268E0C3598F</string>
+				<string>2A1F8D9E5DA4249343A4799F40D3ED9D</string>
+				<string>AC26B14860AF4CC4819D9E3349492F72</string>
+				<string>7C1F79F89A0407312230551C6F37451F</string>
+				<string>A81B4202C076987A35A7557F377A1E85</string>
+				<string>C6E5F65A0652F5F4461F68CF2C1FAA2E</string>
+				<string>A0FBDEE8C41FEE96DF816C8D00895D7B</string>
+				<string>26585777B7E555D4D800EDDA85D3AD9B</string>
+				<string>1EB8F187CEBD6791DA53E23E51C40146</string>
+				<string>52FA02072126922BFB1C7626BC9AE08A</string>
+			</array>
 			<key>isa</key>
-			<string>PBXBuildFile</string>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>IQKeyboardManagerSwift</string>
+			<key>path</key>
+			<string>IQKeyboardManagerSwift</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
 		</dict>
-		<key>36FE804AE7938C3B88AF0C93EDF98D12</key>
+		<key>3636AF8807C7863F0029F86D226D32AA</key>
 		<dict>
 			<key>includeInIndex</key>
 			<string>1</string>
 			<key>isa</key>
 			<string>PBXFileReference</string>
 			<key>lastKnownFileType</key>
-			<string>sourcecode.swift</string>
+			<string>sourcecode.c.h</string>
 			<key>name</key>
-			<string>IQUIWindow+Hierarchy.swift</string>
+			<string>UIView+WebCacheOperation.h</string>
 			<key>path</key>
-			<string>IQKeyboardManagerSwift/Categories/IQUIWindow+Hierarchy.swift</string>
+			<string>SDWebImage/UIView+WebCacheOperation.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>365D1BDF8AA7776FC8284BF9EAB7D438</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>SDWebImageDownloaderOperation.h</string>
+			<key>path</key>
+			<string>SDWebImage/SDWebImageDownloaderOperation.h</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
@@ -746,23 +1134,30 @@
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
-		<key>3B082E6ACCC2D096E28EE29CE82F89F6</key>
+		<key>3ACBA34C177206AF6B2BC14939CD5159</key>
 		<dict>
 			<key>fileRef</key>
-			<string>D420FADC17DFB86361C2E72863871EAE</string>
+			<string>BE42BBDCF6E5326E0214E86393F1CA7F</string>
 			<key>isa</key>
 			<string>PBXBuildFile</string>
 		</dict>
-		<key>3B42B98AD2ADAB8DA36C1D3A592CB9A0</key>
+		<key>3B082E6ACCC2D096E28EE29CE82F89F6</key>
+		<dict>
+			<key>fileRef</key>
+			<string>A0FBDEE8C41FEE96DF816C8D00895D7B</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>3B72185442DC041662540296EB9EE246</key>
 		<dict>
 			<key>children</key>
 			<array>
-				<string>C75B99A9B9B6630FF25464B6E049F06F</string>
-				<string>BF4348D53F7AA238E78562FAB206C238</string>
-				<string>963EE6145796E2422513C55BBFFE8971</string>
-				<string>AFE66129B61019B1A6BDBE1ECB7E2874</string>
-				<string>330945877059CA4BD626E9E0574C1D4E</string>
-				<string>78E9B26C33DB51BED10B3CC0F0A87D25</string>
+				<string>78B53A73670E9CEC24CBDDAD5877375E</string>
+				<string>1A31C834A9B5612FFCE0F5EF4968C00B</string>
+				<string>8DB418DF5DD146110CF29224F7E9A57C</string>
+				<string>FC100A8E6EFFD8904320B339E627FA95</string>
+				<string>23F6DF3EB05A0E893C83487F9ED3E111</string>
+				<string>9EFDE929DB6E406B1D9CA26690D0BAA5</string>
 			</array>
 			<key>isa</key>
 			<string>PBXGroup</string>
@@ -794,199 +1189,11 @@
 			<key>productName</key>
 			<string>Pods-FDAUITests</string>
 			<key>productReference</key>
-			<string>18232900551F75476133D6CA8F6DB31B</string>
+			<string>DF5306C14E27ED75865B0ECA2F1EE365</string>
 			<key>productType</key>
 			<string>com.apple.product-type.framework</string>
 		</dict>
-		<key>3C9854452B704969D40D932335DEE0FF</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>wrapper.framework</string>
-			<key>name</key>
-			<string>Foundation.framework</string>
-			<key>path</key>
-			<string>Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.3.sdk/System/Library/Frameworks/Foundation.framework</string>
-			<key>sourceTree</key>
-			<string>DEVELOPER_DIR</string>
-		</dict>
-		<key>3D23290F053A276B418E9A0B638226D1</key>
-		<dict>
-			<key>buildActionMask</key>
-			<string>2147483647</string>
-			<key>files</key>
-			<array>
-				<string>C36D3CABE7EC51808C1327C9D08A77A7</string>
-			</array>
-			<key>isa</key>
-			<string>PBXFrameworksBuildPhase</string>
-			<key>runOnlyForDeploymentPostprocessing</key>
-			<string>0</string>
-		</dict>
-		<key>4F6508F9246B3BF54058BEEE564108CA</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.swift</string>
-			<key>name</key>
-			<string>IQKeyboardManagerConstantsInternal.swift</string>
-			<key>path</key>
-			<string>IQKeyboardManagerSwift/Constants/IQKeyboardManagerConstantsInternal.swift</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>51C2BC99C5218225F33BA26D590DF312</key>
-		<dict>
-			<key>baseConfigurationReference</key>
-			<string>6481C287CDC50C6FE6722A51DF4C79C6</string>
-			<key>buildSettings</key>
-			<dict>
-				<key>CODE_SIGN_IDENTITY[sdk=iphoneos*]</key>
-				<string>iPhone Developer</string>
-				<key>CURRENT_PROJECT_VERSION</key>
-				<string>1</string>
-				<key>DEBUG_INFORMATION_FORMAT</key>
-				<string>dwarf</string>
-				<key>DEFINES_MODULE</key>
-				<string>YES</string>
-				<key>DYLIB_COMPATIBILITY_VERSION</key>
-				<string>1</string>
-				<key>DYLIB_CURRENT_VERSION</key>
-				<string>1</string>
-				<key>DYLIB_INSTALL_NAME_BASE</key>
-				<string>@rpath</string>
-				<key>ENABLE_STRICT_OBJC_MSGSEND</key>
-				<string>YES</string>
-				<key>GCC_NO_COMMON_BLOCKS</key>
-				<string>YES</string>
-				<key>GCC_PREFIX_HEADER</key>
-				<string>Target Support Files/IQKeyboardManagerSwift/IQKeyboardManagerSwift-prefix.pch</string>
-				<key>INFOPLIST_FILE</key>
-				<string>Target Support Files/IQKeyboardManagerSwift/Info.plist</string>
-				<key>INSTALL_PATH</key>
-				<string>$(LOCAL_LIBRARY_DIR)/Frameworks</string>
-				<key>IPHONEOS_DEPLOYMENT_TARGET</key>
-				<string>8.0</string>
-				<key>LD_RUNPATH_SEARCH_PATHS</key>
-				<array>
-					<string>$(inherited)</string>
-					<string>@executable_path/Frameworks</string>
-					<string>@loader_path/Frameworks</string>
-				</array>
-				<key>MODULEMAP_FILE</key>
-				<string>Target Support Files/IQKeyboardManagerSwift/IQKeyboardManagerSwift.modulemap</string>
-				<key>MTL_ENABLE_DEBUG_INFO</key>
-				<string>YES</string>
-				<key>PRODUCT_NAME</key>
-				<string>IQKeyboardManagerSwift</string>
-				<key>SDKROOT</key>
-				<string>iphoneos</string>
-				<key>SKIP_INSTALL</key>
-				<string>YES</string>
-				<key>SWIFT_OPTIMIZATION_LEVEL</key>
-				<string>-Onone</string>
-				<key>SWIFT_VERSION</key>
-				<string>3.0</string>
-				<key>TARGETED_DEVICE_FAMILY</key>
-				<string>1,2</string>
-				<key>VERSIONING_SYSTEM</key>
-				<string>apple-generic</string>
-				<key>VERSION_INFO_PREFIX</key>
-				<string></string>
-			</dict>
-			<key>isa</key>
-			<string>XCBuildConfiguration</string>
-			<key>name</key>
-			<string>Debug</string>
-		</dict>
-		<key>525EC7DFC589B14B8A28E2B83BF044A5</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>path</key>
-			<string>IQKeyboardManagerSwift-prefix.pch</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>55170427A4435520D4BC59DE10121680</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text.script.sh</string>
-			<key>path</key>
-			<string>Pods-FDA-resources.sh</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>5798F91C6004D5ABD0A79606BE738268</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.swift</string>
-			<key>name</key>
-			<string>IQBarButtonItem.swift</string>
-			<key>path</key>
-			<string>IQKeyboardManagerSwift/IQToolbar/IQBarButtonItem.swift</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>59D87C6DDEE038D47CC06ECFA3478F66</key>
-		<dict>
-			<key>fileRef</key>
-			<string>AA782FB402D7D509B245F4A6B4CF2E41</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>5A2F9808D1E481D0A135D6237CAC70DC</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text.xcconfig</string>
-			<key>path</key>
-			<string>Pods-FDA.release.xcconfig</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>5DCD12C2C139245388578C182CACC06D</key>
-		<dict>
-			<key>fileRef</key>
-			<string>36FE804AE7938C3B88AF0C93EDF98D12</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>5F240EC2E1E7F76CA22386F9552295F0</key>
-		<dict>
-			<key>buildActionMask</key>
-			<string>2147483647</string>
-			<key>files</key>
-			<array>
-				<string>DFB6413C6EE7A07F649FA2612A66FAE8</string>
-				<string>F0EC3920107562BEFAAA72F00B85BDD3</string>
-				<string>F39E6121BE9036ACFC1475198A549720</string>
-			</array>
-			<key>isa</key>
-			<string>PBXFrameworksBuildPhase</string>
-			<key>runOnlyForDeploymentPostprocessing</key>
-			<string>0</string>
-		</dict>
-		<key>6085498F330F9FFACA61C9DB5D2D9F02</key>
+		<key>3BE1FE9B59761A14ED63456B1DA9454F</key>
 		<dict>
 			<key>includeInIndex</key>
 			<string>1</string>
@@ -997,165 +1204,36 @@
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
-		<key>63310503A3DD43ED2539C5E6BB7654B2</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.swift</string>
-			<key>name</key>
-			<string>IQKeyboardManager.swift</string>
-			<key>path</key>
-			<string>IQKeyboardManagerSwift/IQKeyboardManager.swift</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>6481C287CDC50C6FE6722A51DF4C79C6</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text.xcconfig</string>
-			<key>path</key>
-			<string>IQKeyboardManagerSwift.xcconfig</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>66E4964B0EEC2F609E8BA59A7E48B6DF</key>
-		<dict>
-			<key>buildActionMask</key>
-			<string>2147483647</string>
-			<key>files</key>
-			<array>
-				<string>203894730B81F081C861853B48255180</string>
-				<string>351F2B97D8540B68CEAB483C0A14A9EF</string>
-			</array>
-			<key>isa</key>
-			<string>PBXSourcesBuildPhase</string>
-			<key>runOnlyForDeploymentPostprocessing</key>
-			<string>0</string>
-		</dict>
-		<key>69EFF8D5CC92D942B5E034E51D75BF75</key>
+		<key>3D47852F5C6512B8B108025EDFBD00EF</key>
 		<dict>
 			<key>fileRef</key>
-			<string>3C9854452B704969D40D932335DEE0FF</string>
+			<string>78870406933F0007CC6680D621E61ABF</string>
 			<key>isa</key>
 			<string>PBXBuildFile</string>
 		</dict>
-		<key>6E68B56A7084F019D86AD32AF3E7CDDC</key>
+		<key>3E46A44E70EF24077559E10E8198694D</key>
 		<dict>
 			<key>children</key>
 			<array>
-				<string>FA194248E2C43D19151AAE3290E0A49C</string>
-				<string>6085498F330F9FFACA61C9DB5D2D9F02</string>
-				<string>6481C287CDC50C6FE6722A51DF4C79C6</string>
-				<string>D15E5744159AD7C8EB369BEA1FDE472C</string>
-				<string>525EC7DFC589B14B8A28E2B83BF044A5</string>
-				<string>C4BDFDA7A284403A0D4621817B8F52EF</string>
+				<string>B1076146AD2F484F1C4E985072190F7D</string>
+				<string>32F3CFE10446FFDD45BB65AC47A8FD1E</string>
+				<string>9B19A0BBB3C15F7605DE1956317711E0</string>
+				<string>943E748F4C257876B3E0FCF050688D19</string>
+				<string>81EE2BAA6DD661D451596371E30B77CD</string>
+				<string>334ACDDD29D71CD18EB5E53F6EFC98B2</string>
+				<string>15F4F3DEBFD6F0CF3E63AA0CD57A5169</string>
+				<string>08C690DD54CC74B6AE5BDF083671D0CC</string>
 			</array>
 			<key>isa</key>
 			<string>PBXGroup</string>
 			<key>name</key>
-			<string>Support Files</string>
+			<string>Crashlytics</string>
 			<key>path</key>
-			<string>../Target Support Files/IQKeyboardManagerSwift</string>
+			<string>Crashlytics</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
-		<key>71A413F05868F90669F54BDFB55EE6DF</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>80F7437049D942C140E8A17D15210515</string>
-				<string>3B42B98AD2ADAB8DA36C1D3A592CB9A0</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>SlideMenuControllerSwift</string>
-			<key>path</key>
-			<string>SlideMenuControllerSwift</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>721E9AC3C4CFEBACD251F1BC2481A74F</key>
-		<dict>
-			<key>explicitFileType</key>
-			<string>wrapper.framework</string>
-			<key>includeInIndex</key>
-			<string>0</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>name</key>
-			<string>IQKeyboardManagerSwift.framework</string>
-			<key>path</key>
-			<string>IQKeyboardManagerSwift.framework</string>
-			<key>sourceTree</key>
-			<string>BUILT_PRODUCTS_DIR</string>
-		</dict>
-		<key>72DB35EE2CF581C07D841E7C92B1A5D8</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.swift</string>
-			<key>name</key>
-			<string>IQUITextFieldView+Additions.swift</string>
-			<key>path</key>
-			<string>IQKeyboardManagerSwift/Categories/IQUITextFieldView+Additions.swift</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>745A098583082D3E9D056BF015C5F8B4</key>
-		<dict>
-			<key>buildConfigurationList</key>
-			<string>FE6DF64F6E1845C508DB0BCAF27630E2</string>
-			<key>buildPhases</key>
-			<array>
-				<string>A1325D0603E2478E8D51B6FF6DC1CFD9</string>
-				<string>3D23290F053A276B418E9A0B638226D1</string>
-				<string>9F27F84B211D72AE3F7CC20C024605D7</string>
-			</array>
-			<key>buildRules</key>
-			<array/>
-			<key>dependencies</key>
-			<array>
-				<string>B83AC04F0AF9F43B3F2AF27942EA9678</string>
-				<string>07085BC33B6FA7755509075152DDB9B2</string>
-			</array>
-			<key>isa</key>
-			<string>PBXNativeTarget</string>
-			<key>name</key>
-			<string>Pods-FDA</string>
-			<key>productName</key>
-			<string>Pods-FDA</string>
-			<key>productReference</key>
-			<string>1C130D50A4300A880327EBCC08BDD9D5</string>
-			<key>productType</key>
-			<string>com.apple.product-type.framework</string>
-		</dict>
-		<key>780CCC3C0D05734EF8FDBE763AA80C7D</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.swift</string>
-			<key>name</key>
-			<string>IQKeyboardReturnKeyHandler.swift</string>
-			<key>path</key>
-			<string>IQKeyboardManagerSwift/IQKeyboardReturnKeyHandler.swift</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>78E9B26C33DB51BED10B3CC0F0A87D25</key>
+		<key>3E874E1F7F14AE4EA5C2ED0D0D34CDAD</key>
 		<dict>
 			<key>includeInIndex</key>
 			<string>1</string>
@@ -1164,381 +1242,26 @@
 			<key>lastKnownFileType</key>
 			<string>sourcecode.c.h</string>
 			<key>path</key>
-			<string>SlideMenuControllerSwift-umbrella.h</string>
+			<string>SDWebImage-umbrella.h</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
-		<key>7DB346D0F39D3F0E887471402A8071AB</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>93A4A3777CF96A4AAC1D13BA6DCCEA73</string>
-				<string>122DA2E5084A4393C29BE363C764795C</string>
-				<string>8BB6EC7C7BC2EA35A8A08D1FEB2FE3E1</string>
-				<string>FFA6512770A769F96C4E5CC4E8D189C7</string>
-				<string>063844C0A78804EAE332FFE159CEC673</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>80F7437049D942C140E8A17D15210515</key>
+		<key>3F46EFC98E9B0F2B7A7F9C46BB2688E2</key>
 		<dict>
 			<key>includeInIndex</key>
 			<string>1</string>
 			<key>isa</key>
 			<string>PBXFileReference</string>
 			<key>lastKnownFileType</key>
-			<string>sourcecode.swift</string>
+			<string>sourcecode.c.h</string>
 			<key>name</key>
-			<string>SlideMenuController.swift</string>
+			<string>FABAttributes.h</string>
 			<key>path</key>
-			<string>Source/SlideMenuController.swift</string>
+			<string>iOS/Fabric.framework/Headers/FABAttributes.h</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
-		<key>8158A76634367C72057EA998E719D970</key>
-		<dict>
-			<key>baseConfigurationReference</key>
-			<string>6481C287CDC50C6FE6722A51DF4C79C6</string>
-			<key>buildSettings</key>
-			<dict>
-				<key>CODE_SIGN_IDENTITY[sdk=iphoneos*]</key>
-				<string>iPhone Developer</string>
-				<key>CURRENT_PROJECT_VERSION</key>
-				<string>1</string>
-				<key>DEBUG_INFORMATION_FORMAT</key>
-				<string>dwarf-with-dsym</string>
-				<key>DEFINES_MODULE</key>
-				<string>YES</string>
-				<key>DYLIB_COMPATIBILITY_VERSION</key>
-				<string>1</string>
-				<key>DYLIB_CURRENT_VERSION</key>
-				<string>1</string>
-				<key>DYLIB_INSTALL_NAME_BASE</key>
-				<string>@rpath</string>
-				<key>ENABLE_STRICT_OBJC_MSGSEND</key>
-				<string>YES</string>
-				<key>GCC_NO_COMMON_BLOCKS</key>
-				<string>YES</string>
-				<key>GCC_PREFIX_HEADER</key>
-				<string>Target Support Files/IQKeyboardManagerSwift/IQKeyboardManagerSwift-prefix.pch</string>
-				<key>INFOPLIST_FILE</key>
-				<string>Target Support Files/IQKeyboardManagerSwift/Info.plist</string>
-				<key>INSTALL_PATH</key>
-				<string>$(LOCAL_LIBRARY_DIR)/Frameworks</string>
-				<key>IPHONEOS_DEPLOYMENT_TARGET</key>
-				<string>8.0</string>
-				<key>LD_RUNPATH_SEARCH_PATHS</key>
-				<array>
-					<string>$(inherited)</string>
-					<string>@executable_path/Frameworks</string>
-					<string>@loader_path/Frameworks</string>
-				</array>
-				<key>MODULEMAP_FILE</key>
-				<string>Target Support Files/IQKeyboardManagerSwift/IQKeyboardManagerSwift.modulemap</string>
-				<key>MTL_ENABLE_DEBUG_INFO</key>
-				<string>NO</string>
-				<key>PRODUCT_NAME</key>
-				<string>IQKeyboardManagerSwift</string>
-				<key>SDKROOT</key>
-				<string>iphoneos</string>
-				<key>SKIP_INSTALL</key>
-				<string>YES</string>
-				<key>SWIFT_VERSION</key>
-				<string>3.0</string>
-				<key>TARGETED_DEVICE_FAMILY</key>
-				<string>1,2</string>
-				<key>VERSIONING_SYSTEM</key>
-				<string>apple-generic</string>
-				<key>VERSION_INFO_PREFIX</key>
-				<string></string>
-			</dict>
-			<key>isa</key>
-			<string>XCBuildConfiguration</string>
-			<key>name</key>
-			<string>Release</string>
-		</dict>
-		<key>816F8F264CF242D9F9A6F521950E7474</key>
-		<dict>
-			<key>fileRef</key>
-			<string>A41E32ADC0470AA3B9DFE3F98285BD2D</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>84B8F51C55543D7E038030BCBA174C00</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text.script.sh</string>
-			<key>path</key>
-			<string>Pods-FDA-frameworks.sh</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>86158EF160C9C4B7AEFFCE7FC59E599B</key>
-		<dict>
-			<key>buildActionMask</key>
-			<string>2147483647</string>
-			<key>files</key>
-			<array>
-				<string>139250EF8D4E404AD5019BA8966C0ED0</string>
-			</array>
-			<key>isa</key>
-			<string>PBXHeadersBuildPhase</string>
-			<key>runOnlyForDeploymentPostprocessing</key>
-			<string>0</string>
-		</dict>
-		<key>8722F3DEE977789B662744240353D970</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text.plist.xml</string>
-			<key>path</key>
-			<string>Pods-FDATests-acknowledgements.plist</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>879EDC2C7E8100C20DD5C06ACCF75467</key>
-		<dict>
-			<key>fileRef</key>
-			<string>4F6508F9246B3BF54058BEEE564108CA</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>88664BB5B0AB95E063B62BAEDE81C5C1</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.swift</string>
-			<key>name</key>
-			<string>IQUIScrollView+Additions.swift</string>
-			<key>path</key>
-			<string>IQKeyboardManagerSwift/Categories/IQUIScrollView+Additions.swift</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>8963C1F4D9907D7E5B31BDF15262632A</key>
-		<dict>
-			<key>fileRef</key>
-			<string>DAB0F40AFC6F7AF08F1F007E5EC916EE</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>8BB6EC7C7BC2EA35A8A08D1FEB2FE3E1</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>B714A80B1106D6505B8D6998509D05A8</string>
-				<string>71A413F05868F90669F54BDFB55EE6DF</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>Pods</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>8E65A93A85A26A77C2F9D3D85012D608</key>
-		<dict>
-			<key>containerPortal</key>
-			<string>D41D8CD98F00B204E9800998ECF8427E</string>
-			<key>isa</key>
-			<string>PBXContainerItemProxy</string>
-			<key>proxyType</key>
-			<string>1</string>
-			<key>remoteGlobalIDString</key>
-			<string>1520003FEBEC114D6C84F832AFEDB994</string>
-			<key>remoteInfo</key>
-			<string>IQKeyboardManagerSwift</string>
-		</dict>
-		<key>8F787E77C0D561F29D856299FA55DC83</key>
-		<dict>
-			<key>buildConfigurations</key>
-			<array>
-				<string>51C2BC99C5218225F33BA26D590DF312</string>
-				<string>8158A76634367C72057EA998E719D970</string>
-			</array>
-			<key>defaultConfigurationIsVisible</key>
-			<string>0</string>
-			<key>defaultConfigurationName</key>
-			<string>Release</string>
-			<key>isa</key>
-			<string>XCConfigurationList</string>
-		</dict>
-		<key>90C01423FCBC9E9236399341F3378BFD</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text</string>
-			<key>path</key>
-			<string>Pods-FDATests-acknowledgements.markdown</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>91030AF37F93914AB64B6D95F55E762D</key>
-		<dict>
-			<key>fileRef</key>
-			<string>091DF997950D402B2ED9600BDDFCEDBE</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>93A4A3777CF96A4AAC1D13BA6DCCEA73</key>
-		<dict>
-			<key>explicitFileType</key>
-			<string>text.script.ruby</string>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text</string>
-			<key>name</key>
-			<string>Podfile</string>
-			<key>path</key>
-			<string>../Podfile</string>
-			<key>sourceTree</key>
-			<string>SOURCE_ROOT</string>
-			<key>xcLanguageSpecificationIdentifier</key>
-			<string>xcode.lang.ruby</string>
-		</dict>
-		<key>963EE6145796E2422513C55BBFFE8971</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text.xcconfig</string>
-			<key>path</key>
-			<string>SlideMenuControllerSwift.xcconfig</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>989EE4ED1C86991E81339AF1CBF3654A</key>
-		<dict>
-			<key>fileRef</key>
-			<string>9EB01A82402675E1924AF158C626E8AB</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>98B7A04D77FCB147CD5AE9282F26CA73</key>
-		<dict>
-			<key>fileRef</key>
-			<string>3C9854452B704969D40D932335DEE0FF</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>995959CA6C582CC2851B5FED7B7CDA32</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>wrapper.plug-in</string>
-			<key>name</key>
-			<string>IQKeyboardManager.bundle</string>
-			<key>path</key>
-			<string>IQKeyboardManagerSwift/Resources/IQKeyboardManager.bundle</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>9AAEC4DC444BE76043DC8003592541BC</key>
-		<dict>
-			<key>fileRef</key>
-			<string>2A87580AD1DD7EF3B8BEFE96A7D18D08</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-			<key>settings</key>
-			<dict>
-				<key>ATTRIBUTES</key>
-				<array>
-					<string>Public</string>
-				</array>
-			</dict>
-		</dict>
-		<key>9EB01A82402675E1924AF158C626E8AB</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.swift</string>
-			<key>name</key>
-			<string>IQUIView+Hierarchy.swift</string>
-			<key>path</key>
-			<string>IQKeyboardManagerSwift/Categories/IQUIView+Hierarchy.swift</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>9EF599536292ABC7E3B2692B562EC437</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.swift</string>
-			<key>name</key>
-			<string>IQTextView.swift</string>
-			<key>path</key>
-			<string>IQKeyboardManagerSwift/IQTextView/IQTextView.swift</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>9F27F84B211D72AE3F7CC20C024605D7</key>
-		<dict>
-			<key>buildActionMask</key>
-			<string>2147483647</string>
-			<key>files</key>
-			<array>
-				<string>E2975BA6BA8850B6B925D27B4CD8B1F2</string>
-			</array>
-			<key>isa</key>
-			<string>PBXHeadersBuildPhase</string>
-			<key>runOnlyForDeploymentPostprocessing</key>
-			<string>0</string>
-		</dict>
-		<key>9F8CAD423FF6DB46A9234790E1ABD88E</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>path</key>
-			<string>Pods-FDA.modulemap</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>A1325D0603E2478E8D51B6FF6DC1CFD9</key>
-		<dict>
-			<key>buildActionMask</key>
-			<string>2147483647</string>
-			<key>files</key>
-			<array>
-				<string>D450E812CB24B48CB971DB72B592DBDD</string>
-			</array>
-			<key>isa</key>
-			<string>PBXSourcesBuildPhase</string>
-			<key>runOnlyForDeploymentPostprocessing</key>
-			<string>0</string>
-		</dict>
-		<key>A15149B35E5D4D0854C1E4B89FD090D3</key>
+		<key>43FB226E30AE632164A63E41D92AACED</key>
 		<dict>
 			<key>baseConfigurationReference</key>
 			<string>5A2F9808D1E481D0A135D6237CAC70DC</string>
@@ -1608,17 +1331,1411 @@
 			<key>name</key>
 			<string>Release</string>
 		</dict>
+		<key>45FC1A4F5E0403D4FE395BF27C507602</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>name</key>
+			<string>SDWebImageDownloaderOperation.m</string>
+			<key>path</key>
+			<string>SDWebImage/SDWebImageDownloaderOperation.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>463C1FE545D146AC9AA57C99FD5D367D</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.swift</string>
+			<key>name</key>
+			<string>IQKeyboardManagerConstantsInternal.swift</string>
+			<key>path</key>
+			<string>IQKeyboardManagerSwift/Constants/IQKeyboardManagerConstantsInternal.swift</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>481681D2D424427C844FB65FAE113544</key>
+		<dict>
+			<key>fileRef</key>
+			<string>0A842637E1585C7DCDB7A298A5645E57</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>48877F823DDECC376D7C402C52433D49</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>text.xcconfig</string>
+			<key>path</key>
+			<string>SDWebImage.xcconfig</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>4B7F05E38B4CF082FFC170E3E236814C</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.swift</string>
+			<key>name</key>
+			<string>IQTextView.swift</string>
+			<key>path</key>
+			<string>IQKeyboardManagerSwift/IQTextView/IQTextView.swift</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>4D0124C0D6671CB434DC81F2C0C36FF0</key>
+		<dict>
+			<key>fileRef</key>
+			<string>517E6F633DC8C1FA382CB5EB13C2AADA</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>ATTRIBUTES</key>
+				<array>
+					<string>Public</string>
+				</array>
+			</dict>
+		</dict>
+		<key>4D3EF353BE553141052F9078B724DE84</key>
+		<dict>
+			<key>buildActionMask</key>
+			<string>2147483647</string>
+			<key>files</key>
+			<array>
+				<string>5E1E6967E01D411353D12CCEE9212E2A</string>
+			</array>
+			<key>isa</key>
+			<string>PBXHeadersBuildPhase</string>
+			<key>runOnlyForDeploymentPostprocessing</key>
+			<string>0</string>
+		</dict>
+		<key>4E101366641CC244927397D60E74AB84</key>
+		<dict>
+			<key>fileRef</key>
+			<string>45FC1A4F5E0403D4FE395BF27C507602</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>4E1EACAFB51FF16C7330C7BE76B4AE07</key>
+		<dict>
+			<key>fileRef</key>
+			<string>85254AA07E6987A36C67837348CDF9C5</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>4E5FF11B43432DFA4BE62AA61D49248C</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXTargetDependency</string>
+			<key>name</key>
+			<string>IQKeyboardManagerSwift</string>
+			<key>target</key>
+			<string>1520003FEBEC114D6C84F832AFEDB994</string>
+			<key>targetProxy</key>
+			<string>BAC472A794043A81E82755C4E8E6B6C6</string>
+		</dict>
+		<key>4F6D1DB05F7F1CDF33F314183CCCAB57</key>
+		<dict>
+			<key>fileRef</key>
+			<string>D1F81EEA51AE8F7F91CC5CFD9205FC04</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>4F9062A58D6CB96EC333A520E3E34B09</key>
+		<dict>
+			<key>fileRef</key>
+			<string>79A876F61CF90D81607C0FA573A56F24</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>517E6F633DC8C1FA382CB5EB13C2AADA</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>UIButton+WebCache.h</string>
+			<key>path</key>
+			<string>SDWebImage/UIButton+WebCache.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>51C2BC99C5218225F33BA26D590DF312</key>
+		<dict>
+			<key>baseConfigurationReference</key>
+			<string>E062193A1DB3F9DBFFA2A16E540C65D9</string>
+			<key>buildSettings</key>
+			<dict>
+				<key>CODE_SIGN_IDENTITY[sdk=iphoneos*]</key>
+				<string>iPhone Developer</string>
+				<key>CURRENT_PROJECT_VERSION</key>
+				<string>1</string>
+				<key>DEBUG_INFORMATION_FORMAT</key>
+				<string>dwarf</string>
+				<key>DEFINES_MODULE</key>
+				<string>YES</string>
+				<key>DYLIB_COMPATIBILITY_VERSION</key>
+				<string>1</string>
+				<key>DYLIB_CURRENT_VERSION</key>
+				<string>1</string>
+				<key>DYLIB_INSTALL_NAME_BASE</key>
+				<string>@rpath</string>
+				<key>ENABLE_STRICT_OBJC_MSGSEND</key>
+				<string>YES</string>
+				<key>GCC_NO_COMMON_BLOCKS</key>
+				<string>YES</string>
+				<key>GCC_PREFIX_HEADER</key>
+				<string>Target Support Files/IQKeyboardManagerSwift/IQKeyboardManagerSwift-prefix.pch</string>
+				<key>INFOPLIST_FILE</key>
+				<string>Target Support Files/IQKeyboardManagerSwift/Info.plist</string>
+				<key>INSTALL_PATH</key>
+				<string>$(LOCAL_LIBRARY_DIR)/Frameworks</string>
+				<key>IPHONEOS_DEPLOYMENT_TARGET</key>
+				<string>8.0</string>
+				<key>LD_RUNPATH_SEARCH_PATHS</key>
+				<array>
+					<string>$(inherited)</string>
+					<string>@executable_path/Frameworks</string>
+					<string>@loader_path/Frameworks</string>
+				</array>
+				<key>MODULEMAP_FILE</key>
+				<string>Target Support Files/IQKeyboardManagerSwift/IQKeyboardManagerSwift.modulemap</string>
+				<key>MTL_ENABLE_DEBUG_INFO</key>
+				<string>YES</string>
+				<key>PRODUCT_NAME</key>
+				<string>IQKeyboardManagerSwift</string>
+				<key>SDKROOT</key>
+				<string>iphoneos</string>
+				<key>SKIP_INSTALL</key>
+				<string>YES</string>
+				<key>SWIFT_OPTIMIZATION_LEVEL</key>
+				<string>-Onone</string>
+				<key>SWIFT_VERSION</key>
+				<string>3.0</string>
+				<key>TARGETED_DEVICE_FAMILY</key>
+				<string>1,2</string>
+				<key>VERSIONING_SYSTEM</key>
+				<string>apple-generic</string>
+				<key>VERSION_INFO_PREFIX</key>
+				<string></string>
+			</dict>
+			<key>isa</key>
+			<string>XCBuildConfiguration</string>
+			<key>name</key>
+			<string>Debug</string>
+		</dict>
+		<key>52680C1D6B5611C2144E5F56250F5B79</key>
+		<dict>
+			<key>baseConfigurationReference</key>
+			<string>48877F823DDECC376D7C402C52433D49</string>
+			<key>buildSettings</key>
+			<dict>
+				<key>CODE_SIGN_IDENTITY[sdk=iphoneos*]</key>
+				<string>iPhone Developer</string>
+				<key>CURRENT_PROJECT_VERSION</key>
+				<string>1</string>
+				<key>DEBUG_INFORMATION_FORMAT</key>
+				<string>dwarf-with-dsym</string>
+				<key>DEFINES_MODULE</key>
+				<string>YES</string>
+				<key>DYLIB_COMPATIBILITY_VERSION</key>
+				<string>1</string>
+				<key>DYLIB_CURRENT_VERSION</key>
+				<string>1</string>
+				<key>DYLIB_INSTALL_NAME_BASE</key>
+				<string>@rpath</string>
+				<key>ENABLE_STRICT_OBJC_MSGSEND</key>
+				<string>YES</string>
+				<key>GCC_NO_COMMON_BLOCKS</key>
+				<string>YES</string>
+				<key>GCC_PREFIX_HEADER</key>
+				<string>Target Support Files/SDWebImage/SDWebImage-prefix.pch</string>
+				<key>INFOPLIST_FILE</key>
+				<string>Target Support Files/SDWebImage/Info.plist</string>
+				<key>INSTALL_PATH</key>
+				<string>$(LOCAL_LIBRARY_DIR)/Frameworks</string>
+				<key>IPHONEOS_DEPLOYMENT_TARGET</key>
+				<string>8.0</string>
+				<key>LD_RUNPATH_SEARCH_PATHS</key>
+				<array>
+					<string>$(inherited)</string>
+					<string>@executable_path/Frameworks</string>
+					<string>@loader_path/Frameworks</string>
+				</array>
+				<key>MODULEMAP_FILE</key>
+				<string>Target Support Files/SDWebImage/SDWebImage.modulemap</string>
+				<key>MTL_ENABLE_DEBUG_INFO</key>
+				<string>NO</string>
+				<key>PRODUCT_NAME</key>
+				<string>SDWebImage</string>
+				<key>SDKROOT</key>
+				<string>iphoneos</string>
+				<key>SKIP_INSTALL</key>
+				<string>YES</string>
+				<key>SWIFT_VERSION</key>
+				<string>3.0</string>
+				<key>TARGETED_DEVICE_FAMILY</key>
+				<string>1,2</string>
+				<key>VERSIONING_SYSTEM</key>
+				<string>apple-generic</string>
+				<key>VERSION_INFO_PREFIX</key>
+				<string></string>
+			</dict>
+			<key>isa</key>
+			<string>XCBuildConfiguration</string>
+			<key>name</key>
+			<string>Release</string>
+		</dict>
+		<key>52FA02072126922BFB1C7626BC9AE08A</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>598E478B8A38A7461681A50CD659D9A0</string>
+				<string>3BE1FE9B59761A14ED63456B1DA9454F</string>
+				<string>E062193A1DB3F9DBFFA2A16E540C65D9</string>
+				<string>2B4BABF2646C9D8D0BC9EBECA58F85F8</string>
+				<string>92ED371462B2BB992CD5E8F7D75DBAB3</string>
+				<string>B1BBA6BD3F4BF6749A6507764647E3B3</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>Support Files</string>
+			<key>path</key>
+			<string>../Target Support Files/IQKeyboardManagerSwift</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>55170427A4435520D4BC59DE10121680</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>text.script.sh</string>
+			<key>path</key>
+			<string>Pods-FDA-resources.sh</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>55A775AD62C9AAA6F6C6B0B890A07E9E</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>name</key>
+			<string>SDWebImageDownloader.m</string>
+			<key>path</key>
+			<string>SDWebImage/SDWebImageDownloader.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>582DD6E32860F945325877EC92D99B9A</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>77A4FC80B9E76FF8AD7E022DE9911A45</string>
+				<string>85254AA07E6987A36C67837348CDF9C5</string>
+				<string>3205F00372C6088F03D814A5D4E8637C</string>
+				<string>1C48DFA086337CC9C53C9505D1096F01</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>iOS</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>58613930FA3EAEF9631A762E63C19F23</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>SDWebImagePrefetcher.h</string>
+			<key>path</key>
+			<string>SDWebImage/SDWebImagePrefetcher.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>5876D673864588C86832C7CBD69142E0</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>name</key>
+			<string>UIView+WebCacheOperation.m</string>
+			<key>path</key>
+			<string>SDWebImage/UIView+WebCacheOperation.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>598E478B8A38A7461681A50CD659D9A0</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>text.plist.xml</string>
+			<key>path</key>
+			<string>Info.plist</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>59D87C6DDEE038D47CC06ECFA3478F66</key>
+		<dict>
+			<key>fileRef</key>
+			<string>D97920D64385806F86E5C4B8091D1D11</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>5A2F9808D1E481D0A135D6237CAC70DC</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>text.xcconfig</string>
+			<key>path</key>
+			<string>Pods-FDA.release.xcconfig</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>5B817F27303984668BF1D291FB4C1898</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>name</key>
+			<string>NSImage+WebCache.m</string>
+			<key>path</key>
+			<string>SDWebImage/NSImage+WebCache.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>5DBB05B579540B2CE783128F2995548E</key>
+		<dict>
+			<key>explicitFileType</key>
+			<string>wrapper.framework</string>
+			<key>includeInIndex</key>
+			<string>0</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>name</key>
+			<string>Pods_FDATests.framework</string>
+			<key>path</key>
+			<string>Pods-FDATests.framework</string>
+			<key>sourceTree</key>
+			<string>BUILT_PRODUCTS_DIR</string>
+		</dict>
+		<key>5DCD12C2C139245388578C182CACC06D</key>
+		<dict>
+			<key>fileRef</key>
+			<string>26585777B7E555D4D800EDDA85D3AD9B</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>5E1E6967E01D411353D12CCEE9212E2A</key>
+		<dict>
+			<key>fileRef</key>
+			<string>AFE478DD98AA980C9DEA118A6C5CBDA5</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>ATTRIBUTES</key>
+				<array>
+					<string>Public</string>
+				</array>
+			</dict>
+		</dict>
+		<key>5E960CE7B823A148E57C4173D946224E</key>
+		<dict>
+			<key>buildActionMask</key>
+			<string>2147483647</string>
+			<key>files</key>
+			<array>
+				<string>F1737C88A79306946011065BD3117008</string>
+				<string>C427DDEDE2DADD338073CE88A0F1269A</string>
+			</array>
+			<key>isa</key>
+			<string>PBXSourcesBuildPhase</string>
+			<key>runOnlyForDeploymentPostprocessing</key>
+			<string>0</string>
+		</dict>
+		<key>5F240EC2E1E7F76CA22386F9552295F0</key>
+		<dict>
+			<key>buildActionMask</key>
+			<string>2147483647</string>
+			<key>files</key>
+			<array>
+				<string>DFB6413C6EE7A07F649FA2612A66FAE8</string>
+				<string>F0EC3920107562BEFAAA72F00B85BDD3</string>
+				<string>F39E6121BE9036ACFC1475198A549720</string>
+			</array>
+			<key>isa</key>
+			<string>PBXFrameworksBuildPhase</string>
+			<key>runOnlyForDeploymentPostprocessing</key>
+			<string>0</string>
+		</dict>
+		<key>6110409E177670C1BA86FC005002B693</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>SDWebImageOperation.h</string>
+			<key>path</key>
+			<string>SDWebImage/SDWebImageOperation.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>61D1EAA8504516CBAAC3D20152A3A1F7</key>
+		<dict>
+			<key>fileRef</key>
+			<string>2A9B5AD1CDA068D9D91FDC32D053FC14</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>ATTRIBUTES</key>
+				<array>
+					<string>Public</string>
+				</array>
+			</dict>
+		</dict>
+		<key>6250F7938142C6821BF9BF957657A04D</key>
+		<dict>
+			<key>fileRef</key>
+			<string>70EBAF4166AFFE0900CE9E49046841FB</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>6271CD58A53E8EB97AA19786795AA70E</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>AD9EEDE854BE84F095D5BCA100247047</string>
+				<string>65F6D6D919A5DD2F396ADC8C71B9636A</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>SDWebImage</string>
+			<key>path</key>
+			<string>SDWebImage</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>65F6D6D919A5DD2F396ADC8C71B9636A</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>05C1B282627C8D3EB44F0016B98436C5</string>
+				<string>11EFEAD8B6304BB87E70D7DF8065CE55</string>
+				<string>48877F823DDECC376D7C402C52433D49</string>
+				<string>0A842637E1585C7DCDB7A298A5645E57</string>
+				<string>179478D96666DF4321C77DB4E0F2B965</string>
+				<string>3E874E1F7F14AE4EA5C2ED0D0D34CDAD</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>Support Files</string>
+			<key>path</key>
+			<string>../Target Support Files/SDWebImage</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>669C4B97CD10C4034F17DEC126D2EFFB</key>
+		<dict>
+			<key>buildConfigurations</key>
+			<array>
+				<string>EAD5179D92ABAD778C40E1913E322009</string>
+				<string>43FB226E30AE632164A63E41D92AACED</string>
+			</array>
+			<key>defaultConfigurationIsVisible</key>
+			<string>0</string>
+			<key>defaultConfigurationName</key>
+			<string>Release</string>
+			<key>isa</key>
+			<string>XCConfigurationList</string>
+		</dict>
+		<key>671909451F7072FCC8B64E6FD17D637F</key>
+		<dict>
+			<key>fileRef</key>
+			<string>EDA7837F11484A192B22949E9C352DDE</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>ATTRIBUTES</key>
+				<array>
+					<string>Public</string>
+				</array>
+			</dict>
+		</dict>
+		<key>679D05DC17966647FB0C893645DA4825</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>BFE3C0EF882E0AA3D3F3A2D8821CB68E</string>
+				<string>3B72185442DC041662540296EB9EE246</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>SlideMenuControllerSwift</string>
+			<key>path</key>
+			<string>SlideMenuControllerSwift</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>6F28B0F167ED335EC739E57BDB8AD2CE</key>
+		<dict>
+			<key>buildActionMask</key>
+			<string>2147483647</string>
+			<key>files</key>
+			<array>
+				<string>6250F7938142C6821BF9BF957657A04D</string>
+				<string>989DCD57EB9C514800A1549CBA3ADF85</string>
+				<string>3386E78F9223A42A6E5059AE349C1446</string>
+				<string>108AD0CBADB4CBA1FCA0E40C604E581C</string>
+				<string>481681D2D424427C844FB65FAE113544</string>
+				<string>C51AF059FB2256C1098579382A29E72F</string>
+				<string>3ACBA34C177206AF6B2BC14939CD5159</string>
+				<string>8F1290B9D1753A63AFBD861EA6B13CE1</string>
+				<string>4E101366641CC244927397D60E74AB84</string>
+				<string>4F6D1DB05F7F1CDF33F314183CCCAB57</string>
+				<string>8B25CC1F1162B3FB493C5BE9B9E3089C</string>
+				<string>D2CF91B64AE19D001F5D079EA4A49FDF</string>
+				<string>3D47852F5C6512B8B108025EDFBD00EF</string>
+				<string>A48EA4F10384A0A2EA6C66B5822B88A0</string>
+				<string>4F9062A58D6CB96EC333A520E3E34B09</string>
+				<string>7366CE67BAE02BDE9E6BE5FB6F0BCA39</string>
+				<string>BF5DD38DC75BD1DEC8C193F906ED3B3D</string>
+				<string>037775677AC798F3499F74A88EE118C6</string>
+			</array>
+			<key>isa</key>
+			<string>PBXSourcesBuildPhase</string>
+			<key>runOnlyForDeploymentPostprocessing</key>
+			<string>0</string>
+		</dict>
+		<key>70EBAF4166AFFE0900CE9E49046841FB</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>name</key>
+			<string>NSData+ImageContentType.m</string>
+			<key>path</key>
+			<string>SDWebImage/NSData+ImageContentType.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>7150EE28D5D9BE2064D303539BF0B441</key>
+		<dict>
+			<key>containerPortal</key>
+			<string>D41D8CD98F00B204E9800998ECF8427E</string>
+			<key>isa</key>
+			<string>PBXContainerItemProxy</string>
+			<key>proxyType</key>
+			<string>1</string>
+			<key>remoteGlobalIDString</key>
+			<string>79BC1236023988E3688970E07CCC86AC</string>
+			<key>remoteInfo</key>
+			<string>SDWebImage</string>
+		</dict>
+		<key>7366CE67BAE02BDE9E6BE5FB6F0BCA39</key>
+		<dict>
+			<key>fileRef</key>
+			<string>9425EAC67A2E3FB676788C1D0E61DAA8</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>77A4FC80B9E76FF8AD7E022DE9911A45</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>wrapper.framework</string>
+			<key>name</key>
+			<string>CoreGraphics.framework</string>
+			<key>path</key>
+			<string>Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.3.sdk/System/Library/Frameworks/CoreGraphics.framework</string>
+			<key>sourceTree</key>
+			<string>DEVELOPER_DIR</string>
+		</dict>
+		<key>78870406933F0007CC6680D621E61ABF</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>name</key>
+			<string>UIImage+GIF.m</string>
+			<key>path</key>
+			<string>SDWebImage/UIImage+GIF.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>78955485B1E64B015D940BF4D4517EED</key>
+		<dict>
+			<key>buildActionMask</key>
+			<string>2147483647</string>
+			<key>files</key>
+			<array>
+				<string>8BDF5E7498AAD95E1A13E39DDD00F25E</string>
+				<string>22CF44503F9D22517DB717E5E81646C0</string>
+			</array>
+			<key>isa</key>
+			<string>PBXFrameworksBuildPhase</string>
+			<key>runOnlyForDeploymentPostprocessing</key>
+			<string>0</string>
+		</dict>
+		<key>78B53A73670E9CEC24CBDDAD5877375E</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>text.plist.xml</string>
+			<key>path</key>
+			<string>Info.plist</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>79A876F61CF90D81607C0FA573A56F24</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>name</key>
+			<string>UIImageView+HighlightedWebCache.m</string>
+			<key>path</key>
+			<string>SDWebImage/UIImageView+HighlightedWebCache.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>79BC1236023988E3688970E07CCC86AC</key>
+		<dict>
+			<key>buildConfigurationList</key>
+			<string>2056B88955E0B6F0EEE6CA947D2B2F5E</string>
+			<key>buildPhases</key>
+			<array>
+				<string>6F28B0F167ED335EC739E57BDB8AD2CE</string>
+				<string>78955485B1E64B015D940BF4D4517EED</string>
+				<string>A6D3EB2DEE2B89C39A141584E26CFD04</string>
+			</array>
+			<key>buildRules</key>
+			<array/>
+			<key>dependencies</key>
+			<array/>
+			<key>isa</key>
+			<string>PBXNativeTarget</string>
+			<key>name</key>
+			<string>SDWebImage</string>
+			<key>productName</key>
+			<string>SDWebImage</string>
+			<key>productReference</key>
+			<string>7C207B833CBFA2FABE1622AB8493B5F4</string>
+			<key>productType</key>
+			<string>com.apple.product-type.framework</string>
+		</dict>
+		<key>7A2FE2486E13F69986F23BFA338F3F5A</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>name</key>
+			<string>UIButton+WebCache.m</string>
+			<key>path</key>
+			<string>SDWebImage/UIButton+WebCache.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>7C1F79F89A0407312230551C6F37451F</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.swift</string>
+			<key>name</key>
+			<string>IQUITextFieldView+Additions.swift</string>
+			<key>path</key>
+			<string>IQKeyboardManagerSwift/Categories/IQUITextFieldView+Additions.swift</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>7C207B833CBFA2FABE1622AB8493B5F4</key>
+		<dict>
+			<key>explicitFileType</key>
+			<string>wrapper.framework</string>
+			<key>includeInIndex</key>
+			<string>0</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>name</key>
+			<string>SDWebImage.framework</string>
+			<key>path</key>
+			<string>SDWebImage.framework</string>
+			<key>sourceTree</key>
+			<string>BUILT_PRODUCTS_DIR</string>
+		</dict>
+		<key>7C8EAE9815739C10F5F8A20B355D895C</key>
+		<dict>
+			<key>baseConfigurationReference</key>
+			<string>8DB418DF5DD146110CF29224F7E9A57C</string>
+			<key>buildSettings</key>
+			<dict>
+				<key>CODE_SIGN_IDENTITY[sdk=iphoneos*]</key>
+				<string>iPhone Developer</string>
+				<key>CURRENT_PROJECT_VERSION</key>
+				<string>1</string>
+				<key>DEBUG_INFORMATION_FORMAT</key>
+				<string>dwarf</string>
+				<key>DEFINES_MODULE</key>
+				<string>YES</string>
+				<key>DYLIB_COMPATIBILITY_VERSION</key>
+				<string>1</string>
+				<key>DYLIB_CURRENT_VERSION</key>
+				<string>1</string>
+				<key>DYLIB_INSTALL_NAME_BASE</key>
+				<string>@rpath</string>
+				<key>ENABLE_STRICT_OBJC_MSGSEND</key>
+				<string>YES</string>
+				<key>GCC_NO_COMMON_BLOCKS</key>
+				<string>YES</string>
+				<key>GCC_PREFIX_HEADER</key>
+				<string>Target Support Files/SlideMenuControllerSwift/SlideMenuControllerSwift-prefix.pch</string>
+				<key>INFOPLIST_FILE</key>
+				<string>Target Support Files/SlideMenuControllerSwift/Info.plist</string>
+				<key>INSTALL_PATH</key>
+				<string>$(LOCAL_LIBRARY_DIR)/Frameworks</string>
+				<key>IPHONEOS_DEPLOYMENT_TARGET</key>
+				<string>8.0</string>
+				<key>LD_RUNPATH_SEARCH_PATHS</key>
+				<array>
+					<string>$(inherited)</string>
+					<string>@executable_path/Frameworks</string>
+					<string>@loader_path/Frameworks</string>
+				</array>
+				<key>MODULEMAP_FILE</key>
+				<string>Target Support Files/SlideMenuControllerSwift/SlideMenuControllerSwift.modulemap</string>
+				<key>MTL_ENABLE_DEBUG_INFO</key>
+				<string>YES</string>
+				<key>PRODUCT_NAME</key>
+				<string>SlideMenuControllerSwift</string>
+				<key>SDKROOT</key>
+				<string>iphoneos</string>
+				<key>SKIP_INSTALL</key>
+				<string>YES</string>
+				<key>SWIFT_OPTIMIZATION_LEVEL</key>
+				<string>-Onone</string>
+				<key>SWIFT_VERSION</key>
+				<string>3.0</string>
+				<key>TARGETED_DEVICE_FAMILY</key>
+				<string>1,2</string>
+				<key>VERSIONING_SYSTEM</key>
+				<string>apple-generic</string>
+				<key>VERSION_INFO_PREFIX</key>
+				<string></string>
+			</dict>
+			<key>isa</key>
+			<string>XCBuildConfiguration</string>
+			<key>name</key>
+			<string>Debug</string>
+		</dict>
+		<key>7DB346D0F39D3F0E887471402A8071AB</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>93A4A3777CF96A4AAC1D13BA6DCCEA73</string>
+				<string>14B8B9B15ECBE87983FF987239AB2D7B</string>
+				<string>F8504428A6779FC74B02F4EE1D6C8A0E</string>
+				<string>1D2D04A334F3DC067163BE7B32BCBA0C</string>
+				<string>063844C0A78804EAE332FFE159CEC673</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>7F11B491D40EE4D920DB17BBFC61FB3F</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>Fabric.h</string>
+			<key>path</key>
+			<string>iOS/Fabric.framework/Headers/Fabric.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>8158A76634367C72057EA998E719D970</key>
+		<dict>
+			<key>baseConfigurationReference</key>
+			<string>E062193A1DB3F9DBFFA2A16E540C65D9</string>
+			<key>buildSettings</key>
+			<dict>
+				<key>CODE_SIGN_IDENTITY[sdk=iphoneos*]</key>
+				<string>iPhone Developer</string>
+				<key>CURRENT_PROJECT_VERSION</key>
+				<string>1</string>
+				<key>DEBUG_INFORMATION_FORMAT</key>
+				<string>dwarf-with-dsym</string>
+				<key>DEFINES_MODULE</key>
+				<string>YES</string>
+				<key>DYLIB_COMPATIBILITY_VERSION</key>
+				<string>1</string>
+				<key>DYLIB_CURRENT_VERSION</key>
+				<string>1</string>
+				<key>DYLIB_INSTALL_NAME_BASE</key>
+				<string>@rpath</string>
+				<key>ENABLE_STRICT_OBJC_MSGSEND</key>
+				<string>YES</string>
+				<key>GCC_NO_COMMON_BLOCKS</key>
+				<string>YES</string>
+				<key>GCC_PREFIX_HEADER</key>
+				<string>Target Support Files/IQKeyboardManagerSwift/IQKeyboardManagerSwift-prefix.pch</string>
+				<key>INFOPLIST_FILE</key>
+				<string>Target Support Files/IQKeyboardManagerSwift/Info.plist</string>
+				<key>INSTALL_PATH</key>
+				<string>$(LOCAL_LIBRARY_DIR)/Frameworks</string>
+				<key>IPHONEOS_DEPLOYMENT_TARGET</key>
+				<string>8.0</string>
+				<key>LD_RUNPATH_SEARCH_PATHS</key>
+				<array>
+					<string>$(inherited)</string>
+					<string>@executable_path/Frameworks</string>
+					<string>@loader_path/Frameworks</string>
+				</array>
+				<key>MODULEMAP_FILE</key>
+				<string>Target Support Files/IQKeyboardManagerSwift/IQKeyboardManagerSwift.modulemap</string>
+				<key>MTL_ENABLE_DEBUG_INFO</key>
+				<string>NO</string>
+				<key>PRODUCT_NAME</key>
+				<string>IQKeyboardManagerSwift</string>
+				<key>SDKROOT</key>
+				<string>iphoneos</string>
+				<key>SKIP_INSTALL</key>
+				<string>YES</string>
+				<key>SWIFT_VERSION</key>
+				<string>3.0</string>
+				<key>TARGETED_DEVICE_FAMILY</key>
+				<string>1,2</string>
+				<key>VERSIONING_SYSTEM</key>
+				<string>apple-generic</string>
+				<key>VERSION_INFO_PREFIX</key>
+				<string></string>
+			</dict>
+			<key>isa</key>
+			<string>XCBuildConfiguration</string>
+			<key>name</key>
+			<string>Release</string>
+		</dict>
+		<key>816F8F264CF242D9F9A6F521950E7474</key>
+		<dict>
+			<key>fileRef</key>
+			<string>A41E32ADC0470AA3B9DFE3F98285BD2D</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>81EE2BAA6DD661D451596371E30B77CD</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>CLSReport.h</string>
+			<key>path</key>
+			<string>iOS/Crashlytics.framework/Headers/CLSReport.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>839CC8675D721D0E4614E5E48885CDEB</key>
+		<dict>
+			<key>fileRef</key>
+			<string>D3554EBDD914424A247D668DEA0AC386</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>84B8F51C55543D7E038030BCBA174C00</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>text.script.sh</string>
+			<key>path</key>
+			<string>Pods-FDA-frameworks.sh</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>85254AA07E6987A36C67837348CDF9C5</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>wrapper.framework</string>
+			<key>name</key>
+			<string>Foundation.framework</string>
+			<key>path</key>
+			<string>Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.3.sdk/System/Library/Frameworks/Foundation.framework</string>
+			<key>sourceTree</key>
+			<string>DEVELOPER_DIR</string>
+		</dict>
+		<key>86158EF160C9C4B7AEFFCE7FC59E599B</key>
+		<dict>
+			<key>buildActionMask</key>
+			<string>2147483647</string>
+			<key>files</key>
+			<array>
+				<string>139250EF8D4E404AD5019BA8966C0ED0</string>
+			</array>
+			<key>isa</key>
+			<string>PBXHeadersBuildPhase</string>
+			<key>runOnlyForDeploymentPostprocessing</key>
+			<string>0</string>
+		</dict>
+		<key>8722F3DEE977789B662744240353D970</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>text.plist.xml</string>
+			<key>path</key>
+			<string>Pods-FDATests-acknowledgements.plist</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>879EDC2C7E8100C20DD5C06ACCF75467</key>
+		<dict>
+			<key>fileRef</key>
+			<string>463C1FE545D146AC9AA57C99FD5D367D</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>8963C1F4D9907D7E5B31BDF15262632A</key>
+		<dict>
+			<key>fileRef</key>
+			<string>DAB0F40AFC6F7AF08F1F007E5EC916EE</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>8B25CC1F1162B3FB493C5BE9B9E3089C</key>
+		<dict>
+			<key>fileRef</key>
+			<string>1354EC4190F4ACE805BE75FDEA4296DA</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>8BD7B4A6D139EDD6D143E1CE466B3528</key>
+		<dict>
+			<key>fileRef</key>
+			<string>9EFDE929DB6E406B1D9CA26690D0BAA5</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>ATTRIBUTES</key>
+				<array>
+					<string>Public</string>
+				</array>
+			</dict>
+		</dict>
+		<key>8BDF5E7498AAD95E1A13E39DDD00F25E</key>
+		<dict>
+			<key>fileRef</key>
+			<string>85254AA07E6987A36C67837348CDF9C5</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>8DB418DF5DD146110CF29224F7E9A57C</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>text.xcconfig</string>
+			<key>path</key>
+			<string>SlideMenuControllerSwift.xcconfig</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>8F1290B9D1753A63AFBD861EA6B13CE1</key>
+		<dict>
+			<key>fileRef</key>
+			<string>55A775AD62C9AAA6F6C6B0B890A07E9E</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>8F787E77C0D561F29D856299FA55DC83</key>
+		<dict>
+			<key>buildConfigurations</key>
+			<array>
+				<string>51C2BC99C5218225F33BA26D590DF312</string>
+				<string>8158A76634367C72057EA998E719D970</string>
+			</array>
+			<key>defaultConfigurationIsVisible</key>
+			<string>0</string>
+			<key>defaultConfigurationName</key>
+			<string>Release</string>
+			<key>isa</key>
+			<string>XCConfigurationList</string>
+		</dict>
+		<key>90C01423FCBC9E9236399341F3378BFD</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>text</string>
+			<key>path</key>
+			<string>Pods-FDATests-acknowledgements.markdown</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>91030AF37F93914AB64B6D95F55E762D</key>
+		<dict>
+			<key>fileRef</key>
+			<string>2A1F8D9E5DA4249343A4799F40D3ED9D</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>928128E9C8E26CFFAA0305C415F31D70</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>SDWebImageDecoder.h</string>
+			<key>path</key>
+			<string>SDWebImage/SDWebImageDecoder.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>92ED371462B2BB992CD5E8F7D75DBAB3</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>path</key>
+			<string>IQKeyboardManagerSwift-prefix.pch</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>93A4A3777CF96A4AAC1D13BA6DCCEA73</key>
+		<dict>
+			<key>explicitFileType</key>
+			<string>text.script.ruby</string>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>text</string>
+			<key>name</key>
+			<string>Podfile</string>
+			<key>path</key>
+			<string>../Podfile</string>
+			<key>sourceTree</key>
+			<string>SOURCE_ROOT</string>
+			<key>xcLanguageSpecificationIdentifier</key>
+			<string>xcode.lang.ruby</string>
+		</dict>
+		<key>93BCB1E278ACDD0DBAF52F03D1697A4A</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>SDImageCacheConfig.h</string>
+			<key>path</key>
+			<string>SDWebImage/SDImageCacheConfig.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>9425EAC67A2E3FB676788C1D0E61DAA8</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>name</key>
+			<string>UIImageView+WebCache.m</string>
+			<key>path</key>
+			<string>SDWebImage/UIImageView+WebCache.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>943E748F4C257876B3E0FCF050688D19</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>CLSLogging.h</string>
+			<key>path</key>
+			<string>iOS/Crashlytics.framework/Headers/CLSLogging.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>9639110FB2AE8D37B08D6B65DE9149F0</key>
+		<dict>
+			<key>fileRef</key>
+			<string>928128E9C8E26CFFAA0305C415F31D70</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>ATTRIBUTES</key>
+				<array>
+					<string>Public</string>
+				</array>
+			</dict>
+		</dict>
+		<key>989DCD57EB9C514800A1549CBA3ADF85</key>
+		<dict>
+			<key>fileRef</key>
+			<string>5B817F27303984668BF1D291FB4C1898</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>989EE4ED1C86991E81339AF1CBF3654A</key>
+		<dict>
+			<key>fileRef</key>
+			<string>A81B4202C076987A35A7557F377A1E85</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>98B7A04D77FCB147CD5AE9282F26CA73</key>
+		<dict>
+			<key>fileRef</key>
+			<string>85254AA07E6987A36C67837348CDF9C5</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>9AAEC4DC444BE76043DC8003592541BC</key>
+		<dict>
+			<key>fileRef</key>
+			<string>2A87580AD1DD7EF3B8BEFE96A7D18D08</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>ATTRIBUTES</key>
+				<array>
+					<string>Public</string>
+				</array>
+			</dict>
+		</dict>
+		<key>9B19A0BBB3C15F7605DE1956317711E0</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>CLSAttributes.h</string>
+			<key>path</key>
+			<string>iOS/Crashlytics.framework/Headers/CLSAttributes.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>9EFDE929DB6E406B1D9CA26690D0BAA5</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>path</key>
+			<string>SlideMenuControllerSwift-umbrella.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>9F8CAD423FF6DB46A9234790E1ABD88E</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>path</key>
+			<string>Pods-FDA.modulemap</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>A041F9F351D61D825F3164B7983C0D73</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>name</key>
+			<string>SDImageCache.m</string>
+			<key>path</key>
+			<string>SDWebImage/SDImageCache.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>A0D0511375C0A603AC72B3B53BA86DBF</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXTargetDependency</string>
+			<key>name</key>
+			<string>SDWebImage</string>
+			<key>target</key>
+			<string>79BC1236023988E3688970E07CCC86AC</string>
+			<key>targetProxy</key>
+			<string>7150EE28D5D9BE2064D303539BF0B441</string>
+		</dict>
+		<key>A0FBDEE8C41FEE96DF816C8D00895D7B</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.swift</string>
+			<key>name</key>
+			<string>IQUIViewController+Additions.swift</string>
+			<key>path</key>
+			<string>IQKeyboardManagerSwift/Categories/IQUIViewController+Additions.swift</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>A270C231F96166C253F1433A1B648838</key>
+		<dict>
+			<key>buildConfigurationList</key>
+			<string>C34F0F10677FF3361462EBA9FE35266C</string>
+			<key>buildPhases</key>
+			<array>
+				<string>5E960CE7B823A148E57C4173D946224E</string>
+				<string>3073EAA5159040CF5007FF545C9AFD08</string>
+				<string>EBE12DEF39E0AF35C89ED72FBA1C8DA7</string>
+			</array>
+			<key>buildRules</key>
+			<array/>
+			<key>dependencies</key>
+			<array/>
+			<key>isa</key>
+			<string>PBXNativeTarget</string>
+			<key>name</key>
+			<string>SlideMenuControllerSwift</string>
+			<key>productName</key>
+			<string>SlideMenuControllerSwift</string>
+			<key>productReference</key>
+			<string>E96C6EC566B33E9FF69CC52454A5BA0C</string>
+			<key>productType</key>
+			<string>com.apple.product-type.framework</string>
+		</dict>
+		<key>A2D4F99C09F1BC1D8FC7FC7A1BF835A5</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>NSImage+WebCache.h</string>
+			<key>path</key>
+			<string>SDWebImage/NSImage+WebCache.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
 		<key>A2FF64B577CEAC43E765D9E4AF96F432</key>
 		<dict>
 			<key>fileRef</key>
-			<string>1EAEAD6DED83F1403FDD4CFFD0B9F721</string>
+			<string>EB77DB68658F278FC43394A409A49B64</string>
 			<key>isa</key>
 			<string>PBXBuildFile</string>
 		</dict>
 		<key>A3FAEF9CA01F3716E2B562F58AFAA046</key>
 		<dict>
 			<key>fileRef</key>
-			<string>780CCC3C0D05734EF8FDBE763AA80C7D</string>
+			<string>F71D2E341100BFBE8E913EA6D7B85DB1</string>
 			<key>isa</key>
 			<string>PBXBuildFile</string>
 		</dict>
@@ -1634,6 +2751,59 @@
 			<string>Pods-FDATests-dummy.m</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
+		</dict>
+		<key>A48EA4F10384A0A2EA6C66B5822B88A0</key>
+		<dict>
+			<key>fileRef</key>
+			<string>E4D06C90C7C9C83CA259B55C9494336F</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>A674D67371708FF6D060BEE4AC959A0F</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>name</key>
+			<string>SDWebImageCompat.m</string>
+			<key>path</key>
+			<string>SDWebImage/SDWebImageCompat.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>A6D3EB2DEE2B89C39A141584E26CFD04</key>
+		<dict>
+			<key>buildActionMask</key>
+			<string>2147483647</string>
+			<key>files</key>
+			<array>
+				<string>30F0C36990391D1F90D7725021964DE2</string>
+				<string>323AC11B0D2CDC9BC3811C87F23151A4</string>
+				<string>61D1EAA8504516CBAAC3D20152A3A1F7</string>
+				<string>DFB600FD2AA0728572EA769BBBD8475A</string>
+				<string>A9BA27E8B239B491C712E5AE00A2EB2E</string>
+				<string>257AC5AC629EFEA49777699210DE84D3</string>
+				<string>9639110FB2AE8D37B08D6B65DE9149F0</string>
+				<string>CBD020256BFC1BFD0F42A0D115401AA5</string>
+				<string>DF9B4E1540D3116C761A2E77F0BB9D17</string>
+				<string>DAA1CC30EBA5D1B8BB173D97F21C6C17</string>
+				<string>EA4CE4BF6241F34A1FEC6215B2DD62BB</string>
+				<string>B62F19E54E0E9A32D76FA7CB02E031DE</string>
+				<string>4D0124C0D6671CB434DC81F2C0C36FF0</string>
+				<string>A945150C0E7EDF7F4D6BC5D9224B6272</string>
+				<string>E6C0399683820742F3853B7DEB411940</string>
+				<string>671909451F7072FCC8B64E6FD17D637F</string>
+				<string>14B8BA18DAB6FE3E0FCEE873BAC9F7F2</string>
+				<string>2758860BD8D8F24683ACBCE189D2CD43</string>
+				<string>B7C88D39F3FF45EB803C2699526E6A9F</string>
+			</array>
+			<key>isa</key>
+			<string>PBXHeadersBuildPhase</string>
+			<key>runOnlyForDeploymentPostprocessing</key>
+			<string>0</string>
 		</dict>
 		<key>A80D4F2115EF3E73BC86833597571AC0</key>
 		<dict>
@@ -1656,11 +2826,11 @@
 			<key>productName</key>
 			<string>Pods-FDATests</string>
 			<key>productReference</key>
-			<string>E628AAE6017A61B79B7B4A4E99CC1EE4</string>
+			<string>5DBB05B579540B2CE783128F2995548E</string>
 			<key>productType</key>
 			<string>com.apple.product-type.framework</string>
 		</dict>
-		<key>A9D513C564BC88068DDFCA5361D3FFAE</key>
+		<key>A81B4202C076987A35A7557F377A1E85</key>
 		<dict>
 			<key>includeInIndex</key>
 			<string>1</string>
@@ -1669,11 +2839,54 @@
 			<key>lastKnownFileType</key>
 			<string>sourcecode.swift</string>
 			<key>name</key>
-			<string>IQKeyboardManagerConstants.swift</string>
+			<string>IQUIView+Hierarchy.swift</string>
 			<key>path</key>
-			<string>IQKeyboardManagerSwift/Constants/IQKeyboardManagerConstants.swift</string>
+			<string>IQKeyboardManagerSwift/Categories/IQUIView+Hierarchy.swift</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
+		</dict>
+		<key>A945150C0E7EDF7F4D6BC5D9224B6272</key>
+		<dict>
+			<key>fileRef</key>
+			<string>292025DBB8ADF0F293BA76DD04C2CFF9</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>ATTRIBUTES</key>
+				<array>
+					<string>Public</string>
+				</array>
+			</dict>
+		</dict>
+		<key>A9AD29BB3A89F60EA2C79104FDCC2535</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>UIImage+MultiFormat.h</string>
+			<key>path</key>
+			<string>SDWebImage/UIImage+MultiFormat.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>A9BA27E8B239B491C712E5AE00A2EB2E</key>
+		<dict>
+			<key>fileRef</key>
+			<string>3E874E1F7F14AE4EA5C2ED0D0D34CDAD</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>ATTRIBUTES</key>
+				<array>
+					<string>Public</string>
+				</array>
+			</dict>
 		</dict>
 		<key>AA202C1AF399D76B6D8F73F74E388238</key>
 		<dict>
@@ -1688,7 +2901,14 @@
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
-		<key>AA782FB402D7D509B245F4A6B4CF2E41</key>
+		<key>AB5BA547C39A0089DAE1E408688EBB81</key>
+		<dict>
+			<key>fileRef</key>
+			<string>85254AA07E6987A36C67837348CDF9C5</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>AC26B14860AF4CC4819D9E3349492F72</key>
 		<dict>
 			<key>includeInIndex</key>
 			<string>1</string>
@@ -1697,18 +2917,40 @@
 			<key>lastKnownFileType</key>
 			<string>sourcecode.swift</string>
 			<key>name</key>
-			<string>IQNSArray+Sort.swift</string>
+			<string>IQUIScrollView+Additions.swift</string>
 			<key>path</key>
-			<string>IQKeyboardManagerSwift/Categories/IQNSArray+Sort.swift</string>
+			<string>IQKeyboardManagerSwift/Categories/IQUIScrollView+Additions.swift</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
-		<key>AB5BA547C39A0089DAE1E408688EBB81</key>
+		<key>ACAAD89A368C1F58136A8F189FD59847</key>
 		<dict>
-			<key>fileRef</key>
-			<string>3C9854452B704969D40D932335DEE0FF</string>
+			<key>buildConfigurationList</key>
+			<string>669C4B97CD10C4034F17DEC126D2EFFB</string>
+			<key>buildPhases</key>
+			<array>
+				<string>F6FD4E69A95CB43740C784B6A2FAE6E4</string>
+				<string>01D2BF69649FB75F21F25CD05F4F63C2</string>
+				<string>4D3EF353BE553141052F9078B724DE84</string>
+			</array>
+			<key>buildRules</key>
+			<array/>
+			<key>dependencies</key>
+			<array>
+				<string>4E5FF11B43432DFA4BE62AA61D49248C</string>
+				<string>A0D0511375C0A603AC72B3B53BA86DBF</string>
+				<string>2DEF435E61145D04288FA6189313EA8A</string>
+			</array>
 			<key>isa</key>
-			<string>PBXBuildFile</string>
+			<string>PBXNativeTarget</string>
+			<key>name</key>
+			<string>Pods-FDA</string>
+			<key>productName</key>
+			<string>Pods-FDA</string>
+			<key>productReference</key>
+			<string>FAF82FAEED3803BC0E6A9AA483BD729B</string>
+			<key>productType</key>
+			<string>com.apple.product-type.framework</string>
 		</dict>
 		<key>ACC1B405AA3A657759119B30A2D6E872</key>
 		<dict>
@@ -1723,18 +2965,50 @@
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
-		<key>AEAB942E1F9628528B1CA5167B6CAF18</key>
+		<key>AD9EEDE854BE84F095D5BCA100247047</key>
 		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
+			<key>children</key>
+			<array>
+				<string>F18019F046032BE474524A9C7688B1E0</string>
+				<string>70EBAF4166AFFE0900CE9E49046841FB</string>
+				<string>A2D4F99C09F1BC1D8FC7FC7A1BF835A5</string>
+				<string>5B817F27303984668BF1D291FB4C1898</string>
+				<string>2A9B5AD1CDA068D9D91FDC32D053FC14</string>
+				<string>A041F9F351D61D825F3164B7983C0D73</string>
+				<string>93BCB1E278ACDD0DBAF52F03D1697A4A</string>
+				<string>2CF8E882EB1B80B1357E03E53F0FCCB8</string>
+				<string>F033404B01E8A162E356EBCF67643DD7</string>
+				<string>A674D67371708FF6D060BEE4AC959A0F</string>
+				<string>928128E9C8E26CFFAA0305C415F31D70</string>
+				<string>BE42BBDCF6E5326E0214E86393F1CA7F</string>
+				<string>277219C294A966A35B61DE68DA1CF72D</string>
+				<string>55A775AD62C9AAA6F6C6B0B890A07E9E</string>
+				<string>365D1BDF8AA7776FC8284BF9EAB7D438</string>
+				<string>45FC1A4F5E0403D4FE395BF27C507602</string>
+				<string>F0E0EE582E868956081A2EC3BA8C7BA3</string>
+				<string>D1F81EEA51AE8F7F91CC5CFD9205FC04</string>
+				<string>6110409E177670C1BA86FC005002B693</string>
+				<string>58613930FA3EAEF9631A762E63C19F23</string>
+				<string>1354EC4190F4ACE805BE75FDEA4296DA</string>
+				<string>517E6F633DC8C1FA382CB5EB13C2AADA</string>
+				<string>7A2FE2486E13F69986F23BFA338F3F5A</string>
+				<string>292025DBB8ADF0F293BA76DD04C2CFF9</string>
+				<string>78870406933F0007CC6680D621E61ABF</string>
+				<string>A9AD29BB3A89F60EA2C79104FDCC2535</string>
+				<string>E4D06C90C7C9C83CA259B55C9494336F</string>
+				<string>EDA7837F11484A192B22949E9C352DDE</string>
+				<string>79A876F61CF90D81607C0FA573A56F24</string>
+				<string>C64D024BE933155D938AF2F41F55E504</string>
+				<string>9425EAC67A2E3FB676788C1D0E61DAA8</string>
+				<string>CB50C84360B0ED0EA8778E9C4681D13D</string>
+				<string>16AE3942B30853A79C81EEA57F8AE45C</string>
+				<string>3636AF8807C7863F0029F86D226D32AA</string>
+				<string>5876D673864588C86832C7CBD69142E0</string>
+			</array>
 			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.swift</string>
+			<string>PBXGroup</string>
 			<key>name</key>
-			<string>IQUIView+IQKeyboardToolbar.swift</string>
-			<key>path</key>
-			<string>IQKeyboardManagerSwift/IQToolbar/IQUIView+IQKeyboardToolbar.swift</string>
+			<string>Core</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
@@ -1775,25 +3049,40 @@
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
-		<key>AFE66129B61019B1A6BDBE1ECB7E2874</key>
+		<key>B1076146AD2F484F1C4E985072190F7D</key>
 		<dict>
 			<key>includeInIndex</key>
 			<string>1</string>
 			<key>isa</key>
 			<string>PBXFileReference</string>
 			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>ANSCompatibility.h</string>
 			<key>path</key>
-			<string>SlideMenuControllerSwift-dummy.m</string>
+			<string>iOS/Crashlytics.framework/Headers/ANSCompatibility.h</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
 		<key>B1709542A41A677BA835CEC032F4DB2D</key>
 		<dict>
 			<key>fileRef</key>
-			<string>D15E5744159AD7C8EB369BEA1FDE472C</string>
+			<string>2B4BABF2646C9D8D0BC9EBECA58F85F8</string>
 			<key>isa</key>
 			<string>PBXBuildFile</string>
+		</dict>
+		<key>B1BBA6BD3F4BF6749A6507764647E3B3</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>path</key>
+			<string>IQKeyboardManagerSwift-umbrella.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
 		</dict>
 		<key>B33A5C01AC387D68EE7165DEFA4875D0</key>
 		<dict>
@@ -1865,19 +3154,6 @@
 			<key>name</key>
 			<string>Debug</string>
 		</dict>
-		<key>B4CCDF0ACEE37ED4308724E62FCDE939</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>wrapper.framework</string>
-			<key>name</key>
-			<string>CoreGraphics.framework</string>
-			<key>path</key>
-			<string>Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.3.sdk/System/Library/Frameworks/CoreGraphics.framework</string>
-			<key>sourceTree</key>
-			<string>DEVELOPER_DIR</string>
-		</dict>
 		<key>B5B7DBDF42D6F85F2BE8863B3A7EA8D3</key>
 		<dict>
 			<key>baseConfigurationReference</key>
@@ -1948,73 +3224,82 @@
 			<key>name</key>
 			<string>Debug</string>
 		</dict>
+		<key>B62F19E54E0E9A32D76FA7CB02E031DE</key>
+		<dict>
+			<key>fileRef</key>
+			<string>58613930FA3EAEF9631A762E63C19F23</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>ATTRIBUTES</key>
+				<array>
+					<string>Public</string>
+				</array>
+			</dict>
+		</dict>
 		<key>B6DB24F02D71E5B838910D3CCD1723F9</key>
 		<dict>
 			<key>fileRef</key>
-			<string>63310503A3DD43ED2539C5E6BB7654B2</string>
+			<string>13F31FA1D4815DBAE89881BA11D86AB2</string>
 			<key>isa</key>
 			<string>PBXBuildFile</string>
 		</dict>
-		<key>B714A80B1106D6505B8D6998509D05A8</key>
+		<key>B7C88D39F3FF45EB803C2699526E6A9F</key>
 		<dict>
-			<key>children</key>
-			<array>
-				<string>5798F91C6004D5ABD0A79606BE738268</string>
-				<string>63310503A3DD43ED2539C5E6BB7654B2</string>
-				<string>A9D513C564BC88068DDFCA5361D3FFAE</string>
-				<string>4F6508F9246B3BF54058BEEE564108CA</string>
-				<string>780CCC3C0D05734EF8FDBE763AA80C7D</string>
-				<string>AA782FB402D7D509B245F4A6B4CF2E41</string>
-				<string>1EAEAD6DED83F1403FDD4CFFD0B9F721</string>
-				<string>9EF599536292ABC7E3B2692B562EC437</string>
-				<string>1CC101965FD02A650251E892F3693D19</string>
-				<string>091DF997950D402B2ED9600BDDFCEDBE</string>
-				<string>88664BB5B0AB95E063B62BAEDE81C5C1</string>
-				<string>72DB35EE2CF581C07D841E7C92B1A5D8</string>
-				<string>9EB01A82402675E1924AF158C626E8AB</string>
-				<string>AEAB942E1F9628528B1CA5167B6CAF18</string>
-				<string>D420FADC17DFB86361C2E72863871EAE</string>
-				<string>36FE804AE7938C3B88AF0C93EDF98D12</string>
-				<string>C1F05EE06CABAD5889155FE36F771CDE</string>
-				<string>6E68B56A7084F019D86AD32AF3E7CDDC</string>
-			</array>
+			<key>fileRef</key>
+			<string>3636AF8807C7863F0029F86D226D32AA</string>
 			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>IQKeyboardManagerSwift</string>
-			<key>path</key>
-			<string>IQKeyboardManagerSwift</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>ATTRIBUTES</key>
+				<array>
+					<string>Public</string>
+				</array>
+			</dict>
 		</dict>
-		<key>B83AC04F0AF9F43B3F2AF27942EA9678</key>
+		<key>BAC472A794043A81E82755C4E8E6B6C6</key>
 		<dict>
+			<key>containerPortal</key>
+			<string>D41D8CD98F00B204E9800998ECF8427E</string>
 			<key>isa</key>
-			<string>PBXTargetDependency</string>
-			<key>name</key>
-			<string>IQKeyboardManagerSwift</string>
-			<key>target</key>
+			<string>PBXContainerItemProxy</string>
+			<key>proxyType</key>
+			<string>1</string>
+			<key>remoteGlobalIDString</key>
 			<string>1520003FEBEC114D6C84F832AFEDB994</string>
-			<key>targetProxy</key>
-			<string>8E65A93A85A26A77C2F9D3D85012D608</string>
+			<key>remoteInfo</key>
+			<string>IQKeyboardManagerSwift</string>
 		</dict>
 		<key>BACEB4A1F7183C8A34C16333AA0CFC88</key>
 		<dict>
 			<key>fileRef</key>
-			<string>AEAB942E1F9628528B1CA5167B6CAF18</string>
+			<string>C6E5F65A0652F5F4461F68CF2C1FAA2E</string>
 			<key>isa</key>
 			<string>PBXBuildFile</string>
 		</dict>
-		<key>BF4348D53F7AA238E78562FAB206C238</key>
+		<key>BE42BBDCF6E5326E0214E86393F1CA7F</key>
 		<dict>
 			<key>includeInIndex</key>
 			<string>1</string>
 			<key>isa</key>
 			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>name</key>
+			<string>SDWebImageDecoder.m</string>
 			<key>path</key>
-			<string>SlideMenuControllerSwift.modulemap</string>
+			<string>SDWebImage/SDWebImageDecoder.m</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
+		</dict>
+		<key>BF5DD38DC75BD1DEC8C193F906ED3B3D</key>
+		<dict>
+			<key>fileRef</key>
+			<string>16AE3942B30853A79C81EEA57F8AE45C</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
 		</dict>
 		<key>BFE30C61F2F15F538DB42A7A64A00228</key>
 		<dict>
@@ -2029,50 +3314,95 @@
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
-		<key>C1F05EE06CABAD5889155FE36F771CDE</key>
+		<key>BFE3C0EF882E0AA3D3F3A2D8821CB68E</key>
 		<dict>
-			<key>children</key>
-			<array>
-				<string>995959CA6C582CC2851B5FED7B7CDA32</string>
-			</array>
+			<key>includeInIndex</key>
+			<string>1</string>
 			<key>isa</key>
-			<string>PBXGroup</string>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.swift</string>
 			<key>name</key>
-			<string>Resources</string>
+			<string>SlideMenuController.swift</string>
+			<key>path</key>
+			<string>Source/SlideMenuController.swift</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
 		<key>C2905200A0CEA22AF403EE0B5E244CEF</key>
 		<dict>
 			<key>fileRef</key>
-			<string>9EF599536292ABC7E3B2692B562EC437</string>
+			<string>4B7F05E38B4CF082FFC170E3E236814C</string>
 			<key>isa</key>
 			<string>PBXBuildFile</string>
 		</dict>
-		<key>C36D3CABE7EC51808C1327C9D08A77A7</key>
+		<key>C34F0F10677FF3361462EBA9FE35266C</key>
 		<dict>
-			<key>fileRef</key>
-			<string>3C9854452B704969D40D932335DEE0FF</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>C3E19B6CA5A488515A9B02663516467B</key>
-		<dict>
-			<key>buildActionMask</key>
-			<string>2147483647</string>
-			<key>files</key>
+			<key>buildConfigurations</key>
 			<array>
-				<string>27CF5A7E60C5902F58C01A1A20F51F49</string>
+				<string>7C8EAE9815739C10F5F8A20B355D895C</string>
+				<string>C6DB540EDFEAFC52CFB2375E0B96A13C</string>
+			</array>
+			<key>defaultConfigurationIsVisible</key>
+			<string>0</string>
+			<key>defaultConfigurationName</key>
+			<string>Release</string>
+			<key>isa</key>
+			<string>XCConfigurationList</string>
+		</dict>
+		<key>C3D4A1CFBBB69591230AA17E31093525</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>22BF379912F5530B73D84C8B9134FBF2</string>
 			</array>
 			<key>isa</key>
-			<string>PBXHeadersBuildPhase</string>
-			<key>runOnlyForDeploymentPostprocessing</key>
-			<string>0</string>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>Frameworks</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
 		</dict>
-		<key>C452EF6611877E9B1AFCAA4A80333541</key>
+		<key>C427DDEDE2DADD338073CE88A0F1269A</key>
+		<dict>
+			<key>fileRef</key>
+			<string>FC100A8E6EFFD8904320B339E627FA95</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>C51AF059FB2256C1098579382A29E72F</key>
+		<dict>
+			<key>fileRef</key>
+			<string>A674D67371708FF6D060BEE4AC959A0F</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>C64D024BE933155D938AF2F41F55E504</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>UIImageView+WebCache.h</string>
+			<key>path</key>
+			<string>SDWebImage/UIImageView+WebCache.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>C66E57E618FD5536917D0052777CC8EB</key>
+		<dict>
+			<key>fileRef</key>
+			<string>F9F5D0DF1812A11B0161E268E0C3598F</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>C6DB540EDFEAFC52CFB2375E0B96A13C</key>
 		<dict>
 			<key>baseConfigurationReference</key>
-			<string>963EE6145796E2422513C55BBFFE8971</string>
+			<string>8DB418DF5DD146110CF29224F7E9A57C</string>
 			<key>buildSettings</key>
 			<dict>
 				<key>CODE_SIGN_IDENTITY[sdk=iphoneos*]</key>
@@ -2080,7 +3410,7 @@
 				<key>CURRENT_PROJECT_VERSION</key>
 				<string>1</string>
 				<key>DEBUG_INFORMATION_FORMAT</key>
-				<string>dwarf</string>
+				<string>dwarf-with-dsym</string>
 				<key>DEFINES_MODULE</key>
 				<string>YES</string>
 				<key>DYLIB_COMPATIBILITY_VERSION</key>
@@ -2110,15 +3440,13 @@
 				<key>MODULEMAP_FILE</key>
 				<string>Target Support Files/SlideMenuControllerSwift/SlideMenuControllerSwift.modulemap</string>
 				<key>MTL_ENABLE_DEBUG_INFO</key>
-				<string>YES</string>
+				<string>NO</string>
 				<key>PRODUCT_NAME</key>
 				<string>SlideMenuControllerSwift</string>
 				<key>SDKROOT</key>
 				<string>iphoneos</string>
 				<key>SKIP_INSTALL</key>
 				<string>YES</string>
-				<key>SWIFT_OPTIMIZATION_LEVEL</key>
-				<string>-Onone</string>
 				<key>SWIFT_VERSION</key>
 				<string>3.0</string>
 				<key>TARGETED_DEVICE_FAMILY</key>
@@ -2131,45 +3459,27 @@
 			<key>isa</key>
 			<string>XCBuildConfiguration</string>
 			<key>name</key>
-			<string>Debug</string>
+			<string>Release</string>
 		</dict>
-		<key>C4BDFDA7A284403A0D4621817B8F52EF</key>
+		<key>C6E5F65A0652F5F4461F68CF2C1FAA2E</key>
 		<dict>
 			<key>includeInIndex</key>
 			<string>1</string>
 			<key>isa</key>
 			<string>PBXFileReference</string>
 			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
+			<string>sourcecode.swift</string>
+			<key>name</key>
+			<string>IQUIView+IQKeyboardToolbar.swift</string>
 			<key>path</key>
-			<string>IQKeyboardManagerSwift-umbrella.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>C66E57E618FD5536917D0052777CC8EB</key>
-		<dict>
-			<key>fileRef</key>
-			<string>1CC101965FD02A650251E892F3693D19</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>C75B99A9B9B6630FF25464B6E049F06F</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text.plist.xml</string>
-			<key>path</key>
-			<string>Info.plist</string>
+			<string>IQKeyboardManagerSwift/IQToolbar/IQUIView+IQKeyboardToolbar.swift</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
 		<key>C76E3B78D128469AB4CBF1B4D1708360</key>
 		<dict>
 			<key>fileRef</key>
-			<string>72DB35EE2CF581C07D841E7C92B1A5D8</string>
+			<string>7C1F79F89A0407312230551C6F37451F</string>
 			<key>isa</key>
 			<string>PBXBuildFile</string>
 		</dict>
@@ -2244,6 +3554,51 @@
 			<key>name</key>
 			<string>Release</string>
 		</dict>
+		<key>C823A511671ABE4A7641D63BD0A2C515</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.swift</string>
+			<key>name</key>
+			<string>IQKeyboardManagerConstants.swift</string>
+			<key>path</key>
+			<string>IQKeyboardManagerSwift/Constants/IQKeyboardManagerConstants.swift</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>C8B1EFAEBBE203201B9CC9B7F8C50BA2</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>3F46EFC98E9B0F2B7A7F9C46BB2688E2</string>
+				<string>7F11B491D40EE4D920DB17BBFC61FB3F</string>
+				<string>C3D4A1CFBBB69591230AA17E31093525</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>Fabric</string>
+			<key>path</key>
+			<string>Fabric</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>C9DC1A733568491198D00795F8F6C54C</key>
+		<dict>
+			<key>containerPortal</key>
+			<string>D41D8CD98F00B204E9800998ECF8427E</string>
+			<key>isa</key>
+			<string>PBXContainerItemProxy</string>
+			<key>proxyType</key>
+			<string>1</string>
+			<key>remoteGlobalIDString</key>
+			<string>A270C231F96166C253F1433A1B648838</string>
+			<key>remoteInfo</key>
+			<string>SlideMenuControllerSwift</string>
+		</dict>
 		<key>CAAF26EABC40CAA997B812DEF0972337</key>
 		<dict>
 			<key>includeInIndex</key>
@@ -2256,6 +3611,35 @@
 			<string>Pods-FDAUITests-acknowledgements.markdown</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
+		</dict>
+		<key>CB50C84360B0ED0EA8778E9C4681D13D</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>UIView+WebCache.h</string>
+			<key>path</key>
+			<string>SDWebImage/UIView+WebCache.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>CBD020256BFC1BFD0F42A0D115401AA5</key>
+		<dict>
+			<key>fileRef</key>
+			<string>277219C294A966A35B61DE68DA1CF72D</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>ATTRIBUTES</key>
+				<array>
+					<string>Public</string>
+				</array>
+			</dict>
 		</dict>
 		<key>CE36B16D1AE22B282C4806F3A8851844</key>
 		<dict>
@@ -2270,7 +3654,7 @@
 			<key>runOnlyForDeploymentPostprocessing</key>
 			<string>0</string>
 		</dict>
-		<key>D15E5744159AD7C8EB369BEA1FDE472C</key>
+		<key>D1F81EEA51AE8F7F91CC5CFD9205FC04</key>
 		<dict>
 			<key>includeInIndex</key>
 			<string>1</string>
@@ -2278,10 +3662,19 @@
 			<string>PBXFileReference</string>
 			<key>lastKnownFileType</key>
 			<string>sourcecode.c.objc</string>
+			<key>name</key>
+			<string>SDWebImageManager.m</string>
 			<key>path</key>
-			<string>IQKeyboardManagerSwift-dummy.m</string>
+			<string>SDWebImage/SDWebImageManager.m</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
+		</dict>
+		<key>D2CF91B64AE19D001F5D079EA4A49FDF</key>
+		<dict>
+			<key>fileRef</key>
+			<string>7A2FE2486E13F69986F23BFA338F3F5A</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
 		</dict>
 		<key>D3554EBDD914424A247D668DEA0AC386</key>
 		<dict>
@@ -2322,7 +3715,7 @@
 			<key>mainGroup</key>
 			<string>7DB346D0F39D3F0E887471402A8071AB</string>
 			<key>productRefGroup</key>
-			<string>FFA6512770A769F96C4E5CC4E8D189C7</string>
+			<string>1D2D04A334F3DC067163BE7B32BCBA0C</string>
 			<key>projectDirPath</key>
 			<string></string>
 			<key>projectReferences</key>
@@ -2332,33 +3725,12 @@
 			<key>targets</key>
 			<array>
 				<string>1520003FEBEC114D6C84F832AFEDB994</string>
-				<string>745A098583082D3E9D056BF015C5F8B4</string>
+				<string>ACAAD89A368C1F58136A8F189FD59847</string>
 				<string>A80D4F2115EF3E73BC86833597571AC0</string>
 				<string>3B9F7A42AF33E925A1096A35C64F2B65</string>
-				<string>0B19A578AC9B281329C1EC09FDAB0299</string>
+				<string>79BC1236023988E3688970E07CCC86AC</string>
+				<string>A270C231F96166C253F1433A1B648838</string>
 			</array>
-		</dict>
-		<key>D420FADC17DFB86361C2E72863871EAE</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.swift</string>
-			<key>name</key>
-			<string>IQUIViewController+Additions.swift</string>
-			<key>path</key>
-			<string>IQKeyboardManagerSwift/Categories/IQUIViewController+Additions.swift</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>D450E812CB24B48CB971DB72B592DBDD</key>
-		<dict>
-			<key>fileRef</key>
-			<string>D3554EBDD914424A247D668DEA0AC386</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
 		</dict>
 		<key>D5B3FB233FEBA4C59180BFF309C39835</key>
 		<dict>
@@ -2383,6 +3755,21 @@
 			<string>text.script.sh</string>
 			<key>path</key>
 			<string>Pods-FDATests-frameworks.sh</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>D97920D64385806F86E5C4B8091D1D11</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.swift</string>
+			<key>name</key>
+			<string>IQNSArray+Sort.swift</string>
+			<key>path</key>
+			<string>IQKeyboardManagerSwift/Categories/IQNSArray+Sort.swift</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
@@ -2469,6 +3856,20 @@
 			<key>name</key>
 			<string>Release</string>
 		</dict>
+		<key>DAA1CC30EBA5D1B8BB173D97F21C6C17</key>
+		<dict>
+			<key>fileRef</key>
+			<string>F0E0EE582E868956081A2EC3BA8C7BA3</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>ATTRIBUTES</key>
+				<array>
+					<string>Public</string>
+				</array>
+			</dict>
+		</dict>
 		<key>DAB0F40AFC6F7AF08F1F007E5EC916EE</key>
 		<dict>
 			<key>includeInIndex</key>
@@ -2481,68 +3882,6 @@
 			<string>Pods-FDAUITests-dummy.m</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
-		</dict>
-		<key>DBF97FE8DFE66E7D5300388CAEA1C67C</key>
-		<dict>
-			<key>baseConfigurationReference</key>
-			<string>963EE6145796E2422513C55BBFFE8971</string>
-			<key>buildSettings</key>
-			<dict>
-				<key>CODE_SIGN_IDENTITY[sdk=iphoneos*]</key>
-				<string>iPhone Developer</string>
-				<key>CURRENT_PROJECT_VERSION</key>
-				<string>1</string>
-				<key>DEBUG_INFORMATION_FORMAT</key>
-				<string>dwarf-with-dsym</string>
-				<key>DEFINES_MODULE</key>
-				<string>YES</string>
-				<key>DYLIB_COMPATIBILITY_VERSION</key>
-				<string>1</string>
-				<key>DYLIB_CURRENT_VERSION</key>
-				<string>1</string>
-				<key>DYLIB_INSTALL_NAME_BASE</key>
-				<string>@rpath</string>
-				<key>ENABLE_STRICT_OBJC_MSGSEND</key>
-				<string>YES</string>
-				<key>GCC_NO_COMMON_BLOCKS</key>
-				<string>YES</string>
-				<key>GCC_PREFIX_HEADER</key>
-				<string>Target Support Files/SlideMenuControllerSwift/SlideMenuControllerSwift-prefix.pch</string>
-				<key>INFOPLIST_FILE</key>
-				<string>Target Support Files/SlideMenuControllerSwift/Info.plist</string>
-				<key>INSTALL_PATH</key>
-				<string>$(LOCAL_LIBRARY_DIR)/Frameworks</string>
-				<key>IPHONEOS_DEPLOYMENT_TARGET</key>
-				<string>8.0</string>
-				<key>LD_RUNPATH_SEARCH_PATHS</key>
-				<array>
-					<string>$(inherited)</string>
-					<string>@executable_path/Frameworks</string>
-					<string>@loader_path/Frameworks</string>
-				</array>
-				<key>MODULEMAP_FILE</key>
-				<string>Target Support Files/SlideMenuControllerSwift/SlideMenuControllerSwift.modulemap</string>
-				<key>MTL_ENABLE_DEBUG_INFO</key>
-				<string>NO</string>
-				<key>PRODUCT_NAME</key>
-				<string>SlideMenuControllerSwift</string>
-				<key>SDKROOT</key>
-				<string>iphoneos</string>
-				<key>SKIP_INSTALL</key>
-				<string>YES</string>
-				<key>SWIFT_VERSION</key>
-				<string>3.0</string>
-				<key>TARGETED_DEVICE_FAMILY</key>
-				<string>1,2</string>
-				<key>VERSIONING_SYSTEM</key>
-				<string>apple-generic</string>
-				<key>VERSION_INFO_PREFIX</key>
-				<string></string>
-			</dict>
-			<key>isa</key>
-			<string>XCBuildConfiguration</string>
-			<key>name</key>
-			<string>Release</string>
 		</dict>
 		<key>DED8474EEC7F65FD2A80AC6715A08352</key>
 		<dict>
@@ -2558,12 +3897,68 @@
 			<key>isa</key>
 			<string>XCConfigurationList</string>
 		</dict>
+		<key>DF5306C14E27ED75865B0ECA2F1EE365</key>
+		<dict>
+			<key>explicitFileType</key>
+			<string>wrapper.framework</string>
+			<key>includeInIndex</key>
+			<string>0</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>name</key>
+			<string>Pods_FDAUITests.framework</string>
+			<key>path</key>
+			<string>Pods-FDAUITests.framework</string>
+			<key>sourceTree</key>
+			<string>BUILT_PRODUCTS_DIR</string>
+		</dict>
+		<key>DF9B4E1540D3116C761A2E77F0BB9D17</key>
+		<dict>
+			<key>fileRef</key>
+			<string>365D1BDF8AA7776FC8284BF9EAB7D438</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>ATTRIBUTES</key>
+				<array>
+					<string>Public</string>
+				</array>
+			</dict>
+		</dict>
+		<key>DFB600FD2AA0728572EA769BBBD8475A</key>
+		<dict>
+			<key>fileRef</key>
+			<string>93BCB1E278ACDD0DBAF52F03D1697A4A</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>ATTRIBUTES</key>
+				<array>
+					<string>Public</string>
+				</array>
+			</dict>
+		</dict>
 		<key>DFB6413C6EE7A07F649FA2612A66FAE8</key>
 		<dict>
 			<key>fileRef</key>
-			<string>B4CCDF0ACEE37ED4308724E62FCDE939</string>
+			<string>77A4FC80B9E76FF8AD7E022DE9911A45</string>
 			<key>isa</key>
 			<string>PBXBuildFile</string>
+		</dict>
+		<key>E062193A1DB3F9DBFFA2A16E540C65D9</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>text.xcconfig</string>
+			<key>path</key>
+			<string>IQKeyboardManagerSwift.xcconfig</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
 		</dict>
 		<key>E0D5D7A22EC96EB94C1117B938D64596</key>
 		<dict>
@@ -2578,10 +3973,25 @@
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
-		<key>E2975BA6BA8850B6B925D27B4CD8B1F2</key>
+		<key>E4D06C90C7C9C83CA259B55C9494336F</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>name</key>
+			<string>UIImage+MultiFormat.m</string>
+			<key>path</key>
+			<string>SDWebImage/UIImage+MultiFormat.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>E6C0399683820742F3853B7DEB411940</key>
 		<dict>
 			<key>fileRef</key>
-			<string>AFE478DD98AA980C9DEA118A6C5CBDA5</string>
+			<string>A9AD29BB3A89F60EA2C79104FDCC2535</string>
 			<key>isa</key>
 			<string>PBXBuildFile</string>
 			<key>settings</key>
@@ -2591,35 +4001,6 @@
 					<string>Public</string>
 				</array>
 			</dict>
-		</dict>
-		<key>E5B8220E755DA8A33A6A52C323805F69</key>
-		<dict>
-			<key>buildConfigurations</key>
-			<array>
-				<string>C452EF6611877E9B1AFCAA4A80333541</string>
-				<string>DBF97FE8DFE66E7D5300388CAEA1C67C</string>
-			</array>
-			<key>defaultConfigurationIsVisible</key>
-			<string>0</string>
-			<key>defaultConfigurationName</key>
-			<string>Release</string>
-			<key>isa</key>
-			<string>XCConfigurationList</string>
-		</dict>
-		<key>E628AAE6017A61B79B7B4A4E99CC1EE4</key>
-		<dict>
-			<key>explicitFileType</key>
-			<string>wrapper.framework</string>
-			<key>includeInIndex</key>
-			<string>0</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>name</key>
-			<string>Pods_FDATests.framework</string>
-			<key>path</key>
-			<string>Pods-FDATests.framework</string>
-			<key>sourceTree</key>
-			<string>BUILT_PRODUCTS_DIR</string>
 		</dict>
 		<key>E95A3820FBAD3589C6FC2921EA170973</key>
 		<dict>
@@ -2634,6 +4015,107 @@
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
+		<key>E96C6EC566B33E9FF69CC52454A5BA0C</key>
+		<dict>
+			<key>explicitFileType</key>
+			<string>wrapper.framework</string>
+			<key>includeInIndex</key>
+			<string>0</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>name</key>
+			<string>SlideMenuControllerSwift.framework</string>
+			<key>path</key>
+			<string>SlideMenuControllerSwift.framework</string>
+			<key>sourceTree</key>
+			<string>BUILT_PRODUCTS_DIR</string>
+		</dict>
+		<key>EA4CE4BF6241F34A1FEC6215B2DD62BB</key>
+		<dict>
+			<key>fileRef</key>
+			<string>6110409E177670C1BA86FC005002B693</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>ATTRIBUTES</key>
+				<array>
+					<string>Public</string>
+				</array>
+			</dict>
+		</dict>
+		<key>EAD5179D92ABAD778C40E1913E322009</key>
+		<dict>
+			<key>baseConfigurationReference</key>
+			<string>E0D5D7A22EC96EB94C1117B938D64596</string>
+			<key>buildSettings</key>
+			<dict>
+				<key>CODE_SIGN_IDENTITY[sdk=iphoneos*]</key>
+				<string>iPhone Developer</string>
+				<key>CURRENT_PROJECT_VERSION</key>
+				<string>1</string>
+				<key>DEBUG_INFORMATION_FORMAT</key>
+				<string>dwarf</string>
+				<key>DEFINES_MODULE</key>
+				<string>YES</string>
+				<key>DYLIB_COMPATIBILITY_VERSION</key>
+				<string>1</string>
+				<key>DYLIB_CURRENT_VERSION</key>
+				<string>1</string>
+				<key>DYLIB_INSTALL_NAME_BASE</key>
+				<string>@rpath</string>
+				<key>ENABLE_STRICT_OBJC_MSGSEND</key>
+				<string>YES</string>
+				<key>GCC_NO_COMMON_BLOCKS</key>
+				<string>YES</string>
+				<key>INFOPLIST_FILE</key>
+				<string>Target Support Files/Pods-FDA/Info.plist</string>
+				<key>INSTALL_PATH</key>
+				<string>$(LOCAL_LIBRARY_DIR)/Frameworks</string>
+				<key>IPHONEOS_DEPLOYMENT_TARGET</key>
+				<string>9.0</string>
+				<key>LD_RUNPATH_SEARCH_PATHS</key>
+				<array>
+					<string>$(inherited)</string>
+					<string>@executable_path/Frameworks</string>
+					<string>@loader_path/Frameworks</string>
+				</array>
+				<key>MACH_O_TYPE</key>
+				<string>staticlib</string>
+				<key>MODULEMAP_FILE</key>
+				<string>Target Support Files/Pods-FDA/Pods-FDA.modulemap</string>
+				<key>MTL_ENABLE_DEBUG_INFO</key>
+				<string>YES</string>
+				<key>OTHER_LDFLAGS</key>
+				<string></string>
+				<key>OTHER_LIBTOOLFLAGS</key>
+				<string></string>
+				<key>PODS_ROOT</key>
+				<string>$(SRCROOT)</string>
+				<key>PRODUCT_BUNDLE_IDENTIFIER</key>
+				<string>org.cocoapods.${PRODUCT_NAME:rfc1034identifier}</string>
+				<key>PRODUCT_NAME</key>
+				<string>Pods_FDA</string>
+				<key>SDKROOT</key>
+				<string>iphoneos</string>
+				<key>SKIP_INSTALL</key>
+				<string>YES</string>
+				<key>SWIFT_OPTIMIZATION_LEVEL</key>
+				<string>-Onone</string>
+				<key>SWIFT_VERSION</key>
+				<string>3.0</string>
+				<key>TARGETED_DEVICE_FAMILY</key>
+				<string>1,2</string>
+				<key>VERSIONING_SYSTEM</key>
+				<string>apple-generic</string>
+				<key>VERSION_INFO_PREFIX</key>
+				<string></string>
+			</dict>
+			<key>isa</key>
+			<string>XCBuildConfiguration</string>
+			<key>name</key>
+			<string>Debug</string>
+		</dict>
 		<key>EB413D89C7AF0B6F412471992D364AF3</key>
 		<dict>
 			<key>includeInIndex</key>
@@ -2644,6 +4126,49 @@
 			<string>sourcecode.c.h</string>
 			<key>path</key>
 			<string>Pods-FDAUITests-umbrella.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>EB77DB68658F278FC43394A409A49B64</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.swift</string>
+			<key>name</key>
+			<string>IQPreviousNextView.swift</string>
+			<key>path</key>
+			<string>IQKeyboardManagerSwift/IQToolbar/IQPreviousNextView.swift</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>EBE12DEF39E0AF35C89ED72FBA1C8DA7</key>
+		<dict>
+			<key>buildActionMask</key>
+			<string>2147483647</string>
+			<key>files</key>
+			<array>
+				<string>8BD7B4A6D139EDD6D143E1CE466B3528</string>
+			</array>
+			<key>isa</key>
+			<string>PBXHeadersBuildPhase</string>
+			<key>runOnlyForDeploymentPostprocessing</key>
+			<string>0</string>
+		</dict>
+		<key>EDA7837F11484A192B22949E9C352DDE</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>UIImageView+HighlightedWebCache.h</string>
+			<key>path</key>
+			<string>SDWebImage/UIImageView+HighlightedWebCache.h</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
@@ -2671,6 +4196,21 @@
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
+		<key>F033404B01E8A162E356EBCF67643DD7</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>SDWebImageCompat.h</string>
+			<key>path</key>
+			<string>SDWebImage/SDWebImageCompat.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
 		<key>F0DF084741B3EE8823C02F1AA63F4242</key>
 		<dict>
 			<key>includeInIndex</key>
@@ -2684,12 +4224,49 @@
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
+		<key>F0E0EE582E868956081A2EC3BA8C7BA3</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>SDWebImageManager.h</string>
+			<key>path</key>
+			<string>SDWebImage/SDWebImageManager.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
 		<key>F0EC3920107562BEFAAA72F00B85BDD3</key>
 		<dict>
 			<key>fileRef</key>
-			<string>3C9854452B704969D40D932335DEE0FF</string>
+			<string>85254AA07E6987A36C67837348CDF9C5</string>
 			<key>isa</key>
 			<string>PBXBuildFile</string>
+		</dict>
+		<key>F1737C88A79306946011065BD3117008</key>
+		<dict>
+			<key>fileRef</key>
+			<string>BFE3C0EF882E0AA3D3F3A2D8821CB68E</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>F18019F046032BE474524A9C7688B1E0</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>NSData+ImageContentType.h</string>
+			<key>path</key>
+			<string>SDWebImage/NSData+ImageContentType.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
 		</dict>
 		<key>F2ABA137ACF3E3B0178934EFFBA9007C</key>
 		<dict>
@@ -2707,7 +4284,7 @@
 		<key>F39E6121BE9036ACFC1475198A549720</key>
 		<dict>
 			<key>fileRef</key>
-			<string>0F2331BAF78D4EDDCD400CF6388C7978</string>
+			<string>1C48DFA086337CC9C53C9505D1096F01</string>
 			<key>isa</key>
 			<string>PBXBuildFile</string>
 		</dict>
@@ -2724,6 +4301,34 @@
 			<key>runOnlyForDeploymentPostprocessing</key>
 			<string>0</string>
 		</dict>
+		<key>F6FD4E69A95CB43740C784B6A2FAE6E4</key>
+		<dict>
+			<key>buildActionMask</key>
+			<string>2147483647</string>
+			<key>files</key>
+			<array>
+				<string>839CC8675D721D0E4614E5E48885CDEB</string>
+			</array>
+			<key>isa</key>
+			<string>PBXSourcesBuildPhase</string>
+			<key>runOnlyForDeploymentPostprocessing</key>
+			<string>0</string>
+		</dict>
+		<key>F71D2E341100BFBE8E913EA6D7B85DB1</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.swift</string>
+			<key>name</key>
+			<string>IQKeyboardReturnKeyHandler.swift</string>
+			<key>path</key>
+			<string>IQKeyboardManagerSwift/IQKeyboardReturnKeyHandler.swift</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
 		<key>F72FB972EFFACF2D8D2DB8F7BAFB01FC</key>
 		<dict>
 			<key>includeInIndex</key>
@@ -2734,6 +4339,45 @@
 			<string>text.plist.xml</string>
 			<key>path</key>
 			<string>Pods-FDA-acknowledgements.plist</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>F8504428A6779FC74B02F4EE1D6C8A0E</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>3E46A44E70EF24077559E10E8198694D</string>
+				<string>C8B1EFAEBBE203201B9CC9B7F8C50BA2</string>
+				<string>34C5F89414992C550EDDB2614050C3FD</string>
+				<string>6271CD58A53E8EB97AA19786795AA70E</string>
+				<string>679D05DC17966647FB0C893645DA4825</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>Pods</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>F93FE76450EA4450CBE9244B0D5B0500</key>
+		<dict>
+			<key>fileRef</key>
+			<string>85254AA07E6987A36C67837348CDF9C5</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>F9F5D0DF1812A11B0161E268E0C3598F</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.swift</string>
+			<key>name</key>
+			<string>IQTitleBarButtonItem.swift</string>
+			<key>path</key>
+			<string>IQKeyboardManagerSwift/IQToolbar/IQTitleBarButtonItem.swift</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
@@ -2748,18 +4392,20 @@
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
-		<key>FA194248E2C43D19151AAE3290E0A49C</key>
+		<key>FAF82FAEED3803BC0E6A9AA483BD729B</key>
 		<dict>
+			<key>explicitFileType</key>
+			<string>wrapper.framework</string>
 			<key>includeInIndex</key>
-			<string>1</string>
+			<string>0</string>
 			<key>isa</key>
 			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text.plist.xml</string>
+			<key>name</key>
+			<string>Pods_FDA.framework</string>
 			<key>path</key>
-			<string>Info.plist</string>
+			<string>Pods-FDA.framework</string>
 			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
+			<string>BUILT_PRODUCTS_DIR</string>
 		</dict>
 		<key>FB00EC5589DD154FC7523EED99EB9315</key>
 		<dict>
@@ -2769,6 +4415,19 @@
 			<string>PBXFileReference</string>
 			<key>path</key>
 			<string>Pods-FDAUITests.modulemap</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>FC100A8E6EFFD8904320B339E627FA95</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>path</key>
+			<string>SlideMenuControllerSwift-dummy.m</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
@@ -2785,35 +4444,6 @@
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
-		<key>FE6DF64F6E1845C508DB0BCAF27630E2</key>
-		<dict>
-			<key>buildConfigurations</key>
-			<array>
-				<string>0C4A23B65576C604C0FF1E3BA95CEBFB</string>
-				<string>A15149B35E5D4D0854C1E4B89FD090D3</string>
-			</array>
-			<key>defaultConfigurationIsVisible</key>
-			<string>0</string>
-			<key>defaultConfigurationName</key>
-			<string>Release</string>
-			<key>isa</key>
-			<string>XCConfigurationList</string>
-		</dict>
-		<key>FEE7C4F58D539C9EE9EBACB74037BF1E</key>
-		<dict>
-			<key>explicitFileType</key>
-			<string>wrapper.framework</string>
-			<key>includeInIndex</key>
-			<string>0</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>name</key>
-			<string>SlideMenuControllerSwift.framework</string>
-			<key>path</key>
-			<string>SlideMenuControllerSwift.framework</string>
-			<key>sourceTree</key>
-			<string>BUILT_PRODUCTS_DIR</string>
-		</dict>
 		<key>FF4987589CA97F0D0B7A44C9E73E7378</key>
 		<dict>
 			<key>buildActionMask</key>
@@ -2826,23 +4456,6 @@
 			<string>PBXSourcesBuildPhase</string>
 			<key>runOnlyForDeploymentPostprocessing</key>
 			<string>0</string>
-		</dict>
-		<key>FFA6512770A769F96C4E5CC4E8D189C7</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>721E9AC3C4CFEBACD251F1BC2481A74F</string>
-				<string>1C130D50A4300A880327EBCC08BDD9D5</string>
-				<string>E628AAE6017A61B79B7B4A4E99CC1EE4</string>
-				<string>18232900551F75476133D6CA8F6DB31B</string>
-				<string>FEE7C4F58D539C9EE9EBACB74037BF1E</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>Products</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
 		</dict>
 	</dict>
 	<key>rootObject</key>

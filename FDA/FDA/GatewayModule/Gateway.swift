@@ -10,9 +10,9 @@ import UIKit
 
 class Gateway: NSObject {
 
-    var studies:Array<Study>?
-    var resources:Array<Resource>?
-    var notification:Array<AppNotification>?
+    var studies:Array<Study>? = []
+    var resources:Array<Resource>? = []
+    var notification:Array<AppNotification>? = []
     var overview:Overview?
     static var instance = Gateway()
 }

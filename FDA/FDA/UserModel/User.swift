@@ -47,7 +47,16 @@ class User{
     var logoutReason : LogoutReason = .user_action
     var isLoginWithTempPassword:Bool = false
     //sharedInstance
-    static var currentUser = User()
+    private static var _currentUser: User?
+    
+    static var currentUser: User {
+        if _currentUser == nil { _currentUser = User() }
+        return _currentUser!
+    }
+    
+    static func resetCurrentUser() {
+        _currentUser = nil
+    }
     
     
     init() {

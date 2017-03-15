@@ -20,6 +20,7 @@ enum SignInLoadFrom:Int{
 class SignInViewController : UIViewController{
     
     var tableViewRowDetails : NSMutableArray?
+    var user = User.currentUser
     
     @IBOutlet var tableView : UITableView?
     @IBOutlet var buttonSignIn : UIButton?
@@ -127,7 +128,20 @@ class SignInViewController : UIViewController{
        
         
         if let signUpController = segue.destination as? SignUpViewController {
-            signUpController.viewLoadFrom = .gatewayOverview
+            if viewLoadFrom == .menu {
+                signUpController.viewLoadFrom = .menu
+            }
+            else {
+                signUpController.viewLoadFrom = .login
+            }
+            
+        }
+        if let verificationController = segue.destination as? VerificationViewController {
+            
+            if viewLoadFrom == .menu {
+                verificationController.shouldCreateMenu = false
+            }
+            
             
         }
         

@@ -12,12 +12,12 @@ import ResearchKit
 //let user = User()
 let activityBuilder:ActivityBuilder? = ActivityBuilder.currentActivityBuilder
 let consentbuilder:ConsentBuilder? = ConsentBuilder()
-var user = User.currentUser
+//var user = User.currentUser
 
 
 let resourceArray : Array<Any>? = nil
 class ViewController: UIViewController {
-    
+    var user = User.currentUser
     
     override func viewDidLoad() {
         super.viewDidLoad()

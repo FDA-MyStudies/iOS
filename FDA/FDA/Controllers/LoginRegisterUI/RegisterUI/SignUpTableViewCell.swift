@@ -59,7 +59,7 @@ class SignUpTableViewCell: UITableViewCell {
      @param tag    is the cell index 
  */
     func setCellData(tag:TextFieldTags)  {
-        
+        let user = User.currentUser
         switch tag {
         case .FirstNameTag:
             if Utilities.isValidValue(someObject: user.firstName as AnyObject?) {

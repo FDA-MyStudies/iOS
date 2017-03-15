@@ -22,6 +22,7 @@ class SignUpViewController : UIViewController{
     var tableViewRowDetails : NSMutableArray?
     var agreedToTerms : Bool = false
     var confirmPassword = ""
+    var user = User.currentUser
     
     @IBOutlet var tableView : UITableView?
     @IBOutlet var tableViewFooterView : UIView?

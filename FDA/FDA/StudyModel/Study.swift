@@ -55,7 +55,7 @@ class Study {
             if Utilities.isValidValue(someObject: studyDetail[kStudyDescription] as AnyObject ){
                 self.description = studyDetail[kStudyDescription] as? String
             }
-            if Utilities.isValidObject(someObject: studyDetail[kStudyLogoURL] as AnyObject ) {
+            if Utilities.isValidValue(someObject: studyDetail[kStudyLogoURL] as AnyObject ) {
                 self.logoURL = studyDetail[kStudyLogoURL] as? String
             }
             if Utilities.isValidValue(someObject: studyDetail[kStudyStatus] as AnyObject )  {

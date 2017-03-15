@@ -1,15 +1,27 @@
 PODS:
+  - Crashlytics (3.8.4):
+    - Fabric (~> 1.6.3)
+  - Fabric (1.6.11)
   - IQKeyboardManagerSwift (4.0.8)
+  - SDWebImage (4.0.0):
+    - SDWebImage/Core (= 4.0.0)
+  - SDWebImage/Core (4.0.0)
   - SlideMenuControllerSwift (3.0.1)
 
 DEPENDENCIES:
+  - Crashlytics
+  - Fabric
   - IQKeyboardManagerSwift
+  - SDWebImage
   - SlideMenuControllerSwift
 
 SPEC CHECKSUMS:
+  Crashlytics: 79e236942ca1e7fc641df1feb9a275360a78ab6a
+  Fabric: 5911403591946b8228ab1c51d98f1d7137e863c6
   IQKeyboardManagerSwift: c04bc9f68473823f825eb44d958fce98d921bead
+  SDWebImage: 76a6348bdc74eb5a55dd08a091ef298e56b55e41
   SlideMenuControllerSwift: 9a163b16d54afab734add42858cba7ef7c307755
 
-PODFILE CHECKSUM: 4fc439d64fbfa8483d02441ec94de8e30931da16
+PODFILE CHECKSUM: 2b847b23b6e5cab07b4ee3fc98360b40478a7677
 
 COCOAPODS: 1.0.1

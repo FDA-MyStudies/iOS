@@ -225,12 +225,14 @@ class LeftMenuViewController : UIViewController, LeftMenuProtocol {
         
     }
     func sendRequestToSignOut() {
-        UserServices().logoutUser(self as! NMWebServiceDelegate)
+        UserServices().logoutUser(self as NMWebServiceDelegate)
     }
 
     func signout(){
         debugPrint("singout")
-        _ = self.navigationController?.popToRootViewController(animated: true)
+        self.changeViewController(.studyList)
+        self.createLeftmenuItems()
+        //_ = self.navigationController?.popToRootViewController(animated: true)
     }
    
 

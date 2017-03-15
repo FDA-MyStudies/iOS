@@ -52,6 +52,7 @@ class ProfileTableViewCell: UITableViewCell {
      */
     func setToggleValue(indexValue:Int)  {
         
+        let user = User.currentUser
         switch ProfileTableViewCellType(rawValue:indexValue)! as ProfileTableViewCellType{
         case .usePasscode:
             if Utilities.isValidValue(someObject: user.settings?.passcode as AnyObject?){

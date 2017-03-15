@@ -20,6 +20,7 @@ enum SignInLoadFrom:Int{
 class SignInViewController : UIViewController{
     
     var tableViewRowDetails : NSMutableArray?
+    var user = User.currentUser
     
     @IBOutlet var tableView : UITableView?
     @IBOutlet var buttonSignIn : UIButton?

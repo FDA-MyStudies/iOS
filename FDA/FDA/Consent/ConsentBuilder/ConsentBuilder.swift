@@ -149,7 +149,7 @@ class ConsentBuilder{
             
            // consentDocument.sections? = self.consentSectionArray
             
-            
+            let user = User.currentUser
             let signatureImage = UIImage(named: "Bomb.png")!
             
             let investigatorSignatureTitle = NSLocalizedString(user.getFullName(), comment: "")

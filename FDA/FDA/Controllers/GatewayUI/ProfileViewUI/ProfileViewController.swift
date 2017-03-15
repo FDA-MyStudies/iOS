@@ -38,6 +38,7 @@ class ProfileViewController: UIViewController {
     var datePickerView:UIDatePicker?
     
     var isCellEditable:Bool?
+    var user = User.currentUser
     
     
     @IBOutlet var tableViewProfile : UITableView?
@@ -151,7 +152,7 @@ class ProfileViewController: UIViewController {
                 
                 self.buttonLeadTime?.setTitle(title!, for: .normal)
                 
-                user.settings?.leadTime = title
+                self.user.settings?.leadTime = title
             }
             
         })

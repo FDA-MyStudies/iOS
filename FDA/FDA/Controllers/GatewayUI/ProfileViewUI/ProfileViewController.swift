@@ -205,7 +205,11 @@ class ProfileViewController: UIViewController {
     
     func handleSignoutResponse(){
         debugPrint("singout")
-        fdaSlideMenuController()?.navigateToHomeAfterSingout()
+        //fdaSlideMenuController()?.navigateToHomeAfterSingout()
+        let leftController = slideMenuController()?.leftViewController as! LeftMenuViewController
+        leftController.changeViewController(.studyList)
+        leftController.createLeftmenuItems()
+        
     }
     
     

@@ -23,7 +23,8 @@ class OverviewSection {
     var imageURL:String?    //download url of image
     var text:String?        //short description
     var link:String?        //used for media link
-  
+    var websiteLink:String?        //used for Website link
+    
     init(detail:Dictionary<String, Any>){
         
         
@@ -42,15 +43,18 @@ class OverviewSection {
             if Utilities.isValidValue(someObject: detail[kOverviewImageLink] as AnyObject ){
                 self.imageURL = detail[kOverviewImageLink] as? String
             }
-            if Utilities.isValidObject(someObject: detail[kOverviewMediaLink] as AnyObject ) {
+            if Utilities.isValidValue(someObject: detail[kOverviewMediaLink] as AnyObject ) {
                 self.link = detail[kOverviewMediaLink] as? String
             }
-          
+            if Utilities.isValidValue(someObject: detail[kOverviewWebsiteLink] as AnyObject ) {
+                self.websiteLink = detail[kOverviewWebsiteLink] as? String
+            }
+            
             
         }
         else{
             Logger.sharedInstance.debug("Overview Dictionary is null:\(detail)")
         }
     }
-
+    
 }

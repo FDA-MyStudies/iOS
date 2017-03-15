@@ -14,6 +14,7 @@ enum SignUpLoadFrom:Int{
     case gatewayOverview
     case login
     case menu
+    case menu_login
 }
 
 
@@ -57,16 +58,18 @@ class SignUpViewController : UIViewController{
         //unhide navigationbar
         self.navigationController?.setNavigationBarHidden(false, animated: true)
         
+        User.resetCurrentUser()
+        user = User.currentUser
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        if viewLoadFrom == .gatewayOverview || viewLoadFrom == .login {
-            self.addBackBarButton()
+        if viewLoadFrom == .menu{
+            self.setNavigationBarItem()
         }
         else {
-            self.setNavigationBarItem()
+            self.addBackBarButton()
         }
         
     }
@@ -233,7 +236,7 @@ class SignUpViewController : UIViewController{
         
         if let verificationController = segue.destination as? VerificationViewController {
             
-            if viewLoadFrom == .menu {
+            if viewLoadFrom == .menu || viewLoadFrom == .menu_login{
                 verificationController.shouldCreateMenu = false
             }
            
@@ -414,8 +417,28 @@ extension SignUpViewController : UITextFieldDelegate{
         
     }
     
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        
+        let tag:TextFieldTags = TextFieldTags(rawValue: textField.tag)!
+        
+        if tag == .FirstNameTag || tag == .LastName || tag == .EmailId {
+            if string == " " {
+                return false
+            }
+            else{
+                return true
+            }
+        }
+        else{
+            return true
+        }
+    
+    }
+    
     func textFieldDidEndEditing(_ textField: UITextField) {
         print(textField.text!)
+        
+        textField.text =  textField.text?.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
         
         let tag:TextFieldTags = TextFieldTags(rawValue: textField.tag)!
         

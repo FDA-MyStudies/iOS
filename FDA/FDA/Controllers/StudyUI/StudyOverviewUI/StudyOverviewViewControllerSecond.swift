@@ -40,6 +40,14 @@ class StudyOverviewViewControllerSecond : UIViewController{
         
     }
     
+    @IBAction func buttonActionJoinStudy(_ sender: Any){
+        
+        if User.currentUser.userType == UserType.AnonymousUser{
+            let leftController = slideMenuController()?.leftViewController as! LeftMenuViewController
+            leftController.changeViewController(.profile_signin)
+        }
+    }
+    
     @IBAction func visitWebsiteButtonAction(_ sender: Any) {
         
         let loginStoryboard = UIStoryboard.init(name: "Main", bundle:Bundle.main)

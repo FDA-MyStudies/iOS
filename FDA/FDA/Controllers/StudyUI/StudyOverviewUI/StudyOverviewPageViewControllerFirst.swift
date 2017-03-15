@@ -15,8 +15,9 @@ class StudyOverviewViewControllerFirst : UIViewController{
     @IBOutlet var buttonJoinStudy : UIButton?
     @IBOutlet var buttonWatchVideo : UIButton?
     @IBOutlet var buttonVisitWebsite : UIButton?
-    @IBOutlet var labelTitle : UILabel? 
+    @IBOutlet var labelTitle : UILabel?
     @IBOutlet var labelDescription : UILabel?
+    
     
     var overviewSectionDetail : OverviewSection!
     
@@ -56,6 +57,14 @@ class StudyOverviewViewControllerFirst : UIViewController{
         
     }
     
+    @IBAction func buttonActionJoinStudy(_ sender: Any){
+        
+        if User.currentUser.userType == UserType.AnonymousUser{
+            let leftController = slideMenuController()?.leftViewController as! LeftMenuViewController
+            leftController.changeViewController(.profile_signin)
+        }
+    }
+    
     func moviePlayBackDidFinish(notification: NSNotification) {
         //  println("moviePlayBackDidFinish:")
         moviePlayer.moviePlayer.stop()
@@ -66,11 +75,14 @@ class StudyOverviewViewControllerFirst : UIViewController{
     
     @IBAction func visitWebsiteButtonAction(_ sender: Any) {
         
-        let loginStoryboard = UIStoryboard.init(name: "Main", bundle:Bundle.main)
-        let webViewController = loginStoryboard.instantiateViewController(withIdentifier:"WebViewController") as! UINavigationController
-        let webView = webViewController.viewControllers[0] as! WebViewController
-        webView.requestLink = "http://www.fda.gov"
-        self.navigationController?.present(webViewController, animated: true, completion: nil)
+        if overviewSectionDetail.websiteLink != nil {
+            
+            let loginStoryboard = UIStoryboard.init(name: "Main", bundle:Bundle.main)
+            let webViewController = loginStoryboard.instantiateViewController(withIdentifier:"WebViewController") as! UINavigationController
+            let webView = webViewController.viewControllers[0] as! WebViewController
+            webView.requestLink = overviewSectionDetail.websiteLink!
+            self.navigationController?.present(webViewController, animated: true, completion: nil)
+        }
     }
     
 }

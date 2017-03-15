@@ -50,22 +50,24 @@ class SignInViewController : UIViewController{
         self.navigationController?.setNavigationBarHidden(false, animated: true)
         
         
-       
+        
         
         if let attributedTitle = buttonSignUp?.attributedTitle(for: .normal) {
             let mutableAttributedTitle = NSMutableAttributedString(attributedString: attributedTitle)
-           
-             mutableAttributedTitle.addAttribute(NSForegroundColorAttributeName, value: UIColor.init(colorLiteralRed: 0/255.0, green: 124/255.0, blue: 186/255.0, alpha: 1.0), range: NSRange(location:10,length:7))
+            
+            mutableAttributedTitle.addAttribute(NSForegroundColorAttributeName, value: UIColor.init(colorLiteralRed: 0/255.0, green: 124/255.0, blue: 186/255.0, alpha: 1.0), range: NSRange(location:10,length:7))
             
             buttonSignUp?.setAttributedTitle(mutableAttributedTitle, for: .normal)
         }
         
-    
+        
         
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        user = User.currentUser
         
         if viewLoadFrom == .gatewayOverview {
             self.addBackBarButton()
@@ -74,6 +76,10 @@ class SignInViewController : UIViewController{
             self.setNavigationBarItem()
         }
         
+        
+        self.perform(#selector(SignInViewController.setInitialDate), with: self, afterDelay: 1)
+        
+        self.tableView?.reloadData()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -84,10 +90,32 @@ class SignInViewController : UIViewController{
     override func viewWillDisappear(_ animated: Bool) {
         //hide navigationbar
         if viewLoadFrom == .gatewayOverview {
-             self.navigationController?.setNavigationBarHidden(true, animated: true)
+            self.navigationController?.setNavigationBarHidden(true, animated: true)
         }
-       
+        
     }
+    
+    func setInitialDate()  {
+        
+        // if textfield have data then we are updating same to model object
+        
+        var selectedCell:SignInTableViewCell =  tableView!.cellForRow(at:IndexPath(row:0, section: 0)) as! SignInTableViewCell
+        
+        let emailTextFieldValue = selectedCell.textFieldValue?.text
+        selectedCell = tableView!.cellForRow(at:IndexPath(row:1, section: 0)) as! SignInTableViewCell
+        
+        let passwordTextFieldValue = selectedCell.textFieldValue?.text
+        
+        
+        if emailTextFieldValue?.isEmpty == false &&  (emailTextFieldValue?.characters.count)! > 0{
+            user.emailId = emailTextFieldValue
+        }
+        if passwordTextFieldValue?.isEmpty == false && (passwordTextFieldValue?.characters.count)! > 0{
+            user.password = passwordTextFieldValue
+        }
+        self.tableView?.reloadData()
+    }
+    
     
     //Used to show the alert using Utility
     func showAlertMessages(textMessage : String){
@@ -104,7 +132,7 @@ class SignInViewController : UIViewController{
         
         self.view.endEditing(true)
         if (user.emailId?.isEmpty)! && (user.password?.isEmpty)! {
-             self.showAlertMessages(textMessage: kMessageAllFieldsAreEmpty)
+            self.showAlertMessages(textMessage: kMessageAllFieldsAreEmpty)
         }else if user.emailId == "" {
             self.showAlertMessages(textMessage: kMessageEmailBlank)
             
@@ -116,8 +144,8 @@ class SignInViewController : UIViewController{
             
         }else{
             print("Call the webservice")
-            user.userType = .FDAUser
-            //self.navigateToGatewayDashboard()
+           
+            
             UserServices().loginUser(self)
             
         }
@@ -125,11 +153,11 @@ class SignInViewController : UIViewController{
     
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-       
+        
         
         if let signUpController = segue.destination as? SignUpViewController {
             if viewLoadFrom == .menu {
-                signUpController.viewLoadFrom = .menu
+                signUpController.viewLoadFrom = .menu_login
             }
             else {
                 signUpController.viewLoadFrom = .login
@@ -179,7 +207,7 @@ class SignInViewController : UIViewController{
         fda.automaticallyAdjustsScrollViewInsets = true
         self.navigationController?.pushViewController(fda, animated: true)
     }
-
+    
 }
 
 //MARK: TableView Data source
@@ -198,6 +226,9 @@ extension SignInViewController : UITableViewDataSource {
         if indexPath.row == SignInTableViewTags.Password.rawValue{
             isSecuredEntry = true
         }
+        else{
+            cell.textFieldValue?.keyboardType = .emailAddress
+        }
         
         cell.textFieldValue?.tag = indexPath.row
         cell.populateCellData(data: tableViewData, securedText: isSecuredEntry)
@@ -208,7 +239,7 @@ extension SignInViewController : UITableViewDataSource {
 
 //MARK: TableView Delegates
 extension SignInViewController :  UITableViewDelegate {
-
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
@@ -222,6 +253,26 @@ extension SignInViewController : UITextFieldDelegate{
         print(textField.tag)
         
     }
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        
+        let tag:SignInTableViewTags = SignInTableViewTags(rawValue: textField.tag)!
+        
+        if tag == .EmailId {
+            if string == " " {
+                return false
+            }
+            else{
+                return true
+            }
+        }
+        else{
+            return true
+        }
+        
+    }
+    
+    
     
     func textFieldDidEndEditing(_ textField: UITextField) {
         print(textField.text!)
@@ -274,11 +325,11 @@ extension SignInViewController:NMWebServiceDelegate {
         }
         else {
             
-           self.navigateToVerifyController()
+            self.navigateToVerifyController()
         }
-
         
-       
+        
+        
         
     }
     func failedRequest(_ manager: NetworkManager, requestName: NSString, error: NSError) {

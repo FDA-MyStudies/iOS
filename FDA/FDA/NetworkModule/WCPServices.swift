@@ -31,6 +31,7 @@ let kOverviewImageLink = "image"
 let kOverviewTitle = "title"
 let kOverviewText = "text"
 let kOverviewMediaLink = "link"
+let kOverviewWebsiteLink = "website"
 
 //notification
 let kNotifications = "notifications"

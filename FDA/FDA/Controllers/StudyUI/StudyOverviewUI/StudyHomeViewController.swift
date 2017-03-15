@@ -33,6 +33,11 @@ class StudyHomeViewController : UIViewController{
         
         // pageViewController?.overview = Gateway.instance.overview
         self.navigationController?.setNavigationBarHidden(true, animated: true)
+        
+        if User.currentUser.userType == UserType.AnonymousUser {
+            buttonStar.isHidden = true
+        }
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {

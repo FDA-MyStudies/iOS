@@ -247,7 +247,8 @@ class NetworkWebServiceHandler: NSObject, URLSessionDelegate {
 
         }else{
             if ((delegate?.failedRequest) != nil) {
-                let error1 = NSError(domain: "Network not available", code: 0,userInfo: nil)
+                //let error1 = NSError(domain: "Network not available", code:0,userInfo: nil)
+                let error1 = NSError(domain: NSURLErrorDomain, code:101,userInfo:[NSLocalizedDescriptionKey:"Network not available"])
                 delegate?.failedRequest(networkManager!, requestName: requestName!,error: error1)
             }
         }

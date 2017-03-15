@@ -61,7 +61,7 @@ class StudyListViewController: UIViewController {
             self.tableView?.rowHeight = 140
         }
         
-        self.loadTestData()
+        //self.loadTestData()
         
     }
     

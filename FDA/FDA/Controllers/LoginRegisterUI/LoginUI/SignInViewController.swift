@@ -126,7 +126,20 @@ class SignInViewController : UIViewController{
        
         
         if let signUpController = segue.destination as? SignUpViewController {
-            signUpController.viewLoadFrom = .gatewayOverview
+            if viewLoadFrom == .menu {
+                signUpController.viewLoadFrom = .menu
+            }
+            else {
+                signUpController.viewLoadFrom = .login
+            }
+            
+        }
+        if let verificationController = segue.destination as? VerificationViewController {
+            
+            if viewLoadFrom == .menu {
+                verificationController.shouldCreateMenu = false
+            }
+            
             
         }
         

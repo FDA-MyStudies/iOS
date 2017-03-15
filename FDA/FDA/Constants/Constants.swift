@@ -77,6 +77,6 @@ let kMessageAllFieldsAreEmpty = "Please enter all the fields"
 let kMessageValidFirstName = "Please enter valid first name. Please use letters(length:1 - 100 characters)."
 let kMessageValidLastName = "Please enter valid last name. Please use letters(length:1 - 100 characters)."
 
-
+let kMessageValidateOldAndNewPasswords = "Old password and New password should not be same."
 
 

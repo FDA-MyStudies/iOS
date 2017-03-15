@@ -365,6 +365,9 @@ class Settings{
             if Utilities.isValidValue(someObject: dict[kSettingsTouchId] as AnyObject){
                 self.touchId = dict[kSettingsTouchId] as? Bool
             }
+            if Utilities.isValidValue(someObject: dict[kSettingsLeadTime] as AnyObject){
+                self.leadTime = dict[kSettingsLeadTime] as? String
+            }
             
         }
         else{

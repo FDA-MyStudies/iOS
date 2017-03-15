@@ -73,7 +73,6 @@ class SignInViewController : UIViewController{
             self.setNavigationBarItem()
         }
         
-        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -102,7 +101,10 @@ class SignInViewController : UIViewController{
     //MARK: Signin Button Action and validation checks
     @IBAction func signInButtonAction(_ sender: Any) {
         
-        if user.emailId == "" {
+        self.view.endEditing(true)
+        if (user.emailId?.isEmpty)! && (user.password?.isEmpty)! {
+             self.showAlertMessages(textMessage: kMessageAllFieldsAreEmpty)
+        }else if user.emailId == "" {
             self.showAlertMessages(textMessage: kMessageEmailBlank)
             
         }else if !(Utilities.isValidEmail(testStr: user.emailId!)) {

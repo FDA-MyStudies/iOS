@@ -57,10 +57,10 @@ class ForgotPasswordViewController : UIViewController{
     @IBAction func submitButtonAction(_ sender: Any) {
         self.dismissKeyboard()
         if textFieldEmail?.text == "" {
-            self.showAlertMessages(textMessage: "Please enter your email address.")
+            self.showAlertMessages(textMessage: kMessageEmailBlank)
             
         }else if !(Utilities.isValidEmail(testStr: (textFieldEmail?.text)!)) {
-            self.showAlertMessages(textMessage: "Please enter valid email address.")
+            self.showAlertMessages(textMessage: kMessageValidEmail)
             
         }else{
             print("Call the Webservice")

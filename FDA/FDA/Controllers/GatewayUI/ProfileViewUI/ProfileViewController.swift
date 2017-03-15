@@ -100,6 +100,9 @@ class ProfileViewController: UIViewController {
             self.editBarButtonItem?.tintColor = UIColor.black
         }
         else{
+            
+             self.view.endEditing(true)
+            
             if self.validateAllFields() {
                 UserServices().updateUserProfile(self)
             }
@@ -278,11 +281,24 @@ class ProfileViewController: UIViewController {
     func validateAllFields() -> Bool{
         
         
-        if user.firstName == "" {
+        if (user.firstName?.isEmpty)! && (user.lastName?.isEmpty)! && (user.emailId?.isEmpty)! {
+            self.showAlertMessages(textMessage: kMessageAllFieldsAreEmpty)
+            return false
+        }
+        else if  user.firstName == ""{
             self.showAlertMessages(textMessage: kMessageFirstNameBlank)
             return false
-        }else if user.lastName == ""{
+        }
+        else if (user.firstName?.isAlphanumeric)! == false || (user.firstName?.characters.count)! > 100 {
+            self.showAlertMessages(textMessage: kMessageValidFirstName)
+            return false
+        }
+        else if user.lastName == ""{
             self.showAlertMessages(textMessage: kMessageLastNameBlank)
+            return false
+
+        }else if user.lastName == "" ||  (user.lastName?.isAlphanumeric)! == false || (user.lastName?.characters.count)! > 100{
+            self.showAlertMessages(textMessage: kMessageValidLastName)
             return false
         }else if user.emailId == "" {
             self.showAlertMessages(textMessage: kMessageEmailBlank)
@@ -476,6 +492,11 @@ extension ProfileViewController:NMWebServiceDelegate {
         }
         else if requestName as String ==  RegistrationMethods.userProfile.description {
             self.tableViewProfile?.reloadData()
+            
+            if (user.settings?.leadTime?.characters.count)! > 0 {
+               self.buttonLeadTime?.setTitle(user.settings?.leadTime, for: .normal)
+            }
+            
         }
         else if requestName as String ==  RegistrationMethods.updateUserProfile.description {
          

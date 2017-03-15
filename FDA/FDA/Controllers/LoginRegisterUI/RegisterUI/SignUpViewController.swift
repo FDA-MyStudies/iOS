@@ -148,16 +148,30 @@ class SignUpViewController : UIViewController{
     
     //All validation checks and Password,Email complexity checks
     func validateAllFields() -> Bool{
-        if user.firstName == "" {
+        
+        if (user.firstName?.isEmpty)! && (user.lastName?.isEmpty)! && (user.emailId?.isEmpty)! && (user.password?.isEmpty)! && confirmPassword.isEmpty {
+            self.showAlertMessages(textMessage: kMessageAllFieldsAreEmpty)
+            return false
+        }else if user.firstName == "" {
             self.showAlertMessages(textMessage: kMessageFirstNameBlank)
             return false
-        }else if user.lastName == ""{
+        }
+        else if(user.firstName?.isAlphanumeric)! == false || (user.firstName?.characters.count)! > 100{
+            self.showAlertMessages(textMessage: kMessageValidFirstName)
+            return false
+        }
+        else if user.lastName == ""{
             self.showAlertMessages(textMessage: kMessageLastNameBlank)
             return false
-        }else if user.emailId == "" {
+        }else if(user.lastName?.isAlphanumeric)! == false || (user.lastName?.characters.count)! > 100{
+            self.showAlertMessages(textMessage: kMessageValidLastName)
+            return false
+        }
+        else if user.emailId == "" {
             self.showAlertMessages(textMessage: kMessageEmailBlank)
             return false
-        }else if !(Utilities.isValidEmail(testStr: user.emailId!)){
+        }
+        else if !(Utilities.isValidEmail(testStr: user.emailId!)){
             self.showAlertMessages(textMessage: kMessageValidEmail)
             return false
         }else if user.password == ""{
@@ -185,6 +199,8 @@ class SignUpViewController : UIViewController{
     
     //MARK: Submit Button Action and validation checks
     @IBAction func submitButtonAction(_ sender: Any) {
+        
+         self.view.endEditing(true)
         
         if self.validateAllFields() == true {
             

@@ -175,10 +175,18 @@ class Utilities: NSObject {
     class func isValidEmail(testStr:String) -> Bool {
         
         // print("validate calendar: \(testStr)")
-        let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}"
+        let emailRegEx = "[A-Z0-9a-z._-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}"
         
         let emailTest = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
-        return emailTest.evaluate(with: testStr)
+        
+        if testStr.characters.count > 255 {
+            return false
+        }
+        else{
+            return emailTest.evaluate(with: testStr)
+        }
+        
+        
     }
     
     //Used to check all the validations for password
@@ -200,7 +208,7 @@ class Utilities: NSObject {
         let specialresult = texttest2.evaluate(with: text)
         print("\(specialresult)")
         
-        let textCountResult = text.characters.count > 8 ? true : false
+        let textCountResult = text.characters.count > 8 && text.characters.count <= 16 ? true : false
         
         
         if capitalresult == false || numberresult == false || specialresult == false || textCountResult ==  false{

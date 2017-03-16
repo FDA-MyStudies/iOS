@@ -29,35 +29,38 @@ class SignUpTableViewCell: UITableViewCell {
         // Initialization code
         
     }
-
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
+        
         // Configure the view for the selected state
     }
-
-    //Populate cell data coming in dictionary
+    
+    
+    /*
+     Populate cell data coming in dictionary
+     */
     func populateCellData(data : NSDictionary , securedText : Bool, keyboardType:UIKeyboardType?){
         
         textFieldValue?.isSecureTextEntry = false
         if securedText == true {
-           textFieldValue?.isSecureTextEntry = true
+            textFieldValue?.isSecureTextEntry = true
         }
         labelType?.text = NSLocalizedString((data["helpText"] as? String)!, comment: "")
         textFieldValue?.placeholder = NSLocalizedString((data["placeHolder"] as? String)!, comment: "")
         
         if keyboardType == nil {
-           textFieldValue?.keyboardType = .default
+            textFieldValue?.keyboardType = .default
         } else {
             textFieldValue?.keyboardType = keyboardType!
         }
         
     }
     
-    /* 
-    Set cell data from User Object (for Profile Class)
-     @param tag    is the cell index 
- */
+    /*
+     Set cell data from User Object (for Profile Class)
+     @param tag    is the cell index
+     */
     func setCellData(tag:TextFieldTags)  {
         let user = User.currentUser
         switch tag {
@@ -66,7 +69,7 @@ class SignUpTableViewCell: UITableViewCell {
                 self.textFieldValue?.text =  user.firstName
             }
             else{
-                 self.textFieldValue?.text = ""
+                self.textFieldValue?.text = ""
             }
         case .LastName:
             if Utilities.isValidValue(someObject: user.lastName as AnyObject?) {
@@ -82,8 +85,6 @@ class SignUpTableViewCell: UITableViewCell {
             else{
                 self.textFieldValue?.text = ""
             }
-            
-            
             
         case .Password:
             if Utilities.isValidValue(someObject: user.password as AnyObject?) {

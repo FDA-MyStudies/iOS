@@ -15,6 +15,7 @@ class SignUpCompleteViewController : UIViewController{
     @IBOutlet var buttonNext : UIButton?
     var shouldCreateMenu:Bool = true
     
+//MARK:ViewController Delegate
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,15 +45,20 @@ class SignUpCompleteViewController : UIViewController{
 
     
     
-    //Next button Action
+//MARK: button Action
     @IBAction func nextButtonAction(_ sender: Any) {
         
             self.navigateToGatewayDashboard()
      
     }
     
+//MARK:Utility Methods
+    
+    
+    /*
+     method to Navigate StudyList after completion
+    */
     func navigateToGatewayDashboard(){
-        
         if shouldCreateMenu {
             
             self.createMenuView()
@@ -64,8 +70,12 @@ class SignUpCompleteViewController : UIViewController{
         }
         
     }
+    
+    /*
+     Method to Create Menu View after completion
+    */
+    
     func createMenuView() {
-        
         let storyboard = UIStoryboard(name: "Gateway", bundle: nil)
         
         let fda = storyboard.instantiateViewController(withIdentifier: "FDASlideMenuViewController") as! FDASlideMenuViewController

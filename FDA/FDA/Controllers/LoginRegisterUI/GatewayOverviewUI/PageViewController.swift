@@ -27,6 +27,8 @@ class PageViewController : UIPageViewController{
     
     var overview : Overview!
     
+//MARK:View Controller Delegates
+    
     override func viewDidLoad() {
         super.viewDidLoad()
          self.automaticallyAdjustsScrollViewInsets = false;
@@ -54,8 +56,11 @@ class PageViewController : UIPageViewController{
        
     }
     
-        
-    //Scrolls to the next view controller.
+  //MARK:Scroll Delegates
+    
+    /*
+     Scrolls to the next view controller.
+     */
     func scrollToNextViewController() {
         if let visibleViewController = viewControllers?.first,
             let nextViewController = pageViewController(self, viewControllerAfter: visibleViewController){
@@ -63,7 +68,9 @@ class PageViewController : UIPageViewController{
         }
     }
     
-    //Scrolls to the given 'viewController' page.
+    /*
+    Scrolls to the given 'viewController' page.
+    */
     private func scrollToViewController(viewController: UIViewController,
                                         direction: UIPageViewControllerNavigationDirection = .forward) {
         setViewControllers([viewController],
@@ -77,7 +84,9 @@ class PageViewController : UIPageViewController{
         })
     }
     
-    //Used to Notify that the current page index was updated.
+    /*
+    Used to Notify that the current page index was updated.
+    */
     func notifyTutorialDelegateOfNewIndex() {
         if let firstViewController = viewControllers?.first,
             let index = orderedViewControllers.index(of: firstViewController) {
@@ -85,10 +94,10 @@ class PageViewController : UIPageViewController{
         }
     }
     
-    //Scrolls to the view controller at the given index.
+    /*
+    Scrolls to the view controller at the given index.
+    */
     func scrollToViewController(index newIndex: Int) {
-        
-        
         
         if let firstViewController = viewControllers?.first,
             let currentIndex = orderedViewControllers.index(of: firstViewController) {

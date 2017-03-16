@@ -27,6 +27,10 @@ class SignInViewController : UIViewController{
     
     @IBOutlet var buttonSignUp: UIButton?
     var viewLoadFrom:SignInLoadFrom = .menu
+    
+    
+//MARK:View Controller Delegates
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -49,9 +53,6 @@ class SignInViewController : UIViewController{
         //unhide navigationbar
         self.navigationController?.setNavigationBarHidden(false, animated: true)
         
-        
-        
-        
         if let attributedTitle = buttonSignUp?.attributedTitle(for: .normal) {
             let mutableAttributedTitle = NSMutableAttributedString(attributedString: attributedTitle)
             
@@ -59,9 +60,6 @@ class SignInViewController : UIViewController{
             
             buttonSignUp?.setAttributedTitle(mutableAttributedTitle, for: .normal)
         }
-        
-        
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -76,7 +74,6 @@ class SignInViewController : UIViewController{
             self.setNavigationBarItem()
         }
         
-        
         self.perform(#selector(SignInViewController.setInitialDate), with: self, afterDelay: 1)
         
         self.tableView?.reloadData()
@@ -84,17 +81,60 @@ class SignInViewController : UIViewController{
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
-        
+       
     }
     override func viewWillDisappear(_ animated: Bool) {
         //hide navigationbar
         if viewLoadFrom == .gatewayOverview {
             self.navigationController?.setNavigationBarHidden(true, animated: true)
         }
-        
     }
     
+//MARK: Button Action
+    @IBAction func signInButtonAction(_ sender: Any) {
+        
+        self.view.endEditing(true)
+        if (user.emailId?.isEmpty)! && (user.password?.isEmpty)! {
+            self.showAlertMessages(textMessage: kMessageAllFieldsAreEmpty)
+        }else if user.emailId == "" {
+            self.showAlertMessages(textMessage: kMessageEmailBlank)
+            
+        }else if !(Utilities.isValidEmail(testStr: user.emailId!)) {
+            self.showAlertMessages(textMessage: kMessageValidEmail)
+            
+        }else if user.password == ""{
+            self.showAlertMessages(textMessage: kMessagePasswordBlank)
+            
+        }else{
+            print("Call the webservice")
+
+            UserServices().loginUser(self)
+        }
+    }
+    
+//MARK: Segue Methods
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        if let signUpController = segue.destination as? SignUpViewController {
+            if viewLoadFrom == .menu {
+                signUpController.viewLoadFrom = .menu_login
+            }
+            else {
+                signUpController.viewLoadFrom = .login
+            }
+            
+        }
+        if let verificationController = segue.destination as? VerificationViewController {
+            
+            if viewLoadFrom == .menu {
+                verificationController.shouldCreateMenu = false
+            }
+        }
+    }
+    
+    /*
+     Initial Data Setup
+    */
     func setInitialDate()  {
         
         // if textfield have data then we are updating same to model object
@@ -117,70 +157,31 @@ class SignInViewController : UIViewController{
     }
     
     
-    //Used to show the alert using Utility
+    /*
+     Used to show the alert using Utility
+     */
     func showAlertMessages(textMessage : String){
         UIUtilities.showAlertMessage("", errorMessage: NSLocalizedString(textMessage, comment: ""), errorAlertActionTitle: NSLocalizedString("OK", comment: ""), viewControllerUsed: self)
     }
     
-    //Dismiss key board when clicked on Background
+    /*
+     Dismiss key board when clicked on Background
+     */
     func dismissKeyboard(){
         self.view.endEditing(true)
     }
-    
-    //MARK: Signin Button Action and validation checks
-    @IBAction func signInButtonAction(_ sender: Any) {
-        
-        self.view.endEditing(true)
-        if (user.emailId?.isEmpty)! && (user.password?.isEmpty)! {
-            self.showAlertMessages(textMessage: kMessageAllFieldsAreEmpty)
-        }else if user.emailId == "" {
-            self.showAlertMessages(textMessage: kMessageEmailBlank)
-            
-        }else if !(Utilities.isValidEmail(testStr: user.emailId!)) {
-            self.showAlertMessages(textMessage: kMessageValidEmail)
-            
-        }else if user.password == ""{
-            self.showAlertMessages(textMessage: kMessagePasswordBlank)
-            
-        }else{
-            print("Call the webservice")
-           
-            
-            UserServices().loginUser(self)
-            
-        }
-    }
-    
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
-        
-        if let signUpController = segue.destination as? SignUpViewController {
-            if viewLoadFrom == .menu {
-                signUpController.viewLoadFrom = .menu_login
-            }
-            else {
-                signUpController.viewLoadFrom = .login
-            }
-            
-        }
-        if let verificationController = segue.destination as? VerificationViewController {
-            
-            if viewLoadFrom == .menu {
-                verificationController.shouldCreateMenu = false
-            }
-            
-            
-        }
-        
-        
-    }
-    
+
+    /*
+     creatingMenuView before Navigating to DashBoard
+    */
     func navigateToGatewayDashboard(){
         
         self.createMenuView()
     }
     
+    /*
+     method to Naviagate to Change Pssword
+     */
     func navigateToChangePassword(){
         
         let storyboard = UIStoryboard(name: "Gateway", bundle: nil)
@@ -195,10 +196,16 @@ class SignInViewController : UIViewController{
         self.navigationController?.pushViewController(changePassword, animated: true)
     }
     
+    /*
+     Method to navigate to Verification controller
+    */
     func navigateToVerifyController(){
         self.performSegue(withIdentifier: "verificationSegue", sender: nil)
     }
     
+    /*
+     Method to update Left Menu
+    */
     func createMenuView() {
         
         let storyboard = UIStoryboard(name: "Gateway", bundle: nil)
@@ -272,8 +279,6 @@ extension SignInViewController : UITextFieldDelegate{
         
     }
     
-    
-    
     func textFieldDidEndEditing(_ textField: UITextField) {
         print(textField.text!)
         switch textField.tag {
@@ -292,6 +297,7 @@ extension SignInViewController : UITextFieldDelegate{
     }
 }
 
+//MARK:Webservices Delegate
 extension SignInViewController:NMWebServiceDelegate {
     
     func startedRequest(_ manager: NetworkManager, requestName: NSString) {
@@ -319,18 +325,11 @@ extension SignInViewController:NMWebServiceDelegate {
                     leftController.changeViewController(.studyList)
                 }
             }
-            
-            
-            
         }
         else {
             
             self.navigateToVerifyController()
         }
-        
-        
-        
-        
     }
     func failedRequest(_ manager: NetworkManager, requestName: NSString, error: NSError) {
         Logger.sharedInstance.info("requestname : \(requestName)")

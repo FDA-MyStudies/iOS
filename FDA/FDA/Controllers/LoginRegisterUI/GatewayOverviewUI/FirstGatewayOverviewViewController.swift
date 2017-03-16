@@ -23,6 +23,7 @@ class FirstGatewayOverviewViewController : UIViewController{
     var overviewSectionDetail : OverviewSection!
     var moviePlayer:MPMoviePlayerViewController!
     
+//MARK:View Controller Delegate
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -50,7 +51,7 @@ class FirstGatewayOverviewViewController : UIViewController{
         
         
     }
-    
+//MARK: Movie Player methods
     func moviePlayBackDidFinish(notification: NSNotification) {
         //  println("moviePlayBackDidFinish:")
         moviePlayer.moviePlayer.stop()
@@ -58,7 +59,7 @@ class FirstGatewayOverviewViewController : UIViewController{
         moviePlayer.dismiss(animated: true, completion: nil)
     }
     
-    //Watchvideo Button Action
+//MARK:Button Action
     @IBAction func watchVideoButtonClicked(_ sender: Any){
         
         let url : NSURL = NSURL(string: "https://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4")!

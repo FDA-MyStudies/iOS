@@ -14,6 +14,8 @@ class ForgotPasswordViewController : UIViewController{
     @IBOutlet var buttonSubmit : UIButton?
     @IBOutlet var textFieldEmail : UITextField?
     
+    //MARK:ViewController Delegates
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -43,17 +45,24 @@ class ForgotPasswordViewController : UIViewController{
         
     }
     
-    //Dismiss key board when clicked on Background
+    
+    //MARK:Utility Methods
+    
+    /*
+     Dismiss key board when clicked on Background
+     */
     func dismissKeyboard(){
         self.view.endEditing(true)
     }
     
-    //Used to show the alert using Utility
+    /*
+     Used to show the alert using Utility
+    */
     func showAlertMessages(textMessage : String){
         UIUtilities.showAlertMessage("", errorMessage: NSLocalizedString(textMessage, comment: ""), errorAlertActionTitle: NSLocalizedString("OK", comment: ""), viewControllerUsed: self)
     }
     
-    //MARK: Submit Button Action and validation checks
+    //MARK:Button Action
     @IBAction func submitButtonAction(_ sender: Any) {
         self.dismissKeyboard()
         if textFieldEmail?.text == "" {
@@ -70,6 +79,7 @@ class ForgotPasswordViewController : UIViewController{
     }
 }
 
+//MARK:Webservices Delegates
 extension ForgotPasswordViewController:NMWebServiceDelegate {
     func startedRequest(_ manager: NetworkManager, requestName: NSString) {
         
@@ -95,7 +105,7 @@ extension ForgotPasswordViewController:NMWebServiceDelegate {
     }
 }
 
-
+//MARK:TextField Delegates
 extension ForgotPasswordViewController:UITextFieldDelegate{
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         

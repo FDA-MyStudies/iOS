@@ -34,6 +34,7 @@ class SignUpViewController : UIViewController{
     @IBOutlet var termsAndCondition:LinkTextView?
     var viewLoadFrom:SignUpLoadFrom = .menu
     
+    //MARK:ViewController Delegates
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -80,77 +81,38 @@ class SignUpViewController : UIViewController{
         
     }
     
-    //Attributed string for Terms & Privacy Policy
+    //MARK: Utility Methods
+    
+    /*
+     Attributed string for Terms & Privacy Policy
+     */
     func agreeToTermsAndConditions(){
-        
-        
-        //        let info = NSMutableAttributedString()
-        //        let firstPart:NSMutableAttributedString = NSMutableAttributedString(string: "Lorem ipsum dolor set amit ", attributes: [NSFontAttributeName: UIFont.systemFont(ofSize: 13)])
-        //
-        //        firstPart.addAttribute(NSForegroundColorAttributeName, value: UIColor.black,
-        //                               range: NSRange(location: 0, length: firstPart.length))
-        //        info.append(firstPart)
-        //
-        //        // The "Read More" string that should be touchable
-        //        let secondPart:NSMutableAttributedString = NSMutableAttributedString(string: "READ MORE", attributes: [NSFontAttributeName: UIFont.systemFont(ofSize: 14)])
-        //        secondPart.addAttribute(NSForegroundColorAttributeName, value: UIColor.black,
-        //                                range: NSRange(location: 0, length: secondPart.length))
-        //        info.append(secondPart)
-        
         
         self.termsAndCondition?.delegate = self
         let attributedString =  termsAndCondition?.attributedText.mutableCopy() as! NSMutableAttributedString
-        //let str = "I Agree to the Terms and Privacy Policy"
-        //let attributedString = NSMutableAttributedString(string: str)
+        
         var foundRange = attributedString.mutableString.range(of: "Terms")
         attributedString.addAttribute(NSLinkAttributeName, value:kTermsAndConditionLink, range: foundRange)
-        //attributedString.addAttribute(NSForegroundColorAttributeName, value:Utilities.getUIColorFromHex(0x007CBA), range: foundRange)
-        
-        
-        //attributedString.addAttributes([NSFontAttributeName: UIFont.], range: foundRange)
-        
         
         foundRange = attributedString.mutableString.range(of: "Privacy Policy")
         attributedString.addAttribute(NSLinkAttributeName, value:kPrivacyPolicyLink, range: foundRange)
-        //attributedString.addAttribute(NSForegroundColorAttributeName, value:Utilities.getUIColorFromHex(0x007CBA), range: foundRange)
+        
         termsAndCondition?.attributedText = attributedString
         
         termsAndCondition?.linkTextAttributes = [NSForegroundColorAttributeName:Utilities.getUIColorFromHex(0x007CBA)]
         
-        //        labelTermsAndConditions?.numberOfLines = 0;
-        //
-        //        //Step 1: Define a normal attributed string for non-link texts
-        //        let string = NSLocalizedString(kAgreeToTermsAndConditionsText, comment: "")
-        //
-        //        let attributes = [NSForegroundColorAttributeName: UIColor.black,
-        //                          NSFontAttributeName: UIFont.preferredFont(forTextStyle: UIFontTextStyle.caption1)]
-        //
-        //        labelTermsAndConditions?.attributedText = NSAttributedString(string: string, attributes: attributes)
-        //
-        //        //Step 2: Define a selection handler block
-        //        let handler = {
-        //            (hyperLabel: FRHyperLabel?, substring: String?) -> Void in
-        //
-        //            if substring == NSLocalizedString(kTermsText, comment: ""){
-        //                //self.performSegue(withIdentifier: "TermsOfUse", sender: nil)
-        //
-        //            }
-        //            else if substring == NSLocalizedString(kPrivacyPolicyText , comment: ""){
-        //                //self.performSegue(withIdentifier: "TermsOfUse", sender: nil)
-        //            }
-        //        }
-        //
-        //        //Step 3: Add link substrings
-        //        labelTermsAndConditions?.setLinksForSubstrings([kPrivacyPolicyText, kTermsText], withLinkHandler: handler)
-        
     }
     
-    //Dismiss key board when clicked on Background
+    /*
+     Dismiss key board when clicked on Background
+     */
     func dismissKeyboard(){
         self.view.endEditing(true)
     }
     
-    //All validation checks and Password,Email complexity checks
+    /*
+     All validation checks and Password,Email complexity checks
+     */
     func validateAllFields() -> Bool{
         
         if (user.firstName?.isEmpty)! && (user.lastName?.isEmpty)! && (user.emailId?.isEmpty)! && (user.password?.isEmpty)! && confirmPassword.isEmpty {
@@ -188,23 +150,28 @@ class SignUpViewController : UIViewController{
         else if (user.password != confirmPassword){
             self.showAlertMessages(textMessage: kMessageValidatePasswords)
             return false
-            
         }
-        
-        
-        
         return true
     }
     
-    //Used to show the alert using Utility
+    /*
+     Used to show the alert using Utility
+     */
     func showAlertMessages(textMessage : String){
         UIUtilities.showAlertMessage("", errorMessage: NSLocalizedString(textMessage, comment: ""), errorAlertActionTitle: NSLocalizedString("OK", comment: ""), viewControllerUsed: self)
     }
     
-    //MARK: Submit Button Action and validation checks
+    /*
+     method to navigate to Verification Controller
+     */
+    func navigateToVerificationController(){
+        self.performSegue(withIdentifier: "verificationSegue", sender: nil)
+    }
+    
+    //MARK: Button Actions
     @IBAction func submitButtonAction(_ sender: Any) {
         
-         self.view.endEditing(true)
+        self.view.endEditing(true)
         
         if self.validateAllFields() == true {
             
@@ -212,15 +179,11 @@ class SignUpViewController : UIViewController{
                 self.showAlertMessages(textMessage: kMessageAgreeToTermsAndConditions)
             }else{
                 //Call the Webservice
-                
-                //self.navigateToVerificationController()
                 UserServices().registerUser(self)
-                
             }
         }
     }
     
-    //MARK: Agree to Terms and Conditions checks
     @IBAction func agreeButtonAction(_ sender: Any) {
         if (sender as! UIButton).isSelected{
             (sender as! UIButton).isSelected = !(sender as! UIButton).isSelected
@@ -231,24 +194,18 @@ class SignUpViewController : UIViewController{
         }
     }
     
-    
+    //MARK:Segue Method
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
         if let verificationController = segue.destination as? VerificationViewController {
             
             if viewLoadFrom == .menu || viewLoadFrom == .menu_login{
                 verificationController.shouldCreateMenu = false
             }
-           
-            
         }
     }
-    
-    func navigateToVerificationController(){
-        
-        self.performSegue(withIdentifier: "verificationSegue", sender: nil)
-    }
 }
+
+//MARK:Gesture Delegate
 
 extension SignUpViewController:UIGestureRecognizerDelegate{
     func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
@@ -267,37 +224,23 @@ class LinkTextView:UITextView{
     override func canPerformAction(_ action: Selector, withSender sender: Any?) -> Bool {
         return false
     }
-   
+    
     override func addGestureRecognizer(_ gestureRecognizer: UIGestureRecognizer) {
         
         if gestureRecognizer.isKind(of: UILongPressGestureRecognizer.classForCoder()){
-           // gestureRecognizer.isEnabled = false
+            // gestureRecognizer.isEnabled = false
         }
         if gestureRecognizer.isKind(of: UITapGestureRecognizer.classForCoder()) {
             //let tap = gestureRecognizer as! UITapGestureRecognizer
             //if tap.numberOfTapsRequired == 2 {
-                gestureRecognizer.isEnabled = false
+            gestureRecognizer.isEnabled = false
             //}
         }
-        
         super.addGestureRecognizer(gestureRecognizer)
     }
-//    override func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
-//        if gestureRecognizer.isKind(of: UITapGestureRecognizer.classForCoder()) {
-//            let tap = gestureRecognizer as! UITapGestureRecognizer
-//            if tap.numberOfTapsRequired == 2 {
-//                return false
-//            }
-//        }
-////        if gestureRecognizer.isKind(of: UILongPressGestureRecognizer.classForCoder()) && !gestureRecognizer.delaysTouchesEnded{
-////            let long = gestureRecognizer as! UILongPressGestureRecognizer
-////            print(long.minimumPressDuration)
-////            return false
-////        }
-//        return true
-//    }
 }
 
+//MARK: Textfield Delegate
 extension SignUpViewController:UITextViewDelegate{
     
     func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange) -> Bool {
@@ -324,40 +267,17 @@ extension SignUpViewController:UITextViewDelegate{
         return false
     }
     
-
+    
     func textViewDidChangeSelection(_ textView: UITextView) {
         if(!NSEqualRanges(textView.selectedRange, NSMakeRange(0, 0))) {
             textView.selectedRange = NSMakeRange(0, 0);
         }
     }
     
-    
-//    override func gestureRecognizerShouldBegin(gestureRecognizer: UIGestureRecognizer!) -> Bool {
-//        if gestureRecognizer.isKindOfClass(UITapGestureRecognizer) && ((gestureRecognizer as UITapGestureRecognizer).numberOfTapsRequired == 1) {
-//            let touchPoint = gestureRecognizer.locationOfTouch(0, inView: self)
-//            let cursorPosition = closestPositionToPoint(touchPoint)
-//            selectedTextRange = textRangeFromPosition(cursorPosition, toPosition: cursorPosition)
-//            return true
-//        }
-//        else {
-//            return false
-//        }
-//    }
-    
-    //    override func gestureRecognizerShouldBegin(gestureRecognizer: UIGestureRecognizer!) -> Bool {
-    //        if gestureRecognizer.isKindOfClass(UITapGestureRecognizer) && ((gestureRecognizer as UITapGestureRecognizer).numberOfTapsRequired == 1) {
-    //            let touchPoint = gestureRecognizer.locationOfTouch(0, inView: self)
-    //            let cursorPosition = closestPositionToPoint(touchPoint)
-    //            selectedTextRange = textRangeFromPosition(cursorPosition, toPosition: cursorPosition)
-    //            return true
-    //        }
-    //        else {
-    //            return false
-    //        }
-    //    }
-    
 }
+
 //MARK: TableView Data source
+
 extension SignUpViewController : UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -376,20 +296,21 @@ extension SignUpViewController : UITableViewDataSource {
         var keyBoardType:UIKeyboardType? =  UIKeyboardType.default
         let textFieldTag = TextFieldTags(rawValue:indexPath.row)!
         
+        //Cell TextField data setup
         switch  textFieldTag {
         case .FirstNameTag,.LastName:
             cell.textFieldValue?.autocapitalizationType = .sentences
             
             isSecuredEntry = false
         case  .Password,.ConfirmPassword:
-           
+            
             isSecuredEntry = true
         case .EmailId :
             keyBoardType = .emailAddress
             isSecuredEntry = false
             
         }
-        
+        //Cell Data Setup
         cell.populateCellData(data: tableViewData, securedText: isSecuredEntry,keyboardType: keyBoardType)
         
         cell.backgroundColor = UIColor.clear
@@ -432,7 +353,6 @@ extension SignUpViewController : UITextFieldDelegate{
         else{
             return true
         }
-    
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
@@ -467,12 +387,10 @@ extension SignUpViewController : UITextFieldDelegate{
             print("No Matching data Found")
             break
         }
-        
     }
-    
 }
 
-//MARK:
+//MARK:Webservice delegates
 extension SignUpViewController:NMWebServiceDelegate {
     
     func startedRequest(_ manager: NetworkManager, requestName: NSString) {

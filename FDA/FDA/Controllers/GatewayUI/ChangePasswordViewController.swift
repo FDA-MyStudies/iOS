@@ -34,7 +34,7 @@ class ChangePasswordViewController: UIViewController {
     
     var viewLoadFrom:ChangePasswordLoadFrom = .profile
     
-    
+//MARK:ViewController delegates
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -78,22 +78,42 @@ class ChangePasswordViewController: UIViewController {
         }
         
     }
-    
-    //Used to show the alert using Utility
+
+//MARK:Utility Methods
+    /* 
+     Used to show the alert using Utility
+     */
     func showAlertMessages(textMessage : String){
         UIUtilities.showAlertMessage("", errorMessage: NSLocalizedString(textMessage, comment: ""), errorAlertActionTitle: NSLocalizedString("OK", comment: ""), viewControllerUsed: self)
     }
     
-    //Dismiss key board when clicked on Background
+    /*
+     Dismiss key board when clicked on Background
+     */
     func dismissKeyboard(){
         self.view.endEditing(true)
     }
-    
+    /*
+     Api Call to Change Password 
+     */
     func requestToChangePassword() {
          UserServices().changePassword(oldPassword: self.oldPassword, newPassword: self.newPassword, delegate: self)
     }
     
-    //MARK: Signin Button Action and validation checks
+    /*
+     seting menu View
+    */
+    func createMenuView() {
+        
+        let storyboard = UIStoryboard(name: "Gateway", bundle: nil)
+        
+        let fda = storyboard.instantiateViewController(withIdentifier: "FDASlideMenuViewController") as! FDASlideMenuViewController
+        fda.automaticallyAdjustsScrollViewInsets = true
+        self.navigationController?.pushViewController(fda, animated: true)
+    }
+    
+    
+//MARK: Button Actions
     @IBAction func submitButtonAction(_ sender: Any) {
         
         
@@ -121,16 +141,6 @@ class ChangePasswordViewController: UIViewController {
         }
         
     }
-    
-    func createMenuView() {
-        
-        let storyboard = UIStoryboard(name: "Gateway", bundle: nil)
-        
-        let fda = storyboard.instantiateViewController(withIdentifier: "FDASlideMenuViewController") as! FDASlideMenuViewController
-        fda.automaticallyAdjustsScrollViewInsets = true
-        self.navigationController?.pushViewController(fda, animated: true)
-    }
-    
 }
 //MARK: TableView Data source
 extension ChangePasswordViewController : UITableViewDataSource {
@@ -186,7 +196,7 @@ extension ChangePasswordViewController : UITextFieldDelegate{
         }
     }
 }
-
+//MARK:Webservice delegates
 extension ChangePasswordViewController:NMWebServiceDelegate {
 
     func startedRequest(_ manager: NetworkManager, requestName: NSString) {

@@ -19,30 +19,21 @@ class HomeViewController : UIViewController{
     @IBOutlet var buttonRegister : UIButton!
     
     
-//    var pageViewController: PageViewController? {
-//        didSet {
-//            pageViewController?.pageViewDelegate = self
-//            //pageViewController?.overview = Gateway.instance.overview!
-//        }
-//    }
+    //MARK:View Controller Delegates
     
     override func loadView() {
         
         super.loadView()
         self.loadTestData()
-        
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-    
-       // self.loadTestData()
+        
+        // self.loadTestData()
         self.automaticallyAdjustsScrollViewInsets = false
         //Added to change next screen
         pageControlView?.addTarget(self, action:#selector(HomeViewController.didChangePageControlValue), for: .valueChanged)
-        
-        
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -59,10 +50,12 @@ class HomeViewController : UIViewController{
         
     }
     
+    //MARK:Initial data setup methods
+    
     func loadTestData(){
-//        let filePath  = Bundle.main.path(forResource: "GatewayOverview", ofType: "json")
-//        let data = NSData(contentsOfFile: filePath!)
-
+        //        let filePath  = Bundle.main.path(forResource: "GatewayOverview", ofType: "json")
+        //        let data = NSData(contentsOfFile: filePath!)
+        
         //load plist info
         let plistPath = Bundle.main.path(forResource: "GatewayOverview", ofType: ".plist", inDirectory:nil)
         let arrayContent = NSMutableArray.init(contentsOfFile: plistPath!)
@@ -93,6 +86,8 @@ class HomeViewController : UIViewController{
         
     }
     
+    //MARK:Segue Methods
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let pageViewController = segue.destination as? PageViewController {
             pageViewController.pageViewDelegate = self
@@ -101,7 +96,7 @@ class HomeViewController : UIViewController{
         
         if let signInController = segue.destination as? SignInViewController {
             signInController.viewLoadFrom = .gatewayOverview
-          
+            
         }
         
         if let signUpController = segue.destination as? SignUpViewController {
@@ -116,9 +111,11 @@ class HomeViewController : UIViewController{
     func didChangePageControlValue() {
         //pageViewController?.scrollToViewController(index: (pageControlView?.currentPage)!)
     }
-   
+    
+    //MARK:Button Actions
+    
     @IBAction func linkButtonAction(_ sender: Any) {
-       
+        
         let loginStoryboard = UIStoryboard.init(name: "Main", bundle:Bundle.main)
         let webViewController = loginStoryboard.instantiateViewController(withIdentifier:"WebViewController") as! UINavigationController
         let webView = webViewController.viewControllers[0] as! WebViewController
@@ -130,8 +127,8 @@ class HomeViewController : UIViewController{
         
         //self.view.alpha = 0
         
-       
-       
+        
+        
     }
     @IBAction func unwindForRegister(_ segue:UIStoryboardSegue){
         DispatchQueue.main.asyncAfter(deadline: .now()) {

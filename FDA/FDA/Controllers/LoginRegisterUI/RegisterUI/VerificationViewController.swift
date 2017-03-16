@@ -9,6 +9,10 @@
 import Foundation
 import UIKit
 
+let kDefaultEmail = "xyz@gmail.com"
+let kSignupCompletionSegue = "signupCompletionSegue"
+let kAlertMessageText = "Message"
+let kAlertMessageVerifyEmail = "Please verify your email adderss."
 
 class VerificationViewController : UIViewController{
     
@@ -17,6 +21,7 @@ class VerificationViewController : UIViewController{
     @IBOutlet var labelVerificationMessage : UILabel?
     var shouldCreateMenu:Bool = true
     
+ //MARK:View Controllere delegates
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,7 +31,7 @@ class VerificationViewController : UIViewController{
         self.title = NSLocalizedString("", comment: "")
         
         let message = labelVerificationMessage?.text
-        let modifiedMessage = message?.replacingOccurrences(of: "xyz@gmail.com", with: User.currentUser.emailId!)
+        let modifiedMessage = message?.replacingOccurrences(of: kDefaultEmail, with: User.currentUser.emailId!)
         labelVerificationMessage?.text = modifiedMessage
         
         //hide navigationbar
@@ -46,7 +51,9 @@ class VerificationViewController : UIViewController{
         
     }
     
-    //Continue Button Action and validation checks
+    
+//MARK:Button Actions
+ 
     @IBAction func continueButtonAction(_ sender: Any) {
         
         UserServices().confirmUserRegistration(self)
@@ -63,11 +70,14 @@ class VerificationViewController : UIViewController{
             singupCompletion.shouldCreateMenu = self.shouldCreateMenu
         }
     }
+//MARK:Utility Methods
     func navigateToSignUpCompletionStep(){
         
-        self.performSegue(withIdentifier: "signupCompletionSegue", sender: nil)
+        self.performSegue(withIdentifier: kSignupCompletionSegue, sender: nil)
     }
 }
+
+//MARK:Webservice Delegates
 
 extension VerificationViewController:NMWebServiceDelegate {
     func startedRequest(_ manager: NetworkManager, requestName: NSString) {
@@ -86,7 +96,7 @@ extension VerificationViewController:NMWebServiceDelegate {
         }
         else {
             
-            UIUtilities.showAlertWithTitleAndMessage(title:NSLocalizedString("Message", comment: "") as NSString, message:NSLocalizedString("Please verify your email adderss.", comment: "") as NSString)
+            UIUtilities.showAlertWithTitleAndMessage(title:NSLocalizedString(kAlertMessageText, comment: "") as NSString, message:NSLocalizedString(kAlertMessageVerifyEmail, comment: "") as NSString)
         }
 
     }

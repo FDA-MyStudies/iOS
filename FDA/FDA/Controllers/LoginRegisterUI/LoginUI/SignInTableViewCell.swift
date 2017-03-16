@@ -30,7 +30,9 @@ class SignInTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
 
-    //Populate cell data coming in dictionary
+    /*
+     Populate cell data coming in dictionary
+    */
     func populateCellData(data : NSDictionary , securedText : Bool){
         
         textFieldValue?.isSecureTextEntry = false

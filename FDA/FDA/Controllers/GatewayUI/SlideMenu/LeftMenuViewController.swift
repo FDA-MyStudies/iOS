@@ -39,6 +39,10 @@ protocol LeftMenuProtocol : class {
 class LeftMenuViewController : UIViewController, LeftMenuProtocol {
     
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var labelVersion: UILabel!
+    @IBOutlet weak var tableHeaderView: UIView!
+    @IBOutlet weak var tableFooterView: UIView!
+    
     
     @IBOutlet weak var buttonSignOut: UIButton?
     var menus = [ ["menuTitle":"Home",
@@ -46,7 +50,7 @@ class LeftMenuViewController : UIViewController, LeftMenuProtocol {
                   
                   ["menuTitle":"Resources",
                    "iconName":"resources_menu1"],
-                ]
+                  ]
     var studyListViewController: UINavigationController!
     var notificationController: UIViewController!
     var resourcesViewController: UIViewController!
@@ -54,7 +58,7 @@ class LeftMenuViewController : UIViewController, LeftMenuProtocol {
     var nonMenuViewController: UIViewController!
     
     var signInViewController:UINavigationController!
-     var signUpViewController:UINavigationController!
+    var signUpViewController:UINavigationController!
     
     //var imageHeaderView: ImageHeaderView!
     
@@ -83,14 +87,14 @@ class LeftMenuViewController : UIViewController, LeftMenuProtocol {
         self.profileviewController = storyboard.instantiateViewController(withIdentifier:  String(describing: ProfileViewController.classForCoder())) as! UINavigationController
         
         
-       
+        
+        self.labelVersion.text = "V" + "\( Bundle.main.infoDictionary?["CFBundleShortVersionString"]! as! String) "
         
         
-    
     }
     
     override func viewWillAppear(_ animated: Bool) {
-         //self.setInitialData()
+        //self.setInitialData()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -139,21 +143,21 @@ class LeftMenuViewController : UIViewController, LeftMenuProtocol {
         
         // Setting proportion height of the header and footer view
         let height = UIScreen.main.bounds.size.height  * (220.0 / 667.0) //calculate new height
-        self.tableView.tableHeaderView?.frame.size = CGSize(width: self.tableView.tableHeaderView!.frame.size.width, height: height)
-        self.tableView.tableFooterView?.frame.size = CGSize(width: self.tableView.tableFooterView!.frame.size.width, height: height)
-        self.tableView.frame.size = CGSize(width:self.tableView.frame.width, height:UIScreen.main.bounds.size.height)
+        self.tableHeaderView.frame.size = CGSize(width: self.tableHeaderView!.frame.size.width, height: height)
+        self.tableFooterView.frame.size = CGSize(width: self.tableFooterView!.frame.size.width, height: height)
+        self.tableView.frame.size = CGSize(width:self.tableView.frame.width, height:UIScreen.main.bounds.size.height  )
         
         self.tableView.reloadData()
         
     }
-
+    
     func setInitialData()  {
         
         let user = User.currentUser
         if user.userType == .FDAUser {
             menus.append(["menuTitle":"Profile",
                           "iconName":"profile_menu1"])
-             self.tableView.tableFooterView?.isHidden = false
+            self.tableView.tableFooterView?.isHidden = false
         }
         else{
             menus.append(["menuTitle":"Sign In",
@@ -166,10 +170,10 @@ class LeftMenuViewController : UIViewController, LeftMenuProtocol {
         }
         
         
-    // Setting proportion height of the header and footer view
+        // Setting proportion height of the header and footer view
         let height = UIScreen.main.bounds.size.height  * (220.0 / 667.0) //calculate new height
         self.tableView.tableHeaderView?.frame.size = CGSize(width: self.tableView.tableHeaderView!.frame.size.width, height: height)
-         self.tableView.tableFooterView?.frame.size = CGSize(width: self.tableView.tableFooterView!.frame.size.width, height: height)
+        self.tableView.tableFooterView?.frame.size = CGSize(width: self.tableView.tableFooterView!.frame.size.width, height: height)
         self.tableView.frame.size = CGSize(width:self.tableView.frame.width, height:UIScreen.main.bounds.size.height)
         
         self.tableView.reloadData()
@@ -183,19 +187,19 @@ class LeftMenuViewController : UIViewController, LeftMenuProtocol {
         case .studyList:
             self.slideMenuController()?.changeMainViewController(self.studyListViewController, close: true)
         case .resources: break
-            //self.slideMenuController()?.changeMainViewController(self.javaViewController, close: true)
+        //self.slideMenuController()?.changeMainViewController(self.javaViewController, close: true)
         case .profile_signin:
             
             if User.currentUser.userType == .FDAUser {
                 self.slideMenuController()?.changeMainViewController(self.profileviewController, close: true)
-               
+                
             }
             else{
-               // go to signin screen
-               //fdaSlideMenuController()?.navigateToHomeControllerForSignin()
+                // go to signin screen
+                //fdaSlideMenuController()?.navigateToHomeControllerForSignin()
                 self.slideMenuController()?.changeMainViewController(self.signInViewController, close: true)
             }
-           
+            
         case .signup:
             self.slideMenuController()?.changeMainViewController(self.signUpViewController, close: true)
             
@@ -224,15 +228,15 @@ class LeftMenuViewController : UIViewController, LeftMenuProtocol {
     func sendRequestToSignOut() {
         UserServices().logoutUser(self as NMWebServiceDelegate)
     }
-
+    
     func signout(){
         debugPrint("singout")
         self.changeViewController(.studyList)
         self.createLeftmenuItems()
         //_ = self.navigationController?.popToRootViewController(animated: true)
     }
-   
-
+    
+    
     
     
 }
@@ -292,7 +296,7 @@ extension LeftMenuViewController : UITableViewDataSource {
             return cell!
         }
         
-       
+        
     }
     
     

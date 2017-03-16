@@ -106,6 +106,21 @@ class UserServices: NSObject {
         
     }
     
+    func resendEmailConfirmation(_ delegate:NMWebServiceDelegate){
+        
+        self.delegate = delegate
+        
+        let user = User.currentUser
+        let headerParams = [kUserId : user.userId!]
+        
+         let params = [kUserEmailId: user.emailId]
+        
+        let method = RegistrationMethods.resendEmailConfirmation.method
+        self.sendRequestWith(method:method, params: params, headers:headerParams)
+        
+    }
+    
+    
     func logoutUser(_ delegate:NMWebServiceDelegate){
         
         self.delegate = delegate
@@ -382,6 +397,13 @@ class UserServices: NSObject {
         
         
     }
+    
+    func handleResendEmailConfirmationResponse(response:Dictionary<String, Any>){
+        
+        
+        
+    }
+    
     
     func handleChangePasswordResponse(response:Dictionary<String, Any>){
         //INCOMPLETE

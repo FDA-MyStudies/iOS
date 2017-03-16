@@ -13,6 +13,7 @@ import UIKit
 class VerificationViewController : UIViewController{
     
     @IBOutlet var buttonContinue : UIButton?
+    @IBOutlet var buttonResendEmail : UIButton?
     @IBOutlet var labelVerificationMessage : UILabel?
     var shouldCreateMenu:Bool = true
     
@@ -51,6 +52,10 @@ class VerificationViewController : UIViewController{
         UserServices().confirmUserRegistration(self)
     }
     
+    @IBAction func resendEmailButtonAction(_ sender: Any){
+        UserServices().resendEmailConfirmation(self)
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         if let singupCompletion = segue.destination as? SignUpCompleteViewController {
@@ -74,6 +79,7 @@ extension VerificationViewController:NMWebServiceDelegate {
         Logger.sharedInstance.info("requestname : \(requestName)")
         
         self.removeProgressIndicator()
+        
         if User.currentUser.verified == true{
             
             self.navigateToSignUpCompletionStep()
@@ -82,7 +88,7 @@ extension VerificationViewController:NMWebServiceDelegate {
             
             UIUtilities.showAlertWithTitleAndMessage(title:NSLocalizedString("Message", comment: "") as NSString, message:NSLocalizedString("Please verify your email adderss.", comment: "") as NSString)
         }
-        
+
     }
     func failedRequest(_ manager: NetworkManager, requestName: NSString, error: NSError) {
         Logger.sharedInstance.info("requestname : \(requestName)")

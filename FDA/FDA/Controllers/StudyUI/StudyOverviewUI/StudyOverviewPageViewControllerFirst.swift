@@ -34,6 +34,14 @@ class StudyOverviewViewControllerFirst : UIViewController{
             let url = URL.init(string:overviewSectionDetail.imageURL!)
             imageViewStudy?.sd_setImage(with: url, placeholderImage:#imageLiteral(resourceName: "OverViewBg"))
         }
+        
+        if overviewSectionDetail.link != nil {
+            buttonWatchVideo?.isHidden = false
+        }
+        else{
+             buttonWatchVideo?.isHidden =  true
+        }
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -50,7 +58,7 @@ class StudyOverviewViewControllerFirst : UIViewController{
     }
     @IBAction func watchVideoButtonAction(_ sender: Any) {
         
-        let url : NSURL = NSURL(string: "https://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4")!
+        let url : NSURL = NSURL(string: overviewSectionDetail.link!)!
         moviePlayer = MPMoviePlayerViewController(contentURL:url as URL!)
         
         moviePlayer.moviePlayer.movieSourceType = .streaming

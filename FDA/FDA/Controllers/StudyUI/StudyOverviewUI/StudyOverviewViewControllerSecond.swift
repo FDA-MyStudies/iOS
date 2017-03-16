@@ -30,6 +30,7 @@ class StudyOverviewViewControllerSecond : UIViewController{
             let url = URL.init(string:overviewSectionDetail.imageURL!)
             imageViewStudy?.sd_setImage(with: url, placeholderImage:#imageLiteral(resourceName: "OverViewBg"))
         }
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {

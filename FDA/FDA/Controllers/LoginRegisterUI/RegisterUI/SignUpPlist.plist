@@ -12,7 +12,7 @@
 		<key>helpText</key>
 		<string>Last Name</string>
 		<key>placeHolder</key>
-		<string>enter first name</string>
+		<string>enter last name</string>
 	</dict>
 	<dict>
 		<key>helpText</key>

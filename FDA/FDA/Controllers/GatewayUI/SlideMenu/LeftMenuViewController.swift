@@ -88,7 +88,7 @@ class LeftMenuViewController : UIViewController, LeftMenuProtocol {
         
         
         
-        self.labelVersion.text = "V" + "\( Bundle.main.infoDictionary?["CFBundleShortVersionString"]! as! String) "
+        self.labelVersion.text = "v" + "\(Utilities.getAppVersion())"
         
         
     }
@@ -128,7 +128,8 @@ class LeftMenuViewController : UIViewController, LeftMenuProtocol {
         if user.userType == .FDAUser {
             menus.append(["menuTitle":"Profile",
                           "iconName":"profile_menu1"])
-            self.tableView.tableFooterView?.isHidden = false
+           
+            self.buttonSignOut?.isHidden = false
         }
         else{
             menus.append(["menuTitle":"Sign In",
@@ -137,14 +138,17 @@ class LeftMenuViewController : UIViewController, LeftMenuProtocol {
             menus.append(["menuTitle":"New User?",
                           "iconName":"newuser_menu1",
                           "subTitle":"Sign up"])
-            self.tableView.tableFooterView?.isHidden = true
+             self.buttonSignOut?.isHidden = true
         }
         
-        
         // Setting proportion height of the header and footer view
-        let height = UIScreen.main.bounds.size.height  * (220.0 / 667.0) //calculate new height
-        self.tableHeaderView.frame.size = CGSize(width: self.tableHeaderView!.frame.size.width, height: height)
-        self.tableFooterView.frame.size = CGSize(width: self.tableFooterView!.frame.size.width, height: height)
+       // let height = UIScreen.main.bounds.size.height  * (220.0 / 667.0) //calculate new height
+        
+        var height:CGFloat? = 0.0
+        height =  (UIScreen.main.bounds.size.height -  CGFloat(menus.count * 78))/2
+        
+        self.tableHeaderView.frame.size = CGSize(width: self.tableHeaderView!.frame.size.width, height: height!)
+        self.tableFooterView.frame.size = CGSize(width: self.tableFooterView!.frame.size.width, height: height!)
         self.tableView.frame.size = CGSize(width:self.tableView.frame.width, height:UIScreen.main.bounds.size.height  )
         
         self.tableView.reloadData()

@@ -497,16 +497,17 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <view key="tableHeaderView" contentMode="scaleToFill" id="nRC-BO-z7A">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="220"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="178"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="FDA LISTENS!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tRN-H1-1nF">
-                                            <rect key="frame" x="49" y="34" width="212" height="46"/>
+                                            <rect key="frame" x="49" y="34" width="212" height="37"/>
                                             <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="18"/>
                                             <color key="textColor" red="0.0" green="0.48627450979999998" blue="0.72941176470000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     <constraints>
                                         <constraint firstItem="tRN-H1-1nF" firstAttribute="leading" secondItem="nRC-BO-z7A" secondAttribute="leading" constant="49" id="3FY-Za-WXJ"/>
                                         <constraint firstItem="tRN-H1-1nF" firstAttribute="top" secondItem="nRC-BO-z7A" secondAttribute="top" constant="34" id="7PZ-wj-fGK"/>
@@ -515,14 +516,14 @@
                                     </constraints>
                                 </view>
                                 <view key="tableFooterView" contentMode="scaleToFill" id="u0K-d2-T6j">
-                                    <rect key="frame" x="0.0" y="382" width="375" height="220"/>
+                                    <rect key="frame" x="0.0" y="340" width="375" height="178"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <subviews>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0DE-kF-2Xl">
-                                            <rect key="frame" x="55" y="110" width="91" height="46"/>
+                                            <rect key="frame" x="56" y="105" width="89" height="39"/>
                                             <constraints>
-                                                <constraint firstAttribute="height" constant="46" id="V6n-6n-0iZ"/>
-                                                <constraint firstAttribute="width" constant="91" id="Zh2-o6-IEk"/>
+                                                <constraint firstAttribute="height" constant="39" id="Z0E-2p-8Q2"/>
+                                                <constraint firstAttribute="width" constant="89" id="aqg-2W-7Qc"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="22"/>
                                             <state key="normal" title="Sign Out">
@@ -533,26 +534,26 @@
                                             </connections>
                                         </button>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="V1.0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gES-c2-7do">
-                                            <rect key="frame" x="175.5" y="150" width="24.5" height="21"/>
+                                            <rect key="frame" x="175.5" y="142" width="24.5" height="21"/>
                                             <constraints>
-                                                <constraint firstAttribute="height" constant="21" id="eXA-NP-sSD"/>
+                                                <constraint firstAttribute="height" constant="21" id="7XJ-rL-MEz"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
                                             <color key="textColor" white="0.5" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
-                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     <constraints>
-                                        <constraint firstAttribute="bottom" secondItem="0DE-kF-2Xl" secondAttribute="bottom" constant="64" id="TDo-Dt-LGC"/>
-                                        <constraint firstItem="gES-c2-7do" firstAttribute="top" secondItem="0DE-kF-2Xl" secondAttribute="bottom" constant="-6" id="V2K-yn-SGL"/>
-                                        <constraint firstItem="0DE-kF-2Xl" firstAttribute="leading" secondItem="u0K-d2-T6j" secondAttribute="leading" constant="55" id="VN8-mS-Pop"/>
-                                        <constraint firstItem="gES-c2-7do" firstAttribute="centerX" secondItem="u0K-d2-T6j" secondAttribute="centerX" id="Vjt-2y-vqA"/>
+                                        <constraint firstItem="0DE-kF-2Xl" firstAttribute="centerY" secondItem="u0K-d2-T6j" secondAttribute="centerY" multiplier="1.39325" id="BaT-4c-Mss"/>
+                                        <constraint firstItem="gES-c2-7do" firstAttribute="centerX" secondItem="u0K-d2-T6j" secondAttribute="centerX" id="LDo-Tt-lxS"/>
+                                        <constraint firstItem="gES-c2-7do" firstAttribute="centerY" secondItem="u0K-d2-T6j" secondAttribute="centerY" multiplier="1.71348" id="Tfj-a5-3im"/>
+                                        <constraint firstItem="0DE-kF-2Xl" firstAttribute="centerX" secondItem="u0K-d2-T6j" secondAttribute="centerX" multiplier="0.536" id="cHo-op-ssE"/>
                                     </constraints>
                                 </view>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" rowHeight="83" id="ViD-n5-s72" customClass="LeftMenuCell" customModule="FDA" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="221" width="375" height="83"/>
+                                        <rect key="frame" x="0.0" y="179" width="375" height="83"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ViD-n5-s72" id="DBh-0i-6ut">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="82"/>
@@ -600,7 +601,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="LeftMenuResourceCell" rowHeight="78" id="JUy-Rs-fyb" customClass="LeftMenuResourceTableViewCell" customModule="FDA" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="304" width="375" height="78"/>
+                                        <rect key="frame" x="0.0" y="262" width="375" height="78"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="JUy-Rs-fyb" id="9CS-pO-4eT">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="77"/>
@@ -663,6 +664,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="buttonSignOut" destination="0DE-kF-2Xl" id="JGo-wu-dbJ"/>
                         <outlet property="labelVersion" destination="gES-c2-7do" id="grn-hT-R3G"/>
                         <outlet property="tableFooterView" destination="u0K-d2-T6j" id="4N9-5B-nCt"/>
                         <outlet property="tableHeaderView" destination="nRC-BO-z7A" id="YuC-BK-8iD"/>

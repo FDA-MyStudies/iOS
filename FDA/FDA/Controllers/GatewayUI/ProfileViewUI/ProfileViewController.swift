@@ -448,8 +448,20 @@ extension ProfileViewController : UITextFieldDelegate{
         
         let tag:TextFieldTags = TextFieldTags(rawValue: textField.tag)!
         // Disabling space editing
-        if tag == .FirstNameTag || tag == .LastName || tag == .EmailId {
-            if string == " " {
+       
+        let finalString = textField.text! + string
+        
+        
+        if tag == .FirstNameTag || tag == .LastName {
+            if string == " "  || finalString.characters.count > 100 {
+                return false
+            }
+            else{
+                return true
+            }
+        }
+        else if  tag == .EmailId {
+            if string == " " || finalString.characters.count > 255{
                 return false
             }
             else{

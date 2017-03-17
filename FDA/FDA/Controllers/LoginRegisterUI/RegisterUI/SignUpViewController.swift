@@ -341,9 +341,27 @@ extension SignUpViewController : UITextFieldDelegate{
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         
         let tag:TextFieldTags = TextFieldTags(rawValue: textField.tag)!
+         let finalString = textField.text! + string
         
-        if tag == .FirstNameTag || tag == .LastName || tag == .EmailId {
-            if string == " " {
+        
+        if tag == .FirstNameTag || tag == .LastName {
+            if string == " "  || finalString.characters.count > 100 {
+                return false
+            }
+            else{
+                return true
+            }
+        }
+        else if  tag == .EmailId {
+            if string == " " || finalString.characters.count > 255{
+                return false
+            }
+            else{
+                return true
+            }
+        }
+        else if tag == .Password || tag == .ConfirmPassword {
+            if finalString.characters.count > 16 {
                 return false
             }
             else{
@@ -354,6 +372,7 @@ extension SignUpViewController : UITextFieldDelegate{
             return true
         }
     }
+    
     
     func textFieldDidEndEditing(_ textField: UITextField) {
         print(textField.text!)

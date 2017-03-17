@@ -178,6 +178,25 @@ extension ChangePasswordViewController : UITextFieldDelegate{
         
     }
     
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        
+        let tag:CPTextFeildTags = CPTextFeildTags(rawValue: textField.tag)!
+        let finalString = textField.text! + string
+        
+        
+        if tag == .newPassword || tag == .confirmPassword {
+            if finalString.characters.count > 16 {
+                return false
+            }
+            else{
+                return true
+            }
+        }
+        else{
+            return true
+        }
+    }
+    
     func textFieldDidEndEditing(_ textField: UITextField) {
         print(textField.text!)
         textField.text =  textField.text?.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)

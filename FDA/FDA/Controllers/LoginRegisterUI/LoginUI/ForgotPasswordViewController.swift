@@ -109,7 +109,9 @@ extension ForgotPasswordViewController:NMWebServiceDelegate {
 extension ForgotPasswordViewController:UITextFieldDelegate{
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         
-        if string == " " {
+        let finalString = textField.text! + string
+        
+        if string == " " || finalString.characters.count > 255{
             return false
         }
         else{

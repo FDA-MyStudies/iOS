@@ -75,6 +75,21 @@ class VerificationViewController : UIViewController{
         
         self.performSegue(withIdentifier: kSignupCompletionSegue, sender: nil)
     }
+    func navigateToChangePasswordViewController(){
+        
+        let storyboard = UIStoryboard(name: "Gateway", bundle: nil)
+        
+        let fda = storyboard.instantiateViewController(withIdentifier: "ChangePasswordViewController") as! ChangePasswordViewController
+        
+        if shouldCreateMenu {
+            fda.viewLoadFrom = .login
+        }
+        else{
+            fda.viewLoadFrom = .menu_login
+        }
+        
+        self.navigationController?.pushViewController(fda, animated: true)
+    }
 }
 
 //MARK:Webservice Delegates
@@ -92,7 +107,13 @@ extension VerificationViewController:NMWebServiceDelegate {
         
         if User.currentUser.verified == true{
             
-            self.navigateToSignUpCompletionStep()
+            if User.currentUser.isLoginWithTempPassword {
+                self.navigateToChangePasswordViewController()
+            }
+            else{
+                self.navigateToSignUpCompletionStep()
+            }
+            
         }
         else {
             

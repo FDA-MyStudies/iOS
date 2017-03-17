@@ -45,7 +45,7 @@ class SignUpCompleteViewController : UIViewController{
 
     
     
-//MARK: button Action
+//MARK: button Actions
     @IBAction func nextButtonAction(_ sender: Any) {
         
             self.navigateToGatewayDashboard()

@@ -6,25 +6,25 @@
 		<key>helpText</key>
 		<string>First Name</string>
 		<key>placeHolder</key>
-		<string>enter first name</string>
+		<string>Enter first name</string>
 	</dict>
 	<dict>
 		<key>helpText</key>
 		<string>Last Name</string>
 		<key>placeHolder</key>
-		<string>enter last name</string>
+		<string>Enter last name</string>
 	</dict>
 	<dict>
 		<key>helpText</key>
 		<string>Email ID</string>
 		<key>placeHolder</key>
-		<string>enter email</string>
+		<string>Enter email</string>
 	</dict>
 	<dict>
 		<key>helpText</key>
 		<string>Password</string>
 		<key>placeHolder</key>
-		<string>add password</string>
+		<string>Add password</string>
 	</dict>
 </array>
 </plist>

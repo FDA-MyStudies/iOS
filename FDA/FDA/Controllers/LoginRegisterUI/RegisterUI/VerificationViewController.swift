@@ -12,7 +12,7 @@ import UIKit
 let kDefaultEmail = "xyz@gmail.com"
 let kSignupCompletionSegue = "signupCompletionSegue"
 let kAlertMessageText = "Message"
-let kAlertMessageVerifyEmail = "Please verify your email adderss."
+let kAlertMessageVerifyEmail = "Please verify your email address."
 
 class VerificationViewController : UIViewController{
     

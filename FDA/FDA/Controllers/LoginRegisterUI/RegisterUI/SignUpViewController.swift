@@ -114,11 +114,11 @@ class SignUpViewController : UIViewController{
      All validation checks and Password,Email complexity checks
      */
     func validateAllFields() -> Bool{
-        
-        if (user.firstName?.isEmpty)! && (user.lastName?.isEmpty)! && (user.emailId?.isEmpty)! && (user.password?.isEmpty)! && confirmPassword.isEmpty {
+        //(user.firstName?.isEmpty)! && (user.lastName?.isEmpty)! &&
+        if  (user.emailId?.isEmpty)! && (user.password?.isEmpty)! && confirmPassword.isEmpty {
             self.showAlertMessages(textMessage: kMessageAllFieldsAreEmpty)
             return false
-        }else if user.firstName == "" {
+        } /* else if user.firstName == "" {
             self.showAlertMessages(textMessage: kMessageFirstNameBlank)
             return false
         }
@@ -132,7 +132,7 @@ class SignUpViewController : UIViewController{
         }else if(user.lastName?.isAlphanumeric)! == false || (user.lastName?.characters.count)! > 100{
             self.showAlertMessages(textMessage: kMessageValidLastName)
             return false
-        }
+        } */
         else if user.emailId == "" {
             self.showAlertMessages(textMessage: kMessageEmailBlank)
             return false
@@ -179,7 +179,7 @@ class SignUpViewController : UIViewController{
                 self.showAlertMessages(textMessage: kMessageAgreeToTermsAndConditions)
             }else{
                 //Call the Webservice
-                UserServices().registerUser(self)
+                UserServices().registerUser(self as! NMWebServiceDelegate)
             }
         }
     }
@@ -298,10 +298,12 @@ extension SignUpViewController : UITableViewDataSource {
         
         //Cell TextField data setup
         switch  textFieldTag {
+        /*
         case .FirstNameTag,.LastName:
             cell.textFieldValue?.autocapitalizationType = .sentences
             
             isSecuredEntry = false
+        */
         case  .Password,.ConfirmPassword:
             
             isSecuredEntry = true
@@ -343,7 +345,7 @@ extension SignUpViewController : UITextFieldDelegate{
         let tag:TextFieldTags = TextFieldTags(rawValue: textField.tag)!
          let finalString = textField.text! + string
         
-        
+        /*
         if tag == .FirstNameTag || tag == .LastName {
             if string == " "  || finalString.characters.count > 100 {
                 return false
@@ -352,7 +354,8 @@ extension SignUpViewController : UITextFieldDelegate{
                 return true
             }
         }
-        else if  tag == .EmailId {
+        else */
+        if  tag == .EmailId {
             if string == " " || finalString.characters.count > 255{
                 return false
             }
@@ -382,6 +385,7 @@ extension SignUpViewController : UITextFieldDelegate{
         let tag:TextFieldTags = TextFieldTags(rawValue: textField.tag)!
         
         switch tag {
+        /*
         case .FirstNameTag:
             user.firstName = textField.text!
             break
@@ -389,7 +393,7 @@ extension SignUpViewController : UITextFieldDelegate{
         case .LastName:
             user.lastName = textField.text!
             break
-            
+        */
         case .EmailId:
             user.emailId = textField.text!
             break

@@ -4,18 +4,6 @@
 <array>
 	<dict>
 		<key>helpText</key>
-		<string>First Name</string>
-		<key>placeHolder</key>
-		<string>Enter first name</string>
-	</dict>
-	<dict>
-		<key>helpText</key>
-		<string>Last Name</string>
-		<key>placeHolder</key>
-		<string>Enter last name</string>
-	</dict>
-	<dict>
-		<key>helpText</key>
 		<string>Email ID</string>
 		<key>placeHolder</key>
 		<string>Enter email</string>

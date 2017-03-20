@@ -84,11 +84,18 @@ class UserServices: NSObject {
         let user = User.currentUser
         //let userSettings = user.settings
         
+        /*
         let params = [kUserEmailId : user.emailId!,
                       kUserFirstName : user.firstName!,
                       kUserLastName : user.lastName!,
                       kUserPassword: user.password!,
                       ]
+        */
+        let params = [kUserEmailId : user.emailId!,
+                      kUserPassword: user.password!,
+                      ]
+
+        
         
         let method = RegistrationMethods.register.method
         self.sendRequestWith(method:method, params: params, headers: nil)
@@ -192,9 +199,10 @@ class UserServices: NSObject {
         
         let headerParams = [kUserId : user.userId!]
 
-        
+        /*
         let profile = [kUserFirstName : user.firstName!,
                        kUserLastName : user.lastName!]
+        */
         
         let settings = [kSettingsRemoteNotifications: (user.settings?.remoteNotifications)! as Bool,
                         kSettingsTouchId : (user.settings?.touchId)! as Bool,
@@ -206,8 +214,13 @@ class UserServices: NSObject {
         let version = Utilities.getAppVersion()
         let info = [kAppVersion : version,
                     kOSType :"ios"]
-        
+        /*
         let params = [kUserProfile:profile,
+                      kUserSettings:settings,
+                      kBasicInfo:info] as [String : Any]
+        */
+        
+        let params = [
                       kUserSettings:settings,
                       kBasicInfo:info] as [String : Any]
         

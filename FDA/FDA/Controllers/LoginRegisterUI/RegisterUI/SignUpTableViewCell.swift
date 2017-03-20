@@ -10,9 +10,9 @@ import UIKit
 import Foundation
 
 enum TextFieldTags : Int {
-    case FirstNameTag = 0
-    case LastName
-    case EmailId
+   // case FirstNameTag = 0
+   // case LastName
+    case EmailId = 0
     case Password
     case ConfirmPassword
 }
@@ -64,6 +64,8 @@ class SignUpTableViewCell: UITableViewCell {
     func setCellData(tag:TextFieldTags)  {
         let user = User.currentUser
         switch tag {
+            
+        /*
         case .FirstNameTag:
             if Utilities.isValidValue(someObject: user.firstName as AnyObject?) {
                 self.textFieldValue?.text =  user.firstName
@@ -78,6 +80,7 @@ class SignUpTableViewCell: UITableViewCell {
             else{
                 self.textFieldValue?.text = ""
             }
+        */
         case .EmailId:
             if Utilities.isValidValue(someObject: user.emailId as AnyObject?) {
                 self.textFieldValue?.text =  user.emailId

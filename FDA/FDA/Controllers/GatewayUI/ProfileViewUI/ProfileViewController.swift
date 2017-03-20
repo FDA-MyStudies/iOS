@@ -292,11 +292,12 @@ class ProfileViewController: UIViewController {
      */
     func validateAllFields() -> Bool{
         
+        //(user.firstName?.isEmpty)! && (user.lastName?.isEmpty)! &&
         
-        if (user.firstName?.isEmpty)! && (user.lastName?.isEmpty)! && (user.emailId?.isEmpty)! {
+        if (user.emailId?.isEmpty)! {
             self.showAlertMessages(textMessage: kMessageAllFieldsAreEmpty)
             return false
-        }
+        } /*
         else if  user.firstName == ""{
             self.showAlertMessages(textMessage: kMessageFirstNameBlank)
             return false
@@ -312,7 +313,7 @@ class ProfileViewController: UIViewController {
         }else if user.lastName == "" ||  (user.lastName?.isAlphanumeric)! == false || (user.lastName?.characters.count)! > 100{
             self.showAlertMessages(textMessage: kMessageValidLastName)
             return false
-        }else if user.emailId == "" {
+        }*/ else if user.emailId == "" {
             self.showAlertMessages(textMessage: kMessageEmailBlank)
             return false
         }else if !(Utilities.isValidEmail(testStr: user.emailId!)){
@@ -367,10 +368,12 @@ extension ProfileViewController : UITableViewDataSource {
             
             // TextField properties set up according to index
             switch  textFieldTag {
+            /*
             case .FirstNameTag,.LastName:
                 cell.textFieldValue?.autocapitalizationType = .sentences
                 
                 isSecuredEntry = false
+            */
             case  .Password:
                 
                 cell.buttonChangePassword?.isUserInteractionEnabled =  true
@@ -451,7 +454,7 @@ extension ProfileViewController : UITextFieldDelegate{
        
         let finalString = textField.text! + string
         
-        
+        /*
         if tag == .FirstNameTag || tag == .LastName {
             if string == " "  || finalString.characters.count > 100 {
                 return false
@@ -460,7 +463,8 @@ extension ProfileViewController : UITextFieldDelegate{
                 return true
             }
         }
-        else if  tag == .EmailId {
+        else */
+        if  tag == .EmailId {
             if string == " " || finalString.characters.count > 255{
                 return false
             }
@@ -481,6 +485,7 @@ extension ProfileViewController : UITextFieldDelegate{
         textField.text =  textField.text?.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
         
         switch textField.tag {
+        /*
         case TextFieldTags.FirstNameTag.rawValue:
             
             user.firstName! =  textField.text!
@@ -491,7 +496,7 @@ extension ProfileViewController : UITextFieldDelegate{
             
             user.lastName! = textField.text!
             break
-            
+        */
         case TextFieldTags.EmailId.rawValue:
             user.emailId! = textField.text!
             

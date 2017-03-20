@@ -22,7 +22,11 @@ class SecondGatewayOverviewViewController : UIViewController{
         
         //Used to set border color for bottom view
         buttonGetStarted?.layer.borderColor = kUicolorForButtonBackground
-        
+         UIApplication.shared.statusBarStyle = .lightContent
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        UIApplication.shared.statusBarStyle = .default
     }
     
     override func viewWillAppear(_ animated: Bool) {

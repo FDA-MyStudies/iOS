@@ -60,6 +60,7 @@ class SignInViewController : UIViewController{
             
             buttonSignUp?.setAttributedTitle(mutableAttributedTitle, for: .normal)
         }
+       
     }
     
     override func viewWillAppear(_ animated: Bool) {

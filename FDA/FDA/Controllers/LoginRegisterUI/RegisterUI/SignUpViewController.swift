@@ -23,7 +23,7 @@ class SignUpViewController : UIViewController{
     var tableViewRowDetails : NSMutableArray?
     var agreedToTerms : Bool = false
     var confirmPassword = ""
-    var user = User.currentUser
+    var user:User!
     
     @IBOutlet var tableView : UITableView?
     @IBOutlet var tableViewFooterView : UIView?
@@ -53,19 +53,20 @@ class SignUpViewController : UIViewController{
         IQKeyboardManager.sharedManager().enable = true
         
         //Used for background tap dismiss keyboard
-        let gestureRecognizwe : UITapGestureRecognizer = UITapGestureRecognizer.init(target: self, action: #selector(SignUpViewController.dismissKeyboard))
-        self.tableView?.addGestureRecognizer(gestureRecognizwe)
+        let tapGestureRecognizer : UITapGestureRecognizer = UITapGestureRecognizer.init(target: self, action: #selector(SignUpViewController.dismissKeyboard))
+        self.tableView?.addGestureRecognizer(tapGestureRecognizer)
         
         //unhide navigationbar
         self.navigationController?.setNavigationBarHidden(false, animated: true)
         
         User.resetCurrentUser()
-        user = User.currentUser
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        self.user = User.currentUser
         if viewLoadFrom == .menu{
             self.setNavigationBarItem()
         }
@@ -115,7 +116,7 @@ class SignUpViewController : UIViewController{
      */
     func validateAllFields() -> Bool{
         //(user.firstName?.isEmpty)! && (user.lastName?.isEmpty)! &&
-        if  (user.emailId?.isEmpty)! && (user.password?.isEmpty)! && confirmPassword.isEmpty {
+        if  (self.user.emailId?.isEmpty)! && (self.user.password?.isEmpty)! && confirmPassword.isEmpty {
             self.showAlertMessages(textMessage: kMessageAllFieldsAreEmpty)
             return false
         } /* else if user.firstName == "" {
@@ -133,21 +134,21 @@ class SignUpViewController : UIViewController{
             self.showAlertMessages(textMessage: kMessageValidLastName)
             return false
         } */
-        else if user.emailId == "" {
+        else if self.user.emailId == "" {
             self.showAlertMessages(textMessage: kMessageEmailBlank)
             return false
         }
-        else if !(Utilities.isValidEmail(testStr: user.emailId!)){
+        else if !(Utilities.isValidEmail(testStr: self.user.emailId!)){
             self.showAlertMessages(textMessage: kMessageValidEmail)
             return false
-        }else if user.password == ""{
+        }else if self.user.password == ""{
             self.showAlertMessages(textMessage: kMessagePasswordBlank)
             return false
-        }else if Utilities.isPasswordValid(text: (user.password)!) == false  {
+        }else if Utilities.isPasswordValid(text: (self.user.password)!) == false  {
             self.showAlertMessages(textMessage: kMessageValidatePasswordComplexity)
             return false
         }
-        else if (user.password != confirmPassword){
+        else if (self.user.password != confirmPassword){
             self.showAlertMessages(textMessage: kMessageValidatePasswords)
             return false
         }
@@ -387,19 +388,19 @@ extension SignUpViewController : UITextFieldDelegate{
         switch tag {
         /*
         case .FirstNameTag:
-            user.firstName = textField.text!
+            self.user.firstName = textField.text!
             break
             
         case .LastName:
-            user.lastName = textField.text!
+            self.user.lastName = textField.text!
             break
         */
         case .EmailId:
-            user.emailId = textField.text!
+            self.user.emailId = textField.text!
             break
             
         case .Password:
-            user.password = textField.text!
+            self.user.password = textField.text!
             break
             
         case .ConfirmPassword:

@@ -41,13 +41,19 @@ class StudyOverviewViewControllerFirst : UIViewController{
         else{
              buttonWatchVideo?.isHidden =  true
         }
-        
+        UIApplication.shared.statusBarStyle = .lightContent
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        UIApplication.shared.statusBarStyle = .default
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         labelTitle?.text = overviewSectionDetail.title
+        
+        self.labelDescription?.text = overviewSectionDetail.text!
         
     }
     
@@ -56,6 +62,12 @@ class StudyOverviewViewControllerFirst : UIViewController{
         
         
     }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        UIApplication.shared.statusBarStyle = UIStatusBarStyle.default
+    }
+   
+    
     @IBAction func watchVideoButtonAction(_ sender: Any) {
         
         let url : NSURL = NSURL(string: overviewSectionDetail.link!)!

@@ -34,6 +34,8 @@ class HomeViewController : UIViewController{
         self.automaticallyAdjustsScrollViewInsets = false
         //Added to change next screen
         pageControlView?.addTarget(self, action:#selector(HomeViewController.didChangePageControlValue), for: .valueChanged)
+        
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {

@@ -106,10 +106,13 @@ class LeftMenuViewController : UIViewController, LeftMenuProtocol {
         let loginStoryBoard = UIStoryboard(name: "Login", bundle: nil)
         let signInController = loginStoryBoard.instantiateViewController(withIdentifier:  String(describing: SignInViewController.classForCoder())) as! SignInViewController
         self.signInViewController = UINavigationController(rootViewController: signInController)
-        
+        self.signInViewController.navigationBar.barStyle = .default
+         self.signInViewController.navigationBar.isTranslucent = false
         
         let signUpController = loginStoryBoard.instantiateViewController(withIdentifier:  String(describing: SignUpViewController.classForCoder())) as! SignUpViewController
         self.signUpViewController = UINavigationController(rootViewController: signUpController)
+        self.signUpViewController.navigationBar.barStyle = .default
+        self.signUpViewController.navigationBar.isTranslucent = false
     }
     
     func createLeftmenuItems(){

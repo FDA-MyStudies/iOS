@@ -36,7 +36,7 @@
                                 </connections>
                             </containerView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zqZ-PQ-IFe">
-                                <rect key="frame" x="16" y="16" width="337" height="30"/>
+                                <rect key="frame" x="253" y="16" width="100" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="KD3-2e-eDS"/>
                                 </constraints>
@@ -117,7 +117,6 @@
                             <constraint firstItem="4Nk-cF-eK0" firstAttribute="centerY" secondItem="KB9-1S-d5W" secondAttribute="centerY" multiplier="1.65667" constant="-62.000000010699978" id="qCH-fx-QNK"/>
                             <constraint firstAttribute="trailingMargin" secondItem="zqZ-PQ-IFe" secondAttribute="trailing" constant="6" id="sXG-mx-9Xy"/>
                             <constraint firstItem="vwF-hX-3DE" firstAttribute="height" secondItem="KB9-1S-d5W" secondAttribute="height" multiplier="60/667" id="tmp-9C-WQ9"/>
-                            <constraint firstItem="zqZ-PQ-IFe" firstAttribute="leading" secondItem="KB9-1S-d5W" secondAttribute="leadingMargin" id="vLE-eX-4XM"/>
                             <constraint firstItem="m6o-Mj-jRm" firstAttribute="top" secondItem="vwF-hX-3DE" secondAttribute="bottom" id="vhX-aa-p33"/>
                         </constraints>
                     </view>
@@ -463,7 +462,7 @@
                             <constraint firstItem="N7H-ey-5oY" firstAttribute="centerX" secondItem="ZuF-Og-5eT" secondAttribute="centerX" constant="-1" id="z3x-lD-MSH"/>
                         </constraints>
                     </view>
-                    <nil key="simulatedStatusBarMetrics"/>
+                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
                     <nil key="simulatedTopBarMetrics"/>
                     <connections>
                         <outlet property="buttonGetStarted" destination="vIh-lT-4bl" id="g3V-wq-WIZ"/>
@@ -567,7 +566,7 @@
                             </mask>
                         </variation>
                     </view>
-                    <nil key="simulatedStatusBarMetrics"/>
+                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
                     <nil key="simulatedTopBarMetrics"/>
                     <connections>
                         <outlet property="buttonGetStarted" destination="qls-nn-uxZ" id="gZy-71-Hhu"/>
@@ -891,7 +890,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Tm3-4k-53S">
-                                <rect key="frame" x="139" y="503" width="97" height="35"/>
+                                <rect key="frame" x="139" y="536" width="97" height="35"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="35" id="k1u-Ym-o6b"/>
                                 </constraints>
@@ -900,7 +899,7 @@
                                     <color key="titleColor" red="0.0" green="0.48627450979999998" blue="0.72941176470000002" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <connections>
-                                    <action selector="continueButtonAction:" destination="slw-Bf-fNL" eventType="touchUpInside" id="8zH-tn-51H"/>
+                                    <action selector="resendEmailButtonAction:" destination="slw-Bf-fNL" eventType="touchUpInside" id="fMF-V7-YzR"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -908,6 +907,7 @@
                         <constraints>
                             <constraint firstItem="On0-dU-saR" firstAttribute="centerY" secondItem="wKW-wP-MYg" secondAttribute="centerY" multiplier="0.77961" constant="10.000065000000006" id="0p3-hT-t26"/>
                             <constraint firstItem="Xse-aC-ase" firstAttribute="centerX" secondItem="wKW-wP-MYg" secondAttribute="centerX" id="56m-gx-IeP"/>
+                            <constraint firstItem="Tm3-4k-53S" firstAttribute="centerY" secondItem="wKW-wP-MYg" secondAttribute="centerY" multiplier="1.65967" id="5Pc-3A-Q0K"/>
                             <constraint firstItem="Xse-aC-ase" firstAttribute="height" secondItem="wKW-wP-MYg" secondAttribute="height" multiplier="50/667" id="6o9-P2-s2L"/>
                             <constraint firstItem="On0-dU-saR" firstAttribute="centerX" secondItem="wKW-wP-MYg" secondAttribute="centerX" id="7IC-Sq-6Z3"/>
                             <constraint firstItem="Xse-aC-ase" firstAttribute="width" secondItem="wKW-wP-MYg" secondAttribute="width" multiplier="205/375" id="AVD-N2-hbA"/>
@@ -921,7 +921,6 @@
                             <constraint firstItem="qBm-e0-RzA" firstAttribute="width" secondItem="wKW-wP-MYg" secondAttribute="width" multiplier="220/375" id="bru-Df-BGT"/>
                             <constraint firstItem="93M-Fs-drd" firstAttribute="width" secondItem="wKW-wP-MYg" secondAttribute="width" multiplier="150/375" id="hjS-Vy-pqD"/>
                             <constraint firstItem="Xse-aC-ase" firstAttribute="centerY" secondItem="wKW-wP-MYg" secondAttribute="centerY" multiplier="1.13943" id="jzD-Xb-KbB"/>
-                            <constraint firstItem="Tm3-4k-53S" firstAttribute="top" secondItem="93M-Fs-drd" secondAttribute="bottom" constant="8" id="vru-Xe-b7A"/>
                             <constraint firstItem="qBm-e0-RzA" firstAttribute="height" secondItem="wKW-wP-MYg" secondAttribute="height" multiplier="40/667" id="xgi-aS-PZc"/>
                             <constraint firstItem="qBm-e0-RzA" firstAttribute="centerX" secondItem="wKW-wP-MYg" secondAttribute="centerX" id="ynI-f1-YnA"/>
                         </constraints>
@@ -1023,7 +1022,7 @@
         <image name="welcomeBg" width="375" height="667"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Wsb-hw-1LK"/>
         <segue reference="VqN-my-PFn"/>
+        <segue reference="Wsb-hw-1LK"/>
     </inferredMetricsTieBreakers>
 </document>

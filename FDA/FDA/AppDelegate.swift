@@ -21,7 +21,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         self.customizeNavigationBar()
         Fabric.with([Crashlytics.self])
-
+        
+        
+        
+        
         return true
     }
     

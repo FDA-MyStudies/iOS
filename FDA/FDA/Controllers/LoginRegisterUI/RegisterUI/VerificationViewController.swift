@@ -14,6 +14,8 @@ let kSignupCompletionSegue = "signupCompletionSegue"
 let kAlertMessageText = "Message"
 let kAlertMessageVerifyEmail = "Please verify your email address."
 
+let kAlertMessageResendEmail = "An Email verification link has been sent to your registered email."
+
 class VerificationViewController : UIViewController{
     
     @IBOutlet var buttonContinue : UIButton?
@@ -59,7 +61,7 @@ class VerificationViewController : UIViewController{
         UserServices().confirmUserRegistration(self)
     }
     
-    @IBAction func resendEmailButtonAction(_ sender: Any){
+    @IBAction func resendEmailButtonAction(_ sender: UIButton){
         UserServices().resendEmailConfirmation(self)
     }
     
@@ -117,7 +119,15 @@ extension VerificationViewController:NMWebServiceDelegate {
         }
         else {
             
-            UIUtilities.showAlertWithTitleAndMessage(title:NSLocalizedString(kAlertMessageText, comment: "") as NSString, message:NSLocalizedString(kAlertMessageVerifyEmail, comment: "") as NSString)
+            
+            if requestName as String == RegistrationMethods.resendConfirmation.description {
+                UIUtilities.showAlertWithTitleAndMessage(title:NSLocalizedString(kAlertMessageText, comment: "") as NSString, message:NSLocalizedString(kAlertMessageResendEmail, comment: "") as NSString)
+            }
+            else{
+                UIUtilities.showAlertWithTitleAndMessage(title:NSLocalizedString(kAlertMessageText, comment: "") as NSString, message:NSLocalizedString(kAlertMessageVerifyEmail, comment: "") as NSString)
+            }
+            
+            
         }
 
     }

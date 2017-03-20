@@ -231,6 +231,7 @@
                             <constraint firstAttribute="trailing" secondItem="udp-H9-2Ar" secondAttribute="trailing" id="yux-Ra-VYZ"/>
                         </constraints>
                     </view>
+                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
                     <connections>
                         <outlet property="buttonJoinStudy" destination="5NQ-r5-mSz" id="73u-30-z4z"/>
                         <outlet property="buttonVisitWebsite" destination="zeM-Up-qJV" id="ATr-Jq-lBc"/>
@@ -376,6 +377,7 @@
                             <constraint firstItem="reM-ru-gW5" firstAttribute="width" secondItem="yw2-aH-SLQ" secondAttribute="width" id="zIr-6K-DE6"/>
                         </constraints>
                     </view>
+                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
                     <connections>
                         <outlet property="buttonJoinStudy" destination="lIT-J9-U7S" id="js6-wl-cso"/>
                         <outlet property="buttonLearnMore" destination="mud-v9-9iS" id="3Co-DD-1zf"/>

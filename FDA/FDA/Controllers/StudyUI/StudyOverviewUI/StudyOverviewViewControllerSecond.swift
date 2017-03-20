@@ -30,7 +30,11 @@ class StudyOverviewViewControllerSecond : UIViewController{
             let url = URL.init(string:overviewSectionDetail.imageURL!)
             imageViewStudy?.sd_setImage(with: url, placeholderImage:#imageLiteral(resourceName: "OverViewBg"))
         }
-        
+         UIApplication.shared.statusBarStyle = .lightContent
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        UIApplication.shared.statusBarStyle = .default
     }
     
     override func viewWillAppear(_ animated: Bool) {

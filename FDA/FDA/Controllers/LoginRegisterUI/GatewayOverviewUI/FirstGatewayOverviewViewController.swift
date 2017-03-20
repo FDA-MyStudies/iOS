@@ -35,6 +35,8 @@ class FirstGatewayOverviewViewController : UIViewController{
         //effectView.frame = (imageViewBackgroundImage?.frame)!
         //self.imageViewBackgroundImage?.addSubview(effectView)
 
+        
+         UIApplication.shared.statusBarStyle = .lightContent
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -45,6 +47,11 @@ class FirstGatewayOverviewViewController : UIViewController{
         imageViewBackgroundImage?.image = UIImage.init(named: overviewSectionDetail.imageURL!)
 
     }
+    override func viewDidDisappear(_ animated: Bool) {
+        UIApplication.shared.statusBarStyle = .default
+    }
+    
+    
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)

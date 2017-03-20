@@ -122,7 +122,7 @@ class UserServices: NSObject {
         
          let params = [kUserEmailId: user.emailId]
         
-        let method = RegistrationMethods.resendEmailConfirmation.method
+        let method = RegistrationMethods.resendConfirmation.method
         self.sendRequestWith(method:method, params: params, headers:headerParams)
         
     }

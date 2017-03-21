@@ -14,20 +14,24 @@ import ResearchKit
 let kConsentVisual = "consent"
 let kConsentSharing = "sharing"
 let kConsentReview = "review"
-
+let kConsentVisualScreens = "visualScreens"
 
 // SharingConsent Api Constants
 
 let kConsentSharingStepShortDesc = "shortDesc"
 let kConsentSharingStepLongDesc = "longDesc"
 let kConsentSharingSteplearnMore = "learnMore"
+let kConsentSharingStepText = "text"
+let kConsentSharingStepTitle = "title"
+
+
 
 // ReviewConsent Api Constants
 
 let kConsentReviewStepTitle = "title"
 let kConsentReviewStepSignatureTitle = "signatureTitle"
 let kConsentReviewStepSignatureContent = "signatureContent"
-
+let kConsentReviewStepReasonForConsent = "reasonForConsent"
 
 
 //MARK:ConsentBuilder Class
@@ -44,6 +48,9 @@ class ConsentBuilder{
     var sharingConsent:SharingConsent?
     
     var consentDocument:ORKConsentDocument?
+    var version:String?
+
+    static var currentConsent: ConsentBuilder? = nil
     
     var consentResult:ConsentResult?
     
@@ -59,6 +66,7 @@ class ConsentBuilder{
         self.sharingConsent = SharingConsent()
         self.consentResult = ConsentResult()
         self.consentDocument = ORKConsentDocument()
+        self.version = ""
         
     }
     
@@ -69,7 +77,7 @@ class ConsentBuilder{
         
           if Utilities.isValidObject(someObject: metaDataDict as AnyObject?){
             
-            let visualConsentArray = metaDataDict[kConsentVisual] as! Array<Dictionary<String,Any>>
+            let visualConsentArray = metaDataDict[kConsentVisualScreens] as! Array<Dictionary<String,Any>>
             
             if  Utilities.isValidObject(someObject: visualConsentArray as AnyObject?){
                 for sectionDict in visualConsentArray{
@@ -255,10 +263,17 @@ struct SharingConsent {
     var shortDesc:String?
     var longDesc:String?
     var learnMore:String?
+    var allowWithoutSharing:Bool?
+    var text:String?
+    var title:String?
+    
     init() {
         self.shortDesc = ""
         self.longDesc =  ""
         self.learnMore =  ""
+        self.allowWithoutSharing =  false
+        self.text = ""
+        self.title = ""
     }
     
     public mutating func initWithSharingDict(dict:Dictionary<String, Any>)
@@ -279,6 +294,13 @@ struct SharingConsent {
             if Utilities.isValidValue(someObject: dict[kConsentSharingSteplearnMore] as AnyObject ){
                 self.learnMore = dict[kConsentSharingSteplearnMore] as? String
             }
+            
+            if Utilities.isValidValue(someObject: dict[kConsentSharingStepText] as AnyObject ){
+                self.text = dict[kConsentSharingStepText] as? String
+            }
+            if Utilities.isValidValue(someObject: dict[kConsentSharingStepTitle] as AnyObject ){
+                self.title = dict[kConsentSharingStepTitle] as? String
+            }
         }
         else{
             Logger.sharedInstance.debug("ConsentDocument Step Dictionary is null:\(dict)")
@@ -296,11 +318,13 @@ struct ReviewConsent{
     var title:String?
     var signatureTitle:String?
     var signatureContent:String?
+    var reasonForConsent:String?
     
     init() {
         self.title = ""
         self.signatureTitle =  ""
         self.signatureContent =  ""
+        self.reasonForConsent = ""
     }
     mutating func initWithReviewDict(dict:Dictionary<String, Any>) {
         /* initializer method which initializes all params
@@ -318,6 +342,9 @@ struct ReviewConsent{
             }
             if Utilities.isValidValue(someObject: dict[kConsentReviewStepSignatureContent] as AnyObject ){
                 self.signatureContent = dict[kConsentReviewStepSignatureContent] as? String
+            }
+            if Utilities.isValidValue(someObject: dict[kConsentReviewStepReasonForConsent] as AnyObject ){
+                self.reasonForConsent = dict[kConsentReviewStepReasonForConsent] as? String
             }
         }
         else{

@@ -1,5 +1,5 @@
 //
-//  EligibilityViewController.swift
+//  EligibilityStepViewController.swift
 //  FDA
 //
 //  Created by Arun Kumar on 3/21/17.
@@ -9,7 +9,13 @@
 import UIKit
 import ResearchKit
 
-class EligibilityViewController: ORKStepViewController {
+class EligibilityStep: ORKStep {
+    var type:String?
+}
+
+
+
+class EligibilityStepViewController: ORKStepViewController {
 
     @IBOutlet weak var tokenTextField: UITextField!
     override init(step: ORKStep?) {
@@ -23,7 +29,22 @@ class EligibilityViewController: ORKStepViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Do any additional setup after loading the view.
+        if let step = step as? EligibilityStep {
+            step.type = "token"
+        }
+    }
+    
+    
+    
+    override func hasNextStep() -> Bool {
+        super.hasNextStep()
+        return true
+    }
+    
+    override func goForward(){
+        
+        super.goForward()
+        
     }
     
     override func didReceiveMemoryWarning() {
@@ -34,6 +55,13 @@ class EligibilityViewController: ORKStepViewController {
         
         self.view.endEditing(true)
         let token = tokenTextField.text
+        
+        
+        self.goForward()
+        
+        
+        
+        
        /*
         
         if username?.characters.count == 0 || password?.characters.count == 0{
@@ -60,7 +88,7 @@ class EligibilityViewController: ORKStepViewController {
     }
 }
 
-extension EligibilityViewController:UITextFieldDelegate {
+extension EligibilityStepViewController:UITextFieldDelegate {
     func textFieldDidEndEditing(_ textField: UITextField) {
     }
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {

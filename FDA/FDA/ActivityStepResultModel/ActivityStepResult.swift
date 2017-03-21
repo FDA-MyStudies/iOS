@@ -352,10 +352,10 @@ class ActivityStepResult{
                         let stepTypeResult = questionstepResult as! ORKTimeIntervalQuestionResult
                         
                         if Utilities.isValidValue(someObject: stepTypeResult.intervalAnswer as AnyObject?){
-                            self.value = stepTypeResult.intervalAnswer
+                            self.value = Double(stepTypeResult.intervalAnswer!)
                         }
                         else{
-                            self.value = 0
+                            self.value = 0.0
                         }
                         
                         
@@ -364,10 +364,10 @@ class ActivityStepResult{
                         let stepTypeResult = questionstepResult as! ORKNumericQuestionResult
                         
                         if Utilities.isValidValue(someObject: stepTypeResult.numericAnswer as AnyObject?){
-                            self.value = stepTypeResult.numericAnswer
+                            self.value = Double(stepTypeResult.numericAnswer!)
                         }
                         else{
-                            self.value = 0
+                            self.value = 0.0
                         }
                         
                     case ORKQuestionType.location.rawValue?:

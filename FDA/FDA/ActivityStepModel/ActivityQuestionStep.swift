@@ -67,7 +67,7 @@ let kStepQuestionTextScaleVertical = "vertical"
 
 let kORKTextChoiceText = "text"
 let kORKTextChoiceValue = "value"
-let kORKTextChoiceDetailText = "detail text"
+let kORKTextChoiceDetailText = "detail"
 let kORKTextChoiceExclusive = "exclusive"
 
 
@@ -86,6 +86,9 @@ let kStepQuestionImageChoiceValue = "value"
 let kStepQuestionTextChoiceTextChoices = "textChoices"
 let kStepQuestionTextChoiceSelectionStyle = "selectionStyle"
 
+let kStepQuestionTextChoiceSelectionStyleSingle = "Single"
+let kStepQuestionTextChoiceSelectionStyleMultiple = "Multiple"
+
 //NumericQuestion Type Api Constants
 
 let kStepQuestionNumericStyle = "style"
@@ -101,6 +104,9 @@ let kStepQuestionDateStyle = "style"
 let kStepQuestionDateMinDate = "minDate"
 let kStepQuestionDateMaxDate = "maxDate"
 let kStepQuestionDateDefault = "default"
+let kStepQuestionDateStyleDate = "Date"
+let kStepQuestionDateStyleDateTime = "Date-Time"
+
 
 //TextQuestion Type Api Constants
 
@@ -127,6 +133,18 @@ let kStepQuestionHeightPlaceholder = "placeholder"
 //LocationQuestion Type Api Constants
 
 let kStepQuestionLocationUseCurrentLocation = "useCurrentLocation"
+
+
+enum DateStyle:String{
+    case date = "Date"
+    case dateAndTime = "Date-Time"
+}
+
+enum HeightMeasurementSystem:String{
+    case local  = "Local"
+    case metric  = "Metric"
+    case us  = "US"
+}
 
 enum QuestionStepType:String{
     
@@ -226,6 +244,7 @@ class ActivityQuestionStep: ActivityStep {
     var phi:PHIType?
     var formatDict:Dictionary<String, Any>?
     
+    var healthDataKey:String?
     
     override init() {
         
@@ -388,11 +407,11 @@ class ActivityQuestionStep: ActivityStep {
                     textChoiceArray = self.getTextChoices(dataArray: (formatDict?[kStepQuestionTextChoiceTextChoices] as? NSArray)! )
                     
                     
-                    if ORKChoiceAnswerStyle(rawValue: formatDict?[kStepQuestionTextChoiceSelectionStyle] as! Int) == ORKChoiceAnswerStyle.singleChoice{
+                    if (formatDict?[kStepQuestionTextChoiceSelectionStyle] as! String) == kStepQuestionTextChoiceSelectionStyleSingle{
                         // single choice
                         questionStepAnswerFormat = ORKTextChoiceAnswerFormat(style: ORKChoiceAnswerStyle.singleChoice, textChoices: textChoiceArray!)
                     }
-                    else  if ORKChoiceAnswerStyle(rawValue: formatDict?[kStepQuestionTextChoiceSelectionStyle] as! Int) == ORKChoiceAnswerStyle.multipleChoice{
+                    else  if (formatDict?[kStepQuestionTextChoiceSelectionStyle] as! String) == kStepQuestionTextChoiceSelectionStyleMultiple{
                         // multiple choice
                         questionStepAnswerFormat = ORKTextChoiceAnswerFormat(style: ORKChoiceAnswerStyle.multipleChoice, textChoices: textChoiceArray!)
                     }
@@ -465,7 +484,7 @@ class ActivityQuestionStep: ActivityStep {
                     let maximumDate:NSDate? = dateFormatter.date(from: formatDict?[kStepQuestionDateDefault] as! String) as NSDate?
                     
                     
-                    switch  ORKDateAnswerStyle(rawValue:formatDict?[kStepQuestionDateStyle] as! Int)! as ORKDateAnswerStyle{
+                    switch  DateStyle(rawValue:formatDict?[kStepQuestionDateStyle] as! String)! as DateStyle{
                         
                     case .date:
                         
@@ -546,8 +565,21 @@ class ActivityQuestionStep: ActivityStep {
                 if  Utilities.isValidValue(someObject:formatDict?[kStepQuestionHeightPlaceholder] as AnyObject?)
                     &&   Utilities.isValidValue(someObject:formatDict?[kStepQuestionHeightMeasurementSystem] as AnyObject?)
                 {
-                    questionStepAnswerFormat = ORKAnswerFormat.heightAnswerFormat(with:ORKMeasurementSystem(rawValue: formatDict?[kStepQuestionHeightMeasurementSystem] as! Int)! )
                     
+                    let measurementSystem:ORKMeasurementSystem?
+                    
+                    switch HeightMeasurementSystem(rawValue: formatDict?[kStepQuestionHeightMeasurementSystem] as! String)! {
+                    case .local:
+                        measurementSystem = .local
+                        
+                    case .metric:
+                        measurementSystem = .metric
+                    case .us:
+                        measurementSystem = .USC
+                    default:break
+                        
+                    }
+                    questionStepAnswerFormat = ORKAnswerFormat.heightAnswerFormat(with:measurementSystem! )
                     // Place holder
                     
                 }
@@ -564,8 +596,6 @@ class ActivityQuestionStep: ActivityStep {
                     answerFormat.useCurrentLocation = formatDict?[kStepQuestionLocationUseCurrentLocation] as! Bool
                     
                     questionStepAnswerFormat = answerFormat
-                    
-                    
                 }
                 else{
                     Logger.sharedInstance.debug("location has null values:\(formatDict)")
@@ -610,7 +640,7 @@ class ActivityQuestionStep: ActivityStep {
     func getTextChoices(dataArray:NSArray) -> [ORKTextChoice] {
         
         /* Method  creates ORKTextChoice Array
-         @dataArray: is either array of Dictionary or array of String
+         @param dataArray: is either array of Dictionary or array of String
          returns array of ORKTextChoice
          */
         

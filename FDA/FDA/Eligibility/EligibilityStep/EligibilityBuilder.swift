@@ -9,6 +9,11 @@
 import Foundation
 import ResearchKit
 
+let kEligibilityType = "type"
+let kEligibilityTest = "test"
+let kEligibilityCorrectAnswers = "correctAnswers"
+let kEligibilityTokenTitle = "tokenTitle"
+
 
 enum EligibilityStepType:String {
     case token = "token"
@@ -23,7 +28,7 @@ class EligibilityBuilder{
     var tokenTitle:String?
     
     var testArray:Array<Any>?
-    
+    static var currentEligibility:EligibilityBuilder? = nil
     
     
     init() {
@@ -36,26 +41,61 @@ class EligibilityBuilder{
     
     func initEligibilityWithDict(eligibilityDict:Dictionary<String, Any>)  {
         
+        if Utilities.isValidObject(someObject: eligibilityDict[kEligibilityTest] as AnyObject ){
+            self.testArray = eligibilityDict[kEligibilityTest] as! Array<Dictionary<String, Any>>
+        }
+        if  Utilities.isValidValue(someObject: eligibilityDict[kEligibilityType] as AnyObject?){
+            self.type = EligibilityStepType(rawValue: eligibilityDict[kEligibilityType] as! String)
+        }
+        if Utilities.isValidObject(someObject: eligibilityDict[kEligibilityCorrectAnswers] as AnyObject ){
+            self.testArray = eligibilityDict[kEligibilityTest] as! Array<Dictionary<String, Any>>
+        }
+    
     }
     
     func getEligibilitySteps() -> [ORKStep]?{
         
         
-        if Utilities.isValidObject(someObject: self.testArray as AnyObject )
-            && Utilities.isValidValue(someObject: self.tokenTitle as AnyObject )
-            && Utilities.isValidValue(someObject: self.type as AnyObject ){
+        if  self.type != nil{
+            
+           // Utilities.isValidObject(someObject: self.testArray as AnyObject )
+              //  && Utilities.isValidValue(someObject: self.tokenTitle as AnyObject )
+           
+            
             
             var stepsArray:[ORKStep]? = [ORKStep]()
             
             
+            if self.type == EligibilityStepType.token {
+                
+                let eligibilityStep:EligibilityStep? = EligibilityStep(identifier: "EligibilityTokenStep")
+                eligibilityStep?.type = "TOKEN"
+                stepsArray?.append(eligibilityStep!)
+            }
+            else if self.type == EligibilityStepType.test {
+                // for only test
+                
+                for stepDict in self.testArray!{
+                    let questionStep:ActivityQuestionStep? = ActivityQuestionStep()
+                    questionStep?.initWithDict(stepDict: stepDict as! Dictionary<String, Any>)
+                    stepsArray?.append((questionStep?.getQuestionStep())!)
+                }
+                
+                
+            }
+            else{
+                // for both test + token
             for stepDict in self.testArray!{
-            
-            
+        
             switch self.type! as EligibilityStepType{
             case .token:
                 
-                let passcodeStep = ORKPasscodeStep(identifier:tokenTitle! )
-                stepsArray?.append(passcodeStep)
+               // let passcodeStep = ORKPasscodeStep(identifier:tokenTitle! )
+               // stepsArray?.append(passcodeStep)
+                
+                let eligibilityStep:EligibilityStep? = EligibilityStep(identifier: "EligibilityTokenStep")
+                eligibilityStep?.type = "TOKEN"
+                stepsArray?.append(eligibilityStep!)
                 
             case .test:
                 
@@ -70,6 +110,7 @@ class EligibilityBuilder{
             
             }
             
+            }
             }
             if (stepsArray?.count)! > 0 {
                 return stepsArray!

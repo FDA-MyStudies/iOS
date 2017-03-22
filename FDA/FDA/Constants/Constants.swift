@@ -79,4 +79,12 @@ let kMessageValidLastName = "Please enter valid last name. Please use letters(le
 
 let kMessageValidateOldAndNewPasswords = "Old password and New password should not be same."
 
+//MARK: FeedbackviewController constants
+let kFeedbackTableViewCellIdentifier1 = "FeedbackCellFirst"
+let kFeedbackTableViewCellIdentifier2 = "FeedbackCellSecond"
+
+//MARK: ContactUsviewController constants
+let kContactUsTableViewCellIdentifier = "ContactUsCell"
+
+
 

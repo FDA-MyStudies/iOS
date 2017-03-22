@@ -381,6 +381,8 @@ class UserServices: NSObject {
                 ud.set(user.authToken, forKey:kUserAuthToken)
                 ud.set(user.userId!, forKey: kUserId)
                 ud.synchronize()
+                
+                DBHandler().saveCurrentUser(user: user)
             }
         }
        

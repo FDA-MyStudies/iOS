@@ -26,9 +26,10 @@ class SplashViewController: UIViewController {
         let ud = UserDefaults.standard
         if ud.object(forKey:kUserAuthToken) != nil {
            
-            User.currentUser.authToken = ud.object(forKey: kUserAuthToken) as! String!
-            User.currentUser.userId = ud.object(forKey:kUserId) as! String!
-            User.currentUser.userType = UserType.FDAUser
+            DBHandler().initilizeCurrentUser()
+//            User.currentUser.authToken = ud.object(forKey: kUserAuthToken) as! String!
+//            User.currentUser.userId = ud.object(forKey:kUserId) as! String!
+//            User.currentUser.userType = UserType.FDAUser
             self.navigateToGatewayDashboard()
         }
         else {

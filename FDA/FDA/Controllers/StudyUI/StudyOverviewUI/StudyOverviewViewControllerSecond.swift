@@ -19,6 +19,8 @@ class StudyOverviewViewControllerSecond : UIViewController{
     @IBOutlet var labelDescription : UILabel?
     @IBOutlet var imageViewStudy : UIImageView?
     
+    @IBOutlet var viewConsentButtonConstraint:NSLayoutConstraint?
+    
     var overviewSectionDetail : OverviewSection!
     
     override func viewDidLoad() {
@@ -31,6 +33,9 @@ class StudyOverviewViewControllerSecond : UIViewController{
             imageViewStudy?.sd_setImage(with: url, placeholderImage:#imageLiteral(resourceName: "OverViewBg"))
         }
          UIApplication.shared.statusBarStyle = .lightContent
+        
+        
+         WCPServices().getConsentDocument(studyId: (Study.currentStudy?.studyId)!, delegate: self as NMWebServiceDelegate)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -55,6 +60,21 @@ class StudyOverviewViewControllerSecond : UIViewController{
         }
 
         //labelDescription?.text = overviewSectionDetail.text
+        
+        if Utilities.isValidValue(someObject: overviewSectionDetail.websiteLink as AnyObject? ) ==  false{
+           // if website link is nil
+            
+           buttonVisitWebsite?.isHidden =  true
+           viewConsentButtonConstraint?.constant = UIScreen.main.bounds.size.width - (16 + 110)
+            
+        }
+        else{
+            buttonVisitWebsite?.isHidden = false
+             viewConsentButtonConstraint?.constant = 0
+        }
+        
+        
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -76,7 +96,29 @@ class StudyOverviewViewControllerSecond : UIViewController{
         let loginStoryboard = UIStoryboard.init(name: "Main", bundle:Bundle.main)
         let webViewController = loginStoryboard.instantiateViewController(withIdentifier:"WebViewController") as! UINavigationController
         let webView = webViewController.viewControllers[0] as! WebViewController
-        webView.requestLink = "http://www.fda.gov"
-        self.navigationController?.present(webViewController, animated: true, completion: nil)    }
+        //webView.requestLink = "http://www.fda.gov"
+        
+        self.navigationController?.present(webViewController, animated: true, completion: nil)
+    }
     
 }
+
+extension StudyOverviewViewControllerSecond:NMWebServiceDelegate {
+    
+    func startedRequest(_ manager: NetworkManager, requestName: NSString) {
+        Logger.sharedInstance.info("requestname : \(requestName)")
+        
+    
+    }
+    func finishedRequest(_ manager: NetworkManager, requestName: NSString, response: AnyObject?) {
+        Logger.sharedInstance.info("requestname : \(requestName)")
+    }
+    func failedRequest(_ manager: NetworkManager, requestName: NSString, error: NSError) {
+        Logger.sharedInstance.info("requestname : \(requestName)")
+
+    }
+}
+
+
+
+

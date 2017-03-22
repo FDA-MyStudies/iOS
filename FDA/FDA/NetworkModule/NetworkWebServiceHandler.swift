@@ -208,7 +208,7 @@ class NetworkWebServiceHandler: NSObject, URLSessionDelegate {
             var request = URLRequest.init(url: requestUrl!, cachePolicy: URLRequest.CachePolicy.useProtocolCachePolicy, timeoutInterval: self.connectionTimeoutInterval)
           
             
-            if params != nil{
+            if params != nil && (params?.count)! > 0{
                 let data = try JSONSerialization.data(withJSONObject: params!, options: JSONSerialization.WritingOptions.prettyPrinted)
                 request.httpBody = data
             }
@@ -241,6 +241,9 @@ class NetworkWebServiceHandler: NSObject, URLSessionDelegate {
                         self.handleResponse(data, response: response, requestName: requestName, error: error as NSError?)
                     }
                     
+                }
+                else {
+                    print("error\(error)")
                 }
                 }.resume()
             

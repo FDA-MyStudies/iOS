@@ -15,6 +15,7 @@ class StudyHomeViewController : UIViewController{
     @IBOutlet var pageControlView : UIPageControl?
     @IBOutlet var buttonBack : UIButton!
     @IBOutlet var buttonStar : UIButton!
+    @IBOutlet var buttonJoinStudy : UIButton?
     
     var pageViewController: PageViewController? {
         didSet {
@@ -87,6 +88,16 @@ class StudyHomeViewController : UIViewController{
         }
     }
     
+    
+    
+    @IBAction func buttonActionJoinStudy(_ sender: UIButton){
+        if User.currentUser.userType == UserType.AnonymousUser{
+            let leftController = slideMenuController()?.leftViewController as! LeftMenuViewController
+            leftController.changeViewController(.profile_signin)
+        }
+    }
+
+    
     @IBAction func backButtonAction(_ sender: Any) {
         
         _ = self.navigationController?.popViewController(animated: true)
@@ -119,10 +130,23 @@ extension StudyHomeViewController: PageViewControllerDelegate {
     
     func pageViewController(pageViewController: PageViewController, didUpdatePageCount count: Int){
         pageControlView?.numberOfPages = count
+        
     }
     
     func pageViewController(pageViewController: PageViewController, didUpdatePageIndex index: Int) {
         pageControlView?.currentPage = index
+        
+        if index == 0 {
+            // for First Page
+            
+            buttonJoinStudy?.backgroundColor = kUIColorForSubmitButtonBackground
+            buttonJoinStudy?.setTitleColor(UIColor.white, for: .normal)
+            
+        } else {
+            // for All other pages
+            buttonJoinStudy?.backgroundColor = UIColor.white
+            buttonJoinStudy?.setTitleColor(kUIColorForSubmitButtonBackground, for: .normal)
+        }
     }
     
 }

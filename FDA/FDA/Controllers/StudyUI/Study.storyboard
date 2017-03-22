@@ -34,6 +34,27 @@
                                     <segue destination="150-x0-BlR" kind="embed" id="a99-xZ-e3g"/>
                                 </connections>
                             </containerView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MKo-wh-p4O">
+                                <rect key="frame" x="112" y="532" width="152" height="42"/>
+                                <color key="backgroundColor" red="0.0" green="0.48627450979999998" blue="0.72941176470000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
+                                <state key="normal" title="Join Study">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="4"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="layer.clipsToBounds" value="YES"/>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
+                                        <integer key="value" value="1"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="buttonActionJoinStudy:" destination="N5Y-rW-mwD" eventType="touchUpInside" id="8Ca-aJ-4bL"/>
+                                </connections>
+                            </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="p2D-fQ-5xZ">
                                 <rect key="frame" x="8" y="11" width="50" height="50"/>
                                 <constraints>
@@ -71,15 +92,19 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="p2D-fQ-5xZ" firstAttribute="leading" secondItem="EmZ-HA-ZIB" secondAttribute="leadingMargin" constant="-8" id="7aH-Gl-Hqc"/>
+                            <constraint firstItem="MKo-wh-p4O" firstAttribute="height" secondItem="EmZ-HA-ZIB" secondAttribute="height" multiplier="42/667" id="LCN-B9-cHr"/>
                             <constraint firstItem="XyM-as-imD" firstAttribute="top" secondItem="EmZ-HA-ZIB" secondAttribute="top" id="OXV-ir-VOG"/>
                             <constraint firstAttribute="trailing" secondItem="XyM-as-imD" secondAttribute="trailing" id="PAh-fY-VyR"/>
                             <constraint firstItem="spx-SF-bV8" firstAttribute="width" secondItem="EmZ-HA-ZIB" secondAttribute="width" multiplier="70/375" id="QaN-TR-BW2"/>
                             <constraint firstItem="y8U-nc-Trc" firstAttribute="top" secondItem="XyM-as-imD" secondAttribute="bottom" id="Qzc-bK-EXq"/>
                             <constraint firstItem="XyM-as-imD" firstAttribute="leading" secondItem="EmZ-HA-ZIB" secondAttribute="leading" id="X1g-Mz-fDY"/>
                             <constraint firstItem="p2D-fQ-5xZ" firstAttribute="top" secondItem="0N0-It-5jQ" secondAttribute="bottom" constant="-9" id="bhy-W2-oti"/>
+                            <constraint firstItem="MKo-wh-p4O" firstAttribute="centerX" secondItem="EmZ-HA-ZIB" secondAttribute="centerX" id="gU1-1S-pnn"/>
                             <constraint firstItem="spx-SF-bV8" firstAttribute="centerX" secondItem="EmZ-HA-ZIB" secondAttribute="centerX" id="gby-Fp-War"/>
                             <constraint firstAttribute="trailingMargin" secondItem="9vo-zr-UJ0" secondAttribute="trailing" constant="-10" id="h0c-fu-IdX"/>
+                            <constraint firstItem="MKo-wh-p4O" firstAttribute="centerY" secondItem="EmZ-HA-ZIB" secondAttribute="centerY" multiplier="1.65817" id="hqY-1G-tB7"/>
                             <constraint firstItem="9vo-zr-UJ0" firstAttribute="top" secondItem="0N0-It-5jQ" secondAttribute="bottom" constant="-9" id="jwt-tU-50R"/>
+                            <constraint firstItem="MKo-wh-p4O" firstAttribute="width" secondItem="EmZ-HA-ZIB" secondAttribute="width" multiplier="152/375" id="sqb-d1-YCM"/>
                             <constraint firstItem="spx-SF-bV8" firstAttribute="centerY" secondItem="EmZ-HA-ZIB" secondAttribute="centerY" multiplier="1.50675" id="vgf-zN-kET"/>
                         </constraints>
                     </view>
@@ -89,6 +114,7 @@
                     <size key="freeformSize" width="375" height="667"/>
                     <connections>
                         <outlet property="buttonBack" destination="p2D-fQ-5xZ" id="VUN-DG-vWo"/>
+                        <outlet property="buttonJoinStudy" destination="MKo-wh-p4O" id="XPO-g0-9ko"/>
                         <outlet property="buttonStar" destination="9vo-zr-UJ0" id="FpR-f5-7Jg"/>
                         <outlet property="container" destination="XyM-as-imD" id="zg6-NZ-qCM"/>
                         <outlet property="pageControlView" destination="spx-SF-bV8" id="Tpx-Rw-4mV"/>
@@ -137,7 +163,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="OverViewBg" translatesAutoresizingMaskIntoConstraints="NO" id="d2e-7Y-Ifc">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="OverViewBg" translatesAutoresizingMaskIntoConstraints="NO" id="d2e-7Y-Ifc">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </imageView>
@@ -171,7 +197,7 @@
                                     <action selector="watchVideoButtonAction:" destination="BSo-U7-UDQ" eventType="touchUpInside" id="jCj-4q-NiI"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5NQ-r5-mSz">
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5NQ-r5-mSz">
                                 <rect key="frame" x="112" y="532" width="152" height="43"/>
                                 <color key="backgroundColor" red="0.0" green="0.48627450979999998" blue="0.72941176470000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
@@ -282,7 +308,7 @@
                                         <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="19"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lIT-J9-U7S">
+                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lIT-J9-U7S">
                                         <rect key="frame" x="120" y="260" width="135" height="40"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
                                         <state key="normal" title="Join Study">

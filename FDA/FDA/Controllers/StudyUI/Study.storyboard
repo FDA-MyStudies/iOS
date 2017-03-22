@@ -338,7 +338,6 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wIC-kn-yNP">
                                         <rect key="frame" x="8" y="333" width="110" height="41"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="110" id="9dc-yN-qTr"/>
                                             <constraint firstAttribute="height" constant="41" id="uuW-gC-Z0e"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
@@ -350,13 +349,12 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mud-v9-9iS">
-                                        <rect key="frame" x="263" y="333" width="110" height="41"/>
+                                        <rect key="frame" x="257" y="333" width="110" height="41"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="41" id="LbF-Ee-zaH"/>
-                                            <constraint firstAttribute="width" constant="110" id="iZp-pu-UBM"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
-                                        <state key="normal" title="Learn More">
+                                        <state key="normal" title="View Consent">
                                             <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
@@ -369,8 +367,9 @@
                                     <constraint firstItem="cQm-5R-c9C" firstAttribute="centerY" secondItem="jau-h2-6iA" secondAttribute="centerY" multiplier="0.578947" id="4IF-X0-1p6"/>
                                     <constraint firstItem="lIT-J9-U7S" firstAttribute="width" secondItem="jau-h2-6iA" secondAttribute="width" multiplier="135/375" id="5N9-DY-JNC"/>
                                     <constraint firstItem="lIT-J9-U7S" firstAttribute="centerY" secondItem="jau-h2-6iA" secondAttribute="centerY" multiplier="1.47368" id="5e9-BI-Sa5"/>
-                                    <constraint firstAttribute="trailing" secondItem="mud-v9-9iS" secondAttribute="trailing" constant="2" id="CWw-sb-jrA"/>
+                                    <constraint firstAttribute="trailing" secondItem="mud-v9-9iS" secondAttribute="trailing" constant="8" id="CWw-sb-jrA"/>
                                     <constraint firstItem="GRW-q2-dac" firstAttribute="width" secondItem="jau-h2-6iA" secondAttribute="width" id="GdA-Gj-U9l"/>
+                                    <constraint firstItem="wIC-kn-yNP" firstAttribute="width" secondItem="jau-h2-6iA" secondAttribute="width" multiplier="110/375" id="MWz-Rz-tby"/>
                                     <constraint firstItem="GRW-q2-dac" firstAttribute="centerY" secondItem="jau-h2-6iA" secondAttribute="centerY" multiplier="1.72368" id="Mrp-Ft-QGV"/>
                                     <constraint firstItem="cQm-5R-c9C" firstAttribute="width" secondItem="jau-h2-6iA" secondAttribute="width" multiplier="340/375" id="P1s-8Z-iQj"/>
                                     <constraint firstItem="lIT-J9-U7S" firstAttribute="centerX" secondItem="jau-h2-6iA" secondAttribute="centerX" id="QZe-Nd-phq"/>
@@ -381,10 +380,11 @@
                                     <constraint firstItem="cQm-5R-c9C" firstAttribute="height" secondItem="jau-h2-6iA" secondAttribute="height" multiplier="190/380" id="pJp-PF-mlP"/>
                                     <constraint firstItem="wIC-kn-yNP" firstAttribute="leading" secondItem="jau-h2-6iA" secondAttribute="leading" constant="8" id="pbE-7h-d3g"/>
                                     <constraint firstItem="GRW-q2-dac" firstAttribute="centerX" secondItem="jau-h2-6iA" secondAttribute="centerX" id="tGI-fj-ZkP"/>
+                                    <constraint firstItem="mud-v9-9iS" firstAttribute="width" secondItem="jau-h2-6iA" secondAttribute="width" multiplier="110/375" id="yRW-pU-Y1C"/>
                                 </constraints>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="3EU-2E-MZV" firstAttribute="width" secondItem="rXI-xG-apb" secondAttribute="width" multiplier="240/375" id="ITF-Yv-Tpl"/>
                             <constraint firstItem="3EU-2E-MZV" firstAttribute="height" secondItem="rXI-xG-apb" secondAttribute="height" multiplier="85/667" id="IUj-zs-UEd"/>
@@ -411,6 +411,7 @@
                         <outlet property="imageViewStudy" destination="yw2-aH-SLQ" id="QEU-LZ-zOP"/>
                         <outlet property="labelDescription" destination="cQm-5R-c9C" id="SNl-aY-2nJ"/>
                         <outlet property="labelTitle" destination="3EU-2E-MZV" id="3vW-F5-GXh"/>
+                        <outlet property="viewConsentButtonConstraint" destination="yRW-pU-Y1C" id="6pI-mf-m6l"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zXt-yf-Ky1" userLabel="First Responder" sceneMemberID="firstResponder"/>

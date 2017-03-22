@@ -10,15 +10,15 @@ import Foundation
 import UIKit
 
 class WebViewController : UIViewController{
-
+    
     @IBOutlet var webView : UIWebView?
     var activityIndicator:UIActivityIndicatorView!
     var requestLink:String!
-    
+    var htmlString:String!
     override func viewDidLoad() {
         super.viewDidLoad()
         
-
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -35,11 +35,30 @@ class WebViewController : UIViewController{
         
         
         
-        let url = URL.init(string: requestLink)
-        let urlRequest = URLRequest.init(url: url!)
-        webView?.loadRequest(urlRequest)
+        
+        
+        
+        if Study.currentStudy?.consentDocument?.mimeType == MimeType.html {
+            webView?.loadHTMLString((Study.currentStudy?.consentDocument?.htmlString)!, baseURL: nil)
+        }
+        else{
+            // assumed to be link
+            
+            if Study.currentStudy?.consentDocument != nil {
+                let url = URL.init(string: (Study.currentStudy?.consentDocument?.htmlString)!)
+                let urlRequest = URLRequest.init(url: url!)
+                
+                webView?.loadRequest(urlRequest)
+                
+            }
+            
+        }
+        
+        
+        
+        
         webView?.delegate = self
-       
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {

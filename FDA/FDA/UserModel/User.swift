@@ -27,7 +27,8 @@ enum LogoutReason:String{
 let kUserValueForOS = "ios"
 
 let kCFBundleShortVersionString = "CFBundleShortVersionString"
-
+let kTerms = "terms"
+let kPolicy = "privacy"
 
 //MARK: User
 class User{
@@ -469,6 +470,36 @@ class UserStudyStatus{
                            kBookmarked:self.bookmarked] as [String : Any]
         return studyDetail
     }
+    
+}
+
+class TermsAndPolicy {
+    var termsURL:String?
+    var policyURL:String?
+    static var currentTermsAndPolicy: TermsAndPolicy?
+    init() {
+        self.termsURL = ""
+        self.policyURL = ""
+    }
+     func initWithDict(dict:Dictionary<String,Any>) {
+        if Utilities.isValidObject(someObject: dict as AnyObject) {
+            
+            if Utilities.isValidValue(someObject: dict[kTerms] as AnyObject?)  {
+                self.termsURL = dict[kTerms] as! String?
+            }
+            else{
+                 self.termsURL = ""
+            }
+            
+            if Utilities.isValidValue(someObject: dict[kPolicy] as AnyObject?) {
+                 self.policyURL = dict[kPolicy] as! String?
+            }
+            else{
+                self.policyURL = ""
+            }
+        }
+    }
+    
     
 }
 

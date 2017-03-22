@@ -49,13 +49,34 @@
                                 </connections>
                             </button>
                             <pageControl opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="2" translatesAutoresizingMaskIntoConstraints="NO" id="4Nk-cF-eK0">
-                                <rect key="frame" x="168" y="472" width="40" height="37"/>
+                                <rect key="frame" x="168" y="488" width="40" height="37"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="37" id="zxd-bn-cUg"/>
                                 </constraints>
                                 <color key="pageIndicatorTintColor" red="0.84705882352941175" green="0.8901960784313725" blue="0.90196078431372551" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="currentPageIndicatorTintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </pageControl>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="G1v-Yc-O0B">
+                                <rect key="frame" x="120" y="541" width="135" height="42"/>
+                                <color key="backgroundColor" red="0.0" green="0.48627450979999998" blue="0.72941176470000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
+                                <state key="normal" title="Get Started">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="4"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="layer.clipsToBounds" value="YES"/>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
+                                        <integer key="value" value="1"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="getStartedButtonClicked:" destination="35J-FP-kDe" eventType="touchUpInside" id="eQK-yY-WMU"/>
+                                </connections>
+                            </button>
                             <view alpha="0.80000000000000004" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vwF-hX-3DE">
                                 <rect key="frame" x="0.0" y="607" width="375" height="60"/>
                                 <subviews>
@@ -108,13 +129,17 @@
                             <constraint firstAttribute="trailing" secondItem="HFj-v4-1Yb" secondAttribute="trailing" id="4Zx-kQ-YGp"/>
                             <constraint firstItem="HFj-v4-1Yb" firstAttribute="leading" secondItem="KB9-1S-d5W" secondAttribute="leading" id="6bj-qh-nak"/>
                             <constraint firstItem="zqZ-PQ-IFe" firstAttribute="top" secondItem="KB9-1S-d5W" secondAttribute="topMargin" constant="16" id="9Fb-vS-iGP"/>
+                            <constraint firstItem="G1v-Yc-O0B" firstAttribute="height" secondItem="KB9-1S-d5W" secondAttribute="height" multiplier="42/667" id="FfR-X9-DAC"/>
+                            <constraint firstItem="G1v-Yc-O0B" firstAttribute="centerY" secondItem="KB9-1S-d5W" secondAttribute="centerY" multiplier="1.68216" id="JzS-I4-u8b"/>
                             <constraint firstAttribute="trailing" secondItem="vwF-hX-3DE" secondAttribute="trailing" id="KlN-a2-RF9"/>
                             <constraint firstItem="4Nk-cF-eK0" firstAttribute="width" secondItem="KB9-1S-d5W" secondAttribute="width" multiplier="40/375" id="Q48-ka-av0"/>
+                            <constraint firstItem="G1v-Yc-O0B" firstAttribute="centerX" secondItem="KB9-1S-d5W" secondAttribute="centerX" id="UBQ-hZ-jAn"/>
                             <constraint firstItem="4Nk-cF-eK0" firstAttribute="centerX" secondItem="KB9-1S-d5W" secondAttribute="centerX" id="bhp-yy-DWw"/>
                             <constraint firstItem="vwF-hX-3DE" firstAttribute="leading" secondItem="KB9-1S-d5W" secondAttribute="leading" id="dRJ-yz-dxe"/>
                             <constraint firstItem="HFj-v4-1Yb" firstAttribute="top" secondItem="KB9-1S-d5W" secondAttribute="top" id="hkg-6D-JNs"/>
+                            <constraint firstItem="G1v-Yc-O0B" firstAttribute="width" secondItem="KB9-1S-d5W" secondAttribute="width" multiplier="135/375" id="liE-B1-hER"/>
                             <constraint firstItem="m6o-Mj-jRm" firstAttribute="top" secondItem="HFj-v4-1Yb" secondAttribute="bottom" id="nhY-sE-5vn"/>
-                            <constraint firstItem="4Nk-cF-eK0" firstAttribute="centerY" secondItem="KB9-1S-d5W" secondAttribute="centerY" multiplier="1.65667" constant="-62.000000010699978" id="qCH-fx-QNK"/>
+                            <constraint firstItem="4Nk-cF-eK0" firstAttribute="centerY" secondItem="KB9-1S-d5W" secondAttribute="centerY" multiplier="1.65667" constant="-46" id="qCH-fx-QNK"/>
                             <constraint firstAttribute="trailingMargin" secondItem="zqZ-PQ-IFe" secondAttribute="trailing" constant="6" id="sXG-mx-9Xy"/>
                             <constraint firstItem="vwF-hX-3DE" firstAttribute="height" secondItem="KB9-1S-d5W" secondAttribute="height" multiplier="60/667" id="tmp-9C-WQ9"/>
                             <constraint firstItem="m6o-Mj-jRm" firstAttribute="top" secondItem="vwF-hX-3DE" secondAttribute="bottom" id="vhX-aa-p33"/>
@@ -125,6 +150,7 @@
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="375" height="667"/>
                     <connections>
+                        <outlet property="buttonGetStarted" destination="G1v-Yc-O0B" id="xi4-BB-sF2"/>
                         <outlet property="buttonLink" destination="zqZ-PQ-IFe" id="z3R-qq-zOp"/>
                         <outlet property="buttonRegister" destination="Jyn-tg-ixg" id="bb1-DP-Vzp"/>
                         <outlet property="buttonSignin" destination="WsS-eE-w8m" id="e0f-bY-UFZ"/>
@@ -413,7 +439,7 @@
                                     <action selector="watchVideoButtonClicked:" destination="q1c-F7-xg0" eventType="touchUpInside" id="lbs-mu-F1S"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vIh-lT-4bl">
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vIh-lT-4bl">
                                 <rect key="frame" x="111.5" y="532" width="152" height="43"/>
                                 <color key="backgroundColor" red="0.0" green="0.48627450979999998" blue="0.72941176470000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
@@ -474,7 +500,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pV0-nB-Fl5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="831" y="362"/>
+            <point key="canvasLocation" x="829.60000000000002" y="361.16941529235385"/>
         </scene>
         <!--Second Gateway Overview View Controller-->
         <scene sceneID="lv7-bL-5k5">
@@ -505,7 +531,7 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qls-nn-uxZ">
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qls-nn-uxZ">
                                 <rect key="frame" x="120" y="541" width="135" height="40"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
                                 <state key="normal" title="Get Started">
@@ -1022,7 +1048,7 @@
         <image name="welcomeBg" width="375" height="667"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="VqN-my-PFn"/>
+        <segue reference="Xbj-IV-jBd"/>
         <segue reference="Wsb-hw-1LK"/>
     </inferredMetricsTieBreakers>
 </document>

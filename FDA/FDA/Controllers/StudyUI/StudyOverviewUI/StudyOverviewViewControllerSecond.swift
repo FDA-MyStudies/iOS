@@ -41,7 +41,20 @@ class StudyOverviewViewControllerSecond : UIViewController{
         super.viewWillAppear(animated)
         
         labelTitle?.text = overviewSectionDetail.title
-        labelDescription?.text = overviewSectionDetail.text
+        
+        let attrStr = try! NSAttributedString(
+            data: (overviewSectionDetail.text?.data(using: String.Encoding.unicode, allowLossyConversion: true)!)!,
+            options: [ NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType],
+            documentAttributes: nil)
+        
+        if Utilities.isValidValue(someObject: attrStr.string as AnyObject?){
+            self.labelDescription?.text = attrStr.string
+        }
+        else{
+            self.labelDescription?.text = ""
+        }
+
+        //labelDescription?.text = overviewSectionDetail.text
     }
     
     override func viewDidAppear(_ animated: Bool) {

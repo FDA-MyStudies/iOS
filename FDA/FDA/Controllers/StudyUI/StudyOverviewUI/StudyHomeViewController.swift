@@ -136,6 +136,7 @@ extension StudyHomeViewController: PageViewControllerDelegate {
     func pageViewController(pageViewController: PageViewController, didUpdatePageIndex index: Int) {
         pageControlView?.currentPage = index
         
+        buttonJoinStudy?.layer.borderColor = kUicolorForButtonBackground
         if index == 0 {
             // for First Page
             

@@ -229,7 +229,7 @@ class NetworkWebServiceHandler: NSObject, URLSessionDelegate {
     fileprivate func fireRequest (_ request : URLRequest? , requestName : NSString?){
         
         if NetworkManager.isNetworkAvailable(){
-           // mURLRequest = request!
+            // mURLRequest = request!
             let config = URLSessionConfiguration.default
             let session = Foundation.URLSession.init(configuration: config, delegate: self , delegateQueue: nil)
             
@@ -242,9 +242,15 @@ class NetworkWebServiceHandler: NSObject, URLSessionDelegate {
                     }
                     
                 }
+                else {
+                    DispatchQueue.main.async {
+                        self.delegate?.failedRequest(self.networkManager!, requestName: requestName!,error: error! as NSError)
+                    }
+                    
+                }
                 }.resume()
             
-
+            
         }else{
             if ((delegate?.failedRequest) != nil) {
                 //let error1 = NSError(domain: "Network not available", code:0,userInfo: nil)

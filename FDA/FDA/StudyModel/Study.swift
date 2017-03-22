@@ -9,13 +9,52 @@
 
 import Foundation
 
+let kConsentDocumentType = "type"
+let kConsentDocumentVersion = "version"
+let kConsentDocumentContent = "content"
+
 enum StudyStatus:String{
     case active
     case upcoming
     case closed
 }
-class Study {
 
+struct ConsentDocument {
+    
+    var htmlString:String?
+    var mimeType:MimeType?
+    var version:String?
+    
+    mutating func initialize(){
+        self.mimeType = .html
+        self.htmlString = ""
+        self.version = ""
+    }
+    
+    mutating func initData(consentDoucumentdict:Dictionary<String,Any>){
+        if Utilities.isValidObject(someObject: consentDoucumentdict as AnyObject?){
+            
+            if Utilities.isValidValue(someObject: consentDoucumentdict[kConsentDocumentType] as AnyObject ){
+                self.mimeType = MimeType(rawValue:consentDoucumentdict[kConsentDocumentType] as! String)
+            }
+            
+            if Utilities.isValidValue(someObject: consentDoucumentdict[kConsentDocumentContent] as AnyObject ){
+                self.htmlString = consentDoucumentdict[kConsentDocumentContent] as? String
+            }
+            
+            if Utilities.isValidValue(someObject: consentDoucumentdict[kConsentDocumentVersion] as AnyObject ){
+                self.version = consentDoucumentdict[kConsentDocumentVersion] as? String
+            }
+        }
+        else{
+            Logger.sharedInstance.debug("Study Dictionary is null:\(consentDoucumentdict)")
+        }
+    }
+    
+}
+
+class Study {
+    
     //MARK:Properties
     var studyId:String!
     var name:String?
@@ -31,6 +70,8 @@ class Study {
     var logoURL:String?
     var overview:Overview!
     var activities:Array<Activity>!
+    
+    var consentDocument:ConsentDocument?
     
     static var currentStudy:Study? = nil
     
@@ -66,14 +107,16 @@ class Study {
         else{
             Logger.sharedInstance.debug("Study Dictionary is null:\(studyDetail)")
         }
-
+        
     }
+    
+    
     
     
     class  func updateCurrentStudy(study:Study){
         Study.currentStudy = study
     }
     
-     
+    
     
 }

@@ -3,6 +3,11 @@ PODS:
     - Fabric (~> 1.6.3)
   - Fabric (1.6.11)
   - IQKeyboardManagerSwift (4.0.8)
+  - Realm (2.4.3):
+    - Realm/Headers (= 2.4.3)
+  - Realm/Headers (2.4.3)
+  - RealmSwift (2.4.3):
+    - Realm (= 2.4.3)
   - SDWebImage (4.0.0):
     - SDWebImage/Core (= 4.0.0)
   - SDWebImage/Core (4.0.0)
@@ -12,6 +17,7 @@ DEPENDENCIES:
   - Crashlytics
   - Fabric
   - IQKeyboardManagerSwift
+  - RealmSwift
   - SDWebImage
   - SlideMenuControllerSwift
 
@@ -19,9 +25,11 @@ SPEC CHECKSUMS:
   Crashlytics: 79e236942ca1e7fc641df1feb9a275360a78ab6a
   Fabric: 5911403591946b8228ab1c51d98f1d7137e863c6
   IQKeyboardManagerSwift: c04bc9f68473823f825eb44d958fce98d921bead
+  Realm: e08d60b0048ccccd3949c8c28a92c4db5712d7e9
+  RealmSwift: 30d49739ccb3385d201242736ca4dda56aec9dfc
   SDWebImage: 76a6348bdc74eb5a55dd08a091ef298e56b55e41
   SlideMenuControllerSwift: 9a163b16d54afab734add42858cba7ef7c307755
 
-PODFILE CHECKSUM: 2b847b23b6e5cab07b4ee3fc98360b40478a7677
+PODFILE CHECKSUM: fe0a2ad198aa0ca8ac2185cce64576b5518853c7
 
 COCOAPODS: 1.0.1

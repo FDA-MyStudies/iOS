@@ -13,6 +13,7 @@ target 'FDA' do
   pod 'Fabric'
   pod 'Crashlytics'
   pod 'SDWebImage'
+  pod 'RealmSwift'
 
   target 'FDATests' do
     inherit! :search_paths

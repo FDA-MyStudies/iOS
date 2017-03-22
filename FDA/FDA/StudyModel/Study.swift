@@ -52,8 +52,8 @@ class Study {
             if Utilities.isValidValue(someObject: studyDetail[kStudySponserName] as AnyObject ){
                 self.sponserName = studyDetail[kStudySponserName] as? String
             }
-            if Utilities.isValidValue(someObject: studyDetail[kStudyDescription] as AnyObject ){
-                self.description = studyDetail[kStudyDescription] as? String
+            if Utilities.isValidValue(someObject: studyDetail[kStudyTagLine] as AnyObject ){
+                self.description = studyDetail[kStudyTagLine] as? String
             }
             if Utilities.isValidValue(someObject: studyDetail[kStudyLogoURL] as AnyObject ) {
                 self.logoURL = studyDetail[kStudyLogoURL] as? String

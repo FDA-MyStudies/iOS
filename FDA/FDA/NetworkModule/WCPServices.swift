@@ -17,6 +17,8 @@ let kStudyTitle = "title"
 let kStudyCategory = "category"
 let kStudySponserName = "sponsorName"
 let kStudyDescription = "description"
+let kStudyTagLine = "tagline"
+
 let kStudyStatus = "status"
 let kStudyLogoURL = "logo"
 

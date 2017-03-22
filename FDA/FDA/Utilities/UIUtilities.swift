@@ -19,7 +19,7 @@ class UIUtilities: NSObject {
     class func showAlertWithTitleAndMessage(title: NSString, message : NSString)->Void {
         
         
-          let alert = UIAlertController(title:"",message:message as String,preferredStyle: UIAlertControllerStyle.alert)
+          let alert = UIAlertController(title:title as String,message:message as String,preferredStyle: UIAlertControllerStyle.alert)
           alert.addAction(UIAlertAction(title:NSLocalizedString("OK", comment: ""), style: .default, handler: nil))
           UIApplication.shared.keyWindow?.rootViewController?.present(alert, animated: true, completion: nil)
          

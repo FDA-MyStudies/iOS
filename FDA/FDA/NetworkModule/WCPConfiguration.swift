@@ -40,13 +40,13 @@ struct WCPServerURLConstants {
     //TODO: Set the server end points
     
     //Production
-    //static let ProductionURL = "http://192.168.0.50:8080/StudyMetaData/"
-    //static let DevelopmentURL = "http://192.168.0.50:8080/StudyMetaData/"
+    static let ProductionURL = "http://192.168.0.50:8080/StudyMetaData/"
+    static let DevelopmentURL = "http://192.168.0.50:8080/StudyMetaData/"
     
     
     //Dev
-    static let ProductionURL = "http://192.168.0.50:8080/StudyMetaData-DEV/"
-    static let DevelopmentURL = "http://192.168.0.50:8080/StudyMetaData-DEV/"
+    //static let ProductionURL = "http://192.168.0.50:8080/StudyMetaData-DEV/"
+    //static let DevelopmentURL = "http://192.168.0.50:8080/StudyMetaData-DEV/"
     
     
     //local

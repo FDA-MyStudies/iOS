@@ -19,7 +19,7 @@ class StudyOverviewViewControllerSecond : UIViewController{
     @IBOutlet var labelDescription : UILabel?
     @IBOutlet var imageViewStudy : UIImageView?
     
-    @IBOutlet var viewConsentButtonConstraint:NSLayoutConstraint?
+   
     
     var overViewWebsiteLink:String?
     var overviewSectionDetail : OverviewSection!
@@ -36,7 +36,8 @@ class StudyOverviewViewControllerSecond : UIViewController{
          UIApplication.shared.statusBarStyle = .lightContent
         
         
-         WCPServices().getConsentDocument(studyId: (Study.currentStudy?.studyId)!, delegate: self as NMWebServiceDelegate)
+        
+        
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -62,17 +63,7 @@ class StudyOverviewViewControllerSecond : UIViewController{
 
         //labelDescription?.text = overviewSectionDetail.text
         
-        if Utilities.isValidValue(someObject: overViewWebsiteLink as AnyObject? ) ==  false{
-           // if website link is nil
-            
-           buttonVisitWebsite?.isHidden =  true
-           viewConsentButtonConstraint?.constant = UIScreen.main.bounds.size.width - 16
-            
-        }
-        else{
-            buttonVisitWebsite?.isHidden = false
-             viewConsentButtonConstraint?.constant = 0
-        }
+       
         
         
         
@@ -115,21 +106,7 @@ class StudyOverviewViewControllerSecond : UIViewController{
     
 }
 
-extension StudyOverviewViewControllerSecond:NMWebServiceDelegate {
-    
-    func startedRequest(_ manager: NetworkManager, requestName: NSString) {
-        Logger.sharedInstance.info("requestname : \(requestName)")
-        
-    
-    }
-    func finishedRequest(_ manager: NetworkManager, requestName: NSString, response: AnyObject?) {
-        Logger.sharedInstance.info("requestname : \(requestName)")
-    }
-    func failedRequest(_ manager: NetworkManager, requestName: NSString, error: NSError) {
-        Logger.sharedInstance.info("requestname : \(requestName)")
 
-    }
-}
 
 
 

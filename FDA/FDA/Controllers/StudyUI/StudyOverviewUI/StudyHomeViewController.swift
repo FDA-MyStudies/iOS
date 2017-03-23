@@ -16,6 +16,11 @@ class StudyHomeViewController : UIViewController{
     @IBOutlet var buttonBack : UIButton!
     @IBOutlet var buttonStar : UIButton!
     @IBOutlet var buttonJoinStudy : UIButton?
+    @IBOutlet var visitWebsiteButtonLeadingConstraint:NSLayoutConstraint?
+    @IBOutlet var buttonVisitWebsite : UIButton?
+    @IBOutlet var buttonViewConsent : UIButton?
+    
+    @IBOutlet var viewSeperater: UIView?
     
     var pageViewController: PageViewController? {
         didSet {
@@ -38,6 +43,15 @@ class StudyHomeViewController : UIViewController{
         if User.currentUser.userType == UserType.AnonymousUser {
             buttonStar.isHidden = true
         }
+       
+        
+        
+            if Study.currentStudy?.studyId != nil {
+                WCPServices().getConsentDocument(studyId: (Study.currentStudy?.studyId)!, delegate: self as NMWebServiceDelegate)
+            }
+    
+        
+        
         
     }
     
@@ -47,6 +61,22 @@ class StudyHomeViewController : UIViewController{
         //hide navigationbar
         //self.navigationController?.setNavigationBarHidden(true, animated: true)
         
+        
+        
+        
+        
+        if Utilities.isValidValue(someObject: Study.currentStudy?.overview.websiteLink as AnyObject? ) ==  false{
+            // if website link is nil
+            
+            buttonVisitWebsite?.isHidden =  true
+            visitWebsiteButtonLeadingConstraint?.constant = UIScreen.main.bounds.size.width/2 - 13
+            viewSeperater?.isHidden = true
+        }
+        else{
+            buttonVisitWebsite?.isHidden = false
+            visitWebsiteButtonLeadingConstraint?.constant = 0
+            viewSeperater?.isHidden = false
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -112,6 +142,29 @@ class StudyHomeViewController : UIViewController{
         }
     }
     
+    @IBAction func visitWebsiteButtonAction(_ sender: UIButton) {
+        
+        let loginStoryboard = UIStoryboard.init(name: "Main", bundle:Bundle.main)
+        let webViewController = loginStoryboard.instantiateViewController(withIdentifier:"WebViewController") as! UINavigationController
+        let webView = webViewController.viewControllers[0] as! WebViewController
+        //webView.requestLink = "http://www.fda.gov"
+        
+        
+        if sender.tag == 1188 {
+            //Visit Website
+            webView.requestLink = Study.currentStudy?.overview.websiteLink
+            
+        } else {
+            //View Consent
+            webView.htmlString = (Study.currentStudy?.consentDocument?.htmlString)
+        }
+        
+        
+        self.navigationController?.present(webViewController, animated: true, completion: nil)
+    }
+
+    
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let pageViewController = segue.destination as? PageViewController {
             pageViewController.pageViewDelegate = self
@@ -150,4 +203,21 @@ extension StudyHomeViewController: PageViewControllerDelegate {
         }
     }
     
+}
+
+
+extension StudyHomeViewController:NMWebServiceDelegate {
+    
+    func startedRequest(_ manager: NetworkManager, requestName: NSString) {
+        Logger.sharedInstance.info("requestname : \(requestName)")
+        
+        
+    }
+    func finishedRequest(_ manager: NetworkManager, requestName: NSString, response: AnyObject?) {
+        Logger.sharedInstance.info("requestname : \(requestName)")
+    }
+    func failedRequest(_ manager: NetworkManager, requestName: NSString, error: NSError) {
+        Logger.sharedInstance.info("requestname : \(requestName)")
+        
+    }
 }

@@ -21,7 +21,7 @@ class StudyOverviewViewControllerFirst : UIViewController{
     @IBOutlet var labelDescription : UILabel?
     @IBOutlet var imageViewStudy : UIImageView?
     
-    
+    var overViewWebsiteLink : String?
     var overviewSectionDetail : OverviewSection!
     
     var moviePlayer:MPMoviePlayerViewController!
@@ -56,10 +56,27 @@ class StudyOverviewViewControllerFirst : UIViewController{
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        labelTitle?.text = overviewSectionDetail.title
+         labelTitle?.text = overviewSectionDetail.title
         
         self.labelDescription?.text = overviewSectionDetail.text!
          WCPServices().getEligibilityConsentMetadata(studyId:(Study.currentStudy?.studyId)! , delegate: self)
+        
+        let attrStr = try! NSAttributedString(
+            data: (overviewSectionDetail.text?.data(using: String.Encoding.unicode, allowLossyConversion: true)!)!,
+            options: [ NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType],
+            documentAttributes: nil)
+        
+        if Utilities.isValidValue(someObject: attrStr.string as AnyObject?){
+             self.labelDescription?.text = attrStr.string
+        }
+        else{
+             self.labelDescription?.text = ""
+        }
+       
+        
+        
+        //self.labelDescription?.text = overviewSectionDetail.text!
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -152,12 +169,13 @@ class StudyOverviewViewControllerFirst : UIViewController{
     
     @IBAction func visitWebsiteButtonAction(_ sender: Any) {
         
-        if overviewSectionDetail.websiteLink != nil {
+        if overViewWebsiteLink != nil {
             
             let loginStoryboard = UIStoryboard.init(name: "Main", bundle:Bundle.main)
             let webViewController = loginStoryboard.instantiateViewController(withIdentifier:"WebViewController") as! UINavigationController
             let webView = webViewController.viewControllers[0] as! WebViewController
-            webView.requestLink = overviewSectionDetail.websiteLink!
+            
+            webView.requestLink = overViewWebsiteLink!
             self.navigationController?.present(webViewController, animated: true, completion: nil)
         }
     }

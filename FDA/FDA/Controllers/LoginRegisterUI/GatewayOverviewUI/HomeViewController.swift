@@ -17,7 +17,7 @@ class HomeViewController : UIViewController{
     @IBOutlet var buttonLink : UIButton!
     @IBOutlet var buttonSignin : UIButton!
     @IBOutlet var buttonRegister : UIButton!
-    
+    @IBOutlet var buttonGetStarted : UIButton?
     
     //MARK:View Controller Delegates
     
@@ -116,6 +116,22 @@ class HomeViewController : UIViewController{
     
     //MARK:Button Actions
     
+    //GetStarted Button Action
+    @IBAction func getStartedButtonClicked(_ sender: UIButton){
+        
+        self.createMenuView()
+    }
+    func createMenuView() {
+        
+        let storyboard = UIStoryboard(name: "Gateway", bundle: nil)
+        
+        let fda = storyboard.instantiateViewController(withIdentifier: "FDASlideMenuViewController") as! FDASlideMenuViewController
+        fda.automaticallyAdjustsScrollViewInsets = true
+        self.navigationController?.pushViewController(fda, animated: true)
+        
+    }
+    
+    
     @IBAction func linkButtonAction(_ sender: Any) {
         
         let loginStoryboard = UIStoryboard.init(name: "Main", bundle:Bundle.main)
@@ -156,6 +172,21 @@ extension HomeViewController: PageViewControllerDelegate {
     
     func pageViewController(pageViewController: PageViewController, didUpdatePageIndex index: Int) {
         pageControlView?.currentPage = index
+       
+        buttonGetStarted?.layer.borderColor = kUicolorForButtonBackground
+        
+        if index == 0 {
+            // for First Page
+           
+            buttonGetStarted?.backgroundColor = kUIColorForSubmitButtonBackground
+             buttonGetStarted?.setTitleColor(UIColor.white, for: .normal)
+            
+        } else {
+            // for All other pages
+            buttonGetStarted?.backgroundColor = UIColor.white
+            buttonGetStarted?.setTitleColor(kUIColorForSubmitButtonBackground, for: .normal)
+        }
+        
     }
     
 }

@@ -42,7 +42,7 @@ class SignUpViewController : UIViewController{
         //Used to set border color for bottom view
         buttonSubmit?.layer.borderColor = kUicolorForButtonBackground
         
-        self.agreeToTermsAndConditions()
+       
         self.title = NSLocalizedString(kSignUpTitleText, comment: "")
         
         //load plist info
@@ -60,7 +60,7 @@ class SignUpViewController : UIViewController{
         self.navigationController?.setNavigationBarHidden(false, animated: true)
         
         User.resetCurrentUser()
-        
+        WCPServices().getTermsPolicy(delegate: self)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -93,10 +93,10 @@ class SignUpViewController : UIViewController{
         let attributedString =  termsAndCondition?.attributedText.mutableCopy() as! NSMutableAttributedString
         
         var foundRange = attributedString.mutableString.range(of: "Terms")
-        attributedString.addAttribute(NSLinkAttributeName, value:kTermsAndConditionLink, range: foundRange)
+        attributedString.addAttribute(NSLinkAttributeName, value:(TermsAndPolicy.currentTermsAndPolicy?.termsURL!)! as String, range: foundRange)
         
         foundRange = attributedString.mutableString.range(of: "Privacy Policy")
-        attributedString.addAttribute(NSLinkAttributeName, value:kPrivacyPolicyLink, range: foundRange)
+        attributedString.addAttribute(NSLinkAttributeName, value:(TermsAndPolicy.currentTermsAndPolicy?.policyURL!)! as String  , range: foundRange)
         
         termsAndCondition?.attributedText = attributedString
         
@@ -246,11 +246,12 @@ extension SignUpViewController:UITextViewDelegate{
     
     func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange) -> Bool {
         
-        var link:String = kTermsAndConditionLink
+        var link:String =   (TermsAndPolicy.currentTermsAndPolicy?.termsURL)! //kTermsAndConditionLink
         var title:String = kNavigationTitleTerms
-        if (URL.absoluteString == kPrivacyPolicyLink) {
+        if (URL.absoluteString == TermsAndPolicy.currentTermsAndPolicy?.policyURL ) {
+            //kPrivacyPolicyLink
             print("terms")
-            link = kPrivacyPolicyLink
+            link =  (TermsAndPolicy.currentTermsAndPolicy?.policyURL)! // kPrivacyPolicyLink
             title = kNavigationTitlePrivacyPolicy
             
         }
@@ -420,13 +421,23 @@ extension SignUpViewController:NMWebServiceDelegate {
     func startedRequest(_ manager: NetworkManager, requestName: NSString) {
         
         Logger.sharedInstance.info("requestname : \(requestName)")
-        self.addProgressIndicator()
+        
+        if requestName .isEqual(to: RegistrationMethods.register.rawValue){
+            self.addProgressIndicator()
+        }
+    
     }
     func finishedRequest(_ manager: NetworkManager, requestName: NSString, response: AnyObject?) {
         Logger.sharedInstance.info("requestname : \(requestName)")
         
-        self.removeProgressIndicator()
-        self.navigateToVerificationController()
+       
+        if requestName .isEqual(to: RegistrationMethods.register.rawValue)   {
+             self.removeProgressIndicator()
+            self.navigateToVerificationController()
+        }
+        else{
+            self.agreeToTermsAndConditions()
+        }
         
     }
     func failedRequest(_ manager: NetworkManager, requestName: NSString, error: NSError) {

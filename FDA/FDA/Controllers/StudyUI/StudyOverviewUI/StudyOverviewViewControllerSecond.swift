@@ -19,6 +19,9 @@ class StudyOverviewViewControllerSecond : UIViewController{
     @IBOutlet var labelDescription : UILabel?
     @IBOutlet var imageViewStudy : UIImageView?
     
+    @IBOutlet var viewConsentButtonConstraint:NSLayoutConstraint?
+    
+    var overViewWebsiteLink:String?
     var overviewSectionDetail : OverviewSection!
     
     override func viewDidLoad() {
@@ -31,6 +34,9 @@ class StudyOverviewViewControllerSecond : UIViewController{
             imageViewStudy?.sd_setImage(with: url, placeholderImage:#imageLiteral(resourceName: "OverViewBg"))
         }
          UIApplication.shared.statusBarStyle = .lightContent
+        
+        
+         WCPServices().getConsentDocument(studyId: (Study.currentStudy?.studyId)!, delegate: self as NMWebServiceDelegate)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -41,7 +47,35 @@ class StudyOverviewViewControllerSecond : UIViewController{
         super.viewWillAppear(animated)
         
         labelTitle?.text = overviewSectionDetail.title
-        labelDescription?.text = overviewSectionDetail.text
+        
+        let attrStr = try! NSAttributedString(
+            data: (overviewSectionDetail.text?.data(using: String.Encoding.unicode, allowLossyConversion: true)!)!,
+            options: [ NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType],
+            documentAttributes: nil)
+        
+        if Utilities.isValidValue(someObject: attrStr.string as AnyObject?){
+            self.labelDescription?.text = attrStr.string
+        }
+        else{
+            self.labelDescription?.text = ""
+        }
+
+        //labelDescription?.text = overviewSectionDetail.text
+        
+        if Utilities.isValidValue(someObject: overViewWebsiteLink as AnyObject? ) ==  false{
+           // if website link is nil
+            
+           buttonVisitWebsite?.isHidden =  true
+           viewConsentButtonConstraint?.constant = UIScreen.main.bounds.size.width - 16
+            
+        }
+        else{
+            buttonVisitWebsite?.isHidden = false
+             viewConsentButtonConstraint?.constant = 0
+        }
+        
+        
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -58,12 +92,45 @@ class StudyOverviewViewControllerSecond : UIViewController{
         }
     }
     
-    @IBAction func visitWebsiteButtonAction(_ sender: Any) {
+    @IBAction func visitWebsiteButtonAction(_ sender: UIButton) {
         
         let loginStoryboard = UIStoryboard.init(name: "Main", bundle:Bundle.main)
         let webViewController = loginStoryboard.instantiateViewController(withIdentifier:"WebViewController") as! UINavigationController
         let webView = webViewController.viewControllers[0] as! WebViewController
-        webView.requestLink = "http://www.fda.gov"
-        self.navigationController?.present(webViewController, animated: true, completion: nil)    }
+        //webView.requestLink = "http://www.fda.gov"
+        
+        
+        if sender.tag == 1188 {
+            //Visit Website
+            webView.requestLink = overViewWebsiteLink
+            
+        } else {
+            //View Consent
+            webView.htmlString = (Study.currentStudy?.consentDocument?.htmlString)
+        }
+        
+        
+        self.navigationController?.present(webViewController, animated: true, completion: nil)
+    }
     
 }
+
+extension StudyOverviewViewControllerSecond:NMWebServiceDelegate {
+    
+    func startedRequest(_ manager: NetworkManager, requestName: NSString) {
+        Logger.sharedInstance.info("requestname : \(requestName)")
+        
+    
+    }
+    func finishedRequest(_ manager: NetworkManager, requestName: NSString, response: AnyObject?) {
+        Logger.sharedInstance.info("requestname : \(requestName)")
+    }
+    func failedRequest(_ manager: NetworkManager, requestName: NSString, error: NSError) {
+        Logger.sharedInstance.info("requestname : \(requestName)")
+
+    }
+}
+
+
+
+

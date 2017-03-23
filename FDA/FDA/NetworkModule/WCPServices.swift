@@ -17,6 +17,8 @@ let kStudyTitle = "title"
 let kStudyCategory = "category"
 let kStudySponserName = "sponsorName"
 let kStudyDescription = "description"
+let kStudyTagLine = "tagline"
+
 let kStudyStatus = "status"
 let kStudyLogoURL = "logo"
 
@@ -56,6 +58,17 @@ class WCPServices: NSObject {
         let params = Dictionary<String, Any>()
         self.sendRequestWith(method:method, params: params, headers: nil)
     }
+    
+    func getConsentDocument(studyId:String, delegate:NMWebServiceDelegate){
+        
+        self.delegate = delegate
+        let header = [kStudyId:studyId]
+        let method = WCPMethods.consentDocument.method
+       
+        self.sendRequestWith(method:method, params: nil, headers: header)
+    }
+
+    
     
     func getEligibilityConsentMetadata(studyId:String, delegate:NMWebServiceDelegate){
         
@@ -126,6 +139,16 @@ class WCPServices: NSObject {
         self.sendRequestWith(method:method, params: params, headers: nil)
     }
     
+    func getTermsPolicy(delegate:NMWebServiceDelegate){
+        
+        self.delegate = delegate
+        
+        
+        let method = WCPMethods.termsPolicy.method
+       
+        self.sendRequestWith(method:method, params: nil, headers: nil)
+    }
+    
     func getNotification(skip:Int, delegate:NMWebServiceDelegate){
         
         self.delegate = delegate
@@ -182,6 +205,28 @@ class WCPServices: NSObject {
         Gateway.instance.resources = listOfResources
     }
     
+    func handleConsentDocument(response:Dictionary<String, Any>){
+        
+        let consentDict = response[kConsent] as! Dictionary<String, Any>
+        
+        if Utilities.isValidObject(someObject: consentDict as AnyObject?) {
+            
+            Study.currentStudy?.consentDocument = ConsentDocument()
+            
+            Study.currentStudy?.consentDocument?.initData(consentDoucumentdict: consentDict)
+        }
+
+    }
+    
+    
+    func handleTermsAndPolicy(response:Dictionary<String, Any>){
+        
+       TermsAndPolicy.currentTermsAndPolicy =  TermsAndPolicy()
+       TermsAndPolicy.currentTermsAndPolicy?.initWithDict(dict: response)
+        
+    }
+    
+    
     func handleStudyInfo(response:Dictionary<String, Any>){
         
         let overviewList = response[kOverViewInfo] as! Array<Dictionary<String,Any>>
@@ -195,6 +240,8 @@ class WCPServices: NSObject {
         let overview = Overview()
         overview.type = .study
         overview.sections = listOfOverviews
+        overview.websiteLink = response[kOverViewWebsiteLink] as? String
+        
         
         //update overview object to current study
         Study.currentStudy?.overview = overview
@@ -253,12 +300,15 @@ extension WCPServices:NMWebServiceDelegate{
         case .eligibilityConsent:
             self.handleEligibilityConsentMetaData(response: response as! Dictionary<String, Any>)
         case .resources:break
+        case .consentDocument:
+            self.handleConsentDocument(response: response as! Dictionary<String, Any>)
         case .studyInfo:
             self.handleStudyInfo(response: response as! Dictionary<String, Any>)
         case .activityList:break
         case .activity:break
         case .studyDashboard:break
-        case .termsPolicy:break
+        case .termsPolicy:
+            self.handleTermsAndPolicy(response:response as! Dictionary<String, Any> )
         case .notifications:break
         
         default:

@@ -222,6 +222,8 @@ class WCPServices: NSObject {
         let overview = Overview()
         overview.type = .study
         overview.sections = listOfOverviews
+        overview.websiteLink = response[kOverViewWebsiteLink] as? String
+        
         
         //update overview object to current study
         Study.currentStudy?.overview = overview

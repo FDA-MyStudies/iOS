@@ -122,6 +122,7 @@ class PageViewController : UIPageViewController{
             
             //get first overview controller
             let firstController = storyboard.instantiateViewController(withIdentifier: "FirstViewController") as! StudyOverviewViewControllerFirst
+            firstController.overViewWebsiteLink = overview.websiteLink
             firstController.overviewSectionDetail = overview.sections[0]
             controllers.append(firstController)
             if overview.sections.count >= 2 {
@@ -130,6 +131,7 @@ class PageViewController : UIPageViewController{
                     
                     let restControllers = storyboard.instantiateViewController(withIdentifier: "SecondViewController") as! StudyOverviewViewControllerSecond
                     restControllers.overviewSectionDetail = overview.sections[section]
+                     restControllers.overViewWebsiteLink = overview.websiteLink
                     controllers.append(restControllers)
                 }
             }

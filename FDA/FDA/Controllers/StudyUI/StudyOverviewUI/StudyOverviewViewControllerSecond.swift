@@ -21,6 +21,7 @@ class StudyOverviewViewControllerSecond : UIViewController{
     
     @IBOutlet var viewConsentButtonConstraint:NSLayoutConstraint?
     
+    var overViewWebsiteLink:String?
     var overviewSectionDetail : OverviewSection!
     
     override func viewDidLoad() {
@@ -61,11 +62,11 @@ class StudyOverviewViewControllerSecond : UIViewController{
 
         //labelDescription?.text = overviewSectionDetail.text
         
-        if Utilities.isValidValue(someObject: overviewSectionDetail.websiteLink as AnyObject? ) ==  false{
+        if Utilities.isValidValue(someObject: overViewWebsiteLink as AnyObject? ) ==  false{
            // if website link is nil
             
            buttonVisitWebsite?.isHidden =  true
-           viewConsentButtonConstraint?.constant = UIScreen.main.bounds.size.width - (16 + 110)
+           viewConsentButtonConstraint?.constant = UIScreen.main.bounds.size.width - 16
             
         }
         else{
@@ -91,12 +92,23 @@ class StudyOverviewViewControllerSecond : UIViewController{
         }
     }
     
-    @IBAction func visitWebsiteButtonAction(_ sender: Any) {
+    @IBAction func visitWebsiteButtonAction(_ sender: UIButton) {
         
         let loginStoryboard = UIStoryboard.init(name: "Main", bundle:Bundle.main)
         let webViewController = loginStoryboard.instantiateViewController(withIdentifier:"WebViewController") as! UINavigationController
         let webView = webViewController.viewControllers[0] as! WebViewController
         //webView.requestLink = "http://www.fda.gov"
+        
+        
+        if sender.tag == 1188 {
+            //Visit Website
+            webView.requestLink = overViewWebsiteLink
+            
+        } else {
+            //View Consent
+            webView.htmlString = (Study.currentStudy?.consentDocument?.htmlString)
+        }
+        
         
         self.navigationController?.present(webViewController, animated: true, completion: nil)
     }

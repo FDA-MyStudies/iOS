@@ -8,6 +8,8 @@
 
 import UIKit
 
+let kOverViewWebsiteLink = "studyWebsite"
+
 class Overview {
     enum OverviewType:Int {
         case gateway
@@ -15,6 +17,7 @@ class Overview {
     }
     var sections:Array<OverviewSection>!
     var type:OverviewType = .gateway
+    var websiteLink:String?
 }
 class OverviewSection {
     

@@ -13,8 +13,9 @@ class WebViewController : UIViewController{
     
     @IBOutlet var webView : UIWebView?
     var activityIndicator:UIActivityIndicatorView!
-    var requestLink:String!
-    var htmlString:String!
+    var requestLink:String?
+
+    var htmlString: String?
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -36,27 +37,37 @@ class WebViewController : UIViewController{
         
         
         
-        
-        
-        if Study.currentStudy?.consentDocument?.mimeType == MimeType.html {
-            webView?.loadHTMLString((Study.currentStudy?.consentDocument?.htmlString)!, baseURL: nil)
+        if self.htmlString != nil {
+            //View Consent
+            if Study.currentStudy?.consentDocument?.mimeType == MimeType.html {
+                webView?.loadHTMLString((Study.currentStudy?.consentDocument?.htmlString)!, baseURL: nil)
+            }
+            else{
+                // assumed to be link
+                
+                if Study.currentStudy?.consentDocument != nil {
+                    let url = URL.init(string: (Study.currentStudy?.consentDocument?.htmlString)!)
+                    let urlRequest = URLRequest.init(url: url!)
+                    
+                    webView?.loadRequest(urlRequest)
+                    
+                }
+                
+            }
+ 
         }
         else{
-            // assumed to be link
+            //VisitWebsite
             
-            if Study.currentStudy?.consentDocument != nil {
-                let url = URL.init(string: (Study.currentStudy?.consentDocument?.htmlString)!)
+            if self.requestLink != nil {
+                let url = URL.init(string:self.requestLink!)
                 let urlRequest = URLRequest.init(url: url!)
                 
                 webView?.loadRequest(urlRequest)
-                
+
             }
-            
         }
-        
-        
-        
-        
+    
         webView?.delegate = self
         
     }

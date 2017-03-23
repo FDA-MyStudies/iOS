@@ -328,59 +328,71 @@
                                             <action selector="buttonActionJoinStudy:" destination="EBl-T5-UoM" eventType="touchUpInside" id="Mhe-Bd-H9K"/>
                                         </connections>
                                     </button>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GRW-q2-dac">
-                                        <rect key="frame" x="0.0" y="327" width="375" height="1"/>
-                                        <color key="backgroundColor" red="0.84705882349999995" green="0.89019607840000003" blue="0.90196078430000004" alpha="1" colorSpace="calibratedRGB"/>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JGI-bD-7Bw">
+                                        <rect key="frame" x="0.0" y="332" width="375" height="47"/>
+                                        <subviews>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GRW-q2-dac">
+                                                <rect key="frame" x="0.0" y="0.0" width="375" height="1"/>
+                                                <color key="backgroundColor" red="0.84705882349999995" green="0.89019607840000003" blue="0.90196078430000004" alpha="1" colorSpace="calibratedRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="1" id="mGX-ev-nlU"/>
+                                                </constraints>
+                                            </view>
+                                            <button opaque="NO" tag="1188" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wIC-kn-yNP">
+                                                <rect key="frame" x="8" y="3" width="110" height="41"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="110" id="DF1-eJ-1XS"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
+                                                <state key="normal" title="Visit Website">
+                                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="visitWebsiteButtonAction:" destination="EBl-T5-UoM" eventType="touchUpInside" id="ZZD-ik-4TQ"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" tag="1189" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mud-v9-9iS">
+                                                <rect key="frame" x="257" y="3" width="110" height="41"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="110" id="Tjg-Q2-QFG"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
+                                                <state key="normal" title="View Consent">
+                                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="visitWebsiteButtonAction:" destination="EBl-T5-UoM" eventType="touchUpInside" id="UMT-ST-uyk"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="1" id="JaF-qO-OJc"/>
+                                            <constraint firstItem="wIC-kn-yNP" firstAttribute="leading" secondItem="JGI-bD-7Bw" secondAttribute="leading" constant="8" id="1Jo-Ps-hqZ"/>
+                                            <constraint firstAttribute="bottom" secondItem="mud-v9-9iS" secondAttribute="bottom" constant="3" id="IMr-Hv-0yJ"/>
+                                            <constraint firstItem="GRW-q2-dac" firstAttribute="leading" secondItem="JGI-bD-7Bw" secondAttribute="leading" id="M3k-b6-YqB"/>
+                                            <constraint firstAttribute="bottom" secondItem="wIC-kn-yNP" secondAttribute="bottom" constant="3" id="MlD-7k-wrc"/>
+                                            <constraint firstItem="GRW-q2-dac" firstAttribute="top" secondItem="JGI-bD-7Bw" secondAttribute="top" id="Rpy-Bm-bad"/>
+                                            <constraint firstAttribute="trailing" secondItem="GRW-q2-dac" secondAttribute="trailing" id="T4e-sP-ajh"/>
+                                            <constraint firstItem="wIC-kn-yNP" firstAttribute="top" secondItem="GRW-q2-dac" secondAttribute="bottom" constant="2" id="glB-8T-6KF"/>
+                                            <constraint firstAttribute="height" constant="47" id="gqZ-1t-3sV"/>
+                                            <constraint firstItem="mud-v9-9iS" firstAttribute="top" secondItem="GRW-q2-dac" secondAttribute="bottom" constant="2" id="nvH-sZ-dCQ"/>
+                                            <constraint firstAttribute="trailing" secondItem="mud-v9-9iS" secondAttribute="trailing" constant="8" id="qRX-9K-BQY"/>
                                         </constraints>
                                     </view>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wIC-kn-yNP">
-                                        <rect key="frame" x="8" y="333" width="110" height="41"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="41" id="uuW-gC-Z0e"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
-                                        <state key="normal" title="Visit Website">
-                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="visitWebsiteButtonAction:" destination="EBl-T5-UoM" eventType="touchUpInside" id="EO0-wW-Uhs"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mud-v9-9iS">
-                                        <rect key="frame" x="257" y="333" width="110" height="41"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="41" id="LbF-Ee-zaH"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
-                                        <state key="normal" title="View Consent">
-                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="visitWebsiteButtonAction:" destination="EBl-T5-UoM" eventType="touchUpInside" id="cbs-pa-OsN"/>
-                                        </connections>
-                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstItem="cQm-5R-c9C" firstAttribute="centerY" secondItem="jau-h2-6iA" secondAttribute="centerY" multiplier="0.578947" id="4IF-X0-1p6"/>
                                     <constraint firstItem="lIT-J9-U7S" firstAttribute="width" secondItem="jau-h2-6iA" secondAttribute="width" multiplier="135/375" id="5N9-DY-JNC"/>
                                     <constraint firstItem="lIT-J9-U7S" firstAttribute="centerY" secondItem="jau-h2-6iA" secondAttribute="centerY" multiplier="1.47368" id="5e9-BI-Sa5"/>
-                                    <constraint firstAttribute="trailing" secondItem="mud-v9-9iS" secondAttribute="trailing" constant="8" id="CWw-sb-jrA"/>
-                                    <constraint firstItem="GRW-q2-dac" firstAttribute="width" secondItem="jau-h2-6iA" secondAttribute="width" id="GdA-Gj-U9l"/>
-                                    <constraint firstItem="wIC-kn-yNP" firstAttribute="width" secondItem="jau-h2-6iA" secondAttribute="width" multiplier="110/375" id="MWz-Rz-tby"/>
-                                    <constraint firstItem="GRW-q2-dac" firstAttribute="centerY" secondItem="jau-h2-6iA" secondAttribute="centerY" multiplier="1.72368" id="Mrp-Ft-QGV"/>
+                                    <constraint firstItem="JGI-bD-7Bw" firstAttribute="leading" secondItem="jau-h2-6iA" secondAttribute="leading" id="8Sh-Lw-IKd"/>
                                     <constraint firstItem="cQm-5R-c9C" firstAttribute="width" secondItem="jau-h2-6iA" secondAttribute="width" multiplier="340/375" id="P1s-8Z-iQj"/>
                                     <constraint firstItem="lIT-J9-U7S" firstAttribute="centerX" secondItem="jau-h2-6iA" secondAttribute="centerX" id="QZe-Nd-phq"/>
                                     <constraint firstItem="cQm-5R-c9C" firstAttribute="centerX" secondItem="jau-h2-6iA" secondAttribute="centerX" id="SBl-U4-Ye1"/>
-                                    <constraint firstAttribute="bottom" secondItem="mud-v9-9iS" secondAttribute="bottom" constant="6" id="SLN-uA-2g8"/>
                                     <constraint firstItem="lIT-J9-U7S" firstAttribute="height" secondItem="jau-h2-6iA" secondAttribute="height" multiplier="40/380" id="SQw-yv-nCc"/>
-                                    <constraint firstAttribute="bottom" secondItem="wIC-kn-yNP" secondAttribute="bottom" constant="6" id="aVE-HH-cv3"/>
+                                    <constraint firstAttribute="trailing" secondItem="JGI-bD-7Bw" secondAttribute="trailing" id="fEf-hF-kd5"/>
+                                    <constraint firstAttribute="bottom" secondItem="JGI-bD-7Bw" secondAttribute="bottom" constant="1" id="gWL-YQ-ctc"/>
                                     <constraint firstItem="cQm-5R-c9C" firstAttribute="height" secondItem="jau-h2-6iA" secondAttribute="height" multiplier="190/380" id="pJp-PF-mlP"/>
-                                    <constraint firstItem="wIC-kn-yNP" firstAttribute="leading" secondItem="jau-h2-6iA" secondAttribute="leading" constant="8" id="pbE-7h-d3g"/>
-                                    <constraint firstItem="GRW-q2-dac" firstAttribute="centerX" secondItem="jau-h2-6iA" secondAttribute="centerX" id="tGI-fj-ZkP"/>
-                                    <constraint firstItem="mud-v9-9iS" firstAttribute="width" secondItem="jau-h2-6iA" secondAttribute="width" multiplier="110/375" id="yRW-pU-Y1C"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -411,7 +423,7 @@
                         <outlet property="imageViewStudy" destination="yw2-aH-SLQ" id="QEU-LZ-zOP"/>
                         <outlet property="labelDescription" destination="cQm-5R-c9C" id="SNl-aY-2nJ"/>
                         <outlet property="labelTitle" destination="3EU-2E-MZV" id="3vW-F5-GXh"/>
-                        <outlet property="viewConsentButtonConstraint" destination="yRW-pU-Y1C" id="6pI-mf-m6l"/>
+                        <outlet property="viewConsentButtonConstraint" destination="Tjg-Q2-QFG" id="Kkj-Um-R4s"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zXt-yf-Ky1" userLabel="First Responder" sceneMemberID="firstResponder"/>

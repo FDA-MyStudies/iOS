@@ -20,7 +20,7 @@ class StudyOverviewViewControllerFirst : UIViewController{
     @IBOutlet var labelDescription : UILabel?
     @IBOutlet var imageViewStudy : UIImageView?
     
-    
+    var overViewWebsiteLink : String?
     var overviewSectionDetail : OverviewSection!
     
     var moviePlayer:MPMoviePlayerViewController!
@@ -116,12 +116,13 @@ class StudyOverviewViewControllerFirst : UIViewController{
     
     @IBAction func visitWebsiteButtonAction(_ sender: Any) {
         
-        if overviewSectionDetail.websiteLink != nil {
+        if overViewWebsiteLink != nil {
             
             let loginStoryboard = UIStoryboard.init(name: "Main", bundle:Bundle.main)
             let webViewController = loginStoryboard.instantiateViewController(withIdentifier:"WebViewController") as! UINavigationController
             let webView = webViewController.viewControllers[0] as! WebViewController
-            webView.requestLink = overviewSectionDetail.websiteLink!
+            
+            webView.requestLink = overViewWebsiteLink!
             self.navigationController?.present(webViewController, animated: true, completion: nil)
         }
     }

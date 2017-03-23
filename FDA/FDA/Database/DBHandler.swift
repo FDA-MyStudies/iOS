@@ -48,4 +48,35 @@ class DBHandler: NSObject {
         currentUser.userType =  (dbUser?.userType).map { UserType(rawValue: $0) }!
     }
     
+    
+     //MARK:Study
+    func saveStudies(studies:Array<Study>){
+        
+        
+        var dbStudies:Array<DBStudy> = []
+        for study in studies {
+            
+            let dbStudy = DBStudy()
+            
+            dbStudy.studyId = study.studyId
+            dbStudy.category = study.category!
+            dbStudy.name = study.name!
+            dbStudy.sponserName = study.sponserName!
+            dbStudy.tagLine = study.description!
+            dbStudy.version = study.version!
+            dbStudy.logoURL = study.logoURL!
+            dbStudy.startDate = study.startDate!
+            dbStudy.endEnd = study.endEnd!
+            
+            dbStudies.append(dbStudy)
+        }
+        
+        let realm = try! Realm()
+        print("DBPath : \(realm.configuration.fileURL)")
+        try! realm.write({
+            realm.add(dbStudies, update: true)
+            
+        })
+    }
+    
 }

@@ -78,6 +78,7 @@
 		9432C2F71E4C483D005984EC /* RegistrationServerConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9432C2F61E4C483D005984EC /* RegistrationServerConfiguration.swift */; };
 		9432C2F91E4C4993005984EC /* ResponseServerConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9432C2F81E4C4993005984EC /* ResponseServerConfiguration.swift */; };
 		9432C2FB1E4C9EF8005984EC /* UserServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9432C2FA1E4C9EF8005984EC /* UserServices.swift */; };
+		9432C49C1E83CEEF00EB419C /* DBStudy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9432C49B1E83CEEF00EB419C /* DBStudy.swift */; };
 		94334F7C1E6FE60900755444 /* LeftMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94334F7B1E6FE60900755444 /* LeftMenuViewController.swift */; };
 		94334F801E6FE65600755444 /* FDASlideMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94334F7F1E6FE65600755444 /* FDASlideMenuViewController.swift */; };
 		94334F871E70055A00755444 /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94334F851E70055A00755444 /* UIViewController.swift */; };
@@ -265,6 +266,7 @@
 		9432C2F61E4C483D005984EC /* RegistrationServerConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegistrationServerConfiguration.swift; sourceTree = "<group>"; };
 		9432C2F81E4C4993005984EC /* ResponseServerConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResponseServerConfiguration.swift; sourceTree = "<group>"; };
 		9432C2FA1E4C9EF8005984EC /* UserServices.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserServices.swift; sourceTree = "<group>"; };
+		9432C49B1E83CEEF00EB419C /* DBStudy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DBStudy.swift; sourceTree = "<group>"; };
 		94334F7B1E6FE60900755444 /* LeftMenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LeftMenuViewController.swift; sourceTree = "<group>"; };
 		94334F7F1E6FE65600755444 /* FDASlideMenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FDASlideMenuViewController.swift; sourceTree = "<group>"; };
 		94334F851E70055A00755444 /* UIViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewController.swift; sourceTree = "<group>"; };
@@ -786,6 +788,7 @@
 			children = (
 				9491F7F71E825F5D0018C15E /* DBHandler.swift */,
 				9491F7F91E825FA80018C15E /* DBUser.swift */,
+				9432C49B1E83CEEF00EB419C /* DBStudy.swift */,
 			);
 			path = Database;
 			sourceTree = "<group>";
@@ -1334,6 +1337,7 @@
 				6EED7B331E65421D002C1FA3 /* EligibilityBuilder.swift in Sources */,
 				94CD96E81E4AF61800946477 /* NetworkConstants.swift in Sources */,
 				6EA889C01E6FD22800F160A1 /* ConfirmationOptionalTableViewCell.swift in Sources */,
+				9432C49C1E83CEEF00EB419C /* DBStudy.swift in Sources */,
 				94B3DD4A1E6ED8E500327AE5 /* StudyListCell.swift in Sources */,
 				94B3DD5A1E6ED8E500327AE5 /* SignUpViewController.swift in Sources */,
 				9491F7F81E825F5D0018C15E /* DBHandler.swift in Sources */,

@@ -172,6 +172,9 @@ class WCPServices: NSObject {
         
         //assgin to Gateway
         Gateway.instance.studies = listOfStudies
+        
+        //save in database
+        DBHandler().saveStudies(studies: listOfStudies)
     }
     
     func handleEligibilityConsentMetaData(response:Dictionary<String, Any>){

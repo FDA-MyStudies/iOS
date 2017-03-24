@@ -59,14 +59,14 @@ class DBHandler: NSObject {
             let dbStudy = DBStudy()
             
             dbStudy.studyId = study.studyId
-            dbStudy.category = study.category!
-            dbStudy.name = study.name!
-            dbStudy.sponserName = study.sponserName!
-            dbStudy.tagLine = study.description!
-            dbStudy.version = study.version!
-            dbStudy.logoURL = study.logoURL!
-            dbStudy.startDate = study.startDate!
-            dbStudy.endEnd = study.endEnd!
+            dbStudy.category = study.category
+            dbStudy.name = study.name
+            dbStudy.sponserName = study.sponserName
+            dbStudy.tagLine = study.description
+            dbStudy.version = study.version
+            dbStudy.logoURL = study.logoURL
+            dbStudy.startDate = study.startDate
+            dbStudy.endEnd = study.endEnd
             
             dbStudies.append(dbStudy)
         }
@@ -78,5 +78,6 @@ class DBHandler: NSObject {
             
         })
     }
+    
     
 }

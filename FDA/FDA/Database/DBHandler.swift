@@ -79,5 +79,34 @@ class DBHandler: NSObject {
         })
     }
     
+    class func loadStudyListFromDatabase(completionHandler:@escaping (Array<Study>) -> ()){
+        
+        
+        let realm = try! Realm()
+        let dbStudies = realm.objects(DBStudy.self)
+        
+        var studies:Array<Study> = []
+        for study in dbStudies {
+            
+            let dbStudy = Study()
+            
+            dbStudy.studyId = study.studyId
+            dbStudy.category = study.category
+            dbStudy.name = study.name
+            dbStudy.sponserName = study.sponserName
+            dbStudy.description = study.tagLine
+            dbStudy.version = study.version
+            dbStudy.logoURL = study.logoURL
+            dbStudy.startDate = study.startDate
+            dbStudy.endEnd = study.endEnd
+            
+            studies.append(dbStudy)
+        }
+        
+        completionHandler(studies)
+        
+        
+        
+    }
     
 }

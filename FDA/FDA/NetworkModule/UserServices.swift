@@ -528,13 +528,19 @@ class UserServices: NSObject {
     
     func handleLogoutResponse(response:Dictionary<String, Any>)  {
         
+        //TEMP
         let ud = UserDefaults.standard
         ud.removeObject(forKey: kUserAuthToken)
         ud.removeObject(forKey: kUserId)
         ud.synchronize()
         
+        //Delete from database
+        DBHandler.deleteCurrentUser()
+        
         //reset user object
         User.resetCurrentUser()
+        
+        
         
     }
     

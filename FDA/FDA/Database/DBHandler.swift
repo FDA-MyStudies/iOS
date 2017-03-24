@@ -29,7 +29,6 @@ class DBHandler: NSObject {
             realm.add(dbUser, update: true)
             
         })
-        
     }
     
     func initilizeCurrentUser(){
@@ -38,15 +37,29 @@ class DBHandler: NSObject {
         let dbUsers = realm.objects(DBUser.self)
         let dbUser = dbUsers.last
         
-        let currentUser = User.currentUser
-        currentUser.firstName = dbUser?.firstName
-        currentUser.lastName  = dbUser?.lastName
-        currentUser.verified = dbUser?.verified
-        currentUser.authToken = dbUser?.authToken
-        currentUser.userId = dbUser?.userId
-        currentUser.emailId = dbUser?.emailId
-        currentUser.userType =  (dbUser?.userType).map { UserType(rawValue: $0) }!
+        if dbUser != nil {
+            let currentUser = User.currentUser
+            currentUser.firstName = dbUser?.firstName
+            currentUser.lastName  = dbUser?.lastName
+            currentUser.verified = dbUser?.verified
+            currentUser.authToken = dbUser?.authToken
+            currentUser.userId = dbUser?.userId
+            currentUser.emailId = dbUser?.emailId
+            currentUser.userType =  (dbUser?.userType).map { UserType(rawValue: $0) }!
+        }
+        
     }
+    
+   class func deleteCurrentUser(){
+        
+        let realm = try! Realm()
+        let dbUsers = realm.objects(DBUser.self)
+        let dbUser = dbUsers.last
+        try! realm.write {
+            realm.delete(dbUser!)
+        }
+    }
+    
     
     
      //MARK:Study

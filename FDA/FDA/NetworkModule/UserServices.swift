@@ -47,7 +47,8 @@ let kSettingsTouchId = "touchId"
 let kSettingsLeadTime = "remindersTime"
 
 
-
+//-------------------
+let kDeactivateAccountDeleteData = "deleteData"
 
 let kBookmarked = "bookmarked"
 let kStatus = "status"
@@ -151,6 +152,23 @@ class UserServices: NSObject {
         let method = RegistrationMethods.deleteAccount.method
         self.sendRequestWith(method:method, params: nil, headers: headerParams)
     }
+    
+    func deActivateAccount(_ delegate:NMWebServiceDelegate)  {
+        
+        self.delegate = delegate
+        
+        let user = User.currentUser
+        let headerParams = [kUserAuthToken: user.authToken,
+                            kUserId : user.userId!] as Dictionary<String,String>
+        
+        let deledataArray:Array? = Array<Any>()
+        let params = [kDeactivateAccountDeleteData : deledataArray!]
+        
+        
+        let method = RegistrationMethods.deactivate.method
+        self.sendRequestWith(method:method, params: params, headers: headerParams)
+    }
+    
     
     func forgotPassword(email:String, delegate:NMWebServiceDelegate){
         
@@ -530,7 +548,16 @@ class UserServices: NSObject {
         User.resetCurrentUser()
     }
     
-    
+    func handleDeActivateAccountResponse(response:Dictionary<String, Any>) {
+        let ud = UserDefaults.standard
+        ud.removeObject(forKey: kUserAuthToken)
+        ud.removeObject(forKey: kUserId)
+        ud.synchronize()
+        
+        //reset user object
+        User.resetCurrentUser()
+    }
+
     
     
     private func sendRequestWith(method:Method, params:Dictionary<String, Any>?,headers:Dictionary<String, String>?){
@@ -580,16 +607,22 @@ extension UserServices:NMWebServiceDelegate{
             self.handleChangePasswordResponse(response: response as! Dictionary<String, Any>)
             
         case RegistrationMethods.updatePreferences.description as String: break //did not handled response
+            
         case RegistrationMethods.updateEligibilityConsentStatus.description as String: break
         case RegistrationMethods.consentPDF.description as String: break
         case RegistrationMethods.updateActivityState.description as String: break
         case RegistrationMethods.activityState.description as String: break
         case RegistrationMethods.withdraw.description as String: break
         case RegistrationMethods.forgotPassword.description as String: break
+            
         case RegistrationMethods.logout.description as String:
             self.handleLogoutResponse(response: response as! Dictionary<String, Any>)
+            
         case RegistrationMethods.deleteAccount.description as String:
             self.handleDeleteAccountResponse(response: response as! Dictionary<String, Any>)
+            
+        case RegistrationMethods.deactivate.description as String:
+            self.handleDeActivateAccountResponse(response: response as! Dictionary<String, Any>)
         default : break
         }
         

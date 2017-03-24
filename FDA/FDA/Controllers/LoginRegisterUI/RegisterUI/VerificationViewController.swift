@@ -14,7 +14,7 @@ let kSignupCompletionSegue = "signupCompletionSegue"
 let kAlertMessageText = "Message"
 let kAlertMessageVerifyEmail = "Please verify your email address."
 
-let kAlertMessageResendEmail = "An Email verification link has been sent to your registered email."
+let kAlertMessageResendEmail = "An email verification link has been sent to your registered email."
 
 class VerificationViewController : UIViewController{
     

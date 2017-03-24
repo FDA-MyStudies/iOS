@@ -88,16 +88,66 @@
                                 <color key="pageIndicatorTintColor" red="0.84705882349999995" green="0.89019607840000003" blue="0.90196078430000004" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="currentPageIndicatorTintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </pageControl>
+                            <view alpha="0.69999999999999996" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eJ6-PH-Hb3">
+                                <rect key="frame" x="0.0" y="617" width="375" height="50"/>
+                                <subviews>
+                                    <button opaque="NO" tag="1188" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bc7-W1-fmy">
+                                        <rect key="frame" x="6" y="9" width="178" height="31"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
+                                        <state key="normal" title="Visit Website">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="visitWebsiteButtonAction:" destination="N5Y-rW-mwD" eventType="touchUpInside" id="C6d-rQ-WtF"/>
+                                        </connections>
+                                    </button>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7Ld-sF-BcO">
+                                        <rect key="frame" x="187" y="10" width="1" height="30"/>
+                                        <color key="backgroundColor" red="0.84705882349999995" green="0.89019607840000003" blue="0.90196078430000004" alpha="0.5" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="1" id="Dvy-ym-SBm"/>
+                                            <constraint firstAttribute="height" constant="30" id="rwW-ps-eTC"/>
+                                        </constraints>
+                                    </view>
+                                    <button opaque="NO" tag="1189" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gz3-j6-s6W">
+                                        <rect key="frame" x="190" y="10" width="178" height="31"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
+                                        <state key="normal" title="View Consent">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="visitWebsiteButtonAction:" destination="N5Y-rW-mwD" eventType="touchUpInside" id="DXj-3h-3dB"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="7Ld-sF-BcO" firstAttribute="centerX" secondItem="eJ6-PH-Hb3" secondAttribute="centerX" id="9Gm-0d-KA2"/>
+                                    <constraint firstAttribute="bottom" secondItem="gz3-j6-s6W" secondAttribute="bottom" constant="9" id="HCs-9f-gOQ"/>
+                                    <constraint firstItem="gz3-j6-s6W" firstAttribute="width" secondItem="eJ6-PH-Hb3" secondAttribute="width" multiplier="178/375" id="NmZ-a5-G3L"/>
+                                    <constraint firstItem="gz3-j6-s6W" firstAttribute="leading" secondItem="bc7-W1-fmy" secondAttribute="trailing" constant="6" id="Qmg-8e-ce5"/>
+                                    <constraint firstAttribute="height" constant="50" id="USE-7J-YHu"/>
+                                    <constraint firstItem="gz3-j6-s6W" firstAttribute="top" secondItem="eJ6-PH-Hb3" secondAttribute="top" constant="10" id="XaN-TD-pKw"/>
+                                    <constraint firstItem="bc7-W1-fmy" firstAttribute="leading" secondItem="eJ6-PH-Hb3" secondAttribute="leading" constant="6" id="lbz-zN-ZjQ"/>
+                                    <constraint firstItem="bc7-W1-fmy" firstAttribute="top" secondItem="eJ6-PH-Hb3" secondAttribute="top" constant="9" id="q0H-hR-GJP"/>
+                                    <constraint firstItem="7Ld-sF-BcO" firstAttribute="centerY" secondItem="eJ6-PH-Hb3" secondAttribute="centerY" id="xjP-KW-M42"/>
+                                    <constraint firstAttribute="bottom" secondItem="bc7-W1-fmy" secondAttribute="bottom" constant="10" id="yF8-dQ-e8I"/>
+                                    <constraint firstAttribute="trailing" secondItem="gz3-j6-s6W" secondAttribute="trailing" constant="7" id="yXS-Rh-Bkq"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="p2D-fQ-5xZ" firstAttribute="leading" secondItem="EmZ-HA-ZIB" secondAttribute="leadingMargin" constant="-8" id="7aH-Gl-Hqc"/>
+                            <constraint firstAttribute="trailing" secondItem="eJ6-PH-Hb3" secondAttribute="trailing" id="BN3-iW-h0A"/>
                             <constraint firstItem="MKo-wh-p4O" firstAttribute="height" secondItem="EmZ-HA-ZIB" secondAttribute="height" multiplier="42/667" id="LCN-B9-cHr"/>
                             <constraint firstItem="XyM-as-imD" firstAttribute="top" secondItem="EmZ-HA-ZIB" secondAttribute="top" id="OXV-ir-VOG"/>
                             <constraint firstAttribute="trailing" secondItem="XyM-as-imD" secondAttribute="trailing" id="PAh-fY-VyR"/>
                             <constraint firstItem="spx-SF-bV8" firstAttribute="width" secondItem="EmZ-HA-ZIB" secondAttribute="width" multiplier="70/375" id="QaN-TR-BW2"/>
                             <constraint firstItem="y8U-nc-Trc" firstAttribute="top" secondItem="XyM-as-imD" secondAttribute="bottom" id="Qzc-bK-EXq"/>
                             <constraint firstItem="XyM-as-imD" firstAttribute="leading" secondItem="EmZ-HA-ZIB" secondAttribute="leading" id="X1g-Mz-fDY"/>
+                            <constraint firstItem="eJ6-PH-Hb3" firstAttribute="leading" secondItem="EmZ-HA-ZIB" secondAttribute="leading" id="X2T-v7-qYL"/>
                             <constraint firstItem="p2D-fQ-5xZ" firstAttribute="top" secondItem="0N0-It-5jQ" secondAttribute="bottom" constant="-9" id="bhy-W2-oti"/>
                             <constraint firstItem="MKo-wh-p4O" firstAttribute="centerX" secondItem="EmZ-HA-ZIB" secondAttribute="centerX" id="gU1-1S-pnn"/>
                             <constraint firstItem="spx-SF-bV8" firstAttribute="centerX" secondItem="EmZ-HA-ZIB" secondAttribute="centerX" id="gby-Fp-War"/>
@@ -105,6 +155,7 @@
                             <constraint firstItem="MKo-wh-p4O" firstAttribute="centerY" secondItem="EmZ-HA-ZIB" secondAttribute="centerY" multiplier="1.65817" id="hqY-1G-tB7"/>
                             <constraint firstItem="9vo-zr-UJ0" firstAttribute="top" secondItem="0N0-It-5jQ" secondAttribute="bottom" constant="-9" id="jwt-tU-50R"/>
                             <constraint firstItem="MKo-wh-p4O" firstAttribute="width" secondItem="EmZ-HA-ZIB" secondAttribute="width" multiplier="152/375" id="sqb-d1-YCM"/>
+                            <constraint firstItem="y8U-nc-Trc" firstAttribute="top" secondItem="eJ6-PH-Hb3" secondAttribute="bottom" id="t6Q-kG-ShI"/>
                             <constraint firstItem="spx-SF-bV8" firstAttribute="centerY" secondItem="EmZ-HA-ZIB" secondAttribute="centerY" multiplier="1.50675" id="vgf-zN-kET"/>
                         </constraints>
                     </view>
@@ -116,8 +167,12 @@
                         <outlet property="buttonBack" destination="p2D-fQ-5xZ" id="VUN-DG-vWo"/>
                         <outlet property="buttonJoinStudy" destination="MKo-wh-p4O" id="XPO-g0-9ko"/>
                         <outlet property="buttonStar" destination="9vo-zr-UJ0" id="FpR-f5-7Jg"/>
+                        <outlet property="buttonViewConsent" destination="gz3-j6-s6W" id="fO2-9w-Fbp"/>
+                        <outlet property="buttonVisitWebsite" destination="bc7-W1-fmy" id="dup-O5-ydO"/>
                         <outlet property="container" destination="XyM-as-imD" id="zg6-NZ-qCM"/>
                         <outlet property="pageControlView" destination="spx-SF-bV8" id="Tpx-Rw-4mV"/>
+                        <outlet property="viewSeperater" destination="7Ld-sF-BcO" id="Pgb-Nh-btu"/>
+                        <outlet property="visitWebsiteButtonLeadingConstraint" destination="NmZ-a5-G3L" id="VdA-wA-sHA"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dbw-wT-OkS" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -172,7 +227,7 @@
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="A Study for Pregnant Women" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="14" translatesAutoresizingMaskIntoConstraints="NO" id="w0M-Dz-kSR">
-                                <rect key="frame" x="22" y="167" width="330" height="70"/>
+                                <rect key="frame" x="22.5" y="167" width="330" height="70"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="28"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
@@ -198,7 +253,7 @@
                                 </connections>
                             </button>
                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5NQ-r5-mSz">
-                                <rect key="frame" x="112" y="532" width="152" height="43"/>
+                                <rect key="frame" x="111.5" y="532" width="152" height="43"/>
                                 <color key="backgroundColor" red="0.0" green="0.48627450979999998" blue="0.72941176470000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
                                 <state key="normal" title="Join Study">
@@ -215,8 +270,8 @@
                                     <action selector="buttonActionJoinStudy:" destination="BSo-U7-UDQ" eventType="touchUpInside" id="Mgd-XU-kNX"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zeM-Up-qJV">
-                                <rect key="frame" x="128" y="603" width="120" height="30"/>
+                            <button hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zeM-Up-qJV">
+                                <rect key="frame" x="127.5" y="603" width="120" height="30"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
                                 <state key="normal" title="Visit Website">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -294,7 +349,7 @@
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="How data will be used?" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="14" translatesAutoresizingMaskIntoConstraints="NO" id="3EU-2E-MZV">
-                                <rect key="frame" x="68" y="163" width="240" height="85"/>
+                                <rect key="frame" x="67.5" y="163" width="240" height="85"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="28"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
@@ -303,7 +358,7 @@
                                 <rect key="frame" x="0.0" y="287" width="375" height="380"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="14" translatesAutoresizingMaskIntoConstraints="NO" id="cQm-5R-c9C">
-                                        <rect key="frame" x="18" y="15" width="340" height="190"/>
+                                        <rect key="frame" x="18" y="15.5" width="340" height="189.5"/>
                                         <string key="text">The data captured from pregnant women (e.g. medical product exposures, outcomes etc.) will be linked with data from an organization, such as a clinical practise, that has access to electronic health data and this will help provide insights into the efficacy and safety of medical products.</string>
                                         <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="19"/>
                                         <nil key="highlightedColor"/>
@@ -328,7 +383,7 @@
                                             <action selector="buttonActionJoinStudy:" destination="EBl-T5-UoM" eventType="touchUpInside" id="Mhe-Bd-H9K"/>
                                         </connections>
                                     </button>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JGI-bD-7Bw">
+                                    <view hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JGI-bD-7Bw">
                                         <rect key="frame" x="0.0" y="332" width="375" height="47"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GRW-q2-dac">
@@ -423,7 +478,6 @@
                         <outlet property="imageViewStudy" destination="yw2-aH-SLQ" id="QEU-LZ-zOP"/>
                         <outlet property="labelDescription" destination="cQm-5R-c9C" id="SNl-aY-2nJ"/>
                         <outlet property="labelTitle" destination="3EU-2E-MZV" id="3vW-F5-GXh"/>
-                        <outlet property="viewConsentButtonConstraint" destination="Tjg-Q2-QFG" id="Kkj-Um-R4s"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zXt-yf-Ky1" userLabel="First Responder" sceneMemberID="firstResponder"/>

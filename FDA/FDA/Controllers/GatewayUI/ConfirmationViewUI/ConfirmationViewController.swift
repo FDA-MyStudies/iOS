@@ -62,6 +62,7 @@ class ConfirmationViewController: UIViewController {
         
         self.title = NSLocalizedString(kConfirmationNavigationTitle, comment: "")
         
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -71,7 +72,9 @@ class ConfirmationViewController: UIViewController {
     //MARK:IBActions
     
     @IBAction func deleteAccountAction(_ sender:UIButton){
-     UserServices().deleteAccount(self as NMWebServiceDelegate)
+    //UserServices().deleteAccount(self as NMWebServiceDelegate)
+        
+        UserServices().deActivateAccount(self)
     }
     @IBAction func doNotDeleteAccountAction(_ sender:UIButton){
          _ = self.navigationController?.popViewController(animated: true)
@@ -84,7 +87,12 @@ class ConfirmationViewController: UIViewController {
     }
     
     func handleDeleteAccountResponse(){
-        fdaSlideMenuController()?.navigateToHomeAfterSingout()
+       // fdaSlideMenuController()?.navigateToHomeAfterSingout()
+        
+        let leftController = slideMenuController()?.leftViewController as! LeftMenuViewController
+        leftController.changeViewController(.studyList)
+        leftController.createLeftmenuItems()
+
     }
     
     
@@ -153,7 +161,7 @@ extension ConfirmationViewController:NMWebServiceDelegate {
     func finishedRequest(_ manager: NetworkManager, requestName: NSString, response: AnyObject?) {
         Logger.sharedInstance.info("requestname : \(requestName)")
          self.removeProgressIndicator()
-        if requestName as String ==  RegistrationMethods.deleteAccount.description {
+        if requestName as String ==  RegistrationMethods.deactivate.description {
             
              self.handleDeleteAccountResponse()
         }

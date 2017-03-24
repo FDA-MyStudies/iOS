@@ -421,18 +421,18 @@ extension SignUpViewController:NMWebServiceDelegate {
     func startedRequest(_ manager: NetworkManager, requestName: NSString) {
         
         Logger.sharedInstance.info("requestname : \(requestName)")
-        
+         self.addProgressIndicator()
         if requestName .isEqual(to: RegistrationMethods.register.rawValue){
-            self.addProgressIndicator()
+           
         }
     
     }
     func finishedRequest(_ manager: NetworkManager, requestName: NSString, response: AnyObject?) {
         Logger.sharedInstance.info("requestname : \(requestName)")
         
-       
-        if requestName .isEqual(to: RegistrationMethods.register.rawValue)   {
-             self.removeProgressIndicator()
+       self.removeProgressIndicator()
+        if requestName .isEqual(to: RegistrationMethods.register.description)   {
+            
             self.navigateToVerificationController()
         }
         else{

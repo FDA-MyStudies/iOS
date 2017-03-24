@@ -77,7 +77,7 @@
                                     <action selector="getStartedButtonClicked:" destination="35J-FP-kDe" eventType="touchUpInside" id="eQK-yY-WMU"/>
                                 </connections>
                             </button>
-                            <view alpha="0.80000000000000004" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vwF-hX-3DE">
+                            <view alpha="0.69999999999999996" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vwF-hX-3DE">
                                 <rect key="frame" x="0.0" y="607" width="375" height="60"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jyn-tg-ixg">
@@ -413,7 +413,7 @@
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Welcome!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="Ciy-R8-Rn9">
-                                <rect key="frame" x="136" y="211" width="103" height="27"/>
+                                <rect key="frame" x="136" y="207.5" width="103" height="27"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="22"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
@@ -483,7 +483,7 @@
                             <constraint firstItem="lLb-72-cxP" firstAttribute="top" secondItem="WSD-iA-wVk" secondAttribute="bottom" id="tYS-t5-qZE"/>
                             <constraint firstItem="Mhn-wP-OGh" firstAttribute="centerX" secondItem="ZuF-Og-5eT" secondAttribute="centerX" id="xwu-kL-EZb"/>
                             <constraint firstItem="Mhn-wP-OGh" firstAttribute="height" secondItem="ZuF-Og-5eT" secondAttribute="height" multiplier="126/667" id="y51-3N-fAr"/>
-                            <constraint firstItem="Ciy-R8-Rn9" firstAttribute="centerY" secondItem="ZuF-Og-5eT" secondAttribute="centerY" multiplier="0.673163" id="yQa-7u-kmN"/>
+                            <constraint firstItem="Ciy-R8-Rn9" firstAttribute="centerY" secondItem="ZuF-Og-5eT" secondAttribute="centerY" multiplier="0.663163" id="yQa-7u-kmN"/>
                             <constraint firstItem="vIh-lT-4bl" firstAttribute="height" secondItem="ZuF-Og-5eT" secondAttribute="height" multiplier="43/667" id="yoI-eU-dRf"/>
                             <constraint firstItem="N7H-ey-5oY" firstAttribute="centerX" secondItem="ZuF-Og-5eT" secondAttribute="centerX" constant="-1" id="z3x-lD-MSH"/>
                         </constraints>

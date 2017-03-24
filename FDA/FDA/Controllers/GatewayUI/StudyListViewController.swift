@@ -69,7 +69,17 @@ class StudyListViewController: UIViewController {
         self.setNavigationBarItem()
         self.navigationController?.setNavigationBarHidden(false, animated: true)
        
-        self.sendRequestToGetStudyList()
+        DBHandler.loadStudyListFromDatabase { (studies) in
+            if studies.count > 0 {
+                Gateway.instance.studies = studies
+                self.tableView?.reloadData()
+            }
+            else {
+                self.sendRequestToGetStudyList()
+            }
+        }
+        //self.tableView?.reloadData()
+        //self.sendRequestToGetStudyList()
         //self.sendRequestToGetUserPreference()
         
     }

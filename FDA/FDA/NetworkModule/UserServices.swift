@@ -366,6 +366,8 @@ class UserServices: NSObject {
             
             user.userType = UserType.FDAUser
             
+            DBHandler().saveCurrentUser(user: user)
+            
             //TEMP : Need to save these values in Realm
             let ud = UserDefaults.standard
             ud.set(user.authToken, forKey:kUserAuthToken)

@@ -47,7 +47,7 @@ class LeftMenuViewController : UIViewController, LeftMenuProtocol {
     
     @IBOutlet weak var buttonSignOut: UIButton?
     var menus = [ ["menuTitle":"Home",
-                   "iconName":"home_menu1"],
+                   "iconName":"home_menu1-1"],
                   
                   ["menuTitle":"Resources",
                    "iconName":"resources_menu1"],
@@ -123,7 +123,7 @@ class LeftMenuViewController : UIViewController, LeftMenuProtocol {
         let user = User.currentUser
         
         menus = [ ["menuTitle":"Home",
-                   "iconName":"home_menu1"],
+                   "iconName":"home_menu1-1"],
                   
                   ["menuTitle":"Resources",
                    "iconName":"resources_menu1"],
@@ -235,7 +235,7 @@ class LeftMenuViewController : UIViewController, LeftMenuProtocol {
     @IBAction func buttonActionSignOut(_ sender: UIButton) {
         
         
-        UIUtilities.showAlertMessageWithTwoActionsAndHandler(NSLocalizedString("Signout", comment: ""), errorMessage: NSLocalizedString("Are you sure you want to signout ?", comment: ""), errorAlertActionTitle: NSLocalizedString("Yes", comment: ""),
+        UIUtilities.showAlertMessageWithTwoActionsAndHandler(NSLocalizedString("Signout", comment: ""), errorMessage: NSLocalizedString("Are you sure you want to signout ?", comment: ""), errorAlertActionTitle: NSLocalizedString("Sign out", comment: ""),
                                                              errorAlertActionTitle2: NSLocalizedString("Cancel", comment: ""), viewControllerUsed: self,
                                                              action1: {
                                                                 

@@ -37,6 +37,8 @@ class ForgotPasswordViewController : UIViewController{
         //unhide navigationbar
         self.navigationController?.setNavigationBarHidden(false, animated: true)
         
+        UIApplication.shared.statusBarStyle = .default
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {

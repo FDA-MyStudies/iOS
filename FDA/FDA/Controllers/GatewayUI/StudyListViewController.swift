@@ -74,7 +74,7 @@ class StudyListViewController: UIViewController {
             self.tableView?.rowHeight = 140
         }
 
-        
+        UIApplication.shared.statusBarStyle = .default
     }
     
     override func didReceiveMemoryWarning() {

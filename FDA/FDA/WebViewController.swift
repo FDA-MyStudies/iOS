@@ -70,6 +70,7 @@ class WebViewController : UIViewController{
     
         webView?.delegate = self
         
+        UIApplication.shared.statusBarStyle = .default
     }
     
     override func viewDidAppear(_ animated: Bool) {

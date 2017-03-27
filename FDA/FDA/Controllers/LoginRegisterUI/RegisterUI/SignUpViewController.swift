@@ -73,7 +73,7 @@ class SignUpViewController : UIViewController{
         else {
             self.addBackBarButton()
         }
-        
+        UIApplication.shared.statusBarStyle = .default
     }
     
     override func viewDidAppear(_ animated: Bool) {

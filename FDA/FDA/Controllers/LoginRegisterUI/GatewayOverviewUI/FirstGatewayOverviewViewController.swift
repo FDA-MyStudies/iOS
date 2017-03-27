@@ -36,7 +36,7 @@ class FirstGatewayOverviewViewController : UIViewController{
         //self.imageViewBackgroundImage?.addSubview(effectView)
 
         
-         UIApplication.shared.statusBarStyle = .lightContent
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -45,10 +45,12 @@ class FirstGatewayOverviewViewController : UIViewController{
         labelTitleText?.text = overviewSectionDetail.title
         labelDescriptionText?.text = overviewSectionDetail.text
         imageViewBackgroundImage?.image = UIImage.init(named: overviewSectionDetail.imageURL!)
+        
+        UIApplication.shared.statusBarStyle = .lightContent
 
     }
     override func viewDidDisappear(_ animated: Bool) {
-        UIApplication.shared.statusBarStyle = .default
+       
     }
     
     

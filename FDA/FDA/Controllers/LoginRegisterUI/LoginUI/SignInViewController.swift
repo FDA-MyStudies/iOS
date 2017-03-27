@@ -78,6 +78,8 @@ class SignInViewController : UIViewController{
         self.perform(#selector(SignInViewController.setInitialDate), with: self, afterDelay: 1)
         
         self.tableView?.reloadData()
+        
+        UIApplication.shared.statusBarStyle = .default
     }
     
     override func viewDidAppear(_ animated: Bool) {

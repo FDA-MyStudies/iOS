@@ -78,6 +78,8 @@ class ProfileViewController: UIViewController {
         UserServices().getUserProfile(self as NMWebServiceDelegate)
         self.setNavigationBarItem()
         
+        UIApplication.shared.statusBarStyle = .default
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {

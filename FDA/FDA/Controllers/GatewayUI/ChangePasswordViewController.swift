@@ -64,6 +64,8 @@ class ChangePasswordViewController: UIViewController {
         
         self.addBackBarButton()
         
+        UIApplication.shared.statusBarStyle = .default
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {

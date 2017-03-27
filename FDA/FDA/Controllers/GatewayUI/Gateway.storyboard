@@ -47,14 +47,14 @@
                                                         <constraint firstAttribute="width" constant="75" id="aHn-1I-aN8"/>
                                                     </constraints>
                                                 </imageView>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="completed_icn" translatesAutoresizingMaskIntoConstraints="NO" id="CjI-3r-2Rg">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="yet_to_join_icn" translatesAutoresizingMaskIntoConstraints="NO" id="CjI-3r-2Rg">
                                                     <rect key="frame" x="109" y="24" width="12" height="12"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="12" id="poE-Qi-I2N"/>
                                                         <constraint firstAttribute="width" constant="12" id="qu0-Zn-bYI"/>
                                                     </constraints>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Not eligible" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Otz-hB-kow">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Yet To Join" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Otz-hB-kow">
                                                     <rect key="frame" x="129" y="24" width="67" height="13"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="67" id="VWX-jE-lod"/>
@@ -64,7 +64,7 @@
                                                     <color key="textColor" red="0.0" green="0.48627450980392156" blue="0.72941176470588232" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="100%" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zic-wt-Oqv">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0%" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zic-wt-Oqv">
                                                     <rect key="frame" x="167" y="110" width="33" height="15"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="15" id="qhm-4b-j9A"/>
@@ -74,7 +74,7 @@
                                                     <color key="textColor" red="0.0" green="0.48627450979999998" blue="0.72941176470000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="35%" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="glq-fa-vfI">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0%" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="glq-fa-vfI">
                                                     <rect key="frame" x="302" y="110" width="33" height="15"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="15" id="2rw-Dr-9kg"/>
@@ -170,7 +170,7 @@
                                                         <constraint firstItem="JYg-ZP-14Y" firstAttribute="top" secondItem="2j4-8u-Wja" secondAttribute="top" id="nyi-4o-8F3"/>
                                                     </constraints>
                                                 </view>
-                                                <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progressViewStyle="bar" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="9uo-qk-CLF">
+                                                <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progressViewStyle="bar" translatesAutoresizingMaskIntoConstraints="NO" id="9uo-qk-CLF">
                                                     <rect key="frame" x="109" y="127" width="101" height="2.5"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="2" id="Yoe-eS-ESB"/>
@@ -178,7 +178,7 @@
                                                     <color key="progressTintColor" red="0.28627450980392155" green="0.71372549019607845" blue="0.89803921568627454" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <color key="trackTintColor" red="0.84705882352941175" green="0.8901960784313725" blue="0.90196078431372551" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </progressView>
-                                                <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progressViewStyle="bar" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="vLp-QY-Cdi">
+                                                <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progressViewStyle="bar" translatesAutoresizingMaskIntoConstraints="NO" id="vLp-QY-Cdi">
                                                     <rect key="frame" x="248" y="127" width="100" height="2.5"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="2" id="T1l-Q3-S3s"/>
@@ -207,7 +207,7 @@
                                                         <userDefinedRuntimeAttribute type="boolean" keyPath="layer.maskToBounds" value="YES"/>
                                                     </userDefinedRuntimeAttributes>
                                                 </view>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XHP-vP-2PX">
+                                                <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XHP-vP-2PX">
                                                     <rect key="frame" x="341" y="24" width="16" height="14"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="14" id="OjY-DF-hta"/>
@@ -1558,12 +1558,12 @@ Below is a list of studies that you are a part of and information on how your re
     <resources>
         <image name="14.png" width="750" height="1334"/>
         <image name="18.jpg" width="750" height="1440"/>
-        <image name="completed_icn" width="12" height="12"/>
         <image name="notChecked" width="18" height="18"/>
         <image name="notification_white" width="26" height="26"/>
         <image name="profile_white" width="26" height="26"/>
         <image name="resources_white" width="26" height="26"/>
         <image name="star_grey" width="15" height="13"/>
         <image name="star_yellow" width="15" height="13"/>
+        <image name="yet_to_join_icn" width="12" height="12"/>
     </resources>
 </document>

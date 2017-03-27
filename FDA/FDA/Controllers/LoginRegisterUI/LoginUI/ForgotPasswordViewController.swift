@@ -93,9 +93,18 @@ extension ForgotPasswordViewController:NMWebServiceDelegate {
         Logger.sharedInstance.info("requestname : \(requestName)")
         self.removeProgressIndicator()
         
-        UIUtilities.showAlertMessageWithActionHandler(NSLocalizedString(kTitleMessage, comment: ""), message: NSLocalizedString(kForgotPasswordResponseMessage, comment: "") , buttonTitle: NSLocalizedString(kTitleOk, comment: ""), viewControllerUsed: self) {
+        
+        if requestName as String == RegistrationMethods.forgotPassword.description  {
+            UIUtilities.showAlertMessageWithActionHandler(NSLocalizedString(kTitleMessage, comment: ""), message: NSLocalizedString(kForgotPasswordResponseMessage, comment: "") , buttonTitle: NSLocalizedString(kTitleOk, comment: ""), viewControllerUsed: self) {
+                
+                _ = self.navigationController?.popViewController(animated: true)
+                
+            }
+        }
+        else{
+            // for resend email
             
-            _ = self.navigationController?.popViewController(animated: true)
+              UIUtilities.showAlertWithTitleAndMessage(title:NSLocalizedString(kAlertMessageText, comment: "") as NSString, message:NSLocalizedString(kAlertMessageResendEmail, comment: "") as NSString)
             
         }
     }
@@ -103,7 +112,28 @@ extension ForgotPasswordViewController:NMWebServiceDelegate {
         
         self.removeProgressIndicator()
         Logger.sharedInstance.info("requestname : \(requestName)")
-        UIUtilities.showAlertWithTitleAndMessage(title:NSLocalizedString(kTitleError, comment: "") as NSString, message: error.localizedDescription as NSString)
+        
+        if requestName as String == RegistrationMethods.forgotPassword.description && error.code == 403{
+            
+            UIUtilities.showAlertMessageWithTwoActionsAndHandler(NSLocalizedString(kTitleMessage, comment: "") , errorMessage: error.localizedDescription, errorAlertActionTitle: NSLocalizedString("Ok", comment: ""),
+                                                                 errorAlertActionTitle2: NSLocalizedString("Resend Email", comment: ""), viewControllerUsed: self,
+                                                                 action1: {
+            },
+                                                                 action2: {
+                                                                    
+                                                                    UserServices().resendEmailConfirmation(emailId:(self.textFieldEmail?.text)!,delegate:self)
+                                                                    
+            })
+
+        }
+        else{
+            // if resend email fails
+            
+             UIUtilities.showAlertWithTitleAndMessage(title:NSLocalizedString(kTitleError, comment: "") as NSString, message: error.localizedDescription as NSString)
+        }
+        
+        
+       
     }
 }
 

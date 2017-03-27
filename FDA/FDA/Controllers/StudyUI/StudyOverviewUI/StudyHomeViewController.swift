@@ -10,6 +10,8 @@ import Foundation
 import UIKit
 import ResearchKit
 
+let kEligibilityConsentTask = "EligibilityConsentTask"
+
 class StudyHomeViewController : UIViewController{
     
     @IBOutlet weak var container : UIView!
@@ -127,7 +129,11 @@ class StudyHomeViewController : UIViewController{
             leftController.changeViewController(.profile_signin)
         }
         else{
-            self.createEligibilityConsentTask()
+            
+            WCPServices().getEligibilityConsentMetadata(studyId:(Study.currentStudy?.studyId)!, delegate: self as NMWebServiceDelegate)
+            
+            
+           
         }
     }
     
@@ -169,7 +175,7 @@ class StudyHomeViewController : UIViewController{
             
         }
         
-        let consentTask:ORKOrderedTask? =  ConsentBuilder.currentConsent?.createConsentTask() as! ORKOrderedTask?
+        let consentTask:ORKOrderedTask? = ConsentBuilder.currentConsent?.createConsentTask() as! ORKOrderedTask?
         
         for stepDict in (consentTask?.steps)!{
             eligibilitySteps?.append(stepDict)
@@ -177,7 +183,7 @@ class StudyHomeViewController : UIViewController{
         
         
         
-        let orkOrderedTask:ORKTask? = ORKOrderedTask(identifier: "Eligibility_ConsentTask", steps: eligibilitySteps)
+        let orkOrderedTask:ORKTask? = ORKOrderedTask(identifier:kEligibilityConsentTask, steps: eligibilitySteps)
         
         taskViewController = ORKTaskViewController(task:orkOrderedTask, taskRun: nil)
         taskViewController?.delegate = self
@@ -263,6 +269,11 @@ extension StudyHomeViewController:NMWebServiceDelegate {
         
         //self.removeProgressIndicator()
         
+        if requestName as String == WCPMethods.eligibilityConsent.method.methodName {
+            self.createEligibilityConsentTask()
+        }
+        
+        
     }
     func failedRequest(_ manager: NetworkManager, requestName: NSString, error: NSError) {
         Logger.sharedInstance.info("requestname : \(requestName)")
@@ -306,15 +317,18 @@ extension StudyHomeViewController:ORKTaskViewControllerDelegate{
                 
             }
             else{
-                activityBuilder?.activity?.restortionData = taskViewController.restorationData
+                //activityBuilder?.activity?.restortionData = taskViewController.restorationData
             }
         }
         
-        if  taskViewController.task?.identifier == "ConsentTask"{
-            consentbuilder?.consentResult?.initWithORKTaskResult(taskResult:taskViewController.result )
+        if  taskViewController.task?.identifier == kEligibilityConsentTask{
+            ConsentBuilder.currentConsent?.consentResult?.initWithORKTaskResult(taskResult:taskViewController.result )
+            
+            Study.currentStudy?.status = .active
+            
         }
         else{
-            activityBuilder?.actvityResult?.initWithORKTaskResult(taskResult: taskViewController.result)
+            //activityBuilder?.actvityResult?.initWithORKTaskResult(taskResult: taskViewController.result)
         }
         
         

@@ -56,8 +56,9 @@ class EligibilityStepViewController: ORKStepViewController {
         self.view.endEditing(true)
         let token = tokenTextField.text
         
-        
-        self.goForward()
+        if (token?.characters.count)! > 0 {
+            // LabKeyServices().verifyEnrollmentToken(token: token!, delegate: self)
+        }
         
         
         
@@ -94,9 +95,42 @@ extension EligibilityStepViewController:UITextFieldDelegate {
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
         return true
     }
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        
+        if string == " "{
+            return false
+        }
+        else{
+            return true
+        }
+
+    }
+    
     func textFieldDidBeginEditing(_ textField: UITextField) {
     }
     
+}
+
+extension EligibilityStepViewController:NMWebServiceDelegate {
+    func startedRequest(_ manager: NetworkManager, requestName: NSString) {
+        Logger.sharedInstance.info("requestname : \(requestName)")
+        
+        self.addProgressIndicator()
+        
+    }
+    func finishedRequest(_ manager: NetworkManager, requestName: NSString, response: AnyObject?) {
+        Logger.sharedInstance.info("requestname : \(requestName)")
+        
+        self.removeProgressIndicator()
+        self.goForward()
+    }
+    func failedRequest(_ manager: NetworkManager, requestName: NSString, error: NSError) {
+        Logger.sharedInstance.info("requestname : \(requestName)")
+        
+        self.removeProgressIndicator()
+        UIUtilities.showAlertWithTitleAndMessage(title:NSLocalizedString("Error", comment: "") as NSString, message: error.localizedDescription as NSString)
+    }
 }
 
 

@@ -58,7 +58,7 @@ class ConsentResult {
                         
                         let dir = FileManager.getStorageDirectory(type: .study)
                         
-                        let fullPath = dir + "/" + "Consent" + "\(self.consentId)" + ".pdf"
+                        let fullPath = dir + "/" + "Consent" +  "_" + "\((Study.currentStudy?.studyId)!)" + ".pdf"
                     
                         do {
                             

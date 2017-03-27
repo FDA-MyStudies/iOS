@@ -59,6 +59,8 @@ class StudyOverviewViewControllerFirst : UIViewController{
          labelTitle?.text = overviewSectionDetail.title
         
        
+        print("size = \(labelTitle?.text?.characters.count)")
+        
         let attrStr = try! NSAttributedString(
             data: (overviewSectionDetail.text?.data(using: String.Encoding.unicode, allowLossyConversion: true)!)!,
             options: [ NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType],
@@ -66,6 +68,7 @@ class StudyOverviewViewControllerFirst : UIViewController{
         
         if Utilities.isValidValue(someObject: attrStr.string as AnyObject?){
              self.labelDescription?.text = attrStr.string
+            
         }
         else{
              self.labelDescription?.text = ""

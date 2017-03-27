@@ -33,6 +33,9 @@ class SecondGatewayOverviewViewController : UIViewController{
         
         super.viewWillAppear(animated)
         labelHeadingText?.text = overviewSectionDetail.title
+       
+        print("size: \(labelHeadingText?.text?.characters.count)")
+        
         labelDescriptionText?.text = overviewSectionDetail.text
         imageViewBackgroundImage?.image = UIImage.init(named: overviewSectionDetail.imageURL!)
     }

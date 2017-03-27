@@ -56,6 +56,8 @@ class StudyOverviewViewControllerSecond : UIViewController{
         
         if Utilities.isValidValue(someObject: attrStr.string as AnyObject?){
             self.labelDescription?.text = attrStr.string
+            
+           
         }
         else{
             self.labelDescription?.text = ""

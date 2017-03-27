@@ -25,7 +25,8 @@ let kLeftMenuCellSubTitleValue = "Sign up"
 enum LeftMenu: Int {
     case studyList = 0
     case resources
-    case profile_signin
+    case profile_reachOut
+    case reachOut_signIn
     case signup
 }
 
@@ -131,10 +132,16 @@ class LeftMenuViewController : UIViewController, LeftMenuProtocol {
         if user.userType == .FDAUser {
             menus.append(["menuTitle":"Profile",
                           "iconName":"profile_menu1"])
+            menus.append(["menuTitle":"Reach Out",
+                          "iconName":"reachout_menu1"])
+
            
             self.buttonSignOut?.isHidden = false
         }
         else{
+            menus.append(["menuTitle":"Reach Out",
+                          "iconName":"reachout_menu1"])
+
             menus.append(["menuTitle":"Sign In",
                           "iconName":"signin_menu1"])
             
@@ -195,18 +202,28 @@ class LeftMenuViewController : UIViewController, LeftMenuProtocol {
             self.slideMenuController()?.changeMainViewController(self.studyListViewController, close: true)
         case .resources: break
         //self.slideMenuController()?.changeMainViewController(self.javaViewController, close: true)
-        case .profile_signin:
+        case .profile_reachOut:
             
             if User.currentUser.userType == .FDAUser {
                 self.slideMenuController()?.changeMainViewController(self.profileviewController, close: true)
                 
             }
             else{
-                // go to signin screen
-                //fdaSlideMenuController()?.navigateToHomeControllerForSignin()
-                self.slideMenuController()?.changeMainViewController(self.signInViewController, close: true)
+                // go to ReachOut screen
+                
             }
             
+        case .reachOut_signIn:
+            if User.currentUser.userType == .FDAUser {
+                // go to reach out
+            }
+            else{
+                
+                // go sign in
+                //fdaSlideMenuController()?.navigateToHomeControllerForSignin()
+                self.slideMenuController()?.changeMainViewController(self.signInViewController, close: true)
+                
+            }
         case .signup:
             self.slideMenuController()?.changeMainViewController(self.signUpViewController, close: true)
             
@@ -252,7 +269,7 @@ extension LeftMenuViewController : UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if let menu = LeftMenu(rawValue: indexPath.row) {
             switch menu {
-            case .studyList, .resources, .profile_signin, .signup:
+            case .studyList, .resources, .profile_reachOut,.reachOut_signIn, .signup:
                 return 78
             }
         }

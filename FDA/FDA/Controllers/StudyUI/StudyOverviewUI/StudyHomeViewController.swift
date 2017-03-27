@@ -123,7 +123,7 @@ class StudyHomeViewController : UIViewController{
     @IBAction func buttonActionJoinStudy(_ sender: UIButton){
         if User.currentUser.userType == UserType.AnonymousUser{
             let leftController = slideMenuController()?.leftViewController as! LeftMenuViewController
-            leftController.changeViewController(.profile_signin)
+            leftController.changeViewController(.reachOut_signIn)
         }
     }
 

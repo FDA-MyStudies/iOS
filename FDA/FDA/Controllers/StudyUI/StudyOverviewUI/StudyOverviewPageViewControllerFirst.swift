@@ -102,7 +102,7 @@ class StudyOverviewViewControllerFirst : UIViewController{
         
         if User.currentUser.userType == UserType.AnonymousUser{
             let leftController = slideMenuController()?.leftViewController as! LeftMenuViewController
-            leftController.changeViewController(.profile_signin)
+            leftController.changeViewController(.reachOut_signIn)
         }
     }
     

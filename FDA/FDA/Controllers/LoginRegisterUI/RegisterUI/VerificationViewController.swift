@@ -62,7 +62,7 @@ class VerificationViewController : UIViewController{
     }
     
     @IBAction func resendEmailButtonAction(_ sender: UIButton){
-        UserServices().resendEmailConfirmation(self)
+        UserServices().resendEmailConfirmation(emailId: User.currentUser.emailId!, delegate: self)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

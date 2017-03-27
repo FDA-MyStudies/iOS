@@ -114,17 +114,14 @@ class UserServices: NSObject {
         
     }
     
-    func resendEmailConfirmation(_ delegate:NMWebServiceDelegate){
+    func resendEmailConfirmation(emailId:String, delegate:NMWebServiceDelegate){
         
         self.delegate = delegate
         
-        let user = User.currentUser
-        let headerParams = [kUserId : user.userId!]
-        
-         let params = [kUserEmailId: user.emailId]
+        let params = [kUserEmailId:emailId]
         
         let method = RegistrationMethods.resendConfirmation.method
-        self.sendRequestWith(method:method, params: params, headers:headerParams)
+        self.sendRequestWith(method:method, params: params, headers:nil)
         
     }
     

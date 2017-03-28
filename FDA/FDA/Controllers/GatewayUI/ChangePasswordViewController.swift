@@ -191,10 +191,21 @@ extension ChangePasswordViewController : UITextFieldDelegate{
                 return false
             }
             else{
+                if (range.location == textField.text?.characters.count && string == " ") {
+                    
+                    textField.text = textField.text?.appending("\u{00a0}")
+                    return false
+                }
                 return true
             }
         }
         else{
+            
+            if (range.location == textField.text?.characters.count && string == " ") {
+                
+                textField.text = textField.text?.appending("\u{00a0}")
+                return false
+            }
             return true
         }
     }

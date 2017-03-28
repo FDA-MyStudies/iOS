@@ -59,13 +59,23 @@ class StudyOverviewViewControllerFirst : UIViewController{
             options: [ NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType],
             documentAttributes: nil)
         
+        let attributedText: NSMutableAttributedString = NSMutableAttributedString(attributedString: attrStr)
+        attributedText.addAttributes([NSFontAttributeName:UIFont(
+            name: "HelveticaNeue",
+            size: 18.0)!], range:(attrStr.string as NSString).range(of: attrStr.string))
+        attributedText.addAttribute(NSForegroundColorAttributeName, value: UIColor.white, range: (attrStr.string as NSString).range(of: attrStr.string))
+        
+        
+        
+        
         if Utilities.isValidValue(someObject: attrStr.string as AnyObject?){
-             self.labelDescription?.text = attrStr.string
+             self.labelDescription?.attributedText = attributedText
         }
         else{
              self.labelDescription?.text = ""
         }
-       
+       self.labelDescription?.textAlignment = .center
+        
         UIApplication.shared.statusBarStyle = .lightContent
         
         //self.labelDescription?.text = overviewSectionDetail.text!

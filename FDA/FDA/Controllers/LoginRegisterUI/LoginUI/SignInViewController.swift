@@ -11,6 +11,8 @@ import UIKit
 import IQKeyboardManagerSwift
 import SlideMenuControllerSwift
 
+let kVerifyMessageFromSignIn = "Your email is pending verification. Please type in the Verification Code received in the email to complete this step and proceed to using the app."
+
 
 enum SignInLoadFrom:Int{
     case gatewayOverview
@@ -116,6 +118,12 @@ class SignInViewController : UIViewController{
     }
     
 //MARK: Segue Methods
+    
+    
+    @IBAction func unwindFromVerification(_ segue:UIStoryboardSegue){
+        
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         if let signUpController = segue.destination as? SignUpViewController {
@@ -132,6 +140,9 @@ class SignInViewController : UIViewController{
             if viewLoadFrom == .menu {
                 verificationController.shouldCreateMenu = false
             }
+            
+            verificationController.labelMessage = kVerifyMessageFromSignIn
+            
         }
     }
     

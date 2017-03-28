@@ -10,6 +10,8 @@ import Foundation
 import UIKit
 import IQKeyboardManagerSwift
 
+let kVerifyMessageFromSignUp = "An email has been sent to xyz@gmail.com. Please type in the Verification Code received in the email to complete the verification step."
+
 enum SignUpLoadFrom:Int{
     case gatewayOverview
     case login
@@ -202,7 +204,15 @@ class SignUpViewController : UIViewController{
             if viewLoadFrom == .menu || viewLoadFrom == .menu_login{
                 verificationController.shouldCreateMenu = false
             }
+            
+            
+            let message = kVerifyMessageFromSignUp
+            let modifiedMessage = message.replacingOccurrences(of: kDefaultEmail, with: User.currentUser.emailId!)
+
+            verificationController.labelMessage = modifiedMessage
+           
         }
+
     }
 }
 

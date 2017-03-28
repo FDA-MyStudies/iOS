@@ -46,6 +46,8 @@ let kSettingsTouchId = "touchId"
 let kSettingsLeadTime = "remindersTime"
 
 
+let kVerifyCode = "verifyCode"
+
 //-------------------
 let kDeactivateAccountDeleteData = "deleteData"
 
@@ -113,6 +115,21 @@ class UserServices: NSObject {
         self.sendRequestWith(method:method, params: nil, headers:headerParams)
         
     }
+    
+    
+    func verifyEmail(verificationCode:String, delegate:NMWebServiceDelegate){
+        
+        self.delegate = delegate
+        
+        let user = User.currentUser
+        
+        let param = [kVerifyCode:verificationCode,
+                     kUserEmailId:user.emailId!]
+        let method = RegistrationMethods.verify.method
+        self.sendRequestWith(method:method, params: param, headers:nil)
+        
+    }
+    
     
     func resendEmailConfirmation(emailId:String, delegate:NMWebServiceDelegate){
         
@@ -397,11 +414,27 @@ class UserServices: NSObject {
                 ud.synchronize()
             }
         }
-       
-        
-       
-        
     }
+    
+    func handleEmailVerifyResponse(response:Dictionary<String, Any>){
+        
+        let user = User.currentUser
+        if let varified = response[kUserVerified] as? Bool {
+            
+            user.verified = varified
+            if user.verified! {
+                
+                user.userType = UserType.FDAUser
+                
+                //TEMP : Need to save these values in Realm
+                let ud = UserDefaults.standard
+                ud.set(user.authToken, forKey:kUserAuthToken)
+                ud.set(user.userId!, forKey: kUserId)
+                ud.synchronize()
+            }
+        }
+    }
+    
     
     func handleGetUserProfileResponse(response:Dictionary<String, Any>){
         
@@ -584,6 +617,10 @@ extension UserServices:NMWebServiceDelegate{
         case RegistrationMethods.confirmRegistration.description as String:
             
             self.handleConfirmRegistrationResponse(response: response as! Dictionary<String, Any>)
+            
+        case RegistrationMethods.verify.description as String:
+            
+            self.handleEmailVerifyResponse(response: response as! Dictionary<String, Any>)
             
         case RegistrationMethods.userProfile.description as String:
             

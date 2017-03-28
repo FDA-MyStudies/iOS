@@ -80,6 +80,10 @@ class StudyOverviewViewControllerSecond : UIViewController{
             let leftController = slideMenuController()?.leftViewController as! LeftMenuViewController
             leftController.changeViewController(.reachOut_signIn)
         }
+        else{
+            //TEMP
+             UIUtilities.showAlertWithTitleAndMessage(title:NSLocalizedString(kAlertMessageText, comment: "") as NSString, message:NSLocalizedString(kAlertMessageReachoutText, comment: "") as NSString)
+        }
     }
     
     @IBAction func visitWebsiteButtonAction(_ sender: UIButton) {

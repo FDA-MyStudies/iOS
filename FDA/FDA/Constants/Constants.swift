@@ -62,7 +62,7 @@ let kMessagePasswordBlank = "Please enter your password."
 let kMessageConfirmPasswordBlank = "Please enter confirm password."
 let kMessageValidatePasswords = "New password and confirm password does not match."
 let kMessageValidatePasswordCharacters = "Password should have minimum of 8 characters."
-let kMessageValidatePasswordComplexity = "Password should have minimum of 1 special character, 1 upper case letter,1 numeric number and length(8 - 16) characters"
+let kMessageValidatePasswordComplexity = "Password should have minimum of 1 special character, 1 upper case letter, 1 lower case letter, 1 numeric number and length(8 - 16) characters"
 let kMessageAgreeToTermsAndConditions = "Please agree to terms and conditions."
 
 let kMessageNewPasswordBlank = "Please enter your new password."
@@ -80,5 +80,7 @@ let kMessageValidFirstName = "Please enter valid first name. Please use letters(
 let kMessageValidLastName = "Please enter valid last name. Please use letters(length:1 - 100 characters)."
 
 let kMessageValidateOldAndNewPasswords = "Old password and New password should not be same."
+ //MARK:VerificationController
 
+let kMessageVerificationCodeEmpty = "Please enter valid Verification Code"
 

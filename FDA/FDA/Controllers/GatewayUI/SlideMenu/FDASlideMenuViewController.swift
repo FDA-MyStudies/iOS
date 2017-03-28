@@ -16,7 +16,7 @@ open class FDASlideMenuViewController: SlideMenuController {
     override open func awakeFromNib() {
         
        
-        SlideMenuOptions.leftViewWidth = 300
+        SlideMenuOptions.leftViewWidth = UIScreen.main.bounds.size.width * 0.81
         let storyboard = UIStoryboard(name: "Gateway", bundle: nil)
         //kStreamerDashBoard
         let controller = storyboard.instantiateViewController(withIdentifier: "StudyListViewController")

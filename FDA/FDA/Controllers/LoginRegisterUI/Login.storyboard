@@ -517,7 +517,7 @@
                             <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="03.png" translatesAutoresizingMaskIntoConstraints="NO" id="fCc-Rp-bme">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="J1Z-IB-nv3">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="J1Z-IB-nv3">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="288"/>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                             </imageView>
@@ -558,6 +558,10 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QKp-hJ-JD4">
+                                <rect key="frame" x="0.0" y="607" width="375" height="60"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -568,6 +572,7 @@
                             <constraint firstItem="Mop-tL-hXD" firstAttribute="top" secondItem="fCc-Rp-bme" secondAttribute="bottom" id="AZD-EZ-giE"/>
                             <constraint firstItem="e3m-lT-DyA" firstAttribute="width" secondItem="J1Z-IB-nv3" secondAttribute="width" id="Ghb-bz-6oa"/>
                             <constraint firstItem="LIE-7a-UoQ" firstAttribute="height" secondItem="srV-ZZ-1rU" secondAttribute="height" multiplier="66/667" id="MuM-uE-PJV"/>
+                            <constraint firstItem="QKp-hJ-JD4" firstAttribute="height" secondItem="srV-ZZ-1rU" secondAttribute="height" multiplier="60/667" id="Nvd-Zg-GvM"/>
                             <constraint firstItem="qls-nn-uxZ" firstAttribute="centerY" secondItem="srV-ZZ-1rU" secondAttribute="centerY" multiplier="1.68216" id="PFc-OY-oX9"/>
                             <constraint firstItem="e3m-lT-DyA" firstAttribute="height" secondItem="J1Z-IB-nv3" secondAttribute="height" id="QIt-gb-Hfn"/>
                             <constraint firstItem="e3m-lT-DyA" firstAttribute="leading" secondItem="J1Z-IB-nv3" secondAttribute="leading" id="SGn-90-nBh"/>
@@ -583,8 +588,11 @@
                             <constraint firstItem="qls-nn-uxZ" firstAttribute="width" secondItem="srV-ZZ-1rU" secondAttribute="width" multiplier="135/375" id="lMf-kd-ucK"/>
                             <constraint firstItem="e3m-lT-DyA" firstAttribute="top" secondItem="J1Z-IB-nv3" secondAttribute="top" id="lig-Vd-PSu"/>
                             <constraint firstItem="fCc-Rp-bme" firstAttribute="leading" secondItem="srV-ZZ-1rU" secondAttribute="leading" id="oFx-iD-aXI"/>
+                            <constraint firstItem="QKp-hJ-JD4" firstAttribute="leading" secondItem="srV-ZZ-1rU" secondAttribute="leading" id="qT9-KU-r7i"/>
                             <constraint firstItem="qls-nn-uxZ" firstAttribute="height" secondItem="srV-ZZ-1rU" secondAttribute="height" multiplier="40/667" id="tdC-jx-ZAn"/>
+                            <constraint firstAttribute="trailing" secondItem="QKp-hJ-JD4" secondAttribute="trailing" id="vaI-yz-naW"/>
                             <constraint firstItem="qls-nn-uxZ" firstAttribute="centerX" secondItem="srV-ZZ-1rU" secondAttribute="centerX" id="vy8-Fp-PfO"/>
+                            <constraint firstItem="Mop-tL-hXD" firstAttribute="top" secondItem="QKp-hJ-JD4" secondAttribute="bottom" id="wmH-OF-U4d"/>
                         </constraints>
                         <variation key="default">
                             <mask key="subviews">
@@ -1048,7 +1056,7 @@
         <image name="welcomeBg" width="375" height="667"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="EeA-Hk-jBe"/>
+        <segue reference="Wsb-hw-1LK"/>
         <segue reference="Xbj-IV-jBd"/>
     </inferredMetricsTieBreakers>
 </document>

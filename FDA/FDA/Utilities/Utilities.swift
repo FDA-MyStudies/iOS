@@ -192,6 +192,13 @@ class Utilities: NSObject {
     //Used to check all the validations for password
     class func isPasswordValid( text : String) -> Bool{
         let text = text
+        
+        let lowercaseLetterRegEx  = ".*[a-z]+.*"
+        let lowercaseTextTest = NSPredicate(format:"SELF MATCHES %@", lowercaseLetterRegEx)
+        let lowercaseresult = lowercaseTextTest.evaluate(with: text)
+        
+        
+        
         let capitalLetterRegEx  = ".*[A-Z]+.*"
         let texttest = NSPredicate(format:"SELF MATCHES %@", capitalLetterRegEx)
         let capitalresult = texttest.evaluate(with: text)
@@ -211,7 +218,7 @@ class Utilities: NSObject {
         let textCountResult = text.characters.count > 7 && text.characters.count <= 16 ? true : false
         
         
-        if capitalresult == false || numberresult == false || specialresult == false || textCountResult ==  false{
+        if capitalresult == false || numberresult == false || specialresult == false || textCountResult ==  false || lowercaseresult == false{
             return false
         }
         

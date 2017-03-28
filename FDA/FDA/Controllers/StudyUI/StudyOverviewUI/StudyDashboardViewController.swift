@@ -99,7 +99,7 @@ extension StudyDashboardViewController : UITableViewDataSource {
         //Used to display the last cell trends
         if indexPath.section == tableViewRowDetails.count{
             
-            cell = tableView.dequeueReusableCell(withIdentifier: "trendCell", for: indexPath) as! StudyDashboardTableViewCell
+            cell = tableView.dequeueReusableCell(withIdentifier: kTrendTableViewCell, for: indexPath) as! StudyDashboardTableViewCell
             return cell!
         }
         
@@ -110,15 +110,15 @@ extension StudyDashboardViewController : UITableViewDataSource {
             //Used for Table view Cell
             switch indexPath.section {
             case 0:
-                cell = tableView.dequeueReusableCell(withIdentifier: "welcomeCell", for: indexPath) as! StudyDashboardTableViewCell
+                cell = tableView.dequeueReusableCell(withIdentifier: kWelcomeTableViewCell, for: indexPath) as! StudyDashboardTableViewCell
                 (cell as! StudyDashboardTableViewCell).displayFirstCelldata(data: tableViewData)
                 
             case 1:
-                cell = tableView.dequeueReusableCell(withIdentifier: "studyActivityCell", for: indexPath) as! StudyDashboardTableViewCell
+                cell = tableView.dequeueReusableCell(withIdentifier: kStudyActivityTableViewCell, for: indexPath) as! StudyDashboardTableViewCell
                 (cell as! StudyDashboardTableViewCell).displaySecondCelldata(data: tableViewData)
                 
             case 2:
-                cell = tableView.dequeueReusableCell(withIdentifier: "percentageCell", for: indexPath) as! StudyDashboardTableViewCell
+                cell = tableView.dequeueReusableCell(withIdentifier: kPercentageTableViewCell, for: indexPath) as! StudyDashboardTableViewCell
                 (cell as! StudyDashboardTableViewCell).displayThirdCellData(data: tableViewData)
                 
             default:
@@ -130,14 +130,14 @@ extension StudyDashboardViewController : UITableViewDataSource {
             //Used for Collection View cell
             if tableViewData["isStudy"] as! String == "YES"{
                 
-                cell = tableView.dequeueReusableCell(withIdentifier: "collectionCell1", for: indexPath) as! StudyDashboardActivityTableViewCell
+                cell = tableView.dequeueReusableCell(withIdentifier: kActivityTableViewCell, for: indexPath) as! StudyDashboardActivityTableViewCell
                 (cell as! StudyDashboardActivityTableViewCell).activityArrayData = todayActivitiesArray
                 (cell as! StudyDashboardActivityTableViewCell).activityCollectionView?.reloadData()
             }
             
            else if tableViewData["isStudy"] as! String == "NO"{
                 
-                cell = tableView.dequeueReusableCell(withIdentifier: "collectionCell2", for: indexPath) as! StudyDashboardStatisticsTableViewCell
+                cell = tableView.dequeueReusableCell(withIdentifier: kStatisticsTableViewCell, for: indexPath) as! StudyDashboardStatisticsTableViewCell
                 (cell as! StudyDashboardStatisticsTableViewCell).statisticsArrayData = statisticsArray
                 (cell as! StudyDashboardStatisticsTableViewCell).statisticsCollectionView?.reloadData()
             }

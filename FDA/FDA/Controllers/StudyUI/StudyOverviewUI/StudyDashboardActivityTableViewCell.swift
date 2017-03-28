@@ -28,7 +28,6 @@ class StudyDashboardActivityTableViewCell: UITableViewCell {
 
 }
 
-
 //MARK: Collection delegates
 extension StudyDashboardActivityTableViewCell: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -40,7 +39,7 @@ extension StudyDashboardActivityTableViewCell: UICollectionViewDelegate, UIColle
         
         let activityCellData = activityArrayData.object(at: indexPath.row) as! NSDictionary
             
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ActivityCell", for: indexPath) as! StudyDashboardCollectionViewCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: kActivityCollectionViewCell, for: indexPath) as! StudyDashboardCollectionViewCell
         cell.displayTodaysActivities(data: activityCellData)
         
         return cell

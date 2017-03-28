@@ -694,7 +694,7 @@
                                             <outlet property="labelStudyCompletion" destination="cLq-2v-KCG" id="lpv-aH-SMO"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="collectionCell1" rowHeight="130" id="3XO-en-Tin" customClass="StudyDashboardActivityTableViewCell" customModule="FDA" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ActivityCell" rowHeight="130" id="3XO-en-Tin" customClass="StudyDashboardActivityTableViewCell" customModule="FDA" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="341" width="375" height="130"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="3XO-en-Tin" id="L2l-PI-X3g">
@@ -815,7 +815,7 @@
                                             <outlet property="activityCollectionView" destination="aoN-0c-6KL" id="nPB-54-bVN"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="collectionCell2" rowHeight="150" id="HiM-EC-i4w" customClass="StudyDashboardStatisticsTableViewCell" customModule="FDA" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="StatisticsCell" rowHeight="150" id="HiM-EC-i4w" customClass="StudyDashboardStatisticsTableViewCell" customModule="FDA" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="471" width="375" height="150"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="HiM-EC-i4w" id="7uN-B9-L3k">

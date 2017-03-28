@@ -87,4 +87,17 @@ let kFeedbackTableViewCellIdentifier2 = "FeedbackCellSecond"
 let kContactUsTableViewCellIdentifier = "ContactUsCell"
 
 
+//MARK: StudyDashboardViewController constants
+let kWelcomeTableViewCell = "welcomeCell"
+let kStudyActivityTableViewCell = "studyActivityCell"
+let kPercentageTableViewCell = "percentageCell"
+let kActivityTableViewCell = "ActivityCell"
+let kStatisticsTableViewCell = "StatisticsCell"
+let kTrendTableViewCell = "trendCell"
+
+let kActivityCollectionViewCell = "ActivityCell"
+let kStatisticsCollectionViewCell = "StatisticsCell"
+
+
+
 

@@ -25,7 +25,6 @@ class StudyDashboardStatisticsTableViewCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
-
 }
 
 //MARK: Collection delegates
@@ -39,7 +38,7 @@ extension StudyDashboardStatisticsTableViewCell: UICollectionViewDelegate, UICol
         
         let activityCellData = statisticsArrayData?.object(at: indexPath.row) as! NSDictionary
         
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "StatisticsCell", for: indexPath) as! StudyDashboardCollectionViewCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: kStatisticsCollectionViewCell, for: indexPath) as! StudyDashboardCollectionViewCell
         cell.displayStatisics(data: activityCellData)
         
         return cell

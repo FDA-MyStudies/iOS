@@ -84,7 +84,7 @@ class ForgotPasswordViewController : UIViewController{
             
         }else{
             print("Call the Webservice")
-            User.currentUser.emailId = textFieldEmail?.text!
+            //User.currentUser.emailId = textFieldEmail?.text!
             UserServices().forgotPassword(email:(textFieldEmail?.text)!,delegate: self)
             
            
@@ -98,6 +98,7 @@ class ForgotPasswordViewController : UIViewController{
         if let verifyController = segue.destination as? VerificationViewController {
             verifyController.labelMessage = kVerficationMessageFromForgotPassword
             verifyController.isFromForgotPassword =  true
+            verifyController.emailId = textFieldEmail?.text
         }
         
     }

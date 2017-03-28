@@ -28,7 +28,7 @@ class VerificationViewController : UIViewController{
     @IBOutlet var textFieldVerificationCode : UITextField?
     var labelMessage : String?
     var isFromForgotPassword :Bool =  false
-    
+    var emailId:String?
     var shouldCreateMenu:Bool = true
     
  //MARK:View Controllere delegates
@@ -48,9 +48,9 @@ class VerificationViewController : UIViewController{
         if labelMessage != nil {
             labelVerificationMessage?.text = labelMessage
         }
-        if Utilities.isValidValue(someObject: User.currentUser.emailId as AnyObject?) {
-            textFieldEmail?.text = User.currentUser.emailId!
-        }
+        
+        textFieldEmail?.text = self.emailId!
+        
         
         //hide navigationbar
         self.navigationController?.setNavigationBarHidden(true, animated: true)
@@ -80,12 +80,12 @@ class VerificationViewController : UIViewController{
     @IBAction func continueTwoButtonAction( _ sender : UIButton){
         
         self.view.endEditing(true)
-        if (User.currentUser.emailId?.isEmpty)! && (self.textFieldVerificationCode?.text == "") {
+        if ((textFieldEmail?.text)!.isEmpty) && (self.textFieldVerificationCode?.text == "") {
             self.showAlertMessages(textMessage: kMessageAllFieldsAreEmpty)
-        }else if User.currentUser.emailId == "" {
+        }else if (textFieldEmail?.text)! == "" {
             self.showAlertMessages(textMessage: kMessageEmailBlank)
             
-        }else if !(Utilities.isValidEmail(testStr: User.currentUser.emailId!)) {
+        }else if !(Utilities.isValidEmail(testStr: (textFieldEmail?.text)!)) {
             self.showAlertMessages(textMessage: kMessageValidEmail)
             
         }else if self.textFieldVerificationCode?.text == ""{
@@ -93,7 +93,10 @@ class VerificationViewController : UIViewController{
             
         }else{
             print("Call the webservice")
-            UserServices().verifyEmail(verificationCode:(self.textFieldVerificationCode?.text)! , delegate: self)
+            
+            UserServices().verifyEmail(emailId:(textFieldEmail?.text)!,  verificationCode:(self.textFieldVerificationCode?.text)! , delegate: self)
+            
+            
         }
     }
     
@@ -101,7 +104,7 @@ class VerificationViewController : UIViewController{
     @IBAction func continueButtonAction(_ sender: Any) {
         
         if (textFieldVerificationCode?.text?.characters.count)! > 0 {
-             UserServices().verifyEmail(verificationCode:(self.textFieldVerificationCode?.text)! , delegate: self)
+             UserServices().verifyEmail(emailId:User.currentUser.emailId!,  verificationCode:(self.textFieldVerificationCode?.text)! , delegate: self)
         }
         else{
              self.showAlertMessages(textMessage: kMessageVerificationCodeEmpty)
@@ -110,12 +113,18 @@ class VerificationViewController : UIViewController{
     
     @IBAction func resendEmailButtonAction(_ sender: UIButton){
         
+        var finalEmail:String = User.currentUser.emailId!
         
-        if (User.currentUser.emailId?.isEmpty)! || !(Utilities.isValidEmail(testStr: User.currentUser.emailId!)) {
+        if isFromForgotPassword {
+            finalEmail = (textFieldEmail?.text)!
+        }
+       
+        
+        if (finalEmail.isEmpty) || !(Utilities.isValidEmail(testStr: finalEmail)) {
              self.showAlertMessages(textMessage: kMessageValidEmail)
         }
         else{
-             UserServices().resendEmailConfirmation(emailId: User.currentUser.emailId!, delegate: self)
+             UserServices().resendEmailConfirmation(emailId: finalEmail, delegate: self)
         }
        
         
@@ -220,7 +229,7 @@ extension VerificationViewController:NMWebServiceDelegate {
         else {
             
             
-            if requestName as String == RegistrationMethods.verify.description {
+            if requestName as String == RegistrationMethods.resendConfirmation.description {
                 UIUtilities.showAlertWithTitleAndMessage(title:NSLocalizedString(kAlertMessageText, comment: "") as NSString, message:NSLocalizedString(kAlertMessageResendEmail, comment: "") as NSString)
             }
             else{

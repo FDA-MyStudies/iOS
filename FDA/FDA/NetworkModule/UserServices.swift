@@ -46,7 +46,7 @@ let kSettingsTouchId = "touchId"
 let kSettingsLeadTime = "remindersTime"
 
 
-let kVerifyCode = "verifyCode"
+let kVerifyCode = "code"
 
 //-------------------
 let kDeactivateAccountDeleteData = "deleteData"
@@ -117,14 +117,14 @@ class UserServices: NSObject {
     }
     
     
-    func verifyEmail(verificationCode:String, delegate:NMWebServiceDelegate){
+    func verifyEmail(emailId:String,verificationCode:String, delegate:NMWebServiceDelegate){
         
         self.delegate = delegate
         
         let user = User.currentUser
         
         let param = [kVerifyCode:verificationCode,
-                     kUserEmailId:user.emailId!]
+                     kUserEmailId:emailId]
         let method = RegistrationMethods.verify.method
         self.sendRequestWith(method:method, params: param, headers:nil)
         

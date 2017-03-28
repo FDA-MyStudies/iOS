@@ -20,6 +20,8 @@ class StudyHomeViewController : UIViewController{
     @IBOutlet var buttonVisitWebsite : UIButton?
     @IBOutlet var buttonViewConsent : UIButton?
     
+    @IBOutlet var viewBottombarBg :UIView?
+    
     @IBOutlet var viewSeperater: UIView?
     
     var pageViewController: PageViewController? {
@@ -43,13 +45,13 @@ class StudyHomeViewController : UIViewController{
         if User.currentUser.userType == UserType.AnonymousUser {
             buttonStar.isHidden = true
         }
-       
         
         
-            if Study.currentStudy?.studyId != nil {
-                WCPServices().getConsentDocument(studyId: (Study.currentStudy?.studyId)!, delegate: self as NMWebServiceDelegate)
-            }
-    
+        
+        if Study.currentStudy?.studyId != nil {
+            WCPServices().getConsentDocument(studyId: (Study.currentStudy?.studyId)!, delegate: self as NMWebServiceDelegate)
+        }
+        
         
         
         
@@ -126,7 +128,7 @@ class StudyHomeViewController : UIViewController{
             leftController.changeViewController(.reachOut_signIn)
         }
     }
-
+    
     
     @IBAction func backButtonAction(_ sender: Any) {
         
@@ -162,7 +164,7 @@ class StudyHomeViewController : UIViewController{
         
         self.navigationController?.present(webViewController, animated: true, completion: nil)
     }
-
+    
     
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -193,13 +195,24 @@ extension StudyHomeViewController: PageViewControllerDelegate {
         if index == 0 {
             // for First Page
             
-            buttonJoinStudy?.backgroundColor = kUIColorForSubmitButtonBackground
-            buttonJoinStudy?.setTitleColor(UIColor.white, for: .normal)
+            
+            
+            UIView.animate(withDuration: 0.1, animations: {
+                self.buttonJoinStudy?.backgroundColor = kUIColorForSubmitButtonBackground
+                self.buttonJoinStudy?.setTitleColor(UIColor.white, for: .normal)
+               
+            })
+            
+            
             
         } else {
             // for All other pages
-            buttonJoinStudy?.backgroundColor = UIColor.white
-            buttonJoinStudy?.setTitleColor(kUIColorForSubmitButtonBackground, for: .normal)
+            
+            UIView.animate(withDuration: 0.1, animations: {
+                
+                self.buttonJoinStudy?.backgroundColor = UIColor.white
+                self.buttonJoinStudy?.setTitleColor(kUIColorForSubmitButtonBackground, for: .normal)
+            })
         }
     }
     

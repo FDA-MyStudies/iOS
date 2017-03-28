@@ -10,7 +10,7 @@ import UIKit
 
 
 let kConfirmationSegueIdentifier = "confirmationSegue"
-let kHeaderDescription = "You have chosen to delete your FDA app account. This will result in automatic withdrawl from all Studies.\n Below is a list of studies that you are a part of and information on how your response data will be handled with each after you withdraw.Please review and confirm."
+let kHeaderDescription = "You have chosen to delete your FDA app account. This will result in automatic withdrawal from all Studies.\n Below is a list of studies that you are a part of and information on how your response data will be handled with each after you withdraw.Please review and confirm."
 
 let kConfirmationCellType = "type"
 let kConfirmationCellTypeOptional = "Optional"

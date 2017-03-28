@@ -27,24 +27,14 @@ class ContactUsTableViewCell: UITableViewCell {
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
         // Configure the view for the selected state
     }
 
-    
-    /*
-     Populate cell data coming in dictionary
-     */
+    //Populate cell data coming in dictionary
     func populateCellData(data : NSDictionary, keyboardType:UIKeyboardType?){
         
         labelType?.text = NSLocalizedString((data["helpText"] as? String)!, comment: "")
         textFieldValue?.placeholder = NSLocalizedString((data["placeHolder"] as? String)!, comment: "")
-        
-//        if keyboardType == nil {
-//            textFieldValue?.keyboardType = .default
-//        } else {
-//            textFieldValue?.keyboardType = keyboardType!
-//        }
         
         textFieldValue?.keyboardType = keyboardType!
     }

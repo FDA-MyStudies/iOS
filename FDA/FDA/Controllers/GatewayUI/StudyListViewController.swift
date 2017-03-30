@@ -59,6 +59,9 @@ class StudyListViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        
+        
+        self.labelHelperText.isHidden = true
         self.setNavigationBarItem()
         self.navigationController?.setNavigationBarHidden(false, animated: true)
        
@@ -129,8 +132,8 @@ class StudyListViewController: UIViewController {
     func navigateToStudyHome(){
         
         let studyStoryBoard = UIStoryboard.init(name: "Study", bundle: Bundle.main)
-        let studyHomeController = studyStoryBoard.instantiateViewController(withIdentifier: String(describing: StudyHomeViewController.classForCoder()))
-        
+        let studyHomeController = studyStoryBoard.instantiateViewController(withIdentifier: String(describing: StudyHomeViewController.classForCoder())) as! StudyHomeViewController
+        studyHomeController.delegate = self
         self.navigationController?.pushViewController(studyHomeController, animated: true)
 
     }
@@ -262,5 +265,19 @@ extension StudyListViewController:NMWebServiceDelegate {
             
             UIUtilities.showAlertWithTitleAndMessage(title:NSLocalizedString(kErrorTitle, comment: "") as NSString, message: error.localizedDescription as NSString)
         }
+    }
+}
+
+extension StudyListViewController:StudyHomeViewDontrollerDelegate{
+    func studyHomeJoinStudy() {
+        
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            // your code here
+            let leftController = self.slideMenuController()?.leftViewController as! LeftMenuViewController
+            leftController.changeViewController(.reachOut_signIn)
+        }
+        
+       
     }
 }

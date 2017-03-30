@@ -53,6 +53,14 @@ class StudyOverviewViewControllerFirst : UIViewController{
         
          labelTitle?.text = overviewSectionDetail.title
         
+        var fontSize = 18.0
+        if DeviceType.IS_IPAD || DeviceType.IS_IPHONE_4_OR_LESS {
+            fontSize = 13.0
+        }
+        else if DeviceType.IS_IPHONE_5 {
+            fontSize = 14.0
+        }
+        
         
         let attrStr = try! NSAttributedString(
             data: (overviewSectionDetail.text?.data(using: String.Encoding.unicode, allowLossyConversion: true)!)!,
@@ -62,7 +70,7 @@ class StudyOverviewViewControllerFirst : UIViewController{
         let attributedText: NSMutableAttributedString = NSMutableAttributedString(attributedString: attrStr)
         attributedText.addAttributes([NSFontAttributeName:UIFont(
             name: "HelveticaNeue",
-            size: 18.0)!], range:(attrStr.string as NSString).range(of: attrStr.string))
+            size: CGFloat(fontSize))!], range:(attrStr.string as NSString).range(of: attrStr.string))
         attributedText.addAttribute(NSForegroundColorAttributeName, value: UIColor.white, range: (attrStr.string as NSString).range(of: attrStr.string))
         
         

@@ -438,10 +438,10 @@ class Utilities: NSObject {
     
     
     class func getAppVersion() -> String{
-        if let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String {
-            return version
-        }
-        return "1.0"
+        
+        let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as! String
+        let bundleVersion = Bundle.main.infoDictionary?["CFBundleVersion"] as! String
+        return version + "." + bundleVersion
     }
     
     class func getBundleIdentifier()->String{

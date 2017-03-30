@@ -210,7 +210,7 @@ class Utilities: NSObject {
         print("\(numberresult)")
         //".*[!#$%&'()*+,-.:;<>=?@[\]^_{}|~]+.*"
         //"!@#%&-_=?:;\"'<>,`~\\*\\?\\+\\[\\]\\(\\)\\{\\}\\^\\$\\|\\\\\\.\\/"
-        let specialCharacterRegEx  = ".*[!@#%&-_=?:;\"'<>,~\\*\\?\\+\\[\\]\\(\\)\\{\\}\\^\\$\\|\\\\\\.\\/]+.*"
+        let specialCharacterRegEx  = ".*[!#$%&'()*+,-.:;\\[\\]<>=?@^_{}|~]+.*"
         let texttest2 = NSPredicate(format:"SELF MATCHES %@", specialCharacterRegEx)
         
         let specialresult = texttest2.evaluate(with: text)

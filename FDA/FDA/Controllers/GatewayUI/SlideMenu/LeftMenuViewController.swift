@@ -23,7 +23,7 @@ let kLeftMenuCellTitleNewUser = "New User?"
 let kLeftMenuCellSubTitleValue = "Sign up"
 
 
-let kAlertMessageReachoutText = "This feature is under development"
+let kAlertMessageReachoutText = "This feature will be available in the next sprint."
 
 enum LeftMenu: Int {
     case studyList = 0
@@ -203,8 +203,8 @@ class LeftMenuViewController : UIViewController, LeftMenuProtocol {
         switch menu {
         case .studyList:
             self.slideMenuController()?.changeMainViewController(self.studyListViewController, close: true)
-        case .resources: break
-        //self.slideMenuController()?.changeMainViewController(self.javaViewController, close: true)
+        case .resources:
+              UIUtilities.showAlertWithTitleAndMessage(title:NSLocalizedString(kAlertMessageText, comment: "") as NSString, message:NSLocalizedString(kAlertMessageReachoutText, comment: "") as NSString)
         case .profile_reachOut:
             
             if User.currentUser.userType == .FDAUser {
@@ -239,7 +239,7 @@ class LeftMenuViewController : UIViewController, LeftMenuProtocol {
     @IBAction func buttonActionSignOut(_ sender: UIButton) {
         
         
-        UIUtilities.showAlertMessageWithTwoActionsAndHandler(NSLocalizedString("Sign out", comment: ""), errorMessage: NSLocalizedString("Are you sure you want to sign out ?", comment: ""), errorAlertActionTitle: NSLocalizedString("Sign out", comment: ""),
+        UIUtilities.showAlertMessageWithTwoActionsAndHandler(NSLocalizedString("Sign Out", comment: ""), errorMessage: NSLocalizedString("Are you sure you want to sign out ?", comment: ""), errorAlertActionTitle: NSLocalizedString("Sign out", comment: ""),
                                                              errorAlertActionTitle2: NSLocalizedString("Cancel", comment: ""), viewControllerUsed: self,
                                                              action1: {
                                                                 

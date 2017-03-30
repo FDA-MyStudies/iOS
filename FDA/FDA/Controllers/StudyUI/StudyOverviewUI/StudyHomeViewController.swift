@@ -126,6 +126,8 @@ class StudyHomeViewController : UIViewController{
         if User.currentUser.userType == UserType.AnonymousUser{
             let leftController = slideMenuController()?.leftViewController as! LeftMenuViewController
             leftController.changeViewController(.reachOut_signIn)
+        else {
+              UIUtilities.showAlertWithTitleAndMessage(title:NSLocalizedString(kAlertMessageText, comment: "") as NSString, message:NSLocalizedString(kAlertMessageReachoutText, comment: "") as NSString)
         }
     }
     

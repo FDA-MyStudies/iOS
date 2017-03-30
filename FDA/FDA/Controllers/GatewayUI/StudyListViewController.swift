@@ -68,10 +68,14 @@ class StudyListViewController: UIViewController {
         
         if User.currentUser.userType == .FDAUser {
             
-            self.tableView?.rowHeight = 156
+            self.tableView?.estimatedRowHeight = 156
+            self.tableView?.rowHeight = UITableViewAutomaticDimension
+            
         }
         else {
-            self.tableView?.rowHeight = 140
+            self.tableView?.estimatedRowHeight = 140
+            self.tableView?.rowHeight = UITableViewAutomaticDimension
+
         }
 
         UIApplication.shared.statusBarStyle = .default

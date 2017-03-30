@@ -367,6 +367,11 @@ extension SignUpViewController : UITextFieldDelegate{
             }
         }
         else */
+        
+        if string == " " {
+            return false
+        }
+        
         if  tag == .EmailId {
             if string == " " || finalString.characters.count > 255{
                 return false
@@ -376,7 +381,7 @@ extension SignUpViewController : UITextFieldDelegate{
             }
         }
         else if tag == .Password || tag == .ConfirmPassword {
-            if finalString.characters.count > 16 {
+            if finalString.characters.count > 14 {
                 return false
             }
             else{

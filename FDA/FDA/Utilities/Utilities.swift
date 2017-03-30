@@ -208,14 +208,15 @@ class Utilities: NSObject {
         let texttest1 = NSPredicate(format:"SELF MATCHES %@", numberRegEx)
         let numberresult = texttest1.evaluate(with: text)
         print("\(numberresult)")
-        
-        let specialCharacterRegEx  = ".*[!&^%$#@()/]+.*"
+        //".*[!#$%&'()*+,-.:;<>=?@[\]^_{}|~]+.*"
+        //"!@#%&-_=?:;\"'<>,`~\\*\\?\\+\\[\\]\\(\\)\\{\\}\\^\\$\\|\\\\\\.\\/"
+        let specialCharacterRegEx  = ".*[!@#%&-_=?:;\"'<>,~\\*\\?\\+\\[\\]\\(\\)\\{\\}\\^\\$\\|\\\\\\.\\/]+.*"
         let texttest2 = NSPredicate(format:"SELF MATCHES %@", specialCharacterRegEx)
         
         let specialresult = texttest2.evaluate(with: text)
         print("\(specialresult)")
         
-        let textCountResult = text.characters.count > 7 && text.characters.count <= 16 ? true : false
+        let textCountResult = text.characters.count > 7 && text.characters.count <= 14 ? true : false
         
         
         if capitalresult == false || numberresult == false || specialresult == false || textCountResult ==  false || lowercaseresult == false{

@@ -177,14 +177,22 @@ extension HomeViewController: PageViewControllerDelegate {
         
         if index == 0 {
             // for First Page
+            UIView.animate(withDuration: 0.1, animations: {
+                self.buttonGetStarted?.backgroundColor = kUIColorForSubmitButtonBackground
+                self.buttonGetStarted?.setTitleColor(UIColor.white, for: .normal)
+            })
+
            
-            buttonGetStarted?.backgroundColor = kUIColorForSubmitButtonBackground
-             buttonGetStarted?.setTitleColor(UIColor.white, for: .normal)
             
         } else {
-            // for All other pages
-            buttonGetStarted?.backgroundColor = UIColor.white
-            buttonGetStarted?.setTitleColor(kUIColorForSubmitButtonBackground, for: .normal)
+            
+            UIView.animate(withDuration: 0.1, animations: {
+                // for All other pages
+                self.buttonGetStarted?.backgroundColor = UIColor.white
+                self.buttonGetStarted?.setTitleColor(kUIColorForSubmitButtonBackground, for: .normal)
+            })
+
+            
         }
         
     }

@@ -419,20 +419,24 @@ class UserServices: NSObject {
     func handleEmailVerifyResponse(response:Dictionary<String, Any>){
         
         let user = User.currentUser
-        if let varified = response[kUserVerified] as? Bool {
+       // if let varified = response[kUserVerified] as? Bool {
             
-            user.verified = varified
+            user.verified = true
             if user.verified! {
                 
-                user.userType = UserType.FDAUser
+                if user.authToken != nil {
+                    
+                    user.userType = UserType.FDAUser
+                    
+                    //TEMP : Need to save these values in Realm
+                    let ud = UserDefaults.standard
+                    ud.set(user.authToken, forKey:kUserAuthToken)
+                    ud.set(user.userId!, forKey: kUserId)
+                    ud.synchronize()
+                }
                 
-                //TEMP : Need to save these values in Realm
-                let ud = UserDefaults.standard
-                ud.set(user.authToken, forKey:kUserAuthToken)
-                ud.set(user.userId!, forKey: kUserId)
-                ud.synchronize()
             }
-        }
+       // }
     }
     
     

@@ -12,7 +12,7 @@ class StudyListViewController: UIViewController {
     
     
     @IBOutlet var tableView:UITableView?
-    
+    @IBOutlet var labelHelperText:UILabel!
     
     func loadTestData(){
         
@@ -149,6 +149,20 @@ class StudyListViewController: UIViewController {
         UserServices().updateStudyBookmarkStatus(studyStauts: userStudyStatus, delegate: self)
     }
     
+     //MARK:Responses
+    func handleStudyListResponse(){
+        
+        if (Gateway.instance.studies?.count)! > 0{
+            self.tableView?.reloadData()
+            self.labelHelperText.isHidden = true
+        }
+        else {
+            self.tableView?.isHidden = true
+            self.labelHelperText.isHidden = false
+        }
+        
+    }
+    
     
 }
 //MARK: TableView Data source
@@ -222,7 +236,7 @@ extension StudyListViewController:NMWebServiceDelegate {
         self.removeProgressIndicator()
         
         if requestName as String == WCPMethods.studyList.rawValue{
-            self.tableView?.reloadData()
+            self.handleStudyListResponse()
         }
         else if(requestName as String == WCPMethods.studyInfo.rawValue){
             self.navigateToStudyHome()

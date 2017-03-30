@@ -32,7 +32,7 @@ class StudyOverviewViewControllerFirst : UIViewController{
         buttonJoinStudy?.layer.borderColor = kUicolorForButtonBackground
         if overviewSectionDetail.imageURL != nil {
             let url = URL.init(string:overviewSectionDetail.imageURL!)
-            imageViewStudy?.sd_setImage(with: url, placeholderImage:#imageLiteral(resourceName: "OverViewBg"))
+            imageViewStudy?.sd_setImage(with: url, placeholderImage:nil)
         }
         
         if overviewSectionDetail.link != nil {

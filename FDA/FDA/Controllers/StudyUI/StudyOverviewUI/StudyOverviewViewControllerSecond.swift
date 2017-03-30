@@ -31,7 +31,7 @@ class StudyOverviewViewControllerSecond : UIViewController{
         buttonJoinStudy?.layer.borderColor = kUicolorForButtonBackground
         if overviewSectionDetail.imageURL != nil {
             let url = URL.init(string:overviewSectionDetail.imageURL!)
-            imageViewStudy?.sd_setImage(with: url, placeholderImage:#imageLiteral(resourceName: "OverViewBg"))
+            imageViewStudy?.sd_setImage(with: url, placeholderImage:nil)
         }
         
         
@@ -48,17 +48,36 @@ class StudyOverviewViewControllerSecond : UIViewController{
         
         labelTitle?.text = overviewSectionDetail.title
         
+        var fontSize = 18.0
+        if DeviceType.IS_IPAD || DeviceType.IS_IPHONE_4_OR_LESS {
+            fontSize = 13.0
+        }
+        else if DeviceType.IS_IPHONE_5 {
+            fontSize = 14.0
+        }
+        
+        
         let attrStr = try! NSAttributedString(
             data: (overviewSectionDetail.text?.data(using: String.Encoding.unicode, allowLossyConversion: true)!)!,
             options: [ NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType],
             documentAttributes: nil)
         
+        let attributedText: NSMutableAttributedString = NSMutableAttributedString(attributedString: attrStr)
+        attributedText.addAttributes([NSFontAttributeName:UIFont(
+            name: "HelveticaNeue",
+            size: CGFloat(fontSize))!], range:(attrStr.string as NSString).range(of: attrStr.string))
+        attributedText.addAttribute(NSForegroundColorAttributeName, value: UIColor.black, range: (attrStr.string as NSString).range(of: attrStr.string))
+        
+        
+        
+        
         if Utilities.isValidValue(someObject: attrStr.string as AnyObject?){
-            self.labelDescription?.text = attrStr.string
+            self.labelDescription?.attributedText = attributedText
         }
         else{
             self.labelDescription?.text = ""
         }
+        self.labelDescription?.textAlignment = .center
 
         //labelDescription?.text = overviewSectionDetail.text
         

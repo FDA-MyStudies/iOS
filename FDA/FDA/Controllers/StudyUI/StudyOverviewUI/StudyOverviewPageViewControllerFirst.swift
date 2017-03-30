@@ -103,16 +103,28 @@ class StudyOverviewViewControllerFirst : UIViewController{
     
     @IBAction func watchVideoButtonAction(_ sender: Any) {
         
-        let url : NSURL = NSURL(string: overviewSectionDetail.link!)!
-        moviePlayer = MPMoviePlayerViewController(contentURL:url as URL!)
+        let urlString = overviewSectionDetail.link!
+        if urlString.contains("youtube"){
+            
+            let url = URL.init(string: urlString)
+            UIApplication.shared.openURL(url!)
+            
+        }
+        else {
+            
+            let url : NSURL = NSURL(string: overviewSectionDetail.link!)!
+            moviePlayer = MPMoviePlayerViewController(contentURL:url as URL!)
+            
+            moviePlayer.moviePlayer.movieSourceType = .streaming
+            
+            NotificationCenter.default.addObserver(self, selector:#selector(StudyOverviewViewControllerFirst.moviePlayBackDidFinish(notification:)),
+                                                   name: NSNotification.Name.MPMoviePlayerPlaybackDidFinish,
+                                                   object: moviePlayer.moviePlayer)
+            
+            self.present(moviePlayer, animated: true, completion: nil)
+
+        }
         
-        moviePlayer.moviePlayer.movieSourceType = .streaming
-        
-        NotificationCenter.default.addObserver(self, selector:#selector(StudyOverviewViewControllerFirst.moviePlayBackDidFinish(notification:)),
-                                               name: NSNotification.Name.MPMoviePlayerPlaybackDidFinish,
-                                               object: moviePlayer.moviePlayer)
-        
-        self.present(moviePlayer, animated: true, completion: nil)
         
     }
     

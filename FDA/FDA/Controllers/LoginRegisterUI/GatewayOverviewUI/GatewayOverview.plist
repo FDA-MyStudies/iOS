@@ -4,50 +4,50 @@
 <array>
 	<dict>
 		<key>title</key>
-		<string>Welcome!</string>
+		<string>FDA Listens!</string>
 		<key>text</key>
-		<string>This is a one-stop app that houses several Studies being conducted by the FDA. Check out the list of available Studies and join the ones that are relevant to you. We look forward to having you on board!</string>
+		<string>In a fresh initiative to gather real-world, contextual and conventionally uncaptured types of patient reported outcomes and data, the FDA now brings Health Research Studies to the mobile platform!</string>
 		<key>type</key>
 		<string>video</string>
 		<key>image</key>
 		<string>welcomeBg</string>
-		<key>link</key>
-		<string></string>
+		<key>videoLink</key>
+		<string>https://www.youtube.com/watch?v=6FGGquOrVic</string>
 	</dict>
 	<dict>
 		<key>title</key>
-		<string>Improving Health Research Outcomes</string>
+		<string>Deriving insights like never before!</string>
 		<key>text</key>
-		<string>This is a one-stop app that houses several Studies being conducted by the FDA. Check out the list of available Studies and join the ones that are relevant to you. We look forward to having you on board!</string>
+		<string>Available for iOS and Android devices, this app will house several FDA studies in the days to come, enabling researchers engage with participants worldwide to gather invaluable data via surveys and active tasks.</string>
 		<key>type</key>
 		<string></string>
 		<key>image</key>
 		<string>img_01</string>
-		<key>link</key>
+		<key>videoLink</key>
 		<string></string>
 	</dict>
 	<dict>
 		<key>title</key>
-		<string>Get fit everyday</string>
+		<string>Leveraging the power of mobility for research</string>
 		<key>text</key>
-		<string>This is a one-stop app that houses several Studies being conducted by the FDA. Check out the list of available Studies and join the ones that are relevant to you. We look forward to having you on board!</string>
+		<string>With participants now being able to provide data while on the go, in their real-world environment and via smartphone features, researchers get seamless access to newer and more frequently provided data to use for analysis.</string>
 		<key>type</key>
 		<string></string>
 		<key>image</key>
 		<string>img_02</string>
-		<key>link</key>
+		<key>videoLink</key>
 		<string></string>
 	</dict>
 	<dict>
 		<key>title</key>
-		<string>Improving Health Research Outcomes</string>
+		<string>Improving health research outcomes</string>
 		<key>text</key>
-		<string>This is a one-stop app that houses several Studies being conducted by the FDA. Check out the list of available Studies and join the ones that are relevant to you. We look forward to having you on board!</string>
+		<string>More data, better insights, improved research outcomes.  Explore and participate in studies that you are eligible for and help make the world a healthier place! We look forward to having you on-board! </string>
 		<key>type</key>
 		<string></string>
 		<key>image</key>
 		<string>img_03</string>
-		<key>link</key>
+		<key>videoLink</key>
 		<string></string>
 	</dict>
 </array>

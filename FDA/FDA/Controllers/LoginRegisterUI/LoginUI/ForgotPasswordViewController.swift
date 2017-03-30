@@ -97,7 +97,7 @@ class ForgotPasswordViewController : UIViewController{
         
         if let verifyController = segue.destination as? VerificationViewController {
             verifyController.labelMessage = kVerficationMessageFromForgotPassword
-            verifyController.isFromForgotPassword =  true
+            verifyController.viewLoadFrom = .forgotPassword
             verifyController.emailId = textFieldEmail?.text
         }
         

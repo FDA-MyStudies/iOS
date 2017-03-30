@@ -792,7 +792,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enter your registered e-mail address to get a reset password Link" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="229-dc-iON">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enter your registered e-mail address to get a reset password link" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="229-dc-iON">
                                 <rect key="frame" x="36" y="100" width="302" height="52"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="18"/>
                                 <nil key="textColor"/>
@@ -979,9 +979,11 @@
                         <outlet property="labelVerificationMessage" destination="On0-dU-saR" id="Aa8-kK-rlZ"/>
                         <outlet property="textFieldVerificationCode" destination="0li-V5-aDa" id="T3h-Ch-q3K"/>
                         <segue destination="3kT-ho-jWT" kind="show" identifier="signupCompletionSegue" id="0lP-oe-drw"/>
+                        <segue destination="yNZ-IU-ygG" kind="unwind" identifier="unwindStudyHomeSegue" unwindAction="unwindeToStudyHome:" id="qPU-Wl-xNH"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xPG-Tx-RfJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="yNZ-IU-ygG" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="2150" y="1957"/>
         </scene>

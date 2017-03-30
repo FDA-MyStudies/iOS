@@ -9,6 +9,11 @@
 import Foundation
 import UIKit
 
+
+protocol StudyHomeViewDontrollerDelegate {
+    func studyHomeJoinStudy()
+}
+
 class StudyHomeViewController : UIViewController{
     
     @IBOutlet weak var container : UIView!
@@ -23,6 +28,8 @@ class StudyHomeViewController : UIViewController{
     @IBOutlet var viewBottombarBg :UIView?
     
     @IBOutlet var viewSeperater: UIView?
+    
+    var delegate:StudyHomeViewDontrollerDelegate?
     
     var pageViewController: PageViewController? {
         didSet {
@@ -61,7 +68,7 @@ class StudyHomeViewController : UIViewController{
         super.viewWillAppear(animated)
         
         //hide navigationbar
-        //self.navigationController?.setNavigationBarHidden(true, animated: true)
+        self.navigationController?.setNavigationBarHidden(true, animated: true)
         
         
         
@@ -124,8 +131,21 @@ class StudyHomeViewController : UIViewController{
     
     @IBAction func buttonActionJoinStudy(_ sender: UIButton){
         if User.currentUser.userType == UserType.AnonymousUser{
-            let leftController = slideMenuController()?.leftViewController as! LeftMenuViewController
-            leftController.changeViewController(.reachOut_signIn)
+            //let leftController = slideMenuController()?.leftViewController as! LeftMenuViewController
+            //leftController.changeViewController(.reachOut_signIn)
+            
+            
+            
+//            let loginStoryBoard = UIStoryboard(name: "Login", bundle: nil)
+//            let signInController = loginStoryBoard.instantiateViewController(withIdentifier:  String(describing: SignInViewController.classForCoder())) as! SignInViewController
+//            signInController.viewLoadFrom = .joinStudy
+//            self.navigationController?.pushViewController(signInController, animated: true)
+            
+            
+            _ = self.navigationController?.popViewController(animated: true)
+            self.delegate?.studyHomeJoinStudy()
+            
+        }
         else {
               UIUtilities.showAlertWithTitleAndMessage(title:NSLocalizedString(kAlertMessageText, comment: "") as NSString, message:NSLocalizedString(kAlertMessageReachoutText, comment: "") as NSString)
         }
@@ -168,7 +188,9 @@ class StudyHomeViewController : UIViewController{
     }
     
     
-    
+    @IBAction func unwindeToStudyHome(_ segue:UIStoryboardSegue){
+        //unwindStudyHomeSegue
+    }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let pageViewController = segue.destination as? PageViewController {
             pageViewController.pageViewDelegate = self

@@ -16,6 +16,7 @@ let kVerifyMessageFromSignIn = "Your email is pending verification. Please type 
 
 enum SignInLoadFrom:Int{
     case gatewayOverview
+    case joinStudy
     case menu
 }
 
@@ -68,9 +69,13 @@ class SignInViewController : UIViewController{
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        
+        //unhide navigationbar
+        self.navigationController?.setNavigationBarHidden(false, animated: true)
+        
         user = User.currentUser
         
-        if viewLoadFrom == .gatewayOverview {
+        if viewLoadFrom == .gatewayOverview || viewLoadFrom == .joinStudy{
             self.addBackBarButton()
         }
         else {
@@ -90,7 +95,7 @@ class SignInViewController : UIViewController{
     }
     override func viewWillDisappear(_ animated: Bool) {
         //hide navigationbar
-        if viewLoadFrom == .gatewayOverview {
+        if viewLoadFrom == .gatewayOverview{
             self.navigationController?.setNavigationBarHidden(true, animated: true)
         }
     }
@@ -130,6 +135,9 @@ class SignInViewController : UIViewController{
             if viewLoadFrom == .menu {
                 signUpController.viewLoadFrom = .menu_login
             }
+            else if(viewLoadFrom == .joinStudy){
+                signUpController.viewLoadFrom = .joinStudy_login
+            }
             else {
                 signUpController.viewLoadFrom = .login
             }
@@ -139,7 +147,18 @@ class SignInViewController : UIViewController{
             
             if viewLoadFrom == .menu {
                 verificationController.shouldCreateMenu = false
+                verificationController.viewLoadFrom = .login
             }
+            else if viewLoadFrom == .joinStudy {
+                verificationController.viewLoadFrom = .joinStudy
+                verificationController.shouldCreateMenu = false
+            }
+            else if viewLoadFrom == .gatewayOverview{
+                
+                verificationController.viewLoadFrom = .login
+                verificationController.shouldCreateMenu = true
+            }
+            
             
             verificationController.labelMessage = kVerifyMessageFromSignIn
             
@@ -340,6 +359,12 @@ extension SignInViewController:NMWebServiceDelegate {
                 
                 if viewLoadFrom == .gatewayOverview {
                     self.navigateToGatewayDashboard()
+                }
+                else if viewLoadFrom == .joinStudy {
+                    
+                    let leftController = slideMenuController()?.leftViewController as! LeftMenuViewController
+                    leftController.createLeftmenuItems()
+                    _ = self.navigationController?.popViewController(animated: true)
                 }
                 else {
                     

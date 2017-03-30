@@ -17,7 +17,13 @@ let kAlertMessageVerifyEmail = "Please verify your email address."
 let kAlertMessageResendEmail = "An email verification code has been sent to your registered email."
 
 
-
+enum VerificationLoadFrom:Int{
+    case forgotPassword
+    case login
+    case signup
+    case joinStudy
+    
+}
 
 class VerificationViewController : UIViewController{
     
@@ -30,6 +36,7 @@ class VerificationViewController : UIViewController{
     var isFromForgotPassword :Bool =  false
     var emailId:String?
     var shouldCreateMenu:Bool = true
+    var viewLoadFrom:VerificationLoadFrom = .signup
     
  //MARK:View Controllere delegates
     
@@ -115,7 +122,7 @@ class VerificationViewController : UIViewController{
         
         var finalEmail:String = User.currentUser.emailId!
         
-        if isFromForgotPassword {
+        if viewLoadFrom == .forgotPassword {
             finalEmail = (textFieldEmail?.text)!
         }
        
@@ -217,9 +224,16 @@ extension VerificationViewController:NMWebServiceDelegate {
         
         if User.currentUser.verified == true{
             
-            if self.isFromForgotPassword{
+            if viewLoadFrom == .forgotPassword{
+                //pop to login
                 
-                self.navigateToChangePasswordViewController()
+                self.performSegue(withIdentifier: "signInUnwindSegue", sender: self)
+            }
+            else if viewLoadFrom == .joinStudy {
+                //pop to study home
+                let leftController = slideMenuController()?.leftViewController as! LeftMenuViewController
+                leftController.createLeftmenuItems()
+                self.performSegue(withIdentifier: "unwindStudyHomeSegue", sender: self)
             }
             else{
                 self.navigateToSignUpCompletionStep()

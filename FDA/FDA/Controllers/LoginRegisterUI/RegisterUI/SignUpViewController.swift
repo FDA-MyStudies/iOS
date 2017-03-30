@@ -14,9 +14,10 @@ let kVerifyMessageFromSignUp = "An email has been sent to xyz@gmail.com. Please 
 
 enum SignUpLoadFrom:Int{
     case gatewayOverview
-    case login
-    case menu
-    case menu_login
+    case login        // from gateway login-> signup
+    case menu        // from menu
+    case menu_login  //from menu->Login->Signup
+    case joinStudy_login //from joinStudy->Login->Signup
 }
 
 
@@ -67,6 +68,9 @@ class SignUpViewController : UIViewController{
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        //unhide navigationbar
+        self.navigationController?.setNavigationBarHidden(false, animated: true)
         
         self.user = User.currentUser
         if viewLoadFrom == .menu{
@@ -201,8 +205,25 @@ class SignUpViewController : UIViewController{
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let verificationController = segue.destination as? VerificationViewController {
             
-            if viewLoadFrom == .menu || viewLoadFrom == .menu_login{
-                verificationController.shouldCreateMenu = false
+            
+            switch viewLoadFrom {
+                 case .menu:
+                    verificationController.shouldCreateMenu = false
+                    verificationController.viewLoadFrom = .signup
+                 case .menu_login:
+                    verificationController.shouldCreateMenu = false
+                    verificationController.viewLoadFrom = .login
+                 case .joinStudy_login:
+                    verificationController.shouldCreateMenu = false
+                    verificationController.viewLoadFrom = .joinStudy
+                 case .login:
+                    verificationController.shouldCreateMenu = true
+                    verificationController.viewLoadFrom = .login
+                case .gatewayOverview:
+                     verificationController.shouldCreateMenu = true
+                    verificationController.viewLoadFrom = .signup
+                
+            
             }
             
             

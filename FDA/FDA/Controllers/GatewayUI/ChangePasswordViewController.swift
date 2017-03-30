@@ -21,6 +21,7 @@ enum ChangePasswordLoadFrom:Int{
     case login
     case menu_login
     case profile
+    case joinStudy
 }
 
 class ChangePasswordViewController: UIViewController {
@@ -31,6 +32,7 @@ class ChangePasswordViewController: UIViewController {
     var confirmPassword = ""
     @IBOutlet var tableView : UITableView?
     @IBOutlet var buttonSubmit : UIButton?
+    var temporaryPassword:String = ""
     
     var viewLoadFrom:ChangePasswordLoadFrom = .profile
     
@@ -157,7 +159,17 @@ extension ChangePasswordViewController : UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: kSignInTableViewCellIdentifier, for: indexPath) as! SignInTableViewCell
         
         cell.textFieldValue?.tag = indexPath.row + 100
+        
         cell.populateCellData(data: tableViewData, securedText: true)
+        if indexPath.row == 0 && temporaryPassword.characters.count > 0{
+            oldPassword = temporaryPassword
+            cell.textFieldValue?.text = oldPassword
+            cell.textFieldValue?.isEnabled = false
+            
+        }
+        else {
+            cell.textFieldValue?.isEnabled = true
+        }
         
         return cell
     }
@@ -258,6 +270,12 @@ extension ChangePasswordViewController:NMWebServiceDelegate {
             //create menu
             
             self.createMenuView()
+        }
+        else if viewLoadFrom == .joinStudy {
+            
+            let leftController = slideMenuController()?.leftViewController as! LeftMenuViewController
+            leftController.createLeftmenuItems()
+             self.performSegue(withIdentifier: "unwindStudyHomeSegue", sender: self)
         }
         
         

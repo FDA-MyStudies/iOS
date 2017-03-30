@@ -204,9 +204,13 @@ class SignInViewController : UIViewController{
         if viewLoadFrom == .menu {
             changePassword.viewLoadFrom = .menu_login
         }
+        else if viewLoadFrom == .joinStudy {
+            changePassword.viewLoadFrom = .joinStudy
+        }
         else {
             changePassword.viewLoadFrom = .login
         }
+        changePassword.temporaryPassword = User.currentUser.password!
         self.navigationController?.pushViewController(changePassword, animated: true)
     }
     

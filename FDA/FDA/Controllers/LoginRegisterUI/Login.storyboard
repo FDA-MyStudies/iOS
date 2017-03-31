@@ -397,7 +397,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="welcomeBg" translatesAutoresizingMaskIntoConstraints="NO" id="WSD-iA-wVk">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="welcomeBg" translatesAutoresizingMaskIntoConstraints="NO" id="WSD-iA-wVk">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </imageView>
@@ -792,7 +792,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enter your registered e-mail address to get a reset password link" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="229-dc-iON">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please enter your registered email to receive password help." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="229-dc-iON">
                                 <rect key="frame" x="36" y="100" width="302" height="52"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="18"/>
                                 <nil key="textColor"/>
@@ -887,7 +887,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Verification Step" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="20" translatesAutoresizingMaskIntoConstraints="NO" id="qBm-e0-RzA">
-                                <rect key="frame" x="78" y="165" width="220" height="40"/>
+                                <rect key="frame" x="78" y="160" width="220" height="50"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="30"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -919,12 +919,12 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Tm3-4k-53S">
-                                <rect key="frame" x="139" y="536" width="97" height="35"/>
+                                <rect key="frame" x="102.5" y="536" width="170" height="35"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="35" id="k1u-Ym-o6b"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
-                                <state key="normal" title="Resend Email ">
+                                <state key="normal" title="Resend Verification Code">
                                     <color key="titleColor" red="0.0" green="0.48627450979999998" blue="0.72941176470000002" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <connections>
@@ -968,7 +968,7 @@
                             <constraint firstItem="93M-Fs-drd" firstAttribute="width" secondItem="wKW-wP-MYg" secondAttribute="width" multiplier="150/375" id="hjS-Vy-pqD"/>
                             <constraint firstItem="0li-V5-aDa" firstAttribute="centerX" secondItem="wKW-wP-MYg" secondAttribute="centerX" id="saU-6b-Q5X"/>
                             <constraint firstItem="0li-V5-aDa" firstAttribute="width" secondItem="wKW-wP-MYg" secondAttribute="width" multiplier="310/375" id="xEK-eg-t4h"/>
-                            <constraint firstItem="qBm-e0-RzA" firstAttribute="height" secondItem="wKW-wP-MYg" secondAttribute="height" multiplier="40/667" id="xgi-aS-PZc"/>
+                            <constraint firstItem="qBm-e0-RzA" firstAttribute="height" secondItem="wKW-wP-MYg" secondAttribute="height" multiplier="50/667" id="xgi-aS-PZc"/>
                             <constraint firstItem="9TU-U8-Oi4" firstAttribute="leading" secondItem="wKW-wP-MYg" secondAttribute="leading" constant="32" id="yBK-aU-fZy"/>
                             <constraint firstItem="qBm-e0-RzA" firstAttribute="centerX" secondItem="wKW-wP-MYg" secondAttribute="centerX" id="ynI-f1-YnA"/>
                         </constraints>
@@ -1000,7 +1000,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Congrats!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="d1G-F1-50Q">
-                                <rect key="frame" x="120" y="153" width="135" height="40"/>
+                                <rect key="frame" x="120" y="148" width="135" height="50"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="30"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -1045,7 +1045,7 @@
                             <constraint firstItem="x7K-bc-LZO" firstAttribute="centerY" secondItem="VJ3-1A-2qP" secondAttribute="centerY" multiplier="1.47826" id="Jk2-gD-YVw"/>
                             <constraint firstItem="x7K-bc-LZO" firstAttribute="width" secondItem="VJ3-1A-2qP" secondAttribute="width" multiplier="150/375" id="MiF-b6-oAJ"/>
                             <constraint firstItem="d1G-F1-50Q" firstAttribute="width" secondItem="VJ3-1A-2qP" secondAttribute="width" multiplier="135/375" id="Q1I-4t-lKL"/>
-                            <constraint firstItem="d1G-F1-50Q" firstAttribute="height" secondItem="VJ3-1A-2qP" secondAttribute="height" multiplier="40/667" id="SZW-Cp-U00"/>
+                            <constraint firstItem="d1G-F1-50Q" firstAttribute="height" secondItem="VJ3-1A-2qP" secondAttribute="height" multiplier="50/667" id="SZW-Cp-U00"/>
                             <constraint firstItem="oeF-fS-OD1" firstAttribute="width" secondItem="VJ3-1A-2qP" secondAttribute="width" multiplier="124/375" id="WC7-UM-GBG"/>
                             <constraint firstItem="WOM-w4-FBB" firstAttribute="centerX" secondItem="VJ3-1A-2qP" secondAttribute="centerX" id="YHF-AM-IID"/>
                             <constraint firstItem="oeF-fS-OD1" firstAttribute="centerX" secondItem="VJ3-1A-2qP" secondAttribute="centerX" id="ciU-oT-MVy"/>
@@ -1076,7 +1076,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Verification Step" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="20" translatesAutoresizingMaskIntoConstraints="NO" id="2Iq-sI-1MG">
-                                <rect key="frame" x="78" y="165" width="220" height="40"/>
+                                <rect key="frame" x="78" y="160" width="220" height="50"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="30"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -1108,12 +1108,12 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gYt-xI-csS">
-                                <rect key="frame" x="139" y="536" width="97" height="35"/>
+                                <rect key="frame" x="102.5" y="536" width="170" height="35"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="35" id="jc7-XR-XCT"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
-                                <state key="normal" title="Resend Email ">
+                                <state key="normal" title="Resend Verification Code">
                                     <color key="titleColor" red="0.0" green="0.48627450979999998" blue="0.72941176470000002" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <connections>
@@ -1184,7 +1184,7 @@
                             <constraint firstItem="2Iq-sI-1MG" firstAttribute="centerX" secondItem="lbX-gl-2N5" secondAttribute="centerX" id="Mgg-rZ-ugk"/>
                             <constraint firstItem="XNb-iO-aTi" firstAttribute="width" secondItem="lbX-gl-2N5" secondAttribute="width" multiplier="330/375" id="Q9b-Nl-jlj"/>
                             <constraint firstItem="tta-Kd-eWH" firstAttribute="top" secondItem="ZXN-su-OVx" secondAttribute="bottom" constant="1" id="RCH-pT-kqj"/>
-                            <constraint firstItem="2Iq-sI-1MG" firstAttribute="height" secondItem="lbX-gl-2N5" secondAttribute="height" multiplier="40/667" id="UDy-al-Ei8"/>
+                            <constraint firstItem="2Iq-sI-1MG" firstAttribute="height" secondItem="lbX-gl-2N5" secondAttribute="height" multiplier="50/667" id="UDy-al-Ei8"/>
                             <constraint firstItem="ZXN-su-OVx" firstAttribute="centerX" secondItem="lbX-gl-2N5" secondAttribute="centerX" id="avq-te-76A"/>
                             <constraint firstItem="rEV-Xk-ssw" firstAttribute="leading" secondItem="lbX-gl-2N5" secondAttribute="leading" constant="32" id="bHE-U9-DfD"/>
                             <constraint firstItem="ZXN-su-OVx" firstAttribute="centerY" secondItem="lbX-gl-2N5" secondAttribute="centerY" multiplier="1.04348" id="cNw-Fg-pe7"/>

@@ -171,7 +171,7 @@ class StudyHomeViewController : UIViewController{
         let loginStoryboard = UIStoryboard.init(name: "Main", bundle:Bundle.main)
         let webViewController = loginStoryboard.instantiateViewController(withIdentifier:"WebViewController") as! UINavigationController
         let webView = webViewController.viewControllers[0] as! WebViewController
-        //webView.requestLink = "http://www.fda.gov"
+       
         
         
         if sender.tag == 1188 {

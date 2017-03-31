@@ -11,7 +11,7 @@ import UIKit
 import IQKeyboardManagerSwift
 import SlideMenuControllerSwift
 
-let kVerifyMessageFromSignIn = "Your email is pending verification. Please type in the Verification Code received in the email to complete this step and proceed to using the app."
+let kVerifyMessageFromSignIn = "Your registered email is pending verification. Please type in the Verification Code received in the email to complete this step and proceed to using the app."
 
 
 enum SignInLoadFrom:Int{
@@ -49,8 +49,12 @@ class SignInViewController : UIViewController{
         IQKeyboardManager.sharedManager().enable = true
         
         //Used for background tap dismiss keyboard
-        let gestureRecognizwe : UITapGestureRecognizer = UITapGestureRecognizer.init(target: self, action: #selector(SignInViewController.dismissKeyboard))
-        self.tableView?.addGestureRecognizer(gestureRecognizwe)
+        let gestureRecognizer : UITapGestureRecognizer = UITapGestureRecognizer.init(target: self, action: #selector(SignInViewController.dismissKeyboard))
+        self.tableView?.addGestureRecognizer(gestureRecognizer)
+        
+        
+        //info button
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(image:UIImage.init(named:"info"), style: .done, target: self, action: #selector(self.buttonInfoAction(_:)))
         
         
         //unhide navigationbar
@@ -120,6 +124,9 @@ class SignInViewController : UIViewController{
 
             UserServices().loginUser(self)
         }
+    }
+    @IBAction func buttonInfoAction(_ sender:Any){
+        UIUtilities.showAlertWithTitleAndMessage(title:"", message:kRegistrationInfoMessage as NSString)
     }
     
 //MARK: Segue Methods

@@ -55,6 +55,10 @@ class SignUpViewController : UIViewController{
         //Automatically takes care  of text field become first responder and scroll of tableview
         IQKeyboardManager.sharedManager().enable = true
         
+        //info button
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(image:UIImage.init(named:"info"), style: .done, target: self, action: #selector(self.buttonInfoAction(_:)))
+       
+        
         //Used for background tap dismiss keyboard
         let tapGestureRecognizer : UITapGestureRecognizer = UITapGestureRecognizer.init(target: self, action: #selector(SignUpViewController.dismissKeyboard))
         self.tableView?.addGestureRecognizer(tapGestureRecognizer)
@@ -200,6 +204,10 @@ class SignUpViewController : UIViewController{
             (sender as! UIButton).isSelected = !(sender as! UIButton).isSelected
         }
     }
+    @IBAction func buttonInfoAction(_ sender:Any){
+        UIUtilities.showAlertWithTitleAndMessage(title:"", message:kRegistrationInfoMessage as NSString)
+    }
+
     
     //MARK:Segue Method
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

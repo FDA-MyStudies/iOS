@@ -43,6 +43,9 @@ class StudyListViewController: UIViewController {
         }
     }
     
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -50,11 +53,20 @@ class StudyListViewController: UIViewController {
         
         //self.addRightBarButton() //Phase2
         //self.addLeftBarButton()
-        self.title = NSLocalizedString("FDA LISTENS!", comment: "")
+        //self.title = NSLocalizedString("FDA LISTENS!", comment: "")
         
-        //self.tableView?.rowHeight = UITableViewAutomaticDimension
+        let titleLabel = UILabel()
+        titleLabel.text = NSLocalizedString("FDA LISTENS!", comment: "")
+        titleLabel.font = UIFont(name: "HelveticaNeue-Medium", size: 18)
+        titleLabel.textAlignment = .left
+        titleLabel.textColor = Utilities.getUIColorFromHex(0x007cba)
+        titleLabel.frame = CGRect.init(x: 0, y: 0, width: 300, height: 44)
+        self.navigationItem.titleView = titleLabel
+        
         
         //self.loadTestData()
+        
+        
         
     }
     

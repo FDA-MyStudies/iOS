@@ -11,7 +11,7 @@ import UIKit
 extension UIViewController {
     
     func setNavigationBarItem() {
-        self.addLeftBarButtonWithImage(UIImage(named: "menu")!)
+        self.addLeftBarButtonWithImage(UIImage(named: "menu_icn")!)
         //self.addRightBarButtonWithImage(UIImage(named: "")!)
         self.slideMenuController()?.removeLeftGestures()
         self.slideMenuController()?.removeRightGestures()

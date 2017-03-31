@@ -104,9 +104,12 @@ class StudyOverviewViewControllerFirst : UIViewController{
     @IBAction func watchVideoButtonAction(_ sender: Any) {
         
         let urlString = overviewSectionDetail.link!
-        if urlString.contains("youtube"){
+        let url = URL.init(string: urlString)
+        let extenstion = url?.pathExtension
+    
+        if  extenstion == nil || extenstion?.characters.count == 0 {
             
-            let url = URL.init(string: urlString)
+            
             UIApplication.shared.openURL(url!)
             
         }

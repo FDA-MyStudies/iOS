@@ -42,7 +42,7 @@ class ChangePasswordViewController: UIViewController {
         
         //Used to set border color for bottom view
         buttonSubmit?.layer.borderColor = kUicolorForButtonBackground
-        self.title = NSLocalizedString(kChangePasswordTitleText, comment: "")
+        
         
         //load plist info
         let plistPath = Bundle.main.path(forResource: "ChangePasswordData", ofType: ".plist", inDirectory:nil)
@@ -58,6 +58,14 @@ class ChangePasswordViewController: UIViewController {
         
         //unhide navigationbar
         self.navigationController?.setNavigationBarHidden(false, animated: true)
+        
+        if temporaryPassword.characters.count > 0{
+            self.title = NSLocalizedString(kCreatePasswordTitleText, comment: "")
+        }
+        else {
+            self.title = NSLocalizedString(kChangePasswordTitleText, comment: "")
+        }
+        
         
     }
     

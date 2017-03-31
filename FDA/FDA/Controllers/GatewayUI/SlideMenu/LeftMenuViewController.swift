@@ -92,7 +92,7 @@ class LeftMenuViewController : UIViewController, LeftMenuProtocol {
         
         
         
-        self.labelVersion.text = "v" + "\(Utilities.getAppVersion())"
+        self.labelVersion.text = "V" + "\(Utilities.getAppVersion())"
         
         
     }

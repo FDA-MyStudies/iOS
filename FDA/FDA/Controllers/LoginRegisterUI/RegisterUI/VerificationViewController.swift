@@ -14,14 +14,29 @@ let kSignupCompletionSegue = "signupCompletionSegue"
 let kAlertMessageText = "Message"
 let kAlertMessageVerifyEmail = "Please verify your email address."
 
-let kAlertMessageResendEmail = "An email verification link has been sent to your registered email."
+let kAlertMessageResendEmail = "An email verification code has been sent to your registered email."
+
+
+enum VerificationLoadFrom:Int{
+    case forgotPassword
+    case login
+    case signup
+    case joinStudy
+    
+}
 
 class VerificationViewController : UIViewController{
     
     @IBOutlet var buttonContinue : UIButton?
     @IBOutlet var buttonResendEmail : UIButton?
     @IBOutlet var labelVerificationMessage : UILabel?
+    @IBOutlet var textFieldEmail :UITextField?
+    @IBOutlet var textFieldVerificationCode : UITextField?
+    var labelMessage : String?
+    var isFromForgotPassword :Bool =  false
+    var emailId:String?
     var shouldCreateMenu:Bool = true
+    var viewLoadFrom:VerificationLoadFrom = .signup
     
  //MARK:View Controllere delegates
     
@@ -32,13 +47,21 @@ class VerificationViewController : UIViewController{
         buttonContinue?.layer.borderColor = kUicolorForButtonBackground
         self.title = NSLocalizedString("", comment: "")
         
-        let message = labelVerificationMessage?.text
-        let modifiedMessage = message?.replacingOccurrences(of: kDefaultEmail, with: User.currentUser.emailId!)
-        labelVerificationMessage?.text = modifiedMessage
+        //let message = labelVerificationMessage?.text
+        //let modifiedMessage = message?.replacingOccurrences(of: kDefaultEmail, with: User.currentUser.emailId!)
+        //labelVerificationMessage?.text = modifiedMessage
+        
+        
+        if labelMessage != nil {
+            labelVerificationMessage?.text = labelMessage
+        }
+        
+        textFieldEmail?.text = self.emailId!
+        
         
         //hide navigationbar
         self.navigationController?.setNavigationBarHidden(true, animated: true)
-        
+       
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -56,13 +79,64 @@ class VerificationViewController : UIViewController{
     
 //MARK:Button Actions
  
+    
+    @IBAction func buttonActionBack(_ sender : UIButton){
+        _ = self.navigationController?.popViewController(animated: true)
+    }
+    
+    @IBAction func continueTwoButtonAction( _ sender : UIButton){
+        
+        self.view.endEditing(true)
+        if ((textFieldEmail?.text)!.isEmpty) && (self.textFieldVerificationCode?.text == "") {
+            self.showAlertMessages(textMessage: kMessageAllFieldsAreEmpty)
+        }else if (textFieldEmail?.text)! == "" {
+            self.showAlertMessages(textMessage: kMessageEmailBlank)
+            
+        }else if !(Utilities.isValidEmail(testStr: (textFieldEmail?.text)!)) {
+            self.showAlertMessages(textMessage: kMessageValidEmail)
+            
+        }else if self.textFieldVerificationCode?.text == ""{
+            self.showAlertMessages(textMessage: kMessageVerificationCodeEmpty)
+            
+        }else{
+            print("Call the webservice")
+            
+            UserServices().verifyEmail(emailId:(textFieldEmail?.text)!,  verificationCode:(self.textFieldVerificationCode?.text)! , delegate: self)
+            
+            
+        }
+    }
+    
+    
     @IBAction func continueButtonAction(_ sender: Any) {
         
-        UserServices().confirmUserRegistration(self)
+        if (textFieldVerificationCode?.text?.characters.count)! > 0 {
+             UserServices().verifyEmail(emailId:User.currentUser.emailId!,  verificationCode:(self.textFieldVerificationCode?.text)! , delegate: self)
+        }
+        else{
+             self.showAlertMessages(textMessage: kMessageVerificationCodeEmpty)
+        }
     }
     
     @IBAction func resendEmailButtonAction(_ sender: UIButton){
-        UserServices().resendEmailConfirmation(self)
+        
+        var finalEmail:String = User.currentUser.emailId!
+        
+        if viewLoadFrom == .forgotPassword {
+            finalEmail = (textFieldEmail?.text)!
+        }
+       
+        
+        if (finalEmail.isEmpty) || !(Utilities.isValidEmail(testStr: finalEmail)) {
+             self.showAlertMessages(textMessage: kMessageValidEmail)
+        }
+        else{
+             UserServices().resendEmailConfirmation(emailId: finalEmail, delegate: self)
+        }
+       
+        
+        
+       
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -73,6 +147,15 @@ class VerificationViewController : UIViewController{
         }
     }
 //MARK:Utility Methods
+    
+    
+    /*
+     Used to show the alert using Utility
+     */
+    func showAlertMessages(textMessage : String){
+        UIUtilities.showAlertMessage("", errorMessage: NSLocalizedString(textMessage, comment: ""), errorAlertActionTitle: NSLocalizedString("OK", comment: ""), viewControllerUsed: self)
+    }
+    
     func navigateToSignUpCompletionStep(){
         
         self.performSegue(withIdentifier: kSignupCompletionSegue, sender: nil)
@@ -94,6 +177,38 @@ class VerificationViewController : UIViewController{
     }
 }
 
+//MARK:TextField Delegates
+extension VerificationViewController:UITextFieldDelegate{
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        
+        let finalString = textField.text! + string
+        
+        if string == " " || finalString.characters.count > 255{
+            return false
+        }
+        else{
+            return true
+        }
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        print(textField.text!)
+       
+        if textField == textFieldEmail {
+             User.currentUser.emailId = textField.text
+            
+        } else {
+            
+        }
+    }
+
+    
+    
+}
+
+
+
+
 //MARK:Webservice Delegates
 
 extension VerificationViewController:NMWebServiceDelegate {
@@ -109,8 +224,16 @@ extension VerificationViewController:NMWebServiceDelegate {
         
         if User.currentUser.verified == true{
             
-            if User.currentUser.isLoginWithTempPassword {
-                self.navigateToChangePasswordViewController()
+            if viewLoadFrom == .forgotPassword{
+                //pop to login
+                
+                self.performSegue(withIdentifier: "signInUnwindSegue", sender: self)
+            }
+            else if viewLoadFrom == .joinStudy {
+                //pop to study home
+                let leftController = slideMenuController()?.leftViewController as! LeftMenuViewController
+                leftController.createLeftmenuItems()
+                self.performSegue(withIdentifier: "unwindStudyHomeSegue", sender: self)
             }
             else{
                 self.navigateToSignUpCompletionStep()

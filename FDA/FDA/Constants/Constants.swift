@@ -28,7 +28,7 @@ let kTitleError = "Error"
 let kTitleMessage = "Message"
 let kTitleOk = "Ok"
 let kTitleCancel = "Cancel"
-
+let kRegistrationInfoMessage = "Registration (or sign up) for the app  is requested only to provide you with a seamless experience of using the app. Your registration information does not become part of the data collected for any study(ies) housed in the app. Each study has its own consent process and your data for the study will not be collected without you providing your informed consent prior to joining the study."
 
 
 
@@ -38,7 +38,7 @@ let kSignInTitleText = "SIGN IN"
 let kSignInTableViewCellIdentifier = "DetailsCell"
 
 //MARK: ForgotPassword Constants
-let kForgotPasswordTitleText = "FORGOT PASSWORD"
+let kForgotPasswordTitleText = "PASSWORD HELP"
 let kForgotPasswordResponseMessage = "We have sent temporary password to your registered email. Please login with temporary password and change your password."
 
 //MARK: SignUp Constants
@@ -60,9 +60,9 @@ let kMessageEmailBlank = "Please enter your email address."
 let kMessageValidEmail = "Please enter valid email address."
 let kMessagePasswordBlank = "Please enter your password."
 let kMessageConfirmPasswordBlank = "Please enter confirm password."
-let kMessageValidatePasswords = "New password and confirm password does not match."
+let kMessageValidatePasswords = "Password and confirm password does not match."
 let kMessageValidatePasswordCharacters = "Password should have minimum of 8 characters."
-let kMessageValidatePasswordComplexity = "Password should have minimum of 1 special character, 1 upper case letter,1 numeric number and length(8 - 16) characters"
+let kMessageValidatePasswordComplexity = "Your password must:\nBe 8 to 14 characters long\nContain a lower case letter\nContain a upper case letter\nContain a number\nContain one of the below special characters\n!  # $ % & ' () * + , - . : ; < > = ? @ [] ^ _  { } | ~"
 let kMessageAgreeToTermsAndConditions = "Please agree to terms and conditions."
 
 let kMessageNewPasswordBlank = "Please enter your new password."
@@ -70,6 +70,7 @@ let kMessageValidateChangePassword = "New password and old password are same."
 
 //MARK: ChangePassword Constants
 let kChangePasswordTitleText = "CHANGE PASSWORD"
+let kCreatePasswordTitleText = "CREATE PASSWORD"
 let kChangePawwordCellIdentifer = "changePasswordCell"
 let kChangePasswordResponseMessage = "Your password changed successfully"
 
@@ -80,5 +81,7 @@ let kMessageValidFirstName = "Please enter valid first name. Please use letters(
 let kMessageValidLastName = "Please enter valid last name. Please use letters(length:1 - 100 characters)."
 
 let kMessageValidateOldAndNewPasswords = "Old password and New password should not be same."
+ //MARK:VerificationController
 
+let kMessageVerificationCodeEmpty = "Please enter valid Verification Code"
 

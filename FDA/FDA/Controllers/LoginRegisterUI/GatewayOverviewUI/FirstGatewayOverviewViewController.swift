@@ -36,7 +36,7 @@ class FirstGatewayOverviewViewController : UIViewController{
         //self.imageViewBackgroundImage?.addSubview(effectView)
 
         
-         UIApplication.shared.statusBarStyle = .lightContent
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -45,10 +45,12 @@ class FirstGatewayOverviewViewController : UIViewController{
         labelTitleText?.text = overviewSectionDetail.title
         labelDescriptionText?.text = overviewSectionDetail.text
         imageViewBackgroundImage?.image = UIImage.init(named: overviewSectionDetail.imageURL!)
+        
+        UIApplication.shared.statusBarStyle = .lightContent
 
     }
     override func viewDidDisappear(_ animated: Bool) {
-        UIApplication.shared.statusBarStyle = .default
+       
     }
     
     
@@ -69,16 +71,27 @@ class FirstGatewayOverviewViewController : UIViewController{
 //MARK:Button Action
     @IBAction func watchVideoButtonClicked(_ sender: Any){
         
-        let url : NSURL = NSURL(string: "https://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4")!
-        moviePlayer = MPMoviePlayerViewController(contentURL:url as URL!)
         
-        moviePlayer.moviePlayer.movieSourceType = .streaming
+        let urlString = overviewSectionDetail.link!
+        if urlString.contains("youtube"){
+            let url = URL.init(string: urlString)
+            UIApplication.shared.openURL(url!)
+        }
+        else {
+            
+            let url = URL.init(string: urlString)
+            
+            moviePlayer = MPMoviePlayerViewController(contentURL:url)
+            moviePlayer.moviePlayer.movieSourceType = .streaming
+            
+            NotificationCenter.default.addObserver(self, selector:#selector(StudyOverviewViewControllerFirst.moviePlayBackDidFinish(notification:)),
+            name: NSNotification.Name.MPMoviePlayerPlaybackDidFinish,
+            object: moviePlayer.moviePlayer)
+            
+            self.present(moviePlayer, animated: true, completion: nil)
+        }
         
-        NotificationCenter.default.addObserver(self, selector:#selector(StudyOverviewViewControllerFirst.moviePlayBackDidFinish(notification:)),
-                                               name: NSNotification.Name.MPMoviePlayerPlaybackDidFinish,
-                                               object: moviePlayer.moviePlayer)
-        
-        self.present(moviePlayer, animated: true, completion: nil)
+       
     
     }
     

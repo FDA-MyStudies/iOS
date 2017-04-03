@@ -11,9 +11,12 @@ import UIKit
 import IQKeyboardManagerSwift
 import SlideMenuControllerSwift
 
+let kVerifyMessageFromSignIn = "Your registered email is pending verification. Please type in the Verification Code received in the email to complete this step and proceed to using the app."
+
 
 enum SignInLoadFrom:Int{
     case gatewayOverview
+    case joinStudy
     case menu
 }
 
@@ -46,8 +49,12 @@ class SignInViewController : UIViewController{
         IQKeyboardManager.sharedManager().enable = true
         
         //Used for background tap dismiss keyboard
-        let gestureRecognizwe : UITapGestureRecognizer = UITapGestureRecognizer.init(target: self, action: #selector(SignInViewController.dismissKeyboard))
-        self.tableView?.addGestureRecognizer(gestureRecognizwe)
+        let gestureRecognizer : UITapGestureRecognizer = UITapGestureRecognizer.init(target: self, action: #selector(SignInViewController.dismissKeyboard))
+        self.tableView?.addGestureRecognizer(gestureRecognizer)
+        
+        
+        //info button
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(image:UIImage.init(named:"info"), style: .done, target: self, action: #selector(self.buttonInfoAction(_:)))
         
         
         //unhide navigationbar
@@ -66,9 +73,13 @@ class SignInViewController : UIViewController{
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        
+        //unhide navigationbar
+        self.navigationController?.setNavigationBarHidden(false, animated: true)
+        
         user = User.currentUser
         
-        if viewLoadFrom == .gatewayOverview {
+        if viewLoadFrom == .gatewayOverview || viewLoadFrom == .joinStudy{
             self.addBackBarButton()
         }
         else {
@@ -78,6 +89,8 @@ class SignInViewController : UIViewController{
         self.perform(#selector(SignInViewController.setInitialDate), with: self, afterDelay: 1)
         
         self.tableView?.reloadData()
+        
+        UIApplication.shared.statusBarStyle = .default
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -86,7 +99,7 @@ class SignInViewController : UIViewController{
     }
     override func viewWillDisappear(_ animated: Bool) {
         //hide navigationbar
-        if viewLoadFrom == .gatewayOverview {
+        if viewLoadFrom == .gatewayOverview{
             self.navigationController?.setNavigationBarHidden(true, animated: true)
         }
     }
@@ -112,13 +125,25 @@ class SignInViewController : UIViewController{
             UserServices().loginUser(self)
         }
     }
+    @IBAction func buttonInfoAction(_ sender:Any){
+        UIUtilities.showAlertWithTitleAndMessage(title:"", message:kRegistrationInfoMessage as NSString)
+    }
     
 //MARK: Segue Methods
+    
+    
+    @IBAction func unwindFromVerification(_ segue:UIStoryboardSegue){
+        
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         if let signUpController = segue.destination as? SignUpViewController {
             if viewLoadFrom == .menu {
                 signUpController.viewLoadFrom = .menu_login
+            }
+            else if(viewLoadFrom == .joinStudy){
+                signUpController.viewLoadFrom = .joinStudy_login
             }
             else {
                 signUpController.viewLoadFrom = .login
@@ -129,7 +154,21 @@ class SignInViewController : UIViewController{
             
             if viewLoadFrom == .menu {
                 verificationController.shouldCreateMenu = false
+                verificationController.viewLoadFrom = .login
             }
+            else if viewLoadFrom == .joinStudy {
+                verificationController.viewLoadFrom = .joinStudy
+                verificationController.shouldCreateMenu = false
+            }
+            else if viewLoadFrom == .gatewayOverview{
+                
+                verificationController.viewLoadFrom = .login
+                verificationController.shouldCreateMenu = true
+            }
+            
+            
+            verificationController.labelMessage = kVerifyMessageFromSignIn
+            
         }
     }
     
@@ -191,9 +230,13 @@ class SignInViewController : UIViewController{
         if viewLoadFrom == .menu {
             changePassword.viewLoadFrom = .menu_login
         }
+        else if viewLoadFrom == .joinStudy {
+            changePassword.viewLoadFrom = .joinStudy
+        }
         else {
             changePassword.viewLoadFrom = .login
         }
+        changePassword.temporaryPassword = User.currentUser.password!
         self.navigationController?.pushViewController(changePassword, animated: true)
     }
     
@@ -275,6 +318,11 @@ extension SignInViewController : UITextFieldDelegate{
             }
         }
         else{
+            if (range.location == textField.text?.characters.count && string == " ") {
+                
+                textField.text = textField.text?.appending("\u{00a0}")
+                return false
+            }
             return true
         }
         
@@ -318,6 +366,12 @@ extension SignInViewController:NMWebServiceDelegate {
                 
                 if viewLoadFrom == .gatewayOverview {
                     self.navigateToGatewayDashboard()
+                }
+                else if viewLoadFrom == .joinStudy {
+                    
+                    let leftController = slideMenuController()?.leftViewController as! LeftMenuViewController
+                    leftController.createLeftmenuItems()
+                    _ = self.navigationController?.popViewController(animated: true)
                 }
                 else {
                     

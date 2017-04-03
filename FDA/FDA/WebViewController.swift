@@ -70,6 +70,7 @@ class WebViewController : UIViewController{
     
         webView?.delegate = self
         
+        UIApplication.shared.statusBarStyle = .default
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -84,6 +85,7 @@ class WebViewController : UIViewController{
 }
 
 extension WebViewController:UIWebViewDelegate{
+    
     func webViewDidFinishLoad(_ webView: UIWebView) {
         self.activityIndicator.stopAnimating()
         self.activityIndicator.removeFromSuperview()
@@ -92,7 +94,19 @@ extension WebViewController:UIWebViewDelegate{
         self.activityIndicator.stopAnimating()
         self.activityIndicator.removeFromSuperview()
         
-        UIUtilities.showAlertWithTitleAndMessage(title:NSLocalizedString(kTitleError, comment: "") as NSString, message: error.localizedDescription as NSString)
+        let buttonTitleOK = NSLocalizedString("OK", comment: "")
+        let alert = UIAlertController(title:NSLocalizedString(kTitleError, comment: ""),message:error.localizedDescription,preferredStyle: UIAlertControllerStyle.alert)
+      
+        alert.addAction(UIAlertAction.init(title:buttonTitleOK, style: .default, handler: { (action) in
+            
+            self.dismiss(animated: true, completion: nil)
+            
+        }))
+        
+      
+        self.present(alert, animated: true, completion: nil)
+        
+       
     }
 }
 

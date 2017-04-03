@@ -33,7 +33,7 @@ class StudyOverviewViewControllerFirst : UIViewController{
         buttonJoinStudy?.layer.borderColor = kUicolorForButtonBackground
         if overviewSectionDetail.imageURL != nil {
             let url = URL.init(string:overviewSectionDetail.imageURL!)
-            imageViewStudy?.sd_setImage(with: url, placeholderImage:#imageLiteral(resourceName: "OverViewBg"))
+            imageViewStudy?.sd_setImage(with: url, placeholderImage:nil)
         }
         
         if overviewSectionDetail.link != nil {
@@ -42,15 +42,11 @@ class StudyOverviewViewControllerFirst : UIViewController{
         else{
              buttonWatchVideo?.isHidden =  true
         }
-        UIApplication.shared.statusBarStyle = .lightContent
-        
-        
-       
         
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-        UIApplication.shared.statusBarStyle = .default
+       
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -58,23 +54,38 @@ class StudyOverviewViewControllerFirst : UIViewController{
         
          labelTitle?.text = overviewSectionDetail.title
         
-       
-        print("size = \(labelTitle?.text?.characters.count)")
+        var fontSize = 18.0
+        if DeviceType.IS_IPAD || DeviceType.IS_IPHONE_4_OR_LESS {
+            fontSize = 13.0
+        }
+        else if DeviceType.IS_IPHONE_5 {
+            fontSize = 14.0
+        }
+        
         
         let attrStr = try! NSAttributedString(
             data: (overviewSectionDetail.text?.data(using: String.Encoding.unicode, allowLossyConversion: true)!)!,
             options: [ NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType],
             documentAttributes: nil)
         
+        let attributedText: NSMutableAttributedString = NSMutableAttributedString(attributedString: attrStr)
+        attributedText.addAttributes([NSFontAttributeName:UIFont(
+            name: "HelveticaNeue",
+            size: CGFloat(fontSize))!], range:(attrStr.string as NSString).range(of: attrStr.string))
+        attributedText.addAttribute(NSForegroundColorAttributeName, value: UIColor.white, range: (attrStr.string as NSString).range(of: attrStr.string))
+        
+        
+        
+        
         if Utilities.isValidValue(someObject: attrStr.string as AnyObject?){
-             self.labelDescription?.text = attrStr.string
-            
+             self.labelDescription?.attributedText = attributedText
         }
         else{
              self.labelDescription?.text = ""
         }
-       
+       self.labelDescription?.textAlignment = .center
         
+        UIApplication.shared.statusBarStyle = .lightContent
         
         //self.labelDescription?.text = overviewSectionDetail.text!
         
@@ -87,22 +98,37 @@ class StudyOverviewViewControllerFirst : UIViewController{
     }
     
     override func viewDidDisappear(_ animated: Bool) {
-        UIApplication.shared.statusBarStyle = UIStatusBarStyle.default
+      
     }
    
     
     @IBAction func watchVideoButtonAction(_ sender: Any) {
         
-        let url : NSURL = NSURL(string: overviewSectionDetail.link!)!
-        moviePlayer = MPMoviePlayerViewController(contentURL:url as URL!)
+        let urlString = overviewSectionDetail.link!
+        let url = URL.init(string: urlString)
+        let extenstion = url?.pathExtension
+    
+        if  extenstion == nil || extenstion?.characters.count == 0 {
+            
+            
+            UIApplication.shared.openURL(url!)
+            
+        }
+        else {
+            
+            let url : NSURL = NSURL(string: overviewSectionDetail.link!)!
+            moviePlayer = MPMoviePlayerViewController(contentURL:url as URL!)
+            
+            moviePlayer.moviePlayer.movieSourceType = .streaming
+            
+            NotificationCenter.default.addObserver(self, selector:#selector(StudyOverviewViewControllerFirst.moviePlayBackDidFinish(notification:)),
+                                                   name: NSNotification.Name.MPMoviePlayerPlaybackDidFinish,
+                                                   object: moviePlayer.moviePlayer)
+            
+            self.present(moviePlayer, animated: true, completion: nil)
+
+        }
         
-        moviePlayer.moviePlayer.movieSourceType = .streaming
-        
-        NotificationCenter.default.addObserver(self, selector:#selector(StudyOverviewViewControllerFirst.moviePlayBackDidFinish(notification:)),
-                                               name: NSNotification.Name.MPMoviePlayerPlaybackDidFinish,
-                                               object: moviePlayer.moviePlayer)
-        
-        self.present(moviePlayer, animated: true, completion: nil)
         
     }
     
@@ -110,7 +136,7 @@ class StudyOverviewViewControllerFirst : UIViewController{
         
         if User.currentUser.userType == UserType.AnonymousUser{
             let leftController = slideMenuController()?.leftViewController as! LeftMenuViewController
-            leftController.changeViewController(.profile_signin)
+            leftController.changeViewController(.reachOut_signIn)
         }
         
     }

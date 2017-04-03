@@ -246,7 +246,6 @@ class NetworkWebServiceHandler: NSObject, URLSessionDelegate {
                     DispatchQueue.main.async {
                         self.delegate?.failedRequest(self.networkManager!, requestName: requestName!,error: error! as NSError)
                     }
-                    
                 }
                 }.resume()
             

@@ -22,10 +22,14 @@ let kLeftMenuCellTitleSignIn = "Sign In"
 let kLeftMenuCellTitleNewUser = "New User?"
 let kLeftMenuCellSubTitleValue = "Sign up"
 
+
+let kAlertMessageReachoutText = "This feature will be available in the next sprint."
+
 enum LeftMenu: Int {
     case studyList = 0
     case resources
-    case profile_signin
+    case profile_reachOut
+    case reachOut_signIn
     case signup
 }
 
@@ -46,7 +50,7 @@ class LeftMenuViewController : UIViewController, LeftMenuProtocol {
     
     @IBOutlet weak var buttonSignOut: UIButton?
     var menus = [ ["menuTitle":"Home",
-                   "iconName":"home_menu1"],
+                   "iconName":"home_menu1-1"],
                   
                   ["menuTitle":"Resources",
                    "iconName":"resources_menu1"],
@@ -69,7 +73,7 @@ class LeftMenuViewController : UIViewController, LeftMenuProtocol {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
+        self.view.isHidden = true
         self.createLeftmenuItems()
         
         self.tableView.separatorColor = UIColor(red: 224/255, green: 224/255, blue: 224/255, alpha: 1.0)
@@ -88,7 +92,7 @@ class LeftMenuViewController : UIViewController, LeftMenuProtocol {
         
         
         
-        self.labelVersion.text = "v" + "\(Utilities.getAppVersion())"
+        self.labelVersion.text = "V" + "\(Utilities.getAppVersion())"
         
         
     }
@@ -99,6 +103,7 @@ class LeftMenuViewController : UIViewController, LeftMenuProtocol {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        self.view.isHidden = false
     }
     
     func createControllersForAnonymousUser(){
@@ -122,7 +127,7 @@ class LeftMenuViewController : UIViewController, LeftMenuProtocol {
         let user = User.currentUser
         
         menus = [ ["menuTitle":"Home",
-                   "iconName":"home_menu1"],
+                   "iconName":"home_menu1-1"],
                   
                   ["menuTitle":"Resources",
                    "iconName":"resources_menu1"],
@@ -131,10 +136,16 @@ class LeftMenuViewController : UIViewController, LeftMenuProtocol {
         if user.userType == .FDAUser {
             menus.append(["menuTitle":"Profile",
                           "iconName":"profile_menu1"])
+            menus.append(["menuTitle":"Reach Out",
+                          "iconName":"reachout_menu1"])
+
            
             self.buttonSignOut?.isHidden = false
         }
         else{
+            menus.append(["menuTitle":"Reach Out",
+                          "iconName":"reachout_menu1"])
+
             menus.append(["menuTitle":"Sign In",
                           "iconName":"signin_menu1"])
             
@@ -148,7 +159,7 @@ class LeftMenuViewController : UIViewController, LeftMenuProtocol {
        // let height = UIScreen.main.bounds.size.height  * (220.0 / 667.0) //calculate new height
         
         var height:CGFloat? = 0.0
-        height =  (UIScreen.main.bounds.size.height -  CGFloat(menus.count * 78))/2
+        height =  (UIScreen.main.bounds.size.height -  CGFloat(menus.count * 70))/2
         
         self.tableHeaderView.frame.size = CGSize(width: self.tableHeaderView!.frame.size.width, height: height!)
         self.tableFooterView.frame.size = CGSize(width: self.tableFooterView!.frame.size.width, height: height!)
@@ -193,20 +204,31 @@ class LeftMenuViewController : UIViewController, LeftMenuProtocol {
         switch menu {
         case .studyList:
             self.slideMenuController()?.changeMainViewController(self.studyListViewController, close: true)
-        case .resources: break
-        //self.slideMenuController()?.changeMainViewController(self.javaViewController, close: true)
-        case .profile_signin:
+        case .resources:
+              UIUtilities.showAlertWithTitleAndMessage(title:NSLocalizedString(kAlertMessageText, comment: "") as NSString, message:NSLocalizedString(kAlertMessageReachoutText, comment: "") as NSString)
+        case .profile_reachOut:
             
             if User.currentUser.userType == .FDAUser {
                 self.slideMenuController()?.changeMainViewController(self.profileviewController, close: true)
                 
             }
             else{
-                // go to signin screen
-                //fdaSlideMenuController()?.navigateToHomeControllerForSignin()
-                self.slideMenuController()?.changeMainViewController(self.signInViewController, close: true)
+                // go to ReachOut screen
+                  UIUtilities.showAlertWithTitleAndMessage(title:NSLocalizedString(kAlertMessageText, comment: "") as NSString, message:NSLocalizedString(kAlertMessageReachoutText, comment: "") as NSString)
             }
             
+        case .reachOut_signIn:
+            if User.currentUser.userType == .FDAUser {
+                // go to reach out
+                  UIUtilities.showAlertWithTitleAndMessage(title:NSLocalizedString(kAlertMessageText, comment: "") as NSString, message:NSLocalizedString(kAlertMessageReachoutText, comment: "") as NSString)
+            }
+            else{
+                
+                // go sign in
+                //fdaSlideMenuController()?.navigateToHomeControllerForSignin()
+                self.slideMenuController()?.changeMainViewController(self.signInViewController, close: true)
+                
+            }
         case .signup:
             self.slideMenuController()?.changeMainViewController(self.signUpViewController, close: true)
             
@@ -218,7 +240,7 @@ class LeftMenuViewController : UIViewController, LeftMenuProtocol {
     @IBAction func buttonActionSignOut(_ sender: UIButton) {
         
         
-        UIUtilities.showAlertMessageWithTwoActionsAndHandler(NSLocalizedString("Signout", comment: ""), errorMessage: NSLocalizedString("Are you sure you want to signout ?", comment: ""), errorAlertActionTitle: NSLocalizedString("Yes", comment: ""),
+        UIUtilities.showAlertMessageWithTwoActionsAndHandler(NSLocalizedString("Sign Out", comment: ""), errorMessage: NSLocalizedString("Are you sure you want to sign out ?", comment: ""), errorAlertActionTitle: NSLocalizedString("Sign out", comment: ""),
                                                              errorAlertActionTitle2: NSLocalizedString("Cancel", comment: ""), viewControllerUsed: self,
                                                              action1: {
                                                                 
@@ -252,8 +274,8 @@ extension LeftMenuViewController : UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if let menu = LeftMenu(rawValue: indexPath.row) {
             switch menu {
-            case .studyList, .resources, .profile_signin, .signup:
-                return 78
+            case .studyList, .resources, .profile_reachOut,.reachOut_signIn, .signup:
+                return 70.0
             }
         }
         return 0

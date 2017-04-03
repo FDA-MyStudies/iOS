@@ -43,10 +43,26 @@ class StudyListCell: UITableViewCell {
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
+       
+        let color = studyStatusIndicator?.backgroundColor
         super.setSelected(selected, animated: animated)
-
         // Configure the view for the selected state
+        if(selected) {
+            
+            studyStatusIndicator?.backgroundColor = color
+        }
     }
+    
+   override func setHighlighted(_ highlighted: Bool, animated: Bool) {
+        let color = studyStatusIndicator?.backgroundColor
+        super.setHighlighted(highlighted, animated: animated)
+        if(highlighted) {
+            
+            studyStatusIndicator?.backgroundColor = color
+        }
+
+    }
+    
 
     
     func populateCellWith(study:Study){
@@ -55,8 +71,13 @@ class StudyListCell: UITableViewCell {
         
         labelStudyTitle?.text = study.name
         labelStudyShortDescription?.text = study.description
-        labelStudySponserName?.text = study.sponserName
-        labelStudyCategoryType?.text = study.category
+        if study.sponserName != nil {
+            labelStudySponserName?.text =  study.category! + " | " + study.sponserName!
+        }
+        else {
+            labelStudySponserName?.text =  study.category!
+        }
+        
         studyLogoImage?.image = #imageLiteral(resourceName: "placeholder")
         
         self.setStudyStatus(study: study)

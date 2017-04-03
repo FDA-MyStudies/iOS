@@ -21,7 +21,14 @@ class UIUtilities: NSObject {
         
           let alert = UIAlertController(title:title as String,message:message as String,preferredStyle: UIAlertControllerStyle.alert)
           alert.addAction(UIAlertAction(title:NSLocalizedString("OK", comment: ""), style: .default, handler: nil))
-          UIApplication.shared.keyWindow?.rootViewController?.present(alert, animated: true, completion: nil)
+        var rootViewController = UIApplication.shared.keyWindow?.rootViewController
+        if let navigationController = rootViewController as? UINavigationController {
+            rootViewController = navigationController.viewControllers.first
+        }
+        if let tabBarController = rootViewController as? UITabBarController {
+            rootViewController = tabBarController.selectedViewController
+        }
+        rootViewController?.present(alert, animated: true, completion: nil)
          
         
         

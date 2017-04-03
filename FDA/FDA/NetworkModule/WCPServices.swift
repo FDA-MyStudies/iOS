@@ -32,7 +32,7 @@ let kOverviewType = "type"
 let kOverviewImageLink = "image"
 let kOverviewTitle = "title"
 let kOverviewText = "text"
-let kOverviewMediaLink = "link"
+let kOverviewMediaLink = "videoLink" // link
 let kOverviewWebsiteLink = "website"
 
 //notification

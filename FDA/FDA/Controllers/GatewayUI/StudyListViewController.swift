@@ -12,7 +12,7 @@ class StudyListViewController: UIViewController {
     
     
     @IBOutlet var tableView:UITableView?
-    
+    @IBOutlet var labelHelperText:UILabel!
     
     func loadTestData(){
         
@@ -43,6 +43,9 @@ class StudyListViewController: UIViewController {
         }
     }
     
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -50,28 +53,47 @@ class StudyListViewController: UIViewController {
         
         //self.addRightBarButton() //Phase2
         //self.addLeftBarButton()
-        self.title = NSLocalizedString("FDA LISTENS!", comment: "")
+        //self.title = NSLocalizedString("FDA LISTENS!", comment: "")
         
-        //self.tableView?.rowHeight = UITableViewAutomaticDimension
-        if User.currentUser.userType == .FDAUser {
-            
-            self.tableView?.rowHeight = 156
-        }
-        else {
-            self.tableView?.rowHeight = 140
-        }
+        let titleLabel = UILabel()
+        titleLabel.text = NSLocalizedString("FDA LISTENS!", comment: "")
+        titleLabel.font = UIFont(name: "HelveticaNeue-Medium", size: 18)
+        titleLabel.textAlignment = .left
+        titleLabel.textColor = Utilities.getUIColorFromHex(0x007cba)
+        titleLabel.frame = CGRect.init(x: 0, y: 0, width: 300, height: 44)
+        self.navigationItem.titleView = titleLabel
+        
         
         //self.loadTestData()
+        
+        
         
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        
+        
+        self.labelHelperText.isHidden = true
         self.setNavigationBarItem()
         self.navigationController?.setNavigationBarHidden(false, animated: true)
        
         self.sendRequestToGetStudyList()
         //self.sendRequestToGetUserPreference()
         
+        
+        if User.currentUser.userType == .FDAUser {
+            
+            self.tableView?.estimatedRowHeight = 156
+            self.tableView?.rowHeight = UITableViewAutomaticDimension
+            
+        }
+        else {
+            self.tableView?.estimatedRowHeight = 140
+            self.tableView?.rowHeight = UITableViewAutomaticDimension
+
+        }
+
+        UIApplication.shared.statusBarStyle = .default
     }
     
     override func didReceiveMemoryWarning() {
@@ -122,8 +144,8 @@ class StudyListViewController: UIViewController {
     func navigateToStudyHome(){
         
         let studyStoryBoard = UIStoryboard.init(name: "Study", bundle: Bundle.main)
-        let studyHomeController = studyStoryBoard.instantiateViewController(withIdentifier: String(describing: StudyHomeViewController.classForCoder()))
-        
+        let studyHomeController = studyStoryBoard.instantiateViewController(withIdentifier: String(describing: StudyHomeViewController.classForCoder())) as! StudyHomeViewController
+        studyHomeController.delegate = self
         self.navigationController?.pushViewController(studyHomeController, animated: true)
 
     }
@@ -140,6 +162,20 @@ class StudyListViewController: UIViewController {
     }
     func sendRequestToUpdateBookMarkStatus(userStudyStatus:UserStudyStatus){
         UserServices().updateStudyBookmarkStatus(studyStauts: userStudyStatus, delegate: self)
+    }
+    
+     //MARK:Responses
+    func handleStudyListResponse(){
+        
+        if (Gateway.instance.studies?.count)! > 0{
+            self.tableView?.reloadData()
+            self.labelHelperText.isHidden = true
+        }
+        else {
+            self.tableView?.isHidden = true
+            self.labelHelperText.isHidden = false
+        }
+        
     }
     
     
@@ -215,7 +251,7 @@ extension StudyListViewController:NMWebServiceDelegate {
         self.removeProgressIndicator()
         
         if requestName as String == WCPMethods.studyList.rawValue{
-            self.tableView?.reloadData()
+            self.handleStudyListResponse()
         }
         else if(requestName as String == WCPMethods.studyInfo.rawValue){
             self.navigateToStudyHome()
@@ -241,5 +277,19 @@ extension StudyListViewController:NMWebServiceDelegate {
             
             UIUtilities.showAlertWithTitleAndMessage(title:NSLocalizedString(kErrorTitle, comment: "") as NSString, message: error.localizedDescription as NSString)
         }
+    }
+}
+
+extension StudyListViewController:StudyHomeViewDontrollerDelegate{
+    func studyHomeJoinStudy() {
+        
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            // your code here
+            let leftController = self.slideMenuController()?.leftViewController as! LeftMenuViewController
+            leftController.changeViewController(.reachOut_signIn)
+        }
+        
+       
     }
 }

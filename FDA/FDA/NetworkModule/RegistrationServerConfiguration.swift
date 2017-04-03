@@ -27,6 +27,7 @@ enum RegistrationMethods:String {
     case changePassword
     case resendConfirmation
     case deactivate
+    case verify
     
     var description:String{
         switch self {

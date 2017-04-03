@@ -21,6 +21,7 @@ enum ChangePasswordLoadFrom:Int{
     case login
     case menu_login
     case profile
+    case joinStudy
 }
 
 class ChangePasswordViewController: UIViewController {
@@ -31,6 +32,7 @@ class ChangePasswordViewController: UIViewController {
     var confirmPassword = ""
     @IBOutlet var tableView : UITableView?
     @IBOutlet var buttonSubmit : UIButton?
+    var temporaryPassword:String = ""
     
     var viewLoadFrom:ChangePasswordLoadFrom = .profile
     
@@ -40,7 +42,7 @@ class ChangePasswordViewController: UIViewController {
         
         //Used to set border color for bottom view
         buttonSubmit?.layer.borderColor = kUicolorForButtonBackground
-        self.title = NSLocalizedString(kChangePasswordTitleText, comment: "")
+        
         
         //load plist info
         let plistPath = Bundle.main.path(forResource: "ChangePasswordData", ofType: ".plist", inDirectory:nil)
@@ -57,12 +59,22 @@ class ChangePasswordViewController: UIViewController {
         //unhide navigationbar
         self.navigationController?.setNavigationBarHidden(false, animated: true)
         
+        if temporaryPassword.characters.count > 0{
+            self.title = NSLocalizedString(kCreatePasswordTitleText, comment: "")
+        }
+        else {
+            self.title = NSLocalizedString(kChangePasswordTitleText, comment: "")
+        }
+        
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         self.addBackBarButton()
+        
+        UIApplication.shared.statusBarStyle = .default
         
     }
     
@@ -155,7 +167,17 @@ extension ChangePasswordViewController : UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: kSignInTableViewCellIdentifier, for: indexPath) as! SignInTableViewCell
         
         cell.textFieldValue?.tag = indexPath.row + 100
+        
         cell.populateCellData(data: tableViewData, securedText: true)
+        if indexPath.row == 0 && temporaryPassword.characters.count > 0{
+            oldPassword = temporaryPassword
+            cell.textFieldValue?.text = oldPassword
+            cell.textFieldValue?.isEnabled = false
+            
+        }
+        else {
+            cell.textFieldValue?.isEnabled = true
+        }
         
         return cell
     }
@@ -189,10 +211,21 @@ extension ChangePasswordViewController : UITextFieldDelegate{
                 return false
             }
             else{
+                if (range.location == textField.text?.characters.count && string == " ") {
+                    
+                    textField.text = textField.text?.appending("\u{00a0}")
+                    return false
+                }
                 return true
             }
         }
         else{
+            
+            if (range.location == textField.text?.characters.count && string == " ") {
+                
+                textField.text = textField.text?.appending("\u{00a0}")
+                return false
+            }
             return true
         }
     }
@@ -245,6 +278,12 @@ extension ChangePasswordViewController:NMWebServiceDelegate {
             //create menu
             
             self.createMenuView()
+        }
+        else if viewLoadFrom == .joinStudy {
+            
+            let leftController = slideMenuController()?.leftViewController as! LeftMenuViewController
+            leftController.createLeftmenuItems()
+             self.performSegue(withIdentifier: "unwindStudyHomeSegue", sender: self)
         }
         
         

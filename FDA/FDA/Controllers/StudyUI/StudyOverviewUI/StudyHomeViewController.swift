@@ -12,6 +12,11 @@ import ResearchKit
 
 let kEligibilityConsentTask = "EligibilityConsentTask"
 
+
+protocol StudyHomeViewDontrollerDelegate {
+    func studyHomeJoinStudy()
+}
+
 class StudyHomeViewController : UIViewController{
     
     @IBOutlet weak var container : UIView!
@@ -23,7 +28,11 @@ class StudyHomeViewController : UIViewController{
     @IBOutlet var buttonVisitWebsite : UIButton?
     @IBOutlet var buttonViewConsent : UIButton?
     
+    @IBOutlet var viewBottombarBg :UIView?
+    
     @IBOutlet var viewSeperater: UIView?
+    
+    var delegate:StudyHomeViewDontrollerDelegate?
     
     var pageViewController: PageViewController? {
         didSet {
@@ -46,13 +55,13 @@ class StudyHomeViewController : UIViewController{
         if User.currentUser.userType == UserType.AnonymousUser {
             buttonStar.isHidden = true
         }
-       
         
         
-            if Study.currentStudy?.studyId != nil {
-                WCPServices().getConsentDocument(studyId: (Study.currentStudy?.studyId)!, delegate: self as NMWebServiceDelegate)
-            }
-    
+        
+        if Study.currentStudy?.studyId != nil {
+            WCPServices().getConsentDocument(studyId: (Study.currentStudy?.studyId)!, delegate: self as NMWebServiceDelegate)
+        }
+        
         
         
         
@@ -62,7 +71,7 @@ class StudyHomeViewController : UIViewController{
         super.viewWillAppear(animated)
         
         //hide navigationbar
-        //self.navigationController?.setNavigationBarHidden(true, animated: true)
+        self.navigationController?.setNavigationBarHidden(true, animated: true)
         
         
         
@@ -125,8 +134,23 @@ class StudyHomeViewController : UIViewController{
     
     @IBAction func buttonActionJoinStudy(_ sender: UIButton){
         if User.currentUser.userType == UserType.AnonymousUser{
-            let leftController = slideMenuController()?.leftViewController as! LeftMenuViewController
-            leftController.changeViewController(.profile_signin)
+            //let leftController = slideMenuController()?.leftViewController as! LeftMenuViewController
+            //leftController.changeViewController(.reachOut_signIn)
+            
+            
+            
+//            let loginStoryBoard = UIStoryboard(name: "Login", bundle: nil)
+//            let signInController = loginStoryBoard.instantiateViewController(withIdentifier:  String(describing: SignInViewController.classForCoder())) as! SignInViewController
+//            signInController.viewLoadFrom = .joinStudy
+//            self.navigationController?.pushViewController(signInController, animated: true)
+            
+            
+            _ = self.navigationController?.popViewController(animated: true)
+            self.delegate?.studyHomeJoinStudy()
+            
+        }
+        else {
+              UIUtilities.showAlertWithTitleAndMessage(title:NSLocalizedString(kAlertMessageText, comment: "") as NSString, message:NSLocalizedString(kAlertMessageReachoutText, comment: "") as NSString)
         }
         else{
             
@@ -200,7 +224,7 @@ class StudyHomeViewController : UIViewController{
         let loginStoryboard = UIStoryboard.init(name: "Main", bundle:Bundle.main)
         let webViewController = loginStoryboard.instantiateViewController(withIdentifier:"WebViewController") as! UINavigationController
         let webView = webViewController.viewControllers[0] as! WebViewController
-        //webView.requestLink = "http://www.fda.gov"
+       
         
         
         if sender.tag == 1188 {
@@ -215,9 +239,11 @@ class StudyHomeViewController : UIViewController{
         
         self.navigationController?.present(webViewController, animated: true, completion: nil)
     }
-
     
     
+    @IBAction func unwindeToStudyHome(_ segue:UIStoryboardSegue){
+        //unwindStudyHomeSegue
+    }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let pageViewController = segue.destination as? PageViewController {
             pageViewController.pageViewDelegate = self
@@ -246,13 +272,24 @@ extension StudyHomeViewController: PageViewControllerDelegate {
         if index == 0 {
             // for First Page
             
-            buttonJoinStudy?.backgroundColor = kUIColorForSubmitButtonBackground
-            buttonJoinStudy?.setTitleColor(UIColor.white, for: .normal)
+            
+            
+            UIView.animate(withDuration: 0.1, animations: {
+                self.buttonJoinStudy?.backgroundColor = kUIColorForSubmitButtonBackground
+                self.buttonJoinStudy?.setTitleColor(UIColor.white, for: .normal)
+               
+            })
+            
+            
             
         } else {
             // for All other pages
-            buttonJoinStudy?.backgroundColor = UIColor.white
-            buttonJoinStudy?.setTitleColor(kUIColorForSubmitButtonBackground, for: .normal)
+            
+            UIView.animate(withDuration: 0.1, animations: {
+                
+                self.buttonJoinStudy?.backgroundColor = UIColor.white
+                self.buttonJoinStudy?.setTitleColor(kUIColorForSubmitButtonBackground, for: .normal)
+            })
         }
     }
     

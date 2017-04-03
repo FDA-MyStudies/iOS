@@ -78,6 +78,8 @@ class ProfileViewController: UIViewController {
         UserServices().getUserProfile(self as NMWebServiceDelegate)
         self.setNavigationBarItem()
         
+        UIApplication.shared.statusBarStyle = .default
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -171,7 +173,7 @@ class ProfileViewController: UIViewController {
     
     @IBAction func buttonActionSignOut(_ sender: UIButton) {
         
-        UIUtilities.showAlertMessageWithTwoActionsAndHandler(NSLocalizedString("Signout", comment: ""), errorMessage: NSLocalizedString("Are you sure you want to signout ?", comment: ""), errorAlertActionTitle: NSLocalizedString("Yes", comment: ""),
+        UIUtilities.showAlertMessageWithTwoActionsAndHandler(NSLocalizedString("Sign out", comment: ""), errorMessage: NSLocalizedString("Are you sure you want to sign out ?", comment: ""), errorAlertActionTitle: NSLocalizedString("Sign out", comment: ""),
                                                              errorAlertActionTitle2: NSLocalizedString("Cancel", comment: ""), viewControllerUsed: self,
                                                              action1: {
                                                                 

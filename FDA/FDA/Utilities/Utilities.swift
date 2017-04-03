@@ -192,6 +192,13 @@ class Utilities: NSObject {
     //Used to check all the validations for password
     class func isPasswordValid( text : String) -> Bool{
         let text = text
+        
+        let lowercaseLetterRegEx  = ".*[a-z]+.*"
+        let lowercaseTextTest = NSPredicate(format:"SELF MATCHES %@", lowercaseLetterRegEx)
+        let lowercaseresult = lowercaseTextTest.evaluate(with: text)
+        
+        
+        
         let capitalLetterRegEx  = ".*[A-Z]+.*"
         let texttest = NSPredicate(format:"SELF MATCHES %@", capitalLetterRegEx)
         let capitalresult = texttest.evaluate(with: text)
@@ -201,17 +208,18 @@ class Utilities: NSObject {
         let texttest1 = NSPredicate(format:"SELF MATCHES %@", numberRegEx)
         let numberresult = texttest1.evaluate(with: text)
         print("\(numberresult)")
-        
-        let specialCharacterRegEx  = ".*[!&^%$#@()/]+.*"
+        //".*[!#$%&'()*+,-.:;<>=?@[\]^_{}|~]+.*"
+        //"!@#%&-_=?:;\"'<>,`~\\*\\?\\+\\[\\]\\(\\)\\{\\}\\^\\$\\|\\\\\\.\\/"
+        let specialCharacterRegEx  = ".*[!#$%&'()*+,-.:;\\[\\]<>=?@^_{}|~]+.*"
         let texttest2 = NSPredicate(format:"SELF MATCHES %@", specialCharacterRegEx)
         
         let specialresult = texttest2.evaluate(with: text)
         print("\(specialresult)")
         
-        let textCountResult = text.characters.count > 7 && text.characters.count <= 16 ? true : false
+        let textCountResult = text.characters.count > 7 && text.characters.count <= 14 ? true : false
         
         
-        if capitalresult == false || numberresult == false || specialresult == false || textCountResult ==  false{
+        if capitalresult == false || numberresult == false || specialresult == false || textCountResult ==  false || lowercaseresult == false{
             return false
         }
         
@@ -430,10 +438,10 @@ class Utilities: NSObject {
     
     
     class func getAppVersion() -> String{
-        if let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String {
-            return version
-        }
-        return "1.0"
+        
+        let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as! String
+        let bundleVersion = Bundle.main.infoDictionary?["CFBundleVersion"] as! String
+        return version + "." + bundleVersion
     }
     
     class func getBundleIdentifier()->String{

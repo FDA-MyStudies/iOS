@@ -22,7 +22,7 @@ class ActivitiesViewController : UIViewController{
         let plistPath = Bundle.main.path(forResource: "Activities", ofType: ".plist", inDirectory:nil)
         tableViewRowDetails = NSMutableArray.init(contentsOfFile: plistPath!)
     
-        self.title = "STUDY ACTIVITIES"
+        self.navigationItem.title = NSLocalizedString("STUDY ACTIVITIES", comment: "")
         self.tableView?.sectionHeaderHeight = 30
     
     }
@@ -36,6 +36,16 @@ class ActivitiesViewController : UIViewController{
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        
+        
+    }
+    
+    @IBAction func homeButtonAction(_ sender: AnyObject){
+        
+        
+    }
+    
+    @IBAction func filterButtonAction(_ sender: AnyObject){
         
         
     }
@@ -61,7 +71,7 @@ extension ActivitiesViewController: UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let view = UIView.init(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: 30))
-        view.backgroundColor = UIColor.init(red: 216/255.0, green: 227/255.0, blue: 230/255.0, alpha: 1)
+        view.backgroundColor = kBackgroundTableViewColor
         
         let dayData = tableViewRowDetails?[section] as! NSDictionary
         
@@ -72,7 +82,7 @@ extension ActivitiesViewController: UITableViewDataSource{
         label.text = statusText
         label.font = UIFont.boldSystemFont(ofSize: 14)
         label.translatesAutoresizingMaskIntoConstraints = true
-        label.textColor = UIColor.init(red: 140/255.0, green: 149/255.0, blue: 163/255.0, alpha: 1.0)
+        label.textColor = kGreyColor
         view.addSubview(label)
         
         return view
@@ -84,7 +94,7 @@ extension ActivitiesViewController: UITableViewDataSource{
         let projectInfo = tableViewData["items"] as! NSArray
         let project = projectInfo[indexPath.row] as! NSMutableDictionary
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "ActivitiesCell", for: indexPath) as! ActivitiesTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: kActivitiesTableViewCell, for: indexPath) as! ActivitiesTableViewCell
         
         //Cell Data Setup
         cell.populateCellData(data: project)

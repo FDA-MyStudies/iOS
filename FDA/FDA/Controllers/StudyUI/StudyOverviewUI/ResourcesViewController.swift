@@ -22,7 +22,7 @@ class ResourcesViewController : UIViewController{
         let plistPath = Bundle.main.path(forResource: "Resources", ofType: ".plist", inDirectory:nil)
         tableViewRowDetails = NSMutableArray.init(contentsOfFile: plistPath!)
         
-        self.title = "Resources"
+        self.navigationItem.title = NSLocalizedString("Resources", comment: "")
         
     }
     
@@ -35,6 +35,11 @@ class ResourcesViewController : UIViewController{
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        
+        
+    }
+    
+    @IBAction func homeButtonAction(_ sender: AnyObject){
         
         
     }
@@ -51,7 +56,7 @@ extension ResourcesViewController : UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let tableViewData = tableViewRowDetails?.object(at: indexPath.row) as! String
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "ResourcesCell", for: indexPath) as! ResourcesTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: kResourcesTableViewCell, for: indexPath) as! ResourcesTableViewCell
         
         //Cell Data Setup
         cell.populateCellData(data: tableViewData)

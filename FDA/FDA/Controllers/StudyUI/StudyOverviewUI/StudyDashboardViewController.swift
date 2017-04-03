@@ -9,13 +9,19 @@
 import Foundation
 import UIKit
 
+enum TableViewCells: Int {
+    case welcomeCell = 0
+    case studyActivityCell
+    case percentageCell
+}
+
 class StudyDashboardViewController : UIViewController{
+    
+    @IBOutlet var tableView : UITableView?
     
     var tableViewRowDetails = NSMutableArray()
     var todayActivitiesArray = NSMutableArray()
     var statisticsArray = NSMutableArray()
-    
-    @IBOutlet var tableView : UITableView?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,13 +49,23 @@ class StudyDashboardViewController : UIViewController{
         
         
     }
+    
+    @IBAction func homeButtonAction(_ sender: AnyObject){
+    
+    
+    }
+    
+    @IBAction func shareButtonAction(_ sender: AnyObject){
+        
+        
+    }
+    
 }
 
 //MARK: TableView Data source
 extension StudyDashboardViewController : UITableViewDataSource {
-    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1//tableViewRowDetails.count
+        return 1
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -60,7 +76,7 @@ extension StudyDashboardViewController : UITableViewDataSource {
         
         //Used for the last cell Height (trends cell)
         if indexPath.section == tableViewRowDetails.count{
-            return 55
+            return 50
         }
         
         let data = self.tableViewRowDetails[indexPath.section] as! NSDictionary
@@ -70,11 +86,11 @@ extension StudyDashboardViewController : UITableViewDataSource {
             
             //Used for Table view Height in a cell
             switch indexPath.section {
-            case 0:
+            case TableViewCells.welcomeCell.rawValue:
                 heightValue = 55
-            case 1:
+            case TableViewCells.studyActivityCell.rawValue:
                 heightValue = 160
-            case 2:
+            case TableViewCells.percentageCell.rawValue:
                 heightValue = 70
             default:
                 return 0
@@ -85,10 +101,9 @@ extension StudyDashboardViewController : UITableViewDataSource {
             if data["isStudy"] as! String == "YES" {
                 heightValue = 130
             }else{
-                heightValue = 150
+                heightValue = 210
             }
         }
-        
         return heightValue
     }
     
@@ -99,7 +114,7 @@ extension StudyDashboardViewController : UITableViewDataSource {
         //Used to display the last cell trends
         if indexPath.section == tableViewRowDetails.count{
             
-            cell = tableView.dequeueReusableCell(withIdentifier: kTrendTableViewCell, for: indexPath) as! StudyDashboardTableViewCell
+            cell = tableView.dequeueReusableCell(withIdentifier: kTrendTableViewCell, for: indexPath) as! StudyDashboardTrendsTableViewCell
             return cell!
         }
         
@@ -109,17 +124,17 @@ extension StudyDashboardViewController : UITableViewDataSource {
             
             //Used for Table view Cell
             switch indexPath.section {
-            case 0:
-                cell = tableView.dequeueReusableCell(withIdentifier: kWelcomeTableViewCell, for: indexPath) as! StudyDashboardTableViewCell
-                (cell as! StudyDashboardTableViewCell).displayFirstCelldata(data: tableViewData)
+            case TableViewCells.welcomeCell.rawValue:
+                cell = tableView.dequeueReusableCell(withIdentifier: kWelcomeTableViewCell, for: indexPath) as! StudyDashboardWelcomeTableViewCell
+                (cell as! StudyDashboardWelcomeTableViewCell).displayFirstCelldata(data: tableViewData)
                 
-            case 1:
-                cell = tableView.dequeueReusableCell(withIdentifier: kStudyActivityTableViewCell, for: indexPath) as! StudyDashboardTableViewCell
-                (cell as! StudyDashboardTableViewCell).displaySecondCelldata(data: tableViewData)
+            case TableViewCells.studyActivityCell.rawValue:
+                cell = tableView.dequeueReusableCell(withIdentifier: kStudyActivityTableViewCell, for: indexPath) as! StudyDashboardStudyActivitiesTableViewCell
+                (cell as! StudyDashboardStudyActivitiesTableViewCell).displaySecondCelldata(data: tableViewData)
                 
-            case 2:
-                cell = tableView.dequeueReusableCell(withIdentifier: kPercentageTableViewCell, for: indexPath) as! StudyDashboardTableViewCell
-                (cell as! StudyDashboardTableViewCell).displayThirdCellData(data: tableViewData)
+            case TableViewCells.percentageCell.rawValue:
+                cell = tableView.dequeueReusableCell(withIdentifier: kPercentageTableViewCell, for: indexPath) as! StudyDashboardStudyPercentageTableViewCell
+                (cell as! StudyDashboardStudyPercentageTableViewCell).displayThirdCellData(data: tableViewData)
                 
             default:
                 return cell!
@@ -139,17 +154,19 @@ extension StudyDashboardViewController : UITableViewDataSource {
                 
                 cell = tableView.dequeueReusableCell(withIdentifier: kStatisticsTableViewCell, for: indexPath) as! StudyDashboardStatisticsTableViewCell
                 (cell as! StudyDashboardStatisticsTableViewCell).statisticsArrayData = statisticsArray
+                
+                //Used for setting it initially
+                (cell as! StudyDashboardStatisticsTableViewCell).buttonDay?.setTitle("  DAY  ", for: UIControlState.normal)
+                
                 (cell as! StudyDashboardStatisticsTableViewCell).statisticsCollectionView?.reloadData()
             }
         }
-        
         return cell!
     }
 }
 
 //MARK: TableView Delegates
 extension StudyDashboardViewController : UITableViewDelegate{
-    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
 

@@ -28,9 +28,10 @@ let kTitleError = "Error"
 let kTitleMessage = "Message"
 let kTitleOk = "Ok"
 let kTitleCancel = "Cancel"
+let kTitleDeleteAccount = "Delete Account"
 let kRegistrationInfoMessage = "Registration (or sign up) for the app  is requested only to provide you with a seamless experience of using the app. Your registration information does not become part of the data collected for any study(ies) housed in the app. Each study has its own consent process and your data for the study will not be collected without you providing your informed consent prior to joining the study."
 
-
+let kDeleteAccountConfirmationMessage = "Are you sure you wish to permanently delete your FDA Health Studies Gateway app account?  You will need to register again if you wish to join a study."
 
 
 //MARK: Signin Constants
@@ -60,7 +61,7 @@ let kMessageEmailBlank = "Please enter your email address."
 let kMessageValidEmail = "Please enter valid email address."
 let kMessagePasswordBlank = "Please enter your password."
 let kMessageConfirmPasswordBlank = "Please enter confirm password."
-let kMessageValidatePasswords = "Password and confirm password does not match."
+let kMessageValidatePasswords = "Please confirm the password"
 let kMessageValidatePasswordCharacters = "Password should have minimum of 8 characters."
 let kMessageValidatePasswordComplexity = "Your password must:\nBe 8 to 14 characters long\nContain a lower case letter\nContain a upper case letter\nContain a number\nContain one of the below special characters\n!  # $ % & ' () * + , - . : ; < > = ? @ [] ^ _  { } | ~"
 let kMessageAgreeToTermsAndConditions = "Please agree to terms and conditions."

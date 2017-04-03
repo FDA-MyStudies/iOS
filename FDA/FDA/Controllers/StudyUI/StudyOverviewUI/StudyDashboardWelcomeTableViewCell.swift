@@ -8,7 +8,7 @@
 
 import UIKit
 
-class StudyDashboardTableViewCell: UITableViewCell {
+class StudyDashboardWelcomeTableViewCell: UITableViewCell {
 
     //First cell Outlets
     @IBOutlet var labelName : UILabel?
@@ -27,7 +27,7 @@ class StudyDashboardTableViewCell: UITableViewCell {
     
     //Used to display First cell data
     func displayFirstCelldata(data : NSDictionary){
-        labelName?.text = String(format:"Welcome back %@,",data["name"] as! String)
+        //labelName?.text = String(format:"Welcome back %@,",data["name"] as! String)
         labelStatus?.text = data["status"] as? String
     }
     

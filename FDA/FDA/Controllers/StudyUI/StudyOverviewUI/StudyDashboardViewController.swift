@@ -59,7 +59,6 @@ class StudyDashboardViewController : UIViewController{
         
         
     }
-    
 }
 
 //MARK: TableView Data source
@@ -149,8 +148,8 @@ extension StudyDashboardViewController : UITableViewDataSource {
                 (cell as! StudyDashboardActivityTableViewCell).activityArrayData = todayActivitiesArray
                 (cell as! StudyDashboardActivityTableViewCell).activityCollectionView?.reloadData()
             }
-            
-           else if tableViewData["isStudy"] as! String == "NO"{
+                
+            else if tableViewData["isStudy"] as! String == "NO"{
                 
                 cell = tableView.dequeueReusableCell(withIdentifier: kStatisticsTableViewCell, for: indexPath) as! StudyDashboardStatisticsTableViewCell
                 (cell as! StudyDashboardStatisticsTableViewCell).statisticsArrayData = statisticsArray

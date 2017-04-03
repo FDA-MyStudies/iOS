@@ -35,9 +35,9 @@ class StudyDashboardStatisticsTableViewCell: UITableViewCell {
         
         if sender.tag == 11{
             //Day clicked
-            buttonDay?.setTitle("  DAY  ", for: UIControlState.normal)
-            buttonWeek?.setTitle("WEEK", for: UIControlState.normal)
-            buttonMonth?.setTitle("MONTH", for: UIControlState.normal)
+            buttonDay?.setTitle(kDaySpaces, for: UIControlState.normal)
+            buttonWeek?.setTitle(kWeek, for: UIControlState.normal)
+            buttonMonth?.setTitle(kMonth, for: UIControlState.normal)
             
             buttonDay?.setTitleColor(UIColor.white, for: UIControlState.normal)
             buttonWeek?.setTitleColor(kGreyColor, for: UIControlState.normal)
@@ -49,9 +49,9 @@ class StudyDashboardStatisticsTableViewCell: UITableViewCell {
             
         }else if sender.tag == 12{
             //Week clicked
-            buttonWeek?.setTitle("  WEEK  ", for: UIControlState.normal)
-            buttonDay?.setTitle("DAY", for: UIControlState.normal)
-            buttonMonth?.setTitle("MONTH", for: UIControlState.normal)
+            buttonWeek?.setTitle(kWeekSpaces, for: UIControlState.normal)
+            buttonDay?.setTitle(kDay, for: UIControlState.normal)
+            buttonMonth?.setTitle(kMonth, for: UIControlState.normal)
             
             buttonWeek?.setTitleColor(UIColor.white, for: UIControlState.normal)
             buttonDay?.setTitleColor(kGreyColor, for: UIControlState.normal)
@@ -63,9 +63,9 @@ class StudyDashboardStatisticsTableViewCell: UITableViewCell {
             
         }else if sender.tag == 13{
             //Months clicked
-            buttonMonth?.setTitle("  MONTH  ", for: UIControlState.normal)
-            buttonDay?.setTitle("DAY", for: UIControlState.normal)
-            buttonWeek?.setTitle("WEEK", for: UIControlState.normal)
+            buttonMonth?.setTitle(kMonthSpaces, for: UIControlState.normal)
+            buttonDay?.setTitle(kDay, for: UIControlState.normal)
+            buttonWeek?.setTitle(kWeek, for: UIControlState.normal)
             
             buttonMonth?.setTitleColor(UIColor.white, for: UIControlState.normal)
             buttonDay?.setTitleColor(kGreyColor, for: UIControlState.normal)

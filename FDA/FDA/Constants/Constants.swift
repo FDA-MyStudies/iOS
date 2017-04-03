@@ -98,7 +98,6 @@ let kResumeSpaces = "  Resume  "
 let kStartSpaces = "  Start  "
 let kCompletedSpaces = "  Completed  "
 
-
 //MARK: ResourcesViewController constants
 let kResourcesTableViewCell = "ResourcesCell"
 
@@ -117,5 +116,10 @@ let kStatisticsCollectionViewCell = "StatisticsCell"
 let kDarkBlueColor = UIColor.init(red: 0/255.0, green: 124/255.0, blue: 186/255.0, alpha: 1.0)
 let kGreyColor = UIColor.init(red: 140/255.0, green: 149/255.0, blue: 163/255.0, alpha: 1.0)
 
-
+let kDaySpaces = "  DAY  "
+let kDay = "Day"
+let kMonthSpaces = "  MONTH  "
+let kMonth = "MONTH"
+let kWeekSpaces = "  WEEK  "
+let kWeek = "WEEK"
 

@@ -10,6 +10,13 @@ import UIKit
 
 class StudyDashboardStudyActivitiesTableViewCell: UITableViewCell {
 
+    //Second cell Outlets
+    @IBOutlet var labelCompletedNumber : UILabel?
+    @IBOutlet var labelSurveyNumber : UILabel?
+    @IBOutlet var labelTaskNumber : UILabel?
+    @IBOutlet var labelSurveyList : UILabel?
+    @IBOutlet var labelTaskList : UILabel?
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -17,8 +24,18 @@ class StudyDashboardStudyActivitiesTableViewCell: UITableViewCell {
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
         // Configure the view for the selected state
+    }
+    
+    //Used to display Second cell data
+    func displaySecondCelldata(data : NSDictionary){
+        labelCompletedNumber?.text = String(format:"%@/10",data["completedNumber"] as! String)
+        labelSurveyNumber?.text = data["surveyNumber"] as? String
+        labelTaskNumber?.text = data["taskNumber"] as? String
+        
+        labelSurveyList?.text = String(format:"%@ Completed, %@ Pending, %@ Missed",data["surveyCompleted"] as! String , data["surveyPending"] as! String , data["surveyMissed"] as! String)
+        
+        labelTaskList?.text = String(format:"%@ Completed, %@ Pending, %@ Missed",data["taskCompleted"] as! String , data["taskPending"] as! String , data["taskMissed"] as! String)
     }
 
 }

@@ -22,14 +22,13 @@ class StudyDashboardActivityTableViewCell: UITableViewCell {
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
         // Configure the view for the selected state
     }
 
 }
 
-//MARK: Collection delegates
-extension StudyDashboardActivityTableViewCell: UICollectionViewDelegate, UICollectionViewDataSource {
+//MARK: Collection Datasource and Delegates
+extension StudyDashboardActivityTableViewCell: UICollectionViewDelegate , UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
         return activityArrayData.count
@@ -39,7 +38,7 @@ extension StudyDashboardActivityTableViewCell: UICollectionViewDelegate, UIColle
         
         let activityCellData = activityArrayData.object(at: indexPath.row) as! NSDictionary
             
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: kActivityCollectionViewCell, for: indexPath) as! StudyDashboardCollectionViewCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: kActivityCollectionViewCell, for: indexPath) as! StudyDashboardActivityCollectionViewCell
         cell.displayTodaysActivities(data: activityCellData)
         
         return cell
@@ -47,10 +46,10 @@ extension StudyDashboardActivityTableViewCell: UICollectionViewDelegate, UIColle
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-
         
     }
 }
+
 
 
 

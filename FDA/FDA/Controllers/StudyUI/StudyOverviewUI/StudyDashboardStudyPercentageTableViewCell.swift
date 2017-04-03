@@ -10,6 +10,10 @@ import UIKit
 
 class StudyDashboardStudyPercentageTableViewCell: UITableViewCell {
 
+    //Third cell Outlets
+    @IBOutlet var labelStudyCompletion : UILabel?
+    @IBOutlet var labelStudyAdherence : UILabel?
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -21,4 +25,10 @@ class StudyDashboardStudyPercentageTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
 
+    //Used to display Third cell data
+    func displayThirdCellData(data : NSDictionary){
+        labelStudyCompletion?.text = String(format: "%@%%", (data["studyCompletion"] as? String)!)
+        labelStudyAdherence?.text = String(format: "%@%%", (data["studyAdherence"] as? String)!)
+    }
+    
 }

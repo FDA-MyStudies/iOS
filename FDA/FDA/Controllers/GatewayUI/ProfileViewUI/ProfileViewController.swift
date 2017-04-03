@@ -173,7 +173,7 @@ class ProfileViewController: UIViewController {
     
     @IBAction func buttonActionSignOut(_ sender: UIButton) {
         
-        UIUtilities.showAlertMessageWithTwoActionsAndHandler(NSLocalizedString("Sign out", comment: ""), errorMessage: NSLocalizedString("Are you sure you want to sign out ?", comment: ""), errorAlertActionTitle: NSLocalizedString("Sign out", comment: ""),
+        UIUtilities.showAlertMessageWithTwoActionsAndHandler(NSLocalizedString("Sign Out", comment: ""), errorMessage: NSLocalizedString("Are you sure you want to sign out ?", comment: ""), errorAlertActionTitle: NSLocalizedString("Sign out", comment: ""),
                                                              errorAlertActionTitle2: NSLocalizedString("Cancel", comment: ""), viewControllerUsed: self,
                                                              action1: {
                                                                 
@@ -188,7 +188,19 @@ class ProfileViewController: UIViewController {
         
     }
     @IBAction func buttonActionDeleteAccount(_ sender: UIButton) {
-        self.performSegue(withIdentifier: kConfirmationSegueIdentifier, sender: nil)
+        //self.performSegue(withIdentifier: kConfirmationSegueIdentifier, sender: nil)
+        UIUtilities.showAlertMessageWithTwoActionsAndHandler(NSLocalizedString(kTitleDeleteAccount, comment: ""), errorMessage: NSLocalizedString(kDeleteAccountConfirmationMessage, comment: ""), errorAlertActionTitle: NSLocalizedString(kTitleDeleteAccount, comment: ""),
+                                                             errorAlertActionTitle2: NSLocalizedString(kTitleCancel, comment: ""), viewControllerUsed: self,
+                                                             action1: {
+                                                                
+                                                                
+                                                                self.sendRequestToDeleteAccount()
+                                                                
+                                                                
+        },
+                                                             action2: {
+                                                                
+        })
     }
     
 //MARK:Utility Methods
@@ -205,6 +217,9 @@ class ProfileViewController: UIViewController {
     func sendRequestToSignOut() {
         UserServices().logoutUser(self)
     }
+    func sendRequestToDeleteAccount(){
+        UserServices().deActivateAccount(self)
+    }
     
     /*
      SignOut Response handler for slider menu setup
@@ -212,6 +227,14 @@ class ProfileViewController: UIViewController {
     func handleSignoutResponse(){
         debugPrint("singout")
         //fdaSlideMenuController()?.navigateToHomeAfterSingout()
+        let leftController = slideMenuController()?.leftViewController as! LeftMenuViewController
+        leftController.changeViewController(.studyList)
+        leftController.createLeftmenuItems()
+        
+    }
+    func handleDeleteAccountResponse(){
+        // fdaSlideMenuController()?.navigateToHomeAfterSingout()
+        
         let leftController = slideMenuController()?.leftViewController as! LeftMenuViewController
         leftController.changeViewController(.studyList)
         leftController.createLeftmenuItems()
@@ -548,6 +571,9 @@ extension ProfileViewController:NMWebServiceDelegate {
             self.tableViewProfile?.reloadData()
             self.buttonLeadTime?.isUserInteractionEnabled = self.isCellEditable!
             
+        }
+        else if requestName as String == RegistrationMethods.deactivate.description{
+            self.handleDeleteAccountResponse()
         }
         
         

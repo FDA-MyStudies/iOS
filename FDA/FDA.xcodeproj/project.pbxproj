@@ -15,9 +15,13 @@
 		482062521E68532300C7A7AF /* UIUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 482062511E68532300C7A7AF /* UIUtilities.swift */; };
 		4833E9DF1E7126900032D244 /* StudyHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4833E9DE1E7126900032D244 /* StudyHomeViewController.swift */; };
 		4833E9E31E712C2B0032D244 /* StudyOverview.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4833E9E21E712C2B0032D244 /* StudyOverview.plist */; };
+		48521A0C1E8CE1B400E90592 /* StudyDashboardStudyActivitiesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48521A0B1E8CE1B400E90592 /* StudyDashboardStudyActivitiesTableViewCell.swift */; };
+		48521A101E8CE2FE00E90592 /* StudyDashboardStudyPercentageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48521A0F1E8CE2FE00E90592 /* StudyDashboardStudyPercentageTableViewCell.swift */; };
+		48521A121E8CE3B500E90592 /* StudyDashboardTrendsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48521A111E8CE3B500E90592 /* StudyDashboardTrendsTableViewCell.swift */; };
+		48521A141E8CE51E00E90592 /* StudyDashboardStatisticsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48521A131E8CE51E00E90592 /* StudyDashboardStatisticsCollectionViewCell.swift */; };
 		486275C31E88EF870056F0F7 /* StudyDashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486275C21E88EF870056F0F7 /* StudyDashboardViewController.swift */; };
-		486275C71E88F0350056F0F7 /* StudyDashboardTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486275C61E88F0350056F0F7 /* StudyDashboardTableViewCell.swift */; };
-		486275C91E88F0750056F0F7 /* StudyDashboardCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486275C81E88F0750056F0F7 /* StudyDashboardCollectionViewCell.swift */; };
+		486275C71E88F0350056F0F7 /* StudyDashboardWelcomeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486275C61E88F0350056F0F7 /* StudyDashboardWelcomeTableViewCell.swift */; };
+		486275C91E88F0750056F0F7 /* StudyDashboardActivityCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486275C81E88F0750056F0F7 /* StudyDashboardActivityCollectionViewCell.swift */; };
 		486275CB1E891C270056F0F7 /* StudyDashboard.plist in Resources */ = {isa = PBXBuildFile; fileRef = 486275CA1E891C270056F0F7 /* StudyDashboard.plist */; };
 		486304D61E6FE77C003CD406 /* GatewayOverview.plist in Resources */ = {isa = PBXBuildFile; fileRef = 486304D51E6FE77C003CD406 /* GatewayOverview.plist */; };
 		4884E3521E825E7D002DA0B9 /* FeedBackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4884E3511E825E7D002DA0B9 /* FeedBackViewController.swift */; };
@@ -213,9 +217,13 @@
 		482062511E68532300C7A7AF /* UIUtilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIUtilities.swift; sourceTree = "<group>"; };
 		4833E9DE1E7126900032D244 /* StudyHomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudyHomeViewController.swift; sourceTree = "<group>"; };
 		4833E9E21E712C2B0032D244 /* StudyOverview.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = StudyOverview.plist; sourceTree = "<group>"; };
+		48521A0B1E8CE1B400E90592 /* StudyDashboardStudyActivitiesTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudyDashboardStudyActivitiesTableViewCell.swift; sourceTree = "<group>"; };
+		48521A0F1E8CE2FE00E90592 /* StudyDashboardStudyPercentageTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudyDashboardStudyPercentageTableViewCell.swift; sourceTree = "<group>"; };
+		48521A111E8CE3B500E90592 /* StudyDashboardTrendsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudyDashboardTrendsTableViewCell.swift; sourceTree = "<group>"; };
+		48521A131E8CE51E00E90592 /* StudyDashboardStatisticsCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudyDashboardStatisticsCollectionViewCell.swift; sourceTree = "<group>"; };
 		486275C21E88EF870056F0F7 /* StudyDashboardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudyDashboardViewController.swift; sourceTree = "<group>"; };
-		486275C61E88F0350056F0F7 /* StudyDashboardTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudyDashboardTableViewCell.swift; sourceTree = "<group>"; };
-		486275C81E88F0750056F0F7 /* StudyDashboardCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudyDashboardCollectionViewCell.swift; sourceTree = "<group>"; };
+		486275C61E88F0350056F0F7 /* StudyDashboardWelcomeTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudyDashboardWelcomeTableViewCell.swift; sourceTree = "<group>"; };
+		486275C81E88F0750056F0F7 /* StudyDashboardActivityCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudyDashboardActivityCollectionViewCell.swift; sourceTree = "<group>"; };
 		486275CA1E891C270056F0F7 /* StudyDashboard.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = StudyDashboard.plist; sourceTree = "<group>"; };
 		486304D51E6FE77C003CD406 /* GatewayOverview.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = GatewayOverview.plist; sourceTree = "<group>"; };
 		4884E3511E825E7D002DA0B9 /* FeedBackViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedBackViewController.swift; sourceTree = "<group>"; };
@@ -959,10 +967,14 @@
 				48BC8D5A1E853BFB002725BD /* ResourcesTableViewCell.swift */,
 				48BC8D5C1E853CC2002725BD /* Resources.plist */,
 				486275C21E88EF870056F0F7 /* StudyDashboardViewController.swift */,
-				486275C61E88F0350056F0F7 /* StudyDashboardTableViewCell.swift */,
+				486275C61E88F0350056F0F7 /* StudyDashboardWelcomeTableViewCell.swift */,
+				48521A0B1E8CE1B400E90592 /* StudyDashboardStudyActivitiesTableViewCell.swift */,
+				48521A0F1E8CE2FE00E90592 /* StudyDashboardStudyPercentageTableViewCell.swift */,
 				4800026C1E8A663A002EC580 /* StudyDashboardActivityTableViewCell.swift */,
+				486275C81E88F0750056F0F7 /* StudyDashboardActivityCollectionViewCell.swift */,
 				480002701E8A69BA002EC580 /* StudyDashboardStatisticsTableViewCell.swift */,
-				486275C81E88F0750056F0F7 /* StudyDashboardCollectionViewCell.swift */,
+				48521A131E8CE51E00E90592 /* StudyDashboardStatisticsCollectionViewCell.swift */,
+				48521A111E8CE3B500E90592 /* StudyDashboardTrendsTableViewCell.swift */,
 				486275CA1E891C270056F0F7 /* StudyDashboard.plist */,
 			);
 			path = StudyOverviewUI;
@@ -1415,14 +1427,15 @@
 				94334F801E6FE65600755444 /* FDASlideMenuViewController.swift in Sources */,
 				6E7D2D5A1E433E8800763D4C /* AppDelegate.swift in Sources */,
 				4833E9DF1E7126900032D244 /* StudyHomeViewController.swift in Sources */,
+				48521A141E8CE51E00E90592 /* StudyDashboardStatisticsCollectionViewCell.swift in Sources */,
 				6ED134341E5EB0280090C976 /* ConsentBuilder.swift in Sources */,
 				94B3DD4E1E6ED8E500327AE5 /* HomeViewController.swift in Sources */,
 				9487102A1E546C3800246109 /* AppNotification.swift in Sources */,
 				94B3DD421E6ED8E500327AE5 /* NotificationTableViewCell.swift in Sources */,
-				486275C91E88F0750056F0F7 /* StudyDashboardCollectionViewCell.swift in Sources */,
+				486275C91E88F0750056F0F7 /* StudyDashboardActivityCollectionViewCell.swift in Sources */,
 				48A24C401E83C0CE009E849E /* ActivitiesViewController.swift in Sources */,
 				6ED8A2E61E447AA2004DEC01 /* Formatter.swift in Sources */,
-				486275C71E88F0350056F0F7 /* StudyDashboardTableViewCell.swift in Sources */,
+				486275C71E88F0350056F0F7 /* StudyDashboardWelcomeTableViewCell.swift in Sources */,
 				94334F8C1E701EB700755444 /* NavigationBackButton.swift in Sources */,
 				486275C31E88EF870056F0F7 /* StudyDashboardViewController.swift in Sources */,
 				941909B51E52FA9B001B01C5 /* Study.swift in Sources */,
@@ -1461,11 +1474,14 @@
 				94B3DD5F1E6ED8E500327AE5 /* StudyOverviewPageViewControllerFirst.swift in Sources */,
 				941909BB1E533AA9001B01C5 /* Overview.swift in Sources */,
 				940577A81E767AC60043215C /* ChangePasswordViewController.swift in Sources */,
+				48521A101E8CE2FE00E90592 /* StudyDashboardStudyPercentageTableViewCell.swift in Sources */,
 				94B3DD5B1E6ED8E500327AE5 /* VerificationViewController.swift in Sources */,
+				48521A121E8CE3B500E90592 /* StudyDashboardTrendsTableViewCell.swift in Sources */,
 				94B3DD4D1E6ED8E500327AE5 /* FirstGatewayOverviewViewController.swift in Sources */,
 				94C602311E51C7D500CB72F7 /* WCPServices.swift in Sources */,
 				9487102C1E54870000246109 /* LabKeyServices.swift in Sources */,
 				6ED1B2291E54255900BF463F /* ActivityStepResult.swift in Sources */,
+				48521A0C1E8CE1B400E90592 /* StudyDashboardStudyActivitiesTableViewCell.swift in Sources */,
 				94CD96ED1E4AFAFF00946477 /* NetworkConfiguration.swift in Sources */,
 				4800026D1E8A663A002EC580 /* StudyDashboardActivityTableViewCell.swift in Sources */,
 				9432C2F71E4C483D005984EC /* RegistrationServerConfiguration.swift in Sources */,

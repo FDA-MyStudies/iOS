@@ -42,16 +42,16 @@ class ActivitiesTableViewCell: UITableViewCell {
             self.labelStatus?.isHidden = false
             
             if data["operation"] as? String == "Resume"{
-                self.labelStatus?.backgroundColor = UIColor.init(red: 245/255.0, green: 175/255.0, blue: 55/255.0, alpha: 1.0)
-                self.labelStatus?.text = "  Resume  "
+                self.labelStatus?.backgroundColor = kYellowColor
+                self.labelStatus?.text = kResumeSpaces
                 
             }else if data["operation"] as? String == "Start"{
-                self.labelStatus?.backgroundColor = UIColor.init(red: 0/255.0, green: 124/255.0, blue: 186/255.0, alpha: 1.0)
-                self.labelStatus?.text = "  Start  "
+                self.labelStatus?.backgroundColor = kBlueColor
+                self.labelStatus?.text = kStartSpaces
                 
             }else{
-                self.labelStatus?.backgroundColor = UIColor.init(red: 76/255.0, green: 175/255.0, blue: 80/255.0, alpha: 1.0)
-                self.labelStatus?.text = "  Completed  "
+                self.labelStatus?.backgroundColor = kGreenColor
+                self.labelStatus?.text = kCompletedSpaces
                 
             }
         }

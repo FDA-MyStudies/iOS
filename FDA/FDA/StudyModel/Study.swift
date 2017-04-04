@@ -75,6 +75,10 @@ class Study {
     
     static var currentStudy:Study? = nil
     
+    init() {
+        
+    }
+    
     init(studyDetail:Dictionary<String,Any>) {
         
         if Utilities.isValidObject(someObject: studyDetail as AnyObject?){

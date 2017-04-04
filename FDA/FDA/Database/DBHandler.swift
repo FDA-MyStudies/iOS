@@ -29,7 +29,6 @@ class DBHandler: NSObject {
             realm.add(dbUser, update: true)
             
         })
-        
     }
     
     func initilizeCurrentUser(){
@@ -38,15 +37,29 @@ class DBHandler: NSObject {
         let dbUsers = realm.objects(DBUser.self)
         let dbUser = dbUsers.last
         
-        let currentUser = User.currentUser
-        currentUser.firstName = dbUser?.firstName
-        currentUser.lastName  = dbUser?.lastName
-        currentUser.verified = dbUser?.verified
-        currentUser.authToken = dbUser?.authToken
-        currentUser.userId = dbUser?.userId
-        currentUser.emailId = dbUser?.emailId
-        currentUser.userType =  (dbUser?.userType).map { UserType(rawValue: $0) }!
+        if dbUser != nil {
+            let currentUser = User.currentUser
+            currentUser.firstName = dbUser?.firstName
+            currentUser.lastName  = dbUser?.lastName
+            currentUser.verified = dbUser?.verified
+            currentUser.authToken = dbUser?.authToken
+            currentUser.userId = dbUser?.userId
+            currentUser.emailId = dbUser?.emailId
+            currentUser.userType =  (dbUser?.userType).map { UserType(rawValue: $0) }!
+        }
+        
     }
+    
+   class func deleteCurrentUser(){
+        
+        let realm = try! Realm()
+        let dbUsers = realm.objects(DBUser.self)
+        let dbUser = dbUsers.last
+        try! realm.write {
+            realm.delete(dbUser!)
+        }
+    }
+    
     
     
      //MARK:Study
@@ -79,5 +92,34 @@ class DBHandler: NSObject {
         })
     }
     
+    class func loadStudyListFromDatabase(completionHandler:@escaping (Array<Study>) -> ()){
+        
+        
+        let realm = try! Realm()
+        let dbStudies = realm.objects(DBStudy.self)
+        
+        var studies:Array<Study> = []
+        for study in dbStudies {
+            
+            let dbStudy = Study()
+            
+            dbStudy.studyId = study.studyId
+            dbStudy.category = study.category
+            dbStudy.name = study.name
+            dbStudy.sponserName = study.sponserName
+            dbStudy.description = study.tagLine
+            dbStudy.version = study.version
+            dbStudy.logoURL = study.logoURL
+            dbStudy.startDate = study.startDate
+            dbStudy.endEnd = study.endEnd
+            
+            studies.append(dbStudy)
+        }
+        
+        completionHandler(studies)
+        
+        
+        
+    }
     
 }

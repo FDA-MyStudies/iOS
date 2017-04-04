@@ -380,6 +380,8 @@ class UserServices: NSObject {
             
             user.userType = UserType.FDAUser
             
+            DBHandler().saveCurrentUser(user: user)
+            
             //TEMP : Need to save these values in Realm
             let ud = UserDefaults.standard
             ud.set(user.authToken, forKey:kUserAuthToken)
@@ -562,13 +564,19 @@ class UserServices: NSObject {
     
     func handleLogoutResponse(response:Dictionary<String, Any>)  {
         
+        //TEMP
         let ud = UserDefaults.standard
         ud.removeObject(forKey: kUserAuthToken)
         ud.removeObject(forKey: kUserId)
         ud.synchronize()
         
+        //Delete from database
+        DBHandler.deleteCurrentUser()
+        
         //reset user object
         User.resetCurrentUser()
+        
+        
         
     }
     

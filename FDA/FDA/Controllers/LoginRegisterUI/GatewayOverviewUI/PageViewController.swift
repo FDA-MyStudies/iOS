@@ -26,6 +26,7 @@ class PageViewController : UIPageViewController{
     weak var pageViewDelegate: PageViewControllerDelegate?
     
     var overview : Overview!
+    var currentIndex = 0
     
 //MARK:View Controller Delegates
     
@@ -35,11 +36,17 @@ class PageViewController : UIPageViewController{
         dataSource = self
         delegate =  self
         
+        
         if let initialViewController = orderedViewControllers.first {
             scrollToViewController(viewController: initialViewController)
         }
         
+        print("\(orderedViewControllers)")
+        
         pageViewDelegate?.pageViewController(pageViewController: self, didUpdatePageCount: orderedViewControllers.count)
+        
+        let scrollView = self.view.subviews.filter { $0 is UIScrollView }.first as! UIScrollView
+        scrollView.delegate = self
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -80,18 +87,42 @@ class PageViewController : UIPageViewController{
                             // Setting the view controller programmatically does not fire
                             // any delegate methods, so we have to manually notify the
                             // 'tutorialDelegate' of the new index.
-                            self.notifyTutorialDelegateOfNewIndex()
+                            self.notifyTutorialDelegateOfNewIndex(prevViewController: nil)
         })
     }
     
     /*
     Used to Notify that the current page index was updated.
     */
-    func notifyTutorialDelegateOfNewIndex() {
-        if let firstViewController = viewControllers?.first,
-            let index = orderedViewControllers.index(of: firstViewController) {
-            pageViewDelegate?.pageViewController(pageViewController: self, didUpdatePageIndex: index)
+    func notifyTutorialDelegateOfNewIndex(prevViewController: UIViewController?) {
+//        if let firstViewController = viewControllers?.first,
+//            let index = orderedViewControllers.index(of: firstViewController) {
+//            pageViewDelegate?.pageViewController(pageViewController: self, didUpdatePageIndex: index)
+//        }
+        
+        
+        var index = 0
+        
+        if  (prevViewController != nil) {
+            index = orderedViewControllers.index(of: prevViewController!)!
         }
+        else {
+        
+            let viewController = self.viewControllers?.last
+            
+            switch viewController {
+            case is FirstGatewayOverviewViewController:
+                index = (viewController as! FirstGatewayOverviewViewController).pageIndex
+            case is SecondGatewayOverviewViewController:
+                index = (viewController as! SecondGatewayOverviewViewController).pageIndex
+            default:
+                index = 0
+            }
+        
+        }
+        
+        pageViewDelegate?.pageViewController(pageViewController: self, didUpdatePageIndex: index)
+
     }
     
     /*
@@ -141,6 +172,7 @@ class PageViewController : UIPageViewController{
             //get first overview controller
             let firstController = storyboard.instantiateViewController(withIdentifier: "FirstViewController") as! FirstGatewayOverviewViewController
             firstController.overviewSectionDetail = overview.sections[0]
+            firstController.pageIndex = 0
             controllers.append(firstController)
             
             let sections = overview.sections.count
@@ -148,6 +180,7 @@ class PageViewController : UIPageViewController{
                 
                 let restControllers = storyboard.instantiateViewController(withIdentifier: "SecondViewController") as! SecondGatewayOverviewViewController
                 restControllers.overviewSectionDetail = overview.sections[section]
+                restControllers.pageIndex = section
                 controllers.append(restControllers)
             }
         }
@@ -160,25 +193,30 @@ class PageViewController : UIPageViewController{
 extension PageViewController: UIPageViewControllerDataSource {
     func pageViewController(_ pageViewController: UIPageViewController,
                             viewControllerAfter viewController: UIViewController) -> UIViewController? {
+        
+        //print("pageViewController viewControllerAfter")
         guard let viewControllerIndex = orderedViewControllers.index(of: viewController) else {
             return nil
         }
-        
+        currentIndex = viewControllerIndex
         let nextIndex = viewControllerIndex + 1
         
         guard orderedViewControllers.count > nextIndex else {
             return nil
         }
         
+        //currentIndex = nextIndex
         return orderedViewControllers[nextIndex]
     }
     
     func pageViewController(_ pageViewController: UIPageViewController,
                             viewControllerBefore viewController: UIViewController) -> UIViewController? {
+        
+        //print("pageViewController viewControllerBefore")
         guard let viewControllerIndex = orderedViewControllers.index(of: viewController) else {
             return nil
         }
-        
+        currentIndex = viewControllerIndex
         let previousIndex = viewControllerIndex - 1
         
         guard previousIndex >= 0 else {
@@ -187,6 +225,7 @@ extension PageViewController: UIPageViewControllerDataSource {
         
         return orderedViewControllers[previousIndex]
     }
+   
 }
 
 //MARK: UIPageViewControllerDelegate
@@ -196,7 +235,31 @@ extension PageViewController: UIPageViewControllerDelegate {
                             didFinishAnimating finished: Bool,
                             previousViewControllers: [UIViewController],
                             transitionCompleted completed: Bool) {
-        self.notifyTutorialDelegateOfNewIndex()
+        
+      //  print("transition \(finished) \(previousViewControllers)")
+
+//        if completed {
+//            //print("transitionCompleted \(previousViewControllers)")
+//            
+//            self.notifyTutorialDelegateOfNewIndex(prevViewController: nil)
+//        }
+//        else {
+//            self.notifyTutorialDelegateOfNewIndex(prevViewController: previousViewControllers.last!)
+//        }
+        
     }
 }
+extension PageViewController: UIScrollViewDelegate{
+   
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+       
+        
+        pageViewDelegate?.pageViewController(pageViewController: self, didUpdatePageIndex: currentIndex)
+    }
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        
+        pageViewDelegate?.pageViewController(pageViewController: self, didUpdatePageIndex: currentIndex)
+    }
+}
+
 

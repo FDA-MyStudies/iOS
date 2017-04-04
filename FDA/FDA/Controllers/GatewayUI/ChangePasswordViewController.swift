@@ -60,6 +60,8 @@ class ChangePasswordViewController: UIViewController {
         self.navigationController?.setNavigationBarHidden(false, animated: true)
         
         if temporaryPassword.characters.count > 0{
+            oldPassword = temporaryPassword
+            tableViewRowDetails?.removeObject(at: 0)
             self.title = NSLocalizedString(kCreatePasswordTitleText, comment: "")
         }
         else {
@@ -158,7 +160,9 @@ class ChangePasswordViewController: UIViewController {
 extension ChangePasswordViewController : UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3
+        
+       return  (self.tableViewRowDetails?.count)!
+        
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -166,18 +170,18 @@ extension ChangePasswordViewController : UITableViewDataSource {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: kSignInTableViewCellIdentifier, for: indexPath) as! SignInTableViewCell
         
-        cell.textFieldValue?.tag = indexPath.row + 100
+        
         
         cell.populateCellData(data: tableViewData, securedText: true)
-        if indexPath.row == 0 && temporaryPassword.characters.count > 0{
-            oldPassword = temporaryPassword
-            cell.textFieldValue?.text = oldPassword
-            cell.textFieldValue?.isEnabled = false
+        var tagIncremental = 100
+        if temporaryPassword.characters.count > 0{
             
+            tagIncremental = 101
         }
         else {
             cell.textFieldValue?.isEnabled = true
         }
+        cell.textFieldValue?.tag = indexPath.row + tagIncremental
         
         return cell
     }

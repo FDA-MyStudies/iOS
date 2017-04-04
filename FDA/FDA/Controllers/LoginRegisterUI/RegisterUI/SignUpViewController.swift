@@ -36,7 +36,7 @@ class SignUpViewController : UIViewController{
     @IBOutlet var labelTermsAndConditions : FRHyperLabel?
     @IBOutlet var termsAndCondition:LinkTextView?
     var viewLoadFrom:SignUpLoadFrom = .menu
-    
+    var termsPageOpened = false
     //MARK:ViewController Delegates
     
     override func viewDidLoad() {
@@ -66,24 +66,37 @@ class SignUpViewController : UIViewController{
         //unhide navigationbar
         self.navigationController?.setNavigationBarHidden(false, animated: true)
         
-        User.resetCurrentUser()
+       
         WCPServices().getTermsPolicy(delegate: self)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        //unhide navigationbar
-        self.navigationController?.setNavigationBarHidden(false, animated: true)
         
-        self.user = User.currentUser
-        if viewLoadFrom == .menu{
-            self.setNavigationBarItem()
+        if termsPageOpened {
+            termsPageOpened = false
         }
         else {
-            self.addBackBarButton()
+            //unhide navigationbar
+            self.navigationController?.setNavigationBarHidden(false, animated: true)
+            
+            User.resetCurrentUser()
+            self.user = User.currentUser
+            confirmPassword = ""
+           
+            if viewLoadFrom == .menu{
+                self.setNavigationBarItem()
+            }
+            else {
+                self.addBackBarButton()
+            }
+            UIApplication.shared.statusBarStyle = .default
+            
+            self.tableView?.reloadData()
         }
-        UIApplication.shared.statusBarStyle = .default
+        
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -205,7 +218,7 @@ class SignUpViewController : UIViewController{
         }
     }
     @IBAction func buttonInfoAction(_ sender:Any){
-        UIUtilities.showAlertWithTitleAndMessage(title:"", message:kRegistrationInfoMessage as NSString)
+        UIUtilities.showAlertWithTitleAndMessage(title:"Why Register?", message:kRegistrationInfoMessage as NSString)
     }
 
     
@@ -301,6 +314,8 @@ extension SignUpViewController:UITextViewDelegate{
         webview.title = title
         self.navigationController?.present(webViewController, animated: true, completion: nil)
         
+        termsPageOpened = true
+        
         return false
     }
     
@@ -330,6 +345,8 @@ extension SignUpViewController : UITableViewDataSource {
         let tableViewData = tableViewRowDetails?.object(at: indexPath.row) as! NSDictionary
         let cell = tableView.dequeueReusableCell(withIdentifier: kSignUpTableViewCellIdentifier, for: indexPath) as! SignUpTableViewCell
         
+        
+        cell.textFieldValue?.text = ""
         var isSecuredEntry : Bool = false
         
         cell.textFieldValue?.tag = indexPath.row

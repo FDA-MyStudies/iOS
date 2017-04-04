@@ -16,6 +16,7 @@ class SecondGatewayOverviewViewController : UIViewController{
     @IBOutlet var labelDescriptionText : UILabel?
     @IBOutlet var buttonGetStarted : UIButton?
     var overviewSectionDetail : OverviewSection!
+    var pageIndex:Int!
     
     override func viewDidLoad() {
         super.viewDidLoad()

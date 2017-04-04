@@ -87,21 +87,22 @@ class VerificationViewController : UIViewController{
     @IBAction func continueTwoButtonAction( _ sender : UIButton){
         
         self.view.endEditing(true)
-        if ((textFieldEmail?.text)!.isEmpty) && (self.textFieldVerificationCode?.text == "") {
-            self.showAlertMessages(textMessage: kMessageAllFieldsAreEmpty)
-        }else if (textFieldEmail?.text)! == "" {
-            self.showAlertMessages(textMessage: kMessageEmailBlank)
-            
-        }else if !(Utilities.isValidEmail(testStr: (textFieldEmail?.text)!)) {
-            self.showAlertMessages(textMessage: kMessageValidEmail)
-            
-        }else if self.textFieldVerificationCode?.text == ""{
+//        if ((textFieldEmail?.text)!.isEmpty) && (self.textFieldVerificationCode?.text == "") {
+//            self.showAlertMessages(textMessage: kMessageAllFieldsAreEmpty)
+//        }else if (textFieldEmail?.text)! == "" {
+//            self.showAlertMessages(textMessage: kMessageEmailBlank)
+//            
+//        }else if !(Utilities.isValidEmail(testStr: (textFieldEmail?.text)!)) {
+//            self.showAlertMessages(textMessage: kMessageValidEmail)
+//            
+//        }else
+        if self.textFieldVerificationCode?.text == ""{
             self.showAlertMessages(textMessage: kMessageVerificationCodeEmpty)
             
         }else{
             print("Call the webservice")
             
-            UserServices().verifyEmail(emailId:(textFieldEmail?.text)!,  verificationCode:(self.textFieldVerificationCode?.text)! , delegate: self)
+            UserServices().verifyEmail(emailId:self.emailId!,  verificationCode:(self.textFieldVerificationCode?.text)! , delegate: self)
             
             
         }
@@ -123,7 +124,7 @@ class VerificationViewController : UIViewController{
         var finalEmail:String = User.currentUser.emailId!
         
         if viewLoadFrom == .forgotPassword {
-            finalEmail = (textFieldEmail?.text)!
+            finalEmail = self.emailId!
         }
        
         

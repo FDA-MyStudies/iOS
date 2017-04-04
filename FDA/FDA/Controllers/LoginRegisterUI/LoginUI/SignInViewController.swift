@@ -77,6 +77,7 @@ class SignInViewController : UIViewController{
         //unhide navigationbar
         self.navigationController?.setNavigationBarHidden(false, animated: true)
         
+        User.resetCurrentUser()
         user = User.currentUser
         
         if viewLoadFrom == .gatewayOverview || viewLoadFrom == .joinStudy{
@@ -86,7 +87,7 @@ class SignInViewController : UIViewController{
             self.setNavigationBarItem()
         }
         
-        self.perform(#selector(SignInViewController.setInitialDate), with: self, afterDelay: 1)
+       // self.perform(#selector(SignInViewController.setInitialDate), with: self, afterDelay: 1)
         
         self.tableView?.reloadData()
         
@@ -102,6 +103,7 @@ class SignInViewController : UIViewController{
         if viewLoadFrom == .gatewayOverview{
             self.navigationController?.setNavigationBarHidden(true, animated: true)
         }
+        
     }
     
 //MARK: Button Action
@@ -126,7 +128,7 @@ class SignInViewController : UIViewController{
         }
     }
     @IBAction func buttonInfoAction(_ sender:Any){
-        UIUtilities.showAlertWithTitleAndMessage(title:"", message:kRegistrationInfoMessage as NSString)
+        UIUtilities.showAlertWithTitleAndMessage(title:"Why Register?", message:kRegistrationInfoMessage as NSString)
     }
     
 //MARK: Segue Methods
@@ -273,6 +275,8 @@ extension SignInViewController : UITableViewDataSource {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: kSignInTableViewCellIdentifier, for: indexPath) as! SignInTableViewCell
         
+        
+        cell.textFieldValue?.text = ""
         var isSecuredEntry : Bool = false
         if indexPath.row == SignInTableViewTags.Password.rawValue{
             isSecuredEntry = true

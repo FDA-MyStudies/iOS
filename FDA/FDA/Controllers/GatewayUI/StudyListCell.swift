@@ -71,12 +71,23 @@ class StudyListCell: UITableViewCell {
         
         labelStudyTitle?.text = study.name
         labelStudyShortDescription?.text = study.description
+        
+       
+        
         if study.sponserName != nil {
-            labelStudySponserName?.text =  study.category! + " | " + study.sponserName!
+            labelStudySponserName?.text =  study.category! + "  |  " + study.sponserName!
         }
         else {
             labelStudySponserName?.text =  study.category!
         }
+        
+        let attributedString =  labelStudySponserName?.attributedText?.mutableCopy() as! NSMutableAttributedString
+        
+        let foundRange = attributedString.mutableString.range(of:study.category!)
+        attributedString.addAttributes([NSFontAttributeName:UIFont(name: "HelveticaNeue-Bold", size: 12)!], range: foundRange)
+        labelStudySponserName?.attributedText = attributedString
+        
+        
         
         studyLogoImage?.image = #imageLiteral(resourceName: "placeholder")
         

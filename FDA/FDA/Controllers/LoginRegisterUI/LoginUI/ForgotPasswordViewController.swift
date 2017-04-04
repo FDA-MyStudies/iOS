@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 let kVerifyViewControllerSegue = "VerifyViewControllerSegue"
-let kVerficationMessageFromForgotPassword = "Your registered email is pending verification. Enter the Verification Code received on this email to complete verification and try the Forgot Password action again."
+let kVerficationMessageFromForgotPassword = "Your registered email(xyz@gmail.com) is pending verification. Enter the Verification Code received on this email to complete verification and try the Forgot Password action again."
 
 
 class ForgotPasswordViewController : UIViewController{
@@ -96,7 +96,11 @@ class ForgotPasswordViewController : UIViewController{
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         if let verifyController = segue.destination as? VerificationViewController {
-            verifyController.labelMessage = kVerficationMessageFromForgotPassword
+            
+            let message = kVerficationMessageFromForgotPassword
+            let modifiedMessage = message.replacingOccurrences(of: kDefaultEmail, with:(textFieldEmail?.text)!)
+            
+            verifyController.labelMessage = modifiedMessage
             verifyController.viewLoadFrom = .forgotPassword
             verifyController.emailId = textFieldEmail?.text
         }

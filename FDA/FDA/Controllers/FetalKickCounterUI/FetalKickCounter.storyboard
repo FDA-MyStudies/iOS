@@ -231,9 +231,102 @@
             </objects>
             <point key="canvasLocation" x="2061.5999999999999" y="1153.6731634182909"/>
         </scene>
+        <!--Consent Completion View Controller-->
+        <scene sceneID="D3Y-ry-lF5">
+            <objects>
+                <viewController storyboardIdentifier="ConsentCompletionViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="sfa-bd-dzE" customClass="ConsentCompletionViewController" customModule="FDA" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="oeK-f4-dMF"/>
+                        <viewControllerLayoutGuide type="bottom" id="nK2-u2-Brc"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Xsz-hq-CrD">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="45.png" translatesAutoresizingMaskIntoConstraints="NO" id="Imf-Q3-sjD">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uIj-lV-uyU">
+                                <rect key="frame" x="113" y="601" width="150" height="45"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
+                                <state key="normal" title="Submit">
+                                    <color key="titleColor" red="0.0" green="0.48627450979999998" blue="0.72941176470000002" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="4"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="layer.clipsToBounds" value="YES"/>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
+                                        <integer key="value" value="1"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KFf-Ee-kF6">
+                                <rect key="frame" x="89" y="514" width="197" height="45"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
+                                <state key="normal" title="View/Email Consent PDF">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="4"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="layer.clipsToBounds" value="YES"/>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
+                                        <integer key="value" value="1"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Thanks for providing consent for this Study" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="Pfh-Dn-IUH">
+                                <rect key="frame" x="37" y="237" width="300" height="81"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="300" id="JoO-k3-rRA"/>
+                                    <constraint firstAttribute="height" constant="81" id="dho-gU-Cy8"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="30"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You can now start participating in the Study" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oQF-1F-Kvh">
+                                <rect key="frame" x="16" y="334" width="343" height="60"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="60" id="7gn-Vs-FRF"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="KFf-Ee-kF6" firstAttribute="centerX" secondItem="Xsz-hq-CrD" secondAttribute="centerX" id="DbS-oP-7yB"/>
+                            <constraint firstItem="KFf-Ee-kF6" firstAttribute="centerY" secondItem="Xsz-hq-CrD" secondAttribute="centerY" multiplier="1.61019" id="EnR-2I-r3e"/>
+                            <constraint firstItem="uIj-lV-uyU" firstAttribute="centerY" secondItem="Xsz-hq-CrD" secondAttribute="centerY" multiplier="1.87" id="JuN-ez-VgA"/>
+                            <constraint firstItem="oQF-1F-Kvh" firstAttribute="centerX" secondItem="Xsz-hq-CrD" secondAttribute="centerX" id="VJs-8d-CWB"/>
+                            <constraint firstItem="uIj-lV-uyU" firstAttribute="centerX" secondItem="Xsz-hq-CrD" secondAttribute="centerX" id="Xqc-7O-WPx"/>
+                            <constraint firstItem="uIj-lV-uyU" firstAttribute="width" secondItem="Xsz-hq-CrD" secondAttribute="width" multiplier="150/375" id="YwU-th-pga"/>
+                            <constraint firstItem="oQF-1F-Kvh" firstAttribute="width" secondItem="Xsz-hq-CrD" secondAttribute="width" multiplier="343/375" id="cUt-Ux-8Si"/>
+                            <constraint firstItem="uIj-lV-uyU" firstAttribute="height" secondItem="Xsz-hq-CrD" secondAttribute="height" multiplier="45/667" id="om8-OX-m5d"/>
+                            <constraint firstItem="KFf-Ee-kF6" firstAttribute="height" secondItem="Xsz-hq-CrD" secondAttribute="height" multiplier="45/667" id="pd8-k9-vgq"/>
+                            <constraint firstItem="Pfh-Dn-IUH" firstAttribute="centerY" secondItem="Xsz-hq-CrD" secondAttribute="centerY" multiplier="0.830584" id="rIH-58-Gdp"/>
+                            <constraint firstItem="KFf-Ee-kF6" firstAttribute="width" secondItem="Xsz-hq-CrD" secondAttribute="width" multiplier="197/375" id="tMF-Ha-tSi"/>
+                            <constraint firstItem="oQF-1F-Kvh" firstAttribute="centerY" secondItem="Xsz-hq-CrD" secondAttribute="centerY" multiplier="1.09145" id="ufq-jr-Lju"/>
+                            <constraint firstItem="Pfh-Dn-IUH" firstAttribute="centerX" secondItem="Xsz-hq-CrD" secondAttribute="centerX" id="v4N-5O-I2b"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ZTs-ha-cz6" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2061.5999999999999" y="1153.6731634182909"/>
+        </scene>
     </scenes>
     <resources>
         <image name="200.png" width="750" height="1334"/>
+        <image name="45.png" width="750" height="1334"/>
         <image name="edit_icn1" width="18" height="17"/>
         <image name="start_buttn1" width="123" height="123"/>
         <image name="time_icn1" width="41" height="40"/>

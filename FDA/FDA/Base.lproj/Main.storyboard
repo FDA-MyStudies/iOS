@@ -351,17 +351,13 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="About the Study" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="97T-bG-ujw">
-                                                    <rect key="frame" x="19" y="21" width="124" height="20"/>
+                                                    <rect key="frame" x="19" y="22" width="124" height="20"/>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="RCa-sz-FrM">
-                                                    <rect key="frame" x="337" y="14" width="20" height="35"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="35" id="Gnp-rC-1EO"/>
-                                                        <constraint firstAttribute="width" constant="20" id="lQk-9e-Pbc"/>
-                                                    </constraints>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="rightIconGrey" translatesAutoresizingMaskIntoConstraints="NO" id="RCa-sz-FrM">
+                                                    <rect key="frame" x="344" y="26" width="8" height="14"/>
                                                 </imageView>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0HX-TJ-rRj">
                                                     <rect key="frame" x="17" y="63" width="340" height="1"/>
@@ -376,9 +372,9 @@
                                                 <constraint firstItem="0HX-TJ-rRj" firstAttribute="leading" secondItem="DvL-m3-8kZ" secondAttribute="leadingMargin" constant="9" id="JhN-nN-2PB"/>
                                                 <constraint firstAttribute="bottomMargin" secondItem="0HX-TJ-rRj" secondAttribute="bottom" constant="-7" id="Os9-hE-dsG"/>
                                                 <constraint firstItem="97T-bG-ujw" firstAttribute="leading" secondItem="DvL-m3-8kZ" secondAttribute="leadingMargin" constant="11" id="RAV-dl-YTj"/>
-                                                <constraint firstItem="97T-bG-ujw" firstAttribute="top" secondItem="DvL-m3-8kZ" secondAttribute="topMargin" constant="13" id="Vkv-jQ-2JD"/>
-                                                <constraint firstAttribute="bottomMargin" secondItem="RCa-sz-FrM" secondAttribute="bottom" constant="8" id="W7h-cY-i7d"/>
-                                                <constraint firstAttribute="trailingMargin" secondItem="RCa-sz-FrM" secondAttribute="trailing" constant="10" id="gEc-q7-BPl"/>
+                                                <constraint firstItem="97T-bG-ujw" firstAttribute="top" secondItem="DvL-m3-8kZ" secondAttribute="topMargin" constant="14" id="Vkv-jQ-2JD"/>
+                                                <constraint firstItem="RCa-sz-FrM" firstAttribute="centerY" secondItem="DvL-m3-8kZ" secondAttribute="centerY" id="gVb-oN-c1g"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="RCa-sz-FrM" secondAttribute="trailing" constant="15" id="kG0-xh-fVg"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
@@ -680,13 +676,13 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="73%" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="cLq-2v-KCG">
-                                                    <rect key="frame" x="22" y="17" width="44.5" height="24.5"/>
+                                                    <rect key="frame" x="22" y="17" width="45" height="25"/>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="21"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Study Completion" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="BUp-ZG-pOn">
-                                                    <rect key="frame" x="71.5" y="26" width="92" height="14"/>
+                                                    <rect key="frame" x="72" y="26" width="92" height="14"/>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="11"/>
                                                     <color key="textColor" red="0.54901960780000003" green="0.58431372550000005" blue="0.63921568630000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -704,7 +700,7 @@
                                                     </constraints>
                                                 </view>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="45%" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="GgA-yD-kzq">
-                                                    <rect key="frame" x="203" y="17" width="45" height="24.5"/>
+                                                    <rect key="frame" x="203" y="17" width="45" height="25"/>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="21"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -976,7 +972,7 @@
                                                     </collectionViewFlowLayout>
                                                     <cells>
                                                         <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="StatisticsCell" id="1vA-72-vU2" customClass="StudyDashboardStatisticsCollectionViewCell" customModule="FDA" customModuleProvider="target">
-                                                            <rect key="frame" x="0.0" y="14" width="125" height="110"/>
+                                                            <rect key="frame" x="0.0" y="13.5" width="125" height="110"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                                                 <rect key="frame" x="0.0" y="0.0" width="125" height="110"/>
@@ -1540,6 +1536,7 @@
         <image name="resourcesActive" width="26" height="26"/>
         <image name="rightArrowBlue" width="23" height="18"/>
         <image name="rightIconBlue" width="8" height="13"/>
+        <image name="rightIconGrey" width="8" height="14"/>
         <image name="shareIcon" width="15" height="22"/>
         <image name="splash" width="375" height="667"/>
         <image name="staticIcon1" width="24" height="24"/>

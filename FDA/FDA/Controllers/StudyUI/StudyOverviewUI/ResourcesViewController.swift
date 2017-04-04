@@ -60,7 +60,7 @@ extension ResourcesViewController : UITableViewDataSource {
         
         //Cell Data Setup
         cell.populateCellData(data: tableViewData)
-        cell.accessoryType = .disclosureIndicator
+        //cell.accessoryType = .disclosureIndicator
         
         cell.backgroundColor = UIColor.clear
         return cell

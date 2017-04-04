@@ -11,6 +11,11 @@ import UIKit
 import ResearchKit
 
 let kEligibilityConsentTask = "EligibilityConsentTask"
+let kEligibilityTokenStep = "EligibilityTokenStep"
+let kFetalKickCounterStep = "FetalKickCounter"
+let kEligibilityStepViewControllerIdentifier = "EligibilityStepViewController"
+
+let kConsentTaskIdentifier = "ConsentTask"
 
 
 protocol StudyHomeViewDontrollerDelegate {
@@ -139,10 +144,10 @@ class StudyHomeViewController : UIViewController{
             
             
             
-//            let loginStoryBoard = UIStoryboard(name: "Login", bundle: nil)
-//            let signInController = loginStoryBoard.instantiateViewController(withIdentifier:  String(describing: SignInViewController.classForCoder())) as! SignInViewController
-//            signInController.viewLoadFrom = .joinStudy
-//            self.navigationController?.pushViewController(signInController, animated: true)
+            //            let loginStoryBoard = UIStoryboard(name: "Login", bundle: nil)
+            //            let signInController = loginStoryBoard.instantiateViewController(withIdentifier:  String(describing: SignInViewController.classForCoder())) as! SignInViewController
+            //            signInController.viewLoadFrom = .joinStudy
+            //            self.navigationController?.pushViewController(signInController, animated: true)
             
             
             _ = self.navigationController?.popViewController(animated: true)
@@ -150,14 +155,13 @@ class StudyHomeViewController : UIViewController{
             
         }
         else {
-              UIUtilities.showAlertWithTitleAndMessage(title:NSLocalizedString(kAlertMessageText, comment: "") as NSString, message:NSLocalizedString(kAlertMessageReachoutText, comment: "") as NSString)
-        }
-        else{
+            // UIUtilities.showAlertWithTitleAndMessage(title:NSLocalizedString(kAlertMessageText, comment: "") as NSString, message:NSLocalizedString(kAlertMessageReachoutText, comment: "") as NSString)
+            
             
             WCPServices().getEligibilityConsentMetadata(studyId:(Study.currentStudy?.studyId)!, delegate: self as NMWebServiceDelegate)
+            // self.createEligibilityConsentTask()
             
             
-           
         }
     }
     
@@ -183,35 +187,39 @@ class StudyHomeViewController : UIViewController{
         let taskViewController:ORKTaskViewController?
         
         
-        
-        
-        let filePath  = Bundle.main.path(forResource: "Consent", ofType: "json")
-        let data = NSData(contentsOfFile: filePath!)
-        do {
-            let dataDict = try JSONSerialization.jsonObject(with: data! as Data, options: []) as? Dictionary<String,Any>
-            
-            let consent = dataDict?["Result"]as! Dictionary<String, Any>
-            ConsentBuilder.currentConsent = ConsentBuilder()
-            ConsentBuilder.currentConsent?.initWithMetaData(metaDataDict: consent)
-            
-            
-        }catch{
-            
-        }
-        
+        /*
+         
+         let filePath  = Bundle.main.path(forResource: "Consent", ofType: "json")
+         let data = NSData(contentsOfFile: filePath!)
+         do {
+         let dataDict = try JSONSerialization.jsonObject(with: data! as Data, options: []) as? Dictionary<String,Any>
+         
+         let consent = dataDict?["Result"]as! Dictionary<String, Any>
+         ConsentBuilder.currentConsent = ConsentBuilder()
+         ConsentBuilder.currentConsent?.initWithMetaData(metaDataDict: consent)
+         
+         
+         }catch{
+         
+         }
+         */
         let consentTask:ORKOrderedTask? = ConsentBuilder.currentConsent?.createConsentTask() as! ORKOrderedTask?
         
         for stepDict in (consentTask?.steps)!{
             eligibilitySteps?.append(stepDict)
         }
         
+        let orkOrderedTask:ORKTask? = ORKOrderedTask(identifier:kEligibilityConsentTask, steps: consentTask?.steps)
         
-        
-        let orkOrderedTask:ORKTask? = ORKOrderedTask(identifier:kEligibilityConsentTask, steps: eligibilitySteps)
         
         taskViewController = ORKTaskViewController(task:orkOrderedTask, taskRun: nil)
+        
         taskViewController?.delegate = self
         taskViewController?.outputDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+        
+        
+        taskViewController?.navigationItem.title = "Consent"
+        
         present(taskViewController!, animated: true, completion: nil)
         
         
@@ -224,7 +232,7 @@ class StudyHomeViewController : UIViewController{
         let loginStoryboard = UIStoryboard.init(name: "Main", bundle:Bundle.main)
         let webViewController = loginStoryboard.instantiateViewController(withIdentifier:"WebViewController") as! UINavigationController
         let webView = webViewController.viewControllers[0] as! WebViewController
-       
+        
         
         
         if sender.tag == 1188 {
@@ -277,7 +285,7 @@ extension StudyHomeViewController: PageViewControllerDelegate {
             UIView.animate(withDuration: 0.1, animations: {
                 self.buttonJoinStudy?.backgroundColor = kUIColorForSubmitButtonBackground
                 self.buttonJoinStudy?.setTitleColor(UIColor.white, for: .normal)
-               
+                
             })
             
             
@@ -350,7 +358,7 @@ extension StudyHomeViewController:ORKTaskViewControllerDelegate{
             print("saved")
             taskResult = taskViewController.restorationData
             
-            if taskViewController.task?.identifier == "ConsentTask"{
+            if taskViewController.task?.identifier == kConsentTaskIdentifier{
                 
             }
             else{
@@ -361,7 +369,7 @@ extension StudyHomeViewController:ORKTaskViewControllerDelegate{
         if  taskViewController.task?.identifier == kEligibilityConsentTask{
             ConsentBuilder.currentConsent?.consentResult?.initWithORKTaskResult(taskResult:taskViewController.result )
             
-           User.currentUser.updateStudyStatus(studyId:(Study.currentStudy?.studyId)!  , status: .inProgress)
+            User.currentUser.updateStudyStatus(studyId:(Study.currentStudy?.studyId)!  , status: .inProgress)
             
         }
         else{
@@ -409,11 +417,11 @@ extension StudyHomeViewController:ORKTaskViewControllerDelegate{
     }
     func taskViewController(_ taskViewController: ORKTaskViewController, viewControllerFor step: ORKStep) -> ORKStepViewController? {
         
-        if step.identifier == "EligibilityTokenStep" {
+        if step.identifier == kEligibilityTokenStep {
             
-            let gatewayStoryboard = UIStoryboard(name: "FetalKickCounter", bundle: nil)
+            let gatewayStoryboard = UIStoryboard(name: kFetalKickCounterStep, bundle: nil)
             
-            let ttController = gatewayStoryboard.instantiateViewController(withIdentifier: "EligibilityStepViewController") as! EligibilityStepViewController
+            let ttController = gatewayStoryboard.instantiateViewController(withIdentifier: kEligibilityStepViewControllerIdentifier) as! EligibilityStepViewController
             ttController.step = step
             
             
@@ -460,6 +468,7 @@ extension StudyHomeViewController:ORKTaskViewControllerDelegate{
                     // task = consentbuilder?.createConsentTask()
                     
                     taskViewController = ORKTaskViewController(task:task, taskRun: nil)
+                    
                     
                     // consentbuilder?.consentResult =   ConsentResult()
                     // consentbuilder?.consentResult?.consentDocument =  consentbuilder?.consentDocument

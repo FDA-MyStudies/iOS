@@ -19,6 +19,7 @@ class FirstGatewayOverviewViewController : UIViewController{
     @IBOutlet var buttonGetStarted : UIButton?
     @IBOutlet var labelDescriptionText : UILabel?
     @IBOutlet var labelTitleText : UILabel?
+    var pageIndex:Int!
     
     var overviewSectionDetail : OverviewSection!
     var moviePlayer:MPMoviePlayerViewController!

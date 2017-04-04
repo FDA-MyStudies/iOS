@@ -183,7 +183,7 @@ class WCPServices: NSObject {
         
         if Utilities.isValidObject(someObject: consent as AnyObject?){
             ConsentBuilder.currentConsent = ConsentBuilder()
-            //ConsentBuilder.currentConsent?.initWithMetaData(metaDataDict: consent)
+            ConsentBuilder.currentConsent?.initWithMetaData(metaDataDict: consent)
         }
         
         if Utilities.isValidObject(someObject: eligibility as AnyObject?){

@@ -28,8 +28,17 @@ enum ConsentStepSectionType:String{
     case studySurvey = "studySurvey"
     case studyTasks = "studyTasks"
     case withdrawing = "withdrawing"
+    case custom = "custom"
     
-    func getIntValue()-> Int{
+    
+    /*
+     method to get IntegerValue for the Enum
+     returns Integer specific to ORKconsent
+     
+    */
+    
+    
+    func getIntValue()-> Int!{
         switch self {
         case .overview:
             return 0;
@@ -39,17 +48,14 @@ enum ConsentStepSectionType:String{
             return 2;
         case .timeCommitment:
             return 3;
-        case .timeCommitment:
-            return 4;
         case .studySurvey:
-            return 5;
-        case .overview:
-            return 6;
+            return 4;
         case .studyTasks:
-            return 7;
+            return 5;
         case .withdrawing:
-            return 8;
-            
+            return 6;
+        case .custom:
+            return 7;
         default:
             return -1
         }
@@ -127,14 +133,23 @@ class ConsentSectionStep{
 
     func createConsentSection() ->ORKConsentSection {
         
-        let consentSection = ORKConsentSection(type: ORKConsentSectionType(rawValue: (self.type?.getIntValue())!)!)
+        let consentType:Int? = (self.type?.getIntValue())! >= 0 ? (self.type?.getIntValue()) : -1
         
-        consentSection.title = self.title
-        consentSection.content = self.text
-        consentSection.summary = self.description
         
-        consentSection.htmlContent =  self.html
-        consentSection.contentURL = URL(string:self.url!)
+        let consentSection = ORKConsentSection(type: ORKConsentSectionType(rawValue: consentType! )!)
+        
+        consentSection.title = self.title!
+        consentSection.summary = self.text!
+        
+        if self.description?.isEmpty == false{
+            consentSection.content = self.description!
+        }
+        else if self.html!.isEmpty == false{
+           consentSection.htmlContent =  self.html!
+        }
+        else if self.url!.isEmpty == false{
+             consentSection.contentURL = URL(string:self.url!)
+        }
         
         return consentSection
     }

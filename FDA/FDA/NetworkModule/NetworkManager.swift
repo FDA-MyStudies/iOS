@@ -104,7 +104,7 @@ class NetworkManager {
     
     func composeRequest(_ requestName: NSString, requestType : RequestType , method : HTTPMethod , params : NSDictionary?, headers : NSDictionary?, delegate : NMWebServiceDelegate){
         
-        let networkWSHandler = NetworkWebServiceHandler(delegate: delegate, challengeDelegate: nil)
+        let networkWSHandler = NetworkWebServiceHandler(delegate: delegate, challengeDelegate: UIApplication.shared.delegate as? NMAuthChallengeDelegate)
         networkWSHandler.networkManager = self
         networkWSHandler.composeRequestFor(requestName, requestType: requestType, method: method, params: params, headers: headers)
         
@@ -112,7 +112,7 @@ class NetworkManager {
     
     func composeRequest(_ configuration:NetworkConfiguration, method: Method, params : NSDictionary?, headers : NSDictionary?, delegate : NMWebServiceDelegate){
         
-        let networkWSHandler = NetworkWebServiceHandler(delegate: delegate, challengeDelegate: nil)
+        let networkWSHandler = NetworkWebServiceHandler(delegate: delegate, challengeDelegate: UIApplication.shared.delegate as? NMAuthChallengeDelegate)
         networkWSHandler.networkManager = self
         networkWSHandler.composeRequest(configuration, method: method, params: params, headers: headers)
         

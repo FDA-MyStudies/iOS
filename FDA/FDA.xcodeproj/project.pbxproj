@@ -770,6 +770,7 @@
 			isa = PBXGroup;
 			children = (
 				6EE93DBF1E93C8850027A5DC /* StudyDashboard.plist */,
+				6EE93DC71E93C8850027A5DC /* StudyDashboardViewController.swift */,
 				6EE93DC01E93C8850027A5DC /* StudyDashboardActivityCollectionViewCell.swift */,
 				6EE93DC11E93C8850027A5DC /* StudyDashboardActivityTableViewCell.swift */,
 				6EE93DC21E93C8850027A5DC /* StudyDashboardStatisticsCollectionViewCell.swift */,
@@ -777,7 +778,6 @@
 				6EE93DC41E93C8850027A5DC /* StudyDashboardStudyActivitiesTableViewCell.swift */,
 				6EE93DC51E93C8850027A5DC /* StudyDashboardStudyPercentageTableViewCell.swift */,
 				6EE93DC61E93C8850027A5DC /* StudyDashboardTrendsTableViewCell.swift */,
-				6EE93DC71E93C8850027A5DC /* StudyDashboardViewController.swift */,
 				6EE93DC81E93C8850027A5DC /* StudyDashboardWelcomeTableViewCell.swift */,
 			);
 			path = StudyDashboardUI;
@@ -1015,10 +1015,10 @@
 			children = (
 				94B3DD3A1E6ED8E500327AE5 /* Study.storyboard */,
 				94B3DD3B1E6ED8E500327AE5 /* Study.xcassets */,
+				94B3DD3C1E6ED8E500327AE5 /* StudyOverviewUI */,
 				6EE93DB61E93C8850027A5DC /* ActivityUI */,
 				6EE93DBA1E93C8850027A5DC /* ResourceUI */,
 				6EE93DBE1E93C8850027A5DC /* StudyDashboardUI */,
-				94B3DD3C1E6ED8E500327AE5 /* StudyOverviewUI */,
 			);
 			path = StudyUI;
 			sourceTree = "<group>";

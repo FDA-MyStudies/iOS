@@ -21,7 +21,7 @@ class SplashViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         
-        DBHandler().initilizeCurrentUser()
+         DBHandler().initilizeCurrentUser()
         //TEMP : Need to get form Realm
         //let ud = UserDefaults.standard
         if User.currentUser.authToken != nil {

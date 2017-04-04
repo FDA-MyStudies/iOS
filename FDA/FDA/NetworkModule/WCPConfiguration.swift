@@ -39,9 +39,14 @@ enum WCPMethods:String {
 struct WCPServerURLConstants {
     //TODO: Set the server end points
     
+    
+    //UAT
+    static let ProductionURL = "http://23.89.199.27:8080/StudyMetaData/"
+    static let DevelopmentURL = "http://23.89.199.27:8080/StudyMetaData/"
+    
     //Production
-    static let ProductionURL = "http://192.168.0.50:8080/StudyMetaData/"
-    static let DevelopmentURL = "http://192.168.0.50:8080/StudyMetaData/"
+    //static let ProductionURL = "http://192.168.0.50:8080/StudyMetaData/"
+    //static let DevelopmentURL = "http://192.168.0.50:8080/StudyMetaData/"
     
     
     //Dev

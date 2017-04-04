@@ -85,4 +85,47 @@ let kMessageValidateOldAndNewPasswords = "Old password and New password should n
  //MARK:VerificationController
 
 let kMessageVerificationCodeEmpty = "Please enter valid Verification Code"
+//MARK: FeedbackviewController constants
+let kFeedbackTableViewCellIdentifier1 = "FeedbackCellFirst"
+let kFeedbackTableViewCellIdentifier2 = "FeedbackCellSecond"
+
+//MARK: ContactUsviewController constants
+let kContactUsTableViewCellIdentifier = "ContactUsCell"
+
+//MARK: ActivitiesViewController constants
+let kBackgroundTableViewColor = UIColor.init(red: 216/255.0, green: 227/255.0, blue: 230/255.0, alpha: 1)
+let kActivitiesTableViewCell = "ActivitiesCell"
+
+let kYellowColor = UIColor.init(red: 245/255.0, green: 175/255.0, blue: 55/255.0, alpha: 1.0)
+let kBlueColor = UIColor.init(red: 0/255.0, green: 124/255.0, blue: 186/255.0, alpha: 1.0)
+let kGreenColor = UIColor.init(red: 76/255.0, green: 175/255.0, blue: 80/255.0, alpha: 1.0)
+
+let kResumeSpaces = "  Resume  "
+let kStartSpaces = "  Start  "
+let kCompletedSpaces = "  Completed  "
+
+//MARK: ResourcesViewController constants
+let kResourcesTableViewCell = "ResourcesCell"
+
+
+//MARK: StudyDashboardViewController constants
+let kWelcomeTableViewCell = "welcomeCell"
+let kStudyActivityTableViewCell = "studyActivityCell"
+let kPercentageTableViewCell = "percentageCell"
+let kActivityTableViewCell = "ActivityCell"
+let kStatisticsTableViewCell = "StatisticsCell"
+let kTrendTableViewCell = "trendCell"
+
+let kActivityCollectionViewCell = "ActivityCell"
+let kStatisticsCollectionViewCell = "StatisticsCell"
+
+let kDarkBlueColor = UIColor.init(red: 0/255.0, green: 124/255.0, blue: 186/255.0, alpha: 1.0)
+let kGreyColor = UIColor.init(red: 140/255.0, green: 149/255.0, blue: 163/255.0, alpha: 1.0)
+
+let kDaySpaces = "  DAY  "
+let kDay = "Day"
+let kMonthSpaces = "  MONTH  "
+let kMonth = "MONTH"
+let kWeekSpaces = "  WEEK  "
+let kWeek = "WEEK"
 

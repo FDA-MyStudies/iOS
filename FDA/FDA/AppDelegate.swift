@@ -61,4 +61,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     
 }
+//Handling for HTTPS
+extension AppDelegate : NMAuthChallengeDelegate{
+    
+    func networkCredential(_ manager : NetworkManager, challenge : URLAuthenticationChallenge) -> URLCredential{
+        var urlCredential:URLCredential = URLCredential()
+        if challenge.protectionSpace.authenticationMethod == NSURLAuthenticationMethodServerTrust {
+            if challenge.protectionSpace.host == "hphci-fdama-te-ur-01.labkey.com" {
+                urlCredential = URLCredential.init(trust: challenge.protectionSpace.serverTrust!)
+            }
+        }
+        return urlCredential
+    }
+    
+    func networkChallengeDisposition(_ manager : NetworkManager, challenge : URLAuthenticationChallenge) -> URLSession.AuthChallengeDisposition{
+        return URLSession.AuthChallengeDisposition.useCredential
+    }
+}
 

@@ -59,8 +59,8 @@ enum RegistrationMethods:String {
 struct RegistrationServerURLConstants {
     //TODO: Set the server end points
     
-    static let ProductionURL = "http://192.168.0.6:8081/labkey/fdahpUserRegWS/home/"
-    static let DevelopmentURL = "http://192.168.0.6:8081/labkey/fdahpUserRegWS/home/"
+    static let ProductionURL = "https://hphci-fdama-te-ur-01.labkey.com/fdahpUserRegWS/"
+    static let DevelopmentURL = "https://hphci-fdama-te-ur-01.labkey.com/fdahpUserRegWS/"
     
 }
 class RegistrationServerConfiguration: NetworkConfiguration {

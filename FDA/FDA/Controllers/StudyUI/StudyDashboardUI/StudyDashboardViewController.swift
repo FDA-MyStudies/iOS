@@ -22,7 +22,8 @@ class StudyDashboardViewController : UIViewController{
     var tableViewRowDetails = NSMutableArray()
     var todayActivitiesArray = NSMutableArray()
     var statisticsArray = NSMutableArray()
-    
+
+//MARK:ViewController Delegates
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -50,6 +51,7 @@ class StudyDashboardViewController : UIViewController{
         
     }
     
+//MARK:Button Actions
     @IBAction func homeButtonAction(_ sender: AnyObject){
     
     

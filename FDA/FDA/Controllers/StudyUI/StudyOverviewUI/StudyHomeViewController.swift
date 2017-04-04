@@ -16,6 +16,9 @@ let kFetalKickCounterStep = "FetalKickCounter"
 let kEligibilityStepViewControllerIdentifier = "EligibilityStepViewController"
 
 let kConsentTaskIdentifier = "ConsentTask"
+let kStudyDashboardViewControllerIdentifier = "StudyDashboardViewController"
+
+let kStudyDashboardTabbarControllerIdentifier = "StudyDashboardTabbarViewControllerIdentifier"
 
 
 protocol StudyHomeViewDontrollerDelegate {
@@ -265,6 +268,17 @@ class StudyHomeViewController : UIViewController{
     func didChangePageControlValue() {
         pageViewController?.scrollToViewController(index: (pageControlView?.currentPage)!)
     }
+    
+    
+    
+    func pushToStudyDashboard(){
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        
+        let studyDashboard = storyboard.instantiateViewController(withIdentifier: kStudyDashboardTabbarControllerIdentifier) as! StudyDashboardTabbarViewController
+        
+        self.navigationController?.pushViewController(studyDashboard, animated: true)
+    }
+    
 }
 
 //MARK: Page Control Delegates for handling Counts
@@ -360,14 +374,8 @@ extension StudyHomeViewController:ORKTaskViewControllerDelegate{
             print("saved")
             taskResult = taskViewController.restorationData
             
-            if taskViewController.task?.identifier == kConsentTaskIdentifier{
-                
-                let storyboard = UIStoryboard(name: "Gateway", bundle: nil)
-                
-                let fda = storyboard.instantiateViewController(withIdentifier: "FDASlideMenuViewController") as! FDASlideMenuViewController
-                fda.automaticallyAdjustsScrollViewInsets = true
-                self.navigationController?.pushViewController(fda, animated: true)
-                
+            if taskViewController.task?.identifier == kEligibilityConsentTask{
+               
             }
             else{
                 //activityBuilder?.activity?.restortionData = taskViewController.restorationData
@@ -386,6 +394,11 @@ extension StudyHomeViewController:ORKTaskViewControllerDelegate{
         
         
         taskViewController.dismiss(animated: true, completion: nil)
+        
+        if( User.currentUser.getStudyStatus(studyId:(Study.currentStudy?.studyId)! ) == UserStudyStatus.StudyStatus.inProgress){
+             self.pushToStudyDashboard()
+        }
+        
         
     }
     

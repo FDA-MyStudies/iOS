@@ -53,6 +53,10 @@ struct WCPServerURLConstants {
     static let ProductionURL = "http://192.168.0.32:8080/StudyMetaData/"
     static let DevelopmentURL = "http://192.168.0.32:8080/StudyMetaData/"
     
+    
+    // 23 server
+    //static let ProductionURL = "http://23.89.199.27:8080/StudyMetaData/"
+    //static let DevelopmentURL = "http://23.89.199.27:8080/StudyMetaData/"
 }
 
 class WCPConfiguration: NetworkConfiguration {

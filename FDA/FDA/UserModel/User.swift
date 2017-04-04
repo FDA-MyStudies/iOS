@@ -271,7 +271,7 @@ class User{
             
             let studyStatus = UserStudyStatus()
             studyStatus.status = status
-            
+            studyStatus.studyId = studyId
             self.participatedStudies.append(studyStatus)
             
             Logger.sharedInstance.info("User Study Status: study is updated : \(studyId)")

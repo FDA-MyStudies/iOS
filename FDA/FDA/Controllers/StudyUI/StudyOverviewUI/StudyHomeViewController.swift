@@ -44,6 +44,7 @@ class StudyHomeViewController : UIViewController{
             pageViewController?.pageViewDelegate = self
         }
     }
+//MARK:View controller Delegates
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -136,6 +137,7 @@ class StudyHomeViewController : UIViewController{
     }
     
     
+//MARK:Button Actions
     
     @IBAction func buttonActionJoinStudy(_ sender: UIButton){
         if User.currentUser.userType == UserType.AnonymousUser{
@@ -359,6 +361,12 @@ extension StudyHomeViewController:ORKTaskViewControllerDelegate{
             taskResult = taskViewController.restorationData
             
             if taskViewController.task?.identifier == kConsentTaskIdentifier{
+                
+                let storyboard = UIStoryboard(name: "Gateway", bundle: nil)
+                
+                let fda = storyboard.instantiateViewController(withIdentifier: "FDASlideMenuViewController") as! FDASlideMenuViewController
+                fda.automaticallyAdjustsScrollViewInsets = true
+                self.navigationController?.pushViewController(fda, animated: true)
                 
             }
             else{

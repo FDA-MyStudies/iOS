@@ -283,7 +283,15 @@ class ConsentBuilder{
             stepArray?.append(reviewConsentStep!)
         }
         
+        
+        let completionStep = ORKCompletionStep(identifier:"ConsentCompletionStep")
+        completionStep.title = NSLocalizedString("Thanks for providing consent for this Study", comment: "")
+        
+        
         if (stepArray?.count)! > 0 {
+            
+            stepArray?.append(completionStep)
+            
             return ORKOrderedTask(identifier: "ConsentTask", steps: stepArray)
         }
         else{

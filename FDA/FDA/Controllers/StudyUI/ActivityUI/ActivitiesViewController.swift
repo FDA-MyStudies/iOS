@@ -24,6 +24,10 @@ class ActivitiesViewController : UIViewController{
     
         self.navigationItem.title = NSLocalizedString("STUDY ACTIVITIES", comment: "")
         self.tableView?.sectionHeaderHeight = 30
+        
+        if (Study.currentStudy?.studyId) != nil {
+             WCPServices().getStudyActivityList(studyId: (Study.currentStudy?.studyId)!, delegate: self)
+        }
     
     }
     
@@ -112,4 +116,31 @@ extension ActivitiesViewController : UITableViewDelegate{
     }
     
 }
+
+extension ActivitiesViewController:NMWebServiceDelegate {
+    func startedRequest(_ manager: NetworkManager, requestName: NSString) {
+        Logger.sharedInstance.info("requestname : \(requestName)")
+        //self.addProgressIndicator()
+    }
+    func finishedRequest(_ manager: NetworkManager, requestName: NSString, response: AnyObject?) {
+        Logger.sharedInstance.info("requestname : \(requestName)")
+        
+        //self.removeProgressIndicator()
+        
+        if requestName as String == WCPMethods.activityList.method.methodName {
+           
+        }
+        
+        
+    }
+    func failedRequest(_ manager: NetworkManager, requestName: NSString, error: NSError) {
+        Logger.sharedInstance.info("requestname : \(requestName)")
+        //self.removeProgressIndicator()
+        
+        
+        
+    }
+}
+
+
 

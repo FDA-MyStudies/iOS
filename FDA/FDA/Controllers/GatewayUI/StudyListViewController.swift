@@ -88,7 +88,7 @@ class StudyListViewController: UIViewController {
         }
         //self.tableView?.reloadData()
         //self.sendRequestToGetStudyList()
-        //self.sendRequestToGetUserPreference()
+        self.sendRequestToGetUserPreference()
         
         
         if User.currentUser.userType == .FDAUser {
@@ -244,7 +244,7 @@ extension StudyListViewController : StudyListDelegates {
             userStudyStatus =  user.removeBookbarkStudy(studyId: study.studyId!)
         }
         
-        //self.sendRequestToUpdateBookMarkStatus(userStudyStatus: userStudyStatus)
+        self.sendRequestToUpdateBookMarkStatus(userStudyStatus: userStudyStatus)
     }
 }
 
@@ -256,7 +256,7 @@ extension StudyListViewController:NMWebServiceDelegate {
         self.addProgressIndicator()
     }
     func finishedRequest(_ manager: NetworkManager, requestName: NSString, response: AnyObject?) {
-        Logger.sharedInstance.info("requestname : \(requestName)")
+        Logger.sharedInstance.info("requestname : \(requestName) : \(response)")
         
         self.removeProgressIndicator()
         
@@ -267,7 +267,8 @@ extension StudyListViewController:NMWebServiceDelegate {
             self.navigateToStudyHome()
         }
         else if (requestName as String == RegistrationMethods.userPreferences.description){
-            self.sendRequestToGetStudyList()
+            //self.sendRequestToGetStudyList()
+            self.tableView?.reloadData()
         }
        
         

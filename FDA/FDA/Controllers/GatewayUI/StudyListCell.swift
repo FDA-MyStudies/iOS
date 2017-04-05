@@ -80,14 +80,26 @@ class StudyListCell: UITableViewCell {
         
         studyLogoImage?.image = #imageLiteral(resourceName: "placeholder")
         
+        //study status
         self.setStudyStatus(study: study)
         
         if User.currentUser.userType == .AnonymousUser {
-            
+            // do nothing
         }
         else {
+            
+            //set participatedStudies
             //self.setUserStatusForStudy(study: study)
+            
+            if User.currentUser.isStudyBookmarked(studyId: study.studyId) {
+                buttonBookmark?.isSelected = true
+            }
+            else {
+                buttonBookmark?.isSelected = false
+            }
         }
+        
+        //logo
         if study.logoURL != nil {
             
             let url = URL.init(string: study.logoURL!)

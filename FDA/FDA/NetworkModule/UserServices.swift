@@ -279,11 +279,12 @@ class UserServices: NSObject {
         self.delegate = delegate
         
         let user = User.currentUser
-        let params = [kUserId : user.userId,
-                      kStudies:[studyStauts.getBookmarkUserStudyStatus()]] as [String : Any]
+        let headerParams = [kUserId : user.userId] as Dictionary<String, String>
+        
+        let params = [kStudies:[studyStauts.getBookmarkUserStudyStatus()]] as [String : Any]
         let method = RegistrationMethods.updatePreferences.method
         
-        self.sendRequestWith(method:method, params: params, headers: nil)
+        self.sendRequestWith(method:method, params: params, headers: headerParams)
     }
     
     func updateUserPreference(_ delegate:NMWebServiceDelegate){

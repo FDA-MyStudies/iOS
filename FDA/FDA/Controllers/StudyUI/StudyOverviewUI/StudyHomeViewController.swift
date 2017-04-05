@@ -162,6 +162,8 @@ class StudyHomeViewController : UIViewController{
         
         else{
             
+            //let studyStatus = User.currentUser.updateStudyStatus(studyId:(Study.currentStudy?.studyId)!, status: .inProgress)
+           // UserServices().updateUserParticipatedStatus(studyStauts: studyStatus, delegate: self)
             
             WCPServices().getEligibilityConsentMetadata(studyId:(Study.currentStudy?.studyId)!, delegate: self as NMWebServiceDelegate)
             // self.createEligibilityConsentTask()
@@ -333,6 +335,7 @@ extension StudyHomeViewController:NMWebServiceDelegate {
         if requestName as String == WCPMethods.eligibilityConsent.method.methodName {
             self.createEligibilityConsentTask()
         }
+        
         
         
     }

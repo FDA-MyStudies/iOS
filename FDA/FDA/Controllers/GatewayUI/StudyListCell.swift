@@ -100,14 +100,9 @@ class StudyListCell: UITableViewCell {
         else {
             
             //set participatedStudies
-            //self.setUserStatusForStudy(study: study)
+            self.setUserStatusForStudy(study: study)
             
-            if User.currentUser.isStudyBookmarked(studyId: study.studyId) {
-                buttonBookmark?.isSelected = true
-            }
-            else {
-                buttonBookmark?.isSelected = false
-            }
+           
         }
         
         //logo
@@ -137,27 +132,37 @@ class StudyListCell: UITableViewCell {
     func setUserStatusForStudy(study:Study){
         
         let currentUser = User.currentUser
-        let userStudyStatus = currentUser.participatedStudies[0]
         
-        //user study status
-        labelStudyUserStatus?.text = userStudyStatus.status.description
         
-        switch userStudyStatus.status {
-        case .inProgress:
-            studyUserStatusIcon?.image = #imageLiteral(resourceName: "in_progress_icn")
-        case .yetToJoin:
+        if let userStudyStatus = currentUser.participatedStudies.filter({$0.studyId == study.studyId}).first {
+            
+            //user study status
+            labelStudyUserStatus?.text = userStudyStatus.status.description
+            
+            switch userStudyStatus.status {
+            case .inProgress:
+                studyUserStatusIcon?.image = #imageLiteral(resourceName: "in_progress_icn")
+            case .yetToJoin:
+                studyUserStatusIcon?.image = #imageLiteral(resourceName: "yet_to_join_icn")
+            case .notEligible:
+                studyUserStatusIcon?.image = #imageLiteral(resourceName: "not_eligible_icn")
+            case .withdrawn:
+                studyUserStatusIcon?.image = #imageLiteral(resourceName: "not_eligible_icn")
+            case .completed:
+                studyUserStatusIcon?.image = #imageLiteral(resourceName: "completed_icn")
+                
+            }
+            
+            //bookMarkStatus
+            buttonBookmark?.isSelected = userStudyStatus.bookmarked
+        }
+        else {
+            labelStudyUserStatus?.text = UserStudyStatus.StudyStatus.yetToJoin.description
             studyUserStatusIcon?.image = #imageLiteral(resourceName: "yet_to_join_icn")
-         case .notEligible:
-            studyUserStatusIcon?.image = #imageLiteral(resourceName: "not_eligible_icn")
-        case .withdrawn:
-            studyUserStatusIcon?.image = #imageLiteral(resourceName: "not_eligible_icn")
-        case .completed:
-            studyUserStatusIcon?.image = #imageLiteral(resourceName: "completed_icn")
-
+            buttonBookmark?.isSelected = false
         }
         
-        //bookMarkStatus
-        buttonBookmark?.isSelected = userStudyStatus.bookmarked
+        
         
         
     }

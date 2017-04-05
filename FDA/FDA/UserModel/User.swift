@@ -259,12 +259,13 @@ class User{
     }
     
     //MARK:Study Status
-    func updateStudyStatus(studyId:String,status:UserStudyStatus.StudyStatus){
+    func updateStudyStatus(studyId:String,status:UserStudyStatus.StudyStatus)->UserStudyStatus{
         
         let studies = self.participatedStudies as Array<UserStudyStatus>
         if let study =   studies.filter({$0.studyId == studyId}).first {
             study.status = status
             Logger.sharedInstance.info("User Study Status: study is updated : \(studyId)")
+            return study
         }
         else {
             Logger.sharedInstance.info("User Study Status: study not found : \(studyId)")
@@ -275,6 +276,7 @@ class User{
             self.participatedStudies.append(studyStatus)
             
             Logger.sharedInstance.info("User Study Status: study is updated : \(studyId)")
+            return studyStatus
         }
     }
     
@@ -414,6 +416,23 @@ class UserStudyStatus{
                 
             }
         }
+        
+        var paramValue:String {
+            switch self {
+            case .yetToJoin:
+                return "yetToJoin"
+            case .inProgress:
+                return "inProgress"
+            case.completed:
+                return "completed"
+            case .notEligible:
+                return "notEligible"
+            case .withdrawn:
+                return "withdrawn"
+                
+            }
+        }
+
     }
     
     var bookmarked:Bool = false
@@ -440,16 +459,16 @@ class UserStudyStatus{
                 
                 let statusValue = detail[kStatus] as! String
                 
-                if (StudyStatus.inProgress.description == statusValue) {
+                if (StudyStatus.inProgress.paramValue == statusValue) {
                     self.status = .inProgress
                 }
-                else if (StudyStatus.notEligible.description == statusValue) {
+                else if (StudyStatus.notEligible.paramValue == statusValue) {
                     self.status = .notEligible
                 }
-                else if (StudyStatus.completed.description == statusValue) {
+                else if (StudyStatus.completed.paramValue == statusValue) {
                     self.status = .completed
                 }
-                else if (StudyStatus.withdrawn.description == statusValue) {
+                else if (StudyStatus.withdrawn.paramValue == statusValue) {
                     self.status = .withdrawn
                 }
             }
@@ -468,6 +487,12 @@ class UserStudyStatus{
         
         let studyDetail = [kStudyId:self.studyId,
                            kBookmarked:self.bookmarked] as [String : Any]
+        return studyDetail
+    }
+    func getParticipatedUserStudyStatus() -> Dictionary<String,Any>{
+        
+        let studyDetail = [kStudyId:self.studyId,
+                           kStudyStatus:self.status.paramValue] as [String : Any]
         return studyDetail
     }
     

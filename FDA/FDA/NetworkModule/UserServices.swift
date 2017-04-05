@@ -287,16 +287,17 @@ class UserServices: NSObject {
         self.sendRequestWith(method:method, params: params, headers: headerParams)
     }
     
-    func updateUserPreference(_ delegate:NMWebServiceDelegate){
+    func updateUserParticipatedStatus(studyStauts:UserStudyStatus, delegate:NMWebServiceDelegate){
         
         self.delegate = delegate
         
-        //INCOMPLETE
+        
         let user = User.currentUser
-        let params = [kUserId : user.userId]
+        let headerParams = [kUserId : user.userId] as Dictionary<String, String>
+        let params = [kStudies:[studyStauts.getParticipatedUserStudyStatus()]] as [String : Any]
         let method = RegistrationMethods.updatePreferences.method
         
-        self.sendRequestWith(method:method, params: params, headers: nil)
+        self.sendRequestWith(method:method, params: params, headers: headerParams)
     }
     
     func updateUserEligibilityConsentStatus(_ delegate:NMWebServiceDelegate){

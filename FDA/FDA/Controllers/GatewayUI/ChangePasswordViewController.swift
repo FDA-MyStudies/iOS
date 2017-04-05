@@ -140,6 +140,9 @@ class ChangePasswordViewController: UIViewController {
         }else if self.newPassword == ""{
             self.showAlertMessages(textMessage: kMessageNewPasswordBlank)
         }
+        else if self.confirmPassword == ""{
+             self.showAlertMessages(textMessage: kMessageProfileConfirmPasswordBlank)
+        }
         else if Utilities.isPasswordValid(text: self.newPassword) == false{
             self.showAlertMessages(textMessage: kMessageValidatePasswordComplexity)
             
@@ -148,7 +151,7 @@ class ChangePasswordViewController: UIViewController {
              self.showAlertMessages(textMessage: kMessageValidateOldAndNewPasswords)
         }
         else if self.newPassword != self.confirmPassword{
-            self.showAlertMessages(textMessage: kMessageValidatePasswords)
+            self.showAlertMessages(textMessage: kMessageProfileValidatePasswords)
         }
         else{
            self.requestToChangePassword()

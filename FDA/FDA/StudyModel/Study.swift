@@ -70,6 +70,7 @@ class Study {
     var logoURL:String?
     var overview:Overview!
     var activities:Array<Activity>!
+    var resources:Array<Resource>? = []
     
     var consentDocument:ConsentDocument?
     

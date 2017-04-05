@@ -12,7 +12,7 @@ import Foundation
 
 
 enum ResourceLevel:String{
-  
+    
     case gateway = "gateway"
     case study = "study"
 }
@@ -30,6 +30,8 @@ class Resource{
     var key:String?
     var type:String?
     var file:File?
+    var audience:Audience?
+    var resourcesId:String?
     var configration:Dictionary<String, Any>?
     
     init() {
@@ -79,9 +81,23 @@ class Resource{
             if (Utilities.isValidValue(someObject: (dict[kResourceType]) as AnyObject)) {
                 self.type = dict[kResourceType] as? String
             }
-            if (Utilities.isValidValue(someObject: (dict[kResourceFile]) as AnyObject)) {
-                self.file?.setFile(dict: dict[kResourceFile] as! NSDictionary)
+            
+            if self.level != nil {
+                
+                if self.level == ResourceLevel.study {
+                    // level = study
+                    self.file?.setFileForStudy(dict:dict)
+                }
+                else if self.level == ResourceLevel.gateway {
+                    // level = gateway
+                    
+                    if (Utilities.isValidValue(someObject: (dict[kResourceFile]) as AnyObject)) {
+                        self.file?.setFile(dict: dict[kResourceFile] as! NSDictionary)
+                    }
+                }
             }
+            
+            
             if (Utilities.isValidObject(someObject: dict[kResourceConfigration] as AnyObject)) {
                 self.configration = dict[kResourceConfigration] as? Dictionary
             }
@@ -90,6 +106,6 @@ class Resource{
             Logger.sharedInstance.debug("Resource Dictionary is null:\(dict)")
         }
         
-}
+    }
     
 }

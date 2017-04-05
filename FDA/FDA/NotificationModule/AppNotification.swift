@@ -8,6 +8,13 @@
 
 import UIKit
 
+
+enum Audience:String{
+    case All
+    case Participants
+    case Limited
+}
+
 class AppNotification {
     
     enum NotificationType:String{
@@ -22,11 +29,7 @@ class AppNotification {
         case Activity
     }
 
-    enum Audience:String{
-        case All
-        case Participants
-        case Limited
-    }
+    
     
     var id:String?
     var type:NotificationType = .Gateway

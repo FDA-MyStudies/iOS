@@ -40,6 +40,9 @@ let kFileMIMEType = "mimeType"
 let kFileName = "name"
 let kFileLink = "link"
 
+let kFileTypeForStudy = "type"
+let kFileTitleForStudy = "title"
+let kFileLinkForStudy = "content"
 
 //MARK: File class
 class File{
@@ -106,6 +109,39 @@ class File{
         
         
         
+    }
+    
+    func setFileForStudy(dict:NSDictionary)  {
+        
+        if Utilities.isValidObject(someObject: dict){
+            
+            if Utilities.isValidValue(someObject: dict[kFileTypeForStudy] as AnyObject)   {
+                self.mimeType = dict[kFileTypeForStudy] as? MimeType
+            }
+            if Utilities.isValidValue(someObject: dict[kFileTitleForStudy] as AnyObject)  {
+                self.name = dict[kFileTitleForStudy] as? String
+            }
+            if Utilities.isValidValue(someObject: dict[kFileLinkForStudy] as AnyObject)  {
+                self.link = dict[kFileLinkForStudy] as? String
+            }
+            
+            
+            //download data
+            var fileData:NSData?
+            fileData = NSData()
+            //save data
+            if fileData != nil{
+                if saveDataIntoDocuments(data: fileData!)  {
+                    NSLog("File saved successfully")
+                }
+                else{
+                    NSLog("File could not be saved")
+                }
+            }
+        }
+        else{
+            Logger.sharedInstance.debug("File Dictionary is null:\(dict)")
+        }
     }
     
     

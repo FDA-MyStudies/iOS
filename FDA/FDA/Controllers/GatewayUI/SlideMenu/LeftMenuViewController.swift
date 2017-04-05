@@ -60,6 +60,7 @@ class LeftMenuViewController : UIViewController, LeftMenuProtocol {
     var resourcesViewController: UIViewController!
     var profileviewController: UIViewController!
     var nonMenuViewController: UIViewController!
+    var reachoutViewController: UINavigationController!
     
     var signInViewController:UINavigationController!
     var signUpViewController:UINavigationController!
@@ -89,6 +90,8 @@ class LeftMenuViewController : UIViewController, LeftMenuProtocol {
         
         
         self.profileviewController = storyboard.instantiateViewController(withIdentifier:  String(describing: ProfileViewController.classForCoder())) as! UINavigationController
+        
+        self.reachoutViewController = storyboard.instantiateViewController(withIdentifier:  String(describing: ProfileViewController.classForCoder())) as! UINavigationController
         
         
         
@@ -214,13 +217,17 @@ class LeftMenuViewController : UIViewController, LeftMenuProtocol {
             }
             else{
                 // go to ReachOut screen
-                  UIUtilities.showAlertWithTitleAndMessage(title:NSLocalizedString(kAlertMessageText, comment: "") as NSString, message:NSLocalizedString(kAlertMessageReachoutText, comment: "") as NSString)
+                //  UIUtilities.showAlertWithTitleAndMessage(title:NSLocalizedString(kAlertMessageText, comment: "") as NSString, message:NSLocalizedString(kAlertMessageReachoutText, comment: "") as NSString)
+                
+                self.slideMenuController()?.changeMainViewController(self.reachoutViewController, close: true)
             }
             
         case .reachOut_signIn:
             if User.currentUser.userType == .FDAUser {
                 // go to reach out
-                  UIUtilities.showAlertWithTitleAndMessage(title:NSLocalizedString(kAlertMessageText, comment: "") as NSString, message:NSLocalizedString(kAlertMessageReachoutText, comment: "") as NSString)
+                  //UIUtilities.showAlertWithTitleAndMessage(title:NSLocalizedString(kAlertMessageText, comment: "") as NSString, message:NSLocalizedString(kAlertMessageReachoutText, comment: "") as NSString)
+                
+                self.slideMenuController()?.changeMainViewController(self.reachoutViewController, close: true)
             }
             else{
                 

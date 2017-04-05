@@ -147,9 +147,9 @@ class ChangePasswordViewController: UIViewController {
             self.showAlertMessages(textMessage: kMessageValidatePasswordComplexity)
             
         }
-        else if  self.oldPassword == self.newPassword{
-             self.showAlertMessages(textMessage: kMessageValidateOldAndNewPasswords)
-        }
+        //else if  self.oldPassword == self.newPassword{
+        //     self.showAlertMessages(textMessage: kMessageValidateOldAndNewPasswords)
+        //}
         else if self.newPassword != self.confirmPassword{
             self.showAlertMessages(textMessage: kMessageProfileValidatePasswords)
         }

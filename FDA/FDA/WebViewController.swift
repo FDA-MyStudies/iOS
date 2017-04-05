@@ -66,6 +66,10 @@ class WebViewController : UIViewController{
                 webView?.loadRequest(urlRequest)
 
             }
+            else{
+                self.activityIndicator.stopAnimating()
+                self.activityIndicator.removeFromSuperview()
+            }
         }
     
         webView?.delegate = self

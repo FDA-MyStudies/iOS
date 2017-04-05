@@ -159,8 +159,8 @@ class StudyHomeViewController : UIViewController{
             self.delegate?.studyHomeJoinStudy()
             
         }
-        else {
-            // UIUtilities.showAlertWithTitleAndMessage(title:NSLocalizedString(kAlertMessageText, comment: "") as NSString, message:NSLocalizedString(kAlertMessageReachoutText, comment: "") as NSString)
+        
+        else{
             
             
             WCPServices().getEligibilityConsentMetadata(studyId:(Study.currentStudy?.studyId)!, delegate: self as NMWebServiceDelegate)

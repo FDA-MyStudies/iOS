@@ -54,14 +54,6 @@ class StudyHomeViewController : UIViewController{
         }
         
         
-        
-        if Study.currentStudy?.studyId != nil {
-            WCPServices().getConsentDocument(studyId: (Study.currentStudy?.studyId)!, delegate: self as NMWebServiceDelegate)
-        }
-        
-        
-        
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -166,25 +158,41 @@ class StudyHomeViewController : UIViewController{
         }
     }
     
+    func displayConsentDocument() {
+        
+        let loginStoryboard = UIStoryboard.init(name: "Main", bundle:Bundle.main)
+        let webViewController = loginStoryboard.instantiateViewController(withIdentifier:"WebViewController") as! UINavigationController
+        let webView = webViewController.viewControllers[0] as! WebViewController
+        self.navigationController?.present(webViewController, animated: true, completion: nil)
+        
+        webView.htmlString = (Study.currentStudy?.consentDocument?.htmlString)
+        
+    }
+    
     @IBAction func visitWebsiteButtonAction(_ sender: UIButton) {
         
         let loginStoryboard = UIStoryboard.init(name: "Main", bundle:Bundle.main)
         let webViewController = loginStoryboard.instantiateViewController(withIdentifier:"WebViewController") as! UINavigationController
         let webView = webViewController.viewControllers[0] as! WebViewController
-       
+        
         
         
         if sender.tag == 1188 {
             //Visit Website
             webView.requestLink = Study.currentStudy?.overview.websiteLink
+            self.navigationController?.present(webViewController, animated: true, completion: nil)
             
         } else {
             //View Consent
-            webView.htmlString = (Study.currentStudy?.consentDocument?.htmlString)
+            
+            if Study.currentStudy?.studyId != nil {
+                WCPServices().getConsentDocument(studyId: (Study.currentStudy?.studyId)!, delegate: self as NMWebServiceDelegate)
+            }
+            
         }
         
         
-        self.navigationController?.present(webViewController, animated: true, completion: nil)
+        
     }
     
     
@@ -244,17 +252,40 @@ extension StudyHomeViewController: PageViewControllerDelegate {
 
 
 extension StudyHomeViewController:NMWebServiceDelegate {
-    
     func startedRequest(_ manager: NetworkManager, requestName: NSString) {
         Logger.sharedInstance.info("requestname : \(requestName)")
         
+        if requestName as String == WCPMethods.consentDocument.method.methodName {
+            self.addProgressIndicator()
+        }
         
+        //self.addProgressIndicator()
     }
     func finishedRequest(_ manager: NetworkManager, requestName: NSString, response: AnyObject?) {
         Logger.sharedInstance.info("requestname : \(requestName)")
+        
+        //self.removeProgressIndicator()
+        
+        
+        if requestName as String == WCPMethods.consentDocument.method.methodName {
+             self.removeProgressIndicator()
+            self.displayConsentDocument()
+           
+        }
+        
+        
     }
     func failedRequest(_ manager: NetworkManager, requestName: NSString, error: NSError) {
         Logger.sharedInstance.info("requestname : \(requestName)")
+        
+        if requestName as String == WCPMethods.consentDocument.method.methodName {
+            self.removeProgressIndicator()
+        }
+        
+        
+        //self.removeProgressIndicator()
+        
+        
         
     }
 }

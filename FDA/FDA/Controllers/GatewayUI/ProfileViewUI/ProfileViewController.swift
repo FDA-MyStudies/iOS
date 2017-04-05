@@ -79,7 +79,7 @@ class ProfileViewController: UIViewController {
         self.setNavigationBarItem()
         
         UIApplication.shared.statusBarStyle = .default
-        
+        self.tableViewProfile?.reloadData()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -381,6 +381,7 @@ extension ProfileViewController : UITableViewDataSource {
             // for SignUp Cell data
             
             let  cell = tableView.dequeueReusableCell(withIdentifier: "CommonDetailsCell", for: indexPath) as! SignUpTableViewCell
+            cell.textFieldValue?.text = ""
             
             var isSecuredEntry : Bool = false
             cell.isUserInteractionEnabled = self.isCellEditable!

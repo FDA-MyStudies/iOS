@@ -76,7 +76,7 @@ class StudyListViewController: UIViewController {
         self.labelHelperText.isHidden = true
         self.setNavigationBarItem()
         self.navigationController?.setNavigationBarHidden(false, animated: true)
-       
+        
         DBHandler.loadStudyListFromDatabase { (studies) in
             if studies.count > 0 {
                 Gateway.instance.studies = studies
@@ -88,21 +88,21 @@ class StudyListViewController: UIViewController {
         }
         //self.tableView?.reloadData()
         //self.sendRequestToGetStudyList()
-        self.sendRequestToGetUserPreference()
+        
         
         
         if User.currentUser.userType == .FDAUser {
             
             self.tableView?.estimatedRowHeight = 156
             self.tableView?.rowHeight = UITableViewAutomaticDimension
-            
+            self.sendRequestToGetUserPreference()
         }
         else {
             self.tableView?.estimatedRowHeight = 140
             self.tableView?.rowHeight = UITableViewAutomaticDimension
-
+            
         }
-
+        
         UIApplication.shared.statusBarStyle = .default
     }
     
@@ -143,13 +143,13 @@ class StudyListViewController: UIViewController {
     }
     
     
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destinationViewController.
-     // Pass the selected object to the new view controller.
-     }
+    // MARK: - Navigation
+    
+    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // Get the new view controller using segue.destinationViewController.
+        // Pass the selected object to the new view controller.
+    }
     
     func navigateToStudyHome(){
         
@@ -157,7 +157,7 @@ class StudyListViewController: UIViewController {
         let studyHomeController = studyStoryBoard.instantiateViewController(withIdentifier: String(describing: StudyHomeViewController.classForCoder())) as! StudyHomeViewController
         studyHomeController.delegate = self
         self.navigationController?.pushViewController(studyHomeController, animated: true)
-
+        
     }
     
     // MARK: - Requests
@@ -168,13 +168,13 @@ class StudyListViewController: UIViewController {
         WCPServices().getStudyInformation(studyId: study.studyId, delegate: self)
     }
     func sendRequestToGetUserPreference(){
-         UserServices().getUserPreference(self)
+        UserServices().getUserPreference(self)
     }
     func sendRequestToUpdateBookMarkStatus(userStudyStatus:UserStudyStatus){
         UserServices().updateStudyBookmarkStatus(studyStauts: userStudyStatus, delegate: self)
     }
     
-     //MARK:Responses
+    //MARK:Responses
     func handleStudyListResponse(){
         
         if (Gateway.instance.studies?.count)! > 0{
@@ -234,7 +234,7 @@ extension StudyListViewController :  UITableViewDelegate {
 extension StudyListViewController : StudyListDelegates {
     
     func studyBookmarked(_ cell: StudyListCell, bookmarked: Bool, forStudy study: Study) {
-      
+        
         let user = User.currentUser
         var userStudyStatus:UserStudyStatus!
         if bookmarked {
@@ -270,7 +270,7 @@ extension StudyListViewController:NMWebServiceDelegate {
             //self.sendRequestToGetStudyList()
             self.tableView?.reloadData()
         }
-       
+        
         
         
     }
@@ -301,6 +301,6 @@ extension StudyListViewController:StudyHomeViewDontrollerDelegate{
             leftController.changeViewController(.reachOut_signIn)
         }
         
-       
+        
     }
 }

@@ -65,7 +65,7 @@ class StudyHomeViewController : UIViewController{
             buttonStar.isHidden = true
         }
         else {
-            if User.currentUser.isStudyBookmarked(studyId: (Study.currentStudy.studyId)!) {
+            if User.currentUser.isStudyBookmarked(studyId: (Study.currentStudy?.studyId)!) {
                 buttonStar.isSelected = true
             }
         }
@@ -191,11 +191,11 @@ class StudyHomeViewController : UIViewController{
         let user = User.currentUser
         if button.isSelected{
             button.isSelected = false
-            userStudyStatus =  user.removeBookbarkStudy(studyId: study.studyId!)
+            userStudyStatus =  user.removeBookbarkStudy(studyId: (study?.studyId)!)
             
         }else{
             button.isSelected = true
-            userStudyStatus =  user.bookmarkStudy(studyId: study.studyId!)
+            userStudyStatus =  user.bookmarkStudy(studyId: (study?.studyId)!)
         }
         
         UserServices().updateStudyBookmarkStatus(studyStauts: userStudyStatus, delegate: self)

@@ -160,6 +160,11 @@ class StudyListViewController: UIViewController {
         
     }
     
+    @IBAction func unwindToStudyList(_ segue:UIStoryboardSegue){
+        //unwindStudyListSegue
+    }
+
+    
     // MARK: - Requests
     func sendRequestToGetStudyList(){
         WCPServices().getStudyList(self)

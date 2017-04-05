@@ -1156,9 +1156,11 @@
                     <navigationItem key="navigationItem" id="RMt-dp-Sda"/>
                     <connections>
                         <outlet property="tableView" destination="Qxc-4T-S8a" id="tZx-jE-93d"/>
+                        <segue destination="baf-N1-scI" kind="unwind" identifier="unwindToStudyListDashboardIdentifier" unwindAction="unwindToStudyList:" id="dJ5-lh-SZO"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ggJ-x4-lvd" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="baf-N1-scI" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="40.799999999999997" y="4067.3163418290856"/>
         </scene>
@@ -1217,8 +1219,8 @@
                                                         <constraint firstAttribute="height" constant="1" id="jbn-JC-r0M"/>
                                                     </constraints>
                                                 </view>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Resume" textAlignment="justified" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="6" translatesAutoresizingMaskIntoConstraints="NO" id="eLR-7x-hRP">
-                                                    <rect key="frame" x="312.5" y="73" width="46" height="16"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Resume" textAlignment="justified" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="6" translatesAutoresizingMaskIntoConstraints="NO" id="eLR-7x-hRP">
+                                                    <rect key="frame" x="312.5" y="74.5" width="46" height="14.5"/>
                                                     <color key="backgroundColor" red="0.96078431369999995" green="0.68627450980000004" blue="0.2156862745" alpha="1" colorSpace="calibratedRGB"/>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="12"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -1287,9 +1289,11 @@
                     </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="SeP-Ma-7HN" id="BoJ-ue-mTc"/>
+                        <segue destination="GMm-vF-dlM" kind="unwind" identifier="unwindeToStudyListIdentier" unwindAction="unwindToStudyList:" id="KOd-u5-tll"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="L36-bx-EGX" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="GMm-vF-dlM" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="40.799999999999997" y="4751.8740629685162"/>
         </scene>

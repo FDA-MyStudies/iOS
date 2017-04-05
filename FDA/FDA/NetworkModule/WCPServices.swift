@@ -84,8 +84,8 @@ class WCPServices: NSObject {
         self.delegate = delegate
         
         let method = WCPMethods.resources.method
-        let params = [kStudyId:studyId]
-        self.sendRequestWith(method:method, params: params, headers: nil)
+        let headerParams = [kStudyId:studyId]
+        self.sendRequestWith(method:method, params: nil, headers: headerParams)
     }
     
     func getStudyInformation(studyId:String, delegate:NMWebServiceDelegate){
@@ -208,6 +208,22 @@ class WCPServices: NSObject {
         Gateway.instance.resources = listOfResources
     }
     
+    func handleResourceForStudy(response:Dictionary<String, Any>){
+        let resources = response[kResources] as! Array<Dictionary<String,Any>>
+        var listOfResources:Array<Resource>! = []
+        for resource in resources{
+            let resourceObj = Resource()
+            resourceObj.level = ResourceLevel.study
+            resourceObj.setResource(dict: resource)
+            
+            listOfResources.append(resourceObj)
+        }
+        
+        //assgin to Gateway
+       Study.currentStudy?.resources = listOfResources
+
+    }
+    
     func handleConsentDocument(response:Dictionary<String, Any>){
         
         let consentDict = response[kConsent] as! Dictionary<String, Any>
@@ -302,7 +318,8 @@ extension WCPServices:NMWebServiceDelegate{
             self.handleStudyList(response: response as! Dictionary<String, Any>)
         case .eligibilityConsent:
             self.handleEligibilityConsentMetaData(response: response as! Dictionary<String, Any>)
-        case .resources:break
+        case .resources:
+             self.handleResourceForStudy(response: response as! Dictionary<String, Any>)
         case .consentDocument:
             self.handleConsentDocument(response: response as! Dictionary<String, Any>)
         case .studyInfo:

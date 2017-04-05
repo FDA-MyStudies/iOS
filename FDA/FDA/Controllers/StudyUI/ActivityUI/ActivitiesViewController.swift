@@ -21,21 +21,21 @@ class ActivitiesViewController : UIViewController{
         //load plist info
         let plistPath = Bundle.main.path(forResource: "Activities", ofType: ".plist", inDirectory:nil)
         tableViewRowDetails = NSMutableArray.init(contentsOfFile: plistPath!)
-    
+        
         self.navigationItem.title = NSLocalizedString("STUDY ACTIVITIES", comment: "")
         self.tableView?.sectionHeaderHeight = 30
         
         if (Study.currentStudy?.studyId) != nil {
-             WCPServices().getStudyActivityList(studyId: (Study.currentStudy?.studyId)!, delegate: self)
+            WCPServices().getStudyActivityList(studyId: (Study.currentStudy?.studyId)!, delegate: self)
         }
-    
+        
     }
     
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-    
-    
+        
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -44,7 +44,12 @@ class ActivitiesViewController : UIViewController{
         
     }
     
+    
+    
+    
     @IBAction func homeButtonAction(_ sender: AnyObject){
+        //_ = self.navigationController?.popToRootViewController(animated: true)
+        self.performSegue(withIdentifier: "unwindeToStudyListIdentier", sender: self)
         
         
     }
@@ -128,7 +133,7 @@ extension ActivitiesViewController:NMWebServiceDelegate {
         //self.removeProgressIndicator()
         
         if requestName as String == WCPMethods.activityList.method.methodName {
-           
+            
         }
         
         

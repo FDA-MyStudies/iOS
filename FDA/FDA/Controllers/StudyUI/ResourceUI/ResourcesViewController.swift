@@ -24,6 +24,8 @@ class ResourcesViewController : UIViewController{
         
         self.navigationItem.title = NSLocalizedString("Resources", comment: "")
         
+        WCPServices().getResourcesForStudy(studyId: (Study.currentStudy?.studyId)!, delegate: self)
+        
     }
     
     
@@ -74,6 +76,32 @@ extension ResourcesViewController : UITableViewDelegate{
         tableView.deselectRow(at: indexPath, animated: true)
     }
     
+}
+
+
+extension ResourcesViewController:NMWebServiceDelegate {
+    func startedRequest(_ manager: NetworkManager, requestName: NSString) {
+        Logger.sharedInstance.info("requestname : \(requestName)")
+        //self.addProgressIndicator()
+    }
+    func finishedRequest(_ manager: NetworkManager, requestName: NSString, response: AnyObject?) {
+        Logger.sharedInstance.info("requestname : \(requestName)")
+        
+        //self.removeProgressIndicator()
+        
+        if requestName as String == WCPMethods.resources.method.methodName {
+            
+        }
+        
+        
+    }
+    func failedRequest(_ manager: NetworkManager, requestName: NSString, error: NSError) {
+        Logger.sharedInstance.info("requestname : \(requestName)")
+        //self.removeProgressIndicator()
+        
+        
+        
+    }
 }
 
 

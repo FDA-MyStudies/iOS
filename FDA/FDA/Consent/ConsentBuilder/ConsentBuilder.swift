@@ -84,7 +84,10 @@ class ConsentBuilder{
                     
                     let consentSection:ConsentSectionStep? = ConsentSectionStep()
                     consentSection?.initWithDict(stepDict: sectionDict)
-                    consentSectionArray.append((consentSection?.createConsentSection())!)
+                    
+                    if consentSection?.visualStep == true{
+                         consentSectionArray.append((consentSection?.createConsentSection())!)
+                    }
                     
                 }
                 
@@ -223,7 +226,7 @@ class ConsentBuilder{
             let reviewConsentStep = ORKConsentReviewStep(identifier: "Review", signature: consentDocument?.signatures?[0], in: consentDocument!)
             
             // In a real application, you would supply your own localized text.
-            reviewConsentStep.text =  "yoooooooo fghjkd" //self.reviewConsent?.title
+            reviewConsentStep.text =  self.reviewConsent?.title //"yoooooooo fghjkd"
             reviewConsentStep.reasonForConsent =  self.reviewConsent?.reasonForConsent
             return reviewConsentStep
 

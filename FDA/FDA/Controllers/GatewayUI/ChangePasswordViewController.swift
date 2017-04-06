@@ -135,7 +135,7 @@ class ChangePasswordViewController: UIViewController {
              self.showAlertMessages(textMessage: kMessageAllFieldsAreEmpty)
         }
         else if self.oldPassword == ""{
-            self.showAlertMessages(textMessage: kMessagePasswordBlank)
+            self.showAlertMessages(textMessage: kMessageCurrentPasswordBlank)
             
         }else if self.newPassword == ""{
             self.showAlertMessages(textMessage: kMessageNewPasswordBlank)

@@ -61,6 +61,8 @@ let kMessageLastNameBlank = "Please enter your last name."
 let kMessageEmailBlank = "Please enter your email address."
 let kMessagePasswordBlank = "Please enter your password."
 
+let kMessageCurrentPasswordBlank = "Please enter your current password."
+
 let kMessageProfileConfirmPasswordBlank = "Please confirm your password."
 let kMessageConfirmPasswordBlank = "Please confirm the password."
 

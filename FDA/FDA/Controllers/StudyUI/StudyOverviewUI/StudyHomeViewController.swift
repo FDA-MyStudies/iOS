@@ -64,6 +64,11 @@ class StudyHomeViewController : UIViewController{
         if User.currentUser.userType == UserType.AnonymousUser {
             buttonStar.isHidden = true
         }
+        else {
+            if User.currentUser.isStudyBookmarked(studyId: (Study.currentStudy?.studyId)!) {
+                buttonStar.isSelected = true
+            }
+        }
         
         
         
@@ -179,12 +184,21 @@ class StudyHomeViewController : UIViewController{
     }
     
     @IBAction func starButtonAction(_ sender: Any) {
-        if (sender as! UIButton).isSelected{
-            (sender as! UIButton).isSelected = !(sender as! UIButton).isSelected
+        
+        let button = sender as! UIButton
+        var userStudyStatus:UserStudyStatus!
+        let study = Study.currentStudy
+        let user = User.currentUser
+        if button.isSelected{
+            button.isSelected = false
+            userStudyStatus =  user.removeBookbarkStudy(studyId: (study?.studyId)!)
             
         }else{
-            (sender as! UIButton).isSelected = !(sender as! UIButton).isSelected
+            button.isSelected = true
+            userStudyStatus =  user.bookmarkStudy(studyId: (study?.studyId)!)
         }
+        
+        UserServices().updateStudyBookmarkStatus(studyStauts: userStudyStatus, delegate: self)
     }
     
     func createEligibilityConsentTask()   {

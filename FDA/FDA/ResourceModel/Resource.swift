@@ -22,7 +22,7 @@ let kResourceKey = "key"
 let kResourceType = "type"
 let kResourceFile = "file"
 let kResourceConfigration = "configration"
-
+let kResourceTitle = "title"
 
 
 class Resource{
@@ -33,6 +33,7 @@ class Resource{
     var audience:Audience?
     var resourcesId:String?
     var configration:Dictionary<String, Any>?
+    var title:String?
     
     init() {
         self.level = ResourceLevel.gateway
@@ -40,6 +41,7 @@ class Resource{
         self.type  = ""
         self.file = File()
         self.configration = Dictionary()
+        self.title = ""
     }
     
     init(detail:Dictionary<String, Any>) {
@@ -61,6 +63,11 @@ class Resource{
             if (Utilities.isValidObject(someObject: detail[kResourceConfigration] as AnyObject)) {
                 self.configration = detail[kResourceConfigration] as? Dictionary
             }
+            
+            if (Utilities.isValidValue(someObject: (detail[kResourceTitle]) as AnyObject)) {
+                self.title = detail[kResourceTitle] as? String
+            }
+            
         }
         else{
             Logger.sharedInstance.debug("Resource Dictionary is null:\(detail)")
@@ -101,6 +108,10 @@ class Resource{
             if (Utilities.isValidObject(someObject: dict[kResourceConfigration] as AnyObject)) {
                 self.configration = dict[kResourceConfigration] as? Dictionary
             }
+            if (Utilities.isValidValue(someObject: (dict[kResourceTitle]) as AnyObject)) {
+                self.title = dict[kResourceTitle] as? String
+            }
+
         }
         else{
             Logger.sharedInstance.debug("Resource Dictionary is null:\(dict)")

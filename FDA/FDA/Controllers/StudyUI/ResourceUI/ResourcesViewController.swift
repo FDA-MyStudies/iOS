@@ -11,16 +11,18 @@ import UIKit
 
 class ResourcesViewController : UIViewController{
     
-    var tableViewRowDetails : NSMutableArray?
+    var tableViewRowDetails : [Resource]?
     
     @IBOutlet var tableView : UITableView?
-    
+    var resourceLink:String?
     override func viewDidLoad() {
         super.viewDidLoad()
         
         //load plist info
-        let plistPath = Bundle.main.path(forResource: "Resources", ofType: ".plist", inDirectory:nil)
-        tableViewRowDetails = NSMutableArray.init(contentsOfFile: plistPath!)
+        // let plistPath = Bundle.main.path(forResource: "ResourcesUI", ofType: ".plist", inDirectory:nil)
+        // tableViewRowDetails = NSMutableArray.init(contentsOfFile: plistPath!)
+        
+        tableViewRowDetails = [Resource]()
         
         self.navigationItem.title = NSLocalizedString("Resources", comment: "")
         
@@ -32,7 +34,7 @@ class ResourcesViewController : UIViewController{
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        
+         UIApplication.shared.statusBarStyle = .default
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -41,9 +43,24 @@ class ResourcesViewController : UIViewController{
         
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "ResourceDetailViewControllerIdentifier"{
+            
+            let resourceDetail = segue.destination as! ResourcesDetailViewController
+            
+            if self.resourceLink != nil{
+                resourceDetail.requestLink = resourceLink!
+            }
+            
+            resourceDetail.hidesBottomBarWhenPushed = true
+            
+        }
+    }
+    
+    
     @IBAction func homeButtonAction(_ sender: AnyObject){
         
-        
+        self.performSegue(withIdentifier: "unwindeToStudyListResourcesIdentifier", sender: self)
     }
 }
 
@@ -52,16 +69,27 @@ class ResourcesViewController : UIViewController{
 extension ResourcesViewController : UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
+        
         return tableViewRowDetails!.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let tableViewData = tableViewRowDetails?.object(at: indexPath.row) as! String
+        
+        
+        let resource = (tableViewRowDetails?[indexPath.row])!
         
         let cell = tableView.dequeueReusableCell(withIdentifier: kResourcesTableViewCell, for: indexPath) as! ResourcesTableViewCell
         
         //Cell Data Setup
-        cell.populateCellData(data: tableViewData)
+        
+        if Utilities.isValidValue(someObject: resource.title as AnyObject) {
+            cell.populateCellData(data: resource.title!)
+        }
+        else{
+            cell.labelTitle?.text = ""
+        }
+        
         //cell.accessoryType = .disclosureIndicator
         
         cell.backgroundColor = UIColor.clear
@@ -74,6 +102,11 @@ extension ResourcesViewController : UITableViewDelegate{
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        
+        let resource = (tableViewRowDetails?[indexPath.row])!
+        resourceLink = resource.file?.getFileLink()
+        
+        self.performSegue(withIdentifier:"ResourceDetailViewControllerIdentifier" , sender: self)
     }
     
 }
@@ -82,22 +115,23 @@ extension ResourcesViewController : UITableViewDelegate{
 extension ResourcesViewController:NMWebServiceDelegate {
     func startedRequest(_ manager: NetworkManager, requestName: NSString) {
         Logger.sharedInstance.info("requestname : \(requestName)")
-        //self.addProgressIndicator()
+        self.addProgressIndicator()
     }
     func finishedRequest(_ manager: NetworkManager, requestName: NSString, response: AnyObject?) {
         Logger.sharedInstance.info("requestname : \(requestName)")
         
-        //self.removeProgressIndicator()
+        self.removeProgressIndicator()
         
         if requestName as String == WCPMethods.resources.method.methodName {
-            
+            tableViewRowDetails = Study.currentStudy?.resources
+            tableView?.reloadData()
         }
         
         
     }
     func failedRequest(_ manager: NetworkManager, requestName: NSString, error: NSError) {
         Logger.sharedInstance.info("requestname : \(requestName)")
-        //self.removeProgressIndicator()
+        self.removeProgressIndicator()
         
         
         

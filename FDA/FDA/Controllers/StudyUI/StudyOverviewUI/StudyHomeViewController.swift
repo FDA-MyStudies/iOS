@@ -288,9 +288,8 @@ class StudyHomeViewController : UIViewController{
     
     
     func pushToStudyDashboard(){
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
         
-        let studyDashboard = storyboard.instantiateViewController(withIdentifier: kStudyDashboardTabbarControllerIdentifier) as! StudyDashboardTabbarViewController
+        let studyDashboard = self.storyboard?.instantiateViewController(withIdentifier: kStudyDashboardTabbarControllerIdentifier) as! StudyDashboardTabbarViewController
         
         self.navigationController?.pushViewController(studyDashboard, animated: true)
     }

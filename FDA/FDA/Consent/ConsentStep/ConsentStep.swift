@@ -135,9 +135,14 @@ class ConsentSectionStep{
         
         let consentType:Int? = (self.type?.getIntValue())! >= 0 ? (self.type?.getIntValue()) : -1
         
+        let consentSection:ORKConsentSection!
         
-        let consentSection = ORKConsentSection(type: ORKConsentSectionType(rawValue: consentType! )!)
-        
+        if self.visualStep == true{
+            consentSection = ORKConsentSection(type: ORKConsentSectionType(rawValue: consentType! )!)
+        }
+        else{
+            consentSection = ORKConsentSection(type: ORKConsentSectionType.onlyInDocument)
+        }
         consentSection.title = self.title!
         consentSection.summary = self.text!
         

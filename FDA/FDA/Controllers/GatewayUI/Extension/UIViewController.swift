@@ -39,6 +39,10 @@ extension UIViewController {
         self.navigationItem.leftBarButtonItem?.isEnabled = false
         self.navigationItem.rightBarButtonItem?.isEnabled = false
         self.navigationItem.backBarButtonItem?.isEnabled = false
+        slideMenuController()?.removeLeftGestures()
+        slideMenuController()?.view.isUserInteractionEnabled = false
+        
+        
         
         var view = self.view.viewWithTag(5000)
         if view == nil {
@@ -63,6 +67,10 @@ extension UIViewController {
         self.navigationItem.backBarButtonItem?.isEnabled = true
         
         let view = self.view.viewWithTag(5000) //as UIView
+        
+        slideMenuController()?.view.isUserInteractionEnabled = true
+        slideMenuController()?.addLeftGestures()
+        
         UIView.animate(withDuration: 0.2, animations: {
             view?.alpha = 0
         }) { (completed) in

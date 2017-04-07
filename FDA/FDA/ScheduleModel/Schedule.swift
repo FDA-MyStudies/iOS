@@ -24,14 +24,7 @@ enum AvailabilityStatus:Int{
 
 class Schedule{
     
-    enum Frequency:String {
-        case One_Time
-        case Daily
-        case Weekly
-        case Monthly
-        case Scheduled
-        case DailyFrequecy
-    }
+   
     
     
     var frequency:Frequency = .One_Time
@@ -64,7 +57,7 @@ class Schedule{
             }
             
             if Utilities.isValidValue(someObject: detail[kActivityFrequency] as AnyObject ){
-                self.frequency = Frequency.init(rawValue: detail[kActivityFrequency] as! String)!
+                self.frequency = Frequency(rawValue: detail[kActivityFrequency] as! String)!
             }
            
         }

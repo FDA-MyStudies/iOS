@@ -15,8 +15,13 @@ let kActivityInfoMetaData = "metadata"
 
 let kActivityStudyId = "studyId"
 let kActivityActivityId = "qId"
-let kActivityName = "name"
+let kActivityName = "title"
 let kActivityConfiguration = "configuration"
+
+let kActivityFrequency = "frequency"
+let kActivityFrequencyRuns = "runs"
+let kActivityFrequencyType = "type"
+
 let kActivityStartTime = "startTime"
 let kActivityEndTime = "endTime"
 
@@ -31,18 +36,25 @@ let kActivityRunLifetime = "runLifetime"
 //questionnaireConfiguration
 let kActivityBranching = "branching"
 let kActivityRandomization = "randomization"
-let kActivityFrequency = "frequency"
+
 
 let kActivityLastModified = "lastModified"
 
 
 enum ActivityType:String{
-    case Questionnaire = "Questionnaire"
+    case Questionnaire = "questionnaire"
     case activeTask = "task"
     //case questionnaireAndActiveTask = "QuestionnaireAndActiveTask"
 }
 
-
+enum Frequency:String {
+    case One_Time = "One Time"
+    case Daily = "Daily"
+    case Weekly = "Weekly"
+    case Monthly = "Monthly"
+    case Scheduled = "Scheduled"
+    case DailyFrequecy = "DailyFrequency"
+}
 
 class Activity{
     
@@ -64,6 +76,10 @@ class Activity{
     var orkSteps:Array<ORKStep>?
     var activitySteps:Array<ActivityStep>?
     
+    
+    var frequencyRuns:Array<Dictionary<String, Any>>?
+    var frequencyType:Frequency
+    
     var result:ActivityResult?
     
     var restortionData:Data?
@@ -82,6 +98,9 @@ class Activity{
         self.startDate = nil
         self.endDate = nil
         
+        
+        
+        
         // questionnaireConfigurations
         self.branching = false
         self.randomization = false
@@ -95,9 +114,14 @@ class Activity{
         self.orkSteps =  Array<ORKStep>()
         
         self.activitySteps = Array<ActivityStep>()
+        
+        self.frequencyRuns = Array<Dictionary<String, Any>>()
+        self.frequencyType = .One_Time
     }
     
     //MARK:Initializer Methods
+    
+    
     
     func initWithStudyActivityList(infoDict:Dictionary<String, Any>) {
         // initializer for basic data from StudyActivitylist
@@ -109,9 +133,12 @@ class Activity{
             if Utilities.isValidValue(someObject: infoDict[kActivityId] as AnyObject ){
                 self.actvityId = infoDict[kActivityId] as! String?
             }
-            if Utilities.isValidValue(someObject: infoDict[kActivityVersion] as AnyObject ){
-                self.version = infoDict[kActivityVersion] as! String?
-            }
+            
+            // if Utilities.isValidValue(someObject: infoDict[kActivityVersion] as AnyObject ){
+            //     self.version = infoDict[kActivityVersion] as! String?
+            // }
+            
+            
             if Utilities.isValidValue(someObject: infoDict[kActivityName] as AnyObject ){
                 self.name = infoDict[kActivityName] as! String?
             }
@@ -119,25 +146,28 @@ class Activity{
                 self.type = infoDict[kActivityType] as? ActivityType
             }
             
-            if Utilities.isValidObject(someObject: infoDict[kActivityConfiguration] as AnyObject?){
-                //Need to reCheck with actual dictionary when passed
-                
-                let configurationDict:Dictionary = infoDict[kActivityConfiguration] as! Dictionary<String, Any>
-                
-                if Utilities.isValidValue(someObject: configurationDict[kActivityStartTime] as AnyObject ){
-                    self.startDate =  Utilities.getDateFromString(dateString: (configurationDict[kActivityStartTime] as! String?)!)
-                }
-                
-                if Utilities.isValidValue(someObject: infoDict[kActivityEndTime] as AnyObject ){
-                    self.endDate =  Utilities.getDateFromString(dateString: (configurationDict[kActivityEndTime] as! String?)!)
-                }
-                
-                //Lifetime and runlife time will be used for scheduling -----PENDING
-                
-                
+            if Utilities.isValidValue(someObject: infoDict[kActivityStartTime] as AnyObject ){
+                // self.startDate =  Utilities.getDateFromString(dateString: (infoDict[kActivityStartTime] as! String?)!)
             }
             
+            if Utilities.isValidValue(someObject: infoDict[kActivityEndTime] as AnyObject ){
+                //self.endDate =  Utilities.getDateFromString(dateString: (infoDict[kActivityEndTime] as! String?)!)
+            }
             
+            if Utilities.isValidObject(someObject: infoDict[kActivityFrequency] as AnyObject?){
+                //Need to reCheck with actual dictionary when passed
+                
+                let frequencyDict:Dictionary = infoDict[kActivityFrequency] as! Dictionary<String, Any>
+                
+                if Utilities.isValidObject(someObject: frequencyDict[kActivityFrequencyRuns] as AnyObject ){
+                    self.frequencyRuns =  frequencyDict[kActivityFrequencyRuns] as? Array<Dictionary<String,Any>>
+                }
+                
+                if Utilities.isValidValue(someObject: frequencyDict[kActivityFrequencyType] as AnyObject ){
+                    self.frequencyType =  Frequency(rawValue:frequencyDict[kActivityFrequencyType] as! String )!
+                }
+                
+            }
         }
         else{
             Logger.sharedInstance.debug("infoDict is null:\(infoDict)")
@@ -231,7 +261,7 @@ class Activity{
         //method to set step array
         
         if Utilities.isValidObject(someObject: stepArray as AnyObject?){
-            self.steps? = stepArray 
+            self.steps? = stepArray
         }
         else{
             Logger.sharedInstance.debug("stepArray is null:\(stepArray)")
@@ -240,19 +270,19 @@ class Activity{
     
     func setORKSteps(orkStepArray:[ORKStep])  {
         if Utilities.isValidObject(someObject: orkStepArray as AnyObject?){
-            self.orkSteps = orkStepArray 
+            self.orkSteps = orkStepArray
         }
         else{
             Logger.sharedInstance.debug("stepArray is null:\(orkStepArray)")
         }
- 
+        
     }
     
     func setActivityStepArray(stepArray:Array<ActivityStep>) {
         //method to set step array
         
         if Utilities.isValidObject(someObject: stepArray as AnyObject?){
-            self.activitySteps? = stepArray 
+            self.activitySteps? = stepArray
         }
         else{
             Logger.sharedInstance.debug("stepArray is null:\(stepArray)")
@@ -263,13 +293,13 @@ class Activity{
     
     
     func getRestortionData() -> Data {
-       return self.restortionData!
+        return self.restortionData!
     }
     func setRestortionData(restortionData:Data)  {
         self.restortionData = restortionData
     }
     
- 
+    
 }
 
 

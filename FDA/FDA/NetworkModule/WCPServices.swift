@@ -103,8 +103,8 @@ class WCPServices: NSObject {
         
 
         let method = WCPMethods.activityList.method
-        let params = [kStudyId:studyId]
-        self.sendRequestWith(method:method, params: params, headers: nil)
+        let headerParams = [kStudyId:studyId]
+        self.sendRequestWith(method:method, params: nil, headers: headerParams)
     }
     
     func getStudyActivityMetadata(studyId:String, activityId:String,activityVersion:String, delegate:NMWebServiceDelegate){
@@ -270,6 +270,19 @@ class WCPServices: NSObject {
     func handleStudyActivityList(response:Dictionary<String, Any>){
         
         let activities = response[kActivites] as! Array<Dictionary<String,Any>>
+        
+        if Utilities.isValidObject(someObject: activities as AnyObject? ) {
+            for activityDict in activities{
+                
+                let activity:Activity? = Activity.init()
+                activity?.initWithStudyActivityList(infoDict: activityDict)
+                Study.currentStudy?.activities.append(activity!)
+                
+            }
+        }
+        else{
+            Logger.sharedInstance.debug("activities is null:\(activities)")
+        }
         
         
     }

@@ -16,7 +16,7 @@ let kActionSheetDoneButtonTitle = "Done"
 let kActionSheetCancelButtonTitle = "Cancel"
 
 let kChangePasswordSegueIdentifier = "changePasswordSegue"
-let kErrorTitle = "Error"
+let kErrorTitle = "Message"
 let kProfileAlertTitleText = "Profile"
 let kProfileAlertUpdatedText = "Profile updated Successfully."
 

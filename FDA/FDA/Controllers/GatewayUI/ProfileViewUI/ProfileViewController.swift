@@ -79,7 +79,7 @@ class ProfileViewController: UIViewController {
         self.setNavigationBarItem()
         
         UIApplication.shared.statusBarStyle = .default
-        
+        self.tableViewProfile?.reloadData()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -173,7 +173,7 @@ class ProfileViewController: UIViewController {
     
     @IBAction func buttonActionSignOut(_ sender: UIButton) {
         
-        UIUtilities.showAlertMessageWithTwoActionsAndHandler(NSLocalizedString("Sign Out", comment: ""), errorMessage: NSLocalizedString("Are you sure you want to sign out ?", comment: ""), errorAlertActionTitle: NSLocalizedString("Sign out", comment: ""),
+        UIUtilities.showAlertMessageWithTwoActionsAndHandler(NSLocalizedString("Sign Out", comment: ""), errorMessage: NSLocalizedString("Are you sure you want to Sign Out ?", comment: ""), errorAlertActionTitle: NSLocalizedString("Sign out", comment: ""),
                                                              errorAlertActionTitle2: NSLocalizedString("Cancel", comment: ""), viewControllerUsed: self,
                                                              action1: {
                                                                 
@@ -381,6 +381,7 @@ extension ProfileViewController : UITableViewDataSource {
             // for SignUp Cell data
             
             let  cell = tableView.dequeueReusableCell(withIdentifier: "CommonDetailsCell", for: indexPath) as! SignUpTableViewCell
+            cell.textFieldValue?.text = ""
             
             var isSecuredEntry : Bool = false
             cell.isUserInteractionEnabled = self.isCellEditable!

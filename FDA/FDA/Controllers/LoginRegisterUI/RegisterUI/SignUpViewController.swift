@@ -171,6 +171,10 @@ class SignUpViewController : UIViewController{
             self.showAlertMessages(textMessage: kMessageValidatePasswordComplexity)
             return false
         }
+        else if confirmPassword == "" {
+            self.showAlertMessages(textMessage: kMessageProfileConfirmPasswordBlank)
+            return false
+        }
         else if (self.user.password != confirmPassword){
             self.showAlertMessages(textMessage: kMessageValidatePasswords)
             return false

@@ -55,15 +55,26 @@ let kNotificationTableViewCellIdentifier = "NotificationCell"
 
 
 //MARK: Validations Message during signup and sign in process
+
 let kMessageFirstNameBlank = "Please enter your first name."
 let kMessageLastNameBlank = "Please enter your last name."
 let kMessageEmailBlank = "Please enter your email address."
-let kMessageValidEmail = "Please enter valid email address."
 let kMessagePasswordBlank = "Please enter your password."
-let kMessageConfirmPasswordBlank = "Please enter confirm password."
-let kMessageValidatePasswords = "Please confirm the password"
+
+let kMessageCurrentPasswordBlank = "Please enter your current password."
+
+let kMessageProfileConfirmPasswordBlank = "Please confirm your password."
+let kMessageConfirmPasswordBlank = "Please confirm the password."
+
+
+let kMessageValidEmail = "Please enter valid email address."
+
+let kMessageValidatePasswords = "The Password and Confirm password fields don't match."
+let kMessageProfileValidatePasswords = "New password and confirm password fields don't match."
+
+
 let kMessageValidatePasswordCharacters = "Password should have minimum of 8 characters."
-let kMessageValidatePasswordComplexity = "Your password must:\nBe 8 to 14 characters long\nContain a lower case letter\nContain a upper case letter\nContain a number\nContain one of the below special characters\n!  # $ % & ' () * + , - . : ; < > = ? @ [] ^ _  { } | ~"
+let kMessageValidatePasswordComplexity = "Your password must contain: 8 to 14 characters, lower case letter, upper case letter, numeric,  special characters \\!  # $ % & ' () * + , - . : ; < > = ? @ [] ^ _  { } | ~"
 let kMessageAgreeToTermsAndConditions = "Please agree to terms and conditions."
 
 let kMessageNewPasswordBlank = "Please enter your new password."
@@ -73,7 +84,7 @@ let kMessageValidateChangePassword = "New password and old password are same."
 let kChangePasswordTitleText = "CHANGE PASSWORD"
 let kCreatePasswordTitleText = "CREATE PASSWORD"
 let kChangePawwordCellIdentifer = "changePasswordCell"
-let kChangePasswordResponseMessage = "Your password changed successfully"
+let kChangePasswordResponseMessage = "Your password has been changed successfully"
 
 
 

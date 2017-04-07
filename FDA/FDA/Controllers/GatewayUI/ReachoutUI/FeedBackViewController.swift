@@ -8,19 +8,30 @@
 
 import Foundation
 import UIKit
+import IQKeyboardManagerSwift
 
 class FeedBackViewController : UIViewController{
     
     @IBOutlet var buttonSubmit : UIButton?
     @IBOutlet var tableView : UITableView?
+    var feedbackText:String = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.navigationItem.title =  NSLocalizedString("FEEDBACK", comment: "")
+        
         //Used to set border color for bottom view
         buttonSubmit?.layer.borderColor = kUicolorForButtonBackground
         
-        //self.tableView?.estimatedRowHeight = 123
-        //self.tableView?.rowHeight = UITableViewAutomaticDimension
+        //Automatically takes care  of text field become first responder and scroll of tableview
+        IQKeyboardManager.sharedManager().enable = true
+
+        
+        self.tableView?.estimatedRowHeight = 123
+        self.tableView?.rowHeight = UITableViewAutomaticDimension
+        
+        self.addBackBarButton()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -37,6 +48,11 @@ class FeedBackViewController : UIViewController{
         super.viewWillDisappear(animated)
         
     }
+    
+    @IBAction func buttonSubmitAciton(_ sender:UIButton){
+        //print("\(ContactUsFeilds.firstName)")
+    }
+
 }
 
 //MARK: TableView Data source
@@ -73,6 +89,38 @@ extension FeedBackViewController : UITableViewDelegate{
 
 }
 
+extension FeedBackViewController: UITextViewDelegate {
+    
+    
+    func textViewDidChange(_ textView: UITextView) {
+        let currentOffset = tableView?.contentOffset
+        UIView.setAnimationsEnabled(false)
+        tableView?.beginUpdates()
+        tableView?.endUpdates()
+        UIView.setAnimationsEnabled(true)
+        tableView?.setContentOffset(currentOffset!, animated: false)
+    }
+    func textViewDidEndEditing(_ textView: UITextView) {
+        print("textViewDidEndEditing")
+        if textView.tag == 101 && textView.text.characters.count == 0 {
+            textView.text = "Enter your feedback here"
+            textView.textColor = UIColor.lightGray
+            textView.tag = 100
+        }
+        else {
+            self.feedbackText = textView.text!
+        }
+    }
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        print("textViewDidBeginEditing")
+        
+        if textView.tag == 100 {
+            textView.text = ""
+            textView.textColor = UIColor.black
+            textView.tag = 101
+        }
+    }
+}
 
 
 

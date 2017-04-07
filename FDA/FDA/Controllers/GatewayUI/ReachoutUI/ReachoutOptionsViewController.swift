@@ -15,9 +15,12 @@ class ReachoutOptionsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.navigationItem.title =  NSLocalizedString("RESOURCES", comment: "")
+        self.navigationItem.title =  NSLocalizedString("REACHOUT", comment: "")
         
         // Do any additional setup after loading the view.
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        self.setNavigationBarItem()
     }
     
     override func didReceiveMemoryWarning() {
@@ -48,7 +51,7 @@ extension ReachoutOptionsViewController : UITableViewDataSource {
         
         //let tableViewData = tableViewRowDetails?.object(at: indexPath.row) as! NSDictionary
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "resourcesCell", for: indexPath) as! ReachoutOptionCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "reachoutCell", for: indexPath) as! ReachoutOptionCell
         
         
         switch indexPath.row {
@@ -70,7 +73,15 @@ extension ReachoutOptionsViewController :  UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        
+       
+        switch indexPath.row {
+        case 0:
+            self.performSegue(withIdentifier: "contactusSegue", sender: self)
+        case 1:
+            self.performSegue(withIdentifier: "feedbackSegue", sender: self)
+        default:
+            debugPrint("default")
+        }
     }
 }
 

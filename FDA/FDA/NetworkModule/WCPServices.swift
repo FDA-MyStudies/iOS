@@ -214,7 +214,7 @@ class WCPServices: NSObject {
         for resource in resources{
             let resourceObj = Resource()
             resourceObj.level = ResourceLevel.study
-            resourceObj.setResource(dict: resource)
+            resourceObj.setResource(dict: resource as NSDictionary)
             
             listOfResources.append(resourceObj)
         }

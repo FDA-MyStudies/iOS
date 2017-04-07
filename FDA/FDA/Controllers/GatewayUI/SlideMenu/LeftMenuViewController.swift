@@ -91,7 +91,7 @@ class LeftMenuViewController : UIViewController, LeftMenuProtocol {
         
         self.profileviewController = storyboard.instantiateViewController(withIdentifier:  String(describing: ProfileViewController.classForCoder())) as! UINavigationController
         
-        self.reachoutViewController = storyboard.instantiateViewController(withIdentifier:  String(describing: ProfileViewController.classForCoder())) as! UINavigationController
+        self.reachoutViewController = storyboard.instantiateViewController(withIdentifier:  String(describing: ReachoutOptionsViewController.classForCoder())) as! UINavigationController
         
         
         

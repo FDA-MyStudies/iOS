@@ -11,12 +11,12 @@ import MobileCoreServices
 
 enum MimeType:String{
     
-    case txt = "text/plain"
-    case html = "text/html"
+    case txt = "text" //text/plain
+    case html = "html" //text/html
     case css = "text/css"
     case xml = "text/xml"
     
-    case pdf = "application/pdf"
+    case pdf = "pdf" //application/pdf
     case json = "application/json"
     case docx = "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
     
@@ -116,7 +116,7 @@ class File{
         if Utilities.isValidObject(someObject: dict){
             
             if Utilities.isValidValue(someObject: dict[kFileTypeForStudy] as AnyObject)   {
-                self.mimeType = dict[kFileTypeForStudy] as? MimeType
+                self.mimeType = MimeType(rawValue:dict[kFileTypeForStudy] as! String)
             }
             if Utilities.isValidValue(someObject: dict[kFileTitleForStudy] as AnyObject)  {
                 self.name = dict[kFileTitleForStudy] as? String

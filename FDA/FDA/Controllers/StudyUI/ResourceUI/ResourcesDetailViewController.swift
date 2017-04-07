@@ -15,7 +15,7 @@ class ResourcesDetailViewController: UIViewController {
     @IBOutlet var webView : UIWebView?
     var activityIndicator:UIActivityIndicatorView!
     var requestLink:String?
-    
+    var type:String?
     var htmlString: String?
     
     override func viewDidLoad() {
@@ -36,11 +36,15 @@ class ResourcesDetailViewController: UIViewController {
             self.view.addSubview(activityIndicator)
             activityIndicator.startAnimating()
             
-            let url:URL? = URL.init(string:self.requestLink!)!
-            let urlRequest = URLRequest(url: url!)
-            
-            webView?.loadRequest(urlRequest)
-            
+            if self.type == "pdf"{
+                let url:URL? = URL.init(string:self.requestLink!.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed)!)
+                let urlRequest = URLRequest(url: url!)
+                webView?.loadRequest(urlRequest)
+                
+            }
+            else{
+                webView?.loadHTMLString(self.requestLink!, baseURL:nil)
+            }
         }
         else{
             

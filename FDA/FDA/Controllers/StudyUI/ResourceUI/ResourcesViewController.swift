@@ -15,6 +15,7 @@ class ResourcesViewController : UIViewController{
     
     @IBOutlet var tableView : UITableView?
     var resourceLink:String?
+    var fileType:String?
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -49,9 +50,11 @@ class ResourcesViewController : UIViewController{
             let resourceDetail = segue.destination as! ResourcesDetailViewController
             
             if self.resourceLink != nil{
-                resourceDetail.requestLink = resourceLink!
+                resourceDetail.requestLink = self.resourceLink!
             }
-            
+            if self.fileType != nil {
+                resourceDetail.type = self.fileType!
+            }
             resourceDetail.hidesBottomBarWhenPushed = true
             
         }
@@ -59,8 +62,9 @@ class ResourcesViewController : UIViewController{
     
     
     @IBAction func homeButtonAction(_ sender: AnyObject){
-        
+        self.navigationController?.navigationBar.isHidden = false
         self.performSegue(withIdentifier: "unwindeToStudyListResourcesIdentifier", sender: self)
+        
     }
 }
 
@@ -105,7 +109,7 @@ extension ResourcesViewController : UITableViewDelegate{
         
         let resource = (tableViewRowDetails?[indexPath.row])!
         resourceLink = resource.file?.getFileLink()
-        
+        fileType = resource.file?.getMIMEType()
         self.performSegue(withIdentifier:"ResourceDetailViewControllerIdentifier" , sender: self)
     }
     
@@ -138,4 +142,25 @@ extension ResourcesViewController:NMWebServiceDelegate {
     }
 }
 
+
+public extension String {
+    /// Decodes string with html encoding.
+    var htmlDecoded: String {
+        guard let encodedData = self.data(using: .utf8) else { return self }
+        
+        let attributedOptions: [String : Any] = [
+            NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType,
+            NSCharacterEncodingDocumentAttribute: String.Encoding.utf8.rawValue]
+        
+        do {
+            let attributedString = try NSAttributedString(data: encodedData,
+                                                          options: attributedOptions,
+                                                          documentAttributes: nil)
+            return attributedString.string
+        } catch {
+            print("Error: \(error)")
+            return ""
+        }
+    }
+}
 

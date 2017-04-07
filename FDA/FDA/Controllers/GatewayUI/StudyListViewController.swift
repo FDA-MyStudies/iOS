@@ -68,6 +68,7 @@ class StudyListViewController: UIViewController {
         
         
         
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -76,6 +77,7 @@ class StudyListViewController: UIViewController {
         self.labelHelperText.isHidden = true
         self.setNavigationBarItem()
         self.navigationController?.setNavigationBarHidden(false, animated: true)
+        self.navigationController?.navigationBar.isHidden = false
         
         DBHandler.loadStudyListFromDatabase { (studies) in
             if studies.count > 0 {
@@ -163,7 +165,15 @@ class StudyListViewController: UIViewController {
     @IBAction func unwindToStudyList(_ segue:UIStoryboardSegue){
         //unwindStudyListSegue
     }
-
+    func pushToStudyDashboard(){
+        
+         let studyStoryBoard = UIStoryboard.init(name: "Study", bundle: Bundle.main)
+        
+        let studyDashboard = studyStoryBoard.instantiateViewController(withIdentifier: kStudyDashboardTabbarControllerIdentifier) as! StudyDashboardTabbarViewController
+      
+        self.navigationController?.navigationBar.isHidden = true
+        self.navigationController?.pushViewController(studyDashboard, animated: true)
+    }
     
     // MARK: - Requests
     func sendRequestToGetStudyList(){
@@ -229,7 +239,27 @@ extension StudyListViewController :  UITableViewDelegate {
         
         let study = Gateway.instance.studies?[indexPath.row]
         Study.updateCurrentStudy(study: study!)
-        self.sendRequestToGetStudyInfo(study: study!)
+        
+        
+        if Study.currentStudy?.status == .active{
+            
+            let userStudyStatus = (User.currentUser.getStudyStatus(studyId:(Study.currentStudy?.studyId)! )) as UserStudyStatus.StudyStatus
+            
+            switch userStudyStatus {
+            case .yetToJoin, .notEligible:
+                 self.sendRequestToGetStudyInfo(study: study!)
+                
+             case .inProgress, .completed:
+                self.pushToStudyDashboard()
+                
+            default:break
+                
+            }
+            
+            
+        }
+        
+       
         
         
     }

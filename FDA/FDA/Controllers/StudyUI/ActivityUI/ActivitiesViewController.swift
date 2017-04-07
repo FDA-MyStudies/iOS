@@ -49,6 +49,9 @@ class ActivitiesViewController : UIViewController{
     
     @IBAction func homeButtonAction(_ sender: AnyObject){
         //_ = self.navigationController?.popToRootViewController(animated: true)
+        
+       
+        
         self.performSegue(withIdentifier: "unwindeToStudyListIdentier", sender: self)
         
         

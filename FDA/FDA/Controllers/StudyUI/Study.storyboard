@@ -539,7 +539,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="About the Study" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AW7-ks-icb">
-                                                    <rect key="frame" x="19" y="22" width="124" height="20"/>
+                                                    <rect key="frame" x="19" y="22" width="317" height="20"/>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -563,6 +563,7 @@
                                                 <constraint firstItem="QQd-sp-B0v" firstAttribute="centerY" secondItem="TiY-86-u9p" secondAttribute="centerY" id="lc8-qe-ef3"/>
                                                 <constraint firstItem="AW7-ks-icb" firstAttribute="leading" secondItem="TiY-86-u9p" secondAttribute="leadingMargin" constant="11" id="nah-Cc-0it"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="QQd-sp-B0v" secondAttribute="trailing" constant="15" id="sIN-V9-GmP"/>
+                                                <constraint firstAttribute="trailing" secondItem="AW7-ks-icb" secondAttribute="trailing" constant="39" id="uRg-aH-ATD"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
@@ -601,7 +602,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8R7-z3-J5e" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="q3w-yD-qXf" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="1257" y="6285"/>
+            <point key="canvasLocation" x="1256.8" y="6284.707646176912"/>
         </scene>
         <!--Study Dashboard View Controller-->
         <scene sceneID="T5g-Dy-bhf">
@@ -697,7 +698,7 @@
                                 <color key="backgroundColor" red="0.84705882349999995" green="0.89019607840000003" blue="0.90196078430000004" alpha="1" colorSpace="calibratedRGB"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="welcomeCell" rowHeight="55" id="lRY-T3-IvM" customClass="StudyDashboardWelcomeTableViewCell" customModule="FDA" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="56" width="375" height="55"/>
+                                        <rect key="frame" x="0.0" y="55" width="375" height="55"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="lRY-T3-IvM" id="Yu2-RD-Ywx">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="55"/>
@@ -737,7 +738,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="studyActivityCell" rowHeight="160" id="MV1-Uf-i0F" customClass="StudyDashboardStudyActivitiesTableViewCell" customModule="FDA" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="111" width="375" height="160"/>
+                                        <rect key="frame" x="0.0" y="110" width="375" height="160"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="MV1-Uf-i0F" id="otA-YI-kOt">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="160"/>
@@ -874,7 +875,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="percentageCell" rowHeight="70" id="xHx-3T-4Ix" customClass="StudyDashboardStudyPercentageTableViewCell" customModule="FDA" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="271" width="375" height="70"/>
+                                        <rect key="frame" x="0.0" y="270" width="375" height="70"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="xHx-3T-4Ix" id="prx-D2-EIC">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="70"/>
@@ -946,7 +947,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ActivityCell" rowHeight="130" id="g3a-Cw-qGa" customClass="StudyDashboardActivityTableViewCell" customModule="FDA" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="341" width="375" height="130"/>
+                                        <rect key="frame" x="0.0" y="340" width="375" height="130"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="g3a-Cw-qGa" id="Ia5-mO-m5B">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="130"/>
@@ -1067,7 +1068,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="StatisticsCell" rowHeight="210" id="CvQ-Hd-eDc" customClass="StudyDashboardStatisticsTableViewCell" customModule="FDA" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="471" width="375" height="210"/>
+                                        <rect key="frame" x="0.0" y="470" width="375" height="210"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="CvQ-Hd-eDc" id="nM8-jf-Yku">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="210"/>
@@ -1177,7 +1178,7 @@
                                                     </collectionViewFlowLayout>
                                                     <cells>
                                                         <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="StatisticsCell" id="MZ5-Pr-Min" customClass="StudyDashboardStatisticsCollectionViewCell" customModule="FDA" customModuleProvider="target">
-                                                            <rect key="frame" x="0.0" y="14" width="125" height="110"/>
+                                                            <rect key="frame" x="0.0" y="13.5" width="125" height="110"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                                                 <rect key="frame" x="0.0" y="0.0" width="125" height="110"/>
@@ -1289,7 +1290,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="trendCell" rowHeight="50" id="C7V-K2-Fb9" customClass="StudyDashboardTrendsTableViewCell" customModule="FDA" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="681" width="375" height="50"/>
+                                        <rect key="frame" x="0.0" y="680" width="375" height="50"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="C7V-K2-Fb9" id="lHu-ZI-fyS">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>

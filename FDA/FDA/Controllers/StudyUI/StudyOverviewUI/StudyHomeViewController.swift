@@ -401,7 +401,10 @@ extension StudyHomeViewController:ORKTaskViewControllerDelegate{
         if  taskViewController.task?.identifier == kEligibilityConsentTask && reason == ORKTaskViewControllerFinishReason.completed{
             ConsentBuilder.currentConsent?.consentResult?.initWithORKTaskResult(taskResult:taskViewController.result )
             
-            User.currentUser.updateStudyStatus(studyId:(Study.currentStudy?.studyId)!  , status: .inProgress)
+            let currentUserStudyStatus =  User.currentUser.updateStudyStatus(studyId:(Study.currentStudy?.studyId)!  , status: .inProgress)
+            
+            
+            UserServices().updateUserParticipatedStatus(studyStauts: currentUserStudyStatus, delegate: self)
             
         }
         else{

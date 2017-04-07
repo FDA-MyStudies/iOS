@@ -22,8 +22,8 @@ class StudyDashboardViewController : UIViewController{
     var tableViewRowDetails = NSMutableArray()
     var todayActivitiesArray = NSMutableArray()
     var statisticsArray = NSMutableArray()
-
-//MARK:ViewController Delegates
+    
+    //MARK:ViewController Delegates
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -36,6 +36,7 @@ class StudyDashboardViewController : UIViewController{
         tableViewRowDetails = tableviewdata["studyActivity"] as! NSMutableArray
         todayActivitiesArray = tableviewdata["todaysActivity"] as! NSMutableArray
         statisticsArray = tableviewdata["statistics"] as! NSMutableArray
+        
         
     }
     
@@ -51,11 +52,12 @@ class StudyDashboardViewController : UIViewController{
         
     }
     
-//MARK:Button Actions
+    //MARK:Button Actions
     @IBAction func homeButtonAction(_ sender: AnyObject){
-    
-     self.performSegue(withIdentifier: "unwindToStudyListDashboardIdentifier", sender: self)
-
+        
+       
+        self.performSegue(withIdentifier: "unwindToStudyListDashboardIdentifier", sender: self)
+        
     }
     
     @IBAction func shareButtonAction(_ sender: AnyObject){
@@ -171,7 +173,7 @@ extension StudyDashboardViewController : UITableViewDataSource {
 extension StudyDashboardViewController : UITableViewDelegate{
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-
+        
         
     }
 }

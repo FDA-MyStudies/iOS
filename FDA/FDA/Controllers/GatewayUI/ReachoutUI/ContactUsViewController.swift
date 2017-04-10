@@ -81,7 +81,7 @@ class ContactUsViewController : UIViewController{
         else if ContactUsFeilds.message.isEmpty {
             UIUtilities.showAlertWithMessage(alertMessage: NSLocalizedString(kMessageMessageBlankCheck, comment: ""))
         }
-        else if Utilities.isValidEmail(testStr: ContactUsFeilds.email){
+        else if !(Utilities.isValidEmail(testStr: ContactUsFeilds.email)){
             UIUtilities.showAlertWithMessage(alertMessage: NSLocalizedString(kMessageValidEmail, comment: ""))
         }
         else {

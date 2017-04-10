@@ -92,5 +92,9 @@ class RegistrationServerConfiguration: NetworkConfiguration {
     override func getDefaultRequestParameters() -> [String : Any] {
         return Dictionary()
     }
+    override func shouldParseErrorMessage() -> Bool {
+        return false
+    }
+
 
 }

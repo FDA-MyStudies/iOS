@@ -114,10 +114,20 @@ class NetworkWebServiceHandler: NSObject, URLSessionDelegate {
     }
     
     fileprivate func getHttpRequest(_ requestName : NSString , parameters : NSDictionary?)-> NSString {
-        let url : NSString = ""
-        // get from uptiiq
         
-        return url
+        // get from uptiiq
+        var url : String = ""
+        if !(parameters == nil || parameters?.count == 0){
+            let allKeys = parameters?.allKeys
+            for key in allKeys! {
+                url = (url as String) + String(format: "%@=%@&",String(describing: key), parameters?[key as! String] as! String)
+            }
+            let length = url.characters.count-1
+            let index = url.index(url.startIndex, offsetBy: length)
+            url = url.substring(to: index) //url.substring(to: length)
+        }
+        return url as NSString
+        
     }
     
     func composeRequestFor(_ requestName: NSString, requestType : RequestType , method : HTTPMethod , params : NSDictionary?, headers : NSDictionary?){
@@ -157,7 +167,7 @@ class NetworkWebServiceHandler: NSObject, URLSessionDelegate {
         }
         switch method.requestType {
         case .requestTypeHTTP:
-            self.generateHTTPRequest(method.methodName as NSString, method: method.methodType, params: requestParams, headers: headers!)
+            self.generateHTTPRequest(method.methodName as NSString, method: method.methodType, params: requestParams, headers: headers)
             break
         case .requestTypeJSON:
             self.generateJSONRequest(method.methodName as NSString, method: method.methodType, params: requestParams, headers: headers)
@@ -188,7 +198,7 @@ class NetworkWebServiceHandler: NSObject, URLSessionDelegate {
       
          var request = URLRequest.init(url: requestUrl, cachePolicy: URLRequest.CachePolicy.useProtocolCachePolicy, timeoutInterval: self.connectionTimeoutInterval)
         request.httpMethod = self.getRequestMethod(method) as String
-        if httpHeaders != nil {
+        if httpHeaders != nil && (httpHeaders?.count)! > 0{
             request.allHTTPHeaderFields = httpHeaders as? [String : String]
         }
         self.fireRequest(request, requestName: requestName)
@@ -275,15 +285,7 @@ class NetworkWebServiceHandler: NSObject, URLSessionDelegate {
                     delegate?.failedRequest(networkManager!, requestName: requestName!,error: error!)
                 }
 
-//                
-//                if error?.localizedDescription == "Could not connect to the server."{
-//                    let error1 = NSError(domain: "Could not connect to the server.", code: 0,userInfo: nil)
-//                    delegate?.failedRequest(networkManager!, requestName: requestName!,error: error1)
-//                }else{
-//                    if ((delegate?.failedRequest) != nil) {
-//                        delegate?.failedRequest(networkManager!, requestName: requestName!,error: error!)
-//                    }
-//                }
+
             }
         }else{
             let status = NetworkConstants.checkResponseHeaders(response!)
@@ -332,7 +334,30 @@ class NetworkWebServiceHandler: NSObject, URLSessionDelegate {
                     
                 }
             }else{
-                error1 = NSError(domain: NSURLErrorDomain, code:statusCode,userInfo:[NSLocalizedDescriptionKey: status.1])
+                
+                
+                if self.configuration.shouldParseErrorMessage() {
+                    
+                    
+                    
+                    var responseDict: Dictionary<String, Any>? = nil
+                    
+                    do{
+                        
+                      responseDict = try JSONSerialization.jsonObject(with: data!, options:.allowFragments) as? Dictionary<String, Any>
+                       
+                      
+                    }catch{
+                        print("Serilization error")
+                    }
+                    error1 = self.configuration.parseError(errorResponse: responseDict!)
+                }
+                else {
+                    
+                    error1 = NSError(domain: NSURLErrorDomain, code:statusCode,userInfo:[NSLocalizedDescriptionKey: status.1])
+                }
+                
+                
               
                 if ((delegate?.failedRequest) != nil) {
                     delegate?.failedRequest(networkManager!, requestName: requestName!,error:error1!)

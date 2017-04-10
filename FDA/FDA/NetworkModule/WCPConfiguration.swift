@@ -75,6 +75,7 @@ class WCPConfiguration: NetworkConfiguration {
     static let configuration = WCPConfiguration()
     
     
+
     //MARK:  Delegates
     override func getProductionURL() -> String {
         return WCPServerURLConstants.ProductionURL
@@ -93,6 +94,9 @@ class WCPConfiguration: NetworkConfiguration {
     }
     override func getDefaultRequestParameters() -> [String : Any] {
         return Dictionary()
+    }
+    override func shouldParseErrorMessage() -> Bool {
+        return true
     }
 
 }

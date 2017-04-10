@@ -32,7 +32,7 @@ let kStepQuestionTypeValue = "QuestionType"
 
 let kStepQuestionPhi = "phi"
 let kStepQuestionFormat = "format"
-
+let kStepQuestionHealthDataKey = "healthDataKey"
 
 // ScaleQuestion type Api Constants
 let kStepQuestionScaleMaxValue = "maxValue"
@@ -241,7 +241,7 @@ enum PHIType:String{
 
 class ActivityQuestionStep: ActivityStep {
     
-    var phi:PHIType?
+   
     var formatDict:Dictionary<String, Any>?
     
     var healthDataKey:String?
@@ -249,7 +249,7 @@ class ActivityQuestionStep: ActivityStep {
     override init() {
         
         super.init()
-        self.phi = .limited
+       self.healthDataKey = ""
         self.formatDict? = Dictionary()
     }
     
@@ -260,13 +260,16 @@ class ActivityQuestionStep: ActivityStep {
             
             super.initWithDict(stepDict: stepDict)
             
-            if Utilities.isValidValue(someObject: stepDict[kStepQuestionPhi] as AnyObject ){
-                self.phi = stepDict[kStepQuestionPhi] as? PHIType
-            }
+          
             
             if Utilities.isValidObject(someObject: stepDict[kStepQuestionFormat] as AnyObject ){
                 self.formatDict = (stepDict[kStepQuestionFormat] as? Dictionary)!
             }
+            
+            if Utilities.isValidValue(someObject: stepDict[kStepQuestionHealthDataKey] as AnyObject ){
+                self.healthDataKey = stepDict[kStepQuestionHealthDataKey] as! String?
+            }
+            
         }
         else{
             Logger.sharedInstance.debug("Question Step Dictionary is null:\(stepDict)")
@@ -644,9 +647,9 @@ class ActivityQuestionStep: ActivityStep {
          returns array of ORKTextChoice
          */
         
-        let textChoiceArray:[ORKTextChoice]?
+        var textChoiceArray:[ORKTextChoice]? = []
         
-        textChoiceArray = [ORKTextChoice]()
+        
         
         if  Utilities.isValidObject(someObject:dataArray )  {
             

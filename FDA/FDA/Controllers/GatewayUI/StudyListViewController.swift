@@ -175,6 +175,21 @@ class StudyListViewController: UIViewController {
         self.navigationController?.pushViewController(studyDashboard, animated: true)
     }
     
+     //MARK:Database Methods
+    func checkDatabaseForStudyInfo(study:Study){
+        
+        DBHandler.loadStudyOverview(studyId: (study.studyId)!) { (overview) in
+            if overview != nil {
+                study.overview = overview
+                self.navigateToStudyHome()
+            }
+            else {
+                self.sendRequestToGetStudyInfo(study: study)
+            }
+        }
+    }
+    
+    
     // MARK: - Requests
     func sendRequestToGetStudyList(){
         WCPServices().getStudyList(self)
@@ -241,6 +256,9 @@ extension StudyListViewController :  UITableViewDelegate {
         Study.updateCurrentStudy(study: study!)
         
         
+        
+      //  DBHandler.getOverSectionDetail(studyId: (study?.studyId)!)
+        
         if Study.currentStudy?.status == .active{
             
             let userStudyStatus =  (Study.currentStudy?.userParticipateState.status)!
@@ -249,13 +267,17 @@ extension StudyListViewController :  UITableViewDelegate {
                 self.pushToStudyDashboard()
             }
             else {
-                self.sendRequestToGetStudyInfo(study: study!)
+                
+                self.checkDatabaseForStudyInfo(study: study!)
+                //self.sendRequestToGetStudyInfo(study: study!)
             }
             
     
         }
         else {
-            self.sendRequestToGetStudyInfo(study: study!)
+            
+            self.checkDatabaseForStudyInfo(study: study!)
+            //self.sendRequestToGetStudyInfo(study: study!)
         }
         
        

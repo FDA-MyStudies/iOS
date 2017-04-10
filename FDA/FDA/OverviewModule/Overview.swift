@@ -28,6 +28,10 @@ class OverviewSection {
     var link:String?        //used for media link
     var websiteLink:String?        //used for Website link
     
+    init(){
+        
+    }
+    
     init(detail:Dictionary<String, Any>){
         
         

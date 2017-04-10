@@ -265,6 +265,9 @@ class WCPServices: NSObject {
         //update overview object to current study
         Study.currentStudy?.overview = overview
         
+        //save in database
+        DBHandler.saveStudyOverview(overview: overview, studyId: (Study.currentStudy?.studyId)!)
+        
     }
     
     func handleStudyActivityList(response:Dictionary<String, Any>){

@@ -133,7 +133,7 @@ class ActivityResult {
     func getResultDictionary() -> Dictionary<String,Any>? {
         
         
-        var activityDict:Dictionary<String,Any>?
+        var activityDict:Dictionary<String,Any>? = Dictionary<String,Any>()
         
         if Utilities.isValidValue(someObject: self.type as AnyObject?){
             activityDict?[kActivityType] = self.type

@@ -23,9 +23,13 @@ enum WCPMethods:String {
     case termsPolicy
     case notifications
     case consentDocument
+    case feedback
+    case contactUs
     
     var method:Method{
         switch self {
+        case .feedback,.contactUs:
+             return Method(methodName:self.rawValue, methodType: .httpMethodPOST, requestType: .requestTypeJSON)
         default:
             return Method(methodName:self.rawValue, methodType: .httpMethodGet, requestType: .requestTypeJSON)
     

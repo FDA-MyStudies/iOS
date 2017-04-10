@@ -68,6 +68,25 @@ class ContactUsViewController : UIViewController{
     
     @IBAction func buttonSubmitAciton(_ sender:UIButton){
         print("\(ContactUsFeilds.firstName)")
+        
+        if ContactUsFeilds.firstName.isEmpty {
+            UIUtilities.showAlertWithMessage(alertMessage: NSLocalizedString(kMessageFirstNameBlank, comment: ""))
+        }
+        else if ContactUsFeilds.email.isEmpty {
+            UIUtilities.showAlertWithMessage(alertMessage: NSLocalizedString(kMessageEmailBlank,comment:""))
+        }
+        else if ContactUsFeilds.subject.isEmpty {
+            UIUtilities.showAlertWithMessage(alertMessage: NSLocalizedString(kMessageSubjectBlankCheck, comment: ""))
+        }
+        else if ContactUsFeilds.message.isEmpty {
+            UIUtilities.showAlertWithMessage(alertMessage: NSLocalizedString(kMessageMessageBlankCheck, comment: ""))
+        }
+        else if Utilities.isValidEmail(testStr: ContactUsFeilds.email){
+            UIUtilities.showAlertWithMessage(alertMessage: NSLocalizedString(kMessageValidEmail, comment: ""))
+        }
+        else {
+            WCPServices().sendUserContactUsRequest(delegate: self)
+        }
     }
 }
 
@@ -103,6 +122,7 @@ extension ContactUsViewController: UITableViewDataSource{
                 keyBoardType = .default
             case .Email :
                 cell.textFieldValue?.text = User.currentUser.emailId!
+                ContactUsFeilds.email = User.currentUser.emailId!
                 keyBoardType = .emailAddress
             }
             
@@ -238,4 +258,23 @@ class TextviewCell:UITableViewCell{
     
 }
 
+extension ContactUsViewController:NMWebServiceDelegate {
+    func startedRequest(_ manager: NetworkManager, requestName: NSString) {
+        
+        Logger.sharedInstance.info("requestname : \(requestName)")
+        self.addProgressIndicator()
+    }
+    func finishedRequest(_ manager: NetworkManager, requestName: NSString, response: AnyObject?) {
+        Logger.sharedInstance.info("requestname : \(requestName)")
+        self.removeProgressIndicator()
+        
+        _ = self.navigationController?.popViewController(animated: true)
+    }
+    func failedRequest(_ manager: NetworkManager, requestName: NSString, error: NSError) {
+        
+        self.removeProgressIndicator()
+        Logger.sharedInstance.info("requestname : \(requestName)")
+        UIUtilities.showAlertWithTitleAndMessage(title:NSLocalizedString("Error", comment: "") as NSString, message: error.localizedDescription as NSString)
+    }
+}
 

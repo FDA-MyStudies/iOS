@@ -10,6 +10,13 @@ import Foundation
 import UIKit
 import IQKeyboardManagerSwift
 
+
+struct FeedbackDetail {
+    
+    static var feedback:String = ""
+    static var subject:String = ""
+}
+
 class FeedBackViewController : UIViewController{
     
     @IBOutlet var buttonSubmit : UIButton?
@@ -51,6 +58,13 @@ class FeedBackViewController : UIViewController{
     
     @IBAction func buttonSubmitAciton(_ sender:UIButton){
         //print("\(ContactUsFeilds.firstName)")
+        
+        if FeedbackDetail.feedback.isEmpty {
+            UIUtilities.showAlertWithMessage(alertMessage: NSLocalizedString("Please provide your feedback", comment: ""))
+        }
+        else {
+            WCPServices().sendUserFeedback(delegate: self)
+        }
     }
 
 }
@@ -108,7 +122,8 @@ extension FeedBackViewController: UITextViewDelegate {
             textView.tag = 100
         }
         else {
-            self.feedbackText = textView.text!
+            //self.feedbackText = textView.text!
+            FeedbackDetail.feedback = textView.text!
         }
     }
     func textViewDidBeginEditing(_ textView: UITextView) {
@@ -122,6 +137,23 @@ extension FeedBackViewController: UITextViewDelegate {
     }
 }
 
-
+extension FeedBackViewController:NMWebServiceDelegate {
+    func startedRequest(_ manager: NetworkManager, requestName: NSString) {
+        
+        Logger.sharedInstance.info("requestname : \(requestName)")
+        self.addProgressIndicator()
+    }
+    func finishedRequest(_ manager: NetworkManager, requestName: NSString, response: AnyObject?) {
+        Logger.sharedInstance.info("requestname : \(requestName)")
+        self.removeProgressIndicator()
+        _ = self.navigationController?.popViewController(animated: true)
+    }
+    func failedRequest(_ manager: NetworkManager, requestName: NSString, error: NSError) {
+        
+        self.removeProgressIndicator()
+        Logger.sharedInstance.info("requestname : \(requestName)")
+        UIUtilities.showAlertWithTitleAndMessage(title:NSLocalizedString("Error", comment: "") as NSString, message: error.localizedDescription as NSString)
+    }
+}
 
 

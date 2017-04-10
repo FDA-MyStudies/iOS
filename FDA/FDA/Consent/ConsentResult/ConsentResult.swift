@@ -17,7 +17,7 @@ class ConsentResult {
     
     var consentId:String?
     var consentDocument:ORKConsentDocument?
-    
+    var consentPdfData:Data?
     var result:Array<ActivityStepResult>?
     //MARK: Initializers
     init() {
@@ -28,7 +28,7 @@ class ConsentResult {
         self.result = Array()
         
         self.consentDocument = ORKConsentDocument()
-        
+        self.consentPdfData = Data()
     }
     
     func initWithORKTaskResult(taskResult:ORKTaskResult) {
@@ -58,8 +58,12 @@ class ConsentResult {
                         
                         let dir = FileManager.getStorageDirectory(type: .study)
                         
-                        let fullPath = dir + "/" + "Consent" +  "_" + "\((Study.currentStudy?.studyId)!)" + ".pdf"
+                        let fullPath =  dir + "/" + "Consent" +  "_" + "\((Study.currentStudy?.studyId)!)" + ".pdf"
                     
+                        self.consentPdfData = Data()
+                        self.consentPdfData = data?.base64EncodedData()
+                        
+                        
                         do {
                             
                             if FileManager.default.fileExists(atPath: fullPath){

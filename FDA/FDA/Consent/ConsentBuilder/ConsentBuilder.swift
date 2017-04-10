@@ -34,6 +34,12 @@ let kConsentReviewStepSignatureContent = "signatureContent"
 let kConsentReviewStepReasonForConsent = "reasonForConsent"
 
 
+enum ConsentStatus:String{
+    case pending = "pending"
+    case completed = "completed"
+}
+
+
 //MARK:ConsentBuilder Class
 
 class ConsentBuilder{
@@ -49,6 +55,7 @@ class ConsentBuilder{
     
     var consentDocument:ORKConsentDocument?
     var version:String?
+    var consentStatus:ConsentStatus?
     
     static var currentConsent: ConsentBuilder? = nil
     
@@ -74,6 +81,8 @@ class ConsentBuilder{
         /* initializer method which initializes all params
          @metaDataDict:contains as Dictionaries for all the properties of Consent Step
          */
+        
+        self.consentStatus = .pending
         
         if Utilities.isValidObject(someObject: metaDataDict as AnyObject?){
             

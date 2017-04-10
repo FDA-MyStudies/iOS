@@ -231,7 +231,7 @@ class StudyHomeViewController : UIViewController{
             eligibilitySteps?.append(stepDict)
         }
         
-        let orkOrderedTask:ORKTask? = ORKOrderedTask(identifier:kEligibilityConsentTask, steps: consentTask?.steps)
+        let orkOrderedTask:ORKTask? = ORKOrderedTask(identifier:kEligibilityConsentTask, steps: eligibilitySteps)
         
         
         taskViewController = ORKTaskViewController(task:orkOrderedTask, taskRun: nil)
@@ -371,7 +371,10 @@ extension StudyHomeViewController:NMWebServiceDelegate {
             self.createEligibilityConsentTask()
         }
         
-        
+        if requestName as String == RegistrationMethods.updatePreferences.method.methodName{
+            
+             UserServices().updateUserEligibilityConsentStatus(eligibilityStatus: true, consentStatus:(ConsentBuilder.currentConsent?.consentStatus)!  , delegate: self)
+        }
         
         
         //self.removeProgressIndicator()
@@ -443,6 +446,7 @@ extension StudyHomeViewController:ORKTaskViewControllerDelegate{
             
             let currentUserStudyStatus =  User.currentUser.updateStudyStatus(studyId:(Study.currentStudy?.studyId)!  , status: .inProgress)
             
+            ConsentBuilder.currentConsent?.consentStatus = .completed
             
             UserServices().updateUserParticipatedStatus(studyStauts: currentUserStudyStatus, delegate: self)
             

@@ -17,6 +17,7 @@ enum StudyStatus:String{
     case active
     case upcoming
     case closed
+    case paused
 }
 
 struct ConsentDocument {
@@ -71,6 +72,7 @@ class Study {
     var overview:Overview!
     var activities:Array<Activity>!
     var resources:Array<Resource>? = []
+    var userParticipateState:UserStudyStatus! = nil
     
     var consentDocument:ConsentDocument?
     

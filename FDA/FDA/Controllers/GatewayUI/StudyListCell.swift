@@ -125,7 +125,8 @@ class StudyListCell: UITableViewCell {
             studyStatusIndicator?.backgroundColor = Utilities.getUIColorFromHex(0x007cba)  //app color
         case .closed:
             studyStatusIndicator?.backgroundColor = Utilities.getUIColorFromHex(0xFF0000)  //red color
-            
+        case .paused:
+            studyStatusIndicator?.backgroundColor = Utilities.getUIColorFromHex(0xFF0000)  //red color
         }
     }
     
@@ -135,6 +136,9 @@ class StudyListCell: UITableViewCell {
         
         
         if let userStudyStatus = currentUser.participatedStudies.filter({$0.studyId == study.studyId}).first {
+            
+            //assign to study
+            study.userParticipateState = userStudyStatus
             
             //user study status
             labelStudyUserStatus?.text = userStudyStatus.status.description
@@ -157,6 +161,7 @@ class StudyListCell: UITableViewCell {
             buttonBookmark?.isSelected = userStudyStatus.bookmarked
         }
         else {
+            study.userParticipateState = UserStudyStatus()
             labelStudyUserStatus?.text = UserStudyStatus.StudyStatus.yetToJoin.description
             studyUserStatusIcon?.image = #imageLiteral(resourceName: "yet_to_join_icn")
             buttonBookmark?.isSelected = false

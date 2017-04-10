@@ -159,11 +159,20 @@ class StudyHomeViewController : UIViewController{
         
         else{
             
-            //let studyStatus = User.currentUser.updateStudyStatus(studyId:(Study.currentStudy?.studyId)!, status: .inProgress)
-           // UserServices().updateUserParticipatedStatus(studyStauts: studyStatus, delegate: self)
+            let currentStudy = Study.currentStudy!
+            let participatedStatus = (currentStudy.userParticipateState.status)
+            if currentStudy.status == .active {
+                if participatedStatus == .yetToJoin || participatedStatus == .notEligible {
+                    
+                    WCPServices().getEligibilityConsentMetadata(studyId:(Study.currentStudy?.studyId)!, delegate: self as NMWebServiceDelegate)
+                }
+            }
             
-            WCPServices().getEligibilityConsentMetadata(studyId:(Study.currentStudy?.studyId)!, delegate: self as NMWebServiceDelegate)
-            // self.createEligibilityConsentTask()
+//            //let studyStatus = User.currentUser.updateStudyStatus(studyId:(Study.currentStudy?.studyId)!, status: .inProgress)
+//           // UserServices().updateUserParticipatedStatus(studyStauts: studyStatus, delegate: self)
+//            
+//            WCPServices().getEligibilityConsentMetadata(studyId:(Study.currentStudy?.studyId)!, delegate: self as NMWebServiceDelegate)
+//            // self.createEligibilityConsentTask()
             
             
         }

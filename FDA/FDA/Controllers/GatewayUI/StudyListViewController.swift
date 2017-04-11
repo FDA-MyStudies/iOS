@@ -256,29 +256,35 @@ extension StudyListViewController :  UITableViewDelegate {
         Study.updateCurrentStudy(study: study!)
         
         
-        
-      //  DBHandler.getOverSectionDetail(studyId: (study?.studyId)!)
-        
-        if Study.currentStudy?.status == .active{
+        if User.currentUser.userType == UserType.FDAUser {
             
-            let userStudyStatus =  (Study.currentStudy?.userParticipateState.status)!
-            
-            if userStudyStatus == .completed || userStudyStatus == .inProgress {
-                self.pushToStudyDashboard()
+            if Study.currentStudy?.status == .active{
+                
+                let userStudyStatus =  (Study.currentStudy?.userParticipateState.status)!
+                
+                if userStudyStatus == .completed || userStudyStatus == .inProgress {
+                    self.pushToStudyDashboard()
+                }
+                else {
+                    
+                    self.checkDatabaseForStudyInfo(study: study!)
+                    //self.sendRequestToGetStudyInfo(study: study!)
+                }
+                
+                
             }
             else {
                 
                 self.checkDatabaseForStudyInfo(study: study!)
                 //self.sendRequestToGetStudyInfo(study: study!)
             }
-            
-    
         }
         else {
-            
             self.checkDatabaseForStudyInfo(study: study!)
-            //self.sendRequestToGetStudyInfo(study: study!)
         }
+      
+        
+        
         
        
         

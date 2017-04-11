@@ -11,6 +11,7 @@ import UIKit
 //Api constants
 let kNotificationSkip = "skip"
 
+let kActivity = "activity"
 
 //study
 let kStudyTitle = "title"
@@ -122,10 +123,10 @@ class WCPServices: NSObject {
         
 
         let method = WCPMethods.activity.method
-        let params = [kStudyId:studyId,
+        let headerParams = [kStudyId:studyId,
                       kActivityId:activityId,
                       kActivityVersion:activityVersion]
-        self.sendRequestWith(method:method, params: params, headers: nil)
+        self.sendRequestWith(method:method, params: nil, headers: headerParams)
     }
     
     func getStudyDashboardInfo(studyId:String, delegate:NMWebServiceDelegate){
@@ -308,10 +309,15 @@ class WCPServices: NSObject {
         let activities = response[kActivites] as! Array<Dictionary<String,Any>>
         
         if Utilities.isValidObject(someObject: activities as AnyObject? ) {
+            
+            Study.currentStudy?.activities = Array<Activity>()
             for activityDict in activities{
                 
                 let activity:Activity? = Activity.init()
                 activity?.initWithStudyActivityList(infoDict: activityDict)
+                
+                
+                
                 Study.currentStudy?.activities.append(activity!)
                 
             }
@@ -324,6 +330,15 @@ class WCPServices: NSObject {
     }
     
     func handleGetStudyActivityMetadata(response:Dictionary<String, Any>){
+        
+        Study.currentActivity?.setActivityMetaData(activityDict:response[kActivity] as! Dictionary<String, Any>)
+        
+         if Utilities.isValidObject(someObject: Study.currentActivity?.steps as AnyObject?){
+            
+            ActivityBuilder.currentActivityBuilder = ActivityBuilder()
+            ActivityBuilder.currentActivityBuilder.initWithActivity(activity:Study.currentActivity! )
+        }
+        
         
     }
     
@@ -375,8 +390,10 @@ extension WCPServices:NMWebServiceDelegate{
             self.handleConsentDocument(response: response as! Dictionary<String, Any>)
         case .studyInfo:
             self.handleStudyInfo(response: response as! Dictionary<String, Any>)
-        case .activityList:break
-        case .activity:break
+        case .activityList:
+            self.handleStudyActivityList(response: response as! Dictionary<String, Any>)
+        case .activity:
+            self.handleGetStudyActivityMetadata(response: response as! Dictionary<String, Any>)
         case .studyDashboard:break
         case .termsPolicy:
             self.handleTermsAndPolicy(response:response as! Dictionary<String, Any> )

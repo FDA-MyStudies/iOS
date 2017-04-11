@@ -34,6 +34,17 @@ class ActivityBuilder {
         
     }
     
+    func initWithActivity(activity:Activity)  {
+        if (activity.steps?.count)! > 0 {
+            self.activity = activity
+            self.actvityResult = ActivityResult()
+            self.actvityResult?.setActivity(activity: self.activity!)
+        }
+        else{
+             Logger.sharedInstance.debug("Activity:activity.steps is null:\(activity)")
+        }
+    }
+    
     func setActivityResultWithORKResult(taskResult:ORKTaskResult) {
         actvityResult?.initWithORKTaskResult(taskResult:taskResult)
     }

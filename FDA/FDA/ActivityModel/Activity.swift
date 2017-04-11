@@ -15,7 +15,10 @@ let kActivityInfoMetaData = "metadata"
 
 let kActivityStudyId = "studyId"
 let kActivityActivityId = "qId"
-let kActivityName = "title"
+let kActivityName = "name"
+
+
+
 let kActivityConfiguration = "configuration"
 
 let kActivityFrequency = "frequency"
@@ -139,11 +142,11 @@ class Activity{
             // }
             
             
-            if Utilities.isValidValue(someObject: infoDict[kActivityName] as AnyObject ){
-                self.name = infoDict[kActivityName] as! String?
+            if Utilities.isValidValue(someObject: infoDict[kActivityTitle] as AnyObject ){
+                self.name = infoDict[kActivityTitle] as! String?
             }
             if Utilities.isValidValue(someObject: infoDict[kActivityType] as AnyObject ){
-                self.type = infoDict[kActivityType] as? ActivityType
+                self.type = ActivityType(rawValue: infoDict[kActivityType] as! String)
             }
             
             if Utilities.isValidValue(someObject: infoDict[kActivityStartTime] as AnyObject ){
@@ -189,9 +192,18 @@ class Activity{
             
             self.setInfo(infoDict: activityDict[kActivityInfoMetaData] as! Dictionary<String,Any>)
             
-            self.setConfiguration(configurationDict:activityDict[kActivityConfiguration] as! Dictionary<String,Any> )
-            self.setStepArray(stepArray:activityDict[kActivitySteps] as! Array )
             
+            //Next Phase Branching and Randomization
+            
+           // self.setConfiguration(configurationDict:activityDict[kActivityConfiguration] as! Dictionary<String,Any> )
+            
+            
+            if Utilities.isValidObject(someObject: activityDict[kActivitySteps] as AnyObject?){
+                 self.setStepArray(stepArray:activityDict[kActivitySteps] as! Array )
+            }
+            else{
+                Logger.sharedInstance.debug("infoDict is null:\(activityDict[kActivitySteps])")
+            }
         }
         else{
             Logger.sharedInstance.debug("infoDict is null:\(activityDict)")
@@ -220,13 +232,13 @@ class Activity{
                 self.version =  infoDict[kActivityVersion] as? String
             }
             if Utilities.isValidValue(someObject: infoDict[kActivityStartTime] as AnyObject ){
-                self.startDate =  Utilities.getDateFromString(dateString: (infoDict[kActivityStartTime] as! String?)!)
+                //self.startDate =  Utilities.getDateFromString(dateString: (infoDict[kActivityStartTime] as! String?)!)
             }
             if Utilities.isValidValue(someObject: infoDict[kActivityEndTime] as AnyObject ){
-                self.endDate =   Utilities.getDateFromString(dateString: (infoDict[kActivityEndTime] as! String?)!)
+                //self.endDate =   Utilities.getDateFromString(dateString: (infoDict[kActivityEndTime] as! String?)!)
             }
             if Utilities.isValidValue(someObject: infoDict[kActivityLastModified] as AnyObject ){
-                self.lastModified =   Utilities.getDateFromString(dateString: (infoDict[kActivityLastModified] as! String?)!)
+                //self.lastModified =   Utilities.getDateFromString(dateString: (infoDict[kActivityLastModified] as! String?)!)
             }
             
         }

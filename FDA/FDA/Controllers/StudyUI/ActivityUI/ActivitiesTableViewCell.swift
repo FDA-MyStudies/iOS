@@ -8,6 +8,10 @@
 
 import UIKit
 
+let kActivityTitle = "title"
+
+
+
 class ActivitiesTableViewCell: UITableViewCell {
 
     @IBOutlet var imageIcon : UIImageView?
@@ -27,16 +31,45 @@ class ActivitiesTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
 
-    func populateCellData(data: NSDictionary){
-        self.labelDays?.text = data["day"] as? String
-        self.labelHeading?.text = data["heading"] as? String
-        self.labelTime?.text = data["time"] as? String
+    func populateCellData(data: Dictionary<String, Any>){
+        
+        let frequency:Dictionary<String,Any> = data[kActivityFrequency] as! Dictionary<String, Any>
+        
+        if Utilities.isValidObject(someObject: frequency as AnyObject?){
+            if Utilities.isValidValue(someObject: frequency[kActivityType] as AnyObject?){
+               self.labelDays?.text = frequency[kActivityType] as! String?
+            }
+            else{
+                self.labelDays?.text = "Everyday"
+            }
+        }
+        else{
+            
+        }
+        
+        if Utilities.isValidValue(someObject: data[kActivityTitle] as AnyObject?){
+            self.labelHeading?.text = data[kActivityTitle] as! String?
+        }
+        else{
+              self.labelHeading?.text = ""
+        }
+        
+        if Utilities.isValidValue(someObject: data[kActivityStartTime] as AnyObject?){
+            self.labelTime?.text = data[kActivityStartTime] as! String?
+        }
+        else{
+            self.labelTime?.text = ""
+        }
+
+        //Status Pending
         self.labelStatus?.text = data["operation"] as? String
         
         if data["day"] as? String == "Weekely"{
             self.imageIcon?.image = UIImage.init(named: "taskIcon")
         }
         
+        
+        //Temp
         self.labelStatus?.isHidden = true
         if data["operation"] as? String != ""{
             self.labelStatus?.isHidden = false
@@ -55,6 +88,11 @@ class ActivitiesTableViewCell: UITableViewCell {
                 
             }
         }
+        
+        
+        //Need to change Temp
+        
+        
     }
     
 }

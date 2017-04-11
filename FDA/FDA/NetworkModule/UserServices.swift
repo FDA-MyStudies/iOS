@@ -39,6 +39,9 @@ let kUserOldPassword = "currentPassword"
 let kUserNewPassword = "newPassword"
 let kUserIsTempPassword = "resetPassword"
 
+
+let kConsentpdf = "pdf"
+
 //MARK: Settings Api Constants
 let kSettingsRemoteNotifications = "remoteNotifications"
 let kSettingsLocalNotifications = "localNotifications"
@@ -300,17 +303,39 @@ class UserServices: NSObject {
         self.sendRequestWith(method:method, params: params, headers: headerParams)
     }
     
-    func updateUserEligibilityConsentStatus(_ delegate:NMWebServiceDelegate){
+    func updateUserEligibilityConsentStatus(eligibilityStatus:Bool,consentStatus:ConsentStatus, delegate:NMWebServiceDelegate){
         
         
         self.delegate = delegate
         
         //INCOMPLETE
         let user = User.currentUser
-        let params = [kUserId : user.userId]
+        let headerParams = [kUserId : user.userId! as String,
+                            kUserAuthToken: user.authToken! as String]
+        
+        let consentVersion:String?
+        if (ConsentBuilder.currentConsent?.version?.characters.count)! > 0 {
+            consentVersion = ConsentBuilder.currentConsent?.version!
+        }
+        else{
+            consentVersion = "1"
+        }
+        
+        let consent = [ kConsentDocumentVersion : consentVersion! as String,
+                        kStatus :consentStatus.rawValue,
+                        kConsentpdf : "\(ConsentBuilder.currentConsent?.consentResult?.consentPdfData!)" as Any] as [String : Any]
+        
+        
+        let params = [kStudyId : (Study.currentStudy?.studyId!)! as String,
+                      kEligibility : eligibilityStatus,
+                      kConsent : consent,
+                      kConsentSharing : ""] as [String : Any]
         let method = RegistrationMethods.updateEligibilityConsentStatus.method
         
-        self.sendRequestWith(method:method, params: params, headers: nil)
+        
+        print(" doc == \(ConsentBuilder.currentConsent?.consentResult?.consentPdfData)")
+        
+        self.sendRequestWith(method:method, params: params, headers:headerParams)
     }
     
     func getConsentPDFForStudy(studyId:String , delegate:NMWebServiceDelegate) {

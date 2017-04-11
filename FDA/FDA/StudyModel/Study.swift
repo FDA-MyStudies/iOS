@@ -77,6 +77,7 @@ class Study {
     var consentDocument:ConsentDocument?
     
     static var currentStudy:Study? = nil
+    static var currentActivity:Activity? = nil
     
     init() {
         
@@ -118,7 +119,9 @@ class Study {
     }
     
     
-    
+    class func updateCurrentActivity(activity:Activity){
+        Study.currentActivity = activity
+    }
     
     class  func updateCurrentStudy(study:Study){
         Study.currentStudy = study

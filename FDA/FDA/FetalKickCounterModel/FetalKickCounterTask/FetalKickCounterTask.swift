@@ -15,7 +15,7 @@ let kFetalKickInstructionStepTitle = "Fetal Kick Counter"
 let kFetalKickInstructionStepText = "This task needs you to record the number of times you experience fetal kicks in a given duration of time.Also called as the Fetal Kick Counter task, this will help assess the activity of the baby within."
 
 
-let kFetalKickIntroductionStepIdentifier = "Introduction"
+let kFetalKickIntroductionStepIdentifier = "FetalKickIntroduction"
 let kFetalKickIntroductionStepTitle = ""
 let kFetalKickIntroductionStepText = "This task needs you to record the number of times you experience fetal kicks in a given duration of time.Also called as the Fetal Kick Counter task, this will help assess the activity of the baby within."
 
@@ -30,7 +30,7 @@ let kFetalKickCounterTaskIdentifier = "FetalKickCounterTask"
 
 class FetalKickCounterTask {
     
-    var duration:Int?       // task run time
+    var duration:Float?       // task run time
     var steps:[ORKStep]?    // steps involved in fetal kick
     
     /*
@@ -46,13 +46,14 @@ class FetalKickCounterTask {
      Initalizer method to create instance
      @param duration    is task run time in hours
      */
-    func initWithFormatDuration(duration:Int)  {
+    func initWithFormatDuration(duration:Float)  {
         
         self.steps =  [ORKStep]()
-        if Utilities.isValidValue(someObject: duration as AnyObject? ){
+        if duration > 0.0{
             self.duration = duration
         }
         else{
+            
             Logger.sharedInstance.warn("Duration is null:\(duration)")
         }
         
@@ -66,12 +67,24 @@ class FetalKickCounterTask {
     func getTask() -> ORKOrderedTask {
         
         
-        //create a Instruction step
-        let instructionStep = ORKInstructionStep(identifier: kFetalKickInstructionStepIdentifier)
-        instructionStep.title = NSLocalizedString(kFetalKickInstructionStepTitle, comment: "")
-        instructionStep.text = NSLocalizedString(kFetalKickInstructionStepText, comment: "")
+        //create a Intro step
         
-        steps?.append(instructionStep)
+        let introStep = FetalKickIntroStep(identifier: kFetalKickIntroductionStepIdentifier)
+        introStep.introTitle =  NSLocalizedString(kFetalKickInstructionStepTitle, comment: "")
+        introStep.subTitle =  NSLocalizedString(kFetalKickInstructionStepText, comment: "")
+        introStep.displayImage = #imageLiteral(resourceName: "task_img1")
+        
+       // let instructionStep = ORKInstructionStep(identifier: kFetalKickInstructionStepIdentifier)
+       // instructionStep.title = NSLocalizedString(kFetalKickInstructionStepTitle, comment: "")
+      // instructionStep.text = NSLocalizedString(kFetalKickInstructionStepText, comment: "")
+        
+       // instructionStep.auxiliaryImage = #imageLiteral(resourceName: "task_img1")
+        
+       // instructionStep.image = #imageLiteral(resourceName: "task_img1")
+        
+       // instructionStep.iconImage = #imageLiteral(resourceName: "task_img1")
+        
+        steps?.append(introStep)
         
         //create a Introduction step
         let introductionStep = ORKInstructionStep(identifier: kFetalKickInstructionStepIdentifier)
@@ -80,7 +93,7 @@ class FetalKickCounterTask {
         
         //create a Fetal Kick Counter Step
         let kickStep = FetalKickCounterStep(identifier: kFetalKickCounterStepIdentifier)
-        kickStep.counDownTimer = self.duration
+        kickStep.counDownTimer = Int(self.duration! * 60)
         
         
         kickStep.totalCounts = 0

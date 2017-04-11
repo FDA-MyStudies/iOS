@@ -34,7 +34,7 @@ class FetalKickCounterStepViewController:  ORKStepViewController {
     var taskResult:FetalKickCounterTaskResult = FetalKickCounterTaskResult(identifier: kFetalKickCounterStepDefaultIdentifier)
     
     
-//Mark: ORKStepViewController overriden methods
+    //Mark: ORKStepViewController overriden methods
     
     
     override init(step: ORKStep?) {
@@ -58,17 +58,17 @@ class FetalKickCounterStepViewController:  ORKStepViewController {
         
         if let step = step as? FetalKickCounterStep {
             
-            self.totalTime =  step.counDownTimer! * 60 * 60
+            self.totalTime =  step.counDownTimer! * 60
             
             let hours =  Int(self.totalTime!) / 3600
             let minutes = Int(self.totalTime!) / 60 % 60
             let seconds =  Int(self.totalTime!) % 60
             
-            self.timerValue =  step.counDownTimer! * 60 * 60
+            self.timerValue =  step.counDownTimer! * 60
             
             self.timerLabel?.text = (hours < 10 ? "0\(hours):" : "\(hours):") + (minutes < 10 ? "0\(minutes):" : "\(minutes):")   + (seconds < 10 ? "0\(seconds)" : "\(seconds)")
             self.taskResult.duration = self.totalTime!
-          
+            
             
         }
         
@@ -106,7 +106,7 @@ class FetalKickCounterStepViewController:  ORKStepViewController {
     
     /*
      updates the timer value
- */
+     */
     
     func setCounter() {
         if self.timerValue! < 0 {
@@ -114,8 +114,8 @@ class FetalKickCounterStepViewController:  ORKStepViewController {
             self.timer?.invalidate()
             self.timer = nil
             
-          // self.result = ORKStepResult.init(stepIdentifier: (step?.identifier)!, results: [taskResult])
-             self.perform(#selector(self.goForward))
+            // self.result = ORKStepResult.init(stepIdentifier: (step?.identifier)!, results: [taskResult])
+            self.perform(#selector(self.goForward))
         }
         else{
             timerValue = timerValue! -  1
@@ -128,16 +128,16 @@ class FetalKickCounterStepViewController:  ORKStepViewController {
             let seconds = Int(self.timerValue!) % 60
             self.timerLabel?.text = (hours < 10 ? "0\(hours):" : "\(hours):") + (minutes < 10 ? "0\(minutes):" : "\(minutes):")   + (seconds < 10 ? "0\(seconds)" : "\(seconds)")
             
-             self.taskResult.totalKickCount = self.kickCounter!
+            self.taskResult.totalKickCount = self.kickCounter!
             
         }
         
     }
     
-   /*
+    /*
      handleTap method detects the tap gesture event
      @param  sender is tapguesture instance
- */
+     */
     func handleTap(_ sender:UITapGestureRecognizer)   {
         counterTextField?.resignFirstResponder()
     }
@@ -155,7 +155,7 @@ class FetalKickCounterStepViewController:  ORKStepViewController {
     @IBAction func startButtonAction(_ sender:UIButton){
         
         if Int((self.counterTextField?.text)!)! == 0 {
-           
+            
             if self.timer == nil {
                 // first time
                 
@@ -171,13 +171,13 @@ class FetalKickCounterStepViewController:  ORKStepViewController {
             
         }
         else{
-              self.kickCounter = self.kickCounter! + 1
+            self.kickCounter = self.kickCounter! + 1
         }
         editCounterButton?.isHidden = false
         
-      
+        
         self.counterTextField?.text =  self.kickCounter! < 10 ?  "0\(self.kickCounter!)" : "\(self.kickCounter!)"
-    
+        
     }
     
 }
@@ -254,16 +254,17 @@ extension FetalKickCounterStepViewController:UITextFieldDelegate {
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         
         if textField == counterTextField{
-            let aSet = NSCharacterSet(charactersIn:"0123456789").inverted
-            let compSepByCharInSet = string.components(separatedBy: aSet)
-            let numberFiltered = compSepByCharInSet.joined(separator: "")
-            return string == numberFiltered
+            if Int(textField.text!)! < 999{
+                return true
+            }
+            else{
+                return false
+            }
         }
-        else{
-            return true
+        else {
+            return false
         }
         
     }
-    
 }
 

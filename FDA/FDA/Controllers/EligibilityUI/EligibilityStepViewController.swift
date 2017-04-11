@@ -57,7 +57,7 @@ class EligibilityStepViewController: ORKStepViewController {
         let token = tokenTextField.text
         
         if (token?.characters.count)! > 0 {
-            // LabKeyServices().verifyEnrollmentToken(token: token!, delegate: self)
+            // LabKeyServices().verifyEnrollmentToken(studyId: (Study.currentStudy?.studyId)!, token: token!, delegate: self)
             
              self.goForward()
         }

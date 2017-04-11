@@ -242,6 +242,7 @@ class StudyHomeViewController : UIViewController{
         
         taskViewController?.navigationItem.title = "Consent"
         
+         UIApplication.shared.statusBarStyle = .default
         present(taskViewController!, animated: true, completion: nil)
         
         
@@ -580,6 +581,7 @@ extension StudyHomeViewController:ORKTaskViewControllerDelegate{
                     
                     taskViewController?.delegate = self
                     taskViewController?.outputDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+                     UIApplication.shared.statusBarStyle = .default
                     present(taskViewController!, animated: true, completion: nil)
                 }
             }

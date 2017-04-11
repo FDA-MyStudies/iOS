@@ -46,6 +46,15 @@ let kNotificationTitle = "title"
 let kNotificationMessage = "message"
 
 
+//feedback
+let kFeedbackSubject = "subject"
+let kFeedbackBody = "body"
+
+//contactus
+let kContactusEmail = "email"
+let kContactusFirstname = "firstName"
+
+
 class WCPServices: NSObject {
     let networkManager = NetworkManager.sharedInstance()
     var delegate:NMWebServiceDelegate! = nil
@@ -161,6 +170,30 @@ class WCPServices: NSObject {
         
     }
     
+    func sendUserFeedback(delegate:NMWebServiceDelegate){
+        
+        self.delegate = delegate
+      
+        let method = WCPMethods.feedback.method
+        let params = [kFeedbackBody:FeedbackDetail.feedback,
+                      kFeedbackSubject:""]
+        self.sendRequestWith(method:method, params: params, headers: nil)
+        
+    }
+    
+    func sendUserContactUsRequest(delegate:NMWebServiceDelegate){
+        
+        self.delegate = delegate
+        
+        let method = WCPMethods.contactUs.method
+        let params = [kFeedbackBody:ContactUsFeilds.message,
+                      kFeedbackSubject:ContactUsFeilds.subject,
+                      kContactusEmail:ContactUsFeilds.email,
+                      kContactusFirstname:ContactUsFeilds.firstName]
+        self.sendRequestWith(method:method, params: params, headers: nil)
+        
+    }
+    
     //MARK:Parsers
     func handleStudyList(response:Dictionary<String, Any>){
         
@@ -266,6 +299,9 @@ class WCPServices: NSObject {
         //update overview object to current study
         Study.currentStudy?.overview = overview
         
+        //save in database
+        DBHandler.saveStudyOverview(overview: overview, studyId: (Study.currentStudy?.studyId)!)
+        
     }
     
     func handleStudyActivityList(response:Dictionary<String, Any>){
@@ -318,6 +354,8 @@ class WCPServices: NSObject {
         Gateway.instance.notification = listOfNotifications
     }
 
+    func handleContactUsAndFeedback(response:Dictionary<String, Any>){
+    }
     
     private func sendRequestWith(method:Method, params:Dictionary<String, Any>?,headers:Dictionary<String, String>?){
         
@@ -360,6 +398,8 @@ extension WCPServices:NMWebServiceDelegate{
         case .termsPolicy:
             self.handleTermsAndPolicy(response:response as! Dictionary<String, Any> )
         case .notifications:break
+        case .contactUs,.feedback:
+            self.handleContactUsAndFeedback(response:response as! Dictionary<String, Any> )
         
         default:
             print("Request was not sent proper method name")

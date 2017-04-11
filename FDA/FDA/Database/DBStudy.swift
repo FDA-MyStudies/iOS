@@ -23,10 +23,26 @@ class DBStudy: Object {
     dynamic var tagLine:String?
     dynamic var brandingConfiguration:String?
     dynamic var logoURL:String?
-    
+    dynamic  var websiteLink:String?
+    var sections = List<DBOverviewSection>()
     
     override static func primaryKey() -> String? {
         return "studyId"
     }
     
+}
+
+class DBOverviewSection: Object {
+    
+    dynamic  var title:String?
+    dynamic  var type:String?
+    dynamic  var imageURL:String?
+    dynamic  var text:String?
+    dynamic  var link:String?
+    dynamic var  studyId:String!
+    dynamic var  sectionId:String!
+    
+    override static func primaryKey() -> String? {
+        return "sectionId"
+    }
 }

@@ -42,6 +42,14 @@ class NetworkProtocols:NetworkConfigurationProtocol{
     internal func getDevelopmentURL() -> String {
         return ""
     }
+    internal func shouldParseErrorMessage() -> Bool {
+        return false
+    }
+    internal func parseError(errorResponse:Dictionary<String,Any>)->NSError{
+        
+        let error = NSError(domain: NSURLErrorDomain, code:101,userInfo:[NSLocalizedDescriptionKey:"Handle your error here"])
+        return  error
+    }
 
     
 }

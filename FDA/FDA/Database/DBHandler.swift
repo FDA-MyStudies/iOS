@@ -24,7 +24,7 @@ class DBHandler: NSObject {
         dbUser.verified = user.verified
         
         let realm = try! Realm()
-        print("DBPath : \(realm.configuration.fileURL)")
+        print("DBPath : varealm.configuration.fileURL)")
         try! realm.write({
             realm.add(dbUser, update: true)
             
@@ -118,7 +118,82 @@ class DBHandler: NSObject {
         
         completionHandler(studies)
         
+    }
+    
+    class func saveStudyOverview(overview:Overview , studyId:String){
         
+        let realm = try! Realm()
+        let studies =  realm.objects(DBStudy.self).filter("studyId == %@",studyId)
+        let dbStudy = studies.last
+        
+        
+        
+        //save overview
+        let dbStudies = List<DBOverviewSection>()
+        for sectionIndex in 0...(overview.sections.count-1) {
+            
+            let section = overview.sections[sectionIndex]
+            let dbOverviewSection = DBOverviewSection()
+            
+            dbOverviewSection.title = section.title
+            dbOverviewSection.link  = section.link
+            dbOverviewSection.imageURL = section.imageURL
+            dbOverviewSection.text = section.text
+            dbOverviewSection.type = section.type
+            dbOverviewSection.studyId = studyId
+            dbOverviewSection.sectionId = studyId + "screen\(sectionIndex)"
+            dbStudies.append(dbOverviewSection)
+        }
+        
+       
+        
+        debugPrint("DBPath : \(realm.configuration.fileURL)")
+        try! realm.write({
+            
+            realm.add(dbStudies,update: true)
+            dbStudy?.sections.append(objectsIn: dbStudies)
+            dbStudy?.websiteLink = overview.websiteLink
+            
+            
+        })
+        
+    }
+    
+    class func loadStudyOverview(studyId:String,completionHandler:@escaping (Overview?) -> ()){
+        
+        let realm = try! Realm()
+        let studies =  realm.objects(DBStudy.self).filter("studyId == %@",studyId)
+        let dbStudy = studies.last
+       
+        
+        if dbStudy?.sections != nil && (dbStudy?.sections.count)! > 0 {
+            
+            // inilize OverviewSection from database
+            var overviewSections:Array<OverviewSection> = []
+            for dbSection in (dbStudy?.sections)! {
+                let section = OverviewSection()
+                
+                section.title = dbSection.title
+                section.imageURL = dbSection.imageURL
+                section.link = dbSection.link
+                section.type = dbSection.type
+                section.text = dbSection.text
+                
+                overviewSections.append(section)
+            }
+            
+            //Create Overview object  
+            let overview = Overview()
+            overview.type = .study
+            overview.websiteLink = dbStudy?.websiteLink
+            overview.sections = overviewSections
+            
+            completionHandler(overview)
+        }
+        else {
+            completionHandler(nil)
+        }
+     
         
     }
     

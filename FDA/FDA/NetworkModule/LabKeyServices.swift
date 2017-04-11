@@ -9,7 +9,7 @@
 import UIKit
 
 //api keys
-let kEnrollmentToken        = "enrollmentToken"
+let kEnrollmentToken        = "token"
 let kParticipantId          = "participantId"
 let kEnrollmentTokenValid   = "valid"
 let kDeleteResponses        = "deleteResponses"
@@ -21,7 +21,7 @@ class LabKeyServices: NSObject {
     
      //MARK:Requests
     func enrollForStudy(studyId:String, token:String , delegate:NMWebServiceDelegate){
-        
+        self.delegate = delegate
         let method = ResponseMethods.enroll.method
         
         let params = [kEnrollmentToken:token,
@@ -30,18 +30,21 @@ class LabKeyServices: NSObject {
         self.sendRequestWith(method:method, params: params, headers: nil)
     }
     
-    func verifyEnrollmentToken(token:String, delegate:NMWebServiceDelegate){
+    func verifyEnrollmentToken(studyId:String,token:String, delegate:NMWebServiceDelegate){
         
-        let method = ResponseMethods.verifyEnrollmentToken.method
+        self.delegate = delegate
+        
+        let method = ResponseMethods.validateEnrollmentToken.method
         
         let params = [kEnrollmentToken:token,
+                      kStudyId:studyId
                       ]
         
         self.sendRequestWith(method:method, params: params, headers: nil)
     }
     
     func withdrawFromStudy(studyId:String,participantId:String,deleteResponses:Bool,delegate:NMWebServiceDelegate){
-        
+        self.delegate = delegate
         let method = ResponseMethods.withdrawFromStudy.method
         
         let params = [kStudyId:studyId,
@@ -52,12 +55,12 @@ class LabKeyServices: NSObject {
         self.sendRequestWith(method:method, params: params, headers: nil)
     }
     
-    func processResponse(_:NMWebServiceDelegate){
-        
+    func processResponse(delegate:NMWebServiceDelegate){
+        self.delegate = delegate
     }
     
-    func getParticipantResponse(_:NMWebServiceDelegate){
-        
+    func getParticipantResponse(delegate:NMWebServiceDelegate){
+        self.delegate = delegate
     }
     
      //MARK:Parsers
@@ -86,7 +89,7 @@ class LabKeyServices: NSObject {
     
     private func sendRequestWith(method:Method, params:Dictionary<String, Any>,headers:Dictionary<String, String>?){
         
-        networkManager.composeRequest(RegistrationServerConfiguration.configuration,
+        networkManager.composeRequest(ResponseServerConfiguration.configuration,
                                       method: method,
                                       params: params as NSDictionary?,
                                       headers: headers as NSDictionary?,
@@ -102,12 +105,22 @@ extension LabKeyServices:NMWebServiceDelegate{
     func finishedRequest(_ manager: NetworkManager, requestName: NSString, response: AnyObject?) {
         
         switch requestName {
-            
+        case ResponseMethods.validateEnrollmentToken.description as String: break
+        case ResponseMethods.enroll.description as String: break
+        case ResponseMethods.getParticipantResponse.description as String: break
+        case ResponseMethods.processResponse.description as String: break
+        case ResponseMethods.withdrawFromStudy.description as String: break
         default:
-            print("Request was not sent proper method name")
+            print("Request was not sent with proper method name")
+        }
+        
+        if delegate != nil {
+            delegate.finishedRequest(manager, requestName: requestName, response: response)
         }
     }
     func failedRequest(_ manager: NetworkManager, requestName: NSString, error: NSError) {
-        
+        if delegate != nil {
+            delegate.failedRequest(manager, requestName: requestName, error: error)
+        }
     }
 }

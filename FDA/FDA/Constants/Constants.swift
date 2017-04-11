@@ -96,13 +96,15 @@ let kMessageValidateOldAndNewPasswords = "Old password and New password should n
  //MARK:VerificationController
 
 let kMessageVerificationCodeEmpty = "Please enter valid Verification Code"
+
 //MARK: FeedbackviewController constants
 let kFeedbackTableViewCellIdentifier1 = "FeedbackCellFirst"
 let kFeedbackTableViewCellIdentifier2 = "FeedbackCellSecond"
 
 //MARK: ContactUsviewController constants
 let kContactUsTableViewCellIdentifier = "ContactUsCell"
-
+let kMessageSubjectBlankCheck = "Please enter subject"
+let kMessageMessageBlankCheck = "Please enter message"
 //MARK: ActivitiesViewController constants
 let kBackgroundTableViewColor = UIColor.init(red: 216/255.0, green: 227/255.0, blue: 230/255.0, alpha: 1)
 let kActivitiesTableViewCell = "ActivitiesCell"

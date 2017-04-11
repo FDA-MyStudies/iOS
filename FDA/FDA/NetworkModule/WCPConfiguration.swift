@@ -96,7 +96,7 @@ class WCPConfiguration: NetworkConfiguration {
         return Dictionary()
     }
     override func shouldParseErrorMessage() -> Bool {
-        return true
+        return false
     }
 
 }

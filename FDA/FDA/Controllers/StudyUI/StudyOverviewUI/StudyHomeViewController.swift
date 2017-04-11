@@ -251,27 +251,30 @@ class StudyHomeViewController : UIViewController{
     
     func displayConsentDocument() {
         
-        let loginStoryboard = UIStoryboard.init(name: "Main", bundle:Bundle.main)
-        let webViewController = loginStoryboard.instantiateViewController(withIdentifier:"WebViewController") as! UINavigationController
-        let webView = webViewController.viewControllers[0] as! WebViewController
-        self.navigationController?.present(webViewController, animated: true, completion: nil)
         
-        webView.htmlString = (Study.currentStudy?.consentDocument?.htmlString)
+        if Study.currentStudy?.consentDocument != nil {
+            if Study.currentStudy?.consentDocument?.htmlString != nil {
+                self.navigateToWebView(link: nil, htmlText: (Study.currentStudy?.consentDocument?.htmlString)!)
+            }
+        }
+      
         
     }
     
     @IBAction func visitWebsiteButtonAction(_ sender: UIButton) {
         
-        let loginStoryboard = UIStoryboard.init(name: "Main", bundle:Bundle.main)
-        let webViewController = loginStoryboard.instantiateViewController(withIdentifier:"WebViewController") as! UINavigationController
-        let webView = webViewController.viewControllers[0] as! WebViewController
+//        let loginStoryboard = UIStoryboard.init(name: "Main", bundle:Bundle.main)
+//        let webViewController = loginStoryboard.instantiateViewController(withIdentifier:"WebViewController") as! UINavigationController
+//        let webView = webViewController.viewControllers[0] as! WebViewController
         
         
         
         if sender.tag == 1188 {
             //Visit Website
-            webView.requestLink = Study.currentStudy?.overview.websiteLink
-            self.navigationController?.present(webViewController, animated: true, completion: nil)
+           // webView.requestLink = Study.currentStudy?.overview.websiteLink
+            //self.navigationController?.present(webViewController, animated: true, completion: nil)
+            
+            self.navigateToWebView(link:  Study.currentStudy?.overview.websiteLink, htmlText: nil)
             
         } else {
             //View Consent
@@ -295,6 +298,24 @@ class StudyHomeViewController : UIViewController{
             pageViewController.pageViewDelegate = self
             pageViewController.overview = Study.currentStudy?.overview
         }
+    }
+    
+    
+    func navigateToWebView(link:String?,htmlText:String?){
+        
+        let loginStoryboard = UIStoryboard.init(name: "Main", bundle:Bundle.main)
+        let webViewController = loginStoryboard.instantiateViewController(withIdentifier:"WebViewController") as! UINavigationController
+        let webView = webViewController.viewControllers[0] as! WebViewController
+        
+        if link != nil {
+             webView.requestLink = Study.currentStudy?.overview.websiteLink
+        }
+        if htmlText != nil {
+            webView.htmlString = htmlText
+        }
+        
+        
+        self.navigationController?.present(webViewController, animated: true, completion: nil)
     }
     
     //Fired when the user taps on the pageControl to change its current page (Commented as this is not working)

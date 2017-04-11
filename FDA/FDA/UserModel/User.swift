@@ -228,23 +228,26 @@ class User{
     }
     
     
-    func bookmarkActivity(studyId:String,activityId:String){
+    func bookmarkActivity(studyId:String,activityId:String) -> UserActivityStatus{
         
         
         let activityes = self.participatedActivites as Array<UserActivityStatus>
         if let activity =   activityes.filter({$0.studyId == studyId && $0.activityId == activityId}).first {
             activity.bookmarked = true
             Logger.sharedInstance.info("Bookmark: activity is bookmarked : \(studyId)")
+            return activity
         }
         else {
             Logger.sharedInstance.info("Bookmark: activity not found : \(studyId)")
             
             let activityStatus = UserActivityStatus()
             activityStatus.bookmarked = true
-            
+            activityStatus.studyId = studyId
+            activityStatus.activityId = activityId
             self.participatedActivites.append(activityStatus)
             
             Logger.sharedInstance.info("Bookmark: activity is bookmarked : \(studyId)")
+            return activityStatus
         }
         
     }
@@ -290,19 +293,23 @@ class User{
     }
     
     //MARK:Activity Status
-    func updateActivityStatus(studyId:String,activityId:String,status:UserActivityStatus.ActivityStatus){
+    func updateActivityStatus(studyId:String,activityId:String,status:UserActivityStatus.ActivityStatus) -> UserActivityStatus{
         
         let activityes = self.participatedActivites as Array<UserActivityStatus>
         if let activity =   activityes.filter({$0.studyId == studyId && $0.activityId == activityId}).first {
             activity.status = status
             Logger.sharedInstance.info("User Activity Status: activity is updated : \(studyId)")
+            return activity
         }
         else {
             Logger.sharedInstance.info("User Activity Status: activity not found : \(studyId)")
             
             let activityStatus = UserActivityStatus()
             activityStatus.status = status
+            activityStatus.studyId = studyId
+            activityStatus.activityId = activityId
             self.participatedActivites.append(activityStatus)
+            return activityStatus
             
             Logger.sharedInstance.info("User Activity Status: activity is updated : \(studyId)")
         }
@@ -550,13 +557,28 @@ class UserActivityStatus{
                 
             }
         }
+        
+        var paramValue:String {
+            switch self {
+            case .yetToJoin:
+                return "yetToJoin"
+            case .inProgress:
+                return "inProgress"
+            case.completed:
+                return "completed"
+            case .abandoned:
+                return "abandoned"
+            
+                
+            }
+        }
     }
     
     var bookmarked:Bool = false
     var activityId:String! = ""
     var studyId:String! = ""
     var activityVersion:String! = ""
-    var status:ActivityStatus? = .yetToJoin
+    var status:ActivityStatus = .yetToJoin
     init() {
         
     }
@@ -598,9 +620,23 @@ class UserActivityStatus{
         else{
             Logger.sharedInstance.debug("UserStudyStatus Dictionary is null:\(detail)")
         }
+       
         
+    }
+    
+    func getBookmarkUserActivityStatus() -> Dictionary<String,Any>{
         
+        let studyDetail = [kStudyId:self.studyId,
+                           kActivityId:self.activityId,
+                           kBookmarked:self.bookmarked] as [String : Any]
+        return studyDetail
+    }
+    func getParticipatedUserActivityStatus() -> Dictionary<String,Any>{
         
+        let studyDetail = [kStudyId:self.studyId,
+                           kActivityId:self.activityId,
+                           kStudyStatus:self.status.paramValue] as [String : Any]
+        return studyDetail
     }
     
 }

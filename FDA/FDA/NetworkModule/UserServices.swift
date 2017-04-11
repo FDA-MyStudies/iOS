@@ -290,6 +290,20 @@ class UserServices: NSObject {
         self.sendRequestWith(method:method, params: params, headers: headerParams)
     }
     
+    func updateActivityBookmarkStatus(activityStauts:UserActivityStatus , delegate:NMWebServiceDelegate){
+        self.delegate = delegate
+        
+        let user = User.currentUser
+        let headerParams = [kUserId : user.userId] as Dictionary<String, String>
+        
+        let params = [kActivites:[activityStauts.getBookmarkUserActivityStatus()]] as [String : Any]
+        let method = RegistrationMethods.updatePreferences.method
+        
+        self.sendRequestWith(method:method, params: params, headers: headerParams)
+    }
+    
+    
+    
     func updateUserParticipatedStatus(studyStauts:UserStudyStatus, delegate:NMWebServiceDelegate){
         
         self.delegate = delegate
@@ -298,6 +312,19 @@ class UserServices: NSObject {
         let user = User.currentUser
         let headerParams = [kUserId : user.userId] as Dictionary<String, String>
         let params = [kStudies:[studyStauts.getParticipatedUserStudyStatus()]] as [String : Any]
+        let method = RegistrationMethods.updatePreferences.method
+        
+        self.sendRequestWith(method:method, params: params, headers: headerParams)
+    }
+    
+    func updateUserActivityParticipatedStatus(activityStatus:UserActivityStatus, delegate:NMWebServiceDelegate){
+        
+        self.delegate = delegate
+        
+        
+        let user = User.currentUser
+        let headerParams = [kUserId : user.userId] as Dictionary<String, String>
+        let params = [kActivites:[activityStatus.getParticipatedUserActivityStatus()]] as [String : Any]
         let method = RegistrationMethods.updatePreferences.method
         
         self.sendRequestWith(method:method, params: params, headers: headerParams)

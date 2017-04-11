@@ -45,6 +45,10 @@
 		6EAB39A91E4B0B4A003442B8 /* Resources.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6EAB39A81E4B0B4A003442B8 /* Resources.plist */; };
 		6EABD0331E56FE2000623D94 /* TaskSchema.json in Resources */ = {isa = PBXBuildFile; fileRef = 6EABD0321E56FE2000623D94 /* TaskSchema.json */; };
 		6EB7187C1E77C01900E293EF /* Encoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EB7187B1E77C01900E293EF /* Encoder.swift */; };
+		6EB740181E9CD38100A4C773 /* FetalKickTest.json in Resources */ = {isa = PBXBuildFile; fileRef = 6EB740171E9CD38100A4C773 /* FetalKickTest.json */; };
+		6EB7401C1E9CFAD700A4C773 /* 01.png in Resources */ = {isa = PBXBuildFile; fileRef = 6EB7401B1E9CFAD700A4C773 /* 01.png */; };
+		6EB740261E9D028000A4C773 /* FetalKickIntroStepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EB740251E9D028000A4C773 /* FetalKickIntroStepViewController.swift */; };
+		6EB740281E9D1F8700A4C773 /* 03.png in Resources */ = {isa = PBXBuildFile; fileRef = 6EB740271E9D1F8700A4C773 /* 03.png */; };
 		6EBC2E801E94FB5300828CA1 /* StudyDashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EBC2E751E94FB5300828CA1 /* StudyDashboardViewController.swift */; };
 		6EBC2E811E94FB5300828CA1 /* StudyDashboard.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6EBC2E761E94FB5300828CA1 /* StudyDashboard.plist */; };
 		6EBC2E821E94FB5300828CA1 /* StudyDashboardActivityCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EBC2E771E94FB5300828CA1 /* StudyDashboardActivityCollectionViewCell.swift */; };
@@ -266,6 +270,10 @@
 		6EAB39A81E4B0B4A003442B8 /* Resources.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Resources.plist; sourceTree = "<group>"; };
 		6EABD0321E56FE2000623D94 /* TaskSchema.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = TaskSchema.json; sourceTree = "<group>"; };
 		6EB7187B1E77C01900E293EF /* Encoder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Encoder.swift; sourceTree = "<group>"; };
+		6EB740171E9CD38100A4C773 /* FetalKickTest.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = FetalKickTest.json; sourceTree = "<group>"; };
+		6EB7401B1E9CFAD700A4C773 /* 01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 01.png; sourceTree = "<group>"; };
+		6EB740251E9D028000A4C773 /* FetalKickIntroStepViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FetalKickIntroStepViewController.swift; sourceTree = "<group>"; };
+		6EB740271E9D1F8700A4C773 /* 03.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 03.png; sourceTree = "<group>"; };
 		6EBC2E751E94FB5300828CA1 /* StudyDashboardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudyDashboardViewController.swift; sourceTree = "<group>"; };
 		6EBC2E761E94FB5300828CA1 /* StudyDashboard.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = StudyDashboard.plist; sourceTree = "<group>"; };
 		6EBC2E771E94FB5300828CA1 /* StudyDashboardActivityCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudyDashboardActivityCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -426,7 +434,9 @@
 		486B511D1E6951E400B98EBC /* UIReference screens */ = {
 			isa = PBXGroup;
 			children = (
+				6EB740271E9D1F8700A4C773 /* 03.png */,
 				6EE93D911E93B8C30027A5DC /* 45.png */,
+				6EB7401B1E9CFAD700A4C773 /* 01.png */,
 				6EBC8A341E8118970020F9E6 /* 200.png */,
 				48A24C371E839CF9009E849E /* 24-study-dashboard.png */,
 				48A24C3B1E839CFD009E849E /* 25-study-activities.png */,
@@ -605,6 +615,14 @@
 				6EB7187B1E77C01900E293EF /* Encoder.swift */,
 			);
 			path = EncoderModel;
+			sourceTree = "<group>";
+		};
+		6EB740221E9D020C00A4C773 /* FetalKickIntroStepViewController */ = {
+			isa = PBXGroup;
+			children = (
+				6EB740251E9D028000A4C773 /* FetalKickIntroStepViewController.swift */,
+			);
+			path = FetalKickIntroStepViewController;
 			sourceTree = "<group>";
 		};
 		6EBC8A271E8112B80020F9E6 /* EligibilityUI */ = {
@@ -831,6 +849,7 @@
 		6EED7B341E65743D002C1FA3 /* FetalKickCounterModel */ = {
 			isa = PBXGroup;
 			children = (
+				6EB740221E9D020C00A4C773 /* FetalKickIntroStepViewController */,
 				6EED7B351E6574E5002C1FA3 /* FetalKickCounterTask */,
 				6EED7B361E6574E5002C1FA3 /* FetalKickCounterStepViewController */,
 				6EED7B371E6574E5002C1FA3 /* FetalKickCounterStep */,
@@ -841,6 +860,7 @@
 		6EED7B351E6574E5002C1FA3 /* FetalKickCounterTask */ = {
 			isa = PBXGroup;
 			children = (
+				6EB740171E9CD38100A4C773 /* FetalKickTest.json */,
 				6EED7B3C1E65752C002C1FA3 /* FetalKickCounterTask.swift */,
 			);
 			path = FetalKickCounterTask;
@@ -1292,14 +1312,17 @@
 				94B3DD511E6ED8E500327AE5 /* Login.storyboard in Resources */,
 				94B3DD491E6ED8E500327AE5 /* StudyList.json in Resources */,
 				6EA889C51E701E8200F160A1 /* Confirmation.plist in Resources */,
+				6EB740281E9D1F8700A4C773 /* 03.png in Resources */,
 				6EE93DC91E93C8850027A5DC /* Activities.plist in Resources */,
 				94B3DD521E6ED8E500327AE5 /* LoginAssets.xcassets in Resources */,
 				6ECF75D21E6EF1E7008C935E /* FetalKickCounter.xcassets in Resources */,
 				4884E35C1E827F8F002DA0B9 /* ContactUs.plist in Resources */,
+				6EB740181E9CD38100A4C773 /* FetalKickTest.json in Resources */,
 				6E7D2D5F1E433E8800763D4C /* Main.storyboard in Resources */,
 				94B3DD401E6ED8E500327AE5 /* Gateway.storyboard in Resources */,
 				6EC129241E64624F00B90167 /* Acivity_Question.json in Resources */,
 				94B3DD441E6ED8E500327AE5 /* Profile.plist in Resources */,
+				6EB7401C1E9CFAD700A4C773 /* 01.png in Resources */,
 				6E7D2D8C1E4340B200763D4C /* UserProfile.plist in Resources */,
 				6E7D2D901E43526100763D4C /* Register.plist in Resources */,
 				48A24C3C1E839CFD009E849E /* 25-study-activities.png in Resources */,
@@ -1561,6 +1584,7 @@
 				6ED1B2331E54256700BF463F /* ActivityQuestionStep.swift in Sources */,
 				6EE93DCB1E93C8850027A5DC /* ActivitiesViewController.swift in Sources */,
 				6ED1B2211E54253800BF463F /* Activity.swift in Sources */,
+				6EB740261E9D028000A4C773 /* FetalKickIntroStepViewController.swift in Sources */,
 				9491F7FA1E825FA80018C15E /* DBUser.swift in Sources */,
 				6ED1B2341E54256700BF463F /* ActivityStep.swift in Sources */,
 				6EBC2E831E94FB5300828CA1 /* StudyDashboardActivityTableViewCell.swift in Sources */,

@@ -64,7 +64,7 @@ class ActivityStepResult{
     var endTime:Date?
     var skipped:Bool?
     var value:Any?
-    
+   
     /* default initializer method
      */
     
@@ -76,6 +76,7 @@ class ActivityStepResult{
         self.endTime = Date.init(timeIntervalSinceNow: 0)
         self.skipped = false
         self.value = 0
+        
         
     }
     //MARK: Utility Method
@@ -161,11 +162,9 @@ class ActivityStepResult{
         
         switch self.type! as ActivityStepType {
             
-        case .instruction: stepDict?[kActivityStepResultType] = ""
+        case .instruction: stepDict?[kActivityStepResultType] = "null"
             
         case .question:  stepDict?[kActivityStepResultType] = self.step?.resultType
-            
-            
             
         case .form: stepDict?[kActivityStepResultType] = ActvityStepResultType.formOrActiveTask
             
@@ -226,6 +225,8 @@ class ActivityStepResult{
                         
                         if ((questionstepResult as? ORKScaleQuestionResult) != nil){
                             let stepTypeResult = questionstepResult as! ORKScaleQuestionResult
+                            
+                            
                             
                             if Utilities.isValidValue(someObject: stepTypeResult.scaleAnswer as AnyObject?){
                                 

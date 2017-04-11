@@ -95,6 +95,8 @@ class ViewController: UIViewController {
         taskViewController = ORKTaskViewController(task:task, taskRun: nil)
         taskViewController?.delegate = self
         taskViewController?.outputDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+         UIApplication.shared.statusBarStyle = .default
+        
         present(taskViewController!, animated: true, completion: nil)
 
         
@@ -144,6 +146,9 @@ class ViewController: UIViewController {
                     
                     taskViewController?.delegate = self
                     taskViewController?.outputDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+                    
+                     UIApplication.shared.statusBarStyle = .default
+                    
                     present(taskViewController!, animated: true, completion: nil)
                 }
             }

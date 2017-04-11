@@ -72,7 +72,9 @@ class ActivitiesViewController : UIViewController{
     func createActivity(){
         
         
-        let filePath  = Bundle.main.path(forResource: "Acivity_Question", ofType: "json")
+        //let filePath  = Bundle.main.path(forResource: "Acivity_Question", ofType: "json")
+        
+         let filePath  = Bundle.main.path(forResource: "FetalKickTest", ofType: "json")
         
         let data = NSData(contentsOfFile: filePath!)
         do {
@@ -102,7 +104,12 @@ class ActivitiesViewController : UIViewController{
         taskViewController = ORKTaskViewController(task:task, taskRun: nil)
         taskViewController?.delegate = self
         taskViewController?.outputDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+        
+        UIApplication.shared.statusBarStyle = .default
+        
         present(taskViewController!, animated: true, completion: nil)
+        
+        
     }
 
 }
@@ -192,7 +199,7 @@ extension ActivitiesViewController : UITableViewDelegate{
         self.createActivity()
         
         //To be uncommented
-       // WCPServices().getStudyActivityMetadata(studyId:(Study.currentStudy?.studyId)! , activityId: (Study.currentActivity?.actvityId)!, activityVersion: "1", delegate: self)
+        //WCPServices().getStudyActivityMetadata(studyId:(Study.currentStudy?.studyId)! , activityId: (Study.currentActivity?.actvityId)!, activityVersion: "1", delegate: self)
     }
     
 }
@@ -272,13 +279,15 @@ extension ActivitiesViewController:ORKTaskViewControllerDelegate{
             consentbuilder?.consentResult?.initWithORKTaskResult(taskResult:taskViewController.result )
         }
         else{
-            ActivityBuilder.currentActivityBuilder.actvityResult?.initWithORKTaskResult(taskResult: taskViewController.result)
-            print("\(ActivityBuilder.currentActivityBuilder.actvityResult?.getResultDictionary())")
+            
+            if reason == ORKTaskViewControllerFinishReason.completed{
+                ActivityBuilder.currentActivityBuilder.actvityResult?.initWithORKTaskResult(taskResult: taskViewController.result)
+                print("\(ActivityBuilder.currentActivityBuilder.actvityResult?.getResultDictionary())")
+
+            }
+            
         }
-        
-        
         taskViewController.dismiss(animated: true, completion: nil)
-        
     }
     
     func taskViewController(_ taskViewController: ORKTaskViewController, stepViewControllerWillAppear stepViewController: ORKStepViewController) {
@@ -296,7 +305,16 @@ extension ActivitiesViewController:ORKTaskViewControllerDelegate{
                     let orkStepResult:ORKStepResult? = taskViewController.result.results?[(taskViewController.result.results?.count)! - 2] as! ORKStepResult?
                     let activityStepResult:ActivityStepResult? = ActivityStepResult()
                     
+                   
+                    
+                    
                     activityStepResult?.initWithORKStepResult(stepResult: orkStepResult! as ORKStepResult , activityType:(ActivityBuilder.currentActivityBuilder.actvityResult?.type)!)
+                    
+                     let index = (taskViewController.result.results?.count)! - 2
+                    if index < (ActivityBuilder.currentActivityBuilder.activity?.activitySteps?.count)!{
+                         activityStepResult?.step = ActivityBuilder.currentActivityBuilder.activity?.activitySteps?[index]
+                    }
+                    
                     ActivityBuilder.currentActivityBuilder.actvityResult?.result?.append(activityStepResult!)
                     
                 }
@@ -317,14 +335,23 @@ extension ActivitiesViewController:ORKTaskViewControllerDelegate{
     }
     func taskViewController(_ taskViewController: ORKTaskViewController, viewControllerFor step: ORKStep) -> ORKStepViewController? {
         
-        if step.identifier == "FetalKickCounter" {
+         let storyboard = UIStoryboard.init(name: "FetalKickCounter", bundle: nil)
+        
+        if step.identifier == "FetalKickCounterStep" {
             
-            let ttController = self.storyboard?.instantiateViewController(withIdentifier: "FetalKickCounterStepViewController") as! FetalKickCounterStepViewController
+            let ttController = storyboard.instantiateViewController(withIdentifier: "FetalKickCounterStepViewController") as! FetalKickCounterStepViewController
             ttController.step = step
-            
-            
             return ttController
-        } else {
+        }
+        else if  step.identifier == kFetalKickIntroductionStepIdentifier{
+           
+            
+            let ttController = storyboard.instantiateViewController(withIdentifier: "FetalKickIntroStepViewControllerIdentifier") as! FetalKickIntroStepViewController
+            ttController.step = step
+            return ttController
+
+        }
+        else {
             return nil
         }
     }

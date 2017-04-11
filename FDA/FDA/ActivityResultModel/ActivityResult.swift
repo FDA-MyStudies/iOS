@@ -18,7 +18,7 @@ class ActivityResult {
     var activity:Activity?
     var startTime:Date?
     var endTime:Date?
-    
+   
     var result:Array<ActivityStepResult>?
     //MARK: Initializers
     init() {

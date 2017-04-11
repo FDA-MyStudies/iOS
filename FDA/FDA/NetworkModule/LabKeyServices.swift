@@ -106,7 +106,8 @@ extension LabKeyServices:NMWebServiceDelegate{
         
         switch requestName {
         case ResponseMethods.validateEnrollmentToken.description as String: break
-        case ResponseMethods.enroll.description as String: break
+        case ResponseMethods.enroll.description as String:
+            self.handleEnrollForStudy(response: response as! Dictionary<String, Any>)
         case ResponseMethods.getParticipantResponse.description as String: break
         case ResponseMethods.processResponse.description as String: break
         case ResponseMethods.withdrawFromStudy.description as String: break

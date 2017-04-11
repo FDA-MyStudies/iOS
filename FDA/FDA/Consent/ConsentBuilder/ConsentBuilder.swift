@@ -56,7 +56,7 @@ class ConsentBuilder{
     var consentDocument:ORKConsentDocument?
     var version:String?
     var consentStatus:ConsentStatus?
-    
+    var consentHasVisualStep:Bool?
     static var currentConsent: ConsentBuilder? = nil
     
     var consentResult:ConsentResult?
@@ -74,6 +74,7 @@ class ConsentBuilder{
         self.consentResult = ConsentResult()
         self.consentDocument = ORKConsentDocument()
         self.version = ""
+        self.consentHasVisualStep = false
         
     }
     
@@ -83,6 +84,7 @@ class ConsentBuilder{
          */
         
         self.consentStatus = .pending
+         self.consentHasVisualStep = false
         
         if Utilities.isValidObject(someObject: metaDataDict as AnyObject?){
             
@@ -94,6 +96,10 @@ class ConsentBuilder{
                     let consentSection:ConsentSectionStep? = ConsentSectionStep()
                     consentSection?.initWithDict(stepDict: sectionDict)
                          consentSectionArray.append((consentSection?.createConsentSection())!)
+                    
+                    if consentSection?.type != .custom{
+                        self.consentHasVisualStep = true
+                    }
                     
                 }
                 
@@ -283,7 +289,14 @@ class ConsentBuilder{
         var stepArray:Array<ORKStep>? = Array()
         
         if visualConsentStep != nil{
-            stepArray?.append(visualConsentStep!)
+            
+            if  self.consentHasVisualStep! {
+                stepArray?.append(visualConsentStep!)
+            }
+            else{
+                // it means all steps are custom only included in documents
+            }
+            
         }
         if sharingConsentStep != nil{
             stepArray?.append(sharingConsentStep!)

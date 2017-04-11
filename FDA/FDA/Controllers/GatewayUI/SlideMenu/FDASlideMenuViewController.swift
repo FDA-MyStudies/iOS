@@ -81,6 +81,10 @@ open class FDASlideMenuViewController: SlideMenuController {
         
         User.resetCurrentUser()
         //TEMP
+        
+        //Delete from database
+        DBHandler.deleteCurrentUser()
+        
         let ud = UserDefaults.standard
         ud.removeObject(forKey: kUserAuthToken)
         ud.removeObject(forKey: kUserId)

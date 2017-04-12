@@ -72,9 +72,9 @@ class ActivitiesViewController : UIViewController{
     func createActivity(){
         
         
-        //let filePath  = Bundle.main.path(forResource: "Acivity_Question", ofType: "json")
+        let filePath  = Bundle.main.path(forResource: "Acivity_Question", ofType: "json")
         
-         let filePath  = Bundle.main.path(forResource: "FetalKickTest", ofType: "json")
+        // let filePath  = Bundle.main.path(forResource: "FetalKickTest", ofType: "json")
         
         let data = NSData(contentsOfFile: filePath!)
         do {
@@ -109,7 +109,7 @@ class ActivitiesViewController : UIViewController{
         
         present(taskViewController!, animated: true, completion: nil)
         
-        
+      
     }
 
 }

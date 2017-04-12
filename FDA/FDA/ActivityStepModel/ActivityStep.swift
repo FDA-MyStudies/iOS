@@ -57,7 +57,7 @@ class ActivityStep{
     var repeatable:Bool?
     var repeatableText:String?
     
-    var destinations:Dictionary<String,Any>?
+    var destinations:Array<Dictionary<String,Any>>?
     
     /* default Intalizer method */
     init() {
@@ -73,13 +73,13 @@ class ActivityStep{
         self.groupName = ""
         self.repeatable = false
         self.repeatableText = ""
-        self.destinations = Dictionary()
+        self.destinations = Array()
         
     }
     
     /* initializer method with all params
      */
-    init(activityId:String,type:ActivityStepType,resultType:String,key:String,title:String,text:String,skippable:Bool,groupName:String,repeatable:Bool,repeatableText:String, destinations:Dictionary<String,Any>) {
+    init(activityId:String,type:ActivityStepType,resultType:String,key:String,title:String,text:String,skippable:Bool,groupName:String,repeatable:Bool,repeatableText:String, destinations:Array<Dictionary<String,Any>>) {
         
         self.activityId = activityId
         self.type = type
@@ -134,8 +134,8 @@ class ActivityStep{
             if Utilities.isValidValue(someObject: stepDict[kActivityStepRepeatableText] as AnyObject )  {
                 self.repeatableText = stepDict[kActivityStepRepeatableText] as? String
             }
-            if Utilities.isValidValue(someObject: stepDict[kActivityStepDestinations] as AnyObject )  {
-                self.destinations = stepDict[kActivityStepDestinations] as? Dictionary<String, Any>
+            if Utilities.isValidObject(someObject: stepDict[kActivityStepDestinations] as AnyObject )  {
+                self.destinations = stepDict[kActivityStepDestinations] as? Array<Dictionary<String, Any>>
             }
             
         }

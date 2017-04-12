@@ -68,7 +68,7 @@ class Activity{
     var name:String?
     var version:String?
     var lastModified:Date?
-    var userStatus:UserActivityStatus.ActivityStatus
+    var userStatus:UserActivityStatus.ActivityStatus = .yetToJoin
     var startDate:Date?
     var endDate:Date?
     var branching:Bool?

@@ -113,9 +113,11 @@ let kYellowColor = UIColor.init(red: 245/255.0, green: 175/255.0, blue: 55/255.0
 let kBlueColor = UIColor.init(red: 0/255.0, green: 124/255.0, blue: 186/255.0, alpha: 1.0)
 let kGreenColor = UIColor.init(red: 76/255.0, green: 175/255.0, blue: 80/255.0, alpha: 1.0)
 
+
 let kResumeSpaces = "  Resume  "
 let kStartSpaces = "  Start  "
 let kCompletedSpaces = "  Completed  "
+let kInCompletedSpaces = "  Incompleted  "
 
 //MARK: ResourcesViewController constants
 let kResourcesTableViewCell = "ResourcesCell"

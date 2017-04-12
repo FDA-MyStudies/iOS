@@ -30,6 +30,58 @@ class ActivitiesTableViewCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
+    
+    func populateCellDataWithActivity(activity:Activity){
+        self.labelHeading?.text = activity.name
+        //self.labelTime?.text = (activity.startDate?.description)! + "-" + (activity.endDate?.description)!
+        self.labelDays?.text = activity.frequencyType.rawValue
+        self.setUserStatusForActivity(activity: activity)
+    }
+    
+    func setUserStatusForActivity(activity:Activity){
+        
+        let currentUser = User.currentUser
+        
+        
+        if let userActivityStatus = currentUser.participatedActivites.filter({$0.activityId == activity.actvityId}).first {
+            
+            //assign to study
+            //activity.userParticipateState = userActivityStatus
+            
+            //user study status
+            labelStatus?.text = userActivityStatus.status.description
+            
+            switch userActivityStatus.status {
+            case .inProgress:
+                self.labelStatus?.backgroundColor = kYellowColor
+                //self.labelStatus?.text = kResumeSpaces
+            case .yetToJoin:
+                self.labelStatus?.backgroundColor = kBlueColor
+                //self.labelStatus?.text = kStartSpaces
+            case .abandoned:
+                self.labelStatus?.backgroundColor =  UIColor.red
+                //self.labelStatus?.text = kInCompletedSpaces
+            case .completed:
+                self.labelStatus?.backgroundColor = kGreenColor
+                //self.labelStatus?.text = kCompletedSpaces
+                
+            }
+            
+            //bookMarkStatus
+            //buttonBookmark?.isSelected = userStudyStatus.bookmarked
+        }
+        else {
+            //study.userParticipateState = UserStudyStatus()
+            //labelStudyUserStatus?.text = UserStudyStatus.StudyStatus.yetToJoin.description
+            self.labelStatus?.backgroundColor = kBlueColor
+            self.labelStatus?.text = UserActivityStatus.ActivityStatus.yetToJoin.description
+        }
+        
+      
+    }
+    
+    
+    
 
     func populateCellData(data: Dictionary<String, Any>){
         

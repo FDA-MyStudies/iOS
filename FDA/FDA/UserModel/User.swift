@@ -547,13 +547,13 @@ class UserActivityStatus{
         var description:String {
             switch self {
             case .yetToJoin:
-                return "Yet To Join"
+                return "  Start  "
             case .inProgress:
-                return "In Progress"
+                return "  Resume  "
             case.completed:
-                return "Completed"
+                return "  Completed  "
             case .abandoned:
-                return "Abandoned"
+                return "  Incomplete  "
                 
             }
         }
@@ -604,13 +604,16 @@ class UserActivityStatus{
                 
                 let statusValue = detail[kStatus] as! String
                 
-                if (ActivityStatus.inProgress.description == statusValue) {
+                if (ActivityStatus.inProgress.paramValue == statusValue) {
                     self.status = .inProgress
                 }
-                else if (ActivityStatus.completed.description == statusValue) {
+                else if (ActivityStatus.yetToJoin.paramValue == statusValue) {
+                    self.status = .yetToJoin
+                }
+                else if (ActivityStatus.completed.paramValue == statusValue) {
                     self.status = .completed
                 }
-                else if (ActivityStatus.abandoned.description == statusValue) {
+                else if (ActivityStatus.abandoned.paramValue == statusValue) {
                     self.status = .abandoned
                 }
             }

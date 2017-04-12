@@ -411,7 +411,7 @@ class Utilities: NSObject {
             return nil
         }
         
-        dateFormatter.dateFormat = "yyyy MMM EEEE HH:mm"
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
         // dateFormatter.timeZone = NSTimeZone.local // NSTimeZone(name: "UTC") as TimeZone!
         let finalString = dateFormatter.string(from: date)
         let finalDate = dateFormatter.date(from: finalString)

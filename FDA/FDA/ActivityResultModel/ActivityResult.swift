@@ -15,7 +15,7 @@ let kActivityResult = "result"
 class ActivityResult {
     
     var type:ActivityType?
-    var activity:Activity?
+    weak var activity:Activity?
     var startTime:Date?
     var endTime:Date?
    

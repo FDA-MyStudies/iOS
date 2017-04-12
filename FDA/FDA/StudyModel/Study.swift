@@ -70,7 +70,7 @@ class Study {
     var brandingConfiguration:String?
     var logoURL:String?
     var overview:Overview!
-    var activities:Array<Activity>!
+    var activities:Array<Activity>! = []
     var resources:Array<Resource>? = []
     var userParticipateState:UserStudyStatus! = nil
     

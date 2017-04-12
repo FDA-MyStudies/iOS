@@ -12,11 +12,16 @@ import ResearchKit
 
 let kActivities = "activities"
 
+
+enum ActivityAvailabilityStatus:String{
+    case current
+    case upcoming
+    case past
+}
+
 class ActivitiesViewController : UIViewController{
     
-    var tableViewRowDetails : NSMutableArray?
-    
-    var dataArray:NSMutableArray? = NSMutableArray()
+    var tableViewSections:Array<Dictionary<String,Any>> = []
     
     @IBOutlet var tableView : UITableView?
     
@@ -24,10 +29,11 @@ class ActivitiesViewController : UIViewController{
         super.viewDidLoad()
         
         //load plist info
-        let plistPath = Bundle.main.path(forResource: "Activities", ofType: ".plist", inDirectory:nil)
-        tableViewRowDetails = NSMutableArray.init(contentsOfFile: plistPath!)
+        //let plistPath = Bundle.main.path(forResource: "Activities", ofType: ".plist", inDirectory:nil)
+       // tableViewRowDetails = Array(contente) //NSMutableArray.init(contentsOfFile: plistPath!)
         
-        
+        self.tableView?.estimatedRowHeight = 103
+        self.tableView?.rowHeight = UITableViewAutomaticDimension
         
         self.navigationItem.title = NSLocalizedString("STUDY ACTIVITIES", comment: "")
         self.tableView?.sectionHeaderHeight = 30
@@ -111,6 +117,63 @@ class ActivitiesViewController : UIViewController{
         
       
     }
+    
+    func getActivityAvailabilityStatus(activity:Activity) -> ActivityAvailabilityStatus {
+        
+        let todayDate = Date()
+        
+        let startDateResult = (activity.startDate?.compare(todayDate))! as ComparisonResult
+        let endDateResult = (activity.endDate?.compare(todayDate))! as ComparisonResult
+        
+        if startDateResult == .orderedAscending && endDateResult == .orderedDescending{
+            print("current")
+            return .current
+        }
+        else if startDateResult == .orderedDescending {
+            print("upcoming")
+            return .upcoming
+        }
+        else if endDateResult == .orderedAscending {
+            print("past")
+            return .past
+        }
+        return .past
+    }
+    
+    func handleActivityListResponse(){
+        
+        let activities = Study.currentStudy?.activities
+        
+        var currentActivities:Array<Activity> = []
+        var upcomingActivities:Array<Activity> = []
+        var pastActivities:Array<Activity> = []
+        
+        for activity in activities! {
+            
+          let status =  self.getActivityAvailabilityStatus(activity: activity)
+            switch status {
+            case .current:
+                currentActivities.append(activity)
+            case .upcoming:
+                upcomingActivities.append(activity)
+            case .past:
+                pastActivities.append(activity)
+           
+            }
+        }
+        
+        let currentDetails = ["title":"CURRENT","activities":currentActivities] as [String : Any]
+        let upcomingDetails = ["title":"UPCOMING","activities":upcomingActivities] as [String : Any]
+        let pastDetails = ["title":"PAST","activities":pastActivities] as [String : Any]
+        
+        tableViewSections.append(currentDetails)
+        tableViewSections.append(upcomingDetails)
+        tableViewSections.append(pastDetails)
+        
+        
+        self.tableView?.reloadData()
+        
+    }
 
 }
 
@@ -118,7 +181,7 @@ class ActivitiesViewController : UIViewController{
 extension ActivitiesViewController: UITableViewDataSource{
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        return tableViewSections.count
     }
     
     private func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -130,12 +193,13 @@ extension ActivitiesViewController: UITableViewDataSource{
         // let sectionHeader = tableViewRowDetails?[section] as! NSDictionary
         // let sectionHeaderData = sectionHeader["items"] as! NSArray
         
-        if (dataArray?.count)! > 0 {
-            return dataArray!.count
+        let rowDetail = tableViewSections[section] 
+        let activities = rowDetail["activities"] as! Array<Activity>
+        if activities.count == 0 {
+            return 1
         }
-        else{
-            return 0
-        }
+        return activities.count
+        
         
     }
     
@@ -144,9 +208,9 @@ extension ActivitiesViewController: UITableViewDataSource{
         let view = UIView.init(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: 30))
         view.backgroundColor = kBackgroundTableViewColor
         
-        let dayData = tableViewRowDetails?[section] as! NSDictionary
+        let dayData = tableViewSections[section]
         
-        let statusText = dayData["status"] as! String
+        let statusText = dayData["title"] as! String
         
         let label = UILabel.init(frame: CGRect(x: 18, y: 0, width: view.frame.size.width, height: view.frame.size.height))
         label.textAlignment = NSTextAlignment.natural
@@ -161,29 +225,25 @@ extension ActivitiesViewController: UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let tableViewData = tableViewRowDetails?.object(at: indexPath.section) as! NSDictionary
-        // let projectInfo = tableViewData["items"] as! NSArray
-        // let project = projectInfo[indexPath.row] as! Dictionary<String,Any>
-        
-        let cell = tableView.dequeueReusableCell(withIdentifier: kActivitiesTableViewCell, for: indexPath) as! ActivitiesTableViewCell
-        
-        //Cell Data Setup
-        
-        if indexPath.section == 0 {
+        let rowDetail = tableViewSections[indexPath.section]
+        let activities = rowDetail["activities"] as! Array<Activity>
+        if activities.count == 0 {
             
-            if (dataArray?.count)! > 0 {
-                let activity = dataArray?[indexPath.row]
-                cell.populateCellData(data: (activity as! Dictionary<String, Any>))
-            }
-            
+            let cell = tableView.dequeueReusableCell(withIdentifier: "noData", for: indexPath)
+            cell.isUserInteractionEnabled = false
+            return cell
         }
-        else{
-            //cell.populateCellData(data: project )
+        else {
+            let cell = tableView.dequeueReusableCell(withIdentifier: kActivitiesTableViewCell, for: indexPath) as! ActivitiesTableViewCell
             
+            //Cell Data Setup
+            cell.backgroundColor = UIColor.clear
+            
+            cell.populateCellDataWithActivity(activity: (activities[indexPath.row]))
+            return cell
         }
         
-        cell.backgroundColor = UIColor.clear
-        return cell
+        
     }
 }
 
@@ -193,7 +253,16 @@ extension ActivitiesViewController : UITableViewDelegate{
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
-        Study.updateCurrentActivity(activity:(Study.currentStudy?.activities[indexPath.row])!)
+        
+        let rowDetail = tableViewSections[indexPath.section]
+        let activities = rowDetail["activities"] as! Array<Activity>
+        
+        //update activity status
+        //let activity = activities[indexPath.row]
+        //let status = User.currentUser.updateActivityStatus(studyId: activity.studyId!, activityId: activity.actvityId!, status: .inProgress)
+        //UserServices().updateUserActivityParticipatedStatus(activityStatus: status, delegate: self)
+        
+        Study.updateCurrentActivity(activity:activities[indexPath.row])
         
         //Following to be commented
         self.createActivity()
@@ -207,20 +276,17 @@ extension ActivitiesViewController : UITableViewDelegate{
 extension ActivitiesViewController:NMWebServiceDelegate {
     func startedRequest(_ manager: NetworkManager, requestName: NSString) {
         Logger.sharedInstance.info("requestname : \(requestName)")
-        //self.addProgressIndicator()
+        self.addProgressIndicator()
     }
     func finishedRequest(_ manager: NetworkManager, requestName: NSString, response: AnyObject?) {
         Logger.sharedInstance.info("requestname : \(requestName)")
         
-        //self.removeProgressIndicator()
+        self.removeProgressIndicator()
         
         if requestName as String == WCPMethods.activityList.method.methodName {
-            
-            if Utilities.isValidObject(someObject: response?[kActivities] as AnyObject){
-                dataArray?.addObjects(from: response?[kActivities] as! [Any])
-            }
-            
-            self.tableView?.reloadData()
+                       
+            //self.tableView?.reloadData()
+            self.handleActivityListResponse()
             
         }
         else if requestName as String == WCPMethods.activity.method.methodName {
@@ -231,7 +297,7 @@ extension ActivitiesViewController:NMWebServiceDelegate {
     }
     func failedRequest(_ manager: NetworkManager, requestName: NSString, error: NSError) {
         Logger.sharedInstance.info("requestname : \(requestName)")
-        //self.removeProgressIndicator()
+        self.removeProgressIndicator()
         
         
         
@@ -300,8 +366,10 @@ extension ActivitiesViewController:ORKTaskViewControllerDelegate{
             }
             else{
                 
+                //Explain
                 if (ActivityBuilder.currentActivityBuilder.actvityResult?.result?.count)! < (taskViewController.result.results?.count)!{
                     
+                    //Explain
                     let orkStepResult:ORKStepResult? = taskViewController.result.results?[(taskViewController.result.results?.count)! - 2] as! ORKStepResult?
                     let activityStepResult:ActivityStepResult? = ActivityStepResult()
                     
@@ -316,6 +384,8 @@ extension ActivitiesViewController:ORKTaskViewControllerDelegate{
                     }
                     
                     ActivityBuilder.currentActivityBuilder.actvityResult?.result?.append(activityStepResult!)
+                    
+                    //save result in db
                     
                 }
             }

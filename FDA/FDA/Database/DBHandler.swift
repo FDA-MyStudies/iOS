@@ -197,4 +197,59 @@ class DBHandler: NSObject {
         
     }
     
+    
+     //MARK:Activity
+    class func saveActivities(activityies:Array<Activity>){
+        
+        
+        var dbActivities:Array<DBActivity> = []
+        for activity in activityies {
+            
+            let dbActivity = DBActivity()
+            dbActivity.studyId = activity.studyId
+            dbActivity.actvityId = activity.actvityId
+            dbActivity.type = activity.type?.rawValue
+            dbActivity.name = activity.name
+            dbActivity.startDate = activity.startDate
+            dbActivity.endDate = activity.endDate
+            
+            dbActivities.append(dbActivity)
+           
+        }
+        
+        let realm = try! Realm()
+        print("DBPath : \(realm.configuration.fileURL)")
+        try! realm.write({
+            realm.add(dbActivities, update: true)
+            
+        })
+    }
+    
+    
+    class func loadActivityListFromDatabase(studyId:String,completionHandler:@escaping (Array<Activity>) -> ()){
+        
+        
+        let realm = try! Realm()
+        let dbActivities = realm.objects(DBActivity.self).filter("studyId == %@",studyId)
+        
+        var activities:Array<Activity> = []
+        for dbActivity in dbActivities {
+            
+            let activity = Activity()
+            activity.actvityId  = dbActivity.actvityId
+            activity.studyId    = dbActivity.studyId
+            activity.name       = dbActivity.name
+            activity.startDate  = dbActivity.startDate
+            activity.endDate    = dbActivity.endDate
+            activity.type       = ActivityType(rawValue:dbActivity.type!)
+            
+            activities.append(activity)
+            
+        }
+        
+        completionHandler(activities)
+        
+    }
+
+    
 }

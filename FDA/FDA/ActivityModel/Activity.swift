@@ -81,7 +81,7 @@ class Activity{
     
     
     var frequencyRuns:Array<Dictionary<String, Any>>?
-    var frequencyType:Frequency
+    var frequencyType:Frequency = .One_Time
     
     var result:ActivityResult?
     
@@ -124,11 +124,13 @@ class Activity{
     
     //MARK:Initializer Methods
     
+    init(studyId:String,infoDict:Dictionary<String,Any>) {
+
     
-    
-    func initWithStudyActivityList(infoDict:Dictionary<String, Any>) {
+    //func initWithStudyActivityList(infoDict:Dictionary<String, Any>) {
         // initializer for basic data from StudyActivitylist
         
+        self.studyId = studyId
         
         //Need to reCheck with actual dictionary when passed
         if Utilities.isValidObject(someObject: infoDict as AnyObject?){
@@ -150,11 +152,11 @@ class Activity{
             }
             
             if Utilities.isValidValue(someObject: infoDict[kActivityStartTime] as AnyObject ){
-                // self.startDate =  Utilities.getDateFromString(dateString: (infoDict[kActivityStartTime] as! String?)!)
+                 self.startDate =  Utilities.getDateFromString(dateString: (infoDict[kActivityStartTime] as! String?)!)
             }
             
             if Utilities.isValidValue(someObject: infoDict[kActivityEndTime] as AnyObject ){
-                //self.endDate =  Utilities.getDateFromString(dateString: (infoDict[kActivityEndTime] as! String?)!)
+                self.endDate =  Utilities.getDateFromString(dateString: (infoDict[kActivityEndTime] as! String?)!)
             }
             
             if Utilities.isValidObject(someObject: infoDict[kActivityFrequency] as AnyObject?){

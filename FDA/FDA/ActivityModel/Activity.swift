@@ -75,12 +75,12 @@ class Activity{
     var randomization:Bool?
     
     var schedule:Schedule?
-    var steps:Array<Dictionary<String,Any>>?
-    var orkSteps:Array<ORKStep>?
-    var activitySteps:Array<ActivityStep>?
+    var steps:Array<Dictionary<String,Any>>? = []
+    var orkSteps:Array<ORKStep>? = []
+    var activitySteps:Array<ActivityStep>? = []
     
     
-    var frequencyRuns:Array<Dictionary<String, Any>>?
+    var frequencyRuns:Array<Dictionary<String, Any>>? = []
     var frequencyType:Frequency = .One_Time
     
     var result:ActivityResult?

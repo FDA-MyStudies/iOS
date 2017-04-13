@@ -497,6 +497,7 @@ extension StudyHomeViewController:ORKTaskViewControllerDelegate{
             }
             else{
                 
+                /*
                 if (activityBuilder?.actvityResult?.result?.count)! < (taskViewController.result.results?.count)!{
                     
                     let orkStepResult:ORKStepResult? = taskViewController.result.results?[(taskViewController.result.results?.count)! - 2] as! ORKStepResult?
@@ -506,6 +507,7 @@ extension StudyHomeViewController:ORKTaskViewControllerDelegate{
                     activityBuilder?.actvityResult?.result?.append(activityStepResult!)
                     
                 }
+                */
             }
         }
     }

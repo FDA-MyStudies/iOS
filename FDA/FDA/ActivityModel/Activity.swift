@@ -86,6 +86,10 @@ class Activity{
     var result:ActivityResult?
 
     var restortionData:Data?
+    var totalRuns = 0
+    var currentRunId = 1
+    var compeltedRuns = 0
+    var incompletedRuns = 0
     var activityRuns:Array<ActivityRun>! = []
     
     init() {

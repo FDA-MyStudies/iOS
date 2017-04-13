@@ -19,6 +19,7 @@ class ActivitiesTableViewCell: UITableViewCell {
     @IBOutlet var labelHeading : UILabel?
     @IBOutlet var labelTime : UILabel?
     @IBOutlet var labelStatus : UILabel?
+    @IBOutlet var labelRunStatus : UILabel?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -37,11 +38,16 @@ class ActivitiesTableViewCell: UITableViewCell {
         self.labelDays?.text = activity.frequencyType.rawValue
         self.setUserStatusForActivity(activity: activity)
         
-        if activity.activityRuns.count == 0 {
+        if activity.totalRuns == 0 {
             let schedule = Schedule()
             schedule.frequency = activity.frequencyType
+            schedule.startTime = activity.startDate
+            schedule.endTime = activity.endDate
+            schedule.activity = activity
             schedule.setActivityRun()
         }
+        
+        self.labelRunStatus?.text = "Run: " + String(activity.currentRunId) + "/" + String(activity.totalRuns) + ", " + String(activity.compeltedRuns) + "done" + ", " + String(activity.incompletedRuns) + "missed"
         
     }
     

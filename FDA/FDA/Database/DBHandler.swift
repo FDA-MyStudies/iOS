@@ -260,12 +260,60 @@ class DBHandler: NSObject {
             activity.endDate    = dbActivity.endDate
             activity.type       = ActivityType(rawValue:dbActivity.type!)
             activity.restortionData = dbActivity.restortionData
+            activity.totalRuns = dbActivity.activityRuns.count
+            
+            let resultComplete =  dbActivity.activityRuns.filter("isCompleted == %@",true)
+            activity.compeltedRuns = resultComplete.count
+            let resultInComplete =  dbActivity.activityRuns.filter("isCompleted == %@",false)
+            activity.incompletedRuns = resultInComplete.count
+            //print("completed \(result.count)")
+            
+//            if dbActivity.activityRuns.count > 0 {
+//                var activityRuns:Array<ActivityRun> = []
+//                for dbRun in dbActivity.activityRuns{
+//                    let run = ActivityRun
+//                }
+//            }
+            
             
             activities.append(activity)
             
         }
         
         completionHandler(activities)
+        
+    }
+    
+    class func saveActivityRuns(activityId:String,studyId:String,runs:Array<ActivityRun>){
+        
+        let realm = try! Realm()
+        let dbActivities = realm.objects(DBActivity.self).filter("studyId == %@ && actvityId == %@",studyId,activityId)
+        let dbActivity = dbActivities.last
+        
+        //save overview
+        let dbActivityRuns = List<DBActivityRun>()
+        for sectionIndex in 0...(runs.count-1) {
+            
+            let activityRun = runs[sectionIndex]
+            let dbActivityRun = DBActivityRun()
+            dbActivityRun.startDate = activityRun.startDate
+            dbActivityRun.endDate = activityRun.endDate
+            dbActivityRun.activityId = activityId
+            dbActivityRun.studyId = studyId
+            dbActivityRun.runId = activityRun.runId
+            dbActivityRun.isCompleted = activityRun.isCompleted
+            
+            dbActivityRuns.append(dbActivityRun)
+        }
+        debugPrint("DBPath : \(realm.configuration.fileURL)")
+        try! realm.write({
+            
+            realm.add(dbActivityRuns)
+            dbActivity?.activityRuns.append(objectsIn: dbActivityRuns)
+            //dbStudy?.websiteLink = overview.websiteLink
+            
+            
+        })
         
     }
 

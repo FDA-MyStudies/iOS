@@ -32,6 +32,7 @@ class Schedule{
     var endTime:Date!
     var lastRunTime:Date? = nil
     var nextRunTime:Date!
+    weak var activity:Activity!
     var activityRuns:Array<ActivityRun>! = []
     var dailyFrequencyTimings = [["start":"10:00","end":"12:59"],
                                  ["start":"13:00","end":"15:59"]]
@@ -93,7 +94,8 @@ class Schedule{
     func setActivityRun(){
         
         switch self.frequency {
-        case Frequency.One_Time: break
+        case Frequency.One_Time:
+            self.setDailyRuns()
         case Frequency.Daily:
             self.setDailyRuns()
         case Frequency.Weekly:
@@ -131,7 +133,9 @@ class Schedule{
             
            // print("start date \(runStartDate!) , end date \(runEndDate!)")
         }
+        let study = Study.currentStudy
         
+        DBHandler.saveActivityRuns(activityId: (activity.actvityId)!, studyId: (study?.studyId)!, runs: activityRuns)
         
     }
     

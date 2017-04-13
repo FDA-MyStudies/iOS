@@ -16,7 +16,7 @@ let kActionSheetDoneButtonTitle = "Done"
 let kActionSheetCancelButtonTitle = "Cancel"
 
 let kChangePasswordSegueIdentifier = "changePasswordSegue"
-let kErrorTitle = "Error"
+let kErrorTitle = ""
 let kProfileAlertTitleText = "Profile"
 let kProfileAlertUpdatedText = "Profile updated Successfully."
 
@@ -235,9 +235,16 @@ class ProfileViewController: UIViewController {
     func handleDeleteAccountResponse(){
         // fdaSlideMenuController()?.navigateToHomeAfterSingout()
         
-        let leftController = slideMenuController()?.leftViewController as! LeftMenuViewController
-        leftController.changeViewController(.studyList)
-        leftController.createLeftmenuItems()
+        
+        UIUtilities.showAlertMessageWithActionHandler(NSLocalizedString(kTitleMessage, comment: ""), message: NSLocalizedString(kMessageAccountDeletedSuccess, comment: ""), buttonTitle: NSLocalizedString(kTitleOk, comment: ""), viewControllerUsed: self) {
+            
+            let leftController = self.slideMenuController()?.leftViewController as! LeftMenuViewController
+            leftController.changeViewController(.studyList)
+            leftController.createLeftmenuItems()
+            
+        }
+        
+        
         
     }
     

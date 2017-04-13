@@ -517,14 +517,15 @@ class TermsAndPolicy {
         if Utilities.isValidObject(someObject: dict as AnyObject) {
             
             if Utilities.isValidValue(someObject: dict[kTerms] as AnyObject?)  {
-                self.termsURL = dict[kTerms] as! String?
+                
+                self.termsURL = (dict[kTerms] as! String?)?.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
             }
             else{
                  self.termsURL = ""
             }
             
             if Utilities.isValidValue(someObject: dict[kPolicy] as AnyObject?) {
-                 self.policyURL = dict[kPolicy] as! String?
+                 self.policyURL = (dict[kPolicy] as! String?)?.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
             }
             else{
                 self.policyURL = ""

@@ -513,7 +513,7 @@ extension SignUpViewController:NMWebServiceDelegate {
     func failedRequest(_ manager: NetworkManager, requestName: NSString, error: NSError) {
         Logger.sharedInstance.info("requestname : \(requestName)")
         self.removeProgressIndicator()
-        UIUtilities.showAlertWithTitleAndMessage(title:NSLocalizedString("Error", comment: "") as NSString, message: error.localizedDescription as NSString)
+        UIUtilities.showAlertWithTitleAndMessage(title:NSLocalizedString(kErrorTitle, comment: "") as NSString, message: error.localizedDescription as NSString)
     }
 }
 

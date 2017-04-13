@@ -32,6 +32,7 @@ let kTitleDeleteAccount = "Delete Account"
 let kRegistrationInfoMessage = "Registration (or sign up) for the app  is requested only to provide you with a seamless experience of using the app. Your registration information does not become part of the data collected for any study(ies) housed in the app. Each study has its own consent process and your data for the study will not be collected without you providing your informed consent prior to joining the study."
 
 let kDeleteAccountConfirmationMessage = "Are you sure you wish to permanently delete your FDA Health Studies Gateway app account?  You will need to register again if you wish to join a study."
+let kMessageAccountDeletedSuccess = "Account has been deleted"
 
 
 //MARK: Signin Constants
@@ -79,6 +80,7 @@ let kMessageAgreeToTermsAndConditions = "Please agree to terms and conditions."
 
 let kMessageNewPasswordBlank = "Please enter your new password."
 let kMessageValidateChangePassword = "New password and old password are same."
+
 
 //MARK: ChangePassword Constants
 let kChangePasswordTitleText = "CHANGE PASSWORD"

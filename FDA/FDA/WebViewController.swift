@@ -14,7 +14,7 @@ class WebViewController : UIViewController{
     @IBOutlet var webView : UIWebView?
     var activityIndicator:UIActivityIndicatorView!
     var requestLink:String?
-
+    
     var htmlString: String?
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,7 +25,7 @@ class WebViewController : UIViewController{
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-       
+        
         
         //Used to add a loader
         activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: .gray)
@@ -35,7 +35,7 @@ class WebViewController : UIViewController{
         
         
         
-        if self.requestLink != nil {
+        if self.requestLink != nil && (self.requestLink?.characters.count)! > 0 {
             let url = URL.init(string:self.requestLink!)
             let urlRequest = URLRequest.init(url: url!)
             
@@ -46,7 +46,7 @@ class WebViewController : UIViewController{
             
             webView?.loadHTMLString(self.htmlString!, baseURL: nil)
             
- 
+            
         }
         else{
             //VisitWebsite
@@ -54,9 +54,9 @@ class WebViewController : UIViewController{
             self.activityIndicator.stopAnimating()
             self.activityIndicator.removeFromSuperview()
             
-           
+            
         }
-    
+        
         webView?.delegate = self
         
         UIApplication.shared.statusBarStyle = .default
@@ -85,17 +85,17 @@ extension WebViewController:UIWebViewDelegate{
         
         let buttonTitleOK = NSLocalizedString("OK", comment: "")
         let alert = UIAlertController(title:NSLocalizedString(kTitleError, comment: ""),message:error.localizedDescription,preferredStyle: UIAlertControllerStyle.alert)
-      
+        
         alert.addAction(UIAlertAction.init(title:buttonTitleOK, style: .default, handler: { (action) in
             
             self.dismiss(animated: true, completion: nil)
             
         }))
         
-      
+        
         self.present(alert, animated: true, completion: nil)
         
-       
+        
     }
 }
 

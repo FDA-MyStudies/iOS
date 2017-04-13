@@ -97,12 +97,6 @@ class EligibilityBuilder{
                 eligibilityStep?.type = "TOKEN"
                 stepsArray?.append(eligibilityStep!)
                 
-                let eligibilityCompletionStep = ORKInstructionStep(identifier: "VerifiedScreen")
-                eligibilityCompletionStep.text = "Your ID has been validated. You are eligible to join the Study.\nPlease click Continue to proceed to the Consent section."
-                
-                eligibilityCompletionStep.title = "Validated!"
-                eligibilityCompletionStep.image =  #imageLiteral(resourceName: "successBlueBig")
-                stepsArray?.append(eligibilityCompletionStep)
             case .test:
                 
                 let questionStep:ActivityQuestionStep? = ActivityQuestionStep()
@@ -119,6 +113,17 @@ class EligibilityBuilder{
             }
             }
             if (stepsArray?.count)! > 0 {
+                
+                
+                let eligibilityCompletionStep = ORKInstructionStep(identifier: "VerifiedScreen")
+                eligibilityCompletionStep.text = "Your ID has been validated. You are eligible to join the Study.\nPlease click Continue to proceed to the Consent section."
+                
+                eligibilityCompletionStep.title = "Validated!"
+                eligibilityCompletionStep.image =  #imageLiteral(resourceName: "successBlueBig")
+                stepsArray?.append(eligibilityCompletionStep)
+
+                
+                
                 return stepsArray!
             }
             else{

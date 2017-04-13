@@ -36,13 +36,14 @@ class DBActivity: Object {
     //dynamic var result:ActivityResult?
     
     dynamic var restortionData:Data?
+    var activityRuns = List<DBActivityRun>()
     
     override static func primaryKey() -> String? {
         return "actvityId"
     }
     
 }
-class DBActivityRun {
+class DBActivityRun: Object {
     
    dynamic  var startDate:Date!
    dynamic  var endDate:Date!

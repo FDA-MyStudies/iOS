@@ -93,7 +93,7 @@ class ActivitiesViewController : UIViewController{
         
         let filePath  = Bundle.main.path(forResource: "Acivity_Question", ofType: "json")
         
-        // let filePath  = Bundle.main.path(forResource: "FetalKickTest", ofType: "json")
+        //let filePath  = Bundle.main.path(forResource: "FetalKickTest", ofType: "json")
         
         let data = NSData(contentsOfFile: filePath!)
         do {
@@ -392,7 +392,16 @@ extension ActivitiesViewController:ORKTaskViewControllerDelegate{
             if reason == ORKTaskViewControllerFinishReason.completed{
                 ActivityBuilder.currentActivityBuilder.actvityResult?.initWithORKTaskResult(taskResult: taskViewController.result)
                 print("\(ActivityBuilder.currentActivityBuilder.actvityResult?.getResultDictionary())")
-
+                
+               
+                Study.currentActivity?.userStatus = .completed
+                
+                //To be Uncommented
+                
+                //let status = User.currentUser.updateActivityStatus(studyId: activity.studyId!, activityId: activity.actvityId!, status: .inProgress)
+                //UserServices().updateUserActivityParticipatedStatus(activityStatus: status, delegate: self)
+                
+                
             }
             
         }

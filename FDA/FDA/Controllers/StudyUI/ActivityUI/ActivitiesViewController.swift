@@ -38,8 +38,20 @@ class ActivitiesViewController : UIViewController{
         self.navigationItem.title = NSLocalizedString("STUDY ACTIVITIES", comment: "")
         self.tableView?.sectionHeaderHeight = 30
         
+        
+        
         if (Study.currentStudy?.studyId) != nil {
-            WCPServices().getStudyActivityList(studyId: (Study.currentStudy?.studyId)!, delegate: self)
+            
+            DBHandler.loadActivityListFromDatabase(studyId: (Study.currentStudy?.studyId)!) { (activities) in
+                if activities.count > 0 {
+                    Study.currentStudy?.activities = activities
+                }
+                else {
+                     WCPServices().getStudyActivityList(studyId: (Study.currentStudy?.studyId)!, delegate: self)
+                }
+            }
+
+           
         }
         
     }
@@ -389,6 +401,10 @@ extension ActivitiesViewController:ORKTaskViewControllerDelegate{
                 activityBuilder?.actvityResult?.result?.removeLast()
             }
             else{
+                
+                let study = Study.currentStudy
+                let activity = Study.currentActivity
+                DBHandler.updateActivityRestortionDataFor(activityId:(activity?.actvityId)!, studyId: (study?.studyId)!, restortionData: taskViewController.restorationData!)
                 
                 //Explain
                 if (ActivityBuilder.currentActivityBuilder.actvityResult?.result?.count)! < (taskViewController.result.results?.count)!{

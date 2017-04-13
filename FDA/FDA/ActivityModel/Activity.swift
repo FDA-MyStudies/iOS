@@ -219,12 +219,12 @@ class Activity{
         // method to set info part of activity from ActivityMetaData
         
         if Utilities.isValidObject(someObject: infoDict as AnyObject?){
-            if Utilities.isValidValue(someObject: infoDict[kActivityStudyId] as AnyObject ){
-                self.studyId =   infoDict[kActivityStudyId] as? String
-            }
-            if Utilities.isValidValue(someObject: infoDict[kActivityId] as AnyObject ){
-                self.actvityId =   infoDict[kActivityId] as? String
-            }
+//            if Utilities.isValidValue(someObject: infoDict[kActivityStudyId] as AnyObject ){
+//                self.studyId =   infoDict[kActivityStudyId] as? String
+//            }
+//            if Utilities.isValidValue(someObject: infoDict[kActivityId] as AnyObject ){
+//                self.actvityId =   infoDict[kActivityId] as? String
+//            }
             
             if Utilities.isValidValue(someObject: infoDict[kActivityName] as AnyObject ){
                 self.name =   infoDict[kActivityName] as? String

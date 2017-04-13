@@ -155,6 +155,11 @@ class ActivityBuilder {
                      else{
                      // ordered
                      */
+                    
+                    
+                   // let completionStep = ORKCompletionStep(identifier: "CompletionStep")
+                    //completionStep.title
+                    
                     task =  ORKOrderedTask(identifier: (activity?.actvityId!)!, steps: orkStepArray)
                     
                 

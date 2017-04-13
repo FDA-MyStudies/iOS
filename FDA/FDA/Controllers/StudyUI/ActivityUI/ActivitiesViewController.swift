@@ -106,10 +106,30 @@ class ActivitiesViewController : UIViewController{
         
         let task:ORKTask?
         let taskViewController:ORKTaskViewController?
-        task = ActivityBuilder.currentActivityBuilder.createTask()
-        taskViewController = ORKTaskViewController(task:task, taskRun: nil)
+        
+         task = ActivityBuilder.currentActivityBuilder.createTask()
+        
+        
+        
+        if UserDefaults.standard.dictionaryRepresentation().keys.contains("RESTORED-RESULT"){
+            let restoredData = UserDefaults.standard.value(forKey:"RESTORED-RESULT") as! Data
+            
+            let result:ORKResult?
+            taskViewController = ORKTaskViewController(task: task, restorationData: restoredData, delegate: self)
+        }
+        else{
+    
+         taskViewController = ORKTaskViewController(task:task, taskRun: nil)
+             taskViewController?.outputDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+        }
+        
+       
+        
+        
+        
+        
         taskViewController?.delegate = self
-        taskViewController?.outputDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+       //
         
         UIApplication.shared.statusBarStyle = .default
         
@@ -121,6 +141,9 @@ class ActivitiesViewController : UIViewController{
     func getActivityAvailabilityStatus(activity:Activity) -> ActivityAvailabilityStatus {
         
         let todayDate = Date()
+        
+        
+        if activity.startDate != nil && activity.endDate != nil {
         
         let startDateResult = (activity.startDate?.compare(todayDate))! as ComparisonResult
         let endDateResult = (activity.endDate?.compare(todayDate))! as ComparisonResult
@@ -136,6 +159,7 @@ class ActivitiesViewController : UIViewController{
         else if endDateResult == .orderedAscending {
             print("past")
             return .past
+        }
         }
         return .past
     }
@@ -374,7 +398,10 @@ extension ActivitiesViewController:ORKTaskViewControllerDelegate{
                     let activityStepResult:ActivityStepResult? = ActivityStepResult()
                     
                    
+                     UserDefaults.standard.set(taskViewController.restorationData, forKey: "RESTORED-RESULT")
+                     UserDefaults.standard.synchronize()
                     
+           
                     
                     activityStepResult?.initWithORKStepResult(stepResult: orkStepResult! as ORKStepResult , activityType:(ActivityBuilder.currentActivityBuilder.actvityResult?.type)!)
                     

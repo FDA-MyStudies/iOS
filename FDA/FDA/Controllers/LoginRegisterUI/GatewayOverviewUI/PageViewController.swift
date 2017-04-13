@@ -238,27 +238,27 @@ extension PageViewController: UIPageViewControllerDelegate {
         
       //  print("transition \(finished) \(previousViewControllers)")
 
-//        if completed {
-//            //print("transitionCompleted \(previousViewControllers)")
-//            
-//            self.notifyTutorialDelegateOfNewIndex(prevViewController: nil)
-//        }
-//        else {
-//            self.notifyTutorialDelegateOfNewIndex(prevViewController: previousViewControllers.last!)
-//        }
+        if completed {
+            //print("transitionCompleted \(previousViewControllers)")
+            
+            self.notifyTutorialDelegateOfNewIndex(prevViewController: nil)
+        }
+        else {
+            self.notifyTutorialDelegateOfNewIndex(prevViewController: previousViewControllers.last!)
+        }
         
     }
 }
 extension PageViewController: UIScrollViewDelegate{
    
     func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
-       
+       print(currentIndex)
         
         pageViewDelegate?.pageViewController(pageViewController: self, didUpdatePageIndex: currentIndex)
     }
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-        
-        pageViewDelegate?.pageViewController(pageViewController: self, didUpdatePageIndex: currentIndex)
+        print(currentIndex)
+        //pageViewDelegate?.pageViewController(pageViewController: self, didUpdatePageIndex: currentIndex)
     }
 }
 

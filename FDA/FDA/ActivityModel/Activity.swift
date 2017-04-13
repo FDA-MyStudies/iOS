@@ -84,8 +84,9 @@ class Activity{
     var frequencyType:Frequency = .One_Time
     
     var result:ActivityResult?
-    
+
     var restortionData:Data?
+    var activityRuns:Array<ActivityRun>! = []
     
     init() {
         //Default Initializer

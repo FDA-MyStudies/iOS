@@ -30,7 +30,7 @@ class EligibilityStepViewController: ORKStepViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        buttonSubmit?.layer.borderColor = UIColor.blue.cgColor
+        buttonSubmit?.layer.borderColor =   UIColor.blue.cgColor
         
         if let step = step as? EligibilityStep {
             step.type = "token"

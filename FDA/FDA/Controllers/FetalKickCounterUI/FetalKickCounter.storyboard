@@ -226,6 +226,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="buttonSubmit" destination="Qzc-1W-fgy" id="OY9-s0-zVq"/>
                         <outlet property="tokenTextField" destination="1Zu-1M-7Gw" id="zD1-WJ-N4b"/>
                     </connections>
                 </viewController>

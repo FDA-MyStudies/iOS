@@ -227,15 +227,16 @@ class DBHandler: NSObject {
     }
     
     
-    class func updateActivityRestortionDataFor(activityId:String,studyId:String,restortionData:Data){
+    class func updateActivityRestortionDataFor(activityId:String,studyId:String,restortionData:Data?){
         
         let realm = try! Realm()
-        let dbActivities = realm.objects(DBActivity.self).filter("studyId == %@ && activityId == %@",studyId,activityId)
+        let dbActivities = realm.objects(DBActivity.self).filter("studyId == %@ && actvityId == %@",studyId,activityId)
         let dbActivity = dbActivities.last
         
+        print("DBPath : \(realm.configuration.fileURL)")
         try! realm.write({
             dbActivity?.restortionData = restortionData
-            
+            realm.add(dbActivity!, update: true)
         })
         
         

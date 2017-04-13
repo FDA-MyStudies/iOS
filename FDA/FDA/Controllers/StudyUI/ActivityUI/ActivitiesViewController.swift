@@ -123,8 +123,8 @@ class ActivitiesViewController : UIViewController{
         
         
         
-        if UserDefaults.standard.dictionaryRepresentation().keys.contains("RESTORED-RESULT"){
-            let restoredData = UserDefaults.standard.value(forKey:"RESTORED-RESULT") as! Data
+        if Study.currentActivity?.restortionData != nil {
+            let restoredData = Study.currentActivity?.restortionData 
             
             let result:ORKResult?
             taskViewController = ORKTaskViewController(task: task, restorationData: restoredData, delegate: self)

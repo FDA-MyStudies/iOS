@@ -55,7 +55,7 @@ enum Frequency:String {
     case Daily = "Daily"
     case Weekly = "Weekly"
     case Monthly = "Monthly"
-    case Scheduled = "Manually Schedule"
+    case Scheduled = "Manually schedule"
     //case DailyFrequecy = "DailyFrequency"
 }
 

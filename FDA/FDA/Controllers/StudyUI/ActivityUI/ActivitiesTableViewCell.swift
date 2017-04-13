@@ -36,6 +36,13 @@ class ActivitiesTableViewCell: UITableViewCell {
         //self.labelTime?.text = (activity.startDate?.description)! + "-" + (activity.endDate?.description)!
         self.labelDays?.text = activity.frequencyType.rawValue
         self.setUserStatusForActivity(activity: activity)
+        
+        if activity.activityRuns.count == 0 {
+            let schedule = Schedule()
+            schedule.frequency = activity.frequencyType
+            schedule.setActivityRun()
+        }
+        
     }
     
     func setUserStatusForActivity(activity:Activity){

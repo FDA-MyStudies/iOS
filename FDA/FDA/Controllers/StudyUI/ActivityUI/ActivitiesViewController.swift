@@ -45,6 +45,7 @@ class ActivitiesViewController : UIViewController{
             DBHandler.loadActivityListFromDatabase(studyId: (Study.currentStudy?.studyId)!) { (activities) in
                 if activities.count > 0 {
                     Study.currentStudy?.activities = activities
+                    self.handleActivityListResponse()
                 }
                 else {
                      WCPServices().getStudyActivityList(studyId: (Study.currentStudy?.studyId)!, delegate: self)
@@ -364,6 +365,12 @@ extension ActivitiesViewController:ORKTaskViewControllerDelegate{
             taskResult = taskViewController.result
         case ORKTaskViewControllerFinishReason.discarded:
             print("discarded")
+            
+            let study = Study.currentStudy
+            let activity = Study.currentActivity
+            activity?.restortionData = nil
+            DBHandler.updateActivityRestortionDataFor(activityId:(activity?.actvityId)!, studyId: (study?.studyId)!, restortionData:nil)
+            
             taskResult = taskViewController.result
         case ORKTaskViewControllerFinishReason.saved:
             print("saved")

@@ -35,10 +35,23 @@ class DBActivity: Object {
     
     //dynamic var result:ActivityResult?
     
-     var restortionData:Data?
+    dynamic var restortionData:Data?
     
     override static func primaryKey() -> String? {
         return "actvityId"
     }
     
 }
+class DBActivityRun {
+    
+   dynamic  var startDate:Date!
+   dynamic  var endDate:Date!
+   dynamic  var complitionDate:Date!
+   dynamic  var runId:Int = 1
+   dynamic  var studyId:String!
+   dynamic  var activityId:String!
+   dynamic  var isCompleted:Bool = false
+    
+}
+
+

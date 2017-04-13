@@ -1438,6 +1438,12 @@
                                                         <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
                                                     </userDefinedRuntimeAttributes>
                                                 </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Run: 3/10, 4 done , 5 missed" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="awn-oW-cWh">
+                                                    <rect key="frame" x="218" y="26" width="142" height="13"/>
+                                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="11"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="XEW-cJ-D3D" firstAttribute="leading" secondItem="fx2-fg-lLI" secondAttribute="trailing" constant="10" id="0BG-SL-2QO"/>
@@ -1455,12 +1461,15 @@
                                                 <constraint firstAttribute="trailing" secondItem="XbX-KG-vXg" secondAttribute="trailing" constant="15" id="mIO-Jz-sTY"/>
                                                 <constraint firstItem="X8A-Rm-SyQ" firstAttribute="leading" secondItem="Yc6-Fr-m7h" secondAttribute="leading" constant="46" id="rvz-wk-lym"/>
                                                 <constraint firstAttribute="trailing" secondItem="bK6-Cz-ULl" secondAttribute="trailing" constant="17" id="vPc-UA-I6h"/>
+                                                <constraint firstItem="AfA-Oz-waF" firstAttribute="top" secondItem="awn-oW-cWh" secondAttribute="bottom" id="vRj-pI-Qw6"/>
+                                                <constraint firstAttribute="trailing" secondItem="awn-oW-cWh" secondAttribute="trailing" constant="15" id="xYo-Ce-mSL"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="imageIcon" destination="fx2-fg-lLI" id="ZzW-E9-ilU"/>
                                             <outlet property="labelDays" destination="XEW-cJ-D3D" id="UmO-49-48K"/>
                                             <outlet property="labelHeading" destination="AfA-Oz-waF" id="XB5-oA-OXj"/>
+                                            <outlet property="labelRunStatus" destination="awn-oW-cWh" id="SBz-u7-58R"/>
                                             <outlet property="labelStatus" destination="XbX-KG-vXg" id="Ne4-6C-Rbt"/>
                                             <outlet property="labelTime" destination="X8A-Rm-SyQ" id="bPp-hw-giW"/>
                                         </connections>

@@ -19,6 +19,7 @@ class ActivitiesTableViewCell: UITableViewCell {
     @IBOutlet var labelHeading : UILabel?
     @IBOutlet var labelTime : UILabel?
     @IBOutlet var labelStatus : UILabel?
+    @IBOutlet var labelRunStatus : UILabel?
     
     override func awakeFromNib() {
         super.awakeFromNib()

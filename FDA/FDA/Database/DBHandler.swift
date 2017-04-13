@@ -213,6 +213,7 @@ class DBHandler: NSObject {
             dbActivity.startDate = activity.startDate
             dbActivity.endDate = activity.endDate
             
+            
             dbActivities.append(dbActivity)
            
         }
@@ -223,6 +224,21 @@ class DBHandler: NSObject {
             realm.add(dbActivities, update: true)
             
         })
+    }
+    
+    
+    class func updateActivityRestortionDataFor(activityId:String,studyId:String,restortionData:Data){
+        
+        let realm = try! Realm()
+        let dbActivities = realm.objects(DBActivity.self).filter("studyId == %@ && activityId == %@",studyId,activityId)
+        let dbActivity = dbActivities.last
+        
+        try! realm.write({
+            dbActivity?.restortionData = restortionData
+            
+        })
+        
+        
     }
     
     
@@ -242,6 +258,7 @@ class DBHandler: NSObject {
             activity.startDate  = dbActivity.startDate
             activity.endDate    = dbActivity.endDate
             activity.type       = ActivityType(rawValue:dbActivity.type!)
+            activity.restortionData = dbActivity.restortionData
             
             activities.append(activity)
             

@@ -157,8 +157,11 @@ class ActivityBuilder {
                      */
                     
                     
-                   // let completionStep = ORKCompletionStep(identifier: "CompletionStep")
-                    //completionStep.title
+                    let completionStep = ORKCompletionStep(identifier: "CompletionStep")
+                    completionStep.title = "Task Completed"
+                    completionStep.image = #imageLiteral(resourceName: "successBlueBig")
+                    
+                    orkStepArray?.append(completionStep)
                     
                     task =  ORKOrderedTask(identifier: (activity?.actvityId!)!, steps: orkStepArray)
                     
@@ -264,7 +267,7 @@ class ActivityBuilder {
                 }
                 
             case .activeTask:
-                
+                /*
                 var stepDict = activity?.steps!.last
                 
                 if Utilities.isValidObject(someObject: stepDict as AnyObject?) && Utilities.isValidValue(someObject: stepDict?[kActivityStepType] as AnyObject ) {
@@ -284,9 +287,13 @@ class ActivityBuilder {
                     Logger.sharedInstance.debug("Activity:stepDict is null:\(stepDict)")
                     break;
                 }
+                
+                */
+                
+                
                 // case .questionnaireAndActiveTask:
                 
-                /*
+                
                  
                  for var stepDict in (activity?.steps!)! {
                  
@@ -345,7 +352,7 @@ class ActivityBuilder {
                  return nil
                  }
                  
-                 */
+                 
                 
             }
             

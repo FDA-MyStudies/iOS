@@ -379,15 +379,15 @@ extension StudyHomeViewController:NMWebServiceDelegate {
         Logger.sharedInstance.info("requestname : \(requestName)")
         
         if requestName as String == WCPMethods.consentDocument.method.methodName {
-            self.addProgressIndicator()
+            //self.addProgressIndicator()
         }
         
-        //self.addProgressIndicator()
+        self.addProgressIndicator()
     }
     func finishedRequest(_ manager: NetworkManager, requestName: NSString, response: AnyObject?) {
         Logger.sharedInstance.info("requestname : \(requestName)")
         
-        //self.removeProgressIndicator()
+        self.removeProgressIndicator()
         
         if requestName as String == WCPMethods.eligibilityConsent.method.methodName {
             self.createEligibilityConsentTask()
@@ -412,10 +412,10 @@ extension StudyHomeViewController:NMWebServiceDelegate {
     }
     func failedRequest(_ manager: NetworkManager, requestName: NSString, error: NSError) {
         Logger.sharedInstance.info("requestname : \(requestName)")
-        //self.removeProgressIndicator()
+        self.removeProgressIndicator()
         
         if requestName as String == WCPMethods.consentDocument.method.methodName {
-            self.removeProgressIndicator()
+            //self.removeProgressIndicator()
         }
         
         

@@ -39,16 +39,39 @@ class ActivitiesTableViewCell: UITableViewCell {
         self.setUserStatusForActivity(activity: activity)
         
         if activity.totalRuns == 0 {
-            let schedule = Schedule()
-            schedule.frequency = activity.frequencyType
-            schedule.startTime = activity.startDate
-            schedule.endTime = activity.endDate
-            schedule.activity = activity
-            schedule.setActivityRun()
+            Schedule().getRunsForActivity(activity: activity, handler: { (runs) in
+                if runs.count > 0 {
+                    
+                    let date = Date()
+                    
+                    let runsBeforeToday = runs.filter({$0.startDate <= date})
+                    let completedRuns = runs.filter({$0.isCompleted == true})
+                    let incompleteRuns = runsBeforeToday.count - completedRuns.count
+                    let run = runsBeforeToday.last
+                    
+                    activity.compeltedRuns = completedRuns.count
+                    activity.incompletedRuns = incompleteRuns
+                    activity.currentRunId = (run?.runId)!
+                    activity.totalRuns = runs.count
+                    
+                    self.updateUserRunStatus(activity: activity)
+                    
+                    DBHandler.saveActivityRuns(activityId: (activity.actvityId)!, studyId: (Study.currentStudy?.studyId)!, runs: runs)
+                }
+            })
+
         }
         
-        self.labelRunStatus?.text = "Run: " + String(activity.currentRunId) + "/" + String(activity.totalRuns) + ", " + String(activity.compeltedRuns) + "done" + ", " + String(activity.incompletedRuns) + "missed"
+        self.calculateActivityTimings(activity: activity)
         
+        self.updateUserRunStatus(activity: activity)
+       // self.labelRunStatus?.text = "Run: " + String(activity.currentRunId) + "/" + String(activity.totalRuns) + ", " + String(activity.compeltedRuns) + " done" + ", " + String(activity.incompletedRuns) + " missed"
+        
+    }
+    
+    func updateUserRunStatus(activity:Activity){
+        
+        self.labelRunStatus?.text = "Run: " + String(activity.currentRunId) + "/" + String(activity.totalRuns) + ", " + String(activity.compeltedRuns) + " done" + ", " + String(activity.incompletedRuns) + " missed"
     }
     
     func setUserStatusForActivity(activity:Activity){
@@ -94,70 +117,103 @@ class ActivitiesTableViewCell: UITableViewCell {
     }
     
     
-    
+    func calculateActivityTimings(activity:Activity){
+        
+        let startDate = activity.startDate
+        let endDate   = activity.endDate
+        let frequency = activity.frequencyType
+        
+        let activityStartTime = ActivitiesTableViewCell.timeFormatter.string(from: startDate!)
+        let startDateString = ActivitiesTableViewCell.oneTimeFormatter.string(from: startDate!)
+        let endDateString = ActivitiesTableViewCell.oneTimeFormatter.string(from: endDate!)
+        
+        
+        
+        //weekly
+        let weeklyStartTime = ActivitiesTableViewCell.weeklyformatter.string(from: startDate!)
+        print("weeklyStartTime: \(weeklyStartTime.replacingOccurrences(of: ",", with: "every"))")
+        
+        
+        //monthly
+        var monthlyStartTime = ActivitiesTableViewCell.monthlyformatter.string(from: startDate!)
+        monthlyStartTime = monthlyStartTime.replacingOccurrences(of: ",", with: "on")
+        monthlyStartTime = monthlyStartTime.replacingOccurrences(of: ":", with: "every month")
+        print("monthlyStartTime :\(monthlyStartTime))")
+        
+        switch frequency {
+        case .One_Time:
+            
+            labelTime?.text = startDateString + " - " + endDateString
+            print("\(activityStartTime), \(startDateString) to \(endDateString)")
+        case .Daily:
+            
+            let runStartTime =  ActivitiesTableViewCell.timeFormatter.string(from: startDate!)
+            let dailyStartDate =  ActivitiesTableViewCell.timeFormatter.string(from: startDate!)
+            let endDate = ActivitiesTableViewCell.formatter.string(from: endDate!)
+            labelTime?.text = runStartTime  +  dailyStartDate + " to " + endDate
+            
+        case .Weekly:
+            
+            var weeklyStartTime = ActivitiesTableViewCell.weeklyformatter.string(from: startDate!)
+            weeklyStartTime = weeklyStartTime.replacingOccurrences(of: ",", with: "every")
+            let endDate = ActivitiesTableViewCell.formatter.string(from: endDate!)
+            
+            labelTime?.text = weeklyStartTime + " to " + endDate
+            
+            
+        case .Monthly:
+            var monthlyStartTime = ActivitiesTableViewCell.monthlyformatter.string(from: startDate!)
+            monthlyStartTime = monthlyStartTime.replacingOccurrences(of: ",", with: "on")
+            monthlyStartTime = monthlyStartTime.replacingOccurrences(of: ":", with: "every month")
+            
+            let endDate = ActivitiesTableViewCell.formatter.string(from: endDate!)
+            
+            labelTime?.text = monthlyStartTime + " to " + endDate
 
-    func populateCellData(data: Dictionary<String, Any>){
+            
+        case .Scheduled:
+            labelTime?.text = startDateString + " - " + endDateString
         
-        let frequency:Dictionary<String,Any> = data[kActivityFrequency] as! Dictionary<String, Any>
-        
-        if Utilities.isValidObject(someObject: frequency as AnyObject?){
-            if Utilities.isValidValue(someObject: frequency[kActivityType] as AnyObject?){
-               self.labelDays?.text = frequency[kActivityType] as! String?
-            }
-            else{
-                self.labelDays?.text = "Everyday"
-            }
-        }
-        else{
             
         }
-        
-        if Utilities.isValidValue(someObject: data[kActivityTitle] as AnyObject?){
-            self.labelHeading?.text = data[kActivityTitle] as! String?
-        }
-        else{
-              self.labelHeading?.text = ""
-        }
-        
-        if Utilities.isValidValue(someObject: data[kActivityStartTime] as AnyObject?){
-            self.labelTime?.text = data[kActivityStartTime] as! String?
-        }
-        else{
-            self.labelTime?.text = ""
-        }
-
-        //Status Pending
-        self.labelStatus?.text = data["operation"] as? String
-        
-        if data["day"] as? String == "Weekely"{
-            self.imageIcon?.image = UIImage.init(named: "taskIcon")
-        }
-        
-        
-        //Temp
-        self.labelStatus?.isHidden = true
-        if data["operation"] as? String != ""{
-            self.labelStatus?.isHidden = false
-            
-            if data["operation"] as? String == "Resume"{
-                self.labelStatus?.backgroundColor = kYellowColor
-                self.labelStatus?.text = kResumeSpaces
-                
-            }else if data["operation"] as? String == "Start"{
-                self.labelStatus?.backgroundColor = kBlueColor
-                self.labelStatus?.text = kStartSpaces
-                
-            }else{
-                self.labelStatus?.backgroundColor = kGreenColor
-                self.labelStatus?.text = kCompletedSpaces
-                
-            }
-        }
-        
-        
-        //Need to change Temp
-        
         
     }
+    
+    private static let formatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "MMM dd YYYY"
+        formatter.timeZone = TimeZone.init(abbreviation:"GMT")
+        return formatter
+    }()
+    
+    private static let oneTimeFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "hha, MMM dd YYYY"
+        formatter.timeZone = TimeZone.init(abbreviation:"GMT")
+        return formatter
+    }()
+    
+    private static let weeklyformatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "hha , EEE MMM dd YYYY"
+        formatter.timeZone = TimeZone.init(abbreviation:"GMT")
+        return formatter
+    }()
+
+    private static let monthlyformatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "hha , dd : EEE MMM dd YYYY"
+        formatter.timeZone = TimeZone.init(abbreviation:"GMT")
+        return formatter
+    }()
+
+    private static let timeFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "hha"
+        formatter.timeZone = TimeZone.init(abbreviation:"GMT")
+        return formatter
+    }()
+
+    
     
 }

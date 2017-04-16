@@ -42,6 +42,8 @@ class ActivitiesViewController : UIViewController{
         
         if (Study.currentStudy?.studyId) != nil {
             
+            //WCPServices().getStudyActivityList(studyId: (Study.currentStudy?.studyId)!, delegate: self)
+            
             DBHandler.loadActivityListFromDatabase(studyId: (Study.currentStudy?.studyId)!) { (activities) in
                 if activities.count > 0 {
                     Study.currentStudy?.activities = activities
@@ -211,6 +213,25 @@ class ActivitiesViewController : UIViewController{
         self.tableView?.reloadData()
         
     }
+    
+    func updateActivityStatusToInProgress(){
+        
+        let activity = Study.currentActivity!
+        let status = User.currentUser.updateActivityStatus(studyId: activity.studyId!, activityId: activity.actvityId!, status: .inProgress)
+        UserServices().updateUserActivityParticipatedStatus(activityStatus: status, delegate: self)
+    }
+    
+    func updateActivityStatusToComplete(){
+        
+        let activity = Study.currentActivity!
+        let status = User.currentUser.updateActivityStatus(studyId: activity.studyId!, activityId: activity.actvityId!, status: .completed)
+        UserServices().updateUserActivityParticipatedStatus(activityStatus: status, delegate: self)
+    }
+    
+    func updateRunStatusToComplete(){
+        let activity = Study.currentActivity!
+        DBHandler.updateRunToComplete(runId: activity.currentRunId, activityId: activity.actvityId!, studyId: activity.studyId!)
+    }
 
 }
 
@@ -360,6 +381,7 @@ extension ActivitiesViewController:ORKTaskViewControllerDelegate{
         case ORKTaskViewControllerFinishReason.completed:
             print("completed")
             taskResult = taskViewController.result
+            self.updateRunStatusToComplete()
         case ORKTaskViewControllerFinishReason.failed:
             print("failed")
             taskResult = taskViewController.result

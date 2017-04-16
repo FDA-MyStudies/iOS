@@ -51,11 +51,11 @@ enum ActivityType:String{
 }
 
 enum Frequency:String {
-    case One_Time = "One Time"
+    case One_Time = "One time"
     case Daily = "Daily"
     case Weekly = "Weekly"
     case Monthly = "Monthly"
-    case Scheduled = "Manually schedule"
+    case Scheduled = "Manually Schedule"
     //case DailyFrequecy = "DailyFrequency"
 }
 

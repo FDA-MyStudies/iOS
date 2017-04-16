@@ -248,7 +248,7 @@ class DBHandler: NSObject {
         
         let realm = try! Realm()
         let dbActivities = realm.objects(DBActivity.self).filter("studyId == %@",studyId)
-        
+        let date = Date()
         var activities:Array<Activity> = []
         for dbActivity in dbActivities {
             
@@ -262,18 +262,18 @@ class DBHandler: NSObject {
             activity.restortionData = dbActivity.restortionData
             activity.totalRuns = dbActivity.activityRuns.count
             
-            let resultComplete =  dbActivity.activityRuns.filter("isCompleted == %@",true)
-            activity.compeltedRuns = resultComplete.count
-            let resultInComplete =  dbActivity.activityRuns.filter("isCompleted == %@",false)
-            activity.incompletedRuns = resultInComplete.count
-            //print("completed \(result.count)")
+            if activity.totalRuns != 0 {
+                
+                let runsBeforeToday = dbActivity.activityRuns.filter({$0.startDate <= date})
+                let completedRuns = dbActivity.activityRuns.filter({$0.isCompleted == true})
+                let incompleteRuns = runsBeforeToday.count - completedRuns.count
+                let run = runsBeforeToday.last
+                
+                activity.compeltedRuns = completedRuns.count
+                activity.incompletedRuns = incompleteRuns
+                activity.currentRunId = (run?.runId)!
+            }
             
-//            if dbActivity.activityRuns.count > 0 {
-//                var activityRuns:Array<ActivityRun> = []
-//                for dbRun in dbActivity.activityRuns{
-//                    let run = ActivityRun
-//                }
-//            }
             
             
             activities.append(activity)
@@ -312,6 +312,21 @@ class DBHandler: NSObject {
             dbActivity?.activityRuns.append(objectsIn: dbActivityRuns)
             //dbStudy?.websiteLink = overview.websiteLink
             
+            
+        })
+        
+    }
+    
+    class func updateRunToComplete(runId:Int,activityId:String,studyId:String){
+        
+        let realm = try! Realm()
+        let dbRuns = realm.objects(DBActivityRun.self).filter("studyId == %@ && activityId == %@ && runId == %d",studyId,activityId,runId)
+        let dbRun = dbRuns.last
+        
+        try! realm.write({
+            
+           dbRun?.isCompleted = true
+           //realm.add(dbRun!, update: true)
             
         })
         

@@ -41,6 +41,8 @@ class Schedule{
                             ["start":"2017-01-28 13:00:00","end":"2017-01-31 15:59:00"]]
     var currentRunId = 0
     
+    var completionHandler:((Array<ActivityRun>) -> ())? = nil
+    
     init(){
         
     }
@@ -90,6 +92,17 @@ class Schedule{
     }
     
    
+    func getRunsForActivity(activity:Activity,handler:@escaping (Array<ActivityRun>) -> ()){
+        
+        self.completionHandler = handler
+        self.frequency = activity.frequencyType
+        self.startTime = activity.startDate
+        self.endTime = activity.endDate
+        self.activity = activity
+        
+        self.setActivityRun()
+        
+    }
     
     func setActivityRun(){
         
@@ -103,8 +116,12 @@ class Schedule{
         case Frequency.Monthly:
             self.setMonthlyRuns()
         case Frequency.Scheduled:break
-        default: break
+        
             
+        }
+        
+        if self.completionHandler != nil {
+            self.completionHandler!(self.activityRuns)
         }
     }
     
@@ -133,9 +150,13 @@ class Schedule{
             
            // print("start date \(runStartDate!) , end date \(runEndDate!)")
         }
-        let study = Study.currentStudy
         
-        DBHandler.saveActivityRuns(activityId: (activity.actvityId)!, studyId: (study?.studyId)!, runs: activityRuns)
+        
+        
+        
+        //let study = Study.currentStudy
+        
+        //DBHandler.saveActivityRuns(activityId: (activity.actvityId)!, studyId: (study?.studyId)!, runs: activityRuns)
         
     }
     

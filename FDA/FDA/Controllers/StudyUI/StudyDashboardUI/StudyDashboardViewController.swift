@@ -19,6 +19,7 @@ class StudyDashboardViewController : UIViewController{
     
     @IBOutlet var tableView : UITableView?
     
+    
     var tableViewRowDetails = NSMutableArray()
     var todayActivitiesArray = NSMutableArray()
     var statisticsArray = NSMutableArray()

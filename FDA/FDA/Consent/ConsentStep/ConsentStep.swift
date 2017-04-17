@@ -46,16 +46,18 @@ enum ConsentStepSectionType:String{
             return 1;
         case .privacy:
             return 2;
-        case .timeCommitment:
+        case .dataUse :
             return 3;
-        case .studySurvey:
+        case .timeCommitment:
             return 4;
-        case .studyTasks:
+        case .studySurvey:
             return 5;
-        case .withdrawing:
+        case .studyTasks:
             return 6;
-        case .custom:
+        case .withdrawing:
             return 7;
+        case .custom:
+            return 8;
         default:
             return -1
         }
@@ -138,6 +140,7 @@ class ConsentSectionStep{
         let consentSection:ORKConsentSection!
         
         if self.visualStep == true{
+            
             consentSection = ORKConsentSection(type: ORKConsentSectionType(rawValue: consentType! )!)
         }
         else{

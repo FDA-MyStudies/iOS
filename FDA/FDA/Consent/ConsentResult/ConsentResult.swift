@@ -11,7 +11,7 @@ import ResearchKit
 
 class ConsentResult {
     
-   
+    
     var startTime:Date?
     var endTime:Date?
     
@@ -19,9 +19,12 @@ class ConsentResult {
     var consentDocument:ORKConsentDocument?
     var consentPdfData:Data?
     var result:Array<ActivityStepResult>?
+    
+    var token:String?
+    
     //MARK: Initializers
     init() {
-       
+        
         self.startTime = Date()
         self.endTime = Date()
         
@@ -29,6 +32,7 @@ class ConsentResult {
         
         self.consentDocument = ORKConsentDocument()
         self.consentPdfData = Data()
+        self.token = ""
     }
     
     func initWithORKTaskResult(taskResult:ORKTaskResult) {
@@ -37,18 +41,18 @@ class ConsentResult {
             if   ((stepResult as! ORKStepResult).results?.count)! > 0{
                 
                 if  let questionstepResult:ORKChoiceQuestionResult? = (stepResult as! ORKStepResult).results?[0] as? ORKChoiceQuestionResult?{
-                  
-                        if Utilities.isValidValue(someObject: questionstepResult?.choiceAnswers?[0] as AnyObject?){
-                            /* sharing choice result either 1 selected or 2 seleceted
-                            */
-
-                            
-                            
-                        }
-                        else{
-                         
-                        }
-            }
+                    
+                    if Utilities.isValidValue(someObject: questionstepResult?.choiceAnswers?[0] as AnyObject?){
+                        /* sharing choice result either 1 selected or 2 seleceted
+                         */
+                        
+                        
+                        
+                    }
+                    else{
+                        
+                    }
+                }
                 else if let signatureStepResult:ORKConsentSignatureResult? = (stepResult as! ORKStepResult).results?[0] as? ORKConsentSignatureResult?{
                     
                     signatureStepResult?.apply(to: self.consentDocument!)
@@ -58,8 +62,8 @@ class ConsentResult {
                         
                         let dir = FileManager.getStorageDirectory(type: .study)
                         
-                        let fullPath =  dir + "/" + "Consent" +  "_" + "\((Study.currentStudy?.studyId)!)" + ".pdf"
-                    
+                        let fullPath = "file://" + dir + "/" + "Consent" +  "_" + "\((Study.currentStudy?.studyId)!)" + ".pdf"
+                        
                         self.consentPdfData = Data()
                         self.consentPdfData = data?.base64EncodedData()
                         
@@ -68,7 +72,7 @@ class ConsentResult {
                             
                             if FileManager.default.fileExists(atPath: fullPath){
                                 
-                               try FileManager.default.removeItem(atPath: fullPath)
+                                try FileManager.default.removeItem(atPath: fullPath)
                                 
                             }
                             FileManager.default.createFile(atPath:fullPath , contents: data, attributes: [:])
@@ -76,17 +80,21 @@ class ConsentResult {
                             try data?.write(to: URL(string:fullPath)! , options: .noFileProtection)
                             
                             // writing to disk
-                        
-                            } catch let error as NSError {
-                                print("error writing to url \(fullPath)")
-                                print(error.localizedDescription)
-                            }
+                            
+                        } catch let error as NSError {
+                            print("error writing to url \(fullPath)")
+                            print(error.localizedDescription)
+                        }
                     })
                     
                 }
-            
+                else if let tokenStepResult:EligibilityTokenTaskResult? = (stepResult as! ORKStepResult).results?[0] as? EligibilityTokenTaskResult?{
+                    
+                    self.token = tokenStepResult?.enrollmentToken
+                }
+                
+            }
         }
-    }
     }
     
     func setConsentDocument(consentDocument:ORKConsentDocument)  {
@@ -134,8 +142,8 @@ class ConsentResult {
     }
     
     
-   
-
+    
+    
     //MARK: Setter & getter methods for ActivityResult
     func setActivityResult(activityStepResult:ActivityStepResult)  {
         self.result?.append(activityStepResult)
@@ -152,7 +160,7 @@ class ConsentResult {
         // method to get the dictionary for Api
         var activityDict:Dictionary<String,Any>?
         
-
+        
         if self.startTime != nil && (Utilities.getStringFromDate(date: self.startTime!) != nil){
             
             activityDict?[kActivityStartTime] = Utilities.getStringFromDate(date: self.startTime!)
@@ -179,6 +187,6 @@ class ConsentResult {
         
         return activityDict!
     }
-
+    
     
 }

@@ -19,6 +19,9 @@ class EligibilityStepViewController: ORKStepViewController {
 
     @IBOutlet weak var tokenTextField: UITextField!
     @IBOutlet weak var buttonSubmit:UIButton?
+    
+     var taskResult:EligibilityTokenTaskResult = EligibilityTokenTaskResult(identifier: kFetalKickCounterStepDefaultIdentifier)
+    
     override init(step: ORKStep?) {
         super.init(step: step)
     }
@@ -30,7 +33,7 @@ class EligibilityStepViewController: ORKStepViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        buttonSubmit?.layer.borderColor =   UIColor.blue.cgColor
+        buttonSubmit?.layer.borderColor =   kUicolorForButtonBackground
         
         if let step = step as? EligibilityStep {
             step.type = "token"
@@ -50,6 +53,24 @@ class EligibilityStepViewController: ORKStepViewController {
         
     }
     
+    override var result: ORKStepResult? {
+        
+        let orkResult = super.result
+        orkResult?.results = [self.taskResult]
+        return orkResult
+        
+    }
+
+    func showAlert(message:String){
+        let alert = UIAlertController(title:kErrorTitle as String,message:message as String,preferredStyle: UIAlertControllerStyle.alert)
+        alert.addAction(UIAlertAction(title:NSLocalizedString("OK", comment: ""), style: .default, handler: nil))
+        
+        
+        self.navigationController?.present(alert, animated: true, completion: nil)
+
+    }
+    
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -59,37 +80,19 @@ class EligibilityStepViewController: ORKStepViewController {
         self.view.endEditing(true)
         let token = tokenTextField.text
         
+        
         if (token?.characters.count)! > 0 {
-            // LabKeyServices().verifyEnrollmentToken(studyId: (Study.currentStudy?.studyId)!, token: token!, delegate: self)
+            //(Study.currentStudy?.studyId)!
+            LabKeyServices().verifyEnrollmentToken(studyId: "TESTSTUDY01", token: token!, delegate: self)
             
-             self.goForward()
+            //self.goForward()
+        }
+        else{
+            self.showAlert(title: "Message", message: "Please enter valid token")
+          
+
         }
         
-        
-        
-        
-       /*
-        
-        if username?.characters.count == 0 || password?.characters.count == 0{
-            self.showAlert(title: "Error", message: "Please provide email id and password to sign in")
-            return
-        }
-        
-        self.toggleLoader(show: true)
-        
-        
-        AppConnectHelper.sharedInstance.login(username: username!, password: password!) { (success, errorMessage) in
-            self.toggleLoader(show: false)
-            
-            if  success {
-                self.goForward()
-            }
-            else if  errorMessage != nil {
-                self.showAlert(title: "Error", message: errorMessage!)
-            }
-        }
-        
-        */
         
     }
 }
@@ -128,14 +131,45 @@ extension EligibilityStepViewController:NMWebServiceDelegate {
         Logger.sharedInstance.info("requestname : \(requestName)")
         
         self.removeProgressIndicator()
+        
+        if (tokenTextField.text?.characters.count)! > 0 {
+             self.taskResult.enrollmentToken = tokenTextField.text!
+        }
+        else{
+             self.taskResult.enrollmentToken = ""
+        }
+       
+        
         self.goForward()
     }
     func failedRequest(_ manager: NetworkManager, requestName: NSString, error: NSError) {
         Logger.sharedInstance.info("requestname : \(requestName)")
         
         self.removeProgressIndicator()
-        UIUtilities.showAlertWithTitleAndMessage(title:NSLocalizedString("Error", comment: "") as NSString, message: error.localizedDescription as NSString)
+        self.showAlert(message: error.localizedDescription)
+        
     }
+    
+    
+    
+    
 }
 
+open class EligibilityTokenTaskResult: ORKResult {
+    
+    open var enrollmentToken:String = ""
+   
+    
+    override open var description: String {
+        get {
+            return "enrollmentToken:\(enrollmentToken)"
+        }
+    }
+    
+    override open var debugDescription: String {
+        get {
+            return "enrollmentToken:\(enrollmentToken)"
+        }
+    }
+}
 

@@ -13,13 +13,7 @@ import Foundation
 let kScheduleStartTime = "start"
 let kScheduleEndTime = "end"
 
-enum AvailabilityStatus:Int{
-    case runAvailable
-    case runExpired
-    case runCompleted
-    case activityExpired
-    case activityNotAvailable
-}
+
 
 
 class Schedule{
@@ -108,7 +102,7 @@ class Schedule{
         
         switch self.frequency {
         case Frequency.One_Time:
-            self.setDailyRuns()
+            self.setOneTimeRun()
         case Frequency.Daily:
             self.setDailyRuns()
         case Frequency.Weekly:
@@ -123,6 +117,17 @@ class Schedule{
         if self.completionHandler != nil {
             self.completionHandler!(self.activityRuns)
         }
+    }
+    
+    func setOneTimeRun(){
+        
+        
+        let activityRun = ActivityRun()
+        activityRun.runId = 1
+        activityRun.startDate = startTime
+        activityRun.endDate = endTime
+        
+        activityRuns.append(activityRun)
     }
     
     func setDailyRuns(){
@@ -183,7 +188,7 @@ class Schedule{
             activityRuns.append(activityRun)
             
             //save range
-            //debugPrint("start date \(runStartDate!) , end date \(runEndDate!)")
+            debugPrint("start date \(runStartDate!) , end date \(runEndDate!)")
             
             runStartDate = calendar.date(byAdding:.second, value:1, to: runEndDate!)
             runId += 1

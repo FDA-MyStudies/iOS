@@ -18,6 +18,7 @@ enum TableViewCells: Int {
 class StudyDashboardViewController : UIViewController{
     
     @IBOutlet var tableView : UITableView?
+    @IBOutlet var labelStudyTitle : UILabel?
     
     var tableViewRowDetails = NSMutableArray()
     var todayActivitiesArray = NSMutableArray()
@@ -36,6 +37,8 @@ class StudyDashboardViewController : UIViewController{
         tableViewRowDetails = tableviewdata["studyActivity"] as! NSMutableArray
         todayActivitiesArray = tableviewdata["todaysActivity"] as! NSMutableArray
         statisticsArray = tableviewdata["statistics"] as! NSMutableArray
+        
+        labelStudyTitle?.text = Study.currentStudy?.name
         
         
     }

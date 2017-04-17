@@ -284,7 +284,11 @@ extension StudyListViewController:StudyHomeViewDontrollerDelegate{
     func studyHomeJoinStudy() {
         
         
+        
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            
+            self.removeProgressIndicator()
+            
             // your code here
             let leftController = self.slideMenuController()?.leftViewController as! LeftMenuViewController
             leftController.changeViewController(.reachOut_signIn)

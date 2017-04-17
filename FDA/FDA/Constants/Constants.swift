@@ -102,13 +102,13 @@ let kMessageVerificationCodeEmpty = "Please enter valid Verification Code"
 //MARK: FeedbackviewController constants
 let kFeedbackTableViewCellIdentifier1 = "FeedbackCellFirst"
 let kFeedbackTableViewCellIdentifier2 = "FeedbackCellSecond"
-let kMessageFeedbackSubmittedSuccessfuly = "Thankyou for your feedback"
+let kMessageFeedbackSubmittedSuccessfuly = "Thank you for providing feedback. Your gesture is appreciated."
 
 //MARK: ContactUsviewController constants
 let kContactUsTableViewCellIdentifier = "ContactUsCell"
 let kMessageSubjectBlankCheck = "Please enter subject"
 let kMessageMessageBlankCheck = "Please enter message"
-let kMessageContactedSuccessfuly = "Thankyou for contacting us"
+let kMessageContactedSuccessfuly = "Thank you for contacting us. We will get back to you on your email address at the earliest."
 
 
 //MARK: ActivitiesViewController constants

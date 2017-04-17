@@ -27,7 +27,8 @@ class ResourcesViewController : UIViewController{
         
         self.navigationItem.title = NSLocalizedString("Resources", comment: "")
         
-        WCPServices().getResourcesForStudy(studyId: (Study.currentStudy?.studyId)!, delegate: self)
+        //Next Phase
+        //WCPServices().getResourcesForStudy(studyId: (Study.currentStudy?.studyId)!, delegate: self)
         
     }
     
@@ -40,7 +41,7 @@ class ResourcesViewController : UIViewController{
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
+         UIUtilities.showAlertWithTitleAndMessage(title:NSLocalizedString(kAlertMessageText, comment: "") as NSString, message:NSLocalizedString(kAlertMessageReachoutText, comment: "") as NSString)
         
     }
     

@@ -141,19 +141,19 @@ class StudyHomeViewController : UIViewController{
     
     @IBAction func buttonActionJoinStudy(_ sender: UIButton){
         if User.currentUser.userType == UserType.AnonymousUser{
-            //let leftController = slideMenuController()?.leftViewController as! LeftMenuViewController
-            //leftController.changeViewController(.reachOut_signIn)
+            let leftController = slideMenuController()?.leftViewController as! LeftMenuViewController
+            leftController.changeViewController(.reachOut_signIn)
             
             
             
-            //            let loginStoryBoard = UIStoryboard(name: "Login", bundle: nil)
-            //            let signInController = loginStoryBoard.instantiateViewController(withIdentifier:  String(describing: SignInViewController.classForCoder())) as! SignInViewController
-            //            signInController.viewLoadFrom = .joinStudy
-            //            self.navigationController?.pushViewController(signInController, animated: true)
+                        let loginStoryBoard = UIStoryboard(name: "Login", bundle: nil)
+                        let signInController = loginStoryBoard.instantiateViewController(withIdentifier:  String(describing: SignInViewController.classForCoder())) as! SignInViewController
+                        signInController.viewLoadFrom = .joinStudy
+                        self.navigationController?.pushViewController(signInController, animated: true)
             
             
-            _ = self.navigationController?.popViewController(animated: true)
-            self.delegate?.studyHomeJoinStudy()
+            //_ = self.navigationController?.popViewController(animated: true)
+            //self.delegate?.studyHomeJoinStudy()
             
         }
         
@@ -336,7 +336,7 @@ class StudyHomeViewController : UIViewController{
 }
 
 //MARK: Page Control Delegates for handling Counts
-extension StudyHomeViewController: PageViewControllerDelegate {
+extension StudyHomeViewController: PageViewControllerDelegate { 
     
     func pageViewController(pageViewController: PageViewController, didUpdatePageCount count: Int){
         pageControlView?.numberOfPages = count
@@ -510,6 +510,30 @@ extension StudyHomeViewController:ORKTaskViewControllerDelegate{
                 activityBuilder?.actvityResult?.result?.removeLast()
             }
             else{
+                
+                
+                if stepViewController .isKind(of: ORKCompletionStepViewController.self){
+                    
+                    let reviewStep:ORKStepResult? = taskViewController.result.results?[(taskViewController.result.results?.count)! - 2] as! ORKStepResult?
+                    
+                    if (reviewStep?.identifier)! == "Review" && (reviewStep?.results?.count)! > 0{
+                        let consentSignatureResult:ORKConsentSignatureResult? = reviewStep?.results?.first as? ORKConsentSignatureResult
+                        
+                        if  consentSignatureResult?.consented == false{
+                            taskViewController.dismiss(animated: true
+                                , completion: nil)
+
+                        }
+                        
+                   
+                    }
+                    
+                    
+                }
+                
+                
+                
+                
                 
                 /*
                 if (activityBuilder?.actvityResult?.result?.count)! < (taskViewController.result.results?.count)!{

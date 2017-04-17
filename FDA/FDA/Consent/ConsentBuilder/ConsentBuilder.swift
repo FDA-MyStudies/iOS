@@ -166,7 +166,7 @@ class ConsentBuilder{
             
             
             
-            consentDocument.title = "title"
+            consentDocument.title = Study.currentStudy?.name
             consentDocument.signaturePageTitle = "signaturePageTitle"
             consentDocument.signaturePageContent = "signaturePageContent"
             
@@ -240,13 +240,13 @@ class ConsentBuilder{
         if Utilities.isValidValue(someObject: self.reviewConsent?.signatureTitle as AnyObject ) {
             reviewConsentStep?.text = self.reviewConsent?.title
         } else {
-            reviewConsentStep?.text = "Title"
+            reviewConsentStep?.text = ""
         }
         
         if Utilities.isValidValue(someObject: self.reviewConsent?.reasonForConsent as AnyObject ) {
             reviewConsentStep?.reasonForConsent = self.reviewConsent?.reasonForConsent
         } else {
-            reviewConsentStep?.reasonForConsent = "Reason"
+            reviewConsentStep?.reasonForConsent = ""
         }
         
         return reviewConsentStep

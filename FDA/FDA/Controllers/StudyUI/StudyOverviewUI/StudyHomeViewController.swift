@@ -398,6 +398,20 @@ extension StudyHomeViewController:NMWebServiceDelegate {
              UserServices().updateUserEligibilityConsentStatus(eligibilityStatus: true, consentStatus:(ConsentBuilder.currentConsent?.consentStatus)!  , delegate: self)
         }
         
+        if requestName as String == ResponseMethods.enroll.description {
+            
+            let currentUserStudyStatus =  User.currentUser.updateStudyStatus(studyId:(Study.currentStudy?.studyId)!  , status: .inProgress)
+            
+            ConsentBuilder.currentConsent?.consentStatus = .completed
+            UserServices().updateUserParticipatedStatus(studyStauts: currentUserStudyStatus, delegate: self)
+            
+            if( User.currentUser.getStudyStatus(studyId:(Study.currentStudy?.studyId)! ) == UserStudyStatus.StudyStatus.inProgress){
+                self.pushToStudyDashboard()
+            }
+
+            
+            
+        }
         
         //self.removeProgressIndicator()
         
@@ -466,11 +480,11 @@ extension StudyHomeViewController:ORKTaskViewControllerDelegate{
         if  taskViewController.task?.identifier == kEligibilityConsentTask && reason == ORKTaskViewControllerFinishReason.completed{
             ConsentBuilder.currentConsent?.consentResult?.initWithORKTaskResult(taskResult:taskViewController.result )
             
-            let currentUserStudyStatus =  User.currentUser.updateStudyStatus(studyId:(Study.currentStudy?.studyId)!  , status: .inProgress)
+            self.addProgressIndicator()
+            LabKeyServices().enrollForStudy(studyId: "TESTSTUDY01", token: (ConsentBuilder.currentConsent?.consentResult?.token)!, delegate: self)
             
-            ConsentBuilder.currentConsent?.consentStatus = .completed
             
-            UserServices().updateUserParticipatedStatus(studyStauts: currentUserStudyStatus, delegate: self)
+           
             
         }
         else{
@@ -480,9 +494,6 @@ extension StudyHomeViewController:ORKTaskViewControllerDelegate{
         
         taskViewController.dismiss(animated: true, completion: nil)
         
-        if( User.currentUser.getStudyStatus(studyId:(Study.currentStudy?.studyId)! ) == UserStudyStatus.StudyStatus.inProgress){
-             self.pushToStudyDashboard()
-        }
         
         
     }

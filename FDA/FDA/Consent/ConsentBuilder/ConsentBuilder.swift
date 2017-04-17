@@ -208,46 +208,48 @@ class ConsentBuilder{
          @returns an instance of ORKConsentReviewStep
          */
         
-        if Utilities.isValidValue(someObject: self.reviewConsent?.title as AnyObject )
-            && Utilities.isValidValue(someObject: self.reviewConsent?.signatureTitle as AnyObject )
-            && Utilities.isValidValue(someObject: self.reviewConsent?.signatureContent as AnyObject ){
-            
+        let reviewConsentStep:ORKConsentReviewStep?
+
+        if  Utilities.isValidValue(someObject: self.reviewConsent?.signatureContent as AnyObject ){
             
             // identifier missing
             
+            let consentDocument:ORKConsentDocument? = (self.getConsentDocument() as ORKConsentDocument)
+            consentDocument?.htmlReviewContent = self.reviewConsent?.signatureContent
             
-            let reviewConsentStep = ORKConsentReviewStep(identifier: "Review", signature: (self.getConsentDocument() as ORKConsentDocument).signatures?[0], in: self.getConsentDocument())
+            consentDocument?.signaturePageContent = NSLocalizedString("I agree to participate in this research study.", comment: "")
             
             
+             reviewConsentStep = ORKConsentReviewStep(identifier: "Review", signature: (self.getConsentDocument() as ORKConsentDocument).signatures?[0], in: self.getConsentDocument())
             
+          
             
-            // In a real application, you would supply your own localized text.
-            reviewConsentStep.text = self.reviewConsent?.title
-            reviewConsentStep.reasonForConsent = self.reviewConsent?.signatureContent
-            return reviewConsentStep
         }
         else{
             
             let consentDocument:ORKConsentDocument? = (self.getConsentDocument() as ORKConsentDocument)
-            consentDocument?.htmlReviewContent = self.reviewConsent?.signatureContent
             
             consentDocument?.signaturePageContent = NSLocalizedString("I agree to participate in this research study.", comment: "") 
 
             
             
-            let reviewConsentStep = ORKConsentReviewStep(identifier: "Review", signature: consentDocument?.signatures?[0], in: consentDocument!)
+             reviewConsentStep = ORKConsentReviewStep(identifier: "Review", signature: consentDocument?.signatures?[0], in: consentDocument!)
             
-            // In a real application, you would supply your own localized text.
-            reviewConsentStep.text =  self.reviewConsent?.title //"yoooooooo fghjkd"
-            reviewConsentStep.reasonForConsent =  self.reviewConsent?.reasonForConsent
-            return reviewConsentStep
-
-            
-            
-            
-            //Logger.sharedInstance.debug("consent Step has null values:")
-            //return nil
         }
+        
+        if Utilities.isValidValue(someObject: self.reviewConsent?.signatureTitle as AnyObject ) {
+            reviewConsentStep?.text = self.reviewConsent?.title
+        } else {
+            reviewConsentStep?.text = "Title"
+        }
+        
+        if Utilities.isValidValue(someObject: self.reviewConsent?.reasonForConsent as AnyObject ) {
+            reviewConsentStep?.reasonForConsent = self.reviewConsent?.reasonForConsent
+        } else {
+            reviewConsentStep?.reasonForConsent = "Reason"
+        }
+        
+        return reviewConsentStep
         
     }
     

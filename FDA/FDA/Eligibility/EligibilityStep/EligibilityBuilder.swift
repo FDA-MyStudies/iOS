@@ -116,11 +116,11 @@ class EligibilityBuilder{
                 
                 
                 let eligibilityCompletionStep = ORKInstructionStep(identifier: "VerifiedScreen")
-                eligibilityCompletionStep.text = "Your ID has been validated. You are eligible to join the Study.\nPlease click Get Started to proceed to the Consent section."
+                eligibilityCompletionStep.text = "Your enrollment token has been successfully validated. You are eligible to join the Study.\nPlease click Get Started to proceed to the Consent section."
                 
                 
                 
-                eligibilityCompletionStep.title = "Validated!"
+                eligibilityCompletionStep.title = " You are Eligible!"
                 eligibilityCompletionStep.image =  #imageLiteral(resourceName: "successBlueBig")
                 stepsArray?.append(eligibilityCompletionStep)
 

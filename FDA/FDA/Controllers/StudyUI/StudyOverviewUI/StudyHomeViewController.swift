@@ -141,19 +141,19 @@ class StudyHomeViewController : UIViewController{
     
     @IBAction func buttonActionJoinStudy(_ sender: UIButton){
         if User.currentUser.userType == UserType.AnonymousUser{
-            //let leftController = slideMenuController()?.leftViewController as! LeftMenuViewController
-            //leftController.changeViewController(.reachOut_signIn)
+           // let leftController = slideMenuController()?.leftViewController as! LeftMenuViewController
+           // leftController.changeViewController(.reachOut_signIn)
             
             
             
-            //            let loginStoryBoard = UIStoryboard(name: "Login", bundle: nil)
-            //            let signInController = loginStoryBoard.instantiateViewController(withIdentifier:  String(describing: SignInViewController.classForCoder())) as! SignInViewController
-            //            signInController.viewLoadFrom = .joinStudy
-            //            self.navigationController?.pushViewController(signInController, animated: true)
+                        let loginStoryBoard = UIStoryboard(name: "Login", bundle: nil)
+                        let signInController = loginStoryBoard.instantiateViewController(withIdentifier:  String(describing: SignInViewController.classForCoder())) as! SignInViewController
+                        signInController.viewLoadFrom = .joinStudy
+                        self.navigationController?.pushViewController(signInController, animated: true)
             
             
-            _ = self.navigationController?.popViewController(animated: true)
-            self.delegate?.studyHomeJoinStudy()
+           // _ = self.navigationController?.popViewController(animated: true)
+           // self.delegate?.studyHomeJoinStudy()
             
         }
         
@@ -286,13 +286,14 @@ class StudyHomeViewController : UIViewController{
             
         }
         
-        
-        
+       
     }
     
     
     @IBAction func unwindeToStudyHome(_ segue:UIStoryboardSegue){
         //unwindStudyHomeSegue
+        //self.buttonActionJoinStudy(UIButton())
+        WCPServices().getEligibilityConsentMetadata(studyId:(Study.currentStudy?.studyId)!, delegate: self as NMWebServiceDelegate)
     }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let pageViewController = segue.destination as? PageViewController {

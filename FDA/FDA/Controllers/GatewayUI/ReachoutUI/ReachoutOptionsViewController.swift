@@ -15,7 +15,7 @@ class ReachoutOptionsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.navigationItem.title =  NSLocalizedString("REACHOUT", comment: "")
+        self.navigationItem.title =  NSLocalizedString("REACH OUT", comment: "")
         
         // Do any additional setup after loading the view.
     }

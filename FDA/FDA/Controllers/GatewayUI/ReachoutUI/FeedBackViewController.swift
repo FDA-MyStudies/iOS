@@ -146,7 +146,11 @@ extension FeedBackViewController:NMWebServiceDelegate {
     func finishedRequest(_ manager: NetworkManager, requestName: NSString, response: AnyObject?) {
         Logger.sharedInstance.info("requestname : \(requestName)")
         self.removeProgressIndicator()
-        _ = self.navigationController?.popViewController(animated: true)
+        
+        UIUtilities.showAlertMessageWithActionHandler("", message: NSLocalizedString(kMessageFeedbackSubmittedSuccessfuly, comment: ""), buttonTitle: kTitleOk, viewControllerUsed: self) {
+            _ = self.navigationController?.popViewController(animated: true)
+        }
+        
     }
     func failedRequest(_ manager: NetworkManager, requestName: NSString, error: NSError) {
         

@@ -268,7 +268,10 @@ extension ContactUsViewController:NMWebServiceDelegate {
         Logger.sharedInstance.info("requestname : \(requestName)")
         self.removeProgressIndicator()
         
-        _ = self.navigationController?.popViewController(animated: true)
+        UIUtilities.showAlertMessageWithActionHandler("", message: NSLocalizedString(kMessageContactedSuccessfuly, comment: ""), buttonTitle: kTitleOk, viewControllerUsed: self) {
+            _ = self.navigationController?.popViewController(animated: true)
+        }
+        
     }
     func failedRequest(_ manager: NetworkManager, requestName: NSString, error: NSError) {
         

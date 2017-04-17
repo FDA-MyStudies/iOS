@@ -375,7 +375,8 @@ extension SignInViewController:NMWebServiceDelegate {
                     
                     let leftController = slideMenuController()?.leftViewController as! LeftMenuViewController
                     leftController.createLeftmenuItems()
-                    _ = self.navigationController?.popViewController(animated: true)
+                    self.performSegue(withIdentifier: "unwindStudyHomeSegue", sender: self)
+                    //_ = self.navigationController?.popViewController(animated: true)
                 }
                 else {
                     

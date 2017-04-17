@@ -21,6 +21,8 @@ class ActivitiesTableViewCell: UITableViewCell {
     @IBOutlet var labelStatus : UILabel?
     @IBOutlet var labelRunStatus : UILabel?
     
+    var availabilityStatus:ActivityAvailabilityStatus = .current
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -32,40 +34,65 @@ class ActivitiesTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-    func populateCellDataWithActivity(activity:Activity){
+    func populateCellDataWithActivity(activity:Activity ,availablityStatus:ActivityAvailabilityStatus){
+        
+        self.availabilityStatus = availablityStatus
+        
         self.labelHeading?.text = activity.name
-        //self.labelTime?.text = (activity.startDate?.description)! + "-" + (activity.endDate?.description)!
-        self.labelDays?.text = activity.frequencyType.rawValue
+        
+        self.labelDays?.text = activity.frequencyType.description
         self.setUserStatusForActivity(activity: activity)
         
-        if activity.totalRuns == 0 {
-            Schedule().getRunsForActivity(activity: activity, handler: { (runs) in
-                if runs.count > 0 {
-                    
-                    let date = Date()
-                    
-                    let runsBeforeToday = runs.filter({$0.startDate <= date})
-                    let completedRuns = runs.filter({$0.isCompleted == true})
-                    let incompleteRuns = runsBeforeToday.count - completedRuns.count
-                    let run = runsBeforeToday.last
-                    
-                    activity.compeltedRuns = completedRuns.count
-                    activity.incompletedRuns = incompleteRuns
-                    activity.currentRunId = (run?.runId)!
-                    activity.totalRuns = runs.count
-                    
-                    self.updateUserRunStatus(activity: activity)
-                    
-                    DBHandler.saveActivityRuns(activityId: (activity.actvityId)!, studyId: (Study.currentStudy?.studyId)!, runs: runs)
-                }
-            })
+        if availablityStatus != .upcoming {
+            
+            labelRunStatus?.isHidden = false
+            labelStatus?.isHidden = false
+            
+            //update activity run details as compelted and missed
+            self.updateUserRunStatus(activity: activity)
 
+            
+            //update user activity status
+            self.setUserStatusForActivity(activity: activity)
+            
+            
+            //calculate activity runs and save in database
+            if activity.totalRuns == 0 {
+                Schedule().getRunsForActivity(activity: activity, handler: { (runs) in
+                    if runs.count > 0 {
+                        
+                        let date = Date()
+                        
+                        let runsBeforeToday = runs.filter({$0.startDate <= date})
+                        let completedRuns = runs.filter({$0.isCompleted == true})
+                        let incompleteRuns = runsBeforeToday.count - completedRuns.count
+                        let run = runsBeforeToday.last
+                        
+                        activity.compeltedRuns = completedRuns.count
+                        activity.incompletedRuns = incompleteRuns
+                        activity.currentRunId =  (run != nil) ? (run?.runId)! : 1
+                        activity.totalRuns = runs.count
+                        
+                        self.updateUserRunStatus(activity: activity)
+                        
+                        DBHandler.saveActivityRuns(activityId: (activity.actvityId)!, studyId: (Study.currentStudy?.studyId)!, runs: runs)
+                    }
+                })
+                
+            }
         }
+        else {
+            
+            labelRunStatus?.isHidden = true
+            labelStatus?.isHidden = true
+        }
+        
+        
         
         self.calculateActivityTimings(activity: activity)
         
-        self.updateUserRunStatus(activity: activity)
-       // self.labelRunStatus?.text = "Run: " + String(activity.currentRunId) + "/" + String(activity.totalRuns) + ", " + String(activity.compeltedRuns) + " done" + ", " + String(activity.incompletedRuns) + " missed"
+        
+       
         
     }
     
@@ -107,10 +134,22 @@ class ActivitiesTableViewCell: UITableViewCell {
             //buttonBookmark?.isSelected = userStudyStatus.bookmarked
         }
         else {
-            //study.userParticipateState = UserStudyStatus()
-            //labelStudyUserStatus?.text = UserStudyStatus.StudyStatus.yetToJoin.description
+            
             self.labelStatus?.backgroundColor = kBlueColor
-            self.labelStatus?.text = UserActivityStatus.ActivityStatus.yetToJoin.description
+            
+            //if in database their is no staus update for past activities 
+            //assigning abandoned status by default
+            if self.availabilityStatus == .past {
+                
+                self.labelStatus?.backgroundColor =  UIColor.red
+                self.labelStatus?.text = UserActivityStatus.ActivityStatus.abandoned.description
+            }
+            else {
+                
+                self.labelStatus?.backgroundColor = kBlueColor
+                self.labelStatus?.text = UserActivityStatus.ActivityStatus.yetToJoin.description
+            }
+            
         }
         
       
@@ -129,16 +168,7 @@ class ActivitiesTableViewCell: UITableViewCell {
         
         
         
-        //weekly
-        let weeklyStartTime = ActivitiesTableViewCell.weeklyformatter.string(from: startDate!)
-        print("weeklyStartTime: \(weeklyStartTime.replacingOccurrences(of: ",", with: "every"))")
         
-        
-        //monthly
-        var monthlyStartTime = ActivitiesTableViewCell.monthlyformatter.string(from: startDate!)
-        monthlyStartTime = monthlyStartTime.replacingOccurrences(of: ",", with: "on")
-        monthlyStartTime = monthlyStartTime.replacingOccurrences(of: ":", with: "every month")
-        print("monthlyStartTime :\(monthlyStartTime))")
         
         switch frequency {
         case .One_Time:
@@ -148,9 +178,9 @@ class ActivitiesTableViewCell: UITableViewCell {
         case .Daily:
             
             let runStartTime =  ActivitiesTableViewCell.timeFormatter.string(from: startDate!)
-            let dailyStartDate =  ActivitiesTableViewCell.timeFormatter.string(from: startDate!)
+            let dailyStartDate =  ActivitiesTableViewCell.formatter.string(from: startDate!)
             let endDate = ActivitiesTableViewCell.formatter.string(from: endDate!)
-            labelTime?.text = runStartTime  +  dailyStartDate + " to " + endDate
+            labelTime?.text = runStartTime  + "\n" +  dailyStartDate + " to " + endDate
             
         case .Weekly:
             
@@ -164,7 +194,7 @@ class ActivitiesTableViewCell: UITableViewCell {
         case .Monthly:
             var monthlyStartTime = ActivitiesTableViewCell.monthlyformatter.string(from: startDate!)
             monthlyStartTime = monthlyStartTime.replacingOccurrences(of: ",", with: "on")
-            monthlyStartTime = monthlyStartTime.replacingOccurrences(of: ":", with: "every month")
+            monthlyStartTime = monthlyStartTime.replacingOccurrences(of: ":", with: "every month\n")
             
             let endDate = ActivitiesTableViewCell.formatter.string(from: endDate!)
             
@@ -202,7 +232,7 @@ class ActivitiesTableViewCell: UITableViewCell {
 
     private static let monthlyformatter: DateFormatter = {
         let formatter = DateFormatter()
-        formatter.dateFormat = "hha , dd : EEE MMM dd YYYY"
+        formatter.dateFormat = "hha , dd :MMM dd YYYY"
         formatter.timeZone = TimeZone.init(abbreviation:"GMT")
         return formatter
     }()

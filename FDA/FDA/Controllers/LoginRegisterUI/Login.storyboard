@@ -774,9 +774,11 @@
                         <outlet property="buttonSignUp" destination="k1R-vE-2bf" id="Poi-wx-15a"/>
                         <outlet property="tableView" destination="ss7-zA-DJ6" id="5c2-N8-WqJ"/>
                         <segue destination="slw-Bf-fNL" kind="show" identifier="verificationSegue" id="Wsb-hw-1LK"/>
+                        <segue destination="Wno-P6-W9P" kind="unwind" identifier="unwindStudyHomeSegue" unwindAction="unwindeToStudyHome:" id="qV5-ui-5l6"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Hb9-ku-DtX" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="Wno-P6-W9P" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="1240.8" y="1153.6731634182909"/>
         </scene>

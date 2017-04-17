@@ -56,7 +56,23 @@ enum Frequency:String {
     case Weekly = "Weekly"
     case Monthly = "Monthly"
     case Scheduled = "Manually Schedule"
-    //case DailyFrequecy = "DailyFrequency"
+    
+    var description:String{
+        switch self {
+        case .One_Time:
+            return "One Time"
+        case .Daily:
+            return "Daily"
+        case .Weekly:
+            return "Weekly"
+        case .Monthly:
+            return "Monthly"
+        case .Scheduled:
+            return "As Scheduled"
+        
+        }
+    }
+    
 }
 
 class Activity{

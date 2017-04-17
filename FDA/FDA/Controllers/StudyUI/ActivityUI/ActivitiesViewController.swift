@@ -13,7 +13,7 @@ import ResearchKit
 let kActivities = "activities"
 
 
-enum ActivityAvailabilityStatus:String{
+enum ActivityAvailabilityStatus:Int{
     case current
     case upcoming
     case past
@@ -285,6 +285,7 @@ extension ActivitiesViewController: UITableViewDataSource{
         
         let rowDetail = tableViewSections[indexPath.section]
         let activities = rowDetail["activities"] as! Array<Activity>
+        
         if activities.count == 0 {
             
             let cell = tableView.dequeueReusableCell(withIdentifier: "noData", for: indexPath)
@@ -297,7 +298,10 @@ extension ActivitiesViewController: UITableViewDataSource{
             //Cell Data Setup
             cell.backgroundColor = UIColor.clear
             
-            cell.populateCellDataWithActivity(activity: (activities[indexPath.row]))
+            let availabilityStatus = ActivityAvailabilityStatus(rawValue:indexPath.section)
+            
+            cell.populateCellDataWithActivity(activity: (activities[indexPath.row]), availablityStatus:availabilityStatus!)
+            
             return cell
         }
         
@@ -311,22 +315,27 @@ extension ActivitiesViewController : UITableViewDelegate{
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
+        let availabilityStatus = ActivityAvailabilityStatus(rawValue:indexPath.section)!
         
-        let rowDetail = tableViewSections[indexPath.section]
-        let activities = rowDetail["activities"] as! Array<Activity>
-        
-        //update activity status
-        //let activity = activities[indexPath.row]
-        //let status = User.currentUser.updateActivityStatus(studyId: activity.studyId!, activityId: activity.actvityId!, status: .inProgress)
-        //UserServices().updateUserActivityParticipatedStatus(activityStatus: status, delegate: self)
-        
-        Study.updateCurrentActivity(activity:activities[indexPath.row])
-        
-        //Following to be commented
-        self.createActivity()
-        
-        //To be uncommented
+        switch availabilityStatus {
+        case .current:
+            
+            let rowDetail = tableViewSections[indexPath.section]
+            let activities = rowDetail["activities"] as! Array<Activity>
+            
+            Study.updateCurrentActivity(activity:activities[indexPath.row])
+            
+            //Following to be commented
+            self.createActivity()
+            
+            //To be uncommented
         //WCPServices().getStudyActivityMetadata(studyId:(Study.currentStudy?.studyId)! , activityId: (Study.currentActivity?.actvityId)!, activityVersion: "1", delegate: self)
+            
+        case .upcoming,.past: break
+       
+        }
+        
+        
     }
     
 }

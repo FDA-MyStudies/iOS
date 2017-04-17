@@ -77,7 +77,10 @@ class ConsentResult {
                             }
                             FileManager.default.createFile(atPath:fullPath , contents: data, attributes: [:])
                             
-                            try data?.write(to: URL(string:fullPath)! , options: .noFileProtection)
+                            
+                            try data?.write(to:  URL(string:fullPath)!)
+                            
+                            //try data?.write(to: URL(string:fullPath)! , options: .atomicWrite)
                             
                             // writing to disk
                             

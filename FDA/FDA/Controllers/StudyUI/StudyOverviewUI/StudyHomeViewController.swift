@@ -478,6 +478,9 @@ extension StudyHomeViewController:ORKTaskViewControllerDelegate{
         }
         
         if  taskViewController.task?.identifier == kEligibilityConsentTask && reason == ORKTaskViewControllerFinishReason.completed{
+            
+             ConsentBuilder.currentConsent?.consentResult?.consentDocument =   ConsentBuilder.currentConsent?.consentDocument
+            
             ConsentBuilder.currentConsent?.consentResult?.initWithORKTaskResult(taskResult:taskViewController.result )
             
             self.addProgressIndicator()

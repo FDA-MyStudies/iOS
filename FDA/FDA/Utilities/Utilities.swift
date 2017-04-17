@@ -401,7 +401,7 @@ class Utilities: NSObject {
         */
         
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
         // dateFormatter.timeZone = NSTimeZone(name: "UTC") as TimeZone!
         
         //"2016-08-01T08:00:00+0900"

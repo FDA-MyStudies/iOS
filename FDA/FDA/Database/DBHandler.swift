@@ -212,7 +212,7 @@ class DBHandler: NSObject {
             dbActivity.name = activity.name
             dbActivity.startDate = activity.startDate
             dbActivity.endDate = activity.endDate
-            
+            dbActivity.frequencyType = activity.frequencyType.rawValue
             
             dbActivities.append(dbActivity)
            
@@ -259,6 +259,7 @@ class DBHandler: NSObject {
             activity.startDate  = dbActivity.startDate
             activity.endDate    = dbActivity.endDate
             activity.type       = ActivityType(rawValue:dbActivity.type!)
+            activity.frequencyType = Frequency(rawValue:dbActivity.frequencyType!)!
             activity.restortionData = dbActivity.restortionData
             activity.totalRuns = dbActivity.activityRuns.count
             
@@ -271,7 +272,7 @@ class DBHandler: NSObject {
                 
                 activity.compeltedRuns = completedRuns.count
                 activity.incompletedRuns = incompleteRuns
-                activity.currentRunId = (run?.runId)!
+                activity.currentRunId =  (run != nil) ? (run?.runId)! : 1
             }
             
             

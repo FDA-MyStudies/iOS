@@ -102,11 +102,15 @@ let kMessageVerificationCodeEmpty = "Please enter valid Verification Code"
 //MARK: FeedbackviewController constants
 let kFeedbackTableViewCellIdentifier1 = "FeedbackCellFirst"
 let kFeedbackTableViewCellIdentifier2 = "FeedbackCellSecond"
+let kMessageFeedbackSubmittedSuccessfuly = "Thankyou for your feedback"
 
 //MARK: ContactUsviewController constants
 let kContactUsTableViewCellIdentifier = "ContactUsCell"
 let kMessageSubjectBlankCheck = "Please enter subject"
 let kMessageMessageBlankCheck = "Please enter message"
+let kMessageContactedSuccessfuly = "Thankyou for contacting us"
+
+
 //MARK: ActivitiesViewController constants
 let kBackgroundTableViewColor = UIColor.init(red: 216/255.0, green: 227/255.0, blue: 230/255.0, alpha: 1)
 let kActivitiesTableViewCell = "ActivitiesCell"

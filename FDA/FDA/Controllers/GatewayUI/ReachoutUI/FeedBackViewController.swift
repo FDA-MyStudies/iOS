@@ -15,6 +15,15 @@ struct FeedbackDetail {
     
     static var feedback:String = ""
     static var subject:String = ""
+    
+    
+    init(){
+        FeedbackDetail.feedback = ""
+        FeedbackDetail.subject = ""
+        
+    }
+    
+    
 }
 
 class FeedBackViewController : UIViewController{
@@ -48,7 +57,7 @@ class FeedBackViewController : UIViewController{
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
+        _ = FeedbackDetail.init()
     }
     
     override func viewWillDisappear(_ animated: Bool) {

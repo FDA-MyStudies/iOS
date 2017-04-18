@@ -24,13 +24,8 @@ class DBActivity: Object {
     var branching:Bool?
     var randomization:Bool?
     
-    //dynamic var schedule:Schedule?
-    // var steps = List()
-    //dynamic var orkSteps:Array<ORKStep>?
-    //dynamic var activitySteps:Array<ActivityStep>?
     
-    
-    // var frequencyRuns = List()
+    //dynamic var frequencyRunsData:Data?
     dynamic var frequencyType:String?
     
     //dynamic var result:ActivityResult?

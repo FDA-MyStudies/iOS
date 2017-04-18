@@ -35,8 +35,12 @@ class EligibilityStepViewController: ORKStepViewController {
         
         buttonSubmit?.layer.borderColor =   kUicolorForButtonBackground
         
+       
+        
         if let step = step as? EligibilityStep {
             step.type = "token"
+            
+           
         }
     }
     
@@ -146,7 +150,14 @@ extension EligibilityStepViewController:NMWebServiceDelegate {
         Logger.sharedInstance.info("requestname : \(requestName)")
         
         self.removeProgressIndicator()
-        self.showAlert(message: error.localizedDescription)
+        
+        if error.code == 101 {
+             self.showAlert(message: kMessageForInvalidToken)
+        }
+        
+        
+        
+       
         
     }
     

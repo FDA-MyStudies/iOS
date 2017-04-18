@@ -41,8 +41,7 @@ class ResourcesViewController : UIViewController{
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-         UIUtilities.showAlertWithTitleAndMessage(title:NSLocalizedString(kAlertMessageText, comment: "") as NSString, message:NSLocalizedString(kAlertMessageReachoutText, comment: "") as NSString)
-        
+               
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

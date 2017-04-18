@@ -138,13 +138,17 @@ class ActivitiesViewController : UIViewController{
              taskViewController?.outputDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
         }
         
-       
+     
+       taskViewController?.traitCollection
         
-        
-        
+        UIView.appearance(whenContainedInInstancesOf: [ORKTaskViewController.self]).tintColor = kUIColorForSubmitButtonBackground
         
         taskViewController?.delegate = self
        //
+        
+      
+        
+        
         
         UIApplication.shared.statusBarStyle = .default
         

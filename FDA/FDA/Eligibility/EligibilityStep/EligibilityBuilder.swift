@@ -14,6 +14,7 @@ let kEligibilityTest = "test"
 let kEligibilityCorrectAnswers = "correctAnswers"
 let kEligibilityTokenTitle = "tokenTitle"
 
+let kEligibilityVerifiedScreen = "VerifiedScreen"
 
 enum EligibilityStepType:String {
     case token = "token"
@@ -115,16 +116,16 @@ class EligibilityBuilder{
             if (stepsArray?.count)! > 0 {
                 
                 
-                let eligibilityCompletionStep = ORKInstructionStep(identifier: "VerifiedScreen")
+                let eligibilityCompletionStep = ORKInstructionStep(identifier: kEligibilityVerifiedScreen)
                 eligibilityCompletionStep.text = "Your enrollment token has been successfully validated. You are eligible to join the Study.\nPlease click Get Started to proceed to the Consent section."
                 
                 
                 
-                eligibilityCompletionStep.title = " You are Eligible!"
+                eligibilityCompletionStep.title = "You are Eligible!"
                 eligibilityCompletionStep.image =  #imageLiteral(resourceName: "successBlueBig")
                 stepsArray?.append(eligibilityCompletionStep)
 
-                
+            
                 
                 return stepsArray!
             }

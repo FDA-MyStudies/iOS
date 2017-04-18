@@ -242,6 +242,9 @@ class StudyHomeViewController : UIViewController{
         
         taskViewController?.navigationItem.title = "Consent"
         
+        
+        UIView.appearance(whenContainedInInstancesOf: [ORKTaskViewController.self]).tintColor = kUIColorForSubmitButtonBackground
+        
          UIApplication.shared.statusBarStyle = .default
         present(taskViewController!, animated: true, completion: nil)
         
@@ -549,6 +552,21 @@ extension StudyHomeViewController:ORKTaskViewControllerDelegate{
                 */
             }
         }
+        
+        
+        
+        if stepViewController.step?.identifier == kEligibilityVerifiedScreen || stepViewController.step?.identifier == kConsentCompletionStepIdentifier || stepViewController.step?.identifier == "visual" || stepViewController.step?.identifier == "Review"{
+            
+            stepViewController.backButtonItem = nil
+            
+           
+            
+        }
+        else{
+            stepViewController.backButtonItem?.isEnabled = true
+        }
+    
+        
     }
     
     //MARK:StepViewController Delegate
@@ -574,6 +592,9 @@ extension StudyHomeViewController:ORKTaskViewControllerDelegate{
             
             return ttController
         } else {
+            
+            
+            
             return nil
         }
     }

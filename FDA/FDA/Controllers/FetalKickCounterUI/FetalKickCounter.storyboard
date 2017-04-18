@@ -165,7 +165,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Enter enrollment token" textAlignment="center" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="1Zu-1M-7Gw">
-                                <rect key="frame" x="32.5" y="328" width="310" height="62"/>
+                                <rect key="frame" x="33" y="328" width="310" height="62"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
                                 <textInputTraits key="textInputTraits" keyboardType="emailAddress"/>
@@ -181,7 +181,7 @@
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qzc-1W-fgy">
-                                <rect key="frame" x="112.5" y="451" width="150" height="40"/>
+                                <rect key="frame" x="113" y="451" width="150" height="40"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                                 <state key="normal" title="Submit">
                                     <color key="titleColor" red="0.0" green="0.48627450979999998" blue="0.72941176470000002" alpha="1" colorSpace="calibratedRGB"/>
@@ -207,6 +207,12 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Eligibility" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gPT-6p-tqe">
+                                <rect key="frame" x="136.5" y="82" width="102.5" height="30.5"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="26"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -221,7 +227,9 @@
                             <constraint firstItem="ekz-Ns-BHi" firstAttribute="leading" secondItem="Vvm-Y2-4cb" secondAttribute="leadingMargin" constant="17" id="MoW-yK-HLG"/>
                             <constraint firstItem="blT-Iy-WlF" firstAttribute="width" secondItem="Vvm-Y2-4cb" secondAttribute="width" multiplier="289/375" id="SxA-i7-QVR"/>
                             <constraint firstItem="Qzc-1W-fgy" firstAttribute="height" secondItem="Vvm-Y2-4cb" secondAttribute="height" multiplier="40/667" id="UYX-6r-FuZ"/>
+                            <constraint firstItem="gPT-6p-tqe" firstAttribute="centerY" secondItem="Vvm-Y2-4cb" secondAttribute="centerY" multiplier="0.290854" id="aYW-eK-0af"/>
                             <constraint firstItem="Qzc-1W-fgy" firstAttribute="centerY" secondItem="Vvm-Y2-4cb" secondAttribute="centerY" multiplier="1.41229" id="htG-Tp-Td6"/>
+                            <constraint firstItem="gPT-6p-tqe" firstAttribute="centerX" secondItem="Vvm-Y2-4cb" secondAttribute="centerX" id="lNm-W9-sYa"/>
                             <constraint firstItem="ekz-Ns-BHi" firstAttribute="top" secondItem="1Zu-1M-7Gw" secondAttribute="bottom" constant="1" id="mrP-PP-DfF"/>
                             <constraint firstItem="blT-Iy-WlF" firstAttribute="height" secondItem="Vvm-Y2-4cb" secondAttribute="height" multiplier="117/667" id="rEe-F3-iZ6"/>
                             <constraint firstItem="1Zu-1M-7Gw" firstAttribute="centerX" secondItem="Vvm-Y2-4cb" secondAttribute="centerX" id="vpG-jh-MyC"/>
@@ -234,7 +242,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Xva-Df-tCd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2199.1999999999998" y="479.91004497751129"/>
+            <point key="canvasLocation" x="2175" y="544"/>
         </scene>
         <!--Consent Completion View Controller-->
         <scene sceneID="D3Y-ry-lF5">

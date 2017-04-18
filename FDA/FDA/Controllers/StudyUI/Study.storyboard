@@ -576,13 +576,25 @@
                                     <outlet property="delegate" destination="dCa-6u-qt2" id="C5l-uA-ane"/>
                                 </connections>
                             </tableView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No data Available.This feature is under development." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tW6-6k-q5i">
+                                <rect key="frame" x="0.0" y="310" width="375" height="63"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="63" id="eBH-jP-cFi"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="ZKr-ab-Sg7" firstAttribute="top" secondItem="Ie7-oe-i1L" secondAttribute="bottom" id="1HY-mJ-dQq"/>
+                            <constraint firstItem="tW6-6k-q5i" firstAttribute="width" secondItem="RNE-GL-dYl" secondAttribute="width" id="8Lk-Dr-PLf"/>
                             <constraint firstAttribute="trailing" secondItem="ZKr-ab-Sg7" secondAttribute="trailing" id="HMy-iP-vA4"/>
                             <constraint firstItem="TaC-NO-Vva" firstAttribute="top" secondItem="ZKr-ab-Sg7" secondAttribute="bottom" id="SYC-aC-t91"/>
                             <constraint firstItem="ZKr-ab-Sg7" firstAttribute="leading" secondItem="RNE-GL-dYl" secondAttribute="leading" id="W5D-K0-UBt"/>
+                            <constraint firstItem="tW6-6k-q5i" firstAttribute="centerX" secondItem="RNE-GL-dYl" secondAttribute="centerX" id="hbC-05-sdu"/>
+                            <constraint firstItem="tW6-6k-q5i" firstAttribute="centerY" secondItem="RNE-GL-dYl" secondAttribute="centerY" multiplier="1.02398" id="wdO-yb-qpm"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="KMy-aB-Koe">
@@ -1320,14 +1332,26 @@
                                     <outlet property="delegate" destination="Ivr-tV-60u" id="s0s-hP-cmQ"/>
                                 </connections>
                             </tableView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No data Available.This feature is under development." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zyD-Rd-9k5">
+                                <rect key="frame" x="0.0" y="337" width="375" height="63"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="63" id="fRb-Cb-2Ay"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="CGF-M8-TqW" firstAttribute="top" secondItem="gvo-He-ly7" secondAttribute="bottom" id="2nY-2C-r1l"/>
+                            <constraint firstItem="zyD-Rd-9k5" firstAttribute="width" secondItem="blp-fg-T0R" secondAttribute="width" id="3D9-U5-1zz"/>
                             <constraint firstItem="qIB-Ui-39s" firstAttribute="leading" secondItem="blp-fg-T0R" secondAttribute="leading" id="Aap-2s-hfu"/>
                             <constraint firstItem="LYX-5F-scC" firstAttribute="top" secondItem="sDb-kq-gfo" secondAttribute="bottom" constant="10" id="DAF-qU-78i"/>
+                            <constraint firstItem="zyD-Rd-9k5" firstAttribute="centerX" secondItem="blp-fg-T0R" secondAttribute="centerX" id="HBu-f5-aMt"/>
                             <constraint firstItem="gvo-He-ly7" firstAttribute="leading" secondItem="blp-fg-T0R" secondAttribute="leading" id="Ie8-mJ-KHy"/>
                             <constraint firstItem="LYX-5F-scC" firstAttribute="leading" secondItem="blp-fg-T0R" secondAttribute="leadingMargin" id="QWr-bG-GQa"/>
+                            <constraint firstItem="zyD-Rd-9k5" firstAttribute="centerY" secondItem="blp-fg-T0R" secondAttribute="centerY" multiplier="1.10495" id="S94-4h-nMq"/>
                             <constraint firstItem="gvo-He-ly7" firstAttribute="top" secondItem="blp-fg-T0R" secondAttribute="top" id="UT6-Jx-GXe"/>
                             <constraint firstItem="I37-Hh-k13" firstAttribute="top" secondItem="CGF-M8-TqW" secondAttribute="bottom" id="W9R-9b-sS6"/>
                             <constraint firstItem="TFh-y2-sZW" firstAttribute="width" secondItem="blp-fg-T0R" secondAttribute="width" multiplier="260/375" id="WNO-Ik-8Vf"/>
@@ -1355,7 +1379,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cWU-7s-48r" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="ulG-kV-I7n" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="1214" y="4917"/>
+            <point key="canvasLocation" x="1213.5999999999999" y="4916.4917541229388"/>
         </scene>
         <!--Activities View Controller-->
         <scene sceneID="wV6-gf-Owr">

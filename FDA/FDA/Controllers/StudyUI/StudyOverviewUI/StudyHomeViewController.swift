@@ -47,7 +47,7 @@ class StudyHomeViewController : UIViewController{
             pageViewController?.pageViewDelegate = self
         }
     }
-//MARK:View controller Delegates
+    //MARK:View controller Delegates
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -137,26 +137,26 @@ class StudyHomeViewController : UIViewController{
     }
     
     
-//MARK:Button Actions
+    //MARK:Button Actions
     
     @IBAction func buttonActionJoinStudy(_ sender: UIButton){
         if User.currentUser.userType == UserType.AnonymousUser{
-           // let leftController = slideMenuController()?.leftViewController as! LeftMenuViewController
-           // leftController.changeViewController(.reachOut_signIn)
+            // let leftController = slideMenuController()?.leftViewController as! LeftMenuViewController
+            // leftController.changeViewController(.reachOut_signIn)
             
             
             
-                        let loginStoryBoard = UIStoryboard(name: "Login", bundle: nil)
-                        let signInController = loginStoryBoard.instantiateViewController(withIdentifier:  String(describing: SignInViewController.classForCoder())) as! SignInViewController
-                        signInController.viewLoadFrom = .joinStudy
-                        self.navigationController?.pushViewController(signInController, animated: true)
+            let loginStoryBoard = UIStoryboard(name: "Login", bundle: nil)
+            let signInController = loginStoryBoard.instantiateViewController(withIdentifier:  String(describing: SignInViewController.classForCoder())) as! SignInViewController
+            signInController.viewLoadFrom = .joinStudy
+            self.navigationController?.pushViewController(signInController, animated: true)
             
             
-           // _ = self.navigationController?.popViewController(animated: true)
-           // self.delegate?.studyHomeJoinStudy()
+            // _ = self.navigationController?.popViewController(animated: true)
+            // self.delegate?.studyHomeJoinStudy()
             
         }
-        
+            
         else{
             
             let currentStudy = Study.currentStudy!
@@ -168,11 +168,11 @@ class StudyHomeViewController : UIViewController{
                 }
             }
             
-//            //let studyStatus = User.currentUser.updateStudyStatus(studyId:(Study.currentStudy?.studyId)!, status: .inProgress)
-//           // UserServices().updateUserParticipatedStatus(studyStauts: studyStatus, delegate: self)
-//            
-//            WCPServices().getEligibilityConsentMetadata(studyId:(Study.currentStudy?.studyId)!, delegate: self as NMWebServiceDelegate)
-//            // self.createEligibilityConsentTask()
+            //            //let studyStatus = User.currentUser.updateStudyStatus(studyId:(Study.currentStudy?.studyId)!, status: .inProgress)
+            //           // UserServices().updateUserParticipatedStatus(studyStauts: studyStatus, delegate: self)
+            //
+            //            WCPServices().getEligibilityConsentMetadata(studyId:(Study.currentStudy?.studyId)!, delegate: self as NMWebServiceDelegate)
+            //            // self.createEligibilityConsentTask()
             
             
         }
@@ -245,7 +245,7 @@ class StudyHomeViewController : UIViewController{
         
         UIView.appearance(whenContainedInInstancesOf: [ORKTaskViewController.self]).tintColor = kUIColorForSubmitButtonBackground
         
-         UIApplication.shared.statusBarStyle = .default
+        UIApplication.shared.statusBarStyle = .default
         present(taskViewController!, animated: true, completion: nil)
         
         
@@ -261,21 +261,21 @@ class StudyHomeViewController : UIViewController{
                 self.navigateToWebView(link: nil, htmlText: (Study.currentStudy?.consentDocument?.htmlString)!)
             }
         }
-      
+        
         
     }
     
     @IBAction func visitWebsiteButtonAction(_ sender: UIButton) {
         
-//        let loginStoryboard = UIStoryboard.init(name: "Main", bundle:Bundle.main)
-//        let webViewController = loginStoryboard.instantiateViewController(withIdentifier:"WebViewController") as! UINavigationController
-//        let webView = webViewController.viewControllers[0] as! WebViewController
+        //        let loginStoryboard = UIStoryboard.init(name: "Main", bundle:Bundle.main)
+        //        let webViewController = loginStoryboard.instantiateViewController(withIdentifier:"WebViewController") as! UINavigationController
+        //        let webView = webViewController.viewControllers[0] as! WebViewController
         
         
         
         if sender.tag == 1188 {
             //Visit Website
-           // webView.requestLink = Study.currentStudy?.overview.websiteLink
+            // webView.requestLink = Study.currentStudy?.overview.websiteLink
             //self.navigationController?.present(webViewController, animated: true, completion: nil)
             
             self.navigateToWebView(link:  Study.currentStudy?.overview.websiteLink, htmlText: nil)
@@ -289,7 +289,7 @@ class StudyHomeViewController : UIViewController{
             
         }
         
-       
+        
     }
     
     
@@ -313,7 +313,7 @@ class StudyHomeViewController : UIViewController{
         let webView = webViewController.viewControllers[0] as! WebViewController
         
         if link != nil {
-             webView.requestLink = Study.currentStudy?.overview.websiteLink
+            webView.requestLink = Study.currentStudy?.overview.websiteLink
         }
         if htmlText != nil {
             webView.htmlString = htmlText
@@ -340,7 +340,7 @@ class StudyHomeViewController : UIViewController{
 }
 
 //MARK: Page Control Delegates for handling Counts
-extension StudyHomeViewController: PageViewControllerDelegate { 
+extension StudyHomeViewController: PageViewControllerDelegate {
     
     func pageViewController(pageViewController: PageViewController, didUpdatePageCount count: Int){
         pageControlView?.numberOfPages = count
@@ -399,7 +399,7 @@ extension StudyHomeViewController:NMWebServiceDelegate {
         
         if requestName as String == RegistrationMethods.updatePreferences.method.methodName{
             
-             UserServices().updateUserEligibilityConsentStatus(eligibilityStatus: true, consentStatus:(ConsentBuilder.currentConsent?.consentStatus)!  , delegate: self)
+            UserServices().updateUserEligibilityConsentStatus(eligibilityStatus: true, consentStatus:(ConsentBuilder.currentConsent?.consentStatus)!  , delegate: self)
         }
         
         if requestName as String == ResponseMethods.enroll.description {
@@ -412,7 +412,7 @@ extension StudyHomeViewController:NMWebServiceDelegate {
             if( User.currentUser.getStudyStatus(studyId:(Study.currentStudy?.studyId)! ) == UserStudyStatus.StudyStatus.inProgress){
                 self.pushToStudyDashboard()
             }
-
+            
             
             
         }
@@ -421,9 +421,9 @@ extension StudyHomeViewController:NMWebServiceDelegate {
         
         
         if requestName as String == WCPMethods.consentDocument.method.methodName {
-             self.removeProgressIndicator()
+            self.removeProgressIndicator()
             self.displayConsentDocument()
-           
+            
         }
         
         
@@ -474,7 +474,7 @@ extension StudyHomeViewController:ORKTaskViewControllerDelegate{
             taskResult = taskViewController.restorationData
             
             if taskViewController.task?.identifier == kEligibilityConsentTask{
-               
+                
             }
             else{
                 //activityBuilder?.activity?.restortionData = taskViewController.restorationData
@@ -483,7 +483,7 @@ extension StudyHomeViewController:ORKTaskViewControllerDelegate{
         
         if  taskViewController.task?.identifier == kEligibilityConsentTask && reason == ORKTaskViewControllerFinishReason.completed{
             
-             ConsentBuilder.currentConsent?.consentResult?.consentDocument =   ConsentBuilder.currentConsent?.consentDocument
+            ConsentBuilder.currentConsent?.consentResult?.consentDocument =   ConsentBuilder.currentConsent?.consentDocument
             
             ConsentBuilder.currentConsent?.consentResult?.initWithORKTaskResult(taskResult:taskViewController.result )
             
@@ -491,7 +491,7 @@ extension StudyHomeViewController:ORKTaskViewControllerDelegate{
             LabKeyServices().enrollForStudy(studyId: "TESTSTUDY01", token: (ConsentBuilder.currentConsent?.consentResult?.token)!, delegate: self)
             
             
-           
+            
             
         }
         else{
@@ -515,57 +515,31 @@ extension StudyHomeViewController:ORKTaskViewControllerDelegate{
             }
             else{
                 
-                
-                if stepViewController .isKind(of: ORKCompletionStepViewController.self){
-                    
-                    let reviewStep:ORKStepResult? = taskViewController.result.results?[(taskViewController.result.results?.count)! - 2] as! ORKStepResult?
-                    
-                    if (reviewStep?.identifier)! == "Review" && (reviewStep?.results?.count)! > 0{
-                        let consentSignatureResult:ORKConsentSignatureResult? = reviewStep?.results?.first as? ORKConsentSignatureResult
-                        
-                        if  consentSignatureResult?.consented == false{
-                            taskViewController.dismiss(animated: true
-                                , completion: nil)
-
-                        }
-                        
-                   
-                    }
-                    
-                    
-                }
-                
-                
-                
-                
-                
-                /*
-                if (activityBuilder?.actvityResult?.result?.count)! < (taskViewController.result.results?.count)!{
-                    
-                    let orkStepResult:ORKStepResult? = taskViewController.result.results?[(taskViewController.result.results?.count)! - 2] as! ORKStepResult?
-                    let activityStepResult:ActivityStepResult? = ActivityStepResult()
-                    
-                    activityStepResult?.initWithORKStepResult(stepResult: orkStepResult! as ORKStepResult , activityType:(activityBuilder?.actvityResult?.activity?.type)!)
-                    activityBuilder?.actvityResult?.result?.append(activityStepResult!)
-                    
-                }
-                */
             }
+            
+            
+            /*
+             if (activityBuilder?.actvityResult?.result?.count)! < (taskViewController.result.results?.count)!{
+             
+             let orkStepResult:ORKStepResult? = taskViewController.result.results?[(taskViewController.result.results?.count)! - 2] as! ORKStepResult?
+             let activityStepResult:ActivityStepResult? = ActivityStepResult()
+             
+             activityStepResult?.initWithORKStepResult(stepResult: orkStepResult! as ORKStepResult , activityType:(activityBuilder?.actvityResult?.activity?.type)!)
+             activityBuilder?.actvityResult?.result?.append(activityStepResult!)
+             
+             }
+             */
         }
-        
-        
         
         if stepViewController.step?.identifier == kEligibilityVerifiedScreen || stepViewController.step?.identifier == kConsentCompletionStepIdentifier || stepViewController.step?.identifier == "visual" || stepViewController.step?.identifier == "Review"{
             
             stepViewController.backButtonItem = nil
             
-           
-            
         }
         else{
             stepViewController.backButtonItem?.isEnabled = true
         }
-    
+        
         
     }
     
@@ -593,9 +567,30 @@ extension StudyHomeViewController:ORKTaskViewControllerDelegate{
             return ttController
         } else {
             
+            if step .isKind(of: ORKCompletionStep.self){
+                
+                let reviewStep:ORKStepResult? = taskViewController.result.results?[(taskViewController.result.results?.count)! - 1] as! ORKStepResult?
+                
+                if (reviewStep?.identifier)! == "Review" && (reviewStep?.results?.count)! > 0{
+                    let consentSignatureResult:ORKConsentSignatureResult? = reviewStep?.results?.first as? ORKConsentSignatureResult
+                    
+                    if  consentSignatureResult?.consented == false{
+                        taskViewController.dismiss(animated: true
+                            , completion: nil)
+                        return nil
+                    }
+                    else{
+                        return nil
+                    }
+                }
+                else {
+                    return nil
+                }
+            }
+            else{
+                return nil
+            }
             
-            
-            return nil
         }
     }
     
@@ -643,7 +638,7 @@ extension StudyHomeViewController:ORKTaskViewControllerDelegate{
                     
                     taskViewController?.delegate = self
                     taskViewController?.outputDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
-                     UIApplication.shared.statusBarStyle = .default
+                    UIApplication.shared.statusBarStyle = .default
                     present(taskViewController!, animated: true, completion: nil)
                 }
             }

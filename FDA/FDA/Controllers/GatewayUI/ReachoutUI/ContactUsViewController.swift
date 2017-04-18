@@ -18,6 +18,13 @@ struct ContactUsFeilds {
     static var subject:String = ""
     static var message:String = ""
     
+    
+  init(){
+        ContactUsFeilds.firstName = ""
+        ContactUsFeilds.email = ""
+        ContactUsFeilds.subject = ""
+        ContactUsFeilds.message = ""
+    }
 }
 
 class ContactUsViewController : UIViewController{
@@ -53,7 +60,7 @@ class ContactUsViewController : UIViewController{
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
+        _ = ContactUsFeilds.init()
     }
     
     override func viewDidAppear(_ animated: Bool) {

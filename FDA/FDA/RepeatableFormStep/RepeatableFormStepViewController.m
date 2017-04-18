@@ -78,7 +78,7 @@
    // NSInteger count = mItems.count - 1;
     
     NSInteger count = mItems.count ;
-    NSInteger suffix = count / _originalFormItems.count + 1;
+    NSInteger suffix = count / _originalFormItems.count ;
     
     for (ORKFormItem *item in _originalFormItems) {
         NSString *identifier = [item.identifier stringByAppendingFormat:@"_%ld", (long)suffix];

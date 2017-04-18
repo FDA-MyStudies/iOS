@@ -21,6 +21,7 @@ class ActivitiesTableViewCell: UITableViewCell {
     @IBOutlet var labelStatus : UILabel?
     @IBOutlet var labelRunStatus : UILabel?
     
+    
     var availabilityStatus:ActivityAvailabilityStatus = .current
     
     override func awakeFromNib() {
@@ -41,7 +42,7 @@ class ActivitiesTableViewCell: UITableViewCell {
         self.labelHeading?.text = activity.name
         
         self.labelDays?.text = activity.frequencyType.description
-        self.setUserStatusForActivity(activity: activity)
+        
         
         if availablityStatus != .upcoming {
             
@@ -63,10 +64,15 @@ class ActivitiesTableViewCell: UITableViewCell {
                         
                         let date = Date()
                         
-                        let runsBeforeToday = runs.filter({$0.startDate <= date})
+                        var runsBeforeToday = runs.filter({$0.startDate <= date})
+                        let run = runsBeforeToday.last //current run
+                        if runsBeforeToday.count >= 1 {
+                            runsBeforeToday.removeLast()
+                        }
+                        
                         let completedRuns = runs.filter({$0.isCompleted == true})
                         let incompleteRuns = runsBeforeToday.count - completedRuns.count
-                        let run = runsBeforeToday.last
+                        
                         
                         activity.compeltedRuns = completedRuns.count
                         activity.incompletedRuns = incompleteRuns
@@ -90,7 +96,7 @@ class ActivitiesTableViewCell: UITableViewCell {
         
         
         self.calculateActivityTimings(activity: activity)
-        
+        self.setUserStatusForActivity(activity: activity)
         
        
         
@@ -106,7 +112,7 @@ class ActivitiesTableViewCell: UITableViewCell {
         let currentUser = User.currentUser
         
         
-        if let userActivityStatus = currentUser.participatedActivites.filter({$0.activityId == activity.actvityId}).first {
+        if let userActivityStatus = currentUser.participatedActivites.filter({$0.activityId == activity.actvityId && $0.activityRunId == String(activity.currentRunId)}).first {
             
             //assign to study
             //activity.userParticipateState = userActivityStatus
@@ -162,7 +168,7 @@ class ActivitiesTableViewCell: UITableViewCell {
         let endDate   = activity.endDate
         let frequency = activity.frequencyType
         
-        let activityStartTime = ActivitiesTableViewCell.timeFormatter.string(from: startDate!)
+        //let activityStartTime = ActivitiesTableViewCell.timeFormatter.string(from: startDate!)
         let startDateString = ActivitiesTableViewCell.oneTimeFormatter.string(from: startDate!)
         let endDateString = ActivitiesTableViewCell.oneTimeFormatter.string(from: endDate!)
         
@@ -174,10 +180,17 @@ class ActivitiesTableViewCell: UITableViewCell {
         case .One_Time:
             
             labelTime?.text = startDateString + " - " + endDateString
-            print("\(activityStartTime), \(startDateString) to \(endDateString)")
+            //print("\(activityStartTime), \(startDateString) to \(endDateString)")
         case .Daily:
             
-            let runStartTime =  ActivitiesTableViewCell.timeFormatter.string(from: startDate!)
+            var runStartTimingsList:Array<String> = []
+            for dict in activity.frequencyRuns!{
+                let startTime = dict[kScheduleStartTime] as! String
+                let runStartTime = ActivitiesTableViewCell.dailyFormatter.date(from: startTime)
+                let runStartTimeAsString =  ActivitiesTableViewCell.timeFormatter.string(from: runStartTime!)
+                runStartTimingsList.append(runStartTimeAsString)
+            }
+            let runStartTime =  runStartTimingsList.joined(separator: " | ") //ActivitiesTableViewCell.timeFormatter.string(from: startDate!)
             let dailyStartDate =  ActivitiesTableViewCell.formatter.string(from: startDate!)
             let endDate = ActivitiesTableViewCell.formatter.string(from: endDate!)
             labelTime?.text = runStartTime  + "\n" +  dailyStartDate + " to " + endDate
@@ -243,7 +256,12 @@ class ActivitiesTableViewCell: UITableViewCell {
         formatter.timeZone = TimeZone.init(abbreviation:"GMT")
         return formatter
     }()
-
+    private static let dailyFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "HH:mm:ss"
+        formatter.timeZone = TimeZone.init(abbreviation:"GMT")
+        return formatter
+    }()
     
     
 }

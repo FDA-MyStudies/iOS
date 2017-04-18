@@ -24,6 +24,7 @@ class ActivitiesViewController : UIViewController{
     var tableViewSections:Array<Dictionary<String,Any>> = []
     
     @IBOutlet var tableView : UITableView?
+    var selectedIndexPath:IndexPath? = nil
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -214,23 +215,30 @@ class ActivitiesViewController : UIViewController{
         
     }
     
-    func updateActivityStatusToInProgress(){
+    func updateActivityRunStuatus(status:UserActivityStatus.ActivityStatus){
         
         let activity = Study.currentActivity!
-        let status = User.currentUser.updateActivityStatus(studyId: activity.studyId!, activityId: activity.actvityId!, status: .inProgress)
+        let status = User.currentUser.updateActivityStatus(studyId: activity.studyId!, activityId: activity.actvityId!,runId: String(activity.currentRunId), status:status)
         UserServices().updateUserActivityParticipatedStatus(activityStatus: status, delegate: self)
+    }
+    
+    func updateActivityStatusToInProgress(){
+        
+        self.updateActivityRunStuatus(status: .inProgress)
+        
     }
     
     func updateActivityStatusToComplete(){
-        
-        let activity = Study.currentActivity!
-        let status = User.currentUser.updateActivityStatus(studyId: activity.studyId!, activityId: activity.actvityId!, status: .completed)
-        UserServices().updateUserActivityParticipatedStatus(activityStatus: status, delegate: self)
+        self.updateActivityRunStuatus(status: .completed)
     }
     
+    //save completed staus in database
     func updateRunStatusToComplete(){
+        
         let activity = Study.currentActivity!
+        activity.compeltedRuns += 1
         DBHandler.updateRunToComplete(runId: activity.currentRunId, activityId: activity.actvityId!, studyId: activity.studyId!)
+        self.updateActivityStatusToComplete()
     }
 
 }
@@ -330,6 +338,10 @@ extension ActivitiesViewController : UITableViewDelegate{
             
             //To be uncommented
         //WCPServices().getStudyActivityMetadata(studyId:(Study.currentStudy?.studyId)! , activityId: (Study.currentActivity?.actvityId)!, activityVersion: "1", delegate: self)
+            
+            self.updateActivityStatusToInProgress()
+            
+            self.selectedIndexPath = indexPath
             
         case .upcoming,.past: break
        
@@ -436,7 +448,9 @@ extension ActivitiesViewController:ORKTaskViewControllerDelegate{
             }
             
         }
-        taskViewController.dismiss(animated: true, completion: nil)
+        taskViewController.dismiss(animated: true, completion: {
+            self.tableView?.reloadRows(at: [self.selectedIndexPath!], with: .automatic)
+        })
     }
     
     func taskViewController(_ taskViewController: ORKTaskViewController, stepViewControllerWillAppear stepViewController: ORKStepViewController) {

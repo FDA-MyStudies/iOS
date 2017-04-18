@@ -265,10 +265,15 @@ class DBHandler: NSObject {
             
             if activity.totalRuns != 0 {
                 
-                let runsBeforeToday = dbActivity.activityRuns.filter({$0.startDate <= date})
+                var runsBeforeToday = dbActivity.activityRuns.filter({$0.startDate <= date}) as Array
+                let run = runsBeforeToday.last //current run
+                if runsBeforeToday.count >= 1 {
+                    runsBeforeToday.removeLast()
+                }
+
                 let completedRuns = dbActivity.activityRuns.filter({$0.isCompleted == true})
                 let incompleteRuns = runsBeforeToday.count - completedRuns.count
-                let run = runsBeforeToday.last
+                
                 
                 activity.compeltedRuns = completedRuns.count
                 activity.incompletedRuns = incompleteRuns

@@ -293,10 +293,10 @@ class User{
     }
     
     //MARK:Activity Status
-    func updateActivityStatus(studyId:String,activityId:String,status:UserActivityStatus.ActivityStatus) -> UserActivityStatus{
+    func updateActivityStatus(studyId:String,activityId:String,runId:String,status:UserActivityStatus.ActivityStatus) -> UserActivityStatus{
         
         let activityes = self.participatedActivites as Array<UserActivityStatus>
-        if let activity =   activityes.filter({$0.studyId == studyId && $0.activityId == activityId}).first {
+        if let activity =   activityes.filter({$0.studyId == studyId && $0.activityId == activityId && $0.activityRunId == runId}).first {
             activity.status = status
             Logger.sharedInstance.info("User Activity Status: activity is updated : \(studyId)")
             return activity
@@ -308,6 +308,7 @@ class User{
             activityStatus.status = status
             activityStatus.studyId = studyId
             activityStatus.activityId = activityId
+            activityStatus.activityRunId = runId
             self.participatedActivites.append(activityStatus)
             return activityStatus
             
@@ -579,6 +580,7 @@ class UserActivityStatus{
     var activityId:String! = ""
     var studyId:String! = ""
     var activityVersion:String! = ""
+    var activityRunId:String! = ""
     var status:ActivityStatus = .yetToJoin
     init() {
         
@@ -598,6 +600,9 @@ class UserActivityStatus{
             }
             if Utilities.isValidValue(someObject: detail[kBookmarked] as AnyObject){
                 self.bookmarked = detail[kBookmarked] as! Bool
+            }
+            if Utilities.isValidValue(someObject: detail[kActivityRunId] as AnyObject){
+                self.activityRunId = detail[kActivityRunId] as! String
             }
             
             
@@ -639,6 +644,7 @@ class UserActivityStatus{
         
         let studyDetail = [kStudyId:self.studyId,
                            kActivityId:self.activityId,
+                           kActivityRunId:self.activityRunId,
                            kStudyStatus:self.status.paramValue] as [String : Any]
         return studyDetail
     }

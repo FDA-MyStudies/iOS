@@ -59,6 +59,7 @@ let kBookmarked = "bookmarked"
 let kStatus = "status"
 let kActivityId = "activityId"
 let kActivityVersion = "activityVersion"
+let kActivityRunId = "activityRunId"
 
 //MARK: Logout Api constants
 let kLogoutReason = "reason"

@@ -10,8 +10,8 @@ import Foundation
 
 
 
-let kScheduleStartTime = "start"
-let kScheduleEndTime = "end"
+let kScheduleStartTime = "startTime"
+let kScheduleEndTime = "endTime"
 
 
 
@@ -28,11 +28,9 @@ class Schedule{
     var nextRunTime:Date!
     weak var activity:Activity!
     var activityRuns:Array<ActivityRun>! = []
-    var dailyFrequencyTimings = [["start":"10:00","end":"12:59"],
-                                 ["start":"13:00","end":"15:59"]]
+    var dailyFrequencyTimings:Array<Dictionary<String,Any>> = []
     
-    var scheduledTimings = [["start":"2017-01-26 10:00:00","end":"2017-01-28 12:59:00"],
-                            ["start":"2017-01-28 13:00:00","end":"2017-01-31 15:59:00"]]
+    var scheduledTimings:Array<Dictionary<String,Any>> = []
     var currentRunId = 0
     
     var completionHandler:((Array<ActivityRun>) -> ())? = nil
@@ -104,12 +102,13 @@ class Schedule{
         case Frequency.One_Time:
             self.setOneTimeRun()
         case Frequency.Daily:
-            self.setDailyRuns()
+            self.setDailyFrequenyRuns()
         case Frequency.Weekly:
             self.setWeeklyRuns()
         case Frequency.Monthly:
             self.setMonthlyRuns()
-        case Frequency.Scheduled:break
+        case Frequency.Scheduled:
+            self.setScheduledRuns()
         
             
         }
@@ -230,34 +229,102 @@ class Schedule{
         //let timings = [["start":"10:00","end":"12:59"],
         //               ["start":"13:00","end":"15:59"]]
         
+        dailyFrequencyTimings = activity.frequencyRuns!
+        
         let numberOfDays = self.getNumberOfDaysBetween(startDate: startTime, endDate: endTime)
         let calendar = Calendar.current
         var runId = 1
+        let startDateString =  Schedule.formatter.string(from: startTime)
+        var startDateShortStyle = Schedule.formatter2.date(from: startDateString)
         for day in 1...numberOfDays {
             
-           let startDate =  calendar.date(byAdding:.day, value: day, to: startTime)
+            let startDate = startDateShortStyle
             
             for timing in dailyFrequencyTimings{
                 
                 //run start time creation
-                let dailyStartTime = timing[kScheduleStartTime]
-                var hoursAndMins = dailyStartTime?.components(separatedBy: ":")
-                var hour = Int((hoursAndMins?[0])!)
-                var minutes = Int((hoursAndMins?[1])!)
+                let dailyStartTime = timing[kScheduleStartTime] as! String
+                var hoursAndMins = dailyStartTime.components(separatedBy: ":")
+                var hour = Int((hoursAndMins[0]))
+                var minutes = Int((hoursAndMins[1]))
+                var second = Int((hoursAndMins[2]))
                 
                 var runStartDate =  calendar.date(byAdding:.hour, value: hour!, to: startDate!)
                 runStartDate = calendar.date(byAdding:.minute, value: minutes!, to: runStartDate!)
+                runStartDate = calendar.date(byAdding:.second, value: second!, to: runStartDate!)
                 
                 
                 //run end time creation
-                 let dailyEndTime = timing[kScheduleEndTime]
-                 hoursAndMins = dailyEndTime?.components(separatedBy: ":")
-                 hour = Int((hoursAndMins?[0])!)
-                 minutes = Int((hoursAndMins?[1])!)
-                
+                let dailyEndTime = timing[kScheduleEndTime] as! String
+                hoursAndMins = dailyEndTime.components(separatedBy: ":")
+                hour = Int((hoursAndMins[0]))
+                minutes = Int((hoursAndMins[1]))
+                second = Int((hoursAndMins[2]))
                 
                 var runEndDate =  calendar.date(byAdding:.hour, value: hour!, to: startDate!)
                 runEndDate = calendar.date(byAdding:.minute, value: minutes!, to: runEndDate!)
+                runEndDate = calendar.date(byAdding:.second, value: second!, to: runEndDate!)
+                
+                print("start date \(runStartDate!) , end date \(runEndDate!)")
+                
+                //appent in activityRun array
+                let activityRun = ActivityRun()
+                activityRun.runId = runId
+                activityRun.startDate = runStartDate
+                activityRun.endDate = runEndDate
+                activityRuns.append(activityRun)
+                
+                runId += 1
+                
+            }
+            
+            startDateShortStyle =  calendar.date(byAdding:.day, value: 1, to: startDateShortStyle!)
+            
+        }
+    }
+
+    /*
+    func setDailyFrequenyRuns(){
+        
+        
+        
+        //let timings = [["start":"10:00","end":"12:59"],
+        //               ["start":"13:00","end":"15:59"]]
+        
+        dailyFrequencyTimings = activity.frequencyRuns!
+        
+        let numberOfDays = self.getNumberOfDaysBetween(startDate: startTime, endDate: endTime)
+        let calendar = Calendar.current
+        var runId = 1
+        var startDate = startTime
+        for day in 1...numberOfDays {
+            
+           
+            
+            for timing in dailyFrequencyTimings{
+                
+                //run start time creation
+                let dailyStartTime = timing[kScheduleStartTime] as! String
+                var hoursAndMins = dailyStartTime.components(separatedBy: ":")
+                var hour = Int((hoursAndMins[0]))
+                var minutes = Int((hoursAndMins[1]))
+                var second = Int((hoursAndMins[2]))
+                
+                var runStartDate =  calendar.date(byAdding:.hour, value: hour!, to: startDate!)
+                runStartDate = calendar.date(byAdding:.minute, value: minutes!, to: runStartDate!)
+                runStartDate = calendar.date(byAdding:.second, value: second!, to: runStartDate!)
+                
+                
+                //run end time creation
+                 let dailyEndTime = timing[kScheduleEndTime] as! String
+                 hoursAndMins = dailyEndTime.components(separatedBy: ":")
+                 hour = Int((hoursAndMins[0]))
+                 minutes = Int((hoursAndMins[1]))
+                 second = Int((hoursAndMins[2]))
+                
+                var runEndDate =  calendar.date(byAdding:.hour, value: hour!, to: startDate!)
+                runEndDate = calendar.date(byAdding:.minute, value: minutes!, to: runEndDate!)
+                runEndDate = calendar.date(byAdding:.second, value: second!, to: runEndDate!)
                 
                 print("start date \(runStartDate!) , end date \(runEndDate!)")
                 
@@ -271,29 +338,34 @@ class Schedule{
                 runId += 1
 
             }
+            
+            startDate =  calendar.date(byAdding:.day, value: day, to: startTime)
            
         }
-    }
+    }*/
     
     func setScheduledRuns(){
         
         //let timings = [["start":"2017-01-26 10:00:00","end":"2017-01-28 12:59:00"],
         //               ["start":"2017-01-28 13:00:00","end":"2017-01-31 15:59:00"]]
         
+        
+        scheduledTimings = activity.frequencyRuns!
+        
         var runId = 1
         for timing in scheduledTimings {
             
             //run start time creation
             let scheduledStartTime = timing[kScheduleStartTime]
-            let runStartDate = Schedule.formatter.date(from: scheduledStartTime!)
+            let runStartDate =  Utilities.getDateFromString(dateString: scheduledStartTime! as! String)
             
             //check if run is valid for user of not based on activity start time
-            let result = runStartDate!.compare(startTime)
-            if result == .orderedSame || result == .orderedAscending {
+            //let result = runStartDate!.compare(startTime)
+            //if result == .orderedSame || result == .orderedAscending {
                 
                 //run end time creation
                 let scheduledEndTime = timing[kScheduleEndTime]
-                let runEndDate = Schedule.formatter.date(from: scheduledEndTime!)
+                let runEndDate = Utilities.getDateFromString(dateString: scheduledEndTime! as! String)
                 
                 print("start date \(runStartDate!) , end date \(runEndDate!)")
                 
@@ -305,7 +377,7 @@ class Schedule{
                 activityRuns.append(activityRun)
                 
                 runId += 1
-            }
+            //}
             
             
         }
@@ -321,7 +393,16 @@ class Schedule{
     
     private static let formatter: DateFormatter = {
         let formatter = DateFormatter()
-        formatter.dateFormat = "YYYY-mm-dd HH:mm:ss"
+        formatter.dateFormat = "YYYY-mm-dd"
+        formatter.dateStyle = .short
+        formatter.timeZone = TimeZone.init(abbreviation:"GMT")
+        return formatter
+    }()
+    
+    private static let formatter2: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "YYYY-mm-dd"
+        formatter.dateStyle = .short
         formatter.timeZone = TimeZone.init(abbreviation:"GMT")
         return formatter
     }()

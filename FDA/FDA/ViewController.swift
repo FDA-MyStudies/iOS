@@ -97,6 +97,9 @@ class ViewController: UIViewController {
         taskViewController?.outputDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
          UIApplication.shared.statusBarStyle = .default
         
+        
+        UIView.appearance(whenContainedInInstancesOf: [ORKTaskViewController.self]).tintColor = kUIColorForSubmitButtonBackground
+        
         present(taskViewController!, animated: true, completion: nil)
 
         

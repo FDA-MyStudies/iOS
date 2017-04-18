@@ -34,10 +34,20 @@ let kConsentReviewStepSignatureContent = "signatureContent"
 let kConsentReviewStepReasonForConsent = "reasonForConsent"
 
 
+
+
+//
+
+let kConsentCompletionStepIdentifier = "ConsentCompletionStep"
+
+
 enum ConsentStatus:String{
     case pending = "pending"
     case completed = "completed"
 }
+
+
+
 
 
 //MARK:ConsentBuilder Class
@@ -308,7 +318,7 @@ class ConsentBuilder{
         }
         
         
-        let completionStep = ORKCompletionStep(identifier:"ConsentCompletionStep")
+        let completionStep = ORKCompletionStep(identifier:kConsentCompletionStepIdentifier)
         completionStep.title = NSLocalizedString("Thanks for providing consent for this Study", comment: "")
         
         

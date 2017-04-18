@@ -150,3 +150,8 @@ let kMonth = "MONTH"
 let kWeekSpaces = "  WEEK  "
 let kWeek = "WEEK"
 
+//MARK: Eligibility constants
+
+let kMessageForInvalidToken = "Please enter valid enrollment token"
+
+

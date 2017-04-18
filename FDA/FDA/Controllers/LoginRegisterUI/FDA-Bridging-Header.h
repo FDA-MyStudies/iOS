@@ -3,3 +3,5 @@
 //
 
 #import "FRHyperLabel.h"
+#include "RepeatableFormStepViewController.h"
+#include "RepeatableFormStep.h"

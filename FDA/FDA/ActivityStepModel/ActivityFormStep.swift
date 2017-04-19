@@ -45,12 +45,37 @@ class ActivityFormStep: ActivityStep {
          returns the ORKFormStep
          NOTE: this method only return formStep of Questions, does not support ActiveTask as items
          */
-        if   Utilities.isValidValue(someObject:title  as AnyObject?)
-            && Utilities.isValidValue(someObject:key  as AnyObject?)
+        if Utilities.isValidValue(someObject:key  as AnyObject?)
             && Utilities.isValidObject(someObject:self.itemsArray  as AnyObject?) {
             
-            let step = ORKFormStep(identifier: key!, title: title, text: text)
-            step.formItems = [ORKFormItem]()
+            let step:ORKFormStep?
+            
+            
+            if self.repeatable == true{
+                
+                
+                
+                
+                step  = RepeatableFormStep(identifier: key!, title:"", text: text!)
+                
+               
+                
+                (step as! RepeatableFormStep).repeatable = true
+                
+                (step as! RepeatableFormStep).repeatableText = self.repeatableText
+                
+                step?.formItems = [ORKFormItem]()
+            }
+            else{
+                step = ORKFormStep(identifier: key!, title: "", text: text!)
+                step?.formItems = [ORKFormItem]()
+            }
+            
+            
+            if  Utilities.isValidValue(someObject:title!  as AnyObject?){
+                step?.title = title!
+            }
+           
             
             for dict in self.itemsArray {
                 
@@ -63,8 +88,8 @@ class ActivityFormStep: ActivityStep {
                     
                     let formItem01 = ORKFormItem(identifier: orkQuestionStep.identifier, text: orkQuestionStep.title, answerFormat: orkQuestionStep.answerFormat)
                     formItem01.placeholder = orkQuestionStep.text
-                    
-                    step.formItems?.append(formItem01)
+                    formItem01.isOptional = (questionStep?.skippable)!
+                    step?.formItems?.append(formItem01)
                     
                 }
                 else{

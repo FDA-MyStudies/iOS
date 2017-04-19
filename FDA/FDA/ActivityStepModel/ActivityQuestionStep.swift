@@ -554,7 +554,9 @@ class ActivityQuestionStep: ActivityStep {
                     &&   Utilities.isValidValue(someObject:formatDict?[kStepQuestionTimeIntervalStep] as AnyObject?)
                 {
                     
-                    questionStepAnswerFormat = ORKAnswerFormat.timeIntervalAnswerFormat(withDefaultInterval: formatDict?[kStepQuestionTimeIntervalDefault] as! Double, step: formatDict?[kStepQuestionTimeIntervalStep] as! Int)
+                    let defaultTimeInterval:Double? = Double((formatDict?[kStepQuestionTimeIntervalDefault] as? Int)!  )
+                    
+                    questionStepAnswerFormat = ORKAnswerFormat.timeIntervalAnswerFormat(withDefaultInterval:defaultTimeInterval!, step: formatDict?[kStepQuestionTimeIntervalStep] as! Int)
                     
                     
                 }
@@ -620,7 +622,6 @@ class ActivityQuestionStep: ActivityStep {
             
             questionStep?.text = text
             
-            
             return questionStep!
             
             
@@ -663,7 +664,7 @@ class ActivityQuestionStep: ActivityStep {
                         
                         if  Utilities.isValidValue(someObject:dict[kORKTextChoiceText] as AnyObject?) &&  Utilities.isValidValue(someObject:dict[kORKTextChoiceValue] as AnyObject?) &&  Utilities.isValidValue(someObject:dict[kORKTextChoiceDetailText] as AnyObject?) &&  Utilities.isValidValue(someObject:dict[kORKTextChoiceExclusive] as AnyObject?) {
                             
-                            let  choice = ORKTextChoice(text: dict[kORKTextChoiceText] as! String, detailText: dict[kORKTextChoiceDetailText] as? String, value: dict[kORKTextChoiceValue] as? Int as! NSCoding & NSCopying & NSObjectProtocol, exclusive: (dict[kORKTextChoiceValue] as? Bool)!)
+                            let  choice = ORKTextChoice(text: (dict[kORKTextChoiceText] as? String)!, detailText: (dict[kORKTextChoiceDetailText] as? String)!, value: (dict[kORKTextChoiceValue] as? NSCoding & NSCopying & NSObjectProtocol)! , exclusive: (dict[kORKTextChoiceExclusive] as? Bool)!)
                             textChoiceArray?.append(choice)
                             
                         }

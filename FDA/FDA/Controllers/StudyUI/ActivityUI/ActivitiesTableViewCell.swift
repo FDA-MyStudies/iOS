@@ -30,10 +30,26 @@ class ActivitiesTableViewCell: UITableViewCell {
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
+        
+        let color = labelStatus?.backgroundColor
         super.setSelected(selected, animated: animated)
-
         // Configure the view for the selected state
+        if(selected) {
+            
+            labelStatus?.backgroundColor = color
+        }
     }
+    
+    override func setHighlighted(_ highlighted: Bool, animated: Bool) {
+        let color = labelStatus?.backgroundColor
+        super.setHighlighted(highlighted, animated: animated)
+        if(highlighted) {
+            
+            labelStatus?.backgroundColor = color
+        }
+        
+    }
+  
     
     func populateCellDataWithActivity(activity:Activity ,availablityStatus:ActivityAvailabilityStatus){
         
@@ -63,12 +79,15 @@ class ActivitiesTableViewCell: UITableViewCell {
                     if runs.count > 0 {
                         
                         let date = Date()
+                        print("Current Date :\(date.description)")
                         
-                        var runsBeforeToday = runs.filter({$0.startDate <= date})
-                        let run = runsBeforeToday.last //current run
-                        if runsBeforeToday.count >= 1 {
-                            runsBeforeToday.removeLast()
-                        }
+                        var runsBeforeToday = runs.filter({$0.endDate <= date})
+                        
+                        let run = runs.filter({$0.startDate <= date && $0.endDate > date}).first//runsBeforeToday.last //current run
+                        //if (runsBeforeToday.count >= 1 &&  !((run?.endDate)! > date))
+                        //{
+                        //    runsBeforeToday.removeLast()
+                        //}
                         
                         let completedRuns = runs.filter({$0.isCompleted == true})
                         let incompleteRuns = runsBeforeToday.count - completedRuns.count
@@ -76,8 +95,9 @@ class ActivitiesTableViewCell: UITableViewCell {
                         
                         activity.compeltedRuns = completedRuns.count
                         activity.incompletedRuns = incompleteRuns
-                        activity.currentRunId =  (run != nil) ? (run?.runId)! : 1
+                        activity.currentRunId =  (run != nil) ? (run?.runId)! : runsBeforeToday.count
                         activity.totalRuns = runs.count
+                        activity.currentRun = run
                         
                         self.updateUserRunStatus(activity: activity)
                         
@@ -115,7 +135,7 @@ class ActivitiesTableViewCell: UITableViewCell {
         if let userActivityStatus = currentUser.participatedActivites.filter({$0.activityId == activity.actvityId && $0.activityRunId == String(activity.currentRunId)}).first {
             
             //assign to study
-            //activity.userParticipateState = userActivityStatus
+            activity.userParticipationStatus = userActivityStatus
             
             //user study status
             labelStatus?.text = userActivityStatus.status.description
@@ -151,6 +171,10 @@ class ActivitiesTableViewCell: UITableViewCell {
                 self.labelStatus?.text = UserActivityStatus.ActivityStatus.abandoned.description
             }
             else {
+                
+                let activityStatus = UserActivityStatus()
+                activityStatus.status = .yetToJoin
+                activity.userParticipationStatus = activityStatus
                 
                 self.labelStatus?.backgroundColor = kBlueColor
                 self.labelStatus?.text = UserActivityStatus.ActivityStatus.yetToJoin.description

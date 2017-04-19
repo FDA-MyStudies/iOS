@@ -395,7 +395,7 @@ class Schedule{
         let formatter = DateFormatter()
         formatter.dateFormat = "YYYY-mm-dd"
         formatter.dateStyle = .short
-        formatter.timeZone = TimeZone.init(abbreviation:"GMT")
+        formatter.timeZone = TimeZone.init(abbreviation:"UTC")
         return formatter
     }()
     
@@ -403,7 +403,7 @@ class Schedule{
         let formatter = DateFormatter()
         formatter.dateFormat = "YYYY-mm-dd"
         formatter.dateStyle = .short
-        formatter.timeZone = TimeZone.init(abbreviation:"GMT")
+        formatter.timeZone = TimeZone.current // TimeZone.init(abbreviation:"IST")
         return formatter
     }()
     

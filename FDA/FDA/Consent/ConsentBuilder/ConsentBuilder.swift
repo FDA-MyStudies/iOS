@@ -49,7 +49,6 @@ enum ConsentStatus:String{
 
 
 
-
 //MARK:ConsentBuilder Class
 
 class ConsentBuilder{
@@ -297,7 +296,7 @@ class ConsentBuilder{
         let visualConsentStep:ORKVisualConsentStep? = self.getVisualConsentStep()
         let sharingConsentStep:ORKConsentSharingStep? = self.getConsentSharingStep()
         let reviewConsentStep:ORKConsentReviewStep? = self.getReviewConsentStep()
-        
+                
         var stepArray:Array<ORKStep>? = Array()
         
         if visualConsentStep != nil{
@@ -435,3 +434,21 @@ struct ReviewConsent{
         
     }
 }
+
+extension ORKConsentReviewStep {
+    
+    func showsProgress() -> Bool {
+        return true
+    }
+    
+}
+
+extension ORKVisualConsentStep {
+    
+    func showsProgress() -> Bool {
+        return true
+    }
+    
+}
+
+

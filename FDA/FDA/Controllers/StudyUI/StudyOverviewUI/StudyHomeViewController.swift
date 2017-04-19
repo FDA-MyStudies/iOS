@@ -233,6 +233,7 @@ class StudyHomeViewController : UIViewController{
         
         let orkOrderedTask:ORKTask? = ORKOrderedTask(identifier:kEligibilityConsentTask, steps: eligibilitySteps)
         
+       
         
         taskViewController = ORKTaskViewController(task:orkOrderedTask, taskRun: nil)
         
@@ -240,7 +241,7 @@ class StudyHomeViewController : UIViewController{
         taskViewController?.outputDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
         
         
-        taskViewController?.navigationItem.title = "Consent"
+        taskViewController?.navigationItem.title = nil
         
         
         UIView.appearance(whenContainedInInstancesOf: [ORKTaskViewController.self]).tintColor = kUIColorForSubmitButtonBackground

@@ -90,6 +90,7 @@ class ActivityBuilder {
                                 activityStepArray?.append(questionStep!)
                                 
                             case .form:
+                                
                                 let formStep:ActivityFormStep? = ActivityFormStep()
                                 formStep?.initWithDict(stepDict: stepDict)
                                 
@@ -165,7 +166,6 @@ class ActivityBuilder {
                     
                     task =  ORKOrderedTask(identifier: (activity?.actvityId!)!, steps: orkStepArray)
                     
-                
                     task =  ORKNavigableOrderedTask(identifier:(activity?.actvityId)!, steps: orkStepArray)
                     
                     
@@ -225,12 +225,25 @@ class ActivityBuilder {
                                     }
                                     
                                     if choicePredicate.count == 0{
+                                        // if condition is empty
                                         
+                                        if (destination?.count)! > 0 {
+                                        // if destination is not empty but condition is empty
+                                            
                                         for destinationId in destination!{
                                             
                                            let  directRule = ORKDirectStepNavigationRule(destinationStepIdentifier: destinationId)
                                             
                                               (task as! ORKNavigableOrderedTask).setNavigationRule(directRule, forTriggerStepIdentifier:step.identifier)
+                                        }
+                                        }
+                                        else{
+                                            // if both destination and condition are empty
+                                            
+                                            let  directRule = ORKDirectStepNavigationRule(destinationStepIdentifier: "CompletionStep")
+                                            
+                                            (task as! ORKNavigableOrderedTask).setNavigationRule(directRule, forTriggerStepIdentifier:step.identifier)
+                                            
                                         }
                                     }
                                     else{

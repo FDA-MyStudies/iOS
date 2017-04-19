@@ -93,7 +93,7 @@ class ActivitiesViewController : UIViewController{
     
     func createActivity(){
         
-        
+        /*
         let filePath  = Bundle.main.path(forResource: "Acivity_Question", ofType: "json")
         
         //let filePath  = Bundle.main.path(forResource: "FetalKickTest", ofType: "json")
@@ -109,7 +109,7 @@ class ActivitiesViewController : UIViewController{
             print("\(error)")
         }
     
-       
+       */
         
         if Utilities.isValidObject(someObject: Study.currentActivity?.steps as AnyObject?){
             
@@ -338,10 +338,10 @@ extension ActivitiesViewController : UITableViewDelegate{
             Study.updateCurrentActivity(activity:activities[indexPath.row])
             
             //Following to be commented
-            self.createActivity()
+           // self.createActivity()
             
             //To be uncommented
-        //WCPServices().getStudyActivityMetadata(studyId:(Study.currentStudy?.studyId)! , activityId: (Study.currentActivity?.actvityId)!, activityVersion: "1", delegate: self)
+        WCPServices().getStudyActivityMetadata(studyId:(Study.currentStudy?.studyId)! , activityId: (Study.currentActivity?.actvityId)!, activityVersion: "1", delegate: self)
             
             self.updateActivityStatusToInProgress()
             

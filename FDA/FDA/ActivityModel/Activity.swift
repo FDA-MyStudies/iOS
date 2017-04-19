@@ -107,6 +107,8 @@ class Activity{
     var compeltedRuns = 0
     var incompletedRuns = 0
     var activityRuns:Array<ActivityRun>! = []
+    var currentRun:ActivityRun! = nil
+    var userParticipationStatus:UserActivityStatus! = nil
     
     init() {
         //Default Initializer

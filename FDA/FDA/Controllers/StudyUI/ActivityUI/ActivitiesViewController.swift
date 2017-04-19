@@ -335,17 +335,38 @@ extension ActivitiesViewController : UITableViewDelegate{
             let rowDetail = tableViewSections[indexPath.section]
             let activities = rowDetail["activities"] as! Array<Activity>
             
-            Study.updateCurrentActivity(activity:activities[indexPath.row])
+            let activity = activities[indexPath.row]
+            //Check for activity run status & if run is available
+            if activity.currentRun != nil {
+                if activity.userParticipationStatus != nil {
+                    let activityRunParticipationStatus = activity.userParticipationStatus
+                    if activityRunParticipationStatus?.status == .yetToJoin || activityRunParticipationStatus?.status == .inProgress {
+                        
+                        
+                        Study.updateCurrentActivity(activity:activities[indexPath.row])
+                        
+                        //Following to be commented
+                        self.createActivity()
+                        
+                        //To be uncommented
+                        //WCPServices().getStudyActivityMetadata(studyId:(Study.currentStudy?.studyId)! , activityId: (Study.currentActivity?.actvityId)!, activityVersion: "1", delegate: self)
+                        
+                        self.updateActivityStatusToInProgress()
+                        
+                        self.selectedIndexPath = indexPath
+                    }
+                    else {
+                        debugPrint("run is completed")
+                    }
+                }
+               
+            }
+            else {
+                debugPrint("run not available")
+            }
             
-            //Following to be commented
-            self.createActivity()
             
-            //To be uncommented
-        //WCPServices().getStudyActivityMetadata(studyId:(Study.currentStudy?.studyId)! , activityId: (Study.currentActivity?.actvityId)!, activityVersion: "1", delegate: self)
-            
-            self.updateActivityStatusToInProgress()
-            
-            self.selectedIndexPath = indexPath
+           
             
         case .upcoming,.past: break
        

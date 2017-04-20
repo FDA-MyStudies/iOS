@@ -355,7 +355,7 @@ extension StudyHomeViewController: PageViewControllerDelegate {
         if index == 0 {
             // for First Page
             
-
+            
             UIView.animate(withDuration: 0.1, animations: {
                 self.buttonJoinStudy?.backgroundColor = kUIColorForSubmitButtonBackground
                 self.buttonJoinStudy?.setTitleColor(UIColor.white, for: .normal)
@@ -489,15 +489,23 @@ extension StudyHomeViewController:ORKTaskViewControllerDelegate{
             
             self.addProgressIndicator()
             LabKeyServices().enrollForStudy(studyId: "TESTSTUDY01", token: (ConsentBuilder.currentConsent?.consentResult?.token)!, delegate: self)
-            
-        }
+            taskViewController.dismiss(animated: true, completion: nil)        }
         else{
             //activityBuilder?.actvityResult?.initWithORKTaskResult(taskResult: taskViewController.result)
+            
+            
+            
+            taskViewController.dismiss(animated: true, completion: nil)
+            
+            if reason == ORKTaskViewControllerFinishReason.discarded{
+                
+                _ = self.navigationController?.popViewController(animated: true)
+            }
         }
         
         
-        taskViewController.dismiss(animated: true, completion: nil)
-       
+        
+        
     }
     
     func taskViewController(_ taskViewController: ORKTaskViewController, stepViewControllerWillAppear stepViewController: ORKStepViewController) {
@@ -535,9 +543,9 @@ extension StudyHomeViewController:ORKTaskViewControllerDelegate{
             
             if stepViewController.step?.identifier == kConsentViewPdfCompletionStep{
                 
-                 stepViewController.backButtonItem = nil
+                stepViewController.backButtonItem = nil
                 
-                  let orkStepResult:ORKStepResult? = taskViewController.result.results?[(taskViewController.result.results?.count)! - 2] as! ORKStepResult?
+                let orkStepResult:ORKStepResult? = taskViewController.result.results?[(taskViewController.result.results?.count)! - 2] as! ORKStepResult?
                 
                 let consentSignatureResult:ConsentCompletionTaskResult? = orkStepResult?.results?.first as? ConsentCompletionTaskResult
                 
@@ -549,7 +557,7 @@ extension StudyHomeViewController:ORKTaskViewControllerDelegate{
                 }
             }
             else{
-            stepViewController.backButtonItem?.isEnabled = true
+                stepViewController.backButtonItem?.isEnabled = true
             }
         }
         
@@ -596,15 +604,17 @@ extension StudyHomeViewController:ORKTaskViewControllerDelegate{
                 }
                 else{
                     
+                     let documentCopy:ORKConsentDocument = (ConsentBuilder.currentConsent?.consentDocument)!.copy() as! ORKConsentDocument
                     
-                    consentSignatureResult?.apply(to: (ConsentBuilder.currentConsent?.consentDocument)!)
+                    
+                    consentSignatureResult?.apply(to: documentCopy)
                     
                     let gatewayStoryboard = UIStoryboard(name: kFetalKickCounterStep, bundle: nil)
                     
                     let ttController = gatewayStoryboard.instantiateViewController(withIdentifier: kConsentSharePdfStoryboardId) as! ConsentSharePdfStepViewController
                     ttController.step = step
                     
-                    ttController.consentDocument =  ConsentBuilder.currentConsent?.consentDocument
+                    ttController.consentDocument =  documentCopy
                     
                     return ttController
                     

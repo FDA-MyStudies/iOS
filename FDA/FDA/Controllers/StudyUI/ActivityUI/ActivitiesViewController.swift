@@ -140,7 +140,7 @@ class ActivitiesViewController : UIViewController{
         }
         
      
-       taskViewController?.traitCollection
+       taskViewController?.showsProgressInNavigationBar = true
         
         UIView.appearance(whenContainedInInstancesOf: [ORKTaskViewController.self]).tintColor = kUIColorForSubmitButtonBackground
         

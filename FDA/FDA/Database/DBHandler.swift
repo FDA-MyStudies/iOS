@@ -201,29 +201,71 @@ class DBHandler: NSObject {
      //MARK:Activity
     class func saveActivities(activityies:Array<Activity>){
         
+        let realm = try! Realm()
         
         var dbActivities:Array<DBActivity> = []
         for activity in activityies {
             
-            let dbActivity = DBActivity()
-            dbActivity.studyId = activity.studyId
-            dbActivity.actvityId = activity.actvityId
-            dbActivity.type = activity.type?.rawValue
-            dbActivity.name = activity.name
-            dbActivity.startDate = activity.startDate
-            dbActivity.endDate = activity.endDate
-            dbActivity.frequencyType = activity.frequencyType.rawValue
+            let dbActivityArray = realm.objects(DBActivity.self).filter("studyId == %@ && actvityId == %@",activity.studyId!,activity.actvityId!) //as DBActivity
+           
+            var dbActivity = DBActivity()
+            if dbActivityArray.count != 0 {
+                dbActivity = dbActivityArray.last!
+                try! realm.write({
+                    
+                    dbActivity.type = activity.type?.rawValue
+                    dbActivity.name = activity.name
+                    dbActivity.startDate = activity.startDate
+                    dbActivity.endDate = activity.endDate
+                    dbActivity.frequencyType = activity.frequencyType.rawValue
+                    do {
+                        let json = ["data":activity.frequencyRuns]
+                        let data =  try JSONSerialization.data(withJSONObject: json, options: JSONSerialization.WritingOptions.prettyPrinted)
+                        dbActivity.frequencyRunsData = data
+                    }
+                    catch{
+                        
+                    }
+                    
+                })
+            }
+            else {
+                
+                //let dbActivity = DBActivity()
+                dbActivity.studyId = activity.studyId
+                dbActivity.actvityId = activity.actvityId
+                dbActivity.type = activity.type?.rawValue
+                dbActivity.name = activity.name
+                dbActivity.startDate = activity.startDate
+                dbActivity.endDate = activity.endDate
+                dbActivity.frequencyType = activity.frequencyType.rawValue
+                do {
+                    let json = ["data":activity.frequencyRuns]
+                    let data =  try JSONSerialization.data(withJSONObject: json, options: JSONSerialization.WritingOptions.prettyPrinted)
+                    dbActivity.frequencyRunsData = data
+                }
+                catch{
+                    
+                }
+                dbActivities.append(dbActivity)
+            }
             
-            dbActivities.append(dbActivity)
+            
+            
+            
+            //dbActivities.append(dbActivity)
            
         }
         
-        let realm = try! Realm()
+        
         print("DBPath : \(realm.configuration.fileURL)")
-        try! realm.write({
-            realm.add(dbActivities, update: true)
-            
-        })
+        if dbActivities.count > 0 {
+            try! realm.write({
+                realm.add(dbActivities, update: true)
+                
+            })
+        }
+       
     }
     
     
@@ -263,19 +305,47 @@ class DBHandler: NSObject {
             activity.restortionData = dbActivity.restortionData
             activity.totalRuns = dbActivity.activityRuns.count
             
+            do {
+                let frequencyRuns = try JSONSerialization.jsonObject(with: dbActivity.frequencyRunsData!, options: []) as! [String:Any]
+                activity.frequencyRuns = frequencyRuns["data"] as! Array<Dictionary<String, Any>>?
+            }
+            catch{
+                
+            }
+            
+            print("Database \(activity.totalRuns)")
+            
             if activity.totalRuns != 0 {
                 
-                var runsBeforeToday = dbActivity.activityRuns.filter({$0.endDate <= date})
                 
-                let run = dbActivity.activityRuns.filter({$0.startDate <= date && $0.endDate > date}).first //current run
-
-                let completedRuns = dbActivity.activityRuns.filter({$0.isCompleted == true})
+                
+                var runs:Array<ActivityRun> = []
+                for dbRun in dbActivity.activityRuns {
+                    let run = ActivityRun()
+                    run .activityId = dbRun.activityId
+                    run.complitionDate = dbRun.complitionDate
+                    run.startDate = dbRun.startDate
+                    run.endDate = dbRun.endDate
+                    run.runId = dbRun.runId
+                    run.studyId = dbRun.studyId
+                    run.isCompleted = dbRun.isCompleted
+                    
+                    runs.append(run)
+                }
+                activity.activityRuns = runs
+                
+                var runsBeforeToday = runs.filter({$0.endDate <= date})
+                
+                let run = runs.filter({$0.startDate <= date && $0.endDate > date}).first //current run
+                
+                let completedRuns = runs.filter({$0.isCompleted == true})
                 let incompleteRuns = runsBeforeToday.count - completedRuns.count
                 
                 
                 activity.compeltedRuns = completedRuns.count
-                activity.incompletedRuns = incompleteRuns
+                activity.incompletedRuns = (incompleteRuns < 0) ? 0 :incompleteRuns
                 activity.currentRunId =  (run != nil) ? (run?.runId)! : runsBeforeToday.count
+                activity.currentRun = run
                 
                 
             }
@@ -314,7 +384,7 @@ class DBHandler: NSObject {
         debugPrint("DBPath : \(realm.configuration.fileURL)")
         try! realm.write({
             
-            realm.add(dbActivityRuns)
+            //realm.add(dbActivityRuns)
             dbActivity?.activityRuns.append(objectsIn: dbActivityRuns)
             //dbStudy?.websiteLink = overview.websiteLink
             

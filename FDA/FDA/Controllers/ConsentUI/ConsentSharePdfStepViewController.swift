@@ -9,6 +9,8 @@
 import UIKit
 import ResearchKit
 
+let kConsentCompletionResultIdentifier = "ConsentCompletion"
+
 class ConsentCompletionStep: ORKStep {
     var mainTitle:String?
     var subTitle:String?
@@ -19,6 +21,10 @@ class ConsentCompletionViewController: ORKStepViewController {
     @IBOutlet weak var buttonViewPdf:UIButton?
     
     @IBOutlet weak var buttonNext:UIButton?
+    
+    
+    var taskResult:ConsentCompletionTaskResult = ConsentCompletionTaskResult(identifier: kConsentCompletionResultIdentifier)
+    
     
 //MARK:ORKstepView Controller Init methods
     override init(step: ORKStep?) {
@@ -39,14 +45,26 @@ class ConsentCompletionViewController: ORKStepViewController {
         
     }
     
+    override var result: ORKStepResult? {
+        
+        let orkResult = super.result
+        orkResult?.results = [self.taskResult]
+        return orkResult
+        
+    }
+    
     
 //MARK:Button Actions
     
     @IBAction func buttonActionNext(sender: UIButton?) {
+         self.taskResult.didTapOnViewPdf = false
         self.goForward()
     }
     
     @IBAction func buttonActionViewPdf(sender: UIButton?) {
+        
+        self.taskResult.didTapOnViewPdf = true
+        self.goForward()
     }
     
 //MARK:View controller delegates
@@ -66,3 +84,25 @@ class ConsentCompletionViewController: ORKStepViewController {
     }
     
 }
+
+
+
+open class ConsentCompletionTaskResult: ORKResult {
+    
+    open var didTapOnViewPdf:Bool = false
+    
+    
+    override open var description: String {
+        get {
+            return "didTapOnViewPdf:\(didTapOnViewPdf)"
+        }
+    }
+    
+    override open var debugDescription: String {
+        get {
+            return "didTapOnViewPdf:\(didTapOnViewPdf)"
+        }
+    }
+}
+
+

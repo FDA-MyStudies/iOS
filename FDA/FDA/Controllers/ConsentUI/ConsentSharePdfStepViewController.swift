@@ -14,14 +14,16 @@ let kConsentCompletionResultIdentifier = "ConsentCompletion"
 class ConsentCompletionStep: ORKStep {
     var mainTitle:String?
     var subTitle:String?
+    
+    
 }
 
-class ConsentCompletionViewController: ORKStepViewController {
+class ConsentSharePdfStepViewController: ORKStepViewController {
 
     @IBOutlet weak var buttonViewPdf:UIButton?
     
     @IBOutlet weak var buttonNext:UIButton?
-    
+    var consentDocument:ORKConsentDocument?
     
     var taskResult:ConsentCompletionTaskResult = ConsentCompletionTaskResult(identifier: kConsentCompletionResultIdentifier)
     
@@ -63,8 +65,46 @@ class ConsentCompletionViewController: ORKStepViewController {
     
     @IBAction func buttonActionViewPdf(sender: UIButton?) {
         
-        self.taskResult.didTapOnViewPdf = true
-        self.goForward()
+        self.addProgressIndicator()
+      
+        
+        self.consentDocument?.makePDF(completionHandler: { data,error in
+            NSLog("data: \(data)    \n  error: \(error)")
+            
+            self.taskResult.pdfData = data!
+            
+            self.taskResult.didTapOnViewPdf = true
+            
+            let dir = FileManager.getStorageDirectory(type: .study)
+            
+            let fullPath = "file://" + dir + "/" + "Consent" +  "_" + "\((Study.currentStudy?.studyId)!)" + ".pdf"
+            
+            do {
+                
+                if FileManager.default.fileExists(atPath: fullPath){
+                    
+                    try FileManager.default.removeItem(atPath: fullPath)
+                    
+                }
+                FileManager.default.createFile(atPath:fullPath , contents: data, attributes: [:])
+                
+                
+                try data?.write(to:  URL(string:fullPath)!)
+                
+                //try data?.write(to: URL(string:fullPath)! , options: .atomicWrite)
+                
+                // writing to disk
+                
+            } catch let error as NSError {
+                print("error writing to url \(fullPath)")
+                print(error.localizedDescription)
+            }
+
+            self.removeProgressIndicator()
+            
+            self.goForward()
+            
+        })
     }
     
 //MARK:View controller delegates
@@ -76,6 +116,10 @@ class ConsentCompletionViewController: ORKStepViewController {
             step.mainTitle = "Thanks for providing consent for this Study"
             step.subTitle =  "You can now start participating in the Study"
         }
+        
+         buttonViewPdf?.layer.borderColor =   kUicolorForButtonBackground
+        
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -91,6 +135,7 @@ open class ConsentCompletionTaskResult: ORKResult {
     
     open var didTapOnViewPdf:Bool = false
     
+    open var pdfData:Data = Data()
     
     override open var description: String {
         get {

@@ -114,6 +114,7 @@ let kMessageContactedSuccessfuly = "Thank you for contacting us. We will get bac
 //MARK: ActivitiesViewController constants
 let kBackgroundTableViewColor = UIColor.init(red: 216/255.0, green: 227/255.0, blue: 230/255.0, alpha: 1)
 let kActivitiesTableViewCell = "ActivitiesCell"
+let kActivitiesTableViewScheduledCell = "ActivitiesCellScheduled"
 
 let kYellowColor = UIColor.init(red: 245/255.0, green: 175/255.0, blue: 55/255.0, alpha: 1.0)
 let kBlueColor = UIColor.init(red: 0/255.0, green: 124/255.0, blue: 186/255.0, alpha: 1.0)

@@ -233,7 +233,7 @@ class StudyHomeViewController : UIViewController{
         
         let orkOrderedTask:ORKTask? = ORKOrderedTask(identifier:kEligibilityConsentTask, steps: eligibilitySteps)
         
-       
+        
         
         taskViewController = ORKTaskViewController(task:orkOrderedTask, taskRun: nil)
         
@@ -355,8 +355,7 @@ extension StudyHomeViewController: PageViewControllerDelegate {
         if index == 0 {
             // for First Page
             
-            
-            
+
             UIView.animate(withDuration: 0.1, animations: {
                 self.buttonJoinStudy?.backgroundColor = kUIColorForSubmitButtonBackground
                 self.buttonJoinStudy?.setTitleColor(UIColor.white, for: .normal)
@@ -491,9 +490,6 @@ extension StudyHomeViewController:ORKTaskViewControllerDelegate{
             self.addProgressIndicator()
             LabKeyServices().enrollForStudy(studyId: "TESTSTUDY01", token: (ConsentBuilder.currentConsent?.consentResult?.token)!, delegate: self)
             
-            
-            
-            
         }
         else{
             //activityBuilder?.actvityResult?.initWithORKTaskResult(taskResult: taskViewController.result)
@@ -501,9 +497,7 @@ extension StudyHomeViewController:ORKTaskViewControllerDelegate{
         
         
         taskViewController.dismiss(animated: true, completion: nil)
-        
-        
-        
+       
     }
     
     func taskViewController(_ taskViewController: ORKTaskViewController, stepViewControllerWillAppear stepViewController: ORKStepViewController) {
@@ -532,13 +526,31 @@ extension StudyHomeViewController:ORKTaskViewControllerDelegate{
              */
         }
         
-        if stepViewController.step?.identifier == kEligibilityVerifiedScreen || stepViewController.step?.identifier == kConsentCompletionStepIdentifier || stepViewController.step?.identifier == "visual" || stepViewController.step?.identifier == "Review"{
+        if stepViewController.step?.identifier == kEligibilityVerifiedScreen || stepViewController.step?.identifier == kConsentCompletionStepIdentifier || stepViewController.step?.identifier == "visual" || stepViewController.step?.identifier == "Review" || stepViewController.step?.identifier == kConsentSharePdfCompletionStep{
             
             stepViewController.backButtonItem = nil
             
         }
         else{
+            
+            if stepViewController.step?.identifier == kConsentViewPdfCompletionStep{
+                
+                 stepViewController.backButtonItem = nil
+                
+                  let orkStepResult:ORKStepResult? = taskViewController.result.results?[(taskViewController.result.results?.count)! - 2] as! ORKStepResult?
+                
+                let consentSignatureResult:ConsentCompletionTaskResult? = orkStepResult?.results?.first as? ConsentCompletionTaskResult
+                
+                if  consentSignatureResult?.didTapOnViewPdf == false{
+                    stepViewController.goForward()
+                }
+                else{
+                    
+                }
+            }
+            else{
             stepViewController.backButtonItem?.isEnabled = true
+            }
         }
         
         
@@ -566,31 +578,70 @@ extension StudyHomeViewController:ORKTaskViewControllerDelegate{
             
             
             return ttController
-        } else {
+        }
+        else if step.identifier == kConsentSharePdfCompletionStep {
             
-            if step .isKind(of: ORKCompletionStep.self){
+            
+            let reviewStep:ORKStepResult? = taskViewController.result.results?[(taskViewController.result.results?.count)! - 1] as! ORKStepResult?
+            
+            if (reviewStep?.identifier)! == "Review" && (reviewStep?.results?.count)! > 0{
+                let consentSignatureResult:ORKConsentSignatureResult? = reviewStep?.results?.first as? ORKConsentSignatureResult
                 
-                let reviewStep:ORKStepResult? = taskViewController.result.results?[(taskViewController.result.results?.count)! - 1] as! ORKStepResult?
-                
-                if (reviewStep?.identifier)! == "Review" && (reviewStep?.results?.count)! > 0{
-                    let consentSignatureResult:ORKConsentSignatureResult? = reviewStep?.results?.first as? ORKConsentSignatureResult
+                if  consentSignatureResult?.consented == false{
                     
-                    if  consentSignatureResult?.consented == false{
-                        taskViewController.dismiss(animated: true
-                            , completion: nil)
-                        return nil
-                    }
-                    else{
-                        return nil
-                    }
-                }
-                else {
+                    
+                    taskViewController.dismiss(animated: true
+                        , completion: nil)
                     return nil
                 }
+                else{
+                    
+                    
+                    consentSignatureResult?.apply(to: (ConsentBuilder.currentConsent?.consentDocument)!)
+                    
+                    let gatewayStoryboard = UIStoryboard(name: kFetalKickCounterStep, bundle: nil)
+                    
+                    let ttController = gatewayStoryboard.instantiateViewController(withIdentifier: kConsentSharePdfStoryboardId) as! ConsentSharePdfStepViewController
+                    ttController.step = step
+                    
+                    ttController.consentDocument =  ConsentBuilder.currentConsent?.consentDocument
+                    
+                    return ttController
+                    
+                }
             }
-            else{
+            else {
                 return nil
             }
+        }
+        else if step.identifier == kConsentViewPdfCompletionStep {
+            
+            let reviewSharePdfStep:ORKStepResult? = taskViewController.result.results?.last as! ORKStepResult?
+            
+            let result = (reviewSharePdfStep?.results?.first as? ConsentCompletionTaskResult)
+            
+            if (result?.didTapOnViewPdf)!{
+                let gatewayStoryboard = UIStoryboard(name: kFetalKickCounterStep, bundle: nil)
+                
+                let ttController = gatewayStoryboard.instantiateViewController(withIdentifier: kConsentViewPdfStoryboardId) as! ConsentPdfViewerStepViewController
+                ttController.step = step
+                
+                ttController.pdfData = result?.pdfData
+                
+                return ttController
+                
+                
+            }
+            else{
+                //taskViewController.goForward()
+                return nil
+            }
+            
+        }
+        else {
+            
+            return nil
+            
             
         }
     }

@@ -445,7 +445,9 @@ class ActivityQuestionStep: ActivityStep {
                     
                     let localizedQuestionStepAnswerFormatUnit = NSLocalizedString(formatDict?[kStepQuestionNumericUnit] as! String , comment: "")
                     
-                    switch ORKNumericAnswerStyle(rawValue:formatDict?[kStepQuestionNumericStyle] as! Int )! as ORKNumericAnswerStyle {
+                    let style = (formatDict?[kStepQuestionNumericStyle] as! String == "Decimal") ? 0 : 1
+                    
+                    switch ORKNumericAnswerStyle(rawValue:style)! as ORKNumericAnswerStyle {
                     case .integer:
                         questionStepAnswerFormat = ORKAnswerFormat.integerAnswerFormat(withUnit:localizedQuestionStepAnswerFormatUnit)
                         

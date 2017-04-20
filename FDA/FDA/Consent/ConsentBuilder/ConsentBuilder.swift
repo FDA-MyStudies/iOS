@@ -38,7 +38,16 @@ let kConsentReviewStepReasonForConsent = "reasonForConsent"
 
 //
 
-let kConsentCompletionStepIdentifier = "ConsentCompletionStep"
+let kConsentSharePdfCompletionStep = "ConsentShareCompletionStep"
+let kConsentViewPdfCompletionStep = "ConsentViewPdfCompletionStep"
+let kConsentCompletionStepIdentifier = "ConsentFinalCompletionStep"
+
+
+//Completion Storyboard Segue
+
+let kConsentSharePdfStoryboardId = "ConsentSharePdfStepViewControllerIdentifier"
+
+let kConsentViewPdfStoryboardId = "ConsentPdfViewerStepViewControllerIdentifier"
 
 
 enum ConsentStatus:String{
@@ -131,13 +140,13 @@ class ConsentBuilder{
         }
     }
     
-    func getVisualConsentStep() -> ORKVisualConsentStep? {
+    func getVisualConsentStep() -> VisualConsentStep? {
         /* Method to get VisualConsentStep
          @returns an instance of ORKVisualConsentStep
          */
         
         if self.consentSectionArray.count > 0 {
-        let visualConsentStep = ORKVisualConsentStep(identifier: "visual", document: self.getConsentDocument())
+        let visualConsentStep = VisualConsentStep(identifier: "visual", document: self.getConsentDocument())
         return visualConsentStep
         }
         else{
@@ -152,7 +161,7 @@ class ConsentBuilder{
             return self.consentDocument!
         }
         else{
-            self.consentDocument = ORKConsentDocument()
+            //self.consentDocument = ORKConsentDocument()
             self.consentDocument = self.createConsentDocument()
             return self.consentDocument!
         }
@@ -176,7 +185,7 @@ class ConsentBuilder{
             
             
             consentDocument.title = Study.currentStudy?.name
-            consentDocument.signaturePageTitle = "signaturePageTitle"
+            consentDocument.signaturePageTitle = "Participant"
             consentDocument.signaturePageContent = "signaturePageContent"
             
             consentDocument.sections = [ORKConsentSection]()
@@ -187,19 +196,20 @@ class ConsentBuilder{
             
             // consentDocument.sections? = self.consentSectionArray
             
-            let user = User.currentUser
-            let signatureImage = UIImage(named: "Bomb.png")!
+//            let user = User.currentUser
+//            let signatureImage = UIImage(named: "Bomb.png")!
+//            
+//            let investigatorSignatureTitle = NSLocalizedString(user.getFullName(), comment: "")
+//            let investigatorSignatureGivenName = NSLocalizedString(user.firstName!, comment: "")
+//            let investigatorSignatureFamilyName = NSLocalizedString(user.lastName!, comment: "")
+//            let investigatorSignatureDateString = Utilities.getStringFromDate(date: Date.init(timeIntervalSinceNow: 0))
             
-            let investigatorSignatureTitle = NSLocalizedString(user.getFullName(), comment: "")
-            let investigatorSignatureGivenName = NSLocalizedString(user.firstName!, comment: "")
-            let investigatorSignatureFamilyName = NSLocalizedString(user.lastName!, comment: "")
-            let investigatorSignatureDateString = Utilities.getStringFromDate(date: Date.init(timeIntervalSinceNow: 0))
+//            let investigatorSignature = ORKConsentSignature(forPersonWithTitle: investigatorSignatureTitle, dateFormatString: nil, identifier:"Signature", givenName: investigatorSignatureGivenName, familyName: investigatorSignatureFamilyName, signatureImage: signatureImage, dateString: investigatorSignatureDateString)
             
-            let investigatorSignature = ORKConsentSignature(forPersonWithTitle: investigatorSignatureTitle, dateFormatString: nil, identifier:"Signature", givenName: investigatorSignatureGivenName, familyName: investigatorSignatureFamilyName, signatureImage: signatureImage, dateString: investigatorSignatureDateString)
-            
-            
+            let investigatorSignature = ORKConsentSignature(forPersonWithTitle:"Participant", dateFormatString: "MM/dd/YYYY", identifier: "Signature")
             
             consentDocument.addSignature(investigatorSignature)
+            
             return consentDocument
             
         }
@@ -212,12 +222,12 @@ class ConsentBuilder{
     }
     
     
-    func getReviewConsentStep() -> ORKConsentReviewStep? {
+    func getReviewConsentStep() -> ConsentReviewStep? {
         /* Method to get ReviewConsentStep
          @returns an instance of ORKConsentReviewStep
          */
         
-        let reviewConsentStep:ORKConsentReviewStep?
+        let reviewConsentStep:ConsentReviewStep?
 
         if  Utilities.isValidValue(someObject: self.reviewConsent?.signatureContent as AnyObject ){
             
@@ -229,7 +239,7 @@ class ConsentBuilder{
             consentDocument?.signaturePageContent = NSLocalizedString("I agree to participate in this research study.", comment: "")
             
             
-             reviewConsentStep = ORKConsentReviewStep(identifier: "Review", signature: (self.getConsentDocument() as ORKConsentDocument).signatures?[0], in: self.getConsentDocument())
+             reviewConsentStep = ConsentReviewStep(identifier: "Review", signature: (self.getConsentDocument() as ORKConsentDocument).signatures?[0], in: self.getConsentDocument())
             
           
             
@@ -242,7 +252,7 @@ class ConsentBuilder{
 
             
             
-             reviewConsentStep = ORKConsentReviewStep(identifier: "Review", signature: consentDocument?.signatures?[0], in: consentDocument!)
+             reviewConsentStep = ConsentReviewStep(identifier: "Review", signature: consentDocument?.signatures?[0], in: consentDocument!)
             
         }
         
@@ -263,7 +273,7 @@ class ConsentBuilder{
     }
     
     
-    func getConsentSharingStep() -> ORKConsentSharingStep? {
+    func getConsentSharingStep() -> ConsentSharingStep? {
         /* Method to get ConsentSharingStep
          @returns an instance of ORKConsentSharingStep
          */
@@ -275,7 +285,7 @@ class ConsentBuilder{
             
             // identifier missing
             
-            let sharingConsentStep = ORKConsentSharingStep(identifier: "Sharing", investigatorShortDescription: (self.sharingConsent?.shortDesc)!, investigatorLongDescription: (self.sharingConsent?.longDesc)!, localizedLearnMoreHTMLContent: (self.sharingConsent?.learnMore)!)
+            let sharingConsentStep = ConsentSharingStep(identifier: "Sharing", investigatorShortDescription: (self.sharingConsent?.shortDesc)!, investigatorLongDescription: (self.sharingConsent?.longDesc)!, localizedLearnMoreHTMLContent: (self.sharingConsent?.learnMore)!)
             
             return sharingConsentStep
             
@@ -293,9 +303,9 @@ class ConsentBuilder{
         /* Method to get ORKTask i.e ConsentTask
          @returns an instance of ORKTask
          */
-        let visualConsentStep:ORKVisualConsentStep? = self.getVisualConsentStep()
-        let sharingConsentStep:ORKConsentSharingStep? = self.getConsentSharingStep()
-        let reviewConsentStep:ORKConsentReviewStep? = self.getReviewConsentStep()
+        let visualConsentStep:VisualConsentStep? = self.getVisualConsentStep()
+        let sharingConsentStep:ConsentSharingStep? = self.getConsentSharingStep()
+        let reviewConsentStep:ConsentReviewStep? = self.getReviewConsentStep()
                 
         var stepArray:Array<ORKStep>? = Array()
         
@@ -317,15 +327,34 @@ class ConsentBuilder{
         }
         
         
+        
+       // kConsentViewPdfCompletionStep
+        
+        let consentCompletionStep = ConsentCompletionStep(identifier: kConsentSharePdfCompletionStep)
+        
+        consentCompletionStep.mainTitle = "Thanks for providing consent for this Study"
+        consentCompletionStep.subTitle =  "You can now start participating in the Study"
+        
+        let consentViewPdfStep = ConsentPdfViewerStep(identifier:kConsentViewPdfCompletionStep )
+        
+
         let completionStep = ORKCompletionStep(identifier:kConsentCompletionStepIdentifier)
         completionStep.title = NSLocalizedString("Thanks for providing consent for this Study", comment: "")
         
         
         if (stepArray?.count)! > 0 {
             
+             stepArray?.append(consentCompletionStep)
+             stepArray?.append(consentViewPdfStep)
+            
             stepArray?.append(completionStep)
             
-            return ORKOrderedTask(identifier: "ConsentTask", steps: stepArray)
+            
+            let task = ORKNavigableOrderedTask(identifier: "ConsentTask", steps: stepArray)
+            
+            return task
+            
+            //return ORKOrderedTask(identifier: "ConsentTask", steps: stepArray)
         }
         else{
             return nil
@@ -435,7 +464,7 @@ struct ReviewConsent{
     }
 }
 
-extension ORKConsentReviewStep {
+class ConsentReviewStep:ORKConsentReviewStep {
     
     func showsProgress() -> Bool {
         return true
@@ -443,7 +472,15 @@ extension ORKConsentReviewStep {
     
 }
 
-extension ORKVisualConsentStep {
+class VisualConsentStep:ORKVisualConsentStep {
+    
+    func showsProgress() -> Bool {
+        return true
+    }
+    
+}
+
+class ConsentSharingStep:ORKConsentSharingStep {
     
     func showsProgress() -> Bool {
         return true

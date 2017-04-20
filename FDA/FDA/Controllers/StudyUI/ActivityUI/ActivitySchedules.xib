@@ -23,7 +23,7 @@
                                 <constraint firstAttribute="height" constant="40" id="aRL-As-xxa"/>
                                 <constraint firstAttribute="width" constant="45" id="awX-4x-TVV"/>
                             </constraints>
-                            <state key="normal" title="X">
+                            <state key="normal" image="close_1">
                                 <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
                             <connections>
@@ -62,4 +62,7 @@
             <point key="canvasLocation" x="25.5" y="52.5"/>
         </view>
     </objects>
+    <resources>
+        <image name="close_1" width="15" height="15"/>
+    </resources>
 </document>

@@ -265,11 +265,9 @@ class DBHandler: NSObject {
             
             if activity.totalRuns != 0 {
                 
-                var runsBeforeToday = dbActivity.activityRuns.filter({$0.startDate <= date}) as Array
-                let run = runsBeforeToday.last //current run
-                if runsBeforeToday.count >= 1 {
-                    runsBeforeToday.removeLast()
-                }
+                var runsBeforeToday = dbActivity.activityRuns.filter({$0.endDate <= date})
+                
+                let run = dbActivity.activityRuns.filter({$0.startDate <= date && $0.endDate > date}).first //current run
 
                 let completedRuns = dbActivity.activityRuns.filter({$0.isCompleted == true})
                 let incompleteRuns = runsBeforeToday.count - completedRuns.count
@@ -277,7 +275,9 @@ class DBHandler: NSObject {
                 
                 activity.compeltedRuns = completedRuns.count
                 activity.incompletedRuns = incompleteRuns
-                activity.currentRunId =  (run != nil) ? (run?.runId)! : 1
+                activity.currentRunId =  (run != nil) ? (run?.runId)! : runsBeforeToday.count
+                
+                
             }
             
             

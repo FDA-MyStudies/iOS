@@ -88,7 +88,7 @@ class ActivitiesTableViewCell: UITableViewCell {
                         
                         var runsBeforeToday = runs.filter({$0.endDate <= date})
                         
-                        let run = runs.filter({$0.startDate <= date && $0.endDate > date}).first//
+                        let run = runs.filter({$0.startDate <= date && $0.endDate > date}).first //current run
                         
                         let completedRuns = runs.filter({$0.isCompleted == true})
                         let incompleteRuns = runsBeforeToday.count - completedRuns.count
@@ -214,6 +214,7 @@ class ActivitiesTableViewCell: UITableViewCell {
         switch frequency {
         case .One_Time:
             
+            imageIcon?.image = UIImage.init(named: "taskIcon")
             labelTime?.text = startDateString + " - " + endDateString
             //print("\(activityStartTime), \(startDateString) to \(endDateString)")
         case .Daily:

@@ -44,7 +44,7 @@ class ActivitiesViewController : UIViewController{
         if (Study.currentStudy?.studyId) != nil {
             
             WCPServices().getStudyActivityList(studyId: (Study.currentStudy?.studyId)!, delegate: self)
-            
+//            
 //            DBHandler.loadActivityListFromDatabase(studyId: (Study.currentStudy?.studyId)!) { (activities) in
 //                if activities.count > 0 {
 //                    Study.currentStudy?.activities = activities
@@ -379,7 +379,7 @@ extension ActivitiesViewController : UITableViewDelegate{
            // self.createActivity()
             
             //To be uncommented
-        WCPServices().getStudyActivityMetadata(studyId:(Study.currentStudy?.studyId)! , activityId: (Study.currentActivity?.actvityId)!, activityVersion: "1", delegate: self)
+        //WCPServices().getStudyActivityMetadata(studyId:(Study.currentStudy?.studyId)! , activityId: (Study.currentActivity?.actvityId)!, activityVersion: "1", delegate: self)
             
         case .upcoming,.past: break
        

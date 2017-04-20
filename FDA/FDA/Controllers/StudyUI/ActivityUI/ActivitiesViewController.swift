@@ -33,7 +33,7 @@ class ActivitiesViewController : UIViewController{
         //let plistPath = Bundle.main.path(forResource: "Activities", ofType: ".plist", inDirectory:nil)
        // tableViewRowDetails = Array(contente) //NSMutableArray.init(contentsOfFile: plistPath!)
         
-        self.tableView?.estimatedRowHeight = 103
+        self.tableView?.estimatedRowHeight = 126
         self.tableView?.rowHeight = UITableViewAutomaticDimension
         
         self.navigationItem.title = NSLocalizedString("STUDY ACTIVITIES", comment: "")
@@ -123,7 +123,7 @@ class ActivitiesViewController : UIViewController{
         let task:ORKTask?
         let taskViewController:ORKTaskViewController?
         
-         task = ActivityBuilder.currentActivityBuilder.createTask()
+        task = ActivityBuilder.currentActivityBuilder.createTask()
         
         
         
@@ -305,14 +305,24 @@ extension ActivitiesViewController: UITableViewDataSource{
             return cell
         }
         else {
-            let cell = tableView.dequeueReusableCell(withIdentifier: kActivitiesTableViewCell, for: indexPath) as! ActivitiesTableViewCell
+            var cell = tableView.dequeueReusableCell(withIdentifier: kActivitiesTableViewCell, for: indexPath) as! ActivitiesTableViewCell
+            cell.delegate = self
             
             //Cell Data Setup
             cell.backgroundColor = UIColor.clear
-            
+            //kActivitiesTableViewScheduledCell
             let availabilityStatus = ActivityAvailabilityStatus(rawValue:indexPath.section)
             
-            cell.populateCellDataWithActivity(activity: (activities[indexPath.row]), availablityStatus:availabilityStatus!)
+            let activity = activities[indexPath.row]
+            
+            //check for scheduled frequency
+            if activity.frequencyType == .Scheduled {
+                
+                cell = tableView.dequeueReusableCell(withIdentifier: kActivitiesTableViewScheduledCell, for: indexPath) as! ActivitiesTableViewCell
+                cell.delegate = self
+            }
+            
+            cell.populateCellDataWithActivity(activity:activity, availablityStatus:availabilityStatus!)
             
             return cell
         }
@@ -346,10 +356,10 @@ extension ActivitiesViewController : UITableViewDelegate{
                         Study.updateCurrentActivity(activity:activities[indexPath.row])
                         
                         //Following to be commented
-                        self.createActivity()
+                        //self.createActivity()
                         
                         //To be uncommented
-                        //WCPServices().getStudyActivityMetadata(studyId:(Study.currentStudy?.studyId)! , activityId: (Study.currentActivity?.actvityId)!, activityVersion: "1", delegate: self)
+                        WCPServices().getStudyActivityMetadata(studyId:(Study.currentStudy?.studyId)! , activityId: (Study.currentActivity?.actvityId)!, activityVersion: "1", delegate: self)
                         
                         self.updateActivityStatusToInProgress()
                         
@@ -380,13 +390,30 @@ extension ActivitiesViewController : UITableViewDelegate{
     
 }
 
+ //MARK: ActivitiesCellDelegate
+extension ActivitiesViewController:ActivitiesCellDelegate{
+    
+    func activityCell(cell: ActivitiesTableViewCell, activity: Activity) {
+        
+        var frame = self.view.frame
+        //frame.size.height -= 114
+        
+        let view = ActivitySchedules.instanceFromNib(frame: frame, activity: activity)
+        //self.view.addSubview(view)
+        UIApplication.shared.keyWindow?.addSubview(view)
+    }
+    
+    
+    
+}
+
 extension ActivitiesViewController:NMWebServiceDelegate {
     func startedRequest(_ manager: NetworkManager, requestName: NSString) {
         Logger.sharedInstance.info("requestname : \(requestName)")
         self.addProgressIndicator()
     }
     func finishedRequest(_ manager: NetworkManager, requestName: NSString, response: AnyObject?) {
-        Logger.sharedInstance.info("requestname : \(requestName)")
+        Logger.sharedInstance.info("requestname : \(requestName) Response : \(response)")
         
         self.removeProgressIndicator()
         
@@ -561,7 +588,85 @@ extension ActivitiesViewController:ORKTaskViewControllerDelegate{
     
 }
 
-
+class ActivitySchedules:UIView,UITableViewDelegate,UITableViewDataSource{
+    
+    @IBOutlet var tableview:UITableView?
+    @IBOutlet var buttonCancel:UIButton!
+    @IBOutlet var heightLayoutConstraint:NSLayoutConstraint!
+    var activity:Activity!
+    
+//    override init(frame: CGRect) {
+//        super.init(frame: frame)
+//        let view = self.instanceFromNib()
+//        addSubview(view)
+//        tableview?.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
+//    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        
+        super.init(coder: aDecoder)
+        //fatalError("init(coder:) has not been implemented")
+    }
+    class func instanceFromNib(frame:CGRect , activity:Activity) -> ActivitySchedules {
+        let view = UINib(nibName: "ActivitySchedules", bundle: nil).instantiate(withOwner: nil, options: nil)[0] as! ActivitySchedules
+        view.frame = frame
+        view.activity = activity
+        view.tableview?.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
+        view.tableview?.delegate = view
+        view.tableview?.dataSource = view
+        let height = (activity.activityRuns.count*44) + 104
+        let maxViewHeight = Int(UIScreen.main.bounds.size.height - 67)
+        view.heightLayoutConstraint.constant = CGFloat((height > maxViewHeight) ? maxViewHeight:height)
+        view.layoutIfNeeded()
+        
+        return view
+    }
+    
+    @IBAction func buttonCancelClicked(_:UIButton){
+        self.removeFromSuperview()
+    }
+    
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
+        return self.activity.activityRuns.count
+        
+        
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
+        cell.textLabel?.font = UIFont(name: "HelveticaNeue-Light", size: 13)
+        let activityRun = self.activity.activityRuns[indexPath.row]
+        cell.textLabel?.text = ActivitySchedules.formatter.string(from: activityRun.startDate) + " - "
+        + ActivitySchedules.formatter.string(from: activityRun.endDate)
+        if activityRun.runId == self.activity.currentRunId {
+            cell.textLabel?.textColor = kBlueColor
+        }
+        else if activityRun.runId < self.activity.currentRunId {
+            cell.textLabel?.textColor = UIColor.gray
+        }
+        
+        cell.textLabel?.textAlignment = .center
+        return cell
+        
+        
+    }
+    
+    private static let formatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "hha, MMM dd YYYY"
+        formatter.timeZone = TimeZone.init(abbreviation:"GMT")
+        return formatter
+    }()
+}
 
 
 

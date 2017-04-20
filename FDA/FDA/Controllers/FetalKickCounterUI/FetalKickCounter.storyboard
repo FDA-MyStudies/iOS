@@ -55,7 +55,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TOTAL KICK COUNT" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="yvB-Wf-hYf">
-                                <rect key="frame" x="94" y="213.5" width="188" height="24"/>
+                                <rect key="frame" x="93.5" y="213.5" width="188" height="24"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="20"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -70,7 +70,7 @@
                                 </connections>
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="time_icn1" translatesAutoresizingMaskIntoConstraints="NO" id="SgZ-rH-aBn">
-                                <rect key="frame" x="167" y="46" width="42" height="36"/>
+                                <rect key="frame" x="166.5" y="45.5" width="42" height="36.5"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="SgZ-rH-aBn" secondAttribute="height" multiplier="23:20" id="r02-m5-0Fi"/>
                                 </constraints>
@@ -85,7 +85,7 @@
                                 </connections>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TAP TO START TIMER" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="6" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="Sue-m0-sIi">
-                                <rect key="frame" x="113" y="376.5" width="150" height="18"/>
+                                <rect key="frame" x="112.5" y="376.5" width="150" height="18"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
                                 <color key="textColor" red="0.54901960780000003" green="0.58431372550000005" blue="0.63921568630000003" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -165,7 +165,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Enter enrollment token" textAlignment="center" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="1Zu-1M-7Gw">
-                                <rect key="frame" x="33" y="328" width="310" height="62"/>
+                                <rect key="frame" x="32.5" y="328" width="310" height="62"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
                                 <textInputTraits key="textInputTraits" keyboardType="emailAddress"/>
@@ -181,7 +181,7 @@
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qzc-1W-fgy">
-                                <rect key="frame" x="113" y="451" width="150" height="40"/>
+                                <rect key="frame" x="112.5" y="451" width="150" height="40"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                                 <state key="normal" title="Submit">
                                     <color key="titleColor" red="0.0" green="0.48627450979999998" blue="0.72941176470000002" alpha="1" colorSpace="calibratedRGB"/>
@@ -208,7 +208,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Eligibility" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gPT-6p-tqe">
-                                <rect key="frame" x="136.5" y="82" width="102.5" height="30.5"/>
+                                <rect key="frame" x="136" y="81.5" width="103" height="31"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="26"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -242,12 +242,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Xva-Df-tCd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2175" y="544"/>
+            <point key="canvasLocation" x="1055" y="557"/>
         </scene>
-        <!--Consent Completion View Controller-->
+        <!--Consent Share Pdf Step View Controller-->
         <scene sceneID="D3Y-ry-lF5">
             <objects>
-                <viewController storyboardIdentifier="ConsentCompletionViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="sfa-bd-dzE" customClass="ConsentCompletionViewController" customModule="FDA" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ConsentSharePdfStepViewControllerIdentifier" useStoryboardIdentifierAsRestorationIdentifier="YES" id="sfa-bd-dzE" customClass="ConsentSharePdfStepViewController" customModule="FDA" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="oeK-f4-dMF"/>
                         <viewControllerLayoutGuide type="bottom" id="nK2-u2-Brc"/>
@@ -256,12 +256,12 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="45.png" translatesAutoresizingMaskIntoConstraints="NO" id="Imf-Q3-sjD">
+                            <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="45.png" translatesAutoresizingMaskIntoConstraints="NO" id="Imf-Q3-sjD">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uIj-lV-uyU">
-                                <rect key="frame" x="113" y="601" width="150" height="45"/>
+                                <rect key="frame" x="112.5" y="601" width="150" height="45"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
                                 <state key="normal" title="Submit">
                                     <color key="titleColor" red="0.0" green="0.48627450979999998" blue="0.72941176470000002" alpha="1" colorSpace="calibratedRGB"/>
@@ -276,26 +276,22 @@
                                         <integer key="value" value="1"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="buttonActionNextWithSender:" destination="sfa-bd-dzE" eventType="touchUpInside" id="3Xh-qn-Vv2"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KFf-Ee-kF6">
-                                <rect key="frame" x="89" y="514" width="197" height="45"/>
+                                <rect key="frame" x="89" y="514.5" width="197" height="45"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
                                 <state key="normal" title="View/Email Consent PDF">
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                        <integer key="value" value="4"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="boolean" keyPath="layer.clipsToBounds" value="YES"/>
-                                    <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
-                                        <integer key="value" value="1"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="buttonActionViewPdfWithSender:" destination="sfa-bd-dzE" eventType="touchUpInside" id="sUS-dr-c34"/>
+                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Thanks for providing consent for this Study" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="Pfh-Dn-IUH">
-                                <rect key="frame" x="37" y="237" width="300" height="81"/>
+                                <rect key="frame" x="37.5" y="236.5" width="300" height="81"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="300" id="JoO-k3-rRA"/>
                                     <constraint firstAttribute="height" constant="81" id="dho-gU-Cy8"/>
@@ -331,10 +327,15 @@
                             <constraint firstItem="Pfh-Dn-IUH" firstAttribute="centerX" secondItem="Xsz-hq-CrD" secondAttribute="centerX" id="v4N-5O-I2b"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="4h3-3D-Hf4"/>
+                    <connections>
+                        <outlet property="buttonNext" destination="uIj-lV-uyU" id="rT4-Pa-vVa"/>
+                        <outlet property="buttonViewPdf" destination="KFf-Ee-kF6" id="1fs-Pc-9RI"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZTs-ha-cz6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2061.5999999999999" y="1153.6731634182909"/>
+            <point key="canvasLocation" x="2872.8000000000002" y="566.26686656671666"/>
         </scene>
         <!--Fetal Kick Intro Step View Controller-->
         <scene sceneID="Cry-ej-gAS">
@@ -353,7 +354,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2YV-6t-dEM">
-                                <rect key="frame" x="113" y="544" width="150" height="40"/>
+                                <rect key="frame" x="112.5" y="543.5" width="150" height="40.5"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
                                 <state key="normal" title="Next">
                                     <color key="titleColor" red="0.0" green="0.48627450979999998" blue="0.72941176470000002" alpha="1" colorSpace="calibratedRGB"/>
@@ -373,7 +374,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Fetal Kick Counter" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="6vD-yL-Trh">
-                                <rect key="frame" x="38" y="163" width="300" height="81"/>
+                                <rect key="frame" x="37.5" y="162.5" width="300" height="81"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="81" id="NKa-HH-VNe"/>
                                     <constraint firstAttribute="width" constant="300" id="pfg-OS-Zwy"/>
@@ -396,7 +397,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="task_img1" translatesAutoresizingMaskIntoConstraints="NO" id="gmy-zG-f35">
-                                <rect key="frame" x="118" y="45" width="140" height="122"/>
+                                <rect key="frame" x="117" y="44.5" width="141" height="122"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="gmy-zG-f35" secondAttribute="height" multiplier="31:27" id="G9g-79-Kku"/>
                                 </constraints>
@@ -447,6 +448,100 @@
             </objects>
             <point key="canvasLocation" x="996" y="-132.68365817091455"/>
         </scene>
+        <!--ConsentDocument-->
+        <scene sceneID="yW4-dV-l64">
+            <objects>
+                <viewController storyboardIdentifier="ConsentPdfViewerStepViewControllerIdentifier" useStoryboardIdentifierAsRestorationIdentifier="YES" id="0WO-Bz-3yZ" customClass="ConsentPdfViewerStepViewController" customModule="FDA" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="lJV-d0-wCC"/>
+                        <viewControllerLayoutGuide type="bottom" id="VNb-MI-fUh"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="GNI-xV-GEW">
+                        <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="njD-n5-vGk">
+                                <rect key="frame" x="0.0" y="559" width="375" height="44"/>
+                                <items>
+                                    <barButtonItem image="shareIcon" width="187.5" id="o5H-XN-c6n">
+                                        <color key="tintColor" red="0.0" green="0.48627450979999998" blue="0.72941176470000002" alpha="1" colorSpace="calibratedRGB"/>
+                                        <connections>
+                                            <action selector="buttonActionEmailPdfWithSender:" destination="0WO-Bz-3yZ" id="pPM-Lr-QqE"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem title="Next" width="162" id="1qm-qt-0go">
+                                        <color key="tintColor" red="0.0" green="0.48627450979999998" blue="0.72941176470000002" alpha="1" colorSpace="calibratedRGB"/>
+                                        <connections>
+                                            <action selector="buttonActionNextWithSender:" destination="0WO-Bz-3yZ" id="rPt-xP-vJZ"/>
+                                        </connections>
+                                    </barButtonItem>
+                                </items>
+                            </toolbar>
+                            <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CDB-HW-nPS">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="559"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outlet property="delegate" destination="0WO-Bz-3yZ" id="0iF-uh-784"/>
+                                </connections>
+                            </webView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="njD-n5-vGk" secondAttribute="trailing" id="3cS-Wz-dqV"/>
+                            <constraint firstItem="VNb-MI-fUh" firstAttribute="top" secondItem="njD-n5-vGk" secondAttribute="bottom" id="8EV-zH-MJd"/>
+                            <constraint firstItem="njD-n5-vGk" firstAttribute="top" secondItem="CDB-HW-nPS" secondAttribute="bottom" id="Hcp-a6-IRB"/>
+                            <constraint firstAttribute="trailing" secondItem="CDB-HW-nPS" secondAttribute="trailing" id="Tfo-bI-z9k"/>
+                            <constraint firstItem="njD-n5-vGk" firstAttribute="leading" secondItem="GNI-xV-GEW" secondAttribute="leading" id="a0p-iE-WQc"/>
+                            <constraint firstItem="CDB-HW-nPS" firstAttribute="top" secondItem="lJV-d0-wCC" secondAttribute="bottom" id="mlK-Ni-Gtk"/>
+                            <constraint firstItem="CDB-HW-nPS" firstAttribute="leading" secondItem="GNI-xV-GEW" secondAttribute="leading" id="wYu-c6-7hz"/>
+                        </constraints>
+                    </view>
+                    <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
+                    <navigationItem key="navigationItem" title="ConsentDocument" id="e0E-Qm-Uc8"/>
+                    <connections>
+                        <outlet property="webView" destination="CDB-HW-nPS" id="hyX-oC-20L"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="3oC-WO-6E2" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4615.1999999999998" y="566.26686656671666"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="e6O-BH-Lx9">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="tjP-Cs-vL9" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Id2-o1-rv0">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="sfa-bd-dzE" kind="relationship" relationship="rootViewController" id="x5d-dS-tiZ"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="aVx-Aa-TQs" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1933.5999999999999" y="566.26686656671666"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="Fo9-0Y-nze">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="rXA-HI-g5M" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Bf4-vu-ub4">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="0WO-Bz-3yZ" kind="relationship" relationship="rootViewController" id="4Qa-rq-uEn"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="4QJ-wn-zFE" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3676" y="565.36731634182911"/>
+        </scene>
     </scenes>
     <resources>
         <image name="01.png" width="750" height="1334"/>
@@ -454,6 +549,7 @@
         <image name="200.png" width="750" height="1334"/>
         <image name="45.png" width="750" height="1334"/>
         <image name="edit_icn1" width="18" height="17"/>
+        <image name="shareIcon" width="15" height="22"/>
         <image name="start_buttn1" width="123" height="123"/>
         <image name="task_img1" width="160" height="160"/>
         <image name="time_icn1" width="41" height="40"/>

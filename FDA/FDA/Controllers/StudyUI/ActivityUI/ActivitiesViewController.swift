@@ -33,7 +33,7 @@ class ActivitiesViewController : UIViewController{
         //let plistPath = Bundle.main.path(forResource: "Activities", ofType: ".plist", inDirectory:nil)
        // tableViewRowDetails = Array(contente) //NSMutableArray.init(contentsOfFile: plistPath!)
         
-        self.tableView?.estimatedRowHeight = 103
+        self.tableView?.estimatedRowHeight = 126
         self.tableView?.rowHeight = UITableViewAutomaticDimension
         
         self.navigationItem.title = NSLocalizedString("STUDY ACTIVITIES", comment: "")
@@ -123,7 +123,7 @@ class ActivitiesViewController : UIViewController{
         let task:ORKTask?
         let taskViewController:ORKTaskViewController?
         
-         task = ActivityBuilder.currentActivityBuilder.createTask()
+        task = ActivityBuilder.currentActivityBuilder.createTask()
         
         
         
@@ -305,14 +305,24 @@ extension ActivitiesViewController: UITableViewDataSource{
             return cell
         }
         else {
-            let cell = tableView.dequeueReusableCell(withIdentifier: kActivitiesTableViewCell, for: indexPath) as! ActivitiesTableViewCell
+            var cell = tableView.dequeueReusableCell(withIdentifier: kActivitiesTableViewCell, for: indexPath) as! ActivitiesTableViewCell
+            cell.delegate = self
             
             //Cell Data Setup
             cell.backgroundColor = UIColor.clear
-            
+            //kActivitiesTableViewScheduledCell
             let availabilityStatus = ActivityAvailabilityStatus(rawValue:indexPath.section)
             
-            cell.populateCellDataWithActivity(activity: (activities[indexPath.row]), availablityStatus:availabilityStatus!)
+            let activity = activities[indexPath.row]
+            
+            //check for scheduled frequency
+            if activity.frequencyType == .Scheduled {
+                
+                cell = tableView.dequeueReusableCell(withIdentifier: kActivitiesTableViewScheduledCell, for: indexPath) as! ActivitiesTableViewCell
+                cell.delegate = self
+            }
+            
+            cell.populateCellDataWithActivity(activity:activity, availablityStatus:availabilityStatus!)
             
             return cell
         }
@@ -346,10 +356,10 @@ extension ActivitiesViewController : UITableViewDelegate{
                         Study.updateCurrentActivity(activity:activities[indexPath.row])
                         
                         //Following to be commented
-                        self.createActivity()
+                        //self.createActivity()
                         
                         //To be uncommented
-                        //WCPServices().getStudyActivityMetadata(studyId:(Study.currentStudy?.studyId)! , activityId: (Study.currentActivity?.actvityId)!, activityVersion: "1", delegate: self)
+                        WCPServices().getStudyActivityMetadata(studyId:(Study.currentStudy?.studyId)! , activityId: (Study.currentActivity?.actvityId)!, activityVersion: "1", delegate: self)
                         
                         self.updateActivityStatusToInProgress()
                         
@@ -380,13 +390,30 @@ extension ActivitiesViewController : UITableViewDelegate{
     
 }
 
+ //MARK: ActivitiesCellDelegate
+extension ActivitiesViewController:ActivitiesCellDelegate{
+    
+    func activityCell(cell: ActivitiesTableViewCell, activity: Activity) {
+        
+        var frame = self.view.frame
+        //frame.size.height -= 114
+        
+        let view = ActivitySchedules.instanceFromNib(frame: frame, activity: activity)
+        //self.view.addSubview(view)
+        UIApplication.shared.keyWindow?.addSubview(view)
+    }
+    
+    
+    
+}
+
 extension ActivitiesViewController:NMWebServiceDelegate {
     func startedRequest(_ manager: NetworkManager, requestName: NSString) {
         Logger.sharedInstance.info("requestname : \(requestName)")
         self.addProgressIndicator()
     }
     func finishedRequest(_ manager: NetworkManager, requestName: NSString, response: AnyObject?) {
-        Logger.sharedInstance.info("requestname : \(requestName)")
+        Logger.sharedInstance.info("requestname : \(requestName) Response : \(response)")
         
         self.removeProgressIndicator()
         

@@ -10,7 +10,9 @@ import UIKit
 
 let kActivityTitle = "title"
 
-
+protocol ActivitiesCellDelegate {
+    func activityCell(cell:ActivitiesTableViewCell, activity:Activity)
+}
 
 class ActivitiesTableViewCell: UITableViewCell {
 
@@ -20,7 +22,9 @@ class ActivitiesTableViewCell: UITableViewCell {
     @IBOutlet var labelTime : UILabel?
     @IBOutlet var labelStatus : UILabel?
     @IBOutlet var labelRunStatus : UILabel?
-    
+    @IBOutlet var buttonMoreSchedules : UIButton?
+    var delegate:ActivitiesCellDelegate?
+    var currentActivity:Activity! = nil
     
     var availabilityStatus:ActivityAvailabilityStatus = .current
     
@@ -54,6 +58,7 @@ class ActivitiesTableViewCell: UITableViewCell {
     func populateCellDataWithActivity(activity:Activity ,availablityStatus:ActivityAvailabilityStatus){
         
         self.availabilityStatus = availablityStatus
+        self.currentActivity = activity
         
         self.labelHeading?.text = activity.name
         
@@ -83,11 +88,7 @@ class ActivitiesTableViewCell: UITableViewCell {
                         
                         var runsBeforeToday = runs.filter({$0.endDate <= date})
                         
-                        let run = runs.filter({$0.startDate <= date && $0.endDate > date}).first//runsBeforeToday.last //current run
-                        //if (runsBeforeToday.count >= 1 &&  !((run?.endDate)! > date))
-                        //{
-                        //    runsBeforeToday.removeLast()
-                        //}
+                        let run = runs.filter({$0.startDate <= date && $0.endDate > date}).first//
                         
                         let completedRuns = runs.filter({$0.isCompleted == true})
                         let incompleteRuns = runsBeforeToday.count - completedRuns.count
@@ -98,6 +99,7 @@ class ActivitiesTableViewCell: UITableViewCell {
                         activity.currentRunId =  (run != nil) ? (run?.runId)! : runsBeforeToday.count
                         activity.totalRuns = runs.count
                         activity.currentRun = run
+                        activity.activityRuns = runs
                         
                         self.updateUserRunStatus(activity: activity)
                         
@@ -125,6 +127,15 @@ class ActivitiesTableViewCell: UITableViewCell {
     func updateUserRunStatus(activity:Activity){
         
         self.labelRunStatus?.text = "Run: " + String(activity.currentRunId) + "/" + String(activity.totalRuns) + ", " + String(activity.compeltedRuns) + " done" + ", " + String(activity.incompletedRuns) + " missed"
+        
+        if activity.totalRuns == 1 {
+            self.buttonMoreSchedules?.isHidden = true
+        }
+        else {
+            let moreSchedulesTitle =  "+" + String(activity.totalRuns - 1) + " more"
+            self.buttonMoreSchedules?.setTitle(moreSchedulesTitle, for: .normal)
+ 
+        }
     }
     
     func setUserStatusForActivity(activity:Activity){
@@ -245,6 +256,11 @@ class ActivitiesTableViewCell: UITableViewCell {
         }
         
     }
+    
+    @IBAction func buttonMoreSchedulesClicked(_ :UIButton){
+        self.delegate?.activityCell(cell: self, activity: self.currentActivity)
+    }
+    
     
     private static let formatter: DateFormatter = {
         let formatter = DateFormatter()

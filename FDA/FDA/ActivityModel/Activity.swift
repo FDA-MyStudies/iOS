@@ -179,6 +179,9 @@ class Activity{
             if Utilities.isValidValue(someObject: infoDict[kActivityStartTime] as AnyObject ){
                  self.startDate =  Utilities.getDateFromString(dateString: (infoDict[kActivityStartTime] as! String?)!)
             }
+            else {
+                self.startDate = Date()
+            }
             
             if Utilities.isValidValue(someObject: infoDict[kActivityEndTime] as AnyObject ){
                 self.endDate =  Utilities.getDateFromString(dateString: (infoDict[kActivityEndTime] as! String?)!)

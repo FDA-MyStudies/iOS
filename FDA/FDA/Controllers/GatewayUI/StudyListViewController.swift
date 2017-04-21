@@ -258,7 +258,7 @@ extension StudyListViewController :  UITableViewDelegate {
         
         if User.currentUser.userType == UserType.FDAUser {
             
-            if Study.currentStudy?.status == .active{
+            if Study.currentStudy?.status == .Active{
                 
                 let userStudyStatus =  (Study.currentStudy?.userParticipateState.status)!
                 

@@ -22,6 +22,10 @@ let kStudyTagLine = "tagline"
 
 let kStudyStatus = "status"
 let kStudyLogoURL = "logo"
+let kStudySettings = "settings"
+let kStudyEnrolling = "enrolling"
+let kStudyPlatform = "platform"
+let kStudyRejoin = "rejoin"
 
 //resources
 let kResources = "resources"
@@ -176,7 +180,7 @@ class WCPServices: NSObject {
       
         let method = WCPMethods.feedback.method
         let params = [kFeedbackBody:FeedbackDetail.feedback,
-                      kFeedbackSubject:"Feedback"]
+                      kFeedbackSubject:FeedbackDetail.subject]
         self.sendRequestWith(method:method, params: params, headers: nil)
         
     }

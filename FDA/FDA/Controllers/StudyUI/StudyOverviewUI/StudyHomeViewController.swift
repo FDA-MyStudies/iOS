@@ -161,19 +161,42 @@ class StudyHomeViewController : UIViewController{
             
             let currentStudy = Study.currentStudy!
             let participatedStatus = (currentStudy.userParticipateState.status)
-            if currentStudy.status == .active {
+            
+            
+            switch currentStudy.status {
+            case .Active:
                 if participatedStatus == .yetToJoin || participatedStatus == .notEligible {
                     
-                    WCPServices().getEligibilityConsentMetadata(studyId:(Study.currentStudy?.studyId)!, delegate: self as NMWebServiceDelegate)
+                    //check if enrolling is allowed
+                    if currentStudy.studySettings.enrollingAllowed {
+                        WCPServices().getEligibilityConsentMetadata(studyId:(Study.currentStudy?.studyId)!, delegate: self as NMWebServiceDelegate)
+                    }
+                    else {
+                        UIUtilities.showAlertWithTitleAndMessage(title: "", message: NSLocalizedString(kMessageForStudyEnrollingNotAllowed, comment: "") as NSString)
+                    }
+                   
                 }
+                else if participatedStatus == .withdrawn {
+                    
+                    // check if rejoining is allowed after withrdrawn from study
+                    if currentStudy.studySettings.rejoinStudyAfterWithdrawn {
+                        
+                         WCPServices().getEligibilityConsentMetadata(studyId:(Study.currentStudy?.studyId)!, delegate: self as NMWebServiceDelegate)
+                    }
+                    else {
+                        UIUtilities.showAlertWithTitleAndMessage(title: "", message: NSLocalizedString(kMessageForStudyWithdrawnState, comment: "") as NSString)
+                    }
+                }
+            case .Upcoming:
+                UIUtilities.showAlertWithTitleAndMessage(title: "", message: NSLocalizedString(kMessageForStudyUpcomingState, comment: "") as NSString)
+            case .Paused:
+                UIUtilities.showAlertWithTitleAndMessage(title: "", message: NSLocalizedString(kMessageForStudyPausedState, comment: "") as NSString)
+            case .Closed:
+                UIUtilities.showAlertWithTitleAndMessage(title: "", message: NSLocalizedString(kMessageForStudyClosedState, comment: "") as NSString)
+            
             }
             
-            //            //let studyStatus = User.currentUser.updateStudyStatus(studyId:(Study.currentStudy?.studyId)!, status: .inProgress)
-            //           // UserServices().updateUserParticipatedStatus(studyStauts: studyStatus, delegate: self)
-            //
-            //            WCPServices().getEligibilityConsentMetadata(studyId:(Study.currentStudy?.studyId)!, delegate: self as NMWebServiceDelegate)
-            //            // self.createEligibilityConsentTask()
-            
+          
             
         }
     }

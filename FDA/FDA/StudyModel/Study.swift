@@ -14,10 +14,10 @@ let kConsentDocumentVersion = "version"
 let kConsentDocumentContent = "content"
 
 enum StudyStatus:String{
-    case active
-    case upcoming
-    case closed
-    case paused
+    case Active
+    case Upcoming
+    case Closed
+    case Paused
 }
 
 struct ConsentDocument {
@@ -64,7 +64,7 @@ class Study {
     var category:String?
     var startDate:String?
     var endEnd:String?
-    var status:StudyStatus = .active
+    var status:StudyStatus = .Active
     var sponserName:String?
     var description:String?
     var brandingConfiguration:String?
@@ -73,7 +73,7 @@ class Study {
     var activities:Array<Activity>! = []
     var resources:Array<Resource>? = []
     var userParticipateState:UserStudyStatus! = nil
-    
+    var studySettings:StudySettings!
     var consentDocument:ConsentDocument?
     
     static var currentStudy:Study? = nil
@@ -108,7 +108,10 @@ class Study {
                 self.logoURL = studyDetail[kStudyLogoURL] as? String
             }
             if Utilities.isValidValue(someObject: studyDetail[kStudyStatus] as AnyObject )  {
-                self.status = .active //StudyStatus.init(rawValue: studyDetail[kStudyStatus] as! String)!
+                self.status = StudyStatus.init(rawValue: studyDetail[kStudyStatus] as! String)!
+            }
+            if Utilities.isValidObject(someObject: studyDetail[kStudySettings] as AnyObject )  {
+                self.studySettings = StudySettings(settings: studyDetail[kStudySettings] as! Dictionary<String, Any>)
             }
             
         }
@@ -129,4 +132,33 @@ class Study {
     
     
     
+}
+
+class StudySettings{
+    
+    var enrollingAllowed = true
+    var rejoinStudyAfterWithdrawn = false
+    var platform = "ios"
+    
+    init() {
+        
+    }
+    
+    init(settings:Dictionary<String,Any>) {
+        
+        if Utilities.isValidObject(someObject: settings as AnyObject?){
+            
+            if Utilities.isValidValue(someObject: settings[kStudyEnrolling] as AnyObject ){
+                self.enrollingAllowed = (settings[kStudyEnrolling] as? Bool)!
+            }
+            
+            if Utilities.isValidValue(someObject: settings[kStudyRejoin] as AnyObject ){
+                self.rejoinStudyAfterWithdrawn = (settings[kStudyRejoin] as? Bool)!
+            }
+            
+            if Utilities.isValidValue(someObject: settings[kStudyPlatform] as AnyObject ){
+                self.platform = (settings[kStudyPlatform] as? String)!
+            }
+        }
+    }
 }

@@ -202,59 +202,50 @@ class DBHandler: NSObject {
     class func saveActivities(activityies:Array<Activity>){
         
         let realm = try! Realm()
+        let study = Study.currentStudy
+        let dbActivityArray = realm.objects(DBActivity.self).filter({$0.studyId == study?.studyId})// "studyId == %@",study?.studyId)
+        
         
         var dbActivities:Array<DBActivity> = []
         for activity in activityies {
-            
-            let dbActivityArray = realm.objects(DBActivity.self).filter("studyId == %@ && actvityId == %@",activity.studyId!,activity.actvityId!) //as DBActivity
-           
-            var dbActivity = DBActivity()
+          
+            var dbActivity:DBActivity?
             if dbActivityArray.count != 0 {
-                dbActivity = dbActivityArray.last!
-                try! realm.write({
+                dbActivity = dbActivityArray.filter({$0.actvityId == activity.actvityId!}).last!
+                
+                if dbActivity == nil {
                     
-                    dbActivity.type = activity.type?.rawValue
-                    dbActivity.name = activity.name
-                    dbActivity.startDate = activity.startDate
-                    dbActivity.endDate = activity.endDate
-                    dbActivity.frequencyType = activity.frequencyType.rawValue
-                    do {
-                        let json = ["data":activity.frequencyRuns]
-                        let data =  try JSONSerialization.data(withJSONObject: json, options: JSONSerialization.WritingOptions.prettyPrinted)
-                        dbActivity.frequencyRunsData = data
-                    }
-                    catch{
+                    dbActivity = DBHandler.getDBActivity(activity: activity)
+                    dbActivities.append(dbActivity!)
+                }
+                else {
+                    
+                    try! realm.write({
                         
-                    }
-                    
-                })
+                        dbActivity?.type = activity.type?.rawValue
+                        dbActivity?.name = activity.name
+                        dbActivity?.startDate = activity.startDate
+                        dbActivity?.endDate = activity.endDate
+                        dbActivity?.frequencyType = activity.frequencyType.rawValue
+                        do {
+                            let json = ["data":activity.frequencyRuns]
+                            let data =  try JSONSerialization.data(withJSONObject: json, options: JSONSerialization.WritingOptions.prettyPrinted)
+                            dbActivity?.frequencyRunsData = data
+                        }
+                        catch{
+                            
+                        }
+                        
+                    })
+
+                }
             }
             else {
                 
-                //let dbActivity = DBActivity()
-                dbActivity.studyId = activity.studyId
-                dbActivity.actvityId = activity.actvityId
-                dbActivity.type = activity.type?.rawValue
-                dbActivity.name = activity.name
-                dbActivity.startDate = activity.startDate
-                dbActivity.endDate = activity.endDate
-                dbActivity.frequencyType = activity.frequencyType.rawValue
-                do {
-                    let json = ["data":activity.frequencyRuns]
-                    let data =  try JSONSerialization.data(withJSONObject: json, options: JSONSerialization.WritingOptions.prettyPrinted)
-                    dbActivity.frequencyRunsData = data
-                }
-                catch{
-                    
-                }
-                dbActivities.append(dbActivity)
+                dbActivity = DBHandler.getDBActivity(activity: activity)
+                dbActivities.append(dbActivity!)
             }
             
-            
-            
-            
-            //dbActivities.append(dbActivity)
-           
         }
         
         
@@ -266,6 +257,28 @@ class DBHandler: NSObject {
             })
         }
        
+    }
+    
+   private class func getDBActivity(activity:Activity)->DBActivity{
+        
+        let dbActivity = DBActivity()
+        
+        dbActivity.studyId = activity.studyId
+        dbActivity.actvityId = activity.actvityId
+        dbActivity.type = activity.type?.rawValue
+        dbActivity.name = activity.name
+        dbActivity.startDate = activity.startDate
+        dbActivity.endDate = activity.endDate
+        dbActivity.frequencyType = activity.frequencyType.rawValue
+        do {
+            let json = ["data":activity.frequencyRuns]
+            let data =  try JSONSerialization.data(withJSONObject: json, options: JSONSerialization.WritingOptions.prettyPrinted)
+            dbActivity.frequencyRunsData = data
+        }
+        catch{
+            
+        }
+        return dbActivity
     }
     
     
@@ -334,9 +347,24 @@ class DBHandler: NSObject {
                 }
                 activity.activityRuns = runs
                 
-                var runsBeforeToday = runs.filter({$0.endDate <= date})
                 
-                let run = runs.filter({$0.startDate <= date && $0.endDate > date}).first //current run
+                var runsBeforeToday:Array<ActivityRun>! = []
+                var run:ActivityRun!
+                if activity.frequencyType == Frequency.One_Time && activity.endDate == nil {
+                    //runsBeforeToday = runs
+                    run = runs.last
+                }
+                else {
+                    
+                    runsBeforeToday = runs.filter({$0.endDate <= date})
+                    
+                    run = runs.filter({$0.startDate <= date && $0.endDate > date}).first //current run
+                    
+                }
+                
+                //var runsBeforeToday = runs.filter({$0.endDate <= date})
+                
+                //let run = runs.filter({$0.startDate <= date && $0.endDate > date}).first //current run
                 
                 let completedRuns = runs.filter({$0.isCompleted == true})
                 let incompleteRuns = runsBeforeToday.count - completedRuns.count

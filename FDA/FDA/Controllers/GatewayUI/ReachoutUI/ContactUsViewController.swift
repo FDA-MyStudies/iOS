@@ -76,7 +76,11 @@ class ContactUsViewController : UIViewController{
     @IBAction func buttonSubmitAciton(_ sender:UIButton){
         print("\(ContactUsFeilds.firstName)")
         
-        if ContactUsFeilds.firstName.isEmpty {
+        if (ContactUsFeilds.firstName.isEmpty && ContactUsFeilds.email.isEmpty && ContactUsFeilds.subject.isEmpty && ContactUsFeilds.message.isEmpty){
+            
+            UIUtilities.showAlertWithMessage(alertMessage: NSLocalizedString(kMessageAllFieldsAreEmpty, comment: ""))
+        }
+        else if ContactUsFeilds.firstName.isEmpty {
             UIUtilities.showAlertWithMessage(alertMessage: NSLocalizedString(kMessageFirstNameBlank, comment: ""))
         }
         else if ContactUsFeilds.email.isEmpty {
@@ -168,7 +172,7 @@ extension ContactUsViewController: UITextViewDelegate {
     func textViewDidEndEditing(_ textView: UITextView) {
         print("textViewDidEndEditing")
         if textView.tag == 101 && textView.text.characters.count == 0 {
-            textView.text = "Enter your message here"
+            textView.text = kMessageTextViewPlaceHolder
             textView.textColor = UIColor.lightGray
             textView.tag = 100
         }

@@ -26,6 +26,8 @@ struct FeedbackDetail {
     
 }
 
+
+
 class FeedBackViewController : UIViewController{
     
     @IBOutlet var buttonSubmit : UIButton?
@@ -67,8 +69,13 @@ class FeedBackViewController : UIViewController{
     
     @IBAction func buttonSubmitAciton(_ sender:UIButton){
         //print("\(ContactUsFeilds.firstName)")
-        
-        if FeedbackDetail.feedback.isEmpty {
+        if FeedbackDetail.subject.isEmpty && FeedbackDetail.feedback.isEmpty {
+            UIUtilities.showAlertWithMessage(alertMessage: NSLocalizedString(kMessageAllFieldsAreEmpty, comment: ""))
+        }
+        else if FeedbackDetail.subject.isEmpty {
+            UIUtilities.showAlertWithMessage(alertMessage: NSLocalizedString("Please enter message", comment: ""))
+        }
+        else if FeedbackDetail.feedback.isEmpty {
             UIUtilities.showAlertWithMessage(alertMessage: NSLocalizedString("Please provide your feedback", comment: ""))
         }
         else {
@@ -82,7 +89,7 @@ class FeedBackViewController : UIViewController{
 extension FeedBackViewController: UITableViewDataSource{
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 2
+        return 3
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -92,10 +99,24 @@ extension FeedBackViewController: UITableViewDataSource{
         
         if indexPath.row == 0{
             cell = tableView.dequeueReusableCell(withIdentifier: kFeedbackTableViewCellIdentifier1, for: indexPath) as! FeedBackTableViewCell
-            //(cell as! FeedBackTableViewCell).displayTableData(data: data , collectionArraydata: upcomingEventsArray)
+           
         
-        }else{
-            cell = tableView.dequeueReusableCell(withIdentifier: kFeedbackTableViewCellIdentifier2, for: indexPath) as! FeedBackTableViewCell
+        }
+        else if indexPath.row == 1{
+           let cell = tableView.dequeueReusableCell(withIdentifier: kContactUsTableViewCellIdentifier, for: indexPath) as! ContactUsTableViewCell
+            cell.textFieldValue?.tag = indexPath.row
+            
+//            var keyBoardType : UIKeyboardType? =  UIKeyboardType.default
+//           
+//            cell.textFieldValue?.keyboardType = keyBoardType
+//            cell.placeholderText
+//            
+//            //Cell Data Setup
+//            //cell.populateCellData(data: tableViewData,keyboardType: keyBoardType)
+            return cell
+        }
+        else{
+            cell = tableView.dequeueReusableCell(withIdentifier: "textviewCell", for: indexPath) as! TextviewCell
         
         }
         
@@ -145,7 +166,23 @@ extension FeedBackViewController: UITextViewDelegate {
         }
     }
 }
-
+//MARK: Textfield Delegate
+extension FeedBackViewController : UITextFieldDelegate{
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        
+        
+    }
+   
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        print(textField.text!)
+        
+        textField.text =  textField.text?.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
+        FeedbackDetail.subject = textField.text!
+        
+    }
+}
 extension FeedBackViewController:NMWebServiceDelegate {
     func startedRequest(_ manager: NetworkManager, requestName: NSString) {
         

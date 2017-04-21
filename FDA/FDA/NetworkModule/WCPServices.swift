@@ -176,7 +176,7 @@ class WCPServices: NSObject {
       
         let method = WCPMethods.feedback.method
         let params = [kFeedbackBody:FeedbackDetail.feedback,
-                      kFeedbackSubject:"Feedback"]
+                      kFeedbackSubject:FeedbackDetail.subject]
         self.sendRequestWith(method:method, params: params, headers: nil)
         
     }

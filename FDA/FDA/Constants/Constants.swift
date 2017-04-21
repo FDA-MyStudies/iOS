@@ -161,6 +161,6 @@ let kMessageForStudyUpcomingState = "Currently study is not available"
 let kMessageForStudyPausedState = "Currently study is not available"
 let kMessageForStudyClosedState = "Currently study closed"
 let kMessageForStudyWithdrawnState = "You are not allowed to join this study"
-let kMessageForStudyEnrollingNotAllowed = "Enrolling is available currently"
+let kMessageForStudyEnrollingNotAllowed = "Enrolling is not available currently"
 
 

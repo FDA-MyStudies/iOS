@@ -30,7 +30,7 @@ let kConsentSharingStepTitle = "title"
 
 let kConsentReviewStepTitle = "title"
 let kConsentReviewStepSignatureTitle = "signatureTitle"
-let kConsentReviewStepSignatureContent = "signatureContent"
+let kConsentReviewStepSignatureContent = "reviewHTML"
 let kConsentReviewStepReasonForConsent = "reasonForConsent"
 
 

@@ -19,7 +19,7 @@ let kEligibilityVerifiedScreen = "VerifiedScreen"
 enum EligibilityStepType:String {
     case token = "token"
     case test = "test"
-    case both = "both"
+    case both = "combined"
 }
 
 

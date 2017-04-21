@@ -168,24 +168,24 @@ class ActivitiesViewController : UIViewController{
         
         
         if activity.startDate != nil && activity.endDate != nil {
-        
-        let startDateResult = (activity.startDate?.compare(todayDate))! as ComparisonResult
-        let endDateResult = (activity.endDate?.compare(todayDate))! as ComparisonResult
-        
-        if startDateResult == .orderedAscending && endDateResult == .orderedDescending{
-            print("current")
-            return .current
+            
+            let startDateResult = (activity.startDate?.compare(todayDate))! as ComparisonResult
+            let endDateResult = (activity.endDate?.compare(todayDate))! as ComparisonResult
+            
+            if startDateResult == .orderedAscending && endDateResult == .orderedDescending{
+                print("current")
+                return .current
+            }
+            else if startDateResult == .orderedDescending {
+                print("upcoming")
+                return .upcoming
+            }
+            else if endDateResult == .orderedAscending {
+                print("past")
+                return .past
+            }
         }
-        else if startDateResult == .orderedDescending {
-            print("upcoming")
-            return .upcoming
-        }
-        else if endDateResult == .orderedAscending {
-            print("past")
-            return .past
-        }
-        }
-        return .past
+        return .current
     }
     
     func handleActivityListResponse(){

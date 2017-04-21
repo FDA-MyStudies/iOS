@@ -334,9 +334,24 @@ class DBHandler: NSObject {
                 }
                 activity.activityRuns = runs
                 
-                var runsBeforeToday = runs.filter({$0.endDate <= date})
                 
-                let run = runs.filter({$0.startDate <= date && $0.endDate > date}).first //current run
+                var runsBeforeToday:Array<ActivityRun>! = []
+                var run:ActivityRun!
+                if activity.frequencyType == Frequency.One_Time && activity.endDate == nil {
+                    //runsBeforeToday = runs
+                    run = runs.last
+                }
+                else {
+                    
+                    runsBeforeToday = runs.filter({$0.endDate <= date})
+                    
+                    run = runs.filter({$0.startDate <= date && $0.endDate > date}).first //current run
+                    
+                }
+                
+                //var runsBeforeToday = runs.filter({$0.endDate <= date})
+                
+                //let run = runs.filter({$0.startDate <= date && $0.endDate > date}).first //current run
                 
                 let completedRuns = runs.filter({$0.isCompleted == true})
                 let incompleteRuns = runsBeforeToday.count - completedRuns.count

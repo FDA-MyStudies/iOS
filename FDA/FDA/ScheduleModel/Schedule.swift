@@ -23,7 +23,7 @@ class Schedule{
     
     var frequency:Frequency = .One_Time
     var startTime:Date!
-    var endTime:Date!
+    var endTime:Date?
     var lastRunTime:Date? = nil
     var nextRunTime:Date!
     weak var activity:Activity!
@@ -69,7 +69,7 @@ class Schedule{
         let currentDate = Date()
         var availablityStatus = true
         
-        let result = currentDate.compare(endTime)
+        let result = currentDate.compare(endTime!)
         let startResult = currentDate.compare(startTime)
         if (startResult == .orderedSame || startResult == .orderedAscending) {
             availablityStatus = false
@@ -134,7 +134,7 @@ class Schedule{
         
        
         
-        let numberOfDays = self.getNumberOfDaysBetween(startDate: startTime, endDate: endTime)
+        let numberOfDays = self.getNumberOfDaysBetween(startDate: startTime, endDate: endTime!)
         print("numberOfDays \(numberOfDays)")
         var runStartDate:Date? = startTime
         var runEndDate:Date? = nil
@@ -157,11 +157,6 @@ class Schedule{
         
         
         
-        
-        //let study = Study.currentStudy
-        
-        //DBHandler.saveActivityRuns(activityId: (activity.actvityId)!, studyId: (study?.studyId)!, runs: activityRuns)
-        
     }
     
     func setWeeklyRuns() {
@@ -173,9 +168,9 @@ class Schedule{
         //first day
         var runStartDate = calendar.date(byAdding:.weekday, value:(targetDay - dayOfWeek), to: startTime)
         var runId = 1
-        while runStartDate?.compare(endTime) == .orderedAscending {
+        while runStartDate?.compare(endTime!) == .orderedAscending {
             var runEndDate =  calendar.date(byAdding:.second, value:((7*86400) - 1), to: runStartDate!)
-            if runEndDate?.compare(endTime) == .orderedDescending {
+            if runEndDate?.compare(endTime!) == .orderedDescending {
                 runEndDate = endTime
             }
             
@@ -201,11 +196,11 @@ class Schedule{
         
         var runStartDate = startTime
         var runId = 1
-        while runStartDate?.compare(endTime) == .orderedAscending {
+        while runStartDate?.compare(endTime!) == .orderedAscending {
             let nextRunStartDate =  calendar.date(byAdding:.month, value:1*runId, to: startTime!)
             var runEndDate = calendar.date(byAdding: .second, value: -1, to: nextRunStartDate!)
             //save range
-            if runEndDate?.compare(endTime) == .orderedDescending {
+            if runEndDate?.compare(endTime!) == .orderedDescending {
                 runEndDate = endTime
             }
             
@@ -231,7 +226,7 @@ class Schedule{
         
         dailyFrequencyTimings = activity.frequencyRuns!
         
-        let numberOfDays = self.getNumberOfDaysBetween(startDate: startTime, endDate: endTime)
+        let numberOfDays = self.getNumberOfDaysBetween(startDate: startTime, endDate: endTime!)
         let calendar = Calendar.current
         var runId = 1
         let startDateString =  Schedule.formatter.string(from: startTime)

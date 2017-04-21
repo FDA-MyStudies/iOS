@@ -86,16 +86,27 @@ class ActivitiesTableViewCell: UITableViewCell {
                         let date = Date()
                         print("Current Date :\(date.description)")
                         
-                        var runsBeforeToday = runs.filter({$0.endDate <= date})
+                        var runsBeforeToday:Array<ActivityRun>! = []
+                        var run:ActivityRun!
+                        if activity.frequencyType == Frequency.One_Time && activity.endDate == nil {
+                            //runsBeforeToday = runs
+                            run = runs.last
+                        }
+                        else {
+                            
+                             runsBeforeToday = runs.filter({$0.endDate <= date})
+                            
+                             run = runs.filter({$0.startDate <= date && $0.endDate > date}).first //current run
+
+                        }
                         
-                        let run = runs.filter({$0.startDate <= date && $0.endDate > date}).first //current run
                         
                         let completedRuns = runs.filter({$0.isCompleted == true})
                         let incompleteRuns = runsBeforeToday.count - completedRuns.count
                         
                         
                         activity.compeltedRuns = completedRuns.count
-                        activity.incompletedRuns = incompleteRuns
+                        activity.incompletedRuns = (incompleteRuns < 0) ? 0 :incompleteRuns
                         activity.currentRunId =  (run != nil) ? (run?.runId)! : runsBeforeToday.count
                         activity.totalRuns = runs.count
                         activity.currentRun = run
@@ -205,7 +216,11 @@ class ActivitiesTableViewCell: UITableViewCell {
         
         //let activityStartTime = ActivitiesTableViewCell.timeFormatter.string(from: startDate!)
         let startDateString = ActivitiesTableViewCell.oneTimeFormatter.string(from: startDate!)
-        let endDateString = ActivitiesTableViewCell.oneTimeFormatter.string(from: endDate!)
+        var endDateString = ""
+        if endDate != nil {
+            endDateString = ActivitiesTableViewCell.oneTimeFormatter.string(from: endDate!)
+        }
+       
         
         
         

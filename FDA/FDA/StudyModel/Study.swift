@@ -14,10 +14,10 @@ let kConsentDocumentVersion = "version"
 let kConsentDocumentContent = "content"
 
 enum StudyStatus:String{
-    case active
-    case upcoming
-    case closed
-    case paused
+    case Active
+    case Upcoming
+    case Closed
+    case Paused
 }
 
 struct ConsentDocument {
@@ -64,7 +64,7 @@ class Study {
     var category:String?
     var startDate:String?
     var endEnd:String?
-    var status:StudyStatus = .active
+    var status:StudyStatus = .Active
     var sponserName:String?
     var description:String?
     var brandingConfiguration:String?
@@ -108,7 +108,10 @@ class Study {
                 self.logoURL = studyDetail[kStudyLogoURL] as? String
             }
             if Utilities.isValidValue(someObject: studyDetail[kStudyStatus] as AnyObject )  {
-                self.status = .active //StudyStatus.init(rawValue: studyDetail[kStudyStatus] as! String)!
+                self.status = StudyStatus.init(rawValue: studyDetail[kStudyStatus] as! String)!
+            }
+            if Utilities.isValidObject(someObject: studyDetail[kStudySettings] as AnyObject )  {
+                self.studySettings = StudySettings(settings: studyDetail[kStudySettings] as! Dictionary<String, Any>)
             }
             
         }

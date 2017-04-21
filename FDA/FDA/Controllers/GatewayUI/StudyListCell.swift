@@ -119,13 +119,13 @@ class StudyListCell: UITableViewCell {
         labelStudyStatus?.text = study.status.rawValue.uppercased()
         
         switch study.status {
-        case .active:
+        case .Active:
             studyStatusIndicator?.backgroundColor = Utilities.getUIColorFromHex(0x4caf50) //green
-        case .upcoming:
+        case .Upcoming:
             studyStatusIndicator?.backgroundColor = Utilities.getUIColorFromHex(0x007cba)  //app color
-        case .closed:
+        case .Closed:
             studyStatusIndicator?.backgroundColor = Utilities.getUIColorFromHex(0xFF0000)  //red color
-        case .paused:
+        case .Paused:
             studyStatusIndicator?.backgroundColor = Utilities.getUIColorFromHex(0xFF0000)  //red color
         }
     }

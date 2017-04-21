@@ -22,6 +22,10 @@ let kStudyTagLine = "tagline"
 
 let kStudyStatus = "status"
 let kStudyLogoURL = "logo"
+let kStudySettings = "settings"
+let kStudyEnrolling = "enrolling"
+let kStudyPlatform = "platform"
+let kStudyRejoin = "rejoin"
 
 //resources
 let kResources = "resources"

@@ -510,17 +510,19 @@ extension StudyHomeViewController:ORKTaskViewControllerDelegate{
     
     func taskViewController(_ taskViewController: ORKTaskViewController, stepViewControllerWillAppear stepViewController: ORKStepViewController) {
         
+        
+        
         if (taskViewController.result.results?.count)! > 1{
-            
-            
+    
             if activityBuilder?.actvityResult?.result?.count == taskViewController.result.results?.count{
+                //Removing the dummy result:Currentstep result which not presented yet
                 activityBuilder?.actvityResult?.result?.removeLast()
             }
             else{
                 
             }
             
-            
+            //Following to for Step Level Result Saving , rather than Restorted data
             /*
              if (activityBuilder?.actvityResult?.result?.count)! < (taskViewController.result.results?.count)!{
              
@@ -534,33 +536,45 @@ extension StudyHomeViewController:ORKTaskViewControllerDelegate{
              */
         }
         
+        //Handling show and hide of Back Button
+        
+        //For Verified Step , Completion Step, Visual Step, Review Step, Share Pdf Step
+        
         if stepViewController.step?.identifier == kEligibilityVerifiedScreen || stepViewController.step?.identifier == kConsentCompletionStepIdentifier || stepViewController.step?.identifier == "visual" || stepViewController.step?.identifier == "Review" || stepViewController.step?.identifier == kConsentSharePdfCompletionStep{
             
+            
+            if stepViewController.step?.identifier == kEligibilityVerifiedScreen{
+               stepViewController.continueButtonTitle = "Continue"
+            }
+            
+            
             stepViewController.backButtonItem = nil
-            
         }
-        else{
+        //checking if currentstep is View Pdf Step
+        else if stepViewController.step?.identifier == kConsentViewPdfCompletionStep{
             
-            if stepViewController.step?.identifier == kConsentViewPdfCompletionStep{
-                
-                stepViewController.backButtonItem = nil
-                
-                let orkStepResult:ORKStepResult? = taskViewController.result.results?[(taskViewController.result.results?.count)! - 2] as! ORKStepResult?
-                
-                let consentSignatureResult:ConsentCompletionTaskResult? = orkStepResult?.results?.first as? ConsentCompletionTaskResult
-                
-                if  consentSignatureResult?.didTapOnViewPdf == false{
-                    stepViewController.goForward()
-                }
-                else{
-                    
-                }
+            //Back button is enabled
+            stepViewController.backButtonItem?.isEnabled = true
+            
+            let orkStepResult:ORKStepResult? = taskViewController.result.results?[(taskViewController.result.results?.count)! - 2] as! ORKStepResult?
+            
+            let consentSignatureResult:ConsentCompletionTaskResult? = orkStepResult?.results?.first as? ConsentCompletionTaskResult
+            
+            //Checking if Signature is consented after Review Step
+            
+            if  consentSignatureResult?.didTapOnViewPdf == false{
+                //Directly moving to completion step by skipping Intermediate PDF viewer screen
+                stepViewController.goForward()
             }
             else{
-                stepViewController.backButtonItem?.isEnabled = true
+                
             }
         }
-        
+        else{
+            //Back button is enabled
+            stepViewController.backButtonItem?.isEnabled = true
+            
+        }
         
     }
     
@@ -577,6 +591,8 @@ extension StudyHomeViewController:ORKTaskViewControllerDelegate{
     }
     func taskViewController(_ taskViewController: ORKTaskViewController, viewControllerFor step: ORKStep) -> ORKStepViewController? {
         
+        //CurrentStep is TokenStep
+        
         if step.identifier == kEligibilityTokenStep {
             
             let gatewayStoryboard = UIStoryboard(name: kFetalKickCounterStep, bundle: nil)
@@ -584,13 +600,22 @@ extension StudyHomeViewController:ORKTaskViewControllerDelegate{
             let ttController = gatewayStoryboard.instantiateViewController(withIdentifier: kEligibilityStepViewControllerIdentifier) as! EligibilityStepViewController
             ttController.step = step
             
-            
             return ttController
         }
         else if step.identifier == kConsentSharePdfCompletionStep {
             
             
-            let reviewStep:ORKStepResult? = taskViewController.result.results?[(taskViewController.result.results?.count)! - 1] as! ORKStepResult?
+            
+            
+           // let reviewStep:ORKStepResult? = taskViewController.result.results?[(taskViewController.result.results?.count)! - 1] as! ORKStepResult?
+            
+            
+            var totalResults =  taskViewController.result.results
+             let reviewStep:ORKStepResult?
+                
+               totalResults = totalResults?.filter({$0.identifier == "Review"})
+            
+            reviewStep = totalResults?.first as! ORKStepResult?
             
             if (reviewStep?.identifier)! == "Review" && (reviewStep?.results?.count)! > 0{
                 let consentSignatureResult:ORKConsentSignatureResult? = reviewStep?.results?.first as? ORKConsentSignatureResult
@@ -606,8 +631,7 @@ extension StudyHomeViewController:ORKTaskViewControllerDelegate{
                 }
                 else{
                     
-                     let documentCopy:ORKConsentDocument = (ConsentBuilder.currentConsent?.consentDocument)!.copy() as! ORKConsentDocument
-                    
+                    let documentCopy:ORKConsentDocument = (ConsentBuilder.currentConsent?.consentDocument)!.copy() as! ORKConsentDocument
                     
                     consentSignatureResult?.apply(to: documentCopy)
                     
@@ -653,63 +677,7 @@ extension StudyHomeViewController:ORKTaskViewControllerDelegate{
         else {
             
             return nil
-            
-            
         }
     }
     
-    
-    func buildTask()  {
-        
-        // let filePath  = Bundle.main.path(forResource: "LatestActive_Taskdocument", ofType: "json")
-        
-        //let filePath  = Bundle.main.path(forResource: "ActiveTask", ofType: "json")
-        
-        let filePath  = Bundle.main.path(forResource: "Consent", ofType: "json")
-        
-        //let filePath  = Bundle.main.path(forResource: "Acivity_Question", ofType: "json")
-        
-        let data = NSData(contentsOfFile: filePath!)
-        
-        
-        do {
-            let dataDict = try JSONSerialization.jsonObject(with: data! as Data, options: []) as? Dictionary<String,Any>
-            
-            if  Utilities.isValidObject(someObject: dataDict as AnyObject?) && (dataDict?.count)! > 0 {
-                
-                
-                let task:ORKTask?
-                let taskViewController:ORKTaskViewController?
-                
-                if Utilities.isValidObject(someObject: dataDict?["Result"] as? Dictionary<String, Any> as AnyObject?){
-                    
-                    
-                    // activityBuilder?.initActivityWithDict(dict: dataDict?["Result"] as! Dictionary<String, Any>)
-                    
-                    
-                    
-                    task = activityBuilder?.createTask()
-                    
-                    
-                    // consentbuilder?.initWithMetaData(metaDataDict:dataDict?["Result"] as! Dictionary<String, Any> )
-                    // task = consentbuilder?.createConsentTask()
-                    
-                    taskViewController = ORKTaskViewController(task:task, taskRun: nil)
-                    
-                    
-                    // consentbuilder?.consentResult =   ConsentResult()
-                    // consentbuilder?.consentResult?.consentDocument =  consentbuilder?.consentDocument
-                    
-                    taskViewController?.delegate = self
-                    taskViewController?.outputDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
-                    UIApplication.shared.statusBarStyle = .default
-                    present(taskViewController!, animated: true, completion: nil)
-                }
-            }
-            
-            // use anyObj here
-        } catch {
-            print("json error: \(error.localizedDescription)")
-        }
-    }
 }

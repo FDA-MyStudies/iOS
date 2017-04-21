@@ -463,13 +463,16 @@
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="njD-n5-vGk">
                                 <rect key="frame" x="0.0" y="559" width="375" height="44"/>
                                 <items>
-                                    <barButtonItem image="shareIcon" width="187.5" id="o5H-XN-c6n">
+                                    <barButtonItem image="shareIcon" width="39.5" id="o5H-XN-c6n">
                                         <color key="tintColor" red="0.0" green="0.48627450979999998" blue="0.72941176470000002" alpha="1" colorSpace="calibratedRGB"/>
                                         <connections>
                                             <action selector="buttonActionEmailPdfWithSender:" destination="0WO-Bz-3yZ" id="pPM-Lr-QqE"/>
                                         </connections>
                                     </barButtonItem>
-                                    <barButtonItem title="Next" width="162" id="1qm-qt-0go">
+                                    <barButtonItem width="59" style="plain" systemItem="flexibleSpace" id="7si-4X-Jhg">
+                                        <color key="tintColor" red="0.54901960780000003" green="0.58431372550000005" blue="0.63921568630000003" alpha="1" colorSpace="calibratedRGB"/>
+                                    </barButtonItem>
+                                    <barButtonItem title="Next" width="48" id="1qm-qt-0go">
                                         <color key="tintColor" red="0.0" green="0.48627450979999998" blue="0.72941176470000002" alpha="1" colorSpace="calibratedRGB"/>
                                         <connections>
                                             <action selector="buttonActionNextWithSender:" destination="0WO-Bz-3yZ" id="rPt-xP-vJZ"/>

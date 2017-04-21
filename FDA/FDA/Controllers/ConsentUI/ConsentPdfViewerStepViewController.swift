@@ -79,9 +79,9 @@ class ConsentPdfViewerStepViewController: ORKStepViewController {
         let mailComposerVC = MFMailComposeViewController()
         mailComposerVC.mailComposeDelegate = self
         
-        mailComposerVC.setToRecipients(["abc@gmail.com"])
-        mailComposerVC.setSubject("Sending you an in-app e-mail...")
-        mailComposerVC.setMessageBody("Sending e-mail in-app is not so bad!", isHTML: false)
+        
+        mailComposerVC.setSubject("Signed Consent")
+        mailComposerVC.setMessageBody("", isHTML: false)
         
         
         let dir = FileManager.getStorageDirectory(type: .study)

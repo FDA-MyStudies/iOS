@@ -56,11 +56,11 @@ extension ReachoutOptionsViewController : UITableViewDataSource {
         
         switch indexPath.row {
         case 0:
-            cell.labelTitle?.text = NSLocalizedString("Contact Us", comment: "")
+            cell.labelTitle?.text = NSLocalizedString("Leave Anonymous Feedback", comment: "")
         case 1:
-            cell.labelTitle?.text = NSLocalizedString("Feedback", comment: "")
+            cell.labelTitle?.text = NSLocalizedString("Need Help? Contact Us", comment: "")
         default:
-            cell.labelTitle?.text = NSLocalizedString("Contact Us", comment: "")
+            cell.labelTitle?.text = NSLocalizedString("Need Help? Contact Us", comment: "")
         }
         
         
@@ -75,9 +75,9 @@ extension ReachoutOptionsViewController :  UITableViewDelegate {
         tableView.deselectRow(at: indexPath, animated: true)
        
         switch indexPath.row {
-        case 0:
-            self.performSegue(withIdentifier: "contactusSegue", sender: self)
         case 1:
+            self.performSegue(withIdentifier: "contactusSegue", sender: self)
+        case 0:
             self.performSegue(withIdentifier: "feedbackSegue", sender: self)
         default:
             debugPrint("default")

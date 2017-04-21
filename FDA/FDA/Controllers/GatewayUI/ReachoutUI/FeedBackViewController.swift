@@ -35,7 +35,7 @@ class FeedBackViewController : UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.navigationItem.title =  NSLocalizedString("FEEDBACK", comment: "")
+        self.navigationItem.title =  NSLocalizedString("LEAVE US YOUR FEEDBACK", comment: "")
         
         //Used to set border color for bottom view
         buttonSubmit?.layer.borderColor = kUicolorForButtonBackground

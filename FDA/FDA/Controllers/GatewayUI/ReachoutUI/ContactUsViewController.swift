@@ -168,7 +168,7 @@ extension ContactUsViewController: UITextViewDelegate {
     func textViewDidEndEditing(_ textView: UITextView) {
         print("textViewDidEndEditing")
         if textView.tag == 101 && textView.text.characters.count == 0 {
-            textView.text = "Enter your message here"
+            textView.text = kMessageTextViewPlaceHolder
             textView.textColor = UIColor.lightGray
             textView.tag = 100
         }

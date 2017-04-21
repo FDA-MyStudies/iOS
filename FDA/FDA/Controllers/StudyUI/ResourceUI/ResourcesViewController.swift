@@ -11,7 +11,7 @@ import UIKit
 
 class ResourcesViewController : UIViewController{
     
-    var tableViewRowDetails : [Resource]?
+    var tableViewRowDetails : [AnyObject]?
     
     @IBOutlet var tableView : UITableView?
     var resourceLink:String?
@@ -19,16 +19,18 @@ class ResourcesViewController : UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //load plist info
-        // let plistPath = Bundle.main.path(forResource: "ResourcesUI", ofType: ".plist", inDirectory:nil)
-        // tableViewRowDetails = NSMutableArray.init(contentsOfFile: plistPath!)
         
-        tableViewRowDetails = [Resource]()
+        
+        //load plist info
+        let plistPath = Bundle.main.path(forResource: "ResourcesUI", ofType: ".plist", inDirectory:nil)
+        tableViewRowDetails = NSMutableArray(contentsOfFile: plistPath!) as [AnyObject]?
+        
+       
         
         self.navigationItem.title = NSLocalizedString("Resources", comment: "")
         
         //Next Phase
-        //WCPServices().getResourcesForStudy(studyId: (Study.currentStudy?.studyId)!, delegate: self)
+        WCPServices().getResourcesForStudy(studyId: (Study.currentStudy?.studyId)!, delegate: self)
         
     }
     
@@ -87,12 +89,25 @@ extension ResourcesViewController : UITableViewDataSource {
         
         //Cell Data Setup
         
-        if Utilities.isValidValue(someObject: resource.title as AnyObject) {
-            cell.populateCellData(data: resource.title!)
+        if (resource as? Resource) != nil {
+            // resources cell
+            
+            if Utilities.isValidValue(someObject: (resource as? Resource)?.title as AnyObject) {
+                cell.populateCellData(data: ((resource as? Resource)?.title)!)
+            }
+            else{
+                cell.labelTitle?.text = ""
+            }
+            
+            
         }
         else{
-            cell.labelTitle?.text = ""
+            // default cells
+            
+            cell.populateCellData(data:resource as! String)
         }
+        
+       
         
         //cell.accessoryType = .disclosureIndicator
         
@@ -108,9 +123,17 @@ extension ResourcesViewController : UITableViewDelegate{
         tableView.deselectRow(at: indexPath, animated: true)
         
         let resource = (tableViewRowDetails?[indexPath.row])!
-        resourceLink = resource.file?.getFileLink()
-        fileType = resource.file?.getMIMEType()
-        self.performSegue(withIdentifier:"ResourceDetailViewControllerIdentifier" , sender: self)
+        
+        if (resource as? Resource) != nil {
+            
+            resourceLink = (resource as? Resource)?.file?.getFileLink()
+            fileType = (resource as? Resource)?.file?.getMIMEType()
+            self.performSegue(withIdentifier:"ResourceDetailViewControllerIdentifier" , sender: self)
+        }
+        else{
+            
+        }
+        
     }
     
 }
@@ -127,7 +150,26 @@ extension ResourcesViewController:NMWebServiceDelegate {
         self.removeProgressIndicator()
         
         if requestName as String == WCPMethods.resources.method.methodName {
+            
+           
+            
+            
             tableViewRowDetails = Study.currentStudy?.resources
+            
+            
+            
+            let plistPath = Bundle.main.path(forResource: "ResourcesUI", ofType: ".plist", inDirectory:nil)
+            
+            let array = NSMutableArray(contentsOfFile: plistPath!) as [AnyObject]?
+            
+            for title in array!{
+               tableViewRowDetails?.append(title)
+            }
+            
+           
+            
+            
+            
             tableView?.reloadData()
         }
         

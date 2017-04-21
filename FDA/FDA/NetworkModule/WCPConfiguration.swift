@@ -54,8 +54,8 @@ struct WCPServerURLConstants {
 
     
     //New SerVerForDevelopment
-    //static let ProductionURL = "http://192.168.0.26:8080/StudyMetaData/"
-    //static let DevelopmentURL = "http://192.168.0.26:8080/StudyMetaData/"
+    static let ProductionURL = "http://192.168.0.26:8080/StudyMetaData/"
+    static let DevelopmentURL = "http://192.168.0.26:8080/StudyMetaData/"
     
 
     
@@ -70,8 +70,8 @@ struct WCPServerURLConstants {
     
     
     //local
-    static let ProductionURL = "http://192.168.0.32:8080/StudyMetaData/"
-    static let DevelopmentURL = "http://192.168.0.32:8080/StudyMetaData/"
+    //static let ProductionURL = "http://192.168.0.32:8080/StudyMetaData/"
+    //static let DevelopmentURL = "http://192.168.0.32:8080/StudyMetaData/"
     
     
 }

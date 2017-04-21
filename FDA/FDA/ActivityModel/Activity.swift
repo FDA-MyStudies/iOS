@@ -81,7 +81,9 @@ class Activity{
     var actvityId:String?
     
     var studyId:String?
-    var name:String?
+    var name:String? //this will come in activity list used to display
+    var shortName:String? //this will come in meta data
+    
     var version:String?
     var lastModified:Date?
     var userStatus:UserActivityStatus.ActivityStatus = .yetToJoin
@@ -124,7 +126,7 @@ class Activity{
         self.startDate = nil
         self.endDate = nil
         
-        
+        self.shortName = ""
         
         
         // questionnaireConfigurations
@@ -249,8 +251,9 @@ class Activity{
 //                self.actvityId =   infoDict[kActivityId] as? String
 //            }
             
-            if Utilities.isValidValue(someObject: infoDict[kActivityName] as AnyObject ){
-                self.name =   infoDict[kActivityName] as? String
+                        
+            if Utilities.isValidValue(someObject: infoDict[kActivityTitle] as AnyObject ){
+                self.shortName =   infoDict[kActivityTitle] as? String
             }
             
             if Utilities.isValidValue(someObject: infoDict[kActivityVersion] as AnyObject ){

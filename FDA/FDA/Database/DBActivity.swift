@@ -25,7 +25,7 @@ class DBActivity: Object {
     var randomization:Bool?
     
     
-    //dynamic var frequencyRunsData:Data?
+    dynamic var frequencyRunsData:Data?
     dynamic var frequencyType:String?
     
     //dynamic var result:ActivityResult?

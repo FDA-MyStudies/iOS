@@ -21,7 +21,7 @@ enum ActivityAvailabilityStatus:Int{
 
 class ActivitiesViewController : UIViewController{
     
-    var tableViewSections:Array<Dictionary<String,Any>> = []
+    var tableViewSections:Array<Dictionary<String,Any>>! = []
     
     @IBOutlet var tableView : UITableView?
     var selectedIndexPath:IndexPath? = nil
@@ -43,19 +43,12 @@ class ActivitiesViewController : UIViewController{
         
         if (Study.currentStudy?.studyId) != nil {
             
-            WCPServices().getStudyActivityList(studyId: (Study.currentStudy?.studyId)!, delegate: self)
-//            
-//            DBHandler.loadActivityListFromDatabase(studyId: (Study.currentStudy?.studyId)!) { (activities) in
-//                if activities.count > 0 {
-//                    Study.currentStudy?.activities = activities
-//                    self.handleActivityListResponse()
-//                }
-//                else {
-//                     WCPServices().getStudyActivityList(studyId: (Study.currentStudy?.studyId)!, delegate: self)
-//                }
-//            }
-
            
+            WCPServices().getStudyActivityList(studyId: (Study.currentStudy?.studyId)!, delegate: self)
+            //load from database
+            self.loadActivitiesFromDatabase()
+            
+  
         }
         
     }
@@ -73,7 +66,18 @@ class ActivitiesViewController : UIViewController{
         
     }
     
-    
+    func loadActivitiesFromDatabase(){
+        
+        DBHandler.loadActivityListFromDatabase(studyId: (Study.currentStudy?.studyId)!) { (activities) in
+            if activities.count > 0 {
+                Study.currentStudy?.activities = activities
+                self.handleActivityListResponse()
+            }
+            else {
+                WCPServices().getStudyActivityList(studyId: (Study.currentStudy?.studyId)!, delegate: self)
+            }
+        }
+    }
     
     
     @IBAction func homeButtonAction(_ sender: AnyObject){
@@ -185,6 +189,8 @@ class ActivitiesViewController : UIViewController{
     }
     
     func handleActivityListResponse(){
+        
+        tableViewSections = []
         
         let activities = Study.currentStudy?.activities
         
@@ -367,6 +373,8 @@ extension ActivitiesViewController : UITableViewDelegate{
                     }
                     else {
                         debugPrint("run is completed")
+                        Study.updateCurrentActivity(activity:activities[indexPath.row])
+                        self.updateRunStatusToComplete()
                     }
                 }
                
@@ -420,7 +428,8 @@ extension ActivitiesViewController:NMWebServiceDelegate {
         if requestName as String == WCPMethods.activityList.method.methodName {
                        
             //self.tableView?.reloadData()
-            self.handleActivityListResponse()
+            //self.handleActivityListResponse()
+            self.loadActivitiesFromDatabase()
             
         }
         else if requestName as String == WCPMethods.activity.method.methodName {

@@ -600,7 +600,9 @@ extension StudyHomeViewController:ORKTaskViewControllerDelegate{
                     
                     taskViewController.dismiss(animated: true
                         , completion: nil)
+                     _ = self.navigationController?.popViewController(animated: true)
                     return nil
+                    
                 }
                 else{
                     

@@ -69,6 +69,9 @@ class EligibilityBuilder{
             
             if self.type == EligibilityStepType.token {
                 
+              //  let passcodeStep = ORKPasscodeStep(identifier:tokenTitle! )
+              //  stepsArray?.append(passcodeStep)
+                
                 let eligibilityStep:EligibilityStep? = EligibilityStep(identifier: "EligibilityTokenStep")
                 eligibilityStep?.type = "TOKEN"
                 stepsArray?.append(eligibilityStep!)
@@ -90,9 +93,6 @@ class EligibilityBuilder{
         
             switch self.type! as EligibilityStepType{
             case .token:
-                
-               // let passcodeStep = ORKPasscodeStep(identifier:tokenTitle! )
-               // stepsArray?.append(passcodeStep)
                 
                 let eligibilityStep:EligibilityStep? = EligibilityStep(identifier: "EligibilityTokenStep")
                 eligibilityStep?.type = "TOKEN"

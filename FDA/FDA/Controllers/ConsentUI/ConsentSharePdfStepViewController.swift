@@ -75,6 +75,11 @@ class ConsentSharePdfStepViewController: ORKStepViewController {
             
             self.taskResult.didTapOnViewPdf = true
             
+            ConsentBuilder.currentConsent?.consentResult?.consentPdfData = Data()
+             ConsentBuilder.currentConsent?.consentResult?.consentPdfData = data?.base64EncodedData()
+
+            
+            
             let dir = FileManager.getStorageDirectory(type: .study)
             
             let fullPath = "file://" + dir + "/" + "Consent" +  "_" + "\((Study.currentStudy?.studyId)!)" + ".pdf"

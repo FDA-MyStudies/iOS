@@ -25,7 +25,9 @@ class ResourcesViewController : UIViewController{
         let plistPath = Bundle.main.path(forResource: "ResourcesUI", ofType: ".plist", inDirectory:nil)
         tableViewRowDetails = NSMutableArray(contentsOfFile: plistPath!) as [AnyObject]?
         
-       
+        if (Study.currentStudy?.studySettings.rejoinStudyAfterWithdrawn)! == false {
+            tableViewRowDetails?.removeLast()
+        }
         
         self.navigationItem.title = NSLocalizedString("Resources", comment: "")
         
@@ -131,7 +133,33 @@ extension ResourcesViewController : UITableViewDelegate{
             self.performSegue(withIdentifier:"ResourceDetailViewControllerIdentifier" , sender: self)
         }
         else{
-            
+            if resource as! String == "Leave Study" {
+                
+                //Incomplete web config
+                
+                // iF WEBCONFIG == ask_user
+                
+                UIUtilities.showAlertMessageWithTwoActionsAndHandler(NSLocalizedString("Leave Study", comment: ""), errorMessage: NSLocalizedString("Are you sure you want to leave Study ?", comment: ""), errorAlertActionTitle: NSLocalizedString("Leave Study", comment: ""),
+                                                                     errorAlertActionTitle2: NSLocalizedString("Cancel", comment: ""), viewControllerUsed: self,
+                                                                     action1: {
+                                                                        
+                                                                        LabKeyServices().withdrawFromStudy(studyId: (Study.currentStudy?.studyId)!, participantId: User.currentUser.userId, deleteResponses: false, delegate: self)
+                                                                        
+                                                                       
+                },
+                                                                     action2: {
+                                                                        
+                })
+
+               // else if no_action
+                
+                
+                // else if delete_data
+                
+            }
+            else{
+                
+            }
         }
         
     }
@@ -151,12 +179,7 @@ extension ResourcesViewController:NMWebServiceDelegate {
         
         if requestName as String == WCPMethods.resources.method.methodName {
             
-           
-            
-            
             tableViewRowDetails = Study.currentStudy?.resources
-            
-            
             
             let plistPath = Bundle.main.path(forResource: "ResourcesUI", ofType: ".plist", inDirectory:nil)
             
@@ -166,11 +189,34 @@ extension ResourcesViewController:NMWebServiceDelegate {
                tableViewRowDetails?.append(title)
             }
             
-           
-            
-            
+            if (Study.currentStudy?.studySettings.rejoinStudyAfterWithdrawn)! == false {
+                tableViewRowDetails?.removeLast()
+            }
+            tableView?.isHidden =  false
             
             tableView?.reloadData()
+        }
+        else if requestName as String == ResponseMethods.withdrawFromStudy.method.methodName {
+            
+             self.addProgressIndicator()
+            UserServices().withdrawFromStudy(studyId: (Study.currentStudy?.studyId)!, shouldDeleteData: false, delegate: self)
+        }
+        else if requestName as String == RegistrationMethods.withdraw.method.methodName{
+            
+            
+            self.navigationController?.navigationBar.isHidden = false
+            self.performSegue(withIdentifier: "unwindeToStudyListResourcesIdentifier", sender: self)
+
+            
+            
+          //  let currentUserStudyStatus =  User.currentUser.updateStudyStatus(studyId:(Study.currentStudy?.studyId)!  , status: .withdrawn)
+            
+          //  UserServices().updateUserParticipatedStatus(studyStauts: currentUserStudyStatus, delegate: self)
+           // self.addProgressIndicator()
+        }
+        else  if requestName as String == RegistrationMethods.updatePreferences.method.methodName{
+           // self.navigationController?.navigationBar.isHidden = false
+           // self.performSegue(withIdentifier: "unwindeToStudyListResourcesIdentifier", sender: self)
         }
         
         

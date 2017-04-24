@@ -25,6 +25,8 @@ enum WCPMethods:String {
     case consentDocument
     case feedback
     case contactUs
+    case studyUpdates
+    case appUpdates
     
     var method:Method{
         switch self {

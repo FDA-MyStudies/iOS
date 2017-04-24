@@ -406,13 +406,16 @@ class UserServices: NSObject {
         self.delegate = delegate
         
         let user = User.currentUser
-        let params = [kUserId : user.userId! as String,
+        
+        let headerParams = [kUserId : user.userId! as String]
+        
+        let params = [
                       kStudyId: studyId,
                       kDeleteData: shouldDeleteData] as [String : Any]
         
         let method = RegistrationMethods.withdraw.method
         
-        self.sendRequestWith(method:method, params: params, headers: nil)
+        self.sendRequestWith(method:method, params: params, headers: headerParams)
     }
     
     

@@ -421,23 +421,26 @@ extension StudyHomeViewController:NMWebServiceDelegate {
         }
         
         if requestName as String == RegistrationMethods.updatePreferences.method.methodName{
-            
+             self.addProgressIndicator()
             UserServices().updateUserEligibilityConsentStatus(eligibilityStatus: true, consentStatus:(ConsentBuilder.currentConsent?.consentStatus)!  , delegate: self)
         }
         
         if requestName as String == ResponseMethods.enroll.description {
             
+            self.addProgressIndicator()
+            
             let currentUserStudyStatus =  User.currentUser.updateStudyStatus(studyId:(Study.currentStudy?.studyId)!  , status: .inProgress)
             
             ConsentBuilder.currentConsent?.consentStatus = .completed
             UserServices().updateUserParticipatedStatus(studyStauts: currentUserStudyStatus, delegate: self)
+        }
+        
+        
+        if requestName as String == RegistrationMethods.updateEligibilityConsentStatus.method.methodName{
             
             if( User.currentUser.getStudyStatus(studyId:(Study.currentStudy?.studyId)! ) == UserStudyStatus.StudyStatus.inProgress){
                 self.pushToStudyDashboard()
             }
-            
-            
-            
         }
         
         //self.removeProgressIndicator()

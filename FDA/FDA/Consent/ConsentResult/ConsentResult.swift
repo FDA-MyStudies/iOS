@@ -55,7 +55,11 @@ class ConsentResult {
                 }
                 else if let signatureStepResult:ORKConsentSignatureResult? = (stepResult as! ORKStepResult).results?[0] as? ORKConsentSignatureResult?{
                     
+                    
                     signatureStepResult?.apply(to: self.consentDocument!)
+                    
+                    if self.consentPdfData == nil{
+                    
                     
                     self.consentDocument?.makePDF(completionHandler: { data,error in
                         NSLog("data: \(data)    \n  error: \(error)")
@@ -89,7 +93,7 @@ class ConsentResult {
                             print(error.localizedDescription)
                         }
                     })
-                    
+                    }
                 }
                 else if let tokenStepResult:EligibilityTokenTaskResult? = (stepResult as! ORKStepResult).results?[0] as? EligibilityTokenTaskResult?{
                     

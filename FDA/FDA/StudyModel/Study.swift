@@ -60,6 +60,7 @@ class Study {
     var studyId:String!
     var name:String?
     var version:String?
+    var newVersion:String?
     var identifer:String?
     var category:String?
     var startDate:String?
@@ -93,6 +94,9 @@ class Study {
             
             if Utilities.isValidValue(someObject: studyDetail[kStudyTitle] as AnyObject ){
                 self.name = studyDetail[kStudyTitle] as? String
+            }
+            if Utilities.isValidValue(someObject: studyDetail[kStudyVersion] as AnyObject ){
+                self.version = studyDetail[kStudyVersion] as? String
             }
             
             if Utilities.isValidValue(someObject: studyDetail[kStudyCategory] as AnyObject ){
@@ -161,4 +165,34 @@ class StudySettings{
             }
         }
     }
+}
+
+struct StudyUpdates{
+    
+   static  var studyInfoUpdated = false
+   static  var studyConsentUpdated = false
+   static  var studyActivitiesUpdated = false
+   static  var studyResourcesUpdated = false
+    
+    init(detail:Dictionary<String,Any>){
+        
+        if Utilities.isValidObject(someObject: detail as AnyObject?){
+            
+            if Utilities.isValidValue(someObject: detail[kStudyResources] as AnyObject ){
+                StudyUpdates.studyResourcesUpdated = (detail[kStudyResources] as? Bool)!
+            }
+            if Utilities.isValidValue(someObject: detail[kStudyInfo] as AnyObject ){
+                StudyUpdates.studyInfoUpdated = (detail[kStudyInfo] as? Bool)!
+            }
+            if Utilities.isValidValue(someObject: detail[kStudyConsent] as AnyObject ){
+                StudyUpdates.studyConsentUpdated = (detail[kStudyConsent] as? Bool)!
+            }
+            if Utilities.isValidValue(someObject: detail[kStudyActivities] as AnyObject ){
+                StudyUpdates.studyActivitiesUpdated = (detail[kStudyActivities] as? Bool)!
+            }
+            
+        }
+       
+    }
+    
 }

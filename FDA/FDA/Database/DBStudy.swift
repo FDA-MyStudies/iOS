@@ -14,6 +14,7 @@ class DBStudy: Object {
     dynamic var studyId:String!
     dynamic var name:String?
     dynamic var version:String?
+    dynamic var updatedVersion:String?
     dynamic var identifer:String?
     dynamic var category:String?
     dynamic var startDate:String?
@@ -24,6 +25,8 @@ class DBStudy: Object {
     dynamic var brandingConfiguration:String?
     dynamic var logoURL:String?
     dynamic  var websiteLink:String?
+    dynamic  var bookmarked:String?
+    dynamic  var participatedStatus:Int = 0
     var sections = List<DBOverviewSection>()
     
     override static func primaryKey() -> String? {

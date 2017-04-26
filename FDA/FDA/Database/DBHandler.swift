@@ -128,6 +128,9 @@ class DBHandler: NSObject {
         dbStudy.logoURL = study.logoURL
         dbStudy.startDate = study.startDate
         dbStudy.endEnd = study.endEnd
+        dbStudy.enrolling = study.studySettings.enrollingAllowed
+        dbStudy.rejoin = study.studySettings.rejoinStudyAfterWithdrawn
+        dbStudy.platform = study.studySettings.platform
         
         return dbStudy
         
@@ -154,6 +157,13 @@ class DBHandler: NSObject {
             study.logoURL = dbStudy.logoURL
             study.startDate = dbStudy.startDate
             study.endEnd = dbStudy.endEnd
+            
+            let studySettings = StudySettings()
+            studySettings.enrollingAllowed = dbStudy.enrolling
+            studySettings.rejoinStudyAfterWithdrawn = dbStudy.rejoin
+            studySettings.platform = dbStudy.platform!
+            
+            study.studySettings = studySettings
             
             studies.append(study)
         }

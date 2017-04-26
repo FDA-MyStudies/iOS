@@ -18,6 +18,7 @@ class SecondGatewayOverviewViewController : UIViewController{
     var overviewSectionDetail : OverviewSection!
     var pageIndex:Int!
     
+//MARK:- View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -48,14 +49,14 @@ class SecondGatewayOverviewViewController : UIViewController{
         
     }
     
-    //GetStarted Button Action
+//MARK:- Button Actions
+    
+    /* GetStarted Button Clicked */
     @IBAction func getStartedButtonClicked(_ sender: Any){
-        
-        
         self.createMenuView()
     }
     
-    
+    /* Create the menu view using FDASlideMenuViewController and Gateway storyboard */
     func createMenuView() {
         
         let storyboard = UIStoryboard(name: "Gateway", bundle: nil)

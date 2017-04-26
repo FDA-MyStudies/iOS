@@ -19,11 +19,11 @@ class StudyOverviewViewControllerSecond : UIViewController{
     @IBOutlet var labelDescription : UILabel?
     @IBOutlet var imageViewStudy : UIImageView?
     
-   
     
     var overViewWebsiteLink:String?
     var overviewSectionDetail : OverviewSection!
     
+//MARK:- View lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -33,14 +33,11 @@ class StudyOverviewViewControllerSecond : UIViewController{
             let url = URL.init(string:overviewSectionDetail.imageURL!)
             imageViewStudy?.sd_setImage(with: url, placeholderImage:nil)
         }
-        
-        
-        
-        
-        
     }
     
     override func viewWillDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -56,7 +53,6 @@ class StudyOverviewViewControllerSecond : UIViewController{
             fontSize = 14.0
         }
         
-        
         let attrStr = try! NSAttributedString(
             data: (overviewSectionDetail.text?.data(using: String.Encoding.unicode, allowLossyConversion: true)!)!,
             options: [ NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType],
@@ -67,9 +63,6 @@ class StudyOverviewViewControllerSecond : UIViewController{
             name: "HelveticaNeue",
             size: CGFloat(fontSize))!], range:(attrStr.string as NSString).range(of: attrStr.string))
         attributedText.addAttribute(NSForegroundColorAttributeName, value: UIColor.black, range: (attrStr.string as NSString).range(of: attrStr.string))
-        
-        
-        
         
         if Utilities.isValidValue(someObject: attrStr.string as AnyObject?){
             self.labelDescription?.attributedText = attributedText
@@ -83,8 +76,6 @@ class StudyOverviewViewControllerSecond : UIViewController{
         
         UIApplication.shared.statusBarStyle = .lightContent
         
-        
-        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -93,6 +84,9 @@ class StudyOverviewViewControllerSecond : UIViewController{
         
     }
     
+//MARK:- Button Actions 
+    
+    /* Join Study button clicked */
     @IBAction func buttonActionJoinStudy(_ sender: Any){
         
         if User.currentUser.userType == UserType.AnonymousUser{
@@ -105,13 +99,13 @@ class StudyOverviewViewControllerSecond : UIViewController{
         }
     }
     
+    /* Visit website button clicked */
     @IBAction func visitWebsiteButtonAction(_ sender: UIButton) {
         
         let loginStoryboard = UIStoryboard.init(name: "Main", bundle:Bundle.main)
         let webViewController = loginStoryboard.instantiateViewController(withIdentifier:"WebViewController") as! UINavigationController
         let webView = webViewController.viewControllers[0] as! WebViewController
         //webView.requestLink = "http://www.fda.gov"
-        
         
         if sender.tag == 1188 {
             //Visit Website
@@ -122,14 +116,7 @@ class StudyOverviewViewControllerSecond : UIViewController{
             webView.htmlString = (Study.currentStudy?.consentDocument?.htmlString)
         }
         
-        
         self.navigationController?.present(webViewController, animated: true, completion: nil)
     }
-    
 }
-
-
-
-
-
 

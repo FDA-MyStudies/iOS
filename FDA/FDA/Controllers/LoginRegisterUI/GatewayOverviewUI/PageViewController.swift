@@ -18,17 +18,16 @@ protocol PageViewControllerDelegate: class {
     //Parameter index: the index of the currently visible page.
     func pageViewController(pageViewController: PageViewController,
                             didUpdatePageIndex index: Int)
-    
 }
 
 class PageViewController : UIPageViewController{
     
     weak var pageViewDelegate: PageViewControllerDelegate?
-    
     var overview : Overview!
     var currentIndex = 0
     
-//MARK:View Controller Delegates
+    
+//MARK:- View Controller Delegates
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -54,8 +53,6 @@ class PageViewController : UIPageViewController{
         
         //self.loadTestData()
         
-       
-        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -63,7 +60,7 @@ class PageViewController : UIPageViewController{
        
     }
     
-  //MARK:Scroll Delegates
+//MARK:- Scroll Delegates
     
     /*
      Scrolls to the next view controller.
@@ -118,11 +115,8 @@ class PageViewController : UIPageViewController{
             default:
                 index = 0
             }
-        
         }
-        
         pageViewDelegate?.pageViewController(pageViewController: self, didUpdatePageIndex: index)
-
     }
     
     /*
@@ -166,7 +160,6 @@ class PageViewController : UIPageViewController{
                     controllers.append(restControllers)
                 }
             }
-            
         }
         else {
             //get first overview controller
@@ -189,7 +182,7 @@ class PageViewController : UIPageViewController{
     }
 }
 
-//MARK: UIPageViewController DataSource
+//MARK:- UIPageViewController DataSource
 extension PageViewController: UIPageViewControllerDataSource {
     func pageViewController(_ pageViewController: UIPageViewController,
                             viewControllerAfter viewController: UIViewController) -> UIViewController? {
@@ -222,13 +215,11 @@ extension PageViewController: UIPageViewControllerDataSource {
         guard previousIndex >= 0 else {
             return nil
         }
-        
         return orderedViewControllers[previousIndex]
     }
-   
 }
 
-//MARK: UIPageViewControllerDelegate
+//MARK:- UIPageViewControllerDelegate
 extension PageViewController: UIPageViewControllerDelegate {
     
     func pageViewController(_ pageViewController: UIPageViewController,
@@ -249,6 +240,8 @@ extension PageViewController: UIPageViewControllerDelegate {
         
     }
 }
+
+//MARK:- UIScrollview delegates
 extension PageViewController: UIScrollViewDelegate{
    
     func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
@@ -261,5 +254,4 @@ extension PageViewController: UIScrollViewDelegate{
         //pageViewDelegate?.pageViewController(pageViewController: self, didUpdatePageIndex: currentIndex)
     }
 }
-
 

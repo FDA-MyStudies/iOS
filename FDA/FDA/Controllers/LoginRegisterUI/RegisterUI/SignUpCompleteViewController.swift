@@ -46,8 +46,11 @@ class SignUpCompleteViewController : UIViewController{
     
 //MARK:- button Actions
     
+    /* Next button clicked 
+     Navigate the screen to GateWay dashboard
+     */
     @IBAction func nextButtonAction(_ sender: Any) {
-            self.navigateToGatewayDashboard()
+        self.navigateToGatewayDashboard()
     }
     
     

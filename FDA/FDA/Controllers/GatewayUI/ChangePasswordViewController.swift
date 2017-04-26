@@ -9,8 +9,6 @@
 import UIKit
 import IQKeyboardManagerSwift
 
-
-
 enum CPTextFeildTags : Int {
     case oldPassword = 100
     case newPassword
@@ -36,7 +34,8 @@ class ChangePasswordViewController: UIViewController {
     
     var viewLoadFrom:ChangePasswordLoadFrom = .profile
     
-//MARK:ViewController delegates
+    
+//MARK:- ViewController delegates
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -67,8 +66,6 @@ class ChangePasswordViewController: UIViewController {
         else {
             self.title = NSLocalizedString(kChangePasswordTitleText, comment: "")
         }
-        
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -77,7 +74,6 @@ class ChangePasswordViewController: UIViewController {
         self.addBackBarButton()
         
         UIApplication.shared.statusBarStyle = .default
-        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -85,15 +81,15 @@ class ChangePasswordViewController: UIViewController {
         
         
     }
+    
     override func viewWillDisappear(_ animated: Bool) {
         //hide navigationbar
         if viewLoadFrom == .login {
             self.navigationController?.setNavigationBarHidden(true, animated: true)
         }
-        
     }
 
-//MARK:Utility Methods
+//MARK:- Utility Methods
     /* 
      Used to show the alert using Utility
      */
@@ -127,9 +123,12 @@ class ChangePasswordViewController: UIViewController {
     }
     
     
-//MARK: Button Actions
+//MARK:- Button Actions
+    
+    /* Validations after clicking on submit button
+     If all the validations satisfy send user feedback request
+     */
     @IBAction func submitButtonAction(_ sender: Any) {
-        
         
         if self.oldPassword.isEmpty && self.newPassword.isEmpty && self.confirmPassword.isEmpty{
              self.showAlertMessages(textMessage: kMessageAllFieldsAreEmpty)
@@ -156,24 +155,21 @@ class ChangePasswordViewController: UIViewController {
         else{
            self.requestToChangePassword()
         }
-        
     }
 }
-//MARK: TableView Data source
+
+//MARK:- TableView Data source
 extension ChangePasswordViewController : UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
        return  (self.tableViewRowDetails?.count)!
-        
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let tableViewData = tableViewRowDetails?.object(at: indexPath.row) as! NSDictionary
         
         let cell = tableView.dequeueReusableCell(withIdentifier: kSignInTableViewCellIdentifier, for: indexPath) as! SignInTableViewCell
-        
-        
         
         cell.populateCellData(data: tableViewData, securedText: true)
         var tagIncremental = 100
@@ -190,7 +186,7 @@ extension ChangePasswordViewController : UITableViewDataSource {
     }
 }
 
-//MARK: TableView Delegates
+//MARK:- TableView Delegates
 extension ChangePasswordViewController :  UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -199,7 +195,7 @@ extension ChangePasswordViewController :  UITableViewDelegate {
     }
 }
 
-//MARK: Textfield Delegate
+//MARK:- Textfield Delegate
 extension ChangePasswordViewController : UITextFieldDelegate{
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
@@ -255,13 +251,15 @@ extension ChangePasswordViewController : UITextFieldDelegate{
         }
     }
 }
-//MARK:Webservice delegates
-extension ChangePasswordViewController:NMWebServiceDelegate {
 
+//MARK:- Webservice delegates
+extension ChangePasswordViewController:NMWebServiceDelegate {
+    
     func startedRequest(_ manager: NetworkManager, requestName: NSString) {
         Logger.sharedInstance.info("requestname : \(requestName)")
         self.addProgressIndicator()
     }
+    
     func finishedRequest(_ manager: NetworkManager, requestName: NSString, response: AnyObject?) {
         Logger.sharedInstance.info("requestname : \(requestName)")
         self.removeProgressIndicator()
@@ -290,17 +288,15 @@ extension ChangePasswordViewController:NMWebServiceDelegate {
             
             let leftController = slideMenuController()?.leftViewController as! LeftMenuViewController
             leftController.createLeftmenuItems()
-             self.performSegue(withIdentifier: "unwindStudyHomeSegue", sender: self)
+            self.performSegue(withIdentifier: "unwindStudyHomeSegue", sender: self)
         }
-        
-        
-
     }
+    
     func failedRequest(_ manager: NetworkManager, requestName: NSString, error: NSError) {
         Logger.sharedInstance.info("requestname : \(requestName)")
-
+        
         self.removeProgressIndicator()
-
+        
         if error.code == 401 { //unauthorized
             UIUtilities.showAlertMessageWithActionHandler(kErrorTitle, message: error.localizedDescription, buttonTitle: kTitleOk, viewControllerUsed: self, action: {
                 self.fdaSlideMenuController()?.navigateToHomeAfterUnauthorizedAccess()
@@ -309,5 +305,7 @@ extension ChangePasswordViewController:NMWebServiceDelegate {
         else {
             
             UIUtilities.showAlertWithTitleAndMessage(title:NSLocalizedString(kErrorTitle, comment: "") as NSString, message: error.localizedDescription as NSString)
-        }    }
+        }
+    }
 }
+

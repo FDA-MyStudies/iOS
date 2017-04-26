@@ -12,13 +12,12 @@ import UIKit
 let kVerifyViewControllerSegue = "VerifyViewControllerSegue"
 let kVerficationMessageFromForgotPassword = "Your registered email(xyz@gmail.com) is pending verification. Enter the Verification Code received on this email to complete verification and try the Forgot Password action again."
 
-
 class ForgotPasswordViewController : UIViewController{
     
     @IBOutlet var buttonSubmit : UIButton?
     @IBOutlet var textFieldEmail : UITextField?
     
-    //MARK:ViewController Delegates
+//MARK:- ViewController Delegates
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,7 +29,6 @@ class ForgotPasswordViewController : UIViewController{
         //Used for background tap dismiss keyboard
         let gestureRecognizwe : UITapGestureRecognizer = UITapGestureRecognizer.init(target: self, action: #selector(SignInViewController.dismissKeyboard))
         self.view?.addGestureRecognizer(gestureRecognizwe)
-        
         
         self.addBackBarButton()
     }
@@ -51,8 +49,7 @@ class ForgotPasswordViewController : UIViewController{
         
     }
     
-    
-    //MARK:Utility Methods
+//MARK:- Utility Methods
     
     /*
      Dismiss key board when clicked on Background
@@ -65,7 +62,6 @@ class ForgotPasswordViewController : UIViewController{
         self.performSegue(withIdentifier: kVerifyViewControllerSegue, sender: self)
     }
     
-    
     /*
      Used to show the alert using Utility
     */
@@ -73,7 +69,11 @@ class ForgotPasswordViewController : UIViewController{
         UIUtilities.showAlertMessage("", errorMessage: NSLocalizedString(textMessage, comment: ""), errorAlertActionTitle: NSLocalizedString("OK", comment: ""), viewControllerUsed: self)
     }
     
-    //MARK:Button Action
+//MARK:- Button Action
+    
+    /* Submit Button Clicked
+     Used to check all the validations before making a logout webservice call
+     */
     @IBAction func submitButtonAction(_ sender: Any) {
         self.dismissKeyboard()
         if textFieldEmail?.text == "" {
@@ -86,13 +86,10 @@ class ForgotPasswordViewController : UIViewController{
             print("Call the Webservice")
             //User.currentUser.emailId = textFieldEmail?.text!
             UserServices().forgotPassword(email:(textFieldEmail?.text)!,delegate: self)
-            
-           
-            
         }
     }
     
-    
+//MARK:- Segue Methods
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         if let verifyController = segue.destination as? VerificationViewController {
@@ -104,18 +101,17 @@ class ForgotPasswordViewController : UIViewController{
             verifyController.viewLoadFrom = .forgotPassword
             verifyController.emailId = textFieldEmail?.text
         }
-        
     }
-    
 }
 
-//MARK:Webservices Delegates
+//MARK:- Webservices Delegates
 extension ForgotPasswordViewController:NMWebServiceDelegate {
     func startedRequest(_ manager: NetworkManager, requestName: NSString) {
         
         Logger.sharedInstance.info("requestname : \(requestName)")
         self.addProgressIndicator()
     }
+    
     func finishedRequest(_ manager: NetworkManager, requestName: NSString, response: AnyObject?) {
         
         Logger.sharedInstance.info("requestname : \(requestName)")
@@ -136,6 +132,7 @@ extension ForgotPasswordViewController:NMWebServiceDelegate {
             
         }
     }
+    
     func failedRequest(_ manager: NetworkManager, requestName: NSString, error: NSError) {
         
         self.removeProgressIndicator()
@@ -144,7 +141,6 @@ extension ForgotPasswordViewController:NMWebServiceDelegate {
         if requestName as String == RegistrationMethods.forgotPassword.description && error.code == 403{
             
             self.navigateToVerifyViewController()
-            
             
             /*
             UIUtilities.showAlertMessageWithTwoActionsAndHandler(NSLocalizedString(kTitleMessage, comment: "") , errorMessage: error.localizedDescription, errorAlertActionTitle: NSLocalizedString("Ok", comment: ""),
@@ -161,16 +157,12 @@ extension ForgotPasswordViewController:NMWebServiceDelegate {
         }
         else{
             // if resend email fails
-            
              UIUtilities.showAlertWithTitleAndMessage(title:NSLocalizedString(kTitleError, comment: "") as NSString, message: error.localizedDescription as NSString)
         }
-        
-        
-       
     }
 }
 
-//MARK:TextField Delegates
+//MARK:- TextField Delegates
 extension ForgotPasswordViewController:UITextFieldDelegate{
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         

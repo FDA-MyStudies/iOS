@@ -67,7 +67,6 @@ class SignUpViewController : UIViewController{
         //unhide navigationbar
         self.navigationController?.setNavigationBarHidden(false, animated: true)
         
-       
         WCPServices().getTermsPolicy(delegate: self)
     }
     
@@ -197,6 +196,9 @@ class SignUpViewController : UIViewController{
     
 //MARK:- Button Actions
     
+    /* Submit button Clicked 
+      Used to check all the validations before making a Register webservice call
+     */
     @IBAction func submitButtonAction(_ sender: Any) {
         
         self.view.endEditing(true)
@@ -212,6 +214,7 @@ class SignUpViewController : UIViewController{
         }
     }
     
+    /* Agree button clicked */
     @IBAction func agreeButtonAction(_ sender: Any) {
         if (sender as! UIButton).isSelected{
             (sender as! UIButton).isSelected = !(sender as! UIButton).isSelected
@@ -221,6 +224,8 @@ class SignUpViewController : UIViewController{
             (sender as! UIButton).isSelected = !(sender as! UIButton).isSelected
         }
     }
+    
+    /* Displays why the user has to register */
     @IBAction func buttonInfoAction(_ sender:Any){
         UIUtilities.showAlertWithTitleAndMessage(title:"Why Register?", message:kRegistrationInfoMessage as NSString)
     }

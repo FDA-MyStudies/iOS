@@ -132,7 +132,7 @@ class VerificationViewController : UIViewController{
         }
     }
 
-//MARK- Segue Delegates
+//MARK- Segue Methods
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         

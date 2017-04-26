@@ -41,7 +41,6 @@ class ProfileViewController: UIViewController {
     var isCellEditable:Bool?
     var user = User.currentUser
     
-    
     @IBOutlet var tableViewProfile : UITableView?
     @IBOutlet var tableViewFooterViewProfile : UIView?
     @IBOutlet var buttonLeadTime:UIButton?
@@ -49,8 +48,8 @@ class ProfileViewController: UIViewController {
     @IBOutlet var editBarButtonItem:UIBarButtonItem?
     @IBOutlet var tableTopConstraint:NSLayoutConstraint?
     
-//MARK: ViewController delegates
     
+//MARK:- ViewController delegates
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -71,7 +70,6 @@ class ProfileViewController: UIViewController {
         
     }
     
-    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         user = User.currentUser
@@ -88,8 +86,10 @@ class ProfileViewController: UIViewController {
         
     }
     
-//MARK:IBActions
     
+//MARK:- Button Actions
+    
+    /* Edit Button Clicked */
     @IBAction func editBarButtonAction(_ sender:UIBarButtonItem){
         
         if self.isCellEditable! == false  {
@@ -101,19 +101,14 @@ class ProfileViewController: UIViewController {
             self.editBarButtonItem?.tintColor = UIColor.black
         }
         else{
-            
             self.view.endEditing(true)
             
             if self.validateAllFields() {
                 UserServices().updateUserProfile(self)
             }
         }
-        
-        
         self.tableViewProfile?.reloadData()
     }
-    
-    
     
     /*
      button action for LeadtimeButton, CancelButton & DoneButton
@@ -164,13 +159,13 @@ class ProfileViewController: UIViewController {
             
         })
         
-        
         alertView.addAction(action)
         alertView.addAction(actionCancel)
         present(alertView, animated: true, completion: nil)
         
     }
     
+    /* Signout Button Clicked */
     @IBAction func buttonActionSignOut(_ sender: UIButton) {
         
         UIUtilities.showAlertMessageWithTwoActionsAndHandler(NSLocalizedString("Sign Out", comment: ""), errorMessage: NSLocalizedString("Are you sure you want to Sign Out ?", comment: ""), errorAlertActionTitle: NSLocalizedString("Sign out", comment: ""),
@@ -187,6 +182,8 @@ class ProfileViewController: UIViewController {
         })
         
     }
+    
+    /* Delete Account clicked*/
     @IBAction func buttonActionDeleteAccount(_ sender: UIButton) {
         //self.performSegue(withIdentifier: kConfirmationSegueIdentifier, sender: nil)
         UIUtilities.showAlertMessageWithTwoActionsAndHandler(NSLocalizedString(kTitleDeleteAccount, comment: ""), errorMessage: NSLocalizedString(kDeleteAccountConfirmationMessage, comment: ""), errorAlertActionTitle: NSLocalizedString(kTitleDeleteAccount, comment: ""),
@@ -203,7 +200,8 @@ class ProfileViewController: UIViewController {
         })
     }
     
-//MARK:Utility Methods
+    
+//MARK:- Utility Methods
     
     /*
      Dismiss key board when clicked on Background
@@ -243,11 +241,7 @@ class ProfileViewController: UIViewController {
             leftController.createLeftmenuItems()
             
         }
-        
-        
-        
     }
-    
     
     /*
      setInitialData sets lead Time
@@ -373,7 +367,7 @@ class ProfileViewController: UIViewController {
 }
 
 
-//MARK: TableView Data source
+//MARK:- TableView Data source
 extension ProfileViewController : UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -462,7 +456,7 @@ extension ProfileViewController : UITableViewDataSource {
     }
 }
 
-//MARK: TableView Delegates
+//MARK:- TableView Delegates
 extension ProfileViewController : UITableViewDelegate{
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -471,7 +465,7 @@ extension ProfileViewController : UITableViewDelegate{
     }
 }
 
-//MARK: Textfield Delegate
+//MARK:- Textfield Delegate
 extension ProfileViewController : UITextFieldDelegate{
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
@@ -548,13 +542,14 @@ extension ProfileViewController : UITextFieldDelegate{
     }
 }
 
-//MARK:UserService Response handler
+//MARK:- UserService Response handler
 
 extension ProfileViewController:NMWebServiceDelegate {
     func startedRequest(_ manager: NetworkManager, requestName: NSString) {
         Logger.sharedInstance.info("requestname : \(requestName)")
         self.addProgressIndicator()
     }
+    
     func finishedRequest(_ manager: NetworkManager, requestName: NSString, response: AnyObject?) {
         Logger.sharedInstance.info("requestname : \(requestName)")
         
@@ -583,9 +578,8 @@ extension ProfileViewController:NMWebServiceDelegate {
         else if requestName as String == RegistrationMethods.deactivate.description{
             self.handleDeleteAccountResponse()
         }
-        
-        
     }
+    
     func failedRequest(_ manager: NetworkManager, requestName: NSString, error: NSError) {
         Logger.sharedInstance.info("requestname : \(requestName)")
         self.removeProgressIndicator()
@@ -599,6 +593,5 @@ extension ProfileViewController:NMWebServiceDelegate {
             
             UIUtilities.showAlertWithTitleAndMessage(title:NSLocalizedString(kErrorTitle, comment: "") as NSString, message: error.localizedDescription as NSString)
         }
-        
     }
 }

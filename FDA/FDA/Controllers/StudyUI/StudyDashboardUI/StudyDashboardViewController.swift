@@ -41,6 +41,14 @@ class StudyDashboardViewController : UIViewController{
         
         labelStudyTitle?.text = Study.currentStudy?.name
         
+        //check if consent is udpated
+        if(StudyUpdates.studyConsentUpdated){
+            print("Study consent is updated: Please Present Consent UI")
+        }
+        else {
+            print("Study consent not updated")
+        }
+        
         
     }
     

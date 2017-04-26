@@ -16,13 +16,11 @@ let kAlertMessageVerifyEmail = "Please verify your email address."
 
 let kAlertMessageResendEmail = "An email verification code has been sent to your registered email."
 
-
 enum VerificationLoadFrom:Int{
     case forgotPassword
     case login
     case signup
     case joinStudy
-    
 }
 
 class VerificationViewController : UIViewController{
@@ -38,7 +36,7 @@ class VerificationViewController : UIViewController{
     var shouldCreateMenu:Bool = true
     var viewLoadFrom:VerificationLoadFrom = .signup
     
- //MARK:View Controllere delegates
+//MARK:- View Controllere delegates
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -51,13 +49,11 @@ class VerificationViewController : UIViewController{
         //let modifiedMessage = message?.replacingOccurrences(of: kDefaultEmail, with: User.currentUser.emailId!)
         //labelVerificationMessage?.text = modifiedMessage
         
-        
         if labelMessage != nil {
             labelVerificationMessage?.text = labelMessage
         }
         
         textFieldEmail?.text = self.emailId!
-        
         
         //hide navigationbar
         self.navigationController?.setNavigationBarHidden(true, animated: true)
@@ -77,13 +73,14 @@ class VerificationViewController : UIViewController{
     }
     
     
-//MARK:Button Actions
+//MARK:- Button Actions
  
-    
+    /* Navigate to previous screen */
     @IBAction func buttonActionBack(_ sender : UIButton){
         _ = self.navigationController?.popViewController(animated: true)
     }
     
+    /* Used to send the verification mail to regestered mail id*/
     @IBAction func continueTwoButtonAction( _ sender : UIButton){
         
         self.view.endEditing(true)
@@ -104,11 +101,10 @@ class VerificationViewController : UIViewController{
             
             UserServices().verifyEmail(emailId:self.emailId!,  verificationCode:(self.textFieldVerificationCode?.text)! , delegate: self)
             
-            
         }
     }
     
-    
+    /* Send the verification mail id to regestered */
     @IBAction func continueButtonAction(_ sender: Any) {
         
         if (textFieldVerificationCode?.text?.characters.count)! > 0 {
@@ -119,6 +115,7 @@ class VerificationViewController : UIViewController{
         }
     }
     
+    /* Resend the verification code to regestered mail id */
     @IBAction func resendEmailButtonAction(_ sender: UIButton){
         
         var finalEmail:String = User.currentUser.emailId!
@@ -127,18 +124,15 @@ class VerificationViewController : UIViewController{
             finalEmail = self.emailId!
         }
        
-        
         if (finalEmail.isEmpty) || !(Utilities.isValidEmail(testStr: finalEmail)) {
              self.showAlertMessages(textMessage: kMessageValidEmail)
         }
         else{
              UserServices().resendEmailConfirmation(emailId: finalEmail, delegate: self)
         }
-       
-        
-        
-       
     }
+
+//MARK- Segue Delegates
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
@@ -147,20 +141,23 @@ class VerificationViewController : UIViewController{
             singupCompletion.shouldCreateMenu = self.shouldCreateMenu
         }
     }
-//MARK:Utility Methods
     
     
+//MARK:- Utility Methods
+
     /*
      Used to show the alert using Utility
      */
     func showAlertMessages(textMessage : String){
         UIUtilities.showAlertMessage("", errorMessage: NSLocalizedString(textMessage, comment: ""), errorAlertActionTitle: NSLocalizedString("OK", comment: ""), viewControllerUsed: self)
     }
-    
+
+    /* Navigate to Sign up completion screen */
     func navigateToSignUpCompletionStep(){
-        
         self.performSegue(withIdentifier: kSignupCompletionSegue, sender: nil)
     }
+    
+    /* Navigate to change password screen */
     func navigateToChangePasswordViewController(){
         
         let storyboard = UIStoryboard(name: "Gateway", bundle: nil)
@@ -178,8 +175,11 @@ class VerificationViewController : UIViewController{
     }
 }
 
-//MARK:TextField Delegates
+
+//MARK:- TextField Delegates
+
 extension VerificationViewController:UITextFieldDelegate{
+    
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         
         let finalString = textField.text! + string
@@ -202,22 +202,19 @@ extension VerificationViewController:UITextFieldDelegate{
             
         }
     }
-
-    
-    
 }
 
 
-
-
-//MARK:Webservice Delegates
+//MARK:- Webservice Delegates
 
 extension VerificationViewController:NMWebServiceDelegate {
+    
     func startedRequest(_ manager: NetworkManager, requestName: NSString) {
         
         self.addProgressIndicator()
         Logger.sharedInstance.info("requestname : \(requestName)")
     }
+    
     func finishedRequest(_ manager: NetworkManager, requestName: NSString, response: AnyObject?) {
         Logger.sharedInstance.info("requestname : \(requestName)")
         
@@ -239,10 +236,8 @@ extension VerificationViewController:NMWebServiceDelegate {
             else{
                 self.navigateToSignUpCompletionStep()
             }
-            
         }
         else {
-            
             
             if requestName as String == RegistrationMethods.resendConfirmation.description {
                 UIUtilities.showAlertWithTitleAndMessage(title:NSLocalizedString(kAlertMessageText, comment: "") as NSString, message:NSLocalizedString(kAlertMessageResendEmail, comment: "") as NSString)
@@ -250,11 +245,9 @@ extension VerificationViewController:NMWebServiceDelegate {
             else{
                 UIUtilities.showAlertWithTitleAndMessage(title:NSLocalizedString(kAlertMessageText, comment: "") as NSString, message:NSLocalizedString(kAlertMessageVerifyEmail, comment: "") as NSString)
             }
-            
-            
         }
-
     }
+    
     func failedRequest(_ manager: NetworkManager, requestName: NSString, error: NSError) {
         Logger.sharedInstance.info("requestname : \(requestName)")
         

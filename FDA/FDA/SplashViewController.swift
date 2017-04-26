@@ -24,6 +24,8 @@ class SplashViewController: UIViewController {
          DBHandler().initilizeCurrentUser()
         //TEMP : Need to get form Realm
         //let ud = UserDefaults.standard
+        
+        /*Used to Check AuthKey, If exists navigate to HomeController else GatewayDashboard*/
         if User.currentUser.authToken != nil {
            
 //            DBHandler().initilizeCurrentUser()
@@ -48,6 +50,9 @@ class SplashViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    /* Navigating to Home Screen
+     load HomeViewController from Login Storyboard 
+     */
     func navigateToHomeController(){
         
         let loginStoryboard = UIStoryboard.init(name: "Login", bundle:Bundle.main)
@@ -55,12 +60,14 @@ class SplashViewController: UIViewController {
         self.navigationController?.pushViewController(homeViewController, animated: true)
     }
     
+    /* Navigate to gateway Dashboard */
     func navigateToGatewayDashboard(){
-        
         self.createMenuView()
     }
     
-
+    /* Navigating to Study list 
+     Load FDASlideMenuViewController from Gateway Storyboard
+     */
     func createMenuView() {
         
         let storyboard = UIStoryboard(name: "Gateway", bundle: nil)

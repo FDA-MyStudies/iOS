@@ -219,6 +219,13 @@ class StudyListViewController: UIViewController {
         }
         
     }
+    //save information for study which feilds need to be updated
+    func handleStudyUpdatedInformation(){
+        
+        DBHandler.updateMetaDataToUpdateForStudy(study: Study.currentStudy!, updateDetails: nil)
+        
+        self.pushToStudyDashboard()
+    }
     
     
 }
@@ -264,9 +271,20 @@ extension StudyListViewController :  UITableViewDelegate {
                 
                 let userStudyStatus =  (Study.currentStudy?.userParticipateState.status)!
                 
-                if userStudyStatus == .completed || userStudyStatus == .inProgress || userStudyStatus == .yetToJoin {
+                if userStudyStatus == .completed || userStudyStatus == .inProgress{
                     //self.pushToStudyDashboard()
-                    WCPServices().getStudyUpdates(study: study!, delegate: self)
+                    // check if study version is udpated
+                    if(study?.version != study?.newVersion){
+                        WCPServices().getStudyUpdates(study: study!, delegate: self)
+                    }
+                    else{
+                        
+                        DBHandler.loadStudyDetailsToUpdate(studyId: (study?.studyId)!, completionHandler: { (success) in
+                            self.pushToStudyDashboard()
+                        })
+                        
+                    }
+                    
                 }
                 else {
                     
@@ -336,6 +354,7 @@ extension StudyListViewController:NMWebServiceDelegate {
             self.tableView?.reloadData()
         }
         else if (requestName as String == WCPMethods.studyUpdates.rawValue){
+            self.handleStudyUpdatedInformation()
         }
         
         

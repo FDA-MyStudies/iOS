@@ -173,25 +173,30 @@ struct StudyUpdates{
    static  var studyConsentUpdated = false
    static  var studyActivitiesUpdated = false
    static  var studyResourcesUpdated = false
+    static  var studyVersion:String = ""
     
     init(detail:Dictionary<String,Any>){
         
-        if Utilities.isValidObject(someObject: detail as AnyObject?){
+        if Utilities.isValidObject(someObject: detail[kStudyUpdates] as AnyObject?){
             
-            if Utilities.isValidValue(someObject: detail[kStudyResources] as AnyObject ){
-                StudyUpdates.studyResourcesUpdated = (detail[kStudyResources] as? Bool)!
+            let updates =  detail[kStudyUpdates] as! Dictionary<String,Any>
+            
+            if Utilities.isValidValue(someObject: updates[kStudyResources] as AnyObject ){
+                StudyUpdates.studyResourcesUpdated = (updates[kStudyResources] as? Bool)!
             }
-            if Utilities.isValidValue(someObject: detail[kStudyInfo] as AnyObject ){
-                StudyUpdates.studyInfoUpdated = (detail[kStudyInfo] as? Bool)!
+            if Utilities.isValidValue(someObject: updates[kStudyInfo] as AnyObject ){
+                StudyUpdates.studyInfoUpdated = (updates[kStudyInfo] as? Bool)!
             }
-            if Utilities.isValidValue(someObject: detail[kStudyConsent] as AnyObject ){
-                StudyUpdates.studyConsentUpdated = (detail[kStudyConsent] as? Bool)!
+            if Utilities.isValidValue(someObject: updates[kStudyConsent] as AnyObject ){
+                StudyUpdates.studyConsentUpdated = (updates[kStudyConsent] as? Bool)!
             }
-            if Utilities.isValidValue(someObject: detail[kStudyActivities] as AnyObject ){
-                StudyUpdates.studyActivitiesUpdated = (detail[kStudyActivities] as? Bool)!
+            if Utilities.isValidValue(someObject: updates[kStudyActivities] as AnyObject ){
+                StudyUpdates.studyActivitiesUpdated = (updates[kStudyActivities] as? Bool)!
             }
             
         }
+        
+        StudyUpdates.studyVersion = detail[kStudyCurrentVersion] as! String
        
     }
     

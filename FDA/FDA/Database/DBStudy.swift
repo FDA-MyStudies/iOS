@@ -27,6 +27,10 @@ class DBStudy: Object {
     dynamic  var websiteLink:String?
     dynamic  var bookmarked:String?
     dynamic  var participatedStatus:Int = 0
+    dynamic var updateResources : Bool = false
+    dynamic var updateActivities : Bool = false
+    dynamic var updateConsent : Bool = false
+    dynamic var updateInfo : Bool = false
     var sections = List<DBOverviewSection>()
     
     override static func primaryKey() -> String? {

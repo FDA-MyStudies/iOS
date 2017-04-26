@@ -239,6 +239,38 @@ class DBHandler: NSObject {
         
     }
     
+    class func updateMetaDataToUpdateForStudy(study:Study , updateDetails:StudyUpdates?){
+        
+        let realm = try! Realm()
+        let studies =  realm.objects(DBStudy.self).filter("studyId == %@",study.studyId)
+        let dbStudy = studies.last
+        
+        try! realm.write({
+            
+            dbStudy?.updateResources = StudyUpdates.studyResourcesUpdated
+            dbStudy?.updateConsent = StudyUpdates.studyConsentUpdated
+            dbStudy?.updateActivities = StudyUpdates.studyActivitiesUpdated
+            dbStudy?.updateInfo = StudyUpdates.studyInfoUpdated
+            dbStudy?.version = dbStudy?.updatedVersion//StudyUpdates.studyVersion
+           // dbStudy?.updatedVersion = StudyUpdates.studyVersion
+            
+        })
+        
+    }
+    
+    class func loadStudyDetailsToUpdate(studyId:String,completionHandler:@escaping (Bool) -> ()){
+        let realm = try! Realm()
+        let studies =  realm.objects(DBStudy.self).filter("studyId == %@",studyId)
+        let dbStudy = studies.last
+        
+        StudyUpdates.studyActivitiesUpdated = (dbStudy?.updateActivities)!
+        StudyUpdates.studyConsentUpdated = (dbStudy?.updateConsent)!
+        StudyUpdates.studyResourcesUpdated = (dbStudy?.updateResources)!
+        StudyUpdates.studyInfoUpdated = (dbStudy?.updateInfo)!
+        
+        completionHandler(true)
+    }
+    
     
      //MARK:Activity
     class func saveActivities(activityies:Array<Activity>){

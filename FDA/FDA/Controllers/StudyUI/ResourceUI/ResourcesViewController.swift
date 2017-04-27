@@ -11,7 +11,7 @@ import UIKit
 
 class ResourcesViewController : UIViewController{
     
-    var tableViewRowDetails : [AnyObject]?
+    var tableViewRowDetails : [AnyObject]? = []
     
     @IBOutlet var tableView : UITableView?
     var resourceLink:String?
@@ -22,17 +22,17 @@ class ResourcesViewController : UIViewController{
         
         
         //load plist info
-        let plistPath = Bundle.main.path(forResource: "ResourcesUI", ofType: ".plist", inDirectory:nil)
-        tableViewRowDetails = NSMutableArray(contentsOfFile: plistPath!) as [AnyObject]?
+        //let plistPath = Bundle.main.path(forResource: "ResourcesUI", ofType: ".plist", inDirectory:nil)
+        //tableViewRowDetails = NSMutableArray(contentsOfFile: plistPath!) as [AnyObject]?
         
-        if (Study.currentStudy?.studySettings.rejoinStudyAfterWithdrawn)! == false {
-            tableViewRowDetails?.removeLast()
-        }
+        //if (Study.currentStudy?.studySettings.rejoinStudyAfterWithdrawn)! == false {
+        //    tableViewRowDetails?.removeLast()
+        //}
         
         self.navigationItem.title = NSLocalizedString("Resources", comment: "")
-        
         //Next Phase
-        WCPServices().getResourcesForStudy(studyId: (Study.currentStudy?.studyId)!, delegate: self)
+        WCPServices().getResourcesForStudy(studyId: "STDPD", delegate: self)
+        
         
     }
     
@@ -41,6 +41,8 @@ class ResourcesViewController : UIViewController{
         super.viewWillAppear(animated)
         
          UIApplication.shared.statusBarStyle = .default
+        
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -52,7 +54,7 @@ class ResourcesViewController : UIViewController{
         if segue.identifier == "ResourceDetailViewControllerIdentifier"{
             
             let resourceDetail = segue.destination as! ResourcesDetailViewController
-            
+            resourceDetail.resource = sender as! Resource
             if self.resourceLink != nil{
                 resourceDetail.requestLink = self.resourceLink!
             }
@@ -69,6 +71,43 @@ class ResourcesViewController : UIViewController{
         self.navigationController?.navigationBar.isHidden = false
         self.performSegue(withIdentifier: "unwindeToStudyListResourcesIdentifier", sender: self)
         
+    }
+    
+    func addDefaultList(){
+        
+        //add default List
+        let plistPath = Bundle.main.path(forResource: "ResourcesUI", ofType: ".plist", inDirectory:nil)
+        
+        let array = NSMutableArray(contentsOfFile: plistPath!) as [AnyObject]?
+        
+        for title in array!{
+            tableViewRowDetails?.append(title)
+        }
+        
+    }
+    
+    func appendLeaveStudy(){
+        
+        //append Leave Study row
+        if (Study.currentStudy?.studySettings.rejoinStudyAfterWithdrawn)! != false {
+            tableViewRowDetails?.append("Leave Study" as AnyObject)
+        }
+    }
+    
+    func handleResourcesReponse(){
+        
+        self.addDefaultList()
+        
+        //Add resources list
+        for  resource in (Study.currentStudy?.resources)!{
+            tableViewRowDetails?.append(resource)
+        }
+        
+        self.appendLeaveStudy()
+        
+       
+        tableView?.isHidden =  false
+        tableView?.reloadData()
     }
 }
 
@@ -130,7 +169,7 @@ extension ResourcesViewController : UITableViewDelegate{
             
             resourceLink = (resource as? Resource)?.file?.getFileLink()
             fileType = (resource as? Resource)?.file?.getMIMEType()
-            self.performSegue(withIdentifier:"ResourceDetailViewControllerIdentifier" , sender: self)
+            self.performSegue(withIdentifier:"ResourceDetailViewControllerIdentifier" , sender: resource)
         }
         else{
             if resource as! String == "Leave Study" {
@@ -173,28 +212,15 @@ extension ResourcesViewController:NMWebServiceDelegate {
         self.addProgressIndicator()
     }
     func finishedRequest(_ manager: NetworkManager, requestName: NSString, response: AnyObject?) {
-        Logger.sharedInstance.info("requestname : \(requestName)")
+        Logger.sharedInstance.info("requestname : \(requestName) response : \(response)" )
         
         self.removeProgressIndicator()
         
         if requestName as String == WCPMethods.resources.method.methodName {
             
-            tableViewRowDetails = Study.currentStudy?.resources
+            self.handleResourcesReponse()
             
-            let plistPath = Bundle.main.path(forResource: "ResourcesUI", ofType: ".plist", inDirectory:nil)
             
-            let array = NSMutableArray(contentsOfFile: plistPath!) as [AnyObject]?
-            
-            for title in array!{
-               tableViewRowDetails?.append(title)
-            }
-            
-            if (Study.currentStudy?.studySettings.rejoinStudyAfterWithdrawn)! == false {
-                tableViewRowDetails?.removeLast()
-            }
-            tableView?.isHidden =  false
-            
-            tableView?.reloadData()
         }
         else if requestName as String == ResponseMethods.withdrawFromStudy.method.methodName {
             

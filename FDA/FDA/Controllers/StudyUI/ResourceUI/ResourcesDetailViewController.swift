@@ -9,18 +9,26 @@
 import UIKit
 import MessageUI
 
+let resourcesDownloadPath = AKUtility.baseFilePath + "/Resources"
+
 class ResourcesDetailViewController: UIViewController {
     
     
     @IBOutlet var webView : UIWebView?
+    @IBOutlet var progressBar : UIProgressView?
+    
     var activityIndicator:UIActivityIndicatorView!
     var requestLink:String?
     var type:String?
     var htmlString: String?
+    var resource:Resource?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.hidesBottomBarWhenPushed = true
+        self.addBackBarButton()
+        
+        self.title = resource?.title
         
     }
     
@@ -29,17 +37,22 @@ class ResourcesDetailViewController: UIViewController {
         
         UIApplication.shared.statusBarStyle = .default
         
-        if self.requestLink != nil {
+        if self.resource?.file?.link != nil {
             
             activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: .gray)
             activityIndicator.center = CGPoint(x: self.view.frame.midX, y: self.view.frame.midY-100)
             self.view.addSubview(activityIndicator)
             activityIndicator.startAnimating()
             
-            if self.type == "pdf"{
-                let url:URL? = URL.init(string:self.requestLink!.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed)!)
-                let urlRequest = URLRequest(url: url!)
-                webView?.loadRequest(urlRequest)
+            if self.resource?.file?.mimeType == .pdf{
+
+                if self.resource?.file?.localPath != nil {
+                    self.loadWebViewWithPath(path: (self.resource?.file?.localPath)!)
+                }
+                else {
+                    self.startDownloadingfile()
+                }
+                
                 
             }
             else{
@@ -58,6 +71,32 @@ class ResourcesDetailViewController: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         // self.tabBar.isHidden = false
     }
+    
+    func loadWebViewWithPath(path:String){
+        
+        let url:URL? = URL.init(string:path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed)!)
+        let urlRequest = URLRequest(url: url!)
+        webView?.loadRequest(urlRequest)
+    }
+    
+    func startDownloadingfile(){
+        
+        if !FileManager.default.fileExists(atPath: resourcesDownloadPath) {
+            try! FileManager.default.createDirectory(atPath: resourcesDownloadPath, withIntermediateDirectories: true, attributes: nil)
+        }
+        debugPrint("custom download path: \(resourcesDownloadPath)")
+        
+        let fileURL:NSString =  "https://gradcollege.okstate.edu/sites/default/files/PDF_linking.pdf"
+        
+        var fileName : NSString = fileURL.lastPathComponent as NSString
+        
+        fileName = AKUtility.getUniqueFileNameWithPath((resourcesDownloadPath as NSString).appendingPathComponent(fileName as String) as NSString)
+        
+        let fdm = FileDownloadManager()
+        fdm.delegate = self
+        fdm.downloadFile(fileName as String, fileURL: fileURL.addingPercentEscapes(using: String.Encoding.utf8.rawValue)!, destinationPath: resourcesDownloadPath)
+    }
+    
     
     //MARK:Button Actions
     
@@ -111,15 +150,35 @@ extension ResourcesDetailViewController:MFMailComposeViewControllerDelegate{
         
         composeVC.setSubject("Resources")
         
-        if self.requestLink != nil{
-            composeVC.setMessageBody(self.requestLink!, isHTML: false)
+        if resource?.file?.localPath != nil {
+          
+            do {
+                let data = try Data.init(contentsOf: URL(string:(resource?.file?.localPath)!)!)
+                composeVC.addAttachmentData(data, mimeType: "application/pdf", fileName: (resource?.file?.name)!)
+            }
+            catch{
+                
+            }
+            
         }
-        else{
-            composeVC.setMessageBody(self.requestLink!, isHTML: true)
+        else {
+            composeVC.setMessageBody((resource?.file?.link)!, isHTML: true)
         }
         
-        // Present the view controller modally.
-        self.present(composeVC, animated: true, completion: nil)
+        
+        if MFMailComposeViewController.canSendMail()
+        {
+            self.present(composeVC, animated: true, completion: nil)
+        }
+        else{
+            let alert = UIAlertController(title:NSLocalizedString(kTitleError, comment: ""),message:"",preferredStyle: UIAlertControllerStyle.alert)
+            
+            alert.addAction(UIAlertAction.init(title:NSLocalizedString("OK", comment: ""), style: .default, handler: { (action) in
+                
+                self.dismiss(animated: true, completion: nil)
+                
+            }))
+        }
     }
     
     func mailComposeController(_ controller: MFMailComposeViewController,
@@ -130,3 +189,20 @@ extension ResourcesDetailViewController:MFMailComposeViewControllerDelegate{
 
 }
 
+
+extension ResourcesDetailViewController:FileDownloadManagerDelegates{
+    
+    func download(manager: FileDownloadManager, didUpdateProgress progress: Float) {
+       
+        self.progressBar?.progress = progress
+    }
+    func download(manager: FileDownloadManager, didFinishDownloadingAtPath path:String) {
+        
+        self.resource?.file?.localPath = path
+        self.loadWebViewWithPath(path: path)
+        
+    }
+    func download(manager: FileDownloadManager, didFailedWithError error: Error) {
+        
+    }
+}

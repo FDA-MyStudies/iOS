@@ -21,9 +21,6 @@ enum LogoutReason:String{
 }
 
 
-
-
-
 let kUserValueForOS = "ios"
 
 let kCFBundleShortVersionString = "CFBundleShortVersionString"

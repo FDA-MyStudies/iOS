@@ -10,14 +10,13 @@ import Foundation
 import UIKit
 import IQKeyboardManagerSwift
 
-
+/* Contact us field description*/
 struct ContactUsFeilds {
     
     static var firstName:String = ""
     static var email:String = ""
     static var subject:String = ""
     static var message:String = ""
-    
     
   init(){
         ContactUsFeilds.firstName = ""
@@ -37,6 +36,8 @@ class ContactUsViewController : UIViewController{
     @IBOutlet var feedbackTextView : UITextView?
     var previousContentHeight:Double = 0.0
     
+    
+//MARK:- View Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -73,6 +74,12 @@ class ContactUsViewController : UIViewController{
         
     }
     
+    
+//MARK:- Button Actions
+    
+    /* Validations after clicking on submit button 
+     If all the validations satisfy send contact-us request
+     */
     @IBAction func buttonSubmitAciton(_ sender:UIButton){
         print("\(ContactUsFeilds.firstName)")
         
@@ -101,7 +108,8 @@ class ContactUsViewController : UIViewController{
     }
 }
 
-//MARK: TableView Data source
+
+//MARK:- TableView Data source
 extension ContactUsViewController: UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -149,18 +157,19 @@ extension ContactUsViewController: UITableViewDataSource{
    
 }
 
-//MARK: TableView Delegates
+
+//MARK:- TableView Delegates
 extension ContactUsViewController : UITableViewDelegate{
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
     }
-    
 }
 
+
+//MARK:- TextView Delegates
 extension ContactUsViewController: UITextViewDelegate {
 
-    
     func textViewDidChange(_ textView: UITextView) {
         let currentOffset = tableView?.contentOffset
         UIView.setAnimationsEnabled(false)
@@ -191,7 +200,8 @@ extension ContactUsViewController: UITextViewDelegate {
     }
 }
 
-//MARK: Textfield Delegate
+
+//MARK:- Textfield Delegate
 extension ContactUsViewController : UITextFieldDelegate{
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
@@ -219,7 +229,6 @@ extension ContactUsViewController : UITextFieldDelegate{
         }
         return true
     }
-    
     
     func textFieldDidEndEditing(_ textField: UITextField) {
         print(textField.text!)
@@ -249,7 +258,7 @@ extension ContactUsViewController : UITextFieldDelegate{
     }
 }
 
-
+//MARK:- Tableview cell class initialization
 class TextviewCell:UITableViewCell{
     
     @IBOutlet var labelTitle: UILabel?
@@ -265,10 +274,10 @@ class TextviewCell:UITableViewCell{
         super.setSelected(selected, animated: animated)
         // Configure the view for the selected state
     }
-    
-    
 }
 
+
+//MARK:- Webservice Delegates
 extension ContactUsViewController:NMWebServiceDelegate {
     func startedRequest(_ manager: NetworkManager, requestName: NSString) {
         

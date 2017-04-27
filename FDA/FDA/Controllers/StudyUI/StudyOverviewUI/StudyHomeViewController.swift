@@ -47,7 +47,8 @@ class StudyHomeViewController : UIViewController{
             pageViewController?.pageViewDelegate = self
         }
     }
-    //MARK:View controller Delegates
+
+//MARK:- View controller Delegates
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -69,19 +70,12 @@ class StudyHomeViewController : UIViewController{
                 buttonStar.isSelected = true
             }
         }
-        
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
         //hide navigationbar
         self.navigationController?.setNavigationBarHidden(true, animated: true)
-        
-        
-        
-        
         
         if Utilities.isValidValue(someObject: Study.currentStudy?.overview.websiteLink as AnyObject? ) ==  false{
             // if website link is nil
@@ -103,6 +97,7 @@ class StudyHomeViewController : UIViewController{
         
     }
     
+    /* Load the test data from StudyOverview plist file */
     func loadTestData(){
         //        let filePath  = Bundle.main.path(forResource: "GatewayOverview", ofType: "json")
         //        let data = NSData(contentsOfFile: filePath!)
@@ -137,31 +132,27 @@ class StudyHomeViewController : UIViewController{
     }
     
     
-    //MARK:Button Actions
+//MARK:- Button Actions
     
+    /* Join Study button clicked */
     @IBAction func buttonActionJoinStudy(_ sender: UIButton){
         if User.currentUser.userType == UserType.AnonymousUser{
             // let leftController = slideMenuController()?.leftViewController as! LeftMenuViewController
             // leftController.changeViewController(.reachOut_signIn)
-            
-            
             
             let loginStoryBoard = UIStoryboard(name: "Login", bundle: nil)
             let signInController = loginStoryBoard.instantiateViewController(withIdentifier:  String(describing: SignInViewController.classForCoder())) as! SignInViewController
             signInController.viewLoadFrom = .joinStudy
             self.navigationController?.pushViewController(signInController, animated: true)
             
-            
             // _ = self.navigationController?.popViewController(animated: true)
             // self.delegate?.studyHomeJoinStudy()
-            
         }
             
         else{
             
             let currentStudy = Study.currentStudy!
             let participatedStatus = (currentStudy.userParticipateState.status)
-            
             
             switch currentStudy.status {
             case .Active:
@@ -174,7 +165,6 @@ class StudyHomeViewController : UIViewController{
                     else {
                         UIUtilities.showAlertWithTitleAndMessage(title: "", message: NSLocalizedString(kMessageForStudyEnrollingNotAllowed, comment: "") as NSString)
                     }
-                   
                 }
                 else if participatedStatus == .withdrawn {
                     
@@ -195,18 +185,15 @@ class StudyHomeViewController : UIViewController{
                 UIUtilities.showAlertWithTitleAndMessage(title: "", message: NSLocalizedString(kMessageForStudyClosedState, comment: "") as NSString)
             
             }
-            
-          
-            
         }
     }
-    
-    
+
+    /* Back button clicked */
     @IBAction func backButtonAction(_ sender: Any) {
-        
         _ = self.navigationController?.popViewController(animated: true)
     }
     
+    /* Start Button clicked */
     @IBAction func starButtonAction(_ sender: Any) {
         
         let button = sender as! UIButton
@@ -225,12 +212,12 @@ class StudyHomeViewController : UIViewController{
         UserServices().updateStudyBookmarkStatus(studyStauts: userStudyStatus, delegate: self)
     }
     
+    /* Create Eligibility Consent Task */
     func createEligibilityConsentTask()   {
         
         var eligibilitySteps =  EligibilityBuilder.currentEligibility?.getEligibilitySteps()
         
         let taskViewController:ORKTaskViewController?
-        
         
         /*
          
@@ -255,46 +242,35 @@ class StudyHomeViewController : UIViewController{
         }
         
         let orkOrderedTask:ORKTask? = ORKOrderedTask(identifier:kEligibilityConsentTask, steps: eligibilitySteps)
-        
-        
-        
         taskViewController = ORKTaskViewController(task:orkOrderedTask, taskRun: nil)
         
         taskViewController?.delegate = self
         taskViewController?.outputDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
         
-        
         taskViewController?.navigationItem.title = nil
-        
         
         UIView.appearance(whenContainedInInstancesOf: [ORKTaskViewController.self]).tintColor = kUIColorForSubmitButtonBackground
         
         UIApplication.shared.statusBarStyle = .default
         present(taskViewController!, animated: true, completion: nil)
         
-        
     }
     
-    
-    
+    /* Display consent Document */
     func displayConsentDocument() {
-        
-        
         if Study.currentStudy?.consentDocument != nil {
             if Study.currentStudy?.consentDocument?.htmlString != nil {
                 self.navigateToWebView(link: nil, htmlText: (Study.currentStudy?.consentDocument?.htmlString)!)
             }
         }
-        
-        
     }
     
+    /* Visit website button clicked */
     @IBAction func visitWebsiteButtonAction(_ sender: UIButton) {
         
         //        let loginStoryboard = UIStoryboard.init(name: "Main", bundle:Bundle.main)
         //        let webViewController = loginStoryboard.instantiateViewController(withIdentifier:"WebViewController") as! UINavigationController
         //        let webView = webViewController.viewControllers[0] as! WebViewController
-        
         
         
         if sender.tag == 1188 {
@@ -310,18 +286,18 @@ class StudyHomeViewController : UIViewController{
             if Study.currentStudy?.studyId != nil {
                 WCPServices().getConsentDocument(studyId: (Study.currentStudy?.studyId)!, delegate: self as NMWebServiceDelegate)
             }
-            
         }
-        
-        
     }
     
-    
+    /* Unwind to Study home */
     @IBAction func unwindeToStudyHome(_ segue:UIStoryboardSegue){
         //unwindStudyHomeSegue
         //self.buttonActionJoinStudy(UIButton())
         WCPServices().getEligibilityConsentMetadata(studyId:(Study.currentStudy?.studyId)!, delegate: self as NMWebServiceDelegate)
     }
+    
+//Mark:- Segue Methods
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let pageViewController = segue.destination as? PageViewController {
             pageViewController.pageViewDelegate = self
@@ -329,7 +305,10 @@ class StudyHomeViewController : UIViewController{
         }
     }
     
-    
+    /* Navigates to weblink 
+     @params- Link - the link to go for desired destination
+            - htmlText - displays the text in the webview
+     */
     func navigateToWebView(link:String?,htmlText:String?){
         
         let loginStoryboard = UIStoryboard.init(name: "Main", bundle:Bundle.main)
@@ -342,8 +321,6 @@ class StudyHomeViewController : UIViewController{
         if htmlText != nil {
             webView.htmlString = htmlText
         }
-        
-        
         self.navigationController?.present(webViewController, animated: true, completion: nil)
     }
     
@@ -352,18 +329,15 @@ class StudyHomeViewController : UIViewController{
         pageViewController?.scrollToViewController(index: (pageControlView?.currentPage)!)
     }
     
-    
-    
+    /* Push screen back to Studydashboard Tabbar controller */
     func pushToStudyDashboard(){
         
         let studyDashboard = self.storyboard?.instantiateViewController(withIdentifier: kStudyDashboardTabbarControllerIdentifier) as! StudyDashboardTabbarViewController
-        
         self.navigationController?.pushViewController(studyDashboard, animated: true)
     }
-    
 }
 
-//MARK: Page Control Delegates for handling Counts
+//MARK:- Page Control Delegates for handling Counts
 extension StudyHomeViewController: PageViewControllerDelegate {
     
     func pageViewController(pageViewController: PageViewController, didUpdatePageCount count: Int){
@@ -384,9 +358,6 @@ extension StudyHomeViewController: PageViewControllerDelegate {
                 self.buttonJoinStudy?.setTitleColor(UIColor.white, for: .normal)
                 
             })
-            
-            
-            
         } else {
             // for All other pages
             
@@ -397,10 +368,9 @@ extension StudyHomeViewController: PageViewControllerDelegate {
             })
         }
     }
-    
 }
 
-
+//MARK:- Webservice Delegates
 extension StudyHomeViewController:NMWebServiceDelegate {
     func startedRequest(_ manager: NetworkManager, requestName: NSString) {
         Logger.sharedInstance.info("requestname : \(requestName)")
@@ -411,6 +381,7 @@ extension StudyHomeViewController:NMWebServiceDelegate {
         
         self.addProgressIndicator()
     }
+    
     func finishedRequest(_ manager: NetworkManager, requestName: NSString, response: AnyObject?) {
         Logger.sharedInstance.info("requestname : \(requestName)")
         
@@ -435,22 +406,16 @@ extension StudyHomeViewController:NMWebServiceDelegate {
             if( User.currentUser.getStudyStatus(studyId:(Study.currentStudy?.studyId)! ) == UserStudyStatus.StudyStatus.inProgress){
                 self.pushToStudyDashboard()
             }
-            
-            
-            
         }
-        
         //self.removeProgressIndicator()
-        
         
         if requestName as String == WCPMethods.consentDocument.method.methodName {
             self.removeProgressIndicator()
             self.displayConsentDocument()
             
         }
-        
-        
     }
+    
     func failedRequest(_ manager: NetworkManager, requestName: NSString, error: NSError) {
         Logger.sharedInstance.info("requestname : \(requestName)")
         self.removeProgressIndicator()
@@ -458,19 +423,13 @@ extension StudyHomeViewController:NMWebServiceDelegate {
         if requestName as String == WCPMethods.consentDocument.method.methodName {
             //self.removeProgressIndicator()
         }
-        
-        
         //self.removeProgressIndicator()
-        
-        
         
     }
 }
 
-
+//MARK:- ORKTaskViewController Delegate
 extension StudyHomeViewController:ORKTaskViewControllerDelegate{
-    //MARK:ORKTaskViewController Delegate
-    
     
     func taskViewControllerSupportsSaveAndRestore(_ taskViewController: ORKTaskViewController) -> Bool {
         return true
@@ -478,9 +437,7 @@ extension StudyHomeViewController:ORKTaskViewControllerDelegate{
     
     public func taskViewController(_ taskViewController: ORKTaskViewController, didFinishWith reason: ORKTaskViewControllerFinishReason, error: Error?) {
         
-        
         var taskResult:Any?
-        
         switch reason {
             
         case ORKTaskViewControllerFinishReason.completed:
@@ -516,8 +473,6 @@ extension StudyHomeViewController:ORKTaskViewControllerDelegate{
         else{
             //activityBuilder?.actvityResult?.initWithORKTaskResult(taskResult: taskViewController.result)
             
-            
-            
             taskViewController.dismiss(animated: true, completion: nil)
             
             if reason == ORKTaskViewControllerFinishReason.discarded{
@@ -525,15 +480,9 @@ extension StudyHomeViewController:ORKTaskViewControllerDelegate{
                 _ = self.navigationController?.popViewController(animated: true)
             }
         }
-        
-        
-        
-        
     }
     
     func taskViewController(_ taskViewController: ORKTaskViewController, stepViewControllerWillAppear stepViewController: ORKStepViewController) {
-        
-        
         
         if (taskViewController.result.results?.count)! > 1{
     
@@ -598,10 +547,9 @@ extension StudyHomeViewController:ORKTaskViewControllerDelegate{
             stepViewController.backButtonItem?.isEnabled = true
             
         }
-        
     }
     
-    //MARK:StepViewController Delegate
+//MARK:- StepViewController Delegate
     public func stepViewController(_ stepViewController: ORKStepViewController, didFinishWith direction: ORKStepViewControllerNavigationDirection){
         
     }
@@ -609,9 +557,11 @@ extension StudyHomeViewController:ORKTaskViewControllerDelegate{
     public func stepViewControllerResultDidChange(_ stepViewController: ORKStepViewController){
         
     }
+    
     public func stepViewControllerDidFail(_ stepViewController: ORKStepViewController, withError error: Error?){
         
     }
+    
     func taskViewController(_ taskViewController: ORKTaskViewController, viewControllerFor step: ORKStep) -> ORKStepViewController? {
         
         //CurrentStep is TokenStep
@@ -626,9 +576,6 @@ extension StudyHomeViewController:ORKTaskViewControllerDelegate{
             return ttController
         }
         else if step.identifier == kConsentSharePdfCompletionStep {
-            
-            
-            
             
            // let reviewStep:ORKStepResult? = taskViewController.result.results?[(taskViewController.result.results?.count)! - 1] as! ORKStepResult?
             
@@ -688,19 +635,15 @@ extension StudyHomeViewController:ORKTaskViewControllerDelegate{
                 ttController.pdfData = result?.pdfData
                 
                 return ttController
-                
-                
             }
             else{
                 //taskViewController.goForward()
                 return nil
             }
-            
         }
         else {
             
             return nil
         }
     }
-    
 }

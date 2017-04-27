@@ -37,7 +37,9 @@ class SignUpViewController : UIViewController{
     @IBOutlet var termsAndCondition:LinkTextView?
     var viewLoadFrom:SignUpLoadFrom = .menu
     var termsPageOpened = false
-    //MARK:ViewController Delegates
+
+
+//MARK:- ViewController Delegates
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,7 +47,6 @@ class SignUpViewController : UIViewController{
         //Used to set border color for bottom view
         buttonSubmit?.layer.borderColor = kUicolorForButtonBackground
         
-       
         self.title = NSLocalizedString(kSignUpTitleText, comment: "")
         
         //load plist info
@@ -66,13 +67,11 @@ class SignUpViewController : UIViewController{
         //unhide navigationbar
         self.navigationController?.setNavigationBarHidden(false, animated: true)
         
-       
         WCPServices().getTermsPolicy(delegate: self)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
         
         if termsPageOpened {
             termsPageOpened = false
@@ -95,8 +94,6 @@ class SignUpViewController : UIViewController{
             
             self.tableView?.reloadData()
         }
-        
-        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -105,7 +102,7 @@ class SignUpViewController : UIViewController{
         
     }
     
-    //MARK: Utility Methods
+//MARK:- Utility Methods
     
     /*
      Attributed string for Terms & Privacy Policy
@@ -196,7 +193,12 @@ class SignUpViewController : UIViewController{
         self.performSegue(withIdentifier: "verificationSegue", sender: nil)
     }
     
-    //MARK: Button Actions
+    
+//MARK:- Button Actions
+    
+    /* Submit button Clicked 
+      Used to check all the validations before making a Register webservice call
+     */
     @IBAction func submitButtonAction(_ sender: Any) {
         
         self.view.endEditing(true)
@@ -212,6 +214,7 @@ class SignUpViewController : UIViewController{
         }
     }
     
+    /* Agree button clicked */
     @IBAction func agreeButtonAction(_ sender: Any) {
         if (sender as! UIButton).isSelected{
             (sender as! UIButton).isSelected = !(sender as! UIButton).isSelected
@@ -221,16 +224,17 @@ class SignUpViewController : UIViewController{
             (sender as! UIButton).isSelected = !(sender as! UIButton).isSelected
         }
     }
+    
+    /* Displays why the user has to register */
     @IBAction func buttonInfoAction(_ sender:Any){
         UIUtilities.showAlertWithTitleAndMessage(title:"Why Register?", message:kRegistrationInfoMessage as NSString)
     }
 
     
-    //MARK:Segue Method
+//MARK:- Segue Method
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let verificationController = segue.destination as? VerificationViewController {
-            
-            
             switch viewLoadFrom {
                  case .menu:
                     verificationController.shouldCreateMenu = false
@@ -247,22 +251,16 @@ class SignUpViewController : UIViewController{
                 case .gatewayOverview:
                      verificationController.shouldCreateMenu = true
                     verificationController.viewLoadFrom = .signup
-                
-            
             }
-            
-            
             let message = kVerifyMessageFromSignUp
             let modifiedMessage = message.replacingOccurrences(of: kDefaultEmail, with: User.currentUser.emailId!)
-
             verificationController.labelMessage = modifiedMessage
-           
-        }
 
+        }
     }
 }
 
-//MARK:Gesture Delegate
+//MARK:- Gesture Delegate
 
 extension SignUpViewController:UIGestureRecognizerDelegate{
     func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
@@ -275,9 +273,10 @@ extension SignUpViewController:UIGestureRecognizerDelegate{
     }
 }
 
-//MARK: UITextViewDelegate
+//MARK:- UITextViewDelegate
 
 class LinkTextView:UITextView{
+    
     override func canPerformAction(_ action: Selector, withSender sender: Any?) -> Bool {
         return false
     }
@@ -297,7 +296,8 @@ class LinkTextView:UITextView{
     }
 }
 
-//MARK: Textfield Delegate
+//MARK:- Textfield Delegate
+
 extension SignUpViewController:UITextViewDelegate{
     
     func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange) -> Bool {
@@ -327,16 +327,14 @@ extension SignUpViewController:UITextViewDelegate{
         return false
     }
     
-    
     func textViewDidChangeSelection(_ textView: UITextView) {
         if(!NSEqualRanges(textView.selectedRange, NSMakeRange(0, 0))) {
             textView.selectedRange = NSMakeRange(0, 0);
         }
     }
-    
 }
 
-//MARK: TableView Data source
+//MARK:- TableView Data source
 
 extension SignUpViewController : UITableViewDataSource {
     
@@ -382,7 +380,8 @@ extension SignUpViewController : UITableViewDataSource {
     }
 }
 
-//MARK: TableView Delegates
+//MARK:- TableView Delegates
+
 extension SignUpViewController : UITableViewDelegate{
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -391,7 +390,8 @@ extension SignUpViewController : UITableViewDelegate{
     }
 }
 
-//MARK: Textfield Delegate
+//MARK:- Textfield Delegate
+
 extension SignUpViewController : UITextFieldDelegate{
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
@@ -399,7 +399,6 @@ extension SignUpViewController : UITextFieldDelegate{
         if textField.tag == TextFieldTags.EmailId.rawValue{
             textField.keyboardType = .emailAddress
         }
-        
     }
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
@@ -448,7 +447,6 @@ extension SignUpViewController : UITextFieldDelegate{
         }
     }
     
-    
     func textFieldDidEndEditing(_ textField: UITextField) {
         print(textField.text!)
         
@@ -485,7 +483,8 @@ extension SignUpViewController : UITextFieldDelegate{
     }
 }
 
-//MARK:Webservice delegates
+//MARK:- Webservice delegates
+
 extension SignUpViewController:NMWebServiceDelegate {
     
     func startedRequest(_ manager: NetworkManager, requestName: NSString) {
@@ -495,8 +494,8 @@ extension SignUpViewController:NMWebServiceDelegate {
         if requestName .isEqual(to: RegistrationMethods.register.rawValue){
            
         }
-    
     }
+    
     func finishedRequest(_ manager: NetworkManager, requestName: NSString, response: AnyObject?) {
         Logger.sharedInstance.info("requestname : \(requestName)")
         
@@ -508,13 +507,12 @@ extension SignUpViewController:NMWebServiceDelegate {
         else{
             self.agreeToTermsAndConditions()
         }
-        
     }
+    
     func failedRequest(_ manager: NetworkManager, requestName: NSString, error: NSError) {
         Logger.sharedInstance.info("requestname : \(requestName)")
         self.removeProgressIndicator()
         UIUtilities.showAlertWithTitleAndMessage(title:NSLocalizedString(kErrorTitle, comment: "") as NSString, message: error.localizedDescription as NSString)
     }
 }
-
 

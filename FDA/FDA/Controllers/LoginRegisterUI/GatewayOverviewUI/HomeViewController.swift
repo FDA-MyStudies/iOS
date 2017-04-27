@@ -19,10 +19,9 @@ class HomeViewController : UIViewController{
     @IBOutlet var buttonRegister : UIButton!
     @IBOutlet var buttonGetStarted : UIButton?
     
-    //MARK:View Controller Delegates
+//MARK:- View Controller Delegates
     
     override func loadView() {
-        
         super.loadView()
         self.loadTestData()
     }
@@ -35,7 +34,6 @@ class HomeViewController : UIViewController{
         //Added to change next screen
         pageControlView?.addTarget(self, action:#selector(HomeViewController.didChangePageControlValue), for: .valueChanged)
         
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -43,7 +41,6 @@ class HomeViewController : UIViewController{
         
         //hide navigationbar
         self.navigationController?.setNavigationBarHidden(true, animated: true)
-        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -52,7 +49,7 @@ class HomeViewController : UIViewController{
         
     }
     
-    //MARK:Initial data setup methods
+//MARK:- Initial data setup methods
     
     func loadTestData(){
         //        let filePath  = Bundle.main.path(forResource: "GatewayOverview", ofType: "json")
@@ -81,14 +78,13 @@ class HomeViewController : UIViewController{
             //assgin to Gateway
             Gateway.instance.overview = overview
             
-            
         } catch {
             print("json error: \(error.localizedDescription)")
         }
-        
     }
     
-    //MARK:Segue Methods
+    
+//MARK:- Segue Methods
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let pageViewController = segue.destination as? PageViewController {
@@ -105,8 +101,6 @@ class HomeViewController : UIViewController{
             signUpController.viewLoadFrom = .gatewayOverview
             
         }
-        
-        
     }
     
     //Fired when the user taps on the pageControl to change its current page (Commented as this is not working)
@@ -114,24 +108,24 @@ class HomeViewController : UIViewController{
         //pageViewController?.scrollToViewController(index: (pageControlView?.currentPage)!)
     }
     
-    //MARK:Button Actions
     
-    //GetStarted Button Action
+//MARK:- Button Actions
+    
+    /* GetStarted Button Clicked */
     @IBAction func getStartedButtonClicked(_ sender: UIButton){
-        
         self.createMenuView()
     }
+    
+    /* Create a menu view */
     func createMenuView() {
         
         let storyboard = UIStoryboard(name: "Gateway", bundle: nil)
-        
         let fda = storyboard.instantiateViewController(withIdentifier: "FDASlideMenuViewController") as! FDASlideMenuViewController
         fda.automaticallyAdjustsScrollViewInsets = true
         self.navigationController?.pushViewController(fda, animated: true)
-        
     }
     
-    
+    /* Website link button clicked */
     @IBAction func linkButtonAction(_ sender: Any) {
         
         let loginStoryboard = UIStoryboard.init(name: "Main", bundle:Bundle.main)
@@ -145,15 +139,17 @@ class HomeViewController : UIViewController{
         
         //self.view.alpha = 0
         
-        
-        
     }
+    
+    /* Unwind segue to register */
     @IBAction func unwindForRegister(_ segue:UIStoryboardSegue){
         DispatchQueue.main.asyncAfter(deadline: .now()) {
             // your code here
             self.buttonRegister.sendActions(for: .touchUpInside)
         }
     }
+    
+    /* Unwind segue to sign-in */
     @IBAction func unwindForSignIn(_ segue:UIStoryboardSegue){
         
         DispatchQueue.main.asyncAfter(deadline: .now()) {
@@ -163,7 +159,7 @@ class HomeViewController : UIViewController{
     }
 }
 
-//MARK: Page Control Delegates for handling Counts
+//MARK:- Page Control Delegates for handling Counts
 extension HomeViewController: PageViewControllerDelegate {
     
     func pageViewController(pageViewController: PageViewController, didUpdatePageCount count: Int){
@@ -181,9 +177,6 @@ extension HomeViewController: PageViewControllerDelegate {
                 self.buttonGetStarted?.backgroundColor = kUIColorForSubmitButtonBackground
                 self.buttonGetStarted?.setTitleColor(UIColor.white, for: .normal)
             })
-
-           
-            
         } else {
             
             UIView.animate(withDuration: 0.1, animations: {
@@ -191,10 +184,7 @@ extension HomeViewController: PageViewControllerDelegate {
                 self.buttonGetStarted?.backgroundColor = UIColor.white
                 self.buttonGetStarted?.setTitleColor(kUIColorForSubmitButtonBackground, for: .normal)
             })
-
-            
         }
-        
     }
-    
 }
+

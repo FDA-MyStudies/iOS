@@ -11,7 +11,7 @@ import RealmSwift
 
 class DBHandler: NSObject {
 
-    
+    /* Used to save user details like userid, authkey, first name , last name etc*/
     func saveCurrentUser(user:User){
         
         let dbUser = DBUser()
@@ -31,6 +31,7 @@ class DBHandler: NSObject {
         })
     }
     
+    /* Used to initialize the current logged in user*/
     func initilizeCurrentUser(){
         
         let realm = try! Realm()
@@ -50,7 +51,8 @@ class DBHandler: NSObject {
         
     }
     
-   class func deleteCurrentUser(){
+    /* Used to delete current logged in user*/
+    class func deleteCurrentUser(){
         
         let realm = try! Realm()
         let dbUsers = realm.objects(DBUser.self)
@@ -63,6 +65,9 @@ class DBHandler: NSObject {
     
     
      //MARK:Study
+    /* Save studies 
+     @params: studies - Array
+     */
     func saveStudies(studies:Array<Study>){
         
         let realm = try! Realm()
@@ -172,6 +177,9 @@ class DBHandler: NSObject {
         
     }
     
+    /* Save study overview
+     @params: overview , String
+     */
     class func saveStudyOverview(overview:Overview , studyId:String){
         
         let realm = try! Realm()

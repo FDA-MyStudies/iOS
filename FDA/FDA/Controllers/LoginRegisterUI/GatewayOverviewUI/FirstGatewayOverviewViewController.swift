@@ -24,7 +24,8 @@ class FirstGatewayOverviewViewController : UIViewController{
     var overviewSectionDetail : OverviewSection!
     var moviePlayer:MPMoviePlayerViewController!
     
-//MARK:View Controller Delegate
+    
+//MARK:- View Controller Delegate
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -35,9 +36,7 @@ class FirstGatewayOverviewViewController : UIViewController{
         //let effectView = UIVisualEffectView(effect: blur)
         //effectView.frame = (imageViewBackgroundImage?.frame)!
         //self.imageViewBackgroundImage?.addSubview(effectView)
-
-        
-        
+    
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -50,18 +49,18 @@ class FirstGatewayOverviewViewController : UIViewController{
         UIApplication.shared.statusBarStyle = .lightContent
 
     }
+    
     override func viewDidDisappear(_ animated: Bool) {
        
     }
-    
-    
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
         
     }
-//MARK: Movie Player methods
+    
+//MARK:- Movie Player methods
     func moviePlayBackDidFinish(notification: NSNotification) {
         //  println("moviePlayBackDidFinish:")
         moviePlayer.moviePlayer.stop()
@@ -69,10 +68,8 @@ class FirstGatewayOverviewViewController : UIViewController{
         moviePlayer.dismiss(animated: true, completion: nil)
     }
     
-//MARK:Button Action
+//MARK:- Button Action
     @IBAction func watchVideoButtonClicked(_ sender: Any){
-        
-        
         let urlString = overviewSectionDetail.link!
         if urlString.contains("youtube"){
             let url = URL.init(string: urlString)
@@ -91,18 +88,14 @@ class FirstGatewayOverviewViewController : UIViewController{
             
             self.present(moviePlayer, animated: true, completion: nil)
         }
-        
-       
-    
     }
     
     //GetStarted Button Action
     @IBAction func getStartedButtonClicked(_ sender: Any){
-        
         self.createMenuView()
     }
     
-    
+    /* Create the menu view using FDASlideMenuViewController and Gateway storyboard */
     func createMenuView() {
         
         let storyboard = UIStoryboard(name: "Gateway", bundle: nil)
@@ -113,5 +106,4 @@ class FirstGatewayOverviewViewController : UIViewController{
 
     }
 }
-
 

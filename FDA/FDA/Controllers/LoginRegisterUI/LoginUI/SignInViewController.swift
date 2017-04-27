@@ -32,7 +32,7 @@ class SignInViewController : UIViewController{
     var viewLoadFrom:SignInLoadFrom = .menu
     
     
-//MARK:View Controller Delegates
+//MARK:- View Controller Delegates
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -67,12 +67,10 @@ class SignInViewController : UIViewController{
             
             buttonSignUp?.setAttributedTitle(mutableAttributedTitle, for: .normal)
         }
-       
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
         
         //unhide navigationbar
         self.navigationController?.setNavigationBarHidden(false, animated: true)
@@ -98,15 +96,19 @@ class SignInViewController : UIViewController{
         super.viewDidAppear(animated)
        
     }
+    
     override func viewWillDisappear(_ animated: Bool) {
         //hide navigationbar
         if viewLoadFrom == .gatewayOverview{
             self.navigationController?.setNavigationBarHidden(true, animated: true)
         }
-        
     }
     
-//MARK: Button Action
+//MARK:- Button Action
+    
+    /* Sign In Button Clicked
+     Used to check all the validations before making a login webservice call
+     */
     @IBAction func signInButtonAction(_ sender: Any) {
         
         self.view.endEditing(true)
@@ -123,16 +125,17 @@ class SignInViewController : UIViewController{
             
         }else{
             print("Call the webservice")
-
             UserServices().loginUser(self)
         }
     }
+    
+    /* To Display registration information */
     @IBAction func buttonInfoAction(_ sender:Any){
         UIUtilities.showAlertWithTitleAndMessage(title:"Why Register?", message:kRegistrationInfoMessage as NSString)
     }
     
-//MARK: Segue Methods
     
+//MARK:- Segue Methods
     
     @IBAction func unwindFromVerification(_ segue:UIStoryboardSegue){
         
@@ -260,10 +263,9 @@ class SignInViewController : UIViewController{
         fda.automaticallyAdjustsScrollViewInsets = true
         self.navigationController?.pushViewController(fda, animated: true)
     }
-    
 }
 
-//MARK: TableView Data source
+//MARK:- TableView Data source
 extension SignInViewController : UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -274,7 +276,6 @@ extension SignInViewController : UITableViewDataSource {
         let tableViewData = tableViewRowDetails?.object(at: indexPath.row) as! NSDictionary
         
         let cell = tableView.dequeueReusableCell(withIdentifier: kSignInTableViewCellIdentifier, for: indexPath) as! SignInTableViewCell
-        
         
         cell.textFieldValue?.text = ""
         var isSecuredEntry : Bool = false
@@ -292,7 +293,7 @@ extension SignInViewController : UITableViewDataSource {
     }
 }
 
-//MARK: TableView Delegates
+//MARK:- TableView Delegates
 extension SignInViewController :  UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -301,7 +302,7 @@ extension SignInViewController :  UITableViewDelegate {
     }
 }
 
-//MARK: Textfield Delegate
+//MARK:- Textfield Delegate
 extension SignInViewController : UITextFieldDelegate{
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
@@ -350,7 +351,7 @@ extension SignInViewController : UITextFieldDelegate{
     }
 }
 
-//MARK:Webservices Delegate
+//MARK:- Webservices Delegate
 extension SignInViewController:NMWebServiceDelegate {
     
     func startedRequest(_ manager: NetworkManager, requestName: NSString) {

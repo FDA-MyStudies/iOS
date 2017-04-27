@@ -23,9 +23,10 @@ class StudyOverviewViewControllerFirst : UIViewController{
     
     var overViewWebsiteLink : String?
     var overviewSectionDetail : OverviewSection!
-    
     var moviePlayer:MPMoviePlayerViewController!
+
     
+//MARK:- View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -42,7 +43,6 @@ class StudyOverviewViewControllerFirst : UIViewController{
         else{
              buttonWatchVideo?.isHidden =  true
         }
-        
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -62,7 +62,6 @@ class StudyOverviewViewControllerFirst : UIViewController{
             fontSize = 14.0
         }
         
-        
         let attrStr = try! NSAttributedString(
             data: (overviewSectionDetail.text?.data(using: String.Encoding.unicode, allowLossyConversion: true)!)!,
             options: [ NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType],
@@ -73,9 +72,6 @@ class StudyOverviewViewControllerFirst : UIViewController{
             name: "HelveticaNeue",
             size: CGFloat(fontSize))!], range:(attrStr.string as NSString).range(of: attrStr.string))
         attributedText.addAttribute(NSForegroundColorAttributeName, value: UIColor.white, range: (attrStr.string as NSString).range(of: attrStr.string))
-        
-        
-        
         
         if Utilities.isValidValue(someObject: attrStr.string as AnyObject?){
              self.labelDescription?.attributedText = attributedText
@@ -94,14 +90,16 @@ class StudyOverviewViewControllerFirst : UIViewController{
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        
     }
     
     override func viewDidDisappear(_ animated: Bool) {
-      
+      super.viewDidDisappear(animated)
+        
     }
    
+//MARK:- Button Actions
     
+    /* Watch Video Button clicked */
     @IBAction func watchVideoButtonAction(_ sender: Any) {
         
         let urlString = overviewSectionDetail.link!
@@ -109,10 +107,7 @@ class StudyOverviewViewControllerFirst : UIViewController{
         let extenstion = url?.pathExtension
     
         if  extenstion == nil || extenstion?.characters.count == 0 {
-            
-            
             UIApplication.shared.openURL(url!)
-            
         }
         else {
             
@@ -128,27 +123,18 @@ class StudyOverviewViewControllerFirst : UIViewController{
             self.present(moviePlayer, animated: true, completion: nil)
 
         }
-        
-        
     }
     
+    /* Join Study button clicked */
     @IBAction func buttonActionJoinStudy(_ sender: Any){
         
         if User.currentUser.userType == UserType.AnonymousUser{
             let leftController = slideMenuController()?.leftViewController as! LeftMenuViewController
             leftController.changeViewController(.reachOut_signIn)
         }
-        
     }
-    
-    func moviePlayBackDidFinish(notification: NSNotification) {
-        //  println("moviePlayBackDidFinish:")
-        moviePlayer.moviePlayer.stop()
-        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.MPMoviePlayerPlaybackDidFinish, object: nil)
-        moviePlayer.dismiss(animated: true, completion: nil)
-    }
-    
-    
+
+    /* Visit website button clicked */
     @IBAction func visitWebsiteButtonAction(_ sender: Any) {
         
         if overViewWebsiteLink != nil {
@@ -162,15 +148,23 @@ class StudyOverviewViewControllerFirst : UIViewController{
         }
     }
     
+    /* Video player completed the video notification */
+    func moviePlayBackDidFinish(notification: NSNotification) {
+        //  println("moviePlayBackDidFinish:")
+        moviePlayer.moviePlayer.stop()
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.MPMoviePlayerPlaybackDidFinish, object: nil)
+        moviePlayer.dismiss(animated: true, completion: nil)
+    }
 }
 
-//MARK:WCPServices Response handler
+//MARK:- WCPServices Response handler
 
 extension StudyOverviewViewControllerFirst:NMWebServiceDelegate {
     func startedRequest(_ manager: NetworkManager, requestName: NSString) {
         Logger.sharedInstance.info("requestname : \(requestName)")
         self.addProgressIndicator()
     }
+    
     func finishedRequest(_ manager: NetworkManager, requestName: NSString, response: AnyObject?) {
         Logger.sharedInstance.info("requestname : \(requestName)")
         
@@ -180,17 +174,11 @@ extension StudyOverviewViewControllerFirst:NMWebServiceDelegate {
             
         }
     }
+    
     func failedRequest(_ manager: NetworkManager, requestName: NSString, error: NSError) {
         Logger.sharedInstance.info("requestname : \(requestName)")
         self.removeProgressIndicator()
         
-       
-        
     }
 }
-
-    
-
-    
-    
 

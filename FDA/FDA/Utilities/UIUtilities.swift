@@ -15,9 +15,8 @@ public typealias AlertAction = () -> Void
 
 class UIUtilities: NSObject {
     
-    
+    /* Presents alert message */
     class func showAlertWithTitleAndMessage(title: NSString, message : NSString)->Void {
-        
         
         let alert = UIAlertController(title:title as String,message:message as String,preferredStyle: UIAlertControllerStyle.alert)
           alert.addAction(UIAlertAction(title:NSLocalizedString("OK", comment: ""), style: .default, handler: nil))
@@ -30,44 +29,39 @@ class UIUtilities: NSObject {
         }
         rootViewController?.present(alert, animated: true, completion: nil)
          
-        
-        
     }
     
-    
-    
+    /* Dismiss alert message*/
     class func dismissAlert(){
         alert.dismiss(withClickedButtonIndex: 0, animated: false)
     }
     
+    /* Presents alert message */
     class func showAlertWithMessage(alertMessage:String)->Void{
-        
         self.showAlertWithTitleAndMessage(title:"", message: alertMessage as NSString)
-        
     }
     
-    
+    /* Initial Padding space before displaying the texts */
     class func paddingViewForTextFiled(textFiled:UITextField)->Void{
-        
-        
         let paddingView =  UIView.init(frame: CGRect(x: 0, y: 0, width: 10, height: textFiled.frame.height))
         textFiled.leftView = paddingView
         textFiled.leftViewMode = UITextFieldViewMode.always
-        
-        
     }
     
+    /* Add a border to Textfield
+     @params:- textfield - the data which is used to show
+     @return:- textfield - returns text field with padding space
+     */
     class func addingBorderToTextField(textField:UITextField)->UITextField {
-        
         //  textField.borderStyle =  UITextBorderStyle.RoundedRect
         textField.layer.borderWidth = 2
         textField.layer.borderColor = Utilities.hexStringToUIColor("556085").cgColor
         textField.backgroundColor =  Utilities.hexStringToUIColor("414c6f")
         
         return textField
-        
     }
     
+    /* Used to show invalid input for that particular textfield */
     class func getTextfieldWithInvalidInputBorder(textField:UITextField, layerBorderColor : String, backgroundColor : String) {
         
         //textField.borderStyle =  UITextBorderStyle.RoundedRect
@@ -78,6 +72,7 @@ class UIUtilities: NSObject {
         //"414c6f"
     }
     
+    /* Used to remove border text field */
     class func removeTheBorderToTextField(textField:UITextField)->UITextField {
         
         textField.borderStyle =  UITextBorderStyle.none
@@ -143,6 +138,7 @@ class UIUtilities: NSObject {
         }
     }
     
+    /* Performs spinning action using CoreAnimation */
     class func addSpinAnimation(withDuration duration : CFTimeInterval)-> CABasicAnimation{
         let animation = CABasicAnimation(keyPath: "transform.rotation.z")
         animation.fromValue = 0
@@ -150,6 +146,7 @@ class UIUtilities: NSObject {
         animation.duration = duration
         return animation
     }
+    
     class  func getHexColors() -> NSArray {
         
         let hexColors = ["ff9f30","fdf22f","b6ff14","07f51c"]
@@ -178,8 +175,6 @@ class UIUtilities: NSObject {
         return greenView
     }
     
-    
-    
     class func setWhiteBorderOnView(view : UIView, borderWidth : CGFloat, cornerRadius : CGFloat){
         
         view.layer.borderWidth = borderWidth
@@ -194,7 +189,6 @@ class UIUtilities: NSObject {
         view.layer.borderColor = Utilities.hexStringToUIColor("kInvalidBorderColor").cgColor
     }
     
-    
     class func convertDictionaryIntoString(mutableDic:NSMutableDictionary) ->String{
         
         var jsonString:String!
@@ -206,9 +200,7 @@ class UIUtilities: NSObject {
             
         }
         return jsonString
-        
     }
-    
     
     class func convertNSMutableArrayIntoString(mutableArray:NSMutableArray) ->String {
         
@@ -266,8 +258,5 @@ class UIUtilities: NSObject {
 //        GiFHUD.dismiss()
 //    }
     
-    
-    
-    
-    
 }
+

@@ -157,10 +157,11 @@ let kWeek = "WEEK"
 let kMessageForInvalidToken = "Please enter valid enrollment token"
 
 //MARK: StudyHomeMessages
-let kMessageForStudyUpcomingState = "Currently study is not available"
-let kMessageForStudyPausedState = "Currently study is not available"
-let kMessageForStudyClosedState = "Currently study closed"
-let kMessageForStudyWithdrawnState = "You are not allowed to join this study"
-let kMessageForStudyEnrollingNotAllowed = "Enrolling is not available currently"
+let kMessageForStudyUpcomingState = "This study is an upcoming one and isn't yet open for enrolling participants. Please check back later."
+let kMessageForStudyPausedState = "This study has been temporarily paused. Please check back later."
+let kMessageForStudyPausedAfterJoiningState = "The study has been temporarily paused. You can participate in activities once it is resumed. Please check back later."
+let kMessageForStudyClosedState = "This study has been closed."
+let kMessageForStudyWithdrawnState = "Sorry, this study currently does not allow previously enrolled participants to rejoin the study after they have withdrawn from the study. Please check back later or explore other studies"
+let kMessageForStudyEnrollingNotAllowed = "Sorry, enrollment for this study has been closed for now. Please check back later or explore other studies you could join."
 
 

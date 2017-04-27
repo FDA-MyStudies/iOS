@@ -207,7 +207,7 @@ class SignUpViewController : UIViewController{
                 self.showAlertMessages(textMessage: kMessageAgreeToTermsAndConditions)
             }else{
                 //Call the Webservice
-                UserServices().registerUser(self as! NMWebServiceDelegate)
+                UserServices().registerUser(self as NMWebServiceDelegate)
             }
         }
     }
@@ -372,7 +372,7 @@ extension SignUpViewController : UITableViewDataSource {
         case .EmailId :
             keyBoardType = .emailAddress
             isSecuredEntry = false
-            
+        default:break
         }
         //Cell Data Setup
         cell.populateCellData(data: tableViewData, securedText: isSecuredEntry,keyboardType: keyBoardType)

@@ -19,6 +19,7 @@ let kStudyCategory = "category"
 let kStudySponserName = "sponsorName"
 let kStudyDescription = "description"
 let kStudyTagLine = "tagline"
+let kStudyVersion = "studyVersion"
 
 let kStudyStatus = "status"
 let kStudyLogoURL = "logo"
@@ -57,6 +58,16 @@ let kFeedbackBody = "body"
 //contactus
 let kContactusEmail = "email"
 let kContactusFirstname = "firstName"
+
+//studyupdates
+let kStudyUpdates = "updates"
+let kStudyCurrentVersion = "currentVersion"
+let kStudyConsent = "consent"
+let kStudyActivities = "activities"
+let kStudyResources = "resources"
+let kStudyInfo = "info"
+
+
 
 
 class WCPServices: NSObject {
@@ -195,6 +206,16 @@ class WCPServices: NSObject {
                       kContactusEmail:ContactUsFeilds.email,
                       kContactusFirstname:ContactUsFeilds.firstName]
         self.sendRequestWith(method:method, params: params, headers: nil)
+        
+    }
+    
+    func getStudyUpdates(study:Study,delegate:NMWebServiceDelegate){
+        self.delegate = delegate
+        
+        let method = WCPMethods.studyUpdates.method
+        let headerParams = [kStudyId:study.studyId!,
+                            kStudyVersion:study.version!]
+        self.sendRequestWith(method:method, params: nil, headers: headerParams)
         
     }
     
@@ -366,6 +387,13 @@ class WCPServices: NSObject {
 
     func handleContactUsAndFeedback(response:Dictionary<String, Any>){
     }
+    func handleStudyUpdates(response:Dictionary<String, Any>){
+        
+        if Utilities.isValidObject(someObject: response as AnyObject?){
+            _ = StudyUpdates(detail: response as! Dictionary<String, Any>)
+        }
+    }
+
     
     private func sendRequestWith(method:Method, params:Dictionary<String, Any>?,headers:Dictionary<String, String>?){
         
@@ -410,7 +438,8 @@ extension WCPServices:NMWebServiceDelegate{
         case .notifications:break
         case .contactUs,.feedback:
             self.handleContactUsAndFeedback(response:response as! Dictionary<String, Any> )
-        
+        case .studyUpdates:
+            self.handleStudyUpdates(response: response as! Dictionary<String, Any>)
         default:
             print("Request was not sent proper method name")
         }

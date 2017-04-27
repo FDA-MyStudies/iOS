@@ -296,7 +296,7 @@ class UserServices: NSObject {
         self.delegate = delegate
         
         let user = User.currentUser
-        let headerParams = [kUserId : user.userId] as Dictionary<String, String>
+        let headerParams = [kUserId : user.userId!]
         
         let params = [kStudies:[studyStauts.getBookmarkUserStudyStatus()]] as [String : Any]
         let method = RegistrationMethods.updatePreferences.method

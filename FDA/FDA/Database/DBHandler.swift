@@ -65,31 +65,75 @@ class DBHandler: NSObject {
      //MARK:Study
     func saveStudies(studies:Array<Study>){
         
-        
+        let realm = try! Realm()
+        let dbStudiesArray = realm.objects(DBStudy.self)
+      
         var dbStudies:Array<DBStudy> = []
         for study in studies {
             
-            let dbStudy = DBStudy()
             
-            dbStudy.studyId = study.studyId
-            dbStudy.category = study.category
-            dbStudy.name = study.name
-            dbStudy.sponserName = study.sponserName
-            dbStudy.tagLine = study.description
-            dbStudy.version = study.version
-            dbStudy.logoURL = study.logoURL
-            dbStudy.startDate = study.startDate
-            dbStudy.endEnd = study.endEnd
+            //some studies are already present in db
+            var dbStudy:DBStudy?
+            if dbStudiesArray.count > 0 {
+                 dbStudy = dbStudiesArray.filter({$0.studyId ==  study.studyId}).last
+            }
             
-            dbStudies.append(dbStudy)
+            if dbStudy == nil {
+                dbStudy = DBHandler.getDBStudy(study: study)
+                dbStudies.append(dbStudy!)
+            }
+            else {
+                
+                try! realm.write({
+                    dbStudy?.category = study.category
+                    dbStudy?.name = study.name
+                    dbStudy?.sponserName = study.sponserName
+                    dbStudy?.tagLine = study.description
+                    dbStudy?.logoURL = study.logoURL
+                    dbStudy?.startDate = study.startDate
+                    dbStudy?.endEnd = study.endEnd
+                    
+                    if dbStudy?.participatedStatus == UserStudyStatus.StudyStatus.inProgress.rawValue {
+                        dbStudy?.updatedVersion = "2"
+                    }
+                    else {
+                        dbStudy?.version = study.version
+                        dbStudy?.updatedVersion = study.version
+                    }
+                    
+                })
+                
+            }
+           
         }
         
-        let realm = try! Realm()
+        
         print("DBPath : \(realm.configuration.fileURL)")
         try! realm.write({
             realm.add(dbStudies, update: true)
             
         })
+    }
+    
+    private class func getDBStudy(study:Study) ->DBStudy{
+        
+        let dbStudy = DBStudy()
+        dbStudy.studyId = study.studyId
+        dbStudy.category = study.category
+        dbStudy.name = study.name
+        dbStudy.sponserName = study.sponserName
+        dbStudy.tagLine = study.description
+        dbStudy.version = study.version
+        dbStudy.updatedVersion = study.version
+        dbStudy.logoURL = study.logoURL
+        dbStudy.startDate = study.startDate
+        dbStudy.endEnd = study.endEnd
+        dbStudy.enrolling = study.studySettings.enrollingAllowed
+        dbStudy.rejoin = study.studySettings.rejoinStudyAfterWithdrawn
+        dbStudy.platform = study.studySettings.platform
+        
+        return dbStudy
+        
     }
     
     class func loadStudyListFromDatabase(completionHandler:@escaping (Array<Study>) -> ()){
@@ -99,21 +143,29 @@ class DBHandler: NSObject {
         let dbStudies = realm.objects(DBStudy.self)
         
         var studies:Array<Study> = []
-        for study in dbStudies {
+        for dbStudy in dbStudies {
             
-            let dbStudy = Study()
+            let study = Study()
             
-            dbStudy.studyId = study.studyId
-            dbStudy.category = study.category
-            dbStudy.name = study.name
-            dbStudy.sponserName = study.sponserName
-            dbStudy.description = study.tagLine
-            dbStudy.version = study.version
-            dbStudy.logoURL = study.logoURL
-            dbStudy.startDate = study.startDate
-            dbStudy.endEnd = study.endEnd
+            study.studyId = dbStudy.studyId
+            study.category = dbStudy.category
+            study.name = dbStudy.name
+            study.sponserName = dbStudy.sponserName
+            study.description = dbStudy.tagLine
+            study.version = dbStudy.version
+            study.newVersion = dbStudy.updatedVersion
+            study.logoURL = dbStudy.logoURL
+            study.startDate = dbStudy.startDate
+            study.endEnd = dbStudy.endEnd
             
-            studies.append(dbStudy)
+            let studySettings = StudySettings()
+            studySettings.enrollingAllowed = dbStudy.enrolling
+            studySettings.rejoinStudyAfterWithdrawn = dbStudy.rejoin
+            studySettings.platform = dbStudy.platform!
+            
+            study.studySettings = studySettings
+            
+            studies.append(study)
         }
         
         completionHandler(studies)
@@ -195,6 +247,38 @@ class DBHandler: NSObject {
         }
      
         
+    }
+    
+    class func updateMetaDataToUpdateForStudy(study:Study , updateDetails:StudyUpdates?){
+        
+        let realm = try! Realm()
+        let studies =  realm.objects(DBStudy.self).filter("studyId == %@",study.studyId)
+        let dbStudy = studies.last
+        
+        try! realm.write({
+            
+            dbStudy?.updateResources = StudyUpdates.studyResourcesUpdated
+            dbStudy?.updateConsent = StudyUpdates.studyConsentUpdated
+            dbStudy?.updateActivities = StudyUpdates.studyActivitiesUpdated
+            dbStudy?.updateInfo = StudyUpdates.studyInfoUpdated
+            dbStudy?.version = dbStudy?.updatedVersion//StudyUpdates.studyVersion
+           // dbStudy?.updatedVersion = StudyUpdates.studyVersion
+            
+        })
+        
+    }
+    
+    class func loadStudyDetailsToUpdate(studyId:String,completionHandler:@escaping (Bool) -> ()){
+        let realm = try! Realm()
+        let studies =  realm.objects(DBStudy.self).filter("studyId == %@",studyId)
+        let dbStudy = studies.last
+        
+        StudyUpdates.studyActivitiesUpdated = (dbStudy?.updateActivities)!
+        StudyUpdates.studyConsentUpdated = (dbStudy?.updateConsent)!
+        StudyUpdates.studyResourcesUpdated = (dbStudy?.updateResources)!
+        StudyUpdates.studyInfoUpdated = (dbStudy?.updateInfo)!
+        
+        completionHandler(true)
     }
     
     

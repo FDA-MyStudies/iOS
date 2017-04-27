@@ -66,9 +66,7 @@ class StudyListViewController: UIViewController {
         
         //self.loadTestData()
         
-        
-        
-        
+      
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -79,20 +77,9 @@ class StudyListViewController: UIViewController {
         self.navigationController?.setNavigationBarHidden(false, animated: true)
         self.navigationController?.navigationBar.isHidden = false
         
-//        DBHandler.loadStudyListFromDatabase { (studies) in
-//            if studies.count > 0 {
-//                Gateway.instance.studies = studies
-//                self.tableView?.reloadData()
-//            }
-//            else {
-//                self.sendRequestToGetStudyList()
-//            }
-//        }
-        //self.tableView?.reloadData()
+        //self.loadStudiesFromDatabase()
         self.sendRequestToGetStudyList()
-        
-        
-        
+       
         if User.currentUser.userType == .FDAUser {
             
             self.tableView?.estimatedRowHeight = 156
@@ -113,6 +100,21 @@ class StudyListViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    
+    
+    func loadStudiesFromDatabase(){
+        
+        DBHandler.loadStudyListFromDatabase { (studies) in
+            if studies.count > 0 {
+                Gateway.instance.studies = studies
+                self.tableView?.reloadData()
+            }
+            else {
+                self.sendRequestToGetStudyList()
+            }
+        }
+
+    }
     
     //MARK:Custom Bar Buttons
     
@@ -208,7 +210,7 @@ class StudyListViewController: UIViewController {
     func handleStudyListResponse(){
         
         if (Gateway.instance.studies?.count)! > 0{
-            self.tableView?.reloadData()
+            self.loadStudiesFromDatabase()
             self.labelHelperText.isHidden = true
         }
         else {
@@ -216,6 +218,13 @@ class StudyListViewController: UIViewController {
             self.labelHelperText.isHidden = false
         }
         
+    }
+    //save information for study which feilds need to be updated
+    func handleStudyUpdatedInformation(){
+        
+        DBHandler.updateMetaDataToUpdateForStudy(study: Study.currentStudy!, updateDetails: nil)
+        
+        self.pushToStudyDashboard()
     }
     
     
@@ -246,7 +255,7 @@ extension StudyListViewController : UITableViewDataSource {
     }
 }
 
-//MARK: TableView Delegates
+//MARK:- TableView Delegates
 extension StudyListViewController :  UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -262,8 +271,20 @@ extension StudyListViewController :  UITableViewDelegate {
                 
                 let userStudyStatus =  (Study.currentStudy?.userParticipateState.status)!
                 
-                if userStudyStatus == .completed || userStudyStatus == .inProgress {
-                    self.pushToStudyDashboard()
+                if userStudyStatus == .completed || userStudyStatus == .inProgress{
+                    //self.pushToStudyDashboard()
+                    // check if study version is udpated
+                    if(study?.version != study?.newVersion){
+                        WCPServices().getStudyUpdates(study: study!, delegate: self)
+                    }
+                    else{
+                        
+                        DBHandler.loadStudyDetailsToUpdate(studyId: (study?.studyId)!, completionHandler: { (success) in
+                            self.pushToStudyDashboard()
+                        })
+                        
+                    }
+                    
                 }
                 else {
                     
@@ -331,6 +352,9 @@ extension StudyListViewController:NMWebServiceDelegate {
         else if (requestName as String == RegistrationMethods.userPreferences.description){
             //self.sendRequestToGetStudyList()
             self.tableView?.reloadData()
+        }
+        else if (requestName as String == WCPMethods.studyUpdates.rawValue){
+            self.handleStudyUpdatedInformation()
         }
         
         

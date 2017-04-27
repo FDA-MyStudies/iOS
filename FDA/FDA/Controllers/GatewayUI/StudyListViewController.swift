@@ -273,6 +273,15 @@ extension StudyListViewController :  UITableViewDelegate {
                 
                 
             }
+            else  if Study.currentStudy?.status == .Paused{
+                let userStudyStatus =  (Study.currentStudy?.userParticipateState.status)!
+                
+                if userStudyStatus == .completed || userStudyStatus == .inProgress {
+                    
+                    UIUtilities.showAlertWithTitleAndMessage(title: "", message: NSLocalizedString(kMessageForStudyPausedAfterJoiningState, comment: "") as NSString)
+                }
+                
+            }
             else {
                 
                 self.checkDatabaseForStudyInfo(study: study!)

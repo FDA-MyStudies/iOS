@@ -8,10 +8,17 @@
 
 import UIKit
 
+protocol FileDownloadManagerDelegates {
+    func download(manager:FileDownloadManager,didUpdateProgress progress:Float)
+    func download(manager:FileDownloadManager,didFinishDownloadingAtPath path:String)
+    func download(manager:FileDownloadManager,didFailedWithError error:Error)
+}
+
 class FileDownloadManager : NSObject {
     
     var sessionManager: Foundation.URLSession!
     open var downloadingArray: [FileDownloadModel] = []
+    var delegate:FileDownloadManagerDelegates?
     let taskStartedDate = Date()
     func downloadFile(_ fileName: String, fileURL: String, destinationPath: String){
         
@@ -49,20 +56,22 @@ extension FileDownloadManager:URLSessionDelegate{
             let totalBytesCount = Double(downloadTask.countOfBytesExpectedToReceive)
             let progress = Float(receivedBytesCount / totalBytesCount)
             
+            self.delegate?.download(manager: self, didUpdateProgress: progress)
+            
              //downloadModel.startTime!
-            let timeInterval = self.taskStartedDate.timeIntervalSinceNow
-            let downloadTime = TimeInterval(-1 * timeInterval)
+            //let timeInterval = self.taskStartedDate.timeIntervalSinceNow
+            //let downloadTime = TimeInterval(-1 * timeInterval)
             
-            let speed = Float(totalBytesWritten) / Float(downloadTime)
+            //let speed = Float(totalBytesWritten) / Float(downloadTime)
             
-            let remainingContentLength = totalBytesExpectedToWrite - totalBytesWritten
+            //let remainingContentLength = totalBytesExpectedToWrite - totalBytesWritten
             
-            let remainingTime = Int(remainingContentLength) / Int(speed)
-            let hours = Int(remainingTime) / 3600
-            let minutes = (Int(remainingTime) - hours * 3600) / 60
-            let seconds = Int(remainingTime) - hours * 3600 - minutes * 60
+            //let remainingTime = Int(remainingContentLength) / Int(speed)
+            //let hours = Int(remainingTime) / 3600
+            //let minutes = (Int(remainingTime) - hours * 3600) / 60
+            //let seconds = Int(remainingTime) - hours * 3600 - minutes * 60
             
-            print(progress)
+            //print(progress)
             
 
         })
@@ -87,10 +96,11 @@ extension FileDownloadManager:URLSessionDelegate{
                     
                     do {
                         try fileManager.moveItem(at: location, to: fileURL)
+                        self.delegate?.download(manager: self, didFinishDownloadingAtPath:destinationPath)
                     } catch let error as NSError {
                         debugPrint("Error while moving downloaded file to destination path:\(error)")
                         DispatchQueue.main.async(execute: { () -> Void in
-                           // self.delegate?.downloadRequestDidFailedWithError?(error, downloadModel: downloadModel, index: index)
+                           self.delegate?.download(manager: self, didFailedWithError: error)
                         })
                     }
                // } else {
@@ -114,7 +124,11 @@ extension FileDownloadManager:URLSessionDelegate{
     }
      func URLSession(_ session: Foundation.URLSession, task: URLSessionTask, didCompleteWithError error: NSError?) {
          debugPrint("task id: \(task.taskIdentifier)")
-        debugPrint("Completed with error \(error?.localizedDescription)")
+         debugPrint("Completed with error \(error?.localizedDescription)")
+        if error != nil {
+            self.delegate?.download(manager: self, didFailedWithError: error!)
+        }
+        
     }
     public func urlSessionDidFinishEvents(forBackgroundURLSession session: URLSession) {
         

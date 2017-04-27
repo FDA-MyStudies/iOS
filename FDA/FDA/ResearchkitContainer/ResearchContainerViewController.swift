@@ -87,10 +87,10 @@ class ResearchContainerViewController: UIViewController, HealthClientType {
     }
     
     func toWithdrawl() {
-        let viewController = WithdrawViewController()
-        viewController.delegate = self
+       // let viewController = WithdrawViewController()
+       // viewController.delegate = self
         
-        present(viewController, animated: true, completion: nil)
+      //  present(viewController, animated: true, completion: nil)
     }
 }
 
@@ -99,6 +99,8 @@ extension ResearchContainerViewController: ORKTaskViewControllerDelegate {
 
     public func taskViewController(_ taskViewController: ORKTaskViewController, didFinishWith reason: ORKTaskViewControllerFinishReason, error: Error?) {
         // Check if the user has finished the `WithdrawViewController`.
+        
+        /*
         if taskViewController is WithdrawViewController {
             /*
                 If the user has completed the withdrawl steps, remove them from
@@ -112,5 +114,7 @@ extension ResearchContainerViewController: ORKTaskViewControllerDelegate {
             // Dismiss the `WithdrawViewController`.
             dismiss(animated: true, completion: nil)
         }
+ 
+ */
     }
 }

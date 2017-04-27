@@ -237,6 +237,9 @@ extension VerificationViewController:NMWebServiceDelegate {
                 self.performSegue(withIdentifier: "unwindStudyHomeSegue", sender: self)
             }
             else{
+                let appDelegate = UIApplication.shared.delegate as! AppDelegate
+                appDelegate.checkPasscode(viewController: self)
+                
                 self.navigateToSignUpCompletionStep()
             }
             
@@ -270,3 +273,43 @@ extension VerificationViewController:NMWebServiceDelegate {
         }
     }
 }
+
+
+extension VerificationViewController:ORKTaskViewControllerDelegate{
+    //MARK:ORKTaskViewController Delegate
+    
+    func taskViewControllerSupportsSaveAndRestore(_ taskViewController: ORKTaskViewController) -> Bool {
+        return true
+    }
+    
+    public func taskViewController(_ taskViewController: ORKTaskViewController, didFinishWith reason: ORKTaskViewControllerFinishReason, error: Error?) {
+        
+        var taskResult:Any?
+        
+        switch reason {
+            
+        case ORKTaskViewControllerFinishReason.completed:
+            print("completed")
+            taskResult = taskViewController.result
+        case ORKTaskViewControllerFinishReason.failed:
+            print("failed")
+            taskResult = taskViewController.result
+        case ORKTaskViewControllerFinishReason.discarded:
+            print("discarded")
+            
+            taskResult = taskViewController.result
+        case ORKTaskViewControllerFinishReason.saved:
+            print("saved")
+            taskResult = taskViewController.restorationData
+            
+        }
+        taskViewController.dismiss(animated: true, completion: nil)
+    }
+    
+    func taskViewController(_ taskViewController: ORKTaskViewController, stepViewControllerWillAppear stepViewController: ORKStepViewController) {
+        
+    }
+    
+}
+
+

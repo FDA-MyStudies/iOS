@@ -267,6 +267,9 @@ class LeftMenuViewController : UIViewController, LeftMenuProtocol {
     
     func signout(){
         debugPrint("singout")
+        
+        ORKPasscodeViewController.removePasscodeFromKeychain()
+        
         self.changeViewController(.studyList)
         self.createLeftmenuItems()
         //_ = self.navigationController?.popToRootViewController(animated: true)

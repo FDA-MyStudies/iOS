@@ -57,7 +57,7 @@ class LeftMenuViewController : UIViewController, LeftMenuProtocol {
                   ]
     var studyListViewController: UINavigationController!
     var notificationController: UIViewController!
-    var resourcesViewController: UIViewController!
+    var resourcesViewController: UINavigationController!
     var profileviewController: UIViewController!
     var nonMenuViewController: UIViewController!
     var reachoutViewController: UINavigationController!
@@ -88,6 +88,8 @@ class LeftMenuViewController : UIViewController, LeftMenuProtocol {
         
         self.notificationController = storyboard.instantiateViewController(withIdentifier:  String(describing: NotificationViewController.classForCoder())) as! UINavigationController
         
+        
+        self.resourcesViewController = storyboard.instantiateViewController(withIdentifier:  String(describing: GatewayResourcesListViewController.classForCoder())) as! UINavigationController
         
         self.profileviewController = storyboard.instantiateViewController(withIdentifier:  String(describing: ProfileViewController.classForCoder())) as! UINavigationController
         
@@ -208,7 +210,8 @@ class LeftMenuViewController : UIViewController, LeftMenuProtocol {
         case .studyList:
             self.slideMenuController()?.changeMainViewController(self.studyListViewController, close: true)
         case .resources:
-              UIUtilities.showAlertWithTitleAndMessage(title:NSLocalizedString(kAlertMessageText, comment: "") as NSString, message:NSLocalizedString(kAlertMessageReachoutText, comment: "") as NSString)
+              //UIUtilities.showAlertWithTitleAndMessage(title:NSLocalizedString(kAlertMessageText, comment: "") as NSString, message:NSLocalizedString(kAlertMessageReachoutText, comment: "") as NSString)
+            self.slideMenuController()?.changeMainViewController(self.resourcesViewController, close: true)
         case .profile_reachOut:
             
             if User.currentUser.userType == .FDAUser {

@@ -699,10 +699,10 @@
             </objects>
             <point key="canvasLocation" x="-31" y="-65"/>
         </scene>
-        <!--Resources List View Controller-->
+        <!--Gateway Resources List View Controller-->
         <scene sceneID="GBc-op-J8W">
             <objects>
-                <viewController id="5n6-K7-AGX" customClass="ResourcesListViewController" customModule="FDA" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="5n6-K7-AGX" customClass="GatewayResourcesListViewController" customModule="FDA" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="egc-TX-UG0"/>
                         <viewControllerLayoutGuide type="bottom" id="WDC-E8-9AP"/>
@@ -777,7 +777,7 @@
         <!--Navigation Controller-->
         <scene sceneID="uO5-OP-Ue5">
             <objects>
-                <navigationController storyboardIdentifier="ResourcesListViewController" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Cza-pp-Sb1" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="GatewayResourcesListViewController" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Cza-pp-Sb1" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="" image="resources_white" id="4n8-WT-iUv">
                         <inset key="imageInsets" minX="0.0" minY="7" maxX="0.0" maxY="-7"/>
                     </tabBarItem>

@@ -13,10 +13,10 @@ let kLabelText = "LabelName"
 let kToggleValue = "ToggleValue"
 
 enum ProfileTableViewCellType:Int {
-    case usePasscode = 4
-    case useTouchId = 5
-    case receivePushNotifications = 6
-    case receiveStudyActivityReminder = 7
+    case usePasscode = 3
+    case useTouchId = 4
+    case receivePushNotifications = 5
+    case receiveStudyActivityReminder = 6
 }
 
 
@@ -24,6 +24,7 @@ class ProfileTableViewCell: UITableViewCell {
     
     @IBOutlet var labelName : UILabel?
     @IBOutlet var switchToggle : UISwitch?
+   
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -57,9 +58,11 @@ class ProfileTableViewCell: UITableViewCell {
         case .usePasscode:
             if Utilities.isValidValue(someObject: user.settings?.passcode as AnyObject?){
                 self.switchToggle?.isOn = (user.settings?.passcode)!
+                
             }
             else{
                  self.switchToggle?.isOn =  false
+                
             }
         case .useTouchId:
             if Utilities.isValidValue(someObject: user.settings?.touchId as AnyObject?){

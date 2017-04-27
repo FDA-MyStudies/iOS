@@ -68,6 +68,9 @@ class Resource{
                 self.title = detail[kResourceTitle] as? String
             }
             
+            self.file = File()
+            self.file?.setFileForStudy(dict:detail as NSDictionary)
+            
         }
         else{
             Logger.sharedInstance.debug("Resource Dictionary is null:\(detail)")

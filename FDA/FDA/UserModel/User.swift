@@ -40,6 +40,8 @@ class User{
     var userType : UserType?
     var userId : String!
     var password : String? = ""
+   
+    
     //var confirmPassword : String? = ""
     var verified : Bool!
     var authToken: String!
@@ -116,6 +118,9 @@ class User{
             if Utilities.isValidValue(someObject: dict[kUserId] as AnyObject )  {
                 self.userId = dict[kUserId] as? String
             }
+            
+            
+            
         }
         else{
             Logger.sharedInstance.debug("User Dictionary is null:\(dict)")
@@ -336,6 +341,7 @@ class Settings{
     var touchId :Bool?
     var passcode :Bool?
     var leadTime :String?
+     var locale : String?
     
     init() {
         self.remoteNotifications = false
@@ -343,6 +349,7 @@ class Settings{
         self.touchId  = false
         self.passcode = false
         self.leadTime = "00:00"
+        self.locale = ""
     }
     
     init(remoteNotifications:Bool?,localNotifications:Bool?,touchId: Bool?,passcode:Bool?){
@@ -388,6 +395,10 @@ class Settings{
             if Utilities.isValidValue(someObject: dict[kSettingsLeadTime] as AnyObject){
                 self.leadTime = dict[kSettingsLeadTime] as? String
             }
+            if Utilities.isValidValue(someObject: dict[kLocale] as AnyObject )  {
+                self.locale = dict[kLocale] as? String
+            }
+
             
         }
         else{

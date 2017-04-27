@@ -93,7 +93,13 @@ class WCPServices: NSObject {
         self.sendRequestWith(method:method, params: nil, headers: header)
     }
 
-    
+    func getGatewayResources(delegate:NMWebServiceDelegate){
+        self.delegate = delegate
+        
+        let method = WCPMethods.gatewayInfo.method
+        let params = Dictionary<String, Any>()
+        self.sendRequestWith(method:method, params: params, headers: nil)
+    }
     
     func getEligibilityConsentMetadata(studyId:String, delegate:NMWebServiceDelegate){
         
@@ -257,7 +263,7 @@ class WCPServices: NSObject {
     func handleResourceListForGateway(response:Dictionary<String, Any>){
         
         let resources = response[kResources] as! Array<Dictionary<String,Any>>
-        var listOfResources:Array<Resource>!
+        var listOfResources:Array<Resource>! = []
         for resource in resources{
             let resourceObj = Resource(detail: resource)
             listOfResources.append(resourceObj)
@@ -417,7 +423,8 @@ extension WCPServices:NMWebServiceDelegate{
         let methodName = WCPMethods(rawValue: requestName as String)!
         
         switch methodName {
-        case .gatewayInfo:break
+        case .gatewayInfo:
+            self.handleResourceListForGateway(response: response as! Dictionary<String, Any>)
         case .studyList:
             self.handleStudyList(response: response as! Dictionary<String, Any>)
         case .eligibilityConsent:

@@ -459,5 +459,6 @@ class ActivityRun {
     var studyId:String!
     var activityId:String!
     var isCompleted:Bool = false
+    var restortionData:Data?
     
 }

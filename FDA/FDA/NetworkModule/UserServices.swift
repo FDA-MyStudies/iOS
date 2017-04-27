@@ -12,12 +12,18 @@ import UIKit
 let kAppVersion = "appVersion"
 let kOSType = "os"
 
+let kDeviceToken = "deviceToken"
+
 //MARK: Registration Server API Constants
 let kUserFirstName = "firstName"
 let kUserLastName = "lastName"
 let kUserEmailId = "emailId"
 let kUserSettings = "settings"
 let kUserId = "userId"
+
+let kLocale = "locale"
+let kParticipantInfo = "participantInfo"
+
 let kUserProfile = "profile"
 let kUserInfo = "info"
 let kUserOS = "os"
@@ -47,8 +53,9 @@ let kSettingsRemoteNotifications = "remoteNotifications"
 let kSettingsLocalNotifications = "localNotifications"
 let kSettingsPassCode = "passcode"
 let kSettingsTouchId = "touchId"
-let kSettingsLeadTime = "remindersTime"
+let kSettingsLeadTime = "reminderLeadTime"
 
+let kSettingsLocale = "locale"
 
 let kVerifyCode = "code"
 
@@ -245,12 +252,17 @@ class UserServices: NSObject {
                         kSettingsTouchId : (user.settings?.touchId)! as Bool,
                         kSettingsPassCode : (user.settings?.passcode)! as Bool,
                         kSettingsLocalNotifications : (user.settings?.localNotifications)! as Bool,
-                        kSettingsLeadTime : (user.settings?.leadTime)! as String
+                        kSettingsLeadTime : (user.settings?.leadTime)! as String,
+                        kSettingsLocale : (user.settings?.locale)! as String
         ] as [String : Any]
         
         let version = Utilities.getAppVersion()
         let info = [kAppVersion : version,
-                    kOSType :"ios"]
+                    kOSType :"ios",
+                    kDeviceToken : ""
+                    ]
+        
+        
         /*
         let params = [kUserProfile:profile,
                       kUserSettings:settings,
@@ -259,7 +271,8 @@ class UserServices: NSObject {
         
         let params = [
                       kUserSettings:settings,
-                      kBasicInfo:info] as [String : Any]
+                      kBasicInfo:info,
+                      kParticipantInfo : []] as [String : Any]
         
         let method = RegistrationMethods.updateUserProfile.method
         

@@ -30,7 +30,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sorry, no studies available right now. Please remain signed in to get notified when there are new studies available." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sfa-0h-9w7">
-                                <rect key="frame" x="20" y="275" width="335" height="52.5"/>
+                                <rect key="frame" x="20" y="275.5" width="335" height="52.5"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -91,13 +91,13 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="A study for pregnant women" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LLs-YR-ZfM">
-                                                    <rect key="frame" x="109" y="39" width="248" height="19"/>
+                                                    <rect key="frame" x="109" y="39" width="248" height="20"/>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="16"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="A study for pregnant women" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YLI-bb-qxx">
-                                                    <rect key="frame" x="109" y="61" width="248" height="14"/>
+                                                    <rect key="frame" x="109" y="62" width="248" height="14"/>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -133,7 +133,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Sponser yg | Pregnancy" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JYg-ZP-14Y">
-                                                    <rect key="frame" x="109" y="81" width="248" height="15"/>
+                                                    <rect key="frame" x="109" y="82" width="248" height="14"/>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
                                                     <color key="textColor" red="0.5490196078431373" green="0.58431372549019611" blue="0.63921568627450975" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -147,7 +147,7 @@
                                                     <color key="trackTintColor" red="0.84705882352941175" green="0.8901960784313725" blue="0.90196078431372551" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </progressView>
                                                 <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progressViewStyle="bar" translatesAutoresizingMaskIntoConstraints="NO" id="vLp-QY-Cdi">
-                                                    <rect key="frame" x="248" y="122" width="100" height="2.5"/>
+                                                    <rect key="frame" x="248" y="122" width="101" height="2.5"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="2" id="T1l-Q3-S3s"/>
                                                     </constraints>
@@ -502,12 +502,12 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="20" translatesAutoresizingMaskIntoConstraints="NO" id="co8-an-6G9">
-                                                    <rect key="frame" x="81.5" y="19" width="0.0" height="16.5"/>
+                                                    <rect key="frame" x="82" y="19" width="0.0" height="17"/>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="22"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sign up" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="14" translatesAutoresizingMaskIntoConstraints="NO" id="du0-3K-yBm">
-                                                    <rect key="frame" x="81.5" y="35.5" width="171" height="20"/>
+                                                    <rect key="frame" x="82" y="36" width="171" height="20"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="20" id="HZP-gZ-7kg"/>
                                                     </constraints>
@@ -516,7 +516,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="profile_white" translatesAutoresizingMaskIntoConstraints="NO" id="F54-LP-vEh">
-                                                    <rect key="frame" x="34" y="21" width="27.5" height="27.5"/>
+                                                    <rect key="frame" x="34" y="21" width="28" height="28"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" secondItem="F54-LP-vEh" secondAttribute="height" multiplier="1:1" id="8ry-zA-SZZ"/>
@@ -550,19 +550,19 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="jjj" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="20" translatesAutoresizingMaskIntoConstraints="NO" id="gAZ-xG-Pxt">
-                                                    <rect key="frame" x="87.5" y="22" width="16" height="25.5"/>
+                                                    <rect key="frame" x="88" y="22" width="16" height="26"/>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="22"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="profile_white" translatesAutoresizingMaskIntoConstraints="NO" id="uGR-sE-vLT">
-                                                    <rect key="frame" x="34" y="21" width="32.5" height="32.5"/>
+                                                    <rect key="frame" x="34" y="21" width="33" height="33"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" secondItem="uGR-sE-vLT" secondAttribute="height" multiplier="1:1" id="27m-6j-B7V"/>
                                                     </constraints>
                                                 </imageView>
                                                 <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="4" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="14" translatesAutoresizingMaskIntoConstraints="NO" id="RlU-TK-JcR">
-                                                    <rect key="frame" x="108.5" y="27" width="35" height="17.5"/>
+                                                    <rect key="frame" x="109" y="27" width="35" height="18"/>
                                                     <color key="backgroundColor" red="0.0" green="0.48627450979999998" blue="0.72941176470000002" alpha="1" colorSpace="calibratedRGB"/>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -999,13 +999,13 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="First Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tud-Fw-jEG">
-                                                    <rect key="frame" x="23" y="12" width="88" height="21"/>
+                                                    <rect key="frame" x="23" y="19" width="88" height="22"/>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="18"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="enter first name" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="FHg-Y2-WtR">
-                                                    <rect key="frame" x="138" y="3" width="219" height="40"/>
+                                                    <rect key="frame" x="222" y="5.5" width="135" height="40"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="40" id="wR4-vq-36I"/>
                                                     </constraints>
@@ -1017,7 +1017,7 @@
                                                     </connections>
                                                 </textField>
                                                 <button hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yrx-fB-aoa">
-                                                    <rect key="frame" x="138" y="4" width="219" height="40"/>
+                                                    <rect key="frame" x="209" y="7" width="148" height="40"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="40" id="Bue-El-GXQ"/>
                                                     </constraints>
@@ -1036,15 +1036,14 @@
                                             </subviews>
                                             <constraints>
                                                 <constraint firstAttribute="trailing" secondItem="yrx-fB-aoa" secondAttribute="trailing" constant="18" id="8TS-Ce-9Oo"/>
-                                                <constraint firstAttribute="bottomMargin" secondItem="tud-Fw-jEG" secondAttribute="bottom" constant="20.5" id="8hu-TT-5s0"/>
-                                                <constraint firstItem="qzU-Kz-9Eh" firstAttribute="top" secondItem="yrx-fB-aoa" secondAttribute="bottom" constant="16" id="E4V-Vf-fj5"/>
-                                                <constraint firstItem="tud-Fw-jEG" firstAttribute="leading" secondItem="oSF-ho-qdn" secondAttribute="leadingMargin" constant="15" id="Ht3-Z5-0QA"/>
+                                                <constraint firstItem="qzU-Kz-9Eh" firstAttribute="top" secondItem="yrx-fB-aoa" secondAttribute="bottom" constant="13" id="E4V-Vf-fj5"/>
                                                 <constraint firstAttribute="bottomMargin" secondItem="qzU-Kz-9Eh" secondAttribute="bottom" constant="-8" id="VRx-bT-LxD"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="FHg-Y2-WtR" secondAttribute="trailing" constant="10" id="ZZD-zS-Esc"/>
-                                                <constraint firstItem="yrx-fB-aoa" firstAttribute="leading" secondItem="tud-Fw-jEG" secondAttribute="trailing" constant="27" id="ZtH-9B-Azj"/>
+                                                <constraint firstItem="tud-Fw-jEG" firstAttribute="top" secondItem="oSF-ho-qdn" secondAttribute="top" constant="19" id="bOL-uG-vCE"/>
+                                                <constraint firstItem="tud-Fw-jEG" firstAttribute="leading" secondItem="oSF-ho-qdn" secondAttribute="leading" constant="23" id="kfP-fp-w8d"/>
+                                                <constraint firstItem="qzU-Kz-9Eh" firstAttribute="top" secondItem="tud-Fw-jEG" secondAttribute="bottom" constant="19" id="n2A-rd-Von"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="qzU-Kz-9Eh" secondAttribute="trailing" constant="10" id="nvr-Sh-7ks"/>
-                                                <constraint firstAttribute="bottomMargin" secondItem="FHg-Y2-WtR" secondAttribute="bottom" constant="10" id="pgL-HN-2NY"/>
-                                                <constraint firstItem="FHg-Y2-WtR" firstAttribute="leading" secondItem="tud-Fw-jEG" secondAttribute="trailing" constant="27" id="voI-zq-XoM"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="FHg-Y2-WtR" secondAttribute="bottom" constant="8" id="pgL-HN-2NY"/>
                                                 <constraint firstItem="qzU-Kz-9Eh" firstAttribute="leading" secondItem="oSF-ho-qdn" secondAttribute="leadingMargin" constant="12" id="xT8-dB-qIC"/>
                                             </constraints>
                                         </tableViewCellContentView>
@@ -1061,8 +1060,8 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="61"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Use Touch ID to access or sign in to app" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="vfp-9Y-Asr">
-                                                    <rect key="frame" x="22" y="10" width="260" height="42"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Use Passcode to access  app" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="vfp-9Y-Asr">
+                                                    <rect key="frame" x="22" y="0.5" width="260" height="51.5"/>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="18"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -1070,20 +1069,19 @@
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="okL-Il-d4F">
                                                     <rect key="frame" x="307" y="15" width="51" height="31"/>
                                                     <color key="onTintColor" red="0.0" green="0.48627450979999998" blue="0.72941176470000002" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <connections>
-                                                        <action selector="switchValueChangedWithSender:" destination="3uv-2m-XeE" eventType="valueChanged" id="QQm-yW-UI4"/>
-                                                    </connections>
                                                 </switch>
                                             </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                             <constraints>
                                                 <constraint firstAttribute="trailing" secondItem="okL-Il-d4F" secondAttribute="trailing" constant="19" id="DrQ-sv-SHP"/>
                                                 <constraint firstItem="vfp-9Y-Asr" firstAttribute="width" secondItem="wfh-L8-pIE" secondAttribute="width" multiplier="260/375" id="Ubr-f9-V1Q"/>
-                                                <constraint firstAttribute="bottom" secondItem="vfp-9Y-Asr" secondAttribute="bottom" constant="9" id="YD3-4h-0bg"/>
+                                                <constraint firstAttribute="bottom" secondItem="vfp-9Y-Asr" secondAttribute="bottom" constant="10" id="YD3-4h-0bg"/>
                                                 <constraint firstItem="okL-Il-d4F" firstAttribute="top" secondItem="wfh-L8-pIE" secondAttribute="top" constant="15" id="Zzl-wU-cMw"/>
-                                                <constraint firstItem="vfp-9Y-Asr" firstAttribute="top" secondItem="wfh-L8-pIE" secondAttribute="top" constant="10" id="jnx-Ka-dXk"/>
+                                                <constraint firstItem="vfp-9Y-Asr" firstAttribute="top" secondItem="wfh-L8-pIE" secondAttribute="top" id="jnx-Ka-dXk"/>
                                                 <constraint firstItem="vfp-9Y-Asr" firstAttribute="leading" secondItem="wfh-L8-pIE" secondAttribute="leading" constant="22" id="o7K-tC-5aN"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <connections>
                                             <outlet property="labelName" destination="vfp-9Y-Asr" id="4YO-dv-zej"/>
                                             <outlet property="switchToggle" destination="okL-Il-d4F" id="v8y-dF-0fq"/>
@@ -1105,7 +1103,7 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="jHf-nb-dhq">
-                        <barButtonItem key="rightBarButtonItem" enabled="NO" id="q3A-jV-JHW">
+                        <barButtonItem key="rightBarButtonItem" title="Edit" id="q3A-jV-JHW">
                             <color key="tintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>
                                 <action selector="editBarButtonAction:" destination="UWn-lb-vfU" id="mVF-PF-MsV"/>
@@ -1124,7 +1122,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="EVy-Bf-QZZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="908" y="1447"/>
+            <point key="canvasLocation" x="908" y="1446.9265367316343"/>
         </scene>
         <!--Confirmation View Controller-->
         <scene sceneID="whI-Tq-Vfl">
@@ -1660,13 +1658,13 @@ Below is a list of studies that you are a part of and information on how your re
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Subject" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CKp-ZC-FCM">
-                                                    <rect key="frame" x="18" y="19" width="56.5" height="19"/>
+                                                    <rect key="frame" x="18" y="19" width="57" height="20"/>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="16"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="enter subject" textAlignment="right" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="ZAG-q5-tTH">
-                                                    <rect key="frame" x="89.5" y="19" width="267.5" height="23"/>
+                                                    <rect key="frame" x="90" y="19" width="267" height="23"/>
                                                     <nil key="textColor"/>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="16"/>
                                                     <textInputTraits key="textInputTraits"/>
@@ -1752,7 +1750,7 @@ Below is a list of studies that you are a part of and information on how your re
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0mt-Xu-KqK">
-                                <rect key="frame" x="113" y="548" width="150" height="36"/>
+                                <rect key="frame" x="112.5" y="548" width="150" height="36"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
                                 <state key="normal" title="Submit">
                                     <color key="titleColor" red="0.0" green="0.48627450979999998" blue="0.72941176470000002" alpha="1" colorSpace="calibratedRGB"/>
@@ -1821,13 +1819,13 @@ Below is a list of studies that you are a part of and information on how your re
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="First Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pB8-Jw-hq2">
-                                                    <rect key="frame" x="18" y="19" width="80.5" height="19.5"/>
+                                                    <rect key="frame" x="18" y="19" width="81" height="20"/>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="16"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="enter first name" textAlignment="right" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="MNt-de-Zxv">
-                                                    <rect key="frame" x="113.5" y="19" width="243.5" height="23"/>
+                                                    <rect key="frame" x="114" y="19" width="243" height="23"/>
                                                     <nil key="textColor"/>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="16"/>
                                                     <textInputTraits key="textInputTraits"/>
@@ -1869,13 +1867,13 @@ Below is a list of studies that you are a part of and information on how your re
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Message" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cTN-Dm-9a6">
-                                                    <rect key="frame" x="18" y="7" width="339" height="19.5"/>
+                                                    <rect key="frame" x="18" y="7" width="339" height="20"/>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="16"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" tag="100" contentMode="scaleToFill" verticalCompressionResistancePriority="749" scrollEnabled="NO" text="Please let us know what you need help with. We will get back to you at the earliest" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="vt2-7v-hE4">
-                                                    <rect key="frame" x="12" y="26.5" width="351" height="35.5"/>
+                                                    <rect key="frame" x="12" y="27" width="351" height="35"/>
                                                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="16"/>
                                                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -1913,7 +1911,7 @@ Below is a list of studies that you are a part of and information on how your re
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="038-eu-Tw1">
-                                <rect key="frame" x="113" y="548" width="150" height="36"/>
+                                <rect key="frame" x="112.5" y="548" width="150" height="36"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
                                 <state key="normal" title="Submit">
                                     <color key="titleColor" red="0.0" green="0.48627450979999998" blue="0.72941176470000002" alpha="1" colorSpace="calibratedRGB"/>

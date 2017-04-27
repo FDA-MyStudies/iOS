@@ -20,17 +20,17 @@ let kErrorTitle = ""
 let kProfileAlertTitleText = "Profile"
 let kProfileAlertUpdatedText = "Profile updated Successfully."
 
-let signupCellLastIndex = 3
+let signupCellLastIndex = 2
 
 let kProfileTitleText = "PROFILE"
 
 
 // Cell Toggle Switch Types
 enum ToggelSwitchTags:Int{
-    case usePasscode = 4
-    case useTouchId = 5
-    case receivePush = 6
-    case receiveStudyActivityReminders = 7
+    case usePasscode = 3
+    case useTouchId = 4
+    case receivePush = 5
+    case receiveStudyActivityReminders = 6
 }
 
 class ProfileViewController: UIViewController {
@@ -41,6 +41,7 @@ class ProfileViewController: UIViewController {
     var isCellEditable:Bool?
     var user = User.currentUser
     
+    var isPasscodeViewPresented:Bool = false
     
     @IBOutlet var tableViewProfile : UITableView?
     @IBOutlet var tableViewFooterViewProfile : UIView?
@@ -49,12 +50,16 @@ class ProfileViewController: UIViewController {
     @IBOutlet var editBarButtonItem:UIBarButtonItem?
     @IBOutlet var tableTopConstraint:NSLayoutConstraint?
     
-//MARK: ViewController delegates
+    //MARK: ViewController delegates
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         //First responder handler for textfields
+        
+        
+        
+        
         IQKeyboardManager.sharedManager().enable = true
         
         
@@ -75,7 +80,13 @@ class ProfileViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         user = User.currentUser
-        UserServices().getUserProfile(self as NMWebServiceDelegate)
+        
+        if isPasscodeViewPresented == false{
+            UserServices().getUserProfile(self as NMWebServiceDelegate)
+        }
+        
+        
+        
         self.setNavigationBarItem()
         
         UIApplication.shared.statusBarStyle = .default
@@ -88,7 +99,23 @@ class ProfileViewController: UIViewController {
         
     }
     
-//MARK:IBActions
+    //MARK:IBActions
+    
+    @IBAction func buttonActionChangePassCode(_ sender:UIButton){
+        
+        let passcodeStep = ORKPasscodeStep(identifier: "PasscodeStep")
+        
+        
+        
+        passcodeStep.passcodeType = .type4Digit
+        let task = ORKOrderedTask(identifier: "PassCodeTask", steps: [passcodeStep])
+        let taskViewController = ORKTaskViewController.init(task: task, taskRun: nil)
+        taskViewController.delegate = self
+        
+        
+        self.navigationController?.present(taskViewController, animated: false, completion: nil)
+    }
+    
     
     @IBAction func editBarButtonAction(_ sender:UIBarButtonItem){
         
@@ -203,7 +230,7 @@ class ProfileViewController: UIViewController {
         })
     }
     
-//MARK:Utility Methods
+    //MARK:Utility Methods
     
     /*
      Dismiss key board when clicked on Background
@@ -223,7 +250,7 @@ class ProfileViewController: UIViewController {
     
     /*
      SignOut Response handler for slider menu setup
-    */
+     */
     func handleSignoutResponse(){
         debugPrint("singout")
         //fdaSlideMenuController()?.navigateToHomeAfterSingout()
@@ -234,6 +261,8 @@ class ProfileViewController: UIViewController {
     }
     func handleDeleteAccountResponse(){
         // fdaSlideMenuController()?.navigateToHomeAfterSingout()
+        
+        ORKPasscodeViewController.removePasscodeFromKeychain()
         
         
         UIUtilities.showAlertMessageWithActionHandler(NSLocalizedString(kTitleMessage, comment: ""), message: NSLocalizedString(kMessageAccountDeletedSuccess, comment: ""), buttonTitle: NSLocalizedString(kTitleOk, comment: ""), viewControllerUsed: self) {
@@ -272,7 +301,7 @@ class ProfileViewController: UIViewController {
     /*
      toggle Value change  method for cell Togges
      @param Sender  has to be a UISwitch
-    */
+     */
     func toggleValueChanged(_ sender:UISwitch)  {
         
         let toggle:UISwitch? = sender as UISwitch
@@ -282,13 +311,16 @@ class ProfileViewController: UIViewController {
             switch ToggelSwitchTags(rawValue:sender.tag)! as ToggelSwitchTags{
             case .usePasscode:
                 user.settings?.passcode = toggle?.isOn
+                self.checkPasscode()
+                
             case .useTouchId:
                 user.settings?.touchId = toggle?.isOn
+                
             case .receivePush:
                 user.settings?.remoteNotifications = toggle?.isOn
             case .receiveStudyActivityReminders:
                 user.settings?.localNotifications = toggle?.isOn
-            
+                
             }
             
             self.editBarButtonItem?.tintColor = UIColor.black
@@ -301,7 +333,7 @@ class ProfileViewController: UIViewController {
     
     /*
      Segue Delegate method for Navigation based on segue connected
-    */
+     */
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
@@ -313,7 +345,7 @@ class ProfileViewController: UIViewController {
     }
     /*
      Button action for Change password button
-    */
+     */
     func pushToChangePassword(_ sender:UIButton)  {
         self.performSegue(withIdentifier: kChangePasswordSegueIdentifier, sender: nil)
     }
@@ -330,22 +362,22 @@ class ProfileViewController: UIViewController {
             self.showAlertMessages(textMessage: kMessageAllFieldsAreEmpty)
             return false
         } /*
-        else if  user.firstName == ""{
-            self.showAlertMessages(textMessage: kMessageFirstNameBlank)
-            return false
-        }
-        else if (user.firstName?.isAlphanumeric)! == false || (user.firstName?.characters.count)! > 100 {
-            self.showAlertMessages(textMessage: kMessageValidFirstName)
-            return false
-        }
-        else if user.lastName == ""{
-            self.showAlertMessages(textMessage: kMessageLastNameBlank)
-            return false
-            
-        }else if user.lastName == "" ||  (user.lastName?.isAlphanumeric)! == false || (user.lastName?.characters.count)! > 100{
-            self.showAlertMessages(textMessage: kMessageValidLastName)
-            return false
-        }*/ else if user.emailId == "" {
+             else if  user.firstName == ""{
+             self.showAlertMessages(textMessage: kMessageFirstNameBlank)
+             return false
+             }
+             else if (user.firstName?.isAlphanumeric)! == false || (user.firstName?.characters.count)! > 100 {
+             self.showAlertMessages(textMessage: kMessageValidFirstName)
+             return false
+             }
+             else if user.lastName == ""{
+             self.showAlertMessages(textMessage: kMessageLastNameBlank)
+             return false
+             
+             }else if user.lastName == "" ||  (user.lastName?.isAlphanumeric)! == false || (user.lastName?.characters.count)! > 100{
+             self.showAlertMessages(textMessage: kMessageValidLastName)
+             return false
+         }*/ else if user.emailId == "" {
             self.showAlertMessages(textMessage: kMessageEmailBlank)
             return false
         }else if !(Utilities.isValidEmail(testStr: user.emailId!)){
@@ -363,6 +395,37 @@ class ProfileViewController: UIViewController {
     func showAlertMessages(textMessage : String){
         UIUtilities.showAlertMessage("", errorMessage: NSLocalizedString(textMessage, comment: ""), errorAlertActionTitle: NSLocalizedString("OK", comment: ""), viewControllerUsed: self)
     }
+    
+    
+    func checkPasscode() {
+        if User.currentUser.userType == .FDAUser {
+            //FDA user
+            
+            if  ORKPasscodeViewController.isPasscodeStoredInKeychain() == false{
+                let passcodeStep = ORKPasscodeStep(identifier: "PasscodeStep")
+                passcodeStep.passcodeType = .type4Digit
+                let task = ORKOrderedTask(identifier: "PassCodeTask", steps: [passcodeStep])
+                let taskViewController = ORKTaskViewController.init(task: task, taskRun: nil)
+                taskViewController.delegate = self
+                self.navigationController?.present(taskViewController, animated: false, completion: nil)
+            }
+            else{
+                let passcodeViewController = ORKPasscodeViewController.passcodeAuthenticationViewController(withText: "Enter Passcode to access app", delegate:self)
+                
+                self.navigationController?.present(passcodeViewController, animated: false, completion: nil)
+            }
+            
+        }
+            
+        else{
+            //Anonomous user
+            
+            //ORKPasscodeViewController.removePasscodeFromKeychain()
+        }
+        
+    }
+    
+    
     
     
     override func didReceiveMemoryWarning() {
@@ -401,12 +464,12 @@ extension ProfileViewController : UITableViewDataSource {
             
             // TextField properties set up according to index
             switch  textFieldTag {
-            /*
-            case .FirstNameTag,.LastName:
-                cell.textFieldValue?.autocapitalizationType = .sentences
-                
-                isSecuredEntry = false
-            */
+                /*
+                 case .FirstNameTag,.LastName:
+                 cell.textFieldValue?.autocapitalizationType = .sentences
+                 
+                 isSecuredEntry = false
+                 */
             case  .Password:
                 
                 cell.buttonChangePassword?.isUserInteractionEnabled =  true
@@ -419,6 +482,29 @@ extension ProfileViewController : UITableViewDataSource {
             case .EmailId :
                 keyBoardType = .emailAddress
                 isSecuredEntry = false
+                
+            case .ConfirmPassword : //ChangePasscode
+                
+                cell.textFieldValue?.isHidden = true
+                cell.buttonChangePassword?.isHidden =  false
+                cell.buttonChangePassword?.setTitle("ChangePasscode", for: .normal)
+                
+                if User.currentUser.settings?.passcode == true {
+                    cell.buttonChangePassword?.isUserInteractionEnabled =  true
+                    
+                    cell.buttonChangePassword?.setTitleColor(kUIColorForSubmitButtonBackground, for: .normal)
+                    
+                    cell.isUserInteractionEnabled = true
+                }
+                else{
+                    cell.buttonChangePassword?.isUserInteractionEnabled =  false
+                    cell.buttonChangePassword?.setTitleColor(UIColor.gray, for: .normal)
+                    
+                    cell.isUserInteractionEnabled = false
+                }
+                
+                cell.buttonChangePassword?.addTarget(self, action:#selector(buttonActionChangePassCode), for: .touchUpInside)
+                
             default: break
             }
             //Cell data setup
@@ -453,11 +539,10 @@ extension ProfileViewController : UITableViewDataSource {
             cell.switchToggle?.addTarget(self, action: #selector(ProfileViewController.toggleValueChanged), for: .valueChanged)
             
             cell.isUserInteractionEnabled = self.isCellEditable!
+            
+            
             return cell
         }
-        
-        
-        
         
     }
 }
@@ -484,19 +569,19 @@ extension ProfileViewController : UITextFieldDelegate{
         
         let tag:TextFieldTags = TextFieldTags(rawValue: textField.tag)!
         // Disabling space editing
-       
+        
         let finalString = textField.text! + string
         
         /*
-        if tag == .FirstNameTag || tag == .LastName {
-            if string == " "  || finalString.characters.count > 100 {
-                return false
-            }
-            else{
-                return true
-            }
-        }
-        else */
+         if tag == .FirstNameTag || tag == .LastName {
+         if string == " "  || finalString.characters.count > 100 {
+         return false
+         }
+         else{
+         return true
+         }
+         }
+         else */
         if  tag == .EmailId {
             if string == " " || finalString.characters.count > 255{
                 return false
@@ -518,18 +603,18 @@ extension ProfileViewController : UITextFieldDelegate{
         textField.text =  textField.text?.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
         
         switch textField.tag {
-        /*
-        case TextFieldTags.FirstNameTag.rawValue:
-            
-            user.firstName! =  textField.text!
-            
-            break
-            
-        case TextFieldTags.LastName.rawValue:
-            
-            user.lastName! = textField.text!
-            break
-        */
+            /*
+             case TextFieldTags.FirstNameTag.rawValue:
+             
+             user.firstName! =  textField.text!
+             
+             break
+             
+             case TextFieldTags.LastName.rawValue:
+             
+             user.lastName! = textField.text!
+             break
+             */
         case TextFieldTags.EmailId.rawValue:
             user.emailId! = textField.text!
             
@@ -579,6 +664,11 @@ extension ProfileViewController:NMWebServiceDelegate {
             self.tableViewProfile?.reloadData()
             self.buttonLeadTime?.isUserInteractionEnabled = self.isCellEditable!
             
+            
+            if self.isPasscodeViewPresented == true{
+                self.isPasscodeViewPresented = false
+                UserServices().getUserProfile(self)
+            }
         }
         else if requestName as String == RegistrationMethods.deactivate.description{
             self.handleDeleteAccountResponse()
@@ -602,3 +692,72 @@ extension ProfileViewController:NMWebServiceDelegate {
         
     }
 }
+
+
+
+
+
+
+extension ProfileViewController: ORKPasscodeDelegate {
+    func passcodeViewControllerDidFinish(withSuccess viewController: UIViewController) {
+        
+        UserServices().updateUserProfile(self)
+        self.isPasscodeViewPresented = true
+        ORKPasscodeViewController.removePasscodeFromKeychain()
+        
+        viewController.dismiss(animated: true, completion: nil)
+    }
+    
+    func passcodeViewControllerDidFailAuthentication(_ viewController: UIViewController) {
+    }
+}
+
+extension ProfileViewController:ORKTaskViewControllerDelegate{
+    //MARK:ORKTaskViewController Delegate
+    
+    func taskViewControllerSupportsSaveAndRestore(_ taskViewController: ORKTaskViewController) -> Bool {
+        return true
+    }
+    
+    public func taskViewController(_ taskViewController: ORKTaskViewController, didFinishWith reason: ORKTaskViewControllerFinishReason, error: Error?) {
+        
+        var taskResult:Any?
+        
+        switch reason {
+            
+        case ORKTaskViewControllerFinishReason.completed:
+            print("completed")
+            taskResult = taskViewController.result
+            
+         //   let passcodeDict:NSDictionary? =  ORKKeychainWrapper.object(forKey: "ORKPasscode", error:nil) as? NSDictionary
+            
+         //   ORKPasscodeViewController.forcePasscode(passcodeDict?.object(forKey: "passcode") as! String, withTouchIdEnabled: false)
+            
+            UserServices().updateUserProfile(self)
+            
+            
+        case ORKTaskViewControllerFinishReason.failed:
+            print("failed")
+            taskResult = taskViewController.result
+        case ORKTaskViewControllerFinishReason.discarded:
+            print("discarded")
+            
+            taskResult = taskViewController.result
+        case ORKTaskViewControllerFinishReason.saved:
+            print("saved")
+            taskResult = taskViewController.restorationData
+            
+        }
+        
+        self.isPasscodeViewPresented = true
+        taskViewController.dismiss(animated: true, completion: {
+            
+        })
+    }
+    
+    func taskViewController(_ taskViewController: ORKTaskViewController, stepViewControllerWillAppear stepViewController: ORKStepViewController) {
+        
+    }
+    
+}
+

@@ -15,6 +15,7 @@ enum TextFieldTags : Int {
     case EmailId = 0
     case Password
     case ConfirmPassword
+
 }
 
 class SignUpTableViewCell: UITableViewCell {
@@ -46,6 +47,7 @@ class SignUpTableViewCell: UITableViewCell {
         if securedText == true {
             textFieldValue?.isSecureTextEntry = true
         }
+        
         labelType?.text = NSLocalizedString((data["helpText"] as? String)!, comment: "")
         textFieldValue?.placeholder = NSLocalizedString((data["placeHolder"] as? String)!, comment: "")
         

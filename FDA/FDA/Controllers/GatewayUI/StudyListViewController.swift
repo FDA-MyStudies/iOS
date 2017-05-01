@@ -66,6 +66,9 @@ class StudyListViewController: UIViewController {
         
         //self.loadTestData()
         
+        //get Profile data to check for passcode
+        //Condition missing
+        UserServices().getUserProfile(self as NMWebServiceDelegate)
       
     }
     
@@ -100,6 +103,22 @@ class StudyListViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+//MARK:Helper Methods
+    
+    /*
+     //Method to display taskViewController for passcode setup if passcode setup is enabled,called only once after signin
+    */
+    
+    func setPassCode() {
+        let passcodeStep = ORKPasscodeStep(identifier: "PasscodeStep")
+        
+        passcodeStep.passcodeType = .type4Digit
+        let task = ORKOrderedTask(identifier: "PassCodeTask", steps: [passcodeStep])
+        let taskViewController = ORKTaskViewController.init(task: task, taskRun: nil)
+        taskViewController.delegate = self
+        
+        self.navigationController?.present(taskViewController, animated: false, completion: nil)
+    }
     
     
     func loadStudiesFromDatabase(){
@@ -356,6 +375,11 @@ extension StudyListViewController:NMWebServiceDelegate {
         else if (requestName as String == WCPMethods.studyUpdates.rawValue){
             self.handleStudyUpdatedInformation()
         }
+        else if requestName as String ==  RegistrationMethods.userProfile.description {
+            if User.currentUser.settings?.passcode == true {
+                self.setPassCode()
+            }
+        }
         
         
         
@@ -394,3 +418,45 @@ extension StudyListViewController:StudyHomeViewDontrollerDelegate{
         
     }
 }
+
+
+extension StudyListViewController:ORKTaskViewControllerDelegate{
+    //MARK:ORKTaskViewController Delegate
+    
+    func taskViewControllerSupportsSaveAndRestore(_ taskViewController: ORKTaskViewController) -> Bool {
+        return true
+    }
+    
+    public func taskViewController(_ taskViewController: ORKTaskViewController, didFinishWith reason: ORKTaskViewControllerFinishReason, error: Error?) {
+        
+        var taskResult:Any?
+        
+        switch reason {
+            
+        case ORKTaskViewControllerFinishReason.completed:
+            print("completed")
+            taskResult = taskViewController.result
+
+        case ORKTaskViewControllerFinishReason.failed:
+            print("failed")
+            taskResult = taskViewController.result
+        case ORKTaskViewControllerFinishReason.discarded:
+            print("discarded")
+            
+            taskResult = taskViewController.result
+        case ORKTaskViewControllerFinishReason.saved:
+            print("saved")
+            taskResult = taskViewController.restorationData
+            
+        }
+        
+        taskViewController.dismiss(animated: true, completion:nil)
+    }
+    
+    func taskViewController(_ taskViewController: ORKTaskViewController, stepViewControllerWillAppear stepViewController: ORKStepViewController) {
+        
+    }
+    
+}
+
+

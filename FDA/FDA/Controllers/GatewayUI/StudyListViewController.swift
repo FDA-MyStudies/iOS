@@ -110,8 +110,10 @@ class StudyListViewController: UIViewController {
     */
     
     func setPassCode() {
-        let passcodeStep = ORKPasscodeStep(identifier: "PasscodeStep")
+        //Remove Passcode if already exist
+        ORKPasscodeViewController.removePasscodeFromKeychain()
         
+        let passcodeStep = ORKPasscodeStep(identifier: "PasscodeStep")
         passcodeStep.passcodeType = .type4Digit
         let task = ORKOrderedTask(identifier: "PassCodeTask", steps: [passcodeStep])
         let taskViewController = ORKTaskViewController.init(task: task, taskRun: nil)

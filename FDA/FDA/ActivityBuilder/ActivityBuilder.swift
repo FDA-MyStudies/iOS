@@ -86,8 +86,10 @@ class ActivityBuilder {
                                 let questionStep:ActivityQuestionStep? = ActivityQuestionStep()
                                 questionStep?.initWithDict(stepDict: stepDict)
                                 
-                                orkStepArray?.append((questionStep?.getQuestionStep())!)
-                                activityStepArray?.append(questionStep!)
+                                if (questionStep?.getQuestionStep()) != nil{
+                                    orkStepArray?.append((questionStep?.getQuestionStep())!)
+                                    activityStepArray?.append(questionStep!)
+                                }
                                 
                             case .form:
                                 

@@ -511,18 +511,34 @@ class ActivityQuestionStep: ActivityStep {
                 }
             case .text:
                 
-                if  Utilities.isValidValue(someObject:formatDict?[kStepQuestionTextMaxLength] as AnyObject?)
-                    &&  Utilities.isValidValue(someObject:formatDict?[kStepQuestionTextValidationRegex] as AnyObject?)
-                    &&  Utilities.isValidValue(someObject:formatDict?[kStepQuestionTextInvalidMessage] as AnyObject?)
-                    &&  Utilities.isValidValue(someObject:formatDict?[kStepQuestionTextPlaceholder] as AnyObject?)
-                    &&  Utilities.isValidValue(someObject:formatDict?[kStepQuestionTextMultipleLines] as AnyObject?){
+                //Question
+                
+                // Utilities.isValidValue(someObject:formatDict?[kStepQuestionTextMaxLength] as AnyObject?)
+                   // &&  Utilities.isValidValue(someObject:formatDict?[kStepQuestionTextValidationRegex] as AnyObject?)
+                   // &&  Utilities.isValidValue(someObject:formatDict?[kStepQuestionTextInvalidMessage] as AnyObject?)
+                   // &&  Utilities.isValidValue(someObject:formatDict?[kStepQuestionTextPlaceholder] as AnyObject?)
+                    if Utilities.isValidValue(someObject:formatDict?[kStepQuestionTextMultipleLines] as AnyObject?){
                     
                     
                     let answerFormat = ORKAnswerFormat.textAnswerFormat()
                     
-                    answerFormat.maximumLength = formatDict?[kStepQuestionTextMaxLength] as! Int
-                    answerFormat.validationRegex = formatDict?[kStepQuestionTextValidationRegex] as? String
-                    answerFormat.invalidMessage = formatDict?[kStepQuestionTextInvalidMessage] as? String
+                    if Utilities.isValidValue(someObject:formatDict?[kStepQuestionTextMaxLength] as AnyObject?){
+                         answerFormat.maximumLength = formatDict?[kStepQuestionTextMaxLength] as! Int
+                    }
+                    else{
+                         answerFormat.maximumLength = 0
+                    }
+                    
+                    if Utilities.isValidValue(someObject:formatDict?[kStepQuestionTextValidationRegex] as AnyObject?) && Utilities.isValidValue(someObject:formatDict?[kStepQuestionTextInvalidMessage] as AnyObject?){
+                        answerFormat.validationRegex = formatDict?[kStepQuestionTextValidationRegex] as? String
+                        
+                         answerFormat.invalidMessage = formatDict?[kStepQuestionTextInvalidMessage] as? String
+                    }
+                    else{
+                        answerFormat.validationRegex = nil
+                        answerFormat.invalidMessage = nil
+                    }
+                    
                     answerFormat.multipleLines = formatDict?[kStepQuestionTextMultipleLines] as! Bool
                     
                     // placeholder  usage???
@@ -665,9 +681,19 @@ class ActivityQuestionStep: ActivityStep {
                     
                     if Utilities.isValidObject(someObject: dict){
                         
-                        if  Utilities.isValidValue(someObject:dict[kORKTextChoiceText] as AnyObject?) &&  Utilities.isValidValue(someObject:dict[kORKTextChoiceValue] as AnyObject?) &&  Utilities.isValidValue(someObject:dict[kORKTextChoiceDetailText] as AnyObject?) &&  Utilities.isValidValue(someObject:dict[kORKTextChoiceExclusive] as AnyObject?) {
+                        if  Utilities.isValidValue(someObject:dict[kORKTextChoiceText] as AnyObject?) &&  Utilities.isValidValue(someObject:dict[kORKTextChoiceValue] as AnyObject?) &&  Utilities.isValidValue(someObject:dict[kORKTextChoiceExclusive] as AnyObject?) {
                             
-                            let  choice = ORKTextChoice(text: (dict[kORKTextChoiceText] as? String)!, detailText: (dict[kORKTextChoiceDetailText] as? String)!, value: (dict[kORKTextChoiceValue] as? NSCoding & NSCopying & NSObjectProtocol)! , exclusive: (dict[kORKTextChoiceExclusive] as? Bool)!)
+                            let detailText:String?
+                            
+                            if Utilities.isValidValue(someObject: (dict[kORKTextChoiceDetailText] as? String as AnyObject?)){
+                                detailText = dict[kORKTextChoiceDetailText] as? String
+                            }
+                            else{
+                                detailText = " "
+                            }
+                            
+                            
+                            let  choice = ORKTextChoice(text: (dict[kORKTextChoiceText] as? String)!, detailText: detailText, value: (dict[kORKTextChoiceValue] as? NSCoding & NSCopying & NSObjectProtocol)! , exclusive: (dict[kORKTextChoiceExclusive] as? Bool)!)
                             textChoiceArray?.append(choice)
                             
                         }

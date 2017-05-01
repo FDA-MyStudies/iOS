@@ -103,13 +103,10 @@ class ProfileViewController: UIViewController {
         
         let passcodeStep = ORKPasscodeStep(identifier: "PasscodeStep")
         
-        
-        
         passcodeStep.passcodeType = .type4Digit
         let task = ORKOrderedTask(identifier: "PassCodeTask", steps: [passcodeStep])
         let taskViewController = ORKTaskViewController.init(task: task, taskRun: nil)
         taskViewController.delegate = self
-        
         
         self.navigationController?.present(taskViewController, animated: false, completion: nil)
     }
@@ -467,6 +464,7 @@ extension ProfileViewController : UITableViewDataSource {
                 cell.buttonChangePassword?.isUserInteractionEnabled =  true
                 cell.buttonChangePassword?.isHidden =  false
                 cell.buttonChangePassword?.addTarget(self, action:#selector(pushToChangePassword), for: .touchUpInside)
+                 cell.buttonChangePassword?.setTitleColor(kUIColorForSubmitButtonBackground, for: .normal)
                 cell.textFieldValue?.isHidden = true
                 cell.isUserInteractionEnabled = true
                 
@@ -479,7 +477,7 @@ extension ProfileViewController : UITableViewDataSource {
                 
                 cell.textFieldValue?.isHidden = true
                 cell.buttonChangePassword?.isHidden =  false
-                cell.buttonChangePassword?.setTitle("ChangePasscode", for: .normal)
+                cell.buttonChangePassword?.setTitle("Change Passcode", for: .normal)
                 
                 if User.currentUser.settings?.passcode == true {
                     cell.buttonChangePassword?.isUserInteractionEnabled =  true

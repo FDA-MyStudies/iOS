@@ -967,7 +967,9 @@
                                         <button hidden="YES" opaque="NO" tag="1100" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="k3b-X7-wvN">
                                             <rect key="frame" x="285" y="10" width="71" height="33"/>
                                             <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="18"/>
-                                            <state key="normal" title="00:30"/>
+                                            <state key="normal" title="00:30">
+                                                <color key="titleColor" red="0.0" green="0.48627450979999998" blue="0.72941176470000002" alpha="1" colorSpace="calibratedRGB"/>
+                                            </state>
                                             <connections>
                                                 <action selector="buttonActionLeadTime:" destination="UWn-lb-vfU" eventType="touchUpInside" id="yG1-Uk-xyK"/>
                                             </connections>
@@ -1104,7 +1106,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="jHf-nb-dhq">
                         <barButtonItem key="rightBarButtonItem" title="Edit" id="q3A-jV-JHW">
-                            <color key="tintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                            <color key="tintColor" red="0.0" green="0.48627450979999998" blue="0.72941176470000002" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
                                 <action selector="editBarButtonAction:" destination="UWn-lb-vfU" id="mVF-PF-MsV"/>
                             </connections>

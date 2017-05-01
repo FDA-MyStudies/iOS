@@ -16,6 +16,8 @@ let kConsentSharing = "sharing"
 let kConsentReview = "review"
 let kConsentVisualScreens = "visualScreens"
 
+let kConsentVersion = "version"
+
 // SharingConsent Api Constants
 
 let kConsentSharingStepShortDesc = "shortDesc"
@@ -106,6 +108,13 @@ class ConsentBuilder{
         
         if Utilities.isValidObject(someObject: metaDataDict as AnyObject?){
             
+            if Utilities.isValidValue(someObject: metaDataDict[kConsentVersion] as AnyObject?){
+                
+                self.version =  metaDataDict[kConsentVersion] as! String?
+            }
+            else{
+                self.version = "No_Version"
+            }
             let visualConsentArray = metaDataDict[kConsentVisualScreens] as! Array<Dictionary<String,Any>>
             
             if  Utilities.isValidObject(someObject: visualConsentArray as AnyObject?){

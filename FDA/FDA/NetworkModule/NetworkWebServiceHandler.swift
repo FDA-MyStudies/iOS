@@ -215,7 +215,7 @@ class NetworkWebServiceHandler: NSObject, URLSessionDelegate {
         do{
             
             
-            var request = URLRequest.init(url: requestUrl!, cachePolicy: URLRequest.CachePolicy.useProtocolCachePolicy, timeoutInterval: self.connectionTimeoutInterval)
+            var request = URLRequest.init(url: requestUrl!, cachePolicy: URLRequest.CachePolicy.reloadIgnoringLocalCacheData, timeoutInterval: self.connectionTimeoutInterval)
           
             
             if params != nil && (params?.count)! > 0{

@@ -66,7 +66,7 @@ class ConsentResult {
                         
                         let dir = FileManager.getStorageDirectory(type: .study)
                         
-                        let fullPath = "file://" + dir + "/" + "Consent" +  "_" + "\((Study.currentStudy?.studyId)!)" + ".pdf"
+                        let fullPath = "file://" + dir + "/" + "Consent" +  "_" + "\((Study.currentStudy?.studyId)!)" + "_" + "\(ConsentBuilder.currentConsent?.version)" + ".pdf"
                         
                         self.consentPdfData = Data()
                         self.consentPdfData = data?.base64EncodedData()

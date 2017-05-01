@@ -836,6 +836,7 @@
 		6EE93DB61E93C8850027A5DC /* ActivityUI */ = {
 			isa = PBXGroup;
 			children = (
+				6EE93DBE1E93C8850027A5DC /* StudyDashboardUI */,
 				6EE93DB71E93C8850027A5DC /* Activities.plist */,
 				6EE93DB81E93C8850027A5DC /* ActivitiesTableViewCell.swift */,
 				6EE93DB91E93C8850027A5DC /* ActivitiesViewController.swift */,
@@ -870,7 +871,8 @@
 				6EBC2E7E1E94FB5300828CA1 /* StudyDashboardTrendsTableViewCell.swift */,
 				6EBC2E7F1E94FB5300828CA1 /* StudyDashboardWelcomeTableViewCell.swift */,
 			);
-			path = StudyDashboardUI;
+			name = StudyDashboardUI;
+			path = ../StudyDashboardUI;
 			sourceTree = "<group>";
 		};
 		6EED7B2E1E6541FF002C1FA3 /* Eligibility */ = {
@@ -1111,7 +1113,6 @@
 				94B3DD3C1E6ED8E500327AE5 /* StudyOverviewUI */,
 				6EE93DB61E93C8850027A5DC /* ActivityUI */,
 				6EE93DBA1E93C8850027A5DC /* ResourceUI */,
-				6EE93DBE1E93C8850027A5DC /* StudyDashboardUI */,
 			);
 			path = StudyUI;
 			sourceTree = "<group>";

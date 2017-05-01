@@ -374,16 +374,16 @@ class DBHandler: NSObject {
     }
     
     
-    class func updateActivityRestortionDataFor(activityId:String,studyId:String,restortionData:Data?){
+    class func updateActivityRestortionDataFor(activity:Activity,studyId:String,restortionData:Data?){
         
         let realm = try! Realm()
-        let dbActivities = realm.objects(DBActivity.self).filter("studyId == %@ && actvityId == %@",studyId,activityId)
+        let dbActivities = realm.objects(DBActivityRun.self).filter({$0.activityId == activity.actvityId && $0.studyId == studyId && $0.runId == activity.currentRun.runId}) //.filter("studyId == %@ && actvityId == %@ && runId == %@",studyId,activity.actvityId,activity.currrentRun.runId)
         let dbActivity = dbActivities.last
         
         print("DBPath : \(realm.configuration.fileURL)")
         try! realm.write({
             dbActivity?.restortionData = restortionData
-            realm.add(dbActivity!, update: true)
+            //realm.add(dbActivity!, update: true)
         })
         
         
@@ -407,7 +407,6 @@ class DBHandler: NSObject {
             activity.endDate    = dbActivity.endDate
             activity.type       = ActivityType(rawValue:dbActivity.type!)
             activity.frequencyType = Frequency(rawValue:dbActivity.frequencyType!)!
-            activity.restortionData = dbActivity.restortionData
             activity.totalRuns = dbActivity.activityRuns.count
             
             do {
@@ -434,7 +433,7 @@ class DBHandler: NSObject {
                     run.runId = dbRun.runId
                     run.studyId = dbRun.studyId
                     run.isCompleted = dbRun.isCompleted
-                    
+                    run.restortionData = dbRun.restortionData
                     runs.append(run)
                 }
                 activity.activityRuns = runs

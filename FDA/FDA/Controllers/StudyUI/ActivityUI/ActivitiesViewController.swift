@@ -112,8 +112,8 @@ class ActivitiesViewController : UIViewController{
         catch let error as NSError{
             print("\(error)")
         }
-    
-       */
+    */
+       
         
         if Utilities.isValidObject(someObject: Study.currentActivity?.steps as AnyObject?){
             
@@ -131,8 +131,8 @@ class ActivitiesViewController : UIViewController{
         
         
         
-        if Study.currentActivity?.restortionData != nil {
-            let restoredData = Study.currentActivity?.restortionData 
+        if Study.currentActivity?.currentRun.restortionData != nil {
+            let restoredData = Study.currentActivity?.currentRun.restortionData
             
             let result:ORKResult?
             taskViewController = ORKTaskViewController(task: task, restorationData: restoredData, delegate: self)
@@ -373,8 +373,8 @@ extension ActivitiesViewController : UITableViewDelegate{
                     }
                     else {
                         debugPrint("run is completed")
-                        Study.updateCurrentActivity(activity:activities[indexPath.row])
-                        self.updateRunStatusToComplete()
+                        //Study.updateCurrentActivity(activity:activities[indexPath.row])
+                        //self.updateRunStatusToComplete()
                     }
                 }
                
@@ -473,12 +473,13 @@ extension ActivitiesViewController:ORKTaskViewControllerDelegate{
         case ORKTaskViewControllerFinishReason.discarded:
             print("discarded")
             
-            let study = Study.currentStudy
-            let activity = Study.currentActivity
-            activity?.restortionData = nil
-            DBHandler.updateActivityRestortionDataFor(activityId:(activity?.actvityId)!, studyId: (study?.studyId)!, restortionData:nil)
+           // let study = Study.currentStudy
+           // let activity = Study.currentActivity
+           // activity?.restortionData = nil
+           // DBHandler.updateActivityRestortionDataFor(activity:activity!, studyId: (study?.studyId)!, restortionData:nil)
             
-            taskResult = taskViewController.result
+           // taskResult = taskViewController.result
+            
         case ORKTaskViewControllerFinishReason.saved:
             print("saved")
             taskResult = taskViewController.restorationData
@@ -529,7 +530,7 @@ extension ActivitiesViewController:ORKTaskViewControllerDelegate{
                 
                 let study = Study.currentStudy
                 let activity = Study.currentActivity
-                DBHandler.updateActivityRestortionDataFor(activityId:(activity?.actvityId)!, studyId: (study?.studyId)!, restortionData: taskViewController.restorationData!)
+                DBHandler.updateActivityRestortionDataFor(activity:activity!, studyId: (study?.studyId)!, restortionData: taskViewController.restorationData!)
                 
                 //Explain
                 if (ActivityBuilder.currentActivityBuilder.actvityResult?.result?.count)! < (taskViewController.result.results?.count)!{

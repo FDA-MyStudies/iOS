@@ -40,6 +40,8 @@ class StudyHomeViewController : UIViewController{
     
     @IBOutlet var viewSeperater: UIView?
     
+    var isStudyBookMarked = false
+    
     var delegate:StudyHomeViewDontrollerDelegate?
     
     var pageViewController: PageViewController? {
@@ -209,6 +211,7 @@ class StudyHomeViewController : UIViewController{
             userStudyStatus =  user.bookmarkStudy(studyId: (study?.studyId)!)
         }
         
+        self.isStudyBookMarked = true
         UserServices().updateStudyBookmarkStatus(studyStauts: userStudyStatus, delegate: self)
     }
     
@@ -326,7 +329,7 @@ class StudyHomeViewController : UIViewController{
     
     //Fired when the user taps on the pageControl to change its current page (Commented as this is not working)
     func didChangePageControlValue() {
-        pageViewController?.scrollToViewController(index: (pageControlView?.currentPage)!)
+       // pageViewController?.scrollToViewController(index: (pageControlView?.currentPage)!)
     }
     
     /* Push screen back to Studydashboard Tabbar controller */
@@ -393,15 +396,28 @@ extension StudyHomeViewController:NMWebServiceDelegate {
         
         if requestName as String == RegistrationMethods.updatePreferences.method.methodName{
             
-            UserServices().updateUserEligibilityConsentStatus(eligibilityStatus: true, consentStatus:(ConsentBuilder.currentConsent?.consentStatus)!  , delegate: self)
+            if isStudyBookMarked {
+                
+            }
+            else {
+                self.addProgressIndicator()
+                UserServices().updateUserEligibilityConsentStatus(eligibilityStatus: true, consentStatus:(ConsentBuilder.currentConsent?.consentStatus)!  , delegate: self)
+            }
+            
         }
         
         if requestName as String == ResponseMethods.enroll.description {
+            
+            self.addProgressIndicator()
             
             let currentUserStudyStatus =  User.currentUser.updateStudyStatus(studyId:(Study.currentStudy?.studyId)!  , status: .inProgress)
             
             ConsentBuilder.currentConsent?.consentStatus = .completed
             UserServices().updateUserParticipatedStatus(studyStauts: currentUserStudyStatus, delegate: self)
+        }
+        
+        
+        if requestName as String == RegistrationMethods.updateEligibilityConsentStatus.method.methodName{
             
             if( User.currentUser.getStudyStatus(studyId:(Study.currentStudy?.studyId)! ) == UserStudyStatus.StudyStatus.inProgress){
                 self.pushToStudyDashboard()
@@ -473,12 +489,14 @@ extension StudyHomeViewController:ORKTaskViewControllerDelegate{
         else{
             //activityBuilder?.actvityResult?.initWithORKTaskResult(taskResult: taskViewController.result)
             
-            taskViewController.dismiss(animated: true, completion: nil)
             
             if reason == ORKTaskViewControllerFinishReason.discarded{
                 
                 _ = self.navigationController?.popViewController(animated: true)
             }
+            taskViewController.dismiss(animated: true, completion: nil)
+            
+            
         }
     }
     

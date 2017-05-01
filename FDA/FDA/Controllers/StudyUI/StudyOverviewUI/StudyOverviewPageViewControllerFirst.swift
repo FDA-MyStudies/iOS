@@ -20,7 +20,7 @@ class StudyOverviewViewControllerFirst : UIViewController{
     @IBOutlet var labelTitle : UILabel?
     @IBOutlet var labelDescription : UILabel?
     @IBOutlet var imageViewStudy : UIImageView?
-    
+    var pageIndex:Int!
     var overViewWebsiteLink : String?
     var overviewSectionDetail : OverviewSection!
     var moviePlayer:MPMoviePlayerViewController!

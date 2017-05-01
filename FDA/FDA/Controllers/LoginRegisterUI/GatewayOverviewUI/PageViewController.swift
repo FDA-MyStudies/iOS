@@ -112,6 +112,10 @@ class PageViewController : UIPageViewController{
                 index = (viewController as! FirstGatewayOverviewViewController).pageIndex
             case is SecondGatewayOverviewViewController:
                 index = (viewController as! SecondGatewayOverviewViewController).pageIndex
+            case is StudyOverviewViewControllerFirst:
+                index = (viewController as! StudyOverviewViewControllerFirst).pageIndex
+            case is StudyOverviewViewControllerSecond:
+                index = (viewController as! StudyOverviewViewControllerSecond).pageIndex
             default:
                 index = 0
             }
@@ -147,6 +151,7 @@ class PageViewController : UIPageViewController{
             
             //get first overview controller
             let firstController = storyboard.instantiateViewController(withIdentifier: "FirstViewController") as! StudyOverviewViewControllerFirst
+            firstController.pageIndex = 0
             firstController.overViewWebsiteLink = overview.websiteLink
             firstController.overviewSectionDetail = overview.sections[0]
             controllers.append(firstController)
@@ -157,6 +162,7 @@ class PageViewController : UIPageViewController{
                     let restControllers = storyboard.instantiateViewController(withIdentifier: "SecondViewController") as! StudyOverviewViewControllerSecond
                     restControllers.overviewSectionDetail = overview.sections[section]
                      restControllers.overViewWebsiteLink = overview.websiteLink
+                    restControllers.pageIndex = section
                     controllers.append(restControllers)
                 }
             }

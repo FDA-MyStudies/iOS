@@ -30,7 +30,7 @@ class DBActivity: Object {
     
     //dynamic var result:ActivityResult?
     
-    dynamic var restortionData:Data?
+    
     var activityRuns = List<DBActivityRun>()
     
     override static func primaryKey() -> String? {
@@ -47,6 +47,7 @@ class DBActivityRun: Object {
    dynamic  var studyId:String!
    dynamic  var activityId:String!
    dynamic  var isCompleted:Bool = false
+    dynamic var restortionData:Data?
     
 }
 

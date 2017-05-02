@@ -29,6 +29,8 @@
             
             UIView.appearance(whenContainedInInstancesOf: [ORKTaskViewController.self]).tintColor = kUIColorForSubmitButtonBackground
             
+            self.checkForAppUpdate()
+            
             return true
         }
         
@@ -81,6 +83,9 @@
             // UINavigationBar.appearance().tintColor = UIColor.clear
         }
         
+        func checkForAppUpdate(){
+            WCPServices().checkForAppUpdates(delegate: self)
+        }
         
          func checkPasscode(viewController:UIViewController) {
             if User.currentUser.userType == .FDAUser {
@@ -129,7 +134,46 @@
             return URLSession.AuthChallengeDisposition.useCredential
         }
     }
-    
+    extension AppDelegate:NMWebServiceDelegate {
+        func startedRequest(_ manager: NetworkManager, requestName: NSString) {
+            Logger.sharedInstance.info("requestname : \(requestName)")
+            //self.addProgressIndicator()
+        }
+        func finishedRequest(_ manager: NetworkManager, requestName: NSString, response: AnyObject?) {
+            Logger.sharedInstance.info("requestname : \(requestName) Response : \(response)")
+            
+            if requestName as String == WCPMethods.appUpdates.method.methodName {
+                
+                let appVersion = Utilities.getAppVersion()
+                if appVersion != response?["currentVersion"] as! String {
+                    
+                    if response?["forceUpdate"] as! Bool {
+                        
+                        let appBlocker = AppUpdateBlocker.instanceFromNib(frame:(UIApplication.shared.keyWindow?.bounds)!, detail: response as! Dictionary<String, Any>);
+                        UIApplication.shared.keyWindow?.addSubview(appBlocker);
+                    }
+                    else {
+                         UIUtilities.showAlertWithMessage(alertMessage: response?["message"] as! String);
+                    }
+                    
+                    
+                }
+              
+                
+            }
+            
+            
+            
+        }
+        func failedRequest(_ manager: NetworkManager, requestName: NSString, error: NSError) {
+            Logger.sharedInstance.info("requestname : \(requestName)")
+            
+            
+            
+            
+        }
+    }
+
    
     extension AppDelegate:ORKTaskViewControllerDelegate{
         //MARK:ORKTaskViewController Delegate

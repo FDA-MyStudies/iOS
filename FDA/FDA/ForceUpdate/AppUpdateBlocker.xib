@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="HelveticaNeue.ttc">
+            <string>HelveticaNeue</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="AppUpdateBlocker" customModule="FDA" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HHW-5w-hQf">
+                    <rect key="frame" x="130" y="563" width="115" height="41"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="41" id="Egt-dQ-Fu5"/>
+                        <constraint firstAttribute="width" constant="115" id="gnw-AK-95C"/>
+                    </constraints>
+                    <state key="normal" title="Upgrade">
+                        <color key="titleColor" red="0.28627450980000002" green="0.71372549019999998" blue="0.8980392157" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </state>
+                    <connections>
+                        <action selector="buttonUpgradeAction" destination="iN0-l3-epB" eventType="touchUpInside" id="7QJ-pP-cDG"/>
+                    </connections>
+                </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="There is a new version of the app available with several useful updates. Please upgrade the app to continue using it." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="6" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k95-ae-ceN">
+                    <rect key="frame" x="16" y="220" width="343" height="308"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="308" id="vL6-SK-E5S"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="19"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="FDALISTENS! 2.0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Par-hA-Csd">
+                    <rect key="frame" x="16" y="185" width="343" height="21"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="21" id="jyP-7K-jav"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="18"/>
+                    <color key="textColor" red="0.0" green="0.48627450979999998" blue="0.72941176470000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="Par-hA-Csd" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="16" id="BAc-kt-gwV"/>
+                <constraint firstAttribute="bottom" secondItem="HHW-5w-hQf" secondAttribute="bottom" constant="63" id="PPY-f3-2K2"/>
+                <constraint firstAttribute="trailing" secondItem="k95-ae-ceN" secondAttribute="trailing" constant="16" id="TRM-4C-XRk"/>
+                <constraint firstItem="k95-ae-ceN" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="16" id="adK-E5-K1q"/>
+                <constraint firstItem="k95-ae-ceN" firstAttribute="top" secondItem="Par-hA-Csd" secondAttribute="bottom" constant="14" id="f1g-fX-cVM"/>
+                <constraint firstItem="HHW-5w-hQf" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="mKt-ID-qg4"/>
+                <constraint firstAttribute="trailing" secondItem="Par-hA-Csd" secondAttribute="trailing" constant="16" id="nkU-Rd-lqc"/>
+                <constraint firstItem="HHW-5w-hQf" firstAttribute="top" secondItem="k95-ae-ceN" secondAttribute="bottom" constant="35" id="qMv-di-Fji"/>
+                <constraint firstItem="k95-ae-ceN" firstAttribute="top" secondItem="Par-hA-Csd" secondAttribute="bottom" constant="14" id="sau-7Y-stg"/>
+            </constraints>
+            <connections>
+                <outlet property="buttonUpgrade" destination="HHW-5w-hQf" id="qrH-aF-Vb5"/>
+                <outlet property="labelMessage" destination="k95-ae-ceN" id="zv4-gs-P04"/>
+                <outlet property="labelVersionNumber" destination="Par-hA-Csd" id="eAq-Fz-qxO"/>
+            </connections>
+            <point key="canvasLocation" x="24.5" y="51.5"/>
+        </view>
+    </objects>
+</document>

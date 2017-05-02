@@ -128,7 +128,7 @@ class StudyDashboardViewController : UIViewController{
     
      //MARK:Reques calls
     func sendRequestToGetDashboardInfo(){
-        
+        WCPServices().getStudyDashboardInfo(studyId: (Study.currentStudy?.studyId)!, delegate: self)
     }
     
 }
@@ -263,6 +263,9 @@ extension StudyDashboardViewController:NMWebServiceDelegate {
         
         if requestName as String == WCPMethods.eligibilityConsent.method.methodName {
             self.createEligibilityConsentTask()
+        }
+        else if requestName as String == WCPMethods.studyDashboard.method.methodName {
+            
         }
         
     }

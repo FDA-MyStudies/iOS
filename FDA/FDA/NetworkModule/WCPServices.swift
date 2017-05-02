@@ -297,6 +297,10 @@ class WCPServices: NSObject {
 
     }
     
+    func handleStudyDashboard(response:Dictionary<String, Any>){
+        
+    }
+    
     func handleConsentDocument(response:Dictionary<String, Any>){
         
         let consentDict = response[kConsent] as! Dictionary<String, Any>
@@ -447,7 +451,8 @@ extension WCPServices:NMWebServiceDelegate{
             self.handleStudyActivityList(response: response as! Dictionary<String, Any>)
         case .activity:
             self.handleGetStudyActivityMetadata(response: response as! Dictionary<String, Any>)
-        case .studyDashboard:break
+        case .studyDashboard:
+            self.handleStudyDashboard(response: response as! Dictionary<String, Any>)
         case .termsPolicy:
             self.handleTermsAndPolicy(response:response as! Dictionary<String, Any> )
         case .notifications:break

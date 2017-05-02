@@ -72,6 +72,8 @@ let kActivityRunId = "activityRunId"
 let kLogoutReason = "reason"
 let kLogoutReasonValue = "Logout"
 
+
+
 class UserServices: NSObject {
     
     let networkManager = NetworkManager.sharedInstance()
@@ -292,6 +294,20 @@ class UserServices: NSObject {
         self.sendRequestWith(method:method, params: nil, headers: headerParams)
     }
     
+    
+    func getStudyStates(_ delegate:NMWebServiceDelegate){
+        
+        self.delegate = delegate
+        
+        let user = User.currentUser
+        let headerParams = [kUserId : user.userId!,
+                            kUserAuthToken: user.authToken] as Dictionary<String, String>
+        
+        let method = RegistrationMethods.studyState.method
+        
+        self.sendRequestWith(method:method, params: nil, headers: headerParams)
+    }
+    
     func updateStudyBookmarkStatus(studyStauts:UserStudyStatus , delegate:NMWebServiceDelegate){
         self.delegate = delegate
         
@@ -299,7 +315,7 @@ class UserServices: NSObject {
         let headerParams = [kUserId : user.userId!]
         
         let params = [kStudies:[studyStauts.getBookmarkUserStudyStatus()]] as [String : Any]
-        let method = RegistrationMethods.updatePreferences.method
+        let method = RegistrationMethods.updateStudyState.method
         
         self.sendRequestWith(method:method, params: params, headers: headerParams)
     }
@@ -311,7 +327,7 @@ class UserServices: NSObject {
         let headerParams = [kUserId : user.userId] as Dictionary<String, String>
         
         let params = [kActivites:[activityStauts.getBookmarkUserActivityStatus()]] as [String : Any]
-        let method = RegistrationMethods.updatePreferences.method
+        let method = RegistrationMethods.updateActivityState.method
         
         self.sendRequestWith(method:method, params: params, headers: headerParams)
     }
@@ -326,7 +342,7 @@ class UserServices: NSObject {
         let user = User.currentUser
         let headerParams = [kUserId : user.userId] as Dictionary<String, String>
         let params = [kStudies:[studyStauts.getParticipatedUserStudyStatus()]] as [String : Any]
-        let method = RegistrationMethods.updatePreferences.method
+        let method = RegistrationMethods.updateStudyState.method
         
         self.sendRequestWith(method:method, params: params, headers: headerParams)
     }
@@ -339,7 +355,7 @@ class UserServices: NSObject {
         let user = User.currentUser
         let headerParams = [kUserId : user.userId] as Dictionary<String, String>
         let params = [kActivites:[activityStatus.getParticipatedUserActivityStatus()]] as [String : Any]
-        let method = RegistrationMethods.updatePreferences.method
+        let method = RegistrationMethods.updateActivityState.method
         
         self.sendRequestWith(method:method, params: params, headers: headerParams)
     }
@@ -600,7 +616,27 @@ class UserServices: NSObject {
         
         
     }
-    
+    func handleGetStudyStatesResponse(response:Dictionary<String, Any>){
+        let user = User.currentUser
+        //studies
+        if let studies = response[kStudies] as? Array<Dictionary<String, Any>> {
+            
+            for study in studies {
+                let participatedStudy = UserStudyStatus(detail: study)
+                user.participatedStudies.append(participatedStudy)
+            }
+        }
+    }
+    func handleGetActivityStatesResponse(response:Dictionary<String, Any>){
+        let user = User.currentUser
+        //activities
+        if let activites = response[kActivites]  as? Array<Dictionary<String, Any>> {
+            for activity in activites {
+                let participatedActivity = UserActivityStatus(detail: activity)
+                user.participatedActivites.append(participatedActivity)
+            }
+        }
+    }
     func handleUpdateEligibilityConsentStatusResponse(response:Dictionary<String, Any>){
         
         
@@ -720,6 +756,7 @@ extension UserServices:NMWebServiceDelegate{
             
         case RegistrationMethods.userPreferences.description as String:
             
+            
             self.handleGetPreferenceResponse(response: response as! Dictionary<String, Any>)
         case RegistrationMethods.changePassword.description as String:
             
@@ -729,8 +766,12 @@ extension UserServices:NMWebServiceDelegate{
             
         case RegistrationMethods.updateEligibilityConsentStatus.description as String: break
         case RegistrationMethods.consentPDF.description as String: break
+        case RegistrationMethods.studyState.description as String:
+            self.handleGetStudyStatesResponse(response:  response as! Dictionary<String, Any>)
+        case RegistrationMethods.updateStudyState.description as String: break
         case RegistrationMethods.updateActivityState.description as String: break
-        case RegistrationMethods.activityState.description as String: break
+        case RegistrationMethods.activityState.description as String:
+            self.handleGetActivityStatesResponse(response:  response as! Dictionary<String, Any>)
         case RegistrationMethods.withdraw.description as String: break
         case RegistrationMethods.forgotPassword.description as String: break
             

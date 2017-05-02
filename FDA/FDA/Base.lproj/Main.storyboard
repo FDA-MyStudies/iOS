@@ -89,13 +89,19 @@
                     </view>
                     <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
                     <navigationItem key="navigationItem" id="a8h-MV-o3u">
-                        <barButtonItem key="rightBarButtonItem" title="Cancel" id="U5e-0P-U9P">
+                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="U5e-0P-U9P">
                             <connections>
                                 <action selector="cancelButtonClicked:" destination="bUD-GQ-LvD" id="xFc-EM-Fx6"/>
                             </connections>
                         </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" image="shareIcon" id="9Q5-Vd-vw7">
+                            <connections>
+                                <action selector="buttonActionShare:" destination="bUD-GQ-LvD" id="OmV-Jj-UAk"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="barItemShare" destination="9Q5-Vd-vw7" id="L7h-x0-p6L"/>
                         <outlet property="webView" destination="hcg-Vp-i82" id="Sy0-fh-koW"/>
                     </connections>
                 </viewController>

@@ -18,6 +18,8 @@ enum RegistrationMethods:String {
     case updatePreferences
     case updateEligibilityConsentStatus
     case consentPDF
+    case updateStudyState
+    case studyState
     case updateActivityState
     case activityState
     case withdraw
@@ -28,6 +30,8 @@ enum RegistrationMethods:String {
     case resendConfirmation
     case deactivate
     case verify
+    
+    
     
     var description:String{
         switch self {
@@ -41,7 +45,7 @@ enum RegistrationMethods:String {
         
         switch self {
        
-        case .activityState,.consentPDF,.deleteAccount,.confirmRegistration,.userProfile,.userPreferences:
+        case .activityState,.consentPDF,.deleteAccount,.confirmRegistration,.userProfile,.userPreferences,.studyState:
             //GET Methods
             return Method(methodName:(self.rawValue+".api"), methodType: .httpMethodGet, requestType: .requestTypeJSON)
         case .withdraw,.logout, .deactivate:

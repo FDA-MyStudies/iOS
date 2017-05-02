@@ -41,6 +41,10 @@ class StudyDashboardViewController : UIViewController{
         
         labelStudyTitle?.text = Study.currentStudy?.name
         
+        
+        
+        
+        
         //check if consent is udpated
         
         //TO BE REMOVED FOLLOWING 
@@ -120,6 +124,13 @@ class StudyDashboardViewController : UIViewController{
         
         
     }
+    
+    
+     //MARK:Reques calls
+    func sendRequestToGetDashboardInfo(){
+        
+    }
+    
 }
 
 //MARK: TableView Data source

@@ -77,7 +77,7 @@ class LabKeyServices: NSObject {
         
         let params = [kActivityType:ActivityType! ,
                       kActivityInfoMetaData:info,
-                      kParticipantId:User.currentUser.userId,
+                      kParticipantId:"32ac0aa495530a1960f5d2849ebdf4d1",
                       kActivityResponseData :responseData
             ] as [String : Any]
         

@@ -96,6 +96,8 @@ class ConsentSharePdfStepViewController: ORKStepViewController {
                 
                 try data?.write(to:  URL(string:fullPath)!)
                 
+                FileDownloadManager.encyptFile(pathURL:URL(string:fullPath)! )
+                
                 //try data?.write(to: URL(string:fullPath)! , options: .atomicWrite)
                 
                 // writing to disk

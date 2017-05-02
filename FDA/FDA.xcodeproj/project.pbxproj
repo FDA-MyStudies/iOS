@@ -142,7 +142,7 @@
 		94B3DD451E6ED8E500327AE5 /* ProfileTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B3DD1C1E6ED8E500327AE5 /* ProfileTableViewCell.swift */; };
 		94B3DD461E6ED8E500327AE5 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B3DD1D1E6ED8E500327AE5 /* ProfileViewController.swift */; };
 		94B3DD471E6ED8E500327AE5 /* ResourcesListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B3DD1E1E6ED8E500327AE5 /* ResourcesListCell.swift */; };
-		94B3DD481E6ED8E500327AE5 /* ResourcesListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B3DD1F1E6ED8E500327AE5 /* ResourcesListViewController.swift */; };
+		94B3DD481E6ED8E500327AE5 /* GatewayResourcesListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B3DD1F1E6ED8E500327AE5 /* GatewayResourcesListViewController.swift */; };
 		94B3DD491E6ED8E500327AE5 /* StudyList.json in Resources */ = {isa = PBXBuildFile; fileRef = 94B3DD201E6ED8E500327AE5 /* StudyList.json */; };
 		94B3DD4A1E6ED8E500327AE5 /* StudyListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B3DD211E6ED8E500327AE5 /* StudyListCell.swift */; };
 		94B3DD4B1E6ED8E500327AE5 /* StudyListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B3DD221E6ED8E500327AE5 /* StudyListViewController.swift */; };
@@ -377,7 +377,7 @@
 		94B3DD1C1E6ED8E500327AE5 /* ProfileTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileTableViewCell.swift; sourceTree = "<group>"; };
 		94B3DD1D1E6ED8E500327AE5 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		94B3DD1E1E6ED8E500327AE5 /* ResourcesListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResourcesListCell.swift; sourceTree = "<group>"; };
-		94B3DD1F1E6ED8E500327AE5 /* ResourcesListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResourcesListViewController.swift; sourceTree = "<group>"; };
+		94B3DD1F1E6ED8E500327AE5 /* GatewayResourcesListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GatewayResourcesListViewController.swift; sourceTree = "<group>"; };
 		94B3DD201E6ED8E500327AE5 /* StudyList.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = StudyList.json; sourceTree = "<group>"; };
 		94B3DD211E6ED8E500327AE5 /* StudyListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudyListCell.swift; sourceTree = "<group>"; };
 		94B3DD221E6ED8E500327AE5 /* StudyListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudyListViewController.swift; sourceTree = "<group>"; };
@@ -1026,7 +1026,7 @@
 				94B3DD1A1E6ED8E500327AE5 /* ProfileViewUI */,
 				4884E3501E825E54002DA0B9 /* ReachoutUI */,
 				94B3DD1E1E6ED8E500327AE5 /* ResourcesListCell.swift */,
-				94B3DD1F1E6ED8E500327AE5 /* ResourcesListViewController.swift */,
+				94B3DD1F1E6ED8E500327AE5 /* GatewayResourcesListViewController.swift */,
 				94B3DD201E6ED8E500327AE5 /* StudyList.json */,
 				94B3DD211E6ED8E500327AE5 /* StudyListCell.swift */,
 				94B3DD221E6ED8E500327AE5 /* StudyListViewController.swift */,
@@ -1632,7 +1632,7 @@
 				94B3DD461E6ED8E500327AE5 /* ProfileViewController.swift in Sources */,
 				94B3DD5E1E6ED8E500327AE5 /* StudyOverviewPageViewController.swift in Sources */,
 				6ED1B21E1E54252500BF463F /* Schedule.swift in Sources */,
-				94B3DD481E6ED8E500327AE5 /* ResourcesListViewController.swift in Sources */,
+				94B3DD481E6ED8E500327AE5 /* GatewayResourcesListViewController.swift in Sources */,
 				6ED1B2331E54256700BF463F /* ActivityQuestionStep.swift in Sources */,
 				6EE93DCB1E93C8850027A5DC /* ActivitiesViewController.swift in Sources */,
 				6ED1B2211E54253800BF463F /* Activity.swift in Sources */,

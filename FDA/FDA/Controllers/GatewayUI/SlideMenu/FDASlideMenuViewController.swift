@@ -37,7 +37,7 @@ open class FDASlideMenuViewController: SlideMenuController {
         if let vc = UIApplication.topViewController() {
             if vc is StudyListViewController ||
                 vc is NotificationViewController ||
-                vc is ResourcesListViewController ||
+                vc is GatewayResourcesListViewController ||
                 vc is ProfileViewController {
                 return true
             }

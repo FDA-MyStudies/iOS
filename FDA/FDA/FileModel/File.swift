@@ -56,7 +56,7 @@ class File{
         self.mimeType = MimeType.txt
         self.name = ""
         self.link  = ""
-        self.localPath = ""
+        //self.localPath = ""
     }
     
     func getMIMEType() -> String {
@@ -86,19 +86,7 @@ class File{
             if Utilities.isValidValue(someObject: dict[kFileLink] as AnyObject)  {
                 self.link = dict[kFileLink] as? String
             }
-            //download data
-            var fileData:NSData?
-            
-            fileData = NSData()
-            //save data
-            if fileData != nil{
-                if saveDataIntoDocuments(data: fileData!)  {
-                    NSLog("File saved successfully")
-                }
-                else{
-                    NSLog("File could not be saved")
-                }
-            }
+           
             
         }
         else{
@@ -126,25 +114,14 @@ class File{
             }
             
             
-            //download data
-            var fileData:NSData?
-            fileData = NSData()
-            //save data
-            if fileData != nil{
-                if saveDataIntoDocuments(data: fileData!)  {
-                    NSLog("File saved successfully")
-                }
-                else{
-                    NSLog("File could not be saved")
-                }
-            }
+            
         }
         else{
             Logger.sharedInstance.debug("File Dictionary is null:\(dict)")
         }
     }
     
-    
+    /*
     func saveDataIntoDocuments(data:NSData) -> Bool {
         
         do {
@@ -176,7 +153,7 @@ class File{
             self.localPath = ""
             return false
         }
-    }
+    }*/
 }
 
 

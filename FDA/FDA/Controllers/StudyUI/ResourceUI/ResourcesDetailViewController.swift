@@ -199,7 +199,7 @@ extension ResourcesDetailViewController:FileDownloadManagerDelegates{
     func download(manager: FileDownloadManager, didFinishDownloadingAtPath path:String) {
         
         
-        let data = manager.decrytFile(pathURL: URL.init(string: path))
+        let data = FileDownloadManager.decrytFile(pathURL: URL.init(string: path))
         
         if data != nil{
             self.resource?.file?.localPath = path

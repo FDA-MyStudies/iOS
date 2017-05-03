@@ -20,13 +20,15 @@ class StudyOverviewViewControllerFirst : UIViewController{
     @IBOutlet var labelTitle : UILabel?
     @IBOutlet var labelDescription : UILabel?
     @IBOutlet var imageViewStudy : UIImageView?
+    
     var pageIndex:Int!
     var overViewWebsiteLink : String?
     var overviewSectionDetail : OverviewSection!
     var moviePlayer:MPMoviePlayerViewController!
 
     
-//MARK:- View Lifecycle
+//MARK:- Viewcontroller Lifecycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -96,10 +98,34 @@ class StudyOverviewViewControllerFirst : UIViewController{
       super.viewDidDisappear(animated)
         
     }
+    
+    
+//MARK:-
+    
+    /** 
+     
+     This method is used for Video player completed the video notification 
+     
+     @param notification    used to access the different notifications
+     
+     */
+    func moviePlayBackDidFinish(notification: NSNotification) {
+        //  println("moviePlayBackDidFinish:")
+        moviePlayer.moviePlayer.stop()
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.MPMoviePlayerPlaybackDidFinish, object: nil)
+        moviePlayer.dismiss(animated: true, completion: nil)
+    }
+    
    
 //MARK:- Button Actions
     
-    /* Watch Video Button clicked */
+    /**
+     
+     This method is used to Watch Video 
+     
+     @param sender  Access any kind of object
+     
+     */
     @IBAction func watchVideoButtonAction(_ sender: Any) {
         
         let urlString = overviewSectionDetail.link!
@@ -125,7 +151,14 @@ class StudyOverviewViewControllerFirst : UIViewController{
         }
     }
     
-    /* Join Study button clicked */
+    
+    /** 
+     
+     This method is used to Join Study
+     
+     @param sender  Access any kind of object
+     
+     */
     @IBAction func buttonActionJoinStudy(_ sender: Any){
         
         if User.currentUser.userType == UserType.AnonymousUser{
@@ -133,8 +166,15 @@ class StudyOverviewViewControllerFirst : UIViewController{
             leftController.changeViewController(.reachOut_signIn)
         }
     }
+    
 
-    /* Visit website button clicked */
+    /**
+     
+     This method is used to Visit website 
+     
+     @param sender  Access any kind of object
+     
+     */
     @IBAction func visitWebsiteButtonAction(_ sender: Any) {
         
         if overViewWebsiteLink != nil {
@@ -147,15 +187,8 @@ class StudyOverviewViewControllerFirst : UIViewController{
             self.navigationController?.present(webViewController, animated: true, completion: nil)
         }
     }
-    
-    /* Video player completed the video notification */
-    func moviePlayBackDidFinish(notification: NSNotification) {
-        //  println("moviePlayBackDidFinish:")
-        moviePlayer.moviePlayer.stop()
-        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.MPMoviePlayerPlaybackDidFinish, object: nil)
-        moviePlayer.dismiss(animated: true, completion: nil)
-    }
 }
+
 
 //MARK:- WCPServices Response handler
 

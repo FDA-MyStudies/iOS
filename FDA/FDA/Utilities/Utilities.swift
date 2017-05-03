@@ -48,7 +48,6 @@ struct iOSVersion {
 
 class Utilities: NSObject {
     
-    
     class func getAttributedText(plainString pstr: String, boldString bstr: String, fontSize size: CGFloat,plainFontName:String,boldFontName:String) -> NSAttributedString {
         
         let title:String = pstr + " " + bstr
@@ -60,9 +59,7 @@ class Utilities: NSObject {
         attributedString.addAttributes(stringAttributes2, range: (title as NSString).range(of: bstr))
         
         return attributedString
-        
     }
-    
     
     class func getUIColorFromHex(_ hexInt: Int, alpha:CGFloat? = 1.0) -> UIColor {
         
@@ -100,7 +97,6 @@ class Utilities: NSObject {
         )
     }
     
-    
     class func getDateStringWithFormat(_ dateFormatter:String,date:Date) ->String{
         
         let formatter = DateFormatter()
@@ -110,7 +106,6 @@ class Utilities: NSObject {
         let dateString = formatter.string(from: date)
         
         return dateString
-        
     }
     
     class func getDateFromStringWithFormat(_ dateFormate:String,resultDate:String)->Date {
@@ -122,7 +117,6 @@ class Utilities: NSObject {
         let resDate = formatter.date(from: resultDate)
         
         return  resDate!
-        
     }
     
     class func frameForText(_ text: String, font: UIFont) -> CGSize {
@@ -133,14 +127,11 @@ class Utilities: NSObject {
         return size
     }
     
-    
     class func paddingViewForTextFiled(_ textFiled:UITextField)->Void{
         let paddingView = UIView(frame: CGRect(x: 0, y: 0, width: 20, height: textFiled.frame.height))
         textFiled.leftView = paddingView
         textFiled.leftViewMode = UITextFieldViewMode.always
         // textFiled.layoutIfNeeded()
-        
-        
     }
     
     class func clearTheNotificationData(){
@@ -148,6 +139,7 @@ class Utilities: NSObject {
         UserDefaults.standard.removeObject(forKey: "NotifName")
         UserDefaults.standard.removeObject(forKey: "NotifTime")
     }
+    
     class func validateInputValue(value : String, valueType : String)-> Bool{
         
         var valueRegex = ""
@@ -185,8 +177,6 @@ class Utilities: NSObject {
         else{
             return emailTest.evaluate(with: testStr)
         }
-        
-        
     }
     
     //Used to check all the validations for password
@@ -196,8 +186,6 @@ class Utilities: NSObject {
         let lowercaseLetterRegEx  = ".*[a-z]+.*"
         let lowercaseTextTest = NSPredicate(format:"SELF MATCHES %@", lowercaseLetterRegEx)
         let lowercaseresult = lowercaseTextTest.evaluate(with: text)
-        
-        
         
         let capitalLetterRegEx  = ".*[A-Z]+.*"
         let texttest = NSPredicate(format:"SELF MATCHES %@", capitalLetterRegEx)
@@ -227,8 +215,7 @@ class Utilities: NSObject {
     }
     
     
-    class func formatNumber( mobileNumber: NSString)-> NSString
-    {
+    class func formatNumber( mobileNumber: NSString)-> NSString{
         var mobileNumber = mobileNumber
         mobileNumber = mobileNumber.replacingOccurrences(of: "(", with: "") as NSString
         mobileNumber = mobileNumber.replacingOccurrences(of: ")", with: "") as NSString
@@ -246,7 +233,6 @@ class Utilities: NSObject {
         
         return mobileNumber;
     }
-    
     
     class  func getLength( mobileNumber : NSString) -> Int
     {
@@ -275,7 +261,6 @@ class Utilities: NSObject {
         
         print("\(capitalresult)")
         
-        
         let numberRegEx  = ".*[a-z0-9A-Z]+.*"
         let texttest1 = NSPredicate(format:"SELF MATCHES %@", numberRegEx)
         let numberresult = texttest1.evaluate(with: password)
@@ -283,7 +268,6 @@ class Utilities: NSObject {
         print("\(numberresult)")
         
         return capitalresult && numberresult
-        
     }
     
     class func isValidValue(someObject: AnyObject?) -> Bool {
@@ -321,13 +305,11 @@ class Utilities: NSObject {
                 Logger.sharedInstance.debug("Value is null:\(someObject)")
                 return false
             }
-            
         }
         else{
             return false
         }
     }
-    
     
     class func isValidValueAndOfType(someValue:AnyObject? , type:AnyClass )->Bool{
         /* Method to check if value is of specific Type
@@ -357,10 +339,7 @@ class Utilities: NSObject {
             Logger.sharedInstance.debug("Value is null:\(someObject)")
             return false
         }
-        
     }
-    
-    
     
     class func isValidObject(someObject: AnyObject?)-> Bool{
         
@@ -390,8 +369,6 @@ class Utilities: NSObject {
             Logger.sharedInstance.debug("Object is null:\(someObject)")
             return false
         }
-        
-        
     }
     
     class func getDateFromString(dateString:String)->Date?{
@@ -431,14 +408,9 @@ class Utilities: NSObject {
         let dateValue = dateFormatter.string(from: date)
         
         return dateValue
-        
     }
     
-    
-    
-    
     class func getAppVersion() -> String{
-        
         let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as! String
         let bundleVersion = Bundle.main.infoDictionary?["CFBundleVersion"] as! String
         return version + "." + bundleVersion
@@ -450,22 +422,16 @@ class Utilities: NSObject {
     }
     
     class func showAlertWithMessage(alertMessage:String)->Void{
-        
         self.showAlertWithTitleAndMessage(title:"", message: alertMessage as NSString)
-        
     }
     
     class func showAlertWithTitleAndMessage(title: NSString, message : NSString)->Void {
-        
-        
         alert.title = title as String
         alert.message = message as String
         alert.addButton(withTitle: "OK")
         alert.show()
     }
-    
 }
-
 
 extension FileManager {
     class func documentsDir() -> String {
@@ -484,7 +450,6 @@ extension FileManager {
         var paths = NSSearchPathForDirectoriesInDomains(.cachesDirectory, .userDomainMask, true) as [String]
         return paths[0]
     }
-    
     
     class func getStorageDirectory(type:DirectoryType) -> String{
         /* Method to create Study or gateway directory
@@ -516,5 +481,4 @@ extension FileManager {
             }
         }
     }
-    
 }

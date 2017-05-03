@@ -105,8 +105,30 @@ class StudyListViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+  
+//MARK:Button Actions
+    
+    
+    @IBAction func buttonActionNotification(_ sender:UIBarButtonItem){
+       self.navigateToNotifications()
+    }
+    
+    
     
 //MARK:Helper Methods
+    
+    
+    func navigateToNotifications(){
+        
+        let gatewayStoryBoard = UIStoryboard.init(name: "Gateway", bundle: Bundle.main)
+        let notificationController = gatewayStoryBoard.instantiateViewController(withIdentifier:"NotificationViewControllerIdentifier") as! NotificationViewController
+        
+        self.navigationController?.pushViewController(notificationController, animated: true)
+        
+    }
+
+    
+    
     
     /*
      //Method to display taskViewController for passcode setup if passcode setup is enabled,called only once after signin

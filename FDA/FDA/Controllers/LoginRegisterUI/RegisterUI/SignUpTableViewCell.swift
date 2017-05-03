@@ -38,8 +38,10 @@ class SignUpTableViewCell: UITableViewCell {
     }
     
     
-    /*
+    /**
+     
      Populate cell data coming in dictionary
+     
      */
     func populateCellData(data : NSDictionary , securedText : Bool, keyboardType:UIKeyboardType?){
         
@@ -59,9 +61,12 @@ class SignUpTableViewCell: UITableViewCell {
         
     }
     
-    /*
+    
+    /**
+     
      Set cell data from User Object (for Profile Class)
      @param tag    is the cell index
+     
      */
     func setCellData(tag:TextFieldTags)  {
         let user = User.currentUser
@@ -102,10 +107,7 @@ class SignUpTableViewCell: UITableViewCell {
         default: break
             
         }
-        
-        
-    }
-    
+    }    
 }
 
 

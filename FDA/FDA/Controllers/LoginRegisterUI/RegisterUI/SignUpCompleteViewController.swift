@@ -15,7 +15,7 @@ class SignUpCompleteViewController : UIViewController{
     @IBOutlet var buttonNext : UIButton?
     var shouldCreateMenu:Bool = true
     
-//MARK:- ViewController Delegate
+//MARK:- ViewController Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,8 +46,12 @@ class SignUpCompleteViewController : UIViewController{
     
 //MARK:- button Actions
     
-    /* Next button clicked 
-     Navigate the screen to GateWay dashboard
+    /**
+     
+     Next button clicked and navigate the screen to GateWay dashboard
+     
+     @param sender  accepts any object
+     
      */
     @IBAction func nextButtonAction(_ sender: Any) {
         self.navigateToGatewayDashboard()
@@ -56,9 +60,11 @@ class SignUpCompleteViewController : UIViewController{
     
 //MARK:- Utility Methods
     
-    /*
-     method to Navigate StudyList after completion
-    */
+    /**
+     
+     Used to Navigate StudyList after completion
+    
+     */
     func navigateToGatewayDashboard(){
         if shouldCreateMenu {
             self.createMenuView()
@@ -70,10 +76,12 @@ class SignUpCompleteViewController : UIViewController{
         }
     }
     
-    /*
-     Method to Create Menu View after completion
-    */
     
+    /**
+     
+     Method to Create Menu View after completion
+    
+     */
     func createMenuView() {
         let storyboard = UIStoryboard(name: "Gateway", bundle: nil)
         
@@ -81,5 +89,6 @@ class SignUpCompleteViewController : UIViewController{
         fda.automaticallyAdjustsScrollViewInsets = true
         self.navigationController?.pushViewController(fda, animated: true)
     }
-    
 }
+
+

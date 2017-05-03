@@ -24,18 +24,18 @@ enum ChangePasswordLoadFrom:Int{
 
 class ChangePasswordViewController: UIViewController {
     
+    @IBOutlet var tableView : UITableView?
+    @IBOutlet var buttonSubmit : UIButton?
+    
     var tableViewRowDetails : NSMutableArray?
     var newPassword = ""
     var oldPassword = ""
     var confirmPassword = ""
-    @IBOutlet var tableView : UITableView?
-    @IBOutlet var buttonSubmit : UIButton?
     var temporaryPassword:String = ""
-    
     var viewLoadFrom:ChangePasswordLoadFrom = .profile
     
     
-//MARK:- ViewController delegates
+//MARK:- ViewController Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -90,29 +90,43 @@ class ChangePasswordViewController: UIViewController {
     }
 
 //MARK:- Utility Methods
-    /* 
+    /**
+     
      Used to show the alert using Utility
+     
+     @param textMessage   used to display the text in the alert
+     
      */
     func showAlertMessages(textMessage : String){
         UIUtilities.showAlertMessage("", errorMessage: NSLocalizedString(textMessage, comment: ""), errorAlertActionTitle: NSLocalizedString("OK", comment: ""), viewControllerUsed: self)
     }
     
-    /*
+    
+    /**
+     
      Dismiss key board when clicked on Background
+     
      */
     func dismissKeyboard(){
         self.view.endEditing(true)
     }
-    /*
+    
+    
+    /**
+     
      Api Call to Change Password 
+     
      */
     func requestToChangePassword() {
          UserServices().changePassword(oldPassword: self.oldPassword, newPassword: self.newPassword, delegate: self)
     }
     
-    /*
-     seting menu View
-    */
+    
+    /**
+     
+     Seting menu View using FDASlideMenuViewController and Gateway Storyboard
+    
+     */
     func createMenuView() {
         
         let storyboard = UIStoryboard(name: "Gateway", bundle: nil)
@@ -125,8 +139,13 @@ class ChangePasswordViewController: UIViewController {
     
 //MARK:- Button Actions
     
-    /* Validations after clicking on submit button
+    /**
+     
+     Validations after clicking on submit button
      If all the validations satisfy send user feedback request
+     
+     @param sender accepts any object
+     
      */
     @IBAction func submitButtonAction(_ sender: Any) {
         

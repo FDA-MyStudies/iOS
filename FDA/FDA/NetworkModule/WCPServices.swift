@@ -50,6 +50,8 @@ let kNotificationSubType = "subtype"
 let kNotificationAudience = "audience"
 let kNotificationTitle = "title"
 let kNotificationMessage = "message"
+let kNotificationStudyId = "studyId"
+
 
 
 //feedback
@@ -187,8 +189,8 @@ class WCPServices: NSObject {
         
 
         let method = WCPMethods.notifications.method
-        let params = [kNotificationSkip:skip]
-        self.sendRequestWith(method:method, params: params, headers: nil)
+        let headerParams = [kNotificationSkip:"\(skip)"]
+        self.sendRequestWith(method:method, params: nil, headers: headerParams)
         
     }
     
@@ -408,7 +410,7 @@ class WCPServices: NSObject {
     func handleGetNotification(response:Dictionary<String, Any>){
         
         let notifications = response[kNotifications] as! Array<Dictionary<String,Any>>
-        var listOfNotifications:Array<AppNotification>!
+        var listOfNotifications:Array<AppNotification>! = []
         for notification in notifications{
              let overviewObj = AppNotification(detail: notification)
              listOfNotifications.append(overviewObj)
@@ -469,7 +471,8 @@ extension WCPServices:NMWebServiceDelegate{
             self.handleStudyDashboard(response: response as! Dictionary<String, Any>)
         case .termsPolicy:
             self.handleTermsAndPolicy(response:response as! Dictionary<String, Any> )
-        case .notifications:break
+        case .notifications:
+            self.handleGetNotification(response:response as! Dictionary<String, Any> )
         case .contactUs,.feedback:
             self.handleContactUsAndFeedback(response:response as! Dictionary<String, Any> )
         case .studyUpdates:

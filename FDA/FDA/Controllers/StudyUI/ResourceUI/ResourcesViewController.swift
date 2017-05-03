@@ -124,15 +124,15 @@ class ResourcesViewController : UIViewController{
     }
     
     
-    func navigateToWebView(link:String?,htmlText:String?){
+    func navigateToWebView(link:String?,htmlText:String?,pdfData:Data?){
         
         let loginStoryboard = UIStoryboard.init(name: "Main", bundle:Bundle.main)
         let webViewController = loginStoryboard.instantiateViewController(withIdentifier:"WebViewController") as! UINavigationController
         let webView = webViewController.viewControllers[0] as! WebViewController
         webView.isEmailAvailable = true
         
-        if link != nil {
-            webView.requestLink = Study.currentStudy?.overview.websiteLink
+        if pdfData != nil {
+            webView.pdfData = pdfData
         }
         
         self.navigationController?.present(webViewController, animated: true, completion: nil)
@@ -255,10 +255,24 @@ extension ResourcesViewController : UITableViewDelegate{
                 
                 let dir = FileManager.getStorageDirectory(type: .study)
                 
-                let fullPath = "file://" + dir + "/" + "Consent" +  "_" + "\((Study.currentStudy?.studyId)!)" + ".pdf"
+                var fullPath = "file://" + dir + "/" + "Consent" +  "_" + "\((Study.currentStudy?.studyId)!)" + "_"
+                    
+                if (Study.currentStudy?.consentDocument?.version) == nil{
+                    fullPath =  fullPath + "No_Version"
+                }
+                else{
+                     fullPath =  fullPath + "\(Study.currentStudy?.consentDocument?.version)"
+                }
+                   fullPath = fullPath  + ".pdf"
+                
+
+                let pdfData = FileDownloadManager.decrytFile(pathURL:URL.init(string: fullPath))
                 
                 
-                self.navigateToWebView(link: fullPath, htmlText: "")
+                if pdfData != nil {
+                    self.navigateToWebView(link: "", htmlText: "",pdfData:pdfData)
+                }
+    
             }
                 
             else{

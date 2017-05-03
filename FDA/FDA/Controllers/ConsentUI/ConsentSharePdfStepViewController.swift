@@ -82,21 +82,30 @@ class ConsentSharePdfStepViewController: ORKStepViewController {
             
             let dir = FileManager.getStorageDirectory(type: .study)
             
-            let fullPath = "file://" + dir + "/" + "Consent" +  "_" + "\((Study.currentStudy?.studyId)!)" + ".pdf"
+            let fullPath:String!
+            
+            if (ConsentBuilder.currentConsent?.version!) == nil {
+                
+                fullPath = "file://" + dir + "/" + "Consent" +  "_" + "\((Study.currentStudy?.studyId)!)" + "_" + "No_Version" + ".pdf"
+                
+            }
+            else{
+                fullPath = "file://" + dir + "/" + "Consent" +  "_" + "\((Study.currentStudy?.studyId)!)" + "_" + "\((ConsentBuilder.currentConsent?.version!)!)" + ".pdf"
+            }
             
             do {
                 
-                if FileManager.default.fileExists(atPath: fullPath){
+                if FileManager.default.fileExists(atPath: fullPath!){
                     
-                    try FileManager.default.removeItem(atPath: fullPath)
+                    try FileManager.default.removeItem(atPath: fullPath!)
                     
                 }
-                FileManager.default.createFile(atPath:fullPath , contents: data, attributes: [:])
+                FileManager.default.createFile(atPath:fullPath! , contents: data, attributes: [:])
                 
                 
-                try data?.write(to:  URL(string:fullPath)!)
+                try data?.write(to:  URL(string:fullPath!)!)
                 
-                FileDownloadManager.encyptFile(pathURL:URL(string:fullPath)! )
+                FileDownloadManager.encyptFile(pathURL:URL(string:fullPath!)! )
                 
                 //try data?.write(to: URL(string:fullPath)! , options: .atomicWrite)
                 

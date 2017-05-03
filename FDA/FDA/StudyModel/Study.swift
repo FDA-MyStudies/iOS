@@ -43,7 +43,7 @@ struct ConsentDocument {
     mutating func initialize(){
         self.mimeType = .html
         self.htmlString = ""
-        self.version = ""
+        self.version = "No_Version"
     }
     
     mutating func initData(consentDoucumentdict:Dictionary<String,Any>){

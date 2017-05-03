@@ -39,7 +39,7 @@ class SignUpViewController : UIViewController{
     var termsPageOpened = false
 
 
-//MARK:- ViewController Delegates
+//MARK:- ViewController Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -104,8 +104,10 @@ class SignUpViewController : UIViewController{
     
 //MARK:- Utility Methods
     
-    /*
+    /**
+     
      Attributed string for Terms & Privacy Policy
+     
      */
     func agreeToTermsAndConditions(){
         
@@ -124,15 +126,21 @@ class SignUpViewController : UIViewController{
         
     }
     
-    /*
+    
+    /**
+     
      Dismiss key board when clicked on Background
+     
      */
     func dismissKeyboard(){
         self.view.endEditing(true)
     }
     
-    /*
+    
+    /**
+     
      All validation checks and Password,Email complexity checks
+     
      */
     func validateAllFields() -> Bool{
         //(user.firstName?.isEmpty)! && (user.lastName?.isEmpty)! &&
@@ -179,15 +187,22 @@ class SignUpViewController : UIViewController{
         return true
     }
     
-    /*
+    
+    /**
+     
      Used to show the alert using Utility
+     @param textMessage     data which we need to display in the alert
+     
      */
     func showAlertMessages(textMessage : String){
         UIUtilities.showAlertMessage("", errorMessage: NSLocalizedString(textMessage, comment: ""), errorAlertActionTitle: NSLocalizedString("OK", comment: ""), viewControllerUsed: self)
     }
     
-    /*
-     method to navigate to Verification Controller
+    
+    /**
+     
+     Method to navigate to Verification Controller
+     
      */
     func navigateToVerificationController(){
         self.performSegue(withIdentifier: "verificationSegue", sender: nil)
@@ -196,8 +211,13 @@ class SignUpViewController : UIViewController{
     
 //MARK:- Button Actions
     
-    /* Submit button Clicked 
-      Used to check all the validations before making a Register webservice call
+    /**
+
+     Submit button Clicked and Used to check all the validations
+     before making a Register webservice call
+     
+     @param sender  Accepts any object
+     
      */
     @IBAction func submitButtonAction(_ sender: Any) {
         
@@ -214,7 +234,14 @@ class SignUpViewController : UIViewController{
         }
     }
     
-    /* Agree button clicked */
+    
+    /**
+     
+     Agree to terms and conditions button clicked
+     
+     @param sender  accepts any object
+     
+     */
     @IBAction func agreeButtonAction(_ sender: Any) {
         if (sender as! UIButton).isSelected{
             (sender as! UIButton).isSelected = !(sender as! UIButton).isSelected
@@ -225,7 +252,12 @@ class SignUpViewController : UIViewController{
         }
     }
     
-    /* Displays why the user has to register */
+    
+    /**
+     
+     Displays alert regarding why the user has to register
+     
+     */
     @IBAction func buttonInfoAction(_ sender:Any){
         UIUtilities.showAlertWithTitleAndMessage(title:"Why Register?", message:kRegistrationInfoMessage as NSString)
     }

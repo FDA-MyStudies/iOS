@@ -66,7 +66,16 @@ class ConsentResult {
                         
                         let dir = FileManager.getStorageDirectory(type: .study)
                         
-                        let fullPath = "file://" + dir + "/" + "Consent" +  "_" + "\((Study.currentStudy?.studyId)!)" + "_" + "\(ConsentBuilder.currentConsent?.version)" + ".pdf"
+                        let fullPath:String!
+                        
+                        if (ConsentBuilder.currentConsent?.version!) == nil {
+                            
+                            fullPath = "file://" + dir + "/" + "Consent" +  "_" + "\((Study.currentStudy?.studyId)!)" + "_" + "No_Version" + ".pdf"
+                            
+                        }
+                        else{
+                            fullPath = "file://" + dir + "/" + "Consent" +  "_" + "\((Study.currentStudy?.studyId)!)" + "_" + "\((ConsentBuilder.currentConsent?.version!)!)" + ".pdf"
+                        }
                         
                         self.consentPdfData = Data()
                         self.consentPdfData = data?.base64EncodedData()
@@ -82,10 +91,10 @@ class ConsentResult {
                             FileManager.default.createFile(atPath:fullPath , contents: data, attributes: [:])
                             
                             
-                            try data?.write(to:  URL(string:fullPath)!)
+                            try data?.write(to:  URL(string:fullPath!)!)
                             
                             
-                            FileDownloadManager.encyptFile(pathURL: URL(string:fullPath)!)
+                            FileDownloadManager.encyptFile(pathURL: URL(string:fullPath!)!)
                             
                             //try data?.write(to: URL(string:fullPath)! , options: .atomicWrite)
                             
@@ -97,6 +106,52 @@ class ConsentResult {
                         }
                     })
                     }
+                    else{
+                        let dir = FileManager.getStorageDirectory(type: .study)
+                        
+                        let fullPath:String!
+                        
+                        if (ConsentBuilder.currentConsent?.version!) == nil {
+                            
+                            fullPath = "file://" + dir + "/" + "Consent" +  "_" + "\((Study.currentStudy?.studyId)!)" + "_" + "No_Version" + ".pdf"
+                            
+                        }
+                        else{
+                            fullPath = "file://" + dir + "/" + "Consent" +  "_" + "\((Study.currentStudy?.studyId)!)" + "_" + "\((ConsentBuilder.currentConsent?.version!)!)" + ".pdf"
+                        }
+                        
+                        var data:Data? = Data.init()
+                        data = self.consentPdfData
+                        
+                        self.consentPdfData = consentPdfData?.base64EncodedData()
+                        do {
+                            
+                            if FileManager.default.fileExists(atPath: fullPath){
+                                
+                                try FileManager.default.removeItem(atPath: fullPath)
+                                
+                            }
+                            FileManager.default.createFile(atPath:fullPath , contents: data, attributes: [:])
+                            
+                            
+                            try data?.write(to:  URL(string:fullPath!)!)
+                            
+                            
+                            FileDownloadManager.encyptFile(pathURL: URL(string:fullPath!)!)
+                            
+                            //try data?.write(to: URL(string:fullPath)! , options: .atomicWrite)
+                            
+                            // writing to disk
+                            
+                        } catch let error as NSError {
+                            print("error writing to url \(fullPath)")
+                            print(error.localizedDescription)
+                        }
+                    }
+                    
+                    //Study.currentStudy?.consentDocument = ConsentBuilder.currentConsent
+                    
+                    
                 }
                 else if let tokenStepResult:EligibilityTokenTaskResult? = (stepResult as! ORKStepResult).results?[0] as? EligibilityTokenTaskResult?{
                     

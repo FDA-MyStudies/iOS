@@ -59,34 +59,54 @@ class ConfirmationViewController: UIViewController {
         self.addBackBarButton()
     }
     
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+    
+    
+//MARK:-
+    
+    /**
+     
+     Handle delete account webservice response
+     
+     */
+    func handleDeleteAccountResponse(){
+        // fdaSlideMenuController()?.navigateToHomeAfterSingout()
+        
+        let leftController = slideMenuController()?.leftViewController as! LeftMenuViewController
+        leftController.changeViewController(.studyList)
+        leftController.createLeftmenuItems()
+        
+    }
+    
     
 //MARK:- Button Actions
     
-    /* Delete account button clicked */
+    /**
+     
+     Delete account button clicked 
+     
+     @param sender  Accepts any object
+     
+     */
     @IBAction func deleteAccountAction(_ sender:UIButton){
     //UserServices().deleteAccount(self as NMWebServiceDelegate)
         
         UserServices().deActivateAccount(self)
     }
     
-    /* Donot Delete button action*/
+    
+    /**
+     
+     Donot Delete button action
+     
+     @param sender  Accepts any object
+     
+     */
     @IBAction func doNotDeleteAccountAction(_ sender:UIButton){
          _ = self.navigationController?.popViewController(animated: true)
-    }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
-    /* Handle delete account webservice response */
-    func handleDeleteAccountResponse(){
-       // fdaSlideMenuController()?.navigateToHomeAfterSingout()
-        
-        let leftController = slideMenuController()?.leftViewController as! LeftMenuViewController
-        leftController.changeViewController(.studyList)
-        leftController.createLeftmenuItems()
-
     }
 }
 

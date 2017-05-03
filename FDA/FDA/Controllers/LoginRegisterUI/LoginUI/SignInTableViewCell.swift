@@ -30,8 +30,14 @@ class SignInTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
 
-    /*
-     Populate cell data coming in dictionary
+    
+    /**
+     
+     Populate cell data coming from dictionary
+     
+     @param data    dictionary data from from signinVC
+     @param securedText    Used to check weather the text fiels is secured or not
+    
     */
     func populateCellData(data : NSDictionary , securedText : Bool){
         
@@ -42,5 +48,6 @@ class SignInTableViewCell: UITableViewCell {
         labelType?.text = NSLocalizedString((data["helpText"] as? String)!, comment: "")
         textFieldValue?.placeholder = NSLocalizedString((data["placeHolder"] as? String)!, comment: "")
     }
-    
 }
+
+

@@ -255,8 +255,9 @@ extension ResourcesViewController : UITableViewDelegate{
                 
                 let dir = FileManager.getStorageDirectory(type: .study)
                 
-                let fullPath = "file://" + dir + "/" + "Consent" +  "_" + "\((Study.currentStudy?.studyId)!)" + ".pdf"
                 
+                
+                 let fullPath = "file://" + dir + "/" + "Consent" +  "_" + "\((Study.currentStudy?.studyId)!)" + "_" + "\(Study.currentStudy?.consentDocument?.version)" + ".pdf"
                 
                 self.navigateToWebView(link: fullPath, htmlText: "")
             }

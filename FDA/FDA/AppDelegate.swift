@@ -29,7 +29,7 @@
             
             UIView.appearance(whenContainedInInstancesOf: [ORKTaskViewController.self]).tintColor = kUIColorForSubmitButtonBackground
             
-            self.checkForAppUpdate()
+           // self.checkForAppUpdate()
             
             return true
         }

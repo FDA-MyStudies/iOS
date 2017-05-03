@@ -11,6 +11,8 @@ import UIKit
 
 class StudyOverviewPageViewController : UIPageViewController{
     
+//MARK:- Viewcontroller Lifecycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -36,19 +38,33 @@ class StudyOverviewPageViewController : UIPageViewController{
         
     }
     
+//MARK:-
+    
+    /**
+     
+     This method is used to instantiate view controllers for Pagination 
+     
+     */
     private(set) lazy var orderedViewControllers: [UIViewController] = {
         return [self.newColoredViewController(ViewController: "First"),
                 self.newColoredViewController(ViewController: "Second")]
     }()
     
+    
+    /** 
+     
+     This method is used to show which Viewcontroller needs to be loaded 
+     in Pagination 
+     */
     private func newColoredViewController(ViewController: String) -> UIViewController {
         return UIStoryboard(name: "Login", bundle: nil) .
             instantiateViewController(withIdentifier: "\(ViewController)OverviewViewController")
     }
-    
 }
 
-//MARK: Page View Controller delegates
+
+//MARK:- Page View Controller delegates
+
 extension StudyOverviewPageViewController: UIPageViewControllerDataSource {
     func pageViewController(_ pageViewController: UIPageViewController,
                             viewControllerAfter viewController: UIViewController) -> UIViewController? {
@@ -88,5 +104,4 @@ extension StudyOverviewPageViewController: UIPageViewControllerDataSource {
         
         return orderedViewControllers[nextIndex]
     }
-    
 }

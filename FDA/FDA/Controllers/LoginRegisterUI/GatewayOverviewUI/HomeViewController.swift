@@ -19,7 +19,8 @@ class HomeViewController : UIViewController{
     @IBOutlet var buttonRegister : UIButton!
     @IBOutlet var buttonGetStarted : UIButton?
     
-//MARK:- View Controller Delegates
+    
+//MARK:- ViewController Lifecycle
     
     override func loadView() {
         super.loadView()
@@ -49,8 +50,13 @@ class HomeViewController : UIViewController{
         
     }
     
-//MARK:- Initial data setup methods
+//MARK:- 
     
+    /**
+ 
+       This method is used to load Initial data setup
+    
+     */
     func loadTestData(){
         //        let filePath  = Bundle.main.path(forResource: "GatewayOverview", ofType: "json")
         //        let data = NSData(contentsOfFile: filePath!)
@@ -103,7 +109,13 @@ class HomeViewController : UIViewController{
         }
     }
     
-    //Fired when the user taps on the pageControl to change its current page (Commented as this is not working)
+    
+    /**
+ 
+     This method is triggered when the user taps on the pageControl to 
+     change its current page (Commented as this is not working)
+ 
+     */
     func didChangePageControlValue() {
         //pageViewController?.scrollToViewController(index: (pageControlView?.currentPage)!)
     }
@@ -111,12 +123,21 @@ class HomeViewController : UIViewController{
     
 //MARK:- Button Actions
     
-    /* GetStarted Button Clicked */
+    /**
+     
+     This method takes the users action and calls menu view
+     
+     */
     @IBAction func getStartedButtonClicked(_ sender: UIButton){
         self.createMenuView()
     }
     
-    /* Create a menu view */
+    
+    /**
+     
+     This methos is used to Create a menu view 
+     
+     */
     func createMenuView() {
         
         let storyboard = UIStoryboard(name: "Gateway", bundle: nil)
@@ -125,7 +146,15 @@ class HomeViewController : UIViewController{
         self.navigationController?.pushViewController(fda, animated: true)
     }
     
-    /* Website link button clicked */
+    
+    /**
+     
+     This method is used to initialize WebViewController using 
+     Main storyboard
+     
+     @param sender  Access any kind of objects
+     
+     */
     @IBAction func linkButtonAction(_ sender: Any) {
         
         let loginStoryboard = UIStoryboard.init(name: "Main", bundle:Bundle.main)
@@ -135,13 +164,27 @@ class HomeViewController : UIViewController{
         self.navigationController?.present(webViewController, animated: true, completion: nil)
     }
     
+    
+    /**
+     
+     This method is used to perform unwind operation
+     
+     @param segue   the segue which is connected to 1 controller to another
+     
+     */
     @IBAction func unwindForLogout(_ segue:UIStoryboardSegue){
         
-        //self.view.alpha = 0
         
     }
     
-    /* Unwind segue to register */
+    
+    /**
+     
+     This method is used to Unwind segue 
+     
+     @param segue   the segue which is connected to 1 controller to another
+     
+     */
     @IBAction func unwindForRegister(_ segue:UIStoryboardSegue){
         DispatchQueue.main.asyncAfter(deadline: .now()) {
             // your code here
@@ -149,7 +192,14 @@ class HomeViewController : UIViewController{
         }
     }
     
-    /* Unwind segue to sign-in */
+    
+    /**
+     
+     This method is used to send the screen back to Signin
+     
+     @param segue   the segue which is connected to 1 controller to another
+     
+     */
     @IBAction func unwindForSignIn(_ segue:UIStoryboardSegue){
         
         DispatchQueue.main.asyncAfter(deadline: .now()) {

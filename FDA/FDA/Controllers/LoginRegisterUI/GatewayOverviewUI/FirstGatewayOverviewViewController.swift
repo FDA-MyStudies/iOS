@@ -19,13 +19,13 @@ class FirstGatewayOverviewViewController : UIViewController{
     @IBOutlet var buttonGetStarted : UIButton?
     @IBOutlet var labelDescriptionText : UILabel?
     @IBOutlet var labelTitleText : UILabel?
-    var pageIndex:Int!
     
+    var pageIndex:Int!
     var overviewSectionDetail : OverviewSection!
     var moviePlayer:MPMoviePlayerViewController!
     
     
-//MARK:- View Controller Delegate
+//MARK:- View Controller Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -61,6 +61,14 @@ class FirstGatewayOverviewViewController : UIViewController{
     }
     
 //MARK:- Movie Player methods
+    
+    /**
+     
+     Movie player completion method
+     
+     @param notification    receives the paticular video completion notification
+
+     */
     func moviePlayBackDidFinish(notification: NSNotification) {
         //  println("moviePlayBackDidFinish:")
         moviePlayer.moviePlayer.stop()
@@ -68,7 +76,16 @@ class FirstGatewayOverviewViewController : UIViewController{
         moviePlayer.dismiss(animated: true, completion: nil)
     }
     
+    
 //MARK:- Button Action
+    
+    /**
+     
+     Watch video button clicked
+     
+     @param sender    accets any object
+
+     */
     @IBAction func watchVideoButtonClicked(_ sender: Any){
         let urlString = overviewSectionDetail.link!
         if urlString.contains("youtube"){
@@ -90,12 +107,25 @@ class FirstGatewayOverviewViewController : UIViewController{
         }
     }
     
+    
+    /**
+     
+     This method is used to create FDASlideMenuViewController and Gateway storyboard
+     
+     @param sender    accepts any object
+
+     */
     //GetStarted Button Action
     @IBAction func getStartedButtonClicked(_ sender: Any){
         self.createMenuView()
     }
     
-    /* Create the menu view using FDASlideMenuViewController and Gateway storyboard */
+    
+    /**
+     
+     Create the menu view using FDASlideMenuViewController and Gateway storyboard
+
+     */
     func createMenuView() {
         
         let storyboard = UIStoryboard(name: "Gateway", bundle: nil)

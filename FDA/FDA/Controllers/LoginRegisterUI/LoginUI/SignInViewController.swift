@@ -22,17 +22,15 @@ enum SignInLoadFrom:Int{
 
 class SignInViewController : UIViewController{
     
+    @IBOutlet var tableView : UITableView?
+    @IBOutlet var buttonSignIn : UIButton?
+    @IBOutlet var buttonSignUp: UIButton?
+
+    var viewLoadFrom:SignInLoadFrom = .menu
     var tableViewRowDetails : NSMutableArray?
     var user = User.currentUser
     
-    @IBOutlet var tableView : UITableView?
-    @IBOutlet var buttonSignIn : UIButton?
-    
-    @IBOutlet var buttonSignUp: UIButton?
-    var viewLoadFrom:SignInLoadFrom = .menu
-    
-    
-//MARK:- View Controller Delegates
+//MARK:- ViewController Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -106,8 +104,13 @@ class SignInViewController : UIViewController{
     
 //MARK:- Button Action
     
-    /* Sign In Button Clicked
-     Used to check all the validations before making a login webservice call
+    /**
+     
+     Sign In Button Clicked and is used to check all the validations 
+     before making a login webservice call
+     
+     @param sender  accepts any object
+     
      */
     @IBAction func signInButtonAction(_ sender: Any) {
         
@@ -129,9 +132,123 @@ class SignInViewController : UIViewController{
         }
     }
     
-    /* To Display registration information */
+    
+    /**
+     
+     To Display registration information
+     
+     @param sender    accepts any object
+
+     */
     @IBAction func buttonInfoAction(_ sender:Any){
         UIUtilities.showAlertWithTitleAndMessage(title:"Why Register?", message:kRegistrationInfoMessage as NSString)
+    }
+
+//MARK:-
+    
+    /**
+     
+     Initial Data Setup which displays email and password
+     
+     */
+    func setInitialDate()  {
+        
+        // if textfield have data then we are updating same to model object
+        
+        var selectedCell:SignInTableViewCell =  tableView!.cellForRow(at:IndexPath(row:0, section: 0)) as! SignInTableViewCell
+        
+        let emailTextFieldValue = selectedCell.textFieldValue?.text
+        selectedCell = tableView!.cellForRow(at:IndexPath(row:1, section: 0)) as! SignInTableViewCell
+        
+        let passwordTextFieldValue = selectedCell.textFieldValue?.text
+        
+        
+        if emailTextFieldValue?.isEmpty == false &&  (emailTextFieldValue?.characters.count)! > 0{
+            user.emailId = emailTextFieldValue
+        }
+        if passwordTextFieldValue?.isEmpty == false && (passwordTextFieldValue?.characters.count)! > 0{
+            user.password = passwordTextFieldValue
+        }
+        self.tableView?.reloadData()
+    }
+    
+    
+    /**
+     
+     Used to show the alert using Utility
+     
+     */
+    func showAlertMessages(textMessage : String){
+        UIUtilities.showAlertMessage("", errorMessage: NSLocalizedString(textMessage, comment: ""), errorAlertActionTitle: NSLocalizedString("OK", comment: ""), viewControllerUsed: self)
+    }
+    
+    
+    /**
+     
+     Dismiss key board when clicked on Background
+     
+     */
+    func dismissKeyboard(){
+        self.view.endEditing(true)
+    }
+    
+    
+    /**
+     
+     creatingMenuView before Navigating to DashBoard
+     
+     */
+    func navigateToGatewayDashboard(){
+        self.createMenuView()
+    }
+    
+    
+    /**
+     
+     Used to Naviagate Changepassword view controller using gateway storyboard
+     
+     */
+    func navigateToChangePassword(){
+        
+        let storyboard = UIStoryboard(name: "Gateway", bundle: nil)
+        
+        let changePassword = storyboard.instantiateViewController(withIdentifier: "ChangePasswordViewController") as! ChangePasswordViewController
+        if viewLoadFrom == .menu {
+            changePassword.viewLoadFrom = .menu_login
+        }
+        else if viewLoadFrom == .joinStudy {
+            changePassword.viewLoadFrom = .joinStudy
+        }
+        else {
+            changePassword.viewLoadFrom = .login
+        }
+        changePassword.temporaryPassword = User.currentUser.password!
+        self.navigationController?.pushViewController(changePassword, animated: true)
+    }
+    
+    
+    /**
+     
+     Used to navigate to Verification controller
+     
+     */
+    func navigateToVerifyController(){
+        self.performSegue(withIdentifier: "verificationSegue", sender: nil)
+    }
+    
+    
+    /**
+     
+     Method to update Left Menu using FDASlideMenuViewController and Gateway dashboard
+     
+     */
+    func createMenuView() {
+        
+        let storyboard = UIStoryboard(name: "Gateway", bundle: nil)
+        
+        let fda = storyboard.instantiateViewController(withIdentifier: "FDASlideMenuViewController") as! FDASlideMenuViewController
+        fda.automaticallyAdjustsScrollViewInsets = true
+        self.navigationController?.pushViewController(fda, animated: true)
     }
     
     
@@ -171,97 +288,8 @@ class SignInViewController : UIViewController{
                 verificationController.shouldCreateMenu = true
             }
             
-            
             verificationController.labelMessage = kVerifyMessageFromSignIn
-            
         }
-    }
-    
-    /*
-     Initial Data Setup
-    */
-    func setInitialDate()  {
-        
-        // if textfield have data then we are updating same to model object
-        
-        var selectedCell:SignInTableViewCell =  tableView!.cellForRow(at:IndexPath(row:0, section: 0)) as! SignInTableViewCell
-        
-        let emailTextFieldValue = selectedCell.textFieldValue?.text
-        selectedCell = tableView!.cellForRow(at:IndexPath(row:1, section: 0)) as! SignInTableViewCell
-        
-        let passwordTextFieldValue = selectedCell.textFieldValue?.text
-        
-        
-        if emailTextFieldValue?.isEmpty == false &&  (emailTextFieldValue?.characters.count)! > 0{
-            user.emailId = emailTextFieldValue
-        }
-        if passwordTextFieldValue?.isEmpty == false && (passwordTextFieldValue?.characters.count)! > 0{
-            user.password = passwordTextFieldValue
-        }
-        self.tableView?.reloadData()
-    }
-    
-    
-    /*
-     Used to show the alert using Utility
-     */
-    func showAlertMessages(textMessage : String){
-        UIUtilities.showAlertMessage("", errorMessage: NSLocalizedString(textMessage, comment: ""), errorAlertActionTitle: NSLocalizedString("OK", comment: ""), viewControllerUsed: self)
-    }
-    
-    /*
-     Dismiss key board when clicked on Background
-     */
-    func dismissKeyboard(){
-        self.view.endEditing(true)
-    }
-
-    /*
-     creatingMenuView before Navigating to DashBoard
-    */
-    func navigateToGatewayDashboard(){
-        
-        self.createMenuView()
-    }
-    
-    /*
-     method to Naviagate to Change Pssword
-     */
-    func navigateToChangePassword(){
-        
-        let storyboard = UIStoryboard(name: "Gateway", bundle: nil)
-        
-        let changePassword = storyboard.instantiateViewController(withIdentifier: "ChangePasswordViewController") as! ChangePasswordViewController
-        if viewLoadFrom == .menu {
-            changePassword.viewLoadFrom = .menu_login
-        }
-        else if viewLoadFrom == .joinStudy {
-            changePassword.viewLoadFrom = .joinStudy
-        }
-        else {
-            changePassword.viewLoadFrom = .login
-        }
-        changePassword.temporaryPassword = User.currentUser.password!
-        self.navigationController?.pushViewController(changePassword, animated: true)
-    }
-    
-    /*
-     Method to navigate to Verification controller
-    */
-    func navigateToVerifyController(){
-        self.performSegue(withIdentifier: "verificationSegue", sender: nil)
-    }
-    
-    /*
-     Method to update Left Menu
-    */
-    func createMenuView() {
-        
-        let storyboard = UIStoryboard(name: "Gateway", bundle: nil)
-        
-        let fda = storyboard.instantiateViewController(withIdentifier: "FDASlideMenuViewController") as! FDASlideMenuViewController
-        fda.automaticallyAdjustsScrollViewInsets = true
-        self.navigationController?.pushViewController(fda, animated: true)
     }
 }
 

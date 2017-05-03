@@ -37,7 +37,7 @@ class ContactUsViewController : UIViewController{
     var previousContentHeight:Double = 0.0
     
     
-//MARK:- View Life Cycle
+//MARK:- ViewController LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -77,8 +77,13 @@ class ContactUsViewController : UIViewController{
     
 //MARK:- Button Actions
     
-    /* Validations after clicking on submit button 
+    /**
+     
+     Validations after clicking on submit button
      If all the validations satisfy send contact-us request
+     
+     @param sender  accepts any object
+     
      */
     @IBAction func buttonSubmitAciton(_ sender:UIButton){
         print("\(ContactUsFeilds.firstName)")
@@ -151,10 +156,8 @@ extension ContactUsViewController: UITableViewDataSource{
             cell.backgroundColor = UIColor.clear
             return cell
         }
-        
         return cell
     }
-   
 }
 
 
@@ -257,6 +260,7 @@ extension ContactUsViewController : UITextFieldDelegate{
         }
     }
 }
+
 
 //MARK:- Tableview cell class initialization
 class TextviewCell:UITableViewCell{

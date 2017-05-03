@@ -19,7 +19,6 @@ struct FeedbackDetail {
     init(){
         FeedbackDetail.feedback = ""
         FeedbackDetail.subject = ""
-        
     }
 }
 
@@ -30,7 +29,7 @@ class FeedBackViewController : UIViewController{
     var feedbackText:String = ""
     
     
-//MARK:- View Life cycle
+//MARK:- ViewController Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -64,10 +63,16 @@ class FeedBackViewController : UIViewController{
         
     }
     
+    
 //MARK:- Button Actions
     
-    /* Validations after clicking on submit button
+    /**
+     
+     Validations after clicking on submit button
      If all the validations satisfy send user feedback request
+     
+     @param sender  accepts any object
+     
      */
     @IBAction func buttonSubmitAciton(_ sender:UIButton){
         //print("\(ContactUsFeilds.firstName)")
@@ -85,6 +90,7 @@ class FeedBackViewController : UIViewController{
         }
     }
 }
+
 
 //MARK:- TableView Data source
 extension FeedBackViewController: UITableViewDataSource{
@@ -125,6 +131,7 @@ extension FeedBackViewController: UITableViewDataSource{
     }
 }
 
+
 //MARK:- TableView Delegates
 extension FeedBackViewController : UITableViewDelegate{
 
@@ -132,6 +139,7 @@ extension FeedBackViewController : UITableViewDelegate{
         tableView.deselectRow(at: indexPath, animated: true)
     }
 }
+
 
 //MARK:- UITextview Delegate
 extension FeedBackViewController: UITextViewDelegate {
@@ -167,6 +175,7 @@ extension FeedBackViewController: UITextViewDelegate {
     }
 }
 
+
 //MARK:- Textfield Delegate
 extension FeedBackViewController : UITextFieldDelegate{
     
@@ -182,6 +191,7 @@ extension FeedBackViewController : UITextFieldDelegate{
         FeedbackDetail.subject = textField.text!
     }
 }
+
 
 //MARK- Webservice Delegates
 extension FeedBackViewController:NMWebServiceDelegate {

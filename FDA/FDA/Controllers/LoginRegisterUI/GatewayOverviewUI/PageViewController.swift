@@ -27,7 +27,7 @@ class PageViewController : UIPageViewController{
     var currentIndex = 0
     
     
-//MARK:- View Controller Delegates
+//MARK:- View Controller Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -62,8 +62,10 @@ class PageViewController : UIPageViewController{
     
 //MARK:- Scroll Delegates
     
-    /*
+    /**
+     
      Scrolls to the next view controller.
+     
      */
     func scrollToNextViewController() {
         if let visibleViewController = viewControllers?.first,
@@ -72,9 +74,12 @@ class PageViewController : UIPageViewController{
         }
     }
     
-    /*
-    Scrolls to the given 'viewController' page.
-    */
+    
+    /**
+     
+     Scrolls to the given 'viewController' page.
+    
+     */
     private func scrollToViewController(viewController: UIViewController,
                                         direction: UIPageViewControllerNavigationDirection = .forward) {
         setViewControllers([viewController],
@@ -88,9 +93,13 @@ class PageViewController : UIPageViewController{
         })
     }
     
-    /*
-    Used to Notify that the current page index was updated.
-    */
+    
+    /**
+     
+     Used to Notify that the current page index was updated.
+     @param prevViewController     previousViewController used
+    
+     */
     func notifyTutorialDelegateOfNewIndex(prevViewController: UIViewController?) {
 //        if let firstViewController = viewControllers?.first,
 //            let index = orderedViewControllers.index(of: firstViewController) {
@@ -123,9 +132,13 @@ class PageViewController : UIPageViewController{
         pageViewDelegate?.pageViewController(pageViewController: self, didUpdatePageIndex: index)
     }
     
-    /*
-    Scrolls to the view controller at the given index.
-    */
+    
+    /**
+     
+     Scrolls to the view controller at the given index.
+     @param newIndex    used to give the index of viewcontrollers
+    
+     */
     func scrollToViewController(index newIndex: Int) {
         
         if let firstViewController = viewControllers?.first,
@@ -141,6 +154,14 @@ class PageViewController : UIPageViewController{
         return self.getOverviewViewControllers()
     }()
     
+    
+    /**
+     
+     Used to get the Viewcontrollers from Study or Overview
+     
+     @return UIViewController   gives array of viewcontrollers
+     
+     */
     private func getOverviewViewControllers() -> [UIViewController] {
         
         var controllers:Array<UIViewController> = []

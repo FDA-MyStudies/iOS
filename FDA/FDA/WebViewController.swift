@@ -16,6 +16,8 @@ class WebViewController : UIViewController{
     var requestLink:String?
     
     var htmlString: String?
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         

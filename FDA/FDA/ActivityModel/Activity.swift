@@ -13,6 +13,10 @@ import ResearchKit
 let kActivityType = "type"
 let kActivityInfoMetaData = "metadata"
 
+let kActivityInfo = "info"
+
+let kActivityResponseData = "data"
+
 let kActivityStudyId = "studyId"
 let kActivityActivityId = "qId"
 let kActivityName = "name"

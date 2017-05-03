@@ -12,6 +12,33 @@ class GatewayResourcesListViewController: UIViewController {
 
     @IBOutlet var tableView:UITableView?
     
+    
+    func loadResources(){
+        
+        let plistPath = Bundle.main.path(forResource: "Resources", ofType: ".plist", inDirectory:nil)
+        let arrayContent = NSMutableArray.init(contentsOfFile: plistPath!)
+        
+        do {
+           
+           // let resources = response[kResources] as! Array<Dictionary<String,Any>>
+            var listOfResources:Array<Resource>! = []
+            for resource in arrayContent!{
+                let resourceObj = Resource(detail: resource as! Dictionary<String, Any>)
+                listOfResources.append(resourceObj)
+            }
+            
+            //assgin to Gateway
+            Gateway.instance.resources = listOfResources
+            
+            
+            self.tableView?.reloadData()
+        } catch {
+            print("json error: \(error.localizedDescription)")
+        }
+
+
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -23,7 +50,8 @@ class GatewayResourcesListViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         
         self.setNavigationBarItem()
-        WCPServices().getGatewayResources(delegate: self)
+        //WCPServices().getGatewayResources(delegate: self)
+        self.loadResources()
     }
 
     override func didReceiveMemoryWarning() {

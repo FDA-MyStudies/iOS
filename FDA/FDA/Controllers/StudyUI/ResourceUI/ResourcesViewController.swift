@@ -255,7 +255,15 @@ extension ResourcesViewController : UITableViewDelegate{
                 
                 let dir = FileManager.getStorageDirectory(type: .study)
                 
-                let fullPath = "file://" + dir + "/" + "Consent" +  "_" + "\((Study.currentStudy?.studyId)!)" + "_" + "\(Study.currentStudy?.consentDocument?.version)" + ".pdf"
+                var fullPath = "file://" + dir + "/" + "Consent" +  "_" + "\((Study.currentStudy?.studyId)!)" + "_"
+                    
+                if (Study.currentStudy?.consentDocument?.version) == nil{
+                    fullPath =  fullPath + "No_Version"
+                }
+                else{
+                     fullPath =  fullPath + "\(Study.currentStudy?.consentDocument?.version)"
+                }
+                   fullPath = fullPath  + ".pdf"
                 
 
                 let pdfData = FileDownloadManager.decrytFile(pathURL:URL.init(string: fullPath))

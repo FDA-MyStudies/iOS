@@ -101,7 +101,7 @@ class StudyHomeViewController : UIViewController{
                 buttonVisitWebsite?.isHidden = false
                 visitWebsiteButtonLeadingConstraint?.constant = 0.0
                 self.view.layoutIfNeeded()
-                buttonVisitWebsite?.backgroundColor = UIColor.red
+               // buttonVisitWebsite?.backgroundColor = UIColor.red
                 
                  // visitWebsiteButtonTrailingConstraint?.constant =
                 
@@ -490,7 +490,7 @@ extension StudyHomeViewController:NMWebServiceDelegate {
             self.createEligibilityConsentTask()
         }
         
-        if requestName as String == RegistrationMethods.updatePreferences.method.methodName{
+        if requestName as String == RegistrationMethods.updateStudyState.method.methodName{
             
             if isStudyBookMarked {
                 
@@ -517,7 +517,7 @@ extension StudyHomeViewController:NMWebServiceDelegate {
             
             if( User.currentUser.getStudyStatus(studyId:(Study.currentStudy?.studyId)! ) == UserStudyStatus.StudyStatus.inProgress){
                 self.pushToStudyDashboard()
-            }
+            } 
         }
         //self.removeProgressIndicator()
         

@@ -386,7 +386,13 @@
                         </constraints>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout" top="YES"/>
-                    <navigationItem key="navigationItem" id="lvJ-hS-6Ge"/>
+                    <navigationItem key="navigationItem" id="lvJ-hS-6Ge">
+                        <barButtonItem key="rightBarButtonItem" image="notification_active" id="1Em-cN-3Vf">
+                            <connections>
+                                <action selector="buttonActionNotification:" destination="8qc-EF-dit" id="9IP-2g-4Mb"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="labelHelperText" destination="sfa-0h-9w7" id="TIU-c4-n4H"/>
                         <outlet property="tableView" destination="Bq5-vM-CAI" id="jRi-hK-51s"/>
@@ -821,7 +827,7 @@
         <!--Notification View Controller-->
         <scene sceneID="NEH-aw-BHc">
             <objects>
-                <viewController id="zmZ-Ff-dEh" customClass="NotificationViewController" customModule="FDA" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="NotificationViewControllerIdentifier" useStoryboardIdentifierAsRestorationIdentifier="YES" id="zmZ-Ff-dEh" customClass="NotificationViewController" customModule="FDA" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="PBW-5g-3tz"/>
                         <viewControllerLayoutGuide type="bottom" id="yLT-4v-XjN"/>
@@ -833,7 +839,7 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="14.png" translatesAutoresizingMaskIntoConstraints="NO" id="3mj-c9-Ss6">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                             </imageView>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="97" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ebc-jX-8mI">
+                            <tableView hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="97" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ebc-jX-8mI">
                                 <rect key="frame" x="0.0" y="1" width="375" height="602"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
@@ -1963,6 +1969,7 @@ Below is a list of studies that you are a part of and information on how your re
         <image name="14.png" width="750" height="1334"/>
         <image name="18.jpg" width="750" height="1440"/>
         <image name="notChecked" width="18" height="18"/>
+        <image name="notification_active" width="26" height="26"/>
         <image name="notification_white" width="26" height="26"/>
         <image name="profile_white" width="26" height="26"/>
         <image name="resources_white" width="26" height="26"/>

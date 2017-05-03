@@ -252,19 +252,10 @@ extension ResourcesViewController : UITableViewDelegate{
             else if  resource as! String == "Consent PDF"{
                 
                 //PENDING
+                let path = AKUtility.baseFilePath + "/Study"
+                let consentPath = Study.currentStudy?.signedConsentFilePath
                 
-                let dir = FileManager.getStorageDirectory(type: .study)
-                
-                var fullPath = "file://" + dir + "/" + "Consent" +  "_" + "\((Study.currentStudy?.studyId)!)" + "_"
-                    
-                if (Study.currentStudy?.consentDocument?.version) == nil{
-                    fullPath =  fullPath + "No_Version"
-                }
-                else{
-                     fullPath =  fullPath + "\(Study.currentStudy?.consentDocument?.version)"
-                }
-                   fullPath = fullPath  + ".pdf"
-                
+                let fullPath = path + "/" + consentPath!
 
                 let pdfData = FileDownloadManager.decrytFile(pathURL:URL.init(string: fullPath))
                 

@@ -47,10 +47,16 @@ class ResourcesDetailViewController: UIViewController {
             if self.resource?.file?.mimeType == .pdf{
                 
                 if self.resource?.file?.localPath != nil {
-                    self.loadWebViewWithPath(path: (self.resource?.file?.localPath)!)
+                    
+                    let pdfData = FileDownloadManager.decrytFile(pathURL:URL(string:(self.resource?.file?.localPath)!))
+                    self.loadWebViewWithData(data: pdfData!)
+                    //self.loadWebViewWithPath(path: (self.resource?.file?.localPath)!)
                 }
                 else {
-                    self.startDownloadingfile()
+                   let path = resourcesDownloadPath + "/PDF_linking.pdf"
+                    //self.startDownloadingfile()
+                    let pdfData = FileDownloadManager.decrytFile(pathURL:URL(string:path))
+                    self.loadWebViewWithData(data: pdfData!)
                 }
                 
                 
@@ -77,6 +83,14 @@ class ResourcesDetailViewController: UIViewController {
         let url:URL? = URL.init(string:path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed)!)
         let urlRequest = URLRequest(url: url!)
         webView?.loadRequest(urlRequest)
+    }
+    func loadWebViewWithData(data:Data){
+        
+        self.webView?.load(data, mimeType: "application/pdf", textEncodingName: "UTF-8", baseURL:URL.init(fileURLWithPath: "") )
+        
+//        let url:URL? = URL.init(string:path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed)!)
+//        let urlRequest = URLRequest(url: url!)
+//        webView?.loadRequest(urlRequest)
     }
     
     func startDownloadingfile(){

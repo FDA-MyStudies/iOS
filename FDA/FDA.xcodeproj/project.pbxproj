@@ -93,6 +93,7 @@
 		6ED8A2E61E447AA2004DEC01 /* Formatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ED8A2E31E447AA2004DEC01 /* Formatter.swift */; };
 		6ED8A2E71E447AA2004DEC01 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ED8A2E51E447AA2004DEC01 /* Logger.swift */; };
 		6ED9D5DB1E5B2D5200A0719D /* ActiveTask.json in Resources */ = {isa = PBXBuildFile; fileRef = 6ED9D5DA1E5B2D5100A0719D /* ActiveTask.json */; };
+		6EDABCCE1EBA41EE005F3AA6 /* Labkey_Activity.json in Resources */ = {isa = PBXBuildFile; fileRef = 6EDABCCD1EBA41EE005F3AA6 /* Labkey_Activity.json */; };
 		6EE5756C1E891440009BAA25 /* Gateway.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6EE5756B1E891440009BAA25 /* Gateway.xcassets */; };
 		6EE93D901E93B5700027A5DC /* ConsentSharePdfStepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EE93D8F1E93B5700027A5DC /* ConsentSharePdfStepViewController.swift */; };
 		6EE93D921E93B8C30027A5DC /* 45.png in Resources */ = {isa = PBXBuildFile; fileRef = 6EE93D911E93B8C30027A5DC /* 45.png */; };
@@ -106,8 +107,8 @@
 		6EED7B391E6574FE002C1FA3 /* FetalKickCounterStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EED7B381E6574FE002C1FA3 /* FetalKickCounterStep.swift */; };
 		6EED7B3B1E65751D002C1FA3 /* FetalKickCounterStepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EED7B3A1E65751D002C1FA3 /* FetalKickCounterStepViewController.swift */; };
 		6EED7B3D1E65752C002C1FA3 /* FetalKickCounterTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EED7B3C1E65752C002C1FA3 /* FetalKickCounterTask.swift */; };
-		6EF05A941E4DAB0400CD7661 /* ResearchKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EF05A911E4DAAFB00CD7661 /* ResearchKit.framework */; };
-		6EF05A951E4DAB0400CD7661 /* ResearchKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6EF05A911E4DAAFB00CD7661 /* ResearchKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		6EF05A941E4DAB0400CD7661 /* ReferenceProxy in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EF05A911E4DAAFB00CD7661 /* ResearchKit.framework */; };
+		6EF05A951E4DAB0400CD7661 /* ReferenceProxy in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6EF05A911E4DAAFB00CD7661 /* ResearchKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		6EF05A991E4DC36400CD7661 /* StepProvider.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6EF05A981E4DC36400CD7661 /* StepProvider.plist */; };
 		6EF2FCEF1E72CDE900B5F212 /* LeftMenuResourceTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EF2FCEE1E72CDE900B5F212 /* LeftMenuResourceTableViewCell.swift */; };
 		6EF748BF1E69645700F1E89E /* LatestActive_Taskdocument.json in Resources */ = {isa = PBXBuildFile; fileRef = 6EF748BE1E69645700F1E89E /* LatestActive_Taskdocument.json */; };
@@ -224,7 +225,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				6EF05A951E4DAB0400CD7661 /* ResearchKit.framework in Embed Frameworks */,
+				6EF05A951E4DAB0400CD7661 /* ReferenceProxy in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -329,6 +330,7 @@
 		6ED8A2E41E447AA2004DEC01 /* Logger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Logger.h; sourceTree = "<group>"; };
 		6ED8A2E51E447AA2004DEC01 /* Logger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		6ED9D5DA1E5B2D5100A0719D /* ActiveTask.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = ActiveTask.json; sourceTree = "<group>"; };
+		6EDABCCD1EBA41EE005F3AA6 /* Labkey_Activity.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Labkey_Activity.json; sourceTree = "<group>"; };
 		6EE5756B1E891440009BAA25 /* Gateway.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Gateway.xcassets; sourceTree = "<group>"; };
 		6EE93D8F1E93B5700027A5DC /* ConsentSharePdfStepViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConsentSharePdfStepViewController.swift; sourceTree = "<group>"; };
 		6EE93D911E93B8C30027A5DC /* 45.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 45.png; sourceTree = "<group>"; };
@@ -425,7 +427,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6EF05A941E4DAB0400CD7661 /* ResearchKit.framework in Frameworks */,
+				6EF05A941E4DAB0400CD7661 /* ReferenceProxy in Frameworks */,
 				2F2CF29CD5359B994C8987E7 /* Pods_FDA.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -619,6 +621,7 @@
 		6E9B39BC1E55DFDA0037D09D /* ActivityBuilder */ = {
 			isa = PBXGroup;
 			children = (
+				6EDABCCD1EBA41EE005F3AA6 /* Labkey_Activity.json */,
 				6EF748BE1E69645700F1E89E /* LatestActive_Taskdocument.json */,
 				6EC129231E64624F00B90167 /* Acivity_Question.json */,
 				6ED9D5DA1E5B2D5100A0719D /* ActiveTask.json */,
@@ -1349,6 +1352,7 @@
 				946CA5ED1E72DCA300CC8535 /* ProgressView.xib in Resources */,
 				6ECF75D01E6EF140008C935E /* FetalKickCounter.storyboard in Resources */,
 				940577AC1E767C8D0043215C /* ChangePasswordData.plist in Resources */,
+				6EDABCCE1EBA41EE005F3AA6 /* Labkey_Activity.json in Resources */,
 				6ED134381E5F1B110090C976 /* Consent.json in Resources */,
 				94B3DD541E6ED8E500327AE5 /* SignInPlist.plist in Resources */,
 				48A24C381E839CF9009E849E /* 24-study-dashboard.png in Resources */,
@@ -1464,7 +1468,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		8519D695BAE863DEC88E428D /* [CP] Check Pods Manifest.lock */ = {
@@ -1479,7 +1483,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		94AB05721E7924F40079E718 /* ShellScript */ = {
@@ -1522,7 +1526,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		F27896D5D0F3DBD93DAEB8F5 /* [CP] Copy Pods Resources */ = {

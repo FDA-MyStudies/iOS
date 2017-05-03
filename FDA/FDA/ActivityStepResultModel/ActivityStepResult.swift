@@ -64,7 +64,7 @@ class ActivityStepResult{
     var endTime:Date?
     var skipped:Bool?
     var value:Any?
-   
+    
     /* default initializer method
      */
     
@@ -98,11 +98,16 @@ class ActivityStepResult{
         
         self.endTime = stepResult.endDate
         
+        if (stepResult.results?.count)! > 1 {
+            self.type = .form
+        }
+        
         self.setResultValue(stepResult:stepResult ,activityType:activityType )
         
         
         
     }
+    
     
     /* method create ActivityStepResult by initializing params
      @stepDict:contains all ActivityResultStep properties
@@ -166,7 +171,7 @@ class ActivityStepResult{
             
         case .question:  stepDict?[kActivityStepResultType] = self.step?.resultType
             
-        case .form: stepDict?[kActivityStepResultType] = ActvityStepResultType.formOrActiveTask
+        case .form: stepDict?[kActivityStepResultType] = ActvityStepResultType.formOrActiveTask.rawValue
             
             
         case .active: stepDict?[kActivityStepResultType] = self.step?.resultType
@@ -191,7 +196,7 @@ class ActivityStepResult{
         stepDict?[kActivityStepSkipped] = self.skipped
         
         if self.value != nil {
-            stepDict?[kActivityStepResultValue] = self.value
+                stepDict?[kActivityStepResultValue] = self.value
         }
         
         return stepDict
@@ -215,182 +220,52 @@ class ActivityStepResult{
                 // for question Step
                 
                 
-                if  let questionstepResult:ORKQuestionResult? = stepResult.results?.first as? ORKQuestionResult?{
+                if stepResult.results?.count == 1 {
                     
                     
-                    switch questionstepResult?.questionType.rawValue{
+                    if  let questionstepResult:ORKQuestionResult? = stepResult.results?.first as? ORKQuestionResult?{
                         
+                        self.setValue(questionstepResult:questionstepResult! )
                         
-                    case  ORKQuestionType.scale.rawValue? : //scale and continuos scale
+                    }
+                    else{
                         
-                        if ((questionstepResult as? ORKScaleQuestionResult) != nil){
-                            let stepTypeResult = questionstepResult as! ORKScaleQuestionResult
-                            
-                            
-                            
-                            if Utilities.isValidValue(someObject: stepTypeResult.scaleAnswer as AnyObject?){
-                                
-                                self.value = stepTypeResult.scaleAnswer as! Double
-                            }
-                            else{
-                                self.value = 0.0
-                            }
-                        }
-                        else{
-                            let stepTypeResult = questionstepResult as! ORKChoiceQuestionResult
-                            if Utilities.isValidObject(someObject:stepTypeResult.choiceAnswers as AnyObject?){
-                                if (stepTypeResult.choiceAnswers?.count)! > 0{
-                                    self.value = stepTypeResult.choiceAnswers?.first
-                                }
-                                else{
-                                    self.value = ""
-                                }
-                                
-                            }
-                            else{
-                                self.value = ""
-                            }
-                            
-                        }
+                        // for consent step result we are storing the ORKConsentSignatureResult
+                        let consentStepResult:ORKConsentSignatureResult? = (stepResult.results?.first as? ORKConsentSignatureResult?)!
                         
+                        self.value = consentStepResult;
                         
-                        
-                    case ORKQuestionType.singleChoice.rawValue?: //textchoice + value picker + imageChoice + textchoice
-                        
-                        let stepTypeResult = questionstepResult as! ORKChoiceQuestionResult
-                        if Utilities.isValidObject(someObject:stepTypeResult.choiceAnswers as AnyObject?){
-                            if (stepTypeResult.choiceAnswers?.count)! > 0{
-                                self.value = stepTypeResult.choiceAnswers?.first
-                            }
-                            else{
-                                self.value = ""
-                            }
-                            
-                        }
-                        else{
-                            self.value = ""
-                        }
-                    case ORKQuestionType.multipleChoice.rawValue?: //textchoice + value picker + imageChoice + textchoice
-                        
-                        let stepTypeResult = questionstepResult as! ORKChoiceQuestionResult
-                        if Utilities.isValidObject(someObject:stepTypeResult.choiceAnswers as AnyObject?){
-                            if (stepTypeResult.choiceAnswers?.count)! > 1{
-                                self.value = stepTypeResult.choiceAnswers
-                            }
-                            else{
-                                self.value = stepTypeResult.choiceAnswers?.first
-                            }
-                            
-                        }
-                        else{
-                            self.value = ""
-                        }
-                        
-                        
-                    case ORKQuestionType.boolean.rawValue?:
-                        
-                        let stepTypeResult = questionstepResult as! ORKBooleanQuestionResult
-                        
-                        if Utilities.isValidValue(someObject: stepTypeResult.booleanAnswer as AnyObject?){
-                            self.value = stepTypeResult.booleanAnswer!
-                        }
-                        else{
-                            self.value = 0
-                        }
-                        
-                    case ORKQuestionType.integer.rawValue?: // numeric type
-                        let stepTypeResult = questionstepResult as! ORKNumericQuestionResult
-                        
-                        if Utilities.isValidValue(someObject: stepTypeResult.numericAnswer as AnyObject?){
-                            self.value =  "\(Double(stepTypeResult.numericAnswer!))" + stepTypeResult.unit!
-                        }
-                        else{
-                            self.value = 0.0
-                        }
-                    case ORKQuestionType.decimal.rawValue?: // numeric type
-                        let stepTypeResult = questionstepResult as! ORKNumericQuestionResult
-                        
-                        if Utilities.isValidValue(someObject: stepTypeResult.numericAnswer as AnyObject?){
-                            self.value =  "\(Double(stepTypeResult.numericAnswer!))" + stepTypeResult.unit!
-                        }
-                        else{
-                            self.value = 0.0
-                        }
-                    case  ORKQuestionType.timeOfDay.rawValue?:
-                        
-                        let stepTypeResult = questionstepResult as! ORKTimeOfDayQuestionResult
-                        
-                        if (stepTypeResult.dateComponentsAnswer?.isValidDate)!{
-                            self.value =  "\(stepTypeResult.dateComponentsAnswer?.hour)" + ":" + "\(stepTypeResult.dateComponentsAnswer?.minute)" + ":" + "\(stepTypeResult.dateComponentsAnswer?.second)"
-                        }
-                        else{
-                            self.value = "00:00:00"
-                        }
-                        
-                    case ORKQuestionType.date.rawValue?:
-                        let stepTypeResult = questionstepResult as! ORKDateQuestionResult
-                        
-                        if Utilities.isValidValue(someObject: stepTypeResult.dateAnswer as AnyObject?){
-                            self.value =  Utilities.getStringFromDate(date: stepTypeResult.dateAnswer! )
-                        }
-                        else{
-                            self.value = "00:00:0000"
-                        }
-                        
-                    case ORKQuestionType.text.rawValue?: // text + email
-                        
-                        let stepTypeResult = questionstepResult as! ORKTextQuestionResult
-                        
-                        if Utilities.isValidValue(someObject: stepTypeResult.answer as AnyObject?){
-                            self.value = stepTypeResult.answer
-                        }
-                        else{
-                            self.value = ""
-                        }
-                        
-                    case ORKQuestionType.timeInterval.rawValue?:
-                        
-                        let stepTypeResult = questionstepResult as! ORKTimeIntervalQuestionResult
-                        
-                        if Utilities.isValidValue(someObject: stepTypeResult.intervalAnswer as AnyObject?){
-                            self.value = Double(stepTypeResult.intervalAnswer!)
-                        }
-                        else{
-                            self.value = 0.0
-                        }
-                        
-                        
-                    case ORKQuestionType.height.rawValue?:
-                        
-                        let stepTypeResult = questionstepResult as! ORKNumericQuestionResult
-                        
-                        if Utilities.isValidValue(someObject: stepTypeResult.numericAnswer as AnyObject?){
-                            self.value = Double(stepTypeResult.numericAnswer!)
-                        }
-                        else{
-                            self.value = 0.0
-                        }
-                        
-                    case ORKQuestionType.location.rawValue?:
-                        let stepTypeResult = questionstepResult as! ORKLocationQuestionResult
-                        
-                        if CLLocationCoordinate2DIsValid((stepTypeResult.locationAnswer?.coordinate)! ){
-                            self.value = "\(stepTypeResult.locationAnswer?.coordinate.latitude)" + "," + "\(stepTypeResult.locationAnswer?.coordinate.longitude)"
-                        }
-                        else{
-                            self.value = "0.0,0.0"
-                        }
-                        
-                        
-                    default:break
                     }
                 }
                 else{
+                    // for form step result
                     
-                    // for consent step result we are storing the ORKConsentSignatureResult
-                    let consentStepResult:ORKConsentSignatureResult? = (stepResult.results?.first as? ORKConsentSignatureResult?)!
+                    self.value  = [ActivityStepResult]()
                     
-                    self.value = consentStepResult;
+                    var formResultArray:[Dictionary<String,Any>] = [Dictionary<String,Any>]()
+                    
+                    for result in stepResult.results!{
+                        let activityStepResult:ActivityStepResult? = ActivityStepResult()
+                        
+                        activityStepResult?.startTime = self.startTime
+                        activityStepResult?.key = result.identifier
+                        activityStepResult?.endTime = self.endTime
+                        activityStepResult?.skipped = self.skipped
+                        
+                        
+                        if ((result as? ORKQuestionResult) != nil){
+                        
+                            
+                        let questionResult:ORKQuestionResult? = (result as? ORKQuestionResult)
+                            
+                        self.setValue(questionstepResult:questionResult! )
+                        
+                        activityStepResult?.value = self.value
+                    
+                        formResultArray.append((activityStepResult?.getActivityStepResultDict()!)!)
+                        }
+                    }
+                    self.value = formResultArray
                     
                 }
             }
@@ -428,7 +303,7 @@ class ActivityStepResult{
                                 resultDict?[kActivityActiveStepKey] = kSpatialSpanMemoryKeyNumberOfFailures
                                 resultDict?[kActivityStepResultValue] = stepTypeResult?.numberOfFailures
                                 
-                           
+                                
                                 
                             }
                             resultDict?[kActivityStepStartTime] =  self.startTime
@@ -520,6 +395,176 @@ class ActivityStepResult{
             
         }
     }
+    
+    func setValue(questionstepResult:ORKQuestionResult) {
+        switch questionstepResult.questionType.rawValue{
+            
+            
+        case  ORKQuestionType.scale.rawValue : //scale and continuos scale
+            
+            if ((questionstepResult as? ORKScaleQuestionResult) != nil){
+                let stepTypeResult = questionstepResult as! ORKScaleQuestionResult
+                
+                
+                
+                if Utilities.isValidValue(someObject: stepTypeResult.scaleAnswer as AnyObject?){
+                    
+                    self.value = stepTypeResult.scaleAnswer as! Double
+                }
+                else{
+                    self.value = 0.0
+                }
+            }
+            else{
+                let stepTypeResult = questionstepResult as! ORKChoiceQuestionResult
+                if Utilities.isValidObject(someObject:stepTypeResult.choiceAnswers as AnyObject?){
+                    if (stepTypeResult.choiceAnswers?.count)! > 0{
+                        self.value = stepTypeResult.choiceAnswers?.first
+                    }
+                    else{
+                        self.value = ""
+                    }
+                    
+                }
+                else{
+                    self.value = ""
+                }
+                
+            }
+            
+            
+            
+        case ORKQuestionType.singleChoice.rawValue: //textchoice + value picker + imageChoice + textchoice
+            
+            let stepTypeResult = questionstepResult as! ORKChoiceQuestionResult
+            if Utilities.isValidObject(someObject:stepTypeResult.choiceAnswers as AnyObject?){
+                if (stepTypeResult.choiceAnswers?.count)! > 0{
+                    self.value = stepTypeResult.choiceAnswers?.first
+                }
+                else{
+                    self.value = ""
+                }
+                
+            }
+            else{
+                self.value = ""
+            }
+        case ORKQuestionType.multipleChoice.rawValue: //textchoice + value picker + imageChoice + textchoice
+            
+            let stepTypeResult = questionstepResult as! ORKChoiceQuestionResult
+            if Utilities.isValidObject(someObject:stepTypeResult.choiceAnswers as AnyObject?){
+                if (stepTypeResult.choiceAnswers?.count)! > 1{
+                    self.value = stepTypeResult.choiceAnswers
+                }
+                else{
+                    self.value = stepTypeResult.choiceAnswers?.first
+                }
+                
+            }
+            else{
+                self.value = ""
+            }
+            
+            
+        case ORKQuestionType.boolean.rawValue:
+            
+            let stepTypeResult = questionstepResult as! ORKBooleanQuestionResult
+            
+            if Utilities.isValidValue(someObject: stepTypeResult.booleanAnswer as AnyObject?){
+                self.value = stepTypeResult.booleanAnswer!
+            }
+            else{
+                self.value = 0
+            }
+            
+        case ORKQuestionType.integer.rawValue: // numeric type
+            let stepTypeResult = questionstepResult as! ORKNumericQuestionResult
+            
+            if Utilities.isValidValue(someObject: stepTypeResult.numericAnswer as AnyObject?){
+                self.value =  "\(Double(stepTypeResult.numericAnswer!))" + stepTypeResult.unit!
+            }
+            else{
+                self.value = 0.0
+            }
+        case ORKQuestionType.decimal.rawValue: // numeric type
+            let stepTypeResult = questionstepResult as! ORKNumericQuestionResult
+            
+            if Utilities.isValidValue(someObject: stepTypeResult.numericAnswer as AnyObject?){
+                self.value =  "\(Double(stepTypeResult.numericAnswer!))" + stepTypeResult.unit!
+            }
+            else{
+                self.value = 0.0
+            }
+        case  ORKQuestionType.timeOfDay.rawValue:
+            
+            let stepTypeResult = questionstepResult as! ORKTimeOfDayQuestionResult
+            
+            if (stepTypeResult.dateComponentsAnswer?.isValidDate)!{
+                self.value =  "\(stepTypeResult.dateComponentsAnswer?.hour)" + ":" + "\(stepTypeResult.dateComponentsAnswer?.minute)" + ":" + "\(stepTypeResult.dateComponentsAnswer?.second)"
+            }
+            else{
+                self.value = "00:00:00"
+            }
+            
+        case ORKQuestionType.date.rawValue:
+            let stepTypeResult = questionstepResult as! ORKDateQuestionResult
+            
+            if Utilities.isValidValue(someObject: stepTypeResult.dateAnswer as AnyObject?){
+                self.value =  Utilities.getStringFromDate(date: stepTypeResult.dateAnswer! )
+            }
+            else{
+                self.value = "00:00:0000"
+            }
+            
+        case ORKQuestionType.text.rawValue: // text + email
+            
+            let stepTypeResult = questionstepResult as! ORKTextQuestionResult
+            
+            if Utilities.isValidValue(someObject: stepTypeResult.answer as AnyObject?){
+                self.value = stepTypeResult.answer
+            }
+            else{
+                self.value = ""
+            }
+            
+        case ORKQuestionType.timeInterval.rawValue:
+            
+            let stepTypeResult = questionstepResult as! ORKTimeIntervalQuestionResult
+            
+            if Utilities.isValidValue(someObject: stepTypeResult.intervalAnswer as AnyObject?){
+                self.value = Double(stepTypeResult.intervalAnswer!)
+            }
+            else{
+                self.value = 0.0
+            }
+            
+            
+        case ORKQuestionType.height.rawValue:
+            
+            let stepTypeResult = questionstepResult as! ORKNumericQuestionResult
+            
+            if Utilities.isValidValue(someObject: stepTypeResult.numericAnswer as AnyObject?){
+                self.value = Double(stepTypeResult.numericAnswer!)
+            }
+            else{
+                self.value = 0.0
+            }
+            
+        case ORKQuestionType.location.rawValue:
+            let stepTypeResult = questionstepResult as! ORKLocationQuestionResult
+            
+            if CLLocationCoordinate2DIsValid((stepTypeResult.locationAnswer?.coordinate)! ){
+                self.value = "\(stepTypeResult.locationAnswer?.coordinate.latitude)" + "," + "\(stepTypeResult.locationAnswer?.coordinate.longitude)"
+            }
+            else{
+                self.value = "0.0,0.0"
+            }
+            
+            
+        default:break
+        }
+    }
+    
     
     //MARK: Setter & Getter methods for Step
     

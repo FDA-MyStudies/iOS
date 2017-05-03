@@ -97,6 +97,7 @@ class DBHandler: NSObject {
                     dbStudy?.logoURL = study.logoURL
                     dbStudy?.startDate = study.startDate
                     dbStudy?.endEnd = study.endEnd
+                    dbStudy?.status = study.status.rawValue
                     
                     if dbStudy?.participatedStatus == UserStudyStatus.StudyStatus.inProgress.rawValue {
                         dbStudy?.updatedVersion = "2"
@@ -136,6 +137,8 @@ class DBHandler: NSObject {
         dbStudy.enrolling = study.studySettings.enrollingAllowed
         dbStudy.rejoin = study.studySettings.rejoinStudyAfterWithdrawn
         dbStudy.platform = study.studySettings.platform
+        dbStudy.status = study.status.rawValue
+        dbStudy.participatedStatus = study.userParticipateState.status.rawValue
         
         return dbStudy
         
@@ -162,13 +165,22 @@ class DBHandler: NSObject {
             study.logoURL = dbStudy.logoURL
             study.startDate = dbStudy.startDate
             study.endEnd = dbStudy.endEnd
+            study.status = StudyStatus(rawValue:dbStudy.status!)!
             
+            //settings
             let studySettings = StudySettings()
             studySettings.enrollingAllowed = dbStudy.enrolling
             studySettings.rejoinStudyAfterWithdrawn = dbStudy.rejoin
             studySettings.platform = dbStudy.platform!
             
             study.studySettings = studySettings
+            
+            //status
+            let participatedStatus = UserStudyStatus()
+            participatedStatus.status = UserStudyStatus.StudyStatus(rawValue:dbStudy.participatedStatus)!
+            participatedStatus.bookmarked = dbStudy.bookmarked
+            participatedStatus.studyId = dbStudy.studyId
+            study.userParticipateState = participatedStatus
             
             studies.append(study)
         }

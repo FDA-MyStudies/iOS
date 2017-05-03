@@ -80,9 +80,7 @@ class StudyListViewController: UIViewController {
         self.navigationController?.setNavigationBarHidden(false, animated: true)
         self.navigationController?.navigationBar.isHidden = false
         
-        //self.loadStudiesFromDatabase()
-        self.sendRequestToGetStudyList()
-       
+        
         if User.currentUser.userType == .FDAUser {
             
             self.tableView?.estimatedRowHeight = 156
@@ -92,8 +90,13 @@ class StudyListViewController: UIViewController {
         else {
             self.tableView?.estimatedRowHeight = 140
             self.tableView?.rowHeight = UITableViewAutomaticDimension
-            
+            self.sendRequestToGetStudyList()
         }
+        
+        //self.loadStudiesFromDatabase()
+        
+       
+        
         
         UIApplication.shared.statusBarStyle = .default
     }
@@ -127,7 +130,23 @@ class StudyListViewController: UIViewController {
         
         DBHandler.loadStudyListFromDatabase { (studies) in
             if studies.count > 0 {
-                Gateway.instance.studies = studies
+               
+                
+                
+                
+                let  sortedstudies =  studies.sorted(by: { (study1:Study, study2:Study) -> Bool in
+                    //return ((study1.status.sortIndex < study2.status.sortIndex) && (study1.userParticipateState.status.sortIndex < study2.userParticipateState.status.sortIndex))
+                   return (study1.userParticipateState.status.sortIndex < study2.userParticipateState.status.sortIndex)
+                })
+                
+                let  sortedstudies2 =  sortedstudies.sorted(by: { (study1:Study, study2:Study) -> Bool in
+                    //return ((study1.status.sortIndex < study2.status.sortIndex) && (study1.userParticipateState.status.sortIndex < study2.userParticipateState.status.sortIndex))
+                    
+                    return (study1.status.sortIndex < study2.status.sortIndex)
+                })
+                
+                
+                Gateway.instance.studies = sortedstudies2
                 self.tableView?.reloadData()
             }
             else {
@@ -380,8 +399,20 @@ extension StudyListViewController:NMWebServiceDelegate {
             self.navigateToStudyHome()
         }
         else if (requestName as String == RegistrationMethods.userPreferences.description){
-            //self.sendRequestToGetStudyList()
-            self.tableView?.reloadData()
+            
+            self.addProgressIndicator()
+            self.sendRequestToGetStudyList()
+            
+            //self.tableView?.reloadData()
+            
+            
+//            let studies = Gateway.instance.studies?.sorted(by: { (study1:Study, study2:Study) -> Bool in
+//                return study1.userParticipateState.status.sortIndex < study2.userParticipateState.status.sortIndex
+//            })
+//            Gateway.instance.studies = studies
+//            
+//            self.tableView?.reloadData()
+            
         }
         else if (requestName as String == WCPMethods.studyUpdates.rawValue){
             self.handleStudyUpdatedInformation()

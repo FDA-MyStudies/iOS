@@ -8,12 +8,18 @@
 
 import Foundation
 import UIKit
+import MessageUI
 
 class WebViewController : UIViewController{
     
     @IBOutlet var webView : UIWebView?
+    @IBOutlet var barItemShare : UIBarButtonItem?
+    
     var activityIndicator:UIActivityIndicatorView!
     var requestLink:String?
+    
+    
+    var isEmailAvailable:Bool? = false
     
     var htmlString: String?
     override func viewDidLoad() {
@@ -33,6 +39,10 @@ class WebViewController : UIViewController{
         self.view.addSubview(activityIndicator)
         activityIndicator.startAnimating()
         
+        
+        if self.isEmailAvailable == false{
+            barItemShare = nil
+        }
         
         
         if self.requestLink != nil && (self.requestLink?.characters.count)! > 0 {
@@ -71,8 +81,66 @@ class WebViewController : UIViewController{
     @IBAction func cancelButtonClicked(_ sender : Any){
         self.dismiss(animated: true, completion: nil)
     }
+    
+    @IBAction func buttonActionShare(_ sender : UIBarButtonItem){
+        
+    }
+    
+   
+    func sendConsentByMail() {
+        let mailComposerVC = MFMailComposeViewController()
+        mailComposerVC.mailComposeDelegate = self
+        
+        
+        mailComposerVC.setSubject("Consent")
+       
+         let data:Data?
+       
+        
+        if self.requestLink != nil && (self.requestLink?.characters.count)! > 0 {
+           
+            do {
+              data = try Data.init(contentsOf: URL.init(string:self.requestLink! )! )
+                
+                 mailComposerVC.addAttachmentData(data!, mimeType: "application/pdf", fileName:"UnsignedConset")
+                
+                 mailComposerVC.setMessageBody("", isHTML: false)
+                
+            } catch {
+                print("Error: \(error)")
+            }
+        }
+        else if self.htmlString != nil {
+            mailComposerVC.setMessageBody(self.htmlString!, isHTML: true)
+           
+        }
+        else{
+        }
+        
+        if MFMailComposeViewController.canSendMail()
+        {
+            self.present(mailComposerVC, animated: true, completion: nil)
+        }
+        else{
+            let alert = UIAlertController(title:NSLocalizedString(kTitleError, comment: ""),message:"",preferredStyle: UIAlertControllerStyle.alert)
+            
+            alert.addAction(UIAlertAction.init(title:NSLocalizedString("OK", comment: ""), style: .default, handler: { (action) in
+                
+                self.dismiss(animated: true, completion: nil)
+                
+            }))
+        }
+        
+        
+    }
+    
 }
 
+extension WebViewController:MFMailComposeViewControllerDelegate{
+    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+        controller.dismiss(animated: true, completion: nil)
+    }
+}
 extension WebViewController:UIWebViewDelegate{
     
     func webViewDidFinishLoad(_ webView: UIWebView) {
@@ -98,6 +166,8 @@ extension WebViewController:UIWebViewDelegate{
         
     }
 }
+
+
 
 
 

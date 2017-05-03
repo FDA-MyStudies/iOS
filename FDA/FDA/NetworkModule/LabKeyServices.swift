@@ -19,7 +19,7 @@ class LabKeyServices: NSObject {
     let networkManager = NetworkManager.sharedInstance()
     var delegate:NMWebServiceDelegate! = nil
     
-     //MARK:Requests
+    //MARK:Requests
     func enrollForStudy(studyId:String, token:String , delegate:NMWebServiceDelegate){
         self.delegate = delegate
         let method = ResponseMethods.enroll.method
@@ -38,7 +38,7 @@ class LabKeyServices: NSObject {
         
         let params = [kEnrollmentToken:token,
                       kStudyId:studyId
-                      ]
+        ]
         
         self.sendRequestWith(method:method, params: params, headers: nil)
     }
@@ -50,20 +50,47 @@ class LabKeyServices: NSObject {
         let params = [kStudyId:studyId,
                       kParticipantId:participantId,
                       kDeleteResponses:deleteResponses
-                      ] as [String : Any]
+            ] as [String : Any]
         
         self.sendRequestWith(method:method, params: params, headers: nil)
     }
     
-    func processResponse(delegate:NMWebServiceDelegate){
+    func processResponse(responseData:Dictionary<String,Any>, delegate:NMWebServiceDelegate){
         self.delegate = delegate
+        
+        let method = ResponseMethods.processResponse.method
+        
+        let studyId =  "CAFDA12" // Study.currentStudy?.studyId!
+        let activiyId = "QR-4" // Study.currentActivity?.actvityId!
+        let activityName =  "QR4" //Study.currentActivity?.shortName!
+        let activityVersion = "1.0" //Study.currentActivity?.version!
+        let currentRunId = Study.currentActivity?.currentRunId
+        
+        let info =  [kStudyId:studyId ,
+                     kActivityId:activiyId ,
+                     kActivityName:activityName ,
+                     kActivityVersion :activityVersion ,
+                     kActivityRunId:currentRunId!
+            ] as [String : Any]
+        
+        let ActivityType = Study.currentActivity?.type?.rawValue
+        
+        let params = [kActivityType:ActivityType! ,
+                      kActivityInfoMetaData:info,
+                      kParticipantId:"32ac0aa495530a1960f5d2849ebdf4d1",
+                      kActivityResponseData :responseData
+            ] as [String : Any]
+        
+        self.sendRequestWith(method:method, params: params, headers: nil)
+        
+        
     }
     
     func getParticipantResponse(delegate:NMWebServiceDelegate){
         self.delegate = delegate
     }
     
-     //MARK:Parsers
+    //MARK:Parsers
     func handleEnrollForStudy(response:Dictionary<String, Any>){
         
     }
@@ -83,9 +110,9 @@ class LabKeyServices: NSObject {
     func handleGetParticipantResponse(response:Dictionary<String, Any>){
         
     }
-
-
-
+    
+    
+    
     
     private func sendRequestWith(method:Method, params:Dictionary<String, Any>,headers:Dictionary<String, String>?){
         

@@ -31,6 +31,10 @@ class StudyHomeViewController : UIViewController{
     @IBOutlet var buttonStar : UIButton!
     @IBOutlet var buttonJoinStudy : UIButton?
     @IBOutlet var visitWebsiteButtonLeadingConstraint:NSLayoutConstraint?
+    
+    
+     @IBOutlet var visitWebsiteButtonTrailingConstraint:NSLayoutConstraint?
+    
     @IBOutlet var buttonVisitWebsite : UIButton?
     @IBOutlet var buttonViewConsent : UIButton?
     @IBOutlet var viewBottombarBg :UIView?
@@ -38,6 +42,8 @@ class StudyHomeViewController : UIViewController{
     
     var isStudyBookMarked = false
     var delegate:StudyHomeViewDontrollerDelegate?
+    
+    var hideViewConsentAfterJoining = false
     
     var pageViewController: PageViewController? {
         didSet {
@@ -83,8 +89,33 @@ class StudyHomeViewController : UIViewController{
         else{
             buttonVisitWebsite?.isHidden = false
             visitWebsiteButtonLeadingConstraint?.constant = 0
+          
+            
             viewSeperater?.isHidden = false
         }
+        
+        // If coming from Activity Resources
+        if hideViewConsentAfterJoining == true{
+            
+            if Utilities.isValidValue(someObject: Study.currentStudy?.overview.websiteLink as AnyObject? ){
+                buttonVisitWebsite?.isHidden = false
+                visitWebsiteButtonLeadingConstraint?.constant = 0.0
+                self.view.layoutIfNeeded()
+                buttonVisitWebsite?.backgroundColor = UIColor.red
+                
+                 // visitWebsiteButtonTrailingConstraint?.constant =
+                
+                viewSeperater?.isHidden = true
+                
+                buttonViewConsent?.isHidden = true
+            }
+            else{
+                 buttonVisitWebsite?.isHidden =  true
+            }
+            
+            
+        }
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -389,6 +420,7 @@ class StudyHomeViewController : UIViewController{
         let loginStoryboard = UIStoryboard.init(name: "Main", bundle:Bundle.main)
         let webViewController = loginStoryboard.instantiateViewController(withIdentifier:"WebViewController") as! UINavigationController
         let webView = webViewController.viewControllers[0] as! WebViewController
+        webView.isEmailAvailable = true
         
         if link != nil {
             webView.requestLink = Study.currentStudy?.overview.websiteLink

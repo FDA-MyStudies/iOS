@@ -41,7 +41,9 @@ class ResourcesViewController : UIViewController{
         super.viewWillAppear(animated)
         
          UIApplication.shared.statusBarStyle = .default
+        self.navigationController?.setNavigationBarHidden(false, animated: true)
         
+        self.tabBarController?.tabBar.isHidden = false
         
     }
     
@@ -109,6 +111,52 @@ class ResourcesViewController : UIViewController{
         tableView?.isHidden =  false
         tableView?.reloadData()
     }
+    
+    func navigateToStudyHome(){
+        
+        let studyStoryBoard = UIStoryboard.init(name: "Study", bundle: Bundle.main)
+        let studyHomeController = studyStoryBoard.instantiateViewController(withIdentifier: String(describing: StudyHomeViewController.classForCoder())) as! StudyHomeViewController
+        studyHomeController.hideViewConsentAfterJoining = true
+        
+        studyHomeController.hidesBottomBarWhenPushed = true
+        self.navigationController?.pushViewController(studyHomeController, animated: true)
+        
+    }
+    
+    
+    func navigateToWebView(link:String?,htmlText:String?){
+        
+        let loginStoryboard = UIStoryboard.init(name: "Main", bundle:Bundle.main)
+        let webViewController = loginStoryboard.instantiateViewController(withIdentifier:"WebViewController") as! UINavigationController
+        let webView = webViewController.viewControllers[0] as! WebViewController
+        webView.isEmailAvailable = true
+        
+        if link != nil {
+            webView.requestLink = Study.currentStudy?.overview.websiteLink
+        }
+        
+        self.navigationController?.present(webViewController, animated: true, completion: nil)
+    }
+    
+    
+    
+    func checkDatabaseForStudyInfo(study:Study){
+        
+        DBHandler.loadStudyOverview(studyId: (study.studyId)!) { (overview) in
+            if overview != nil {
+                study.overview = overview
+                self.navigateToStudyHome()
+            }
+            else {
+                self.sendRequestToGetStudyInfo(study: study)
+            }
+        }
+    }
+    func sendRequestToGetStudyInfo(study:Study){
+        WCPServices().getStudyInformation(studyId: study.studyId, delegate: self)
+    }
+    
+    
 }
 
 
@@ -196,6 +244,23 @@ extension ResourcesViewController : UITableViewDelegate{
                 // else if delete_data
                 
             }
+            else if  resource as! String == "About the Study"{
+                
+                self.checkDatabaseForStudyInfo(study: Study.currentStudy!)
+                
+            }
+            else if  resource as! String == "Consent PDF"{
+                
+                //PENDING
+                
+                let dir = FileManager.getStorageDirectory(type: .study)
+                
+                let fullPath = "file://" + dir + "/" + "Consent" +  "_" + "\((Study.currentStudy?.studyId)!)" + ".pdf"
+                
+                
+                self.navigateToWebView(link: fullPath, htmlText: "")
+            }
+                
             else{
                 
             }
@@ -244,6 +309,14 @@ extension ResourcesViewController:NMWebServiceDelegate {
            // self.navigationController?.navigationBar.isHidden = false
            // self.performSegue(withIdentifier: "unwindeToStudyListResourcesIdentifier", sender: self)
         }
+        else if(requestName as String == WCPMethods.studyInfo.rawValue){
+            
+           
+            
+            self.tabBarController?.tabBar.isHidden = true
+            
+            self.navigateToStudyHome()
+        }
         
         
     }
@@ -251,8 +324,15 @@ extension ResourcesViewController:NMWebServiceDelegate {
         Logger.sharedInstance.info("requestname : \(requestName)")
         self.removeProgressIndicator()
         
-        
-        
+        if requestName as String == WCPMethods.resources.method.methodName {
+            
+            self.addDefaultList()
+            self.appendLeaveStudy()
+            self.tableView?.isHidden = false
+            self.tableView?.reloadData()
+            
+            
+        }
     }
 }
 

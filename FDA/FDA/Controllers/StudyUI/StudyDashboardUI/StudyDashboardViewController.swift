@@ -43,7 +43,7 @@ class StudyDashboardViewController : UIViewController{
         
         
         
-        
+        self.sendRequestToGetDashboardInfo()
         
         //check if consent is udpated
         
@@ -257,7 +257,7 @@ extension StudyDashboardViewController:NMWebServiceDelegate {
     }
     
     func finishedRequest(_ manager: NetworkManager, requestName: NSString, response: AnyObject?) {
-        Logger.sharedInstance.info("requestname : \(requestName)")
+        Logger.sharedInstance.info("requestname : \(requestName) response ; \(response)")
         
         self.removeProgressIndicator()
         

@@ -150,7 +150,7 @@
                     if response?["forceUpdate"] as! Bool {
                         
                         let appBlocker = AppUpdateBlocker.instanceFromNib(frame:(UIApplication.shared.keyWindow?.bounds)!, detail: response as! Dictionary<String, Any>);
-                        UIApplication.shared.keyWindow?.addSubview(appBlocker);
+                       // UIApplication.shared.keyWindow?.addSubview(appBlocker);
                     }
                     else {
                          UIUtilities.showAlertWithMessage(alertMessage: response?["message"] as! String);

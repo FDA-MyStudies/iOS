@@ -43,13 +43,16 @@ class ActivitiesViewController : UIViewController{
         
         if (Study.currentStudy?.studyId) != nil {
             
-           
-            WCPServices().getStudyActivityList(studyId: (Study.currentStudy?.studyId)!, delegate: self)
-            //load from database
-            self.loadActivitiesFromDatabase()
             
+            //WCPServices().getStudyActivityList(studyId: (Study.currentStudy?.studyId)!, delegate: self)
+            //load from database
+            //self.loadActivitiesFromDatabase()
+            
+            self.sendRequestToGetActivityStates()
   
         }
+        
+        
         
     }
     
@@ -65,6 +68,8 @@ class ActivitiesViewController : UIViewController{
         
         
     }
+    
+    
     
     func loadActivitiesFromDatabase(){
         
@@ -223,14 +228,29 @@ class ActivitiesViewController : UIViewController{
         
         self.tableView?.reloadData()
         
+        self.removeProgressIndicator()
+        
     }
     
     func updateActivityRunStuatus(status:UserActivityStatus.ActivityStatus){
         
         let activity = Study.currentActivity!
         let status = User.currentUser.updateActivityStatus(studyId: activity.studyId!, activityId: activity.actvityId!,runId: String(activity.currentRunId), status:status)
-        UserServices().updateUserActivityParticipatedStatus(activityStatus: status, delegate: self)
+        UserServices().updateUserActivityParticipatedStatus(studyId:activity.studyId!, activityStatus: status, delegate: self)
+        
+        self.updateCompletionAdherence()
     }
+    
+    func updateCompletionAdherence(){
+        
+        let studyid = (Study.currentStudy?.studyId)!
+        DBHandler.loadAllStudyRuns(studyId: studyid) { (completion, adherence) in
+            //
+            let status = User.currentUser.udpateCompletionAndAdherence(studyId:studyid, completion: completion, adherence: adherence)
+            UserServices().udpateCompletionAdherence(studyStauts: status, delegate: self)
+        }
+    }
+    
     
     func updateActivityStatusToInProgress(){
         
@@ -250,6 +270,15 @@ class ActivitiesViewController : UIViewController{
         DBHandler.updateRunToComplete(runId: activity.currentRunId, activityId: activity.actvityId!, studyId: activity.studyId!)
         self.updateActivityStatusToComplete()
     }
+    
+    
+    func sendRequestToGetActivityStates(){
+        UserServices().getUserActivityState(studyId: (Study.currentStudy?.studyId)!, delegate: self)
+    }
+    func sendRequesToGetActivityList(){
+        WCPServices().getStudyActivityList(studyId: (Study.currentStudy?.studyId)!, delegate: self)
+    }
+    
 
 }
 
@@ -423,9 +452,12 @@ extension ActivitiesViewController:NMWebServiceDelegate {
     func finishedRequest(_ manager: NetworkManager, requestName: NSString, response: AnyObject?) {
         Logger.sharedInstance.info("requestname : \(requestName) Response : \(response)")
         
-        self.removeProgressIndicator()
         
-        if requestName as String == WCPMethods.activityList.method.methodName {
+        
+        if requestName as String == RegistrationMethods.activityState.method.methodName{
+            self.sendRequesToGetActivityList()
+        }
+        else if requestName as String == WCPMethods.activityList.method.methodName {
                        
             //self.tableView?.reloadData()
             //self.handleActivityListResponse()
@@ -433,9 +465,11 @@ extension ActivitiesViewController:NMWebServiceDelegate {
             
         }
         else if requestName as String == WCPMethods.activity.method.methodName {
+            self.removeProgressIndicator()
             self.createActivity()
         }
         else if requestName as String == ResponseMethods.processResponse.method.methodName{
+            self.removeProgressIndicator()
              self.updateRunStatusToComplete()
         }
         
@@ -468,7 +502,7 @@ extension ActivitiesViewController:ORKTaskViewControllerDelegate{
         case ORKTaskViewControllerFinishReason.completed:
             print("completed")
             taskResult = taskViewController.result
-            //self.updateRunStatusToComplete()
+            self.updateRunStatusToComplete()
         case ORKTaskViewControllerFinishReason.failed:
             print("failed")
             taskResult = taskViewController.result

@@ -143,6 +143,12 @@ class StudyListCell: UITableViewCell {
             //user study status
             labelStudyUserStatus?.text = userStudyStatus.status.description
             
+            //update completion %
+            self.labelCompletionValue?.text = String(userStudyStatus.completion) + "%"
+            self.labelAdherenceValue?.text = String(userStudyStatus.adherence)  + "%"
+            self.progressBarCompletion?.progress = Float(userStudyStatus.completion)/100
+            self.progressBarAdherence?.progress = Float(userStudyStatus.adherence)/100
+            
             switch userStudyStatus.status {
             case .inProgress:
                 studyUserStatusIcon?.image = #imageLiteral(resourceName: "in_progress_icn")

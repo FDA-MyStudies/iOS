@@ -68,7 +68,7 @@ class StudyListViewController: UIViewController {
         
         //get Profile data to check for passcode
         //Condition missing
-        UserServices().getUserProfile(self as NMWebServiceDelegate)
+        //UserServices().getUserProfile(self as NMWebServiceDelegate)
       
     }
     
@@ -262,7 +262,7 @@ class StudyListViewController: UIViewController {
         WCPServices().getStudyInformation(studyId: study.studyId, delegate: self)
     }
     func sendRequestToGetUserPreference(){
-        UserServices().getUserPreference(self)
+        UserServices().getStudyStates(self)
     }
     func sendRequestToUpdateBookMarkStatus(userStudyStatus:UserStudyStatus){
         UserServices().updateStudyBookmarkStatus(studyStauts: userStudyStatus, delegate: self)
@@ -412,34 +412,30 @@ extension StudyListViewController:NMWebServiceDelegate {
     func finishedRequest(_ manager: NetworkManager, requestName: NSString, response: AnyObject?) {
         Logger.sharedInstance.info("requestname : \(requestName) : \(response)")
         
-        self.removeProgressIndicator()
+       
         
         if requestName as String == WCPMethods.studyList.rawValue{
             self.handleStudyListResponse()
+            self.removeProgressIndicator()
         }
         else if(requestName as String == WCPMethods.studyInfo.rawValue){
+             self.removeProgressIndicator()
             self.navigateToStudyHome()
         }
-        else if (requestName as String == RegistrationMethods.userPreferences.description){
+        else if (requestName as String == RegistrationMethods.studyState.description){
             
-            self.addProgressIndicator()
+            
             self.sendRequestToGetStudyList()
-            
-            //self.tableView?.reloadData()
-            
-            
-//            let studies = Gateway.instance.studies?.sorted(by: { (study1:Study, study2:Study) -> Bool in
-//                return study1.userParticipateState.status.sortIndex < study2.userParticipateState.status.sortIndex
-//            })
-//            Gateway.instance.studies = studies
-//            
-//            self.tableView?.reloadData()
+             
+           
             
         }
         else if (requestName as String == WCPMethods.studyUpdates.rawValue){
+             self.removeProgressIndicator()
             self.handleStudyUpdatedInformation()
         }
         else if requestName as String ==  RegistrationMethods.userProfile.description {
+             self.removeProgressIndicator()
             if User.currentUser.settings?.passcode == true {
                 self.setPassCode()
             }

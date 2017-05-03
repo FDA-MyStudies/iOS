@@ -491,6 +491,25 @@ class DBHandler: NSObject {
         
     }
     
+    class func loadAllStudyRuns(studyId:String,completionHandler:@escaping (_ completion:Int,_ adherence:Int) -> ()){
+        
+        let date = Date()
+        let realm = try! Realm()
+        let studyRuns = realm.objects(DBActivityRun.self).filter("studyId == %@",studyId)
+        let completedRuns = studyRuns.filter({$0.isCompleted == true})
+        let runsBeforeToday = studyRuns.filter({($0.endDate == nil) || ($0.endDate <= date)})
+        let incompleteRuns = runsBeforeToday.count - completedRuns.count
+        
+        let completion = ceil( Double((completedRuns.count + incompleteRuns)*100/studyRuns.count) )
+        let adherence = ceil (Double((completedRuns.count)*100/(completedRuns.count + incompleteRuns)))
+        
+        completionHandler(Int(completion),Int(adherence))
+        
+        
+        print("complete: \(completedRuns.count) , incomplete: \(incompleteRuns)")
+        
+    }
+    
     class func saveActivityRuns(activityId:String,studyId:String,runs:Array<ActivityRun>){
         
         let realm = try! Realm()

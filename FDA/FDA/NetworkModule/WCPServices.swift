@@ -22,6 +22,7 @@ let kStudyTagLine = "tagline"
 let kStudyVersion = "studyVersion"
 
 let kStudyStatus = "status"
+let kActivityStatus = "activityState"
 let kStudyLogoURL = "logo"
 let kStudySettings = "settings"
 let kStudyEnrolling = "enrolling"
@@ -159,7 +160,7 @@ class WCPServices: NSObject {
 
         let method = WCPMethods.studyDashboard.method
         let params = [kStudyId:studyId]
-        self.sendRequestWith(method:method, params: params, headers: nil)
+        self.sendRequestWith(method:method, params: nil, headers: params)
     }
     
     func getTermsPolicy(studyId:String, delegate:NMWebServiceDelegate){

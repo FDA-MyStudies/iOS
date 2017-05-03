@@ -11,6 +11,8 @@ import Foundation
 import ResearchKit
 
 let kActivityResult = "result"
+let kActivityResults = "results"
+
 
 class ActivityResult {
     
@@ -45,8 +47,11 @@ class ActivityResult {
                 
                 activityStepResult?.initWithORKStepResult(stepResult: stepResult as! ORKStepResult , activityType:(self.activity?.type)!)
                 
+                if stepResult.identifier != "CompletionStep"{
+                     self.result?.append(activityStepResult!)
+                }
                 
-                self.result?.append(activityStepResult!)
+               
                 
                 print("###: \n  \(activityStepResult?.getActivityStepResultDict())")
                 

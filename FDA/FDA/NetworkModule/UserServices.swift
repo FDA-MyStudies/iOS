@@ -37,6 +37,7 @@ let kUserVerified = "verified"
 let kUserAuthToken = "auth"
 let kStudies = "studies"
 let kActivites = "activities"
+let kActivityKey = "activity"
 let kConsent = "consent"
 let kEligibility = "eligibility"
 let kUserEligibilityStatus = "eligbibilityStatus"
@@ -67,6 +68,8 @@ let kStatus = "status"
 let kActivityId = "activityId"
 let kActivityVersion = "activityVersion"
 let kActivityRunId = "activityRunId"
+let kCompletion = "completion"
+let kAdherence = "adherence"
 
 //MARK: Logout Api constants
 let kLogoutReason = "reason"
@@ -300,12 +303,24 @@ class UserServices: NSObject {
         self.delegate = delegate
         
         let user = User.currentUser
-        let headerParams = [kUserId : user.userId!,
-                            kUserAuthToken: user.authToken] as Dictionary<String, String>
+        let headerParams = [kUserId : user.userId!] as Dictionary<String, String>
         
         let method = RegistrationMethods.studyState.method
         
         self.sendRequestWith(method:method, params: nil, headers: headerParams)
+    }
+    
+    func udpateCompletionAdherence(studyStauts:UserStudyStatus , delegate:NMWebServiceDelegate){
+        
+        self.delegate = delegate
+        
+        let user = User.currentUser
+        let headerParams = [kUserId : user.userId!]
+        
+        let params = [kStudies:[studyStauts.getCompletionAdherence()]] as [String : Any]
+        let method = RegistrationMethods.updateStudyState.method
+        
+        self.sendRequestWith(method:method, params: params, headers: headerParams)
     }
     
     func updateStudyBookmarkStatus(studyStauts:UserStudyStatus , delegate:NMWebServiceDelegate){
@@ -347,14 +362,15 @@ class UserServices: NSObject {
         self.sendRequestWith(method:method, params: params, headers: headerParams)
     }
     
-    func updateUserActivityParticipatedStatus(activityStatus:UserActivityStatus, delegate:NMWebServiceDelegate){
+    func updateUserActivityParticipatedStatus(studyId:String, activityStatus:UserActivityStatus, delegate:NMWebServiceDelegate){
         
         self.delegate = delegate
         
         
         let user = User.currentUser
         let headerParams = [kUserId : user.userId] as Dictionary<String, String>
-        let params = [kActivites:[activityStatus.getParticipatedUserActivityStatus()]] as [String : Any]
+        let params = [kStudyId:studyId,
+                      kActivity:[activityStatus.getParticipatedUserActivityStatus()]] as [String : Any]
         let method = RegistrationMethods.updateActivityState.method
         
         self.sendRequestWith(method:method, params: params, headers: headerParams)
@@ -421,12 +437,12 @@ class UserServices: NSObject {
         self.delegate = delegate
         
         let user = User.currentUser
-        let params = [kUserId : user.userId,
+        let params = [kUserId : user.userId!,
                       kStudyId: studyId]
         
         let method = RegistrationMethods.activityState.method
         
-        self.sendRequestWith(method:method, params: params, headers: nil)
+        self.sendRequestWith(method:method, params: nil, headers: params)
     }
     
     func withdrawFromStudy(studyId:String ,shouldDeleteData:Bool, delegate:NMWebServiceDelegate){

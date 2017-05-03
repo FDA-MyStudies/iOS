@@ -224,7 +224,7 @@ extension StudyDashboardViewController : UITableViewDataSource {
             else if tableViewData["isStudy"] as! String == "NO"{
                 
                 cell = tableView.dequeueReusableCell(withIdentifier: kStatisticsTableViewCell, for: indexPath) as! StudyDashboardStatisticsTableViewCell
-                (cell as! StudyDashboardStatisticsTableViewCell).statisticsArrayData = statisticsArray
+               // (cell as! StudyDashboardStatisticsTableViewCell).statisticsArrayData = statisticsArray
                 
                 //Used for setting it initially
                 (cell as! StudyDashboardStatisticsTableViewCell).buttonDay?.setTitle("  DAY  ", for: UIControlState.normal)
@@ -265,7 +265,7 @@ extension StudyDashboardViewController:NMWebServiceDelegate {
             self.createEligibilityConsentTask()
         }
         else if requestName as String == WCPMethods.studyDashboard.method.methodName {
-            
+            self.tableView?.reloadData()
         }
         
     }

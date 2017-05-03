@@ -300,6 +300,19 @@ class WCPServices: NSObject {
     
     func handleStudyDashboard(response:Dictionary<String, Any>){
         
+        let dashboard = response["dashboard"] as! Dictionary<String, Any>
+        
+        if Utilities.isValidObject(someObject: dashboard as AnyObject?){
+             let statsList = dashboard["statistics"] as! Array<Dictionary<String,Any>>
+             var listOfStats:Array<DashboardStatistics>! = []
+            for stat in statsList{
+                
+                let dashboardStat = DashboardStatistics.init(detail: stat)
+                listOfStats.append(dashboardStat)
+            }
+            
+            StudyDashboard.instance.statistics = listOfStats
+        }
     }
     
     func handleConsentDocument(response:Dictionary<String, Any>){

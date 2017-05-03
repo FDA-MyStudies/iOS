@@ -55,11 +55,15 @@ class AppNotification {
             if Utilities.isValidValue(someObject: detail[kNotificationType] as AnyObject ){
                 self.type = NotificationType(rawValue: detail[kNotificationType] as! String)!
             }
-            if Utilities.isValidObject(someObject: detail[kNotificationSubType] as AnyObject ) {
+            if Utilities.isValidValue(someObject: detail[kNotificationSubType] as AnyObject ) {
                  self.subType = NotificationSubType(rawValue: detail[kNotificationSubType] as! String)!
             }
-            if Utilities.isValidObject(someObject: detail[kNotificationAudience] as AnyObject ) {
+            if Utilities.isValidValue(someObject: detail[kNotificationAudience] as AnyObject ) {
                 self.audience = Audience(rawValue: detail[kNotificationAudience] as! String)!
+            }
+            
+            if Utilities.isValidValue(someObject: detail[kNotificationStudyId] as AnyObject ) {
+                self.studyId =  detail[kNotificationStudyId] as? String
             }
             
         }

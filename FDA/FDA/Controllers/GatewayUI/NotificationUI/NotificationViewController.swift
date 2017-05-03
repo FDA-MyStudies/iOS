@@ -101,7 +101,7 @@ extension NotificationViewController : UITableViewDelegate{
                 
               let index =  Gateway.instance.studies?.index(where: { $0.studyId == appNotif.studyId })
                 
-                Study.currentStudy = Gateway.instance.studies?[index!]
+                Study.updateCurrentStudy(study:(Gateway.instance.studies?[index!])! )
                 
                   self.pushToStudyDashboard(type:appNotif.subType )
             }

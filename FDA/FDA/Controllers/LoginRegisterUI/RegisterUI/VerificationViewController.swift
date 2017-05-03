@@ -36,7 +36,7 @@ class VerificationViewController : UIViewController{
     var shouldCreateMenu:Bool = true
     var viewLoadFrom:VerificationLoadFrom = .signup
     
-//MARK:- View Controllere delegates
+//MARK:- View Controllere Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -75,12 +75,25 @@ class VerificationViewController : UIViewController{
     
 //MARK:- Button Actions
  
-    /* Navigate to previous screen */
+    /**
+     
+     Navigate to previous screen 
+     
+     @param sender  accepts any object
+     
+     */
     @IBAction func buttonActionBack(_ sender : UIButton){
         _ = self.navigationController?.popViewController(animated: true)
     }
     
-    /* Used to send the verification mail to regestered mail id*/
+    
+    /**
+     
+     Used to send the verification mail to regestered mail id
+     
+     @param sender  accepts anyy object
+     
+     */
     @IBAction func continueTwoButtonAction( _ sender : UIButton){
         
         self.view.endEditing(true)
@@ -104,7 +117,14 @@ class VerificationViewController : UIViewController{
         }
     }
     
-    /* Send the verification mail id to regestered */
+    
+    /**
+     
+     Send the verification mail id to regestered 
+     
+     @param sender  accepts any object
+     
+     */
     @IBAction func continueButtonAction(_ sender: Any) {
         
         if (textFieldVerificationCode?.text?.characters.count)! > 0 {
@@ -115,7 +135,14 @@ class VerificationViewController : UIViewController{
         }
     }
     
-    /* Resend the verification code to regestered mail id */
+    
+    /**
+     
+     Resend the verification code to regestered mail id 
+     
+     @param sender  accepts any object
+     
+     */
     @IBAction func resendEmailButtonAction(_ sender: UIButton){
         
         var finalEmail:String = User.currentUser.emailId!
@@ -145,19 +172,33 @@ class VerificationViewController : UIViewController{
     
 //MARK:- Utility Methods
 
-    /*
+    /**
+     
      Used to show the alert using Utility
+     
+     @param textMessage     The message which is used to display in alert
+     
      */
     func showAlertMessages(textMessage : String){
         UIUtilities.showAlertMessage("", errorMessage: NSLocalizedString(textMessage, comment: ""), errorAlertActionTitle: NSLocalizedString("OK", comment: ""), viewControllerUsed: self)
     }
 
-    /* Navigate to Sign up completion screen */
+    
+    /**
+     
+     Navigate to Sign up completion screen 
+     
+     */
     func navigateToSignUpCompletionStep(){
         self.performSegue(withIdentifier: kSignupCompletionSegue, sender: nil)
     }
     
-    /* Navigate to change password screen */
+    
+    /**
+     
+     Navigate to change password screen 
+     
+     */
     func navigateToChangePasswordViewController(){
         
         let storyboard = UIStoryboard(name: "Gateway", bundle: nil)
@@ -177,7 +218,6 @@ class VerificationViewController : UIViewController{
 
 
 //MARK:- TextField Delegates
-
 extension VerificationViewController:UITextFieldDelegate{
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
@@ -206,7 +246,6 @@ extension VerificationViewController:UITextFieldDelegate{
 
 
 //MARK:- Webservice Delegates
-
 extension VerificationViewController:NMWebServiceDelegate {
     
     func startedRequest(_ manager: NetworkManager, requestName: NSString) {
@@ -267,7 +306,7 @@ extension VerificationViewController:NMWebServiceDelegate {
     }
 }
 
-
+//MARK:- ORKTaskViewController Delegate
 extension VerificationViewController:ORKTaskViewControllerDelegate{
     //MARK:ORKTaskViewController Delegate
     
@@ -302,7 +341,6 @@ extension VerificationViewController:ORKTaskViewControllerDelegate{
     func taskViewController(_ taskViewController: ORKTaskViewController, stepViewControllerWillAppear stepViewController: ORKStepViewController) {
         
     }
-    
 }
 
 

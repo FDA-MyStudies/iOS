@@ -37,31 +37,23 @@ class ProfileViewController: UIViewController {
     
     var tableViewRowDetails : NSMutableArray?
     var datePickerView:UIDatePicker?
-    
     var isCellEditable:Bool?
     var user = User.currentUser
-    
     var isPasscodeViewPresented:Bool = false
     
     @IBOutlet var tableViewProfile : UITableView?
     @IBOutlet var tableViewFooterViewProfile : UIView?
     @IBOutlet var buttonLeadTime:UIButton?
-    
     @IBOutlet var editBarButtonItem:UIBarButtonItem?
     @IBOutlet var tableTopConstraint:NSLayoutConstraint?
     
     
-//MARK:- ViewController delegates
+//MARK:- ViewController Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
         //First responder handler for textfields
-        
-        
-        
-        
         IQKeyboardManager.sharedManager().enable = true
-        
         
         //Load plist info
         let plistPath = Bundle.main.path(forResource: "Profile", ofType: ".plist", inDirectory:nil)
@@ -83,9 +75,6 @@ class ProfileViewController: UIViewController {
         if isPasscodeViewPresented == false{
             UserServices().getUserProfile(self as NMWebServiceDelegate)
         }
-        
-        
-        
         self.setNavigationBarItem()
         
         UIApplication.shared.statusBarStyle = .default
@@ -98,7 +87,15 @@ class ProfileViewController: UIViewController {
         
     }
     
+//MARK:- Button Actions
     
+    /**
+     
+     Change password button clicked
+     
+     @param sender    Accepts any object
+
+     */
     @IBAction func buttonActionChangePassCode(_ sender:UIButton){
         
         let passcodeStep = ORKPasscodeStep(identifier: "PasscodeStep")
@@ -112,6 +109,13 @@ class ProfileViewController: UIViewController {
     }
     
     
+    /**
+     
+     Edit Profile button clicked
+     
+     @param sender    Accepts UIbarButtonItem
+
+     */
     @IBAction func editBarButtonAction(_ sender:UIBarButtonItem){
         
         if self.isCellEditable! == false  {
@@ -132,9 +136,13 @@ class ProfileViewController: UIViewController {
         self.tableViewProfile?.reloadData()
     }
     
-    /*
-     button action for LeadtimeButton, CancelButton & DoneButton
-     @param sender  UIButton
+    
+    /**
+     
+     Button action for LeadtimeButton, CancelButton & DoneButton
+     
+     @param sender  Accepts UIButton object
+     
      */
     @IBAction func buttonActionLeadTime(_ sender: UIButton) {
         
@@ -187,7 +195,14 @@ class ProfileViewController: UIViewController {
         
     }
     
-    /* Signout Button Clicked */
+    
+    /**
+     
+     Signout Button Clicked
+     
+     @param sender  Accepts UIButton Object
+     
+     */
     @IBAction func buttonActionSignOut(_ sender: UIButton) {
         
         UIUtilities.showAlertMessageWithTwoActionsAndHandler(NSLocalizedString("Sign Out", comment: ""), errorMessage: NSLocalizedString("Are you sure you want to Sign Out ?", comment: ""), errorAlertActionTitle: NSLocalizedString("Sign out", comment: ""),
@@ -205,7 +220,14 @@ class ProfileViewController: UIViewController {
         
     }
     
-    /* Delete Account clicked*/
+    
+    /**
+     
+     Delete Account clicked
+     
+     @param sender  Accepts UIButton Object
+     
+     */
     @IBAction func buttonActionDeleteAccount(_ sender: UIButton) {
         //self.performSegue(withIdentifier: kConfirmationSegueIdentifier, sender: nil)
         UIUtilities.showAlertMessageWithTwoActionsAndHandler(NSLocalizedString(kTitleDeleteAccount, comment: ""), errorMessage: NSLocalizedString(kDeleteAccountConfirmationMessage, comment: ""), errorAlertActionTitle: NSLocalizedString(kTitleDeleteAccount, comment: ""),
@@ -225,24 +247,40 @@ class ProfileViewController: UIViewController {
     
 //MARK:- Utility Methods
     
-    /*
+    /**
+     
      Dismiss key board when clicked on Background
+     
      */
     func dismissKeyboard(){
         self.view.endEditing(true)
     }
     
-    /* Api Call to SignOut
+    
+    /**
+     
+     Api Call to SignOut
+     
      */
     func sendRequestToSignOut() {
         UserServices().logoutUser(self)
     }
+    
+    
+    /**
+ 
+     Api call to delete account
+     
+     */
     func sendRequestToDeleteAccount(){
         UserServices().deActivateAccount(self)
     }
     
-    /*
+    
+    /**
+     
      SignOut Response handler for slider menu setup
+     
      */
     func handleSignoutResponse(){
         debugPrint("singout")
@@ -252,6 +290,13 @@ class ProfileViewController: UIViewController {
         leftController.createLeftmenuItems()
         
     }
+    
+    
+    /**
+     
+     DeleteAccount Response handler
+     
+     */
     func handleDeleteAccountResponse(){
         // fdaSlideMenuController()?.navigateToHomeAfterSingout()
         
@@ -267,8 +312,11 @@ class ProfileViewController: UIViewController {
         }
     }
     
-    /*
-     setInitialData sets lead Time
+    
+    /**
+     
+     SetInitialData sets lead Time
+     
      */
     func setInitialDate()  {
         
@@ -278,8 +326,6 @@ class ProfileViewController: UIViewController {
         else{
             Logger.sharedInstance.debug("settings/LeadTime is null")
         }
-        
-        
         self.title = NSLocalizedString(kProfileTitleText, comment: "")
         self.isCellEditable =  false
         
@@ -287,9 +333,12 @@ class ProfileViewController: UIViewController {
     }
     
     
-    /*
-     toggle Value change  method for cell Togges
+    /**
+     
+     Toggle Value change  method for cell Togges
+     
      @param Sender  has to be a UISwitch
+     
      */
     func toggleValueChanged(_ sender:UISwitch)  {
         
@@ -317,31 +366,27 @@ class ProfileViewController: UIViewController {
         else{
             Logger.sharedInstance.debug("settings is null")
         }
-        
     }
     
-    /*
-     Segue Delegate method for Navigation based on segue connected
-     */
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
-        if let changePassword = segue.destination as? ChangePasswordViewController {
-            changePassword.viewLoadFrom = .profile
-            
-        }
-        
-    }
-    /*
+
+    /**
+     
      Button action for Change password button
+     
+     @param sender  Accepts UIbutton Object
+     
      */
     func pushToChangePassword(_ sender:UIButton)  {
         self.performSegue(withIdentifier: kChangePasswordSegueIdentifier, sender: nil)
     }
     
     
-    /*
-     Validation of Profile data
+    /**
+     
+     Validation to check entered email is valid or not
+    
+     @return Bool
+     
      */
     func validateAllFields() -> Bool{
         
@@ -373,19 +418,27 @@ class ProfileViewController: UIViewController {
             self.showAlertMessages(textMessage: kMessageValidEmail)
             return false
         }
-        
         return true
     }
+
     
-    /*
+    /**
+     
      Method to show the alert using Utility
+     
      @param textMessage    message to be displayed
+     
      */
     func showAlertMessages(textMessage : String){
         UIUtilities.showAlertMessage("", errorMessage: NSLocalizedString(textMessage, comment: ""), errorAlertActionTitle: NSLocalizedString("OK", comment: ""), viewControllerUsed: self)
     }
     
     
+    /**
+     
+     Used to check weather the user id FDA user or not
+     
+     */
     func checkPasscode() {
         if User.currentUser.userType == .FDAUser {
             //FDA user
@@ -403,25 +456,33 @@ class ProfileViewController: UIViewController {
                 
                 self.navigationController?.present(passcodeViewController, animated: false, completion: nil)
             }
-            
         }
-            
         else{
             //Anonomous user
-            
             //ORKPasscodeViewController.removePasscodeFromKeychain()
         }
-        
     }
-    
-    
-    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
+    
+//MARK:- Segue Method
+    
+    /**
+     
+     Segue Delegate method for Navigation based on segue connected
+     
+     */
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        if let changePassword = segue.destination as? ChangePasswordViewController {
+            changePassword.viewLoadFrom = .profile
+            
+        }
+    }
 }
 
 
@@ -624,7 +685,6 @@ extension ProfileViewController : UITextFieldDelegate{
 }
 
 //MARK:- UserService Response handler
-
 extension ProfileViewController:NMWebServiceDelegate {
     func startedRequest(_ manager: NetworkManager, requestName: NSString) {
         Logger.sharedInstance.info("requestname : \(requestName)")
@@ -682,11 +742,7 @@ extension ProfileViewController:NMWebServiceDelegate {
     }
 }
 
-
-
-
-
-
+//MARK:- ORKPasscode Delegate
 extension ProfileViewController: ORKPasscodeDelegate {
     func passcodeViewControllerDidFinish(withSuccess viewController: UIViewController) {
         
@@ -701,8 +757,9 @@ extension ProfileViewController: ORKPasscodeDelegate {
     }
 }
 
+
+//MARK:- ORKTaskViewController Delegate
 extension ProfileViewController:ORKTaskViewControllerDelegate{
-    //MARK:ORKTaskViewController Delegate
     
     func taskViewControllerSupportsSaveAndRestore(_ taskViewController: ORKTaskViewController) -> Bool {
         return true
@@ -747,6 +804,5 @@ extension ProfileViewController:ORKTaskViewControllerDelegate{
     func taskViewController(_ taskViewController: ORKTaskViewController, stepViewControllerWillAppear stepViewController: ORKStepViewController) {
         
     }
-    
 }
 

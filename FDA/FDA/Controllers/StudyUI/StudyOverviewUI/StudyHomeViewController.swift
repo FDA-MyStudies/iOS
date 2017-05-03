@@ -17,9 +17,7 @@ let kEligibilityStepViewControllerIdentifier = "EligibilityStepViewController"
 
 let kConsentTaskIdentifier = "ConsentTask"
 let kStudyDashboardViewControllerIdentifier = "StudyDashboardViewController"
-
 let kStudyDashboardTabbarControllerIdentifier = "StudyDashboardTabbarViewControllerIdentifier"
-
 
 protocol StudyHomeViewDontrollerDelegate {
     func studyHomeJoinStudy()
@@ -39,13 +37,10 @@ class StudyHomeViewController : UIViewController{
     
     @IBOutlet var buttonVisitWebsite : UIButton?
     @IBOutlet var buttonViewConsent : UIButton?
-    
     @IBOutlet var viewBottombarBg :UIView?
-    
     @IBOutlet var viewSeperater: UIView?
     
     var isStudyBookMarked = false
-    
     var delegate:StudyHomeViewDontrollerDelegate?
     
     var hideViewConsentAfterJoining = false
@@ -56,7 +51,7 @@ class StudyHomeViewController : UIViewController{
         }
     }
 
-//MARK:- View controller Delegates
+//MARK:- Viewcontroller Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -65,7 +60,6 @@ class StudyHomeViewController : UIViewController{
         self.automaticallyAdjustsScrollViewInsets = false
         //Added to change next screen
         pageControlView?.addTarget(self, action:#selector(StudyHomeViewController.didChangePageControlValue), for: .valueChanged)
-        
         
         // pageViewController?.overview = Gateway.instance.overview
         self.navigationController?.setNavigationBarHidden(true, animated: true)
@@ -130,7 +124,13 @@ class StudyHomeViewController : UIViewController{
         
     }
     
-    /* Load the test data from StudyOverview plist file */
+
+//MARK:-
+    /**
+     
+     This method Loads the test data from StudyOverview plist file
+     
+     */
     func loadTestData(){
         //        let filePath  = Bundle.main.path(forResource: "GatewayOverview", ofType: "json")
         //        let data = NSData(contentsOfFile: filePath!)
@@ -165,9 +165,100 @@ class StudyHomeViewController : UIViewController{
     }
     
     
+    /**
+     
+     This Methd creates eligibility Consent Task
+     
+     */
+    func createEligibilityConsentTask()   {
+        
+        var eligibilitySteps =  EligibilityBuilder.currentEligibility?.getEligibilitySteps()
+        
+        let taskViewController:ORKTaskViewController?
+        
+        /*
+         
+         let filePath  = Bundle.main.path(forResource: "Consent", ofType: "json")
+         let data = NSData(contentsOfFile: filePath!)
+         do {
+         let dataDict = try JSONSerialization.jsonObject(with: data! as Data, options: []) as? Dictionary<String,Any>
+         
+         let consent = dataDict?["Result"]as! Dictionary<String, Any>
+         ConsentBuilder.currentConsent = ConsentBuilder()
+         ConsentBuilder.currentConsent?.initWithMetaData(metaDataDict: consent)
+         
+         
+         }catch{
+         
+         }
+         */
+        let consentTask:ORKOrderedTask? = ConsentBuilder.currentConsent?.createConsentTask() as! ORKOrderedTask?
+        
+        for stepDict in (consentTask?.steps)!{
+            eligibilitySteps?.append(stepDict)
+        }
+        
+        let orkOrderedTask:ORKTask? = ORKOrderedTask(identifier:kEligibilityConsentTask, steps: eligibilitySteps)
+        taskViewController = ORKTaskViewController(task:orkOrderedTask, taskRun: nil)
+        
+        taskViewController?.delegate = self
+        taskViewController?.outputDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+        
+        taskViewController?.navigationItem.title = nil
+        
+        UIView.appearance(whenContainedInInstancesOf: [ORKTaskViewController.self]).tintColor = kUIColorForSubmitButtonBackground
+        
+        UIApplication.shared.statusBarStyle = .default
+        present(taskViewController!, animated: true, completion: nil)
+        
+    }
+    
+    
+    /**
+     
+    This Method displays consent Document 
+     
+     */
+    func displayConsentDocument() {
+        if Study.currentStudy?.consentDocument != nil {
+            if Study.currentStudy?.consentDocument?.htmlString != nil {
+                self.navigateToWebView(link: nil, htmlText: (Study.currentStudy?.consentDocument?.htmlString)!)
+            }
+        }
+    }
+    
+    
+    /**
+     
+     This Method is used when the user taps on the pageControl to change its 
+     current page (Commented as this is not working)
+     
+     */
+    func didChangePageControlValue() {
+        // pageViewController?.scrollToViewController(index: (pageControlView?.currentPage)!)
+    }
+    
+    
+    /**
+     
+     This Method is used to push screen back to Studydashboard tabbar controller
+     
+     */
+    func pushToStudyDashboard(){
+        let studyDashboard = self.storyboard?.instantiateViewController(withIdentifier: kStudyDashboardTabbarControllerIdentifier) as! StudyDashboardTabbarViewController
+        self.navigationController?.pushViewController(studyDashboard, animated: true)
+    }
+    
+    
 //MARK:- Button Actions
     
-    /* Join Study button clicked */
+    /**
+     
+     This Method Join Study button clicked
+     
+     @param sender  Accepts any kind of objects
+     
+     */
     @IBAction func buttonActionJoinStudy(_ sender: UIButton){
         if User.currentUser.userType == UserType.AnonymousUser{
             // let leftController = slideMenuController()?.leftViewController as! LeftMenuViewController
@@ -220,13 +311,27 @@ class StudyHomeViewController : UIViewController{
             }
         }
     }
+    
 
-    /* Back button clicked */
+    /**
+     
+     This method is used to navigate to previous view controller
+     
+     @param sender    Accepts any kind of objects
+
+     */
     @IBAction func backButtonAction(_ sender: Any) {
         _ = self.navigationController?.popViewController(animated: true)
     }
     
-    /* Start Button clicked */
+    
+    /**
+     
+     This method is start button Action
+     
+     @param sender    Accepts Any kind of object
+     
+     */
     @IBAction func starButtonAction(_ sender: Any) {
         
         let button = sender as! UIButton
@@ -246,60 +351,14 @@ class StudyHomeViewController : UIViewController{
         UserServices().updateStudyBookmarkStatus(studyStauts: userStudyStatus, delegate: self)
     }
     
-    /* Create Eligibility Consent Task */
-    func createEligibilityConsentTask()   {
-        
-        var eligibilitySteps =  EligibilityBuilder.currentEligibility?.getEligibilitySteps()
-        
-        let taskViewController:ORKTaskViewController?
-        
-        /*
-         
-         let filePath  = Bundle.main.path(forResource: "Consent", ofType: "json")
-         let data = NSData(contentsOfFile: filePath!)
-         do {
-         let dataDict = try JSONSerialization.jsonObject(with: data! as Data, options: []) as? Dictionary<String,Any>
-         
-         let consent = dataDict?["Result"]as! Dictionary<String, Any>
-         ConsentBuilder.currentConsent = ConsentBuilder()
-         ConsentBuilder.currentConsent?.initWithMetaData(metaDataDict: consent)
-         
-         
-         }catch{
-         
-         }
-         */
-        let consentTask:ORKOrderedTask? = ConsentBuilder.currentConsent?.createConsentTask() as! ORKOrderedTask?
-        
-        for stepDict in (consentTask?.steps)!{
-            eligibilitySteps?.append(stepDict)
-        }
-        
-        let orkOrderedTask:ORKTask? = ORKOrderedTask(identifier:kEligibilityConsentTask, steps: eligibilitySteps)
-        taskViewController = ORKTaskViewController(task:orkOrderedTask, taskRun: nil)
-        
-        taskViewController?.delegate = self
-        taskViewController?.outputDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
-        
-        taskViewController?.navigationItem.title = nil
-        
-        UIView.appearance(whenContainedInInstancesOf: [ORKTaskViewController.self]).tintColor = kUIColorForSubmitButtonBackground
-        
-        UIApplication.shared.statusBarStyle = .default
-        present(taskViewController!, animated: true, completion: nil)
-        
-    }
     
-    /* Display consent Document */
-    func displayConsentDocument() {
-        if Study.currentStudy?.consentDocument != nil {
-            if Study.currentStudy?.consentDocument?.htmlString != nil {
-                self.navigateToWebView(link: nil, htmlText: (Study.currentStudy?.consentDocument?.htmlString)!)
-            }
-        }
-    }
-    
-    /* Visit website button clicked */
+    /**
+     
+     This method is visit website button action
+     
+     @param sender    Accepts Any kind of object
+     
+     */
     @IBAction func visitWebsiteButtonAction(_ sender: UIButton) {
         
         //        let loginStoryboard = UIStoryboard.init(name: "Main", bundle:Bundle.main)
@@ -323,14 +382,22 @@ class StudyHomeViewController : UIViewController{
         }
     }
     
-    /* Unwind to Study home */
+    
+    /**
+     
+     This method is unwind to study home
+     
+     @param segue    the segue used to connect the View controller
+     
+     */
     @IBAction func unwindeToStudyHome(_ segue:UIStoryboardSegue){
         //unwindStudyHomeSegue
         //self.buttonActionJoinStudy(UIButton())
         WCPServices().getEligibilityConsentMetadata(studyId:(Study.currentStudy?.studyId)!, delegate: self as NMWebServiceDelegate)
     }
+  
     
-//Mark:- Segue Methods
+//MARK:- Segue Methods
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let pageViewController = segue.destination as? PageViewController {
@@ -339,9 +406,14 @@ class StudyHomeViewController : UIViewController{
         }
     }
     
-    /* Navigates to weblink 
-     @params- Link - the link to go for desired destination
-            - htmlText - displays the text in the webview
+    
+    /**
+     
+     This Method navigates to weblink
+     
+     @param link        the link to go for desired destination
+     @param htmlText    displays the text in the webview
+     
      */
     func navigateToWebView(link:String?,htmlText:String?){
         
@@ -358,21 +430,11 @@ class StudyHomeViewController : UIViewController{
         }
         self.navigationController?.present(webViewController, animated: true, completion: nil)
     }
-    
-    //Fired when the user taps on the pageControl to change its current page (Commented as this is not working)
-    func didChangePageControlValue() {
-       // pageViewController?.scrollToViewController(index: (pageControlView?.currentPage)!)
-    }
-    
-    /* Push screen back to Studydashboard Tabbar controller */
-    func pushToStudyDashboard(){
-        
-        let studyDashboard = self.storyboard?.instantiateViewController(withIdentifier: kStudyDashboardTabbarControllerIdentifier) as! StudyDashboardTabbarViewController
-        self.navigationController?.pushViewController(studyDashboard, animated: true)
-    }
 }
 
+
 //MARK:- Page Control Delegates for handling Counts
+
 extension StudyHomeViewController: PageViewControllerDelegate {
     
     func pageViewController(pageViewController: PageViewController, didUpdatePageCount count: Int){
@@ -405,7 +467,9 @@ extension StudyHomeViewController: PageViewControllerDelegate {
     }
 }
 
+
 //MARK:- Webservice Delegates
+
 extension StudyHomeViewController:NMWebServiceDelegate {
     func startedRequest(_ manager: NetworkManager, requestName: NSString) {
         Logger.sharedInstance.info("requestname : \(requestName)")
@@ -460,7 +524,6 @@ extension StudyHomeViewController:NMWebServiceDelegate {
         if requestName as String == WCPMethods.consentDocument.method.methodName {
             self.removeProgressIndicator()
             self.displayConsentDocument()
-            
         }
     }
     
@@ -476,7 +539,9 @@ extension StudyHomeViewController:NMWebServiceDelegate {
     }
 }
 
+
 //MARK:- ORKTaskViewController Delegate
+
 extension StudyHomeViewController:ORKTaskViewControllerDelegate{
     
     func taskViewControllerSupportsSaveAndRestore(_ taskViewController: ORKTaskViewController) -> Bool {
@@ -527,7 +592,6 @@ extension StudyHomeViewController:ORKTaskViewControllerDelegate{
                 _ = self.navigationController?.popViewController(animated: true)
             }
             taskViewController.dismiss(animated: true, completion: nil)
-            
             
         }
     }
@@ -599,7 +663,9 @@ extension StudyHomeViewController:ORKTaskViewControllerDelegate{
         }
     }
     
+    
 //MARK:- StepViewController Delegate
+    
     public func stepViewController(_ stepViewController: ORKStepViewController, didFinishWith direction: ORKStepViewControllerNavigationDirection){
         
     }
@@ -641,7 +707,6 @@ extension StudyHomeViewController:ORKTaskViewControllerDelegate{
                 let consentSignatureResult:ORKConsentSignatureResult? = reviewStep?.results?.first as? ORKConsentSignatureResult
                 
                 if  consentSignatureResult?.consented == false{
-                    
                     
                     taskViewController.dismiss(animated: true
                         , completion: nil)

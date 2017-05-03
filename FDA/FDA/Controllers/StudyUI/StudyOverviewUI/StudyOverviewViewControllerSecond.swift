@@ -18,13 +18,14 @@ class StudyOverviewViewControllerSecond : UIViewController{
     @IBOutlet var labelTitle : UILabel?
     @IBOutlet var labelDescription : UILabel?
     @IBOutlet var imageViewStudy : UIImageView?
-     var pageIndex:Int!
-   
     
+    var pageIndex:Int!
     var overViewWebsiteLink:String?
     var overviewSectionDetail : OverviewSection!
     
-//MARK:- View lifecycle
+    
+//MARK:- Viewcontroller lifecycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -87,7 +88,13 @@ class StudyOverviewViewControllerSecond : UIViewController{
     
 //MARK:- Button Actions 
     
-    /* Join Study button clicked */
+    /**
+     
+     This method is used to Join Study
+     
+     @param sender  Access any kind of objects
+     
+     */
     @IBAction func buttonActionJoinStudy(_ sender: Any){
         
         if User.currentUser.userType == UserType.AnonymousUser{
@@ -100,7 +107,14 @@ class StudyOverviewViewControllerSecond : UIViewController{
         }
     }
     
-    /* Visit website button clicked */
+    
+    /**
+     
+     This method is used to Visit website
+     
+     @param sender  Access any kind of object
+     
+     */
     @IBAction func visitWebsiteButtonAction(_ sender: UIButton) {
         
         let loginStoryboard = UIStoryboard.init(name: "Main", bundle:Bundle.main)

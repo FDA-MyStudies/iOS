@@ -12,6 +12,8 @@ class ReachoutOptionsViewController: UIViewController {
 
     @IBOutlet var tableView:UITableView?
     
+    
+//MARK:- Viewcontroller Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -40,7 +42,8 @@ class ReachoutOptionsViewController: UIViewController {
      */
     
 }
-//MARK: TableView Data source
+
+//MARK:- TableView Data source
 extension ReachoutOptionsViewController : UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -68,7 +71,7 @@ extension ReachoutOptionsViewController : UITableViewDataSource {
     }
 }
 
-//MARK: TableView Delegates
+//MARK:- TableView Delegates
 extension ReachoutOptionsViewController :  UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

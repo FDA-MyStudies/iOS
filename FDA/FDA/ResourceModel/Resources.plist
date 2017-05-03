@@ -2,98 +2,15 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <array>
-    <dict>
-        <key>level</key>
-        <string>gateway</string>
-        <key>key</key>
-        <string>G01</string>
-        <key>type</key>
-        <string>txt</string>
-        <key>file</key>
-            <dict>
-                <key>mimType</key>
-                <string>text/plain</string>
-                <key>name</key>
-                <string>gatewayResource</string>
-                <key>link</key>
-                <string>http://www.google.com/resouce.txt</string>
-            </dict>
-        <key>configration</key>
-            <dict>
-                <key>anchorDateType</key>
-                <string>joining</string>
-                <key>activityId</key>
-                <string>A0045</string>
-                <key>key</key>
-                <string>ACT-PREGNANCY</string>
-                <key>start</key>
-                <string> 08/02/2017 2:26 PM</string>
-                <key>end</key>
-                <string>28/02/2017 2:26 PM</string>
-            </dict>
-    </dict>
-    <dict>
-        <key>level</key>
-        <string>study</string>
-        <key>key</key>
-        <string>S01</string>
-        <key>type</key>
-        <string>txt</string>
-        <key>file</key>
-        <dict>
-            <key>mimType</key>
-            <string>application/pdf</string>
-            <key>name</key>
-            <string>gatewayResource</string>
-            <key>link</key>
-            <string>http://www.apple.com/resouce.txt</string>
-        </dict>
-        <key>configration</key>
-        <dict>
-            <key>anchorDateType</key>
-            <string>joining</string>
-            <key>activityId</key>
-            <string>A0045</string>
-            <key>key</key>
-            <string>ACT-PREGNANCY</string>
-            <key>start</key>
-            <string> 08/02/2017 2:26 PM</string>
-            <key>end</key>
-            <string>28/02/2017 2:26 PM</string>
-        </dict>
-    </dict>
-    <dict>
-        <key>level</key>
-        <string>gateway</string>
-        <key>key</key>
-        <string>G01</string>
-        <key>type</key>
-        <string>txt</string>
-        <key>file</key>
-        <dict>
-            <key>mimType</key>
-            <string>application/pdf</string>
-            <key>name</key>
-            <string>gatewayResource</string>
-            <key>link</key>
-            <string>http://www.facebook.com/resouce.txt</string>
-        </dict>
-        <key>configration</key>
-        <dict>
-            <key>anchorDateType</key>
-            <string>joining</string>
-            <key>activityId</key>
-            <string>G0045</string>
-            <key>key</key>
-            <string>ACT-PREGNANCY</string>
-            <key>start</key>
-            <string> 08/02/2017 2:26 PM</string>
-            <key>end</key>
-            <string>28/02/2017 2:26 PM</string>
-        </dict>
-    </dict>
-
-
-	<dict/>
+	<dict>
+		<key>resourceId</key>
+		<string>111</string>
+		<key>title</key>
+		<string>FDA Resource 1</string>
+		<key>type</key>
+		<string>pdf</string>
+		<key>content</key>
+		<string>https://gradcollege.okstate.edu/sites/default/files/PDF_linking.pdf</string>
+	</dict>
 </array>
 </plist>

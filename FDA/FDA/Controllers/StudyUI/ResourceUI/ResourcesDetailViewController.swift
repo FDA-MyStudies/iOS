@@ -45,7 +45,7 @@ class ResourcesDetailViewController: UIViewController {
             activityIndicator.startAnimating()
             
             if self.resource?.file?.mimeType == .pdf{
-
+                
                 if self.resource?.file?.localPath != nil {
                     self.loadWebViewWithPath(path: (self.resource?.file?.localPath)!)
                 }
@@ -106,7 +106,7 @@ class ResourcesDetailViewController: UIViewController {
     
     @IBAction func buttonActionForward(_ sender : UIBarButtonItem){
         
-       self.sendEmail()
+        self.sendEmail()
     }
     
     override func didReceiveMemoryWarning() {
@@ -151,7 +151,7 @@ extension ResourcesDetailViewController:MFMailComposeViewControllerDelegate{
         composeVC.setSubject("Resources")
         
         if resource?.file?.localPath != nil {
-          
+            
             do {
                 let data = try Data.init(contentsOf: URL(string:(resource?.file?.localPath)!)!)
                 composeVC.addAttachmentData(data, mimeType: "application/pdf", fileName: (resource?.file?.name)!)
@@ -183,26 +183,37 @@ extension ResourcesDetailViewController:MFMailComposeViewControllerDelegate{
     
     func mailComposeController(_ controller: MFMailComposeViewController,
                                didFinishWith result: MFMailComposeResult, error: Error?) {
-       
+        
         controller.dismiss(animated: true, completion: nil)
     }
-
+    
 }
 
 
 extension ResourcesDetailViewController:FileDownloadManagerDelegates{
     
     func download(manager: FileDownloadManager, didUpdateProgress progress: Float) {
-       
+        
         self.progressBar?.progress = progress
     }
     func download(manager: FileDownloadManager, didFinishDownloadingAtPath path:String) {
         
-        self.resource?.file?.localPath = path
-        self.loadWebViewWithPath(path: path)
+        
+        let data = manager.decrytFile(pathURL: URL.init(string: path))
+        
+        if data != nil{
+            self.resource?.file?.localPath = path
+            // self.loadWebViewWithPath(path: path)
+            
+            let mimeType = "application/" + "\((self.resource?.file?.mimeType?.rawValue)!)"
+            
+            self.webView?.load(data!, mimeType: mimeType, textEncodingName: "UTF-8", baseURL:URL.init(fileURLWithPath: "") )
+        }
         
     }
     func download(manager: FileDownloadManager, didFailedWithError error: Error) {
         
     }
+    
+    
 }

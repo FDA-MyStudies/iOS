@@ -175,6 +175,7 @@
                         <outlet property="viewBottombarBg" destination="eJ6-PH-Hb3" id="oZa-5V-gYl"/>
                         <outlet property="viewSeperater" destination="7Ld-sF-BcO" id="Pgb-Nh-btu"/>
                         <outlet property="visitWebsiteButtonLeadingConstraint" destination="NmZ-a5-G3L" id="VdA-wA-sHA"/>
+                        <outlet property="visitWebsiteButtonTrailingConstraint" destination="Qmg-8e-ce5" id="npf-Js-NJW"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dbw-wT-OkS" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1190,7 +1191,7 @@
                                                     </collectionViewFlowLayout>
                                                     <cells>
                                                         <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="StatisticsCell" id="MZ5-Pr-Min" customClass="StudyDashboardStatisticsCollectionViewCell" customModule="FDA" customModuleProvider="target">
-                                                            <rect key="frame" x="0.0" y="13.5" width="125" height="110"/>
+                                                            <rect key="frame" x="0.0" y="14" width="125" height="110"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                                                 <rect key="frame" x="0.0" y="0.0" width="125" height="110"/>

@@ -7,11 +7,15 @@
 //
 
 import UIKit
+import CryptoSwift
 
 protocol FileDownloadManagerDelegates {
     func download(manager:FileDownloadManager,didUpdateProgress progress:Float)
     func download(manager:FileDownloadManager,didFinishDownloadingAtPath path:String)
     func download(manager:FileDownloadManager,didFailedWithError error:Error)
+    
+   
+    
 }
 
 class FileDownloadManager : NSObject {
@@ -58,7 +62,7 @@ extension FileDownloadManager:URLSessionDelegate{
             
             self.delegate?.download(manager: self, didUpdateProgress: progress)
             
-             //downloadModel.startTime!
+            //downloadModel.startTime!
             //let timeInterval = self.taskStartedDate.timeIntervalSinceNow
             //let downloadTime = TimeInterval(-1 * timeInterval)
             
@@ -73,13 +77,13 @@ extension FileDownloadManager:URLSessionDelegate{
             
             //print(progress)
             
-
+            
         })
         
     }
-     func URLSession(_ session: Foundation.URLSession, downloadTask: URLSessionDownloadTask, didFinishDownloadingToURL location: URL) {
+    func URLSession(_ session: Foundation.URLSession, downloadTask: URLSessionDownloadTask, didFinishDownloadingToURL location: URL) {
         
-         debugPrint("didFinishDownloadingToURL location \(location)")
+        debugPrint("didFinishDownloadingToURL location \(location)")
         
         for (index, downloadModel) in downloadingArray.enumerated() {
             if downloadTask.isEqual(downloadModel.task) {
@@ -91,40 +95,45 @@ extension FileDownloadManager:URLSessionDelegate{
                 
                 //If all set just move downloaded file to the destination
                 //if fileManager.fileExists(atPath: basePath) {
-                    let fileURL = URL(fileURLWithPath: destinationPath as String)
-                    debugPrint("directory path = \(destinationPath)")
+                let fileURL = URL(fileURLWithPath: destinationPath as String)
+                debugPrint("directory path = \(destinationPath)")
+                
+                do {
+                    try fileManager.moveItem(at: location, to: fileURL)
                     
-                    do {
-                        try fileManager.moveItem(at: location, to: fileURL)
-                        self.delegate?.download(manager: self, didFinishDownloadingAtPath:destinationPath)
-                    } catch let error as NSError {
-                        debugPrint("Error while moving downloaded file to destination path:\(error)")
-                        DispatchQueue.main.async(execute: { () -> Void in
-                           self.delegate?.download(manager: self, didFailedWithError: error)
-                        })
-                    }
-               // } else {
-                    //Opportunity to handle the folder doesnot exists error appropriately.
-                    //Move downloaded file to destination
-                    //Delegate will be called on the session queue
-                    //Otherwise blindly give error Destination folder does not exists
+                    // encryt the data present at filepath fileURL
                     
-//                    if let _ = self.delegate?.downloadRequestDestinationDoestNotExists {
-//                        self.delegate?.downloadRequestDestinationDoestNotExists?(downloadModel, index: index, location: location)
-//                    } else {
-//                        let error = NSError(domain: "FolderDoesNotExist", code: 404, userInfo: [NSLocalizedDescriptionKey : "Destination folder does not exists"])
-//                        //self.delegate?.downloadRequestDidFailedWithError?(error, downloadModel: downloadModel, index: index)
-//                    }
-              //  }
+                    FileDownloadManager.encyptFile(pathURL: fileURL)
+                    
+                    self.delegate?.download(manager: self, didFinishDownloadingAtPath:destinationPath)
+                } catch let error as NSError {
+                    debugPrint("Error while moving downloaded file to destination path:\(error)")
+                    DispatchQueue.main.async(execute: { () -> Void in
+                        self.delegate?.download(manager: self, didFailedWithError: error)
+                    })
+                }
+                // } else {
+                //Opportunity to handle the folder doesnot exists error appropriately.
+                //Move downloaded file to destination
+                //Delegate will be called on the session queue
+                //Otherwise blindly give error Destination folder does not exists
+                
+                //                    if let _ = self.delegate?.downloadRequestDestinationDoestNotExists {
+                //                        self.delegate?.downloadRequestDestinationDoestNotExists?(downloadModel, index: index, location: location)
+                //                    } else {
+                //                        let error = NSError(domain: "FolderDoesNotExist", code: 404, userInfo: [NSLocalizedDescriptionKey : "Destination folder does not exists"])
+                //                        //self.delegate?.downloadRequestDidFailedWithError?(error, downloadModel: downloadModel, index: index)
+                //                    }
+                //  }
                 
                 break
             }
         }
         
     }
-     func URLSession(_ session: Foundation.URLSession, task: URLSessionTask, didCompleteWithError error: NSError?) {
-         debugPrint("task id: \(task.taskIdentifier)")
-         debugPrint("Completed with error \(error?.localizedDescription)")
+    func URLSession(_ session: Foundation.URLSession, task: URLSessionTask, didCompleteWithError error: NSError?) {
+        debugPrint("task id: \(task.taskIdentifier)")
+        debugPrint("Completed with error \(error?.localizedDescription)")
         if error != nil {
             self.delegate?.download(manager: self, didFailedWithError: error!)
         }
@@ -132,12 +141,77 @@ extension FileDownloadManager:URLSessionDelegate{
     }
     public func urlSessionDidFinishEvents(forBackgroundURLSession session: URLSession) {
         
-//        if let backgroundCompletion = self.backgroundSessionCompletionHandler {
-//            DispatchQueue.main.async(execute: {
-//                backgroundCompletion()
-//            })
-//        }
-//        debugPrint("All tasks are finished")
+        //        if let backgroundCompletion = self.backgroundSessionCompletionHandler {
+        //            DispatchQueue.main.async(execute: {
+        //                backgroundCompletion()
+        //            })
+        //        }
+        //        debugPrint("All tasks are finished")
+        
+    }
+    
+    public func decrytFile(pathURL:URL?) -> Data?{
+        
+        
+        let pathString = "file://" + "\((pathURL?.absoluteString)!)"
+        
+        if !FileManager.default.fileExists(atPath: pathString) {
+        
+        do{
+            let data = try Data.init(contentsOf: URL.init(string: pathString)!)
+            let aes = try AES(key: "passwordpasswordpasswordpassword", iv: "drowssapdrowssap")
+            let deCipherText = try aes.decrypt(data)
+            let deCryptedData = Data(deCipherText)
+            return deCryptedData
+            
+        }
+        catch let error as NSError{
+            
+             debugPrint("Decrypting data failed \(error.localizedDescription)")
+            print(error)
+            
+            return nil
+        }
+           
+        }
+        else{
+            return nil
+        }
+        
+    }
+    
+    
+   class func encyptFile(pathURL:URL?){
+        
+        if !FileManager.default.fileExists(atPath: (pathURL?.absoluteString)!) {
+            
+            do{
+                let data = try Data.init(contentsOf: pathURL!)
+                let aes = try AES(key: "passwordpasswordpasswordpassword", iv: "drowssapdrowssap") // aes128
+                let ciphertext = try aes.encrypt(data)
+                
+                
+                let encryptedData =  Data(ciphertext)
+                
+                do{
+                    
+                    try encryptedData.write(to: pathURL!, options: Data.WritingOptions.atomic)
+                    
+                }
+                catch let error as NSError{
+                    print(error)
+                    debugPrint("Writing encrypted data to path failed \(error.localizedDescription)")
+                }
+                
+                
+                
+            }
+            catch let error as NSError{
+                print(error)
+                debugPrint("Encryting data failed \(error.localizedDescription)")
+            }
+            
+        }
         
     }
     

@@ -18,6 +18,7 @@ class WebViewController : UIViewController{
     var activityIndicator:UIActivityIndicatorView!
     var requestLink:String?
     
+    var pdfData:Data?
     
     var isEmailAvailable:Bool? = false
     
@@ -56,6 +57,11 @@ class WebViewController : UIViewController{
             
             webView?.loadHTMLString(self.htmlString!, baseURL: nil)
             
+            
+        }
+        else if self.pdfData != nil {
+            
+            self.webView?.load(pdfData!, mimeType: "application/pdf", textEncodingName: "UTF-8", baseURL:URL.init(fileURLWithPath: "") )
             
         }
         else{

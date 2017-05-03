@@ -150,7 +150,7 @@ extension FileDownloadManager:URLSessionDelegate{
         
     }
     
-    public func decrytFile(pathURL:URL?) -> Data?{
+    class func decrytFile(pathURL:URL?) -> Data?{
         
         
         let pathString = "file://" + "\((pathURL?.absoluteString)!)"

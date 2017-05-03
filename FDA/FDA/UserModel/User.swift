@@ -168,6 +168,36 @@ class User{
         
     }
     
+    func udpateCompletionAndAdherence(studyId:String,completion:Int,adherence:Int) -> UserStudyStatus{
+        
+        
+        let studies = self.participatedStudies as Array<UserStudyStatus>
+        if let study =   studies.filter({$0.studyId == studyId}).first {
+            
+            study.adherence = adherence
+            study.completion = completion
+            
+            
+            return study
+        }
+        else {
+           
+            
+            let studyStatus = UserStudyStatus()
+            
+            studyStatus.studyId = studyId
+            studyStatus.adherence = adherence
+            studyStatus.completion = completion
+            self.participatedStudies.append(studyStatus)
+            
+           
+            
+            return studyStatus
+        }
+        
+    }
+
+    
     //MARK:Study Bookmark
     func isStudyBookmarked(studyId:String) -> Bool{
         
@@ -472,6 +502,8 @@ class UserStudyStatus{
     var status:StudyStatus = .yetToJoin
     var consent:String! = ""
     var joiningDate:Date!
+    var completion:Int = 0
+    var adherence:Int = 0
     
     init() {
         
@@ -486,6 +518,12 @@ class UserStudyStatus{
             }
             if Utilities.isValidValue(someObject: detail[kBookmarked] as AnyObject){
                 self.bookmarked = detail[kBookmarked] as! Bool
+            }
+            if Utilities.isValidValue(someObject: detail[kCompletion] as AnyObject){
+                self.completion = detail[kCompletion] as! Int
+            }
+            if Utilities.isValidValue(someObject: detail[kAdherence] as AnyObject){
+                self.adherence = detail[kAdherence] as! Int
             }
             if Utilities.isValidValue(someObject: detail[kStatus] as AnyObject){
                 
@@ -525,6 +563,12 @@ class UserStudyStatus{
         
         let studyDetail = [kStudyId:self.studyId,
                            kStudyStatus:self.status.paramValue] as [String : Any]
+        return studyDetail
+    }
+    func getCompletionAdherence() -> Dictionary<String,Any>{
+        let studyDetail = [kStudyId:self.studyId,
+                           "completion":completion,
+                           "adherence":adherence] as [String : Any]
         return studyDetail
     }
     
@@ -630,9 +674,9 @@ class UserActivityStatus{
             }
             
             
-            if Utilities.isValidValue(someObject: detail[kStatus] as AnyObject){
+            if Utilities.isValidValue(someObject: detail[kActivityStatus] as AnyObject){
                 
-                let statusValue = detail[kStatus] as! String
+                let statusValue = detail[kActivityStatus] as! String
                 
                 if (ActivityStatus.inProgress.paramValue == statusValue) {
                     self.status = .inProgress
@@ -666,10 +710,10 @@ class UserActivityStatus{
     }
     func getParticipatedUserActivityStatus() -> Dictionary<String,Any>{
         
-        let studyDetail = [kStudyId:self.studyId,
+        let studyDetail = [
                            kActivityId:self.activityId,
                            kActivityRunId:self.activityRunId,
-                           kStudyStatus:self.status.paramValue] as [String : Any]
+                           kActivityStatus:self.status.paramValue] as [String : Any]
         return studyDetail
     }
     

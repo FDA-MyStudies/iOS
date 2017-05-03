@@ -97,7 +97,7 @@ class ActivitiesViewController : UIViewController{
     
     func createActivity(){
         
-        /*
+       /*
         let filePath  = Bundle.main.path(forResource: "Acivity_Question", ofType: "json")
         
         //let filePath  = Bundle.main.path(forResource: "FetalKickTest", ofType: "json")
@@ -112,8 +112,8 @@ class ActivitiesViewController : UIViewController{
         catch let error as NSError{
             print("\(error)")
         }
-    */
-       
+ 
+       */
         
         if Utilities.isValidObject(someObject: Study.currentActivity?.steps as AnyObject?){
             
@@ -435,7 +435,9 @@ extension ActivitiesViewController:NMWebServiceDelegate {
         else if requestName as String == WCPMethods.activity.method.methodName {
             self.createActivity()
         }
-        
+        else if requestName as String == ResponseMethods.processResponse.method.methodName{
+             self.updateRunStatusToComplete()
+        }
         
     }
     func failedRequest(_ manager: NetworkManager, requestName: NSString, error: NSError) {
@@ -466,7 +468,7 @@ extension ActivitiesViewController:ORKTaskViewControllerDelegate{
         case ORKTaskViewControllerFinishReason.completed:
             print("completed")
             taskResult = taskViewController.result
-            self.updateRunStatusToComplete()
+            //self.updateRunStatusToComplete()
         case ORKTaskViewControllerFinishReason.failed:
             print("failed")
             taskResult = taskViewController.result
@@ -504,6 +506,10 @@ extension ActivitiesViewController:ORKTaskViewControllerDelegate{
                
                 Study.currentActivity?.userStatus = .completed
                 
+                
+                LabKeyServices().processResponse(responseData:(ActivityBuilder.currentActivityBuilder.actvityResult?.getResultDictionary())! , delegate: self)
+                
+                
                 //To be Uncommented
                 
                 //let status = User.currentUser.updateActivityStatus(studyId: activity.studyId!, activityId: activity.actvityId!, status: .inProgress)
@@ -532,6 +538,8 @@ extension ActivitiesViewController:ORKTaskViewControllerDelegate{
                 let activity = Study.currentActivity
                 DBHandler.updateActivityRestortionDataFor(activity:activity!, studyId: (study?.studyId)!, restortionData: taskViewController.restorationData!)
                 
+                /*
+                
                 //Explain
                 if (ActivityBuilder.currentActivityBuilder.actvityResult?.result?.count)! < (taskViewController.result.results?.count)!{
                     
@@ -557,6 +565,7 @@ extension ActivitiesViewController:ORKTaskViewControllerDelegate{
                     //save result in db
                     
                 }
+ */
             }
         }
     }

@@ -21,6 +21,7 @@ class ConsentResult {
     var result:Array<ActivityStepResult>?
     
     var token:String?
+    var consentPath:String?
     
     //MARK: Initializers
     init() {
@@ -67,19 +68,18 @@ class ConsentResult {
                         let dir = FileManager.getStorageDirectory(type: .study)
                         
                         let fullPath:String!
+                        let path = AKUtility.baseFilePath + "/Study"
+                        var fileName:String = "Consent" +  "_" + "\((Study.currentStudy?.studyId)!)" + ".pdf"
                         
-                        if (ConsentBuilder.currentConsent?.version!) == nil {
-                            
-                            fullPath = "file://" + dir + "/" + "Consent" +  "_" + "\((Study.currentStudy?.studyId)!)" + "_" + "No_Version" + ".pdf"
-                            
-                        }
-                        else{
-                            fullPath = "file://" + dir + "/" + "Consent" +  "_" + "\((Study.currentStudy?.studyId)!)" + "_" + "\((ConsentBuilder.currentConsent?.version!)!)" + ".pdf"
+                        fullPath = path + "/" + fileName
+                        
+                        if !FileManager.default.fileExists(atPath: path) {
+                            try! FileManager.default.createDirectory(atPath: path, withIntermediateDirectories: true, attributes: nil)
                         }
                         
                         self.consentPdfData = Data()
                         self.consentPdfData = data?.base64EncodedData()
-                        
+                        self.consentPath = fileName
                         
                         do {
                             
@@ -110,19 +110,18 @@ class ConsentResult {
                         let dir = FileManager.getStorageDirectory(type: .study)
                         
                         let fullPath:String!
+                        let path = AKUtility.baseFilePath + "/Study"
+                        var fileName:String = "Consent" +  "_" + "\((Study.currentStudy?.studyId)!)" + ".pdf"
+
+                        fullPath = path + "/" + fileName
                         
-                        if (ConsentBuilder.currentConsent?.version!) == nil {
-                            
-                            fullPath = "file://" + dir + "/" + "Consent" +  "_" + "\((Study.currentStudy?.studyId)!)" + "_" + "No_Version" + ".pdf"
-                            
-                        }
-                        else{
-                            fullPath = "file://" + dir + "/" + "Consent" +  "_" + "\((Study.currentStudy?.studyId)!)" + "_" + "\((ConsentBuilder.currentConsent?.version!)!)" + ".pdf"
+                        if !FileManager.default.fileExists(atPath: path) {
+                            try! FileManager.default.createDirectory(atPath: path, withIntermediateDirectories: true, attributes: nil)
                         }
                         
                         var data:Data? = Data.init()
                         data = self.consentPdfData
-                        
+                        self.consentPath = fileName
                         self.consentPdfData = consentPdfData?.base64EncodedData()
                         do {
                             

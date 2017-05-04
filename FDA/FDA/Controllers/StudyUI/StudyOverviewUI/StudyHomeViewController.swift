@@ -101,6 +101,7 @@ class StudyHomeViewController : UIViewController{
                 buttonVisitWebsite?.isHidden = false
                 visitWebsiteButtonLeadingConstraint?.constant = 0.0
                 self.view.layoutIfNeeded()
+                buttonJoinStudy?.isHidden = true
                // buttonVisitWebsite?.backgroundColor = UIColor.red
                 
                  // visitWebsiteButtonTrailingConstraint?.constant =
@@ -579,6 +580,13 @@ extension StudyHomeViewController:ORKTaskViewControllerDelegate{
             ConsentBuilder.currentConsent?.consentResult?.consentDocument =   ConsentBuilder.currentConsent?.consentDocument
             
             ConsentBuilder.currentConsent?.consentResult?.initWithORKTaskResult(taskResult:taskViewController.result )
+            
+            //save consent to study
+            Study.currentStudy?.signedConsentVersion = ConsentBuilder.currentConsent?.version
+            Study.currentStudy?.signedConsentFilePath = ConsentBuilder.currentConsent?.consentResult?.consentPath
+            
+            // save also in DB
+            DBHandler.saveConsentInformation(study: Study.currentStudy!)
             
             self.addProgressIndicator()
             LabKeyServices().enrollForStudy(studyId: "TESTSTUDY01", token: (ConsentBuilder.currentConsent?.consentResult?.token)!, delegate: self)

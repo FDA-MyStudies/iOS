@@ -152,8 +152,12 @@ extension FileDownloadManager:URLSessionDelegate{
     
     class func decrytFile(pathURL:URL?) -> Data?{
         
+        var pathString = "file://" + "\((pathURL?.absoluteString)!)"
+        if (pathURL?.absoluteString.contains("file://"))! {
+            pathString = (pathURL?.absoluteString)!
+        }
         
-        let pathString = "file://" + "\((pathURL?.absoluteString)!)"
+        //let pathString = "file://" + "\((pathURL?.absoluteString)!)"
         
         if !FileManager.default.fileExists(atPath: pathString) {
         
@@ -182,8 +186,12 @@ extension FileDownloadManager:URLSessionDelegate{
     
     
    class func encyptFile(pathURL:URL?){
-        
-        if !FileManager.default.fileExists(atPath: (pathURL?.absoluteString)!) {
+    
+    var pathString = "file://" + "\((pathURL?.absoluteString)!)"
+    if (pathURL?.absoluteString.contains("file://"))! {
+        pathString = (pathURL?.absoluteString)!
+    }
+        if !FileManager.default.fileExists(atPath: pathString) {
             
             do{
                 let data = try Data.init(contentsOf: pathURL!)

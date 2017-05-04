@@ -166,6 +166,8 @@ class DBHandler: NSObject {
             study.startDate = dbStudy.startDate
             study.endEnd = dbStudy.endEnd
             study.status = StudyStatus(rawValue:dbStudy.status!)!
+            study.signedConsentVersion = dbStudy.signedConsentVersion
+            study.signedConsentFilePath = dbStudy.signedConsentFilePath
             
             //settings
             let studySettings = StudySettings()
@@ -301,6 +303,20 @@ class DBHandler: NSObject {
         completionHandler(true)
     }
     
+    
+    class func saveConsentInformation(study:Study){
+        
+        let realm = try! Realm()
+        let studies =  realm.objects(DBStudy.self).filter("studyId == %@",study.studyId)
+        let dbStudy = studies.last
+        
+        try! realm.write({
+            
+            dbStudy?.signedConsentFilePath = study.signedConsentFilePath
+            dbStudy?.signedConsentVersion = study.signedConsentVersion
+            
+        })
+    }
     
      //MARK:Activity
     class func saveActivities(activityies:Array<Activity>){

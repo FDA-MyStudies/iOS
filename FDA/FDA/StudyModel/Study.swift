@@ -90,6 +90,8 @@ class Study {
     var userParticipateState:UserStudyStatus! = nil
     var studySettings:StudySettings!
     var consentDocument:ConsentDocument?
+    var signedConsentVersion:String?
+    var signedConsentFilePath:String?
     
     static var currentStudy:Study? = nil
     static var currentActivity:Activity? = nil

@@ -34,6 +34,8 @@ class DBStudy: Object {
     dynamic var platform:String?
     dynamic var rejoin : Bool = false
     dynamic var participatedStatus:Int = 0
+    dynamic var signedConsentVersion:String?
+    dynamic var signedConsentFilePath:String?
     
     var sections = List<DBOverviewSection>()
     

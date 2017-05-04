@@ -107,8 +107,8 @@
 		6EED7B391E6574FE002C1FA3 /* FetalKickCounterStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EED7B381E6574FE002C1FA3 /* FetalKickCounterStep.swift */; };
 		6EED7B3B1E65751D002C1FA3 /* FetalKickCounterStepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EED7B3A1E65751D002C1FA3 /* FetalKickCounterStepViewController.swift */; };
 		6EED7B3D1E65752C002C1FA3 /* FetalKickCounterTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EED7B3C1E65752C002C1FA3 /* FetalKickCounterTask.swift */; };
-		6EF05A941E4DAB0400CD7661 /* ReferenceProxy in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EF05A911E4DAAFB00CD7661 /* ResearchKit.framework */; };
-		6EF05A951E4DAB0400CD7661 /* ReferenceProxy in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6EF05A911E4DAAFB00CD7661 /* ResearchKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		6EF05A941E4DAB0400CD7661 /* ResearchKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EF05A911E4DAAFB00CD7661 /* ResearchKit.framework */; };
+		6EF05A951E4DAB0400CD7661 /* ResearchKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6EF05A911E4DAAFB00CD7661 /* ResearchKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		6EF05A991E4DC36400CD7661 /* StepProvider.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6EF05A981E4DC36400CD7661 /* StepProvider.plist */; };
 		6EF2FCEF1E72CDE900B5F212 /* LeftMenuResourceTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EF2FCEE1E72CDE900B5F212 /* LeftMenuResourceTableViewCell.swift */; };
 		6EF748BF1E69645700F1E89E /* LatestActive_Taskdocument.json in Resources */ = {isa = PBXBuildFile; fileRef = 6EF748BE1E69645700F1E89E /* LatestActive_Taskdocument.json */; };
@@ -168,6 +168,7 @@
 		94B3DD5E1E6ED8E500327AE5 /* StudyOverviewPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B3DD3D1E6ED8E500327AE5 /* StudyOverviewPageViewController.swift */; };
 		94B3DD5F1E6ED8E500327AE5 /* StudyOverviewPageViewControllerFirst.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B3DD3E1E6ED8E500327AE5 /* StudyOverviewPageViewControllerFirst.swift */; };
 		94B3DD601E6ED8E500327AE5 /* StudyOverviewViewControllerSecond.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B3DD3F1E6ED8E500327AE5 /* StudyOverviewViewControllerSecond.swift */; };
+		94C550501EBA153F007740D0 /* StudyDashboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94C5504F1EBA153F007740D0 /* StudyDashboard.swift */; };
 		94C602311E51C7D500CB72F7 /* WCPServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94C602301E51C7D500CB72F7 /* WCPServices.swift */; };
 		94C6BD441EB8513300D4AA72 /* AppUpdateBlocker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94C6BD431EB8513300D4AA72 /* AppUpdateBlocker.swift */; };
 		94C6BD461EB8515000D4AA72 /* AppUpdateBlocker.xib in Resources */ = {isa = PBXBuildFile; fileRef = 94C6BD451EB8515000D4AA72 /* AppUpdateBlocker.xib */; };
@@ -227,7 +228,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				6EF05A951E4DAB0400CD7661 /* ReferenceProxy in Embed Frameworks */,
+				6EF05A951E4DAB0400CD7661 /* ResearchKit.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -408,6 +409,7 @@
 		94B3DD3D1E6ED8E500327AE5 /* StudyOverviewPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudyOverviewPageViewController.swift; sourceTree = "<group>"; };
 		94B3DD3E1E6ED8E500327AE5 /* StudyOverviewPageViewControllerFirst.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudyOverviewPageViewControllerFirst.swift; sourceTree = "<group>"; };
 		94B3DD3F1E6ED8E500327AE5 /* StudyOverviewViewControllerSecond.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudyOverviewViewControllerSecond.swift; sourceTree = "<group>"; };
+		94C5504F1EBA153F007740D0 /* StudyDashboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudyDashboard.swift; sourceTree = "<group>"; };
 		94C602301E51C7D500CB72F7 /* WCPServices.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WCPServices.swift; sourceTree = "<group>"; };
 		94C6BD431EB8513300D4AA72 /* AppUpdateBlocker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppUpdateBlocker.swift; sourceTree = "<group>"; };
 		94C6BD451EB8515000D4AA72 /* AppUpdateBlocker.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AppUpdateBlocker.xib; sourceTree = "<group>"; };
@@ -431,7 +433,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6EF05A941E4DAB0400CD7661 /* ReferenceProxy in Frameworks */,
+				6EF05A941E4DAB0400CD7661 /* ResearchKit.framework in Frameworks */,
 				2F2CF29CD5359B994C8987E7 /* Pods_FDA.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -552,6 +554,7 @@
 		6E7D2D581E433E8700763D4C /* FDA */ = {
 			isa = PBXGroup;
 			children = (
+				94C5504C1EBA1516007740D0 /* DashboardModel */,
 				94C6BD401EB850F100D4AA72 /* ForceUpdate */,
 				6E2B25F01EAE3F1D00E2DFB2 /* ResearchkitContainer */,
 				6ED86F5E1EA6498D00365AF0 /* RepeatableFormStep */,
@@ -1137,6 +1140,14 @@
 			path = StudyOverviewUI;
 			sourceTree = "<group>";
 		};
+		94C5504C1EBA1516007740D0 /* DashboardModel */ = {
+			isa = PBXGroup;
+			children = (
+				94C5504F1EBA153F007740D0 /* StudyDashboard.swift */,
+			);
+			path = DashboardModel;
+			sourceTree = "<group>";
+		};
 		94C6BD401EB850F100D4AA72 /* ForceUpdate */ = {
 			isa = PBXGroup;
 			children = (
@@ -1664,6 +1675,7 @@
 				94CD96EF1E4B16D900946477 /* WCPConfiguration.swift in Sources */,
 				94B3DD5F1E6ED8E500327AE5 /* StudyOverviewPageViewControllerFirst.swift in Sources */,
 				941909BB1E533AA9001B01C5 /* Overview.swift in Sources */,
+				94C550501EBA153F007740D0 /* StudyDashboard.swift in Sources */,
 				940577A81E767AC60043215C /* ChangePasswordViewController.swift in Sources */,
 				94B3DD5B1E6ED8E500327AE5 /* VerificationViewController.swift in Sources */,
 				94B3DD4D1E6ED8E500327AE5 /* FirstGatewayOverviewViewController.swift in Sources */,

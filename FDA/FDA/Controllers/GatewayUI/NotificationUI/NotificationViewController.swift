@@ -21,12 +21,12 @@ class NotificationViewController : UIViewController{
         
         self.title = NSLocalizedString(kNotificationsTitleText, comment: "")
         
-        WCPServices().getNotification(skip: 1, delegate: self)
+        WCPServices().getNotification(skip:0, delegate: self)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.setNavigationBarItem()
+        self.addBackBarButton()
         self.navigationController?.setNavigationBarHidden(false, animated: true)
     }
     
@@ -34,6 +34,31 @@ class NotificationViewController : UIViewController{
         super.viewDidAppear(animated)
         
         
+    }
+    
+    func checkForStudyState(study:Study) -> Bool{
+        
+        let currentStudy = study
+        let participatedStatus = (currentStudy.userParticipateState.status)
+        
+        switch currentStudy.status {
+        case .Active:
+            if participatedStatus == .inProgress {
+                return true
+            }
+            else {
+                 UIUtilities.showAlertWithTitleAndMessage(title: "", message: NSLocalizedString("Please join study to go forward.", comment: "") as NSString)
+            }
+        case .Upcoming:
+            UIUtilities.showAlertWithTitleAndMessage(title: "", message: NSLocalizedString(kMessageForStudyUpcomingState, comment: "") as NSString)
+        case .Paused:
+            UIUtilities.showAlertWithTitleAndMessage(title: "", message: NSLocalizedString(kMessageForStudyPausedState, comment: "") as NSString)
+        case .Closed:
+            UIUtilities.showAlertWithTitleAndMessage(title: "", message: NSLocalizedString(kMessageForStudyClosedState, comment: "") as NSString)
+            
+        }
+        
+        return false
     }
 }
 
@@ -101,9 +126,13 @@ extension NotificationViewController : UITableViewDelegate{
                 
               let index =  Gateway.instance.studies?.index(where: { $0.studyId == appNotif.studyId })
                 
-                Study.updateCurrentStudy(study:(Gateway.instance.studies?[index!])! )
+                //check status for study
+                if self.checkForStudyState(study: (Gateway.instance.studies?[index!])!) {
+                    Study.updateCurrentStudy(study:(Gateway.instance.studies?[index!])! )
+                    self.pushToStudyDashboard(type:appNotif.subType )
+                }
                 
-                  self.pushToStudyDashboard(type:appNotif.subType )
+               
             }
             
         }

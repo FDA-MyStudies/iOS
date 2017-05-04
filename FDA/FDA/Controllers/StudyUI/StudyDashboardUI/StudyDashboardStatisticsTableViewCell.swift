@@ -82,15 +82,16 @@ class StudyDashboardStatisticsTableViewCell: UITableViewCell {
 extension StudyDashboardStatisticsTableViewCell: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
-        return statisticsArrayData!.count
+        return StudyDashboard.instance.statistics.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        let activityCellData = statisticsArrayData?.object(at: indexPath.row) as! NSDictionary
+        //let activityCellData = statisticsArrayData?.object(at: indexPath.row) as! NSDictionary
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: kStatisticsCollectionViewCell, for: indexPath) as! StudyDashboardStatisticsCollectionViewCell
-        cell.displayStatisics(data: activityCellData)
+        let stats = StudyDashboard.instance.statistics[indexPath.row]
+        cell.displayStatisics(data: stats)
         
         return cell
     }

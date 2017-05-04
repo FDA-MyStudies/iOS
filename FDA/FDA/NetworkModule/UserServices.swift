@@ -396,7 +396,7 @@ class UserServices: NSObject {
         
         let consent = [ kConsentDocumentVersion : consentVersion! as String,
                         kStatus :consentStatus.rawValue,
-                        kConsentpdf : "\(ConsentBuilder.currentConsent?.consentResult?.consentPdfData!)" as Any] as [String : Any]
+                        kConsentpdf : "\(ConsentBuilder.currentConsent?.consentResult?.consentPdfData!.base64EncodedData())" as Any] as [String : Any]
         
         
         let params = [kStudyId : (Study.currentStudy?.studyId!)! as String,

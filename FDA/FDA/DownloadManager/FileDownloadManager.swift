@@ -194,7 +194,7 @@ extension FileDownloadManager:URLSessionDelegate{
         if !FileManager.default.fileExists(atPath: pathString) {
             
             do{
-                let data = try Data.init(contentsOf: pathURL!)
+                let data = try Data.init(contentsOf: URL.init(string: pathString)!)
                 let aes = try AES(key: "passwordpasswordpasswordpassword", iv: "drowssapdrowssap") // aes128
                 let ciphertext = try aes.encrypt(data)
                 
@@ -203,7 +203,7 @@ extension FileDownloadManager:URLSessionDelegate{
                 
                 do{
                     
-                    try encryptedData.write(to: pathURL!, options: Data.WritingOptions.atomic)
+                    try encryptedData.write(to: URL.init(string: pathString)!, options: Data.WritingOptions.atomic)
                     
                 }
                 catch let error as NSError{

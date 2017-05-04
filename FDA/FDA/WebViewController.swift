@@ -41,6 +41,7 @@ class WebViewController : UIViewController{
         activityIndicator.startAnimating()
         
         
+        
         if self.isEmailAvailable == false{
             barItemShare = nil
         }

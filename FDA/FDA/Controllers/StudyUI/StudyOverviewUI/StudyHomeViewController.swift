@@ -582,8 +582,8 @@ extension StudyHomeViewController:ORKTaskViewControllerDelegate{
             ConsentBuilder.currentConsent?.consentResult?.initWithORKTaskResult(taskResult:taskViewController.result )
             
             //save consent to study
-            Study.currentStudy?.signedConsentVersion = ConsentBuilder.currentConsent?.version
-            Study.currentStudy?.signedConsentFilePath = ConsentBuilder.currentConsent?.consentResult?.consentPath
+            Study.currentStudy?.signedConsentVersion = ConsentBuilder.currentConsent?.version!
+            Study.currentStudy?.signedConsentFilePath = ConsentBuilder.currentConsent?.consentResult?.consentPath!
             
             // save also in DB
             DBHandler.saveConsentInformation(study: Study.currentStudy!)

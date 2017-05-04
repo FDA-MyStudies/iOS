@@ -530,9 +530,13 @@ class DBHandler: NSObject {
         let studyRuns = realm.objects(DBActivityRun.self).filter("studyId == %@",studyId)
         let completedRuns = studyRuns.filter({$0.isCompleted == true})
         let runsBeforeToday = studyRuns.filter({($0.endDate == nil) || ($0.endDate <= date)})
-        let incompleteRuns = runsBeforeToday.count - completedRuns.count
+        var incompleteRuns = runsBeforeToday.count - completedRuns.count
         
-         let completion = ceil( Double(self.divide(lhs: (completedRuns.count + incompleteRuns)*100, rhs: studyRuns.count)) )
+        if incompleteRuns < 0 {
+            incompleteRuns = 0
+        }
+        
+        let completion = ceil( Double(self.divide(lhs: (completedRuns.count + incompleteRuns)*100, rhs: studyRuns.count)) )
         let adherence = ceil (Double(self.divide(lhs: (completedRuns.count)*100, rhs: (completedRuns.count + incompleteRuns))))
         //let completion = ceil( Double((completedRuns.count + incompleteRuns)*100/studyRuns.count) )
         //let adherence = ceil (Double((completedRuns.count)*100/(completedRuns.count + incompleteRuns)))

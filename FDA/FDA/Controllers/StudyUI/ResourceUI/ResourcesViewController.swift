@@ -9,6 +9,9 @@
 import Foundation
 import UIKit
 
+
+let kConsentPdfKey = "consent"
+
 class ResourcesViewController : UIViewController{
     
     var tableViewRowDetails : [AnyObject]? = []
@@ -156,6 +159,68 @@ class ResourcesViewController : UIViewController{
         WCPServices().getStudyInformation(studyId: study.studyId, delegate: self)
     }
     
+    func pushToResourceDetails(){
+        
+        let path = AKUtility.baseFilePath + "/Study"
+        let consentPath = Study.currentStudy?.signedConsentFilePath
+        
+        let fullPath = path + "/" + consentPath!
+        
+        let pdfData = FileDownloadManager.decrytFile(pathURL:URL.init(string: fullPath))
+        
+        
+        if pdfData != nil {
+            self.navigateToWebView(link: "", htmlText: "",pdfData:pdfData)
+        }
+    }
+    
+    
+    func saveConsentPdfToLocal(base64dataString:String){
+        
+        let consentData = NSData(base64Encoded: base64dataString, options: .ignoreUnknownCharacters)
+        
+        var fullPath:String!
+        let path =  AKUtility.baseFilePath + "/Study"
+        let fileName:String = "Consent" +  "_" + "\((Study.currentStudy?.studyId)!)" + ".pdf"
+        
+        fullPath = path + "/" + fileName
+        
+        if !FileManager.default.fileExists(atPath: path) {
+            try! FileManager.default.createDirectory(atPath: path, withIntermediateDirectories: true, attributes: nil)
+        }
+        
+        do {
+            
+            if FileManager.default.fileExists(atPath: fullPath){
+                
+                try FileManager.default.removeItem(atPath: fullPath)
+                
+            }
+            FileManager.default.createFile(atPath:fullPath , contents: consentData as Data?, attributes: [:])
+            
+            let defaultPath = fullPath
+            
+            fullPath = "file://" + "\(fullPath!)"
+            
+            try consentData?.write(to:  URL(string:fullPath!)!)
+            
+            FileDownloadManager.encyptFile(pathURL: URL(string:defaultPath!)!)
+            
+            Study.currentStudy?.signedConsentFilePath = fileName
+            DBHandler.saveConsentInformation(study: Study.currentStudy!)
+            
+            self.pushToResourceDetails()
+            
+            
+        } catch let error as NSError {
+            print("error writing to url \(fullPath)")
+            print(error.localizedDescription)
+        }
+
+    }
+    
+    
+    
     
 }
 
@@ -252,18 +317,16 @@ extension ResourcesViewController : UITableViewDelegate{
             else if  resource as! String == "Consent PDF"{
                 
                 //PENDING
-                let path = AKUtility.baseFilePath + "/Study"
-                let consentPath = Study.currentStudy?.signedConsentFilePath
                 
-                let fullPath = path + "/" + consentPath!
-
-                let pdfData = FileDownloadManager.decrytFile(pathURL:URL.init(string: fullPath))
+                if  Study.currentStudy?.signedConsentFilePath != nil {
                 
-                
-                if pdfData != nil {
-                    self.navigateToWebView(link: "", htmlText: "",pdfData:pdfData)
+                    self.pushToResourceDetails()
                 }
-    
+                else{
+                    
+                    UserServices().getConsentPDFForStudy(studyId: (Study.currentStudy?.studyId)!, delegate: self)
+                    
+                }
             }
                 
             else{
@@ -321,6 +384,40 @@ extension ResourcesViewController:NMWebServiceDelegate {
             self.tabBarController?.tabBar.isHidden = true
             
             self.navigateToStudyHome()
+        }
+        else if requestName as String == RegistrationMethods.consentPDF.method.methodName{
+            
+            
+            let consentDict:Dictionary<String,Any> = (response as! Dictionary<String,Any>)[kConsentPdfKey] as! Dictionary<String, Any>
+            
+            if Utilities.isValidObject(someObject:consentDict as AnyObject? ){
+                
+                if Utilities.isValidValue(someObject: consentDict[kConsentVersion] as AnyObject?){
+                    Study.currentStudy?.signedConsentVersion = consentDict[kConsentVersion] as? String
+                }
+                else{
+                     Study.currentStudy?.signedConsentVersion = "No_Version"
+                }
+                
+                /* supposed that mime type of consent remains pdf
+                if Utilities.isValidValue(someObject: consentDict[kFileMIMEType] as AnyObject?){
+                    Study.currentStudy?.signedConsentVersion = consentDict[kConsentVersion] as? String
+                }
+ */
+                
+                if Utilities.isValidValue(someObject: consentDict[kConsentPdfContent] as AnyObject?){
+                    self.saveConsentPdfToLocal(base64dataString: consentDict[kConsentPdfContent] as! String )
+                }
+                
+                
+            }
+            
+            
+            
+           
+           
+            
+            
         }
         
         

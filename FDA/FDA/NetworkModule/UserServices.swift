@@ -394,9 +394,11 @@ class UserServices: NSObject {
             consentVersion = "1"
         }
         
+        let base64data = ConsentBuilder.currentConsent?.consentResult?.consentPdfData!.base64EncodedString()
+        
         let consent = [ kConsentDocumentVersion : consentVersion! as String,
                         kStatus :consentStatus.rawValue,
-                        kConsentpdf : "\(ConsentBuilder.currentConsent?.consentResult?.consentPdfData!.base64EncodedData())" as Any] as [String : Any]
+                        kConsentpdf : "\(base64data!)" as Any] as [String : Any]
         
         
         let params = [kStudyId : (Study.currentStudy?.studyId!)! as String,
@@ -416,12 +418,13 @@ class UserServices: NSObject {
         self.delegate = delegate
         
         let user = User.currentUser
-        let params = [kUserId : user.userId,
+        let headerParams = [kUserAuthToken: user.authToken as String,
+                            kUserId : user.userId as String,
                       kStudyId: studyId]
         
         let method = RegistrationMethods.consentPDF.method
         
-        self.sendRequestWith(method:method, params: params, headers: nil)
+        self.sendRequestWith(method:method, params: nil, headers: headerParams)
     }
     
     func updateUserActivityState(_ delegate:NMWebServiceDelegate){
@@ -663,7 +666,12 @@ class UserServices: NSObject {
         
         let user = User.currentUser
         if Utilities.isValidValue(someObject: response[kConsent] as AnyObject?) {
-            // user.consent = response[kConsent] as! String
+           
+            
+            
+          
+            
+            
         }
     }
     

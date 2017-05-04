@@ -105,7 +105,7 @@ extension FileDownloadManager:URLSessionDelegate{
                     
                     FileDownloadManager.encyptFile(pathURL: fileURL)
                     
-                    self.delegate?.download(manager: self, didFinishDownloadingAtPath:destinationPath)
+                    self.delegate?.download(manager: self, didFinishDownloadingAtPath:fileName as String)
                 } catch let error as NSError {
                     debugPrint("Error while moving downloaded file to destination path:\(error)")
                     DispatchQueue.main.async(execute: { () -> Void in

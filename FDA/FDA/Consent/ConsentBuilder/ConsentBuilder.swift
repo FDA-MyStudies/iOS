@@ -17,6 +17,8 @@ let kConsentReview = "review"
 let kConsentVisualScreens = "visualScreens"
 
 let kConsentVersion = "version"
+let kConsentPdfContent = "content"
+
 
 // SharingConsent Api Constants
 

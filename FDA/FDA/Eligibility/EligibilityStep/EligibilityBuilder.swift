@@ -117,7 +117,7 @@ class EligibilityBuilder{
                 
                 
                 let eligibilityCompletionStep = ORKInstructionStep(identifier: kEligibilityVerifiedScreen)
-                eligibilityCompletionStep.text = "Your enrollment token has been successfully validated. You are eligible to join the Study.\nPlease click Get Started to proceed to the Consent section."
+                eligibilityCompletionStep.text = "Your enrollment token has been successfully validated. You are eligible to join the Study.\nPlease click Continue to proceed to the Consent section."
                 
                 
                 

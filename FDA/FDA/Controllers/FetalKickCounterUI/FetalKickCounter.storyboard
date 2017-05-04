@@ -75,8 +75,11 @@
                                     <constraint firstAttribute="width" secondItem="SgZ-rH-aBn" secondAttribute="height" multiplier="23:20" id="r02-m5-0Fi"/>
                                 </constraints>
                             </imageView>
-                            <textField opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="00" textAlignment="center" minimumFontSize="60" translatesAutoresizingMaskIntoConstraints="NO" id="upT-lw-erh">
+                            <textField opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="00" textAlignment="center" adjustsFontSizeToFit="NO" minimumFontSize="60" translatesAutoresizingMaskIntoConstraints="NO" id="upT-lw-erh">
                                 <rect key="frame" x="141" y="242.5" width="93" height="75"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" relation="lessThanOrEqual" constant="150" id="Azn-hP-iqG"/>
+                                </constraints>
                                 <color key="textColor" red="0.0" green="0.48627450979999998" blue="0.72941176470000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="80"/>
                                 <textInputTraits key="textInputTraits" keyboardType="numberPad" returnKeyType="done"/>

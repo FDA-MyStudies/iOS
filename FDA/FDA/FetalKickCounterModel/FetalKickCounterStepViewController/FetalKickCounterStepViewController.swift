@@ -171,7 +171,9 @@ class FetalKickCounterStepViewController:  ORKStepViewController {
             
         }
         else{
-            self.kickCounter = self.kickCounter! + 1
+            if self.kickCounter! < 999 {
+               self.kickCounter = self.kickCounter! + 1
+            }
         }
         editCounterButton?.isHidden = false
         
@@ -228,11 +230,33 @@ extension FetalKickCounterStepViewController:UIGestureRecognizerDelegate{
 //Mark:TextField Delegates
 extension FetalKickCounterStepViewController:UITextFieldDelegate {
     
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        
+        if (textField == counterTextField)
+        {
+            if (textField.text?.characters.count)! > 0 {
+                if Int(textField.text!)! == 0 {
+                    textField.text = ""
+                }
+            }
+        }
+    }
+    
+        
+   
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         
         if (textField == counterTextField)
         {
             counterTextField?.resignFirstResponder()
+            
+            if textField.text?.characters.count == 0 {
+               textField.text = "00"
+                self.kickCounter = 00
+            }
+            
+            
         }
         
         return true
@@ -243,6 +267,12 @@ extension FetalKickCounterStepViewController:UITextFieldDelegate {
         
         if textField == counterTextField! && ( Utilities.isValidValue(someObject: counterTextField?.text as AnyObject?) == false || Int((counterTextField?.text)!)! <= 0) {
             counterTextField?.resignFirstResponder()
+            if textField.text?.characters.count == 0 || (Int((counterTextField?.text)!) != nil) {
+                textField.text = "00"
+                self.kickCounter = 00
+            }
+           
+            
             Utilities.showAlertWithMessage(alertMessage:kAlertPleaseEnterValidValue)
         }
         else{
@@ -253,8 +283,11 @@ extension FetalKickCounterStepViewController:UITextFieldDelegate {
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         
-        if textField == counterTextField{
-            if Int(textField.text!)! < 999{
+        let finalString = textField.text! + string
+        
+        if textField == counterTextField && finalString.characters.count > 0{
+            
+            if Int(finalString)! <= 999{
                 return true
             }
             else{
@@ -262,7 +295,7 @@ extension FetalKickCounterStepViewController:UITextFieldDelegate {
             }
         }
         else {
-            return false
+            return true
         }
         
     }

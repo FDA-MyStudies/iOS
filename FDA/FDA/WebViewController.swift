@@ -23,6 +23,8 @@ class WebViewController : UIViewController{
     var isEmailAvailable:Bool? = false
     
     var htmlString: String?
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         

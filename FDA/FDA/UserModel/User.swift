@@ -328,7 +328,7 @@ class User{
     func updateActivityStatus(studyId:String,activityId:String,runId:String,status:UserActivityStatus.ActivityStatus) -> UserActivityStatus{
         
         let activityes = self.participatedActivites as Array<UserActivityStatus>
-        if let activity =   activityes.filter({$0.studyId == studyId && $0.activityId == activityId && $0.activityRunId == runId}).first {
+        if let activity =   activityes.filter({$0.activityId == activityId && $0.activityRunId == runId}).first {
             activity.status = status
             Logger.sharedInstance.info("User Activity Status: activity is updated : \(studyId)")
             return activity
@@ -351,7 +351,7 @@ class User{
     func getActivityStatus(studyId:String,activityId:String) -> UserActivityStatus.ActivityStatus?{
         
         let activityes = self.participatedActivites as Array<UserActivityStatus>
-        if let activity =   activityes.filter({$0.studyId == studyId && $0.activityId == activityId}).first {
+        if let activity =   activityes.filter({$0.activityId == activityId}).first {
             return activity.status
         }
         return .yetToJoin

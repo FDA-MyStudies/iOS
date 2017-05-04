@@ -447,7 +447,12 @@ extension ActivitiesViewController:ActivitiesCellDelegate{
 extension ActivitiesViewController:NMWebServiceDelegate {
     func startedRequest(_ manager: NetworkManager, requestName: NSString) {
         Logger.sharedInstance.info("requestname : \(requestName)")
-        self.addProgressIndicator()
+       
+        if (requestName as String == RegistrationMethods.updateStudyState.method.methodName) ||  (requestName as String == RegistrationMethods.updateActivityState.method.methodName){
+        }
+        else {
+             self.addProgressIndicator()
+        }
     }
     func finishedRequest(_ manager: NetworkManager, requestName: NSString, response: AnyObject?) {
         Logger.sharedInstance.info("requestname : \(requestName) Response : \(response)")
@@ -470,8 +475,9 @@ extension ActivitiesViewController:NMWebServiceDelegate {
         }
         else if requestName as String == ResponseMethods.processResponse.method.methodName{
             self.removeProgressIndicator()
-             self.updateRunStatusToComplete()
+             //self.updateRunStatusToComplete()
         }
+        
         
     }
     func failedRequest(_ manager: NetworkManager, requestName: NSString, error: NSError) {
@@ -541,7 +547,7 @@ extension ActivitiesViewController:ORKTaskViewControllerDelegate{
                 Study.currentActivity?.userStatus = .completed
                 
                 
-                LabKeyServices().processResponse(responseData:(ActivityBuilder.currentActivityBuilder.actvityResult?.getResultDictionary())! , delegate: self)
+               // LabKeyServices().processResponse(responseData:(ActivityBuilder.currentActivityBuilder.actvityResult?.getResultDictionary())! , delegate: self)
                 
                 
                 //To be Uncommented

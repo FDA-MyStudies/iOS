@@ -19,7 +19,7 @@ class ConsentCompletionStep: ORKStep {
 }
 
 class ConsentSharePdfStepViewController: ORKStepViewController {
-
+    
     @IBOutlet weak var buttonViewPdf:UIButton?
     
     @IBOutlet weak var buttonNext:UIButton?
@@ -28,7 +28,7 @@ class ConsentSharePdfStepViewController: ORKStepViewController {
     var taskResult:ConsentCompletionTaskResult = ConsentCompletionTaskResult(identifier: kConsentCompletionResultIdentifier)
     
     
-//MARK:ORKstepView Controller Init methods
+    //MARK:ORKstepView Controller Init methods
     override init(step: ORKStep?) {
         super.init(step: step)
     }
@@ -56,17 +56,17 @@ class ConsentSharePdfStepViewController: ORKStepViewController {
     }
     
     
-//MARK:Button Actions
+    //MARK:Button Actions
     
     @IBAction func buttonActionNext(sender: UIButton?) {
-         self.taskResult.didTapOnViewPdf = false
+        self.taskResult.didTapOnViewPdf = false
         self.goForward()
     }
     
     @IBAction func buttonActionViewPdf(sender: UIButton?) {
         
         self.addProgressIndicator()
-      
+        
         
         self.consentDocument?.makePDF(completionHandler: { data,error in
             NSLog("data: \(data)    \n  error: \(error)")
@@ -76,46 +76,9 @@ class ConsentSharePdfStepViewController: ORKStepViewController {
             self.taskResult.didTapOnViewPdf = true
             
             ConsentBuilder.currentConsent?.consentResult?.consentPdfData = Data()
-             ConsentBuilder.currentConsent?.consentResult?.consentPdfData = data?.base64EncodedData()
+            ConsentBuilder.currentConsent?.consentResult?.consentPdfData = data
 
-            
-            
-            let dir = FileManager.getStorageDirectory(type: .study)
-            
-            let fullPath:String!
-            
-            if (ConsentBuilder.currentConsent?.version!) == nil {
-                
-                fullPath = "file://" + dir + "/" + "Consent" +  "_" + "\((Study.currentStudy?.studyId)!)" + "_" + "No_Version" + ".pdf"
-                
-            }
-            else{
-                fullPath = "file://" + dir + "/" + "Consent" +  "_" + "\((Study.currentStudy?.studyId)!)" + "_" + "\((ConsentBuilder.currentConsent?.version!)!)" + ".pdf"
-            }
-            
-            do {
-                
-                if FileManager.default.fileExists(atPath: fullPath!){
-                    
-                    try FileManager.default.removeItem(atPath: fullPath!)
-                    
-                }
-                FileManager.default.createFile(atPath:fullPath! , contents: data, attributes: [:])
-                
-                
-                try data?.write(to:  URL(string:fullPath!)!)
-                
-                FileDownloadManager.encyptFile(pathURL:URL(string:fullPath!)! )
-                
-                //try data?.write(to: URL(string:fullPath)! , options: .atomicWrite)
-                
-                // writing to disk
-                
-            } catch let error as NSError {
-                print("error writing to url \(fullPath)")
-                print(error.localizedDescription)
-            }
-
+    
             self.removeProgressIndicator()
             
             self.goForward()
@@ -123,21 +86,21 @@ class ConsentSharePdfStepViewController: ORKStepViewController {
         })
     }
     
-//MARK:View controller delegates
+    //MARK:View controller delegates
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         if let step = step as? ConsentCompletionStep {
             step.mainTitle = "Thanks for providing consent for this Study"
             step.subTitle =  "You can now start participating in the Study"
         }
         
-         buttonViewPdf?.layer.borderColor =   kUicolorForButtonBackground
+        buttonViewPdf?.layer.borderColor =   kUicolorForButtonBackground
         
         
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

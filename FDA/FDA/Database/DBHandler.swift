@@ -100,7 +100,7 @@ class DBHandler: NSObject {
                     dbStudy?.status = study.status.rawValue
                     
                     if dbStudy?.participatedStatus == UserStudyStatus.StudyStatus.inProgress.rawValue {
-                        dbStudy?.updatedVersion = "2"
+                        dbStudy?.updatedVersion = study.version
                     }
                     else {
                         dbStudy?.version = study.version

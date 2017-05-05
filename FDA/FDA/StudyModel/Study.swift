@@ -18,6 +18,20 @@ enum StudyStatus:String{
     case Upcoming
     case Closed
     case Paused
+    
+    var sortIndex : Int {
+        switch self {
+        case .Active:
+            return 0
+        case .Upcoming:
+            return 1
+        case .Paused:
+            return 2
+        case .Closed:
+            return 3
+        
+        }
+    }
 }
 
 struct ConsentDocument {
@@ -117,7 +131,13 @@ class Study {
             if Utilities.isValidObject(someObject: studyDetail[kStudySettings] as AnyObject )  {
                 self.studySettings = StudySettings(settings: studyDetail[kStudySettings] as! Dictionary<String, Any>)
             }
-            
+            let currentUser = User.currentUser
+            if let userStudyStatus = currentUser.participatedStudies.filter({$0.studyId == self.studyId}).last{
+                self.userParticipateState = userStudyStatus
+            }
+            else {
+                self.userParticipateState = UserStudyStatus()
+            }
         }
         else{
             Logger.sharedInstance.debug("Study Dictionary is null:\(studyDetail)")

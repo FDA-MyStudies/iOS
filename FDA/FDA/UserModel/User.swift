@@ -417,6 +417,22 @@ class UserStudyStatus{
         case completed
         case withdrawn
         
+        var sortIndex : Int {
+            switch self {
+            case .inProgress:
+                return 0
+            case .yetToJoin:
+                return 1
+            case .completed:
+                return 2
+            case .withdrawn:
+                return 3
+            case .notEligible:
+                return 4
+                
+            }
+        }
+        
         var description:String {
             switch self {
             case .yetToJoin:

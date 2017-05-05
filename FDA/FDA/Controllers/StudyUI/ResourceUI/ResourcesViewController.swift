@@ -251,8 +251,15 @@ extension ResourcesViewController:NMWebServiceDelegate {
         Logger.sharedInstance.info("requestname : \(requestName)")
         self.removeProgressIndicator()
         
-        
-        
+        if requestName as String == WCPMethods.resources.method.methodName {
+            
+            self.addDefaultList()
+            self.appendLeaveStudy()
+            self.tableView?.isHidden = false
+            self.tableView?.reloadData()
+            
+            
+        }
     }
 }
 

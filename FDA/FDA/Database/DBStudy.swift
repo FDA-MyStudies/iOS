@@ -19,13 +19,13 @@ class DBStudy: Object {
     dynamic var category:String?
     dynamic var startDate:String?
     dynamic var endEnd:String?
-    dynamic var status:Int = 0
+    dynamic var status:String?
     dynamic var sponserName:String?
     dynamic var tagLine:String?
     dynamic var brandingConfiguration:String?
     dynamic var logoURL:String?
     dynamic var websiteLink:String?
-    dynamic var bookmarked:String?
+    dynamic var bookmarked:Bool = false
     dynamic var updateResources : Bool = false
     dynamic var updateActivities : Bool = false
     dynamic var updateConsent : Bool = false

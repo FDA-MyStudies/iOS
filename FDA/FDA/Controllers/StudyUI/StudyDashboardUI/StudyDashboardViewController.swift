@@ -50,15 +50,15 @@ class StudyDashboardViewController : UIViewController{
         if(StudyUpdates.studyConsentUpdated){
             print("Study consent is updated: Please Present Consent UI")
             
-            
-            UIUtilities.showAlertMessageWithTwoActionsAndHandler(NSLocalizedString("Consent Updated", comment: ""), errorMessage: NSLocalizedString("The Consent Document for this study has been updated. Please review the revised Consent terms and provide your Informed Consent, to continue participating in the study.", comment: ""), errorAlertActionTitle: NSLocalizedString("Review", comment: ""),
-                                                                 errorAlertActionTitle2:nil, viewControllerUsed: self,
-                                                                 action1: {
-                                                                     WCPServices().getEligibilityConsentMetadata(studyId:(Study.currentStudy?.studyId)!, delegate: self as NMWebServiceDelegate)
-            },
-                                                                 action2: {
-                                                                    
-            })
+            //Uncomment before release to UAT
+//            UIUtilities.showAlertMessageWithTwoActionsAndHandler(NSLocalizedString("Consent Updated", comment: ""), errorMessage: NSLocalizedString("The Consent Document for this study has been updated. Please review the revised Consent terms and provide your Informed Consent, to continue participating in the study.", comment: ""), errorAlertActionTitle: NSLocalizedString("Review", comment: ""),
+//                                                                 errorAlertActionTitle2:nil, viewControllerUsed: self,
+//                                                                 action1: {
+//                                                                     WCPServices().getEligibilityConsentMetadata(studyId:(Study.currentStudy?.studyId)!, delegate: self as NMWebServiceDelegate)
+//            },
+//                                                                 action2: {
+//                                                                    
+//            })
 
     
             

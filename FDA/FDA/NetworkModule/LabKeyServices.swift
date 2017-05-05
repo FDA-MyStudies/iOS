@@ -60,16 +60,16 @@ class LabKeyServices: NSObject {
         
         let method = ResponseMethods.processResponse.method
         
-        let studyId = Study.currentStudy?.studyId!
-        let activiyId = Study.currentActivity?.actvityId!
-        let activityName = Study.currentActivity?.shortName!
-        let activityVersion = Study.currentActivity?.version!
+        let studyId =  "CAFDA12" // Study.currentStudy?.studyId!
+        let activiyId = "QR-4" // Study.currentActivity?.actvityId!
+        let activityName =  "QR4" //Study.currentActivity?.shortName!
+        let activityVersion = "1.0" //Study.currentActivity?.version!
         let currentRunId = Study.currentActivity?.currentRunId
         
-        let info =  [kStudyId:studyId! ,
-                     kActivityId:activiyId! ,
-                     kActivityName:activityName! ,
-                     kActivityVersion :activityVersion! ,
+        let info =  [kStudyId:studyId ,
+                     kActivityId:activiyId ,
+                     kActivityName:activityName ,
+                     kActivityVersion :activityVersion ,
                      kActivityRunId:currentRunId!
             ] as [String : Any]
         

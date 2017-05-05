@@ -185,6 +185,8 @@ class DBHandler: NSObject {
             
             study.userParticipateState = participatedStatus
             
+            //append to user class participatesStudies also
+            User.currentUser.participatedStudies.append(participatedStatus)
             
             //anchorDate
             let anchorDate = StudyAnchorDate()
@@ -192,6 +194,7 @@ class DBHandler: NSObject {
             anchorDate.anchorDateQuestionKey = dbStudy.anchorDateType
             anchorDate.anchorDateActivityVersion = dbStudy.anchorDateActivityVersion
             anchorDate.anchorDateQuestionKey = dbStudy.anchorDateQuestionKey
+            anchorDate.anchorDateType = dbStudy.anchorDateType
             anchorDate.date = dbStudy.anchorDate
             
             study.anchorDate = anchorDate
@@ -498,6 +501,7 @@ class DBHandler: NSObject {
             activity.type       = ActivityType(rawValue:dbActivity.type!)
             activity.frequencyType = Frequency(rawValue:dbActivity.frequencyType!)!
             activity.totalRuns = dbActivity.activityRuns.count
+            activity.version = dbActivity.version
             
             do {
                 let frequencyRuns = try JSONSerialization.jsonObject(with: dbActivity.frequencyRunsData!, options: []) as! [String:Any]

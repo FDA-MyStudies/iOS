@@ -92,7 +92,7 @@ class WebViewController : UIViewController{
     }
     
     @IBAction func buttonActionShare(_ sender : UIBarButtonItem){
-        
+        self.sendConsentByMail()
     }
     
    
@@ -103,21 +103,14 @@ class WebViewController : UIViewController{
         
         mailComposerVC.setSubject("Consent")
        
-         let data:Data?
+         //let data:Data?
        
         
-        if self.requestLink != nil && (self.requestLink?.characters.count)! > 0 {
+        if self.pdfData != nil{
            
-            do {
-              data = try Data.init(contentsOf: URL.init(string:self.requestLink! )! )
-                
-                 mailComposerVC.addAttachmentData(data!, mimeType: "application/pdf", fileName:"UnsignedConset")
-                
-                 mailComposerVC.setMessageBody("", isHTML: false)
-                
-            } catch {
-                print("Error: \(error)")
-            }
+            mailComposerVC.addAttachmentData(self.pdfData!, mimeType: "application/pdf", fileName:"UnsignedConset")
+            
+            mailComposerVC.setMessageBody("", isHTML: false)
         }
         else if self.htmlString != nil {
             mailComposerVC.setMessageBody(self.htmlString!, isHTML: true)

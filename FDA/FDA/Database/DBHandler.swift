@@ -182,7 +182,19 @@ class DBHandler: NSObject {
             participatedStatus.status = UserStudyStatus.StudyStatus(rawValue:dbStudy.participatedStatus)!
             participatedStatus.bookmarked = dbStudy.bookmarked
             participatedStatus.studyId = dbStudy.studyId
+            
             study.userParticipateState = participatedStatus
+            
+            
+            //anchorDate
+            let anchorDate = StudyAnchorDate()
+            anchorDate.anchorDateActivityId = dbStudy.anchorDateActivityId
+            anchorDate.anchorDateQuestionKey = dbStudy.anchorDateType
+            anchorDate.anchorDateActivityVersion = dbStudy.anchorDateActivityVersion
+            anchorDate.anchorDateQuestionKey = dbStudy.anchorDateQuestionKey
+            anchorDate.date = dbStudy.anchorDate
+            
+            study.anchorDate = anchorDate
             
             studies.append(study)
         }
@@ -231,6 +243,38 @@ class DBHandler: NSObject {
             
         })
         
+    }
+    
+    class func saveAnchorDateDetail(anchorDate:StudyAnchorDate , studyId:String){
+        
+        let realm = try! Realm()
+        let studies =  realm.objects(DBStudy.self).filter("studyId == %@",studyId)
+        let dbStudy = studies.last
+        
+        try! realm.write({
+            
+            dbStudy?.anchorDateActivityId = anchorDate.anchorDateActivityId
+            dbStudy?.anchorDateType = anchorDate.anchorDateType
+            dbStudy?.anchorDateActivityVersion = anchorDate.anchorDateActivityVersion
+            dbStudy?.anchorDateQuestionKey = anchorDate.anchorDateQuestionKey
+            
+        })
+        
+    }
+    
+    class func saveAncorDate(date:Date,studyId:String){
+        
+        let realm = try! Realm()
+        let studies =  realm.objects(DBStudy.self).filter("studyId == %@",studyId)
+        let dbStudy = studies.last
+        
+        try! realm.write({
+            
+            dbStudy?.anchorDate = date
+           
+            
+        })
+
     }
     
     class func loadStudyOverview(studyId:String,completionHandler:@escaping (Overview?) -> ()){

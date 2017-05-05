@@ -71,6 +71,16 @@ let kStudyResources = "resources"
 let kStudyInfo = "info"
 
 
+//study AnchorDate
+
+
+let kStudyAnchorDate = "anchorDate"
+let kStudyAnchorDateType = "type"
+let kStudyAnchorDateActivityId = "activityId"
+let kStudyAnchorDateActivityVersion = "activityVersion"
+let kStudyAnchorDateQuestionKey = "key"
+let kStudyAnchorDateQuestionInfo = "questionInfo"
+
 
 
 class WCPServices: NSObject {
@@ -360,6 +370,17 @@ class WCPServices: NSObject {
         
         //update overview object to current study
         Study.currentStudy?.overview = overview
+        
+        //anchorDate
+        if Utilities.isValidObject(someObject: response[kStudyAnchorDate] as AnyObject?){
+            
+            let studyAndhorDate = StudyAnchorDate.init(detail: response[kStudyAnchorDate] as! Dictionary<String,Any>)
+            
+            //update anchorDate to current study
+            Study.currentStudy?.anchorDate = studyAndhorDate
+            
+            DBHandler.saveAnchorDateDetail(anchorDate: studyAndhorDate, studyId: (Study.currentStudy?.studyId)!)
+        }
         
         //save in database
         DBHandler.saveStudyOverview(overview: overview, studyId: (Study.currentStudy?.studyId)!)

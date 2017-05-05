@@ -92,6 +92,8 @@ class Study {
     var consentDocument:ConsentDocument?
     var signedConsentVersion:String?
     var signedConsentFilePath:String?
+    var anchorDate:StudyAnchorDate?
+   
     
     static var currentStudy:Study? = nil
     static var currentActivity:Activity? = nil
@@ -186,6 +188,80 @@ class StudySettings{
                 self.platform = (settings[kStudyPlatform] as? String)!
             }
         }
+    }
+}
+
+class StudyAnchorDate{
+    //anchorDate Value
+     var date:Date?
+     var anchorDateType:String?
+     var anchorDateActivityId:String?
+     var anchorDateActivityVersion:String?
+     var anchorDateQuestionKey:String?
+    
+    init() {
+        
+    }
+    
+    init(detail:Dictionary<String,Any>) {
+        
+        if Utilities.isValidObject(someObject: detail as AnyObject?){
+            
+            if Utilities.isValidValue(someObject: detail[kStudyAnchorDateType] as AnyObject ){
+                self.anchorDateType = (detail[kStudyAnchorDateType] as? String)!
+            }
+            
+            if Utilities.isValidObject(someObject: detail[kStudyAnchorDateQuestionInfo] as AnyObject?){
+                
+                let questionInfo = detail[kStudyAnchorDateQuestionInfo] as! Dictionary<String,Any>
+                
+                if Utilities.isValidValue(someObject: questionInfo[kStudyAnchorDateActivityId] as AnyObject ){
+                    self.anchorDateActivityId = (questionInfo[kStudyAnchorDateActivityId] as? String)!
+                }
+                
+                if Utilities.isValidValue(someObject: questionInfo[kStudyAnchorDateActivityVersion] as AnyObject ){
+                    self.anchorDateActivityVersion = (questionInfo[kStudyAnchorDateActivityVersion] as? String)!
+                }
+                
+                if Utilities.isValidValue(someObject: questionInfo[kStudyAnchorDateQuestionKey] as AnyObject ){
+                    self.anchorDateQuestionKey = (questionInfo[kStudyAnchorDateQuestionKey] as? String)!
+                }
+            }
+            
+            
+        }
+    }
+    
+    func updateAnchorDate(date:Date){
+        self.date = date    
+    }
+    
+    func setEnrollmentDateAsAnchorDate(){
+        
+        if self.anchorDateType == "enrollment-date" {
+            let currentUser = User.currentUser
+            if let userStudyStatus = currentUser.participatedStudies.filter({$0.studyId == Study.currentStudy?.studyId}).first {
+                self.date = userStudyStatus.joiningDate
+                
+                DBHandler.saveAncorDate(date: self.date!, studyId: (Study.currentStudy?.studyId)!)
+            }
+        }
+    }
+    
+    func setAnchorDateFromQuestion(date:String){
+        
+        if self.anchorDateType == "date-question" {
+            self.date = Utilities.getDateFromString(dateString: date)
+            DBHandler.saveAncorDate(date: self.date!, studyId: (Study.currentStudy?.studyId)!)
+        }
+    }
+    
+    func isAnchorDateAvailable() -> Bool {
+        
+        if  self.anchorDateType != nil {
+            return true
+        }
+        return false
     }
 }
 

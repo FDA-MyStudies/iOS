@@ -124,7 +124,7 @@ class ResourcesViewController : UIViewController{
                     
                 }
             } //check for anchorDate
-            else {
+            else if resource.anchorDateStartDays != nil && resource.anchorDateEndDays != nil {
                 
                 let anchorDate = Study.currentStudy?.anchorDate
                 if(anchorDate != nil && (anchorDate?.isAnchorDateAvailable())!) {
@@ -132,8 +132,8 @@ class ResourcesViewController : UIViewController{
                     let anchorDate = Study.currentStudy?.anchorDate?.date
                     
                     //also anchor date condition
-                    let startDateInterval = TimeInterval(60*60*24*(resource.anchorDateStartDays))
-                    let endDateInterval = TimeInterval(60*60*24*(resource.anchorDateEndDays))
+                    let startDateInterval = TimeInterval(60*60*24*(resource.anchorDateStartDays)!)
+                    let endDateInterval = TimeInterval(60*60*24*(resource.anchorDateEndDays)!)
                     
                     let startAnchorDate = anchorDate?.addingTimeInterval(startDateInterval)
                     let endAnchorDate = anchorDate?.addingTimeInterval(endDateInterval)
@@ -152,6 +152,9 @@ class ResourcesViewController : UIViewController{
                 }
             
                 
+            }
+            else {
+                tableViewRowDetails?.append(resource)
             }
            
         }

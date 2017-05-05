@@ -40,5 +40,14 @@ class NotificationTableViewCell: UITableViewCell {
         else{
             labelNotificationText?.text = ""
         }
+        
+        self.labelNotificationTime?.text = NotificationTableViewCell.formatter.string(from: (appNotification?.date)!)
     }
+    
+    private static let formatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "MMM dd YYYY"
+        formatter.timeZone = TimeZone.init(abbreviation:"GMT")
+        return formatter
+    }()
 }

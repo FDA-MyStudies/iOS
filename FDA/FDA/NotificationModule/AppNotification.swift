@@ -38,6 +38,7 @@ class AppNotification {
     var title:String?
     var message:String?
     var studyId:String?
+    var date:Date?
     
     init(detail:Dictionary<String, Any>){
         
@@ -64,6 +65,9 @@ class AppNotification {
             
             if Utilities.isValidValue(someObject: detail[kNotificationStudyId] as AnyObject ) {
                 self.studyId =  detail[kNotificationStudyId] as? String
+            }
+            if Utilities.isValidValue(someObject: detail["date"] as AnyObject ) {
+                self.date =   Utilities.getDateFromString(dateString: (detail["date"] as? String)!)
             }
             
         }

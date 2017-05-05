@@ -402,7 +402,7 @@ class Utilities: NSObject {
          returns dateString for the specified date in same format
          */
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
         dateFormatter.timeZone = TimeZone.current
         
         let dateValue = dateFormatter.string(from: date)

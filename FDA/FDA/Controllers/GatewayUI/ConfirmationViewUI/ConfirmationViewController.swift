@@ -88,7 +88,7 @@ class ConfirmationViewController: UIViewController {
      
      Delete account button clicked 
      
-     @param sender  Accepts any object
+     @param sender  Accepts UIButton object
      
      */
     @IBAction func deleteAccountAction(_ sender:UIButton){
@@ -102,13 +102,14 @@ class ConfirmationViewController: UIViewController {
      
      Donot Delete button action
      
-     @param sender  Accepts any object
+     @param sender  Accepts UIButton object
      
      */
     @IBAction func doNotDeleteAccountAction(_ sender:UIButton){
          _ = self.navigationController?.popViewController(animated: true)
     }
 }
+
 
 //MARK:- TableView Data source
 extension ConfirmationViewController : UITableViewDataSource {
@@ -141,6 +142,7 @@ extension ConfirmationViewController : UITableViewDataSource {
     }
 }
 
+
 //MARK:- TableView Delegates
 extension ConfirmationViewController : UITableViewDelegate{
     
@@ -149,6 +151,7 @@ extension ConfirmationViewController : UITableViewDelegate{
         //print(indexPath.row)
     }
 }
+
 
 //MARK:- UserService Response handler
 extension ConfirmationViewController:NMWebServiceDelegate {

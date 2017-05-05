@@ -92,7 +92,7 @@ class FeedBackViewController : UIViewController{
 }
 
 
-//MARK:- TableView Data source
+//MARK:- TableView Datasource
 extension FeedBackViewController: UITableViewDataSource{
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -186,7 +186,6 @@ extension FeedBackViewController : UITextFieldDelegate{
    
     func textFieldDidEndEditing(_ textField: UITextField) {
         print(textField.text!)
-        
         textField.text =  textField.text?.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
         FeedbackDetail.subject = textField.text!
     }
@@ -195,11 +194,13 @@ extension FeedBackViewController : UITextFieldDelegate{
 
 //MARK- Webservice Delegates
 extension FeedBackViewController:NMWebServiceDelegate {
+    
     func startedRequest(_ manager: NetworkManager, requestName: NSString) {
         
         Logger.sharedInstance.info("requestname : \(requestName)")
         self.addProgressIndicator()
     }
+    
     func finishedRequest(_ manager: NetworkManager, requestName: NSString, response: AnyObject?) {
         Logger.sharedInstance.info("requestname : \(requestName)")
         self.removeProgressIndicator()
@@ -207,8 +208,8 @@ extension FeedBackViewController:NMWebServiceDelegate {
         UIUtilities.showAlertMessageWithActionHandler("", message: NSLocalizedString(kMessageFeedbackSubmittedSuccessfuly, comment: ""), buttonTitle: kTitleOk, viewControllerUsed: self) {
             _ = self.navigationController?.popViewController(animated: true)
         }
-        
     }
+    
     func failedRequest(_ manager: NetworkManager, requestName: NSString, error: NSError) {
         
         self.removeProgressIndicator()

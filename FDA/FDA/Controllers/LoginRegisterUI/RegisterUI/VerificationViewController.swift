@@ -13,7 +13,6 @@ let kDefaultEmail = "xyz@gmail.com"
 let kSignupCompletionSegue = "signupCompletionSegue"
 let kAlertMessageText = "Message"
 let kAlertMessageVerifyEmail = "Please verify your email address."
-
 let kAlertMessageResendEmail = "An email verification code has been sent to your registered email."
 
 enum VerificationLoadFrom:Int{
@@ -30,14 +29,15 @@ class VerificationViewController : UIViewController{
     @IBOutlet var labelVerificationMessage : UILabel?
     @IBOutlet var textFieldEmail :UITextField?
     @IBOutlet var textFieldVerificationCode : UITextField?
+    
     var labelMessage : String?
     var isFromForgotPassword :Bool =  false
     var emailId:String?
     var shouldCreateMenu:Bool = true
     var viewLoadFrom:VerificationLoadFrom = .signup
     
-//MARK:- View Controllere Lifecycle
     
+//MARK:- View Controllere Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -140,7 +140,7 @@ class VerificationViewController : UIViewController{
      
      Resend the verification code to regestered mail id 
      
-     @param sender  accepts any object
+     @param sender  accepts UIButton object
      
      */
     @IBAction func resendEmailButtonAction(_ sender: UIButton){
@@ -159,8 +159,8 @@ class VerificationViewController : UIViewController{
         }
     }
 
-//MARK- Segue Methods
     
+//MARK:- Segue Methods
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         if let singupCompletion = segue.destination as? SignUpCompleteViewController {
@@ -308,7 +308,6 @@ extension VerificationViewController:NMWebServiceDelegate {
 
 //MARK:- ORKTaskViewController Delegate
 extension VerificationViewController:ORKTaskViewControllerDelegate{
-    //MARK:ORKTaskViewController Delegate
     
     func taskViewControllerSupportsSaveAndRestore(_ taskViewController: ORKTaskViewController) -> Bool {
         return true

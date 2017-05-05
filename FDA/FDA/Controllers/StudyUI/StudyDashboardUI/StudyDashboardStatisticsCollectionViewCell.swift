@@ -16,7 +16,13 @@ class StudyDashboardStatisticsCollectionViewCell: UICollectionViewCell {
     @IBOutlet var labelStatisticsCount : UILabel?
     
     
-    //Used to display Statistics cell data
+    /**
+     
+     Used to display Statistics cell
+     
+     @param data    Accepts the data from Dictionary
+     
+     */
     func displayStatisics(data : DashboardStatistics){
         
         labelStatisticsText?.text = data.title

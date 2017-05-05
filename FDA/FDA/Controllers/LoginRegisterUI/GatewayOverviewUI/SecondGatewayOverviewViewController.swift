@@ -15,6 +15,7 @@ class SecondGatewayOverviewViewController : UIViewController{
     @IBOutlet var labelHeadingText : UILabel?
     @IBOutlet var labelDescriptionText : UILabel?
     @IBOutlet var buttonGetStarted : UIButton?
+    
     var overviewSectionDetail : OverviewSection!
     var pageIndex:Int!
     
@@ -49,30 +50,35 @@ class SecondGatewayOverviewViewController : UIViewController{
         
     }
     
-//MARK:- Button Actions
     
-    /**
-     
-     This method is used to create FDASlideMenuViewController and Gateway storyboard
-     
-     @param sender    accepts any object
-     
-     */
-    @IBAction func getStartedButtonClicked(_ sender: Any){
-        self.createMenuView()
-    }
-    
+//MARK:-
     
     /**
      
      Create the menu view using FDASlideMenuViewController and Gateway storyboard
      
-     */    func createMenuView() {
+     */
+    func createMenuView() {
         
         let storyboard = UIStoryboard(name: "Gateway", bundle: nil)
         
         let fda = storyboard.instantiateViewController(withIdentifier: "FDASlideMenuViewController") as! FDASlideMenuViewController
         fda.automaticallyAdjustsScrollViewInsets = true
         self.navigationController?.pushViewController(fda, animated: true)
-        
-    }}
+    }
+
+    
+//MARK:- Button Actions
+    
+    /**
+     
+     This method is used to create FDASlideMenuViewController and Gateway storyboard
+     
+     @param sender    accepts any kind of object
+     
+     */
+    @IBAction func getStartedButtonClicked(_ sender: Any){
+        self.createMenuView()
+    }
+}
+

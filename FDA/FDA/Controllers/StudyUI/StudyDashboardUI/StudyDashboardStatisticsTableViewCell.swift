@@ -12,7 +12,6 @@ class StudyDashboardStatisticsTableViewCell: UITableViewCell {
 
     //Fifth cell Outlets
     @IBOutlet var statisticsCollectionView: UICollectionView?
-    
     @IBOutlet var buttonDay : UIButton?
     @IBOutlet var buttonWeek : UIButton?
     @IBOutlet var buttonMonth : UIButton?
@@ -31,6 +30,15 @@ class StudyDashboardStatisticsTableViewCell: UITableViewCell {
         
     }
     
+//MARK:- Button action
+    
+    /**
+     
+     Day, Week and Month Button clicked
+     
+     @param sender    Accepts Any object
+
+     */
     @IBAction func dayWeekMonthButtonAction(_ sender: AnyObject){
         
         if sender.tag == 11{
@@ -78,15 +86,14 @@ class StudyDashboardStatisticsTableViewCell: UITableViewCell {
     }
 }
 
-//MARK: Collection delegates
+//MARK:- Collection delegates
 extension StudyDashboardStatisticsTableViewCell: UICollectionViewDelegate, UICollectionViewDataSource {
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        
         return StudyDashboard.instance.statistics.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
         //let activityCellData = statisticsArrayData?.object(at: indexPath.row) as! NSDictionary
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: kStatisticsCollectionViewCell, for: indexPath) as! StudyDashboardStatisticsCollectionViewCell
@@ -102,3 +109,5 @@ extension StudyDashboardStatisticsTableViewCell: UICollectionViewDelegate, UICol
         
     }
 }
+
+

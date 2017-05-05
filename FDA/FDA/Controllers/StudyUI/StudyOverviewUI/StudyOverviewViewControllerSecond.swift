@@ -25,7 +25,6 @@ class StudyOverviewViewControllerSecond : UIViewController{
     
     
 //MARK:- Viewcontroller lifecycle
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -112,7 +111,7 @@ class StudyOverviewViewControllerSecond : UIViewController{
      
      This method is used to Visit website
      
-     @param sender  Access any kind of object
+     @param sender  Access UIButton object
      
      */
     @IBAction func visitWebsiteButtonAction(_ sender: UIButton) {

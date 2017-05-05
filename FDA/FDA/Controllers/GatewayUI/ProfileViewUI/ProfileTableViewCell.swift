@@ -31,25 +31,30 @@ class ProfileTableViewCell: UITableViewCell {
         // Initialization code
     }
     
-//Mark:IBActions
     @IBAction func switchValueChanged(sender: UISwitch) {
         
     }
     
-//Mark:Cell Utility Methods
     
-    /*
-     used to set default values
+    /**
+     
+     Used to set default values
+     
      @param dict    holds the dictionary of default values
+     
      */
     func setCellData(dict : NSDictionary ){
         
         self.labelName?.text = NSLocalizedString((dict[kLabelText] as? String)!, comment: "")
         
     }
-    /*
-     used to set toggle value for switch
+    
+    
+    /**
+     Used to set toggle value for switch
+     
      @param toggleValue    switch Value
+     
      */
     func setToggleValue(indexValue:Int)  {
         
@@ -85,19 +90,14 @@ class ProfileTableViewCell: UITableViewCell {
             else{
                 self.switchToggle?.isOn =  false
             }
-       
-            
         }
-        
-
     }
     
-    
-
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         
         // Configure the view for the selected state
     }
-    
 }
+
+

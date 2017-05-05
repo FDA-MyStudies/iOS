@@ -28,7 +28,6 @@ class StudyOverviewViewControllerFirst : UIViewController{
 
     
 //MARK:- Viewcontroller Lifecycle
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -190,9 +189,9 @@ class StudyOverviewViewControllerFirst : UIViewController{
 }
 
 
-//MARK:- WCPServices Response handler
-
+//MARK:- Webservice Delegates
 extension StudyOverviewViewControllerFirst:NMWebServiceDelegate {
+    
     func startedRequest(_ manager: NetworkManager, requestName: NSString) {
         Logger.sharedInstance.info("requestname : \(requestName)")
         self.addProgressIndicator()

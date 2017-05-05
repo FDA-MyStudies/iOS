@@ -141,6 +141,8 @@ class SignUpViewController : UIViewController{
      
      All validation checks and Password,Email complexity checks
      
+     @return Bool
+     
      */
     func validateAllFields() -> Bool{
         //(user.firstName?.isEmpty)! && (user.lastName?.isEmpty)! &&
@@ -257,6 +259,8 @@ class SignUpViewController : UIViewController{
      
      Displays alert regarding why the user has to register
      
+     @param sender  Accepts any object
+     
      */
     @IBAction func buttonInfoAction(_ sender:Any){
         UIUtilities.showAlertWithTitleAndMessage(title:"Why Register?", message:kRegistrationInfoMessage as NSString)
@@ -292,8 +296,8 @@ class SignUpViewController : UIViewController{
     }
 }
 
-//MARK:- Gesture Delegate
 
+//MARK:- Gesture Delegate
 extension SignUpViewController:UIGestureRecognizerDelegate{
     func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
         if gestureRecognizer.isKind(of: UITapGestureRecognizer.classForCoder()) {
@@ -305,8 +309,8 @@ extension SignUpViewController:UIGestureRecognizerDelegate{
     }
 }
 
-//MARK:- UITextViewDelegate
 
+//MARK:- UITextView Delegate
 class LinkTextView:UITextView{
     
     override func canPerformAction(_ action: Selector, withSender sender: Any?) -> Bool {
@@ -328,8 +332,8 @@ class LinkTextView:UITextView{
     }
 }
 
-//MARK:- Textfield Delegate
 
+//MARK:- Textfield Delegate
 extension SignUpViewController:UITextViewDelegate{
     
     func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange) -> Bool {
@@ -366,8 +370,8 @@ extension SignUpViewController:UITextViewDelegate{
     }
 }
 
-//MARK:- TableView Data source
 
+//MARK:- TableView Datasource
 extension SignUpViewController : UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -412,8 +416,8 @@ extension SignUpViewController : UITableViewDataSource {
     }
 }
 
-//MARK:- TableView Delegates
 
+//MARK:- TableView Delegates
 extension SignUpViewController : UITableViewDelegate{
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -422,8 +426,8 @@ extension SignUpViewController : UITableViewDelegate{
     }
 }
 
-//MARK:- Textfield Delegate
 
+//MARK:- Textfield Delegate
 extension SignUpViewController : UITextFieldDelegate{
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
@@ -515,8 +519,8 @@ extension SignUpViewController : UITextFieldDelegate{
     }
 }
 
-//MARK:- Webservice delegates
 
+//MARK:- Webservice delegates
 extension SignUpViewController:NMWebServiceDelegate {
     
     func startedRequest(_ manager: NetworkManager, requestName: NSString) {

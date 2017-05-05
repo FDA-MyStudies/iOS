@@ -27,7 +27,8 @@ class StudyDashboardActivityTableViewCell: UITableViewCell {
 
 }
 
-//MARK: Collection Datasource and Delegates
+
+//MARK:- Collection Datasource and Delegates
 extension StudyDashboardActivityTableViewCell: UICollectionViewDelegate , UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         

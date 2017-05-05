@@ -93,7 +93,7 @@ class ProfileViewController: UIViewController {
      
      Change password button clicked
      
-     @param sender    Accepts any object
+     @param sender    Accepts UIButton object
 
      */
     @IBAction func buttonActionChangePassCode(_ sender:UIButton){
@@ -684,8 +684,10 @@ extension ProfileViewController : UITextFieldDelegate{
     }
 }
 
+
 //MARK:- UserService Response handler
 extension ProfileViewController:NMWebServiceDelegate {
+    
     func startedRequest(_ manager: NetworkManager, requestName: NSString) {
         Logger.sharedInstance.info("requestname : \(requestName)")
         self.addProgressIndicator()
@@ -742,8 +744,10 @@ extension ProfileViewController:NMWebServiceDelegate {
     }
 }
 
+
 //MARK:- ORKPasscode Delegate
 extension ProfileViewController: ORKPasscodeDelegate {
+    
     func passcodeViewControllerDidFinish(withSuccess viewController: UIViewController) {
         
         UserServices().updateUserProfile(self)

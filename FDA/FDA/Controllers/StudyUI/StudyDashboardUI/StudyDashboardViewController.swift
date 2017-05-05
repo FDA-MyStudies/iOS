@@ -20,12 +20,12 @@ class StudyDashboardViewController : UIViewController{
     @IBOutlet var tableView : UITableView?
     @IBOutlet var labelStudyTitle : UILabel?
     
-    
     var tableViewRowDetails = NSMutableArray()
     var todayActivitiesArray = NSMutableArray()
     var statisticsArray = NSMutableArray()
     
-    //MARK:ViewController Delegates
+    
+//MARK:- ViewController Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -40,11 +40,6 @@ class StudyDashboardViewController : UIViewController{
         statisticsArray = tableviewdata["statistics"] as! NSMutableArray
         
         labelStudyTitle?.text = Study.currentStudy?.name
-        
-        
-       
-        
-        
         //check if consent is udpated
         
         //TO BE REMOVED FOLLOWING 
@@ -63,16 +58,11 @@ class StudyDashboardViewController : UIViewController{
 //                                                                 action2: {
 //                                                                    
 //            })
-
-    
-            
            
         }
         else {
             print("Study consent not updated")
         }
-        
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -88,9 +78,7 @@ class StudyDashboardViewController : UIViewController{
             else {
                 self.sendRequestToGetDashboardInfo()
             }
-            
         }
-        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -99,12 +87,14 @@ class StudyDashboardViewController : UIViewController{
     }
     
     
-//MARK: Helper Methods
+//MARK:- Helper Methods
     
-    /* Create Eligibility Consent Task */
-    func createEligibilityConsentTask()   {
-        
-        
+    /**
+     
+     Used to Create Eligibility Consent Task 
+     
+     */
+    func createEligibilityConsentTask() {
         
         let taskViewController:ORKTaskViewController?
         
@@ -121,32 +111,50 @@ class StudyDashboardViewController : UIViewController{
         
         UIApplication.shared.statusBarStyle = .default
         present(taskViewController!, animated: true, completion: nil)
-        
-    }
-    
-    //MARK:Button Actions
-    @IBAction func homeButtonAction(_ sender: AnyObject){
-        
-       
-        self.performSegue(withIdentifier: "unwindToStudyListDashboardIdentifier", sender: self)
-        
-    }
-    
-    @IBAction func shareButtonAction(_ sender: AnyObject){
-        
-        
     }
     
     
-     //MARK:Reques calls
+    /**
+     
+     Used to send Request To Get Dashboard Info
+     
+     */
     func sendRequestToGetDashboardInfo(){
         WCPServices().getStudyDashboardInfo(studyId: (Study.currentStudy?.studyId)!, delegate: self)
     }
     
+    
+//MARK:- Button Actions
+    
+    /**
+     
+     Home button clicked
+     
+     @param sender    Accepts any kind of object
+
+     */
+    @IBAction func homeButtonAction(_ sender: AnyObject){
+        self.performSegue(withIdentifier: unwindToStudyListDashboard, sender: self)
+    }
+    
+    
+    /**
+     
+     Share to others button clicked
+     
+     @param sender    Accepts any kind of object
+     
+     */
+    @IBAction func shareButtonAction(_ sender: AnyObject){
+        
+        
+    }
 }
 
-//MARK: TableView Data source
+
+//MARK:- TableView Datasource
 extension StudyDashboardViewController : UITableViewDataSource {
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 1
     }
@@ -248,23 +256,20 @@ extension StudyDashboardViewController : UITableViewDataSource {
     }
 }
 
-//MARK: TableView Delegates
+
+//MARK:- TableView Delegates
 extension StudyDashboardViewController : UITableViewDelegate{
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        
-        
     }
 }
 
 
-
 //MARK:- Webservice Delegates
 extension StudyDashboardViewController:NMWebServiceDelegate {
+    
     func startedRequest(_ manager: NetworkManager, requestName: NSString) {
         Logger.sharedInstance.info("requestname : \(requestName)")
-        
-        
         self.addProgressIndicator()
     }
     
@@ -279,7 +284,6 @@ extension StudyDashboardViewController:NMWebServiceDelegate {
         else if requestName as String == WCPMethods.studyDashboard.method.methodName {
             self.tableView?.reloadData()
         }
-        
     }
     
     func failedRequest(_ manager: NetworkManager, requestName: NSString, error: NSError) {
@@ -290,11 +294,11 @@ extension StudyDashboardViewController:NMWebServiceDelegate {
             //self.removeProgressIndicator()
         }
         //self.removeProgressIndicator()
-        
     }
 }
 
 
+//MARK:- ORKTaskViewController Delegate
 extension StudyDashboardViewController:ORKTaskViewControllerDelegate{
     
     func taskViewControllerSupportsSaveAndRestore(_ taskViewController: ORKTaskViewController) -> Bool {
@@ -313,7 +317,7 @@ extension StudyDashboardViewController:ORKTaskViewControllerDelegate{
             ConsentBuilder.currentConsent?.consentResult?.consentDocument =   ConsentBuilder.currentConsent?.consentDocument
             
             ConsentBuilder.currentConsent?.consentResult?.initWithORKTaskResult(taskResult:taskViewController.result )
-
+            
         case ORKTaskViewControllerFinishReason.failed:
             print("failed")
             taskResult = taskViewController.result
@@ -331,12 +335,7 @@ extension StudyDashboardViewController:ORKTaskViewControllerDelegate{
                 //activityBuilder?.activity?.restortionData = taskViewController.restorationData
             }
         }
-     
-            
-            taskViewController.dismiss(animated: true, completion: nil)
-            
-            
-        
+        taskViewController.dismiss(animated: true, completion: nil)
     }
     
     func taskViewController(_ taskViewController: ORKTaskViewController, stepViewControllerWillAppear stepViewController: ORKStepViewController) {
@@ -350,7 +349,6 @@ extension StudyDashboardViewController:ORKTaskViewControllerDelegate{
             else{
                 
             }
-            
         }
         
         //Handling show and hide of Back Button
@@ -363,8 +361,6 @@ extension StudyDashboardViewController:ORKTaskViewControllerDelegate{
             if stepViewController.step?.identifier == kEligibilityVerifiedScreen{
                 stepViewController.continueButtonTitle = "Continue"
             }
-            
-            
             stepViewController.backButtonItem = nil
         }
             //checking if currentstep is View Pdf Step
@@ -394,7 +390,9 @@ extension StudyDashboardViewController:ORKTaskViewControllerDelegate{
         }
     }
     
-    //MARK:- StepViewController Delegate
+
+//MARK:- StepViewController Delegate
+    
     public func stepViewController(_ stepViewController: ORKStepViewController, didFinishWith direction: ORKStepViewControllerNavigationDirection){
         
     }
@@ -424,7 +422,6 @@ extension StudyDashboardViewController:ORKTaskViewControllerDelegate{
             
             // let reviewStep:ORKStepResult? = taskViewController.result.results?[(taskViewController.result.results?.count)! - 1] as! ORKStepResult?
             
-            
             var totalResults =  taskViewController.result.results
             let reviewStep:ORKStepResult?
             
@@ -436,8 +433,6 @@ extension StudyDashboardViewController:ORKTaskViewControllerDelegate{
                 let consentSignatureResult:ORKConsentSignatureResult? = reviewStep?.results?.first as? ORKConsentSignatureResult
                 
                 if  consentSignatureResult?.consented == false{
-                    
-                    
                     taskViewController.dismiss(animated: true
                         , completion: nil)
                     _ = self.navigationController?.popViewController(animated: true)
@@ -449,16 +444,11 @@ extension StudyDashboardViewController:ORKTaskViewControllerDelegate{
                     let documentCopy:ORKConsentDocument = (ConsentBuilder.currentConsent?.consentDocument)!.copy() as! ORKConsentDocument
                     
                     consentSignatureResult?.apply(to: documentCopy)
-                    
                     let gatewayStoryboard = UIStoryboard(name: kFetalKickCounterStep, bundle: nil)
-                    
                     let ttController = gatewayStoryboard.instantiateViewController(withIdentifier: kConsentSharePdfStoryboardId) as! ConsentSharePdfStepViewController
                     ttController.step = step
-                    
                     ttController.consentDocument =  documentCopy
-                    
                     return ttController
-                    
                 }
             }
             else {
@@ -492,15 +482,6 @@ extension StudyDashboardViewController:ORKTaskViewControllerDelegate{
         }
     }
 }
-
-
-
-
-
-
-
-
-
 
 
 

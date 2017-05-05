@@ -15,14 +15,12 @@ enum TextFieldTags : Int {
     case EmailId = 0
     case Password
     case ConfirmPassword
-
 }
 
 class SignUpTableViewCell: UITableViewCell {
     
     @IBOutlet var labelType : UILabel?
     @IBOutlet var textFieldValue : UITextField?
-    
     @IBOutlet var buttonChangePassword : UIButton? // this button will be extensively used for profile screen
     
     override func awakeFromNib() {
@@ -33,7 +31,6 @@ class SignUpTableViewCell: UITableViewCell {
     
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-        
         // Configure the view for the selected state
     }
     
@@ -41,6 +38,10 @@ class SignUpTableViewCell: UITableViewCell {
     /**
      
      Populate cell data coming in dictionary
+     
+     @param data    Access the data from Dictionary
+     @param securedText     condition used to give TextField secured or not
+     @param keyboardType    allows which kind of keyboard to use
      
      */
     func populateCellData(data : NSDictionary , securedText : Bool, keyboardType:UIKeyboardType?){
@@ -58,13 +59,13 @@ class SignUpTableViewCell: UITableViewCell {
         } else {
             textFieldValue?.keyboardType = keyboardType!
         }
-        
     }
     
     
     /**
      
      Set cell data from User Object (for Profile Class)
+     
      @param tag    is the cell index
      
      */

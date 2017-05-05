@@ -98,7 +98,7 @@ class ActivitiesViewController : UIViewController{
     func createActivity(){
         
        /*
-        let filePath  = Bundle.main.path(forResource: "Acivity_Question", ofType: "json")
+        let filePath  = Bundle.main.path(forResource: "Labkey_Activity", ofType: "json")
         
         //let filePath  = Bundle.main.path(forResource: "FetalKickTest", ofType: "json")
         

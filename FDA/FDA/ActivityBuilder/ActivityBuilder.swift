@@ -209,7 +209,22 @@ class ActivityBuilder {
                                             predicateQuestionChoiceA = ORKResultPredicate.predicateForChoiceQuestionResult(with:resultSelector! , expectedAnswerValue: dict[kCondtion] as! NSCoding & NSCopying & NSObjectProtocol)
                                         case is ORKBooleanAnswerFormat :
                                             
-                                            predicateQuestionChoiceA = ORKResultPredicate.predicateForBooleanQuestionResult(with: resultSelector!, expectedAnswer:  (dict[kCondtion] as? Bool)!)
+                                            let boolValue:Bool!
+                                            
+                                            if dict[kCondtion] as! String == "true"{
+                                                boolValue = true
+                                            }
+                                            else{
+                                               if dict[kCondtion] as! String == "false"{
+                                                boolValue = false
+                                                }
+                                               else{
+                                                 boolValue = dict[kCondtion] as! Bool
+                                                }
+                                            }
+                                           
+                                            
+                                            predicateQuestionChoiceA = ORKResultPredicate.predicateForBooleanQuestionResult(with: resultSelector!, expectedAnswer: boolValue)
                                             
                                         default:break
                                         }

@@ -140,8 +140,8 @@ class ActivityResult {
         
         var activityDict:Dictionary<String,Any>? = Dictionary<String,Any>()
         
-        if Utilities.isValidValue(someObject: self.type as AnyObject?){
-            activityDict?[kActivityType] = self.type
+        if  self.type != nil{
+            activityDict?[kActivityType] = self.type?.rawValue
         }
         
         if self.startTime != nil && (Utilities.getStringFromDate(date: self.startTime!) != nil){

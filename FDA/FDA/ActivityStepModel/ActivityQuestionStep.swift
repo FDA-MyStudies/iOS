@@ -418,6 +418,9 @@ class ActivityQuestionStep: ActivityStep {
                     let imageChoiceArray:[ORKImageChoice]?
                     
                     imageChoiceArray = self.getImageChoices(dataArray: formatDict?[kStepQuestionImageChoices] as! NSArray)
+                    if imageChoiceArray == nil {
+                        return nil
+                    }
                     
                     questionStepAnswerFormat = ORKAnswerFormat.choiceAnswerFormat(with: imageChoiceArray!)
                     
@@ -532,9 +535,10 @@ class ActivityQuestionStep: ActivityStep {
                 
                 
                 if  Utilities.isValidValue(someObject:formatDict?[kStepQuestionDateStyle] as AnyObject?)
-                    &&  Utilities.isValidValue(someObject:formatDict?[kStepQuestionDateMinDate] as AnyObject?)
-                    &&  Utilities.isValidValue(someObject:formatDict?[kStepQuestionDateMaxDate] as AnyObject?)
-                    &&  Utilities.isValidValue(someObject:formatDict?[kStepQuestionDateDefault] as AnyObject?) {
+                    //&&  Utilities.isValidValue(someObject:formatDict?[kStepQuestionDateMinDate] as AnyObject?)
+                    //&&  Utilities.isValidValue(someObject:formatDict?[kStepQuestionDateMaxDate] as AnyObject?)
+                    //&&  Utilities.isValidValue(someObject:formatDict?[kStepQuestionDateDefault] as AnyObject?)
+                {
                     
                     // need to
                     let dateFormatter = DateFormatter()
@@ -812,7 +816,10 @@ class ActivityQuestionStep: ActivityStep {
                     // if it is array of dictionary
                     let dict:NSDictionary = dataArray[i] as! NSDictionary
                     
-                    if  Utilities.isValidValue(someObject: dict[kStepQuestionImageChoiceImage] as AnyObject? ) &&  Utilities.isValidValue(someObject:dict[kStepQuestionImageChoiceSelectedImage] as AnyObject?) &&  Utilities.isValidValue(someObject:dict[kStepQuestionImageChoiceText] as AnyObject?) &&  Utilities.isValidValue(someObject:dict[kStepQuestionImageChoiceValue] as AnyObject?) {
+                    if  Utilities.isValidValue(someObject: dict[kStepQuestionImageChoiceImage] as AnyObject? )
+                        &&  Utilities.isValidValue(someObject:dict[kStepQuestionImageChoiceSelectedImage] as AnyObject?)
+                        &&  Utilities.isValidValue(someObject:dict[kStepQuestionImageChoiceText] as AnyObject?)
+                        &&  Utilities.isValidValue(someObject:dict[kStepQuestionImageChoiceValue] as AnyObject?) {
                         
                         // check if file exist at local path
                         
@@ -831,8 +838,12 @@ class ActivityQuestionStep: ActivityStep {
                         imageChoiceArray?.append(choice)
                         
                     }
+                    else {
+                        return nil
+                    }
                 }
                 else{
+                    return nil
                     Logger.sharedInstance.debug("ORKImageChoice Dictionary is null :\(dataArray[i])")
                     
                 }

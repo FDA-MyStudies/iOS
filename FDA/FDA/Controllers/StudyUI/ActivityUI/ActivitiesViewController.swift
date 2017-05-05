@@ -48,6 +48,8 @@ class ActivitiesViewController : UIViewController{
             //self.loadActivitiesFromDatabase()
             self.sendRequestToGetActivityStates()
         }
+        
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -243,6 +245,8 @@ class ActivitiesViewController : UIViewController{
         self.tableView?.reloadData()
         self.removeProgressIndicator()
         
+        self.updateCompletionAdherence()
+        
     }
     
     
@@ -256,10 +260,13 @@ class ActivitiesViewController : UIViewController{
     func updateActivityRunStuatus(status:UserActivityStatus.ActivityStatus){
         
         let activity = Study.currentActivity!
-        let status = User.currentUser.updateActivityStatus(studyId: activity.studyId!, activityId: activity.actvityId!,runId: String(activity.currentRunId), status:status)
-        UserServices().updateUserActivityParticipatedStatus(studyId:activity.studyId!, activityStatus: status, delegate: self)
+        let activityStatus = User.currentUser.updateActivityStatus(studyId: activity.studyId!, activityId: activity.actvityId!,runId: String(activity.currentRunId), status:status)
+        UserServices().updateUserActivityParticipatedStatus(studyId:activity.studyId!, activityStatus: activityStatus, delegate: self)
         
-        self.updateCompletionAdherence()
+        if status == .completed{
+            self.updateCompletionAdherence()
+        }
+        
     }
     
     
@@ -427,7 +434,8 @@ extension ActivitiesViewController : UITableViewDelegate{
             if activity.currentRun != nil {
                 if activity.userParticipationStatus != nil {
                     let activityRunParticipationStatus = activity.userParticipationStatus
-                    if activityRunParticipationStatus?.status == .yetToJoin || activityRunParticipationStatus?.status == .inProgress {
+                    if activityRunParticipationStatus?.status == .yetToJoin || activityRunParticipationStatus?.status == .inProgress
+                       {
                         
                         
                         Study.updateCurrentActivity(activity:activities[indexPath.row])

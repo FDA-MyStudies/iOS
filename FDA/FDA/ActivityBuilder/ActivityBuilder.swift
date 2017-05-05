@@ -86,8 +86,8 @@ class ActivityBuilder {
                                 let questionStep:ActivityQuestionStep? = ActivityQuestionStep()
                                 questionStep?.initWithDict(stepDict: stepDict)
                                 
-                                if (questionStep?.getQuestionStep()) != nil{
-                                    orkStepArray?.append((questionStep?.getQuestionStep())!)
+                                if let step = (questionStep?.getQuestionStep()){
+                                    orkStepArray?.append(step)
                                     activityStepArray?.append(questionStep!)
                                 }
                                 
@@ -246,9 +246,11 @@ class ActivityBuilder {
                                             
                                         for destinationId in destination!{
                                             
-                                           let  directRule = ORKDirectStepNavigationRule(destinationStepIdentifier: destinationId)
+                                            if destinationId.characters.count != 0 {
+                                                let  directRule = ORKDirectStepNavigationRule(destinationStepIdentifier: destinationId)
                                             
-                                              (task as! ORKNavigableOrderedTask).setNavigationRule(directRule, forTriggerStepIdentifier:step.identifier)
+                                               (task as! ORKNavigableOrderedTask).setNavigationRule(directRule, forTriggerStepIdentifier:step.identifier)
+                                            }
                                         }
                                         }
                                         else{

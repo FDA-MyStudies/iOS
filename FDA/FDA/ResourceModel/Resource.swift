@@ -35,8 +35,8 @@ class Resource{
     var configration:Dictionary<String, Any>?
     var startDate:Date?
     var endDate:Date?
-    var anchorDateStartDays:Int!
-    var anchorDateEndDays:Int!
+    var anchorDateStartDays:Int?
+    var anchorDateEndDays:Int?
     var title:String?
     
     init() {
@@ -74,8 +74,8 @@ class Resource{
                     self.startDate = Utilities.getDateFromStringWithFormat("YYYY-MM-dd", resultDate: configuration["expiryDate"] as! String)
                 }
                 
-                self.anchorDateStartDays = configuration["startDays"] as! Int
-                self.anchorDateEndDays = configuration["endDays"] as! Int
+                self.anchorDateStartDays = configuration["startDays"] as? Int
+                self.anchorDateEndDays = configuration["endDays"] as? Int
                 
             }
             

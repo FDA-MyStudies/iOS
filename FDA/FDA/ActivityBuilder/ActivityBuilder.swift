@@ -191,9 +191,6 @@ class ActivityBuilder {
                                 
                                 let questionStep = step as! ORKQuestionStep
                                 
-                                switch questionStep.answerFormat {
-                                case is ORKTextChoiceAnswerFormat,is ORKBooleanAnswerFormat,is ORKImageChoiceAnswerFormat,is ORKTextScaleAnswerFormat:
-                                    
                                     var choicePredicate:[NSPredicate] = [NSPredicate]()
                                     
                                     var destination:Array<String>? = Array<String>()
@@ -201,7 +198,7 @@ class ActivityBuilder {
                                     for dict in (activityStep?.destinations)!{
                                         var predicateQuestionChoiceA:NSPredicate = NSPredicate()
                                         
-                                        
+                                            
                                         if Utilities.isValidValue(someObject: dict[kCondtion] as AnyObject) {
                                         
                                         switch questionStep.answerFormat {
@@ -239,7 +236,6 @@ class ActivityBuilder {
                                         
                                         destination?.append( dict[kDestination]! as! String)
                                         
-        
                                     }
                                     
                                     if choicePredicate.count == 0{
@@ -277,9 +273,6 @@ class ActivityBuilder {
                                     // case is ORKImageChoiceAnswerFormat:
                                     // case is ORKTextChoiceAnswerFormat:
                                     
-                                default:break
-                                    
-                                }
                                // task =  ORKNavigableOrderedTask(identifier:(activity?.actvityId)!, steps: orkStepArray)
                                
                             }

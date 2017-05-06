@@ -347,7 +347,7 @@ class DBHandler: NSObject {
           
             var dbActivity:DBActivity?
             if dbActivityArray.count != 0 {
-                dbActivity = dbActivityArray.filter({$0.actvityId == activity.actvityId!}).last!
+                dbActivity = dbActivityArray.filter({$0.actvityId == activity.actvityId!}).last
                 
                 if dbActivity == nil {
                     

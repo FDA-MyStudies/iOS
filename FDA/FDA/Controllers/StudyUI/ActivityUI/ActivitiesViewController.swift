@@ -102,7 +102,7 @@ class ActivitiesViewController : UIViewController{
     
     func createActivity(){
         
-       /*
+    
         let filePath  = Bundle.main.path(forResource: "Labkey_Activity", ofType: "json")
         
         //let filePath  = Bundle.main.path(forResource: "FetalKickTest", ofType: "json")
@@ -118,7 +118,7 @@ class ActivitiesViewController : UIViewController{
             print("\(error)")
         }
  
-       */
+ 
         
         if Utilities.isValidObject(someObject: Study.currentActivity?.steps as AnyObject?){
             
@@ -134,6 +134,8 @@ class ActivitiesViewController : UIViewController{
         
         task = ActivityBuilder.currentActivityBuilder.createTask()
         
+        
+        if task != nil {
         
         
         if Study.currentActivity?.currentRun.restortionData != nil {
@@ -156,14 +158,13 @@ class ActivitiesViewController : UIViewController{
         taskViewController?.delegate = self
        //
         
-      
-        
-        
-        
         UIApplication.shared.statusBarStyle = .default
         
         present(taskViewController!, animated: true, completion: nil)
-        
+        }
+        else{
+             UIUtilities.showAlertMessage(kAlertMessageText, errorMessage: NSLocalizedString("Invalid Data!", comment: ""), errorAlertActionTitle: NSLocalizedString("OK", comment: ""), viewControllerUsed: self)
+        }
       
     }
     

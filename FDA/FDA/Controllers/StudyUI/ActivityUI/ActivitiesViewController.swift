@@ -395,7 +395,7 @@ extension ActivitiesViewController : UITableViewDelegate{
                         //self.createActivity()
                         
                         //To be uncommented
-                        WCPServices().getStudyActivityMetadata(studyId:(Study.currentStudy?.studyId)! , activityId: (Study.currentActivity?.actvityId)!, activityVersion: "1", delegate: self)
+                        WCPServices().getStudyActivityMetadata(studyId:(Study.currentStudy?.studyId)! , activityId: (Study.currentActivity?.actvityId)!, activityVersion: (Study.currentActivity?.version)!, delegate: self)
                         
                         self.updateActivityStatusToInProgress()
                         

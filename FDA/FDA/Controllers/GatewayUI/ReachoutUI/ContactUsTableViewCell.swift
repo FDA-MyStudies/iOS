@@ -19,7 +19,6 @@ class ContactUsTableViewCell: UITableViewCell {
     @IBOutlet var labelType : UILabel?
     @IBOutlet var textFieldValue : UITextField?
     
-    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -30,7 +29,15 @@ class ContactUsTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
 
-    //Populate cell data coming in dictionary
+    
+    /**
+     
+     Populate cell data coming in dictionary
+     
+     @param data    used to get the data from dictionaary for all inedx values
+     @param keyboardType    used to select what kind of a keyboard is required
+     
+     */
     func populateCellData(data : NSDictionary, keyboardType:UIKeyboardType?){
         
         labelType?.text = NSLocalizedString((data["helpText"] as? String)!, comment: "")
@@ -38,6 +45,6 @@ class ContactUsTableViewCell: UITableViewCell {
         
         textFieldValue?.keyboardType = keyboardType!
     }
-    
-    
 }
+
+

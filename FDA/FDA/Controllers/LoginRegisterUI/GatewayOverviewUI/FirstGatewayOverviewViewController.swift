@@ -83,7 +83,7 @@ class FirstGatewayOverviewViewController : UIViewController{
      
      Watch video button clicked
      
-     @param sender    accets any object
+     @param sender    accepts any kind of object
 
      */
     @IBAction func watchVideoButtonClicked(_ sender: Any){
@@ -112,10 +112,9 @@ class FirstGatewayOverviewViewController : UIViewController{
      
      This method is used to create FDASlideMenuViewController and Gateway storyboard
      
-     @param sender    accepts any object
+     @param sender    accepts any kind of object
 
      */
-    //GetStarted Button Action
     @IBAction func getStartedButtonClicked(_ sender: Any){
         self.createMenuView()
     }

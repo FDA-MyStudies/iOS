@@ -12,7 +12,6 @@ import UIKit
 class StudyOverviewPageViewController : UIPageViewController{
     
 //MARK:- Viewcontroller Lifecycle
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -55,6 +54,11 @@ class StudyOverviewPageViewController : UIPageViewController{
      
      This method is used to show which Viewcontroller needs to be loaded 
      in Pagination 
+     
+     @param Viewcontroller  used to track which kind of viewcontroller
+                            should be loaded
+     @return UIViewController
+     
      */
     private func newColoredViewController(ViewController: String) -> UIViewController {
         return UIStoryboard(name: "Login", bundle: nil) .
@@ -64,8 +68,8 @@ class StudyOverviewPageViewController : UIPageViewController{
 
 
 //MARK:- Page View Controller delegates
-
 extension StudyOverviewPageViewController: UIPageViewControllerDataSource {
+    
     func pageViewController(_ pageViewController: UIPageViewController,
                             viewControllerAfter viewController: UIViewController) -> UIViewController? {
         guard let viewControllerIndex = orderedViewControllers.index(of: viewController) else {

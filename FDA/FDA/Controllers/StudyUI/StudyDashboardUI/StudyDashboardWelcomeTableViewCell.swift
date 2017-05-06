@@ -25,7 +25,14 @@ class StudyDashboardWelcomeTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-    //Used to display First cell data
+    
+    /**
+     
+     Used to display Welcome cell
+     
+     @param data    Accepts data from Dictionary
+     
+     */
     func displayFirstCelldata(data : NSDictionary){
         //labelName?.text = String(format:"Welcome back %@,",data["name"] as! String)
         labelStatus?.text = data["status"] as? String

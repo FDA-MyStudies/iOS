@@ -9,21 +9,17 @@
 import UIKit
 import SlideMenuControllerSwift
 
-
 let kLeftMenuSubtitle = "subTitle"
 let kLeftMenuTitle = "menuTitle"
 let kLeftMenuIconName = "iconName"
-
-
 let kLeftMenuCellTitleHome = "Home"
 let kLeftMenuCellTitleResources = "Resources"
 let kLeftMenuCellTitleProfile = "Profile"
 let kLeftMenuCellTitleSignIn = "Sign In"
 let kLeftMenuCellTitleNewUser = "New User?"
 let kLeftMenuCellSubTitleValue = "Sign up"
-
-
 let kAlertMessageReachoutText = "This feature will be available in the next sprint."
+
 
 enum LeftMenu: Int {
     case studyList = 0
@@ -32,9 +28,6 @@ enum LeftMenu: Int {
     case reachOut_signIn
     case signup
 }
-
-
-
 
 protocol LeftMenuProtocol : class {
     func changeViewController(_ menu: LeftMenu)
@@ -46,9 +39,8 @@ class LeftMenuViewController : UIViewController, LeftMenuProtocol {
     @IBOutlet weak var labelVersion: UILabel!
     @IBOutlet weak var tableHeaderView: UIView!
     @IBOutlet weak var tableFooterView: UIView!
-    
-    
     @IBOutlet weak var buttonSignOut: UIButton?
+    
     var menus = [ ["menuTitle":"Home",
                    "iconName":"home_menu1-1"],
                   
@@ -61,7 +53,6 @@ class LeftMenuViewController : UIViewController, LeftMenuProtocol {
     var profileviewController: UIViewController!
     var nonMenuViewController: UIViewController!
     var reachoutViewController: UINavigationController!
-    
     var signInViewController:UINavigationController!
     var signUpViewController:UINavigationController!
     
@@ -71,6 +62,7 @@ class LeftMenuViewController : UIViewController, LeftMenuProtocol {
         super.init(coder: aDecoder)
     }
     
+//MARK:- ViewController Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -81,13 +73,9 @@ class LeftMenuViewController : UIViewController, LeftMenuProtocol {
         
         let storyboard = UIStoryboard(name: "Gateway", bundle: nil)
         
-        
-        
         self.studyListViewController = storyboard.instantiateViewController(withIdentifier: String(describing: StudyListViewController.classForCoder())) as! UINavigationController
         
-        
         self.notificationController = storyboard.instantiateViewController(withIdentifier:  String(describing: NotificationViewController.classForCoder())) as! UINavigationController
-        
         
         self.resourcesViewController = storyboard.instantiateViewController(withIdentifier:  String(describing: GatewayResourcesListViewController.classForCoder())) as! UINavigationController
         
@@ -95,11 +83,7 @@ class LeftMenuViewController : UIViewController, LeftMenuProtocol {
         
         self.reachoutViewController = storyboard.instantiateViewController(withIdentifier:  String(describing: ReachoutOptionsViewController.classForCoder())) as! UINavigationController
         
-        
-        
         self.labelVersion.text = "V" + "\(Utilities.getAppVersion())"
-        
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -111,6 +95,13 @@ class LeftMenuViewController : UIViewController, LeftMenuProtocol {
         self.view.isHidden = false
     }
     
+    
+    /**
+     
+     Used to create Login controller for new user using SignInViewController
+     and SignUpViewController
+     
+     */
     func createControllersForAnonymousUser(){
         
         let loginStoryBoard = UIStoryboard(name: "Login", bundle: nil)
@@ -125,6 +116,12 @@ class LeftMenuViewController : UIViewController, LeftMenuProtocol {
         self.signUpViewController.navigationBar.isTranslucent = false
     }
     
+
+    /**
+     
+     Used to create Left menu items
+     
+     */
     func createLeftmenuItems(){
         
         self.createControllersForAnonymousUser()
@@ -143,7 +140,6 @@ class LeftMenuViewController : UIViewController, LeftMenuProtocol {
                           "iconName":"profile_menu1"])
             menus.append(["menuTitle":"Reach Out",
                           "iconName":"reachout_menu1"])
-
            
             self.buttonSignOut?.isHidden = false
         }
@@ -174,6 +170,12 @@ class LeftMenuViewController : UIViewController, LeftMenuProtocol {
         
     }
     
+    
+    /**
+     
+     Used to set the initial data for new user
+     
+     */
     func setInitialData()  {
         
         let user = User.currentUser
@@ -192,19 +194,22 @@ class LeftMenuViewController : UIViewController, LeftMenuProtocol {
             self.tableView.tableFooterView?.isHidden = true
         }
         
-        
         // Setting proportion height of the header and footer view
         let height = UIScreen.main.bounds.size.height  * (220.0 / 667.0) //calculate new height
         self.tableView.tableHeaderView?.frame.size = CGSize(width: self.tableView.tableHeaderView!.frame.size.width, height: height)
         self.tableView.tableFooterView?.frame.size = CGSize(width: self.tableView.tableFooterView!.frame.size.width, height: height)
         self.tableView.frame.size = CGSize(width:self.tableView.frame.width, height:UIScreen.main.bounds.size.height)
-        
         self.tableView.reloadData()
-        
     }
     
     
-    
+    /**
+     
+     Used to change the view controller when clicked from the left menu
+     
+     @param menu    Accepts the data from enum LeftMenu
+
+     */
     func changeViewController(_ menu: LeftMenu) {
         switch menu {
         case .studyList:
@@ -247,9 +252,16 @@ class LeftMenuViewController : UIViewController, LeftMenuProtocol {
     }
     
     
+//MARK:- Button Action
+    
+    /**
+     
+     Signout button clicked
+     
+     @param sender    Accepts UIButton Object
+
+     */
     @IBAction func buttonActionSignOut(_ sender: UIButton) {
-        
-        
         UIUtilities.showAlertMessageWithTwoActionsAndHandler(NSLocalizedString("Sign Out", comment: ""), errorMessage: NSLocalizedString("Are you sure you want to Sign Out ?", comment: ""), errorAlertActionTitle: NSLocalizedString("Sign Out", comment: ""),
                                                              errorAlertActionTitle2: NSLocalizedString("Cancel", comment: ""), viewControllerUsed: self,
                                                              action1: {
@@ -264,10 +276,23 @@ class LeftMenuViewController : UIViewController, LeftMenuProtocol {
         })
         
     }
+
+    
+    /**
+     
+     Send the webservice request to Signout
+     
+     */
     func sendRequestToSignOut() {
         UserServices().logoutUser(self as NMWebServiceDelegate)
     }
     
+    
+    /**
+     
+     As the user is Signed out Remove passcode from the keychain
+     
+     */
     func signout(){
         debugPrint("singout")
         
@@ -277,13 +302,12 @@ class LeftMenuViewController : UIViewController, LeftMenuProtocol {
         self.createLeftmenuItems()
         //_ = self.navigationController?.popToRootViewController(animated: true)
     }
-    
-    
-    
-    
 }
 
+
+//MARK:- UITableView Delegate
 extension LeftMenuViewController : UITableViewDelegate {
+    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if let menu = LeftMenu(rawValue: indexPath.row) {
             switch menu {
@@ -309,6 +333,8 @@ extension LeftMenuViewController : UITableViewDelegate {
     }
 }
 
+
+//MARK:- UITableView DataSource
 extension LeftMenuViewController : UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -337,21 +363,18 @@ extension LeftMenuViewController : UITableViewDataSource {
             
             return cell!
         }
-        
-        
     }
-    
-    
 }
 
 
-//MARK:UserService Response handler
-
+//MARK:- UserService Response handler
 extension LeftMenuViewController:NMWebServiceDelegate {
+    
     func startedRequest(_ manager: NetworkManager, requestName: NSString) {
         Logger.sharedInstance.info("requestname : \(requestName)")
         self.addProgressIndicator()
     }
+    
     func finishedRequest(_ manager: NetworkManager, requestName: NSString, response: AnyObject?) {
         Logger.sharedInstance.info("requestname : \(requestName)")
         
@@ -362,6 +385,7 @@ extension LeftMenuViewController:NMWebServiceDelegate {
         
         self.removeProgressIndicator()
     }
+    
     func failedRequest(_ manager: NetworkManager, requestName: NSString, error: NSError) {
         Logger.sharedInstance.info("requestname : \(requestName)")
         self.removeProgressIndicator()
@@ -374,8 +398,9 @@ extension LeftMenuViewController:NMWebServiceDelegate {
             
             UIUtilities.showAlertWithTitleAndMessage(title:NSLocalizedString(kErrorTitle, comment: "") as NSString, message: error.localizedDescription as NSString)
         }
-        
-        
-        
     }
 }
+
+
+
+

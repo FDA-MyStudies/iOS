@@ -17,8 +17,14 @@ class StudyDashboardActivityCollectionViewCell: UICollectionViewCell {
     @IBOutlet var labelPendingCount : UILabel?
     @IBOutlet var labelPendingSurveyTask : UILabel?
     
-
-    //Used to display activity cell data
+    
+    /**
+     
+     Used to display Activity cell
+     
+     @param data    Accepts data from Dictionary
+ 
+     */
     func displayTodaysActivities(data : NSDictionary){
         labelTitle?.text = data["title"] as? String
         labelCompletedCount?.text = data["completedCount"] as? String
@@ -28,6 +34,4 @@ class StudyDashboardActivityCollectionViewCell: UICollectionViewCell {
         
         labelPendingSurveyTask?.text = String(format: "%@ Survey, %@ Task",data["pendingSurvey"] as! String , data["pendingTask"] as! String)
     }
-    
-
 }

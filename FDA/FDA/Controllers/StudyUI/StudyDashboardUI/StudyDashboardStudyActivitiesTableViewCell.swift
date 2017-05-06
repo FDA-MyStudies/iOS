@@ -27,7 +27,14 @@ class StudyDashboardStudyActivitiesTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-    //Used to display Second cell data
+    
+    /**
+     
+     Used to display Study Activities cell 
+     
+     @param data    Accepts data from Dictionary
+
+     */
     func displaySecondCelldata(data : NSDictionary){
         labelCompletedNumber?.text = String(format:"%@/10",data["completedNumber"] as! String)
         labelSurveyNumber?.text = data["surveyNumber"] as? String
@@ -37,5 +44,7 @@ class StudyDashboardStudyActivitiesTableViewCell: UITableViewCell {
         
         labelTaskList?.text = String(format:"%@ Completed, %@ Pending, %@ Missed",data["taskCompleted"] as! String , data["taskPending"] as! String , data["taskMissed"] as! String)
     }
-
 }
+
+
+

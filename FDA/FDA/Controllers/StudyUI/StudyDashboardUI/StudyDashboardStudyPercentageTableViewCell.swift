@@ -24,31 +24,32 @@ class StudyDashboardStudyPercentageTableViewCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
+    
+    
+    /**
+     
+     Used to display Study Percentage cell
+     
+     @param data    Accepts the data from Dictionary
 
-    //Used to display Third cell data
+     */
     func displayThirdCellData(data : NSDictionary){
-        
-        
         let currentUser = User.currentUser
         let study = Study.currentStudy
         
         if let userStudyStatus = currentUser.participatedStudies.filter({$0.studyId == study?.studyId}).first {
-            
-            
             //update completion %
             self.labelStudyCompletion?.text = String(userStudyStatus.completion) + "%"
             self.labelStudyAdherence?.text = String(userStudyStatus.adherence)  + "%"
             //self.progressBarCompletion?.progress = Float(userStudyStatus.completion)/100
             //self.progressBarAdherence?.progress = Float(userStudyStatus.adherence)/100
-            
-           
         }
         else {
             self.labelStudyCompletion?.text = "0" + "%"
             self.labelStudyAdherence?.text = "0"  + "%"
         }
-        
-       
     }
-    
 }
+
+
+

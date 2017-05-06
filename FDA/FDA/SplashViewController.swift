@@ -10,17 +10,16 @@ import UIKit
 
 class SplashViewController: UIViewController {
 
+    
+//MARK:- Viewcontroller Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
         
-        
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        
          DBHandler().initilizeCurrentUser()
         //TEMP : Need to get form Realm
         //let ud = UserDefaults.standard
@@ -37,8 +36,6 @@ class SplashViewController: UIViewController {
         else {
             self.navigateToHomeController()
         }
-        
-        
     }
 
     override func viewDidDisappear(_ animated: Bool) {
@@ -50,8 +47,11 @@ class SplashViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    /* Navigating to Home Screen
-     load HomeViewController from Login Storyboard 
+    
+    /**
+     
+     Navigating to Home Screen and load HomeViewController from Login Storyboard
+     
      */
     func navigateToHomeController(){
         
@@ -60,13 +60,21 @@ class SplashViewController: UIViewController {
         self.navigationController?.pushViewController(homeViewController, animated: true)
     }
     
-    /* Navigate to gateway Dashboard */
+    
+    /** 
+     
+     Navigate to gateway Dashboard 
+     
+     */
     func navigateToGatewayDashboard(){
         self.createMenuView()
     }
     
-    /* Navigating to Study list 
-     Load FDASlideMenuViewController from Gateway Storyboard
+    
+    /**
+     
+     Navigating to Study list and Load FDASlideMenuViewController from Gateway Storyboard
+     
      */
     func createMenuView() {
         
@@ -76,6 +84,7 @@ class SplashViewController: UIViewController {
         fda.automaticallyAdjustsScrollViewInsets = true
         self.navigationController?.pushViewController(fda, animated: true)
     }
+    
     /*
     // MARK: - Navigation
 

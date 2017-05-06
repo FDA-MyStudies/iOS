@@ -15,8 +15,8 @@ class SignUpCompleteViewController : UIViewController{
     @IBOutlet var buttonNext : UIButton?
     var shouldCreateMenu:Bool = true
     
-//MARK:- ViewController Lifecycle
     
+//MARK:- ViewController Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         

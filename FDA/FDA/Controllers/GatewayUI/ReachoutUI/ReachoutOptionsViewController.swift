@@ -43,7 +43,7 @@ class ReachoutOptionsViewController: UIViewController {
     
 }
 
-//MARK:- TableView Data source
+//MARK:- TableView Datasource
 extension ReachoutOptionsViewController : UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

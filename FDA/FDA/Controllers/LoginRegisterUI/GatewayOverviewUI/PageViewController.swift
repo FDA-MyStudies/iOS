@@ -27,7 +27,7 @@ class PageViewController : UIPageViewController{
     var currentIndex = 0
     
     
-//MARK:- View Controller Lifecycle
+//MARK:- ViewController Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -59,6 +59,7 @@ class PageViewController : UIPageViewController{
         super.viewDidAppear(animated)
        
     }
+    
     
 //MARK:- Scroll Delegates
     
@@ -97,6 +98,7 @@ class PageViewController : UIPageViewController{
     /**
      
      Used to Notify that the current page index was updated.
+     
      @param prevViewController     previousViewController used
     
      */
@@ -136,6 +138,7 @@ class PageViewController : UIPageViewController{
     /**
      
      Scrolls to the view controller at the given index.
+     
      @param newIndex    used to give the index of viewcontrollers
     
      */
@@ -209,8 +212,10 @@ class PageViewController : UIPageViewController{
     }
 }
 
+
 //MARK:- UIPageViewController DataSource
 extension PageViewController: UIPageViewControllerDataSource {
+    
     func pageViewController(_ pageViewController: UIPageViewController,
                             viewControllerAfter viewController: UIViewController) -> UIViewController? {
         
@@ -246,6 +251,7 @@ extension PageViewController: UIPageViewControllerDataSource {
     }
 }
 
+
 //MARK:- UIPageViewControllerDelegate
 extension PageViewController: UIPageViewControllerDelegate {
     
@@ -267,6 +273,7 @@ extension PageViewController: UIPageViewControllerDelegate {
         
     }
 }
+
 
 //MARK:- UIScrollview delegates
 extension PageViewController: UIScrollViewDelegate{

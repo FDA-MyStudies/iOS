@@ -10,47 +10,16 @@ import UIKit
 
 class StudyListViewController: UIViewController {
     
-    
     @IBOutlet var tableView:UITableView?
     @IBOutlet var labelHelperText:UILabel!
     
-    func loadTestData(){
-        
-        
-        let filePath  = Bundle.main.path(forResource: "StudyList", ofType: "json")
-        
-        let data = NSData(contentsOfFile: filePath!)
-        
-        
-        do {
-            let response = try JSONSerialization.jsonObject(with: data! as Data, options: []) as? Dictionary<String,Any>
-            
-            
-            let studies = response?[kStudies] as! Array<Dictionary<String,Any>>
-            var listOfStudies:Array<Study> = []
-            for study in studies{
-                let studyModelObj = Study(studyDetail: study)
-                listOfStudies.append(studyModelObj)
-            }
-            
-            //assgin to Gateway
-            Gateway.instance.studies = listOfStudies
-            
-            
-            
-        } catch {
-            print("json error: \(error.localizedDescription)")
-        }
-    }
     
-    
-    
+//MARK:- Viewcontroller lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         // Do any additional setup after loading the view.
-        
         //self.addRightBarButton() //Phase2
         //self.addLeftBarButton()
         //self.title = NSLocalizedString("FDA LISTENS!", comment: "")
@@ -63,23 +32,17 @@ class StudyListViewController: UIViewController {
         titleLabel.frame = CGRect.init(x: 0, y: 0, width: 300, height: 44)
         self.navigationItem.titleView = titleLabel
         
-        
         //self.loadTestData()
-        
         //get Profile data to check for passcode
         //Condition missing
         //UserServices().getUserProfile(self as NMWebServiceDelegate)
-      
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        
-        
         self.labelHelperText.isHidden = true
         self.setNavigationBarItem()
         self.navigationController?.setNavigationBarHidden(false, animated: true)
         self.navigationController?.navigationBar.isHidden = false
-        
         
         if User.currentUser.userType == .FDAUser {
             
@@ -96,9 +59,6 @@ class StudyListViewController: UIViewController {
         
         //self.loadStudiesFromDatabase()
         
-       
-        
-        
         UIApplication.shared.statusBarStyle = .default
     }
     
@@ -107,18 +67,44 @@ class StudyListViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
   
-//MARK:Button Actions
+//MARK:-
     
-    
-    @IBAction func buttonActionNotification(_ sender:UIBarButtonItem){
-       self.navigateToNotifications()
+    /**
+     
+     Used to load the test data from Studylist of type json
+     
+     */
+    func loadTestData(){
+        
+        let filePath  = Bundle.main.path(forResource: "StudyList", ofType: "json")
+        let data = NSData(contentsOfFile: filePath!)
+        
+        do {
+            let response = try JSONSerialization.jsonObject(with: data! as Data, options: []) as? Dictionary<String,Any>
+            
+            let studies = response?[kStudies] as! Array<Dictionary<String,Any>>
+            var listOfStudies:Array<Study> = []
+            for study in studies{
+                let studyModelObj = Study(studyDetail: study)
+                listOfStudies.append(studyModelObj)
+            }
+            
+            //assgin to Gateway
+            Gateway.instance.studies = listOfStudies
+            
+        } catch {
+            print("json error: \(error.localizedDescription)")
+        }
     }
     
+
+//MARK:- Helper Methods
     
-    
-//MARK:Helper Methods
-    
-    
+    /**
+     
+     Navigate to notification screen
+     
+     */
     func navigateToNotifications(){
         
         let gatewayStoryBoard = UIStoryboard.init(name: "Gateway", bundle: Bundle.main)
@@ -127,14 +113,44 @@ class StudyListViewController: UIViewController {
         self.navigationController?.pushViewController(notificationController, animated: true)
         
     }
-
     
     
+    /**
+     
+     Navigate to StudyHomeViewController screen
+     
+     */
+    func navigateToStudyHome(){
+        
+        let studyStoryBoard = UIStoryboard.init(name: "Study", bundle: Bundle.main)
+        let studyHomeController = studyStoryBoard.instantiateViewController(withIdentifier: String(describing: StudyHomeViewController.classForCoder())) as! StudyHomeViewController
+        studyHomeController.delegate = self
+        self.navigationController?.pushViewController(studyHomeController, animated: true)
+    }
     
-    /*
-     //Method to display taskViewController for passcode setup if passcode setup is enabled,called only once after signin
+    
+    /**
+     
+     Navigate the screen to Study Dashboard tabbar viewcontroller screen
+     
+     */
+    func pushToStudyDashboard(){
+        
+        let studyStoryBoard = UIStoryboard.init(name: "Study", bundle: Bundle.main)
+        
+        let studyDashboard = studyStoryBoard.instantiateViewController(withIdentifier: kStudyDashboardTabbarControllerIdentifier) as! StudyDashboardTabbarViewController
+        
+        self.navigationController?.navigationBar.isHidden = true
+        self.navigationController?.pushViewController(studyDashboard, animated: true)
+    }
+    
+    
+    /**
+     
+     Method to display taskViewController for passcode setup if 
+     passcode setup is enabled,called only once after signin.
+     
     */
-    
     func setPassCode() {
         //Remove Passcode if already exist
         ORKPasscodeViewController.removePasscodeFromKeychain()
@@ -149,13 +165,15 @@ class StudyListViewController: UIViewController {
     }
     
     
+    /**
+     
+     Load the study data from Database
+     
+     */
     func loadStudiesFromDatabase(){
         
         DBHandler.loadStudyListFromDatabase { (studies) in
             if studies.count > 0 {
-               
-                
-                
                 
                 let  sortedstudies =  studies.sorted(by: { (study1:Study, study2:Study) -> Bool in
                     //return ((study1.status.sortIndex < study2.status.sortIndex) && (study1.userParticipateState.status.sortIndex < study2.userParticipateState.status.sortIndex))
@@ -168,7 +186,6 @@ class StudyListViewController: UIViewController {
                     return (study1.status.sortIndex < study2.status.sortIndex)
                 })
                 
-                
                 Gateway.instance.studies = sortedstudies2
                 self.tableView?.reloadData()
             }
@@ -176,11 +193,30 @@ class StudyListViewController: UIViewController {
                 self.sendRequestToGetStudyList()
             }
         }
-
     }
     
-    //MARK:Custom Bar Buttons
     
+//MARK:- Button Actions
+    
+    /**
+     
+     Navigate to notification screen button clicked
+     
+     @param sender    accepts UIBarButtonItem in sender
+     
+     */
+    @IBAction func buttonActionNotification(_ sender:UIBarButtonItem){
+        self.navigateToNotifications()
+    }
+    
+    
+//MARK:- Custom Bar Buttons
+    
+    /**
+     
+     Used to add left bar button item
+     
+     */
     func addLeftBarButton(){
         
         let button = UIButton(type: .custom)
@@ -195,6 +231,12 @@ class StudyListViewController: UIViewController {
         self.navigationItem.setLeftBarButton(barItem, animated: true)
     }
     
+    
+    /**
+     
+     Used to add right bar button item
+     
+     */
     func addRightBarButton(){
         
         let button = UIButton(type: .custom)
@@ -210,37 +252,19 @@ class StudyListViewController: UIViewController {
     }
     
     
-    // MARK: - Navigation
-    
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
+//MARK:- Segue Methods
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
     }
     
-    func navigateToStudyHome(){
-        
-        let studyStoryBoard = UIStoryboard.init(name: "Study", bundle: Bundle.main)
-        let studyHomeController = studyStoryBoard.instantiateViewController(withIdentifier: String(describing: StudyHomeViewController.classForCoder())) as! StudyHomeViewController
-        studyHomeController.delegate = self
-        self.navigationController?.pushViewController(studyHomeController, animated: true)
-        
-    }
     
     @IBAction func unwindToStudyList(_ segue:UIStoryboardSegue){
         //unwindStudyListSegue
     }
-    func pushToStudyDashboard(){
-        
-         let studyStoryBoard = UIStoryboard.init(name: "Study", bundle: Bundle.main)
-        
-        let studyDashboard = studyStoryBoard.instantiateViewController(withIdentifier: kStudyDashboardTabbarControllerIdentifier) as! StudyDashboardTabbarViewController
-      
-        self.navigationController?.navigationBar.isHidden = true
-        self.navigationController?.pushViewController(studyDashboard, animated: true)
-    }
     
-     //MARK:Database Methods
+    
+//MARK:- Database Methods
     func checkDatabaseForStudyInfo(study:Study){
         
         DBHandler.loadStudyOverview(studyId: (study.studyId)!) { (overview) in
@@ -255,21 +279,59 @@ class StudyListViewController: UIViewController {
     }
     
     
-    // MARK: - Requests
+//MARK:- Webservice Requests
+    
+    /**
+     
+     Send the webservice request to get Study List
+     
+     */
     func sendRequestToGetStudyList(){
         WCPServices().getStudyList(self)
     }
+    
+    
+    /**
+     
+     Send the webservice request to get Study Info
+     
+     @param study    Access the data from the study class
+
+     */
     func sendRequestToGetStudyInfo(study:Study){
         WCPServices().getStudyInformation(studyId: study.studyId, delegate: self)
     }
+    
+    
+    /**
+     
+     Send the webservice request to get UserPreferences
+     
+     */
     func sendRequestToGetUserPreference(){
         UserServices().getStudyStates(self)
     }
+    
+    
+    /**
+     
+     Send the webservice request to Update BookMarkStatus
+     
+     @param userStudyStatus    Access the data from UserStudyStatus
+
+     */
     func sendRequestToUpdateBookMarkStatus(userStudyStatus:UserStudyStatus){
         UserServices().updateStudyBookmarkStatus(studyStauts: userStudyStatus, delegate: self)
     }
     
-    //MARK:Responses
+    
+//MARK:- Webservice Responses
+    
+    /**
+     
+     Handle the Study list webservice response
+     
+     */
     func handleStudyListResponse(){
         
         if (Gateway.instance.studies?.count)! > 0{
@@ -280,19 +342,22 @@ class StudyListViewController: UIViewController {
             self.tableView?.isHidden = true
             self.labelHelperText.isHidden = false
         }
-        
     }
-    //save information for study which feilds need to be updated
+    
+    
+    /**
+     
+     save information for study which feilds need to be updated
+     
+    */
     func handleStudyUpdatedInformation(){
-        
         DBHandler.updateMetaDataToUpdateForStudy(study: Study.currentStudy!, updateDetails: nil)
-        
         self.pushToStudyDashboard()
     }
-    
-    
 }
-//MARK: TableView Data source
+
+
+//MARK:- TableView Data source
 extension StudyListViewController : UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -317,6 +382,7 @@ extension StudyListViewController : UITableViewDataSource {
         return cell
     }
 }
+
 
 //MARK:- TableView Delegates
 extension StudyListViewController :  UITableViewDelegate {
@@ -345,17 +411,12 @@ extension StudyListViewController :  UITableViewDelegate {
                         DBHandler.loadStudyDetailsToUpdate(studyId: (study?.studyId)!, completionHandler: { (success) in
                             self.pushToStudyDashboard()
                         })
-                        
                     }
-                    
                 }
                 else {
-                    
                     self.checkDatabaseForStudyInfo(study: study!)
                     //self.sendRequestToGetStudyInfo(study: study!)
                 }
-                
-                
             }
             else  if Study.currentStudy?.status == .Paused{
                 let userStudyStatus =  (Study.currentStudy?.userParticipateState.status)!
@@ -364,7 +425,6 @@ extension StudyListViewController :  UITableViewDelegate {
                     
                     UIUtilities.showAlertWithTitleAndMessage(title: "", message: NSLocalizedString(kMessageForStudyPausedAfterJoiningState, comment: "") as NSString)
                 }
-                
             }
             else {
                 
@@ -375,17 +435,10 @@ extension StudyListViewController :  UITableViewDelegate {
         else {
             self.checkDatabaseForStudyInfo(study: study!)
         }
-      
-        
-        
-        
-       
-        
-        
     }
 }
 
-//MARK: StudyListDelegates
+//MARK:- StudyList Delegates
 extension StudyListViewController : StudyListDelegates {
     
     func studyBookmarked(_ cell: StudyListCell, bookmarked: Bool, forStudy study: Study) {
@@ -404,16 +457,17 @@ extension StudyListViewController : StudyListDelegates {
 }
 
 
+//MARK:- Webservices Delegates
 extension StudyListViewController:NMWebServiceDelegate {
+    
     func startedRequest(_ manager: NetworkManager, requestName: NSString) {
         Logger.sharedInstance.info("requestname : \(requestName)")
         
         self.addProgressIndicator()
     }
+    
     func finishedRequest(_ manager: NetworkManager, requestName: NSString, response: AnyObject?) {
         Logger.sharedInstance.info("requestname : \(requestName) : \(response)")
-        
-       
         
         if requestName as String == WCPMethods.studyList.rawValue{
             self.handleStudyListResponse()
@@ -424,12 +478,7 @@ extension StudyListViewController:NMWebServiceDelegate {
             self.navigateToStudyHome()
         }
         else if (requestName as String == RegistrationMethods.studyState.description){
-            
-            
             self.sendRequestToGetStudyList()
-             
-           
-            
         }
         else if (requestName as String == WCPMethods.studyUpdates.rawValue){
              self.removeProgressIndicator()
@@ -441,10 +490,8 @@ extension StudyListViewController:NMWebServiceDelegate {
                 self.setPassCode()
             }
         }
-        
-        
-        
     }
+    
     func failedRequest(_ manager: NetworkManager, requestName: NSString, error: NSError) {
         Logger.sharedInstance.info("requestname : \(requestName)")
         
@@ -462,27 +509,22 @@ extension StudyListViewController:NMWebServiceDelegate {
     }
 }
 
+
+//MARK:- StudyHomeViewDontroller Delegate
 extension StudyListViewController:StudyHomeViewDontrollerDelegate{
     func studyHomeJoinStudy() {
-        
-        
-        
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-            
             self.removeProgressIndicator()
-            
             // your code here
             let leftController = self.slideMenuController()?.leftViewController as! LeftMenuViewController
             leftController.changeViewController(.reachOut_signIn)
         }
-        
-        
     }
 }
 
 
+//MARK:- ORKTaskViewController Delegate
 extension StudyListViewController:ORKTaskViewControllerDelegate{
-    //MARK:ORKTaskViewController Delegate
     
     func taskViewControllerSupportsSaveAndRestore(_ taskViewController: ORKTaskViewController) -> Bool {
         return true
@@ -491,7 +533,6 @@ extension StudyListViewController:ORKTaskViewControllerDelegate{
     public func taskViewController(_ taskViewController: ORKTaskViewController, didFinishWith reason: ORKTaskViewControllerFinishReason, error: Error?) {
         
         var taskResult:Any?
-        
         switch reason {
             
         case ORKTaskViewControllerFinishReason.completed:
@@ -510,14 +551,12 @@ extension StudyListViewController:ORKTaskViewControllerDelegate{
             taskResult = taskViewController.restorationData
             
         }
-        
         taskViewController.dismiss(animated: true, completion:nil)
     }
     
     func taskViewController(_ taskViewController: ORKTaskViewController, stepViewControllerWillAppear stepViewController: ORKStepViewController) {
         
     }
-    
 }
 
 

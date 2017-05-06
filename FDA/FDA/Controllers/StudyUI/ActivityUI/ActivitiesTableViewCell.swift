@@ -23,9 +23,9 @@ class ActivitiesTableViewCell: UITableViewCell {
     @IBOutlet var labelStatus : UILabel?
     @IBOutlet var labelRunStatus : UILabel?
     @IBOutlet var buttonMoreSchedules : UIButton?
+    
     var delegate:ActivitiesCellDelegate?
     var currentActivity:Activity! = nil
-    
     var availabilityStatus:ActivityAvailabilityStatus = .current
     
     override func awakeFromNib() {
@@ -33,37 +33,56 @@ class ActivitiesTableViewCell: UITableViewCell {
         // Initialization code
     }
 
+    
+    /**
+     
+     Used to change the cell background color
+     
+     @param selected    checks if particular cell is selected
+     @param animated    used to animate the cell
+     
+     */
     override func setSelected(_ selected: Bool, animated: Bool) {
-        
         let color = labelStatus?.backgroundColor
         super.setSelected(selected, animated: animated)
         // Configure the view for the selected state
         if(selected) {
-            
             labelStatus?.backgroundColor = color
         }
     }
     
+    
+    /**
+     
+     Used to set the cell state ie Highlighted
+     
+     @param highlighted    should cell be highlightened
+     @param animated    used to animate the cell
+     
+     */
     override func setHighlighted(_ highlighted: Bool, animated: Bool) {
         let color = labelStatus?.backgroundColor
         super.setHighlighted(highlighted, animated: animated)
         if(highlighted) {
-            
             labelStatus?.backgroundColor = color
         }
-        
     }
-  
     
+    
+    /**
+     
+     Populate the cell data with Activity
+     
+     @param activity    Access the value from Activity class
+     @param availablityStatus Access the value from ActivityAvailabilityStatus enum
+
+     */
     func populateCellDataWithActivity(activity:Activity ,availablityStatus:ActivityAvailabilityStatus){
         
         self.availabilityStatus = availablityStatus
         self.currentActivity = activity
-        
         self.labelHeading?.text = activity.name
-        
         self.labelDays?.text = activity.frequencyType.description
-        
         
         if availablityStatus != .upcoming {
             
@@ -73,10 +92,8 @@ class ActivitiesTableViewCell: UITableViewCell {
             //update activity run details as compelted and missed
             self.updateUserRunStatus(activity: activity)
 
-            
             //update user activity status
             self.setUserStatusForActivity(activity: activity)
-            
             
             //calculate activity runs and save in database
             if activity.totalRuns == 0 {
@@ -117,7 +134,6 @@ class ActivitiesTableViewCell: UITableViewCell {
                         DBHandler.saveActivityRuns(activityId: (activity.actvityId)!, studyId: (Study.currentStudy?.studyId)!, runs: runs)
                     }
                 })
-                
             }
         }
         else {
@@ -125,16 +141,18 @@ class ActivitiesTableViewCell: UITableViewCell {
             labelRunStatus?.isHidden = true
             labelStatus?.isHidden = true
         }
-        
-        
-        
         self.calculateActivityTimings(activity: activity)
         self.setUserStatusForActivity(activity: activity)
-        
-       
-        
     }
     
+    
+    /**
+     
+     Used to update User Run Status
+     
+     @param activity    Access the value from Activity class
+
+     */
     func updateUserRunStatus(activity:Activity){
         
         self.labelRunStatus?.text = "Run: " + String(activity.currentRunId) + "/" + String(activity.totalRuns) + ", " + String(activity.compeltedRuns) + " done" + ", " + String(activity.incompletedRuns) + " missed"
@@ -145,14 +163,20 @@ class ActivitiesTableViewCell: UITableViewCell {
         else {
             let moreSchedulesTitle =  "+" + String(activity.totalRuns - 1) + " more"
             self.buttonMoreSchedules?.setTitle(moreSchedulesTitle, for: .normal)
- 
         }
     }
     
+    
+    /**
+     
+     Used to set User Status For Activity
+     
+     @param activity    Access the value from Activity class
+
+     */
     func setUserStatusForActivity(activity:Activity){
         
         let currentUser = User.currentUser
-        
         
         if let userActivityStatus = currentUser.participatedActivites.filter({$0.activityId == activity.actvityId && $0.activityRunId == String(activity.currentRunId)}).first {
             
@@ -177,7 +201,6 @@ class ActivitiesTableViewCell: UITableViewCell {
                 //self.labelStatus?.text = kCompletedSpaces
                 
             }
-            
             //bookMarkStatus
             //buttonBookmark?.isSelected = userStudyStatus.bookmarked
         }
@@ -201,13 +224,17 @@ class ActivitiesTableViewCell: UITableViewCell {
                 self.labelStatus?.backgroundColor = kBlueColor
                 self.labelStatus?.text = UserActivityStatus.ActivityStatus.yetToJoin.description
             }
-            
         }
-        
-      
     }
     
     
+    /**
+     
+     Used to calculate Activity Timings
+     
+     @param activity    Access the value from Activity class
+
+     */
     func calculateActivityTimings(activity:Activity){
         
         let startDate = activity.startDate
@@ -221,11 +248,6 @@ class ActivitiesTableViewCell: UITableViewCell {
             endDateString = ActivitiesTableViewCell.oneTimeFormatter.string(from: endDate!)
         }
        
-        
-        
-        
-        
-        
         switch frequency {
         case .One_Time:
             
@@ -254,7 +276,6 @@ class ActivitiesTableViewCell: UITableViewCell {
             
             labelTime?.text = weeklyStartTime + " to " + endDate
             
-            
         case .Monthly:
             var monthlyStartTime = ActivitiesTableViewCell.monthlyformatter.string(from: startDate!)
             monthlyStartTime = monthlyStartTime.replacingOccurrences(of: ",", with: "on")
@@ -264,19 +285,25 @@ class ActivitiesTableViewCell: UITableViewCell {
             
             labelTime?.text = monthlyStartTime + " to " + endDate
 
-            
         case .Scheduled:
             labelTime?.text = startDateString + " - " + endDateString
         
-            
         }
-        
     }
     
+    
+//MARK:- Button Action
+    
+    /**
+     
+     Clicked on  MoreSchedules
+     
+     @param _    Accepts UIButton object
+
+     */
     @IBAction func buttonMoreSchedulesClicked(_ :UIButton){
         self.delegate?.activityCell(cell: self, activity: self.currentActivity)
     }
-    
     
     private static let formatter: DateFormatter = {
         let formatter = DateFormatter()
@@ -318,6 +345,6 @@ class ActivitiesTableViewCell: UITableViewCell {
         formatter.timeZone = TimeZone.init(abbreviation:"GMT")
         return formatter
     }()
-    
-    
 }
+
+

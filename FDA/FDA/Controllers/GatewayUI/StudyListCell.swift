@@ -23,15 +23,11 @@ class StudyListCell: UITableViewCell {
     @IBOutlet var labelCompletionValue:UILabel?
     @IBOutlet var labelAdherenceValue:UILabel?
     @IBOutlet var labelStudyStatus:UILabel?
-    
     @IBOutlet var buttonBookmark:UIButton?
-    
     @IBOutlet var progressBarCompletion:UIProgressView?
     @IBOutlet var progressBarAdherence:UIProgressView?
-    
     @IBOutlet var studyLogoImage:UIImageView?
     @IBOutlet var studyUserStatusIcon:UIImageView?
-    
     @IBOutlet var studyStatusIndicator:UIView?
     
     var selectedStudy:Study!
@@ -42,38 +38,53 @@ class StudyListCell: UITableViewCell {
         // Initialization code
     }
 
+    /**
+     
+     Used to change the cell background color
+     
+     @param selected    checks if particular cell is selected
+     @param animated    used to animate the cell
+
+     */
     override func setSelected(_ selected: Bool, animated: Bool) {
-       
         let color = studyStatusIndicator?.backgroundColor
         super.setSelected(selected, animated: animated)
         // Configure the view for the selected state
         if(selected) {
-            
             studyStatusIndicator?.backgroundColor = color
         }
     }
     
-   override func setHighlighted(_ highlighted: Bool, animated: Bool) {
+    
+    /**
+     
+     Used to set the cell state ie Highlighted
+     
+     @param highlighted    should cell be highlightened
+     @param animated    used to animate the cell
+
+     */
+    override func setHighlighted(_ highlighted: Bool, animated: Bool) {
         let color = studyStatusIndicator?.backgroundColor
         super.setHighlighted(highlighted, animated: animated)
         if(highlighted) {
-            
             studyStatusIndicator?.backgroundColor = color
         }
-
     }
     
-
     
+    /**
+     
+     Used to populate the cell data
+     
+     @param study    access the data from Study class
+
+     */
     func populateCellWith(study:Study){
-        
         selectedStudy = study
-        
         labelStudyTitle?.text = study.name
+        
         labelStudyShortDescription?.text = study.description
-        
-       
-        
         if study.sponserName != nil {
             labelStudySponserName?.text =  study.category! + "  |  " + study.sponserName!
         }
@@ -87,8 +98,6 @@ class StudyListCell: UITableViewCell {
         attributedString.addAttributes([NSFontAttributeName:UIFont(name: "HelveticaNeue-Bold", size: 12)!], range: foundRange)
         labelStudySponserName?.attributedText = attributedString
         
-        
-        
         studyLogoImage?.image = #imageLiteral(resourceName: "placeholder")
         
         //study status
@@ -98,22 +107,25 @@ class StudyListCell: UITableViewCell {
             // do nothing
         }
         else {
-            
             //set participatedStudies
             self.setUserStatusForStudy(study: study)
-            
-           
         }
-        
         //logo
         if study.logoURL != nil {
             
             let url = URL.init(string: study.logoURL!)
             studyLogoImage?.sd_setImage(with: url, placeholderImage: #imageLiteral(resourceName: "placeholder"))
         }
-        
     }
     
+    
+    /**
+     
+     Used to set the Study State
+     
+     @param study    Access the data from Study Class
+
+     */
     func setStudyStatus(study:Study){
         
         labelStudyStatus?.text = study.status.rawValue.uppercased()
@@ -130,11 +142,16 @@ class StudyListCell: UITableViewCell {
         }
     }
     
+    
+    /**
+     
+     Used to set UserStatus ForStudy
+     
+     @param study    Access the data from Study Class
+     
+     */
     func setUserStatusForStudy(study:Study){
-        
         let currentUser = User.currentUser
-        
-        
         if let userStudyStatus = currentUser.participatedStudies.filter({$0.studyId == study.studyId}).first {
             
             //assign to study
@@ -172,22 +189,26 @@ class StudyListCell: UITableViewCell {
             studyUserStatusIcon?.image = #imageLiteral(resourceName: "yet_to_join_icn")
             buttonBookmark?.isSelected = false
         }
-        
-        
-        
-        
     }
     
-     //MARK:Button Actions
+    
+//MARK:- Button Actions
+    
+    /**
+     
+     Button bookmark clicked and delegate it back to Study home and 
+     Study list View controller
+     
+     @param sender    Accepts UIButton object
+     
+     */
     @IBAction func buttonBookmardAction(_ sender:UIButton){
-        
         if sender.isSelected {
             sender.isSelected = false
         }
         else {
             sender.isSelected = true
         }
-        
         delegate?.studyBookmarked(self, bookmarked: sender.isSelected, forStudy: self.selectedStudy)
     }
 }

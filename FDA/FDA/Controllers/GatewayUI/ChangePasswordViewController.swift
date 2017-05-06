@@ -42,7 +42,6 @@ class ChangePasswordViewController: UIViewController {
         //Used to set border color for bottom view
         buttonSubmit?.layer.borderColor = kUicolorForButtonBackground
         
-        
         //load plist info
         let plistPath = Bundle.main.path(forResource: "ChangePasswordData", ofType: ".plist", inDirectory:nil)
         tableViewRowDetails = NSMutableArray.init(contentsOfFile: plistPath!)
@@ -205,6 +204,7 @@ extension ChangePasswordViewController : UITableViewDataSource {
     }
 }
 
+
 //MARK:- TableView Delegates
 extension ChangePasswordViewController :  UITableViewDelegate {
     
@@ -213,6 +213,7 @@ extension ChangePasswordViewController :  UITableViewDelegate {
         
     }
 }
+
 
 //MARK:- Textfield Delegate
 extension ChangePasswordViewController : UITextFieldDelegate{
@@ -270,6 +271,7 @@ extension ChangePasswordViewController : UITextFieldDelegate{
         }
     }
 }
+
 
 //MARK:- Webservice delegates
 extension ChangePasswordViewController:NMWebServiceDelegate {

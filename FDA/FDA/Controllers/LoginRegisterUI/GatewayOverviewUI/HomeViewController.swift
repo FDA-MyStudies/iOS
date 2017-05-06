@@ -127,6 +127,8 @@ class HomeViewController : UIViewController{
      
      This method takes the users action and calls menu view
      
+     @param sender  Accepts any kind of object
+     
      */
     @IBAction func getStartedButtonClicked(_ sender: UIButton){
         self.createMenuView()
@@ -208,6 +210,7 @@ class HomeViewController : UIViewController{
         }
     }
 }
+
 
 //MARK:- Page Control Delegates for handling Counts
 extension HomeViewController: PageViewControllerDelegate {

@@ -17,8 +17,21 @@ class NotificationTableViewCell: UITableViewCell {
         super.awakeFromNib()
         // Initialization code
     }
-
     
+    override func setSelected(_ selected: Bool, animated: Bool) {
+        super.setSelected(selected, animated: animated)
+
+        // Configure the view for the selected state
+    }
+    
+    
+    /**
+     
+     Used to populate cell data
+     
+     @param appNotification    Access the data from AppNotification class
+
+     */
     func populateCellWith(appNotification:AppNotification?) {
         
         if Utilities.isValidValue(someObject: appNotification?.message! as AnyObject?){
@@ -27,15 +40,5 @@ class NotificationTableViewCell: UITableViewCell {
         else{
             labelNotificationText?.text = ""
         }
-        
-        
-        
     }
-    
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
-
 }

@@ -51,28 +51,47 @@ class ForgotPasswordViewController : UIViewController{
     
 //MARK:- Utility Methods
     
-    /*
+    /**
+     
      Dismiss key board when clicked on Background
+     
      */
     func dismissKeyboard(){
         self.view.endEditing(true)
     }
     
+    
+    /**
+     
+     Navigate the screen to VerifyViewController
+     
+     */
     func navigateToVerifyViewController()  {
         self.performSegue(withIdentifier: kVerifyViewControllerSegue, sender: self)
     }
     
-    /*
+    
+    /**
+    
      Used to show the alert using Utility
-    */
+     
+     @param textMessage     used to display in the alert message
+    
+     */
     func showAlertMessages(textMessage : String){
         UIUtilities.showAlertMessage("", errorMessage: NSLocalizedString(textMessage, comment: ""), errorAlertActionTitle: NSLocalizedString("OK", comment: ""), viewControllerUsed: self)
     }
     
+    
 //MARK:- Button Action
     
-    /* Submit Button Clicked
-     Used to check all the validations before making a logout webservice call
+    /**
+     
+     Submit Button Clicked, it is used to check all the validations 
+     before making a logout webservice call
+     
+     @param sender  Accepts any kind of object
+     
      */
     @IBAction func submitButtonAction(_ sender: Any) {
         self.dismissKeyboard()
@@ -89,6 +108,7 @@ class ForgotPasswordViewController : UIViewController{
         }
     }
     
+    
 //MARK:- Segue Methods
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
@@ -104,10 +124,11 @@ class ForgotPasswordViewController : UIViewController{
     }
 }
 
+
 //MARK:- Webservices Delegates
 extension ForgotPasswordViewController:NMWebServiceDelegate {
+    
     func startedRequest(_ manager: NetworkManager, requestName: NSString) {
-        
         Logger.sharedInstance.info("requestname : \(requestName)")
         self.addProgressIndicator()
     }
@@ -162,8 +183,10 @@ extension ForgotPasswordViewController:NMWebServiceDelegate {
     }
 }
 
+
 //MARK:- TextField Delegates
 extension ForgotPasswordViewController:UITextFieldDelegate{
+    
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         
         let finalString = textField.text! + string

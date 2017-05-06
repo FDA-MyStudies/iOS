@@ -21,11 +21,14 @@ enum ActivityAvailabilityStatus:Int{
 
 class ActivitiesViewController : UIViewController{
     
+    @IBOutlet var tableView : UITableView?
+    
     var tableViewSections:Array<Dictionary<String,Any>>! = []
     var lastFetelKickIdentifer:String = ""  //TEMP
-    @IBOutlet var tableView : UITableView?
     var selectedIndexPath:IndexPath? = nil
     
+    
+//MARK:- Viewcontroller Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -38,24 +41,14 @@ class ActivitiesViewController : UIViewController{
         
         self.navigationItem.title = NSLocalizedString("STUDY ACTIVITIES", comment: "")
         self.tableView?.sectionHeaderHeight = 30
-        
-        
-        
+
         if (Study.currentStudy?.studyId) != nil {
-            
-            
             //WCPServices().getStudyActivityList(studyId: (Study.currentStudy?.studyId)!, delegate: self)
             //load from database
             //self.loadActivitiesFromDatabase()
-            
             self.sendRequestToGetActivityStates()
-  
         }
-        
-        
-        
     }
-    
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -69,8 +62,32 @@ class ActivitiesViewController : UIViewController{
         
     }
     
+//MARK:- Button Actions
     
+    /**
+     
+     Home Button Clicked
+     
+     @param sender    Accepts any kind of object
+     
+     */
+    @IBAction func homeButtonAction(_ sender: AnyObject){
+        //_ = self.navigationController?.popToRootViewController(animated: true)
+        self.performSegue(withIdentifier: "unwindeToStudyListIdentier", sender: self)
+    }
     
+    @IBAction func filterButtonAction(_ sender: AnyObject){
+        
+        
+    }
+
+//MARK:- 
+    
+    /**
+     
+     Used to load the Actif=vities data from database
+     
+     */
     func loadActivitiesFromDatabase(){
         
         DBHandler.loadActivityListFromDatabase(studyId: (Study.currentStudy?.studyId)!) { (activities) in
@@ -85,21 +102,11 @@ class ActivitiesViewController : UIViewController{
     }
     
     
-    @IBAction func homeButtonAction(_ sender: AnyObject){
-        //_ = self.navigationController?.popToRootViewController(animated: true)
-        
-        
-        
-        self.performSegue(withIdentifier: "unwindeToStudyListIdentier", sender: self)
-        
-        
-    }
-    
-    @IBAction func filterButtonAction(_ sender: AnyObject){
-        
-        
-    }
-    
+    /**
+     
+     Used to create an activity using ORKTaskViewController
+     
+     */
     func createActivity(){
         
     /*
@@ -125,9 +132,6 @@ class ActivitiesViewController : UIViewController{
             ActivityBuilder.currentActivityBuilder = ActivityBuilder()
             ActivityBuilder.currentActivityBuilder.initWithActivity(activity:Study.currentActivity! )
         }
-
-        //---------------
-        
         
         let task:ORKTask?
         let taskViewController:ORKTaskViewController?
@@ -150,16 +154,12 @@ class ActivitiesViewController : UIViewController{
              taskViewController?.outputDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
         }
         
-     
        taskViewController?.showsProgressInNavigationBar = true
         
         UIView.appearance(whenContainedInInstancesOf: [ORKTaskViewController.self]).tintColor = kUIColorForSubmitButtonBackground
         
         taskViewController?.delegate = self
-       //
-        
         UIApplication.shared.statusBarStyle = .default
-        
         present(taskViewController!, animated: true, completion: nil)
         }
         else{
@@ -168,6 +168,15 @@ class ActivitiesViewController : UIViewController{
       
     }
     
+    
+    /**
+     
+     Used to get Activity Availability Status
+     
+     @param activity    Accepts data from Activity class
+     @return ActivityAvailabilityStatus
+     
+     */
     func getActivityAvailabilityStatus(activity:Activity) -> ActivityAvailabilityStatus {
         
         let todayDate = Date()
@@ -194,10 +203,15 @@ class ActivitiesViewController : UIViewController{
         return .current
     }
     
+    
+    /**
+     
+     Used to handle Activity list response
+     
+     */
     func handleActivityListResponse(){
         
         tableViewSections = []
-        
         let activities = Study.currentStudy?.activities
         
         var currentActivities:Array<Activity> = []
@@ -226,13 +240,19 @@ class ActivitiesViewController : UIViewController{
         tableViewSections.append(upcomingDetails)
         tableViewSections.append(pastDetails)
         
-        
         self.tableView?.reloadData()
-        
         self.removeProgressIndicator()
         
     }
     
+    
+    /**
+     
+     Used to update Activity Run Status
+     
+     @param status    Accepts data from UserActivityStatus class and ActivityStatus enum
+     
+     */
     func updateActivityRunStuatus(status:UserActivityStatus.ActivityStatus){
         
         let activity = Study.currentActivity!
@@ -241,6 +261,8 @@ class ActivitiesViewController : UIViewController{
         
         self.updateCompletionAdherence()
     }
+    
+    
     
     func updateCompletionAdherence(){
         
@@ -253,15 +275,25 @@ class ActivitiesViewController : UIViewController{
     }
     
     
+    /**
+     
+     Used to update Activity Status To InProgress
+    
+     */
     func updateActivityStatusToInProgress(){
-        
         self.updateActivityRunStuatus(status: .inProgress)
-        
     }
     
+    
+    /**
+     
+     Used to update Activity Status To Complete
+     
+     */
     func updateActivityStatusToComplete(){
         self.updateActivityRunStuatus(status: .completed)
     }
+    
     
     //save completed staus in database
     func updateRunStatusToComplete(){
@@ -273,9 +305,21 @@ class ActivitiesViewController : UIViewController{
     }
     
     
+    /**
+     
+     Used to send Request To Get ActivityStates
+     
+     */
     func sendRequestToGetActivityStates(){
         UserServices().getUserActivityState(studyId: (Study.currentStudy?.studyId)!, delegate: self)
     }
+    
+    
+    /**
+     
+     Used to send Request To Get ActivityList
+     
+     */
     func sendRequesToGetActivityList(){
         WCPServices().getStudyActivityList(studyId: (Study.currentStudy?.studyId)!, delegate: self)
     }
@@ -283,7 +327,8 @@ class ActivitiesViewController : UIViewController{
 
 }
 
-//MARK: TableView Data source
+
+//MARK:- TableView Datasource
 extension ActivitiesViewController: UITableViewDataSource{
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -305,10 +350,7 @@ extension ActivitiesViewController: UITableViewDataSource{
             return 1
         }
         return activities.count
-        
-        
     }
-    
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let view = UIView.init(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: 30))
@@ -362,12 +404,11 @@ extension ActivitiesViewController: UITableViewDataSource{
             
             return cell
         }
-        
-        
     }
 }
 
-//MARK: TableView Delegates
+
+//MARK:- TableView Delegates
 extension ActivitiesViewController : UITableViewDelegate{
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -422,13 +463,10 @@ extension ActivitiesViewController : UITableViewDelegate{
         case .upcoming,.past: break
        
         }
-        
-        
     }
-    
 }
 
- //MARK: ActivitiesCellDelegate
+//MARK:- ActivitiesCell Delegate
 extension ActivitiesViewController:ActivitiesCellDelegate{
     
     func activityCell(cell: ActivitiesTableViewCell, activity: Activity) {
@@ -440,12 +478,12 @@ extension ActivitiesViewController:ActivitiesCellDelegate{
         //self.view.addSubview(view)
         UIApplication.shared.keyWindow?.addSubview(view)
     }
-    
-    
-    
 }
 
+
+//MARK:- Webservice Delegates
 extension ActivitiesViewController:NMWebServiceDelegate {
+    
     func startedRequest(_ manager: NetworkManager, requestName: NSString) {
         Logger.sharedInstance.info("requestname : \(requestName)")
        
@@ -455,10 +493,9 @@ extension ActivitiesViewController:NMWebServiceDelegate {
              self.addProgressIndicator()
         }
     }
+    
     func finishedRequest(_ manager: NetworkManager, requestName: NSString, response: AnyObject?) {
         Logger.sharedInstance.info("requestname : \(requestName) Response : \(response)")
-        
-        
         
         if requestName as String == RegistrationMethods.activityState.method.methodName{
             self.sendRequesToGetActivityList()
@@ -478,22 +515,17 @@ extension ActivitiesViewController:NMWebServiceDelegate {
             self.removeProgressIndicator()
              //self.updateRunStatusToComplete()
         }
-        
-        
     }
+    
     func failedRequest(_ manager: NetworkManager, requestName: NSString, error: NSError) {
         Logger.sharedInstance.info("requestname : \(requestName)")
         self.removeProgressIndicator()
         
-        
-        
     }
 }
 
-
+//MARK:- ORKTaskViewController Delegate
 extension ActivitiesViewController:ORKTaskViewControllerDelegate{
-    //MARK:ORKTaskViewController Delegate
-    
     
     func taskViewControllerSupportsSaveAndRestore(_ taskViewController: ORKTaskViewController) -> Bool {
         return true
@@ -641,7 +673,8 @@ extension ActivitiesViewController:ORKTaskViewControllerDelegate{
         }
     }
     
-    //MARK:StepViewController Delegate
+
+//MARK:- StepViewController Delegate
     public func stepViewController(_ stepViewController: ORKStepViewController, didFinishWith direction: ORKStepViewControllerNavigationDirection){
         
     }
@@ -649,9 +682,11 @@ extension ActivitiesViewController:ORKTaskViewControllerDelegate{
     public func stepViewControllerResultDidChange(_ stepViewController: ORKStepViewController){
         
     }
+    
     public func stepViewControllerDidFail(_ stepViewController: ORKStepViewController, withError error: Error?){
         
     }
+    
     func taskViewController(_ taskViewController: ORKTaskViewController, viewControllerFor step: ORKStep) -> ORKStepViewController? {
         
          let storyboard = UIStoryboard.init(name: "FetalKickCounter", bundle: nil)
@@ -679,15 +714,15 @@ extension ActivitiesViewController:ORKTaskViewControllerDelegate{
             return nil
         }
     }
-    
-    
 }
 
+//MARK:- ActivitySchedules Class
 class ActivitySchedules:UIView,UITableViewDelegate,UITableViewDataSource{
     
     @IBOutlet var tableview:UITableView?
     @IBOutlet var buttonCancel:UIButton!
     @IBOutlet var heightLayoutConstraint:NSLayoutConstraint!
+    
     var activity:Activity!
     
 //    override init(frame: CGRect) {
@@ -698,10 +733,10 @@ class ActivitySchedules:UIView,UITableViewDelegate,UITableViewDataSource{
 //    }
     
     required init?(coder aDecoder: NSCoder) {
-        
         super.init(coder: aDecoder)
         //fatalError("init(coder:) has not been implemented")
     }
+    
     class func instanceFromNib(frame:CGRect , activity:Activity) -> ActivitySchedules {
         let view = UINib(nibName: "ActivitySchedules", bundle: nil).instantiate(withOwner: nil, options: nil)[0] as! ActivitySchedules
         view.frame = frame
@@ -716,26 +751,22 @@ class ActivitySchedules:UIView,UITableViewDelegate,UITableViewDataSource{
         
         return view
     }
+
     
-    @IBAction func buttonCancelClicked(_:UIButton){
+//MARK:- Button Action
+    @IBAction func buttonCancelClicked(_:UIButton) {
         self.removeFromSuperview()
     }
-    
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
-    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
         return self.activity.activityRuns.count
-        
-        
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
         cell.textLabel?.font = UIFont(name: "HelveticaNeue-Light", size: 13)
@@ -748,11 +779,8 @@ class ActivitySchedules:UIView,UITableViewDelegate,UITableViewDataSource{
         else if activityRun.runId < self.activity.currentRunId {
             cell.textLabel?.textColor = UIColor.gray
         }
-        
         cell.textLabel?.textAlignment = .center
         return cell
-        
-        
     }
     
     private static let formatter: DateFormatter = {
@@ -762,6 +790,5 @@ class ActivitySchedules:UIView,UITableViewDelegate,UITableViewDataSource{
         return formatter
     }()
 }
-
 
 

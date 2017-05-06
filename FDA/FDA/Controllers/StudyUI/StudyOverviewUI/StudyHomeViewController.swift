@@ -14,7 +14,6 @@ let kEligibilityConsentTask = "EligibilityConsentTask"
 let kEligibilityTokenStep = "EligibilityTokenStep"
 let kFetalKickCounterStep = "FetalKickCounter"
 let kEligibilityStepViewControllerIdentifier = "EligibilityStepViewController"
-
 let kConsentTaskIdentifier = "ConsentTask"
 let kStudyDashboardViewControllerIdentifier = "StudyDashboardViewController"
 let kStudyDashboardTabbarControllerIdentifier = "StudyDashboardTabbarViewControllerIdentifier"
@@ -31,10 +30,7 @@ class StudyHomeViewController : UIViewController{
     @IBOutlet var buttonStar : UIButton!
     @IBOutlet var buttonJoinStudy : UIButton?
     @IBOutlet var visitWebsiteButtonLeadingConstraint:NSLayoutConstraint?
-    
-    
-     @IBOutlet var visitWebsiteButtonTrailingConstraint:NSLayoutConstraint?
-    
+    @IBOutlet var visitWebsiteButtonTrailingConstraint:NSLayoutConstraint?
     @IBOutlet var buttonVisitWebsite : UIButton?
     @IBOutlet var buttonViewConsent : UIButton?
     @IBOutlet var viewBottombarBg :UIView?
@@ -42,9 +38,7 @@ class StudyHomeViewController : UIViewController{
     
     var isStudyBookMarked = false
     var delegate:StudyHomeViewDontrollerDelegate?
-    
     var hideViewConsentAfterJoining = false
-    
     var pageViewController: PageViewController? {
         didSet {
             pageViewController?.pageViewDelegate = self
@@ -113,10 +107,7 @@ class StudyHomeViewController : UIViewController{
             else{
                  buttonVisitWebsite?.isHidden =  true
             }
-            
-            
         }
-        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -127,6 +118,7 @@ class StudyHomeViewController : UIViewController{
     
 
 //MARK:-
+    
     /**
      
      This method Loads the test data from StudyOverview plist file
@@ -217,7 +209,7 @@ class StudyHomeViewController : UIViewController{
     
     /**
      
-    This Method displays consent Document 
+     This Method displays consent Document
      
      */
     func displayConsentDocument() {
@@ -257,7 +249,7 @@ class StudyHomeViewController : UIViewController{
      
      This Method Join Study button clicked
      
-     @param sender  Accepts any kind of objects
+     @param sender  Accepts UIButton object
      
      */
     @IBAction func buttonActionJoinStudy(_ sender: UIButton){
@@ -357,7 +349,7 @@ class StudyHomeViewController : UIViewController{
      
      This method is visit website button action
      
-     @param sender    Accepts Any kind of object
+     @param sender    Accepts UIButton object
      
      */
     @IBAction func visitWebsiteButtonAction(_ sender: UIButton) {
@@ -434,8 +426,7 @@ class StudyHomeViewController : UIViewController{
 }
 
 
-//MARK:- Page Control Delegates for handling Counts
-
+//MARK:- PageControl Delegates for handling Counts
 extension StudyHomeViewController: PageViewControllerDelegate {
     
     func pageViewController(pageViewController: PageViewController, didUpdatePageCount count: Int){
@@ -470,8 +461,8 @@ extension StudyHomeViewController: PageViewControllerDelegate {
 
 
 //MARK:- Webservice Delegates
-
 extension StudyHomeViewController:NMWebServiceDelegate {
+    
     func startedRequest(_ manager: NetworkManager, requestName: NSString) {
         Logger.sharedInstance.info("requestname : \(requestName)")
         
@@ -500,7 +491,6 @@ extension StudyHomeViewController:NMWebServiceDelegate {
                 self.addProgressIndicator()
                 UserServices().updateUserEligibilityConsentStatus(eligibilityStatus: true, consentStatus:(ConsentBuilder.currentConsent?.consentStatus)!  , delegate: self)
             }
-            
         }
         
         if requestName as String == ResponseMethods.enroll.description {
@@ -538,13 +528,11 @@ extension StudyHomeViewController:NMWebServiceDelegate {
             //self.removeProgressIndicator()
         }
         //self.removeProgressIndicator()
-        
     }
 }
 
 
 //MARK:- ORKTaskViewController Delegate
-
 extension StudyHomeViewController:ORKTaskViewControllerDelegate{
     
     func taskViewControllerSupportsSaveAndRestore(_ taskViewController: ORKTaskViewController) -> Bool {
@@ -669,13 +657,11 @@ extension StudyHomeViewController:ORKTaskViewControllerDelegate{
         else{
             //Back button is enabled
             stepViewController.backButtonItem?.isEnabled = true
-            
         }
     }
     
     
 //MARK:- StepViewController Delegate
-    
     public func stepViewController(_ stepViewController: ORKStepViewController, didFinishWith direction: ORKStepViewControllerNavigationDirection){
         
     }

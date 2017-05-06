@@ -102,6 +102,7 @@ class SignInViewController : UIViewController{
         }
     }
     
+    
 //MARK:- Button Action
     
     /**
@@ -143,6 +144,7 @@ class SignInViewController : UIViewController{
     @IBAction func buttonInfoAction(_ sender:Any){
         UIUtilities.showAlertWithTitleAndMessage(title:"Why Register?", message:kRegistrationInfoMessage as NSString)
     }
+    
 
 //MARK:-
     
@@ -176,6 +178,8 @@ class SignInViewController : UIViewController{
     /**
      
      Used to show the alert using Utility
+     
+     @param textMessage     Used to display the alert text
      
      */
     func showAlertMessages(textMessage : String){
@@ -293,6 +297,7 @@ class SignInViewController : UIViewController{
     }
 }
 
+
 //MARK:- TableView Data source
 extension SignInViewController : UITableViewDataSource {
     
@@ -321,6 +326,7 @@ extension SignInViewController : UITableViewDataSource {
     }
 }
 
+
 //MARK:- TableView Delegates
 extension SignInViewController :  UITableViewDelegate {
     
@@ -329,6 +335,7 @@ extension SignInViewController :  UITableViewDelegate {
         
     }
 }
+
 
 //MARK:- Textfield Delegate
 extension SignInViewController : UITextFieldDelegate{
@@ -358,7 +365,6 @@ extension SignInViewController : UITextFieldDelegate{
             }
             return true
         }
-        
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
@@ -379,6 +385,7 @@ extension SignInViewController : UITextFieldDelegate{
     }
 }
 
+
 //MARK:- Webservices Delegate
 extension SignInViewController:NMWebServiceDelegate {
     
@@ -386,6 +393,7 @@ extension SignInViewController:NMWebServiceDelegate {
         Logger.sharedInstance.info("requestname : \(requestName)")
         self.addProgressIndicator()
     }
+    
     func finishedRequest(_ manager: NetworkManager, requestName: NSString, response: AnyObject?) {
         Logger.sharedInstance.info("requestname : \(requestName)")
         self.removeProgressIndicator()
@@ -420,6 +428,7 @@ extension SignInViewController:NMWebServiceDelegate {
             self.navigateToVerifyController()
         }
     }
+    
     func failedRequest(_ manager: NetworkManager, requestName: NSString, error: NSError) {
         Logger.sharedInstance.info("requestname : \(requestName)")
         

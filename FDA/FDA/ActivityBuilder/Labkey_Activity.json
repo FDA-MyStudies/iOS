@@ -21,15 +21,12 @@
                   "key": "QR4_F1",
                   "title": "",
                   "text": "",
-                  "skippable": false,
+                  "skippable": true,
                   "groupName": "",
                   "repeatable": true,
                   "repeatableText": "Add More+",
                   "destinations": [
-                                   {
-                                   "condition": "",
-                                   "destination": "QR4_I1"
-                                   }
+                  
                                    ],
                   "healthDataKey": "",
                   "format": {},
@@ -40,17 +37,17 @@
                             "key": "QR4_F1_Q1",
                             "title": "Q1",
                             "text": "QDesc1",
-                            "skippable": false,
+                            "skippable": true,
                             "groupName": "",
                             "repeatable": false,
                             "repeatableText": "",
                             "destinations": [],
                             "healthDataKey": "",
                             "format": {
-                            "maxValue": 1010,
+                            "maxValue": 1077,
                             "minValue": 1000,
                             "default": 1000,
-                            "step": 10,
+                            "step": 11,
                             "vertical": true,
                             "maxDesc": "Maximum Desc",
                             "minDesc": "Minimum Desc",
@@ -66,20 +63,20 @@
                             "key": "QR4_F1_Q2",
                             "title": "Q2",
                             "text": "QDesc2",
-                            "skippable": false,
+                            "skippable": true,
                             "groupName": "",
                             "repeatable": false,
                             "repeatableText": "",
                             "destinations": [],
                             "healthDataKey": "",
                             "format": {
-                            "maxValue": 100,
-                            "minValue": 10,
-                            "default": 5,
-                            "maxFractionDigits": 2,
+                            "maxValue": 4645,
+                            "minValue": 45,
+                            "default": 45,
+                            "maxFractionDigits": 0,
                             "vertical": true,
-                            "maxDesc": "Maximum Desc",
-                            "minDesc": "Minimum Desc",
+                            "maxDesc": "",
+                            "minDesc": "",
                             "maxImage": "",
                             "minImage": ""
                             },
@@ -95,15 +92,12 @@
                   "key": "QR4_I1",
                   "title": "I1",
                   "text": "IText1",
-                  "skippable": false,
+                  "skippable": true,
                   "groupName": "",
                   "repeatable": false,
                   "repeatableText": "",
                   "destinations": [
-                                   {
-                                   "condition": "",
-                                   "destination": "QR4_Q5"
-                                   }
+                  
                                    ],
                   "healthDataKey": "",
                   "format": {},
@@ -116,20 +110,11 @@
                   "key": "QR4_Q5",
                   "title": "Q5",
                   "text": "QDesc5",
-                  "skippable": false,
+                  "skippable": true,
                   "groupName": "",
                   "repeatable": false,
                   "repeatableText": "",
-                  "destinations": [
-                                   {
-                                   "condition": "1",
-                                   "destination": "QR4_Q10"
-                                   },
-                                   {
-                                   "condition": "2",
-                                   "destination": "QR4_Q11"
-                                   }
-                                   ],
+                  "destinations": [],
                   "healthDataKey": "",
                   "format": {
                   "textChoices": [
@@ -157,16 +142,11 @@
                   "key": "QR4_F2",
                   "title": "",
                   "text": "",
-                  "skippable": false,
+                  "skippable": true,
                   "groupName": "",
                   "repeatable": false,
                   "repeatableText": "Add More+",
-                  "destinations": [
-                                   {
-                                   "condition": "",
-                                   "destination": "QR4_I2"
-                                   }
-                                   ],
+                  "destinations": [],
                   "healthDataKey": "",
                   "format": {},
                   "steps": [
@@ -176,7 +156,7 @@
                             "key": "QR4_F2_Q4",
                             "title": "Q4",
                             "text": "QDesc4",
-                            "skippable": false,
+                            "skippable": true,
                             "groupName": "",
                             "repeatable": false,
                             "repeatableText": "",
@@ -186,7 +166,7 @@
                             "textChoices": [
                                             {
                                             "text": "VP1",
-                                            "value": "1",
+                                            "value": "2",
                                             "detail": "",
                                             "exclusive": true
                                             },
@@ -207,7 +187,7 @@
                             "key": "QR4_F2_Q3",
                             "title": "Q3",
                             "text": "QDesc3",
-                            "skippable": false,
+                            "skippable": true,
                             "groupName": "",
                             "repeatable": false,
                             "repeatableText": "",
@@ -243,15 +223,12 @@
                   "key": "QR4_I2",
                   "title": "I2",
                   "text": "IText2",
-                  "skippable": false,
+                  "skippable": true,
                   "groupName": "",
                   "repeatable": false,
                   "repeatableText": "",
                   "destinations": [
-                                   {
-                                   "condition": "",
-                                   "destination": "QR4_Q6"
-                                   }
+                  
                                    ],
                   "healthDataKey": "",
                   "format": {},
@@ -264,22 +241,19 @@
                   "key": "QR4_Q6",
                   "title": "Q6",
                   "text": "QDesc6",
-                  "skippable": false,
+                  "skippable": true,
                   "groupName": "",
                   "repeatable": false,
                   "repeatableText": "",
                   "destinations": [
-                                   {
-                                   "condition": "",
-                                   "destination": "QR4_Q7"
-                                   }
+                  
                                    ],
                   "healthDataKey": "",
                   "format": {
                   "style": "Integer",
-                  "unit": "meters",
-                  "minValue": 2,
-                  "maxValue": 10,
+                  "unit": "",
+                  "minValue": 0,
+                  "maxValue": 0,
                   "placeholder": "Enter value here..."
                   },
                   "steps": [],
@@ -291,15 +265,12 @@
                   "key": "QR4_Q7",
                   "title": "Q7",
                   "text": "QDesc7",
-                  "skippable": false,
+                  "skippable": true,
                   "groupName": "",
                   "repeatable": false,
                   "repeatableText": "",
                   "destinations": [
-                                   {
-                                   "condition": "",
-                                   "destination": "QR4_Q8"
-                                   }
+                  
                                    ],
                   "healthDataKey": "",
                   "format": {
@@ -317,15 +288,12 @@
                   "key": "QR4_Q8",
                   "title": "Q8",
                   "text": "QDesc8",
-                  "skippable": false,
+                  "skippable": true,
                   "groupName": "",
                   "repeatable": false,
                   "repeatableText": "",
                   "destinations": [
-                                   {
-                                   "condition": "",
-                                   "destination": "QR4_Q9"
-                                   }
+                  
                                    ],
                   "healthDataKey": "",
                   "format": {
@@ -349,15 +317,12 @@
                   "repeatable": false,
                   "repeatableText": "",
                   "destinations": [
-                                   {
-                                   "condition": "",
-                                   "destination": "QR4_Q10"
-                                   }
+                  
                                    ],
                   "healthDataKey": "",
                   "format": {
-                  "default": 4,
-                  "step": 25
+                  "default": 10,
+                  "step": 1
                   },
                   "steps": [],
                   "options": []
@@ -373,10 +338,7 @@
                   "repeatable": false,
                   "repeatableText": "",
                   "destinations": [
-                                   {
-                                   "condition": "",
-                                   "destination": "QR4_Q11"
-                                   }
+                  
                                    ],
                   "healthDataKey": "",
                   "format": {
@@ -396,16 +358,7 @@
                   "groupName": "",
                   "repeatable": false,
                   "repeatableText": "",
-                  "destinations": [
-                                   {
-                                   "condition": "true",
-                                   "destination": "QR4_I3"
-                                   },
-                                   {
-                                   "condition": "false",
-                                   "destination": "QR4_I4"
-                                   }
-                                   ],
+                  "destinations": [],
                   "healthDataKey": "",
                   "format": {},
                   "steps": [],
@@ -417,16 +370,11 @@
                   "key": "QR4_I3",
                   "title": "I3",
                   "text": "IText3",
-                  "skippable": false,
+                  "skippable": true,
                   "groupName": "",
                   "repeatable": false,
                   "repeatableText": "",
-                  "destinations": [
-                                   {
-                                   "condition": "",
-                                   "destination": "QR4_I4"
-                                   }
-                                   ],
+                  "destinations": [],
                   "healthDataKey": "",
                   "format": {},
                   "steps": [],
@@ -438,16 +386,11 @@
                   "key": "QR4_I4",
                   "title": "I4",
                   "text": "IText4",
-                  "skippable": false,
+                  "skippable": true,
                   "groupName": "",
                   "repeatable": false,
                   "repeatableText": "",
-                  "destinations": [
-                                   {
-                                   "condition": "",
-                                   "destination": ""
-                                   }
-                                   ],
+                  "destinations": [],
                   "healthDataKey": "",
                   "format": {},
                   "steps": [],

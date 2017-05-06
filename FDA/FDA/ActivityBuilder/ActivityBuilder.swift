@@ -166,10 +166,11 @@ class ActivityBuilder {
                     
                     orkStepArray?.append(completionStep)
                     
-                    task =  ORKOrderedTask(identifier: (activity?.actvityId!)!, steps: orkStepArray)
-                    
-                    task =  ORKNavigableOrderedTask(identifier:(activity?.actvityId)!, steps: orkStepArray)
-                    
+                    if (orkStepArray?.count)! > 0 {
+                        task =  ORKOrderedTask(identifier: (activity?.actvityId!)!, steps: orkStepArray)
+                        
+                        task =  ORKNavigableOrderedTask(identifier:(activity?.actvityId)!, steps: orkStepArray)
+                    }
                     
                     var i:Int? = 0
                     
@@ -293,7 +294,14 @@ class ActivityBuilder {
                         
                         i = i! + 1
                     }
-                    return (task as! ORKNavigableOrderedTask)
+                    
+                    if task != nil {
+                     return (task as! ORKNavigableOrderedTask)
+                    }
+                    else{
+                    return nil
+                    }
+                    
                 }
                 
             case .activeTask:
@@ -375,7 +383,12 @@ class ActivityBuilder {
                  }
                  
                  self.activity?.setORKSteps(orkStepArray: orkStepArray!)
-                 task =  ORKOrderedTask(identifier: (activity?.actvityId!)!, steps: orkStepArray)
+                    
+                    if (orkStepArray?.count)! > 0 {
+                        
+                         task =  ORKOrderedTask(identifier: (activity?.actvityId!)!, steps: orkStepArray)
+                        
+                    }
                  return task!
                  }
                  else{

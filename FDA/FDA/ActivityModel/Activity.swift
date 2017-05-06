@@ -124,7 +124,7 @@ class Activity{
         // info
         self.studyId = ""
         self.name = ""
-        self.version = "0"
+        //self.version = "0"
         self.lastModified = nil
         self.userStatus = .yetToJoin
         self.startDate = nil
@@ -168,9 +168,9 @@ class Activity{
                 self.actvityId = infoDict[kActivityId] as! String?
             }
             
-            // if Utilities.isValidValue(someObject: infoDict[kActivityVersion] as AnyObject ){
-            //     self.version = infoDict[kActivityVersion] as! String?
-            // }
+             if Utilities.isValidValue(someObject: infoDict[kActivityVersion] as AnyObject ){
+                 self.version = infoDict[kActivityVersion] as! String?
+             }
             
             
             if Utilities.isValidValue(someObject: infoDict[kActivityTitle] as AnyObject ){

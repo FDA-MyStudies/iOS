@@ -620,19 +620,24 @@ extension ActivitiesViewController:ORKTaskViewControllerDelegate{
                 let dictionary = activityStepResult?.getActivityStepResultDict()
                 print("dictionary \(dictionary)")
                 
+                //check for anchor date
+                if study?.anchorDate != nil && study?.anchorDate?.anchorDateActivityId == activity?.actvityId {
+                    
+                    if (study?.anchorDate?.anchorDateQuestionKey)! ==  (activityStepResult?.key)!{
+                        if let value1 = activityStepResult?.value as? String {
+                            study?.anchorDate?.setAnchorDateFromQuestion(date: value1)
+                        }
+                    }
+                }
+                
+                //save data for stats
                 if ActivityBuilder.currentActivityBuilder.actvityResult?.type == .Questionnaire {
-                    //let value = activityStepResult?.value as! NSNumber
-                    //let fVlue = value.floatValue
-                    //DBHandler.saveStatisticsDataFor(activityId: (activity?.actvityId)!, key: (stepViewController.step?.identifier)!, data:fVlue)
-                    
-                    //if activityStepResult?.value is Float {
-                        
-                    //}
-                    
+                   
                     if let value1 = activityStepResult?.value as? NSNumber {
                         let value = value1.floatValue
                         DBHandler.saveStatisticsDataFor(activityId: (activity?.actvityId)!, key: (activityStepResult?.key)!, data:value)
                     }
+                    
                 }
                 
                 

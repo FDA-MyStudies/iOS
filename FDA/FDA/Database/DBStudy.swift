@@ -37,6 +37,13 @@ class DBStudy: Object {
     dynamic var signedConsentVersion:String?
     dynamic var signedConsentFilePath:String?
     
+    //anchor date values
+    dynamic var anchorDate:Date?
+    dynamic var anchorDateType:String?
+    dynamic var anchorDateActivityId:String?
+    dynamic var anchorDateActivityVersion:String?
+    dynamic var anchorDateQuestionKey:String?
+    
     var sections = List<DBOverviewSection>()
     
     override static func primaryKey() -> String? {

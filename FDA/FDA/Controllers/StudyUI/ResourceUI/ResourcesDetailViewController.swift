@@ -100,15 +100,19 @@ class ResourcesDetailViewController: UIViewController {
         }
         debugPrint("custom download path: \(resourcesDownloadPath)")
         
-        let fileURL:NSString =  "https://gradcollege.okstate.edu/sites/default/files/PDF_linking.pdf"
+       
         
-        var fileName : NSString = fileURL.lastPathComponent as NSString
+        let fileURL =  (self.resource?.file?.link)!
+        
+        let url = URL(string:fileURL)
+        
+        var fileName : NSString = url!.lastPathComponent as NSString
         
         fileName = AKUtility.getUniqueFileNameWithPath((resourcesDownloadPath as NSString).appendingPathComponent(fileName as String) as NSString)
         
         let fdm = FileDownloadManager()
         fdm.delegate = self
-        fdm.downloadFile(fileName as String, fileURL: fileURL.addingPercentEscapes(using: String.Encoding.utf8.rawValue)!, destinationPath: resourcesDownloadPath)
+        fdm.downloadFile(fileName as String, fileURL: fileURL.addingPercentEscapes(using: String.Encoding(rawValue: String.Encoding.utf8.rawValue))!, destinationPath: resourcesDownloadPath)
     }
     
     

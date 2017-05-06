@@ -474,14 +474,14 @@ extension StudyListViewController:NMWebServiceDelegate {
             self.removeProgressIndicator()
         }
         else if(requestName as String == WCPMethods.studyInfo.rawValue){
-             self.removeProgressIndicator()
+            self.removeProgressIndicator()
             self.navigateToStudyHome()
         }
         else if (requestName as String == RegistrationMethods.studyState.description){
             self.sendRequestToGetStudyList()
         }
         else if (requestName as String == WCPMethods.studyUpdates.rawValue){
-             self.removeProgressIndicator()
+            self.removeProgressIndicator()
             self.handleStudyUpdatedInformation()
         }
         else if requestName as String ==  RegistrationMethods.userProfile.description {
@@ -490,6 +490,11 @@ extension StudyListViewController:NMWebServiceDelegate {
                 self.setPassCode()
             }
         }
+        else if (requestName as String == RegistrationMethods.updateStudyState.description){
+            self.removeProgressIndicator()
+        }
+        
+        
     }
     
     func failedRequest(_ manager: NetworkManager, requestName: NSString, error: NSError) {

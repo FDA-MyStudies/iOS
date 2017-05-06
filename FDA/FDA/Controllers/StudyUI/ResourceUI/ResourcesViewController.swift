@@ -104,36 +104,56 @@ class ResourcesViewController : UIViewController{
         self.addDefaultList()
         
         let todayDate = Date()
-        let anchorDate = Date()
+        
         //Add resources list
         for  resource in (Study.currentStudy?.resources)!{
          
+            //check for startDate and endDate
             if resource.startDate != nil && resource.endDate != nil {
                 
-                var startDateResult = (resource.startDate?.compare(todayDate))! as ComparisonResult
-                var endDateResult = (resource.endDate?.compare(todayDate))! as ComparisonResult
+                let startDateResult = (resource.startDate?.compare(todayDate))! as ComparisonResult
+                let endDateResult = (resource.endDate?.compare(todayDate))! as ComparisonResult
                 
-                if startDateResult == .orderedAscending && endDateResult == .orderedDescending{
+                if ((startDateResult == .orderedAscending || startDateResult == .orderedSame) && (endDateResult == .orderedDescending || endDateResult == .orderedSame)){
                     print("current")
+                    
+                    tableViewRowDetails?.append(resource)
+                    
+                   
+                    
+                    
+                }
+            } //check for anchorDate
+            else {
+                
+                let anchorDate = Study.currentStudy?.anchorDate
+                if(anchorDate != nil && (anchorDate?.isAnchorDateAvailable())!) {
+                    
+                    let anchorDate = Study.currentStudy?.anchorDate?.date
                     
                     //also anchor date condition
                     let startDateInterval = TimeInterval(60*60*24*(resource.anchorDateStartDays))
                     let endDateInterval = TimeInterval(60*60*24*(resource.anchorDateEndDays))
                     
-                    let startAnchorDate = anchorDate.addingTimeInterval(startDateInterval)
-                    let endAnchorDate = anchorDate.addingTimeInterval(endDateInterval)
+                    let startAnchorDate = anchorDate?.addingTimeInterval(startDateInterval)
+                    let endAnchorDate = anchorDate?.addingTimeInterval(endDateInterval)
                     
-                    startDateResult = (startAnchorDate.compare(todayDate)) as ComparisonResult
-                    endDateResult = (endAnchorDate.compare(todayDate)) as ComparisonResult
+                    let startDateResult = (startAnchorDate?.compare(todayDate))! as ComparisonResult
+                    let endDateResult = (endAnchorDate?.compare(todayDate))! as ComparisonResult
                     
                     if ((startDateResult == .orderedAscending || startDateResult == .orderedSame) && (endDateResult == .orderedDescending || endDateResult == .orderedSame)){
                         
                         tableViewRowDetails?.append(resource)
                     }
                     
-                    
                 }
+                else {
+                     tableViewRowDetails?.append(resource)
+                }
+            
+                
             }
+           
         }
         
         self.appendLeaveStudy()

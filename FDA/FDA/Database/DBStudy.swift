@@ -91,3 +91,25 @@ class DBStatisticsData : Object {
     dynamic var startDate:Date?
     dynamic var data:Float = 0.0
 }
+
+class DBResources:Object {
+    
+   dynamic  var studyId:String?
+   dynamic  var level:String?
+   dynamic  var key:String?
+   dynamic  var type:String?
+   dynamic  var audience:String?
+   dynamic  var resourceId:String?
+   dynamic  var startDate:Date?
+   dynamic  var endDate:Date?
+   dynamic  var anchorDateStartDays:Int = 0
+   dynamic  var anchorDateEndDays:Int = 0
+   dynamic  var title:String?
+   dynamic  var serverUrl:String?
+   dynamic  var localPath:String?
+   dynamic  var povAvailable:Bool = false
+    
+    override static func primaryKey() -> String? {
+        return "resourceId"
+    }
+}

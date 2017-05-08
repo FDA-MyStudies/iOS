@@ -23,6 +23,8 @@ let kResourceType = "type"
 let kResourceFile = "file"
 let kResourceConfigration = "availability"
 let kResourceTitle = "title"
+let kResourceId = "resourcesId"
+let kResourceAudience = "audience"
 
 
 class Resource{
@@ -38,6 +40,7 @@ class Resource{
     var anchorDateStartDays:Int?
     var anchorDateEndDays:Int?
     var title:String?
+    var povAvailable:Bool = false
     
     init() {
         self.level = ResourceLevel.gateway
@@ -51,7 +54,13 @@ class Resource{
     init(detail:Dictionary<String, Any>) {
         
         if Utilities.isValidObject(someObject: detail as AnyObject?){
-            
+           
+            if (Utilities.isValidValue(someObject: (detail[kResourceId]) as AnyObject)) {
+                self.resourcesId = detail[kResourceId] as? String
+            }
+            if (Utilities.isValidValue(someObject: (detail[kResourceAudience]) as AnyObject)) {
+                self.audience = Audience(rawValue:detail[kResourceAudience] as! String)
+            }
             if (Utilities.isValidValue(someObject: (detail[kResourceLevel]) as AnyObject)) {
                 self.level = detail[kResourceLevel] as? ResourceLevel
             }
@@ -66,7 +75,7 @@ class Resource{
             }
             if (Utilities.isValidObject(someObject: detail[kResourceConfigration] as AnyObject)) {
                 let configuration = detail[kResourceConfigration] as! Dictionary<String,Any>
-                
+                self.povAvailable = true
                 if (Utilities.isValidValue(someObject: (configuration["availableDate"]) as AnyObject)) {
                     self.startDate = Utilities.getDateFromStringWithFormat("YYYY-MM-dd", resultDate: configuration["availableDate"] as! String)
                 }
@@ -77,6 +86,9 @@ class Resource{
                 self.anchorDateStartDays = configuration["startDays"] as? Int
                 self.anchorDateEndDays = configuration["endDays"] as? Int
                 
+            }
+            else {
+                self.povAvailable = false
             }
             
             if (Utilities.isValidValue(someObject: (detail[kResourceTitle]) as AnyObject)) {
@@ -97,6 +109,12 @@ class Resource{
         
         if Utilities.isValidObject(someObject: dict){
             
+            if (Utilities.isValidValue(someObject: (dict[kResourceId]) as AnyObject)) {
+                self.resourcesId = dict[kResourceId] as? String
+            }
+            if (Utilities.isValidValue(someObject: (dict[kResourceAudience]) as AnyObject)) {
+                 self.audience = Audience(rawValue:dict[kResourceAudience] as! String)
+            }
             if (Utilities.isValidValue(someObject: (dict[kResourceLevel]) as AnyObject)) {
                 self.level = dict[kResourceLevel] as? ResourceLevel
             }
@@ -125,7 +143,7 @@ class Resource{
             
             if (Utilities.isValidObject(someObject: dict[kResourceConfigration] as AnyObject)) {
                 let configuration = dict[kResourceConfigration] as! Dictionary<String,Any>
-                
+                self.povAvailable = true
                 if (Utilities.isValidValue(someObject: (configuration["availableDate"]) as AnyObject)) {
                     self.startDate = Utilities.getDateFromStringWithFormat("YYYY-MM-dd", resultDate: configuration["availableDate"] as! String)
                 }
@@ -133,9 +151,12 @@ class Resource{
                     self.endDate = Utilities.getDateFromStringWithFormat("YYYY-MM-dd", resultDate: configuration["expiryDate"] as! String)
                 }
                 
-                self.anchorDateStartDays = configuration["startDays"] as! Int
-                self.anchorDateEndDays = configuration["endDays"] as! Int
+                self.anchorDateStartDays = configuration["startDays"] as? Int
+                self.anchorDateEndDays = configuration["endDays"] as? Int
                 
+            }
+            else {
+                self.povAvailable = false
             }
             if (Utilities.isValidValue(someObject: (dict[kResourceTitle]) as AnyObject)) {
                 self.title = dict[kResourceTitle] as? String

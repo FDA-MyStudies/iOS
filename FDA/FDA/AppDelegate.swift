@@ -29,6 +29,11 @@
             
             UIView.appearance(whenContainedInInstancesOf: [ORKTaskViewController.self]).tintColor = kUIColorForSubmitButtonBackground
             
+            if ORKPasscodeViewController.isPasscodeStoredInKeychain(){
+                ORKPasscodeViewController.removePasscodeFromKeychain()
+            }
+            
+            
            // self.checkForAppUpdate()
             
             return true
@@ -66,6 +71,13 @@
             // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
            // self.window?.isHidden = false
           
+            let navController = application.windows[0].rootViewController
+           
+            if (navController as? UINavigationController) != nil &&  (navController as? UINavigationController)?.visibleViewController?.isKind(of: ORKTaskViewController.self) == false {
+            
+            
+                self.checkPasscode(viewController: navController!)
+            }
            
           
         }
@@ -96,7 +108,18 @@
                     passcodeStep.passcodeType = .type4Digit
                     let task = ORKOrderedTask(identifier: "PassCodeTask", steps: [passcodeStep])
                     let taskViewController = ORKTaskViewController.init(task: task, taskRun: nil)
-                    taskViewController.delegate = viewController as? ORKTaskViewControllerDelegate
+                    
+                    if viewController.isKind(of: UINavigationController.self){
+                        taskViewController.delegate = self
+                    }
+                    else{
+                        taskViewController.delegate = viewController as? ORKTaskViewControllerDelegate
+                    }
+                    
+                    
+                    
+                    
+                    
                     viewController.present(taskViewController, animated: false, completion: nil)
                 }
                 else{

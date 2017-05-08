@@ -58,6 +58,7 @@ class FetalKickCounterStepViewController:  ORKStepViewController {
         
         if let step = step as? FetalKickCounterStep {
             
+        
             self.totalTime =  step.counDownTimer! * 60
             
             let hours =  Int(self.totalTime!) / 3600
@@ -273,7 +274,7 @@ extension FetalKickCounterStepViewController:UITextFieldDelegate {
             }
            
             
-            Utilities.showAlertWithMessage(alertMessage:kAlertPleaseEnterValidValue)
+            //Utilities.showAlertWithMessage(alertMessage:kAlertPleaseEnterValidValue)
         }
         else{
             self.kickCounter = Int((counterTextField?.text)!)

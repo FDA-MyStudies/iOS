@@ -240,6 +240,7 @@
                     </view>
                     <connections>
                         <outlet property="buttonSubmit" destination="Qzc-1W-fgy" id="OY9-s0-zVq"/>
+                        <outlet property="labelDescription" destination="blT-Iy-WlF" id="e6V-Vj-YJX"/>
                         <outlet property="tokenTextField" destination="1Zu-1M-7Gw" id="zD1-WJ-N4b"/>
                     </connections>
                 </viewController>
@@ -263,9 +264,9 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uIj-lV-uyU">
+                            <button contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uIj-lV-uyU">
                                 <rect key="frame" x="112.5" y="601" width="150" height="45"/>
-                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
+                                <color key="tintColor" red="0.0" green="0.48627450979999998" blue="0.72941176470000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <state key="normal" title="Next">
                                     <color key="titleColor" red="0.0" green="0.48627450979999998" blue="0.72941176470000002" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>

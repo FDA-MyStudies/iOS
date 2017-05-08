@@ -33,7 +33,7 @@ class FetalKickCounterTask {
     var duration:Float?       // task run time
     var identifier:String?
     var steps:[ORKStep]?    // steps involved in fetal kick
-    
+    var instructionText:String?
     /*
      Default Initializer method
      */
@@ -41,6 +41,7 @@ class FetalKickCounterTask {
         self.steps =  [ORKStep]()
         self.identifier = kFetalKickCounterStepIdentifier
         self.duration = 0
+        self.instructionText = ""
     }
     
     
@@ -48,7 +49,7 @@ class FetalKickCounterTask {
      Initalizer method to create instance
      @param duration    is task run time in hours
      */
-    func initWithFormatDuration(duration:Float,identifier:String)  {
+    func initWithFormat(duration:Float,identifier:String,instructionText:String?)  {
         
         self.identifier = identifier
         self.steps =  [ORKStep]()
@@ -60,6 +61,12 @@ class FetalKickCounterTask {
             Logger.sharedInstance.warn("Duration is null:\(duration)")
         }
         
+        if Utilities.isValidValue(someObject: instructionText as AnyObject?){
+             self.instructionText = instructionText
+        }
+        else{
+             self.instructionText = ""
+        }
     }
     
     /*
@@ -92,7 +99,14 @@ class FetalKickCounterTask {
         //create a Introduction step
         let introductionStep = ORKInstructionStep(identifier: kFetalKickInstructionStepIdentifier)
         introductionStep.title = NSLocalizedString(kFetalKickInstructionStepTitle, comment: "")
-        introductionStep.text = NSLocalizedString(kFetalKickInstructionStepText, comment: "")
+        
+        
+        if (self.instructionText?.characters.count)! > 0 {
+            introductionStep.text = NSLocalizedString(self.instructionText!, comment: "")
+            steps?.append(introductionStep)
+        }
+        
+        
         
         //create a Fetal Kick Counter Step
         let kickStep = FetalKickCounterStep(identifier: self.identifier!)

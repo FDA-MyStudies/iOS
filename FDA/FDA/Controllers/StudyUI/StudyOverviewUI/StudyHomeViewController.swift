@@ -683,6 +683,8 @@ extension StudyHomeViewController:ORKTaskViewControllerDelegate{
             let gatewayStoryboard = UIStoryboard(name: kFetalKickCounterStep, bundle: nil)
             
             let ttController = gatewayStoryboard.instantiateViewController(withIdentifier: kEligibilityStepViewControllerIdentifier) as! EligibilityStepViewController
+            
+            ttController.descriptionText = step.text
             ttController.step = step
             
             return ttController

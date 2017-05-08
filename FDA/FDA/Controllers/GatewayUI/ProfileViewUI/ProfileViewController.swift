@@ -284,6 +284,11 @@ class ProfileViewController: UIViewController {
      */
     func handleSignoutResponse(){
         debugPrint("singout")
+        
+        if ORKPasscodeViewController.isPasscodeStoredInKeychain(){
+            ORKPasscodeViewController.removePasscodeFromKeychain()
+        }
+        
         //fdaSlideMenuController()?.navigateToHomeAfterSingout()
         let leftController = slideMenuController()?.leftViewController as! LeftMenuViewController
         leftController.changeViewController(.studyList)

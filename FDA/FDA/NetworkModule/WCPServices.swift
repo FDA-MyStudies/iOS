@@ -305,6 +305,10 @@ class WCPServices: NSObject {
             listOfResources.append(resourceObj)
         }
         
+       
+        //save in database
+        DBHandler.saveResourcesForStudy(studyId: (Study.currentStudy?.studyId)!, resources: listOfResources)
+        
         //assgin to Gateway
        Study.currentStudy?.resources = listOfResources
 

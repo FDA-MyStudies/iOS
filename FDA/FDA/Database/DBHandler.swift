@@ -780,4 +780,134 @@ class DBHandler: NSObject {
         }
      }
     
+    
+    //MARK:- RESOURCES
+    class func saveResourcesForStudy(studyId:String,resources:Array<Resource>){
+        
+        let realm = try! Realm()
+        let dbResourcesArray = realm.objects(DBResources.self).filter({$0.studyId == studyId})
+        
+        var dbResourcesList:Array<DBResources> = []
+        for resource in resources {
+            
+            var dbResource:DBResources?
+            if dbResourcesArray.count != 0 {
+                dbResource = dbResourcesArray.filter({$0.resourceId == resource.resourcesId}).last!
+                
+                if dbResource == nil {
+                    
+                    dbResource = DBHandler.getDBResource(resource: resource)
+                    dbResource?.studyId = studyId
+                    dbResourcesList.append(dbResource!)
+                }
+                else {
+                    
+                    try! realm.write({
+                      
+                        dbResource?.title = resource.title
+                       
+                        dbResource?.audience = resource.audience?.rawValue
+                        dbResource?.endDate = resource.endDate
+                        dbResource?.startDate = resource.startDate
+                        dbResource?.key = resource.key
+                        dbResource?.povAvailable = resource.povAvailable
+                        dbResource?.serverUrl = resource.file?.link
+                        dbResource?.level = resource.level?.rawValue
+                        
+                        if resource.povAvailable {
+                            dbResource?.anchorDateEndDays = resource.anchorDateEndDays!
+                            dbResource?.anchorDateStartDays = resource.anchorDateStartDays!
+                        }
+                        
+                    })
+                    
+                }
+            }
+            else {
+                
+                dbResource = DBHandler.getDBResource(resource: resource)
+                dbResource?.studyId = studyId
+                
+                dbResourcesList.append(dbResource!)
+            }
+            
+        }
+        
+        
+        print("DBPath : \(realm.configuration.fileURL)")
+        if dbResourcesList.count > 0 {
+            try! realm.write({
+                realm.add(dbResourcesList, update: true)
+                
+            })
+        }
+    }
+    
+    private class func getDBResource(resource:Resource)->DBResources{
+        
+        let dbResource = DBResources()
+        dbResource.resourceId = resource.resourcesId
+        dbResource.title = resource.title
+        dbResource.audience = resource.audience?.rawValue
+        dbResource.endDate = resource.endDate
+        dbResource.startDate = resource.startDate
+        dbResource.key = resource.key
+        dbResource.povAvailable = resource.povAvailable
+        dbResource.serverUrl = resource.file?.link
+        dbResource.level = resource.level?.rawValue
+        dbResource.type = resource.type
+        
+        if resource.povAvailable {
+            dbResource.anchorDateEndDays = resource.anchorDateEndDays!
+            dbResource.anchorDateStartDays = resource.anchorDateStartDays!
+        }
+        
+        return dbResource
+        
+    }
+    
+    class func loadResourcesForStudy(studyId:String,completionHandler:@escaping (Array<Resource>) -> ()){
+        
+        
+        let realm = try! Realm()
+        let dbResourceList = realm.objects(DBResources.self).filter("studyId == %@",studyId)
+        
+        var resourceList:Array<Resource> = []
+        for dbResource in dbResourceList {
+            
+            let resource = Resource()
+            resource.resourcesId = dbResource.resourceId
+            resource.title = dbResource.title
+            resource.anchorDateEndDays = dbResource.anchorDateEndDays
+            resource.anchorDateStartDays = dbResource.anchorDateStartDays
+            resource.audience = Audience(rawValue:dbResource.audience!)
+            resource.endDate  = dbResource.endDate
+            resource.startDate = dbResource.startDate
+            resource.key = dbResource.key
+            resource.povAvailable = dbResource.povAvailable
+            resource.level = ResourceLevel(rawValue:dbResource.level!)
+            
+            let file = File()
+            file.link = dbResource.serverUrl
+            file.localPath = dbResource.localPath
+            file.mimeType = MimeType(rawValue:dbResource.type!)
+            file.name = dbResource.title
+            
+            resource.file = file
+                
+            resourceList.append(resource)
+        }
+        completionHandler(resourceList)
+        
+    }
+    
+    class func updateResourceLocalPath(resourceId:String,path:String){
+        let realm = try! Realm()
+        let dbResource = realm.objects(DBResources.self).filter("resourcesId == %@",resourceId).last!
+        try! realm.write({
+            dbResource.localPath = path
+            
+        })
+    }
+    
 }

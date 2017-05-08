@@ -34,8 +34,9 @@ class ResourcesViewController : UIViewController{
         
         self.navigationItem.title = NSLocalizedString("Resources", comment: "")
         //Next Phase
-        WCPServices().getResourcesForStudy(studyId:(Study.currentStudy?.studyId)!, delegate: self)
+        //WCPServices().getResourcesForStudy(studyId:(Study.currentStudy?.studyId)!, delegate: self)
         
+        self.loadResourceFromDatabase()
         
     }
     
@@ -53,6 +54,18 @@ class ResourcesViewController : UIViewController{
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
                
+    }
+    
+    func loadResourceFromDatabase(){
+        DBHandler.loadResourcesForStudy(studyId: (Study.currentStudy?.studyId)!) { (resources) in
+            if resources.count != 0 {
+                 Study.currentStudy?.resources = resources
+                 self.handleResourcesReponse()
+            }
+            else {
+                 WCPServices().getResourcesForStudy(studyId:(Study.currentStudy?.studyId)!, delegate: self)
+            }
+        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

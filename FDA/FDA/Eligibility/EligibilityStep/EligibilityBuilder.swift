@@ -51,7 +51,11 @@ class EligibilityBuilder{
         if Utilities.isValidObject(someObject: eligibilityDict[kEligibilityCorrectAnswers] as AnyObject ){
             self.testArray = eligibilityDict[kEligibilityTest] as! Array<Dictionary<String, Any>>
         }
-    
+        if  Utilities.isValidValue(someObject: eligibilityDict[kEligibilityTokenTitle] as AnyObject?){
+            self.tokenTitle =  eligibilityDict[kEligibilityTokenTitle] as? String
+        }
+
+        
     }
     
     func getEligibilitySteps() -> [ORKStep]?{
@@ -74,6 +78,11 @@ class EligibilityBuilder{
                 
                 let eligibilityStep:EligibilityStep? = EligibilityStep(identifier: "EligibilityTokenStep")
                 eligibilityStep?.type = "TOKEN"
+                
+                if self.tokenTitle != nil {
+                    eligibilityStep?.text = self.tokenTitle!
+                }
+                
                 stepsArray?.append(eligibilityStep!)
             }
             else if self.type == EligibilityStepType.test {
@@ -96,6 +105,10 @@ class EligibilityBuilder{
                 
                 let eligibilityStep:EligibilityStep? = EligibilityStep(identifier: "EligibilityTokenStep")
                 eligibilityStep?.type = "TOKEN"
+                
+                if self.tokenTitle != nil {
+                    eligibilityStep?.text = self.tokenTitle!
+                }
                 stepsArray?.append(eligibilityStep!)
                 
             case .test:

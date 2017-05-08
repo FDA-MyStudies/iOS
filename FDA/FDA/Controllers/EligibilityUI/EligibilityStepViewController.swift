@@ -11,6 +11,7 @@ import ResearchKit
 
 class EligibilityStep: ORKStep {
     var type:String?
+   
 }
 
 
@@ -19,6 +20,8 @@ class EligibilityStepViewController: ORKStepViewController {
 
     @IBOutlet weak var tokenTextField: UITextField!
     @IBOutlet weak var buttonSubmit:UIButton?
+    @IBOutlet weak var labelDescription:UILabel?
+    var descriptionText:String?
     
      var taskResult:EligibilityTokenTaskResult = EligibilityTokenTaskResult(identifier: kFetalKickCounterStepDefaultIdentifier)
     
@@ -36,6 +39,10 @@ class EligibilityStepViewController: ORKStepViewController {
         buttonSubmit?.layer.borderColor =   kUicolorForButtonBackground
         
        
+        if (self.descriptionText?.characters.count)! > 0{
+            labelDescription?.text = self.descriptionText
+        }
+        
         
         if let step = step as? EligibilityStep {
             step.type = "token"

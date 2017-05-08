@@ -486,11 +486,16 @@ class ActivityQuestionStep: ActivityStep {
                     
                     //ORKStep dont need placeholder
                     
-                    let maxValue = formatDict?[kStepQuestionNumericMaxValue] as? NSNumber
+                    var maxValue = formatDict?[kStepQuestionNumericMaxValue] as? NSNumber
                     
-                    let minValue = formatDict?[kStepQuestionNumericMinValue] as? NSNumber
+                    var minValue = formatDict?[kStepQuestionNumericMinValue] as? NSNumber
                     
-                   
+                    if maxValue != nil && maxValue == 0 {
+                        maxValue = nil
+                    }
+                    if minValue != nil && minValue == 0  {
+                        minValue = nil
+                    }
                   
                     let localizedQuestionStepAnswerFormatUnit = NSLocalizedString((formatDict?[kStepQuestionNumericUnit] as? String)! , comment: "")
                     
@@ -616,18 +621,9 @@ class ActivityQuestionStep: ActivityStep {
                 }
             case .email:
                 
-                if  Utilities.isValidValue(someObject:formatDict?[kStepQuestionEmailPlaceholder] as AnyObject?)
-                {
-                    
                     questionStepAnswerFormat = ORKAnswerFormat.emailAnswerFormat()
                     // Place holder???
-                    
-                }
-                else{
-                    Logger.sharedInstance.debug("email has null values:\(formatDict)")
-                    return nil
-                    
-                }
+
             case .timeInterval:
                 
                 if Utilities.isValidValue(someObject:formatDict?[kStepQuestionTimeIntervalStep] as AnyObject?)
@@ -816,10 +812,19 @@ class ActivityQuestionStep: ActivityStep {
                     // if it is array of dictionary
                     let dict:NSDictionary = dataArray[i] as! NSDictionary
                     
+                     var value:Int! = 0
+                    
+                    if Utilities.isValidValue(someObject: dict[kStepQuestionImageChoiceValue] as AnyObject){
+                         value = Int(dict[kStepQuestionImageChoiceValue] as! String)!
+                    }
+                    
+                    
+                    
+                    
                     if  Utilities.isValidValue(someObject: dict[kStepQuestionImageChoiceImage] as AnyObject? )
                         &&  Utilities.isValidValue(someObject:dict[kStepQuestionImageChoiceSelectedImage] as AnyObject?)
                         &&  Utilities.isValidValue(someObject:dict[kStepQuestionImageChoiceText] as AnyObject?)
-                        &&  Utilities.isValidValue(someObject:dict[kStepQuestionImageChoiceValue] as AnyObject?) {
+                        {
                         
                         // check if file exist at local path
                         
@@ -833,12 +838,22 @@ class ActivityQuestionStep: ActivityStep {
                         //let selectedImage:UIImage = UIImage(data: )
                         
                         
-                        let  choice = ORKImageChoice( normalImage: normalImage ,  selectedImage: selectedImage , text: dict[kStepQuestionImageChoiceText] as? String, value: dict[kStepQuestionImageChoiceValue] as! Int as NSCoding & NSCopying & NSObjectProtocol )
+                        let  choice = ORKImageChoice( normalImage: normalImage ,  selectedImage: selectedImage , text: dict[kStepQuestionImageChoiceText] as? String, value: value as Int as NSCoding & NSCopying & NSObjectProtocol )
                         
                         imageChoiceArray?.append(choice)
                         
                     }
                     else {
+                        //To be removed
+                        /*
+                        
+                        let normalImage:UIImage = UIImage(named:"Bomb.png")!
+                        let selectedImage:UIImage = UIImage(named:"container.png")!
+                        let  choice = ORKImageChoice( normalImage: normalImage ,  selectedImage: selectedImage , text: dict[kStepQuestionImageChoiceText] as? String, value: value as Int as NSCoding & NSCopying & NSObjectProtocol )
+                        
+                        imageChoiceArray?.append(choice)
+                        */
+                        
                         return nil
                     }
                 }

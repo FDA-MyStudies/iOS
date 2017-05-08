@@ -617,8 +617,11 @@ extension ActivitiesViewController:ORKTaskViewControllerDelegate{
                 
                 let study = Study.currentStudy
                 let activity = Study.currentActivity
-                DBHandler.updateActivityRestortionDataFor(activity:activity!, studyId: (study?.studyId)!, restortionData: taskViewController.restorationData!)
                 
+                if activity?.type != .activeTask{
+                
+                DBHandler.updateActivityRestortionDataFor(activity:activity!, studyId: (study?.studyId)!, restortionData: taskViewController.restorationData!)
+                }
                 
                
                 //Explain
@@ -704,18 +707,14 @@ extension ActivitiesViewController:ORKTaskViewControllerDelegate{
         
          let storyboard = UIStoryboard.init(name: "FetalKickCounter", bundle: nil)
         
-        if step.identifier == "FetalKickIntroduction" {
-            self.lastFetelKickIdentifer = step.identifier
-        }
-        
        
-        if self.lastFetelKickIdentifer == "FetalKickIntroduction" {
-            self.lastFetelKickIdentifer = ""
+        if step is FetalKickCounterStep {
+           
             let ttController = storyboard.instantiateViewController(withIdentifier: "FetalKickCounterStepViewController") as! FetalKickCounterStepViewController
             ttController.step = step
             return ttController
         }
-        else if  step.identifier == kFetalKickIntroductionStepIdentifier{
+        else if  step is FetalKickIntroStep{
            
             
             let ttController = storyboard.instantiateViewController(withIdentifier: "FetalKickIntroStepViewControllerIdentifier") as! FetalKickIntroStepViewController

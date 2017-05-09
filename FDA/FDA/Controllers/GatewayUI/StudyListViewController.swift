@@ -153,6 +153,9 @@ class StudyListViewController: UIViewController {
     */
     func setPassCode() {
         //Remove Passcode if already exist
+        
+        /*
+        
         ORKPasscodeViewController.removePasscodeFromKeychain()
         
         let passcodeStep = ORKPasscodeStep(identifier: "PasscodeStep")
@@ -162,6 +165,7 @@ class StudyListViewController: UIViewController {
         taskViewController.delegate = self
         
         self.navigationController?.present(taskViewController, animated: false, completion: nil)
+ */
     }
     
     

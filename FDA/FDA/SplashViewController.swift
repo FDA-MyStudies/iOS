@@ -31,6 +31,10 @@ class SplashViewController: UIViewController {
 //            User.currentUser.authToken = ud.object(forKey: kUserAuthToken) as! String!
 //            User.currentUser.userId = ud.object(forKey:kUserId) as! String!
 //            User.currentUser.userType = UserType.FDAUser
+            
+            let appDelegate = UIApplication.shared.delegate as! AppDelegate
+            appDelegate.checkPasscode(viewController: self)
+            
             self.navigateToGatewayDashboard()
         }
         else {
@@ -96,3 +100,42 @@ class SplashViewController: UIViewController {
     */
 
 }
+
+
+//MARK:- ORKTaskViewController Delegate
+extension SplashViewController:ORKTaskViewControllerDelegate{
+    
+    func taskViewControllerSupportsSaveAndRestore(_ taskViewController: ORKTaskViewController) -> Bool {
+        return true
+    }
+    
+    public func taskViewController(_ taskViewController: ORKTaskViewController, didFinishWith reason: ORKTaskViewControllerFinishReason, error: Error?) {
+        
+        var taskResult:Any?
+        
+        switch reason {
+            
+        case ORKTaskViewControllerFinishReason.completed:
+            print("completed")
+            taskResult = taskViewController.result
+        case ORKTaskViewControllerFinishReason.failed:
+            print("failed")
+            taskResult = taskViewController.result
+        case ORKTaskViewControllerFinishReason.discarded:
+            print("discarded")
+            
+            taskResult = taskViewController.result
+        case ORKTaskViewControllerFinishReason.saved:
+            print("saved")
+            taskResult = taskViewController.restorationData
+            
+        }
+        taskViewController.dismiss(animated: true, completion: nil)
+    }
+    
+    func taskViewController(_ taskViewController: ORKTaskViewController, stepViewControllerWillAppear stepViewController: ORKStepViewController) {
+        
+    }
+}
+
+

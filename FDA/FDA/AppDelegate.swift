@@ -29,9 +29,7 @@
             
             UIView.appearance(whenContainedInInstancesOf: [ORKTaskViewController.self]).tintColor = kUIColorForSubmitButtonBackground
             
-            if ORKPasscodeViewController.isPasscodeStoredInKeychain(){
-                ORKPasscodeViewController.removePasscodeFromKeychain()
-            }
+          
             
             
            // self.checkForAppUpdate()
@@ -103,6 +101,9 @@
             if User.currentUser.userType == .FDAUser {
                 //FDA user
                 
+                
+                if User.currentUser.settings?.passcode! == true {
+                
                 if  ORKPasscodeViewController.isPasscodeStoredInKeychain() == false{
                     let passcodeStep = ORKPasscodeStep(identifier: "PasscodeStep")
                     passcodeStep.passcodeType = .type4Digit
@@ -118,8 +119,6 @@
                     
                     
                     
-                    
-                    
                     viewController.present(taskViewController, animated: false, completion: nil)
                 }
                 else{
@@ -129,12 +128,15 @@
                     let passcodeViewController = ORKPasscodeViewController.passcodeAuthenticationViewController(withText: "Enter Passcode to access app", delegate: self)
                     viewController.present(passcodeViewController, animated: false, completion: nil)
                 }
-                
+                }
+                else{
+                    //Passcode is not set by user
+                }
             }
             else{
                 //Anonomous user
                 
-                ORKPasscodeViewController.removePasscodeFromKeychain()
+               // ORKPasscodeViewController.removePasscodeFromKeychain()
             }
 
         }

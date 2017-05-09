@@ -100,10 +100,12 @@ class ProfileViewController: UIViewController {
         
         let passcodeStep = ORKPasscodeStep(identifier: "PasscodeStep")
         
+        
         passcodeStep.passcodeType = .type4Digit
-        let task = ORKOrderedTask(identifier: "PassCodeTask", steps: [passcodeStep])
+        let task = ORKOrderedTask(identifier: "ChangePassCodeTask", steps: [passcodeStep])
         let taskViewController = ORKTaskViewController.init(task: task, taskRun: nil)
         taskViewController.delegate = self
+        
         
         self.navigationController?.present(taskViewController, animated: false, completion: nil)
     }
@@ -354,6 +356,14 @@ class ProfileViewController: UIViewController {
             switch ToggelSwitchTags(rawValue:sender.tag)! as ToggelSwitchTags{
             case .usePasscode:
                 user.settings?.passcode = toggle?.isOn
+                
+                if toggle?.isOn == true{
+                    
+                    if ORKPasscodeViewController.isPasscodeStoredInKeychain(){
+                        ORKPasscodeViewController.removePasscodeFromKeychain()
+                    }
+                }
+                
                 self.checkPasscode()
                 
             case .useTouchId:
@@ -454,6 +464,9 @@ class ProfileViewController: UIViewController {
                 let task = ORKOrderedTask(identifier: "PassCodeTask", steps: [passcodeStep])
                 let taskViewController = ORKTaskViewController.init(task: task, taskRun: nil)
                 taskViewController.delegate = self
+               
+                
+                
                 self.navigationController?.present(taskViewController, animated: false, completion: nil)
             }
             else{
@@ -725,6 +738,9 @@ extension ProfileViewController:NMWebServiceDelegate {
             
             if self.isPasscodeViewPresented == true{
                 self.isPasscodeViewPresented = false
+                
+                DBHandler.saveUserSettingsToDatabase()
+                
                 UserServices().getUserProfile(self)
             }
         }
@@ -757,7 +773,7 @@ extension ProfileViewController: ORKPasscodeDelegate {
         
         UserServices().updateUserProfile(self)
         self.isPasscodeViewPresented = true
-        ORKPasscodeViewController.removePasscodeFromKeychain()
+       
         
         viewController.dismiss(animated: true, completion: nil)
     }
@@ -788,7 +804,14 @@ extension ProfileViewController:ORKTaskViewControllerDelegate{
             
          //   ORKPasscodeViewController.forcePasscode(passcodeDict?.object(forKey: "passcode") as! String, withTouchIdEnabled: false)
             
-            UserServices().updateUserProfile(self)
+            
+            
+            //Following will be executed only when passcode is setted for first time
+            
+            if taskViewController.task?.identifier != "ChangePassCodeTask"{
+                UserServices().updateUserProfile(self)
+                self.isPasscodeViewPresented = true
+            }
             
             
         case ORKTaskViewControllerFinishReason.failed:
@@ -797,6 +820,10 @@ extension ProfileViewController:ORKTaskViewControllerDelegate{
         case ORKTaskViewControllerFinishReason.discarded:
             print("discarded")
             
+            if taskViewController.task?.identifier != "ChangePassCodeTask"{
+                user.settings?.passcode = user.settings?.passcode == true ? false : true
+            }
+            
             taskResult = taskViewController.result
         case ORKTaskViewControllerFinishReason.saved:
             print("saved")
@@ -804,7 +831,7 @@ extension ProfileViewController:ORKTaskViewControllerDelegate{
             
         }
         
-        self.isPasscodeViewPresented = true
+      
         taskViewController.dismiss(animated: true, completion: {
             
         })

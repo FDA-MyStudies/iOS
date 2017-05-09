@@ -23,6 +23,8 @@ class DBHandler: NSObject {
         dbUser.lastName = user.lastName!
         dbUser.verified = user.verified
         
+        
+        
         let realm = try! Realm()
         print("DBPath : varealm.configuration.fileURL)")
         try! realm.write({
@@ -47,9 +49,33 @@ class DBHandler: NSObject {
             currentUser.userId = dbUser?.userId
             currentUser.emailId = dbUser?.emailId
             currentUser.userType =  (dbUser?.userType).map { UserType(rawValue: $0) }!
+            
+            let settings = Settings()
+            settings.localNotifications = dbUser?.localNotificationEnabled
+            settings.passcode = dbUser?.passcodeEnabled
+            settings.remoteNotifications = dbUser?.remoteNotificationEnabled
+            
+            currentUser.settings = settings
         }
         
     }
+    
+    class func saveUserSettingsToDatabase(){
+        
+        let realm = try! Realm()
+        let dbUsers = realm.objects(DBUser.self)
+        let dbUser = dbUsers.last
+        
+        try! realm.write({
+            
+             let user = User.currentUser
+            dbUser?.passcodeEnabled = (user.settings?.passcode)!
+            dbUser?.localNotificationEnabled = (user.settings?.localNotifications)!
+            dbUser?.remoteNotificationEnabled = (user.settings?.remoteNotifications)!
+            
+        })
+    }
+    
     
     /* Used to delete current logged in user*/
     class func deleteCurrentUser(){

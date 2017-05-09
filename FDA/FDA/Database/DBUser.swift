@@ -20,6 +20,10 @@ class DBUser: Object {
     dynamic var authToken: String = ""
     dynamic var userType:Int = UserType.AnonymousUser.rawValue
    
+    dynamic var passcodeEnabled:Bool = true
+    dynamic var remoteNotificationEnabled:Bool = false
+    dynamic var localNotificationEnabled:Bool = false
+    
     override static func primaryKey() -> String? {
         return "userId"
     }

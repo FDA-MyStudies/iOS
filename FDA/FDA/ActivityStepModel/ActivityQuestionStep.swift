@@ -818,9 +818,6 @@ class ActivityQuestionStep: ActivityStep {
                          value = Int(dict[kStepQuestionImageChoiceValue] as! String)!
                     }
                     
-                    
-                    
-                    
                     if  Utilities.isValidValue(someObject: dict[kStepQuestionImageChoiceImage] as AnyObject? )
                         &&  Utilities.isValidValue(someObject:dict[kStepQuestionImageChoiceSelectedImage] as AnyObject?)
                         &&  Utilities.isValidValue(someObject:dict[kStepQuestionImageChoiceText] as AnyObject?)

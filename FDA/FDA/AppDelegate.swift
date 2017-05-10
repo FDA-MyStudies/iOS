@@ -69,6 +69,8 @@
             // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
            // self.window?.isHidden = false
           
+            
+            
             let navController = application.windows[0].rootViewController
            
             if (navController as? UINavigationController) != nil &&  (navController as? UINavigationController)?.visibleViewController?.isKind(of: ORKTaskViewController.self) == false {
@@ -105,9 +107,13 @@
                 if User.currentUser.settings?.passcode! == true {
                 
                 if  ORKPasscodeViewController.isPasscodeStoredInKeychain() == false{
+                    
                     let passcodeStep = ORKPasscodeStep(identifier: "PasscodeStep")
                     passcodeStep.passcodeType = .type4Digit
+                    
                     let task = ORKOrderedTask(identifier: "PassCodeTask", steps: [passcodeStep])
+                    
+    
                     let taskViewController = ORKTaskViewController.init(task: task, taskRun: nil)
                     
                     if viewController.isKind(of: UINavigationController.self){
@@ -116,8 +122,6 @@
                     else{
                         taskViewController.delegate = viewController as? ORKTaskViewControllerDelegate
                     }
-                    
-                    
                     
                     viewController.present(taskViewController, animated: false, completion: nil)
                 }
@@ -244,4 +248,5 @@
         
         func passcodeViewControllerDidFailAuthentication(_ viewController: UIViewController) {
         }
+        
     }

@@ -32,7 +32,7 @@ class SplashViewController: UIViewController {
 //            User.currentUser.userId = ud.object(forKey:kUserId) as! String!
 //            User.currentUser.userType = UserType.FDAUser
             
-            let appDelegate = UIApplication.shared.delegate as! AppDelegate
+           let appDelegate = UIApplication.shared.delegate as! AppDelegate
             appDelegate.checkPasscode(viewController: self)
             
             self.navigateToGatewayDashboard()

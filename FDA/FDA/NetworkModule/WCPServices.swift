@@ -71,6 +71,13 @@ let kStudyResources = "resources"
 let kStudyInfo = "info"
 
 
+//StudyWithdrawalConfigration
+let kStudyWithdrawalConfigration = "withdrawalConfig"
+let kStudyWithdrawalMessage = "message"
+let kStudyWithdrawalType = "type"
+
+
+
 //study AnchorDate
 
 
@@ -100,7 +107,9 @@ class WCPServices: NSObject {
     func getConsentDocument(studyId:String, delegate:NMWebServiceDelegate){
         
         self.delegate = delegate
-        let header = [kStudyId:studyId]
+        
+        //TBD ConsentVersion to be removed
+        let header = [kStudyId:studyId,"consentVersion" : "1.1"]
         let method = WCPMethods.consentDocument.method
        
         self.sendRequestWith(method:method, params: nil, headers: header)
@@ -385,6 +394,21 @@ class WCPServices: NSObject {
             
             DBHandler.saveAnchorDateDetail(anchorDate: studyAndhorDate, studyId: (Study.currentStudy?.studyId)!)
         }
+        
+        //WithdrawalConfigration
+        if Utilities.isValidObject(someObject: response[kStudyWithdrawalConfigration] as AnyObject?){
+            
+            let studyWithdrawalConfig = StudyWithdrawalConfigration.init(withdrawalConfigration: response[kStudyWithdrawalConfigration] as! Dictionary<String,Any>)
+            
+            
+            //update anchorDate to current study
+            Study.currentStudy?.withdrawalConfigration = studyWithdrawalConfig
+            
+            DBHandler.saveWithdrawalConfigration(withdrawalConfigration:studyWithdrawalConfig ,studyId: (Study.currentStudy?.studyId)!)
+        }
+
+        
+        
         
         //save in database
         DBHandler.saveStudyOverview(overview: overview, studyId: (Study.currentStudy?.studyId)!)

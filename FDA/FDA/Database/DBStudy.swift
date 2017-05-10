@@ -44,6 +44,12 @@ class DBStudy: Object {
     dynamic var anchorDateActivityVersion:String?
     dynamic var anchorDateQuestionKey:String?
     
+    
+    //withdrawalConfigration
+    
+    dynamic var withdrawalConfigrationMessage:String?
+    dynamic var withdrawalConfigrationType:String?
+    
     var sections = List<DBOverviewSection>()
     
     override static func primaryKey() -> String? {

@@ -29,9 +29,15 @@ enum StudyStatus:String{
             return 2
         case .Closed:
             return 3
-        
+            
         }
     }
+}
+
+enum StudyWithdrawalConfigrationType:String{
+    case deleteData = "delete_data"
+    case askUser = "ask_user"
+    case noAction = "no_action"
 }
 
 struct ConsentDocument {
@@ -93,7 +99,8 @@ class Study {
     var signedConsentVersion:String?
     var signedConsentFilePath:String?
     var anchorDate:StudyAnchorDate?
-   
+    
+    var withdrawalConfigration:StudyWithdrawalConfigration?
     
     static var currentStudy:Study? = nil
     static var currentActivity:Activity? = nil
@@ -193,11 +200,11 @@ class StudySettings{
 
 class StudyAnchorDate{
     //anchorDate Value
-     var date:Date?
-     var anchorDateType:String?
-     var anchorDateActivityId:String?
-     var anchorDateActivityVersion:String?
-     var anchorDateQuestionKey:String?
+    var date:Date?
+    var anchorDateType:String?
+    var anchorDateActivityId:String?
+    var anchorDateActivityVersion:String?
+    var anchorDateQuestionKey:String?
     
     init() {
         
@@ -233,7 +240,7 @@ class StudyAnchorDate{
     }
     
     func updateAnchorDate(date:Date){
-        self.date = date    
+        self.date = date
     }
     
     func setEnrollmentDateAsAnchorDate(){
@@ -265,37 +272,61 @@ class StudyAnchorDate{
     }
 }
 
-struct StudyUpdates{
+class StudyWithdrawalConfigration {
+      var message = ""
+      var type:StudyWithdrawalConfigrationType? = .noAction
     
-   static  var studyInfoUpdated = false
-   static  var studyConsentUpdated = false
-   static  var studyActivitiesUpdated = false
-   static  var studyResourcesUpdated = false
-    static  var studyVersion:String = ""
     
-    init(detail:Dictionary<String,Any>){
-        
-        if Utilities.isValidObject(someObject: detail[kStudyUpdates] as AnyObject?){
+    init(withdrawalConfigration:Dictionary<String,Any>){
+        if Utilities.isValidObject(someObject: withdrawalConfigration as AnyObject?){
             
-            let updates =  detail[kStudyUpdates] as! Dictionary<String,Any>
+            if Utilities.isValidValue(someObject: withdrawalConfigration[kStudyWithdrawalMessage] as AnyObject ){
+                self.message = (withdrawalConfigration[kStudyWithdrawalMessage] as? String)!
+            }
+            else{
+                self.message = "Are you sure you want to leave Study ?"
+            }
             
-            if Utilities.isValidValue(someObject: updates[kStudyResources] as AnyObject ){
-                StudyUpdates.studyResourcesUpdated = (updates[kStudyResources] as? Bool)!
-            }
-            if Utilities.isValidValue(someObject: updates[kStudyInfo] as AnyObject ){
-                StudyUpdates.studyInfoUpdated = (updates[kStudyInfo] as? Bool)!
-            }
-            if Utilities.isValidValue(someObject: updates[kStudyConsent] as AnyObject ){
-                StudyUpdates.studyConsentUpdated = (updates[kStudyConsent] as? Bool)!
-            }
-            if Utilities.isValidValue(someObject: updates[kStudyActivities] as AnyObject ){
-                StudyUpdates.studyActivitiesUpdated = (updates[kStudyActivities] as? Bool)!
+            if Utilities.isValidValue(someObject: withdrawalConfigration[kStudyWithdrawalType] as AnyObject ){
+                self.type = StudyWithdrawalConfigrationType(rawValue:(withdrawalConfigration[kStudyWithdrawalType] as? String)!)
             }
             
         }
         
-        StudyUpdates.studyVersion = detail[kStudyCurrentVersion] as! String
-       
     }
     
+}
+    struct StudyUpdates{
+        
+        static  var studyInfoUpdated = false
+        static  var studyConsentUpdated = false
+        static  var studyActivitiesUpdated = false
+        static  var studyResourcesUpdated = false
+        static  var studyVersion:String = ""
+        
+        init(detail:Dictionary<String,Any>){
+            
+            if Utilities.isValidObject(someObject: detail[kStudyUpdates] as AnyObject?){
+                
+                let updates =  detail[kStudyUpdates] as! Dictionary<String,Any>
+                
+                if Utilities.isValidValue(someObject: updates[kStudyResources] as AnyObject ){
+                    StudyUpdates.studyResourcesUpdated = (updates[kStudyResources] as? Bool)!
+                }
+                if Utilities.isValidValue(someObject: updates[kStudyInfo] as AnyObject ){
+                    StudyUpdates.studyInfoUpdated = (updates[kStudyInfo] as? Bool)!
+                }
+                if Utilities.isValidValue(someObject: updates[kStudyConsent] as AnyObject ){
+                    StudyUpdates.studyConsentUpdated = (updates[kStudyConsent] as? Bool)!
+                }
+                if Utilities.isValidValue(someObject: updates[kStudyActivities] as AnyObject ){
+                    StudyUpdates.studyActivitiesUpdated = (updates[kStudyActivities] as? Bool)!
+                }
+                
+            }
+            
+            StudyUpdates.studyVersion = detail[kStudyCurrentVersion] as! String
+            
+        }
+        
 }

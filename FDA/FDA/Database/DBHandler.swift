@@ -274,6 +274,28 @@ class DBHandler: NSObject {
         
     }
     
+    
+  
+    
+    class func saveWithdrawalConfigration(withdrawalConfigration:StudyWithdrawalConfigration, studyId:String){
+        
+        let realm = try! Realm()
+        let studies =  realm.objects(DBStudy.self).filter("studyId == %@",studyId)
+        let dbStudy = studies.last
+        
+        try! realm.write({
+
+            dbStudy?.withdrawalConfigrationMessage = withdrawalConfigration.message
+            dbStudy?.withdrawalConfigrationType = withdrawalConfigration.type?.rawValue
+            
+        })
+        
+    }
+
+    
+    
+    
+    
     class func saveAnchorDateDetail(anchorDate:StudyAnchorDate , studyId:String){
         
         let realm = try! Realm()

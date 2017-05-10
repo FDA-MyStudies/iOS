@@ -96,18 +96,13 @@ class ProfileViewController: UIViewController {
      @param sender    Accepts UIButton object
 
      */
+    
+    
     @IBAction func buttonActionChangePassCode(_ sender:UIButton){
         
-        let passcodeStep = ORKPasscodeStep(identifier: "PasscodeStep")
+        let passcodeViewController = ORKPasscodeViewController.passcodeEditingViewController(withText: "Enter Passcode to access app", delegate: self, passcodeType: .type4Digit)
         
-        
-        passcodeStep.passcodeType = .type4Digit
-        let task = ORKOrderedTask(identifier: "ChangePassCodeTask", steps: [passcodeStep])
-        let taskViewController = ORKTaskViewController.init(task: task, taskRun: nil)
-        taskViewController.delegate = self
-        
-        
-        self.navigationController?.present(taskViewController, animated: false, completion: nil)
+        self.navigationController?.present(passcodeViewController, animated: false, completion: nil)
     }
     
     
@@ -465,8 +460,6 @@ class ProfileViewController: UIViewController {
                 let taskViewController = ORKTaskViewController.init(task: task, taskRun: nil)
                 taskViewController.delegate = self
                
-                
-                
                 self.navigationController?.present(taskViewController, animated: false, completion: nil)
             }
             else{

@@ -32,7 +32,7 @@ class FetalKickCounterStepViewController:  ORKStepViewController {
     var totalTime:Int? = 0          // Total duration
     
     var taskResult:FetalKickCounterTaskResult = FetalKickCounterTaskResult(identifier: kFetalKickCounterStepDefaultIdentifier)
-    
+  
     
     //Mark: ORKStepViewController overriden methods
     
@@ -52,6 +52,7 @@ class FetalKickCounterStepViewController:  ORKStepViewController {
         super.init(coder: aDecoder)
     }
     
+     var backgroundTaskIdentifier: UIBackgroundTaskIdentifier?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -70,6 +71,8 @@ class FetalKickCounterStepViewController:  ORKStepViewController {
             self.timerLabel?.text = (hours < 10 ? "0\(hours):" : "\(hours):") + (minutes < 10 ? "0\(minutes):" : "\(minutes):")   + (seconds < 10 ? "0\(seconds)" : "\(seconds)")
             self.taskResult.duration = self.totalTime!
             
+           
+            
             
         }
         
@@ -80,6 +83,13 @@ class FetalKickCounterStepViewController:  ORKStepViewController {
         let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(FetalKickCounterStepViewController.handleTap(_:)))
         gestureRecognizer.delegate = self
         self.view.addGestureRecognizer(gestureRecognizer)
+        
+        
+       // backgroundTaskIdentifier = UIApplication.shared.beginBackgroundTask(expirationHandler: {
+       //     UIApplication.shared.endBackgroundTask(self.backgroundTaskIdentifier!)
+       // })
+    
+        
     }
     
     
@@ -110,27 +120,46 @@ class FetalKickCounterStepViewController:  ORKStepViewController {
      */
     
     func setCounter() {
-        if self.timerValue! < 0 {
-            self.timerValue = 0
-            self.timer?.invalidate()
-            self.timer = nil
-            
-            // self.result = ORKStepResult.init(stepIdentifier: (step?.identifier)!, results: [taskResult])
-            self.perform(#selector(self.goForward))
-        }
-        else{
-            timerValue = timerValue! -  1
-        }
         
-        if timerValue! >= 0{
+        
+        DispatchQueue.global(qos: .background).async {
+            if self.timerValue! < 0 {
+                self.timerValue = 0
+                self.timer?.invalidate()
+                self.timer = nil
+                
+                // self.result = ORKStepResult.init(stepIdentifier: (step?.identifier)!, results: [taskResult])
+                
+                DispatchQueue.main.async{
+                    
+                    self.perform(#selector(self.goForward))
+                }
+                
+            }
+            else{
+                self.timerValue = self.timerValue! -  1
+            }
             
-            let hours = Int(self.timerValue!) / 3600
-            let minutes = Int(self.timerValue!) / 60 % 60
-            let seconds = Int(self.timerValue!) % 60
-            self.timerLabel?.text = (hours < 10 ? "0\(hours):" : "\(hours):") + (minutes < 10 ? "0\(minutes):" : "\(minutes):")   + (seconds < 10 ? "0\(seconds)" : "\(seconds)")
-            
-            self.taskResult.totalKickCount = self.kickCounter!
-            
+            if self.timerValue! >= 0{
+                
+                
+                DispatchQueue.main.async{
+                    
+                    let hours = Int(self.timerValue!) / 3600
+                    let minutes = Int(self.timerValue!) / 60 % 60
+                    let seconds = Int(self.timerValue!) % 60
+
+                    
+                    
+                   self.timerLabel?.text = (hours < 10 ? "0\(hours):" : "\(hours):") + (minutes < 10 ? "0\(minutes):" : "\(minutes):")   + (seconds < 10 ? "0\(seconds)" : "\(seconds)")
+                    
+                    
+                     self.taskResult.totalKickCount = self.kickCounter!
+                }
+                
+               
+                
+            }
         }
         
     }

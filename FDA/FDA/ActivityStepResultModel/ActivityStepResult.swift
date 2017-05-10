@@ -481,7 +481,8 @@ class ActivityStepResult{
             let stepTypeResult = questionstepResult as! ORKNumericQuestionResult
             
             if Utilities.isValidValue(someObject: stepTypeResult.numericAnswer as AnyObject?){
-                self.value =  "\(Double(stepTypeResult.numericAnswer!))" + stepTypeResult.unit!
+                self.value =  Double(stepTypeResult.numericAnswer!)
+                //"\(Double(stepTypeResult.numericAnswer!))" + stepTypeResult.unit!
             }
             else{
                 self.value = 0.0
@@ -490,7 +491,8 @@ class ActivityStepResult{
             let stepTypeResult = questionstepResult as! ORKNumericQuestionResult
             
             if Utilities.isValidValue(someObject: stepTypeResult.numericAnswer as AnyObject?){
-                self.value =  "\(Double(stepTypeResult.numericAnswer!))" + stepTypeResult.unit!
+                self.value = Double(stepTypeResult.numericAnswer!)
+                // "\(Double(stepTypeResult.numericAnswer!))" + stepTypeResult.unit!
             }
             else{
                 self.value = 0.0

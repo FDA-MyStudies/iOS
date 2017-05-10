@@ -700,7 +700,7 @@ class DBHandler: NSObject {
         
     }
 
-    //MARK: Dashboard
+    //MARK:- Dashboard - Statistics
     class func saveDashBoardStatistics(studyId:String,statistics:Array<DashboardStatistics>){
         
         let realm = try! Realm()
@@ -803,29 +803,139 @@ class DBHandler: NSObject {
         
     }
     
+    //MARK:- Dashboard - Charts
+    class func saveDashBoardCharts(studyId:String,charts:Array<DashboardCharts>){
+        
+        let realm = try! Realm()
+        let dbChartsArray = realm.objects(DBCharts.self).filter({$0.studyId == studyId})// "studyId == %@",study?.studyId)
+        
+        
+        var dbChartsList:Array<DBCharts> = []
+        for chart in charts {
+            
+            var dbChart:DBCharts?
+            if dbChartsArray.count != 0 {
+                dbChart = dbChartsArray.filter({$0.activityId == chart.activityId!}).last!
+                
+                if dbChart == nil {
+                    
+                    dbChart = DBHandler.getDBChart(chart: chart)
+                    dbChartsList.append(dbChart!)
+                }
+                else {
+                    
+                    try! realm.write({
+                        
+                        dbChart?.activityId = chart.activityId
+                        dbChart?.activityVersion = chart.activityVersion
+                        dbChart?.chartType = chart.chartType
+                        dbChart?.chartSubType = chart.chartSubType
+                        dbChart?.dataSourceTimeRange = chart.dataSourceTimeRange
+                        dbChart?.dataSourceKey = chart.dataSourceKey
+                        dbChart?.dataSourceType = chart.dataSourceType
+                        dbChart?.displayName = chart.displayName
+                        dbChart?.title = chart.title
+                       
+                        dbChart?.studyId = chart.studyId
+                       
+                        
+                    })
+                    
+                }
+            }
+            else {
+                
+                dbChart = DBHandler.getDBChart(chart: chart)
+                dbChartsList.append(dbChart!)
+            }
+            
+        }
+        
+        
+        print("DBPath : \(realm.configuration.fileURL)")
+        if dbChartsList.count > 0 {
+            try! realm.write({
+                realm.add(dbChartsList, update: true)
+                
+            })
+        }
+    }
+    
+    private class func getDBChart(chart:DashboardCharts)->DBCharts{
+        
+        let dbChart = DBCharts()
+        dbChart.activityId = chart.activityId
+        dbChart.activityVersion = chart.activityVersion
+        dbChart.chartType = chart.chartType
+        dbChart.chartSubType = chart.chartSubType
+        dbChart.dataSourceTimeRange = chart.dataSourceTimeRange
+        dbChart.dataSourceKey = chart.dataSourceKey
+        dbChart.dataSourceType = chart.dataSourceType
+        dbChart.displayName = chart.displayName
+        dbChart.title = chart.title
+        
+        dbChart.studyId = chart.studyId
+        
+        dbChart.chartId = chart.studyId! + chart.title!
+        
+        return dbChart
+        
+    }
+    
+    class func loadChartsForStudy(studyId:String,completionHandler:@escaping (Array<DashboardCharts>) -> ()){
+        
+        let realm = try! Realm()
+        let dbChartList = realm.objects(DBCharts.self).filter("studyId == %@",studyId)
+        
+        var chartList:Array<DashboardCharts> = []
+        for dbChart in dbChartList {
+            
+            let chart = DashboardCharts()
+            chart.activityId =  dbChart.activityId
+            chart.activityVersion  = dbChart.activityVersion
+            chart.chartType = dbChart.chartType
+            chart.chartSubType = dbChart.chartSubType
+            chart.dataSourceTimeRange = dbChart.dataSourceTimeRange
+            chart.dataSourceKey = dbChart.dataSourceKey
+            chart.dataSourceType = dbChart.dataSourceType
+            chart.displayName = dbChart.displayName
+            chart.title = dbChart.title
+          
+            chart.studyId = dbChart.studyId
+           
+            chart.statList = dbChart.statisticsData
+            
+            chartList.append(chart)
+        }
+        completionHandler(chartList)
+    }
+    
     
     class func saveStatisticsDataFor(activityId:String,key:String,data:Float){
         
         let realm = try! Realm()
         let dbStatisticsList = realm.objects(DBStatistics.self).filter("activityId == %@ && dataSourceKey == %@",activityId,key)
         
-        if dbStatisticsList.count > 0 {
-            let dbStatistics = dbStatisticsList.last
-            
+        let dbChartsList = realm.objects(DBCharts.self).filter("activityId == %@ && dataSourceKey == %@",activityId,key)
+        
+        let dbStatistics = dbStatisticsList.last
+        let dbChart = dbChartsList.last
+        
+        //save data
+        let statData = DBStatisticsData()
+        statData.startDate = Date()
+        statData.data = data
+        
+        try! realm.write({
             if dbStatistics != nil {
-                
-                //save data
-                let statData = DBStatisticsData()
-                statData.startDate = Date()
-                statData.data = data
-                
-                try! realm.write({
-                    dbStatistics?.statisticsData.append(statData)
-                    
-                })
+                dbStatistics?.statisticsData.append(statData)
+            }
+            if dbChart != nil {
+                dbChart?.statisticsData.append(statData)
             }
             
-        }
+        })
+        
      }
     
     

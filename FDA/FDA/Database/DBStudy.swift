@@ -93,6 +93,37 @@ class DBStatistics : Object {
     }
     
 }
+class DBCharts :Object {
+    
+    //basic
+    dynamic  var chartId:String?
+    dynamic var studyId:String?
+    dynamic var title:String?
+    dynamic var displayName:String?
+    dynamic var chartType:String?
+    
+    //datasource
+    dynamic var activityId:String?
+    dynamic var activityVersion:String?
+    dynamic var dataSourceType:String?
+    dynamic var dataSourceKey:String?
+    dynamic var dataSourceTimeRange:String?
+    dynamic var startTime:Date?
+    dynamic var endTime:Date?
+    
+    
+    //settings
+    dynamic var barColor:String?
+    dynamic var numberOfPoints:Int = 0
+    dynamic var chartSubType:String?
+    
+    var statisticsData = List<DBStatisticsData>()
+    
+    override static func primaryKey() -> String? {
+        return "chartId"
+    }
+
+}
 class DBStatisticsData : Object {
     dynamic var startDate:Date?
     dynamic var data:Float = 0.0

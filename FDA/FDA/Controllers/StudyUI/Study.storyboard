@@ -715,11 +715,11 @@
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
                                 </userDefinedRuntimeAttributes>
                             </view>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="none" allowsSelection="NO" rowHeight="55" sectionHeaderHeight="1" sectionFooterHeight="10" translatesAutoresizingMaskIntoConstraints="NO" id="CGF-M8-TqW">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="none" rowHeight="55" sectionHeaderHeight="1" sectionFooterHeight="10" translatesAutoresizingMaskIntoConstraints="NO" id="CGF-M8-TqW">
                                 <rect key="frame" x="0.0" y="120" width="375" height="498"/>
                                 <color key="backgroundColor" red="0.84705882349999995" green="0.89019607840000003" blue="0.90196078430000004" alpha="1" colorSpace="calibratedRGB"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="welcomeCell" rowHeight="55" id="lRY-T3-IvM" customClass="StudyDashboardWelcomeTableViewCell" customModule="FDA" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="welcomeCell" rowHeight="55" id="lRY-T3-IvM" customClass="StudyDashboardWelcomeTableViewCell" customModule="FDA" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="56" width="375" height="55"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="lRY-T3-IvM" id="Yu2-RD-Ywx">
@@ -759,7 +759,7 @@
                                             <outlet property="labelStatus" destination="H3l-1i-Q8b" id="pQl-SB-PSi"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="studyActivityCell" rowHeight="160" id="MV1-Uf-i0F" customClass="StudyDashboardStudyActivitiesTableViewCell" customModule="FDA" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="studyActivityCell" rowHeight="160" id="MV1-Uf-i0F" customClass="StudyDashboardStudyActivitiesTableViewCell" customModule="FDA" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="111" width="375" height="160"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="MV1-Uf-i0F" id="otA-YI-kOt">
@@ -896,7 +896,7 @@
                                             <outlet property="labelTaskNumber" destination="88Q-qn-XXZ" id="57b-eQ-Ai2"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="percentageCell" rowHeight="70" id="xHx-3T-4Ix" customClass="StudyDashboardStudyPercentageTableViewCell" customModule="FDA" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="percentageCell" rowHeight="70" id="xHx-3T-4Ix" customClass="StudyDashboardStudyPercentageTableViewCell" customModule="FDA" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="271" width="375" height="70"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="xHx-3T-4Ix" id="prx-D2-EIC">
@@ -968,7 +968,7 @@
                                             <outlet property="labelStudyCompletion" destination="7z2-GP-epO" id="1PU-8u-9R6"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ActivityCell" rowHeight="130" id="g3a-Cw-qGa" customClass="StudyDashboardActivityTableViewCell" customModule="FDA" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="ActivityCell" rowHeight="130" id="g3a-Cw-qGa" customClass="StudyDashboardActivityTableViewCell" customModule="FDA" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="341" width="375" height="130"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="g3a-Cw-qGa" id="Ia5-mO-m5B">
@@ -1089,7 +1089,7 @@
                                             <outlet property="activityCollectionView" destination="72d-9h-t6c" id="W0U-aL-OjZ"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="StatisticsCell" rowHeight="210" id="CvQ-Hd-eDc" customClass="StudyDashboardStatisticsTableViewCell" customModule="FDA" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="StatisticsCell" rowHeight="210" id="CvQ-Hd-eDc" customClass="StudyDashboardStatisticsTableViewCell" customModule="FDA" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="471" width="375" height="210"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="CvQ-Hd-eDc" id="nM8-jf-Yku">
@@ -1200,7 +1200,7 @@
                                                     </collectionViewFlowLayout>
                                                     <cells>
                                                         <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="StatisticsCell" id="MZ5-Pr-Min" customClass="StudyDashboardStatisticsCollectionViewCell" customModule="FDA" customModuleProvider="target">
-                                                            <rect key="frame" x="0.0" y="14" width="125" height="110"/>
+                                                            <rect key="frame" x="0.0" y="13.5" width="125" height="110"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                                                 <rect key="frame" x="0.0" y="0.0" width="125" height="110"/>
@@ -1311,7 +1311,7 @@
                                             <outlet property="statisticsCollectionView" destination="I5p-FV-ltq" id="IhR-It-gey"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="trendCell" rowHeight="50" id="C7V-K2-Fb9" customClass="StudyDashboardTrendsTableViewCell" customModule="FDA" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="trendCell" rowHeight="50" id="C7V-K2-Fb9" customClass="StudyDashboardTrendsTableViewCell" customModule="FDA" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="681" width="375" height="50"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="C7V-K2-Fb9" id="lHu-ZI-fyS">
@@ -1371,16 +1371,154 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="KBN-qp-L97"/>
+                    <nil key="simulatedTopBarMetrics"/>
                     <connections>
                         <outlet property="labelStudyTitle" destination="TFh-y2-sZW" id="nVn-F1-dWU"/>
                         <outlet property="tableView" destination="CGF-M8-TqW" id="cLn-VA-rfv"/>
                         <segue destination="ulG-kV-I7n" kind="unwind" identifier="unwindToStudyListDashboardIdentifier" unwindAction="unwindToStudyList:" id="Xcl-BD-lVy"/>
+                        <segue destination="RJ6-Ms-tMk" kind="show" identifier="chartSegue" id="BlB-8h-Lt2"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cWU-7s-48r" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="ulG-kV-I7n" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="1213.5999999999999" y="4916.4917541229388"/>
+        </scene>
+        <!--Charts View Controller-->
+        <scene sceneID="p7B-Ej-abK">
+            <objects>
+                <viewController id="RJ6-Ms-tMk" customClass="ChartsViewController" customModule="FDA" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="zaY-64-ooN"/>
+                        <viewControllerLayoutGuide type="bottom" id="A3b-qg-tH3"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Wfj-yu-5v5">
+                        <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="184" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="EWq-lN-WeA">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="lineChart" rowHeight="265" id="efL-BG-Ieh" customClass="LineChartCell" customModule="FDA" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="265"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="efL-BG-Ieh" id="w0g-yn-hEC">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="264"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6Hk-K5-nZj" customClass="ORKLineGraphChartView">
+                                                    <rect key="frame" x="0.0" y="60" width="375" height="200"/>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                </view>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="khG-IT-3DU">
+                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="30"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ymm-EY-vQ9">
+                                                            <rect key="frame" x="15" y="0.0" width="345" height="30"/>
+                                                            <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="14"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="30" id="O3d-b5-MYS"/>
+                                                        <constraint firstItem="Ymm-EY-vQ9" firstAttribute="top" secondItem="khG-IT-3DU" secondAttribute="top" id="Q3b-Zn-RjT"/>
+                                                        <constraint firstAttribute="trailing" secondItem="Ymm-EY-vQ9" secondAttribute="trailing" constant="15" id="Y83-SQ-EIW"/>
+                                                        <constraint firstItem="Ymm-EY-vQ9" firstAttribute="leading" secondItem="khG-IT-3DU" secondAttribute="leading" constant="15" id="rIo-gY-uCc"/>
+                                                        <constraint firstAttribute="bottom" secondItem="Ymm-EY-vQ9" secondAttribute="bottom" id="vnG-wO-OKd"/>
+                                                    </constraints>
+                                                </view>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jVd-nn-6Gk">
+                                                    <rect key="frame" x="0.0" y="30" width="375" height="30"/>
+                                                    <subviews>
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="t9Q-NY-zVY">
+                                                            <rect key="frame" x="113" y="4" width="27" height="22"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="22" id="KeT-0X-hou"/>
+                                                                <constraint firstAttribute="width" constant="27" id="gZI-eZ-k8e"/>
+                                                            </constraints>
+                                                            <state key="normal" image="leftIconBlue"/>
+                                                            <connections>
+                                                                <action selector="buttonBackwardAction:" destination="efL-BG-Ieh" eventType="touchUpInside" id="xeG-L1-2dG"/>
+                                                            </connections>
+                                                        </button>
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ENw-Wv-v2u">
+                                                            <rect key="frame" x="236" y="4" width="27" height="22"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" constant="27" id="KyK-tq-42u"/>
+                                                                <constraint firstAttribute="height" constant="22" id="SwU-lk-1ti"/>
+                                                            </constraints>
+                                                            <state key="normal" image="rightIconBlue"/>
+                                                            <connections>
+                                                                <action selector="buttonForwardAction:" destination="efL-BG-Ieh" eventType="touchUpInside" id="2yx-TN-vv7"/>
+                                                            </connections>
+                                                        </button>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="10 May 2017" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cao-rB-R9F">
+                                                            <rect key="frame" x="148" y="6.5" width="80" height="17"/>
+                                                            <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="14"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <constraints>
+                                                        <constraint firstItem="t9Q-NY-zVY" firstAttribute="centerY" secondItem="jVd-nn-6Gk" secondAttribute="centerY" id="C6a-uC-3fw"/>
+                                                        <constraint firstItem="Cao-rB-R9F" firstAttribute="centerY" secondItem="jVd-nn-6Gk" secondAttribute="centerY" id="Ewo-JI-LFf"/>
+                                                        <constraint firstItem="ENw-Wv-v2u" firstAttribute="leading" secondItem="Cao-rB-R9F" secondAttribute="trailing" constant="8" id="N3B-E0-yZS"/>
+                                                        <constraint firstAttribute="height" constant="30" id="Qd2-fz-8NY"/>
+                                                        <constraint firstItem="ENw-Wv-v2u" firstAttribute="centerY" secondItem="jVd-nn-6Gk" secondAttribute="centerY" id="ZfM-Rf-1xW"/>
+                                                        <constraint firstItem="Cao-rB-R9F" firstAttribute="leading" secondItem="t9Q-NY-zVY" secondAttribute="trailing" constant="8" id="Zoo-qL-uh4"/>
+                                                        <constraint firstItem="Cao-rB-R9F" firstAttribute="centerX" secondItem="jVd-nn-6Gk" secondAttribute="centerX" id="aVy-VD-wM5"/>
+                                                    </constraints>
+                                                </view>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="khG-IT-3DU" firstAttribute="top" secondItem="w0g-yn-hEC" secondAttribute="top" id="JlS-ye-Rdn"/>
+                                                <constraint firstAttribute="bottom" secondItem="6Hk-K5-nZj" secondAttribute="bottom" constant="5" id="Q02-Ga-Fe5"/>
+                                                <constraint firstItem="jVd-nn-6Gk" firstAttribute="leading" secondItem="w0g-yn-hEC" secondAttribute="leading" id="ZWM-mh-DjE"/>
+                                                <constraint firstAttribute="trailing" secondItem="6Hk-K5-nZj" secondAttribute="trailing" id="cMI-xv-GlL"/>
+                                                <constraint firstItem="6Hk-K5-nZj" firstAttribute="top" secondItem="jVd-nn-6Gk" secondAttribute="bottom" id="eIH-eo-nib"/>
+                                                <constraint firstItem="khG-IT-3DU" firstAttribute="leading" secondItem="w0g-yn-hEC" secondAttribute="leading" id="gax-vN-XOM"/>
+                                                <constraint firstItem="6Hk-K5-nZj" firstAttribute="leading" secondItem="w0g-yn-hEC" secondAttribute="leading" id="iDO-v6-nAP"/>
+                                                <constraint firstAttribute="trailing" secondItem="khG-IT-3DU" secondAttribute="trailing" id="kIk-Bu-Zb1"/>
+                                                <constraint firstItem="jVd-nn-6Gk" firstAttribute="top" secondItem="khG-IT-3DU" secondAttribute="bottom" id="ybI-8y-7bN"/>
+                                                <constraint firstAttribute="trailing" secondItem="jVd-nn-6Gk" secondAttribute="trailing" id="yhd-wp-UGP"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="buttonBackward" destination="t9Q-NY-zVY" id="wSw-c5-PM1"/>
+                                            <outlet property="buttonForward" destination="ENw-Wv-v2u" id="TZF-EP-n7X"/>
+                                            <outlet property="graphView" destination="6Hk-K5-nZj" id="AFG-vv-fj5"/>
+                                            <outlet property="labelAxisValue" destination="Cao-rB-R9F" id="1Gu-cu-N3C"/>
+                                            <outlet property="labelTitle" destination="Ymm-EY-vQ9" id="XB7-g2-fUN"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="RJ6-Ms-tMk" id="VOF-QO-g4v"/>
+                                    <outlet property="delegate" destination="RJ6-Ms-tMk" id="yKE-hX-Iwh"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="A3b-qg-tH3" firstAttribute="top" secondItem="EWq-lN-WeA" secondAttribute="bottom" id="0vG-OR-dHG"/>
+                            <constraint firstItem="EWq-lN-WeA" firstAttribute="top" secondItem="zaY-64-ooN" secondAttribute="bottom" id="1cF-Ha-JsS"/>
+                            <constraint firstAttribute="trailing" secondItem="EWq-lN-WeA" secondAttribute="trailing" id="IUg-xi-LHt"/>
+                            <constraint firstItem="EWq-lN-WeA" firstAttribute="leading" secondItem="Wfj-yu-5v5" secondAttribute="leading" id="MLa-py-hS8"/>
+                        </constraints>
+                    </view>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
+                    <nil key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="tableView" destination="EWq-lN-WeA" id="qTe-EN-22N"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="scU-r2-9tu" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1968.8" y="4915.5922038980516"/>
         </scene>
         <!--Activities View Controller-->
         <scene sceneID="wV6-gf-Owr">
@@ -1688,8 +1826,8 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </tabBar>
                     <connections>
-                        <segue destination="WeL-we-HZg" kind="relationship" relationship="viewControllers" id="ysa-xf-fht"/>
                         <segue destination="Bo9-MW-c6d" kind="relationship" relationship="viewControllers" id="ZpZ-IA-7s3"/>
+                        <segue destination="WeL-we-HZg" kind="relationship" relationship="viewControllers" id="ysa-xf-fht"/>
                         <segue destination="7GU-Nx-I7D" kind="relationship" relationship="viewControllers" id="Ujz-XY-bwE"/>
                     </connections>
                 </tabBarController>
@@ -1738,11 +1876,11 @@
         <!--Dashboard-->
         <scene sceneID="JhW-w6-LJS">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="WeL-we-HZg" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="WeL-we-HZg" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Dashboard" image="dashboardActive" id="arR-Sy-PnO"/>
                     <toolbarItems/>
-                    <nil key="simulatedTopBarMetrics"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="U2D-mI-xcD">
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="U2D-mI-xcD">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>

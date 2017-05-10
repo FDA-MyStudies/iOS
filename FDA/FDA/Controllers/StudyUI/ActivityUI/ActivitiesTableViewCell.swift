@@ -335,7 +335,7 @@ class ActivitiesTableViewCell: UITableViewCell {
 
     private static let timeFormatter: DateFormatter = {
         let formatter = DateFormatter()
-        formatter.dateFormat = "hha"
+        formatter.dateFormat = "hh:mma"
         formatter.timeZone = TimeZone.init(abbreviation:"GMT")
         return formatter
     }()

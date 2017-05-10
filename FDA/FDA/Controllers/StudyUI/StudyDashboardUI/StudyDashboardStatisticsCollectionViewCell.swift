@@ -25,7 +25,7 @@ class StudyDashboardStatisticsCollectionViewCell: UICollectionViewCell {
      */
     func displayStatisics(data : DashboardStatistics){
         
-        labelStatisticsText?.text = data.title
+        labelStatisticsText?.text = data.displayName
         let array = data.statList.map{$0.data}
         
         if  data.calculation! == StatisticsFormula.Maximum.rawValue {

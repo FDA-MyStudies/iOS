@@ -93,10 +93,12 @@ class StudyHomeViewController : UIViewController{
             
             if Utilities.isValidValue(someObject: Study.currentStudy?.overview.websiteLink as AnyObject? ){
                 buttonVisitWebsite?.isHidden = false
-                visitWebsiteButtonLeadingConstraint?.constant = 0.0
+                visitWebsiteButtonLeadingConstraint?.constant = -184
                 self.view.layoutIfNeeded()
+                buttonVisitWebsite?.layoutIfNeeded()
+                
                 buttonJoinStudy?.isHidden = true
-               // buttonVisitWebsite?.backgroundColor = UIColor.red
+                //buttonVisitWebsite?.backgroundColor = UIColor.red
                 
                  // visitWebsiteButtonTrailingConstraint?.constant =
                 
@@ -105,7 +107,13 @@ class StudyHomeViewController : UIViewController{
                 buttonViewConsent?.isHidden = true
             }
             else{
-                 buttonVisitWebsite?.isHidden =  true
+                 buttonVisitWebsite?.isHidden =  false
+                buttonVisitWebsite?.isUserInteractionEnabled =  false
+                
+                
+                buttonJoinStudy?.isHidden = true
+                viewSeperater?.isHidden = true
+                buttonViewConsent?.isHidden = true
             }
         }
     }

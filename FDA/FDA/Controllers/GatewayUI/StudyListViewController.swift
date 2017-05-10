@@ -404,7 +404,7 @@ extension StudyListViewController :  UITableViewDelegate {
                 
                 let userStudyStatus =  (Study.currentStudy?.userParticipateState.status)!
                 
-                if userStudyStatus == .completed || userStudyStatus == .inProgress || userStudyStatus == .yetToJoin{
+                if userStudyStatus == .completed || userStudyStatus == .inProgress {
                     //self.pushToStudyDashboard()
                     // check if study version is udpated
                     if(study?.version != study?.newVersion){

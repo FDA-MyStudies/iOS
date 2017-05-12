@@ -286,6 +286,11 @@ class ProfileViewController: UIViewController {
             ORKPasscodeViewController.removePasscodeFromKeychain()
         }
         
+        let ud = UserDefaults.standard
+        ud.set(false, forKey: kPasscodeIsPending)
+        ud.synchronize()
+        
+        
         //fdaSlideMenuController()?.navigateToHomeAfterSingout()
         let leftController = slideMenuController()?.leftViewController as! LeftMenuViewController
         leftController.changeViewController(.studyList)
@@ -459,7 +464,7 @@ class ProfileViewController: UIViewController {
                 let task = ORKOrderedTask(identifier: "PassCodeTask", steps: [passcodeStep])
                 let taskViewController = ORKTaskViewController.init(task: task, taskRun: nil)
                 taskViewController.delegate = self
-               
+                taskViewController.isNavigationBarHidden = true
                 self.navigationController?.present(taskViewController, animated: false, completion: nil)
             }
             else{

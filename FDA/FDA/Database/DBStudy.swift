@@ -33,9 +33,14 @@ class DBStudy: Object {
     dynamic var enrolling : Bool = false
     dynamic var platform:String?
     dynamic var rejoin : Bool = false
-    dynamic var participatedStatus:Int = 0
+    
     dynamic var signedConsentVersion:String?
     dynamic var signedConsentFilePath:String?
+    
+    //study state info
+    dynamic var participatedStatus:Int = 0
+    dynamic var participatedId:String?
+    dynamic var joiningDate:Date?
     
     //anchor date values
     dynamic var anchorDate:Date?

@@ -168,7 +168,8 @@ class DBHandler: NSObject {
         dbStudy.platform = study.studySettings.platform
         dbStudy.status = study.status.rawValue
         dbStudy.participatedStatus = study.userParticipateState.status.rawValue
-        
+        dbStudy.participatedId = study.userParticipateState.participantId
+        dbStudy.joiningDate = study.userParticipateState.joiningDate
         return dbStudy
         
     }
@@ -212,6 +213,7 @@ class DBHandler: NSObject {
             participatedStatus.status = UserStudyStatus.StudyStatus(rawValue:dbStudy.participatedStatus)!
             participatedStatus.bookmarked = dbStudy.bookmarked
             participatedStatus.studyId = dbStudy.studyId
+            participatedStatus.participantId = dbStudy.participatedId
             
             study.userParticipateState = participatedStatus
             
@@ -398,6 +400,9 @@ class DBHandler: NSObject {
         try! realm.write({
             
              dbStudy?.participatedStatus = study.userParticipateState.status.rawValue
+             dbStudy?.participatedId = study.userParticipateState.participantId
+            dbStudy?.joiningDate = study.userParticipateState.joiningDate
+            
             
         })
         

@@ -28,6 +28,8 @@ let kStudySettings = "settings"
 let kStudyEnrolling = "enrolling"
 let kStudyPlatform = "platform"
 let kStudyRejoin = "rejoin"
+let kStudyParticipantId = "participantId"
+let kStudyEnrolledDate = "enrolledDate"
 
 //resources
 let kResources = "resources"

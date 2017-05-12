@@ -503,14 +503,30 @@ extension StudyHomeViewController:NMWebServiceDelegate {
         
         if requestName as String == ResponseMethods.enroll.description {
             
-            self.addProgressIndicator()
             
-            let currentUserStudyStatus =  User.currentUser.updateStudyStatus(studyId:(Study.currentStudy?.studyId)!  , status: .inProgress)
-            Study.currentStudy?.userParticipateState = currentUserStudyStatus
-            DBHandler.updateStudyParticipationStatus(study: Study.currentStudy!)
+            if Utilities.isValidObject(someObject: response){
+                let tokenDict = response?["data"] as! Dictionary<String,Any>
+                if Utilities.isValidObject(someObject: tokenDict as AnyObject?){
+                    let apptoken = tokenDict["appToken"] as! String
+                    
+                    self.addProgressIndicator()
+                    
+                    //update token
+                    let currentUserStudyStatus =  User.currentUser.updateStudyStatus(studyId:(Study.currentStudy?.studyId)!  , status: .inProgress)
+                    currentUserStudyStatus.participantId = apptoken
+                    Study.currentStudy?.userParticipateState = currentUserStudyStatus
+                    
+                    
+                    DBHandler.updateStudyParticipationStatus(study: Study.currentStudy!)
+                    
+                    ConsentBuilder.currentConsent?.consentStatus = .completed
+                    UserServices().updateUserParticipatedStatus(studyStauts: currentUserStudyStatus, delegate: self)
+                }
+            }
             
-            ConsentBuilder.currentConsent?.consentStatus = .completed
-            UserServices().updateUserParticipatedStatus(studyStauts: currentUserStudyStatus, delegate: self)
+           
+           
+            
         }
         
         

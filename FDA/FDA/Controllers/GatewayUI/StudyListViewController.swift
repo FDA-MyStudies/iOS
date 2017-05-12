@@ -12,6 +12,7 @@ class StudyListViewController: UIViewController {
     
     @IBOutlet var tableView:UITableView?
     @IBOutlet var labelHelperText:UILabel!
+    var studyListRequestFailed = false
     
     
 //MARK:- Viewcontroller lifecycle
@@ -218,7 +219,23 @@ class StudyListViewController: UIViewController {
                 self.tableView?.reloadData()
             }
             else {
-                self.sendRequestToGetStudyList()
+                if !self.studyListRequestFailed {
+                    
+                    self.labelHelperText.isHidden = true
+                    self.tableView?.isHidden = false
+                    self.studyListRequestFailed = false
+                    
+                    self.sendRequestToGetStudyList()
+                }
+                else {
+                    self.tableView?.isHidden = true
+                    self.labelHelperText.isHidden = false
+                   
+                    
+                }
+                
+                
+                
             }
         }
     }
@@ -362,6 +379,8 @@ class StudyListViewController: UIViewController {
      */
     func handleStudyListResponse(){
         
+        
+        
         if (Gateway.instance.studies?.count)! > 0{
             self.loadStudiesFromDatabase()
             self.labelHelperText.isHidden = true
@@ -428,9 +447,9 @@ extension StudyListViewController :  UITableViewDelegate {
                 
                 let userStudyStatus =  (Study.currentStudy?.userParticipateState.status)!
                 
-                if userStudyStatus == .completed || userStudyStatus == .inProgress {
-                    //|| userStudyStatus == .yetToJoin
+                if userStudyStatus == .completed || userStudyStatus == .inProgress
                     
+                        {
                     //self.pushToStudyDashboard()
                     // check if study version is udpated
                     if(study?.version != study?.newVersion){
@@ -538,6 +557,15 @@ extension StudyListViewController:NMWebServiceDelegate {
             })
         }
         else {
+            
+            if (requestName as String == RegistrationMethods.studyState.description){
+                self.sendRequestToGetStudyList()
+            }
+            else if requestName as String == WCPMethods.studyList.rawValue{
+                studyListRequestFailed = true
+                self.loadStudiesFromDatabase()
+                
+            }
             
             UIUtilities.showAlertWithTitleAndMessage(title:NSLocalizedString(kErrorTitle, comment: "") as NSString, message: error.localizedDescription as NSString)
         }

@@ -21,7 +21,7 @@ let kResourceLevel = "level"
 let kResourceKey = "key"
 let kResourceType = "type"
 let kResourceFile = "file"
-let kResourceConfigration = "configration"
+let kResourceConfigration = "availability"
 let kResourceTitle = "title"
 
 
@@ -33,6 +33,10 @@ class Resource{
     var audience:Audience?
     var resourcesId:String?
     var configration:Dictionary<String, Any>?
+    var startDate:Date?
+    var endDate:Date?
+    var anchorDateStartDays:Int!
+    var anchorDateEndDays:Int!
     var title:String?
     
     init() {
@@ -61,7 +65,18 @@ class Resource{
                 self.file?.setFile(dict: detail[kResourceFile] as! NSDictionary)
             }
             if (Utilities.isValidObject(someObject: detail[kResourceConfigration] as AnyObject)) {
-                self.configration = detail[kResourceConfigration] as? Dictionary
+                let configuration = detail[kResourceConfigration] as! Dictionary<String,Any>
+                
+                if (Utilities.isValidValue(someObject: (configuration["availableDate"]) as AnyObject)) {
+                    self.startDate = Utilities.getDateFromStringWithFormat("YYYY-MM-dd", resultDate: configuration["availableDate"] as! String)
+                }
+                if (Utilities.isValidValue(someObject: (configuration["expiryDate"]) as AnyObject)) {
+                    self.startDate = Utilities.getDateFromStringWithFormat("YYYY-MM-dd", resultDate: configuration["expiryDate"] as! String)
+                }
+                
+                self.anchorDateStartDays = configuration["startDays"] as! Int
+                self.anchorDateEndDays = configuration["endDays"] as! Int
+                
             }
             
             if (Utilities.isValidValue(someObject: (detail[kResourceTitle]) as AnyObject)) {
@@ -109,7 +124,18 @@ class Resource{
             
             
             if (Utilities.isValidObject(someObject: dict[kResourceConfigration] as AnyObject)) {
-                self.configration = dict[kResourceConfigration] as? Dictionary
+                let configuration = dict[kResourceConfigration] as! Dictionary<String,Any>
+                
+                if (Utilities.isValidValue(someObject: (configuration["availableDate"]) as AnyObject)) {
+                    self.startDate = Utilities.getDateFromStringWithFormat("YYYY-MM-dd", resultDate: configuration["availableDate"] as! String)
+                }
+                if (Utilities.isValidValue(someObject: (configuration["expiryDate"]) as AnyObject)) {
+                    self.endDate = Utilities.getDateFromStringWithFormat("YYYY-MM-dd", resultDate: configuration["expiryDate"] as! String)
+                }
+                
+                self.anchorDateStartDays = configuration["startDays"] as! Int
+                self.anchorDateEndDays = configuration["endDays"] as! Int
+                
             }
             if (Utilities.isValidValue(someObject: (dict[kResourceTitle]) as AnyObject)) {
                 self.title = dict[kResourceTitle] as? String

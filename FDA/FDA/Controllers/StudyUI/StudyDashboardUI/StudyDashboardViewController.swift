@@ -11,7 +11,7 @@ import UIKit
 
 enum TableViewCells: Int {
     case welcomeCell = 0
-    case studyActivityCell
+    //case studyActivityCell
     case percentageCell
 }
 
@@ -180,11 +180,9 @@ extension StudyDashboardViewController : UITableViewDataSource {
             //Used for Table view Height in a cell
             switch indexPath.section {
             case TableViewCells.welcomeCell.rawValue:
-                heightValue = 55
-            case TableViewCells.studyActivityCell.rawValue:
-                heightValue = 160
-            case TableViewCells.percentageCell.rawValue:
                 heightValue = 70
+            case TableViewCells.percentageCell.rawValue:
+                heightValue = 200
             default:
                 return 0
             }
@@ -221,9 +219,9 @@ extension StudyDashboardViewController : UITableViewDataSource {
                 cell = tableView.dequeueReusableCell(withIdentifier: kWelcomeTableViewCell, for: indexPath) as! StudyDashboardWelcomeTableViewCell
                 (cell as! StudyDashboardWelcomeTableViewCell).displayFirstCelldata(data: tableViewData)
                 
-            case TableViewCells.studyActivityCell.rawValue:
-                cell = tableView.dequeueReusableCell(withIdentifier: kStudyActivityTableViewCell, for: indexPath) as! StudyDashboardStudyActivitiesTableViewCell
-                (cell as! StudyDashboardStudyActivitiesTableViewCell).displaySecondCelldata(data: tableViewData)
+//            case TableViewCells.studyActivityCell.rawValue:
+//                cell = tableView.dequeueReusableCell(withIdentifier: kStudyActivityTableViewCell, for: indexPath) as! StudyDashboardStudyActivitiesTableViewCell
+//                (cell as! StudyDashboardStudyActivitiesTableViewCell).displaySecondCelldata(data: tableViewData)
                 
             case TableViewCells.percentageCell.rawValue:
                 cell = tableView.dequeueReusableCell(withIdentifier: kPercentageTableViewCell, for: indexPath) as! StudyDashboardStudyPercentageTableViewCell
@@ -236,14 +234,14 @@ extension StudyDashboardViewController : UITableViewDataSource {
         }else{
             
             //Used for Collection View cell
-            if tableViewData["isStudy"] as! String == "YES"{
+           // if tableViewData["isStudy"] as! String == "YES"{
                 
-                cell = tableView.dequeueReusableCell(withIdentifier: kActivityTableViewCell, for: indexPath) as! StudyDashboardActivityTableViewCell
-                (cell as! StudyDashboardActivityTableViewCell).activityArrayData = todayActivitiesArray
-                (cell as! StudyDashboardActivityTableViewCell).activityCollectionView?.reloadData()
-            }
+             //   cell = tableView.dequeueReusableCell(withIdentifier: kActivityTableViewCell, for: indexPath) as! StudyDashboardActivityTableViewCell
+            //    (cell as! StudyDashboardActivityTableViewCell).activityArrayData = todayActivitiesArray
+            //    (cell as! StudyDashboardActivityTableViewCell).activityCollectionView?.reloadData()
+            //}
                 
-            else if tableViewData["isStudy"] as! String == "NO"{
+            //else if tableViewData["isStudy"] as! String == "NO"{
                 
                 cell = tableView.dequeueReusableCell(withIdentifier: kStatisticsTableViewCell, for: indexPath) as! StudyDashboardStatisticsTableViewCell
                // (cell as! StudyDashboardStatisticsTableViewCell).statisticsArrayData = statisticsArray
@@ -254,7 +252,7 @@ extension StudyDashboardViewController : UITableViewDataSource {
                 (cell as! StudyDashboardStatisticsTableViewCell).buttonDay?.setTitle("  DAY  ", for: UIControlState.normal)
                 
                 (cell as! StudyDashboardStatisticsTableViewCell).statisticsCollectionView?.reloadData()
-            }
+            //}
         }
         return cell!
     }

@@ -1103,4 +1103,15 @@ class DBHandler: NSObject {
         })
     }
     
+    
+    
+    //MARK:- DELETE
+    class func deleteAll(){
+        
+        let realm = try! Realm()
+        try! realm.write {
+            realm.deleteAll()
+        }
+    }
+    
 }

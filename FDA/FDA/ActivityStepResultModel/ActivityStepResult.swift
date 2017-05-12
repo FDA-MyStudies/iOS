@@ -501,7 +501,9 @@ class ActivityStepResult{
             
             let stepTypeResult = questionstepResult as! ORKTimeOfDayQuestionResult
             
-            if (stepTypeResult.dateComponentsAnswer?.isValidDate)!{
+            
+            
+            if stepTypeResult.dateComponentsAnswer != nil && (stepTypeResult.dateComponentsAnswer?.isValidDate)!{
                 self.value =  "\(stepTypeResult.dateComponentsAnswer?.hour)" + ":" + "\(stepTypeResult.dateComponentsAnswer?.minute)" + ":" + "\(stepTypeResult.dateComponentsAnswer?.second)"
             }
             else{
@@ -555,7 +557,7 @@ class ActivityStepResult{
         case ORKQuestionType.location.rawValue:
             let stepTypeResult = questionstepResult as! ORKLocationQuestionResult
             
-            if CLLocationCoordinate2DIsValid((stepTypeResult.locationAnswer?.coordinate)! ){
+            if stepTypeResult.locationAnswer != nil && CLLocationCoordinate2DIsValid((stepTypeResult.locationAnswer?.coordinate)! ){
                 self.value = "\(stepTypeResult.locationAnswer?.coordinate.latitude)" + "," + "\(stepTypeResult.locationAnswer?.coordinate.longitude)"
             }
             else{

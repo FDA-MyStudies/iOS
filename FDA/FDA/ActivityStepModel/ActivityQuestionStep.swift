@@ -328,14 +328,19 @@ class ActivityQuestionStep: ActivityStep {
                     &&  Utilities.isValidValue(someObject:formatDict?[kStepQuestionContinuosScaleMinValue] as AnyObject?)
                     &&  Utilities.isValidValue(someObject:formatDict?[kStepQuestionContinuosScaleDefaultValue] as AnyObject?)
                     &&  Utilities.isValidValue(someObject:formatDict?[kStepQuestionContinuosScaleMaxFractionDigits] as AnyObject?)
-                    && formatDict?[kStepQuestionContinuosScaleVertical] != nil && formatDict?[kStepQuestionContinuosScaleMaxDesc] != nil
-                    &&  Utilities.isValidValue(someObject:formatDict?[kStepQuestionScaleMinDesc] as AnyObject?){
+                    && formatDict?[kStepQuestionContinuosScaleVertical] != nil
+                    //&& formatDict?[kStepQuestionContinuosScaleMaxDesc] != nil
+                    //&&  Utilities.isValidValue(someObject:formatDict?[kStepQuestionScaleMinDesc] as AnyObject?)
+                {
+                    
+                    let maxDesc = formatDict?[kStepQuestionContinuosScaleMaxDesc] as? String
+                    let minDesc = formatDict?[kStepQuestionContinuosScaleMaxDesc] as? String
                     
                     questionStepAnswerFormat = ORKAnswerFormat.continuousScale(withMaximumValue: (formatDict?[kStepQuestionContinuosScaleMaxValue] as? Double)!,
                                                                                minimumValue: (formatDict?[kStepQuestionContinuosScaleMinValue] as? Double)!, defaultValue: (formatDict?[kStepQuestionContinuosScaleDefaultValue] as? Double)!, maximumFractionDigits: (formatDict?[kStepQuestionContinuosScaleMaxFractionDigits] as? Int)!,
                                                                                vertical: (formatDict?[kStepQuestionContinuosScaleVertical] as? Bool)!,
-                                                                               maximumValueDescription: (formatDict?[kStepQuestionContinuosScaleMaxDesc] as? String)!,
-                                                                               minimumValueDescription: (formatDict?[kStepQuestionScaleMinDesc] as? String)!)
+                                                                               maximumValueDescription:maxDesc,
+                                                                               minimumValueDescription: minDesc)
                     
                     
                     

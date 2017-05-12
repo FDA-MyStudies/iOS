@@ -31,6 +31,7 @@ let kFetalKickCounterTaskIdentifier = "FetalKickCounterTask"
 class FetalKickCounterTask {
     
     var duration:Float?       // task run time
+    var identifier:String?
     var steps:[ORKStep]?    // steps involved in fetal kick
     
     /*
@@ -38,6 +39,7 @@ class FetalKickCounterTask {
      */
     init() {
         self.steps =  [ORKStep]()
+        self.identifier = kFetalKickCounterStepIdentifier
         self.duration = 0
     }
     
@@ -46,8 +48,9 @@ class FetalKickCounterTask {
      Initalizer method to create instance
      @param duration    is task run time in hours
      */
-    func initWithFormatDuration(duration:Float)  {
+    func initWithFormatDuration(duration:Float,identifier:String)  {
         
+        self.identifier = identifier
         self.steps =  [ORKStep]()
         if duration > 0.0{
             self.duration = duration
@@ -92,7 +95,7 @@ class FetalKickCounterTask {
         introductionStep.text = NSLocalizedString(kFetalKickInstructionStepText, comment: "")
         
         //create a Fetal Kick Counter Step
-        let kickStep = FetalKickCounterStep(identifier: kFetalKickCounterStepIdentifier)
+        let kickStep = FetalKickCounterStep(identifier: self.identifier!)
         kickStep.counDownTimer = Int(self.duration! * 60)
         
         

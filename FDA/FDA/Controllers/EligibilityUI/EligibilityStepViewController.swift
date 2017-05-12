@@ -8,6 +8,7 @@
 
 import UIKit
 import ResearchKit
+import IQKeyboardManagerSwift
 
 class EligibilityStep: ORKStep {
     var type:String?
@@ -49,6 +50,8 @@ class EligibilityStepViewController: ORKStepViewController {
             
            
         }
+        
+        IQKeyboardManager.sharedManager().enable = true
     }
     
     

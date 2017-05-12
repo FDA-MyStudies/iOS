@@ -16,7 +16,7 @@ class SignUpCompleteViewController : UIViewController{
     var shouldCreateMenu:Bool = true
     
     
-//MARK:- ViewController Lifecycle
+    //MARK:- ViewController Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -24,6 +24,17 @@ class SignUpCompleteViewController : UIViewController{
         buttonNext?.layer.borderColor = kUicolorForButtonBackground
         self.title = NSLocalizedString("", comment: "")
         
+        
+        let settings:Settings? = Settings.init()
+        
+        settings?.remoteNotifications = false
+        settings?.localNotifications = false
+        settings?.touchId = true
+        settings?.passcode = true
+        
+        User.currentUser.settings = settings
+        
+        UserServices().updateUserProfile(self as NMWebServiceDelegate)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -42,9 +53,9 @@ class SignUpCompleteViewController : UIViewController{
         //hide navigationbar
         self.navigationController?.setNavigationBarHidden(true, animated: true)
     }
-
     
-//MARK:- button Actions
+    
+    //MARK:- button Actions
     
     /**
      
@@ -58,12 +69,12 @@ class SignUpCompleteViewController : UIViewController{
     }
     
     
-//MARK:- Utility Methods
+    //MARK:- Utility Methods
     
     /**
      
      Used to Navigate StudyList after completion
-    
+     
      */
     func navigateToGatewayDashboard(){
         if shouldCreateMenu {
@@ -80,7 +91,7 @@ class SignUpCompleteViewController : UIViewController{
     /**
      
      Method to Create Menu View after completion
-    
+     
      */
     func createMenuView() {
         let storyboard = UIStoryboard(name: "Gateway", bundle: nil)
@@ -88,6 +99,41 @@ class SignUpCompleteViewController : UIViewController{
         let fda = storyboard.instantiateViewController(withIdentifier: "FDASlideMenuViewController") as! FDASlideMenuViewController
         fda.automaticallyAdjustsScrollViewInsets = true
         self.navigationController?.pushViewController(fda, animated: true)
+    }
+}
+
+
+
+//MARK:- UserService Response handler
+extension SignUpCompleteViewController:NMWebServiceDelegate {
+    
+    func startedRequest(_ manager: NetworkManager, requestName: NSString) {
+        Logger.sharedInstance.info("requestname : \(requestName)")
+        self.addProgressIndicator()
+    }
+    
+    func finishedRequest(_ manager: NetworkManager, requestName: NSString, response: AnyObject?) {
+        Logger.sharedInstance.info("requestname : \(requestName)")
+        
+        self.removeProgressIndicator()
+        if requestName as String ==  RegistrationMethods.updateUserProfile.description {
+            
+            DBHandler.saveUserSettingsToDatabase()
+            
+            let appDelegate = UIApplication.shared.delegate as! AppDelegate
+            appDelegate.checkPasscode(viewController: self.navigationController!)
+
+            
+            
+            
+        }
+    }
+    
+    func failedRequest(_ manager: NetworkManager, requestName: NSString, error: NSError) {
+        Logger.sharedInstance.info("requestname : \(requestName)")
+        self.removeProgressIndicator()
+        
+        UIUtilities.showAlertWithTitleAndMessage(title:NSLocalizedString(kErrorTitle, comment: "") as NSString, message: error.localizedDescription as NSString)
     }
 }
 

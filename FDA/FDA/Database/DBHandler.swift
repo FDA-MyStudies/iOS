@@ -130,6 +130,8 @@ class DBHandler: NSObject {
                     dbStudy?.participatedStatus = study.userParticipateState.status.rawValue
                     dbStudy?.participatedId = study.userParticipateState.participantId
                     dbStudy?.joiningDate = study.userParticipateState.joiningDate
+                    dbStudy?.completion = study.userParticipateState.completion
+                    dbStudy?.adherence = study.userParticipateState.adherence
                     
                     if dbStudy?.participatedStatus == UserStudyStatus.StudyStatus.inProgress.rawValue {
                         dbStudy?.updatedVersion = study.version
@@ -173,7 +175,8 @@ class DBHandler: NSObject {
         dbStudy.participatedStatus = study.userParticipateState.status.rawValue
         dbStudy.participatedId = study.userParticipateState.participantId
         dbStudy.joiningDate = study.userParticipateState.joiningDate
-        
+        dbStudy.completion = study.userParticipateState.completion
+        dbStudy.adherence = study.userParticipateState.adherence
         dbStudy.withdrawalConfigrationMessage = study.withdrawalConfigration?.message
         dbStudy.withdrawalConfigrationType = study.withdrawalConfigration?.type?.rawValue
         
@@ -221,6 +224,9 @@ class DBHandler: NSObject {
             participatedStatus.bookmarked = dbStudy.bookmarked
             participatedStatus.studyId = dbStudy.studyId
             participatedStatus.participantId = dbStudy.participatedId
+            participatedStatus.adherence = dbStudy.adherence
+            participatedStatus.completion = dbStudy.completion
+            participatedStatus.joiningDate = dbStudy.joiningDate
             
             study.userParticipateState = participatedStatus
             
@@ -501,6 +507,9 @@ class DBHandler: NSObject {
                         dbActivity?.version = activity.version
                         dbActivity?.branching = activity.branching!
                         dbActivity?.frequencyType = activity.frequencyType.rawValue
+                        dbActivity?.currentRunId = activity.userParticipationStatus.activityRunId
+                        dbActivity?.participationStatus = activity.userParticipationStatus.status.rawValue
+
                         do {
                             let json = ["data":activity.frequencyRuns]
                             let data =  try JSONSerialization.data(withJSONObject: json, options: JSONSerialization.WritingOptions.prettyPrinted)
@@ -547,6 +556,8 @@ class DBHandler: NSObject {
         dbActivity.version = activity.version
         dbActivity.branching = activity.branching!
         dbActivity.frequencyType = activity.frequencyType.rawValue
+        dbActivity.currentRunId = activity.userParticipationStatus.activityRunId
+        dbActivity.participationStatus = activity.userParticipationStatus.status.rawValue
         do {
             let json = ["data":activity.frequencyRuns]
             let data =  try JSONSerialization.data(withJSONObject: json, options: JSONSerialization.WritingOptions.prettyPrinted)
@@ -623,6 +634,15 @@ class DBHandler: NSObject {
             catch{
                 
             }
+            
+            let userStatus = UserActivityStatus()
+            userStatus.activityId = dbActivity.actvityId
+            userStatus.activityRunId = dbActivity.currentRunId!
+            userStatus.status = UserActivityStatus.ActivityStatus(rawValue:dbActivity.participationStatus)!
+            activity.userParticipationStatus = userStatus
+            
+            //append to user class participatesStudies also
+            User.currentUser.participatedActivites.append(userStatus)
             
             print("Database \(activity.totalRuns)")
             
@@ -764,6 +784,29 @@ class DBHandler: NSObject {
         })
         
     }
+    
+    class func updateActivityParticipationStatus(activity:Activity){
+        
+        let realm = try! Realm()
+        let studies =  realm.objects(DBActivity.self).filter({$0.actvityId == activity.actvityId && $0.studyId == activity.studyId})
+        let dbActivity = studies.last
+        
+        try! realm.write({
+            
+            dbActivity?.currentRunId = activity.userParticipationStatus.activityRunId
+            dbActivity?.participationStatus = activity.userParticipationStatus.status.rawValue
+            
+//            dbStudy?.participatedStatus = study.userParticipateState.status.rawValue
+//            dbStudy?.participatedId = study.userParticipateState.participantId
+//            dbStudy?.joiningDate = study.userParticipateState.joiningDate
+            
+            
+        })
+        
+        
+        
+    }
+    
     //MARK:-  Activity MetaData
     class func saveActivityMetaData(activity:Activity, data:Dictionary<String,Any>){
         

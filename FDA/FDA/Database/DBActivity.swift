@@ -28,7 +28,8 @@ class DBActivity: Object {
     dynamic var frequencyRunsData:Data?
     dynamic var frequencyType:String?
     
-    //dynamic var result:ActivityResult?
+    dynamic var currentRunId:String?
+    dynamic var participationStatus:Int = 0
     
     
     var activityRuns = List<DBActivityRun>()

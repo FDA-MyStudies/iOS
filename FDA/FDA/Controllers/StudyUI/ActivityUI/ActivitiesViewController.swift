@@ -275,6 +275,8 @@ class ActivitiesViewController : UIViewController{
         let activityStatus = User.currentUser.updateActivityStatus(studyId: activity.studyId!, activityId: activity.actvityId!,runId: String(activity.currentRunId), status:status)
         UserServices().updateUserActivityParticipatedStatus(studyId:activity.studyId!, activityStatus: activityStatus, delegate: self)
         
+        DBHandler.updateActivityParticipationStatus(activity: activity)
+        
         if status == .completed{
             self.updateCompletionAdherence()
         }

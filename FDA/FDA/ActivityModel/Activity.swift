@@ -208,6 +208,13 @@ class Activity{
                 }
                 
             }
+            let currentUser = User.currentUser
+            if let userActivityStatus = currentUser.participatedActivites.filter({$0.activityId == self.actvityId}).first {
+                self.userParticipationStatus = userActivityStatus
+            }
+            else {
+                self.userParticipationStatus = UserActivityStatus()
+            }
             
             self.calculateActivityRuns(studyId: self.studyId!)
         }

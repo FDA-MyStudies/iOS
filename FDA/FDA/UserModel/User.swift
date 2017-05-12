@@ -645,7 +645,7 @@ class TermsAndPolicy {
 //MARK: ActivityStatus
 class UserActivityStatus{
     
-    enum ActivityStatus {
+    enum ActivityStatus:Int {
         case yetToJoin
         case inProgress
         case completed

@@ -41,6 +41,8 @@ class DBStudy: Object {
     dynamic var participatedStatus:Int = 0
     dynamic var participatedId:String?
     dynamic var joiningDate:Date?
+    dynamic var completion:Int = 0
+    dynamic var adherence:Int = 0
     
     //anchor date values
     dynamic var anchorDate:Date?

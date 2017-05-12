@@ -508,6 +508,8 @@ extension StudyHomeViewController:NMWebServiceDelegate {
             self.addProgressIndicator()
             
             let currentUserStudyStatus =  User.currentUser.updateStudyStatus(studyId:(Study.currentStudy?.studyId)!  , status: .inProgress)
+            Study.currentStudy?.userParticipateState = currentUserStudyStatus
+            DBHandler.updateStudyParticipationStatus(study: Study.currentStudy!)
             
             ConsentBuilder.currentConsent?.consentStatus = .completed
             UserServices().updateUserParticipatedStatus(studyStauts: currentUserStudyStatus, delegate: self)

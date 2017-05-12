@@ -9,6 +9,7 @@
 import Foundation
 import ResearchKit
 import IQKeyboardManagerSwift
+import IQKeyboardManagerSwift
 
 let kFetalKickCounterStepDefaultIdentifier = "defaultIdentifier"
 

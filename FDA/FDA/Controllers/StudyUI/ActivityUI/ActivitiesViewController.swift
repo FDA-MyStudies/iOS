@@ -572,8 +572,37 @@ extension ActivitiesViewController:ORKTaskViewControllerDelegate{
                 let activity = Study.currentActivity
                 DBHandler.updateActivityRestortionDataFor(activity:activity!, studyId: (study?.studyId)!, restortionData: taskViewController.restorationData!)
                 
-                /*
                 
+               
+                //Explain
+                let orkStepResult:ORKStepResult? = taskViewController.result.results?[(taskViewController.result.results?.count)! - 2] as! ORKStepResult?
+                let activityStepResult:ActivityStepResult? = ActivityStepResult()
+                activityStepResult?.initWithORKStepResult(stepResult: orkStepResult! as ORKStepResult , activityType:(ActivityBuilder.currentActivityBuilder.actvityResult?.type)!)
+                let dictionary = activityStepResult?.getActivityStepResultDict()
+                print("dictionary \(dictionary)")
+                
+                if ActivityBuilder.currentActivityBuilder.actvityResult?.type == .Questionnaire {
+                    //let value = activityStepResult?.value as! NSNumber
+                    //let fVlue = value.floatValue
+                    //DBHandler.saveStatisticsDataFor(activityId: (activity?.actvityId)!, key: (stepViewController.step?.identifier)!, data:fVlue)
+                    
+                    //if activityStepResult?.value is Float {
+                        
+                    //}
+                    
+                    if let value1 = activityStepResult?.value as? NSNumber {
+                        let value = value1.floatValue
+                        DBHandler.saveStatisticsDataFor(activityId: (activity?.actvityId)!, key: (activityStepResult?.key)!, data:value)
+                    }
+                }
+                
+                
+                
+                
+                
+               
+                
+                /*
                 //Explain
                 if (ActivityBuilder.currentActivityBuilder.actvityResult?.result?.count)! < (taskViewController.result.results?.count)!{
                     

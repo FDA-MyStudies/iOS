@@ -20,20 +20,40 @@ class StudyDashboardStatisticsCollectionViewCell: UICollectionViewCell {
     func displayStatisics(data : DashboardStatistics){
         
         labelStatisticsText?.text = data.title
+        let array = data.statList.map{$0.data}
         
-//        if data["type"] as! String == "1"{
-//            statisticsImage?.image = UIImage(named:"staticIcon1")
-//            labelStatisticsText?.text = "TOTAL HOURS OF SLEEP"
-//            labelStatisticsCount?.text = data["sleepCount"] as? String
-//            
-//        }else if data["type"] as! String == "2"{
-//            statisticsImage?.image = UIImage(named:"staticIcon2")
-//            labelStatisticsText?.text = "TOTAL HOURS OF ACTIVITY"
-//            labelStatisticsCount?.text = data["activityCount"] as? String
-//        }else{
-//            statisticsImage?.image = UIImage(named:"staticIcon3")
-//            labelStatisticsText?.text = "TOTAL HOURS OF STEPS"
-//            labelStatisticsCount?.text = data["stepsCount"] as? String
+        if  data.calculation! == StatisticsFormula.Maximum.rawValue {
+             let max = array.max()
+            labelStatisticsCount?.text = String(describing: max)
+        }
+        if  data.calculation! == StatisticsFormula.Minimum.rawValue {
+             let min = array.min()
+            labelStatisticsCount?.text = String(describing: min)
+        }
+        if  data.calculation! == StatisticsFormula.Average.rawValue {
+            let sumArray = array.reduce(0, +)
+            let avgArrayValue = sumArray / Float(array.count)
+            labelStatisticsCount?.text = String(describing: avgArrayValue)
+        }
+        if  data.calculation! == StatisticsFormula.Summation.rawValue {
+            let sumArray = array.reduce(0, +)
+            labelStatisticsCount?.text = String(describing: sumArray)
+        }
+      //  let max = array.max()
+        
+      //  let min = array.min()
+        
+      //  let sumArray = array.reduce(0, +)
+      //  let avgArrayValue = sumArray / Float(array.count)
+        
+      //  let sumArray1 = array.reduce(0, +)
+        
+      //  print("sum:\(sumArray1) min:\(min) avg:\(avgArrayValue) max: \(max)")
+        
+        
+//        let (position, min) = reduce(enumerate(array), (-1, Int.max)) {
+//            $0.1 < $1.1 ? $0 : $1
 //        }
+
     }
 }

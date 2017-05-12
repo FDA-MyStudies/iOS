@@ -42,8 +42,8 @@ class StudyDashboardViewController : UIViewController{
         labelStudyTitle?.text = Study.currentStudy?.name
         
         
+       
         
-        self.sendRequestToGetDashboardInfo()
         
         //check if consent is udpated
         
@@ -78,6 +78,18 @@ class StudyDashboardViewController : UIViewController{
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         UIApplication.shared.statusBarStyle = .lightContent
+        
+        DBHandler.loadStatisticsForStudy(studyId: (Study.currentStudy?.studyId)!) { (statiticsList) in
+            
+            if statiticsList.count != 0 {
+                StudyDashboard.instance.statistics = statiticsList
+                self.tableView?.reloadData()
+            }
+            else {
+                self.sendRequestToGetDashboardInfo()
+            }
+            
+        }
         
     }
     

@@ -290,6 +290,22 @@ class DBHandler: NSObject {
         
     }
     
+    class func updateStudyParticipationStatus(study:Study){
+        
+        let realm = try! Realm()
+        let studies =  realm.objects(DBStudy.self).filter("studyId == %@",study.studyId)
+        let dbStudy = studies.last
+        
+        try! realm.write({
+            
+             dbStudy?.participatedStatus = study.userParticipateState.status.rawValue
+            
+        })
+        
+       
+
+    }
+    
     class func loadStudyDetailsToUpdate(studyId:String,completionHandler:@escaping (Bool) -> ()){
         let realm = try! Realm()
         let studies =  realm.objects(DBStudy.self).filter("studyId == %@",studyId)
@@ -516,14 +532,22 @@ class DBHandler: NSObject {
         let runsBeforeToday = studyRuns.filter({($0.endDate == nil) || ($0.endDate <= date)})
         let incompleteRuns = runsBeforeToday.count - completedRuns.count
         
-        let completion = ceil( Double((completedRuns.count + incompleteRuns)*100/studyRuns.count) )
-        let adherence = ceil (Double((completedRuns.count)*100/(completedRuns.count + incompleteRuns)))
+         let completion = ceil( Double(self.divide(lhs: (completedRuns.count + incompleteRuns)*100, rhs: studyRuns.count)) )
+        let adherence = ceil (Double(self.divide(lhs: (completedRuns.count)*100, rhs: (completedRuns.count + incompleteRuns))))
+        //let completion = ceil( Double((completedRuns.count + incompleteRuns)*100/studyRuns.count) )
+        //let adherence = ceil (Double((completedRuns.count)*100/(completedRuns.count + incompleteRuns)))
         
         completionHandler(Int(completion),Int(adherence))
         
         
         print("complete: \(completedRuns.count) , incomplete: \(incompleteRuns)")
         
+    }
+    static func divide(lhs: Int, rhs: Int) -> Int {
+        if rhs == 0 {
+            return 0
+        }
+        return lhs/rhs
     }
     
     class func saveActivityRuns(activityId:String,studyId:String,runs:Array<ActivityRun>){
@@ -574,5 +598,132 @@ class DBHandler: NSObject {
         
     }
 
+    //MARK: Dashboard
+    class func saveDashBoardStatistics(studyId:String,statistics:Array<DashboardStatistics>){
+        
+        let realm = try! Realm()
+        let dbStatisticsArray = realm.objects(DBStatistics.self).filter({$0.studyId == studyId})// "studyId == %@",study?.studyId)
+        
+        
+        var dbStatisticsList:Array<DBStatistics> = []
+        for stats in statistics {
+            
+            var dbStatistics:DBStatistics?
+            if dbStatisticsArray.count != 0 {
+                dbStatistics = dbStatisticsArray.filter({$0.activityId == stats.activityId!}).last!
+                
+                if dbStatistics == nil {
+                    
+                    dbStatistics = DBHandler.getDBStatistics(stats: stats)
+                    dbStatisticsList.append(dbStatistics!)
+                }
+                else {
+                    
+                    try! realm.write({
+                        
+                        dbStatistics?.activityId = stats.activityId
+                        dbStatistics?.activityVersion = stats.activityVersion
+                        dbStatistics?.calculation = stats.calculation
+                        dbStatistics?.dataSourceKey = stats.dataSourceKey
+                        dbStatistics?.dataSourceType = stats.dataSourceType
+                        dbStatistics?.displayName = stats.displayName
+                        dbStatistics?.title = stats.title
+                        dbStatistics?.statType = stats.statType
+                        dbStatistics?.studyId = stats.studyId
+                        dbStatistics?.unit = stats.unit
+                        
+                    })
+                    
+                }
+            }
+            else {
+                
+                dbStatistics = DBHandler.getDBStatistics(stats: stats)
+                dbStatisticsList.append(dbStatistics!)
+            }
+            
+        }
+        
+        
+        print("DBPath : \(realm.configuration.fileURL)")
+        if dbStatisticsList.count > 0 {
+            try! realm.write({
+                realm.add(dbStatisticsList, update: true)
+                
+            })
+        }
+    }
+    
+    private class func getDBStatistics(stats:DashboardStatistics)->DBStatistics{
+        
+        let dbStatistics = DBStatistics()
+        dbStatistics.activityId = stats.activityId
+        dbStatistics.activityVersion = stats.activityVersion
+        dbStatistics.calculation = stats.calculation
+        dbStatistics.dataSourceKey = stats.dataSourceKey
+        dbStatistics.dataSourceType = stats.dataSourceType
+        dbStatistics.displayName = stats.displayName
+        dbStatistics.title = stats.title
+        dbStatistics.statType = stats.statType
+        dbStatistics.studyId = stats.studyId
+        dbStatistics.unit = stats.unit
+        dbStatistics.statisticsId = stats.studyId! + stats.title!
+        
+        return dbStatistics
+        
+    }
+    
+    class func loadStatisticsForStudy(studyId:String,completionHandler:@escaping (Array<DashboardStatistics>) -> ()){
+        
+        
+        let realm = try! Realm()
+        let dbStatisticsList = realm.objects(DBStatistics.self).filter("studyId == %@",studyId)
+        
+        var statsList:Array<DashboardStatistics> = []
+        for dbStatistics in dbStatisticsList {
+            
+            let stats = DashboardStatistics()
+            stats.activityId =  dbStatistics.activityId
+            stats.activityVersion  = dbStatistics.activityVersion
+            stats.calculation = dbStatistics.calculation
+            stats.dataSourceKey = dbStatistics.dataSourceKey
+            stats.dataSourceType = dbStatistics.dataSourceType
+            stats.displayName = dbStatistics.displayName
+            stats.title = dbStatistics.title
+            stats.statType = dbStatistics.statType
+            stats.studyId = dbStatistics.studyId
+            stats.unit = dbStatistics.unit
+            stats.statList = dbStatistics.statisticsData
+            
+            statsList.append(stats)
+        }
+        completionHandler(statsList)
+        
+    }
+    
+    
+    class func saveStatisticsDataFor(activityId:String,key:String,data:Float){
+        
+        let realm = try! Realm()
+        let dbStatisticsList = realm.objects(DBStatistics.self).filter("activityId == %@ && dataSourceKey == %@",activityId,key)
+        
+        if dbStatisticsList.count > 0 {
+            let dbStatistics = dbStatisticsList.last
+            
+            if dbStatistics != nil {
+                
+                //save data
+                let statData = DBStatisticsData()
+                statData.startDate = Date()
+                statData.data = data
+                
+                try! realm.write({
+                    dbStatistics?.statisticsData.append(statData)
+                    
+                })
+            }
+            
+        }
+     }
     
 }

@@ -45,6 +45,8 @@ class LineChartCell: GraphChartTableViewCell {
    
     var plotPoints:Array<Array<ORKValueRange>> = []
     var xAxisTitles:Array! = []
+    var max:Float = 0.0
+    var min = 0.0
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -62,6 +64,12 @@ class LineChartCell: GraphChartTableViewCell {
         
         labelTitle.text = chart.displayName
         let array = chart.statList.map{$0.data}
+        if array.count != 0 {
+            max = array.max()!
+        }
+        
+        
+        
         var points:Array<ORKValueRange> = []
         
         let timeRange = chart.dataSourceTimeRange!
@@ -393,8 +401,8 @@ class LineChartCell: GraphChartTableViewCell {
         
         for i in 1...numDays{
             
-            if array.count > i {
-                let value = array[i]
+            if array.count >= i {
+                let value = array[i-1]
                 points.append(ORKValueRange(value:Double(value)))
             }
             else {
@@ -421,8 +429,8 @@ class LineChartCell: GraphChartTableViewCell {
         
         for i in 1...xAxisTitles.count{
             
-            if array.count > i {
-                let value = array[i]
+            if array.count >= i {
+                let value = array[i-1]
                 points.append(ORKValueRange(value:Double(value)))
             }
             else {
@@ -445,8 +453,8 @@ class LineChartCell: GraphChartTableViewCell {
         
         for i in 1...xAxisTitles.count{
             
-            if array.count > i {
-                let value = array[i]
+            if array.count >= i {
+                let value = array[i-1]
                 points.append(ORKValueRange(value:Double(value)))
             }
             else {
@@ -470,8 +478,8 @@ class LineChartCell: GraphChartTableViewCell {
         let numWeeks = range.count
         for i in 1...numWeeks{
             
-            if array.count > i {
-                let value = array[i]
+            if array.count >= i {
+                let value = array[i-1]
                 points.append(ORKValueRange(value:Double(value)))
             }
             else {
@@ -557,7 +565,7 @@ extension LineChartCell:ORKValueRangeGraphChartViewDataSource{
     }
     
     func maximumValue(for graphChartView: ORKGraphChartView) -> Double {
-        return 70
+        return Double(max)
     }
     
     func minimumValue(for graphChartView: ORKGraphChartView) -> Double {

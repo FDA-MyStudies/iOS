@@ -109,7 +109,7 @@ class WCPServices: NSObject {
         self.delegate = delegate
         
         //TBD ConsentVersion to be removed
-        let header = [kStudyId:studyId,"consentVersion" : "1.1"]
+        let header = [kStudyId:studyId,"consentVersion" : ""]
         let method = WCPMethods.consentDocument.method
        
         self.sendRequestWith(method:method, params: nil, headers: header)

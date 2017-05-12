@@ -314,6 +314,9 @@ class WCPServices: NSObject {
             }
             
             StudyDashboard.instance.statistics = listOfStats
+            
+            //save in database
+            DBHandler.saveDashBoardStatistics(studyId: (Study.currentStudy?.studyId)!, statistics: listOfStats)
         }
     }
     

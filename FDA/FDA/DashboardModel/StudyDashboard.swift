@@ -7,6 +7,16 @@
 //
 
 import UIKit
+import RealmSwift
+
+
+enum StatisticsFormula:String{
+   case Summation
+   case Average
+   case Maximum
+   case Minimum 
+
+}
 
 class StudyDashboard: NSObject {
     
@@ -18,6 +28,8 @@ class StudyDashboard: NSObject {
 
 class DashboardStatistics {
     
+    var statisticsId:String?
+    var studyId:String?
     var title:String?
     var displayName:String?
     var unit:String?
@@ -27,7 +39,11 @@ class DashboardStatistics {
     var activityVersion:String?
     var dataSourceType:String?
     var dataSourceKey:String?
+    var statList = List<DBStatisticsData>()
     
+    init() {
+        
+    }
     
     init(detail:Dictionary<String,Any>) {
         
@@ -37,36 +53,41 @@ class DashboardStatistics {
             if Utilities.isValidValue(someObject: detail["title"] as AnyObject ){
                 self.title = detail["title"] as? String
             }
+            else {
+                self.title = "123"
+            }
             if Utilities.isValidValue(someObject: detail["displayName"] as AnyObject ){
-                self.title = detail["displayName"] as? String
+                self.displayName = detail["displayName"] as? String
             }
             if Utilities.isValidValue(someObject: detail["statType"] as AnyObject ){
-                self.title = detail["statType"] as? String
+                self.statType = detail["statType"] as? String
             }
             if Utilities.isValidValue(someObject: detail["unit"] as AnyObject ){
-                self.title = detail["unit"] as? String
+                self.unit = detail["unit"] as? String
             }
             if Utilities.isValidValue(someObject: detail["calculation"] as AnyObject ){
-                self.title = detail["calculation"] as? String
+                self.calculation = detail["calculation"] as? String
             }
             
             let datasource = detail["dataSource"] as! Dictionary<String,Any>
             
             if Utilities.isValidValue(someObject: datasource["type"] as AnyObject ){
-                self.title = datasource["type"] as? String
+                self.dataSourceType = datasource["type"] as? String
             }
             if Utilities.isValidValue(someObject: datasource["key"] as AnyObject ){
-                self.title = datasource["key"] as? String
+                self.dataSourceKey = datasource["key"] as? String
             }
             
             let activity = datasource["activity"] as! Dictionary<String,Any>
             if Utilities.isValidValue(someObject: activity[kActivityId] as AnyObject ){
                 self.activityId = activity[kActivityId] as? String
             }
-            if Utilities.isValidValue(someObject: activity[kActivityVersion] as AnyObject ){
-                self.activityId = activity[kActivityVersion] as? String
+            if Utilities.isValidValue(someObject: activity["version"] as AnyObject ){
+                self.activityVersion = activity["version"] as? String
             }
+            self.studyId = Study.currentStudy?.studyId
 
+            self.statisticsId = self.studyId! + self.title!
         }
     }
     

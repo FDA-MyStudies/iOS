@@ -59,3 +59,28 @@ class DBOverviewSection: Object {
         return "sectionId"
     }
 }
+
+class DBStatistics : Object {
+    
+    dynamic var  studyId:String!
+    dynamic var  statisticsId:String!
+    dynamic var title:String?
+    dynamic var displayName:String?
+    dynamic var unit:String?
+    dynamic var calculation:String?
+    dynamic var statType:String?
+    dynamic var activityId:String?
+    dynamic var activityVersion:String?
+    dynamic var dataSourceType:String?
+    dynamic var dataSourceKey:String?
+    var statisticsData = List<DBStatisticsData>()
+    
+    override static func primaryKey() -> String? {
+        return "statisticsId"
+    }
+    
+}
+class DBStatisticsData : Object {
+    dynamic var startDate:Date?
+    dynamic var data:Float = 0.0
+}

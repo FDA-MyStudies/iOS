@@ -648,7 +648,8 @@ extension ActivitiesViewController:ORKTaskViewControllerDelegate{
                 
                 if activity?.type != .activeTask{
                 
-                DBHandler.updateActivityRestortionDataFor(activity:activity!, studyId: (study?.studyId)!, restortionData: taskViewController.restorationData!)
+                    DBHandler.updateActivityRestortionDataFor(activity:activity!, studyId: (study?.studyId)!, restortionData: taskViewController.restorationData!)
+                    activity?.currentRun.restortionData = taskViewController.restorationData!
                 }
                 
                

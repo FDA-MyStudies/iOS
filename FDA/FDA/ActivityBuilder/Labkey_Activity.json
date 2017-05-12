@@ -148,13 +148,13 @@
                             
                             "format": {
                             
-                            "maxValue": 100,
+                            "maxValue": 10,
                             
-                            "minValue": 10,
+                            "minValue": -10,
                             
-                            "default": 5,
+                            "default": 0,
                             
-                            "maxFractionDigits": 2,
+                            "maxFractionDigits": 3,
                             
                             "vertical": true,
                             

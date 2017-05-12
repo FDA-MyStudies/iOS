@@ -22,7 +22,7 @@ enum ActivityAvailabilityStatus:Int{
 class ActivitiesViewController : UIViewController{
     
     var tableViewSections:Array<Dictionary<String,Any>>! = []
-    
+    var lastFetelKickIdentifer:String = ""  //TEMP
     @IBOutlet var tableView : UITableView?
     var selectedIndexPath:IndexPath? = nil
     
@@ -629,6 +629,7 @@ extension ActivitiesViewController:ORKTaskViewControllerDelegate{
                     
                 }
  */
+ 
             }
         }
     }
@@ -648,8 +649,13 @@ extension ActivitiesViewController:ORKTaskViewControllerDelegate{
         
          let storyboard = UIStoryboard.init(name: "FetalKickCounter", bundle: nil)
         
-        if step.identifier == "FetalKickCounterStep" {
-            
+        if step.identifier == "FetalKickIntroduction" {
+            self.lastFetelKickIdentifer = step.identifier
+        }
+        
+       
+        if self.lastFetelKickIdentifer == "FetalKickIntroduction" {
+            self.lastFetelKickIdentifer = ""
             let ttController = storyboard.instantiateViewController(withIdentifier: "FetalKickCounterStepViewController") as! FetalKickCounterStepViewController
             ttController.step = step
             return ttController

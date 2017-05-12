@@ -226,11 +226,16 @@ class Schedule{
         
         dailyFrequencyTimings = activity.frequencyRuns!
         
-        let numberOfDays = self.getNumberOfDaysBetween(startDate: startTime, endDate: endTime!)
+        var numberOfDays = self.getNumberOfDaysBetween(startDate: startTime, endDate: endTime!)
         let calendar = Calendar.current
         var runId = 1
         let startDateString =  Schedule.formatter.string(from: startTime)
         var startDateShortStyle = Schedule.formatter2.date(from: startDateString)
+        
+        if numberOfDays == 0 {
+            numberOfDays = 1;
+        }
+        
         for day in 1...numberOfDays {
             
             let startDate = startDateShortStyle

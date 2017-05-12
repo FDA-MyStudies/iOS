@@ -294,9 +294,14 @@ class LeftMenuViewController : UIViewController, LeftMenuProtocol {
      
      */
     func signout(){
-        debugPrint("singout")
+      
         
         ORKPasscodeViewController.removePasscodeFromKeychain()
+        
+        let ud = UserDefaults.standard
+        ud.set(false, forKey: kPasscodeIsPending)
+        ud.synchronize()
+        
         
         self.changeViewController(.studyList)
         self.createLeftmenuItems()

@@ -323,14 +323,14 @@ class ActivitiesTableViewCell: UITableViewCell {
     
     private static let oneTimeFormatter: DateFormatter = {
         let formatter = DateFormatter()
-        formatter.dateFormat = "hha, MMM dd YYYY"
+        formatter.dateFormat = "hh:mma, MMM dd YYYY"
         formatter.timeZone = TimeZone.init(abbreviation:"GMT")
         return formatter
     }()
     
     private static let weeklyformatter: DateFormatter = {
         let formatter = DateFormatter()
-        formatter.dateFormat = "hha , EEE MMM dd YYYY"
+        formatter.dateFormat = "hh:mma , EEE MMM dd YYYY"
         formatter.timeZone = TimeZone.init(abbreviation:"GMT")
         return formatter
     }()

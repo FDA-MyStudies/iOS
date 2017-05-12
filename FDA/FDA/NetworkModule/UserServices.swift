@@ -715,6 +715,8 @@ class UserServices: NSObject {
         //reset user object
         User.resetCurrentUser()
         
+        DBHandler.deleteAll()
+        
         
         
     }
@@ -727,6 +729,14 @@ class UserServices: NSObject {
         
         //reset user object
         User.resetCurrentUser()
+        
+        //Delete from database
+        DBHandler.deleteCurrentUser()
+        
+        //reset user object
+        User.resetCurrentUser()
+        
+        DBHandler.deleteAll()
     }
     
     func handleDeActivateAccountResponse(response:Dictionary<String, Any>) {
@@ -737,6 +747,14 @@ class UserServices: NSObject {
         
         //reset user object
         User.resetCurrentUser()
+        
+        //Delete from database
+        DBHandler.deleteCurrentUser()
+        
+        //reset user object
+        User.resetCurrentUser()
+        
+        DBHandler.deleteAll()
     }
 
     

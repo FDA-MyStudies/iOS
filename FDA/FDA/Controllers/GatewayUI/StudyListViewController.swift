@@ -35,7 +35,22 @@ class StudyListViewController: UIViewController {
         //self.loadTestData()
         //get Profile data to check for passcode
         //Condition missing
-        //UserServices().getUserProfile(self as NMWebServiceDelegate)
+        
+        let ud = UserDefaults.standard
+        
+        var ispasscodePending:Bool? = false
+        
+        if (ud.value(forKey: kPasscodeIsPending) != nil){
+            ispasscodePending = ud.value(forKey: kPasscodeIsPending) as! Bool?
+        }
+        
+        
+        if ispasscodePending == true{
+            UserServices().getUserProfile(self as NMWebServiceDelegate)
+        }
+        
+        
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -154,8 +169,6 @@ class StudyListViewController: UIViewController {
     func setPassCode() {
         //Remove Passcode if already exist
         
-        /*
-        
         ORKPasscodeViewController.removePasscodeFromKeychain()
         
         let passcodeStep = ORKPasscodeStep(identifier: "PasscodeStep")
@@ -164,8 +177,11 @@ class StudyListViewController: UIViewController {
         let taskViewController = ORKTaskViewController.init(task: task, taskRun: nil)
         taskViewController.delegate = self
         
+        taskViewController.isNavigationBarHidden = true
+        
+        
         self.navigationController?.present(taskViewController, animated: false, completion: nil)
- */
+ 
     }
     
     
@@ -405,6 +421,8 @@ extension StudyListViewController :  UITableViewDelegate {
                 let userStudyStatus =  (Study.currentStudy?.userParticipateState.status)!
                 
                 if userStudyStatus == .completed || userStudyStatus == .inProgress {
+                    //|| userStudyStatus == .yetToJoin
+                    
                     //self.pushToStudyDashboard()
                     // check if study version is udpated
                     if(study?.version != study?.newVersion){
@@ -547,7 +565,11 @@ extension StudyListViewController:ORKTaskViewControllerDelegate{
         case ORKTaskViewControllerFinishReason.completed:
             print("completed")
             taskResult = taskViewController.result
-
+            
+            let ud = UserDefaults.standard
+            ud.set(false, forKey: kPasscodeIsPending)
+            ud.synchronize()
+            
         case ORKTaskViewControllerFinishReason.failed:
             print("failed")
             taskResult = taskViewController.result

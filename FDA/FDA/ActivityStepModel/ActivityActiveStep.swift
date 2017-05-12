@@ -436,7 +436,7 @@ class ActivityActiveStep: ActivityStep {
                 {
                     let fetalKickTask:FetalKickCounterTask? = FetalKickCounterTask()
                     
-                    fetalKickTask?.initWithFormatDuration(duration: Float((formatDict?[kActiveFetalKickCounterDuration] as? String)!)!)
+                    fetalKickTask?.initWithFormatDuration(duration: Float((formatDict?[kActiveFetalKickCounterDuration] as? String)!)! ,identifier:self.key!)
                     
                     return fetalKickTask?.getTask()
                     

@@ -13,6 +13,12 @@ import IQKeyboardManagerSwift
 class EligibilityStep: ORKStep {
     var type:String?
    
+    func showsProgress() -> Bool {
+        return false
+    }
+
+    
+    
 }
 
 

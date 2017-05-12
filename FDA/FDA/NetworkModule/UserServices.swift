@@ -287,6 +287,55 @@ class UserServices: NSObject {
         self.sendRequestWith(method:method, params: params, headers: headerParams)
     }
     
+    
+    
+    func updateUserProfile(deviceToken:String, delegate:NMWebServiceDelegate){
+        
+        self.delegate = delegate
+        
+        let user = User.currentUser
+        
+        let headerParams = [kUserId : user.userId!]
+        
+        /*
+         let profile = [kUserFirstName : user.firstName!,
+         kUserLastName : user.lastName!]
+         */
+        
+        let settings = [kSettingsRemoteNotifications: (user.settings?.remoteNotifications)! as Bool,
+                        kSettingsTouchId : (user.settings?.touchId)! as Bool,
+                        kSettingsPassCode : (user.settings?.passcode)! as Bool,
+                        kSettingsLocalNotifications : (user.settings?.localNotifications)! as Bool,
+                        kSettingsLeadTime : (user.settings?.leadTime)! as String,
+                        kSettingsLocale : (user.settings?.locale)! as String
+            ] as [String : Any]
+        
+        let version = Utilities.getAppVersion()
+        let info = [kAppVersion : version,
+                    kOSType :"ios",
+                    kDeviceToken : deviceToken
+        ]
+        
+        
+        /*
+         let params = [kUserProfile:profile,
+         kUserSettings:settings,
+         kBasicInfo:info] as [String : Any]
+         */
+        
+        let params = [
+            kUserSettings:settings,
+            kBasicInfo:info,
+            kParticipantInfo : []] as [String : Any]
+        
+        let method = RegistrationMethods.updateUserProfile.method
+        
+        self.sendRequestWith(method:method, params: params, headers: headerParams)
+    }
+
+    
+    
+    
     func getUserPreference(_ delegate:NMWebServiceDelegate){
         
         self.delegate = delegate

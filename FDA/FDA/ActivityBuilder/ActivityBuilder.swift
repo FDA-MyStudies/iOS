@@ -169,10 +169,26 @@ class ActivityBuilder {
                     if (orkStepArray?.count)! > 0 {
                         task =  ORKOrderedTask(identifier: (activity?.actvityId!)!, steps: orkStepArray)
                         
-                        task =  ORKNavigableOrderedTask(identifier:(activity?.actvityId)!, steps: orkStepArray)
+                        
+                        
+                        if self.activity?.branching == true{
+                        
+                           task =  ORKNavigableOrderedTask(identifier:(activity?.actvityId)!, steps: orkStepArray)
+                        } // comment the else part
+                        else{
+                            task =  ORKNavigableOrderedTask(identifier:(activity?.actvityId)!, steps: orkStepArray)
+                        }
+                        
+                        
                     }
                     
+                    
+                    
+                    
+                    
                     var i:Int? = 0
+                    
+                    
                     
                     for step in orkStepArray!
                     {
@@ -183,6 +199,8 @@ class ActivityBuilder {
                             
                             
                             if (activityStep?.destinations?.count)! > 0{
+                                
+                               
                                 
                                 let resultSelector: ORKResultSelector?
                                 var predicateRule: ORKPredicateStepNavigationRule?
@@ -291,7 +309,14 @@ class ActivityBuilder {
                     }
                     
                     if task != nil {
-                     return (task as! ORKNavigableOrderedTask)
+                        
+                        if (self.activity?.branching)! {
+                           return (task as! ORKNavigableOrderedTask)
+                        }
+                        else{
+                            return (task as! ORKOrderedTask)
+                        }
+                     
                     }
                     else{
                     return nil

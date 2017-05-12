@@ -15,6 +15,9 @@ class ConsentCompletionStep: ORKStep {
     var mainTitle:String?
     var subTitle:String?
     
+    func showsProgress() -> Bool {
+        return false
+    }
     
 }
 

@@ -17,6 +17,8 @@ class FetalKickCounterStepViewController:  ORKStepViewController {
     
     //ORKStepViewController ORKActiveStepViewController
     
+    var backgroundTaskIdentifier: UIBackgroundTaskIdentifier?
+    
     
     @IBOutlet weak var startButton:UIButton?   // button to start task as well as increment the counter
     @IBOutlet weak var startTitleLabel:UILabel? // displays the title
@@ -53,7 +55,7 @@ class FetalKickCounterStepViewController:  ORKStepViewController {
         super.init(coder: aDecoder)
     }
     
-     var backgroundTaskIdentifier: UIBackgroundTaskIdentifier?
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -74,6 +76,15 @@ class FetalKickCounterStepViewController:  ORKStepViewController {
             
            
             
+            
+        }
+        
+        backgroundTaskIdentifier = UIApplication.shared.beginBackgroundTask(expirationHandler: {
+            
+        })
+        
+        
+        func viewWillAppear(){
             
         }
         
@@ -192,6 +203,8 @@ class FetalKickCounterStepViewController:  ORKStepViewController {
                 
                 self.timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(FetalKickCounterStepViewController.setCounter), userInfo: nil, repeats: true)
                 
+                RunLoop.main.add(self.timer!, forMode: .commonModes)
+                
                 // start button image and start title changed
                 startButton?.setImage(UIImage(named: "kick_btn1.png"), for: .normal)
                 startTitleLabel?.text = NSLocalizedString("TAP TO RECORD A KICK", comment:"")
@@ -209,7 +222,7 @@ class FetalKickCounterStepViewController:  ORKStepViewController {
         editCounterButton?.isHidden = false
         
         
-        self.counterTextField?.text =  self.kickCounter! < 10 ?  "0\(self.kickCounter!)" : "\(self.kickCounter!)"
+        self.counterTextField?.text =  self.kickCounter! < 10 ?  ("0\(self.kickCounter!)" == "00" ? "000" : "0\(self.kickCounter!)") : "\(self.kickCounter!)"
         
     }
     

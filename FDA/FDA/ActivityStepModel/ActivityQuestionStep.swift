@@ -547,13 +547,13 @@ class ActivityQuestionStep: ActivityStep {
                     
                     // need to
                     let dateFormatter = DateFormatter()
-                    dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
+                    dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
                     
                     
                     
                     let defaultDate:NSDate? = dateFormatter.date(from: formatDict?[kStepQuestionDateDefault] as! String) as NSDate?
-                    let minimumDate:NSDate? = dateFormatter.date(from: formatDict?[kStepQuestionDateDefault] as! String) as NSDate?
-                    let maximumDate:NSDate? = dateFormatter.date(from: formatDict?[kStepQuestionDateDefault] as! String) as NSDate?
+                    let minimumDate:NSDate? = dateFormatter.date(from: formatDict?[kStepQuestionDateMinDate] as! String) as NSDate?
+                    let maximumDate:NSDate? = dateFormatter.date(from: formatDict?[kStepQuestionDateMaxDate] as! String) as NSDate?
                     
                     
                     switch  DateStyle(rawValue:formatDict?[kStepQuestionDateStyle] as! String)! as DateStyle{
@@ -825,8 +825,14 @@ class ActivityQuestionStep: ActivityStep {
                         
                         // check if file exist at local path
                         
-                        let normalImage:UIImage = UIImage(named:"Bomb.png")!
-                        let selectedImage:UIImage = UIImage(named:"container.png")!
+                            
+                        let base64String =  dict[kStepQuestionImageChoiceImage] as! String
+                            
+                        let normalImageData = NSData(base64Encoded: base64String, options: .ignoreUnknownCharacters)
+                        let selectedImageData  = NSData(base64Encoded: (dict[kStepQuestionImageChoiceSelectedImage] as! String), options: .ignoreUnknownCharacters)
+                            
+                        let normalImage:UIImage = UIImage(data:normalImageData as! Data)!
+                        let selectedImage:UIImage =  UIImage(data:selectedImageData as! Data)!
                         
                         //else  download image from url
                         

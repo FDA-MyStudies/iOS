@@ -64,7 +64,23 @@
         button.frame = view.bounds;
         
         [button setTitle:[self formStep].repeatableText forState:UIControlStateNormal];
-        [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        
+        
+        
+        UIFont *font1 = [UIFont fontWithName:@"HelveticaNeue-Medium" size:16.0f];
+       
+        NSDictionary *dict1 = @{NSUnderlineStyleAttributeName:@(NSUnderlineStyleSingle),
+                                NSFontAttributeName:font1,
+                                NSForegroundColorAttributeName:[UIColor colorWithRed: 0.0f / 255.0f green: 124.0f / 255.0f blue: 186.0f / 255.0f alpha:1]}; // Added line
+        
+        
+        NSMutableAttributedString *attString = [[NSMutableAttributedString alloc] init];
+        [attString appendAttributedString:[[NSAttributedString alloc] initWithString:[self formStep].repeatableText    attributes:dict1]];
+       
+        [button setAttributedTitle:attString forState:UIControlStateNormal];
+      
+
+       
         [button addTarget:self action:@selector(addMoreAction:) forControlEvents:UIControlEventTouchUpInside];
         [view addSubview:button];
     }

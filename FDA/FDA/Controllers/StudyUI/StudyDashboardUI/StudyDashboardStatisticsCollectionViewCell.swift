@@ -53,6 +53,7 @@ class StudyDashboardStatisticsCollectionViewCell: UICollectionViewCell {
     @IBOutlet var statisticsImage : UIImageView?
     @IBOutlet var labelStatisticsText : UILabel?
     @IBOutlet var labelStatisticsCount : UILabel?
+    @IBOutlet var labelUnit : UILabel?
     var stats:DashboardStatistics!
     
     
@@ -60,6 +61,7 @@ class StudyDashboardStatisticsCollectionViewCell: UICollectionViewCell {
         
          stats = data
          labelStatisticsText?.text = data.displayName
+         labelUnit?.text = data.unit?.uppercased()
         
         self.displayStateTypeImage()
         
@@ -209,20 +211,24 @@ class StudyDashboardStatisticsCollectionViewCell: UICollectionViewCell {
         
         if  data.calculation! == StatisticsFormula.Maximum.rawValue {
             let max = array.max()
-            labelStatisticsCount?.text = String(describing: max)
+            let maxValue:String! = String(format:"%.2f", max!)
+            labelStatisticsCount?.text = maxValue
         }
         if  data.calculation! == StatisticsFormula.Minimum.rawValue {
             let min = array.min()
-            labelStatisticsCount?.text = String(describing: min)
+            let minValue = String(format:"%.2f", min!)
+            labelStatisticsCount?.text = minValue
         }
         if  data.calculation! == StatisticsFormula.Average.rawValue {
             let sumArray = array.reduce(0, +)
             let avgArrayValue = sumArray / Float(array.count)
-            labelStatisticsCount?.text = String(describing: avgArrayValue)
+            let avgValue = String(format:"%.2f", avgArrayValue)
+            labelStatisticsCount?.text = avgValue
         }
         if  data.calculation! == StatisticsFormula.Summation.rawValue {
             let sumArray = array.reduce(0, +)
-            labelStatisticsCount?.text = String(describing: sumArray)
+            let sumValue = String(format:"%.2f", sumArray)
+            labelStatisticsCount?.text = sumValue
         }
     }
 

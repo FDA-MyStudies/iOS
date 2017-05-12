@@ -146,6 +146,7 @@ class Study {
                 self.studySettings = StudySettings(settings: studyDetail[kStudySettings] as! Dictionary<String, Any>)
             }
             let currentUser = User.currentUser
+            
             if let userStudyStatus = currentUser.participatedStudies.filter({$0.studyId == self.studyId}).last{
                 self.userParticipateState = userStudyStatus
             }

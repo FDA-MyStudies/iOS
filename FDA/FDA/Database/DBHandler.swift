@@ -127,6 +127,9 @@ class DBHandler: NSObject {
                     dbStudy?.enrolling = study.studySettings.enrollingAllowed
                     dbStudy?.rejoin = study.studySettings.rejoinStudyAfterWithdrawn
                     dbStudy?.platform = study.studySettings.platform
+                    dbStudy?.participatedStatus = study.userParticipateState.status.rawValue
+                    dbStudy?.participatedId = study.userParticipateState.participantId
+                    dbStudy?.joiningDate = study.userParticipateState.joiningDate
                     
                     if dbStudy?.participatedStatus == UserStudyStatus.StudyStatus.inProgress.rawValue {
                         dbStudy?.updatedVersion = study.version
@@ -220,6 +223,8 @@ class DBHandler: NSObject {
             participatedStatus.participantId = dbStudy.participatedId
             
             study.userParticipateState = participatedStatus
+            
+            print("status \(dbStudy.participatedStatus)");
             
             //append to user class participatesStudies also
             User.currentUser.participatedStudies.append(participatedStatus)

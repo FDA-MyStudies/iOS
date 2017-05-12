@@ -43,6 +43,7 @@ class DBStudy: Object {
     dynamic var anchorDateActivityId:String?
     dynamic var anchorDateActivityVersion:String?
     dynamic var anchorDateQuestionKey:String?
+    dynamic var activitiesLocalNotificationUpdated = false
     
     
     //withdrawalConfigration

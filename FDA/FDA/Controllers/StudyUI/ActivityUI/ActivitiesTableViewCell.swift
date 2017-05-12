@@ -96,6 +96,7 @@ class ActivitiesTableViewCell: UITableViewCell {
             self.setUserStatusForActivity(activity: activity)
             
             //calculate activity runs and save in database
+            /*
             if activity.totalRuns == 0 {
                 Schedule().getRunsForActivity(activity: activity, handler: { (runs) in
                     if runs.count > 0 {
@@ -134,7 +135,7 @@ class ActivitiesTableViewCell: UITableViewCell {
                         DBHandler.saveActivityRuns(activityId: (activity.actvityId)!, studyId: (Study.currentStudy?.studyId)!, runs: runs)
                     }
                 })
-            }
+            }*/
         }
         else {
             

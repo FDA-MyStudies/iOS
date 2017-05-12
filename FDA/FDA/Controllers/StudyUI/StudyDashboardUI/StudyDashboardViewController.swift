@@ -248,6 +248,8 @@ extension StudyDashboardViewController : UITableViewDataSource {
                 cell = tableView.dequeueReusableCell(withIdentifier: kStatisticsTableViewCell, for: indexPath) as! StudyDashboardStatisticsTableViewCell
                // (cell as! StudyDashboardStatisticsTableViewCell).statisticsArrayData = statisticsArray
                 
+                (cell as! StudyDashboardStatisticsTableViewCell).displayData()
+                
                 //Used for setting it initially
                 (cell as! StudyDashboardStatisticsTableViewCell).buttonDay?.setTitle("  DAY  ", for: UIControlState.normal)
                 

@@ -247,6 +247,18 @@ class ActivitiesViewController : UIViewController{
         
         self.updateCompletionAdherence()
         
+        if !(Study.currentStudy?.activitiesLocalNotificationUpdated)! {
+            
+            LocalNotification.registerAllLocalNotificationFor(activities: (Study.currentStudy?.activities)!) { (finished) in
+                print("Notification set sucessfully")
+                Study.currentStudy?.activitiesLocalNotificationUpdated = true
+                
+                DBHandler.updateLocalNotificaitonUpdated(studyId: (Study.currentStudy?.studyId)!)
+            }
+
+        }
+        
+        
     }
     
     

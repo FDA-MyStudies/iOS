@@ -20,6 +20,11 @@
             return window?.rootViewController as? ResearchContainerViewController
         }
         
+        func askForNotification(){
+            
+            let notificationSettings = UIUserNotificationSettings(types: [.alert, .sound, .badge], categories: nil)
+            UIApplication.shared.registerUserNotificationSettings(notificationSettings)
+        }
         
         func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
             // Override point for customization after application launch.
@@ -30,6 +35,9 @@
             UIView.appearance(whenContainedInInstancesOf: [ORKTaskViewController.self]).tintColor = kUIColorForSubmitButtonBackground
             
             // self.checkForAppUpdate()
+            
+           self.askForNotification()
+           // self.checkForAppUpdate()
             
             return true
         }
@@ -79,10 +87,15 @@
              */
         }
         
+        
         func applicationWillTerminate(_ application: UIApplication) {
             // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
         }
         
+       //MARK:- NOTIFICATION
+        func application(_ application: UIApplication, didReceive notification: UILocalNotification) {
+            print("Notificatio received\(notification.userInfo)")
+        }
         //MARK:Custom Navigation Bar
         func customizeNavigationBar(){
             UINavigationBar.appearance().titleTextAttributes = [

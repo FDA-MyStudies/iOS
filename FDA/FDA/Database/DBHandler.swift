@@ -194,6 +194,7 @@ class DBHandler: NSObject {
             study.status = StudyStatus(rawValue:dbStudy.status!)!
             study.signedConsentVersion = dbStudy.signedConsentVersion
             study.signedConsentFilePath = dbStudy.signedConsentFilePath
+            study.activitiesLocalNotificationUpdated = dbStudy.activitiesLocalNotificationUpdated
             
             //settings
             let studySettings = StudySettings()
@@ -429,6 +430,16 @@ class DBHandler: NSObject {
         })
     }
     
+    class func updateLocalNotificaitonUpdated(studyId:String){
+        
+        let realm = try! Realm()
+        let study = realm.object(ofType: DBStudy.self, forPrimaryKey: studyId)
+        try! realm.write({
+            study?.activitiesLocalNotificationUpdated = true
+        })
+        
+    }
+    
      //MARK:Activity
     class func saveActivities(activityies:Array<Activity>){
         
@@ -486,12 +497,13 @@ class DBHandler: NSObject {
             try! realm.write({
                 realm.add(dbActivities, update: true)
                 
+                
             })
         }
        
     }
     
-   private class func getDBActivity(activity:Activity)->DBActivity{
+    private class func getDBActivity(activity:Activity)->DBActivity{
         
         let dbActivity = DBActivity()
         
@@ -511,6 +523,26 @@ class DBHandler: NSObject {
         catch{
             
         }
+        
+        
+        //save overview
+        let dbActivityRuns = List<DBActivityRun>()
+        for sectionIndex in 0...(activity.activityRuns.count-1) {
+            
+            let activityRun = activity.activityRuns[sectionIndex]
+            let dbActivityRun = DBActivityRun()
+            dbActivityRun.startDate = activityRun.startDate
+            dbActivityRun.endDate = activityRun.endDate
+            dbActivityRun.activityId = activity.actvityId
+            dbActivityRun.studyId = activity.studyId
+            dbActivityRun.runId = activityRun.runId
+            dbActivityRun.isCompleted = activityRun.isCompleted
+            
+            dbActivityRuns.append(dbActivityRun)
+        }
+        
+        dbActivity.activityRuns.append(objectsIn: dbActivityRuns)
+      
         return dbActivity
     }
     

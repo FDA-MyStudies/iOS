@@ -79,28 +79,30 @@ class StudyDashboardStatisticsCollectionViewCell: UICollectionViewCell {
             statisticsImage?.image = UIImage(named: "activity")
         }
         else {
-            let type = StatisticsType(rawValue:stats.statType!)!
+            //let type = StatisticsType(rawValue:stats.statType!)!
             
-            switch type {
-            case  .Activity:
+            switch stats.statType! {
+            case  StatisticsType.Activity.description:
                 statisticsImage?.image = UIImage(named: "stat_icn_active_task")
-            case  .Sleep:
+            case  StatisticsType.Sleep.description:
                 statisticsImage?.image = UIImage(named: "stat_icn_sleep")
-            case  .Weight:
+            case  StatisticsType.Weight.description:
                 statisticsImage?.image = UIImage(named: "stat_icn_weight")
-            case  .Nutrition:
+            case  StatisticsType.Nutrition.description:
                 statisticsImage?.image = UIImage(named: "stat_icn_nutrition")
-            case  .HeartRate:
+            case  StatisticsType.HeartRate.description:
                 statisticsImage?.image = UIImage(named: "stat_icn_heart_rate")
-            case  .BloodGlucose:
+            case  StatisticsType.BloodGlucose.description:
                 statisticsImage?.image = UIImage(named: "stat_icn_glucose")
-            case  .ActiveTask:
+            case  StatisticsType.ActiveTask.description:
                 statisticsImage?.image = UIImage(named: "stat_icn_active_task")
-            case  .BabyKicks:
+            case  StatisticsType.BabyKicks.description:
                 statisticsImage?.image = UIImage(named: "stat_icn_baby_kicks")
-            case  .Mood:
+            case  StatisticsType.Mood.description:
                 statisticsImage?.image = UIImage(named: "stat_icn_mood")
-            case  .Other:
+            case  StatisticsType.Other.description:
+                statisticsImage?.image = UIImage(named: "stat_icn_other")
+            default :
                 statisticsImage?.image = UIImage(named: "stat_icn_other")
             }
         }

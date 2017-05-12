@@ -230,7 +230,7 @@
                 if slideMenuController != nil{
                     
                     User.resetCurrentUser()
-                    DBHandler.deleteCurrentUser()
+                    //DBHandler.deleteCurrentUser()
                     
                     let ud = UserDefaults.standard
                     ud.removeObject(forKey: kUserAuthToken)

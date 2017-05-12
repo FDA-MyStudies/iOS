@@ -36,6 +36,17 @@ class StudyListViewController: UIViewController {
         //get Profile data to check for passcode
         //Condition missing
         
+        
+        
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        appDelegate.askForNotification()
+        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        
+        
+        
         let ud = UserDefaults.standard
         
         var ispasscodePending:Bool? = false
@@ -51,9 +62,6 @@ class StudyListViewController: UIViewController {
         
         
         
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
         self.labelHelperText.isHidden = true
         self.setNavigationBarItem()
         self.navigationController?.setNavigationBarHidden(false, animated: true)

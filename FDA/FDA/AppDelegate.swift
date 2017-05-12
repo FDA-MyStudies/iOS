@@ -9,6 +9,7 @@
     import UIKit
     import Fabric
     import Crashlytics
+    import UserNotifications
     
     @UIApplicationMain
     class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -22,8 +23,26 @@
         
         func askForNotification(){
             
-            let notificationSettings = UIUserNotificationSettings(types: [.alert, .sound, .badge], categories: nil)
-            UIApplication.shared.registerUserNotificationSettings(notificationSettings)
+//            let notificationSettings = UIUserNotificationSettings(types: [.alert, .sound, .badge], categories: nil)
+//            UIApplication.shared.registerUserNotificationSettings(notificationSettings)
+            
+            if #available(iOS 10.0, *) {
+                let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
+                UNUserNotificationCenter.current().requestAuthorization(
+                    options: authOptions,
+                    completionHandler: {_, _ in })
+                
+                // For iOS 10 display notification (sent via APNS)
+                UNUserNotificationCenter.current().delegate = self
+                
+                
+            } else {
+                let settings: UIUserNotificationSettings =
+                    UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil)
+                UIApplication.shared.registerUserNotificationSettings(settings)
+            }
+            UIApplication.shared.registerForRemoteNotifications()
+            
         }
         
         func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
@@ -36,7 +55,7 @@
             
             // self.checkForAppUpdate()
             
-           self.askForNotification()
+           
            // self.checkForAppUpdate()
             
             return true
@@ -96,6 +115,9 @@
         func application(_ application: UIApplication, didReceive notification: UILocalNotification) {
             print("Notificatio received\(notification.userInfo)")
         }
+        
+        
+        
         //MARK:Custom Navigation Bar
         func customizeNavigationBar(){
             UINavigationBar.appearance().titleTextAttributes = [
@@ -317,6 +339,11 @@
             case ORKTaskViewControllerFinishReason.completed:
                 print("completed")
                 taskResult = taskViewController.result
+                
+                let ud = UserDefaults.standard
+                ud.set(false, forKey: kPasscodeIsPending)
+                ud.synchronize()
+                
             case ORKTaskViewControllerFinishReason.failed:
                 print("failed")
                 taskResult = taskViewController.result
@@ -359,3 +386,29 @@
         }
         
     }
+    @available(iOS 10, *)
+    extension AppDelegate : UNUserNotificationCenterDelegate {
+        
+        //Receive displayed notifications for iOS 10 devices.
+        func userNotificationCenter(_ center: UNUserNotificationCenter,
+                                    willPresent notification: UNNotification,
+                                    withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+            let userInfo = notification.request.content.userInfo
+            print(userInfo)
+            completionHandler([UNNotificationPresentationOptions.alert, .sound, .badge])
+            
+        }
+        
+        func userNotificationCenter(_ center: UNUserNotificationCenter,
+                                    didReceive response: UNNotificationResponse,
+                                    withCompletionHandler completionHandler: @escaping () -> Void) {
+            let userInfo = response.notification.request.content.userInfo
+            print(userInfo)
+            
+            if (UIApplication.shared.applicationState == UIApplicationState.active) {//|| (UIApplication.shared.applicationState == UIApplicationState.background){
+                UIApplication.shared.applicationIconBadgeNumber = 0
+                //self.handlePushNotificationResponse(userInfo : userInfo as NSDictionary)
+            }
+        }
+    }
+

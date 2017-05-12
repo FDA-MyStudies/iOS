@@ -53,9 +53,6 @@ class ActivityFormStep: ActivityStep {
             
             if self.repeatable == true{
                 
-                
-                
-                
                 step  = RepeatableFormStep(identifier: key!, title:"", text: text!)
                 
                
@@ -75,6 +72,11 @@ class ActivityFormStep: ActivityStep {
             if  Utilities.isValidValue(someObject:title!  as AnyObject?){
                 step?.title = title!
             }
+           
+            if  Utilities.isValidValue(someObject:self.skippable!  as AnyObject?){
+                 step?.isOptional = self.skippable!
+            }
+            
            
             
             for dict in self.itemsArray {

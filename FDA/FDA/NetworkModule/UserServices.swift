@@ -47,6 +47,9 @@ let kUserNewPassword = "newPassword"
 let kUserIsTempPassword = "resetPassword"
 
 
+let kPasscodeIsPending = "PASSCODESETUP"
+
+
 let kConsentpdf = "pdf"
 
 //MARK: Settings Api Constants
@@ -492,6 +495,9 @@ class UserServices: NSObject {
             let ud = UserDefaults.standard
             ud.set(user.authToken, forKey:kUserAuthToken)
             ud.set(user.userId!, forKey: kUserId)
+            
+            ud.set(true, forKey: kPasscodeIsPending)
+            
             ud.synchronize()
         }
         

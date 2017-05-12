@@ -400,6 +400,8 @@ extension SignInViewController:NMWebServiceDelegate {
         
         if User.currentUser.verified == true {
             
+            ORKPasscodeViewController.removePasscodeFromKeychain()
+            
             if User.currentUser.isLoginWithTempPassword {
                 self.navigateToChangePassword()
             }

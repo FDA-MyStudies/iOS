@@ -19,9 +19,22 @@ class LocalNotification: NSObject {
 //                    kActivityId:"2"]
     
 //    LocalNotification.scheduleNotificationOn(date: date, message: message, userInfo: userInfo)
-    
+        let date = Date()
         for activity in activities {
-            for run in activity.activityRuns {
+            
+            var runsBeforeToday:Array<ActivityRun> = []
+            if activity.frequencyType == Frequency.One_Time && activity.endDate == nil {
+                //runsBeforeToday = runs
+                runsBeforeToday = activity.activityRuns
+            }
+            else {
+                
+                runsBeforeToday = activity.activityRuns.filter({$0.endDate >= date})
+                
+            }
+           
+            
+            for run in runsBeforeToday {
                 
                 print("Notification \(activity.actvityId) run: \(run.runId)")
                 
@@ -99,7 +112,9 @@ class LocalNotification: NSObject {
     
     
    class func scheduleNotificationOn(date:Date,message:String,userInfo:Dictionary<String,Any>){
-        
+    
+        print("NotificationMessage\(message)")
+    
         let notification = UILocalNotification()
         notification.fireDate = date
         notification.alertBody = message

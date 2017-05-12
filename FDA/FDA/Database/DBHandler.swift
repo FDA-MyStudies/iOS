@@ -429,7 +429,9 @@ class DBHandler: NSObject {
             
              dbStudy?.participatedStatus = study.userParticipateState.status.rawValue
              dbStudy?.participatedId = study.userParticipateState.participantId
-            dbStudy?.joiningDate = study.userParticipateState.joiningDate
+             dbStudy?.joiningDate = study.userParticipateState.joiningDate
+             dbStudy?.completion = study.userParticipateState.completion
+             dbStudy?.adherence = study.userParticipateState.adherence
             
             
         })

@@ -292,6 +292,7 @@ class ActivitiesViewController : UIViewController{
             //
             let status = User.currentUser.udpateCompletionAndAdherence(studyId:studyid, completion: completion, adherence: adherence)
             UserServices().udpateCompletionAdherence(studyStauts: status, delegate: self)
+            DBHandler.updateStudyParticipationStatus(study: Study.currentStudy!)
         }
     }
     

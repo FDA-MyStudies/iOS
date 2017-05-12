@@ -83,19 +83,6 @@ class ConsentPdfViewerStepViewController: ORKStepViewController {
         mailComposerVC.setSubject("Signed Consent")
         mailComposerVC.setMessageBody("", isHTML: false)
         
-        
-        let dir = FileManager.getStorageDirectory(type: .study)
-        
-        let fullPath:String!
-        
-        if (ConsentBuilder.currentConsent?.version!) == nil {
-            
-            fullPath = "file://" + dir + "/" + "Consent" +  "_" + "\((Study.currentStudy?.studyId)!)" + "_" + "No_Version" + ".pdf"
-
-        }
-        else{
-             fullPath = "file://" + dir + "/" + "Consent" +  "_" + "\((Study.currentStudy?.studyId)!)" + "_" + "\((ConsentBuilder.currentConsent?.version!)!)" + ".pdf"
-        }
       
       let Filename = "Consent" +  "_" + "\((Study.currentStudy?.studyId)!)" + ".pdf"
         

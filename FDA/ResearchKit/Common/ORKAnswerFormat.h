@@ -1290,7 +1290,7 @@ ORK_CLASS_AVAILABLE
 /**
  The size of the allowed step in the interval, in minutes.
  
- By default, the value of this property is 1. The minimum value is 1, and the maximum value is 30.
+ By default, the value of this property is uuuu. The minimum value is 1, and the maximum value is 30.
  */
 @property (readonly) NSInteger step;
 

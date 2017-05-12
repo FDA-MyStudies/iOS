@@ -47,16 +47,16 @@ class ResourcesDetailViewController: UIViewController {
             if self.resource?.file?.mimeType == .pdf{
                 
                 if self.resource?.file?.localPath != nil {
-                    
-                    let pdfData = FileDownloadManager.decrytFile(pathURL:URL(string:(self.resource?.file?.localPath)!))
+                    let path = resourcesDownloadPath + "/" + (self.resource?.file?.localPath)!
+                    let pdfData = FileDownloadManager.decrytFile(pathURL:URL(string:path))
                     self.loadWebViewWithData(data: pdfData!)
                     //self.loadWebViewWithPath(path: (self.resource?.file?.localPath)!)
                 }
                 else {
-                   let path = resourcesDownloadPath + "/PDF_linking.pdf"
-                    //self.startDownloadingfile()
-                    let pdfData = FileDownloadManager.decrytFile(pathURL:URL(string:path))
-                    self.loadWebViewWithData(data: pdfData!)
+                   //let path = resourcesDownloadPath + "/PDF_linking.pdf"
+                    self.startDownloadingfile()
+                    //let pdfData = FileDownloadManager.decrytFile(pathURL:URL(string:path))
+                    //self.loadWebViewWithData(data: pdfData!)
                 }
                 
                 
@@ -167,11 +167,15 @@ extension ResourcesDetailViewController:MFMailComposeViewControllerDelegate{
         if resource?.file?.localPath != nil {
             
             do {
-                let data = try Data.init(contentsOf: URL(string:(resource?.file?.localPath)!)!)
-                composeVC.addAttachmentData(data, mimeType: "application/pdf", fileName: (resource?.file?.name)!)
-            }
-            catch{
                 
+                 let fullPath = resourcesDownloadPath + "/" + (self.resource?.file?.localPath)!
+                
+                 let data = FileDownloadManager.decrytFile(pathURL: URL.init(string: fullPath))
+                
+                composeVC.addAttachmentData(data!, mimeType: "application/pdf", fileName: (resource?.file?.name)!)
+            }
+            catch let error as NSError{
+                 print("error \(error)")
             }
             
         }
@@ -213,7 +217,10 @@ extension ResourcesDetailViewController:FileDownloadManagerDelegates{
     func download(manager: FileDownloadManager, didFinishDownloadingAtPath path:String) {
         
         
-        let data = FileDownloadManager.decrytFile(pathURL: URL.init(string: path))
+         let fullPath = resourcesDownloadPath + "/" + path
+        
+        
+        let data = FileDownloadManager.decrytFile(pathURL: URL.init(string: fullPath))
         
         if data != nil{
             self.resource?.file?.localPath = path

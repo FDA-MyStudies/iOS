@@ -111,7 +111,7 @@
             else{
                 //Anonomous user
                 
-                //ORKPasscodeViewController.removePasscodeFromKeychain()
+                ORKPasscodeViewController.removePasscodeFromKeychain()
             }
 
         }

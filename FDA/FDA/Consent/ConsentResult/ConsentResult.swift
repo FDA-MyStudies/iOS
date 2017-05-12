@@ -59,17 +59,22 @@ class ConsentResult {
                     
                     signatureStepResult?.apply(to: self.consentDocument!)
                     
-                    if self.consentPdfData == nil{
+                    if self.consentPdfData?.count == 0{
                     
+                    self.consentPath = "Consent" +  "_" + "\((Study.currentStudy?.studyId)!)" + ".pdf"
+                        
                     
                     self.consentDocument?.makePDF(completionHandler: { data,error in
                         NSLog("data: \(data)    \n  error: \(error)")
                         
                         let dir = FileManager.getStorageDirectory(type: .study)
                         
-                        let fullPath:String!
-                        let path = AKUtility.baseFilePath + "/Study"
-                        var fileName:String = "Consent" +  "_" + "\((Study.currentStudy?.studyId)!)" + ".pdf"
+                        var fullPath:String!
+                        let path =  AKUtility.baseFilePath + "/Study"
+                        let fileName:String = "Consent" +  "_" + "\((Study.currentStudy?.studyId)!)" + ".pdf"
+                        
+                        self.consentPath = fileName
+                        
                         
                         fullPath = path + "/" + fileName
                         
@@ -78,7 +83,7 @@ class ConsentResult {
                         }
                         
                         self.consentPdfData = Data()
-                        self.consentPdfData = data?.base64EncodedData()
+                        self.consentPdfData = data
                         self.consentPath = fileName
                         
                         do {
@@ -90,11 +95,14 @@ class ConsentResult {
                             }
                             FileManager.default.createFile(atPath:fullPath , contents: data, attributes: [:])
                             
+                            let defaultPath = fullPath
+                            
+                            fullPath = "file://" + "\(fullPath!)"
                             
                             try data?.write(to:  URL(string:fullPath!)!)
                             
                             
-                            FileDownloadManager.encyptFile(pathURL: URL(string:fullPath!)!)
+                            FileDownloadManager.encyptFile(pathURL: URL(string:defaultPath!)!)
                             
                             //try data?.write(to: URL(string:fullPath)! , options: .atomicWrite)
                             
@@ -109,10 +117,13 @@ class ConsentResult {
                     else{
                         let dir = FileManager.getStorageDirectory(type: .study)
                         
-                        let fullPath:String!
-                        let path = AKUtility.baseFilePath + "/Study"
-                        var fileName:String = "Consent" +  "_" + "\((Study.currentStudy?.studyId)!)" + ".pdf"
-
+                        var fullPath:String!
+                        let path =  AKUtility.baseFilePath + "/Study"
+                        let fileName:String = "Consent" +  "_" + "\((Study.currentStudy?.studyId)!)" + ".pdf"
+                        
+                        self.consentPath = fileName
+                        
+                        
                         fullPath = path + "/" + fileName
                         
                         if !FileManager.default.fileExists(atPath: path) {
@@ -122,7 +133,7 @@ class ConsentResult {
                         var data:Data? = Data.init()
                         data = self.consentPdfData
                         self.consentPath = fileName
-                        self.consentPdfData = consentPdfData?.base64EncodedData()
+                        
                         do {
                             
                             if FileManager.default.fileExists(atPath: fullPath){
@@ -132,13 +143,11 @@ class ConsentResult {
                             }
                             FileManager.default.createFile(atPath:fullPath , contents: data, attributes: [:])
                             
+                            fullPath = "file://" + "\(fullPath!)"
                             
                             try data?.write(to:  URL(string:fullPath!)!)
                             
-                            
                             FileDownloadManager.encyptFile(pathURL: URL(string:fullPath!)!)
-                            
-                            //try data?.write(to: URL(string:fullPath)! , options: .atomicWrite)
                             
                             // writing to disk
                             

@@ -23,6 +23,8 @@ class WebViewController : UIViewController{
     var isEmailAvailable:Bool? = false
     
     var htmlString: String?
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -39,6 +41,7 @@ class WebViewController : UIViewController{
         activityIndicator.center = CGPoint(x: self.view.frame.midX, y: self.view.frame.midY-100)
         self.view.addSubview(activityIndicator)
         activityIndicator.startAnimating()
+        
         
         
         if self.isEmailAvailable == false{

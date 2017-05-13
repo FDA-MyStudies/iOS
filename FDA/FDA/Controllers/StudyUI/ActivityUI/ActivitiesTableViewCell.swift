@@ -253,7 +253,15 @@ class ActivitiesTableViewCell: UITableViewCell {
         case .One_Time:
             
             imageIcon?.image = UIImage.init(named: "taskIcon")
-            labelTime?.text = startDateString + " - " + endDateString
+            if endDate != nil {
+                
+                labelTime?.text = startDateString + " - " + endDateString
+            }
+            else {
+                labelTime?.text = startDateString
+                
+            }
+            
             //print("\(activityStartTime), \(startDateString) to \(endDateString)")
         case .Daily:
             

@@ -226,19 +226,32 @@ class ProfileViewController: UIViewController {
      
      */
     @IBAction func buttonActionDeleteAccount(_ sender: UIButton) {
-        //self.performSegue(withIdentifier: kConfirmationSegueIdentifier, sender: nil)
-        UIUtilities.showAlertMessageWithTwoActionsAndHandler(NSLocalizedString(kTitleDeleteAccount, comment: ""), errorMessage: NSLocalizedString(kDeleteAccountConfirmationMessage, comment: ""), errorAlertActionTitle: NSLocalizedString(kTitleDeleteAccount, comment: ""),
-                                                             errorAlertActionTitle2: NSLocalizedString(kTitleCancel, comment: ""), viewControllerUsed: self,
-                                                             action1: {
-                                                                
-                                                                
-                                                                self.sendRequestToDeleteAccount()
-                                                                
-                                                                
-        },
-                                                             action2: {
-                                                                
-        })
+        
+        if (Gateway.instance.studies?.count)! > 0 {
+            let studies = Gateway.instance.studies
+            let joinedStudies = studies?.filter({$0.userParticipateState.status == .inProgress || $0.userParticipateState.status == .completed})
+            
+            if joinedStudies?.count != 0 {
+                self.performSegue(withIdentifier: "confirmationSegue", sender: joinedStudies)
+            }
+            else {
+                UIUtilities.showAlertMessageWithTwoActionsAndHandler(NSLocalizedString(kTitleDeleteAccount, comment: ""), errorMessage: NSLocalizedString(kDeleteAccountConfirmationMessage, comment: ""), errorAlertActionTitle: NSLocalizedString(kTitleDeleteAccount, comment: ""),
+                                                                     errorAlertActionTitle2: NSLocalizedString(kTitleCancel, comment: ""), viewControllerUsed: self,
+                                                                     action1: {
+                                                                        
+                                                                        
+                                                                        self.sendRequestToDeleteAccount()
+                                                                        
+                                                                        
+                },
+                                                                     action2: {
+                                                                        
+                })
+            }
+        }
+        
+        
+        
     }
     
     
@@ -496,6 +509,10 @@ class ProfileViewController: UIViewController {
         
         if let changePassword = segue.destination as? ChangePasswordViewController {
             changePassword.viewLoadFrom = .profile
+            
+        }
+        else if let confirmDelete = segue.destination as? ConfirmationViewController {
+            confirmDelete.joinedStudies = sender as! Array<Study>
             
         }
     }

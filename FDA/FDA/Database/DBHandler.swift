@@ -256,6 +256,7 @@ class DBHandler: NSObject {
             else{
                  withdrawalInfo.type = .notAvailable
             }
+            study.withdrawalConfigration = withdrawalInfo
             
            
             

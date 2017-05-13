@@ -500,28 +500,52 @@ class DBHandler: NSObject {
                 }
                 else {
                     
-                    try! realm.write({
+                    //check if version is updated
+                    if dbActivity?.version != activity.version {
                         
-                        dbActivity?.type = activity.type?.rawValue
-                        dbActivity?.name = activity.name
-                        dbActivity?.startDate = activity.startDate
-                        dbActivity?.endDate = activity.endDate
-                        dbActivity?.version = activity.version
-                        dbActivity?.branching = activity.branching!
-                        dbActivity?.frequencyType = activity.frequencyType.rawValue
-                        dbActivity?.currentRunId = activity.userParticipationStatus.activityRunId
-                        dbActivity?.participationStatus = activity.userParticipationStatus.status.rawValue
-
-                        do {
-                            let json = ["data":activity.frequencyRuns]
-                            let data =  try JSONSerialization.data(withJSONObject: json, options: JSONSerialization.WritingOptions.prettyPrinted)
-                            dbActivity?.frequencyRunsData = data
-                        }
-                        catch{
+                        try! realm.write({
+                            realm.delete((dbActivity?.activityRuns)!)
+                            realm.delete(dbActivity!)
+                        })
+                        
+                        let updatedActivity = DBHandler.getDBActivity(activity: activity)
+                        dbActivities.append(updatedActivity)
+                        DBHandler.deleteMetaDataForActivity(activity: activity)
+                        
+                    }
+                    else {
+                         try! realm.write({
                             
-                        }
-                        
-                    })
+                            dbActivity?.currentRunId = activity.userParticipationStatus.activityRunId
+                            dbActivity?.participationStatus = activity.userParticipationStatus.status.rawValue
+                         })
+                    }
+                    
+//                    try! realm.write({
+//                        
+//                        
+//                            dbActivity?.type = activity.type?.rawValue
+//                            dbActivity?.name = activity.name
+//                            dbActivity?.startDate = activity.startDate
+//                            dbActivity?.endDate = activity.endDate
+//                            dbActivity?.updatedVersion = activity.version
+//                            dbActivity?.branching = activity.branching!
+//                            dbActivity?.frequencyType = activity.frequencyType.rawValue
+//                            dbActivity?.currentRunId = activity.userParticipationStatus.activityRunId
+//                            dbActivity?.participationStatus = activity.userParticipationStatus.status.rawValue
+//                            
+//                            do {
+//                                let json = ["data":activity.frequencyRuns]
+//                                let data =  try JSONSerialization.data(withJSONObject: json, options: JSONSerialization.WritingOptions.prettyPrinted)
+//                                dbActivity?.frequencyRunsData = data
+//                            }
+//                            catch{
+//                                
+//                            }
+//                        
+//                        
+//                        
+//                    })
 
                 }
             }
@@ -556,6 +580,7 @@ class DBHandler: NSObject {
         dbActivity.startDate = activity.startDate
         dbActivity.endDate = activity.endDate
         dbActivity.version = activity.version
+        //dbActivity.updatedVersion = activity.version
         dbActivity.branching = activity.branching!
         dbActivity.frequencyType = activity.frequencyType.rawValue
         dbActivity.currentRunId = activity.userParticipationStatus.activityRunId
@@ -834,6 +859,7 @@ class DBHandler: NSObject {
         })
         
     }
+    
     class func loadActivityMetaData(activity:Activity,completionHandler:@escaping (Bool) -> ()){
         
         let realm = try! Realm()
@@ -868,6 +894,21 @@ class DBHandler: NSObject {
 
         
         
+    }
+    class func deleteMetaDataForActivity(activity:Activity){
+        
+        let realm = try! Realm()
+        let dbMetaDataList = realm.objects(DBActivityMetaData.self).filter({$0.actvityId == activity.actvityId && $0.studyId == activity.studyId})
+        
+        if dbMetaDataList.count != 0 {
+            let metaData = dbMetaDataList.last
+            try! realm.write({
+                realm.delete(metaData!)
+                
+            })
+
+            
+        }
     }
 
     //MARK:- Dashboard - Statistics

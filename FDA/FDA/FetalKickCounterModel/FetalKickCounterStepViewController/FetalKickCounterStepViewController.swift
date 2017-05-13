@@ -283,8 +283,8 @@ extension FetalKickCounterStepViewController:UITextFieldDelegate {
             counterTextField?.resignFirstResponder()
             
             if textField.text?.characters.count == 0 {
-               textField.text = "00"
-                self.kickCounter = 00
+               textField.text = "000"
+                self.kickCounter = 000
             }
             
             
@@ -299,8 +299,8 @@ extension FetalKickCounterStepViewController:UITextFieldDelegate {
         if textField == counterTextField! && ( Utilities.isValidValue(someObject: counterTextField?.text as AnyObject?) == false || Int((counterTextField?.text)!)! <= 0) {
             counterTextField?.resignFirstResponder()
             if textField.text?.characters.count == 0 || (Int((counterTextField?.text)!) != nil) {
-                textField.text = "00"
-                self.kickCounter = 00
+                textField.text = "000"
+                self.kickCounter = 000
             }
            
             

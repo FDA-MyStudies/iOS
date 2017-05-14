@@ -600,7 +600,7 @@ extension ActivitiesViewController:ORKTaskViewControllerDelegate{
                 Study.currentActivity?.userStatus = .completed
                 
                 
-               // LabKeyServices().processResponse(responseData:(ActivityBuilder.currentActivityBuilder.actvityResult?.getResultDictionary())! , delegate: self)
+                LabKeyServices().processResponse(responseData:(ActivityBuilder.currentActivityBuilder.actvityResult?.getResultDictionary())! , delegate: self)
                 
                 
                 //To be Uncommented

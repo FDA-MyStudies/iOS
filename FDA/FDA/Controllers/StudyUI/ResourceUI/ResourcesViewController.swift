@@ -19,6 +19,7 @@ class ResourcesViewController : UIViewController{
     @IBOutlet var tableView : UITableView?
     var resourceLink:String?
     var fileType:String?
+    var navigateToStudyOverview:Bool? = false
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -36,6 +37,10 @@ class ResourcesViewController : UIViewController{
         //Next Phase
         //WCPServices().getResourcesForStudy(studyId:(Study.currentStudy?.studyId)!, delegate: self)
         
+        
+       
+        
+        
         self.loadResourceFromDatabase()
         
     }
@@ -48,6 +53,11 @@ class ResourcesViewController : UIViewController{
         self.navigationController?.setNavigationBarHidden(false, animated: true)
         
         self.tabBarController?.tabBar.isHidden = false
+        
+        if Study.currentStudy?.withdrawalConfigration?.message == nil && ( Study.currentStudy?.withdrawalConfigration?.type == nil || Study.currentStudy?.withdrawalConfigration?.type == .notAvailable ){
+            WCPServices().getStudyInformation(studyId: (Study.currentStudy?.studyId)!, delegate: self)
+        }
+        
         
     }
     
@@ -215,11 +225,16 @@ class ResourcesViewController : UIViewController{
                 self.navigateToStudyHome()
             }
             else {
+                
+                self.navigateToStudyOverview = true
                 self.sendRequestToGetStudyInfo(study: study)
             }
         }
     }
     func sendRequestToGetStudyInfo(study:Study){
+        
+        
+        
         WCPServices().getStudyInformation(studyId: study.studyId, delegate: self)
     }
     
@@ -283,7 +298,12 @@ class ResourcesViewController : UIViewController{
 
     }
     
-    
+    func withdrawalFromStudy(deleteResponse:Bool)  {
+        //TBD: uncomment following for UAT
+         LabKeyServices().withdrawFromStudy(studyId: (Study.currentStudy?.studyId)!, participantId: User.currentUser.userId, deleteResponses: deleteResponse, delegate: self)
+        
+        UserServices().withdrawFromStudy(studyId: (Study.currentStudy?.studyId)!, shouldDeleteData: deleteResponse, delegate: self)
+    }
     
     
 }
@@ -355,13 +375,69 @@ extension ResourcesViewController : UITableViewDelegate{
                 
                 // iF WEBCONFIG == ask_user
                 
-                UIUtilities.showAlertMessageWithTwoActionsAndHandler(NSLocalizedString("Leave Study", comment: ""), errorMessage: NSLocalizedString("Are you sure you want to leave Study ?", comment: ""), errorAlertActionTitle: NSLocalizedString("Leave Study", comment: ""),
+                var withdrawalMessage = Study.currentStudy?.withdrawalConfigration?.message
+                
+                var withdrawalType = Study.currentStudy?.withdrawalConfigration?.type
+                
+                if withdrawalMessage == nil {
+                    withdrawalMessage = "Are you sure you want to leave Study ?"
+                }
+                
+                if withdrawalType == nil {
+                    withdrawalType = .notAvailable
+                }
+                
+                
+                UIUtilities.showAlertMessageWithTwoActionsAndHandler(NSLocalizedString("Leave Study", comment: ""), errorMessage: NSLocalizedString(withdrawalMessage!, comment: ""), errorAlertActionTitle: NSLocalizedString("Proceed", comment: ""),
                                                                      errorAlertActionTitle2: NSLocalizedString("Cancel", comment: ""), viewControllerUsed: self,
                                                                      action1: {
-                                                                        //TBD: uncomment following for UAT
-                                                                       // LabKeyServices().withdrawFromStudy(studyId: (Study.currentStudy?.studyId)!, participantId: User.currentUser.userId, deleteResponses: false, delegate: self)
                                                                         
-                                                                        UserServices().withdrawFromStudy(studyId: (Study.currentStudy?.studyId)!, shouldDeleteData: false, delegate: self)
+                                                                        
+                                                                        switch withdrawalType! as StudyWithdrawalConfigrationType {
+                                                                            
+                                                                        case .askUser :
+                                                                            
+                                                                            UIUtilities.showAlertMessageWithThreeActionsAndHandler(kTitleMessage, errorMessage: "Do you want to delete Study data?", errorAlertActionTitle: "Delete my data", errorAlertActionTitle2: "Retain my data", errorAlertActionTitle3: "Cancel", viewControllerUsed: self, action1: {
+                                                                                // Delete action
+                                                                                
+                                                                                self.withdrawalFromStudy(deleteResponse: true)
+                                                                                
+                                                                            }, action2: {
+                                                                                // Retain Action
+                                                                                
+                                                                                 self.withdrawalFromStudy(deleteResponse: false)
+                                                                                
+                                                                            }, action3: {
+                                                                                // Cancel Action
+                                                                            })
+                                                                            
+                                                                            
+                                                                        case .deleteData:
+                                                                            
+                                                                            UIUtilities.showAlertMessageWithTwoActionsAndHandler(NSLocalizedString("Do you want to delete Study data?", comment: ""), errorMessage: NSLocalizedString(withdrawalMessage!, comment: ""), errorAlertActionTitle: NSLocalizedString("OK", comment: ""),
+                                                                                                                                 errorAlertActionTitle2: NSLocalizedString("Cancel", comment: ""), viewControllerUsed: self,
+                                                                                                                                 action1: {
+                                                                                                                                     self.withdrawalFromStudy(deleteResponse: true)
+                                                                            },
+                                                                                                                                 action2: {
+                                                                                                                                    
+                                                                            })
+                                                                        
+                                                                        case .noAction :
+                                                                            
+                                                                            UIUtilities.showAlertMessageWithTwoActionsAndHandler(NSLocalizedString("Do you want to delete Study data?", comment: ""), errorMessage: NSLocalizedString(withdrawalMessage!, comment: ""), errorAlertActionTitle: NSLocalizedString("OK", comment: ""),
+                                                                                                                                 errorAlertActionTitle2: NSLocalizedString("Cancel", comment: ""), viewControllerUsed: self,
+                                                                                                                                 action1: {
+                                                                                                                                    self.withdrawalFromStudy(deleteResponse: false)
+                                                                            },
+                                                                                                                                 action2: {
+                                                                                                                                    
+                                                                            })
+                                                                            
+                                                                            default : break
+                                                                        }
+                                                                       
+
                 },
                                                                      action2: {
                                                                         
@@ -443,11 +519,15 @@ extension ResourcesViewController:NMWebServiceDelegate {
         }
         else if(requestName as String == WCPMethods.studyInfo.rawValue){
             
-           
+            if self.navigateToStudyOverview == true{
+                // this means that about the study has been tapped and get study info has been called
+                self.navigateToStudyOverview = false
+                self.tabBarController?.tabBar.isHidden = true
+                
+                self.navigateToStudyHome()
+            }
             
-            self.tabBarController?.tabBar.isHidden = true
             
-            self.navigateToStudyHome()
         }
         else if requestName as String == RegistrationMethods.consentPDF.method.methodName{
             
@@ -477,11 +557,9 @@ extension ResourcesViewController:NMWebServiceDelegate {
             }
             
             
-            
-           
-           
-            
-            
+        }
+        else if(requestName as String == WCPMethods.studyInfo.rawValue){
+            self.removeProgressIndicator()
         }
         
         

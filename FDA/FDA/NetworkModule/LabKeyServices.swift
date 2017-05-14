@@ -73,7 +73,7 @@ class LabKeyServices: NSObject {
         if let userStudyStatus = currentUser.participatedStudies.filter({$0.studyId == Study.currentStudy?.studyId!}).first {
             
             
-            let studyId =  "CAFDA12" // Study.currentStudy?.studyId!
+            let studyId =  Study.currentStudy?.studyId!
             let activiyId =  Study.currentActivity?.actvityId!
             let activityName =  Study.currentActivity?.shortName!
             let activityVersion = Study.currentActivity?.version!
@@ -81,7 +81,7 @@ class LabKeyServices: NSObject {
             
             
             
-            let info =  [kStudyId:studyId ,
+            let info =  [kStudyId:studyId! ,
                          kActivityId:activiyId! ,
                          kActivityName:activityName! ,
                          "version" :activityVersion! ,

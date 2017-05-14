@@ -51,13 +51,15 @@ class FetalKickCounterTask {
      */
     func initWithFormat(duration:Float,identifier:String,instructionText:String?)  {
         
+        
+        
         self.identifier = identifier
         self.steps =  [ORKStep]()
         if duration > 0.0{
-            self.duration = duration
+            self.duration =  duration
         }
         else{
-            self.duration = 5.0
+            self.duration = 0.05
             Logger.sharedInstance.warn("Duration is null:\(duration)")
         }
         

@@ -222,7 +222,9 @@ class FetalKickCounterStepViewController:  ORKStepViewController {
         editCounterButton?.isHidden = false
         
         
-        self.counterTextField?.text =  self.kickCounter! < 10 ?  ("0\(self.kickCounter!)" == "00" ? "000" : "0\(self.kickCounter!)") : "\(self.kickCounter!)"
+        
+        
+        self.counterTextField?.text =  self.kickCounter! < 10 ?  ("0\(self.kickCounter!)" == "00" ? "000" : "00\(self.kickCounter!)") : (self.kickCounter! > 100 ? "\(self.kickCounter!)" : "0\(self.kickCounter!)" )
         
     }
     
@@ -315,12 +317,18 @@ extension FetalKickCounterStepViewController:UITextFieldDelegate {
                 textField.text = "000"
                 self.kickCounter = 000
             }
-           
+            
             
             //Utilities.showAlertWithMessage(alertMessage:kAlertPleaseEnterValidValue)
         }
         else{
             self.kickCounter = Int((counterTextField?.text)!)
+            
+            if textField.text?.characters.count == 2{
+                textField.text = "0" + textField.text!
+                self.kickCounter  = (Int((counterTextField?.text)!))
+            }
+            
         }
         
     }

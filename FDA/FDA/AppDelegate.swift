@@ -281,6 +281,75 @@
             
         }
         
+        func checkConsentStatus() {
+            
+           
+            if(StudyUpdates.studyConsentUpdated){
+                print("Study consent is updated: Please Present Consent UI")
+                
+                
+                
+                let navigationController =  (self.window?.rootViewController as! UINavigationController)
+                
+                var topController:UIViewController = navigationController
+                if navigationController.viewControllers.count > 0 {
+                     topController = navigationController.viewControllers.first!
+                }
+                
+                
+                
+                            UIUtilities.showAlertMessageWithTwoActionsAndHandler(NSLocalizedString("Consent Updated", comment: ""), errorMessage: NSLocalizedString("The Consent Document for this study has been updated. Please review the revised Consent terms and provide your Informed Consent, to continue participating in the study.", comment: ""), errorAlertActionTitle: NSLocalizedString("Review", comment: ""),
+                                                                                 errorAlertActionTitle2:nil, viewControllerUsed: topController,
+                                                                                 action1: {
+                                                                                     WCPServices().getEligibilityConsentMetadata(studyId:(Study.currentStudy?.studyId)!, delegate: self as NMWebServiceDelegate)
+                                                                                    self.addAndRemoveProgress(add: true)
+                            },
+                                                                                 action2: {
+                
+                            })
+                
+            }
+            else {
+                print("Study consent not updated")
+            }
+        }
+        
+        
+        /**
+         
+         Used to Create Eligibility Consent Task
+         
+         */
+        func createEligibilityConsentTask() {
+            
+            let taskViewController:ORKTaskViewController?
+            
+            let consentTask:ORKOrderedTask? = ConsentBuilder.currentConsent?.createConsentTask() as! ORKOrderedTask?
+            
+            taskViewController = ORKTaskViewController(task:consentTask, taskRun: nil)
+            
+            taskViewController?.delegate = self
+            taskViewController?.outputDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+            
+            taskViewController?.navigationItem.title = nil
+            
+            UIView.appearance(whenContainedInInstancesOf: [ORKTaskViewController.self]).tintColor = kUIColorForSubmitButtonBackground
+            
+            UIApplication.shared.statusBarStyle = .default
+            
+            
+            var topVC = UIApplication.shared.keyWindow?.rootViewController
+            
+            
+            while topVC?.presentedViewController != nil {
+                topVC = topVC?.presentedViewController
+            }
+            
+            topVC?.present(taskViewController!, animated: true, completion: nil)
+        }
+        
+        
+        
         func checkPasscode(viewController:UIViewController) {
             
             
@@ -368,6 +437,17 @@
             
         }
         
+        
+        func popToStudyListViewController(){
+            
+            let navigationController =  (self.window?.rootViewController as! UINavigationController)
+            
+            var topController:UIViewController = navigationController
+            if navigationController.viewControllers.count > 0 {
+                topController = navigationController.viewControllers.first!
+            }
+            _ = topController.navigationController?.popViewController(animated: true)
+        }
         
         
         func handleSignoutResponse(){
@@ -462,12 +542,21 @@
                 
                 
             }
+            else if requestName as String == WCPMethods.eligibilityConsent.method.methodName {
+                self.addAndRemoveProgress(add: false)
+                self.createEligibilityConsentTask()
+            }
+                
             else if requestName as String == RegistrationMethods.logout.method.methodName {
                 
                 
                 self.handleSignoutResponse()
                 
                 
+            }
+            else  if requestName as String == RegistrationMethods.updateEligibilityConsentStatus.method.methodName{
+                
+                self.addAndRemoveProgress(add: false)
             }
             
             
@@ -501,18 +590,43 @@
                 
             case ORKTaskViewControllerFinishReason.completed:
                 print("completed")
-                taskResult = taskViewController.result
                 
+                if taskViewController.task?.identifier == kConsentTaskIdentifier{
+                    ConsentBuilder.currentConsent?.consentResult?.consentDocument =   ConsentBuilder.currentConsent?.consentDocument
+                    
+                    ConsentBuilder.currentConsent?.consentResult?.initWithORKTaskResult(taskResult:taskViewController.result )
+                    
+                    //save consent to study
+                    Study.currentStudy?.signedConsentVersion = ConsentBuilder.currentConsent?.version!
+                    Study.currentStudy?.signedConsentFilePath = ConsentBuilder.currentConsent?.consentResult?.consentPath!
+                    
+                    // save also in DB
+                    DBHandler.saveConsentInformation(study: Study.currentStudy!)
+                    
+                    DBHandler.updateMetaDataToUpdateForStudy(study: Study.currentStudy!, updateDetails:nil)
+                    
+                    
+                }
+                else{
+
+                taskResult = taskViewController.result
                 let ud = UserDefaults.standard
                 ud.set(false, forKey: kPasscodeIsPending)
                 ud.synchronize()
                 
                 self.appIsResignedButDidNotEnteredBackground = false
-                
+                }
             case ORKTaskViewControllerFinishReason.failed:
                 print("failed")
                 taskResult = taskViewController.result
             case ORKTaskViewControllerFinishReason.discarded:
+                
+                if  taskViewController.task?.identifier == kConsentTaskIdentifier{
+                    
+                    self.popToStudyListViewController()
+                }
+                
+                
                 print("discarded")
                 
                 taskResult = taskViewController.result
@@ -520,12 +634,196 @@
                 print("saved")
                 taskResult = taskViewController.restorationData
             }
+            
+            
+            
             taskViewController.dismiss(animated: true, completion: nil)
+            
+            if taskViewController.task?.identifier == kConsentTaskIdentifier && reason == ORKTaskViewControllerFinishReason.completed{
+                
+                 ConsentBuilder.currentConsent?.consentStatus = .completed
+                
+                self.addAndRemoveProgress(add: true)
+                
+                UserServices().updateUserEligibilityConsentStatus(eligibilityStatus: true, consentStatus:(ConsentBuilder.currentConsent?.consentStatus)!  , delegate: self)
+               
+            }
+
+            
+            
+            
+            
         }
+        
         
         func taskViewController(_ taskViewController: ORKTaskViewController, stepViewControllerWillAppear stepViewController: ORKStepViewController) {
             
+            
+             if taskViewController.task?.identifier == kConsentTaskIdentifier{
+            
+            if (taskViewController.result.results?.count)! > 1{
+                
+                if activityBuilder?.actvityResult?.result?.count == taskViewController.result.results?.count{
+                    //Removing the dummy result:Currentstep result which not presented yet
+                    activityBuilder?.actvityResult?.result?.removeLast()
+                }
+                else{
+                    
+                }
+            }
+            
+            //Handling show and hide of Back Button
+            
+            //For Verified Step , Completion Step, Visual Step, Review Step, Share Pdf Step
+            
+            if  stepViewController.step?.identifier == kConsentCompletionStepIdentifier || stepViewController.step?.identifier == "visual" || stepViewController.step?.identifier == "Review" || stepViewController.step?.identifier == kConsentSharePdfCompletionStep{
+                
+                
+                if stepViewController.step?.identifier == kEligibilityVerifiedScreen{
+                    stepViewController.continueButtonTitle = "Continue"
+                }
+                stepViewController.backButtonItem = nil
+            }
+                //checking if currentstep is View Pdf Step
+            else if stepViewController.step?.identifier == kConsentViewPdfCompletionStep{
+                
+                //Back button is enabled
+                stepViewController.backButtonItem?.isEnabled = true
+                
+                let orkStepResult:ORKStepResult? = taskViewController.result.results?[(taskViewController.result.results?.count)! - 2] as! ORKStepResult?
+                
+                let consentSignatureResult:ConsentCompletionTaskResult? = orkStepResult?.results?.first as? ConsentCompletionTaskResult
+                
+                //Checking if Signature is consented after Review Step
+                
+                if  consentSignatureResult?.didTapOnViewPdf == false{
+                    //Directly moving to completion step by skipping Intermediate PDF viewer screen
+                    stepViewController.goForward()
+                }
+                else{
+                    
+                }
+            }
+            else{
+                //Back button is enabled
+                stepViewController.backButtonItem?.isEnabled = true
+                
+            }
+                
+                
+            }
         }
+        
+        
+        //MARK:- StepViewController Delegate
+        
+        public func stepViewController(_ stepViewController: ORKStepViewController, didFinishWith direction: ORKStepViewControllerNavigationDirection){
+            
+        }
+        
+        public func stepViewControllerResultDidChange(_ stepViewController: ORKStepViewController){
+            
+        }
+        
+        public func stepViewControllerDidFail(_ stepViewController: ORKStepViewController, withError error: Error?){
+            
+        }
+        
+        func taskViewController(_ taskViewController: ORKTaskViewController, viewControllerFor step: ORKStep) -> ORKStepViewController? {
+            
+            
+             if taskViewController.task?.identifier == kConsentTaskIdentifier{
+            
+            
+            //CurrentStep is TokenStep
+            
+            if step.identifier == kEligibilityTokenStep {
+                
+                let gatewayStoryboard = UIStoryboard(name: kFetalKickCounterStep, bundle: nil)
+                
+                let ttController = gatewayStoryboard.instantiateViewController(withIdentifier: kEligibilityStepViewControllerIdentifier) as! EligibilityStepViewController
+                ttController.descriptionText = step.text
+                ttController.step = step
+                
+                return ttController
+            }
+            else if step.identifier == kConsentSharePdfCompletionStep {
+                
+                // let reviewStep:ORKStepResult? = taskViewController.result.results?[(taskViewController.result.results?.count)! - 1] as! ORKStepResult?
+                
+                var totalResults =  taskViewController.result.results
+                let reviewStep:ORKStepResult?
+                
+                totalResults = totalResults?.filter({$0.identifier == "Review"})
+                
+                reviewStep = totalResults?.first as! ORKStepResult?
+                
+                if (reviewStep?.identifier)! == "Review" && (reviewStep?.results?.count)! > 0{
+                    let consentSignatureResult:ORKConsentSignatureResult? = reviewStep?.results?.first as? ORKConsentSignatureResult
+                    
+                    if  consentSignatureResult?.consented == false{
+                        taskViewController.dismiss(animated: true
+                            , completion: nil)
+                        
+                        var topVC = UIApplication.shared.keyWindow?.rootViewController
+                        while topVC?.presentedViewController != nil {
+                            topVC = topVC?.presentedViewController
+                        }
+
+                        _ = topVC?.navigationController?.popViewController(animated: true)
+                        return nil
+                        
+                    }
+                    else{
+                        
+                        let documentCopy:ORKConsentDocument = (ConsentBuilder.currentConsent?.consentDocument)!.copy() as! ORKConsentDocument
+                        
+                        consentSignatureResult?.apply(to: documentCopy)
+                        let gatewayStoryboard = UIStoryboard(name: kFetalKickCounterStep, bundle: nil)
+                        let ttController = gatewayStoryboard.instantiateViewController(withIdentifier: kConsentSharePdfStoryboardId) as! ConsentSharePdfStepViewController
+                        ttController.step = step
+                        ttController.consentDocument =  documentCopy
+                        return ttController
+                    }
+                }
+                else {
+                    return nil
+                }
+            }
+            else if step.identifier == kConsentViewPdfCompletionStep {
+                
+                let reviewSharePdfStep:ORKStepResult? = taskViewController.result.results?.last as! ORKStepResult?
+                
+                let result = (reviewSharePdfStep?.results?.first as? ConsentCompletionTaskResult)
+                
+                if (result?.didTapOnViewPdf)!{
+                    let gatewayStoryboard = UIStoryboard(name: kFetalKickCounterStep, bundle: nil)
+                    
+                    let ttController = gatewayStoryboard.instantiateViewController(withIdentifier: kConsentViewPdfStoryboardId) as! ConsentPdfViewerStepViewController
+                    ttController.step = step
+                    
+                    ttController.pdfData = result?.pdfData
+                    
+                    return ttController
+                }
+                else{
+                    //taskViewController.goForward()
+                    return nil
+                }
+            }
+            else {
+                
+                return nil
+            }
+                
+            }
+             else{
+                // other than consent step mostly passcode step
+                
+                return nil
+            }
+        }
+
     }
     
     extension AppDelegate: ORKPasscodeDelegate {
@@ -555,6 +853,10 @@
         }
         
     }
+    
+    
+    
+    
     @available(iOS 10, *)
     extension AppDelegate : UNUserNotificationCenterDelegate {
         

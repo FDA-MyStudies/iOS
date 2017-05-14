@@ -312,6 +312,11 @@ class StudyWithdrawalConfigration {
         static  var studyResourcesUpdated = false
         static  var studyVersion:String = ""
         
+        init() {
+            
+        }
+        
+        
         init(detail:Dictionary<String,Any>){
             
             if Utilities.isValidObject(someObject: detail[kStudyUpdates] as AnyObject?){

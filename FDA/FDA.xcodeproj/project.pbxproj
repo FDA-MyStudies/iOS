@@ -168,6 +168,8 @@
 		94B3DD5E1E6ED8E500327AE5 /* StudyOverviewPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B3DD3D1E6ED8E500327AE5 /* StudyOverviewPageViewController.swift */; };
 		94B3DD5F1E6ED8E500327AE5 /* StudyOverviewPageViewControllerFirst.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B3DD3E1E6ED8E500327AE5 /* StudyOverviewPageViewControllerFirst.swift */; };
 		94B3DD601E6ED8E500327AE5 /* StudyOverviewViewControllerSecond.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B3DD3F1E6ED8E500327AE5 /* StudyOverviewViewControllerSecond.swift */; };
+		94C13DBC1EC1988600E3AEBF /* ChartsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94C13DBB1EC1988600E3AEBF /* ChartsViewController.swift */; };
+		94C13DBE1EC19E4700E3AEBF /* LineChartCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94C13DBD1EC19E4700E3AEBF /* LineChartCell.swift */; };
 		94C550501EBA153F007740D0 /* StudyDashboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94C5504F1EBA153F007740D0 /* StudyDashboard.swift */; };
 		94C602311E51C7D500CB72F7 /* WCPServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94C602301E51C7D500CB72F7 /* WCPServices.swift */; };
 		94C6BD441EB8513300D4AA72 /* AppUpdateBlocker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94C6BD431EB8513300D4AA72 /* AppUpdateBlocker.swift */; };
@@ -409,6 +411,8 @@
 		94B3DD3D1E6ED8E500327AE5 /* StudyOverviewPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudyOverviewPageViewController.swift; sourceTree = "<group>"; };
 		94B3DD3E1E6ED8E500327AE5 /* StudyOverviewPageViewControllerFirst.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudyOverviewPageViewControllerFirst.swift; sourceTree = "<group>"; };
 		94B3DD3F1E6ED8E500327AE5 /* StudyOverviewViewControllerSecond.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudyOverviewViewControllerSecond.swift; sourceTree = "<group>"; };
+		94C13DBB1EC1988600E3AEBF /* ChartsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChartsViewController.swift; sourceTree = "<group>"; };
+		94C13DBD1EC19E4700E3AEBF /* LineChartCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LineChartCell.swift; sourceTree = "<group>"; };
 		94C5504F1EBA153F007740D0 /* StudyDashboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudyDashboard.swift; sourceTree = "<group>"; };
 		94C602301E51C7D500CB72F7 /* WCPServices.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WCPServices.swift; sourceTree = "<group>"; };
 		94C6BD431EB8513300D4AA72 /* AppUpdateBlocker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppUpdateBlocker.swift; sourceTree = "<group>"; };
@@ -1119,6 +1123,7 @@
 		94B3DD391E6ED8E500327AE5 /* StudyUI */ = {
 			isa = PBXGroup;
 			children = (
+				94C13DB81EC1986900E3AEBF /* ChartsUI */,
 				94B3DD3A1E6ED8E500327AE5 /* Study.storyboard */,
 				94B3DD3B1E6ED8E500327AE5 /* Study.xcassets */,
 				94B3DD3C1E6ED8E500327AE5 /* StudyOverviewUI */,
@@ -1138,6 +1143,15 @@
 				4833E9E21E712C2B0032D244 /* StudyOverview.plist */,
 			);
 			path = StudyOverviewUI;
+			sourceTree = "<group>";
+		};
+		94C13DB81EC1986900E3AEBF /* ChartsUI */ = {
+			isa = PBXGroup;
+			children = (
+				94C13DBB1EC1988600E3AEBF /* ChartsViewController.swift */,
+				94C13DBD1EC19E4700E3AEBF /* LineChartCell.swift */,
+			);
+			path = ChartsUI;
 			sourceTree = "<group>";
 		};
 		94C5504C1EBA1516007740D0 /* DashboardModel */ = {
@@ -1613,6 +1627,7 @@
 				941909B81E5310D6001B01C5 /* Gateway.swift in Sources */,
 				94B3DD451E6ED8E500327AE5 /* ProfileTableViewCell.swift in Sources */,
 				6EED7B391E6574FE002C1FA3 /* FetalKickCounterStep.swift in Sources */,
+				94C13DBC1EC1988600E3AEBF /* ChartsViewController.swift in Sources */,
 				6EC8019B1E67EF3400CC5966 /* Constants.swift in Sources */,
 				6EC129221E64279100B90167 /* ConsentStepResult.swift in Sources */,
 				6E7D2D5C1E433E8800763D4C /* ViewController.swift in Sources */,
@@ -1648,6 +1663,7 @@
 				94CD96EA1E4AF61800946477 /* NetworkWebServiceHandler.swift in Sources */,
 				6EB7187C1E77C01900E293EF /* Encoder.swift in Sources */,
 				6ED1B2301E54256700BF463F /* ActivityActiveStep.swift in Sources */,
+				94C13DBE1EC19E4700E3AEBF /* LineChartCell.swift in Sources */,
 				481DFA4C1E6EEB70004C39EF /* WebViewController.swift in Sources */,
 				6ED1B2241E54254900BF463F /* ActivityResult.swift in Sources */,
 				9432C2FB1E4C9EF8005984EC /* UserServices.swift in Sources */,

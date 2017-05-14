@@ -262,18 +262,41 @@ class LeftMenuViewController : UIViewController, LeftMenuProtocol {
 
      */
     @IBAction func buttonActionSignOut(_ sender: UIButton) {
-        UIUtilities.showAlertMessageWithTwoActionsAndHandler(NSLocalizedString("Sign Out", comment: ""), errorMessage: NSLocalizedString("Are you sure you want to Sign Out ?", comment: ""), errorAlertActionTitle: NSLocalizedString("Sign Out", comment: ""),
-                                                             errorAlertActionTitle2: NSLocalizedString("Cancel", comment: ""), viewControllerUsed: self,
-                                                             action1: {
-                                                                
-                                                                
-                                                                self.sendRequestToSignOut()
-                                                                
-                                                                
-        },
-                                                             action2: {
-                                                                
-        })
+        
+        DBHandler.isDataAvailableToSync { (available) in
+            if(available){
+                
+                UIUtilities.showAlertMessageWithTwoActionsAndHandler(NSLocalizedString("Sign Out", comment: ""), errorMessage: NSLocalizedString("Are you sure you want to Sign Out ? Your data will be lost.", comment: ""), errorAlertActionTitle: NSLocalizedString("Sign Out", comment: ""),
+                                                                     errorAlertActionTitle2: NSLocalizedString("Sign Out later", comment: ""), viewControllerUsed: self,
+                                                                     action1: {
+                                                                        
+                                                                        
+                                                                        self.sendRequestToSignOut()
+                                                                        
+                                                                        
+                },
+                                                                     action2: {
+                                                                        
+                })
+            }
+            else {
+                
+                UIUtilities.showAlertMessageWithTwoActionsAndHandler(NSLocalizedString("Sign Out", comment: ""), errorMessage: NSLocalizedString("Are you sure you want to Sign Out ?", comment: ""), errorAlertActionTitle: NSLocalizedString("Sign Out", comment: ""),
+                                                                     errorAlertActionTitle2: NSLocalizedString("Cancel", comment: ""), viewControllerUsed: self,
+                                                                     action1: {
+                                                                        
+                                                                        
+                                                                        self.sendRequestToSignOut()
+                                                                        
+                                                                        
+                },
+                                                                     action2: {
+                                                                        
+                })
+            }
+        }
+        
+       
         
     }
 
@@ -295,6 +318,7 @@ class LeftMenuViewController : UIViewController, LeftMenuProtocol {
      */
     func signout(){
       
+        
         
         ORKPasscodeViewController.removePasscodeFromKeychain()
         

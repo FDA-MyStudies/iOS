@@ -774,7 +774,7 @@
                         <outlet property="buttonSignUp" destination="k1R-vE-2bf" id="Poi-wx-15a"/>
                         <outlet property="tableView" destination="ss7-zA-DJ6" id="5c2-N8-WqJ"/>
                         <segue destination="slw-Bf-fNL" kind="show" identifier="verificationSegue" id="Wsb-hw-1LK"/>
-                        <segue destination="Wno-P6-W9P" kind="unwind" identifier="unwindStudyHomeSegue" unwindAction="unwindeToStudyHome:" id="qV5-ui-5l6"/>
+                        <segue destination="Wno-P6-W9P" kind="unwind" identifier="unwindStudyHomeSegue" animates="NO" unwindAction="unwindeToStudyHome:" id="qV5-ui-5l6"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Hb9-ku-DtX" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -981,7 +981,7 @@
                         <outlet property="labelVerificationMessage" destination="On0-dU-saR" id="Aa8-kK-rlZ"/>
                         <outlet property="textFieldVerificationCode" destination="0li-V5-aDa" id="T3h-Ch-q3K"/>
                         <segue destination="3kT-ho-jWT" kind="show" identifier="signupCompletionSegue" id="0lP-oe-drw"/>
-                        <segue destination="yNZ-IU-ygG" kind="unwind" identifier="unwindStudyHomeSegue" unwindAction="unwindeToStudyHome:" id="qPU-Wl-xNH"/>
+                        <segue destination="yNZ-IU-ygG" kind="unwind" identifier="unwindStudyHomeSegue" animates="NO" unwindAction="unwindeToStudyHome:" id="qPU-Wl-xNH"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xPG-Tx-RfJ" userLabel="First Responder" sceneMemberID="firstResponder"/>

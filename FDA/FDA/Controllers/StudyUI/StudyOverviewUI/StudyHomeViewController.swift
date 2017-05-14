@@ -44,6 +44,17 @@ class StudyHomeViewController : UIViewController{
             pageViewController?.pageViewDelegate = self
         }
     }
+    
+    func hideSubViews(){
+        for subview in self.view.subviews{
+            subview.isHidden = true;
+        }
+    }
+    func unHideSubViews(){
+        for subview in self.view.subviews{
+            subview.isHidden = false;
+        }
+    }
 
 //MARK:- Viewcontroller Lifecycle
     
@@ -66,6 +77,8 @@ class StudyHomeViewController : UIViewController{
                 buttonStar.isSelected = true
             }
         }
+        
+       
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -394,9 +407,65 @@ class StudyHomeViewController : UIViewController{
     @IBAction func unwindeToStudyHome(_ segue:UIStoryboardSegue){
         //unwindStudyHomeSegue
         //self.buttonActionJoinStudy(UIButton())
-        WCPServices().getEligibilityConsentMetadata(studyId:(Study.currentStudy?.studyId)!, delegate: self as NMWebServiceDelegate)
+        
+        self.hideSubViews()
+        //call api to get all study stats
+        UserServices().getStudyStates(self)
+        
+        
+       // WCPServices().getEligibilityConsentMetadata(studyId:(Study.currentStudy?.studyId)!, delegate: self as NMWebServiceDelegate)
     }
-  
+    
+  //MARK:- Segue Methods
+    func handleResponseForStudyState(){
+        let currentUser = User.currentUser
+        let study = Study.currentStudy!
+        if let studyStatus = currentUser.participatedStudies.filter({$0.studyId == Study.currentStudy?.studyId}).last {
+            
+            if study.status == .Active {
+                if studyStatus.status == .inProgress {
+                    //go to study dashboard
+                    
+                    self.pushToStudyDashboard()
+                }
+                else if studyStatus.status == .yetToJoin {
+                    
+                    //check if enrolling is allowed
+                    if study.studySettings.enrollingAllowed {
+                        WCPServices().getEligibilityConsentMetadata(studyId:(Study.currentStudy?.studyId)!, delegate: self as NMWebServiceDelegate)
+                    }
+                    else {
+                        //unhide view
+                        self.unHideSubViews()
+                    }
+                   
+                }
+                else {
+                     //unhide view
+                    self.unHideSubViews()
+                }
+            }
+            else{
+                 //unhide view
+                self.unHideSubViews()
+            }
+            
+        }
+        else {
+            
+            if study.status == .Active {
+                if study.studySettings.enrollingAllowed {
+                    WCPServices().getEligibilityConsentMetadata(studyId:(Study.currentStudy?.studyId)!, delegate: self as NMWebServiceDelegate)
+                }
+                else {
+                    self.unHideSubViews()
+                }
+            }
+            else {
+               self.unHideSubViews()
+            }
+        }
+    }
     
 //MARK:- Segue Methods
     
@@ -484,14 +553,15 @@ extension StudyHomeViewController:NMWebServiceDelegate {
     func finishedRequest(_ manager: NetworkManager, requestName: NSString, response: AnyObject?) {
         Logger.sharedInstance.info("requestname : \(requestName)")
         
-        self.removeProgressIndicator()
+       
         
         if requestName as String == WCPMethods.eligibilityConsent.method.methodName {
+             self.removeProgressIndicator()
             self.createEligibilityConsentTask()
         }
         
         if requestName as String == RegistrationMethods.updateStudyState.method.methodName{
-            
+             self.removeProgressIndicator()
             if isStudyBookMarked {
                 
             }
@@ -523,6 +593,7 @@ extension StudyHomeViewController:NMWebServiceDelegate {
                     UserServices().updateUserParticipatedStatus(studyStauts: currentUserStudyStatus, delegate: self)
                 }
             }
+             self.removeProgressIndicator()
             
            
            
@@ -531,7 +602,7 @@ extension StudyHomeViewController:NMWebServiceDelegate {
         
         
         if requestName as String == RegistrationMethods.updateEligibilityConsentStatus.method.methodName{
-            
+             self.removeProgressIndicator()
             if( User.currentUser.getStudyStatus(studyId:(Study.currentStudy?.studyId)! ) == UserStudyStatus.StudyStatus.inProgress){
                 self.pushToStudyDashboard()
             } 
@@ -541,6 +612,13 @@ extension StudyHomeViewController:NMWebServiceDelegate {
         if requestName as String == WCPMethods.consentDocument.method.methodName {
             self.removeProgressIndicator()
             self.displayConsentDocument()
+        }
+        
+        if (requestName as String == RegistrationMethods.studyState.description){
+            
+            self.removeProgressIndicator()
+            self.handleResponseForStudyState()
+            
         }
     }
     

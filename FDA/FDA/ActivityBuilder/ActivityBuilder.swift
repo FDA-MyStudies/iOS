@@ -203,8 +203,12 @@ class ActivityBuilder {
                             if (activityStep?.destinations?.count)! > 0{
                                 
                                 var defaultStepIdentifier:String = ""
-                                    
-                                    defaultStepIdentifier = (activityStepArray?[(i!+1)].key)!
+                                
+                                if i! + 1 < 35{
+                                     defaultStepIdentifier = (activityStepArray?[(i!+1)].key)!
+                                }
+                                
+                                
                                 var defaultStepExist:Bool? = false
                                 let resultSelector: ORKResultSelector?
                                 var predicateRule: ORKPredicateStepNavigationRule?
@@ -250,7 +254,7 @@ class ActivityBuilder {
                                            
                                             
                                             if  boolValue != nil {
-                                                predicateQuestionChoiceA = ORKResultPredicate.predicateForBooleanQuestionResult(with: resultSelector!, expectedAnswer: boolValue!)
+//                                                predicateQuestionChoiceA = ORKResultPredicate.predicateForBooleanQuestionResult(with: resultSelector!, expectedAnswer: boolValue!)
                                             }
                                             
                                             
@@ -259,7 +263,7 @@ class ActivityBuilder {
                                         }
                                             
                                                 choicePredicate.append(predicateQuestionChoiceA)
-                                        
+                                        destination?.append( dict[kDestination]! as! String)
                                         }
                                         else{
                                             
@@ -275,7 +279,7 @@ class ActivityBuilder {
                                         }
                                        
                                         
-                                        destination?.append( dict[kDestination]! as! String)
+                                        
                                         
                                     }
                                     
@@ -307,9 +311,9 @@ class ActivityBuilder {
                                         
                                         
                                         if defaultStepExist!{
-                                            destination =  destination?.filter({ $0 != defaultStepIdentifier
-                                                
-                                            })
+//                                            destination =  destination?.filter({ $0 != defaultStepIdentifier
+//                                                
+//                                            })
                                         }
                                         
                                          predicateRule = ORKPredicateStepNavigationRule(resultPredicates: choicePredicate, destinationStepIdentifiers: destination!, defaultStepIdentifier: defaultStepIdentifier, validateArrays: true)

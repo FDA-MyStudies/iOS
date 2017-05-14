@@ -206,7 +206,7 @@ class StudyListViewController: UIViewController {
         
         DBHandler.loadStudyListFromDatabase { (studies) in
             if studies.count > 0 {
-                
+                 self.tableView?.isHidden = false
                 let  sortedstudies =  studies.sorted(by: { (study1:Study, study2:Study) -> Bool in
                     //return ((study1.status.sortIndex < study2.status.sortIndex) && (study1.userParticipateState.status.sortIndex < study2.userParticipateState.status.sortIndex))
                    return (study1.userParticipateState.status.sortIndex < study2.userParticipateState.status.sortIndex)
@@ -387,6 +387,7 @@ class StudyListViewController: UIViewController {
         if (Gateway.instance.studies?.count)! > 0{
             self.loadStudiesFromDatabase()
             self.labelHelperText.isHidden = true
+             self.tableView?.isHidden = false
         }
         else {
             self.tableView?.isHidden = true

@@ -68,6 +68,8 @@ class StudyDashboardViewController : UIViewController{
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         UIApplication.shared.statusBarStyle = .lightContent
+        //unhide navigationbar
+        self.navigationController?.setNavigationBarHidden(true, animated: true)
         
         DBHandler.loadStatisticsForStudy(studyId: (Study.currentStudy?.studyId)!) { (statiticsList) in
             
@@ -260,7 +262,12 @@ extension StudyDashboardViewController : UITableViewDataSource {
 //MARK:- TableView Delegates
 extension StudyDashboardViewController : UITableViewDelegate{
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
         tableView.deselectRow(at: indexPath, animated: true)
+        
+        if indexPath.section == tableViewRowDetails.count {
+            self.performSegue(withIdentifier: "chartSegue", sender: nil)
+        }
     }
 }
 

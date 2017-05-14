@@ -18,6 +18,17 @@ enum StatisticsFormula:String{
 
 }
 
+enum ChartTimeRange:String{
+    
+   case  days_of_week //s,m,t..s   f = daily
+   case  days_of_month // 1,2,3,4..31   f = daily
+   case  weeks_of_month // w1,w2,w3,w4.. w5   f = weekly
+   case  months_of_year //j,f,m..d  f = monthly
+   case  runs //   f = sheduled
+   case  hours_of_day  // f = withInADay
+   
+}
+
 class StudyDashboard: NSObject {
     
     var statistics:Array<DashboardStatistics>! = []

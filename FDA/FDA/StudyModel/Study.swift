@@ -38,6 +38,8 @@ enum StudyWithdrawalConfigrationType:String{
     case deleteData = "delete_data"
     case askUser = "ask_user"
     case noAction = "no_action"
+    
+    case notAvailable = "NotAvailable"
 }
 
 struct ConsentDocument {
@@ -274,10 +276,13 @@ class StudyAnchorDate{
 }
 
 class StudyWithdrawalConfigration {
-      var message = ""
-      var type:StudyWithdrawalConfigrationType? = .noAction
+    var message:String? = ""
+      var type:StudyWithdrawalConfigrationType? = .notAvailable
     
     
+    init() {
+        
+    }
     init(withdrawalConfigration:Dictionary<String,Any>){
         if Utilities.isValidObject(someObject: withdrawalConfigration as AnyObject?){
             
@@ -285,12 +290,13 @@ class StudyWithdrawalConfigration {
                 self.message = (withdrawalConfigration[kStudyWithdrawalMessage] as? String)!
             }
             else{
-                self.message = "Are you sure you want to leave Study ?"
+                self.message = ""
             }
             
             if Utilities.isValidValue(someObject: withdrawalConfigration[kStudyWithdrawalType] as AnyObject ){
                 self.type = StudyWithdrawalConfigrationType(rawValue:(withdrawalConfigration[kStudyWithdrawalType] as? String)!)
             }
+           
             
         }
         

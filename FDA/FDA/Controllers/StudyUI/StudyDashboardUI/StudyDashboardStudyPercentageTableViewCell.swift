@@ -70,13 +70,13 @@ class StudyDashboardStudyPercentageTableViewCell: UITableViewCell {
         
         if let userStudyStatus = currentUser.participatedStudies.filter({$0.studyId == study?.studyId}).first {
             //update completion %
-            self.labelStudyCompletion?.text = String(userStudyStatus.completion)// + "%"
-            self.labelStudyAdherence?.text = String(userStudyStatus.adherence) // + "%"
+            self.labelStudyCompletion?.text = String(userStudyStatus.adherence)// + "%"
+            self.labelStudyAdherence?.text = String(userStudyStatus.completion) // + "%"
             //self.progressBarCompletion?.progress = Float(userStudyStatus.completion)/100
             //self.progressBarAdherence?.progress = Float(userStudyStatus.adherence)/100
             
-            studyPercentagePie?.angle = Double(userStudyStatus.adherence)/0.27777778
-            completedPercentagePie?.angle = Double(userStudyStatus.completion)/0.27777778
+            studyPercentagePie?.angle = Double(userStudyStatus.completion)/0.27777778
+            completedPercentagePie?.angle = Double(userStudyStatus.adherence)/0.27777778
             
         }
         else {

@@ -149,25 +149,32 @@ class ResourcesViewController : UIViewController{
             } //check for anchorDate
             else if resource.anchorDateStartDays != nil && resource.anchorDateEndDays != nil {
                 
-                let anchorDate = Study.currentStudy?.anchorDate
-                if(anchorDate != nil && (anchorDate?.isAnchorDateAvailable())!) {
+                let anchorDateObject = Study.currentStudy?.anchorDate
+                if(anchorDateObject != nil && (anchorDateObject?.isAnchorDateAvailable())!) {
+                    
+                    
                     
                     let anchorDate = Study.currentStudy?.anchorDate?.date
                     
-                    //also anchor date condition
-                    let startDateInterval = TimeInterval(60*60*24*(resource.anchorDateStartDays)!)
-                    let endDateInterval = TimeInterval(60*60*24*(resource.anchorDateEndDays)!)
-                    
-                    let startAnchorDate = anchorDate?.addingTimeInterval(startDateInterval)
-                    let endAnchorDate = anchorDate?.addingTimeInterval(endDateInterval)
-                    
-                    let startDateResult = (startAnchorDate?.compare(todayDate))! as ComparisonResult
-                    let endDateResult = (endAnchorDate?.compare(todayDate))! as ComparisonResult
-                    
-                    if ((startDateResult == .orderedAscending || startDateResult == .orderedSame) && (endDateResult == .orderedDescending || endDateResult == .orderedSame)){
+                    if anchorDate != nil {
                         
-                        tableViewRowDetails?.append(resource)
+                        //also anchor date condition
+                        let startDateInterval = TimeInterval(60*60*24*(resource.anchorDateStartDays)!)
+                        let endDateInterval = TimeInterval(60*60*24*(resource.anchorDateEndDays)!)
+                        
+                        let startAnchorDate = anchorDate?.addingTimeInterval(startDateInterval)
+                        let endAnchorDate = anchorDate?.addingTimeInterval(endDateInterval)
+                        
+                        let startDateResult = (startAnchorDate?.compare(todayDate))! as ComparisonResult
+                        let endDateResult = (endAnchorDate?.compare(todayDate))! as ComparisonResult
+                        
+                        if ((startDateResult == .orderedAscending || startDateResult == .orderedSame) && (endDateResult == .orderedDescending || endDateResult == .orderedSame)){
+                            
+                            tableViewRowDetails?.append(resource)
+                        }
                     }
+                    
+                    
                     
                 }
                 else {

@@ -164,6 +164,10 @@ class ChangePasswordViewController: UIViewController {
             self.showAlertMessages(textMessage: kMessageValidatePasswordComplexity)
             
         }
+        else if self.newPassword == User.currentUser.emailId {
+            self.showAlertMessages(textMessage: kMessagePasswordMatchingToOtherFeilds)
+            
+        }
         //else if  self.oldPassword == self.newPassword{
         //     self.showAlertMessages(textMessage: kMessageValidateOldAndNewPasswords)
         //}
@@ -230,7 +234,7 @@ extension ChangePasswordViewController : UITextFieldDelegate{
         
         
         if tag == .newPassword || tag == .confirmPassword {
-            if finalString.characters.count > 16 {
+            if finalString.characters.count > 64 {
                 return false
             }
             else{

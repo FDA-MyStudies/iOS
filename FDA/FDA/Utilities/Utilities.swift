@@ -204,7 +204,7 @@ class Utilities: NSObject {
         let specialresult = texttest2.evaluate(with: text)
         print("\(specialresult)")
         
-        let textCountResult = text.characters.count > 7 && text.characters.count <= 14 ? true : false
+        let textCountResult = text.characters.count > 7 && text.characters.count <= 64 ? true : false
         
         
         if capitalresult == false || numberresult == false || specialresult == false || textCountResult ==  false || lowercaseresult == false{

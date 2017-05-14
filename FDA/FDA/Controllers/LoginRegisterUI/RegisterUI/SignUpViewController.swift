@@ -178,6 +178,10 @@ class SignUpViewController : UIViewController{
             self.showAlertMessages(textMessage: kMessageValidatePasswordComplexity)
             return false
         }
+        else if (self.user.password)! == user.emailId {
+            self.showAlertMessages(textMessage: kMessagePasswordMatchingToOtherFeilds)
+            return false
+        }
         else if confirmPassword == "" {
             self.showAlertMessages(textMessage: kMessageProfileConfirmPasswordBlank)
             return false
@@ -466,7 +470,7 @@ extension SignUpViewController : UITextFieldDelegate{
             }
         }
         else if tag == .Password || tag == .ConfirmPassword {
-            if finalString.characters.count > 14 {
+            if finalString.characters.count > 64 {
                 return false
             }
             else{

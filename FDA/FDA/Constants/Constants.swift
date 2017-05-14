@@ -70,6 +70,8 @@ let kMessageCurrentPasswordBlank = "Please enter your current password."
 let kMessageProfileConfirmPasswordBlank = "Please confirm your password."
 let kMessageConfirmPasswordBlank = "Please confirm the password."
 
+let kMessagePasswordMatchingToOtherFeilds = "Your password should not match with email id"
+
 
 let kMessageValidEmail = "Please enter valid email address."
 

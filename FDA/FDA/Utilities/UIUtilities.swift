@@ -229,6 +229,30 @@ class UIUtilities: NSObject {
         viewControllerUsed.present(alert, animated:true, completion: nil)
     }
     
+    class func showAlertMessageWithThreeActionsAndHandler(_ errorTitle : String,errorMessage : String,errorAlertActionTitle : String ,errorAlertActionTitle2 : String?,errorAlertActionTitle3 : String?,viewControllerUsed : UIViewController, action1:@escaping AlertAction, action2:@escaping AlertAction,action3:@escaping AlertAction){
+        let alert = UIAlertController(title: errorTitle, message: errorMessage, preferredStyle:UIAlertControllerStyle.alert)
+        
+        alert.addAction(UIAlertAction(title: errorAlertActionTitle, style: UIAlertActionStyle.default, handler: { (action) in
+            action1()
+        }))
+        if errorAlertActionTitle2 != nil {
+            alert.addAction(UIAlertAction(title: errorAlertActionTitle2, style: UIAlertActionStyle.default, handler: { (action) in
+                action2()
+            }))
+        }
+        
+        if errorAlertActionTitle3 != nil {
+            alert.addAction(UIAlertAction(title: errorAlertActionTitle3, style: UIAlertActionStyle.default, handler: { (action) in
+                action3()
+            }))
+        }
+        
+        
+        viewControllerUsed.present(alert, animated:true, completion: nil)
+    }
+    
+    
+    
     class func showAlertMessageWithActionHandler(_ title : String,message : String,buttonTitle : String ,viewControllerUsed : UIViewController, action:@escaping AlertAction){
         
         let alert = UIAlertController(title: title, message: message, preferredStyle:UIAlertControllerStyle.alert)

@@ -166,6 +166,9 @@ class DBHandler: NSObject {
         dbStudy.status = study.status.rawValue
         dbStudy.participatedStatus = study.userParticipateState.status.rawValue
         
+        dbStudy.withdrawalConfigrationMessage = study.withdrawalConfigration?.message
+        dbStudy.withdrawalConfigrationType = study.withdrawalConfigration?.type?.rawValue
+        
         return dbStudy
         
     }
@@ -225,6 +228,19 @@ class DBHandler: NSObject {
             anchorDate.date = dbStudy.anchorDate
             
             study.anchorDate = anchorDate
+            
+            let withdrawalInfo = StudyWithdrawalConfigration()
+            withdrawalInfo.message = dbStudy.withdrawalConfigrationMessage
+            
+            
+            if dbStudy.withdrawalConfigrationType != nil {
+                 withdrawalInfo.type = StudyWithdrawalConfigrationType(rawValue: dbStudy.withdrawalConfigrationType!)
+            }
+            else{
+                 withdrawalInfo.type = .notAvailable
+            }
+            
+           
             
             studies.append(study)
         }

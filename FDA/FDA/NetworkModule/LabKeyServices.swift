@@ -69,7 +69,7 @@ class LabKeyServices: NSObject {
         let info =  [kStudyId:studyId ,
                      kActivityId:activiyId ,
                      kActivityName:activityName ,
-                     kActivityVersion :activityVersion ,
+                     "version" :activityVersion ,
                      kActivityRunId:currentRunId!
             ] as [String : Any]
         
@@ -77,7 +77,7 @@ class LabKeyServices: NSObject {
         
         let params = [kActivityType:ActivityType! ,
                       kActivityInfoMetaData:info,
-                      kParticipantId:"32ac0aa495530a1960f5d2849ebdf4d1",
+                      kParticipantId:"43decbe8662d1f3c198b19d79c6df7d6",
                       kActivityResponseData :responseData
             ] as [String : Any]
         

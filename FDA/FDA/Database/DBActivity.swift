@@ -48,14 +48,16 @@ class DBActivityMetaData:Object {
 }
 class DBActivityRun: Object {
     
-   dynamic  var startDate:Date!
-   dynamic  var endDate:Date!
-   dynamic  var complitionDate:Date!
-   dynamic  var runId:Int = 1
-   dynamic  var studyId:String!
-   dynamic  var activityId:String!
-   dynamic  var isCompleted:Bool = false
-    dynamic var restortionData:Data?
+    dynamic  var startDate:Date!
+    dynamic  var endDate:Date!
+    dynamic  var complitionDate:Date!
+    dynamic  var runId:Int = 1
+    dynamic  var studyId:String!
+    dynamic  var activityId:String!
+    dynamic  var isCompleted:Bool = false
+    dynamic  var restortionData:Data?
+    dynamic  var toBeSynced:Bool = false
+    dynamic  var responseData:Data?
     
 }
 

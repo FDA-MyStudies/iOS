@@ -483,7 +483,7 @@ class ProfileViewController: UIViewController {
                 self.navigationController?.present(taskViewController, animated: false, completion: nil)
             }
             else{
-                let passcodeViewController = ORKPasscodeViewController.passcodeAuthenticationViewController(withText: "Enter Passcode to access app", delegate:self)
+                let passcodeViewController = ORKPasscodeViewController.passcodeAuthenticationViewController(withText: "", delegate:self)
                 
                 self.navigationController?.present(passcodeViewController, animated: false, completion: nil)
             }

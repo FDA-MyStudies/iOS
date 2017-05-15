@@ -480,6 +480,12 @@ class ActivityStepResult{
             let stepTypeResult = questionstepResult as! ORKChoiceQuestionResult
             if Utilities.isValidObject(someObject:stepTypeResult.choiceAnswers as AnyObject?){
                 if (stepTypeResult.choiceAnswers?.count)! > 0{
+                    
+                    //if (self.step?.resultType as! String) ==  QuestionStepType.imageChoice ||  (self.step?.resultType as! String) == QuestionStepType.valuePicker{
+                        
+                   // }
+                    
+                    
                     self.value = stepTypeResult.choiceAnswers?.first
                 }
                 else{

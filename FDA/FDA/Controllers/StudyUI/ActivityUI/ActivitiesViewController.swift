@@ -455,8 +455,19 @@ extension ActivitiesViewController : UITableViewDelegate{
                         //Following to be commented
                         //self.createActivity()
                         
-                        //To be uncommented
-                        WCPServices().getStudyActivityMetadata(studyId:(Study.currentStudy?.studyId)! , activityId: (Study.currentActivity?.actvityId)!, activityVersion: (Study.currentActivity?.version)!, delegate: self)
+                        //check in database
+                        DBHandler.loadActivityMetaData(activity: activities[indexPath.row], completionHandler: { (found) in
+                            if found {
+                                self.createActivity()
+                            }
+                            else {
+                                
+                                WCPServices().getStudyActivityMetadata(studyId:(Study.currentStudy?.studyId)! , activityId: (Study.currentActivity?.actvityId)!, activityVersion: (Study.currentActivity?.version)!, delegate: self)
+                            }
+                        })
+                        
+//                        //To be uncommented
+//                        WCPServices().getStudyActivityMetadata(studyId:(Study.currentStudy?.studyId)! , activityId: (Study.currentActivity?.actvityId)!, activityVersion: (Study.currentActivity?.version)!, delegate: self)
                         
                         self.updateActivityStatusToInProgress()
                         
@@ -540,6 +551,11 @@ extension ActivitiesViewController:NMWebServiceDelegate {
     func failedRequest(_ manager: NetworkManager, requestName: NSString, error: NSError) {
         Logger.sharedInstance.info("requestname : \(requestName)")
         self.removeProgressIndicator()
+        
+        if requestName as String == RegistrationMethods.activityState.method.methodName{
+            //self.sendRequesToGetActivityList()
+            self.loadActivitiesFromDatabase()
+        }
         
     }
 }

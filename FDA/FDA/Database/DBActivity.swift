@@ -38,6 +38,13 @@ class DBActivity: Object {
     }
     
 }
+class DBActivityMetaData:Object {
+    
+    dynamic var actvityId:String?
+    dynamic var studyId:String?
+    dynamic var metaData:Data?
+    
+}
 class DBActivityRun: Object {
     
    dynamic  var startDate:Date!

@@ -474,6 +474,7 @@ class WCPServices: NSObject {
             ActivityBuilder.currentActivityBuilder.initWithActivity(activity:Study.currentActivity! )
         }
         
+        DBHandler.saveActivityMetaData(activity: Study.currentActivity!, data: response)
         
     }
     

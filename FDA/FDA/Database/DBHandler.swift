@@ -756,6 +756,66 @@ class DBHandler: NSObject {
         })
         
     }
+    //MARK:-  Activity MetaData
+    class func saveActivityMetaData(activity:Activity, data:Dictionary<String,Any>){
+        
+        let realm = try! Realm()
+        let metaData = DBActivityMetaData()
+        metaData.actvityId = activity.actvityId;
+        metaData.studyId = activity.studyId;
+        
+        do {
+            let json = data
+            let data =  try JSONSerialization.data(withJSONObject: json, options: JSONSerialization.WritingOptions.prettyPrinted)
+            metaData.metaData = data
+        }
+        catch{
+            
+        }
+        
+        try! realm.write({
+            
+            realm.add(metaData)
+            
+            
+        })
+        
+    }
+    class func loadActivityMetaData(activity:Activity,completionHandler:@escaping (Bool) -> ()){
+        
+        let realm = try! Realm()
+        let dbMetaDataList = realm.objects(DBActivityMetaData.self).filter({$0.actvityId == activity.actvityId && $0.studyId == activity.studyId})
+        
+        if dbMetaDataList.count != 0 {
+            let metaData = dbMetaDataList.last
+            
+            do {
+                let response = try JSONSerialization.jsonObject(with: (metaData?.metaData)!, options: []) as! [String:Any]
+                
+                Study.currentActivity?.setActivityMetaData(activityDict:response[kActivity] as! Dictionary<String, Any>)
+                
+                if Utilities.isValidObject(someObject: Study.currentActivity?.steps as AnyObject?){
+                    
+                    ActivityBuilder.currentActivityBuilder = ActivityBuilder()
+                    ActivityBuilder.currentActivityBuilder.initWithActivity(activity:Study.currentActivity! )
+                }
+                
+                completionHandler(true)
+                
+            }
+            catch{
+                completionHandler(false)
+            }
+        }
+        else {
+             completionHandler(false)
+        }
+        
+        
+
+        
+        
+    }
 
     //MARK:- Dashboard - Statistics
     class func saveDashBoardStatistics(studyId:String,statistics:Array<DashboardStatistics>){

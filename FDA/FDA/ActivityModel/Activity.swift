@@ -176,6 +176,9 @@ class Activity{
             if Utilities.isValidValue(someObject: infoDict[kActivityTitle] as AnyObject ){
                 self.name = infoDict[kActivityTitle] as! String?
             }
+            if Utilities.isValidValue(someObject: infoDict[kActivityBranching] as AnyObject ){
+                self.branching = infoDict[kActivityBranching] as? Bool
+            }
             if Utilities.isValidValue(someObject: infoDict[kActivityType] as AnyObject ){
                 self.type = ActivityType(rawValue: infoDict[kActivityType] as! String)
             }

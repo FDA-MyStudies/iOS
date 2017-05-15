@@ -112,6 +112,30 @@
         }
         
        //MARK:- NOTIFICATION
+        
+        func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+            
+            let deviceTokenString = deviceToken.reduce("", {$0 + String(format: "%02X", $1)})
+            print(deviceTokenString)
+            //UserDetails.deviceToken = deviceTokenString
+            
+            print("APNs token retrieved: \(deviceToken)")
+           
+            
+        }
+        func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
+            
+            print("i am not available in simulator \(error)")
+            
+        }
+        func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any]) {
+            print(userInfo)
+            
+            //For iOS 8 & 9
+            if (UIApplication.shared.applicationState == UIApplicationState.background)||(UIApplication.shared.applicationState == UIApplicationState.inactive){
+               
+            }
+        }
         func application(_ application: UIApplication, didReceive notification: UILocalNotification) {
             print("Notificatio received\(notification.userInfo)")
         }

@@ -379,6 +379,7 @@
 		946CA5EC1E72DCA300CC8535 /* ProgressView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProgressView.xib; sourceTree = "<group>"; };
 		948710291E546C3800246109 /* AppNotification.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppNotification.swift; sourceTree = "<group>"; };
 		9487102B1E54870000246109 /* LabKeyServices.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LabKeyServices.swift; sourceTree = "<group>"; };
+		94878B861EC982C30064E1D4 /* FDA.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = FDA.entitlements; sourceTree = "<group>"; };
 		9491F7F71E825F5D0018C15E /* DBHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DBHandler.swift; sourceTree = "<group>"; };
 		9491F7F91E825FA80018C15E /* DBUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DBUser.swift; sourceTree = "<group>"; };
 		94B3DD0A1E6EC47700327AE5 /* SplashViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
@@ -573,6 +574,7 @@
 		6E7D2D581E433E8700763D4C /* FDA */ = {
 			isa = PBXGroup;
 			children = (
+				94878B861EC982C30064E1D4 /* FDA.entitlements */,
 				482CC61C1EC5F52200BFE8C6 /* External Libraries */,
 				94C5504C1EBA1516007740D0 /* DashboardModel */,
 				94C6BD401EB850F100D4AA72 /* ForceUpdate */,
@@ -1293,6 +1295,9 @@
 							com.apple.BackgroundModes = {
 								enabled = 1;
 							};
+							com.apple.Push = {
+								enabled = 1;
+							};
 						};
 					};
 					6E7D2D691E433E8800763D4C = {
@@ -1897,6 +1902,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = FDA/FDA.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = "";
@@ -1921,6 +1927,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = FDA/FDA.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = "";
 				ENABLE_BITCODE = NO;

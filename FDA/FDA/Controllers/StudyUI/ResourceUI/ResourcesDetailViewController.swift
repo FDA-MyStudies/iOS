@@ -22,12 +22,12 @@ class ResourcesDetailViewController: UIViewController {
     var type:String?
     var htmlString: String?
     var resource:Resource?
-    
+    var isEmailComposerPresented:Bool?
     override func viewDidLoad() {
         super.viewDidLoad()
         self.hidesBottomBarWhenPushed = true
         self.addBackBarButton()
-        
+        self.isEmailComposerPresented = false
         self.title = resource?.title
         
     }
@@ -37,11 +37,18 @@ class ResourcesDetailViewController: UIViewController {
         
         UIApplication.shared.statusBarStyle = .default
         
+        if self.isEmailComposerPresented == false{
+        
+        
         if self.resource?.file?.link != nil {
             
             activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: .gray)
             activityIndicator.center = CGPoint(x: self.view.frame.midX, y: self.view.frame.midY-100)
+            
+           
             self.view.addSubview(activityIndicator)
+            
+            
             activityIndicator.startAnimating()
             
             if self.resource?.file?.mimeType == .pdf{
@@ -70,6 +77,7 @@ class ResourcesDetailViewController: UIViewController {
         }
         
         webView?.delegate = self
+        }
         
         UIApplication.shared.statusBarStyle = .default
     }
@@ -191,6 +199,9 @@ extension ResourcesDetailViewController:MFMailComposeViewControllerDelegate{
         if MFMailComposeViewController.canSendMail()
         {
             self.present(composeVC, animated: true, completion: nil)
+            
+            
+           
         }
         else{
             let alert = UIAlertController(title:NSLocalizedString(kTitleError, comment: ""),message:"",preferredStyle: UIAlertControllerStyle.alert)
@@ -205,6 +216,8 @@ extension ResourcesDetailViewController:MFMailComposeViewControllerDelegate{
     
     func mailComposeController(_ controller: MFMailComposeViewController,
                                didFinishWith result: MFMailComposeResult, error: Error?) {
+        
+         self.isEmailComposerPresented = true
         
         controller.dismiss(animated: true, completion: nil)
     }

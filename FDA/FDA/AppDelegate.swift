@@ -255,6 +255,8 @@
              
              */
             
+             UIApplication.shared.applicationIconBadgeNumber = 0
+            
             if self.appIsResignedButDidNotEnteredBackground! {
                 
                 let navController = application.windows[0].rootViewController
@@ -722,7 +724,7 @@
                         guard ORKPasscodeViewController.isPasscodeStoredInKeychain() && !(containerViewController?.presentedViewController is ORKPasscodeViewController) else { return }
                         window?.makeKeyAndVisible()
                         
-                        let passcodeViewController = ORKPasscodeViewController.passcodeAuthenticationViewController(withText: "Enter Passcode to access app", delegate: self)
+                        let passcodeViewController = ORKPasscodeViewController.passcodeAuthenticationViewController(withText: "", delegate: self)
                         
                         
                         
@@ -1436,7 +1438,7 @@
             let userInfo = response.notification.request.content.userInfo
             print("REMOTE NOTIFICATION:" + "\(userInfo)")
             
-            if (UIApplication.shared.applicationState == UIApplicationState.active) {//|| (UIApplication.shared.applicationState == UIApplicationState.background){
+            if (UIApplication.shared.applicationState == UIApplicationState.active || (UIApplication.shared.applicationState == UIApplicationState.inactive)) {//|| (UIApplication.shared.applicationState == UIApplicationState.background){
                 UIApplication.shared.applicationIconBadgeNumber = 0
                 
                 self.handleLocalAndRemoteNotification(userInfoDetails: userInfo as! Dictionary<String, Any>)

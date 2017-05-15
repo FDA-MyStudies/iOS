@@ -93,7 +93,7 @@ class Study {
     var signedConsentVersion:String?
     var signedConsentFilePath:String?
     var anchorDate:StudyAnchorDate?
-   
+    var activitiesLocalNotificationUpdated = false
     
     static var currentStudy:Study? = nil
     static var currentActivity:Activity? = nil

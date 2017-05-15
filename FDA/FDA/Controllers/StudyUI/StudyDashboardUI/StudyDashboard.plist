@@ -14,123 +14,12 @@
 				<string>In Progress</string>
 			</dict>
 			<dict>
-				<key>completedNumber</key>
-				<string>4</string>
-				<key>surveyNumber</key>
-				<string>6</string>
-				<key>taskNumber</key>
-				<string>4</string>
-				<key>surveyCompleted</key>
-				<string>3</string>
-				<key>surveyPending</key>
-				<string>1</string>
-				<key>surveyMissed</key>
-				<string>2</string>
-				<key>taskCompleted</key>
-				<string>1</string>
-				<key>taskPending</key>
-				<string>2</string>
-				<key>taskMissed</key>
-				<string>1</string>
-				<key>isTableViewCell</key>
-				<string>YES</string>
-			</dict>
-			<dict>
 				<key>studyCompletion</key>
 				<string>73</string>
 				<key>studyAdherence</key>
 				<string>43</string>
 				<key>isTableViewCell</key>
 				<string>YES</string>
-			</dict>
-			<dict>
-				<key>isTableViewCell</key>
-				<string>NO</string>
-				<key>isStudy</key>
-				<string>YES</string>
-				<key>todaysActivity</key>
-				<array>
-					<dict>
-						<key>isTableViewCell</key>
-						<string>NO</string>
-						<key>isStudy</key>
-						<string>YES</string>
-						<key>title</key>
-						<string>Today&apos;s Activities</string>
-						<key>completedCount</key>
-						<string>2</string>
-						<key>pendingCount</key>
-						<string>3</string>
-						<key>completedSurvey</key>
-						<string>1</string>
-						<key>completedTask</key>
-						<string>1</string>
-						<key>pendingTask</key>
-						<string>1</string>
-						<key>pendingSurvey</key>
-						<string>2</string>
-					</dict>
-					<dict>
-						<key>isTableViewCell</key>
-						<string>NO</string>
-						<key>isStudy</key>
-						<string>YES</string>
-						<key>title</key>
-						<string>Upcoming Activities</string>
-						<key>completedCount</key>
-						<string>2</string>
-						<key>pendingCount</key>
-						<string>3</string>
-						<key>completedSurvey</key>
-						<string>1</string>
-						<key>completedTask</key>
-						<string>1</string>
-						<key>pendingSurvey</key>
-						<string>2</string>
-						<key>pendingTask</key>
-						<string>1</string>
-					</dict>
-					<dict>
-						<key>isTableViewCell</key>
-						<string>NO</string>
-						<key>isStudy</key>
-						<string>YES</string>
-						<key>title</key>
-						<string>Today&apos;s Activities</string>
-						<key>completedCount</key>
-						<string>2</string>
-						<key>pendingCount</key>
-						<string>3</string>
-						<key>completedSurvey</key>
-						<string>1</string>
-						<key>completedTask</key>
-						<string>1</string>
-						<key>pendingSurvey</key>
-						<string>2</string>
-						<key>pendingTask</key>
-						<string>1</string>
-					</dict>
-					<dict>
-						<key>isTableViewCell</key>
-						<string>NO</string>
-						<key>isStudy</key>
-						<string>YES</string>
-						<key>title</key>
-						<string>Upcoming Activities</string>
-						<key>completedCount</key>
-						<string>2</string>
-						<key>pendingCount</key>
-						<string>3</string>
-						<key>completedSurvey</key>
-						<string>1</string>
-						<key>completedTask</key>
-						<string>1</string>
-						<key>pendingSurvey</key>
-						<string>2</string>
-						<key>pendingTask</key>
-						<string>1</string>
-					</dict>
-				</array>
 			</dict>
 			<dict>
 				<key>isStudy</key>

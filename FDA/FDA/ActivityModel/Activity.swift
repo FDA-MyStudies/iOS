@@ -205,6 +205,8 @@ class Activity{
                 }
                 
             }
+            
+            self.calculateActivityRuns(studyId: self.studyId!)
         }
         else{
             Logger.sharedInstance.debug("infoDict is null:\(infoDict)")
@@ -337,7 +339,48 @@ class Activity{
     }
     
     
-    
+    func calculateActivityRuns(studyId:String){
+        
+        Schedule().getRunsForActivity(activity: self, handler: { (runs) in
+            if runs.count > 0 {
+                print("activityid: \(self.actvityId) runs \(runs.count)")
+                self.activityRuns = runs
+                
+//                let date = Date()
+//                print("Current Date :\(date.description)")
+//                
+//                var runsBeforeToday:Array<ActivityRun>! = []
+//                var run:ActivityRun!
+//                if self.frequencyType == Frequency.One_Time && activity.endDate == nil {
+//                    //runsBeforeToday = runs
+//                    run = runs.last
+//                }
+//                else {
+//                    
+//                    runsBeforeToday = runs.filter({$0.endDate <= date})
+//                    
+//                    run = runs.filter({$0.startDate <= date && $0.endDate > date}).first //current run
+//                    
+//                }
+//                
+//                
+//                let completedRuns = runs.filter({$0.isCompleted == true})
+//                let incompleteRuns = runsBeforeToday.count - completedRuns.count
+//                
+//                
+//                activity.compeltedRuns = completedRuns.count
+//                activity.incompletedRuns = (incompleteRuns < 0) ? 0 :incompleteRuns
+//                activity.currentRunId =  (run != nil) ? (run?.runId)! : runsBeforeToday.count
+//                activity.totalRuns = runs.count
+//                activity.currentRun = run
+//                activity.activityRuns = runs
+//                
+//                self.updateUserRunStatus(activity: activity)
+                
+//                DBHandler.saveActivityRuns(activityId: (activity.actvityId)!, studyId: (Study.currentStudy?.studyId)!, runs: runs)
+            }
+        })
+    }
     
     func getRestortionData() -> Data {
         return self.restortionData!

@@ -494,7 +494,7 @@ class DBHandler: NSObject {
                         dbActivity?.startDate = activity.startDate
                         dbActivity?.endDate = activity.endDate
                         dbActivity?.version = activity.version
-                        dbActivity?.branching = activity.branching
+                        dbActivity?.branching = activity.branching!
                         dbActivity?.frequencyType = activity.frequencyType.rawValue
                         do {
                             let json = ["data":activity.frequencyRuns]
@@ -540,7 +540,7 @@ class DBHandler: NSObject {
         dbActivity.startDate = activity.startDate
         dbActivity.endDate = activity.endDate
         dbActivity.version = activity.version
-        dbActivity.branching = activity.branching
+        dbActivity.branching = activity.branching!
         dbActivity.frequencyType = activity.frequencyType.rawValue
         do {
             let json = ["data":activity.frequencyRuns]

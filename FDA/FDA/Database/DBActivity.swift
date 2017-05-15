@@ -21,8 +21,8 @@ class DBActivity: Object {
     //dynamic var userStatus:UserActivityStatus.ActivityStatus
     dynamic var startDate:Date?
     dynamic var endDate:Date?
-    var branching:Bool?
-    var randomization:Bool?
+    dynamic var branching:Bool = false
+    dynamic var randomization:Bool = false
     
     
     dynamic var frequencyRunsData:Data?

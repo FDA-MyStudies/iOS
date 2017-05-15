@@ -182,7 +182,7 @@ class Schedule{
             activityRuns.append(activityRun)
             
             //save range
-            debugPrint("start date \(runStartDate!) , end date \(runEndDate!)")
+            //debugPrint("start date \(runStartDate!) , end date \(runEndDate!)")
             
             runStartDate = calendar.date(byAdding:.second, value:1, to: runEndDate!)
             runId += 1
@@ -260,7 +260,7 @@ class Schedule{
                 runEndDate = calendar.date(byAdding:.minute, value: minutes!, to: runEndDate!)
                 runEndDate = calendar.date(byAdding:.second, value: second!, to: runEndDate!)
                 
-                print("start date \(runStartDate!) , end date \(runEndDate!)")
+                //print("start date \(runStartDate!) , end date \(runEndDate!)")
                 
                 //appent in activityRun array
                 let activityRun = ActivityRun()
@@ -362,7 +362,7 @@ class Schedule{
                 let scheduledEndTime = timing[kScheduleEndTime]
                 let runEndDate = Utilities.getDateFromString(dateString: scheduledEndTime! as! String)
                 
-                print("start date \(runStartDate!) , end date \(runEndDate!)")
+                //print("start date \(runStartDate!) , end date \(runEndDate!)")
                 
                 //appent in activityRun array
                 let activityRun = ActivityRun()

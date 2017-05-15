@@ -54,7 +54,7 @@ class StudyDashboardStudyPercentageTableViewCell: UITableViewCell {
         studyPercentagePie?.glowMode = .forward
         studyPercentagePie?.glowAmount = 0.1
         studyPercentagePie?.set(colors: blueColor)
-        //studyPercentagePie?.angle = 99/0.21777778
+        //studyPercentagePie?.angle = 99/0.27777778
         
         completedPercentagePie?.startAngle = -90
         completedPercentagePie?.progressThickness = 0.3
@@ -66,7 +66,7 @@ class StudyDashboardStudyPercentageTableViewCell: UITableViewCell {
         completedPercentagePie?.glowMode = .forward
         completedPercentagePie?.glowAmount = 0.1
         completedPercentagePie?.set(colors: blueColor)
-        //completedPercentagePie?.angle = 99/0.23777778
+        //completedPercentagePie?.angle = 99/0.27777778
         
         if let userStudyStatus = currentUser.participatedStudies.filter({$0.studyId == study?.studyId}).first {
             //update completion %
@@ -75,8 +75,8 @@ class StudyDashboardStudyPercentageTableViewCell: UITableViewCell {
             //self.progressBarCompletion?.progress = Float(userStudyStatus.completion)/100
             //self.progressBarAdherence?.progress = Float(userStudyStatus.adherence)/100
             
-            studyPercentagePie?.angle = Double(userStudyStatus.adherence)/0.23777778
-            completedPercentagePie?.angle = Double(userStudyStatus.completion)/0.23777778
+            studyPercentagePie?.angle = Double(userStudyStatus.adherence)/0.27777778
+            completedPercentagePie?.angle = Double(userStudyStatus.completion)/0.27777778
             
         }
         else {

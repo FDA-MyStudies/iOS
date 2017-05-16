@@ -12,6 +12,8 @@
 @interface ORKFormStepViewController (Internal)
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView;
+
+
 - (void) stepDidChange;
 
 @end
@@ -21,6 +23,7 @@
 
 @property (nonatomic, strong) NSArray *originalFormItems;
 
+@property(nonatomic, strong) UITableView *originalTableView;
 @end
 
 @implementation RepeatableFormStepViewController
@@ -32,6 +35,8 @@
     NSMutableArray *items = [[[self formStep] formItems] mutableCopy];
     [items removeLastObject];
     _originalFormItems = items;
+    
+    
 }
 
 - (void) viewDidAppear:(BOOL)animated {
@@ -54,6 +59,8 @@
     if (![self formStep].repeatable) {
         return;
     }
+    
+    _originalTableView = tableView;
     
     NSInteger sections = [super numberOfSectionsInTableView:tableView];
     if (sections - 1 == section) {
@@ -83,6 +90,9 @@
        
         [button addTarget:self action:@selector(addMoreAction:) forControlEvents:UIControlEventTouchUpInside];
         [view addSubview:button];
+        
+        
+        
     }
 }
 
@@ -112,7 +122,14 @@
 
     [[self formStep] setFormItems:mItems];
     [super stepDidChange];
+    
+    
+ //  [_originalTableView scrollToNearestSelectedRowAtScrollPosition:UITableViewScrollPositionBottom animated:false];
 }
+
+
+
+
 
 /*
 #pragma mark - Navigation

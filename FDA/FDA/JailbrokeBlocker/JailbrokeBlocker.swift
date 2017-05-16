@@ -1,14 +1,14 @@
 //
-//  AppUpdateBlocker.swift
+//  JailbrokeBlocker.swift
 //  FDA
 //
-//  Created by Surender Rathore on 5/2/17.
+//  Created by Arun Kumar on 5/2/17.
 //  Copyright © 2017 BTC. All rights reserved.
 //
 
 import UIKit
 
-class AppUpdateBlocker: UIView {
+class JailbrokeBlocker: UIView {
 
     @IBOutlet var buttonUpgrade:UIButton!
     @IBOutlet var labelMessage:UILabel!
@@ -22,9 +22,9 @@ class AppUpdateBlocker: UIView {
         //Used to set border color for bottom view
         buttonUpgrade?.layer.borderColor = UIColor.white.cgColor
     }
-    class func instanceFromNib(frame:CGRect,detail:Dictionary<String,Any>) -> AppUpdateBlocker {
+    class func instanceFromNib(frame:CGRect,detail:Dictionary<String,Any>?) -> JailbrokeBlocker {
         
-        let view = UINib(nibName: "AppUpdateBlocker", bundle: nil).instantiate(withOwner: nil, options: nil)[0] as! AppUpdateBlocker
+        let view = UINib(nibName: "JailbrokeBlocker", bundle: nil).instantiate(withOwner: nil, options: nil)[0] as! JailbrokeBlocker
         view.frame = frame
         view.layoutIfNeeded()
         return view

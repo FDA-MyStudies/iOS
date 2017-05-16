@@ -124,6 +124,9 @@ class DBHandler: NSObject {
                     dbStudy?.startDate = study.startDate
                     dbStudy?.endEnd = study.endEnd
                     dbStudy?.status = study.status.rawValue
+                    dbStudy?.enrolling = study.studySettings.enrollingAllowed
+                    dbStudy?.rejoin = study.studySettings.rejoinStudyAfterWithdrawn
+                    dbStudy?.platform = study.studySettings.platform
                     
                     if dbStudy?.participatedStatus == UserStudyStatus.StudyStatus.inProgress.rawValue {
                         dbStudy?.updatedVersion = study.version

@@ -52,6 +52,8 @@
         func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
             // Override point for customization after application launch.
             
+            
+            
             self.customizeNavigationBar()
             Fabric.with([Crashlytics.self])
             
@@ -63,7 +65,8 @@
            // self.checkForAppUpdate()
             
             return true
-        }
+           
+    }
         
         func applicationWillResignActive(_ application: UIApplication) {
             // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
@@ -112,7 +115,14 @@
             
             // self.window?.isHidden = true
             
-            self.checkPasscode(viewController: (application.windows[0].rootViewController)!)
+            
+           
+                  self.checkPasscode(viewController: (application.windows[0].rootViewController)!)
+            
+            
+            
+            
+          
             
             // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
         }
@@ -143,6 +153,19 @@
                     self.checkPasscode(viewController: navController!)
                 }
             }
+            
+            if AppDelegate.jailbroken(application: application) {
+                
+                let navigationController =  (self.window?.rootViewController as! UINavigationController)
+                
+                let appBlocker = JailbrokeBlocker.instanceFromNib(frame: navigationController.view.frame, detail: nil);
+                
+                UIApplication.shared.keyWindow?.addSubview(appBlocker);
+                
+                UIApplication.shared.keyWindow?.bringSubview(toFront: appBlocker)
+                
+            }
+            
             
             
         }
@@ -183,6 +206,57 @@
         func application(_ application: UIApplication, didReceive notification: UILocalNotification) {
             print("Notificatio received\(notification.userInfo)")
         }
+        
+        
+        public static func jailbroken(application: UIApplication) -> Bool {
+            guard let cydiaUrlScheme = NSURL(string: "cydia://package/com.example.package") else { return isJailbroken() }
+            return application.canOpenURL(cydiaUrlScheme as URL) || isJailbroken()
+        }
+        
+        
+        static func isJailbroken() -> Bool {
+            
+            if UIDevice.current.model != "iPhone Simulator" {
+               return false
+            }
+            
+            let fileManager = FileManager.default
+            if fileManager.fileExists(atPath: "/Applications/Cydia.app") ||
+                fileManager.fileExists(atPath: "/Library/MobileSubstrate/MobileSubstrate.dylib") ||
+                fileManager.fileExists(atPath: "/bin/bash") ||
+                fileManager.fileExists(atPath: "/usr/sbin/sshd") ||
+                fileManager.fileExists(atPath: "/etc/apt") ||
+                fileManager.fileExists(atPath: "/usr/bin/ssh") {
+                return true
+            }
+            
+            if canOpen(path: "/Applications/Cydia.app") ||
+                canOpen(path: "/Library/MobileSubstrate/MobileSubstrate.dylib") ||
+                canOpen(path: "/bin/bash") ||
+                canOpen(path: "/usr/sbin/sshd") ||
+                canOpen(path: "/etc/apt") ||
+          
+                canOpen(path: "/usr/bin/ssh") {
+                return true
+            }
+            
+            let path = "/private/" + NSUUID().uuidString
+            do {
+                try "anyString".write(toFile: path, atomically: true, encoding: String.Encoding.utf8)
+                try fileManager.removeItem(atPath: path)
+                return true
+            } catch {
+                return false
+            }
+        }
+        
+        static func canOpen(path: String) -> Bool {
+            let file = fopen(path, "r")
+            guard file != nil else { return false }
+            fclose(file)
+            return true
+        }
+        
         
         
         
@@ -242,7 +316,25 @@
                         
                         let passcodeViewController = ORKPasscodeViewController.passcodeAuthenticationViewController(withText: "Enter Passcode to access app", delegate: self)
                         
-                        viewController.present(passcodeViewController, animated: false, completion: nil)
+                        
+                        
+                        var topVC = UIApplication.shared.keyWindow?.rootViewController
+                        
+                        
+                        while topVC?.presentedViewController != nil {
+                            topVC = topVC?.presentedViewController
+                        }
+                        
+                        if topVC?.presentedViewController?.isKind(of: ORKPasscodeViewController.self) == false{
+                             topVC!.present(passcodeViewController, animated: false, completion: nil)
+                        }
+                        
+                       
+                             //UIApplication.shared.keyWindow?.rootViewController?.present(passcodeViewController, animated: false, completion: nil)
+                    
+                        
+                    
+                       // viewController.present(passcodeViewController, animated: false, completion: nil)
                     }
                 }
                 else{
@@ -489,3 +581,8 @@
         }
     }
 
+    
+    
+    
+    
+    

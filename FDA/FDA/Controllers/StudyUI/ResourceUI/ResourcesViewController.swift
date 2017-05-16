@@ -302,7 +302,7 @@ class ResourcesViewController : UIViewController{
         //TBD: uncomment following for UAT
          LabKeyServices().withdrawFromStudy(studyId: (Study.currentStudy?.studyId)!, participantId: User.currentUser.userId, deleteResponses: deleteResponse, delegate: self)
         
-        UserServices().withdrawFromStudy(studyId: (Study.currentStudy?.studyId)!, shouldDeleteData: deleteResponse, delegate: self)
+        //UserServices().withdrawFromStudy(studyId: (Study.currentStudy?.studyId)!, shouldDeleteData: deleteResponse, delegate: self)
     }
     
     
@@ -397,15 +397,18 @@ extension ResourcesViewController : UITableViewDelegate{
                                                                             
                                                                         case .askUser :
                                                                             
-                                                                            UIUtilities.showAlertMessageWithThreeActionsAndHandler(kTitleMessage, errorMessage: "Do you want to delete Study data?", errorAlertActionTitle: "Delete my data", errorAlertActionTitle2: "Retain my data", errorAlertActionTitle3: "Cancel", viewControllerUsed: self, action1: {
+                                                                            UIUtilities.showAlertMessageWithThreeActionsAndHandler(kTitleMessage, errorMessage: "You are choosing to leave the study. Please choose if the data you provided for the study so far, can be retained and used for research purposes OR if it should be deleted.", errorAlertActionTitle: "Retain my data", errorAlertActionTitle2: "Delete my data", errorAlertActionTitle3: "Cancel", viewControllerUsed: self, action1: {
+                                                                                // Retain Action
+                                                                                
+                                                                                self.withdrawalFromStudy(deleteResponse: false)
+                                                                                
+                                                                               
+                                                                                
+                                                                            }, action2: {
+                                                                                
                                                                                 // Delete action
                                                                                 
                                                                                 self.withdrawalFromStudy(deleteResponse: true)
-                                                                                
-                                                                            }, action2: {
-                                                                                // Retain Action
-                                                                                
-                                                                                 self.withdrawalFromStudy(deleteResponse: false)
                                                                                 
                                                                             }, action3: {
                                                                                 // Cancel Action
@@ -414,7 +417,7 @@ extension ResourcesViewController : UITableViewDelegate{
                                                                             
                                                                         case .deleteData:
                                                                             
-                                                                            UIUtilities.showAlertMessageWithTwoActionsAndHandler(NSLocalizedString("Do you want to delete Study data?", comment: ""), errorMessage: NSLocalizedString(withdrawalMessage!, comment: ""), errorAlertActionTitle: NSLocalizedString("OK", comment: ""),
+                                                                            UIUtilities.showAlertMessageWithTwoActionsAndHandler(NSLocalizedString("You are choosing to leave the study. Data that you have provided for the study so far, will be deleted from our databases. Tap OK to confirm that you wish to leave the study or Cancel to abstain from doing so.", comment: ""), errorMessage: NSLocalizedString(withdrawalMessage!, comment: ""), errorAlertActionTitle: NSLocalizedString("OK", comment: ""),
                                                                                                                                  errorAlertActionTitle2: NSLocalizedString("Cancel", comment: ""), viewControllerUsed: self,
                                                                                                                                  action1: {
                                                                                                                                      self.withdrawalFromStudy(deleteResponse: true)
@@ -425,7 +428,7 @@ extension ResourcesViewController : UITableViewDelegate{
                                                                         
                                                                         case .noAction :
                                                                             
-                                                                            UIUtilities.showAlertMessageWithTwoActionsAndHandler(NSLocalizedString("Do you want to delete Study data?", comment: ""), errorMessage: NSLocalizedString(withdrawalMessage!, comment: ""), errorAlertActionTitle: NSLocalizedString("OK", comment: ""),
+                                                                            UIUtilities.showAlertMessageWithTwoActionsAndHandler(NSLocalizedString("You are choosing to leave the study. Data that you have provided for the study so far, will be retained in our databases for research purposes. Tap OK to confirm that you wish to leave the study or Cancel to abstain from doing so.", comment: ""), errorMessage: NSLocalizedString(withdrawalMessage!, comment: ""), errorAlertActionTitle: NSLocalizedString("OK", comment: ""),
                                                                                                                                  errorAlertActionTitle2: NSLocalizedString("Cancel", comment: ""), viewControllerUsed: self,
                                                                                                                                  action1: {
                                                                                                                                     self.withdrawalFromStudy(deleteResponse: false)

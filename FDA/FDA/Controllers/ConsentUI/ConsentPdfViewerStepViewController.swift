@@ -14,7 +14,9 @@ import ResearchKit
 
 class ConsentPdfViewerStep: ORKStep {
     
-   
+    func showsProgress() -> Bool {
+        return false
+    }
 }
 
 class ConsentPdfViewerStepViewController: ORKStepViewController {

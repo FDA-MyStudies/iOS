@@ -343,13 +343,15 @@ class ConsentBuilder{
         
         let consentCompletionStep = ConsentCompletionStep(identifier: kConsentSharePdfCompletionStep)
         
+       
+        
         consentCompletionStep.mainTitle = "Thanks for providing consent for this Study"
         consentCompletionStep.subTitle =  "You can now start participating in the Study"
         
         let consentViewPdfStep = ConsentPdfViewerStep(identifier:kConsentViewPdfCompletionStep )
         
 
-        let completionStep = ORKCompletionStep(identifier:kConsentCompletionStepIdentifier)
+        let completionStep = CustomCompletionStep(identifier:kConsentCompletionStepIdentifier)
         completionStep.title = NSLocalizedString("Thanks for providing consent for this Study", comment: "")
         
         
@@ -477,25 +479,33 @@ struct ReviewConsent{
 
 class ConsentReviewStep:ORKConsentReviewStep {
     
-    func showsProgress() -> Bool {
+   /* func showsProgress() -> Bool {
         return true
     }
-    
+    */
 }
 
 class VisualConsentStep:ORKVisualConsentStep {
     
-    func showsProgress() -> Bool {
+   /* func showsProgress() -> Bool {
         return true
     }
-    
+    */
 }
 
 class ConsentSharingStep:ORKConsentSharingStep {
     
-    func showsProgress() -> Bool {
+   /* func showsProgress() -> Bool {
         return true
     }
+   */
+}
+
+class CustomCompletionStep:ORKCompletionStep {
+    
+    func showsProgress() -> Bool {
+     return true
+     }
     
 }
 

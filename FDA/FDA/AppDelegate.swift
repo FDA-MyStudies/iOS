@@ -325,7 +325,7 @@
                             topVC = topVC?.presentedViewController
                         }
                         
-                        if topVC?.presentedViewController?.isKind(of: ORKPasscodeViewController.self) == false{
+                        if (topVC?.presentedViewController?.isKind(of: ORKPasscodeViewController.self) == false && (topVC?.presentedViewController?.isKind(of: ORKTaskViewController.self))!) || ( topVC != nil && topVC?.isKind(of: ORKPasscodeViewController.self) == false) {
                              topVC!.present(passcodeViewController, animated: false, completion: nil)
                         }
                         

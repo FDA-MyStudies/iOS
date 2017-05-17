@@ -15,6 +15,10 @@ let kRetainButtonTag = 11221
 let kConfirmationOptionalDefaultTypeRetain = "retain"
 let kConfirmationOptionalDefaultTypeDelete = "delete"
 
+
+protocol ConfirmationOptionalDelegate {
+    func confirmationCell(cell:ConfirmationOptionalTableViewCell , forStudy study:Study, deleteData:Bool)
+}
 class ConfirmationOptionalTableViewCell: UITableViewCell {
 
     @IBOutlet var buttonDeleteData:UIButton?
@@ -22,7 +26,8 @@ class ConfirmationOptionalTableViewCell: UITableViewCell {
     @IBOutlet var labelTitle:UILabel?
     @IBOutlet var imageViewDeleteCheckBox: UIImageView?
     @IBOutlet var imageViewRetainCheckBox: UIImageView?
-    
+    var study:Study!
+    var delegate:ConfirmationOptionalDelegate? = nil
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -33,26 +38,33 @@ class ConfirmationOptionalTableViewCell: UITableViewCell {
     
     @IBAction func deleteOrRetainDataButtonAction(_ sender:UIButton?){
         
+        var deleteData = false
         if sender?.tag == kDeleteButtonTag {
             if (imageViewDeleteCheckBox?.image?.isEqual(#imageLiteral(resourceName: "notChecked")))! {
                 imageViewDeleteCheckBox?.image = #imageLiteral(resourceName: "checked")
                 imageViewRetainCheckBox?.image = #imageLiteral(resourceName: "notChecked")
+                deleteData = true;
             }
             else{
                 imageViewDeleteCheckBox?.image = #imageLiteral(resourceName: "notChecked")
                 imageViewRetainCheckBox?.image = #imageLiteral(resourceName: "checked")
+                deleteData = false;
             }
         }
         else{
             if (imageViewRetainCheckBox?.image?.isEqual(#imageLiteral(resourceName: "notChecked")))! {
                 imageViewRetainCheckBox?.image = #imageLiteral(resourceName: "checked")
                 imageViewDeleteCheckBox?.image = #imageLiteral(resourceName: "notChecked")
+                deleteData = false;
             }
             else{
                 imageViewRetainCheckBox?.image = #imageLiteral(resourceName: "notChecked")
                 imageViewDeleteCheckBox?.image = #imageLiteral(resourceName: "checked")
+                deleteData = true;
             }
         }
+        
+        self.delegate?.confirmationCell(cell: self, forStudy: study, deleteData: deleteData)
        
     }
    

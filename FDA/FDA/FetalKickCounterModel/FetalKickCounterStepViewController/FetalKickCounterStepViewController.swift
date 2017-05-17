@@ -17,6 +17,8 @@ class FetalKickCounterStepViewController:  ORKStepViewController {
     
     //ORKStepViewController ORKActiveStepViewController
     
+    var backgroundTaskIdentifier: UIBackgroundTaskIdentifier?
+    
     
     @IBOutlet weak var startButton:UIButton?   // button to start task as well as increment the counter
     @IBOutlet weak var startTitleLabel:UILabel? // displays the title
@@ -53,7 +55,7 @@ class FetalKickCounterStepViewController:  ORKStepViewController {
         super.init(coder: aDecoder)
     }
     
-     var backgroundTaskIdentifier: UIBackgroundTaskIdentifier?
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -76,6 +78,11 @@ class FetalKickCounterStepViewController:  ORKStepViewController {
             
             
         }
+        
+        backgroundTaskIdentifier = UIApplication.shared.beginBackgroundTask(expirationHandler: {
+            
+        })
+        
         
         // enables the IQKeyboardManager
         IQKeyboardManager.sharedManager().enable = true

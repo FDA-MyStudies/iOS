@@ -11,10 +11,14 @@
     import Crashlytics
     import UserNotifications
     
+    import CallKit
+    
     @UIApplicationMain
     class AppDelegate: UIResponder, UIApplicationDelegate {
         
         var window: UIWindow?
+        
+        var appIsResignedButDidNotEnteredBackground:Bool? = false
         
         let healthStore = HKHealthStore()
         var containerViewController: ResearchContainerViewController? {
@@ -67,6 +71,8 @@
             
             
             
+            self.appIsResignedButDidNotEnteredBackground = true
+            
             //  self.window?.isHidden = true;
             
             
@@ -76,9 +82,31 @@
             // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
             // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
             
+            self.appIsResignedButDidNotEnteredBackground = false
             
             
         }
+        
+        
+        func application(_ application: UIApplication, performFetchWithCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
+            
+            /*
+            if let tabBarController = window?.rootViewController as? UITabBarController,
+                let viewControllers = tabBarController.viewControllers
+            {
+                for viewController in viewControllers {
+                    if let fetchViewController = viewController as? FetalKickCounterStepViewController {
+                        fetchViewController.fetch {
+                            fetchViewController.updateUI()
+                            completionHandler(.newData)
+                        }
+                    }
+                }
+            }
+     
+     */
+        }
+        
         
         func applicationWillEnterForeground(_ application: UIApplication) {
             
@@ -104,6 +132,19 @@
              }
              
              */
+            
+            if self.appIsResignedButDidNotEnteredBackground! {
+                
+                let navController = application.windows[0].rootViewController
+                
+                if (navController as? UINavigationController) != nil &&  (navController as? UINavigationController)?.visibleViewController?.isKind(of: ORKTaskViewController.self) == false {
+                    
+                    
+                    self.checkPasscode(viewController: navController!)
+                }
+            }
+            
+            
         }
         
         
@@ -118,6 +159,9 @@
             let deviceTokenString = deviceToken.reduce("", {$0 + String(format: "%02X", $1)})
             print(deviceTokenString)
             //UserDetails.deviceToken = deviceTokenString
+            
+            UserServices().updateUserProfile(deviceToken: deviceTokenString , delegate: self)
+            
             
             print("APNs token retrieved: \(deviceToken)")
            
@@ -164,6 +208,9 @@
         }
         
         func checkPasscode(viewController:UIViewController) {
+            
+            
+            
             if User.currentUser.userType == .FDAUser {
                 //FDA user
                 
@@ -368,6 +415,8 @@
                 ud.set(false, forKey: kPasscodeIsPending)
                 ud.synchronize()
                 
+                self.appIsResignedButDidNotEnteredBackground = false
+                
             case ORKTaskViewControllerFinishReason.failed:
                 print("failed")
                 taskResult = taskViewController.result
@@ -390,6 +439,8 @@
     extension AppDelegate: ORKPasscodeDelegate {
         func passcodeViewControllerDidFinish(withSuccess viewController: UIViewController) {
             containerViewController?.contentHidden = false
+            self.appIsResignedButDidNotEnteredBackground = false
+            
             
             viewController.dismiss(animated: true, completion: nil)
         }
@@ -404,9 +455,11 @@
         func passcodeViewControllerForgotPasscodeTapped(_ viewController: UIViewController) {
             
             
-            self.sendRequestToSignOut()
             
-            viewController.dismiss(animated: true, completion: nil)
+            
+            viewController.dismiss(animated: true, completion: {
+                self.sendRequestToSignOut()
+            })
         }
         
     }

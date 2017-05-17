@@ -72,6 +72,9 @@ class StudyListViewController: UIViewController {
             
             self.tableView?.estimatedRowHeight = 156
             self.tableView?.rowHeight = UITableViewAutomaticDimension
+            
+            
+            
             self.sendRequestToGetUserPreference()
           //  self.sendRequestToGetStudyList()
         }

@@ -59,29 +59,50 @@ class LabKeyServices: NSObject {
         self.delegate = delegate
         
         let method = ResponseMethods.processResponse.method
-        
+       /*
         let studyId =  "CAFDA12" // Study.currentStudy?.studyId!
         let activiyId = "QR-4" // Study.currentActivity?.actvityId!
         let activityName =  "QR4" //Study.currentActivity?.shortName!
         let activityVersion = "1.0" //Study.currentActivity?.version!
         let currentRunId = Study.currentActivity?.currentRunId
         
-        let info =  [kStudyId:studyId ,
-                     kActivityId:activiyId ,
-                     kActivityName:activityName ,
-                     "version" :activityVersion ,
-                     kActivityRunId:currentRunId!
-            ] as [String : Any]
+        */
         
-        let ActivityType = Study.currentActivity?.type?.rawValue
         
-        let params = [kActivityType:ActivityType! ,
-                      kActivityInfoMetaData:info,
-                      kParticipantId:"43decbe8662d1f3c198b19d79c6df7d6",
-                      kActivityResponseData :responseData
-            ] as [String : Any]
+        let currentUser = User.currentUser
+        if let userStudyStatus = currentUser.participatedStudies.filter({$0.studyId == Study.currentStudy?.studyId!}).first {
+            
+            
+            let studyId =  "CAFDA12" // Study.currentStudy?.studyId!
+            let activiyId =  Study.currentActivity?.actvityId!
+            let activityName =  Study.currentActivity?.shortName!
+            let activityVersion = Study.currentActivity?.version!
+            let currentRunId = Study.currentActivity?.currentRunId
+            
+            
+            
+            let info =  [kStudyId:studyId ,
+                         kActivityId:activiyId! ,
+                         kActivityName:activityName! ,
+                         "version" :activityVersion! ,
+                         kActivityRunId:"\(currentRunId!)"
+                ] as [String : String]
+            
+            let ActivityType = Study.currentActivity?.type?.rawValue
+            
+            let params = [kActivityType:ActivityType! ,
+                          kActivityInfoMetaData:info,
+                          kParticipantId: userStudyStatus.participantId! as String,  //"43decbe8662d1f3c198b19d79c6df7d6",
+                          kActivityResponseData :responseData
+                ] as [String : Any]
+            
+            self.sendRequestWith(method:method, params: params, headers: nil)
+            
+            
+        }
         
-        self.sendRequestWith(method:method, params: params, headers: nil)
+        
+   
         
         
     }

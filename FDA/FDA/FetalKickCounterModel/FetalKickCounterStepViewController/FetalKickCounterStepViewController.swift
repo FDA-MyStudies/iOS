@@ -84,6 +84,10 @@ class FetalKickCounterStepViewController:  ORKStepViewController {
         })
         
         
+        func viewWillAppear(){
+            
+        }
+        
         // enables the IQKeyboardManager
         IQKeyboardManager.sharedManager().enable = true
         
@@ -199,6 +203,8 @@ class FetalKickCounterStepViewController:  ORKStepViewController {
                 
                 self.timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(FetalKickCounterStepViewController.setCounter), userInfo: nil, repeats: true)
                 
+                RunLoop.main.add(self.timer!, forMode: .commonModes)
+                
                 // start button image and start title changed
                 startButton?.setImage(UIImage(named: "kick_btn1.png"), for: .normal)
                 startTitleLabel?.text = NSLocalizedString("TAP TO RECORD A KICK", comment:"")
@@ -216,7 +222,7 @@ class FetalKickCounterStepViewController:  ORKStepViewController {
         editCounterButton?.isHidden = false
         
         
-        self.counterTextField?.text =  self.kickCounter! < 10 ?  "0\(self.kickCounter!)" : "\(self.kickCounter!)"
+        self.counterTextField?.text =  self.kickCounter! < 10 ?  ("0\(self.kickCounter!)" == "00" ? "000" : "0\(self.kickCounter!)") : "\(self.kickCounter!)"
         
     }
     

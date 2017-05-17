@@ -129,7 +129,7 @@ class EligibilityBuilder{
             if (stepsArray?.count)! > 0 {
                 
                 
-                let eligibilityCompletionStep = ORKInstructionStep(identifier: kEligibilityVerifiedScreen)
+                let eligibilityCompletionStep = customInstructionStep(identifier: kEligibilityVerifiedScreen)
                 eligibilityCompletionStep.text = "Your enrollment token has been successfully validated. You are eligible to join the Study.\nPlease click Continue to proceed to the Consent section."
                 
                 
@@ -156,3 +156,10 @@ class EligibilityBuilder{
     }
     
 }
+
+class customInstructionStep:ORKInstructionStep{
+    func showsProgress() -> Bool {
+        return false
+    }
+}
+

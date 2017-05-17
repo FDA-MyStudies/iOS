@@ -248,6 +248,8 @@ class User{
     }
     
     
+    
+    
     //MARK:Activity Bookmark
     func isActivityBookmarked(studyId:String,activityId:String) -> Bool{
         
@@ -307,6 +309,27 @@ class User{
             
             let studyStatus = UserStudyStatus()
             studyStatus.status = status
+            studyStatus.studyId = studyId
+            self.participatedStudies.append(studyStatus)
+            
+            Logger.sharedInstance.info("User Study Status: study is updated : \(studyId)")
+            return studyStatus
+        }
+    }
+    
+    func updateParticipantId(studyId:String,participantId:String)->UserStudyStatus{
+        
+        let studies = self.participatedStudies as Array<UserStudyStatus>
+        if let study =   studies.filter({$0.studyId == studyId}).first {
+            study.participantId = participantId
+            Logger.sharedInstance.info("User Study Status: study is updated : \(studyId)")
+            return study
+        }
+        else {
+            Logger.sharedInstance.info("User Study Status: study not found : \(studyId)")
+            
+            let studyStatus = UserStudyStatus()
+            studyStatus.participantId = participantId
             studyStatus.studyId = studyId
             self.participatedStudies.append(studyStatus)
             
@@ -504,6 +527,7 @@ class UserStudyStatus{
     var joiningDate:Date!
     var completion:Int = 0
     var adherence:Int = 0
+    var participantId:String?
     
     init() {
         
@@ -524,6 +548,12 @@ class UserStudyStatus{
             }
             if Utilities.isValidValue(someObject: detail[kAdherence] as AnyObject){
                 self.adherence = detail[kAdherence] as! Int
+            }
+            if Utilities.isValidValue(someObject: detail[kStudyParticipantId] as AnyObject){
+                self.participantId = detail[kStudyParticipantId] as? String
+            }
+            if Utilities.isValidValue(someObject: detail[kStudyEnrolledDate] as AnyObject){
+                self.joiningDate = Utilities.getDateFromString(dateString: detail[kStudyEnrolledDate] as! String)
             }
             if Utilities.isValidValue(someObject: detail[kStatus] as AnyObject){
                 
@@ -561,8 +591,15 @@ class UserStudyStatus{
     }
     func getParticipatedUserStudyStatus() -> Dictionary<String,Any>{
         
+        
+        var id = ""
+        if self.participantId != nil {
+            id = self.participantId!
+        }
+        
         let studyDetail = [kStudyId:self.studyId,
-                           kStudyStatus:self.status.paramValue] as [String : Any]
+                           kStudyStatus:self.status.paramValue,
+                           kStudyParticipantId:id] as [String : Any]
         return studyDetail
     }
     func getCompletionAdherence() -> Dictionary<String,Any>{

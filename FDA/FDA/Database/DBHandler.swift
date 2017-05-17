@@ -124,6 +124,9 @@ class DBHandler: NSObject {
                     dbStudy?.startDate = study.startDate
                     dbStudy?.endEnd = study.endEnd
                     dbStudy?.status = study.status.rawValue
+                    dbStudy?.enrolling = study.studySettings.enrollingAllowed
+                    dbStudy?.rejoin = study.studySettings.rejoinStudyAfterWithdrawn
+                    dbStudy?.platform = study.studySettings.platform
                     
                     if dbStudy?.participatedStatus == UserStudyStatus.StudyStatus.inProgress.rawValue {
                         dbStudy?.updatedVersion = study.version
@@ -165,6 +168,8 @@ class DBHandler: NSObject {
         dbStudy.platform = study.studySettings.platform
         dbStudy.status = study.status.rawValue
         dbStudy.participatedStatus = study.userParticipateState.status.rawValue
+        dbStudy.participatedId = study.userParticipateState.participantId
+        dbStudy.joiningDate = study.userParticipateState.joiningDate
         
         dbStudy.withdrawalConfigrationMessage = study.withdrawalConfigration?.message
         dbStudy.withdrawalConfigrationType = study.withdrawalConfigration?.type?.rawValue
@@ -212,6 +217,7 @@ class DBHandler: NSObject {
             participatedStatus.status = UserStudyStatus.StudyStatus(rawValue:dbStudy.participatedStatus)!
             participatedStatus.bookmarked = dbStudy.bookmarked
             participatedStatus.studyId = dbStudy.studyId
+            participatedStatus.participantId = dbStudy.participatedId
             
             study.userParticipateState = participatedStatus
             
@@ -411,6 +417,9 @@ class DBHandler: NSObject {
         try! realm.write({
             
              dbStudy?.participatedStatus = study.userParticipateState.status.rawValue
+             dbStudy?.participatedId = study.userParticipateState.participantId
+            dbStudy?.joiningDate = study.userParticipateState.joiningDate
+            
             
         })
         
@@ -1114,6 +1123,17 @@ class DBHandler: NSObject {
             dbResource.localPath = path
             
         })
+    }
+    
+    
+    
+    //MARK:- DELETE
+    class func deleteAll(){
+        
+        let realm = try! Realm()
+        try! realm.write {
+            realm.deleteAll()
+        }
     }
     
 }

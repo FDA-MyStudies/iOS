@@ -123,7 +123,9 @@ extension SignUpCompleteViewController:NMWebServiceDelegate {
             let appDelegate = UIApplication.shared.delegate as! AppDelegate
             appDelegate.checkPasscode(viewController: self.navigationController!)
 
-            
+            let ud = UserDefaults.standard
+            ud.set(false, forKey: kPasscodeIsPending)
+            ud.synchronize()
             
             
         }

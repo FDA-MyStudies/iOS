@@ -811,6 +811,9 @@ extension ProfileViewController:ORKTaskViewControllerDelegate{
                 self.isPasscodeViewPresented = true
             }
             
+            let ud = UserDefaults.standard
+            ud.set(false, forKey: kPasscodeIsPending)
+            ud.synchronize()
             
         case ORKTaskViewControllerFinishReason.failed:
             print("failed")

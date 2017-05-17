@@ -538,6 +538,7 @@ extension SignUpViewController:NMWebServiceDelegate {
        self.removeProgressIndicator()
         if requestName .isEqual(to: RegistrationMethods.register.description)   {
             
+            ORKPasscodeViewController.removePasscodeFromKeychain()
             self.navigateToVerificationController()
         }
         else{

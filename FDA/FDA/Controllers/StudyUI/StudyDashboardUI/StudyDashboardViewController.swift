@@ -46,23 +46,8 @@ class StudyDashboardViewController : UIViewController{
         
         StudyUpdates.studyConsentUpdated = true
         
-        if(StudyUpdates.studyConsentUpdated){
-            print("Study consent is updated: Please Present Consent UI")
-            
-            //Uncomment before release to UAT
-//            UIUtilities.showAlertMessageWithTwoActionsAndHandler(NSLocalizedString("Consent Updated", comment: ""), errorMessage: NSLocalizedString("The Consent Document for this study has been updated. Please review the revised Consent terms and provide your Informed Consent, to continue participating in the study.", comment: ""), errorAlertActionTitle: NSLocalizedString("Review", comment: ""),
-//                                                                 errorAlertActionTitle2:nil, viewControllerUsed: self,
-//                                                                 action1: {
-//                                                                     WCPServices().getEligibilityConsentMetadata(studyId:(Study.currentStudy?.studyId)!, delegate: self as NMWebServiceDelegate)
-//            },
-//                                                                 action2: {
-//                                                                    
-//            })
-           
-        }
-        else {
-            print("Study consent not updated")
-        }
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        appDelegate.checkConsentStatus()
     }
     
     override func viewWillAppear(_ animated: Bool) {

@@ -648,8 +648,8 @@ extension StudyHomeViewController:ORKTaskViewControllerDelegate{
         
         //For Verified Step , Completion Step, Visual Step, Review Step, Share Pdf Step
         
-        if stepViewController.step?.identifier == kEligibilityVerifiedScreen || stepViewController.step?.identifier == kConsentCompletionStepIdentifier || stepViewController.step?.identifier == "visual" || stepViewController.step?.identifier == "Review" || stepViewController.step?.identifier == kConsentSharePdfCompletionStep{
-            
+        if stepViewController.step?.identifier == kEligibilityVerifiedScreen || stepViewController.step?.identifier == kConsentCompletionStepIdentifier || stepViewController.step?.identifier == "visual"  || stepViewController.step?.identifier == kConsentSharePdfCompletionStep{
+            //|| stepViewController.step?.identifier == "Review"
             
             if stepViewController.step?.identifier == kEligibilityVerifiedScreen{
                stepViewController.continueButtonTitle = "Continue"

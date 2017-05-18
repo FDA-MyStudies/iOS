@@ -176,7 +176,7 @@ class ActivityBuilder {
                            task =  ORKNavigableOrderedTask(identifier:(activity?.actvityId)!, steps: orkStepArray)
                         } // comment the else part
                         else{
-                            task =  ORKNavigableOrderedTask(identifier:(activity?.actvityId)!, steps: orkStepArray)
+                            task =  ORKOrderedTask(identifier:(activity?.actvityId)!, steps: orkStepArray)
                         }
                         
                         
@@ -247,14 +247,14 @@ class ActivityBuilder {
                                                else if (dict[kCondtion] as! String) == ""{
                                                  boolValue = nil
                                                 
-                                                    defaultStepIdentifier = dict[kDestination]! as! String
+                                                defaultStepIdentifier = dict[kDestination]! as! String
                                                 
                                                 }
                                             }
                                            
                                             
                                             if  boolValue != nil {
-//                                                predicateQuestionChoiceA = ORKResultPredicate.predicateForBooleanQuestionResult(with: resultSelector!, expectedAnswer: boolValue!)
+                                                predicateQuestionChoiceA = ORKResultPredicate.predicateForBooleanQuestionResult(with: resultSelector!, expectedAnswer: boolValue!)
                                             }
                                             
                                             
@@ -263,7 +263,7 @@ class ActivityBuilder {
                                         }
                                             
                                                 choicePredicate.append(predicateQuestionChoiceA)
-                                        destination?.append( dict[kDestination]! as! String)
+                                                destination?.append( dict[kDestination]! as! String)
                                         }
                                         else{
                                             

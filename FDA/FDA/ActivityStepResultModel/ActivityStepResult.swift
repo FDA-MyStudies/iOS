@@ -288,7 +288,7 @@ class ActivityStepResult{
                         for i in 0..<3 {
                             var resultDict:Dictionary<String, Any>? =  Dictionary()
                             
-                            resultDict?[kActivityActiveKeyResultType] = ActiveStepResultType.numeric
+                            resultDict?[kActivityActiveKeyResultType] = ActiveStepResultType.numeric.rawValue
                             
                             
                             switch SpatialSpanMemoryType(rawValue:i)! as SpatialSpanMemoryType {
@@ -327,7 +327,7 @@ class ActivityStepResult{
                     for i in 0..<2 {
                         var resultDict:Dictionary<String, Any>? =  Dictionary()
                         
-                        resultDict?[kActivityActiveKeyResultType] = ActiveStepResultType.numeric
+                        resultDict?[kActivityActiveKeyResultType] = ActiveStepResultType.numeric.rawValue
                         
                         
                         if  TowerOfHanoiResultType(rawValue:i) == .puzzleWasSolved{ //puzzleWasSolved

@@ -23,6 +23,9 @@ let kUicolorForButtonBackground = UIColor.init(colorLiteralRed: 0/255.0, green: 
 
 let kUIColorForSubmitButtonBackground = UIColor.init(colorLiteralRed: 0/255.0, green: 124/255.0, blue: 186/255.0, alpha: 1.0)
 
+let NoNetworkErrorCode = -101
+let CouldNotConnectToServerCode = -1001
+
 //Display Constants
 let kTitleError = "Error"
 let kTitleMessage = "Message"

@@ -93,8 +93,13 @@ class ConfirmationViewController: UIViewController {
             else {
                 studiesToDisplay.append(study!)
                 joinedStudies.removeFirst()
-                print("studies to display \(studiesToDisplay.count)")
+                
+                let studiesIds = studiesToDisplay.map({$0.studyId!})
+                print("studies to display \(studiesIds)")
+                
                 self.checkWithdrawlConfigurationForNextSuty()
+                
+               
                 
             }
         }
@@ -157,7 +162,14 @@ class ConfirmationViewController: UIViewController {
         
         self.tableViewConfirmation?.reloadData()
        
-        print("studies to display \(studiesToDisplay.count)")
+        let studiesIds = studiesToDisplay.map({$0.studyId!})
+        print("studies to display \(studiesIds)")
+    }
+    
+    func handleWithdrawnFromStudyResponse(){
+        
+        studiesToWithdrawn.removeFirst()
+        self.withdrawnFromNextStudy()
     }
     
     
@@ -174,15 +186,37 @@ class ConfirmationViewController: UIViewController {
     @IBAction func deleteAccountAction(_ sender:UIButton){
     //UserServices().deleteAccount(self as NMWebServiceDelegate)
         
+        var found:Bool = false
         for withdrawnStudy in studiesToWithdrawn {
             if withdrawnStudy.shouldDelete == nil {
                 print("Response not proviced")
+                UIUtilities.showAlertWithMessage(alertMessage: NSLocalizedString("Please select an option between Delete Data or Retain Data for all studies.", comment: ""))
+                found = true
                 break;
             }
+            
         }
         
+        if !found {
+            self.withdrawnFromNextStudy()
+        }
         
         //UserServices().deActivateAccount(self)
+    }
+    
+    func withdrawnFromNextStudy(){
+        
+        if studiesToWithdrawn.count != 0 {
+            
+            let studyToWithdrawn = studiesToWithdrawn.first
+            LabKeyServices().withdrawFromStudy(studyId: (studyToWithdrawn?.studyId)!, participantId: (studyToWithdrawn?.participantId)!, deleteResponses: (studyToWithdrawn?.shouldDelete)!, delegate: self)
+        }
+        else {
+            //call for delete account
+            
+            let studiesIds = studiesToDisplay.map({$0.studyId!})
+            UserServices().deActivateAccount(listOfStudyIds: studiesIds, delegate: self)
+        }
     }
     
     
@@ -273,6 +307,9 @@ extension ConfirmationViewController:NMWebServiceDelegate {
              self.handleDeleteAccountResponse()
         }
         else if(requestName as String == WCPMethods.studyInfo.rawValue){
+            self.handleStudyInformationResonse()
+        }
+        else if(requestName as String == ResponseMethods.withdrawFromStudy.description){
             self.handleStudyInformationResonse()
         }
     }

@@ -835,6 +835,42 @@ class DBHandler: NSObject {
         
     }
     
+    class func saveResponseDataFor(activity:Activity,toBeSynced:Bool,data:Dictionary<String,Any>){
+        
+        let realm = try! Realm()
+        let currentRun = activity.currentRun
+        let dbRuns = realm.objects(DBActivityRun.self).filter({$0.studyId == currentRun?.studyId && $0.activityId == activity.actvityId && $0.runId == currentRun?.runId}) //filter("studyId == %@ && activityId == %@ && runId == %d",studyId,activityId,runId)
+        let dbRun = dbRuns.last
+        
+        
+        
+        try! realm.write({
+            
+            dbRun?.toBeSynced = true
+            do {
+                let json = ["data":data]
+                let jsonData =  try JSONSerialization.data(withJSONObject: json, options: JSONSerialization.WritingOptions.prettyPrinted)
+                dbRun?.responseData = jsonData
+            }
+            catch{
+                
+            }
+            
+        })
+    }
+    
+    class func isDataAvailableToSync(completionHandler:@escaping (Bool) -> ()){
+        
+        let realm = try! Realm()
+        let dbRuns = realm.objects(DBActivityRun.self).filter({$0.toBeSynced == true})
+        if dbRuns.count > 0{
+            completionHandler(true)
+        }
+        else {
+            completionHandler(false)
+        }
+    }
+    
     //MARK:-  Activity MetaData
     class func saveActivityMetaData(activity:Activity, data:Dictionary<String,Any>){
         

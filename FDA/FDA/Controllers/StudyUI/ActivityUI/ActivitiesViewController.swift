@@ -563,7 +563,24 @@ extension ActivitiesViewController:NMWebServiceDelegate {
             //self.sendRequesToGetActivityList()
             self.loadActivitiesFromDatabase()
         }
-        
+        else if requestName as String == ResponseMethods.processResponse.method.methodName {
+            
+            if (error.code == NoNetworkErrorCode) {
+                //Users are notified when their responses don’t get submitted due to network issues and are notified that the responses will be automatically submitted once the app has network available again.
+//                UIUtilities.showAlertWithMessage(alertMessage: "Your responses don’t get submitted due to network issue, but we have saved it locally, we will automatically submit once the app has network available again.")
+//                
+//                if error.code == CouldNotConnectToServerCode {
+//                    UIUtilities.showAlertWithMessage(alertMessage: "Your responses don’t get submitted due to connectiviy with our server, but we have saved it locally, we will automatically submit once the app has network available again.")
+//                }
+               let data = ActivityBuilder.currentActivityBuilder.actvityResult?.getResultDictionary()
+               DBHandler.saveResponseDataFor(activity: Study.currentActivity!, toBeSynced: true, data: data!)
+                
+            }
+            
+        }
+        else {
+            UIUtilities.showAlertWithTitleAndMessage(title:NSLocalizedString(kErrorTitle, comment: "") as NSString, message: error.localizedDescription as NSString)
+        }
     }
 }
 
@@ -623,13 +640,12 @@ extension ActivitiesViewController:ORKTaskViewControllerDelegate{
                 Study.currentActivity?.userStatus = .completed
                 
                 
+                
+                //send response to labkey
                 LabKeyServices().processResponse(responseData:(ActivityBuilder.currentActivityBuilder.actvityResult?.getResultDictionary())! , delegate: self)
                 
                 
-                //To be Uncommented
                 
-                //let status = User.currentUser.updateActivityStatus(studyId: activity.studyId!, activityId: activity.actvityId!, status: .inProgress)
-                //UserServices().updateUserActivityParticipatedStatus(activityStatus: status, delegate: self)
                 
                 
             }

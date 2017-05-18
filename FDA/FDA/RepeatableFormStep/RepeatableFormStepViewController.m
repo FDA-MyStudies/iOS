@@ -23,7 +23,7 @@
 
 @property (nonatomic, strong) NSArray *originalFormItems;
 
-@property(nonatomic, strong) UITableView *originalTableView;
+@property(nonatomic, weak) UITableView *originalTableView;
 @end
 
 @implementation RepeatableFormStepViewController
@@ -124,7 +124,8 @@
     [super stepDidChange];
     
     
- //  [_originalTableView scrollToNearestSelectedRowAtScrollPosition:UITableViewScrollPositionBottom animated:false];
+    NSIndexPath *ip = [NSIndexPath indexPathForRow:mItems.count inSection:0];
+    [_originalTableView scrollToRowAtIndexPath:ip atScrollPosition:UITableViewScrollPositionBottom animated:YES];
 }
 
 

@@ -465,5 +465,7 @@ class ActivityRun {
     var activityId:String!
     var isCompleted:Bool = false
     var restortionData:Data?
+    var toBeSynced:Bool = false
+    var responseData:Data?
     
 }

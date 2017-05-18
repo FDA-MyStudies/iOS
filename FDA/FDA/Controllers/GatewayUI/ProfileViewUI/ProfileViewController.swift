@@ -283,7 +283,8 @@ class ProfileViewController: UIViewController {
      
      */
     func sendRequestToDeleteAccount(){
-        UserServices().deActivateAccount(self)
+        let studies:Array<String> = []
+        UserServices().deActivateAccount(listOfStudyIds: studies, delegate: self)
     }
     
     

@@ -138,7 +138,7 @@ class StudyListCell: UITableViewCell {
         case .Closed:
             studyStatusIndicator?.backgroundColor = Utilities.getUIColorFromHex(0xFF0000)  //red color
         case .Paused:
-            studyStatusIndicator?.backgroundColor = Utilities.getUIColorFromHex(0xFF4500)  //red color
+            studyStatusIndicator?.backgroundColor = Utilities.getUIColorFromHex(0xf5af37)  //orange color
         }
     }
     

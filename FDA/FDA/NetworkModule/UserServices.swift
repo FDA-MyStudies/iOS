@@ -186,7 +186,7 @@ class UserServices: NSObject {
         self.sendRequestWith(method:method, params: nil, headers: headerParams)
     }
     
-    func deActivateAccount(_ delegate:NMWebServiceDelegate)  {
+    func deActivateAccount(listOfStudyIds:Array<String> , delegate:NMWebServiceDelegate)  {
         
         self.delegate = delegate
         
@@ -194,8 +194,8 @@ class UserServices: NSObject {
         let headerParams = [kUserAuthToken: user.authToken,
                             kUserId : user.userId!] as Dictionary<String,String>
         
-        let deledataArray:Array? = Array<Any>()
-        let params = [kDeactivateAccountDeleteData : deledataArray!]
+        //let deledataArray:Array? = Array<Any>()
+        let params = [kDeactivateAccountDeleteData : listOfStudyIds]
         
         
         let method = RegistrationMethods.deactivate.method

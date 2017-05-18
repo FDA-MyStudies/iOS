@@ -661,7 +661,7 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MYG-14-Lp0">
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MYG-14-Lp0">
                                 <rect key="frame" x="342" y="28" width="15" height="22"/>
                                 <state key="normal" image="shareIcon"/>
                                 <connections>
@@ -673,7 +673,7 @@
                                 <color key="backgroundColor" red="0.84705882349999995" green="0.89019607840000003" blue="0.90196078430000004" alpha="1" colorSpace="calibratedRGB"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="welcomeCell" rowHeight="70" id="lRY-T3-IvM" customClass="StudyDashboardWelcomeTableViewCell" customModule="FDA" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="55" width="375" height="70"/>
+                                        <rect key="frame" x="0.0" y="56" width="375" height="70"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="lRY-T3-IvM" id="Yu2-RD-Ywx">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="70"/>
@@ -754,7 +754,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="percentageCell" rowHeight="200" id="xHx-3T-4Ix" customClass="StudyDashboardStudyPercentageTableViewCell" customModule="FDA" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="125" width="375" height="200"/>
+                                        <rect key="frame" x="0.0" y="126" width="375" height="200"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="xHx-3T-4Ix" id="prx-D2-EIC">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="200"/>
@@ -882,7 +882,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="StatisticsCell" rowHeight="210" id="CvQ-Hd-eDc" customClass="StudyDashboardStatisticsTableViewCell" customModule="FDA" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="325" width="375" height="210"/>
+                                        <rect key="frame" x="0.0" y="326" width="375" height="210"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="CvQ-Hd-eDc" id="nM8-jf-Yku">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="210"/>
@@ -1158,7 +1158,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="trendCell" rowHeight="50" id="C7V-K2-Fb9" customClass="StudyDashboardTrendsTableViewCell" customModule="FDA" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="535" width="375" height="50"/>
+                                        <rect key="frame" x="0.0" y="536" width="375" height="50"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="C7V-K2-Fb9" id="lHu-ZI-fyS">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
@@ -1664,6 +1664,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="color" keyPath="tintColor">
+                                <color key="value" red="0.21176470588235294" green="0.48627450980392156" blue="0.72941176470588232" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
                     </tabBar>
                     <connections>
                         <segue destination="Bo9-MW-c6d" kind="relationship" relationship="viewControllers" id="ZpZ-IA-7s3"/>
@@ -1679,7 +1684,13 @@
         <scene sceneID="HeT-Bz-qr8">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Bo9-MW-c6d" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Activities" image="activities_blue_active" id="oT5-OT-1EB"/>
+                    <tabBarItem key="tabBarItem" title="Activities" image="activities_blue_active" id="oT5-OT-1EB">
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="color" keyPath="tintColor">
+                                <color key="value" red="0.2196078431372549" green="0.48627450980392156" blue="0.72941176470588232" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </tabBarItem>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="DHs-KD-p4k">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
@@ -1698,7 +1709,13 @@
         <scene sceneID="xKo-Ui-0ZZ">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="7GU-Nx-I7D" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Resources" image="resourcesActive" id="W7D-Iu-sAw"/>
+                    <tabBarItem key="tabBarItem" title="Resources" image="resourcesActive" id="W7D-Iu-sAw">
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="color" keyPath="tintColor">
+                                <color key="value" red="0.2196078431372549" green="0.48627450980392156" blue="0.72941176470588232" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </tabBarItem>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Myb-Rk-C1b">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
@@ -1717,7 +1734,13 @@
         <scene sceneID="JhW-w6-LJS">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="WeL-we-HZg" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Dashboard" image="dashboardActive" id="arR-Sy-PnO"/>
+                    <tabBarItem key="tabBarItem" title="Dashboard" image="dashboardActive" id="arR-Sy-PnO">
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="color" keyPath="tintColor">
+                                <color key="value" red="0.2196078431372549" green="0.48627450980392156" blue="0.72941176470588232" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </tabBarItem>
                     <toolbarItems/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="U2D-mI-xcD">
@@ -1732,30 +1755,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PWP-vK-IvK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="183" y="4918"/>
-        </scene>
-        <!--View Controller-->
-        <scene sceneID="daf-gy-roA">
-            <objects>
-                <viewController id="18R-58-wLj" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="7Qo-F1-CSI"/>
-                        <viewControllerLayoutGuide type="bottom" id="7UF-cq-tDx"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="tyI-me-fcP">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="study_dashboard.png" translatesAutoresizingMaskIntoConstraints="NO" id="nwU-r3-5jM">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Cs2-JV-53i" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="599" y="4916"/>
         </scene>
         <!--Resources Detail View Controller-->
         <scene sceneID="SKl-ed-gQZ">
@@ -1829,7 +1828,6 @@
         <image name="starGreyBig" width="21" height="19"/>
         <image name="starYellow" width="21" height="19"/>
         <image name="staticIcon1" width="24" height="24"/>
-        <image name="study_dashboard.png" width="750" height="1334"/>
         <image name="surveyIcon" width="21" height="21"/>
         <image name="watchVideo" width="119" height="27"/>
     </resources>

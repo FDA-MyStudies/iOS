@@ -45,8 +45,8 @@ class StudyDashboardStudyPercentageTableViewCell: UITableViewCell {
         let study = Study.currentStudy
         
         studyPercentagePie?.startAngle = -90
-        studyPercentagePie?.progressThickness = 0.3
-        studyPercentagePie?.trackThickness = 0.3
+        studyPercentagePie?.progressThickness = 0.25
+        studyPercentagePie?.trackThickness = 0.25
         studyPercentagePie?.trackColor = greyColor
         studyPercentagePie?.clockwise = true
         studyPercentagePie?.gradientRotateSpeed = 2
@@ -57,8 +57,8 @@ class StudyDashboardStudyPercentageTableViewCell: UITableViewCell {
         //studyPercentagePie?.angle = 99/0.27777778
         
         completedPercentagePie?.startAngle = -90
-        completedPercentagePie?.progressThickness = 0.3
-        completedPercentagePie?.trackThickness = 0.3
+        completedPercentagePie?.progressThickness = 0.25
+        completedPercentagePie?.trackThickness = 0.25
         completedPercentagePie?.trackColor = greyColor
         completedPercentagePie?.clockwise = true
         completedPercentagePie?.gradientRotateSpeed = 2

@@ -8,7 +8,7 @@
             
             "studyId": "CAFDA12",
             
-            "activityId": "QR-4",
+            "activityId": "QR4_I4",
             
             "name": "QR4",
             
@@ -283,7 +283,7 @@
                                   
                                   "detail": "",
                                   
-                                  "exclusive": true
+                                  "exclusive": false
                                   
                                   },
                                   
@@ -295,13 +295,24 @@
                                   
                                   "detail": "",
                                   
-                                  "exclusive": true
+                                  "exclusive": false
+                                  
+                                  },
+                                  {
+                                  
+                                  "text": "TC3",
+                                  
+                                  "value": "3",
+                                  
+                                  "detail": "",
+                                  
+                                  "exclusive": false
                                   
                                   }
                                   
                                   ],
                   
-                  "selectionStyle": "Single"
+                  "selectionStyle": "Multiple"
                   
                   },
                   
@@ -807,13 +818,20 @@
                                    
                                    "condition": "true",
                                    
-                                   "destination": "QR4_I3"
+                                   "destination": "QR4_I4"
                                    
                                    },
                                    
                                    {
                                    
                                    "condition": "false",
+                                   
+                                   "destination": "QR4_I4"
+                                   
+                                   },
+                                   {
+                                   
+                                   "condition": "",
                                    
                                    "destination": "QR4_I4"
                                    

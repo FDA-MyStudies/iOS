@@ -672,21 +672,55 @@ class LineChartCell: GraphChartTableViewCell {
         if ((charActivity?.frequencyRuns?.count)! > 0){
             
             for i in 0...(charActivity?.frequencyRuns?.count)! - 1 {
-                if array.count > i {
-                    let value = array[i]
-                    points.append(ORKValueRange(value:Double(value)))
-                }
-                else {
-                    points.append(ORKValueRange())
-                }
-                
                 
                 //x axis title
                 xAxisTitles.append(String(i+1))
+                points.append(ORKValueRange())
+                
+                let frequency = charActivity?.frequencyRuns?[i]
+                let runStartTime = LineChartCell.dailyFormatter.date(from: frequency?["startTime"] as! String)
+                let endTime = LineChartCell.dailyFormatter.date(from: frequency?["endTime"] as! String)
+                
+                if dataList.count > 0{
+                    for j in 0...dataList.count-1 {
+                        let data = dataList[j]
+                        let value = data.data
+                        
+                        let dateAsString = LineChartCell.dailyFormatter.string(from: data.startDate!)
+                        let responseDate = LineChartCell.dailyFormatter2.date(from: dateAsString)
+                        
+                        if (responseDate! > runStartTime! && responseDate! < endTime!) {
+                            points[i] = ORKValueRange(value:Double(value))
+                        }
+                    }
+                }
                 
             }
             
+            
+            
+            
+            
         }
+        
+//        if ((charActivity?.frequencyRuns?.count)! > 0){
+//            
+//            for i in 0...(charActivity?.frequencyRuns?.count)! - 1 {
+//                if array.count > i {
+//                    let value = array[i]
+//                    points.append(ORKValueRange(value:Double(value)))
+//                }
+//                else {
+//                    points.append(ORKValueRange())
+//                }
+//                
+//                
+//                //x axis title
+//                xAxisTitles.append(String(i+1))
+//                
+//            }
+//            
+//        }
         plotPoints.append(points)
         
         self.graphView.reloadData()
@@ -774,6 +808,18 @@ class LineChartCell: GraphChartTableViewCell {
         let formatter = DateFormatter()
         formatter.dateFormat = "hh:mma, MMM dd YYYY"
         formatter.timeZone = TimeZone.init(abbreviation:"GMT")
+        return formatter
+    }()
+    private static let dailyFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "HH:mm:ss"
+        //formatter.timeZone = TimeZone.init(abbreviation:"GMT")
+        return formatter
+    }()
+    private static let dailyFormatter2: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "HH:mm:ss"
+        //formatter.timeZone = TimeZone.init(abbreviation:"GMT")
         return formatter
     }()
 

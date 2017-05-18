@@ -114,7 +114,9 @@ class StudyDashboardStatisticsTableViewCell: UITableViewCell {
             startDateOfWeek = todaysDate.startOfWeek
             endDateOfWeek = todaysDate.endOfWeek
             //current year
-            let stringStartDate = StudyDashboardStatisticsTableViewCell.formatter.string(from: startDateOfWeek!)
+            var startDate = startDateOfWeek
+            startDate = startDate?.addingTimeInterval(24*3600)
+            let stringStartDate = StudyDashboardStatisticsTableViewCell.formatter.string(from: startDate!)
             let stringEndDate = StudyDashboardStatisticsTableViewCell.formatter.string(from: endDateOfWeek!)
             labelDateValue?.text = stringStartDate + " - " + stringEndDate
             self.buttonForward?.isEnabled = false
@@ -175,7 +177,9 @@ class StudyDashboardStatisticsTableViewCell: UITableViewCell {
             
             startDateOfWeek = calendar.date(byAdding: .day, value: 7, to: startDateOfWeek!)
             endDateOfWeek = calendar.date(byAdding: .day, value: 7, to: endDateOfWeek!)
-            let stringStartDate = StudyDashboardStatisticsTableViewCell.formatter.string(from: startDateOfWeek!)
+            var startDate = startDateOfWeek
+            startDate = calendar.date(byAdding: .day, value: 1, to: startDate!)
+            let stringStartDate = StudyDashboardStatisticsTableViewCell.formatter.string(from: startDate!)
             let stringEndDate = StudyDashboardStatisticsTableViewCell.formatter.string(from: endDateOfWeek!)
             labelDateValue?.text = stringStartDate + " - " + stringEndDate
             

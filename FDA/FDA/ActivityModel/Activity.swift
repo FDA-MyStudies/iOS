@@ -271,8 +271,8 @@ class Activity{
 //            }
             
                         
-            if Utilities.isValidValue(someObject: infoDict[kActivityTitle] as AnyObject ){
-                self.shortName =   infoDict[kActivityTitle] as? String
+            if Utilities.isValidValue(someObject: infoDict["name"] as AnyObject ){
+                self.shortName =   infoDict["name"] as? String
             }
             
             if Utilities.isValidValue(someObject: infoDict[kActivityVersion] as AnyObject ){

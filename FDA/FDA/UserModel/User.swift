@@ -686,6 +686,9 @@ class UserActivityStatus{
     var studyId:String! = ""
     var activityVersion:String! = ""
     var activityRunId:String! = ""
+    var totalRuns = 0
+    var compeltedRuns = 0
+    var incompletedRuns = 0
     var status:ActivityStatus = .yetToJoin
     init() {
         
@@ -747,10 +750,16 @@ class UserActivityStatus{
     }
     func getParticipatedUserActivityStatus() -> Dictionary<String,Any>{
         
+        let runDetail = [	"total":self.totalRuns,
+                         	"completed":self.compeltedRuns,
+                         	"missed":self.incompletedRuns]
+        
         let studyDetail = [
                            kActivityId:self.activityId,
                            kActivityRunId:self.activityRunId,
-                           kActivityStatus:self.status.paramValue] as [String : Any]
+                           kActivityStatus:self.status.paramValue,
+                           "activityRun":runDetail] as [String : Any]
+       
         return studyDetail
     }
     

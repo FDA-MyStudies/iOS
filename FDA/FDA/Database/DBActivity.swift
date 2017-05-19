@@ -30,7 +30,7 @@ class DBActivity: Object {
     
     dynamic var currentRunId:String?
     dynamic var participationStatus:Int = 0
-    
+    dynamic var completedRuns:Int = 0
     
     var activityRuns = List<DBActivityRun>()
     

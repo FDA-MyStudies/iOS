@@ -519,6 +519,8 @@ class DBHandler: NSObject {
                             
                             dbActivity?.currentRunId = activity.userParticipationStatus.activityRunId
                             dbActivity?.participationStatus = activity.userParticipationStatus.status.rawValue
+                            dbActivity?.completedRuns = activity.userParticipationStatus.compeltedRuns
+                            
                          })
                     }
                     
@@ -586,6 +588,7 @@ class DBHandler: NSObject {
         dbActivity.frequencyType = activity.frequencyType.rawValue
         dbActivity.currentRunId = activity.userParticipationStatus.activityRunId
         dbActivity.participationStatus = activity.userParticipationStatus.status.rawValue
+        dbActivity.completedRuns = activity.userParticipationStatus.compeltedRuns
         do {
             let json = ["data":activity.frequencyRuns]
             let data =  try JSONSerialization.data(withJSONObject: json, options: JSONSerialization.WritingOptions.prettyPrinted)
@@ -639,7 +642,7 @@ class DBHandler: NSObject {
         
         let realm = try! Realm()
         let dbActivities = realm.objects(DBActivity.self).filter("studyId == %@",studyId)
-        let date = Date()
+        let date = Date().utcDate()
         var activities:Array<Activity> = []
         for dbActivity in dbActivities {
             
@@ -663,14 +666,6 @@ class DBHandler: NSObject {
                 
             }
             
-            let userStatus = UserActivityStatus()
-            userStatus.activityId = dbActivity.actvityId
-            userStatus.activityRunId = dbActivity.currentRunId!
-            userStatus.status = UserActivityStatus.ActivityStatus(rawValue:dbActivity.participationStatus)!
-            activity.userParticipationStatus = userStatus
-            
-            //append to user class participatesStudies also
-            User.currentUser.participatedActivites.append(userStatus)
             
             print("Database \(activity.totalRuns)")
             
@@ -723,6 +718,31 @@ class DBHandler: NSObject {
                 
                 
             }
+            
+            //check for completed runs
+            if activity.compeltedRuns < dbActivity.completedRuns {
+                activity.compeltedRuns = dbActivity.completedRuns
+            }
+            
+            let userStatus = UserActivityStatus()
+            userStatus.activityId = dbActivity.actvityId
+            userStatus.activityRunId = String(activity.currentRunId)
+            
+            if String(activity.currentRunId) == dbActivity.currentRunId {
+                userStatus.status = UserActivityStatus.ActivityStatus(rawValue:dbActivity.participationStatus)!
+            }
+            
+            userStatus.compeltedRuns = activity.compeltedRuns
+            userStatus.incompletedRuns = activity.incompletedRuns
+            userStatus.totalRuns = activity.totalRuns
+            if activity.currentRun == nil {
+                userStatus.status = UserActivityStatus.ActivityStatus.abandoned
+            }
+            activity.userParticipationStatus = userStatus
+            
+            //append to user class participatesStudies also
+            User.currentUser.participatedActivites.append(userStatus)
+
             
             
             

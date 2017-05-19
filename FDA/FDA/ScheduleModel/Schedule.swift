@@ -138,7 +138,7 @@ class Schedule{
         print("numberOfDays \(numberOfDays)")
         var runStartDate:Date? = startTime
         var runEndDate:Date? = nil
-        let calendar = Calendar.current
+        let calendar = Calendar.currentUTC()
         for day in 1...numberOfDays {
             
             
@@ -162,7 +162,7 @@ class Schedule{
     func setWeeklyRuns() {
         
         let dayOfWeek = self.getCurrentWeekDay(date: startTime)
-        let calendar = Calendar.current
+        let calendar = Calendar.currentUTC()
         let targetDay = 1 //server configurable
         
         //first day
@@ -192,7 +192,7 @@ class Schedule{
     
     func setMonthlyRuns(){
         
-        let calendar = Calendar.current
+        let calendar = Calendar.currentUTC()
         
         var runStartDate = startTime
         var runId = 1
@@ -227,7 +227,7 @@ class Schedule{
         dailyFrequencyTimings = activity.frequencyRuns!
         
         var numberOfDays = self.getNumberOfDaysBetween(startDate: startTime, endDate: endTime!)
-        let calendar = Calendar.current
+        let calendar = Calendar.currentUTC()
         var runId = 1
         let startDateString =  Schedule.formatter.string(from: startTime)
         var startDateShortStyle = Schedule.formatter2.date(from: startDateString)
@@ -412,7 +412,7 @@ class Schedule{
         
         
         
-        let calendar = Calendar.current
+        let calendar = Calendar.currentUTC()
         let component = calendar.dateComponents([.weekday], from: date)
         print(component.weekday! as Int)
         let dayOfWeek = component.weekday! as Int
@@ -421,13 +421,13 @@ class Schedule{
         
     }
     func endOfDay(date: Date) -> (Date) {
-        let calendar = Calendar.current
+        let calendar = Calendar.currentUTC()
         let endDate = calendar.date(byAdding: .day, value: 1, to: date)
         return (endDate!)
     }
     
     func getNumberOfWeeksBetween(startDate:Date,endDate:Date) -> Int {
-        let calendar = Calendar.current
+        let calendar = Calendar.currentUTC()
         let date1 = calendar.startOfDay(for: startDate)
         let date2 = calendar.startOfDay(for: endDate) //calendar.startOfDay(for: endDate)
         
@@ -440,7 +440,8 @@ class Schedule{
     
     func getNumberOfDaysBetween(startDate:Date,endDate:Date) -> Int {
         
-        let calendar = Calendar.current
+        var calendar = Calendar.currentUTC()
+        
         
         // Replace the hour (time) of both dates with 00:00
         let date1 = calendar.startOfDay(for: startDate)
@@ -468,4 +469,39 @@ class ActivityRun {
     var toBeSynced:Bool = false
     var responseData:Data?
     
+}
+extension Calendar{
+    
+    static func currentUTC() -> Calendar {
+        var calender = Calendar.current
+        calender.timeZone = TimeZone(abbreviation: "UTC")!
+        return calender
+    }
+    //public static var currentUTC:Calendar {
+    //    var calender = Calendar.current
+    //    calender.timeZone = TimeZone(abbreviation: "UTC")!
+    //    return calender
+    //}
+}
+extension Date{
+    
+    public static var todayUTC:Date{
+        let timezone = TimeZone(abbreviation: "UTC")!
+        var dateComponents = Calendar.current.dateComponents(in: timezone, from: Date())
+        dateComponents.calendar = Calendar.currentUTC()
+        let date = dateComponents.date
+        return date!
+    }
+    
+    public func utcDate()->Date{
+        
+        let timezone = TimeZone(abbreviation: "UTC")!
+        var dateComponents = Calendar.current.dateComponents(in: timezone, from: self)
+        dateComponents.calendar = Calendar.currentUTC()
+        let date = dateComponents.date
+        return date!
+        
+        
+    }
+
 }

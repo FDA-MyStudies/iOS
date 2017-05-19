@@ -86,6 +86,19 @@ class ActivitiesViewController : UIViewController{
         
         
     }
+    
+    func checkForDashBoardInfo(){
+        
+        DBHandler.loadStatisticsForStudy(studyId: (Study.currentStudy?.studyId)!) { (statiticsList) in
+            
+            if statiticsList.count != 0 {
+               
+            }
+            else {
+                self.sendRequestToGetDashboardInfo()
+            }
+        }
+    }
 
 //MARK:- 
     
@@ -100,11 +113,16 @@ class ActivitiesViewController : UIViewController{
             if activities.count > 0 {
                 Study.currentStudy?.activities = activities
                 self.handleActivityListResponse()
+                
+               
+                
             }
             else {
                 WCPServices().getStudyActivityList(studyId: (Study.currentStudy?.studyId)!, delegate: self)
             }
         }
+        
+         self.checkForDashBoardInfo()
     }
     
     
@@ -276,7 +294,12 @@ class ActivitiesViewController : UIViewController{
     func updateActivityRunStuatus(status:UserActivityStatus.ActivityStatus){
         
         let activity = Study.currentActivity!
+        
         let activityStatus = User.currentUser.updateActivityStatus(studyId: activity.studyId!, activityId: activity.actvityId!,runId: String(activity.currentRunId), status:status)
+        activityStatus.compeltedRuns = activity.compeltedRuns
+        activityStatus.incompletedRuns = activity.incompletedRuns
+        activityStatus.totalRuns = activity.totalRuns
+        
         UserServices().updateUserActivityParticipatedStatus(studyId:activity.studyId!, activityStatus: activityStatus, delegate: self)
         
         DBHandler.updateActivityParticipationStatus(activity: activity)
@@ -348,6 +371,10 @@ class ActivitiesViewController : UIViewController{
      */
     func sendRequesToGetActivityList(){
         WCPServices().getStudyActivityList(studyId: (Study.currentStudy?.studyId)!, delegate: self)
+    }
+    
+    func sendRequestToGetDashboardInfo(){
+        WCPServices().getStudyDashboardInfo(studyId: (Study.currentStudy?.studyId)!, delegate: self)
     }
     
 
@@ -525,7 +552,8 @@ extension ActivitiesViewController:NMWebServiceDelegate {
     func startedRequest(_ manager: NetworkManager, requestName: NSString) {
         Logger.sharedInstance.info("requestname : \(requestName)")
        
-        if (requestName as String == RegistrationMethods.updateStudyState.method.methodName) ||  (requestName as String == RegistrationMethods.updateActivityState.method.methodName){
+        if (requestName as String == RegistrationMethods.updateStudyState.method.methodName) ||  (requestName as String == RegistrationMethods.updateActivityState.method.methodName) ||
+            (requestName as String == WCPMethods.studyDashboard.method.methodName){
         }
         else {
              self.addProgressIndicator()

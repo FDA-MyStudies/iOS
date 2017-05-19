@@ -96,6 +96,7 @@ class LabKeyServices: NSObject {
                           kActivityResponseData :responseData
                 ] as [String : Any]
             
+            print("processresponse \(params)")
             self.sendRequestWith(method:method, params: params, headers: nil)
             
             

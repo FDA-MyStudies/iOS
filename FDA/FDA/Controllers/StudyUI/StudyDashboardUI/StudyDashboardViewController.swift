@@ -44,10 +44,10 @@ class StudyDashboardViewController : UIViewController{
         
         //TO BE REMOVED FOLLOWING 
         
-        StudyUpdates.studyConsentUpdated = true
+        //StudyUpdates.studyConsentUpdated = true
         
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        appDelegate.checkConsentStatus()
+        //let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        //appDelegate.checkConsentStatus()
     }
     
     override func viewWillAppear(_ animated: Bool) {

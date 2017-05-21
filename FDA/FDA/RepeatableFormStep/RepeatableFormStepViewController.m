@@ -124,8 +124,8 @@
     [super stepDidChange];
     
     
-    NSIndexPath *ip = [NSIndexPath indexPathForRow:mItems.count inSection:0];
-    [_originalTableView scrollToRowAtIndexPath:ip atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+    NSIndexPath *ip = [NSIndexPath indexPathForRow:mItems.count - 1 inSection:0];
+    //[_originalTableView scrollToRowAtIndexPath:ip atScrollPosition:UITableViewScrollPositionBottom animated:YES];
 }
 
 

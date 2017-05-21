@@ -106,6 +106,10 @@ class ConsentSectionStep{
                 self.type =  ConsentStepSectionType(rawValue:(stepDict[kConsentStepType] as? String)!)
             }
             
+            
+            
+            
+            
             if Utilities.isValidValue(someObject: stepDict[kConsentStepTitle] as AnyObject ){
                 self.title = stepDict[kConsentStepTitle] as? String
             }
@@ -158,6 +162,13 @@ class ConsentSectionStep{
         else if self.url!.isEmpty == false{
              consentSection.contentURL = URL(string:self.url!)
         }
+        
+        
+        if self.type == .custom && self.visualStep == true{
+            
+            consentSection.customImage  = #imageLiteral(resourceName: "task_img2")
+        }
+        
         
         return consentSection
     }

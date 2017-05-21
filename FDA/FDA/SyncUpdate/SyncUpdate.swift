@@ -7,3 +7,19 @@
 //
 
 import Foundation
+
+class SyncUpdate{
+    
+    var isReachabilityChanged:Bool
+     static var currentSyncUpdate:SyncUpdate? = nil
+   
+    init() {
+        self.isReachabilityChanged = false
+    }
+    
+    @objc func updateData(){
+        
+    }
+    
+    
+}

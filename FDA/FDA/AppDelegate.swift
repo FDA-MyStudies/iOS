@@ -64,6 +64,14 @@
            
            // self.checkForAppUpdate()
             
+            
+            
+            
+            SyncUpdate.currentSyncUpdate = SyncUpdate()
+            
+              NotificationCenter.default.addObserver(SyncUpdate.currentSyncUpdate as Any , selector: #selector(SyncUpdate.currentSyncUpdate?.updateData), name:ReachabilityChangedNotification, object: nil)
+            
+            
             return true
            
     }
@@ -481,7 +489,10 @@
                     ud.synchronize()
                     
                     
-                    slideMenuController?.navigateToHomeAfterSingout()
+                    let leftController = slideMenuController?.leftViewController as! LeftMenuViewController
+                    leftController.changeViewController(.studyList)
+                    leftController.createLeftmenuItems()
+
                 }
                 
             }
@@ -839,17 +850,40 @@
         }
         
         func passcodeViewControllerText(forForgotPasscode viewController: UIViewController) -> String {
-            return "Forgot Passcode?"
+            return "Forgot Passcode? Sign In Again"
         }
         
         func passcodeViewControllerForgotPasscodeTapped(_ viewController: UIViewController) {
             
             
+                
+            var topVC = UIApplication.shared.keyWindow?.rootViewController
             
             
-            viewController.dismiss(animated: true, completion: {
-                self.sendRequestToSignOut()
-            })
+            while topVC?.presentedViewController != nil {
+                topVC = topVC?.presentedViewController
+            }
+
+            
+                
+                UIUtilities.showAlertMessageWithTwoActionsAndHandler(NSLocalizedString("Passcode", comment: ""), errorMessage: NSLocalizedString("You will be signed out and will need to sign in again. Are you sure you want to proceed?", comment: ""), errorAlertActionTitle: NSLocalizedString("OK", comment: ""),
+                                                                     errorAlertActionTitle2:NSLocalizedString("Cancel", comment: ""), viewControllerUsed: topVC!,
+                                                                     action1: {
+                                                                         viewController.dismiss(animated: true, completion: {
+                                                                        
+                                                                        self.sendRequestToSignOut()
+                                                                        })
+                },
+                                                                     action2: {
+                                                                        
+                                                                       
+                })
+
+                
+                
+                
+                
+    
         }
         
     }

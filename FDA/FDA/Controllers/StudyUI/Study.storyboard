@@ -1028,7 +1028,7 @@
                                                     </collectionViewFlowLayout>
                                                     <cells>
                                                         <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="StatisticsCell" id="MZ5-Pr-Min" customClass="StudyDashboardStatisticsCollectionViewCell" customModule="FDA" customModuleProvider="target">
-                                                            <rect key="frame" x="0.0" y="13.5" width="125" height="110"/>
+                                                            <rect key="frame" x="0.0" y="14" width="125" height="110"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                                                 <rect key="frame" x="0.0" y="0.0" width="125" height="110"/>
@@ -1245,7 +1245,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="265"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="efL-BG-Ieh" id="w0g-yn-hEC">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="265"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="264"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6Hk-K5-nZj" customClass="ORKLineGraphChartView">

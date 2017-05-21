@@ -40,6 +40,13 @@ class AppNotification {
     var studyId:String?
     var date:Date?
     
+    var activityId:String?
+    var read:Bool? = false
+    
+    init() {
+        
+    }
+    
     init(detail:Dictionary<String, Any>){
         
         if Utilities.isValidObject(someObject: detail as AnyObject?){
@@ -68,6 +75,10 @@ class AppNotification {
             }
             if Utilities.isValidValue(someObject: detail["date"] as AnyObject ) {
                 self.date =   Utilities.getDateFromString(dateString: (detail["date"] as? String)!)
+            }
+            
+            if Utilities.isValidValue(someObject: detail[kNotificationActivityId] as AnyObject ) {
+                self.activityId =   detail[kNotificationActivityId] as? String
             }
             
         }

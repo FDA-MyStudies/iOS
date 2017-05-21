@@ -39,6 +39,39 @@ class NotificationViewController : UIViewController{
     
 //MARK:- 
     
+    
+    func handleNotificationListResponse(){
+        if (Gateway.instance.notification?.count)! > 0{
+            self.loadNotificationFromDatabase()
+            self.tableView?.isHidden = false
+        }
+        else {
+            self.tableView?.isHidden = true
+        }
+    }
+    
+    func loadNotificationFromDatabase(){
+        
+        DBHandler.loadNotificationListFromDatabase(completionHandler: {(notificationList) in
+            
+            if notificationList.count > 0 {
+                 self.tableView?.isHidden = false
+                
+                Gateway.instance.notification = notificationList
+                self.tableView?.reloadData()
+            }
+            else{
+                
+            }
+            
+            })
+    }
+
+    
+    
+    
+    
+    
     /**
      
      Used to check the Study State
@@ -167,8 +200,7 @@ extension NotificationViewController:NMWebServiceDelegate {
         self.removeProgressIndicator()
         
         if requestName as String == WCPMethods.notifications.method.methodName {
-            self.tableView?.reloadData()
-            self.tableView?.isHidden = false
+           self.handleNotificationListResponse()
         }
     }
  

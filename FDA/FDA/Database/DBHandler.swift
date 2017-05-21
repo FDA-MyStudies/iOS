@@ -155,6 +155,61 @@ class DBHandler: NSObject {
         })
     }
     
+    
+    func saveNotifications(notifications:Array<AppNotification>){
+        
+        let realm = try! Realm()
+        
+        var dbNotificationList:Array<DBNotification> = []
+        for notification in notifications {
+            
+            let dbNotification = DBNotification()
+            dbNotification.id = notification.id!
+            dbNotification.title = notification.title!
+            dbNotification.message = notification.message!
+            
+            
+            if notification.studyId != nil {
+                 dbNotification.studyId = notification.studyId!
+            }
+            else{
+                 dbNotification.studyId = ""
+            }
+           
+            
+            if notification.activityId != nil {
+                dbNotification.activityId = notification.activityId!
+            }
+            else{
+                dbNotification.activityId = ""
+            }
+            
+            dbNotification.isRead = notification.read!
+            
+            dbNotification.notificationType = notification.type.rawValue
+            dbNotification.subType = notification.subType.rawValue
+            dbNotification.audience = notification.audience!.rawValue
+            dbNotification.date = notification.date!
+            
+            dbNotificationList.append(dbNotification)
+            
+        }
+        
+        
+        print("DBPath : \(realm.configuration.fileURL)")
+        try! realm.write({
+            realm.add(dbNotificationList, update: true)
+            
+        })
+ 
+ 
+    }
+    
+    
+    
+    
+    
+    
     private class func getDBStudy(study:Study) ->DBStudy{
         
         let dbStudy = DBStudy()
@@ -266,6 +321,47 @@ class DBHandler: NSObject {
         completionHandler(studies)
         
     }
+    
+    
+    class func loadNotificationListFromDatabase(completionHandler:@escaping (Array<AppNotification>) -> ()){
+        
+        
+        let realm = try! Realm()
+        let dbNotifications = realm.objects(DBNotification.self)
+        
+        var notificationList:Array<AppNotification> = []
+        for dbnotification in dbNotifications {
+            
+            let notification = AppNotification()
+            
+            notification.id = dbnotification.id
+            notification.title = dbnotification.title
+            notification.message = dbnotification.message
+            notification.studyId = dbnotification.studyId
+            notification.activityId = dbnotification.activityId
+            notification.type =    AppNotification.NotificationType(rawValue:dbnotification.notificationType!)!
+        
+            notification.subType = AppNotification.NotificationSubType(rawValue:dbnotification.subType!)!
+            
+            notification.audience = Audience(rawValue:dbnotification.audience!)!
+            notification.date =  dbnotification.date
+            
+            notification.read = dbnotification.isRead
+            
+            notificationList.append(notification)
+            
+            
+        }
+        completionHandler(notificationList)
+        
+    }
+    
+    
+    
+    
+    
+    
+    
     
     /* Save study overview
      @params: overview , String

@@ -53,7 +53,7 @@ let kNotificationAudience = "audience"
 let kNotificationTitle = "title"
 let kNotificationMessage = "message"
 let kNotificationStudyId = "studyId"
-
+let kNotificationActivityId = "activityId"
 
 
 //feedback
@@ -490,7 +490,8 @@ class WCPServices: NSObject {
         Gateway.instance.notification = listOfNotifications
         
         //save in database
-       // DBHandler().saveStudies(studies: listOfStudies)
+        DBHandler().saveNotifications(notifications:listOfNotifications )
+    
     }
 
     func handleContactUsAndFeedback(response:Dictionary<String, Any>){

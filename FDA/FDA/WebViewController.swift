@@ -45,6 +45,10 @@ class WebViewController : UIViewController{
         
         
         if self.isEmailAvailable == false{
+            
+        barItemShare?.isEnabled = false
+        self.navigationItem.rightBarButtonItem = nil
+            
             barItemShare = nil
         }
         

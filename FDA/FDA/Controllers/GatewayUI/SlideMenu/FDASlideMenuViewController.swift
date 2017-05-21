@@ -75,6 +75,19 @@ open class FDASlideMenuViewController: SlideMenuController {
         
         self.leftViewController?.view.isHidden = true
         _ = self.navigationController?.popToRootViewController(animated: true)
+        
+    
+        let navVC:UINavigationController = UIApplication.shared.keyWindow?.rootViewController as! UINavigationController
+        
+        if navVC.viewControllers.count > 0 {
+            let splashVC:SplashViewController = navVC.viewControllers.first as! SplashViewController
+            
+            splashVC.navigateToGatewayDashboard()
+        }
+        
+       
+        
+        
     }
     
     func navigateToHomeAfterUnauthorizedAccess(){

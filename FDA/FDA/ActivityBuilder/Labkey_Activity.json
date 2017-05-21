@@ -96,11 +96,11 @@
                             
                             "format": {
                             
-                            "maxValue": 1010,
+                            "maxValue": 100,
                             
-                            "minValue": 1000,
+                            "minValue": 0,
                             
-                            "default": 1000,
+                            "default": 60,
                             
                             "step": 10,
                             
@@ -338,7 +338,7 @@
                   
                   "groupName": "",
                   
-                  "repeatable": false,
+                  "repeatable": true,
                   
                   "repeatableText": "Add More+",
                   

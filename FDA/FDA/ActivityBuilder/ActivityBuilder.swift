@@ -194,7 +194,7 @@ class ActivityBuilder {
                     
                     for step in orkStepArray!
                     {
-                        
+                        print("stepid \(step.identifier)")
                         if step.isKind(of: ORKQuestionStep.self){
                             
                             let activityStep:ActivityQuestionStep? = activityStepArray?[(i!)] as?  ActivityQuestionStep
@@ -204,27 +204,27 @@ class ActivityBuilder {
                                 
                                 var defaultStepIdentifier:String = ""
                                 
-                                if i! + 1 < 35{
-                                     defaultStepIdentifier = (activityStepArray?[(i!+1)].key)!
+                                if i! + 1 < (activityStepArray?.count)!{
+                                    defaultStepIdentifier = (activityStepArray?[(i!+1)].key)!
                                 }
                                 
                                 
                                 var defaultStepExist:Bool? = false
                                 let resultSelector: ORKResultSelector?
                                 var predicateRule: ORKPredicateStepNavigationRule?
-                               
+                                
                                 resultSelector =  ORKResultSelector(stepIdentifier: step.identifier, resultIdentifier: step.identifier)
                                 
                                 let questionStep = step as! ORKQuestionStep
                                 
-                                    var choicePredicate:[NSPredicate] = [NSPredicate]()
+                                var choicePredicate:[NSPredicate] = [NSPredicate]()
+                                
+                                var destination:Array<String>? = Array<String>()
+                                
+                                for dict in (activityStep?.destinations)!{
+                                    var predicateQuestionChoiceA:NSPredicate = NSPredicate()
                                     
-                                    var destination:Array<String>? = Array<String>()
-                                    
-                                    for dict in (activityStep?.destinations)!{
-                                        var predicateQuestionChoiceA:NSPredicate = NSPredicate()
-                                        
-                                        if Utilities.isValidValue(someObject: dict[kCondtion] as AnyObject) {
+                                    if Utilities.isValidValue(someObject: dict[kCondtion] as AnyObject) {
                                         
                                         switch questionStep.answerFormat {
                                             
@@ -232,6 +232,8 @@ class ActivityBuilder {
                                             
                                             predicateQuestionChoiceA = ORKResultPredicate.predicateForChoiceQuestionResult(with:resultSelector! , expectedAnswerValue: dict[kCondtion] as! NSCoding & NSCopying & NSObjectProtocol)
                                             
+                                            choicePredicate.append(predicateQuestionChoiceA)
+                                            destination?.append( dict[kDestination]! as! String)
                                             
                                         case is ORKBooleanAnswerFormat :
                                             
@@ -241,95 +243,105 @@ class ActivityBuilder {
                                                 boolValue = true
                                             }
                                             else{
-                                               if (dict[kCondtion] as! String).caseInsensitiveCompare("false") ==  ComparisonResult.orderedSame{
-                                                boolValue = false
+                                                if (dict[kCondtion] as! String).caseInsensitiveCompare("false") ==  ComparisonResult.orderedSame{
+                                                    boolValue = false
                                                 }
-                                               else if (dict[kCondtion] as! String) == ""{
-                                                 boolValue = nil
-                                                
-                                                defaultStepIdentifier = dict[kDestination]! as! String
-                                                
+                                                else if (dict[kCondtion] as! String) == ""{
+                                                    boolValue = nil
+                                                    
+                                                    if Utilities.isValidValue(someObject: dict[kDestination] as AnyObject? ){
+                                                        defaultStepIdentifier = dict[kDestination]! as! String
+                                                    }
+                                                    
+                                                    
+                                                    
                                                 }
                                             }
-                                           
+                                            
                                             
                                             if  boolValue != nil {
                                                 predicateQuestionChoiceA = ORKResultPredicate.predicateForBooleanQuestionResult(with: resultSelector!, expectedAnswer: boolValue!)
                                             }
                                             
-                                            
+                                            choicePredicate.append(predicateQuestionChoiceA)
+                                            destination?.append( dict[kDestination]! as! String)
                                             
                                         default:break
                                         }
-                                            
-                                                choicePredicate.append(predicateQuestionChoiceA)
-                                                destination?.append( dict[kDestination]! as! String)
-                                        }
-                                        else{
-                                            
-                                            
-                                            if dict[kCondtion] != nil && dict[kCondtion] as! String == ""{
-                                                
-                                                defaultStepExist = true
-                                                
-                                                defaultStepIdentifier = dict[kDestination]! as! String
-                                            }
-                                            
-                                            
-                                        }
-                                       
                                         
                                         
-                                        
-                                    }
-                                    
-                                    if choicePredicate.count == 0{
-                                        // if condition is empty
-                                        
-                                        if (destination?.count)! > 0 {
-                                        // if destination is not empty but condition is empty
-                                            
-                                        for destinationId in destination!{
-                                            
-                                            if destinationId.characters.count != 0 {
-                                                let  directRule = ORKDirectStepNavigationRule(destinationStepIdentifier: destinationId)
-                                            
-                                               (task as! ORKNavigableOrderedTask).setNavigationRule(directRule, forTriggerStepIdentifier:step.identifier)
-                                            }
-                                        }
-                                        }
-                                        else{
-                                            // if both destination and condition are empty
-                                            
-                                            let  directRule = ORKDirectStepNavigationRule(destinationStepIdentifier: "CompletionStep")
-                                            
-                                            (task as! ORKNavigableOrderedTask).setNavigationRule(directRule, forTriggerStepIdentifier:step.identifier)
-                                            
-                                        }
                                     }
                                     else{
                                         
                                         
-                                        if defaultStepExist!{
-//                                            destination =  destination?.filter({ $0 != defaultStepIdentifier
-//                                                
-//                                            })
+                                        if dict[kCondtion] != nil && dict[kCondtion] as! String == ""{
+                                            
+                                            defaultStepExist = true
+                                            
+                                            
+                                            if Utilities.isValidValue(someObject: dict[kDestination] as AnyObject? ){
+                                                defaultStepIdentifier = dict[kDestination]! as! String
+                                            }
+                                            
                                         }
                                         
-                                         predicateRule = ORKPredicateStepNavigationRule(resultPredicates: choicePredicate, destinationStepIdentifiers: destination!, defaultStepIdentifier: defaultStepIdentifier, validateArrays: true)
                                         
-                                        
-                                         (task as! ORKNavigableOrderedTask).setNavigationRule(predicateRule!, forTriggerStepIdentifier:step.identifier)
                                     }
                                     
-                                   
-                                    // case is ORKBooleanAnswerFormat:
                                     
-                                    // case is ORKImageChoiceAnswerFormat:
-                                    // case is ORKTextChoiceAnswerFormat:
                                     
-                               // task =  ORKNavigableOrderedTask(identifier:(activity?.actvityId)!, steps: orkStepArray)
-                               
+                                    
+                                }
+                                
+                                if choicePredicate.count == 0{
+                                    // if condition is empty
+                                    
+                                    if (destination?.count)! > 0 {
+                                        // if destination is not empty but condition is empty
+                                        
+                                        for destinationId in destination!{
+                                            
+                                            if destinationId.characters.count != 0 {
+                                                let  directRule = ORKDirectStepNavigationRule(destinationStepIdentifier: destinationId)
+                                                
+                                                (task as! ORKNavigableOrderedTask).setNavigationRule(directRule, forTriggerStepIdentifier:step.identifier)
+                                            }
+                                        }
+                                    }
+                                    else{
+                                        // if both destination and condition are empty
+                                        
+                                        let  directRule = ORKDirectStepNavigationRule(destinationStepIdentifier: "CompletionStep")
+                                        
+                                        (task as! ORKNavigableOrderedTask).setNavigationRule(directRule, forTriggerStepIdentifier:step.identifier)
+                                        
+                                    }
+                                }
+                                else{
+                                    
+                                    
+                                    if defaultStepExist!{
+                                        //                                            destination =  destination?.filter({ $0 != defaultStepIdentifier
+                                        //
+                                        //                                            })
+                                    }
+                                    
+                                    
+                                    print("choices \(choicePredicate) destination \(destination)")
+                                    predicateRule = ORKPredicateStepNavigationRule(resultPredicates: choicePredicate, destinationStepIdentifiers: destination!, defaultStepIdentifier: defaultStepIdentifier, validateArrays: true)
+                                    
+                                    
+                                    (task as! ORKNavigableOrderedTask).setNavigationRule(predicateRule!, forTriggerStepIdentifier:step.identifier)
+                                }
+                                
+                                
+                                // case is ORKBooleanAnswerFormat:
+                                
+                                // case is ORKImageChoiceAnswerFormat:
+                                // case is ORKTextChoiceAnswerFormat:
+                                
+                                // task =  ORKNavigableOrderedTask(identifier:(activity?.actvityId)!, steps: orkStepArray)
+                                
                             }
                             else{
                                 //destination array is empty
@@ -341,7 +353,7 @@ class ActivityBuilder {
                         }
                         
                         i = i! + 1
-                    }
+                        }
                 }
                     if task != nil {
                         

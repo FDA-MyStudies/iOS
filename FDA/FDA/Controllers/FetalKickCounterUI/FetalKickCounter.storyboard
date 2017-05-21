@@ -204,7 +204,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="blT-Iy-WlF">
-                                <rect key="frame" x="43" y="152" width="289" height="117"/>
+                                <rect key="frame" x="43" y="123" width="289" height="175"/>
                                 <string key="text">This study allows only pre-screened participants to join the study. If you are one, please enter the enrollment token provided to you for this study.</string>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="18"/>
                                 <nil key="textColor"/>
@@ -234,7 +234,7 @@
                             <constraint firstItem="Qzc-1W-fgy" firstAttribute="centerY" secondItem="Vvm-Y2-4cb" secondAttribute="centerY" multiplier="1.41229" id="htG-Tp-Td6"/>
                             <constraint firstItem="gPT-6p-tqe" firstAttribute="centerX" secondItem="Vvm-Y2-4cb" secondAttribute="centerX" id="lNm-W9-sYa"/>
                             <constraint firstItem="ekz-Ns-BHi" firstAttribute="top" secondItem="1Zu-1M-7Gw" secondAttribute="bottom" constant="1" id="mrP-PP-DfF"/>
-                            <constraint firstItem="blT-Iy-WlF" firstAttribute="height" secondItem="Vvm-Y2-4cb" secondAttribute="height" multiplier="117/667" id="rEe-F3-iZ6"/>
+                            <constraint firstItem="blT-Iy-WlF" firstAttribute="height" secondItem="Vvm-Y2-4cb" secondAttribute="height" multiplier="175/667" id="rEe-F3-iZ6"/>
                             <constraint firstItem="1Zu-1M-7Gw" firstAttribute="centerX" secondItem="Vvm-Y2-4cb" secondAttribute="centerX" id="vpG-jh-MyC"/>
                         </constraints>
                     </view>
@@ -401,7 +401,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="task_img1" translatesAutoresizingMaskIntoConstraints="NO" id="gmy-zG-f35">
-                                <rect key="frame" x="117" y="44.5" width="141" height="122"/>
+                                <rect key="frame" x="117.5" y="44.5" width="140" height="122"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="gmy-zG-f35" secondAttribute="height" multiplier="31:27" id="G9g-79-Kku"/>
                                 </constraints>

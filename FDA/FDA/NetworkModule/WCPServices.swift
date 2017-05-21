@@ -488,6 +488,9 @@ class WCPServices: NSObject {
         }
         
         Gateway.instance.notification = listOfNotifications
+        
+        //save in database
+       // DBHandler().saveStudies(studies: listOfStudies)
     }
 
     func handleContactUsAndFeedback(response:Dictionary<String, Any>){

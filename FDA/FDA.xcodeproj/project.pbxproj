@@ -111,6 +111,7 @@
 		6EED7B391E6574FE002C1FA3 /* FetalKickCounterStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EED7B381E6574FE002C1FA3 /* FetalKickCounterStep.swift */; };
 		6EED7B3B1E65751D002C1FA3 /* FetalKickCounterStepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EED7B3A1E65751D002C1FA3 /* FetalKickCounterStepViewController.swift */; };
 		6EED7B3D1E65752C002C1FA3 /* FetalKickCounterTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EED7B3C1E65752C002C1FA3 /* FetalKickCounterTask.swift */; };
+		6EF0466B1ED1C943008098BB /* DBNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EF0466A1ED1C943008098BB /* DBNotification.swift */; };
 		6EF05A941E4DAB0400CD7661 /* ResearchKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EF05A911E4DAAFB00CD7661 /* ResearchKit.framework */; };
 		6EF05A951E4DAB0400CD7661 /* ResearchKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6EF05A911E4DAAFB00CD7661 /* ResearchKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		6EF05A991E4DC36400CD7661 /* StepProvider.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6EF05A981E4DC36400CD7661 /* StepProvider.plist */; };
@@ -358,6 +359,7 @@
 		6EED7B381E6574FE002C1FA3 /* FetalKickCounterStep.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FetalKickCounterStep.swift; sourceTree = "<group>"; };
 		6EED7B3A1E65751D002C1FA3 /* FetalKickCounterStepViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FetalKickCounterStepViewController.swift; sourceTree = "<group>"; };
 		6EED7B3C1E65752C002C1FA3 /* FetalKickCounterTask.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FetalKickCounterTask.swift; sourceTree = "<group>"; };
+		6EF0466A1ED1C943008098BB /* DBNotification.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DBNotification.swift; sourceTree = "<group>"; };
 		6EF05A8A1E4DAAFB00CD7661 /* ResearchKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = ResearchKit.xcodeproj; sourceTree = "<group>"; };
 		6EF05A981E4DC36400CD7661 /* StepProvider.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = StepProvider.plist; sourceTree = "<group>"; };
 		6EF2FCEE1E72CDE900B5F212 /* LeftMenuResourceTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LeftMenuResourceTableViewCell.swift; sourceTree = "<group>"; };
@@ -1045,6 +1047,7 @@
 				9491F7F91E825FA80018C15E /* DBUser.swift */,
 				9432C49B1E83CEEF00EB419C /* DBStudy.swift */,
 				94D20E9E1E9DFFE7005C3531 /* DBActivity.swift */,
+				6EF0466A1ED1C943008098BB /* DBNotification.swift */,
 			);
 			path = Database;
 			sourceTree = "<group>";
@@ -1726,6 +1729,7 @@
 				94B3DD481E6ED8E500327AE5 /* GatewayResourcesListViewController.swift in Sources */,
 				6ED1B2331E54256700BF463F /* ActivityQuestionStep.swift in Sources */,
 				482CC61E1EC5F52E00BFE8C6 /* KDCircularProgress.swift in Sources */,
+				6EF0466B1ED1C943008098BB /* DBNotification.swift in Sources */,
 				6EE93DCB1E93C8850027A5DC /* ActivitiesViewController.swift in Sources */,
 				6ED1B2211E54253800BF463F /* Activity.swift in Sources */,
 				94C6BD441EB8513300D4AA72 /* AppUpdateBlocker.swift in Sources */,

@@ -140,6 +140,8 @@ class ResourcesViewController : UIViewController{
     
     func handleResourcesReponse(){
         
+        tableViewRowDetails = []
+        
         self.addDefaultList()
         
         let todayDate = Date()

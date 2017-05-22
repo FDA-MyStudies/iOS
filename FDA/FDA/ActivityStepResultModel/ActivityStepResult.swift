@@ -422,6 +422,26 @@ class ActivityStepResult{
                             
                             self.value = round(stepTypeResult.scaleAnswer as! Double)
                         }
+                        else if (maxFractionDigit as! Int) == 1 {
+                            
+                            let v = stepTypeResult.scaleAnswer as! Double
+                            self.value = Double(round(10 * v)/10)//round(stepTypeResult.scaleAnswer as! Double)
+                        }
+                        else if (maxFractionDigit as! Int) == 2 {
+                            
+                            let v = stepTypeResult.scaleAnswer as! Double
+                            self.value = Double(round(100 * v)/100)//round(stepTypeResult.scaleAnswer as! Double)
+                        }
+                        else if (maxFractionDigit as! Int) == 3 {
+                            
+                            let v = stepTypeResult.scaleAnswer as! Double
+                            self.value = Double(round(1000 * v)/1000)//round(stepTypeResult.scaleAnswer as! Double)
+                        }
+                        else if (maxFractionDigit as! Int) == 4 {
+                            
+                            let v = stepTypeResult.scaleAnswer as! Double
+                            self.value = Double(round(10000 * v)/10000)//round(stepTypeResult.scaleAnswer as! Double)
+                        }
                         else{
                              self.value = stepTypeResult.scaleAnswer as! Double
                         }

@@ -444,23 +444,33 @@ class LineChartCell: GraphChartTableViewCell {
     
     func handleMonthsOfYearForDate(date:Date){
         
-        let dataList:Array<DBStatisticsData> = currentChart.statList.filter({$0.startDate! >= date.startOfMonth() && $0.startDate! <= date.endOfMonth()})
+        let dataList:Array<DBStatisticsData> = currentChart.statList.filter({$0.startDate! >= date.startOfYear() && $0.startDate! <= date.endOfYear()})
         
         let array = dataList.map{$0.data}
         var points:Array<ORKValueRange> = []
        
         plotPoints = []
         
-        for i in 1...xAxisTitles.count{
-            
-            if array.count >= i {
-                let value = array[i-1]
-                points.append(ORKValueRange(value:Double(value)))
-            }
-            else {
-                points.append(ORKValueRange())
+        for _ in 1...xAxisTitles.count{
+            points.append(ORKValueRange())
+        }
+        
+        if dataList.count > 0 {
+            for i in 0...dataList.count-1 {
+                
+                let data = dataList[i]
+                let responseDate = data.startDate
+                let month = LineChartCell.shortMonthFormatter.string(from: responseDate!)
+                print("month \(month)")
+                let value = data.data
+                //points.insert(ORKValueRange(value:Double(value)), at: Int(month)!)
+                points[Int(month)! - 1] = ORKValueRange(value:Double(value))
+              
             }
         }
+        
+        
+       
         plotPoints.append(points)
         
         self.graphView.reloadData()
@@ -550,6 +560,13 @@ class LineChartCell: GraphChartTableViewCell {
         formatter.timeZone = TimeZone.init(abbreviation:"GMT")
         return formatter
     }()
+    
+    public static let shortMonthFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "M"
+        formatter.timeZone = TimeZone.init(abbreviation:"GMT")
+        return formatter
+    }()
 
 }
 extension LineChartCell:ORKValueRangeGraphChartViewDataSource{
@@ -605,6 +622,14 @@ extension Date {
     
     func endOfMonth() -> Date {
         return Calendar.current.date(byAdding: DateComponents(month: 1, day: -1), to: self.startOfMonth())!
+    }
+    
+    func startOfYear() -> Date {
+        return Calendar.current.date(from: Calendar.current.dateComponents([.year], from: Calendar.current.startOfDay(for: self)))!
+    }
+    
+    func endOfYear() -> Date {
+        return Calendar.current.date(byAdding: DateComponents(year: 1, second: -1), to: self.startOfYear())!
     }
     var startOfDay: Date {
         return Calendar.current.startOfDay(for: self)

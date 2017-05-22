@@ -476,6 +476,8 @@ class WCPServices: NSObject {
         
         DBHandler.saveActivityMetaData(activity: Study.currentActivity!, data: response)
         
+        DBHandler.updateActivityMetaData(activity: Study.currentActivity!)
+        
     }
     
     func handleGetNotification(response:Dictionary<String, Any>){

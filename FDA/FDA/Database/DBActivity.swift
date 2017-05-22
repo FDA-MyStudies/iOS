@@ -16,6 +16,7 @@ class DBActivity: Object {
     
     dynamic var studyId:String?
     dynamic var name:String?
+    dynamic var shortName:String?
     dynamic var version:String?
     dynamic var lastModified:Date?
     //dynamic var userStatus:UserActivityStatus.ActivityStatus

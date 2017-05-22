@@ -659,6 +659,19 @@ class DBHandler: NSObject {
         
     }
     
+    class func updateActivityMetaData(activity:Activity){
+        
+        let realm = try! Realm()
+        let dbActivities = realm.objects(DBActivity.self).filter({$0.actvityId == activity.actvityId && $0.studyId == activity.studyId})
+        let dbActivity = dbActivities.last
+        
+        try! realm.write({
+            dbActivity?.shortName = activity.shortName
+            
+        })
+        
+    }
+    
     
     class func loadActivityListFromDatabase(studyId:String,completionHandler:@escaping (Array<Activity>) -> ()){
         
@@ -1241,7 +1254,7 @@ class DBHandler: NSObject {
             
             var dbResource:DBResources?
             if dbResourcesArray.count != 0 {
-                dbResource = dbResourcesArray.filter({$0.resourceId == resource.resourcesId}).last!
+                dbResource = dbResourcesArray.filter({$0.resourceId == resource.resourcesId}).last
                 
                 if dbResource == nil {
                     

@@ -536,7 +536,8 @@ class ActivityStepResult{
             let stepTypeResult = questionstepResult as! ORKTimeIntervalQuestionResult
             
             if Utilities.isValidValue(someObject: stepTypeResult.intervalAnswer as AnyObject?){
-                self.value = Double(stepTypeResult.intervalAnswer!)
+                //let hours =  (stepTypeResult.intervalAnswer! as! Decimal)/3600
+                self.value = Double(stepTypeResult.intervalAnswer!)/3600
             }
             else{
                 self.value = 0.0

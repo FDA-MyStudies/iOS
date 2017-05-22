@@ -190,20 +190,20 @@ class ActivitiesViewController : UIViewController{
     func createActivity(){
         
     
-        let filePath  = Bundle.main.path(forResource: "Labkey_Activity", ofType: "json")
-        
-        //let filePath  = Bundle.main.path(forResource: "FetalKickTest", ofType: "json")
-        
-        let data = NSData(contentsOfFile: filePath!)
-        do {
-            let dataDict = try JSONSerialization.jsonObject(with: data! as Data, options: []) as? Dictionary<String,Any>
-            
-            Study.currentActivity?.setActivityMetaData(activityDict:dataDict?["Result"] as! Dictionary<String, Any>)
-            
-        }
-        catch let error as NSError{
-            print("\(error)")
-        }
+//        let filePath  = Bundle.main.path(forResource: "Labkey_Activity", ofType: "json")
+//        
+//        //let filePath  = Bundle.main.path(forResource: "FetalKickTest", ofType: "json")
+//        
+//        let data = NSData(contentsOfFile: filePath!)
+//        do {
+//            let dataDict = try JSONSerialization.jsonObject(with: data! as Data, options: []) as? Dictionary<String,Any>
+//            
+//            Study.currentActivity?.setActivityMetaData(activityDict:dataDict?["Result"] as! Dictionary<String, Any>)
+//            
+//        }
+//        catch let error as NSError{
+//            print("\(error)")
+//        }
  
  
         

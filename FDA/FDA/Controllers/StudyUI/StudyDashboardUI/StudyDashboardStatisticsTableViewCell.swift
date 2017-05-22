@@ -201,6 +201,8 @@ class StudyDashboardStatisticsTableViewCell: UITableViewCell {
             }
         
         }
+        
+        self.statisticsCollectionView?.reloadData()
     }
     @IBAction func buttonBackwardClicked(_ sender:UIButton){
         

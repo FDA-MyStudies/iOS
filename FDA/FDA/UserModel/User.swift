@@ -19,6 +19,35 @@ enum LogoutReason:String{
     case error
     case security_jailbroken
 }
+enum DayValue : String{
+    case Sun
+    case Mon
+    case Tue
+    case Wed
+    case Thu
+    case Fri
+    case Sat
+    
+    var dayIndex:Int{
+        switch self {
+        case .Sun:
+            return 1
+        case .Mon:
+            return 2
+        case .Tue:
+            return 3
+        case .Wed:
+            return 4
+        case .Thu:
+            return 5
+        case .Fri:
+            return 6
+        case .Sat:
+            return 7
+        
+        }
+    }
+}
 
 
 let kUserValueForOS = "ios"

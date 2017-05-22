@@ -8,6 +8,9 @@
 
 import UIKit
 
+
+
+
 class GraphChartTableViewCell: UITableViewCell {
     @IBOutlet weak var graphView: ORKGraphChartView!
 }
@@ -18,6 +21,9 @@ class LineChartCell: GraphChartTableViewCell {
     @IBOutlet weak var buttonForward:UIButton!
     @IBOutlet weak var buttonBackward:UIButton!
     var currentChart:DashboardCharts!
+    
+    
+    
     
     var hourOfDayDate = Date()
     var startDateOfWeek:Date?
@@ -407,16 +413,31 @@ class LineChartCell: GraphChartTableViewCell {
         
         for i in 1...numDays{
             
-            if array.count >= i {
-                let value = array[i-1]
-                points.append(ORKValueRange(value:Double(value)))
+            if i == 1 || i == 5 || i == 10 || i == 15 || i == 20 || i == 25 || i == numDays{
+              xAxisTitles.append(String(i))
             }
             else {
-                points.append(ORKValueRange())
+              xAxisTitles.append("")
             }
             
-            xAxisTitles.append(String(i))
+            points.append(ORKValueRange())
         }
+        
+        if dataList.count > 0 {
+            for i in 0...dataList.count-1 {
+                
+                let data = dataList[i]
+                let responseDate = data.startDate
+                let day = LineChartCell.shortDateFormatter.string(from: responseDate!)
+                print("day \(day)")
+                let value = data.data
+                
+                points[Int(day)! - 1] = ORKValueRange(value:Double(value))
+                
+            }
+        }
+        
+
         plotPoints.append(points)
         
         self.graphView.reloadData()
@@ -432,17 +453,42 @@ class LineChartCell: GraphChartTableViewCell {
        
         plotPoints = []
         
-        
         for i in 1...xAxisTitles.count{
             
-            if array.count >= i {
-                let value = array[i-1]
-                points.append(ORKValueRange(value:Double(value)))
-            }
-            else {
-                points.append(ORKValueRange())
+            
+            points.append(ORKValueRange())
+            
+        }
+        
+        if dataList.count > 0 {
+            for i in 0...dataList.count-1 {
+                
+                let data = dataList[i]
+                let responseDate = data.startDate
+                let day = LineChartCell.shortDayFormatter.string(from: responseDate!)
+                //print("day \(day)")
+                let value = data.data
+                
+                let currentDay = DayValue(rawValue:day)!
+                
+                //print("index \(currentDay.dayIndex)")
+                
+                points[currentDay.dayIndex - 1] = ORKValueRange(value:Double(value))
+                
             }
         }
+        
+        
+//        for i in 1...xAxisTitles.count{
+//            
+//            if array.count >= i {
+//                let value = array[i-1]
+//                points.append(ORKValueRange(value:Double(value)))
+//            }
+//            else {
+//                points.append(ORKValueRange())
+//            }
+//        }
         plotPoints.append(points)
         
         self.graphView.reloadData()
@@ -467,7 +513,7 @@ class LineChartCell: GraphChartTableViewCell {
                 let data = dataList[i]
                 let responseDate = data.startDate
                 let month = LineChartCell.shortMonthFormatter.string(from: responseDate!)
-                print("month \(month)")
+                //print("month \(month)")
                 let value = data.data
                 //points.insert(ORKValueRange(value:Double(value)), at: Int(month)!)
                 points[Int(month)! - 1] = ORKValueRange(value:Double(value))
@@ -494,18 +540,31 @@ class LineChartCell: GraphChartTableViewCell {
         let calendar = Calendar.current
         let range = calendar.range(of: .weekOfMonth, in: .month, for: date)!
         let numWeeks = range.count
+        
         for i in 1...numWeeks{
             
-            if array.count >= i {
-                let value = array[i-1]
-                points.append(ORKValueRange(value:Double(value)))
-            }
-            else {
-                points.append(ORKValueRange())
-            }
             
+            points.append(ORKValueRange())
             xAxisTitles.append("W" + String(i))
         }
+        
+        
+        if dataList.count > 0 {
+            for i in 0...dataList.count-1 {
+                
+                let data = dataList[i]
+                let responseDate = data.startDate
+                let week = self.getWeekNumber(date: responseDate!)
+                //print("month \(month)")
+                let value = data.data
+                //points.insert(ORKValueRange(value:Double(value)), at: Int(month)!)
+                points[week - 1] = ORKValueRange(value:Double(value))
+                
+            }
+        }
+        
+        
+
         plotPoints.append(points)
         
         self.graphView.reloadData()
@@ -602,6 +661,25 @@ class LineChartCell: GraphChartTableViewCell {
         formatter.timeZone = TimeZone.init(abbreviation:"GMT")
         return formatter
     }()
+    public static let shortDateFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "dd"
+        formatter.timeZone = TimeZone.init(abbreviation:"GMT")
+        return formatter
+    }()
+
+    public static let shortDayFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "E"
+        formatter.timeZone = TimeZone.init(abbreviation:"GMT")
+        return formatter
+    }()
+    
+    func getWeekNumber(date:Date)->Int{
+        let calender = Calendar.current
+        let week = calender.component(.weekOfMonth, from:date)
+        return week
+    }
 
 }
 extension LineChartCell:ORKValueRangeGraphChartViewDataSource{

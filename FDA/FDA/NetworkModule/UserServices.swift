@@ -760,6 +760,10 @@ class UserServices: NSObject {
         ud.removeObject(forKey: kUserId)
         ud.synchronize()
         
+        let appDomain = Bundle.main.bundleIdentifier!
+        UserDefaults.standard.removePersistentDomain(forName: appDomain)
+        UserDefaults.standard.synchronize()
+        
         //Delete from database
         DBHandler.deleteCurrentUser()
         
@@ -777,6 +781,10 @@ class UserServices: NSObject {
         ud.removeObject(forKey: kUserAuthToken)
         ud.removeObject(forKey: kUserId)
         ud.synchronize()
+        
+        let appDomain = Bundle.main.bundleIdentifier!
+        UserDefaults.standard.removePersistentDomain(forName: appDomain)
+        UserDefaults.standard.synchronize()
         
         //reset user object
         User.resetCurrentUser()

@@ -118,6 +118,15 @@
             
             
             
+            if UIApplication.shared.applicationIconBadgeNumber > 0 {
+                let ud = UserDefaults.standard
+                ud.set(true, forKey: kShowNotification)
+                ud.synchronize()
+                
+                
+                UIApplication.shared.applicationIconBadgeNumber = 0
+            }
+            
             
             SyncUpdate.currentSyncUpdate = SyncUpdate()
             
@@ -277,7 +286,7 @@
             
         }
         func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any]) {
-            print(userInfo)
+            print("REMOTE NOTIFICATION:" + "\(userInfo)")
             
             //For iOS 8 & 9
             if (UIApplication.shared.applicationState == UIApplicationState.background)||(UIApplication.shared.applicationState == UIApplicationState.inactive){
@@ -1063,7 +1072,7 @@
                                     willPresent notification: UNNotification,
                                     withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
             let userInfo = notification.request.content.userInfo
-            print(userInfo)
+            print("REMOTE NOTIFICATION:" + "\(userInfo)")
             completionHandler([UNNotificationPresentationOptions.alert, .sound, .badge])
             
         }
@@ -1072,7 +1081,7 @@
                                     didReceive response: UNNotificationResponse,
                                     withCompletionHandler completionHandler: @escaping () -> Void) {
             let userInfo = response.notification.request.content.userInfo
-            print(userInfo)
+            print("REMOTE NOTIFICATION:" + "\(userInfo)")
             
             if (UIApplication.shared.applicationState == UIApplicationState.active) {//|| (UIApplication.shared.applicationState == UIApplicationState.background){
                 UIApplication.shared.applicationIconBadgeNumber = 0

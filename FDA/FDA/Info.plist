@@ -47,6 +47,10 @@
 	<string>$(PRODUCT_NAME) would like to access your Location when using the app</string>
 	<key>NSMotionUsageDescription</key>
 	<string>$(PRODUCT_NAME) would like to use Motion data</string>
+	<key>UIAppFonts</key>
+	<array>
+		<string>Verdana Italic.ttf</string>
+	</array>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>fetch</string>

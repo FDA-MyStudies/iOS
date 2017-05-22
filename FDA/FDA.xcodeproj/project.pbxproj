@@ -93,6 +93,7 @@
 		6ED1B2331E54256700BF463F /* ActivityQuestionStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ED1B22E1E54256700BF463F /* ActivityQuestionStep.swift */; };
 		6ED1B2341E54256700BF463F /* ActivityStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ED1B22F1E54256700BF463F /* ActivityStep.swift */; };
 		6ED1D06F1EA884BD00E5A794 /* ConsentPdfViewerStepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ED1D06E1EA884BD00E5A794 /* ConsentPdfViewerStepViewController.swift */; };
+		6ED593731F011D5B00AC3636 /* Verdana Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6ED593721F011D5B00AC3636 /* Verdana Italic.ttf */; };
 		6ED86F631EA6498D00365AF0 /* RepeatableFormStep.m in Sources */ = {isa = PBXBuildFile; fileRef = 6ED86F601EA6498D00365AF0 /* RepeatableFormStep.m */; };
 		6ED86F641EA6498D00365AF0 /* RepeatableFormStepViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6ED86F621EA6498D00365AF0 /* RepeatableFormStepViewController.m */; };
 		6ED8A2E61E447AA2004DEC01 /* Formatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ED8A2E31E447AA2004DEC01 /* Formatter.swift */; };
@@ -339,6 +340,7 @@
 		6ED1B22E1E54256700BF463F /* ActivityQuestionStep.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityQuestionStep.swift; sourceTree = "<group>"; };
 		6ED1B22F1E54256700BF463F /* ActivityStep.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityStep.swift; sourceTree = "<group>"; };
 		6ED1D06E1EA884BD00E5A794 /* ConsentPdfViewerStepViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConsentPdfViewerStepViewController.swift; sourceTree = "<group>"; };
+		6ED593721F011D5B00AC3636 /* Verdana Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Verdana Italic.ttf"; sourceTree = "<group>"; };
 		6ED86F5F1EA6498D00365AF0 /* RepeatableFormStep.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RepeatableFormStep.h; sourceTree = "<group>"; };
 		6ED86F601EA6498D00365AF0 /* RepeatableFormStep.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RepeatableFormStep.m; sourceTree = "<group>"; };
 		6ED86F611EA6498D00365AF0 /* RepeatableFormStepViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RepeatableFormStepViewController.h; sourceTree = "<group>"; };
@@ -582,6 +584,7 @@
 		6E7D2D581E433E8700763D4C /* FDA */ = {
 			isa = PBXGroup;
 			children = (
+				6ED593711F011D5B00AC3636 /* Fonts */,
 				94878B861EC982C30064E1D4 /* FDA.entitlements */,
 				6E9E81D21ECEDA290007B492 /* SyncUpdate */,
 				482CC61C1EC5F52200BFE8C6 /* External Libraries */,
@@ -862,6 +865,14 @@
 				6ED1B22F1E54256700BF463F /* ActivityStep.swift */,
 			);
 			path = ActivityStepModel;
+			sourceTree = "<group>";
+		};
+		6ED593711F011D5B00AC3636 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				6ED593721F011D5B00AC3636 /* Verdana Italic.ttf */,
+			);
+			path = Fonts;
 			sourceTree = "<group>";
 		};
 		6ED86F5E1EA6498D00365AF0 /* RepeatableFormStep */ = {
@@ -1431,6 +1442,7 @@
 				6EABD0331E56FE2000623D94 /* TaskSchema.json in Resources */,
 				48A24C3E1E839D03009E849E /* 55V2.png in Resources */,
 				6E7D2D8E1E43445600763D4C /* UserPreferences.plist in Resources */,
+				6ED593731F011D5B00AC3636 /* Verdana Italic.ttf in Resources */,
 				94B3DD581E6ED8E500327AE5 /* SignUpPlist.plist in Resources */,
 				6ED9D5DB1E5B2D5200A0719D /* ActiveTask.json in Resources */,
 				94C6BD461EB8515000D4AA72 /* AppUpdateBlocker.xib in Resources */,

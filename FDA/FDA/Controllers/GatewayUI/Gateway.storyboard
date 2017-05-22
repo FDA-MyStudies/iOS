@@ -62,9 +62,9 @@
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Yet To Join" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Otz-hB-kow">
-                                                    <rect key="frame" x="129" y="24" width="67" height="13"/>
+                                                    <rect key="frame" x="129" y="24" width="120" height="13"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="67" id="VWX-jE-lod"/>
+                                                        <constraint firstAttribute="width" constant="120" id="VWX-jE-lod"/>
                                                         <constraint firstAttribute="height" constant="13" id="w43-Ch-KlS"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="11"/>

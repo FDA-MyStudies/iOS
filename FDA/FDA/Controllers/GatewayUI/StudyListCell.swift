@@ -160,7 +160,19 @@ class StudyListCell: UITableViewCell {
             study.userParticipateState = userStudyStatus
             
             //user study status
-            labelStudyUserStatus?.text = userStudyStatus.status.description
+            
+            switch study.status {
+            case .Active:
+                labelStudyUserStatus?.text = userStudyStatus.status.description
+            case .Closed:
+                labelStudyUserStatus?.text = userStudyStatus.status.closedStudyDescription
+            case .Upcoming:
+                labelStudyUserStatus?.text = userStudyStatus.status.upcomingStudyDescription
+            default:
+                labelStudyUserStatus?.text = userStudyStatus.status.description
+            }
+            
+            
             
             //update completion %
             self.labelCompletionValue?.text = String(userStudyStatus.completion) + "%"

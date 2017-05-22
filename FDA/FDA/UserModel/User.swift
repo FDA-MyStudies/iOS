@@ -502,6 +502,26 @@ class UserStudyStatus{
             }
         }
         
+        var closedStudyDescription:String {
+            switch self {
+            case .yetToJoin:
+                return "No participation"
+            case .inProgress:
+                return "Partial Participation"
+            case.completed:
+                return "Completed"
+            case .notEligible:
+                return "Not Eligible"
+            case .withdrawn:
+                return "Withdrawn"
+                
+            }
+        }
+        
+        var upcomingStudyDescription:String{
+            return "Yet to Join"
+        }
+        
         var paramValue:String {
             switch self {
             case .yetToJoin:
@@ -582,6 +602,8 @@ class UserStudyStatus{
         
         
     }
+    
+    
     
     func getBookmarkUserStudyStatus() -> Dictionary<String,Any>{
         

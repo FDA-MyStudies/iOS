@@ -120,11 +120,14 @@ class Schedule{
     
     func setOneTimeRun(){
         
+        let offset = UserDefaults.standard.value(forKey: "offset") as? Int
+        let updatedStartTime = startTime.addingTimeInterval(TimeInterval(offset!))
+        let updatedEndTime = endTime?.addingTimeInterval(TimeInterval(offset!))
         
         let activityRun = ActivityRun()
         activityRun.runId = 1
-        activityRun.startDate = startTime
-        activityRun.endDate = endTime
+        activityRun.startDate = updatedStartTime
+        activityRun.endDate = updatedEndTime
         
         activityRuns.append(activityRun)
     }
@@ -162,17 +165,23 @@ class Schedule{
     
     func setWeeklyRuns() {
         
-        let dayOfWeek = self.getCurrentWeekDay(date: startTime)
+        
+        let offset = UserDefaults.standard.value(forKey: "offset") as? Int
+        let updatedStartTime = startTime.addingTimeInterval(TimeInterval(offset!))
+        let updatedEndTime = endTime?.addingTimeInterval(TimeInterval(offset!))
+        
+        
+        let dayOfWeek = self.getCurrentWeekDay(date: updatedStartTime)
         let calendar = Calendar.currentUTC()
         let targetDay = 1 //server configurable
         
         //first day
-        var runStartDate = calendar.date(byAdding:.weekday, value:(targetDay - dayOfWeek), to: startTime)
+        var runStartDate = calendar.date(byAdding:.weekday, value:(targetDay - dayOfWeek), to: updatedStartTime)
         var runId = 1
-        while runStartDate?.compare(endTime!) == .orderedAscending {
+        while runStartDate?.compare(updatedEndTime!) == .orderedAscending {
             var runEndDate =  calendar.date(byAdding:.second, value:((7*86400) - 1), to: runStartDate!)
-            if runEndDate?.compare(endTime!) == .orderedDescending {
-                runEndDate = endTime
+            if runEndDate?.compare(updatedEndTime!) == .orderedDescending {
+                runEndDate = updatedEndTime
             }
             
             //appent in activity
@@ -234,8 +243,8 @@ class Schedule{
         var numberOfDays = self.getNumberOfDaysBetween(startDate: startTime, endDate: endTime!)
         let calendar = Calendar.currentUTC()
         var runId = 1
-        let startDateString =  Schedule.formatter.string(from: startTime)
-        var startDateShortStyle = Schedule.formatter2.date(from: startDateString)
+        let startDateString =  Schedule.formatter?.string(from: startTime)
+        var startDateShortStyle = Schedule.formatter2?.date(from: startDateString!)
         
         if numberOfDays == 0 {
             numberOfDays = 1;
@@ -379,12 +388,16 @@ class Schedule{
                 let runEndDate = Utilities.getDateFromString(dateString: scheduledEndTime! as! String)
                 
                 //print("start date \(runStartDate!) , end date \(runEndDate!)")
+            
+            let offset = UserDefaults.standard.value(forKey: "offset") as? Int
+            let updatedStartTime = runStartDate?.addingTimeInterval(TimeInterval(offset!))
+            let updatedEndTime = runEndDate?.addingTimeInterval(TimeInterval(offset!))
                 
                 //appent in activityRun array
                 let activityRun = ActivityRun()
                 activityRun.runId = runId
-                activityRun.startDate = runStartDate
-                activityRun.endDate = runEndDate
+                activityRun.startDate = updatedStartTime
+                activityRun.endDate = updatedEndTime
                 activityRuns.append(activityRun)
                 
                 runId += 1
@@ -402,7 +415,7 @@ class Schedule{
     
      //MARK:Utility Methods
     
-    private static let formatter: DateFormatter = {
+    public static var formatter: DateFormatter? = {
         let formatter = DateFormatter()
         formatter.dateFormat = "YYYY-mm-dd"
         formatter.dateStyle = .short
@@ -410,7 +423,7 @@ class Schedule{
         return formatter
     }()
     
-    private static let formatter2: DateFormatter = {
+    public static var formatter2: DateFormatter? = {
         let formatter = DateFormatter()
         formatter.dateFormat = "YYYY-mm-dd"
         formatter.dateStyle = .short

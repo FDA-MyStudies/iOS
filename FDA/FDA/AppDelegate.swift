@@ -88,7 +88,8 @@
                 else {
                     
                     
-                    
+                    Schedule.formatter = nil
+                    Schedule.formatter2 = nil
                     print("timezoneChange")
                     let date2 = date.addingTimeInterval(TimeInterval(difference))
                     print("currentUTC \(date.description)")
@@ -126,7 +127,8 @@
             
             
             
-            
+            let date = Date()
+            print("date \(LineChartCell.shortDayFormatter.string(from: date))")
             
             return true
            
@@ -378,7 +380,7 @@
                 
                 
                 
-                            UIUtilities.showAlertMessageWithTwoActionsAndHandler(NSLocalizedString("Consent Updated", comment: ""), errorMessage: NSLocalizedString("The Consent Document for this study has been updated. Please review the revised Consent terms and provide your Informed Consent, to continue participating in the study.", comment: ""), errorAlertActionTitle: NSLocalizedString("Review", comment: ""),
+                            UIUtilities.showAlertMessageWithTwoActionsAndHandler(NSLocalizedString("Covarnt Updated", comment: ""), errorMessage: NSLocalizedString("The Consent Document for this study has been updated. Please review the revised Consent terms and provide your Informed Consent, to continue participating in the study.", comment: ""), errorAlertActionTitle: NSLocalizedString("Review", comment: ""),
                                                                                  errorAlertActionTitle2:nil, viewControllerUsed: topController,
                                                                                  action1: {
                                                                                     

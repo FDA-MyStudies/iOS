@@ -264,6 +264,31 @@ class StudyHomeViewController : UIViewController{
     }
     
     
+    /**
+     
+     Method to display taskViewController for passcode setup if
+     passcode setup is enabled,called only once after signin.
+     
+     */
+    func setPassCode() {
+        //Remove Passcode if already exist
+        
+        ORKPasscodeViewController.removePasscodeFromKeychain()
+        
+        let passcodeStep = ORKPasscodeStep(identifier: "PasscodeStep")
+        passcodeStep.passcodeType = .type4Digit
+        let task = ORKOrderedTask(identifier: "PassCodeTask", steps: [passcodeStep])
+        let taskViewController = ORKTaskViewController.init(task: task, taskRun: nil)
+        taskViewController.delegate = self
+        
+        taskViewController.isNavigationBarHidden = true
+        
+        
+        self.navigationController?.present(taskViewController, animated: false, completion: nil)
+        
+    }
+    
+    
 //MARK:- Button Actions
     
     /**
@@ -409,11 +434,16 @@ class StudyHomeViewController : UIViewController{
         //self.buttonActionJoinStudy(UIButton())
         
         self.hideSubViews()
-        //call api to get all study stats
-        UserServices().getStudyStates(self)
+        
+       
+        
+        if (UserDefaults.standard.value(forKey: kPasscodeIsPending) as! Bool?)!{
+            UserServices().getUserProfile(self as NMWebServiceDelegate)
+        }
         
         
-       // WCPServices().getEligibilityConsentMetadata(studyId:(Study.currentStudy?.studyId)!, delegate: self as NMWebServiceDelegate)
+        
+        
     }
     
   //MARK:- Segue Methods
@@ -624,6 +654,16 @@ extension StudyHomeViewController:NMWebServiceDelegate {
             self.handleResponseForStudyState()
             
         }
+        
+        if (requestName as String == RegistrationMethods.userProfile.description) {
+            
+            if User.currentUser.settings?.passcode == true {
+                self.setPassCode()
+            }
+            else {
+                UserServices().getStudyStates(self)
+            }
+        }
     }
     
     func failedRequest(_ manager: NetworkManager, requestName: NSString, error: NSError) {
@@ -656,6 +696,22 @@ extension StudyHomeViewController:ORKTaskViewControllerDelegate{
     }
     
     public func taskViewController(_ taskViewController: ORKTaskViewController, didFinishWith reason: ORKTaskViewControllerFinishReason, error: Error?) {
+        
+        
+        if taskViewController.task?.identifier == "PassCodeTask" {
+            
+            let ud = UserDefaults.standard
+            ud.set(false, forKey: kPasscodeIsPending)
+            ud.synchronize()
+            
+            taskViewController.dismiss(animated: true, completion: {
+                //call api to get all study stats
+                UserServices().getStudyStates(self)
+            })
+            return
+        }
+        
+        
         
         var taskResult:Any?
         switch reason {

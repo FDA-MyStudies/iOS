@@ -761,7 +761,7 @@ extension StudyHomeViewController:ORKTaskViewControllerDelegate{
             
             if reason == ORKTaskViewControllerFinishReason.discarded{
                 
-                _ = self.navigationController?.popViewController(animated: true)
+                //_ = self.navigationController?.popViewController(animated: true)
             }
             taskViewController.dismiss(animated: true, completion: nil)
             

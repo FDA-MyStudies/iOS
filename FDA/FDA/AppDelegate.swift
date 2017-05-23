@@ -52,6 +52,54 @@
             
         }
         
+        func calculateTimeZoneChange(){
+            
+            let date = Date().utcDate()
+            
+            let timeZoneUTC = TimeZone(abbreviation: "UTC")
+            let timeZoneAutoCurrent = TimeZone.autoupdatingCurrent
+            let timeZoneCurrent = TimeZone.current
+            
+            print("auto \(timeZoneAutoCurrent.description)")
+            print("current \(timeZoneCurrent.description)")
+            
+            let differenceFromUTC = timeZoneUTC?.secondsFromGMT()
+            let differenceFromCurrent = timeZoneCurrent.secondsFromGMT()
+            let differenceFromAutoCurrent = timeZoneCurrent.secondsFromGMT()
+            
+            print("utc \(differenceFromUTC) current \(differenceFromCurrent) autoCurrent\(differenceFromAutoCurrent)")
+            
+            let ud = UserDefaults.standard
+            let setuptimeDiff = ud.value(forKey: "setUPTime") as? Int
+            if setuptimeDiff == nil {
+                ud.set(differenceFromCurrent, forKey: "setUPTime")
+                ud.set(0, forKey: "offset")
+            }
+            else {
+                
+                let difference = differenceFromCurrent - setuptimeDiff!
+                
+                ud.set(difference, forKey: "offset")
+                
+                if difference == 0 {
+                    
+                    print("not changed")
+                }
+                else {
+                    
+                    
+                    
+                    print("timezoneChange")
+                    let date2 = date.addingTimeInterval(TimeInterval(difference))
+                    print("currentUTC \(date.description)")
+                    print("date \(date2.description)")
+                }
+                
+            }
+            
+            ud.synchronize()
+        }
+        
         func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
             // Override point for customization after application launch.
             
@@ -73,6 +121,11 @@
             SyncUpdate.currentSyncUpdate = SyncUpdate()
             
               NotificationCenter.default.addObserver(SyncUpdate.currentSyncUpdate as Any , selector: #selector(SyncUpdate.currentSyncUpdate?.updateData), name:ReachabilityChangedNotification, object: nil)
+            
+            
+            
+            
+            
             
             
             return true
@@ -192,7 +245,7 @@
                 
             }
             
-            
+            self.calculateTimeZoneChange()
             
         }
         

@@ -174,7 +174,10 @@ class ActivitiesViewController : UIViewController{
                 
             }
             else {
-                WCPServices().getStudyActivityList(studyId: (Study.currentStudy?.studyId)!, delegate: self)
+                
+                self.sendRequestToGetActivityStates()
+                
+               // WCPServices().getStudyActivityList(studyId: (Study.currentStudy?.studyId)!, delegate: self)
             }
         }
         

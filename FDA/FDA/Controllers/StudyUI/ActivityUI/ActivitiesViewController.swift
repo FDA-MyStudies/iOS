@@ -83,6 +83,7 @@ class ActivitiesViewController : UIViewController{
         else {
             
             self.loadActivitiesFromDatabase()
+            // self.sendRequestToGetActivityStates()
         }
     }
     
@@ -770,10 +771,23 @@ extension ActivitiesViewController:ORKTaskViewControllerDelegate{
                 }
                 
                
+                
+                
                 //Explain
                 let orkStepResult:ORKStepResult? = taskViewController.result.results?[(taskViewController.result.results?.count)! - 2] as! ORKStepResult?
                 let activityStepResult:ActivityStepResult? = ActivityStepResult()
+                if (activity?.activitySteps?.count )! > 0 {
+                    
+                    let activityStepArray = activity?.activitySteps?.filter({$0.key == orkStepResult?.identifier
+                    })
+                    
+                    if (activityStepArray?.count)! > 0 {
+                        activityStepResult?.step  = activityStepArray?.first
+                    }
+                    
+                }
                 activityStepResult?.initWithORKStepResult(stepResult: orkStepResult! as ORKStepResult , activityType:(ActivityBuilder.currentActivityBuilder.actvityResult?.type)!)
+                
                 let dictionary = activityStepResult?.getActivityStepResultDict()
                 print("dictionary \(dictionary)")
                 

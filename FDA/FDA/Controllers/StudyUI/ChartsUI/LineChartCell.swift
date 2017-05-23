@@ -158,7 +158,13 @@ class LineChartCell: GraphChartTableViewCell {
         
             
         case .runs:
-            break
+            
+            let stringStartDate = LineChartCell.formatter.string(from: (charActivity?.startDate!)!)
+            let stringEndDate = LineChartCell.formatter.string(from: (charActivity?.endDate!)!)
+            labelAxisValue.text = stringStartDate + " - " + stringEndDate
+            
+            self.handleRunsForDate(startDate:(charActivity?.startDate)! , endDate: (charActivity?.endDate)!)
+            
         case .hours_of_day:
             
             
@@ -539,6 +545,35 @@ class LineChartCell: GraphChartTableViewCell {
         self.graphView.reloadData()
     }
     
+    func handleRunsForDate(startDate:Date,endDate:Date){
+        
+        let dataList:Array<DBStatisticsData> = currentChart.statList.filter({$0.startDate! >= startDate && $0.startDate! <= endDate})
+        
+        let array = dataList.map{$0.data}
+        var points:Array<ORKValueRange> = []
+        xAxisTitles = []
+        plotPoints = []
+        
+        if ((charActivity?.frequencyRuns?.count)! > 0){
+            
+            for i in 0...(charActivity?.frequencyRuns?.count)! - 1 {
+                
+                if array.count > i {
+                    let value = array[i]
+                    points.append(ORKValueRange(value:Double(value)))
+                }
+                else {
+                    points.append(ORKValueRange())
+                }
+                
+                
+                //x axis title
+                xAxisTitles.append(String(i+1))
+                
+            }
+            
+        }
+    }
     
     
     //MARK: - FORMATERS

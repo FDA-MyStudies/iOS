@@ -544,6 +544,10 @@ class DBHandler: NSObject {
                             dbActivity?.participationStatus = activity.userParticipationStatus.status.rawValue
                             dbActivity?.completedRuns = activity.userParticipationStatus.compeltedRuns
                             
+                            
+                            
+
+                            
                          })
                     }
                     
@@ -678,7 +682,13 @@ class DBHandler: NSObject {
         
         let realm = try! Realm()
         let dbActivities = realm.objects(DBActivity.self).filter("studyId == %@",studyId)
-        let date = Date().utcDate()
+        var date = Date().utcDate()
+        
+        let difference = UserDefaults.standard.value(forKey: "offset") as? Int
+        if difference != nil {
+            date = date.addingTimeInterval(TimeInterval(difference!))
+        }
+        
         var activities:Array<Activity> = []
         for dbActivity in dbActivities {
             

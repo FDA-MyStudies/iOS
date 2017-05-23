@@ -337,7 +337,7 @@ class ActivitiesTableViewCell: UITableViewCell {
 
     private static let monthlyformatter: DateFormatter = {
         let formatter = DateFormatter()
-        formatter.dateFormat = "hha , dd :MMM dd YYYY"
+        formatter.dateFormat = "hh:mma , dd :MMM dd YYYY"
         formatter.timeZone = TimeZone.init(abbreviation:"GMT")
         return formatter
     }()

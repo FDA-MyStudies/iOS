@@ -132,7 +132,8 @@ class Schedule{
     func setDailyRuns(){
         
         
-       
+       // startTime = startTime.utcDate()
+       // endTime = endTime?.utcDate()
         
         let numberOfDays = self.getNumberOfDaysBetween(startDate: startTime, endDate: endTime!)
         print("numberOfDays \(numberOfDays)")
@@ -193,15 +194,17 @@ class Schedule{
     func setMonthlyRuns(){
         
         let calendar = Calendar.currentUTC()
-        
-        var runStartDate = startTime
+        let offset = UserDefaults.standard.value(forKey: "offset") as? Int
+        let updatedStartTime = startTime.addingTimeInterval(TimeInterval(offset!))
+        let updatedEndTime = endTime?.addingTimeInterval(TimeInterval(offset!))
+        var runStartDate = updatedStartTime
         var runId = 1
-        while runStartDate?.compare(endTime!) == .orderedAscending {
-            let nextRunStartDate =  calendar.date(byAdding:.month, value:1*runId, to: startTime!)
+        while runStartDate.compare(updatedEndTime!) == .orderedAscending {
+            let nextRunStartDate =  calendar.date(byAdding:.month, value:1*runId, to: updatedStartTime)
             var runEndDate = calendar.date(byAdding: .second, value: -1, to: nextRunStartDate!)
             //save range
-            if runEndDate?.compare(endTime!) == .orderedDescending {
-                runEndDate = endTime
+            if runEndDate?.compare(updatedEndTime!) == .orderedDescending {
+                runEndDate = updatedEndTime
             }
             
             //appent in activity
@@ -212,7 +215,7 @@ class Schedule{
             activityRuns.append(activityRun)
             
             //debugPrint("start date \(runStartDate!) , end date \(runEndDate!)")
-            runStartDate = nextRunStartDate
+            runStartDate = nextRunStartDate!
             runId += 1
         }
     }
@@ -223,6 +226,8 @@ class Schedule{
         
         //let timings = [["start":"10:00","end":"12:59"],
         //               ["start":"13:00","end":"15:59"]]
+        
+       
         
         dailyFrequencyTimings = activity.frequencyRuns!
         
@@ -266,12 +271,18 @@ class Schedule{
                 runEndDate = calendar.date(byAdding:.second, value: second!, to: runEndDate!)
                 
                 //print("start date \(runStartDate!) , end date \(runEndDate!)")
+                runStartDate = runStartDate?.utcDate()
+                runEndDate = runEndDate?.utcDate()
+                let offset = UserDefaults.standard.value(forKey: "offset") as? Int
+                let updatedStartTime = runStartDate?.addingTimeInterval(TimeInterval(offset!))
+                let updatedEndTime = runEndDate?.addingTimeInterval(TimeInterval(offset!))
+                
                 
                 //appent in activityRun array
                 let activityRun = ActivityRun()
                 activityRun.runId = runId
-                activityRun.startDate = runStartDate
-                activityRun.endDate = runEndDate
+                activityRun.startDate = updatedStartTime
+                activityRun.endDate = updatedEndTime
                 activityRuns.append(activityRun)
                 
                 runId += 1

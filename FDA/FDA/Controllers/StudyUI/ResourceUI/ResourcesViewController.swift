@@ -172,6 +172,14 @@ class ResourcesViewController : UIViewController{
                             
                             tableViewRowDetails?.append(resource)
                         }
+                        else {
+                            
+                            //register notification
+                            let message = "A new resource " + resource.title! + " is available."
+                            let userInfo = ["studyId":(Study.currentStudy?.studyId)!,
+                                            "type":"resource"];
+                            LocalNotification.scheduleNotificationOn(date: startAnchorDate!, message: message, userInfo: userInfo)
+                        }
                     }
                     
                     

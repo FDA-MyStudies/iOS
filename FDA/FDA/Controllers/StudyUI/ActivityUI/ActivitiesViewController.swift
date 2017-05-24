@@ -26,7 +26,7 @@ class ActivitiesViewController : UIViewController{
     var tableViewSections:Array<Dictionary<String,Any>>! = []
     var lastFetelKickIdentifer:String = ""  //TEMP
     var selectedIndexPath:IndexPath? = nil
-    
+    var isAnchorDateSet:Bool = false
     
 //MARK:- Viewcontroller Lifecycle
     override func viewDidLoad() {
@@ -67,6 +67,45 @@ class ActivitiesViewController : UIViewController{
         
         
     }
+    
+    
+    func registerNotificationForAnchorDate(){
+        
+        DBHandler.getResourcesWithAnchorDateAvailable(studyId: (Study.currentStudy?.studyId)!) { (resourcesList) in
+            if resourcesList.count > 0 {
+                
+                for resource in resourcesList {
+                    
+                    if resource.startDate == nil && resource.endDate == nil {
+                        
+                        let anchorDateObject = Study.currentStudy?.anchorDate
+                        if(anchorDateObject != nil && (anchorDateObject?.isAnchorDateAvailable())!) {
+                            
+                            let anchorDate = Study.currentStudy?.anchorDate?.date
+                            
+                            if anchorDate != nil {
+                                
+                                //also anchor date condition
+                                let startDateInterval = TimeInterval(60*60*24*(resource.anchorDateStartDays))
+                               
+                                
+                                let startAnchorDate = anchorDate?.addingTimeInterval(startDateInterval)
+                                
+                                self.isAnchorDateSet = false
+                                
+                                //register notification
+                                let message = "A new resource " + resource.title! + " is available."
+                                let userInfo = ["studyId":(Study.currentStudy?.studyId)!,
+                                                "type":"resource"];
+                                LocalNotification.scheduleNotificationOn(date: startAnchorDate!, message: message, userInfo: userInfo)
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
     
 //MARK:- Button Actions
     
@@ -681,6 +720,10 @@ extension ActivitiesViewController:ORKTaskViewControllerDelegate{
         }
         taskViewController.dismiss(animated: true, completion: {
             self.tableView?.reloadRows(at: [self.selectedIndexPath!], with: .automatic)
+            
+            if self.isAnchorDateSet {
+                self.registerNotificationForAnchorDate()
+            }
         })
     }
     
@@ -716,6 +759,7 @@ extension ActivitiesViewController:ORKTaskViewControllerDelegate{
                     
                     if (study?.anchorDate?.anchorDateQuestionKey)! ==  (activityStepResult?.key)!{
                         if let value1 = activityStepResult?.value as? String {
+                            isAnchorDateSet = true
                             study?.anchorDate?.setAnchorDateFromQuestion(date: value1)
                         }
                     }

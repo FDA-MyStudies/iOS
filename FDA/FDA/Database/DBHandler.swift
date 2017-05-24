@@ -156,54 +156,7 @@ class DBHandler: NSObject {
     }
     
     
-    func saveNotifications(notifications:Array<AppNotification>){
-        
-        let realm = try! Realm()
-        
-        var dbNotificationList:Array<DBNotification> = []
-        for notification in notifications {
-            
-            let dbNotification = DBNotification()
-            dbNotification.id = notification.id!
-            dbNotification.title = notification.title!
-            dbNotification.message = notification.message!
-            
-            
-            if notification.studyId != nil {
-                 dbNotification.studyId = notification.studyId!
-            }
-            else{
-                 dbNotification.studyId = ""
-            }
-           
-            
-            if notification.activityId != nil {
-                dbNotification.activityId = notification.activityId!
-            }
-            else{
-                dbNotification.activityId = ""
-            }
-            
-            dbNotification.isRead = notification.read!
-            
-            dbNotification.notificationType = notification.type.rawValue
-            dbNotification.subType = notification.subType.rawValue
-            dbNotification.audience = notification.audience!.rawValue
-            dbNotification.date = notification.date!
-            
-            dbNotificationList.append(dbNotification)
-            
-        }
-        
-        
-        print("DBPath : \(realm.configuration.fileURL)")
-        try! realm.write({
-            realm.add(dbNotificationList, update: true)
-            
-        })
- 
- 
-    }
+    
     
     
     
@@ -323,38 +276,6 @@ class DBHandler: NSObject {
     }
     
     
-    class func loadNotificationListFromDatabase(completionHandler:@escaping (Array<AppNotification>) -> ()){
-        
-        
-        let realm = try! Realm()
-        let dbNotifications = realm.objects(DBNotification.self)
-        
-        var notificationList:Array<AppNotification> = []
-        for dbnotification in dbNotifications {
-            
-            let notification = AppNotification()
-            
-            notification.id = dbnotification.id
-            notification.title = dbnotification.title
-            notification.message = dbnotification.message
-            notification.studyId = dbnotification.studyId
-            notification.activityId = dbnotification.activityId
-            notification.type =    AppNotification.NotificationType(rawValue:dbnotification.notificationType!)!
-        
-            notification.subType = AppNotification.NotificationSubType(rawValue:dbnotification.subType!)!
-            
-            notification.audience = Audience(rawValue:dbnotification.audience!)!
-            notification.date =  dbnotification.date
-            
-            notification.read = dbnotification.isRead
-            
-            notificationList.append(notification)
-            
-            
-        }
-        completionHandler(notificationList)
-        
-    }
     
     
     
@@ -1423,6 +1344,14 @@ class DBHandler: NSObject {
         
     }
     
+    class func getResourcesWithAnchorDateAvailable(studyId:String,completionHandler:@escaping (Array<DBResources>) -> ()){
+        
+        let realm = try! Realm()
+        let dbResourceList:Array<DBResources> = realm.objects(DBResources.self).filter({$0.studyId == studyId && $0.povAvailable == true})
+        
+        completionHandler(dbResourceList)
+    }
+    
     class func updateResourceLocalPath(resourceId:String,path:String){
         let realm = try! Realm()
         let dbResource = realm.objects(DBResources.self).filter("resourcesId == %@",resourceId).last!
@@ -1432,8 +1361,89 @@ class DBHandler: NSObject {
         })
     }
     
+     //MARK:- NOTIFICATION
+    func saveNotifications(notifications:Array<AppNotification>){
+        
+        let realm = try! Realm()
+        
+        var dbNotificationList:Array<DBNotification> = []
+        for notification in notifications {
+            
+            let dbNotification = DBNotification()
+            dbNotification.id = notification.id!
+            dbNotification.title = notification.title!
+            dbNotification.message = notification.message!
+            
+            
+            if notification.studyId != nil {
+                dbNotification.studyId = notification.studyId!
+            }
+            else{
+                dbNotification.studyId = ""
+            }
+            
+            
+            if notification.activityId != nil {
+                dbNotification.activityId = notification.activityId!
+            }
+            else{
+                dbNotification.activityId = ""
+            }
+            
+            dbNotification.isRead = notification.read!
+            
+            dbNotification.notificationType = notification.type.rawValue
+            dbNotification.subType = notification.subType.rawValue
+            dbNotification.audience = notification.audience!.rawValue
+            dbNotification.date = notification.date!
+            
+            dbNotificationList.append(dbNotification)
+            
+        }
+        
+        
+        print("DBPath : \(realm.configuration.fileURL)")
+        try! realm.write({
+            realm.add(dbNotificationList, update: true)
+            
+        })
+        
+        
+    }
     
-    
+    class func loadNotificationListFromDatabase(completionHandler:@escaping (Array<AppNotification>) -> ()){
+        
+        
+        let realm = try! Realm()
+        let dbNotifications = realm.objects(DBNotification.self)
+        
+        var notificationList:Array<AppNotification> = []
+        for dbnotification in dbNotifications {
+            
+            let notification = AppNotification()
+            
+            notification.id = dbnotification.id
+            notification.title = dbnotification.title
+            notification.message = dbnotification.message
+            notification.studyId = dbnotification.studyId
+            notification.activityId = dbnotification.activityId
+            notification.type =    AppNotification.NotificationType(rawValue:dbnotification.notificationType!)!
+            
+            notification.subType = AppNotification.NotificationSubType(rawValue:dbnotification.subType!)!
+            
+            notification.audience = Audience(rawValue:dbnotification.audience!)!
+            notification.date =  dbnotification.date
+            
+            notification.read = dbnotification.isRead
+            
+            notificationList.append(notification)
+            
+            
+        }
+        completionHandler(notificationList)
+        
+    }
+
     //MARK:- DELETE
     class func deleteAll(){
         

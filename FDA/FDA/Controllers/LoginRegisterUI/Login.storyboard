@@ -791,7 +791,7 @@
                                 </attributedString>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                 <connections>
-                                    <outlet property="delegate" destination="0Vw-2B-bh0" id="fIK-Zf-cRa"/>
+                                    <outlet property="delegate" destination="A51-y2-CGR" id="lHV-P2-d2I"/>
                                 </connections>
                             </textView>
                         </subviews>

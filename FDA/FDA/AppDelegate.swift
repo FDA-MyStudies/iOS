@@ -88,8 +88,8 @@
                 else {
                     
                     
-                    Schedule.formatter = nil
-                    Schedule.formatter2 = nil
+                    Schedule._formatter = nil
+                    Schedule._formatter2 = nil
                     print("timezoneChange")
                     let date2 = date.addingTimeInterval(TimeInterval(difference))
                     print("currentUTC \(date.description)")

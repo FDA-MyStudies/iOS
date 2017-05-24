@@ -414,22 +414,60 @@ class Schedule{
     
     
      //MARK:Utility Methods
+    public static var _formatter: DateFormatter?
+    public static var formatter: DateFormatter! {
+        
+        get {
+            if let f = _formatter{
+                return f
+            }
+            else {
+                let formatter = DateFormatter()
+                formatter.dateFormat = "YYYY-mm-dd"
+                formatter.dateStyle = .short
+                formatter.timeZone = TimeZone.init(abbreviation:"UTC")
+                _formatter = formatter
+                return formatter
+            }
+        }
+        set(newValue){
+            _formatter = newValue
+        }
+        
+//        let formatter = DateFormatter()
+//        formatter.dateFormat = "YYYY-mm-dd"
+//        formatter.dateStyle = .short
+//        formatter.timeZone = TimeZone.init(abbreviation:"UTC")
+//        return formatter
+    }
     
-    public static var formatter: DateFormatter? = {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "YYYY-mm-dd"
-        formatter.dateStyle = .short
-        formatter.timeZone = TimeZone.init(abbreviation:"UTC")
-        return formatter
-    }()
-    
-    public static var formatter2: DateFormatter? = {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "YYYY-mm-dd"
-        formatter.dateStyle = .short
-        formatter.timeZone = TimeZone.current // TimeZone.init(abbreviation:"IST")
-        return formatter
-    }()
+    public static var _formatter2: DateFormatter?
+    public static var formatter2: DateFormatter! {
+        
+        get{
+            
+            if let f = _formatter2{
+                return f
+            }
+            else {
+                let formatter = DateFormatter()
+                formatter.dateFormat = "YYYY-mm-dd"
+                formatter.dateStyle = .short
+                formatter.timeZone = TimeZone.current // TimeZone.init(abbreviation:"IST")
+                _formatter2 = formatter
+                return formatter
+            }
+        }
+        set(newValue){
+            _formatter2 = newValue
+        }
+        
+//        let formatter = DateFormatter()
+//        formatter.dateFormat = "YYYY-mm-dd"
+//        formatter.dateStyle = .short
+//        formatter.timeZone = TimeZone.current // TimeZone.init(abbreviation:"IST")
+//        return formatter
+    }
     
     
     func getCurrentWeekDay(date:Date) -> Int{

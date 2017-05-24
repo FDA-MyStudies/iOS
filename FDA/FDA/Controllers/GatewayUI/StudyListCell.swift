@@ -29,6 +29,7 @@ class StudyListCell: UITableViewCell {
     @IBOutlet var studyLogoImage:UIImageView?
     @IBOutlet var studyUserStatusIcon:UIImageView?
     @IBOutlet var studyStatusIndicator:UIView?
+    @IBOutlet var categoryBG:UIView?
     
     var selectedStudy:Study!
     var delegate:StudyListDelegates? = nil
@@ -48,10 +49,12 @@ class StudyListCell: UITableViewCell {
      */
     override func setSelected(_ selected: Bool, animated: Bool) {
         let color = studyStatusIndicator?.backgroundColor
+        let color2 = categoryBG?.backgroundColor
         super.setSelected(selected, animated: animated)
         // Configure the view for the selected state
         if(selected) {
             studyStatusIndicator?.backgroundColor = color
+            categoryBG?.backgroundColor = color2
         }
     }
     
@@ -66,9 +69,11 @@ class StudyListCell: UITableViewCell {
      */
     override func setHighlighted(_ highlighted: Bool, animated: Bool) {
         let color = studyStatusIndicator?.backgroundColor
+        let color2 = categoryBG?.backgroundColor
         super.setHighlighted(highlighted, animated: animated)
         if(highlighted) {
             studyStatusIndicator?.backgroundColor = color
+            categoryBG?.backgroundColor = color2
         }
     }
     

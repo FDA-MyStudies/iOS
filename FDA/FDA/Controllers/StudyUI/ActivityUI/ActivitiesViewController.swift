@@ -48,8 +48,10 @@ class ActivitiesViewController : UIViewController{
             //self.loadActivitiesFromDatabase()
             self.sendRequestToGetActivityStates()
             
-             let appDelegate = UIApplication.shared.delegate as! AppDelegate
-            appDelegate.checkConsentStatus()
+            if StudyUpdates.studyConsentUpdated {
+                let appDelegate = UIApplication.shared.delegate as! AppDelegate
+                appDelegate.checkConsentStatus()
+            }
             
         }
         

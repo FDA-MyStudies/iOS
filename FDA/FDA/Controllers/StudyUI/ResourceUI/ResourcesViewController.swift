@@ -38,7 +38,10 @@ class ResourcesViewController : UIViewController{
         //WCPServices().getResourcesForStudy(studyId:(Study.currentStudy?.studyId)!, delegate: self)
         
         
-       
+        if StudyUpdates.studyConsentUpdated {
+            let appDelegate = UIApplication.shared.delegate as! AppDelegate
+            appDelegate.checkConsentStatus()
+        }
         
         
         self.loadResourceFromDatabase()

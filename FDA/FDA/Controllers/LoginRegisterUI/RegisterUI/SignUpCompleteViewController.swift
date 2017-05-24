@@ -125,6 +125,7 @@ extension SignUpCompleteViewController:NMWebServiceDelegate {
 
             let ud = UserDefaults.standard
             ud.set(false, forKey: kPasscodeIsPending)
+            ud.set(false, forKey: kShowNotification)
             ud.synchronize()
             
             

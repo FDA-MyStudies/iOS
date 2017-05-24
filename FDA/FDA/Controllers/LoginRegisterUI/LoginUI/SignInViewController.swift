@@ -25,10 +25,12 @@ class SignInViewController : UIViewController{
     @IBOutlet var tableView : UITableView?
     @IBOutlet var buttonSignIn : UIButton?
     @IBOutlet var buttonSignUp: UIButton?
-
+    @IBOutlet var termsAndCondition:LinkTextView?
     var viewLoadFrom:SignInLoadFrom = .menu
     var tableViewRowDetails : NSMutableArray?
     var user = User.currentUser
+    var termsPageOpened = false
+    
     
 //MARK:- ViewController Lifecycle
     
@@ -82,6 +84,12 @@ class SignInViewController : UIViewController{
         else {
             self.setNavigationBarItem()
         }
+        
+        
+        if termsPageOpened {
+            termsPageOpened = false
+        }
+        
         
        // self.perform(#selector(SignInViewController.setInitialDate), with: self, afterDelay: 1)
         
@@ -384,6 +392,44 @@ extension SignInViewController : UITextFieldDelegate{
         }
     }
 }
+
+extension SignInViewController:UITextViewDelegate{
+    
+    func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange) -> Bool {
+        
+        var link:String =   (TermsAndPolicy.currentTermsAndPolicy?.termsURL)! //kTermsAndConditionLink
+        var title:String = kNavigationTitleTerms
+        if (URL.absoluteString == TermsAndPolicy.currentTermsAndPolicy?.policyURL ) {
+            //kPrivacyPolicyLink
+            print("terms")
+            link =  (TermsAndPolicy.currentTermsAndPolicy?.policyURL)! // kPrivacyPolicyLink
+            title = kNavigationTitlePrivacyPolicy
+            
+        }
+        let loginStoryboard = UIStoryboard.init(name: "Main", bundle:Bundle.main)
+        let webViewController = loginStoryboard.instantiateViewController(withIdentifier:"WebViewController") as! UINavigationController
+        let webview = webViewController.viewControllers[0] as! WebViewController
+        webview.requestLink = link
+        webview.title = title
+        self.navigationController?.present(webViewController, animated: true, completion: nil)
+        
+        termsPageOpened = true
+        
+        return false
+    }
+    
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive press: UIPress) -> Bool {
+        return false
+    }
+    
+    func textViewDidChangeSelection(_ textView: UITextView) {
+        if(!NSEqualRanges(textView.selectedRange, NSMakeRange(0, 0))) {
+            textView.selectedRange = NSMakeRange(0, 0);
+        }
+    }
+}
+
+
 
 
 //MARK:- Webservices Delegate

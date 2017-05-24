@@ -86,7 +86,7 @@ class NotificationViewController : UIViewController{
      @return Bool
      
      */
-    func checkForStudyState(study:Study) -> Bool{
+    class func checkForStudyState(study:Study) -> Bool{
         
         let currentStudy = study
         let participatedStatus = (currentStudy.userParticipateState.status)
@@ -110,6 +110,33 @@ class NotificationViewController : UIViewController{
         
         return false
     }
+    
+    
+    class func checkForStudyStateAndParticiapantState(study:Study) -> Bool{
+        
+        let currentStudy = study
+        let participatedStatus = (currentStudy.userParticipateState.status)
+        
+        switch currentStudy.status {
+        case .Active:
+            if participatedStatus == .inProgress {
+                return true
+            }
+            else {
+               return false
+            }
+        case .Upcoming:
+           return false
+        case .Paused:
+            return false
+        case .Closed:
+            return false
+            
+        }
+        
+        return false
+    }
+    
     
     
     /**
@@ -183,7 +210,7 @@ extension NotificationViewController : UITableViewDelegate{
               let index =  Gateway.instance.studies?.index(where: { $0.studyId == appNotif.studyId })
                 
                 //check status for study
-                if self.checkForStudyState(study: (Gateway.instance.studies?[index!])!) {
+                if NotificationViewController.checkForStudyState(study: (Gateway.instance.studies?[index!])!) {
                     Study.updateCurrentStudy(study:(Gateway.instance.studies?[index!])! )
                     self.pushToStudyDashboard(type:appNotif.subType )
                 }

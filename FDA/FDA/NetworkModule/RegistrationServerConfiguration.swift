@@ -65,7 +65,7 @@ struct RegistrationServerURLConstants {
     
     
     //Testing server
-   // static let ProductionURL = "http://192.168.0.6:8081/labkey/fdahpUserRegWS/"
+    //static let ProductionURL = "http://192.168.0.6:8081/labkey/fdahpUserRegWS/"
     //static let DevelopmentURL = "http://192.168.0.6:8081/labkey/fdahpUserRegWS/"
     
     //LabKey Server

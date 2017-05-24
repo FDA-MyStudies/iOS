@@ -288,7 +288,7 @@ class ActivitiesTableViewCell: UITableViewCell {
         case .Monthly:
             var monthlyStartTime = ActivitiesTableViewCell.monthlyformatter.string(from: startDate!)
             monthlyStartTime = monthlyStartTime.replacingOccurrences(of: ",", with: "on")
-            monthlyStartTime = monthlyStartTime.replacingOccurrences(of: ":", with: "every month\n")
+            monthlyStartTime = monthlyStartTime.replacingOccurrences(of: ";", with: "every month\n")
             
             let endDate = ActivitiesTableViewCell.formatter.string(from: endDate!)
             
@@ -337,7 +337,7 @@ class ActivitiesTableViewCell: UITableViewCell {
 
     private static let monthlyformatter: DateFormatter = {
         let formatter = DateFormatter()
-        formatter.dateFormat = "hh:mma , dd :MMM dd YYYY"
+        formatter.dateFormat = "hh:mma , dd ;MMM dd YYYY"
         formatter.timeZone = TimeZone.init(abbreviation:"GMT")
         return formatter
     }()

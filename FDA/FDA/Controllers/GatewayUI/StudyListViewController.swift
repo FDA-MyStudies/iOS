@@ -39,7 +39,7 @@ class StudyListViewController: UIViewController {
         
         
         
-        self.addRightNavigationItem()
+       
         
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         appDelegate.askForNotification()
@@ -48,6 +48,8 @@ class StudyListViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         
+        
+         self.addRightNavigationItem()
         
         
         let ud = UserDefaults.standard
@@ -439,6 +441,16 @@ class StudyListViewController: UIViewController {
             self.loadStudiesFromDatabase()
             self.labelHelperText.isHidden = true
              self.tableView?.isHidden = false
+            
+            let appDelegate = UIApplication.shared.delegate as! AppDelegate
+            
+            
+            
+            
+            if appDelegate.notificationDetails != nil && User.currentUser.userType == .FDAUser{
+                appDelegate.handleLocalAndRemoteNotification(userInfoDetails:appDelegate.notificationDetails! )
+            }
+            
         }
         else {
             self.tableView?.isHidden = true

@@ -86,11 +86,13 @@ class StudyListCell: UITableViewCell {
         
         labelStudyShortDescription?.text = study.description
         if study.sponserName != nil {
-            labelStudySponserName?.text =  study.category! + "  |  " + study.sponserName!
+            labelStudySponserName?.text =  study.sponserName!
         }
-        else {
-            labelStudySponserName?.text =  study.category!
-        }
+        
+        labelStudyCategoryType?.text =  study.category!.uppercased()
+        
+        progressBarCompletion?.layer.cornerRadius = 2
+        progressBarCompletion?.layer.masksToBounds = true
         
         let attributedString =  labelStudySponserName?.attributedText?.mutableCopy() as! NSMutableAttributedString
         

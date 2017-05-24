@@ -70,7 +70,7 @@ class StudyListViewController: UIViewController {
         
         if User.currentUser.userType == .FDAUser {
             
-            self.tableView?.estimatedRowHeight = 156
+            self.tableView?.estimatedRowHeight = 145
             self.tableView?.rowHeight = UITableViewAutomaticDimension
             
             

@@ -145,6 +145,7 @@ class DBResources:Object {
    dynamic  var type:String?
    dynamic  var audience:String?
    dynamic  var resourceId:String?
+   dynamic  var notificationMessage:String?
    dynamic  var startDate:Date?
    dynamic  var endDate:Date?
    dynamic  var anchorDateStartDays:Int = 0

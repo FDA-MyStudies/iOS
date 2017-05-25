@@ -12,6 +12,7 @@ import UIKit
 class NotificationViewController : UIViewController{
     
     @IBOutlet var tableView : UITableView?
+    var notificationArray:Array<Any> = []
     
     
 //MARK:- ViewController LifeCycle
@@ -21,6 +22,7 @@ class NotificationViewController : UIViewController{
         
         self.title = NSLocalizedString(kNotificationsTitleText, comment: "")
         
+        self.loadLocalNotification()
         WCPServices().getNotification(skip:0, delegate: self)
     }
     
@@ -61,16 +63,30 @@ class NotificationViewController : UIViewController{
         DBHandler.loadNotificationListFromDatabase(completionHandler: {(notificationList) in
             
             if notificationList.count > 0 {
-                 self.tableView?.isHidden = false
+                self.tableView?.isHidden = false
                 
-                Gateway.instance.notification = notificationList
+                //Gateway.instance.notification = notificationList
+                for notification in notificationList{
+                    self.notificationArray.append(notification)
+                }
+                
                 self.tableView?.reloadData()
             }
             else{
                 
             }
             
-            })
+        })
+    }
+    
+    func loadLocalNotification(){
+        
+        DBHandler.getLocalNotification { (notificationList) in
+            if notificationList.count > 0 {
+                self.notificationArray = notificationList
+            }
+        }
+        
     }
 
     
@@ -180,7 +196,7 @@ class NotificationViewController : UIViewController{
 extension NotificationViewController : UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return (Gateway.instance.notification?.count)!
+        return notificationArray.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -188,7 +204,7 @@ extension NotificationViewController : UITableViewDataSource {
         
         cell = tableView.dequeueReusableCell(withIdentifier:kNotificationTableViewCellIdentifier , for: indexPath) as? NotificationTableViewCell
         
-        cell?.populateCellWith(appNotification: (Gateway.instance.notification?[indexPath.row])!)
+        cell?.populateCellWith(notification: (notificationArray[indexPath.row]))
         cell?.backgroundColor = UIColor.clear
         return cell!
     }

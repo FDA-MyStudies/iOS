@@ -15,6 +15,11 @@ enum Audience:String{
     case Limited
 }
 
+class AppLocalNotification:AppNotification{
+    var startDate:Date?
+    var endDate:Date?
+}
+
 class AppNotification {
     
     enum NotificationType:String{

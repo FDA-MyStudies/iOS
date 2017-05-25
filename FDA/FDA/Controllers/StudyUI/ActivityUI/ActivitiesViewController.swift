@@ -105,17 +105,36 @@ class ActivitiesViewController : UIViewController{
                                 
                                 //also anchor date condition
                                 let startDateInterval = TimeInterval(60*60*24*(resource.anchorDateStartDays))
+                                
+                                let endDateInterval = TimeInterval(60*60*24*(resource.anchorDateEndDays))
                                
                                 
                                 let startAnchorDate = anchorDate?.addingTimeInterval(startDateInterval)
+                                let endAnchorDate = anchorDate?.addingTimeInterval(endDateInterval)
                                 
                                 self.isAnchorDateSet = false
                                 
+                                let notification = AppLocalNotification()
+                                notification.id = resource.resourceId! + (Study.currentStudy?.studyId)!
+                                notification.message = resource.notificationMessage
+                                notification.title = "New Resource Available"
+                                notification.startDate = startAnchorDate
+                                notification.endDate = endAnchorDate
+                                notification.type = AppNotification.NotificationType.Study
+                                notification.subType = AppNotification.NotificationSubType.Resource
+                                notification.audience = Audience.Limited
+                                notification.studyId = (Study.currentStudy?.studyId)!
+                                notification.activityId = Study.currentActivity?.actvityId
+                                
+                                DBHandler.saveLocalNotification(notification: notification)
+                                
                                 //register notification
-                                let message = "A new resource " + resource.title! + " is available."
+                                let message = resource.notificationMessage
                                 let userInfo = ["studyId":(Study.currentStudy?.studyId)!,
                                                 "type":"resource"];
-                                LocalNotification.scheduleNotificationOn(date: startAnchorDate!, message: message, userInfo: userInfo)
+                                LocalNotification.scheduleNotificationOn(date: startAnchorDate!, message: message!, userInfo: userInfo)
+                                
+                               
                             }
                         }
                     }

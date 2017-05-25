@@ -31,6 +31,7 @@ class Resource{
     var level:ResourceLevel?
     var key:String?
     var type:String?
+    var notificationMessage:String?
     var file:File?
     var audience:Audience?
     var resourcesId:String?
@@ -73,6 +74,11 @@ class Resource{
             if (Utilities.isValidValue(someObject: (detail[kResourceFile]) as AnyObject)) {
                 self.file?.setFile(dict: detail[kResourceFile] as! NSDictionary)
             }
+            if (Utilities.isValidValue(someObject: (detail["notificationText"]) as AnyObject)){
+                self.notificationMessage = detail["notificationText"] as? String
+            }
+
+            
             if (Utilities.isValidObject(someObject: detail[kResourceConfigration] as AnyObject)) {
                 let configuration = detail[kResourceConfigration] as! Dictionary<String,Any>
                 self.povAvailable = true
@@ -123,6 +129,9 @@ class Resource{
             }
             if (Utilities.isValidValue(someObject: (dict[kResourceType]) as AnyObject)) {
                 self.type = dict[kResourceType] as? String
+            }
+            if (Utilities.isValidValue(someObject: (dict["notificationText"]) as AnyObject)){
+                self.notificationMessage = dict["notificationText"] as? String
             }
             
             if self.level != nil {

@@ -154,6 +154,7 @@ class ResourcesViewController : UIViewController{
                 
                 let startDateResult = (resource.startDate?.compare(todayDate))! as ComparisonResult
                 let endDateResult = (resource.endDate?.compare(todayDate))! as ComparisonResult
+              
                 
                 if ((startDateResult == .orderedAscending || startDateResult == .orderedSame) && (endDateResult == .orderedDescending || endDateResult == .orderedSame)){
                     print("current")
@@ -192,11 +193,25 @@ class ResourcesViewController : UIViewController{
                         }
                         else {
                             
+                            let notification = AppLocalNotification()
+                            notification.id = resource.resourcesId! + (Study.currentStudy?.studyId)!
+                            notification.message = resource.notificationMessage
+                            notification.title = "New Resource Available"
+                            notification.startDate = startAnchorDate
+                            notification.endDate = endAnchorDate
+                            notification.type = AppNotification.NotificationType.Study
+                            notification.subType = AppNotification.NotificationSubType.Resource
+                            notification.audience = Audience.Limited
+                            notification.studyId = (Study.currentStudy?.studyId)!
+                            //notification.activityId = Study.currentActivity?.actvityId
+                            
+                            DBHandler.saveLocalNotification(notification: notification)
+                            
                             //register notification
-                            let message = "A new resource " + resource.title! + " is available."
+                            let message = resource.notificationMessage
                             let userInfo = ["studyId":(Study.currentStudy?.studyId)!,
                                             "type":"resource"];
-                            LocalNotification.scheduleNotificationOn(date: startAnchorDate!, message: message, userInfo: userInfo)
+                            LocalNotification.scheduleNotificationOn(date: startAnchorDate!, message: message!, userInfo: userInfo)
                         }
                     }
                     

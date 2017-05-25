@@ -96,12 +96,22 @@ open class FDASlideMenuViewController: SlideMenuController {
         //TEMP
         
         //Delete from database
-        DBHandler.deleteCurrentUser()
+        DBHandler.deleteAll()
+        
+        if ORKPasscodeViewController.isPasscodeStoredInKeychain() {
+            ORKPasscodeViewController.removePasscodeFromKeychain()
+        }
         
         let ud = UserDefaults.standard
         ud.removeObject(forKey: kUserAuthToken)
         ud.removeObject(forKey: kUserId)
         ud.synchronize()
+        
+        
+        let appDomain = Bundle.main.bundleIdentifier!
+        UserDefaults.standard.removePersistentDomain(forName: appDomain)
+        UserDefaults.standard.synchronize()
+
         
         self.leftViewController?.view.isHidden = true
         _ = self.navigationController?.popToRootViewController(animated: true)

@@ -605,6 +605,10 @@ extension StudyListViewController:NMWebServiceDelegate {
             if User.currentUser.settings?.passcode == true {
                 self.setPassCode()
             }
+            else {
+                UserDefaults.standard.set(false, forKey: kPasscodeIsPending)
+                UserDefaults.standard.synchronize()
+            }
         }
         else if (requestName as String == RegistrationMethods.updateStudyState.description){
             self.removeProgressIndicator()

@@ -311,6 +311,7 @@ class StudyWithdrawalConfigration {
         static  var studyActivitiesUpdated = false
         static  var studyResourcesUpdated = false
         static  var studyVersion:String? = nil
+        static  var studyStatus:String? = nil
         
         init() {
             
@@ -334,6 +335,9 @@ class StudyWithdrawalConfigration {
                 }
                 if Utilities.isValidValue(someObject: updates[kStudyActivities] as AnyObject ){
                     StudyUpdates.studyActivitiesUpdated = (updates[kStudyActivities] as? Bool)!
+                }
+                if Utilities.isValidValue(someObject: updates["status"] as AnyObject ){
+                    StudyUpdates.studyStatus = updates["status"] as? String
                 }
                 
             }

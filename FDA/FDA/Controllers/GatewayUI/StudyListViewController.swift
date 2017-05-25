@@ -50,6 +50,8 @@ class StudyListViewController: UIViewController {
         
         
         
+        Study.currentStudy = nil
+        
         let ud = UserDefaults.standard
         
         var ispasscodePending:Bool? = false

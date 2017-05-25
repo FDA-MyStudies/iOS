@@ -817,7 +817,7 @@
                         <outlet property="buttonSignIn" destination="Les-Kl-pFS" id="3iX-wX-bnH"/>
                         <outlet property="buttonSignUp" destination="k1R-vE-2bf" id="Poi-wx-15a"/>
                         <outlet property="tableView" destination="ss7-zA-DJ6" id="5c2-N8-WqJ"/>
-                        <outlet property="termsAndCondition" destination="kEu-ol-yfS" id="KSh-Cj-6JE"/>
+                        <outlet property="termsAndCondition" destination="kEu-ol-yfS" id="AgD-5N-ou0"/>
                         <segue destination="slw-Bf-fNL" kind="show" identifier="verificationSegue" id="Wsb-hw-1LK"/>
                         <segue destination="Wno-P6-W9P" kind="unwind" identifier="unwindStudyHomeSegue" animates="NO" unwindAction="unwindeToStudyHome:" id="qV5-ui-5l6"/>
                     </connections>

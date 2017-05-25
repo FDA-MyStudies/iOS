@@ -60,6 +60,8 @@ class SignInViewController : UIViewController{
         //unhide navigationbar
         self.navigationController?.setNavigationBarHidden(false, animated: true)
         
+        WCPServices().getTermsPolicy(delegate: self)
+        
         if let attributedTitle = buttonSignUp?.attributedTitle(for: .normal) {
             let mutableAttributedTitle = NSMutableAttributedString(attributedString: attributedTitle)
             
@@ -264,6 +266,24 @@ class SignInViewController : UIViewController{
     }
     
     
+    func agreeToTermsAndConditions(){
+        
+        self.termsAndCondition?.delegate = self
+        let attributedString =  termsAndCondition?.attributedText.mutableCopy() as! NSMutableAttributedString
+        
+        var foundRange = attributedString.mutableString.range(of: "Terms")
+        attributedString.addAttribute(NSLinkAttributeName, value:(TermsAndPolicy.currentTermsAndPolicy?.termsURL!)! as String, range: foundRange)
+        
+        foundRange = attributedString.mutableString.range(of: "Privacy Policy")
+        attributedString.addAttribute(NSLinkAttributeName, value:(TermsAndPolicy.currentTermsAndPolicy?.policyURL!)! as String  , range: foundRange)
+        
+        termsAndCondition?.attributedText = attributedString
+        
+        termsAndCondition?.linkTextAttributes = [NSForegroundColorAttributeName:Utilities.getUIColorFromHex(0x007CBA)]
+        
+    }
+    
+    
 //MARK:- Segue Methods
     
     @IBAction func unwindFromVerification(_ segue:UIStoryboardSegue){
@@ -393,6 +413,19 @@ extension SignInViewController : UITextFieldDelegate{
     }
 }
 
+extension SignInViewController:UIGestureRecognizerDelegate{
+    func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
+        if gestureRecognizer.isKind(of: UITapGestureRecognizer.classForCoder()) {
+            if gestureRecognizer.numberOfTouches == 2 {
+                return false
+            }
+        }
+        return true
+    }
+}
+
+
+
 extension SignInViewController:UITextViewDelegate{
     
     func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange) -> Bool {
@@ -444,6 +477,12 @@ extension SignInViewController:NMWebServiceDelegate {
         Logger.sharedInstance.info("requestname : \(requestName)")
         self.removeProgressIndicator()
         
+        if requestName as String == WCPMethods.termsPolicy.method.methodName {
+            self.agreeToTermsAndConditions()
+        }
+        else
+        {
+        
         if User.currentUser.verified == true {
             
             ORKPasscodeViewController.removePasscodeFromKeychain()
@@ -474,6 +513,7 @@ extension SignInViewController:NMWebServiceDelegate {
         else {
             
             self.navigateToVerifyController()
+        }
         }
     }
     

@@ -18,7 +18,13 @@
         
         var window: UIWindow?
         
+        var notificationDetails:Dictionary<String,Any>?
+        
         var appIsResignedButDidNotEnteredBackground:Bool? = false
+        
+        var alertVCPresented:UIAlertController?
+        
+        var parentViewControllerForAlert:UIViewController?
         
         let healthStore = HKHealthStore()
         var containerViewController: ResearchContainerViewController? {
@@ -30,8 +36,8 @@
         
         func askForNotification(){
             
-//            let notificationSettings = UIUserNotificationSettings(types: [.alert, .sound, .badge], categories: nil)
-//            UIApplication.shared.registerUserNotificationSettings(notificationSettings)
+            //            let notificationSettings = UIUserNotificationSettings(types: [.alert, .sound, .badge], categories: nil)
+            //            UIApplication.shared.registerUserNotificationSettings(notificationSettings)
             
             if #available(iOS 10.0, *) {
                 let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
@@ -113,8 +119,8 @@
             
             // self.checkForAppUpdate()
             
-           
-           // self.checkForAppUpdate()
+            
+            // self.checkForAppUpdate()
             
             
             
@@ -130,18 +136,34 @@
             
             SyncUpdate.currentSyncUpdate = SyncUpdate()
             
-              NotificationCenter.default.addObserver(SyncUpdate.currentSyncUpdate as Any , selector: #selector(SyncUpdate.currentSyncUpdate?.updateData), name:ReachabilityChangedNotification, object: nil)
-            
-            
-            
+            NotificationCenter.default.addObserver(SyncUpdate.currentSyncUpdate as Any , selector: #selector(SyncUpdate.currentSyncUpdate?.updateData), name:ReachabilityChangedNotification, object: nil)
             
             
             let date = Date()
             print("date \(LineChartCell.shortDayFormatter.string(from: date))")
             
+            
+            
+            if (launchOptions != nil) {
+                // Launched from push notification
+                let notification = launchOptions?[.remoteNotification]
+                
+                if Utilities.isValidValue(someObject: notification as AnyObject?){
+                    
+                    notificationDetails = notification as! Dictionary<String, Any>?
+                    
+                   
+                }
+                else{
+                     UIApplication.shared.applicationIconBadgeNumber = 0
+                }
+                
+            }
+            
+            
             return true
-           
-    }
+            
+        }
         
         func applicationWillResignActive(_ application: UIApplication) {
             // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
@@ -169,20 +191,20 @@
         func application(_ application: UIApplication, performFetchWithCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
             
             /*
-            if let tabBarController = window?.rootViewController as? UITabBarController,
-                let viewControllers = tabBarController.viewControllers
-            {
-                for viewController in viewControllers {
-                    if let fetchViewController = viewController as? FetalKickCounterStepViewController {
-                        fetchViewController.fetch {
-                            fetchViewController.updateUI()
-                            completionHandler(.newData)
-                        }
-                    }
-                }
-            }
-     
-     */
+             if let tabBarController = window?.rootViewController as? UITabBarController,
+             let viewControllers = tabBarController.viewControllers
+             {
+             for viewController in viewControllers {
+             if let fetchViewController = viewController as? FetalKickCounterStepViewController {
+             fetchViewController.fetch {
+             fetchViewController.updateUI()
+             completionHandler(.newData)
+             }
+             }
+             }
+             }
+             
+             */
         }
         
         
@@ -200,17 +222,17 @@
             
             
             
-//
-//            let vc = application.topMostViewController()
-//            if vc is ActivitiesViewController{
-//                print("ActivitiesViewController")
-//            }
+            //
+            //            let vc = application.topMostViewController()
+            //            if vc is ActivitiesViewController{
+            //                print("ActivitiesViewController")
+            //            }
             //print(vc)
             
-//            if navigationController.viewControllers.count > 0 {
-//                
-//                
-//            }
+            //            if navigationController.viewControllers.count > 0 {
+            //
+            //
+            //            }
             
             
             
@@ -265,7 +287,7 @@
             // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
         }
         
-       //MARK:- NOTIFICATION
+        //MARK:- NOTIFICATION
         
         func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
             
@@ -277,7 +299,7 @@
             
             
             print("APNs token retrieved: \(deviceToken)")
-           
+            
             
         }
         func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
@@ -290,9 +312,16 @@
             
             //For iOS 8 & 9
             if (UIApplication.shared.applicationState == UIApplicationState.background)||(UIApplication.shared.applicationState == UIApplicationState.inactive){
-               
+                
             }
         }
+        
+        func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
+            
+           
+            
+        }
+        
         func application(_ application: UIApplication, didReceive notification: UILocalNotification) {
             print("Notificatio received\(notification.userInfo)")
         }
@@ -307,7 +336,7 @@
         static func isJailbroken() -> Bool {
             
             if UIDevice.current.model != "iPhone Simulator" {
-               return false
+                return false
             }
             
             let fileManager = FileManager.default
@@ -325,7 +354,7 @@
                 canOpen(path: "/bin/bash") ||
                 canOpen(path: "/usr/sbin/sshd") ||
                 canOpen(path: "/etc/apt") ||
-          
+                
                 canOpen(path: "/usr/bin/ssh") {
                 return true
             }
@@ -384,24 +413,24 @@
                 
                 var topController:UIViewController = navigationController
                 if navigationController.viewControllers.count > 0 {
-                     topController = navigationController.viewControllers.first!
+                    topController = navigationController.viewControllers.first!
                 }
                 
                 
                 
-                            UIUtilities.showAlertMessageWithTwoActionsAndHandler(NSLocalizedString("Covarnt Updated", comment: ""), errorMessage: NSLocalizedString("The Consent Document for this study has been updated. Please review the revised Consent terms and provide your Informed Consent, to continue participating in the study.", comment: ""), errorAlertActionTitle: NSLocalizedString("Review", comment: ""),
-                                                                                 errorAlertActionTitle2:nil, viewControllerUsed: topController,
-                                                                                 action1: {
-                                                                                    
-                                                                                        self.addAndRemoveProgress(add: true)
-                                                                                    
-                                                                                    
-                                                                                        WCPServices().getEligibilityConsentMetadata(studyId:(Study.currentStudy?.studyId)!, delegate: self as NMWebServiceDelegate)
-                                                                                    
-                            },
-                                                                                 action2: {
-                
-                            })
+                UIUtilities.showAlertMessageWithTwoActionsAndHandler(NSLocalizedString("Covarnt Updated", comment: ""), errorMessage: NSLocalizedString("The Consent Document for this study has been updated. Please review the revised Consent terms and provide your Informed Consent, to continue participating in the study.", comment: ""), errorAlertActionTitle: NSLocalizedString("Review", comment: ""),
+                                                                     errorAlertActionTitle2:nil, viewControllerUsed: topController,
+                                                                     action1: {
+                                                                        
+                                                                        self.addAndRemoveProgress(add: true)
+                                                                        
+                                                                        
+                                                                        WCPServices().getEligibilityConsentMetadata(studyId:(Study.currentStudy?.studyId)!, delegate: self as NMWebServiceDelegate)
+                                                                        
+                },
+                                                                     action2: {
+                                                                        
+                })
                 
             }
             else {
@@ -445,6 +474,216 @@
             topVC?.present(taskViewController!, animated: true, completion: nil)
         }
         
+        func handleLocalAndRemoteNotification(userInfoDetails:Dictionary<String,Any>){
+            /*
+             let filePath  = Bundle.main.path(forResource: "Labkey_Activity", ofType: "json")
+             
+             let userInfo:Dictionary<String,Any>?
+             
+             let data = NSData(contentsOfFile: filePath!)
+             do {
+             userInfo = try JSONSerialization.jsonObject(with: data! as Data, options: []) as? Dictionary<String,Any>
+             
+             }
+             catch let error as NSError{
+             print("\(error)")
+             }
+             
+             */
+            
+            var notificationType:String? = ""
+            var notificationSubType:AppNotification.NotificationSubType? = .Announcement
+            
+            
+            if (userInfoDetails.count) > 0 {
+                
+                
+                if Utilities.isValidValue(someObject: userInfoDetails[kNotificationType] as AnyObject){
+                    notificationType =  userInfoDetails[kNotificationType] as? String
+                }
+                if Utilities.isValidValue(someObject: userInfoDetails[kNotificationSubType] as AnyObject){
+                    notificationSubType = AppNotification.NotificationSubType(rawValue:userInfoDetails[kNotificationSubType] as! String)
+                }
+                
+                if notificationType == AppNotification.NotificationType.Study.rawValue{
+                    
+                    var studyId:String? = ""
+                    
+                    if Utilities.isValidValue(someObject: userInfoDetails[kStudyId] as AnyObject){
+                        studyId = userInfoDetails[kStudyId] as? String
+                    }
+                    
+                    
+                    if studyId != nil || studyId != ""{
+                        
+                        var initialVC:UIViewController?
+                        
+                        
+                        let navigationController =  (self.window?.rootViewController as! UINavigationController)
+                        let menuVC = navigationController.viewControllers.last
+                        if  menuVC is FDASlideMenuViewController {
+                            let mainController =  (menuVC as! FDASlideMenuViewController).mainViewController
+                            if mainController is UINavigationController {
+                                let nav = (mainController as! UINavigationController)
+                                initialVC = nav.viewControllers.last
+                                
+                                
+                                
+                                //                                if tabbarVC is StudyDashboardTabbarViewController{
+                                //                                    let studyTabBar = tabbarVC as! StudyDashboardTabbarViewController
+                                //                                    selectedController = ((studyTabBar.viewControllers?[studyTabBar.selectedIndex]) as! UINavigationController).viewControllers.last
+                                //
+                                //                                }
+                                
+                                
+                            }
+                            
+                        }
+                        
+                        if Gateway.instance.studies!.contains(where: { $0.studyId == studyId }){
+                            
+                            let index =  Gateway.instance.studies?.index(where: { $0.studyId == studyId })
+                            
+                            //check status for study
+                            if NotificationViewController.checkForStudyStateAndParticiapantState(study: (Gateway.instance.studies?[index!])!) {
+                                Study.updateCurrentStudy(study:(Gateway.instance.studies?[index!])! )
+                                
+                                
+                                switch notificationSubType! as AppNotification.NotificationSubType {
+                                case .Activity, .Resource:
+                                    
+                                    var activityId:String? = ""
+                                    
+                                    if Utilities.isValidValue(someObject: userInfoDetails[kActivityId] as AnyObject){
+                                        activityId = userInfoDetails[kActivityId] as? String
+                                    }
+                                    
+                                    var resourceId:String? = ""
+                                    if Utilities.isValidValue(someObject: userInfoDetails[kResourceId] as AnyObject){
+                                        resourceId = userInfoDetails[kResourceId] as? String
+                                    }
+                                    
+                                    
+                                    
+                                    if !(initialVC is UITabBarController){
+                                        //push tabbar and switch to activty tab
+                                        
+                                        print("push tabbar and switch to activty tab")
+                                        
+                                        
+                                        self.pushToTabbar(viewController: initialVC!, selectedTab: (notificationSubType! as AppNotification.NotificationSubType == .Activity) ? 0 : 2)
+                            
+                                    }
+                                    else {
+                                        //switch to activty tab
+                                        
+                                        (initialVC as! UITabBarController).selectedIndex =  (notificationSubType! as AppNotification.NotificationSubType == .Activity) ? 0 : 2
+                                        
+                                        print("switch to activty tab")
+                                    }
+                                    
+                                    //                       if !(initialVC is ActivitiesViewController){
+                                    //
+                                    //                            if initialVC is StudyListViewController {
+                                    //
+                                    //                            }
+                                    //                            else if initialVC is ResourcesViewController{
+                                    //
+                                    //                            }
+                                    //                            else if initialVC is ReachoutOptionsViewController{
+                                    //
+                                    //                            }
+                                    //                            else if initialVC is ProfileViewController{
+                                    //
+                                    //                            }
+                                    
+                                    //                       }
+                                    
+                                    
+                                    
+                                case .Study:
+                                    
+                                    
+                                    let leftController = (menuVC as! FDASlideMenuViewController).leftViewController as! LeftMenuViewController
+                                    
+                                    if !(initialVC is StudyListViewController){
+                                        
+                                        
+                                        if initialVC is ProfileViewController  ||  initialVC is ReachoutOptionsViewController || initialVC is GatewayResourcesListViewController{
+                                            leftController.changeViewController(.studyList)
+                                            leftController.createLeftmenuItems()
+                                        }
+                                        
+                                        else if initialVC is UITabBarController {
+                                            
+                                            initialVC?.performSegue(withIdentifier: "unwindeToStudyListIdentier", sender: initialVC)
+                                            
+                                        }
+                                        
+                                    }
+                                    else {
+                                        
+                                        leftController.changeViewController(.studyList)
+                                        leftController.createLeftmenuItems()
+                                    }
+                                    
+                                case .Announcement:break
+                                    
+                                default:break
+                                    
+                                }
+                                
+                                
+                                
+                                
+                            }
+                            else{
+                                //study is not joined
+                            }
+                        }
+                        else{
+                            //Study is not in the list
+                        }
+                        
+                       
+                    }
+                    else{
+                        //studyId is Null
+                    }
+                }
+                else if notificationType == AppNotification.NotificationType.Gateway.rawValue{
+                    
+                    if notificationSubType == AppNotification.NotificationSubType.Announcement{
+                        
+                    }
+                    else{
+                        
+                    }
+                    
+                }
+                
+            }
+           
+            
+            self.notificationDetails = nil
+            
+        }
+        
+        
+        func pushToTabbar(viewController:UIViewController,selectedTab:Int){
+            
+            let studyStoryBoard = UIStoryboard.init(name: "Study", bundle: Bundle.main)
+            
+            
+            let studyDashboard = studyStoryBoard.instantiateViewController(withIdentifier: kStudyDashboardTabbarControllerIdentifier) as! StudyDashboardTabbarViewController
+            
+            studyDashboard.selectedIndex = selectedTab
+            
+            
+            viewController.navigationController?.navigationBar.isHidden = true
+            viewController.navigationController?.pushViewController(studyDashboard, animated: true)
+        }
+        
         
         
         func checkPasscode(viewController:UIViewController) {
@@ -486,21 +725,41 @@
                         
                         var topVC = UIApplication.shared.keyWindow?.rootViewController
                         
+                        var parentController:UIViewController?
                         
                         while topVC?.presentedViewController != nil {
+                            
+                            parentController = topVC
+                            
                             topVC = topVC?.presentedViewController
                         }
                         
-                        if (topVC?.presentedViewController?.isKind(of: ORKPasscodeViewController.self) == false && (topVC?.presentedViewController?.isKind(of: ORKTaskViewController.self))!) || ( topVC != nil && topVC?.isKind(of: ORKPasscodeViewController.self) == false) {
-                             topVC!.present(passcodeViewController, animated: false, completion: nil)
+                       
+                        
+                        if topVC is UIAlertController{
+                            
+                            alertVCPresented = topVC as! UIAlertController?
+                            
+                            topVC?.dismiss(animated: true, completion: nil)
+                            topVC = parentController
+                            
+                            parentViewControllerForAlert = topVC
                         }
                         
-                       
-                             //UIApplication.shared.keyWindow?.rootViewController?.present(passcodeViewController, animated: false, completion: nil)
-                    
                         
-                    
-                       // viewController.present(passcodeViewController, animated: false, completion: nil)
+                        
+                        
+                        
+                        if (topVC?.presentedViewController?.isKind(of: ORKPasscodeViewController.self) == false && (topVC?.presentedViewController?.isKind(of: ORKTaskViewController.self))!) || ( topVC != nil && topVC?.isKind(of: ORKPasscodeViewController.self) == false) {
+                            topVC!.present(passcodeViewController, animated: false, completion: nil)
+                        }
+                        
+                        
+                        //UIApplication.shared.keyWindow?.rootViewController?.present(passcodeViewController, animated: false, completion: nil)
+                        
+                        
+                        
+                        // viewController.present(passcodeViewController, animated: false, completion: nil)
                     }
                 }
                 else{
@@ -518,27 +777,27 @@
         func addAndRemoveProgress(add:Bool){
             
             if add{
-                 self.window?.addProgressIndicatorOnWindow()
+                self.window?.addProgressIndicatorOnWindow()
             }
             else {
                 self.window?.removeProgressIndicatorFromWindow()
             }
-           
             
-//            let navigationController =  (self.window?.rootViewController as! UINavigationController)
-//            
-//            if navigationController.viewControllers.count > 0 {
-//                let studyListController = navigationController.viewControllers.first
-//                
-//                if add == true{
-//                    
-//                    studyListController?.addProgressIndicator()
-//                }
-//                else{
-//                    
-//                    studyListController?.removeProgressIndicator()
-//                }
-//            }
+            
+            //            let navigationController =  (self.window?.rootViewController as! UINavigationController)
+            //
+            //            if navigationController.viewControllers.count > 0 {
+            //                let studyListController = navigationController.viewControllers.first
+            //
+            //                if add == true{
+            //
+            //                    studyListController?.addProgressIndicator()
+            //                }
+            //                else{
+            //
+            //                    studyListController?.removeProgressIndicator()
+            //                }
+            //            }
             
         }
         
@@ -580,6 +839,10 @@
             
             let ud = UserDefaults.standard
             ud.set(false, forKey: kPasscodeIsPending)
+             ud.set(false, forKey: kShowNotification)
+            
+
+            
             ud.synchronize()
             
             
@@ -604,7 +867,7 @@
                     let leftController = slideMenuController?.leftViewController as! LeftMenuViewController
                     leftController.changeViewController(.studyList)
                     leftController.createLeftmenuItems()
-
+                    
                 }
                 
             }
@@ -645,39 +908,18 @@
                     
                 }
                 
-                let studyStatus = StudyStatus(rawValue:StudyUpdates.studyStatus!)!
+            }
+            
+            
+            if selectedController != nil {
+                self.checkConsentStatus(controller: self.selectedController!)
                 
-                if studyStatus != .Active {
-                   _ = nav?.popToRootViewController(animated: true)
-                    var message = ""
-                    switch studyStatus {
-                   
-                    case .Upcoming:
-                        message = NSLocalizedString(kMessageForStudyUpcomingState, comment: "")
-                       
-                    case .Paused:
-                        message = NSLocalizedString(kMessageForStudyPausedState, comment: "")
-                       // UIUtilities.showAlertWithTitleAndMessage(title: "", message: NSLocalizedString(kMessageForStudyPausedState, comment: "") as NSString)
-                    case .Closed:
-                        message = NSLocalizedString(kMessageForStudyClosedState, comment: "")
-                       // UIUtilities.showAlertWithTitleAndMessage(title: "", message: NSLocalizedString(kMessageForStudyClosedState, comment: "") as NSString)
-                    default: break
-                
-                    }
-                    
-                    let alert = UIAlertController(title:"" as String,message:message as String,preferredStyle: UIAlertControllerStyle.alert)
-                    alert.addAction(UIAlertAction(title:NSLocalizedString("OK", comment: ""), style: .default, handler: nil))
-//                    var rootViewController = UIApplication.shared.keyWindow?.rootViewController
-//                    if let navigationController = rootViewController as? UINavigationController {
-//                        rootViewController = navigationController.viewControllers.first
-//                    }
-//                    if let tabBarController = rootViewController as? UITabBarController {
-//                        rootViewController = tabBarController.selectedViewController
-//                    }
-                    
-                    //let vc =  nav?.viewControllers.first
-                    //nav?.present(alert, animated: true, completion: nil)
-                   
+                //if self.selectedController is StudyDashboardViewController {
+                //(self.selectedController as! StudyDashboardViewController).)
+                // }
+                // else
+                if self.selectedController is ActivitiesViewController {
+                    (self.selectedController as! ActivitiesViewController).checkForActivitiesUpdates()
                 }
                 else {
                     
@@ -752,7 +994,7 @@
                 
             }
             else if requestName as String == WCPMethods.eligibilityConsent.method.methodName {
-               
+                
                 self.createEligibilityConsentTask()
             }
                 
@@ -825,13 +1067,13 @@
                     
                 }
                 else{
-
-                taskResult = taskViewController.result
-                let ud = UserDefaults.standard
-                ud.set(false, forKey: kPasscodeIsPending)
-                ud.synchronize()
-                
-                self.appIsResignedButDidNotEnteredBackground = false
+                    
+                    taskResult = taskViewController.result
+                    let ud = UserDefaults.standard
+                    ud.set(false, forKey: kPasscodeIsPending)
+                    ud.synchronize()
+                    
+                    self.appIsResignedButDidNotEnteredBackground = false
                 }
             case ORKTaskViewControllerFinishReason.failed:
                 print("failed")
@@ -867,14 +1109,14 @@
             
             if taskViewController.task?.identifier == kConsentTaskIdentifier && reason == ORKTaskViewControllerFinishReason.completed{
                 
-                 ConsentBuilder.currentConsent?.consentStatus = .completed
+                ConsentBuilder.currentConsent?.consentStatus = .completed
                 
                 self.addAndRemoveProgress(add: true)
                 
                 UserServices().updateUserEligibilityConsentStatus(eligibilityStatus: true, consentStatus:(ConsentBuilder.currentConsent?.consentStatus)!  , delegate: self)
-               
+                
             }
-
+            
             
             
             
@@ -885,56 +1127,60 @@
         func taskViewController(_ taskViewController: ORKTaskViewController, stepViewControllerWillAppear stepViewController: ORKStepViewController) {
             
             
-             if taskViewController.task?.identifier == kConsentTaskIdentifier{
-            
-            if (taskViewController.result.results?.count)! > 1{
+            if taskViewController.task?.identifier == kConsentTaskIdentifier{
                 
-                if activityBuilder?.actvityResult?.result?.count == taskViewController.result.results?.count{
-                    //Removing the dummy result:Currentstep result which not presented yet
-                    activityBuilder?.actvityResult?.result?.removeLast()
+                if (taskViewController.result.results?.count)! > 1{
+                    
+                    if activityBuilder?.actvityResult?.result?.count == taskViewController.result.results?.count{
+                        //Removing the dummy result:Currentstep result which not presented yet
+                        activityBuilder?.actvityResult?.result?.removeLast()
+                    }
+                    else{
+                        
+                    }
+                }
+                
+                //Handling show and hide of Back Button
+                
+                //For Verified Step , Completion Step, Visual Step, Review Step, Share Pdf Step
+                
+                
+                
+                
+                
+                if  stepViewController.step?.identifier == kConsentCompletionStepIdentifier || stepViewController.step?.identifier == "visual"  || stepViewController.step?.identifier == kConsentSharePdfCompletionStep || stepViewController.step?.identifier == kEligibilityVerifiedScreen{
+                    
+                    
+                    if stepViewController.step?.identifier == kEligibilityVerifiedScreen{
+                        stepViewController.continueButtonTitle = "Continue"
+                    }
+                    stepViewController.backButtonItem = nil
+                }
+                    //checking if currentstep is View Pdf Step
+                else if stepViewController.step?.identifier == kConsentViewPdfCompletionStep{
+                    
+                    //Back button is enabled
+                    stepViewController.backButtonItem?.isEnabled = true
+                    
+                    let orkStepResult:ORKStepResult? = taskViewController.result.results?[(taskViewController.result.results?.count)! - 2] as! ORKStepResult?
+                    
+                    let consentSignatureResult:ConsentCompletionTaskResult? = orkStepResult?.results?.first as? ConsentCompletionTaskResult
+                    
+                    //Checking if Signature is consented after Review Step
+                    
+                    if  consentSignatureResult?.didTapOnViewPdf == false{
+                        //Directly moving to completion step by skipping Intermediate PDF viewer screen
+                        stepViewController.goForward()
+                    }
+                    else{
+                        
+                    }
                 }
                 else{
+                    //Back button is enabled
+                    stepViewController.backButtonItem?.isEnabled = true
                     
                 }
-            }
-            
-            //Handling show and hide of Back Button
-            
-            //For Verified Step , Completion Step, Visual Step, Review Step, Share Pdf Step
-            
-            if  stepViewController.step?.identifier == kConsentCompletionStepIdentifier || stepViewController.step?.identifier == "visual" || stepViewController.step?.identifier == "Review" || stepViewController.step?.identifier == kConsentSharePdfCompletionStep{
-                
-                
-                if stepViewController.step?.identifier == kEligibilityVerifiedScreen{
-                    stepViewController.continueButtonTitle = "Continue"
-                }
-                stepViewController.backButtonItem = nil
-            }
-                //checking if currentstep is View Pdf Step
-            else if stepViewController.step?.identifier == kConsentViewPdfCompletionStep{
-                
-                //Back button is enabled
-                stepViewController.backButtonItem?.isEnabled = true
-                
-                let orkStepResult:ORKStepResult? = taskViewController.result.results?[(taskViewController.result.results?.count)! - 2] as! ORKStepResult?
-                
-                let consentSignatureResult:ConsentCompletionTaskResult? = orkStepResult?.results?.first as? ConsentCompletionTaskResult
-                
-                //Checking if Signature is consented after Review Step
-                
-                if  consentSignatureResult?.didTapOnViewPdf == false{
-                    //Directly moving to completion step by skipping Intermediate PDF viewer screen
-                    stepViewController.goForward()
-                }
-                else{
-                    
-                }
-            }
-            else{
-                //Back button is enabled
-                stepViewController.backButtonItem?.isEnabled = true
-                
-            }
                 
                 
             }
@@ -958,98 +1204,98 @@
         func taskViewController(_ taskViewController: ORKTaskViewController, viewControllerFor step: ORKStep) -> ORKStepViewController? {
             
             
-             if taskViewController.task?.identifier == kConsentTaskIdentifier{
-            
-            
-            //CurrentStep is TokenStep
-            
-            if step.identifier == kEligibilityTokenStep {
+            if taskViewController.task?.identifier == kConsentTaskIdentifier{
                 
-                let gatewayStoryboard = UIStoryboard(name: kFetalKickCounterStep, bundle: nil)
                 
-                let ttController = gatewayStoryboard.instantiateViewController(withIdentifier: kEligibilityStepViewControllerIdentifier) as! EligibilityStepViewController
-                ttController.descriptionText = step.text
-                ttController.step = step
+                //CurrentStep is TokenStep
                 
-                return ttController
-            }
-            else if step.identifier == kConsentSharePdfCompletionStep {
-                
-                // let reviewStep:ORKStepResult? = taskViewController.result.results?[(taskViewController.result.results?.count)! - 1] as! ORKStepResult?
-                
-                var totalResults =  taskViewController.result.results
-                let reviewStep:ORKStepResult?
-                
-                totalResults = totalResults?.filter({$0.identifier == "Review"})
-                
-                reviewStep = totalResults?.first as! ORKStepResult?
-                
-                if (reviewStep?.identifier)! == "Review" && (reviewStep?.results?.count)! > 0{
-                    let consentSignatureResult:ORKConsentSignatureResult? = reviewStep?.results?.first as? ORKConsentSignatureResult
+                if step.identifier == kEligibilityTokenStep {
                     
-                    if  consentSignatureResult?.consented == false{
-                        taskViewController.dismiss(animated: true
-                            , completion: nil)
-                        
-                        var topVC = UIApplication.shared.keyWindow?.rootViewController
-                        while topVC?.presentedViewController != nil {
-                            topVC = topVC?.presentedViewController
-                        }
-
-                        _ = topVC?.navigationController?.popViewController(animated: true)
-                        return nil
-                        
-                    }
-                    else{
-                        
-                        let documentCopy:ORKConsentDocument = (ConsentBuilder.currentConsent?.consentDocument)!.copy() as! ORKConsentDocument
-                        
-                        consentSignatureResult?.apply(to: documentCopy)
-                        let gatewayStoryboard = UIStoryboard(name: kFetalKickCounterStep, bundle: nil)
-                        let ttController = gatewayStoryboard.instantiateViewController(withIdentifier: kConsentSharePdfStoryboardId) as! ConsentSharePdfStepViewController
-                        ttController.step = step
-                        ttController.consentDocument =  documentCopy
-                        return ttController
-                    }
-                }
-                else {
-                    return nil
-                }
-            }
-            else if step.identifier == kConsentViewPdfCompletionStep {
-                
-                let reviewSharePdfStep:ORKStepResult? = taskViewController.result.results?.last as! ORKStepResult?
-                
-                let result = (reviewSharePdfStep?.results?.first as? ConsentCompletionTaskResult)
-                
-                if (result?.didTapOnViewPdf)!{
                     let gatewayStoryboard = UIStoryboard(name: kFetalKickCounterStep, bundle: nil)
                     
-                    let ttController = gatewayStoryboard.instantiateViewController(withIdentifier: kConsentViewPdfStoryboardId) as! ConsentPdfViewerStepViewController
+                    let ttController = gatewayStoryboard.instantiateViewController(withIdentifier: kEligibilityStepViewControllerIdentifier) as! EligibilityStepViewController
+                    ttController.descriptionText = step.text
                     ttController.step = step
-                    
-                    ttController.pdfData = result?.pdfData
                     
                     return ttController
                 }
-                else{
-                    //taskViewController.goForward()
+                else if step.identifier == kConsentSharePdfCompletionStep {
+                    
+                    // let reviewStep:ORKStepResult? = taskViewController.result.results?[(taskViewController.result.results?.count)! - 1] as! ORKStepResult?
+                    
+                    var totalResults =  taskViewController.result.results
+                    let reviewStep:ORKStepResult?
+                    
+                    totalResults = totalResults?.filter({$0.identifier == "Review"})
+                    
+                    reviewStep = totalResults?.first as! ORKStepResult?
+                    
+                    if (reviewStep?.identifier)! == "Review" && (reviewStep?.results?.count)! > 0{
+                        let consentSignatureResult:ORKConsentSignatureResult? = reviewStep?.results?.first as? ORKConsentSignatureResult
+                        
+                        if  consentSignatureResult?.consented == false{
+                            taskViewController.dismiss(animated: true
+                                , completion: nil)
+                            
+                            var topVC = UIApplication.shared.keyWindow?.rootViewController
+                            while topVC?.presentedViewController != nil {
+                                topVC = topVC?.presentedViewController
+                            }
+                            
+                            _ = topVC?.navigationController?.popViewController(animated: true)
+                            return nil
+                            
+                        }
+                        else{
+                            
+                            let documentCopy:ORKConsentDocument = (ConsentBuilder.currentConsent?.consentDocument)!.copy() as! ORKConsentDocument
+                            
+                            consentSignatureResult?.apply(to: documentCopy)
+                            let gatewayStoryboard = UIStoryboard(name: kFetalKickCounterStep, bundle: nil)
+                            let ttController = gatewayStoryboard.instantiateViewController(withIdentifier: kConsentSharePdfStoryboardId) as! ConsentSharePdfStepViewController
+                            ttController.step = step
+                            ttController.consentDocument =  documentCopy
+                            return ttController
+                        }
+                    }
+                    else {
+                        return nil
+                    }
+                }
+                else if step.identifier == kConsentViewPdfCompletionStep {
+                    
+                    let reviewSharePdfStep:ORKStepResult? = taskViewController.result.results?.last as! ORKStepResult?
+                    
+                    let result = (reviewSharePdfStep?.results?.first as? ConsentCompletionTaskResult)
+                    
+                    if (result?.didTapOnViewPdf)!{
+                        let gatewayStoryboard = UIStoryboard(name: kFetalKickCounterStep, bundle: nil)
+                        
+                        let ttController = gatewayStoryboard.instantiateViewController(withIdentifier: kConsentViewPdfStoryboardId) as! ConsentPdfViewerStepViewController
+                        ttController.step = step
+                        
+                        ttController.pdfData = result?.pdfData
+                        
+                        return ttController
+                    }
+                    else{
+                        //taskViewController.goForward()
+                        return nil
+                    }
+                }
+                else {
+                    
                     return nil
                 }
-            }
-            else {
-                
-                return nil
-            }
                 
             }
-             else{
+            else{
                 // other than consent step mostly passcode step
                 
                 return nil
             }
         }
-
+        
     }
     
     extension AppDelegate: ORKPasscodeDelegate {
@@ -1058,7 +1304,15 @@
             self.appIsResignedButDidNotEnteredBackground = false
             
             
+          
+            
             viewController.dismiss(animated: true, completion: nil)
+            
+            if alertVCPresented != nil {
+                parentViewControllerForAlert?.present(alertVCPresented!, animated: true, completion: nil)
+            }
+            
+            
         }
         
         func passcodeViewControllerDidFailAuthentication(_ viewController: UIViewController) {
@@ -1071,34 +1325,34 @@
         func passcodeViewControllerForgotPasscodeTapped(_ viewController: UIViewController) {
             
             
-                
+            
             var topVC = UIApplication.shared.keyWindow?.rootViewController
             
             
             while topVC?.presentedViewController != nil {
                 topVC = topVC?.presentedViewController
             }
-
             
-                
-                UIUtilities.showAlertMessageWithTwoActionsAndHandler(NSLocalizedString("Passcode", comment: ""), errorMessage: NSLocalizedString("You will be signed out and will need to sign in again. Are you sure you want to proceed?", comment: ""), errorAlertActionTitle: NSLocalizedString("OK", comment: ""),
-                                                                     errorAlertActionTitle2:NSLocalizedString("Cancel", comment: ""), viewControllerUsed: topVC!,
-                                                                     action1: {
-                                                                         viewController.dismiss(animated: true, completion: {
+            
+            
+            UIUtilities.showAlertMessageWithTwoActionsAndHandler(NSLocalizedString("Passcode", comment: ""), errorMessage: NSLocalizedString("You will be signed out and will need to sign in again. Are you sure you want to proceed?", comment: ""), errorAlertActionTitle: NSLocalizedString("OK", comment: ""),
+                                                                 errorAlertActionTitle2:NSLocalizedString("Cancel", comment: ""), viewControllerUsed: topVC!,
+                                                                 action1: {
+                                                                    viewController.dismiss(animated: true, completion: {
                                                                         
                                                                         self.sendRequestToSignOut()
-                                                                        })
-                },
-                                                                     action2: {
-                                                                        
-                                                                       
-                })
-
-                
-                
-                
-                
-    
+                                                                    })
+            },
+                                                                 action2: {
+                                                                    
+                                                                    
+            })
+            
+            
+            
+            
+            
+            
         }
         
     }
@@ -1115,7 +1369,13 @@
                                     withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
             let userInfo = notification.request.content.userInfo
             print("REMOTE NOTIFICATION:" + "\(userInfo)")
+            
+            
+            
+            
             completionHandler([UNNotificationPresentationOptions.alert, .sound, .badge])
+            
+            //self.handleLocalAndRemoteNotification(userInfoDetails: userInfo as! Dictionary<String, Any>)
             
         }
         
@@ -1125,10 +1385,18 @@
             let userInfo = response.notification.request.content.userInfo
             print("REMOTE NOTIFICATION:" + "\(userInfo)")
             
-            if (UIApplication.shared.applicationState == UIApplicationState.active) {//|| (UIApplication.shared.applicationState == UIApplicationState.background){
+            if (UIApplication.shared.applicationState == UIApplicationState.background) {//|| (UIApplication.shared.applicationState == UIApplicationState.background){
                 UIApplication.shared.applicationIconBadgeNumber = 0
+                
+                self.handleLocalAndRemoteNotification(userInfoDetails: userInfo as! Dictionary<String, Any>)
+                
                 //self.handlePushNotificationResponse(userInfo : userInfo as NSDictionary)
             }
+            
+            
+            
+            
+            
         }
     }
     
@@ -1163,7 +1431,7 @@
             return self.keyWindow?.rootViewController?.topMostViewController()
         }
     }
-
+    
     
     
     

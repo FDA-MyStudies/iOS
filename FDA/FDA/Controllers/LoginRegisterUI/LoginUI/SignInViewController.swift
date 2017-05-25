@@ -25,10 +25,12 @@ class SignInViewController : UIViewController{
     @IBOutlet var tableView : UITableView?
     @IBOutlet var buttonSignIn : UIButton?
     @IBOutlet var buttonSignUp: UIButton?
-
+    @IBOutlet var termsAndCondition:LinkTextView?
     var viewLoadFrom:SignInLoadFrom = .menu
     var tableViewRowDetails : NSMutableArray?
     var user = User.currentUser
+    var termsPageOpened = false
+    
     
 //MARK:- ViewController Lifecycle
     
@@ -58,6 +60,8 @@ class SignInViewController : UIViewController{
         //unhide navigationbar
         self.navigationController?.setNavigationBarHidden(false, animated: true)
         
+        WCPServices().getTermsPolicy(delegate: self)
+        
         if let attributedTitle = buttonSignUp?.attributedTitle(for: .normal) {
             let mutableAttributedTitle = NSMutableAttributedString(attributedString: attributedTitle)
             
@@ -82,6 +86,12 @@ class SignInViewController : UIViewController{
         else {
             self.setNavigationBarItem()
         }
+        
+        
+        if termsPageOpened {
+            termsPageOpened = false
+        }
+        
         
        // self.perform(#selector(SignInViewController.setInitialDate), with: self, afterDelay: 1)
         
@@ -256,6 +266,24 @@ class SignInViewController : UIViewController{
     }
     
     
+    func agreeToTermsAndConditions(){
+        
+        self.termsAndCondition?.delegate = self
+        let attributedString =  termsAndCondition?.attributedText.mutableCopy() as! NSMutableAttributedString
+        
+        var foundRange = attributedString.mutableString.range(of: "Terms")
+        attributedString.addAttribute(NSLinkAttributeName, value:(TermsAndPolicy.currentTermsAndPolicy?.termsURL!)! as String, range: foundRange)
+        
+        foundRange = attributedString.mutableString.range(of: "Privacy Policy")
+        attributedString.addAttribute(NSLinkAttributeName, value:(TermsAndPolicy.currentTermsAndPolicy?.policyURL!)! as String  , range: foundRange)
+        
+        termsAndCondition?.attributedText = attributedString
+        
+        termsAndCondition?.linkTextAttributes = [NSForegroundColorAttributeName:Utilities.getUIColorFromHex(0x007CBA)]
+        
+    }
+    
+    
 //MARK:- Segue Methods
     
     @IBAction func unwindFromVerification(_ segue:UIStoryboardSegue){
@@ -385,6 +413,57 @@ extension SignInViewController : UITextFieldDelegate{
     }
 }
 
+extension SignInViewController:UIGestureRecognizerDelegate{
+    func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
+        if gestureRecognizer.isKind(of: UITapGestureRecognizer.classForCoder()) {
+            if gestureRecognizer.numberOfTouches == 2 {
+                return false
+            }
+        }
+        return true
+    }
+}
+
+
+
+extension SignInViewController:UITextViewDelegate{
+    
+    func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange) -> Bool {
+        
+        var link:String =   (TermsAndPolicy.currentTermsAndPolicy?.termsURL)! //kTermsAndConditionLink
+        var title:String = kNavigationTitleTerms
+        if (URL.absoluteString == TermsAndPolicy.currentTermsAndPolicy?.policyURL ) {
+            //kPrivacyPolicyLink
+            print("terms")
+            link =  (TermsAndPolicy.currentTermsAndPolicy?.policyURL)! // kPrivacyPolicyLink
+            title = kNavigationTitlePrivacyPolicy
+            
+        }
+        let loginStoryboard = UIStoryboard.init(name: "Main", bundle:Bundle.main)
+        let webViewController = loginStoryboard.instantiateViewController(withIdentifier:"WebViewController") as! UINavigationController
+        let webview = webViewController.viewControllers[0] as! WebViewController
+        webview.requestLink = link
+        webview.title = title
+        self.navigationController?.present(webViewController, animated: true, completion: nil)
+        
+        termsPageOpened = true
+        
+        return false
+    }
+    
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive press: UIPress) -> Bool {
+        return false
+    }
+    
+    func textViewDidChangeSelection(_ textView: UITextView) {
+        if(!NSEqualRanges(textView.selectedRange, NSMakeRange(0, 0))) {
+            textView.selectedRange = NSMakeRange(0, 0);
+        }
+    }
+}
+
+
+
 
 //MARK:- Webservices Delegate
 extension SignInViewController:NMWebServiceDelegate {
@@ -397,6 +476,12 @@ extension SignInViewController:NMWebServiceDelegate {
     func finishedRequest(_ manager: NetworkManager, requestName: NSString, response: AnyObject?) {
         Logger.sharedInstance.info("requestname : \(requestName)")
         self.removeProgressIndicator()
+        
+        if requestName as String == WCPMethods.termsPolicy.method.methodName {
+            self.agreeToTermsAndConditions()
+        }
+        else
+        {
         
         if User.currentUser.verified == true {
             
@@ -428,6 +513,7 @@ extension SignInViewController:NMWebServiceDelegate {
         else {
             
             self.navigateToVerifyController()
+        }
         }
     }
     

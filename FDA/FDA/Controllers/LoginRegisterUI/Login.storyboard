@@ -552,7 +552,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="LC2-3W-qRB">
-                                <rect key="frame" x="27" y="305.5" width="320" height="176"/>
+                                <rect key="frame" x="27.5" y="305.5" width="320" height="176"/>
                                 <string key="text">This is a one-stop app that houses several Studies being conducted by the FDA. Check out the list of available Studies and join the ones that are relevant to you. We look forward to having you on board!</string>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
                                 <nil key="textColor"/>
@@ -619,7 +619,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="QEr-gp-3T2" sceneMemberID="viewController">
                     <toolbarItems/>
                     <nil key="simulatedTopBarMetrics"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="PKu-fU-nTZ">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="PKu-fU-nTZ">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -753,6 +753,47 @@
                                     <segue destination="0Vw-2B-bh0" kind="show" id="VqN-my-PFn"/>
                                 </connections>
                             </button>
+                            <textView clipsSubviews="YES" contentMode="scaleToFill" editable="NO" usesAttributedText="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kEu-ol-yfS" customClass="LinkTextView" customModule="FDA" customModuleProvider="target">
+                                <rect key="frame" x="31" y="435" width="307" height="64"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="64" id="h2Q-Sm-Z2R"/>
+                                </constraints>
+                                <attributedString key="attributedText">
+                                    <fragment content="I Agree to the ">
+                                        <attributes>
+                                            <color key="NSColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                            <font key="NSFont" size="16" name="HelveticaNeue"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="Terms">
+                                        <attributes>
+                                            <color key="NSColor" red="0.0" green="0.48627450980392156" blue="0.72941176470588232" alpha="1" colorSpace="calibratedRGB"/>
+                                            <font key="NSFont" size="16" name="HelveticaNeue-Medium"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content=" and ">
+                                        <attributes>
+                                            <color key="NSColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                            <font key="NSFont" size="16" name="HelveticaNeue"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="Privacy Policy">
+                                        <attributes>
+                                            <color key="NSColor" red="0.0" green="0.48627450980392156" blue="0.72941176470588232" alpha="1" colorSpace="calibratedRGB"/>
+                                            <font key="NSFont" size="16" name="HelveticaNeue-Medium"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                </attributedString>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                <connections>
+                                    <outlet property="delegate" destination="A51-y2-CGR" id="lHV-P2-d2I"/>
+                                </connections>
+                            </textView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -760,12 +801,15 @@
                             <constraint firstItem="yoe-20-K0y" firstAttribute="top" secondItem="k1R-vE-2bf" secondAttribute="bottom" constant="45" id="BYG-wp-VR3"/>
                             <constraint firstItem="Les-Kl-pFS" firstAttribute="height" secondItem="rvK-l9-jc7" secondAttribute="height" multiplier="40/667" id="CBz-vX-arZ"/>
                             <constraint firstItem="ss7-zA-DJ6" firstAttribute="leading" secondItem="rvK-l9-jc7" secondAttribute="leading" id="Cvw-cX-94z"/>
+                            <constraint firstItem="Les-Kl-pFS" firstAttribute="top" secondItem="kEu-ol-yfS" secondAttribute="bottom" constant="13" id="Jr8-Dl-vOv"/>
                             <constraint firstItem="Les-Kl-pFS" firstAttribute="centerY" secondItem="rvK-l9-jc7" secondAttribute="centerY" multiplier="1.5952" id="KGK-H4-obR"/>
                             <constraint firstItem="3eF-aU-RcQ" firstAttribute="top" secondItem="ss7-zA-DJ6" secondAttribute="bottom" constant="16" id="KgJ-2F-K43"/>
                             <constraint firstItem="Les-Kl-pFS" firstAttribute="centerX" secondItem="rvK-l9-jc7" secondAttribute="centerX" id="UQZ-sF-1G6"/>
+                            <constraint firstItem="kEu-ol-yfS" firstAttribute="leading" secondItem="rvK-l9-jc7" secondAttribute="leading" constant="31" id="bha-w8-1FM"/>
                             <constraint firstItem="3eF-aU-RcQ" firstAttribute="centerX" secondItem="rvK-l9-jc7" secondAttribute="centerX" id="dHp-82-dA2"/>
                             <constraint firstItem="ss7-zA-DJ6" firstAttribute="top" secondItem="SnD-H7-w6h" secondAttribute="bottom" constant="1" id="ek7-ud-2St"/>
                             <constraint firstItem="Les-Kl-pFS" firstAttribute="width" secondItem="rvK-l9-jc7" secondAttribute="width" multiplier="150/375" id="rui-dP-Lgd"/>
+                            <constraint firstAttribute="trailing" secondItem="kEu-ol-yfS" secondAttribute="trailing" constant="37" id="wUX-Uj-7Lk"/>
                             <constraint firstAttribute="trailing" secondItem="ss7-zA-DJ6" secondAttribute="trailing" id="yYS-C4-Qch"/>
                         </constraints>
                     </view>
@@ -773,6 +817,7 @@
                         <outlet property="buttonSignIn" destination="Les-Kl-pFS" id="3iX-wX-bnH"/>
                         <outlet property="buttonSignUp" destination="k1R-vE-2bf" id="Poi-wx-15a"/>
                         <outlet property="tableView" destination="ss7-zA-DJ6" id="5c2-N8-WqJ"/>
+                        <outlet property="termsAndCondition" destination="kEu-ol-yfS" id="AgD-5N-ou0"/>
                         <segue destination="slw-Bf-fNL" kind="show" identifier="verificationSegue" id="Wsb-hw-1LK"/>
                         <segue destination="Wno-P6-W9P" kind="unwind" identifier="unwindStudyHomeSegue" animates="NO" unwindAction="unwindeToStudyHome:" id="qV5-ui-5l6"/>
                     </connections>
@@ -1203,7 +1248,7 @@
         <image name="welcomeBg" width="375" height="667"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="VqN-my-PFn"/>
         <segue reference="Wsb-hw-1LK"/>
+        <segue reference="VqN-my-PFn"/>
     </inferredMetricsTieBreakers>
 </document>

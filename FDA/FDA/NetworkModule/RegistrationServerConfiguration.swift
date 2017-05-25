@@ -47,7 +47,7 @@ enum RegistrationMethods:String {
        
         case .activityState,.consentPDF,.deleteAccount,.confirmRegistration,.userProfile,.userPreferences,.studyState:
             //GET Methods
-            return Method(methodName:(self.rawValue+".api"), methodType: .httpMethodGet, requestType: .requestTypeJSON)
+            return Method(methodName:(self.rawValue+".api"), methodType: .httpMethodGet, requestType: .requestTypeHTTP)
         case .withdraw,.logout, .deactivate:
             //DELETE Methods
             return Method(methodName:(self.rawValue+".api"), methodType: .httpMethodDELETE, requestType: .requestTypeJSON)
@@ -65,12 +65,12 @@ struct RegistrationServerURLConstants {
     
     
     //Testing server
-    //static let ProductionURL = "http://192.168.0.6:8081/labkey/fdahpUserRegWS/"
-    //static let DevelopmentURL = "http://192.168.0.6:8081/labkey/fdahpUserRegWS/"
+    static let ProductionURL = "http://192.168.0.6:8081/labkey/fdahpUserRegWS/"
+    static let DevelopmentURL = "http://192.168.0.6:8081/labkey/fdahpUserRegWS/"
      
     //LabKey Server
-    static let ProductionURL = "https://hphci-fdama-te-ur-01.labkey.com/fdahpUserRegWS/"
-    static let DevelopmentURL = "https://hphci-fdama-te-ur-01.labkey.com/fdahpUserRegWS/"
+    //static let ProductionURL = "https://hphci-fdama-te-ur-01.labkey.com/fdahpUserRegWS/"
+    //static let DevelopmentURL = "https://hphci-fdama-te-ur-01.labkey.com/fdahpUserRegWS/"
     
 }
 class RegistrationServerConfiguration: NetworkConfiguration {

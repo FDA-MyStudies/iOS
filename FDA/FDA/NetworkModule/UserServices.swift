@@ -472,13 +472,14 @@ class UserServices: NSObject {
         self.delegate = delegate
         
         let user = User.currentUser
-        let headerParams = [kUserAuthToken: user.authToken as String,
-                            kUserId : user.userId as String,
-                      kStudyId: studyId]
+        let params = [kStudyId: studyId,
+                      "consentVersion":""]
+        
+         let headerParams = [kUserId : user.userId!]
         
         let method = RegistrationMethods.consentPDF.method
         
-        self.sendRequestWith(method:method, params: nil, headers: headerParams)
+        self.sendRequestWith(method:method, params: params, headers: headerParams)
     }
     
     func updateUserActivityState(_ delegate:NMWebServiceDelegate){
@@ -494,12 +495,13 @@ class UserServices: NSObject {
         self.delegate = delegate
         
         let user = User.currentUser
-        let params = [kUserId : user.userId!,
-                      kStudyId: studyId]
+        let params = [kStudyId: studyId]
+        
+        let headerParams = [kUserId : user.userId!]
         
         let method = RegistrationMethods.activityState.method
         
-        self.sendRequestWith(method:method, params: nil, headers: params)
+        self.sendRequestWith(method:method, params: params, headers: headerParams)
     }
     
     func withdrawFromStudy(studyId:String ,shouldDeleteData:Bool, delegate:NMWebServiceDelegate){

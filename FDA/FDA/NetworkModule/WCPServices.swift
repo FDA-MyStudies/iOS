@@ -114,7 +114,7 @@ class WCPServices: NSObject {
         let header = [kStudyId:studyId,"consentVersion" : ""]
         let method = WCPMethods.consentDocument.method
        
-        self.sendRequestWith(method:method, params: nil, headers: header)
+        self.sendRequestWith(method:method, params: header, headers: nil)
     }
 
     func getGatewayResources(delegate:NMWebServiceDelegate){
@@ -132,7 +132,7 @@ class WCPServices: NSObject {
 
         let method = WCPMethods.eligibilityConsent.method
         let headerParams = [kStudyId:studyId]
-        self.sendRequestWith(method:method, params: nil, headers: headerParams)
+        self.sendRequestWith(method:method, params: headerParams, headers: nil)
     }
     func getResourcesForStudy(studyId:String, delegate:NMWebServiceDelegate){
         
@@ -140,7 +140,7 @@ class WCPServices: NSObject {
         
         let method = WCPMethods.resources.method
         let headerParams = [kStudyId:studyId]
-        self.sendRequestWith(method:method, params: nil, headers: headerParams)
+        self.sendRequestWith(method:method, params: headerParams, headers:nil )
     }
     
     func getStudyInformation(studyId:String, delegate:NMWebServiceDelegate){
@@ -149,7 +149,7 @@ class WCPServices: NSObject {
         
         let method = WCPMethods.studyInfo.method
         let params = [kStudyId:studyId]
-        self.sendRequestWith(method:method, params: nil, headers: params)
+        self.sendRequestWith(method:method, params: params, headers: nil)
     }
     
     func getStudyActivityList(studyId:String, delegate:NMWebServiceDelegate){
@@ -159,7 +159,7 @@ class WCPServices: NSObject {
 
         let method = WCPMethods.activityList.method
         let headerParams = [kStudyId:studyId]
-        self.sendRequestWith(method:method, params: nil, headers: headerParams)
+        self.sendRequestWith(method:method, params: headerParams, headers: nil)
     }
     
     func getStudyActivityMetadata(studyId:String, activityId:String,activityVersion:String, delegate:NMWebServiceDelegate){
@@ -171,7 +171,7 @@ class WCPServices: NSObject {
         let headerParams = [kStudyId:studyId,
                       kActivityId:activityId,
                       kActivityVersion:activityVersion]
-        self.sendRequestWith(method:method, params: nil, headers: headerParams)
+        self.sendRequestWith(method:method, params: headerParams, headers: nil)
     }
     
     func getStudyDashboardInfo(studyId:String, delegate:NMWebServiceDelegate){
@@ -181,7 +181,7 @@ class WCPServices: NSObject {
 
         let method = WCPMethods.studyDashboard.method
         let params = [kStudyId:studyId]
-        self.sendRequestWith(method:method, params: nil, headers: params)
+        self.sendRequestWith(method:method, params: params, headers: nil)
     }
     
     func getTermsPolicy(studyId:String, delegate:NMWebServiceDelegate){
@@ -211,7 +211,7 @@ class WCPServices: NSObject {
 
         let method = WCPMethods.notifications.method
         let headerParams = [kNotificationSkip:"\(skip)"]
-        self.sendRequestWith(method:method, params: nil, headers: headerParams)
+        self.sendRequestWith(method:method, params: headerParams, headers: nil)
         
     }
     
@@ -245,7 +245,7 @@ class WCPServices: NSObject {
         let method = WCPMethods.studyUpdates.method
         let headerParams = [kStudyId:study.studyId!,
                             kStudyVersion:study.version!]
-        self.sendRequestWith(method:method, params: nil, headers: headerParams)
+        self.sendRequestWith(method:method, params: headerParams, headers: nil)
         
     }
     func checkForAppUpdates(delegate:NMWebServiceDelegate){
@@ -254,7 +254,7 @@ class WCPServices: NSObject {
         let method = WCPMethods.appUpdates.method
         let headerParams = [kAppVersion:Utilities.getAppVersion(),
                             kOSType:"ios"]
-        self.sendRequestWith(method:method, params: nil, headers: headerParams)
+        self.sendRequestWith(method:method, params: headerParams, headers: nil)
     }
     
     //MARK:Parsers

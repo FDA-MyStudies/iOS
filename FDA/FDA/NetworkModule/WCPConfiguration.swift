@@ -33,7 +33,7 @@ enum WCPMethods:String {
         case .feedback,.contactUs:
              return Method(methodName:self.rawValue, methodType: .httpMethodPOST, requestType: .requestTypeJSON)
         default:
-            return Method(methodName:self.rawValue, methodType: .httpMethodGet, requestType: .requestTypeJSON)
+            return Method(methodName:self.rawValue, methodType: .httpMethodGet, requestType: .requestTypeHTTP)
     
             
         }
@@ -51,13 +51,13 @@ struct WCPServerURLConstants {
     
     
     //UAT
-    static let ProductionURL = "http://23.89.199.27:8080/StudyMetaData/"
-    static let DevelopmentURL = "http://23.89.199.27:8080/StudyMetaData/"
+    //static let ProductionURL = "http://23.89.199.27:8080/StudyMetaData/"
+    //static let DevelopmentURL = "http://23.89.199.27:8080/StudyMetaData/"
 
     
     //New SerVerForDevelopment
-    //static let ProductionURL = "http://192.168.0.26:8080/StudyMetaData/"
-    //static let DevelopmentURL = "http://192.168.0.26:8080/StudyMetaData/"
+    static let ProductionURL = "http://192.168.0.26:8080/StudyMetaData/"
+    static let DevelopmentURL = "http://192.168.0.26:8080/StudyMetaData/"
     
 
     

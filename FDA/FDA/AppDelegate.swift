@@ -886,9 +886,9 @@
                 DBHandler.updateMetaDataToUpdateForStudy(study: Study.currentStudy!, updateDetails: nil)
                 
                 
-               
                 
-               
+                
+                
                 var nav:UINavigationController?
                 let navigationController =  (self.window?.rootViewController as! UINavigationController)
                 let menuVC = navigationController.viewControllers.last
@@ -908,18 +908,39 @@
                     
                 }
                 
-            }
-            
-            
-            if selectedController != nil {
-                self.checkConsentStatus(controller: self.selectedController!)
+                let studyStatus = StudyStatus(rawValue:StudyUpdates.studyStatus!)!
                 
-                //if self.selectedController is StudyDashboardViewController {
-                //(self.selectedController as! StudyDashboardViewController).)
-                // }
-                // else
-                if self.selectedController is ActivitiesViewController {
-                    (self.selectedController as! ActivitiesViewController).checkForActivitiesUpdates()
+                if studyStatus != .Active {
+                    _ = nav?.popToRootViewController(animated: true)
+                    var message = ""
+                    switch studyStatus {
+                        
+                    case .Upcoming:
+                        message = NSLocalizedString(kMessageForStudyUpcomingState, comment: "")
+                        
+                    case .Paused:
+                        message = NSLocalizedString(kMessageForStudyPausedState, comment: "")
+                    // UIUtilities.showAlertWithTitleAndMessage(title: "", message: NSLocalizedString(kMessageForStudyPausedState, comment: "") as NSString)
+                    case .Closed:
+                        message = NSLocalizedString(kMessageForStudyClosedState, comment: "")
+                    // UIUtilities.showAlertWithTitleAndMessage(title: "", message: NSLocalizedString(kMessageForStudyClosedState, comment: "") as NSString)
+                    default: break
+                        
+                    }
+                    
+                    let alert = UIAlertController(title:"" as String,message:message as String,preferredStyle: UIAlertControllerStyle.alert)
+                    alert.addAction(UIAlertAction(title:NSLocalizedString("OK", comment: ""), style: .default, handler: nil))
+                    //                    var rootViewController = UIApplication.shared.keyWindow?.rootViewController
+                    //                    if let navigationController = rootViewController as? UINavigationController {
+                    //                        rootViewController = navigationController.viewControllers.first
+                    //                    }
+                    //                    if let tabBarController = rootViewController as? UITabBarController {
+                    //                        rootViewController = tabBarController.selectedViewController
+                    //                    }
+                    
+                    //let vc =  nav?.viewControllers.first
+                    //nav?.present(alert, animated: true, completion: nil)
+                    
                 }
                 else {
                     

@@ -21,8 +21,9 @@ class LineChartCell: GraphChartTableViewCell {
     @IBOutlet weak var buttonForward:UIButton!
     @IBOutlet weak var buttonBackward:UIButton!
     var currentChart:DashboardCharts!
-    
-    
+    var frequencyPageIndex = 0
+    var frequencyPageSize = 2
+    var pageNumber = 0
     
     
     var hourOfDayDate = Date()
@@ -165,11 +166,14 @@ class LineChartCell: GraphChartTableViewCell {
             
         case .runs:
             
+            self.buttonForward.isEnabled = true
             let stringStartDate = LineChartCell.formatter.string(from: (charActivity?.startDate!)!)
             let stringEndDate = LineChartCell.formatter.string(from: (charActivity?.endDate!)!)
             labelAxisValue.text = stringStartDate + " - " + stringEndDate
             
-            self.handleRunsForDate(startDate:(charActivity?.startDate)! , endDate: (charActivity?.endDate)!)
+            let runs = self.getNextSetOfFrequencyRuns()
+            
+            self.handleRunsForDate(startDate:(charActivity?.startDate)! , endDate: (charActivity?.endDate)! ,runs: runs)
             
         case .hours_of_day:
             
@@ -268,7 +272,37 @@ class LineChartCell: GraphChartTableViewCell {
             self.handleWeeksOfMonthForDate(date: hourOfDayDate)
             
         case .runs:
-            break
+            
+            self.buttonForward.isEnabled = true
+            self.buttonBackward.isEnabled = true
+            pageNumber += 1
+            frequencyPageIndex = frequencyPageSize*pageNumber
+            let frequencySet = self.getNextSetOfFrequencyRuns()
+            
+            if frequencySet.count != 0 {
+                
+                let firstFrequency = frequencySet.first
+                let lastFrequency = frequencySet.last
+                let sTime = firstFrequency?["startTime"] as! String
+                let eTime = lastFrequency?["endTime"] as! String
+                
+                let startDate = Utilities.getDateFromString(dateString: sTime)
+                let endDate = Utilities.getDateFromString(dateString: eTime)
+                
+                let stringStartDate = LineChartCell.formatter.string(from: startDate!)
+                let stringEndDate = LineChartCell.formatter.string(from: endDate!)
+                labelAxisValue.text = stringStartDate + " - " + stringEndDate
+                
+                self.handleRunsForDate(startDate: startDate!, endDate: endDate! ,runs: frequencySet)
+
+            }
+            else {
+                xAxisTitles = []
+                plotPoints = []
+                self.graphView.reloadData()
+            }
+            
+            
         case .hours_of_day:
            
             
@@ -370,7 +404,36 @@ class LineChartCell: GraphChartTableViewCell {
             self.handleWeeksOfMonthForDate(date: hourOfDayDate)
             
         case .runs:
-            break
+            
+            self.buttonForward.isEnabled = true
+            self.buttonBackward.isEnabled = true
+            pageNumber -= 1
+            frequencyPageIndex = frequencyPageSize*pageNumber
+            let frequencySet = self.getNextSetOfFrequencyRuns()
+            
+            if frequencySet.count != 0 {
+                
+                let firstFrequency = frequencySet.first
+                let lastFrequency = frequencySet.last
+                let sTime = firstFrequency?["startTime"] as! String
+                let eTime = lastFrequency?["endTime"] as! String
+                
+                let startDate = Utilities.getDateFromString(dateString: sTime)
+                let endDate = Utilities.getDateFromString(dateString: eTime)
+                
+                let stringStartDate = LineChartCell.formatter.string(from: startDate!)
+                let stringEndDate = LineChartCell.formatter.string(from: endDate!)
+                labelAxisValue.text = stringStartDate + " - " + stringEndDate
+                
+                self.handleRunsForDate(startDate: startDate!, endDate: endDate! ,runs: frequencySet)
+            }
+            else {
+                xAxisTitles = []
+                plotPoints = []
+                self.graphView.reloadData()
+            }
+            
+            
         case .hours_of_day:
             
             
@@ -394,6 +457,31 @@ class LineChartCell: GraphChartTableViewCell {
             
         }
     }
+    
+    func getNextSetOfFrequencyRuns() -> Array<Dictionary<String,Any>>{
+       
+//        var pagesize = frequencyPageSize
+//        if (frequencyPageIndex + frequencyPageSize) > (charActivity?.frequencyRuns?.count)!{
+//            // pagesize = (frequencyPageIndex + frequencyPageSize) - (charActivity?.frequencyRuns?.count)!
+//            pagesize = (charActivity?.frequencyRuns?.count)!
+//        }
+//        pagesize =  pagesize - 1
+//        let frequencyRunsSet = charActivity?.frequencyRuns?[frequencyPageIndex..<pagesize]
+//        print("frequency \(frequencyRunsSet)")
+//        return frequencyRunsSet!
+        
+        var frequencyRunsSet:Array<Dictionary<String,Any>> = []
+        for index in frequencyPageIndex...((frequencyPageIndex+frequencyPageSize)-1){
+            if index < ((charActivity?.frequencyRuns?.count)!) && index >= 0{
+                let run = charActivity?.frequencyRuns?[index]
+                frequencyRunsSet.append(run!)
+            }
+          
+        }
+        print("frequency \(frequencyRunsSet)")
+        return frequencyRunsSet
+    }
+    
     
     //MARK: - Data Calculation
     
@@ -604,7 +692,7 @@ class LineChartCell: GraphChartTableViewCell {
         self.graphView.reloadData()
     }
     
-    func handleRunsForDate(startDate:Date,endDate:Date){
+    func handleRunsForDate(startDate:Date,endDate:Date,runs:Array<Dictionary<String,Any>>){
         
         let dataList:Array<DBStatisticsData> = currentChart.statList.filter({$0.startDate! >= startDate && $0.startDate! <= endDate})
         
@@ -613,9 +701,9 @@ class LineChartCell: GraphChartTableViewCell {
         xAxisTitles = []
         plotPoints = []
         
-        if ((charActivity?.frequencyRuns?.count)! > 0){
+        if ((runs.count) > 0){
             
-            for i in 0...(charActivity?.frequencyRuns?.count)! - 1 {
+            for i in 0...(runs.count - 1) {
                 
                 if array.count > i {
                     let value = array[i]
@@ -632,6 +720,8 @@ class LineChartCell: GraphChartTableViewCell {
             }
             
         }
+        plotPoints.append(points)
+        self.graphView.reloadData()
     }
     
     
@@ -680,6 +770,12 @@ class LineChartCell: GraphChartTableViewCell {
         let week = calender.component(.weekOfMonth, from:date)
         return week
     }
+    private static let oneTimeFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "hh:mma, MMM dd YYYY"
+        formatter.timeZone = TimeZone.init(abbreviation:"GMT")
+        return formatter
+    }()
 
 }
 extension LineChartCell:ORKValueRangeGraphChartViewDataSource{

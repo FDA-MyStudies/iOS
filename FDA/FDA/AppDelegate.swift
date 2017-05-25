@@ -22,6 +22,10 @@
         
         var appIsResignedButDidNotEnteredBackground:Bool? = false
         
+        var alertVCPresented:UIAlertController?
+        
+        var parentViewControllerForAlert:UIViewController?
+        
         let healthStore = HKHealthStore()
         var containerViewController: ResearchContainerViewController? {
             return window?.rootViewController as? ResearchContainerViewController
@@ -721,10 +725,30 @@
                         
                         var topVC = UIApplication.shared.keyWindow?.rootViewController
                         
+                        var parentController:UIViewController?
                         
                         while topVC?.presentedViewController != nil {
+                            
+                            parentController = topVC
+                            
                             topVC = topVC?.presentedViewController
                         }
+                        
+                       
+                        
+                        if topVC is UIAlertController{
+                            
+                            alertVCPresented = topVC as! UIAlertController?
+                            
+                            topVC?.dismiss(animated: true, completion: nil)
+                            topVC = parentController
+                            
+                            parentViewControllerForAlert = topVC
+                        }
+                        
+                        
+                        
+                        
                         
                         if (topVC?.presentedViewController?.isKind(of: ORKPasscodeViewController.self) == false && (topVC?.presentedViewController?.isKind(of: ORKTaskViewController.self))!) || ( topVC != nil && topVC?.isKind(of: ORKPasscodeViewController.self) == false) {
                             topVC!.present(passcodeViewController, animated: false, completion: nil)
@@ -1259,7 +1283,15 @@
             self.appIsResignedButDidNotEnteredBackground = false
             
             
+          
+            
             viewController.dismiss(animated: true, completion: nil)
+            
+            if alertVCPresented != nil {
+                parentViewControllerForAlert?.present(alertVCPresented!, animated: true, completion: nil)
+            }
+            
+            
         }
         
         func passcodeViewControllerDidFailAuthentication(_ viewController: UIViewController) {

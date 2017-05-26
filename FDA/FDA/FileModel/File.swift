@@ -110,7 +110,14 @@ class File{
                 self.name = dict[kFileTitleForStudy] as? String
             }
             if Utilities.isValidValue(someObject: dict[kFileLinkForStudy] as AnyObject)  {
+                
                 self.link = dict[kFileLinkForStudy] as? String
+                if (self.link?.contains("http"))!{
+                    //self.link = fileLink
+                }
+                else {
+                    self.localPath = "BundlePath"
+                }
             }
             
             

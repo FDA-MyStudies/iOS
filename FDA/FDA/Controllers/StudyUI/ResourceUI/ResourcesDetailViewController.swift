@@ -54,10 +54,20 @@ class ResourcesDetailViewController: UIViewController {
             if self.resource?.file?.mimeType == .pdf{
                 
                 if self.resource?.file?.localPath != nil {
-                    let path = resourcesDownloadPath + "/" + (self.resource?.file?.localPath)!
-                    let pdfData = FileDownloadManager.decrytFile(pathURL:URL(string:path))
-                    self.loadWebViewWithData(data: pdfData!)
-                    //self.loadWebViewWithPath(path: (self.resource?.file?.localPath)!)
+                    
+                    if self.resource?.file?.localPath == "BundlePath"{
+                        
+                        let path = Bundle.main.path(forResource: self.resource?.file?.link!, ofType: ".pdf")
+                        self.loadWebViewWithPath(path: path!)
+                    }
+                    else {
+                        let path = resourcesDownloadPath + "/" + (self.resource?.file?.localPath)!
+                        let pdfData = FileDownloadManager.decrytFile(pathURL:URL(string:path))
+                        self.loadWebViewWithData(data: pdfData!)
+
+                    }
+                    
+                                      //self.loadWebViewWithPath(path: (self.resource?.file?.localPath)!)
                 }
                 else {
                    //let path = resourcesDownloadPath + "/PDF_linking.pdf"
@@ -178,17 +188,33 @@ extension ResourcesDetailViewController:MFMailComposeViewControllerDelegate{
         
         if resource?.file?.localPath != nil {
             
-            do {
+            if self.resource?.file?.localPath == "BundlePath"{
                 
-                 let fullPath = resourcesDownloadPath + "/" + (self.resource?.file?.localPath)!
-                
-                 let data = FileDownloadManager.decrytFile(pathURL: URL.init(string: fullPath))
-                
-                composeVC.addAttachmentData(data!, mimeType: "application/pdf", fileName: (resource?.file?.name)!)
+                do {
+                    let file = Bundle.main.url(forResource: self.resource?.file?.link!, withExtension: "pdf")
+                    let data = try Data(contentsOf: file!)
+                    composeVC.addAttachmentData(data, mimeType: "application/pdf", fileName: (resource?.file?.name)!)
+                }
+                catch{
+                    
+                }
             }
-            catch let error as NSError{
-                 print("error \(error)")
+            else {
+                
+                do {
+                    
+                    let fullPath = resourcesDownloadPath + "/" + (self.resource?.file?.localPath)!
+                    
+                    let data = FileDownloadManager.decrytFile(pathURL: URL.init(string: fullPath))
+                    
+                    composeVC.addAttachmentData(data!, mimeType: "application/pdf", fileName: (resource?.file?.name)!)
+                }
+                catch let error as NSError{
+                    print("error \(error)")
+                }
             }
+            
+            
             
         }
         else {

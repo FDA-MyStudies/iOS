@@ -18,7 +18,7 @@
         
         var window: UIWindow?
         
-        var notificationDetails:Dictionary<String,Any>?
+        var notificationDetails:Dictionary<String,Any>? = Dictionary<String,Any>()
         
         var appIsResignedButDidNotEnteredBackground:Bool? = false
         
@@ -314,6 +314,11 @@
             if (UIApplication.shared.applicationState == UIApplicationState.background)||(UIApplication.shared.applicationState == UIApplicationState.inactive){
                 
             }
+            
+            let ud = UserDefaults.standard
+            ud.set(true, forKey: kShowNotification)
+            ud.synchronize()
+            
         }
         
         func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
@@ -418,7 +423,7 @@
                 
                 
                 
-                UIUtilities.showAlertMessageWithTwoActionsAndHandler(NSLocalizedString("Covarnt Updated", comment: ""), errorMessage: NSLocalizedString("The Consent Document for this study has been updated. Please review the revised Consent terms and provide your Informed Consent, to continue participating in the study.", comment: ""), errorAlertActionTitle: NSLocalizedString("Review", comment: ""),
+                UIUtilities.showAlertMessageWithTwoActionsAndHandler(NSLocalizedString("Consent Updated", comment: ""), errorMessage: NSLocalizedString("The Consent Document for this study has been updated. Please review the revised Consent terms and provide your Informed Consent, to continue participating in the study.", comment: ""), errorAlertActionTitle: NSLocalizedString("Review", comment: ""),
                                                                      errorAlertActionTitle2:nil, viewControllerUsed: topController,
                                                                      action1: {
                                                                         
@@ -1391,7 +1396,9 @@
             let userInfo = notification.request.content.userInfo
             print("REMOTE NOTIFICATION:" + "\(userInfo)")
             
-            
+            let ud = UserDefaults.standard
+            ud.set(true, forKey: kShowNotification)
+            ud.synchronize()
             
             
             completionHandler([UNNotificationPresentationOptions.alert, .sound, .badge])
@@ -1406,7 +1413,7 @@
             let userInfo = response.notification.request.content.userInfo
             print("REMOTE NOTIFICATION:" + "\(userInfo)")
             
-            if (UIApplication.shared.applicationState == UIApplicationState.background) {//|| (UIApplication.shared.applicationState == UIApplicationState.background){
+            if (UIApplication.shared.applicationState == UIApplicationState.active) {//|| (UIApplication.shared.applicationState == UIApplicationState.background){
                 UIApplication.shared.applicationIconBadgeNumber = 0
                 
                 self.handleLocalAndRemoteNotification(userInfoDetails: userInfo as! Dictionary<String, Any>)
@@ -1426,7 +1433,9 @@
         func addProgressIndicatorOnWindow(){
             
             let view = UINib(nibName: "ProgressView", bundle: nil).instantiate(withOwner: nil, options: nil)[0] as? UIView
-            view?.frame = UIScreen.main.bounds
+            var frame = UIScreen.main.bounds
+            frame.origin.y += 64
+            view?.frame = frame
             view?.tag = 50000
             self.addSubview(view!)
             view?.alpha = 0

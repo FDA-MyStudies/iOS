@@ -89,9 +89,19 @@ class Schedule{
         //get joiningDate
         let studyStatus = User.currentUser.participatedStudies.filter({$0.studyId == activity.studyId}).last
         print("joiningDate \(studyStatus?.joiningDate.description)")
+        
+         let startDateResult = (activity.startDate?.compare((studyStatus?.joiningDate)!))! as ComparisonResult
+        
+        if startDateResult == .orderedDescending {
+            self.startTime = activity.startDate
+        }
+        else {
+            self.startTime = studyStatus?.joiningDate
+        }
+        
         self.completionHandler = handler
         self.frequency = activity.frequencyType
-        self.startTime = studyStatus?.joiningDate //activity.startDate
+        //self.startTime = studyStatus?.joiningDate //activity.startDate
         self.endTime = activity.endDate
         self.activity = activity
         

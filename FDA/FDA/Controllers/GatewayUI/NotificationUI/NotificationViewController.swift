@@ -67,7 +67,21 @@ class NotificationViewController : UIViewController{
                 
                 //Gateway.instance.notification = notificationList
                 for notification in notificationList{
-                    self.notificationArray.append(notification)
+                    
+                   
+                    if notification.type == AppNotification.NotificationType.Study{
+                        
+                        let study = Gateway.instance.studies?.filter({$0.studyId == notification.studyId}).last
+                        
+                        if self.isUserJoined(study: study!){
+                            self.notificationArray.append(notification)
+                        }
+                    }
+                    else{
+                         self.notificationArray.append(notification)
+                    }
+                    
+                   
                 }
                 
                 self.tableView?.reloadData()
@@ -123,6 +137,18 @@ class NotificationViewController : UIViewController{
             UIUtilities.showAlertWithTitleAndMessage(title: "", message: NSLocalizedString(kMessageForStudyClosedState, comment: "") as NSString)
             
         }
+        
+        return false
+    }
+    
+     func isUserJoined(study:Study) -> Bool{
+        
+        let currentStudy = study
+        let participatedStatus = (currentStudy.userParticipateState.status)
+        if participatedStatus == .inProgress {
+            return true
+        }
+        
         
         return false
     }
@@ -217,20 +243,21 @@ extension NotificationViewController : UITableViewDelegate{
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
-        let appNotif = (Gateway.instance.notification?[indexPath.row])!
+        let appNotification = notificationArray[indexPath.row]
+        let appNotif = appNotification as! AppNotification
+        if appNotif.type == AppNotification.NotificationType.Study{
         
         if Utilities.isValidValue(someObject: appNotif.studyId as AnyObject?) {
             
-            if Gateway.instance.studies!.contains(where: { $0.studyId == appNotif.studyId }){
-                
-              let index =  Gateway.instance.studies?.index(where: { $0.studyId == appNotif.studyId })
-                
-                //check status for study
-                if NotificationViewController.checkForStudyState(study: (Gateway.instance.studies?[index!])!) {
-                    Study.updateCurrentStudy(study:(Gateway.instance.studies?[index!])! )
-                    self.pushToStudyDashboard(type:appNotif.subType )
-                }
+            let study = Gateway.instance.studies?.filter({$0.studyId == appNotif.studyId}).last
+            
+            if self.isUserJoined(study: study!){
+                Study.updateCurrentStudy(study:study! )
+                self.pushToStudyDashboard(type:appNotif.subType )
+
             }
+        
+        }
         }
     }
 }

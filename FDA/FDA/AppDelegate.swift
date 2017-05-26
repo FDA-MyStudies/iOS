@@ -24,6 +24,8 @@
         
         var alertVCPresented:UIAlertController?
         
+        var isPasscodePresented:Bool? =  false
+        
         var parentViewControllerForAlert:UIViewController?
         
         let healthStore = HKHealthStore()
@@ -718,6 +720,8 @@
                             taskViewController.delegate = viewController as? ORKTaskViewControllerDelegate
                         }
                         taskViewController.isNavigationBarHidden = true
+                        
+                        isPasscodePresented = true
                         viewController.present(taskViewController, animated: false, completion: nil)
                     }
                     else{
@@ -756,6 +760,7 @@
                         
                         
                         if (topVC?.presentedViewController?.isKind(of: ORKPasscodeViewController.self) == false && (topVC?.presentedViewController?.isKind(of: ORKTaskViewController.self))!) || ( topVC != nil && topVC?.isKind(of: ORKPasscodeViewController.self) == false) {
+                            isPasscodePresented = true
                             topVC!.present(passcodeViewController, animated: false, completion: nil)
                         }
                         
@@ -1359,7 +1364,9 @@
             
           
             
-            viewController.dismiss(animated: true, completion: nil)
+            viewController.dismiss(animated: true, completion: {
+                self.isPasscodePresented = false
+            })
             
             if alertVCPresented != nil {
                 parentViewControllerForAlert?.present(alertVCPresented!, animated: true, completion: nil)
@@ -1369,6 +1376,9 @@
         }
         
         func passcodeViewControllerDidFailAuthentication(_ viewController: UIViewController) {
+            
+            
+            
         }
         
         func passcodeViewControllerText(forForgotPasscode viewController: UIViewController) -> String {

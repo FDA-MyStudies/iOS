@@ -52,48 +52,58 @@ class StudyListViewController: UIViewController {
          self.addRightNavigationItem()
         
         
-        Study.currentStudy = nil
-        
-        let ud = UserDefaults.standard
-        
-        var ispasscodePending:Bool? = false
-        
-        if (ud.value(forKey: kPasscodeIsPending) != nil){
-            ispasscodePending = ud.value(forKey: kPasscodeIsPending) as! Bool?
-        }
+        let appdelegate = UIApplication.shared.delegate as! AppDelegate
         
         
-        if ispasscodePending == true{
+        
             
-            if User.currentUser.userType == .FDAUser {
-                UserServices().getUserProfile(self as NMWebServiceDelegate)
+            Study.currentStudy = nil
+            
+            let ud = UserDefaults.standard
+            
+            var ispasscodePending:Bool? = false
+            
+            if (ud.value(forKey: kPasscodeIsPending) != nil){
+                ispasscodePending = ud.value(forKey: kPasscodeIsPending) as! Bool?
             }
             
             
-        }
-        
-        
-        
-        self.labelHelperText.isHidden = true
-        self.setNavigationBarItem()
-        self.navigationController?.setNavigationBarHidden(false, animated: true)
-        self.navigationController?.navigationBar.isHidden = false
-        
-        if User.currentUser.userType == .FDAUser {
-            
-            self.tableView?.estimatedRowHeight = 145
-            self.tableView?.rowHeight = UITableViewAutomaticDimension
+            if ispasscodePending == true{
+                
+                if User.currentUser.userType == .FDAUser {
+                    UserServices().getUserProfile(self as NMWebServiceDelegate)
+                }
+                
+                
+            }
             
             
             
-            self.sendRequestToGetUserPreference()
-          //  self.sendRequestToGetStudyList()
-        }
-        else {
-            self.tableView?.estimatedRowHeight = 140
-            self.tableView?.rowHeight = UITableViewAutomaticDimension
-            self.sendRequestToGetStudyList()
-        }
+            self.labelHelperText.isHidden = true
+            self.setNavigationBarItem()
+            self.navigationController?.setNavigationBarHidden(false, animated: true)
+            self.navigationController?.navigationBar.isHidden = false
+            
+            if User.currentUser.userType == .FDAUser {
+                
+                self.tableView?.estimatedRowHeight = 145
+                self.tableView?.rowHeight = UITableViewAutomaticDimension
+                
+                if (self.fdaSlideMenuController()?.isLeftOpen())!{
+                   
+                }
+                else {
+                     self.sendRequestToGetUserPreference()
+                }
+                
+                
+                //  self.sendRequestToGetStudyList()
+            }
+            else {
+                self.tableView?.estimatedRowHeight = 140
+                self.tableView?.rowHeight = UITableViewAutomaticDimension
+                self.sendRequestToGetStudyList()
+            }
         
         //self.loadStudiesFromDatabase()
         

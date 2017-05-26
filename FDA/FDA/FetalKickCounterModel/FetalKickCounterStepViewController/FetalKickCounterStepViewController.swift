@@ -325,10 +325,23 @@ extension FetalKickCounterStepViewController:UITextFieldDelegate {
             self.kickCounter = Int((counterTextField?.text)!)
             
             if textField.text?.characters.count == 2{
-                textField.text = "0" + textField.text!
+                counterTextField?.text = "0" + textField.text!
                 self.kickCounter  = (Int((counterTextField?.text)!))
             }
-            
+            else if (textField.text?.characters.count)! > 3{
+                let finalValue = (Int((counterTextField?.text)!))
+                
+                if finalValue! < 10{
+                    counterTextField?.text = "00" + "\(finalValue!)"
+                }
+                else if finalValue! >= 10 && finalValue! < 100{
+                     counterTextField?.text = "0" + "\(finalValue!)"
+                }
+                else {
+                     counterTextField?.text = "\(finalValue!)"
+                }
+                
+            }
         }
         
     }
@@ -340,6 +353,7 @@ extension FetalKickCounterStepViewController:UITextFieldDelegate {
         if textField == counterTextField && finalString.characters.count > 0{
             
             if Int(finalString)! <= 999{
+                
                 return true
             }
             else{

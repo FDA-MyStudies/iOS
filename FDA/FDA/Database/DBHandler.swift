@@ -754,40 +754,61 @@ class DBHandler: NSObject {
                 //let run = runs.filter({$0.startDate <= date && $0.endDate > date}).first //current run
                 
                 let completedRuns = runs.filter({$0.isCompleted == true})
-                let incompleteRuns = runsBeforeToday.count - completedRuns.count
+                //let incompleteRuns = runsBeforeToday.count - completedRuns.count
                 
                 
                 activity.compeltedRuns = completedRuns.count
-                activity.incompletedRuns = (incompleteRuns < 0) ? 0 :incompleteRuns
+                //activity.incompletedRuns = (incompleteRuns < 0) ? 0 :incompleteRuns
                 activity.currentRunId =  (run != nil) ? (run?.runId)! : runsBeforeToday.count
                 activity.currentRun = run
                 
                 
+                //check for completed runs
+                //if activity.compeltedRuns == 0 &&  dbActivity.completedRuns != 0 {
+                    activity.compeltedRuns = dbActivity.completedRuns
+                    
+                
+                    
+                //}
+                
+                let userStatus = UserActivityStatus()
+                userStatus.activityId = dbActivity.actvityId
+                userStatus.activityRunId = String(activity.currentRunId)
+                
+                if String(activity.currentRunId) == dbActivity.currentRunId {
+                    userStatus.status = UserActivityStatus.ActivityStatus(rawValue:dbActivity.participationStatus)!
+                }
+                
+                userStatus.compeltedRuns = activity.compeltedRuns
+                userStatus.incompletedRuns = activity.incompletedRuns
+                userStatus.totalRuns = activity.totalRuns
+                
+                let incompleteRuns = activity.currentRunId - activity.compeltedRuns
+                activity.incompletedRuns = (incompleteRuns < 0) ? 0 :incompleteRuns
+                if activity.currentRun == nil {
+                    userStatus.status = UserActivityStatus.ActivityStatus.abandoned
+                  
+                }
+                else {
+                    
+                    if userStatus.status != UserActivityStatus.ActivityStatus.completed {
+
+                        var incompleteRuns = activity.currentRunId - activity.compeltedRuns
+                        incompleteRuns -= 1
+                        activity.incompletedRuns = (incompleteRuns < 0) ? 0 :incompleteRuns
+                    }
+                   
+                }
+                activity.userParticipationStatus = userStatus
+                
+                
+                
+                //append to user class participatesStudies also
+                User.currentUser.participatedActivites.append(userStatus)
+                
             }
             
-            //check for completed runs
-            if activity.compeltedRuns < dbActivity.completedRuns {
-                activity.compeltedRuns = dbActivity.completedRuns
-            }
             
-            let userStatus = UserActivityStatus()
-            userStatus.activityId = dbActivity.actvityId
-            userStatus.activityRunId = String(activity.currentRunId)
-            
-            if String(activity.currentRunId) == dbActivity.currentRunId {
-                userStatus.status = UserActivityStatus.ActivityStatus(rawValue:dbActivity.participationStatus)!
-            }
-            
-            userStatus.compeltedRuns = activity.compeltedRuns
-            userStatus.incompletedRuns = activity.incompletedRuns
-            userStatus.totalRuns = activity.totalRuns
-            if activity.currentRun == nil {
-                userStatus.status = UserActivityStatus.ActivityStatus.abandoned
-            }
-            activity.userParticipationStatus = userStatus
-            
-            //append to user class participatesStudies also
-            User.currentUser.participatedActivites.append(userStatus)
 
             
             
@@ -889,6 +910,7 @@ class DBHandler: NSObject {
             
             dbActivity?.currentRunId = activity.userParticipationStatus.activityRunId
             dbActivity?.participationStatus = activity.userParticipationStatus.status.rawValue
+            dbActivity?.completedRuns = activity.compeltedRuns
             
 //            dbStudy?.participatedStatus = study.userParticipateState.status.rawValue
 //            dbStudy?.participatedId = study.userParticipateState.participantId

@@ -27,6 +27,7 @@ class ActivitiesViewController : UIViewController{
     var lastFetelKickIdentifer:String = ""  //TEMP
     var selectedIndexPath:IndexPath? = nil
     var isAnchorDateSet:Bool = false
+    var taskControllerPresented = false
     
 //MARK:- Viewcontroller Lifecycle
     override func viewDidLoad() {
@@ -63,7 +64,11 @@ class ActivitiesViewController : UIViewController{
         super.viewWillAppear(animated)
         UIApplication.shared.statusBarStyle = .default
         
-        self.checkForActivitiesUpdates()
+        if !taskControllerPresented {
+            taskControllerPresented = false
+            self.checkForActivitiesUpdates()
+        }
+        
         
     }
     
@@ -226,9 +231,8 @@ class ActivitiesViewController : UIViewController{
         }
         catch let error as NSError{
             print("\(error)")
-        }
+        }*/
  
-*/
         
         if Utilities.isValidObject(someObject: Study.currentActivity?.steps as AnyObject?){
             
@@ -243,32 +247,33 @@ class ActivitiesViewController : UIViewController{
         
         
         if task != nil {
-        
-        
-        if Study.currentActivity?.currentRun.restortionData != nil {
-            let restoredData = Study.currentActivity?.currentRun.restortionData
             
-            let result:ORKResult?
-            taskViewController = ORKTaskViewController(task: task, restorationData: restoredData, delegate: self)
+            
+            if Study.currentActivity?.currentRun.restortionData != nil {
+                let restoredData = Study.currentActivity?.currentRun.restortionData
+                
+                let result:ORKResult?
+                taskViewController = ORKTaskViewController(task: task, restorationData: restoredData, delegate: self)
+            }
+            else{
+                
+                taskViewController = ORKTaskViewController(task:task, taskRun: nil)
+                taskViewController?.outputDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+            }
+            
+            taskViewController?.showsProgressInNavigationBar = true
+            
+            UIView.appearance(whenContainedInInstancesOf: [ORKTaskViewController.self]).tintColor = kUIColorForSubmitButtonBackground
+            
+            taskViewController?.delegate = self
+            UIApplication.shared.statusBarStyle = .default
+            taskControllerPresented = true
+            present(taskViewController!, animated: true, completion: nil)
         }
         else{
-    
-         taskViewController = ORKTaskViewController(task:task, taskRun: nil)
-             taskViewController?.outputDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+            UIUtilities.showAlertMessage(kAlertMessageText, errorMessage: NSLocalizedString("Invalid Data!", comment: ""), errorAlertActionTitle: NSLocalizedString("OK", comment: ""), viewControllerUsed: self)
         }
         
-       taskViewController?.showsProgressInNavigationBar = true
-        
-        UIView.appearance(whenContainedInInstancesOf: [ORKTaskViewController.self]).tintColor = kUIColorForSubmitButtonBackground
-        
-        taskViewController?.delegate = self
-        UIApplication.shared.statusBarStyle = .default
-        present(taskViewController!, animated: true, completion: nil)
-        }
-        else{
-             UIUtilities.showAlertMessage(kAlertMessageText, errorMessage: NSLocalizedString("Invalid Data!", comment: ""), errorAlertActionTitle: NSLocalizedString("OK", comment: ""), viewControllerUsed: self)
-        }
-      
     }
     
     
@@ -392,17 +397,43 @@ class ActivitiesViewController : UIViewController{
     
     
     func updateCompletionAdherence(){
+
+        
+       // let rowDetail = tableViewSections[indexPath.section]
+        
+        var totalRuns = 0
+        var totalCompletedRuns = 0
+        var totalIncompletedRuns = 0
+        for detail in tableViewSections {
+            let activities = detail["activities"] as! Array<Activity>
+            for activity in activities {
+                totalRuns += activity.totalRuns
+                totalIncompletedRuns += activity.incompletedRuns
+                totalCompletedRuns += activity.compeltedRuns
+            }
+        }
+        
+        
+        
+        
+        let completion = ceil( Double(self.divide(lhs: (totalCompletedRuns + totalIncompletedRuns)*100, rhs: totalRuns)) )
+        let adherence = ceil (Double(self.divide(lhs: totalCompletedRuns*100, rhs: (totalCompletedRuns + totalIncompletedRuns))))
         
         let studyid = (Study.currentStudy?.studyId)!
-        DBHandler.loadAllStudyRuns(studyId: studyid) { (completion, adherence) in
-            //
-            let status = User.currentUser.udpateCompletionAndAdherence(studyId:studyid, completion: completion, adherence: adherence)
+//        DBHandler.loadAllStudyRuns(studyId: studyid) { (completion, adherence) in
+//            //
+            let status = User.currentUser.udpateCompletionAndAdherence(studyId:studyid, completion: Int(completion), adherence: Int(adherence))
             UserServices().udpateCompletionAdherence(studyStauts: status, delegate: self)
             DBHandler.updateStudyParticipationStatus(study: Study.currentStudy!)
-        }
+//        }
     }
     
-    
+    func divide(lhs: Int, rhs: Int) -> Int {
+        if rhs == 0 {
+            return 0
+        }
+        return lhs/rhs
+    }
     /**
      
      Used to update Activity Status To InProgress
@@ -798,8 +829,8 @@ extension ActivitiesViewController:ORKTaskViewControllerDelegate{
             
         }
         taskViewController.dismiss(animated: true, completion: {
-            self.tableView?.reloadRows(at: [self.selectedIndexPath!], with: .automatic)
-            
+            //self.tableView?.reloadRows(at: [self.selectedIndexPath!], with: .automatic)
+            self.tableView?.reloadData()
             if self.isAnchorDateSet {
                 self.registerNotificationForAnchorDate()
             }

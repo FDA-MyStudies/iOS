@@ -764,6 +764,10 @@ class UserActivityStatus{
                 self.activityRunId = detail[kActivityRunId] as! String
             }
             
+            let runDetail = detail["activityRun"] as! Dictionary<String,Any>
+            if Utilities.isValidValue(someObject: runDetail["completed"] as AnyObject){
+                self.compeltedRuns = runDetail["completed"] as! Int
+            }
             
             if Utilities.isValidValue(someObject: detail[kActivityStatus] as AnyObject){
                 

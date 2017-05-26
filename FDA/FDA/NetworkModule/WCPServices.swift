@@ -331,32 +331,37 @@ class WCPServices: NSObject {
         
         if Utilities.isValidObject(someObject: dashboard as AnyObject?){
             
-            //stats
-            let statsList = dashboard["statistics"] as! Array<Dictionary<String,Any>>
-            var listOfStats:Array<DashboardStatistics>! = []
-            for stat in statsList{
+            if Study.currentStudy != nil {
                 
-                let dashboardStat = DashboardStatistics.init(detail: stat)
-                listOfStats.append(dashboardStat)
+                //stats
+                let statsList = dashboard["statistics"] as! Array<Dictionary<String,Any>>
+                var listOfStats:Array<DashboardStatistics>! = []
+                for stat in statsList{
+                    
+                    let dashboardStat = DashboardStatistics.init(detail: stat)
+                    listOfStats.append(dashboardStat)
+                }
+                
+                StudyDashboard.instance.statistics = listOfStats
+                //save stats in database
+                DBHandler.saveDashBoardStatistics(studyId: (Study.currentStudy?.studyId)!, statistics: listOfStats)
+                
+                //charts
+                let chartList = dashboard["charts"] as! Array<Dictionary<String,Any>>
+                var listOfCharts:Array<DashboardCharts>! = []
+                for chart in chartList{
+                    
+                    let dashboardChart = DashboardCharts.init(detail: chart)
+                    listOfCharts.append(dashboardChart)
+                }
+                
+                StudyDashboard.instance.charts = listOfCharts
+                
+                //save charts in database
+                DBHandler.saveDashBoardCharts(studyId: (Study.currentStudy?.studyId)!, charts: listOfCharts)
             }
             
-            StudyDashboard.instance.statistics = listOfStats
-            //save stats in database
-            DBHandler.saveDashBoardStatistics(studyId: (Study.currentStudy?.studyId)!, statistics: listOfStats)
             
-            //charts
-            let chartList = dashboard["charts"] as! Array<Dictionary<String,Any>>
-            var listOfCharts:Array<DashboardCharts>! = []
-            for chart in chartList{
-                
-                let dashboardChart = DashboardCharts.init(detail: chart)
-                listOfCharts.append(dashboardChart)
-            }
-            
-            StudyDashboard.instance.charts = listOfCharts
-            
-            //save charts in database
-            DBHandler.saveDashBoardCharts(studyId: (Study.currentStudy?.studyId)!, charts: listOfCharts)
             
         }
     }

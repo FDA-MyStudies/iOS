@@ -482,8 +482,11 @@ extension SignInViewController:NMWebServiceDelegate {
         }
         else
         {
-        
+            let delegate = UIApplication.shared.delegate as! AppDelegate
+            delegate.calculateTimeZoneChange()
         if User.currentUser.verified == true {
+            
+            
             
             ORKPasscodeViewController.removePasscodeFromKeychain()
             

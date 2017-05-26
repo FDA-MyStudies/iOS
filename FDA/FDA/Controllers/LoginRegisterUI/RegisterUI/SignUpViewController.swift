@@ -542,6 +542,8 @@ extension SignUpViewController:NMWebServiceDelegate {
        self.removeProgressIndicator()
         if requestName .isEqual(to: RegistrationMethods.register.description)   {
             
+            let delegate = UIApplication.shared.delegate as! AppDelegate
+            delegate.calculateTimeZoneChange()
             ORKPasscodeViewController.removePasscodeFromKeychain()
             self.navigateToVerificationController()
         }

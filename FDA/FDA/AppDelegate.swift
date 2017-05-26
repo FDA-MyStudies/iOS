@@ -18,7 +18,7 @@
         
         var window: UIWindow?
         
-        var notificationDetails:Dictionary<String,Any>?
+        var notificationDetails:Dictionary<String,Any>? = Dictionary<String,Any>()
         
         var appIsResignedButDidNotEnteredBackground:Bool? = false
         
@@ -418,7 +418,7 @@
                 
                 
                 
-                UIUtilities.showAlertMessageWithTwoActionsAndHandler(NSLocalizedString("Covarnt Updated", comment: ""), errorMessage: NSLocalizedString("The Consent Document for this study has been updated. Please review the revised Consent terms and provide your Informed Consent, to continue participating in the study.", comment: ""), errorAlertActionTitle: NSLocalizedString("Review", comment: ""),
+                UIUtilities.showAlertMessageWithTwoActionsAndHandler(NSLocalizedString("Consent Updated", comment: ""), errorMessage: NSLocalizedString("The Consent Document for this study has been updated. Please review the revised Consent terms and provide your Informed Consent, to continue participating in the study.", comment: ""), errorAlertActionTitle: NSLocalizedString("Review", comment: ""),
                                                                      errorAlertActionTitle2:nil, viewControllerUsed: topController,
                                                                      action1: {
                                                                         
@@ -1406,7 +1406,7 @@
             let userInfo = response.notification.request.content.userInfo
             print("REMOTE NOTIFICATION:" + "\(userInfo)")
             
-            if (UIApplication.shared.applicationState == UIApplicationState.background) {//|| (UIApplication.shared.applicationState == UIApplicationState.background){
+            if (UIApplication.shared.applicationState == UIApplicationState.active) {//|| (UIApplication.shared.applicationState == UIApplicationState.background){
                 UIApplication.shared.applicationIconBadgeNumber = 0
                 
                 self.handleLocalAndRemoteNotification(userInfoDetails: userInfo as! Dictionary<String, Any>)

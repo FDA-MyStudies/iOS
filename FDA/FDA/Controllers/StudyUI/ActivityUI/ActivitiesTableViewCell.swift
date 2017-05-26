@@ -87,13 +87,22 @@ class ActivitiesTableViewCell: UITableViewCell {
         if availablityStatus != .upcoming {
             
             labelRunStatus?.isHidden = false
-            labelStatus?.isHidden = false
+           
             
             //update activity run details as compelted and missed
             self.updateUserRunStatus(activity: activity)
 
             //update user activity status
             self.setUserStatusForActivity(activity: activity)
+            
+            
+            if activity.currentRunId == 0 {
+                labelStatus?.isHidden = true
+            }
+            else {
+                 labelStatus?.isHidden = false
+            }
+            
             
             //calculate activity runs and save in database
             /*
@@ -273,8 +282,8 @@ class ActivitiesTableViewCell: UITableViewCell {
                 runStartTimingsList.append(runStartTimeAsString)
             }
             let runStartTime =  runStartTimingsList.joined(separator: " | ") //ActivitiesTableViewCell.timeFormatter.string(from: startDate!)
-            let dailyStartDate =  ActivitiesTableViewCell.formatter.string(from: startDate!)
-            let endDate = ActivitiesTableViewCell.formatter.string(from: endDate!)
+            let dailyStartDate =  ActivitiesTableViewCell.dailyActivityFormatter.string(from: startDate!)
+            let endDate = ActivitiesTableViewCell.dailyActivityFormatter.string(from: endDate!)
             labelTime?.text = runStartTime  + "\n" +  dailyStartDate + " to " + endDate
             
         case .Weekly:
@@ -317,6 +326,13 @@ class ActivitiesTableViewCell: UITableViewCell {
     private static let formatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateFormat = "MMM dd YYYY"
+        formatter.timeZone = TimeZone.init(abbreviation:"GMT")
+        return formatter
+    }()
+    
+    private static let dailyActivityFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "MMM dd YYYY hh:mma"
         formatter.timeZone = TimeZone.init(abbreviation:"GMT")
         return formatter
     }()

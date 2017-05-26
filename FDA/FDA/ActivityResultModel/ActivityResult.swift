@@ -181,7 +181,7 @@ class ActivityResult {
             }
             
             
-            activityDict?[kActivityResult] = activityResultArray
+            activityDict?[kActivityResults] = activityResultArray
         }
         
         return activityDict!

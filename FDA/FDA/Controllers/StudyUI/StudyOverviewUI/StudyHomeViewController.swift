@@ -37,6 +37,7 @@ class StudyHomeViewController : UIViewController{
     @IBOutlet var viewSeperater: UIView?
     
     var isStudyBookMarked = false
+    var isGettingJoiningDate = false
     var delegate:StudyHomeViewDontrollerDelegate?
     var hideViewConsentAfterJoining = false
     var pageViewController: PageViewController? {
@@ -637,8 +638,11 @@ extension StudyHomeViewController:NMWebServiceDelegate {
         if requestName as String == RegistrationMethods.updateEligibilityConsentStatus.method.methodName{
             
             if( User.currentUser.getStudyStatus(studyId:(Study.currentStudy?.studyId)! ) == UserStudyStatus.StudyStatus.inProgress){
-                self.pushToStudyDashboard()
-                self.removeProgressIndicator()
+                
+                isGettingJoiningDate = true
+                UserServices().getStudyStates(self)
+                
+               
             } 
         }
         //self.removeProgressIndicator()
@@ -650,8 +654,16 @@ extension StudyHomeViewController:NMWebServiceDelegate {
         
         if (requestName as String == RegistrationMethods.studyState.description){
             
-            self.removeProgressIndicator()
-            self.handleResponseForStudyState()
+            if isGettingJoiningDate {
+                self.pushToStudyDashboard()
+                self.removeProgressIndicator()
+                isGettingJoiningDate = false
+            }
+            else {
+                self.removeProgressIndicator()
+                self.handleResponseForStudyState()
+            }
+           
             
         }
         

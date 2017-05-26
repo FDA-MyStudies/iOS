@@ -86,9 +86,12 @@ class Schedule{
    
     func getRunsForActivity(activity:Activity,handler:@escaping (Array<ActivityRun>) -> ()){
         
+        //get joiningDate
+        let studyStatus = User.currentUser.participatedStudies.filter({$0.studyId == activity.studyId}).last
+        print("joiningDate \(studyStatus?.joiningDate.description)")
         self.completionHandler = handler
         self.frequency = activity.frequencyType
-        self.startTime = activity.startDate
+        self.startTime = studyStatus?.joiningDate //activity.startDate
         self.endTime = activity.endDate
         self.activity = activity
         

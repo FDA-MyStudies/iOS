@@ -600,7 +600,11 @@ class ActivityStepResult{
             let stepTypeResult = questionstepResult as! ORKLocationQuestionResult
             
             if stepTypeResult.locationAnswer != nil && CLLocationCoordinate2DIsValid((stepTypeResult.locationAnswer?.coordinate)! ){
-                self.value = "\(stepTypeResult.locationAnswer?.coordinate.latitude)" + "," + "\(stepTypeResult.locationAnswer?.coordinate.longitude)"
+                
+                let lat = stepTypeResult.locationAnswer?.coordinate.latitude
+                let long = stepTypeResult.locationAnswer?.coordinate.longitude
+                
+                self.value = "\(lat!)" + "," + "\(long!)"
             }
             else{
                 self.value = "0.0,0.0"

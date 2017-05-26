@@ -958,6 +958,33 @@
                   
                   "options": []
                   
+                  },
+                  {
+                  
+                  "type": "question",
+                  
+                  "resultType": "location",
+                  
+                  "key": "locationCheckKey",
+                  
+                  "title": "locationCheckTitle",
+                  
+                  "skippable": false,
+                  
+                  "groupName": "Basic",
+                  
+                  "repeatable": false,
+                  
+                  "repeatableText": "abcd",
+                  
+                  "destinations": [],
+                  
+                  "format": {
+                  
+                  "useCurrentLocation": true
+                  
+                  }
+                  
                   }
                   
                   ]

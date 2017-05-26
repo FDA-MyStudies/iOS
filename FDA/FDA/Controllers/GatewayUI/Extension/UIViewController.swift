@@ -55,12 +55,12 @@ extension UIViewController {
     func addProgressIndicator(){
         
         self.navigationItem.leftBarButtonItem?.isEnabled = false
-        self.navigationItem.rightBarButtonItem?.isEnabled = false
+        self.navigationItem.rightBarButtonItem?.isEnabled = true
         self.navigationItem.backBarButtonItem?.isEnabled = false
         slideMenuController()?.removeLeftGestures()
         slideMenuController()?.view.isUserInteractionEnabled = false
         
-        
+        self.navigationController?.navigationBar.isUserInteractionEnabled = false
         
         var view = self.view.viewWithTag(5000)
         if view == nil {
@@ -83,6 +83,8 @@ extension UIViewController {
         self.navigationItem.leftBarButtonItem?.isEnabled = true
         self.navigationItem.rightBarButtonItem?.isEnabled = true
         self.navigationItem.backBarButtonItem?.isEnabled = true
+        
+         self.navigationController?.navigationBar.isUserInteractionEnabled = true
         
         let view = self.view.viewWithTag(5000) //as UIView
         

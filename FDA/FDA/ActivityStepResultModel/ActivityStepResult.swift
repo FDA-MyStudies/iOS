@@ -359,7 +359,7 @@ class ActivityStepResult{
                     for i in 0..<2 {
                         var resultDict:Dictionary<String, Any>? =  Dictionary()
                         
-                        resultDict?[kActivityActiveKeyResultType] = ActiveStepResultType.numeric
+                        resultDict?[kActivityActiveKeyResultType] = ActiveStepResultType.numeric.rawValue
                         
                         
                         if i == 0{ //

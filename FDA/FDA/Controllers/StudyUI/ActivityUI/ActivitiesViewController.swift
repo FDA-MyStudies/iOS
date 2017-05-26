@@ -193,23 +193,23 @@ class ActivitiesViewController : UIViewController{
      */
     func createActivity(){
         
-    
-//        let filePath  = Bundle.main.path(forResource: "Labkey_Activity", ofType: "json")
-//        
-//        //let filePath  = Bundle.main.path(forResource: "FetalKickTest", ofType: "json")
-//        
-//        let data = NSData(contentsOfFile: filePath!)
-//        do {
-//            let dataDict = try JSONSerialization.jsonObject(with: data! as Data, options: []) as? Dictionary<String,Any>
-//            
-//            Study.currentActivity?.setActivityMetaData(activityDict:dataDict?["Result"] as! Dictionary<String, Any>)
-//            
-//        }
-//        catch let error as NSError{
-//            print("\(error)")
-//        }
+    /*
+        let filePath  = Bundle.main.path(forResource: "Labkey_Activity", ofType: "json")
+        
+        //let filePath  = Bundle.main.path(forResource: "FetalKickTest", ofType: "json")
+        
+        let data = NSData(contentsOfFile: filePath!)
+        do {
+            let dataDict = try JSONSerialization.jsonObject(with: data! as Data, options: []) as? Dictionary<String,Any>
+            
+            Study.currentActivity?.setActivityMetaData(activityDict:dataDict?["Result"] as! Dictionary<String, Any>)
+            
+        }
+        catch let error as NSError{
+            print("\(error)")
+        }
  
- 
+ */
         
         if Utilities.isValidObject(someObject: Study.currentActivity?.steps as AnyObject?){
             
@@ -650,6 +650,15 @@ extension ActivitiesViewController:NMWebServiceDelegate {
         Logger.sharedInstance.info("requestname : \(requestName)")
         self.removeProgressIndicator()
         
+        if error.code == 401 { //unauthorized
+            UIUtilities.showAlertMessageWithActionHandler(kErrorTitle, message: error.localizedDescription, buttonTitle: kTitleOk, viewControllerUsed: self, action: {
+                self.fdaSlideMenuController()?.navigateToHomeAfterUnauthorizedAccess()
+            })
+        }
+        else
+        {
+        
+        
         if requestName as String == RegistrationMethods.activityState.method.methodName{
             //self.sendRequesToGetActivityList()
             self.loadActivitiesFromDatabase()
@@ -672,6 +681,7 @@ extension ActivitiesViewController:NMWebServiceDelegate {
         else {
             UIUtilities.showAlertWithTitleAndMessage(title:NSLocalizedString(kErrorTitle, comment: "") as NSString, message: error.localizedDescription as NSString)
         }
+    }
     }
 }
 
@@ -730,6 +740,32 @@ extension ActivitiesViewController:ORKTaskViewControllerDelegate{
                
                 Study.currentActivity?.userStatus = .completed
                 
+                
+                if ActivityBuilder.currentActivityBuilder.actvityResult?.type == ActivityType.activeTask{
+                    
+                    
+                    if  (taskViewController.result.results?.count)! > 0 {
+                        
+                        let orkStepResult:ORKStepResult? = taskViewController.result.results?[2] as! ORKStepResult
+                        if (orkStepResult?.results?.count)! > 0 {
+                            
+                            let fetalKickResult:FetalKickCounterTaskResult? = orkStepResult?.results?.first as! FetalKickCounterTaskResult
+                            
+                            let study = Study.currentStudy
+                            let activity = Study.currentActivity
+                          
+                            
+                            let value = Float((fetalKickResult?.totalKickCount)!)
+                            let dict = ActivityBuilder.currentActivityBuilder.activity?.steps?.first!
+                            let key = dict?[kActivityStepKey] as! String
+                            
+                            DBHandler.saveStatisticsDataFor(activityId: (activity?.actvityId)!, key: key, data:value)
+                            
+                        }
+                        
+                    }
+                    
+                }
                 
                 
                 //send response to labkey

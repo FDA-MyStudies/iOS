@@ -46,8 +46,8 @@ struct WCPServerURLConstants {
     //TODO: Set the server end points
     
     //LabKey
-    //static let ProductionURL =  "https://hphci-fdama-te-wcp-01.labkey.com/StudyMetaData/"
-    //static let DevelopmentURL = "https://hphci-fdama-te-wcp-01.labkey.com/StudyMetaData/"
+    static let ProductionURL =  "https://hphci-fdama-te-wcp-01.labkey.com/StudyMetaData/"
+    static let DevelopmentURL = "https://hphci-fdama-te-wcp-01.labkey.com/StudyMetaData/"
     
     
     //UAT
@@ -56,8 +56,8 @@ struct WCPServerURLConstants {
 
     
     //New SerVerForDevelopment
-    static let ProductionURL = "http://192.168.0.26:8080/StudyMetaData/"
-    static let DevelopmentURL = "http://192.168.0.26:8080/StudyMetaData/"
+    //static let ProductionURL = "http://192.168.0.26:8080/StudyMetaData/"
+    //static let DevelopmentURL = "http://192.168.0.26:8080/StudyMetaData/"
     
 
     

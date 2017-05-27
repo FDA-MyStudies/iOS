@@ -314,6 +314,11 @@
             if (UIApplication.shared.applicationState == UIApplicationState.background)||(UIApplication.shared.applicationState == UIApplicationState.inactive){
                 
             }
+            
+            let ud = UserDefaults.standard
+            ud.set(true, forKey: kShowNotification)
+            ud.synchronize()
+            
         }
         
         func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
@@ -1391,7 +1396,9 @@
             let userInfo = notification.request.content.userInfo
             print("REMOTE NOTIFICATION:" + "\(userInfo)")
             
-            
+            let ud = UserDefaults.standard
+            ud.set(true, forKey: kShowNotification)
+            ud.synchronize()
             
             
             completionHandler([UNNotificationPresentationOptions.alert, .sound, .badge])
@@ -1426,7 +1433,9 @@
         func addProgressIndicatorOnWindow(){
             
             let view = UINib(nibName: "ProgressView", bundle: nil).instantiate(withOwner: nil, options: nil)[0] as? UIView
-            view?.frame = UIScreen.main.bounds
+            var frame = UIScreen.main.bounds
+            frame.origin.y += 64
+            view?.frame = frame
             view?.tag = 50000
             self.addSubview(view!)
             view?.alpha = 0

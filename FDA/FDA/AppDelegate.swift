@@ -315,9 +315,7 @@
                 
             }
             
-            let ud = UserDefaults.standard
-            ud.set(true, forKey: kShowNotification)
-            ud.synchronize()
+            self.updateNotification()
             
         }
         
@@ -885,13 +883,40 @@
             
         }
         
+        func updateNotification(){
+            
+            
+            let ud = UserDefaults.standard
+            ud.set(true, forKey: kShowNotification)
+            ud.synchronize()
+            
+            
+            var nav:UINavigationController?
+            let navigationController =  (self.window?.rootViewController as! UINavigationController)
+            let menuVC = navigationController.viewControllers.last
+            if  menuVC is FDASlideMenuViewController {
+                let mainController =  (menuVC as! FDASlideMenuViewController).mainViewController
+                if mainController is UINavigationController {
+                    nav = (mainController as! UINavigationController)
+                    let studyListVC = nav?.viewControllers.last
+                    if studyListVC is StudyListViewController{
+                        (studyListVC as! StudyListViewController).addRightNavigationItem()
+                        
+                    }
+                    
+                    
+                }
+                
+            }
+            
+            
+        }
+        
+        
         func handleStudyUpdatedInformation(){
             
             if Study.currentStudy != nil {
                 DBHandler.updateMetaDataToUpdateForStudy(study: Study.currentStudy!, updateDetails: nil)
-                
-                
-                
                 
                 
                 var nav:UINavigationController?
@@ -1396,10 +1421,8 @@
             let userInfo = notification.request.content.userInfo
             print("REMOTE NOTIFICATION:" + "\(userInfo)")
             
-            let ud = UserDefaults.standard
-            ud.set(true, forKey: kShowNotification)
-            ud.synchronize()
-            
+           
+            self.updateNotification()
             
             completionHandler([UNNotificationPresentationOptions.alert, .sound, .badge])
             
@@ -1421,8 +1444,8 @@
                 //self.handlePushNotificationResponse(userInfo : userInfo as NSDictionary)
             }
             
-            
-            
+            self.updateNotification()
+           
             
             
         }

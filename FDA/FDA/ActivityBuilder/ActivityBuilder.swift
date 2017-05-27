@@ -182,10 +182,6 @@ class ActivityBuilder {
                         
                     }
                     
-                    
-                    
-                    
-                    
                     var i:Int? = 0
                     
                     //self.activity?.branching = true
@@ -207,7 +203,9 @@ class ActivityBuilder {
                                 if i! + 1 < (activityStepArray?.count)!{
                                     defaultStepIdentifier = (activityStepArray?[(i!+1)].key)!
                                 }
-                                
+                                else{
+                                    defaultStepIdentifier = "CompletionStep"
+                                }
                                 
                                 var defaultStepExist:Bool? = false
                                 let resultSelector: ORKResultSelector?

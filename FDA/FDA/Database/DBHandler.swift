@@ -1285,6 +1285,7 @@ class DBHandler: NSObject {
                         dbResource?.povAvailable = resource.povAvailable
                         dbResource?.serverUrl = resource.file?.link
                         dbResource?.level = resource.level?.rawValue
+                        dbResource?.notificationMessage = resource.notificationMessage
                         
                         if resource.povAvailable {
                             dbResource?.anchorDateEndDays = resource.anchorDateEndDays!
@@ -1328,6 +1329,7 @@ class DBHandler: NSObject {
         dbResource.serverUrl = resource.file?.link
         dbResource.level = resource.level?.rawValue
         dbResource.type = resource.type
+        dbResource.notificationMessage = resource.notificationMessage
         
         if resource.povAvailable {
             dbResource.anchorDateEndDays = resource.anchorDateEndDays!
@@ -1471,6 +1473,84 @@ class DBHandler: NSObject {
         }
         completionHandler(notificationList)
         
+    }
+    
+    class func saveLocalNotification(notification:AppLocalNotification){
+        
+        
+        let realm = try! Realm()
+        
+        
+        let dbNotification = DBLocalNotification()
+        dbNotification.id = notification.id
+        dbNotification.title = notification.title
+        dbNotification.message = notification.message
+        
+        
+        if notification.studyId != nil {
+            dbNotification.studyId = notification.studyId
+        }
+        else{
+            dbNotification.studyId = ""
+        }
+        
+        
+        if notification.activityId != nil {
+            dbNotification.activityId = notification.activityId
+        }
+        else{
+            dbNotification.activityId = ""
+        }
+        
+        dbNotification.isRead = notification.read!
+        
+        dbNotification.notificationType = notification.type.rawValue
+        dbNotification.subType = notification.subType.rawValue
+        dbNotification.audience = notification.audience!.rawValue
+        dbNotification.startDate = notification.startDate
+        dbNotification.endDate = notification.endDate
+        
+        
+        
+        print("DBPath : \(realm.configuration.fileURL)")
+        try! realm.write({
+            realm.add(dbNotification, update: true)
+            
+        })
+    }
+    
+    class func getLocalNotification(completionHandler:@escaping (Array<AppLocalNotification>) -> ()){
+        
+        let realm = try! Realm()
+        let todayDate = Date()
+        let dbNotifications = realm.objects(DBLocalNotification.self).filter({$0.startDate! <= todayDate && $0.endDate! >= todayDate})
+        
+        var notificationList:Array<AppLocalNotification> = []
+        for dbnotification in dbNotifications {
+            
+            let notification = AppLocalNotification()
+            
+            notification.id = dbnotification.id
+            notification.title = dbnotification.title
+            notification.message = dbnotification.message
+            notification.studyId = dbnotification.studyId
+            notification.activityId = dbnotification.activityId
+            notification.type =    AppNotification.NotificationType(rawValue:dbnotification.notificationType!)!
+            
+            notification.subType = AppNotification.NotificationSubType(rawValue:dbnotification.subType!)!
+            
+            notification.audience = Audience(rawValue:dbnotification.audience!)!
+            //notification.date =  dbnotification.date
+            
+            notification.read = dbnotification.isRead
+            notification.startDate = dbnotification.startDate
+            notification.endDate = dbnotification.endDate
+            
+            notificationList.append(notification)
+            
+            
+        }
+        completionHandler(notificationList)
     }
 
     //MARK:- DELETE

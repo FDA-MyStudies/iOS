@@ -32,16 +32,51 @@ class NotificationTableViewCell: UITableViewCell {
      @param appNotification    Access the data from AppNotification class
 
      */
-    func populateCellWith(appNotification:AppNotification?) {
+    func populateCellWith(notification:Any?) {
         
-        if Utilities.isValidValue(someObject: appNotification?.message! as AnyObject?){
-            labelNotificationText?.text =  appNotification?.message!
+        
+        if notification is AppNotification {
+            let appNotification = notification as! AppNotification
+            if appNotification.date != nil {
+                  self.labelNotificationTime?.text = NotificationTableViewCell.formatter.string(from: (appNotification.date)!)
+                
+                if appNotification.message != nil{
+                    labelNotificationText?.text =  appNotification.message!
+                }
+                else{
+                    labelNotificationText?.text = ""
+                }
+            }
+            else {
+                
+                 let appNotification = notification as! AppLocalNotification
+                 self.labelNotificationTime?.text = NotificationTableViewCell.formatter.string(from: (appNotification.startDate)!)
+                
+                if appNotification.message != nil{
+                    labelNotificationText?.text =  appNotification.message!
+                }
+                else{
+                    labelNotificationText?.text = ""
+                }
+            }
+           
+           
+           
         }
-        else{
-            labelNotificationText?.text = ""
+        else {
+           let appNotification = notification as! AppLocalNotification
+            self.labelNotificationTime?.text = NotificationTableViewCell.formatter.string(from: (appNotification.startDate)!)
+            if Utilities.isValidValue(someObject: appNotification.message! as AnyObject?){
+                labelNotificationText?.text =  appNotification.message!
+            }
+            else{
+                labelNotificationText?.text = ""
+            }
         }
         
-        self.labelNotificationTime?.text = NotificationTableViewCell.formatter.string(from: (appNotification?.date)!)
+       
+        
+       
     }
     
     private static let formatter: DateFormatter = {

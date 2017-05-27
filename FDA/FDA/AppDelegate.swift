@@ -815,7 +815,7 @@
         
         func checkForStudyUpdates(){
             
-            if Study.currentStudy != nil {
+            if Study.currentStudy != nil && Study.currentStudy?.userParticipateState.status == UserStudyStatus.StudyStatus.inProgress{
                 
                 let userStudyStatus =  (Study.currentStudy?.userParticipateState.status)!
                 

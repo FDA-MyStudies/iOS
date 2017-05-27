@@ -117,6 +117,8 @@ class StudyListViewController: UIViewController {
         button.frame = CGRect.init(x: 0, y: 0, width: 30, height: 30)
         view.addSubview(button)
         
+        button.isExclusiveTouch = true
+        
         let label = UILabel.init(frame:CGRect.init(x: 15, y: 0, width: 10, height: 10) )
         
         label.font = UIFont.systemFont(ofSize: 10)

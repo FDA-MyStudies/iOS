@@ -510,10 +510,20 @@ class ActivityStepResult{
             let stepTypeResult = questionstepResult as! ORKChoiceQuestionResult
             if Utilities.isValidObject(someObject:stepTypeResult.choiceAnswers as AnyObject?){
                 if (stepTypeResult.choiceAnswers?.count)! > 1{
-                    self.value = stepTypeResult.choiceAnswers
+                    
+                     var resultArray:Array<String>? = []
+                    
+                    for value in stepTypeResult.choiceAnswers!{
+                        resultArray?.append("\(value)")
+                    }
+                    
+                    self.value = resultArray
                 }
                 else{
-                    self.value = stepTypeResult.choiceAnswers?.first
+                    
+                    let resultValue:String? = "\(stepTypeResult.choiceAnswers?.first)"
+                    self.value = resultValue!
+                    
                 }
                 
             }
@@ -527,10 +537,12 @@ class ActivityStepResult{
             let stepTypeResult = questionstepResult as! ORKBooleanQuestionResult
             
             if Utilities.isValidValue(someObject: stepTypeResult.booleanAnswer as AnyObject?){
-                self.value = stepTypeResult.booleanAnswer!
+                
+                self.value =  stepTypeResult.booleanAnswer! == 1 ? true : false
+                
             }
             else{
-                self.value = 0
+                self.value = false
             }
             
         case ORKQuestionType.integer.rawValue: // numeric type

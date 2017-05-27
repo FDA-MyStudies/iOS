@@ -475,18 +475,27 @@ class ActivityStepResult{
             
             
             
-        case ORKQuestionType.singleChoice.rawValue: //textchoice + value picker + imageChoice + textchoice
+        case ORKQuestionType.singleChoice.rawValue: //textchoice + value picker + imageChoice
             
             let stepTypeResult = questionstepResult as! ORKChoiceQuestionResult
             if Utilities.isValidObject(someObject:stepTypeResult.choiceAnswers as AnyObject?){
                 if (stepTypeResult.choiceAnswers?.count)! > 0{
                     
-                    //if (self.step?.resultType as! String) ==  QuestionStepType.imageChoice ||  (self.step?.resultType as! String) == QuestionStepType.valuePicker{
+                    if (self.step?.resultType as! String) ==  QuestionStepType.imageChoice.rawValue ||  (self.step?.resultType as! String) == QuestionStepType.valuePicker.rawValue{
                         
-                   // }
+                        //for image choice and valuepicker
+                        
+                        let resultValue:String? = "\(stepTypeResult.choiceAnswers?.first)"
+                        self.value = resultValue!
+                   }
+                    else{
+                        // for text choice
+                        
+                        let resultArray:Array<String>? = ["\(stepTypeResult.choiceAnswers?.first)"]
+                         self.value = resultArray
+                    }
                     
-                    
-                    self.value = stepTypeResult.choiceAnswers?.first
+                   
                 }
                 else{
                     self.value = ""
@@ -496,7 +505,7 @@ class ActivityStepResult{
             else{
                 self.value = ""
             }
-        case ORKQuestionType.multipleChoice.rawValue: //textchoice + value picker + imageChoice + textchoice
+        case ORKQuestionType.multipleChoice.rawValue: //textchoice + imageChoice +
             
             let stepTypeResult = questionstepResult as! ORKChoiceQuestionResult
             if Utilities.isValidObject(someObject:stepTypeResult.choiceAnswers as AnyObject?){

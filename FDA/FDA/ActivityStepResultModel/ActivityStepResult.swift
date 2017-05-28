@@ -571,8 +571,13 @@ class ActivityStepResult{
             
             
             
-            if stepTypeResult.dateComponentsAnswer != nil && (stepTypeResult.dateComponentsAnswer?.isValidDate)!{
-                self.value =  "\(stepTypeResult.dateComponentsAnswer?.hour)" + ":" + "\(stepTypeResult.dateComponentsAnswer?.minute)" + ":" + "\(stepTypeResult.dateComponentsAnswer?.second)"
+            if stepTypeResult.dateComponentsAnswer != nil {
+            
+                let hour:Int? = stepTypeResult.dateComponentsAnswer?.hour
+                let minute:Int? = stepTypeResult.dateComponentsAnswer?.minute
+                let seconds:Int? = stepTypeResult.dateComponentsAnswer?.second
+                
+                self.value =  "\(hour == nil ? 00 : hour!)" + ":" + "\(minute == nil ? 00 : minute! )" + ":" + "\(seconds == nil ? 00 : seconds!)"
             }
             else{
                 self.value = "00:00:00"

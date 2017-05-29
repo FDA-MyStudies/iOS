@@ -316,6 +316,15 @@ class ActivityQuestionStep: ActivityStep {
                     
                     let stepsValue = difference / (formatDict?[kStepQuestionScaleStep] as? Int)!
                     
+                    let defaultPosition = formatDict?[kStepQuestionScaleDefaultValue] as! Int
+                    
+                    
+                    var defaultValue = defaultPosition * stepsValue
+                    
+                    if defaultValue > (formatDict?[kStepQuestionScaleMaxValue] as! Int){
+                        defaultValue = formatDict?[kStepQuestionScaleMaxValue] as! Int
+                    }
+                    
                     
                     if ((formatDict?[kStepQuestionScaleMaxValue] as? Int)! != (formatDict?[kStepQuestionScaleMinValue] as? Int)!) && divisibleValue == 0 && (stepsValue >= 1 && stepsValue <= 13){
                     

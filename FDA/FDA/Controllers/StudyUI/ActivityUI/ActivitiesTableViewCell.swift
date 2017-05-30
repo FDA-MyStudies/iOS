@@ -326,35 +326,35 @@ class ActivitiesTableViewCell: UITableViewCell {
     private static let formatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateFormat = "MMM dd YYYY"
-        formatter.timeZone = TimeZone.init(abbreviation:"GMT")
+        //formatter.timeZone = TimeZone.init(abbreviation:"GMT")
         return formatter
     }()
     
     private static let dailyActivityFormatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateFormat = "MMM dd YYYY hh:mma"
-        formatter.timeZone = TimeZone.init(abbreviation:"GMT")
+        //formatter.timeZone = TimeZone.init(abbreviation:"GMT")
         return formatter
     }()
     
     private static let oneTimeFormatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateFormat = "hh:mma, MMM dd YYYY"
-        formatter.timeZone = TimeZone.init(abbreviation:"GMT")
+        //formatter.timeZone = TimeZone.init(abbreviation:"GMT")
         return formatter
     }()
     
     private static let weeklyformatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateFormat = "hh:mma , EEE MMM dd YYYY"
-        formatter.timeZone = TimeZone.init(abbreviation:"GMT")
+        //formatter.timeZone = TimeZone.init(abbreviation:"GMT")
         return formatter
     }()
 
     private static let monthlyformatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateFormat = "hh:mma , dd ;MMM dd YYYY"
-        formatter.timeZone = TimeZone.init(abbreviation:"GMT")
+        //formatter.timeZone = TimeZone.init(abbreviation:"GMT")
         return formatter
     }()
 

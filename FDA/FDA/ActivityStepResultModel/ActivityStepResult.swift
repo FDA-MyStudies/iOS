@@ -308,8 +308,8 @@ class ActivityStepResult{
                                 
                                 
                             }
-                            resultDict?[kActivityStepStartTime] =  self.startTime
-                            resultDict?[kActivityStepEndTime] =  self.endTime
+                            resultDict?[kActivityStepStartTime] =  "\(self.startTime)"
+                            resultDict?[kActivityStepEndTime] =  "\(self.endTime)"
                             resultDict?[kActivityStepSkipped] =  self.skipped
                             
                             resultArray?.append(resultDict!)
@@ -342,8 +342,8 @@ class ActivityStepResult{
                             
                         }
                         
-                        resultDict?[kActivityStepStartTime] =  self.startTime
-                        resultDict?[kActivityStepEndTime] =  self.endTime
+                        resultDict?[kActivityStepStartTime] =  "\(self.startTime)"
+                        resultDict?[kActivityStepEndTime] =  "\(self.endTime)"
                         resultDict?[kActivityStepSkipped] =  self.skipped
                         
                         resultArray?.append(resultDict!)
@@ -364,16 +364,16 @@ class ActivityStepResult{
                         
                         if i == 0{ //
                             resultDict?[kActivityActiveStepKey] = kFetalKickCounterDuration
-                            resultDict?[kActivityStepResultValue] = stepTypeResult?.duration
+                            resultDict?[kActivityStepResultValue] = Double((stepTypeResult?.duration) == nil ? 0 : (stepTypeResult?.duration)!)
                         }
                         else{ // numberOfMoves
                             resultDict?[kActivityActiveStepKey] = kFetalKickCounterCount
-                            resultDict?[kActivityStepResultValue] = stepTypeResult?.totalKickCount
+                            resultDict?[kActivityStepResultValue] = Double((stepTypeResult?.totalKickCount) == nil ? 0 : (stepTypeResult?.totalKickCount)!)
                             
                         }
                         
-                        resultDict?[kActivityStepStartTime] =  self.startTime
-                        resultDict?[kActivityStepEndTime] =  self.endTime
+                        resultDict?[kActivityStepStartTime] =  "\(self.startTime)"
+                        resultDict?[kActivityStepEndTime] =  "\(self.endTime)"
                         resultDict?[kActivityStepSkipped] =  self.skipped
                         
                         resultArray?.append(resultDict!)

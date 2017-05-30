@@ -22,7 +22,7 @@ let kFetalKickIntroductionStepText = "This task needs you to record the number o
 
 let kFetalKickCounterStepIdentifier = "FetalKickCounterStep"
 
-let kFetalKickCounterStepCompletionTitle = "Task Completed"
+let kFetalKickCounterStepCompletionTitle = "CompletionStep"
 let kFetalKickCounterStepCompletionText = "Thank you for your time!"
 
 let kFetalKickCounterTaskIdentifier = "FetalKickCounterTask"

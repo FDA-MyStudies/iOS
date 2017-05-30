@@ -231,8 +231,8 @@ class ActivitiesViewController : UIViewController{
         }
         catch let error as NSError{
             print("\(error)")
-        }*/
- 
+        }
+ */
         
         if Utilities.isValidObject(someObject: Study.currentActivity?.steps as AnyObject?){
             

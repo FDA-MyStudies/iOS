@@ -61,9 +61,10 @@ class ActivityResult {
                 
                 activityStepResult?.initWithORKStepResult(stepResult: stepResult as! ORKStepResult , activityType:(self.activity?.type)!)
                 
+               
                 
                 
-                if stepResult.identifier != "CompletionStep"{
+                if stepResult.identifier != "CompletionStep" && stepResult.identifier !=  kFetalKickInstructionStepIdentifier && stepResult.identifier != kFetalKickIntroductionStepIdentifier {
                      self.result?.append(activityStepResult!)
                 }
                 

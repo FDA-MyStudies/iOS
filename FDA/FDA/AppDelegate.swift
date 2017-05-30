@@ -147,6 +147,9 @@
             
             
             if (launchOptions != nil) {
+                
+                print("launchOptions : \(launchOptions)")
+                
                 // Launched from push notification
                 let notification = launchOptions?[.remoteNotification]
                 

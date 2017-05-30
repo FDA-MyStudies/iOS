@@ -14,6 +14,7 @@
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView;
 
 
+
 - (void) stepDidChange;
 
 @end
@@ -96,6 +97,10 @@
     }
 }
 
+
+
+
+
 - (void) addMoreAction:(id)sender {
     
     NSMutableArray *mItems = [[[self formStep] formItems] mutableCopy];
@@ -123,9 +128,11 @@
     [[self formStep] setFormItems:mItems];
     [super stepDidChange];
     
+   
+    
     
     NSIndexPath *ip = [NSIndexPath indexPathForRow:mItems.count - 1 inSection:0];
-    //[_originalTableView scrollToRowAtIndexPath:ip atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+    [_originalTableView scrollToRowAtIndexPath:ip atScrollPosition:UITableViewScrollPositionBottom animated:YES];
 }
 
 

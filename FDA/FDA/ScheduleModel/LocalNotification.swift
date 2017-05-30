@@ -134,7 +134,7 @@ class LocalNotification: NSObject {
     private static let timeFormatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateFormat = "hh:mma"
-        formatter.timeZone = TimeZone.init(abbreviation:"GMT")
+        //formatter.timeZone = TimeZone.init(abbreviation:"GMT")
         return formatter
     }()
     

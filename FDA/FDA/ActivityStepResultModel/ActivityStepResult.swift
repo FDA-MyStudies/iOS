@@ -308,8 +308,8 @@ class ActivityStepResult{
                                 
                                 
                             }
-                            resultDict?[kActivityStepStartTime] =  "\(self.startTime)"
-                            resultDict?[kActivityStepEndTime] =  "\(self.endTime)"
+                            resultDict?[kActivityStepStartTime] =  "\(self.startTime!)"
+                            resultDict?[kActivityStepEndTime] =  "\(self.endTime!)"
                             resultDict?[kActivityStepSkipped] =  self.skipped
                             
                             resultArray?.append(resultDict!)
@@ -342,8 +342,8 @@ class ActivityStepResult{
                             
                         }
                         
-                        resultDict?[kActivityStepStartTime] =  "\(self.startTime)"
-                        resultDict?[kActivityStepEndTime] =  "\(self.endTime)"
+                        resultDict?[kActivityStepStartTime] =  "\(self.startTime!)"
+                        resultDict?[kActivityStepEndTime] =  "\(self.endTime!)"
                         resultDict?[kActivityStepSkipped] =  self.skipped
                         
                         resultArray?.append(resultDict!)
@@ -372,8 +372,8 @@ class ActivityStepResult{
                             
                         }
                         
-                        resultDict?[kActivityStepStartTime] =  "\(self.startTime)"
-                        resultDict?[kActivityStepEndTime] =  "\(self.endTime)"
+                        resultDict?[kActivityStepStartTime] =  "\(self.startTime!)"
+                        resultDict?[kActivityStepEndTime] =  "\(self.endTime!)"
                         resultDict?[kActivityStepSkipped] =  self.skipped
                         
                         resultArray?.append(resultDict!)

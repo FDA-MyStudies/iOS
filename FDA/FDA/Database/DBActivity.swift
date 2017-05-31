@@ -11,6 +11,7 @@ import RealmSwift
 
 class DBActivity: Object {
     
+    dynamic var id:String?
     dynamic var type:String?
     dynamic var actvityId:String?
     
@@ -36,7 +37,7 @@ class DBActivity: Object {
     var activityRuns = List<DBActivityRun>()
     
     override static func primaryKey() -> String? {
-        return "actvityId"
+        return "id"
     }
     
 }

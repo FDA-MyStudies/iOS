@@ -616,6 +616,7 @@ class DBHandler: NSObject {
         dbActivity.currentRunId = activity.userParticipationStatus.activityRunId
         dbActivity.participationStatus = activity.userParticipationStatus.status.rawValue
         dbActivity.completedRuns = activity.userParticipationStatus.compeltedRuns
+        dbActivity.id = activity.studyId! + activity.actvityId!
         do {
             let json = ["data":activity.frequencyRuns]
             let data =  try JSONSerialization.data(withJSONObject: json, options: JSONSerialization.WritingOptions.prettyPrinted)

@@ -126,7 +126,7 @@
             
             
             
-             self.checkForAppUpdate()
+            // self.checkForAppUpdate()
             
             
             
@@ -1058,7 +1058,7 @@
                         
                         //UIApplication.shared.sendAction(#selector("resignFirstResponder"), to:nil, from:nil, for:nil)
                         
-                        shouldAddForceUpgradeScreen = true
+                        self.shouldAddForceUpgradeScreen = true
                         
                         let version = response?["currentVersion"] as! String
                         

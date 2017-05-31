@@ -486,12 +486,14 @@ class ActivityStepResult{
                         //for image choice and valuepicker
                         
                         let resultValue:String? = "\(stepTypeResult.choiceAnswers?.first)"
-                        self.value = resultValue!
+                        self.value = (resultValue == nil ? "" : resultValue!)
                    }
                     else{
                         // for text choice
                         
-                        let resultArray:Array<String>? = ["\(stepTypeResult.choiceAnswers?.first)"]
+                         let resultValue:String? = "\(stepTypeResult.choiceAnswers?.first)"
+                        
+                        let resultArray:Array<String>? = ["\(resultValue == nil ? "" : resultValue!)"]
                          self.value = resultArray
                     }
                     
@@ -514,7 +516,7 @@ class ActivityStepResult{
                      var resultArray:Array<String>? = []
                     
                     for value in stepTypeResult.choiceAnswers!{
-                        resultArray?.append("\(value)")
+                        resultArray?.append("\(value == nil ? "" : value)")
                     }
                     
                     self.value = resultArray
@@ -522,7 +524,7 @@ class ActivityStepResult{
                 else{
                     
                     let resultValue:String? = "\(stepTypeResult.choiceAnswers?.first)"
-                    self.value = resultValue!
+                    self.value = (resultValue == nil  ? "" : resultValue!)
                     
                 }
                 

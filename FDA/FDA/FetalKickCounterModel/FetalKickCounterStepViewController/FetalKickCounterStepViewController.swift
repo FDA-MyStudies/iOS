@@ -63,13 +63,13 @@ class FetalKickCounterStepViewController:  ORKStepViewController {
         if let step = step as? FetalKickCounterStep {
             
         
-            self.totalTime =    step.counDownTimer! * 60
+            self.totalTime =    step.counDownTimer!
             
             let hours =  Int(self.totalTime!) / 3600
             let minutes = Int(self.totalTime!) / 60 % 60
             let seconds =  Int(self.totalTime!) % 60
             
-            self.timerValue =   step.counDownTimer! * 60
+            self.timerValue =   step.counDownTimer!
             
             self.timerLabel?.text = (hours < 10 ? "0\(hours):" : "\(hours):") + (minutes < 10 ? "0\(minutes):" : "\(minutes):")   + (seconds < 10 ? "0\(seconds)" : "\(seconds)")
             self.taskResult.duration = self.totalTime!

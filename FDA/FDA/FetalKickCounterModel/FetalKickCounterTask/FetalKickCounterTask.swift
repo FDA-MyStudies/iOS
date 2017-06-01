@@ -59,7 +59,7 @@ class FetalKickCounterTask {
             self.duration =  duration
         }
         else{
-            self.duration = 0.05
+            self.duration = 50
             Logger.sharedInstance.warn("Duration is null:\(duration)")
         }
         

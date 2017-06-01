@@ -62,6 +62,8 @@ class ActivitiesViewController : UIViewController{
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        self.navigationController?.interactivePopGestureRecognizer?.isEnabled = false
         UIApplication.shared.statusBarStyle = .default
         
         if !taskControllerPresented {

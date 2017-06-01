@@ -15,6 +15,10 @@ class StudyDashboardTabbarViewController: UITabBarController {
 
         // Do any additional setup after loading the view.
     }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        self.navigationController?.interactivePopGestureRecognizer?.isEnabled = false
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

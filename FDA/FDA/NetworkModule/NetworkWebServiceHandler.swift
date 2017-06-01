@@ -322,7 +322,7 @@ class NetworkWebServiceHandler: NSObject, URLSessionDelegate {
                         }
                         
                         
-                        error1 = NSError(domain: NSURLErrorDomain, code: statusCode,userInfo: dictionary as? [AnyHashable: Any])
+                        error1 = NSError(domain: NSURLErrorDomain, code: 300,userInfo:[NSLocalizedDescriptionKey:"Could not connect to server. Please try again later."])
                         
                         
                         if ((delegate?.failedRequest) != nil) {

@@ -44,6 +44,8 @@ class StudyListViewController: UIViewController {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         appDelegate.askForNotification()
         
+        
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -71,6 +73,7 @@ class StudyListViewController: UIViewController {
             if ispasscodePending == true{
                 
                 if User.currentUser.userType == .FDAUser {
+                    self.tableView?.isHidden = true
                     UserServices().getUserProfile(self as NMWebServiceDelegate)
                 }
                 
@@ -259,7 +262,9 @@ class StudyListViewController: UIViewController {
         taskViewController.isNavigationBarHidden = true
         
         
-        self.navigationController?.present(taskViewController, animated: false, completion: nil)
+        self.navigationController?.present(taskViewController, animated: false, completion: {
+            self.tableView?.isHidden = false
+        })
  
     }
     
@@ -618,6 +623,7 @@ extension StudyListViewController:NMWebServiceDelegate {
              self.removeProgressIndicator()
             if User.currentUser.settings?.passcode == true {
                 self.setPassCode()
+                
             }
             else {
                 UserDefaults.standard.set(false, forKey: kPasscodeIsPending)

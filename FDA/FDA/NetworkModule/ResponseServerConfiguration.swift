@@ -28,6 +28,8 @@ enum ResponseMethods:String {
         switch self {
         case .getParticipantResponse,.validateEnrollmentToken:
             return Method(methodName:(self.rawValue+".api"), methodType: .httpMethodGet, requestType: .requestTypeHTTP)
+        case .withdrawFromStudy:
+            return Method(methodName:(self.rawValue+".api"), methodType: .httpMethodPOST, requestType: .requestTypeHTTP)
         default:
             return Method(methodName:(self.rawValue+".api"), methodType: .httpMethodPOST, requestType: .requestTypeJSON)
             

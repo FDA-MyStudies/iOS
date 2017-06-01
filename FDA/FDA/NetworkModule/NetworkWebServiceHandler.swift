@@ -120,7 +120,7 @@ class NetworkWebServiceHandler: NSObject, URLSessionDelegate {
         if !(parameters == nil || parameters?.count == 0){
             let allKeys = parameters?.allKeys
             for key in allKeys! {
-                url = (url as String) + String(format: "%@=%@&",String(describing: key), parameters?[key as! String] as! String)
+                url = (url as String) + String(format: "%@=%@&",String(describing: key), parameters?[key as! String] as! CVarArg )
             }
             let length = url.characters.count-1
             let index = url.index(url.startIndex, offsetBy: length)

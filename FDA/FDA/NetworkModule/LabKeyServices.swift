@@ -47,7 +47,7 @@ class LabKeyServices: NSObject {
         self.delegate = delegate
         let method = ResponseMethods.withdrawFromStudy.method
         
-        let params = [kStudyId:studyId,
+        let params = [
                       kParticipantId:participantId,
                       kDeleteResponses:deleteResponses
             ] as [String : Any]

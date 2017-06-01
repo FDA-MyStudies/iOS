@@ -10,42 +10,23 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <view contentMode="scaleToFill" id="iN0-l3-epB">
+        <view alpha="0.65000000000000002" contentMode="scaleToFill" id="iN0-l3-epB">
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="e2D-Rl-d41">
-                    <rect key="frame" x="131" y="284" width="113" height="100"/>
-                    <subviews>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Please wait.." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="peb-PW-QDD">
-                            <rect key="frame" x="14" y="58" width="85" height="21"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            <nil key="highlightedColor"/>
-                        </label>
-                        <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="vuM-6C-qCT">
-                            <rect key="frame" x="38" y="18" width="37" height="37"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        </activityIndicatorView>
-                    </subviews>
-                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                <webView contentMode="scaleToFill" scalesPageToFit="YES" translatesAutoresizingMaskIntoConstraints="NO" id="shc-KY-WLn">
+                    <rect key="frame" x="67" y="214" width="240" height="240"/>
+                    <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="100" id="K2h-zC-pLZ"/>
-                        <constraint firstAttribute="width" constant="113" id="mhJ-fx-rNK"/>
+                        <constraint firstAttribute="height" constant="240" id="9sa-hM-ABG"/>
+                        <constraint firstAttribute="width" constant="240" id="wbj-2r-ZJV"/>
                     </constraints>
-                    <userDefinedRuntimeAttributes>
-                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                            <integer key="value" value="5"/>
-                        </userDefinedRuntimeAttribute>
-                        <userDefinedRuntimeAttribute type="boolean" keyPath="layer.maskToBounds" value="YES"/>
-                    </userDefinedRuntimeAttributes>
-                </view>
+                </webView>
             </subviews>
-            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstItem="e2D-Rl-d41" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="oPZ-CR-OsJ"/>
-                <constraint firstItem="e2D-Rl-d41" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="uFa-Kz-Az8"/>
+                <constraint firstItem="shc-KY-WLn" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="3Wb-is-DW6"/>
+                <constraint firstItem="shc-KY-WLn" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="D6D-tl-G1s"/>
             </constraints>
             <point key="canvasLocation" x="24.5" y="52.5"/>
         </view>

@@ -101,6 +101,8 @@
 		6ED8A2E71E447AA2004DEC01 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ED8A2E51E447AA2004DEC01 /* Logger.swift */; };
 		6ED9D5DB1E5B2D5200A0719D /* ActiveTask.json in Resources */ = {isa = PBXBuildFile; fileRef = 6ED9D5DA1E5B2D5100A0719D /* ActiveTask.json */; };
 		6EDABCCE1EBA41EE005F3AA6 /* Labkey_Activity.json in Resources */ = {isa = PBXBuildFile; fileRef = 6EDABCCD1EBA41EE005F3AA6 /* Labkey_Activity.json */; };
+		6EDDB65A1EE05E4C00C79337 /* NewProgressView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6EDDB6591EE05E4C00C79337 /* NewProgressView.xib */; };
+		6EDDB6611EE05FDC00C79337 /* fda_preload@2x.gif in Resources */ = {isa = PBXBuildFile; fileRef = 6EDDB6601EE05FDC00C79337 /* fda_preload@2x.gif */; };
 		6EE5756C1E891440009BAA25 /* Gateway.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6EE5756B1E891440009BAA25 /* Gateway.xcassets */; };
 		6EE93D901E93B5700027A5DC /* ConsentSharePdfStepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EE93D8F1E93B5700027A5DC /* ConsentSharePdfStepViewController.swift */; };
 		6EE93D921E93B8C30027A5DC /* 45.png in Resources */ = {isa = PBXBuildFile; fileRef = 6EE93D911E93B8C30027A5DC /* 45.png */; };
@@ -353,6 +355,8 @@
 		6ED8A2E51E447AA2004DEC01 /* Logger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		6ED9D5DA1E5B2D5100A0719D /* ActiveTask.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = ActiveTask.json; sourceTree = "<group>"; };
 		6EDABCCD1EBA41EE005F3AA6 /* Labkey_Activity.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Labkey_Activity.json; sourceTree = "<group>"; };
+		6EDDB6591EE05E4C00C79337 /* NewProgressView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NewProgressView.xib; sourceTree = "<group>"; };
+		6EDDB6601EE05FDC00C79337 /* fda_preload@2x.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "fda_preload@2x.gif"; sourceTree = "<group>"; };
 		6EE5756B1E891440009BAA25 /* Gateway.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Gateway.xcassets; sourceTree = "<group>"; };
 		6EE93D8F1E93B5700027A5DC /* ConsentSharePdfStepViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConsentSharePdfStepViewController.swift; sourceTree = "<group>"; };
 		6EE93D911E93B8C30027A5DC /* 45.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 45.png; sourceTree = "<group>"; };
@@ -628,9 +632,11 @@
 				94B3DD0A1E6EC47700327AE5 /* SplashViewController.swift */,
 				6E7D2D5D1E433E8800763D4C /* Main.storyboard */,
 				6E7D2D601E433E8800763D4C /* Assets.xcassets */,
+				6EDDB65F1EE05FDC00C79337 /* OtherAssets */,
 				6E7D2D621E433E8800763D4C /* LaunchScreen.storyboard */,
 				6E7D2D651E433E8800763D4C /* Info.plist */,
 				481DFA4B1E6EEB70004C39EF /* WebViewController.swift */,
+				6EDDB6591EE05E4C00C79337 /* NewProgressView.xib */,
 				946CA5EC1E72DCA300CC8535 /* ProgressView.xib */,
 				94A758AC1ED8694B00567528 /* AbilifyMedGuide.pdf */,
 			);
@@ -899,6 +905,14 @@
 				6ED8A2E51E447AA2004DEC01 /* Logger.swift */,
 			);
 			path = Logger;
+			sourceTree = "<group>";
+		};
+		6EDDB65F1EE05FDC00C79337 /* OtherAssets */ = {
+			isa = PBXGroup;
+			children = (
+				6EDDB6601EE05FDC00C79337 /* fda_preload@2x.gif */,
+			);
+			path = OtherAssets;
 			sourceTree = "<group>";
 		};
 		6EE93D8C1E93B4ED0027A5DC /* ConsentUI */ = {
@@ -1471,6 +1485,8 @@
 				6ED134381E5F1B110090C976 /* Consent.json in Resources */,
 				94B3DD541E6ED8E500327AE5 /* SignInPlist.plist in Resources */,
 				48A24C381E839CF9009E849E /* 24-study-dashboard.png in Resources */,
+				6EDDB65A1EE05E4C00C79337 /* NewProgressView.xib in Resources */,
+				6EDDB6611EE05FDC00C79337 /* fda_preload@2x.gif in Resources */,
 				6E7D2D611E433E8800763D4C /* Assets.xcassets in Resources */,
 				4833E9E31E712C2B0032D244 /* StudyOverview.plist in Resources */,
 				94B3DD511E6ED8E500327AE5 /* Login.storyboard in Resources */,

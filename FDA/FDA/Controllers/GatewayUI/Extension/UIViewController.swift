@@ -7,8 +7,10 @@
 //
 
 import UIKit
+import QuickLook
 
 extension UIViewController {
+    
     
     
     func topMostViewController() -> UIViewController {
@@ -62,13 +64,37 @@ extension UIViewController {
         
         self.navigationController?.navigationBar.isUserInteractionEnabled = false
         
+        
+       
+        
         var view = self.view.viewWithTag(5000)
         if view == nil {
-            view = UINib(nibName: "ProgressView", bundle: nil).instantiate(withOwner: nil, options: nil)[0] as? UIView
-            view?.frame = UIScreen.main.bounds
+            
+           
+            
+            
+            
+           view = UINib(nibName: "NewProgressView", bundle: nil).instantiate(withOwner: nil, options: nil)[0] as? UIView
+            
+            
+            let url = Bundle.main.url(forResource: "fda_preload@2x", withExtension: "gif")!
+            let data = try! Data(contentsOf: url)
+            let webView =  view?.subviews.first as! UIWebView
+            
+            
+            webView.load(data, mimeType: "image/gif", textEncodingName: "UTF-8", baseURL: NSURL() as URL)
+            webView.scalesPageToFit = true
+            webView.contentMode = UIViewContentMode.scaleAspectFit
+            
+            
+            
+           view?.frame = UIScreen.main.bounds
             view?.tag = 5000
             self.view.addSubview(view!)
             view?.alpha = 0
+            
+            
+            
             UIView.animate(withDuration: 0.3) {
                 view?.alpha = 1
             }
@@ -76,6 +102,10 @@ extension UIViewController {
         
         
     }
+    
+    
+    
+    
     
     func removeProgressIndicator(){
         

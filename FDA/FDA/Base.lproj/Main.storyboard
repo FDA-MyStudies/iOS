@@ -50,7 +50,7 @@
         <scene sceneID="Tvb-Zj-YVH">
             <objects>
                 <navigationController navigationBarHidden="YES" id="MdS-y7-8dh" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="7yL-2N-hKp">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="7yL-2N-hKp">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -142,7 +142,7 @@
         <scene sceneID="qF6-32-ogD">
             <objects>
                 <navigationController navigationBarHidden="YES" id="hkc-gp-DUa" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Wwc-Sf-TQN">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="Wwc-Sf-TQN">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -158,7 +158,7 @@
                     <toolbarItems/>
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
                     <nil key="simulatedTopBarMetrics"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="xF8-iB-u6j">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="xF8-iB-u6j">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -1474,7 +1474,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="zdn-zu-3yK" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="pnM-TJ-sFj">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="pnM-TJ-sFj">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>

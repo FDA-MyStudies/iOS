@@ -60,41 +60,96 @@ class FetalKickCounterStepViewController:  ORKStepViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        let notificationCenter = NotificationCenter.default
+        notificationCenter.addObserver(self, selector: #selector(appMovedToBackground), name: Notification.Name.UIApplicationWillResignActive, object: nil)
+        
+        
+        notificationCenter.addObserver(self, selector: #selector(appBecameActive), name: Notification.Name.UIApplicationDidBecomeActive, object: nil)
+        
+        
+        
         if let step = step as? FetalKickCounterStep {
             
+            let ud = UserDefaults.standard
+            //ud.set(true, forKey: "FKC")
+            
+            //ud.set(Study.currentActivity?.actvityId, forKey: "FetalKickActivityId")
+            //ud.set(Study.currentStudy?.studyId, forKey: "FetalKickStudyId")
+            let activityId = ud.value(forKey:"FetalKickActivityId" ) as! String?
+            var differenceInSec = 0
+            var autoStartTimer = false
+            if  ud.bool(forKey: "FKC")
+                && activityId != nil
+                && activityId == Study.currentActivity?.actvityId
+                 {
+                    
+                let previousTimerStartDate = ud.object(forKey: "FetalKickStartTimeStamp") as! Date
+                let currentDate = Date()
+                differenceInSec = Int(currentDate.timeIntervalSince(previousTimerStartDate))
+                autoStartTimer = true
+                    
+                    
+                    
+                    
+            }
         
-            self.totalTime =    step.counDownTimer!
+            if differenceInSec > step.counDownTimer!{
+                //task is completed
+                self.goForward()
+            }
+            else {
+                if differenceInSec >= 0 && differenceInSec < step.counDownTimer!{
+                    self.totalTime =   step.counDownTimer! - differenceInSec
+                }
+                
+                print("difference \(differenceInSec)")
+                // self.totalTime =    step.counDownTimer!
+                
+                let hours =  Int(self.totalTime!) / 3600
+                let minutes = Int(self.totalTime!) / 60 % 60
+                let seconds =  Int(self.totalTime!) % 60
+                
+                self.timerValue =  self.totalTime    // step.counDownTimer!
+                
+                self.timerLabel?.text = (hours < 10 ? "0\(hours):" : "\(hours):") + (minutes < 10 ? "0\(minutes):" : "\(minutes):")   + (seconds < 10 ? "0\(seconds)" : "\(seconds)")
+                self.taskResult.duration = self.totalTime!
+                
+                
+                if autoStartTimer{
+                    
+                    let previousKicks:Int? = ud.value(forKey:"FetalKickCounterValue" ) as? Int
+                    
+                    self.kickCounter = (previousKicks == nil ? 0 : previousKicks!)
+                    
+                    self.setCounter()
+                    
+                    self.startButtonAction(UIButton())
+                    
+                    
+                    
+                }
+                
+            }
             
-            let hours =  Int(self.totalTime!) / 3600
-            let minutes = Int(self.totalTime!) / 60 % 60
-            let seconds =  Int(self.totalTime!) % 60
-            
-            self.timerValue =   step.counDownTimer!
-            
-            self.timerLabel?.text = (hours < 10 ? "0\(hours):" : "\(hours):") + (minutes < 10 ? "0\(minutes):" : "\(minutes):")   + (seconds < 10 ? "0\(seconds)" : "\(seconds)")
-            self.taskResult.duration = self.totalTime!
-            
-           
+            backgroundTaskIdentifier = UIApplication.shared.beginBackgroundTask(expirationHandler: {
+                
+            })
             
             
-        }
-        
-        backgroundTaskIdentifier = UIApplication.shared.beginBackgroundTask(expirationHandler: {
             
-        })
-        
-        
-        func viewWillAppear(){
             
-        }
-        
-        // enables the IQKeyboardManager
-        IQKeyboardManager.sharedManager().enable = true
-        
-        // adding guesture to view to support outside tap
-        let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(FetalKickCounterStepViewController.handleTap(_:)))
-        gestureRecognizer.delegate = self
-        self.view.addGestureRecognizer(gestureRecognizer)
+            // enables the IQKeyboardManager
+            IQKeyboardManager.sharedManager().enable = true
+            
+            // adding guesture to view to support outside tap
+            let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(FetalKickCounterStepViewController.handleTap(_:)))
+            gestureRecognizer.delegate = self
+            self.view.addGestureRecognizer(gestureRecognizer)
+            }
+            
+            
+            
+          
         
         
        // backgroundTaskIdentifier = UIApplication.shared.beginBackgroundTask(expirationHandler: {
@@ -130,6 +185,23 @@ class FetalKickCounterStepViewController:  ORKStepViewController {
     /*
      updates the timer value
      */
+    
+    func setCounterValue(){
+        
+            if self.kickCounter! < 10{
+                counterTextField?.text = "00" + "\(self.kickCounter!)"
+            }
+            else if self.kickCounter! >= 10 && self.kickCounter! < 100{
+                counterTextField?.text = "0" + "\(self.kickCounter!)"
+            }
+            else {
+                counterTextField?.text = "\(self.kickCounter!)"
+            }
+            
+        
+
+    }
+    
     
     func setCounter() {
         
@@ -184,6 +256,43 @@ class FetalKickCounterStepViewController:  ORKStepViewController {
         counterTextField?.resignFirstResponder()
     }
     
+    func appMovedToBackground() {
+        
+        print("App moved to background!")
+        
+        let ud = UserDefaults.standard
+        if ud.object(forKey: "FetalKickStartTimeStamp") != nil{
+            
+            ud.set(true, forKey: "FKC")
+            
+            ud.set(Study.currentActivity?.actvityId, forKey: "FetalKickActivityId")
+            ud.set(Study.currentStudy?.studyId, forKey: "FetalKickStudyId")
+            
+            ud.set(self.kickCounter, forKey: "FetalKickCounterValue")
+            
+            //check if runid is saved
+            if ud.object(forKey: "FetalKickCounterRunid") == nil {
+                ud.set(Study.currentActivity?.currentRun.runId, forKey: "FetalKickCounterRunid")
+            }
+            
+            
+            ud.synchronize()
+        }
+        
+    }
+    
+    
+    func appBecameActive() {
+        print("App moved to forground!")
+        
+        let ud = UserDefaults.standard
+        ud.set(false, forKey: "FKC")
+        
+        ud.synchronize()
+    }
+
+    
+    
     //Mark:IBActions
     
     
@@ -202,6 +311,13 @@ class FetalKickCounterStepViewController:  ORKStepViewController {
                 // first time
                 
                 self.timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(FetalKickCounterStepViewController.setCounter), userInfo: nil, repeats: true)
+                
+                //save start time stamp
+                let ud = UserDefaults.standard
+                if ud.object(forKey: "FetalKickStartTimeStamp") == nil {
+                    ud.set(Date(),forKey:"FetalKickStartTimeStamp")
+                }
+                ud.synchronize()
                 
                 RunLoop.main.add(self.timer!, forMode: .commonModes)
                 

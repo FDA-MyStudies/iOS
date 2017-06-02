@@ -404,12 +404,17 @@ extension SignUpViewController : UITableViewDataSource {
             
             isSecuredEntry = false
         */
-        case  .Password,.ConfirmPassword:
+        case  .Password:
             
             isSecuredEntry = true
+            cell.textFieldValue?.text = self.user.password
+        case  .ConfirmPassword:
+            isSecuredEntry = true
+            cell.textFieldValue?.text = confirmPassword
         case .EmailId :
             keyBoardType = .emailAddress
             isSecuredEntry = false
+            cell.textFieldValue?.text = self.user.emailId
         default:break
         }
         //Cell Data Setup

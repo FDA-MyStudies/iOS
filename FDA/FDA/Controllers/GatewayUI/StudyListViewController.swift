@@ -44,6 +44,8 @@ class StudyListViewController: UIViewController {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         appDelegate.askForNotification()
         
+        
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -71,6 +73,7 @@ class StudyListViewController: UIViewController {
             if ispasscodePending == true{
                 
                 if User.currentUser.userType == .FDAUser {
+                    self.tableView?.isHidden = true
                     UserServices().getUserProfile(self as NMWebServiceDelegate)
                 }
                 
@@ -191,6 +194,35 @@ class StudyListViewController: UIViewController {
         }
     }
     
+    
+    func checkIfFetelKickCountRunning(){
+        
+        let ud = UserDefaults.standard
+        
+        
+        if (ud.bool(forKey: "FKC") && ud.object(forKey: "FetalKickStartTimeStamp") != nil) {
+            
+            let studyId = ud.object(forKey: "FetalKickStudyId")  as! String
+            let study  = Gateway.instance.studies?.filter({$0.studyId == studyId}).last
+            
+            
+            if (study?.userParticipateState.status == .inProgress && study?.status == .Active){
+                
+                Study.updateCurrentStudy(study: study!)
+                self.pushToStudyDashboard(animated: false)
+            }
+        }
+        
+        
+//        ud.removeObject(forKey: "FKC")
+//        ud.removeObject(forKey: "FetalKickActivityId")
+//        ud.removeObject(forKey: "FetalKickCounterValue")
+//        ud.removeObject(forKey: "FetalKickStartTimeStamp")
+//        ud.synchronize()
+        
+        
+    }
+    
 
 //MARK:- Helper Methods
     
@@ -228,14 +260,14 @@ class StudyListViewController: UIViewController {
      Navigate the screen to Study Dashboard tabbar viewcontroller screen
      
      */
-    func pushToStudyDashboard(){
+    func pushToStudyDashboard(animated:Bool = true){
         
         let studyStoryBoard = UIStoryboard.init(name: "Study", bundle: Bundle.main)
         
         let studyDashboard = studyStoryBoard.instantiateViewController(withIdentifier: kStudyDashboardTabbarControllerIdentifier) as! StudyDashboardTabbarViewController
         
         self.navigationController?.navigationBar.isHidden = true
-        self.navigationController?.pushViewController(studyDashboard, animated: true)
+        self.navigationController?.pushViewController(studyDashboard, animated: animated)
     }
     
     
@@ -259,7 +291,9 @@ class StudyListViewController: UIViewController {
         taskViewController.isNavigationBarHidden = true
         
         
-        self.navigationController?.present(taskViewController, animated: false, completion: nil)
+        self.navigationController?.present(taskViewController, animated: false, completion: {
+            self.tableView?.isHidden = false
+        })
  
     }
     
@@ -287,6 +321,10 @@ class StudyListViewController: UIViewController {
                 
                 Gateway.instance.studies = sortedstudies2
                 self.tableView?.reloadData()
+                
+                
+                self.checkIfFetelKickCountRunning()
+                
             }
             else {
                 if !self.studyListRequestFailed {
@@ -618,6 +656,7 @@ extension StudyListViewController:NMWebServiceDelegate {
              self.removeProgressIndicator()
             if User.currentUser.settings?.passcode == true {
                 self.setPassCode()
+                
             }
             else {
                 UserDefaults.standard.set(false, forKey: kPasscodeIsPending)
@@ -651,8 +690,11 @@ extension StudyListViewController:NMWebServiceDelegate {
                 self.loadStudiesFromDatabase()
                 
             }
+            else {
+                 UIUtilities.showAlertWithTitleAndMessage(title:NSLocalizedString(kErrorTitle, comment: "") as NSString, message: error.localizedDescription as NSString)
+            }
             
-            UIUtilities.showAlertWithTitleAndMessage(title:NSLocalizedString(kErrorTitle, comment: "") as NSString, message: error.localizedDescription as NSString)
+          
         }
     }
 }

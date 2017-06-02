@@ -1980,8 +1980,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.btc.FDA;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "7372aef9-8c6b-4fcd-8d3e-343f5585f65a";
-				PROVISIONING_PROFILE_SPECIFIER = FDA_Development;
+				PROVISIONING_PROFILE = "b15a4b9d-4503-491f-a6e4-1bf9dddb88ce";
+				PROVISIONING_PROFILE_SPECIFIER = HPHC_Development;
 				SWIFT_OBJC_BRIDGING_HEADER = "FDA/Controllers/LoginRegisterUI/FDA-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;

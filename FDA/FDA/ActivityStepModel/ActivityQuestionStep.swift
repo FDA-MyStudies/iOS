@@ -359,7 +359,7 @@ class ActivityQuestionStep: ActivityStep {
                 {
                     
                     let maxDesc = formatDict?[kStepQuestionContinuosScaleMaxDesc] as? String
-                    let minDesc = formatDict?[kStepQuestionContinuosScaleMaxDesc] as? String
+                    let minDesc = formatDict?[kStepQuestionContinuosScaleMinDesc] as? String
                     
                     
                     if (formatDict?[kStepQuestionContinuosScaleMinValue] as? Double)! != (formatDict?[kStepQuestionContinuosScaleMaxValue] as? Double)!{

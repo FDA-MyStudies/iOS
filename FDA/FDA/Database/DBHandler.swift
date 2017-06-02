@@ -1481,7 +1481,7 @@ class DBHandler: NSObject {
         
         
         let realm = try! Realm()
-        let dbNotifications = realm.objects(DBNotification.self)
+        let dbNotifications = realm.objects(DBNotification.self).sorted(byKeyPath: "date", ascending: false)
         
         var notificationList:Array<AppNotification> = []
         for dbnotification in dbNotifications {

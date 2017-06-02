@@ -157,8 +157,17 @@ class ConsentBuilder{
          */
         
         if self.consentSectionArray.count > 0 {
-        let visualConsentStep = VisualConsentStep(identifier: "visual", document: self.getConsentDocument())
-        return visualConsentStep
+            
+            let invisibleVisualConsents = self.consentSectionArray.filter({$0.type == .onlyInDocument})
+            
+            if invisibleVisualConsents.count ==  self.consentSectionArray.count{
+                return nil
+            }
+            else{
+                let visualConsentStep = VisualConsentStep(identifier: "visual", document: self.getConsentDocument())
+                return visualConsentStep
+            }
+        
         }
         else{
             return nil

@@ -186,27 +186,47 @@ class StudyHomeViewController : UIViewController{
      
      */
     func createEligibilityConsentTask()   {
-        
-        var eligibilitySteps =  EligibilityBuilder.currentEligibility?.getEligibilitySteps()
-        
-        let taskViewController:ORKTaskViewController?
-        
         /*
-         
-         let filePath  = Bundle.main.path(forResource: "Consent", ofType: "json")
+         let filePath  = Bundle.main.path(forResource: "ConsentLatest", ofType: "json")
          let data = NSData(contentsOfFile: filePath!)
+        
+        var response:Dictionary<String,Any>?
+        
          do {
-         let dataDict = try JSONSerialization.jsonObject(with: data! as Data, options: []) as? Dictionary<String,Any>
+          response = try JSONSerialization.jsonObject(with: data! as Data, options: []) as? Dictionary<String,Any>
          
-         let consent = dataDict?["Result"]as! Dictionary<String, Any>
-         ConsentBuilder.currentConsent = ConsentBuilder()
-         ConsentBuilder.currentConsent?.initWithMetaData(metaDataDict: consent)
+            
+        // let consent = dataDict?["Result"]as! Dictionary<String, Any>
+        // ConsentBuilder.currentConsent = ConsentBuilder()
+        // ConsentBuilder.currentConsent?.initWithMetaData(metaDataDict: consent)
          
          
          }catch{
          
          }
-         */
+        
+        let consent = response?[kConsent] as! Dictionary<String, Any>
+        let eligibility = response?[kEligibility] as! Dictionary<String, Any>
+        
+        if Utilities.isValidObject(someObject: consent as AnyObject?){
+            ConsentBuilder.currentConsent = ConsentBuilder()
+            ConsentBuilder.currentConsent?.initWithMetaData(metaDataDict: consent)
+        }
+        
+        if Utilities.isValidObject(someObject: eligibility as AnyObject?){
+            EligibilityBuilder.currentEligibility = EligibilityBuilder()
+            EligibilityBuilder.currentEligibility?.initEligibilityWithDict(eligibilityDict:eligibility )
+        }
+        
+ */
+ 
+        //-------------------------------
+        
+        var eligibilitySteps =  EligibilityBuilder.currentEligibility?.getEligibilitySteps()
+        
+        let taskViewController:ORKTaskViewController?
+        
+       
         let consentTask:ORKOrderedTask? = ConsentBuilder.currentConsent?.createConsentTask() as! ORKOrderedTask?
         
         for stepDict in (consentTask?.steps)!{

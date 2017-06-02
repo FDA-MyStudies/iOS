@@ -197,7 +197,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="m43-3P-pth" sceneMemberID="viewController">
                     <toolbarItems/>
                     <nil key="simulatedTopBarMetrics"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="1Sg-W7-ndU">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="1Sg-W7-ndU">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -369,7 +369,7 @@
                                 <rect key="frame" x="0.0" y="287" width="375" height="380"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="18" translatesAutoresizingMaskIntoConstraints="NO" id="cQm-5R-c9C">
-                                        <rect key="frame" x="18" y="16" width="340" height="189"/>
+                                        <rect key="frame" x="18" y="15.5" width="340" height="190"/>
                                         <string key="text">The data captured from pregnant women (e.g. medical product exposures, outcomes etc.) will be linked with data from an organization, such as a clinical practise, that has access to electronic health data and this will help provide insights into the efficacy and safety of medical products.</string>
                                         <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="19"/>
                                         <nil key="highlightedColor"/>
@@ -674,7 +674,7 @@
                                 <color key="backgroundColor" red="0.84705882349999995" green="0.89019607840000003" blue="0.90196078430000004" alpha="1" colorSpace="calibratedRGB"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="welcomeCell" rowHeight="70" id="lRY-T3-IvM" customClass="StudyDashboardWelcomeTableViewCell" customModule="FDA" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="56" width="375" height="70"/>
+                                        <rect key="frame" x="0.0" y="55.5" width="375" height="70"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="lRY-T3-IvM" id="Yu2-RD-Ywx">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="70"/>
@@ -755,7 +755,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="percentageCell" rowHeight="200" id="xHx-3T-4Ix" customClass="StudyDashboardStudyPercentageTableViewCell" customModule="FDA" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="126" width="375" height="200"/>
+                                        <rect key="frame" x="0.0" y="125.5" width="375" height="200"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="xHx-3T-4Ix" id="prx-D2-EIC">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="200"/>
@@ -883,7 +883,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="StatisticsCell" rowHeight="210" id="CvQ-Hd-eDc" customClass="StudyDashboardStatisticsTableViewCell" customModule="FDA" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="326" width="375" height="210"/>
+                                        <rect key="frame" x="0.0" y="325.5" width="375" height="210"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="CvQ-Hd-eDc" id="nM8-jf-Yku">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="210"/>
@@ -1028,7 +1028,7 @@
                                                     </collectionViewFlowLayout>
                                                     <cells>
                                                         <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="StatisticsCell" id="MZ5-Pr-Min" customClass="StudyDashboardStatisticsCollectionViewCell" customModule="FDA" customModuleProvider="target">
-                                                            <rect key="frame" x="0.0" y="14" width="125" height="110"/>
+                                                            <rect key="frame" x="0.0" y="13.5" width="125" height="110"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                                                 <rect key="frame" x="0.0" y="0.0" width="125" height="110"/>
@@ -1159,7 +1159,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="trendCell" rowHeight="50" id="C7V-K2-Fb9" customClass="StudyDashboardTrendsTableViewCell" customModule="FDA" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="536" width="375" height="50"/>
+                                        <rect key="frame" x="0.0" y="535.5" width="375" height="50"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="C7V-K2-Fb9" id="lHu-ZI-fyS">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
@@ -1245,7 +1245,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="265"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="efL-BG-Ieh" id="w0g-yn-hEC">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="264"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="264.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6Hk-K5-nZj" customClass="ORKLineGraphChartView">
@@ -1427,6 +1427,7 @@
                                                     <rect key="frame" x="314" y="71" width="46" height="15"/>
                                                     <color key="backgroundColor" red="0.96078431369999995" green="0.68627450980000004" blue="0.2156862745" alpha="1" colorSpace="calibratedRGB"/>
                                                     <constraints>
+                                                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="46" id="KhJ-oL-OxS"/>
                                                         <constraint firstAttribute="height" constant="15" id="y8Y-Fy-2uF"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="12"/>
@@ -1693,7 +1694,7 @@
                         </userDefinedRuntimeAttributes>
                     </tabBarItem>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="DHs-KD-p4k">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="DHs-KD-p4k">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -1718,7 +1719,7 @@
                         </userDefinedRuntimeAttributes>
                     </tabBarItem>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="Myb-Rk-C1b">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Myb-Rk-C1b">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -1744,7 +1745,7 @@
                     </tabBarItem>
                     <toolbarItems/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" translucent="NO" id="U2D-mI-xcD">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="U2D-mI-xcD">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>

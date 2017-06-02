@@ -503,9 +503,10 @@ class ActivitiesViewController : UIViewController{
         }
         else {
             let previousMissed = ud.object(forKey: missedKey) as! Int
+             ud.set(totalIncompletedRuns, forKey: missedKey)
             if previousMissed < totalIncompletedRuns {
                 //sho alert
-                ud.set(totalIncompletedRuns, forKey: missedKey)
+               
                 UIUtilities.showAlertWithMessage(alertMessage: "Hi, we noticed you happened to miss out on an activity run today. Your participation is important!  We urge you to complete study activities before they expire and have a higher study adherence rate!")
             }
         }

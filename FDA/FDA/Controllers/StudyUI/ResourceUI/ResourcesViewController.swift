@@ -157,112 +157,117 @@ class ResourcesViewController : UIViewController{
         
         //Add resources list
         for  resource in (Study.currentStudy?.resources)!{
-         
-            //check for startDate and endDate
-            if resource.startDate != nil && resource.endDate != nil {
-                
-                let start = resource.startDate?.startOfDay
-                let end = resource.endDate?.endOfDay
-                
-                let startDateResult = (start?.compare(todayDate))! as ComparisonResult
-                let endDateResult = (end?.compare(todayDate))! as ComparisonResult
-              
-                
-                if ((startDateResult == .orderedAscending || startDateResult == .orderedSame) && (endDateResult == .orderedDescending || endDateResult == .orderedSame)){
-                    print("current")
+            
+            if resource.povAvailable{
+                //check for startDate and endDate
+                if resource.startDate != nil && resource.endDate != nil {
                     
-                    tableViewRowDetails?.append(resource)
+                    let start = resource.startDate?.startOfDay
+                    let end = resource.endDate?.endOfDay
                     
-                   
+                    let startDateResult = (start?.compare(todayDate))! as ComparisonResult
+                    let endDateResult = (end?.compare(todayDate))! as ComparisonResult
                     
                     
-                }
-            } //check for anchorDate
-            else if resource.anchorDateStartDays != nil && resource.anchorDateEndDays != nil {
-                
-                let anchorDateObject = Study.currentStudy?.anchorDate
-                if(anchorDateObject != nil && (anchorDateObject?.isAnchorDateAvailable())!) {
-                    
-                    
-                    
-                    let anchorDate = Study.currentStudy?.anchorDate?.date
-                    
-                    if anchorDate != nil {
+                    if ((startDateResult == .orderedAscending || startDateResult == .orderedSame) && (endDateResult == .orderedDescending || endDateResult == .orderedSame)){
+                        print("current")
                         
-                        //also anchor date condition
-                        let startDateInterval = TimeInterval(60*60*24*(resource.anchorDateStartDays)!)
-                        let endDateInterval = TimeInterval(60*60*24*(resource.anchorDateEndDays)!)
+                        tableViewRowDetails?.append(resource)
                         
-                        let startAnchorDate = anchorDate?.addingTimeInterval(startDateInterval)
-                        var endAnchorDate = anchorDate?.addingTimeInterval(endDateInterval)
                         
-                        endAnchorDate = endAnchorDate?.endOfDay
-                        let startDateResult = (startAnchorDate?.compare(todayDate))! as ComparisonResult
-                        let endDateResult = (endAnchorDate?.compare(todayDate))! as ComparisonResult
                         
-                        if ((startDateResult == .orderedAscending || startDateResult == .orderedSame) && (endDateResult == .orderedDescending || endDateResult == .orderedSame)){
-                            
-                            tableViewRowDetails?.append(resource)
-                        }
-//                        else if startDateResult == .orderedDescending {
-//                            print("upcoming")
-//                            return .upcoming
-//                        }
-//                        else if endDateResult == .orderedAscending {
-//                            print("past")
-//                            return .past
-//                        }
-                        else if startDateResult == .orderedDescending {
-                            //upcoming
-                            let notfiId = resource.resourcesId! + (Study.currentStudy?.studyId)!
-                            DBHandler.isNotificationSetFor(notification: notfiId
-                                , completionHandler: { (found) in
-                                    if !found {
-                                        
-                                        let notification = AppLocalNotification()
-                                        notification.id = resource.resourcesId! + (Study.currentStudy?.studyId)!
-                                        notification.message = resource.notificationMessage
-                                        notification.title = "New Resource Available"
-                                        notification.startDate = startAnchorDate
-                                        notification.endDate = endAnchorDate
-                                        notification.type = AppNotification.NotificationType.Study
-                                        notification.subType = AppNotification.NotificationSubType.Resource
-                                        notification.audience = Audience.Limited
-                                        notification.studyId = (Study.currentStudy?.studyId)!
-                                        //notification.activityId = Study.currentActivity?.actvityId
-                                        
-                                        DBHandler.saveLocalNotification(notification: notification)
-                                        
-                                        //register notification
-                                        let message = resource.notificationMessage
-                                        let userInfo = ["studyId":(Study.currentStudy?.studyId)!,
-                                                        "type":"resource"];
-                                        LocalNotification.scheduleNotificationOn(date: startAnchorDate!, message: message!, userInfo: userInfo)
-                                    }
-                            })
-                            
-                            
-                        }
+                        
                     }
+                } //check for anchorDate
+                else if resource.anchorDateStartDays != nil && resource.anchorDateEndDays != nil {
                     
+                    let anchorDateObject = Study.currentStudy?.anchorDate
+                    if(anchorDateObject != nil && (anchorDateObject?.isAnchorDateAvailable())!) {
+                        
+                        
+                        
+                        let anchorDate = Study.currentStudy?.anchorDate?.date
+                        
+                        if anchorDate != nil {
+                            
+                            //also anchor date condition
+                            let startDateInterval = TimeInterval(60*60*24*(resource.anchorDateStartDays)!)
+                            let endDateInterval = TimeInterval(60*60*24*(resource.anchorDateEndDays)!)
+                            
+                            let startAnchorDate = anchorDate?.addingTimeInterval(startDateInterval)
+                            var endAnchorDate = anchorDate?.addingTimeInterval(endDateInterval)
+                            
+                            endAnchorDate = endAnchorDate?.endOfDay
+                            let startDateResult = (startAnchorDate?.compare(todayDate))! as ComparisonResult
+                            let endDateResult = (endAnchorDate?.compare(todayDate))! as ComparisonResult
+                            
+                            if ((startDateResult == .orderedAscending || startDateResult == .orderedSame) && (endDateResult == .orderedDescending || endDateResult == .orderedSame)){
+                                
+                                tableViewRowDetails?.append(resource)
+                            }
+                                //                        else if startDateResult == .orderedDescending {
+                                //                            print("upcoming")
+                                //                            return .upcoming
+                                //                        }
+                                //                        else if endDateResult == .orderedAscending {
+                                //                            print("past")
+                                //                            return .past
+                                //                        }
+                            else if startDateResult == .orderedDescending {
+                                //upcoming
+                                let notfiId = resource.resourcesId! + (Study.currentStudy?.studyId)!
+                                DBHandler.isNotificationSetFor(notification: notfiId
+                                    , completionHandler: { (found) in
+                                        if !found {
+                                            
+                                            let notification = AppLocalNotification()
+                                            notification.id = resource.resourcesId! + (Study.currentStudy?.studyId)!
+                                            notification.message = resource.notificationMessage
+                                            notification.title = "New Resource Available"
+                                            notification.startDate = startAnchorDate
+                                            notification.endDate = endAnchorDate
+                                            notification.type = AppNotification.NotificationType.Study
+                                            notification.subType = AppNotification.NotificationSubType.Resource
+                                            notification.audience = Audience.Limited
+                                            notification.studyId = (Study.currentStudy?.studyId)!
+                                            //notification.activityId = Study.currentActivity?.actvityId
+                                            
+                                            DBHandler.saveLocalNotification(notification: notification)
+                                            
+                                            //register notification
+                                            let message = resource.notificationMessage
+                                            let userInfo = ["studyId":(Study.currentStudy?.studyId)!,
+                                                            "type":"resource"];
+                                            LocalNotification.scheduleNotificationOn(date: startAnchorDate!, message: message!, userInfo: userInfo)
+                                        }
+                                })
+                                
+                                
+                            }
+                        }
+                        
+                        
+                        
+                    }
+                    else {
+                        tableViewRowDetails?.append(resource)
+                    }
                     
                     
                 }
                 else {
-                     tableViewRowDetails?.append(resource)
+                    tableViewRowDetails?.append(resource)
                 }
-            
-                
             }
             else {
-                tableViewRowDetails?.append(resource)
+                 tableViewRowDetails?.append(resource)
             }
-           
+            
         }
         
         self.appendLeaveStudy()
         
-       
+        
         tableView?.isHidden =  false
         tableView?.reloadData()
         
@@ -573,22 +578,23 @@ extension ResourcesViewController:NMWebServiceDelegate {
     func finishedRequest(_ manager: NetworkManager, requestName: NSString, response: AnyObject?) {
         Logger.sharedInstance.info("requestname : \(requestName) response : \(response)" )
         
-        self.removeProgressIndicator()
+        
         
         if requestName as String == WCPMethods.resources.method.methodName {
             
+            self.removeProgressIndicator()
             self.handleResourcesReponse()
             
             
         }
         else if requestName as String == ResponseMethods.withdrawFromStudy.method.methodName {
             
-             self.addProgressIndicator()
+             //self.addProgressIndicator()
             UserServices().withdrawFromStudy(studyId: (Study.currentStudy?.studyId)!, shouldDeleteData: false, delegate: self)
         }
         else if requestName as String == RegistrationMethods.withdraw.method.methodName{
             
-            
+            self.removeProgressIndicator()
             self.navigationController?.navigationBar.isHidden = false
             self.performSegue(withIdentifier: "unwindeToStudyListResourcesIdentifier", sender: self)
 
@@ -602,9 +608,11 @@ extension ResourcesViewController:NMWebServiceDelegate {
         else  if requestName as String == RegistrationMethods.updatePreferences.method.methodName{
            // self.navigationController?.navigationBar.isHidden = false
            // self.performSegue(withIdentifier: "unwindeToStudyListResourcesIdentifier", sender: self)
+            self.removeProgressIndicator()
         }
         else if(requestName as String == WCPMethods.studyInfo.rawValue){
             
+            self.removeProgressIndicator()
             StudyUpdates.studyInfoUpdated = false
             DBHandler.updateMetaDataToUpdateForStudy(study: Study.currentStudy!, updateDetails: nil)
             
@@ -620,7 +628,7 @@ extension ResourcesViewController:NMWebServiceDelegate {
         }
         else if requestName as String == RegistrationMethods.consentPDF.method.methodName{
             
-            
+            self.removeProgressIndicator()
             let consentDict:Dictionary<String,Any> = (response as! Dictionary<String,Any>)[kConsentPdfKey] as! Dictionary<String, Any>
             
             if Utilities.isValidObject(someObject:consentDict as AnyObject? ){

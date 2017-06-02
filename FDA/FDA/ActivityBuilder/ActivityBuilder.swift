@@ -270,7 +270,7 @@ class ActivityBuilder {
                                         
                                     }
                                     else{
-                                        
+                                        // it means contition is empty
                                         
                                         if dict[kCondtion] != nil && dict[kCondtion] as! String == ""{
                                             
@@ -278,7 +278,14 @@ class ActivityBuilder {
                                             
                                             
                                             if Utilities.isValidValue(someObject: dict[kDestination] as AnyObject? ){
+                                                // means we ahave valid destination
+                                                
                                                 defaultStepIdentifier = dict[kDestination]! as! String
+                                            }
+                                            else{
+                                                // invalid destination i.e condition = "" && destination = ""
+                                                
+                                                 defaultStepIdentifier = "CompletionStep"
                                             }
                                             
                                         }

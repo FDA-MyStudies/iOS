@@ -1390,6 +1390,7 @@ class DBHandler: NSObject {
             resource.startDate = dbResource.startDate
             resource.key = dbResource.key
             resource.povAvailable = dbResource.povAvailable
+            resource.notificationMessage = dbResource.notificationMessage
             resource.level = ResourceLevel(rawValue:dbResource.level!)
             
             let file = File()

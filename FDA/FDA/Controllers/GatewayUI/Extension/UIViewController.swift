@@ -77,12 +77,13 @@ extension UIViewController {
            view = UINib(nibName: "NewProgressView", bundle: nil).instantiate(withOwner: nil, options: nil)[0] as? UIView
             
             
-            let url = Bundle.main.url(forResource: "fda_preload@2x", withExtension: "gif")!
+            let url = Bundle.main.url(forResource: "fda_preload", withExtension: "gif")!
             let data = try! Data(contentsOf: url)
             let webView =  view?.subviews.first as! UIWebView
             
             
-            webView.load(data, mimeType: "image/gif", textEncodingName: "UTF-8", baseURL: NSURL() as URL)
+            //webView.load(data, mimeType: "image/gif", textEncodingName: "UTF-8", baseURL: URL())
+            webView.loadRequest(URLRequest.init(url: url))
             webView.scalesPageToFit = true
             webView.contentMode = UIViewContentMode.scaleAspectFit
             

@@ -112,7 +112,7 @@ class FetalKickCounterTask {
         
         //create a Fetal Kick Counter Step
         let kickStep = FetalKickCounterStep(identifier: self.identifier!)
-        kickStep.counDownTimer = Int(self.duration! * 60)
+        kickStep.counDownTimer = Int(self.duration! )
         
         
         kickStep.totalCounts = 0

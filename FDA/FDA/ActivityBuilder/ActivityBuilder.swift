@@ -231,7 +231,18 @@ class ActivityBuilder {
                                             predicateQuestionChoiceA = ORKResultPredicate.predicateForChoiceQuestionResult(with:resultSelector! , expectedAnswerValue: dict[kCondtion] as! NSCoding & NSCopying & NSObjectProtocol)
                                             
                                             choicePredicate.append(predicateQuestionChoiceA)
-                                            destination?.append( dict[kDestination]! as! String)
+                                            
+                                            if dict[kCondtion] != nil && dict[kDestination] != nil && (dict[kDestination] as! String) == "" {
+                                                // this means c = value & d = ""
+                                                
+                                                 destination?.append( "CompletionStep" )
+                                            }
+                                            else{
+                                                // this means c = value && d =  value
+                                                
+                                                destination?.append( dict[kDestination]! as! String)
+                                            }
+                                            
                                             
                                         case is ORKBooleanAnswerFormat :
                                             
@@ -262,7 +273,16 @@ class ActivityBuilder {
                                             }
                                             
                                             choicePredicate.append(predicateQuestionChoiceA)
-                                            destination?.append( dict[kDestination]! as! String)
+                                            if dict[kCondtion] != nil && dict[kDestination] != nil && (dict[kDestination] as! String) == "" {
+                                                // this means c = value & d = ""
+                                                
+                                                destination?.append( "CompletionStep" )
+                                            }
+                                            else{
+                                                // this means c = value && d =  value
+                                                
+                                                destination?.append( dict[kDestination]! as! String)
+                                            }
                                             
                                         default:break
                                         }
@@ -270,7 +290,7 @@ class ActivityBuilder {
                                         
                                     }
                                     else{
-                                        // it means contition is empty
+                                        // it means condition is empty
                                         
                                         if dict[kCondtion] != nil && dict[kCondtion] as! String == ""{
                                             

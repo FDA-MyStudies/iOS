@@ -616,6 +616,7 @@ class DBHandler: NSObject {
         dbActivity.currentRunId = activity.userParticipationStatus.activityRunId
         dbActivity.participationStatus = activity.userParticipationStatus.status.rawValue
         dbActivity.completedRuns = activity.userParticipationStatus.compeltedRuns
+        dbActivity.id = activity.studyId! + activity.actvityId!
         do {
             let json = ["data":activity.frequencyRuns]
             let data =  try JSONSerialization.data(withJSONObject: json, options: JSONSerialization.WritingOptions.prettyPrinted)
@@ -804,7 +805,15 @@ class DBHandler: NSObject {
                 
                 
                 //append to user class participatesStudies also
-                User.currentUser.participatedActivites.append(userStatus)
+                let activityStatus = User.currentUser.participatedActivites.filter({$0.activityId == activity.actvityId}).first
+                let index = User.currentUser.participatedActivites.index(where:{$0.activityId == activity.actvityId })
+                if activityStatus != nil {
+                    User.currentUser.participatedActivites[index!] = userStatus
+                }
+                else {
+                    User.currentUser.participatedActivites.append(userStatus)
+                }
+                
                 
             }
             
@@ -1573,6 +1582,18 @@ class DBHandler: NSObject {
             
         }
         completionHandler(notificationList)
+    }
+    
+    class func isNotificationSetFor(notification:String,completionHandler:@escaping (Bool) -> ()){
+        let realm = try! Realm()
+       
+        let dbNotifications = realm.object(ofType: DBLocalNotification.self, forPrimaryKey: notification)
+        
+        if dbNotifications == nil{
+            completionHandler(false)
+        }
+        completionHandler(true)
+        
     }
 
     //MARK:- DELETE

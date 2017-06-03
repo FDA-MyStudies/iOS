@@ -95,6 +95,13 @@ class FetalKickCounterStepViewController:  ORKStepViewController {
         
             if differenceInSec > step.counDownTimer!{
                 //task is completed
+                
+                let previousKicks:Int? = ud.value(forKey:"FetalKickCounterValue" ) as? Int
+                
+                self.kickCounter = (previousKicks == nil ? 0 : previousKicks!)
+                
+                self.taskResult.totalKickCount = self.kickCounter!
+                
                 self.goForward()
             }
             else {

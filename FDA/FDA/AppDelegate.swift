@@ -35,6 +35,10 @@
         
         var selectedController:UIViewController?
         
+        var shouldAddForceUpgradeScreen = false
+        
+        var blockerScreen:AppUpdateBlocker?
+        
         
         func askForNotification(){
             
@@ -119,7 +123,7 @@
             
             UIView.appearance(whenContainedInInstancesOf: [ORKTaskViewController.self]).tintColor = kUIColorForSubmitButtonBackground
             
-            // self.checkForAppUpdate()
+            
             
             
             // self.checkForAppUpdate()
@@ -302,6 +306,7 @@
             print(deviceTokenString)
             //UserDetails.deviceToken = deviceTokenString
             
+            User.currentUser.settings?.remoteNotifications = true
             UserServices().updateUserProfile(deviceToken: deviceTokenString , delegate: self)
             
             
@@ -725,6 +730,7 @@
                         taskViewController.isNavigationBarHidden = true
                         
                         isPasscodePresented = true
+                        blockerScreen?.isHidden = true
                         viewController.present(taskViewController, animated: false, completion: nil)
                     }
                     else{
@@ -764,6 +770,9 @@
                         
                         if (topVC?.presentedViewController?.isKind(of: ORKPasscodeViewController.self) == false && (topVC?.presentedViewController?.isKind(of: ORKTaskViewController.self))!) || ( topVC != nil && topVC?.isKind(of: ORKPasscodeViewController.self) == false) {
                             isPasscodePresented = true
+                            
+                            blockerScreen?.isHidden = true
+                            
                             topVC!.present(passcodeViewController, animated: false, completion: nil)
                         }
                         
@@ -1042,8 +1051,46 @@
                     
                     if response?["forceUpdate"] as! Bool {
                         
-                        let appBlocker = AppUpdateBlocker.instanceFromNib(frame:(UIApplication.shared.keyWindow?.bounds)!, detail: response as! Dictionary<String, Any>);
+                       
+                       // topVC?.view.endEditing(true)
+                        
+                        //self.window?.endEditing(true)
+                        
+                        //UIApplication.shared.sendAction(#selector("resignFirstResponder"), to:nil, from:nil, for:nil)
+                        
+                        self.shouldAddForceUpgradeScreen = true
+                        
+                        let version = response?["currentVersion"] as! String
+                        
+                        blockerScreen = AppUpdateBlocker.instanceFromNib(frame:(UIApplication.shared.keyWindow?.bounds)!, detail: response as! Dictionary<String, Any>);
+                        
+                        blockerScreen?.labelVersionNumber.text = "V-" + version
+                        blockerScreen?.labelMessage.text = response?["message"] as? String
+                        
+                        
+                        if User.currentUser.userType == .FDAUser {
+                            //FDA user
+                            
+                            if User.currentUser.settings?.passcode! == false {
+                                UIApplication.shared.keyWindow?.addSubview(blockerScreen!)
+                            }
+                        }
+                        else {
+                            UIApplication.shared.keyWindow?.addSubview(blockerScreen!)
+                        }
+                        
                         // UIApplication.shared.keyWindow?.addSubview(appBlocker);
+                        
+                        //UIApplication.shared.sendAction(#selector(resignFirstResponder), to: nil, from: nil, for: nil)
+                        
+//                        var topVC = UIApplication.shared.keyWindow?.rootViewController
+//                        let vc  = topVC?.presentedViewController
+//                        if vc is ORKPasscodeViewController {
+//                           let vc1 = vc as! ORKPasscodeViewController
+//                            vc1.view.endEditing(true)
+//                        }
+                        
+                        
                     }
                     else {
                         UIUtilities.showAlertWithMessage(alertMessage: response?["message"] as! String);
@@ -1369,6 +1416,19 @@
             
             viewController.dismiss(animated: true, completion: {
                 self.isPasscodePresented = false
+                
+                if self.shouldAddForceUpgradeScreen {
+                    
+                    if self.blockerScreen?.isHidden == true {
+                        self.blockerScreen?.isHidden = false
+                    }
+                    else {
+                        UIApplication.shared.keyWindow?.addSubview(self.blockerScreen!)
+                    }
+                    
+                   
+                }
+                
             })
             
             if alertVCPresented != nil {

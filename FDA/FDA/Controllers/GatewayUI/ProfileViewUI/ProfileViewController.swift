@@ -28,9 +28,9 @@ let kProfileTitleText = "PROFILE"
 // Cell Toggle Switch Types
 enum ToggelSwitchTags:Int{
     case usePasscode = 3
-    case useTouchId = 4
-    case receivePush = 5
-    case receiveStudyActivityReminders = 6
+    case useTouchId = 6
+    case receivePush = 4
+    case receiveStudyActivityReminders = 5
 }
 
 class ProfileViewController: UIViewController {
@@ -388,6 +388,23 @@ class ProfileViewController: UIViewController {
                 user.settings?.remoteNotifications = toggle?.isOn
             case .receiveStudyActivityReminders:
                 user.settings?.localNotifications = toggle?.isOn
+                
+                if (user.settings?.localNotifications)! {
+                    //on
+                    print("on")
+                    self.addProgressIndicator()
+                    LocalNotification.registerLocalNotificationForJoinedStudies(completionHandler: { (done) in
+                        print("completed")
+                        self.removeProgressIndicator()
+                    })
+                }
+                else {
+                    print("false")
+                    UIApplication.shared.cancelAllLocalNotifications()
+                    let application = UIApplication.shared
+                    let scheduledNotifications = application.scheduledLocalNotifications!
+                    print("notification  \(scheduledNotifications)")
+                }
                 
             }
             
@@ -751,12 +768,12 @@ extension ProfileViewController:NMWebServiceDelegate {
             self.editBarButtonItem?.title = "Edit"
             self.tableViewProfile?.reloadData()
             self.buttonLeadTime?.isUserInteractionEnabled = self.isCellEditable!
-            
+             DBHandler.saveUserSettingsToDatabase()
             
             if self.isPasscodeViewPresented == true{
                 self.isPasscodeViewPresented = false
                 
-                DBHandler.saveUserSettingsToDatabase()
+               
                 
                 UserServices().getUserProfile(self)
             }

@@ -14,15 +14,23 @@
 		<key>placeHolder</key>
 		<string>add password</string>
 	</dict>
-    <dict>
-        <key>helpText</key>
-        <string>Passcode</string>
-        <key>placeHolder</key>
-        <string>add passcode</string>
-    </dict>
+	<dict>
+		<key>helpText</key>
+		<string>Passcode</string>
+		<key>placeHolder</key>
+		<string>add passcode</string>
+	</dict>
 	<dict>
 		<key>LabelName</key>
 		<string>Use Passcode to access app</string>
+	</dict>
+	<dict>
+		<key>LabelName</key>
+		<string>Receive Push Notifications?</string>
+	</dict>
+	<dict>
+		<key>LabelName</key>
+		<string>Receive Study Activity Reminders?</string>
 	</dict>
 </array>
 </plist>

@@ -14,9 +14,9 @@ let kToggleValue = "ToggleValue"
 
 enum ProfileTableViewCellType:Int {
     case usePasscode = 3
-    case useTouchId = 4
-    case receivePushNotifications = 5
-    case receiveStudyActivityReminder = 6
+    case useTouchId = 6
+    case receivePushNotifications = 4
+    case receiveStudyActivityReminder = 5
 }
 
 

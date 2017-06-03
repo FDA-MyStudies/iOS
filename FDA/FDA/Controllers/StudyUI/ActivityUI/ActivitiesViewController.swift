@@ -391,15 +391,18 @@ class ActivitiesViewController : UIViewController{
         
         self.updateCompletionAdherence()
         
-        if !(Study.currentStudy?.activitiesLocalNotificationUpdated)! {
+        if (User.currentUser.settings?.localNotifications)! {
             
-            LocalNotification.registerAllLocalNotificationFor(activities: (Study.currentStudy?.activities)!) { (finished) in
-                print("Notification set sucessfully")
-                Study.currentStudy?.activitiesLocalNotificationUpdated = true
+            if !(Study.currentStudy?.activitiesLocalNotificationUpdated)! {
                 
-                DBHandler.updateLocalNotificaitonUpdated(studyId: (Study.currentStudy?.studyId)!)
+                LocalNotification.registerAllLocalNotificationFor(activities: (Study.currentStudy?.activities)!) { (finished) in
+                    print("Notification set sucessfully")
+                    Study.currentStudy?.activitiesLocalNotificationUpdated = true
+                    
+                    DBHandler.updateLocalNotificaitonUpdated(studyId: (Study.currentStudy?.studyId)!)
+                }
+                
             }
-            
         }
         
         
@@ -808,6 +811,9 @@ extension ActivitiesViewController:NMWebServiceDelegate {
                     DBHandler.saveResponseDataFor(activity: Study.currentActivity!, toBeSynced: true, data: data!)
                     
                 }
+                
+            }
+            else if requestName as String == RegistrationMethods.updateStudyState.method.methodName{
                 
             }
             else {

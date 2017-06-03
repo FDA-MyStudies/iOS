@@ -100,7 +100,7 @@ class ProfileViewController: UIViewController {
     
     @IBAction func buttonActionChangePassCode(_ sender:UIButton){
         
-        let passcodeViewController = ORKPasscodeViewController.passcodeEditingViewController(withText: "Enter Passcode to access app", delegate: self, passcodeType: .type4Digit)
+        let passcodeViewController = ORKPasscodeViewController.passcodeEditingViewController(withText: "", delegate: self, passcodeType: .type4Digit)
         
         self.navigationController?.present(passcodeViewController, animated: false, completion: nil)
     }

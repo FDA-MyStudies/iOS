@@ -562,7 +562,7 @@ class UserStudyStatus{
             case .notEligible:
                 return "notEligible"
             case .withdrawn:
-                return "withdrawn"
+                return "Withdrawn"
                 
             }
         }

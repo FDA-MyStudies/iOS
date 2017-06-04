@@ -32,6 +32,7 @@ class AppNotification {
         case Study
         case Resource
         case Activity
+        case studyEvent
     }
 
     

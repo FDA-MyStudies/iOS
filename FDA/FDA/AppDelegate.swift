@@ -564,6 +564,7 @@
                                 Study.updateCurrentStudy(study:(Gateway.instance.studies?[index!])! )
                                 
                                 
+                                
                                 switch notificationSubType! as AppNotification.NotificationSubType {
                                 case .Activity, .Resource:
                                     
@@ -1541,7 +1542,20 @@
         
         func addProgressIndicatorOnWindow(){
             
-            let view = UINib(nibName: "ProgressView", bundle: nil).instantiate(withOwner: nil, options: nil)[0] as? UIView
+           
+           let view = UINib(nibName: "NewProgressView", bundle: nil).instantiate(withOwner: nil, options: nil)[0] as? UIView
+            
+            
+            let url = Bundle.main.url(forResource: "fda_preload", withExtension: "gif")!
+            let data = try! Data(contentsOf: url)
+            let webView =  view?.subviews.first as! UIWebView
+            
+            
+            //webView.load(data, mimeType: "image/gif", textEncodingName: "UTF-8", baseURL: URL())
+            webView.loadRequest(URLRequest.init(url: url))
+            webView.scalesPageToFit = true
+            webView.contentMode = UIViewContentMode.scaleAspectFit
+
             var frame = UIScreen.main.bounds
             frame.origin.y += 64
             view?.frame = frame
@@ -1562,6 +1576,36 @@
                 view?.removeFromSuperview()
             }
         }
+        
+        /*
+     
+         func addProgressIndicatorOnWindow(){
+         
+         let view = UINib(nibName: "ProgressView", bundle: nil).instantiate(withOwner: nil, options: nil)[0] as? UIView
+         var frame = UIScreen.main.bounds
+         frame.origin.y += 64
+         view?.frame = frame
+         view?.tag = 50000
+         self.addSubview(view!)
+         view?.alpha = 0
+         UIView.animate(withDuration: 0.3) {
+         view?.alpha = 1
+         }
+         }
+         
+         func removeProgressIndicatorFromWindow(){
+         
+         let view = self.viewWithTag(50000) //as UIView
+         UIView.animate(withDuration: 0.2, animations: {
+         view?.alpha = 0
+         }) { (completed) in
+         view?.removeFromSuperview()
+         }
+         }
+
+     
+     */
+        
         
         
     }

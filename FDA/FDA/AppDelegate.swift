@@ -935,6 +935,11 @@
         func handleStudyUpdatedInformation(){
             
             if Study.currentStudy != nil {
+                
+                if Study.currentStudy?.version == Study.currentStudy?.newVersion{
+                    return
+                }
+                
                 DBHandler.updateMetaDataToUpdateForStudy(study: Study.currentStudy!, updateDetails: nil)
                 
                 
@@ -1013,6 +1018,19 @@
             
             
             
+        }
+        
+        func popViewControllerAfterConsentDisagree(){
+            //self.popToStudyListViewController()
+            if self.selectedController is StudyDashboardViewController {
+                (self.selectedController as! StudyDashboardViewController).homeButtonAction(UIButton())
+            }
+            else if self.selectedController is ActivitiesViewController {
+                (self.selectedController as! ActivitiesViewController).homeButtonAction(UIButton())
+            }
+            else if self.selectedController is ResourcesViewController {
+                (self.selectedController as! ResourcesViewController).homeButtonAction(UIButton())
+            }
         }
         
         
@@ -1127,10 +1145,13 @@
         func failedRequest(_ manager: NetworkManager, requestName: NSString, error: NSError) {
             Logger.sharedInstance.info("requestname : \(requestName)")
             
-            
+            self.addAndRemoveProgress(add: false)
             if requestName as String == RegistrationMethods.logout.method.methodName {
                 self.addAndRemoveProgress(add: false)
                 
+            }
+            else if requestName as String == WCPMethods.eligibilityConsent.method.methodName{
+                self.popViewControllerAfterConsentDisagree()
             }
             
             
@@ -1190,16 +1211,7 @@
                 
                 if  taskViewController.task?.identifier == kConsentTaskIdentifier{
                     
-                    //self.popToStudyListViewController()
-                    if self.selectedController is StudyDashboardViewController {
-                        (self.selectedController as! StudyDashboardViewController).homeButtonAction(UIButton())
-                    }
-                    else if self.selectedController is ActivitiesViewController {
-                        (self.selectedController as! ActivitiesViewController).homeButtonAction(UIButton())
-                    }
-                    else if self.selectedController is ResourcesViewController {
-                        (self.selectedController as! ResourcesViewController).homeButtonAction(UIButton())
-                    }
+                    self.popViewControllerAfterConsentDisagree()
                 }
                 
                 
@@ -1345,12 +1357,7 @@
                             taskViewController.dismiss(animated: true
                                 , completion: nil)
                             
-                            var topVC = UIApplication.shared.keyWindow?.rootViewController
-                            while topVC?.presentedViewController != nil {
-                                topVC = topVC?.presentedViewController
-                            }
-                            
-                            _ = topVC?.navigationController?.popViewController(animated: true)
+                            self.popViewControllerAfterConsentDisagree()
                             return nil
                             
                         }

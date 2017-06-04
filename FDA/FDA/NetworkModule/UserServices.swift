@@ -699,6 +699,7 @@ class UserServices: NSObject {
     func handleGetStudyStatesResponse(response:Dictionary<String, Any>){
         let user = User.currentUser
         //studies
+        user.participatedStudies.removeAll()
         if let studies = response[kStudies] as? Array<Dictionary<String, Any>> {
             
             for study in studies {

@@ -350,7 +350,7 @@ class StudyHomeViewController : UIViewController{
                         UIUtilities.showAlertWithTitleAndMessage(title: "", message: NSLocalizedString(kMessageForStudyEnrollingNotAllowed, comment: "") as NSString)
                     }
                 }
-                else if participatedStatus == .withdrawn {
+                else if participatedStatus == .Withdrawn {
                     
                     // check if rejoining is allowed after withrdrawn from study
                     if currentStudy.studySettings.rejoinStudyAfterWithdrawn {

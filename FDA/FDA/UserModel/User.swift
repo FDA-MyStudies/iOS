@@ -497,7 +497,7 @@ class UserStudyStatus{
         case notEligible
         case inProgress
         case completed
-        case withdrawn
+        case Withdrawn
         
         var sortIndex : Int {
             switch self {
@@ -507,7 +507,7 @@ class UserStudyStatus{
                 return 1
             case .completed:
                 return 2
-            case .withdrawn:
+            case .Withdrawn:
                 return 3
             case .notEligible:
                 return 4
@@ -525,7 +525,7 @@ class UserStudyStatus{
                 return "Completed"
             case .notEligible:
                 return "Not Eligible"
-            case .withdrawn:
+            case .Withdrawn:
                 return "Withdrawn"
                 
             }
@@ -541,7 +541,7 @@ class UserStudyStatus{
                 return "Completed"
             case .notEligible:
                 return "Not Eligible"
-            case .withdrawn:
+            case .Withdrawn:
                 return "Withdrawn"
                 
             }
@@ -561,7 +561,7 @@ class UserStudyStatus{
                 return "completed"
             case .notEligible:
                 return "notEligible"
-            case .withdrawn:
+            case .Withdrawn:
                 return "Withdrawn"
                 
             }
@@ -617,8 +617,8 @@ class UserStudyStatus{
                 else if (StudyStatus.completed.paramValue == statusValue) {
                     self.status = .completed
                 }
-                else if (StudyStatus.withdrawn.paramValue == statusValue) {
-                    self.status = .withdrawn
+                else if (StudyStatus.Withdrawn.paramValue == statusValue) {
+                    self.status = .Withdrawn
                 }
             }
             

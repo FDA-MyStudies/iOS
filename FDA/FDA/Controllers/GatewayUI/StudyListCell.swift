@@ -192,7 +192,7 @@ class StudyListCell: UITableViewCell {
                 studyUserStatusIcon?.image = #imageLiteral(resourceName: "yet_to_join_icn")
             case .notEligible:
                 studyUserStatusIcon?.image = #imageLiteral(resourceName: "not_eligible_icn")
-            case .withdrawn:
+            case .Withdrawn:
                 studyUserStatusIcon?.image = #imageLiteral(resourceName: "not_eligible_icn")
             case .completed:
                 studyUserStatusIcon?.image = #imageLiteral(resourceName: "completed_icn")

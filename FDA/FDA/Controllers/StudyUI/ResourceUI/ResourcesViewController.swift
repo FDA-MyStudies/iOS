@@ -191,27 +191,44 @@ class ResourcesViewController : UIViewController{
                             
                             tableViewRowDetails?.append(resource)
                         }
-                        else {
+//                        else if startDateResult == .orderedDescending {
+//                            print("upcoming")
+//                            return .upcoming
+//                        }
+//                        else if endDateResult == .orderedAscending {
+//                            print("past")
+//                            return .past
+//                        }
+                        else if startDateResult == .orderedDescending {
+                            //upcoming
+                            let notfiId = resource.resourcesId! + (Study.currentStudy?.studyId)!
+                            DBHandler.isNotificationSetFor(notification: notfiId
+                                , completionHandler: { (found) in
+                                    if !found {
+                                        
+                                        let notification = AppLocalNotification()
+                                        notification.id = resource.resourcesId! + (Study.currentStudy?.studyId)!
+                                        notification.message = resource.notificationMessage
+                                        notification.title = "New Resource Available"
+                                        notification.startDate = startAnchorDate
+                                        notification.endDate = endAnchorDate
+                                        notification.type = AppNotification.NotificationType.Study
+                                        notification.subType = AppNotification.NotificationSubType.Resource
+                                        notification.audience = Audience.Limited
+                                        notification.studyId = (Study.currentStudy?.studyId)!
+                                        //notification.activityId = Study.currentActivity?.actvityId
+                                        
+                                        DBHandler.saveLocalNotification(notification: notification)
+                                        
+                                        //register notification
+                                        let message = resource.notificationMessage
+                                        let userInfo = ["studyId":(Study.currentStudy?.studyId)!,
+                                                        "type":"resource"];
+                                        LocalNotification.scheduleNotificationOn(date: startAnchorDate!, message: message!, userInfo: userInfo)
+                                    }
+                            })
                             
-                            let notification = AppLocalNotification()
-                            notification.id = resource.resourcesId! + (Study.currentStudy?.studyId)!
-                            notification.message = resource.notificationMessage
-                            notification.title = "New Resource Available"
-                            notification.startDate = startAnchorDate
-                            notification.endDate = endAnchorDate
-                            notification.type = AppNotification.NotificationType.Study
-                            notification.subType = AppNotification.NotificationSubType.Resource
-                            notification.audience = Audience.Limited
-                            notification.studyId = (Study.currentStudy?.studyId)!
-                            //notification.activityId = Study.currentActivity?.actvityId
                             
-                            DBHandler.saveLocalNotification(notification: notification)
-                            
-                            //register notification
-                            let message = resource.notificationMessage
-                            let userInfo = ["studyId":(Study.currentStudy?.studyId)!,
-                                            "type":"resource"];
-                            LocalNotification.scheduleNotificationOn(date: startAnchorDate!, message: message!, userInfo: userInfo)
                         }
                     }
                     

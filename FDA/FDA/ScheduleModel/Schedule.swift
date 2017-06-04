@@ -259,7 +259,7 @@ class Schedule{
         let startDateString =  Schedule.formatter?.string(from: startTime)
         var startDateShortStyle = Schedule.formatter2?.date(from: startDateString!)
         
-        if numberOfDays == 0 {
+        if numberOfDays <= 0 {
             numberOfDays = 1;
         }
         

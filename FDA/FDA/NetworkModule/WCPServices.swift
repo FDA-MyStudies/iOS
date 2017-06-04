@@ -443,24 +443,25 @@ class WCPServices: NSObject {
         let activities = response[kActivites] as! Array<Dictionary<String,Any>>
         
         if Utilities.isValidObject(someObject: activities as AnyObject? ) {
-            
-            var activityList:Array<Activity> = []
-           // Study.currentStudy?.activities = Array<Activity>()
-            for activityDict in activities{
+            if Study.currentStudy != nil {
+                var activityList:Array<Activity> = []
+                // Study.currentStudy?.activities = Array<Activity>()
+                for activityDict in activities{
+                    
+                    //let activity:Activity? = Activity.init()
+                    //activity?.initWithStudyActivityList(infoDict: activityDict)
+                    let activity = Activity.init(studyId: (Study.currentStudy?.studyId)!, infoDict: activityDict)
+                    
+                    activityList.append(activity)
+                    
+                    
+                }
                 
-                //let activity:Activity? = Activity.init()
-                //activity?.initWithStudyActivityList(infoDict: activityDict)
-                let activity = Activity.init(studyId: (Study.currentStudy?.studyId)!, infoDict: activityDict)
-                
-                activityList.append(activity)
-                
-               
+                //save to current study object
+                Study.currentStudy?.activities = activityList
+                //save in database
+                DBHandler.saveActivities(activityies: (Study.currentStudy?.activities)!)
             }
-            
-            //save to current study object
-            Study.currentStudy?.activities = activityList
-            //save in database
-            DBHandler.saveActivities(activityies: (Study.currentStudy?.activities)!)
         }
         else{
             Logger.sharedInstance.debug("activities is null:\(activities)")

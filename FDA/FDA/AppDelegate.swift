@@ -306,6 +306,7 @@
             print(deviceTokenString)
             //UserDetails.deviceToken = deviceTokenString
             
+            User.currentUser.settings?.remoteNotifications = true
             UserServices().updateUserProfile(deviceToken: deviceTokenString , delegate: self)
             
             

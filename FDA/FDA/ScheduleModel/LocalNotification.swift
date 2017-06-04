@@ -10,6 +10,54 @@ import UIKit
 
 class LocalNotification: NSObject {
 
+    static var studies:Array<Study> = []
+    static var handler:((Bool) -> ()) = {_ in }
+    class func registerLocalNotificationForJoinedStudies(completionHandler:@escaping (Bool) -> ()){
+        
+         studies = (Gateway.instance.studies?.filter({$0.userParticipateState.status == UserStudyStatus.StudyStatus.inProgress && $0.status == .Active}))!
+        
+        handler = completionHandler
+       
+        LocalNotification.registerForStudy()
+        
+        
+    }
+    
+    class func registerForStudy(){
+        
+        if studies.count > 0 {
+            
+            let study = studies.first
+            LocalNotification.registerForStudy(study: study!) { (done) in
+                if done {
+                    if (studies.count) > 0 {
+                        studies.removeFirst()
+                        LocalNotification.registerForStudy()
+                    }
+                    
+                }
+            }
+        }
+        else {
+            handler(true)
+        }
+        
+       
+    }
+    
+    class func registerForStudy(study:Study,completionHandler:@escaping (Bool) -> ()){
+    
+        DBHandler.loadActivityListFromDatabase(studyId: study.studyId) { (activities) in
+            if activities.count > 0 {
+                LocalNotification.registerAllLocalNotificationFor(activities: activities, completionHandler: { (done) in
+                    completionHandler(true)
+                })
+            }
+            else {
+                 completionHandler(true)
+            }
+        }
+    }
     
    class func registerAllLocalNotificationFor(activities:Array<Activity>,completionHandler:@escaping (Bool) -> ()){
     

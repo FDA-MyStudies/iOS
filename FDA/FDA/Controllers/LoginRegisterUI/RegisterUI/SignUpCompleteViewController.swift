@@ -28,7 +28,7 @@ class SignUpCompleteViewController : UIViewController{
         let settings:Settings? = Settings.init()
         
         settings?.remoteNotifications = false
-        settings?.localNotifications = false
+        settings?.localNotifications = true
         settings?.touchId = true
         settings?.passcode = true
         

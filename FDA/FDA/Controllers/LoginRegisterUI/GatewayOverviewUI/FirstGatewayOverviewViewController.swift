@@ -37,6 +37,11 @@ class FirstGatewayOverviewViewController : UIViewController{
         //effectView.frame = (imageViewBackgroundImage?.frame)!
         //self.imageViewBackgroundImage?.addSubview(effectView)
     
+        
+        if overviewSectionDetail.link == nil {
+            buttonWatchVideo?.isHidden = true
+        }
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {

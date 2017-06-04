@@ -430,7 +430,13 @@ class DBHandler: NSObject {
             dbStudy?.updateConsent = StudyUpdates.studyConsentUpdated
             dbStudy?.updateActivities = StudyUpdates.studyActivitiesUpdated
             dbStudy?.updateInfo = StudyUpdates.studyInfoUpdated
-            dbStudy?.version = dbStudy?.updatedVersion//StudyUpdates.studyVersion
+            if StudyUpdates.studyVersion != nil {
+                dbStudy?.version = StudyUpdates.studyVersion
+            }
+            else {
+                dbStudy?.version = dbStudy?.updatedVersion
+            }
+            
            // dbStudy?.updatedVersion = StudyUpdates.studyVersion
             
         })

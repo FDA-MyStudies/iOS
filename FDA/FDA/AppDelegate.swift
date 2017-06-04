@@ -25,6 +25,9 @@
             return window?.rootViewController as? ResearchContainerViewController
         }
         
+        var selectedController:UIViewController?
+        
+        
         func askForNotification(){
             
 //            let notificationSettings = UIUserNotificationSettings(types: [.alert, .sound, .badge], categories: nil)
@@ -116,13 +119,28 @@
             // self.window?.isHidden = true
             
             
-           
-                  self.checkPasscode(viewController: (application.windows[0].rootViewController)!)
+            
+            self.checkPasscode(viewController: (application.windows[0].rootViewController)!)
+            
+            self.checkForStudyUpdates()
             
             
             
             
-          
+            
+//
+//            let vc = application.topMostViewController()
+//            if vc is ActivitiesViewController{
+//                print("ActivitiesViewController")
+//            }
+            //print(vc)
+            
+//            if navigationController.viewControllers.count > 0 {
+//                
+//                
+//            }
+            
+            
             
             // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
         }
@@ -281,9 +299,10 @@
             
         }
         
-        func checkConsentStatus() {
+        func checkConsentStatus(controller:UIViewController) {
             
-           
+            self.selectedController = controller
+            
             if(StudyUpdates.studyConsentUpdated){
                 print("Study consent is updated: Please Present Consent UI")
                 
@@ -301,8 +320,12 @@
                             UIUtilities.showAlertMessageWithTwoActionsAndHandler(NSLocalizedString("Consent Updated", comment: ""), errorMessage: NSLocalizedString("The Consent Document for this study has been updated. Please review the revised Consent terms and provide your Informed Consent, to continue participating in the study.", comment: ""), errorAlertActionTitle: NSLocalizedString("Review", comment: ""),
                                                                                  errorAlertActionTitle2:nil, viewControllerUsed: topController,
                                                                                  action1: {
-                                                                                     WCPServices().getEligibilityConsentMetadata(studyId:(Study.currentStudy?.studyId)!, delegate: self as NMWebServiceDelegate)
-                                                                                    self.addAndRemoveProgress(add: true)
+                                                                                    
+                                                                                        self.addAndRemoveProgress(add: true)
+                                                                                    
+                                                                                    
+                                                                                        WCPServices().getEligibilityConsentMetadata(studyId:(Study.currentStudy?.studyId)!, delegate: self as NMWebServiceDelegate)
+                                                                                    
                             },
                                                                                  action2: {
                 
@@ -344,6 +367,8 @@
             while topVC?.presentedViewController != nil {
                 topVC = topVC?.presentedViewController
             }
+            
+            self.addAndRemoveProgress(add: false)
             
             topVC?.present(taskViewController!, animated: true, completion: nil)
         }
@@ -420,20 +445,28 @@
         
         func addAndRemoveProgress(add:Bool){
             
-            let navigationController =  (self.window?.rootViewController as! UINavigationController)
-            
-            if navigationController.viewControllers.count > 0 {
-                let studyListController = navigationController.viewControllers.first
-                
-                if add == true{
-                    
-                    studyListController?.addProgressIndicator()
-                }
-                else{
-                    
-                    studyListController?.removeProgressIndicator()
-                }
+            if add{
+                 self.window?.addProgressIndicatorOnWindow()
             }
+            else {
+                self.window?.removeProgressIndicatorFromWindow()
+            }
+           
+            
+//            let navigationController =  (self.window?.rootViewController as! UINavigationController)
+//            
+//            if navigationController.viewControllers.count > 0 {
+//                let studyListController = navigationController.viewControllers.first
+//                
+//                if add == true{
+//                    
+//                    studyListController?.addProgressIndicator()
+//                }
+//                else{
+//                    
+//                    studyListController?.removeProgressIndicator()
+//                }
+//            }
             
         }
         
@@ -447,6 +480,21 @@
                 topController = navigationController.viewControllers.first!
             }
             _ = topController.navigationController?.popViewController(animated: true)
+        }
+        
+        func checkForStudyUpdates(){
+            
+            if Study.currentStudy != nil {
+                
+                let userStudyStatus =  (Study.currentStudy?.userParticipateState.status)!
+                
+                if userStudyStatus == .inProgress || userStudyStatus == .yetToJoin
+                {
+                    WCPServices().getStudyUpdates(study: Study.currentStudy!, delegate: self)
+                }
+                
+                
+            }
         }
         
         
@@ -491,6 +539,50 @@
             //let leftController = slideMenuController()?.leftViewController as! LeftMenuViewController
             // leftController.changeViewController(.studyList)
             //leftController.createLeftmenuItems()
+            
+        }
+        
+        func handleStudyUpdatedInformation(){
+            
+            if Study.currentStudy != nil {
+                DBHandler.updateMetaDataToUpdateForStudy(study: Study.currentStudy!, updateDetails: nil)
+            }
+            
+            
+            let navigationController =  (self.window?.rootViewController as! UINavigationController)
+            let menuVC = navigationController.viewControllers.last
+            if  menuVC is FDASlideMenuViewController {
+                let mainController =  (menuVC as! FDASlideMenuViewController).mainViewController
+                if mainController is UINavigationController {
+                    let nav = (mainController as! UINavigationController)
+                    let tabbarVC = nav.viewControllers.last
+                    if tabbarVC is StudyDashboardTabbarViewController{
+                        let studyTabBar = tabbarVC as! StudyDashboardTabbarViewController
+                        selectedController = ((studyTabBar.viewControllers?[studyTabBar.selectedIndex]) as! UINavigationController).viewControllers.last
+                        
+                    }
+                    
+                    
+                }
+                
+            }
+
+            
+            if selectedController != nil {
+                self.checkConsentStatus(controller: self.selectedController!)
+                
+                //if self.selectedController is StudyDashboardViewController {
+                    //(self.selectedController as! StudyDashboardViewController).)
+               // }
+               // else
+                if self.selectedController is ActivitiesViewController {
+                    (self.selectedController as! ActivitiesViewController).checkForActivitiesUpdates()
+                }
+                else if self.selectedController is ResourcesViewController {
+                    (self.selectedController as! ResourcesViewController).checkForResourceUpdate()
+                }
+                
+            }
             
         }
         
@@ -543,7 +635,7 @@
                 
             }
             else if requestName as String == WCPMethods.eligibilityConsent.method.methodName {
-                self.addAndRemoveProgress(add: false)
+               
                 self.createEligibilityConsentTask()
             }
                 
@@ -557,6 +649,10 @@
             else  if requestName as String == RegistrationMethods.updateEligibilityConsentStatus.method.methodName{
                 
                 self.addAndRemoveProgress(add: false)
+            }
+            else if (requestName as String == WCPMethods.studyUpdates.rawValue){
+                //self.removeProgressIndicator()
+                self.handleStudyUpdatedInformation()
             }
             
             
@@ -592,6 +688,7 @@
                 print("completed")
                 
                 if taskViewController.task?.identifier == kConsentTaskIdentifier{
+                    
                     ConsentBuilder.currentConsent?.consentResult?.consentDocument =   ConsentBuilder.currentConsent?.consentDocument
                     
                     ConsentBuilder.currentConsent?.consentResult?.initWithORKTaskResult(taskResult:taskViewController.result )
@@ -603,6 +700,9 @@
                     // save also in DB
                     DBHandler.saveConsentInformation(study: Study.currentStudy!)
                     
+                    
+                    //update consent is updaeted in db
+                    StudyUpdates.studyConsentUpdated  = false
                     DBHandler.updateMetaDataToUpdateForStudy(study: Study.currentStudy!, updateDetails:nil)
                     
                     
@@ -623,7 +723,16 @@
                 
                 if  taskViewController.task?.identifier == kConsentTaskIdentifier{
                     
-                    self.popToStudyListViewController()
+                    //self.popToStudyListViewController()
+                    if self.selectedController is StudyDashboardViewController {
+                        (self.selectedController as! StudyDashboardViewController).homeButtonAction(UIButton())
+                    }
+                    else if self.selectedController is ActivitiesViewController {
+                        (self.selectedController as! ActivitiesViewController).homeButtonAction(UIButton())
+                    }
+                    else if self.selectedController is ResourcesViewController {
+                        (self.selectedController as! ResourcesViewController).homeButtonAction(UIButton())
+                    }
                 }
                 
                 
@@ -880,6 +989,38 @@
                 UIApplication.shared.applicationIconBadgeNumber = 0
                 //self.handlePushNotificationResponse(userInfo : userInfo as NSDictionary)
             }
+        }
+    }
+    
+    extension UIWindow{
+        
+        func addProgressIndicatorOnWindow(){
+            
+            let view = UINib(nibName: "ProgressView", bundle: nil).instantiate(withOwner: nil, options: nil)[0] as? UIView
+            view?.frame = UIScreen.main.bounds
+            view?.tag = 50000
+            self.addSubview(view!)
+            view?.alpha = 0
+            UIView.animate(withDuration: 0.3) {
+                view?.alpha = 1
+            }
+        }
+        
+        func removeProgressIndicatorFromWindow(){
+            
+            let view = self.viewWithTag(50000) //as UIView
+            UIView.animate(withDuration: 0.2, animations: {
+                view?.alpha = 0
+            }) { (completed) in
+                view?.removeFromSuperview()
+            }
+        }
+        
+        
+    }
+    extension UIApplication {
+        func topMostViewController() -> UIViewController? {
+            return self.keyWindow?.rootViewController?.topMostViewController()
         }
     }
 

@@ -347,7 +347,7 @@ class FetalKickCounterStepViewController:  ORKStepViewController {
         
         
         
-        self.counterTextField?.text =  self.kickCounter! < 10 ?  ("0\(self.kickCounter!)" == "00" ? "000" : "00\(self.kickCounter!)") : (self.kickCounter! > 100 ? "\(self.kickCounter!)" : "0\(self.kickCounter!)" )
+        self.counterTextField?.text =  self.kickCounter! < 10 ?  ("0\(self.kickCounter!)" == "00" ? "000" : "00\(self.kickCounter!)") : (self.kickCounter! >= 100 ? "\(self.kickCounter!)" : "0\(self.kickCounter!)" )
         
     }
     

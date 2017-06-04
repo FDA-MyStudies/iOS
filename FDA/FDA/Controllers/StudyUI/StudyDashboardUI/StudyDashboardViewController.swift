@@ -47,7 +47,7 @@ class StudyDashboardViewController : UIViewController{
         //StudyUpdates.studyConsentUpdated = true
         if StudyUpdates.studyConsentUpdated {
             let appDelegate = UIApplication.shared.delegate as! AppDelegate
-            appDelegate.checkConsentStatus()
+             appDelegate.checkConsentStatus(controller: self)
         }
        
     }

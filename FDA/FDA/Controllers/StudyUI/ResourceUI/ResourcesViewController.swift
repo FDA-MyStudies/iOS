@@ -40,11 +40,11 @@ class ResourcesViewController : UIViewController{
         
         if StudyUpdates.studyConsentUpdated {
             let appDelegate = UIApplication.shared.delegate as! AppDelegate
-            appDelegate.checkConsentStatus()
+             appDelegate.checkConsentStatus(controller: self)
         }
         
         
-        self.loadResourceFromDatabase()
+        
         
     }
     
@@ -61,6 +61,8 @@ class ResourcesViewController : UIViewController{
             WCPServices().getStudyInformation(studyId: (Study.currentStudy?.studyId)!, delegate: self)
         }
         
+        self.checkForResourceUpdate()
+        
         
     }
     
@@ -68,6 +70,17 @@ class ResourcesViewController : UIViewController{
         super.viewDidAppear(animated)
                
     }
+    
+    func checkForResourceUpdate(){
+        
+        if StudyUpdates.studyResourcesUpdated {
+            WCPServices().getResourcesForStudy(studyId:(Study.currentStudy?.studyId)!, delegate: self)
+        }
+        else {
+            self.loadResourceFromDatabase()
+        }
+    }
+    
     
     func loadResourceFromDatabase(){
         DBHandler.loadResourcesForStudy(studyId: (Study.currentStudy?.studyId)!) { (resources) in
@@ -205,6 +218,10 @@ class ResourcesViewController : UIViewController{
        
         tableView?.isHidden =  false
         tableView?.reloadData()
+        
+        
+        StudyUpdates.studyResourcesUpdated = false
+        DBHandler.updateMetaDataToUpdateForStudy(study: Study.currentStudy!, updateDetails: nil)
     }
     
     func navigateToStudyHome(){

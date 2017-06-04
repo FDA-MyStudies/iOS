@@ -310,7 +310,7 @@ class StudyWithdrawalConfigration {
         static  var studyConsentUpdated = false
         static  var studyActivitiesUpdated = false
         static  var studyResourcesUpdated = false
-        static  var studyVersion:String = ""
+        static  var studyVersion:String? = nil
         
         init() {
             
@@ -338,7 +338,7 @@ class StudyWithdrawalConfigration {
                 
             }
             
-            StudyUpdates.studyVersion = detail[kStudyCurrentVersion] as! String
+            StudyUpdates.studyVersion = detail[kStudyCurrentVersion] as? String
             
         }
         

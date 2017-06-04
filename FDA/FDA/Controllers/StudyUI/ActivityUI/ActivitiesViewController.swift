@@ -46,11 +46,12 @@ class ActivitiesViewController : UIViewController{
             //WCPServices().getStudyActivityList(studyId: (Study.currentStudy?.studyId)!, delegate: self)
             //load from database
             //self.loadActivitiesFromDatabase()
-            self.sendRequestToGetActivityStates()
+           
+            
             
             if StudyUpdates.studyConsentUpdated {
                 let appDelegate = UIApplication.shared.delegate as! AppDelegate
-                appDelegate.checkConsentStatus()
+                appDelegate.checkConsentStatus(controller: self)
             }
             
         }
@@ -62,6 +63,8 @@ class ActivitiesViewController : UIViewController{
         super.viewWillAppear(animated)
         UIApplication.shared.statusBarStyle = .default
         
+        self.checkForActivitiesUpdates()
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -70,6 +73,18 @@ class ActivitiesViewController : UIViewController{
         
     }
     
+    func checkForActivitiesUpdates(){
+        
+        if StudyUpdates.studyActivitiesUpdated {
+            
+            self.sendRequestToGetActivityStates()
+            
+        }
+        else {
+            
+            self.loadActivitiesFromDatabase()
+        }
+    }
     
     func registerNotificationForAnchorDate(){
         
@@ -613,6 +628,9 @@ extension ActivitiesViewController:NMWebServiceDelegate {
             //self.handleActivityListResponse()
             self.loadActivitiesFromDatabase()
             
+            StudyUpdates.studyActivitiesUpdated = false
+            DBHandler.updateMetaDataToUpdateForStudy(study: Study.currentStudy!, updateDetails: nil)
+            
         }
         else if requestName as String == WCPMethods.activity.method.methodName {
             self.removeProgressIndicator()
@@ -677,10 +695,10 @@ extension ActivitiesViewController:ORKTaskViewControllerDelegate{
         case ORKTaskViewControllerFinishReason.discarded:
             print("discarded")
             
-           // let study = Study.currentStudy
-           // let activity = Study.currentActivity
-           // activity?.restortionData = nil
-           // DBHandler.updateActivityRestortionDataFor(activity:activity!, studyId: (study?.studyId)!, restortionData:nil)
+            let study = Study.currentStudy
+            let activity = Study.currentActivity
+            activity?.currentRun.restortionData = nil
+            DBHandler.updateActivityRestortionDataFor(activity:activity!, studyId: (study?.studyId)!, restortionData:nil)
             
            // taskResult = taskViewController.result
             

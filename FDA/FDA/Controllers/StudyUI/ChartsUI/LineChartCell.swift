@@ -468,7 +468,9 @@ class LineChartCell: GraphChartTableViewCell {
     
     func handleWeeksOfMonthForDate(date:Date){
         
-        let array = currentChart.statList.map{$0.data}
+         let dataList:Array<DBStatisticsData> = currentChart.statList.filter({$0.startDate! >= date.startOfMonth() && $0.startDate! <= date.endOfMonth()})
+        
+        let array = dataList.map{$0.data}
         var points:Array<ORKValueRange> = []
         xAxisTitles = []
         plotPoints = []

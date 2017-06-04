@@ -1439,7 +1439,11 @@
             })
             
             if alertVCPresented != nil {
-                parentViewControllerForAlert?.present(alertVCPresented!, animated: true, completion: nil)
+                
+                //let controller = alertVCPresented
+                parentViewControllerForAlert?.present(alertVCPresented!, animated: true, completion: {
+                    self.alertVCPresented = nil
+                })
             }
             
             

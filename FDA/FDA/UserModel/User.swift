@@ -424,7 +424,7 @@ class Settings{
     
     init() {
         self.remoteNotifications = false
-        self.localNotifications = false
+        self.localNotifications = true
         self.touchId  = false
         self.passcode = false
         self.leadTime = "00:00"

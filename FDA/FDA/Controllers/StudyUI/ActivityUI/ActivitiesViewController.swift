@@ -189,7 +189,7 @@ class ActivitiesViewController : UIViewController{
      */
     func createActivity(){
         
-    /*
+    
         let filePath  = Bundle.main.path(forResource: "Labkey_Activity", ofType: "json")
         
         //let filePath  = Bundle.main.path(forResource: "FetalKickTest", ofType: "json")
@@ -205,7 +205,7 @@ class ActivitiesViewController : UIViewController{
             print("\(error)")
         }
  
- */
+ 
         
         if Utilities.isValidObject(someObject: Study.currentActivity?.steps as AnyObject?){
             

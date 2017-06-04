@@ -821,10 +821,10 @@ class ActivityQuestionStep: ActivityStep {
                     // if it is array of dictionary
                     let dict:NSDictionary = dataArray[i] as! NSDictionary
                     
-                     var value:Int! = 0
+                     var value:String!
                     
                     if Utilities.isValidValue(someObject: dict[kStepQuestionImageChoiceValue] as AnyObject){
-                         value = Int(dict[kStepQuestionImageChoiceValue] as! String)!
+                         value = dict[kStepQuestionImageChoiceValue] as! String
                     }
                     
                     if  Utilities.isValidValue(someObject: dict[kStepQuestionImageChoiceImage] as AnyObject? )
@@ -850,7 +850,7 @@ class ActivityQuestionStep: ActivityStep {
                         //let selectedImage:UIImage = UIImage(data: )
                         
                         
-                        let  choice = ORKImageChoice( normalImage: normalImage ,  selectedImage: selectedImage , text: dict[kStepQuestionImageChoiceText] as? String, value: value as Int as NSCoding & NSCopying & NSObjectProtocol )
+                        let  choice = ORKImageChoice( normalImage: normalImage ,  selectedImage: selectedImage , text: dict[kStepQuestionImageChoiceText] as? String, value: value  as NSCoding & NSCopying & NSObjectProtocol )
                         
                         imageChoiceArray?.append(choice)
                         

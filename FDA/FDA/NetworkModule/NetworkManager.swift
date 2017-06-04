@@ -15,7 +15,7 @@ protocol NMWebServiceDelegate{
      *  Called when request is fired.Use this to show any activity indicator
      *
      *  @param manager       NetworkManager instance
-     *  @param requestName Web request name
+     *  @param requestName Web request@objc  name
      */
     func startedRequest(_ manager: NetworkManager, requestName:NSString)
     
@@ -81,6 +81,7 @@ class NetworkManager {
 //        }
         reachability =  Reachability.init()
         NotificationCenter.default.addObserver(self, selector: #selector(reachabilityChanged(_:)), name:ReachabilityChangedNotification, object: nil)
+    
         do{
             try reachability?.startNotifier()
         }catch{

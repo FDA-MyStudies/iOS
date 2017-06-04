@@ -188,7 +188,7 @@ class ActivityBuilder {
                     
                     var i:Int? = 0
                     
-                    
+                    //self.activity?.branching = true
                     
                     if self.activity?.branching == true{
                     
@@ -311,9 +311,19 @@ class ActivityBuilder {
                                     else{
                                         // if both destination and condition are empty
                                         
-                                        let  directRule = ORKDirectStepNavigationRule(destinationStepIdentifier: "CompletionStep")
                                         
-                                        (task as! ORKNavigableOrderedTask).setNavigationRule(directRule, forTriggerStepIdentifier:step.identifier)
+                                        let  directRule:ORKDirectStepNavigationRule!
+                                        
+                                        if defaultStepExist == false{
+                                            directRule = ORKDirectStepNavigationRule(destinationStepIdentifier: "CompletionStep")
+                                        }
+                                        else{
+                                             directRule = ORKDirectStepNavigationRule(destinationStepIdentifier: defaultStepIdentifier)
+                                            
+                                           
+                                        }
+                                        
+                                        (task as! ORKNavigableOrderedTask).setNavigationRule(directRule!, forTriggerStepIdentifier:step.identifier)
                                         
                                     }
                                 }

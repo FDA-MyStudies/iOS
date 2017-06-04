@@ -261,6 +261,13 @@
                                    },
                                    {
                                    
+                                   "condition": "3",
+                                   
+                                   "destination": "QR4_F2"
+                                   
+                                   },
+                                   {
+                                   
                                    "condition": "",
                                    
                                    "destination": "QR4_I4"
@@ -312,7 +319,7 @@
                                   
                                   ],
                   
-                  "selectionStyle": "Multiple"
+                  "selectionStyle": "Single"
                   
                   },
                   
@@ -442,7 +449,27 @@
                             
                             "repeatableText": "",
                             
-                            "destinations": [],
+                            "destinations": [{
+                                             
+                                             "condition": "1",
+                                             
+                                             "destination": "QR4_Q6"
+                                             
+                                             },
+                                             {
+                                             
+                                             "condition": "2",
+                                             
+                                             "destination": "QR4_I2"
+                                             
+                                             },
+                                             {
+                                             
+                                             "condition": "",
+                                             
+                                             "destination": "QR4_Q7"
+                                             
+                                             }],
                             
                             "healthDataKey": "",
                             
@@ -826,7 +853,7 @@
                                    
                                    "condition": "false",
                                    
-                                   "destination": "QR4_I4"
+                                   "destination": "QR4_I3"
                                    
                                    },
                                    {

@@ -561,12 +561,12 @@ extension StudyHomeViewController:NMWebServiceDelegate {
         }
         
         if requestName as String == RegistrationMethods.updateStudyState.method.methodName{
-             self.removeProgressIndicator()
+            
             if isStudyBookMarked {
-                
+                self.removeProgressIndicator()
             }
             else {
-                self.addProgressIndicator()
+               // self.addProgressIndicator()
                 UserServices().updateUserEligibilityConsentStatus(eligibilityStatus: true, consentStatus:(ConsentBuilder.currentConsent?.consentStatus)!  , delegate: self)
             }
         }
@@ -579,7 +579,10 @@ extension StudyHomeViewController:NMWebServiceDelegate {
                 if Utilities.isValidObject(someObject: tokenDict as AnyObject?){
                     let apptoken = tokenDict["appToken"] as! String
                     
-                    self.addProgressIndicator()
+                   // self.addProgressIndicator()
+                    
+                    
+                    
                     
                     //update token
                     let currentUserStudyStatus =  User.currentUser.updateStudyStatus(studyId:(Study.currentStudy?.studyId)!  , status: .inProgress)
@@ -593,7 +596,7 @@ extension StudyHomeViewController:NMWebServiceDelegate {
                     UserServices().updateUserParticipatedStatus(studyStauts: currentUserStudyStatus, delegate: self)
                 }
             }
-             self.removeProgressIndicator()
+            
             
            
            
@@ -602,9 +605,10 @@ extension StudyHomeViewController:NMWebServiceDelegate {
         
         
         if requestName as String == RegistrationMethods.updateEligibilityConsentStatus.method.methodName{
-             self.removeProgressIndicator()
+            
             if( User.currentUser.getStudyStatus(studyId:(Study.currentStudy?.studyId)! ) == UserStudyStatus.StudyStatus.inProgress){
                 self.pushToStudyDashboard()
+                self.removeProgressIndicator()
             } 
         }
         //self.removeProgressIndicator()
@@ -629,6 +633,16 @@ extension StudyHomeViewController:NMWebServiceDelegate {
         if requestName as String == WCPMethods.consentDocument.method.methodName {
             //self.removeProgressIndicator()
         }
+        
+        if requestName as String == ResponseMethods.enroll.description
+            || requestName as String == RegistrationMethods.updateStudyState.method.methodName
+            || requestName as String == RegistrationMethods.updateEligibilityConsentStatus.method.methodName{
+            self.unHideSubViews()
+        }
+        
+        
+        
+        
         //self.removeProgressIndicator()
     }
 }
@@ -668,6 +682,8 @@ extension StudyHomeViewController:ORKTaskViewControllerDelegate{
         }
         
         if  taskViewController.task?.identifier == kEligibilityConsentTask && reason == ORKTaskViewControllerFinishReason.completed{
+            
+            self.hideSubViews()
             
             ConsentBuilder.currentConsent?.consentResult?.consentDocument =   ConsentBuilder.currentConsent?.consentDocument
             

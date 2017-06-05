@@ -188,7 +188,7 @@ class ActivitiesTableViewCell: UITableViewCell {
         
         let currentUser = User.currentUser
         
-        if let userActivityStatus = currentUser.participatedActivites.filter({$0.activityId == activity.actvityId && $0.activityRunId == String(activity.currentRunId)}).first {
+        if let userActivityStatus = currentUser.participatedActivites.filter({$0.activityId == activity.actvityId && $0.studyId == activity.studyId && $0.activityRunId == String(activity.currentRunId)}).first {
             
             //assign to study
             activity.userParticipationStatus = userActivityStatus

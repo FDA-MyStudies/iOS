@@ -443,7 +443,7 @@ class ActivitiesViewController : UIViewController{
     func updateCompletionAdherence(){
         
         
-        // let rowDetail = tableViewSections[indexPath.section]
+        
         
         var totalRuns = 0
         var totalCompletedRuns = 0
@@ -470,6 +470,48 @@ class ActivitiesViewController : UIViewController{
         UserServices().udpateCompletionAdherence(studyStauts: status, delegate: self)
         DBHandler.updateStudyParticipationStatus(study: Study.currentStudy!)
         //        }
+        
+        let halfCompletionKey = "50pcShown"  + (Study.currentStudy?.name)!
+        let fullCompletionKey = "100pcShown"  + (Study.currentStudy?.name)!
+        let missedKey = "totalMissed"  + (Study.currentStudy?.name)!
+        
+        let ud = UserDefaults.standard
+        if completion > 50 && completion < 100 {
+            
+            if !(ud.bool(forKey: halfCompletionKey)){
+                let message =  "The study " + (Study.currentStudy?.name!)! + " is now 50pc complete! We look forward to your continued participation as we move towards a 100pc!"
+                UIUtilities.showAlertWithMessage(alertMessage: message)
+                ud.set(true, forKey: halfCompletionKey)
+
+            }
+            
+        }
+        
+        if completion == 100 {
+            
+            if !(ud.bool(forKey: fullCompletionKey)){
+                let message =  "The study " + (Study.currentStudy?.name!)! + " is 100pc complete! Thank you for your participation! We appreciate it!"
+                UIUtilities.showAlertWithMessage(alertMessage: message)
+                ud.set(true, forKey: fullCompletionKey)
+                
+            }
+        }
+        
+        
+        if ud.object(forKey: missedKey) == nil {
+            ud.set(totalIncompletedRuns, forKey: missedKey)
+        }
+        else {
+            let previousMissed = ud.object(forKey: missedKey) as! Int
+            if previousMissed < totalIncompletedRuns {
+                //sho alert
+                ud.set(totalIncompletedRuns, forKey: missedKey)
+                UIUtilities.showAlertWithMessage(alertMessage: "Hi, we noticed you happened to miss out on an activity run today. Your participation is important!  We urge you to complete study activities before they expire and have a higher study adherence rate!")
+            }
+        }
+        
+        ud.synchronize()
+        
     }
     
     func divide(lhs: Int, rhs: Int) -> Int {

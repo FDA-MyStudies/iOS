@@ -650,6 +650,8 @@ class UserServices: NSObject {
             
             user.userType = UserType.FDAUser
             
+            DBHandler().saveCurrentUser(user: user)
+            
             //TEMP : Need to save these values in Realm
             let ud = UserDefaults.standard
             ud.set(user.authToken, forKey:kUserAuthToken)
@@ -686,8 +688,8 @@ class UserServices: NSObject {
         //activities
         if let activites = response[kActivites]  as? Array<Dictionary<String, Any>> {
             for activity in activites {
-                let participatedActivity = UserActivityStatus(detail: activity)
-                user.participatedActivites.append(participatedActivity)
+               // let participatedActivity = UserActivityStatus(detail: activity)
+               // user.participatedActivites.append(participatedActivity)
             }
         }
         
@@ -709,10 +711,13 @@ class UserServices: NSObject {
         let user = User.currentUser
         //activities
         if let activites = response[kActivites]  as? Array<Dictionary<String, Any>> {
-            for activity in activites {
-                let participatedActivity = UserActivityStatus(detail: activity)
-                user.participatedActivites.append(participatedActivity)
+            if Study.currentStudy != nil {
+                for activity in activites {
+                    let participatedActivity = UserActivityStatus(detail: activity,studyId:(Study.currentStudy?.studyId)!)
+                    user.participatedActivites.append(participatedActivity)
+                }
             }
+          
         }
     }
     func handleUpdateEligibilityConsentStatusResponse(response:Dictionary<String, Any>){
@@ -745,8 +750,9 @@ class UserServices: NSObject {
         //activities
         let activites = response[kActivites]  as! Array<Dictionary<String, Any>>
         for activity in activites {
-            let participatedActivity = UserActivityStatus(detail: activity)
-            user.participatedActivites.append(participatedActivity)
+            
+            //let participatedActivity = UserActivityStatus(detail: activity)
+           // user.participatedActivites.append(participatedActivity)
         }
     }
     

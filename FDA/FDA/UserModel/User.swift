@@ -744,7 +744,7 @@ class UserActivityStatus{
     init() {
         
     }
-    init(detail:Dictionary<String, Any>){
+    init(detail:Dictionary<String, Any> ,studyId:String){
         
         if Utilities.isValidObject(someObject: detail as AnyObject?){
             
@@ -768,6 +768,8 @@ class UserActivityStatus{
             if Utilities.isValidValue(someObject: runDetail["completed"] as AnyObject){
                 self.compeltedRuns = runDetail["completed"] as! Int
             }
+            
+            self.studyId = studyId
             
             if Utilities.isValidValue(someObject: detail[kActivityStatus] as AnyObject){
                 

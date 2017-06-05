@@ -90,13 +90,16 @@ class Schedule{
         let studyStatus = User.currentUser.participatedStudies.filter({$0.studyId == activity.studyId}).last
         print("joiningDate \(studyStatus?.joiningDate.description)")
         
-         let startDateResult = (activity.startDate?.compare((studyStatus?.joiningDate)!))! as ComparisonResult
+        let joiningDate = studyStatus?.joiningDate.utcDate()
+        let start = activity.startDate?.utcDate()
+        
+         let startDateResult = (start?.compare(joiningDate!))! as ComparisonResult
         
         if startDateResult == .orderedDescending {
-            self.startTime = activity.startDate
+            self.startTime = start
         }
         else {
-            self.startTime = studyStatus?.joiningDate
+            self.startTime = joiningDate
         }
         
         self.completionHandler = handler
@@ -294,20 +297,27 @@ class Schedule{
                 
                 //print("start date \(runStartDate!) , end date \(runEndDate!)")
                 runStartDate = runStartDate?.utcDate()
-                runEndDate = runEndDate?.utcDate()
-                let offset = UserDefaults.standard.value(forKey: "offset") as? Int
-                let updatedStartTime = runStartDate?.addingTimeInterval(TimeInterval(offset!))
-                let updatedEndTime = runEndDate?.addingTimeInterval(TimeInterval(offset!))
                 
+               
+                    
+                    runEndDate = runEndDate?.utcDate()
+                    let offset = UserDefaults.standard.value(forKey: "offset") as? Int
+                    let updatedStartTime = runStartDate?.addingTimeInterval(TimeInterval(offset!))
+                 if !(updatedStartTime! < startTime) {
+                    let updatedEndTime = runEndDate?.addingTimeInterval(TimeInterval(offset!))
+                    
+                    
+                    //appent in activityRun array
+                    let activityRun = ActivityRun()
+                    activityRun.runId = runId
+                    activityRun.startDate = updatedStartTime
+                    activityRun.endDate = updatedEndTime
+                    activityRuns.append(activityRun)
+                    
+                    runId += 1
+                }
                 
-                //appent in activityRun array
-                let activityRun = ActivityRun()
-                activityRun.runId = runId
-                activityRun.startDate = updatedStartTime
-                activityRun.endDate = updatedEndTime
-                activityRuns.append(activityRun)
-                
-                runId += 1
+               
                 
             }
             

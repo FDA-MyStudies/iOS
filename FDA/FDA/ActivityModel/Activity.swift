@@ -209,7 +209,7 @@ class Activity{
                 
             }
             let currentUser = User.currentUser
-            if let userActivityStatus = currentUser.participatedActivites.filter({$0.activityId == self.actvityId}).first {
+            if let userActivityStatus = currentUser.participatedActivites.filter({$0.activityId == self.actvityId && $0.studyId == self.studyId}).first {
                 self.userParticipationStatus = userActivityStatus
             }
             else {

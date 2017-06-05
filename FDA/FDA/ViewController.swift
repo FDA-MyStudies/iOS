@@ -239,8 +239,8 @@ class ViewController: UIViewController {
                 //activities
                 let activites = dict[kActivites]  as! Array<Dictionary<String, Any>>
                 for activity in activites {
-                    let participatedActivity = UserActivityStatus(detail: activity)
-                    user.participatedActivites.append(participatedActivity)
+                   // let participatedActivity = UserActivityStatus(detail: activity)
+                    //user.participatedActivites.append(participatedActivity)
                 }
                 
             }

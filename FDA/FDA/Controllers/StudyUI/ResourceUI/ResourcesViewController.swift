@@ -182,8 +182,9 @@ class ResourcesViewController : UIViewController{
                         let endDateInterval = TimeInterval(60*60*24*(resource.anchorDateEndDays)!)
                         
                         let startAnchorDate = anchorDate?.addingTimeInterval(startDateInterval)
-                        let endAnchorDate = anchorDate?.addingTimeInterval(endDateInterval)
+                        var endAnchorDate = anchorDate?.addingTimeInterval(endDateInterval)
                         
+                        endAnchorDate = endAnchorDate?.endOfDay
                         let startDateResult = (startAnchorDate?.compare(todayDate))! as ComparisonResult
                         let endDateResult = (endAnchorDate?.compare(todayDate))! as ComparisonResult
                         

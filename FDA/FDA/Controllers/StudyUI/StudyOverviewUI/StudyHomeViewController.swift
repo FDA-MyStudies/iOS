@@ -121,7 +121,7 @@ class StudyHomeViewController : UIViewController{
                 buttonViewConsent?.isHidden = true
             }
             else{
-                 buttonVisitWebsite?.isHidden =  false
+                 buttonVisitWebsite?.isHidden =  true
                 buttonVisitWebsite?.isUserInteractionEnabled =  false
                 
                 

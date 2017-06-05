@@ -142,9 +142,9 @@ class ResourcesViewController : UIViewController{
     func appendLeaveStudy(){
         
         //append Leave Study row
-        if (Study.currentStudy?.studySettings.rejoinStudyAfterWithdrawn)! != false {
+        //if (Study.currentStudy?.studySettings.rejoinStudyAfterWithdrawn)! != false {
             tableViewRowDetails?.append("Leave Study" as AnyObject)
-        }
+        //}
     }
     
     func handleResourcesReponse(){
@@ -161,8 +161,11 @@ class ResourcesViewController : UIViewController{
             //check for startDate and endDate
             if resource.startDate != nil && resource.endDate != nil {
                 
-                let startDateResult = (resource.startDate?.compare(todayDate))! as ComparisonResult
-                let endDateResult = (resource.endDate?.compare(todayDate))! as ComparisonResult
+                let start = resource.startDate?.startOfDay
+                let end = resource.endDate?.endOfDay
+                
+                let startDateResult = (start?.compare(todayDate))! as ComparisonResult
+                let endDateResult = (end?.compare(todayDate))! as ComparisonResult
               
                 
                 if ((startDateResult == .orderedAscending || startDateResult == .orderedSame) && (endDateResult == .orderedDescending || endDateResult == .orderedSame)){
@@ -601,6 +604,9 @@ extension ResourcesViewController:NMWebServiceDelegate {
            // self.performSegue(withIdentifier: "unwindeToStudyListResourcesIdentifier", sender: self)
         }
         else if(requestName as String == WCPMethods.studyInfo.rawValue){
+            
+            StudyUpdates.studyInfoUpdated = false
+            DBHandler.updateMetaDataToUpdateForStudy(study: Study.currentStudy!, updateDetails: nil)
             
             if self.navigateToStudyOverview == true{
                 // this means that about the study has been tapped and get study info has been called

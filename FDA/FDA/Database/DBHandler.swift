@@ -132,6 +132,7 @@ class DBHandler: NSObject {
                     dbStudy?.joiningDate = study.userParticipateState.joiningDate
                     dbStudy?.completion = study.userParticipateState.completion
                     dbStudy?.adherence = study.userParticipateState.adherence
+                    dbStudy?.bookmarked = study.userParticipateState.bookmarked
                     
                     if dbStudy?.participatedStatus == UserStudyStatus.StudyStatus.inProgress.rawValue {
                         dbStudy?.updatedVersion = study.version
@@ -147,6 +148,7 @@ class DBHandler: NSObject {
            
         }
         
+       
         
         print("DBPath : \(realm.configuration.fileURL)")
         try! realm.write({
@@ -185,6 +187,7 @@ class DBHandler: NSObject {
         dbStudy.joiningDate = study.userParticipateState.joiningDate
         dbStudy.completion = study.userParticipateState.completion
         dbStudy.adherence = study.userParticipateState.adherence
+        dbStudy.bookmarked = study.userParticipateState.bookmarked
         dbStudy.withdrawalConfigrationMessage = study.withdrawalConfigration?.message
         dbStudy.withdrawalConfigrationType = study.withdrawalConfigration?.type?.rawValue
         
@@ -536,7 +539,7 @@ class DBHandler: NSObject {
                         
                         let updatedActivity = DBHandler.getDBActivity(activity: activity)
                         dbActivities.append(updatedActivity)
-                        DBHandler.deleteMetaDataForActivity(activity: activity)
+                        DBHandler.deleteMetaDataForActivity(activityId: activity.actvityId!, studyId: activity.studyId!)
                         
                     }
                     else {
@@ -553,32 +556,6 @@ class DBHandler: NSObject {
                          })
                     }
                     
-//                    try! realm.write({
-//                        
-//                        
-//                            dbActivity?.type = activity.type?.rawValue
-//                            dbActivity?.name = activity.name
-//                            dbActivity?.startDate = activity.startDate
-//                            dbActivity?.endDate = activity.endDate
-//                            dbActivity?.updatedVersion = activity.version
-//                            dbActivity?.branching = activity.branching!
-//                            dbActivity?.frequencyType = activity.frequencyType.rawValue
-//                            dbActivity?.currentRunId = activity.userParticipationStatus.activityRunId
-//                            dbActivity?.participationStatus = activity.userParticipationStatus.status.rawValue
-//                            
-//                            do {
-//                                let json = ["data":activity.frequencyRuns]
-//                                let data =  try JSONSerialization.data(withJSONObject: json, options: JSONSerialization.WritingOptions.prettyPrinted)
-//                                dbActivity?.frequencyRunsData = data
-//                            }
-//                            catch{
-//                                
-//                            }
-//                        
-//                        
-//                        
-//                    })
-
                 }
             }
             else {
@@ -589,6 +566,30 @@ class DBHandler: NSObject {
             
         }
         
+        
+        //delete activity from database
+        var newlist = activityies
+        
+        
+        let dbActivityIds:Array<String> = dbActivityArray.map({$0.actvityId!})
+        let activitieIds:Array<String>  = newlist.map({$0.actvityId!})
+        let dbset:Set<String> = Set(dbActivityIds)
+        let set:Set<String> = Set(activitieIds)
+        
+        let toBeDelete = dbset.subtracting(set)
+        for aId in toBeDelete{
+         let dbActivity = dbActivityArray.filter({$0.actvityId == aId}).last
+            
+            DBHandler.deleteMetaDataForActivity(activityId: (dbActivity?.actvityId)!, studyId: (dbActivity?.studyId)!)
+            
+            try! realm.write({
+                realm.delete((dbActivity?.activityRuns)!)
+                realm.delete(dbActivity!)
+            })
+            
+           
+        }
+    
         
         print("DBPath : \(realm.configuration.fileURL)")
         if dbActivities.count > 0 {
@@ -1032,10 +1033,10 @@ class DBHandler: NSObject {
         
         
     }
-    class func deleteMetaDataForActivity(activity:Activity){
+    class func deleteMetaDataForActivity(activityId:String,studyId:String){
         
         let realm = try! Realm()
-        let dbMetaDataList = realm.objects(DBActivityMetaData.self).filter({$0.actvityId == activity.actvityId && $0.studyId == activity.studyId})
+        let dbMetaDataList = realm.objects(DBActivityMetaData.self).filter({$0.actvityId == activityId && $0.studyId == studyId})
         
         if dbMetaDataList.count != 0 {
             let metaData = dbMetaDataList.last
@@ -1339,6 +1340,28 @@ class DBHandler: NSObject {
             }
             
         }
+        
+        
+        var newlist = resources
+        
+        
+        let dbResourceIds:Array<String> = dbResourcesArray.map({$0.resourceId!})
+        let resourceIds:Array<String>  = newlist.map({$0.resourcesId!})
+        let dbset:Set<String> = Set(dbResourceIds)
+        let set:Set<String> = Set(resourceIds)
+        
+        let toBeDelete = dbset.subtracting(set)
+        for aId in toBeDelete{
+            let dbResource = dbResourcesArray.filter({$0.resourceId == aId}).last
+            
+            try! realm.write({
+               
+                realm.delete(dbResource!)
+            })
+            
+            
+        }
+
         
         
         print("DBPath : \(realm.configuration.fileURL)")

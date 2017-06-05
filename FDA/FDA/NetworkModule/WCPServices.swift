@@ -390,51 +390,56 @@ class WCPServices: NSObject {
     
     func handleStudyInfo(response:Dictionary<String, Any>){
         
-        let overviewList = response[kOverViewInfo] as! Array<Dictionary<String,Any>>
-        var listOfOverviews:Array<OverviewSection> = []
-        for overview in overviewList{
-            let overviewObj = OverviewSection(detail: overview)
-            listOfOverviews.append(overviewObj)
+        if Study.currentStudy != nil {
+            
+            
+            
+            let overviewList = response[kOverViewInfo] as! Array<Dictionary<String,Any>>
+            var listOfOverviews:Array<OverviewSection> = []
+            for overview in overviewList{
+                let overviewObj = OverviewSection(detail: overview)
+                listOfOverviews.append(overviewObj)
+            }
+            
+            //create new Overview object
+            let overview = Overview()
+            overview.type = .study
+            overview.sections = listOfOverviews
+            overview.websiteLink = response[kOverViewWebsiteLink] as? String
+            
+            
+            //update overview object to current study
+            Study.currentStudy?.overview = overview
+            
+            //anchorDate
+            if Utilities.isValidObject(someObject: response[kStudyAnchorDate] as AnyObject?){
+                
+                let studyAndhorDate = StudyAnchorDate.init(detail: response[kStudyAnchorDate] as! Dictionary<String,Any>)
+                
+                //update anchorDate to current study
+                Study.currentStudy?.anchorDate = studyAndhorDate
+                
+                DBHandler.saveAnchorDateDetail(anchorDate: studyAndhorDate, studyId: (Study.currentStudy?.studyId)!)
+            }
+            
+            //WithdrawalConfigration
+            if Utilities.isValidObject(someObject: response[kStudyWithdrawalConfigration] as AnyObject?){
+                
+                let studyWithdrawalConfig = StudyWithdrawalConfigration.init(withdrawalConfigration: response[kStudyWithdrawalConfigration] as! Dictionary<String,Any>)
+                
+                
+                //update anchorDate to current study
+                Study.currentStudy?.withdrawalConfigration = studyWithdrawalConfig
+                
+                DBHandler.saveWithdrawalConfigration(withdrawalConfigration:studyWithdrawalConfig ,studyId: (Study.currentStudy?.studyId)!)
+            }
+            
+            
+            
+            
+            //save in database
+            DBHandler.saveStudyOverview(overview: overview, studyId: (Study.currentStudy?.studyId)!)
         }
-        
-        //create new Overview object
-        let overview = Overview()
-        overview.type = .study
-        overview.sections = listOfOverviews
-        overview.websiteLink = response[kOverViewWebsiteLink] as? String
-        
-        
-        //update overview object to current study
-        Study.currentStudy?.overview = overview
-        
-        //anchorDate
-        if Utilities.isValidObject(someObject: response[kStudyAnchorDate] as AnyObject?){
-            
-            let studyAndhorDate = StudyAnchorDate.init(detail: response[kStudyAnchorDate] as! Dictionary<String,Any>)
-            
-            //update anchorDate to current study
-            Study.currentStudy?.anchorDate = studyAndhorDate
-            
-            DBHandler.saveAnchorDateDetail(anchorDate: studyAndhorDate, studyId: (Study.currentStudy?.studyId)!)
-        }
-        
-        //WithdrawalConfigration
-        if Utilities.isValidObject(someObject: response[kStudyWithdrawalConfigration] as AnyObject?){
-            
-            let studyWithdrawalConfig = StudyWithdrawalConfigration.init(withdrawalConfigration: response[kStudyWithdrawalConfigration] as! Dictionary<String,Any>)
-            
-            
-            //update anchorDate to current study
-            Study.currentStudy?.withdrawalConfigration = studyWithdrawalConfig
-            
-            DBHandler.saveWithdrawalConfigration(withdrawalConfigration:studyWithdrawalConfig ,studyId: (Study.currentStudy?.studyId)!)
-        }
-
-        
-        
-        
-        //save in database
-        DBHandler.saveStudyOverview(overview: overview, studyId: (Study.currentStudy?.studyId)!)
         
     }
     

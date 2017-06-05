@@ -22,7 +22,7 @@ class LineChartCell: GraphChartTableViewCell {
     @IBOutlet weak var buttonBackward:UIButton!
     var currentChart:DashboardCharts!
     var frequencyPageIndex = 0
-    var frequencyPageSize = 2
+    var frequencyPageSize = 5
     var pageNumber = 0
     
     
@@ -53,7 +53,7 @@ class LineChartCell: GraphChartTableViewCell {
     var plotPoints:Array<Array<ORKValueRange>> = []
     var xAxisTitles:Array! = []
     var max:Float = 0.0
-    var min = 0.0
+    var min:Float = 0.0
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -84,7 +84,29 @@ class LineChartCell: GraphChartTableViewCell {
         return attributedStartDate
     }
     
+    func getSchedulesAttributedText(stringStartDate:String,stringEndDate:String)->NSAttributedString{
+        
+        let stringStartDate2 = stringStartDate + " - "
+        
+        
+        let color = Utilities.getUIColorFromHex(0x007CBA)
+        
+        let attributedStartDate:NSMutableAttributedString = NSMutableAttributedString(string: stringStartDate2)
+        attributedStartDate.addAttribute(NSForegroundColorAttributeName, value: color, range: NSMakeRange(0, 2))
+        
+        let attributedEndDate:NSMutableAttributedString = NSMutableAttributedString(string: stringEndDate)
+        attributedEndDate.addAttribute(NSForegroundColorAttributeName, value: color, range: NSMakeRange(0, 2))
+        
+        
+        attributedStartDate.append(attributedEndDate)
+        
+        return attributedStartDate
+    }
+    
     func setupLineChart(chart:DashboardCharts){
+        
+        
+        self.graphView.tintColor = UIColor.gray
         
         currentChart = chart
         
@@ -92,6 +114,7 @@ class LineChartCell: GraphChartTableViewCell {
         let array = chart.statList.map{$0.data}
         if array.count != 0 {
             max = array.max()!
+            min = array.min()!
         }
         
         
@@ -203,7 +226,11 @@ class LineChartCell: GraphChartTableViewCell {
             self.buttonForward.isEnabled = true
             let stringStartDate = LineChartCell.formatter.string(from: (charActivity?.startDate!)!)
             let stringEndDate = LineChartCell.formatter.string(from: (charActivity?.endDate!)!)
-            labelAxisValue.text = stringStartDate + " - " + stringEndDate
+            
+            let attributedText = self.getSchedulesAttributedText(stringStartDate: stringStartDate, stringEndDate: stringEndDate)
+            
+            
+            labelAxisValue.attributedText = attributedText//stringStartDate + " - " + stringEndDate
             
             let runs = self.getNextSetOfFrequencyRuns()
             
@@ -328,7 +355,9 @@ class LineChartCell: GraphChartTableViewCell {
                 
                 let stringStartDate = LineChartCell.formatter.string(from: startDate!)
                 let stringEndDate = LineChartCell.formatter.string(from: endDate!)
-                labelAxisValue.text = stringStartDate + " - " + stringEndDate
+                let attributedText = self.getSchedulesAttributedText(stringStartDate: stringStartDate, stringEndDate: stringEndDate)
+                
+                labelAxisValue.attributedText = attributedText//stringStartDate + " - " + stringEndDate
                 
                 self.handleRunsForDate(startDate: startDate!, endDate: endDate! ,runs: frequencySet)
 
@@ -461,7 +490,9 @@ class LineChartCell: GraphChartTableViewCell {
                 
                 let stringStartDate = LineChartCell.formatter.string(from: startDate!)
                 let stringEndDate = LineChartCell.formatter.string(from: endDate!)
-                labelAxisValue.text = stringStartDate + " - " + stringEndDate
+                let attributedText = self.getSchedulesAttributedText(stringStartDate: stringStartDate, stringEndDate: stringEndDate)
+                
+                labelAxisValue.attributedText = attributedText //stringStartDate + " - " + stringEndDate
                 
                 self.handleRunsForDate(startDate: startDate!, endDate: endDate! ,runs: frequencySet)
             }
@@ -881,7 +912,7 @@ extension LineChartCell:ORKValueRangeGraphChartViewDataSource{
     }
     
     func minimumValue(for graphChartView: ORKGraphChartView) -> Double {
-        return 0
+        return Double(min)
     }
     
     func graphChartView(_ graphChartView: ORKGraphChartView, titleForXAxisAtPointIndex pointIndex: Int) -> String? {

@@ -26,7 +26,7 @@ class StudyListViewController: UIViewController {
         //self.title = NSLocalizedString("FDA LISTENS!", comment: "")
         
         let titleLabel = UILabel()
-        titleLabel.text = NSLocalizedString("FDA LISTENS!", comment: "")
+        titleLabel.text = NSLocalizedString("FDA MY STUDIES!", comment: "")
         titleLabel.font = UIFont(name: "HelveticaNeue-Medium", size: 18)
         titleLabel.textAlignment = .left
         titleLabel.textColor = Utilities.getUIColorFromHex(0x007cba)

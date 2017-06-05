@@ -137,7 +137,7 @@ class DBHandler: NSObject {
                         dbStudy?.updatedVersion = study.version
                     }
                     else {
-                        dbStudy?.version = study.version
+                       // dbStudy?.version = study.version
                         dbStudy?.updatedVersion = study.version
                     }
                     
@@ -318,7 +318,7 @@ class DBHandler: NSObject {
         try! realm.write({
             
             realm.add(dbStudies,update: true)
-            dbStudy?.sections.append(objectsIn: dbStudies)
+           // dbStudy?.sections.append(objectsIn: dbStudies)
             dbStudy?.websiteLink = overview.websiteLink
             
             
@@ -383,15 +383,16 @@ class DBHandler: NSObject {
     class func loadStudyOverview(studyId:String,completionHandler:@escaping (Overview?) -> ()){
         
         let realm = try! Realm()
-        let studies =  realm.objects(DBStudy.self).filter("studyId == %@",studyId)
-        let dbStudy = studies.last
+        let studies =  realm.objects(DBOverviewSection.self).filter("studyId == %@",studyId)
+        let study =  realm.objects(DBStudy.self).filter("studyId == %@",studyId).last
+        //let dbStudy = studies.last
        
         
-        if dbStudy?.sections != nil && (dbStudy?.sections.count)! > 0 {
+        if studies.count > 0 {
             
             // inilize OverviewSection from database
             var overviewSections:Array<OverviewSection> = []
-            for dbSection in (dbStudy?.sections)! {
+            for dbSection in studies {
                 let section = OverviewSection()
                 
                 section.title = dbSection.title
@@ -406,7 +407,7 @@ class DBHandler: NSObject {
             //Create Overview object  
             let overview = Overview()
             overview.type = .study
-            overview.websiteLink = dbStudy?.websiteLink
+            overview.websiteLink = study?.websiteLink
             overview.sections = overviewSections
             
             completionHandler(overview)
@@ -775,6 +776,7 @@ class DBHandler: NSObject {
                 let userStatus = UserActivityStatus()
                 userStatus.activityId = dbActivity.actvityId
                 userStatus.activityRunId = String(activity.currentRunId)
+                userStatus.studyId = dbActivity.studyId
                 
                 if String(activity.currentRunId) == dbActivity.currentRunId {
                     userStatus.status = UserActivityStatus.ActivityStatus(rawValue:dbActivity.participationStatus)!
@@ -805,8 +807,8 @@ class DBHandler: NSObject {
                 
                 
                 //append to user class participatesStudies also
-                let activityStatus = User.currentUser.participatedActivites.filter({$0.activityId == activity.actvityId}).first
-                let index = User.currentUser.participatedActivites.index(where:{$0.activityId == activity.actvityId })
+                let activityStatus = User.currentUser.participatedActivites.filter({$0.activityId == activity.actvityId && $0.studyId == activity.studyId}).first
+                let index = User.currentUser.participatedActivites.index(where:{$0.activityId == activity.actvityId && $0.studyId == activity.studyId })
                 if activityStatus != nil {
                     User.currentUser.participatedActivites[index!] = userStatus
                 }

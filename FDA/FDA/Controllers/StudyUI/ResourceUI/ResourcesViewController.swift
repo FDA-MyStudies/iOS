@@ -186,7 +186,7 @@ class ResourcesViewController : UIViewController{
                         
                         
                         
-                        let anchorDate = Study.currentStudy?.anchorDate?.date
+                        let anchorDate = Study.currentStudy?.anchorDate?.date?.startOfDay
                         
                         if anchorDate != nil {
                             
@@ -235,10 +235,12 @@ class ResourcesViewController : UIViewController{
                                             DBHandler.saveLocalNotification(notification: notification)
                                             
                                             //register notification
+                                            var notificationDate = startAnchorDate?.startOfDay
+                                            notificationDate = notificationDate?.addingTimeInterval(43200)
                                             let message = resource.notificationMessage
                                             let userInfo = ["studyId":(Study.currentStudy?.studyId)!,
                                                             "type":"resource"];
-                                            LocalNotification.scheduleNotificationOn(date: startAnchorDate!, message: message!, userInfo: userInfo)
+                                            LocalNotification.scheduleNotificationOn(date: notificationDate!, message: message!, userInfo: userInfo)
                                         }
                                 })
                                 
@@ -674,6 +676,7 @@ extension ResourcesViewController:NMWebServiceDelegate {
             
             if requestName as String == WCPMethods.resources.method.methodName {
                 
+                tableViewRowDetails = []
                 self.addDefaultList()
                 self.appendLeaveStudy()
                 self.tableView?.isHidden = false

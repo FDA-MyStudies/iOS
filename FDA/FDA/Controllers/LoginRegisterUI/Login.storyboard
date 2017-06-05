@@ -754,38 +754,38 @@
                                 </connections>
                             </button>
                             <textView clipsSubviews="YES" contentMode="scaleToFill" editable="NO" usesAttributedText="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kEu-ol-yfS" customClass="LinkTextView" customModule="FDA" customModuleProvider="target">
-                                <rect key="frame" x="31" y="435" width="313" height="64"/>
+                                <rect key="frame" x="10" y="425" width="355" height="74"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="64" id="h2Q-Sm-Z2R"/>
+                                    <constraint firstAttribute="height" constant="74" id="h2Q-Sm-Z2R"/>
                                 </constraints>
                                 <attributedString key="attributedText">
-                                    <fragment content="I Agree to the ">
+                                    <fragment content="By tapping Sign In, you agree to this app's ">
                                         <attributes>
                                             <color key="NSColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                             <font key="NSFont" size="16" name="HelveticaNeue"/>
-                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                         </attributes>
                                     </fragment>
                                     <fragment content="Terms">
                                         <attributes>
                                             <color key="NSColor" red="0.0" green="0.48627450980392156" blue="0.72941176470588232" alpha="1" colorSpace="calibratedRGB"/>
                                             <font key="NSFont" size="16" name="HelveticaNeue-Medium"/>
-                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                         </attributes>
                                     </fragment>
                                     <fragment content=" and ">
                                         <attributes>
                                             <color key="NSColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                             <font key="NSFont" size="16" name="HelveticaNeue"/>
-                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                         </attributes>
                                     </fragment>
                                     <fragment content="Privacy Policy">
                                         <attributes>
                                             <color key="NSColor" red="0.0" green="0.48627450980392156" blue="0.72941176470588232" alpha="1" colorSpace="calibratedRGB"/>
                                             <font key="NSFont" size="16" name="HelveticaNeue-Medium"/>
-                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                         </attributes>
                                     </fragment>
                                 </attributedString>
@@ -805,11 +805,11 @@
                             <constraint firstItem="Les-Kl-pFS" firstAttribute="centerY" secondItem="rvK-l9-jc7" secondAttribute="centerY" multiplier="1.5952" id="KGK-H4-obR"/>
                             <constraint firstItem="3eF-aU-RcQ" firstAttribute="top" secondItem="ss7-zA-DJ6" secondAttribute="bottom" constant="16" id="KgJ-2F-K43"/>
                             <constraint firstItem="Les-Kl-pFS" firstAttribute="centerX" secondItem="rvK-l9-jc7" secondAttribute="centerX" id="UQZ-sF-1G6"/>
-                            <constraint firstItem="kEu-ol-yfS" firstAttribute="leading" secondItem="rvK-l9-jc7" secondAttribute="leading" constant="31" id="bha-w8-1FM"/>
+                            <constraint firstItem="kEu-ol-yfS" firstAttribute="leading" secondItem="rvK-l9-jc7" secondAttribute="leading" constant="10" id="bha-w8-1FM"/>
                             <constraint firstItem="3eF-aU-RcQ" firstAttribute="centerX" secondItem="rvK-l9-jc7" secondAttribute="centerX" id="dHp-82-dA2"/>
                             <constraint firstItem="ss7-zA-DJ6" firstAttribute="top" secondItem="SnD-H7-w6h" secondAttribute="bottom" constant="1" id="ek7-ud-2St"/>
                             <constraint firstItem="Les-Kl-pFS" firstAttribute="width" secondItem="rvK-l9-jc7" secondAttribute="width" multiplier="150/375" id="rui-dP-Lgd"/>
-                            <constraint firstAttribute="trailing" secondItem="kEu-ol-yfS" secondAttribute="trailing" constant="31" id="wUX-Uj-7Lk"/>
+                            <constraint firstAttribute="trailing" secondItem="kEu-ol-yfS" secondAttribute="trailing" constant="10" id="wUX-Uj-7Lk"/>
                             <constraint firstAttribute="trailing" secondItem="ss7-zA-DJ6" secondAttribute="trailing" id="yYS-C4-Qch"/>
                         </constraints>
                     </view>

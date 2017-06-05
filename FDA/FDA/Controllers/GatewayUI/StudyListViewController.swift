@@ -518,7 +518,43 @@ class StudyListViewController: UIViewController {
     */
     func handleStudyUpdatedInformation(){
         DBHandler.updateMetaDataToUpdateForStudy(study: Study.currentStudy!, updateDetails: nil)
-        self.pushToStudyDashboard()
+        
+        if StudyUpdates.studyInfoUpdated {
+             self.sendRequestToGetStudyInfo(study: Study.currentStudy!)
+        }
+        else {
+            self.navigateBasedOnUserStatus()
+        }
+        
+        
+        
+        
+    }
+    
+    
+    func navigateBasedOnUserStatus(){
+        
+        if User.currentUser.userType == UserType.FDAUser {
+            
+            if Study.currentStudy?.status == .Active{
+                
+                let userStudyStatus =  (Study.currentStudy?.userParticipateState.status)!
+                
+                if userStudyStatus == .completed || userStudyStatus == .inProgress  //|| userStudyStatus == .yetToJoin
+                {
+                    self.pushToStudyDashboard()
+                }
+                else {
+                    self.checkDatabaseForStudyInfo(study: Study.currentStudy!)
+                }
+            }
+            else {
+                self.checkDatabaseForStudyInfo(study: Study.currentStudy!)
+            }
+        }
+        else {
+            self.checkDatabaseForStudyInfo(study: Study.currentStudy!)
+        }
     }
 }
 
@@ -582,7 +618,14 @@ extension StudyListViewController :  UITableViewDelegate {
                     }
                 }
                 else {
-                    self.checkDatabaseForStudyInfo(study: study!)
+                    
+                    if(study?.version != study?.newVersion){
+                        WCPServices().getStudyUpdates(study: study!, delegate: self)
+                    }
+                    else {
+                         self.checkDatabaseForStudyInfo(study: study!)
+                    }
+                   
                     //self.sendRequestToGetStudyInfo(study: study!)
                 }
             }
@@ -596,12 +639,22 @@ extension StudyListViewController :  UITableViewDelegate {
             }
             else {
                 
-                self.checkDatabaseForStudyInfo(study: study!)
+                if(study?.version != study?.newVersion){
+                    WCPServices().getStudyUpdates(study: study!, delegate: self)
+                }
+                else {
+                    self.checkDatabaseForStudyInfo(study: study!)
+                }
                 //self.sendRequestToGetStudyInfo(study: study!)
             }
         }
         else {
-            self.checkDatabaseForStudyInfo(study: study!)
+            if(study?.version != study?.newVersion){
+                WCPServices().getStudyUpdates(study: study!, delegate: self)
+            }
+            else {
+                self.checkDatabaseForStudyInfo(study: study!)
+            }
         }
     }
 }
@@ -643,7 +696,8 @@ extension StudyListViewController:NMWebServiceDelegate {
         }
         else if(requestName as String == WCPMethods.studyInfo.rawValue){
             self.removeProgressIndicator()
-            self.navigateToStudyHome()
+            //self.navigateToStudyHome()
+            self.navigateBasedOnUserStatus()
         }
         else if (requestName as String == RegistrationMethods.studyState.description){
             self.sendRequestToGetStudyList()

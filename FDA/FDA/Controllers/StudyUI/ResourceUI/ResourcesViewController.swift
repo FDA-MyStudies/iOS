@@ -63,6 +63,8 @@ class ResourcesViewController : UIViewController{
         
         self.checkForResourceUpdate()
         
+        self.checkForInfoUpdate()
+        
         
     }
     
@@ -78,6 +80,13 @@ class ResourcesViewController : UIViewController{
         }
         else {
             self.loadResourceFromDatabase()
+        }
+    }
+    
+    func checkForInfoUpdate(){
+        
+        if StudyUpdates.studyInfoUpdated {
+             WCPServices().getStudyInformation(studyId: (Study.currentStudy?.studyId)!, delegate: self)
         }
     }
     
@@ -642,14 +651,25 @@ extension ResourcesViewController:NMWebServiceDelegate {
         Logger.sharedInstance.info("requestname : \(requestName)")
         self.removeProgressIndicator()
         
-        if requestName as String == WCPMethods.resources.method.methodName {
+        if error.code == 401 { //unauthorized
+            UIUtilities.showAlertMessageWithActionHandler(kErrorTitle, message: error.localizedDescription, buttonTitle: kTitleOk, viewControllerUsed: self, action: {
+                self.fdaSlideMenuController()?.navigateToHomeAfterUnauthorizedAccess()
+            })
+        }
+        else {
             
-            self.addDefaultList()
-            self.appendLeaveStudy()
-            self.tableView?.isHidden = false
-            self.tableView?.reloadData()
-            
-            
+            if requestName as String == WCPMethods.resources.method.methodName {
+                
+                self.addDefaultList()
+                self.appendLeaveStudy()
+                self.tableView?.isHidden = false
+                self.tableView?.reloadData()
+                
+                
+            }
+            else {
+                 UIUtilities.showAlertWithTitleAndMessage(title:NSLocalizedString(kErrorTitle, comment: "") as NSString, message: error.localizedDescription as NSString)
+            }
         }
     }
 }

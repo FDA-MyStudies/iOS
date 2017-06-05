@@ -471,9 +471,9 @@ class ActivitiesViewController : UIViewController{
         DBHandler.updateStudyParticipationStatus(study: Study.currentStudy!)
         //        }
         
-        let halfCompletionKey = "50pcShown"  + (Study.currentStudy?.name)!
-        let fullCompletionKey = "100pcShown"  + (Study.currentStudy?.name)!
-        let missedKey = "totalMissed"  + (Study.currentStudy?.name)!
+        let halfCompletionKey = "50pcShown"  + (Study.currentStudy?.studyId)!
+        let fullCompletionKey = "100pcShown"  + (Study.currentStudy?.studyId)!
+        let missedKey = "totalMissed"  + (Study.currentStudy?.studyId)!
         
         let ud = UserDefaults.standard
         if completion > 50 && completion < 100 {

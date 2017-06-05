@@ -44,6 +44,7 @@
 		6E7D2D901E43526100763D4C /* Register.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6E7D2D8F1E43526100763D4C /* Register.plist */; };
 		6E91D6821ECD662E0012F49F /* JailbrokeBlocker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E91D6801ECD662E0012F49F /* JailbrokeBlocker.swift */; };
 		6E91D6831ECD662E0012F49F /* JailbrokeBlocker.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6E91D6811ECD662E0012F49F /* JailbrokeBlocker.xib */; };
+		6E93C7E11EE2EC26006788B1 /* ConsentLatest.json in Resources */ = {isa = PBXBuildFile; fileRef = 6E93C7E01EE2EC26006788B1 /* ConsentLatest.json */; };
 		6E9B39C01E55DFF10037D09D /* ActivityBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E9B39BF1E55DFF10037D09D /* ActivityBuilder.swift */; };
 		6E9E81D61ECEDA770007B492 /* SyncUpdate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E9E81D51ECEDA770007B492 /* SyncUpdate.swift */; };
 		6EA889BC1E6FD16B00F160A1 /* ConfirmationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EA889BB1E6FD16B00F160A1 /* ConfirmationViewController.swift */; };
@@ -295,6 +296,7 @@
 		6E7D2D8F1E43526100763D4C /* Register.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Register.plist; sourceTree = "<group>"; };
 		6E91D6801ECD662E0012F49F /* JailbrokeBlocker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JailbrokeBlocker.swift; sourceTree = "<group>"; };
 		6E91D6811ECD662E0012F49F /* JailbrokeBlocker.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JailbrokeBlocker.xib; sourceTree = "<group>"; };
+		6E93C7E01EE2EC26006788B1 /* ConsentLatest.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = ConsentLatest.json; sourceTree = "<group>"; };
 		6E9B39BF1E55DFF10037D09D /* ActivityBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityBuilder.swift; sourceTree = "<group>"; };
 		6E9E81D51ECEDA770007B492 /* SyncUpdate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SyncUpdate.swift; sourceTree = "<group>"; };
 		6EA889BB1E6FD16B00F160A1 /* ConfirmationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfirmationViewController.swift; sourceTree = "<group>"; };
@@ -819,6 +821,7 @@
 		6ED1342F1E5EB0110090C976 /* ConsentBuilder */ = {
 			isa = PBXGroup;
 			children = (
+				6E93C7E01EE2EC26006788B1 /* ConsentLatest.json */,
 				6ED134371E5F1B110090C976 /* Consent.json */,
 				6ED134331E5EB0280090C976 /* ConsentBuilder.swift */,
 			);
@@ -1459,6 +1462,7 @@
 			files = (
 				6EE93D921E93B8C30027A5DC /* 45.png in Resources */,
 				94B3DD5C1E6ED8E500327AE5 /* Study.storyboard in Resources */,
+				6E93C7E11EE2EC26006788B1 /* ConsentLatest.json in Resources */,
 				6EABD0331E56FE2000623D94 /* TaskSchema.json in Resources */,
 				48A24C3E1E839D03009E849E /* 55V2.png in Resources */,
 				6E7D2D8E1E43445600763D4C /* UserPreferences.plist in Resources */,

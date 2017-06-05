@@ -196,7 +196,7 @@ class NetworkWebServiceHandler: NSObject, URLSessionDelegate {
         
         let requestUrl = URL(string: requestString as String)!
       
-         var request = URLRequest.init(url: requestUrl, cachePolicy: URLRequest.CachePolicy.useProtocolCachePolicy, timeoutInterval: self.connectionTimeoutInterval)
+         var request = URLRequest.init(url: requestUrl, cachePolicy: URLRequest.CachePolicy.reloadIgnoringLocalCacheData, timeoutInterval: self.connectionTimeoutInterval)
         request.httpMethod = self.getRequestMethod(method) as String
         if httpHeaders != nil && (httpHeaders?.count)! > 0{
             request.allHTTPHeaderFields = httpHeaders as? [String : String]

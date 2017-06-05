@@ -139,13 +139,13 @@
 		94334F881E70055A00755444 /* UIApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94334F861E70055A00755444 /* UIApplication.swift */; };
 		94334F8A1E7005BF00755444 /* LeftMenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94334F891E7005BF00755444 /* LeftMenuCell.swift */; };
 		94334F8C1E701EB700755444 /* NavigationBackButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94334F8B1E701EB700755444 /* NavigationBackButton.swift */; };
+		945B32511EE5550B00E46EDC /* AppGlossary.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 945B32501EE5550B00E46EDC /* AppGlossary.pdf */; };
 		946CA5E91E728C2300CC8535 /* StringEncoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 946CA5E81E728C2300CC8535 /* StringEncoder.swift */; };
 		946CA5ED1E72DCA300CC8535 /* ProgressView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 946CA5EC1E72DCA300CC8535 /* ProgressView.xib */; };
 		9487102A1E546C3800246109 /* AppNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 948710291E546C3800246109 /* AppNotification.swift */; };
 		9487102C1E54870000246109 /* LabKeyServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9487102B1E54870000246109 /* LabKeyServices.swift */; };
 		9491F7F81E825F5D0018C15E /* DBHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9491F7F71E825F5D0018C15E /* DBHandler.swift */; };
 		9491F7FA1E825FA80018C15E /* DBUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9491F7F91E825FA80018C15E /* DBUser.swift */; };
-		94A758AD1ED8694B00567528 /* AbilifyMedGuide.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 94A758AC1ED8694B00567528 /* AbilifyMedGuide.pdf */; };
 		94B3DD0B1E6EC47700327AE5 /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B3DD0A1E6EC47700327AE5 /* SplashViewController.swift */; };
 		94B3DD401E6ED8E500327AE5 /* Gateway.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 94B3DD151E6ED8E500327AE5 /* Gateway.storyboard */; };
 		94B3DD421E6ED8E500327AE5 /* NotificationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B3DD181E6ED8E500327AE5 /* NotificationTableViewCell.swift */; };
@@ -392,6 +392,7 @@
 		94334F861E70055A00755444 /* UIApplication.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIApplication.swift; sourceTree = "<group>"; };
 		94334F891E7005BF00755444 /* LeftMenuCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LeftMenuCell.swift; sourceTree = "<group>"; };
 		94334F8B1E701EB700755444 /* NavigationBackButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationBackButton.swift; sourceTree = "<group>"; };
+		945B32501EE5550B00E46EDC /* AppGlossary.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = AppGlossary.pdf; sourceTree = "<group>"; };
 		946CA5E81E728C2300CC8535 /* StringEncoder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringEncoder.swift; sourceTree = "<group>"; };
 		946CA5EC1E72DCA300CC8535 /* ProgressView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProgressView.xib; sourceTree = "<group>"; };
 		948710291E546C3800246109 /* AppNotification.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppNotification.swift; sourceTree = "<group>"; };
@@ -399,7 +400,6 @@
 		94878B861EC982C30064E1D4 /* FDA.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = FDA.entitlements; sourceTree = "<group>"; };
 		9491F7F71E825F5D0018C15E /* DBHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DBHandler.swift; sourceTree = "<group>"; };
 		9491F7F91E825FA80018C15E /* DBUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DBUser.swift; sourceTree = "<group>"; };
-		94A758AC1ED8694B00567528 /* AbilifyMedGuide.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = AbilifyMedGuide.pdf; sourceTree = "<group>"; };
 		94B3DD0A1E6EC47700327AE5 /* SplashViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
 		94B3DD151E6ED8E500327AE5 /* Gateway.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Gateway.storyboard; sourceTree = "<group>"; };
 		94B3DD181E6ED8E500327AE5 /* NotificationTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationTableViewCell.swift; sourceTree = "<group>"; };
@@ -638,7 +638,7 @@
 				481DFA4B1E6EEB70004C39EF /* WebViewController.swift */,
 				6EDDB6591EE05E4C00C79337 /* NewProgressView.xib */,
 				946CA5EC1E72DCA300CC8535 /* ProgressView.xib */,
-				94A758AC1ED8694B00567528 /* AbilifyMedGuide.pdf */,
+				945B32501EE5550B00E46EDC /* AppGlossary.pdf */,
 			);
 			path = FDA;
 			sourceTree = "<group>";
@@ -1493,6 +1493,7 @@
 				942591C41EA8A2650010D892 /* ActivitySchedules.xib in Resources */,
 				94B3DD491E6ED8E500327AE5 /* StudyList.json in Resources */,
 				6EA889C51E701E8200F160A1 /* Confirmation.plist in Resources */,
+				945B32511EE5550B00E46EDC /* AppGlossary.pdf in Resources */,
 				6E14F2031F0224AD00EA8D1E /* Notification.json in Resources */,
 				6EB740281E9D1F8700A4C773 /* 03.png in Resources */,
 				6EE93DC91E93C8850027A5DC /* Activities.plist in Resources */,
@@ -1504,7 +1505,6 @@
 				94B3DD401E6ED8E500327AE5 /* Gateway.storyboard in Resources */,
 				6EC129241E64624F00B90167 /* Acivity_Question.json in Resources */,
 				94B3DD441E6ED8E500327AE5 /* Profile.plist in Resources */,
-				94A758AD1ED8694B00567528 /* AbilifyMedGuide.pdf in Resources */,
 				6EB7401C1E9CFAD700A4C773 /* 01.png in Resources */,
 				6E7D2D8C1E4340B200763D4C /* UserProfile.plist in Resources */,
 				6E7D2D901E43526100763D4C /* Register.plist in Resources */,

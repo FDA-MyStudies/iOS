@@ -6,11 +6,11 @@
 		<key>resourceId</key>
 		<string>111</string>
 		<key>title</key>
-		<string>FDA Resource 1</string>
+		<string>App Glossary</string>
 		<key>type</key>
 		<string>pdf</string>
 		<key>content</key>
-		<string>AbilifyMedGuide</string>
+		<string>AppGlossary</string>
 	</dict>
 </array>
 </plist>

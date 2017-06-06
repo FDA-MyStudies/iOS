@@ -443,7 +443,7 @@
                                     self.blockerScreen = AppUpdateBlocker.instanceFromNib(frame:(UIApplication.shared.keyWindow?.bounds)!, detail: parsedDict as! Dictionary<String, Any>);
                                     
                                     self.blockerScreen?.labelVersionNumber.text = "V-" + appStoreVersion
-                                    self.blockerScreen?.labelMessage.text = "Check out the new update for FDA My Studies."
+                                    self.blockerScreen?.labelMessage.text = "Please update to the latest version of app to continue."
                                     
                                     
                                     if User.currentUser.userType == .FDAUser {

@@ -126,7 +126,7 @@
             
             
             
-            // self.checkForAppUpdate()
+            self.checkForAppUpdateForVersion()
             
             
             
@@ -161,10 +161,10 @@
                     
                     notificationDetails = notification as! Dictionary<String, Any>?
                     
-                   
+                    
                 }
                 else{
-                     UIApplication.shared.applicationIconBadgeNumber = 0
+                    UIApplication.shared.applicationIconBadgeNumber = 0
                 }
                 
             }
@@ -264,7 +264,7 @@
              
              */
             
-             UIApplication.shared.applicationIconBadgeNumber = 0
+            UIApplication.shared.applicationIconBadgeNumber = 0
             
             if self.appIsResignedButDidNotEnteredBackground! {
                 
@@ -333,7 +333,7 @@
         
         func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
             
-           
+            
             
         }
         
@@ -407,6 +407,89 @@
             WCPServices().checkForAppUpdates(delegate: self)
         }
         
+        func checkForAppUpdateForVersion(){
+            
+            let infoDict = Bundle.main.infoDictionary
+            
+            let appId = infoDict?["CFBundleIdentifier"]
+            
+            let url:URL = URL.init(string:"http://itunes.apple.com/lookup?bundleId=\(appId!)" )!
+            
+            let request =   URLRequest(url:url)
+            
+            
+            let session = URLSession.shared
+            session.dataTask(with: request) {(data, response, error) -> Void in
+                if data != nil {
+                    DispatchQueue.main.async {
+                        //self.handleResponse(data, response: response, requestName: requestName, error: error as NSError?)
+                        do {
+                            
+                            let data = try Data.init(contentsOf: url)
+                            let parsedDict = try JSONSerialization.jsonObject(with: data, options:[])
+                            
+                            if ((parsedDict as! [String:Any])["resultCount"] as! Int) == 1{
+                                
+                                let resultArray = ((parsedDict as! [String:Any])["result"]) as! Array<Dictionary<String,Any>>
+                                
+                                let appStoreVersion = (resultArray.first)?["version"]  as! String
+                                
+                                let currentVersion = infoDict?["CFBundleShortVersionString"]
+                                
+                                if appStoreVersion != (currentVersion as! String) {
+                                    
+                                    self.shouldAddForceUpgradeScreen = true
+                                    
+                                    self.blockerScreen = AppUpdateBlocker.instanceFromNib(frame:(UIApplication.shared.keyWindow?.bounds)!, detail: parsedDict as! Dictionary<String, Any>);
+                                    
+                                    self.blockerScreen?.labelVersionNumber.text = "V-" + appStoreVersion
+                                    self.blockerScreen?.labelMessage.text = "Check out the new update for FDA My Studies."
+                                    
+                                    
+                                    if User.currentUser.userType == .FDAUser {
+                                        //FDA user
+                                        
+                                        if User.currentUser.settings?.passcode! == false {
+                                            UIApplication.shared.keyWindow?.addSubview(self.blockerScreen!)
+                                        }
+                                    }
+                                    else {
+                                        UIApplication.shared.keyWindow?.addSubview(self.blockerScreen!)
+                                    }
+                                }
+                                else {
+                                    
+                                }
+                            }
+                        }
+                        catch{
+                            
+                        }
+                        
+                    }
+                    
+                }
+                else {
+                    DispatchQueue.main.async {
+                        //self.delegate?.failedRequest(self.networkManager!, requestName: requestName!,error: error! as NSError)
+                    }
+                }
+                }.resume()
+            
+            
+//            let task2 =  URLSession.shared.dataTask(with: request) {
+//                (data, response, error) -> Void in
+//                if let data = data {
+//                    
+//                }
+//                else {
+//                    DispatchQueue.main.async {
+//                    }
+//                }
+//                }.resume()
+        }
+        
+
         func sendRequestToSignOut() {
             
             self.addAndRemoveProgress(add: true)
@@ -588,7 +671,7 @@
                                         
                                         
                                         self.pushToTabbar(viewController: initialVC!, selectedTab: (notificationSubType! as AppNotification.NotificationSubType == .Activity) ? 0 : 2)
-                            
+                                        
                                     }
                                     else {
                                         //switch to activty tab
@@ -629,7 +712,7 @@
                                             leftController.changeViewController(.studyList)
                                             leftController.createLeftmenuItems()
                                         }
-                                        
+                                            
                                         else if initialVC is UITabBarController {
                                             
                                             initialVC?.performSegue(withIdentifier: "unwindeToStudyListIdentier", sender: initialVC)
@@ -661,7 +744,7 @@
                             //Study is not in the list
                         }
                         
-                       
+                        
                     }
                     else{
                         //studyId is Null
@@ -679,7 +762,7 @@
                 }
                 
             }
-           
+            
             
             self.notificationDetails = nil
             
@@ -753,7 +836,7 @@
                             topVC = topVC?.presentedViewController
                         }
                         
-                       
+                        
                         
                         if topVC is UIAlertController{
                             
@@ -862,9 +945,9 @@
             
             let ud = UserDefaults.standard
             ud.set(false, forKey: kPasscodeIsPending)
-             ud.set(false, forKey: kShowNotification)
+            ud.set(false, forKey: kShowNotification)
             
-
+            
             
             ud.synchronize()
             
@@ -1070,8 +1153,8 @@
                     
                     if response?["forceUpdate"] as! Bool {
                         
-                       
-                       // topVC?.view.endEditing(true)
+                        
+                        // topVC?.view.endEditing(true)
                         
                         //self.window?.endEditing(true)
                         
@@ -1102,12 +1185,12 @@
                         
                         //UIApplication.shared.sendAction(#selector(resignFirstResponder), to: nil, from: nil, for: nil)
                         
-//                        var topVC = UIApplication.shared.keyWindow?.rootViewController
-//                        let vc  = topVC?.presentedViewController
-//                        if vc is ORKPasscodeViewController {
-//                           let vc1 = vc as! ORKPasscodeViewController
-//                            vc1.view.endEditing(true)
-//                        }
+                        //                        var topVC = UIApplication.shared.keyWindow?.rootViewController
+                        //                        let vc  = topVC?.presentedViewController
+                        //                        if vc is ORKPasscodeViewController {
+                        //                           let vc1 = vc as! ORKPasscodeViewController
+                        //                            vc1.view.endEditing(true)
+                        //                        }
                         
                         
                     }
@@ -1420,7 +1503,7 @@
             self.appIsResignedButDidNotEnteredBackground = false
             
             
-          
+            
             
             viewController.dismiss(animated: true, completion: {
                 self.isPasscodePresented = false
@@ -1434,7 +1517,7 @@
                         UIApplication.shared.keyWindow?.addSubview(self.blockerScreen!)
                     }
                     
-                   
+                    
                 }
                 
             })
@@ -1508,7 +1591,7 @@
             let userInfo = notification.request.content.userInfo
             print("REMOTE NOTIFICATION:" + "\(userInfo)")
             
-           
+            
             self.updateNotification()
             
             completionHandler([UNNotificationPresentationOptions.alert, .sound, .badge])
@@ -1532,7 +1615,7 @@
             }
             
             self.updateNotification()
-           
+            
             
             
         }
@@ -1542,8 +1625,8 @@
         
         func addProgressIndicatorOnWindow(){
             
-           
-           let view = UINib(nibName: "NewProgressView", bundle: nil).instantiate(withOwner: nil, options: nil)[0] as? UIView
+            
+            let view = UINib(nibName: "NewProgressView", bundle: nil).instantiate(withOwner: nil, options: nil)[0] as? UIView
             
             
             let url = Bundle.main.url(forResource: "fda_preload", withExtension: "gif")!
@@ -1555,7 +1638,7 @@
             webView.loadRequest(URLRequest.init(url: url))
             webView.scalesPageToFit = true
             webView.contentMode = UIViewContentMode.scaleAspectFit
-
+            
             var frame = UIScreen.main.bounds
             frame.origin.y += 64
             view?.frame = frame
@@ -1578,7 +1661,7 @@
         }
         
         /*
-     
+         
          func addProgressIndicatorOnWindow(){
          
          let view = UINib(nibName: "ProgressView", bundle: nil).instantiate(withOwner: nil, options: nil)[0] as? UIView
@@ -1602,9 +1685,9 @@
          view?.removeFromSuperview()
          }
          }
-
-     
-     */
+         
+         
+         */
         
         
         

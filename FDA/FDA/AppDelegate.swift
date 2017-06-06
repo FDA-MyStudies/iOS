@@ -414,63 +414,80 @@
             let appId = infoDict?["CFBundleIdentifier"]
             
             let url:URL = URL.init(string:"http://itunes.apple.com/lookup?bundleId=\(appId!)" )!
-        
-                let request =   URLRequest(url:url)
             
-             let task2 =  URLSession.shared.dataTask(with: request) {
-                (data, response, error) -> Void in
-                if let data = data {
-                    do {
-                        
-                        let data = try Data.init(contentsOf: url)
-                        let parsedDict = try JSONSerialization.jsonObject(with: data, options:[])
-                        
-                        if ((parsedDict as! [String:Any])["resultCount"] as! Int) == 1{
+            let request =   URLRequest(url:url)
+            
+            
+            let session = URLSession.shared
+            session.dataTask(with: request) {(data, response, error) -> Void in
+                if data != nil {
+                    DispatchQueue.main.async {
+                        //self.handleResponse(data, response: response, requestName: requestName, error: error as NSError?)
+                        do {
                             
-                            let resultArray = ((parsedDict as! [String:Any])["result"]) as! Array<Dictionary<String,Any>>
+                            let data = try Data.init(contentsOf: url)
+                            let parsedDict = try JSONSerialization.jsonObject(with: data, options:[])
                             
-                            let appStoreVersion = (resultArray.first)?["version"]  as! String
-                            
-                            let currentVersion = infoDict?["CFBundleShortVersionString"]
-                            
-                            if appStoreVersion != (currentVersion as! String) {
+                            if ((parsedDict as! [String:Any])["resultCount"] as! Int) == 1{
                                 
-                                self.shouldAddForceUpgradeScreen = true
+                                let resultArray = ((parsedDict as! [String:Any])["result"]) as! Array<Dictionary<String,Any>>
                                 
-                                blockerScreen = AppUpdateBlocker.instanceFromNib(frame:(UIApplication.shared.keyWindow?.bounds)!, detail: parsedDict as! Dictionary<String, Any>);
+                                let appStoreVersion = (resultArray.first)?["version"]  as! String
                                 
-                                blockerScreen?.labelVersionNumber.text = "V-" + appStoreVersion
-                                blockerScreen?.labelMessage.text = "Check out the new update for FDA My Studies."
+                                let currentVersion = infoDict?["CFBundleShortVersionString"]
                                 
-                                
-                                if User.currentUser.userType == .FDAUser {
-                                    //FDA user
+                                if appStoreVersion != (currentVersion as! String) {
                                     
-                                    if User.currentUser.settings?.passcode! == false {
-                                        UIApplication.shared.keyWindow?.addSubview(blockerScreen!)
+                                    self.shouldAddForceUpgradeScreen = true
+                                    
+                                    self.blockerScreen = AppUpdateBlocker.instanceFromNib(frame:(UIApplication.shared.keyWindow?.bounds)!, detail: parsedDict as! Dictionary<String, Any>);
+                                    
+                                    self.blockerScreen?.labelVersionNumber.text = "V-" + appStoreVersion
+                                    self.blockerScreen?.labelMessage.text = "Check out the new update for FDA My Studies."
+                                    
+                                    
+                                    if User.currentUser.userType == .FDAUser {
+                                        //FDA user
+                                        
+                                        if User.currentUser.settings?.passcode! == false {
+                                            UIApplication.shared.keyWindow?.addSubview(self.blockerScreen!)
+                                        }
+                                    }
+                                    else {
+                                        UIApplication.shared.keyWindow?.addSubview(self.blockerScreen!)
                                     }
                                 }
                                 else {
-                                    UIApplication.shared.keyWindow?.addSubview(blockerScreen!)
+                                    
                                 }
                             }
-                            else {
-                                
-                            }
                         }
-                    }
-                    catch error as Error{
+                        catch{
+                            
+                        }
                         
                     }
+                    
                 }
                 else {
                     DispatchQueue.main.async {
+                        //self.delegate?.failedRequest(self.networkManager!, requestName: requestName!,error: error! as NSError)
                     }
                 }
                 }.resume()
-     
-     */
-    }
+            
+            
+//            let task2 =  URLSession.shared.dataTask(with: request) {
+//                (data, response, error) -> Void in
+//                if let data = data {
+//                    
+//                }
+//                else {
+//                    DispatchQueue.main.async {
+//                    }
+//                }
+//                }.resume()
+        }
         
 
         func sendRequestToSignOut() {

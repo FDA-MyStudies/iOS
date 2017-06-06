@@ -147,20 +147,7 @@ class LineChartCell: GraphChartTableViewCell {
             
             startDateOfWeek = Date().startOfWeek
             endDateOfWeek = Date().endOfWeek
-            //current year
-//            let stringStartDate = LineChartCell.formatter.string(from: startDateOfWeek!) + " - "
-//            let stringEndDate = LineChartCell.formatter.string(from: endDateOfWeek!)
-//            
-//            let color = Utilities.getUIColorFromHex(0x007CBA)
-//            
-//            let attributedStartDate:NSMutableAttributedString = NSMutableAttributedString(string: stringStartDate)
-//            attributedStartDate.addAttribute(NSForegroundColorAttributeName, value: color, range: NSMakeRange(0, 2))
-//            
-//            let attributedEndDate:NSMutableAttributedString = NSMutableAttributedString(string: stringEndDate)
-//            attributedEndDate.addAttribute(NSForegroundColorAttributeName, value: color, range: NSMakeRange(0, 2))
-//            
-//            
-//            attributedStartDate.append(attributedEndDate)
+
             
             let attributedText = self.getWeeklyAttributedText()
             
@@ -203,7 +190,16 @@ class LineChartCell: GraphChartTableViewCell {
 
             
             
-            xAxisTitles = Calendar.current.veryShortMonthSymbols
+            xAxisTitles = Calendar.current.shortMonthSymbols
+            
+            for i in 0...11{
+                if (i == 0 || i == 3 || i == 6 || i == 9 || i == 11){
+                    
+                }
+                else {
+                    xAxisTitles[i] = ""
+                }
+            }
             
             self.handleMonthsOfYearForDate(date: Date())
             
@@ -223,6 +219,8 @@ class LineChartCell: GraphChartTableViewCell {
             
         case .runs:
             
+            labelTitle.text = chart.displayName! + " (per run)"
+            
             self.buttonForward.isEnabled = true
             let stringStartDate = LineChartCell.formatter.string(from: (charActivity?.startDate!)!)
             let stringEndDate = LineChartCell.formatter.string(from: (charActivity?.endDate!)!)
@@ -240,7 +238,7 @@ class LineChartCell: GraphChartTableViewCell {
             
             
             
-            
+             labelTitle.text = chart.displayName! + " (per run)"
             
             //current date
             let stringDate = LineChartCell.formatter.string(from: Date())

@@ -19,8 +19,8 @@ class DBHandler: NSObject {
         dbUser.emailId = user.emailId!
         dbUser.authToken = user.authToken
         dbUser.userId = user.userId
-        dbUser.firstName = user.firstName!
-        dbUser.lastName = user.lastName!
+        //dbUser.firstName = user.firstName
+        //dbUser.lastName = user.lastName
         dbUser.verified = user.verified
         
         
@@ -198,6 +198,7 @@ class DBHandler: NSObject {
         let realm = try! Realm()
         let dbStudies = realm.objects(DBStudy.self)
         
+        User.currentUser.participatedStudies.removeAll()
         var studies:Array<Study> = []
         for dbStudy in dbStudies {
             
@@ -630,9 +631,9 @@ class DBHandler: NSObject {
         
         //save overview
         let dbActivityRuns = List<DBActivityRun>()
-        for sectionIndex in 0...(activity.activityRuns.count-1) {
+        for activityRun in activity.activityRuns {
             
-            let activityRun = activity.activityRuns[sectionIndex]
+            //let activityRun = activity.activityRuns[sectionIndex]
             let dbActivityRun = DBActivityRun()
             dbActivityRun.startDate = activityRun.startDate
             dbActivityRun.endDate = activityRun.endDate

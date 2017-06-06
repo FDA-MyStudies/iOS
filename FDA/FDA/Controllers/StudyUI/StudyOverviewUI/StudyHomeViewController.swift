@@ -785,7 +785,7 @@ extension StudyHomeViewController:ORKTaskViewControllerDelegate{
             DBHandler.saveConsentInformation(study: Study.currentStudy!)
             
             self.addProgressIndicator()
-            LabKeyServices().enrollForStudy(studyId: "TESTSTUDY01", token: (ConsentBuilder.currentConsent?.consentResult?.token)!, delegate: self)
+            LabKeyServices().enrollForStudy(studyId: (Study.currentStudy?.studyId)!, token: (ConsentBuilder.currentConsent?.consentResult?.token)!, delegate: self)
             taskViewController.dismiss(animated: true, completion: nil)        }
         else{
             //activityBuilder?.actvityResult?.initWithORKTaskResult(taskResult: taskViewController.result)

@@ -103,7 +103,7 @@ class EligibilityStepViewController: ORKStepViewController {
         
         if (token?.characters.count)! > 0 {
             //(Study.currentStudy?.studyId)!
-            LabKeyServices().verifyEnrollmentToken(studyId: "TESTSTUDY01", token: token!, delegate: self)
+            LabKeyServices().verifyEnrollmentToken(studyId: (Study.currentStudy?.studyId)!, token: token!, delegate: self)
             
             //self.goForward()
         }

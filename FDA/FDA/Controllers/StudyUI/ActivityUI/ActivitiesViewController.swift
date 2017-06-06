@@ -40,6 +40,8 @@ class ActivitiesViewController : UIViewController{
         self.tableView?.estimatedRowHeight = 126
         self.tableView?.rowHeight = UITableViewAutomaticDimension
         
+         self.tabBarController?.delegate = self
+        
         self.navigationItem.title = NSLocalizedString("STUDY ACTIVITIES", comment: "")
         self.tableView?.sectionHeaderHeight = 30
         
@@ -738,8 +740,7 @@ extension ActivitiesViewController : UITableViewDelegate{
                             }
                         })
                         
-                        //                        //To be uncommented
-                        //                        WCPServices().getStudyActivityMetadata(studyId:(Study.currentStudy?.studyId)! , activityId: (Study.currentActivity?.actvityId)!, activityVersion: (Study.currentActivity?.version)!, delegate: self)
+                      
                         
                         self.updateActivityStatusToInProgress()
                         
@@ -821,6 +822,7 @@ extension ActivitiesViewController:NMWebServiceDelegate {
         else if requestName as String == ResponseMethods.processResponse.method.methodName{
             self.removeProgressIndicator()
             //self.updateRunStatusToComplete()
+            self.checkForActivitiesUpdates()
         }
     }
     
@@ -1170,6 +1172,19 @@ extension ActivitiesViewController:ORKTaskViewControllerDelegate{
             return nil
         }
     }
+}
+
+extension ActivitiesViewController:UITabBarControllerDelegate{
+    
+    func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
+        let tabBarIndex = tabBarController.selectedIndex
+        if tabBarIndex == 0 {
+            //do your stuff
+            self.checkForActivitiesUpdates()
+        }
+    }
+    
+    
 }
 
 //MARK:- ActivitySchedules Class

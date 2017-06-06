@@ -257,11 +257,19 @@ class ActivitiesTableViewCell: UITableViewCell {
         if endDate != nil {
             endDateString = ActivitiesTableViewCell.oneTimeFormatter.string(from: endDate!)
         }
+        
+        if activity.type == ActivityType.activeTask{
+             imageIcon?.image = UIImage.init(named: "taskIcon")
+        }
+        else {
+            
+            imageIcon?.image = UIImage.init(named: "surveyIcon")
+        }
        
         switch frequency {
         case .One_Time:
             
-            imageIcon?.image = UIImage.init(named: "taskIcon")
+           
             if endDate != nil {
                 
                 labelTime?.text = startDateString + " - " + endDateString

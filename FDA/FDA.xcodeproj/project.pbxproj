@@ -1985,7 +1985,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.hphci.fda.mobilestudies;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "b15a4b9d-4503-491f-a6e4-1bf9dddb88ce";
+				PROVISIONING_PROFILE = "c6b175a2-3cbf-4e94-95e8-c756d66a4161";
 				PROVISIONING_PROFILE_SPECIFIER = HPHC_Development;
 				SWIFT_OBJC_BRIDGING_HEADER = "FDA/Controllers/LoginRegisterUI/FDA-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -2010,7 +2010,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.hphci.fda.mobilestudies;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "b15a4b9d-4503-491f-a6e4-1bf9dddb88ce";
+				PROVISIONING_PROFILE = "c6b175a2-3cbf-4e94-95e8-c756d66a4161";
 				PROVISIONING_PROFILE_SPECIFIER = HPHC_Development;
 				SWIFT_OBJC_BRIDGING_HEADER = "FDA/Controllers/LoginRegisterUI/FDA-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;

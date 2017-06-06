@@ -65,6 +65,8 @@ class ActivityResult {
                 
                 
                 if stepResult.identifier != "CompletionStep" && stepResult.identifier !=  kFetalKickInstructionStepIdentifier && stepResult.identifier != kFetalKickIntroductionStepIdentifier {
+                    
+                    
                      self.result?.append(activityStepResult!)
                 }
                 

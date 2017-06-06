@@ -408,7 +408,7 @@
         }
         
         func checkForAppUpdateForVersion(){
-            
+            /*
             let infoDict = Bundle.main.infoDictionary
             
             let appId = infoDict?["CFBundleIdentifier"]
@@ -468,6 +468,8 @@
                     }
                 }
                 }.resume()
+     
+     */
     }
         
 

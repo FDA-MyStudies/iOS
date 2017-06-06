@@ -529,6 +529,9 @@ class StudyListViewController: UIViewController {
             StudyUpdates.studyConsentUpdated = false
             StudyUpdates.studyActivitiesUpdated = false
             StudyUpdates.studyResourcesUpdated = false
+            
+            currentStudy?.version = StudyUpdates.studyVersion
+            currentStudy?.newVersion = StudyUpdates.studyVersion
         }
         
         DBHandler.updateMetaDataToUpdateForStudy(study: Study.currentStudy!, updateDetails: nil)
@@ -616,7 +619,7 @@ extension StudyListViewController :  UITableViewDelegate {
                 
                 let userStudyStatus =  (Study.currentStudy?.userParticipateState.status)!
                 
-                if userStudyStatus == .completed || userStudyStatus == .inProgress  //|| userStudyStatus == .yetToJoin
+                if userStudyStatus == .completed || userStudyStatus == .inProgress
                 {
                     
                     //self.pushToStudyDashboard()

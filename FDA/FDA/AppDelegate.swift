@@ -1274,6 +1274,8 @@
                     
                     
                     //update consent is updaeted in db
+                    Study.currentStudy?.version = StudyUpdates.studyVersion
+                    Study.currentStudy?.newVersion = StudyUpdates.studyVersion
                     StudyUpdates.studyConsentUpdated  = false
                     DBHandler.updateMetaDataToUpdateForStudy(study: Study.currentStudy!, updateDetails:nil)
                     

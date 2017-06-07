@@ -171,7 +171,15 @@ extension EligibilityStepViewController:NMWebServiceDelegate {
              self.showAlert(message: kMessageForInvalidToken)
         }
         else{
-            self.showAlert(message:error.localizedDescription)
+            
+            if error.code == 101 {
+                self.showAlert(message:"Unable to Enroll, Please try again later.")
+            }
+            else{
+                self.showAlert(message:error.localizedDescription)
+            }
+            
+            
         }
         
         

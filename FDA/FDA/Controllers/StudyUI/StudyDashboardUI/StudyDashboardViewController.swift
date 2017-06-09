@@ -111,7 +111,9 @@ class StudyDashboardViewController : UIViewController{
     func sendRequestToGetDashboardInfo(){
         WCPServices().getStudyDashboardInfo(studyId: (Study.currentStudy?.studyId)!, delegate: self)
     }
-    
+    func sendRequestToGetDashboardRespons(){
+       // https://hphci-fdama-te-ds-01.labkey.com/mobileAppStudy-executeSQL.api?participantId=1a3d0d308df81024f8bfd7f11f7a0168&sql=SELECT%20*%20FROM%20Q1
+    }
     
 //MARK:- Button Actions
     

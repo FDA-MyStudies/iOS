@@ -33,10 +33,21 @@ class StudyDashboard: NSObject {
     
     var statistics:Array<DashboardStatistics>! = []
     var charts:Array<DashboardCharts>! = []
+    var dashboardResponse:Array<DashboardResponse> = []
     static var instance = StudyDashboard()
 }
 
-
+class DashboardResponse{
+    var key:String?
+    var type:String?
+    var values:Array<Dictionary<String,Any>> = []
+    var date:String?
+    var isPHI:String?
+    
+    init() {
+        
+    }
+}
 class DashboardStatistics {
     
     var statisticsId:String?

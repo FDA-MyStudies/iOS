@@ -157,30 +157,16 @@ class LabKeyServices: NSObject {
         
     }
     
-    class DashboardResponse{
-        var key:String?
-        var type:String?
-        var value:Float = 0.0
-        var date:String?
-        var isPHI:String?
-        
-        init() {
-            
-        }
-    }
+   
     func handleGetParticipantResponse(response:Dictionary<String, Any>){
         
         
-        
-       
-        
-        
         var dashBoardResponse:Array<DashboardResponse> = []
-        if let feilds = response["fields"] as? Array<Dictionary<String,Any>>{
+        let metadata =   response["metaData"] as? Dictionary<String,Any>
+        if let feilds = metadata?["fields"] as? Array<Dictionary<String,Any>>{
             
            
-            
-            print("rows \(feilds)")
+            print("feilds \(feilds)")
             for feildDetail in feilds {
                 
                 if let fieldKeys = feildDetail["fieldKey"] as? Array<String> {
@@ -189,14 +175,18 @@ class LabKeyServices: NSObject {
                     
                     let responseData = DashboardResponse()
                     //check for key which don't need to be parsed
-                    if (fieldKeyValue != "container"
-                        || fieldKeyValue != "CreatedBy"
-                        || fieldKeyValue != "ModifiedBy"
-                        || fieldKeyValue != "lastIndexed"
-                        || fieldKeyValue != "Modified"
-                        || fieldKeyValue != "Key"
-                        || fieldKeyValue != "ParticipantId" ){
+                    if (fieldKeyValue == "container"
+                        || fieldKeyValue == "Created"
+                        || fieldKeyValue == "CreatedBy"
+                        || fieldKeyValue == "ModifiedBy"
+                        || fieldKeyValue == "lastIndexed"
+                        || fieldKeyValue == "Modified"
+                        || fieldKeyValue == "Key"
+                        || fieldKeyValue == "ParticipantId" ){
                         
+                       //do not do anything
+                    }
+                    else {
                         responseData.key = fieldKeyValue
                         responseData.type = feildDetail["type"] as! String?
                         responseData.isPHI = feildDetail["phi"] as! String?
@@ -213,11 +203,38 @@ class LabKeyServices: NSObject {
         if let rows = response["rows"] as? Array<Dictionary<String,Any>>{
             print("rows \(rows)")
             
+            for rowDetail in rows {
+                if let data =  rowDetail["data"] as? Dictionary<String,Any>{
+                    //created date
+                    let dateDetail = data["Created"]  as? Dictionary<String,Any>
+                    let date = dateDetail?["value"] as! String
+                    
+                    for responseData in dashBoardResponse {
+                    
+                        if let keyValue = data[responseData.key!] as? Dictionary<String,Any> {
+                            print("value \(keyValue["value"])")
+                            if (responseData.type! == "int" || responseData.type! == "float" || responseData.type! == "double") {
+                                let value = keyValue["value"] as! Float
+                                let valueDetail = ["value":value,
+                                                   "date":date] as Dictionary<String,Any>
+                                
+                                responseData.values.append(valueDetail)
+                            }
+
+                        }
+                    }
+                }
+            }
             
             
         }
+        
+        StudyDashboard.instance.dashboardResponse = dashBoardResponse
+        
+        //save in database as well
+        //TBD
     
-    
+    }
     
     
     private func sendRequestWith(method:Method, params:Dictionary<String, Any>,headers:Dictionary<String, String>?){

@@ -124,8 +124,20 @@ class LabKeyServices: NSObject {
         
     }
     
-    func getParticipantResponse(delegate:NMWebServiceDelegate){
+    func getParticipantResponse(activityId:String,participantId:String,delegate:NMWebServiceDelegate){
         self.delegate = delegate
+        
+        let method = ResponseMethods.executeSQL.method
+        let query = "SELECT * FROM " + activityId
+        let params = [
+            
+                      kParticipantId: participantId,
+                      "sql" :query
+            ] as [String : Any]
+        
+       
+        self.sendRequestWith(method:method, params: params, headers: nil)
+        
     }
     
     //MARK:Parsers
@@ -145,9 +157,65 @@ class LabKeyServices: NSObject {
         
     }
     
+    class DashboardResponse{
+        var key:String?
+        var type:String?
+        var value:Float = 0.0
+        var date:String?
+        var isPHI:String?
+        
+        init() {
+            
+        }
+    }
     func handleGetParticipantResponse(response:Dictionary<String, Any>){
         
-    }
+        
+        
+       
+        
+        
+        var dashBoardResponse:Array<DashboardResponse> = []
+        if let feilds = response["fields"] as? Array<Dictionary<String,Any>>{
+            
+           
+            
+            print("rows \(feilds)")
+            for feildDetail in feilds {
+                
+                if let fieldKeys = feildDetail["fieldKey"] as? Array<String> {
+                    
+                    let fieldKeyValue = fieldKeys.first
+                    
+                    let responseData = DashboardResponse()
+                    //check for key which don't need to be parsed
+                    if (fieldKeyValue != "container"
+                        || fieldKeyValue != "CreatedBy"
+                        || fieldKeyValue != "ModifiedBy"
+                        || fieldKeyValue != "lastIndexed"
+                        || fieldKeyValue != "Modified"
+                        || fieldKeyValue != "Key"
+                        || fieldKeyValue != "ParticipantId" ){
+                        
+                        responseData.key = fieldKeyValue
+                        responseData.type = feildDetail["type"] as! String?
+                        responseData.isPHI = feildDetail["phi"] as! String?
+                        
+                        dashBoardResponse.append(responseData)
+                    }
+                }
+                
+                
+            }
+            
+        }
+        
+        if let rows = response["rows"] as? Array<Dictionary<String,Any>>{
+            print("rows \(rows)")
+            
+            
+            
+        }
     
     
     
@@ -174,6 +242,8 @@ extension LabKeyServices:NMWebServiceDelegate{
         case ResponseMethods.enroll.description as String:
             self.handleEnrollForStudy(response: response as! Dictionary<String, Any>)
         case ResponseMethods.getParticipantResponse.description as String: break
+        case ResponseMethods.executeSQL.description as String:
+            self.handleGetParticipantResponse(response: response as! Dictionary<String, Any>)
         case ResponseMethods.processResponse.description as String: break
         case ResponseMethods.withdrawFromStudy.description as String: break
         default:

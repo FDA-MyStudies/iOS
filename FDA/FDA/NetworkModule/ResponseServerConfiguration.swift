@@ -14,6 +14,7 @@ enum ResponseMethods:String {
     case processResponse
     case withdrawFromStudy
     case getParticipantResponse
+    case executeSQL
     
     
     var description:String{
@@ -26,7 +27,7 @@ enum ResponseMethods:String {
     
     var method:Method{
         switch self {
-        case .getParticipantResponse,.validateEnrollmentToken:
+        case .getParticipantResponse,.validateEnrollmentToken,.executeSQL:
             return Method(methodName:(self.rawValue+".api"), methodType: .httpMethodGet, requestType: .requestTypeHTTP)
         case .withdrawFromStudy:
             return Method(methodName:(self.rawValue+".api"), methodType: .httpMethodPOST, requestType: .requestTypeHTTP)
@@ -41,12 +42,12 @@ enum ResponseMethods:String {
 struct ResponseServerURLConstants {
     //TODO: Set the server end points
     
-//    static let ProductionURL = "https://hphci-fdama-te-ds-01.labkey.com/mobileappstudy-"
-//    static let DevelopmentURL = "https://hphci-fdama-te-ds-01.labkey.com/mobileappstudy-"
+    static let ProductionURL = "https://hphci-fdama-te-ds-01.labkey.com/mobileappstudy-"
+    static let DevelopmentURL = "https://hphci-fdama-te-ds-01.labkey.com/mobileappstudy-"
     
     //Labkey UAT Server
-    static let ProductionURL = "https://hphci-fdama-st-ds-01.labkey.com/mobileappstudy-"
-    static let DevelopmentURL = "https://hphci-fdama-st-ds-01.labkey.com/mobileappstudy-"
+//    static let ProductionURL = "https://hphci-fdama-st-ds-01.labkey.com/mobileappstudy-"
+//    static let DevelopmentURL = "https://hphci-fdama-st-ds-01.labkey.com/mobileappstudy-"
     
 }
 class ResponseServerConfiguration: NetworkConfiguration {

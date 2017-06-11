@@ -246,6 +246,10 @@ class ActivityStepResult{
                     
                     var formResultArray:[Dictionary<String,Any>] = [Dictionary<String,Any>]()
                     
+                    var i:Int! = 0
+                    
+                    var j:Int! = 0
+                    
                     for result in stepResult.results!{
                         let activityStepResult:ActivityStepResult? = ActivityStepResult()
                         
@@ -254,7 +258,13 @@ class ActivityStepResult{
                         activityStepResult?.endTime = self.endTime
                         activityStepResult?.skipped = self.skipped
                         
+                        let activityStep = ActivityStep()
+                        activityStepResult?.step = activityStep
                         
+                        j = (i == 0 ? 0 : i % (self.step as! ActivityFormStep).itemsArray.count)
+                        
+                        let itemDict = (self.step as! ActivityFormStep).itemsArray[j] as Dictionary<String, Any>
+                        activityStepResult?.step?.resultType = itemDict["resultType"] as! String
                         if ((result as? ORKQuestionResult) != nil){
                         
                             
@@ -266,6 +276,7 @@ class ActivityStepResult{
                     
                         formResultArray.append((activityStepResult?.getActivityStepResultDict()!)!)
                         }
+                        i = i + 1
                     }
                     self.value = formResultArray
                     
@@ -485,13 +496,14 @@ class ActivityStepResult{
                         
                         //for image choice and valuepicker
                         
-                        let resultValue:String? = "\(stepTypeResult.choiceAnswers?.first)"
-                        self.value = (resultValue == nil ? "" : resultValue!)
+                        let resultValue:String! = "\(stepTypeResult.choiceAnswers!.first!)"
+                        
+                        self.value = (resultValue == nil ? "" : resultValue)
                    }
                     else{
                         // for text choice
                         
-                         let resultValue:String? = "\(stepTypeResult.choiceAnswers?.first)"
+                         let resultValue:String! = "\(stepTypeResult.choiceAnswers!.first!)"
                         
                         let resultArray:Array<String>? = ["\(resultValue == nil ? "" : resultValue!)"]
                          self.value = resultArray

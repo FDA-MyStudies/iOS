@@ -1461,7 +1461,7 @@ class DBHandler: NSObject {
             let dbNotification = DBNotification()
             dbNotification.id = notification.id!
             dbNotification.title = notification.title!
-            dbNotification.message = notification.message!
+            dbNotification.message =  (notification.message == nil) ? "" : notification.message!
             
             
             if notification.studyId != nil {

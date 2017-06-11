@@ -172,7 +172,7 @@ extension EligibilityStepViewController:NMWebServiceDelegate {
         }
         else{
             
-            if error.code == 101 {
+            if error.localizedDescription.localizedCaseInsensitiveContains("Study with StudyId") {
                 self.showAlert(message:"Unable to Enroll, Please try again later.")
             }
             else{

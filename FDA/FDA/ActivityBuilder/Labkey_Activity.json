@@ -172,6 +172,57 @@
                             
                             "options": []
                             
+                            },
+                            {
+                            
+                            "type": "question",
+                            
+                            "resultType": "scale",
+                            
+                            "key": "QR4_F1_Q3u",
+                            
+                            "title": "Q1",
+                            
+                            "text": "QDesc1",
+                            
+                            "skippable": true,
+                            
+                            "groupName": "",
+                            
+                            "repeatable": false,
+                            
+                            "repeatableText": "",
+                            
+                            "destinations": [],
+                            
+                            "healthDataKey": "",
+                            
+                            "format": {
+                            
+                            "maxValue": 100,
+                            
+                            "minValue": 0,
+                            
+                            "default": 60,
+                            
+                            "step": 10,
+                            
+                            "vertical": true,
+                            
+                            "maxDesc": "Maximum Desc",
+                            
+                            "minDesc": "Minimum Desc",
+                            
+                            "maxImage": "",
+                            
+                            "minImage": ""
+                            
+                            },
+                            
+                            "steps": [],
+                            
+                            "options": []
+                            
                             }
                             
                             ],

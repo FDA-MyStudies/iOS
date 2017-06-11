@@ -16,6 +16,7 @@ class ActivityFormStep: ActivityStep {
     
     var itemsArray:[Dictionary<String,Any>]
     
+   
     override init() {
         self.itemsArray = Array()
         super.init()

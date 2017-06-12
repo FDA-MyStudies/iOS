@@ -41,12 +41,12 @@ enum ResponseMethods:String {
 struct ResponseServerURLConstants {
     //TODO: Set the server end points
     
-//    static let ProductionURL = "https://hphci-fdama-te-ds-01.labkey.com/mobileappstudy-"
-//    static let DevelopmentURL = "https://hphci-fdama-te-ds-01.labkey.com/mobileappstudy-"
+    static let ProductionURL = "https://hphci-fdama-te-ds-01.labkey.com/mobileappstudy-"
+    static let DevelopmentURL = "https://hphci-fdama-te-ds-01.labkey.com/mobileappstudy-"
     
     //Labkey UAT Server
-    static let ProductionURL = "https://hphci-fdama-st-ds-01.labkey.com/mobileappstudy-"
-    static let DevelopmentURL = "https://hphci-fdama-st-ds-01.labkey.com/mobileappstudy-"
+    //static let ProductionURL = "https://hphci-fdama-st-ds-01.labkey.com/mobileappstudy-"
+    //static let DevelopmentURL = "https://hphci-fdama-st-ds-01.labkey.com/mobileappstudy-"
     
 }
 class ResponseServerConfiguration: NetworkConfiguration {

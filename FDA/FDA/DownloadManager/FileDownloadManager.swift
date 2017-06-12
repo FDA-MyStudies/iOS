@@ -162,8 +162,28 @@ extension FileDownloadManager:URLSessionDelegate{
         if !FileManager.default.fileExists(atPath: pathString) {
         
         do{
+            
+            let ud = UserDefaults.standard
+            
+            var key = ""
+            var initializationVector = ""
+            
+            if ud.value(forKey: "EncryptionKey") != nil {
+                key = ud.value(forKey: "EncryptionKey") as! String
+            }
+            else{
+                key = "passwordpasswordpasswordpassword"
+            }
+            if ud.value(forKey: "EncryptionIV") != nil {
+                initializationVector = ud.value(forKey: "EncryptionIV") as! String
+            }
+            else{
+                initializationVector = "drowssapdrowssap"
+            }
+
+            
             let data = try Data.init(contentsOf: URL.init(string: pathString)!)
-            let aes = try AES(key: "passwordpasswordpasswordpassword", iv: "drowssapdrowssap")
+            let aes = try AES(key: key, iv: initializationVector)
             let deCipherText = try aes.decrypt(data)
             let deCryptedData = Data(deCipherText)
             return deCryptedData
@@ -194,10 +214,28 @@ extension FileDownloadManager:URLSessionDelegate{
         if !FileManager.default.fileExists(atPath: pathString) {
             
             do{
-                let data = try Data.init(contentsOf: URL.init(string: pathString)!)
-                let aes = try AES(key: "passwordpasswordpasswordpassword", iv: "drowssapdrowssap") // aes128
-                let ciphertext = try aes.encrypt(data)
                 
+                let ud = UserDefaults.standard
+                
+                var key = ""
+                var initializationVector = ""
+                
+                if ud.value(forKey: "EncryptionKey") != nil {
+                    key = ud.value(forKey: "EncryptionKey") as! String
+                }
+                else{
+                    key = "passwordpasswordpasswordpassword"
+                }
+                if ud.value(forKey: "EncryptionIV") != nil {
+                     initializationVector = ud.value(forKey: "EncryptionIV") as! String
+                }
+                else{
+                    initializationVector = "drowssapdrowssap"
+                }
+                let data = try Data.init(contentsOf: URL.init(string: pathString)!)
+                let aes = try AES(key: key, iv: initializationVector) // aes128
+                
+                let ciphertext = try aes.encrypt(data)
                 
                 let encryptedData =  Data(ciphertext)
                 

@@ -26,6 +26,8 @@
         
         var isPasscodePresented:Bool? =  false
         
+        
+        
         var parentViewControllerForAlert:UIViewController?
         
         let healthStore = HKHealthStore()
@@ -63,6 +65,54 @@
             UIApplication.shared.registerForRemoteNotifications()
             
         }
+        
+        func updateKeyAndInitializationVector(){
+            
+            
+            let currentDate = "\(Date(timeIntervalSinceNow: 0))"
+            
+            let currentIndex = currentDate.index(currentDate.endIndex
+                , offsetBy: -13)
+            let subStringFromDate = currentDate.substring(to: currentIndex)
+
+            
+            let ud = UserDefaults.standard
+            
+            if User.currentUser.userType ==  .FDAUser{
+                
+                let index =  User.currentUser.userId.index(User.currentUser.userId.endIndex
+                    , offsetBy: -16)
+                
+                let subKey = User.currentUser.userId.substring(to:index ) // 36 - 12 =  24 characters
+                
+                ud.set("\(subKey + subStringFromDate)", forKey: "EncryptionKey")
+                
+            }
+            else{
+                 ud.set(currentDate + "Password123", forKey: "EncryptionKey")
+            }
+            
+            if UIDevice.current.model == "iPhone Simulator" {
+                // simulator
+                
+                ud.set("drowssapdrowssap", forKey: "EncryptionIV")
+            }
+            else{
+                // not a simulator
+                
+
+                var udid = UIDevice.current.identifierForVendor?.uuidString
+                
+                let index =  udid?.index((udid?.endIndex)!
+                    , offsetBy: -20)
+                
+                udid = udid?.substring(to: index!)
+                
+                ud.set(udid, forKey: "EncryptionIV")
+            }
+            ud.synchronize()
+        }
+        
         
         func calculateTimeZoneChange(){
             
@@ -406,6 +456,8 @@
         func checkForAppUpdate(){
             WCPServices().checkForAppUpdates(delegate: self)
         }
+        
+       
         
         func checkForAppUpdateForVersion(){
             
@@ -947,10 +999,12 @@
             ud.set(false, forKey: kPasscodeIsPending)
             ud.set(false, forKey: kShowNotification)
             
-            
-            
             ud.synchronize()
             
+            
+            
+            self.updateKeyAndInitializationVector()
+
             
             let navigationController =  (self.window?.rootViewController as! UINavigationController)
             

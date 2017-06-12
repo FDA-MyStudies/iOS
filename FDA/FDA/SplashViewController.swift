@@ -9,7 +9,8 @@
 import UIKit
 
 class SplashViewController: UIViewController {
-
+    
+var isAppOpenedForFirstTime:Bool? = false
     
 //MARK:- Viewcontroller Lifecycle
     override func viewDidLoad() {
@@ -23,6 +24,9 @@ class SplashViewController: UIViewController {
          DBHandler().initilizeCurrentUser()
         //TEMP : Need to get form Realm
         //let ud = UserDefaults.standard
+        
+        
+        self.checkIfAppLaunchedForFirstTime()
         
         /*Used to Check AuthKey, If exists navigate to HomeController else GatewayDashboard*/
         if User.currentUser.authToken != nil {
@@ -89,15 +93,58 @@ class SplashViewController: UIViewController {
         self.navigationController?.pushViewController(fda, animated: true)
     }
     
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    func checkIfAppLaunchedForFirstTime(){
+        
+        if isAppOpenedForFirstTime == false{
+            
+            
+            let currentDate = "\(Date(timeIntervalSinceNow: 0))"
+            
+            let currentIndex = currentDate.index(currentDate.endIndex
+                , offsetBy: -13)
+            let subStringFromDate = currentDate.substring(to: currentIndex)
+            
+            let ud = UserDefaults.standard
+            
+           
+            
+            if User.currentUser.userType == .FDAUser{
+                
+                let index =  User.currentUser.userId.index(User.currentUser.userId.endIndex
+                    , offsetBy: -16)
+                
+                let subKey = User.currentUser.userId.substring(to:index )
+                
+                ud.set("\(subKey + subStringFromDate)", forKey: "EncryptionKey")
+            }
+            else{
+                ud.set(currentDate + "Password123", forKey: "EncryptionKey")
+            }
+            
+            
+            if UIDevice.current.model == "iPhone Simulator" {
+                // simulator
+                
+                ud.set("drowssapdrowssap", forKey: "EncryptionIV")
+                
+            }
+            else{
+                // not a simulator
+                var udid = UIDevice.current.identifierForVendor?.uuidString
+                
+                let index =  udid?.index((udid?.endIndex)!
+                    , offsetBy: -20)
+                
+                udid = udid?.substring(to: index!)
+                
+                ud.set(udid, forKey: "EncryptionIV")
+            }
+            
+            ud.synchronize()
+            
+        }
+        
     }
-    */
 
 }
 

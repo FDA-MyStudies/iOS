@@ -1020,82 +1020,89 @@
             
             if Study.currentStudy != nil {
                 
+                Study.currentStudy?.newVersion = StudyUpdates.studyVersion
                 if Study.currentStudy?.version == Study.currentStudy?.newVersion{
                     return
                 }
-                
-                DBHandler.updateMetaDataToUpdateForStudy(study: Study.currentStudy!, updateDetails: nil)
-                
-                
-                var nav:UINavigationController?
-                let navigationController =  (self.window?.rootViewController as! UINavigationController)
-                let menuVC = navigationController.viewControllers.last
-                if  menuVC is FDASlideMenuViewController {
-                    let mainController =  (menuVC as! FDASlideMenuViewController).mainViewController
-                    if mainController is UINavigationController {
-                        nav = (mainController as! UINavigationController)
-                        let tabbarVC = nav?.viewControllers.last
-                        if tabbarVC is StudyDashboardTabbarViewController{
-                            let studyTabBar = tabbarVC as! StudyDashboardTabbarViewController
-                            selectedController = ((studyTabBar.viewControllers?[studyTabBar.selectedIndex]) as! UINavigationController).viewControllers.last
+                else {
+                    
+                    DBHandler.updateMetaDataToUpdateForStudy(study: Study.currentStudy!, updateDetails: nil)
+                    
+                    
+                    var nav:UINavigationController?
+                    let navigationController =  (self.window?.rootViewController as! UINavigationController)
+                    let menuVC = navigationController.viewControllers.last
+                    if  menuVC is FDASlideMenuViewController {
+                        let mainController =  (menuVC as! FDASlideMenuViewController).mainViewController
+                        if mainController is UINavigationController {
+                            nav = (mainController as! UINavigationController)
+                            let tabbarVC = nav?.viewControllers.last
+                            if tabbarVC is StudyDashboardTabbarViewController{
+                                let studyTabBar = tabbarVC as! StudyDashboardTabbarViewController
+                                selectedController = ((studyTabBar.viewControllers?[studyTabBar.selectedIndex]) as! UINavigationController).viewControllers.last
+                                
+                            }
+                            
                             
                         }
                         
-                        
                     }
                     
-                }
-                
-                let studyStatus = StudyStatus(rawValue:StudyUpdates.studyStatus!)!
-                
-                if studyStatus != .Active {
-                    _ = nav?.popToRootViewController(animated: true)
-                    var message = ""
-                    switch studyStatus {
+                    let studyStatus = StudyStatus(rawValue:StudyUpdates.studyStatus!)!
+                    
+                    if studyStatus != .Active {
+                        _ = nav?.popToRootViewController(animated: true)
+                        var message = ""
+                        switch studyStatus {
+                            
+                        case .Upcoming:
+                            message = NSLocalizedString(kMessageForStudyUpcomingState, comment: "")
+                            
+                        case .Paused:
+                            message = NSLocalizedString(kMessageForStudyPausedState, comment: "")
+                        // UIUtilities.showAlertWithTitleAndMessage(title: "", message: NSLocalizedString(kMessageForStudyPausedState, comment: "") as NSString)
+                        case .Closed:
+                            message = NSLocalizedString(kMessageForStudyClosedState, comment: "")
+                        // UIUtilities.showAlertWithTitleAndMessage(title: "", message: NSLocalizedString(kMessageForStudyClosedState, comment: "") as NSString)
+                        default: break
+                            
+                        }
                         
-                    case .Upcoming:
-                        message = NSLocalizedString(kMessageForStudyUpcomingState, comment: "")
+                        let alert = UIAlertController(title:"" as String,message:message as String,preferredStyle: UIAlertControllerStyle.alert)
+                        alert.addAction(UIAlertAction(title:NSLocalizedString("OK", comment: ""), style: .default, handler: nil))
+                        //                    var rootViewController = UIApplication.shared.keyWindow?.rootViewController
+                        //                    if let navigationController = rootViewController as? UINavigationController {
+                        //                        rootViewController = navigationController.viewControllers.first
+                        //                    }
+                        //                    if let tabBarController = rootViewController as? UITabBarController {
+                        //                        rootViewController = tabBarController.selectedViewController
+                        //                    }
                         
-                    case .Paused:
-                        message = NSLocalizedString(kMessageForStudyPausedState, comment: "")
-                    // UIUtilities.showAlertWithTitleAndMessage(title: "", message: NSLocalizedString(kMessageForStudyPausedState, comment: "") as NSString)
-                    case .Closed:
-                        message = NSLocalizedString(kMessageForStudyClosedState, comment: "")
-                    // UIUtilities.showAlertWithTitleAndMessage(title: "", message: NSLocalizedString(kMessageForStudyClosedState, comment: "") as NSString)
-                    default: break
+                        //let vc =  nav?.viewControllers.first
+                        //nav?.present(alert, animated: true, completion: nil)
                         
                     }
-                    
-                    let alert = UIAlertController(title:"" as String,message:message as String,preferredStyle: UIAlertControllerStyle.alert)
-                    alert.addAction(UIAlertAction(title:NSLocalizedString("OK", comment: ""), style: .default, handler: nil))
-                    //                    var rootViewController = UIApplication.shared.keyWindow?.rootViewController
-                    //                    if let navigationController = rootViewController as? UINavigationController {
-                    //                        rootViewController = navigationController.viewControllers.first
-                    //                    }
-                    //                    if let tabBarController = rootViewController as? UITabBarController {
-                    //                        rootViewController = tabBarController.selectedViewController
-                    //                    }
-                    
-                    //let vc =  nav?.viewControllers.first
-                    //nav?.present(alert, animated: true, completion: nil)
-                    
-                }
-                else {
-                    
-                    if selectedController != nil {
-                        self.checkConsentStatus(controller: self.selectedController!)
+                    else {
                         
-                        //if self.selectedController is StudyDashboardViewController {
-                        //(self.selectedController as! StudyDashboardViewController).)
-                        // }
-                        // else
-                        if self.selectedController is ActivitiesViewController {
-                            (self.selectedController as! ActivitiesViewController).checkForActivitiesUpdates()
+                        if selectedController != nil {
+                            
+                            if !self.isPasscodePresented! {
+                                self.checkConsentStatus(controller: self.selectedController!)
+                            }
+                            
+                            
+                            //if self.selectedController is StudyDashboardViewController {
+                            //(self.selectedController as! StudyDashboardViewController).)
+                            // }
+                            // else
+                            if self.selectedController is ActivitiesViewController {
+                                (self.selectedController as! ActivitiesViewController).checkForActivitiesUpdates()
+                            }
+                            else if self.selectedController is ResourcesViewController {
+                                (self.selectedController as! ResourcesViewController).checkForResourceUpdate()
+                            }
+                            
                         }
-                        else if self.selectedController is ResourcesViewController {
-                            (self.selectedController as! ResourcesViewController).checkForResourceUpdate()
-                        }
-                        
                     }
                 }
             }
@@ -1274,6 +1281,8 @@
                     
                     
                     //update consent is updaeted in db
+                    Study.currentStudy?.version = StudyUpdates.studyVersion
+                    Study.currentStudy?.newVersion = StudyUpdates.studyVersion
                     StudyUpdates.studyConsentUpdated  = false
                     DBHandler.updateMetaDataToUpdateForStudy(study: Study.currentStudy!, updateDetails:nil)
                     
@@ -1518,6 +1527,10 @@
                     }
                     
                     
+                }
+                
+                if self.selectedController != nil {
+                    self.checkConsentStatus(controller: self.selectedController!)
                 }
                 
             })

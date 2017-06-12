@@ -720,8 +720,9 @@ extension StudyListViewController:NMWebServiceDelegate {
             self.sendRequestToGetStudyList()
         }
         else if (requestName as String == WCPMethods.studyUpdates.rawValue){
-            self.removeProgressIndicator()
+            
             self.handleStudyUpdatedInformation()
+            self.removeProgressIndicator()
         }
         else if requestName as String ==  RegistrationMethods.userProfile.description {
              self.removeProgressIndicator()

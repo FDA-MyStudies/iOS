@@ -305,6 +305,10 @@ class ProfileViewController: UIViewController {
          ud.set(false, forKey: kShowNotification)
         ud.synchronize()
         
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        appDelegate.updateKeyAndInitializationVector()
+
+        
         
         //fdaSlideMenuController()?.navigateToHomeAfterSingout()
         let leftController = slideMenuController()?.leftViewController as! LeftMenuViewController
@@ -323,6 +327,9 @@ class ProfileViewController: UIViewController {
         // fdaSlideMenuController()?.navigateToHomeAfterSingout()
         
         ORKPasscodeViewController.removePasscodeFromKeychain()
+        
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        appDelegate.updateKeyAndInitializationVector()
         
         
         UIUtilities.showAlertMessageWithActionHandler(NSLocalizedString(kTitleMessage, comment: ""), message: NSLocalizedString(kMessageAccountDeletedSuccess, comment: ""), buttonTitle: NSLocalizedString(kTitleOk, comment: ""), viewControllerUsed: self) {

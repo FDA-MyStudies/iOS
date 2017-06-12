@@ -325,8 +325,14 @@ class LeftMenuViewController : UIViewController, LeftMenuProtocol {
         let ud = UserDefaults.standard
         ud.set(false, forKey: kPasscodeIsPending)
          ud.set(false, forKey: kShowNotification)
+        
+        
+        
         ud.synchronize()
         
+        
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        appDelegate.updateKeyAndInitializationVector()
         
         self.changeViewController(.studyList)
         self.createLeftmenuItems()

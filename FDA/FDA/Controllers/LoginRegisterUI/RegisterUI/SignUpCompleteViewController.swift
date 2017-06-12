@@ -65,6 +65,11 @@ class SignUpCompleteViewController : UIViewController{
      
      */
     @IBAction func nextButtonAction(_ sender: Any) {
+        
+        //Updating Key & Vector
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        appDelegate.updateKeyAndInitializationVector()
+        
         self.navigateToGatewayDashboard()
     }
     

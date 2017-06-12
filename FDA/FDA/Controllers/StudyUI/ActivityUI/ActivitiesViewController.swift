@@ -52,6 +52,7 @@ class ActivitiesViewController : UIViewController{
             
             
             
+            
             if StudyUpdates.studyConsentUpdated {
                 let appDelegate = UIApplication.shared.delegate as! AppDelegate
                 appDelegate.checkConsentStatus(controller: self)

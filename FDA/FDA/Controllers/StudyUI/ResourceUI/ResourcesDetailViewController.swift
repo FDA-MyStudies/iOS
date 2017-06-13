@@ -85,7 +85,7 @@ class ResourcesDetailViewController: UIViewController {
         else{
             
         }
-        
+       // webView?.scalesPageToFit = true
         webView?.delegate = self
         }
         

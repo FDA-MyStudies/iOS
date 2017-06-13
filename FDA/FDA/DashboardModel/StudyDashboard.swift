@@ -35,6 +35,10 @@ class StudyDashboard: NSObject {
     var charts:Array<DashboardCharts>! = []
     var dashboardResponse:Array<DashboardResponse> = []
     static var instance = StudyDashboard()
+    
+    func saveDashboardResponse(responseList:Array<DashboardResponse>){
+        self.dashboardResponse.append(contentsOf: responseList)
+    }
 }
 
 class DashboardResponse{

@@ -124,11 +124,11 @@ class LabKeyServices: NSObject {
         
     }
     
-    func getParticipantResponse(activityId:String,participantId:String,delegate:NMWebServiceDelegate){
+    func getParticipantResponse(activityId:String,keys:String,participantId:String,delegate:NMWebServiceDelegate){
         self.delegate = delegate
         
         let method = ResponseMethods.executeSQL.method
-        let query = "SELECT * FROM " + activityId
+        let query = "SELECT " + keys + ",Created" + " FROM " + activityId
         let params = [
             
                       kParticipantId: participantId,
@@ -229,7 +229,8 @@ class LabKeyServices: NSObject {
             
         }
         
-        StudyDashboard.instance.dashboardResponse = dashBoardResponse
+        //StudyDashboard.instance.dashboardResponse = dashBoardResponse
+        StudyDashboard.instance.saveDashboardResponse(responseList: dashBoardResponse)
         
         //save in database as well
         //TBD

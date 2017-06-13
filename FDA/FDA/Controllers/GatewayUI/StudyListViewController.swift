@@ -619,7 +619,8 @@ extension StudyListViewController :  UITableViewDelegate {
                 
                 let userStudyStatus =  (Study.currentStudy?.userParticipateState.status)!
                 
-                if userStudyStatus == .completed || userStudyStatus == .inProgress 
+                if userStudyStatus == .completed || userStudyStatus == .inProgress
+                    //|| userStudyStatus == .yetToJoin
                 {
                     
                     //self.pushToStudyDashboard()

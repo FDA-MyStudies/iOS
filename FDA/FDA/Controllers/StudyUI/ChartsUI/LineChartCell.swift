@@ -127,6 +127,8 @@ class LineChartCell: GraphChartTableViewCell {
         charActivity = activity
         
         if charActivity == nil {
+            self.buttonForward.isEnabled = false
+            self.buttonBackward.isEnabled = false
             return
         }
         

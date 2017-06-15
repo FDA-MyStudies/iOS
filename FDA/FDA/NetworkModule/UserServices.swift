@@ -544,6 +544,11 @@ class UserServices: NSObject {
             
             DBHandler().saveCurrentUser(user: user)
             
+            //Updating Key & Vector
+            let appDelegate = UIApplication.shared.delegate as! AppDelegate
+            appDelegate.updateKeyAndInitializationVector()
+            
+            
             //TEMP : Need to save these values in Realm
             let ud = UserDefaults.standard
             ud.set(user.authToken, forKey:kUserAuthToken)

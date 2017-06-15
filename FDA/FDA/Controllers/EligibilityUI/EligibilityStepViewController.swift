@@ -10,18 +10,18 @@ import UIKit
 import ResearchKit
 import IQKeyboardManagerSwift
 
+let kMessageValidToken = "Please enter valid token"
+let kMessageForMissingStudyId = "Unable to Enroll, Please try again later."
+let kStudyWithStudyId = "Study with StudyId"
+let kTitleOK = "OK"
+
 class EligibilityStep: ORKStep {
     var type:String?
    
     func showsProgress() -> Bool {
         return false
     }
-
-    
-    
 }
-
-
 
 class EligibilityStepViewController: ORKStepViewController {
 
@@ -32,6 +32,8 @@ class EligibilityStepViewController: ORKStepViewController {
     
      var taskResult:EligibilityTokenTaskResult = EligibilityTokenTaskResult(identifier: kFetalKickCounterStepDefaultIdentifier)
     
+    //MARK: ORKStepViewController Intitialization Methods
+    
     override init(step: ORKStep?) {
         super.init(step: step)
     }
@@ -39,28 +41,6 @@ class EligibilityStepViewController: ORKStepViewController {
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        buttonSubmit?.layer.borderColor =   kUicolorForButtonBackground
-        
-       
-        if (self.descriptionText?.characters.count)! > 0{
-            labelDescription?.text = self.descriptionText
-        }
-        
-        
-        if let step = step as? EligibilityStep {
-            step.type = "token"
-            
-           
-        }
-        
-        IQKeyboardManager.sharedManager().enable = true
-    }
-    
-    
     
     override func hasNextStep() -> Bool {
         super.hasNextStep()
@@ -81,20 +61,37 @@ class EligibilityStepViewController: ORKStepViewController {
         
     }
 
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        buttonSubmit?.layer.borderColor =   kUicolorForButtonBackground
+        
+        
+        if (self.descriptionText?.characters.count)! > 0{
+            labelDescription?.text = self.descriptionText
+        }
+        
+        
+        if let step = step as? EligibilityStep {
+            step.type = "token"
+            
+            
+        }
+        
+        IQKeyboardManager.sharedManager().enable = true
+    }
+
+    //MARK: Methods and Button Actions
+
     func showAlert(message:String){
         let alert = UIAlertController(title:kErrorTitle as String,message:message as String,preferredStyle: UIAlertControllerStyle.alert)
-        alert.addAction(UIAlertAction(title:NSLocalizedString("OK", comment: ""), style: .default, handler: nil))
+        alert.addAction(UIAlertAction(title:NSLocalizedString(kTitleOK, comment: ""), style: .default, handler: nil))
         
         
         self.navigationController?.present(alert, animated: true, completion: nil)
 
     }
     
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
     @IBAction func buttonActionSubmit(sender: UIButton?) {
         
         self.view.endEditing(true)
@@ -105,18 +102,21 @@ class EligibilityStepViewController: ORKStepViewController {
             //(Study.currentStudy?.studyId)!
             LabKeyServices().verifyEnrollmentToken(studyId: (Study.currentStudy?.studyId)!, token: token!, delegate: self)
             
-            //self.goForward()
+            
         }
         else{
-            self.showAlert(title: "Message", message: "Please enter valid token")
-          
-
+            self.showAlert(title: kTitleMessage, message:kMessageValidToken )
+            
         }
-        
-        
+    }
+
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
     }
 }
 
+//MARK: TextField Delegates
 extension EligibilityStepViewController:UITextFieldDelegate {
     func textFieldDidEndEditing(_ textField: UITextField) {
     }
@@ -140,6 +140,7 @@ extension EligibilityStepViewController:UITextFieldDelegate {
     
 }
 
+//MARK: Webservice Delegates
 extension EligibilityStepViewController:NMWebServiceDelegate {
     func startedRequest(_ manager: NetworkManager, requestName: NSString) {
         Logger.sharedInstance.info("requestname : \(requestName)")
@@ -172,28 +173,20 @@ extension EligibilityStepViewController:NMWebServiceDelegate {
         }
         else{
             
-            if error.localizedDescription.localizedCaseInsensitiveContains("Study with StudyId") {
-                self.showAlert(message:"Unable to Enroll, Please try again later.")
+            if error.localizedDescription.localizedCaseInsensitiveContains(kStudyWithStudyId) {
+                self.showAlert(message:kMessageForMissingStudyId)
             }
             else{
                 self.showAlert(message:error.localizedDescription)
             }
             
-            
         }
-        
-        
-       
-        
     }
-    
-    
-    
-    
 }
 
+//MARK: ORKResult overriding
+
 open class EligibilityTokenTaskResult: ORKResult {
-    
     open var enrollmentToken:String = ""
    
     

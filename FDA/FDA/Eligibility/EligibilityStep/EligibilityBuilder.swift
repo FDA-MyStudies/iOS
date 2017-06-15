@@ -15,6 +15,10 @@ let kEligibilityCorrectAnswers = "correctAnswers"
 let kEligibilityTokenTitle = "tokenTitle"
 
 let kEligibilityVerifiedScreen = "VerifiedScreen"
+let kEligibilityCompletionDescriptionText = "Your enrollment token has been successfully validated. You are eligible to join the Study.\nPlease click Continue to proceed to the Consent section."
+let kEligibilityCompletionTitle = "You are Eligible!"
+
+
 
 enum EligibilityStepType:String {
     case token = "token"
@@ -76,7 +80,7 @@ class EligibilityBuilder{
                 //let passcodeStep = ORKPasscodeStep(identifier:tokenTitle! )
                 //stepsArray?.append(passcodeStep)
                 
-                let eligibilityStep:EligibilityStep? = EligibilityStep(identifier: "EligibilityTokenStep")
+                let eligibilityStep:EligibilityStep? = EligibilityStep(identifier: kEligibilityTokenStep)
                 eligibilityStep?.type = "TOKEN"
                 
                 if self.tokenTitle != nil {
@@ -130,11 +134,11 @@ class EligibilityBuilder{
                 
                 
                 let eligibilityCompletionStep = customInstructionStep(identifier: kEligibilityVerifiedScreen)
-                eligibilityCompletionStep.text = "Your enrollment token has been successfully validated. You are eligible to join the Study.\nPlease click Continue to proceed to the Consent section."
+                eligibilityCompletionStep.text = kEligibilityCompletionDescriptionText
                 
                 
                 
-                eligibilityCompletionStep.title = "You are Eligible!"
+                eligibilityCompletionStep.title = kEligibilityCompletionTitle
                 eligibilityCompletionStep.image =  #imageLiteral(resourceName: "successBlueBig")
                 stepsArray?.append(eligibilityCompletionStep)
 

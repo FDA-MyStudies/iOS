@@ -234,7 +234,7 @@ class StudyListViewController: UIViewController {
      */
     func navigateToNotifications(){
         
-        let gatewayStoryBoard = UIStoryboard.init(name: "Gateway", bundle: Bundle.main)
+        let gatewayStoryBoard = UIStoryboard.init(name: kStoryboardIdentifierGateway, bundle: Bundle.main)
         let notificationController = gatewayStoryBoard.instantiateViewController(withIdentifier:"NotificationViewControllerIdentifier") as! NotificationViewController
         
         self.navigationController?.pushViewController(notificationController, animated: true)
@@ -283,9 +283,9 @@ class StudyListViewController: UIViewController {
         
         ORKPasscodeViewController.removePasscodeFromKeychain()
         
-        let passcodeStep = ORKPasscodeStep(identifier: "PasscodeStep")
+        let passcodeStep = ORKPasscodeStep(identifier: kPasscodeStepIdentifier)
         passcodeStep.passcodeType = .type4Digit
-        let task = ORKOrderedTask(identifier: "PassCodeTask", steps: [passcodeStep])
+        let task = ORKOrderedTask(identifier: kPasscodeTaskIdentifier, steps: [passcodeStep])
         let taskViewController = ORKTaskViewController.init(task: task, taskRun: nil)
         taskViewController.delegate = self
         
@@ -619,7 +619,8 @@ extension StudyListViewController :  UITableViewDelegate {
                 
                 let userStudyStatus =  (Study.currentStudy?.userParticipateState.status)!
                 
-                if userStudyStatus == .completed || userStudyStatus == .inProgress 
+                if userStudyStatus == .completed || userStudyStatus == .inProgress
+                    //|| userStudyStatus == .yetToJoin
                 {
                     
                     //self.pushToStudyDashboard()

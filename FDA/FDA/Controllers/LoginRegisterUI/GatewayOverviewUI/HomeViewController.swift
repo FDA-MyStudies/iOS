@@ -142,8 +142,8 @@ class HomeViewController : UIViewController{
      */
     func createMenuView() {
         
-        let storyboard = UIStoryboard(name: "Gateway", bundle: nil)
-        let fda = storyboard.instantiateViewController(withIdentifier: "FDASlideMenuViewController") as! FDASlideMenuViewController
+        let storyboard = UIStoryboard(name: kStoryboardIdentifierGateway, bundle: nil)
+        let fda = storyboard.instantiateViewController(withIdentifier: kStoryboardIdentifierSlideMenuVC) as! FDASlideMenuViewController
         fda.automaticallyAdjustsScrollViewInsets = true
         self.navigationController?.pushViewController(fda, animated: true)
     }

@@ -224,7 +224,7 @@ class SignInViewController : UIViewController{
      */
     func navigateToChangePassword(){
         
-        let storyboard = UIStoryboard(name: "Gateway", bundle: nil)
+        let storyboard = UIStoryboard(name: kStoryboardIdentifierGateway, bundle: nil)
         
         let changePassword = storyboard.instantiateViewController(withIdentifier: "ChangePasswordViewController") as! ChangePasswordViewController
         if viewLoadFrom == .menu {
@@ -258,9 +258,9 @@ class SignInViewController : UIViewController{
      */
     func createMenuView() {
         
-        let storyboard = UIStoryboard(name: "Gateway", bundle: nil)
+        let storyboard = UIStoryboard(name: kStoryboardIdentifierGateway, bundle: nil)
         
-        let fda = storyboard.instantiateViewController(withIdentifier: "FDASlideMenuViewController") as! FDASlideMenuViewController
+        let fda = storyboard.instantiateViewController(withIdentifier: kStoryboardIdentifierSlideMenuVC) as! FDASlideMenuViewController
         fda.automaticallyAdjustsScrollViewInsets = true
         self.navigationController?.pushViewController(fda, animated: true)
     }

@@ -440,7 +440,7 @@ extension StudyDashboardViewController:ORKTaskViewControllerDelegate{
         
         //For Verified Step , Completion Step, Visual Step, Review Step, Share Pdf Step
         
-        if  stepViewController.step?.identifier == kConsentCompletionStepIdentifier || stepViewController.step?.identifier == "visual" || stepViewController.step?.identifier == "Review" || stepViewController.step?.identifier == kConsentSharePdfCompletionStep{
+        if  stepViewController.step?.identifier == kConsentCompletionStepIdentifier || stepViewController.step?.identifier == "visual" || stepViewController.step?.identifier == kReviewTitle || stepViewController.step?.identifier == kConsentSharePdfCompletionStep{
             
             
             if stepViewController.step?.identifier == kEligibilityVerifiedScreen{
@@ -511,11 +511,11 @@ extension StudyDashboardViewController:ORKTaskViewControllerDelegate{
             var totalResults =  taskViewController.result.results
             let reviewStep:ORKStepResult?
             
-            totalResults = totalResults?.filter({$0.identifier == "Review"})
+            totalResults = totalResults?.filter({$0.identifier == kReviewTitle})
             
             reviewStep = totalResults?.first as! ORKStepResult?
             
-            if (reviewStep?.identifier)! == "Review" && (reviewStep?.results?.count)! > 0{
+            if (reviewStep?.identifier)! == kReviewTitle && (reviewStep?.results?.count)! > 0{
                 let consentSignatureResult:ORKConsentSignatureResult? = reviewStep?.results?.first as? ORKConsentSignatureResult
                 
                 if  consentSignatureResult?.consented == false{

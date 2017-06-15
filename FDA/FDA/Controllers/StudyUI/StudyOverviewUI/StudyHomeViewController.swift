@@ -296,9 +296,9 @@ class StudyHomeViewController : UIViewController{
         
         ORKPasscodeViewController.removePasscodeFromKeychain()
         
-        let passcodeStep = ORKPasscodeStep(identifier: "PasscodeStep")
+        let passcodeStep = ORKPasscodeStep(identifier: kPasscodeStepIdentifier)
         passcodeStep.passcodeType = .type4Digit
-        let task = ORKOrderedTask(identifier: "PassCodeTask", steps: [passcodeStep])
+        let task = ORKOrderedTask(identifier: kPasscodeTaskIdentifier, steps: [passcodeStep])
         let taskViewController = ORKTaskViewController.init(task: task, taskRun: nil)
         taskViewController.delegate = self
         
@@ -730,7 +730,7 @@ extension StudyHomeViewController:ORKTaskViewControllerDelegate{
     public func taskViewController(_ taskViewController: ORKTaskViewController, didFinishWith reason: ORKTaskViewControllerFinishReason, error: Error?) {
         
         
-        if taskViewController.task?.identifier == "PassCodeTask" {
+        if taskViewController.task?.identifier == kPasscodeTaskIdentifier {
             
             let ud = UserDefaults.standard
             ud.set(false, forKey: kPasscodeIsPending)
@@ -903,11 +903,11 @@ extension StudyHomeViewController:ORKTaskViewControllerDelegate{
             var totalResults =  taskViewController.result.results
              let reviewStep:ORKStepResult?
                 
-               totalResults = totalResults?.filter({$0.identifier == "Review"})
+               totalResults = totalResults?.filter({$0.identifier == kReviewTitle})
             
             reviewStep = totalResults?.first as! ORKStepResult?
             
-            if (reviewStep?.identifier)! == "Review" && (reviewStep?.results?.count)! > 0{
+            if (reviewStep?.identifier)! == kReviewTitle && (reviewStep?.results?.count)! > 0{
                 let consentSignatureResult:ORKConsentSignatureResult? = reviewStep?.results?.first as? ORKConsentSignatureResult
                 
                 if  consentSignatureResult?.consented == false{

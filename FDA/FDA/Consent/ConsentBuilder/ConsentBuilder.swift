@@ -259,7 +259,7 @@ class ConsentBuilder{
             consentDocument?.signaturePageContent = NSLocalizedString("I agree to participate in this research study.", comment: "")
             
             
-             reviewConsentStep = ConsentReviewStep(identifier: "Review", signature: (self.getConsentDocument() as ORKConsentDocument).signatures?[0], in: self.getConsentDocument())
+             reviewConsentStep = ConsentReviewStep(identifier: kReviewTitle, signature: (self.getConsentDocument() as ORKConsentDocument).signatures?[0], in: self.getConsentDocument())
             
           
             
@@ -272,7 +272,7 @@ class ConsentBuilder{
 
             
             
-             reviewConsentStep = ConsentReviewStep(identifier: "Review", signature: consentDocument?.signatures?[0], in: consentDocument!)
+             reviewConsentStep = ConsentReviewStep(identifier: kReviewTitle, signature: consentDocument?.signatures?[0], in: consentDocument!)
             
         }
         

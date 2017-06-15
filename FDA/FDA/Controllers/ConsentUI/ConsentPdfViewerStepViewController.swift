@@ -10,7 +10,11 @@ import UIKit
 import MessageUI
 import ResearchKit
 
-
+let kPdfMimeType = "application/pdf"
+let kUTF8Encoding = "UTF-8"
+let kEmailSubject = "Signed Consent"
+let kConsentFileName = "Consent"
+let kConsentFormat = ".pdf"
 
 class ConsentPdfViewerStep: ORKStep {
     
@@ -19,9 +23,12 @@ class ConsentPdfViewerStep: ORKStep {
     }
 }
 
+/*
+ Displays Signed Consent Pdf and provides option to share by Email
+ */
 class ConsentPdfViewerStepViewController: ORKStepViewController {
     
-      @IBOutlet var webView : UIWebView?
+    @IBOutlet var webView : UIWebView?
     var pdfData:Data?
     
     @IBOutlet weak var buttonEmailPdf:UIBarButtonItem?
@@ -59,7 +66,7 @@ class ConsentPdfViewerStepViewController: ORKStepViewController {
     
     @IBAction func buttonActionEmailPdf(sender: UIBarButtonItem?) {
         
-      self.sendConsentByMail()
+        self.sendConsentByMail()
         
     }
     
@@ -69,35 +76,45 @@ class ConsentPdfViewerStepViewController: ORKStepViewController {
         super.viewDidLoad()
         
         if let step = step as? ConsentPdfViewerStep {
-           
+            
         }
         
         
        self.webView?.load(pdfData!, mimeType: "application/pdf", textEncodingName: "UTF-8", baseURL:URL.init(fileURLWithPath: "") )
          webView?.delegate = self
+        webView?.scalesPageToFit = true
     }
     
+    /*
+     sendConsentByMail used for sharing the Consent
+     */
+    
     func sendConsentByMail() {
+        
         let mailComposerVC = MFMailComposeViewController()
         mailComposerVC.mailComposeDelegate = self
         
         
-        mailComposerVC.setSubject("Signed Consent")
+        mailComposerVC.setSubject(kEmailSubject)
         mailComposerVC.setMessageBody("", isHTML: false)
         
-      
-      let Filename = "Consent" +  "_" + "\((Study.currentStudy?.studyId)!)" + ".pdf"
         
-        mailComposerVC.addAttachmentData(pdfData!, mimeType: "application/pdf", fileName: Filename)
-       
+        // Filename =  Consent_StudyId.pdf
+        
+        let Filename = kConsentFileName +  "_" + "\((Study.currentStudy?.studyId)!)" + kConsentFormat
+        
+        mailComposerVC.addAttachmentData(pdfData!, mimeType: kPdfMimeType, fileName: Filename)
+        
+        // checking if Mailing is available
         if MFMailComposeViewController.canSendMail()
         {
             self.present(mailComposerVC, animated: true, completion: nil)
         }
         else{
+            
             let alert = UIAlertController(title:NSLocalizedString(kTitleError, comment: ""),message:"",preferredStyle: UIAlertControllerStyle.alert)
             
-            alert.addAction(UIAlertAction.init(title:NSLocalizedString("OK", comment: ""), style: .default, handler: { (action) in
+            alert.addAction(UIAlertAction.init(title:NSLocalizedString(kTitleOk, comment: ""), style: .default, handler: { (action) in
                 
                 self.dismiss(animated: true, completion: nil)
                 
@@ -115,17 +132,18 @@ class ConsentPdfViewerStepViewController: ORKStepViewController {
     
 }
 
+//MARK: MailComposer Delegates
 extension ConsentPdfViewerStepViewController:MFMailComposeViewControllerDelegate{
     func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
         controller.dismiss(animated: true, completion: nil)
     }
 }
 
-
+//MARK: WebView Delegate
 extension ConsentPdfViewerStepViewController:UIWebViewDelegate{
     
     func webViewDidFinishLoad(_ webView: UIWebView) {
-    self.removeProgressIndicator()
+        self.removeProgressIndicator()
     }
     func webView(_ webView: UIWebView, didFailLoadWithError error: Error) {
         
@@ -140,9 +158,7 @@ extension ConsentPdfViewerStepViewController:UIWebViewDelegate{
             
         }))
         
-        
         self.present(alert, animated: true, completion: nil)
-        
         
     }
 }

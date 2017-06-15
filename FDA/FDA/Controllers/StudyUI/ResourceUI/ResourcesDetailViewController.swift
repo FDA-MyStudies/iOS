@@ -9,6 +9,7 @@
 import UIKit
 import MessageUI
 
+
 let resourcesDownloadPath = AKUtility.baseFilePath + "/Resources"
 
 class ResourcesDetailViewController: UIViewController {
@@ -23,6 +24,7 @@ class ResourcesDetailViewController: UIViewController {
     var htmlString: String?
     var resource:Resource?
     var isEmailComposerPresented:Bool?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.hidesBottomBarWhenPushed = true
@@ -85,8 +87,9 @@ class ResourcesDetailViewController: UIViewController {
         else{
             
         }
-        
+       // webView?.scalesPageToFit = true
         webView?.delegate = self
+        self.webView?.scalesPageToFit = true
         }
         
         UIApplication.shared.statusBarStyle = .default
@@ -103,7 +106,7 @@ class ResourcesDetailViewController: UIViewController {
         webView?.loadRequest(urlRequest)
     }
     func loadWebViewWithData(data:Data){
-        
+       
         self.webView?.load(data, mimeType: "application/pdf", textEncodingName: "UTF-8", baseURL:URL.init(fileURLWithPath: "") )
         
 //        let url:URL? = URL.init(string:path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed)!)

@@ -100,7 +100,7 @@ class ActivityStepResult{
         
         self.endTime = stepResult.endDate
         
-        if (stepResult.results?.count)! > 1 {
+        if (stepResult.results?.count)! > 1 || (self.step != nil && self.step is ActivityFormStep) {
             self.type = .form
         }
         
@@ -198,7 +198,7 @@ class ActivityStepResult{
         stepDict?[kActivityStepSkipped] = self.skipped
         
         if self.value != nil {
-                stepDict?[kActivityStepResultValue] = self.value
+            stepDict?[kActivityStepResultValue] = self.value
         }
         
         return stepDict
@@ -222,7 +222,7 @@ class ActivityStepResult{
                 // for question Step
                 
                 
-                if stepResult.results?.count == 1 {
+                if stepResult.results?.count == 1 && self.type != .form{
                     
                     
                     if  let questionstepResult:ORKQuestionResult? = stepResult.results?.first as? ORKQuestionResult?{
@@ -244,17 +244,28 @@ class ActivityStepResult{
                     
                     self.value  = [ActivityStepResult]()
                     
-                    var formResultArray:[Dictionary<String,Any>] = [Dictionary<String,Any>]()
+                    var formResultArray:[Any] = [Any]()
                     
                     var i:Int! = 0
                     
                     var j:Int! = 0
                     
+                    var isAddMore:Bool? =  false
+                    
+                    if (stepResult.results?.count)! > (self.step as! ActivityFormStep).itemsArray.count{
+                        
+                        isAddMore = true
+                    }
+                    
+                    var localArray:[Dictionary< String,Any>] = [Dictionary< String,Any>]()
+                    
+                    
                     for result in stepResult.results!{
+                        
                         let activityStepResult:ActivityStepResult? = ActivityStepResult()
                         
                         activityStepResult?.startTime = self.startTime
-                        activityStepResult?.key = result.identifier
+                       
                         activityStepResult?.endTime = self.endTime
                         activityStepResult?.skipped = self.skipped
                         
@@ -263,23 +274,61 @@ class ActivityStepResult{
                         
                         j = (i == 0 ? 0 : i % (self.step as! ActivityFormStep).itemsArray.count)
                         
+                        
+                        
+                        if isAddMore!{
+                            
+                            if j  == 0{
+                                
+                                localArray.removeAll()
+                                localArray = [Dictionary< String,Any>]()
+                            }
+                            
+                            
+                            let stepDict = (((self.step as! ActivityFormStep).itemsArray) as [Dictionary<String,Any>])[j]
+                            
+                             activityStepResult?.key = stepDict["key"] as! String?
+                            
+                        }
+                        else{
+                             activityStepResult?.key = result.identifier
+                        }
                         let itemDict = (self.step as! ActivityFormStep).itemsArray[j] as Dictionary<String, Any>
                         activityStepResult?.step?.resultType = itemDict["resultType"] as! String
                         if ((result as? ORKQuestionResult) != nil){
-                        
                             
-                        let questionResult:ORKQuestionResult? = (result as? ORKQuestionResult)
                             
-                        self.setValue(questionstepResult:questionResult! )
-                        
-                        activityStepResult?.value = self.value
-                    
-                        formResultArray.append((activityStepResult?.getActivityStepResultDict()!)!)
+                            let questionResult:ORKQuestionResult? = (result as? ORKQuestionResult)
+                            
+                            self.setValue(questionstepResult:questionResult! )
+                            
+                            activityStepResult?.value = self.value
+                            
+                            
+                            localArray.append((activityStepResult?.getActivityStepResultDict()!)!)
+                            
+                            if isAddMore!{
+                                if j + 1 == (self.step as! ActivityFormStep).itemsArray.count{
+                                    if localArray.count > 0 {
+                                        formResultArray.append(localArray)
+                                    }
+                                }
+                            }
+                            
                         }
                         i = i + 1
                     }
-                    self.value = formResultArray
                     
+                    if isAddMore!{
+                        self.value = formResultArray
+                    }
+                    else{
+                        
+                        if localArray.count > 0 {
+                            formResultArray.append(localArray)
+                        }
+                        self.value = formResultArray
+                    }
                 }
             }
             else if (activityType == .activeTask){
@@ -454,7 +503,7 @@ class ActivityStepResult{
                             self.value = Double(round(10000 * v)/10000)//round(stepTypeResult.scaleAnswer as! Double)
                         }
                         else{
-                             self.value = stepTypeResult.scaleAnswer as! Double
+                            self.value = stepTypeResult.scaleAnswer as! Double
                         }
                     }
                     else{
@@ -499,17 +548,17 @@ class ActivityStepResult{
                         let resultValue:String! = "\(stepTypeResult.choiceAnswers!.first!)"
                         
                         self.value = (resultValue == nil ? "" : resultValue)
-                   }
+                    }
                     else{
                         // for text choice
                         
-                         let resultValue:String! = "\(stepTypeResult.choiceAnswers!.first!)"
+                        let resultValue:String! = "\(stepTypeResult.choiceAnswers!.first!)"
                         
                         let resultArray:Array<String>? = ["\(resultValue == nil ? "" : resultValue!)"]
-                         self.value = resultArray
+                        self.value = resultArray
                     }
                     
-                   
+                    
                 }
                 else{
                     self.value = ""
@@ -525,7 +574,7 @@ class ActivityStepResult{
             if Utilities.isValidObject(someObject:stepTypeResult.choiceAnswers as AnyObject?){
                 if (stepTypeResult.choiceAnswers?.count)! > 1{
                     
-                     var resultArray:Array<String>? = []
+                    var resultArray:Array<String>? = []
                     
                     for value in stepTypeResult.choiceAnswers!{
                         resultArray?.append("\(value == nil ? "" : value)")
@@ -586,7 +635,7 @@ class ActivityStepResult{
             
             
             if stepTypeResult.dateComponentsAnswer != nil {
-            
+                
                 let hour:Int? = stepTypeResult.dateComponentsAnswer?.hour
                 let minute:Int? = stepTypeResult.dateComponentsAnswer?.minute
                 let seconds:Int? = stepTypeResult.dateComponentsAnswer?.second

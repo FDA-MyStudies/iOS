@@ -24,6 +24,8 @@ let signupCellLastIndex = 2
 
 let kProfileTitleText = "PROFILE"
 
+let kSignOutText = "Sign Out"
+
 
 // Cell Toggle Switch Types
 enum ToggelSwitchTags:Int{
@@ -202,8 +204,8 @@ class ProfileViewController: UIViewController {
      */
     @IBAction func buttonActionSignOut(_ sender: UIButton) {
         
-        UIUtilities.showAlertMessageWithTwoActionsAndHandler(NSLocalizedString("Sign Out", comment: ""), errorMessage: NSLocalizedString("Are you sure you want to Sign Out ?", comment: ""), errorAlertActionTitle: NSLocalizedString("Sign out", comment: ""),
-                                                             errorAlertActionTitle2: NSLocalizedString("Cancel", comment: ""), viewControllerUsed: self,
+        UIUtilities.showAlertMessageWithTwoActionsAndHandler(NSLocalizedString(kSignOutText, comment: ""), errorMessage: NSLocalizedString(kAlertMessageForSignOut, comment: ""), errorAlertActionTitle: NSLocalizedString(kSignOutText, comment: ""),
+                                                             errorAlertActionTitle2: NSLocalizedString(kTitleCancel, comment: ""), viewControllerUsed: self,
                                                              action1: {
                                                                 
                                                                 
@@ -305,6 +307,10 @@ class ProfileViewController: UIViewController {
          ud.set(false, forKey: kShowNotification)
         ud.synchronize()
         
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        appDelegate.updateKeyAndInitializationVector()
+
+        
         
         //fdaSlideMenuController()?.navigateToHomeAfterSingout()
         let leftController = slideMenuController()?.leftViewController as! LeftMenuViewController
@@ -323,6 +329,9 @@ class ProfileViewController: UIViewController {
         // fdaSlideMenuController()?.navigateToHomeAfterSingout()
         
         ORKPasscodeViewController.removePasscodeFromKeychain()
+        
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        appDelegate.updateKeyAndInitializationVector()
         
         
         UIUtilities.showAlertMessageWithActionHandler(NSLocalizedString(kTitleMessage, comment: ""), message: NSLocalizedString(kMessageAccountDeletedSuccess, comment: ""), buttonTitle: NSLocalizedString(kTitleOk, comment: ""), viewControllerUsed: self) {
@@ -491,9 +500,9 @@ class ProfileViewController: UIViewController {
             //FDA user
             
             if  ORKPasscodeViewController.isPasscodeStoredInKeychain() == false{
-                let passcodeStep = ORKPasscodeStep(identifier: "PasscodeStep")
+                let passcodeStep = ORKPasscodeStep(identifier: kPasscodeStepIdentifier)
                 passcodeStep.passcodeType = .type4Digit
-                let task = ORKOrderedTask(identifier: "PassCodeTask", steps: [passcodeStep])
+                let task = ORKOrderedTask(identifier: kPasscodeTaskIdentifier, steps: [passcodeStep])
                 let taskViewController = ORKTaskViewController.init(task: task, taskRun: nil)
                 taskViewController.delegate = self
                 taskViewController.isNavigationBarHidden = true

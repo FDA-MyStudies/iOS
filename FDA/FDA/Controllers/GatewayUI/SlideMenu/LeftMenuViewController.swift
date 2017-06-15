@@ -20,6 +20,10 @@ let kLeftMenuCellTitleNewUser = "New User?"
 let kLeftMenuCellSubTitleValue = "Sign up"
 let kAlertMessageReachoutText = "This feature will be available in the next sprint."
 
+let kAlertMessageForSignOut = "Are you sure you want to Sign Out ?"
+let kAlertMessageSignOutSync = "Are you sure you want to Sign Out ? Your data will be lost."
+
+let kAlertSignOutLaterTitle = "Sign Out later"
 
 enum LeftMenu: Int {
     case studyList = 0
@@ -71,7 +75,7 @@ class LeftMenuViewController : UIViewController, LeftMenuProtocol {
         
         self.tableView.separatorColor = UIColor(red: 224/255, green: 224/255, blue: 224/255, alpha: 1.0)
         
-        let storyboard = UIStoryboard(name: "Gateway", bundle: nil)
+        let storyboard = UIStoryboard(name: kStoryboardIdentifierGateway, bundle: nil)
         
         self.studyListViewController = storyboard.instantiateViewController(withIdentifier: String(describing: StudyListViewController.classForCoder())) as! UINavigationController
         
@@ -266,8 +270,8 @@ class LeftMenuViewController : UIViewController, LeftMenuProtocol {
         DBHandler.isDataAvailableToSync { (available) in
             if(available){
                 
-                UIUtilities.showAlertMessageWithTwoActionsAndHandler(NSLocalizedString("Sign Out", comment: ""), errorMessage: NSLocalizedString("Are you sure you want to Sign Out ? Your data will be lost.", comment: ""), errorAlertActionTitle: NSLocalizedString("Sign Out", comment: ""),
-                                                                     errorAlertActionTitle2: NSLocalizedString("Sign Out later", comment: ""), viewControllerUsed: self,
+                UIUtilities.showAlertMessageWithTwoActionsAndHandler(NSLocalizedString(kSignOutText, comment: ""), errorMessage: NSLocalizedString(kAlertMessageSignOutSync, comment: ""), errorAlertActionTitle: NSLocalizedString(kSignOutText, comment: ""),
+                                                                     errorAlertActionTitle2: NSLocalizedString(kAlertSignOutLaterTitle, comment: ""), viewControllerUsed: self,
                                                                      action1: {
                                                                         
                                                                         
@@ -281,8 +285,8 @@ class LeftMenuViewController : UIViewController, LeftMenuProtocol {
             }
             else {
                 
-                UIUtilities.showAlertMessageWithTwoActionsAndHandler(NSLocalizedString("Sign Out", comment: ""), errorMessage: NSLocalizedString("Are you sure you want to Sign Out ?", comment: ""), errorAlertActionTitle: NSLocalizedString("Sign Out", comment: ""),
-                                                                     errorAlertActionTitle2: NSLocalizedString("Cancel", comment: ""), viewControllerUsed: self,
+                UIUtilities.showAlertMessageWithTwoActionsAndHandler(NSLocalizedString(kSignOutText, comment: ""), errorMessage: NSLocalizedString(kAlertMessageForSignOut, comment: ""), errorAlertActionTitle: NSLocalizedString(kSignOutText, comment: ""),
+                                                                     errorAlertActionTitle2: NSLocalizedString(kTitleCancel, comment: ""), viewControllerUsed: self,
                                                                      action1: {
                                                                         
                                                                         
@@ -325,8 +329,14 @@ class LeftMenuViewController : UIViewController, LeftMenuProtocol {
         let ud = UserDefaults.standard
         ud.set(false, forKey: kPasscodeIsPending)
          ud.set(false, forKey: kShowNotification)
+        
+        
+        
         ud.synchronize()
         
+        
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        appDelegate.updateKeyAndInitializationVector()
         
         self.changeViewController(.studyList)
         self.createLeftmenuItems()

@@ -295,6 +295,8 @@ class ActivityQuestionStep: ActivityStep {
             
             var questionStep:ORKQuestionStep?
             
+            var placeholderText:String? = ""
+            
             switch   QuestionStepType(rawValue:resultType as! String)! as QuestionStepType {
             case .scale:
                 
@@ -506,6 +508,11 @@ class ActivityQuestionStep: ActivityStep {
                         minValue = nil
                     }
                   
+                    if  Utilities.isValidValue(someObject:formatDict?[kStepQuestionNumericPlaceholder] as AnyObject?){
+                        placeholderText = formatDict?[kStepQuestionNumericPlaceholder] as? String
+                    }
+                    
+                    
                     let localizedQuestionStepAnswerFormatUnit = NSLocalizedString((formatDict?[kStepQuestionNumericUnit] as? String)! , comment: "")
                     
                     let style = (formatDict?[kStepQuestionNumericStyle] as! String == "Decimal") ? 0 : 1
@@ -595,6 +602,12 @@ class ActivityQuestionStep: ActivityStep {
                    // &&  Utilities.isValidValue(someObject:formatDict?[kStepQuestionTextPlaceholder] as AnyObject?)
                     if Utilities.isValidValue(someObject:formatDict?[kStepQuestionTextMultipleLines] as AnyObject?){
                     
+                        
+                        if  Utilities.isValidValue(someObject:formatDict?[kStepQuestionNumericPlaceholder] as AnyObject?){
+                            placeholderText = formatDict?[kStepQuestionNumericPlaceholder] as? String
+                        }
+                        
+                        
                     
                     let answerFormat = ORKAnswerFormat.textAnswerFormat()
                     
@@ -631,6 +644,10 @@ class ActivityQuestionStep: ActivityStep {
             case .email:
                 
                     questionStepAnswerFormat = ORKAnswerFormat.emailAnswerFormat()
+                
+                    if  Utilities.isValidValue(someObject:formatDict?[kStepQuestionNumericPlaceholder] as AnyObject?){
+                        placeholderText = formatDict?[kStepQuestionNumericPlaceholder] as? String
+                }
                     // Place holder???
 
             case .timeInterval:
@@ -682,6 +699,10 @@ class ActivityQuestionStep: ActivityStep {
                     questionStepAnswerFormat = ORKAnswerFormat.heightAnswerFormat(with:measurementSystem! )
                     // Place holder
                     
+                    if  Utilities.isValidValue(someObject:formatDict?[kStepQuestionNumericPlaceholder] as AnyObject?){
+                        placeholderText = formatDict?[kStepQuestionNumericPlaceholder] as? String
+                    }
+                    
                 }
                 else{
                     Logger.sharedInstance.debug("height has null values:\(formatDict)")
@@ -713,7 +734,9 @@ class ActivityQuestionStep: ActivityStep {
                 questionStep?.isOptional = false
             }
             
-            
+            if  Utilities.isValidValue(someObject:placeholderText as AnyObject?){
+                questionStep?.placeholder = placeholderText
+            }
             
             questionStep?.text = text
             

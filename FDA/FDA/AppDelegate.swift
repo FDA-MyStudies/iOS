@@ -13,7 +13,29 @@
     
     import CallKit
     
+    let kEncryptionKey = "EncryptionKey"
+    let kEncryptionIV =  "EncryptionIV"
+    let kBlockerScreenLabelText = "Please update to the latest version of app to continue."
+    let kConsentUpdatedTitle = "Consent Updated"
+    
+    let kMessageConsentUpdated = "The Consent Document for this study has been updated. Please review the revised Consent terms and provide your Informed Consent, to continue participating in the study."
+    
+    let kReviewTitle = "Review"
+    
+    let kPasscodeStepIdentifier = "PasscodeStep"
+    let kPasscodeTaskIdentifier = "PassCodeTask"
+    
+    let kMessagePasscode = "Passcode"
+    
+    let kMessagePasscodeSignOut = "You will be signed out and will need to sign in again. Are you sure you want to proceed?"
+    
+    let kNewProgressViewNIB = "NewProgressView"
+    let kforgotPasscodeTitle = "Forgot Passcode? Sign In Again"
+    
+    let kStudyStoryboard = "Study"
+    
     @UIApplicationMain
+    
     class AppDelegate: UIResponder, UIApplicationDelegate {
         
         var window: UIWindow?
@@ -25,6 +47,8 @@
         var alertVCPresented:UIAlertController?
         
         var isPasscodePresented:Bool? =  false
+        
+        
         
         var parentViewControllerForAlert:UIViewController?
         
@@ -63,6 +87,54 @@
             UIApplication.shared.registerForRemoteNotifications()
             
         }
+        
+        func updateKeyAndInitializationVector(){
+            
+            
+            let currentDate = "\(Date(timeIntervalSinceNow: 0))"
+            
+            let currentIndex = currentDate.index(currentDate.endIndex
+                , offsetBy: -13)
+            let subStringFromDate = currentDate.substring(to: currentIndex)
+            
+            
+            let ud = UserDefaults.standard
+            
+            if User.currentUser.userType ==  .FDAUser{
+                
+                let index =  User.currentUser.userId.index(User.currentUser.userId.endIndex
+                    , offsetBy: -16)
+                
+                let subKey = User.currentUser.userId.substring(to:index ) // 36 - 12 =  24 characters
+                
+                ud.set("\(subKey + subStringFromDate)", forKey: kEncryptionKey)
+                
+            }
+            else{
+                ud.set(currentDate + kDefaultPasscodeString, forKey: kEncryptionKey)
+            }
+            
+            if UIDevice.current.model == kIsIphoneSimulator {
+                // simulator
+                
+                ud.set(kdefaultIVForEncryption, forKey: kEncryptionIV)
+            }
+            else{
+                // not a simulator
+                
+                
+                var udid = UIDevice.current.identifierForVendor?.uuidString
+                
+                let index =  udid?.index((udid?.endIndex)!
+                    , offsetBy: -20)
+                
+                udid = udid?.substring(to: index!)
+                
+                ud.set(udid, forKey: kEncryptionIV)
+            }
+            ud.synchronize()
+        }
+        
         
         func calculateTimeZoneChange(){
             
@@ -112,6 +184,9 @@
             
             ud.synchronize()
         }
+        
+        //MARK: App Delegates
+        
         
         func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
             // Override point for customization after application launch.
@@ -319,7 +394,7 @@
         }
         func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
             
-            print("i am not available in simulator \(error)")
+            print("Token Registration failed in simulator \(error)")
             
         }
         func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any]) {
@@ -344,6 +419,7 @@
             print("Notificatio received\(notification.userInfo)")
         }
         
+        //MARK: Jailbreak Methods
         
         public static func jailbroken(application: UIApplication) -> Bool {
             guard let cydiaUrlScheme = NSURL(string: "cydia://package/com.example.package") else { return isJailbroken() }
@@ -410,6 +486,11 @@
             WCPServices().checkForAppUpdates(delegate: self)
         }
         
+        
+        /*
+         To get the current App version from App Store and Adds the blocker screen if it is of lower version
+        */
+        
         func checkForAppUpdateForVersion(){
             
             let infoDict = Bundle.main.infoDictionary
@@ -446,7 +527,7 @@
                                     self.blockerScreen = AppUpdateBlocker.instanceFromNib(frame:(UIApplication.shared.keyWindow?.bounds)!, detail: parsedDict as! Dictionary<String, Any>);
                                     
                                     self.blockerScreen?.labelVersionNumber.text = "V-" + appStoreVersion
-                                    self.blockerScreen?.labelMessage.text = "Please update to the latest version of app to continue."
+                                    self.blockerScreen?.labelMessage.text = kBlockerScreenLabelText
                                     
                                     
                                     if User.currentUser.userType == .FDAUser {
@@ -480,19 +561,19 @@
                 }.resume()
             
             
-//            let task2 =  URLSession.shared.dataTask(with: request) {
-//                (data, response, error) -> Void in
-//                if let data = data {
-//                    
-//                }
-//                else {
-//                    DispatchQueue.main.async {
-//                    }
-//                }
-//                }.resume()
+            //            let task2 =  URLSession.shared.dataTask(with: request) {
+            //                (data, response, error) -> Void in
+            //                if let data = data {
+            //
+            //                }
+            //                else {
+            //                    DispatchQueue.main.async {
+            //                    }
+            //                }
+            //                }.resume()
         }
         
-
+        
         func sendRequestToSignOut() {
             
             self.addAndRemoveProgress(add: true)
@@ -500,6 +581,10 @@
             UserServices().logoutUser(self as NMWebServiceDelegate)
             
         }
+        
+        /*
+          check the  current Consent Status
+        */
         
         func checkConsentStatus(controller:UIViewController) {
             
@@ -518,8 +603,7 @@
                 }
                 
                 
-                
-                UIUtilities.showAlertMessageWithTwoActionsAndHandler(NSLocalizedString("Consent Updated", comment: ""), errorMessage: NSLocalizedString("The Consent Document for this study has been updated. Please review the revised Consent terms and provide your Informed Consent, to continue participating in the study.", comment: ""), errorAlertActionTitle: NSLocalizedString("Review", comment: ""),
+                UIUtilities.showAlertMessageWithTwoActionsAndHandler(NSLocalizedString(kConsentUpdatedTitle, comment: ""), errorMessage: NSLocalizedString(kMessageConsentUpdated, comment: ""), errorAlertActionTitle: NSLocalizedString(kReviewTitle, comment: ""),
                                                                      errorAlertActionTitle2:nil, viewControllerUsed: topController,
                                                                      action1: {
                                                                         
@@ -774,7 +858,7 @@
         
         func pushToTabbar(viewController:UIViewController,selectedTab:Int){
             
-            let studyStoryBoard = UIStoryboard.init(name: "Study", bundle: Bundle.main)
+            let studyStoryBoard = UIStoryboard.init(name: kStudyStoryboard, bundle: Bundle.main)
             
             
             let studyDashboard = studyStoryBoard.instantiateViewController(withIdentifier: kStudyDashboardTabbarControllerIdentifier) as! StudyDashboardTabbarViewController
@@ -800,10 +884,10 @@
                     
                     if  ORKPasscodeViewController.isPasscodeStoredInKeychain() == false{
                         
-                        let passcodeStep = ORKPasscodeStep(identifier: "PasscodeStep")
+                        let passcodeStep = ORKPasscodeStep(identifier: kPasscodeStepIdentifier)
                         passcodeStep.passcodeType = .type4Digit
                         
-                        let task = ORKOrderedTask(identifier: "PassCodeTask", steps: [passcodeStep])
+                        let task = ORKOrderedTask(identifier: kPasscodeTaskIdentifier, steps: [passcodeStep])
                         
                         
                         let taskViewController = ORKTaskViewController.init(task: task, taskRun: nil)
@@ -859,6 +943,8 @@
                             isPasscodePresented = true
                             
                             blockerScreen?.isHidden = true
+                            
+                            //passcodeViewController.view.bringSubview(toFront: keyboard)
                             
                             topVC!.present(passcodeViewController, animated: false, completion: nil)
                         }
@@ -950,9 +1036,11 @@
             ud.set(false, forKey: kPasscodeIsPending)
             ud.set(false, forKey: kShowNotification)
             
-            
-            
             ud.synchronize()
+            
+            
+            
+            self.updateKeyAndInitializationVector()
             
             
             let navigationController =  (self.window?.rootViewController as! UINavigationController)
@@ -1147,6 +1235,9 @@
             return URLSession.AuthChallengeDisposition.useCredential
         }
     }
+    
+    //MARK: Webservices delegates
+    
     extension AppDelegate:NMWebServiceDelegate {
         func startedRequest(_ manager: NetworkManager, requestName: NSString) {
             Logger.sharedInstance.info("requestname : \(requestName)")
@@ -1220,9 +1311,7 @@
                 
             else if requestName as String == RegistrationMethods.logout.method.methodName {
                 
-                
                 self.handleSignoutResponse()
-                
                 
             }
             else  if requestName as String == RegistrationMethods.updateEligibilityConsentStatus.method.methodName{
@@ -1397,11 +1486,8 @@
                     stepViewController.backButtonItem?.isEnabled = true
                     
                 }
-                
-                
             }
         }
-        
         
         //MARK:- StepViewController Delegate
         
@@ -1442,11 +1528,11 @@
                     var totalResults =  taskViewController.result.results
                     let reviewStep:ORKStepResult?
                     
-                    totalResults = totalResults?.filter({$0.identifier == "Review"})
+                    totalResults = totalResults?.filter({$0.identifier == kReviewTitle})
                     
                     reviewStep = totalResults?.first as! ORKStepResult?
                     
-                    if (reviewStep?.identifier)! == "Review" && (reviewStep?.results?.count)! > 0{
+                    if (reviewStep?.identifier)! == kReviewTitle && (reviewStep?.results?.count)! > 0{
                         let consentSignatureResult:ORKConsentSignatureResult? = reviewStep?.results?.first as? ORKConsentSignatureResult
                         
                         if  consentSignatureResult?.consented == false{
@@ -1509,6 +1595,7 @@
         
     }
     
+    //MARK: Passcode Delegate
     extension AppDelegate: ORKPasscodeDelegate {
         func passcodeViewControllerDidFinish(withSuccess viewController: UIViewController) {
             containerViewController?.contentHidden = false
@@ -1556,7 +1643,7 @@
         }
         
         func passcodeViewControllerText(forForgotPasscode viewController: UIViewController) -> String {
-            return "Forgot Passcode? Sign In Again"
+            return kforgotPasscodeTitle
         }
         
         func passcodeViewControllerForgotPasscodeTapped(_ viewController: UIViewController) {
@@ -1572,8 +1659,8 @@
             
             
             
-            UIUtilities.showAlertMessageWithTwoActionsAndHandler(NSLocalizedString("Passcode", comment: ""), errorMessage: NSLocalizedString("You will be signed out and will need to sign in again. Are you sure you want to proceed?", comment: ""), errorAlertActionTitle: NSLocalizedString("OK", comment: ""),
-                                                                 errorAlertActionTitle2:NSLocalizedString("Cancel", comment: ""), viewControllerUsed: topVC!,
+            UIUtilities.showAlertMessageWithTwoActionsAndHandler(NSLocalizedString(kMessagePasscode, comment: ""), errorMessage: NSLocalizedString(kMessagePasscodeSignOut, comment: ""), errorAlertActionTitle: NSLocalizedString(kTitleOK, comment: ""),
+                                                                 errorAlertActionTitle2:NSLocalizedString(kTitleCancel, comment: ""), viewControllerUsed: topVC!,
                                                                  action1: {
                                                                     viewController.dismiss(animated: true, completion: {
                                                                         
@@ -1595,7 +1682,7 @@
     }
     
     
-    
+    //MARK: UNUserNotification Delegate
     
     @available(iOS 10, *)
     extension AppDelegate : UNUserNotificationCenterDelegate {
@@ -1642,7 +1729,7 @@
         func addProgressIndicatorOnWindow(){
             
             
-            let view = UINib(nibName: "NewProgressView", bundle: nil).instantiate(withOwner: nil, options: nil)[0] as? UIView
+            let view = UINib(nibName: kNewProgressViewNIB, bundle: nil).instantiate(withOwner: nil, options: nil)[0] as? UIView
             
             
             let url = Bundle.main.url(forResource: "fda_preload", withExtension: "gif")!

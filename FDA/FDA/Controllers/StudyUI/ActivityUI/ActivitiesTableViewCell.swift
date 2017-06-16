@@ -93,58 +93,19 @@ class ActivitiesTableViewCell: UITableViewCell {
             
 
             //update user activity status
-            self.setUserStatusForActivity(activity: activity)
+            //self.setUserStatusForActivity(activity: activity)
             
             
             if activity.currentRunId == 0 {
                 labelStatus?.isHidden = true
             }
             else {
-                 labelStatus?.isHidden = false
+                labelStatus?.isHidden = false
             }
             
             
-            //calculate activity runs and save in database
-            /*
-            if activity.totalRuns == 0 {
-                Schedule().getRunsForActivity(activity: activity, handler: { (runs) in
-                    if runs.count > 0 {
-                        
-                        let date = Date()
-                        print("Current Date :\(date.description)")
-                        
-                        var runsBeforeToday:Array<ActivityRun>! = []
-                        var run:ActivityRun!
-                        if activity.frequencyType == Frequency.One_Time && activity.endDate == nil {
-                            //runsBeforeToday = runs
-                            run = runs.last
-                        }
-                        else {
-                            
-                             runsBeforeToday = runs.filter({$0.endDate <= date})
-                            
-                             run = runs.filter({$0.startDate <= date && $0.endDate > date}).first //current run
-
-                        }
-                        
-                        
-                        let completedRuns = runs.filter({$0.isCompleted == true})
-                        let incompleteRuns = runsBeforeToday.count - completedRuns.count
-                        
-                        
-                        activity.compeltedRuns = completedRuns.count
-                        activity.incompletedRuns = (incompleteRuns < 0) ? 0 :incompleteRuns
-                        activity.currentRunId =  (run != nil) ? (run?.runId)! : runsBeforeToday.count
-                        activity.totalRuns = runs.count
-                        activity.currentRun = run
-                        activity.activityRuns = runs
-                        
-                        self.updateUserRunStatus(activity: activity)
-                        
-                        DBHandler.saveActivityRuns(activityId: (activity.actvityId)!, studyId: (Study.currentStudy?.studyId)!, runs: runs)
-                    }
-                })
-            }*/
+            
+            
         }
         else {
             
@@ -156,6 +117,18 @@ class ActivitiesTableViewCell: UITableViewCell {
         
         //update activity run details as compelted and missed
         self.updateUserRunStatus(activity: activity)
+        
+        if availablityStatus == .past{
+            
+            if activity.incompletedRuns != 0 {
+                self.labelStatus?.backgroundColor =  UIColor.red
+                self.labelStatus?.text = UserActivityStatus.ActivityStatus.abandoned.description
+            }
+            else {
+                self.labelStatus?.backgroundColor =  kGreenColor
+                self.labelStatus?.text = UserActivityStatus.ActivityStatus.completed.description
+            }
+        }
     }
     
     

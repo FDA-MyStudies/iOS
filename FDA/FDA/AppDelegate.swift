@@ -800,6 +800,7 @@
                         let passcodeStep = ORKPasscodeStep(identifier: "PasscodeStep")
                         passcodeStep.passcodeType = .type4Digit
                         
+                        
                         let task = ORKOrderedTask(identifier: "PassCodeTask", steps: [passcodeStep])
                         
                         
@@ -970,22 +971,25 @@
                     ud.removeObject(forKey: kUserAuthToken)
                     ud.removeObject(forKey: kUserId)
                     ud.synchronize()
+                    //following to be removed it has to be moved to studylist
+                     slideMenuController?.fdaSlideMenuController()?.navigateToHomeAfterSingout()
                     
                     
-                    let leftController = slideMenuController?.leftViewController as! LeftMenuViewController
-                    leftController.changeViewController(.studyList)
-                    leftController.createLeftmenuItems()
+                    
+                    //let leftController = slideMenuController?.leftViewController as! LeftMenuViewController
+                    //leftController.changeViewController(.studyList)
+                    //leftController.createLeftmenuItems()
                     
                 }
                 
             }
             
-            // FDASlideMenuViewController.fdaSlideMenuController().navigateToHomeAfterSingout()
+            /*
             
-            //let leftController = slideMenuController()?.leftViewController as! LeftMenuViewController
-            // leftController.changeViewController(.studyList)
-            //leftController.createLeftmenuItems()
-            
+            let leftController = slideMenuController()?.leftViewController as! LeftMenuViewController
+             leftController.changeViewController(.studyList)
+            leftController.createLeftmenuItems()
+            */
         }
         
         func updateNotification(){

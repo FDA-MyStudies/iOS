@@ -485,13 +485,14 @@ class ActivityStepResult{
                         
                         //for image choice and valuepicker
                         
-                        let resultValue:String? = "\(stepTypeResult.choiceAnswers?.first)"
-                        self.value = (resultValue == nil ? "" : resultValue!)
+                        let resultValue:String! = "\(stepTypeResult.choiceAnswers!.first!)"
+                        
+                        self.value = (resultValue == nil ? "" : resultValue)
                    }
                     else{
                         // for text choice
                         
-                         let resultValue:String? = "\(stepTypeResult.choiceAnswers?.first)"
+                         let resultValue:String! = "\(stepTypeResult.choiceAnswers!.first!)"
                         
                         let resultArray:Array<String>? = ["\(resultValue == nil ? "" : resultValue!)"]
                          self.value = resultArray

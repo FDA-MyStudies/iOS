@@ -63,11 +63,21 @@ class ActivityResult {
                 
                
                 
-                
+               
                 if stepResult.identifier != "CompletionStep" && stepResult.identifier !=  kFetalKickInstructionStepIdentifier && stepResult.identifier != kFetalKickIntroductionStepIdentifier {
                     
+                    if activityStepResult?.step != nil && (activityStepResult?.step is ActivityInstructionStep) == false{
+                        self.result?.append(activityStepResult!)
+                    }
+                    else{
+                        
+                        if self.activity?.type == .activeTask{
+                            self.result?.append(activityStepResult!)
+                        }
+                        
+                        
+                    }
                     
-                     self.result?.append(activityStepResult!)
                 }
                 
                

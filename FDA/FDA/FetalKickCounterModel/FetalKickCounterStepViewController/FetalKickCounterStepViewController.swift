@@ -12,6 +12,7 @@ import IQKeyboardManagerSwift
 import IQKeyboardManagerSwift
 
 let kFetalKickCounterStepDefaultIdentifier = "defaultIdentifier"
+let kTapToRecordKick = "TAP TO RECORD A KICK"
 
 class FetalKickCounterStepViewController:  ORKStepViewController {
     
@@ -330,7 +331,7 @@ class FetalKickCounterStepViewController:  ORKStepViewController {
                 
                 // start button image and start title changed
                 startButton?.setImage(UIImage(named: "kick_btn1.png"), for: .normal)
-                startTitleLabel?.text = NSLocalizedString("TAP TO RECORD A KICK", comment:"")
+                startTitleLabel?.text = NSLocalizedString(kTapToRecordKick, comment:"")
             }
             else{
                 self.kickCounter = self.kickCounter! + 1

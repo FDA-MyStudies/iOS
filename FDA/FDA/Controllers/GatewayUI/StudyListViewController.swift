@@ -283,9 +283,9 @@ class StudyListViewController: UIViewController {
         
         ORKPasscodeViewController.removePasscodeFromKeychain()
         
-        let passcodeStep = ORKPasscodeStep(identifier: "PasscodeStep")
+        let passcodeStep = ORKPasscodeStep(identifier: kPasscodeStepIdentifier)
         passcodeStep.passcodeType = .type4Digit
-        let task = ORKOrderedTask(identifier: "PassCodeTask", steps: [passcodeStep])
+        let task = ORKOrderedTask(identifier: kPasscodeTaskIdentifier, steps: [passcodeStep])
         let taskViewController = ORKTaskViewController.init(task: task, taskRun: nil)
         taskViewController.delegate = self
         

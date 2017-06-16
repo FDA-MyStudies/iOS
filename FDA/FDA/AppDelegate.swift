@@ -13,7 +13,10 @@
     
     import CallKit
     
+    let kEncryptionKey = "EncryptionKey"
+    let kEncryptionIV =  "EncryptionIV"
     @UIApplicationMain
+
     class AppDelegate: UIResponder, UIApplicationDelegate {
         
         var window: UIWindow?
@@ -85,17 +88,17 @@
                 
                 let subKey = User.currentUser.userId.substring(to:index ) // 36 - 12 =  24 characters
                 
-                ud.set("\(subKey + subStringFromDate)", forKey: "EncryptionKey")
+                ud.set("\(subKey + subStringFromDate)", forKey: kEncryptionKey)
                 
             }
             else{
-                 ud.set(currentDate + "Password123", forKey: "EncryptionKey")
+                 ud.set(currentDate + kDefaultPasscodeString, forKey: kEncryptionKey)
             }
             
-            if UIDevice.current.model == "iPhone Simulator" {
+            if UIDevice.current.model == kIsIphoneSimulator {
                 // simulator
                 
-                ud.set("drowssapdrowssap", forKey: "EncryptionIV")
+                ud.set(kdefaultIVForEncryption, forKey: kEncryptionIV)
             }
             else{
                 // not a simulator
@@ -108,7 +111,7 @@
                 
                 udid = udid?.substring(to: index!)
                 
-                ud.set(udid, forKey: "EncryptionIV")
+                ud.set(udid, forKey: kEncryptionIV)
             }
             ud.synchronize()
         }

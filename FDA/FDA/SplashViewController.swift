@@ -8,6 +8,11 @@
 
 import UIKit
 
+let kDefaultPasscodeString = "Password123"
+let kIsIphoneSimulator = "iPhone Simulator"
+let kStoryboardIdentifierGateway = "Gateway"
+let kStoryboardIdentifierSlideMenuVC = "FDASlideMenuViewController"
+
 class SplashViewController: UIViewController {
     
 var isAppOpenedForFirstTime:Bool? = false
@@ -86,9 +91,9 @@ var isAppOpenedForFirstTime:Bool? = false
      */
     func createMenuView() {
         
-        let storyboard = UIStoryboard(name: "Gateway", bundle: nil)
+        let storyboard = UIStoryboard(name: kStoryboardIdentifierGateway, bundle: nil)
         
-        let fda = storyboard.instantiateViewController(withIdentifier: "FDASlideMenuViewController") as! FDASlideMenuViewController
+        let fda = storyboard.instantiateViewController(withIdentifier: kStoryboardIdentifierSlideMenuVC) as! FDASlideMenuViewController
         fda.automaticallyAdjustsScrollViewInsets = true
         self.navigationController?.pushViewController(fda, animated: true)
     }
@@ -115,17 +120,17 @@ var isAppOpenedForFirstTime:Bool? = false
                 
                 let subKey = User.currentUser.userId.substring(to:index )
                 
-                ud.set("\(subKey + subStringFromDate)", forKey: "EncryptionKey")
+                ud.set("\(subKey + subStringFromDate)", forKey: kEncryptionKey)
             }
             else{
-                ud.set(currentDate + "Password123", forKey: "EncryptionKey")
+                ud.set(currentDate + kDefaultPasscodeString, forKey: kEncryptionKey)
             }
             
             
-            if UIDevice.current.model == "iPhone Simulator" {
+            if UIDevice.current.model == kIsIphoneSimulator {
                 // simulator
                 
-                ud.set("drowssapdrowssap", forKey: "EncryptionIV")
+                ud.set(kdefaultIVForEncryption, forKey: kEncryptionIV)
                 
             }
             else{
@@ -137,7 +142,7 @@ var isAppOpenedForFirstTime:Bool? = false
                 
                 udid = udid?.substring(to: index!)
                 
-                ud.set(udid, forKey: "EncryptionIV")
+                ud.set(udid, forKey: kEncryptionIV)
             }
             
             ud.synchronize()

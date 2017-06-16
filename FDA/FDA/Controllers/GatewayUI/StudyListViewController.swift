@@ -234,7 +234,7 @@ class StudyListViewController: UIViewController {
      */
     func navigateToNotifications(){
         
-        let gatewayStoryBoard = UIStoryboard.init(name: "Gateway", bundle: Bundle.main)
+        let gatewayStoryBoard = UIStoryboard.init(name: kStoryboardIdentifierGateway, bundle: Bundle.main)
         let notificationController = gatewayStoryBoard.instantiateViewController(withIdentifier:"NotificationViewControllerIdentifier") as! NotificationViewController
         
         self.navigationController?.pushViewController(notificationController, animated: true)

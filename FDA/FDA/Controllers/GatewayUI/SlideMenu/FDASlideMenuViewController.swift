@@ -9,6 +9,8 @@
 import UIKit
 import SlideMenuControllerSwift
 
+let kStudyListViewControllerIdentifier = "StudyListViewController"
+let kLeftMenuViewControllerIdentifier = "LeftMenuViewController"
 
 open class FDASlideMenuViewController: SlideMenuController {
     
@@ -17,15 +19,15 @@ open class FDASlideMenuViewController: SlideMenuController {
         
        
         SlideMenuOptions.leftViewWidth = UIScreen.main.bounds.size.width * 0.81
-        let storyboard = UIStoryboard(name: "Gateway", bundle: nil)
+        let storyboard = UIStoryboard(name: kStoryboardIdentifierGateway, bundle: nil)
         //kStreamerDashBoard
-        let controller = storyboard.instantiateViewController(withIdentifier: "StudyListViewController")
+        let controller = storyboard.instantiateViewController(withIdentifier: kStudyListViewControllerIdentifier)
         self.mainViewController = controller
         
         
         
         
-         let controller2 = storyboard.instantiateViewController(withIdentifier: "LeftMenuViewController")
+         let controller2 = storyboard.instantiateViewController(withIdentifier: kLeftMenuViewControllerIdentifier)
         self.leftViewController = controller2
          super.awakeFromNib()
          //

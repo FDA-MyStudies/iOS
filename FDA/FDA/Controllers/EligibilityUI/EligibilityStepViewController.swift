@@ -13,6 +13,7 @@ import IQKeyboardManagerSwift
 let kMessageValidToken = "Please enter valid token"
 let kMessageForMissingStudyId = "Unable to Enroll, Please try again later."
 let kStudyWithStudyId = "Study with StudyId"
+let kTitleOK = "OK"
 
 class EligibilityStep: ORKStep {
     var type:String?
@@ -84,7 +85,7 @@ class EligibilityStepViewController: ORKStepViewController {
 
     func showAlert(message:String){
         let alert = UIAlertController(title:kErrorTitle as String,message:message as String,preferredStyle: UIAlertControllerStyle.alert)
-        alert.addAction(UIAlertAction(title:NSLocalizedString("OK", comment: ""), style: .default, handler: nil))
+        alert.addAction(UIAlertAction(title:NSLocalizedString(kTitleOK, comment: ""), style: .default, handler: nil))
         
         
         self.navigationController?.present(alert, animated: true, completion: nil)

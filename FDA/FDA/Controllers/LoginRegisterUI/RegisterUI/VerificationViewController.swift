@@ -15,6 +15,8 @@ let kAlertMessageText = "Message"
 let kAlertMessageVerifyEmail = "Please verify your email address."
 let kAlertMessageResendEmail = "An email verification code has been sent to your registered email."
 
+let kChangePasswordViewControllerIdentifier = "ChangePasswordViewController"
+
 enum VerificationLoadFrom:Int{
     case forgotPassword
     case login
@@ -201,9 +203,9 @@ class VerificationViewController : UIViewController{
      */
     func navigateToChangePasswordViewController(){
         
-        let storyboard = UIStoryboard(name: "Gateway", bundle: nil)
+        let storyboard = UIStoryboard(name: kStoryboardIdentifierGateway, bundle: nil)
         
-        let fda = storyboard.instantiateViewController(withIdentifier: "ChangePasswordViewController") as! ChangePasswordViewController
+        let fda = storyboard.instantiateViewController(withIdentifier: kChangePasswordViewControllerIdentifier) as! ChangePasswordViewController
         
         if shouldCreateMenu {
             fda.viewLoadFrom = .login

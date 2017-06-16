@@ -18,6 +18,9 @@ protocol FileDownloadManagerDelegates {
     
 }
 
+let kdefaultKeyForEncrytion = "passwordpasswordpasswordpassword"
+let kdefaultIVForEncryption = "drowssapdrowssap"
+
 class FileDownloadManager : NSObject {
     
     var sessionManager: Foundation.URLSession!
@@ -168,17 +171,17 @@ extension FileDownloadManager:URLSessionDelegate{
             var key = ""
             var initializationVector = ""
             
-            if ud.value(forKey: "EncryptionKey") != nil {
-                key = ud.value(forKey: "EncryptionKey") as! String
+            if ud.value(forKey: kEncryptionKey) != nil {
+                key = ud.value(forKey: kEncryptionKey) as! String
             }
             else{
-                key = "passwordpasswordpasswordpassword"
+                key = kdefaultKeyForEncrytion
             }
-            if ud.value(forKey: "EncryptionIV") != nil {
-                initializationVector = ud.value(forKey: "EncryptionIV") as! String
+            if ud.value(forKey: kEncryptionIV) != nil {
+                initializationVector = ud.value(forKey: kEncryptionIV) as! String
             }
             else{
-                initializationVector = "drowssapdrowssap"
+                initializationVector = kdefaultIVForEncryption
             }
 
             
@@ -220,17 +223,17 @@ extension FileDownloadManager:URLSessionDelegate{
                 var key = ""
                 var initializationVector = ""
                 
-                if ud.value(forKey: "EncryptionKey") != nil {
-                    key = ud.value(forKey: "EncryptionKey") as! String
+                if ud.value(forKey: kEncryptionKey) != nil {
+                    key = ud.value(forKey: kEncryptionKey) as! String
                 }
                 else{
-                    key = "passwordpasswordpasswordpassword"
+                    key = kdefaultKeyForEncrytion
                 }
-                if ud.value(forKey: "EncryptionIV") != nil {
-                     initializationVector = ud.value(forKey: "EncryptionIV") as! String
+                if ud.value(forKey: kEncryptionIV) != nil {
+                     initializationVector = ud.value(forKey: kEncryptionIV) as! String
                 }
                 else{
-                    initializationVector = "drowssapdrowssap"
+                    initializationVector = kdefaultIVForEncryption
                 }
                 let data = try Data.init(contentsOf: URL.init(string: pathString)!)
                 let aes = try AES(key: key, iv: initializationVector) // aes128

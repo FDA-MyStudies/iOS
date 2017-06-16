@@ -159,6 +159,12 @@ let kWeek = "WEEK"
 
 let kMessageForInvalidToken = "Please enter valid enrollment token"
 
+let kMessageValidToken = "Please enter valid token"
+let kMessageForMissingStudyId = "Unable to Enroll, Please try again later."
+
+let kMessageInvalidTokenOrIfStudyDoesNotExist = "Sorry, this token is invalid. Please enter a valid token to continue."
+
+
 //MARK:- StudyHomeMessages
 let kMessageForStudyUpcomingState = "This study is an upcoming one and isn't yet open for enrolling participants. Please check back later."
 let kMessageForStudyPausedState = "This study has been temporarily paused. Please check back later."

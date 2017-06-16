@@ -21,7 +21,7 @@ class EligibilityStep: ORKStep {
     
 }
 
-
+let kStudyWithStudyId = "Study with StudyId"
 
 class EligibilityStepViewController: ORKStepViewController {
 
@@ -168,28 +168,26 @@ extension EligibilityStepViewController:NMWebServiceDelegate {
         self.removeProgressIndicator()
         
         if error.localizedDescription.localizedCaseInsensitiveContains(tokenTextField.text!){
-             self.showAlert(message: kMessageForInvalidToken)
+            
+            self.showAlert(message: kMessageInvalidTokenOrIfStudyDoesNotExist) //kMessageForInvalidToken
+            
         }
         else{
             
-            if error.localizedDescription.localizedCaseInsensitiveContains("Study with StudyId") {
-                self.showAlert(message:"Unable to Enroll, Please try again later.")
+            if error.localizedDescription.localizedCaseInsensitiveContains(kStudyWithStudyId) {
+                
+                self.showAlert(message:kMessageInvalidTokenOrIfStudyDoesNotExist) //kMessageForMissingStudyId
+                
             }
+                
             else{
+                
                 self.showAlert(message:error.localizedDescription)
+                
             }
-            
             
         }
-        
-        
-       
-        
     }
-    
-    
-    
-    
 }
 
 open class EligibilityTokenTaskResult: ORKResult {

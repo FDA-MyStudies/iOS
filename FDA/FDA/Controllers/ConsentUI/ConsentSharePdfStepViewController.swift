@@ -10,11 +10,21 @@ import UIKit
 import ResearchKit
 
 let kConsentCompletionResultIdentifier = "ConsentCompletion"
+let kMainTitle = "Thanks for providing consent for this Study"
+let kSubTitle = "You can now start participating in the Study"
 
+/* Consent Completion Step
+ @mainTitle: title displayed in Consent Completion UI
+ @subTitle: subTitle displayed in Consent Completion UI
+ 
+ */
 class ConsentCompletionStep: ORKStep {
     var mainTitle:String?
     var subTitle:String?
     
+    /*
+     showsProgress: Displays the step numbers in navigation bar
+     */
     func showsProgress() -> Bool {
         return false
     }
@@ -23,9 +33,9 @@ class ConsentCompletionStep: ORKStep {
 
 class ConsentSharePdfStepViewController: ORKStepViewController {
     
-    @IBOutlet weak var buttonViewPdf:UIButton?
+    @IBOutlet weak var buttonViewPdf:UIButton? // button to Push to PdfViewer
     
-    @IBOutlet weak var buttonNext:UIButton?
+    @IBOutlet weak var buttonNext:UIButton? // button to take to next step
     var consentDocument:ORKConsentDocument?
     
     var taskResult:ConsentCompletionTaskResult = ConsentCompletionTaskResult(identifier: kConsentCompletionResultIdentifier)
@@ -70,7 +80,7 @@ class ConsentSharePdfStepViewController: ORKStepViewController {
         
         self.addProgressIndicator()
         
-        
+        //Generating consentDocumentPdf
         self.consentDocument?.makePDF(completionHandler: { data,error in
             NSLog("data: \(data)    \n  error: \(error)")
             
@@ -78,10 +88,11 @@ class ConsentSharePdfStepViewController: ORKStepViewController {
             
             self.taskResult.didTapOnViewPdf = true
             
+            //Saving ConsentPdfData
             ConsentBuilder.currentConsent?.consentResult?.consentPdfData = Data()
             ConsentBuilder.currentConsent?.consentResult?.consentPdfData = data
-
-    
+            
+            
             self.removeProgressIndicator()
             
             self.goForward()
@@ -95,8 +106,8 @@ class ConsentSharePdfStepViewController: ORKStepViewController {
         super.viewDidLoad()
         
         if let step = step as? ConsentCompletionStep {
-            step.mainTitle = "Thanks for providing consent for this Study"
-            step.subTitle =  "You can now start participating in the Study"
+            step.mainTitle = kMainTitle
+            step.subTitle =  kSubTitle
         }
         
         buttonViewPdf?.layer.borderColor =   kUicolorForButtonBackground
@@ -112,7 +123,7 @@ class ConsentSharePdfStepViewController: ORKStepViewController {
 }
 
 
-
+//Overrriding the ORKTaskResult to get customized results
 open class ConsentCompletionTaskResult: ORKResult {
     
     open var didTapOnViewPdf:Bool = false

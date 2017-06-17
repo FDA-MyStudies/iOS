@@ -175,6 +175,8 @@ class ActivitiesTableViewCell: UITableViewCell {
             self.buttonMoreSchedulesBottomLine?.isHidden = true
         }
         else {
+            self.buttonMoreSchedules?.isHidden = false
+            self.buttonMoreSchedulesBottomLine?.isHidden = false
             let moreSchedulesTitle =  "+" + String(activity.totalRuns - 1) + " more"
             self.buttonMoreSchedules?.setTitle(moreSchedulesTitle, for: .normal)
         }

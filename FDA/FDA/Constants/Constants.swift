@@ -29,6 +29,7 @@ let CouldNotConnectToServerCode = -1001
 //Display Constants
 let kTitleError = "Error"
 let kTitleMessage = "Message"
+let kImportantNoteMessage = "Important Note"
 let kTitleOk = "Ok"
 let kTitleCancel = "Cancel"
 let kTitleDeleteAccount = "Delete Account"

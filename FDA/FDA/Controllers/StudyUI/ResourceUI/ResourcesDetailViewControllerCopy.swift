@@ -1,5 +1,5 @@
 //
-//  ResourcesDetailViewController.swift
+//  ResourcesDetailViewControllerCopy.swift
 //  FDA
 //
 //  Created by Arun Kumar on 4/6/17.
@@ -8,15 +8,18 @@
 
 import UIKit
 import MessageUI
+import WebKit
+import SafariServices
+//let resourcesDownloadPath = AKUtility.baseFilePath + "/Resources"
 
-
-let resourcesDownloadPath = AKUtility.baseFilePath + "/Resources"
-
-class ResourcesDetailViewController: UIViewController {
+class ResourcesDetailViewControllerCopy: UIViewController {
     
+    @IBOutlet var webViewContainer : UIView?
+     var webView : WKWebView?
     
-    @IBOutlet var webView : UIWebView?
     @IBOutlet var progressBar : UIProgressView?
+    @IBOutlet var bottomToolBar : UIToolbar?
+    
     
     var activityIndicator:UIActivityIndicatorView!
     var requestLink:String?
@@ -24,13 +27,24 @@ class ResourcesDetailViewController: UIViewController {
     var htmlString: String?
     var resource:Resource?
     var isEmailComposerPresented:Bool?
+    
     override func viewDidLoad() {
+        
         super.viewDidLoad()
         self.hidesBottomBarWhenPushed = true
         self.addBackBarButton()
         self.isEmailComposerPresented = false
         self.title = resource?.title
         
+        let webConfiguration = WKWebViewConfiguration()
+        
+        let webViewFrame = CGRect.init(x: 0, y: 0, width: (webViewContainer?.frame.width)!, height: (webViewContainer?.frame.height)! - 44.0)
+        webView = WKWebView.init(frame: webViewFrame, configuration: webConfiguration)
+        
+       
+        webViewContainer?.addSubview(webView!)
+        
+       
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -51,7 +65,7 @@ class ResourcesDetailViewController: UIViewController {
             
             
             activityIndicator.startAnimating()
-            
+             self.activityIndicator.hidesWhenStopped = true
             if self.resource?.file?.mimeType == .pdf{
                 
                 if self.resource?.file?.localPath != nil {
@@ -80,14 +94,20 @@ class ResourcesDetailViewController: UIViewController {
                 
             }
             else{
-                webView?.loadHTMLString(self.requestLink!, baseURL:nil)
+                
+                 webView?.allowsBackForwardNavigationGestures = true
+                
+                _ = webView?.loadHTMLString(self.requestLink!, baseURL: nil)
+                 
+               
             }
         }
         else{
             
         }
         
-        webView?.delegate = self
+        webView?.uiDelegate = self
+        webView?.navigationDelegate = self
         }
         
         UIApplication.shared.statusBarStyle = .default
@@ -101,15 +121,21 @@ class ResourcesDetailViewController: UIViewController {
         
         let url:URL? = URL.init(string:path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed)!)
         let urlRequest = URLRequest(url: url!)
-        webView?.loadRequest(urlRequest)
+        
+        
+    
+        webView?.allowsBackForwardNavigationGestures = true
+        _ = webView?.load(urlRequest)
+       // webView?.loadRequest(urlRequest)
     }
     func loadWebViewWithData(data:Data){
         
-        self.webView?.load(data, mimeType: "application/pdf", textEncodingName: "UTF-8", baseURL:URL.init(fileURLWithPath: "") )
+         webView?.allowsBackForwardNavigationGestures = true
         
-//        let url:URL? = URL.init(string:path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed)!)
-//        let urlRequest = URLRequest(url: url!)
-//        webView?.loadRequest(urlRequest)
+       _ = self.webView?.load(data, mimeType: "application/pdf", characterEncodingName: "UTF-8", baseURL: URL.init(fileURLWithPath: ""))
+        
+       // self.webView?.load(data, mimeType: "application/pdf", textEncodingName: "UTF-8", baseURL:URL.init(fileURLWithPath: "") )
+        
     }
     
     func startDownloadingfile(){
@@ -146,21 +172,40 @@ class ResourcesDetailViewController: UIViewController {
         self.sendEmail()
     }
     
+    @IBAction func buttonActionBack(_ sender : UIBarButtonItem){
+       
+        if (webView?.canGoBack)!{
+           _ =  webView?.goBack()
+        }
+        else if webView?.backForwardList.backList.count == 0 {
+            if  self.resource?.file?.mimeType != .pdf {
+                _ = webView?.loadHTMLString(self.requestLink!, baseURL: nil)
+
+            }
+        }
+    }
+    
+    @IBAction func buttonActionGoForward(_ sender : UIBarButtonItem){
+        if (webView?.canGoForward)!{
+           _ = webView?.goForward()
+        }
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
 }
 
-extension ResourcesDetailViewController:UIWebViewDelegate{
+extension ResourcesDetailViewControllerCopy:UIWebViewDelegate{
     
     func webViewDidFinishLoad(_ webView: UIWebView) {
         self.activityIndicator.stopAnimating()
-        self.activityIndicator.removeFromSuperview()
+       
     }
     func webView(_ webView: UIWebView, didFailLoadWithError error: Error) {
         self.activityIndicator.stopAnimating()
-        self.activityIndicator.removeFromSuperview()
+      
         
         let buttonTitleOK = NSLocalizedString("OK", comment: "")
         let alert = UIAlertController(title:NSLocalizedString(kTitleError, comment: ""),message:error.localizedDescription,preferredStyle: UIAlertControllerStyle.alert)
@@ -178,7 +223,144 @@ extension ResourcesDetailViewController:UIWebViewDelegate{
     }
 }
 
-extension ResourcesDetailViewController:MFMailComposeViewControllerDelegate{
+extension ResourcesDetailViewControllerCopy:WKUIDelegate,WKNavigationDelegate{
+    
+    
+    func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation) {
+        print("webView:\(webView) didStartProvisionalNavigation:\(navigation)")
+    }
+    
+    func webView(_ webView: WKWebView, didCommit navigation: WKNavigation) {
+        print("webView:\(webView) didCommitNavigation:\(navigation)")
+    }
+    
+    func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: (@escaping (WKNavigationActionPolicy) -> Void)) {
+        print("webView:\(webView) decidePolicyForNavigationAction:\(navigationAction) decisionHandler:\(decisionHandler)")
+        
+        switch navigationAction.navigationType {
+        case .linkActivated:
+            if navigationAction.targetFrame == nil {
+                webView.load(navigationAction.request)
+            }
+        default:
+            break
+        }
+        self.activityIndicator.startAnimating()
+        decisionHandler(.allow)
+    }
+    
+    func webView(_ webView: WKWebView, decidePolicyFor navigationResponse: WKNavigationResponse, decisionHandler: (@escaping (WKNavigationResponsePolicy) -> Void)) {
+        print("webView:\(webView) decidePolicyForNavigationResponse:\(navigationResponse) decisionHandler:\(decisionHandler)")
+        
+        decisionHandler(.allow)
+    }
+    
+    func webView(_ webView: WKWebView, didReceive challenge: URLAuthenticationChallenge, completionHandler: @escaping (URLSession.AuthChallengeDisposition, URLCredential?) -> Void) {
+        print("webView:\(webView) didReceiveAuthenticationChallenge:\(challenge) completionHandler:\(completionHandler)")
+        
+        switch (challenge.protectionSpace.authenticationMethod) {
+        case NSURLAuthenticationMethodHTTPBasic:
+            let alertController = UIAlertController(title: "Authentication Required", message: webView.url?.host, preferredStyle: .alert)
+            weak var usernameTextField: UITextField!
+            alertController.addTextField { textField in
+                textField.placeholder = "Username"
+                usernameTextField = textField
+            }
+            weak var passwordTextField: UITextField!
+            alertController.addTextField { textField in
+                textField.placeholder = "Password"
+                textField.isSecureTextEntry = true
+                passwordTextField = textField
+            }
+            alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { action in
+                completionHandler(.cancelAuthenticationChallenge, nil)
+            }))
+            alertController.addAction(UIAlertAction(title: "Log In", style: .default, handler: { action in
+                guard let username = usernameTextField.text, let password = passwordTextField.text else {
+                    completionHandler(.rejectProtectionSpace, nil)
+                    return
+                }
+                let credential = URLCredential(user: username, password: password, persistence: URLCredential.Persistence.forSession)
+                completionHandler(.useCredential, credential)
+            }))
+            present(alertController, animated: true, completion: nil)
+        default:
+            completionHandler(.rejectProtectionSpace, nil);
+        }
+    }
+    
+    func webView(_ webView: WKWebView, didReceiveServerRedirectForProvisionalNavigation navigation: WKNavigation) {
+        print("webView:\(webView) didReceiveServerRedirectForProvisionalNavigation:\(navigation)")
+    }
+ 
+    
+    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation) {
+        print("webView:\(webView) didFinishNavigation:\(navigation)")
+        
+        self.activityIndicator.stopAnimating()
+        
+    }
+    
+    func webView(_ webView: WKWebView, didFail navigation: WKNavigation, withError error: Error) {
+        print("webView:\(webView) didFailNavigation:\(navigation) withError:\(error)")
+        
+        let alert = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+        present(alert, animated: true, completion: nil)
+    }
+    
+    func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation, withError error: Error) {
+        print("webView:\(webView) didFailProvisionalNavigation:\(navigation) withError:\(error)")
+    }
+    
+    // MARK: WKUIDelegate methods
+    
+    func webView(_ webView: WKWebView, runJavaScriptAlertPanelWithMessage message: String, initiatedByFrame frame: WKFrameInfo, completionHandler: (@escaping () -> Void)) {
+        print("webView:\(webView) runJavaScriptAlertPanelWithMessage:\(message) initiatedByFrame:\(frame) completionHandler:\(completionHandler)")
+        
+        let alertController = UIAlertController(title: frame.request.url?.host, message: message, preferredStyle: .alert)
+        alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
+            completionHandler()
+        }))
+        present(alertController, animated: true, completion: nil)
+    }
+    
+    func webView(_ webView: WKWebView, runJavaScriptConfirmPanelWithMessage message: String, initiatedByFrame frame: WKFrameInfo, completionHandler: (@escaping (Bool) -> Void)) {
+        print("webView:\(webView) runJavaScriptConfirmPanelWithMessage:\(message) initiatedByFrame:\(frame) completionHandler:\(completionHandler)")
+        
+        let alertController = UIAlertController(title: frame.request.url?.host, message: message, preferredStyle: .alert)
+        alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { action in
+            completionHandler(false)
+        }))
+        alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
+            completionHandler(true)
+        }))
+        present(alertController, animated: true, completion: nil)
+    }
+    
+    func webView(_ webView: WKWebView, runJavaScriptTextInputPanelWithPrompt prompt: String, defaultText: String?, initiatedByFrame frame: WKFrameInfo, completionHandler: @escaping (String?) -> Void) {
+        print("webView:\(webView) runJavaScriptTextInputPanelWithPrompt:\(prompt) defaultText:\(defaultText) initiatedByFrame:\(frame) completionHandler:\(completionHandler)")
+        
+        let alertController = UIAlertController(title: frame.request.url?.host, message: prompt, preferredStyle: .alert)
+        weak var alertTextField: UITextField!
+        alertController.addTextField { textField in
+            textField.text = defaultText
+            alertTextField = textField
+        }
+        alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { action in
+            completionHandler(nil)
+        }))
+        alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
+            completionHandler(alertTextField.text)
+        }))
+        present(alertController, animated: true, completion: nil)
+    }
+
+}
+
+
+
+extension ResourcesDetailViewControllerCopy:MFMailComposeViewControllerDelegate{
     
     func sendEmail() {
         let composeVC = MFMailComposeViewController()
@@ -252,7 +434,7 @@ extension ResourcesDetailViewController:MFMailComposeViewControllerDelegate{
 }
 
 
-extension ResourcesDetailViewController:FileDownloadManagerDelegates{
+extension ResourcesDetailViewControllerCopy:FileDownloadManagerDelegates{
     
     func download(manager: FileDownloadManager, didUpdateProgress progress: Float) {
         
@@ -272,7 +454,9 @@ extension ResourcesDetailViewController:FileDownloadManagerDelegates{
             
             let mimeType = "application/" + "\((self.resource?.file?.mimeType?.rawValue)!)"
             
-            self.webView?.load(data!, mimeType: mimeType, textEncodingName: "UTF-8", baseURL:URL.init(fileURLWithPath: "") )
+            self.webView?.load(data!, mimeType: mimeType, characterEncodingName: mimeType, baseURL: URL.init(fileURLWithPath: "") )
+            
+            //self.webView?.load(data!, mimeType: mimeType, textEncodingName: mimeType, baseURL:URL.init(fileURLWithPath: "") )
         }
         
     }

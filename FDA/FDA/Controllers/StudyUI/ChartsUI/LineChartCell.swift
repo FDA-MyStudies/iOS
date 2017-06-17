@@ -126,6 +126,12 @@ class LineChartCell: GraphChartTableViewCell {
         let activity = Study.currentStudy?.activities.filter({$0.actvityId == chart.activityId}).last
         charActivity = activity
         
+        if charActivity == nil {
+            self.buttonForward.isEnabled = false
+            self.buttonBackward.isEnabled = false
+            return
+        }
+        
         switch chartTimeRange {
             
         case .days_of_month:

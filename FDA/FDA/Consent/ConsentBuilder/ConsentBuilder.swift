@@ -283,7 +283,7 @@ class ConsentBuilder{
         }
         
         if Utilities.isValidValue(someObject: self.reviewConsent?.reasonForConsent as AnyObject ) {
-            reviewConsentStep?.reasonForConsent = (self.reviewConsent?.reasonForConsent)! + "."
+            reviewConsentStep?.reasonForConsent = (self.reviewConsent?.reasonForConsent)!
         } else {
             reviewConsentStep?.reasonForConsent = ""
         }

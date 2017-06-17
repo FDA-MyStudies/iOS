@@ -9,12 +9,15 @@
 import Foundation
 import UIKit
 
-
+enum CompletionLoadFrom:Int{
+    case signup
+    case joinStudy
+}
 class SignUpCompleteViewController : UIViewController{
     
     @IBOutlet var buttonNext : UIButton?
     var shouldCreateMenu:Bool = true
-    
+    var viewLoadFrom:CompletionLoadFrom = .signup
     
     //MARK:- ViewController Lifecycle
     override func viewDidLoad() {
@@ -71,6 +74,16 @@ class SignUpCompleteViewController : UIViewController{
         appDelegate.updateKeyAndInitializationVector()
         
         self.navigateToGatewayDashboard()
+        
+        if self.viewLoadFrom == .joinStudy{
+            let leftController = slideMenuController()?.leftViewController as! LeftMenuViewController
+            leftController.createLeftmenuItems()
+            self.performSegue(withIdentifier: "unwindStudyHomeSegue", sender: self)
+        }
+        else {
+            self.navigateToGatewayDashboard()
+        }
+        
     }
     
     

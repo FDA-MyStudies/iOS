@@ -117,6 +117,19 @@ class ResourcesViewController : UIViewController{
             resourceDetail.hidesBottomBarWhenPushed = true
             
         }
+        else if segue.identifier == "ResourceDetailViewSegueIdentifier"{
+            
+            let resourceDetail = segue.destination as! ResourcesDetailViewControllerCopy
+            resourceDetail.resource = sender as! Resource
+            if self.resourceLink != nil{
+                resourceDetail.requestLink = self.resourceLink!
+            }
+            if self.fileType != nil {
+                resourceDetail.type = self.fileType!
+            }
+            resourceDetail.hidesBottomBarWhenPushed = true
+            
+        }
     }
     
     
@@ -456,7 +469,7 @@ extension ResourcesViewController : UITableViewDelegate{
             
             resourceLink = (resource as? Resource)?.file?.getFileLink()
             fileType = (resource as? Resource)?.file?.getMIMEType()
-            self.performSegue(withIdentifier:"ResourceDetailViewControllerIdentifier" , sender: resource)
+            self.performSegue(withIdentifier:"ResourceDetailViewSegueIdentifier" , sender: resource)
         }
         else{
             if resource as! String == "Leave Study" {

@@ -610,13 +610,13 @@
                     <connections>
                         <outlet property="tableView" destination="ZKr-ab-Sg7" id="U7F-jr-zSj"/>
                         <segue destination="q3w-yD-qXf" kind="unwind" identifier="unwindeToStudyListResourcesIdentifier" unwindAction="unwindToStudyList:" id="HLI-FK-KrT"/>
-                        <segue destination="0YV-mj-82E" kind="push" identifier="ResourceDetailViewControllerIdentifier" id="Ksa-1R-Onb"/>
+                        <segue destination="Thx-il-vcR" kind="push" identifier="ResourceDetailViewSegueIdentifier" id="4FZ-Jh-C36"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8R7-z3-J5e" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="q3w-yD-qXf" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="1256.8" y="6284.707646176912"/>
+            <point key="canvasLocation" x="1214" y="6400"/>
         </scene>
         <!--Study Dashboard View Controller-->
         <scene sceneID="T5g-Dy-bhf">
@@ -1811,7 +1811,7 @@
                         <viewControllerLayoutGuide type="bottom" id="3jB-Cw-9Qt"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="MYK-RY-Tbr">
-                        <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" fixedFrame="YES" progressViewStyle="bar" translatesAutoresizingMaskIntoConstraints="NO" id="Opj-CP-tJy">
@@ -1820,10 +1820,10 @@
                                 <color key="progressTintColor" red="0.28627450980000002" green="0.71372549019999998" blue="0.8980392157" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </progressView>
                             <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="51q-E2-3o9">
-                                <rect key="frame" x="0.0" y="3" width="375" height="600"/>
+                                <rect key="frame" x="0.0" y="23" width="375" height="644"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <connections>
-                                    <outlet property="delegate" destination="0YV-mj-82E" id="pIA-h7-D8e"/>
+                                    <outlet property="delegate" destination="0YV-mj-82E" id="eai-DC-l0D"/>
                                 </connections>
                             </webView>
                         </subviews>
@@ -1846,12 +1846,84 @@
                     </navigationItem>
                     <connections>
                         <outlet property="progressBar" destination="Opj-CP-tJy" id="zav-j2-6pd"/>
-                        <outlet property="webView" destination="51q-E2-3o9" id="1JK-C7-f5v"/>
+                        <outlet property="webView" destination="51q-E2-3o9" id="Dah-ge-0h2"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tce-5G-MZF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2140" y="6278.4107946026988"/>
+            <point key="canvasLocation" x="2140" y="5901"/>
+        </scene>
+        <!--Resources Detail View Controller Copy-->
+        <scene sceneID="cUw-Lb-m0G">
+            <objects>
+                <viewController storyboardIdentifier="ResourceDetailViewControllerCopyIdentifier" hidesBottomBarWhenPushed="YES" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Thx-il-vcR" customClass="ResourcesDetailViewControllerCopy" customModule="FDA" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Gaq-g3-9IE"/>
+                        <viewControllerLayoutGuide type="bottom" id="0bc-l1-kBd"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="JgA-R7-8Iv">
+                        <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <progressView hidden="YES" opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progressViewStyle="bar" translatesAutoresizingMaskIntoConstraints="NO" id="Glz-Q1-dVe">
+                                <rect key="frame" x="0.0" y="1" width="375" height="2.5"/>
+                                <color key="progressTintColor" red="0.28627450980000002" green="0.71372549019999998" blue="0.8980392157" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </progressView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xWp-Pd-g7z">
+                                <rect key="frame" x="0.0" y="3" width="375" height="600"/>
+                                <subviews>
+                                    <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="woR-0K-eTs">
+                                        <rect key="frame" x="0.0" y="556" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                        <items>
+                                            <barButtonItem image="leftIconBlue" id="ij7-ZW-jM2">
+                                                <color key="tintColor" red="0.0" green="0.48627450979999998" blue="0.72941176470000002" alpha="1" colorSpace="calibratedRGB"/>
+                                                <connections>
+                                                    <action selector="buttonActionBack:" destination="Thx-il-vcR" id="tut-h1-1Xq"/>
+                                                </connections>
+                                            </barButtonItem>
+                                            <barButtonItem width="40" systemItem="fixedSpace" id="4U7-op-HpP"/>
+                                            <barButtonItem image="rightIconBlue" width="40" id="Xla-tZ-4YD">
+                                                <color key="tintColor" red="0.0" green="0.48627450979999998" blue="0.72941176470000002" alpha="1" colorSpace="calibratedRGB"/>
+                                                <connections>
+                                                    <action selector="buttonActionGoForward:" destination="Thx-il-vcR" id="RZD-PV-ipx"/>
+                                                </connections>
+                                            </barButtonItem>
+                                        </items>
+                                    </toolbar>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="xWp-Pd-g7z" firstAttribute="top" secondItem="Glz-Q1-dVe" secondAttribute="bottom" id="Cuf-W0-Cfh"/>
+                            <constraint firstItem="Glz-Q1-dVe" firstAttribute="leading" secondItem="JgA-R7-8Iv" secondAttribute="leading" id="FdN-WA-zvR"/>
+                            <constraint firstItem="Glz-Q1-dVe" firstAttribute="top" secondItem="Gaq-g3-9IE" secondAttribute="bottom" constant="1" id="Lft-OE-d9n"/>
+                            <constraint firstAttribute="trailing" secondItem="xWp-Pd-g7z" secondAttribute="trailing" id="SWI-No-wL7"/>
+                            <constraint firstAttribute="trailing" secondItem="Glz-Q1-dVe" secondAttribute="trailing" id="TYq-zh-a0M"/>
+                            <constraint firstItem="xWp-Pd-g7z" firstAttribute="leading" secondItem="JgA-R7-8Iv" secondAttribute="leading" id="aff-aI-wjj"/>
+                            <constraint firstAttribute="bottom" secondItem="xWp-Pd-g7z" secondAttribute="bottom" id="bvZ-HU-i5p"/>
+                        </constraints>
+                    </view>
+                    <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
+                    <navigationItem key="navigationItem" id="kaJ-wl-UuI">
+                        <barButtonItem key="rightBarButtonItem" image="shareIcon" id="TRZ-NT-2WW">
+                            <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                            <connections>
+                                <action selector="buttonActionForward:" destination="Thx-il-vcR" id="XPH-fW-g0h"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="bottomToolBar" destination="woR-0K-eTs" id="UMD-HW-mnE"/>
+                        <outlet property="progressBar" destination="Glz-Q1-dVe" id="sjP-10-4h0"/>
+                        <outlet property="webViewContainer" destination="xWp-Pd-g7z" id="EeY-Ix-xEj"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="0Bq-iC-c4c" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2064.8000000000002" y="6661.6191904047982"/>
         </scene>
     </scenes>
     <resources>

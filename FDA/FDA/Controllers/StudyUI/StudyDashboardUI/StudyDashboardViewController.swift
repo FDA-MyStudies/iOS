@@ -51,6 +51,12 @@ class StudyDashboardViewController : UIViewController{
             let appDelegate = UIApplication.shared.delegate as! AppDelegate
              appDelegate.checkConsentStatus(controller: self)
         }
+        
+        
+        let ud = UserDefaults.standard
+        if !(ud.bool(forKey: "LabKeyResponseParsed")){
+            self.getDataKeysForCurrentStudy()
+        }
        
     }
     
@@ -71,7 +77,7 @@ class StudyDashboardViewController : UIViewController{
             }
         }
         
-        self.getDataKeysForCurrentStudy()
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -138,15 +144,32 @@ class StudyDashboardViewController : UIViewController{
         
         if self.dataSourceKeysForLabkey.count != 0 {
             let details = self.dataSourceKeysForLabkey.first
-            let activityId = "Q1"//details?["activityId"]
-            let keys = "Q5,Q13"//details?["keys"]
-            LabKeyServices().getParticipantResponse(activityId: activityId, keys: keys, participantId: "1a3d0d308df81024f8bfd7f11f7a0168", delegate: self)
+            let activityId = details?["activityId"]
+            let keys = details?["keys"]
+            let participantId = Study.currentStudy?.userParticipateState.participantId
+            LabKeyServices().getParticipantResponse(activityId: activityId!, keys: keys!, participantId: participantId!, delegate: self)
         }
         else{
             self.removeProgressIndicator()
             
             //save response in database
             
+            let responses = StudyDashboard.instance.dashboardResponse
+            for  response in responses{
+                
+                let activityId = response.activityId
+                let key = response.key
+                
+                let values = response.values
+                for value in values{
+                    let responseValue = value["value"] as! Float
+                    let date = StudyDashboardViewController.labkeyDateFormatter.date(from: value["date"] as! String)
+                     DBHandler.saveStatisticsDataFor(activityId: activityId!, key: key!, data:responseValue ,date:date!)
+                }
+                
+                
+            }
+            UserDefaults.standard.set(true, forKey: "LabKeyResponseParsed")
             print("Labkey response \(StudyDashboard.instance.dashboardResponse)")
         }
         
@@ -187,6 +210,14 @@ class StudyDashboardViewController : UIViewController{
         
         
     }
+    
+    private static let labkeyDateFormatter: DateFormatter = {
+        //2017/06/13 18:12:13
+        let formatter = DateFormatter()
+        formatter.dateFormat = "YYYY/MM/dd HH:mm:ss"
+       
+        return formatter
+    }()
 }
 
 

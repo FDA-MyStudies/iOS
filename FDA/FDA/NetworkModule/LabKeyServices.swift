@@ -18,7 +18,7 @@ class LabKeyServices: NSObject {
     
     let networkManager = NetworkManager.sharedInstance()
     var delegate:NMWebServiceDelegate! = nil
-    
+    var activityId:String!  //Temp: replace with request parameters
     //MARK:Requests
     func enrollForStudy(studyId:String, token:String , delegate:NMWebServiceDelegate){
         self.delegate = delegate
@@ -125,8 +125,9 @@ class LabKeyServices: NSObject {
     }
     
     func getParticipantResponse(activityId:String,keys:String,participantId:String,delegate:NMWebServiceDelegate){
-        self.delegate = delegate
         
+        self.delegate = delegate
+        self.activityId = activityId
         let method = ResponseMethods.executeSQL.method
         let query = "SELECT " + keys + ",Created" + " FROM " + activityId
         let params = [
@@ -187,6 +188,7 @@ class LabKeyServices: NSObject {
                        //do not do anything
                     }
                     else {
+                        responseData.activityId = self.activityId
                         responseData.key = fieldKeyValue
                         responseData.type = feildDetail["type"] as! String?
                         responseData.isPHI = feildDetail["phi"] as! String?

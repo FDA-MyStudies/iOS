@@ -43,6 +43,7 @@ class StudyDashboard: NSObject {
 
 class DashboardResponse{
     var key:String?
+    var activityId:String?
     var type:String?
     var values:Array<Dictionary<String,Any>> = []
     var date:String?

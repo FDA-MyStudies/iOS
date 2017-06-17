@@ -802,6 +802,7 @@
                         let passcodeStep = ORKPasscodeStep(identifier: "PasscodeStep")
                         passcodeStep.passcodeType = .type4Digit
                         
+                        passcodeStep.text = "Set up a passcode for the app"
                         
                         let task = ORKOrderedTask(identifier: "PassCodeTask", steps: [passcodeStep])
                         

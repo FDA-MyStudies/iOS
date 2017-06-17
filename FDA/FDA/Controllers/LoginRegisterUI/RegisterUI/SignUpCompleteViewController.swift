@@ -73,8 +73,7 @@ class SignUpCompleteViewController : UIViewController{
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         appDelegate.updateKeyAndInitializationVector()
         
-        self.navigateToGatewayDashboard()
-        
+       
         if self.viewLoadFrom == .joinStudy{
             let leftController = slideMenuController()?.leftViewController as! LeftMenuViewController
             leftController.createLeftmenuItems()

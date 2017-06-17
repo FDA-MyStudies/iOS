@@ -28,6 +28,8 @@
         
         var parentViewControllerForAlert:UIViewController?
         
+        var iscomingFromForgotPasscode:Bool? =  false
+        
         let healthStore = HKHealthStore()
         var containerViewController: ResearchContainerViewController? {
             return window?.rootViewController as? ResearchContainerViewController
@@ -945,15 +947,10 @@
                 ORKPasscodeViewController.removePasscodeFromKeychain()
             }
             
-            
             let ud = UserDefaults.standard
             ud.set(false, forKey: kPasscodeIsPending)
             ud.set(false, forKey: kShowNotification)
-            
-            
-            
             ud.synchronize()
-            
             
             let navigationController =  (self.window?.rootViewController as! UINavigationController)
             
@@ -974,8 +971,6 @@
                     //following to be removed it has to be moved to studylist
                      slideMenuController?.fdaSlideMenuController()?.navigateToHomeAfterSingout()
                     
-                    
-                    
                     //let leftController = slideMenuController?.leftViewController as! LeftMenuViewController
                     //leftController.changeViewController(.studyList)
                     //leftController.createLeftmenuItems()
@@ -992,13 +987,49 @@
             */
         }
         
-        func updateNotification(){
+        
+        
+        func handleSignoutAfterLogoutResponse(){
             
+            if ORKPasscodeViewController.isPasscodeStoredInKeychain(){
+                ORKPasscodeViewController.removePasscodeFromKeychain()
+            }
+            
+            let ud = UserDefaults.standard
+            ud.set(false, forKey: kPasscodeIsPending)
+            ud.set(false, forKey: kShowNotification)
+            ud.synchronize()
+            
+            let navigationController =  (self.window?.rootViewController as! UINavigationController)
+            
+            if navigationController.viewControllers.count > 0 {
+                let slideMenuController = navigationController.viewControllers.last as? FDASlideMenuViewController
+                
+                self.addAndRemoveProgress(add: false)
+                if slideMenuController != nil{
+                    User.resetCurrentUser()
+                    let ud = UserDefaults.standard
+                    ud.removeObject(forKey: kUserAuthToken)
+                    ud.removeObject(forKey: kUserId)
+                    ud.synchronize()
+                    
+                    let leftController = slideMenuController?.leftViewController as! LeftMenuViewController
+                    leftController.changeViewController(.reachOut_signIn)
+                    leftController.createLeftmenuItems()
+
+                    
+                }
+                
+            }
+        }
+        
+        
+        
+        func updateNotification(){
             
             let ud = UserDefaults.standard
             ud.set(true, forKey: kShowNotification)
             ud.synchronize()
-            
             
             var nav:UINavigationController?
             let navigationController =  (self.window?.rootViewController as! UINavigationController)
@@ -1012,13 +1043,8 @@
                         (studyListVC as! StudyListViewController).addRightNavigationItem()
                         
                     }
-                    
-                    
                 }
-                
             }
-            
-            
         }
         
         
@@ -1224,7 +1250,13 @@
             else if requestName as String == RegistrationMethods.logout.method.methodName {
                 
                 
-                self.handleSignoutResponse()
+                if iscomingFromForgotPasscode! {
+                    self.handleSignoutAfterLogoutResponse()
+                }
+                else{
+                    self.handleSignoutResponse()
+                }
+                
                 
                 
             }
@@ -1565,8 +1597,10 @@
             
             var topVC = UIApplication.shared.keyWindow?.rootViewController
             
+           
             
             while topVC?.presentedViewController != nil {
+                
                 topVC = topVC?.presentedViewController
             }
             
@@ -1576,6 +1610,18 @@
                                                                  errorAlertActionTitle2:NSLocalizedString("Cancel", comment: ""), viewControllerUsed: topVC!,
                                                                  action1: {
                                                                     viewController.dismiss(animated: true, completion: {
+                                                                        
+                                                                        var topVC = UIApplication.shared.keyWindow?.rootViewController
+                                                                        while topVC?.presentedViewController != nil {
+                                                                            
+                                                                            topVC = topVC?.presentedViewController
+                                                                        }
+                                                                        
+                                                                        if topVC is ORKTaskViewController{
+                                                                             topVC?.dismiss(animated: true, completion: nil)
+                                                                        }
+                                                                        
+                                                                       self.iscomingFromForgotPasscode = true
                                                                         
                                                                         self.sendRequestToSignOut()
                                                                     })

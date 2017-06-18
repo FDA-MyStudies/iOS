@@ -45,9 +45,6 @@ class ResourcesDetailViewControllerCopy: UIViewController {
         webViewContainer?.addSubview(webView!)
         
         
-        
-        
-        
        
     }
     

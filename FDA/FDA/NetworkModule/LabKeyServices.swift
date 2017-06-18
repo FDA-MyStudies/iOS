@@ -124,8 +124,20 @@ class LabKeyServices: NSObject {
         
     }
     
-    func getParticipantResponse(delegate:NMWebServiceDelegate){
+    func getParticipantResponse(activityId:String,keys:String,participantId:String,delegate:NMWebServiceDelegate){
         self.delegate = delegate
+        
+        let method = ResponseMethods.executeSQL.method
+        let query = "SELECT " + keys + ",Created" + " FROM " + activityId
+        let params = [
+            
+                      kParticipantId: participantId,
+                      "sql" :query
+            ] as [String : Any]
+        
+       
+        self.sendRequestWith(method:method, params: params, headers: nil)
+        
     }
     
     //MARK:Parsers
@@ -145,11 +157,85 @@ class LabKeyServices: NSObject {
         
     }
     
+   
     func handleGetParticipantResponse(response:Dictionary<String, Any>){
         
+        
+        var dashBoardResponse:Array<DashboardResponse> = []
+        let metadata =   response["metaData"] as? Dictionary<String,Any>
+        if let feilds = metadata?["fields"] as? Array<Dictionary<String,Any>>{
+            
+           
+            print("feilds \(feilds)")
+            for feildDetail in feilds {
+                
+                if let fieldKeys = feildDetail["fieldKey"] as? Array<String> {
+                    
+                    let fieldKeyValue = fieldKeys.first
+                    
+                    let responseData = DashboardResponse()
+                    //check for key which don't need to be parsed
+                    if (fieldKeyValue == "container"
+                        || fieldKeyValue == "Created"
+                        || fieldKeyValue == "CreatedBy"
+                        || fieldKeyValue == "ModifiedBy"
+                        || fieldKeyValue == "lastIndexed"
+                        || fieldKeyValue == "Modified"
+                        || fieldKeyValue == "Key"
+                        || fieldKeyValue == "ParticipantId" ){
+                        
+                       //do not do anything
+                    }
+                    else {
+                        responseData.key = fieldKeyValue
+                        responseData.type = feildDetail["type"] as! String?
+                        responseData.isPHI = feildDetail["phi"] as! String?
+                        
+                        dashBoardResponse.append(responseData)
+                    }
+                }
+                
+                
+            }
+            
+        }
+        
+        if let rows = response["rows"] as? Array<Dictionary<String,Any>>{
+            print("rows \(rows)")
+            
+            for rowDetail in rows {
+                if let data =  rowDetail["data"] as? Dictionary<String,Any>{
+                    //created date
+                    let dateDetail = data["Created"]  as? Dictionary<String,Any>
+                    let date = dateDetail?["value"] as! String
+                    
+                    for responseData in dashBoardResponse {
+                    
+                        if let keyValue = data[responseData.key!] as? Dictionary<String,Any> {
+                            print("value \(keyValue["value"])")
+                            if (responseData.type! == "int" || responseData.type! == "float" || responseData.type! == "double") {
+                                let value = keyValue["value"] as! Float
+                                let valueDetail = ["value":value,
+                                                   "date":date] as Dictionary<String,Any>
+                                
+                                responseData.values.append(valueDetail)
+                            }
+
+                        }
+                    }
+                }
+            }
+            
+            
+        }
+        
+        //StudyDashboard.instance.dashboardResponse = dashBoardResponse
+        StudyDashboard.instance.saveDashboardResponse(responseList: dashBoardResponse)
+        
+        //save in database as well
+        //TBD
+    
     }
-    
-    
     
     
     private func sendRequestWith(method:Method, params:Dictionary<String, Any>,headers:Dictionary<String, String>?){
@@ -174,6 +260,8 @@ extension LabKeyServices:NMWebServiceDelegate{
         case ResponseMethods.enroll.description as String:
             self.handleEnrollForStudy(response: response as! Dictionary<String, Any>)
         case ResponseMethods.getParticipantResponse.description as String: break
+        case ResponseMethods.executeSQL.description as String:
+            self.handleGetParticipantResponse(response: response as! Dictionary<String, Any>)
         case ResponseMethods.processResponse.description as String: break
         case ResponseMethods.withdrawFromStudy.description as String: break
         default:

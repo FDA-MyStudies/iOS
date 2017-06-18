@@ -310,7 +310,7 @@ extension ConfirmationViewController:NMWebServiceDelegate {
             self.handleStudyInformationResonse()
         }
         else if(requestName as String == ResponseMethods.withdrawFromStudy.description){
-            self.handleStudyInformationResonse()
+            self.handleWithdrawnFromStudyResponse()
         }
     }
     

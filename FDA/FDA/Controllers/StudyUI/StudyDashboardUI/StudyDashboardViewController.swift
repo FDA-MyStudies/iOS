@@ -20,6 +20,8 @@ class StudyDashboardViewController : UIViewController{
     @IBOutlet var tableView : UITableView?
     @IBOutlet var labelStudyTitle : UILabel?
     
+    var dataSourceKeysForLabkey:Array<Dictionary<String,String>> = []
+    
     var tableViewRowDetails = NSMutableArray()
     var todayActivitiesArray = NSMutableArray()
     var statisticsArray = NSMutableArray()
@@ -68,6 +70,8 @@ class StudyDashboardViewController : UIViewController{
                 self.sendRequestToGetDashboardInfo()
             }
         }
+        
+        self.getDataKeysForCurrentStudy()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -102,6 +106,21 @@ class StudyDashboardViewController : UIViewController{
         present(taskViewController!, animated: true, completion: nil)
     }
     
+    func getDataKeysForCurrentStudy(){
+        
+        DBHandler.getDataSourceKeyForActivity(studyId: (Study.currentStudy?.studyId)!) { (activityKeys) in
+            print(activityKeys)
+            if activityKeys.count > 0 {
+                self.dataSourceKeysForLabkey = activityKeys
+                self.sendRequestToGetDashboardResponse()
+            }
+        }
+
+    }
+        
+    
+    
+    
     
     /**
      
@@ -112,6 +131,36 @@ class StudyDashboardViewController : UIViewController{
         WCPServices().getStudyDashboardInfo(studyId: (Study.currentStudy?.studyId)!, delegate: self)
     }
     
+    
+    
+    func sendRequestToGetDashboardResponse(){
+        
+        
+        if self.dataSourceKeysForLabkey.count != 0 {
+            let details = self.dataSourceKeysForLabkey.first
+            let activityId = "Q1"//details?["activityId"]
+            let keys = "Q5,Q13"//details?["keys"]
+            LabKeyServices().getParticipantResponse(activityId: activityId, keys: keys, participantId: "1a3d0d308df81024f8bfd7f11f7a0168", delegate: self)
+        }
+        else{
+            self.removeProgressIndicator()
+            
+            //save response in database
+            
+            print("Labkey response \(StudyDashboard.instance.dashboardResponse)")
+        }
+        
+        //https://hphci-fdama-te-ds-01.labkey.com/mobileAppStudy-executeSQL.api?participantId=1a3d0d308df81024f8bfd7f11f7a0168&sql=SELECT%20*%20FROM%20Q1
+        
+        
+    }
+    
+    
+    func handleExecuteSQLResonse(){
+        
+        self.dataSourceKeysForLabkey.removeFirst()
+        self.sendRequestToGetDashboardResponse()
+    }
     
 //MARK:- Button Actions
     
@@ -270,22 +319,33 @@ extension StudyDashboardViewController:NMWebServiceDelegate {
     func finishedRequest(_ manager: NetworkManager, requestName: NSString, response: AnyObject?) {
         Logger.sharedInstance.info("requestname : \(requestName) response ; \(response)")
         
-        self.removeProgressIndicator()
+       
         
         if requestName as String == WCPMethods.eligibilityConsent.method.methodName {
+            self.removeProgressIndicator()
             self.createEligibilityConsentTask()
         }
         else if requestName as String == WCPMethods.studyDashboard.method.methodName {
+            self.removeProgressIndicator()
             self.tableView?.reloadData()
+        }
+        else if requestName as String == ResponseMethods.executeSQL.description{
+            self.handleExecuteSQLResonse()
         }
     }
     
     func failedRequest(_ manager: NetworkManager, requestName: NSString, error: NSError) {
         Logger.sharedInstance.info("requestname : \(requestName)")
-        self.removeProgressIndicator()
+        
         
         if requestName as String == WCPMethods.consentDocument.method.methodName {
-            //self.removeProgressIndicator()
+            self.removeProgressIndicator()
+        }
+        else if requestName as String == ResponseMethods.executeSQL.description{
+            self.handleExecuteSQLResonse()
+        }
+        else {
+            self.removeProgressIndicator()
         }
         //self.removeProgressIndicator()
     }

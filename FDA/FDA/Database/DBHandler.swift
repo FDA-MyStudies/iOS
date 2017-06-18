@@ -1287,6 +1287,60 @@ class DBHandler: NSObject {
         
      }
     
+    class func getDataSourceKeyForActivity(studyId:String, completionHandler:@escaping (Array<Dictionary<String,String>>) -> ()){
+        
+        let realm = try! Realm()
+        let dbStatisticsList = realm.objects(DBStatistics.self).filter({$0.studyId == studyId})
+        let dbChartsList = realm.objects(DBCharts.self).filter({$0.studyId == studyId})
+        
+        let statActivities:Array<String> = dbStatisticsList.map({$0.activityId!})
+        let chartActivities:Array<String> = dbChartsList.map({$0.activityId!})
+        
+        let set1 = Set(statActivities)
+        let set2 = Set(chartActivities)
+        
+        let allActivities = set1.union(set2)
+        
+        var activityAndQuestionKeys:Array<Dictionary<String,String>> = []
+        
+        for activityId in allActivities{
+            
+            
+            
+            let statList = dbStatisticsList.filter({$0.activityId == activityId})
+            let chatList = dbChartsList.filter({$0.activityId == activityId})
+            
+            let statsKeys = statList.map({$0.dataSourceKey})
+            let chartKeys = chatList.map({$0.dataSourceKey})
+            
+            
+            
+            var keys:Array<String> = []
+            for key in statsKeys{
+                if !keys.contains(key!){
+                    keys.append(key!)
+                }
+            }
+            
+            for key in chartKeys{
+                if !keys.contains(key!){
+                    keys.append(key!)
+                }
+            }
+            
+            let keyString = keys.joined(separator: ",")
+            
+            //activityAndQuestionKeys[activityId] = keyString
+            let dict = ["activityId":activityId,
+                        "keys":keyString] as Dictionary<String,String>
+            
+            activityAndQuestionKeys.append(dict)
+            
+        }
+        
+        return completionHandler(activityAndQuestionKeys)
+
+    }
     
     //MARK:- RESOURCES
     class func saveResourcesForStudy(studyId:String,resources:Array<Resource>){

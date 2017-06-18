@@ -44,7 +44,25 @@ class ResourcesDetailViewControllerCopy: UIViewController {
        
         webViewContainer?.addSubview(webView!)
         
+        
+        
+        
+        
        
+    }
+    
+    override func viewDidLayoutSubviews() {
+        
+        NSLayoutConstraint(item: webView!, attribute: .left, relatedBy: .equal, toItem: webViewContainer, attribute: .left, multiplier: 1.0, constant: 0.0).isActive = true
+        
+        NSLayoutConstraint(item: webView!, attribute: .right, relatedBy: .equal, toItem: webViewContainer, attribute: .right, multiplier: 1.0, constant: 0.0).isActive = true
+        
+        NSLayoutConstraint(item: webView!, attribute: .top, relatedBy: .equal, toItem: webViewContainer, attribute:.top, multiplier: 1.0, constant:0.0).isActive = true
+        
+        NSLayoutConstraint(item: webView!, attribute: .bottom, relatedBy: .equal, toItem: webViewContainer, attribute:.bottom, multiplier: 1.0, constant:-44.0).isActive = true
+    
+        webView?.translatesAutoresizingMaskIntoConstraints = false
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {

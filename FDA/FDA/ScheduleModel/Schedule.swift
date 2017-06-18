@@ -303,8 +303,9 @@ class Schedule{
                     runEndDate = runEndDate?.utcDate()
                     let offset = UserDefaults.standard.value(forKey: "offset") as? Int
                     let updatedStartTime = runStartDate?.addingTimeInterval(TimeInterval(offset!))
-                 if !(updatedStartTime! < startTime) {
                     let updatedEndTime = runEndDate?.addingTimeInterval(TimeInterval(offset!))
+                 if !(updatedEndTime! < startTime) {
+                    
                     
                     
                     //appent in activityRun array

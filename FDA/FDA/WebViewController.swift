@@ -81,7 +81,7 @@ class WebViewController : UIViewController{
         }
         
         webView?.delegate = self
-         //webView?.scalesPageToFit = true
+        webView?.scalesPageToFit = true
         UIApplication.shared.statusBarStyle = .default
     }
     

@@ -23,6 +23,7 @@ class ActivitiesTableViewCell: UITableViewCell {
     @IBOutlet var labelStatus : UILabel?
     @IBOutlet var labelRunStatus : UILabel?
     @IBOutlet var buttonMoreSchedules : UIButton?
+    @IBOutlet var buttonMoreSchedulesBottomLine : UIView?
     
     var delegate:ActivitiesCellDelegate?
     var currentActivity:Activity! = nil
@@ -89,8 +90,7 @@ class ActivitiesTableViewCell: UITableViewCell {
             labelRunStatus?.isHidden = false
            
             
-            //update activity run details as compelted and missed
-            self.updateUserRunStatus(activity: activity)
+            
 
             //update user activity status
             self.setUserStatusForActivity(activity: activity)
@@ -153,6 +153,9 @@ class ActivitiesTableViewCell: UITableViewCell {
         }
         self.calculateActivityTimings(activity: activity)
         self.setUserStatusForActivity(activity: activity)
+        
+        //update activity run details as compelted and missed
+        self.updateUserRunStatus(activity: activity)
     }
     
     
@@ -169,6 +172,7 @@ class ActivitiesTableViewCell: UITableViewCell {
         
         if activity.totalRuns == 1 {
             self.buttonMoreSchedules?.isHidden = true
+            self.buttonMoreSchedulesBottomLine?.isHidden = true
         }
         else {
             let moreSchedulesTitle =  "+" + String(activity.totalRuns - 1) + " more"

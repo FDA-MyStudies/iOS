@@ -944,6 +944,8 @@
                             
                             blockerScreen?.isHidden = true
                             
+                            //passcodeViewController.view.bringSubview(toFront: keyboard)
+                            
                             topVC!.present(passcodeViewController, animated: false, completion: nil)
                         }
                         
@@ -1484,11 +1486,8 @@
                     stepViewController.backButtonItem?.isEnabled = true
                     
                 }
-                
-                
             }
         }
-        
         
         //MARK:- StepViewController Delegate
         

@@ -80,9 +80,9 @@ class ConsentPdfViewerStepViewController: ORKStepViewController {
         }
         
         
-        self.webView?.load(pdfData!, mimeType: kPdfMimeType, textEncodingName: kUTF8Encoding, baseURL:URL.init(fileURLWithPath: "") )
-        webView?.delegate = self
-        // webView?.scalesPageToFit = true
+       self.webView?.load(pdfData!, mimeType: "application/pdf", textEncodingName: "UTF-8", baseURL:URL.init(fileURLWithPath: "") )
+         webView?.delegate = self
+        webView?.scalesPageToFit = true
     }
     
     /*

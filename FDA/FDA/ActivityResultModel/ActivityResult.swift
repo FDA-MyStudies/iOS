@@ -63,7 +63,7 @@ class ActivityResult {
                 
                
                 
-                
+               
                 if stepResult.identifier != "CompletionStep" && stepResult.identifier !=  kFetalKickInstructionStepIdentifier && stepResult.identifier != kFetalKickIntroductionStepIdentifier {
                     
                     if activityStepResult?.step != nil && (activityStepResult?.step is ActivityInstructionStep) == false{

@@ -52,9 +52,11 @@ class ActivityFormStep: ActivityStep {
             let step:ORKFormStep?
             
             
+           
+            
             if self.repeatable == true{
                 
-                step  = RepeatableFormStep(identifier: key!, title:"", text: text!)
+                step  = RepeatableFormStep(identifier: key!, title:(self.title == nil ? "" : self.title!), text: text!)
                 
                
                 
@@ -65,7 +67,7 @@ class ActivityFormStep: ActivityStep {
                 step?.formItems = [ORKFormItem]()
             }
             else{
-                step = ORKFormStep(identifier: key!, title: "", text: text!)
+                step = ORKFormStep(identifier: key!, title: (self.title == nil ? "" : self.title!), text: text!)
                 step?.formItems = [ORKFormItem]()
             }
             
@@ -78,7 +80,7 @@ class ActivityFormStep: ActivityStep {
                  step?.isOptional = self.skippable!
             }
             
-           
+            
             
             for dict in self.itemsArray {
                 
@@ -90,7 +92,12 @@ class ActivityFormStep: ActivityStep {
                     let orkQuestionStep:ORKQuestionStep = (questionStep?.getQuestionStep())!
                     
                     let formItem01 = ORKFormItem(identifier: orkQuestionStep.identifier, text: orkQuestionStep.title, answerFormat: orkQuestionStep.answerFormat)
-                    formItem01.placeholder = orkQuestionStep.text
+                    
+                    //formItem01.text = orkQuestionStep.text
+                    
+                   
+                    
+                    formItem01.placeholder = orkQuestionStep.placeholder == nil ? "" :  orkQuestionStep.placeholder
                     formItem01.isOptional = (questionStep?.skippable)!
                     step?.formItems?.append(formItem01)
                     

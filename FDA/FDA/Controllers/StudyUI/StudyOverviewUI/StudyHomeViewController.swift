@@ -461,6 +461,9 @@ class StudyHomeViewController : UIViewController{
         if (UserDefaults.standard.value(forKey: kPasscodeIsPending) as! Bool?)!{
             UserServices().getUserProfile(self as NMWebServiceDelegate)
         }
+        else {
+             UserServices().getStudyStates(self)
+        }
         
         
         
@@ -476,7 +479,7 @@ class StudyHomeViewController : UIViewController{
             if study.status == .Active {
                 if studyStatus.status == .inProgress {
                     //go to study dashboard
-                    
+                    self.removeProgressIndicator()
                     self.pushToStudyDashboard()
                 }
                 else if studyStatus.status == .yetToJoin {
@@ -487,17 +490,20 @@ class StudyHomeViewController : UIViewController{
                     }
                     else {
                         //unhide view
+                        self.removeProgressIndicator()
                         self.unHideSubViews()
                     }
                    
                 }
                 else {
                      //unhide view
+                    self.removeProgressIndicator()
                     self.unHideSubViews()
                 }
             }
             else{
                  //unhide view
+                self.removeProgressIndicator()
                 self.unHideSubViews()
             }
             
@@ -509,10 +515,12 @@ class StudyHomeViewController : UIViewController{
                     WCPServices().getEligibilityConsentMetadata(studyId:(Study.currentStudy?.studyId)!, delegate: self as NMWebServiceDelegate)
                 }
                 else {
+                    self.removeProgressIndicator()
                     self.unHideSubViews()
                 }
             }
             else {
+                self.removeProgressIndicator()
                self.unHideSubViews()
             }
         }
@@ -680,7 +688,7 @@ extension StudyHomeViewController:NMWebServiceDelegate {
                 isGettingJoiningDate = false
             }
             else {
-                self.removeProgressIndicator()
+                
                 self.handleResponseForStudyState()
             }
            
@@ -792,7 +800,7 @@ extension StudyHomeViewController:ORKTaskViewControllerDelegate{
             
             
             if reason == ORKTaskViewControllerFinishReason.discarded{
-                
+                self.unHideSubViews()
                 //_ = self.navigationController?.popViewController(animated: true)
             }
             taskViewController.dismiss(animated: true, completion: nil)

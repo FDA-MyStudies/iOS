@@ -168,6 +168,10 @@ class VerificationViewController : UIViewController{
         if let singupCompletion = segue.destination as? SignUpCompleteViewController {
            
             singupCompletion.shouldCreateMenu = self.shouldCreateMenu
+            if self.viewLoadFrom == .joinStudy{
+                singupCompletion.viewLoadFrom = .joinStudy
+            }
+            
         }
     }
     
@@ -270,9 +274,14 @@ extension VerificationViewController:NMWebServiceDelegate {
             }
             else if viewLoadFrom == .joinStudy {
                 //pop to study home
-                let leftController = slideMenuController()?.leftViewController as! LeftMenuViewController
-                leftController.createLeftmenuItems()
-                self.performSegue(withIdentifier: "unwindStudyHomeSegue", sender: self)
+//                let leftController = slideMenuController()?.leftViewController as! LeftMenuViewController
+//                leftController.createLeftmenuItems()
+//                self.performSegue(withIdentifier: "unwindStudyHomeSegue", sender: self)
+                
+                let appDelegate = UIApplication.shared.delegate as! AppDelegate
+                appDelegate.checkPasscode(viewController: self)
+                
+                self.navigateToSignUpCompletionStep()
             }
             else{
                 let appDelegate = UIApplication.shared.delegate as! AppDelegate

@@ -126,7 +126,9 @@ class LineChartCell: GraphChartTableViewCell {
         let activity = Study.currentStudy?.activities.filter({$0.actvityId == chart.activityId}).last
         charActivity = activity
         
-        if charActivity == nil{
+        if charActivity == nil {
+            self.buttonForward.isEnabled = false
+            self.buttonBackward.isEnabled = false
             return
         }
         

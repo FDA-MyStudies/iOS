@@ -26,6 +26,8 @@ class EligibilityStep: ORKStep {
     }
 }
 
+let kStudyWithStudyId = "Study with StudyId"
+
 class EligibilityStepViewController: ORKStepViewController {
 
     @IBOutlet weak var tokenTextField: UITextField!
@@ -172,15 +174,22 @@ extension EligibilityStepViewController:NMWebServiceDelegate {
         self.removeProgressIndicator()
         
         if error.localizedDescription.localizedCaseInsensitiveContains(tokenTextField.text!){
-             self.showAlert(message: kMessageInvalidTokenOrIfStudyDoesNotExist) //kMessageForInvalidToken
+            
+            self.showAlert(message: kMessageInvalidTokenOrIfStudyDoesNotExist) //kMessageForInvalidToken
+            
         }
         else{
             
             if error.localizedDescription.localizedCaseInsensitiveContains(kStudyWithStudyId) {
+                
                 self.showAlert(message:kMessageInvalidTokenOrIfStudyDoesNotExist) //kMessageForMissingStudyId
+                
             }
+                
             else{
+                
                 self.showAlert(message:error.localizedDescription)
+                
             }
             
         }

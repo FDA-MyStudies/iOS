@@ -69,9 +69,12 @@
             return;
         }
         UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-        button.frame = view.bounds;
+        
+        //button.frame = view.bounds;
+        
         
         [button setTitle:[self formStep].repeatableText forState:UIControlStateNormal];
+        
         
         
         
@@ -85,9 +88,15 @@
         NSMutableAttributedString *attString = [[NSMutableAttributedString alloc] init];
         [attString appendAttributedString:[[NSAttributedString alloc] initWithString:[self formStep].repeatableText    attributes:dict1]];
        
+        
+        CGSize buttonSize = [[self formStep].repeatableText sizeWithAttributes:dict1];
+        
+        
+        CGFloat x = (view.bounds.size.width - (buttonSize.width + 10)) / 2   ;
+        
+        button.frame =  CGRectMake((x > 0 ? x : 0), view.bounds.origin.y, buttonSize.width + 10.0f, buttonSize.height);
+        
         [button setAttributedTitle:attString forState:UIControlStateNormal];
-      
-
        
         [button addTarget:self action:@selector(addMoreAction:) forControlEvents:UIControlEventTouchUpInside];
         [view addSubview:button];

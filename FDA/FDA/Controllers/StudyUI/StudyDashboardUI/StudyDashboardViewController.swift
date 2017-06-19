@@ -60,18 +60,24 @@ class StudyDashboardViewController : UIViewController{
         //unhide navigationbar
         self.navigationController?.setNavigationBarHidden(true, animated: true)
         
-        DBHandler.loadStatisticsForStudy(studyId: (Study.currentStudy?.studyId)!) { (statiticsList) in
+        if StudyUpdates.studyActivitiesUpdated {
+            self.sendRequestToGetDashboardInfo()
+        }
+        else {
             
-            if statiticsList.count != 0 {
-                StudyDashboard.instance.statistics = statiticsList
-                self.tableView?.reloadData()
-            }
-            else {
-                self.sendRequestToGetDashboardInfo()
+            DBHandler.loadStatisticsForStudy(studyId: (Study.currentStudy?.studyId)!) { (statiticsList) in
+                
+                if statiticsList.count != 0 {
+                    StudyDashboard.instance.statistics = statiticsList
+                    self.tableView?.reloadData()
+                }
+                else {
+                    self.sendRequestToGetDashboardInfo()
+                }
             }
         }
         
-        self.getDataKeysForCurrentStudy()
+       
     }
     
     override func viewDidAppear(_ animated: Bool) {

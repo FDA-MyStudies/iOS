@@ -58,8 +58,6 @@ class StudyListViewController: UIViewController {
         let appdelegate = UIApplication.shared.delegate as! AppDelegate
         
         
-        
-            
             Study.currentStudy = nil
             
             let ud = UserDefaults.standard

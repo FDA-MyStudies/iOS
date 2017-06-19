@@ -1061,7 +1061,7 @@ class DBHandler: NSObject {
             
             var dbStatistics:DBStatistics?
             if dbStatisticsArray.count != 0 {
-                dbStatistics = dbStatisticsArray.filter({$0.activityId == stats.activityId!}).last!
+                dbStatistics = dbStatisticsArray.filter({$0.activityId == stats.activityId!}).last
                 
                 if dbStatistics == nil {
                     
@@ -1164,7 +1164,7 @@ class DBHandler: NSObject {
             
             var dbChart:DBCharts?
             if dbChartsArray.count != 0 {
-                dbChart = dbChartsArray.filter({$0.activityId == chart.activityId!}).last!
+                dbChart = dbChartsArray.filter({$0.activityId == chart.activityId!}).last
                 
                 if dbChart == nil {
                     
@@ -1684,6 +1684,52 @@ class DBHandler: NSObject {
         try! realm.write {
             realm.deleteAll()
         }
+    }
+    
+    class func deleteStudyData(studyId:String){
+        
+        let realm = try! Realm()
+        
+        //delete activites and its metadata
+        let dbActivities = realm.objects(DBActivity.self).filter("studyId == %@",studyId)
+        for dbActivity in dbActivities{
+            
+            DBHandler.deleteMetaDataForActivity(activityId: (dbActivity.actvityId)!, studyId: (dbActivity.studyId)!)
+            
+            try! realm.write({
+                realm.delete((dbActivity.activityRuns))
+                realm.delete(dbActivity)
+            })
+        }
+        
+        //delete stats
+        let dbStatisticsArray = realm.objects(DBStatistics.self).filter({$0.studyId == studyId})
+        for stat in dbStatisticsArray{
+            try! realm.write({
+                realm.delete((stat.statisticsData))
+                realm.delete(stat)
+            })
+        }
+        
+        //delete chart
+        let dbChartsArray = realm.objects(DBCharts.self).filter({$0.studyId == studyId})
+        for chart in dbChartsArray{
+            try! realm.write({
+                realm.delete((chart.statisticsData))
+                realm.delete(chart)
+            })
+        }
+
+        
+        
+        //delete resource
+        let dbResourcesArray = realm.objects(DBResources.self).filter({$0.studyId == studyId})
+        try! realm.write({
+           
+          
+            realm.delete(dbResourcesArray)
+        })
+        
     }
     
 }

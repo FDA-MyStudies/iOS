@@ -491,7 +491,7 @@ extension ResourcesViewController : UITableViewDelegate{
                 }
                 
                 
-                UIUtilities.showAlertMessageWithTwoActionsAndHandler(NSLocalizedString("Leave Study", comment: ""), errorMessage: NSLocalizedString(withdrawalMessage!, comment: ""), errorAlertActionTitle: NSLocalizedString("Proceed", comment: ""),
+                UIUtilities.showAlertMessageWithTwoActionsAndHandler(NSLocalizedString("Leave Study?", comment: ""), errorMessage: NSLocalizedString(withdrawalMessage!, comment: ""), errorAlertActionTitle: NSLocalizedString("Proceed", comment: ""),
                                                                      errorAlertActionTitle2: NSLocalizedString("Cancel", comment: ""), viewControllerUsed: self,
                                                                      action1: {
                                                                         
@@ -500,7 +500,7 @@ extension ResourcesViewController : UITableViewDelegate{
                                                                             
                                                                         case .askUser :
                                                                             
-                                                                            UIUtilities.showAlertMessageWithThreeActionsAndHandler(kTitleMessage, errorMessage: "You are choosing to leave the study. Please choose if the data you provided for the study so far, can be retained and used for research purposes OR if it should be deleted.", errorAlertActionTitle: "Retain my data", errorAlertActionTitle2: "Delete my data", errorAlertActionTitle3: "Cancel", viewControllerUsed: self, action1: {
+                                                                            UIUtilities.showAlertMessageWithThreeActionsAndHandler(kImportantNoteMessage, errorMessage: "You are choosing to leave the study. Please choose if the data you provided for the study so far, can be retained and used for research purposes OR if it should be deleted.", errorAlertActionTitle: "Retain my data", errorAlertActionTitle2: "Delete my data", errorAlertActionTitle3: "Cancel", viewControllerUsed: self, action1: {
                                                                                 // Retain Action
                                                                                 
                                                                                 self.withdrawalFromStudy(deleteResponse: false)
@@ -608,6 +608,9 @@ extension ResourcesViewController:NMWebServiceDelegate {
             UserServices().withdrawFromStudy(studyId: (Study.currentStudy?.studyId)!, shouldDeleteData: false, delegate: self)
         }
         else if requestName as String == RegistrationMethods.withdraw.method.methodName{
+            
+            
+            DBHandler.deleteStudyData(studyId:(Study.currentStudy?.studyId)!)
             
             self.removeProgressIndicator()
             self.navigationController?.navigationBar.isHidden = false

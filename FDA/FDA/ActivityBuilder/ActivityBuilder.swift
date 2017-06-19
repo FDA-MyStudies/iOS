@@ -191,9 +191,18 @@ class ActivityBuilder {
                     for step in orkStepArray!
                     {
                         print("stepid \(step.identifier)")
-                        if step.isKind(of: ORKQuestionStep.self){
+                        if step.isKind(of: ORKQuestionStep.self) || (step.isKind(of: ORKInstructionStep.self) && step.isKind(of: ORKCompletionStep.self) == false){
                             
-                            let activityStep:ActivityQuestionStep? = activityStepArray?[(i!)] as?  ActivityQuestionStep
+                            
+                            let activityStep:ActivityStep?
+                            
+                            if step.isKind(of: ORKQuestionStep.self){
+                                 activityStep = activityStepArray?[(i!)] as?  ActivityQuestionStep
+                            }
+                            else{
+                                 activityStep = activityStepArray?[(i!)] as?  ActivityInstructionStep
+                            }
+                            
                             
                             
                             if (activityStep?.destinations?.count)! > 0{
@@ -213,7 +222,16 @@ class ActivityBuilder {
                                 
                                 resultSelector =  ORKResultSelector(stepIdentifier: step.identifier, resultIdentifier: step.identifier)
                                 
-                                let questionStep = step as! ORKQuestionStep
+                                let questionStep:ORKStep?
+                                
+                                if step.isKind(of: ORKQuestionStep.self){
+                                      questionStep = step as! ORKQuestionStep
+                                }
+                                else{
+                                      questionStep = step as! ORKInstructionStep
+                                }
+                                
+                               
                                 
                                 var choicePredicate:[NSPredicate] = [NSPredicate]()
                                 
@@ -224,7 +242,7 @@ class ActivityBuilder {
                                     
                                     if Utilities.isValidValue(someObject: dict[kCondtion] as AnyObject) {
                                         
-                                        switch questionStep.answerFormat {
+                                        switch (questionStep as! ORKQuestionStep).answerFormat {
                                             
                                         case is ORKTextChoiceAnswerFormat, is ORKTextScaleAnswerFormat, is ORKImageChoiceAnswerFormat:
                                             

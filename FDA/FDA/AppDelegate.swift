@@ -386,12 +386,14 @@
             print(deviceTokenString)
             //UserDetails.deviceToken = deviceTokenString
             
+            if  User.currentUser.userType == .FDAUser{
+            
             User.currentUser.settings?.remoteNotifications = true
             UserServices().updateUserProfile(deviceToken: deviceTokenString , delegate: self)
             
             
             print("APNs token retrieved: \(deviceToken)")
-            
+            }
             
         }
         func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
@@ -578,7 +580,7 @@
         
         func sendRequestToSignOut() {
             
-            self.addAndRemoveProgress(add: true)
+          // self.window?.addProgressIndicatorOnWindowFromTop()
             
             UserServices().logoutUser(self as NMWebServiceDelegate)
             
@@ -889,6 +891,7 @@
                         let passcodeStep = ORKPasscodeStep(identifier: kPasscodeStepIdentifier)
                         passcodeStep.passcodeType = .type4Digit
                         
+                        passcodeStep.text = "Set up a passcode for the app"
                         let task = ORKOrderedTask(identifier: kPasscodeTaskIdentifier, steps: [passcodeStep])
                         
                         
@@ -1702,6 +1705,9 @@
             UIUtilities.showAlertMessageWithTwoActionsAndHandler(NSLocalizedString(kMessagePasscode, comment: ""), errorMessage: NSLocalizedString(kMessagePasscodeSignOut, comment: ""), errorAlertActionTitle: NSLocalizedString(kTitleOK, comment: ""),
                                                                  errorAlertActionTitle2:NSLocalizedString(kTitleCancel, comment: ""), viewControllerUsed: topVC!,
                                                                  action1: {
+                                                                    
+                                                                     self.window?.addProgressIndicatorOnWindowFromTop()
+                                                                    
                                                                     viewController.dismiss(animated: true, completion: {
                                                                         
                                                                         var topVC = UIApplication.shared.keyWindow?.rootViewController
@@ -1802,6 +1808,35 @@
             view?.alpha = 0
             UIView.animate(withDuration: 0.3) {
                 view?.alpha = 1
+            }
+        }
+        func addProgressIndicatorOnWindowFromTop(){
+            
+            var view = self.viewWithTag(5000)
+            if view == nil {
+            
+            let view = UINib(nibName: "NewProgressView", bundle: nil).instantiate(withOwner: nil, options: nil)[0] as? UIView
+            
+            
+            let url = Bundle.main.url(forResource: "fda_preload", withExtension: "gif")!
+            let data = try! Data(contentsOf: url)
+            let webView =  view?.subviews.first as! UIWebView
+            
+            
+            //webView.load(data, mimeType: "image/gif", textEncodingName: "UTF-8", baseURL: URL())
+            webView.loadRequest(URLRequest.init(url: url))
+            webView.scalesPageToFit = true
+            webView.contentMode = UIViewContentMode.scaleAspectFit
+            
+            var frame = UIScreen.main.bounds
+            
+            view?.frame = frame
+            view?.tag = 50000
+            self.addSubview(view!)
+            view?.alpha = 0
+            UIView.animate(withDuration: 0.3) {
+                view?.alpha = 1
+            }
             }
         }
         

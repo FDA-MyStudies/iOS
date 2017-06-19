@@ -89,6 +89,9 @@ class ActivitiesViewController : UIViewController{
             
             self.sendRequestToGetActivityStates()
             
+            //also get dashboard data
+            self.sendRequestToGetDashboardInfo()
+            
         }
         else {
             

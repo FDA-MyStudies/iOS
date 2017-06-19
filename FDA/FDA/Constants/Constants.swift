@@ -29,6 +29,7 @@ let CouldNotConnectToServerCode = -1001
 //Display Constants
 let kTitleError = "Error"
 let kTitleMessage = "Message"
+let kImportantNoteMessage = "Important Note"
 let kTitleOk = "Ok"
 let kTitleCancel = "Cancel"
 let kTitleDeleteAccount = "Delete Account"
@@ -158,6 +159,12 @@ let kWeek = "WEEK"
 //MARK:- Eligibility constants
 
 let kMessageForInvalidToken = "Please enter valid enrollment token"
+
+let kMessageValidToken = "Please enter valid token"
+let kMessageForMissingStudyId = "Unable to Enroll, Please try again later."
+
+let kMessageInvalidTokenOrIfStudyDoesNotExist = "Sorry, this token is invalid. Please enter a valid token to continue."
+
 
 //MARK:- StudyHomeMessages
 let kMessageForStudyUpcomingState = "This study is an upcoming one and isn't yet open for enrolling participants. Please check back later."

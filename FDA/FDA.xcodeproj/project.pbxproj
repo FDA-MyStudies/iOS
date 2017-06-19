@@ -1358,7 +1358,7 @@
 						CreatedOnToolsVersion = 8.2.1;
 						DevelopmentTeam = FWLLYUH7XR;
 						LastSwiftMigration = 0820;
-						ProvisioningStyle = Manual;
+						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -1986,15 +1986,15 @@
 				CODE_SIGN_ENTITLEMENTS = FDA/FDA.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = FWLLYUH7XR;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_BITCODE = YES;
 				INFOPLIST_FILE = FDA/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.hphci.fda.mobilestudies;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "c6b175a2-3cbf-4e94-95e8-c756d66a4161";
-				PROVISIONING_PROFILE_SPECIFIER = HPHC_Development;
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "FDA/Controllers/LoginRegisterUI/FDA-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
@@ -2011,15 +2011,15 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = FDA/FDA.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = FWLLYUH7XR;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_BITCODE = YES;
 				INFOPLIST_FILE = FDA/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.hphci.fda.mobilestudies;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "c6b175a2-3cbf-4e94-95e8-c756d66a4161";
-				PROVISIONING_PROFILE_SPECIFIER = HPHC_Development;
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "FDA/Controllers/LoginRegisterUI/FDA-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 			};

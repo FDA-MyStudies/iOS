@@ -18,7 +18,8 @@ class LabKeyServices: NSObject {
     
     let networkManager = NetworkManager.sharedInstance()
     var delegate:NMWebServiceDelegate! = nil
-    
+    var activityId:String!  //Temp: replace with request parameters
+    var keys:String!  //Temp: replace with request parameters
     //MARK:Requests
     func enrollForStudy(studyId:String, token:String , delegate:NMWebServiceDelegate){
         self.delegate = delegate
@@ -125,8 +126,14 @@ class LabKeyServices: NSObject {
     }
     
     func getParticipantResponse(activityId:String,keys:String,participantId:String,delegate:NMWebServiceDelegate){
-        self.delegate = delegate
         
+        
+        
+        
+        
+        self.delegate = delegate
+        self.activityId = activityId
+        self.keys = keys
         let method = ResponseMethods.executeSQL.method
         let query = "SELECT " + keys + ",Created" + " FROM " + activityId
         let params = [
@@ -161,44 +168,59 @@ class LabKeyServices: NSObject {
     func handleGetParticipantResponse(response:Dictionary<String, Any>){
         
         
+//        var dashBoardResponse:Array<DashboardResponse> = []
+//        let metadata =   response["metaData"] as? Dictionary<String,Any>
+//        if let feilds = metadata?["fields"] as? Array<Dictionary<String,Any>>{
+//            
+//           
+//            print("feilds \(feilds)")
+//            for feildDetail in feilds {
+//                
+//                if let fieldKeys = feildDetail["fieldKey"] as? Array<String> {
+//                    
+//                    let fieldKeyValue = fieldKeys.first
+//                    
+//                    let responseData = DashboardResponse()
+//                    //check for key which don't need to be parsed
+//                    if (fieldKeyValue == "container"
+//                        || fieldKeyValue == "Created"
+//                        || fieldKeyValue == "CreatedBy"
+//                        || fieldKeyValue == "ModifiedBy"
+//                        || fieldKeyValue == "lastIndexed"
+//                        || fieldKeyValue == "Modified"
+//                        || fieldKeyValue == "Key"
+//                        || fieldKeyValue == "ParticipantId" ){
+//                        
+//                       //do not do anything
+//                    }
+//                    else {
+//                        responseData.activityId = self.activityId
+//                        responseData.key = fieldKeyValue
+//                        responseData.type = feildDetail["type"] as! String?
+//                        responseData.isPHI = feildDetail["phi"] as! String?
+//                        
+//                        dashBoardResponse.append(responseData)
+//                    }
+//                }
+//                
+//                
+//            }
+//            
+//        }
+        
         var dashBoardResponse:Array<DashboardResponse> = []
-        let metadata =   response["metaData"] as? Dictionary<String,Any>
-        if let feilds = metadata?["fields"] as? Array<Dictionary<String,Any>>{
+        let keysArray = self.keys.components(separatedBy: ",")
+        for key in keysArray{
             
-           
-            print("feilds \(feilds)")
-            for feildDetail in feilds {
-                
-                if let fieldKeys = feildDetail["fieldKey"] as? Array<String> {
-                    
-                    let fieldKeyValue = fieldKeys.first
-                    
-                    let responseData = DashboardResponse()
-                    //check for key which don't need to be parsed
-                    if (fieldKeyValue == "container"
-                        || fieldKeyValue == "Created"
-                        || fieldKeyValue == "CreatedBy"
-                        || fieldKeyValue == "ModifiedBy"
-                        || fieldKeyValue == "lastIndexed"
-                        || fieldKeyValue == "Modified"
-                        || fieldKeyValue == "Key"
-                        || fieldKeyValue == "ParticipantId" ){
-                        
-                       //do not do anything
-                    }
-                    else {
-                        responseData.key = fieldKeyValue
-                        responseData.type = feildDetail["type"] as! String?
-                        responseData.isPHI = feildDetail["phi"] as! String?
-                        
-                        dashBoardResponse.append(responseData)
-                    }
-                }
-                
-                
-            }
+            let responseData = DashboardResponse()
+            responseData.activityId = activityId
+            responseData.key = key
+            responseData.type = "int"
+            responseData.isPHI = "true"
             
+            dashBoardResponse.append(responseData)
         }
+
         
         if let rows = response["rows"] as? Array<Dictionary<String,Any>>{
             print("rows \(rows)")
@@ -212,14 +234,17 @@ class LabKeyServices: NSObject {
                     for responseData in dashBoardResponse {
                     
                         if let keyValue = data[responseData.key!] as? Dictionary<String,Any> {
-                            print("value \(keyValue["value"])")
-                            if (responseData.type! == "int" || responseData.type! == "float" || responseData.type! == "double") {
-                                let value = keyValue["value"] as! Float
-                                let valueDetail = ["value":value,
-                                                   "date":date] as Dictionary<String,Any>
-                                
-                                responseData.values.append(valueDetail)
-                            }
+                            
+                            let value = keyValue["value"] as! Float
+                            let valueDetail = ["value":value,
+                                               "date":date] as Dictionary<String,Any>
+                            
+                            responseData.values.append(valueDetail)
+                            
+//                            print("value \(keyValue["value"])")
+//                            if (responseData.type! == "int" || responseData.type! == "float" || responseData.type! == "double") {
+//                               
+//                            }
 
                         }
                     }

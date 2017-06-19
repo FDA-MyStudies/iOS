@@ -10,10 +10,10 @@ import UIKit
 import ResearchKit
 import IQKeyboardManagerSwift
 
-let kMessageValidToken = "Please enter valid token"
-let kMessageForMissingStudyId = "Unable to Enroll, Please try again later."
-
-let kMessageInvalidTokenOrIfStudyDoesNotExist = "Sorry, this token is invalid. Please enter a valid token to continue."
+//let kMessageValidToken = "Please enter valid token"
+//let kMessageForMissingStudyId = "Unable to Enroll, Please try again later."
+//
+//let kMessageInvalidTokenOrIfStudyDoesNotExist = "Sorry, this token is invalid. Please enter a valid token to continue."
 
 let kStudyWithStudyId = "Study with StudyId"
 let kTitleOK = "OK"

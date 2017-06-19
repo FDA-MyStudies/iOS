@@ -980,7 +980,7 @@ extension ActivitiesViewController:ORKTaskViewControllerDelegate{
                                 let key = dict?[kActivityStepKey] as! String
                                 
                                 
-                                DBHandler.saveStatisticsDataFor(activityId: (activity?.actvityId)!, key: key, data:value)
+                                DBHandler.saveStatisticsDataFor(activityId: (activity?.actvityId)!, key: key, data:value,date:Date())
                                 
                                 
                                 
@@ -1079,7 +1079,7 @@ extension ActivitiesViewController:ORKTaskViewControllerDelegate{
                     
                     if let value1 = activityStepResult?.value as? NSNumber {
                         let value = value1.floatValue
-                        DBHandler.saveStatisticsDataFor(activityId: (activity?.actvityId)!, key: (activityStepResult?.key)!, data:value)
+                        DBHandler.saveStatisticsDataFor(activityId: (activity?.actvityId)!, key: (activityStepResult?.key)!, data:value,date:Date())
                     }
                     
                 }

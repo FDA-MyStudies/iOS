@@ -1260,7 +1260,7 @@ class DBHandler: NSObject {
     }
     
     
-    class func saveStatisticsDataFor(activityId:String,key:String,data:Float){
+    class func saveStatisticsDataFor(activityId:String,key:String,data:Float,date:Date){
         
         let realm = try! Realm()
         let dbStatisticsList = realm.objects(DBStatistics.self).filter("activityId == %@ && dataSourceKey == %@",activityId,key)
@@ -1272,7 +1272,7 @@ class DBHandler: NSObject {
         
         //save data
         let statData = DBStatisticsData()
-        statData.startDate = Date()
+        statData.startDate = date
         statData.data = data
         
         try! realm.write({

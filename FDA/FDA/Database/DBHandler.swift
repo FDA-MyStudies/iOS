@@ -1632,4 +1632,50 @@ class DBHandler: NSObject {
         }
     }
     
+    class func deleteStudyData(studyId:String){
+        
+        let realm = try! Realm()
+        
+        //delete activites and its metadata
+        let dbActivities = realm.objects(DBActivity.self).filter("studyId == %@",studyId)
+        for dbActivity in dbActivities{
+            
+            DBHandler.deleteMetaDataForActivity(activityId: (dbActivity.actvityId)!, studyId: (dbActivity.studyId)!)
+            
+            try! realm.write({
+                realm.delete((dbActivity.activityRuns))
+                realm.delete(dbActivity)
+            })
+        }
+        
+        //delete stats
+        let dbStatisticsArray = realm.objects(DBStatistics.self).filter({$0.studyId == studyId})
+        for stat in dbStatisticsArray{
+            try! realm.write({
+                realm.delete((stat.statisticsData))
+                realm.delete(stat)
+            })
+        }
+        
+        //delete chart
+        let dbChartsArray = realm.objects(DBCharts.self).filter({$0.studyId == studyId})
+        for chart in dbChartsArray{
+            try! realm.write({
+                realm.delete((chart.statisticsData))
+                realm.delete(chart)
+            })
+        }
+
+        
+        
+        //delete resource
+        let dbResourcesArray = realm.objects(DBResources.self).filter({$0.studyId == studyId})
+        try! realm.write({
+           
+          
+            realm.delete(dbResourcesArray)
+        })
+        
+    }
+    
 }

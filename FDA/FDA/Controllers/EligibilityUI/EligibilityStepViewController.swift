@@ -12,6 +12,9 @@ import IQKeyboardManagerSwift
 
 let kMessageValidToken = "Please enter valid token"
 let kMessageForMissingStudyId = "Unable to Enroll, Please try again later."
+
+let kMessageInvalidTokenOrIfStudyDoesNotExist = "Sorry, this token is invalid. Please enter a valid token to continue."
+
 let kStudyWithStudyId = "Study with StudyId"
 let kTitleOK = "OK"
 
@@ -169,12 +172,12 @@ extension EligibilityStepViewController:NMWebServiceDelegate {
         self.removeProgressIndicator()
         
         if error.localizedDescription.localizedCaseInsensitiveContains(tokenTextField.text!){
-             self.showAlert(message: kMessageForInvalidToken)
+             self.showAlert(message: kMessageInvalidTokenOrIfStudyDoesNotExist) //kMessageForInvalidToken
         }
         else{
             
             if error.localizedDescription.localizedCaseInsensitiveContains(kStudyWithStudyId) {
-                self.showAlert(message:kMessageForMissingStudyId)
+                self.showAlert(message:kMessageInvalidTokenOrIfStudyDoesNotExist) //kMessageForMissingStudyId
             }
             else{
                 self.showAlert(message:error.localizedDescription)

@@ -1061,7 +1061,7 @@ class DBHandler: NSObject {
             
             var dbStatistics:DBStatistics?
             if dbStatisticsArray.count != 0 {
-                dbStatistics = dbStatisticsArray.filter({$0.activityId == stats.activityId!}).last!
+                dbStatistics = dbStatisticsArray.filter({$0.activityId == stats.activityId!}).last
                 
                 if dbStatistics == nil {
                     
@@ -1164,7 +1164,7 @@ class DBHandler: NSObject {
             
             var dbChart:DBCharts?
             if dbChartsArray.count != 0 {
-                dbChart = dbChartsArray.filter({$0.activityId == chart.activityId!}).last!
+                dbChart = dbChartsArray.filter({$0.activityId == chart.activityId!}).last
                 
                 if dbChart == nil {
                     

@@ -609,6 +609,9 @@ extension ResourcesViewController:NMWebServiceDelegate {
         }
         else if requestName as String == RegistrationMethods.withdraw.method.methodName{
             
+            
+            DBHandler.deleteStudyData(studyId:(Study.currentStudy?.studyId)!)
+            
             self.removeProgressIndicator()
             self.navigationController?.navigationBar.isHidden = false
             self.performSegue(withIdentifier: "unwindeToStudyListResourcesIdentifier", sender: self)

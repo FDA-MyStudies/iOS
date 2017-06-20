@@ -120,7 +120,7 @@ class ActivitiesTableViewCell: UITableViewCell {
         
         if availablityStatus == .past{
             
-            if activity.incompletedRuns != 0 {
+            if activity.incompletedRuns != 0 || activity.totalRuns == 0 {
                 self.labelStatus?.backgroundColor =  UIColor.red
                 self.labelStatus?.text = UserActivityStatus.ActivityStatus.abandoned.description
             }

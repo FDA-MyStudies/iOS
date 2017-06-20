@@ -318,8 +318,6 @@ class LeftMenuViewController : UIViewController, LeftMenuProtocol {
      */
     func signout(){
       
-        
-        
         ORKPasscodeViewController.removePasscodeFromKeychain()
         
         let ud = UserDefaults.standard

@@ -395,32 +395,7 @@ class Utilities: NSObject {
         return finalDate
         
     }
-    class func getDateFromStringWithOutTimezone(dateString:String)->Date?{
-        /* Method to get DateFromString for default dateFormatter
-         @dateString:a date String of format "yyyy-MM-dd'T'HH:mm:ssZ"
-         returns date for the specified dateString in same format
-         */
-        
-        let dateWithoutTimeZoneArray = dateString.components(separatedBy: ".")
-        let dateWithourTimeZone = dateWithoutTimeZoneArray[0] as String
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
-        // dateFormatter.timeZone = NSTimeZone(name: "UTC") as TimeZone!
-        
-        //"2016-08-01T08:00:00+0900"
-        
-        guard let date = dateFormatter.date(from: dateWithourTimeZone) else {
-            assert(false, "no date from string")
-            return nil
-        }
-        
-        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-        // dateFormatter.timeZone = NSTimeZone.local // NSTimeZone(name: "UTC") as TimeZone!
-        let finalString = dateFormatter.string(from: date)
-        let finalDate = dateFormatter.date(from: finalString)
-        return finalDate
-        
-    }
+    
     class func getStringFromDate(date:Date)->String?{
         /* Method to get StringFromDate for default dateFormatter
          @date:a date  of format "yyyy-MM-dd'T'HH:mm:ssZ"

@@ -105,7 +105,7 @@ class Schedule{
         self.completionHandler = handler
         self.frequency = activity.frequencyType
         //self.startTime = studyStatus?.joiningDate //activity.startDate
-        self.endTime = activity.endDate?.utcDate()
+        self.endTime = activity.endDate
         self.activity = activity
         
         self.setActivityRun()
@@ -266,7 +266,7 @@ class Schedule{
             numberOfDays = 1;
         }
         
-        for day in 0...numberOfDays {
+        for day in 1...numberOfDays {
             
             let startDate = startDateShortStyle
             
@@ -530,10 +530,10 @@ class Schedule{
         
         
         // Replace the hour (time) of both dates with 00:00
-        let date1 = startDate.startOfDay //calendar.startOfDay(for: startDate)
-        let date2 = endDate.endOfDay//calendar.startOfDay(for: endDate)
+        let date1 = calendar.startOfDay(for: startDate)
+        let date2 = calendar.startOfDay(for: endDate)
         
-        let components = calendar.dateComponents([Calendar.Component.day], from: date1, to: date2!)
+        let components = calendar.dateComponents([Calendar.Component.day], from: date1, to: date2)
         
         print(components.day! as Int)
         

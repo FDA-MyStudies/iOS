@@ -386,12 +386,14 @@
             print(deviceTokenString)
             //UserDetails.deviceToken = deviceTokenString
             
+            if  User.currentUser.userType == .FDAUser{
+            
             User.currentUser.settings?.remoteNotifications = true
             UserServices().updateUserProfile(deviceToken: deviceTokenString , delegate: self)
             
             
             print("APNs token retrieved: \(deviceToken)")
-            
+            }
             
         }
         func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {

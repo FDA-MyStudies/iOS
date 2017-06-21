@@ -8,6 +8,7 @@
 
 import UIKit
 import IQKeyboardManagerSwift
+import LocalAuthentication
 
 let kProfileTableViewCellIdentifier = "ProfileTableViewCell"
 
@@ -25,6 +26,14 @@ let signupCellLastIndex = 2
 let kProfileTitleText = "PROFILE"
 
 let kSignOutText = "Sign Out"
+let kLabelName = "LabelName"
+
+let kUseTouchIdOrPasscode = "Use Touch ID/Passcode to Access App"
+
+let kUsePasscodeToAccessApp = "Use Passcode to access app"
+
+let ktouchid = "touchIdEnabled"
+let korkPasscode = "ORKPasscode"
 
 
 // Cell Toggle Switch Types
@@ -43,6 +52,8 @@ class ProfileViewController: UIViewController {
     var user = User.currentUser
     var isPasscodeViewPresented:Bool = false
     
+    var passcodeStateIsEditing:Bool = false
+    
     @IBOutlet var tableViewProfile : UITableView?
     @IBOutlet var tableViewFooterViewProfile : UIView?
     @IBOutlet var buttonLeadTime:UIButton?
@@ -59,6 +70,7 @@ class ProfileViewController: UIViewController {
         
         //Load plist info
         let plistPath = Bundle.main.path(forResource: "Profile", ofType: ".plist", inDirectory:nil)
+        
         tableViewRowDetails = NSMutableArray.init(contentsOfFile: plistPath!)
         
         //Resigning First Responder on outside tap
@@ -103,8 +115,9 @@ class ProfileViewController: UIViewController {
     @IBAction func buttonActionChangePassCode(_ sender:UIButton){
         
         let passcodeViewController = ORKPasscodeViewController.passcodeEditingViewController(withText: "", delegate: self, passcodeType: .type4Digit)
+        passcodeStateIsEditing = true
         
-        self.navigationController?.present(passcodeViewController, animated: false, completion: nil)
+        self.navigationController?.present(passcodeViewController, animated: false, completion: {})
     }
     
     
@@ -361,6 +374,42 @@ class ProfileViewController: UIViewController {
         self.isCellEditable =  false
         
         self.buttonLeadTime?.isUserInteractionEnabled =  false
+        
+        
+        var touchIdEnabled:Bool? = true
+        
+        
+        // 1. Create a authentication context
+        let authenticationContext = LAContext()
+        var error:NSError?
+        
+        // 2. Check if the device has a fingerprint sensor
+        // If not, show the user an alert view and bail out!
+        guard authenticationContext.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error) else {
+            touchIdEnabled = false
+            return
+        }
+        
+        var passcodeDict:Dictionary<String,Any> =  tableViewRowDetails?[3] as! Dictionary<String, Any>
+        
+        
+        let keychainPasscodeDict:Dictionary<String,Any>? = ORKKeychainWrapper.object(forKey: korkPasscode, error: &error)  == nil ? nil : (ORKKeychainWrapper.object(forKey: korkPasscode, error: &error)  as?  Dictionary<String,Any>)
+        var istouchIdEnabled:Bool =  false
+        if keychainPasscodeDict != nil &&  (keychainPasscodeDict?.count)! > 0{
+            istouchIdEnabled = (keychainPasscodeDict?[ktouchid])! as! Bool
+        }
+        
+        print("touch;;;\(istouchIdEnabled)")
+        
+        if touchIdEnabled! && istouchIdEnabled {
+            passcodeDict[kLabelName] =  kUseTouchIdOrPasscode
+            tableViewRowDetails?.replaceObject(at: 3, with: passcodeDict)
+        }
+        else{
+            passcodeDict[kLabelName] =  kUsePasscodeToAccessApp
+            tableViewRowDetails?.replaceObject(at: 3, with: passcodeDict)
+        }
+        
     }
     
     
@@ -488,6 +537,11 @@ class ProfileViewController: UIViewController {
     func showAlertMessages(textMessage : String){
         UIUtilities.showAlertMessage("", errorMessage: NSLocalizedString(textMessage, comment: ""), errorAlertActionTitle: NSLocalizedString("OK", comment: ""), viewControllerUsed: self)
     }
+    
+    
+    
+    
+    
     
     
     /**
@@ -818,11 +872,29 @@ extension ProfileViewController: ORKPasscodeDelegate {
         self.isPasscodeViewPresented = true
        
         
-        viewController.dismiss(animated: true, completion: nil)
+        self.dismiss(animated: true, completion: {
+            self.setInitialDate()
+        })
     }
     
     func passcodeViewControllerDidFailAuthentication(_ viewController: UIViewController) {
+        
     }
+    
+    
+    
+    
+    
+    func passcodeViewControllerDidCancel(_ viewController: UIViewController){
+        
+        if passcodeStateIsEditing{
+            viewController.dismiss(animated: true, completion: {
+                self.passcodeStateIsEditing = false
+            })
+        }
+        
+    }
+    
 }
 
 
@@ -878,7 +950,7 @@ extension ProfileViewController:ORKTaskViewControllerDelegate{
         }
         
       
-        taskViewController.dismiss(animated: true, completion: {
+        self.dismiss(animated: true, completion: {
             
         })
     }

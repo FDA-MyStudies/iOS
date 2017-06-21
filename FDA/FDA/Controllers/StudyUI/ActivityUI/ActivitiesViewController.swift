@@ -12,6 +12,7 @@ import ResearchKit
 
 let kActivities = "activities"
 
+let kActivityUnwindToStudyListIdentifier = "unwindeToStudyListIdentier"
 
 enum ActivityAvailabilityStatus:Int{
     case current
@@ -68,6 +69,8 @@ class ActivitiesViewController : UIViewController{
         
         self.navigationController?.interactivePopGestureRecognizer?.isEnabled = false
         UIApplication.shared.statusBarStyle = .default
+        
+        self.addHomeButton()
         
         if !taskControllerPresented {
             taskControllerPresented = false
@@ -204,7 +207,7 @@ class ActivitiesViewController : UIViewController{
      */
     @IBAction func homeButtonAction(_ sender: AnyObject){
         //_ = self.navigationController?.popToRootViewController(animated: true)
-        self.performSegue(withIdentifier: "unwindeToStudyListIdentier", sender: self)
+        self.performSegue(withIdentifier: kActivityUnwindToStudyListIdentifier, sender: self)
     }
     
     @IBAction func filterButtonAction(_ sender: AnyObject){

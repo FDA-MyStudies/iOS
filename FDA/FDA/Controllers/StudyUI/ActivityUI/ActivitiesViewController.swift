@@ -333,10 +333,17 @@ class ActivitiesViewController : UIViewController{
      */
     func getActivityAvailabilityStatus(activity:Activity) -> ActivityAvailabilityStatus {
         
-        let todayDate = Date()
+        var todayDate = Date().utcDate()
         
+        let difference = UserDefaults.standard.value(forKey: "offset") as? Int
+        if difference != nil {
+            todayDate = todayDate.addingTimeInterval(TimeInterval(difference!))
+        }
+       
         
         if activity.startDate != nil && activity.endDate != nil {
+            
+
             
             let startDateResult = (activity.startDate?.compare(todayDate))! as ComparisonResult
             let endDateResult = (activity.endDate?.compare(todayDate))! as ComparisonResult

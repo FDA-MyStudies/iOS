@@ -44,6 +44,7 @@ class ActivityResult {
             
             var i = 0
             
+            
             for stepResult in taskResult.results!{
                 let activityStepResult:ActivityStepResult? = ActivityStepResult()
                 
@@ -61,9 +62,6 @@ class ActivityResult {
                 
                 activityStepResult?.initWithORKStepResult(stepResult: stepResult as! ORKStepResult , activityType:(self.activity?.type)!)
                 
-               
-                
-               
                 if stepResult.identifier != "CompletionStep" && stepResult.identifier !=  kFetalKickInstructionStepIdentifier && stepResult.identifier != kFetalKickIntroductionStepIdentifier {
                     
                     if activityStepResult?.step != nil && (activityStepResult?.step is ActivityInstructionStep) == false{
@@ -79,8 +77,6 @@ class ActivityResult {
                     }
                     
                 }
-                
-               
                 
                 print("###: \n  \(activityStepResult?.getActivityStepResultDict())")
                 
@@ -170,9 +166,14 @@ class ActivityResult {
         var activityDict:Dictionary<String,Any>? = Dictionary<String,Any>()
         
         if  self.type != nil{
-            //activityDict?[kActivityType] = self.type?.rawValue
             
-            activityDict?[kActivityActiveKeyResultType] = (self.type?.rawValue == ActivityType.activeTask.rawValue ? "grouped" : self.type?.rawValue)
+            if self.type != .activeTask{
+               // activityDict?[kActivityType] = self.type?.rawValue
+                
+                activityDict?[kActivityActiveKeyResultType] = self.type?.rawValue
+            }
+            
+            //activityDict?[kActivityActiveKeyResultType] = (self.type?.rawValue == ActivityType.activeTask.rawValue ? "grouped" : self.type?.rawValue)
         }
         
         if self.startTime != nil && (Utilities.getStringFromDate(date: self.startTime!) != nil){
@@ -194,7 +195,6 @@ class ActivityResult {
                 activityResultArray.append( (activityStepResult.getActivityStepResultDict())! as Dictionary<String,Any>)
                 
             }
-            
             
             activityDict?[kActivityResults] = activityResultArray
         }

@@ -472,6 +472,7 @@ class ActivityBuilder {
                  questionStep?.initWithDict(stepDict: stepDict)
                  
                  orkStepArray?.append((questionStep?.getQuestionStep())!)
+                    
                  case   .active , .taskSpatialSpanMemory , .taskTowerOfHanoi :
                  
                  var localTask: ORKOrderedTask?
@@ -480,6 +481,7 @@ class ActivityBuilder {
                  activeStep?.initWithDict(stepDict: stepDict)
                  localTask = activeStep?.getActiveTask() as! ORKOrderedTask?
                  
+                 activityStepArray?.append(activeStep!)
                  
                  for step  in (localTask?.steps)!{
                  orkStepArray?.append(step)

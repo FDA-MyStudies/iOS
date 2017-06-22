@@ -103,6 +103,11 @@ class ActivityStepResult{
         if (stepResult.results?.count)! > 1 || (self.step != nil && self.step is ActivityFormStep) {
             self.type = .form
         }
+        else{
+            if activityType == .activeTask{
+                self.type =  .active
+            }
+        }
         
         self.setResultValue(stepResult:stepResult ,activityType:activityType )
         

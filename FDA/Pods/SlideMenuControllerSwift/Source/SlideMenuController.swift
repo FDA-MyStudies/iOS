@@ -1036,7 +1036,7 @@ extension UIViewController {
     
     public func addLeftBarButtonWithImage(_ buttonImage: UIImage) {
         
-        let customView = UIView.init(frame: CGRect.init(x: -10, y: 0, width: buttonImage.size.width + 10, height: buttonImage.size.height + 10))
+        let customView = UIView.init(frame: CGRect.init(x: -15, y: 0, width: buttonImage.size.width + 30, height: buttonImage.size.height + 30))
         
         let backbutton:UIButton = UIButton.init(frame: customView.frame)
         

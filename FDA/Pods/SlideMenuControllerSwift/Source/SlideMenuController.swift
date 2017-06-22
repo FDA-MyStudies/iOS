@@ -1033,10 +1033,32 @@ extension UIViewController {
         return nil
     }
     
+    
     public func addLeftBarButtonWithImage(_ buttonImage: UIImage) {
+        
+        let customView = UIView.init(frame: CGRect.init(x: -15, y: 0, width: buttonImage.size.width + 30, height: buttonImage.size.height + 30))
+        
+        let backbutton:UIButton = UIButton.init(frame: customView.frame)
+        
+        backbutton.setImage(buttonImage, for: .normal)
+        
+        backbutton.addTarget(self, action: #selector(self.toggleLeft), for: .touchUpInside)
+        
+        customView.addSubview(backbutton)
+        
+        // UIBarButtonItem(image:#imageLiteral(resourceName: "backIcon"), style: UIBarButtonItemStyle.plain, target: self, action: #selector(self.popController))
+        navigationItem.leftBarButtonItem = UIBarButtonItem.init(customView: customView)
+    }
+    
+    
+    
+    /*
+    public func addLeftBarButtonWithImage(_ buttonImage: UIImage) {
+        
         let leftButton: UIBarButtonItem = UIBarButtonItem(image: buttonImage, style: UIBarButtonItemStyle.plain, target: self, action: #selector(self.toggleLeft))
         navigationItem.leftBarButtonItem = leftButton
     }
+ */
     
     public func addRightBarButtonWithImage(_ buttonImage: UIImage) {
         let rightButton: UIBarButtonItem = UIBarButtonItem(image: buttonImage, style: UIBarButtonItemStyle.plain, target: self, action: #selector(self.toggleRight))

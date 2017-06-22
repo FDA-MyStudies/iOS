@@ -26,7 +26,7 @@ class StudyListViewController: UIViewController {
         //self.title = NSLocalizedString("FDA LISTENS!", comment: "")
         
         let titleLabel = UILabel()
-        titleLabel.text = NSLocalizedString("FDA MY STUDIES!", comment: "")
+        titleLabel.text = NSLocalizedString("FDA My Studies", comment: "")
         titleLabel.font = UIFont(name: "HelveticaNeue-Medium", size: 18)
         titleLabel.textAlignment = .left
         titleLabel.textColor = Utilities.getUIColorFromHex(0x007cba)
@@ -126,12 +126,12 @@ class StudyListViewController: UIViewController {
         
         button.setImage(#imageLiteral(resourceName: "notification_active"), for: UIControlState.normal)
         button.addTarget(self, action:#selector(self.buttonActionNotification(_:)), for: UIControlEvents.touchUpInside)
-        button.frame = CGRect.init(x: 0, y: 0, width: 30, height: 30)
+        button.frame = CGRect.init(x: 15, y: 0, width: 30, height: 30)
         view.addSubview(button)
         
         button.isExclusiveTouch = true
         
-        let label = UILabel.init(frame:CGRect.init(x: 15, y: 0, width: 10, height: 10) )
+        let label = UILabel.init(frame:CGRect.init(x: 30, y: 0, width: 10, height: 10) )
         
         label.font = UIFont.systemFont(ofSize: 10)
         label.textColor = UIColor.white
@@ -283,6 +283,9 @@ class StudyListViewController: UIViewController {
         
         let passcodeStep = ORKPasscodeStep(identifier: kPasscodeStepIdentifier)
         passcodeStep.passcodeType = .type4Digit
+        
+        passcodeStep.text = kPasscodeSetUpText
+        
         let task = ORKOrderedTask(identifier: kPasscodeTaskIdentifier, steps: [passcodeStep])
         let taskViewController = ORKTaskViewController.init(task: task, taskRun: nil)
         taskViewController.delegate = self
@@ -816,7 +819,8 @@ extension StudyListViewController:ORKTaskViewControllerDelegate{
             taskResult = taskViewController.restorationData
             
         }
-        taskViewController.dismiss(animated: true, completion:nil)
+        
+        self.dismiss(animated: true, completion: nil)
     }
     
     func taskViewController(_ taskViewController: ORKTaskViewController, stepViewControllerWillAppear stepViewController: ORKStepViewController) {

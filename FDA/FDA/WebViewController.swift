@@ -112,7 +112,9 @@ class WebViewController : UIViewController{
         
         if self.pdfData != nil{
            
-            mailComposerVC.addAttachmentData(self.pdfData!, mimeType: "application/pdf", fileName:"UnsignedConset")
+            let consentName:String! = (Study.currentStudy?.name!)! + "_SignedConsent"
+            
+            mailComposerVC.addAttachmentData(self.pdfData!, mimeType: "application/pdf", fileName:consentName)
             
             mailComposerVC.setMessageBody("", isHTML: false)
         }

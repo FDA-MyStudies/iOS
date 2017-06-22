@@ -141,9 +141,11 @@ class ActivitiesTableViewCell: UITableViewCell {
      */
     func updateUserRunStatus(activity:Activity){
         
-        self.labelRunStatus?.text = "Run: " + String(activity.currentRunId) + "/" + String(activity.totalRuns) + ", " + String(activity.compeltedRuns) + " done" + ", " + String(activity.incompletedRuns) + " missed"
+        let currentRunId = (activity.totalRuns != 0) ? String(activity.currentRunId) : "0"
         
-        if activity.totalRuns == 1 {
+        self.labelRunStatus?.text = "Run: " + currentRunId + "/" + String(activity.totalRuns) + ", " + String(activity.compeltedRuns) + " done" + ", " + String(activity.incompletedRuns) + " missed"
+        
+        if activity.totalRuns <= 1 {
             self.buttonMoreSchedules?.isHidden = true
             self.buttonMoreSchedulesBottomLine?.isHidden = true
         }
@@ -226,8 +228,19 @@ class ActivitiesTableViewCell: UITableViewCell {
      */
     func calculateActivityTimings(activity:Activity){
         
-        let startDate = activity.startDate
-        let endDate   = activity.endDate
+        print("name: \(activity.name) - start \(activity.startDate) , end \(activity.endDate)")
+        
+        var startDate = activity.startDate//?.utcDate()
+        var endDate   = activity.endDate//?.utcDate()
+        
+        var difference = UserDefaults.standard.value(forKey: "offset") as? Int
+        if difference != nil {
+            difference = difference! * -1
+            startDate = startDate?.addingTimeInterval(TimeInterval(difference!))
+            endDate = endDate?.addingTimeInterval(TimeInterval(difference!))
+        }
+        
+    
         let frequency = activity.frequencyType
         
         //let activityStartTime = ActivitiesTableViewCell.timeFormatter.string(from: startDate!)
@@ -319,8 +332,8 @@ class ActivitiesTableViewCell: UITableViewCell {
     
     private static let dailyActivityFormatter: DateFormatter = {
         let formatter = DateFormatter()
-        formatter.dateFormat = "MMM dd YYYY hh:mma"
-        //formatter.timeZone = TimeZone.init(abbreviation:"GMT")
+        formatter.dateFormat = "MMM dd YYYY"
+        //formatter.timeZone = TimeZone.current //.init(abbreviation:"GMT")
         return formatter
     }()
     
@@ -348,13 +361,13 @@ class ActivitiesTableViewCell: UITableViewCell {
     private static let timeFormatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateFormat = "hh:mma"
-        formatter.timeZone = TimeZone.init(abbreviation:"GMT")
+        //formatter.timeZone = TimeZone.init(abbreviation:"GMT")
         return formatter
     }()
     private static let dailyFormatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateFormat = "HH:mm:ss"
-        formatter.timeZone = TimeZone.init(abbreviation:"GMT")
+        //formatter.timeZone = TimeZone.init(abbreviation:"GMT")
         return formatter
     }()
 }

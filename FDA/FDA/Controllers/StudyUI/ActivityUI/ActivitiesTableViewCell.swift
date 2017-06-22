@@ -141,9 +141,11 @@ class ActivitiesTableViewCell: UITableViewCell {
      */
     func updateUserRunStatus(activity:Activity){
         
-        self.labelRunStatus?.text = "Run: " + String(activity.currentRunId) + "/" + String(activity.totalRuns) + ", " + String(activity.compeltedRuns) + " done" + ", " + String(activity.incompletedRuns) + " missed"
+        let currentRunId = (activity.totalRuns != 0) ? String(activity.currentRunId) : "0"
         
-        if activity.totalRuns == 1 {
+        self.labelRunStatus?.text = "Run: " + currentRunId + "/" + String(activity.totalRuns) + ", " + String(activity.compeltedRuns) + " done" + ", " + String(activity.incompletedRuns) + " missed"
+        
+        if activity.totalRuns <= 1 {
             self.buttonMoreSchedules?.isHidden = true
             self.buttonMoreSchedulesBottomLine?.isHidden = true
         }

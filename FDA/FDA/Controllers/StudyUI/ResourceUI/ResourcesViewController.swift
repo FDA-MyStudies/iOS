@@ -22,6 +22,8 @@ class ResourcesViewController : UIViewController{
     var resourceLink:String?
     var fileType:String?
     var navigateToStudyOverview:Bool? = false
+    
+    var shouldDeleteData:Bool? = false
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -53,6 +55,9 @@ class ResourcesViewController : UIViewController{
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        self.tableView?.estimatedRowHeight = 65
+        self.tableView?.rowHeight = UITableViewAutomaticDimension
         
         self.addHomeButton()
          UIApplication.shared.statusBarStyle = .default
@@ -506,6 +511,7 @@ extension ResourcesViewController : UITableViewDelegate{
                                                                             UIUtilities.showAlertMessageWithThreeActionsAndHandler(kImportantNoteMessage, errorMessage: "You are choosing to leave the study. Please choose if the data you provided for the study so far, can be retained and used for research purposes OR if it should be deleted.", errorAlertActionTitle: "Retain my data", errorAlertActionTitle2: "Delete my data", errorAlertActionTitle3: "Cancel", viewControllerUsed: self, action1: {
                                                                                 // Retain Action
                                                                                 
+                                                                                self.shouldDeleteData = false
                                                                                 self.withdrawalFromStudy(deleteResponse: false)
                                                                                 
                                                                                
@@ -513,7 +519,7 @@ extension ResourcesViewController : UITableViewDelegate{
                                                                             }, action2: {
                                                                                 
                                                                                 // Delete action
-                                                                                
+                                                                                  self.shouldDeleteData = true
                                                                                 self.withdrawalFromStudy(deleteResponse: true)
                                                                                 
                                                                             }, action3: {
@@ -526,7 +532,8 @@ extension ResourcesViewController : UITableViewDelegate{
                                                                             UIUtilities.showAlertMessageWithTwoActionsAndHandler(NSLocalizedString("You are choosing to leave the study. Data that you have provided for the study so far, will be deleted from our databases. Tap OK to confirm that you wish to leave the study or Cancel to abstain from doing so.", comment: ""), errorMessage: NSLocalizedString("", comment: ""), errorAlertActionTitle: NSLocalizedString("OK", comment: ""),
                                                                                                                                  errorAlertActionTitle2: NSLocalizedString("Cancel", comment: ""), viewControllerUsed: self,
                                                                                                                                  action1: {
-                                                                                                                                     self.withdrawalFromStudy(deleteResponse: true)
+                                                                                        self.shouldDeleteData = true
+                                                                                        self.withdrawalFromStudy(deleteResponse: true)
                                                                             },
                                                                                                                                  action2: {
                                                                                                                                     
@@ -537,7 +544,8 @@ extension ResourcesViewController : UITableViewDelegate{
                                                                             UIUtilities.showAlertMessageWithTwoActionsAndHandler(NSLocalizedString("You are choosing to leave the study. Data that you have provided for the study so far, will be retained in our databases for research purposes. Tap OK to confirm that you wish to leave the study or Cancel to abstain from doing so.", comment: ""), errorMessage: NSLocalizedString("", comment: ""), errorAlertActionTitle: NSLocalizedString("OK", comment: ""),
                                                                                                                                  errorAlertActionTitle2: NSLocalizedString("Cancel", comment: ""), viewControllerUsed: self,
                                                                                                                                  action1: {
-                                                                                                                                    self.withdrawalFromStudy(deleteResponse: false)
+                                                                                         self.shouldDeleteData = false
+                                                                                            self.withdrawalFromStudy(deleteResponse: false)
                                                                             },
                                                                                                                                  action2: {
                                                                                                                                     
@@ -608,10 +616,24 @@ extension ResourcesViewController:NMWebServiceDelegate {
         else if requestName as String == ResponseMethods.withdrawFromStudy.method.methodName {
             
              //self.addProgressIndicator()
-            UserServices().withdrawFromStudy(studyId: (Study.currentStudy?.studyId)!, shouldDeleteData: false, delegate: self)
+            UserServices().withdrawFromStudy(studyId: (Study.currentStudy?.studyId)!, shouldDeleteData: self.shouldDeleteData!
+                , delegate: self)
         }
         else if requestName as String == RegistrationMethods.withdraw.method.methodName{
             
+            let currentUser = User.currentUser
+            let userActivityStatusList:Array<UserActivityStatus> = currentUser.participatedActivites.filter({$0.studyId == (Study.currentStudy?.studyId)!})
+                
+            for activityStatus in userActivityStatusList {
+                let index =  currentUser.participatedActivites.index(where: {$0.activityId == activityStatus.activityId})
+                currentUser.participatedActivites.remove(at: index!)
+                //currentUser.participatedActivites.remove
+                    
+            }
+                
+            
+          
+
             
             DBHandler.deleteStudyData(studyId:(Study.currentStudy?.studyId)!)
             

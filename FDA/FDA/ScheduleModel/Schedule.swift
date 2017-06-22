@@ -92,23 +92,42 @@ class Schedule{
         
         let joiningDate = studyStatus?.joiningDate.utcDate()
         let start = activity.startDate?.utcDate()
-        
-         let startDateResult = (start?.compare(joiningDate!))! as ComparisonResult
-        
-        if startDateResult == .orderedDescending {
-            self.startTime = start
-        }
-        else {
-            self.startTime = joiningDate
-        }
+       
         
         self.completionHandler = handler
-        self.frequency = activity.frequencyType
-        //self.startTime = studyStatus?.joiningDate //activity.startDate
-        self.endTime = activity.endDate?.utcDate()
-        self.activity = activity
+        var endDateResult:ComparisonResult? = nil
+        if activity.endDate != nil {
+             let end = activity.endDate?.utcDate()
+             endDateResult = (end?.compare(joiningDate!))! as ComparisonResult
+        }
+        let startDateResult = (start?.compare(joiningDate!))! as ComparisonResult
         
-        self.setActivityRun()
+        
+        //check if user joined after activity is ended
+        if  endDateResult != nil && endDateResult == .orderedAscending {
+            if self.completionHandler != nil {
+                self.completionHandler!(self.activityRuns)
+            }
+        }
+        else {
+            //check if user joined before activity is started
+            if startDateResult == .orderedDescending {
+                self.startTime = start
+            }
+            else {
+                self.startTime = joiningDate
+            }
+            
+            
+            self.frequency = activity.frequencyType
+            //self.startTime = studyStatus?.joiningDate //activity.startDate
+            self.endTime = activity.endDate?.utcDate()
+            self.activity = activity
+            
+            self.setActivityRun()
+        }
+        
+       
         
     }
     

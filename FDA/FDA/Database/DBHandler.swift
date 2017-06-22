@@ -497,12 +497,12 @@ class DBHandler: NSObject {
         })
     }
     
-    class func updateLocalNotificaitonUpdated(studyId:String){
+    class func updateLocalNotificaitonUpdated(studyId:String,status:Bool){
         
         let realm = try! Realm()
         let study = realm.object(ofType: DBStudy.self, forPrimaryKey: studyId)
         try! realm.write({
-            study?.activitiesLocalNotificationUpdated = true
+            study?.activitiesLocalNotificationUpdated = status
         })
         
     }
@@ -581,6 +581,9 @@ class DBHandler: NSObject {
          let dbActivity = dbActivityArray.filter({$0.actvityId == aId}).last
             
             DBHandler.deleteMetaDataForActivity(activityId: (dbActivity?.actvityId)!, studyId: (dbActivity?.studyId)!)
+            
+            //remove local notification
+            LocalNotification.removeLocalNotificationfor(studyId: (dbActivity?.studyId)!, activityid: (dbActivity?.actvityId)!)
             
             try! realm.write({
                 realm.delete((dbActivity?.activityRuns)!)

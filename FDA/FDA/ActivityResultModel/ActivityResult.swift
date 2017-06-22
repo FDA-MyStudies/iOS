@@ -170,7 +170,9 @@ class ActivityResult {
         var activityDict:Dictionary<String,Any>? = Dictionary<String,Any>()
         
         if  self.type != nil{
-            activityDict?[kActivityType] = self.type?.rawValue
+            //activityDict?[kActivityType] = self.type?.rawValue
+            
+            activityDict?[kActivityActiveKeyResultType] = (self.type?.rawValue == ActivityType.activeTask.rawValue ? "grouped" : self.type?.rawValue)
         }
         
         if self.startTime != nil && (Utilities.getStringFromDate(date: self.startTime!) != nil){

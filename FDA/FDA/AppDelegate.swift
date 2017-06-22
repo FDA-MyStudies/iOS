@@ -34,6 +34,8 @@
     
     let kStudyStoryboard = "Study"
     
+    let kPasscodeSetUpText = "Set up a passcode for the app"
+    
     @UIApplicationMain
     
     class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -891,7 +893,7 @@
                         let passcodeStep = ORKPasscodeStep(identifier: kPasscodeStepIdentifier)
                         passcodeStep.passcodeType = .type4Digit
                         
-                        passcodeStep.text = "Set up a passcode for the app"
+                        passcodeStep.text = kPasscodeSetUpText
                         let task = ORKOrderedTask(identifier: kPasscodeTaskIdentifier, steps: [passcodeStep])
                         
                         

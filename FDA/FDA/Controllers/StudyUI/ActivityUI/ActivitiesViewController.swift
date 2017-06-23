@@ -46,7 +46,7 @@ class ActivitiesViewController : UIViewController{
         self.navigationItem.title = NSLocalizedString("STUDY ACTIVITIES", comment: "")
         self.tableView?.sectionHeaderHeight = 30
         
-        LocalNotification.removeLocalNotificationfor(studyId: (Study.currentStudy?.studyId)!)
+       
         
         if (Study.currentStudy?.studyId) != nil {
             //WCPServices().getStudyActivityList(studyId: (Study.currentStudy?.studyId)!, delegate: self)
@@ -397,6 +397,12 @@ class ActivitiesViewController : UIViewController{
                 
             }
         }
+        
+        //sort as per start date
+        currentActivities.sort(by: {$0.startDate?.compare($1.startDate!) == .orderedAscending})
+        upcomingActivities.sort(by: {$0.startDate?.compare($1.startDate!) == .orderedAscending})
+        pastActivities.sort(by: {$0.startDate?.compare($1.startDate!) == .orderedAscending})
+        
         
         let currentDetails = ["title":"CURRENT","activities":currentActivities] as [String : Any]
         let upcomingDetails = ["title":"UPCOMING","activities":upcomingActivities] as [String : Any]

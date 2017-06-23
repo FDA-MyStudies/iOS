@@ -44,7 +44,7 @@ class StudyListViewController: UIViewController {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         appDelegate.askForNotification()
         
-        if User.currentUser.userType == .FDAUser {
+        if User.currentUser.userType == .FDAUser && User.currentUser.settings?.localNotifications == true{
             appDelegate.checkForAppReopenNotification()
         }
         

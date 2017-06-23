@@ -87,7 +87,7 @@ class ConsentPdfViewerStepViewController: ORKStepViewController {
         mailComposerVC.setMessageBody("", isHTML: false)
         
       
-      let Filename = "Consent" +  "_" + "\((Study.currentStudy?.studyId)!)" + ".pdf"
+      let Filename =   "\((Study.currentStudy?.name)!)" + "_SignedConsent"   + ".pdf"
         
         mailComposerVC.addAttachmentData(pdfData!, mimeType: "application/pdf", fileName: Filename)
        

@@ -621,6 +621,7 @@ extension ResourcesViewController:NMWebServiceDelegate {
         }
         else if requestName as String == RegistrationMethods.withdraw.method.methodName{
             
+            //clear all local data storage
             let currentUser = User.currentUser
             let userActivityStatusList:Array<UserActivityStatus> = currentUser.participatedActivites.filter({$0.studyId == (Study.currentStudy?.studyId)!})
                 
@@ -631,22 +632,21 @@ extension ResourcesViewController:NMWebServiceDelegate {
                     
             }
                 
-            
-          
-
-            
+            //clear database storage
             DBHandler.deleteStudyData(studyId:(Study.currentStudy?.studyId)!)
+            
+            //clear local notification for study
+            LocalNotification.removeLocalNotificationfor(studyId: (Study.currentStudy?.studyId)!)
+            
+            //udpate status to false so notification can be registered again
+            Study.currentStudy?.activitiesLocalNotificationUpdated = false
+            DBHandler.updateLocalNotificaitonUpdated(studyId: (Study.currentStudy?.studyId)!,status: false)
             
             self.removeProgressIndicator()
             self.navigationController?.navigationBar.isHidden = false
             self.performSegue(withIdentifier: "unwindeToStudyListResourcesIdentifier", sender: self)
 
-            
-            
-          //  let currentUserStudyStatus =  User.currentUser.updateStudyStatus(studyId:(Study.currentStudy?.studyId)!  , status: .withdrawn)
-            
-          //  UserServices().updateUserParticipatedStatus(studyStauts: currentUserStudyStatus, delegate: self)
-           // self.addProgressIndicator()
+   
         }
         else  if requestName as String == RegistrationMethods.updatePreferences.method.methodName{
            // self.navigationController?.navigationBar.isHidden = false

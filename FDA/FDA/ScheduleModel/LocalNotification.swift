@@ -181,6 +181,38 @@ class LocalNotification: NSObject {
 
     }
     
+    
+    class func removeLocalNotificationfor(studyId:String,activityid:String) {
+        
+        let allNotificaiton = UIApplication.shared.scheduledLocalNotifications
+       
+        for notification in allNotificaiton! {
+            let userInfo = notification.userInfo
+            if (userInfo![kStudyId] as! String == studyId && userInfo![kActivityId] as! String == activityid) {
+                UIApplication.shared.cancelLocalNotification(notification)
+            }
+        }
+        
+    }
+    
+    class func removeLocalNotificationfor(studyId:String) {
+        
+        let allNotificaiton = UIApplication.shared.scheduledLocalNotifications
+      
+        for notification in allNotificaiton! {
+            let userInfo = notification.userInfo
+            if (userInfo![kStudyId] as! String == studyId) {
+                UIApplication.shared.cancelLocalNotification(notification)
+            }
+        }
+        
+    }
+    
+    class func cancelAllLocalNotification() {
+        
+        UIApplication.shared.cancelAllLocalNotifications()
+    }
+    
     private static let timeFormatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateFormat = "hh:mma"

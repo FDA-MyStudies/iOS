@@ -46,6 +46,8 @@ class ActivitiesViewController : UIViewController{
         self.navigationItem.title = NSLocalizedString("STUDY ACTIVITIES", comment: "")
         self.tableView?.sectionHeaderHeight = 30
         
+        LocalNotification.removeLocalNotificationfor(studyId: (Study.currentStudy?.studyId)!)
+        
         if (Study.currentStudy?.studyId) != nil {
             //WCPServices().getStudyActivityList(studyId: (Study.currentStudy?.studyId)!, delegate: self)
             //load from database
@@ -417,7 +419,7 @@ class ActivitiesViewController : UIViewController{
                     print("Notification set sucessfully")
                     Study.currentStudy?.activitiesLocalNotificationUpdated = true
                     
-                    DBHandler.updateLocalNotificaitonUpdated(studyId: (Study.currentStudy?.studyId)!)
+                    DBHandler.updateLocalNotificaitonUpdated(studyId: (Study.currentStudy?.studyId)!,status: true)
                 }
                 
             }

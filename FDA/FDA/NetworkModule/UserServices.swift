@@ -785,7 +785,11 @@ class UserServices: NSObject {
         //reset user object
         User.resetCurrentUser()
         
+        //delete complete database
         DBHandler.deleteAll()
+        
+        //cancel all local notification
+        LocalNotification.cancelAllLocalNotification()
         
         
         
@@ -807,10 +811,12 @@ class UserServices: NSObject {
         //Delete from database
         DBHandler.deleteCurrentUser()
         
-        //reset user object
-        User.resetCurrentUser()
         
+        //delete complete database
         DBHandler.deleteAll()
+        
+        //cancel all local notification
+        LocalNotification.cancelAllLocalNotification()
     }
     
     func handleDeActivateAccountResponse(response:Dictionary<String, Any>) {
@@ -819,16 +825,22 @@ class UserServices: NSObject {
         ud.removeObject(forKey: kUserId)
         ud.synchronize()
         
+        let appDomain = Bundle.main.bundleIdentifier!
+        UserDefaults.standard.removePersistentDomain(forName: appDomain)
+        UserDefaults.standard.synchronize()
+        
         //reset user object
         User.resetCurrentUser()
         
         //Delete from database
         DBHandler.deleteCurrentUser()
         
-        //reset user object
-        User.resetCurrentUser()
         
+        //delete complete database
         DBHandler.deleteAll()
+        
+        //cancel all local notification
+        LocalNotification.cancelAllLocalNotification()
     }
 
     

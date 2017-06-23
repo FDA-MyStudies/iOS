@@ -128,6 +128,7 @@ class DashboardCharts {
     var title:String?
     var displayName:String?
     var chartType:String?
+    var scrollable:Bool = true
     
     //datasource
     var activityId:String?
@@ -167,6 +168,9 @@ class DashboardCharts {
             }
             if Utilities.isValidValue(someObject: detail["type"] as AnyObject ){
                 self.chartType = detail["type"] as? String
+            }
+            if Utilities.isValidValue(someObject: detail["scrollable"] as AnyObject ){
+                self.scrollable = detail["scrollable"] as! Bool
             }
             
             

@@ -135,6 +135,15 @@ class LineChartCell: GraphChartTableViewCell {
         let timeRange = chart.dataSourceTimeRange!
         let chartTimeRange = ChartTimeRange(rawValue:timeRange)!
         
+        if chart.scrollable {
+            self.buttonForward.isHidden = false
+            self.buttonBackward.isHidden = false
+        }
+        else {
+            self.buttonForward.isHidden = true
+            self.buttonBackward.isHidden = true
+        }
+        
         switch chartTimeRange {
             
         case .days_of_month:

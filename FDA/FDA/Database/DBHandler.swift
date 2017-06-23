@@ -1189,6 +1189,7 @@ class DBHandler: NSObject {
                         dbChart?.dataSourceType = chart.dataSourceType
                         dbChart?.displayName = chart.displayName
                         dbChart?.title = chart.title
+                        dbChart?.scrollable = chart.scrollable
                        
                         dbChart?.studyId = chart.studyId
                        
@@ -1227,6 +1228,7 @@ class DBHandler: NSObject {
         dbChart.dataSourceType = chart.dataSourceType
         dbChart.displayName = chart.displayName
         dbChart.title = chart.title
+        dbChart.scrollable = chart.scrollable
         
         dbChart.studyId = chart.studyId
         
@@ -1254,6 +1256,7 @@ class DBHandler: NSObject {
             chart.dataSourceType = dbChart.dataSourceType
             chart.displayName = dbChart.displayName
             chart.title = dbChart.title
+            chart.scrollable = dbChart.scrollable
           
             chart.studyId = dbChart.studyId
            

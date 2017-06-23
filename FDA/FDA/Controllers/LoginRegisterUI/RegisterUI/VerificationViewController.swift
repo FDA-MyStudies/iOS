@@ -17,6 +17,8 @@ let kAlertMessageResendEmail = "An email verification code has been sent to your
 
 let kChangePasswordViewControllerIdentifier = "ChangePasswordViewController"
 
+let kNotificationRegistrationIsPending = "NotificationRegistrationIsPending"
+
 enum VerificationLoadFrom:Int{
     case forgotPassword
     case login
@@ -266,6 +268,10 @@ extension VerificationViewController:NMWebServiceDelegate {
         self.removeProgressIndicator()
         
         if User.currentUser.verified == true{
+            
+            let ud = UserDefaults.standard
+            ud.set(true, forKey: kNotificationRegistrationIsPending)
+            ud.synchronize()
             
             if viewLoadFrom == .forgotPassword{
                 //pop to login

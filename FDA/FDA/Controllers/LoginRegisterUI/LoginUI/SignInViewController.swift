@@ -486,7 +486,9 @@ extension SignInViewController:NMWebServiceDelegate {
             delegate.calculateTimeZoneChange()
         if User.currentUser.verified == true {
             
-            
+            let ud = UserDefaults.standard
+            ud.set(true, forKey: kNotificationRegistrationIsPending)
+            ud.synchronize()
             
             ORKPasscodeViewController.removePasscodeFromKeychain()
             

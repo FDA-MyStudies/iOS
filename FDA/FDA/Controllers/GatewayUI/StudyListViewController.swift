@@ -15,7 +15,7 @@ class StudyListViewController: UIViewController {
     var studyListRequestFailed = false
     
     
-//MARK:- Viewcontroller lifecycle
+    //MARK:- Viewcontroller lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,14 +37,8 @@ class StudyListViewController: UIViewController {
         //get Profile data to check for passcode
         //Condition missing
         
-        
-        
-       
-        
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         appDelegate.askForNotification()
-        
-        
         
     }
     
@@ -52,71 +46,73 @@ class StudyListViewController: UIViewController {
         
         
         
-         self.addRightNavigationItem()
+        self.addRightNavigationItem()
         
         
         let appdelegate = UIApplication.shared.delegate as! AppDelegate
         
         
-            Study.currentStudy = nil
-            
-            let ud = UserDefaults.standard
-            
-            var ispasscodePending:Bool? = false
-            
-            if (ud.value(forKey: kPasscodeIsPending) != nil){
-                ispasscodePending = ud.value(forKey: kPasscodeIsPending) as! Bool?
-            }
-            
-            
-            if ispasscodePending == true{
-                
-                if User.currentUser.userType == .FDAUser {
-                    self.tableView?.isHidden = true
-                    UserServices().getUserProfile(self as NMWebServiceDelegate)
-                }
-                
-                
-            }
-            
-            
-            
-            self.labelHelperText.isHidden = true
-            self.setNavigationBarItem()
-            self.navigationController?.setNavigationBarHidden(false, animated: true)
-            self.navigationController?.navigationBar.isHidden = false
+        Study.currentStudy = nil
+        
+        let ud = UserDefaults.standard
+        
+        var ispasscodePending:Bool? = false
+        
+        if (ud.value(forKey: kPasscodeIsPending) != nil){
+            ispasscodePending = ud.value(forKey: kPasscodeIsPending) as! Bool?
+        }
+        
+        
+        if ispasscodePending == true{
             
             if User.currentUser.userType == .FDAUser {
+                self.tableView?.isHidden = true
+                UserServices().getUserProfile(self as NMWebServiceDelegate)
+            }
+        }
+        
+        self.labelHelperText.isHidden = true
+        self.setNavigationBarItem()
+        self.navigationController?.setNavigationBarHidden(false, animated: true)
+        self.navigationController?.navigationBar.isHidden = false
+        
+        if User.currentUser.userType == .FDAUser {
+            
+            self.tableView?.estimatedRowHeight = 145
+            self.tableView?.rowHeight = UITableViewAutomaticDimension
+            
+            if (self.fdaSlideMenuController()?.isLeftOpen())!{
                 
-                self.tableView?.estimatedRowHeight = 145
-                self.tableView?.rowHeight = UITableViewAutomaticDimension
-                
-                if (self.fdaSlideMenuController()?.isLeftOpen())!{
-                   
-                }
-                else {
-                     self.sendRequestToGetUserPreference()
-                }
-                
-                
-                //  self.sendRequestToGetStudyList()
             }
             else {
-                self.tableView?.estimatedRowHeight = 140
-                self.tableView?.rowHeight = UITableViewAutomaticDimension
-                self.sendRequestToGetStudyList()
+                self.sendRequestToGetUserPreference()
             }
+            
+            
+            //  self.sendRequestToGetStudyList()
+        }
+        else {
+            self.tableView?.estimatedRowHeight = 140
+            self.tableView?.rowHeight = UITableViewAutomaticDimension
+            self.sendRequestToGetStudyList()
+        }
         
         //self.loadStudiesFromDatabase()
         
         UIApplication.shared.statusBarStyle = .default
+        
+        
+        if ud.value(forKey: kNotificationRegistrationIsPending) != nil && ud.bool(forKey: kNotificationRegistrationIsPending) == true{
+            appdelegate.askForNotification()
+        }
+        
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-  
+    
     func  addRightNavigationItem(){
         
         
@@ -145,7 +141,7 @@ class StudyListViewController: UIViewController {
         
         let barButton = UIBarButtonItem.init(customView: view)
         self.navigationItem.rightBarButtonItem = barButton
-
+        
         let ud = UserDefaults.standard
         
         let showNotification = ud.bool(forKey: kShowNotification)
@@ -163,7 +159,7 @@ class StudyListViewController: UIViewController {
     
     
     
-//MARK:-
+    //MARK:-
     
     /**
      
@@ -213,17 +209,17 @@ class StudyListViewController: UIViewController {
         }
         
         
-//        ud.removeObject(forKey: "FKC")
-//        ud.removeObject(forKey: "FetalKickActivityId")
-//        ud.removeObject(forKey: "FetalKickCounterValue")
-//        ud.removeObject(forKey: "FetalKickStartTimeStamp")
-//        ud.synchronize()
+        //        ud.removeObject(forKey: "FKC")
+        //        ud.removeObject(forKey: "FetalKickActivityId")
+        //        ud.removeObject(forKey: "FetalKickCounterValue")
+        //        ud.removeObject(forKey: "FetalKickStartTimeStamp")
+        //        ud.synchronize()
         
         
     }
     
-
-//MARK:- Helper Methods
+    
+    //MARK:- Helper Methods
     
     /**
      
@@ -272,10 +268,10 @@ class StudyListViewController: UIViewController {
     
     /**
      
-     Method to display taskViewController for passcode setup if 
+     Method to display taskViewController for passcode setup if
      passcode setup is enabled,called only once after signin.
      
-    */
+     */
     func setPassCode() {
         //Remove Passcode if already exist
         
@@ -296,7 +292,7 @@ class StudyListViewController: UIViewController {
         self.navigationController?.present(taskViewController, animated: false, completion: {
             self.tableView?.isHidden = false
         })
- 
+        
     }
     
     
@@ -309,11 +305,11 @@ class StudyListViewController: UIViewController {
         
         DBHandler.loadStudyListFromDatabase { (studies) in
             if studies.count > 0 {
-                 self.tableView?.isHidden = false
-//                let  sortedstudies =  studies.sorted(by: { (study1:Study, study2:Study) -> Bool in
-//                    
-//                   return (study1.userParticipateState.status.sortIndex < study2.userParticipateState.status.sortIndex)
-//                })
+                self.tableView?.isHidden = false
+                //                let  sortedstudies =  studies.sorted(by: { (study1:Study, study2:Study) -> Bool in
+                //
+                //                   return (study1.userParticipateState.status.sortIndex < study2.userParticipateState.status.sortIndex)
+                //                })
                 
                 let  sortedstudies2 =  studies.sorted(by: { (study1:Study, study2:Study) -> Bool in
                     
@@ -321,7 +317,7 @@ class StudyListViewController: UIViewController {
                         return (study1.userParticipateState.status.sortIndex < study2.userParticipateState.status.sortIndex)
                     }
                     
-                   // print("1id : \(study1.studyId) , 2id : \(study2.studyId)")
+                    // print("1id : \(study1.studyId) , 2id : \(study2.studyId)")
                     return (study1.status.sortIndex < study2.status.sortIndex)
                 })
                 
@@ -344,7 +340,7 @@ class StudyListViewController: UIViewController {
                 else {
                     self.tableView?.isHidden = true
                     self.labelHelperText.isHidden = false
-                   
+                    
                     
                 }
                 
@@ -355,7 +351,7 @@ class StudyListViewController: UIViewController {
     }
     
     
-//MARK:- Button Actions
+    //MARK:- Button Actions
     
     /**
      
@@ -369,7 +365,7 @@ class StudyListViewController: UIViewController {
     }
     
     
-//MARK:- Custom Bar Buttons
+    //MARK:- Custom Bar Buttons
     
     /**
      
@@ -411,7 +407,7 @@ class StudyListViewController: UIViewController {
     }
     
     
-//MARK:- Segue Methods
+    //MARK:- Segue Methods
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
@@ -423,7 +419,7 @@ class StudyListViewController: UIViewController {
     }
     
     
-//MARK:- Database Methods
+    //MARK:- Database Methods
     func checkDatabaseForStudyInfo(study:Study){
         
         DBHandler.loadStudyOverview(studyId: (study.studyId)!) { (overview) in
@@ -438,7 +434,7 @@ class StudyListViewController: UIViewController {
     }
     
     
-//MARK:- Webservice Requests
+    //MARK:- Webservice Requests
     
     /**
      
@@ -455,7 +451,7 @@ class StudyListViewController: UIViewController {
      Send the webservice request to get Study Info
      
      @param study    Access the data from the study class
-
+     
      */
     func sendRequestToGetStudyInfo(study:Study){
         WCPServices().getStudyInformation(studyId: study.studyId, delegate: self)
@@ -477,14 +473,14 @@ class StudyListViewController: UIViewController {
      Send the webservice request to Update BookMarkStatus
      
      @param userStudyStatus    Access the data from UserStudyStatus
-
+     
      */
     func sendRequestToUpdateBookMarkStatus(userStudyStatus:UserStudyStatus){
         UserServices().updateStudyBookmarkStatus(studyStauts: userStudyStatus, delegate: self)
     }
     
     
-//MARK:- Webservice Responses
+    //MARK:- Webservice Responses
     
     /**
      
@@ -498,7 +494,7 @@ class StudyListViewController: UIViewController {
         if (Gateway.instance.studies?.count)! > 0{
             self.loadStudiesFromDatabase()
             self.labelHelperText.isHidden = true
-             self.tableView?.isHidden = false
+            self.tableView?.isHidden = false
             
             let appDelegate = UIApplication.shared.delegate as! AppDelegate
             
@@ -521,7 +517,7 @@ class StudyListViewController: UIViewController {
      
      save information for study which feilds need to be updated
      
-    */
+     */
     func handleStudyUpdatedInformation(){
         
         let currentStudy = Study.currentStudy
@@ -538,7 +534,7 @@ class StudyListViewController: UIViewController {
         DBHandler.updateMetaDataToUpdateForStudy(study: Study.currentStudy!, updateDetails: nil)
         
         if StudyUpdates.studyInfoUpdated {
-             self.sendRequestToGetStudyInfo(study: Study.currentStudy!)
+            self.sendRequestToGetStudyInfo(study: Study.currentStudy!)
         }
         else {
             self.navigateBasedOnUserStatus()
@@ -642,9 +638,9 @@ extension StudyListViewController :  UITableViewDelegate {
                         WCPServices().getStudyUpdates(study: study!, delegate: self)
                     }
                     else {
-                         self.checkDatabaseForStudyInfo(study: study!)
+                        self.checkDatabaseForStudyInfo(study: study!)
                     }
-                   
+                    
                     //self.sendRequestToGetStudyInfo(study: study!)
                 }
             }
@@ -727,7 +723,7 @@ extension StudyListViewController:NMWebServiceDelegate {
             self.removeProgressIndicator()
         }
         else if requestName as String ==  RegistrationMethods.userProfile.description {
-             self.removeProgressIndicator()
+            self.removeProgressIndicator()
             if User.currentUser.settings?.passcode == true {
                 self.setPassCode()
                 
@@ -765,10 +761,10 @@ extension StudyListViewController:NMWebServiceDelegate {
                 
             }
             else {
-                 UIUtilities.showAlertWithTitleAndMessage(title:NSLocalizedString(kErrorTitle, comment: "") as NSString, message: error.localizedDescription as NSString)
+                UIUtilities.showAlertWithTitleAndMessage(title:NSLocalizedString(kErrorTitle, comment: "") as NSString, message: error.localizedDescription as NSString)
             }
             
-          
+            
         }
     }
 }
@@ -820,6 +816,12 @@ extension StudyListViewController:ORKTaskViewControllerDelegate{
             
         }
         
+        self.perform(#selector(dismisscontroller), with: self, afterDelay: 1.0)
+        
+        
+    }
+    
+    func dismisscontroller(){
         self.dismiss(animated: true, completion: nil)
     }
     

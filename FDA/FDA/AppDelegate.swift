@@ -355,7 +355,10 @@
                 if (navController as? UINavigationController) != nil &&  (navController as? UINavigationController)?.visibleViewController?.isKind(of: ORKTaskViewController.self) == false {
                     
                     
-                    self.checkPasscode(viewController: navController!)
+                    //if (navController as? UINavigationController)?.visibleViewController?.isKind(of: ORKPasscodeViewController.self) == false{
+                        self.checkPasscode(viewController: navController!)
+                    //}
+                    
                 }
             }
             

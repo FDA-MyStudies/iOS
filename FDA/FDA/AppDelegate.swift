@@ -189,6 +189,15 @@
             ud.synchronize()
         }
         
+        func checkForAppReopenNotification() {
+            
+            //remove if notificatin is available
+            LocalNotification.removeReopenAppNotification()
+            
+            LocalNotification.registerReopenAppNotification()
+            
+        }
+        
         //MARK: App Delegates
         
         

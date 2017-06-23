@@ -188,8 +188,10 @@ class LocalNotification: NSObject {
        
         for notification in allNotificaiton! {
             let userInfo = notification.userInfo
-            if (userInfo![kStudyId] as! String == studyId && userInfo![kActivityId] as! String == activityid) {
-                UIApplication.shared.cancelLocalNotification(notification)
+            if userInfo?[kStudyId] != nil && userInfo?[kActivityId] != nil{
+                if (userInfo![kStudyId] as! String == studyId && userInfo![kActivityId] as! String == activityid) {
+                    UIApplication.shared.cancelLocalNotification(notification)
+                }
             }
         }
         
@@ -201,8 +203,10 @@ class LocalNotification: NSObject {
       
         for notification in allNotificaiton! {
             let userInfo = notification.userInfo
-            if (userInfo![kStudyId] as! String == studyId) {
-                UIApplication.shared.cancelLocalNotification(notification)
+            if userInfo?[kStudyId] != nil {
+                if (userInfo![kStudyId] as! String == studyId) {
+                    UIApplication.shared.cancelLocalNotification(notification)
+                }
             }
         }
         
@@ -211,6 +215,40 @@ class LocalNotification: NSObject {
     class func cancelAllLocalNotification() {
         
         UIApplication.shared.cancelAllLocalNotifications()
+    }
+    
+    
+    class func registerReopenAppNotification(){
+        
+        let userInfo = ["registerApp":"mystudies",
+                        ]
+        let date = Date().addingTimeInterval(60*60*24*14)
+        
+        let message = "It’s been a while since you visited the app. Please continue your participation and contribute towards a healthier world!"
+        
+        
+        let notification = UILocalNotification()
+        notification.fireDate = date
+        notification.alertBody = message
+        notification.alertAction = "Ok"
+        notification.soundName = UILocalNotificationDefaultSoundName
+        notification.userInfo = userInfo
+        notification.repeatInterval = NSCalendar.Unit.day
+        UIApplication.shared.scheduleLocalNotification(notification)
+        
+    }
+    class func removeReopenAppNotification(){
+        
+        let allNotificaiton = UIApplication.shared.scheduledLocalNotifications
+        
+        for notification in allNotificaiton! {
+            let userInfo = notification.userInfo
+            if userInfo?["registerApp"] != nil {
+                if (userInfo!["registerApp"] as! String == "mystudies") {
+                    UIApplication.shared.cancelLocalNotification(notification)
+                }
+            }
+        }
     }
     
     private static let timeFormatter: DateFormatter = {

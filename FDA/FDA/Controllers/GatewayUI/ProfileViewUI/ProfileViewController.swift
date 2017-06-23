@@ -864,6 +864,21 @@ extension ProfileViewController: ORKPasscodeDelegate {
     
     func passcodeViewControllerDidFailAuthentication(_ viewController: UIViewController) {
     }
+    
+    
+    
+    
+    
+    func passcodeViewControllerDidCancel(_ viewController: UIViewController){
+        
+        if passcodeStateIsEditing{
+            viewController.dismiss(animated: true, completion: {
+                self.passcodeStateIsEditing = false
+            })
+        }
+        
+    }
+    
 }
 
 

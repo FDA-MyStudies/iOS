@@ -188,8 +188,10 @@ class LocalNotification: NSObject {
        
         for notification in allNotificaiton! {
             let userInfo = notification.userInfo
-            if (userInfo![kStudyId] as! String == studyId && userInfo![kActivityId] as! String == activityid) {
-                UIApplication.shared.cancelLocalNotification(notification)
+            if userInfo?[kStudyId] != nil && userInfo?[kActivityId] != nil{
+                if (userInfo![kStudyId] as! String == studyId && userInfo![kActivityId] as! String == activityid) {
+                    UIApplication.shared.cancelLocalNotification(notification)
+                }
             }
         }
         
@@ -201,8 +203,10 @@ class LocalNotification: NSObject {
       
         for notification in allNotificaiton! {
             let userInfo = notification.userInfo
-            if (userInfo![kStudyId] as! String == studyId) {
-                UIApplication.shared.cancelLocalNotification(notification)
+            if userInfo?[kStudyId] != nil {
+                if (userInfo![kStudyId] as! String == studyId) {
+                    UIApplication.shared.cancelLocalNotification(notification)
+                }
             }
         }
         

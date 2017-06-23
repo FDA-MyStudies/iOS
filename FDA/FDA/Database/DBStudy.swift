@@ -109,6 +109,7 @@ class DBCharts :Object {
     dynamic var title:String?
     dynamic var displayName:String?
     dynamic var chartType:String?
+    dynamic var scrollable:Bool = true
     
     //datasource
     dynamic var activityId:String?

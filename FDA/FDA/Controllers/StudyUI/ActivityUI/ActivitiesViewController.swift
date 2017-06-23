@@ -386,16 +386,27 @@ class ActivitiesViewController : UIViewController{
         
         for activity in activities! {
             
-            let status =  self.getActivityAvailabilityStatus(activity: activity)
-            switch status {
-            case .current:
-                currentActivities.append(activity)
-            case .upcoming:
-                upcomingActivities.append(activity)
-            case .past:
-                pastActivities.append(activity)
+            if activity.state == "active" || activity.state == nil{
                 
+                let status =  self.getActivityAvailabilityStatus(activity: activity)
+                switch status {
+                case .current:
+                    currentActivities.append(activity)
+                case .upcoming:
+                    upcomingActivities.append(activity)
+                case .past:
+                    pastActivities.append(activity)
+                    
+                }
             }
+            else {
+                //remove notification for inactive activites
+                
+                //remove local notification
+                LocalNotification.removeLocalNotificationfor(studyId:activity.studyId!, activityid:activity.actvityId!)
+            }
+            
+           
         }
         
         //sort as per start date
@@ -474,14 +485,15 @@ class ActivitiesViewController : UIViewController{
         var totalRuns = 0
         var totalCompletedRuns = 0
         var totalIncompletedRuns = 0
-        for detail in tableViewSections {
-            let activities = detail["activities"] as! Array<Activity>
-            for activity in activities {
+        let activities = Study.currentStudy?.activities
+        //for detail in tableViewSections {
+           // let activities = detail["activities"] as! Array<Activity>
+            for activity in activities! {
                 totalRuns += activity.totalRuns
                 totalIncompletedRuns += activity.incompletedRuns
                 totalCompletedRuns += activity.compeltedRuns
             }
-        }
+        //}
         
         
         

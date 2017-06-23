@@ -14,7 +14,7 @@ class DBActivity: Object {
     dynamic var id:String?
     dynamic var type:String?
     dynamic var actvityId:String?
-    
+    dynamic var state:String?
     dynamic var studyId:String?
     dynamic var name:String?
     dynamic var shortName:String?

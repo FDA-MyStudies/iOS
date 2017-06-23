@@ -548,7 +548,7 @@ class DBHandler: NSObject {
                             dbActivity?.currentRunId = activity.userParticipationStatus.activityRunId
                             dbActivity?.participationStatus = activity.userParticipationStatus.status.rawValue
                             dbActivity?.completedRuns = activity.userParticipationStatus.compeltedRuns
-                            
+                            dbActivity?.state = activity.state
                             
                             
 
@@ -568,30 +568,30 @@ class DBHandler: NSObject {
         
         
         //delete activity from database
-        var newlist = activityies
-        
-        
-        let dbActivityIds:Array<String> = dbActivityArray.map({$0.actvityId!})
-        let activitieIds:Array<String>  = newlist.map({$0.actvityId!})
-        let dbset:Set<String> = Set(dbActivityIds)
-        let set:Set<String> = Set(activitieIds)
-        
-        let toBeDelete = dbset.subtracting(set)
-        for aId in toBeDelete{
-         let dbActivity = dbActivityArray.filter({$0.actvityId == aId}).last
-            
-            DBHandler.deleteMetaDataForActivity(activityId: (dbActivity?.actvityId)!, studyId: (dbActivity?.studyId)!)
-            
-            //remove local notification
-            LocalNotification.removeLocalNotificationfor(studyId: (dbActivity?.studyId)!, activityid: (dbActivity?.actvityId)!)
-            
-            try! realm.write({
-                realm.delete((dbActivity?.activityRuns)!)
-                realm.delete(dbActivity!)
-            })
-            
-           
-        }
+//        var newlist = activityies
+//        
+//        
+//        let dbActivityIds:Array<String> = dbActivityArray.map({$0.actvityId!})
+//        let activitieIds:Array<String>  = newlist.map({$0.actvityId!})
+//        let dbset:Set<String> = Set(dbActivityIds)
+//        let set:Set<String> = Set(activitieIds)
+//        
+//        let toBeDelete = dbset.subtracting(set)
+//        for aId in toBeDelete{
+//         let dbActivity = dbActivityArray.filter({$0.actvityId == aId}).last
+//            
+//            DBHandler.deleteMetaDataForActivity(activityId: (dbActivity?.actvityId)!, studyId: (dbActivity?.studyId)!)
+//            
+//            //remove local notification
+//            LocalNotification.removeLocalNotificationfor(studyId: (dbActivity?.studyId)!, activityid: (dbActivity?.actvityId)!)
+//            
+//            try! realm.write({
+//                realm.delete((dbActivity?.activityRuns)!)
+//                realm.delete(dbActivity!)
+//            })
+//            
+//           
+//        }
     
         
         print("DBPath : \(realm.configuration.fileURL)")
@@ -616,6 +616,7 @@ class DBHandler: NSObject {
         dbActivity.startDate = activity.startDate
         dbActivity.endDate = activity.endDate
         dbActivity.version = activity.version
+        dbActivity.state = activity.state
         //dbActivity.updatedVersion = activity.version
         dbActivity.branching = activity.branching!
         dbActivity.frequencyType = activity.frequencyType.rawValue
@@ -710,6 +711,7 @@ class DBHandler: NSObject {
             activity.totalRuns = dbActivity.activityRuns.count
             activity.version = dbActivity.version
             activity.branching = dbActivity.branching
+            activity.state = dbActivity.state
             
             do {
                 let frequencyRuns = try JSONSerialization.jsonObject(with: dbActivity.frequencyRunsData!, options: []) as! [String:Any]

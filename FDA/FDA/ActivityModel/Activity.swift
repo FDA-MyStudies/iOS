@@ -78,7 +78,10 @@ enum Frequency:String {
     }
     
 }
-
+enum ActivityState:String {
+    case active
+    case deleted
+}
 class Activity{
     
     var type:ActivityType?
@@ -87,8 +90,8 @@ class Activity{
     var studyId:String?
     var name:String? //this will come in activity list used to display
     var shortName:String? //this will come in meta data
-    
     var version:String?
+    var state:String?
     var lastModified:Date?
     var userStatus:UserActivityStatus.ActivityStatus = .yetToJoin
     var startDate:Date?
@@ -175,6 +178,9 @@ class Activity{
             
             if Utilities.isValidValue(someObject: infoDict[kActivityTitle] as AnyObject ){
                 self.name = infoDict[kActivityTitle] as! String?
+            }
+            if Utilities.isValidValue(someObject: infoDict["state"] as AnyObject ){
+                self.state = infoDict["state"] as! String?
             }
             if Utilities.isValidValue(someObject: infoDict[kActivityBranching] as AnyObject ){
                 self.branching = infoDict[kActivityBranching] as? Bool

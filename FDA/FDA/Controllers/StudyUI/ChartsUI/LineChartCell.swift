@@ -121,16 +121,19 @@ class LineChartCell: GraphChartTableViewCell {
         
         var points:Array<ORKValueRange> = []
         
-        let timeRange = chart.dataSourceTimeRange!
-        let chartTimeRange = ChartTimeRange(rawValue:timeRange)!
+       
         let activity = Study.currentStudy?.activities.filter({$0.actvityId == chart.activityId}).last
+        
         charActivity = activity
         
-        if charActivity == nil {
+        if charActivity == nil || chart.dataSourceTimeRange == nil {
             self.buttonForward.isEnabled = false
             self.buttonBackward.isEnabled = false
             return
         }
+        
+        let timeRange = chart.dataSourceTimeRange!
+        let chartTimeRange = ChartTimeRange(rawValue:timeRange)!
         
         switch chartTimeRange {
             
@@ -172,11 +175,6 @@ class LineChartCell: GraphChartTableViewCell {
             
             
             self.handleDaysOfWeekForStartDate(startDate: startDateOfWeek!, endDate: endDateOfWeek!)
-            
-            
-            
-            
-           
             
             
             

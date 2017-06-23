@@ -26,7 +26,7 @@ class EligibilityStep: ORKStep {
     }
 }
 
-let kStudyWithStudyId = "Study with StudyId"
+//let kStudyWithStudyId = "Study with StudyId"
 
 class EligibilityStepViewController: ORKStepViewController {
 

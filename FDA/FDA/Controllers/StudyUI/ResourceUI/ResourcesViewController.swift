@@ -12,6 +12,8 @@ import UIKit
 
 let kConsentPdfKey = "consent"
 
+let kUnwindToStudyListIdentifier = "unwindeToStudyListResourcesIdentifier"
+
 class ResourcesViewController : UIViewController{
     
     var tableViewRowDetails : [AnyObject]? = []
@@ -52,6 +54,7 @@ class ResourcesViewController : UIViewController{
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        self.addHomeButton()
          UIApplication.shared.statusBarStyle = .default
         self.navigationController?.setNavigationBarHidden(false, animated: true)
         
@@ -135,7 +138,7 @@ class ResourcesViewController : UIViewController{
     
     @IBAction func homeButtonAction(_ sender: AnyObject){
         self.navigationController?.navigationBar.isHidden = false
-        self.performSegue(withIdentifier: "unwindeToStudyListResourcesIdentifier", sender: self)
+        self.performSegue(withIdentifier: kUnwindToStudyListIdentifier, sender: self)
         
     }
     

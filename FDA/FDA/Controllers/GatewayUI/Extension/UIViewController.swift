@@ -70,10 +70,6 @@ extension UIViewController {
         var view = self.view.viewWithTag(5000)
         if view == nil {
             
-           
-            
-            
-            
            view = UINib(nibName: "NewProgressView", bundle: nil).instantiate(withOwner: nil, options: nil)[0] as? UIView
             
             

@@ -126,12 +126,12 @@ class StudyListViewController: UIViewController {
         
         button.setImage(#imageLiteral(resourceName: "notification_active"), for: UIControlState.normal)
         button.addTarget(self, action:#selector(self.buttonActionNotification(_:)), for: UIControlEvents.touchUpInside)
-        button.frame = CGRect.init(x: 0, y: 0, width: 30, height: 30)
+        button.frame = CGRect.init(x: 15, y: 0, width: 30, height: 30)
         view.addSubview(button)
         
         button.isExclusiveTouch = true
         
-        let label = UILabel.init(frame:CGRect.init(x: 15, y: 0, width: 10, height: 10) )
+        let label = UILabel.init(frame:CGRect.init(x: 30, y: 0, width: 10, height: 10) )
         
         label.font = UIFont.systemFont(ofSize: 10)
         label.textColor = UIColor.white
@@ -815,7 +815,8 @@ extension StudyListViewController:ORKTaskViewControllerDelegate{
             taskResult = taskViewController.restorationData
             
         }
-        taskViewController.dismiss(animated: true, completion:nil)
+        
+        self.dismiss(animated: true, completion: nil)
     }
     
     func taskViewController(_ taskViewController: ORKTaskViewController, stepViewControllerWillAppear stepViewController: ORKStepViewController) {

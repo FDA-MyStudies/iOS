@@ -29,6 +29,8 @@ let kLabelName = "LabelName"
 
 let kUseTouchIdOrPasscode = "Use Touch ID/Passcode to Access App"
 
+let kUsePasscodeToAccessApp = "Use Passcode to access app"
+
 let ktouchid = "touchIdEnabled"
 let korkPasscode = "ORKPasscode"
 
@@ -383,7 +385,7 @@ class ProfileViewController: UIViewController {
         var passcodeDict:Dictionary<String,Any> =  tableViewRowDetails?[3] as! Dictionary<String, Any>
         
         
-        let keychainPasscodeDict:Dictionary<String,Any>? = ORKKeychainWrapper.object(forKey: korkPasscode, error: &error) as? Dictionary<String, Any>
+        let keychainPasscodeDict:Dictionary<String,Any>? = ORKKeychainWrapper.object(forKey: korkPasscode, error: &error)  == nil ? nil : (ORKKeychainWrapper.object(forKey: korkPasscode, error: &error)  as?  Dictionary<String,Any>)
         var istouchIdEnabled:Bool =  false
         if keychainPasscodeDict != nil &&  (keychainPasscodeDict?.count)! > 0{
             istouchIdEnabled = (keychainPasscodeDict?[ktouchid])! as! Bool
@@ -395,7 +397,10 @@ class ProfileViewController: UIViewController {
             passcodeDict[kLabelName] =  kUseTouchIdOrPasscode
             tableViewRowDetails?.replaceObject(at: 3, with: passcodeDict)
         }
-        
+        else{
+            passcodeDict[kLabelName] =  kUsePasscodeToAccessApp
+            tableViewRowDetails?.replaceObject(at: 3, with: passcodeDict)
+        }
         
     }
     
@@ -859,10 +864,13 @@ extension ProfileViewController: ORKPasscodeDelegate {
         self.isPasscodeViewPresented = true
        
         
-        viewController.dismiss(animated: true, completion: nil)
+        self.dismiss(animated: true, completion: {
+            self.setInitialDate()
+        })
     }
     
     func passcodeViewControllerDidFailAuthentication(_ viewController: UIViewController) {
+        
     }
     
     
@@ -934,7 +942,7 @@ extension ProfileViewController:ORKTaskViewControllerDelegate{
         }
         
       
-        taskViewController.dismiss(animated: true, completion: {
+        self.dismiss(animated: true, completion: {
             
         })
     }

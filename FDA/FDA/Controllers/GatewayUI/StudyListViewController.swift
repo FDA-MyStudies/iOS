@@ -39,6 +39,8 @@ class StudyListViewController: UIViewController {
         
         
         
+        self.addRightNavigationItem()
+        
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         appDelegate.askForNotification()
         
@@ -58,7 +60,12 @@ class StudyListViewController: UIViewController {
         
         
         if ispasscodePending == true{
-            UserServices().getUserProfile(self as NMWebServiceDelegate)
+            
+            if User.currentUser.userType == .FDAUser {
+                UserServices().getUserProfile(self as NMWebServiceDelegate)
+            }
+            
+            
         }
         
         
@@ -94,6 +101,50 @@ class StudyListViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
   
+    func  addRightNavigationItem(){
+        
+        
+        let view = UIView.init(frame: CGRect.init(x: 0, y: 0, width: 40, height: 40))
+        
+        let button = UIButton.init(type: .custom)
+        
+        button.setImage(#imageLiteral(resourceName: "notification_active"), for: UIControlState.normal)
+        button.addTarget(self, action:#selector(self.buttonActionNotification(_:)), for: UIControlEvents.touchUpInside)
+        button.frame = CGRect.init(x: 0, y: 0, width: 30, height: 30)
+        view.addSubview(button)
+        
+        let label = UILabel.init(frame:CGRect.init(x: 15, y: 0, width: 10, height: 10) )
+        
+        label.font = UIFont.systemFont(ofSize: 10)
+        label.textColor = UIColor.white
+        
+        label.textAlignment = NSTextAlignment.center
+        label.backgroundColor = kUIColorForSubmitButtonBackground
+        label.layer.cornerRadius = 5
+        label.clipsToBounds = true
+        label.text = ""
+        view.addSubview(label)
+        
+        let barButton = UIBarButtonItem.init(customView: view)
+        self.navigationItem.rightBarButtonItem = barButton
+
+        let ud = UserDefaults.standard
+        
+        let showNotification = ud.bool(forKey: kShowNotification)
+        
+        if showNotification{
+            label.isHidden = false
+        }
+        else{
+            label.isHidden = true
+        }
+        
+        
+        
+    }
+    
+    
+    
 //MARK:-
     
     /**

@@ -41,11 +41,27 @@ class ActivityResult {
         
         
         if Utilities.isValidObject(someObject: self.result as AnyObject?) == false && self.result?.count == 0 {
+            
+            var i = 0
+            
             for stepResult in taskResult.results!{
                 let activityStepResult:ActivityStepResult? = ActivityStepResult()
                 
                 
+                if (self.activity?.activitySteps?.count )! > 0 {
+                    
+                    let activityStepArray = self.activity?.activitySteps?.filter({$0.key == stepResult.identifier
+                    })
+                    
+                    if (activityStepArray?.count)! > 0 {
+                        activityStepResult?.step  = activityStepArray?.first
+                    }
+                    
+                }
+                
                 activityStepResult?.initWithORKStepResult(stepResult: stepResult as! ORKStepResult , activityType:(self.activity?.type)!)
+                
+                
                 
                 if stepResult.identifier != "CompletionStep"{
                      self.result?.append(activityStepResult!)
@@ -55,7 +71,7 @@ class ActivityResult {
                 
                 print("###: \n  \(activityStepResult?.getActivityStepResultDict())")
                 
-                
+                i = i + 1
             }
         }
         

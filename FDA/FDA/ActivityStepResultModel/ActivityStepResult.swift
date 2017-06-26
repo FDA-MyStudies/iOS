@@ -65,18 +65,20 @@ class ActivityStepResult{
     var skipped:Bool?
     var value:Any?
     
+    var questionStep:ActivityQuestionStep?
+    
     /* default initializer method
      */
     
     init() {
-        step = ActivityStep()
+        self.step = ActivityStep()
         self.type = .question
         self.key = ""
         self.startTime = Date.init(timeIntervalSinceNow: 0)
         self.endTime = Date.init(timeIntervalSinceNow: 0)
         self.skipped = false
         self.value = 0
-        
+        self.questionStep = nil
         
     }
     //MARK: Utility Method
@@ -409,7 +411,26 @@ class ActivityStepResult{
                 
                 if Utilities.isValidValue(someObject: stepTypeResult.scaleAnswer as AnyObject?){
                     
-                    self.value = stepTypeResult.scaleAnswer as! Double
+                    
+                    if self.step != nil && (self.step as? ActivityQuestionStep) != nil && ((self.step as? ActivityQuestionStep)?.resultType as! String) == "continuousScale"{
+                        let formatDict:Dictionary<String, Any>
+                        
+                        formatDict = ((self.step as? ActivityQuestionStep)?.formatDict)!
+                        let maxFractionDigit = formatDict[kStepQuestionContinuosScaleMaxFractionDigits]
+                        
+                        if (maxFractionDigit as! Int) == 0 {
+                            
+                            self.value = round(stepTypeResult.scaleAnswer as! Double)
+                        }
+                        else{
+                             self.value = stepTypeResult.scaleAnswer as! Double
+                        }
+                    }
+                    else{
+                        self.value = stepTypeResult.scaleAnswer as! Double
+                    }
+                    
+                    
                 }
                 else{
                     self.value = 0.0

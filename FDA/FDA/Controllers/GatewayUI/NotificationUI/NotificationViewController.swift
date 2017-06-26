@@ -28,6 +28,12 @@ class NotificationViewController : UIViewController{
         super.viewWillAppear(animated)
         self.addBackBarButton()
         self.navigationController?.setNavigationBarHidden(false, animated: true)
+        
+        
+        
+        let ud = UserDefaults.standard
+        ud.set(false, forKey: kShowNotification)
+        ud.synchronize()
     }
     
     override func viewDidAppear(_ animated: Bool) {

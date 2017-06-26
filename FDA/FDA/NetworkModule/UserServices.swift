@@ -48,6 +48,8 @@ let kUserIsTempPassword = "resetPassword"
 
 
 let kPasscodeIsPending = "PASSCODESETUP"
+let kShowNotification = "SHOWNOTIFICATION"
+
 
 
 let kConsentpdf = "pdf"

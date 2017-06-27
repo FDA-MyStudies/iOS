@@ -86,6 +86,8 @@ class UserServices: NSObject {
     
     let networkManager = NetworkManager.sharedInstance()
     var delegate:NMWebServiceDelegate! = nil
+    var requestParams:Dictionary<String,Any>? = [:]
+    var headerParams:Dictionary<String,String>? = [:]
     
     //MARK: Requests
     func loginUser(_ delegate:NMWebServiceDelegate){
@@ -846,6 +848,9 @@ class UserServices: NSObject {
     
     
     private func sendRequestWith(method:Method, params:Dictionary<String, Any>?,headers:Dictionary<String, String>?){
+        
+        self.requestParams = params
+        self.headerParams = headers
         
         networkManager.composeRequest(RegistrationServerConfiguration.configuration,
                                       method: method,

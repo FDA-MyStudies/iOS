@@ -34,13 +34,63 @@ class SyncUpdate{
             
             DispatchQueue.main.asyncAfter(deadline: .now() + 20.0) {
                 // your code here
-                self.updateRunInformationToServer()
+                //self.updateRunInformationToServer()
+                self.syncDataToServer()
             }
             
             
         }
         else {
              print("not available")
+        }
+    }
+    
+    func syncDataToServer() {
+        
+        let realm = try! Realm()
+        let toBeSyncedData = realm.objects(DBDataOfflineSync.self).first
+        if toBeSyncedData != nil {
+            
+            //request params
+            var params:Dictionary<String, Any>? = nil
+            if toBeSyncedData?.requestParams != nil {
+                
+                do {
+                    params = try JSONSerialization.jsonObject(with: (toBeSyncedData?.requestParams)!, options: []) as? Dictionary<String, Any>
+                    
+                }
+                catch{
+                    
+                }
+            }
+            
+            //header params
+            var headers:Dictionary<String, Any>? = nil
+            if toBeSyncedData?.headerParams != nil {
+                
+                do {
+                    headers = try JSONSerialization.jsonObject(with: (toBeSyncedData?.headerParams)!, options: []) as? Dictionary<String, Any>
+                    
+                }
+                catch{
+                    
+                }
+            }
+            
+            
+            let method = toBeSyncedData?.method!
+            let server = toBeSyncedData?.server!
+            
+            if server == "registration" {
+                let method = RegistrationMethods
+            }
+            else if server == "wcp" {
+                
+            }
+            else if server == "response"
+            
+            
+            
         }
     }
     

@@ -929,10 +929,23 @@ extension UserServices:NMWebServiceDelegate{
             delegate.finishedRequest(manager, requestName: requestName, response: response)
         }
     }
+    
+    
     func failedRequest(_ manager: NetworkManager, requestName: NSString, error: NSError) {
         if delegate != nil {
             delegate.failedRequest(manager, requestName: requestName, error: error)
         }
+        
+        //handle failed request due to network connectivity
+        if requestName as String == RegistrationMethods.updateStudyState.description {
+            
+            if (error.code == NoNetworkErrorCode) {
+                //save in database
+                print("save in database")
+                DBHandler.saveRequestInformation(params: self.requestParams, headers: self.headerParams, method: requestName as String, server: "registration")
+            }
+        }
+
     }
     
 }

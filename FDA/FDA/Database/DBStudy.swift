@@ -160,3 +160,12 @@ class DBResources:Object {
         return "resourceId"
     }
 }
+
+
+class DBDataOfflineSync:Object{
+    
+    dynamic var requestParams:Data?
+    dynamic var headerParams:Data?
+    dynamic var method:String?
+    dynamic var server:String?
+}

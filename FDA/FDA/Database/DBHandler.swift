@@ -965,6 +965,45 @@ class DBHandler: NSObject {
         })
     }
     
+    class func saveRequestInformation(params:Dictionary<String,Any>?,headers:Dictionary<String,Any>?,method:String,server:String) {
+        
+        let realm = try! Realm()
+        let dataSync = DBDataOfflineSync()
+        
+        if params != nil {
+            do {
+                let paramData =  try JSONSerialization.data(withJSONObject: params!, options: JSONSerialization.WritingOptions.prettyPrinted)
+                dataSync.requestParams = paramData
+            }
+            catch{
+                
+            }
+            
+        }
+        
+        if headers != nil {
+            do {
+                let headerData =  try JSONSerialization.data(withJSONObject: headers!, options: JSONSerialization.WritingOptions.prettyPrinted)
+                dataSync.headerParams = headerData
+            }
+            catch{
+                
+            }
+            
+        }
+        dataSync.method = method
+        dataSync.server = server
+        
+        
+        try! realm.write({
+            
+            realm.add(dataSync)
+            
+        })
+        
+        
+    }
+    
     class func isDataAvailableToSync(completionHandler:@escaping (Bool) -> ()){
         
         let realm = try! Realm()

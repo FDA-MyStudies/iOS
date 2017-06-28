@@ -183,7 +183,8 @@ extension FileDownloadManager:URLSessionDelegate{
             else{
                 initializationVector = kdefaultIVForEncryption
             }
-
+            // key = kdefaultKeyForEncrytion
+            //initializationVector = kdefaultIVForEncryption
             
             let data = try Data.init(contentsOf: URL.init(string: pathString)!)
             let aes = try AES(key: key, iv: initializationVector)
@@ -235,6 +236,8 @@ extension FileDownloadManager:URLSessionDelegate{
                 else{
                     initializationVector = kdefaultIVForEncryption
                 }
+                 //key = kdefaultKeyForEncrytion
+                //initializationVector = kdefaultIVForEncryption
                 let data = try Data.init(contentsOf: URL.init(string: pathString)!)
                 let aes = try AES(key: key, iv: initializationVector) // aes128
                 

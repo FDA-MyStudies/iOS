@@ -65,6 +65,8 @@ class ActivityStepResult{
     var skipped:Bool?
     var value:Any?
     
+    var subTypeForForm:String?
+    
     var questionStep:ActivityQuestionStep?
     
     /* default initializer method
@@ -79,6 +81,7 @@ class ActivityStepResult{
         self.skipped = false
         self.value = 0
         self.questionStep = nil
+        self.subTypeForForm = ""
         
     }
     //MARK: Utility Method
@@ -309,6 +312,14 @@ class ActivityStepResult{
                             
                             
                             let questionResult:ORKQuestionResult? = (result as? ORKQuestionResult)
+                            
+                            if  Utilities.isValidValue(someObject: (activityStepResult?.step?.resultType as? String as AnyObject)){
+                                self.subTypeForForm = activityStepResult?.step?.resultType as? String
+                            }
+                            else{
+                                self.subTypeForForm = ""
+                            }
+                            
                             
                             self.setValue(questionstepResult:questionResult! )
                             
@@ -551,7 +562,15 @@ class ActivityStepResult{
             if Utilities.isValidObject(someObject:stepTypeResult.choiceAnswers as AnyObject?){
                 if (stepTypeResult.choiceAnswers?.count)! > 0{
                     
-                    if (self.step?.resultType as! String) ==  QuestionStepType.imageChoice.rawValue ||  (self.step?.resultType as! String) == QuestionStepType.valuePicker.rawValue{
+                    var resultType:String? = (self.step?.resultType as! String)
+                    
+                     // for form we have to assign the step type of each form item
+                    if resultType == "grouped"{
+                       
+                        resultType = self.subTypeForForm
+                    }
+                    
+                    if resultType ==  QuestionStepType.imageChoice.rawValue ||  resultType == QuestionStepType.valuePicker.rawValue{
                         
                         //for image choice and valuepicker
                         
@@ -578,7 +597,7 @@ class ActivityStepResult{
             else{
                 self.value = ""
             }
-        case ORKQuestionType.multipleChoice.rawValue: //textchoice + imageChoice +
+        case ORKQuestionType.multipleChoice.rawValue: //textchoice + imageChoice + // Testing is Pending
             
             let stepTypeResult = questionstepResult as! ORKChoiceQuestionResult
             if Utilities.isValidObject(someObject:stepTypeResult.choiceAnswers as AnyObject?){

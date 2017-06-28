@@ -66,7 +66,7 @@
         var shouldAddForceUpgradeScreen = false
         
         var blockerScreen:AppUpdateBlocker?
-        
+        var passcodeParentControllerWhileSetup:UIViewController?
         
         func askForNotification(){
             
@@ -340,13 +340,9 @@
             
             // self.window?.isHidden = true
             
-            
-            
             self.checkPasscode(viewController: (application.windows[0].rootViewController)!)
             
             self.checkForStudyUpdates()
-            
-            
             
             
             
@@ -947,6 +943,8 @@
                         }
                         taskViewController.isNavigationBarHidden = true
                         
+                        passcodeParentControllerWhileSetup = viewController
+                        
                         isPasscodePresented = true
                         blockerScreen?.isHidden = true
                         viewController.present(taskViewController, animated: false, completion: nil)
@@ -971,18 +969,21 @@
                         }
                         
                         
-                        
                         if topVC is UIAlertController{
                             
                             alertVCPresented = topVC as! UIAlertController?
                             
-                            topVC?.dismiss(animated: true, completion: nil)
+                            if (parentController is ORKPasscodeViewController) == false{
+                                 topVC?.dismiss(animated: true, completion: nil)
+                            }
+                            
+                           
                             topVC = parentController
                             
                             parentViewControllerForAlert = topVC
                         }
                         
-                        
+                        passcodeParentControllerWhileSetup = nil
                         
                         
                         
@@ -1491,9 +1492,13 @@
                 taskResult = taskViewController.restorationData
             }
             
+            if passcodeParentControllerWhileSetup != nil {
+                passcodeParentControllerWhileSetup?.dismiss(animated: true, completion:nil)
+            }
+            else{
+                taskViewController.dismiss(animated: true, completion: nil)
+            }
             
-            
-            taskViewController.dismiss(animated: true, completion: nil)
             
             if taskViewController.task?.identifier == kConsentTaskIdentifier && reason == ORKTaskViewControllerFinishReason.completed{
                 

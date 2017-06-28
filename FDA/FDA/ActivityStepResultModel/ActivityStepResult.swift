@@ -613,8 +613,8 @@ class ActivityStepResult{
                 }
                 else{
                     
-                    let resultValue:String? = "\(stepTypeResult.choiceAnswers?.first)"
-                    self.value = (resultValue == nil  ? "" : resultValue!)
+                    let resultValue:String! = "\(stepTypeResult.choiceAnswers!.first!)"
+                    self.value = (resultValue == nil  ? "" : resultValue)
                     
                 }
                 

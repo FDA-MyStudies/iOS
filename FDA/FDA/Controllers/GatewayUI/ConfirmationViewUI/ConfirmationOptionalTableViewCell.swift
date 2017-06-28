@@ -45,11 +45,11 @@ class ConfirmationOptionalTableViewCell: UITableViewCell {
                 imageViewRetainCheckBox?.image = #imageLiteral(resourceName: "notChecked")
                 deleteData = true;
             }
-            else{
-                imageViewDeleteCheckBox?.image = #imageLiteral(resourceName: "notChecked")
-                imageViewRetainCheckBox?.image = #imageLiteral(resourceName: "checked")
-                deleteData = false;
-            }
+//            else{
+//                imageViewDeleteCheckBox?.image = #imageLiteral(resourceName: "notChecked")
+//                imageViewRetainCheckBox?.image = #imageLiteral(resourceName: "checked")
+//                deleteData = false;
+//            }
         }
         else{
             if (imageViewRetainCheckBox?.image?.isEqual(#imageLiteral(resourceName: "notChecked")))! {
@@ -57,11 +57,11 @@ class ConfirmationOptionalTableViewCell: UITableViewCell {
                 imageViewDeleteCheckBox?.image = #imageLiteral(resourceName: "notChecked")
                 deleteData = false;
             }
-            else{
-                imageViewRetainCheckBox?.image = #imageLiteral(resourceName: "notChecked")
-                imageViewDeleteCheckBox?.image = #imageLiteral(resourceName: "checked")
-                deleteData = true;
-            }
+//            else{
+//                imageViewRetainCheckBox?.image = #imageLiteral(resourceName: "notChecked")
+//                imageViewDeleteCheckBox?.image = #imageLiteral(resourceName: "checked")
+//                deleteData = true;
+//            }
         }
         
         self.delegate?.confirmationCell(cell: self, forStudy: study, deleteData: deleteData)

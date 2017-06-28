@@ -161,9 +161,10 @@ class ActivityBuilder {
                     
                     
                     let completionStep = ORKCompletionStep(identifier: "CompletionStep")
-                    completionStep.title = "Task Completed"
-                    completionStep.image = #imageLiteral(resourceName: "successBlueBig")
+                    completionStep.title = "Activity Completed"
                     
+                    completionStep.image = #imageLiteral(resourceName: "successBlueBig")
+                    completionStep.detailText = "Thank you for your time!"
                     orkStepArray?.append(completionStep)
                     
                     if (orkStepArray?.count)! > 0 {

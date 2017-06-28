@@ -671,7 +671,7 @@ class ActivityStepResult{
             let stepTypeResult = questionstepResult as! ORKTextQuestionResult
             
             if Utilities.isValidValue(someObject: stepTypeResult.answer as AnyObject?){
-                self.value = stepTypeResult.answer
+                self.value = stepTypeResult.answer as! String
             }
             else{
                 self.value = ""

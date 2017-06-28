@@ -801,7 +801,7 @@ extension StudyListViewController:ORKTaskViewControllerDelegate{
         switch reason {
             
         case ORKTaskViewControllerFinishReason.completed:
-            print("completed")
+             print("completed")
             taskResult = taskViewController.result
             
             let ud = UserDefaults.standard

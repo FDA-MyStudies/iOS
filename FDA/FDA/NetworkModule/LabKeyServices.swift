@@ -20,6 +20,10 @@ class LabKeyServices: NSObject {
     var delegate:NMWebServiceDelegate! = nil
     var activityId:String!  //Temp: replace with request parameters
     var keys:String!  //Temp: replace with request parameters
+    var requestParams:Dictionary<String,Any>? = [:]
+    var headerParams:Dictionary<String,String>? = [:]
+    
+    
     //MARK:Requests
     func enrollForStudy(studyId:String, token:String , delegate:NMWebServiceDelegate){
         self.delegate = delegate
@@ -147,6 +151,12 @@ class LabKeyServices: NSObject {
         
     }
     
+    func syncOfflineSavedData(method:Method, params:Dictionary<String, Any>?,headers:Dictionary<String, String>? , delegate:NMWebServiceDelegate){
+        
+        self.delegate = delegate
+        self.sendRequestWith(method:method, params: params!, headers: headers)
+    }
+    
     //MARK:Parsers
     func handleEnrollForStudy(response:Dictionary<String, Any>){
         
@@ -265,6 +275,9 @@ class LabKeyServices: NSObject {
     
     private func sendRequestWith(method:Method, params:Dictionary<String, Any>,headers:Dictionary<String, String>?){
         
+        self.requestParams = params
+        self.headerParams = headers
+        
         networkManager.composeRequest(ResponseServerConfiguration.configuration,
                                       method: method,
                                       params: params as NSDictionary?,
@@ -300,6 +313,15 @@ extension LabKeyServices:NMWebServiceDelegate{
     func failedRequest(_ manager: NetworkManager, requestName: NSString, error: NSError) {
         if delegate != nil {
             delegate.failedRequest(manager, requestName: requestName, error: error)
+        }
+        
+        if requestName as String == ResponseMethods.processResponse.description {
+            
+            if (error.code == NoNetworkErrorCode) {
+                //save in database
+                print("save in database")
+                DBHandler.saveRequestInformation(params: self.requestParams, headers: self.headerParams, method: requestName as String, server: "response")
+            }
         }
     }
 }

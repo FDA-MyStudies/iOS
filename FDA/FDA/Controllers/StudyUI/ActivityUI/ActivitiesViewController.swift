@@ -888,8 +888,8 @@ extension ActivitiesViewController:NMWebServiceDelegate {
                     //                if error.code == CouldNotConnectToServerCode {
                     //                    UIUtilities.showAlertWithMessage(alertMessage: "Your responses don’t get submitted due to connectiviy with our server, but we have saved it locally, we will automatically submit once the app has network available again.")
                     //                }
-                    let data = ActivityBuilder.currentActivityBuilder.actvityResult?.getResultDictionary()
-                    DBHandler.saveResponseDataFor(activity: Study.currentActivity!, toBeSynced: true, data: data!)
+                    //let data = ActivityBuilder.currentActivityBuilder.actvityResult?.getResultDictionary()
+                    //DBHandler.saveResponseDataFor(activity: Study.currentActivity!, toBeSynced: true, data: data!)
                     
                 }
                 

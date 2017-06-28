@@ -168,4 +168,5 @@ class DBDataOfflineSync:Object{
     dynamic var headerParams:Data?
     dynamic var method:String?
     dynamic var server:String?
+    dynamic var date:Date?
 }

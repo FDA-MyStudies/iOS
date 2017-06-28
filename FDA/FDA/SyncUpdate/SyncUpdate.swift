@@ -32,7 +32,7 @@ class SyncUpdate{
         if (NetworkManager.sharedInstance().reachability?.isReachable)!{
             print("*******************update Data***************")
             
-            DispatchQueue.main.asyncAfter(deadline: .now() + 20.0) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 10.0) {
                 // your code here
                 //self.updateRunInformationToServer()
                 self.syncDataToServer()
@@ -48,7 +48,7 @@ class SyncUpdate{
     func syncDataToServer() {
         
         let realm = try! Realm()
-        let toBeSyncedData = realm.objects(DBDataOfflineSync.self).first
+        let toBeSyncedData = realm.objects(DBDataOfflineSync.self).sorted(byKeyPath: "date", ascending: true).first
         if toBeSyncedData != nil {
             
             //request params
@@ -65,11 +65,11 @@ class SyncUpdate{
             }
             
             //header params
-            var headers:Dictionary<String, Any>? = nil
+            var headers:Dictionary<String, String>? = nil
             if toBeSyncedData?.headerParams != nil {
                 
                 do {
-                    headers = try JSONSerialization.jsonObject(with: (toBeSyncedData?.headerParams)!, options: []) as? Dictionary<String, Any>
+                    headers = try JSONSerialization.jsonObject(with: (toBeSyncedData?.headerParams)!, options: []) as? Dictionary<String, String>
                     
                 }
                 catch{
@@ -78,18 +78,33 @@ class SyncUpdate{
             }
             
             
-            let method = toBeSyncedData?.method!
+            let methodString = toBeSyncedData?.method!
             let server = toBeSyncedData?.server!
             
             if server == "registration" {
-                let method = RegistrationMethods
+                
+                let methodName = methodString?.components(separatedBy: ".").first
+                let registrationMethod = RegistrationMethods(rawValue:methodName!)
+                let method = registrationMethod?.method
+                UserServices().syncOfflineSavedData(method: method!, params: params, headers: headers ,delegate: self)
+                
+                
             }
             else if server == "wcp" {
                 
             }
-            else if server == "response"
+            else if server == "response" {
+                
+                let methodName = methodString?.components(separatedBy: ".").first
+                let registrationMethod = ResponseMethods(rawValue:methodName!)
+                let method = registrationMethod?.method
+                LabKeyServices().syncOfflineSavedData(method: method!, params: params, headers: headers ,delegate: self)
+            }
             
-            
+            //delete current database object
+            try! realm.write {
+               realm.delete(toBeSyncedData!)
+            }
             
         }
     }
@@ -190,8 +205,8 @@ extension SyncUpdate:NMWebServiceDelegate {
     func finishedRequest(_ manager: NetworkManager, requestName: NSString, response: AnyObject?) {
         Logger.sharedInstance.info("requestname : \(requestName) : \(response)")
         
-       self.findNextRunToSync()
-        
+       //self.findNextRunToSync()
+        self.syncDataToServer()
        
     }
     

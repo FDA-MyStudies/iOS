@@ -524,6 +524,12 @@ class UserServices: NSObject {
         self.sendRequestWith(method:method, params: params, headers: headerParams)
     }
     
+    func syncOfflineSavedData(method:Method, params:Dictionary<String, Any>?,headers:Dictionary<String, String>? , delegate:NMWebServiceDelegate){
+        
+        self.delegate = delegate
+        self.sendRequestWith(method:method, params: params, headers: headers)
+    }
+    
     
     //MARK:Parsers
     func handleUserLoginResponse(response:Dictionary<String, Any>){
@@ -937,7 +943,8 @@ extension UserServices:NMWebServiceDelegate{
         }
         
         //handle failed request due to network connectivity
-        if requestName as String == RegistrationMethods.updateStudyState.description {
+        if requestName as String == RegistrationMethods.updateStudyState.description ||
+           requestName as String == RegistrationMethods.updateActivityState.description {
             
             if (error.code == NoNetworkErrorCode) {
                 //save in database

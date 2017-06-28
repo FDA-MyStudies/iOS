@@ -993,6 +993,7 @@ class DBHandler: NSObject {
         }
         dataSync.method = method
         dataSync.server = server
+        dataSync.date = Date()
         
         
         try! realm.write({
@@ -1007,7 +1008,7 @@ class DBHandler: NSObject {
     class func isDataAvailableToSync(completionHandler:@escaping (Bool) -> ()){
         
         let realm = try! Realm()
-        let dbRuns = realm.objects(DBActivityRun.self).filter({$0.toBeSynced == true})
+        let dbRuns = realm.objects(DBDataOfflineSync.self)
         if dbRuns.count > 0{
             completionHandler(true)
         }

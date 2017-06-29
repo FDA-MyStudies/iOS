@@ -1506,6 +1506,8 @@
             
             if passcodeParentControllerWhileSetup != nil {
                 passcodeParentControllerWhileSetup?.dismiss(animated: true, completion:nil)
+                
+                passcodeParentControllerWhileSetup = nil
             }
             else{
                 taskViewController.dismiss(animated: true, completion: nil)

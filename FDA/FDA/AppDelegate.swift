@@ -427,6 +427,7 @@
             if  User.currentUser.userType == .FDAUser{
             
             User.currentUser.settings?.remoteNotifications = true
+            User.currentUser.settings?.localNotifications = true
             UserServices().updateUserProfile(deviceToken: deviceTokenString , delegate: self)
             
             
@@ -1330,12 +1331,7 @@
                     
                     if response?["forceUpdate"] as! Bool {
                         
-                        
-                        // topVC?.view.endEditing(true)
-                        
-                        //self.window?.endEditing(true)
-                        
-                        //UIApplication.shared.sendAction(#selector("resignFirstResponder"), to:nil, from:nil, for:nil)
+                      
                         
                         self.shouldAddForceUpgradeScreen = true
                         
@@ -1358,16 +1354,7 @@
                             UIApplication.shared.keyWindow?.addSubview(blockerScreen!)
                         }
                         
-                        // UIApplication.shared.keyWindow?.addSubview(appBlocker);
-                        
-                        //UIApplication.shared.sendAction(#selector(resignFirstResponder), to: nil, from: nil, for: nil)
-                        
-                        //                        var topVC = UIApplication.shared.keyWindow?.rootViewController
-                        //                        let vc  = topVC?.presentedViewController
-                        //                        if vc is ORKPasscodeViewController {
-                        //                           let vc1 = vc as! ORKPasscodeViewController
-                        //                            vc1.view.endEditing(true)
-                        //                        }
+                       
                         
                         
                     }
@@ -1405,6 +1392,12 @@
             else if (requestName as String == WCPMethods.studyUpdates.rawValue){
                 //self.removeProgressIndicator()
                 self.handleStudyUpdatedInformation()
+            }
+            else if (requestName as String == RegistrationMethods.updateUserProfile.description){
+                
+                let ud = UserDefaults.standard
+                ud.set(false, forKey: kNotificationRegistrationIsPending)
+                ud.synchronize()
             }
             
             

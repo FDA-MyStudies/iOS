@@ -389,8 +389,26 @@ class ActivityStepResult{
                                 
                                 
                             }
-                            resultDict?[kActivityStepStartTime] =  "\(self.startTime!)"
-                            resultDict?[kActivityStepEndTime] =  "\(self.endTime!)"
+                            if self.startTime != nil && (Utilities.getStringFromDate(date: self.startTime!) != nil){
+                                
+                                resultDict?[kActivityStepStartTime] = Utilities.getStringFromDate(date: self.startTime!)
+                            }
+                            else{
+                                let currentDate = Date()
+                                let dateString =  Utilities.getStringFromDate(date: currentDate)
+                                
+                                resultDict?[kActivityStepStartTime] = dateString
+                            }
+                            if self.endTime != nil && (Utilities.getStringFromDate(date: self.endTime!) != nil){
+                                
+                                resultDict?[kActivityStepEndTime] = Utilities.getStringFromDate(date: self.endTime!)
+                            }
+                            else{
+                                let currentDate = Date()
+                                let dateString =  Utilities.getStringFromDate(date: currentDate)
+                                
+                                resultDict?[kActivityStepEndTime] = dateString
+                            }
                             resultDict?[kActivityStepSkipped] =  self.skipped
                             
                             resultArray?.append(resultDict!)
@@ -423,8 +441,26 @@ class ActivityStepResult{
                             
                         }
                         
-                        resultDict?[kActivityStepStartTime] =  "\(self.startTime!)"
-                        resultDict?[kActivityStepEndTime] =  "\(self.endTime!)"
+                        if self.startTime != nil && (Utilities.getStringFromDate(date: self.startTime!) != nil){
+                            
+                            resultDict?[kActivityStepStartTime] = Utilities.getStringFromDate(date: self.startTime!)
+                        }
+                        else{
+                            let currentDate = Date()
+                            let dateString =  Utilities.getStringFromDate(date: currentDate)
+                            
+                            resultDict?[kActivityStepStartTime] = dateString
+                        }
+                        if self.endTime != nil && (Utilities.getStringFromDate(date: self.endTime!) != nil){
+                            
+                            resultDict?[kActivityStepEndTime] = Utilities.getStringFromDate(date: self.endTime!)
+                        }
+                        else{
+                            let currentDate = Date()
+                            let dateString =  Utilities.getStringFromDate(date: currentDate)
+                            
+                            resultDict?[kActivityStepEndTime] = dateString
+                        }
                         resultDict?[kActivityStepSkipped] =  self.skipped
                         
                         resultArray?.append(resultDict!)
@@ -453,8 +489,27 @@ class ActivityStepResult{
                             
                         }
                         
-                        resultDict?[kActivityStepStartTime] =  "\(self.startTime!)"
-                        resultDict?[kActivityStepEndTime] =  "\(self.endTime!)"
+                        if self.startTime != nil && (Utilities.getStringFromDate(date: self.startTime!) != nil){
+                            
+                             resultDict?[kActivityStepStartTime] = Utilities.getStringFromDate(date: self.startTime!)
+                        }
+                        else{
+                            let currentDate = Date()
+                            let dateString =  Utilities.getStringFromDate(date: currentDate)
+                            
+                            resultDict?[kActivityStepStartTime] = dateString
+                        }
+                        if self.endTime != nil && (Utilities.getStringFromDate(date: self.endTime!) != nil){
+                            
+                           resultDict?[kActivityStepEndTime] = Utilities.getStringFromDate(date: self.endTime!)
+                        }
+                        else{
+                            let currentDate = Date()
+                            let dateString =  Utilities.getStringFromDate(date: currentDate)
+                            
+                            resultDict?[kActivityStepEndTime] = dateString
+                        }
+                        
                         resultDict?[kActivityStepSkipped] =  self.skipped
                         
                         resultArray?.append(resultDict!)

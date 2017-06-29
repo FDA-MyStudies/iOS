@@ -37,7 +37,7 @@ let kRegistrationInfoMessage = "Registration (or sign up) for the app  is reques
 
 let kDeleteAccountConfirmationMessage = "Are you sure you wish to permanently delete your FDA My Studies account? You will need to register again if you wish to join a study."
 let kMessageAccountDeletedSuccess = "Account has been deleted"
-
+let kMessageAppNotificationOffRemainder = "Stay up-to-date! Turn ON notifications and reminders in app and phone settings to get notified about study activity in a timely manner."
 
 //MARK:- Signin Constants
 let kSignInTitleText = "SIGN IN"

@@ -38,7 +38,7 @@ class StudyListViewController: UIViewController {
         //Condition missing
         
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        appDelegate.askForNotification()
+//        appDelegate.askForNotification()
         
         if User.currentUser.userType == .FDAUser && User.currentUser.settings?.localNotifications == true{
             appDelegate.checkForAppReopenNotification()
@@ -166,6 +166,48 @@ class StudyListViewController: UIViewController {
     
     //MARK:-
     
+    func checkIfNotificationEnabled(){
+        
+        var notificationEnabledFromAppSettings = false
+        
+        
+        //app settings
+        let notificationType = UIApplication.shared.currentUserNotificationSettings!.types
+        if notificationType == [] {
+            print("notifications are NOT enabled")
+        } else {
+            print("notifications are enabled")
+            notificationEnabledFromAppSettings = true
+        }
+        
+        
+        if ((User.currentUser.settings?.remoteNotifications)!
+            && (User.currentUser.settings?.localNotifications)!
+            && notificationEnabledFromAppSettings) {
+            //don't do anything
+        }
+        else {
+            
+            var ud = UserDefaults.standard
+            let previousDate = ud.object(forKey: "NotificationRemainder") as? Date
+            let todayDate = Date()
+            var daysLastSeen = 0
+            if previousDate != nil {
+                daysLastSeen = Schedule().getNumberOfDaysBetween(startDate: previousDate!, endDate: todayDate)
+            }
+            
+            
+            if (previousDate == nil || daysLastSeen >= 7 ) {
+                
+                UIUtilities.showAlertWithTitleAndMessage(title:NSLocalizedString("FDA My Studies", comment: "") as NSString, message: NSLocalizedString(kMessageAppNotificationOffRemainder, comment: "") as NSString)
+                
+                ud.set(Date(), forKey: "NotificationRemainder")
+                ud.synchronize()
+            }
+        }
+        
+    }
+    
     /**
      
      Used to load the test data from Studylist of type json
@@ -212,14 +254,9 @@ class StudyListViewController: UIViewController {
                 self.pushToStudyDashboard(animated: false)
             }
         }
-        
-        
-        //        ud.removeObject(forKey: "FKC")
-        //        ud.removeObject(forKey: "FetalKickActivityId")
-        //        ud.removeObject(forKey: "FetalKickCounterValue")
-        //        ud.removeObject(forKey: "FetalKickStartTimeStamp")
-        //        ud.synchronize()
-        
+        else {
+            self.checkIfNotificationEnabled()
+        }
         
     }
     
@@ -307,6 +344,8 @@ class StudyListViewController: UIViewController {
      
      */
     func loadStudiesFromDatabase(){
+        
+        
         
         DBHandler.loadStudyListFromDatabase { (studies) in
             if studies.count > 0 {
@@ -502,9 +541,6 @@ class StudyListViewController: UIViewController {
             self.tableView?.isHidden = false
             
             let appDelegate = UIApplication.shared.delegate as! AppDelegate
-            
-            
-            
             
             if appDelegate.notificationDetails != nil && User.currentUser.userType == .FDAUser{
                 appDelegate.handleLocalAndRemoteNotification(userInfoDetails:appDelegate.notificationDetails! )

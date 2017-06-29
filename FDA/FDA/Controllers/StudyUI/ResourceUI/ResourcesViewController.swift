@@ -357,8 +357,28 @@ class ResourcesViewController : UIViewController{
         
         let pdfData = FileDownloadManager.decrytFile(pathURL:URL.init(string: fullPath))
         
+        var isPDF:Bool = false
+        if (pdfData?.count)! >= 1024 //only check if bigger
+        {
+            var pdfBytes = [UInt8]()
+            pdfBytes = [ 0x25, 0x50, 0x44, 0x46]
+            let pdfHeader = NSData(bytes: pdfBytes, length: 4)
+            
+            let myRange: Range = 0..<1024
+            let foundRange = pdfData?.range(of: pdfHeader as Data, options: .anchored, in:myRange) //rangeOfData(pdfHeader, options: nil, range: NSMakeRange(0, 1024))
+            if foundRange != nil && (foundRange?.count)! > 0
+            {
+                isPDF = true
+                print("pdf")
+            }
+            else {
+                isPDF = false
+                print("not pdf")
+                UserServices().getConsentPDFForStudy(studyId: (Study.currentStudy?.studyId)!, delegate: self)
+            }
+        }
         
-        if pdfData != nil {
+        if pdfData != nil && isPDF{
             self.navigateToWebView(link: "", htmlText: "",pdfData:pdfData)
         }
     }
@@ -680,7 +700,7 @@ extension ResourcesViewController:NMWebServiceDelegate {
                     Study.currentStudy?.signedConsentVersion = consentDict[kConsentVersion] as? String
                 }
                 else{
-                     Study.currentStudy?.signedConsentVersion = "No_Version"
+                    Study.currentStudy?.signedConsentVersion = "No_Version"
                 }
                 
                 /* supposed that mime type of consent remains pdf

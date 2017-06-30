@@ -556,7 +556,7 @@ class ProfileViewController: UIViewController {
             if  ORKPasscodeViewController.isPasscodeStoredInKeychain() == false{
                 let passcodeStep = ORKPasscodeStep(identifier: kPasscodeStepIdentifier)
                 passcodeStep.passcodeType = .type4Digit
-                 passcodeStep.text = kPasscodeSetUpText
+                // passcodeStep.text = kPasscodeSetUpText
                 let task = ORKOrderedTask(identifier: kPasscodeTaskIdentifier, steps: [passcodeStep])
                 let taskViewController = ORKTaskViewController.init(task: task, taskRun: nil)
                 taskViewController.delegate = self

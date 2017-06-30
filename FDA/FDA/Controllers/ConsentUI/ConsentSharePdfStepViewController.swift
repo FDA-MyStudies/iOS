@@ -112,7 +112,7 @@ class ConsentSharePdfStepViewController: ORKStepViewController {
         
         buttonViewPdf?.layer.borderColor =   kUicolorForButtonBackground
         
-        
+        buttonNext?.layer.borderColor =   kUicolorForButtonBackground
     }
     
     override func didReceiveMemoryWarning() {

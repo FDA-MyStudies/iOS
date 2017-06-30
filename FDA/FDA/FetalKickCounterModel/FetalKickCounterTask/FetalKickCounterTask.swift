@@ -126,6 +126,7 @@ class FetalKickCounterTask {
         
         //create a Completion Step
         let summaryStep = ORKCompletionStep(identifier: kFetalKickCounterStepCompletionTitle)
+        summaryStep.title = "Activity Completed"
         
         steps?.append(summaryStep)
         

@@ -354,6 +354,8 @@ class FetalKickCounterStepViewController:  ORKStepViewController {
         
     }
     @IBAction func submitButtonAction(_ sender:UIButton){
+        
+        self.taskResult.totalKickCount = self.kickCounter == nil ? 0 : self.kickCounter!
         self.perform(#selector(self.goForward))
     }
 }

@@ -59,6 +59,8 @@ class FetalKickIntroStepViewController:  ORKStepViewController {
             self.titleLabel?.text = step.introTitle
             self.descriptionLabel?.text = step.subTitle
             self.iconImage = step.displayImage
+            
+            buttonNext?.layer.borderColor =   kUicolorForButtonBackground
         }
         
     }

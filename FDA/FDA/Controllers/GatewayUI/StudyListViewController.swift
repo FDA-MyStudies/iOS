@@ -255,7 +255,7 @@ class StudyListViewController: UIViewController {
             }
         }
         else {
-            self.checkIfNotificationEnabled()
+            //self.checkIfNotificationEnabled()
         }
         
     }

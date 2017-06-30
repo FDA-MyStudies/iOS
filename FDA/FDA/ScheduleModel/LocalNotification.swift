@@ -84,7 +84,7 @@ class LocalNotification: NSObject {
             
             for run in runsBeforeToday {
                 
-                print("Notification \(activity.actvityId) run: \(run.runId)")
+                
                 
                 switch activity.frequencyType {
                 case .One_Time:
@@ -168,7 +168,7 @@ class LocalNotification: NSObject {
     
    class func scheduleNotificationOn(date:Date,message:String,userInfo:Dictionary<String,Any>){
     
-        print("NotificationMessage\(message)")
+        print("NotificationMessage\(message) ** date \(date.description(with: Locale.current))" )
     
         let notification = UILocalNotification()
         notification.fireDate = date

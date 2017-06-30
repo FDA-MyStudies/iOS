@@ -128,6 +128,11 @@ class FetalKickCounterTask {
         let summaryStep = ORKCompletionStep(identifier: kFetalKickCounterStepCompletionTitle)
         summaryStep.title = "Activity Completed"
         
+        summaryStep.image = #imageLiteral(resourceName: "successBlueBig")
+        summaryStep.detailText = "Thank you for your time!"
+       
+        
+        
         steps?.append(summaryStep)
         
         return ORKOrderedTask(identifier: kFetalKickCounterTaskIdentifier, steps: steps)

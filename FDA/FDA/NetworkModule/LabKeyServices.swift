@@ -129,7 +129,7 @@ class LabKeyServices: NSObject {
         
     }
     
-    func getParticipantResponse(activityId:String,keys:String,participantId:String,delegate:NMWebServiceDelegate){
+    func getParticipantResponse(tableName:String,activityId:String,keys:String,participantId:String,delegate:NMWebServiceDelegate){
         
         
         
@@ -139,7 +139,7 @@ class LabKeyServices: NSObject {
         self.activityId = activityId
         self.keys = keys
         let method = ResponseMethods.executeSQL.method
-        let query = "SELECT " + keys + ",Created" + " FROM " + activityId
+        let query = "SELECT " + keys + ",Created" + " FROM " + tableName
         let params = [
             
                       kParticipantId: participantId,
@@ -220,11 +220,12 @@ class LabKeyServices: NSObject {
         
         var dashBoardResponse:Array<DashboardResponse> = []
         let keysArray = self.keys.components(separatedBy: ",")
-        for key in keysArray{
+        for  key in keysArray{
             
+            let newkey = key.replacingOccurrences(of: "\"", with: "")
             let responseData = DashboardResponse()
             responseData.activityId = activityId
-            responseData.key = key
+            responseData.key = newkey
             responseData.type = "int"
             responseData.isPHI = "true"
             

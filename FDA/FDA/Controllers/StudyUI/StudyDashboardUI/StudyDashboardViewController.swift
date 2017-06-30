@@ -64,6 +64,7 @@ class StudyDashboardViewController : UIViewController{
         super.viewWillAppear(animated)
         UIApplication.shared.statusBarStyle = .lightContent
         //unhide navigationbar
+       
         self.navigationController?.setNavigationBarHidden(true, animated: true)
         
         if StudyUpdates.studyActivitiesUpdated {
@@ -151,9 +152,15 @@ class StudyDashboardViewController : UIViewController{
         if self.dataSourceKeysForLabkey.count != 0 {
             let details = self.dataSourceKeysForLabkey.first
             let activityId = details?["activityId"]
-            let keys = details?["keys"]
+            var tableName = activityId
+            let activity = Study.currentStudy?.activities.filter({$0.actvityId == activityId}).first
+            var keys = details?["keys"]
+            if activity?.type == ActivityType.activeTask {
+                keys = "\"count\""
+                tableName = activityId!+activityId!
+            }
             let participantId = Study.currentStudy?.userParticipateState.participantId
-            LabKeyServices().getParticipantResponse(activityId: activityId!, keys: keys!, participantId: participantId!, delegate: self)
+            LabKeyServices().getParticipantResponse(tableName:tableName!,activityId: activityId!, keys: keys!, participantId: participantId!, delegate: self)
         }
         else{
             self.removeProgressIndicator()
@@ -164,7 +171,13 @@ class StudyDashboardViewController : UIViewController{
             for  response in responses{
                 
                 let activityId = response.activityId
-                let key = response.key
+                let activity = Study.currentStudy?.activities.filter({$0.actvityId == activityId}).first
+                var key = response.key
+                if activity?.type == ActivityType.activeTask {
+                    
+                    key = activityId!
+                }
+                
                 
                 let values = response.values
                 for value in values{
@@ -176,7 +189,7 @@ class StudyDashboardViewController : UIViewController{
                 
             }
             UserDefaults.standard.set(true, forKey: "LabKeyResponseParsed")
-            print("Labkey response \(StudyDashboard.instance.dashboardResponse)")
+           // print("Labkey response \(StudyDashboard.instance.dashboardResponse)")
         }
         
         //https://hphci-fdama-te-ds-01.labkey.com/mobileAppStudy-executeSQL.api?participantId=1a3d0d308df81024f8bfd7f11f7a0168&sql=SELECT%20*%20FROM%20Q1

@@ -104,6 +104,10 @@ class ConsentResult {
                             
                             FileDownloadManager.encyptFile(pathURL: URL(string:defaultPath!)!)
                             
+                            let notificationName = Notification.Name("pdfCreationNotificationIdentifier")
+                            // Post notification
+                            NotificationCenter.default.post(name: notificationName, object: nil)
+                            
                             //try data?.write(to: URL(string:fullPath)! , options: .atomicWrite)
                             
                             // writing to disk

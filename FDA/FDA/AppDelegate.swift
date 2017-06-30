@@ -1279,6 +1279,18 @@
             
         }
         
+        
+        func updateEligibilityConsentStatus(){
+            
+            let notificationName = Notification.Name("pdfCreationNotificationIdentifier")
+            // Post notification
+          
+            // Stop listening notification
+            NotificationCenter.default.removeObserver(self, name: notificationName, object: nil);
+            
+             UserServices().updateUserEligibilityConsentStatus(eligibilityStatus: true, consentStatus:(ConsentBuilder.currentConsent?.consentStatus)!  , delegate: self)
+        }
+        
         func popViewControllerAfterConsentDisagree(){
             //self.popToStudyListViewController()
             if self.selectedController is StudyDashboardViewController {
@@ -1487,6 +1499,8 @@
             
             if passcodeParentControllerWhileSetup != nil {
                 passcodeParentControllerWhileSetup?.dismiss(animated: true, completion:nil)
+                
+                passcodeParentControllerWhileSetup = nil
             }
             else{
                 taskViewController.dismiss(animated: true, completion: nil)
@@ -1499,7 +1513,24 @@
                 
                 self.addAndRemoveProgress(add: true)
                 
-                UserServices().updateUserEligibilityConsentStatus(eligibilityStatus: true, consentStatus:(ConsentBuilder.currentConsent?.consentStatus)!  , delegate: self)
+                
+                if ConsentBuilder.currentConsent?.consentResult?.consentPdfData?.count == 0 {
+                    
+                    // Define identifier
+                    let notificationName = Notification.Name("pdfCreationNotificationIdentifier")
+                    
+                    // Register to receive notification
+                    NotificationCenter.default.addObserver(self, selector: #selector(self.updateEligibilityConsentStatus), name: notificationName, object: nil)
+                    
+                    
+                    self.perform(#selector(self.updateEligibilityConsentStatus), with: self, afterDelay: 2.0)
+                }
+                else{
+                     UserServices().updateUserEligibilityConsentStatus(eligibilityStatus: true, consentStatus:(ConsentBuilder.currentConsent?.consentStatus)!  , delegate: self)
+                }
+                
+                
+               
                 
             }
             

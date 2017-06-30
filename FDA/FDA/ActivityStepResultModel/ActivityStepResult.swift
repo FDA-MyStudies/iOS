@@ -65,6 +65,8 @@ class ActivityStepResult{
     var skipped:Bool?
     var value:Any?
     
+    var subTypeForForm:String?
+    
     var questionStep:ActivityQuestionStep?
     
     /* default initializer method
@@ -79,6 +81,7 @@ class ActivityStepResult{
         self.skipped = false
         self.value = 0
         self.questionStep = nil
+        self.subTypeForForm = ""
         
     }
     //MARK: Utility Method
@@ -310,6 +313,14 @@ class ActivityStepResult{
                             
                             let questionResult:ORKQuestionResult? = (result as? ORKQuestionResult)
                             
+                            if  Utilities.isValidValue(someObject: (activityStepResult?.step?.resultType as? String as AnyObject)){
+                                self.subTypeForForm = activityStepResult?.step?.resultType as? String
+                            }
+                            else{
+                                self.subTypeForForm = ""
+                            }
+                            
+                            
                             self.setValue(questionstepResult:questionResult! )
                             
                             activityStepResult?.value = self.value
@@ -378,8 +389,26 @@ class ActivityStepResult{
                                 
                                 
                             }
-                            resultDict?[kActivityStepStartTime] =  "\(self.startTime!)"
-                            resultDict?[kActivityStepEndTime] =  "\(self.endTime!)"
+                            if self.startTime != nil && (Utilities.getStringFromDate(date: self.startTime!) != nil){
+                                
+                                resultDict?[kActivityStepStartTime] = Utilities.getStringFromDate(date: self.startTime!)
+                            }
+                            else{
+                                let currentDate = Date()
+                                let dateString =  Utilities.getStringFromDate(date: currentDate)
+                                
+                                resultDict?[kActivityStepStartTime] = dateString
+                            }
+                            if self.endTime != nil && (Utilities.getStringFromDate(date: self.endTime!) != nil){
+                                
+                                resultDict?[kActivityStepEndTime] = Utilities.getStringFromDate(date: self.endTime!)
+                            }
+                            else{
+                                let currentDate = Date()
+                                let dateString =  Utilities.getStringFromDate(date: currentDate)
+                                
+                                resultDict?[kActivityStepEndTime] = dateString
+                            }
                             resultDict?[kActivityStepSkipped] =  self.skipped
                             
                             resultArray?.append(resultDict!)
@@ -412,8 +441,26 @@ class ActivityStepResult{
                             
                         }
                         
-                        resultDict?[kActivityStepStartTime] =  "\(self.startTime!)"
-                        resultDict?[kActivityStepEndTime] =  "\(self.endTime!)"
+                        if self.startTime != nil && (Utilities.getStringFromDate(date: self.startTime!) != nil){
+                            
+                            resultDict?[kActivityStepStartTime] = Utilities.getStringFromDate(date: self.startTime!)
+                        }
+                        else{
+                            let currentDate = Date()
+                            let dateString =  Utilities.getStringFromDate(date: currentDate)
+                            
+                            resultDict?[kActivityStepStartTime] = dateString
+                        }
+                        if self.endTime != nil && (Utilities.getStringFromDate(date: self.endTime!) != nil){
+                            
+                            resultDict?[kActivityStepEndTime] = Utilities.getStringFromDate(date: self.endTime!)
+                        }
+                        else{
+                            let currentDate = Date()
+                            let dateString =  Utilities.getStringFromDate(date: currentDate)
+                            
+                            resultDict?[kActivityStepEndTime] = dateString
+                        }
                         resultDict?[kActivityStepSkipped] =  self.skipped
                         
                         resultArray?.append(resultDict!)
@@ -442,8 +489,27 @@ class ActivityStepResult{
                             
                         }
                         
-                        resultDict?[kActivityStepStartTime] =  "\(self.startTime!)"
-                        resultDict?[kActivityStepEndTime] =  "\(self.endTime!)"
+                        if self.startTime != nil && (Utilities.getStringFromDate(date: self.startTime!) != nil){
+                            
+                             resultDict?[kActivityStepStartTime] = Utilities.getStringFromDate(date: self.startTime!)
+                        }
+                        else{
+                            let currentDate = Date()
+                            let dateString =  Utilities.getStringFromDate(date: currentDate)
+                            
+                            resultDict?[kActivityStepStartTime] = dateString
+                        }
+                        if self.endTime != nil && (Utilities.getStringFromDate(date: self.endTime!) != nil){
+                            
+                           resultDict?[kActivityStepEndTime] = Utilities.getStringFromDate(date: self.endTime!)
+                        }
+                        else{
+                            let currentDate = Date()
+                            let dateString =  Utilities.getStringFromDate(date: currentDate)
+                            
+                            resultDict?[kActivityStepEndTime] = dateString
+                        }
+                        
                         resultDict?[kActivityStepSkipped] =  self.skipped
                         
                         resultArray?.append(resultDict!)
@@ -551,7 +617,15 @@ class ActivityStepResult{
             if Utilities.isValidObject(someObject:stepTypeResult.choiceAnswers as AnyObject?){
                 if (stepTypeResult.choiceAnswers?.count)! > 0{
                     
-                    if (self.step?.resultType as! String) ==  QuestionStepType.imageChoice.rawValue ||  (self.step?.resultType as! String) == QuestionStepType.valuePicker.rawValue{
+                    var resultType:String? = (self.step?.resultType as! String)
+                    
+                     // for form we have to assign the step type of each form item
+                    if resultType == "grouped"{
+                       
+                        resultType = self.subTypeForForm
+                    }
+                    
+                    if resultType ==  QuestionStepType.imageChoice.rawValue ||  resultType == QuestionStepType.valuePicker.rawValue{
                         
                         //for image choice and valuepicker
                         
@@ -578,7 +652,7 @@ class ActivityStepResult{
             else{
                 self.value = ""
             }
-        case ORKQuestionType.multipleChoice.rawValue: //textchoice + imageChoice +
+        case ORKQuestionType.multipleChoice.rawValue: //textchoice + imageChoice + // Testing is Pending
             
             let stepTypeResult = questionstepResult as! ORKChoiceQuestionResult
             if Utilities.isValidObject(someObject:stepTypeResult.choiceAnswers as AnyObject?){
@@ -594,8 +668,9 @@ class ActivityStepResult{
                 }
                 else{
                     
-                    let resultValue:String? = "\(stepTypeResult.choiceAnswers?.first)"
-                    self.value = (resultValue == nil  ? "" : resultValue!)
+                    let resultValue:String! = "\(stepTypeResult.choiceAnswers!.first!)"
+                    let resultArray:Array<String>? = ["\(resultValue == nil ? "" : resultValue!)"]
+                    self.value = resultArray
                     
                 }
                 
@@ -646,11 +721,11 @@ class ActivityStepResult{
             
             if stepTypeResult.dateComponentsAnswer != nil {
                 
-                let hour:Int? = stepTypeResult.dateComponentsAnswer?.hour
-                let minute:Int? = stepTypeResult.dateComponentsAnswer?.minute
-                let seconds:Int? = stepTypeResult.dateComponentsAnswer?.second
+                let hour:Int? = (stepTypeResult.dateComponentsAnswer?.hour == nil ? 0 : stepTypeResult.dateComponentsAnswer?.hour)
+                let minute:Int? = (stepTypeResult.dateComponentsAnswer?.minute == nil ? 0 : stepTypeResult.dateComponentsAnswer?.minute)
+                let seconds:Int? = (stepTypeResult.dateComponentsAnswer?.second == nil ? 0 : stepTypeResult.dateComponentsAnswer?.second)
                 
-                self.value =  "\(hour == nil ? 00 : hour!)" + ":" + "\(minute == nil ? 00 : minute! )" + ":" + "\(seconds == nil ? 00 : seconds!)"
+                self.value = (( hour! < 10 ? ("0" + "\(hour!)") : "\(hour!)") + ":" + ( minute! < 10 ? ("0" + "\(minute!)") : "\(minute!)") + ":" + ( seconds! < 10 ? ("0" + "\(seconds!)") : "\(seconds!)"))
             }
             else{
                 self.value = "00:00:00"
@@ -665,7 +740,15 @@ class ActivityStepResult{
             else{
                 self.value = "00:00:0000"
             }
+        case ORKQuestionType.dateAndTime.rawValue:
+            let stepTypeResult = questionstepResult as! ORKDateQuestionResult
             
+            if Utilities.isValidValue(someObject: stepTypeResult.dateAnswer as AnyObject?){
+                self.value =  Utilities.getStringFromDate(date: stepTypeResult.dateAnswer! )
+            }
+            else{
+                self.value = "00:00:0000"
+            }
         case ORKQuestionType.text.rawValue: // text + email
             
             let stepTypeResult = questionstepResult as! ORKTextQuestionResult

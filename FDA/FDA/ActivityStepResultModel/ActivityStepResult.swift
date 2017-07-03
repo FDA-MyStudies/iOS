@@ -669,7 +669,8 @@ class ActivityStepResult{
                 else{
                     
                     let resultValue:String! = "\(stepTypeResult.choiceAnswers!.first!)"
-                    self.value = (resultValue == nil  ? "" : resultValue)
+                    let resultArray:Array<String>? = ["\(resultValue == nil ? "" : resultValue!)"]
+                    self.value = resultArray
                     
                 }
                 
@@ -720,11 +721,11 @@ class ActivityStepResult{
             
             if stepTypeResult.dateComponentsAnswer != nil {
                 
-                let hour:Int? = stepTypeResult.dateComponentsAnswer?.hour
-                let minute:Int? = stepTypeResult.dateComponentsAnswer?.minute
-                let seconds:Int? = stepTypeResult.dateComponentsAnswer?.second
+                let hour:Int? = (stepTypeResult.dateComponentsAnswer?.hour == nil ? 0 : stepTypeResult.dateComponentsAnswer?.hour)
+                let minute:Int? = (stepTypeResult.dateComponentsAnswer?.minute == nil ? 0 : stepTypeResult.dateComponentsAnswer?.minute)
+                let seconds:Int? = (stepTypeResult.dateComponentsAnswer?.second == nil ? 0 : stepTypeResult.dateComponentsAnswer?.second)
                 
-                self.value =  "\(hour == nil ? 00 : hour!)" + ":" + "\(minute == nil ? 00 : minute! )" + ":" + "\(seconds == nil ? 00 : seconds!)"
+                self.value = (( hour! < 10 ? ("0" + "\(hour!)") : "\(hour!)") + ":" + ( minute! < 10 ? ("0" + "\(minute!)") : "\(minute!)") + ":" + ( seconds! < 10 ? ("0" + "\(seconds!)") : "\(seconds!)"))
             }
             else{
                 self.value = "00:00:00"
@@ -739,7 +740,15 @@ class ActivityStepResult{
             else{
                 self.value = "00:00:0000"
             }
+        case ORKQuestionType.dateAndTime.rawValue:
+            let stepTypeResult = questionstepResult as! ORKDateQuestionResult
             
+            if Utilities.isValidValue(someObject: stepTypeResult.dateAnswer as AnyObject?){
+                self.value =  Utilities.getStringFromDate(date: stepTypeResult.dateAnswer! )
+            }
+            else{
+                self.value = "00:00:0000"
+            }
         case ORKQuestionType.text.rawValue: // text + email
             
             let stepTypeResult = questionstepResult as! ORKTextQuestionResult

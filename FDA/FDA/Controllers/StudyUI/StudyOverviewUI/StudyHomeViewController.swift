@@ -649,7 +649,7 @@ extension StudyHomeViewController:NMWebServiceDelegate {
                     NotificationCenter.default.addObserver(self, selector: #selector(self.updateEligibilityConsentStatus), name: notificationName, object: nil)
                     
                     
-                    self.perform(#selector(self.updateEligibilityConsentStatus), with: self, afterDelay: 2.0)
+                    //self.perform(#selector(self.updateEligibilityConsentStatus), with: self, afterDelay: 2.0)
                 }
                 else{
                     UserServices().updateUserEligibilityConsentStatus(eligibilityStatus: true, consentStatus:(ConsentBuilder.currentConsent?.consentStatus)!  , delegate: self)
@@ -745,6 +745,8 @@ extension StudyHomeViewController:NMWebServiceDelegate {
             || requestName as String == RegistrationMethods.updateStudyState.method.methodName
             || requestName as String == RegistrationMethods.updateEligibilityConsentStatus.method.methodName{
             self.unHideSubViews()
+            
+             UIUtilities.showAlertWithTitleAndMessage(title:NSLocalizedString(kErrorTitle, comment: "") as NSString, message: error.localizedDescription as NSString)
         }
         
         

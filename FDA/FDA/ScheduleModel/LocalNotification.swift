@@ -92,7 +92,7 @@ class LocalNotification: NSObject {
                     
                     if run.endDate != nil {
                         let date = run.endDate.addingTimeInterval(-24*3600) // 24 hours before
-                        let message = "The activity " + activity.name! + " will expire in 24 hours. Your participation is important! Please visit the study to complete it now."
+                        let message = "The activity " + activity.name! + " will expire in 24 hours. Your participation is important. Please visit the study to complete it now."
                         let userInfo = [kStudyId:run.studyId,
                                         kActivityId:run.activityId]
                         
@@ -106,7 +106,7 @@ class LocalNotification: NSObject {
                     if activity.frequencyRuns?.count == 1 {
                         
                         let date = run.startDate! // 24 hours before
-                        let message = "A new run of the daily activity " + activity.name! + ", is now available and is valid for today. Your participation is important! Visit the study to complete it now."
+                        let message = "A new run of the daily activity " + activity.name! + ", is now available. Your participation is important. Please visit the study to complete it now."
                         let userInfo = [kStudyId:run.studyId,
                                         kActivityId:run.activityId]
                         
@@ -116,8 +116,8 @@ class LocalNotification: NSObject {
                         
                         let date = run.startDate! // 24 hours before
                         let message1 = "A new run of the daily activity " + activity.name!
-                        let message2 = ", is now available and is valid only until " + LocalNotification.timeFormatter.string(from: run.endDate!)
-                        let messgge3 = ". Your participation is important! Visit the study to complete it now."
+                        let message2 = ", is now available and is valid until " + LocalNotification.timeFormatter.string(from: run.endDate!)
+                        let messgge3 = ". Your participation is important. Please visit the study to complete it now."
                         let message = message1 + message2 + messgge3
                         let userInfo = [kStudyId:run.studyId,
                                         kActivityId:run.activityId]
@@ -128,29 +128,38 @@ class LocalNotification: NSObject {
                     
                 case .Weekly:
                     
+                    //expiry notificaiton
                     let date = run.endDate.addingTimeInterval(-24*3600)
-                    let message = "The current run of the weekly activity " + activity.name! + " will expire in 24 hours. Your participation is important! Please visit the study to complete it now. "
+                    let message = "The current run of the weekly activity " + activity.name! + " will expire in 24 hours. Your participation is important. Please visit the study to complete it now."
                     let userInfo = [kStudyId:run.studyId,
                                     kActivityId:run.activityId]
                     
                     LocalNotification.scheduleNotificationOn(date: date, message: message, userInfo: userInfo)
+                    
+                    //start notification
+                    let startMessage = "A new run of the weekly activity " + activity.name! + ", is now available. Please visit the study to complete it now."
+                    LocalNotification.scheduleNotificationOn(date: run.startDate!, message: startMessage, userInfo: userInfo)
                     
                 case .Monthly:
                     
                     let date = run.endDate.addingTimeInterval(-72*3600)
-                    let message = ":  The current run of the monthly activity " + activity.name! + " will expire in 3 days. Your participation is important! Please visit the study to complete it now."
+                    let message = "The current run of the monthly activity " + activity.name! + " will expire in 3 days. Your participation is important. Please visit the study to complete it now."
                     let userInfo = [kStudyId:run.studyId,
                                     kActivityId:run.activityId]
                     
                     LocalNotification.scheduleNotificationOn(date: date, message: message, userInfo: userInfo)
+                    
+                    //start notification
+                    let startMessage = "A new run of the monthly activity " + activity.name! + ", is now available. Please visit the study to complete it now."
+                    LocalNotification.scheduleNotificationOn(date: run.startDate!, message: startMessage, userInfo: userInfo)
                     
                 case .Scheduled:
                     
                     let date = run.startDate! // 24 hours before
                     let endDate = LocalNotification.oneTimeFormatter.string(from: run.endDate!)
                     let message1 = "A new run of the scheduled activity " + activity.name!
-                    let message2 = ", is now available and is valid only until " + "\(endDate)"
-                    let message3 = ". Your participation is important! Visit the study to complete it now."
+                    let message2 = ", is now available and is valid until " + "\(endDate)"
+                    let message3 = ". Your participation is important. Please visit the study to complete it now."
                     let message = message1 + message2 + message3
                     let userInfo = [kStudyId:run.studyId,
                                     kActivityId:run.activityId]
@@ -224,7 +233,7 @@ class LocalNotification: NSObject {
                         ]
         let date = Date().addingTimeInterval(60*60*24*14)
         
-        let message = "It’s been a while since you visited the app. Please continue your participation and contribute towards a healthier world!"
+        let message = "It’s been a while since you visited the FDA My Studies app. Please consider continuing your participation in any studies in which you’re enrolled."
         
         
         let notification = UILocalNotification()

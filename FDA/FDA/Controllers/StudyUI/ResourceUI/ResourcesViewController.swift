@@ -528,7 +528,7 @@ extension ResourcesViewController : UITableViewDelegate{
                                                                             
                                                                         case .askUser :
                                                                             
-                                                                            UIUtilities.showAlertMessageWithThreeActionsAndHandler(kImportantNoteMessage, errorMessage: "You are choosing to leave the study. Please choose if the data you provided for the study so far, can be retained and used for research purposes OR if it should be deleted.", errorAlertActionTitle: "Retain my data", errorAlertActionTitle2: "Delete my data", errorAlertActionTitle3: "Cancel", viewControllerUsed: self, action1: {
+                                                                            UIUtilities.showAlertMessageWithThreeActionsAndHandler(kImportantNoteMessage, errorMessage: "You are choosing to leave the study. Please choose if your response data can be retained and used for research purposes OR if your response data should be deleted.", errorAlertActionTitle: "Retain my data", errorAlertActionTitle2: "Delete my data", errorAlertActionTitle3: "Cancel", viewControllerUsed: self, action1: {
                                                                                 // Retain Action
                                                                                 
                                                                                 self.shouldDeleteData = false
@@ -549,7 +549,7 @@ extension ResourcesViewController : UITableViewDelegate{
                                                                             
                                                                         case .deleteData:
                                                                             
-                                                                            UIUtilities.showAlertMessageWithTwoActionsAndHandler(NSLocalizedString("You are choosing to leave the study. Data that you have provided for the study so far, will be deleted from our databases. Tap OK to confirm that you wish to leave the study or Cancel to abstain from doing so.", comment: ""), errorMessage: NSLocalizedString("", comment: ""), errorAlertActionTitle: NSLocalizedString("OK", comment: ""),
+                                                                            UIUtilities.showAlertMessageWithTwoActionsAndHandler(NSLocalizedString("Tap OK to confirm your withdrawal from the study. Tap cancel to remain enrolled in the study.", comment: ""), errorMessage: NSLocalizedString("", comment: ""), errorAlertActionTitle: NSLocalizedString("OK", comment: ""),
                                                                                                                                  errorAlertActionTitle2: NSLocalizedString("Cancel", comment: ""), viewControllerUsed: self,
                                                                                                                                  action1: {
                                                                                         self.shouldDeleteData = true
@@ -561,7 +561,7 @@ extension ResourcesViewController : UITableViewDelegate{
                                                                         
                                                                         case .noAction :
                                                                             
-                                                                            UIUtilities.showAlertMessageWithTwoActionsAndHandler(NSLocalizedString("You are choosing to leave the study. Data that you have provided for the study so far, will be retained in our databases for research purposes. Tap OK to confirm that you wish to leave the study or Cancel to abstain from doing so.", comment: ""), errorMessage: NSLocalizedString("", comment: ""), errorAlertActionTitle: NSLocalizedString("OK", comment: ""),
+                                                                            UIUtilities.showAlertMessageWithTwoActionsAndHandler(NSLocalizedString("Tap OK to confirm your withdrawal from the study. Tap cancel to remain enrolled in the study.", comment: ""), errorMessage: NSLocalizedString("", comment: ""), errorAlertActionTitle: NSLocalizedString("OK", comment: ""),
                                                                                                                                  errorAlertActionTitle2: NSLocalizedString("Cancel", comment: ""), viewControllerUsed: self,
                                                                                                                                  action1: {
                                                                                          self.shouldDeleteData = false
@@ -726,9 +726,10 @@ extension ResourcesViewController:NMWebServiceDelegate {
     }
     func failedRequest(_ manager: NetworkManager, requestName: NSString, error: NSError) {
         Logger.sharedInstance.info("requestname : \(requestName)")
-        self.removeProgressIndicator()
+       
         
         if error.code == 401 { //unauthorized
+             self.removeProgressIndicator()
             UIUtilities.showAlertMessageWithActionHandler(kErrorTitle, message: error.localizedDescription, buttonTitle: kTitleOk, viewControllerUsed: self, action: {
                 self.fdaSlideMenuController()?.navigateToHomeAfterUnauthorizedAccess()
             })
@@ -737,6 +738,7 @@ extension ResourcesViewController:NMWebServiceDelegate {
             
             if requestName as String == WCPMethods.resources.method.methodName {
                 
+                 self.removeProgressIndicator()
                 tableViewRowDetails = []
                 self.addDefaultList()
                 self.appendLeaveStudy()
@@ -745,8 +747,21 @@ extension ResourcesViewController:NMWebServiceDelegate {
                 
                 
             }
+            else if requestName as String == ResponseMethods.withdrawFromStudy.description {
+                
+                if error.localizedDescription.localizedCaseInsensitiveContains("Invalid ParticipantId.") {
+                    
+                    
+                    UserServices().withdrawFromStudy(studyId: (Study.currentStudy?.studyId)!, shouldDeleteData: self.shouldDeleteData!
+                        , delegate: self)
+                }
+                else {
+                   self.removeProgressIndicator()
+                }
+            }
             else {
-                 UIUtilities.showAlertWithTitleAndMessage(title:NSLocalizedString(kErrorTitle, comment: "") as NSString, message: error.localizedDescription as NSString)
+                
+                UIUtilities.showAlertWithTitleAndMessage(title:NSLocalizedString(kErrorTitle, comment: "") as NSString, message: error.localizedDescription as NSString)
             }
         }
     }

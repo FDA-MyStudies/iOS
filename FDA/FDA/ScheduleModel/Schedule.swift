@@ -425,17 +425,17 @@ class Schedule{
             //check if run is valid for user of not based on activity start time
             //let result = runStartDate!.compare(startTime)
             //if result == .orderedSame || result == .orderedAscending {
-                
-                //run end time creation
-                let scheduledEndTime = timing[kScheduleEndTime]
-                let runEndDate = Utilities.getDateFromString(dateString: scheduledEndTime! as! String)
-                
-                //print("start date \(runStartDate!) , end date \(runEndDate!)")
+            
+            //run end time creation
+            let scheduledEndTime = timing[kScheduleEndTime]
+            let runEndDate = Utilities.getDateFromString(dateString: scheduledEndTime! as! String)
+            
+            //print("start date \(runStartDate!) , end date \(runEndDate!)")
             
             let offset = UserDefaults.standard.value(forKey: "offset") as? Int
             let updatedStartTime = runStartDate?.addingTimeInterval(TimeInterval(offset!))
             let updatedEndTime = runEndDate?.addingTimeInterval(TimeInterval(offset!))
-                
+            if !(updatedEndTime! < startTime) {
                 //appent in activityRun array
                 let activityRun = ActivityRun()
                 activityRun.runId = runId
@@ -444,12 +444,13 @@ class Schedule{
                 activityRuns.append(activityRun)
                 
                 runId += 1
+            }
             //}
             
             
         }
         
-       
+        
     }
     
     

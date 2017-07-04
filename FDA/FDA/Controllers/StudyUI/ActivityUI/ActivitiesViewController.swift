@@ -517,7 +517,7 @@ class ActivitiesViewController : UIViewController{
         if completion > 50 && completion < 100 {
             
             if !(ud.bool(forKey: halfCompletionKey)){
-                let message =  "The study " + (Study.currentStudy?.name!)! + " is now 50pc complete! We look forward to your continued participation as we move towards a 100pc!"
+                let message =  "The study " + (Study.currentStudy?.name!)! + " is now 50pc complete. We look forward to your continued participation as the study progresses."
                 UIUtilities.showAlertWithMessage(alertMessage: message)
                 ud.set(true, forKey: halfCompletionKey)
 
@@ -528,7 +528,7 @@ class ActivitiesViewController : UIViewController{
         if completion == 100 {
             
             if !(ud.bool(forKey: fullCompletionKey)){
-                let message =  "The study " + (Study.currentStudy?.name!)! + " is 100pc complete! Thank you for your participation! We appreciate it!"
+                let message =  "The study " + (Study.currentStudy?.name!)! + " is 100pc complete. Thank you for your participation."
                 UIUtilities.showAlertWithMessage(alertMessage: message)
                 ud.set(true, forKey: fullCompletionKey)
                 
@@ -545,7 +545,8 @@ class ActivitiesViewController : UIViewController{
             if previousMissed < totalIncompletedRuns {
                 //sho alert
                
-                UIUtilities.showAlertWithMessage(alertMessage: "Hi, we noticed you happened to miss out on an activity run today. Your participation is important!  We urge you to complete study activities before they expire and have a higher study adherence rate!")
+                let message = "We noticed you missed an activity in " + (Study.currentStudy?.name!)! + " today. That’s ok! We know you’re busy, but we encourage you to complete study activities before they expire."
+                UIUtilities.showAlertWithMessage(alertMessage: message)
             }
         }
         

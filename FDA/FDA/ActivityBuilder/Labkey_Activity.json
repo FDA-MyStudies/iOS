@@ -341,7 +341,7 @@
                                   
                                   "detail": "",
                                   
-                                  "exclusive": false
+                                  "exclusive": true
                                   
                                   },
                                   
@@ -370,7 +370,7 @@
                                   
                                   ],
                   
-                  "selectionStyle": "Single"
+                  "selectionStyle": "Multiple"
                   
                   },
                   

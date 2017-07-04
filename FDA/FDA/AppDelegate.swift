@@ -247,9 +247,6 @@
             
             
             if UIApplication.shared.applicationIconBadgeNumber > 0 {
-                let ud = UserDefaults.standard
-                ud.set(true, forKey: kShowNotification)
-                ud.synchronize()
                 
                 
                 UIApplication.shared.applicationIconBadgeNumber = 0
@@ -277,10 +274,19 @@
                     
                     notificationDetails = notification as! Dictionary<String, Any>?
                     
+                    let ud = UserDefaults.standard
+                    ud.set(true, forKey: kShowNotification)
+                    ud.synchronize()
+
                     
                 }
                 else{
                     UIApplication.shared.applicationIconBadgeNumber = 0
+                    
+                    let ud = UserDefaults.standard
+                    ud.set(false, forKey: kShowNotification)
+                    ud.synchronize()
+
                 }
                 
             }
@@ -448,13 +454,47 @@
                 
             }
             
-            self.updateNotification()
+            if userInfo.count > 0 && userInfo.keys.contains("type"){
+                self.updateNotification()
+            }
             
         }
         
         func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
             
+           
+            print("REMOTE NOTIFICATION:" + "\(userInfo)")
             
+            
+            if( UIApplication.shared.applicationState == UIApplicationState.inactive )
+            {
+                
+                completionHandler( .newData );
+            }
+            else if( UIApplication.shared.applicationState == UIApplicationState.background )
+            {
+                
+                completionHandler( .newData );
+            }  
+            else  
+            {  
+               
+                completionHandler( .newData );
+            }
+            
+            
+            if (UIApplication.shared.applicationState == UIApplicationState.active || (UIApplication.shared.applicationState == UIApplicationState.inactive)) {//|| (UIApplication.shared.applicationState == UIApplicationState.background){
+                UIApplication.shared.applicationIconBadgeNumber = 0
+                
+                self.handleLocalAndRemoteNotification(userInfoDetails: userInfo as! Dictionary<String, Any>)
+                
+                //self.handlePushNotificationResponse(userInfo : userInfo as NSDictionary)
+            }
+            
+            if userInfo.count > 0 && userInfo.keys.contains("type"){
+                self.updateNotification()
+            }
+
             
         }
         
@@ -1823,8 +1863,13 @@
             let userInfo = notification.request.content.userInfo
             print("REMOTE NOTIFICATION:" + "\(userInfo)")
             
+             print("keys:" + "\(userInfo.keys)")
             
-            self.updateNotification()
+            if userInfo.count > 0 && userInfo.keys.contains("type"){
+                 self.updateNotification()
+            }
+            
+           
             
             completionHandler([UNNotificationPresentationOptions.alert, .sound, .badge])
             
@@ -1846,7 +1891,9 @@
                 //self.handlePushNotificationResponse(userInfo : userInfo as NSDictionary)
             }
             
-            self.updateNotification()
+            if userInfo.count > 0 && userInfo.keys.contains("type"){
+                self.updateNotification()
+            }
             
             
             

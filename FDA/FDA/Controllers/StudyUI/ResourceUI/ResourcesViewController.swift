@@ -726,9 +726,10 @@ extension ResourcesViewController:NMWebServiceDelegate {
     }
     func failedRequest(_ manager: NetworkManager, requestName: NSString, error: NSError) {
         Logger.sharedInstance.info("requestname : \(requestName)")
-        self.removeProgressIndicator()
+       
         
         if error.code == 401 { //unauthorized
+             self.removeProgressIndicator()
             UIUtilities.showAlertMessageWithActionHandler(kErrorTitle, message: error.localizedDescription, buttonTitle: kTitleOk, viewControllerUsed: self, action: {
                 self.fdaSlideMenuController()?.navigateToHomeAfterUnauthorizedAccess()
             })
@@ -737,6 +738,7 @@ extension ResourcesViewController:NMWebServiceDelegate {
             
             if requestName as String == WCPMethods.resources.method.methodName {
                 
+                 self.removeProgressIndicator()
                 tableViewRowDetails = []
                 self.addDefaultList()
                 self.appendLeaveStudy()
@@ -745,8 +747,21 @@ extension ResourcesViewController:NMWebServiceDelegate {
                 
                 
             }
+            else if requestName as String == ResponseMethods.withdrawFromStudy.description {
+                
+                if error.localizedDescription.localizedCaseInsensitiveContains("Invalid ParticipantId.") {
+                    
+                    
+                    UserServices().withdrawFromStudy(studyId: (Study.currentStudy?.studyId)!, shouldDeleteData: self.shouldDeleteData!
+                        , delegate: self)
+                }
+                else {
+                   self.removeProgressIndicator()
+                }
+            }
             else {
-                 UIUtilities.showAlertWithTitleAndMessage(title:NSLocalizedString(kErrorTitle, comment: "") as NSString, message: error.localizedDescription as NSString)
+                
+                UIUtilities.showAlertWithTitleAndMessage(title:NSLocalizedString(kErrorTitle, comment: "") as NSString, message: error.localizedDescription as NSString)
             }
         }
     }

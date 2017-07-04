@@ -316,18 +316,30 @@ extension ConfirmationViewController:NMWebServiceDelegate {
     
     func failedRequest(_ manager: NetworkManager, requestName: NSString, error: NSError) {
         Logger.sharedInstance.info("requestname : \(requestName)")
-        self.removeProgressIndicator()
+        
         
         if error.code == 401 { //unauthorized
+            self.removeProgressIndicator()
             UIUtilities.showAlertMessageWithActionHandler(kErrorTitle, message: error.localizedDescription, buttonTitle: kTitleOk, viewControllerUsed: self, action: {
                 self.fdaSlideMenuController()?.navigateToHomeAfterUnauthorizedAccess()
             })
         }
         else {
             if(requestName as String == WCPMethods.studyInfo.rawValue){
-                
+                self.removeProgressIndicator()
+            }
+            else if requestName as String == ResponseMethods.withdrawFromStudy.description{
+                if error.localizedDescription.localizedCaseInsensitiveContains("Invalid ParticipantId.") {
+                    
+                    self.handleWithdrawnFromStudyResponse()
+                    
+                }
+                else {
+                    self.removeProgressIndicator()
+                }
             }
             else {
+                self.removeProgressIndicator()
                 UIUtilities.showAlertWithTitleAndMessage(title:NSLocalizedString(kErrorTitle, comment: "") as NSString, message: error.localizedDescription as NSString)
             }
             

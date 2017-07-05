@@ -872,9 +872,14 @@ extension ProfileViewController: ORKPasscodeDelegate {
         UserServices().updateUserProfile(self)
         self.isPasscodeViewPresented = true
        
+        //Recent Changes
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        appDelegate.appIsResignedButDidNotEnteredBackground = false
+
         
         self.dismiss(animated: true, completion: {
             self.setInitialDate()
+            
         })
     }
     
@@ -950,7 +955,9 @@ extension ProfileViewController:ORKTaskViewControllerDelegate{
             
         }
         
-      
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        appDelegate.appIsResignedButDidNotEnteredBackground = false
+
         self.dismiss(animated: true, completion: {
             
         })

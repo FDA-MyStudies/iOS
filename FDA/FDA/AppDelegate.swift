@@ -352,6 +352,7 @@
             
             self.checkPasscode(viewController: (application.windows[0].rootViewController)!)
             
+           
             self.checkForStudyUpdates()
             
             

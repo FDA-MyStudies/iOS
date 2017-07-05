@@ -257,7 +257,7 @@ class StudyHomeViewController : UIViewController{
     func displayConsentDocument() {
         if Study.currentStudy?.consentDocument != nil {
             if Study.currentStudy?.consentDocument?.htmlString != nil {
-                self.navigateToWebView(link: nil, htmlText: (Study.currentStudy?.consentDocument?.htmlString)!)
+                self.navigateToWebView(link: nil, htmlText: (Study.currentStudy?.consentDocument?.htmlString)!, isEmailAvailable:true)
             }
         }
     }
@@ -444,7 +444,7 @@ class StudyHomeViewController : UIViewController{
             // webView.requestLink = Study.currentStudy?.overview.websiteLink
             //self.navigationController?.present(webViewController, animated: true, completion: nil)
             
-            self.navigateToWebView(link:  Study.currentStudy?.overview.websiteLink, htmlText: nil)
+            self.navigateToWebView(link:  Study.currentStudy?.overview.websiteLink, htmlText: nil,isEmailAvailable:false)
             
         } else {
             //View Consent
@@ -557,12 +557,12 @@ class StudyHomeViewController : UIViewController{
      @param htmlText    displays the text in the webview
      
      */
-    func navigateToWebView(link:String?,htmlText:String?){
+    func navigateToWebView(link:String?,htmlText:String?, isEmailAvailable:Bool?){
         
         let loginStoryboard = UIStoryboard.init(name: "Main", bundle:Bundle.main)
         let webViewController = loginStoryboard.instantiateViewController(withIdentifier:"WebViewController") as! UINavigationController
         let webView = webViewController.viewControllers[0] as! WebViewController
-        webView.isEmailAvailable = true
+        webView.isEmailAvailable = isEmailAvailable!
         
         if link != nil {
             webView.requestLink = Study.currentStudy?.overview.websiteLink

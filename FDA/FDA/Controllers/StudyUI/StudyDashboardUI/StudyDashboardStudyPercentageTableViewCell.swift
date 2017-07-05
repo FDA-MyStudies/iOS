@@ -70,21 +70,33 @@ class StudyDashboardStudyPercentageTableViewCell: UITableViewCell {
         
         if let userStudyStatus = currentUser.participatedStudies.filter({$0.studyId == study?.studyId}).first {
             //update completion %
-            self.labelStudyCompletion?.text = String(userStudyStatus.adherence)// + "%"
-            self.labelStudyAdherence?.text = String(userStudyStatus.completion) // + "%"
-            //self.progressBarCompletion?.progress = Float(userStudyStatus.completion)/100
-            //self.progressBarAdherence?.progress = Float(userStudyStatus.adherence)/100
             
-            studyPercentagePie?.angle = Double(userStudyStatus.completion)/0.27777778
-            completedPercentagePie?.angle = Double(userStudyStatus.adherence)/0.27777778
+            if ( Study.currentStudy?.totalIncompleteRuns == 0
+                && Study.currentStudy?.totalCompleteRuns ==  0){
+                
+                self.labelStudyCompletion?.text = "--"
+                self.labelStudyAdherence?.text = "--"
+                
+                studyPercentagePie?.angle = 0
+                completedPercentagePie?.angle = 0
+            }
+            else {
+                
+                self.labelStudyCompletion?.text = String(userStudyStatus.adherence)
+                self.labelStudyAdherence?.text = String(userStudyStatus.completion)
+                
+                
+                studyPercentagePie?.angle = Double(userStudyStatus.completion)/0.27777778
+                completedPercentagePie?.angle = Double(userStudyStatus.adherence)/0.27777778
+            }
             
         }
         else {
-            self.labelStudyCompletion?.text = "0" //+ "%"
-            self.labelStudyAdherence?.text = "0"  //+ "%"
+            self.labelStudyCompletion?.text = "0"
+            self.labelStudyAdherence?.text = "0"
             
-            studyPercentagePie?.angle = 0//Double(userStudyStatus.adherence)/0.23777778
-            completedPercentagePie?.angle = 0//Double(userStudyStatus.completion)/0.23777778
+            studyPercentagePie?.angle = 0
+            completedPercentagePie?.angle = 0
         }
     }
 }

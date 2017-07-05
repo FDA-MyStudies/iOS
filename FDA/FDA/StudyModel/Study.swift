@@ -102,6 +102,8 @@ class Study {
     var signedConsentFilePath:String?
     var anchorDate:StudyAnchorDate?
     var activitiesLocalNotificationUpdated = false
+    var totalIncompleteRuns = 0
+    var totalCompleteRuns = 0
     
     var withdrawalConfigration:StudyWithdrawalConfigration?
     

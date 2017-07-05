@@ -496,18 +496,18 @@ class ActivitiesViewController : UIViewController{
         //}
         
         
-        
+        Study.currentStudy?.totalCompleteRuns = totalCompletedRuns
+        Study.currentStudy?.totalIncompleteRuns = totalIncompletedRuns
         
         let completion = ceil( Double(self.divide(lhs: (totalCompletedRuns + totalIncompletedRuns)*100, rhs: totalRuns)) )
         let adherence = ceil (Double(self.divide(lhs: totalCompletedRuns*100, rhs: (totalCompletedRuns + totalIncompletedRuns))))
         
         let studyid = (Study.currentStudy?.studyId)!
-        //        DBHandler.loadAllStudyRuns(studyId: studyid) { (completion, adherence) in
-        //            //
+       
         let status = User.currentUser.udpateCompletionAndAdherence(studyId:studyid, completion: Int(completion), adherence: Int(adherence))
         UserServices().udpateCompletionAdherence(studyStauts: status, delegate: self)
         DBHandler.updateStudyParticipationStatus(study: Study.currentStudy!)
-        //        }
+       
         
         let halfCompletionKey = "50pcShown"  + (Study.currentStudy?.studyId)!
         let fullCompletionKey = "100pcShown"  + (Study.currentStudy?.studyId)!

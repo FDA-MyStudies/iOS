@@ -36,6 +36,8 @@
     
     let kPasscodeSetUpText = "Set up a passcode for the app"
     
+    let kIphoneSimulator =  "iPhone Simulator"
+    
     @UIApplicationMain
     
     class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -512,7 +514,7 @@
         
         static func isJailbroken() -> Bool {
             
-            if UIDevice.current.model != "iPhone Simulator" {
+            if UIDevice.current.model != kIphoneSimulator {
                 return false
             }
             

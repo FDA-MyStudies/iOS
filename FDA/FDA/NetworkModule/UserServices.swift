@@ -328,7 +328,7 @@ class UserServices: NSObject {
          */
         
         let params = [
-            kUserSettings:settings,
+            
             kBasicInfo:info,
             kParticipantInfo : []] as [String : Any]
         

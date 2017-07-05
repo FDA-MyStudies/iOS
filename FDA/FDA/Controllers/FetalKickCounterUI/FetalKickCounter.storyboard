@@ -20,7 +20,7 @@
         <scene sceneID="Iy6-1K-v1C">
             <objects>
                 <navigationController id="Xk3-VF-nDE" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="fSm-ig-KYs">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="fSm-ig-KYs">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -470,7 +470,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="7e4-7b-qtd" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="a3x-IE-FDY">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="a3x-IE-FDY">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -483,7 +483,7 @@
             </objects>
             <point key="canvasLocation" x="996" y="-132.68365817091455"/>
         </scene>
-        <!--ConsentDocument-->
+        <!--Consent Document-->
         <scene sceneID="yW4-dV-l64">
             <objects>
                 <viewController storyboardIdentifier="ConsentPdfViewerStepViewControllerIdentifier" useStoryboardIdentifierAsRestorationIdentifier="YES" id="0WO-Bz-3yZ" customClass="ConsentPdfViewerStepViewController" customModule="FDA" customModuleProvider="target" sceneMemberID="viewController">
@@ -535,7 +535,7 @@
                         </constraints>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
-                    <navigationItem key="navigationItem" title="ConsentDocument" id="e0E-Qm-Uc8"/>
+                    <navigationItem key="navigationItem" title="Consent Document" id="e0E-Qm-Uc8"/>
                     <connections>
                         <outlet property="webView" destination="CDB-HW-nPS" id="hyX-oC-20L"/>
                     </connections>
@@ -549,7 +549,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="tjP-Cs-vL9" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="Id2-o1-rv0">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Id2-o1-rv0">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -567,7 +567,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="rXA-HI-g5M" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="Bf4-vu-ub4">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Bf4-vu-ub4">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>

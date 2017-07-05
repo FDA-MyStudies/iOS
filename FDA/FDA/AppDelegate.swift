@@ -38,6 +38,8 @@
     
     let kIphoneSimulator =  "iPhone Simulator"
     
+    let kBundleIdentier = "CFBundleIdentifier"
+    
     @UIApplicationMain
     
     class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -580,7 +582,7 @@
             
             let infoDict = Bundle.main.infoDictionary
             
-            let appId = infoDict?["CFBundleIdentifier"]
+            let appId = infoDict?[kBundleIdentier]
             
             let url:URL = URL.init(string:"http://itunes.apple.com/lookup?bundleId=\(appId!)" )!
             

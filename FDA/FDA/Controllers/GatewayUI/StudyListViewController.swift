@@ -692,6 +692,14 @@ extension StudyListViewController :  UITableViewDelegate {
                     
                     UIUtilities.showAlertWithTitleAndMessage(title: "", message: NSLocalizedString(kMessageForStudyPausedAfterJoiningState, comment: "") as NSString)
                 }
+                else {
+                    if(study?.version != study?.newVersion){
+                        WCPServices().getStudyUpdates(study: study!, delegate: self)
+                    }
+                    else {
+                        self.checkDatabaseForStudyInfo(study: study!)
+                    }
+                }
             }
             else {
                 

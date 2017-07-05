@@ -813,11 +813,12 @@ extension ActivitiesViewController:ActivitiesCellDelegate{
     func activityCell(cell: ActivitiesTableViewCell, activity: Activity) {
         
         var frame = self.view.frame
-        //frame.size.height -= 114
+        //frame.size.height += 114
         
         let view = ActivitySchedules.instanceFromNib(frame: frame, activity: activity)
-        //self.view.addSubview(view)
-        UIApplication.shared.keyWindow?.addSubview(view)
+        self.tabBarController?.view.addSubview(view)
+        //self.view.bringSubview(toFront: view)
+        //UIApplication.shared.keyWindow?.addSubview(view)
     }
 }
 
@@ -1264,7 +1265,7 @@ class ActivitySchedules:UIView,UITableViewDelegate,UITableViewDataSource{
     private static let formatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateFormat = "hha, MMM dd YYYY"
-        formatter.timeZone = TimeZone.init(abbreviation:"GMT")
+        //formatter.timeZone = TimeZone.init(abbreviation:"GMT")
         return formatter
     }()
 }

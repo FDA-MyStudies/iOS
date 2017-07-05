@@ -452,7 +452,7 @@ class ActivityQuestionStep: ActivityStep {
                     textChoiceArray = self.getTextChoices(dataArray: (formatDict?[kStepQuestionTextChoiceTextChoices] as? NSArray)! )
                     
                     
-                    if (textChoiceArray?.count)! >= 2 &&  (textChoiceArray?.count)! <= 8 {
+                   // if (textChoiceArray?.count)! >= 2 &&  (textChoiceArray?.count)! <= 8 {
                     
                     
                     if (formatDict?[kStepQuestionTextChoiceSelectionStyle] as! String) == kStepQuestionTextChoiceSelectionStyleSingle{
@@ -468,10 +468,10 @@ class ActivityQuestionStep: ActivityStep {
                         return nil
                         
                     }
-                    }
-                    else{
-                        return nil
-                    }
+                   // }
+                   // else{
+                   //     return nil
+                   // }
                 }
                 else{
                     Logger.sharedInstance.debug("textChoice Question Step has null values:\(formatDict)")

@@ -57,6 +57,10 @@ class ContactUsViewController : UIViewController{
         
         self.tableView?.estimatedRowHeight = 62
         self.tableView?.rowHeight = UITableViewAutomaticDimension
+        
+        //Used for background tap dismiss keyboard
+        let tapGestureRecognizer : UITapGestureRecognizer = UITapGestureRecognizer.init(target: self, action: #selector(ContactUsViewController.handleTapGesture))
+        self.tableView?.addGestureRecognizer(tapGestureRecognizer)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -74,6 +78,17 @@ class ContactUsViewController : UIViewController{
         
     }
     
+    func handleTapGesture(gesture:UIGestureRecognizer){
+        
+        let location = gesture.location(in: gesture.view)
+        if location.y > 245 {
+            let ip = IndexPath.init(row: 3, section: 0)
+            let cell = self.tableView?.cellForRow(at: ip) as! TextviewCell
+            cell.textView?.becomeFirstResponder()
+
+        }
+        
+    }
     
 //MARK:- Button Actions
     

@@ -113,7 +113,7 @@ let kContactUsTableViewCellIdentifier = "ContactUsCell"
 let kMessageSubjectBlankCheck = "Please enter subject"
 let kMessageMessageBlankCheck = "Please enter message"
 let kMessageContactedSuccessfuly = "Thank you for contacting us. We will get back to you on your email address at the earliest."
-let kMessageTextViewPlaceHolder = "Please let us know what you need help with. We will get back to you at the earliest"
+let kMessageTextViewPlaceHolder = ""
 
 
 //MARK:- ActivitiesViewController constants

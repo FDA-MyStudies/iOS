@@ -420,7 +420,7 @@ class Schedule{
             
             //run start time creation
             let scheduledStartTime = timing[kScheduleStartTime]
-            let runStartDate =  Utilities.getDateFromString(dateString: scheduledStartTime! as! String)
+            let runStartDate =  Utilities.getDateFromStringWithOutTimezone(dateString: scheduledStartTime! as! String)
             
             //check if run is valid for user of not based on activity start time
             //let result = runStartDate!.compare(startTime)
@@ -428,7 +428,7 @@ class Schedule{
             
             //run end time creation
             let scheduledEndTime = timing[kScheduleEndTime]
-            let runEndDate = Utilities.getDateFromString(dateString: scheduledEndTime! as! String)
+            let runEndDate = Utilities.getDateFromStringWithOutTimezone(dateString: scheduledEndTime! as! String)
             
             //print("start date \(runStartDate!) , end date \(runEndDate!)")
             

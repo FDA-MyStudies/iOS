@@ -246,16 +246,14 @@ class LabKeyServices: NSObject {
                     
                         if let keyValue = data[responseData.key!] as? Dictionary<String,Any> {
                             
-                            let value = keyValue["value"] as! Float
-                            let valueDetail = ["value":value,
-                                               "date":date] as Dictionary<String,Any>
+                            if Utilities.isValidValue(someObject: keyValue["value"] as AnyObject?) {
+                                let value = keyValue["value"] as! Float
+                                let valueDetail = ["value":value,
+                                                   "date":date] as Dictionary<String,Any>
+                                
+                                responseData.values.append(valueDetail)
+                            }
                             
-                            responseData.values.append(valueDetail)
-                            
-//                            print("value \(keyValue["value"])")
-//                            if (responseData.type! == "int" || responseData.type! == "float" || responseData.type! == "double") {
-//                               
-//                            }
 
                         }
                     }

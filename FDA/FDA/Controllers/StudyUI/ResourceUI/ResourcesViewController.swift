@@ -22,6 +22,7 @@ class ResourcesViewController : UIViewController{
     var resourceLink:String?
     var fileType:String?
     var navigateToStudyOverview:Bool? = false
+    var withdrawlInformationNotFound = false
     
     var shouldDeleteData:Bool? = false
     override func viewDidLoad() {
@@ -299,6 +300,89 @@ class ResourcesViewController : UIViewController{
         DBHandler.updateMetaDataToUpdateForStudy(study: Study.currentStudy!, updateDetails: nil)
     }
     
+    func handleLeaveStudy() {
+        
+        var withdrawalMessage = Study.currentStudy?.withdrawalConfigration?.message
+        
+        var withdrawalType = Study.currentStudy?.withdrawalConfigration?.type
+        
+        if withdrawalMessage == nil {
+            withdrawalMessage = "Are you sure you want to leave Study ?"
+        }
+        
+        if withdrawalType == nil || withdrawalType == .notAvailable {
+            
+            withdrawlInformationNotFound = true
+            withdrawalType = .notAvailable
+            WCPServices().getStudyInformation(studyId: (Study.currentStudy?.studyId)!, delegate: self)
+            return
+        }
+        
+        
+        UIUtilities.showAlertMessageWithTwoActionsAndHandler(NSLocalizedString("Leave Study?", comment: ""), errorMessage: NSLocalizedString(withdrawalMessage!, comment: ""), errorAlertActionTitle: NSLocalizedString("Proceed", comment: ""),
+                                                             errorAlertActionTitle2: NSLocalizedString("Cancel", comment: ""), viewControllerUsed: self,
+                                                             action1: {
+                                                                
+                                                                
+                                                                switch withdrawalType! as StudyWithdrawalConfigrationType {
+                                                                    
+                                                                case .askUser :
+                                                                    
+                                                                    UIUtilities.showAlertMessageWithThreeActionsAndHandler(kImportantNoteMessage, errorMessage: "You are choosing to leave the study. Please choose if your response data can be retained and used for research purposes OR if your response data should be deleted.", errorAlertActionTitle: "Retain my data", errorAlertActionTitle2: "Delete my data", errorAlertActionTitle3: "Cancel", viewControllerUsed: self, action1: {
+                                                                        // Retain Action
+                                                                        
+                                                                        self.shouldDeleteData = false
+                                                                        self.withdrawalFromStudy(deleteResponse: false)
+                                                                        
+                                                                        
+                                                                        
+                                                                    }, action2: {
+                                                                        
+                                                                        // Delete action
+                                                                        self.shouldDeleteData = true
+                                                                        self.withdrawalFromStudy(deleteResponse: true)
+                                                                        
+                                                                    }, action3: {
+                                                                        // Cancel Action
+                                                                    })
+                                                                    
+                                                                    
+                                                                case .deleteData:
+                                                                    
+                                                                    UIUtilities.showAlertMessageWithTwoActionsAndHandler(NSLocalizedString("Tap OK to confirm your withdrawal from the study. Tap cancel to remain enrolled in the study.", comment: ""), errorMessage: NSLocalizedString("", comment: ""), errorAlertActionTitle: NSLocalizedString("OK", comment: ""),
+                                                                                                                         errorAlertActionTitle2: NSLocalizedString("Cancel", comment: ""), viewControllerUsed: self,
+                                                                                                                         action1: {
+                                                                                                                            self.shouldDeleteData = true
+                                                                                                                            self.withdrawalFromStudy(deleteResponse: true)
+                                                                    },
+                                                                                                                         action2: {
+                                                                                                                            
+                                                                    })
+                                                                    
+                                                                case .noAction :
+                                                                    
+                                                                    UIUtilities.showAlertMessageWithTwoActionsAndHandler(NSLocalizedString("Tap OK to confirm your withdrawal from the study. Tap cancel to remain enrolled in the study.", comment: ""), errorMessage: NSLocalizedString("", comment: ""), errorAlertActionTitle: NSLocalizedString("OK", comment: ""),
+                                                                                                                         errorAlertActionTitle2: NSLocalizedString("Cancel", comment: ""), viewControllerUsed: self,
+                                                                                                                         action1: {
+                                                                                                                            self.shouldDeleteData = false
+                                                                                                                            self.withdrawalFromStudy(deleteResponse: false)
+                                                                    },
+                                                                                                                         action2: {
+                                                                                                                            
+                                                                    })
+                                                                    
+                                                                default : break
+                                                                }
+                                                                
+                                                                
+        },
+                                                             action2: {
+                                                                
+        })
+        
+        
+    }
+    
     func navigateToStudyHome(){
         
         let studyStoryBoard = UIStoryboard.init(name: "Study", bundle: Bundle.main)
@@ -501,90 +585,7 @@ extension ResourcesViewController : UITableViewDelegate{
         }
         else{
             if resource as! String == "Leave Study" {
-                
-                //Incomplete web config
-                
-                // iF WEBCONFIG == ask_user
-                
-                var withdrawalMessage = Study.currentStudy?.withdrawalConfigration?.message
-                
-                var withdrawalType = Study.currentStudy?.withdrawalConfigration?.type
-                
-                if withdrawalMessage == nil {
-                    withdrawalMessage = "Are you sure you want to leave Study ?"
-                }
-                
-                if withdrawalType == nil {
-                    withdrawalType = .notAvailable
-                }
-                
-                
-                UIUtilities.showAlertMessageWithTwoActionsAndHandler(NSLocalizedString("Leave Study?", comment: ""), errorMessage: NSLocalizedString(withdrawalMessage!, comment: ""), errorAlertActionTitle: NSLocalizedString("Proceed", comment: ""),
-                                                                     errorAlertActionTitle2: NSLocalizedString("Cancel", comment: ""), viewControllerUsed: self,
-                                                                     action1: {
-                                                                        
-                                                                        
-                                                                        switch withdrawalType! as StudyWithdrawalConfigrationType {
-                                                                            
-                                                                        case .askUser :
-                                                                            
-                                                                            UIUtilities.showAlertMessageWithThreeActionsAndHandler(kImportantNoteMessage, errorMessage: "You are choosing to leave the study. Please choose if your response data can be retained and used for research purposes OR if your response data should be deleted.", errorAlertActionTitle: "Retain my data", errorAlertActionTitle2: "Delete my data", errorAlertActionTitle3: "Cancel", viewControllerUsed: self, action1: {
-                                                                                // Retain Action
-                                                                                
-                                                                                self.shouldDeleteData = false
-                                                                                self.withdrawalFromStudy(deleteResponse: false)
-                                                                                
-                                                                               
-                                                                                
-                                                                            }, action2: {
-                                                                                
-                                                                                // Delete action
-                                                                                  self.shouldDeleteData = true
-                                                                                self.withdrawalFromStudy(deleteResponse: true)
-                                                                                
-                                                                            }, action3: {
-                                                                                // Cancel Action
-                                                                            })
-                                                                            
-                                                                            
-                                                                        case .deleteData:
-                                                                            
-                                                                            UIUtilities.showAlertMessageWithTwoActionsAndHandler(NSLocalizedString("Tap OK to confirm your withdrawal from the study. Tap cancel to remain enrolled in the study.", comment: ""), errorMessage: NSLocalizedString("", comment: ""), errorAlertActionTitle: NSLocalizedString("OK", comment: ""),
-                                                                                                                                 errorAlertActionTitle2: NSLocalizedString("Cancel", comment: ""), viewControllerUsed: self,
-                                                                                                                                 action1: {
-                                                                                        self.shouldDeleteData = true
-                                                                                        self.withdrawalFromStudy(deleteResponse: true)
-                                                                            },
-                                                                                                                                 action2: {
-                                                                                                                                    
-                                                                            })
-                                                                        
-                                                                        case .noAction :
-                                                                            
-                                                                            UIUtilities.showAlertMessageWithTwoActionsAndHandler(NSLocalizedString("Tap OK to confirm your withdrawal from the study. Tap cancel to remain enrolled in the study.", comment: ""), errorMessage: NSLocalizedString("", comment: ""), errorAlertActionTitle: NSLocalizedString("OK", comment: ""),
-                                                                                                                                 errorAlertActionTitle2: NSLocalizedString("Cancel", comment: ""), viewControllerUsed: self,
-                                                                                                                                 action1: {
-                                                                                         self.shouldDeleteData = false
-                                                                                            self.withdrawalFromStudy(deleteResponse: false)
-                                                                            },
-                                                                                                                                 action2: {
-                                                                                                                                    
-                                                                            })
-                                                                            
-                                                                            default : break
-                                                                        }
-                                                                       
-
-                },
-                                                                     action2: {
-                                                                        
-                })
-
-               // else if no_action
-                
-                
-                // else if delete_data
-                
+                self.handleLeaveStudy()
             }
             else if  resource as! String == "About the Study"{
                 
@@ -686,6 +687,10 @@ extension ResourcesViewController:NMWebServiceDelegate {
                 
                 self.navigateToStudyHome()
             }
+            else if self.withdrawlInformationNotFound {
+                self.withdrawlInformationNotFound = false
+                self.handleLeaveStudy()
+            }
             
             
         }
@@ -761,6 +766,7 @@ extension ResourcesViewController:NMWebServiceDelegate {
             }
             else {
                 
+                self.removeProgressIndicator()
                 UIUtilities.showAlertWithTitleAndMessage(title:NSLocalizedString(kErrorTitle, comment: "") as NSString, message: error.localizedDescription as NSString)
             }
         }

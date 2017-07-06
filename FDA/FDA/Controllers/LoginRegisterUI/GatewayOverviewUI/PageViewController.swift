@@ -168,10 +168,10 @@ class PageViewController : UIPageViewController{
     private func getOverviewViewControllers() -> [UIViewController] {
         
         var controllers:Array<UIViewController> = []
-        var storyboard = UIStoryboard.init(name: "Login", bundle: Bundle.main)
+        var storyboard = UIStoryboard.init(name: kLoginStoryboardIdentifier, bundle: Bundle.main)
         
         if overview.type == .study {
-            storyboard = UIStoryboard.init(name: "Study", bundle: Bundle.main)
+            storyboard = UIStoryboard.init(name: kStudyStoryboard, bundle: Bundle.main)
             
             //get first overview controller
             let firstController = storyboard.instantiateViewController(withIdentifier: "FirstViewController") as! StudyOverviewViewControllerFirst

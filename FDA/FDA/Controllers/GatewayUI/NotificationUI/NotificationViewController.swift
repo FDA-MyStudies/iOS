@@ -192,7 +192,7 @@ class NotificationViewController : UIViewController{
     func pushToStudyDashboard(type:AppNotification.NotificationSubType?){
         
         let viewController:StudyDashboardTabbarViewController?
-        let storyboard = UIStoryboard(name: "Study", bundle: nil)
+        let storyboard = UIStoryboard(name: kStudyStoryboard, bundle: nil)
         if type != nil {
             
             self.navigationController?.setNavigationBarHidden(true, animated: true)

@@ -9,6 +9,8 @@
 import UIKit
 import QuickLook
 
+let kResourceName = "fda_preload"
+
 extension UIViewController {
     
     
@@ -70,10 +72,10 @@ extension UIViewController {
         var view = self.view.viewWithTag(5000)
         if view == nil {
             
-           view = UINib(nibName: "NewProgressView", bundle: nil).instantiate(withOwner: nil, options: nil)[0] as? UIView
+           view = UINib(nibName: kNewProgressViewNIB, bundle: nil).instantiate(withOwner: nil, options: nil)[0] as? UIView
             
             
-            let url = Bundle.main.url(forResource: "fda_preload", withExtension: "gif")!
+            let url = Bundle.main.url(forResource: kResourceName, withExtension: "gif")!
             let data = try! Data(contentsOf: url)
             let webView =  view?.subviews.first as! UIWebView
             

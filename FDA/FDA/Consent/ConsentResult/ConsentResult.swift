@@ -104,7 +104,7 @@ class ConsentResult {
                             
                             FileDownloadManager.encyptFile(pathURL: URL(string:defaultPath!)!)
                             
-                            let notificationName = Notification.Name("pdfCreationNotificationIdentifier")
+                            let notificationName = Notification.Name(kPDFCreationNotificationId)
                             // Post notification
                             NotificationCenter.default.post(name: notificationName, object: nil)
                             

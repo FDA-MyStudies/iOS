@@ -39,6 +39,21 @@
     let kIphoneSimulator =  "iPhone Simulator"
     
     let kBundleIdentier = "CFBundleIdentifier"
+    let kPDFCreationNotificationId = "pdfCreationNotificationIdentifier"
+    let ksetUpTimeIdentifier = "setUPTime"
+    let kCFBundleShortVersion = "CFBundleShortVersionString"
+    
+    let kResultCount = "resultCount"
+    
+    let kContinueButtonTitle =  NSLocalizedString("Continue", comment:"")
+    let kType = "type"
+    
+    let kCurrentVersion = "currentVersion"
+    let kForceUpdate = "forceUpdate"
+    let kMessage = "message"
+    let kVisualStepId = "visual"
+    
+ 
     
     @UIApplicationMain
     
@@ -162,9 +177,9 @@
             print("utc \(differenceFromUTC) current \(differenceFromCurrent) autoCurrent\(differenceFromAutoCurrent)")
             
             let ud = UserDefaults.standard
-            let setuptimeDiff = ud.value(forKey: "setUPTime") as? Int
+            let setuptimeDiff = ud.value(forKey: ksetUpTimeIdentifier) as? Int
             if setuptimeDiff == nil {
-                ud.set(differenceFromCurrent, forKey: "setUPTime")
+                ud.set(differenceFromCurrent, forKey: ksetUpTimeIdentifier)
                 ud.set(0, forKey: "offset")
             }
             else {
@@ -459,7 +474,7 @@
                 
             }
             
-            if userInfo.count > 0 && userInfo.keys.contains("type"){
+            if userInfo.count > 0 && userInfo.keys.contains(kType){
                 self.updateNotification()
             }
             
@@ -496,7 +511,7 @@
                 //self.handlePushNotificationResponse(userInfo : userInfo as NSDictionary)
             }
             
-            if userInfo.count > 0 && userInfo.keys.contains("type"){
+            if userInfo.count > 0 && userInfo.keys.contains(kType){
                 self.updateNotification()
             }
 
@@ -600,13 +615,13 @@
                             let data = try Data.init(contentsOf: url)
                             let parsedDict = try JSONSerialization.jsonObject(with: data, options:[])
                             
-                            if ((parsedDict as! [String:Any])["resultCount"] as! Int) == 1{
+                            if ((parsedDict as! [String:Any])[kResultCount] as! Int) == 1{
                                 
                                 let resultArray = ((parsedDict as! [String:Any])["result"]) as! Array<Dictionary<String,Any>>
                                 
                                 let appStoreVersion = (resultArray.first)?["version"]  as! String
                                 
-                                let currentVersion = infoDict?["CFBundleShortVersionString"]
+                                let currentVersion = infoDict?[kCFBundleShortVersion]
                                 
                                 if appStoreVersion != (currentVersion as! String) {
                                     
@@ -890,7 +905,7 @@
                                             
                                         else if initialVC is UITabBarController {
                                             
-                                            initialVC?.performSegue(withIdentifier: "unwindeToStudyListIdentier", sender: initialVC)
+                                            initialVC?.performSegue(withIdentifier: kActivityUnwindToStudyListIdentifier, sender: initialVC)
                                             
                                         }
                                         
@@ -1072,22 +1087,7 @@
                 self.window?.removeProgressIndicatorFromWindow()
             }
             
-            
-            //            let navigationController =  (self.window?.rootViewController as! UINavigationController)
-            //
-            //            if navigationController.viewControllers.count > 0 {
-            //                let studyListController = navigationController.viewControllers.first
-            //
-            //                if add == true{
-            //
-            //                    studyListController?.addProgressIndicator()
-            //                }
-            //                else{
-            //
-            //                    studyListController?.removeProgressIndicator()
-            //                }
-            //            }
-            
+    
         }
         
         
@@ -1160,12 +1160,7 @@
                 
             }
             
-            /*
             
-            let leftController = slideMenuController()?.leftViewController as! LeftMenuViewController
-             leftController.changeViewController(.studyList)
-            leftController.createLeftmenuItems()
-            */
         }
         
         
@@ -1273,10 +1268,10 @@
                             
                         case .Paused:
                             message = NSLocalizedString(kMessageForStudyPausedState, comment: "")
-                        // UIUtilities.showAlertWithTitleAndMessage(title: "", message: NSLocalizedString(kMessageForStudyPausedState, comment: "") as NSString)
+                        
                         case .Closed:
                             message = NSLocalizedString(kMessageForStudyClosedState, comment: "")
-                        // UIUtilities.showAlertWithTitleAndMessage(title: "", message: NSLocalizedString(kMessageForStudyClosedState, comment: "") as NSString)
+                        
                         default: break
                             
                         }
@@ -1304,10 +1299,6 @@
                             }
                             
                             
-                            //if self.selectedController is StudyDashboardViewController {
-                            //(self.selectedController as! StudyDashboardViewController).)
-                            // }
-                            // else
                             if self.selectedController is ActivitiesViewController {
                                 (self.selectedController as! ActivitiesViewController).checkForActivitiesUpdates()
                             }
@@ -1327,7 +1318,7 @@
         
         func updateEligibilityConsentStatus(){
             
-            let notificationName = Notification.Name("pdfCreationNotificationIdentifier")
+            let notificationName = Notification.Name(kPDFCreationNotificationId)
             // Post notification
           
             // Stop listening notification
@@ -1384,20 +1375,18 @@
             if requestName as String == WCPMethods.appUpdates.method.methodName {
                 
                 let appVersion = Utilities.getAppVersion()
-                if appVersion != response?["currentVersion"] as! String {
+                if appVersion != response?[kCurrentVersion] as! String {
                     
-                    if response?["forceUpdate"] as! Bool {
-                        
-                      
+                    if response?[kForceUpdate] as! Bool {
                         
                         self.shouldAddForceUpgradeScreen = true
                         
-                        let version = response?["currentVersion"] as! String
+                        let version = response?[kCurrentVersion] as! String
                         
                         blockerScreen = AppUpdateBlocker.instanceFromNib(frame:(UIApplication.shared.keyWindow?.bounds)!, detail: response as! Dictionary<String, Any>);
                         
                         blockerScreen?.labelVersionNumber.text = "V-" + version
-                        blockerScreen?.labelMessage.text = response?["message"] as? String
+                        blockerScreen?.labelMessage.text = response?[kMessage] as? String
                         
                         
                         if User.currentUser.userType == .FDAUser {
@@ -1416,7 +1405,7 @@
                         
                     }
                     else {
-                        UIUtilities.showAlertWithMessage(alertMessage: response?["message"] as! String);
+                        UIUtilities.showAlertWithMessage(alertMessage: response?[kMessage] as! String);
                     }
                     
                     
@@ -1562,7 +1551,7 @@
                 if ConsentBuilder.currentConsent?.consentResult?.consentPdfData?.count == 0 {
                     
                     // Define identifier
-                    let notificationName = Notification.Name("pdfCreationNotificationIdentifier")
+                    let notificationName = Notification.Name(kPDFCreationNotificationId)
                     
                     // Register to receive notification
                     NotificationCenter.default.addObserver(self, selector: #selector(self.updateEligibilityConsentStatus), name: notificationName, object: nil)
@@ -1610,11 +1599,11 @@
                 
                 
                 
-                if  stepViewController.step?.identifier == kConsentCompletionStepIdentifier || stepViewController.step?.identifier == "visual"  || stepViewController.step?.identifier == kConsentSharePdfCompletionStep || stepViewController.step?.identifier == kEligibilityVerifiedScreen{
+                if  stepViewController.step?.identifier == kConsentCompletionStepIdentifier || stepViewController.step?.identifier == kVisualStepId  || stepViewController.step?.identifier == kConsentSharePdfCompletionStep || stepViewController.step?.identifier == kEligibilityVerifiedScreen{
                     
                     
                     if stepViewController.step?.identifier == kEligibilityVerifiedScreen{
-                        stepViewController.continueButtonTitle = "Continue"
+                        stepViewController.continueButtonTitle = kContinueButtonTitle
                     }
                     stepViewController.backButtonItem = nil
                 }
@@ -1870,7 +1859,7 @@
             
              print("keys:" + "\(userInfo.keys)")
             
-            if userInfo.count > 0 && userInfo.keys.contains("type"){
+            if userInfo.count > 0 && userInfo.keys.contains(kType){
                  self.updateNotification()
             }
             
@@ -1896,7 +1885,7 @@
                 //self.handlePushNotificationResponse(userInfo : userInfo as NSDictionary)
             }
             
-            if userInfo.count > 0 && userInfo.keys.contains("type"){
+            if userInfo.count > 0 && userInfo.keys.contains(kType){
                 self.updateNotification()
             }
             
@@ -1913,7 +1902,7 @@
             let view = UINib(nibName: kNewProgressViewNIB, bundle: nil).instantiate(withOwner: nil, options: nil)[0] as? UIView
             
             
-            let url = Bundle.main.url(forResource: "fda_preload", withExtension: "gif")!
+            let url = Bundle.main.url(forResource: kResourceName, withExtension: "gif")!
             let data = try! Data(contentsOf: url)
             let webView =  view?.subviews.first as! UIWebView
             
@@ -1938,10 +1927,10 @@
             var view = self.viewWithTag(5000)
             if view == nil {
             
-            let view = UINib(nibName: "NewProgressView", bundle: nil).instantiate(withOwner: nil, options: nil)[0] as? UIView
+            let view = UINib(nibName: kNewProgressViewNIB, bundle: nil).instantiate(withOwner: nil, options: nil)[0] as? UIView
             
             
-            let url = Bundle.main.url(forResource: "fda_preload", withExtension: "gif")!
+            let url = Bundle.main.url(forResource: kResourceName, withExtension: "gif")!
             let data = try! Data(contentsOf: url)
             let webView =  view?.subviews.first as! UIWebView
             

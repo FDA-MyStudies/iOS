@@ -61,7 +61,7 @@ class StudyOverviewPageViewController : UIPageViewController{
      
      */
     private func newColoredViewController(ViewController: String) -> UIViewController {
-        return UIStoryboard(name: "Login", bundle: nil) .
+        return UIStoryboard(name: kLoginStoryboardIdentifier, bundle: nil) .
             instantiateViewController(withIdentifier: "\(ViewController)OverviewViewController")
     }
 }

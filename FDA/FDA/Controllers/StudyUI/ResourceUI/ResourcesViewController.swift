@@ -385,7 +385,7 @@ class ResourcesViewController : UIViewController{
     
     func navigateToStudyHome(){
         
-        let studyStoryBoard = UIStoryboard.init(name: "Study", bundle: Bundle.main)
+        let studyStoryBoard = UIStoryboard.init(name: kStudyStoryboard, bundle: Bundle.main)
         let studyHomeController = studyStoryBoard.instantiateViewController(withIdentifier: String(describing: StudyHomeViewController.classForCoder())) as! StudyHomeViewController
         studyHomeController.hideViewConsentAfterJoining = true
         

@@ -305,8 +305,30 @@ class ActivitiesTableViewCell: UITableViewCell {
 
         case .Scheduled:
             
-            let runStartDate = activity.currentRun.startDate
-            let runEndDate = activity.currentRun.endDate
+            
+            var runStartDate:Date?
+            var runEndDate:Date?
+            if activity.currentRun != nil {
+                
+                
+             runStartDate = activity.currentRun.startDate
+             runEndDate = activity.currentRun.endDate
+            
+            
+                
+            }
+            else {
+                
+                let run = activity.activityRuns.filter({$0.runId == activity.currentRunId}).first
+                runStartDate = run?.startDate
+                runEndDate = run?.endDate
+                
+            }
+            
+            if runEndDate == nil || runStartDate == nil {
+                runStartDate = activity.startDate
+                runEndDate = activity.endDate
+            }
             
             let currentRunStartDate = ActivitiesTableViewCell.oneTimeFormatter.string(from: runStartDate!)
             let currentRunEndDate = ActivitiesTableViewCell.oneTimeFormatter.string(from: runEndDate!)

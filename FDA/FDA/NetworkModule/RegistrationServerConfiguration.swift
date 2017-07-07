@@ -77,6 +77,10 @@ struct RegistrationServerURLConstants {
     static let ProductionURL = "https://hphci-fdama-st-ur-01.labkey.com/fdahpUserRegWS/"
     static let DevelopmentURL = "https://hphci-fdama-st-ur-01.labkey.com/fdahpUserRegWS/"
     
+    //Labkey Production Server Staging enviroment
+    //static let ProductionURL = "https://hphci-fdama-pr-ur-01.labkey.com/fdahpUserRegWS/"
+    //static let DevelopmentURL = "https://hphci-fdama-pr-ur-01.labkey.com/fdahpUserRegWS/"
+    
     
 }
 class RegistrationServerConfiguration: NetworkConfiguration {

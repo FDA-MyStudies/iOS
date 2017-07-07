@@ -164,7 +164,7 @@ class ConsentBuilder{
                 return nil
             }
             else{
-                let visualConsentStep = VisualConsentStep(identifier: "visual", document: self.getConsentDocument())
+                let visualConsentStep = VisualConsentStep(identifier: kVisualStepId, document: self.getConsentDocument())
                 return visualConsentStep
             }
         

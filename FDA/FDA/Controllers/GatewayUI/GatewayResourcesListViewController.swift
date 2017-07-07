@@ -103,7 +103,7 @@ extension GatewayResourcesListViewController :  UITableViewDelegate {
         tableView.deselectRow(at: indexPath, animated: true)
         
         let resource = Gateway.instance.resources?[indexPath.row]
-        let storyboard = UIStoryboard(name: "Study", bundle: nil)
+        let storyboard = UIStoryboard(name: kStudyStoryboard, bundle: nil)
         let resourceDetail =   storyboard.instantiateViewController(withIdentifier: "ResourceDetailViewControllerIdentifier") as! ResourcesDetailViewController
         resourceDetail.resource = resource
         self.navigationController?.pushViewController(resourceDetail, animated: true)

@@ -68,7 +68,7 @@ var isAppOpenedForFirstTime:Bool? = false
      */
     func navigateToHomeController(){
         
-        let loginStoryboard = UIStoryboard.init(name: "Login", bundle:Bundle.main)
+        let loginStoryboard = UIStoryboard.init(name: kLoginStoryboardIdentifier, bundle:Bundle.main)
         let homeViewController = loginStoryboard.instantiateViewController(withIdentifier:"HomeViewController")
         self.navigationController?.pushViewController(homeViewController, animated: true)
     }

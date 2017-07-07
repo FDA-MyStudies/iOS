@@ -285,7 +285,7 @@ class StudyListViewController: UIViewController {
      */
     func navigateToStudyHome(){
         
-        let studyStoryBoard = UIStoryboard.init(name: "Study", bundle: Bundle.main)
+        let studyStoryBoard = UIStoryboard.init(name: kStudyStoryboard, bundle: Bundle.main)
         let studyHomeController = studyStoryBoard.instantiateViewController(withIdentifier: String(describing: StudyHomeViewController.classForCoder())) as! StudyHomeViewController
         studyHomeController.delegate = self
         self.navigationController?.pushViewController(studyHomeController, animated: true)
@@ -299,7 +299,7 @@ class StudyListViewController: UIViewController {
      */
     func pushToStudyDashboard(animated:Bool = true){
         
-        let studyStoryBoard = UIStoryboard.init(name: "Study", bundle: Bundle.main)
+        let studyStoryBoard = UIStoryboard.init(name: kStudyStoryboard, bundle: Bundle.main)
         
         let studyDashboard = studyStoryBoard.instantiateViewController(withIdentifier: kStudyDashboardTabbarControllerIdentifier) as! StudyDashboardTabbarViewController
         

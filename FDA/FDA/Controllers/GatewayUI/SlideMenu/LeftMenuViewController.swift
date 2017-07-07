@@ -25,6 +25,10 @@ let kAlertMessageSignOutSync = "Are you sure you want to Sign Out ? Your data wi
 
 let kAlertSignOutLaterTitle = "Sign Out later"
 
+//MARK:Segue Identifiers
+let kLoginStoryboardIdentifier = "Login"
+
+
 enum LeftMenu: Int {
     case studyList = 0
     case resources
@@ -108,7 +112,7 @@ class LeftMenuViewController : UIViewController, LeftMenuProtocol {
      */
     func createControllersForAnonymousUser(){
         
-        let loginStoryBoard = UIStoryboard(name: "Login", bundle: nil)
+        let loginStoryBoard = UIStoryboard(name: kLoginStoryboardIdentifier, bundle: nil)
         let signInController = loginStoryBoard.instantiateViewController(withIdentifier:  String(describing: SignInViewController.classForCoder())) as! SignInViewController
         self.signInViewController = UINavigationController(rootViewController: signInController)
         self.signInViewController.navigationBar.barStyle = .default

@@ -459,11 +459,11 @@ extension StudyDashboardViewController:ORKTaskViewControllerDelegate{
         
         //For Verified Step , Completion Step, Visual Step, Review Step, Share Pdf Step
         
-        if  stepViewController.step?.identifier == kConsentCompletionStepIdentifier || stepViewController.step?.identifier == "visual" || stepViewController.step?.identifier == kReviewTitle || stepViewController.step?.identifier == kConsentSharePdfCompletionStep{
+        if  stepViewController.step?.identifier == kConsentCompletionStepIdentifier || stepViewController.step?.identifier == kVisualStepId || stepViewController.step?.identifier == kReviewTitle || stepViewController.step?.identifier == kConsentSharePdfCompletionStep{
             
             
             if stepViewController.step?.identifier == kEligibilityVerifiedScreen{
-                stepViewController.continueButtonTitle = "Continue"
+                stepViewController.continueButtonTitle = kContinueButtonTitle
             }
             stepViewController.backButtonItem = nil
         }

@@ -312,7 +312,7 @@ class StudyHomeViewController : UIViewController{
     
     func updateEligibilityConsentStatus(){
         
-        let notificationName = Notification.Name("pdfCreationNotificationIdentifier")
+        let notificationName = Notification.Name(kPDFCreationNotificationId)
         // Post notification
         
         // Stop listening notification
@@ -337,7 +337,7 @@ class StudyHomeViewController : UIViewController{
             // let leftController = slideMenuController()?.leftViewController as! LeftMenuViewController
             // leftController.changeViewController(.reachOut_signIn)
             
-            let loginStoryBoard = UIStoryboard(name: "Login", bundle: nil)
+            let loginStoryBoard = UIStoryboard(name: kLoginStoryboardIdentifier, bundle: nil)
             let signInController = loginStoryBoard.instantiateViewController(withIdentifier:  String(describing: SignInViewController.classForCoder())) as! SignInViewController
             signInController.viewLoadFrom = .joinStudy
             self.navigationController?.pushViewController(signInController, animated: true)
@@ -643,7 +643,7 @@ extension StudyHomeViewController:NMWebServiceDelegate {
                 if ConsentBuilder.currentConsent?.consentResult?.consentPdfData?.count == 0 {
                     
                     // Define identifier
-                    let notificationName = Notification.Name("pdfCreationNotificationIdentifier")
+                    let notificationName = Notification.Name(kPDFCreationNotificationId)
                     
                     // Register to receive notification
                     NotificationCenter.default.addObserver(self, selector: #selector(self.updateEligibilityConsentStatus), name: notificationName, object: nil)
@@ -867,11 +867,11 @@ extension StudyHomeViewController:ORKTaskViewControllerDelegate{
         
         //For Verified Step , Completion Step, Visual Step, Review Step, Share Pdf Step
         
-        if stepViewController.step?.identifier == kEligibilityVerifiedScreen || stepViewController.step?.identifier == kConsentCompletionStepIdentifier || stepViewController.step?.identifier == "visual"  || stepViewController.step?.identifier == kConsentSharePdfCompletionStep{
+        if stepViewController.step?.identifier == kEligibilityVerifiedScreen || stepViewController.step?.identifier == kConsentCompletionStepIdentifier || stepViewController.step?.identifier == kVisualStepId  || stepViewController.step?.identifier == kConsentSharePdfCompletionStep{
             //|| stepViewController.step?.identifier == "Review"
             
             if stepViewController.step?.identifier == kEligibilityVerifiedScreen{
-               stepViewController.continueButtonTitle = "Continue"
+               stepViewController.continueButtonTitle = kContinueButtonTitle
             }
             
             

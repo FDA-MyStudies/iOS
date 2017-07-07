@@ -49,6 +49,10 @@ struct ResponseServerURLConstants {
     static let ProductionURL = "https://hphci-fdama-st-ds-01.labkey.com/mobileappstudy-"
     static let DevelopmentURL = "https://hphci-fdama-st-ds-01.labkey.com/mobileappstudy-"
     
+    //Labkey Production Server
+    //static let ProductionURL = "https://hphci-fdama-pr-ds-01.labkey.com/mobileappstudy-"
+    //static let DevelopmentURL = "https://hphci-fdama-pr-ds-01.labkey.com/mobileappstudy-"
+    
 }
 class ResponseServerConfiguration: NetworkConfiguration {
     static let configuration = ResponseServerConfiguration()

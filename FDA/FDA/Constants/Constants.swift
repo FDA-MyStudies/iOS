@@ -45,7 +45,7 @@ let kSignInTableViewCellIdentifier = "DetailsCell"
 
 //MARK:- ForgotPassword Constants
 let kForgotPasswordTitleText = "PASSWORD HELP"
-let kForgotPasswordResponseMessage = "We have sent temporary password to your registered email. Please login with temporary password and change your password."
+let kForgotPasswordResponseMessage = "We have sent a temporary password to your registered email. Please login with temporary password and change your password."
 
 //MARK:- SignUp Constants
 let kSignUpTitleText = "SIGN UP"

@@ -304,7 +304,13 @@ class ActivitiesTableViewCell: UITableViewCell {
             labelTime?.text = monthlyStartTime + " to " + endDate
 
         case .Scheduled:
-            labelTime?.text = startDateString + " - " + endDateString
+            
+            let runStartDate = activity.currentRun.startDate
+            let runEndDate = activity.currentRun.endDate
+            
+            let currentRunStartDate = ActivitiesTableViewCell.oneTimeFormatter.string(from: runStartDate!)
+            let currentRunEndDate = ActivitiesTableViewCell.oneTimeFormatter.string(from: runEndDate!)
+            labelTime?.text = currentRunStartDate + " - " + currentRunEndDate
         
         }
     }

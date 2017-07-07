@@ -1264,7 +1264,7 @@ class ActivitySchedules:UIView,UITableViewDelegate,UITableViewDataSource{
     
     private static let formatter: DateFormatter = {
         let formatter = DateFormatter()
-        formatter.dateFormat = "hha, MMM dd YYYY"
+        formatter.dateFormat = "hh:mma, MMM dd YYYY"
         //formatter.timeZone = TimeZone.init(abbreviation:"GMT")
         return formatter
     }()

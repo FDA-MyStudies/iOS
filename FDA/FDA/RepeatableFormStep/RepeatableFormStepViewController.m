@@ -25,6 +25,11 @@
 @property (nonatomic, strong) NSArray *originalFormItems;
 
 @property(nonatomic, weak) UITableView *originalTableView;
+
+@property (nonatomic, assign) NSInteger repeatableTextSection;
+
+@property (nonatomic, assign) NSInteger lastSectionRowCount;
+
 @end
 
 @implementation RepeatableFormStepViewController
@@ -68,6 +73,9 @@
     _originalTableView = tableView;
     
     NSInteger sections = [super numberOfSectionsInTableView:tableView];
+    
+    NSLog(@"sections-> %d", sections);
+
     if (sections - 1 == section) {
         if ([view.subviews.lastObject isKindOfClass:[UIButton class]]) {
             return;
@@ -105,7 +113,9 @@
         [button addTarget:self action:@selector(addMoreAction:) forControlEvents:UIControlEventTouchUpInside];
         [view addSubview:button];
         
+        _repeatableTextSection = section;
         
+        _lastSectionRowCount = [_originalTableView numberOfRowsInSection:section - 1];
         
     }
 }
@@ -118,6 +128,7 @@
 
 
 - (void) addMoreAction:(id)sender {
+    
     
     NSMutableArray *mItems = [[[self formStep] formItems] mutableCopy];
     [mItems removeLastObject];
@@ -146,10 +157,51 @@
     
    
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        
+        NSLog(@"tcs-> %@ %@", NSStringFromCGSize(self.originalTableView.contentSize), NSStringFromCGSize(self.originalTableView.frame.size));
+
         if (self.originalTableView.contentSize.height > self.originalTableView.frame.size.height)
         {
-            CGPoint offset = CGPointMake(0, self.originalTableView.contentSize.height - self.originalTableView.frame.size.height);
-            [self.originalTableView setContentOffset:offset animated:YES];
+//            CGPoint offset = CGPointMake(0, self.originalTableView.contentSize.height - self.originalTableView.frame.size.height);
+//            
+//            NSInteger sections = [self.originalTableView numberOfSections];
+//            
+//            NSInteger lastSection = _repeatableTextSection - 1;
+
+            
+            NSInteger previousLastSectionRowCount = [_originalTableView numberOfRowsInSection:_repeatableTextSection - 1];
+            
+            NSIndexPath *scrollToIndexPath;
+            
+            if (_lastSectionRowCount < previousLastSectionRowCount) {
+                scrollToIndexPath = [NSIndexPath indexPathForRow:previousLastSectionRowCount - 1 inSection:_repeatableTextSection - 1];
+            }
+            else {
+                scrollToIndexPath = [NSIndexPath indexPathForRow:0 inSection:_repeatableTextSection];
+            }
+            
+            [self.originalTableView scrollToRowAtIndexPath:scrollToIndexPath atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+            
+//            UITableViewCell *cell = [_originalTableView cellForRowAtIndexPath:scrollToIndexPath];
+//            [cell becomeFirstResponder];
+            
+            
+            
+            
+            
+            /*
+            NSInteger noOfSections  =  mItems.count - _originalFormItems.count + 1 ;
+            
+            if (self.originalFormItems.count > 2){
+            
+            noOfSections = noOfSections - ((NSInteger*)(noOfSections /_originalFormItems.count) > 0 ? (noOfSections /_originalFormItems.count) : 0);
+            }
+            NSIndexPath *secondLastIndexPath = [NSIndexPath indexPathForRow:0 inSection:noOfSections];
+            
+            
+            [self.originalTableView scrollToRowAtIndexPath:secondLastIndexPath atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+            */
+            //[self.originalTableView setContentOffset:offset animated:YES];
         }
         
     });

@@ -64,11 +64,11 @@ class ActivityFormStep: ActivityStep {
                 
                 (step as! RepeatableFormStep).repeatableText = self.repeatableText
                 
-                step?.formItems = [ORKFormItem]()
+                //step?.formItems = [ORKFormItem]()
             }
             else{
                 step = ORKFormStep(identifier: key!, title: (self.title == nil ? "" : self.title!), text: text!)
-                step?.formItems = [ORKFormItem]()
+                //step?.formItems = [ORKFormItem]()
             }
             
             
@@ -81,6 +81,7 @@ class ActivityFormStep: ActivityStep {
             }
             
             
+            var formItemsArray = [ORKFormItem]()
             
             for dict in self.itemsArray {
                 
@@ -99,13 +100,21 @@ class ActivityFormStep: ActivityStep {
                     
                     formItem01.placeholder = orkQuestionStep.placeholder == nil ? "" :  orkQuestionStep.placeholder
                     formItem01.isOptional = (questionStep?.skippable)!
-                    step?.formItems?.append(formItem01)
+                    //step?.formItems?.append(formItem01)
+                    formItemsArray.append(formItem01)
                     
                 }
                 else{
                     Logger.sharedInstance.debug("item Dictionary is null :\(dict)")
                 }
             }
+            
+            if self.repeatable == true{
+                (step as! RepeatableFormStep).initialItemCount = formItemsArray.count
+            }
+            
+            step?.formItems = formItemsArray
+            
             return step
             
         }

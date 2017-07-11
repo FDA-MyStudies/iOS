@@ -33,8 +33,12 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+    NSInteger originalItemCount = [[self formStep] initialItemCount];
     NSMutableArray *items = [[[self formStep] formItems] mutableCopy];
     [items removeLastObject];
+    if (items.count > originalItemCount) {
+        [items removeObjectsInRange:NSMakeRange(originalItemCount, items.count - originalItemCount)];
+    }
     _originalFormItems = items;
     
     

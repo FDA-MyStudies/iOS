@@ -12,5 +12,6 @@
 
 @property (nonatomic, assign) BOOL repeatable;
 @property (nonatomic, copy, nullable) NSString *repeatableText;
+@property (nonatomic, assign) NSInteger initialItemCount;
 
 @end

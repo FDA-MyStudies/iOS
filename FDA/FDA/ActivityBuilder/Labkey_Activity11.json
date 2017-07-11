@@ -1,4 +1,5 @@
-{"Result":
+{
+    "Result":
     
     {
         
@@ -24,7 +25,7 @@
         
         "configuration": {
             
-            "frequency":"one-time"
+            "frequency": "one-time"
             
         },
         
@@ -223,15 +224,376 @@
                             
                             "options": []
                             
+                            },
+                            {
+                            
+                            "type": "question",
+                            
+                            "resultType": "date",
+                            
+                            "key": "QR4_Q7_0",
+                            
+                            "title": "Q7",
+                            
+                            "text": "QDesc7",
+                            
+                            "skippable": true,
+                            
+                            "groupName": "",
+                            
+                            "repeatable": false,
+                            
+                            "repeatableText": "",
+                            
+                            "destinations": [
+                            
+                            
+                            
+                            ],
+                            
+                            "healthDataKey": "",
+                            
+                            "format": {
+                            
+                            "style": "Date",
+                            
+                            "minDate": "",
+                            
+                            "maxDate": "",
+                            
+                            "default": ""
+                            
                             }
                             
+                            },
+                            {
+                            
+                            "type": "question",
+                            
+                            "resultType": "date",
+                            
+                            "key": "QR4_Q7_1",
+                            
+                            "title": "Q7",
+                            
+                            "text": "QDesc7",
+                            
+                            "skippable": true,
+                            
+                            "groupName": "",
+                            
+                            "repeatable": false,
+                            
+                            "repeatableText": "",
+                            
+                            "destinations": [
+                            
+                            
+                            
+                            ],
+                            
+                            "healthDataKey": "",
+                            
+                            "format": {
+                            
+                            "style": "Date",
+                            
+                            "minDate": "",
+                            
+                            "maxDate": "",
+                            
+                            "default": ""
+                            
+                            }
+                            }
                             ],
                   
                   "options": []
                   
+                  },
+                  {
+                  
+                  "destinations" : [
+                                    
+                                    {
+                                    
+                                    "condition" : "",
+                                    
+                                    "destination" : ""
+                                    
+                                    }
+                                    
+                                    ],
+                  
+                  "format" : {
+                  
+                  },
+                  
+                  "groupName" : "",
+                  
+                  "healthDataKey" : "",
+                  
+                  "key" : "SmokeMedForm1",
+                  
+                  "options" : [],
+                  
+                  "repeatable" : true,
+                  
+                  "repeatableText" : "add",
+                  
+                  "resultType" : "grouped",
+                  
+                  "skippable" : true,
+                  
+                  "steps" : [
+                             
+                             {
+                             
+                             "destinations"
+                             :[],
+                             
+                             "format" : {
+                             
+                             "default" : "2017-06-01T00:00:00.000-0400",
+                             
+                             "maxDate" : "",
+                             
+                             "minDate" : "",
+                             
+                             "style" : "Date"
+                             
+                             },
+                             
+                             "groupName" : "",
+                             
+                             "healthDataKey" : "",
+                             
+                             "key" : "SmokeMedStop90",
+                             
+                             "options" : [],
+                             
+                             "repeatable" : true,
+                             
+                             "repeatableText" : "",
+                             
+                             "resultType" : "date",
+                             
+                             "skippable" : true,
+                             
+                             "steps" : [],
+                             
+                             "text" : "",
+                             
+                             "title" : "First question?",
+                             
+                             "type" : "question"
+                             
+                             },
+                             
+                             {
+                             
+                             "destinations" : [],
+                             
+                             
+                             "format" : {
+                             
+                             "selectionStyle" : "Single",
+                             
+                             "textChoices" : [
+                                              
+                                              {
+                                              
+                                              "detail" : "",
+                                              
+                                              "exclusive" : 0,
+                                              
+                                              "text" : "Smoking Med 1",
+                                              
+                                              "value" : 1
+                                              
+                                              },
+                                              
+                                              {
+                                              
+                                              "detail" : "",
+                                              
+                                              "exclusive" : 0,
+                                              
+                                              "text" : "Smoking Med 2",
+                                              
+                                              "value" : 2
+                                              
+                                              }
+                                              
+                                              ]
+                             
+                             },
+                             
+                             "groupName" : "",
+                             
+                             "healthDataKey" : "",
+                             
+                             "key" : "SmokeMed3",
+                             
+                             "options" : [],
+                             
+                             "repeatable" : false,
+                             
+                             "repeatableText" : "",
+                             
+                             "resultType" : "textChoice",
+                             
+                             "skippable" : true,
+                             
+                             "steps":[],
+                             
+                             "text" : "",
+                             
+                             "title" : "What medication did you take?",
+                             
+                             "type" : "question"
+                             
+                             },
+                             
+                             {
+                             
+                             "destinations" : [],
+                             
+                             "format" : {
+                             
+                             
+                             "invalidMessage" : "",
+                             
+                             "maxLength" : 0,
+                             
+                             "multipleLines" : 0,
+                             
+                             "placeholder" : "Enter medication",
+                             
+                             "validationRegex" : ""
+                             
+                             },
+                             
+                             "groupName" : "",
+                             
+                             "healthDataKey" : "",
+                             
+                             "key" : "SmokeMedText1",
+                             
+                             "options" : [],
+                             
+                             "repeatable" : false,
+                             
+                             "repeatableText" : "",
+                             
+                             "resultType" : "text",
+                             
+                             "skippable" : true,
+                             
+                             "steps" : [],
+                             
+                             "text" : "",
+                             
+                             "title" : "If your medication is not in this list, please enter it here:",
+                             
+                             "type" : "question"
+                             
+                             },
+                             
+                             {
+                             
+                             "destinations" : [],
+                             
+                             "format" : {
+                             
+                             "default" : "2017-06-01T00:00:00.000-0400",
+                             
+                             "maxDate" : "",
+                             
+                             "minDate" : "",
+                             
+                             "style" : "Date"
+                             
+                             },
+                             
+                             "groupName" : "",
+                             
+                             "healthDataKey" : "",
+                             
+                             "key" : "SmokeMedStart1",
+                             
+                             "options" : [],
+                             
+                             "repeatable" : false,
+                             
+                             "repeatableText" : "",
+                             
+                             "resultType" : "date",
+                             
+                             "skippable" : true,
+                             
+                             "steps" : [],
+                             
+                             "text" : "",
+                             
+                             "title" : "When during your pregnancy did you start taking this medication to stop smoking?",
+                             
+                             "type" : "question"
+                             
+                             },
+                             
+                             {
+                             
+                             "destinations" 
+                             :[],
+                             
+                             "format" : {
+                             
+                             "default" : "2017-06-01T00:00:00.000-0400",
+                             
+                             "maxDate" : "",
+                             
+                             "minDate" : "",
+                             
+                             "style" : "Date"
+                             
+                             },
+                             
+                             "groupName" : "",
+                             
+                             "healthDataKey" : "",
+                             
+                             "key" : "SmokeMedStop1",
+                             
+                             "options" : [],
+                             
+                             "repeatable" : true,
+                             
+                             "repeatableText" : "",
+                             
+                             "resultType" : "date",
+                             
+                             "skippable" : true,
+                             
+                             "steps" : [],
+                             
+                             "text" : "",
+                             
+                             "title" : "When did you stop taking this medication?",
+                             
+                             "type" : "question"
+                             
+                             }
+                             
+                             ],
+                  
+                  "text" : "",
+                  
+                  "title" : "",
+                  
+                  "type" : "form"
+                  
                   }
-                  
-                  
                   
                   
                   ]
@@ -241,4 +603,3 @@
     }
     
 }
-

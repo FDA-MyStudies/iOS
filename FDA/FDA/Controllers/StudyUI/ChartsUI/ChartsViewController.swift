@@ -11,6 +11,7 @@ import UIKit
 class ChartsViewController: UIViewController {
 
     @IBOutlet weak var tableView:UITableView!
+    @IBOutlet weak var backButton:UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -18,14 +19,20 @@ class ChartsViewController: UIViewController {
         // Do any additional setup after loading the view.
         
         self.title = NSLocalizedString("TRENDS", comment: "")
-        self.addBackBarButton()
+        //self.addBackBarButton()
         
         //unhide navigationbar
-        self.navigationController?.setNavigationBarHidden(false, animated: true)
+        //self.navigationController?.setNavigationBarHidden(false, animated: true)
+        
+        
+
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
        
+        //UINavigationBar.appearance().tintColor = UIColor.red
+        
+        
         
         DBHandler.loadChartsForStudy(studyId: (Study.currentStudy?.studyId)!) { (chartList) in
             
@@ -39,6 +46,10 @@ class ChartsViewController: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    @IBAction func backButtonAction(_ sender:UIButton){
+        self.navigationController?.popViewController(animated: true)
     }
     
 

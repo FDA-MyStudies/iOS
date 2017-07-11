@@ -65,6 +65,25 @@ class LineChartCell: GraphChartTableViewCell {
         // Configure the view for the selected state
     }
     
+    func getWeeklyAttributedText()->NSAttributedString{
+        
+        let stringStartDate = LineChartCell.formatter.string(from: startDateOfWeek!) + " - "
+        let stringEndDate = LineChartCell.formatter.string(from: endDateOfWeek!)
+        
+        let color = Utilities.getUIColorFromHex(0x007CBA)
+        
+        let attributedStartDate:NSMutableAttributedString = NSMutableAttributedString(string: stringStartDate)
+        attributedStartDate.addAttribute(NSForegroundColorAttributeName, value: color, range: NSMakeRange(0, 2))
+        
+        let attributedEndDate:NSMutableAttributedString = NSMutableAttributedString(string: stringEndDate)
+        attributedEndDate.addAttribute(NSForegroundColorAttributeName, value: color, range: NSMakeRange(0, 2))
+        
+        
+        attributedStartDate.append(attributedEndDate)
+        
+        return attributedStartDate
+    }
+    
     func setupLineChart(chart:DashboardCharts){
         
         currentChart = chart
@@ -106,9 +125,24 @@ class LineChartCell: GraphChartTableViewCell {
             startDateOfWeek = Date().startOfWeek
             endDateOfWeek = Date().endOfWeek
             //current year
-            let stringStartDate = LineChartCell.formatter.string(from: startDateOfWeek!)
-            let stringEndDate = LineChartCell.formatter.string(from: endDateOfWeek!)
-            labelAxisValue.text = stringStartDate + " - " + stringEndDate
+//            let stringStartDate = LineChartCell.formatter.string(from: startDateOfWeek!) + " - "
+//            let stringEndDate = LineChartCell.formatter.string(from: endDateOfWeek!)
+//            
+//            let color = Utilities.getUIColorFromHex(0x007CBA)
+//            
+//            let attributedStartDate:NSMutableAttributedString = NSMutableAttributedString(string: stringStartDate)
+//            attributedStartDate.addAttribute(NSForegroundColorAttributeName, value: color, range: NSMakeRange(0, 2))
+//            
+//            let attributedEndDate:NSMutableAttributedString = NSMutableAttributedString(string: stringEndDate)
+//            attributedEndDate.addAttribute(NSForegroundColorAttributeName, value: color, range: NSMakeRange(0, 2))
+//            
+//            
+//            attributedStartDate.append(attributedEndDate)
+            
+            let attributedText = self.getWeeklyAttributedText()
+            
+            labelAxisValue.attributedText = attributedText
+            
             self.buttonForward.isEnabled = false
             
             
@@ -234,9 +268,12 @@ class LineChartCell: GraphChartTableViewCell {
             
             startDateOfWeek = calendar.date(byAdding: .day, value: 7, to: startDateOfWeek!)
             endDateOfWeek = calendar.date(byAdding: .day, value: 7, to: endDateOfWeek!)
-            let stringStartDate = LineChartCell.formatter.string(from: startDateOfWeek!)
-            let stringEndDate = LineChartCell.formatter.string(from: endDateOfWeek!)
-            labelAxisValue.text = stringStartDate + " - " + stringEndDate
+            
+            let attributedText = self.getWeeklyAttributedText()
+            
+            //let stringStartDate = LineChartCell.formatter.string(from: startDateOfWeek!)
+            //let stringEndDate = LineChartCell.formatter.string(from: endDateOfWeek!)
+            labelAxisValue.attributedText = attributedText //stringStartDate + " - " + stringEndDate
             
             self.handleDaysOfWeekForStartDate(startDate: startDateOfWeek!, endDate: endDateOfWeek!)
             
@@ -362,9 +399,10 @@ class LineChartCell: GraphChartTableViewCell {
             
             startDateOfWeek = calendar.date(byAdding: .day, value: -7, to: startDateOfWeek!)
             endDateOfWeek = calendar.date(byAdding: .day, value: -7, to: endDateOfWeek!)
-            let stringStartDate = LineChartCell.formatter.string(from: startDateOfWeek!)
-            let stringEndDate = LineChartCell.formatter.string(from: endDateOfWeek!)
-            labelAxisValue.text = stringStartDate + " - " + stringEndDate
+            //let stringStartDate = LineChartCell.formatter.string(from: startDateOfWeek!)
+            //let stringEndDate = LineChartCell.formatter.string(from: endDateOfWeek!)
+            let attributedText = self.getWeeklyAttributedText()
+            labelAxisValue.attributedText = attributedText //stringStartDate + " - " + stringEndDate
             
             self.handleDaysOfWeekForStartDate(startDate: startDateOfWeek!, endDate: endDateOfWeek!)
             
@@ -762,7 +800,7 @@ class LineChartCell: GraphChartTableViewCell {
     //MARK: - FORMATERS
     private static let formatter: DateFormatter = {
         let formatter = DateFormatter()
-        formatter.dateFormat = "MMM dd YYYY"
+        formatter.dateFormat = "dd, MMM YYYY"
         formatter.timeZone = TimeZone.init(abbreviation:"GMT")
         return formatter
     }()

@@ -21,6 +21,8 @@ let kAlertPleaseEnterValidValue = "Please Enter Valid Value"
 //Used for corner radius Color for sign in , sign up , forgot password etc screens
 let kUicolorForButtonBackground = UIColor.init(colorLiteralRed: 0/255.0, green: 124/255.0, blue: 186/255.0, alpha: 1.0).cgColor
 
+let kUicolorForCancelBackground = UIColor.init(colorLiteralRed: 140/255.0, green: 149/255.0, blue: 163/255.0, alpha: 1.0).cgColor
+
 let kUIColorForSubmitButtonBackground = UIColor.init(colorLiteralRed: 0/255.0, green: 124/255.0, blue: 186/255.0, alpha: 1.0)
 
 let NoNetworkErrorCode = -101
@@ -176,6 +178,9 @@ let kMessageForStudyEnrollingNotAllowed = "Sorry, enrollment for this study has 
 
 
 //MARK:- StudyDashboardViewController segues
-
 let unwindToStudyListDashboard = "unwindToStudyListDashboardIdentifier"
+
+
+//MARK:- FilterListViewController Segue
+let filterListSegue = "filterscreenSegue"
 

@@ -762,6 +762,7 @@ extension ResourcesViewController:NMWebServiceDelegate {
                 }
                 else {
                    self.removeProgressIndicator()
+                    UIUtilities.showAlertWithTitleAndMessage(title:NSLocalizedString(kErrorTitle, comment: "") as NSString, message: error.localizedDescription as NSString)
                 }
             }
             else {

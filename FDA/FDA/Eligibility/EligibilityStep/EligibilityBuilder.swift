@@ -34,6 +34,7 @@ class EligibilityBuilder{
     
     var testArray:Array<Any>?
     static var currentEligibility:EligibilityBuilder? = nil
+    var correctAnswers:Array<Dictionary<String,Any>>?
     
     
     init() {
@@ -42,6 +43,7 @@ class EligibilityBuilder{
         self.type = .token
         self.tokenTitle = ""
         self.testArray = Array()
+        self.correctAnswers = Array<Dictionary<String,Any>>()
     }
     
     func initEligibilityWithDict(eligibilityDict:Dictionary<String, Any>)  {
@@ -53,12 +55,12 @@ class EligibilityBuilder{
             self.type = EligibilityStepType(rawValue: eligibilityDict[kEligibilityType] as! String)
         }
         if Utilities.isValidObject(someObject: eligibilityDict[kEligibilityCorrectAnswers] as AnyObject ){
-            self.testArray = eligibilityDict[kEligibilityTest] as! Array<Dictionary<String, Any>>
+            self.correctAnswers = eligibilityDict[kEligibilityCorrectAnswers] as? Array<Dictionary<String, Any>>
         }
         if  Utilities.isValidValue(someObject: eligibilityDict[kEligibilityTokenTitle] as AnyObject?){
             self.tokenTitle =  eligibilityDict[kEligibilityTokenTitle] as? String
         }
-
+        
         
     }
     
@@ -91,6 +93,8 @@ class EligibilityBuilder{
             }
             else if self.type == EligibilityStepType.test {
                 // for only test
+                
+                //test array will hold the questions, correct answers will hold the answers
                 
                 for stepDict in self.testArray!{
                     let questionStep:ActivityQuestionStep? = ActivityQuestionStep()

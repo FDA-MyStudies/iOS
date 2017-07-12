@@ -1688,7 +1688,7 @@ open class IQKeyboardManager: NSObject, UIGestureRecognizerDelegate {
                 addToolbarIfRequired()
             }
         } else {
-            removeToolbarIfRequired()
+            //removeToolbarIfRequired()
         }
 
         _tapGesture.isEnabled = privateShouldResignOnTouchOutside()

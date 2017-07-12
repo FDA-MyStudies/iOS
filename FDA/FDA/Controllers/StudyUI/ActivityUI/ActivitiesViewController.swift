@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 import ResearchKit
+import IQKeyboardManagerSwift
 
 let kActivities = "activities"
 
@@ -37,6 +38,8 @@ class ActivitiesViewController : UIViewController{
         //load plist info
         //let plistPath = Bundle.main.path(forResource: "Activities", ofType: ".plist", inDirectory:nil)
         // tableViewRowDetails = Array(contente) //NSMutableArray.init(contentsOfFile: plistPath!)
+        
+        
         
         self.tableView?.estimatedRowHeight = 126
         self.tableView?.rowHeight = UITableViewAutomaticDimension
@@ -284,6 +287,10 @@ class ActivitiesViewController : UIViewController{
          }
  
         */
+        
+        
+        IQKeyboardManager.sharedManager().enable = false
+        IQKeyboardManager.sharedManager().enableAutoToolbar = false
         
         if Utilities.isValidObject(someObject: Study.currentActivity?.steps as AnyObject?){
             
@@ -918,6 +925,9 @@ extension ActivitiesViewController:ORKTaskViewControllerDelegate{
     
     public func taskViewController(_ taskViewController: ORKTaskViewController, didFinishWith reason: ORKTaskViewControllerFinishReason, error: Error?) {
         
+        
+        IQKeyboardManager.sharedManager().enable = true
+        IQKeyboardManager.sharedManager().enableAutoToolbar = true
         
         var taskResult:Any?
         

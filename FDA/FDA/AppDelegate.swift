@@ -281,16 +281,22 @@
             print("date \(LineChartCell.shortDayFormatter.string(from: date))")
             
             
+            //let ud1 = UserDefaults.standard
             
             if (launchOptions != nil) {
                 
+                
+                //ud1.set("not null", forKey: "launch")
+                //ud1.synchronize()
                 print("launchOptions : \(launchOptions)")
                 
                 // Launched from push notification
                 let notification = launchOptions?[.remoteNotification]
                 
-                if Utilities.isValidValue(someObject: notification as AnyObject?){
+                if Utilities.isValidObject(someObject: notification as AnyObject){
                     
+                    
+                   // ud1.set("valid", forKey: "launch")
                     notificationDetails = notification as! Dictionary<String, Any>?
                     
                     let ud = UserDefaults.standard
@@ -300,6 +306,8 @@
                     
                 }
                 else{
+                    
+                   // ud1.set("invalid", forKey: "launch")
                     UIApplication.shared.applicationIconBadgeNumber = 0
                     
                     let ud = UserDefaults.standard
@@ -370,20 +378,10 @@
            
             self.checkForStudyUpdates()
             
-            
-            
-            //
-            //            let vc = application.topMostViewController()
-            //            if vc is ActivitiesViewController{
-            //                print("ActivitiesViewController")
-            //            }
-            //print(vc)
-            
-            //            if navigationController.viewControllers.count > 0 {
-            //
-            //
-            //            }
-            
+            let number = UIApplication.shared.applicationIconBadgeNumber
+            if number >= 1 {
+                self.updateNotification()
+            }
             
             
             // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.

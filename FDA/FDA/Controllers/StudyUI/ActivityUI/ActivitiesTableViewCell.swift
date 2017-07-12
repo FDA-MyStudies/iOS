@@ -228,7 +228,7 @@ class ActivitiesTableViewCell: UITableViewCell {
      */
     func calculateActivityTimings(activity:Activity){
         
-        print("name: \(activity.name) - start \(activity.startDate) , end \(activity.endDate)")
+        //print("name: \(activity.name) - start \(activity.startDate) , end \(activity.endDate)")
         
         var startDate = activity.startDate//?.utcDate()
         var endDate   = activity.endDate//?.utcDate()

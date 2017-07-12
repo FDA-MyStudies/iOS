@@ -263,7 +263,7 @@ class NetworkWebServiceHandler: NSObject, URLSessionDelegate {
         }else{
             if ((delegate?.failedRequest) != nil) {
                 //let error1 = NSError(domain: "Network not available", code:0,userInfo: nil)
-                let error1 = NSError(domain: NSURLErrorDomain, code:NoNetworkErrorCode,userInfo:[NSLocalizedDescriptionKey:"Network not available"])
+                let error1 = NSError(domain: NSURLErrorDomain, code:NoNetworkErrorCode,userInfo:[NSLocalizedDescriptionKey:"You seem to be offline. Please connect to a network to proceed with this action."])
                 delegate?.failedRequest(networkManager!, requestName: requestName!,error: error1)
             }
         }

@@ -1017,6 +1017,87 @@ class DBHandler: NSObject {
         }
     }
     
+    class func getCompletion(studyId:String ,completionHandler:@escaping (_ completion:Int,_ adherence:Int) -> ()){
+        
+        let realm = try! Realm()
+        let dbActivities = realm.objects(DBActivity.self).filter("studyId == %@",studyId)
+        
+        if dbActivities.count <= 0 {
+            completionHandler(-1,-1)
+            return
+        }
+        
+        var date = Date().utcDate()
+        
+        let difference = UserDefaults.standard.value(forKey: "offset") as? Int
+        if difference != nil {
+            date = date.addingTimeInterval(TimeInterval(difference!))
+        }
+        
+        
+        var totalStudyRuns = 0
+        var totalCompletedRuns = 0
+        var totalIncompletedRuns = 0
+        
+        for dbActivity in dbActivities {
+            
+            let runs =  dbActivity.activityRuns
+            var run:DBActivityRun!
+            var runsBeforeToday:Array<DBActivityRun>! = []
+            
+            if dbActivity.endDate == nil {
+                
+                run = runs.last
+            }
+            else {
+                
+                runsBeforeToday = runs.filter({$0.endDate <= date})
+                
+                run = runs.filter({$0.startDate <= date && $0.endDate > date}).first //current run
+                
+            }
+            
+            let currentRunId =  (run != nil) ? (run?.runId)! : runsBeforeToday.count
+          
+            let completedRuns = dbActivity.completedRuns
+            var incompleteRuns = currentRunId - completedRuns
+            incompleteRuns = (incompleteRuns < 0) ? 0 :incompleteRuns
+            
+            var participationStatus:UserActivityStatus.ActivityStatus = .yetToJoin
+            if String(currentRunId) == dbActivity.currentRunId {
+                participationStatus = UserActivityStatus.ActivityStatus(rawValue:dbActivity.participationStatus)!
+            }
+            
+            
+            if participationStatus != UserActivityStatus.ActivityStatus.completed && run != nil{
+                incompleteRuns = currentRunId - completedRuns
+                incompleteRuns -= 1
+                incompleteRuns = (incompleteRuns < 0) ? 0 :incompleteRuns
+            }
+            let totalRuns = runs.count
+            
+            //print("id \(dbActivity.name!) ,totalStudyRuns \(totalStudyRuns), totalIncompletedRuns \(totalIncompletedRuns), totalCompletedRuns \(totalCompletedRuns)")
+             //print("id \(dbActivity.name!) -> totalIncompletedRuns \(incompleteRuns)")
+            
+            //update values
+            totalStudyRuns += totalRuns
+            totalIncompletedRuns += incompleteRuns
+            totalCompletedRuns += completedRuns
+          
+
+        }
+        
+        
+        //print("totalStudyRuns \(totalStudyRuns), totalIncompletedRuns \(totalIncompletedRuns), totalCompletedRuns \(totalCompletedRuns)")
+        
+        let completion = ceil( Double(self.divide(lhs: (totalCompletedRuns + totalIncompletedRuns)*100, rhs: totalStudyRuns)) )
+        
+        print("completion % \(completion)")
+        completionHandler(Int(completion),0)
+        
+        
+    }
+    
     //MARK:-  Activity MetaData
     class func saveActivityMetaData(activity:Activity, data:Dictionary<String,Any>){
         

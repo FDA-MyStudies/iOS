@@ -722,7 +722,7 @@ class DBHandler: NSObject {
             }
             
             
-            print("Database \(activity.totalRuns)")
+           
             
             if activity.totalRuns != 0 {
                 
@@ -758,27 +758,20 @@ class DBHandler: NSObject {
                     
                 }
                 
-                //var runsBeforeToday = runs.filter({$0.endDate <= date})
-                
-                //let run = runs.filter({$0.startDate <= date && $0.endDate > date}).first //current run
+              
                 
                 let completedRuns = runs.filter({$0.isCompleted == true})
-                //let incompleteRuns = runsBeforeToday.count - completedRuns.count
+                
                 
                 
                 activity.compeltedRuns = completedRuns.count
-                //activity.incompletedRuns = (incompleteRuns < 0) ? 0 :incompleteRuns
+                
                 activity.currentRunId =  (run != nil) ? (run?.runId)! : runsBeforeToday.count
                 activity.currentRun = run
                 
                 
-                //check for completed runs
-                //if activity.compeltedRuns == 0 &&  dbActivity.completedRuns != 0 {
-                    activity.compeltedRuns = dbActivity.completedRuns
-                    
                 
-                    
-                //}
+                activity.compeltedRuns = dbActivity.completedRuns
                 
                 let userStatus = UserActivityStatus()
                 userStatus.activityId = dbActivity.actvityId

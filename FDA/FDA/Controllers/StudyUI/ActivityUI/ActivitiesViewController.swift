@@ -354,15 +354,15 @@ class ActivitiesViewController : UIViewController{
             let endDateResult = (activity.endDate?.compare(todayDate))! as ComparisonResult
             
             if startDateResult == .orderedAscending && endDateResult == .orderedDescending{
-                print("current")
+                
                 return .current
             }
             else if startDateResult == .orderedDescending {
-                print("upcoming")
+                
                 return .upcoming
             }
             else if endDateResult == .orderedAscending {
-                print("past")
+                
                 return .past
             }
         }
@@ -492,6 +492,9 @@ class ActivitiesViewController : UIViewController{
                 totalRuns += activity.totalRuns
                 totalIncompletedRuns += activity.incompletedRuns
                 totalCompletedRuns += activity.compeltedRuns
+                
+                // print("id \(activity.name), totalStudyRuns \(totalRuns), totalIncompletedRuns \(totalIncompletedRuns), totalCompletedRuns \(totalCompletedRuns)")
+                //print("id \(activity.name!), totalIncompletedRuns \(activity.incompletedRuns)")
             }
         //}
         

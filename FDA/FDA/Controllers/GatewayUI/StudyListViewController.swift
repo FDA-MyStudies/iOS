@@ -14,6 +14,8 @@ class StudyListViewController: UIViewController {
     @IBOutlet var labelHelperText:UILabel!
     var studyListRequestFailed = false
     
+    var isComingFromFilterScreen : Bool = false
+    var studyResponseArray = NSArray()
     
     //MARK:- Viewcontroller lifecycle
     
@@ -44,7 +46,7 @@ class StudyListViewController: UIViewController {
             appDelegate.checkForAppReopenNotification()
         }
         
-        
+        isComingFromFilterScreen = false
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -81,7 +83,12 @@ class StudyListViewController: UIViewController {
             if (self.fdaSlideMenuController()?.isLeftOpen())!{
                 
             }else {
-                self.sendRequestToGetUserPreference()
+                
+                if !(isComingFromFilterScreen){
+                    isComingFromFilterScreen = false
+                    self.sendRequestToGetUserPreference()
+                }
+        
             }
             
             //  self.sendRequestToGetStudyList()
@@ -400,7 +407,7 @@ class StudyListViewController: UIViewController {
     
     /**
      
-     Navigate to notification screen button clicked
+     Navigate to notification screen on button clicked
      
      @param sender    accepts UIBarButtonItem in sender
      
@@ -409,7 +416,13 @@ class StudyListViewController: UIViewController {
         self.navigateToNotifications()
     }
     
-    
+    /**
+     
+     Navigate to StudyFilter screen on button clicked
+     
+     @param sender    accepts UIBarButtonItem in sender
+     
+     */
     @IBAction func filterAction(_ sender:UIBarButtonItem){
         self.performSegue(withIdentifier: filterListSegue, sender: nil)
     }
@@ -625,20 +638,59 @@ class StudyListViewController: UIViewController {
 }
 
 
-
 //MARK:- Applied filter delegate
 extension StudyListViewController : StudyFilterDelegates{
 
     //Based on applied filter call WS
     func appliedFilter(studyArray: Array<String>, statusArray: Array<String>, categoriesArray: Array<String>) {
-         print("Cancel filter Clicked for WS Call")
         
+//      let studyies =  Gateway.instance.studies?.filter({$0.category == categoriesArray[0] || $0.category == categoriesArray[1]})
+        
+        print("Apply filter Clicked for WS Call")
+        isComingFromFilterScreen = true
+        
+        let attributeValue = studyArray[0]
+        
+        let namePredicate = NSPredicate(format: "status like %@",attributeValue);
+        let data1 = studyResponseArray.filtered(using: namePredicate)
+        print(data1)
+        
+//        let result = Gateway.instance.studies?.filter{
+//            (e) -> Bool in
+//            
+//            if e.status == attributeValue {
+//                return true
+//            } else {
+//                return false
+//            }
+//            }.map {
+//                // this "maps" the array and returns the first part of the tuple
+//                $0.category
+//        }
+//        print(result!)
+
+        
+        
+//        for studyObject in arrNames{
+//            
+//            let dict = NSMutableDictionary()
+//            dict.setValue(studyObject.name, forKey: "studyName")
+//          
+//        }
+        
+        
+        //Gateway.instance.studies = data1 as? Array<Study>
+        tableView?.reloadData()
         
     }
     
     func cancelFilter(studyArray : Array<String>, statusArray : Array<String>, categoriesArray : Array<String>){
-        print("Apply filter Clicked for WS Call")
-    
+        
+        print("Cancel filter Clicked for WS Call")
+        isComingFromFilterScreen = true
+        
+//        let filteredArray = arrNames.filter { namePredicate.evaluateWithObject($0) };
+//        println("names = ,\(filteredArray)");
         
     }
 }
@@ -782,9 +834,12 @@ extension StudyListViewController:NMWebServiceDelegate {
     }
     
     func finishedRequest(_ manager: NetworkManager, requestName: NSString, response: AnyObject?) {
-        Logger.sharedInstance.info("requestname : \(requestName) : \(response)")
+        Logger.sharedInstance.info("requestname : \(requestName) : \(String(describing: response))")
         
         if requestName as String == WCPMethods.studyList.rawValue{
+            let responseDict = response as! NSDictionary
+            studyResponseArray = (responseDict["studies"] as? NSArray)!
+            
             self.handleStudyListResponse()
             self.removeProgressIndicator()
         }

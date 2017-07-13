@@ -174,6 +174,7 @@ class ResourcesViewController : UIViewController{
         tableViewRowDetails = []
         
         self.addDefaultList()
+        self.appendLeaveStudy()
         
         let todayDate = Date()
         
@@ -289,7 +290,7 @@ class ResourcesViewController : UIViewController{
             
         }
         
-        self.appendLeaveStudy()
+        
         
         
         tableView?.isHidden =  false

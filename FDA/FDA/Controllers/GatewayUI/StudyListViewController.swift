@@ -61,6 +61,7 @@ class StudyListViewController: UIViewController {
         
         let ud = UserDefaults.standard
         
+        
         var ispasscodePending:Bool? = false
         
         if (ud.value(forKey: kPasscodeIsPending) != nil){

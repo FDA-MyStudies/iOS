@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 
-//Used to apply filter based on Apply and Cancel actions
+//Used to do filter based on Apply and Cancel actions
 protocol StudyFilterDelegates {
     
     func appliedFilter(studyArray : Array<String>, statusArray : Array<String>, categoriesArray : Array<String>)
@@ -41,6 +41,11 @@ class StudyFilterViewController: UIViewController {
         super.viewWillAppear(animated)
         
     
+
+        
+        
+        
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -66,7 +71,7 @@ class StudyFilterViewController: UIViewController {
      
      */
     @IBAction func applyButtonAction(_ sender: AnyObject){
-        delegate?.appliedFilter(studyArray: [""], statusArray: [""], categoriesArray: [""])
+        delegate?.appliedFilter(studyArray: ["Active"], statusArray: [""], categoriesArray: ["Food Safety","Observational Studies"])
         self.dismiss(animated: true, completion: nil)
         
         

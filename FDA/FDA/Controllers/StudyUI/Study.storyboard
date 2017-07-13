@@ -765,7 +765,7 @@
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ujA-js-JkO" customClass="KDCircularProgress" customModule="FDA" customModuleProvider="target">
                                                     <rect key="frame" x="0.0" y="0.0" width="187" height="200"/>
                                                     <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="THE STUDY IS" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="XjP-9a-aCO">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="YOU ARE" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="XjP-9a-aCO">
                                                             <rect key="frame" x="66" y="53" width="55" height="34"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="34" id="GnX-4I-iWb"/>
@@ -787,8 +787,10 @@
                                                             <color key="textColor" red="0.54901960780000003" green="0.58431372550000005" blue="0.63921568630000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="COMPLETE" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="1se-Ih-SJx">
-                                                            <rect key="frame" x="66" y="117" width="55" height="12"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="1se-Ih-SJx">
+                                                            <rect key="frame" x="64" y="122" width="59.5" height="24"/>
+                                                            <string key="text">DONE WITH 
+THE STUDY</string>
                                                             <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="10"/>
                                                             <color key="textColor" red="0.54901960780000003" green="0.58431372550000005" blue="0.63921568630000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
@@ -803,7 +805,7 @@
                                                         <constraint firstItem="XjP-9a-aCO" firstAttribute="centerX" secondItem="ujA-js-JkO" secondAttribute="centerX" id="dfm-cb-a2L"/>
                                                         <constraint firstItem="J3t-SP-0pl" firstAttribute="top" secondItem="XjP-9a-aCO" secondAttribute="bottom" constant="8" id="rV8-U0-AL4"/>
                                                         <constraint firstItem="J3t-SP-0pl" firstAttribute="leading" secondItem="7z2-GP-epO" secondAttribute="trailing" constant="1" id="ugE-6j-Yiz"/>
-                                                        <constraint firstItem="1se-Ih-SJx" firstAttribute="top" secondItem="7z2-GP-epO" secondAttribute="bottom" constant="-1" id="zTi-li-mVW"/>
+                                                        <constraint firstItem="1se-Ih-SJx" firstAttribute="top" secondItem="7z2-GP-epO" secondAttribute="bottom" constant="4" id="zTi-li-mVW"/>
                                                     </constraints>
                                                 </view>
                                                 <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3Q8-4M-yXU">
@@ -817,7 +819,7 @@
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jpi-ig-JF9" customClass="KDCircularProgress" customModule="FDA" customModuleProvider="target">
                                                     <rect key="frame" x="188" y="0.0" width="187" height="200"/>
                                                     <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="YOU COMPLETED" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="mcT-Pq-7B0">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="YOU ARE COMPLETING" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="mcT-Pq-7B0">
                                                             <rect key="frame" x="61" y="51" width="65" height="34"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="34" id="f9n-Lm-hkM"/>
@@ -839,7 +841,7 @@
                                                             <color key="textColor" red="0.54901960780000003" green="0.58431372550000005" blue="0.63921568630000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="OF ACTIVITIES SO FAR" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="b43-6R-4Z2">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="OF ACTIVITIES ON TIME" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="b43-6R-4Z2">
                                                             <rect key="frame" x="54" y="109" width="80" height="43"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="80" id="5jM-q8-ciT"/>

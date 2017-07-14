@@ -924,7 +924,7 @@ extension ActivitiesViewController:ORKTaskViewControllerDelegate{
             ud.removeObject(forKey: "FetalKickCounterRunid")
             ud.synchronize()
             
-            // taskResult = taskViewController.result
+            self.checkForActivitiesUpdates()
             
         case ORKTaskViewControllerFinishReason.saved:
             print("saved")
@@ -936,6 +936,8 @@ extension ActivitiesViewController:ORKTaskViewControllerDelegate{
             else{
                 ActivityBuilder.currentActivityBuilder.activity?.restortionData = taskViewController.restorationData
             }
+            
+            self.checkForActivitiesUpdates()
         }
         
         if  taskViewController.task?.identifier == "ConsentTask"{
@@ -1053,7 +1055,7 @@ extension ActivitiesViewController:ORKTaskViewControllerDelegate{
                 activityStepResult?.initWithORKStepResult(stepResult: orkStepResult! as ORKStepResult , activityType:(ActivityBuilder.currentActivityBuilder.actvityResult?.type)!)
                 
                 let dictionary = activityStepResult?.getActivityStepResultDict()
-                print("dictionary \(dictionary)")
+                
                 
                 //check for anchor date
                 if study?.anchorDate != nil && study?.anchorDate?.anchorDateActivityId == activity?.actvityId {
@@ -1103,33 +1105,7 @@ extension ActivitiesViewController:ORKTaskViewControllerDelegate{
                 }
                 
                 
-                /*
-                 //Explain
-                 if (ActivityBuilder.currentActivityBuilder.actvityResult?.result?.count)! < (taskViewController.result.results?.count)!{
-                 
-                 //Explain
-                 let orkStepResult:ORKStepResult? = taskViewController.result.results?[(taskViewController.result.results?.count)! - 2] as! ORKStepResult?
-                 let activityStepResult:ActivityStepResult? = ActivityStepResult()
-                 
-                 
-                 UserDefaults.standard.set(taskViewController.restorationData, forKey: "RESTORED-RESULT")
-                 UserDefaults.standard.synchronize()
-                 
-                 
-                 
-                 activityStepResult?.initWithORKStepResult(stepResult: orkStepResult! as ORKStepResult , activityType:(ActivityBuilder.currentActivityBuilder.actvityResult?.type)!)
-                 
-                 let index = (taskViewController.result.results?.count)! - 2
-                 if index < (ActivityBuilder.currentActivityBuilder.activity?.activitySteps?.count)!{
-                 activityStepResult?.step = ActivityBuilder.currentActivityBuilder.activity?.activitySteps?[index]
-                 }
-                 
-                 ActivityBuilder.currentActivityBuilder.actvityResult?.result?.append(activityStepResult!)
-                 
-                 //save result in db
-                 
-                 }
-                 */
+                
                 
             }
         }
@@ -1196,13 +1172,7 @@ class ActivitySchedules:UIView,UITableViewDelegate,UITableViewDataSource{
     
     var activity:Activity!
     
-    //    override init(frame: CGRect) {
-    //        super.init(frame: frame)
-    //        let view = self.instanceFromNib()
-    //        addSubview(view)
-    //        tableview?.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
-    //    }
-    
+        
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         //fatalError("init(coder:) has not been implemented")

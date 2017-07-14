@@ -301,7 +301,7 @@ class StudyHomeViewController : UIViewController{
                             
                              var predicateQuestionChoiceA:NSPredicate = NSPredicate()
                             
-                            predicateQuestionChoiceA = ORKResultPredicate.predicateForChoiceQuestionResult(with:resultSelector! , expectedAnswerValue: choiceA! as NSCoding & NSCopying & NSObjectProtocol)
+                            predicateQuestionChoiceA = ORKResultPredicate.predicateForBooleanQuestionResult(with: resultSelector!, expectedAnswer: choiceA)
                             
                             let inverseChoiceB = (correctAnswerDict?[kEligibilityCorrectAnswer] as? Bool) == true ? false : true
                             
@@ -315,6 +315,20 @@ class StudyHomeViewController : UIViewController{
                             
                             //choicePredicate.append(predicateQuestionChoiceA)
                             choicePredicate.append(predicateQuestionChoiceB)
+                            
+                            
+                            // following is to jump to visual/review step after eligibilitytest
+                            
+                            if defaultStepIdentifier == kInEligibilityStep{
+                                
+                                let nextStepAfterIneligibilityIdentifier = (eligibilitySteps?[(i!+2)].identifier)!
+                                
+                                destination?.append(nextStepAfterIneligibilityIdentifier)
+                                 choicePredicate.append(predicateQuestionChoiceA)
+                            }
+                            
+                            
+                            
                             
                         }
                         else if (correctAnswerArray?.count) == 2 {
@@ -992,7 +1006,7 @@ extension StudyHomeViewController:ORKTaskViewControllerDelegate{
         //For Verified Step , Completion Step, Visual Step, Review Step, Share Pdf Step
         
         if stepViewController.step?.identifier == kEligibilityVerifiedScreen || stepViewController.step?.identifier == kConsentCompletionStepIdentifier || stepViewController.step?.identifier == kVisualStepId  || stepViewController.step?.identifier == kConsentSharePdfCompletionStep ||
-            stepViewController.step?.identifier == kInEligibilityStep{
+            stepViewController.step?.identifier == kInEligibilityStep || stepViewController.step?.identifier == kEligibilityValidateScreen{
             //|| stepViewController.step?.identifier == "Review"
             
             if stepViewController.step?.identifier == kEligibilityVerifiedScreen{

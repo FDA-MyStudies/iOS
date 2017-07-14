@@ -14,10 +14,22 @@ let kEligibilityTest = "test"
 let kEligibilityCorrectAnswers = "correctAnswers"
 let kEligibilityTokenTitle = "tokenTitle"
 
+let kEligibilityInEligibleScreen = "InEligibleScreen"
+let kEligibilityInEligibleDescriptionText = "Sorry, You are Ineligible"
+
+
 let kEligibilityVerifiedScreen = "VerifiedScreen"
 let kEligibilityCompletionDescriptionText = "Your enrollment token has been successfully validated. You are eligible to join the Study.\nPlease click Continue to proceed to the Consent section."
 let kEligibilityCompletionTitle = "You are Eligible!"
 
+let kEligibilityStep = "steps"
+
+let kEligibilityValidateScreen = "ValidatedScreen"
+let kEligibilityValidationDescriptionText = "Your ID has been validated. You are eligible to join the Study.Please click Continue to proceed to the Consent section."
+let kEligibilityValidationTitle = "Validated!"
+
+let kEligibilityCorrectAnswer = "answer"
+let kEligibilityCorrectAnswerKey = "key"
 
 
 enum EligibilityStepType:String {
@@ -90,6 +102,11 @@ class EligibilityBuilder{
                 }
                 
                 stepsArray?.append(eligibilityStep!)
+                
+                
+                
+                
+                
             }
             else if self.type == EligibilityStepType.test {
                 // for only test
@@ -106,47 +123,58 @@ class EligibilityBuilder{
             }
             else{
                 // for both test + token
-            for stepDict in self.testArray!{
-        
-            switch self.type! as EligibilityStepType{
-            case .token:
                 
-                let eligibilityStep:EligibilityStep? = EligibilityStep(identifier: "EligibilityTokenStep")
+                // creating Token Step
+                let eligibilityStep:EligibilityStep? = EligibilityStep(identifier: kEligibilityTokenStep)
                 eligibilityStep?.type = "TOKEN"
                 
                 if self.tokenTitle != nil {
                     eligibilityStep?.text = self.tokenTitle!
                 }
+                
                 stepsArray?.append(eligibilityStep!)
                 
-            case .test:
+                // creating Token Validated Step
+                let eligibilityValidationStep = customInstructionStep(identifier: kEligibilityValidateScreen)
+                eligibilityValidationStep.text = kEligibilityValidationDescriptionText
                 
+                eligibilityValidationStep.title = kEligibilityValidationTitle
+                eligibilityValidationStep.image =  #imageLiteral(resourceName: "successBlueBig")
+                stepsArray?.append(eligibilityValidationStep)
+
+                // creating Test Questions
+                
+            for stepDict in self.testArray!{
+        
                 let questionStep:ActivityQuestionStep? = ActivityQuestionStep()
                 questionStep?.initWithDict(stepDict: stepDict as! Dictionary<String, Any>)
+                // Questions are mandatory not skippable
+                questionStep?.skippable = false
                 stepsArray?.append((questionStep?.getQuestionStep())!)
+        
+            }
+            
+                // creating InEligibility Completion Step
                 
-            case .both:
-                // need to check if it is of question type ?? or pass code type
-                // business logic needed to arrage passcode and questionary
-                break
-            
+                let eligibilityCompletionStep:InEligibilityStep? = InEligibilityStep(identifier: kInEligibilityStep)
+                
+                stepsArray?.append(eligibilityCompletionStep!)
+                
+                
             }
             
-            }
-            }
+        
             if (stepsArray?.count)! > 0 {
                 
                 
+                // creating Eligibility Completion Step
                 let eligibilityCompletionStep = customInstructionStep(identifier: kEligibilityVerifiedScreen)
                 eligibilityCompletionStep.text = kEligibilityCompletionDescriptionText
-                
-                
                 
                 eligibilityCompletionStep.title = kEligibilityCompletionTitle
                 eligibilityCompletionStep.image =  #imageLiteral(resourceName: "successBlueBig")
                 stepsArray?.append(eligibilityCompletionStep)
-
-            
+                
                 
                 return stepsArray!
             }

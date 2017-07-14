@@ -12,8 +12,13 @@ import ResearchKit
 
 let kEligibilityConsentTask = "EligibilityConsentTask"
 let kEligibilityTokenStep = "EligibilityTokenStep"
+
+let kInEligibilityStep = "InEligibilityStep"
+
 let kFetalKickCounterStep = "FetalKickCounter"
 let kEligibilityStepViewControllerIdentifier = "EligibilityStepViewController"
+let kInEligibilityStepViewControllerIdentifier = "InEligibilityStepViewController"
+
 let kConsentTaskIdentifier = "ConsentTask"
 let kStudyDashboardViewControllerIdentifier = "StudyDashboardViewController"
 let kStudyDashboardTabbarControllerIdentifier = "StudyDashboardTabbarViewControllerIdentifier"
@@ -233,8 +238,121 @@ class StudyHomeViewController : UIViewController{
             eligibilitySteps?.append(stepDict)
         }
         
-        let orkOrderedTask:ORKTask? = ORKOrderedTask(identifier:kEligibilityConsentTask, steps: eligibilitySteps)
-        taskViewController = ORKTaskViewController(task:orkOrderedTask, taskRun: nil)
+        
+        
+        
+        
+        
+        var orkOrderedTask:ORKTask? = ORKOrderedTask(identifier:kEligibilityConsentTask, steps: eligibilitySteps)
+        
+        if EligibilityBuilder.currentEligibility?.type == .test || EligibilityBuilder.currentEligibility?.type == .both{
+            
+            
+            orkOrderedTask = ORKNavigableOrderedTask(identifier:kEligibilityConsentTask, steps: eligibilitySteps)
+            
+             var i:Int? = 0
+            
+            for orkstep in eligibilitySteps!{
+                
+                if  orkstep.isKind(of: ORKQuestionStep.self) && (orkstep as? ORKQuestionStep)?.answerFormat?.questionType == .boolean{
+                
+                    
+                    var defaultStepIdentifier:String = ""
+                    
+                    var choicePredicate:[NSPredicate] = [NSPredicate]()
+                    
+                    var destination:Array<String>? = Array<String>()
+                    
+                    let resultSelector: ORKResultSelector?
+                    
+                    var predicateRule: ORKPredicateStepNavigationRule?
+                   
+                    resultSelector =  ORKResultSelector(stepIdentifier: orkstep.identifier, resultIdentifier: orkstep.identifier)
+                    
+                    if i! + 1 < (eligibilitySteps?.count)!{
+                        defaultStepIdentifier = (eligibilitySteps?[(i!+1)].identifier)!
+                    }
+                    else{
+                        defaultStepIdentifier = "CompletionStep"
+                    }
+                    
+                    var correctAnswerArray:Array<Dictionary<String,Any>>? = Array<Dictionary<String,Any>>()
+                    
+                    
+                    if (EligibilityBuilder.currentEligibility?.correctAnswers?.count)! > 0{
+                        // getting correct answer dict for current step
+                        
+                        correctAnswerArray = EligibilityBuilder.currentEligibility?.correctAnswers?.filter({($0[kEligibilityCorrectAnswerKey] as? String) == orkstep.identifier})
+                    }
+                    else{
+                        // there are no correct answers
+                    }
+                    
+                    
+                    
+                    if (correctAnswerArray?.count)! > 0{
+                        if (correctAnswerArray?.count)! == 1{
+                            // only for correct answer go to next or else go to ineligible screen
+                            
+                            
+                            let correctAnswerDict = correctAnswerArray?.first
+                            
+                            let choiceA:Bool! = (correctAnswerDict?[kEligibilityCorrectAnswer] as! Bool)
+                            
+                             var predicateQuestionChoiceA:NSPredicate = NSPredicate()
+                            
+                            predicateQuestionChoiceA = ORKResultPredicate.predicateForChoiceQuestionResult(with:resultSelector! , expectedAnswerValue: choiceA! as NSCoding & NSCopying & NSObjectProtocol)
+                            
+                            let inverseChoiceB = (correctAnswerDict?[kEligibilityCorrectAnswer] as? Bool) == true ? false : true
+                            
+                            
+                            let predicateQuestionChoiceB = ORKResultPredicate.predicateForBooleanQuestionResult(with: resultSelector!, expectedAnswer: inverseChoiceB)
+                            
+                            
+                           // destination?.append(defaultStepIdentifier)
+                            destination?.append(kInEligibilityStep) // inEligible completion step
+                            
+                            
+                            //choicePredicate.append(predicateQuestionChoiceA)
+                            choicePredicate.append(predicateQuestionChoiceB)
+                            
+                        }
+                        else if (correctAnswerArray?.count) == 2 {
+                            // for both answers pass to next question no need of branching
+                        }
+                        
+                        
+                    }
+                    else{
+                        // there are no correct answers
+                    }
+                    
+                    
+                    if choicePredicate.count > 0 && (destination?.count)! > 0{
+                        print("choices in eligibility \(choicePredicate) ")
+                        predicateRule = ORKPredicateStepNavigationRule(resultPredicates: choicePredicate, destinationStepIdentifiers: destination!, defaultStepIdentifier: defaultStepIdentifier, validateArrays: true)
+                        
+                        (orkOrderedTask as! ORKNavigableOrderedTask).setNavigationRule(predicateRule!, forTriggerStepIdentifier:orkstep.identifier)
+
+                    }
+                    
+                    
+                    
+                }
+                
+                i = i! + 1
+            }
+            
+            
+        }
+        
+        if (orkOrderedTask is ORKNavigableOrderedTask){
+           taskViewController = ORKTaskViewController(task:(orkOrderedTask as! ORKNavigableOrderedTask), taskRun: nil)
+        }
+        else{
+            taskViewController = ORKTaskViewController(task:orkOrderedTask, taskRun: nil)
+            
+        }
         
         taskViewController?.delegate = self
         taskViewController?.outputDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
@@ -806,7 +924,13 @@ extension StudyHomeViewController:ORKTaskViewControllerDelegate{
             }
         }
         
-        if  taskViewController.task?.identifier == kEligibilityConsentTask && reason == ORKTaskViewControllerFinishReason.completed{
+        let lastStepResultIdentifier:String?
+        
+        lastStepResultIdentifier = (taskViewController.result.results?.last as! ORKStepResult).identifier
+        
+        
+        
+        if  taskViewController.task?.identifier == kEligibilityConsentTask && reason == ORKTaskViewControllerFinishReason.completed && lastStepResultIdentifier != kInEligibilityStep{
             
             self.hideSubViews()
             
@@ -867,7 +991,8 @@ extension StudyHomeViewController:ORKTaskViewControllerDelegate{
         
         //For Verified Step , Completion Step, Visual Step, Review Step, Share Pdf Step
         
-        if stepViewController.step?.identifier == kEligibilityVerifiedScreen || stepViewController.step?.identifier == kConsentCompletionStepIdentifier || stepViewController.step?.identifier == kVisualStepId  || stepViewController.step?.identifier == kConsentSharePdfCompletionStep{
+        if stepViewController.step?.identifier == kEligibilityVerifiedScreen || stepViewController.step?.identifier == kConsentCompletionStepIdentifier || stepViewController.step?.identifier == kVisualStepId  || stepViewController.step?.identifier == kConsentSharePdfCompletionStep ||
+            stepViewController.step?.identifier == kInEligibilityStep{
             //|| stepViewController.step?.identifier == "Review"
             
             if stepViewController.step?.identifier == kEligibilityVerifiedScreen{
@@ -994,6 +1119,28 @@ extension StudyHomeViewController:ORKTaskViewControllerDelegate{
             }
             else{
                 //taskViewController.goForward()
+                return nil
+            }
+        }
+        else  if step.identifier ==  kInEligibilityStep{
+            
+            let gatewayStoryboard = UIStoryboard(name: kFetalKickCounterStep, bundle: nil)
+            
+            let ttController = gatewayStoryboard.instantiateViewController(withIdentifier: kInEligibilityStepViewControllerIdentifier) as! InEligibilityStepViewController
+    
+            ttController.step = step
+            
+            return ttController
+        }
+        else if step.identifier == kEligibilityVerifiedScreen{
+            let lastStepResultIdentifier : String?
+            lastStepResultIdentifier = (taskViewController.result.results?.last as! ORKStepResult).identifier
+            
+            if lastStepResultIdentifier == kInEligibilityStep{
+                self.dismiss(animated: true, completion: nil)
+                return nil
+            }
+            else{
                 return nil
             }
         }

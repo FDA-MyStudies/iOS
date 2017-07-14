@@ -276,7 +276,39 @@ class WCPServices: NSObject {
     
     func handleEligibilityConsentMetaData(response:Dictionary<String, Any>){
         let consent = response[kConsent] as! Dictionary<String, Any>
-        let eligibility = response[kEligibility] as! Dictionary<String, Any>
+        var eligibility = response[kEligibility] as! Dictionary<String, Any>
+        
+        
+        // To Be Commented
+        
+        let filePath  = Bundle.main.path(forResource: "Eligibility_1B", ofType: "json")
+        
+        //let filePath  = Bundle.main.path(forResource: "FetalKickTest", ofType: "json")
+        
+        let data = NSData(contentsOfFile: filePath!)
+        do {
+            let dataDict = try JSONSerialization.jsonObject(with: data! as Data, options: []) as? Dictionary<String,Any>
+            
+            let result = dataDict?["Result"] as! Dictionary<String, Any>
+            
+            
+            if Utilities.isValidObject(someObject: eligibility as AnyObject?){
+                eligibility[kEligibilityTest] = result[kEligibilityStep]
+                
+                 eligibility[kEligibilityCorrectAnswers] = result[kEligibilityCorrectAnswers]
+                
+                eligibility["type"] = "combined"
+            }
+            
+        }
+        catch let error as NSError{
+            print("\(error)")
+        }
+        
+        
+        //-------
+        
+        
         
         if Utilities.isValidObject(someObject: consent as AnyObject?){
             ConsentBuilder.currentConsent = ConsentBuilder()

@@ -119,6 +119,12 @@ class EligibilityBuilder{
                     stepsArray?.append((questionStep?.getQuestionStep())!)
                 }
                 
+                // creating InEligibility Completion Step
+                
+                let eligibilityCompletionStep:InEligibilityStep? = InEligibilityStep(identifier: kInEligibilityStep)
+                
+                stepsArray?.append(eligibilityCompletionStep!)
+                
                 
             }
             else{

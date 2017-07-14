@@ -275,7 +275,7 @@ class WCPServices: NSObject {
     }
     
     func handleEligibilityConsentMetaData(response:Dictionary<String, Any>){
-        let consent = response[kConsent] as! Dictionary<String, Any>
+        var consent = response[kConsent] as! Dictionary<String, Any>
         var eligibility = response[kEligibility] as! Dictionary<String, Any>
         
         
@@ -297,7 +297,10 @@ class WCPServices: NSObject {
                 
                  eligibility[kEligibilityCorrectAnswers] = result[kEligibilityCorrectAnswers]
                 
-                eligibility["type"] = "combined"
+                eligibility["type"] = "test"
+                
+                consent[kConsentComprehension] = result[kConsentComprehension]
+                
             }
             
         }

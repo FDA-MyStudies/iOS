@@ -38,7 +38,15 @@ let kConsentReviewStepSignatureContent = "reviewHTML"
 let kConsentReviewStepReasonForConsent = "reasonForConsent"
 
 
+// Comprehension Api Constants
 
+let kConsentComprehension = "comprehension"
+let kConsentComprehensionQuestions = "questions"
+let kConsentComprehensionCorrectAnswers = "correctAnswers"
+let kConsentComprehensionCorrectAnswersKey = "key"
+let kConsentComprehensionAnswer = "answer"
+let kConsentComprehensionPassScore = "passScore"
+let kConsentComprehensionEvaluation = "evaluation"
 
 //
 
@@ -83,6 +91,8 @@ class ConsentBuilder{
     
     var consentResult:ConsentResult?
     
+    var comprehension:Comprehension?
+    
     init() {
         /* Default Initializer method
          by default sets all params to empty values
@@ -98,6 +108,7 @@ class ConsentBuilder{
         self.version = ""
         self.consentHasVisualStep = false
         
+        self.comprehension = Comprehension()
     }
     
     func initWithMetaData(metaDataDict:Dictionary<String, Any>)  {
@@ -144,6 +155,13 @@ class ConsentBuilder{
             
             if  Utilities.isValidObject(someObject: reviewConsentDict as AnyObject?){
                 self.reviewConsent?.initWithReviewDict(dict: reviewConsentDict)
+                
+            }
+            
+            let comprehensionDict = metaDataDict[kConsentComprehension] as! Dictionary<String,Any>
+            
+            if  Utilities.isValidObject(someObject: comprehensionDict as AnyObject?){
+                self.comprehension?.initWithComprehension(dict: comprehensionDict)
                 
             }
             
@@ -241,6 +259,32 @@ class ConsentBuilder{
         
     }
     
+    func getComprehensionSteps() -> [ORKStep]? {
+        /* Method to get ComprehensionSteps
+         @returns an array of ORKSteps
+         */
+        
+        if (self.comprehension?.questions?.count)! > 0 {
+            var stepsArray:[ORKStep]? = [ORKStep]()
+            for stepDict in (self.comprehension?.questions!)!{
+                let questionStep:ActivityQuestionStep? = ActivityQuestionStep()
+                questionStep?.initWithDict(stepDict: stepDict )
+                
+                questionStep?.skippable = false
+                stepsArray?.append((questionStep?.getQuestionStep())!)
+            }
+            
+            return stepsArray
+            
+        }
+        else{
+            return nil
+        }
+    }
+    
+    
+    
+    
     
     func getReviewConsentStep() -> ConsentReviewStep? {
         /* Method to get ReviewConsentStep
@@ -326,7 +370,9 @@ class ConsentBuilder{
         let visualConsentStep:VisualConsentStep? = self.getVisualConsentStep()
         let sharingConsentStep:ConsentSharingStep? = self.getConsentSharingStep()
         let reviewConsentStep:ConsentReviewStep? = self.getReviewConsentStep()
-                
+        
+        let comprehensionSteps:[ORKStep]? = self.getComprehensionSteps()
+        
         var stepArray:Array<ORKStep>? = Array()
         
         if visualConsentStep != nil{
@@ -339,6 +385,18 @@ class ConsentBuilder{
             }
             
         }
+        
+        // comprehension steps
+        
+        if comprehensionSteps != nil && (comprehensionSteps?.count)! > 0 {
+            
+            for step in comprehensionSteps!{
+                stepArray?.append(step)
+            }
+            
+        }
+        
+        
         if sharingConsentStep != nil{
             stepArray?.append(sharingConsentStep!)
         }
@@ -485,6 +543,55 @@ struct ReviewConsent{
         
     }
 }
+
+//MARK:Comprehension Struct
+
+enum Evaluation:String{
+    case any = "any"
+    case all = "all"
+}
+
+
+struct Comprehension{
+    
+    var passScore:Int?
+    var questions:Array<Dictionary<String,Any>>?
+    var correctAnswers:Array<Dictionary<String,Any>>?
+    
+    
+    
+    init() {
+        self.passScore = 0
+        self.questions =  []
+        self.correctAnswers =  []
+    }
+    
+    mutating func initWithComprehension(dict:Dictionary<String, Any>) {
+        /* initializer method which initializes all params
+         @dict:contains as key:Value pair for all the properties of Comprehension Step
+         */
+        
+        if Utilities.isValidObject(someObject: dict as AnyObject?){
+            
+            if Utilities.isValidValue(someObject: dict[kConsentComprehensionPassScore] as AnyObject ){
+                self.passScore =  (dict[kConsentComprehensionPassScore] as? Int)!
+            }
+            
+            if Utilities.isValidObject(someObject: dict[kConsentComprehensionQuestions] as AnyObject ){
+                self.questions = dict[kConsentComprehensionQuestions] as? Array<Dictionary<String,Any>>
+            }
+            if Utilities.isValidObject(someObject: dict[kConsentComprehensionCorrectAnswers] as AnyObject ){
+                self.correctAnswers = dict[kConsentComprehensionCorrectAnswers] as?  Array<Dictionary<String,Any>>
+            }
+        }
+        else{
+            Logger.sharedInstance.debug("Comprehension Step Dictionary is null:\(dict)")
+        }
+        
+    }
+}
+
+
 
 class ConsentReviewStep:ORKConsentReviewStep {
     

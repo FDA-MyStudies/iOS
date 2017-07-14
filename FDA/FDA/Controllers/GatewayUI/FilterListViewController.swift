@@ -13,9 +13,9 @@ import UIKit
 //Used to do filter based on Apply and Cancel actions
 protocol StudyFilterDelegates {
     
-    func appliedFilter(studyArray : Array<String>, statusArray : Array<String>, categoriesArray : Array<String>)
+    func appliedFilter(studyStatus : Array<String>, pariticipationsStatus : Array<String>, categories: Array<String> , searchText:String,bookmarked:Bool)
     
-    func cancelFilter(studyArray : Array<String>, statusArray : Array<String>, categoriesArray : Array<String>)
+    func didCancelFilter(_ cancel:Bool)
 }
 
 class StudyFilterViewController: UIViewController {
@@ -25,9 +25,11 @@ class StudyFilterViewController: UIViewController {
     
     var delegate : StudyFilterDelegates?
     
-    var studiesString = ""
-    var categoriesString = ""
-    var participationStatus = ""
+    var studyStatus : Array<String> = []
+    var pariticipationsStatus : Array<String> = []
+    var categories: Array<String> = []
+    var searchText:String = ""
+    var bookmark = true
     
     
     //MARK:- Viewcontroller lifecycle
@@ -71,8 +73,15 @@ class StudyFilterViewController: UIViewController {
      
      */
     @IBAction func applyButtonAction(_ sender: AnyObject){
-        delegate?.appliedFilter(studyArray: ["Active"], statusArray: [""], categoriesArray: ["Food Safety","Observational Studies"])
+        
+        //categories = ["Food Safety","Observational Studies","Cosmetics Safety"]
+        //pariticipationsStatus = ["Food Safety","Observational Studies"]
+        studyStatus = ["Closed","Paused"]
+        searchText = "Human"
+        
+        delegate?.appliedFilter(studyStatus: studyStatus, pariticipationsStatus: pariticipationsStatus, categories: categories,searchText:searchText,bookmarked: bookmark)
         self.dismiss(animated: true, completion: nil)
+        
         
         
     }
@@ -86,7 +95,7 @@ class StudyFilterViewController: UIViewController {
      
      */
     @IBAction func cancelButtonAction(_ sender: AnyObject){
-        delegate?.cancelFilter(studyArray: [""], statusArray: [""], categoriesArray: [""])
+        self.delegate?.didCancelFilter(true)
         self.dismiss(animated: true, completion: nil)
 
     

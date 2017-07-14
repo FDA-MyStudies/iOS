@@ -15,7 +15,7 @@ class StudyListViewController: UIViewController {
     var studyListRequestFailed = false
     
     var isComingFromFilterScreen : Bool = false
-    var studyResponseArray = NSArray()
+    var studiesList:Array<Study> = []
     
     //MARK:- Viewcontroller lifecycle
     
@@ -50,6 +50,13 @@ class StudyListViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        
+        
+        if isComingFromFilterScreen {
+            isComingFromFilterScreen = false
+            return
+        }
+        
         self.addRightNavigationItem()
         let appdelegate = UIApplication.shared.delegate as! AppDelegate
         
@@ -85,10 +92,9 @@ class StudyListViewController: UIViewController {
                 
             }else {
                 
-                if !(isComingFromFilterScreen){
-                    isComingFromFilterScreen = false
-                    self.sendRequestToGetUserPreference()
-                }
+                
+                self.sendRequestToGetUserPreference()
+               
         
             }
             
@@ -369,12 +375,10 @@ class StudyListViewController: UIViewController {
                     if study1.status == study2.status {
                         return (study1.userParticipateState.status.sortIndex < study2.userParticipateState.status.sortIndex)
                     }
-                    
-                    // print("1id : \(study1.studyId) , 2id : \(study2.studyId)")
                     return (study1.status.sortIndex < study2.status.sortIndex)
                 })
                 
-                Gateway.instance.studies = sortedstudies2
+                self.studiesList = sortedstudies2
                 self.tableView?.reloadData()
                 
                 
@@ -403,6 +407,18 @@ class StudyListViewController: UIViewController {
         }
     }
     
+    func getSortedStudies(studies:Array<Study>) -> Array<Study>{
+        
+        let  sortedstudies2 =  studies.sorted(by: { (study1:Study, study2:Study) -> Bool in
+            
+            if study1.status == study2.status {
+                return (study1.userParticipateState.status.sortIndex < study2.userParticipateState.status.sortIndex)
+            }
+            return (study1.status.sortIndex < study2.status.sortIndex)
+        })
+        return sortedstudies2
+    }
+    
     
     //MARK:- Button Actions
     
@@ -425,6 +441,8 @@ class StudyListViewController: UIViewController {
      
      */
     @IBAction func filterAction(_ sender:UIBarButtonItem){
+        
+        isComingFromFilterScreen = true
         self.performSegue(withIdentifier: filterListSegue, sender: nil)
     }
     
@@ -643,57 +661,71 @@ class StudyListViewController: UIViewController {
 extension StudyListViewController : StudyFilterDelegates{
 
     //Based on applied filter call WS
-    func appliedFilter(studyArray: Array<String>, statusArray: Array<String>, categoriesArray: Array<String>) {
+    func appliedFilter(studyStatus: Array<String>, pariticipationsStatus: Array<String>, categories: Array<String>, searchText: String, bookmarked: Bool) {
+      
+       //filter by study category
+        var categoryFilteredStudies:Array<Study>! = []
+        if categories.count > 0 {
+             categoryFilteredStudies =  Gateway.instance.studies?.filter({categories.contains($0.category!)})
+        }
         
-//      let studyies =  Gateway.instance.studies?.filter({$0.category == categoriesArray[0] || $0.category == categoriesArray[1]})
+        //filter by study status
+        var statusFilteredStudies:Array<Study>! = []
+        if studyStatus.count > 0 {
+             statusFilteredStudies =  Gateway.instance.studies?.filter({studyStatus.contains($0.status.rawValue)})
+        }
         
-        print("Apply filter Clicked for WS Call")
-        isComingFromFilterScreen = true
+        //filter by study status
+        var pariticipationsStatusFilteredStudies:Array<Study>! = []
+        if pariticipationsStatus.count > 0 {
+             pariticipationsStatusFilteredStudies =  Gateway.instance.studies?.filter({studyStatus.contains($0.userParticipateState.status.description)})
+        }
         
-        let attributeValue = studyArray[0]
+        //filter by bookmark
+        var bookmarkedStudies:Array<Study>! = []
+        bookmarkedStudies = Gateway.instance.studies?.filter({$0.userParticipateState.bookmarked == bookmarked})
         
-        let namePredicate = NSPredicate(format: "status like %@",attributeValue);
-        let data1 = studyResponseArray.filtered(using: namePredicate)
-        print(data1)
+        //filter by searched Text
+        var searchTextFilteredStudies:Array<Study>! = []
+        if searchText.characters.count > 0 {
+            searchTextFilteredStudies = Gateway.instance.studies?.filter({
+                ($0.name?.containsIgnoringCase(searchText))! || ($0.category?.containsIgnoringCase(searchText))! || ($0.description?.containsIgnoringCase(searchText))! || ($0.sponserName?.containsIgnoringCase(searchText))!
+                
+            })
+        }
         
-//        let result = Gateway.instance.studies?.filter{
-//            (e) -> Bool in
-//            
-//            if e.status == attributeValue {
-//                return true
-//            } else {
-//                return false
-//            }
-//            }.map {
-//                // this "maps" the array and returns the first part of the tuple
-//                $0.category
-//        }
-//        print(result!)
-
+        let setStudyStatus = Set<Study>(statusFilteredStudies)
+        let setpariticipationsStatus = Set<Study>(pariticipationsStatusFilteredStudies)
+        var studiesSet = setStudyStatus.union(setpariticipationsStatus)
         
+        let setCategories  = Set<Study>(categoryFilteredStudies)
+        studiesSet = studiesSet.union(setCategories)
         
-//        for studyObject in arrNames{
-//            
-//            let dict = NSMutableDictionary()
-//            dict.setValue(studyObject.name, forKey: "studyName")
-//          
-//        }
+        let setSearchedTextStudies = Set<Study>(searchTextFilteredStudies)
+        studiesSet = studiesSet.union(setSearchedTextStudies)
         
         
-        //Gateway.instance.studies = data1 as? Array<Study>
-        tableView?.reloadData()
+        let setBookmarkedStudies = Set<Study>(bookmarkedStudies)
+        studiesSet = studiesSet.union(setBookmarkedStudies)
+        
+        
+        let allStudiesArray:Array<Study> = Array(studiesSet)
+        
+        self.studiesList = self.getSortedStudies(studies: allStudiesArray)
+        
+        self.tableView?.reloadData()
+        
+        
         
     }
     
-    func cancelFilter(studyArray : Array<String>, statusArray : Array<String>, categoriesArray : Array<String>){
+    func didCancelFilter(_ cancel: Bool) {
         
-        print("Cancel filter Clicked for WS Call")
-        isComingFromFilterScreen = true
-        
-//        let filteredArray = arrNames.filter { namePredicate.evaluateWithObject($0) };
-//        println("names = ,\(filteredArray)");
-        
+        self.studiesList = Gateway.instance.studies!
+        self.tableView?.reloadData()
     }
+    
+  
 }
 
 
@@ -701,7 +733,7 @@ extension StudyListViewController : StudyFilterDelegates{
 extension StudyListViewController : UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return (Gateway.instance.studies?.count)!
+        return self.studiesList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -716,7 +748,7 @@ extension StudyListViewController : UITableViewDataSource {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as! StudyListCell
         
-        cell.populateCellWith(study: (Gateway.instance.studies?[indexPath.row])!)
+        cell.populateCellWith(study: (self.studiesList[indexPath.row]))
         cell.delegate = self
         
         return cell
@@ -730,8 +762,8 @@ extension StudyListViewController :  UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
-        let study = Gateway.instance.studies?[indexPath.row]
-        Study.updateCurrentStudy(study: study!)
+        let study = self.studiesList[indexPath.row]
+        Study.updateCurrentStudy(study: study)
         
         
         if User.currentUser.userType == UserType.FDAUser {
@@ -746,23 +778,23 @@ extension StudyListViewController :  UITableViewDelegate {
                     
                     //self.pushToStudyDashboard()
                     // check if study version is udpated
-                    if(study?.version != study?.newVersion){
-                        WCPServices().getStudyUpdates(study: study!, delegate: self)
+                    if(study.version != study.newVersion){
+                        WCPServices().getStudyUpdates(study: study, delegate: self)
                     }
                     else{
                         
-                        DBHandler.loadStudyDetailsToUpdate(studyId: (study?.studyId)!, completionHandler: { (success) in
+                        DBHandler.loadStudyDetailsToUpdate(studyId: (study.studyId)!, completionHandler: { (success) in
                             self.pushToStudyDashboard()
                         })
                     }
                 }
                 else {
                     
-                    if(study?.version != study?.newVersion){
-                        WCPServices().getStudyUpdates(study: study!, delegate: self)
+                    if(study.version != study.newVersion){
+                        WCPServices().getStudyUpdates(study: study, delegate: self)
                     }
                     else {
-                        self.checkDatabaseForStudyInfo(study: study!)
+                        self.checkDatabaseForStudyInfo(study: study)
                     }
                     
                     //self.sendRequestToGetStudyInfo(study: study!)
@@ -776,31 +808,31 @@ extension StudyListViewController :  UITableViewDelegate {
                     UIUtilities.showAlertWithTitleAndMessage(title: "", message: NSLocalizedString(kMessageForStudyPausedAfterJoiningState, comment: "") as NSString)
                 }
                 else {
-                    if(study?.version != study?.newVersion){
-                        WCPServices().getStudyUpdates(study: study!, delegate: self)
+                    if(study.version != study.newVersion){
+                        WCPServices().getStudyUpdates(study: study, delegate: self)
                     }
                     else {
-                        self.checkDatabaseForStudyInfo(study: study!)
+                        self.checkDatabaseForStudyInfo(study: study)
                     }
                 }
             }
             else {
                 
-                if(study?.version != study?.newVersion){
-                    WCPServices().getStudyUpdates(study: study!, delegate: self)
+                if(study.version != study.newVersion){
+                    WCPServices().getStudyUpdates(study: study, delegate: self)
                 }
                 else {
-                    self.checkDatabaseForStudyInfo(study: study!)
+                    self.checkDatabaseForStudyInfo(study: study)
                 }
                 //self.sendRequestToGetStudyInfo(study: study!)
             }
         }
         else {
-            if(study?.version != study?.newVersion){
-                WCPServices().getStudyUpdates(study: study!, delegate: self)
+            if(study.version != study.newVersion){
+                WCPServices().getStudyUpdates(study: study, delegate: self)
             }
             else {
-                self.checkDatabaseForStudyInfo(study: study!)
+                self.checkDatabaseForStudyInfo(study: study)
             }
         }
     }
@@ -839,7 +871,7 @@ extension StudyListViewController:NMWebServiceDelegate {
         
         if requestName as String == WCPMethods.studyList.rawValue{
             let responseDict = response as! NSDictionary
-            studyResponseArray = (responseDict["studies"] as? NSArray)!
+            
             
             self.handleStudyListResponse()
             self.removeProgressIndicator()

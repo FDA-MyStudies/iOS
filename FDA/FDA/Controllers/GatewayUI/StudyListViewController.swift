@@ -14,6 +14,8 @@ class StudyListViewController: UIViewController {
     @IBOutlet var labelHelperText:UILabel!
     var studyListRequestFailed = false
     
+    var isComingFromFilterScreen : Bool = false
+    var studyResponseArray = NSArray()
     
     //MARK:- Viewcontroller lifecycle
     
@@ -44,18 +46,12 @@ class StudyListViewController: UIViewController {
             appDelegate.checkForAppReopenNotification()
         }
         
-        
+        isComingFromFilterScreen = false
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        
-        
-        
         self.addRightNavigationItem()
-        
-        
         let appdelegate = UIApplication.shared.delegate as! AppDelegate
-        
         
         Study.currentStudy = nil
         
@@ -68,9 +64,7 @@ class StudyListViewController: UIViewController {
             ispasscodePending = ud.value(forKey: kPasscodeIsPending) as! Bool?
         }
         
-        
         if ispasscodePending == true{
-            
             if User.currentUser.userType == .FDAUser {
                 self.tableView?.isHidden = true
                 UserServices().getUserProfile(self as NMWebServiceDelegate)
@@ -89,11 +83,14 @@ class StudyListViewController: UIViewController {
             
             if (self.fdaSlideMenuController()?.isLeftOpen())!{
                 
+            }else {
+                
+                if !(isComingFromFilterScreen){
+                    isComingFromFilterScreen = false
+                    self.sendRequestToGetUserPreference()
+                }
+        
             }
-            else {
-                self.sendRequestToGetUserPreference()
-            }
-            
             
             //  self.sendRequestToGetStudyList()
         }
@@ -111,7 +108,6 @@ class StudyListViewController: UIViewController {
         if ud.value(forKey: kNotificationRegistrationIsPending) != nil && ud.bool(forKey: kNotificationRegistrationIsPending) == true{
             appdelegate.askForNotification()
         }
-        
     }
     
     override func didReceiveMemoryWarning() {
@@ -121,20 +117,28 @@ class StudyListViewController: UIViewController {
     
     func  addRightNavigationItem(){
         
-        
-        let view = UIView.init(frame: CGRect.init(x: 0, y: 0, width: 40, height: 40))
+        let view = UIView.init(frame: CGRect.init(x: 0, y: 4, width: 40, height: 40))
+        //view.backgroundColor = UIColor.red
         
         let button = UIButton.init(type: .custom)
         
         button.setImage(#imageLiteral(resourceName: "notification_active"), for: UIControlState.normal)
         button.addTarget(self, action:#selector(self.buttonActionNotification(_:)), for: UIControlEvents.touchUpInside)
-        button.frame = CGRect.init(x: 15, y: 0, width: 30, height: 30)
+        button.frame = CGRect.init(x: 10, y: 4, width: 30, height: 30)
         view.addSubview(button)
-        
         button.isExclusiveTouch = true
         
-        let label = UILabel.init(frame:CGRect.init(x: 30, y: 0, width: 10, height: 10) )
         
+//        ///// Added filterButton
+//        let filterButton = UIButton.init(type: .custom)
+//        filterButton.setImage(#imageLiteral(resourceName: "filterIcon"), for: UIControlState.normal)
+//        filterButton.addTarget(self, action:#selector(self.filterAction(_:)), for: UIControlEvents.touchUpInside)
+//        filterButton.frame = CGRect.init(x: 55, y: 0, width: 30, height: 30)
+//        view.addSubview(filterButton)
+//        filterButton.isExclusiveTouch = true
+        
+        
+        let label = UILabel.init(frame:CGRect.init(x: 30, y: 4, width: 10, height: 10) )
         label.font = UIFont.systemFont(ofSize: 10)
         label.textColor = UIColor.white
         
@@ -146,7 +150,16 @@ class StudyListViewController: UIViewController {
         view.addSubview(label)
         
         let barButton = UIBarButtonItem.init(customView: view)
-        self.navigationItem.rightBarButtonItem = barButton
+        
+        
+        let filterButton1 = UIBarButtonItem(image: UIImage(named: "filterIcon"), style: .plain, target: self, action: #selector(self.filterAction(_:)))//action:#selector(Class.MethodName) for swift 3
+        
+        ///// Added filterBarButton
+        //let filterBarButton = UIBarButtonItem.init(customView: view)
+        
+        
+        //Changes from rightBarButtonItem to rightBarButtonItems(to support multiple Bar button item)
+        self.navigationItem.rightBarButtonItems = [barButton , filterButton1]
         
         let ud = UserDefaults.standard
         
@@ -154,15 +167,10 @@ class StudyListViewController: UIViewController {
         
         if showNotification{
             label.isHidden = false
-        }
-        else{
+        }else{
             label.isHidden = true
         }
-        
-        
-        
     }
-    
     
     
     //MARK:-
@@ -189,7 +197,7 @@ class StudyListViewController: UIViewController {
         }
         else {
             
-            var ud = UserDefaults.standard
+            let ud = UserDefaults.standard
             let previousDate = ud.object(forKey: "NotificationRemainder") as? Date
             let todayDate = Date()
             var daysLastSeen = 0
@@ -400,13 +408,24 @@ class StudyListViewController: UIViewController {
     
     /**
      
-     Navigate to notification screen button clicked
+     Navigate to notification screen on button clicked
      
      @param sender    accepts UIBarButtonItem in sender
      
      */
     @IBAction func buttonActionNotification(_ sender:UIBarButtonItem){
         self.navigateToNotifications()
+    }
+    
+    /**
+     
+     Navigate to StudyFilter screen on button clicked
+     
+     @param sender    accepts UIBarButtonItem in sender
+     
+     */
+    @IBAction func filterAction(_ sender:UIBarButtonItem){
+        self.performSegue(withIdentifier: filterListSegue, sender: nil)
     }
     
     
@@ -456,6 +475,11 @@ class StudyListViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
+        
+        if segue.identifier == filterListSegue{
+            let filterVc = segue.destination as! StudyFilterViewController
+            filterVc.delegate = self
+        }
     }
     
     
@@ -615,6 +639,64 @@ class StudyListViewController: UIViewController {
 }
 
 
+//MARK:- Applied filter delegate
+extension StudyListViewController : StudyFilterDelegates{
+
+    //Based on applied filter call WS
+    func appliedFilter(studyArray: Array<String>, statusArray: Array<String>, categoriesArray: Array<String>) {
+        
+//      let studyies =  Gateway.instance.studies?.filter({$0.category == categoriesArray[0] || $0.category == categoriesArray[1]})
+        
+        print("Apply filter Clicked for WS Call")
+        isComingFromFilterScreen = true
+        
+        let attributeValue = studyArray[0]
+        
+        let namePredicate = NSPredicate(format: "status like %@",attributeValue);
+        let data1 = studyResponseArray.filtered(using: namePredicate)
+        print(data1)
+        
+//        let result = Gateway.instance.studies?.filter{
+//            (e) -> Bool in
+//            
+//            if e.status == attributeValue {
+//                return true
+//            } else {
+//                return false
+//            }
+//            }.map {
+//                // this "maps" the array and returns the first part of the tuple
+//                $0.category
+//        }
+//        print(result!)
+
+        
+        
+//        for studyObject in arrNames{
+//            
+//            let dict = NSMutableDictionary()
+//            dict.setValue(studyObject.name, forKey: "studyName")
+//          
+//        }
+        
+        
+        //Gateway.instance.studies = data1 as? Array<Study>
+        tableView?.reloadData()
+        
+    }
+    
+    func cancelFilter(studyArray : Array<String>, statusArray : Array<String>, categoriesArray : Array<String>){
+        
+        print("Cancel filter Clicked for WS Call")
+        isComingFromFilterScreen = true
+        
+//        let filteredArray = arrNames.filter { namePredicate.evaluateWithObject($0) };
+//        println("names = ,\(filteredArray)");
+        
+    }
+}
+
+
 //MARK:- TableView Data source
 extension StudyListViewController : UITableViewDataSource {
     
@@ -753,9 +835,12 @@ extension StudyListViewController:NMWebServiceDelegate {
     }
     
     func finishedRequest(_ manager: NetworkManager, requestName: NSString, response: AnyObject?) {
-        Logger.sharedInstance.info("requestname : \(requestName) : \(response)")
+        Logger.sharedInstance.info("requestname : \(requestName) : \(String(describing: response))")
         
         if requestName as String == WCPMethods.studyList.rawValue{
+            let responseDict = response as! NSDictionary
+            studyResponseArray = (responseDict["studies"] as? NSArray)!
+            
             self.handleStudyListResponse()
             self.removeProgressIndicator()
         }

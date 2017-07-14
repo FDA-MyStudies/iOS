@@ -1,0 +1,156 @@
+{
+    "Result":
+    {
+        "steps": [
+                  
+                  {
+                  
+                  "type": "question",
+                  
+                  "resultType": "boolean",
+                  
+                  "key": "QR_Q1",
+                  
+                  "title": "Q1",
+                  
+                  "text": "Are you a girl?",
+                  
+                  "skippable": false,
+                  
+                  "groupName": "",
+                  
+                  "repeatable": false,
+                  
+                  "repeatableText": "",
+                  
+                  "destinations": [],
+                  
+                  "healthDataKey": "",
+                  
+                  "format": {},
+                  
+                  "steps": [],
+                  
+                  "options": []
+                  
+                  },
+                  {
+                  
+                  "type": "question",
+                  
+                  "resultType": "boolean",
+                  
+                  "key": "QR_Q2",
+                  
+                  "title": "Q2",
+                  
+                  "text": "Are you of age > 20",
+                  
+                  "skippable": false,
+                  
+                  "groupName": "",
+                  
+                  "repeatable": false,
+                  
+                  "repeatableText": "",
+                  
+                  "destinations": [],
+                  
+                  "healthDataKey": "",
+                  
+                  "format": {},
+                  
+                  "steps": [],
+                  
+                  "options": []
+                  
+                  },
+                  {
+                  
+                  "type": "question",
+                  
+                  "resultType": "boolean",
+                  
+                  "key": "QR_Q3",
+                  
+                  "title": "Q3",
+                  
+                  "text": "Are you pregnant?",
+                  
+                  "skippable": false,
+                  
+                  "groupName": "",
+                  
+                  "repeatable": false,
+                  
+                  "repeatableText": "",
+                  
+                  "destinations": [],
+                  
+                  "healthDataKey": "",
+                  
+                  "format": {},
+                  
+                  "steps": [],
+                  
+                  "options": []
+                  
+                  },
+                  {
+                  
+                  "type": "question",
+                  
+                  "resultType": "boolean",
+                  
+                  "key": "QR_Q4",
+                  
+                  "title": "Q4",
+                  
+                  "text": "Is this the first time you gor pregnant?",
+                  
+                  "skippable": false,
+                  
+                  "groupName": "",
+                  
+                  "repeatable": false,
+                  
+                  "repeatableText": "",
+                  
+                  "destinations": [],
+                  
+                  "healthDataKey": "",
+                  
+                  "format": {},
+                  
+                  "steps": [],
+                  
+                  "options": []
+                  
+                  }
+
+                  
+                  
+                  ],
+        
+        "correctAnswers": [
+                           {
+                           "key":"QR_Q1",
+                           "answer":false
+                           },
+                           {
+                           "key":"QR_Q2",
+                           "answer":true
+                           },
+                           {
+                           "key":"QR_Q3",
+                           "answer":true
+                           },
+                           {
+                           "key":"QR_Q4",
+                           "answer":false
+                           }
+                           ]
+        
+    }
+    
+}

@@ -164,7 +164,7 @@ class ActivityBuilder {
                     completionStep.title = "Activity Completed"
                     
                     completionStep.image = #imageLiteral(resourceName: "successBlueBig")
-                    completionStep.detailText = "Thank you for your time!"
+                    completionStep.detailText = "Tap Done to submit responses. Responses cannot be modified after submission."
                     orkStepArray?.append(completionStep)
                     
                     if (orkStepArray?.count)! > 0 {

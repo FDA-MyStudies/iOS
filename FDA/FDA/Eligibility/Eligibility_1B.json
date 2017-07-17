@@ -152,7 +152,7 @@
                            ],
         
         "comprehension": {
-            "passScore": 200,
+            "passScore": 300,
             "questions": [
                           {
                           
@@ -330,8 +330,7 @@
                                {
                                "key": "14",
                                "answer": [
-                                          "A",
-                                          "B"
+                                          "A"
                                           ],
                                "evaluation": "any"
                                },

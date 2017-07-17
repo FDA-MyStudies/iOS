@@ -119,6 +119,7 @@
 		6EE93DCC1E93C8850027A5DC /* ResourcesUI.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6EE93DBB1E93C8850027A5DC /* ResourcesUI.plist */; };
 		6EE93DCD1E93C8850027A5DC /* ResourcesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EE93DBC1E93C8850027A5DC /* ResourcesTableViewCell.swift */; };
 		6EE93DCE1E93C8850027A5DC /* ResourcesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EE93DBD1E93C8850027A5DC /* ResourcesViewController.swift */; };
+		6EED31A31F1CD7B300A7AF56 /* LatestActive_1B.json in Resources */ = {isa = PBXBuildFile; fileRef = 6EED31A21F1CD7B300A7AF56 /* LatestActive_1B.json */; };
 		6EED7B331E65421D002C1FA3 /* EligibilityBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EED7B321E65421D002C1FA3 /* EligibilityBuilder.swift */; };
 		6EED7B391E6574FE002C1FA3 /* FetalKickCounterStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EED7B381E6574FE002C1FA3 /* FetalKickCounterStep.swift */; };
 		6EED7B3B1E65751D002C1FA3 /* FetalKickCounterStepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EED7B3A1E65751D002C1FA3 /* FetalKickCounterStepViewController.swift */; };
@@ -380,6 +381,7 @@
 		6EE93DBB1E93C8850027A5DC /* ResourcesUI.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = ResourcesUI.plist; sourceTree = "<group>"; };
 		6EE93DBC1E93C8850027A5DC /* ResourcesTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResourcesTableViewCell.swift; sourceTree = "<group>"; };
 		6EE93DBD1E93C8850027A5DC /* ResourcesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResourcesViewController.swift; sourceTree = "<group>"; };
+		6EED31A21F1CD7B300A7AF56 /* LatestActive_1B.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = LatestActive_1B.json; sourceTree = "<group>"; };
 		6EED7B321E65421D002C1FA3 /* EligibilityBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EligibilityBuilder.swift; sourceTree = "<group>"; };
 		6EED7B381E6574FE002C1FA3 /* FetalKickCounterStep.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FetalKickCounterStep.swift; sourceTree = "<group>"; };
 		6EED7B3A1E65751D002C1FA3 /* FetalKickCounterStepViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FetalKickCounterStepViewController.swift; sourceTree = "<group>"; };
@@ -699,6 +701,7 @@
 		6E9B39BC1E55DFDA0037D09D /* ActivityBuilder */ = {
 			isa = PBXGroup;
 			children = (
+				6EED31A21F1CD7B300A7AF56 /* LatestActive_1B.json */,
 				6E5F751A1EF4109500ABA308 /* Labkey_Activity11.json */,
 				6EDABCCD1EBA41EE005F3AA6 /* Labkey_Activity.json */,
 				6EF748BE1E69645700F1E89E /* LatestActive_Taskdocument.json */,
@@ -1528,6 +1531,7 @@
 				6E7D2D5F1E433E8800763D4C /* Main.storyboard in Resources */,
 				94B3DD401E6ED8E500327AE5 /* Gateway.storyboard in Resources */,
 				6EC129241E64624F00B90167 /* Acivity_Question.json in Resources */,
+				6EED31A31F1CD7B300A7AF56 /* LatestActive_1B.json in Resources */,
 				6EE8E4D91F17459200028853 /* Eligibility_1B.json in Resources */,
 				94B3DD441E6ED8E500327AE5 /* Profile.plist in Resources */,
 				6EB7401C1E9CFAD700A4C773 /* 01.png in Resources */,

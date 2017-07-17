@@ -300,14 +300,35 @@ class ActivityActiveStep: ActivityStep {
                     && Utilities.isValidValue(someObject:formatDict?[kActiveSpatialSpanMemoryPlaySpeed] as AnyObject?)
                     && Utilities.isValidValue(someObject:formatDict?[kActiveSpatialSpanMemoryMaximumTests] as AnyObject?)
                     && Utilities.isValidValue(someObject:formatDict?[kActiveSpatialSpanMemoryMaximumConsecutiveFailures] as AnyObject?)
-                    && Utilities.isValidValue(someObject:formatDict?[kActiveSpatialSpanMemoryCustomTargetImage] as AnyObject?)
-                    && Utilities.isValidValue(someObject:formatDict?[kActiveSpatialSpanMemoryCustomTargetPluralName] as AnyObject?)
                     && Utilities.isValidValue(someObject:formatDict?[kActiveSpatialSpanMemoryRequireReversal] as AnyObject?)
                 {
                     
-                    //Image data downloading pending ->  kActiveSpatialSpanMemoryCustomTargetImage
+                    //&& Utilities.isValidValue(someObject:formatDict?[kActiveSpatialSpanMemoryCustomTargetImage] as AnyObject?)
+                        //&& Utilities.isValidValue(someObject:formatDict?[kActiveSpatialSpanMemoryCustomTargetPluralName] as AnyObject?)
+                    
                     
                     let image = UIImage(named:formatDict?[kActiveSpatialSpanMemoryCustomTargetImage] as! String)
+                    
+                    
+                    let initialSpan = (formatDict?[kActiveSpatialSpanMemoryInitialSpan] as? Int)
+                    let minimumSpan = (formatDict?[kActiveSpatialSpanMemoryMinimumSpan] as? Int)
+                    
+                    let maximumSpan = (formatDict?[kActiveSpatialSpanMemoryMaximumSpan] as? Int)
+                    
+                    let playSpeed = (formatDict?[kActiveSpatialSpanMemoryPlaySpeed] as? Float)
+                    let maximumTest = (formatDict?[kActiveSpatialSpanMemoryMaximumTests] as? Int)
+                    
+                    let maximumConsecutiveFailures = (formatDict?[kActiveSpatialSpanMemoryMaximumConsecutiveFailures] as? Int)
+                    
+                    
+                    if initialSpan! >= 2
+                        && initialSpan! >= minimumSpan!
+                        && initialSpan! <= maximumSpan!
+                        && maximumSpan! <= 20
+                        && playSpeed! > 0.4
+                        && playSpeed! < 21.0
+                        && maximumTest! >= 1
+                        && maximumConsecutiveFailures! >= 1{
                     
                     
                     return ORKOrderedTask.spatialSpanMemoryTask(withIdentifier:  key!, intendedUseDescription:
@@ -322,6 +343,11 @@ class ActivityActiveStep: ActivityStep {
                                                                 customTargetPluralName: formatDict?[kActiveSpatialSpanMemoryCustomTargetPluralName] as! String?,
                                                                 requireReversal: ((formatDict?[kActiveSpatialSpanMemoryRequireReversal]) != nil),
                                                                 options: self.options!)
+                    }
+                    else{
+                        return nil
+                    }
+                    
                 }
                 else{
                     Logger.sharedInstance.debug("spatialSpanMemoryStep:formatDict has null values:\(formatDict)")

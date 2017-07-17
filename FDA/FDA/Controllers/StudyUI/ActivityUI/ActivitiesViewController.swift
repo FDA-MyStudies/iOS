@@ -270,8 +270,8 @@ class ActivitiesViewController : UIViewController{
     func createActivity(){
         
         
-         /*
-         let filePath  = Bundle.main.path(forResource: "Labkey_Activity", ofType: "json")
+        
+         let filePath  = Bundle.main.path(forResource: "LatestActive_1B", ofType: "json")
          
          //let filePath  = Bundle.main.path(forResource: "FetalKickTest", ofType: "json")
          
@@ -285,8 +285,8 @@ class ActivitiesViewController : UIViewController{
          catch let error as NSError{
          print("\(error)")
          }
- 
-        */
+        
+        
         
         
         IQKeyboardManager.sharedManager().enable = false
@@ -1010,34 +1010,48 @@ extension ActivitiesViewController:ORKTaskViewControllerDelegate{
                     if  (taskViewController.result.results?.count)! > 0 {
                         
                         let orkStepResult:ORKStepResult? = taskViewController.result.results?[2] as! ORKStepResult
+                        
                         if (orkStepResult?.results?.count)! > 0 {
                             
-                            let fetalKickResult:FetalKickCounterTaskResult? = orkStepResult?.results?.first as! FetalKickCounterTaskResult
+                            let activeTaskResultType =  ActiveStepType(rawValue:ActivityBuilder.currentActivityBuilder.activity?.activitySteps?.first?.resultType as! String)
                             
-                            let study = Study.currentStudy
-                            let activity = Study.currentActivity
-                            
-                            
-                            if fetalKickResult != nil{
+                            switch activeTaskResultType! {
                                 
-                                let value = Float((fetalKickResult?.totalKickCount)!)
-                                let dict = ActivityBuilder.currentActivityBuilder.activity?.steps?.first!
-                                let key = dict?[kActivityStepKey] as! String
+                            case .fetalKickCounter:
                                 
+                                let fetalKickResult:FetalKickCounterTaskResult? = orkStepResult?.results?.first as! FetalKickCounterTaskResult
                                 
-                                DBHandler.saveStatisticsDataFor(activityId: (activity?.actvityId)!, key: key, data:value,date:Date())
+                                let study = Study.currentStudy
+                                let activity = Study.currentActivity
                                 
                                 
+                                if fetalKickResult != nil{
+                                    
+                                    let value = Float((fetalKickResult?.totalKickCount)!)
+                                    let dict = ActivityBuilder.currentActivityBuilder.activity?.steps?.first!
+                                    let key = dict?[kActivityStepKey] as! String
+                                    
+                                    
+                                    DBHandler.saveStatisticsDataFor(activityId: (activity?.actvityId)!, key: key, data:value,date:Date())
+                                    
+                                    
+                                    
+                                    let ud = UserDefaults.standard
+                                    ud.removeObject(forKey: "FKC")
+                                    ud.removeObject(forKey: "FetalKickActivityId")
+                                    ud.removeObject(forKey: "FetalKickCounterValue")
+                                    ud.removeObject(forKey: "FetalKickStartTimeStamp")
+                                    ud.removeObject(forKey: "FetalKickStudyId")
+                                    ud.removeObject(forKey: "FetalKickCounterRunid")
+                                    ud.synchronize()
+                                    
+                                }
+                                case .spatialSpanMemoryStep: break
                                 
-                                let ud = UserDefaults.standard
-                                ud.removeObject(forKey: "FKC")
-                                ud.removeObject(forKey: "FetalKickActivityId")
-                                ud.removeObject(forKey: "FetalKickCounterValue")
-                                ud.removeObject(forKey: "FetalKickStartTimeStamp")
-                                ud.removeObject(forKey: "FetalKickStudyId")
-                                ud.removeObject(forKey: "FetalKickCounterRunid")
-                                ud.synchronize()
                                 
+                                    
+                                    default:break
+                                    
                                 
                                 
                             }

@@ -417,6 +417,14 @@
                     }
                     
                 }
+                else if(navController as? UINavigationController) != nil
+                    &&  (navController as? UINavigationController)?.visibleViewController?.isKind(of: ORKTaskViewController.self) == true
+                    && (((navController as? UINavigationController)?.visibleViewController as! ORKTaskViewController).title != nil && ((navController as? UINavigationController)?.visibleViewController as! ORKTaskViewController).title! == "Activity"){
+                    if (navController as? UINavigationController)?.visibleViewController?.isKind(of: ORKPasscodeViewController.self) == false{
+                        self.checkPasscode(viewController: navController!)
+                    }
+                }
+                
             }
             
             if AppDelegate.jailbroken(application: application) {

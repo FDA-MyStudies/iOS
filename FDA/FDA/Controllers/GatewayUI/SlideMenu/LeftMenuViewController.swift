@@ -21,7 +21,9 @@ let kLeftMenuCellSubTitleValue = "Sign up"
 let kAlertMessageReachoutText = "This feature will be available in the next sprint."
 
 let kAlertMessageForSignOut = "Are you sure you want to Sign Out ?"
-let kAlertMessageSignOutSync = "Are you sure you want to Sign Out ? Your data will be lost."
+let kAlertMessageSignOutSync = "Are you sure you want to sign out? Incomplete activities and activities completed while offline must be re-started when you next sign in."
+
+//"Are you sure you want to Sign Out ? Your data will be lost."
 
 let kAlertSignOutLaterTitle = "Sign Out later"
 

@@ -136,6 +136,12 @@ class StudyOverviewViewControllerFirst : UIViewController{
         }
         else {
             
+            do{
+                try AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayback)
+            } catch {
+                //Didn't work
+            }
+            
             let url : NSURL = NSURL(string: overviewSectionDetail.link!)!
             moviePlayer = MPMoviePlayerViewController(contentURL:url as URL!)
             

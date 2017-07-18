@@ -82,7 +82,6 @@ class ActivitiesViewController : UIViewController{
             self.checkForActivitiesUpdates()
         }
         
-        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -269,7 +268,7 @@ class ActivitiesViewController : UIViewController{
      */
     func createActivity(){
         
-        
+        /*
         
          let filePath  = Bundle.main.path(forResource: "LatestActive_1B", ofType: "json")
          
@@ -286,7 +285,7 @@ class ActivitiesViewController : UIViewController{
          print("\(error)")
          }
         
-        
+        */
         
         
         IQKeyboardManager.sharedManager().enable = false

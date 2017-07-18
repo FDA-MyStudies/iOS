@@ -38,13 +38,25 @@ class ResourcesDetailViewControllerCopy: UIViewController {
         
         let webConfiguration = WKWebViewConfiguration()
         
+        let jscript = "var meta = document.createElement('meta'); meta.setAttribute('name', 'viewport'); meta.setAttribute('content', 'width=device-width'); document.getElementsByTagName('head')[0].appendChild(meta);"
+        
+        let userScript = WKUserScript(source: jscript, injectionTime: .atDocumentEnd, forMainFrameOnly: true)
+        
+        let wkUController = WKUserContentController()
+        
+        wkUController.addUserScript(userScript)
+        
+        let wkWebConfig = WKWebViewConfiguration()
+        
+        wkWebConfig.userContentController = wkUController
+        
+        
         let webViewFrame = CGRect.init(x: 0, y: 0, width: (webViewContainer?.frame.width)!, height: (webViewContainer?.frame.height)! - 44.0)
-        webView = WKWebView.init(frame: webViewFrame, configuration: webConfiguration)
+        
+        webView = WKWebView.init(frame: webViewFrame, configuration: wkWebConfig)
         
        
         webViewContainer?.addSubview(webView!)
-        
-        
        
     }
     

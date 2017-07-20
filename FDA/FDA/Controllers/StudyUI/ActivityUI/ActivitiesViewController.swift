@@ -326,6 +326,36 @@ class ActivitiesViewController : UIViewController{
             UIApplication.shared.statusBarStyle = .default
             taskControllerPresented = true
             present(taskViewController!, animated: true, completion: nil)
+            
+            
+// -----------NEEDED FOR NEXT PHASE
+//              if Study.currentActivity?.currentRun.restortionData != nil {
+//                while (taskViewController?.result.results?.count)! > 1 {
+//                    
+//                    taskViewController?.goBackward()
+//                    
+//                    let questionstepViewArray = (taskViewController?.currentStepViewController?.view?.subviews)?.filter({$0.isKind(of: UIScrollView.self)})
+//                    let questionStepView = questionstepViewArray?.first
+//                    
+//                    if questionStepView != nil {
+//                    
+//                    for subView in (questionStepView?.accessibilityElements)!{
+//                        
+//                        if (subView as AnyObject).isKind(of: UIButton.self) == false{
+//                            ((subView as Any) as AnyObject).isUserInteractionEnabled = false
+//                            
+//                            print("subview : \(subView)")
+//                            
+//                        }
+//                        
+//                        
+//                    }
+//                    
+//                    }
+//                }
+//                
+//            }
+            
         }
         else{
             UIUtilities.showAlertMessage(kAlertMessageText, errorMessage: NSLocalizedString("Invalid Data!", comment: ""), errorAlertActionTitle: NSLocalizedString("OK", comment: ""), viewControllerUsed: self)

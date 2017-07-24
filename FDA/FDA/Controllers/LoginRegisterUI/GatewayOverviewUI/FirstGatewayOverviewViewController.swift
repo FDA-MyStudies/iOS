@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 import MediaPlayer
+import AVKit
 
 class FirstGatewayOverviewViewController : UIViewController{
     
@@ -23,6 +24,7 @@ class FirstGatewayOverviewViewController : UIViewController{
     var pageIndex:Int!
     var overviewSectionDetail : OverviewSection!
     var moviePlayer:MPMoviePlayerViewController!
+    var playerViewController:AVPlayerViewController!
     
     
 //MARK:- View Controller Lifecycle
@@ -80,6 +82,10 @@ class FirstGatewayOverviewViewController : UIViewController{
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name.MPMoviePlayerPlaybackDidFinish, object: nil)
         moviePlayer.dismiss(animated: true, completion: nil)
     }
+    func playerDidFinishPlaying(note: NSNotification) {
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: nil)
+        self.playerViewController.dismiss(animated: true, completion: nil)
+    }
     
     
 //MARK:- Button Action
@@ -101,14 +107,23 @@ class FirstGatewayOverviewViewController : UIViewController{
             
             let url = URL.init(string: urlString)
             
-            moviePlayer = MPMoviePlayerViewController(contentURL:url)
-            moviePlayer.moviePlayer.movieSourceType = .streaming
+//            moviePlayer = MPMoviePlayerViewController(contentURL:url)
+//            moviePlayer.moviePlayer.movieSourceType = .streaming
+//            
+//            NotificationCenter.default.addObserver(self, selector:#selector(StudyOverviewViewControllerFirst.moviePlayBackDidFinish(notification:)),
+//            name: NSNotification.Name.MPMoviePlayerPlaybackDidFinish,
+//            object: moviePlayer.moviePlayer)
+//            
+//            self.present(moviePlayer, animated: true, completion: nil)
             
-            NotificationCenter.default.addObserver(self, selector:#selector(StudyOverviewViewControllerFirst.moviePlayBackDidFinish(notification:)),
-            name: NSNotification.Name.MPMoviePlayerPlaybackDidFinish,
-            object: moviePlayer.moviePlayer)
-            
-            self.present(moviePlayer, animated: true, completion: nil)
+            let player = AVPlayer(url: url!)
+            NotificationCenter.default.addObserver(self, selector:#selector(StudyOverviewViewControllerFirst.playerDidFinishPlaying(note:)),
+                                                   name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: player.currentItem)
+            playerViewController = AVPlayerViewController()
+            playerViewController.player = player
+            self.present(playerViewController, animated: true) {
+                self.playerViewController.player!.play()
+            }
         }
     }
     

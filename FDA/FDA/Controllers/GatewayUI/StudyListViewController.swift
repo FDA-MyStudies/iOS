@@ -579,6 +579,8 @@ class StudyListViewController: UIViewController {
             self.sendRequestToGetStudyInfo(study: Study.currentStudy!)
         }
         else {
+            
+            self.removeProgressIndicator()
             self.navigateBasedOnUserStatus()
         }
         
@@ -770,7 +772,7 @@ extension StudyListViewController:NMWebServiceDelegate {
         else if (requestName as String == WCPMethods.studyUpdates.rawValue){
             
             self.handleStudyUpdatedInformation()
-            self.removeProgressIndicator()
+            //self.removeProgressIndicator()
         }
         else if requestName as String ==  RegistrationMethods.userProfile.description {
             self.removeProgressIndicator()

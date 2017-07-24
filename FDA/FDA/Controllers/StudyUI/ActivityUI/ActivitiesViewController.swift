@@ -494,7 +494,7 @@ class ActivitiesViewController : UIViewController{
         var totalRuns = 0
         var totalCompletedRuns = 0
         var totalIncompletedRuns = 0
-        let activities = Study.currentStudy?.activities
+        let activities = Study.currentStudy?.activities.filter({$0.state == "active"})
         //for detail in tableViewSections {
            // let activities = detail["activities"] as! Array<Activity>
             for activity in activities! {
@@ -797,14 +797,14 @@ extension ActivitiesViewController : UITableViewDelegate{
                     }
                     else {
                         debugPrint("run is completed")
-                        //Study.updateCurrentActivity(activity:activities[indexPath.row])
-                        //self.updateRunStatusToComplete()
+                        //UIUtilities.showAlertWithMessage(alertMessage: NSLocalizedString("You missed the previous run of this activity. Please wait till the next run becomes available. Run timings are given on the Activities list screen.", comment: ""))
                     }
                 }
                 
             }
-            else {
+            else if activity.userParticipationStatus?.status == .abandoned {
                 debugPrint("run not available")
+                 UIUtilities.showAlertWithMessage(alertMessage: NSLocalizedString("You missed the previous run of this activity. Please wait till the next run becomes available. Run timings are given on the Activities list screen.", comment: ""))
             }
             
             //Following to be commented

@@ -797,14 +797,14 @@ extension ActivitiesViewController : UITableViewDelegate{
                     }
                     else {
                         debugPrint("run is completed")
-                        //Study.updateCurrentActivity(activity:activities[indexPath.row])
-                        //self.updateRunStatusToComplete()
+                        //UIUtilities.showAlertWithMessage(alertMessage: NSLocalizedString("You missed the previous run of this activity. Please wait till the next run becomes available. Run timings are given on the Activities list screen.", comment: ""))
                     }
                 }
                 
             }
-            else {
+            else if activity.userParticipationStatus?.status == .abandoned {
                 debugPrint("run not available")
+                 UIUtilities.showAlertWithMessage(alertMessage: NSLocalizedString("You missed the previous run of this activity. Please wait till the next run becomes available. Run timings are given on the Activities list screen.", comment: ""))
             }
             
             //Following to be commented

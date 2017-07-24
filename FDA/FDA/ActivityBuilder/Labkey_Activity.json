@@ -31,7 +31,59 @@
         
         
         "steps": [
+                  {
                   
+                  "type": "question",
+                  
+                  "resultType": "numeric",
+                  
+                  "key": "QR4_Q101",
+                  
+                  "title": "Q6_init",
+                  
+                  "text": "QDesc6",
+                  
+                  "skippable": true,
+                  
+                  "groupName": "",
+                  
+                  "repeatable": false,
+                  
+                  "repeatableText": "",
+                  
+                  "destinations": [
+                                   
+                                   {
+                                   
+                                   "condition": "",
+                                   
+                                   "destination": "QR4_F1"
+                                   
+                                   }
+                                   
+                                   ],
+                  
+                  "healthDataKey": "HKQuantityTypeIdentifierStepCount",
+                  
+                  "format": {
+                  
+                  "style": "Integer",
+                  
+                  "unit": "meters",
+                  
+                  "minValue": 2,
+                  
+                  "maxValue": 10,
+                  
+                  "placeholder": "Enter value here..."
+                  
+                  },
+                  
+                  "steps": [],
+                  
+                  "options": []
+                  
+                  },
                   {
                   
                   "type": "form",
@@ -646,7 +698,7 @@
                                    
                                    ],
                   
-                  "healthDataKey": "",
+                  "healthDataKey": "HKQuantityTypeIdentifierBodyTemperature",
                   
                   "format": {
                   

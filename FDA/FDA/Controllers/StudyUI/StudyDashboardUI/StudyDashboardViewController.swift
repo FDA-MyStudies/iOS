@@ -183,7 +183,10 @@ class StudyDashboardViewController : UIViewController{
                 for value in values{
                     let responseValue = value["value"] as! Float
                     let date = StudyDashboardViewController.labkeyDateFormatter.date(from: value["date"] as! String)
-                     DBHandler.saveStatisticsDataFor(activityId: activityId!, key: key!, data:responseValue ,date:date!)
+                     let localDateAsString = StudyDashboardViewController.localDateFormatter.string(from: date!)
+                    
+                     let localDate = StudyDashboardViewController.localDateFormatter.date(from: localDateAsString)
+                     DBHandler.saveStatisticsDataFor(activityId: activityId!, key: key!, data:responseValue ,date:localDate!)
                 }
                 
                 
@@ -233,8 +236,18 @@ class StudyDashboardViewController : UIViewController{
     private static let labkeyDateFormatter: DateFormatter = {
         //2017/06/13 18:12:13
         let formatter = DateFormatter()
+        formatter.timeZone = TimeZone.init(identifier: "America/New_York")
         formatter.dateFormat = "YYYY/MM/dd HH:mm:ss"
        
+        return formatter
+    }()
+    
+    private static let localDateFormatter: DateFormatter = {
+        //2017/06/13 18:12:13
+        let formatter = DateFormatter()
+        formatter.timeZone = TimeZone.current
+        formatter.dateFormat = "YYYY/MM/dd HH:mm:ss"
+        
         return formatter
     }()
 }

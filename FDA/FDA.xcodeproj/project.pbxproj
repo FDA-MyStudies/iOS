@@ -119,6 +119,7 @@
 		6EE93DCC1E93C8850027A5DC /* ResourcesUI.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6EE93DBB1E93C8850027A5DC /* ResourcesUI.plist */; };
 		6EE93DCD1E93C8850027A5DC /* ResourcesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EE93DBC1E93C8850027A5DC /* ResourcesTableViewCell.swift */; };
 		6EE93DCE1E93C8850027A5DC /* ResourcesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EE93DBD1E93C8850027A5DC /* ResourcesViewController.swift */; };
+		6EEBA47A1F25FAA100FB0258 /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EEBA4791F25FAA100FB0258 /* HealthKit.framework */; };
 		6EED31A31F1CD7B300A7AF56 /* LatestActive_1B.json in Resources */ = {isa = PBXBuildFile; fileRef = 6EED31A21F1CD7B300A7AF56 /* LatestActive_1B.json */; };
 		6EED7B331E65421D002C1FA3 /* EligibilityBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EED7B321E65421D002C1FA3 /* EligibilityBuilder.swift */; };
 		6EED7B391E6574FE002C1FA3 /* FetalKickCounterStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EED7B381E6574FE002C1FA3 /* FetalKickCounterStep.swift */; };
@@ -381,6 +382,7 @@
 		6EE93DBB1E93C8850027A5DC /* ResourcesUI.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = ResourcesUI.plist; sourceTree = "<group>"; };
 		6EE93DBC1E93C8850027A5DC /* ResourcesTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResourcesTableViewCell.swift; sourceTree = "<group>"; };
 		6EE93DBD1E93C8850027A5DC /* ResourcesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResourcesViewController.swift; sourceTree = "<group>"; };
+		6EEBA4791F25FAA100FB0258 /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = System/Library/Frameworks/HealthKit.framework; sourceTree = SDKROOT; };
 		6EED31A21F1CD7B300A7AF56 /* LatestActive_1B.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = LatestActive_1B.json; sourceTree = "<group>"; };
 		6EED7B321E65421D002C1FA3 /* EligibilityBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EligibilityBuilder.swift; sourceTree = "<group>"; };
 		6EED7B381E6574FE002C1FA3 /* FetalKickCounterStep.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FetalKickCounterStep.swift; sourceTree = "<group>"; };
@@ -478,6 +480,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6EEBA47A1F25FAA100FB0258 /* HealthKit.framework in Frameworks */,
 				6EF05A941E4DAB0400CD7661 /* ResearchKit.framework in Frameworks */,
 				2F2CF29CD5359B994C8987E7 /* Pods_FDA.framework in Frameworks */,
 			);
@@ -543,6 +546,7 @@
 		5E6053B2479953DCC93BD8D4 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				6EEBA4791F25FAA100FB0258 /* HealthKit.framework */,
 				09ABCB412CFB53694DC239AC /* Pods_FDA.framework */,
 				B7E309D273812BCB954E8968 /* Pods_FDATests.framework */,
 				4C1A57F15C55319A5A1EA87C /* Pods_FDAUITests.framework */,
@@ -1378,6 +1382,9 @@
 							com.apple.BackgroundModes = {
 								enabled = 1;
 							};
+							com.apple.HealthKit = {
+								enabled = 1;
+							};
 							com.apple.Push = {
 								enabled = 1;
 							};
@@ -2006,7 +2013,7 @@
 				CODE_SIGN_ENTITLEMENTS = FDA/FDA.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = FWLLYUH7XR;
 				ENABLE_BITCODE = YES;
 				INFOPLIST_FILE = FDA/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -2031,7 +2038,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = FDA/FDA.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = FWLLYUH7XR;
 				ENABLE_BITCODE = YES;
 				INFOPLIST_FILE = FDA/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;

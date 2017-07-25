@@ -297,7 +297,7 @@ class WCPServices: NSObject {
                 
                  eligibility[kEligibilityCorrectAnswers] = result[kEligibilityCorrectAnswers]
                 
-                eligibility["type"] = "test"
+                eligibility["type"] = "combined"
                 
                 consent[kConsentComprehension] = result[kConsentComprehension]
                 

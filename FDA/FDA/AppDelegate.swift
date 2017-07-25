@@ -69,7 +69,7 @@
         
         var isPasscodePresented:Bool? =  false
         
-        
+        var isComprehensionFailed:Bool? = false
         
         var parentViewControllerForAlert:UIViewController?
         
@@ -569,6 +569,26 @@
             guard file != nil else { return false }
             fclose(file)
             return true
+        }
+        
+        
+        //MARK: Add Retry Screen
+        
+        func addRetryScreen(viewController:UIViewController?)  {
+            
+            let navigationController =  (self.window?.rootViewController as! UINavigationController)
+            
+            let retryView = ComprehensionFailure.instanceFromNib(frame: navigationController.view.frame, detail: nil);
+            
+            if (viewController!)  != nil{
+                retryView.delegate = viewController as! ComprehensionFailureDelegate
+            }
+            else{
+                retryView.delegate = self as! ComprehensionFailureDelegate
+            }
+            UIApplication.shared.keyWindow?.addSubview(retryView);
+            
+            UIApplication.shared.keyWindow?.bringSubview(toFront: retryView)
         }
         
         
@@ -1841,6 +1861,20 @@
         }
         
     }
+    
+    //MARK:ComprehensionFailureDelegate
+    
+    extension AppDelegate:ComprehensionFailureDelegate{
+        func didTapOnCancel() {
+            
+        }
+
+        func didTapOnRetry() {
+            
+        }
+    }
+    
+    
     
     
     //MARK: UNUserNotification Delegate

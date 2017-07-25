@@ -580,7 +580,7 @@
             
             let retryView = ComprehensionFailure.instanceFromNib(frame: navigationController.view.frame, detail: nil);
             
-            if (viewController!)  != nil{
+            if viewController != nil{
                 retryView.delegate = viewController as! ComprehensionFailureDelegate
             }
             else{
@@ -1547,6 +1547,11 @@
             case ORKTaskViewControllerFinishReason.saved:
                 print("saved")
                 taskResult = taskViewController.restorationData
+                
+                if  taskViewController.task?.identifier == kConsentTaskIdentifier{
+                    
+                    self.popViewControllerAfterConsentDisagree()
+                }
             }
             
             if passcodeParentControllerWhileSetup != nil {
@@ -1744,6 +1749,92 @@
                         return nil
                     }
                 }
+                else if step.identifier == kReviewTitle{
+                    
+                    
+                    // comprehension test is available
+                    if (ConsentBuilder.currentConsent?.comprehension?.questions?.count)! > 0 {
+                        
+                        
+                        let visualStepIndex:Int = (taskViewController.result.results?.index(where: {$0.identifier == kVisualStepId}))!
+                        
+                        if visualStepIndex >= 0 {
+                            
+                            var  i = visualStepIndex + 1 // holds the index of  question
+                            var j = 0 // holds the index of correct answer
+                            
+                            var userScore = 0
+                            
+                            while  i < (taskViewController.result.results?.count)! {
+                                
+                                
+                                let textChoiceResult:ORKChoiceQuestionResult = ((taskViewController.result.results?[i] as! ORKStepResult).results?.first) as! ORKChoiceQuestionResult
+                                
+                                
+                                
+                                let correctAnswerDict:Dictionary<String,Any>? = ConsentBuilder.currentConsent?.comprehension?.correctAnswers?[j]
+                                
+                                let answerArray:[String] = (correctAnswerDict?[kConsentComprehensionAnswer] as? [String])!
+                                
+                                let evaluationType:Evaluation? = Evaluation(rawValue: correctAnswerDict?[kConsentComprehensionEvaluation] as! String)
+                                
+                                let answeredSet = Set(textChoiceResult.choiceAnswers! as! [String])
+                                
+                                let correctAnswerSet = Set(answerArray)
+                                
+                                switch evaluationType! {
+                                case .any:
+                                    
+                                    
+                                    if answeredSet.isSubset(of: correctAnswerSet){
+                                        userScore = userScore + 100
+                                    }
+                                    else if (answeredSet.intersection(correctAnswerSet)).isEmpty == false{
+                                        userScore = userScore + 100
+                                    }
+                                    
+                                case .all:
+                                    
+                                    if answeredSet == correctAnswerSet{
+                                        userScore = userScore + 100
+                                    }
+                                    
+                                    
+                                default: break
+                                    
+                                }
+                                
+                                j+=1
+                                i+=1
+                            }
+                            
+                            if userScore >= (ConsentBuilder.currentConsent?.comprehension?.passScore)! {
+                                return nil
+                            }
+                            else{
+                                
+                                
+                                self.isComprehensionFailed = true
+                                self.addRetryScreen(viewController: nil)
+                                
+                                taskViewController.dismiss(animated: true
+                                    , completion: nil)
+                            }
+                            
+                        }
+                        else{
+                            // if by chance we didnt get visualStepIndex i.e there no visual step
+                            // logically should never occur
+                        }
+                        
+                        return nil
+                    }
+                    else{
+                        // comprehension test is not available
+                        return nil
+                    }
+                    
+                }
                 else {
                     
                     return nil
@@ -1866,11 +1957,11 @@
     
     extension AppDelegate:ComprehensionFailureDelegate{
         func didTapOnCancel() {
-            
+            self.popViewControllerAfterConsentDisagree()
         }
 
         func didTapOnRetry() {
-            
+            self.createEligibilityConsentTask()
         }
     }
     

@@ -43,7 +43,7 @@
                             </constraints>
                         </imageView>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b7l-Wh-qpO">
-                            <rect key="frame" x="113" y="566.5" width="150" height="40"/>
+                            <rect key="frame" x="113" y="566" width="150" height="40"/>
                             <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
                             <state key="normal" title="Retry">
                                 <color key="titleColor" red="0.0" green="0.48627450979999998" blue="0.72941176470000002" alpha="1" colorSpace="calibratedRGB"/>
@@ -62,9 +62,11 @@
                                 <action selector="buttonRetryAction" destination="iN0-l3-epB" eventType="touchUpInside" id="gQ2-9K-Spp"/>
                             </connections>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dcV-56-Hws">
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dcV-56-Hws">
                             <rect key="frame" x="301" y="20" width="54" height="30"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="54" id="4Pb-Va-sCS"/>
+                            </constraints>
                             <state key="normal" title="Cancel">
                                 <color key="titleColor" red="0.0" green="0.48627450979999998" blue="0.72941176470000002" alpha="1" colorSpace="calibratedRGB"/>
                             </state>
@@ -82,7 +84,9 @@
                         <constraint firstItem="kjL-rf-IRM" firstAttribute="centerY" secondItem="Vkn-Is-FiS" secondAttribute="centerY" multiplier="0.778141" id="9oj-dL-Jfq"/>
                         <constraint firstItem="NJC-CA-ro1" firstAttribute="height" secondItem="Vkn-Is-FiS" secondAttribute="height" multiplier="50/667" id="BSd-Ek-zBE"/>
                         <constraint firstItem="b7l-Wh-qpO" firstAttribute="height" secondItem="Vkn-Is-FiS" secondAttribute="height" multiplier="40/667" id="IEx-Wf-pfh"/>
+                        <constraint firstAttribute="trailing" secondItem="dcV-56-Hws" secondAttribute="trailing" constant="20" id="IlL-b1-7s4"/>
                         <constraint firstItem="b7l-Wh-qpO" firstAttribute="centerX" secondItem="Vkn-Is-FiS" secondAttribute="centerX" id="KeE-wE-CE2"/>
+                        <constraint firstItem="dcV-56-Hws" firstAttribute="top" secondItem="Vkn-Is-FiS" secondAttribute="top" constant="20" id="OdF-zT-58g"/>
                         <constraint firstItem="JU5-DE-RKR" firstAttribute="centerX" secondItem="Vkn-Is-FiS" secondAttribute="centerX" id="UHw-JR-F6X"/>
                         <constraint firstItem="NJC-CA-ro1" firstAttribute="width" secondItem="Vkn-Is-FiS" secondAttribute="width" multiplier="135/375" id="Va6-Ed-B0s"/>
                         <constraint firstItem="kjL-rf-IRM" firstAttribute="width" secondItem="Vkn-Is-FiS" secondAttribute="width" multiplier="300/375" id="Xwr-1H-gkM"/>

@@ -490,11 +490,11 @@ class ActivitiesViewController : UIViewController{
         
         
         
-        
+        //let deletedActivities = Study.currentStudy?.activities.filter({$0.totalRuns != ($0.incompletedRuns + $0.compeltedRuns)})
         var totalRuns = 0
         var totalCompletedRuns = 0
         var totalIncompletedRuns = 0
-        let activities = Study.currentStudy?.activities.filter({$0.state == "active"})
+        let activities = Study.currentStudy?.activities //.filter({$0.state == "active"})
         //for detail in tableViewSections {
            // let activities = detail["activities"] as! Array<Activity>
             for activity in activities! {

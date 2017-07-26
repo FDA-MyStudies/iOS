@@ -415,8 +415,14 @@ class Schedule{
         
         scheduledTimings = activity.frequencyRuns!
         
+        let offset = UserDefaults.standard.value(forKey: "offset") as? Int
+        let activityEndTime = endTime?.addingTimeInterval(TimeInterval(offset!))
+        
         var runId = 1
         for timing in scheduledTimings {
+            
+            
+            
             
             //run start time creation
             let scheduledStartTime = timing[kScheduleStartTime]
@@ -434,16 +440,20 @@ class Schedule{
             
             let offset = UserDefaults.standard.value(forKey: "offset") as? Int
             let updatedStartTime = runStartDate?.addingTimeInterval(TimeInterval(offset!))
-            let updatedEndTime = runEndDate?.addingTimeInterval(TimeInterval(offset!))
-            if !(updatedEndTime! < startTime) {
-                //appent in activityRun array
-                let activityRun = ActivityRun()
-                activityRun.runId = runId
-                activityRun.startDate = updatedStartTime
-                activityRun.endDate = updatedEndTime
-                activityRuns.append(activityRun)
+            
+            if activityEndTime! > updatedStartTime! {
                 
-                runId += 1
+                let updatedEndTime = runEndDate?.addingTimeInterval(TimeInterval(offset!))
+                if !(updatedEndTime! < startTime) {
+                    //appent in activityRun array
+                    let activityRun = ActivityRun()
+                    activityRun.runId = runId
+                    activityRun.startDate = updatedStartTime
+                    activityRun.endDate = updatedEndTime
+                    activityRuns.append(activityRun)
+                    
+                    runId += 1
+                }
             }
             //}
             

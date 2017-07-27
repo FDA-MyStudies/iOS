@@ -13,6 +13,8 @@ import ResearchKit
 let kPdfMimeType = "application/pdf"
 let kUTF8Encoding = "UTF-8"
 let kEmailSubject = "Signed Consent"
+let kEmailSubjectDashboard = "Dashboard"
+let kEmailSubjectCharts = "Charts"
 let kConsentFileName = "Consent"
 let kConsentFormat = ".pdf"
 

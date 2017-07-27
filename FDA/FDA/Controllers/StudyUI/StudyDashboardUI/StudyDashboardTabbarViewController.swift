@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import MessageUI
+
 
 class StudyDashboardTabbarViewController: UITabBarController {
 
@@ -25,15 +27,48 @@ class StudyDashboardTabbarViewController: UITabBarController {
         // Dispose of any resources that can be recreated.
     }
     
+    
+    public func shareScreenshotByEmail(image:UIImage!, subject:String!){
+        
+        let imageData = UIImagePNGRepresentation(image)
+        
+        let mailComposerVC = MFMailComposeViewController()
+        mailComposerVC.mailComposeDelegate = self as! MFMailComposeViewControllerDelegate
+        
+        
+        mailComposerVC.setSubject(subject)
+        mailComposerVC.setMessageBody("", isHTML: false)
+        
+        
+        let Filename =   "\((Study.currentStudy?.name)!)" + "_Dashboard"   + ".png"
+        
+        mailComposerVC.addAttachmentData(imageData!, mimeType: "image/png", fileName: Filename)
+        
+        if MFMailComposeViewController.canSendMail()
+        {
+            self.present(mailComposerVC, animated: true, completion: nil)
+        }
+        else{
+            
+            let alert = UIAlertController(title:NSLocalizedString(kTitleError, comment: ""),message:"",preferredStyle: UIAlertControllerStyle.alert)
+            
+            alert.addAction(UIAlertAction.init(title:NSLocalizedString(kTitleOk, comment: ""), style: .default, handler: { (action) in
+                
+                self.dismiss(animated: true, completion: nil)
+                
+            }))
+        }
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        
+        
     }
-    */
-
+    
+    
 }
+
+extension StudyDashboardTabbarViewController:MFMailComposeViewControllerDelegate{
+    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+        controller.dismiss(animated: true, completion: nil)
+    }
+}
+

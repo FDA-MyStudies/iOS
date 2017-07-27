@@ -227,8 +227,21 @@ class StudyDashboardViewController : UIViewController{
      */
     @IBAction func shareButtonAction(_ sender: AnyObject){
         
-        
+        self.shareScreenShotByMail()
     }
+    
+    func shareScreenShotByMail() {
+        //Create the UIImage
+        UIGraphicsBeginImageContext(view.frame.size)
+        view.layer.render(in: UIGraphicsGetCurrentContext()!)
+        let image = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        (self.tabBarController as! StudyDashboardTabbarViewController).shareScreenshotByEmail(image: image,subject: kEmailSubjectDashboard)
+        
+       
+    }
+    
     
     private static let labkeyDateFormatter: DateFormatter = {
         //2017/06/13 18:12:13

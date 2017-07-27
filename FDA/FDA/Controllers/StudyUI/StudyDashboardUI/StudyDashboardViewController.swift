@@ -54,7 +54,8 @@ class StudyDashboardViewController : UIViewController{
         
         
         let ud = UserDefaults.standard
-        if !(ud.bool(forKey: "LabKeyResponseParsed")){
+        let key = "LabKeyResponse" + (Study.currentStudy?.studyId)!
+        if !(ud.bool(forKey: key)){
             self.getDataKeysForCurrentStudy()
         }
        
@@ -191,7 +192,8 @@ class StudyDashboardViewController : UIViewController{
                 
                 
             }
-            UserDefaults.standard.set(true, forKey: "LabKeyResponseParsed")
+            let key = "LabKeyResponse" + (Study.currentStudy?.studyId)!
+            UserDefaults.standard.set(true, forKey: key)
            // print("Labkey response \(StudyDashboard.instance.dashboardResponse)")
         }
         

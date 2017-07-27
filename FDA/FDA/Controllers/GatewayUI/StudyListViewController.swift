@@ -112,6 +112,9 @@ class StudyListViewController: UIViewController {
             appdelegate.askForNotification()
         }
         
+        
+       
+        
     }
     
     override func didReceiveMemoryWarning() {
@@ -257,6 +260,21 @@ class StudyListViewController: UIViewController {
         }
         else {
             //self.checkIfNotificationEnabled()
+            if NotificationHandler.instance.studyId.characters.count > 0 {
+                
+               
+                
+                let studyId = NotificationHandler.instance.studyId
+                
+                let study = Gateway.instance.studies?.filter({$0.studyId == studyId}).first
+                Study.updateCurrentStudy(study: study!)
+                
+                NotificationHandler.instance.studyId = ""
+                
+                self.performTaskBasedOnStudyStatus()
+                
+                
+            }
         }
         
     }
@@ -614,6 +632,71 @@ class StudyListViewController: UIViewController {
             self.checkDatabaseForStudyInfo(study: Study.currentStudy!)
         }
     }
+    
+    func performTaskBasedOnStudyStatus(){
+        
+        let study = Study.currentStudy
+        
+        if User.currentUser.userType == UserType.FDAUser {
+            
+            if Study.currentStudy?.status == .Active{
+                
+                let userStudyStatus =  (Study.currentStudy?.userParticipateState.status)!
+                
+                if userStudyStatus == .completed || userStudyStatus == .inProgress
+                    //|| userStudyStatus == .yetToJoin
+                {
+                    
+                    //self.pushToStudyDashboard()
+                    // check if study version is udpated
+                    if(study?.version != study?.newVersion){
+                        WCPServices().getStudyUpdates(study: study!, delegate: self)
+                    }
+                    else{
+                        
+                        DBHandler.loadStudyDetailsToUpdate(studyId: (study?.studyId)!, completionHandler: { (success) in
+                            self.pushToStudyDashboard()
+                        })
+                    }
+                }
+                else {
+                    
+                    self.checkForStudyUpdate(study: study)
+                }
+            }
+            else  if Study.currentStudy?.status == .Paused{
+                let userStudyStatus =  (Study.currentStudy?.userParticipateState.status)!
+                
+                if userStudyStatus == .completed || userStudyStatus == .inProgress {
+                    
+                    UIUtilities.showAlertWithTitleAndMessage(title: "", message: NSLocalizedString(kMessageForStudyPausedAfterJoiningState, comment: "") as NSString)
+                }
+                else {
+                    self.checkForStudyUpdate(study: study)
+                }
+            }
+            else {
+                
+                self.checkForStudyUpdate(study: study)
+            }
+        }
+        else {
+            
+            self.checkForStudyUpdate(study: study)
+            
+        }
+    }
+    
+    func checkForStudyUpdate(study:Study?){
+        
+        if(study?.version != study?.newVersion){
+            WCPServices().getStudyUpdates(study: study!, delegate: self)
+        }
+        else {
+            self.checkDatabaseForStudyInfo(study: study!)
+        }
+    }
+    
 }
 
 
@@ -653,7 +736,9 @@ extension StudyListViewController :  UITableViewDelegate {
         let study = Gateway.instance.studies?[indexPath.row]
         Study.updateCurrentStudy(study: study!)
         
+        self.performTaskBasedOnStudyStatus()
         
+        /*
         if User.currentUser.userType == UserType.FDAUser {
             
             if Study.currentStudy?.status == .Active{
@@ -723,7 +808,9 @@ extension StudyListViewController :  UITableViewDelegate {
                 self.checkDatabaseForStudyInfo(study: study!)
             }
         }
+ */
     }
+ 
 }
 
 //MARK:- StudyList Delegates

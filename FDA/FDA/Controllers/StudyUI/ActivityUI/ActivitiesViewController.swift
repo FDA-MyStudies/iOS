@@ -60,6 +60,8 @@ class ActivitiesViewController : UIViewController{
             
             
             if StudyUpdates.studyConsentUpdated {
+                
+                NotificationHandler.instance.activityId = ""
                 let appDelegate = UIApplication.shared.delegate as! AppDelegate
                 appDelegate.checkConsentStatus(controller: self)
             }
@@ -133,13 +135,24 @@ class ActivitiesViewController : UIViewController{
             })
 
         }
-        
-        
-        //        ud.removeObject(forKey: "FKC")
-        //        ud.removeObject(forKey: "FetalKickActivityId")
-        //        ud.removeObject(forKey: "FetalKickCounterValue")
-        //        ud.removeObject(forKey: "FetalKickStartTimeStamp")
-        //        ud.synchronize()
+        else {
+            //check if user navigated from notification
+            
+            if NotificationHandler.instance.activityId.characters.count > 0 {
+                
+                let activityId = NotificationHandler.instance.activityId
+                
+                let rowDetail = tableViewSections[0]
+                let activities = rowDetail["activities"] as! Array<Activity>
+                let index = activities.index(where: {$0.actvityId == activityId})
+                let ip = IndexPath.init(row: index!, section: 0)
+                self.selectedIndexPath = ip
+                self.tableView?.selectRow(at: ip, animated: true, scrollPosition:.middle)
+                self.tableView?.delegate?.tableView!(self.tableView!, didSelectRowAt: ip)
+                
+                NotificationHandler.instance.activityId = ""
+            }
+        }
         
         
     }

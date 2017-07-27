@@ -277,21 +277,22 @@
             NotificationCenter.default.addObserver(SyncUpdate.currentSyncUpdate as Any , selector: #selector(SyncUpdate.currentSyncUpdate?.updateData), name:ReachabilityChangedNotification, object: nil)
             
             
-            let date = Date()
-            print("date \(LineChartCell.shortDayFormatter.string(from: date))")
+            //let date = Date()
+            //print("date \(LineChartCell.shortDayFormatter.string(from: date))")
             
             
-            //let ud1 = UserDefaults.standard
+            let ud1 = UserDefaults.standard
             
             if (launchOptions != nil) {
                 
                 
-                //ud1.set("not null", forKey: "launch")
+                ud1.set("not null", forKey: "launch")
                 //ud1.synchronize()
                 print("launchOptions : \(launchOptions)")
                 
                 // Launched from push notification
                 let notification = launchOptions?[.remoteNotification]
+                let localNotification = launchOptions?[.localNotification] as! UILocalNotification
                 
                 if Utilities.isValidObject(someObject: notification as AnyObject){
                     
@@ -305,9 +306,19 @@
 
                     
                 }
+                else if (Utilities.isValidObject(someObject: localNotification.userInfo as AnyObject)){
+                    
+                    ud1.set("local", forKey: "launch")
+                    let notificationDetails = localNotification.userInfo as! Dictionary<String, Any>
+                    NotificationHandler.instance.appOpenFromNotification = true
+                    NotificationHandler.instance.studyId = notificationDetails[kStudyId] as! String!
+                    NotificationHandler.instance.activityId = notificationDetails[kActivityId] as! String!
+                    
+                    ud1.synchronize()
+                }
                 else{
                     
-                   // ud1.set("invalid", forKey: "launch")
+                    ud1.set("invalid", forKey: "launch")
                     UIApplication.shared.applicationIconBadgeNumber = 0
                     
                     let ud = UserDefaults.standard
@@ -319,8 +330,7 @@
             }
             
             self.checkForRealmMigration()
-            
-            //LabKeyServices().getParticipantResponse(activityId: "Q1", participantId: "1a3d0d308df81024f8bfd7f11f7a0168", delegate: self)
+         
             
             return true
             
@@ -404,6 +414,7 @@
              */
             
             UIApplication.shared.applicationIconBadgeNumber = 0
+           
             
             if self.appIsResignedButDidNotEnteredBackground! {
                 
@@ -767,7 +778,56 @@
             
             topVC?.present(taskViewController!, animated: true, completion: nil)
         }
-        
+        func handleLocalNotification(userInfoDetails:Dictionary<String,Any>){
+            
+            
+            var initialVC:UIViewController?
+            
+            let navigationController =  (self.window?.rootViewController as! UINavigationController)
+            let menuVC = navigationController.viewControllers.last
+            if  menuVC is FDASlideMenuViewController {
+                let mainController =  (menuVC as! FDASlideMenuViewController).mainViewController
+                if mainController is UINavigationController {
+                    let nav = (mainController as! UINavigationController)
+                    initialVC = nav.viewControllers.last
+                    }
+                
+            }
+            
+            
+//            var activityId:String? = ""
+//            
+//            if Utilities.isValidValue(someObject: userInfoDetails[kActivityId] as AnyObject){
+//                activityId = userInfoDetails[kActivityId] as? String
+//            }
+            
+//            var resourceId:String? = ""
+//            if Utilities.isValidValue(someObject: userInfoDetails[kResourceId] as AnyObject){
+//                resourceId = userInfoDetails[kResourceId] as? String
+//            }
+            
+           
+            NotificationHandler.instance.appOpenFromNotification = true
+            NotificationHandler.instance.studyId = userInfoDetails[kStudyId] as! String!
+            NotificationHandler.instance.activityId = userInfoDetails[kActivityId] as! String!
+            
+            if !(initialVC is UITabBarController){
+                //push tabbar and switch to activty tab
+                if !(initialVC is StudyListViewController) {
+                    
+                    let leftController = (menuVC as! FDASlideMenuViewController).leftViewController as! LeftMenuViewController
+                    leftController.changeViewController(.studyList)
+                    leftController.createLeftmenuItems()
+                }
+             }
+            else {
+                //switch to activty tab
+                
+                (initialVC as! UITabBarController).selectedIndex =  0 //(notificationSubType! as AppNotification.NotificationSubType == .Activity) ? 0 : 2
+                
+                
+            }
+        }
         func handleLocalAndRemoteNotification(userInfoDetails:Dictionary<String,Any>){
             /*
              let filePath  = Bundle.main.path(forResource: "Labkey_Activity", ofType: "json")
@@ -823,11 +883,6 @@
                                 
                                 
                                 
-                                //                                if tabbarVC is StudyDashboardTabbarViewController{
-                                //                                    let studyTabBar = tabbarVC as! StudyDashboardTabbarViewController
-                                //                                    selectedController = ((studyTabBar.viewControllers?[studyTabBar.selectedIndex]) as! UINavigationController).viewControllers.last
-                                //
-                                //                                }
                                 
                                 
                             }
@@ -876,25 +931,6 @@
                                         
                                         print("switch to activty tab")
                                     }
-                                    
-                                    //                       if !(initialVC is ActivitiesViewController){
-                                    //
-                                    //                            if initialVC is StudyListViewController {
-                                    //
-                                    //                            }
-                                    //                            else if initialVC is ResourcesViewController{
-                                    //
-                                    //                            }
-                                    //                            else if initialVC is ReachoutOptionsViewController{
-                                    //
-                                    //                            }
-                                    //                            else if initialVC is ProfileViewController{
-                                    //
-                                    //                            }
-                                    
-                                    //                       }
-                                    
-                                    
                                     
                                 case .Study:
                                     
@@ -1880,19 +1916,30 @@
         func userNotificationCenter(_ center: UNUserNotificationCenter,
                                     didReceive response: UNNotificationResponse,
                                     withCompletionHandler completionHandler: @escaping () -> Void) {
+            
+            
+            
             let userInfo = response.notification.request.content.userInfo
             print("REMOTE NOTIFICATION:" + "\(userInfo)")
+            print("application state \(UIApplication.shared.applicationState.rawValue)")
+            UIApplication.shared.applicationIconBadgeNumber = 0
             
-            if (UIApplication.shared.applicationState == UIApplicationState.active || (UIApplication.shared.applicationState == UIApplicationState.inactive)) {//|| (UIApplication.shared.applicationState == UIApplicationState.background){
-                UIApplication.shared.applicationIconBadgeNumber = 0
+            if (UIApplication.shared.applicationState == UIApplicationState.background || (UIApplication.shared.applicationState == UIApplicationState.inactive)) {//|| (UIApplication.shared.applicationState == UIApplicationState.background){
+                
                 
                 self.handleLocalAndRemoteNotification(userInfoDetails: userInfo as! Dictionary<String, Any>)
                 
-                //self.handlePushNotificationResponse(userInfo : userInfo as NSDictionary)
+                
             }
             
             if userInfo.count > 0 && userInfo.keys.contains(kType){
                 self.updateNotification()
+            }
+            else {
+                if (UIApplication.shared.applicationState == UIApplicationState.background || (UIApplication.shared.applicationState == UIApplicationState.inactive)){
+                    self.handleLocalNotification(userInfoDetails: userInfo as! Dictionary<String, Any>)
+                }
+                
             }
             
             

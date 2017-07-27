@@ -277,3 +277,10 @@ class LocalNotification: NSObject {
     }()
     
 }
+
+class NotificationHandler: NSObject {
+    var studyId:String! = ""
+    var activityId:String! = ""
+    var appOpenFromNotification = false
+    static var instance = NotificationHandler()
+}

@@ -64,7 +64,8 @@ class ChartsViewController: UIViewController {
         let savedContentOffset = self.tableView.contentOffset
         let savedFrame = tableView.frame
         
-        UIGraphicsBeginImageContext(tableView.contentSize)
+        
+        UIGraphicsBeginImageContextWithOptions(tableView.contentSize, self.view.isOpaque, 0.0)
         tableView.contentOffset = .zero
         tableView.frame = CGRect(x: 0, y: 0, width: tableView.contentSize.width, height: tableView.contentSize.height)
         tableView.layer.render(in: UIGraphicsGetCurrentContext()!)

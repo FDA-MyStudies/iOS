@@ -232,7 +232,8 @@ class StudyDashboardViewController : UIViewController{
     
     func shareScreenShotByMail() {
         //Create the UIImage
-        UIGraphicsBeginImageContext(view.frame.size)
+       
+        UIGraphicsBeginImageContextWithOptions(view.bounds.size, self.view.isOpaque, 0.0)
         view.layer.render(in: UIGraphicsGetCurrentContext()!)
         let image = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()

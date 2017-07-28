@@ -14,6 +14,9 @@
 		482CC61E1EC5F52E00BFE8C6 /* KDCircularProgress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 482CC61D1EC5F52E00BFE8C6 /* KDCircularProgress.swift */; };
 		4833E9DF1E7126900032D244 /* StudyHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4833E9DE1E7126900032D244 /* StudyHomeViewController.swift */; };
 		4833E9E31E712C2B0032D244 /* StudyOverview.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4833E9E21E712C2B0032D244 /* StudyOverview.plist */; };
+		484ACBF61F2896A500BCC819 /* FilterListCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 484ACBF51F2896A500BCC819 /* FilterListCollectionViewCell.swift */; };
+		484ACBFC1F28A82B00BCC819 /* FilterData.plist in Resources */ = {isa = PBXBuildFile; fileRef = 484ACBFB1F28A82B00BCC819 /* FilterData.plist */; };
+		484ACC001F28BC8800BCC819 /* FilterListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 484ACBFF1F28BC8800BCC819 /* FilterListTableViewCell.swift */; };
 		48567FDD1F14F72900857193 /* 13.png in Resources */ = {isa = PBXBuildFile; fileRef = 48567FDC1F14F72900857193 /* 13.png */; };
 		48567FE11F14FB3C00857193 /* FilterListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48567FE01F14FB3C00857193 /* FilterListViewController.swift */; };
 		486304D61E6FE77C003CD406 /* GatewayOverview.plist in Resources */ = {isa = PBXBuildFile; fileRef = 486304D51E6FE77C003CD406 /* GatewayOverview.plist */; };
@@ -263,6 +266,9 @@
 		482CC61D1EC5F52E00BFE8C6 /* KDCircularProgress.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KDCircularProgress.swift; sourceTree = "<group>"; };
 		4833E9DE1E7126900032D244 /* StudyHomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudyHomeViewController.swift; sourceTree = "<group>"; };
 		4833E9E21E712C2B0032D244 /* StudyOverview.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = StudyOverview.plist; sourceTree = "<group>"; };
+		484ACBF51F2896A500BCC819 /* FilterListCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterListCollectionViewCell.swift; sourceTree = "<group>"; };
+		484ACBFB1F28A82B00BCC819 /* FilterData.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = FilterData.plist; sourceTree = "<group>"; };
+		484ACBFF1F28BC8800BCC819 /* FilterListTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterListTableViewCell.swift; sourceTree = "<group>"; };
 		48567FDC1F14F72900857193 /* 13.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 13.png; sourceTree = "<group>"; };
 		48567FE01F14FB3C00857193 /* FilterListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterListViewController.swift; sourceTree = "<group>"; };
 		486304D51E6FE77C003CD406 /* GatewayOverview.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = GatewayOverview.plist; sourceTree = "<group>"; };
@@ -1138,6 +1144,9 @@
 				94B3DD211E6ED8E500327AE5 /* StudyListCell.swift */,
 				94B3DD221E6ED8E500327AE5 /* StudyListViewController.swift */,
 				48567FE01F14FB3C00857193 /* FilterListViewController.swift */,
+				484ACBFB1F28A82B00BCC819 /* FilterData.plist */,
+				484ACBF51F2896A500BCC819 /* FilterListCollectionViewCell.swift */,
+				484ACBFF1F28BC8800BCC819 /* FilterListTableViewCell.swift */,
 				940577A71E767AC60043215C /* ChangePasswordViewController.swift */,
 				940577AB1E767C8D0043215C /* ChangePasswordData.plist */,
 			);
@@ -1514,6 +1523,7 @@
 				945B32511EE5550B00E46EDC /* AppGlossary.pdf in Resources */,
 				6E14F2031F0224AD00EA8D1E /* Notification.json in Resources */,
 				6EB740281E9D1F8700A4C773 /* 03.png in Resources */,
+				484ACBFC1F28A82B00BCC819 /* FilterData.plist in Resources */,
 				6EE93DC91E93C8850027A5DC /* Activities.plist in Resources */,
 				94B3DD521E6ED8E500327AE5 /* LoginAssets.xcassets in Resources */,
 				6ECF75D21E6EF1E7008C935E /* FetalKickCounter.xcassets in Resources */,
@@ -1756,6 +1766,7 @@
 				6E183AB31E966230005D7A27 /* FileDownloadManager.swift in Sources */,
 				9487102A1E546C3800246109 /* AppNotification.swift in Sources */,
 				94B3DD421E6ED8E500327AE5 /* NotificationTableViewCell.swift in Sources */,
+				484ACBF61F2896A500BCC819 /* FilterListCollectionViewCell.swift in Sources */,
 				6ED8A2E61E447AA2004DEC01 /* Formatter.swift in Sources */,
 				94334F8C1E701EB700755444 /* NavigationBackButton.swift in Sources */,
 				6EBC2E801E94FB5300828CA1 /* StudyDashboardViewController.swift in Sources */,
@@ -1804,6 +1815,7 @@
 				6EB740261E9D028000A4C773 /* FetalKickIntroStepViewController.swift in Sources */,
 				9491F7FA1E825FA80018C15E /* DBUser.swift in Sources */,
 				6ED1B2341E54256700BF463F /* ActivityStep.swift in Sources */,
+				484ACC001F28BC8800BCC819 /* FilterListTableViewCell.swift in Sources */,
 				6EBC2E831E94FB5300828CA1 /* StudyDashboardActivityTableViewCell.swift in Sources */,
 				6EC1291F1E64241200B90167 /* ConsentResult.swift in Sources */,
 				94CD96EF1E4B16D900946477 /* WCPConfiguration.swift in Sources */,

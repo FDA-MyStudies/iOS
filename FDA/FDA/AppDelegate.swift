@@ -483,6 +483,7 @@
             print("Token Registration failed in simulator \(error)")
             
         }
+        
         func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any]) {
             print("REMOTE NOTIFICATION:" + "\(userInfo)")
             
@@ -493,6 +494,12 @@
             
             if userInfo.count > 0 && userInfo.keys.contains(kType){
                 self.updateNotification()
+            }
+            else {
+                if (UIApplication.shared.applicationState == UIApplicationState.background || (UIApplication.shared.applicationState == UIApplicationState.inactive)){
+                    self.handleLocalNotification(userInfoDetails: userInfo as! Dictionary<String, Any>)
+                }
+                
             }
             
         }
@@ -530,6 +537,12 @@
             
             if userInfo.count > 0 && userInfo.keys.contains(kType){
                 self.updateNotification()
+            }
+            else {
+                if (UIApplication.shared.applicationState == UIApplicationState.background || (UIApplication.shared.applicationState == UIApplicationState.inactive)){
+                    self.handleLocalNotification(userInfoDetails: userInfo as! Dictionary<String, Any>)
+                }
+                
             }
 
             

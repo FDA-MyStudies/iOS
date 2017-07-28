@@ -149,16 +149,7 @@ class StudyOverviewViewControllerFirst : UIViewController{
             }
             
             let url : NSURL = NSURL(string: overviewSectionDetail.link!)!
-//            moviePlayer = MPMoviePlayerViewController(contentURL:url as URL!)
-//            
-//            moviePlayer.moviePlayer.movieSourceType = .streaming
-//            
-//            NotificationCenter.default.addObserver(self, selector:#selector(StudyOverviewViewControllerFirst.moviePlayBackDidFinish(notification:)),
-//                                                   name: NSNotification.Name.MPMoviePlayerPlaybackDidFinish,
-//                                                   object: moviePlayer.moviePlayer)
-//            
-//            self.present(moviePlayer, animated: true, completion: nil)
-            //let videoURL = URL(string: "https://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4")
+
             let player = AVPlayer(url: url as URL)
             NotificationCenter.default.addObserver(self, selector:#selector(StudyOverviewViewControllerFirst.playerDidFinishPlaying(note:)),
                                                    name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: player.currentItem)

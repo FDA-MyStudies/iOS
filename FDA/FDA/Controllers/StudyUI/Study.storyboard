@@ -648,7 +648,7 @@
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LYX-5F-scC">
-                                <rect key="frame" x="16" y="28" width="20" height="22"/>
+                                <rect key="frame" x="16" y="35" width="20" height="22"/>
                                 <state key="normal" image="homeIconWhite"/>
                                 <connections>
                                     <action selector="homeButtonAction:" destination="Ivr-tV-60u" eventType="touchUpInside" id="sHp-Gg-E5b"/>
@@ -664,7 +664,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MYG-14-Lp0">
-                                <rect key="frame" x="342" y="28" width="15" height="22"/>
+                                <rect key="frame" x="342" y="35" width="15" height="22"/>
                                 <state key="normal" image="shareIcon"/>
                                 <connections>
                                     <action selector="shareButtonAction:" destination="Ivr-tV-60u" eventType="touchUpInside" id="vxm-JJ-Ii0"/>
@@ -1197,7 +1197,7 @@
                         <constraints>
                             <constraint firstItem="CGF-M8-TqW" firstAttribute="top" secondItem="gvo-He-ly7" secondAttribute="bottom" id="2nY-2C-r1l"/>
                             <constraint firstItem="zyD-Rd-9k5" firstAttribute="width" secondItem="blp-fg-T0R" secondAttribute="width" id="3D9-U5-1zz"/>
-                            <constraint firstItem="LYX-5F-scC" firstAttribute="top" secondItem="sDb-kq-gfo" secondAttribute="bottom" constant="8" id="DAF-qU-78i"/>
+                            <constraint firstItem="LYX-5F-scC" firstAttribute="top" secondItem="sDb-kq-gfo" secondAttribute="bottom" constant="15" id="DAF-qU-78i"/>
                             <constraint firstItem="zyD-Rd-9k5" firstAttribute="centerX" secondItem="blp-fg-T0R" secondAttribute="centerX" id="HBu-f5-aMt"/>
                             <constraint firstItem="gvo-He-ly7" firstAttribute="leading" secondItem="blp-fg-T0R" secondAttribute="leading" id="Ie8-mJ-KHy"/>
                             <constraint firstItem="LYX-5F-scC" firstAttribute="leading" secondItem="blp-fg-T0R" secondAttribute="leadingMargin" id="QWr-bG-GQa"/>
@@ -1209,7 +1209,7 @@
                             <constraint firstAttribute="trailing" secondItem="gvo-He-ly7" secondAttribute="trailing" id="a3x-7H-w0m"/>
                             <constraint firstItem="TFh-y2-sZW" firstAttribute="top" secondItem="sDb-kq-gfo" secondAttribute="bottom" constant="1" id="f8Z-Aw-pFj"/>
                             <constraint firstAttribute="trailing" secondItem="CGF-M8-TqW" secondAttribute="trailing" id="nIW-Km-8gp"/>
-                            <constraint firstItem="MYG-14-Lp0" firstAttribute="top" secondItem="sDb-kq-gfo" secondAttribute="bottom" constant="8" id="vcd-HX-8zr"/>
+                            <constraint firstItem="MYG-14-Lp0" firstAttribute="top" secondItem="sDb-kq-gfo" secondAttribute="bottom" constant="15" id="vcd-HX-8zr"/>
                             <constraint firstItem="TFh-y2-sZW" firstAttribute="centerX" secondItem="blp-fg-T0R" secondAttribute="centerX" id="wqv-0c-bGM"/>
                             <constraint firstAttribute="trailingMargin" secondItem="MYG-14-Lp0" secondAttribute="trailing" constant="2" id="x6J-fy-g1x"/>
                         </constraints>

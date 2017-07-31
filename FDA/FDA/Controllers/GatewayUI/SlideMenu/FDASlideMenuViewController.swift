@@ -104,6 +104,11 @@ open class FDASlideMenuViewController: SlideMenuController {
             ORKPasscodeViewController.removePasscodeFromKeychain()
         }
         
+        
+        //cancel all local notification
+        LocalNotification.cancelAllLocalNotification()
+
+        
         let ud = UserDefaults.standard
         ud.removeObject(forKey: kUserAuthToken)
         ud.removeObject(forKey: kUserId)

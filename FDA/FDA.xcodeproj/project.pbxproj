@@ -1993,7 +1993,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.hphci.fda.mobilestudies;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "8615c646-bd1c-4c63-95ab-09e2b80df28e";
+				PROVISIONING_PROFILE = "603f4edb-c476-41f2-a4a0-7c6526258acb";
 				PROVISIONING_PROFILE_SPECIFIER = HPHC_Development;
 				SWIFT_OBJC_BRIDGING_HEADER = "FDA/Controllers/LoginRegisterUI/FDA-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";

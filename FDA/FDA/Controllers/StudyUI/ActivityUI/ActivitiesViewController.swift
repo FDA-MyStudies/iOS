@@ -24,12 +24,15 @@ enum ActivityAvailabilityStatus:Int{
 class ActivitiesViewController : UIViewController{
     
     @IBOutlet var tableView : UITableView?
+    @IBOutlet var labelNoNetworkAvailable:UILabel?
     
     var tableViewSections:Array<Dictionary<String,Any>>! = []
     var lastFetelKickIdentifer:String = ""  //TEMP
     var selectedIndexPath:IndexPath? = nil
     var isAnchorDateSet:Bool = false
     var taskControllerPresented = false
+    
+    
     
     //MARK:- Viewcontroller Lifecycle
     override func viewDidLoad() {
@@ -84,6 +87,14 @@ class ActivitiesViewController : UIViewController{
             self.checkForActivitiesUpdates()
         }
         
+        if tableViewSections.count == 0{
+            self.tableView?.isHidden = true
+            self.labelNoNetworkAvailable?.isHidden = false
+        }
+        else{
+            self.tableView?.isHidden = false
+            self.labelNoNetworkAvailable?.isHidden = true
+        }
         
     }
     
@@ -447,6 +458,9 @@ class ActivitiesViewController : UIViewController{
         
         self.tableView?.reloadData()
         self.removeProgressIndicator()
+        
+        self.tableView?.isHidden = false
+        self.labelNoNetworkAvailable?.isHidden = true
         
         self.updateCompletionAdherence()
         
@@ -904,7 +918,16 @@ extension ActivitiesViewController:NMWebServiceDelegate {
             
             if requestName as String == RegistrationMethods.activityState.method.methodName{
                 //self.sendRequesToGetActivityList()
-                self.loadActivitiesFromDatabase()
+                if (error.code != NoNetworkErrorCode) {
+                    self.loadActivitiesFromDatabase()
+                }
+                else {
+                    
+                    self.tableView?.isHidden = true
+                    self.labelNoNetworkAvailable?.isHidden = false
+                    
+                     UIUtilities.showAlertWithTitleAndMessage(title:NSLocalizedString(kErrorTitle, comment: "") as NSString, message: error.localizedDescription as NSString)
+                }
             }
             else if requestName as String == ResponseMethods.processResponse.method.methodName {
                 

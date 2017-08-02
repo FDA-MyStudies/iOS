@@ -39,6 +39,11 @@ class StudyFilterViewController: UIViewController {
         super.viewDidLoad()
         applyButton?.layer.borderColor = kUicolorForButtonBackground
         cancelButton?.layer.borderColor = kUicolorForCancelBackground
+        
+        if let layout = collectionView?.collectionViewLayout as? PinterestLayout {
+            layout.delegate = self
+        }
+        
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -153,6 +158,8 @@ extension StudyFilterViewController : UICollectionViewDataSource{//,UICollection
 //        self.performSegue(withIdentifier: keventDetailsSegue, sender: nil)
 //    }
 }
+
+/*
 extension StudyFilterViewController:UICollectionViewDelegateFlowLayout{
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -168,8 +175,26 @@ extension StudyFilterViewController:UICollectionViewDelegateFlowLayout{
         return CGSize.init(width: (screenwidth-20)/2, height: height) //CGSizeMake(64, 64)
     }
 }
-
-
+*/
+extension StudyFilterViewController:PinterestLayoutDelegate{
+    // 1. Returns the photo height
+    func collectionView(_ collectionView:UICollectionView, heightForPhotoAtIndexPath indexPath:IndexPath , withWidth width:CGFloat) -> CGFloat {
+        let screenwidth = UIScreen.main.bounds.size.width
+        
+        let filterOptions = StudyFilterHandler.instance.filterOptions[indexPath.row]
+        var headerHeight = 0
+        if filterOptions.title.characters.count > 0 {
+            headerHeight = 40
+        }
+        let height:CGFloat = CGFloat((filterOptions.filterValues.count * 50) + headerHeight)
+        return height
+    }
+    
+    // 2. Returns the annotation size based on the text
+    func collectionView(_ collectionView: UICollectionView, heightForAnnotationAtIndexPath indexPath: IndexPath, withWidth width: CGFloat) -> CGFloat {
+        return 0
+    }
+}
 
 class StudyFilterHandler {
     var filterOptions:Array<FilterOptions> = []

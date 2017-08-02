@@ -26,7 +26,7 @@ class FilterListTableViewCell: UITableViewCell {
 
     func populateCellWith(filterValue: FilterValues){
         self.name?.text = filterValue.title
-        
+        self.name?.sizeToFit()
         
         if filterValue.isSelected{
             self.imageSelected?.image = UIImage(named:"checked")

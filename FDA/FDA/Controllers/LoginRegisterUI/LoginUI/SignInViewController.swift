@@ -138,7 +138,16 @@ class SignInViewController : UIViewController{
             self.showAlertMessages(textMessage: kMessagePasswordBlank)
             
         }else{
-            print("Call the webservice")
+            
+            let ud = UserDefaults.standard
+            if user.emailId == kStagingUserEmailId {
+                ud.set(true, forKey: kIsStagingUser)
+            }
+            else {
+                ud.set(false, forKey: kIsStagingUser)
+            }
+            ud.synchronize()
+            
             UserServices().loginUser(self)
         }
     }

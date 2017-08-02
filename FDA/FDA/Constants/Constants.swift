@@ -179,3 +179,9 @@ let kMessageForStudyEnrollingNotAllowed = "Sorry, enrollment for this study has 
 
 let unwindToStudyListDashboard = "unwindToStudyListDashboardIdentifier"
 
+//MARK:- Staging User Details
+
+let kStagingUserEmailId = "aqibm@boston-technology.com"
+let kIsStagingUser = "StagingUser"
+
+

@@ -50,7 +50,7 @@ struct WCPServerURLConstants {
     //static let DevelopmentURL = "https://hphci-fdama-te-wcp-01.labkey.com/StudyMetaData/"
     
     //Lab UAT Server
-    static let ProductionURL =  "https://hphci-fdama-st-wcp-01.labkey.com/StudyMetaData/"
+    static let ProductionURL =  "https://hphci-fdama-pr-wcp-01.labkey.com/StudyMetaData/"
     static let DevelopmentURL = "https://hphci-fdama-st-wcp-01.labkey.com/StudyMetaData/"
     
     //Lab Production Server

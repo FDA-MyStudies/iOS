@@ -735,7 +735,7 @@ class UserActivityStatus{
     var bookmarked:Bool = false
     var activityId:String! = ""
     var studyId:String! = ""
-    var activityVersion:String! = ""
+    var activityVersion:String! = "1.0"
     var activityRunId:String! = ""
     var totalRuns = 0
     var compeltedRuns = 0
@@ -815,6 +815,7 @@ class UserActivityStatus{
                            kActivityId:self.activityId,
                            kActivityRunId:self.activityRunId,
                            kActivityStatus:self.status.paramValue,
+                           kActivityVersion:self.activityVersion,
                            "activityRun":runDetail] as [String : Any]
        
         return studyDetail

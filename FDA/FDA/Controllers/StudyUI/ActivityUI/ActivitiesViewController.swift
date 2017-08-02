@@ -500,6 +500,7 @@ class ActivitiesViewController : UIViewController{
         activityStatus.compeltedRuns = activity.compeltedRuns
         activityStatus.incompletedRuns = activity.incompletedRuns
         activityStatus.totalRuns = activity.totalRuns
+        activityStatus.activityVersion = activity.version
         
         UserServices().updateUserActivityParticipatedStatus(studyId:activity.studyId!, activityStatus: activityStatus, delegate: self)
         
@@ -656,6 +657,7 @@ class ActivitiesViewController : UIViewController{
         activityStatus.compeltedRuns = activity.compeltedRuns
         activityStatus.incompletedRuns = activity.incompletedRuns
         activityStatus.totalRuns = activity.totalRuns
+        activityStatus.activityVersion = activity.version
         
         UserServices().updateUserActivityParticipatedStatus(studyId:activity.studyId!, activityStatus: activityStatus, delegate: self)
         

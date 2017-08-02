@@ -13,25 +13,40 @@
 				<key>name</key>
 				<string>Active</string>
 				<key>isEnabled</key>
-				<string>NO</string>
+				<false/>
 			</dict>
 			<dict>
 				<key>name</key>
 				<string>Closed</string>
 				<key>isEnabled</key>
-				<string>NO</string>
+				<false/>
 			</dict>
 			<dict>
 				<key>name</key>
 				<string>Upcoming</string>
 				<key>isEnabled</key>
-				<string>NO</string>
+				<false/>
 			</dict>
 			<dict>
 				<key>name</key>
 				<string>Paused</string>
 				<key>isEnabled</key>
-				<string>NO</string>
+				<false/>
+			</dict>
+		</array>
+	</dict>
+	<dict>
+		<key>isHeaderAvailable</key>
+		<string>NO</string>
+		<key>headerText</key>
+		<string></string>
+		<key>studyData</key>
+		<array>
+			<dict>
+				<key>name</key>
+				<string>Bookmarked</string>
+				<key>isEnabled</key>
+				<false/>
 			</dict>
 		</array>
 	</dict>
@@ -46,46 +61,31 @@
 				<key>name</key>
 				<string>In Progress</string>
 				<key>isEnabled</key>
-				<string>NO</string>
+				<false/>
 			</dict>
 			<dict>
 				<key>name</key>
 				<string>Completed</string>
 				<key>isEnabled</key>
-				<string>NO</string>
+				<false/>
 			</dict>
 			<dict>
 				<key>name</key>
 				<string>Withdrawn</string>
 				<key>isEnabled</key>
-				<string>NO</string>
+				<false/>
 			</dict>
 			<dict>
 				<key>name</key>
 				<string>Not Eligebile</string>
 				<key>isEnabled</key>
-				<string>NO</string>
+				<false/>
 			</dict>
 			<dict>
 				<key>name</key>
 				<string>Yet to Join</string>
 				<key>isEnabled</key>
-				<string>NO</string>
-			</dict>
-		</array>
-	</dict>
-	<dict>
-		<key>isHeaderAvailable</key>
-		<string>NO</string>
-		<key>headerText</key>
-		<string>StudyStatus</string>
-		<key>studyData</key>
-		<array>
-			<dict>
-				<key>name</key>
-				<string>Bookmarked</string>
-				<key>isEnabled</key>
-				<string>NO</string>
+				<false/>
 			</dict>
 		</array>
 	</dict>
@@ -100,25 +100,61 @@
 				<key>name</key>
 				<string>Pregnancy</string>
 				<key>isEnabled</key>
-				<string>NO</string>
+				<false/>
 			</dict>
 			<dict>
 				<key>name</key>
 				<string>Fitness</string>
 				<key>isEnabled</key>
-				<string>NO</string>
+				<false/>
 			</dict>
 			<dict>
 				<key>name</key>
 				<string>Nutrition</string>
 				<key>isEnabled</key>
-				<string>NO</string>
+				<false/>
 			</dict>
 			<dict>
 				<key>name</key>
 				<string>Lifestyle</string>
 				<key>isEnabled</key>
-				<string>NO</string>
+				<false/>
+			</dict>
+			<dict>
+				<key>name</key>
+				<string>Lifestyle</string>
+				<key>isEnabled</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>name</key>
+				<string>Lifestyle</string>
+				<key>isEnabled</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>name</key>
+				<string>Lifestyle</string>
+				<key>isEnabled</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>name</key>
+				<string>Lifestyle</string>
+				<key>isEnabled</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>name</key>
+				<string>Lifestyle</string>
+				<key>isEnabled</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>name</key>
+				<string>Lifestyle</string>
+				<key>isEnabled</key>
+				<false/>
 			</dict>
 		</array>
 	</dict>

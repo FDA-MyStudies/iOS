@@ -24,11 +24,11 @@ class FilterListTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
 
-    func populateCellWith(study: NSDictionary){
-        self.name?.text = study["name"] as? String
+    func populateCellWith(filterValue: FilterValues){
+        self.name?.text = filterValue.title
         
-        let isselected = study["isEnabled"] as! String
-        if isselected == "YES"{
+        
+        if filterValue.isSelected{
             self.imageSelected?.image = UIImage(named:"checked")
         }else{
             self.imageSelected?.image = UIImage(named:"notChecked")

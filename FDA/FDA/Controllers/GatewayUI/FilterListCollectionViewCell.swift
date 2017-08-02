@@ -11,20 +11,24 @@ import UIKit
 class FilterListCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet weak var tableView : UITableView?
+    @IBOutlet weak var tableViewHeader : UIView?
+    @IBOutlet weak var labelHeaderTitle : UILabel?
     
     var headerName = ""
     var studyData = NSMutableArray()
+    var filterOptions:FilterOptions!
     
-    func displayCollectionData(data : NSDictionary){
+    func displayCollectionData(data : FilterOptions){
     
-        studyData = data["studyData"] as! NSMutableArray
-        
-//        let view = UIView.init(frame: CGRect(x: 0, y: 0, width: (tableView?.frame.width)!, height: 20))
-//        view.backgroundColor = UIColor.lightGray
-//        let label = UILabel.init(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height))
-//        label.text = "STUDY STATUS"
-//        view.addSubview(label)
-//        tableView?.tableHeaderView = view
+        //studyData = data["studyData"] as! NSMutableArray
+        filterOptions = data
+        if filterOptions.title.characters.count == 0{
+            tableView?.tableHeaderView = nil
+        }
+        else {
+            labelHeaderTitle?.text = filterOptions.title
+            tableView?.tableHeaderView = tableViewHeader
+        }
         
         tableView?.reloadData()
     }
@@ -34,7 +38,7 @@ class FilterListCollectionViewCell: UICollectionViewCell {
 extension FilterListCollectionViewCell : UITableViewDelegate , UITableViewDataSource{
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return studyData.count
+        return filterOptions.filterValues.count //studyData.count
     }
     /*
     
@@ -73,16 +77,18 @@ extension FilterListCollectionViewCell : UITableViewDelegate , UITableViewDataSo
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! FilterListTableViewCell
         
-        let data = studyData[indexPath.row] as! NSDictionary
-        
-        cell.populateCellWith(study: data)
+        let data = filterOptions.filterValues[indexPath.row]
+        cell.populateCellWith(filterValue: data)
         
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        let data = filterOptions.filterValues[indexPath.row]
+        data.isSelected = !data.isSelected
         
+        tableView.reloadData()
         
     }
 

@@ -47,9 +47,29 @@ class StudyFilterViewController: UIViewController {
         let plistPath = Bundle.main.path(forResource: "FilterData", ofType: ".plist", inDirectory:nil)
         filterData = NSMutableArray.init(contentsOfFile: plistPath!)!
         
+       if StudyFilterHandler.instance.filterOptions.count == 0 {
+            var filterOptionsList:Array<FilterOptions> = []
+            
+            for options in filterData! {
+                let values = (options as! Dictionary<String,Any>)["studyData"] as! Array<Dictionary<String,Any>>
+                let filterOptions = FilterOptions()
+                filterOptions.title = (options as! Dictionary<String,Any>)["headerText"] as! String!
+                
+                
+                var filterValues:Array<FilterValues> = []
+                for value in values {
+                    let filterValue = FilterValues()
+                    filterValue.title = value["name"] as! String!
+                    filterValue.isSelected = value["isEnabled"] as! Bool //(value["isEnabled"] != nil)
+                    filterValues.append(filterValue)
+                }
+                filterOptions.filterValues = filterValues
+                filterOptionsList.append(filterOptions)
+            }
+            StudyFilterHandler.instance.filterOptions = filterOptionsList
+        }
         
-        
-        
+        self.collectionView?.reloadData()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -61,7 +81,7 @@ class StudyFilterViewController: UIViewController {
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         
-        filterData?.removeAllObjects()
+        //filterData?.removeAllObjects()
     }
     
     
@@ -109,18 +129,19 @@ class StudyFilterViewController: UIViewController {
 extension StudyFilterViewController : UICollectionViewDataSource{//,UICollectionViewDelegate {
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return filterData!.count
+        return StudyFilterHandler.instance.filterOptions.count //filterData!.count
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! FilterListCollectionViewCell
 
-        let data = filterData?[indexPath.row] as! NSDictionary
-        cell.displayCollectionData(data: data)
+        //let data = filterData?[indexPath.row] as! NSDictionary
+        let filterOption = StudyFilterHandler.instance.filterOptions[indexPath.row]
+        cell.displayCollectionData(data: filterOption)
 
         return cell
     }
-
+   
 //    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
 //
 //        print("Collection view at row \(collectionView.tag) selected index path \(indexPath)")
@@ -132,11 +153,38 @@ extension StudyFilterViewController : UICollectionViewDataSource{//,UICollection
 //        self.performSegue(withIdentifier: keventDetailsSegue, sender: nil)
 //    }
 }
+extension StudyFilterViewController:UICollectionViewDelegateFlowLayout{
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        
+        let screenwidth = UIScreen.main.bounds.size.width
+        let filterOptions = StudyFilterHandler.instance.filterOptions[indexPath.row]
+        var headerHeight = 0
+        if filterOptions.title.characters.count > 0 {
+            headerHeight = 40
+        }
+        let height:CGFloat = CGFloat((filterOptions.filterValues.count * 50) + headerHeight)
+        
+        return CGSize.init(width: (screenwidth-20)/2, height: height) //CGSizeMake(64, 64)
+    }
+}
 
 
 
+class StudyFilterHandler {
+    var filterOptions:Array<FilterOptions> = []
+    static var instance = StudyFilterHandler()
+}
 
-
+class FilterOptions{
+    var title:String!
+    var filterValues:Array<FilterValues> = []
+}
+class FilterValues {
+    
+    var title:String!
+    var isSelected = false
+}
 
 
 

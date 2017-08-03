@@ -34,12 +34,17 @@ class FilterListCollectionViewCell: UICollectionViewCell {
         
         self.tableView?.estimatedRowHeight = 50
         self.tableView?.rowHeight = UITableViewAutomaticDimension
+        
+        labelHeaderTitle?.sizeToFit()
+        
     }
 }
 
 
 extension FilterListCollectionViewCell : UITableViewDelegate , UITableViewDataSource{
 
+    
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return filterOptions.filterValues.count //studyData.count
     }

@@ -226,6 +226,8 @@ class ConsentBuilder{
             consentDocument.signaturePageTitle = "Participant"
             consentDocument.signaturePageContent = "signaturePageContent"
             
+            
+            
             consentDocument.sections = [ORKConsentSection]()
             
             if self.consentSectionArray.count > 0 {
@@ -245,6 +247,9 @@ class ConsentBuilder{
 //            let investigatorSignature = ORKConsentSignature(forPersonWithTitle: investigatorSignatureTitle, dateFormatString: nil, identifier:"Signature", givenName: investigatorSignatureGivenName, familyName: investigatorSignatureFamilyName, signatureImage: signatureImage, dateString: investigatorSignatureDateString)
             
             let investigatorSignature = ORKConsentSignature(forPersonWithTitle:"Participant", dateFormatString: "MM/dd/YYYY", identifier: "Signature")
+            
+            
+            //investigatorSignature.requiresName = false
             
             consentDocument.addSignature(investigatorSignature)
             
@@ -302,10 +307,7 @@ class ConsentBuilder{
             
             consentDocument?.signaturePageContent = NSLocalizedString("I agree to participate in this research study.", comment: "")
             
-            
              reviewConsentStep = ConsentReviewStep(identifier: kReviewTitle, signature: (self.getConsentDocument() as ORKConsentDocument).signatures?[0], in: self.getConsentDocument())
-            
-          
             
         }
         else{

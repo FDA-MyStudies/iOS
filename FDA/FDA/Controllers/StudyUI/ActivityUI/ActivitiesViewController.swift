@@ -352,7 +352,9 @@ class ActivitiesViewController : UIViewController{
             taskViewController?.delegate = self
             UIApplication.shared.statusBarStyle = .default
             taskControllerPresented = true
-            present(taskViewController!, animated: true, completion: nil)
+            present(taskViewController!, animated: true, completion: {
+                Logger.sharedInstance.info("Activity presented to user")
+            })
         }
         else{
             UIUtilities.showAlertMessage(kAlertMessageText, errorMessage: NSLocalizedString("Invalid Data!", comment: ""), errorAlertActionTitle: NSLocalizedString("OK", comment: ""), viewControllerUsed: self)
@@ -480,6 +482,8 @@ class ActivitiesViewController : UIViewController{
         
         
         self.checkIfFetelKickCountRunning()
+        
+        Logger.sharedInstance.info("Activities Displayed to user")
         
         
     }
@@ -806,7 +810,7 @@ extension ActivitiesViewController : UITableViewDelegate{
                         
                         //Following to be commented
                         //self.createActivity()
-                        
+                        Logger.sharedInstance.info("Activity Fetching from db")
                         //check in database
                         DBHandler.loadActivityMetaData(activity: activities[indexPath.row], completionHandler: { (found) in
                             if found {

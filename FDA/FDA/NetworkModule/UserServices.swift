@@ -868,12 +868,13 @@ class UserServices: NSObject {
 }
 extension UserServices:NMWebServiceDelegate{
     func startedRequest(_ manager: NetworkManager, requestName: NSString) {
+        Logger.sharedInstance.info("RUS Request Called: \(requestName)")
         if delegate != nil {
             delegate.startedRequest(manager, requestName: requestName)
         }
     }
     func finishedRequest(_ manager: NetworkManager, requestName: NSString, response: AnyObject?) {
-        
+        Logger.sharedInstance.info("RUS Received Data: \(requestName)")
         switch requestName {
         case RegistrationMethods.login.description as String:
             

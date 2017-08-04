@@ -390,7 +390,7 @@ class ActivityBuilder {
                                     }
                                     
                                     
-                                    print("choices \(choicePredicate) destination \(destination)")
+                                    //print("choices \(choicePredicate) destination \(destination)")
                                     predicateRule = ORKPredicateStepNavigationRule(resultPredicates: choicePredicate, destinationStepIdentifiers: destination!, defaultStepIdentifier: defaultStepIdentifier, validateArrays: true)
                                     
                                     

@@ -25,6 +25,7 @@ open class Logger {
     
     fileprivate func logger(_ level: Level, items: [Any], file: String, line: Int, column: Int) {
 
+        
         let result = formatter.format(
             level: level,
             items: items,
@@ -33,7 +34,7 @@ open class Logger {
             column: column
         )
 
-        print(result, separator: "", terminator: "")
+        print(Date(),result, separator: "", terminator: "")
         
     }
     

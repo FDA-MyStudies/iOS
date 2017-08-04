@@ -302,7 +302,7 @@ class Utilities: NSObject {
                 return true
             }
             else{
-                Logger.sharedInstance.debug("Value is null:\(someObject)")
+                //Logger.sharedInstance.debug("Value is null:\(someObject)")
                 return false
             }
         }

@@ -260,16 +260,19 @@ class WCPServices: NSObject {
     //MARK:Parsers
     func handleStudyList(response:Dictionary<String, Any>){
         
+        Logger.sharedInstance.info("Studies Parsing Start")
+        
         let studies = response[kStudies] as! Array<Dictionary<String,Any>>
         var listOfStudies:Array<Study> = []
         for study in studies{
             let studyModelObj = Study(studyDetail: study)
             listOfStudies.append(studyModelObj)
         }
-        
+        Logger.sharedInstance.info("Studies Parsing Finished")
         //assgin to Gateway
         Gateway.instance.studies = listOfStudies
         
+        Logger.sharedInstance.info("Studies Saving in DB")
         //save in database
         DBHandler().saveStudies(studies: listOfStudies)
     }
@@ -445,6 +448,7 @@ class WCPServices: NSObject {
     
     func handleStudyActivityList(response:Dictionary<String, Any>){
         
+        Logger.sharedInstance.info("Activities Parsing Start")
         let activities = response[kActivites] as! Array<Dictionary<String,Any>>
         
         if Utilities.isValidObject(someObject: activities as AnyObject? ) {
@@ -462,8 +466,10 @@ class WCPServices: NSObject {
                     
                 }
                 
+                Logger.sharedInstance.info("Activities Parsing Finished")
                 //save to current study object
                 Study.currentStudy?.activities = activityList
+                Logger.sharedInstance.info("Activities Saving in DB")
                 //save in database
                 DBHandler.saveActivities(activityies: (Study.currentStudy?.activities)!)
             }
@@ -530,12 +536,14 @@ class WCPServices: NSObject {
 }
 extension WCPServices:NMWebServiceDelegate{
     func startedRequest(_ manager: NetworkManager, requestName: NSString) {
+        Logger.sharedInstance.info("WCP Request Called: \(requestName)")
         if delegate != nil {
             delegate.startedRequest(manager, requestName: requestName)
         }
     }
     func finishedRequest(_ manager: NetworkManager, requestName: NSString, response: AnyObject?) {
         
+        Logger.sharedInstance.info("WCP Received Data: \(requestName)")
         let methodName = WCPMethods(rawValue: requestName as String)!
         
         switch methodName {

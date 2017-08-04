@@ -155,6 +155,8 @@ class DBHandler: NSObject {
             realm.add(dbStudies, update: true)
             
         })
+        
+        Logger.sharedInstance.info("Studies Saved in DB")
     }
     
     
@@ -602,6 +604,7 @@ class DBHandler: NSObject {
                 
             })
         }
+        Logger.sharedInstance.info("Activities Saved in DB")
        
     }
     

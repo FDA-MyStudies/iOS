@@ -37,6 +37,8 @@
 		6E2B25F31EAE3F1D00E2DFB2 /* ResearchContainerSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E2B25F11EAE3F1D00E2DFB2 /* ResearchContainerSegue.swift */; };
 		6E2B25F41EAE3F1D00E2DFB2 /* ResearchContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E2B25F21EAE3F1D00E2DFB2 /* ResearchContainerViewController.swift */; };
 		6E4CECB61F31B41C005E0832 /* PinterestLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E4CECB51F31B41C005E0832 /* PinterestLayout.swift */; };
+		6E4D86DC1F389DF1003DBDD8 /* SearchBarView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6E4D86DB1F389DF1003DBDD8 /* SearchBarView.xib */; };
+		6E4D86E01F38A740003DBDD8 /* SearchBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E4D86DF1F38A740003DBDD8 /* SearchBarView.swift */; };
 		6E5F751B1EF4109500ABA308 /* Labkey_Activity11.json in Resources */ = {isa = PBXBuildFile; fileRef = 6E5F751A1EF4109500ABA308 /* Labkey_Activity11.json */; };
 		6E7D2D5A1E433E8800763D4C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E7D2D591E433E8800763D4C /* AppDelegate.swift */; };
 		6E7D2D5C1E433E8800763D4C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E7D2D5B1E433E8800763D4C /* ViewController.swift */; };
@@ -291,6 +293,8 @@
 		6E2B25F11EAE3F1D00E2DFB2 /* ResearchContainerSegue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResearchContainerSegue.swift; sourceTree = "<group>"; };
 		6E2B25F21EAE3F1D00E2DFB2 /* ResearchContainerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResearchContainerViewController.swift; sourceTree = "<group>"; };
 		6E4CECB51F31B41C005E0832 /* PinterestLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PinterestLayout.swift; sourceTree = "<group>"; };
+		6E4D86DB1F389DF1003DBDD8 /* SearchBarView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SearchBarView.xib; sourceTree = "<group>"; };
+		6E4D86DF1F38A740003DBDD8 /* SearchBarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchBarView.swift; sourceTree = "<group>"; };
 		6E5F751A1EF4109500ABA308 /* Labkey_Activity11.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Labkey_Activity11.json; sourceTree = "<group>"; };
 		6E7D2D561E433E8700763D4C /* FDA.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FDA.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6E7D2D591E433E8800763D4C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -1150,6 +1154,8 @@
 				484ACBFB1F28A82B00BCC819 /* FilterData.plist */,
 				484ACBF51F2896A500BCC819 /* FilterListCollectionViewCell.swift */,
 				484ACBFF1F28BC8800BCC819 /* FilterListTableViewCell.swift */,
+				6E4D86DB1F389DF1003DBDD8 /* SearchBarView.xib */,
+				6E4D86DF1F38A740003DBDD8 /* SearchBarView.swift */,
 				940577A71E767AC60043215C /* ChangePasswordViewController.swift */,
 				940577AB1E767C8D0043215C /* ChangePasswordData.plist */,
 			);
@@ -1486,6 +1492,7 @@
 			files = (
 				6EE93D921E93B8C30027A5DC /* 45.png in Resources */,
 				94B3DD5C1E6ED8E500327AE5 /* Study.storyboard in Resources */,
+				6E4D86DC1F389DF1003DBDD8 /* SearchBarView.xib in Resources */,
 				6E93C7E11EE2EC26006788B1 /* ConsentLatest.json in Resources */,
 				6EABD0331E56FE2000623D94 /* TaskSchema.json in Resources */,
 				48A24C3E1E839D03009E849E /* 55V2.png in Resources */,
@@ -1815,6 +1822,7 @@
 				6EF0466B1ED1C943008098BB /* DBNotification.swift in Sources */,
 				6EE93DCB1E93C8850027A5DC /* ActivitiesViewController.swift in Sources */,
 				6ED1B2211E54253800BF463F /* Activity.swift in Sources */,
+				6E4D86E01F38A740003DBDD8 /* SearchBarView.swift in Sources */,
 				94C6BD441EB8513300D4AA72 /* AppUpdateBlocker.swift in Sources */,
 				6EB740261E9D028000A4C773 /* FetalKickIntroStepViewController.swift in Sources */,
 				9491F7FA1E825FA80018C15E /* DBUser.swift in Sources */,

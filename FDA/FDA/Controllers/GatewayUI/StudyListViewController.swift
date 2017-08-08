@@ -7,12 +7,13 @@
 //
 
 import UIKit
-
+import IQKeyboardManagerSwift
 class StudyListViewController: UIViewController {
     
     @IBOutlet var tableView:UITableView?
     @IBOutlet var labelHelperText:UILabel!
     var studyListRequestFailed = false
+    var searchView:SearchBarView?
     
     var isComingFromFilterScreen : Bool = false
     var studiesList:Array<Study> = []
@@ -33,6 +34,7 @@ class StudyListViewController: UIViewController {
         titleLabel.textAlignment = .left
         titleLabel.textColor = Utilities.getUIColorFromHex(0x007cba)
         titleLabel.frame = CGRect.init(x: 0, y: 0, width: 300, height: 44)
+       
         self.navigationItem.titleView = titleLabel
         
         //self.loadTestData()
@@ -47,6 +49,8 @@ class StudyListViewController: UIViewController {
         }
         
         isComingFromFilterScreen = false
+        
+         IQKeyboardManager.sharedManager().enable = true
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -123,28 +127,21 @@ class StudyListViewController: UIViewController {
     
     func  addRightNavigationItem(){
         
-        let view = UIView.init(frame: CGRect.init(x: 0, y: 4, width: 40, height: 40))
+        let view = UIView.init(frame: CGRect.init(x: 0, y: 4, width: 110, height: 40))
         //view.backgroundColor = UIColor.red
         
+        
+        // Notification Button
         let button = UIButton.init(type: .custom)
         
         button.setImage(#imageLiteral(resourceName: "notification_active"), for: UIControlState.normal)
         button.addTarget(self, action:#selector(self.buttonActionNotification(_:)), for: UIControlEvents.touchUpInside)
-        button.frame = CGRect.init(x: 10, y: 4, width: 30, height: 30)
+        button.frame = CGRect.init(x: 80, y: 4, width: 30, height: 30)
         view.addSubview(button)
         button.isExclusiveTouch = true
         
-        
-//        ///// Added filterButton
-//        let filterButton = UIButton.init(type: .custom)
-//        filterButton.setImage(#imageLiteral(resourceName: "filterIcon"), for: UIControlState.normal)
-//        filterButton.addTarget(self, action:#selector(self.filterAction(_:)), for: UIControlEvents.touchUpInside)
-//        filterButton.frame = CGRect.init(x: 55, y: 0, width: 30, height: 30)
-//        view.addSubview(filterButton)
-//        filterButton.isExclusiveTouch = true
-        
-        
-        let label = UILabel.init(frame:CGRect.init(x: 30, y: 4, width: 10, height: 10) )
+        // notification Indicator
+        let label = UILabel.init(frame:CGRect.init(x: 100, y: 4, width: 10, height: 10) )
         label.font = UIFont.systemFont(ofSize: 10)
         label.textColor = UIColor.white
         
@@ -155,17 +152,41 @@ class StudyListViewController: UIViewController {
         label.text = ""
         view.addSubview(label)
         
+        
+        
+        //  filter Button
+        let filterButton = UIButton.init(type: .custom)
+        filterButton.setImage(#imageLiteral(resourceName: "filterIcon"), for: UIControlState.normal)
+        filterButton.addTarget(self, action:#selector(self.filterAction(_:)), for: UIControlEvents.touchUpInside)
+        filterButton.frame = CGRect.init(x: 40, y: 4, width: 30, height: 30)
+        view.addSubview(filterButton)
+        filterButton.isExclusiveTouch = true
+        
+        
+        //  filter Button
+        let SearchButton = UIButton.init(type: .custom)
+        SearchButton.setImage(#imageLiteral(resourceName: "search_small"), for: UIControlState.normal)
+        SearchButton.addTarget(self, action:#selector(self.searchButtonAction(_:)), for: UIControlEvents.touchUpInside)
+        SearchButton.frame = CGRect.init(x: 0, y: 4, width: 30, height: 30)
+        view.addSubview(SearchButton)
+        SearchButton.isExclusiveTouch = true
+        
+        
+        
         let barButton = UIBarButtonItem.init(customView: view)
         
         
-        let filterButton1 = UIBarButtonItem(image: UIImage(named: "filterIcon"), style: .plain, target: self, action: #selector(self.filterAction(_:)))//action:#selector(Class.MethodName) for swift 3
+       // let filterButton1 = UIBarButtonItem(image: UIImage(named: "filterIcon"), style: .plain, target: self, action: #selector(self.filterAction(_:)))//action:#selector(Class.MethodName) for swift 3
         
         ///// Added filterBarButton
         //let filterBarButton = UIBarButtonItem.init(customView: view)
         
         
+         //let buttonSearch = UIBarButtonItem(image: UIImage(named: "search_big"), style: .plain, target: self, action: #selector(self.searchButtonAction(_:)))//action:#selector(Class.MethodName) for swift 3
+        
+        
         //Changes from rightBarButtonItem to rightBarButtonItems(to support multiple Bar button item)
-        self.navigationItem.rightBarButtonItems = [barButton , filterButton1]
+        self.navigationItem.rightBarButtonItems = [barButton ]
         
         let ud = UserDefaults.standard
         
@@ -447,6 +468,23 @@ class StudyListViewController: UIViewController {
     }
     
     
+    @IBAction func searchButtonAction(_ sender:UIBarButtonItem){
+        
+        searchView = SearchBarView.instanceFromNib(frame:CGRect.init(x: 0, y: 0, width: self.view.frame.size.width, height: 64.0), detail: nil);
+        
+        //self.navigationController?.navigationBar.isHidden = true
+    
+        searchView?.textFieldSearch?.becomeFirstResponder()
+        searchView?.delegate = self
+        
+        self.slideMenuController()?.leftPanGesture?.isEnabled = false
+        
+       self.navigationController?.view.addSubview(searchView!)
+
+        
+    }
+    
+    
     //MARK:- Custom Bar Buttons
     
     /**
@@ -463,8 +501,9 @@ class StudyListViewController: UIViewController {
         button.frame = CGRect(x: 0, y: 0, width: 120, height: 30)
         button.contentHorizontalAlignment = .left
         button.setTitleColor(Utilities.getUIColorFromHex(0x007cba), for: .normal)
-        let barItem = UIBarButtonItem(customView: button)
         
+        let barItem = UIBarButtonItem(customView: button)
+       
         self.navigationItem.setLeftBarButton(barItem, animated: true)
     }
     
@@ -762,6 +801,12 @@ extension StudyListViewController :  UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
+        
+        if searchView != nil {
+            searchView?.removeFromSuperview()
+            self.slideMenuController()?.leftPanGesture?.isEnabled = true
+        }
+        
         let study = self.studiesList[indexPath.row]
         Study.updateCurrentStudy(study: study)
         
@@ -853,6 +898,18 @@ extension StudyListViewController : StudyListDelegates {
         }
         
         self.sendRequestToUpdateBookMarkStatus(userStudyStatus: userStudyStatus)
+    }
+}
+
+
+extension StudyListViewController : searchBarDelegate {
+    func didTapOnCancel() {
+        
+        self.slideMenuController()?.leftPanGesture?.isEnabled = true
+        //self.navigationController?.navigationBar.isHidden = false
+    }
+    func search(text: String) {
+        
     }
 }
 

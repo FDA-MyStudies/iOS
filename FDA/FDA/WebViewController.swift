@@ -158,18 +158,19 @@ extension WebViewController:UIWebViewDelegate{
     func webView(_ webView: UIWebView, didFailLoadWithError error: Error) {
         self.activityIndicator.stopAnimating()
         self.activityIndicator.removeFromSuperview()
+        debugPrint("\(error.localizedDescription)")
         
-        let buttonTitleOK = NSLocalizedString("OK", comment: "")
-        let alert = UIAlertController(title:NSLocalizedString(kTitleError, comment: ""),message:error.localizedDescription,preferredStyle: UIAlertControllerStyle.alert)
-        
-        alert.addAction(UIAlertAction.init(title:buttonTitleOK, style: .default, handler: { (action) in
-            
-            self.dismiss(animated: true, completion: nil)
-            
-        }))
-        
-        
-        self.present(alert, animated: true, completion: nil)
+//        let buttonTitleOK = NSLocalizedString("OK", comment: "")
+//        let alert = UIAlertController(title:NSLocalizedString(kTitleError, comment: ""),message:error.localizedDescription,preferredStyle: UIAlertControllerStyle.alert)
+//        
+//        alert.addAction(UIAlertAction.init(title:buttonTitleOK, style: .default, handler: { (action) in
+//            
+//            self.dismiss(animated: true, completion: nil)
+//            
+//        }))
+//        
+//        
+//        self.present(alert, animated: true, completion: nil)
         
         
     }

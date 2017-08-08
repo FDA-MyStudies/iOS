@@ -282,35 +282,62 @@
             
             
             let ud1 = UserDefaults.standard
+//            if launchOptions != nil {
+//                 //Utilities.showAlertWithMessage(alertMessage: (launchOptions?.description)!)
+//                ud1.set(launchOptions?.description, forKey: "notification")
+//                ud1.synchronize()
+//            }
+//            if ud1.value(forKey: "notification") != nil {
+//                print("notificaiton \(ud1.value(forKey: "notification"))")
+//                Utilities.showAlertWithMessage(alertMessage:ud1.value(forKey: "notification") as! String)
+//            }
+            
             
             if (launchOptions != nil && launchOptions?[.sourceApplication] == nil) {
                 
-                
+               
                 ud1.set("not null", forKey: "launch")
                 //ud1.synchronize()
                 //print("launchOptions : \(launchOptions)")
                 
                 // Launched from push notification
                 let notification = launchOptions?[.remoteNotification]
-                let localNotification = launchOptions?[.localNotification]
+                //let localNotification = launchOptions?[.localNotification] as! UILocalNotification
                 
                 if Utilities.isValidObject(someObject: notification as AnyObject){
                     
                     
-                   // ud1.set("valid", forKey: "launch")
-                    notificationDetails = notification as! Dictionary<String, Any>?
-                    
+                   
+                   // let localUserInfo = notification as! UILocalNotification
+                    notificationDetails = notification as? Dictionary<String, Any>
+                                     
                     let ud = UserDefaults.standard
                     ud.set(true, forKey: kShowNotification)
                     ud.synchronize()
-
+                    
+//                    var notificationType:String? = ""
+//                    if Utilities.isValidValue(someObject: notificationDetails?[kNotificationType] as AnyObject){
+//                        notificationType =  notificationDetails?[kNotificationType] as? String
+//                    }
+//                    
+//                    if notificationType == AppNotification.NotificationType.Study.rawValue{
+//                        
+//                        var studyId:String? = ""
+//                        
+//                        if Utilities.isValidValue(someObject: notificationDetails?[kStudyId] as AnyObject){
+//                            studyId = notificationDetails?[kStudyId] as? String
+//                        }
+//                        NotificationHandler.instance.appOpenFromNotification = true
+//                        NotificationHandler.instance.studyId = studyId
+//                    }
                     
                 }
-                else if (Utilities.isValidObject(someObject: localNotification as AnyObject)){
-                    
+                else if (launchOptions?[.localNotification] != nil){
+                   //  Utilities.showAlertWithMessage(alertMessage: (launchOptions?.description)!)
                     ud1.set("local", forKey: "launch")
-                    let localUserInfo = localNotification as! UILocalNotification
-                    let notificationDetails = localUserInfo.userInfo as! Dictionary<String, Any>
+                    let localNotification = launchOptions?[.localNotification] as! UILocalNotification
+                    let notificationDetails = localNotification.userInfo as! Dictionary<String, Any>
+                    
                     NotificationHandler.instance.appOpenFromNotification = true
                     NotificationHandler.instance.studyId = notificationDetails[kStudyId] as! String!
                     NotificationHandler.instance.activityId = notificationDetails[kActivityId] as! String!
@@ -318,7 +345,7 @@
                     ud1.synchronize()
                 }
                 else{
-                    
+                   
                     ud1.set("invalid", forKey: "launch")
                     UIApplication.shared.applicationIconBadgeNumber = 0
                     
@@ -332,6 +359,11 @@
             
             self.checkForRealmMigration()
          
+            
+//            let date = Date().addingTimeInterval(15)
+//            let userInfo = [kStudyId:"TESTSTUDY01",
+//                            kActivityId:"12"]
+//            LocalNotification.scheduleNotificationOn(date: date, message: "local", userInfo: userInfo)
             
             return true
             
@@ -491,6 +523,8 @@
             //For iOS 8 & 9
             if (UIApplication.shared.applicationState == UIApplicationState.background)||(UIApplication.shared.applicationState == UIApplicationState.inactive){
                 
+                self.updateNotification()
+                self.handleLocalAndRemoteNotification(userInfoDetails: userInfo as! Dictionary<String, Any>)
             }
             
             if userInfo.count > 0 && userInfo.keys.contains(kType){
@@ -505,52 +539,53 @@
             
         }
         
-        func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
-            
-           
-            print("REMOTE NOTIFICATION:" + "\(userInfo)")
-            
-            
-            if( UIApplication.shared.applicationState == UIApplicationState.inactive )
-            {
-                
-                completionHandler( .newData );
-            }
-            else if( UIApplication.shared.applicationState == UIApplicationState.background )
-            {
-                
-                completionHandler( .newData );
-            }  
-            else  
-            {  
-               
-                completionHandler( .newData );
-            }
-            
-            
-            if (UIApplication.shared.applicationState == UIApplicationState.active || (UIApplication.shared.applicationState == UIApplicationState.inactive)) {//|| (UIApplication.shared.applicationState == UIApplicationState.background){
-                UIApplication.shared.applicationIconBadgeNumber = 0
-                
-                self.handleLocalAndRemoteNotification(userInfoDetails: userInfo as! Dictionary<String, Any>)
-                
-                //self.handlePushNotificationResponse(userInfo : userInfo as NSDictionary)
-            }
-            
-            if userInfo.count > 0 && userInfo.keys.contains(kType){
-                self.updateNotification()
-            }
-            else {
-                if (UIApplication.shared.applicationState == UIApplicationState.background || (UIApplication.shared.applicationState == UIApplicationState.inactive)){
-                    self.handleLocalNotification(userInfoDetails: userInfo as! Dictionary<String, Any>)
-                }
-                
-            }
-
-            
-        }
+//        func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
+//            
+//           
+//            print("REMOTE NOTIFICATION:" + "\(userInfo)")
+//            
+//            
+//            if( UIApplication.shared.applicationState == UIApplicationState.inactive )
+//            {
+//                
+//                completionHandler( .newData );
+//            }
+//            else if( UIApplication.shared.applicationState == UIApplicationState.background )
+//            {
+//                
+//                completionHandler( .newData );
+//            }  
+//            else  
+//            {  
+//               
+//                completionHandler( .newData );
+//            }
+//            
+//            
+//            if ((UIApplication.shared.applicationState == UIApplicationState.inactive) || (UIApplication.shared.applicationState == UIApplicationState.background)){
+//                UIApplication.shared.applicationIconBadgeNumber = 0
+//                
+//                self.handleLocalAndRemoteNotification(userInfoDetails: userInfo as! Dictionary<String, Any>)
+//                
+//                //self.handlePushNotificationResponse(userInfo : userInfo as NSDictionary)
+//            }
+//            
+//            if userInfo.count > 0 && userInfo.keys.contains(kType){
+//                self.updateNotification()
+//            }
+//            else {
+//                if (UIApplication.shared.applicationState == UIApplicationState.background || (UIApplication.shared.applicationState == UIApplicationState.inactive)){
+//                    self.handleLocalNotification(userInfoDetails: userInfo as! Dictionary<String, Any>)
+//                }
+//                
+//            }
+//
+//            
+//        }
         
         func application(_ application: UIApplication, didReceive notification: UILocalNotification) {
             print("Notificatio received\(notification.userInfo)")
+            self.handleLocalNotification(userInfoDetails: notification.userInfo as! Dictionary<String, Any>)
         }
         
         //MARK: Jailbreak Methods
@@ -809,18 +844,7 @@
             }
             
             
-//            var activityId:String? = ""
-//            
-//            if Utilities.isValidValue(someObject: userInfoDetails[kActivityId] as AnyObject){
-//                activityId = userInfoDetails[kActivityId] as? String
-//            }
-            
-//            var resourceId:String? = ""
-//            if Utilities.isValidValue(someObject: userInfoDetails[kResourceId] as AnyObject){
-//                resourceId = userInfoDetails[kResourceId] as? String
-//            }
-            
-           
+
             NotificationHandler.instance.appOpenFromNotification = true
             NotificationHandler.instance.studyId = userInfoDetails[kStudyId] as! String!
             NotificationHandler.instance.activityId = userInfoDetails[kActivityId] as! String!
@@ -895,21 +919,19 @@
                                 let nav = (mainController as! UINavigationController)
                                 initialVC = nav.viewControllers.last
                                 
-                                
-                                
-                                
+                              
                                 
                             }
                             
                         }
                         
-                        if Gateway.instance.studies!.contains(where: { $0.studyId == studyId }){
+                        //if Gateway.instance.studies!.contains(where: { $0.studyId == studyId }){
                             
-                            let index =  Gateway.instance.studies?.index(where: { $0.studyId == studyId })
+                        //    let index =  Gateway.instance.studies?.index(where: { $0.studyId == studyId })
                             
                             //check status for study
-                            if NotificationViewController.checkForStudyStateAndParticiapantState(study: (Gateway.instance.studies?[index!])!) {
-                                Study.updateCurrentStudy(study:(Gateway.instance.studies?[index!])! )
+                        //    if NotificationViewController.checkForStudyStateAndParticiapantState(study: (Gateway.instance.studies?[index!])!) {
+                       //         Study.updateCurrentStudy(study:(Gateway.instance.studies?[index!])! )
                                 
                                 
                                 
@@ -946,7 +968,7 @@
                                         print("switch to activty tab")
                                     }
                                     
-                                case .Study:
+                                case .Study,.studyEvent:
                                     
                                     
                                     let leftController = (menuVC as! FDASlideMenuViewController).leftViewController as! LeftMenuViewController
@@ -955,10 +977,14 @@
                                         
                                         
                                         if initialVC is ProfileViewController  ||  initialVC is ReachoutOptionsViewController || initialVC is GatewayResourcesListViewController{
+                                            
+                                            NotificationHandler.instance.appOpenFromNotification = true
+                                            NotificationHandler.instance.studyId = studyId
+                                            
+                                            
                                             leftController.changeViewController(.studyList)
                                             leftController.createLeftmenuItems()
                                         }
-                                            
                                         else if initialVC is UITabBarController {
                                             
                                             initialVC?.performSegue(withIdentifier: kActivityUnwindToStudyListIdentifier, sender: initialVC)
@@ -967,6 +993,9 @@
                                         
                                     }
                                     else {
+                                        
+                                        NotificationHandler.instance.appOpenFromNotification = true
+                                        NotificationHandler.instance.studyId = studyId
                                         
                                         leftController.changeViewController(.studyList)
                                         leftController.createLeftmenuItems()
@@ -981,14 +1010,14 @@
                                 
                                 
                                 
-                            }
-                            else{
+                            //}
+                            //else{
                                 //study is not joined
-                            }
-                        }
-                        else{
+                            //}
+                        //}
+                        //else{
                             //Study is not in the list
-                        }
+                        //}
                         
                         
                     }

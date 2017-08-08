@@ -47,13 +47,13 @@ class NetworkWebServiceHandler: NSObject, URLSessionDelegate {
         let ud:Bool = UserDefaults.standard.bool(forKey: kIsStagingUser)
         
         #if DEBUG
-            if ud {
+            if !ud {
                  return self.configuration.getDevelopmentURL() as NSString
                 
             }
             return self.configuration.getProductionURL() as NSString
         #else
-            if ud {
+            if !ud {
                 return self.configuration.getDevelopmentURL() as NSString
             }
             return self.configuration.getProductionURL() as NSString

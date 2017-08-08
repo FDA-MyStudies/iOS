@@ -19,6 +19,7 @@ class SearchBarView: UIView {
     
     @IBOutlet weak var textFieldSearch:UITextField?
     @IBOutlet weak var buttonCancel:UIButton?
+    @IBOutlet weak var viewBackground:UIView?
     var delegate: searchBarDelegate?
     
     required init?(coder aDecoder: NSCoder) {
@@ -32,6 +33,13 @@ class SearchBarView: UIView {
         let view = UINib(nibName: "SearchBarView", bundle: nil).instantiate(withOwner: nil, options: nil)[0] as! SearchBarView
         view.frame = frame
         view.layoutIfNeeded()
+        
+        
+        
+        view.viewBackground?.layer.cornerRadius = 2.0
+        view.viewBackground?.clipsToBounds = true
+        
+        
         
         return view
         

@@ -474,6 +474,8 @@ class StudyListViewController: UIViewController {
         
         //self.navigationController?.navigationBar.isHidden = true
     
+         
+        
         searchView?.textFieldSearch?.becomeFirstResponder()
         searchView?.delegate = self
         

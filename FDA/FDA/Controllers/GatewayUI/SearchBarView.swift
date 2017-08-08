@@ -36,7 +36,7 @@ class SearchBarView: UIView {
         
         
         
-        view.viewBackground?.layer.cornerRadius = 2.0
+        view.viewBackground?.layer.cornerRadius = 3.0
         view.viewBackground?.clipsToBounds = true
         
         

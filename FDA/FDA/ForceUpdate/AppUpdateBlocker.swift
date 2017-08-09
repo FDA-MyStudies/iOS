@@ -32,7 +32,7 @@ class AppUpdateBlocker: UIView {
     }
 
     @IBAction func buttonUpgradeAction(){
-        UIApplication.shared.openURL(URL(string:"https://itunes.apple.com/us/app/hey-there.../id1032962936?ls=1&mt=8")!)
+        UIApplication.shared.openURL(URL(string:"https://itunes.apple.com/us/app/fda-my-studies/id1242835330?ls=1&mt=8")!)
     }
 
 }

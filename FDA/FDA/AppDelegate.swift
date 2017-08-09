@@ -283,16 +283,16 @@
             
             let ud1 = UserDefaults.standard
             
-            if (launchOptions != nil) {
+            if (launchOptions != nil && launchOptions?[.sourceApplication] == nil) {
                 
                 
                 ud1.set("not null", forKey: "launch")
                 //ud1.synchronize()
-                print("launchOptions : \(launchOptions)")
+                //print("launchOptions : \(launchOptions)")
                 
                 // Launched from push notification
                 let notification = launchOptions?[.remoteNotification]
-                let localNotification = launchOptions?[.localNotification] as! UILocalNotification
+                let localNotification = launchOptions?[.localNotification]
                 
                 if Utilities.isValidObject(someObject: notification as AnyObject){
                     
@@ -306,10 +306,11 @@
 
                     
                 }
-                else if (Utilities.isValidObject(someObject: localNotification.userInfo as AnyObject)){
+                else if (Utilities.isValidObject(someObject: localNotification as AnyObject)){
                     
                     ud1.set("local", forKey: "launch")
-                    let notificationDetails = localNotification.userInfo as! Dictionary<String, Any>
+                    let localUserInfo = localNotification as! UILocalNotification
+                    let notificationDetails = localUserInfo.userInfo as! Dictionary<String, Any>
                     NotificationHandler.instance.appOpenFromNotification = true
                     NotificationHandler.instance.studyId = notificationDetails[kStudyId] as! String!
                     NotificationHandler.instance.activityId = notificationDetails[kActivityId] as! String!

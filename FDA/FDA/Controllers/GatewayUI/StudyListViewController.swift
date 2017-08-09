@@ -759,6 +759,8 @@ extension StudyListViewController : StudyFilterDelegates{
         
         
     }
+
+
     
     func didCancelFilter(_ cancel: Bool) {
         
@@ -912,6 +914,19 @@ extension StudyListViewController : searchBarDelegate {
     }
     func search(text: String) {
         
+            //filter by searched Text
+            var searchTextFilteredStudies:Array<Study>! = []
+            if text.characters.count > 0 {
+                searchTextFilteredStudies = Gateway.instance.studies?.filter({
+                    ($0.name?.containsIgnoringCase(text))! || ($0.category?.containsIgnoringCase(text))! || ($0.description?.containsIgnoringCase(text))! || ($0.sponserName?.containsIgnoringCase(text))!
+                    
+                })
+            }
+            
+            self.studiesList = self.getSortedStudies(studies: searchTextFilteredStudies)
+            
+            self.tableView?.reloadData()
+    
     }
 }
 

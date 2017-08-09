@@ -34,10 +34,10 @@
                             </constraints>
                         </imageView>
                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="search" textAlignment="natural" clearsOnBeginEditing="YES" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="x0y-MY-FMc">
-                            <rect key="frame" x="53" y="7.5" width="220" height="19"/>
+                            <rect key="frame" x="48" y="7.5" width="225" height="19"/>
                             <nil key="textColor"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                            <textInputTraits key="textInputTraits" returnKeyType="search"/>
+                            <textInputTraits key="textInputTraits" keyboardType="alphabet" returnKeyType="search"/>
                             <connections>
                                 <outlet property="delegate" destination="iN0-l3-epB" id="0Do-ze-A10"/>
                             </connections>
@@ -49,7 +49,7 @@
                         <constraint firstAttribute="trailing" secondItem="x0y-MY-FMc" secondAttribute="trailing" constant="8" id="aqT-ED-7ef"/>
                         <constraint firstItem="Uy2-kH-egr" firstAttribute="leading" secondItem="1wb-t2-VOs" secondAttribute="leading" constant="16" id="fpc-tO-lWb"/>
                         <constraint firstItem="x0y-MY-FMc" firstAttribute="centerY" secondItem="1wb-t2-VOs" secondAttribute="centerY" id="hAf-xn-ZJz"/>
-                        <constraint firstItem="x0y-MY-FMc" firstAttribute="leading" secondItem="Uy2-kH-egr" secondAttribute="trailing" constant="21" id="qJd-Pl-oW4"/>
+                        <constraint firstItem="x0y-MY-FMc" firstAttribute="leading" secondItem="Uy2-kH-egr" secondAttribute="trailing" constant="16" id="qJd-Pl-oW4"/>
                         <constraint firstItem="Uy2-kH-egr" firstAttribute="top" secondItem="1wb-t2-VOs" secondAttribute="top" constant="7" id="ydB-tV-mcc"/>
                     </constraints>
                 </view>

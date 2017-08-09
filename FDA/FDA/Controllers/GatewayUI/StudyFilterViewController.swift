@@ -16,7 +16,18 @@ protocol StudyFilterDelegates {
     func appliedFilter(studyStatus : Array<String>, pariticipationsStatus : Array<String>, categories: Array<String> , searchText:String,bookmarked:Bool)
     
     func didCancelFilter(_ cancel:Bool)
+    
+    
 }
+
+enum FilterType:Int {
+    case studyStatus = 0
+    case bookMark
+    case participantStatus
+    case category
+    
+}
+
 
 class StudyFilterViewController: UIViewController {
 
@@ -103,8 +114,31 @@ class StudyFilterViewController: UIViewController {
         
         //categories = ["Food Safety","Observational Studies","Cosmetics Safety"]
         //pariticipationsStatus = ["Food Safety","Observational Studies"]
-        studyStatus = ["Closed","Paused"]
-        searchText = "Human"
+        
+        var i:Int = 0
+        for filterOptions in StudyFilterHandler.instance.filterOptions{
+            
+            let filterType = FilterType.init(rawValue: i)
+            let filterValues = (filterOptions.filterValues.filter({$0.isSelected == true}))
+            for value in filterValues{
+                switch (filterType!) {
+                    
+                case .studyStatus:
+                    studyStatus.append(value.title)
+                case .participantStatus:
+                    pariticipationsStatus.append(value.title)
+                case .bookMark:
+                    bookmark = (value.isSelected)
+                case .category:
+                    categories.append(value.title)
+                default:break
+                }
+            }
+            i = i + 1
+        }
+        
+        // studyStatus = ["Closed","Paused"]
+        //searchText = "Human"
         
         delegate?.appliedFilter(studyStatus: studyStatus, pariticipationsStatus: pariticipationsStatus, categories: categories,searchText:searchText,bookmarked: bookmark)
         self.dismiss(animated: true, completion: nil)

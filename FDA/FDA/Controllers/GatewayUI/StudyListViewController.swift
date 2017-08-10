@@ -488,7 +488,8 @@ class StudyListViewController: UIViewController {
         DBHandler.loadStudyOverview(studyId: (study.studyId)!) { (overview) in
             if overview != nil {
                 study.overview = overview
-                self.navigateToStudyHome()
+                //
+                self.navigateBasedOnUserStatus()
             }
             else {
                 self.sendRequestToGetStudyInfo(study: study)
@@ -621,15 +622,18 @@ class StudyListViewController: UIViewController {
                     self.pushToStudyDashboard()
                 }
                 else {
-                    self.checkDatabaseForStudyInfo(study: Study.currentStudy!)
+                    //self.checkDatabaseForStudyInfo(study: Study.currentStudy!)
+                    self.navigateToStudyHome()
                 }
             }
             else {
-                self.checkDatabaseForStudyInfo(study: Study.currentStudy!)
+                //self.checkDatabaseForStudyInfo(study: Study.currentStudy!)
+                self.navigateToStudyHome()
             }
         }
         else {
-            self.checkDatabaseForStudyInfo(study: Study.currentStudy!)
+            //self.checkDatabaseForStudyInfo(study: Study.currentStudy!)
+            self.navigateToStudyHome()
         }
     }
     
@@ -655,7 +659,8 @@ class StudyListViewController: UIViewController {
                     else{
                         
                         DBHandler.loadStudyDetailsToUpdate(studyId: (study?.studyId)!, completionHandler: { (success) in
-                            self.pushToStudyDashboard()
+                            //self.pushToStudyDashboard()
+                            self.checkDatabaseForStudyInfo(study: study!)
                         })
                     }
                 }

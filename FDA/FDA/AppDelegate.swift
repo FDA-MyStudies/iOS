@@ -987,7 +987,7 @@
                                         }
                                         else if initialVC is UITabBarController {
                                             
-                                            initialVC?.performSegue(withIdentifier: kActivityUnwindToStudyListIdentifier, sender: initialVC)
+                                            //initialVC?.performSegue(withIdentifier: kActivityUnwindToStudyListIdentifier, sender: initialVC)
                                             
                                         }
                                         

@@ -180,7 +180,7 @@ class LocalNotification: NSObject {
         ///print("NotificationMessage\(message) ** date \(date.description(with: Locale.current))" )
         
         if date > Date() {
-            //print("NotificationMessage\(message) ** date \(date.description(with: Locale.current))" )
+            print("NotificationMessage\(message) ** date \(date.description(with: Locale.current))" )
             let notification = UILocalNotification()
             notification.fireDate = date
             notification.alertBody = message

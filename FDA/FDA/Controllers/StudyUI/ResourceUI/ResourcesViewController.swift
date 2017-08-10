@@ -69,10 +69,16 @@ class ResourcesViewController : UIViewController{
         if Study.currentStudy?.withdrawalConfigration?.message == nil && ( Study.currentStudy?.withdrawalConfigration?.type == nil || Study.currentStudy?.withdrawalConfigration?.type == .notAvailable ){
             WCPServices().getStudyInformation(studyId: (Study.currentStudy?.studyId)!, delegate: self)
         }
+        else if StudyUpdates.studyInfoUpdated {
+            WCPServices().getStudyInformation(studyId: (Study.currentStudy?.studyId)!, delegate: self)
+        }
+        else {
+            self.checkForResourceUpdate()
+        }
         
-        self.checkForResourceUpdate()
+        //self.checkForResourceUpdate()
         
-        self.checkForInfoUpdate()
+        //self.checkForInfoUpdate()
         
         
     }
@@ -677,11 +683,12 @@ extension ResourcesViewController:NMWebServiceDelegate {
         }
         else if(requestName as String == WCPMethods.studyInfo.rawValue){
             
-            self.removeProgressIndicator()
+            
             StudyUpdates.studyInfoUpdated = false
             DBHandler.updateMetaDataToUpdateForStudy(study: Study.currentStudy!, updateDetails: nil)
             
             if self.navigateToStudyOverview == true{
+                self.removeProgressIndicator()
                 // this means that about the study has been tapped and get study info has been called
                 self.navigateToStudyOverview = false
                 self.tabBarController?.tabBar.isHidden = true
@@ -689,8 +696,13 @@ extension ResourcesViewController:NMWebServiceDelegate {
                 self.navigateToStudyHome()
             }
             else if self.withdrawlInformationNotFound {
+                
+                self.removeProgressIndicator()
                 self.withdrawlInformationNotFound = false
                 self.handleLeaveStudy()
+            }
+            else {
+                self.checkForResourceUpdate()
             }
             
             

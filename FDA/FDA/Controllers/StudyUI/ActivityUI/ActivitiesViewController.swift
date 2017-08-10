@@ -31,6 +31,8 @@ class ActivitiesViewController : UIViewController{
     var isAnchorDateSet:Bool = false
     var taskControllerPresented = false
     
+    var selectedFilter: ActivityFilterType?
+    
     //MARK:- Viewcontroller Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,6 +41,7 @@ class ActivitiesViewController : UIViewController{
         //let plistPath = Bundle.main.path(forResource: "Activities", ofType: ".plist", inDirectory:nil)
         // tableViewRowDetails = Array(contente) //NSMutableArray.init(contentsOfFile: plistPath!)
         
+        selectedFilter = ActivityFilterType.all
         
         
         self.tableView?.estimatedRowHeight = 126
@@ -49,7 +52,7 @@ class ActivitiesViewController : UIViewController{
         self.navigationItem.title = NSLocalizedString("STUDY ACTIVITIES", comment: "")
         self.tableView?.sectionHeaderHeight = 30
         
-       
+       self.navigationController?.navigationItem.rightBarButtonItem?.tintColor = UIColor.gray
         
         if (Study.currentStudy?.studyId) != nil {
             //WCPServices().getStudyActivityList(studyId: (Study.currentStudy?.studyId)!, delegate: self)
@@ -216,8 +219,15 @@ class ActivitiesViewController : UIViewController{
     }
     
     @IBAction func filterButtonAction(_ sender: AnyObject){
+         var frame = self.view.frame
         
+        if self.selectedFilter == nil {
+            self.selectedFilter = ActivityFilterType.all
+        }
         
+        let view = ActivityFilterView.instanceFromNib(frame:frame , selectedIndex:self.selectedFilter!)
+        view.delegate = self
+        self.tabBarController?.view.addSubview(view)
     }
     
     func checkForDashBoardInfo(){
@@ -829,6 +839,13 @@ extension ActivitiesViewController:ActivitiesCellDelegate{
         self.tabBarController?.view.addSubview(view)
         //self.view.bringSubview(toFront: view)
         //UIApplication.shared.keyWindow?.addSubview(view)
+    }
+}
+
+//MARK:- ActivityFilterDelegate
+extension ActivitiesViewController:ActivityFilterViewDelegate{
+    func setSelectedFilter(selectedIndex: ActivityFilterType) {
+        self.selectedFilter = selectedIndex
     }
 }
 

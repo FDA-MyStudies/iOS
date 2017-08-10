@@ -1700,6 +1700,12 @@
                                 <action selector="homeButtonAction:" destination="CH1-xk-4mx" id="m8d-DC-tte"/>
                             </connections>
                         </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" image="filterIcon" id="5Qf-v0-gsM">
+                            <color key="tintColor" red="0.54901960780000003" green="0.58431372550000005" blue="0.63921568630000003" alpha="1" colorSpace="calibratedRGB"/>
+                            <connections>
+                                <action selector="filterButtonAction:" destination="CH1-xk-4mx" id="GHy-zT-Pzd"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="AY4-np-17e" id="3gm-vW-CJR"/>
@@ -1942,6 +1948,7 @@
         <image name="backIconWhite" width="23" height="18"/>
         <image name="calenderIcon" width="14" height="15"/>
         <image name="dashboardActive" width="26" height="26"/>
+        <image name="filterIcon" width="19" height="22"/>
         <image name="homeIcon" width="20" height="17"/>
         <image name="homeIconWhite" width="20" height="21"/>
         <image name="img_01" width="750" height="570"/>

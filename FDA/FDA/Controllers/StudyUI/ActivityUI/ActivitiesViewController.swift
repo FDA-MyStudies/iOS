@@ -31,6 +31,7 @@ class ActivitiesViewController : UIViewController{
     var isAnchorDateSet:Bool = false
     var taskControllerPresented = false
     
+    var allActivityList:Array<Dictionary<String,Any>>! = []
     var selectedFilter: ActivityFilterType?
     
     //MARK:- Viewcontroller Lifecycle
@@ -58,8 +59,6 @@ class ActivitiesViewController : UIViewController{
             //WCPServices().getStudyActivityList(studyId: (Study.currentStudy?.studyId)!, delegate: self)
             //load from database
             //self.loadActivitiesFromDatabase()
-            
-            
             
             
             if StudyUpdates.studyConsentUpdated {
@@ -219,7 +218,7 @@ class ActivitiesViewController : UIViewController{
     }
     
     @IBAction func filterButtonAction(_ sender: AnyObject){
-         var frame = self.view.frame
+         let frame = self.view.frame
         
         if self.selectedFilter == nil {
             self.selectedFilter = ActivityFilterType.all
@@ -395,6 +394,7 @@ class ActivitiesViewController : UIViewController{
     func handleActivityListResponse(){
         
         tableViewSections = []
+        allActivityList = []
         let activities = Study.currentStudy?.activities
         
         var currentActivities:Array<Activity> = []
@@ -436,9 +436,22 @@ class ActivitiesViewController : UIViewController{
         let upcomingDetails = ["title":"UPCOMING","activities":upcomingActivities] as [String : Any]
         let pastDetails = ["title":"PAST","activities":pastActivities] as [String : Any]
         
-        tableViewSections.append(currentDetails)
-        tableViewSections.append(upcomingDetails)
-        tableViewSections.append(pastDetails)
+        
+        
+        
+        allActivityList.append(currentDetails)
+        allActivityList.append(upcomingDetails)
+        allActivityList.append(pastDetails)
+        
+        tableViewSections = allActivityList
+        
+        if self.selectedFilter == .tasks || self.selectedFilter == .surveys{
+            
+             let filterType:ActivityType! =  (selectedFilter == .surveys ? .Questionnaire : .activeTask)
+            self.updateSectionArray(activityType: filterType)
+        }
+        
+        
         
         self.tableView?.reloadData()
         self.removeProgressIndicator()
@@ -845,8 +858,53 @@ extension ActivitiesViewController:ActivitiesCellDelegate{
 //MARK:- ActivityFilterDelegate
 extension ActivitiesViewController:ActivityFilterViewDelegate{
     func setSelectedFilter(selectedIndex: ActivityFilterType) {
-        self.selectedFilter = selectedIndex
+        
+        // current filter is not same as existing filter
+        if self.selectedFilter != selectedIndex{
+            
+           // currently filter type is all so no need to fetch all activities
+            if self.selectedFilter == .all{
+                
+                let filterType:ActivityType! =  (selectedIndex == .surveys ? .Questionnaire : .activeTask)
+                self.updateSectionArray(activityType: filterType)
+                
+            }
+            else{// existing filterType is either Task or Surveys
+                
+                //load all the sections from scratch
+                self.tableViewSections = []
+                self.tableViewSections = allActivityList
+                
+                // applying the new filter Type
+                if selectedIndex == .surveys || selectedIndex == .tasks{
+                    let filterType:ActivityType! =  (selectedIndex == .surveys ? .Questionnaire : .activeTask)
+                    self.updateSectionArray(activityType: filterType)
+                }
+            }
+            self.selectedFilter = selectedIndex
+            self.tableView?.reloadData()
+        }
+        else{
+            //current and newly selected filter types are same
+        }
     }
+    
+    func updateSectionArray(activityType:ActivityType)  {
+        
+        var updatedSectionArray:Array<Dictionary<String,Any>>! = []
+        for section in tableViewSections{
+            let activities = section[kActivities] as! Array<Activity>
+            var sectionDict:Dictionary<String,Any>! = section
+            sectionDict[kActivities] = activities.filter({$0.type == activityType
+            })
+            
+            updatedSectionArray.append(sectionDict)
+        }
+        tableViewSections = []
+        tableViewSections = updatedSectionArray
+    }
+    
+    
 }
 
 

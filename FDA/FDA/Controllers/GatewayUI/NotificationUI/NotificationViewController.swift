@@ -146,7 +146,7 @@ class NotificationViewController : UIViewController{
         
         let currentStudy = study
         let participatedStatus = (currentStudy.userParticipateState.status)
-        if participatedStatus == .inProgress {
+        if participatedStatus == .inProgress{
             return true
         }
         
@@ -252,7 +252,8 @@ extension NotificationViewController : UITableViewDelegate{
             
             let study = Gateway.instance.studies?.filter({$0.studyId == appNotif.studyId}).last
             
-            if self.isUserJoined(study: study!){
+            if self.isUserJoined(study: study!) && study?.status == .Active{
+                
                 Study.updateCurrentStudy(study:study! )
                 self.pushToStudyDashboard(type:appNotif.subType )
 

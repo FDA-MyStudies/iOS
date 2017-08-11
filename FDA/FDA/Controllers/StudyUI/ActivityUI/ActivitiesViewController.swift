@@ -172,7 +172,7 @@ class ActivitiesViewController : UIViewController{
         
         DBHandler.getResourcesWithAnchorDateAvailable(studyId: (Study.currentStudy?.studyId)!) { (resourcesList) in
             if resourcesList.count > 0 {
-                
+                let todayDate = Date()
                 for resource in resourcesList {
                     
                     if resource.startDate == nil && resource.endDate == nil {
@@ -180,9 +180,10 @@ class ActivitiesViewController : UIViewController{
                         let anchorDateObject = Study.currentStudy?.anchorDate
                         if(anchorDateObject != nil && (anchorDateObject?.isAnchorDateAvailable())!) {
                             
-                            let anchorDate = Study.currentStudy?.anchorDate?.date
+                            let anchorDate = Study.currentStudy?.anchorDate?.date?.startOfDay
                             
                             if anchorDate != nil {
+                                
                                 
                                 //also anchor date condition
                                 let startDateInterval = TimeInterval(60*60*24*(resource.anchorDateStartDays))
@@ -191,30 +192,53 @@ class ActivitiesViewController : UIViewController{
                                 
                                 
                                 let startAnchorDate = anchorDate?.addingTimeInterval(startDateInterval)
-                                let endAnchorDate = anchorDate?.addingTimeInterval(endDateInterval)
+                                var endAnchorDate = anchorDate?.addingTimeInterval(endDateInterval)
                                 
+                                endAnchorDate = endAnchorDate?.endOfDay
+                                let startDateResult = (startAnchorDate?.compare(todayDate))! as ComparisonResult
+                                let endDateResult = (endAnchorDate?.compare(todayDate))! as ComparisonResult
                                 self.isAnchorDateSet = false
+//                                var notificationDate = startAnchorDate?.startOfDay
+//                                notificationDate = notificationDate?.addingTimeInterval(43200)
+//                                let message = resource.notificationMessage
+//                                let userInfo = ["studyId":(Study.currentStudy?.studyId)!,
+//                                                "type":"resource"];
+//                                LocalNotification.scheduleNotificationOn(date: notificationDate!, message: message!, userInfo: userInfo)
                                 
-                                let notification = AppLocalNotification()
-                                notification.id = resource.resourceId! + (Study.currentStudy?.studyId)!
-                                notification.message = resource.notificationMessage
-                                notification.title = "New Resource Available"
-                                notification.startDate = startAnchorDate
-                                notification.endDate = endAnchorDate
-                                notification.type = AppNotification.NotificationType.Study
-                                notification.subType = AppNotification.NotificationSubType.Resource
-                                notification.audience = Audience.Limited
-                                notification.studyId = (Study.currentStudy?.studyId)!
-                                notification.activityId = Study.currentActivity?.actvityId
-                                
-                                DBHandler.saveLocalNotification(notification: notification)
-                                
-                                //register notification
-                                let message = resource.notificationMessage
-                                let userInfo = ["studyId":(Study.currentStudy?.studyId)!,
-                                                "type":"resource"];
-                                LocalNotification.scheduleNotificationOn(date: startAnchorDate!, message: message!, userInfo: userInfo)
-                                
+                                if startDateResult == .orderedDescending {
+                                    //upcoming
+                                    let notfiId = resource.resourceId! + (Study.currentStudy?.studyId)!
+                                    DBHandler.isNotificationSetFor(notification: notfiId
+                                        , completionHandler: { (found) in
+                                            if !found {
+                                                
+                                                let notification = AppLocalNotification()
+                                                notification.id = resource.resourceId! + (Study.currentStudy?.studyId)!
+                                                notification.message = resource.notificationMessage
+                                                notification.title = "New Resource Available"
+                                                notification.startDate = startAnchorDate
+                                                notification.endDate = endAnchorDate
+                                                notification.type = AppNotification.NotificationType.Study
+                                                notification.subType = AppNotification.NotificationSubType.Resource
+                                                notification.audience = Audience.Limited
+                                                notification.studyId = (Study.currentStudy?.studyId)!
+                                                //notification.activityId = Study.currentActivity?.actvityId
+                                                
+                                                DBHandler.saveLocalNotification(notification: notification)
+                                                
+                                                //register notification
+                                                var notificationDate = startAnchorDate?.startOfDay
+                                                notificationDate = notificationDate?.addingTimeInterval(43200)
+                                                let message = resource.notificationMessage
+                                                let userInfo = ["studyId":(Study.currentStudy?.studyId)!,
+                                                                "type":"resource"];
+                                                LocalNotification.scheduleNotificationOn(date: notificationDate!, message: message!, userInfo: userInfo)
+                                            }
+                                    })
+                                    
+                                    
+                                }
+                              
                                 
                             }
                         }
@@ -352,7 +376,9 @@ class ActivitiesViewController : UIViewController{
             taskViewController?.delegate = self
             UIApplication.shared.statusBarStyle = .default
             taskControllerPresented = true
-            present(taskViewController!, animated: true, completion: nil)
+            present(taskViewController!, animated: true, completion: {
+                Logger.sharedInstance.info("Activity presented to user")
+            })
         }
         else{
             UIUtilities.showAlertMessage(kAlertMessageText, errorMessage: NSLocalizedString("Invalid Data!", comment: ""), errorAlertActionTitle: NSLocalizedString("OK", comment: ""), viewControllerUsed: self)
@@ -481,6 +507,8 @@ class ActivitiesViewController : UIViewController{
         
         self.checkIfFetelKickCountRunning()
         
+        Logger.sharedInstance.info("Activities Displayed to user")
+        
         
     }
     
@@ -557,7 +585,7 @@ class ActivitiesViewController : UIViewController{
         if completion > 50 && completion < 100 {
             
             if !(ud.bool(forKey: halfCompletionKey)){
-                let message =  "The study " + (Study.currentStudy?.name!)! + " is now 50pc complete. We look forward to your continued participation as the study progresses."
+                let message =  "The study " + (Study.currentStudy?.name!)! + " is now 50 percent complete. We look forward to your continued participation as the study progresses."
                 UIUtilities.showAlertWithMessage(alertMessage: message)
                 ud.set(true, forKey: halfCompletionKey)
 
@@ -568,7 +596,7 @@ class ActivitiesViewController : UIViewController{
         if completion == 100 {
             
             if !(ud.bool(forKey: fullCompletionKey)){
-                let message =  "The study " + (Study.currentStudy?.name!)! + " is 100pc complete. Thank you for your participation."
+                let message =  "The study " + (Study.currentStudy?.name!)! + " is 100 percent complete. Thank you for your participation."
                 UIUtilities.showAlertWithMessage(alertMessage: message)
                 ud.set(true, forKey: fullCompletionKey)
                 
@@ -806,7 +834,7 @@ extension ActivitiesViewController : UITableViewDelegate{
                         
                         //Following to be commented
                         //self.createActivity()
-                        
+                        Logger.sharedInstance.info("Activity Fetching from db")
                         //check in database
                         DBHandler.loadActivityMetaData(activity: activities[indexPath.row], completionHandler: { (found) in
                             if found {

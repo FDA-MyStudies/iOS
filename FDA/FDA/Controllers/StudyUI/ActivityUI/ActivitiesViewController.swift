@@ -581,7 +581,7 @@ class ActivitiesViewController : UIViewController{
         if completion > 50 && completion < 100 {
             
             if !(ud.bool(forKey: halfCompletionKey)){
-                let message =  "The study " + (Study.currentStudy?.name!)! + " is now 50 percentage complete. We look forward to your continued participation as the study progresses."
+                let message =  "The study " + (Study.currentStudy?.name!)! + " is now 50 percent complete. We look forward to your continued participation as the study progresses."
                 UIUtilities.showAlertWithMessage(alertMessage: message)
                 ud.set(true, forKey: halfCompletionKey)
 
@@ -592,7 +592,7 @@ class ActivitiesViewController : UIViewController{
         if completion == 100 {
             
             if !(ud.bool(forKey: fullCompletionKey)){
-                let message =  "The study " + (Study.currentStudy?.name!)! + " is 100 percentage complete. Thank you for your participation."
+                let message =  "The study " + (Study.currentStudy?.name!)! + " is 100 percent complete. Thank you for your participation."
                 UIUtilities.showAlertWithMessage(alertMessage: message)
                 ud.set(true, forKey: fullCompletionKey)
                 

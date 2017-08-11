@@ -365,7 +365,7 @@ class StudyListViewController: UIViewController {
     func loadStudiesFromDatabase(){
         
         
-        
+        Logger.sharedInstance.info("Fetching Studies From DB")
         DBHandler.loadStudyListFromDatabase { (studies) in
             if studies.count > 0 {
                 self.tableView?.isHidden = false
@@ -373,7 +373,7 @@ class StudyListViewController: UIViewController {
                 //
                 //                   return (study1.userParticipateState.status.sortIndex < study2.userParticipateState.status.sortIndex)
                 //                })
-                
+                Logger.sharedInstance.info("Sorting Studies")
                 let  sortedstudies2 =  studies.sorted(by: { (study1:Study, study2:Study) -> Bool in
                     
                     if study1.status == study2.status {
@@ -386,7 +386,7 @@ class StudyListViewController: UIViewController {
                 
                 Gateway.instance.studies = sortedstudies2
                 self.tableView?.reloadData()
-                
+                Logger.sharedInstance.info("Studies displayed to user")
                 
                 self.checkIfFetelKickCountRunning()
                 
@@ -553,7 +553,7 @@ class StudyListViewController: UIViewController {
      */
     func handleStudyListResponse(){
         
-        
+        Logger.sharedInstance.info("Study Response Handler")
         
         if (Gateway.instance.studies?.count)! > 0{
             self.loadStudiesFromDatabase()
@@ -841,13 +841,13 @@ extension StudyListViewController : StudyListDelegates {
 extension StudyListViewController:NMWebServiceDelegate {
     
     func startedRequest(_ manager: NetworkManager, requestName: NSString) {
-        Logger.sharedInstance.info("requestname : \(requestName)")
+        //Logger.sharedInstance.info("requestname : \(requestName)")
         
         self.addProgressIndicator()
     }
     
     func finishedRequest(_ manager: NetworkManager, requestName: NSString, response: AnyObject?) {
-        Logger.sharedInstance.info("requestname : \(requestName) : \(response)")
+        //Logger.sharedInstance.info("requestname : \(requestName) : \(response)")
         
         if requestName as String == WCPMethods.studyList.rawValue{
             self.handleStudyListResponse()

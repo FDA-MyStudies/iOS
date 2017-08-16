@@ -614,16 +614,19 @@ class ActivityStepResult{
         case ORKQuestionType.singleChoice.rawValue: //textchoice + value picker + imageChoice
             
             let stepTypeResult = questionstepResult as! ORKChoiceQuestionResult
+            
+            var resultType:String? = (self.step?.resultType as! String)
+            
+            // for form we have to assign the step type of each form item
+            if resultType == "grouped"{
+                
+                resultType = self.subTypeForForm
+            }
+            
             if Utilities.isValidObject(someObject:stepTypeResult.choiceAnswers as AnyObject?){
                 if (stepTypeResult.choiceAnswers?.count)! > 0{
                     
-                    var resultType:String? = (self.step?.resultType as! String)
-                    
-                     // for form we have to assign the step type of each form item
-                    if resultType == "grouped"{
-                       
-                        resultType = self.subTypeForForm
-                    }
+                   
                     
                     if resultType ==  QuestionStepType.imageChoice.rawValue ||  resultType == QuestionStepType.valuePicker.rawValue{
                         
@@ -645,12 +648,23 @@ class ActivityStepResult{
                     
                 }
                 else{
-                    self.value = ""
+                    if resultType ==  QuestionStepType.imageChoice.rawValue ||  resultType == QuestionStepType.valuePicker.rawValue{
+                        self.value = ""
+                    }
+                    else{
+                        self.value = []
+                    }
                 }
-                
             }
             else{
-                self.value = ""
+                
+                if resultType ==  QuestionStepType.imageChoice.rawValue ||  resultType == QuestionStepType.valuePicker.rawValue{
+                    self.value = ""
+                }
+                else{
+                    self.value = []
+                }
+
             }
         case ORKQuestionType.multipleChoice.rawValue: //textchoice + imageChoice + // Testing is Pending
             
@@ -676,7 +690,7 @@ class ActivityStepResult{
                 
             }
             else{
-                self.value = ""
+                self.value = []
             }
             
             
@@ -738,7 +752,7 @@ class ActivityStepResult{
                 self.value =  Utilities.getStringFromDate(date: stepTypeResult.dateAnswer! )
             }
             else{
-                self.value = "00:00:0000"
+                self.value = "0000-00-00'T'00:00:00"
             }
         case ORKQuestionType.dateAndTime.rawValue:
             let stepTypeResult = questionstepResult as! ORKDateQuestionResult
@@ -747,7 +761,7 @@ class ActivityStepResult{
                 self.value =  Utilities.getStringFromDate(date: stepTypeResult.dateAnswer! )
             }
             else{
-                self.value = "00:00:0000"
+                self.value = "0000-00-00'T'00:00:00"
             }
         case ORKQuestionType.text.rawValue: // text + email
             

@@ -683,7 +683,7 @@
                             
                             if ((parsedDict as! [String:Any])[kResultCount] as! Int) == 1{
                                 
-                                let resultArray = ((parsedDict as! [String:Any])["result"]) as! Array<Dictionary<String,Any>>
+                                let resultArray = ((parsedDict as! [String:Any])["results"]) as! Array<Dictionary<String,Any>>
                                 
                                 let appStoreVersion = (resultArray.first)?["version"]  as! String
                                 

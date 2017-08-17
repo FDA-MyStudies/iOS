@@ -687,7 +687,7 @@
                             //let data = try Data.init(contentsOf: url)
                             let parsedDict = try JSONSerialization.jsonObject(with: data!, options:[])
                             
-                            print("parsedDict: \(parsedDict)")
+                           // print("parsedDict: \(parsedDict)")
                             if ((parsedDict as! [String:Any])[kResultCount] as! Int) == 1{
                                 
                                 let resultArray = ((parsedDict as! [String:Any])[kResultsForAppStore]) as! Array<Dictionary<String,Any>>

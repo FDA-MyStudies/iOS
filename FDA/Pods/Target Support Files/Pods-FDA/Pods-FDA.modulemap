@@ -1,0 +1,6 @@
+framework module Pods_FDA {
+  umbrella header "Pods-FDA-umbrella.h"
+
+  export *
+  module * { export * }
+}

@@ -44,6 +44,8 @@
     let kCFBundleShortVersion = "CFBundleShortVersionString"
     
     let kResultCount = "resultCount"
+    let kResultsForAppStore = "results"
+    let kAppStoreVersion = "version"
     
     let kContinueButtonTitle =  NSLocalizedString("Continue", comment:"")
     let kType = "type"
@@ -426,6 +428,7 @@
                 self.updateNotification()
             }
             
+            self.checkForAppUpdateForVersion()
             
             // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
         }
@@ -664,28 +667,32 @@
             
             let infoDict = Bundle.main.infoDictionary
             
-            let appId = infoDict?[kBundleIdentier]
+            let appId =  infoDict?[kBundleIdentier]
             
             let url:URL = URL.init(string:"http://itunes.apple.com/lookup?bundleId=\(appId!)" )!
             
-            let request =   URLRequest(url:url)
-            
-            
+            var request =   URLRequest(url:url)
+            request.cachePolicy = .reloadIgnoringLocalCacheData
             let session = URLSession.shared
             session.dataTask(with: request) {(data, response, error) -> Void in
+                //print("response: \(response), url: \(url), request:\(response?.url), data:\(data), error: \(error)")
                 if data != nil {
+                    
+                    
+                    
                     DispatchQueue.main.async {
                         //self.handleResponse(data, response: response, requestName: requestName, error: error as NSError?)
                         do {
                             
-                            let data = try Data.init(contentsOf: url)
-                            let parsedDict = try JSONSerialization.jsonObject(with: data, options:[])
+                            //let data = try Data.init(contentsOf: url)
+                            let parsedDict = try JSONSerialization.jsonObject(with: data!, options:[])
                             
+                            print("parsedDict: \(parsedDict)")
                             if ((parsedDict as! [String:Any])[kResultCount] as! Int) == 1{
                                 
-                                let resultArray = ((parsedDict as! [String:Any])["result"]) as! Array<Dictionary<String,Any>>
+                                let resultArray = ((parsedDict as! [String:Any])[kResultsForAppStore]) as! Array<Dictionary<String,Any>>
                                 
-                                let appStoreVersion = (resultArray.first)?["version"]  as! String
+                                let appStoreVersion = (resultArray.first)?[kAppStoreVersion]  as! String
                                 
                                 let currentVersion = infoDict?[kCFBundleShortVersion]
                                 

@@ -696,7 +696,7 @@
                                 
                                 let currentVersion = infoDict?[kCFBundleShortVersion]
                                 
-                                if appStoreVersion != (currentVersion as! String) {
+                                if appStoreVersion != (currentVersion as! String) && appStoreVersion.compare(currentVersion as! String, options: .numeric, range: nil, locale: nil) == ComparisonResult.orderedDescending{
                                     
                                     self.shouldAddForceUpgradeScreen = true
                                     

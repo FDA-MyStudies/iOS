@@ -56,7 +56,7 @@ class NetworkWebServiceHandler: NSObject, URLSessionDelegate {
             if ud {
                 return self.configuration.getDevelopmentURL() as NSString
             }
-            return self.configuration.getDevelopmentURL() as NSString
+            return self.configuration.getProductionURL() as NSString
         #endif
     }
     

@@ -425,6 +425,21 @@ class ActivitiesViewController : UIViewController{
                 return .past
             }
         }
+        else if activity.startDate != nil {
+            
+            let startDateResult = (activity.startDate?.compare(todayDate))! as ComparisonResult
+            
+            if startDateResult == .orderedAscending{
+                
+                return .current
+            }
+            else if startDateResult == .orderedDescending {
+                
+                return .upcoming
+            }
+            
+            
+        }
         return .current
     }
     

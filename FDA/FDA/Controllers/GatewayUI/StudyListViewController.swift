@@ -20,6 +20,8 @@ class StudyListViewController: UIViewController {
     
     var previousCollectionData:Array<Array<String>> = []
     
+    var previousStudyList:Array<Study> = []
+    
     //MARK:- Viewcontroller lifecycle
     
     override func viewDidLoad() {
@@ -404,6 +406,15 @@ class StudyListViewController: UIViewController {
                 self.studiesList = sortedstudies2
                 self.tableView?.reloadData()
                 
+                self.previousStudyList = sortedstudies2
+                
+                if self.previousCollectionData.count > 0 {
+                    
+
+                    self.appliedFilter(studyStatus: self.previousCollectionData.first!, pariticipationsStatus: self.previousCollectionData[2], categories: self.previousCollectionData[3], searchText: "", bookmarked:(self.previousCollectionData[1].count > 0 ? true : false))
+ 
+                    
+                }
                 
                 self.checkIfFetelKickCountRunning()
                 
@@ -636,6 +647,8 @@ class StudyListViewController: UIViewController {
                 appDelegate.handleLocalAndRemoteNotification(userInfoDetails:appDelegate.notificationDetails! )
             }
             
+            
+            
         }
         else {
             self.tableView?.isHidden = true
@@ -713,9 +726,9 @@ extension StudyListViewController : StudyFilterDelegates{
         previousCollectionData = []
         
         previousCollectionData.append(studyStatus)
-        previousCollectionData.append((bookmarked == true ? ["Bookmarked"]:[""]))
+        previousCollectionData.append((bookmarked == true ? ["Bookmarked"]:[]))
         previousCollectionData.append(pariticipationsStatus)
-        previousCollectionData.append(categories)
+        previousCollectionData.append(categories.count == 0 ? [] : categories)
 
         
         
@@ -770,6 +783,8 @@ extension StudyListViewController : StudyFilterDelegates{
         
         self.studiesList = self.getSortedStudies(studies: allStudiesArray)
         
+        self.previousStudyList = self.studiesList
+        
         self.tableView?.reloadData()
         
         
@@ -780,8 +795,8 @@ extension StudyListViewController : StudyFilterDelegates{
     
     func didCancelFilter(_ cancel: Bool) {
         
-        self.studiesList = Gateway.instance.studies!
-        self.tableView?.reloadData()
+        //self.studiesList = Gateway.instance.studies!
+        //self.tableView?.reloadData()
     }
     
   
@@ -921,29 +936,45 @@ extension StudyListViewController : StudyListDelegates {
     }
 }
 
-
+//MARK:SearchBarDelegate
 extension StudyListViewController : searchBarDelegate {
     func didTapOnCancel() {
         
         self.slideMenuController()?.leftPanGesture?.isEnabled = true
         //self.navigationController?.navigationBar.isHidden = false
         
-        self.search(text: "")
+        
+        if self.studiesList.count == 0 {
+             self.studiesList = self.previousStudyList
+        }
+        
+       
+        self.tableView?.reloadData()
+        //self.search(text: "")
     }
     func search(text: String) {
         
             //filter by searched Text
             var searchTextFilteredStudies:Array<Study>! = []
             if text.characters.count > 0 {
-                searchTextFilteredStudies = Gateway.instance.studies?.filter({
+                searchTextFilteredStudies = self.studiesList.filter({
                     ($0.name?.containsIgnoringCase(text))! || ($0.category?.containsIgnoringCase(text))! || ($0.description?.containsIgnoringCase(text))! || ($0.sponserName?.containsIgnoringCase(text))!
                     
                 })
+                self.previousStudyList = self.studiesList
+                self.studiesList = self.getSortedStudies(studies: searchTextFilteredStudies)
             }
             
-            self.studiesList = self.getSortedStudies(studies: searchTextFilteredStudies)
-            
+        
             self.tableView?.reloadData()
+        
+        if self.studiesList.count > 0{
+            if searchView != nil {
+                searchView?.removeFromSuperview()
+                self.slideMenuController()?.leftPanGesture?.isEnabled = true
+            }
+        }
+        
     
     }
 }

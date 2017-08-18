@@ -159,6 +159,7 @@ class StudyFilterViewController: UIViewController {
         //pariticipationsStatus = ["Food Safety","Observational Studies"]
         
         var i:Int = 0
+        var isbookmarked = false
         for filterOptions in StudyFilterHandler.instance.filterOptions{
             
             let filterType = FilterType.init(rawValue: i)
@@ -172,6 +173,7 @@ class StudyFilterViewController: UIViewController {
                     pariticipationsStatus.append(value.title)
                 case .bookMark:
                     bookmark = (value.isSelected)
+                    isbookmarked = true
                 case .category:
                     categories.append(value.title)
                 default:break
@@ -186,9 +188,16 @@ class StudyFilterViewController: UIViewController {
         previousCollectionData = []
         
         previousCollectionData.append(studyStatus)
-        previousCollectionData.append((bookmark == true ? ["Bookmarked"]:[""]))
+        if isbookmarked{
+            previousCollectionData.append((bookmark == true ? ["Bookmarked"]:[]))
+        }
+        else{
+            previousCollectionData.append([])
+            bookmark = false
+        }
+        
         previousCollectionData.append(pariticipationsStatus)
-        previousCollectionData.append(categories)
+        previousCollectionData.append(categories.count == 0 ? [] : categories)
         
         delegate?.appliedFilter(studyStatus: studyStatus, pariticipationsStatus: pariticipationsStatus, categories: categories,searchText:searchText,bookmarked: bookmark)
         self.dismiss(animated: true, completion: nil)

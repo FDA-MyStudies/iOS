@@ -17,7 +17,6 @@ protocol StudyFilterDelegates {
     
     func didCancelFilter(_ cancel:Bool)
     
-    
 }
 
 enum FilterType:Int {
@@ -45,6 +44,8 @@ class StudyFilterViewController: UIViewController {
     var bookmark = true
     var filterData : NSMutableArray?
     
+    var previousCollectionData:Array<Array<String>> = []
+    
     //MARK:- Viewcontroller lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -55,6 +56,8 @@ class StudyFilterViewController: UIViewController {
             layout.delegate = self
         }
         
+        
+        
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -63,28 +66,68 @@ class StudyFilterViewController: UIViewController {
         let plistPath = Bundle.main.path(forResource: "FilterData", ofType: ".plist", inDirectory:nil)
         filterData = NSMutableArray.init(contentsOfFile: plistPath!)!
         
+        
+        StudyFilterHandler.instance.filterOptions = []
+        
        if StudyFilterHandler.instance.filterOptions.count == 0 {
             var filterOptionsList:Array<FilterOptions> = []
-            
+        
+        var i = 0
+        
             for options in filterData! {
                 let values = (options as! Dictionary<String,Any>)["studyData"] as! Array<Dictionary<String,Any>>
                 let filterOptions = FilterOptions()
                 filterOptions.title = (options as! Dictionary<String,Any>)["headerText"] as! String!
                 
                 
+                var selectedValues:Array<String> = []
+                if previousCollectionData.count > 0{
+                    selectedValues = previousCollectionData[i]
+                }
+                
+                
                 var filterValues:Array<FilterValues> = []
                 for value in values {
+                    
+                   var isContained = false
+                    
                     let filterValue = FilterValues()
                     filterValue.title = value["name"] as! String!
-                    filterValue.isSelected = value["isEnabled"] as! Bool //(value["isEnabled"] != nil)
+                    
+                    if selectedValues.count > 0 {
+                        isContained = selectedValues.contains(value["name"] as! String)
+                        
+                    }
+                    
+                    if isContained == false{
+                        
+                        if previousCollectionData.count == 0{
+                            // this means that we are first time accessing the filter screen
+                            
+                            filterValue.isSelected =  value["isEnabled"] as! Bool
+                        }
+                        else{
+                            // means that filter is already set
+                            filterValue.isSelected = false
+                        }
+                        
+                    }
+                    else{
+                        filterValue.isSelected = true
+                    }
+                
+    
                     filterValues.append(filterValue)
                 }
                 filterOptions.filterValues = filterValues
                 filterOptionsList.append(filterOptions)
+                
+                i = i + 1
+                
             }
             StudyFilterHandler.instance.filterOptions = filterOptionsList
         }
-        
+       
         self.collectionView?.reloadData()
     }
     
@@ -140,10 +183,15 @@ class StudyFilterViewController: UIViewController {
         // studyStatus = ["Closed","Paused"]
         //searchText = "Human"
         
+        previousCollectionData = []
+        
+        previousCollectionData.append(studyStatus)
+        previousCollectionData.append((bookmark == true ? ["Bookmarked"]:[""]))
+        previousCollectionData.append(pariticipationsStatus)
+        previousCollectionData.append(categories)
+        
         delegate?.appliedFilter(studyStatus: studyStatus, pariticipationsStatus: pariticipationsStatus, categories: categories,searchText:searchText,bookmarked: bookmark)
         self.dismiss(animated: true, completion: nil)
-        
-        
         
     }
     

@@ -18,6 +18,8 @@ class StudyListViewController: UIViewController {
     var isComingFromFilterScreen : Bool = false
     var studiesList:Array<Study> = []
     
+    var previousCollectionData:Array<Array<String>> = []
+    
     //MARK:- Viewcontroller lifecycle
     
     override func viewDidLoad() {
@@ -537,6 +539,10 @@ class StudyListViewController: UIViewController {
         
         if segue.identifier == filterListSegue{
             let filterVc = segue.destination as! StudyFilterViewController
+            if self.previousCollectionData.count > 0 {
+                 filterVc.previousCollectionData = self.previousCollectionData
+            }
+            
             filterVc.delegate = self
         }
     }
@@ -704,6 +710,16 @@ extension StudyListViewController : StudyFilterDelegates{
     //Based on applied filter call WS
     func appliedFilter(studyStatus: Array<String>, pariticipationsStatus: Array<String>, categories: Array<String>, searchText: String, bookmarked: Bool) {
       
+        previousCollectionData = []
+        
+        previousCollectionData.append(studyStatus)
+        previousCollectionData.append((bookmarked == true ? ["Bookmarked"]:[""]))
+        previousCollectionData.append(pariticipationsStatus)
+        previousCollectionData.append(categories)
+
+        
+        
+        
        //filter by study category
         var categoryFilteredStudies:Array<Study>! = []
         if categories.count > 0 {
@@ -911,6 +927,8 @@ extension StudyListViewController : searchBarDelegate {
         
         self.slideMenuController()?.leftPanGesture?.isEnabled = true
         //self.navigationController?.navigationBar.isHidden = false
+        
+        self.search(text: "")
     }
     func search(text: String) {
         

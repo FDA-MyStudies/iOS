@@ -351,7 +351,7 @@ class ConsentBuilder{
             
             // identifier missing
             
-            let sharingConsentStep = ConsentSharingStep(identifier: "Sharing", investigatorShortDescription: (self.sharingConsent?.shortDesc)!, investigatorLongDescription: (self.sharingConsent?.longDesc)!, localizedLearnMoreHTMLContent: (self.sharingConsent?.learnMore)!)
+            let sharingConsentStep = ConsentSharingStep(identifier: kConsentSharing, investigatorShortDescription: (self.sharingConsent?.shortDesc)!, investigatorLongDescription: (self.sharingConsent?.longDesc)!, localizedLearnMoreHTMLContent: (self.sharingConsent?.learnMore)!)
             
             return sharingConsentStep
             

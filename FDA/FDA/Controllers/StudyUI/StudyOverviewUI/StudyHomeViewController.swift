@@ -336,7 +336,26 @@ class StudyHomeViewController : UIViewController{
                             
                         }
                         else if (correctAnswerArray?.count) == 2 {
-                            // for both answers pass to next question no need of branching
+                            // for both answers pass to next question no need of branching, provided that this is not last question
+                            
+                            var nextStep:ORKStep?
+                            
+                            if i! + 1 < (eligibilitySteps?.count)!{
+                                nextStep = (eligibilitySteps?[(i!+1)])!
+                            }
+                            
+                            if nextStep != nil && nextStep is InEligibilityStep{
+                                // need to jump to validated screen
+                                
+                                let  directRule:ORKDirectStepNavigationRule!
+                                directRule = ORKDirectStepNavigationRule(destinationStepIdentifier: kEligibilityVerifiedScreen)
+                                (orkOrderedTask as! ORKNavigableOrderedTask).setNavigationRule(directRule!, forTriggerStepIdentifier:orkstep.identifier)
+                                
+                            }
+                            else{
+                                // do nothing assuming that next step is some question step
+                            }
+                            
                         }
                         
                         
@@ -1039,7 +1058,8 @@ extension StudyHomeViewController:ORKTaskViewControllerDelegate{
         //For Verified Step , Completion Step, Visual Step, Review Step, Share Pdf Step
         
         if stepViewController.step?.identifier == kEligibilityVerifiedScreen || stepViewController.step?.identifier == kConsentCompletionStepIdentifier || stepViewController.step?.identifier == kVisualStepId  || stepViewController.step?.identifier == kConsentSharePdfCompletionStep ||
-            stepViewController.step?.identifier == kInEligibilityStep || stepViewController.step?.identifier == kEligibilityValidateScreen{
+            stepViewController.step?.identifier == kInEligibilityStep || stepViewController.step?.identifier == kEligibilityValidateScreen
+        || stepViewController.step?.identifier == kConsentSharing || stepViewController.step?.identifier == kReviewTitle{
             //|| stepViewController.step?.identifier == "Review"
             
             if stepViewController.step?.identifier == kEligibilityVerifiedScreen{
@@ -1196,7 +1216,14 @@ extension StudyHomeViewController:ORKTaskViewControllerDelegate{
                 return nil
             }
         }
-        else if step.identifier == kReviewTitle{
+        else if step.identifier == kReviewTitle || step.identifier == kConsentSharing{
+            
+            //previous step was consent sharing and validation of answers(if comprehension test exists) is already done
+            
+            if step.identifier == kReviewTitle && taskViewController.result.results?.last?.identifier == kConsentSharing{
+                return nil
+            }
+            
             
             
             // comprehension test is available

@@ -280,7 +280,7 @@ class WCPServices: NSObject {
         
         
         // To Be Commented
-        
+        /*
         let filePath  = Bundle.main.path(forResource: "Eligibility_1B", ofType: "json")
         
         //let filePath  = Bundle.main.path(forResource: "FetalKickTest", ofType: "json")
@@ -308,7 +308,7 @@ class WCPServices: NSObject {
             print("\(error)")
         }
         
-        
+        */
         //-------
         
         

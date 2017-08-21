@@ -268,7 +268,7 @@ class ActivitiesViewController : UIViewController{
      */
     func createActivity(){
         
-        
+        /*
         
          let filePath  = Bundle.main.path(forResource: "Labkey_Activity", ofType: "json")
          
@@ -284,7 +284,7 @@ class ActivitiesViewController : UIViewController{
          catch let error as NSError{
          print("\(error)")
          }
-        
+        */
         
         
         

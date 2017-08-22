@@ -289,6 +289,7 @@ extension StudyFilterViewController:PinterestLayoutDelegate{
 
 class StudyFilterHandler {
     var filterOptions:Array<FilterOptions> = []
+    var previousAppliedFilters:Array<Array<String>> = []
     static var instance = StudyFilterHandler()
 }
 

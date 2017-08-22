@@ -17,9 +17,7 @@ class StudyListViewController: UIViewController {
     
     var isComingFromFilterScreen : Bool = false
     var studiesList:Array<Study> = []
-    
-    var previousCollectionData:Array<Array<String>> = []
-    
+
     var previousStudyList:Array<Study> = []
     
     //MARK:- Viewcontroller lifecycle
@@ -408,10 +406,10 @@ class StudyListViewController: UIViewController {
                 
                 self.previousStudyList = sortedstudies2
                 
-                if self.previousCollectionData.count > 0 {
-                    
+                if StudyFilterHandler.instance.previousAppliedFilters.count > 0 {
+                   let previousCollectionData = StudyFilterHandler.instance.previousAppliedFilters
 
-                    self.appliedFilter(studyStatus: self.previousCollectionData.first!, pariticipationsStatus: self.previousCollectionData[2], categories: self.previousCollectionData[3], searchText: "", bookmarked:(self.previousCollectionData[1].count > 0 ? true : false))
+                    self.appliedFilter(studyStatus: previousCollectionData.first!, pariticipationsStatus: previousCollectionData[2], categories:previousCollectionData[3], searchText: "", bookmarked:(previousCollectionData[1].count > 0 ? true : false))
  
                     
                 }
@@ -550,8 +548,8 @@ class StudyListViewController: UIViewController {
         
         if segue.identifier == filterListSegue{
             let filterVc = segue.destination as! StudyFilterViewController
-            if self.previousCollectionData.count > 0 {
-                 filterVc.previousCollectionData = self.previousCollectionData
+            if StudyFilterHandler.instance.previousAppliedFilters.count > 0 {
+                 filterVc.previousCollectionData = StudyFilterHandler.instance.previousAppliedFilters
             }
             
             filterVc.delegate = self
@@ -723,14 +721,15 @@ extension StudyListViewController : StudyFilterDelegates{
     //Based on applied filter call WS
     func appliedFilter(studyStatus: Array<String>, pariticipationsStatus: Array<String>, categories: Array<String>, searchText: String, bookmarked: Bool) {
       
-        previousCollectionData = []
+        
+        var previousCollectionData:Array<Array<String>> = []
         
         previousCollectionData.append(studyStatus)
         previousCollectionData.append((bookmarked == true ? ["Bookmarked"]:[]))
         previousCollectionData.append(pariticipationsStatus)
         previousCollectionData.append(categories.count == 0 ? [] : categories)
 
-        
+        StudyFilterHandler.instance.previousAppliedFilters = previousCollectionData
         
         
        //filter by study category

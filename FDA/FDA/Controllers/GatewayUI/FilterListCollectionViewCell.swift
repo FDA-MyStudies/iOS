@@ -37,6 +37,8 @@ class FilterListCollectionViewCell: UICollectionViewCell {
         
         labelHeaderTitle?.sizeToFit()
         
+        
+        
     }
 }
 

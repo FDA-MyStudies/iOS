@@ -17,7 +17,7 @@ class StudyListViewController: UIViewController {
     
     var isComingFromFilterScreen : Bool = false
     var studiesList:Array<Study> = []
-
+    
     var previousStudyList:Array<Study> = []
     
     //MARK:- Viewcontroller lifecycle
@@ -36,7 +36,7 @@ class StudyListViewController: UIViewController {
         titleLabel.textAlignment = .left
         titleLabel.textColor = Utilities.getUIColorFromHex(0x007cba)
         titleLabel.frame = CGRect.init(x: 0, y: 0, width: 300, height: 44)
-       
+        
         self.navigationItem.titleView = titleLabel
         
         //self.loadTestData()
@@ -44,7 +44,7 @@ class StudyListViewController: UIViewController {
         //Condition missing
         
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
-//        appDelegate.askForNotification()
+        //        appDelegate.askForNotification()
         
         if User.currentUser.userType == .FDAUser && User.currentUser.settings?.localNotifications == true{
             appDelegate.checkForAppReopenNotification()
@@ -52,7 +52,7 @@ class StudyListViewController: UIViewController {
         
         isComingFromFilterScreen = false
         
-         IQKeyboardManager.sharedManager().enable = true
+        IQKeyboardManager.sharedManager().enable = true
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -100,8 +100,8 @@ class StudyListViewController: UIViewController {
                 
                 
                 self.sendRequestToGetUserPreference()
-               
-        
+                
+                
             }
             
             //  self.sendRequestToGetStudyList()
@@ -178,13 +178,13 @@ class StudyListViewController: UIViewController {
         let barButton = UIBarButtonItem.init(customView: view)
         
         
-       // let filterButton1 = UIBarButtonItem(image: UIImage(named: "filterIcon"), style: .plain, target: self, action: #selector(self.filterAction(_:)))//action:#selector(Class.MethodName) for swift 3
+        // let filterButton1 = UIBarButtonItem(image: UIImage(named: "filterIcon"), style: .plain, target: self, action: #selector(self.filterAction(_:)))//action:#selector(Class.MethodName) for swift 3
         
         ///// Added filterBarButton
         //let filterBarButton = UIBarButtonItem.init(customView: view)
         
         
-         //let buttonSearch = UIBarButtonItem(image: UIImage(named: "search_big"), style: .plain, target: self, action: #selector(self.searchButtonAction(_:)))//action:#selector(Class.MethodName) for swift 3
+        //let buttonSearch = UIBarButtonItem(image: UIImage(named: "search_big"), style: .plain, target: self, action: #selector(self.searchButtonAction(_:)))//action:#selector(Class.MethodName) for swift 3
         
         
         //Changes from rightBarButtonItem to rightBarButtonItems(to support multiple Bar button item)
@@ -407,10 +407,10 @@ class StudyListViewController: UIViewController {
                 self.previousStudyList = sortedstudies2
                 
                 if StudyFilterHandler.instance.previousAppliedFilters.count > 0 {
-                   let previousCollectionData = StudyFilterHandler.instance.previousAppliedFilters
-
+                    let previousCollectionData = StudyFilterHandler.instance.previousAppliedFilters
+                    
                     self.appliedFilter(studyStatus: previousCollectionData.first!, pariticipationsStatus: previousCollectionData[2], categories:previousCollectionData[3], searchText: "", bookmarked:(previousCollectionData[1].count > 0 ? true : false))
- 
+                    
                     
                 }
                 
@@ -481,20 +481,33 @@ class StudyListViewController: UIViewController {
     
     @IBAction func searchButtonAction(_ sender:UIBarButtonItem){
         
-        searchView = SearchBarView.instanceFromNib(frame:CGRect.init(x: 0, y: 0, width: self.view.frame.size.width, height: 64.0), detail: nil);
         
-        //self.navigationController?.navigationBar.isHidden = true
-    
-         
+        self.searchView = SearchBarView.instanceFromNib(frame:CGRect.init(x: 0, y: -200, width: self.view.frame.size.width, height: 64.0), detail: nil);
         
-        searchView?.textFieldSearch?.becomeFirstResponder()
-        searchView?.delegate = self
         
-        self.slideMenuController()?.leftPanGesture?.isEnabled = false
-        
-       self.navigationController?.view.addSubview(searchView!)
+        UIView.animate(withDuration: 0.2,
+                       delay: 0.1,
+                       options: UIViewAnimationOptions.preferredFramesPerSecond60,
+                       animations: { () -> Void in
+                        
+                        self.searchView?.frame = CGRect(x:0 , y:0 , width:self.view.frame.size.width , height: 64.0)
+                        
+                        //self.navigationController?.navigationBar.isHidden = true
+                        
+                        self.searchView?.textFieldSearch?.becomeFirstResponder()
+                        self.searchView?.delegate = self
+                        
+                        self.slideMenuController()?.leftPanGesture?.isEnabled = false
+                        
+                        self.navigationController?.view.addSubview(self.searchView!)
+                        
+                        if StudyFilterHandler.instance.searchText.characters.count > 0 {
+                            self.searchView?.textFieldSearch?.text = StudyFilterHandler.instance.searchText
+                        }
 
-        
+        }, completion: { (finished) -> Void in
+            
+        })
     }
     
     
@@ -516,7 +529,7 @@ class StudyListViewController: UIViewController {
         button.setTitleColor(Utilities.getUIColorFromHex(0x007cba), for: .normal)
         
         let barItem = UIBarButtonItem(customView: button)
-       
+        
         self.navigationItem.setLeftBarButton(barItem, animated: true)
     }
     
@@ -549,7 +562,7 @@ class StudyListViewController: UIViewController {
         if segue.identifier == filterListSegue{
             let filterVc = segue.destination as! StudyFilterViewController
             if StudyFilterHandler.instance.previousAppliedFilters.count > 0 {
-                 filterVc.previousCollectionData = StudyFilterHandler.instance.previousAppliedFilters
+                filterVc.previousCollectionData = StudyFilterHandler.instance.previousAppliedFilters
             }
             
             filterVc.delegate = self
@@ -717,10 +730,11 @@ class StudyListViewController: UIViewController {
 
 //MARK:- Applied filter delegate
 extension StudyListViewController : StudyFilterDelegates{
-
+    
     //Based on applied filter call WS
     func appliedFilter(studyStatus: Array<String>, pariticipationsStatus: Array<String>, categories: Array<String>, searchText: String, bookmarked: Bool) {
-      
+        
+        
         
         var previousCollectionData:Array<Array<String>> = []
         
@@ -728,31 +742,36 @@ extension StudyListViewController : StudyFilterDelegates{
         previousCollectionData.append((bookmarked == true ? ["Bookmarked"]:[]))
         previousCollectionData.append(pariticipationsStatus)
         previousCollectionData.append(categories.count == 0 ? [] : categories)
-
+        
         StudyFilterHandler.instance.previousAppliedFilters = previousCollectionData
         
+        StudyFilterHandler.instance.searchText = ""
         
-       //filter by study category
+        //filter by study category
         var categoryFilteredStudies:Array<Study>! = []
         if categories.count > 0 {
-             categoryFilteredStudies =  Gateway.instance.studies?.filter({categories.contains($0.category!)})
+            categoryFilteredStudies =  Gateway.instance.studies?.filter({categories.contains($0.category!)})
         }
         
         //filter by study status
         var statusFilteredStudies:Array<Study>! = []
         if studyStatus.count > 0 {
-             statusFilteredStudies =  Gateway.instance.studies?.filter({studyStatus.contains($0.status.rawValue)})
+            statusFilteredStudies =  Gateway.instance.studies?.filter({studyStatus.contains($0.status.rawValue)})
         }
         
         //filter by study status
         var pariticipationsStatusFilteredStudies:Array<Study>! = []
         if pariticipationsStatus.count > 0 {
-             pariticipationsStatusFilteredStudies =  Gateway.instance.studies?.filter({studyStatus.contains($0.userParticipateState.status.description)})
+            pariticipationsStatusFilteredStudies =  Gateway.instance.studies?.filter({studyStatus.contains($0.userParticipateState.status.description)})
         }
         
         //filter by bookmark
         var bookmarkedStudies:Array<Study>! = []
+        
+        if bookmarked{
+            
         bookmarkedStudies = Gateway.instance.studies?.filter({$0.userParticipateState.bookmarked == bookmarked})
+        }
         
         //filter by searched Text
         var searchTextFilteredStudies:Array<Study>! = []
@@ -789,8 +808,8 @@ extension StudyListViewController : StudyFilterDelegates{
         
         
     }
-
-
+    
+    
     
     func didCancelFilter(_ cancel: Bool) {
         
@@ -798,7 +817,7 @@ extension StudyListViewController : StudyFilterDelegates{
         //self.tableView?.reloadData()
     }
     
-  
+    
 }
 
 
@@ -944,28 +963,34 @@ extension StudyListViewController : searchBarDelegate {
         
         
         if self.studiesList.count == 0 {
-             self.studiesList = self.previousStudyList
+            self.studiesList = self.previousStudyList
         }
         
-       
+        
         self.tableView?.reloadData()
         //self.search(text: "")
     }
     func search(text: String) {
         
-            //filter by searched Text
-            var searchTextFilteredStudies:Array<Study>! = []
-            if text.characters.count > 0 {
-                searchTextFilteredStudies = self.studiesList.filter({
-                    ($0.name?.containsIgnoringCase(text))! || ($0.category?.containsIgnoringCase(text))! || ($0.description?.containsIgnoringCase(text))! || ($0.sponserName?.containsIgnoringCase(text))!
-                    
-                })
-                self.previousStudyList = self.studiesList
-                self.studiesList = self.getSortedStudies(studies: searchTextFilteredStudies)
-            }
+        //filter by searched Text
+        var searchTextFilteredStudies:Array<Study>! = []
+        if text.characters.count > 0 {
+            searchTextFilteredStudies = self.studiesList.filter({
+                ($0.name?.containsIgnoringCase(text))! || ($0.category?.containsIgnoringCase(text))! || ($0.description?.containsIgnoringCase(text))! || ($0.sponserName?.containsIgnoringCase(text))!
+                
+            })
             
+            StudyFilterHandler.instance.searchText = text
+            
+            self.previousStudyList = self.studiesList
+            self.studiesList = self.getSortedStudies(studies: searchTextFilteredStudies)
+        }else{
+            StudyFilterHandler.instance.searchText = ""
+            
+        }
         
-            self.tableView?.reloadData()
+        
+        self.tableView?.reloadData()
         
         if self.studiesList.count > 0{
             if searchView != nil {
@@ -974,7 +999,7 @@ extension StudyListViewController : searchBarDelegate {
             }
         }
         
-    
+        
     }
 }
 
@@ -1085,7 +1110,7 @@ extension StudyListViewController:ORKTaskViewControllerDelegate{
         switch reason {
             
         case ORKTaskViewControllerFinishReason.completed:
-             print("completed")
+            print("completed")
             taskResult = taskViewController.result
             
             let ud = UserDefaults.standard

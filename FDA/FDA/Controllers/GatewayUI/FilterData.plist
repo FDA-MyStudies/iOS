@@ -46,7 +46,7 @@
 				<key>name</key>
 				<string>Bookmarked</string>
 				<key>isEnabled</key>
-				<true/>
+				<false/>
 			</dict>
 		</array>
 	</dict>

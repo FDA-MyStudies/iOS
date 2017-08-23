@@ -231,6 +231,21 @@ extension StudyFilterViewController : UICollectionViewDataSource{//,UICollection
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! FilterListCollectionViewCell
 
+        
+        
+        if User.currentUser.userType == .FDAUser{
+            cell.isUserInteractionEnabled = true
+        }
+        else{
+            if indexPath.item % 2 == 0 {
+               cell.isUserInteractionEnabled = false
+            }
+            else{
+                cell.isUserInteractionEnabled = true
+            }
+        }
+        
+        
         //let data = filterData?[indexPath.row] as! NSDictionary
         let filterOption = StudyFilterHandler.instance.filterOptions[indexPath.row]
         cell.displayCollectionData(data: filterOption)
@@ -290,6 +305,7 @@ extension StudyFilterViewController:PinterestLayoutDelegate{
 class StudyFilterHandler {
     var filterOptions:Array<FilterOptions> = []
     var previousAppliedFilters:Array<Array<String>> = []
+    var searchText = ""
     static var instance = StudyFilterHandler()
 }
 

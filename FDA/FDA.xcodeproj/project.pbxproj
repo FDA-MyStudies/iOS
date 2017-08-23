@@ -36,6 +36,7 @@
 		6E183AB51E966230005D7A27 /* AKUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E183AB21E966230005D7A27 /* AKUtility.swift */; };
 		6E2B25F31EAE3F1D00E2DFB2 /* ResearchContainerSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E2B25F11EAE3F1D00E2DFB2 /* ResearchContainerSegue.swift */; };
 		6E2B25F41EAE3F1D00E2DFB2 /* ResearchContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E2B25F21EAE3F1D00E2DFB2 /* ResearchContainerViewController.swift */; };
+		6E417AD31F4D5DA1007F27DA /* AnanomousFilterData.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6E417AD21F4D5DA1007F27DA /* AnanomousFilterData.plist */; };
 		6E4CECB61F31B41C005E0832 /* PinterestLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E4CECB51F31B41C005E0832 /* PinterestLayout.swift */; };
 		6E4D72FD1F3C2E4000BF88B7 /* ActivityFilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E4D72FC1F3C2E4000BF88B7 /* ActivityFilterView.swift */; };
 		6E4D72FF1F3C3DE000BF88B7 /* ActivityFilterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6E4D72FE1F3C3DE000BF88B7 /* ActivityFilterView.xib */; };
@@ -294,6 +295,7 @@
 		6E183AB21E966230005D7A27 /* AKUtility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AKUtility.swift; sourceTree = "<group>"; };
 		6E2B25F11EAE3F1D00E2DFB2 /* ResearchContainerSegue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResearchContainerSegue.swift; sourceTree = "<group>"; };
 		6E2B25F21EAE3F1D00E2DFB2 /* ResearchContainerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResearchContainerViewController.swift; sourceTree = "<group>"; };
+		6E417AD21F4D5DA1007F27DA /* AnanomousFilterData.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = AnanomousFilterData.plist; sourceTree = "<group>"; };
 		6E4CECB51F31B41C005E0832 /* PinterestLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PinterestLayout.swift; sourceTree = "<group>"; };
 		6E4D72FC1F3C2E4000BF88B7 /* ActivityFilterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityFilterView.swift; sourceTree = "<group>"; };
 		6E4D72FE1F3C3DE000BF88B7 /* ActivityFilterView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ActivityFilterView.xib; sourceTree = "<group>"; };
@@ -1166,6 +1168,7 @@
 				48567FE01F14FB3C00857193 /* StudyFilterViewController.swift */,
 				6E4CECB51F31B41C005E0832 /* PinterestLayout.swift */,
 				484ACBFB1F28A82B00BCC819 /* FilterData.plist */,
+				6E417AD21F4D5DA1007F27DA /* AnanomousFilterData.plist */,
 				484ACBF51F2896A500BCC819 /* FilterListCollectionViewCell.swift */,
 				484ACBFF1F28BC8800BCC819 /* FilterListTableViewCell.swift */,
 				6E4D86DB1F389DF1003DBDD8 /* SearchBarView.xib */,
@@ -1558,6 +1561,7 @@
 				94B3DD401E6ED8E500327AE5 /* Gateway.storyboard in Resources */,
 				6EC129241E64624F00B90167 /* Acivity_Question.json in Resources */,
 				94B3DD441E6ED8E500327AE5 /* Profile.plist in Resources */,
+				6E417AD31F4D5DA1007F27DA /* AnanomousFilterData.plist in Resources */,
 				6EB7401C1E9CFAD700A4C773 /* 01.png in Resources */,
 				6E7D2D8C1E4340B200763D4C /* UserProfile.plist in Resources */,
 				6E7D2D901E43526100763D4C /* Register.plist in Resources */,

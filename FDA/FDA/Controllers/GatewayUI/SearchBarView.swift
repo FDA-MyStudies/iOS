@@ -46,11 +46,20 @@ class SearchBarView: UIView {
     }
     
     @IBAction func buttonCancelAction(){
-       self.delegate?.didTapOnCancel()
         
-        self.removeFromSuperview()
+        self.delegate?.didTapOnCancel()
+        
+        UIView.animate(withDuration: 0.2,
+                       delay: 0.1,
+                       options: UIViewAnimationOptions.preferredFramesPerSecond60,
+                       animations: { () -> Void in
+                        self.frame = CGRect(x:0 , y:-300 , width:self.frame.size.width , height: 64.0)
+                        
+                        
+        }, completion: { (finished) -> Void in
+            self.removeFromSuperview()
+        })
     }
-    
 }
 
 extension SearchBarView : UITextFieldDelegate{

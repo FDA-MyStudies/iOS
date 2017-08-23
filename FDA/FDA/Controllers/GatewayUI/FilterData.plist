@@ -83,7 +83,7 @@
 			</dict>
 			<dict>
 				<key>name</key>
-				<string>Yet to Join</string>
+				<string>Yet To Join</string>
 				<key>isEnabled</key>
 				<true/>
 			</dict>
@@ -98,13 +98,13 @@
 		<array>
 			<dict>
 				<key>name</key>
-				<string>Pregnancy</string>
+				<string>Cosmetics Safety</string>
 				<key>isEnabled</key>
 				<true/>
 			</dict>
 			<dict>
 				<key>name</key>
-				<string>Fitness</string>
+				<string>Biologics Safety</string>
 				<key>isEnabled</key>
 				<true/>
 			</dict>
@@ -116,43 +116,31 @@
 			</dict>
 			<dict>
 				<key>name</key>
-				<string>Lifestyle</string>
+				<string>Public Health</string>
 				<key>isEnabled</key>
 				<true/>
 			</dict>
 			<dict>
 				<key>name</key>
-				<string>Lifestyle</string>
+				<string>Observational Studies</string>
 				<key>isEnabled</key>
 				<true/>
 			</dict>
 			<dict>
 				<key>name</key>
-				<string>Lifestyle</string>
+				<string>Clinical Trials</string>
 				<key>isEnabled</key>
 				<true/>
 			</dict>
 			<dict>
 				<key>name</key>
-				<string>Lifestyle</string>
+				<string>Medical Device Safety</string>
 				<key>isEnabled</key>
 				<true/>
 			</dict>
 			<dict>
 				<key>name</key>
-				<string>Lifestyle</string>
-				<key>isEnabled</key>
-				<true/>
-			</dict>
-			<dict>
-				<key>name</key>
-				<string>Lifestyle12345 676435896374</string>
-				<key>isEnabled</key>
-				<true/>
-			</dict>
-			<dict>
-				<key>name</key>
-				<string>Lifestyle</string>
+				<string>Drug Safety</string>
 				<key>isEnabled</key>
 				<true/>
 			</dict>

@@ -63,7 +63,14 @@ class StudyFilterViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        let plistPath = Bundle.main.path(forResource: "FilterData", ofType: ".plist", inDirectory:nil)
+        var resource = "AnanomousFilterData"
+        
+        if User.currentUser.userType == .FDAUser{
+            resource = "FilterData"
+        }
+       
+        
+        let plistPath = Bundle.main.path(forResource: resource, ofType: ".plist", inDirectory:nil)
         filterData = NSMutableArray.init(contentsOfFile: plistPath!)!
         
         
@@ -160,6 +167,8 @@ class StudyFilterViewController: UIViewController {
         
         var i:Int = 0
         var isbookmarked = false
+       
+        
         for filterOptions in StudyFilterHandler.instance.filterOptions{
             
             let filterType = FilterType.init(rawValue: i)
@@ -172,8 +181,15 @@ class StudyFilterViewController: UIViewController {
                 case .participantStatus:
                     pariticipationsStatus.append(value.title)
                 case .bookMark:
-                    bookmark = (value.isSelected)
-                    isbookmarked = true
+                    
+                    if User.currentUser.userType == .FDAUser{
+                        bookmark = (value.isSelected)
+                        isbookmarked = true
+                    }
+                    else{
+                        categories.append(value.title)
+                    }
+                    
                 case .category:
                     categories.append(value.title)
                 default:break
@@ -188,6 +204,8 @@ class StudyFilterViewController: UIViewController {
         previousCollectionData = []
         
         previousCollectionData.append(studyStatus)
+        
+        if User.currentUser.userType == .FDAUser{
         if isbookmarked{
             previousCollectionData.append((bookmark == true ? ["Bookmarked"]:[]))
         }
@@ -195,7 +213,12 @@ class StudyFilterViewController: UIViewController {
             previousCollectionData.append([])
             bookmark = false
         }
-        
+        }
+        else{
+            previousCollectionData.append(categories)
+            bookmark = false
+            
+        }
         previousCollectionData.append(pariticipationsStatus)
         previousCollectionData.append(categories.count == 0 ? [] : categories)
         
@@ -231,19 +254,6 @@ extension StudyFilterViewController : UICollectionViewDataSource{//,UICollection
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! FilterListCollectionViewCell
 
-        
-        
-        if User.currentUser.userType == .FDAUser{
-            cell.isUserInteractionEnabled = true
-        }
-        else{
-            if indexPath.item % 2 == 0 {
-               cell.isUserInteractionEnabled = false
-            }
-            else{
-                cell.isUserInteractionEnabled = true
-            }
-        }
         
         
         //let data = filterData?[indexPath.row] as! NSDictionary

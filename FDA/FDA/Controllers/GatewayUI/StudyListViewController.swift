@@ -8,10 +8,19 @@
 
 import UIKit
 import IQKeyboardManagerSwift
+
+let kHelperTextForFilteredStudiesNotFound = "Sorry, no Studies found. Please try different Filter Options"
+let kHelperTextForSearchedStudiesNotFound = "Sorry, no Studies found. Please check the spelling or try a different search."
+
+let kHelperTextForOffline = "Sorry, no studies available right now. Please remain signed in to get notified when there are new studies available."
+
 class StudyListViewController: UIViewController {
     
     @IBOutlet var tableView:UITableView?
     @IBOutlet var labelHelperText:UILabel!
+    
+    var refreshControl:UIRefreshControl?
+    
     var studyListRequestFailed = false
     var searchView:SearchBarView?
     
@@ -53,6 +62,13 @@ class StudyListViewController: UIViewController {
         isComingFromFilterScreen = false
         
         IQKeyboardManager.sharedManager().enable = true
+        
+        
+        refreshControl = UIRefreshControl()
+        refreshControl?.attributedTitle = NSAttributedString(string: "Pull to refresh")
+        refreshControl?.addTarget(self, action: #selector(refresh(sender:)), for: UIControlEvents.valueChanged)
+        tableView?.addSubview(refreshControl!)
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -409,7 +425,14 @@ class StudyListViewController: UIViewController {
                 if StudyFilterHandler.instance.previousAppliedFilters.count > 0 {
                     let previousCollectionData = StudyFilterHandler.instance.previousAppliedFilters
                     
-                    self.appliedFilter(studyStatus: previousCollectionData.first!, pariticipationsStatus: previousCollectionData[2], categories:previousCollectionData[3], searchText: "", bookmarked:(previousCollectionData[1].count > 0 ? true : false))
+                    if User.currentUser.userType == .FDAUser{
+                        
+                        self.appliedFilter(studyStatus: previousCollectionData.first!, pariticipationsStatus: previousCollectionData[2], categories:previousCollectionData[3], searchText: "", bookmarked:(previousCollectionData[1].count > 0 ? true : false))
+                    }
+                    else{
+                        self.appliedFilter(studyStatus: previousCollectionData.first!, pariticipationsStatus: [], categories:previousCollectionData[1], searchText: "", bookmarked:false)
+                    }
+                    
                     
                     
                 }
@@ -429,7 +452,7 @@ class StudyListViewController: UIViewController {
                 else {
                     self.tableView?.isHidden = true
                     self.labelHelperText.isHidden = false
-                    
+                    self.labelHelperText.text = kHelperTextForOffline
                     
                 }
                 
@@ -464,6 +487,12 @@ class StudyListViewController: UIViewController {
     @IBAction func buttonActionNotification(_ sender:UIBarButtonItem){
         self.navigateToNotifications()
     }
+    
+    
+    func refresh(sender:AnyObject) {
+        self.sendRequestToGetStudyList()
+    }
+    
     
     /**
      
@@ -649,8 +678,8 @@ class StudyListViewController: UIViewController {
         
         if (Gateway.instance.studies?.count)! > 0{
             self.loadStudiesFromDatabase()
-            self.labelHelperText.isHidden = true
-            self.tableView?.isHidden = false
+            //self.labelHelperText.isHidden = true
+            //self.tableView?.isHidden = false
             
             let appDelegate = UIApplication.shared.delegate as! AppDelegate
             
@@ -739,8 +768,13 @@ extension StudyListViewController : StudyFilterDelegates{
         var previousCollectionData:Array<Array<String>> = []
         
         previousCollectionData.append(studyStatus)
-        previousCollectionData.append((bookmarked == true ? ["Bookmarked"]:[]))
-        previousCollectionData.append(pariticipationsStatus)
+        
+        if User.currentUser.userType == .FDAUser{
+              previousCollectionData.append((bookmarked == true ? ["Bookmarked"]:[]))
+            previousCollectionData.append(pariticipationsStatus)
+        }
+        
+        
         previousCollectionData.append(categories.count == 0 ? [] : categories)
         
         StudyFilterHandler.instance.previousAppliedFilters = previousCollectionData
@@ -762,7 +796,7 @@ extension StudyListViewController : StudyFilterDelegates{
         //filter by study status
         var pariticipationsStatusFilteredStudies:Array<Study>! = []
         if pariticipationsStatus.count > 0 {
-            pariticipationsStatusFilteredStudies =  Gateway.instance.studies?.filter({studyStatus.contains($0.userParticipateState.status.description)})
+            pariticipationsStatusFilteredStudies =  Gateway.instance.studies?.filter({pariticipationsStatus.contains($0.userParticipateState.status.description)})
         }
         
         //filter by bookmark
@@ -805,11 +839,24 @@ extension StudyListViewController : StudyFilterDelegates{
         
         self.tableView?.reloadData()
         
-        
-        
+        if self.studiesList.count == 0 {
+            self.tableView?.isHidden = true
+            self.labelHelperText.isHidden = false
+            
+            if searchText == ""{
+                
+                self.labelHelperText.text = kHelperTextForFilteredStudiesNotFound
+            }
+            else{
+                self.labelHelperText.text = kHelperTextForSearchedStudiesNotFound
+            }
+            
+        }
+        else{
+            self.tableView?.isHidden = false
+            self.labelHelperText.isHidden = true
+        }
     }
-    
-    
     
     func didCancelFilter(_ cancel: Bool) {
         
@@ -839,6 +886,7 @@ extension StudyListViewController : UITableViewDataSource {
         }
         
         let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as! StudyListCell
+        
         
         cell.populateCellWith(study: (self.studiesList[indexPath.row]))
         cell.delegate = self
@@ -984,6 +1032,14 @@ extension StudyListViewController : searchBarDelegate {
             
             self.previousStudyList = self.studiesList
             self.studiesList = self.getSortedStudies(studies: searchTextFilteredStudies)
+            
+            if self.studiesList.count == 0 {
+            self.labelHelperText.text = kHelperTextForSearchedStudiesNotFound
+            self.tableView?.isHidden = true
+            self.labelHelperText.isHidden = false
+            }
+            
+            
         }else{
             StudyFilterHandler.instance.searchText = ""
             
@@ -1019,6 +1075,10 @@ extension StudyListViewController:NMWebServiceDelegate {
         if requestName as String == WCPMethods.studyList.rawValue{
             let responseDict = response as! NSDictionary
             
+            
+            if self.refreshControl != nil && (self.refreshControl?.isRefreshing)!{
+                self.refreshControl?.endRefreshing()
+            }
             
             self.handleStudyListResponse()
             self.removeProgressIndicator()

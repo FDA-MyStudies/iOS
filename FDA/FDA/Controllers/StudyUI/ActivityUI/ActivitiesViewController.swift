@@ -30,6 +30,7 @@ class ActivitiesViewController : UIViewController{
     var selectedIndexPath:IndexPath? = nil
     var isAnchorDateSet:Bool = false
     var taskControllerPresented = false
+    var refreshControl:UIRefreshControl?
     
     var allActivityList:Array<Dictionary<String,Any>>! = []
     var selectedFilter: ActivityFilterType?
@@ -68,7 +69,12 @@ class ActivitiesViewController : UIViewController{
             
         }
         
-        
+        refreshControl = UIRefreshControl()
+        refreshControl?.attributedTitle = NSAttributedString(string: "Pull to refresh")
+        refreshControl?.addTarget(self, action: #selector(refresh(sender:)), for: UIControlEvents.valueChanged)
+        tableView?.addSubview(refreshControl!)
+       
+
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -241,6 +247,12 @@ class ActivitiesViewController : UIViewController{
             }
         }
     }
+    
+    
+    func refresh(sender:AnyObject) {
+        self.sendRequesToGetActivityList()
+    }
+    
     
     //MARK:-
     
@@ -933,6 +945,11 @@ extension ActivitiesViewController:NMWebServiceDelegate {
             //self.tableView?.reloadData()
             //self.handleActivityListResponse()
             self.loadActivitiesFromDatabase()
+            
+            if self.refreshControl != nil && (self.refreshControl?.isRefreshing)!{
+                self.refreshControl?.endRefreshing()
+            }
+            
             
             StudyUpdates.studyActivitiesUpdated = false
             DBHandler.updateMetaDataToUpdateForStudy(study: Study.currentStudy!, updateDetails: nil)

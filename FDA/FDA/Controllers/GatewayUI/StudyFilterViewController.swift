@@ -56,19 +56,12 @@ class StudyFilterViewController: UIViewController {
             layout.delegate = self
         }
         
-        
-        
-    }
-
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
         var resource = "AnanomousFilterData"
         
         if User.currentUser.userType == .FDAUser{
             resource = "FilterData"
         }
-       
+        
         
         let plistPath = Bundle.main.path(forResource: resource, ofType: ".plist", inDirectory:nil)
         filterData = NSMutableArray.init(contentsOfFile: plistPath!)!
@@ -76,11 +69,11 @@ class StudyFilterViewController: UIViewController {
         
         StudyFilterHandler.instance.filterOptions = []
         
-       if StudyFilterHandler.instance.filterOptions.count == 0 {
+        if StudyFilterHandler.instance.filterOptions.count == 0 {
             var filterOptionsList:Array<FilterOptions> = []
-        
-        var i = 0
-        
+            
+            var i = 0
+            
             for options in filterData! {
                 let values = (options as! Dictionary<String,Any>)["studyData"] as! Array<Dictionary<String,Any>>
                 let filterOptions = FilterOptions()
@@ -96,7 +89,7 @@ class StudyFilterViewController: UIViewController {
                 var filterValues:Array<FilterValues> = []
                 for value in values {
                     
-                   var isContained = false
+                    var isContained = false
                     
                     let filterValue = FilterValues()
                     filterValue.title = value["name"] as! String!
@@ -122,8 +115,8 @@ class StudyFilterViewController: UIViewController {
                     else{
                         filterValue.isSelected = true
                     }
-                
-    
+                    
+                    
                     filterValues.append(filterValue)
                 }
                 filterOptions.filterValues = filterValues
@@ -134,8 +127,15 @@ class StudyFilterViewController: UIViewController {
             }
             StudyFilterHandler.instance.filterOptions = filterOptionsList
         }
+
+         self.collectionView?.reloadData()
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        
        
-        self.collectionView?.reloadData()
     }
     
     override func viewDidAppear(_ animated: Bool) {

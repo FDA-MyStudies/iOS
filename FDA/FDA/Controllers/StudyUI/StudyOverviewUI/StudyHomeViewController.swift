@@ -331,9 +331,6 @@ class StudyHomeViewController : UIViewController{
                                 choicePredicate.append(predicateQuestionChoiceA)
                             }
                             
-                            
-                            
-                            
                         }
                         else if (correctAnswerArray?.count) == 2 {
                             // for both answers pass to next question no need of branching, provided that this is not last question
@@ -1261,16 +1258,16 @@ extension StudyHomeViewController:ORKTaskViewControllerDelegate{
                             
                             
                             if answeredSet.isSubset(of: correctAnswerSet){
-                                userScore = userScore + 100
+                                userScore = userScore + 1
                             }
                             else if (answeredSet.intersection(correctAnswerSet)).isEmpty == false{
-                                userScore = userScore + 100
+                                userScore = userScore + 1
                             }
                             
                         case .all:
                             
                             if answeredSet == correctAnswerSet{
-                                userScore = userScore + 100
+                                userScore = userScore + 1
                             }
                             
                             

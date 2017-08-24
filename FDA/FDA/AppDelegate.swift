@@ -84,6 +84,8 @@
         
         var shouldAddForceUpgradeScreen = false
         
+        var retryView:ComprehensionFailure?
+        
         var blockerScreen:AppUpdateBlocker?
         var passcodeParentControllerWhileSetup:UIViewController?
         
@@ -578,17 +580,17 @@
             
             let navigationController =  (self.window?.rootViewController as! UINavigationController)
             
-            let retryView = ComprehensionFailure.instanceFromNib(frame: navigationController.view.frame, detail: nil);
+            self.retryView = ComprehensionFailure.instanceFromNib(frame: navigationController.view.frame, detail: nil);
             
             if viewController != nil{
-                retryView.delegate = viewController as! ComprehensionFailureDelegate
+                retryView?.delegate = viewController as! ComprehensionFailureDelegate
             }
             else{
-                retryView.delegate = self as! ComprehensionFailureDelegate
+                retryView?.delegate = self as! ComprehensionFailureDelegate
             }
-            UIApplication.shared.keyWindow?.addSubview(retryView);
+            UIApplication.shared.keyWindow?.addSubview(retryView!);
             
-            UIApplication.shared.keyWindow?.bringSubview(toFront: retryView)
+            UIApplication.shared.keyWindow?.bringSubview(toFront: retryView!)
         }
         
         
@@ -1026,6 +1028,8 @@
                         
                         isPasscodePresented = true
                         blockerScreen?.isHidden = true
+                        
+                        
                         viewController.present(taskViewController, animated: false, completion: nil)
                     }
                     else{
@@ -1070,6 +1074,11 @@
                             isPasscodePresented = true
                             
                             blockerScreen?.isHidden = true
+                            
+                            if isComprehensionFailed!{
+                                self.retryView?.isHidden = true
+                            }
+                            
                             
                             //passcodeViewController.view.bringSubview(toFront: keyboard)
                             
@@ -1520,6 +1529,10 @@
                     DBHandler.updateMetaDataToUpdateForStudy(study: Study.currentStudy!, updateDetails:nil)
                     
                     
+                    if self.isComprehensionFailed!{
+                        self.isComprehensionFailed = false
+                    }
+                    
                 }
                 else{
                     
@@ -1544,6 +1557,12 @@
                 print("discarded")
                 
                 taskResult = taskViewController.result
+                
+                if self.isComprehensionFailed!{
+                    self.isComprehensionFailed = false
+                }
+                
+                
             case ORKTaskViewControllerFinishReason.saved:
                 print("saved")
                 taskResult = taskViewController.restorationData
@@ -1870,8 +1889,13 @@
                     else {
                         UIApplication.shared.keyWindow?.addSubview(self.blockerScreen!)
                     }
+                }
+                
+                if self.isComprehensionFailed!{
                     
-                    
+                    if self.retryView != nil{
+                         self.retryView?.isHidden = false
+                    }
                 }
                 
                 if self.selectedController != nil {

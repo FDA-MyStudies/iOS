@@ -1260,9 +1260,9 @@ extension StudyHomeViewController:ORKTaskViewControllerDelegate{
                             if answeredSet.isSubset(of: correctAnswerSet){
                                 userScore = userScore + 1
                             }
-                            else if (answeredSet.intersection(correctAnswerSet)).isEmpty == false{
-                                userScore = userScore + 1
-                            }
+//                            else if (answeredSet.intersection(correctAnswerSet)).isEmpty == false{
+//                                userScore = userScore + 1
+//                            }
                             
                         case .all:
                             

@@ -77,7 +77,7 @@
 			</dict>
 			<dict>
 				<key>name</key>
-				<string>Not Eligebile</string>
+				<string>Not Eligible</string>
 				<key>isEnabled</key>
 				<false/>
 			</dict>

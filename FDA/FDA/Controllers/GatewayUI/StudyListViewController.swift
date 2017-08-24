@@ -533,7 +533,7 @@ class StudyListViewController: UIViewController {
                         if StudyFilterHandler.instance.searchText.characters.count > 0 {
                             self.searchView?.textFieldSearch?.text = StudyFilterHandler.instance.searchText
                         }
-
+                        
         }, completion: { (finished) -> Void in
             
         })
@@ -770,7 +770,7 @@ extension StudyListViewController : StudyFilterDelegates{
         previousCollectionData.append(studyStatus)
         
         if User.currentUser.userType == .FDAUser{
-              previousCollectionData.append((bookmarked == true ? ["Bookmarked"]:[]))
+            previousCollectionData.append((bookmarked == true ? ["Bookmarked"]:[]))
             previousCollectionData.append(pariticipationsStatus)
         }
         
@@ -804,7 +804,7 @@ extension StudyListViewController : StudyFilterDelegates{
         
         if bookmarked{
             
-        bookmarkedStudies = Gateway.instance.studies?.filter({$0.userParticipateState.bookmarked == bookmarked})
+            bookmarkedStudies = Gateway.instance.studies?.filter({$0.userParticipateState.bookmarked == bookmarked})
         }
         
         //filter by searched Text
@@ -816,6 +816,7 @@ extension StudyListViewController : StudyFilterDelegates{
             })
         }
         
+        /* Union
         let setStudyStatus = Set<Study>(statusFilteredStudies)
         let setpariticipationsStatus = Set<Study>(pariticipationsStatusFilteredStudies)
         var studiesSet = setStudyStatus.union(setpariticipationsStatus)
@@ -829,9 +830,79 @@ extension StudyListViewController : StudyFilterDelegates{
         
         let setBookmarkedStudies = Set<Study>(bookmarkedStudies)
         studiesSet = studiesSet.union(setBookmarkedStudies)
+        */
         
+        // Intersection
+        let setStudyStatus = Set<Study>(statusFilteredStudies)
         
-        let allStudiesArray:Array<Study> = Array(studiesSet)
+        let setpariticipationsStatus = Set<Study>(pariticipationsStatusFilteredStudies)
+        
+         var statusFilteredSet = Set<Study>()
+        
+         var allFilteredSet = Set<Study>()
+        
+         // (setStudyStatus) ^ (setpariticipationsStatus)
+        
+        if setStudyStatus.count > 0 && setpariticipationsStatus.count > 0{
+            statusFilteredSet = setStudyStatus.intersection(setpariticipationsStatus)
+        }
+        else{
+            if setStudyStatus.count > 0 {
+               statusFilteredSet = setStudyStatus
+            }
+            else if setpariticipationsStatus.count > 0{
+                statusFilteredSet = setpariticipationsStatus
+            }
+        }
+
+         var bookMarkAndCategorySet = Set<Study>()
+        
+        let setCategories  = Set<Study>(categoryFilteredStudies)
+        
+        let setBookmarkedStudies = Set<Study>(bookmarkedStudies)
+       
+        
+        // (setCategories) ^ (setBookmarkedStudies)
+        if setCategories.count > 0 && setBookmarkedStudies.count > 0{
+            bookMarkAndCategorySet = setCategories.intersection(setBookmarkedStudies)
+        }
+        else{
+            if setCategories.count > 0 {
+                bookMarkAndCategorySet = setCategories
+            }
+            else if setBookmarkedStudies.count > 0{
+                bookMarkAndCategorySet = setBookmarkedStudies
+            }
+        }
+        
+        // (statusFilteredSet) ^ (bookMarkAndCategorySet)
+        if statusFilteredSet.count > 0 && bookMarkAndCategorySet.count > 0{
+            allFilteredSet = statusFilteredSet.intersection(bookMarkAndCategorySet)
+        }
+        else{
+            if statusFilteredSet.count > 0 {
+                allFilteredSet = statusFilteredSet
+            }
+            else if bookMarkAndCategorySet.count > 0{
+                allFilteredSet = bookMarkAndCategorySet
+            }
+        }
+        
+        // (studystatus ^ participantstatus ^ bookmarked ^ category) ^ (searchTextResult)
+        let setSearchedTextStudies = Set<Study>(searchTextFilteredStudies)
+        
+        if allFilteredSet.count > 0 && setSearchedTextStudies.count > 0{
+            allFilteredSet = allFilteredSet.intersection(setSearchedTextStudies)
+        }
+        else{
+             if setSearchedTextStudies.count > 0{
+                allFilteredSet = setSearchedTextStudies
+            }
+        }
+        
+
+        //--
+        let allStudiesArray:Array<Study> = Array(allFilteredSet)
         
         self.studiesList = self.getSortedStudies(studies: allStudiesArray)
         
@@ -844,13 +915,11 @@ extension StudyListViewController : StudyFilterDelegates{
             self.labelHelperText.isHidden = false
             
             if searchText == ""{
-                
                 self.labelHelperText.text = kHelperTextForFilteredStudiesNotFound
             }
             else{
                 self.labelHelperText.text = kHelperTextForSearchedStudiesNotFound
             }
-            
         }
         else{
             self.tableView?.isHidden = false
@@ -1034,9 +1103,9 @@ extension StudyListViewController : searchBarDelegate {
             self.studiesList = self.getSortedStudies(studies: searchTextFilteredStudies)
             
             if self.studiesList.count == 0 {
-            self.labelHelperText.text = kHelperTextForSearchedStudiesNotFound
-            self.tableView?.isHidden = true
-            self.labelHelperText.isHidden = false
+                self.labelHelperText.text = kHelperTextForSearchedStudiesNotFound
+                self.tableView?.isHidden = true
+                self.labelHelperText.isHidden = false
             }
             
             

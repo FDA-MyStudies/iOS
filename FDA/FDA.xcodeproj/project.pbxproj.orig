@@ -36,13 +36,16 @@
 		6E183AB51E966230005D7A27 /* AKUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E183AB21E966230005D7A27 /* AKUtility.swift */; };
 		6E2B25F31EAE3F1D00E2DFB2 /* ResearchContainerSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E2B25F11EAE3F1D00E2DFB2 /* ResearchContainerSegue.swift */; };
 		6E2B25F41EAE3F1D00E2DFB2 /* ResearchContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E2B25F21EAE3F1D00E2DFB2 /* ResearchContainerViewController.swift */; };
+<<<<<<< HEAD
 		6E31DC691F17AF9C00C3E1DB /* InEligibilityStepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E31DC681F17AF9C00C3E1DB /* InEligibilityStepViewController.swift */; };
+=======
 		6E417AD31F4D5DA1007F27DA /* AnanomousFilterData.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6E417AD21F4D5DA1007F27DA /* AnanomousFilterData.plist */; };
 		6E4CECB61F31B41C005E0832 /* PinterestLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E4CECB51F31B41C005E0832 /* PinterestLayout.swift */; };
 		6E4D72FD1F3C2E4000BF88B7 /* ActivityFilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E4D72FC1F3C2E4000BF88B7 /* ActivityFilterView.swift */; };
 		6E4D72FF1F3C3DE000BF88B7 /* ActivityFilterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6E4D72FE1F3C3DE000BF88B7 /* ActivityFilterView.xib */; };
 		6E4D86DC1F389DF1003DBDD8 /* SearchBarView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6E4D86DB1F389DF1003DBDD8 /* SearchBarView.xib */; };
 		6E4D86E01F38A740003DBDD8 /* SearchBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E4D86DF1F38A740003DBDD8 /* SearchBarView.swift */; };
+>>>>>>> ravi_develop_1B
 		6E5F751B1EF4109500ABA308 /* Labkey_Activity11.json in Resources */ = {isa = PBXBuildFile; fileRef = 6E5F751A1EF4109500ABA308 /* Labkey_Activity11.json */; };
 		6E61BCC41F27262F00C156B9 /* ComprehensionFailure.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6E61BCC31F27262F00C156B9 /* ComprehensionFailure.xib */; };
 		6E61BCC61F27271000C156B9 /* ComprehensionFailure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E61BCC51F27271000C156B9 /* ComprehensionFailure.swift */; };
@@ -301,13 +304,16 @@
 		6E183AB21E966230005D7A27 /* AKUtility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AKUtility.swift; sourceTree = "<group>"; };
 		6E2B25F11EAE3F1D00E2DFB2 /* ResearchContainerSegue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResearchContainerSegue.swift; sourceTree = "<group>"; };
 		6E2B25F21EAE3F1D00E2DFB2 /* ResearchContainerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResearchContainerViewController.swift; sourceTree = "<group>"; };
+<<<<<<< HEAD
 		6E31DC681F17AF9C00C3E1DB /* InEligibilityStepViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InEligibilityStepViewController.swift; sourceTree = "<group>"; };
+=======
 		6E417AD21F4D5DA1007F27DA /* AnanomousFilterData.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = AnanomousFilterData.plist; sourceTree = "<group>"; };
 		6E4CECB51F31B41C005E0832 /* PinterestLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PinterestLayout.swift; sourceTree = "<group>"; };
 		6E4D72FC1F3C2E4000BF88B7 /* ActivityFilterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityFilterView.swift; sourceTree = "<group>"; };
 		6E4D72FE1F3C3DE000BF88B7 /* ActivityFilterView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ActivityFilterView.xib; sourceTree = "<group>"; };
 		6E4D86DB1F389DF1003DBDD8 /* SearchBarView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SearchBarView.xib; sourceTree = "<group>"; };
 		6E4D86DF1F38A740003DBDD8 /* SearchBarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchBarView.swift; sourceTree = "<group>"; };
+>>>>>>> ravi_develop_1B
 		6E5F751A1EF4109500ABA308 /* Labkey_Activity11.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Labkey_Activity11.json; sourceTree = "<group>"; };
 		6E61BCC31F27262F00C156B9 /* ComprehensionFailure.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ComprehensionFailure.xib; sourceTree = "<group>"; };
 		6E61BCC51F27271000C156B9 /* ComprehensionFailure.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComprehensionFailure.swift; sourceTree = "<group>"; };
@@ -609,6 +615,7 @@
 			path = ResearchkitContainer;
 			sourceTree = "<group>";
 		};
+<<<<<<< HEAD
 		6E61BCC01F27260400C156B9 /* ComprehensionUI */ = {
 			isa = PBXGroup;
 			children = (
@@ -617,8 +624,7 @@
 			);
 			name = ComprehensionUI;
 			path = ComprehensionFailureUI;
-			sourceTree = "<group>";
-		};
+=======
 		6E4D72F91F3C2E0F00BF88B7 /* ActivityFilterView */ = {
 			isa = PBXGroup;
 			children = (
@@ -626,6 +632,7 @@
 				6E4D72FE1F3C3DE000BF88B7 /* ActivityFilterView.xib */,
 			);
 			path = ActivityFilterView;
+>>>>>>> ravi_develop_1B
 			sourceTree = "<group>";
 		};
 		6E7D2D4D1E433E8700763D4C = {

@@ -30,6 +30,10 @@ class ActivitiesViewController : UIViewController{
     var selectedIndexPath:IndexPath? = nil
     var isAnchorDateSet:Bool = false
     var taskControllerPresented = false
+    var refreshControl:UIRefreshControl?
+    
+    var allActivityList:Array<Dictionary<String,Any>>! = []
+    var selectedFilter: ActivityFilterType?
     
     //MARK:- Viewcontroller Lifecycle
     override func viewDidLoad() {
@@ -39,6 +43,7 @@ class ActivitiesViewController : UIViewController{
         //let plistPath = Bundle.main.path(forResource: "Activities", ofType: ".plist", inDirectory:nil)
         // tableViewRowDetails = Array(contente) //NSMutableArray.init(contentsOfFile: plistPath!)
         
+        selectedFilter = ActivityFilterType.all
         
         
         self.tableView?.estimatedRowHeight = 126
@@ -49,14 +54,12 @@ class ActivitiesViewController : UIViewController{
         self.navigationItem.title = NSLocalizedString("STUDY ACTIVITIES", comment: "")
         self.tableView?.sectionHeaderHeight = 30
         
-       
+       self.navigationController?.navigationItem.rightBarButtonItem?.tintColor = UIColor.gray
         
         if (Study.currentStudy?.studyId) != nil {
             //WCPServices().getStudyActivityList(studyId: (Study.currentStudy?.studyId)!, delegate: self)
             //load from database
             //self.loadActivitiesFromDatabase()
-            
-            
             
             
             if StudyUpdates.studyConsentUpdated {
@@ -66,7 +69,12 @@ class ActivitiesViewController : UIViewController{
             
         }
         
-        
+        refreshControl = UIRefreshControl()
+        refreshControl?.attributedTitle = NSAttributedString(string: "Pull to refresh")
+        refreshControl?.addTarget(self, action: #selector(refresh(sender:)), for: UIControlEvents.valueChanged)
+        tableView?.addSubview(refreshControl!)
+       
+
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -215,8 +223,15 @@ class ActivitiesViewController : UIViewController{
     }
     
     @IBAction func filterButtonAction(_ sender: AnyObject){
+         let frame = self.view.frame
         
+        if self.selectedFilter == nil {
+            self.selectedFilter = ActivityFilterType.all
+        }
         
+        let view = ActivityFilterView.instanceFromNib(frame:frame , selectedIndex:self.selectedFilter!)
+        view.delegate = self
+        self.tabBarController?.view.addSubview(view)
     }
     
     func checkForDashBoardInfo(){
@@ -231,6 +246,12 @@ class ActivitiesViewController : UIViewController{
             }
         }
     }
+    
+    
+    func refresh(sender:AnyObject) {
+        self.sendRequesToGetActivityList()
+    }
+    
     
     //MARK:-
     
@@ -414,6 +435,7 @@ class ActivitiesViewController : UIViewController{
     func handleActivityListResponse(){
         
         tableViewSections = []
+        allActivityList = []
         let activities = Study.currentStudy?.activities
         
         var currentActivities:Array<Activity> = []
@@ -455,9 +477,22 @@ class ActivitiesViewController : UIViewController{
         let upcomingDetails = ["title":"UPCOMING","activities":upcomingActivities] as [String : Any]
         let pastDetails = ["title":"PAST","activities":pastActivities] as [String : Any]
         
-        tableViewSections.append(currentDetails)
-        tableViewSections.append(upcomingDetails)
-        tableViewSections.append(pastDetails)
+        
+        
+        
+        allActivityList.append(currentDetails)
+        allActivityList.append(upcomingDetails)
+        allActivityList.append(pastDetails)
+        
+        tableViewSections = allActivityList
+        
+        if self.selectedFilter == .tasks || self.selectedFilter == .surveys{
+            
+             let filterType:ActivityType! =  (selectedFilter == .surveys ? .Questionnaire : .activeTask)
+            self.updateSectionArray(activityType: filterType)
+        }
+        
+        
         
         self.tableView?.reloadData()
         self.removeProgressIndicator()
@@ -861,6 +896,58 @@ extension ActivitiesViewController:ActivitiesCellDelegate{
     }
 }
 
+//MARK:- ActivityFilterDelegate
+extension ActivitiesViewController:ActivityFilterViewDelegate{
+    func setSelectedFilter(selectedIndex: ActivityFilterType) {
+        
+        // current filter is not same as existing filter
+        if self.selectedFilter != selectedIndex{
+            
+           // currently filter type is all so no need to fetch all activities
+            if self.selectedFilter == .all{
+                
+                let filterType:ActivityType! =  (selectedIndex == .surveys ? .Questionnaire : .activeTask)
+                self.updateSectionArray(activityType: filterType)
+                
+            }
+            else{// existing filterType is either Task or Surveys
+                
+                //load all the sections from scratch
+                self.tableViewSections = []
+                self.tableViewSections = allActivityList
+                
+                // applying the new filter Type
+                if selectedIndex == .surveys || selectedIndex == .tasks{
+                    let filterType:ActivityType! =  (selectedIndex == .surveys ? .Questionnaire : .activeTask)
+                    self.updateSectionArray(activityType: filterType)
+                }
+            }
+            self.selectedFilter = selectedIndex
+            self.tableView?.reloadData()
+        }
+        else{
+            //current and newly selected filter types are same
+        }
+    }
+    
+    func updateSectionArray(activityType:ActivityType)  {
+        
+        var updatedSectionArray:Array<Dictionary<String,Any>>! = []
+        for section in tableViewSections{
+            let activities = section[kActivities] as! Array<Activity>
+            var sectionDict:Dictionary<String,Any>! = section
+            sectionDict[kActivities] = activities.filter({$0.type == activityType
+            })
+            
+            updatedSectionArray.append(sectionDict)
+        }
+        tableViewSections = []
+        tableViewSections = updatedSectionArray
+    }
+    
+    
+}
+
 
 //MARK:- Webservice Delegates
 extension ActivitiesViewController:NMWebServiceDelegate {
@@ -887,6 +974,11 @@ extension ActivitiesViewController:NMWebServiceDelegate {
             //self.tableView?.reloadData()
             //self.handleActivityListResponse()
             self.loadActivitiesFromDatabase()
+            
+            if self.refreshControl != nil && (self.refreshControl?.isRefreshing)!{
+                self.refreshControl?.endRefreshing()
+            }
+            
             
             StudyUpdates.studyActivitiesUpdated = false
             DBHandler.updateMetaDataToUpdateForStudy(study: Study.currentStudy!, updateDetails: nil)

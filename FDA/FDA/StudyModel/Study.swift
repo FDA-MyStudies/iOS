@@ -76,7 +76,7 @@ struct ConsentDocument {
     
 }
 
-class Study {
+class Study : Hashable {
     
     //MARK:Properties
     var studyId:String!
@@ -104,6 +104,10 @@ class Study {
     var activitiesLocalNotificationUpdated = false
     var totalIncompleteRuns = 0
     var totalCompleteRuns = 0
+    
+    var hashValue: Int {
+        return self.studyId.hashValue
+    }
     
     var withdrawalConfigration:StudyWithdrawalConfigration?
     
@@ -160,6 +164,10 @@ class Study {
             Logger.sharedInstance.debug("Study Dictionary is null:\(studyDetail)")
         }
         
+    }
+    
+    static func ==(lhs: Study, rhs: Study) -> Bool {
+        return lhs.studyId == rhs.studyId
     }
     
     

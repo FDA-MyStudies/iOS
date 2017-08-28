@@ -21,6 +21,10 @@ extension String {
     func toBase64() -> String {
         return Data(self.utf8).base64EncodedString()
     }
+    
+    func containsIgnoringCase(_ find:String) -> Bool{
+        return self.range(of: find, options: .caseInsensitive, range: nil, locale: nil) != nil //rangeOfString(find, options: NSString.CompareOptions.CaseInsensitiveSearch) != nil
+    }
 }
 
 

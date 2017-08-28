@@ -515,7 +515,7 @@ class StudyListViewController: UIViewController {
         
         
         UIView.animate(withDuration: 0.2,
-                       delay: 0.1,
+                       delay: 0.0,
                        options: UIViewAnimationOptions.preferredFramesPerSecond60,
                        animations: { () -> Void in
                         

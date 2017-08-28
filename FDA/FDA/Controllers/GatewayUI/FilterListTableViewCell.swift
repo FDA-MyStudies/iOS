@@ -28,6 +28,7 @@ class FilterListTableViewCell: UITableViewCell {
         self.name?.text = filterValue.title
         self.name?.sizeToFit()
         
+        
         if filterValue.isSelected{
             self.imageSelected?.image = UIImage(named:"checked")
         }else{

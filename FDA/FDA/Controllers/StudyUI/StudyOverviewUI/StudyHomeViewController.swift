@@ -46,6 +46,7 @@ class StudyHomeViewController : UIViewController{
     var delegate:StudyHomeViewDontrollerDelegate?
     var hideViewConsentAfterJoining = false
     
+    
     var consentRestorationData: Data?
     
     var pageViewController: PageViewController? {
@@ -411,7 +412,17 @@ class StudyHomeViewController : UIViewController{
         UIView.appearance(whenContainedInInstancesOf: [ORKTaskViewController.self]).tintColor = kUIColorForSubmitButtonBackground
         
         UIApplication.shared.statusBarStyle = .default
-        present(taskViewController!, animated: true, completion: nil)
+        present(taskViewController!, animated: true, completion: {
+            
+            let appdelegate:AppDelegate? = UIApplication.shared.delegate as? AppDelegate
+            
+            if  appdelegate?.retryView?.isHidden == false{
+            
+            appdelegate?.retryView?.isHidden = true
+            appdelegate?.retryView?.removeFromSuperview()
+            }
+            
+        })
         
     }
     
@@ -744,7 +755,10 @@ class StudyHomeViewController : UIViewController{
 
 extension StudyHomeViewController:ComprehensionFailureDelegate{
     func didTapOnRetry() {
+        
         self.createEligibilityConsentTask()
+       
+        
     }
     
     func didTapOnCancel(){

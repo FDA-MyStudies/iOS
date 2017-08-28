@@ -33,6 +33,8 @@ class ComprehensionFailure: UIView {
         
         let view = UINib(nibName: "ComprehensionFailure", bundle: nil).instantiate(withOwner: nil, options: nil)[0] as! ComprehensionFailure
         view.frame = frame
+        view.buttonRetry?.layer.borderColor =   kUicolorForButtonBackground
+        
         view.layoutIfNeeded()
         return view
         
@@ -44,8 +46,7 @@ class ComprehensionFailure: UIView {
         self.delegate?.didTapOnCancel()
     }
     @IBAction func buttonRetryAction(){
-        self.isHidden =  true
-        self.removeFromSuperview()
+       
         self.delegate?.didTapOnRetry()
     }
 }

@@ -20,7 +20,7 @@
         <scene sceneID="Iy6-1K-v1C">
             <objects>
                 <navigationController id="Xk3-VF-nDE" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="fSm-ig-KYs">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="fSm-ig-KYs">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -470,7 +470,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="7e4-7b-qtd" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="a3x-IE-FDY">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="a3x-IE-FDY">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -549,7 +549,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="tjP-Cs-vL9" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="Id2-o1-rv0">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Id2-o1-rv0">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -567,7 +567,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="rXA-HI-g5M" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="Bf4-vu-ub4">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Bf4-vu-ub4">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -604,7 +604,7 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="successBlueBig" translatesAutoresizingMaskIntoConstraints="NO" id="w7M-LE-9s0">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="smile2" translatesAutoresizingMaskIntoConstraints="NO" id="w7M-LE-9s0">
                                 <rect key="frame" x="125" y="306" width="124" height="120"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="w7M-LE-9s0" secondAttribute="height" multiplier="31:30" id="yhj-zJ-xGV"/>
@@ -668,8 +668,8 @@
         <image name="45.png" width="750" height="1334"/>
         <image name="edit_icn1" width="18" height="17"/>
         <image name="shareIcon" width="15" height="22"/>
+        <image name="smile2" width="122" height="119"/>
         <image name="start_buttn1" width="123" height="123"/>
-        <image name="successBlueBig" width="122" height="120"/>
         <image name="task_img1" width="160" height="160"/>
         <image name="time_icn1" width="41" height="40"/>
     </resources>

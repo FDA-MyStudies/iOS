@@ -36,7 +36,7 @@
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="successBlueBig" translatesAutoresizingMaskIntoConstraints="NO" id="JU5-DE-RKR">
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="smile2" translatesAutoresizingMaskIntoConstraints="NO" id="JU5-DE-RKR">
                             <rect key="frame" x="125" y="390" width="124" height="120"/>
                             <constraints>
                                 <constraint firstAttribute="width" secondItem="JU5-DE-RKR" secondAttribute="height" multiplier="31:30" id="Lj3-t5-yf6"/>
@@ -45,6 +45,7 @@
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b7l-Wh-qpO">
                             <rect key="frame" x="113" y="566" width="150" height="40"/>
                             <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
+                            <color key="tintColor" red="0.0" green="0.48627450979999998" blue="0.72941176470000002" alpha="1" colorSpace="calibratedRGB"/>
                             <state key="normal" title="Retry">
                                 <color key="titleColor" red="0.0" green="0.48627450979999998" blue="0.72941176470000002" alpha="1" colorSpace="calibratedRGB"/>
                             </state>
@@ -113,6 +114,6 @@
         </view>
     </objects>
     <resources>
-        <image name="successBlueBig" width="122" height="120"/>
+        <image name="smile2" width="122" height="119"/>
     </resources>
 </document>

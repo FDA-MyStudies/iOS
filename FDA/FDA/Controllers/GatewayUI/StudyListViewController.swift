@@ -152,7 +152,7 @@ class StudyListViewController: UIViewController {
         // Notification Button
         let button = UIButton.init(type: .custom)
         
-        button.setImage(#imageLiteral(resourceName: "notification_active"), for: UIControlState.normal)
+        button.setImage(#imageLiteral(resourceName: "notification_grey"), for: UIControlState.normal)
         button.addTarget(self, action:#selector(self.buttonActionNotification(_:)), for: UIControlEvents.touchUpInside)
         button.frame = CGRect.init(x: 80, y: 4, width: 30, height: 30)
         view.addSubview(button)
@@ -876,18 +876,23 @@ extension StudyListViewController : StudyFilterDelegates{
         }
         
         // (statusFilteredSet) ^ (bookMarkAndCategorySet)
+        
+        
         if statusFilteredSet.count > 0 && bookMarkAndCategorySet.count > 0{
             allFilteredSet = statusFilteredSet.intersection(bookMarkAndCategorySet)
         }
         else{
-            if statusFilteredSet.count > 0 {
-                allFilteredSet = statusFilteredSet
+            
+            if (statusFilteredSet.count > 0 && (bookmarked == true || categories.count > 0)) ||  (bookMarkAndCategorySet.count > 0 && (pariticipationsStatus.count > 0 || studyStatus.count > 0)){
+                 allFilteredSet = bookMarkAndCategorySet.intersection(statusFilteredSet)
             }
-            else if bookMarkAndCategorySet.count > 0{
-                allFilteredSet = bookMarkAndCategorySet
+            else{
+                allFilteredSet = statusFilteredSet.union(bookMarkAndCategorySet)
+            
             }
+
         }
-        
+
         // (studystatus ^ participantstatus ^ bookmarked ^ category) ^ (searchTextResult)
         let setSearchedTextStudies = Set<Study>(searchTextFilteredStudies)
         
@@ -900,11 +905,23 @@ extension StudyListViewController : StudyFilterDelegates{
             }
         }
         
+        
+        
+        
 
         //--
         let allStudiesArray:Array<Study> = Array(allFilteredSet)
         
-        self.studiesList = self.getSortedStudies(studies: allStudiesArray)
+        if searchText.characters.count == 0 && bookmarked == false && studyStatus.count == 0 &&
+            pariticipationsStatus.count == 0 && categories.count == 0 {
+            
+            self.studiesList = Gateway.instance.studies!
+        }
+        else{
+            self.studiesList = self.getSortedStudies(studies: allStudiesArray)
+        }
+        
+        
         
         self.previousStudyList = self.studiesList
         

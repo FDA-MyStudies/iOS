@@ -1964,4 +1964,5 @@
         <image name="surveyIcon" width="21" height="21"/>
         <image name="watchVideo" width="119" height="27"/>
     </resources>
+    <color key="tintColor" red="0.54901960780000003" green="0.58431372550000005" blue="0.63921568630000003" alpha="1" colorSpace="calibratedRGB"/>
 </document>

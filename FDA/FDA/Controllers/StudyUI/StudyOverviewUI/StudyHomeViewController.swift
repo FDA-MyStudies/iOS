@@ -46,6 +46,7 @@ class StudyHomeViewController : UIViewController{
     var delegate:StudyHomeViewDontrollerDelegate?
     var hideViewConsentAfterJoining = false
     
+    var isUpdatingIneligibility:Bool = false
     
     var consentRestorationData: Data?
     
@@ -827,9 +828,15 @@ extension StudyHomeViewController:NMWebServiceDelegate {
         
         if requestName as String == RegistrationMethods.updateStudyState.method.methodName{
             
-            if isStudyBookMarked {
+            if isStudyBookMarked  ||  self.isUpdatingIneligibility{
                 self.removeProgressIndicator()
+                
+                if self.isUpdatingIneligibility{
+                    self.isUpdatingIneligibility = false
+                }
+                
             }
+
             else {
                 // self.addProgressIndicator()
                 
@@ -1228,7 +1235,23 @@ extension StudyHomeViewController:ORKTaskViewControllerDelegate{
             lastStepResultIdentifier = (taskViewController.result.results?.last as! ORKStepResult).identifier
             
             if lastStepResultIdentifier == kInEligibilityStep{
-                self.dismiss(animated: true, completion: nil)
+                
+               
+                let currentUserStudyStatus =  User.currentUser.updateStudyStatus(studyId:(Study.currentStudy?.studyId)!  , status: .notEligible)
+                
+                Study.currentStudy?.userParticipateState = currentUserStudyStatus
+                
+                
+                DBHandler.updateStudyParticipationStatus(study: Study.currentStudy!)
+                
+                
+                
+                self.dismiss(animated: true, completion: {
+                    
+                    self.isUpdatingIneligibility = true
+                    
+                     UserServices().updateUserParticipatedStatus(studyStauts: currentUserStudyStatus, delegate: self)
+                })
                 return nil
             }
             else{

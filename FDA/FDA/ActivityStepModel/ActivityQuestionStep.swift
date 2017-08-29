@@ -520,6 +520,25 @@ class ActivityQuestionStep: ActivityStep {
                     switch ORKNumericAnswerStyle(rawValue:style)! as ORKNumericAnswerStyle {
                     case .integer:
                         
+                        
+                        if  Utilities.isValidValue(someObject:self.healthDataKey as AnyObject?){
+                            
+                            
+                            let quantityTypeId:HKQuantityTypeIdentifier = HKQuantityTypeIdentifier.init(rawValue:self.healthDataKey! )
+                            
+                            
+                            let quantityType = HKQuantityType.quantityType(forIdentifier: quantityTypeId)
+                            //let unit =  HKUnit.init(from: localizedQuestionStepAnswerFormatUnit)
+                            
+                            
+                            //let healthKitStore = HKHealthStore()
+                            
+                            //healthKitStore.is
+                         questionStepAnswerFormat = ORKHealthKitQuantityTypeAnswerFormat.init(quantityType: quantityType!, unit: nil, style: ORKNumericAnswerStyle.integer)
+                        
+                        }
+                        else{
+                        
                         if minValue != nil && maxValue != nil {
                             
                             questionStepAnswerFormat = ORKNumericAnswerFormat.init(style: ORKNumericAnswerStyle.integer, unit: localizedQuestionStepAnswerFormatUnit, minimum: minValue , maximum: maxValue)
@@ -528,14 +547,29 @@ class ActivityQuestionStep: ActivityStep {
                         else{
                             questionStepAnswerFormat = ORKAnswerFormat.integerAnswerFormat(withUnit:localizedQuestionStepAnswerFormatUnit)
                         }
-                        
+                        }
                     case .decimal:
+                        
+                        
+                        if  Utilities.isValidValue(someObject:self.healthDataKey as AnyObject?){
+                            
+                            let quantityTypeId = HKQuantityTypeIdentifier.init(rawValue:self.healthDataKey! )
+                            
+                            //let unit =  HKUnit.init(from: localizedQuestionStepAnswerFormatUnit)
+                            
+                            
+                            
+                             questionStepAnswerFormat = ORKHealthKitQuantityTypeAnswerFormat.init(quantityType: HKQuantityType.quantityType(forIdentifier: quantityTypeId)!, unit: nil, style: ORKNumericAnswerStyle.decimal)
+                            
+                        }
+                        else{
                         
                         if minValue != nil && maxValue != nil {
                             questionStepAnswerFormat = ORKNumericAnswerFormat.init(style: ORKNumericAnswerStyle.decimal, unit: localizedQuestionStepAnswerFormatUnit, minimum: minValue , maximum: maxValue)
                         }
                         else{
                              questionStepAnswerFormat = ORKAnswerFormat.decimalAnswerFormat(withUnit: localizedQuestionStepAnswerFormatUnit)
+                        }
                         }
                     }
                     

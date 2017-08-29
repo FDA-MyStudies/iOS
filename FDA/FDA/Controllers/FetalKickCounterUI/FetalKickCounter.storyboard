@@ -111,7 +111,7 @@
                                 </connections>
                             </button>
                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Aqo-FS-uXn">
-                                <rect key="frame" x="113" y="455" width="150" height="40"/>
+                                <rect key="frame" x="112.5" y="455" width="150" height="40"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                                 <state key="normal" title="Submit">
                                     <color key="titleColor" red="0.0" green="0.48627450979999998" blue="0.72941176470000002" alpha="1" colorSpace="calibratedRGB"/>
@@ -580,6 +580,93 @@
             </objects>
             <point key="canvasLocation" x="3676" y="565.36731634182911"/>
         </scene>
+        <!--In Eligibility Step View Controller-->
+        <scene sceneID="QOy-qh-jLL">
+            <objects>
+                <viewController storyboardIdentifier="InEligibilityStepViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="tB7-Ld-qIh" customClass="InEligibilityStepViewController" customModule="FDA" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="nBE-32-rCb"/>
+                        <viewControllerLayoutGuide type="bottom" id="bRJ-Wa-zKC"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="2cp-yO-fO8">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Not Eligible" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="DRs-0f-pS9">
+                                <rect key="frame" x="120" y="114.5" width="135" height="50"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="30"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="7" baselineAdjustment="alignBaselines" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="AzP-hO-NLT">
+                                <rect key="frame" x="37.5" y="189.5" width="300" height="100"/>
+                                <attributedString key="attributedText">
+                                    <fragment>
+                                        <string key="content">Sorry, you are not eligible for participation in this study. We thank you for your interest and time, and encourage you to explore other studies as they are made available in the app.</string>
+                                        <attributes>
+                                            <font key="NSFont" size="18.5" name="HelveticaNeue-Light"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="truncatingTail" baseWritingDirection="natural" lineSpacing="4" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                </attributedString>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="smile2" translatesAutoresizingMaskIntoConstraints="NO" id="w7M-LE-9s0">
+                                <rect key="frame" x="125.5" y="339.5" width="124" height="120"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="w7M-LE-9s0" secondAttribute="height" multiplier="31:30" id="yhj-zJ-xGV"/>
+                                </constraints>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mVr-1X-vKQ">
+                                <rect key="frame" x="112.5" y="519.5" width="150" height="40"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
+                                <state key="normal" title="Done">
+                                    <color key="titleColor" red="0.0" green="0.48627450979999998" blue="0.72941176470000002" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="4"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="layer.clipsToBounds" value="YES"/>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
+                                        <integer key="value" value="1"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="buttonActionDoneWithSender:" destination="tB7-Ld-qIh" eventType="touchUpInside" id="i5l-w3-STP"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="DRs-0f-pS9" firstAttribute="width" secondItem="2cp-yO-fO8" secondAttribute="width" multiplier="135/375" id="33z-EV-qqh"/>
+                            <constraint firstItem="mVr-1X-vKQ" firstAttribute="centerY" secondItem="2cp-yO-fO8" secondAttribute="centerY" multiplier="1.61826" id="9yh-uv-Vnd"/>
+                            <constraint firstItem="w7M-LE-9s0" firstAttribute="centerX" secondItem="2cp-yO-fO8" secondAttribute="centerX" id="FBt-GB-gXy"/>
+                            <constraint firstItem="AzP-hO-NLT" firstAttribute="centerY" secondItem="2cp-yO-fO8" secondAttribute="centerY" multiplier="0.718141" id="KRa-a7-DYi"/>
+                            <constraint firstItem="AzP-hO-NLT" firstAttribute="centerX" secondItem="2cp-yO-fO8" secondAttribute="centerX" id="MFa-aw-Lhe"/>
+                            <constraint firstItem="AzP-hO-NLT" firstAttribute="width" secondItem="2cp-yO-fO8" secondAttribute="width" multiplier="300/375" id="Qe8-TB-GGT"/>
+                            <constraint firstItem="mVr-1X-vKQ" firstAttribute="height" secondItem="2cp-yO-fO8" secondAttribute="height" multiplier="40/667" id="XSu-kA-s7D"/>
+                            <constraint firstItem="mVr-1X-vKQ" firstAttribute="centerX" secondItem="2cp-yO-fO8" secondAttribute="centerX" id="bbN-gT-CNs"/>
+                            <constraint firstItem="DRs-0f-pS9" firstAttribute="centerX" secondItem="2cp-yO-fO8" secondAttribute="centerX" id="c38-7t-O3k"/>
+                            <constraint firstItem="w7M-LE-9s0" firstAttribute="centerY" secondItem="2cp-yO-fO8" secondAttribute="centerY" multiplier="1.19745" id="jor-15-11m"/>
+                            <constraint firstItem="DRs-0f-pS9" firstAttribute="centerY" secondItem="2cp-yO-fO8" secondAttribute="centerY" multiplier="0.418741" id="kIY-Dh-eiv"/>
+                            <constraint firstItem="w7M-LE-9s0" firstAttribute="width" secondItem="2cp-yO-fO8" secondAttribute="width" multiplier="124/375" id="qnh-rA-VUi"/>
+                            <constraint firstItem="AzP-hO-NLT" firstAttribute="height" secondItem="2cp-yO-fO8" secondAttribute="height" multiplier="100/667" id="sCM-ZC-Tr2"/>
+                            <constraint firstItem="mVr-1X-vKQ" firstAttribute="width" secondItem="2cp-yO-fO8" secondAttribute="width" multiplier="150/375" id="ueh-ZM-a7R"/>
+                            <constraint firstItem="DRs-0f-pS9" firstAttribute="height" secondItem="2cp-yO-fO8" secondAttribute="height" multiplier="50/667" id="ySd-kd-5kz"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="buttonDone" destination="mVr-1X-vKQ" id="UIi-KM-zDv"/>
+                        <segue destination="8uK-ue-bHg" kind="unwind" identifier="unwindStudyHomeSegue" animates="NO" unwindAction="unwindeToStudyHome:" id="J6u-xc-dZy"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="4Oa-l2-814" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="8uK-ue-bHg" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+            <point key="canvasLocation" x="3434" y="1343"/>
+        </scene>
     </scenes>
     <resources>
         <image name="01.png" width="750" height="1334"/>
@@ -588,6 +675,7 @@
         <image name="45.png" width="750" height="1334"/>
         <image name="edit_icn1" width="18" height="17"/>
         <image name="shareIcon" width="15" height="22"/>
+        <image name="smile2" width="122" height="119"/>
         <image name="start_buttn1" width="123" height="123"/>
         <image name="task_img1" width="160" height="160"/>
         <image name="time_icn1" width="41" height="40"/>

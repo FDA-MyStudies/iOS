@@ -27,7 +27,7 @@ let kConsentSharingStepLongDesc = "longDesc"
 let kConsentSharingSteplearnMore = "learnMore"
 let kConsentSharingStepText = "text"
 let kConsentSharingStepTitle = "title"
-
+let kConsentSharingStepAllowWithoutSharing = "allowWithoutSharing"
 
 
 // ReviewConsent Api Constants
@@ -38,7 +38,15 @@ let kConsentReviewStepSignatureContent = "reviewHTML"
 let kConsentReviewStepReasonForConsent = "reasonForConsent"
 
 
+// Comprehension Api Constants
 
+let kConsentComprehension = "comprehension"
+let kConsentComprehensionQuestions = "questions"
+let kConsentComprehensionCorrectAnswers = "correctAnswers"
+let kConsentComprehensionCorrectAnswersKey = "key"
+let kConsentComprehensionAnswer = "answer"
+let kConsentComprehensionPassScore = "passScore"
+let kConsentComprehensionEvaluation = "evaluation"
 
 //
 
@@ -52,6 +60,20 @@ let kConsentCompletionStepIdentifier = "ConsentFinalCompletionStep"
 let kConsentSharePdfStoryboardId = "ConsentSharePdfStepViewControllerIdentifier"
 
 let kConsentViewPdfStoryboardId = "ConsentPdfViewerStepViewControllerIdentifier"
+
+
+// Comprehenion Instruction Step Keys
+
+let kConsentComprehensionTestTitle = "Comprehension"
+let kConsentComprehensionTestText = "Let's do a quick and simple test of your understanding of this Study."
+let kComprehensionInstructionStepIdentifier = "ComprehensionInstructionStep"
+
+// Comprehension Completion Step Keys
+
+let kComprehensionCompletionTitle = "Great Job!"
+let kComprehensionCompletionText = "You answered all of the questions correctly. Tap on Next to proceed"
+let kComprehensionCompletionStepIdentifier = "ComprehensionCompletionStep"
+
 
 
 enum ConsentStatus:String{
@@ -83,6 +105,8 @@ class ConsentBuilder{
     
     var consentResult:ConsentResult?
     
+    var comprehension:Comprehension?
+    
     init() {
         /* Default Initializer method
          by default sets all params to empty values
@@ -98,6 +122,7 @@ class ConsentBuilder{
         self.version = ""
         self.consentHasVisualStep = false
         
+        self.comprehension = Comprehension()
     }
     
     func initWithMetaData(metaDataDict:Dictionary<String, Any>)  {
@@ -144,6 +169,13 @@ class ConsentBuilder{
             
             if  Utilities.isValidObject(someObject: reviewConsentDict as AnyObject?){
                 self.reviewConsent?.initWithReviewDict(dict: reviewConsentDict)
+                
+            }
+            
+            let comprehensionDict = metaDataDict[kConsentComprehension] as! Dictionary<String,Any>
+            
+            if  Utilities.isValidObject(someObject: comprehensionDict as AnyObject?){
+                self.comprehension?.initWithComprehension(dict: comprehensionDict)
                 
             }
             
@@ -208,6 +240,8 @@ class ConsentBuilder{
             consentDocument.signaturePageTitle = "Participant"
             consentDocument.signaturePageContent = "signaturePageContent"
             
+            
+            
             consentDocument.sections = [ORKConsentSection]()
             
             if self.consentSectionArray.count > 0 {
@@ -228,6 +262,9 @@ class ConsentBuilder{
             
             let investigatorSignature = ORKConsentSignature(forPersonWithTitle:"Participant", dateFormatString: "MM/dd/YYYY", identifier: "Signature")
             
+            
+            //investigatorSignature.requiresName = false
+            
             consentDocument.addSignature(investigatorSignature)
             
             return consentDocument
@@ -240,6 +277,33 @@ class ConsentBuilder{
         }
         
     }
+    
+    func getComprehensionSteps() -> [ORKStep]? {
+        /* Method to get ComprehensionSteps
+         @returns an array of ORKSteps
+         */
+        
+       
+        if (self.comprehension?.questions?.count)! > 0 {
+            var stepsArray:[ORKStep]? = [ORKStep]()
+            for stepDict in (self.comprehension?.questions!)!{
+                let questionStep:ActivityQuestionStep? = ActivityQuestionStep()
+                questionStep?.initWithDict(stepDict: stepDict )
+                
+                questionStep?.skippable = false
+                stepsArray?.append((questionStep?.getQuestionStep())!)
+            }
+            
+            return stepsArray
+            
+        }
+        else{
+            return nil
+        }
+    }
+    
+    
+    
     
     
     func getReviewConsentStep() -> ConsentReviewStep? {
@@ -258,10 +322,7 @@ class ConsentBuilder{
             
             consentDocument?.signaturePageContent = NSLocalizedString("I agree to participate in this research study.", comment: "")
             
-            
              reviewConsentStep = ConsentReviewStep(identifier: kReviewTitle, signature: (self.getConsentDocument() as ORKConsentDocument).signatures?[0], in: self.getConsentDocument())
-            
-          
             
         }
         else{
@@ -298,6 +359,7 @@ class ConsentBuilder{
          @returns an instance of ORKConsentSharingStep
          */
         
+        
         if Utilities.isValidValue(someObject: self.sharingConsent?.shortDesc as AnyObject )
             && Utilities.isValidValue(someObject: self.sharingConsent?.longDesc as AnyObject )
             && Utilities.isValidValue(someObject: self.sharingConsent?.learnMore as AnyObject ){
@@ -305,7 +367,16 @@ class ConsentBuilder{
             
             // identifier missing
             
-            let sharingConsentStep = ConsentSharingStep(identifier: "Sharing", investigatorShortDescription: (self.sharingConsent?.shortDesc)!, investigatorLongDescription: (self.sharingConsent?.longDesc)!, localizedLearnMoreHTMLContent: (self.sharingConsent?.learnMore)!)
+            let sharingConsentStep = ConsentSharingStep(identifier: kConsentSharing, investigatorShortDescription: (self.sharingConsent?.shortDesc)!, investigatorLongDescription: (self.sharingConsent?.longDesc)!, localizedLearnMoreHTMLContent: (self.sharingConsent?.learnMore)!)
+            
+            if Utilities.isValidValue(someObject: self.sharingConsent?.text as AnyObject ){
+                sharingConsentStep.text = self.sharingConsent?.text
+            }
+           
+            if Utilities.isValidValue(someObject: self.sharingConsent?.title as AnyObject ){
+                sharingConsentStep.text = self.sharingConsent?.title
+            }
+            
             
             return sharingConsentStep
             
@@ -326,7 +397,9 @@ class ConsentBuilder{
         let visualConsentStep:VisualConsentStep? = self.getVisualConsentStep()
         let sharingConsentStep:ConsentSharingStep? = self.getConsentSharingStep()
         let reviewConsentStep:ConsentReviewStep? = self.getReviewConsentStep()
-                
+        
+        let comprehensionSteps:[ORKStep]? = self.getComprehensionSteps()
+        
         var stepArray:Array<ORKStep>? = Array()
         
         if visualConsentStep != nil{
@@ -339,6 +412,38 @@ class ConsentBuilder{
             }
             
         }
+        
+        // comprehension steps
+        
+        if comprehensionSteps != nil && (comprehensionSteps?.count)! > 0 {
+            
+            // adding Instruction Step for Comprehenion
+            
+            let comprehensionTestInstructionStep = customInstructionStep(identifier: kComprehensionInstructionStepIdentifier)
+            comprehensionTestInstructionStep.text = kConsentComprehensionTestText
+            
+            comprehensionTestInstructionStep.title = kConsentComprehensionTestTitle
+            stepArray?.append(comprehensionTestInstructionStep)
+            
+            
+            // adding questionery
+            for step in comprehensionSteps!{
+                stepArray?.append(step)
+            }
+            
+            //adding Completion Step
+            
+            let comprehensionCompletionStep = customInstructionStep(identifier: kComprehensionCompletionStepIdentifier)
+            comprehensionCompletionStep.text = kComprehensionCompletionText
+            
+            comprehensionCompletionStep.title = kComprehensionCompletionTitle
+            comprehensionCompletionStep.image =  #imageLiteral(resourceName: "successBlueBig")
+            stepArray?.append(comprehensionCompletionStep)
+
+            
+        }
+        
+        
         if sharingConsentStep != nil{
             stepArray?.append(sharingConsentStep!)
         }
@@ -398,6 +503,7 @@ struct SharingConsent {
     var allowWithoutSharing:Bool?
     var text:String?
     var title:String?
+   
     
     init() {
         self.shortDesc = ""
@@ -433,6 +539,11 @@ struct SharingConsent {
             if Utilities.isValidValue(someObject: dict[kConsentSharingStepTitle] as AnyObject ){
                 self.title = dict[kConsentSharingStepTitle] as? String
             }
+            
+            if Utilities.isValidValue(someObject: dict[kConsentSharingStepAllowWithoutSharing] as AnyObject ){
+                self.allowWithoutSharing = dict[kConsentSharingStepAllowWithoutSharing] as? Bool
+            }
+            
         }
         else{
             Logger.sharedInstance.debug("ConsentDocument Step Dictionary is null:\(dict)")
@@ -485,6 +596,55 @@ struct ReviewConsent{
         
     }
 }
+
+//MARK:Comprehension Struct
+
+enum Evaluation:String{
+    case any = "any"
+    case all = "all"
+}
+
+
+struct Comprehension{
+    
+    var passScore:Int?
+    var questions:Array<Dictionary<String,Any>>?
+    var correctAnswers:Array<Dictionary<String,Any>>?
+    
+    
+    
+    init() {
+        self.passScore = 0
+        self.questions =  []
+        self.correctAnswers =  []
+    }
+    
+    mutating func initWithComprehension(dict:Dictionary<String, Any>) {
+        /* initializer method which initializes all params
+         @dict:contains as key:Value pair for all the properties of Comprehension Step
+         */
+        
+        if Utilities.isValidObject(someObject: dict as AnyObject?){
+            
+            if Utilities.isValidValue(someObject: dict[kConsentComprehensionPassScore] as AnyObject ){
+                self.passScore =  (dict[kConsentComprehensionPassScore] as? Int)!
+            }
+            
+            if Utilities.isValidObject(someObject: dict[kConsentComprehensionQuestions] as AnyObject ){
+                self.questions = dict[kConsentComprehensionQuestions] as? Array<Dictionary<String,Any>>
+            }
+            if Utilities.isValidObject(someObject: dict[kConsentComprehensionCorrectAnswers] as AnyObject ){
+                self.correctAnswers = dict[kConsentComprehensionCorrectAnswers] as?  Array<Dictionary<String,Any>>
+            }
+        }
+        else{
+            Logger.sharedInstance.debug("Comprehension Step Dictionary is null:\(dict)")
+        }
+        
+    }
+}
+
+
 
 class ConsentReviewStep:ORKConsentReviewStep {
     

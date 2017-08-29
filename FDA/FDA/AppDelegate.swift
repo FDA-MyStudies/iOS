@@ -71,7 +71,7 @@
         
         var isPasscodePresented:Bool? =  false
         
-        
+        var isComprehensionFailed:Bool? = false
         
         var parentViewControllerForAlert:UIViewController?
         
@@ -85,6 +85,8 @@
         var selectedController:UIViewController?
         
         var shouldAddForceUpgradeScreen = false
+        
+        var retryView:ComprehensionFailure?
         
         var blockerScreen:AppUpdateBlocker?
         var passcodeParentControllerWhileSetup:UIViewController?
@@ -643,6 +645,26 @@
         }
         
         
+        //MARK: Add Retry Screen
+        
+        func addRetryScreen(viewController:UIViewController?)  {
+            
+            let navigationController =  (self.window?.rootViewController as! UINavigationController)
+            
+            self.retryView = ComprehensionFailure.instanceFromNib(frame: navigationController.view.frame, detail: nil);
+            
+            if viewController != nil{
+                retryView?.delegate = viewController as! ComprehensionFailureDelegate
+            }
+            else{
+                retryView?.delegate = self as! ComprehensionFailureDelegate
+            }
+            UIApplication.shared.keyWindow?.addSubview(retryView!);
+            
+            UIApplication.shared.keyWindow?.bringSubview(toFront: retryView!)
+        }
+        
+        
         
         
         //MARK:Custom Navigation Bar
@@ -1100,6 +1122,8 @@
                         
                         isPasscodePresented = true
                         blockerScreen?.isHidden = true
+                        
+                        
                         viewController.present(taskViewController, animated: false, completion: nil)
                     }
                     else{
@@ -1144,6 +1168,11 @@
                             isPasscodePresented = true
                             
                             blockerScreen?.isHidden = true
+                            
+                            if isComprehensionFailed!{
+                                self.retryView?.isHidden = true
+                            }
+                            
                             
                             //passcodeViewController.view.bringSubview(toFront: keyboard)
                             
@@ -1594,6 +1623,10 @@
                     DBHandler.updateMetaDataToUpdateForStudy(study: Study.currentStudy!, updateDetails:nil)
                     
                     
+                    if self.isComprehensionFailed!{
+                        self.isComprehensionFailed = false
+                    }
+                    
                 }
                 else{
                     
@@ -1618,9 +1651,20 @@
                 print("discarded")
                 
                 taskResult = taskViewController.result
+                
+                if self.isComprehensionFailed!{
+                    self.isComprehensionFailed = false
+                }
+                
+                
             case ORKTaskViewControllerFinishReason.saved:
                 print("saved")
                 taskResult = taskViewController.restorationData
+                
+                if  taskViewController.task?.identifier == kConsentTaskIdentifier{
+                    
+                    self.popViewControllerAfterConsentDisagree()
+                }
             }
             
             if passcodeParentControllerWhileSetup != nil {
@@ -1720,8 +1764,12 @@
                     }
                 }
                 else{
-                    //Back button is enabled
-                    stepViewController.backButtonItem?.isEnabled = true
+                    if taskViewController.task?.identifier == "ConsentTask"{
+                        stepViewController.backButtonItem = nil
+                    }
+                    else{
+                        stepViewController.backButtonItem?.isEnabled = true
+                    }
                     
                 }
             }
@@ -1818,6 +1866,114 @@
                         return nil
                     }
                 }
+                else if step.identifier == kComprehensionCompletionStepIdentifier
+                {
+                    // comprehension test is available
+                    if (ConsentBuilder.currentConsent?.comprehension?.questions?.count)! > 0 {
+                        
+                        
+                        let visualStepIndex:Int = (taskViewController.result.results?.index(where: {$0.identifier == kVisualStepId}))!
+                        
+                        if visualStepIndex > 0 {
+                            
+                            var  i = visualStepIndex + 2 // holds the index of  question
+                            var j = 0 // holds the index of correct answer
+                            
+                            var userScore = 0
+                            
+                            while  i < (taskViewController.result.results?.count)! {
+                                
+                                
+                                let textChoiceResult:ORKChoiceQuestionResult = ((taskViewController.result.results?[i] as! ORKStepResult).results?.first) as! ORKChoiceQuestionResult
+                                
+                                
+                                
+                                let correctAnswerDict:Dictionary<String,Any>? = ConsentBuilder.currentConsent?.comprehension?.correctAnswers?[j]
+                                
+                                let answerArray:[String] = (correctAnswerDict?[kConsentComprehensionAnswer] as? [String])!
+                                
+                                let evaluationType:Evaluation? = Evaluation(rawValue: correctAnswerDict?[kConsentComprehensionEvaluation] as! String)
+                                
+                                let answeredSet = Set(textChoiceResult.choiceAnswers! as! [String])
+                                
+                                let correctAnswerSet = Set(answerArray)
+                                
+                                switch evaluationType! {
+                                case .any:
+                                    
+                                    
+                                    if answeredSet.isSubset(of: correctAnswerSet){
+                                        userScore = userScore + 1
+                                    }
+                                    //                            else if (answeredSet.intersection(correctAnswerSet)).isEmpty == false{
+                                    //                                userScore = userScore + 1
+                                    //                            }
+                                    
+                                case .all:
+                                    
+                                    if answeredSet == correctAnswerSet{
+                                        userScore = userScore + 1
+                                    }
+                                    
+                                    
+                                default: break
+                                    
+                                }
+                                
+                                j+=1
+                                i+=1
+                            }
+                            
+                            if userScore >= (ConsentBuilder.currentConsent?.comprehension?.passScore)! {
+                                return nil
+                            }
+                            else{
+                                
+                                self.isComprehensionFailed = true
+                                self.addRetryScreen(viewController: nil)
+                                
+                                taskViewController.dismiss(animated: true, completion: nil)
+                            }
+                            
+                        }
+                        else{
+                            // if by chance we didnt get visualStepIndex i.e there no visual step
+                            // logically should never occur
+                        }
+                        
+                        return nil
+                    }
+                    else{
+                        // comprehension test is not available
+                        return nil
+                    }
+                    
+                }
+                else if step.identifier == kReviewTitle{
+                    // if sharing step exists && allowWithoutSharing is set
+                    
+                    let shareStep:ORKStepResult? = taskViewController.result.results?.last as! ORKStepResult?
+                    
+                    ConsentBuilder.currentConsent?.sharingConsent?.allowWithoutSharing = false
+                    
+                    if shareStep?.identifier == kConsentSharing && ConsentBuilder.currentConsent?.sharingConsent != nil && (ConsentBuilder.currentConsent?.sharingConsent?.allowWithoutSharing)! == false{
+                        
+                        let result = (shareStep?.results?.first as? ORKChoiceQuestionResult)
+                        
+                        if (result?.choiceAnswers?.first as! Bool) == true{
+                            return nil
+                        }
+                        else{
+                            taskViewController.dismiss(animated: true, completion: nil)
+                            return nil
+                        }
+                        
+                        
+                    }
+                    else{
+                        return nil
+                    }
+                }
                 else {
                     
                     return nil
@@ -1853,8 +2009,13 @@
                     else {
                         UIApplication.shared.keyWindow?.addSubview(self.blockerScreen!)
                     }
+                }
+                
+                if self.isComprehensionFailed!{
                     
-                    
+                    if self.retryView != nil{
+                         self.retryView?.isHidden = false
+                    }
                 }
                 
                 if self.selectedController != nil {
@@ -1935,6 +2096,20 @@
         }
         
     }
+    
+    //MARK:ComprehensionFailureDelegate
+    
+    extension AppDelegate:ComprehensionFailureDelegate{
+        func didTapOnCancel() {
+            self.popViewControllerAfterConsentDisagree()
+        }
+
+        func didTapOnRetry() {
+            self.createEligibilityConsentTask()
+        }
+    }
+    
+    
     
     
     //MARK: UNUserNotification Delegate

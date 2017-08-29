@@ -565,6 +565,10 @@ class UserServices: NSObject {
             ud.set(true, forKey: kPasscodeIsPending)
             
             ud.synchronize()
+            
+            StudyFilterHandler.instance.previousAppliedFilters = []
+            
+            
         }
         
     }
@@ -595,6 +599,8 @@ class UserServices: NSObject {
                 ud.synchronize()
                 
                 DBHandler().saveCurrentUser(user: user)
+                
+                StudyFilterHandler.instance.previousAppliedFilters = []
             }
         }
     }
@@ -799,7 +805,9 @@ class UserServices: NSObject {
         //cancel all local notification
         LocalNotification.cancelAllLocalNotification()
         
-        
+        //reset Filters
+        StudyFilterHandler.instance.previousAppliedFilters = []
+        StudyFilterHandler.instance.searchText = ""
         
     }
     

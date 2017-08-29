@@ -24,7 +24,7 @@ class ChartsViewController: UIViewController {
         //unhide navigationbar
         //self.navigationController?.setNavigationBarHidden(false, animated: true)
         
-        
+    
 
     }
     override func viewWillAppear(_ animated: Bool) {
@@ -52,7 +52,33 @@ class ChartsViewController: UIViewController {
         self.navigationController?.popViewController(animated: true)
     }
     
+    @IBAction func shareButtonAction(_ sender: AnyObject){
+        
+        self.shareScreenShotByMail()
+    }
 
+    func shareScreenShotByMail() {
+        
+        //Create the UIImage
+        
+        let savedContentOffset = self.tableView.contentOffset
+        let savedFrame = tableView.frame
+        
+        
+        UIGraphicsBeginImageContextWithOptions(tableView.contentSize, self.view.isOpaque, 0.0)
+        tableView.contentOffset = .zero
+        tableView.frame = CGRect(x: 0, y: 0, width: tableView.contentSize.width, height: tableView.contentSize.height)
+        tableView.layer.render(in: UIGraphicsGetCurrentContext()!)
+        let image = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext();
+        
+        tableView.contentOffset = savedContentOffset
+        tableView.frame = savedFrame
+        
+        (self.tabBarController as! StudyDashboardTabbarViewController).shareScreenshotByEmail(image: image, subject: kEmailSubjectCharts)
+    
+    }
+    
     /*
     // MARK: - Navigation
 

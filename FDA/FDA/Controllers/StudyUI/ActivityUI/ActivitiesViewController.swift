@@ -31,8 +31,10 @@ class ActivitiesViewController : UIViewController{
     var selectedIndexPath:IndexPath? = nil
     var isAnchorDateSet:Bool = false
     var taskControllerPresented = false
+    var refreshControl:UIRefreshControl?
     
-    
+    var allActivityList:Array<Dictionary<String,Any>>! = []
+    var selectedFilter: ActivityFilterType?
     
     //MARK:- Viewcontroller Lifecycle
     override func viewDidLoad() {
@@ -42,6 +44,7 @@ class ActivitiesViewController : UIViewController{
         //let plistPath = Bundle.main.path(forResource: "Activities", ofType: ".plist", inDirectory:nil)
         // tableViewRowDetails = Array(contente) //NSMutableArray.init(contentsOfFile: plistPath!)
         
+        selectedFilter = ActivityFilterType.all
         
         
         self.tableView?.estimatedRowHeight = 126
@@ -52,7 +55,7 @@ class ActivitiesViewController : UIViewController{
         self.navigationItem.title = NSLocalizedString("STUDY ACTIVITIES", comment: "")
         self.tableView?.sectionHeaderHeight = 30
         
-       
+       self.navigationController?.navigationItem.rightBarButtonItem?.tintColor = UIColor.gray
         
         if (Study.currentStudy?.studyId) != nil {
             //WCPServices().getStudyActivityList(studyId: (Study.currentStudy?.studyId)!, delegate: self)
@@ -60,7 +63,7 @@ class ActivitiesViewController : UIViewController{
             //self.loadActivitiesFromDatabase()
             
             
-            
+            //StudyUpdates.studyConsentUpdated = true
             
             if StudyUpdates.studyConsentUpdated {
                 
@@ -71,7 +74,12 @@ class ActivitiesViewController : UIViewController{
             
         }
         
-        
+        refreshControl = UIRefreshControl()
+        refreshControl?.attributedTitle = NSAttributedString(string: "Pull to refresh")
+        refreshControl?.addTarget(self, action: #selector(refresh(sender:)), for: UIControlEvents.valueChanged)
+        tableView?.addSubview(refreshControl!)
+       
+
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -264,8 +272,15 @@ class ActivitiesViewController : UIViewController{
     }
     
     @IBAction func filterButtonAction(_ sender: AnyObject){
+         let frame = self.view.frame
         
+        if self.selectedFilter == nil {
+            self.selectedFilter = ActivityFilterType.all
+        }
         
+        let view = ActivityFilterView.instanceFromNib(frame:frame , selectedIndex:self.selectedFilter!)
+        view.delegate = self
+        self.tabBarController?.view.addSubview(view)
     }
     
     func checkForDashBoardInfo(){
@@ -280,6 +295,12 @@ class ActivitiesViewController : UIViewController{
             }
         }
     }
+    
+    
+    func refresh(sender:AnyObject) {
+        self.sendRequesToGetActivityList()
+    }
+    
     
     //MARK:-
     
@@ -317,8 +338,8 @@ class ActivitiesViewController : UIViewController{
      */
     func createActivity(){
         
+        /*
         
-         /*
          let filePath  = Bundle.main.path(forResource: "Labkey_Activity", ofType: "json")
          
          //let filePath  = Bundle.main.path(forResource: "FetalKickTest", ofType: "json")
@@ -333,8 +354,8 @@ class ActivitiesViewController : UIViewController{
          catch let error as NSError{
          print("\(error)")
          }
- 
         */
+        
         
         
         IQKeyboardManager.sharedManager().enable = false
@@ -376,9 +397,37 @@ class ActivitiesViewController : UIViewController{
             taskViewController?.delegate = self
             UIApplication.shared.statusBarStyle = .default
             taskControllerPresented = true
-            present(taskViewController!, animated: true, completion: {
-                Logger.sharedInstance.info("Activity presented to user")
-            })
+            present(taskViewController!, animated: true, completion: nil)
+            
+            
+// -----------NEEDED FOR NEXT PHASE
+//              if Study.currentActivity?.currentRun.restortionData != nil {
+//                while (taskViewController?.result.results?.count)! > 1 {
+//                    
+//                    taskViewController?.goBackward()
+//                    
+//                    let questionstepViewArray = (taskViewController?.currentStepViewController?.view?.subviews)?.filter({$0.isKind(of: UIScrollView.self)})
+//                    let questionStepView = questionstepViewArray?.first
+//                    
+//                    if questionStepView != nil {
+//                    
+//                    for subView in (questionStepView?.accessibilityElements)!{
+//                        
+//                        if (subView as AnyObject).isKind(of: UIButton.self) == false{
+//                            ((subView as Any) as AnyObject).isUserInteractionEnabled = false
+//                            
+//                            print("subview : \(subView)")
+//                            
+//                        }
+//                        
+//                        
+//                    }
+//                    
+//                    }
+//                }
+//                
+//            }
+            
         }
         else{
             UIUtilities.showAlertMessage(kAlertMessageText, errorMessage: NSLocalizedString("Invalid Data!", comment: ""), errorAlertActionTitle: NSLocalizedString("OK", comment: ""), viewControllerUsed: self)
@@ -452,6 +501,7 @@ class ActivitiesViewController : UIViewController{
     func handleActivityListResponse(){
         
         tableViewSections = []
+        allActivityList = []
         let activities = Study.currentStudy?.activities
         
         var currentActivities:Array<Activity> = []
@@ -493,9 +543,22 @@ class ActivitiesViewController : UIViewController{
         let upcomingDetails = ["title":"UPCOMING","activities":upcomingActivities] as [String : Any]
         let pastDetails = ["title":"PAST","activities":pastActivities] as [String : Any]
         
-        tableViewSections.append(currentDetails)
-        tableViewSections.append(upcomingDetails)
-        tableViewSections.append(pastDetails)
+        
+        
+        
+        allActivityList.append(currentDetails)
+        allActivityList.append(upcomingDetails)
+        allActivityList.append(pastDetails)
+        
+        tableViewSections = allActivityList
+        
+        if self.selectedFilter == .tasks || self.selectedFilter == .surveys{
+            
+             let filterType:ActivityType! =  (selectedFilter == .surveys ? .Questionnaire : .activeTask)
+            self.updateSectionArray(activityType: filterType)
+        }
+        
+        
         
         self.tableView?.reloadData()
         self.removeProgressIndicator()
@@ -906,6 +969,58 @@ extension ActivitiesViewController:ActivitiesCellDelegate{
     }
 }
 
+//MARK:- ActivityFilterDelegate
+extension ActivitiesViewController:ActivityFilterViewDelegate{
+    func setSelectedFilter(selectedIndex: ActivityFilterType) {
+        
+        // current filter is not same as existing filter
+        if self.selectedFilter != selectedIndex{
+            
+           // currently filter type is all so no need to fetch all activities
+            if self.selectedFilter == .all{
+                
+                let filterType:ActivityType! =  (selectedIndex == .surveys ? .Questionnaire : .activeTask)
+                self.updateSectionArray(activityType: filterType)
+                
+            }
+            else{// existing filterType is either Task or Surveys
+                
+                //load all the sections from scratch
+                self.tableViewSections = []
+                self.tableViewSections = allActivityList
+                
+                // applying the new filter Type
+                if selectedIndex == .surveys || selectedIndex == .tasks{
+                    let filterType:ActivityType! =  (selectedIndex == .surveys ? .Questionnaire : .activeTask)
+                    self.updateSectionArray(activityType: filterType)
+                }
+            }
+            self.selectedFilter = selectedIndex
+            self.tableView?.reloadData()
+        }
+        else{
+            //current and newly selected filter types are same
+        }
+    }
+    
+    func updateSectionArray(activityType:ActivityType)  {
+        
+        var updatedSectionArray:Array<Dictionary<String,Any>>! = []
+        for section in tableViewSections{
+            let activities = section[kActivities] as! Array<Activity>
+            var sectionDict:Dictionary<String,Any>! = section
+            sectionDict[kActivities] = activities.filter({$0.type == activityType
+            })
+            
+            updatedSectionArray.append(sectionDict)
+        }
+        tableViewSections = []
+        tableViewSections = updatedSectionArray
+    }
+    
+    
+}
+
 
 //MARK:- Webservice Delegates
 extension ActivitiesViewController:NMWebServiceDelegate {
@@ -932,6 +1047,11 @@ extension ActivitiesViewController:NMWebServiceDelegate {
             //self.tableView?.reloadData()
             //self.handleActivityListResponse()
             self.loadActivitiesFromDatabase()
+            
+            if self.refreshControl != nil && (self.refreshControl?.isRefreshing)!{
+                self.refreshControl?.endRefreshing()
+            }
+            
             
             StudyUpdates.studyActivitiesUpdated = false
             DBHandler.updateMetaDataToUpdateForStudy(study: Study.currentStudy!, updateDetails: nil)
@@ -1093,34 +1213,48 @@ extension ActivitiesViewController:ORKTaskViewControllerDelegate{
                     if  (taskViewController.result.results?.count)! > 0 {
                         
                         let orkStepResult:ORKStepResult? = taskViewController.result.results?[2] as! ORKStepResult
+                        
                         if (orkStepResult?.results?.count)! > 0 {
                             
-                            let fetalKickResult:FetalKickCounterTaskResult? = orkStepResult?.results?.first as! FetalKickCounterTaskResult
+                            let activeTaskResultType =  ActiveStepType(rawValue:ActivityBuilder.currentActivityBuilder.activity?.activitySteps?.first?.resultType as! String)
                             
-                            let study = Study.currentStudy
-                            let activity = Study.currentActivity
-                            
-                            
-                            if fetalKickResult != nil{
+                            switch activeTaskResultType! {
                                 
-                                let value = Float((fetalKickResult?.totalKickCount)!)
-                                let dict = ActivityBuilder.currentActivityBuilder.activity?.steps?.first!
-                                let key = dict?[kActivityStepKey] as! String
+                            case .fetalKickCounter:
                                 
+                                let fetalKickResult:FetalKickCounterTaskResult? = orkStepResult?.results?.first as! FetalKickCounterTaskResult
                                 
-                                DBHandler.saveStatisticsDataFor(activityId: (activity?.actvityId)!, key: key, data:value,date:Date())
+                                let study = Study.currentStudy
+                                let activity = Study.currentActivity
                                 
                                 
+                                if fetalKickResult != nil{
+                                    
+                                    let value = Float((fetalKickResult?.totalKickCount)!)
+                                    let dict = ActivityBuilder.currentActivityBuilder.activity?.steps?.first!
+                                    let key = dict?[kActivityStepKey] as! String
+                                    
+                                    
+                                    DBHandler.saveStatisticsDataFor(activityId: (activity?.actvityId)!, key: key, data:value,date:Date())
+                                    
+                                    
+                                    
+                                    let ud = UserDefaults.standard
+                                    ud.removeObject(forKey: "FKC")
+                                    ud.removeObject(forKey: "FetalKickActivityId")
+                                    ud.removeObject(forKey: "FetalKickCounterValue")
+                                    ud.removeObject(forKey: "FetalKickStartTimeStamp")
+                                    ud.removeObject(forKey: "FetalKickStudyId")
+                                    ud.removeObject(forKey: "FetalKickCounterRunid")
+                                    ud.synchronize()
+                                    
+                                }
+                                case .spatialSpanMemoryStep: break
                                 
-                                let ud = UserDefaults.standard
-                                ud.removeObject(forKey: "FKC")
-                                ud.removeObject(forKey: "FetalKickActivityId")
-                                ud.removeObject(forKey: "FetalKickCounterValue")
-                                ud.removeObject(forKey: "FetalKickStartTimeStamp")
-                                ud.removeObject(forKey: "FetalKickStudyId")
-                                ud.removeObject(forKey: "FetalKickCounterRunid")
-                                ud.synchronize()
                                 
+                                    
+                                    default:break
+                                    
                                 
                                 
                             }

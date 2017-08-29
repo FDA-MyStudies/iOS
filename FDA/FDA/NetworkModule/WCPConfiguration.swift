@@ -50,8 +50,8 @@ struct WCPServerURLConstants {
     //static let DevelopmentURL = "https://hphci-fdama-te-wcp-01.labkey.com/StudyMetaData/"
     
     //Lab UAT Server
-    static let ProductionURL =  "https://hphci-fdama-pr-wcp-01.labkey.com/StudyMetaData/"
-    static let DevelopmentURL = "https://hphci-fdama-st-wcp-01.labkey.com/StudyMetaData/"
+   // static let ProductionURL =  "https://hphci-fdama-st-wcp-01.labkey.com/StudyMetaData/"
+   // static let DevelopmentURL = "https://hphci-fdama-st-wcp-01.labkey.com/StudyMetaData/"
     
     //Lab Production Server
     //static let ProductionURL =  "https://hphci-fdama-pr-wcp-01.labkey.com/StudyMetaData/"
@@ -62,10 +62,6 @@ struct WCPServerURLConstants {
     //static let ProductionURL = "http://23.89.199.27:8080/StudyMetaData/"
     //static let DevelopmentURL = "http://23.89.199.27:8080/StudyMetaData/"
 
-    //static let ProductionURL = "http://172.246.126.44:8080/StudyMetaData/"
-    //static let DevelopmentURL = "http://172.246.126.44:8080/StudyMetaData/"
-
-    
     
     //New SerVerForDevelopment
     //static let ProductionURL = "http://192.168.0.26:8080/StudyMetaData/"
@@ -87,7 +83,9 @@ struct WCPServerURLConstants {
     //static let ProductionURL = "http://192.168.0.32:8080/StudyMetaData/"
     //static let DevelopmentURL = "http://192.168.0.32:8080/StudyMetaData/"
     
-    
+    //local 2
+    static let ProductionURL = "http://172.246.126.44:8080/StudyMetaData/"
+    static let DevelopmentURL = "http://172.246.126.44:8080/StudyMetaData/"
 }
 
 class WCPConfiguration: NetworkConfiguration {

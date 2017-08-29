@@ -369,6 +369,15 @@ class ConsentBuilder{
             
             let sharingConsentStep = ConsentSharingStep(identifier: kConsentSharing, investigatorShortDescription: (self.sharingConsent?.shortDesc)!, investigatorLongDescription: (self.sharingConsent?.longDesc)!, localizedLearnMoreHTMLContent: (self.sharingConsent?.learnMore)!)
             
+            if Utilities.isValidValue(someObject: self.sharingConsent?.text as AnyObject ){
+                sharingConsentStep.text = self.sharingConsent?.text
+            }
+           
+            if Utilities.isValidValue(someObject: self.sharingConsent?.title as AnyObject ){
+                sharingConsentStep.text = self.sharingConsent?.title
+            }
+            
+            
             return sharingConsentStep
             
         }

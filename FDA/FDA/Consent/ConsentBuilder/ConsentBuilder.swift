@@ -27,7 +27,7 @@ let kConsentSharingStepLongDesc = "longDesc"
 let kConsentSharingSteplearnMore = "learnMore"
 let kConsentSharingStepText = "text"
 let kConsentSharingStepTitle = "title"
-
+let kConsentSharingStepAllowWithoutSharing = "allowWithoutSharing"
 
 
 // ReviewConsent Api Constants
@@ -60,6 +60,20 @@ let kConsentCompletionStepIdentifier = "ConsentFinalCompletionStep"
 let kConsentSharePdfStoryboardId = "ConsentSharePdfStepViewControllerIdentifier"
 
 let kConsentViewPdfStoryboardId = "ConsentPdfViewerStepViewControllerIdentifier"
+
+
+// Comprehenion Instruction Step Keys
+
+let kConsentComprehensionTestTitle = "Comprehension"
+let kConsentComprehensionTestText = "Let's do a quick and simple test of your understanding of this Study."
+let kComprehensionInstructionStepIdentifier = "ComprehensionInstructionStep"
+
+// Comprehension Completion Step Keys
+
+let kComprehensionCompletionTitle = "Great Job!"
+let kComprehensionCompletionText = "You answered all of the questions correctly. Tap on Next to proceed"
+let kComprehensionCompletionStepIdentifier = "ComprehensionCompletionStep"
+
 
 
 enum ConsentStatus:String{
@@ -269,6 +283,7 @@ class ConsentBuilder{
          @returns an array of ORKSteps
          */
         
+       
         if (self.comprehension?.questions?.count)! > 0 {
             var stepsArray:[ORKStep]? = [ORKStep]()
             for stepDict in (self.comprehension?.questions!)!{
@@ -344,6 +359,7 @@ class ConsentBuilder{
          @returns an instance of ORKConsentSharingStep
          */
         
+        
         if Utilities.isValidValue(someObject: self.sharingConsent?.shortDesc as AnyObject )
             && Utilities.isValidValue(someObject: self.sharingConsent?.longDesc as AnyObject )
             && Utilities.isValidValue(someObject: self.sharingConsent?.learnMore as AnyObject ){
@@ -392,9 +408,29 @@ class ConsentBuilder{
         
         if comprehensionSteps != nil && (comprehensionSteps?.count)! > 0 {
             
+            // adding Instruction Step for Comprehenion
+            
+            let comprehensionTestInstructionStep = customInstructionStep(identifier: kComprehensionInstructionStepIdentifier)
+            comprehensionTestInstructionStep.text = kConsentComprehensionTestText
+            
+            comprehensionTestInstructionStep.title = kConsentComprehensionTestTitle
+            stepArray?.append(comprehensionTestInstructionStep)
+            
+            
+            // adding questionery
             for step in comprehensionSteps!{
                 stepArray?.append(step)
             }
+            
+            //adding Completion Step
+            
+            let comprehensionCompletionStep = customInstructionStep(identifier: kComprehensionCompletionStepIdentifier)
+            comprehensionCompletionStep.text = kComprehensionCompletionText
+            
+            comprehensionCompletionStep.title = kComprehensionCompletionTitle
+            comprehensionCompletionStep.image =  #imageLiteral(resourceName: "successBlueBig")
+            stepArray?.append(comprehensionCompletionStep)
+
             
         }
         
@@ -458,6 +494,7 @@ struct SharingConsent {
     var allowWithoutSharing:Bool?
     var text:String?
     var title:String?
+   
     
     init() {
         self.shortDesc = ""
@@ -493,6 +530,11 @@ struct SharingConsent {
             if Utilities.isValidValue(someObject: dict[kConsentSharingStepTitle] as AnyObject ){
                 self.title = dict[kConsentSharingStepTitle] as? String
             }
+            
+            if Utilities.isValidValue(someObject: dict[kConsentSharingStepAllowWithoutSharing] as AnyObject ){
+                self.allowWithoutSharing = dict[kConsentSharingStepAllowWithoutSharing] as? Bool
+            }
+            
         }
         else{
             Logger.sharedInstance.debug("ConsentDocument Step Dictionary is null:\(dict)")

@@ -111,7 +111,7 @@
                                 </connections>
                             </button>
                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Aqo-FS-uXn">
-                                <rect key="frame" x="113" y="455" width="150" height="40"/>
+                                <rect key="frame" x="112.5" y="455" width="150" height="40"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                                 <state key="normal" title="Submit">
                                     <color key="titleColor" red="0.0" green="0.48627450979999998" blue="0.72941176470000002" alpha="1" colorSpace="calibratedRGB"/>
@@ -593,25 +593,32 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Not Eligible" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="DRs-0f-pS9">
-                                <rect key="frame" x="120" y="148" width="135" height="50"/>
+                                <rect key="frame" x="120" y="114.5" width="135" height="50"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="30"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Unfortunately, you are ineligible to join study." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="AzP-hO-NLT">
-                                <rect key="frame" x="38" y="207" width="300" height="65"/>
-                                <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="18.5"/>
-                                <nil key="textColor"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="7" baselineAdjustment="alignBaselines" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="AzP-hO-NLT">
+                                <rect key="frame" x="37.5" y="189.5" width="300" height="100"/>
+                                <attributedString key="attributedText">
+                                    <fragment>
+                                        <string key="content">Sorry, you are not eligible for participation in this study. We thank you for your interest and time, and encourage you to explore other studies as they are made available in the app.</string>
+                                        <attributes>
+                                            <font key="NSFont" size="18.5" name="HelveticaNeue-Light"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="truncatingTail" baseWritingDirection="natural" lineSpacing="4" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                </attributedString>
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="smile2" translatesAutoresizingMaskIntoConstraints="NO" id="w7M-LE-9s0">
-                                <rect key="frame" x="125" y="306" width="124" height="120"/>
+                                <rect key="frame" x="125.5" y="339.5" width="124" height="120"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="w7M-LE-9s0" secondAttribute="height" multiplier="31:30" id="yhj-zJ-xGV"/>
                                 </constraints>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mVr-1X-vKQ">
-                                <rect key="frame" x="113" y="473" width="150" height="40"/>
+                                <rect key="frame" x="112.5" y="519.5" width="150" height="40"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
                                 <state key="normal" title="Done">
                                     <color key="titleColor" red="0.0" green="0.48627450979999998" blue="0.72941176470000002" alpha="1" colorSpace="calibratedRGB"/>
@@ -634,7 +641,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="DRs-0f-pS9" firstAttribute="width" secondItem="2cp-yO-fO8" secondAttribute="width" multiplier="135/375" id="33z-EV-qqh"/>
-                            <constraint firstItem="mVr-1X-vKQ" firstAttribute="centerY" secondItem="2cp-yO-fO8" secondAttribute="centerY" multiplier="1.47826" id="9yh-uv-Vnd"/>
+                            <constraint firstItem="mVr-1X-vKQ" firstAttribute="centerY" secondItem="2cp-yO-fO8" secondAttribute="centerY" multiplier="1.61826" id="9yh-uv-Vnd"/>
                             <constraint firstItem="w7M-LE-9s0" firstAttribute="centerX" secondItem="2cp-yO-fO8" secondAttribute="centerX" id="FBt-GB-gXy"/>
                             <constraint firstItem="AzP-hO-NLT" firstAttribute="centerY" secondItem="2cp-yO-fO8" secondAttribute="centerY" multiplier="0.718141" id="KRa-a7-DYi"/>
                             <constraint firstItem="AzP-hO-NLT" firstAttribute="centerX" secondItem="2cp-yO-fO8" secondAttribute="centerX" id="MFa-aw-Lhe"/>
@@ -642,10 +649,10 @@
                             <constraint firstItem="mVr-1X-vKQ" firstAttribute="height" secondItem="2cp-yO-fO8" secondAttribute="height" multiplier="40/667" id="XSu-kA-s7D"/>
                             <constraint firstItem="mVr-1X-vKQ" firstAttribute="centerX" secondItem="2cp-yO-fO8" secondAttribute="centerX" id="bbN-gT-CNs"/>
                             <constraint firstItem="DRs-0f-pS9" firstAttribute="centerX" secondItem="2cp-yO-fO8" secondAttribute="centerX" id="c38-7t-O3k"/>
-                            <constraint firstItem="w7M-LE-9s0" firstAttribute="centerY" secondItem="2cp-yO-fO8" secondAttribute="centerY" multiplier="1.09745" id="jor-15-11m"/>
-                            <constraint firstItem="DRs-0f-pS9" firstAttribute="centerY" secondItem="2cp-yO-fO8" secondAttribute="centerY" multiplier="0.518741" id="kIY-Dh-eiv"/>
+                            <constraint firstItem="w7M-LE-9s0" firstAttribute="centerY" secondItem="2cp-yO-fO8" secondAttribute="centerY" multiplier="1.19745" id="jor-15-11m"/>
+                            <constraint firstItem="DRs-0f-pS9" firstAttribute="centerY" secondItem="2cp-yO-fO8" secondAttribute="centerY" multiplier="0.418741" id="kIY-Dh-eiv"/>
                             <constraint firstItem="w7M-LE-9s0" firstAttribute="width" secondItem="2cp-yO-fO8" secondAttribute="width" multiplier="124/375" id="qnh-rA-VUi"/>
-                            <constraint firstItem="AzP-hO-NLT" firstAttribute="height" secondItem="2cp-yO-fO8" secondAttribute="height" multiplier="65/667" id="sCM-ZC-Tr2"/>
+                            <constraint firstItem="AzP-hO-NLT" firstAttribute="height" secondItem="2cp-yO-fO8" secondAttribute="height" multiplier="100/667" id="sCM-ZC-Tr2"/>
                             <constraint firstItem="mVr-1X-vKQ" firstAttribute="width" secondItem="2cp-yO-fO8" secondAttribute="width" multiplier="150/375" id="ueh-ZM-a7R"/>
                             <constraint firstItem="DRs-0f-pS9" firstAttribute="height" secondItem="2cp-yO-fO8" secondAttribute="height" multiplier="50/667" id="ySd-kd-5kz"/>
                         </constraints>

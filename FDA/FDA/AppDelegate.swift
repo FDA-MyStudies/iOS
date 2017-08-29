@@ -1670,8 +1670,12 @@
                     }
                 }
                 else{
-                    //Back button is enabled
-                    stepViewController.backButtonItem?.isEnabled = true
+                    if taskViewController.task?.identifier == "ConsentTask"{
+                        stepViewController.backButtonItem = nil
+                    }
+                    else{
+                        stepViewController.backButtonItem?.isEnabled = true
+                    }
                     
                 }
             }
@@ -1768,18 +1772,17 @@
                         return nil
                     }
                 }
-                else if step.identifier == kReviewTitle{
-                    
-                    
+                else if step.identifier == kComprehensionCompletionStepIdentifier
+                {
                     // comprehension test is available
                     if (ConsentBuilder.currentConsent?.comprehension?.questions?.count)! > 0 {
                         
                         
                         let visualStepIndex:Int = (taskViewController.result.results?.index(where: {$0.identifier == kVisualStepId}))!
                         
-                        if visualStepIndex >= 0 {
+                        if visualStepIndex > 0 {
                             
-                            var  i = visualStepIndex + 1 // holds the index of  question
+                            var  i = visualStepIndex + 2 // holds the index of  question
                             var j = 0 // holds the index of correct answer
                             
                             var userScore = 0
@@ -1806,16 +1809,16 @@
                                     
                                     
                                     if answeredSet.isSubset(of: correctAnswerSet){
-                                        userScore = userScore + 100
+                                        userScore = userScore + 1
                                     }
-                                    else if (answeredSet.intersection(correctAnswerSet)).isEmpty == false{
-                                        userScore = userScore + 100
-                                    }
+                                    //                            else if (answeredSet.intersection(correctAnswerSet)).isEmpty == false{
+                                    //                                userScore = userScore + 1
+                                    //                            }
                                     
                                 case .all:
                                     
                                     if answeredSet == correctAnswerSet{
-                                        userScore = userScore + 100
+                                        userScore = userScore + 1
                                     }
                                     
                                     
@@ -1832,12 +1835,10 @@
                             }
                             else{
                                 
-                                
                                 self.isComprehensionFailed = true
                                 self.addRetryScreen(viewController: nil)
                                 
-                                taskViewController.dismiss(animated: true
-                                    , completion: nil)
+                                taskViewController.dismiss(animated: true, completion: nil)
                             }
                             
                         }
@@ -1853,6 +1854,31 @@
                         return nil
                     }
                     
+                }
+                else if step.identifier == kReviewTitle{
+                    // if sharing step exists && allowWithoutSharing is set
+                    
+                    let shareStep:ORKStepResult? = taskViewController.result.results?.last as! ORKStepResult?
+                    
+                    ConsentBuilder.currentConsent?.sharingConsent?.allowWithoutSharing = false
+                    
+                    if shareStep?.identifier == kConsentSharing && ConsentBuilder.currentConsent?.sharingConsent != nil && (ConsentBuilder.currentConsent?.sharingConsent?.allowWithoutSharing)! == false{
+                        
+                        let result = (shareStep?.results?.first as? ORKChoiceQuestionResult)
+                        
+                        if (result?.choiceAnswers?.first as! Bool) == true{
+                            return nil
+                        }
+                        else{
+                            taskViewController.dismiss(animated: true, completion: nil)
+                            return nil
+                        }
+                        
+                        
+                    }
+                    else{
+                        return nil
+                    }
                 }
                 else {
                     

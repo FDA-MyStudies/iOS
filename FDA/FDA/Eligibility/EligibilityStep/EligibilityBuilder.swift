@@ -28,6 +28,17 @@ let kEligibilityValidateScreen = "ValidatedScreen"
 let kEligibilityValidationDescriptionText = "Your ID has been validated. You are eligible to join the Study.Please click Continue to proceed to the Consent section."
 let kEligibilityValidationTitle = "Validated!"
 
+
+
+let kEligibilityTestInstructionStep = "EligibilityTestInstructionStep"
+let kEligibilityTestInstructionTestTitle = "Eligibility Test"
+let kEligibilityInstructionTestText = "Please answer some quick questions to confirm your eligibility for this study."
+
+
+
+let kEligibilityCompletionTestDescriptionText = "Based on the answers you provided, you are eligible to participate in this study.\nPlease click Continue to proceed to the Consent section."
+
+
 let kEligibilityCorrectAnswer = "answer"
 let kEligibilityCorrectAnswerKey = "key"
 
@@ -79,13 +90,13 @@ class EligibilityBuilder{
     func getEligibilitySteps() -> [ORKStep]?{
         
         
+        
         if  self.type != nil{
             
-           // Utilities.isValidObject(someObject: self.testArray as AnyObject )
-              //  && Utilities.isValidValue(someObject: self.tokenTitle as AnyObject )
+            // Utilities.isValidObject(someObject: self.testArray as AnyObject )
+            //  && Utilities.isValidValue(someObject: self.tokenTitle as AnyObject )
+            
            
-            
-            
             var stepsArray:[ORKStep]? = [ORKStep]()
             
             
@@ -103,6 +114,13 @@ class EligibilityBuilder{
                 
                 stepsArray?.append(eligibilityStep!)
                 
+                // creating Token Validated Step
+                let eligibilityValidationStep = customInstructionStep(identifier: kEligibilityValidateScreen)
+                eligibilityValidationStep.text = kEligibilityValidationDescriptionText
+                
+                eligibilityValidationStep.title = kEligibilityValidationTitle
+                eligibilityValidationStep.image =  #imageLiteral(resourceName: "successBlueBig")
+                stepsArray?.append(eligibilityValidationStep)
                 
                 
                 
@@ -110,6 +128,15 @@ class EligibilityBuilder{
             }
             else if self.type == EligibilityStepType.test {
                 // for only test
+                
+                // add the Instruction step for eligibility Test
+                
+                let eligibilityTestInstructionStep = customInstructionStep(identifier: kEligibilityTestInstructionStep)
+                eligibilityTestInstructionStep.text = kEligibilityInstructionTestText
+                
+                eligibilityTestInstructionStep.title = kEligibilityTestInstructionTestTitle
+                stepsArray?.append(eligibilityTestInstructionStep)
+                
                 
                 //test array will hold the questions, correct answers will hold the answers
                 
@@ -140,26 +167,29 @@ class EligibilityBuilder{
                 
                 stepsArray?.append(eligibilityStep!)
                 
-                // creating Token Validated Step
-                let eligibilityValidationStep = customInstructionStep(identifier: kEligibilityValidateScreen)
-                eligibilityValidationStep.text = kEligibilityValidationDescriptionText
                 
-                eligibilityValidationStep.title = kEligibilityValidationTitle
-                eligibilityValidationStep.image =  #imageLiteral(resourceName: "successBlueBig")
-                stepsArray?.append(eligibilityValidationStep)
-
+                
+                // add the Instruction step for eligibility Test
+                
+                let eligibilityTestInstructionStep = customInstructionStep(identifier: kEligibilityTestInstructionStep)
+                eligibilityTestInstructionStep.text = kEligibilityInstructionTestText
+                
+                eligibilityTestInstructionStep.title = kEligibilityTestInstructionTestTitle
+                stepsArray?.append(eligibilityTestInstructionStep)
+                
+                
                 // creating Test Questions
                 
-            for stepDict in self.testArray!{
-        
-                let questionStep:ActivityQuestionStep? = ActivityQuestionStep()
-                questionStep?.initWithDict(stepDict: stepDict as! Dictionary<String, Any>)
-                // Questions are mandatory not skippable
-                questionStep?.skippable = false
-                stepsArray?.append((questionStep?.getQuestionStep())!)
-        
-            }
-            
+                for stepDict in self.testArray!{
+                    
+                    let questionStep:ActivityQuestionStep? = ActivityQuestionStep()
+                    questionStep?.initWithDict(stepDict: stepDict as! Dictionary<String, Any>)
+                    // Questions are mandatory not skippable
+                    questionStep?.skippable = false
+                    stepsArray?.append((questionStep?.getQuestionStep())!)
+                    
+                }
+                
                 // creating InEligibility Completion Step
                 
                 let eligibilityCompletionStep:InEligibilityStep? = InEligibilityStep(identifier: kInEligibilityStep)
@@ -169,18 +199,20 @@ class EligibilityBuilder{
                 
             }
             
-        
+            
             if (stepsArray?.count)! > 0 {
                 
                 
-                // creating Eligibility Completion Step
-                let eligibilityCompletionStep = customInstructionStep(identifier: kEligibilityVerifiedScreen)
-                eligibilityCompletionStep.text = kEligibilityCompletionDescriptionText
-                
-                eligibilityCompletionStep.title = kEligibilityCompletionTitle
-                eligibilityCompletionStep.image =  #imageLiteral(resourceName: "successBlueBig")
-                stepsArray?.append(eligibilityCompletionStep)
-                
+                if self.type == EligibilityStepType.test || self.type == .both {
+                    
+                    // creating Eligibility Completion Step
+                    let eligibilityCompletionStep = customInstructionStep(identifier: kEligibilityVerifiedScreen)
+                    eligibilityCompletionStep.text = kEligibilityCompletionTestDescriptionText
+                    
+                    eligibilityCompletionStep.title = kEligibilityCompletionTitle
+                    eligibilityCompletionStep.image =  #imageLiteral(resourceName: "successBlueBig")
+                    stepsArray?.append(eligibilityCompletionStep)
+                }
                 
                 return stepsArray!
             }

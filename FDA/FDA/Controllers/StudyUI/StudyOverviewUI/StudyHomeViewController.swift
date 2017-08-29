@@ -1107,7 +1107,15 @@ extension StudyHomeViewController:ORKTaskViewControllerDelegate{
         }
         else{
             //Back button is enabled
-            stepViewController.backButtonItem?.isEnabled = true
+            
+            if taskViewController.task?.identifier == kEligibilityConsentTask{
+                stepViewController.backButtonItem = nil
+            }
+            else{
+                stepViewController.backButtonItem?.isEnabled = true
+            }
+            
+            
         }
     }
     
@@ -1227,13 +1235,11 @@ extension StudyHomeViewController:ORKTaskViewControllerDelegate{
                 return nil
             }
         }
-        else if step.identifier == kReviewTitle || step.identifier == kConsentSharing{
+        else if step.identifier == kComprehensionCompletionStepIdentifier {
             
             //previous step was consent sharing and validation of answers(if comprehension test exists) is already done
             
-            if step.identifier == kReviewTitle && taskViewController.result.results?.last?.identifier == kConsentSharing{
-                return nil
-            }
+            
             
             
             
@@ -1245,7 +1251,7 @@ extension StudyHomeViewController:ORKTaskViewControllerDelegate{
                 
                 if visualStepIndex > 0 {
                     
-                    var  i = visualStepIndex + 1 // holds the index of  question
+                    var  i = visualStepIndex + 2 // holds the index of  question
                     var j = 0 // holds the index of correct answer
                     
                     var userScore = 0
@@ -1318,6 +1324,31 @@ extension StudyHomeViewController:ORKTaskViewControllerDelegate{
                 return nil
             }
             
+        }
+        else if step.identifier == kReviewTitle{
+            // if sharing step exists && allowWithoutSharing is set
+            
+            let shareStep:ORKStepResult? = taskViewController.result.results?.last as! ORKStepResult?
+            
+            ConsentBuilder.currentConsent?.sharingConsent?.allowWithoutSharing = false
+            
+            if shareStep?.identifier == kConsentSharing && ConsentBuilder.currentConsent?.sharingConsent != nil && (ConsentBuilder.currentConsent?.sharingConsent?.allowWithoutSharing)! == false{
+                
+                let result = (shareStep?.results?.first as? ORKChoiceQuestionResult)
+                
+                if (result?.choiceAnswers?.first as! Bool) == true{
+                   return nil
+                }
+                else{
+                   self.dismiss(animated: true, completion: nil)
+                    return nil
+                }
+                
+                
+            }
+            else{
+                return nil
+            }
         }
         else {
             

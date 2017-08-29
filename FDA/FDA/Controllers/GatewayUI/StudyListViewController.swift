@@ -271,6 +271,21 @@ class StudyListViewController: UIViewController {
         }
         else {
             //self.checkIfNotificationEnabled()
+            if NotificationHandler.instance.studyId.characters.count > 0 {
+                
+               
+                
+                let studyId = NotificationHandler.instance.studyId
+                
+                let study = Gateway.instance.studies?.filter({$0.studyId == studyId}).first
+                Study.updateCurrentStudy(study: study!)
+                
+                NotificationHandler.instance.studyId = ""
+                
+                self.performTaskBasedOnStudyStatus()
+                
+                
+            }
         }
         
     }
@@ -361,7 +376,7 @@ class StudyListViewController: UIViewController {
     func loadStudiesFromDatabase(){
         
         
-        
+        Logger.sharedInstance.info("Fetching Studies From DB")
         DBHandler.loadStudyListFromDatabase { (studies) in
             if studies.count > 0 {
                 self.tableView?.isHidden = false
@@ -369,7 +384,7 @@ class StudyListViewController: UIViewController {
                 //
                 //                   return (study1.userParticipateState.status.sortIndex < study2.userParticipateState.status.sortIndex)
                 //                })
-                
+                Logger.sharedInstance.info("Sorting Studies")
                 let  sortedstudies2 =  studies.sorted(by: { (study1:Study, study2:Study) -> Bool in
                     
                     if study1.status == study2.status {
@@ -380,7 +395,7 @@ class StudyListViewController: UIViewController {
                 
                 self.studiesList = sortedstudies2
                 self.tableView?.reloadData()
-                
+                Logger.sharedInstance.info("Studies displayed to user")
                 
                 self.checkIfFetelKickCountRunning()
                 
@@ -512,7 +527,8 @@ class StudyListViewController: UIViewController {
         DBHandler.loadStudyOverview(studyId: (study.studyId)!) { (overview) in
             if overview != nil {
                 study.overview = overview
-                self.navigateToStudyHome()
+                //
+                self.navigateBasedOnUserStatus()
             }
             else {
                 self.sendRequestToGetStudyInfo(study: study)
@@ -576,7 +592,7 @@ class StudyListViewController: UIViewController {
      */
     func handleStudyListResponse(){
         
-        
+        Logger.sharedInstance.info("Study Response Handler")
         
         if (Gateway.instance.studies?.count)! > 0{
             self.loadStudiesFromDatabase()
@@ -621,6 +637,8 @@ class StudyListViewController: UIViewController {
             self.sendRequestToGetStudyInfo(study: Study.currentStudy!)
         }
         else {
+            
+            self.removeProgressIndicator()
             self.navigateBasedOnUserStatus()
         }
         
@@ -643,17 +661,86 @@ class StudyListViewController: UIViewController {
                     self.pushToStudyDashboard()
                 }
                 else {
-                    self.checkDatabaseForStudyInfo(study: Study.currentStudy!)
+                    //self.checkDatabaseForStudyInfo(study: Study.currentStudy!)
+                    self.navigateToStudyHome()
                 }
             }
             else {
-                self.checkDatabaseForStudyInfo(study: Study.currentStudy!)
+                //self.checkDatabaseForStudyInfo(study: Study.currentStudy!)
+                self.navigateToStudyHome()
             }
         }
         else {
-            self.checkDatabaseForStudyInfo(study: Study.currentStudy!)
+            //self.checkDatabaseForStudyInfo(study: Study.currentStudy!)
+            self.navigateToStudyHome()
         }
     }
+    
+    func performTaskBasedOnStudyStatus(){
+        
+        let study = Study.currentStudy
+        
+        if User.currentUser.userType == UserType.FDAUser {
+            
+            if Study.currentStudy?.status == .Active{
+                
+                let userStudyStatus =  (Study.currentStudy?.userParticipateState.status)!
+                
+                if userStudyStatus == .completed || userStudyStatus == .inProgress
+                    //|| userStudyStatus == .yetToJoin
+                {
+                    
+                    //self.pushToStudyDashboard()
+                    // check if study version is udpated
+                    if(study?.version != study?.newVersion){
+                        WCPServices().getStudyUpdates(study: study!, delegate: self)
+                    }
+                    else{
+                        
+                        DBHandler.loadStudyDetailsToUpdate(studyId: (study?.studyId)!, completionHandler: { (success) in
+                            //self.pushToStudyDashboard()
+                            self.checkDatabaseForStudyInfo(study: study!)
+                        })
+                    }
+                }
+                else {
+                    
+                    self.checkForStudyUpdate(study: study)
+                }
+            }
+            else  if Study.currentStudy?.status == .Paused{
+                let userStudyStatus =  (Study.currentStudy?.userParticipateState.status)!
+                
+                if userStudyStatus == .completed || userStudyStatus == .inProgress {
+                    
+                    UIUtilities.showAlertWithTitleAndMessage(title: "", message: NSLocalizedString(kMessageForStudyPausedAfterJoiningState, comment: "") as NSString)
+                }
+                else {
+                    self.checkForStudyUpdate(study: study)
+                }
+            }
+            else {
+                
+                self.checkForStudyUpdate(study: study)
+            }
+        }
+        else {
+            
+            self.checkForStudyUpdate(study: study)
+            
+        }
+    }
+    
+    func checkForStudyUpdate(study:Study?){
+        
+        if(study?.version != study?.newVersion){
+            WCPServices().getStudyUpdates(study: study!, delegate: self)
+        }
+        else {
+            self.checkDatabaseForStudyInfo(study: study!)
+        }
+    }
+    
 }
 
 
@@ -765,7 +852,9 @@ extension StudyListViewController :  UITableViewDelegate {
         let study = self.studiesList[indexPath.row]
         Study.updateCurrentStudy(study: study)
         
+        self.performTaskBasedOnStudyStatus()
         
+        /*
         if User.currentUser.userType == UserType.FDAUser {
             
             if Study.currentStudy?.status == .Active{
@@ -835,7 +924,9 @@ extension StudyListViewController :  UITableViewDelegate {
                 self.checkDatabaseForStudyInfo(study: study)
             }
         }
+ */
     }
+ 
 }
 
 //MARK:- StudyList Delegates
@@ -861,13 +952,13 @@ extension StudyListViewController : StudyListDelegates {
 extension StudyListViewController:NMWebServiceDelegate {
     
     func startedRequest(_ manager: NetworkManager, requestName: NSString) {
-        Logger.sharedInstance.info("requestname : \(requestName)")
+        //Logger.sharedInstance.info("requestname : \(requestName)")
         
         self.addProgressIndicator()
     }
     
     func finishedRequest(_ manager: NetworkManager, requestName: NSString, response: AnyObject?) {
-        Logger.sharedInstance.info("requestname : \(requestName) : \(String(describing: response))")
+        //Logger.sharedInstance.info("requestname : \(requestName) : \(response)")
         
         if requestName as String == WCPMethods.studyList.rawValue{
             let responseDict = response as! NSDictionary
@@ -887,7 +978,7 @@ extension StudyListViewController:NMWebServiceDelegate {
         else if (requestName as String == WCPMethods.studyUpdates.rawValue){
             
             self.handleStudyUpdatedInformation()
-            self.removeProgressIndicator()
+            //self.removeProgressIndicator()
         }
         else if requestName as String ==  RegistrationMethods.userProfile.description {
             self.removeProgressIndicator()

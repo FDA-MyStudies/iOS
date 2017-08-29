@@ -24,12 +24,15 @@ enum ActivityAvailabilityStatus:Int{
 class ActivitiesViewController : UIViewController{
     
     @IBOutlet var tableView : UITableView?
+    @IBOutlet var labelNoNetworkAvailable:UILabel?
     
     var tableViewSections:Array<Dictionary<String,Any>>! = []
     var lastFetelKickIdentifer:String = ""  //TEMP
     var selectedIndexPath:IndexPath? = nil
     var isAnchorDateSet:Bool = false
     var taskControllerPresented = false
+    
+    
     
     //MARK:- Viewcontroller Lifecycle
     override func viewDidLoad() {
@@ -60,6 +63,8 @@ class ActivitiesViewController : UIViewController{
             
             
             if StudyUpdates.studyConsentUpdated {
+                
+                NotificationHandler.instance.activityId = ""
                 let appDelegate = UIApplication.shared.delegate as! AppDelegate
                 appDelegate.checkConsentStatus(controller: self)
             }
@@ -82,6 +87,14 @@ class ActivitiesViewController : UIViewController{
             self.checkForActivitiesUpdates()
         }
         
+        if tableViewSections.count == 0{
+            self.tableView?.isHidden = true
+            self.labelNoNetworkAvailable?.isHidden = false
+        }
+        else{
+            self.tableView?.isHidden = false
+            self.labelNoNetworkAvailable?.isHidden = true
+        }
         
     }
     
@@ -133,13 +146,24 @@ class ActivitiesViewController : UIViewController{
             })
 
         }
-        
-        
-        //        ud.removeObject(forKey: "FKC")
-        //        ud.removeObject(forKey: "FetalKickActivityId")
-        //        ud.removeObject(forKey: "FetalKickCounterValue")
-        //        ud.removeObject(forKey: "FetalKickStartTimeStamp")
-        //        ud.synchronize()
+        else {
+            //check if user navigated from notification
+            
+            if NotificationHandler.instance.activityId.characters.count > 0 {
+                
+                let activityId = NotificationHandler.instance.activityId
+                
+                let rowDetail = tableViewSections[0]
+                let activities = rowDetail["activities"] as! Array<Activity>
+                let index = activities.index(where: {$0.actvityId == activityId})
+                let ip = IndexPath.init(row: index!, section: 0)
+                self.selectedIndexPath = ip
+                self.tableView?.selectRow(at: ip, animated: true, scrollPosition:.middle)
+                self.tableView?.delegate?.tableView!(self.tableView!, didSelectRowAt: ip)
+                
+                NotificationHandler.instance.activityId = ""
+            }
+        }
         
         
     }
@@ -148,7 +172,7 @@ class ActivitiesViewController : UIViewController{
         
         DBHandler.getResourcesWithAnchorDateAvailable(studyId: (Study.currentStudy?.studyId)!) { (resourcesList) in
             if resourcesList.count > 0 {
-                
+                let todayDate = Date()
                 for resource in resourcesList {
                     
                     if resource.startDate == nil && resource.endDate == nil {
@@ -156,9 +180,10 @@ class ActivitiesViewController : UIViewController{
                         let anchorDateObject = Study.currentStudy?.anchorDate
                         if(anchorDateObject != nil && (anchorDateObject?.isAnchorDateAvailable())!) {
                             
-                            let anchorDate = Study.currentStudy?.anchorDate?.date
+                            let anchorDate = Study.currentStudy?.anchorDate?.date?.startOfDay
                             
                             if anchorDate != nil {
+                                
                                 
                                 //also anchor date condition
                                 let startDateInterval = TimeInterval(60*60*24*(resource.anchorDateStartDays))
@@ -167,30 +192,53 @@ class ActivitiesViewController : UIViewController{
                                 
                                 
                                 let startAnchorDate = anchorDate?.addingTimeInterval(startDateInterval)
-                                let endAnchorDate = anchorDate?.addingTimeInterval(endDateInterval)
+                                var endAnchorDate = anchorDate?.addingTimeInterval(endDateInterval)
                                 
+                                endAnchorDate = endAnchorDate?.endOfDay
+                                let startDateResult = (startAnchorDate?.compare(todayDate))! as ComparisonResult
+                                let endDateResult = (endAnchorDate?.compare(todayDate))! as ComparisonResult
                                 self.isAnchorDateSet = false
+//                                var notificationDate = startAnchorDate?.startOfDay
+//                                notificationDate = notificationDate?.addingTimeInterval(43200)
+//                                let message = resource.notificationMessage
+//                                let userInfo = ["studyId":(Study.currentStudy?.studyId)!,
+//                                                "type":"resource"];
+//                                LocalNotification.scheduleNotificationOn(date: notificationDate!, message: message!, userInfo: userInfo)
                                 
-                                let notification = AppLocalNotification()
-                                notification.id = resource.resourceId! + (Study.currentStudy?.studyId)!
-                                notification.message = resource.notificationMessage
-                                notification.title = "New Resource Available"
-                                notification.startDate = startAnchorDate
-                                notification.endDate = endAnchorDate
-                                notification.type = AppNotification.NotificationType.Study
-                                notification.subType = AppNotification.NotificationSubType.Resource
-                                notification.audience = Audience.Limited
-                                notification.studyId = (Study.currentStudy?.studyId)!
-                                notification.activityId = Study.currentActivity?.actvityId
-                                
-                                DBHandler.saveLocalNotification(notification: notification)
-                                
-                                //register notification
-                                let message = resource.notificationMessage
-                                let userInfo = ["studyId":(Study.currentStudy?.studyId)!,
-                                                "type":"resource"];
-                                LocalNotification.scheduleNotificationOn(date: startAnchorDate!, message: message!, userInfo: userInfo)
-                                
+                                if startDateResult == .orderedDescending {
+                                    //upcoming
+                                    let notfiId = resource.resourceId! + (Study.currentStudy?.studyId)!
+                                    DBHandler.isNotificationSetFor(notification: notfiId
+                                        , completionHandler: { (found) in
+                                            if !found {
+                                                
+                                                let notification = AppLocalNotification()
+                                                notification.id = resource.resourceId! + (Study.currentStudy?.studyId)!
+                                                notification.message = resource.notificationMessage
+                                                notification.title = "New Resource Available"
+                                                notification.startDate = startAnchorDate
+                                                notification.endDate = endAnchorDate
+                                                notification.type = AppNotification.NotificationType.Study
+                                                notification.subType = AppNotification.NotificationSubType.Resource
+                                                notification.audience = Audience.Limited
+                                                notification.studyId = (Study.currentStudy?.studyId)!
+                                                //notification.activityId = Study.currentActivity?.actvityId
+                                                
+                                                DBHandler.saveLocalNotification(notification: notification)
+                                                
+                                                //register notification
+                                                var notificationDate = startAnchorDate?.startOfDay
+                                                notificationDate = notificationDate?.addingTimeInterval(43200)
+                                                let message = resource.notificationMessage
+                                                let userInfo = ["studyId":(Study.currentStudy?.studyId)!,
+                                                                "type":"resource"];
+                                                LocalNotification.scheduleNotificationOn(date: notificationDate!, message: message!, userInfo: userInfo)
+                                            }
+                                    })
+                                    
+                                    
+                                }
+                              
                                 
                             }
                         }
@@ -321,12 +369,16 @@ class ActivitiesViewController : UIViewController{
             
             taskViewController?.showsProgressInNavigationBar = true
             
+            taskViewController?.title = "Activity"
+            
             UIView.appearance(whenContainedInInstancesOf: [ORKTaskViewController.self]).tintColor = kUIColorForSubmitButtonBackground
             
             taskViewController?.delegate = self
             UIApplication.shared.statusBarStyle = .default
             taskControllerPresented = true
-            present(taskViewController!, animated: true, completion: nil)
+            present(taskViewController!, animated: true, completion: {
+                Logger.sharedInstance.info("Activity presented to user")
+            })
         }
         else{
             UIUtilities.showAlertMessage(kAlertMessageText, errorMessage: NSLocalizedString("Invalid Data!", comment: ""), errorAlertActionTitle: NSLocalizedString("OK", comment: ""), viewControllerUsed: self)
@@ -372,6 +424,21 @@ class ActivitiesViewController : UIViewController{
                 
                 return .past
             }
+        }
+        else if activity.startDate != nil {
+            
+            let startDateResult = (activity.startDate?.compare(todayDate))! as ComparisonResult
+            
+            if startDateResult == .orderedAscending{
+                
+                return .current
+            }
+            else if startDateResult == .orderedDescending {
+                
+                return .upcoming
+            }
+            
+            
         }
         return .current
     }
@@ -433,6 +500,9 @@ class ActivitiesViewController : UIViewController{
         self.tableView?.reloadData()
         self.removeProgressIndicator()
         
+        self.tableView?.isHidden = false
+        self.labelNoNetworkAvailable?.isHidden = true
+        
         self.updateCompletionAdherence()
         
         if (User.currentUser.settings?.localNotifications)! {
@@ -451,6 +521,8 @@ class ActivitiesViewController : UIViewController{
         
         
         self.checkIfFetelKickCountRunning()
+        
+        Logger.sharedInstance.info("Activities Displayed to user")
         
         
     }
@@ -471,6 +543,7 @@ class ActivitiesViewController : UIViewController{
         activityStatus.compeltedRuns = activity.compeltedRuns
         activityStatus.incompletedRuns = activity.incompletedRuns
         activityStatus.totalRuns = activity.totalRuns
+        activityStatus.activityVersion = activity.version
         
         UserServices().updateUserActivityParticipatedStatus(studyId:activity.studyId!, activityStatus: activityStatus, delegate: self)
         
@@ -488,11 +561,11 @@ class ActivitiesViewController : UIViewController{
         
         
         
-        
+        //let deletedActivities = Study.currentStudy?.activities.filter({$0.totalRuns != ($0.incompletedRuns + $0.compeltedRuns)})
         var totalRuns = 0
         var totalCompletedRuns = 0
         var totalIncompletedRuns = 0
-        let activities = Study.currentStudy?.activities
+        let activities = Study.currentStudy?.activities //.filter({$0.state == "active"})
         //for detail in tableViewSections {
            // let activities = detail["activities"] as! Array<Activity>
             for activity in activities! {
@@ -527,7 +600,7 @@ class ActivitiesViewController : UIViewController{
         if completion > 50 && completion < 100 {
             
             if !(ud.bool(forKey: halfCompletionKey)){
-                let message =  "The study " + (Study.currentStudy?.name!)! + " is now 50pc complete. We look forward to your continued participation as the study progresses."
+                let message =  "The study " + (Study.currentStudy?.name!)! + " is now 50 percent complete. We look forward to your continued participation as the study progresses."
                 UIUtilities.showAlertWithMessage(alertMessage: message)
                 ud.set(true, forKey: halfCompletionKey)
 
@@ -538,7 +611,7 @@ class ActivitiesViewController : UIViewController{
         if completion == 100 {
             
             if !(ud.bool(forKey: fullCompletionKey)){
-                let message =  "The study " + (Study.currentStudy?.name!)! + " is 100pc complete. Thank you for your participation."
+                let message =  "The study " + (Study.currentStudy?.name!)! + " is 100 percent complete. Thank you for your participation."
                 UIUtilities.showAlertWithMessage(alertMessage: message)
                 ud.set(true, forKey: fullCompletionKey)
                 
@@ -627,6 +700,7 @@ class ActivitiesViewController : UIViewController{
         activityStatus.compeltedRuns = activity.compeltedRuns
         activityStatus.incompletedRuns = activity.incompletedRuns
         activityStatus.totalRuns = activity.totalRuns
+        activityStatus.activityVersion = activity.version
         
         UserServices().updateUserActivityParticipatedStatus(studyId:activity.studyId!, activityStatus: activityStatus, delegate: self)
         
@@ -775,7 +849,7 @@ extension ActivitiesViewController : UITableViewDelegate{
                         
                         //Following to be commented
                         //self.createActivity()
-                        
+                        Logger.sharedInstance.info("Activity Fetching from db")
                         //check in database
                         DBHandler.loadActivityMetaData(activity: activities[indexPath.row], completionHandler: { (found) in
                             if found {
@@ -795,14 +869,14 @@ extension ActivitiesViewController : UITableViewDelegate{
                     }
                     else {
                         debugPrint("run is completed")
-                        //Study.updateCurrentActivity(activity:activities[indexPath.row])
-                        //self.updateRunStatusToComplete()
+                        //UIUtilities.showAlertWithMessage(alertMessage: NSLocalizedString("You missed the previous run of this activity. Please wait till the next run becomes available. Run timings are given on the Activities list screen.", comment: ""))
                     }
                 }
                 
             }
-            else {
+            else if activity.userParticipationStatus?.status == .abandoned {
                 debugPrint("run not available")
+                 UIUtilities.showAlertWithMessage(alertMessage: NSLocalizedString("You missed the previous run of this activity. Please wait till the next run becomes available. Run timings are given on the Activities list screen.", comment: ""))
             }
             
             //Following to be commented
@@ -889,7 +963,16 @@ extension ActivitiesViewController:NMWebServiceDelegate {
             
             if requestName as String == RegistrationMethods.activityState.method.methodName{
                 //self.sendRequesToGetActivityList()
-                self.loadActivitiesFromDatabase()
+                if (error.code != NoNetworkErrorCode) {
+                    self.loadActivitiesFromDatabase()
+                }
+                else {
+                    
+                    self.tableView?.isHidden = true
+                    self.labelNoNetworkAvailable?.isHidden = false
+                    
+                     UIUtilities.showAlertWithTitleAndMessage(title:NSLocalizedString(kErrorTitle, comment: "") as NSString, message: error.localizedDescription as NSString)
+                }
             }
             else if requestName as String == ResponseMethods.processResponse.method.methodName {
                 

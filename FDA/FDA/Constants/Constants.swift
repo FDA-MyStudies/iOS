@@ -184,3 +184,9 @@ let unwindToStudyListDashboard = "unwindToStudyListDashboardIdentifier"
 //MARK:- FilterListViewController Segue
 let filterListSegue = "filterscreenSegue"
 
+//MARK:- Staging User Details
+
+let kStagingUserEmailId = "aqibm@boston-technology.com"
+let kIsStagingUser = "StagingUser"
+
+

@@ -175,19 +175,22 @@ class LocalNotification: NSObject {
     }
     
     
-   class func scheduleNotificationOn(date:Date,message:String,userInfo:Dictionary<String,Any>){
-    
-        print("NotificationMessage\(message) ** date \(date.description(with: Locale.current))" )
-    
-        let notification = UILocalNotification()
-        notification.fireDate = date
-        notification.alertBody = message
-        notification.alertAction = "Ok"
-        notification.soundName = UILocalNotificationDefaultSoundName
-        notification.userInfo = userInfo
-        //notification.timeZone = NSTimeZone.system
-        UIApplication.shared.scheduleLocalNotification(notification)
-
+    class func scheduleNotificationOn(date:Date,message:String,userInfo:Dictionary<String,Any>){
+        
+        ///print("NotificationMessage\(message) ** date \(date.description(with: Locale.current))" )
+        
+        if date > Date() {
+            print("NotificationMessage\(message) ** date \(date.description(with: Locale.current))" )
+            let notification = UILocalNotification()
+            notification.fireDate = date
+            notification.alertBody = message
+            notification.alertAction = "Ok"
+            notification.soundName = UILocalNotificationDefaultSoundName
+            notification.userInfo = userInfo
+            //notification.timeZone = NSTimeZone.system
+            UIApplication.shared.scheduleLocalNotification(notification)
+        }
+        
     }
     
     
@@ -273,4 +276,11 @@ class LocalNotification: NSObject {
         return formatter
     }()
     
+}
+
+class NotificationHandler: NSObject {
+    var studyId:String! = ""
+    var activityId:String! = ""
+    var appOpenFromNotification = false
+    static var instance = NotificationHandler()
 }

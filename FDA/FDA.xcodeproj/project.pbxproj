@@ -144,7 +144,7 @@
 		94334F881E70055A00755444 /* UIApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94334F861E70055A00755444 /* UIApplication.swift */; };
 		94334F8A1E7005BF00755444 /* LeftMenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94334F891E7005BF00755444 /* LeftMenuCell.swift */; };
 		94334F8C1E701EB700755444 /* NavigationBackButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94334F8B1E701EB700755444 /* NavigationBackButton.swift */; };
-		945B32511EE5550B00E46EDC /* AppGlossary.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 945B32501EE5550B00E46EDC /* AppGlossary.pdf */; };
+		9450598F1F29FA2C007906A7 /* AppGlossary.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 9450598E1F29FA2C007906A7 /* AppGlossary.pdf */; };
 		946CA5E91E728C2300CC8535 /* StringEncoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 946CA5E81E728C2300CC8535 /* StringEncoder.swift */; };
 		946CA5ED1E72DCA300CC8535 /* ProgressView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 946CA5EC1E72DCA300CC8535 /* ProgressView.xib */; };
 		9487102A1E546C3800246109 /* AppNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 948710291E546C3800246109 /* AppNotification.swift */; };
@@ -402,7 +402,7 @@
 		94334F861E70055A00755444 /* UIApplication.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIApplication.swift; sourceTree = "<group>"; };
 		94334F891E7005BF00755444 /* LeftMenuCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LeftMenuCell.swift; sourceTree = "<group>"; };
 		94334F8B1E701EB700755444 /* NavigationBackButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationBackButton.swift; sourceTree = "<group>"; };
-		945B32501EE5550B00E46EDC /* AppGlossary.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = AppGlossary.pdf; sourceTree = "<group>"; };
+		9450598E1F29FA2C007906A7 /* AppGlossary.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = AppGlossary.pdf; sourceTree = "<group>"; };
 		946CA5E81E728C2300CC8535 /* StringEncoder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringEncoder.swift; sourceTree = "<group>"; };
 		946CA5EC1E72DCA300CC8535 /* ProgressView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProgressView.xib; sourceTree = "<group>"; };
 		948710291E546C3800246109 /* AppNotification.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppNotification.swift; sourceTree = "<group>"; };
@@ -649,7 +649,7 @@
 				481DFA4B1E6EEB70004C39EF /* WebViewController.swift */,
 				6EDDB6591EE05E4C00C79337 /* NewProgressView.xib */,
 				946CA5EC1E72DCA300CC8535 /* ProgressView.xib */,
-				945B32501EE5550B00E46EDC /* AppGlossary.pdf */,
+				9450598E1F29FA2C007906A7 /* AppGlossary.pdf */,
 			);
 			path = FDA;
 			sourceTree = "<group>";
@@ -1479,6 +1479,7 @@
 				48A24C3E1E839D03009E849E /* 55V2.png in Resources */,
 				48567FDD1F14F72900857193 /* 13.png in Resources */,
 				6E7D2D8E1E43445600763D4C /* UserPreferences.plist in Resources */,
+				9450598F1F29FA2C007906A7 /* AppGlossary.pdf in Resources */,
 				6ED593731F011D5B00AC3636 /* Verdana Italic.ttf in Resources */,
 				94B3DD581E6ED8E500327AE5 /* SignUpPlist.plist in Resources */,
 				6ED9D5DB1E5B2D5200A0719D /* ActiveTask.json in Resources */,
@@ -1511,7 +1512,6 @@
 				942591C41EA8A2650010D892 /* ActivitySchedules.xib in Resources */,
 				94B3DD491E6ED8E500327AE5 /* StudyList.json in Resources */,
 				6EA889C51E701E8200F160A1 /* Confirmation.plist in Resources */,
-				945B32511EE5550B00E46EDC /* AppGlossary.pdf in Resources */,
 				6E14F2031F0224AD00EA8D1E /* Notification.json in Resources */,
 				6EB740281E9D1F8700A4C773 /* 03.png in Resources */,
 				6EE93DC91E93C8850027A5DC /* Activities.plist in Resources */,
@@ -1935,6 +1935,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				OTHER_LDFLAGS = "";
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -1969,6 +1970,7 @@
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = "";
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;

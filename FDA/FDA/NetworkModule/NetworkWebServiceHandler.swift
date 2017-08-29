@@ -43,9 +43,19 @@ class NetworkWebServiceHandler: NSObject, URLSessionDelegate {
     }
     
     func getServerURLString() -> NSString {
+        
+        let ud:Bool = UserDefaults.standard.bool(forKey: kIsStagingUser)
+        
         #if DEBUG
-            return self.configuration.getDevelopmentURL() as NSString
+            if ud {
+                 return self.configuration.getDevelopmentURL() as NSString
+                
+            }
+            return self.configuration.getProductionURL() as NSString
         #else
+            if ud {
+                return self.configuration.getDevelopmentURL() as NSString
+            }
             return self.configuration.getProductionURL() as NSString
         #endif
     }

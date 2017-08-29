@@ -11,7 +11,7 @@ import UIKit
 import MediaPlayer
 import SDWebImage
 import ResearchKit
-
+import AVKit
 class StudyOverviewViewControllerFirst : UIViewController{
     
     @IBOutlet var buttonJoinStudy : UIButton?
@@ -25,7 +25,8 @@ class StudyOverviewViewControllerFirst : UIViewController{
     var overViewWebsiteLink : String?
     var overviewSectionDetail : OverviewSection!
     var moviePlayer:MPMoviePlayerViewController!
-
+    var playerViewController:AVPlayerViewController!
+    //var player:AVPlayer!
     
 //MARK:- Viewcontroller Lifecycle
     override func viewDidLoad() {
@@ -115,6 +116,11 @@ class StudyOverviewViewControllerFirst : UIViewController{
         moviePlayer.dismiss(animated: true, completion: nil)
     }
     
+    func playerDidFinishPlaying(note: NSNotification) {
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: nil)
+        self.playerViewController.dismiss(animated: true, completion: nil)
+    }
+    
    
 //MARK:- Button Actions
     
@@ -136,16 +142,22 @@ class StudyOverviewViewControllerFirst : UIViewController{
         }
         else {
             
+            do{
+                try AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayback)
+            } catch {
+                //Didn't work
+            }
+            
             let url : NSURL = NSURL(string: overviewSectionDetail.link!)!
-            moviePlayer = MPMoviePlayerViewController(contentURL:url as URL!)
-            
-            moviePlayer.moviePlayer.movieSourceType = .streaming
-            
-            NotificationCenter.default.addObserver(self, selector:#selector(StudyOverviewViewControllerFirst.moviePlayBackDidFinish(notification:)),
-                                                   name: NSNotification.Name.MPMoviePlayerPlaybackDidFinish,
-                                                   object: moviePlayer.moviePlayer)
-            
-            self.present(moviePlayer, animated: true, completion: nil)
+
+            let player = AVPlayer(url: url as URL)
+            NotificationCenter.default.addObserver(self, selector:#selector(StudyOverviewViewControllerFirst.playerDidFinishPlaying(note:)),
+                                                   name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: player.currentItem)
+            playerViewController = AVPlayerViewController()
+            playerViewController.player = player
+            self.present(playerViewController, animated: true) {
+                self.playerViewController.player!.play()
+            }
 
         }
     }

@@ -164,7 +164,7 @@ class ActivityBuilder {
                     completionStep.title = "Activity Completed"
                     
                     completionStep.image = #imageLiteral(resourceName: "successBlueBig")
-                    completionStep.detailText = "Thank you for your time!"
+                    completionStep.detailText = "Thank you for your time!\n\nTap Done to submit responses. Responses cannot be modified after submission."
                     orkStepArray?.append(completionStep)
                     
                     if (orkStepArray?.count)! > 0 {
@@ -192,13 +192,16 @@ class ActivityBuilder {
                     for step in orkStepArray!
                     {
                         print("stepid \(step.identifier)")
-                        if step.isKind(of: ORKQuestionStep.self) || (step.isKind(of: ORKInstructionStep.self) && step.isKind(of: ORKCompletionStep.self) == false){
+                        if step.isKind(of: ORKQuestionStep.self) || step is RepeatableFormStep || step is ORKFormStep || (step.isKind(of: ORKInstructionStep.self) && step.isKind(of: ORKCompletionStep.self) == false){
                             
                             
                             let activityStep:ActivityStep?
                             
                             if step.isKind(of: ORKQuestionStep.self){
                                  activityStep = activityStepArray?[(i!)] as?  ActivityQuestionStep
+                            }
+                            else if step.isKind(of: ORKFormStep.self) || step.isKind(of: RepeatableFormStep.self){
+                                 activityStep = activityStepArray?[(i!)] as?  ActivityFormStep
                             }
                             else{
                                  activityStep = activityStepArray?[(i!)] as?  ActivityInstructionStep
@@ -227,6 +230,12 @@ class ActivityBuilder {
                                 
                                 if step.isKind(of: ORKQuestionStep.self){
                                       questionStep = step as! ORKQuestionStep
+                                }
+                                else if step is RepeatableFormStep{
+                                     questionStep = step as! RepeatableFormStep
+                                }
+                                else if step is ORKFormStep{
+                                     questionStep = step as! ORKFormStep
                                 }
                                 else{
                                       questionStep = step as! ORKInstructionStep
@@ -381,7 +390,7 @@ class ActivityBuilder {
                                     }
                                     
                                     
-                                    print("choices \(choicePredicate) destination \(destination)")
+                                    //print("choices \(choicePredicate) destination \(destination)")
                                     predicateRule = ORKPredicateStepNavigationRule(resultPredicates: choicePredicate, destinationStepIdentifiers: destination!, defaultStepIdentifier: defaultStepIdentifier, validateArrays: true)
                                     
                                     

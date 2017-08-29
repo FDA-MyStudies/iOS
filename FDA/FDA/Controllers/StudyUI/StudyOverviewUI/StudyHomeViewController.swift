@@ -239,6 +239,7 @@ class StudyHomeViewController : UIViewController{
         taskViewController?.delegate = self
         taskViewController?.outputDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
         
+        taskViewController?.title = "Activity"
         taskViewController?.navigationItem.title = nil
         
         UIView.appearance(whenContainedInInstancesOf: [ORKTaskViewController.self]).tintColor = kUIColorForSubmitButtonBackground

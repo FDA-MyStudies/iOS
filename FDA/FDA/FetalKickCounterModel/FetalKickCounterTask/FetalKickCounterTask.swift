@@ -129,7 +129,7 @@ class FetalKickCounterTask {
         summaryStep.title = "Activity Completed"
         
         summaryStep.image = #imageLiteral(resourceName: "successBlueBig")
-        summaryStep.detailText = "Thank you for your time!"
+        summaryStep.detailText = "Thank you for your time!\n\nTap Done to submit responses. Responses cannot be modified after submission."
        
         
         

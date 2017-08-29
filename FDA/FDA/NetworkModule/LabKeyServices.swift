@@ -178,45 +178,6 @@ class LabKeyServices: NSObject {
     func handleGetParticipantResponse(response:Dictionary<String, Any>){
         
         
-//        var dashBoardResponse:Array<DashboardResponse> = []
-//        let metadata =   response["metaData"] as? Dictionary<String,Any>
-//        if let feilds = metadata?["fields"] as? Array<Dictionary<String,Any>>{
-//            
-//           
-//            print("feilds \(feilds)")
-//            for feildDetail in feilds {
-//                
-//                if let fieldKeys = feildDetail["fieldKey"] as? Array<String> {
-//                    
-//                    let fieldKeyValue = fieldKeys.first
-//                    
-//                    let responseData = DashboardResponse()
-//                    //check for key which don't need to be parsed
-//                    if (fieldKeyValue == "container"
-//                        || fieldKeyValue == "Created"
-//                        || fieldKeyValue == "CreatedBy"
-//                        || fieldKeyValue == "ModifiedBy"
-//                        || fieldKeyValue == "lastIndexed"
-//                        || fieldKeyValue == "Modified"
-//                        || fieldKeyValue == "Key"
-//                        || fieldKeyValue == "ParticipantId" ){
-//                        
-//                       //do not do anything
-//                    }
-//                    else {
-//                        responseData.activityId = self.activityId
-//                        responseData.key = fieldKeyValue
-//                        responseData.type = feildDetail["type"] as! String?
-//                        responseData.isPHI = feildDetail["phi"] as! String?
-//                        
-//                        dashBoardResponse.append(responseData)
-//                    }
-//                }
-//                
-//                
-//            }
-//            
-//        }
         
         var dashBoardResponse:Array<DashboardResponse> = []
         let keysArray = self.keys.components(separatedBy: ",")

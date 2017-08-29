@@ -180,7 +180,7 @@
                 scrollToIndexPath = [NSIndexPath indexPathForRow:0 inSection:_repeatableTextSection];
             }
             
-            [self.originalTableView scrollToRowAtIndexPath:scrollToIndexPath atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+            [self.originalTableView scrollToRowAtIndexPath:scrollToIndexPath atScrollPosition:UITableViewScrollPositionTop animated:YES];
             
 //            UITableViewCell *cell = [_originalTableView cellForRowAtIndexPath:scrollToIndexPath];
 //            [cell becomeFirstResponder];

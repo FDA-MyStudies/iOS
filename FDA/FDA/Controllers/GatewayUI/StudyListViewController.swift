@@ -626,8 +626,8 @@ class StudyListViewController: UIViewController {
         DBHandler.loadStudyOverview(studyId: (study.studyId)!) { (overview) in
             if overview != nil {
                 study.overview = overview
-                //
-                self.navigateBasedOnUserStatus()
+                //self.navigateBasedOnUserStatus()
+                self.navigateToStudyHome()
             }
             else {
                 self.sendRequestToGetStudyInfo(study: study)

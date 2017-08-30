@@ -42,7 +42,7 @@ class StudyFilterViewController: UIViewController {
     var categories: Array<String> = []
     var searchText:String = ""
     var bookmark = true
-    var filterData : NSMutableArray?
+    
     
     var previousCollectionData:Array<Array<String>> = []
     
@@ -56,76 +56,12 @@ class StudyFilterViewController: UIViewController {
             layout.delegate = self
         }
         
-        var resource = "AnanomousFilterData"
-        
-        if User.currentUser.userType == .FDAUser{
-            resource = "FilterData"
-        }
-        
-        
-        let plistPath = Bundle.main.path(forResource: resource, ofType: ".plist", inDirectory:nil)
-        filterData = NSMutableArray.init(contentsOfFile: plistPath!)!
-        
-        
-        StudyFilterHandler.instance.filterOptions = []
+       
         
         if StudyFilterHandler.instance.filterOptions.count == 0 {
-            var filterOptionsList:Array<FilterOptions> = []
+            let appDelegate = UIApplication.shared.delegate as! AppDelegate
             
-            var i = 0
-            
-            for options in filterData! {
-                let values = (options as! Dictionary<String,Any>)["studyData"] as! Array<Dictionary<String,Any>>
-                let filterOptions = FilterOptions()
-                filterOptions.title = (options as! Dictionary<String,Any>)["headerText"] as! String!
-                
-                
-                var selectedValues:Array<String> = []
-                if previousCollectionData.count > 0{
-                    selectedValues = previousCollectionData[i]
-                }
-                
-                
-                var filterValues:Array<FilterValues> = []
-                for value in values {
-                    
-                    var isContained = false
-                    
-                    let filterValue = FilterValues()
-                    filterValue.title = value["name"] as! String!
-                    
-                    if selectedValues.count > 0 {
-                        isContained = selectedValues.contains(value["name"] as! String)
-                        
-                    }
-                    
-                    if isContained == false{
-                        
-                        if previousCollectionData.count == 0{
-                            // this means that we are first time accessing the filter screen
-                            
-                            filterValue.isSelected =  value["isEnabled"] as! Bool
-                        }
-                        else{
-                            // means that filter is already set
-                            filterValue.isSelected = false
-                        }
-                        
-                    }
-                    else{
-                        filterValue.isSelected = true
-                    }
-                    
-                    
-                    filterValues.append(filterValue)
-                }
-                filterOptions.filterValues = filterValues
-                filterOptionsList.append(filterOptions)
-                
-                i = i + 1
-                
-            }
-            StudyFilterHandler.instance.filterOptions = filterOptionsList
+            appDelegate.setDefaultFilters(previousCollectionData: self.previousCollectionData)
         }
 
          self.collectionView?.reloadData()
@@ -329,5 +265,130 @@ class FilterValues {
     var isSelected = false
 }
 
+extension AppDelegate{
+    
+    func setDefaultFilters(previousCollectionData:Array<Array<String>>){
+    var filterData : NSMutableArray?
+        
+        var resource = "AnanomousFilterData"
+        
+        if User.currentUser.userType == .FDAUser{
+            resource = "FilterData"
+        }
+        
+        let plistPath = Bundle.main.path(forResource: resource, ofType: ".plist", inDirectory:nil)
+        filterData = NSMutableArray.init(contentsOfFile: plistPath!)!
+        
+        StudyFilterHandler.instance.filterOptions = []
+        
+        var filterOptionsList:Array<FilterOptions> = []
+        
+        var i = 0
+        
+        for options in filterData! {
+            let values = (options as! Dictionary<String,Any>)["studyData"] as! Array<Dictionary<String,Any>>
+            let filterOptions = FilterOptions()
+            filterOptions.title = (options as! Dictionary<String,Any>)["headerText"] as! String!
+            
+            
+            var selectedValues:Array<String> = []
+            if previousCollectionData.count > 0{
+                selectedValues = previousCollectionData[i]
+            }
+            
+            var filterValues:Array<FilterValues> = []
+            for value in values {
+                
+                var isContained = false
+                
+                let filterValue = FilterValues()
+                filterValue.title = value["name"] as! String!
+                
+                if selectedValues.count > 0 {
+                    isContained = selectedValues.contains(value["name"] as! String)
+                    
+                }
+                
+                if isContained == false{
+                    
+                    if previousCollectionData.count == 0{
+                        // this means that we are first time accessing the filter screen
+                        
+                        filterValue.isSelected =  value["isEnabled"] as! Bool
+                    }
+                    else{
+                        // means that filter is already set
+                        filterValue.isSelected = false
+                    }
+                }
+                else{
+                    filterValue.isSelected = true
+                }
+                
+                filterValues.append(filterValue)
+            }
+            filterOptions.filterValues = filterValues
+            filterOptionsList.append(filterOptions)
+            
+            i = i + 1
+            
+        }
+        StudyFilterHandler.instance.filterOptions = filterOptionsList
+        
+        }
+    func getDefaultFilterStrings()->(studyStatus:Array<String>,pariticipationsStatus : Array<String>,categories: Array<String>,searchText:String,bookmark:Bool){
+        
+        var studyStatus : Array<String> = []
+        var pariticipationsStatus : Array<String> = []
+        var categories: Array<String> = []
+        var bookmark = true
+        
+        
+        var i:Int = 0
+        var isbookmarked = false
+        
+        
+        for filterOptions in StudyFilterHandler.instance.filterOptions{
+            
+            let filterType = FilterType.init(rawValue: i)
+            let filterValues = (filterOptions.filterValues.filter({$0.isSelected == true}))
+            for value in filterValues{
+                switch (filterType!) {
+                    
+                case .studyStatus:
+                    studyStatus.append(value.title)
+                case .participantStatus:
+                    pariticipationsStatus.append(value.title)
+                case .bookMark:
+                    
+                    if User.currentUser.userType == .FDAUser{
+                        bookmark = (value.isSelected)
+                        isbookmarked = true
+                    }
+                    else{
+                        categories.append(value.title)
+                    }
+                    
+                case .category:
+                    categories.append(value.title)
+                default:break
+                }
+            }
+            i = i + 1
+        }
+    
+        if User.currentUser.userType == .FDAUser{
+                bookmark = false
+        }
+        else{
+            bookmark = false
+            
+        }
+        
+        return(studyStatus:studyStatus,pariticipationsStatus : pariticipationsStatus,categories:categories,searchText:"",bookmark:bookmark)
+    }
+    
+    
+}
 
 

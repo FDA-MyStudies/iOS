@@ -47,7 +47,7 @@ class SearchBarView: UIView {
     
     @IBAction func buttonCancelAction(){
         
-        self.delegate?.didTapOnCancel()
+        
         
         UIView.animate(withDuration: 0.2,
                        delay: 0.1,
@@ -57,7 +57,9 @@ class SearchBarView: UIView {
                         
                         
         }, completion: { (finished) -> Void in
-            self.removeFromSuperview()
+            
+            self.delegate?.didTapOnCancel()
+           
         })
     }
 }

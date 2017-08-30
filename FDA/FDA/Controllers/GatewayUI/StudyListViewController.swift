@@ -436,6 +436,17 @@ class StudyListViewController: UIViewController {
                     
                     
                 }
+                else {
+                     let appDelegate = UIApplication.shared.delegate as! AppDelegate
+                    
+                    appDelegate.setDefaultFilters(previousCollectionData: [])
+                    
+                    let filterStrings = appDelegate.getDefaultFilterStrings()
+                    
+                    
+                    self.appliedFilter(studyStatus: filterStrings.studyStatus, pariticipationsStatus: filterStrings.pariticipationsStatus, categories:filterStrings.categories, searchText: filterStrings.searchText, bookmarked:filterStrings.bookmark)
+                    
+                }
                 
                 self.checkIfFetelKickCountRunning()
                 
@@ -1096,12 +1107,55 @@ extension StudyListViewController : searchBarDelegate {
         //self.navigationController?.navigationBar.isHidden = false
         
         
-        if self.studiesList.count == 0 {
+        if self.studiesList.count == 0 && self.previousStudyList.count > 0{
             self.studiesList = self.previousStudyList
+        }
+        else if searchView?.textFieldSearch?.text?.characters.count == 0 {
+            
+            if StudyFilterHandler.instance.previousAppliedFilters.count > 0 {
+                let previousCollectionData = StudyFilterHandler.instance.previousAppliedFilters
+                
+                if User.currentUser.userType == .FDAUser{
+                    
+                    self.appliedFilter(studyStatus: previousCollectionData.first!, pariticipationsStatus: previousCollectionData[2], categories:previousCollectionData[3], searchText: "", bookmarked:(previousCollectionData[1].count > 0 ? true : false))
+                }
+                else{
+                    self.appliedFilter(studyStatus: previousCollectionData.first!, pariticipationsStatus: [], categories:previousCollectionData[1], searchText: "", bookmarked:false)
+                }
+                
+            }
+            else{
+                 let appDelegate = UIApplication.shared.delegate as! AppDelegate
+                
+                if StudyFilterHandler.instance.filterOptions.count > 0 {
+                   
+                    let filterStrings = appDelegate.getDefaultFilterStrings()
+                    
+                    self.appliedFilter(studyStatus: filterStrings.studyStatus, pariticipationsStatus: filterStrings.pariticipationsStatus, categories:filterStrings.categories, searchText: filterStrings.searchText, bookmarked:filterStrings.bookmark)
+                }
+                
+            }
+        }
+        
+        if searchView != nil {
+           searchView?.removeFromSuperview()
         }
         
         
+        
         self.tableView?.reloadData()
+        
+        
+        if self.studiesList.count == 0 {
+            self.labelHelperText.text = kHelperTextForSearchedStudiesNotFound
+            self.tableView?.isHidden = true
+            self.labelHelperText.isHidden = false
+        }
+        else{
+            self.tableView?.isHidden = false
+            self.labelHelperText.isHidden = true
+        }
+        
         //self.search(text: "")
     }
     func search(text: String) {

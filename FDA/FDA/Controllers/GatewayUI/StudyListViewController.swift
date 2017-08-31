@@ -100,6 +100,7 @@ class StudyListViewController: UIViewController {
             }
         }
         
+        
         self.labelHelperText.isHidden = true
         self.setNavigationBarItem()
         self.navigationController?.setNavigationBarHidden(false, animated: true)
@@ -720,7 +721,10 @@ class StudyListViewController: UIViewController {
         }
         else {
             self.tableView?.isHidden = true
+            self.labelHelperText.text = kHelperTextForOffline
             self.labelHelperText.isHidden = false
+            
+            
         }
     }
     
@@ -1030,7 +1034,10 @@ extension StudyListViewController : StudyFilterDelegates{
             self.tableView?.isHidden = true
             self.labelHelperText.isHidden = false
             
-            if searchText == ""{
+            if studyListRequestFailed{
+                self.labelHelperText.text = kHelperTextForOffline
+            }
+            else if searchText == ""{
                 self.labelHelperText.text = kHelperTextForFilteredStudiesNotFound
             }
             else{

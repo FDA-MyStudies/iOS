@@ -28,6 +28,7 @@ class FetalKickCounterStepViewController:  ORKStepViewController {
     @IBOutlet weak var editCounterButton:UIButton?  // used to edit the counter value
     @IBOutlet weak var seperatorLineView:UIView? // separator line
     
+    @IBOutlet weak var submitButton:UIButton? // button to submit response to server
     
     var kickCounter:Int? = 0        // counter
     var timer:Timer? = Timer()      //  timer for the task
@@ -67,7 +68,7 @@ class FetalKickCounterStepViewController:  ORKStepViewController {
         
         notificationCenter.addObserver(self, selector: #selector(appBecameActive), name: Notification.Name.UIApplicationDidBecomeActive, object: nil)
         
-        
+         submitButton?.layer.borderColor =   kUicolorForButtonBackground
         
         if let step = step as? FetalKickCounterStep {
             
@@ -103,7 +104,10 @@ class FetalKickCounterStepViewController:  ORKStepViewController {
                 
                 self.taskResult.totalKickCount = self.kickCounter!
                 
-                self.goForward()
+               // self.goForward()
+                self.startButton?.isHidden = true
+                self.startTitleLabel?.isHidden = true
+                self.submitButton?.isHidden =  false
             }
             else {
                 if differenceInSec >= 0 && differenceInSec < step.counDownTimer!{
@@ -154,11 +158,6 @@ class FetalKickCounterStepViewController:  ORKStepViewController {
             gestureRecognizer.delegate = self
             self.view.addGestureRecognizer(gestureRecognizer)
             }
-            
-            
-            
-          
-        
         
        // backgroundTaskIdentifier = UIApplication.shared.beginBackgroundTask(expirationHandler: {
        //     UIApplication.shared.endBackgroundTask(self.backgroundTaskIdentifier!)
@@ -224,7 +223,10 @@ class FetalKickCounterStepViewController:  ORKStepViewController {
                 
                 DispatchQueue.main.async{
                     
-                    self.perform(#selector(self.goForward))
+                    //self.perform(#selector(self.goForward))
+                    self.startButton?.isHidden = true
+                    self.startTitleLabel?.isHidden = true
+                    self.submitButton?.isHidden =  false
                 }
                 
             }
@@ -351,7 +353,9 @@ class FetalKickCounterStepViewController:  ORKStepViewController {
         self.counterTextField?.text =  self.kickCounter! < 10 ?  ("0\(self.kickCounter!)" == "00" ? "000" : "00\(self.kickCounter!)") : (self.kickCounter! >= 100 ? "\(self.kickCounter!)" : "0\(self.kickCounter!)" )
         
     }
-    
+    @IBAction func submitButtonAction(_ sender:UIButton){
+        self.perform(#selector(self.goForward))
+    }
 }
 
 class FetalKickCounterStepType : ORKActiveStep {

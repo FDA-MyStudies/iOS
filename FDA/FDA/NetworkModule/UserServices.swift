@@ -580,6 +580,9 @@ class UserServices: NSObject {
         user.verified   = response[kUserVerified] as! Bool
         user.authToken  = response[kUserAuthToken] as! String
         
+        
+         StudyFilterHandler.instance.previousAppliedFilters = []
+        
     }
     
     func handleConfirmRegistrationResponse(response:Dictionary<String, Any>){

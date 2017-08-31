@@ -773,18 +773,18 @@ class StudyListViewController: UIViewController {
                     self.pushToStudyDashboard()
                 }
                 else {
-                    //self.checkDatabaseForStudyInfo(study: Study.currentStudy!)
-                    self.navigateToStudyHome()
+                    self.checkDatabaseForStudyInfo(study: Study.currentStudy!)
+                   // self.navigateToStudyHome()
                 }
             }
             else {
-                //self.checkDatabaseForStudyInfo(study: Study.currentStudy!)
-                self.navigateToStudyHome()
+                self.checkDatabaseForStudyInfo(study: Study.currentStudy!)
+                //self.navigateToStudyHome()
             }
         }
         else {
-            //self.checkDatabaseForStudyInfo(study: Study.currentStudy!)
-            self.navigateToStudyHome()
+            self.checkDatabaseForStudyInfo(study: Study.currentStudy!)
+            //self.navigateToStudyHome()
         }
     }
     
@@ -810,8 +810,8 @@ class StudyListViewController: UIViewController {
                     else{
                         
                         DBHandler.loadStudyDetailsToUpdate(studyId: (study?.studyId)!, completionHandler: { (success) in
-                            //self.pushToStudyDashboard()
-                            self.checkDatabaseForStudyInfo(study: study!)
+                            self.pushToStudyDashboard()
+                            //self.checkDatabaseForStudyInfo(study: study!)
                         })
                     }
                 }

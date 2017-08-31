@@ -137,6 +137,13 @@ class StudyListViewController: UIViewController {
         if ud.value(forKey: kNotificationRegistrationIsPending) != nil && ud.bool(forKey: kNotificationRegistrationIsPending) == true{
             appdelegate.askForNotification()
         }
+        
+        if studyListRequestFailed{
+            
+            self.labelHelperText.isHidden =  false
+            self.labelHelperText.text = kHelperTextForOffline
+        }
+        
     }
     
     override func didReceiveMemoryWarning() {

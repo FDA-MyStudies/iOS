@@ -609,6 +609,15 @@
 			path = ResearchkitContainer;
 			sourceTree = "<group>";
 		};
+		6E4D72F91F3C2E0F00BF88B7 /* ActivityFilterView */ = {
+			isa = PBXGroup;
+			children = (
+				6E4D72FC1F3C2E4000BF88B7 /* ActivityFilterView.swift */,
+				6E4D72FE1F3C3DE000BF88B7 /* ActivityFilterView.xib */,
+			);
+			path = ActivityFilterView;
+			sourceTree = "<group>";
+		};
 		6E61BCC01F27260400C156B9 /* ComprehensionUI */ = {
 			isa = PBXGroup;
 			children = (
@@ -617,15 +626,6 @@
 			);
 			name = ComprehensionUI;
 			path = ComprehensionFailureUI;
-			sourceTree = "<group>";
-		};
-		6E4D72F91F3C2E0F00BF88B7 /* ActivityFilterView */ = {
-			isa = PBXGroup;
-			children = (
-				6E4D72FC1F3C2E4000BF88B7 /* ActivityFilterView.swift */,
-				6E4D72FE1F3C3DE000BF88B7 /* ActivityFilterView.xib */,
-			);
-			path = ActivityFilterView;
 			sourceTree = "<group>";
 		};
 		6E7D2D4D1E433E8700763D4C = {

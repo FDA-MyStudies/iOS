@@ -1354,7 +1354,7 @@ extension StudyHomeViewController:ORKTaskViewControllerDelegate{
             
             let shareStep:ORKStepResult? = taskViewController.result.results?.last as! ORKStepResult?
             
-            ConsentBuilder.currentConsent?.sharingConsent?.allowWithoutSharing = false
+            //ConsentBuilder.currentConsent?.sharingConsent?.allowWithoutSharing = false
             
             if shareStep?.identifier == kConsentSharing && ConsentBuilder.currentConsent?.sharingConsent != nil && (ConsentBuilder.currentConsent?.sharingConsent?.allowWithoutSharing)! == false{
                 

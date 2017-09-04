@@ -1266,6 +1266,21 @@ extension StudyListViewController : searchBarDelegate {
     }
     func search(text: String) {
         
+        if self.studiesList.count == 0 {
+            
+            let appDelegate = UIApplication.shared.delegate as! AppDelegate
+            
+            if StudyFilterHandler.instance.filterOptions.count > 0 {
+                
+                let filterStrings = appDelegate.getDefaultFilterStrings()
+                
+                self.appliedFilter(studyStatus: filterStrings.studyStatus, pariticipationsStatus: filterStrings.pariticipationsStatus, categories:filterStrings.categories, searchText: filterStrings.searchText, bookmarked:filterStrings.bookmark)
+            }
+            
+            
+        }
+        
+        
         //filter by searched Text
         var searchTextFilteredStudies:Array<Study>! = []
         if text.characters.count > 0 {

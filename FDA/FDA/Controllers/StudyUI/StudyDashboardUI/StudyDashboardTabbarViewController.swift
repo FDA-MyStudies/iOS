@@ -28,7 +28,7 @@ class StudyDashboardTabbarViewController: UITabBarController {
     }
     
     
-    public func shareScreenshotByEmail(image:UIImage!, subject:String!){
+    public func shareScreenshotByEmail(image:UIImage!, subject:String!,fileName:String!){
         
         let imageData = UIImagePNGRepresentation(image)
         
@@ -40,7 +40,7 @@ class StudyDashboardTabbarViewController: UITabBarController {
         mailComposerVC.setMessageBody("", isHTML: false)
         
         
-        let Filename =   "\((Study.currentStudy?.name)!)" + "_Dashboard"   + ".png"
+        let Filename =   "\((Study.currentStudy?.name)!)" + "_" + "\(fileName)"  + ".png"
         
         mailComposerVC.addAttachmentData(imageData!, mimeType: "image/png", fileName: Filename)
         

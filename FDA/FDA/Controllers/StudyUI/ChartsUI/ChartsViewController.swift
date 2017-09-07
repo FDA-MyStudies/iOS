@@ -75,7 +75,7 @@ class ChartsViewController: UIViewController {
         tableView.contentOffset = savedContentOffset
         tableView.frame = savedFrame
         
-        (self.tabBarController as! StudyDashboardTabbarViewController).shareScreenshotByEmail(image: image, subject: kEmailSubjectCharts)
+        (self.tabBarController as! StudyDashboardTabbarViewController).shareScreenshotByEmail(image: image, subject: (Study.currentStudy?.name)! + "_" + kEmailSubjectCharts,fileName:"Charts")
     
     }
     

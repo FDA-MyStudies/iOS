@@ -36,7 +36,9 @@ class StudyDashboardTabbarViewController: UITabBarController {
         mailComposerVC.mailComposeDelegate = self as! MFMailComposeViewControllerDelegate
         
         
-        mailComposerVC.setSubject(subject)
+        let finalSubject = "\((Study.currentStudy?.name)!)" + " " + subject
+        
+        mailComposerVC.setSubject(finalSubject)
         mailComposerVC.setMessageBody("", isHTML: false)
         
         

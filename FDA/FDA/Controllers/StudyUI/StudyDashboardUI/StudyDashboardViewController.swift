@@ -243,7 +243,7 @@ class StudyDashboardViewController : UIViewController{
         let image = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         
-        (self.tabBarController as! StudyDashboardTabbarViewController).shareScreenshotByEmail(image: image,subject: kEmailSubjectDashboard, fileName: "Dashboard")
+        (self.tabBarController as! StudyDashboardTabbarViewController).shareScreenshotByEmail(image: image,subject: kEmailSubjectDashboard, fileName: kEmailSubjectDashboard)
         
        
     }

@@ -88,7 +88,7 @@ class Schedule{
         
         //get joiningDate
         let studyStatus = User.currentUser.participatedStudies.filter({$0.studyId == activity.studyId}).last
-        print("joiningDate \(studyStatus?.joiningDate.description)")
+       // print("joiningDate \(studyStatus?.joiningDate.description)")
         
         let joiningDate = studyStatus?.joiningDate.utcDate()
         let start = activity.startDate?.utcDate()

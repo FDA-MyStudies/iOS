@@ -374,7 +374,7 @@ class ConsentBuilder{
             }
            
             if Utilities.isValidValue(someObject: self.sharingConsent?.title as AnyObject ){
-                sharingConsentStep.text = self.sharingConsent?.title
+                sharingConsentStep.title = self.sharingConsent?.title
             }
             
             

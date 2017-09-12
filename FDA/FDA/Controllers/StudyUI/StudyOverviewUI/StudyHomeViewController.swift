@@ -23,6 +23,8 @@ let kConsentTaskIdentifier = "ConsentTask"
 let kStudyDashboardViewControllerIdentifier = "StudyDashboardViewController"
 let kStudyDashboardTabbarControllerIdentifier = "StudyDashboardTabbarViewControllerIdentifier"
 
+let kShareConsentFailureAlert = "You can't join study without sharing your data"
+
 protocol StudyHomeViewDontrollerDelegate {
     func studyHomeJoinStudy()
 }
@@ -1364,7 +1366,9 @@ extension StudyHomeViewController:ORKTaskViewControllerDelegate{
                    return nil
                 }
                 else{
-                   self.dismiss(animated: true, completion: nil)
+                    self.dismiss(animated: true, completion: {
+                         UIUtilities.showAlertWithTitleAndMessage(title: "Message", message: NSLocalizedString(kShareConsentFailureAlert, comment: "") as NSString)
+                    })
                     return nil
                 }
                 

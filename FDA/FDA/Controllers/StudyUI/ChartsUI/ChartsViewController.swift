@@ -54,7 +54,11 @@ class ChartsViewController: UIViewController {
     
     @IBAction func shareButtonAction(_ sender: AnyObject){
         
-        self.shareScreenShotByMail()
+        if StudyDashboard.instance.charts.count > 0{
+            self.shareScreenShotByMail()
+        }
+        
+        
     }
 
     func shareScreenShotByMail() {

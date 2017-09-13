@@ -562,7 +562,11 @@ class ActivitiesViewController : UIViewController{
         
         
         self.tableView?.reloadData()
-        self.removeProgressIndicator()
+        //--Commented
+        
+         //self.removeProgressIndicator()
+        //---
+       
         
         self.tableView?.isHidden = false
         self.labelNoNetworkAvailable?.isHidden = true
@@ -1084,6 +1088,10 @@ extension ActivitiesViewController:NMWebServiceDelegate {
     func failedRequest(_ manager: NetworkManager, requestName: NSString, error: NSError) {
         Logger.sharedInstance.info("requestname : \(requestName)")
         self.removeProgressIndicator()
+        
+        if self.refreshControl != nil && (self.refreshControl?.isRefreshing)!{
+            self.refreshControl?.endRefreshing()
+        }
         
         if error.code == 401 { //unauthorized
             UIUtilities.showAlertMessageWithActionHandler(kErrorTitle, message: error.localizedDescription, buttonTitle: kTitleOk, viewControllerUsed: self, action: {

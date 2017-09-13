@@ -119,7 +119,8 @@ class ActivitiesViewController : UIViewController{
             self.sendRequestToGetActivityStates()
             
             //also get dashboard data
-            self.sendRequestToGetDashboardInfo()
+            
+            //self.sendRequestToGetDashboardInfo()
             
         }
         else {
@@ -327,7 +328,7 @@ class ActivitiesViewController : UIViewController{
             }
         }
         
-        self.checkForDashBoardInfo()
+       // self.checkForDashBoardInfo()
     }
     
     
@@ -799,7 +800,9 @@ class ActivitiesViewController : UIViewController{
     func sendRequestToGetDashboardInfo(){
         WCPServices().getStudyDashboardInfo(studyId: (Study.currentStudy?.studyId)!, delegate: self)
     }
-    
+    func sendRequestToGetResourcesInfo(){
+        WCPServices().getResourcesForStudy(studyId:(Study.currentStudy?.studyId)!, delegate: self)
+    }
     
 }
 
@@ -1026,10 +1029,10 @@ extension ActivitiesViewController:ActivityFilterViewDelegate{
 extension ActivitiesViewController:NMWebServiceDelegate {
     
     func startedRequest(_ manager: NetworkManager, requestName: NSString) {
-        Logger.sharedInstance.info("requestname : \(requestName)")
+        Logger.sharedInstance.info(" START requestname : \(requestName)")
         
         if (requestName as String == RegistrationMethods.updateStudyState.method.methodName) ||  (requestName as String == RegistrationMethods.updateActivityState.method.methodName) ||
-            (requestName as String == WCPMethods.studyDashboard.method.methodName){
+            (requestName as String == WCPMethods.studyDashboard.method.methodName) || (requestName as String == WCPMethods.resources.method.methodName){
         }
         else {
             self.addProgressIndicator()
@@ -1046,6 +1049,10 @@ extension ActivitiesViewController:NMWebServiceDelegate {
             
             //self.tableView?.reloadData()
             //self.handleActivityListResponse()
+            
+            //--Calling Dashboard
+            self.sendRequestToGetDashboardInfo()
+            //--
             self.loadActivitiesFromDatabase()
             
             if self.refreshControl != nil && (self.refreshControl?.isRefreshing)!{
@@ -1060,6 +1067,12 @@ extension ActivitiesViewController:NMWebServiceDelegate {
         else if requestName as String == WCPMethods.activity.method.methodName {
             self.removeProgressIndicator()
             self.createActivity()
+        }
+        else if requestName as String == WCPMethods.studyDashboard.method.methodName {
+           self.sendRequestToGetResourcesInfo()
+        }
+        else if requestName as String == WCPMethods.resources.method.methodName {
+              self.removeProgressIndicator()
         }
         else if requestName as String == ResponseMethods.processResponse.method.methodName{
             self.removeProgressIndicator()

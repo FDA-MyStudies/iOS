@@ -704,7 +704,7 @@ extension ResourcesViewController:NMWebServiceDelegate {
             else {
                 self.checkForResourceUpdate()
             }
-            
+            self.removeProgressIndicator()
             
         }
         else if requestName as String == RegistrationMethods.consentPDF.method.methodName{
@@ -782,6 +782,10 @@ extension ResourcesViewController:NMWebServiceDelegate {
                 
                 self.removeProgressIndicator()
                 UIUtilities.showAlertWithTitleAndMessage(title:NSLocalizedString(kErrorTitle, comment: "") as NSString, message: error.localizedDescription as NSString)
+                //-- checkDB if there is resources
+                self.checkForResourceUpdate()
+                //--
+                
             }
         }
     }

@@ -97,6 +97,7 @@ class StudyListViewController: UIViewController {
             if User.currentUser.userType == .FDAUser {
                 self.tableView?.isHidden = true
                 UserServices().getUserProfile(self as NMWebServiceDelegate)
+                
             }
         }
         
@@ -136,12 +137,22 @@ class StudyListViewController: UIViewController {
         
         if ud.value(forKey: kNotificationRegistrationIsPending) != nil && ud.bool(forKey: kNotificationRegistrationIsPending) == true{
             appdelegate.askForNotification()
+          
         }
         
         if studyListRequestFailed{
             
             self.labelHelperText.isHidden =  false
             self.labelHelperText.text = kHelperTextForOffline
+        }
+        
+        
+        if ispasscodePending == true{
+            if User.currentUser.userType == .FDAUser {
+                //--- navigation set to hidden
+                self.navigationController?.navigationBar.isHidden = true
+                //---
+            }
         }
         
     }
@@ -1396,6 +1407,18 @@ extension StudyListViewController:NMWebServiceDelegate {
                 
             }
             else {
+                
+                if requestName as String == RegistrationMethods.userProfile.description{
+                    if (self.navigationController?.navigationBar.isHidden)!{
+                        self.navigationController?.navigationBar.isHidden = false
+                    }
+                }
+                
+                if self.refreshControl != nil && (self.refreshControl?.isRefreshing)!{
+                    self.refreshControl?.endRefreshing()
+                }
+                
+                
                 UIUtilities.showAlertWithTitleAndMessage(title:NSLocalizedString(kErrorTitle, comment: "") as NSString, message: error.localizedDescription as NSString)
             }
             
@@ -1433,6 +1456,10 @@ extension StudyListViewController:ORKTaskViewControllerDelegate{
         case ORKTaskViewControllerFinishReason.completed:
             print("completed")
             taskResult = taskViewController.result
+            
+            if (self.navigationController?.navigationBar.isHidden)!{
+                self.navigationController?.navigationBar.isHidden = false
+            }
             
             let ud = UserDefaults.standard
             ud.set(false, forKey: kPasscodeIsPending)

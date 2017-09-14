@@ -42,7 +42,7 @@ class StudyDashboardTabbarViewController: UITabBarController {
         mailComposerVC.setMessageBody("", isHTML: false)
         
         
-        let Filename =   "\((Study.currentStudy?.name)!)" + "_" + "\(fileName)"  + ".png"
+        let Filename =   "\((Study.currentStudy?.name)!)" + "_" + "\(fileName!)"  + ".png"
         
         mailComposerVC.addAttachmentData(imageData!, mimeType: "image/png", fileName: Filename)
         

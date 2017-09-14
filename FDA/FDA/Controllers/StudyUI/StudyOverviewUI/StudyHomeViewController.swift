@@ -23,6 +23,8 @@ let kConsentTaskIdentifier = "ConsentTask"
 let kStudyDashboardViewControllerIdentifier = "StudyDashboardViewController"
 let kStudyDashboardTabbarControllerIdentifier = "StudyDashboardTabbarViewControllerIdentifier"
 
+let kShareConsentFailureAlert = "You can't join study without sharing your data"
+
 protocol StudyHomeViewDontrollerDelegate {
     func studyHomeJoinStudy()
 }
@@ -758,6 +760,9 @@ class StudyHomeViewController : UIViewController{
 extension StudyHomeViewController:ComprehensionFailureDelegate{
     func didTapOnRetry() {
         
+        
+        
+        
         self.createEligibilityConsentTask()
        
         
@@ -1078,7 +1083,7 @@ extension StudyHomeViewController:ORKTaskViewControllerDelegate{
         
         if stepViewController.step?.identifier == kEligibilityVerifiedScreen || stepViewController.step?.identifier == kConsentCompletionStepIdentifier || stepViewController.step?.identifier == kVisualStepId  || stepViewController.step?.identifier == kConsentSharePdfCompletionStep ||
             stepViewController.step?.identifier == kInEligibilityStep || stepViewController.step?.identifier == kEligibilityValidateScreen
-        || stepViewController.step?.identifier == kConsentSharing || stepViewController.step?.identifier == kReviewTitle{
+        || stepViewController.step?.identifier == kConsentSharing || stepViewController.step?.identifier == kReviewTitle || stepViewController.step?.identifier == kComprehensionInstructionStepIdentifier{
             //|| stepViewController.step?.identifier == "Review"
             
             if stepViewController.step?.identifier == kEligibilityVerifiedScreen{
@@ -1088,6 +1093,15 @@ extension StudyHomeViewController:ORKTaskViewControllerDelegate{
             if stepViewController.step?.identifier == kVisualStepId{
                 self.consentRestorationData = Data()
                 self.consentRestorationData = taskViewController.restorationData
+            }
+            else if stepViewController.step?.identifier == kComprehensionInstructionStepIdentifier {
+                
+                let insvisibleConsents = ConsentBuilder.currentConsent?.getVisualConsentStep()
+                
+                if  insvisibleConsents == nil{
+                    self.consentRestorationData = Data()
+                    self.consentRestorationData = taskViewController.restorationData
+                }
             }
             
             
@@ -1271,11 +1285,11 @@ extension StudyHomeViewController:ORKTaskViewControllerDelegate{
             if (ConsentBuilder.currentConsent?.comprehension?.questions?.count)! > 0 {
                 
                 
-                let visualStepIndex:Int = (taskViewController.result.results?.index(where: {$0.identifier == kVisualStepId}))!
+                let visualStepIndex:Int = (taskViewController.result.results?.index(where: {$0.identifier == kComprehensionInstructionStepIdentifier}))!
                 
                 if visualStepIndex > 0 {
                     
-                    var  i = visualStepIndex + 2 // holds the index of  question
+                    var  i = visualStepIndex + 1 // holds the index of  question
                     var j = 0 // holds the index of correct answer
                     
                     var userScore = 0
@@ -1364,7 +1378,9 @@ extension StudyHomeViewController:ORKTaskViewControllerDelegate{
                    return nil
                 }
                 else{
-                   self.dismiss(animated: true, completion: nil)
+                    self.dismiss(animated: true, completion: {
+                         UIUtilities.showAlertWithTitleAndMessage(title: "Message", message: NSLocalizedString(kShareConsentFailureAlert, comment: "") as NSString)
+                    })
                     return nil
                 }
                 

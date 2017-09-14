@@ -347,7 +347,7 @@ class ActivityBuilder {
                                     }
                                 
                                 
-                                if (activityStep?.destinations?.count)! > 0{
+                                if activityStep?.destinations != nil && (activityStep?.destinations?.count)! > 0{
                                     
                                     
                                     

@@ -30,7 +30,7 @@ enum RegistrationMethods:String {
     case resendConfirmation
     case deactivate
     case verify
-    
+    case refreshToken
     
     
     var description:String{

@@ -2202,7 +2202,7 @@
         }
         func addProgressIndicatorOnWindowFromTop(){
             
-            var view = self.viewWithTag(5000)
+            var view = self.viewWithTag(50000)
             if view == nil {
             
             let view = UINib(nibName: kNewProgressViewNIB, bundle: nil).instantiate(withOwner: nil, options: nil)[0] as? UIView

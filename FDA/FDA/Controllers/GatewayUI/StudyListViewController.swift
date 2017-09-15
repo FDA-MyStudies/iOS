@@ -29,6 +29,8 @@ class StudyListViewController: UIViewController {
     
     var previousStudyList:Array<Study> = []
     
+    var allStudyList:Array<Study> = []
+
     //MARK:- Viewcontroller lifecycle
     
     override func viewDidLoad() {
@@ -150,7 +152,7 @@ class StudyListViewController: UIViewController {
         if ispasscodePending == true{
             if User.currentUser.userType == .FDAUser {
                 //--- navigation set to hidden
-                self.navigationController?.navigationBar.isHidden = true
+                //self.navigationController?.navigationBar.isHidden = true
                 //---
             }
         }
@@ -456,6 +458,7 @@ class StudyListViewController: UIViewController {
                 Logger.sharedInstance.info("Studies displayed to user")
                 
                 self.previousStudyList = sortedstudies2
+                self.allStudyList = sortedstudies2
                 
                 if StudyFilterHandler.instance.previousAppliedFilters.count > 0 {
                     let previousCollectionData = StudyFilterHandler.instance.previousAppliedFilters
@@ -771,8 +774,9 @@ class StudyListViewController: UIViewController {
             self.sendRequestToGetStudyInfo(study: Study.currentStudy!)
         }
         else {
-            
-            self.removeProgressIndicator()
+            //---
+           // self.removeProgressIndicator()
+            //--
             self.navigateBasedOnUserStatus()
         }
         
@@ -905,19 +909,19 @@ extension StudyListViewController : StudyFilterDelegates{
         //filter by study category
         var categoryFilteredStudies:Array<Study>! = []
         if categories.count > 0 {
-            categoryFilteredStudies =  Gateway.instance.studies?.filter({categories.contains($0.category!)})
+            categoryFilteredStudies =  self.allStudyList.filter({categories.contains($0.category!)})
         }
         
         //filter by study status
         var statusFilteredStudies:Array<Study>! = []
         if studyStatus.count > 0 {
-            statusFilteredStudies =  Gateway.instance.studies?.filter({studyStatus.contains($0.status.rawValue)})
+            statusFilteredStudies =  self.allStudyList.filter({studyStatus.contains($0.status.rawValue)})
         }
         
         //filter by study status
         var pariticipationsStatusFilteredStudies:Array<Study>! = []
         if pariticipationsStatus.count > 0 {
-            pariticipationsStatusFilteredStudies =  Gateway.instance.studies?.filter({pariticipationsStatus.contains($0.userParticipateState.status.description)})
+            pariticipationsStatusFilteredStudies =  self.allStudyList.filter({pariticipationsStatus.contains($0.userParticipateState.status.description)})
         }
         
         //filter by bookmark
@@ -925,13 +929,13 @@ extension StudyListViewController : StudyFilterDelegates{
         
         if bookmarked{
             
-            bookmarkedStudies = Gateway.instance.studies?.filter({$0.userParticipateState.bookmarked == bookmarked})
+            bookmarkedStudies = self.allStudyList.filter({$0.userParticipateState.bookmarked == bookmarked})
         }
         
         //filter by searched Text
         var searchTextFilteredStudies:Array<Study>! = []
         if searchText.characters.count > 0 {
-            searchTextFilteredStudies = Gateway.instance.studies?.filter({
+            searchTextFilteredStudies = self.allStudyList.filter({
                 ($0.name?.containsIgnoringCase(searchText))! || ($0.category?.containsIgnoringCase(searchText))! || ($0.description?.containsIgnoringCase(searchText))! || ($0.sponserName?.containsIgnoringCase(searchText))!
                 
             })
@@ -1036,7 +1040,7 @@ extension StudyListViewController : StudyFilterDelegates{
         if searchText.characters.count == 0 && bookmarked == false && studyStatus.count == 0 &&
             pariticipationsStatus.count == 0 && categories.count == 0 {
             
-            self.studiesList = Gateway.instance.studies!
+            self.studiesList = self.allStudyList
         }
         else{
             self.studiesList = self.getSortedStudies(studies: allStudiesArray)
@@ -1066,6 +1070,11 @@ extension StudyListViewController : StudyFilterDelegates{
             self.tableView?.isHidden = false
             self.labelHelperText.isHidden = true
         }
+        
+       
+        
+        
+        
     }
     
     func didCancelFilter(_ cancel: Bool) {
@@ -1336,13 +1345,24 @@ extension StudyListViewController : searchBarDelegate {
 extension StudyListViewController:NMWebServiceDelegate {
     
     func startedRequest(_ manager: NetworkManager, requestName: NSString) {
-        //Logger.sharedInstance.info("requestname : \(requestName)")
+        Logger.sharedInstance.info("requestname START : \(requestName)")
         
-        self.addProgressIndicator()
+        //self.addProgressIndicator()
+        
+        let appdelegate = UIApplication.shared.delegate as! AppDelegate
+        
+        
+        appdelegate.window?.addProgressIndicatorOnWindowFromTop()
+        
     }
     
     func finishedRequest(_ manager: NetworkManager, requestName: NSString, response: AnyObject?) {
-        //Logger.sharedInstance.info("requestname : \(requestName) : \(response)")
+        Logger.sharedInstance.info("requestname FINISH: \(requestName) : \(response)")
+        
+        
+        let appdelegate = UIApplication.shared.delegate as! AppDelegate
+       
+
         
         if requestName as String == WCPMethods.studyList.rawValue{
             let responseDict = response as! NSDictionary
@@ -1353,23 +1373,38 @@ extension StudyListViewController:NMWebServiceDelegate {
             }
             
             self.handleStudyListResponse()
-            self.removeProgressIndicator()
+            //--
+           // self.removeProgressIndicator()
+            //--
+             appdelegate.window?.removeProgressIndicatorFromWindow()
+            
         }
         else if(requestName as String == WCPMethods.studyInfo.rawValue){
-            self.removeProgressIndicator()
+            //--
+            //self.removeProgressIndicator()
+            //--
+          
+             appdelegate.window?.removeProgressIndicatorFromWindow()
+            
             //self.navigateToStudyHome()
             self.navigateBasedOnUserStatus()
         }
         else if (requestName as String == RegistrationMethods.studyState.description){
+           
+            appdelegate.window?.removeProgressIndicatorFromWindow()
+            
             self.sendRequestToGetStudyList()
         }
         else if (requestName as String == WCPMethods.studyUpdates.rawValue){
-            
+            appdelegate.window?.removeProgressIndicatorFromWindow()
             self.handleStudyUpdatedInformation()
             //self.removeProgressIndicator()
         }
         else if requestName as String ==  RegistrationMethods.userProfile.description {
-            self.removeProgressIndicator()
+            //--
+            //self.removeProgressIndicator()
+            //--
+            appdelegate.window?.removeProgressIndicatorFromWindow()
             if User.currentUser.settings?.passcode == true {
                 self.setPassCode()
                 
@@ -1380,16 +1415,24 @@ extension StudyListViewController:NMWebServiceDelegate {
             }
         }
         else if (requestName as String == RegistrationMethods.updateStudyState.description){
-            self.removeProgressIndicator()
+            //--
+           // self.removeProgressIndicator()
+            //--
+            appdelegate.window?.removeProgressIndicatorFromWindow()
         }
         
         
     }
     
     func failedRequest(_ manager: NetworkManager, requestName: NSString, error: NSError) {
-        Logger.sharedInstance.info("requestname : \(requestName)")
+        Logger.sharedInstance.info("requestname Failed: \(requestName)")
         
-        self.removeProgressIndicator()
+        //--
+        //self.removeProgressIndicator()
+        //--
+        let appdelegate = UIApplication.shared.delegate as! AppDelegate
+       
+        appdelegate.window?.removeProgressIndicatorFromWindow()
         
         if error.code == 401 { //unauthorized
             UIUtilities.showAlertMessageWithActionHandler(kErrorTitle, message: error.localizedDescription, buttonTitle: kTitleOk, viewControllerUsed: self, action: {
@@ -1409,9 +1452,7 @@ extension StudyListViewController:NMWebServiceDelegate {
             else {
                 
                 if requestName as String == RegistrationMethods.userProfile.description{
-                    if (self.navigationController?.navigationBar.isHidden)!{
-                        self.navigationController?.navigationBar.isHidden = false
-                    }
+
                 }
                 
                 if self.refreshControl != nil && (self.refreshControl?.isRefreshing)!{
@@ -1432,7 +1473,12 @@ extension StudyListViewController:NMWebServiceDelegate {
 extension StudyListViewController:StudyHomeViewDontrollerDelegate{
     func studyHomeJoinStudy() {
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-            self.removeProgressIndicator()
+            //--
+            //self.removeProgressIndicator()
+            //--
+            let appdelegate = UIApplication.shared.delegate as! AppDelegate
+            appdelegate.window?.removeProgressIndicatorFromWindow()
+            
             // your code here
             let leftController = self.slideMenuController()?.leftViewController as! LeftMenuViewController
             leftController.changeViewController(.reachOut_signIn)
@@ -1456,10 +1502,7 @@ extension StudyListViewController:ORKTaskViewControllerDelegate{
         case ORKTaskViewControllerFinishReason.completed:
             print("completed")
             taskResult = taskViewController.result
-            
-            if (self.navigationController?.navigationBar.isHidden)!{
-                self.navigationController?.navigationBar.isHidden = false
-            }
+        
             
             let ud = UserDefaults.standard
             ud.set(false, forKey: kPasscodeIsPending)

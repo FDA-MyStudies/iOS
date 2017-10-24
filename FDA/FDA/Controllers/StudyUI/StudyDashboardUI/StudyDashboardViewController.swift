@@ -9,6 +9,9 @@
 import Foundation
 import UIKit
 
+
+let kMessageForSharingDashboard = "This action will create a shareable image file of the dashboard currently seen in this section. Proceed?"
+
 enum TableViewCells: Int {
     case welcomeCell = 0
     //case studyActivityCell
@@ -232,7 +235,21 @@ class StudyDashboardViewController : UIViewController{
      */
     @IBAction func shareButtonAction(_ sender: AnyObject){
         
-        self.shareScreenShotByMail()
+        
+        UIUtilities.showAlertMessageWithTwoActionsAndHandler(NSLocalizedString(kTitleMessage, comment: ""), errorMessage: NSLocalizedString(kMessageForSharingDashboard, comment: ""), errorAlertActionTitle: NSLocalizedString(kTitleOK, comment: ""),
+                                                             errorAlertActionTitle2:NSLocalizedString(kTitleCancel, comment: ""), viewControllerUsed: self,
+                                                             action1: {
+                                                                
+                                                                self.shareScreenShotByMail()
+        },
+                                                             
+                                                             action2: {
+                                                                
+                                                                
+        })
+        
+        
+        
     }
     
     func shareScreenShotByMail() {

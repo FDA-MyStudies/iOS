@@ -8,6 +8,9 @@
 
 import UIKit
 
+
+let kMessageForSharingCharts = "This action will create a shareable image file of the charts currently seen in this section. Proceed?"
+
 class ChartsViewController: UIViewController {
 
     @IBOutlet weak var tableView:UITableView!
@@ -55,7 +58,23 @@ class ChartsViewController: UIViewController {
     @IBAction func shareButtonAction(_ sender: AnyObject){
         
         if StudyDashboard.instance.charts.count > 0{
-            self.shareScreenShotByMail()
+            
+            UIUtilities.showAlertMessageWithTwoActionsAndHandler(NSLocalizedString(kTitleMessage, comment: ""), errorMessage: NSLocalizedString(kMessageForSharingCharts, comment: ""), errorAlertActionTitle: NSLocalizedString(kTitleOK, comment: ""),
+                                                                 errorAlertActionTitle2:NSLocalizedString(kTitleCancel, comment: ""), viewControllerUsed: self,
+                                                                 action1: {
+                                                                    
+                                                                   self.shareScreenShotByMail()
+                                                                    },
+            
+                                                                 action2: {
+                                                                    
+                                                                    
+            })
+
+            
+            
+            
+            
         }
         
         

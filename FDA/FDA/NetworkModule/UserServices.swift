@@ -80,7 +80,9 @@ let kAdherence = "adherence"
 let kLogoutReason = "reason"
 let kLogoutReasonValue = "Logout"
 
+//MARK: Refresh token constants
 
+let kRefreshToken = "refreshToken"
 
 class UserServices: NSObject {
     
@@ -524,6 +526,23 @@ class UserServices: NSObject {
         self.sendRequestWith(method:method, params: params, headers: headerParams)
     }
     
+    func updateToken(_ delegate:NMWebServiceDelegate){
+        
+        self.delegate = delegate
+        
+        let user = User.currentUser
+        
+        let param = [kRefreshToken:user.authToken]
+        let method = RegistrationMethods.refreshToken.method
+        self.sendRequestWith(method:method, params: param, headers:nil)
+        
+    }
+
+    
+    
+    
+    
+    
     func syncOfflineSavedData(method:Method, params:Dictionary<String, Any>?,headers:Dictionary<String, String>? , delegate:NMWebServiceDelegate){
         
         self.delegate = delegate
@@ -862,6 +881,8 @@ class UserServices: NSObject {
         LocalNotification.cancelAllLocalNotification()
     }
 
+    func handleUpdateTokenResponse(response:Dictionary<String, Any>){
+    }
     
     
     private func sendRequestWith(method:Method, params:Dictionary<String, Any>?,headers:Dictionary<String, String>?){
@@ -940,6 +961,8 @@ extension UserServices:NMWebServiceDelegate{
             
         case RegistrationMethods.deactivate.description as String:
             self.handleDeActivateAccountResponse(response: response as! Dictionary<String, Any>)
+        case RegistrationMethods.refreshToken.description as String:
+            self.handleUpdateTokenResponse(response: response as! Dictionary<String, Any>)
         default : break
         }
         

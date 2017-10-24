@@ -14,9 +14,7 @@
 		</dict>
 		<dict>
 			<key>FooterText</key>
-			<string>Fabric: Copyright 2016 Twitter, Inc. All Rights Reserved. Use of this software is subject to the terms and conditions of the Fabric Software and Services Agreement located at https://fabric.io/terms. Crashlytics Kit: Copyright 2016 Crashlytics, Inc. All Rights Reserved. Use of this software is subject to the terms and conditions of the Crashlytics Terms of Service located at http://try.crashlytics.com/terms/terms-of-service.pdf and the Crashlytics Privacy Policy located at http://try.crashlytics.com/terms/privacy-policy.pdf. OSS: http://get.fabric.io/terms/opensource.txt</string>
-			<key>License</key>
-			<string>Commercial</string>
+			<string>Fabric: Copyright 2017 Google, Inc. All Rights Reserved. Use of this software is subject to the terms and conditions of the Fabric Software and Services Agreement located at https://fabric.io/terms. Crashlytics Kit: Copyright 2017 Crashlytics, Inc. All Rights Reserved. Use of this software is subject to the terms and conditions of the Crashlytics Terms of Service located at http://try.crashlytics.com/terms/terms-of-service.pdf and the Crashlytics Privacy Policy located at http://try.crashlytics.com/terms/privacy-policy.pdf. OSS: http://get.fabric.io/terms/opensource.txt</string>
 			<key>Title</key>
 			<string>Crashlytics</string>
 			<key>Type</key>
@@ -24,7 +22,7 @@
 		</dict>
 		<dict>
 			<key>FooterText</key>
-			<string>Copyright (C) 2014 Marcin Krzyżanowski &lt;marcin.krzyzanowski@gmail.com&gt;
+			<string>Copyright (C) 2014-2017 Marcin Krzy&#380;anowski &lt;marcin.krzyzanowski@gmail.com&gt;
 This software is provided 'as-is', without any express or implied warranty. 
 
 In no event will the authors be held liable for any damages arising from the use of this software. 
@@ -33,9 +31,8 @@ Permission is granted to anyone to use this software for any purpose,including c
 
 - The origin of this software must not be misrepresented; you must not claim that you wrote the original software. If you use this software in a product, an acknowledgment in the product documentation is required.
 - Altered source versions must be plainly marked as such, and must not be misrepresented as being the original software.
-- This notice may not be removed or altered from any source or binary distribution.</string>
-			<key>License</key>
-			<string>Attribution License</string>
+- This notice may not be removed or altered from any source or binary distribution.
+</string>
 			<key>Title</key>
 			<string>CryptoSwift</string>
 			<key>Type</key>
@@ -43,9 +40,7 @@ Permission is granted to anyone to use this software for any purpose,including c
 		</dict>
 		<dict>
 			<key>FooterText</key>
-			<string>Fabric: Copyright 2016 Twitter, Inc. All Rights Reserved. Use of this software is subject to the terms and conditions of the Fabric Software and Services Agreement located at https://fabric.io/terms. OSS: http://get.fabric.io/terms/opensource.txt</string>
-			<key>License</key>
-			<string>Commercial</string>
+			<string>Fabric: Copyright 2017 Google, Inc. All Rights Reserved. Use of this software is subject to the terms and conditions of the Fabric Software and Services Agreement located at https://fabric.io/terms. OSS: http://get.fabric.io/terms/opensource.txt</string>
 			<key>Title</key>
 			<string>Fabric</string>
 			<key>Type</key>
@@ -78,8 +73,6 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 </string>
-			<key>License</key>
-			<string>MIT</string>
 			<key>Title</key>
 			<string>IQKeyboardManagerSwift</string>
 			<key>Type</key>
@@ -93,7 +86,7 @@ SOFTWARE.
 2. Realm Components
 3. Export Compliance
 
--------------------------------------------------------------------------------
+1. -------------------------------------------------------------------------------
 
                                  Apache License
                            Version 2.0, January 2004
@@ -270,17 +263,19 @@ SOFTWARE.
       incurred by, or claims asserted against, such Contributor by reason
       of your accepting any such warranty or additional liability.
 
+2. -------------------------------------------------------------------------------
+
 REALM COMPONENTS
 
 This software contains components with separate copyright and license terms.
 Your use of these components is subject to the terms and conditions of the
 following licenses.
 
-For the Realm Core component
+For the Realm Platform Extensions component
 
-  Realm Core Binary License
+  Realm Platform Extensions License
 
-  Copyright (c) 2011-2016 Realm Inc All rights reserved
+  Copyright (c) 2011-2017 Realm Inc All rights reserved
 
   Redistribution and use in binary form, with or without modification, is
   permitted provided that the following conditions are met:
@@ -311,18 +306,20 @@ For the Realm Core component
   ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
   POSSIBILITY OF SUCH DAMAGE.
 
+3. -------------------------------------------------------------------------------
+
 EXPORT COMPLIANCE
 
 You understand that the Software may contain cryptographic functions that may be
 subject to export restrictions, and you represent and warrant that you are not
 (i) located in a jurisdiction that is subject to United States economic
-sanctions (“Prohibited Jurisdiction”), including Cuba, Iran, North Korea,
+sanctions (&#8220;Prohibited Jurisdiction&#8221;), including Cuba, Iran, North Korea,
 Sudan, Syria or the Crimea region, (ii) a person listed on any U.S. government
 blacklist (to include the List of Specially Designated Nationals and Blocked
 Persons or the Consolidated Sanctions List administered by the U.S. Department
-of the Treasury’s Office of Foreign Assets Control, or the Denied Persons List
+of the Treasury&#8217;s Office of Foreign Assets Control, or the Denied Persons List
 or Entity List administered by the U.S. Department of Commerce)
-(“Sanctioned Person”), or (iii) controlled or 50% or more owned by a Sanctioned
+(&#8220;Sanctioned Person&#8221;), or (iii) controlled or 50% or more owned by a Sanctioned
 Person.
 
 You agree to comply with all export, re-export and import restrictions and
@@ -332,8 +329,6 @@ or authorize the transfer of, directly or indirectly, of the Software to any
 Prohibited Jurisdiction, or otherwise in violation of any such restrictions or
 regulations.
 </string>
-			<key>License</key>
-			<string>Apache 2.0</string>
 			<key>Title</key>
 			<string>Realm</string>
 			<key>Type</key>
@@ -347,7 +342,7 @@ regulations.
 2. Realm Components
 3. Export Compliance
 
--------------------------------------------------------------------------------
+1. -------------------------------------------------------------------------------
 
                                  Apache License
                            Version 2.0, January 2004
@@ -524,17 +519,19 @@ regulations.
       incurred by, or claims asserted against, such Contributor by reason
       of your accepting any such warranty or additional liability.
 
+2. -------------------------------------------------------------------------------
+
 REALM COMPONENTS
 
 This software contains components with separate copyright and license terms.
 Your use of these components is subject to the terms and conditions of the
 following licenses.
 
-For the Realm Core component
+For the Realm Platform Extensions component
 
-  Realm Core Binary License
+  Realm Platform Extensions License
 
-  Copyright (c) 2011-2016 Realm Inc All rights reserved
+  Copyright (c) 2011-2017 Realm Inc All rights reserved
 
   Redistribution and use in binary form, with or without modification, is
   permitted provided that the following conditions are met:
@@ -565,18 +562,20 @@ For the Realm Core component
   ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
   POSSIBILITY OF SUCH DAMAGE.
 
+3. -------------------------------------------------------------------------------
+
 EXPORT COMPLIANCE
 
 You understand that the Software may contain cryptographic functions that may be
 subject to export restrictions, and you represent and warrant that you are not
 (i) located in a jurisdiction that is subject to United States economic
-sanctions (“Prohibited Jurisdiction”), including Cuba, Iran, North Korea,
+sanctions (&#8220;Prohibited Jurisdiction&#8221;), including Cuba, Iran, North Korea,
 Sudan, Syria or the Crimea region, (ii) a person listed on any U.S. government
 blacklist (to include the List of Specially Designated Nationals and Blocked
 Persons or the Consolidated Sanctions List administered by the U.S. Department
-of the Treasury’s Office of Foreign Assets Control, or the Denied Persons List
+of the Treasury&#8217;s Office of Foreign Assets Control, or the Denied Persons List
 or Entity List administered by the U.S. Department of Commerce)
-(“Sanctioned Person”), or (iii) controlled or 50% or more owned by a Sanctioned
+(&#8220;Sanctioned Person&#8221;), or (iii) controlled or 50% or more owned by a Sanctioned
 Person.
 
 You agree to comply with all export, re-export and import restrictions and
@@ -586,8 +585,6 @@ or authorize the transfer of, directly or indirectly, of the Software to any
 Prohibited Jurisdiction, or otherwise in violation of any such restrictions or
 regulations.
 </string>
-			<key>License</key>
-			<string>Apache 2.0</string>
 			<key>Title</key>
 			<string>RealmSwift</string>
 			<key>Type</key>
@@ -595,7 +592,7 @@ regulations.
 		</dict>
 		<dict>
 			<key>FooterText</key>
-			<string>Copyright (c) 2016 Olivier Poitrey rs@dailymotion.com
+			<string>Copyright (c) 2009-2017 Olivier Poitrey rs@dailymotion.com
  
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -616,8 +613,6 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
 </string>
-			<key>License</key>
-			<string>MIT</string>
 			<key>Title</key>
 			<string>SDWebImage</string>
 			<key>Type</key>
@@ -647,8 +642,6 @@ IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 </string>
-			<key>License</key>
-			<string>MIT</string>
 			<key>Title</key>
 			<string>SlideMenuControllerSwift</string>
 			<key>Type</key>

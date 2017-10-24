@@ -14,7 +14,7 @@ target 'FDA' do
   pod 'Crashlytics'
   pod 'SDWebImage'
   pod 'RealmSwift'
-  pod 'CryptoSwift'
+  pod 'CryptoSwift', '~> 0.7.1'
 
   target 'FDATests' do
     inherit! :search_paths

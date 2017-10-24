@@ -188,7 +188,7 @@ extension FileDownloadManager:URLSessionDelegate{
             
             let data = try Data.init(contentsOf: URL.init(string: pathString)!)
             let aes = try AES(key: key, iv: initializationVector)
-            let deCipherText = try aes.decrypt(data)
+            let deCipherText = try aes.decrypt(Array(data))
             let deCryptedData = Data(deCipherText)
             return deCryptedData
             
@@ -241,7 +241,7 @@ extension FileDownloadManager:URLSessionDelegate{
                 let data = try Data.init(contentsOf: URL.init(string: pathString)!)
                 let aes = try AES(key: key, iv: initializationVector) // aes128
                 
-                let ciphertext = try aes.encrypt(data)
+                let ciphertext = try aes.encrypt(Array(data))
                 
                 let encryptedData =  Data(ciphertext)
                 

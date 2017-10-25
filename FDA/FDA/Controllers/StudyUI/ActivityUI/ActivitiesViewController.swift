@@ -540,7 +540,16 @@ class ActivitiesViewController : UIViewController{
         pastActivities.sort(by: {$0.startDate?.compare($1.startDate!) == .orderedAscending})
         
         
-        let currentDetails = ["title":"CURRENT","activities":currentActivities] as [String : Any]
+        let  sortedCurrentActivities =  currentActivities.sorted(by: { (activity1:Activity, activity2:Activity) -> Bool in
+            
+            //if activity1.status == activity1.status {
+                return (activity1.userParticipationStatus.status.sortIndex < activity2.userParticipationStatus.status.sortIndex)
+            //}
+            //return (activity1.status.sortIndex < activity1.status.sortIndex)
+        })
+        
+        
+        let currentDetails = ["title":"CURRENT","activities":sortedCurrentActivities] as [String : Any]
         let upcomingDetails = ["title":"UPCOMING","activities":upcomingActivities] as [String : Any]
         let pastDetails = ["title":"PAST","activities":pastActivities] as [String : Any]
         

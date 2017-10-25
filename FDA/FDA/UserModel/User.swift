@@ -702,6 +702,21 @@ class UserActivityStatus{
         case completed
         case abandoned
         
+        
+        var sortIndex : Int {
+            switch self {
+            case .inProgress:
+                return 0
+            case .yetToJoin:
+                return 1
+            case .completed:
+                return 2
+            case .abandoned:
+                return 3
+          
+                
+            }
+        }
         var description:String {
             switch self {
             case .yetToJoin:

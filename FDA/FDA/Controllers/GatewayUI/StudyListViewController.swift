@@ -459,6 +459,7 @@ class StudyListViewController: UIViewController {
                 
                 self.previousStudyList = sortedstudies2
                 self.allStudyList = sortedstudies2
+                Gateway.instance.studies = sortedstudies2
                 
                 if StudyFilterHandler.instance.previousAppliedFilters.count > 0 {
                     let previousCollectionData = StudyFilterHandler.instance.previousAppliedFilters

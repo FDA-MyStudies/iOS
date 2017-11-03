@@ -74,7 +74,7 @@ class NotificationViewController : UIViewController{
                         
                         let study = Gateway.instance.studies?.filter({$0.studyId == notification.studyId}).last
                         
-                        if self.isUserJoined(study: study!){
+                        if study != nil && self.isUserJoined(study: study!){
                             self.notificationArray.append(notification)
                         }
                     }
@@ -210,7 +210,7 @@ class NotificationViewController : UIViewController{
                 self.navigationController?.pushViewController(viewController!, animated: true)
             case .Activity:
                 
-                viewController?.selectedIndex = 1
+                viewController?.selectedIndex = 0
                 self.navigationController?.pushViewController(viewController!, animated: true)
             default: break
                 

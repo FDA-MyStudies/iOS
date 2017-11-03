@@ -586,10 +586,10 @@ class ActivitiesViewController : UIViewController{
             
             if !(Study.currentStudy?.activitiesLocalNotificationUpdated)! {
                 
-                LocalNotification.registerAllLocalNotificationFor(activities: (Study.currentStudy?.activities)!) { (finished) in
+                LocalNotification.registerAllLocalNotificationFor(activities: (Study.currentStudy?.activities)!) { (finished,notificationlist) in
                     print("Notification set sucessfully")
                     Study.currentStudy?.activitiesLocalNotificationUpdated = true
-                    
+                    DBHandler.saveRegisteredLocaNotification(notificationList: notificationlist)
                     DBHandler.updateLocalNotificaitonUpdated(studyId: (Study.currentStudy?.studyId)!,status: true)
                 }
                 

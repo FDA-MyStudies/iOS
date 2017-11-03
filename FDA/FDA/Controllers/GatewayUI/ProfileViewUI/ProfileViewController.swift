@@ -9,6 +9,7 @@
 import UIKit
 import IQKeyboardManagerSwift
 import LocalAuthentication
+import SlideMenuControllerSwift
 
 let kProfileTableViewCellIdentifier = "ProfileTableViewCell"
 
@@ -44,7 +45,7 @@ enum ToggelSwitchTags:Int{
     case receiveStudyActivityReminders = 5
 }
 
-class ProfileViewController: UIViewController {
+class ProfileViewController: UIViewController, SlideMenuControllerDelegate {
     
     var tableViewRowDetails : NSMutableArray?
     var datePickerView:UIDatePicker?
@@ -53,6 +54,8 @@ class ProfileViewController: UIViewController {
     var isPasscodeViewPresented:Bool = false
     
     var passcodeStateIsEditing:Bool = false
+    
+    var isProfileEdited = false
     
     @IBOutlet var tableViewProfile : UITableView?
     @IBOutlet var tableViewFooterViewProfile : UIView?
@@ -80,9 +83,11 @@ class ProfileViewController: UIViewController {
         //Initial data setup
         self.setInitialDate()
         
+        self.fdaSlideMenuController()?.delegate = self
+        
     }
     
-    override func viewWillAppear(_ animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) { 
         super.viewWillAppear(animated)
         user = User.currentUser
         
@@ -98,7 +103,21 @@ class ProfileViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
+       
         
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        print("Profile View will disapper")
+        
+        if isProfileEdited {
+            isProfileEdited = false
+            UserServices().updateUserProfile(self)
+        }
+    }
+    
+    func leftDidClose() {
+        print("Left menu is closed")
     }
     
 //MARK:- Button Actions
@@ -371,7 +390,7 @@ class ProfileViewController: UIViewController {
             Logger.sharedInstance.debug("settings/LeadTime is null")
         }
         self.title = NSLocalizedString(kProfileTitleText, comment: "")
-        self.isCellEditable =  false
+        self.isCellEditable =  true
         
         self.buttonLeadTime?.isUserInteractionEnabled =  false
         
@@ -421,6 +440,8 @@ class ProfileViewController: UIViewController {
      
      */
     func toggleValueChanged(_ sender:UISwitch)  {
+        
+        isProfileEdited = true
         
         let toggle:UISwitch? = sender as UISwitch
         
@@ -806,7 +827,11 @@ extension ProfileViewController:NMWebServiceDelegate {
     
     func startedRequest(_ manager: NetworkManager, requestName: NSString) {
         Logger.sharedInstance.info("requestname : \(requestName)")
-        self.addProgressIndicator()
+        
+        if requestName as String !=  RegistrationMethods.updateUserProfile.description {
+             self.addProgressIndicator()
+        }
+       
     }
     
     func finishedRequest(_ manager: NetworkManager, requestName: NSString, response: AnyObject?) {
@@ -827,20 +852,18 @@ extension ProfileViewController:NMWebServiceDelegate {
         }
         else if requestName as String ==  RegistrationMethods.updateUserProfile.description {
             
-            UIUtilities.showAlertWithTitleAndMessage(title:NSLocalizedString(kProfileAlertTitleText, comment: "") as NSString, message: NSLocalizedString(kProfileAlertUpdatedText, comment: "") as NSString)
-            self.isCellEditable = false
+           // UIUtilities.showAlertWithTitleAndMessage(title:NSLocalizedString(kProfileAlertTitleText, comment: "") as NSString, message: NSLocalizedString(kProfileAlertUpdatedText, comment: "") as NSString)
+            self.isCellEditable = true
             self.editBarButtonItem?.title = "Edit"
             self.tableViewProfile?.reloadData()
             self.buttonLeadTime?.isUserInteractionEnabled = self.isCellEditable!
              DBHandler.saveUserSettingsToDatabase()
             
-            if self.isPasscodeViewPresented == true{
-                self.isPasscodeViewPresented = false
-                
-               
-                
-                UserServices().getUserProfile(self)
-            }
+//            if self.isPasscodeViewPresented == true{
+//                self.isPasscodeViewPresented = false
+//
+//                UserServices().getUserProfile(self)
+//            }
         }
         else if requestName as String == RegistrationMethods.deactivate.description{
             self.handleDeleteAccountResponse()
@@ -902,6 +925,8 @@ extension ProfileViewController: ORKPasscodeDelegate {
     }
     
 }
+
+
 
 
 //MARK:- ORKTaskViewController Delegate

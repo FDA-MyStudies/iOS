@@ -34,6 +34,7 @@ class FetalKickCounterTask {
     var identifier:String?
     var steps:[ORKStep]?    // steps involved in fetal kick
     var instructionText:String?
+    var maxKickCounts:Int?
     /*
      Default Initializer method
      */
@@ -42,6 +43,7 @@ class FetalKickCounterTask {
         self.identifier = kFetalKickCounterStepIdentifier
         self.duration = 0
         self.instructionText = ""
+        self.maxKickCounts = 0
     }
     
     
@@ -69,7 +71,15 @@ class FetalKickCounterTask {
         else{
              self.instructionText = ""
         }
+        self.maxKickCounts = 0
     }
+    
+    /* setter method to set totalKickCounts
+    */
+    func setMaxKicks(maxKicks:Int) {
+        self.maxKickCounts = maxKicks
+    }
+    
     
     /*
      Getter method to create fetalKickTask
@@ -115,7 +125,7 @@ class FetalKickCounterTask {
         kickStep.counDownTimer = Int(self.duration! )
         
         
-        kickStep.totalCounts = 0
+        kickStep.totalCounts = self.maxKickCounts
         kickStep.stepDuration = 30
         kickStep.shouldShowDefaultTimer = false
         kickStep.shouldStartTimerAutomatically = true

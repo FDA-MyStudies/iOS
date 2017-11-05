@@ -98,7 +98,7 @@ let kActiveHolePegTestTimeLimit = "timeLimit"
 //FetalKickCounterFormat
 let kActiveFetalKickCounterDuration = "duration"
 let kActiveFetalKickCounterInstructionText = "text"
-
+let kActiveFetalKickCounterkickCounts = "kickcount"
 
 enum ActiveStepType:String{
     // Active Steps.
@@ -465,6 +465,14 @@ class ActivityActiveStep: ActivityStep {
                     let fetalKickTask:FetalKickCounterTask? = FetalKickCounterTask()
                     
                     fetalKickTask?.initWithFormat(duration: Float((formatDict?[kActiveFetalKickCounterDuration] as? Int)!), identifier: self.key!, instructionText: instructionText as? String)
+                    
+                    if Utilities.isValidValue(someObject: formatDict?[kActiveFetalKickCounterkickCounts] as AnyObject ){
+                        fetalKickTask?.maxKickCounts =  formatDict?[kActiveFetalKickCounterkickCounts] as! Int
+                        
+                    }
+                    //TO BE COMMENTED
+                    fetalKickTask?.maxKickCounts = 200
+                    //---
                     
                     return fetalKickTask?.getTask()
                     

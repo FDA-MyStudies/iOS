@@ -15,7 +15,8 @@ target 'FDA' do
   pod 'SDWebImage'
   pod 'RealmSwift'
   pod 'CryptoSwift', '~> 0.7.1'
-
+  pod 'ActionSheetPicker-3.0'
+  
   target 'FDATests' do
     inherit! :search_paths
     # Pods for testing

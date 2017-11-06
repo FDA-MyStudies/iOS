@@ -10,7 +10,7 @@ open class Formatter {
 
     internal func format(level: Level, items: [Any], file: String, line: Int, column: Int) -> String {
         var items = items
-        let fileInfo = ">> \(level.toUpperCase) \(file):\(line):\(column)"
+        let fileInfo = ">> \(level.toUpperCase) \(line):\(column)"
         items.insert(fileInfo, at: 0)
         return items.map({
             String(describing: $0)

@@ -37,6 +37,11 @@ class ActivitiesViewController : UIViewController{
     var selectedFilter: ActivityFilterType?
     
     //MARK:- Viewcontroller Lifecycle
+    fileprivate func presentUpdatedConsent() {
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        appDelegate.checkConsentStatus(controller: self)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -68,8 +73,7 @@ class ActivitiesViewController : UIViewController{
             if StudyUpdates.studyConsentUpdated {
                 
                 NotificationHandler.instance.activityId = ""
-                let appDelegate = UIApplication.shared.delegate as! AppDelegate
-                appDelegate.checkConsentStatus(controller: self)
+                presentUpdatedConsent()
             }
             
         }
@@ -117,16 +121,12 @@ class ActivitiesViewController : UIViewController{
         if StudyUpdates.studyActivitiesUpdated {
             
             self.sendRequestToGetActivityStates()
-            
-            //also get dashboard data
-            
-            //self.sendRequestToGetDashboardInfo()
-            
+    
         }
         else {
             
             self.loadActivitiesFromDatabase()
-            // self.sendRequestToGetActivityStates()
+           
         }
     }
     
@@ -299,7 +299,10 @@ class ActivitiesViewController : UIViewController{
     
     
     func refresh(sender:AnyObject) {
-        self.sendRequesToGetActivityList()
+        
+         Logger.sharedInstance.info("Request for study Updated...")
+         WCPServices().getStudyUpdates(study: Study.currentStudy!, delegate: self)
+        //self.sendRequesToGetActivityList()
     }
     
     
@@ -791,6 +794,23 @@ class ActivitiesViewController : UIViewController{
     }
     
     
+     func handleStudyUpdatesResponse() {
+        
+        Study.currentStudy?.newVersion = StudyUpdates.studyVersion
+        DBHandler.updateMetaDataToUpdateForStudy(study: Study.currentStudy!, updateDetails: nil)
+        
+        if StudyUpdates.studyConsentUpdated {
+            presentUpdatedConsent()
+        }
+        else if StudyUpdates.studyInfoUpdated{
+            
+        }
+        else {
+            self.checkForActivitiesUpdates()
+        }
+        
+    }
+    
     /**
      
      Used to send Request To Get ActivityStates
@@ -1052,6 +1072,8 @@ extension ActivitiesViewController:NMWebServiceDelegate {
         }
     }
     
+   
+    
     func finishedRequest(_ manager: NetworkManager, requestName: NSString, response: AnyObject?) {
         Logger.sharedInstance.info("requestname : \(requestName) Response : \(response)")
         
@@ -1091,6 +1113,22 @@ extension ActivitiesViewController:NMWebServiceDelegate {
             self.removeProgressIndicator()
             //self.updateRunStatusToComplete()
             self.checkForActivitiesUpdates()
+        }
+        else if requestName as String == WCPMethods.studyUpdates.method.methodName {
+            
+            Logger.sharedInstance.info("Handling response for study updates...")
+            if Study.currentStudy?.version == StudyUpdates.studyVersion{
+                
+                self.loadActivitiesFromDatabase()
+                self.removeProgressIndicator()
+                if self.refreshControl != nil && (self.refreshControl?.isRefreshing)!{
+                    self.refreshControl?.endRefreshing()
+                }
+            }
+            else {
+                self.handleStudyUpdatesResponse()
+            }
+            
         }
     }
     

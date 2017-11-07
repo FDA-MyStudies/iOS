@@ -125,6 +125,9 @@ class ActivitiesViewController : UIViewController{
         }
         else {
             
+            if self.refreshControl != nil && (self.refreshControl?.isRefreshing)!{
+                self.refreshControl?.endRefreshing()
+            }
             self.loadActivitiesFromDatabase()
            
         }
@@ -803,7 +806,7 @@ class ActivitiesViewController : UIViewController{
             presentUpdatedConsent()
         }
         else if StudyUpdates.studyInfoUpdated{
-            
+            WCPServices().getStudyInformation(studyId: (Study.currentStudy?.studyId)!, delegate: self)
         }
         else {
             self.checkForActivitiesUpdates()
@@ -1129,6 +1132,13 @@ extension ActivitiesViewController:NMWebServiceDelegate {
                 self.handleStudyUpdatesResponse()
             }
             
+        }
+        else if requestName as String == WCPMethods.studyInfo.method.methodName {
+            
+            StudyUpdates.studyInfoUpdated = false
+            DBHandler.updateMetaDataToUpdateForStudy(study: Study.currentStudy!, updateDetails: nil)
+            
+            self.checkForActivitiesUpdates()
         }
     }
     

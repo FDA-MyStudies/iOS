@@ -57,6 +57,7 @@
 		6E7D2D901E43526100763D4C /* Register.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6E7D2D8F1E43526100763D4C /* Register.plist */; };
 		6E7DC76D1F69479C001A05B6 /* ActivityFilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E7DC76B1F69479C001A05B6 /* ActivityFilterView.swift */; };
 		6E7DC76E1F69479C001A05B6 /* ActivityFilterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6E7DC76C1F69479C001A05B6 /* ActivityFilterView.xib */; };
+		6E80BC041FB04350008C9B8C /* Labkey_Activity_Latest2.json in Resources */ = {isa = PBXBuildFile; fileRef = 6E80BC011FB04340008C9B8C /* Labkey_Activity_Latest2.json */; };
 		6E90D2401EF40D2100F5140F /* ResourcesDetailViewControllerCopy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E90D23F1EF40D2100F5140F /* ResourcesDetailViewControllerCopy.swift */; };
 		6E91D6821ECD662E0012F49F /* JailbrokeBlocker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E91D6801ECD662E0012F49F /* JailbrokeBlocker.swift */; };
 		6E91D6831ECD662E0012F49F /* JailbrokeBlocker.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6E91D6811ECD662E0012F49F /* JailbrokeBlocker.xib */; };
@@ -67,6 +68,7 @@
 		6EA889BE1E6FD20000F160A1 /* ConfirmationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EA889BD1E6FD20000F160A1 /* ConfirmationTableViewCell.swift */; };
 		6EA889C01E6FD22800F160A1 /* ConfirmationOptionalTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EA889BF1E6FD22800F160A1 /* ConfirmationOptionalTableViewCell.swift */; };
 		6EA889C51E701E8200F160A1 /* Confirmation.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6EA889C41E701E8200F160A1 /* Confirmation.plist */; };
+		6EAA048B1FAF4C6E00214D03 /* Labkey_Activity_Latest.json in Resources */ = {isa = PBXBuildFile; fileRef = 6EAA04881FAF4C6A00214D03 /* Labkey_Activity_Latest.json */; };
 		6EAB39A91E4B0B4A003442B8 /* Resources.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6EAB39A81E4B0B4A003442B8 /* Resources.plist */; };
 		6EABD0331E56FE2000623D94 /* TaskSchema.json in Resources */ = {isa = PBXBuildFile; fileRef = 6EABD0321E56FE2000623D94 /* TaskSchema.json */; };
 		6EB7187C1E77C01900E293EF /* Encoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EB7187B1E77C01900E293EF /* Encoder.swift */; };
@@ -328,6 +330,7 @@
 		6E7D2D8F1E43526100763D4C /* Register.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Register.plist; sourceTree = "<group>"; };
 		6E7DC76B1F69479C001A05B6 /* ActivityFilterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityFilterView.swift; sourceTree = "<group>"; };
 		6E7DC76C1F69479C001A05B6 /* ActivityFilterView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ActivityFilterView.xib; sourceTree = "<group>"; };
+		6E80BC011FB04340008C9B8C /* Labkey_Activity_Latest2.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Labkey_Activity_Latest2.json; sourceTree = "<group>"; };
 		6E90D23F1EF40D2100F5140F /* ResourcesDetailViewControllerCopy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResourcesDetailViewControllerCopy.swift; sourceTree = "<group>"; };
 		6E91D6801ECD662E0012F49F /* JailbrokeBlocker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JailbrokeBlocker.swift; sourceTree = "<group>"; };
 		6E91D6811ECD662E0012F49F /* JailbrokeBlocker.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JailbrokeBlocker.xib; sourceTree = "<group>"; };
@@ -338,6 +341,7 @@
 		6EA889BD1E6FD20000F160A1 /* ConfirmationTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfirmationTableViewCell.swift; sourceTree = "<group>"; };
 		6EA889BF1E6FD22800F160A1 /* ConfirmationOptionalTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfirmationOptionalTableViewCell.swift; sourceTree = "<group>"; };
 		6EA889C41E701E8200F160A1 /* Confirmation.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Confirmation.plist; sourceTree = "<group>"; };
+		6EAA04881FAF4C6A00214D03 /* Labkey_Activity_Latest.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Labkey_Activity_Latest.json; sourceTree = "<group>"; };
 		6EAB39A81E4B0B4A003442B8 /* Resources.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Resources.plist; sourceTree = "<group>"; };
 		6EABD0321E56FE2000623D94 /* TaskSchema.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = TaskSchema.json; sourceTree = "<group>"; };
 		6EB7187B1E77C01900E293EF /* Encoder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Encoder.swift; sourceTree = "<group>"; };
@@ -746,6 +750,8 @@
 		6E9B39BC1E55DFDA0037D09D /* ActivityBuilder */ = {
 			isa = PBXGroup;
 			children = (
+				6E80BC011FB04340008C9B8C /* Labkey_Activity_Latest2.json */,
+				6EAA04881FAF4C6A00214D03 /* Labkey_Activity_Latest.json */,
 				6EED31A21F1CD7B300A7AF56 /* LatestActive_1B.json */,
 				6E5F751A1EF4109500ABA308 /* Labkey_Activity11.json */,
 				6EDABCCD1EBA41EE005F3AA6 /* Labkey_Activity.json */,
@@ -1544,6 +1550,7 @@
 				6E93C7E11EE2EC26006788B1 /* ConsentLatest.json in Resources */,
 				6EABD0331E56FE2000623D94 /* TaskSchema.json in Resources */,
 				48A24C3E1E839D03009E849E /* 55V2.png in Resources */,
+				6E80BC041FB04350008C9B8C /* Labkey_Activity_Latest2.json in Resources */,
 				48567FDD1F14F72900857193 /* 13.png in Resources */,
 				6E7D2D8E1E43445600763D4C /* UserPreferences.plist in Resources */,
 				9450598F1F29FA2C007906A7 /* AppGlossary.pdf in Resources */,
@@ -1561,6 +1568,7 @@
 				6E7D2D641E433E8800763D4C /* LaunchScreen.storyboard in Resources */,
 				48C736561EC5C83D002D000F /* study_dashboard.png in Resources */,
 				6EF748BF1E69645700F1E89E /* LatestActive_Taskdocument.json in Resources */,
+				6EAA048B1FAF4C6E00214D03 /* Labkey_Activity_Latest.json in Resources */,
 				6EAB39A91E4B0B4A003442B8 /* Resources.plist in Resources */,
 				486304D61E6FE77C003CD406 /* GatewayOverview.plist in Resources */,
 				6E91D6831ECD662E0012F49F /* JailbrokeBlocker.xib in Resources */,

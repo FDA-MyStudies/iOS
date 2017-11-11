@@ -1712,6 +1712,13 @@ class DBHandler: NSObject {
         
     }
     
+    class func saveRegisteredLocaNotification(notificationList:Array<AppLocalNotification>){
+        
+        for notification in notificationList {
+            DBHandler.saveLocalNotification(notification: notification)
+        }
+    }
+    
     class func saveLocalNotification(notification:AppLocalNotification){
         
         

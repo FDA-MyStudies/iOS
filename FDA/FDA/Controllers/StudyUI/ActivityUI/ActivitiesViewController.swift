@@ -37,6 +37,11 @@ class ActivitiesViewController : UIViewController{
     var selectedFilter: ActivityFilterType?
     
     //MARK:- Viewcontroller Lifecycle
+    fileprivate func presentUpdatedConsent() {
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        appDelegate.checkConsentStatus(controller: self)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -68,8 +73,7 @@ class ActivitiesViewController : UIViewController{
             if StudyUpdates.studyConsentUpdated {
                 
                 NotificationHandler.instance.activityId = ""
-                let appDelegate = UIApplication.shared.delegate as! AppDelegate
-                appDelegate.checkConsentStatus(controller: self)
+                presentUpdatedConsent()
             }
             
         }
@@ -117,16 +121,15 @@ class ActivitiesViewController : UIViewController{
         if StudyUpdates.studyActivitiesUpdated {
             
             self.sendRequestToGetActivityStates()
-            
-            //also get dashboard data
-            
-            //self.sendRequestToGetDashboardInfo()
-            
+    
         }
         else {
             
+            if self.refreshControl != nil && (self.refreshControl?.isRefreshing)!{
+                self.refreshControl?.endRefreshing()
+            }
             self.loadActivitiesFromDatabase()
-            // self.sendRequestToGetActivityStates()
+           
         }
     }
     
@@ -299,7 +302,10 @@ class ActivitiesViewController : UIViewController{
     
     
     func refresh(sender:AnyObject) {
-        self.sendRequesToGetActivityList()
+        
+         Logger.sharedInstance.info("Request for study Updated...")
+         WCPServices().getStudyUpdates(study: Study.currentStudy!, delegate: self)
+        //self.sendRequesToGetActivityList()
     }
     
     
@@ -587,10 +593,10 @@ class ActivitiesViewController : UIViewController{
             
             if !(Study.currentStudy?.activitiesLocalNotificationUpdated)! {
                 
-                LocalNotification.registerAllLocalNotificationFor(activities: (Study.currentStudy?.activities)!) { (finished) in
+                LocalNotification.registerAllLocalNotificationFor(activities: (Study.currentStudy?.activities)!) { (finished,notificationlist) in
                     print("Notification set sucessfully")
                     Study.currentStudy?.activitiesLocalNotificationUpdated = true
-                    
+                    DBHandler.saveRegisteredLocaNotification(notificationList: notificationlist)
                     DBHandler.updateLocalNotificaitonUpdated(studyId: (Study.currentStudy?.studyId)!,status: true)
                 }
                 
@@ -791,6 +797,23 @@ class ActivitiesViewController : UIViewController{
 
     }
     
+    
+     func handleStudyUpdatesResponse() {
+        
+        Study.currentStudy?.newVersion = StudyUpdates.studyVersion
+        DBHandler.updateMetaDataToUpdateForStudy(study: Study.currentStudy!, updateDetails: nil)
+        
+        if StudyUpdates.studyConsentUpdated {
+            presentUpdatedConsent()
+        }
+        else if StudyUpdates.studyInfoUpdated{
+            WCPServices().getStudyInformation(studyId: (Study.currentStudy?.studyId)!, delegate: self)
+        }
+        else {
+            self.checkForActivitiesUpdates()
+        }
+        
+    }
     
     /**
      
@@ -1053,6 +1076,8 @@ extension ActivitiesViewController:NMWebServiceDelegate {
         }
     }
     
+   
+    
     func finishedRequest(_ manager: NetworkManager, requestName: NSString, response: AnyObject?) {
         Logger.sharedInstance.info("requestname : \(requestName) Response : \(response)")
         
@@ -1091,6 +1116,29 @@ extension ActivitiesViewController:NMWebServiceDelegate {
         else if requestName as String == ResponseMethods.processResponse.method.methodName{
             self.removeProgressIndicator()
             //self.updateRunStatusToComplete()
+            self.checkForActivitiesUpdates()
+        }
+        else if requestName as String == WCPMethods.studyUpdates.method.methodName {
+            
+            Logger.sharedInstance.info("Handling response for study updates...")
+            if Study.currentStudy?.version == StudyUpdates.studyVersion{
+                
+                self.loadActivitiesFromDatabase()
+                self.removeProgressIndicator()
+                if self.refreshControl != nil && (self.refreshControl?.isRefreshing)!{
+                    self.refreshControl?.endRefreshing()
+                }
+            }
+            else {
+                self.handleStudyUpdatesResponse()
+            }
+            
+        }
+        else if requestName as String == WCPMethods.studyInfo.method.methodName {
+            
+            StudyUpdates.studyInfoUpdated = false
+            DBHandler.updateMetaDataToUpdateForStudy(study: Study.currentStudy!, updateDetails: nil)
+            
             self.checkForActivitiesUpdates()
         }
     }

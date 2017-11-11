@@ -298,7 +298,7 @@ class ActivityBuilder {
                                                     
                                                 }
                                                 
-                                            case is ORKNumericAnswerFormat ,is ORKScaleAnswerFormat,is ORKTimeIntervalAnswerFormat,is ORKHeightAnswerFormat, is ORKContinuousScaleAnswerFormat:
+                                            case is ORKNumericAnswerFormat ,is ORKScaleAnswerFormat,is ORKTimeIntervalAnswerFormat,is ORKHeightAnswerFormat, is ORKContinuousScaleAnswerFormat,is ORKHealthKitQuantityTypeAnswerFormat:
                                                 
                                                 if let operatorValue = dict[kOperator] as? String{
                                                     
@@ -315,16 +315,21 @@ class ActivityBuilder {
                                                     let operatorType:OperatorType = OperatorType(rawValue: operatorValue)!
                                                     
                                                     switch((questionStep as! ORKQuestionStep).answerFormat){
-                                                    case is ORKNumericAnswerFormat,is ORKHeightAnswerFormat: //Height & Numeric Question
+                                                    case is ORKNumericAnswerFormat,is ORKHeightAnswerFormat,is ORKHealthKitQuantityTypeAnswerFormat: //Height & Numeric Question
                                                         
                                                         var minimumValue = (activityStep as! ActivityQuestionStep).formatDict![kMinimumValue] as? Float
+                                                        
+                                                        var style = ""
                                                         
                                                         if ((questionStep as! ORKQuestionStep).answerFormat! is ORKHeightAnswerFormat ){
                                                             
                                                             minimumValue = 0
                                                         }
+                                                        else{
+                                                            style = ((activityStep as! ActivityQuestionStep).formatDict![kStepQuestionNumericStyle] as? String)!
+                                                        }
                                                         
-                                                        predicateQuestionChoiceA = self.getPredicateForNumeric(resultSelector: resultSelector!, lhs: lhs!, minimumValue: minimumValue!, operatorType: operatorType)
+                                                        predicateQuestionChoiceA = self.getPredicateForNumeric(resultSelector: resultSelector!, lhs: lhs!, minimumValue: minimumValue!, operatorType: operatorType,answerFormat:(questionStep as! ORKQuestionStep).answerFormat!,style:style)
                                                         
                                                     case is ORKTimeIntervalAnswerFormat: //TimeInterval
                                                         
@@ -632,16 +637,43 @@ class ActivityBuilder {
      
      */
     
-    func getPredicateForNumeric(resultSelector:ORKResultSelector, lhs:Double,minimumValue:Float, operatorType:OperatorType) ->NSPredicate{
+    func getPredicateForNumeric(resultSelector:ORKResultSelector, lhs:Double,minimumValue:Float, operatorType:OperatorType,answerFormat:ORKAnswerFormat,style:String) ->NSPredicate{
         
         var predicate:NSPredicate = NSPredicate()
         
         switch(operatorType){
             
         case .equal: //Equal
-            predicate = ORKResultPredicate.predicateForNumericQuestionResult(with: resultSelector, expectedAnswer: Int(lhs))
+            
+            if answerFormat is ORKNumericAnswerFormat || answerFormat is ORKHealthKitQuantityTypeAnswerFormat{
+                
+                if style == "Decimal"{
+                    predicate =  NSPredicate.init(format:"SUBQUERY(SELF, $x, $x.identifier == $ORK_TASK_IDENTIFIER AND SUBQUERY($x.results, $y, $y.identifier == \"\(resultSelector.resultIdentifier)\" AND $y.isPreviousResult == 0 AND SUBQUERY($y.results, $z, $z.identifier == \"\(resultSelector.resultIdentifier)\" AND $z.answer >= \(lhs) AND $z.answer < \(lhs + 0.1)).@count > 0).@count > 0).@count > 0" , argumentArray: [])
+                }
+                else{
+                    predicate = ORKResultPredicate.predicateForNumericQuestionResult(with: resultSelector, expectedAnswer: Int(lhs))
+                }
+            }
+            else{
+                 predicate = ORKResultPredicate.predicateForNumericQuestionResult(with: resultSelector, expectedAnswer: Int(lhs))
+            }
+           
         case .notEqual : //NotEqual
-            let equalPredicate = ORKResultPredicate.predicateForNumericQuestionResult(with: resultSelector, expectedAnswer: Int(lhs))
+            let equalPredicate:NSPredicate!
+            
+            if answerFormat is ORKNumericAnswerFormat{
+                
+                if style == "Decimal"{
+                    equalPredicate =  NSPredicate.init(format:"SUBQUERY(SELF, $x, $x.identifier == $ORK_TASK_IDENTIFIER AND SUBQUERY($x.results, $y, $y.identifier == \"\(resultSelector.resultIdentifier)\" AND $y.isPreviousResult == 0 AND SUBQUERY($y.results, $z, $z.identifier == \"\(resultSelector.resultIdentifier)\" AND $z.answer >= \(lhs) AND $z.answer < \(lhs + 0.1)).@count > 0).@count > 0).@count > 0" , argumentArray: [])
+                }
+                else{
+                    equalPredicate = ORKResultPredicate.predicateForNumericQuestionResult(with: resultSelector, expectedAnswer: Int(lhs))
+                }
+            }
+            else{
+                equalPredicate = ORKResultPredicate.predicateForNumericQuestionResult(with: resultSelector, expectedAnswer: Int(lhs))
+            }
+            
             predicate = NSCompoundPredicate.init(notPredicateWithSubpredicate: equalPredicate)
             
         case .greaterThan : //GreaterThan

@@ -208,10 +208,30 @@ class ActivityStepResult{
             
             stepDict?[kActivityEndTime] = Utilities.getStringFromDate(date: self.endTime!)
         }
-        stepDict?[kActivityStepSkipped] = self.skipped
         
         if self.value != nil {
             stepDict?[kActivityStepResultValue] = self.value
+            
+            if self.value is Array<Any> || self.value is Dictionary<String, Any>{
+                
+                if Utilities.isValidObject(someObject: self.value as AnyObject ){
+                    stepDict?[kActivityStepSkipped] = false
+                }
+                else{
+                    stepDict?[kActivityStepSkipped] = true
+                }
+            }
+            else{
+                if Utilities.isValidValue(someObject: self.value as AnyObject){
+                    stepDict?[kActivityStepSkipped] = false
+                }
+                else{
+                    stepDict?[kActivityStepSkipped] = true
+                }
+            }
+        }
+        else{
+            stepDict?[kActivityStepSkipped] = self.skipped!
         }
         
         return stepDict

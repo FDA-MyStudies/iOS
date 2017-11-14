@@ -23,7 +23,8 @@ class DBUser: Object {
     dynamic var passcodeEnabled:Bool = true
     dynamic var remoteNotificationEnabled:Bool = false
     dynamic var localNotificationEnabled:Bool = false
-    
+    dynamic var refreshToken:String = ""
+  
     override static func primaryKey() -> String? {
         return "userId"
     }

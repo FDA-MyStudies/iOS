@@ -22,7 +22,8 @@ class DBHandler: NSObject {
         //dbUser.firstName = user.firstName
         //dbUser.lastName = user.lastName
         dbUser.verified = user.verified
-        
+      
+        dbUser.refreshToken = user.refreshToken
         
         
         let realm = try! Realm()
@@ -49,7 +50,8 @@ class DBHandler: NSObject {
             currentUser.userId = dbUser?.userId
             currentUser.emailId = dbUser?.emailId
             currentUser.userType =  (dbUser?.userType).map { UserType(rawValue: $0) }!
-            
+            currentUser.refreshToken = dbUser?.refreshToken
+          
             let settings = Settings()
             settings.localNotifications = dbUser?.localNotificationEnabled
             settings.passcode = dbUser?.passcodeEnabled

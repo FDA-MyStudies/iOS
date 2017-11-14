@@ -21,6 +21,7 @@ let kUserEmailId = "emailId"
 let kUserSettings = "settings"
 let kUserId = "userId"
 
+
 let kLocale = "locale"
 let kParticipantInfo = "participantInfo"
 
@@ -532,7 +533,7 @@ class UserServices: NSObject {
         
         let user = User.currentUser
         
-        let param = [kRefreshToken:user.authToken]
+        let param = [kRefreshToken:user.refreshToken]
         let method = RegistrationMethods.refreshToken.method
         self.sendRequestWith(method:method, params: param, headers:nil)
         
@@ -561,10 +562,7 @@ class UserServices: NSObject {
         if let isTempPassword = response[kUserIsTempPassword] as? Bool {
             user.isLoginWithTempPassword = isTempPassword
         }
-        
-       
-        
-       
+      
         if user.verified! && !user.isLoginWithTempPassword {
             
             user.userType = UserType.FDAUser

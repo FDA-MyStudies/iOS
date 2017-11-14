@@ -87,7 +87,7 @@ class FetalKickCounterStepViewController:  ORKStepViewController {
          submitButton?.layer.borderColor =   kUicolorForButtonBackground
         
         if let step = step as? FetalKickCounterStep {
-            step.counDownTimer = 600
+            //step.counDownTimer = 600
             
             let ud = UserDefaults.standard
             //ud.set(true, forKey: "FKC")
@@ -130,7 +130,7 @@ class FetalKickCounterStepViewController:  ORKStepViewController {
                 
                 print("difference \(differenceInSec)")
                 //Setting the maximum time allowed for the task
-                 self.totalTime =    10 //step.counDownTimer!
+                 self.totalTime =     step.counDownTimer! //10
             
                 //Setting the maximum Kicks allowed
                 self.maxKicksAllowed = step.totalCounts!

@@ -85,13 +85,25 @@ let kLogoutReasonValue = "Logout"
 
 let kRefreshToken = "refreshToken"
 
+struct FailedUserServices {
+  
+  var requestParams: [String:Any]? = [:]
+  var headerParams: [String:String]? = [:]
+  var method: Method!
+}
+
+
+
 class UserServices: NSObject {
     
     let networkManager = NetworkManager.sharedInstance()
-    var delegate:NMWebServiceDelegate! = nil
-    var requestParams:Dictionary<String,Any>? = [:]
-    var headerParams:Dictionary<String,String>? = [:]
-    
+    var delegate: NMWebServiceDelegate! = nil
+    var requestParams: Dictionary<String,Any>? = [:]
+    var headerParams: Dictionary<String,String>? = [:]
+    var method: Method!
+    var failedRequestServices = FailedUserServices()
+  
+  
     //MARK: Requests
     func loginUser(_ delegate:NMWebServiceDelegate){
         
@@ -558,7 +570,7 @@ class UserServices: NSObject {
         user.userId     = response[kUserId] as! String
         user.verified   = response[kUserVerified] as! Bool
         user.authToken  = response[kUserAuthToken] as! String
-        
+        user.refreshToken = response[kRefreshToken] as! String
         if let isTempPassword = response[kUserIsTempPassword] as? Bool {
             user.isLoginWithTempPassword = isTempPassword
         }
@@ -880,6 +892,16 @@ class UserServices: NSObject {
     }
 
     func handleUpdateTokenResponse(response:Dictionary<String, Any>){
+      
+      let user = User.currentUser
+      user.authToken  = response[kUserAuthToken] as! String
+      user.refreshToken = response[kRefreshToken] as! String
+      //self.failedRequestServices.headerParams![kUserAuthToken] = user.accessToken
+      
+      DBHandler().saveCurrentUser(user: user)
+      //re-send request which failed due to session expired
+      self.sendRequestWith(method: self.failedRequestServices.method, params: self.failedRequestServices.requestParams, headers: self.failedRequestServices.headerParams)
+      
     }
     
     
@@ -971,6 +993,20 @@ extension UserServices:NMWebServiceDelegate{
     
     
     func failedRequest(_ manager: NetworkManager, requestName: NSString, error: NSError) {
+      
+      if error.code == 101 {
+      
+        self.failedRequestServices.headerParams = self.headerParams
+        self.failedRequestServices.requestParams = self.requestParams
+        self.failedRequestServices.method = self.method
+        
+        print("Failed: Refresh token Expired")
+        //call for referesh token
+        self.updateToken(self)
+        
+        
+      }else {
+        
         if delegate != nil {
             delegate.failedRequest(manager, requestName: requestName, error: error)
         }
@@ -985,7 +1021,7 @@ extension UserServices:NMWebServiceDelegate{
                 DBHandler.saveRequestInformation(params: self.requestParams, headers: self.headerParams, method: requestName as String, server: "registration")
             }
         }
-
+      }
     }
     
 }

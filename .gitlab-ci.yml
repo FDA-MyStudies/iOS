@@ -3,7 +3,7 @@
 # This file assumes an own GitLab CI runner, setup on an OS X system.
 stages:
   - build
-  - test
+#  - test
   - review
  # - archive
 
@@ -15,10 +15,10 @@ build_project:
   tags:
     - ios
 
-test_project:
-    stage: test
-    script:     
-        - xcodebuild test -workspace FDA/FDA.xcworkspace -scheme FDA -destination 'platform=iOS Simulator,name=iPhone 8,OS=11.0' | xcpretty -s
+#test_project:
+#    stage: test
+#    script:     
+#        - xcodebuild test -workspace FDA/FDA.xcworkspace -scheme FDA -destination 'platform=iOS Simulator,name=iPhone 8,OS=11.0' | xcpretty -s
 
 sonar_review:
     stage: review

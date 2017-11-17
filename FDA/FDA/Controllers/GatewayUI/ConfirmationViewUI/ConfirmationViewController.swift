@@ -318,7 +318,7 @@ extension ConfirmationViewController:NMWebServiceDelegate {
         Logger.sharedInstance.info("requestname : \(requestName)")
         
         
-        if error.code == 401 { //unauthorized
+        if error.code == 403 { //unauthorized
             self.removeProgressIndicator()
             UIUtilities.showAlertMessageWithActionHandler(kErrorTitle, message: error.localizedDescription, buttonTitle: kTitleOk, viewControllerUsed: self, action: {
                 self.fdaSlideMenuController()?.navigateToHomeAfterUnauthorizedAccess()

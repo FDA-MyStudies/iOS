@@ -311,7 +311,7 @@ extension VerificationViewController:NMWebServiceDelegate {
         Logger.sharedInstance.info("requestname : \(requestName)")
         
         self.removeProgressIndicator()
-        if error.code == 401 { //unauthorized
+        if error.code == 403 { //unauthorized
             UIUtilities.showAlertMessageWithActionHandler(kErrorTitle, message: error.localizedDescription, buttonTitle: kTitleOk, viewControllerUsed: self, action: {
                 _ = self.navigationController?.popToRootViewController(animated: true)
             })

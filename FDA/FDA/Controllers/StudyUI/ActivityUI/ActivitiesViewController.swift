@@ -1151,7 +1151,7 @@ extension ActivitiesViewController:NMWebServiceDelegate {
             self.refreshControl?.endRefreshing()
         }
         
-        if error.code == 401 { //unauthorized
+        if error.code == 403 { //unauthorized
             UIUtilities.showAlertMessageWithActionHandler(kErrorTitle, message: error.localizedDescription, buttonTitle: kTitleOk, viewControllerUsed: self, action: {
                 self.fdaSlideMenuController()?.navigateToHomeAfterUnauthorizedAccess()
             })

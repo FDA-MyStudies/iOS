@@ -70,7 +70,7 @@ class ConsentResult {
                         let dir = FileManager.getStorageDirectory(type: .study)
                         
                         var fullPath:String!
-                        let path =  AKUtility.baseFilePath + "/Study"
+                        let path =  AKUtility.baseFilePath + "/study"
                         let fileName:String = "Consent" +  "_" + "\((Study.currentStudy?.studyId)!)" + ".pdf"
                         
                         self.consentPath = fileName
@@ -123,7 +123,7 @@ class ConsentResult {
                         let dir = FileManager.getStorageDirectory(type: .study)
                         
                         var fullPath:String!
-                        let path =  AKUtility.baseFilePath + "/Study"
+                        let path =  AKUtility.baseFilePath + "/study"
                         let fileName:String = "Consent" +  "_" + "\((Study.currentStudy?.studyId)!)" + ".pdf"
                         
                         self.consentPath = fileName

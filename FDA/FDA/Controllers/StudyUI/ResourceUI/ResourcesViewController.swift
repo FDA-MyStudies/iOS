@@ -441,7 +441,7 @@ class ResourcesViewController : UIViewController{
     
     func pushToResourceDetails(){
         
-        let path = AKUtility.baseFilePath + "/Study"
+        let path = AKUtility.baseFilePath + "/study"
         let consentPath = Study.currentStudy?.signedConsentFilePath
         
         let fullPath = path + "/" + consentPath!
@@ -480,7 +480,7 @@ class ResourcesViewController : UIViewController{
         let consentData = NSData(base64Encoded: base64dataString, options: .ignoreUnknownCharacters)
         
         var fullPath:String!
-        let path =  AKUtility.baseFilePath + "/Study"
+        let path =  AKUtility.baseFilePath + "/study"
         let fileName:String = "Consent" +  "_" + "\((Study.currentStudy?.studyId)!)" + ".pdf"
         
         fullPath = path + "/" + fileName
@@ -746,7 +746,7 @@ extension ResourcesViewController:NMWebServiceDelegate {
         Logger.sharedInstance.info("requestname : \(requestName)")
        
         
-        if error.code == 401 { //unauthorized
+        if error.code == 403 { //unauthorized
              self.removeProgressIndicator()
             UIUtilities.showAlertMessageWithActionHandler(kErrorTitle, message: error.localizedDescription, buttonTitle: kTitleOk, viewControllerUsed: self, action: {
                 self.fdaSlideMenuController()?.navigateToHomeAfterUnauthorizedAccess()

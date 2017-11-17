@@ -337,6 +337,23 @@ class ActivityQuestionStep: ActivityStep {
                                                                      vertical: (formatDict?[kStepQuestionScaleVertical] as? Bool)!,
                                                                      maximumValueDescription: maxDesc,
                                                                      minimumValueDescription: minDesc)
+                      
+                      if Utilities.isValidValue(someObject: (formatDict?[kStepQuestionScaleMaxImage] as? String as AnyObject)) && Utilities.isValidValue(someObject: (formatDict?[kStepQuestionScaleMinImage] as? String as AnyObject)){
+                        
+                        let minImageBase64String =  formatDict![kStepQuestionScaleMinImage] as! String
+                        let minNormalImageData = NSData(base64Encoded: minImageBase64String, options: .ignoreUnknownCharacters)
+                        let minNormalImage:UIImage = UIImage(data:minNormalImageData! as Data)!
+                        
+                        let maxImageBase64String =  formatDict![kStepQuestionScaleMaxImage] as! String
+                        let maxNormalImageData = NSData(base64Encoded: maxImageBase64String, options: .ignoreUnknownCharacters)
+                        let maxNormalImage:UIImage = UIImage(data:maxNormalImageData! as Data)!
+                        
+                        (questionStepAnswerFormat as! ORKScaleAnswerFormat).minimumImage = minNormalImage
+                        (questionStepAnswerFormat as! ORKScaleAnswerFormat).maximumImage = maxNormalImage
+                      }
+                      
+                      
+                      
                     }
                     else{
                         return nil
@@ -360,8 +377,8 @@ class ActivityQuestionStep: ActivityStep {
                     //&&  Utilities.isValidValue(someObject:formatDict?[kStepQuestionScaleMinDesc] as AnyObject?)
                 {
                     
-                    let maxDesc = formatDict?[kStepQuestionContinuosScaleMaxDesc] as? String
-                    let minDesc = formatDict?[kStepQuestionContinuosScaleMinDesc] as? String
+                    let maxDesc =   formatDict?[kStepQuestionContinuosScaleMaxDesc] as? String
+                    let minDesc =   formatDict?[kStepQuestionContinuosScaleMinDesc] as? String
                     
                     
                     if (formatDict?[kStepQuestionContinuosScaleMinValue] as? Double)! != (formatDict?[kStepQuestionContinuosScaleMaxValue] as? Double)!{
@@ -372,7 +389,23 @@ class ActivityQuestionStep: ActivityStep {
                                                                                vertical: (formatDict?[kStepQuestionContinuosScaleVertical] as? Bool)!,
                                                                                maximumValueDescription:maxDesc,
                                                                                minimumValueDescription: minDesc)
+                      
+                      
+                      if Utilities.isValidValue(someObject: (formatDict?[kStepQuestionContinuosScaleMaxImage] as? String as AnyObject)) && Utilities.isValidValue(someObject: (formatDict?[kStepQuestionContinuosScaleMinImage] as? String as AnyObject)){
+                        
+                        let minImageBase64String =  formatDict![kStepQuestionContinuosScaleMinImage] as! String
+                        let minNormalImageData = NSData(base64Encoded: minImageBase64String, options: .ignoreUnknownCharacters)
+                        let minNormalImage:UIImage = UIImage(data:minNormalImageData! as Data)!
+                        
+                        let maxImageBase64String =  formatDict![kStepQuestionContinuosScaleMaxImage] as! String
+                        let maxNormalImageData = NSData(base64Encoded: maxImageBase64String, options: .ignoreUnknownCharacters)
+                        let maxNormalImage:UIImage = UIImage(data:maxNormalImageData! as Data)!
+                        
+                        (questionStepAnswerFormat as! ORKContinuousScaleAnswerFormat).minimumImage = minNormalImage
+                        (questionStepAnswerFormat as! ORKContinuousScaleAnswerFormat).maximumImage = maxNormalImage
+                      }
                     
+                      
                     
                     }
                     else{
@@ -394,9 +427,17 @@ class ActivityQuestionStep: ActivityStep {
                     let textChoiceArray:[ORKTextChoice]?
                     
                     textChoiceArray = self.getTextChoices(dataArray: formatDict?[kStepQuestionTextScaleTextChoices] as! NSArray)
-                    
+                  
+                  var defaultValue = formatDict?[kStepQuestionTextScaleDefault] as! Int
+                  
+                  if defaultValue > 0 {
+                    //get the current index which = defaultposition - 1
+                    defaultValue = defaultValue - 1
+                  }
+                  
+                  
                     questionStepAnswerFormat = ORKAnswerFormat.textScale(with: textChoiceArray!,
-                                                                         defaultIndex: formatDict?[kStepQuestionTextScaleDefault] as! Int,
+                                                                         defaultIndex: defaultValue,
                                                                          vertical: formatDict?[kStepQuestionTextScaleVertical] as! Bool)
                     
                     

@@ -539,13 +539,11 @@ class UserServices: NSObject {
         self.sendRequestWith(method:method, params: params, headers: headerParams)
     }
     
-    func updateToken(_ delegate:NMWebServiceDelegate){
-        
-        self.delegate = delegate
-        
+    func updateToken(){
+      
         let user = User.currentUser
         
-        let param = [kRefreshToken:user.refreshToken]
+        let param = [kRefreshToken:user.refreshToken!]
         let method = RegistrationMethods.refreshToken.method
         self.sendRequestWith(method:method, params: param, headers:nil)
         
@@ -900,7 +898,12 @@ class UserServices: NSObject {
       
       DBHandler().saveCurrentUser(user: user)
       //re-send request which failed due to session expired
-      self.sendRequestWith(method: self.failedRequestServices.method, params: self.failedRequestServices.requestParams, headers: self.failedRequestServices.headerParams)
+      
+      let requestParams = self.failedRequestServices.requestParams == nil ? nil : self.failedRequestServices.requestParams
+      
+      let headerParams = self.failedRequestServices.headerParams == nil ? [:] : self.failedRequestServices.headerParams
+      
+      self.sendRequestWith(method: self.failedRequestServices.method, params: (self.requestParams == nil ?  nil : self.requestParams) , headers: headerParams)
       
     }
     
@@ -909,7 +912,7 @@ class UserServices: NSObject {
         
         self.requestParams = params
         self.headerParams = headers
-        
+        self.method = method
         networkManager.composeRequest(RegistrationServerConfiguration.configuration,
                                       method: method,
                                       params: params as NSDictionary?,
@@ -920,13 +923,13 @@ class UserServices: NSObject {
 }
 extension UserServices:NMWebServiceDelegate{
     func startedRequest(_ manager: NetworkManager, requestName: NSString) {
-        Logger.sharedInstance.info("RUS Request Called: \(requestName)")
+      //  Logger.sharedInstance.info("RUS Request Called: \(requestName)")
         if delegate != nil {
             delegate.startedRequest(manager, requestName: requestName)
         }
     }
     func finishedRequest(_ manager: NetworkManager, requestName: NSString, response: AnyObject?) {
-        Logger.sharedInstance.info("RUS Received Data: \(requestName)")
+        Logger.sharedInstance.info("RUS Received Data: \(requestName), \(response)")
         switch requestName {
         case RegistrationMethods.login.description as String:
             
@@ -994,15 +997,28 @@ extension UserServices:NMWebServiceDelegate{
     
     func failedRequest(_ manager: NetworkManager, requestName: NSString, error: NSError) {
       
-      if error.code == 101 {
+      if error.code == 401 {
       
         self.failedRequestServices.headerParams = self.headerParams
         self.failedRequestServices.requestParams = self.requestParams
         self.failedRequestServices.method = self.method
         
         print("Failed: Refresh token Expired")
-        //call for referesh token
-        self.updateToken(self)
+      
+        if User.currentUser.refreshToken == ""{
+          //Unauthorized Access
+          let localError  = NSError.init(domain: error.domain, code: 403, userInfo: error.userInfo)
+          
+          if delegate != nil {
+            delegate.failedRequest(manager, requestName: requestName, error: localError)
+          }
+          
+        }
+        else{
+          //Update Refresh Token
+          self.updateToken()
+        }
+        
         
         
       }else {

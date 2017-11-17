@@ -47,8 +47,26 @@ class NetworkProtocols:NetworkConfigurationProtocol{
     }
     internal func parseError(errorResponse:Dictionary<String,Any>)->NSError{
         
-        let error = NSError(domain: NSURLErrorDomain, code:101,userInfo:[NSLocalizedDescriptionKey:"Handle your error here"])
-        return  error
+//        let error = NSError(domain: NSURLErrorDomain, code:101,userInfo:[NSLocalizedDescriptionKey:"Handle your error here"])
+//        return  error
+      
+      var errorCode = 0
+      if let errResponse = errorResponse["error"] as? [String: Any] {
+        if let errCD = errResponse["code"] as? Int {
+          errorCode = errCD
+          let errorDesc = errResponse["message"]
+          
+          let error = NSError(domain: NSURLErrorDomain, code: errorCode, userInfo: [NSLocalizedDescriptionKey: errorDesc])
+          return  error
+        }
+      }
+      
+      
+      let error = NSError(domain: NSURLErrorDomain, code: 101, userInfo: [NSLocalizedDescriptionKey: "Your error localized description"])
+      return  error
+      
+      
+      
     }
 
     

@@ -169,8 +169,6 @@ class NetworkWebServiceHandler: NSObject, URLSessionDelegate {
             delegate?.startedRequest(networkManager!, requestName: method.methodName as NSString)
         }
         
-        
-        
         var requestParams:NSDictionary? = nil
         if params != nil{
             requestParams = self.getCombinedWithCommonParams(params)
@@ -219,7 +217,15 @@ class NetworkWebServiceHandler: NSObject, URLSessionDelegate {
         if params == nil || params?.count == 0 {
             defaultheaders = nil
         }
-        let httpHeaders : NSDictionary? = self.getCombinedHeaders(headers, defaultHeaders: defaultheaders)
+        let httpHeaders : NSDictionary?
+      
+      if requestName as String == RegistrationMethods.refreshToken.method.methodName{
+         httpHeaders = defaultheaders
+      }
+      else{
+         httpHeaders = self.getCombinedHeaders(headers, defaultHeaders: defaultheaders)
+      }
+      
         let baseURLString : NSString = self.getBaseURLString(requestName)
         let requestUrl = URL(string: baseURLString as String)
         do{
@@ -347,14 +353,12 @@ class NetworkWebServiceHandler: NSObject, URLSessionDelegate {
                 
                 
                 if self.configuration.shouldParseErrorMessage() {
-                    
-                    
-                    
-                    var responseDict: Dictionary<String, Any>? = nil
+                  
+                    var responseDict: [String:Any]? = nil
                     
                     do{
                         
-                      responseDict = try JSONSerialization.jsonObject(with: data!, options:.allowFragments) as? Dictionary<String, Any>
+                      responseDict = try JSONSerialization.jsonObject(with: data!, options:.allowFragments) as? [String:Any]
                        
                       
                     }catch{

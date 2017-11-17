@@ -32,6 +32,7 @@
 #import "ORKStepViewController_Internal.h"
 
 #import "ORKImageCaptureView.h"
+#import "ORKImageCaptureStep.h"
 
 #import "ORKImageCaptureStepViewController.h"
 
@@ -78,6 +79,7 @@
 - (instancetype)initWithStep:(ORKStep *)step {
     self = [super initWithStep:step];
     if (self) {
+        NSParameterAssert([step isKindOfClass:[ORKImageCaptureStep class]]);
         _imageCaptureView = [[ORKImageCaptureView alloc] initWithFrame:CGRectZero];
         _imageCaptureView.imageCaptureStep = (ORKImageCaptureStep *)step;
         _imageCaptureView.delegate = self;
@@ -113,7 +115,7 @@
     _imageCaptureView.skipButtonItem = skipButtonItem;
 }
 
-- (void)retakePressed:(void (^)())handler {
+- (void)retakePressed:(void (^)(void))handler {
     // Start the capture session, and reset the captured image to nil
     dispatch_async(_sessionQueue, ^{
         [_captureSession startRunning];

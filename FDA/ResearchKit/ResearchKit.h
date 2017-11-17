@@ -56,6 +56,7 @@
 
 #import <ResearchKit/ORKTask.h>
 #import <ResearchKit/ORKOrderedTask.h>
+#import <ResearchKit/ORKOrderedTask+ORKPredefinedActiveTask.h>
 #import <ResearchKit/ORKNavigableOrderedTask.h>
 #import <ResearchKit/ORKStepNavigationRule.h>
 
@@ -77,6 +78,7 @@
 #import <ResearchKit/ORKLoginStepViewController.h>
 #import <ResearchKit/ORKPageStepViewController.h>
 #import <ResearchKit/ORKPasscodeViewController.h>
+#import <ResearchKit/ORKQuestionStepViewController.h>
 #import <ResearchKit/ORKTableStepViewController.h>
 #import <ResearchKit/ORKTaskViewController.h>
 #import <ResearchKit/ORKTouchAnywhereStepViewController.h>
@@ -100,3 +102,4 @@
 #import <ResearchKit/ORKDataCollectionManager.h>
 #import <ResearchKit/ORKCollector.h>
 
+#import <ResearchKit/ORKDeprecated.h>

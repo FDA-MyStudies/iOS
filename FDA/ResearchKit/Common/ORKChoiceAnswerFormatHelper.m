@@ -47,7 +47,7 @@
     if (self) {
         if ([answerFormat isKindOfClass:[ORKValuePickerAnswerFormat class]]) {
             ORKValuePickerAnswerFormat *valuePickerAnswerFormat = (ORKValuePickerAnswerFormat *)answerFormat;
-            ORKTextChoice *nullChoice = [ORKTextChoice choiceWithText:ORKLocalizedString(@"NULL_ANSWER", nil) value:ORKNullAnswerValue()];
+            ORKTextChoice *nullChoice = valuePickerAnswerFormat.nullTextChoice;
             _choices = [@[nullChoice] arrayByAddingObjectsFromArray:valuePickerAnswerFormat.textChoices];
             _isValuePicker = YES;
         } else if ([answerFormat isKindOfClass:[ORKTextChoiceAnswerFormat class]]) {
@@ -90,7 +90,7 @@
 }
 
 - (id)answerForSelectedIndex:(NSUInteger)index {
-    return [self answerForSelectedIndexes:@[@(index)]];
+    return [self answerForSelectedIndexes:@[ @(index) ]];
 }
 
 - (id)answerForSelectedIndexes:(NSArray *)indexes {
@@ -180,6 +180,18 @@
         }
     }
     return [answerStrings componentsJoinedByString:@"\n"];
+}
+
+- (NSString *)labelForChoiceAnswer:(id)answer {
+    NSMutableArray<NSString *> *answerStrings = [[NSMutableArray alloc] init];
+    NSArray *indexes = [self selectedIndexesForAnswer:answer];
+    for (NSNumber *index in indexes) {
+        NSString *text = [[self answerOptionAtIndex:[index integerValue]] text];
+        if (text != nil) {
+            [answerStrings addObject:text];
+        }
+    }
+    return [answerStrings componentsJoinedByString:@", "];
 }
 
 @end

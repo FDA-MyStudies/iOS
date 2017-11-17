@@ -33,6 +33,7 @@
 #import "ORKPageStepViewController.h"
 #import "ORKResult.h"
 
+
 @implementation ORKPageStep
 
 - (instancetype)initWithIdentifier:(NSString *)identifier {
@@ -77,6 +78,13 @@
         return [self.pageTask requestedPermissions];
     }
     return ORKPermissionNone;
+}
+
+- (NSSet<HKObjectType *> *)requestedHealthKitTypesForReading {
+    if ([self.pageTask respondsToSelector:@selector(requestedHealthKitTypesForReading)]) {
+        return [self.pageTask requestedHealthKitTypesForReading];
+    }
+    return nil;
 }
 
 #pragma mark - NSCopying

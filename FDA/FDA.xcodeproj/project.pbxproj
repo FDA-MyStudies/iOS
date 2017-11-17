@@ -140,8 +140,6 @@
 		6EED7B3B1E65751D002C1FA3 /* FetalKickCounterStepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EED7B3A1E65751D002C1FA3 /* FetalKickCounterStepViewController.swift */; };
 		6EED7B3D1E65752C002C1FA3 /* FetalKickCounterTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EED7B3C1E65752C002C1FA3 /* FetalKickCounterTask.swift */; };
 		6EF0466B1ED1C943008098BB /* DBNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EF0466A1ED1C943008098BB /* DBNotification.swift */; };
-		6EF05A941E4DAB0400CD7661 /* ResearchKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EF05A911E4DAAFB00CD7661 /* ResearchKit.framework */; };
-		6EF05A951E4DAB0400CD7661 /* ResearchKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6EF05A911E4DAAFB00CD7661 /* ResearchKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		6EF05A991E4DC36400CD7661 /* StepProvider.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6EF05A981E4DC36400CD7661 /* StepProvider.plist */; };
 		6EF2FCEF1E72CDE900B5F212 /* LeftMenuResourceTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EF2FCEE1E72CDE900B5F212 /* LeftMenuResourceTableViewCell.swift */; };
 		6EF748BF1E69645700F1E89E /* LatestActive_Taskdocument.json in Resources */ = {isa = PBXBuildFile; fileRef = 6EF748BE1E69645700F1E89E /* LatestActive_Taskdocument.json */; };
@@ -235,26 +233,19 @@
 			remoteGlobalIDString = 6E7D2D551E433E8700763D4C;
 			remoteInfo = FDA;
 		};
-		6EF05A901E4DAAFB00CD7661 /* PBXContainerItemProxy */ = {
+		6EB767791FBEDBFB00E3095E /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 6EF05A8A1E4DAAFB00CD7661 /* ResearchKit.xcodeproj */;
+			containerPortal = 6EB767731FBEDBFA00E3095E /* ResearchKit.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = B183A5951A8535D100C76870;
 			remoteInfo = ResearchKit;
 		};
-		6EF05A921E4DAAFB00CD7661 /* PBXContainerItemProxy */ = {
+		6EB7677B1FBEDBFB00E3095E /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 6EF05A8A1E4DAAFB00CD7661 /* ResearchKit.xcodeproj */;
+			containerPortal = 6EB767731FBEDBFA00E3095E /* ResearchKit.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 86CC8E9A1AC09332001CCD89;
 			remoteInfo = ResearchKitTests;
-		};
-		6EF05A961E4DAB0400CD7661 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 6EF05A8A1E4DAAFB00CD7661 /* ResearchKit.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = B183A4731A8535D100C76870;
-			remoteInfo = ResearchKit;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -265,7 +256,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				6EF05A951E4DAB0400CD7661 /* ResearchKit.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -350,6 +340,7 @@
 		6EB7401B1E9CFAD700A4C773 /* 01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 01.png; sourceTree = "<group>"; };
 		6EB740251E9D028000A4C773 /* FetalKickIntroStepViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FetalKickIntroStepViewController.swift; sourceTree = "<group>"; };
 		6EB740271E9D1F8700A4C773 /* 03.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 03.png; sourceTree = "<group>"; };
+		6EB767731FBEDBFA00E3095E /* ResearchKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = ResearchKit.xcodeproj; sourceTree = "<group>"; };
 		6EBC2E751E94FB5300828CA1 /* StudyDashboardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudyDashboardViewController.swift; sourceTree = "<group>"; };
 		6EBC2E761E94FB5300828CA1 /* StudyDashboard.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = StudyDashboard.plist; sourceTree = "<group>"; };
 		6EBC2E771E94FB5300828CA1 /* StudyDashboardActivityCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudyDashboardActivityCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -417,7 +408,6 @@
 		6EED7B3A1E65751D002C1FA3 /* FetalKickCounterStepViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FetalKickCounterStepViewController.swift; sourceTree = "<group>"; };
 		6EED7B3C1E65752C002C1FA3 /* FetalKickCounterTask.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FetalKickCounterTask.swift; sourceTree = "<group>"; };
 		6EF0466A1ED1C943008098BB /* DBNotification.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DBNotification.swift; sourceTree = "<group>"; };
-		6EF05A8A1E4DAAFB00CD7661 /* ResearchKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = ResearchKit.xcodeproj; sourceTree = "<group>"; };
 		6EF05A981E4DC36400CD7661 /* StepProvider.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = StepProvider.plist; sourceTree = "<group>"; };
 		6EF2FCEE1E72CDE900B5F212 /* LeftMenuResourceTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LeftMenuResourceTableViewCell.swift; sourceTree = "<group>"; };
 		6EF748BE1E69645700F1E89E /* LatestActive_Taskdocument.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = LatestActive_Taskdocument.json; sourceTree = "<group>"; };
@@ -509,7 +499,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				6EEBA47A1F25FAA100FB0258 /* HealthKit.framework in Frameworks */,
-				6EF05A941E4DAB0400CD7661 /* ResearchKit.framework in Frameworks */,
 				2F2CF29CD5359B994C8987E7 /* Pods_FDA.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -637,7 +626,7 @@
 		6E7D2D4D1E433E8700763D4C = {
 			isa = PBXGroup;
 			children = (
-				6EF05A8A1E4DAAFB00CD7661 /* ResearchKit.xcodeproj */,
+				6EB767731FBEDBFA00E3095E /* ResearchKit.xcodeproj */,
 				6E7D2D581E433E8700763D4C /* FDA */,
 				6E7D2D6D1E433E8800763D4C /* FDATests */,
 				6E7D2D781E433E8800763D4C /* FDAUITests */,
@@ -800,6 +789,15 @@
 				6EB740251E9D028000A4C773 /* FetalKickIntroStepViewController.swift */,
 			);
 			path = FetalKickIntroStepViewController;
+			sourceTree = "<group>";
+		};
+		6EB767741FBEDBFA00E3095E /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				6EB7677A1FBEDBFB00E3095E /* ResearchKit.framework */,
+				6EB7677C1FBEDBFB00E3095E /* ResearchKitTests.xctest */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 		6EBC8A271E8112B80020F9E6 /* EligibilityUI */ = {
@@ -1096,15 +1094,6 @@
 			path = FetalKickCounterStep;
 			sourceTree = "<group>";
 		};
-		6EF05A8B1E4DAAFB00CD7661 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				6EF05A911E4DAAFB00CD7661 /* ResearchKit.framework */,
-				6EF05A931E4DAAFB00CD7661 /* ResearchKitTests.xctest */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		941909B11E52FA78001B01C5 /* StudyModel */ = {
 			isa = PBXGroup;
 			children = (
@@ -1373,7 +1362,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				6EF05A971E4DAB0400CD7661 /* PBXTargetDependency */,
 			);
 			name = FDA;
 			productName = FDA;
@@ -1512,8 +1500,8 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
-					ProductGroup = 6EF05A8B1E4DAAFB00CD7661 /* Products */;
-					ProjectRef = 6EF05A8A1E4DAAFB00CD7661 /* ResearchKit.xcodeproj */;
+					ProductGroup = 6EB767741FBEDBFA00E3095E /* Products */;
+					ProjectRef = 6EB767731FBEDBFA00E3095E /* ResearchKit.xcodeproj */;
 				},
 			);
 			projectRoot = "";
@@ -1526,18 +1514,18 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		6EF05A911E4DAAFB00CD7661 /* ResearchKit.framework */ = {
+		6EB7677A1FBEDBFB00E3095E /* ResearchKit.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
 			path = ResearchKit.framework;
-			remoteRef = 6EF05A901E4DAAFB00CD7661 /* PBXContainerItemProxy */;
+			remoteRef = 6EB767791FBEDBFB00E3095E /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		6EF05A931E4DAAFB00CD7661 /* ResearchKitTests.xctest */ = {
+		6EB7677C1FBEDBFB00E3095E /* ResearchKitTests.xctest */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.cfbundle;
 			path = ResearchKitTests.xctest;
-			remoteRef = 6EF05A921E4DAAFB00CD7661 /* PBXContainerItemProxy */;
+			remoteRef = 6EB7677B1FBEDBFB00E3095E /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -1980,11 +1968,6 @@
 			isa = PBXTargetDependency;
 			target = 6E7D2D551E433E8700763D4C /* FDA */;
 			targetProxy = 6E7D2D761E433E8800763D4C /* PBXContainerItemProxy */;
-		};
-		6EF05A971E4DAB0400CD7661 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = ResearchKit;
-			targetProxy = 6EF05A961E4DAB0400CD7661 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 

@@ -44,7 +44,7 @@ typedef NS_ENUM(NSInteger, ORKPageNavigationDirection) {
     ORKPageNavigationDirectionReverse = -1
 } ORK_ENUM_AVAILABLE;
 
-@interface  ORKPageStepViewController () <UIPageViewControllerDelegate, ORKStepViewControllerDelegate>
+@interface ORKPageStepViewController () <UIPageViewControllerDelegate, ORKStepViewControllerDelegate>
 
 @property (nonatomic, readonly) ORKPageResult *initialResult;
 @property (nonatomic, readonly) ORKPageResult *pageResult;
@@ -53,6 +53,7 @@ typedef NS_ENUM(NSInteger, ORKPageNavigationDirection) {
 @property (nonatomic, readonly) ORKStepViewController *currentStepViewController;
 
 @end
+
 
 @implementation ORKPageStepViewController
 
@@ -168,7 +169,8 @@ typedef NS_ENUM(NSInteger, ORKPageNavigationDirection) {
 
 - (ORKStepResult *)result {
     ORKStepResult *result = [super result];
-    result.results = [self.pageResult flattenResults];
+    NSArray *pageResults = [self.pageResult flattenResults];
+    result.results = [result.results arrayByAddingObjectsFromArray:pageResults] ? : pageResults;
     return result;
 }
 

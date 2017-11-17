@@ -76,7 +76,6 @@ typedef void (^_ORKLocationAuthorizationRequestHandler)(BOOL success);
     CLLocationManager *_manager;
     _ORKLocationAuthorizationRequestHandler _handler;
     BOOL _started;
-    
 }
 
 - (instancetype)initWithHandler:(_ORKLocationAuthorizationRequestHandler)handler {
@@ -151,7 +150,7 @@ static void *_ORKViewControllerToolbarObserverContext = &_ORKViewControllerToolb
 
 - (instancetype)initWithTargetViewController:(UIViewController *)target delegate:(id <ORKViewControllerToolbarObserverDelegate>)delegate {
     return [super initWithTarget:target
-                        keyPaths:@[@"navigationItem.leftBarButtonItem", @"navigationItem.rightBarButtonItem", @"toolbarItems", @"navigationItem.title", @"navigationItem.titleView"]
+                        keyPaths:@[ @"navigationItem.leftBarButtonItem", @"navigationItem.rightBarButtonItem", @"toolbarItems", @"navigationItem.title", @"navigationItem.titleView" ]
                         delegate:delegate
                           action:@selector(collectToolbarItemsFromViewController:)
                          context:_ORKViewControllerToolbarObserverContext];
@@ -958,7 +957,7 @@ static NSString *const _ChildNavigationControllerRestorationKey = @"childNavigat
     if ([self shouldDisplayProgressLabel]) {
         ORKTaskProgress progress = [_task progressOfCurrentStep:viewController.step withResult:[self result]];
         if (progress.total > 0) {
-            progressLabel = [NSString stringWithFormat:ORKLocalizedString(@"STEP_PROGRESS_FORMAT", nil) ,ORKLocalizedStringFromNumber(@(progress.current+1)), ORKLocalizedStringFromNumber(@(progress.total))];
+            progressLabel = [NSString localizedStringWithFormat:ORKLocalizedString(@"STEP_PROGRESS_FORMAT", nil) ,ORKLocalizedStringFromNumber(@(progress.current+1)), ORKLocalizedStringFromNumber(@(progress.total))];
         }
     }
     

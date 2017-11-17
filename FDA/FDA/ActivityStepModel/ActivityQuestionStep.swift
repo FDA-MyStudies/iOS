@@ -684,7 +684,7 @@ class ActivityQuestionStep: ActivityStep {
                         
                         
                     
-                    let answerFormat = ORKAnswerFormat.textAnswerFormat()
+                      var answerFormat = ORKAnswerFormat.textAnswerFormat()
                     
                     if Utilities.isValidValue(someObject:formatDict?[kStepQuestionTextMaxLength] as AnyObject?){
                          answerFormat.maximumLength = formatDict?[kStepQuestionTextMaxLength] as! Int
@@ -694,12 +694,24 @@ class ActivityQuestionStep: ActivityStep {
                     }
                     
                     if Utilities.isValidValue(someObject:formatDict?[kStepQuestionTextValidationRegex] as AnyObject?) && Utilities.isValidValue(someObject:formatDict?[kStepQuestionTextInvalidMessage] as AnyObject?){
-                        answerFormat.validationRegex = formatDict?[kStepQuestionTextValidationRegex] as? String
+                      
+                      var regex:NSRegularExpression? = nil
+                      do
+                      {
+                        regex = try NSRegularExpression.init(pattern:(formatDict?[kStepQuestionTextValidationRegex] as? String)! , options: [])
+                      }
+                      catch{
                         
-                         answerFormat.invalidMessage = formatDict?[kStepQuestionTextInvalidMessage] as? String
+                      }
+                      if regex != nil{
+                        answerFormat = ORKAnswerFormat.textAnswerFormat(withValidationRegularExpression: regex!, invalidMessage: (formatDict?[kStepQuestionTextInvalidMessage] as? String)!)
+                      }
+                      
+                        //answerFormat.validationRegex = formatDict?[kStepQuestionTextValidationRegex] as? String
+                        // answerFormat.invalidMessage = formatDict?[kStepQuestionTextInvalidMessage] as? String
                     }
                     else{
-                        answerFormat.validationRegex = nil
+                        //answerFormat.validationRegex = nil
                         answerFormat.invalidMessage = nil
                     }
                     

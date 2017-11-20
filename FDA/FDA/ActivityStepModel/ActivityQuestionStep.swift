@@ -588,7 +588,7 @@ class ActivityQuestionStep: ActivityStep {
                         }
                         else{
                         
-                        if minValue != nil && maxValue != nil {
+                        if minValue != nil || maxValue != nil {
                             
                             questionStepAnswerFormat = ORKNumericAnswerFormat.init(style: ORKNumericAnswerStyle.integer, unit: localizedQuestionStepAnswerFormatUnit, minimum: minValue , maximum: maxValue)
                             
@@ -613,7 +613,7 @@ class ActivityQuestionStep: ActivityStep {
                         }
                         else{
                         
-                        if minValue != nil && maxValue != nil {
+                        if minValue != nil || maxValue != nil {
                             questionStepAnswerFormat = ORKNumericAnswerFormat.init(style: ORKNumericAnswerStyle.decimal, unit: localizedQuestionStepAnswerFormatUnit, minimum: minValue , maximum: maxValue)
                         }
                         else{

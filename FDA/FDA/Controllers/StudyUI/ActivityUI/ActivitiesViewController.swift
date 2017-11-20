@@ -347,8 +347,8 @@ class ActivitiesViewController : UIViewController{
         
        // Labkey_Activity_Latest
         //Labkey_Activity
-        /*
-         let filePath  = Bundle.main.path(forResource: "Labkey_Activity_Latest3", ofType: "json")
+      /*
+         let filePath  = Bundle.main.path(forResource: "Labkey_Activity_Latest", ofType: "json")
          
          //let filePath  = Bundle.main.path(forResource: "FetalKickTest", ofType: "json")
          
@@ -362,8 +362,8 @@ class ActivitiesViewController : UIViewController{
          catch let error as NSError{
          print("\(error)")
          }
+ 
         */
-        
         
         
         IQKeyboardManager.sharedManager().enable = false

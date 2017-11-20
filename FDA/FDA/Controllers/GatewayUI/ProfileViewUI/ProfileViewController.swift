@@ -982,9 +982,10 @@ extension ProfileViewController:ORKTaskViewControllerDelegate{
         
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         appDelegate.appIsResignedButDidNotEnteredBackground = false
-
+      
+        let localTaskViewcontroller =  taskViewController
         self.dismiss(animated: true, completion: {
-            
+          localTaskViewcontroller.view.endEditing(true)
         })
     }
     

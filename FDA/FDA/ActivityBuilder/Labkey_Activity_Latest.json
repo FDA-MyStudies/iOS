@@ -958,6 +958,159 @@
                   
                   }
                   
+                  },
+                  {
+                  
+                  "type": "question",
+                  
+                  "resultType": "date",
+                  
+                  "key": "QR4_QDateTest",
+                  
+                  "title": "Q7",
+                  
+                  "text": "QDesc7",
+                  
+                  "skippable": true,
+                  
+                  "groupName": "",
+                  
+                  "repeatable": false,
+                  
+                  "repeatableText": "",
+                  
+                  "destinations": [
+                                   
+                                   {
+                                   
+                                   "condition": "",
+                                   "operator" : "",
+                                   "destination": "QR4_QDateTest2"
+                                   
+                                   }
+                                   
+                                   ],
+                  
+                  "healthDataKey": "",
+                  
+                  "format": {
+                  
+                  "style": "Date",
+                  
+                  "minDate": "2017-04-17T00:00:00.000-0400",
+                  
+                  "maxDate": "2017-04-18T00:00:00.000-0400",
+                  
+                  "default": "2017-04-18T00:00:00.000-0400",
+                  "dateRange": ""
+                  },
+                  
+                  "steps": [],
+                  
+                  "options": []
+                  
+                  },
+                  {
+                  
+                  "type": "question",
+                  
+                  "resultType": "date",
+                  
+                  "key": "QR4_QDateTest2",
+                  
+                  "title": "Q7",
+                  
+                  "text": "QDesc7",
+                  
+                  "skippable": true,
+                  
+                  "groupName": "",
+                  
+                  "repeatable": false,
+                  
+                  "repeatableText": "",
+                  
+                  "destinations": [
+                                   
+                                   {
+                                   
+                                   "condition": "",
+                                   "operator" : "",
+                                   "destination": "QR4_QDateTest3"
+                                   
+                                   }
+                                   
+                                   ],
+                  
+                  "healthDataKey": "",
+                  
+                  "format": {
+                  
+                  "style": "Date",
+                  
+                  "minDate": "2017-04-17T00:00:00.000-0400",
+                  
+                  "maxDate": "2017-04-18T00:00:00.000-0400",
+                  
+                  "default": "2017-04-18T00:00:00.000-0400",
+                  "dateRange": "untilCurrent"
+                  },
+                  
+                  "steps": [],
+                  
+                  "options": []
+                  
+                  },
+                  {
+                  
+                  "type": "question",
+                  
+                  "resultType": "date",
+                  
+                  "key": "QR4_QDateTest3",
+                  
+                  "title": "Q7",
+                  
+                  "text": "QDesc7",
+                  
+                  "skippable": true,
+                  
+                  "groupName": "",
+                  
+                  "repeatable": false,
+                  
+                  "repeatableText": "",
+                  
+                  "destinations": [
+                                   
+                                   {
+                                   
+                                   "condition": "",
+                                   "operator" : "",
+                                   "destination": ""
+                                   
+                                   }
+                                   
+                                   ],
+                  
+                  "healthDataKey": "",
+                  
+                  "format": {
+                  
+                  "style": "Date",
+                  
+                  "minDate": "2017-04-17T00:00:00.000-0400",
+                  
+                  "maxDate": "2018-04-18T00:00:00.000-0400",
+                  
+                  "default": "2017-12-20T00:00:00.000-0400",
+                  "dateRange": "afterCurrent"
+                  },
+                  
+                  "steps": [],
+                  
+                  "options": []
+                  
                   }
                   
                   ]

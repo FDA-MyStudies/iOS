@@ -104,6 +104,7 @@ let kStepQuestionDateStyle = "style"
 let kStepQuestionDateMinDate = "minDate"
 let kStepQuestionDateMaxDate = "maxDate"
 let kStepQuestionDateDefault = "default"
+let kStepQuestionDateRange = "dateRange"
 let kStepQuestionDateStyleDate = "Date"
 let kStepQuestionDateStyleDateTime = "Date-Time"
 
@@ -134,6 +135,13 @@ let kStepQuestionHeightPlaceholder = "placeholder"
 
 let kStepQuestionLocationUseCurrentLocation = "useCurrentLocation"
 
+
+enum DateRange:String{
+  case untilCurrent = "untilCurrent"
+  case afterCurrent = "afterCurrent"
+  case custom = "custom"
+  case defaultValue = ""
+}
 
 enum DateStyle:String{
     case date = "Date"
@@ -628,8 +636,7 @@ class ActivityQuestionStep: ActivityStep {
                 
                 
             case .date:
-                
-                
+              
                 if  Utilities.isValidValue(someObject:formatDict?[kStepQuestionDateStyle] as AnyObject?)
                     //&&  Utilities.isValidValue(someObject:formatDict?[kStepQuestionDateMinDate] as AnyObject?)
                     //&&  Utilities.isValidValue(someObject:formatDict?[kStepQuestionDateMaxDate] as AnyObject?)
@@ -640,12 +647,27 @@ class ActivityQuestionStep: ActivityStep {
                     let dateFormatter = DateFormatter()
                     dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
                     
+                  
+                  var dateRange:DateRange? = DateRange.defaultValue
+                  
+                  if Utilities.isValidValue(someObject:formatDict?[kStepQuestionDateRange] as AnyObject?) {
                     
-                    
+                    dateRange = DateRange.init(rawValue: formatDict?[kStepQuestionDateRange] as! String)
+                  }
+                  
                     let defaultDate:NSDate? = dateFormatter.date(from: formatDict?[kStepQuestionDateDefault] as! String) as NSDate?
-                    let minimumDate:NSDate? = dateFormatter.date(from: formatDict?[kStepQuestionDateMinDate] as! String) as NSDate?
-                    let maximumDate:NSDate? = dateFormatter.date(from: formatDict?[kStepQuestionDateMaxDate] as! String) as NSDate?
-                    
+                    var minimumDate:NSDate? = dateFormatter.date(from: formatDict?[kStepQuestionDateMinDate] as! String) as NSDate?
+                    var maximumDate:NSDate? = dateFormatter.date(from: formatDict?[kStepQuestionDateMaxDate] as! String) as NSDate?
+                  
+                  switch dateRange! {
+                  case .untilCurrent:
+                    maximumDate = Date.init(timeIntervalSinceNow: 0) as NSDate
+                  case .afterCurrent:
+                    minimumDate = Date.init(timeIntervalSinceNow: 0) as NSDate
+                  case .defaultValue: break
+                  case .custom: break
+                  }
+                  
                     
                     switch  DateStyle(rawValue:formatDict?[kStepQuestionDateStyle] as! String)! as DateStyle{
                         

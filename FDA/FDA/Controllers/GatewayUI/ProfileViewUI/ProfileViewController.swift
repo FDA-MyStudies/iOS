@@ -875,6 +875,7 @@ extension ProfileViewController:NMWebServiceDelegate {
         self.removeProgressIndicator()
         
         if error.code == 403 { //unauthorized
+          
             UIUtilities.showAlertMessageWithActionHandler(kErrorTitle, message: error.localizedDescription, buttonTitle: kTitleOk, viewControllerUsed: self, action: {
                 self.fdaSlideMenuController()?.navigateToHomeAfterUnauthorizedAccess()
             })
@@ -899,11 +900,8 @@ extension ProfileViewController: ORKPasscodeDelegate {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         appDelegate.appIsResignedButDidNotEnteredBackground = false
 
-        
-        self.dismiss(animated: true, completion: {
-            self.setInitialDate()
-            
-        })
+        self.perform(#selector(dismissTaskViewController), with: self, afterDelay: 1)
+         self.setInitialDate()
     }
     
     func passcodeViewControllerDidFailAuthentication(_ viewController: UIViewController) {

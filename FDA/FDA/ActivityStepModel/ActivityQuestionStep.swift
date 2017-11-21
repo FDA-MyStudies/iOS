@@ -663,7 +663,7 @@ class ActivityQuestionStep: ActivityStep {
                   case .untilCurrent:
                     maximumDate = Date.init(timeIntervalSinceNow: 0) as NSDate
                   case .afterCurrent:
-                    minimumDate = Date.init(timeIntervalSinceNow: 0) as NSDate
+                    minimumDate = Date.init(timeIntervalSinceNow: 86400) as NSDate
                   case .defaultValue: break
                   case .custom: break
                   }

@@ -1378,6 +1378,9 @@ extension StudyHomeViewController:ORKTaskViewControllerDelegate{
                    return nil
                 }
                 else{
+                  
+                  
+                  
                     self.dismiss(animated: true, completion: {
                          UIUtilities.showAlertWithTitleAndMessage(title: "Message", message: NSLocalizedString(kShareConsentFailureAlert, comment: "") as NSString)
                     })

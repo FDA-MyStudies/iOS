@@ -1007,8 +1007,13 @@ extension UserServices:NMWebServiceDelegate{
       
         if User.currentUser.refreshToken == ""{
           //Unauthorized Access
-          let localError  = NSError.init(domain: error.domain, code: 403, userInfo: error.userInfo)
           
+          //error.localizedDescription = "Your Session is Expired"
+          
+          let errorInfo = ["NSLocalizedDescription": "Your Session is Expired"]
+          
+          var localError  = NSError.init(domain: error.domain, code: 403, userInfo: errorInfo)
+         
           if delegate != nil {
             delegate.failedRequest(manager, requestName: requestName, error: localError)
           }
@@ -1024,7 +1029,15 @@ extension UserServices:NMWebServiceDelegate{
       }else {
         
         if delegate != nil {
-            delegate.failedRequest(manager, requestName: requestName, error: error)
+          
+          var errorInfo = error.userInfo
+           var localError = error
+          if error.code == 403{
+              errorInfo = ["NSLocalizedDescription": "Your Session is Expired"]
+              localError  = NSError.init(domain: error.domain, code: 403, userInfo: errorInfo)
+          }
+         
+            delegate.failedRequest(manager, requestName: requestName, error: localError)
         }
         
         //handle failed request due to network connectivity

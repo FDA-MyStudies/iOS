@@ -130,7 +130,7 @@ class FetalKickCounterStepViewController:  ORKStepViewController {
                 
                 print("difference \(differenceInSec)")
                 //Setting the maximum time allowed for the task
-                 self.totalTime =     step.counDownTimer! //10
+                 self.totalTime =     10//step.counDownTimer! //10
             
                 //Setting the maximum Kicks allowed
                 self.maxKicksAllowed = step.totalCounts!
@@ -253,7 +253,7 @@ class FetalKickCounterStepViewController:  ORKStepViewController {
                        
                     }
                     else{
-                    
+                    self.editCounterButton?.isHidden = false
                     self.setTimerValue()
                     
                     }
@@ -504,7 +504,8 @@ class FetalKickCounterStepViewController:  ORKStepViewController {
                 
                 print("values = \(values)")
                 print("indexes = \(indexes)")
-            
+          
+          
             let result:Array<String> =  (indexes as! Array<String>)
             let hours = result.first?.components(separatedBy: CharacterSet.init(charactersIn: " h"))
             let minutes = result[1].components(separatedBy: CharacterSet.init(charactersIn: " m"))
@@ -516,11 +517,25 @@ class FetalKickCounterStepViewController:  ORKStepViewController {
             let secondsValue:Int = seconds?.count != 0 ? Int(seconds!.first!)! : 0
             
             self.timerValue = hoursValue * 3600 + minuteValue * 60 + secondsValue
+          
+          if hoursValue * 3600 + minuteValue * 60 + secondsValue > self.totalTime!{
             
-            self.setTimerValue()
+            let hours = Int(self.timerValue!) / 3600
+            let minutes = Int(self.timerValue!) / 60 % 60
+            let seconds = Int(self.timerValue!) % 60
             
-           
+            let value = (hours < 10 ? "0\(hours):" : "\(hours):") + (minutes < 10 ? "0\(minutes):" : "\(minutes):")   + (seconds < 10 ? "0\(seconds)" : "\(seconds)")
+            
+            Utilities.showAlertWithTitleAndMessage(title: kMessage as NSString, message: ("Please Select a valid time(Max " + value + ")") as NSString)
+          }
+          else{
+             self.setTimerValue()
+          }
+          
                 print("picker = \(picker)")
+          
+          
+          
                 return
         }, cancel: { ActionMultipleStringCancelBlock in return }, origin: sender)
         

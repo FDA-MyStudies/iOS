@@ -1309,12 +1309,13 @@ extension ActivitiesViewController:ORKTaskViewControllerDelegate{
                                 
                                 if fetalKickResult != nil{
                                     
-                                    let value = Float((fetalKickResult?.totalKickCount)!)
+                                    let value = Float((fetalKickResult?.duration)!)/60
+                                    let kickcount = Float((fetalKickResult?.totalKickCount)!)
                                     let dict = ActivityBuilder.currentActivityBuilder.activity?.steps?.first!
                                     let key = dict?[kActivityStepKey] as! String
                                     
                                     
-                                    DBHandler.saveStatisticsDataFor(activityId: (activity?.actvityId)!, key: key, data:value,date:Date())
+                                    DBHandler.saveStatisticsDataFor(activityId: (activity?.actvityId)!, key: key, data:value,fkDuration:Int(kickcount), date:Date())
                                     
                                     
                                     
@@ -1420,7 +1421,7 @@ extension ActivitiesViewController:ORKTaskViewControllerDelegate{
                     
                     if let value1 = activityStepResult?.value as? NSNumber {
                         let value = value1.floatValue
-                        DBHandler.saveStatisticsDataFor(activityId: (activity?.actvityId)!, key: (activityStepResult?.key)!, data:value,date:Date())
+                        DBHandler.saveStatisticsDataFor(activityId: (activity?.actvityId)!, key: (activityStepResult?.key)!, data:value,fkDuration: 0,date:Date())
                     }
                     
                 }

@@ -136,6 +136,7 @@ class DBCharts :Object {
 class DBStatisticsData : Object {
     dynamic var startDate:Date?
     dynamic var data:Float = 0.0
+    dynamic var fkDuration:Int = 0
 }
 
 class DBResources:Object {

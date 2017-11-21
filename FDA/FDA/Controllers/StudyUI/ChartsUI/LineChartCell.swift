@@ -596,11 +596,13 @@ class LineChartCell: GraphChartTableViewCell {
                 
                 let data = dataList[i]
                 let responseDate = data.startDate
+                let fk = data.fkDuration
                 let day = LineChartCell.shortDateFormatter.string(from: responseDate!)
                 print("day \(day)")
                 let value = data.data
                 
                 points[Int(day)! - 1] = ORKValueRange(value:Double(value))
+                self.replaceXTitleForActiveTask(value: fk, atIndex: (Int(day)! - 1))
                 
             }
         }
@@ -633,6 +635,7 @@ class LineChartCell: GraphChartTableViewCell {
                 
                 let data = dataList[i]
                 let responseDate = data.startDate
+                let fk = data.fkDuration
                 let day = LineChartCell.shortDayFormatter.string(from: responseDate!)
                 //print("day \(day)")
                 let value = data.data
@@ -642,21 +645,13 @@ class LineChartCell: GraphChartTableViewCell {
                 //print("index \(currentDay.dayIndex)")
                 
                 points[currentDay.dayIndex - 1] = ORKValueRange(value:Double(value))
+                 self.replaceXTitleForActiveTask(value: fk, atIndex: (currentDay.dayIndex - 1))
                 
             }
         }
         
         
-//        for i in 1...xAxisTitles.count{
-//            
-//            if array.count >= i {
-//                let value = array[i-1]
-//                points.append(ORKValueRange(value:Double(value)))
-//            }
-//            else {
-//                points.append(ORKValueRange())
-//            }
-//        }
+
         plotPoints.append(points)
         
         self.graphView.reloadData()
@@ -680,11 +675,13 @@ class LineChartCell: GraphChartTableViewCell {
                 
                 let data = dataList[i]
                 let responseDate = data.startDate
+                let fk = data.fkDuration
                 let month = LineChartCell.shortMonthFormatter.string(from: responseDate!)
                 //print("month \(month)")
                 let value = data.data
                 //points.insert(ORKValueRange(value:Double(value)), at: Int(month)!)
                 points[Int(month)! - 1] = ORKValueRange(value:Double(value))
+                self.replaceXTitleForActiveTask(value: fk, atIndex: (Int(month)! - 1))
               
             }
         }
@@ -721,12 +718,14 @@ class LineChartCell: GraphChartTableViewCell {
             for i in 0...dataList.count-1 {
                 
                 let data = dataList[i]
+                let fk = data.fkDuration
                 let responseDate = data.startDate
                 let week = self.getWeekNumber(date: responseDate!)
                 //print("month \(month)")
                 let value = data.data
                 //points.insert(ORKValueRange(value:Double(value)), at: Int(month)!)
                 points[week - 1] = ORKValueRange(value:Double(value))
+                 self.replaceXTitleForActiveTask(value: fk, atIndex: (week - 1))
                 
             }
         }
@@ -765,12 +764,15 @@ class LineChartCell: GraphChartTableViewCell {
                     for j in 0...dataList.count-1 {
                         let data = dataList[j]
                         let value = data.data
+                        let fk = data.fkDuration
                         
                         let dateAsString = LineChartCell.dailyFormatter.string(from: data.startDate!)
                         let responseDate = LineChartCell.dailyFormatter2.date(from: dateAsString)
                         
                         if (responseDate! > runStartTime! && responseDate! < endTime!) {
                             points[i] = ORKValueRange(value:Double(value))
+                            self.replaceXTitleForActiveTask(value: fk, atIndex: i)
+                           
                         }
                     }
                 }
@@ -783,24 +785,7 @@ class LineChartCell: GraphChartTableViewCell {
             
         }
         
-//        if ((charActivity?.frequencyRuns?.count)! > 0){
-//            
-//            for i in 0...(charActivity?.frequencyRuns?.count)! - 1 {
-//                if array.count > i {
-//                    let value = array[i]
-//                    points.append(ORKValueRange(value:Double(value)))
-//                }
-//                else {
-//                    points.append(ORKValueRange())
-//                }
-//                
-//                
-//                //x axis title
-//                xAxisTitles.append(String(i+1))
-//                
-//            }
-//            
-//        }
+ 
         plotPoints.append(points)
         
         self.graphView.reloadData()
@@ -819,17 +804,22 @@ class LineChartCell: GraphChartTableViewCell {
             
             for i in 0...(runs.count - 1) {
                 
+                //x axis title
+                xAxisTitles.append(String(i+1))
+                
                 if array.count > i {
-                    let value = array[i]
+                    let data = dataList[i]
+                    let value = data.data
+                    let fk = data.fkDuration
                     points.append(ORKValueRange(value:Double(value)))
+                    self.replaceXTitleForActiveTask(value: fk, atIndex: i)
                 }
                 else {
                     points.append(ORKValueRange())
                 }
                 
                 
-                //x axis title
-                xAxisTitles.append(String(i+1))
+                
                 
             }
             
@@ -838,6 +828,15 @@ class LineChartCell: GraphChartTableViewCell {
         self.graphView.reloadData()
     }
     
+    func replaceXTitleForActiveTask(value:Int,atIndex:Int){
+        
+        if charActivity?.type == .activeTask {
+            var title = xAxisTitles[atIndex] as! String
+            title = title + "\n" + "\(value)"
+            xAxisTitles[atIndex] = title
+        }
+       
+    }
     
     //MARK: - FORMATERS
     private static let formatter: DateFormatter = {
@@ -927,8 +926,8 @@ extension LineChartCell:ORKValueRangeGraphChartViewDataSource{
     }
     
     func graphChartView(_ graphChartView: ORKGraphChartView, titleForXAxisAtPointIndex pointIndex: Int) -> String? {
-       
-        return xAxisTitles[pointIndex] as? String
+        let point = xAxisTitles[pointIndex] as? String
+        return point!
     }
     
     func graphChartView(_ graphChartView: ORKGraphChartView, drawsPointIndicatorsForPlotIndex plotIndex: Int) -> Bool {

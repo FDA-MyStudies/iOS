@@ -160,7 +160,7 @@ class StudyDashboardViewController : UIViewController{
             let activity = Study.currentStudy?.activities.filter({$0.actvityId == activityId}).first
             var keys = details?["keys"]
             if activity?.type == ActivityType.activeTask {
-                keys = "\"count\""
+                keys = "\"count\",duration"
                 tableName = activityId!+activityId!
             }
             let participantId = Study.currentStudy?.userParticipateState.participantId
@@ -190,7 +190,7 @@ class StudyDashboardViewController : UIViewController{
                      let localDateAsString = StudyDashboardViewController.localDateFormatter.string(from: date!)
                     
                      let localDate = StudyDashboardViewController.localDateFormatter.date(from: localDateAsString)
-                     DBHandler.saveStatisticsDataFor(activityId: activityId!, key: key!, data:responseValue ,date:localDate!)
+                    DBHandler.saveStatisticsDataFor(activityId: activityId!, key: key!, data:responseValue, fkDuration:0,date:localDate!)
                 }
                 
                 

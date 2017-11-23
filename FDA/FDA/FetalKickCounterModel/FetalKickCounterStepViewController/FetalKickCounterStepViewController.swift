@@ -130,7 +130,7 @@ class FetalKickCounterStepViewController:  ORKStepViewController {
                 
                 print("difference \(differenceInSec)")
                 //Setting the maximum time allowed for the task
-                 self.totalTime =     10//step.counDownTimer! //10
+                 self.totalTime = step.counDownTimer! //10
             
                 //Setting the maximum Kicks allowed
                 self.maxKicksAllowed = step.totalCounts!
@@ -247,7 +247,7 @@ class FetalKickCounterStepViewController:  ORKStepViewController {
                 
                 DispatchQueue.main.async{
                     
-                    if self.timerValue == self.totalTime{
+                    if self.timerValue! > self.totalTime!{
                     self.setResults()
                     self.showAlertOnCompletion()
                        
@@ -357,7 +357,7 @@ class FetalKickCounterStepViewController:  ORKStepViewController {
             secondsArray.append("\(i)" + " s")
             i += 1
         }
-        i = hoursMax
+        i = hoursMax + 1
         while i <= 59{
             minutesArray.append("\(i)" + " m")
             secondsArray.append("\(i)" + " s")
@@ -518,36 +518,28 @@ class FetalKickCounterStepViewController:  ORKStepViewController {
             
             self.timerValue = hoursValue * 3600 + minuteValue * 60 + secondsValue
           
-          if hoursValue * 3600 + minuteValue * 60 + secondsValue > self.totalTime!{
+          if hoursValue * 3600 + minuteValue * 60 + secondsValue >= self.totalTime!{
             
-            let hours = Int(self.timerValue!) / 3600
-            let minutes = Int(self.timerValue!) / 60 % 60
-            let seconds = Int(self.timerValue!) % 60
+            let hours = Int(self.totalTime!) / 3600
+            let minutes = Int(self.totalTime!) / 60 % 60
+            let seconds = Int(self.totalTime!) % 60
             
             let value = (hours < 10 ? "0\(hours):" : "\(hours):") + (minutes < 10 ? "0\(minutes):" : "\(minutes):")   + (seconds < 10 ? "0\(seconds)" : "\(seconds)")
             
-            Utilities.showAlertWithTitleAndMessage(title: kMessage as NSString, message: ("Please Select a valid time(Max " + value + ")") as NSString)
+            Utilities.showAlertWithTitleAndMessage(title: kMessage as NSString, message: ("Please select a valid time(Max " + value + ")") as NSString)
           }
           else{
              self.setTimerValue()
           }
-          
                 print("picker = \(picker)")
-          
-          
-          
                 return
         }, cancel: { ActionMultipleStringCancelBlock in return }, origin: sender)
-        
-        
+      
         acp?.setTextColor(kUIColorForSubmitButtonBackground)
         acp?.pickerBackgroundColor = UIColor.white
         acp?.toolbarBackgroundColor = UIColor.white
         acp?.toolbarButtonsColor = kUIColorForSubmitButtonBackground
         acp?.show()
-        
-        
-        
     }
 }
 

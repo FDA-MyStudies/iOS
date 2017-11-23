@@ -14,7 +14,7 @@ let kLeftMenuTitle = "menuTitle"
 let kLeftMenuIconName = "iconName"
 let kLeftMenuCellTitleHome = "Home"
 let kLeftMenuCellTitleResources = "Resources"
-let kLeftMenuCellTitleProfile = "Profile"
+let kLeftMenuCellTitleProfile = "My Account"
 let kLeftMenuCellTitleSignIn = "Sign In"
 let kLeftMenuCellTitleNewUser = "New User?"
 let kLeftMenuCellSubTitleValue = "Sign up"
@@ -146,7 +146,7 @@ class LeftMenuViewController : UIViewController, LeftMenuProtocol {
         ]
         
         if user.userType == .FDAUser {
-            menus.append(["menuTitle":"Profile",
+            menus.append(["menuTitle":"My Account",
                           "iconName":"profile_menu1"])
             menus.append(["menuTitle":"Reach Out",
                           "iconName":"reachout_menu1"])
@@ -190,7 +190,7 @@ class LeftMenuViewController : UIViewController, LeftMenuProtocol {
         
         let user = User.currentUser
         if user.userType == .FDAUser {
-            menus.append(["menuTitle":"Profile",
+            menus.append(["menuTitle":"My Account",
                           "iconName":"profile_menu1"])
             self.tableView.tableFooterView?.isHidden = false
         }

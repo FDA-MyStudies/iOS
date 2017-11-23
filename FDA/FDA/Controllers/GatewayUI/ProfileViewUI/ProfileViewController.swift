@@ -24,7 +24,7 @@ let kProfileAlertUpdatedText = "Profile updated Successfully."
 
 let signupCellLastIndex = 2
 
-let kProfileTitleText = "PROFILE"
+let kProfileTitleText = "My Account"
 
 let kSignOutText = "Sign Out"
 let kLabelName = "LabelName"

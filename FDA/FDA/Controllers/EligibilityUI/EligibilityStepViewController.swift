@@ -172,10 +172,10 @@ extension EligibilityStepViewController:NMWebServiceDelegate {
         Logger.sharedInstance.info("requestname : \(requestName)")
         
         self.removeProgressIndicator()
-        
-        if error.localizedDescription.localizedCaseInsensitiveContains(tokenTextField.text!){
-            
-            self.showAlert(message: kMessageInvalidTokenOrIfStudyDoesNotExist) //kMessageForInvalidToken
+    if error.localizedDescription.localizedCaseInsensitiveContains(tokenTextField.text!){
+      
+     
+      self.showAlert(message: kMessageInvalidTokenOrIfStudyDoesNotExist) //kMessageForInvalidToken
             
         }
         else{

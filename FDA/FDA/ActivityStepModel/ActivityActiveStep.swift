@@ -341,7 +341,7 @@ class ActivityActiveStep: ActivityStep {
                                                                 maximumConsecutiveFailures: formatDict?[kActiveSpatialSpanMemoryMaximumConsecutiveFailures] as! Int,
                                                                 customTargetImage:image ,
                                                                 customTargetPluralName: formatDict?[kActiveSpatialSpanMemoryCustomTargetPluralName] as! String?,
-                                                                requireReversal: ((formatDict?[kActiveSpatialSpanMemoryRequireReversal]) != nil),
+                                                                requireReversal: (formatDict?[kActiveSpatialSpanMemoryRequireReversal])! as! Bool ,
                                                                 options: self.options!)
                     }
                     else{

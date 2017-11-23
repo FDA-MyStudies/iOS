@@ -1379,11 +1379,18 @@ extension StudyHomeViewController:ORKTaskViewControllerDelegate{
                 }
                 else{
                   
-                  
-                  
                     self.dismiss(animated: true, completion: {
+                      
+                        self.navigationController?.popViewController(animated: true)
+                      
                          UIUtilities.showAlertWithTitleAndMessage(title: "Message", message: NSLocalizedString(kShareConsentFailureAlert, comment: "") as NSString)
+                      
+                   
+                      
                     })
+                  
+                  
+                  
                     return nil
                 }
                 

@@ -203,21 +203,46 @@ class LabKeyServices: NSObject {
                     let dateDetail = data["Created"]  as? Dictionary<String,Any>
                     let date = dateDetail?["value"] as! String
                     
-                    for responseData in dashBoardResponse {
-                    
-                        if let keyValue = data[responseData.key!] as? Dictionary<String,Any> {
+                    //handle for fetel Kick
+                    if let fkid = data["FetalKickId"] {
+                        
+                        let responseData = dashBoardResponse.first
+                        //count
+                        let countDetail = data["count"]  as? Dictionary<String,Any>
+                        let count = countDetail?["value"] as! Float
+                        
+                        //duration
+                        let durationDetail = data["duration"]  as? Dictionary<String,Any>
+                        let duration = durationDetail?["value"] as! Float
+                        
+                        let valueDetail = ["value":duration,
+                                           "count":count,
+                                           "date":date] as Dictionary<String,Any>
+                        
+                        responseData?.values.append(valueDetail)
+                        
+                    }
+                    else {
+                        for responseData in dashBoardResponse {
                             
-                            if Utilities.isValidValue(someObject: keyValue["value"] as AnyObject?) {
-                                let value = keyValue["value"] as! Float
-                                let valueDetail = ["value":value,
-                                                   "date":date] as Dictionary<String,Any>
+                            if let keyValue = data[responseData.key!] as? Dictionary<String,Any> {
                                 
-                                responseData.values.append(valueDetail)
+                                if Utilities.isValidValue(someObject: keyValue["value"] as AnyObject?) {
+                                    let value = keyValue["value"] as! Float
+                                    let valueDetail = ["value":value,
+                                                       "count":Float(0.0),
+                                                       "date":date] as Dictionary<String,Any>
+                                    
+                                    responseData.values.append(valueDetail)
+                                }
+                                
+                                
                             }
-                            
-
                         }
                     }
+                  
+                    
+                    
                 }
             }
             

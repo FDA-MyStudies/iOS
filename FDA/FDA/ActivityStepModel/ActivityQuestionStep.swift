@@ -574,12 +574,14 @@ class ActivityQuestionStep: ActivityStep {
                             
                             
                             let quantityTypeId:HKQuantityTypeIdentifier = HKQuantityTypeIdentifier.init(rawValue:self.healthDataKey! )
-                            
+                          
                             
                             let quantityType = HKQuantityType.quantityType(forIdentifier: quantityTypeId)
-                            //let unit =  HKUnit.init(from: localizedQuestionStepAnswerFormatUnit)
-                            
-                            
+                            //let unit =  HKUnit.init(from: "kgi")
+                          
+                         var unit:HKUnit?
+                          
+                           // unit =  HKUnit.init(from: localizedQuestionStepAnswerFormatUnit)
                             //let healthKitStore = HKHealthStore()
                             
                             //healthKitStore.is
@@ -602,14 +604,13 @@ class ActivityQuestionStep: ActivityStep {
                         
                         if  Utilities.isValidValue(someObject:self.healthDataKey as AnyObject?){
                             
-                            let quantityTypeId = HKQuantityTypeIdentifier.init(rawValue:self.healthDataKey! )
-                            
+                            let quantityTypeId = HKQuantityTypeIdentifier.init(rawValue:self.healthDataKey!)
+                            //self.healthDataKey!
                             //let unit =  HKUnit.init(from: localizedQuestionStepAnswerFormatUnit)
                             
-                            
-                            
+                          var unit:HKUnit?
+                           // unit =  HKUnit.init(from: "count/sec")
                              questionStepAnswerFormat = ORKHealthKitQuantityTypeAnswerFormat.init(quantityType: HKQuantityType.quantityType(forIdentifier: quantityTypeId)!, unit: nil, style: ORKNumericAnswerStyle.decimal)
-                            
                         }
                         else{
                         

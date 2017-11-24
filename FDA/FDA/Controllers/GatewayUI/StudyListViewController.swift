@@ -1054,9 +1054,9 @@ extension StudyListViewController : StudyFilterDelegates{
         self.tableView?.reloadData()
         
         if self.studiesList.count == 0 {
+          
             self.tableView?.isHidden = true
             self.labelHelperText.isHidden = false
-            
             if studyListRequestFailed{
                 self.labelHelperText.text = kHelperTextForOffline
             }
@@ -1071,15 +1071,9 @@ extension StudyListViewController : StudyFilterDelegates{
             self.tableView?.isHidden = false
             self.labelHelperText.isHidden = true
         }
-        
-       
-        
-        
-        
     }
     
     func didCancelFilter(_ cancel: Bool) {
-        
         //self.studiesList = Gateway.instance.studies!
         //self.tableView?.reloadData()
     }
@@ -1106,8 +1100,7 @@ extension StudyListViewController : UITableViewDataSource {
         }
         
         let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as! StudyListCell
-        
-        
+      
         cell.populateCellWith(study: (self.studiesList[indexPath.row]))
         cell.delegate = self
         
@@ -1305,7 +1298,9 @@ extension StudyListViewController : searchBarDelegate {
         //filter by searched Text
         var searchTextFilteredStudies:Array<Study>! = []
         if text.characters.count > 0 {
-            searchTextFilteredStudies = self.studiesList.filter({
+          
+          
+            searchTextFilteredStudies = self.allStudyList.filter({
                 ($0.name?.containsIgnoringCase(text))! || ($0.category?.containsIgnoringCase(text))! || ($0.description?.containsIgnoringCase(text))! || ($0.sponserName?.containsIgnoringCase(text))!
                 
             })
@@ -1320,9 +1315,7 @@ extension StudyListViewController : searchBarDelegate {
                 self.tableView?.isHidden = true
                 self.labelHelperText.isHidden = false
             }
-            
-            
-        }else{
+        }else {
             StudyFilterHandler.instance.searchText = ""
             
         }

@@ -1287,7 +1287,7 @@ extension StudyHomeViewController:ORKTaskViewControllerDelegate{
                 
                 let visualStepIndex:Int = (taskViewController.result.results?.index(where: {$0.identifier == kComprehensionInstructionStepIdentifier}))!
                 
-                if visualStepIndex > 0 {
+                if visualStepIndex >= 0 {
                     
                     var  i = visualStepIndex + 1 // holds the index of  question
                     var j = 0 // holds the index of correct answer
@@ -1384,13 +1384,7 @@ extension StudyHomeViewController:ORKTaskViewControllerDelegate{
                         self.navigationController?.popViewController(animated: true)
                       
                          UIUtilities.showAlertWithTitleAndMessage(title: "Message", message: NSLocalizedString(kShareConsentFailureAlert, comment: "") as NSString)
-                      
-                   
-                      
                     })
-                  
-                  
-                  
                     return nil
                 }
                 

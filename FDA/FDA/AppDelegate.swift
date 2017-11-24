@@ -1874,7 +1874,7 @@
                         
                         let visualStepIndex:Int = (taskViewController.result.results?.index(where: {$0.identifier == kVisualStepId}))!
                         
-                        if visualStepIndex > 0 {
+                        if visualStepIndex >= 0 {
                             
                             var  i = visualStepIndex + 2 // holds the index of  question
                             var j = 0 // holds the index of correct answer
@@ -1954,7 +1954,7 @@
                     
                     let shareStep:ORKStepResult? = taskViewController.result.results?.last as! ORKStepResult?
                     
-                    ConsentBuilder.currentConsent?.sharingConsent?.allowWithoutSharing = false
+                    ConsentBuilder.currentConsent?.sharingConsent?.allowWithoutSharing = true
                     
                     if shareStep?.identifier == kConsentSharing && ConsentBuilder.currentConsent?.sharingConsent != nil && (ConsentBuilder.currentConsent?.sharingConsent?.allowWithoutSharing)! == false{
                         
@@ -1964,8 +1964,13 @@
                             return nil
                         }
                         else{
-                            taskViewController.dismiss(animated: true, completion: nil)
-                            return nil
+                          taskViewController.dismiss(animated: true, completion: {
+                            
+                            self.popViewControllerAfterConsentDisagree()
+                            
+                            UIUtilities.showAlertWithTitleAndMessage(title: "Message", message: NSLocalizedString(kShareConsentFailureAlert, comment: "") as NSString)
+                          })
+                          return nil
                         }
                         
                         

@@ -374,7 +374,7 @@ class FetalKickCounterStepViewController:  ORKStepViewController {
         let minutesIndex =  Int(self.timerValue!) / 60 % 60
         let secondsIndex =   Int(self.timerValue!) % 60
         
-        return [(hoursIndex > 0 ? hoursIndex + 1 : 0) ,(minutesIndex > 0 ? minutesIndex + 1 : 0) ,(secondsIndex > 0 ? secondsIndex + 1 : 0)]
+        return [(hoursIndex > 0 ? hoursIndex  : 0) ,(minutesIndex > 0 ? minutesIndex  : 0) ,(secondsIndex > 0 ? secondsIndex  : 0)]
         
         
  }
@@ -518,7 +518,7 @@ class FetalKickCounterStepViewController:  ORKStepViewController {
             
             self.timerValue = hoursValue * 3600 + minuteValue * 60 + secondsValue
           
-          if hoursValue * 3600 + minuteValue * 60 + secondsValue >= self.totalTime!{
+          if hoursValue * 3600 + minuteValue * 60 + secondsValue > self.totalTime!{
             
             let hours = Int(self.totalTime!) / 3600
             let minutes = Int(self.totalTime!) / 60 % 60

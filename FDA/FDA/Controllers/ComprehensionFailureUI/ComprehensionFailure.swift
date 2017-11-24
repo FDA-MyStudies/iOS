@@ -48,5 +48,8 @@ class ComprehensionFailure: UIView {
     @IBAction func buttonRetryAction(){
        
         self.delegate?.didTapOnRetry()
+      
+      self.isHidden =  true
+      self.removeFromSuperview()
     }
 }

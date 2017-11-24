@@ -540,10 +540,12 @@ struct SharingConsent {
                 self.title = dict[kConsentSharingStepTitle] as? String
             }
             
-            if Utilities.isValidValue(someObject: dict[kConsentSharingStepAllowWithoutSharing] as AnyObject ){
-                self.allowWithoutSharing = dict[kConsentSharingStepAllowWithoutSharing] as? Bool
-            }
-            
+//            if Utilities.isValidValue(someObject: dict[kConsentSharingStepAllowWithoutSharing] as AnyObject ){
+//                self.allowWithoutSharing = dict[kConsentSharingStepAllowWithoutSharing] as? Bool
+//            }
+          
+           self.allowWithoutSharing = true
+          
         }
         else{
             Logger.sharedInstance.debug("ConsentDocument Step Dictionary is null:\(dict)")

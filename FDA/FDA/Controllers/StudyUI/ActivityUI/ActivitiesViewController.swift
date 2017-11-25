@@ -1329,8 +1329,37 @@ extension ActivitiesViewController:ORKTaskViewControllerDelegate{
                                     ud.synchronize()
                                     
                                 }
-                                case .spatialSpanMemoryStep: break
-                                
+                                case .spatialSpanMemoryStep:
+                                    let activity = Study.currentActivity
+                                    
+//                                    //get score
+//                                    let scores = Float(0.0)
+//                                    let keyScore = "score"
+//                                    DBHandler.saveStatisticsDataFor(activityId: (activity?.actvityId)!, key: keyScore , data:Float(scores),fkDuration:Int(0), date:Date())
+//
+//                                    //get numberOfFailures
+//                                    let numberOfFailures = Float(0.0)
+//                                    let keyNumberOfFailures = "numberOfFailures"
+//                                    DBHandler.saveStatisticsDataFor(activityId: (activity?.actvityId)!, key: keyNumberOfFailures , data:Float(numberOfFailures),fkDuration:Int(0), date:Date())
+//
+//
+//                                    //get number of Games
+//                                    let numberOfGames = Float(0.0)
+//                                    let keyNumberOfGames = "numberOfGames"
+//                                    DBHandler.saveStatisticsDataFor(activityId: (activity?.actvityId)!, key: keyNumberOfGames , data:Float(numberOfGames),fkDuration:Int(0), date:Date())
+                                    
+                                break
+                                case .towerOfHanoi:
+                                    //let study = Study.currentStudy
+                                    let activity = Study.currentActivity
+                                    let tohResult:ORKTowerOfHanoiResult? = orkStepResult?.results?.first as? ORKTowerOfHanoiResult
+                                    let key =  ActivityBuilder.currentActivityBuilder.activity?.steps?.first![kActivityStepKey] as? String
+                                    
+                                    let numberOfMoves = tohResult?.moves?.count
+                                    
+                                    DBHandler.saveStatisticsDataFor(activityId: (activity?.actvityId)!, key: key! , data:Float(numberOfMoves!),fkDuration:Int(0), date:Date())
+                                    
+                                break
                                 
                                     
                                     default:break

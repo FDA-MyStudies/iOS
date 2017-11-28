@@ -59,6 +59,13 @@
                                    "operator" : "lt",
                                    "destination": "QR4_I1"
                                    
+                                   },
+                                   {
+                                   
+                                   "condition": "",
+                                   "operator" : "",
+                                   "destination": "QR4_Q102"
+                                   
                                    }
                                    
                                    ],
@@ -108,9 +115,16 @@
                                    
                                    {
                                    
-                                   "condition": "50,60",
-                                   "operator" : "range",
+                                   "condition": "50",
+                                   "operator" : "lt",
                                    "destination": "QR4_Q5"
+                                   
+                                   },
+                                   {
+                                   
+                                   "condition": "",
+                                   "operator" : "",
+                                   "destination": "QR4_I1"
                                    
                                    }
                                    

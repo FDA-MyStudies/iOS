@@ -1350,9 +1350,11 @@ class DBHandler: NSObject {
         dbChart.scrollable = chart.scrollable
         
         dbChart.studyId = chart.studyId
-        
-        dbChart.chartId = chart.studyId! + chart.title!
-        
+      
+      //Following line changed:Arun
+        //dbChart.chartId = chart.studyId! + chart.title!
+      dbChart.chartId = chart.studyId! + (chart.activityId == nil ? "": chart.activityId! )  + chart.dataSourceKey!
+      
         return dbChart
         
     }

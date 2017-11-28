@@ -116,6 +116,8 @@
 		6ED1B2341E54256700BF463F /* ActivityStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ED1B22F1E54256700BF463F /* ActivityStep.swift */; };
 		6ED1D06F1EA884BD00E5A794 /* ConsentPdfViewerStepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ED1D06E1EA884BD00E5A794 /* ConsentPdfViewerStepViewController.swift */; };
 		6ED593731F011D5B00AC3636 /* Verdana Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6ED593721F011D5B00AC3636 /* Verdana Italic.ttf */; };
+		6ED5B05B1FCD551600925352 /* Units.json in Resources */ = {isa = PBXBuildFile; fileRef = 6ED5B0581FCD550F00925352 /* Units.json */; };
+		6ED5B05D1FCDBD8200925352 /* Labkey_Activity_Latest4.json in Resources */ = {isa = PBXBuildFile; fileRef = 6ED5B05C1FCDBD7C00925352 /* Labkey_Activity_Latest4.json */; };
 		6ED86F631EA6498D00365AF0 /* RepeatableFormStep.m in Sources */ = {isa = PBXBuildFile; fileRef = 6ED86F601EA6498D00365AF0 /* RepeatableFormStep.m */; };
 		6ED86F641EA6498D00365AF0 /* RepeatableFormStepViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6ED86F621EA6498D00365AF0 /* RepeatableFormStepViewController.m */; };
 		6ED8A2E61E447AA2004DEC01 /* Formatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ED8A2E31E447AA2004DEC01 /* Formatter.swift */; };
@@ -389,6 +391,8 @@
 		6ED1B22F1E54256700BF463F /* ActivityStep.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityStep.swift; sourceTree = "<group>"; };
 		6ED1D06E1EA884BD00E5A794 /* ConsentPdfViewerStepViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConsentPdfViewerStepViewController.swift; sourceTree = "<group>"; };
 		6ED593721F011D5B00AC3636 /* Verdana Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Verdana Italic.ttf"; sourceTree = "<group>"; };
+		6ED5B0581FCD550F00925352 /* Units.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Units.json; sourceTree = "<group>"; };
+		6ED5B05C1FCDBD7C00925352 /* Labkey_Activity_Latest4.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Labkey_Activity_Latest4.json; sourceTree = "<group>"; };
 		6ED86F5F1EA6498D00365AF0 /* RepeatableFormStep.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RepeatableFormStep.h; sourceTree = "<group>"; };
 		6ED86F601EA6498D00365AF0 /* RepeatableFormStep.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RepeatableFormStep.m; sourceTree = "<group>"; };
 		6ED86F611EA6498D00365AF0 /* RepeatableFormStepViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RepeatableFormStepViewController.h; sourceTree = "<group>"; };
@@ -752,6 +756,7 @@
 		6E9B39BC1E55DFDA0037D09D /* ActivityBuilder */ = {
 			isa = PBXGroup;
 			children = (
+				6ED5B05C1FCDBD7C00925352 /* Labkey_Activity_Latest4.json */,
 				6EEB0AF91FD2811100136EAA /* Labkey_Activity_Latest3.json */,
 				6E80BC011FB04340008C9B8C /* Labkey_Activity_Latest2.json */,
 				6EAA04881FAF4C6A00214D03 /* Labkey_Activity_Latest.json */,
@@ -953,6 +958,7 @@
 		6ED1B22A1E54256700BF463F /* ActivityStepModel */ = {
 			isa = PBXGroup;
 			children = (
+				6ED5B0581FCD550F00925352 /* Units.json */,
 				6ED1B22B1E54256700BF463F /* ActivityActiveStep.swift */,
 				6ED1B22C1E54256700BF463F /* ActivityFormStep.swift */,
 				6ED1B22D1E54256700BF463F /* ActivityInstructionStep.swift */,
@@ -1550,6 +1556,7 @@
 				6EE93D921E93B8C30027A5DC /* 45.png in Resources */,
 				94B3DD5C1E6ED8E500327AE5 /* Study.storyboard in Resources */,
 				6E4D86DC1F389DF1003DBDD8 /* SearchBarView.xib in Resources */,
+				6ED5B05D1FCDBD8200925352 /* Labkey_Activity_Latest4.json in Resources */,
 				6E93C7E11EE2EC26006788B1 /* ConsentLatest.json in Resources */,
 				6EABD0331E56FE2000623D94 /* TaskSchema.json in Resources */,
 				48A24C3E1E839D03009E849E /* 55V2.png in Resources */,
@@ -1566,6 +1573,7 @@
 				6E7DC76E1F69479C001A05B6 /* ActivityFilterView.xib in Resources */,
 				6E5F751B1EF4109500ABA308 /* Labkey_Activity11.json in Resources */,
 				94B3DD5D1E6ED8E500327AE5 /* Study.xcassets in Resources */,
+				6ED5B05B1FCD551600925352 /* Units.json in Resources */,
 				6EE93DCC1E93C8850027A5DC /* ResourcesUI.plist in Resources */,
 				6EBC2E811E94FB5300828CA1 /* StudyDashboard.plist in Resources */,
 				6E7D2D641E433E8800763D4C /* LaunchScreen.storyboard in Resources */,

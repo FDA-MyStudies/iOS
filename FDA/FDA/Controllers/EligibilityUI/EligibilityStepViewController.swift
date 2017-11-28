@@ -174,14 +174,13 @@ extension EligibilityStepViewController:NMWebServiceDelegate {
         self.removeProgressIndicator()
     if error.localizedDescription.localizedCaseInsensitiveContains(tokenTextField.text!){
       
-     
       self.showAlert(message: kMessageInvalidTokenOrIfStudyDoesNotExist) //kMessageForInvalidToken
             
         }
         else{
             
             if error.localizedDescription.localizedCaseInsensitiveContains(kStudyWithStudyId) {
-                
+              
                 self.showAlert(message:kMessageInvalidTokenOrIfStudyDoesNotExist) //kMessageForMissingStudyId
                 
             }

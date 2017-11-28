@@ -187,7 +187,7 @@ class ActivityBuilder {
                         
                         task =  ORKOrderedTask(identifier: (activity?.actvityId!)!, steps: orkStepArray)
                         //to be commented
-                        //self.activity?.branching = false
+                        self.activity?.branching = false
                         
                         if self.activity?.branching == true{
                             task =  ORKNavigableOrderedTask(identifier:(activity?.actvityId)!, steps: orkStepArray)

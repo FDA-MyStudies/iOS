@@ -253,7 +253,11 @@ class ActivityQuestionStep: ActivityStep {
     var formatDict:Dictionary<String, Any>?
     
     var healthDataKey:String?
-    
+  
+    //Following params exclusively used for texscale
+    var textScaleDefaultIndex:Int? = -1
+    var textScaleDefaultValue:String? = ""
+  
     override init() {
         
         super.init()
@@ -433,17 +437,15 @@ class ActivityQuestionStep: ActivityStep {
                     &&  Utilities.isValidValue(someObject:formatDict?[kStepQuestionTextScaleVertical] as AnyObject?) {
                     
                     let textChoiceArray:[ORKTextChoice]?
-                    
-                    textChoiceArray = self.getTextChoices(dataArray: formatDict?[kStepQuestionTextScaleTextChoices] as! NSArray)
                   
                   var defaultValue = formatDict?[kStepQuestionTextScaleDefault] as! Int
+                  self.textScaleDefaultValue = "\(defaultValue)"
+                 
                   
-                  if defaultValue > 0 {
-                    //get the current index which = defaultposition - 1
-                    defaultValue = defaultValue - 1
-                  }
+                    textChoiceArray = self.getTextChoices(dataArray: formatDict?[kStepQuestionTextScaleTextChoices] as! NSArray)
                   
-                  
+                  defaultValue = self.textScaleDefaultIndex!
+                 
                     questionStepAnswerFormat = ORKAnswerFormat.textScale(with: textChoiceArray!,
                                                                          defaultIndex: defaultValue,
                                                                          vertical: formatDict?[kStepQuestionTextScaleVertical] as! Bool)
@@ -578,39 +580,39 @@ class ActivityQuestionStep: ActivityStep {
                             
                             let quantityType = HKQuantityType.quantityType(forIdentifier: quantityTypeId)
                             //let unit =  HKUnit.init(from: "kgi")
+                          var unit:HKUnit? = nil
                           
-                         var unit:HKUnit?
+                          if self.isUnitValid(unit: localizedQuestionStepAnswerFormatUnit){
+                            unit = HKUnit.init(from: localizedQuestionStepAnswerFormatUnit)
+                          }
                           
                            // unit =  HKUnit.init(from: localizedQuestionStepAnswerFormatUnit)
                             //let healthKitStore = HKHealthStore()
-                            
                             //healthKitStore.is
-                         questionStepAnswerFormat = ORKHealthKitQuantityTypeAnswerFormat.init(quantityType: quantityType!, unit: nil, style: ORKNumericAnswerStyle.integer)
+                         questionStepAnswerFormat = ORKHealthKitQuantityTypeAnswerFormat.init(quantityType: quantityType!, unit: unit, style: ORKNumericAnswerStyle.integer)
                         
                         }
                         else{
-                        
                         if minValue != nil || maxValue != nil {
-                            
                             questionStepAnswerFormat = ORKNumericAnswerFormat.init(style: ORKNumericAnswerStyle.integer, unit: localizedQuestionStepAnswerFormatUnit, minimum: minValue , maximum: maxValue)
-                            
                         }
                         else{
                             questionStepAnswerFormat = ORKAnswerFormat.integerAnswerFormat(withUnit:localizedQuestionStepAnswerFormatUnit)
                         }
                         }
                     case .decimal:
-                        
-                        
                         if  Utilities.isValidValue(someObject:self.healthDataKey as AnyObject?){
                             
                             let quantityTypeId = HKQuantityTypeIdentifier.init(rawValue:self.healthDataKey!)
                             //self.healthDataKey!
                             //let unit =  HKUnit.init(from: localizedQuestionStepAnswerFormatUnit)
                             
-                          var unit:HKUnit?
-                           // unit =  HKUnit.init(from: "count/sec")
-                             questionStepAnswerFormat = ORKHealthKitQuantityTypeAnswerFormat.init(quantityType: HKQuantityType.quantityType(forIdentifier: quantityTypeId)!, unit: nil, style: ORKNumericAnswerStyle.decimal)
+                          var unit:HKUnit? = nil
+                          
+                          if localizedQuestionStepAnswerFormatUnit != "" && self.isUnitValid(unit: localizedQuestionStepAnswerFormatUnit){
+                            unit = HKUnit.init(from: localizedQuestionStepAnswerFormatUnit)
+                          }
+                             questionStepAnswerFormat = ORKHealthKitQuantityTypeAnswerFormat.init(quantityType: HKQuantityType.quantityType(forIdentifier: quantityTypeId)!, unit: unit, style: ORKNumericAnswerStyle.decimal)
                         }
                         else{
                         
@@ -704,9 +706,7 @@ class ActivityQuestionStep: ActivityStep {
                         if  Utilities.isValidValue(someObject:formatDict?[kStepQuestionNumericPlaceholder] as AnyObject?){
                             placeholderText = formatDict?[kStepQuestionNumericPlaceholder] as? String
                         }
-                        
-                        
-                    
+                      
                       var answerFormat = ORKAnswerFormat.textAnswerFormat()
                     
                     if Utilities.isValidValue(someObject:formatDict?[kStepQuestionTextMaxLength] as AnyObject?){
@@ -743,8 +743,6 @@ class ActivityQuestionStep: ActivityStep {
                     // placeholder  usage???
                     
                     questionStepAnswerFormat = answerFormat
-                    
-                    
                 }
                 else{
                     Logger.sharedInstance.debug("text has null values:\(formatDict)")
@@ -847,24 +845,16 @@ class ActivityQuestionStep: ActivityStep {
             if  Utilities.isValidValue(someObject:placeholderText as AnyObject?){
                 questionStep?.placeholder = placeholderText
             }
-            
             questionStep?.text = text
-            
-            
+          
             return questionStep!
-            
-            
-            
-            
-            
+          
         }
         else{
             Logger.sharedInstance.debug("FormatDict has null values:\(formatDict)")
             
             return nil
         }
-        
-        
     }
     
     
@@ -878,9 +868,7 @@ class ActivityQuestionStep: ActivityStep {
          */
         
         var textChoiceArray:[ORKTextChoice]? = []
-        
-        
-        
+      
         if  Utilities.isValidObject(someObject:dataArray )  {
             
             for i  in 0 ..< dataArray.count {
@@ -901,7 +889,13 @@ class ActivityQuestionStep: ActivityStep {
                             else{
                                 detailText = " "
                             }
-                            
+                          
+                          if self.textScaleDefaultValue?.isEmpty == false && self.textScaleDefaultValue != ""{
+                            if (dict[kORKTextChoiceValue] as! String)  == self.textScaleDefaultValue {
+                              self.textScaleDefaultIndex = i
+                            }
+                          }
+                          
                             
                             let  choice = ORKTextChoice(text: (dict[kORKTextChoiceText] as? String)!, detailText: detailText, value: (dict[kORKTextChoiceValue] as? NSCoding & NSCopying & NSObjectProtocol)! , exclusive: (dict[kORKTextChoiceExclusive] as? Bool)!)
                             textChoiceArray?.append(choice)
@@ -917,7 +911,12 @@ class ActivityQuestionStep: ActivityStep {
                     if Utilities.isValidValue(someObject: key as AnyObject?) {
                         
                         let choice = ORKTextChoice(text: key, value: i as NSCoding & NSCopying & NSObjectProtocol )
-                        
+
+                      if self.textScaleDefaultValue?.isEmpty == false && self.textScaleDefaultValue != ""{
+                        if key == self.textScaleDefaultValue{
+                          self.textScaleDefaultIndex = i
+                        }
+                      }
                         textChoiceArray?.append(choice)
                     }
                 }
@@ -1017,7 +1016,37 @@ class ActivityQuestionStep: ActivityStep {
         return imageChoiceArray!
     }
     
+  
+  
+  func isUnitValid(unit:String) -> Bool {
     
+    let filePath = Bundle.main.path(forResource: "Units", ofType: ".json", inDirectory:nil)
+    var resultDict:Dictionary<String,Any>?
+    let data = NSData(contentsOfFile: filePath!)
+    do {
+       resultDict = try JSONSerialization.jsonObject(with: data! as Data, options: []) as? Dictionary<String,Any>
+    }
+    catch let error as NSError{
+      print("\(error)")
+    }
+    
+    let categoryDict = resultDict!["Category"] as! Dictionary<String,String>
+    if let category =  categoryDict[self.healthDataKey!]{
+      let unitDict = resultDict!["Unit"] as! Dictionary<String,Any>
+      if let unitsArray = unitDict[category] as? Array<String> {
+        if unitsArray.contains(unit){
+          return true
+        }
+        else{
+          return false
+        }
+      }
+      return false
+    }
+    return false
+  }
+  
+  
     
     
 }

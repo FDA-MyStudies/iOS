@@ -348,7 +348,7 @@ class ActivitiesViewController : UIViewController{
        // Labkey_Activity_Latest
         //Labkey_Activity
       /*
-         let filePath  = Bundle.main.path(forResource: "Labkey_Activity_Latest", ofType: "json")
+         let filePath  = Bundle.main.path(forResource: "Labkey_Activity_Latest4", ofType: "json")
          
          //let filePath  = Bundle.main.path(forResource: "FetalKickTest", ofType: "json")
          
@@ -363,7 +363,7 @@ class ActivitiesViewController : UIViewController{
          print("\(error)")
          }
  
-        */
+      */
         
         
         IQKeyboardManager.sharedManager().enable = false
@@ -1332,21 +1332,23 @@ extension ActivitiesViewController:ORKTaskViewControllerDelegate{
                                 case .spatialSpanMemoryStep:
                                     let activity = Study.currentActivity
                                     
-//                                    //get score
-//                                    let scores = Float(0.0)
-//                                    let keyScore = "score"
-//                                    DBHandler.saveStatisticsDataFor(activityId: (activity?.actvityId)!, key: keyScore , data:Float(scores),fkDuration:Int(0), date:Date())
-//
-//                                    //get numberOfFailures
-//                                    let numberOfFailures = Float(0.0)
-//                                    let keyNumberOfFailures = "numberOfFailures"
-//                                    DBHandler.saveStatisticsDataFor(activityId: (activity?.actvityId)!, key: keyNumberOfFailures , data:Float(numberOfFailures),fkDuration:Int(0), date:Date())
-//
-//
-//                                    //get number of Games
-//                                    let numberOfGames = Float(0.0)
-//                                    let keyNumberOfGames = "numberOfGames"
-//                                    DBHandler.saveStatisticsDataFor(activityId: (activity?.actvityId)!, key: keyNumberOfGames , data:Float(numberOfGames),fkDuration:Int(0), date:Date())
+                                     let spatialSpanResult:ORKSpatialSpanMemoryResult? = orkStepResult?.results?.first as? ORKSpatialSpanMemoryResult
+                                    
+                                    //get score
+                                    let scores = Float((spatialSpanResult?.score)!)
+                                    let keyScore = "Score"
+                                    DBHandler.saveStatisticsDataFor(activityId: (activity?.actvityId)!, key: keyScore , data:Float(scores),fkDuration:Int(0), date:Date())
+
+                                    //get numberOfFailures
+                                    let numberOfFailures = Float((spatialSpanResult?.numberOfFailures)!)
+                                    let keyNumberOfFailures = "NumberofFailures"
+                                    DBHandler.saveStatisticsDataFor(activityId: (activity?.actvityId)!, key: keyNumberOfFailures , data:Float(numberOfFailures),fkDuration:Int(0), date:Date())
+
+
+                                    //get number of Games
+                                    let numberOfGames = Float((spatialSpanResult?.numberOfGames)!)
+                                    let keyNumberOfGames = "NumberofGames"
+                                    DBHandler.saveStatisticsDataFor(activityId: (activity?.actvityId)!, key: keyNumberOfGames , data:Float(numberOfGames),fkDuration:Int(0), date:Date())
                                     
                                 break
                                 case .towerOfHanoi:

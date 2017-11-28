@@ -203,8 +203,11 @@ class DashboardCharts {
             }
             
             self.studyId = Study.currentStudy?.studyId
-            
-            self.chartId = self.studyId! + self.title!
+          
+          //FOLLOWING LINE COMMENTED:Arun
+            //self.chartId = self.studyId! + self.title!
+          self.chartId = self.studyId! + (self.activityId == nil ? "" : self.activityId!) + self.dataSourceKey!
+          //----
         }
     }
 }

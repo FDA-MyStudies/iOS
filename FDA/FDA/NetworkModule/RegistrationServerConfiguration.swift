@@ -65,8 +65,8 @@ struct RegistrationServerURLConstants {
     
     
     //Testing server
-    static let ProductionURL = "http://192.168.0.6:8081/labkey/fdahpUserRegWS/"
-    static let DevelopmentURL = "http://192.168.0.6:8081/labkey/fdahpUserRegWS/"
+    //static let ProductionURL = "http://192.168.0.6:8081/labkey/fdahpUserRegWS/"
+    //static let DevelopmentURL = "http://192.168.0.6:8081/labkey/fdahpUserRegWS/"
     
     
     //LabKey Server Test Enviorment
@@ -78,8 +78,8 @@ struct RegistrationServerURLConstants {
     
     
     //Labkey UAT Server Staging enviroment
-    //static let ProductionURL = "https://hphci-fdama-st-ur-01.labkey.com/fdahpUserRegWS/"
-    //static let DevelopmentURL = "https://hphci-fdama-st-ur-01.labkey.com/fdahpUserRegWS/"
+    static let ProductionURL = "https://hphci-fdama-st-ur-01.labkey.com/fdahpUserRegWS/"
+    static let DevelopmentURL = "https://hphci-fdama-st-ur-01.labkey.com/fdahpUserRegWS/"
     
     //Labkey Production Server Staging enviroment
     //static let ProductionURL = "https://hphci-fdama-pr-ur-01.labkey.com/fdahpUserRegWS/"

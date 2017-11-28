@@ -190,6 +190,9 @@ class ActivityStepResult{
             
             stepDict?[kActivityStepResultType] =  (self.step?.resultType as! String) == "fetalKickCounter" ? "grouped" : (self.step?.resultType)
             }
+            else{
+              stepDict?[kActivityStepResultType] = "grouped"
+          }
             
         default: break
             

@@ -1045,6 +1045,30 @@ extension StudyHomeViewController:ORKTaskViewControllerDelegate{
             if reason == ORKTaskViewControllerFinishReason.discarded{
                 self.unHideSubViews()
                 //_ = self.navigationController?.popViewController(animated: true)
+              
+              if Study.currentStudy?.userParticipateState.status == .notEligible {
+              
+                //checking if validated or verified screen is present in results so status can be reverted back to yet To join
+                let results = taskViewController.result.results?.contains(where: {$0.identifier == kEligibilityVerifiedScreen || $0.identifier == kEligibilityValidateScreen
+                })
+                
+                if results!{
+                  
+                  let currentUserStudyStatus =  User.currentUser.updateStudyStatus(studyId:(Study.currentStudy?.studyId)!  , status: .yetToJoin)
+                  
+                  Study.currentStudy?.userParticipateState = currentUserStudyStatus
+                  
+                  DBHandler.updateStudyParticipationStatus(study: Study.currentStudy!)
+                  
+                  self.isUpdatingIneligibility = true
+                  
+                  UserServices().updateUserParticipatedStatus(studyStauts: currentUserStudyStatus, delegate: self)
+                  
+                  
+                }
+              
+              }
+              
             }
             taskViewController.dismiss(animated: true, completion: nil)
             

@@ -1461,7 +1461,11 @@
             }
         }
         
+      func dismissTaskViewController() {
+        passcodeParentControllerWhileSetup?.dismiss(animated: true, completion:nil)
+        passcodeParentControllerWhileSetup = nil
         
+      }
         
     }
     //Handling for HTTPS
@@ -1668,9 +1672,9 @@
             }
             
             if passcodeParentControllerWhileSetup != nil {
-                passcodeParentControllerWhileSetup?.dismiss(animated: true, completion:nil)
-                
-                passcodeParentControllerWhileSetup = nil
+              
+              self.perform(#selector(dismissTaskViewController), with: self, afterDelay: 2)
+              
             }
             else{
                 taskViewController.dismiss(animated: true, completion: nil)
@@ -1698,16 +1702,9 @@
                 else{
                      UserServices().updateUserEligibilityConsentStatus(eligibilityStatus: true, consentStatus:(ConsentBuilder.currentConsent?.consentStatus)!  , delegate: self)
                 }
-                
-                
-               
-                
+              
             }
-            
-            
-            
-            
-            
+          
         }
         
         
@@ -1730,11 +1727,7 @@
                 //Handling show and hide of Back Button
                 
                 //For Verified Step , Completion Step, Visual Step, Review Step, Share Pdf Step
-                
-                
-                
-                
-                
+              
                 if  stepViewController.step?.identifier == kConsentCompletionStepIdentifier || stepViewController.step?.identifier == kVisualStepId  || stepViewController.step?.identifier == kConsentSharePdfCompletionStep || stepViewController.step?.identifier == kEligibilityVerifiedScreen{
                     
                     
@@ -1885,9 +1878,7 @@
                                 
                                 
                                 let textChoiceResult:ORKChoiceQuestionResult = ((taskViewController.result.results?[i] as! ORKStepResult).results?.first) as! ORKChoiceQuestionResult
-                                
-                                
-                                
+                              
                                 let correctAnswerDict:Dictionary<String,Any>? = ConsentBuilder.currentConsent?.comprehension?.correctAnswers?[j]
                                 
                                 let answerArray:[String] = (correctAnswerDict?[kConsentComprehensionAnswer] as? [String])!
@@ -1900,8 +1891,7 @@
                                 
                                 switch evaluationType! {
                                 case .any:
-                                    
-                                    
+                                  
                                     if answeredSet.isSubset(of: correctAnswerSet){
                                         userScore = userScore + 1
                                     }
@@ -1914,8 +1904,7 @@
                                     if answeredSet == correctAnswerSet{
                                         userScore = userScore + 1
                                     }
-                                    
-                                    
+                                  
                                 default: break
                                     
                                 }
@@ -1999,10 +1988,7 @@
         func passcodeViewControllerDidFinish(withSuccess viewController: UIViewController) {
             containerViewController?.contentHidden = false
             self.appIsResignedButDidNotEnteredBackground = false
-            
-            
-            
-            
+          
             viewController.dismiss(animated: true, completion: {
                 self.isPasscodePresented = false
                 

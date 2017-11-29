@@ -1005,7 +1005,7 @@ extension UserServices:NMWebServiceDelegate{
         
         print("Failed: Refresh token Expired")
       
-        if User.currentUser.refreshToken == ""{
+        if User.currentUser.refreshToken == "" && requestName as String != RegistrationMethods.login.description{
           //Unauthorized Access
           
           //error.localizedDescription = "Your Session is Expired"

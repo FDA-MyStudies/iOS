@@ -1515,7 +1515,7 @@ extension StudyListViewController:ORKTaskViewControllerDelegate{
             
         }
         
-        self.perform(#selector(dismisscontroller), with: self, afterDelay: 1.0)
+        self.perform(#selector(dismisscontroller), with: self, afterDelay: 1.5)
         
         
     }

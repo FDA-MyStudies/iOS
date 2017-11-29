@@ -1090,13 +1090,10 @@
         
         
         func checkPasscode(viewController:UIViewController) {
-            
-            
-            
+          
             if User.currentUser.userType == .FDAUser {
                 //FDA user
-                
-                
+              
                 if User.currentUser.settings?.passcode! == true {
                     
                     if  ORKPasscodeViewController.isPasscodeStoredInKeychain() == false{

@@ -19,9 +19,9 @@ let kActivityActiveKeyResultType = "resultType" // to be used specifically for A
 
 let kActivityActiveStepKey = "key"
 
-let kSpatialSpanMemoryKeyScore = "score"
-let kSpatialSpanMemoryKeyNumberOfGames = "numberOfGames"
-let kSpatialSpanMemoryKeyNumberOfFailures = "numberOfFailures"
+let kSpatialSpanMemoryKeyScore = "Score"
+let kSpatialSpanMemoryKeyNumberOfGames = "NumberofGames"
+let kSpatialSpanMemoryKeyNumberOfFailures = "NumberofFailures"
 
 
 
@@ -449,16 +449,20 @@ class ActivityStepResult{
                     for i in 0..<2 {
                         var resultDict:Dictionary<String, Any>? =  Dictionary()
                         
-                        resultDict?[kActivityActiveKeyResultType] = ActiveStepResultType.numeric.rawValue
+                      
                         
                         
                         if  TowerOfHanoiResultType(rawValue:i) == .puzzleWasSolved{ //puzzleWasSolved
                             resultDict?[kActivityActiveStepKey] = kTowerOfHanoiKeyPuzzleWasSolved
                             resultDict?[kActivityStepResultValue] = stepTypeResult?.puzzleWasSolved
+                          
+                          resultDict?[kActivityActiveKeyResultType] = ActiveStepResultType.boolean.rawValue
                         }
                         else{ // numberOfMoves
                             resultDict?[kActivityActiveStepKey] = kTowerOfHanoiKeyNumberOfMoves
                             resultDict?[kActivityStepResultValue] = stepTypeResult?.moves?.count
+                          
+                          resultDict?[kActivityActiveKeyResultType] = ActiveStepResultType.numeric.rawValue
                             
                         }
                         

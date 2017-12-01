@@ -164,15 +164,15 @@ class StudyDashboardViewController : UIViewController{
 //                keys = "\"count\",duration,FetalKickId"
 //                tableName = activityId!+activityId!
                 
-                keys = "\"count\",duration," + "\(activityId!)"
+                keys = "\"count\",duration"
                 tableName = activityId!+activityId!
               }
               else if activity?.taskSubType == "towerOfHanoi"{
-                keys = "numberOfMoves," + "\(activityId!)"
+                keys = "numberOfMoves"
                 tableName = activityId!+activityId!
               }
               else if activity?.taskSubType == "spatialSpanMemory"{
-                keys = "numberOfGames,score,numberOfFailures," + "\(activityId!)"
+                keys = "NumberofGames,Score,NumberofFailures"
                 tableName = activityId!+activityId!
               }
             }
@@ -191,8 +191,10 @@ class StudyDashboardViewController : UIViewController{
                 let activity = Study.currentStudy?.activities.filter({$0.actvityId == activityId}).first
                 var key = response.key
                 if activity?.type == ActivityType.activeTask {
-                    
+                  
+                  if activity?.taskSubType == "fetalKickCounter" || activity?.taskSubType == "towerOfHanoi"{
                     key = activityId!
+                  }
                 }
                 
                 

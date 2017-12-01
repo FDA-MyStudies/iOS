@@ -260,27 +260,34 @@ class LabKeyServices: NSObject {
                     responseData?.values.append(valueDetail)
                     
                   } //Speatial Memory
-                  else if data["numberOfFailures"] != nil && data["numberOfGames"] != nil   &&   data["score"] != nil {
+                  else if data["NumberofFailures"] != nil && data["NumberofGames"] != nil   &&   data["Score"] != nil {
                     
                     let responseData = dashBoardResponse.first
                     //numberOfFailuresDetail
-                    let numberOfFailuresDetail = data["numberOfFailures"]  as? Dictionary<String,Any>
+                    let numberOfFailuresDetail = data["NumberofFailures"]  as? Dictionary<String,Any>
                     let numberOfFailures = numberOfFailuresDetail?["value"] as! Float
                     
                     //score
-                    let scoreDetail = data["score"]  as? Dictionary<String,Any>
+                    let scoreDetail = data["Score"]  as? Dictionary<String,Any>
                     let score = scoreDetail?["value"] as! Float
                     
                     //numberOfGames
-                    let numberOfGamesDetail = data["numberOfGames"]  as? Dictionary<String,Any>
+                    let numberOfGamesDetail = data["NumberofGames"]  as? Dictionary<String,Any>
                     let numberOfGames = numberOfGamesDetail?["value"] as! Float
                     
-                    let valueDetail = ["value":score,
-                                       "numberOfFailures":numberOfFailures,
-                                       "numberOfGames":numberOfGames,
+                    let valueDetail1 = ["value":numberOfFailures,
+                                       "count":numberOfFailures,
                                        "date":date] as Dictionary<String,Any>
+                    let valueDetail2 = ["value":score,
+                                        "count":score,
+                                        "date":date] as Dictionary<String,Any>
+                    let valueDetail3 = ["value":numberOfGames,
+                                        "count":numberOfGames,
+                                        "date":date] as Dictionary<String,Any>
                     
-                    responseData?.values.append(valueDetail)
+                    responseData?.values.append(valueDetail1)
+                    responseData?.values.append(valueDetail2)
+                    responseData?.values.append(valueDetail3)
                     
                   }
                   else {
@@ -302,10 +309,6 @@ class LabKeyServices: NSObject {
                     }
                   }
                   
-                  
-                  
-                    
-                    
                 }
             }
             

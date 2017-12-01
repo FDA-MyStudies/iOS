@@ -456,7 +456,12 @@ class FetalKickCounterStepViewController:  ORKStepViewController {
                 
                 editCounterButton?.isHidden = false
                 self.counterTextField?.text =  self.kickCounter! < 10 ?  ("0\(self.kickCounter!)" == "00" ? "000" : "00\(self.kickCounter!)") : (self.kickCounter! >= 100 ? "\(self.kickCounter!)" : "0\(self.kickCounter!)" )
-                
+              
+              if self.kickCounter == self.maxKicksAllowed!{
+                self.setResults()
+                self.showAlertOnCompletion()
+              }
+              
             }
             else if self.kickCounter! == self.maxKicksAllowed!{
                 self.setResults()

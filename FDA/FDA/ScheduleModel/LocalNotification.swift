@@ -213,7 +213,7 @@ class LocalNotification: NSObject {
         notification.type = AppNotification.NotificationType.Study
         notification.subType = AppNotification.NotificationSubType.Activity
         notification.audience = Audience.Limited
-        notification.studyId = (Study.currentStudy?.studyId)!
+        notification.studyId =  run.studyId //(Study.currentStudy?.studyId)!
         
         LocalNotification.notificationList.append(notification)
 

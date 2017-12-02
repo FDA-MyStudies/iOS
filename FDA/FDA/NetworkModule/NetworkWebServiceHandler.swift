@@ -203,7 +203,7 @@ class NetworkWebServiceHandler: NSObject, URLSessionDelegate {
         }
         
         let requestUrl = URL(string: requestString as String)!
-      
+      print("Request URL:  \(requestUrl)")
          var request = URLRequest.init(url: requestUrl, cachePolicy: URLRequest.CachePolicy.reloadIgnoringLocalCacheData, timeoutInterval: self.connectionTimeoutInterval)
         request.httpMethod = self.getRequestMethod(method) as String
         if httpHeaders != nil && (httpHeaders?.count)! > 0{

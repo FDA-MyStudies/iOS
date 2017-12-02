@@ -193,15 +193,13 @@ class ActivityStepResult{
             else{
               stepDict?[kActivityStepResultType] = "grouped"
           }
-            
         default: break
             
         }
-        
-        
+      
         if Utilities.isValidValue(someObject: self.key as AnyObject?){
             
-            stepDict?[kActivityStepKey] = self.key
+            stepDict?[kActivityStepKey] = self.key!
         }
         if self.startTime != nil && (Utilities.getStringFromDate(date: self.startTime!) != nil){
             
@@ -437,7 +435,7 @@ class ActivityStepResult{
                             resultArray?.append(resultDict!)
                             
                         }
-                        
+                        self.key = Study.currentActivity?.actvityId
                         self.value = resultArray
                     }
                     else{
@@ -489,7 +487,7 @@ class ActivityStepResult{
                         resultArray?.append(resultDict!)
                         
                     }
-                    
+                    self.key = Study.currentActivity?.actvityId
                     self.value = resultArray
                     
                 }

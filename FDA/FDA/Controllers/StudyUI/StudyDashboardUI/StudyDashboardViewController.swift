@@ -160,8 +160,21 @@ class StudyDashboardViewController : UIViewController{
             let activity = Study.currentStudy?.activities.filter({$0.actvityId == activityId}).first
             var keys = details?["keys"]
             if activity?.type == ActivityType.activeTask {
-                keys = "\"count\",duration,FetalKickId"
+              if activity?.taskSubType == "fetalKickCounter"{
+//                keys = "\"count\",duration,FetalKickId"
+//                tableName = activityId!+activityId!
+                
+                keys = "\"count\",duration," + "\(activityId!)"
                 tableName = activityId!+activityId!
+              }
+              else if activity?.taskSubType == "towerOfHanoi"{
+                keys = "numberOfMoves," + "\(activityId!)"
+                tableName = activityId!+activityId!
+              }
+              else if activity?.taskSubType == "spatialSpanMemory"{
+                keys = "numberOfGames,score,numberOfFailures," + "\(activityId!)"
+                tableName = activityId!+activityId!
+              }
             }
             let participantId = Study.currentStudy?.userParticipateState.participantId
             LabKeyServices().getParticipantResponse(tableName:tableName!,activityId: activityId!, keys: keys!, participantId: participantId!, delegate: self)

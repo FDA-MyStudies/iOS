@@ -46,7 +46,7 @@ let kActivityRandomization = "randomization"
 
 
 let kActivityLastModified = "lastModified"
-
+let kActivityTaskSubType = "taskSubType"
 
 enum ActivityType:String{
     case Questionnaire = "questionnaire"
@@ -118,7 +118,8 @@ class Activity{
     var activityRuns:Array<ActivityRun>! = []
     var currentRun:ActivityRun! = nil
     var userParticipationStatus:UserActivityStatus! = nil
-    
+    var taskSubType:String? = ""
+  
     init() {
         //Default Initializer
         self.type = .Questionnaire
@@ -134,7 +135,7 @@ class Activity{
         self.endDate = nil
         
         self.shortName = ""
-        
+        self.taskSubType = ""
         
         // questionnaireConfigurations
         self.branching = false
@@ -221,7 +222,11 @@ class Activity{
             else {
                 self.userParticipationStatus = UserActivityStatus()
             }
-            
+          
+          if Utilities.isValidValue(someObject: infoDict[kActivityTaskSubType] as AnyObject ){
+            self.taskSubType =  infoDict[kActivityTaskSubType] as! String
+          }
+          
             self.calculateActivityRuns(studyId: self.studyId!)
         }
         else{

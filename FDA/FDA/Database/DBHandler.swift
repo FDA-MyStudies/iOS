@@ -629,6 +629,9 @@ class DBHandler: NSObject {
         dbActivity.participationStatus = activity.userParticipationStatus.status.rawValue
         dbActivity.completedRuns = activity.userParticipationStatus.compeltedRuns
         dbActivity.id = activity.studyId! + activity.actvityId!
+        dbActivity.taskSubType = activity.taskSubType
+      
+      
         do {
             let json = ["data":activity.frequencyRuns]
             let data =  try JSONSerialization.data(withJSONObject: json, options: JSONSerialization.WritingOptions.prettyPrinted)
@@ -717,7 +720,7 @@ class DBHandler: NSObject {
             activity.version = dbActivity.version
             activity.branching = dbActivity.branching
             activity.state = dbActivity.state
-            
+            activity.taskSubType = dbActivity.taskSubType
             do {
                 let frequencyRuns = try JSONSerialization.jsonObject(with: dbActivity.frequencyRunsData!, options: []) as! [String:Any]
                 activity.frequencyRuns = frequencyRuns["data"] as! Array<Dictionary<String, Any>>?

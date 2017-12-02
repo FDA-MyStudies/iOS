@@ -33,7 +33,9 @@ class DBActivity: Object {
     dynamic var currentRunId:String?
     dynamic var participationStatus:Int = 0
     dynamic var completedRuns:Int = 0
-    
+  
+    dynamic var taskSubType:String? 
+  
     var activityRuns = List<DBActivityRun>()
     
     override static func primaryKey() -> String? {

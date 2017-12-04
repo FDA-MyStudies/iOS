@@ -177,8 +177,6 @@ class LabKeyServices: NSObject {
    
     func handleGetParticipantResponse(response:Dictionary<String, Any>){
         
-        
-        
         var dashBoardResponse:Array<DashboardResponse> = []
         let keysArray = self.keys.components(separatedBy: ",")
         for  key in keysArray{
@@ -262,33 +260,43 @@ class LabKeyServices: NSObject {
                   } //Speatial Memory
                   else if data["NumberofFailures"] != nil && data["NumberofGames"] != nil   &&   data["Score"] != nil {
                     
-                    let responseData = dashBoardResponse.first
-                    //numberOfFailuresDetail
-                    let numberOfFailuresDetail = data["NumberofFailures"]  as? Dictionary<String,Any>
-                    let numberOfFailures = numberOfFailuresDetail?["value"] as! Float
+                    for  responseData in dashBoardResponse {
+                        if responseData.key == "NumberofFailures" {
+                            //numberOfFailuresDetail
+                            let numberOfFailuresDetail = data["NumberofFailures"]  as? Dictionary<String,Any>
+                            let numberOfFailures = numberOfFailuresDetail?["value"] as! Float
+                            
+                            let valueDetail1 = ["value":numberOfFailures,
+                                                "count":Float(0.0),
+                                                "date":date] as Dictionary<String,Any>
+                            responseData.values.append(valueDetail1)
+                        }
+                        else if responseData.key == "NumberofGames" {
+                            //numberOfGames
+                            let numberOfGamesDetail = data["NumberofGames"]  as? Dictionary<String,Any>
+                            let numberOfGames = numberOfGamesDetail?["value"] as! Float
+                            
+                            let valueDetail3 = ["value":numberOfGames,
+                                                "count":Float(0.0),
+                                                "date":date] as Dictionary<String,Any>
+                            
+                            responseData.values.append(valueDetail3)
+                        }
+                        else if responseData.key == "Score" {
+                            //score
+                            let scoreDetail = data["Score"]  as? Dictionary<String,Any>
+                            let score = scoreDetail?["value"] as! Float
+                            
+                            let valueDetail2 = ["value":score,
+                                                "count":Float(0.0),
+                                                "date":date] as Dictionary<String,Any>
+                            
+                            responseData.values.append(valueDetail2)
+                        }
+                    }
+                   
                     
-                    //score
-                    let scoreDetail = data["Score"]  as? Dictionary<String,Any>
-                    let score = scoreDetail?["value"] as! Float
-                    
-                    //numberOfGames
-                    let numberOfGamesDetail = data["NumberofGames"]  as? Dictionary<String,Any>
-                    let numberOfGames = numberOfGamesDetail?["value"] as! Float
-                    
-                    let valueDetail1 = ["value":numberOfFailures,
-                                       "count":numberOfFailures,
-                                       "date":date] as Dictionary<String,Any>
-                    let valueDetail2 = ["value":score,
-                                        "count":score,
-                                        "date":date] as Dictionary<String,Any>
-                    let valueDetail3 = ["value":numberOfGames,
-                                        "count":numberOfGames,
-                                        "date":date] as Dictionary<String,Any>
-                    
-                    responseData?.values.append(valueDetail1)
-                    responseData?.values.append(valueDetail2)
-                    responseData?.values.append(valueDetail3)
-                    
+                   
                   }
                   else {
                     for responseData in dashBoardResponse {

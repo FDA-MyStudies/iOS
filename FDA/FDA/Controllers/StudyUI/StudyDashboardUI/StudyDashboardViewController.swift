@@ -195,6 +195,7 @@ class StudyDashboardViewController : UIViewController{
                   if activity?.taskSubType == "fetalKickCounter" || activity?.taskSubType == "towerOfHanoi"{
                     key = activityId!
                   }
+                    
                 }
                 
                 

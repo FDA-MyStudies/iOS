@@ -568,7 +568,11 @@ class UserServices: NSObject {
         user.userId     = response[kUserId] as! String
         user.verified   = response[kUserVerified] as! Bool
         user.authToken  = response[kUserAuthToken] as! String
-        user.refreshToken = response[kRefreshToken] as! String
+      if let refreshToken = response[kRefreshToken] as? String {
+        user.refreshToken = refreshToken
+        
+      }
+      
         if let isTempPassword = response[kUserIsTempPassword] as? Bool {
             user.isLoginWithTempPassword = isTempPassword
         }
@@ -893,7 +897,7 @@ class UserServices: NSObject {
       
       let user = User.currentUser
       user.authToken  = response[kUserAuthToken] as! String
-      user.refreshToken = response[kRefreshToken] as! String
+      //user.refreshToken = response[kRefreshToken] as! String
       //self.failedRequestServices.headerParams![kUserAuthToken] = user.accessToken
       
       DBHandler().saveCurrentUser(user: user)

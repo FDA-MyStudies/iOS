@@ -298,11 +298,24 @@ extension ChangePasswordViewController:NMWebServiceDelegate {
             }
         }
         else if viewLoadFrom == .menu_login {
+          
+          //Updating Key & Vector
+          let appDelegate = UIApplication.shared.delegate as! AppDelegate
+          appDelegate.updateKeyAndInitializationVector()
+          
+          //TEMP : Need to save these values in Realm
+          let ud = UserDefaults.standard
+          
+          ud.set(true, forKey: kPasscodeIsPending)
+          ud.synchronize()
+          StudyFilterHandler.instance.previousAppliedFilters = []
+          
             // do not create menu
             
             let leftController = slideMenuController()?.leftViewController as! LeftMenuViewController
             leftController.createLeftmenuItems()
             leftController.changeViewController(.studyList)
+          
         }
         else if viewLoadFrom == .login {
             //create menu
@@ -328,8 +341,7 @@ extension ChangePasswordViewController:NMWebServiceDelegate {
             })
         }
         else {
-            
-            UIUtilities.showAlertWithTitleAndMessage(title:NSLocalizedString(kErrorTitle, comment: "") as NSString, message: error.localizedDescription as NSString)
+          UIUtilities.showAlertWithTitleAndMessage(title:NSLocalizedString(kErrorTitle, comment: "") as NSString, message: error.localizedDescription as NSString)
         }
     }
 }

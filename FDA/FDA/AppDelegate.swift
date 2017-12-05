@@ -54,7 +54,7 @@
     let kForceUpdate = "forceUpdate"
     let kMessage = "message"
     let kVisualStepId = "visual"
-    
+    let kMessageString = "Message"
  
     
     @UIApplicationMain

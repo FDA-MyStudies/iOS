@@ -93,7 +93,14 @@ class FetalKickCounterTask {
         
         let introStep = FetalKickIntroStep(identifier: kFetalKickIntroductionStepIdentifier)
         introStep.introTitle =  NSLocalizedString(kFetalKickInstructionStepTitle, comment: "")
-        introStep.subTitle =  NSLocalizedString(kFetalKickInstructionStepText, comment: "")
+      
+      if (self.instructionText?.characters.count)! > 0 {
+        introStep.subTitle = NSLocalizedString(self.instructionText!, comment: "")
+        //NSLocalizedString(kFetalKickInstructionStepText, comment: "")
+      }else {
+         introStep.subTitle = NSLocalizedString(kFetalKickInstructionStepText, comment: "")
+      }
+      
         introStep.displayImage = #imageLiteral(resourceName: "task_img1")
         
        // let instructionStep = ORKInstructionStep(identifier: kFetalKickInstructionStepIdentifier)
@@ -107,7 +114,8 @@ class FetalKickCounterTask {
        // instructionStep.iconImage = #imageLiteral(resourceName: "task_img1")
         
         steps?.append(introStep)
-        
+      
+      /*
         //create a Introduction step
         let introductionStep = ORKInstructionStep(identifier: kFetalKickInstructionStepIdentifier)
         introductionStep.title = NSLocalizedString(kFetalKickInstructionStepTitle, comment: "")
@@ -117,7 +125,7 @@ class FetalKickCounterTask {
             introductionStep.text = NSLocalizedString(self.instructionText!, comment: "")
             steps?.append(introductionStep)
         }
-        
+        */
         
         
         //create a Fetal Kick Counter Step

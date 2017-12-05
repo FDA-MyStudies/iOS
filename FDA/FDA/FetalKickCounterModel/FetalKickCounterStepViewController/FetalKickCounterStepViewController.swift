@@ -19,7 +19,7 @@ let kFetalKickCounterStepDefaultIdentifier = "defaultIdentifier"
 let kTapToRecordKick = "TAP TO RECORD A KICK"
 
 let kConfirmMessage =  "You have recorded "
-let kConfirmMessage2 =  " Proceed to confirming the time taken?"
+let kConfirmMessage2 =  " Proceed to submitting count and time?"
 
 let kGreaterValueMessage = "This activity records the time it takes to feel "
 
@@ -392,9 +392,9 @@ class FetalKickCounterStepViewController:  ORKStepViewController {
         
         
         let timeConsumed = (self.timerLabel?.text!)
-        let message = kConfirmMessage + "\(self.kickCounter!) kicks in " + "\(timeConsumed!) time." + kConfirmMessage2
+        let message = kConfirmMessage + "\(self.kickCounter!) kicks in " + "\(timeConsumed!)." + kConfirmMessage2
         
-        UIUtilities.showAlertMessageWithTwoActionsAndHandler(NSLocalizedString(kMessage, comment: ""), errorMessage: NSLocalizedString(message, comment: ""), errorAlertActionTitle: NSLocalizedString(kProceedTitle, comment: ""),
+        UIUtilities.showAlertMessageWithTwoActionsAndHandler(NSLocalizedString(kMessageString, comment: ""), errorMessage: NSLocalizedString(message, comment: ""), errorAlertActionTitle: NSLocalizedString(kProceedTitle, comment: ""),
                                                              errorAlertActionTitle2: NSLocalizedString(kTitleCancel, comment: ""), viewControllerUsed: self,
                                                              action1: {
                                                                 

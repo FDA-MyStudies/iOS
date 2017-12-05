@@ -1312,7 +1312,7 @@ extension ActivitiesViewController:ORKTaskViewControllerDelegate{
                                     let value = Float((fetalKickResult?.duration)!)/60
                                     let kickcount = Float((fetalKickResult?.totalKickCount)!)
                                     let dict = ActivityBuilder.currentActivityBuilder.activity?.steps?.first!
-                                    let key = dict?[kActivityStepKey] as! String
+                                    let key =   dict?[kActivityStepKey] as! String
                                     
                                     
                                     DBHandler.saveStatisticsDataFor(activityId: (activity?.actvityId)!, key: key, data:value,fkDuration:Int(kickcount), date:Date())

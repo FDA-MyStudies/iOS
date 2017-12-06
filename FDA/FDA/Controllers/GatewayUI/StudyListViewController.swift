@@ -835,8 +835,9 @@ class StudyListViewController: UIViewController {
                         WCPServices().getStudyUpdates(study: study!, delegate: self)
                     }
                     else{
-                        
+                        self.addProgressIndicator()
                         DBHandler.loadStudyDetailsToUpdate(studyId: (study?.studyId)!, completionHandler: { (success) in
+                          self.removeProgressIndicator()
                             self.pushToStudyDashboard()
                             //self.checkDatabaseForStudyInfo(study: study!)
                         })

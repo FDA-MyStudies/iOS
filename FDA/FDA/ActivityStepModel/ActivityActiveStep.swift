@@ -319,7 +319,16 @@ class ActivityActiveStep: ActivityStep {
                     let maximumTest = (formatDict?[kActiveSpatialSpanMemoryMaximumTests] as? Int)
                     
                     let maximumConsecutiveFailures = (formatDict?[kActiveSpatialSpanMemoryMaximumConsecutiveFailures] as? Int)
+                  
+                  var customPluralName:String? = "flower"
+                  
+                  if Utilities.isValidValue(someObject: formatDict?[kActiveSpatialSpanMemoryCustomTargetPluralName]  as AnyObject){
                     
+                    customPluralName = formatDict?[kActiveSpatialSpanMemoryCustomTargetPluralName] as! String?
+                    
+                    
+                  }
+                  
                     
                     if initialSpan! >= 2
                         && initialSpan! >= minimumSpan!
@@ -332,7 +341,7 @@ class ActivityActiveStep: ActivityStep {
                     
                     
                     return ORKOrderedTask.spatialSpanMemoryTask(withIdentifier:  key!, intendedUseDescription:
-                        title!,
+                        self.text!,
                                                                 initialSpan: formatDict?[kActiveSpatialSpanMemoryInitialSpan] as! Int,
                                                                 minimumSpan: formatDict?[kActiveSpatialSpanMemoryMinimumSpan] as! Int,
                                                                 maximumSpan: formatDict?[kActiveSpatialSpanMemoryMaximumSpan] as! Int,
@@ -340,7 +349,7 @@ class ActivityActiveStep: ActivityStep {
                                                                 maximumTests: formatDict?[kActiveSpatialSpanMemoryMaximumTests] as! Int,
                                                                 maximumConsecutiveFailures: formatDict?[kActiveSpatialSpanMemoryMaximumConsecutiveFailures] as! Int,
                                                                 customTargetImage:image ,
-                                                                customTargetPluralName: formatDict?[kActiveSpatialSpanMemoryCustomTargetPluralName] as! String?,
+                                                                customTargetPluralName: customPluralName,
                                                                 requireReversal: (formatDict?[kActiveSpatialSpanMemoryRequireReversal])! as! Bool ,
                                                                 options: self.options!)
                     }
@@ -398,7 +407,7 @@ class ActivityActiveStep: ActivityStep {
                 if  Utilities.isValidValue(someObject:formatDict?[kActiveTowerOfHanoiNumberOfDisks] as AnyObject?)
                 {
                     return ORKOrderedTask.towerOfHanoiTask(withIdentifier: key!,
-                                                           intendedUseDescription: title!,
+                                                           intendedUseDescription: self.text!,
                                                            numberOfDisks: formatDict?[kActiveTowerOfHanoiNumberOfDisks] as! UInt ,
                                                            options:self.options!)
                 }

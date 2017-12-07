@@ -29,7 +29,7 @@ class FetalKickIntroStepViewController:  ORKStepViewController {
     //ORKStepViewController ORKActiveStepViewController
     
     var titleLabel:UILabel?
-    var descriptionLabel:UILabel?
+    @IBOutlet weak var descriptionLabel:UILabel?
     var iconImage:UIImage?
     
     

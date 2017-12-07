@@ -471,29 +471,42 @@ class ProfileViewController: UIViewController, SlideMenuControllerDelegate {
                 if (user.settings?.localNotifications)! {
                     //on
                     print("on")
-                    self.addProgressIndicator()
-                    LocalNotification.registerLocalNotificationForJoinedStudies(completionHandler: { (done) in
-                        print("completed")
-                        self.removeProgressIndicator()
-                    })
+                  self.addProgressIndicator()
+                      
+                  self.perform(#selector(self.registerLocalNotification), with: self, afterDelay: 1.0)
                 }
                 else {
                     print("false")
-                    UIApplication.shared.cancelAllLocalNotifications()
-                    let application = UIApplication.shared
-                    let scheduledNotifications = application.scheduledLocalNotifications!
-                    print("notification  \(scheduledNotifications)")
+                   self.addProgressIndicator()
+                  self.perform(#selector(self.cancelAllLocalNotifications), with: self, afterDelay: 1.0)
+                  
                 }
-                
             }
-            
             self.editBarButtonItem?.tintColor = UIColor.black
         }
         else{
             Logger.sharedInstance.debug("settings is null")
         }
     }
+  
+  func cancelAllLocalNotifications(){
     
+    UIApplication.shared.cancelAllLocalNotifications()
+    let application = UIApplication.shared
+    let scheduledNotifications = application.scheduledLocalNotifications!
+    print("notification  \(scheduledNotifications)")
+    
+     self.removeProgressIndicator()
+  }
+  
+  func registerLocalNotification(){
+    LocalNotification.registerLocalNotificationForJoinedStudies(completionHandler: { (done) in
+      print("completed")
+      self.removeProgressIndicator()
+      
+    })
+  }
+  
 
     /**
      

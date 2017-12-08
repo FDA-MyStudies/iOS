@@ -72,55 +72,42 @@
                   "steps": [
                             
                             {
-                            
                             "type": "question",
-                            
                             "resultType": "scale",
-                            
-                            "key": "QR4_F1_Q1",
-                            
-                            "title": "Q1",
-                            
-                            "text": "QDesc1",
-                            
+                            "key": "CBQ1",
+                            "title": "Condition Branching Question One",
+                            "text": "",
                             "skippable": true,
-                            
                             "groupName": "",
-                            
                             "repeatable": false,
-                            
                             "repeatableText": "",
-                            
-                            "destinations": [],
-                            
+                            "destinations": [
+                                             
+                                             {
+                                             "condition": "280",
+                                             "operator": "ne",
+                                             "destination": "CBQ4"
+                                             },
+                                             {
+                                             "condition": "",
+                                             "operator": "",
+                                             "destination": "CBQ3"
+                                             }
+                                             ],
                             "healthDataKey": "",
-                            
                             "format": {
-                            
-                            "maxValue": 100,
-                            
-                            "minValue": 0,
-                            
-                            "default": 60,
-                            
-                            "step": 10,
-                            
-                            "vertical": true,
-                            
-                            "maxDesc": "Maximum Desc",
-                            
-                            "minDesc": "Minimum Desc",
-                            
+                            "maxValue": 1000,
+                            "minValue": 10,
+                            "step": 90,
+                            "default": 10,
+                            "vertical": false,
+                            "maxDesc": "",
+                            "minDesc": "",
                             "maxImage": "",
-                            
                             "minImage": ""
-                            
                             },
-                            
                             "steps": [],
-                            
                             "options": []
-                            
                             },
                             
                             {
@@ -151,7 +138,7 @@
                             
                             "maxValue": 10,
                             
-                            "minValue": -10,
+                            "minValue": 0,
                             
                             "default": 0,
                             
@@ -175,55 +162,42 @@
                             
                             },
                             {
-                            
                             "type": "question",
-                            
                             "resultType": "scale",
-                            
-                            "key": "QR4_F1_Q3u",
-                            
-                            "title": "Q3",
-                            
-                            "text": "QDesc1",
-                            
+                            "key": "CBQScale",
+                            "title": "Condition Branching Question One",
+                            "text": "",
                             "skippable": true,
-                            
                             "groupName": "",
-                            
                             "repeatable": false,
-                            
                             "repeatableText": "",
-                            
-                            "destinations": [],
-                            
+                            "destinations": [
+                                             
+                                             {
+                                             "condition": "280",
+                                             "operator": "ne",
+                                             "destination": "CBQ4"
+                                             },
+                                             {
+                                             "condition": "",
+                                             "operator": "",
+                                             "destination": "CBQ3"
+                                             }
+                                             ],
                             "healthDataKey": "",
-                            
                             "format": {
-                            
-                            "maxValue": 100,
-                            
-                            "minValue": 0,
-                            
-                            "default": 60,
-                            
-                            "step": 10,
-                            
-                            "vertical": true,
-                            
-                            "maxDesc": "Maximum Desc",
-                            
-                            "minDesc": "Minimum Desc",
-                            
+                            "maxValue": 1000,
+                            "minValue": 10,
+                            "step": 90,
+                            "default": 10,
+                            "vertical": false,
+                            "maxDesc": "",
+                            "minDesc": "",
                             "maxImage": "",
-                            
                             "minImage": ""
-                            
                             },
-                            
                             "steps": [],
-                            
                             "options": []
-                            
                             },
                             {
                             

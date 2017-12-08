@@ -116,7 +116,7 @@
         _repeatableTextSection = section;
         
         _lastSectionRowCount = [_originalTableView numberOfRowsInSection:section - 1];
-        
+      NSLog(@"last section row Count: %ld",(long)_lastSectionRowCount);
     }
 }
 
@@ -173,7 +173,7 @@
             
             NSIndexPath *scrollToIndexPath;
             
-            if (_lastSectionRowCount < previousLastSectionRowCount) {
+            if (_lastSectionRowCount <= previousLastSectionRowCount) {
                 scrollToIndexPath = [NSIndexPath indexPathForRow:previousLastSectionRowCount - 1 inSection:_repeatableTextSection - 1];
             }
             else {

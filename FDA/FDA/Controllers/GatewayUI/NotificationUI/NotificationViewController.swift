@@ -81,10 +81,31 @@ class NotificationViewController : UIViewController{
                     else{
                          self.notificationArray.append(notification)
                     }
-                    
-                   
+                }
+              
+              let sorted = self.notificationArray.sorted(by: { (first, second) -> Bool in
+                
+                let date1:Date!
+                let date2:Date!
+                if first is AppLocalNotification {
+                  date1 = (first as! AppLocalNotification).startDate
+                  
+                }
+                else {
+                  date1 = (first as! AppNotification).date
                 }
                 
+                if second is AppLocalNotification {
+                  date2 = (second as! AppLocalNotification).startDate
+                }
+                else {
+                  date2 = (second as! AppNotification).date
+                }
+                
+               return date1 > date2
+                
+              })
+              self.notificationArray = sorted
                 self.tableView?.reloadData()
             }
             else{
@@ -243,7 +264,8 @@ extension NotificationViewController : UITableViewDelegate{
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        
+      
+      
         let appNotification = notificationArray[indexPath.row]
         let appNotif = appNotification as! AppNotification
         if appNotif.type == AppNotification.NotificationType.Study{

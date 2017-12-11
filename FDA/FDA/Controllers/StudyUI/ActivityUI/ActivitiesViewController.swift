@@ -128,8 +128,11 @@ class ActivitiesViewController : UIViewController{
             if self.refreshControl != nil && (self.refreshControl?.isRefreshing)!{
                 self.refreshControl?.endRefreshing()
             }
+          
+          DispatchQueue.main.async {
             self.loadActivitiesFromDatabase()
-           
+          }
+          
         }
     }
     

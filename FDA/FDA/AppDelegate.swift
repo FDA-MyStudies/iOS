@@ -1780,14 +1780,17 @@
         }
         
         func taskViewController(_ taskViewController: ORKTaskViewController, viewControllerFor step: ORKStep) -> ORKStepViewController? {
-            
-            
+          
             if taskViewController.task?.identifier == kConsentTaskIdentifier{
                 
                 
                 //CurrentStep is TokenStep
+              
+              if step.identifier != kEligibilityTokenStep && step.identifier != kConsentSharePdfCompletionStep && step.identifier != kConsentViewPdfCompletionStep && step.identifier != kComprehensionCompletionStepIdentifier && step.identifier != kReviewTitle {
                 
-                if step.identifier == kEligibilityTokenStep {
+                return nil
+              }
+              else  if step.identifier == kEligibilityTokenStep {
                     
                     let gatewayStoryboard = UIStoryboard(name: kFetalKickCounterStep, bundle: nil)
                     
@@ -1935,7 +1938,7 @@
                     }
                     
                 }
-                else if step.identifier == kReviewTitle{
+                else if step.identifier == kReviewTitle {
                     // if sharing step exists && allowWithoutSharing is set
                     
                     let shareStep:ORKStepResult? = taskViewController.result.results?.last as! ORKStepResult?

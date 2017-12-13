@@ -233,6 +233,8 @@ class StudyListViewController: UIViewController {
         
         if showNotification{
             label.isHidden = false
+          
+          
         }else{
             label.isHidden = true
         }
@@ -333,7 +335,7 @@ class StudyListViewController: UIViewController {
             //self.checkIfNotificationEnabled()
             if NotificationHandler.instance.studyId.characters.count > 0 {
                 
-               
+               //UIUtilities.showAlertWithTitleAndMessage(title: "Crash", message: "ghfghfg")
                 
                 let studyId = NotificationHandler.instance.studyId
                 
@@ -731,7 +733,9 @@ class StudyListViewController: UIViewController {
             self.loadStudiesFromDatabase()
             //self.labelHelperText.isHidden = true
             //self.tableView?.isHidden = false
-            
+          
+          
+          
             let appDelegate = UIApplication.shared.delegate as! AppDelegate
             
             if appDelegate.notificationDetails != nil && User.currentUser.userType == .FDAUser{
@@ -835,12 +839,11 @@ class StudyListViewController: UIViewController {
                         WCPServices().getStudyUpdates(study: study!, delegate: self)
                     }
                     else{
-                        self.addProgressIndicator()
-                        DBHandler.loadStudyDetailsToUpdate(studyId: (study?.studyId)!, completionHandler: { (success) in
-                          self.removeProgressIndicator()
-                            self.pushToStudyDashboard()
-                            //self.checkDatabaseForStudyInfo(study: study!)
-                        })
+                      let appDelegate = UIApplication.shared.delegate as! AppDelegate
+                      self.addProgressIndicator()
+                      self.perform(#selector(loadStudyDetails), with: self, afterDelay: 1)
+                      
+                      
                     }
                 }
                 else {
@@ -870,7 +873,18 @@ class StudyListViewController: UIViewController {
             
         }
     }
-    
+  
+  func loadStudyDetails(){
+    let study = Study.currentStudy
+    DBHandler.loadStudyDetailsToUpdate(studyId: (study?.studyId)!, completionHandler: { (success) in
+      
+      self.pushToStudyDashboard()
+      self.removeProgressIndicator()
+      //self.checkDatabaseForStudyInfo(study: study!)
+    })
+  }
+  
+  
     func checkForStudyUpdate(study:Study?){
         
         if(study?.version != study?.newVersion){

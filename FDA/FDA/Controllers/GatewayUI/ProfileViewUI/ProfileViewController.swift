@@ -503,10 +503,16 @@ class ProfileViewController: UIViewController, SlideMenuControllerDelegate {
     LocalNotification.registerLocalNotificationForJoinedStudies(completionHandler: { (done) in
       print("completed")
       self.removeProgressIndicator()
-      
+
     })
   }
   
+  /*REVERTBACK
+  func registerLocalNotification(){
+    LocalNotification.refreshAllLocalNotification()
+    self.removeProgressIndicator()
+  }
+  */
 
     /**
      

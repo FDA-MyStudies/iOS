@@ -320,13 +320,15 @@ class ActivitiesViewController : UIViewController{
      
      */
     func loadActivitiesFromDatabase(){
-        
+      
+      
+      
         DBHandler.loadActivityListFromDatabase(studyId: (Study.currentStudy?.studyId)!) { (activities) in
             if activities.count > 0 {
                 Study.currentStudy?.activities = activities
+              
                 self.handleActivityListResponse()
-                
-                
+              
                 
             }
             else {
@@ -336,7 +338,7 @@ class ActivitiesViewController : UIViewController{
                 // WCPServices().getStudyActivityList(studyId: (Study.currentStudy?.studyId)!, delegate: self)
             }
         }
-        
+      
        // self.checkForDashBoardInfo()
     }
     
@@ -539,6 +541,11 @@ class ActivitiesViewController : UIViewController{
                 
                 //remove local notification
                 LocalNotification.removeLocalNotificationfor(studyId:activity.studyId!, activityid:activity.actvityId!)
+                /* REVERTBACK
+                DBHandler.deleteDBLocalNotification(activityId: activity.actvityId!,studyId:activity.studyId!)
+                LocalNotification.refreshAllLocalNotification()
+               */
+              
             }
             
            

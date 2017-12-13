@@ -1917,11 +1917,11 @@ class DBHandler: NSObject {
     }
   
   
-  class func deleteDBLocalNotification(activityId:String){
+  class func deleteDBLocalNotification(activityId:String,studyId:String){
     
     let realm = try! Realm()
     
-    let dbNotifications = realm.objects(DBNotification.self).filter("activityId == %@",activityId)
+    let dbNotifications = realm.objects(DBNotification.self).filter("activityId == %@ && studyId == %@",activityId,studyId)
     if dbNotifications.count > 0 {
       
       for dbNotification in dbNotifications{

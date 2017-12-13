@@ -320,7 +320,7 @@ class ActivityActiveStep: ActivityStep {
                     
                     let maximumConsecutiveFailures = (formatDict?[kActiveSpatialSpanMemoryMaximumConsecutiveFailures] as? Int)
                   
-                  var customPluralName:String? = "flower"
+                  var customPluralName:String? = "flowers"
                   
                   if Utilities.isValidValue(someObject: formatDict?[kActiveSpatialSpanMemoryCustomTargetPluralName]  as AnyObject){
                     

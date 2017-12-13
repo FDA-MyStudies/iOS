@@ -76,7 +76,9 @@
         var parentViewControllerForAlert:UIViewController?
         
         var iscomingFromForgotPasscode:Bool? =  false
-        
+      
+        var isAppLaunched:Bool? = false
+      
         let healthStore = HKHealthStore()
         var containerViewController: ResearchContainerViewController? {
             return window?.rootViewController as? ResearchContainerViewController
@@ -255,7 +257,7 @@
         func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
             // Override point for customization after application launch.
             
-            
+            self.isAppLaunched = true
             
             self.customizeNavigationBar()
             Fabric.with([Crashlytics.self])
@@ -431,7 +433,10 @@
             }
             
             self.checkForAppUpdateForVersion()
-            
+          
+          
+          
+          
             // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
         }
         
@@ -452,7 +457,7 @@
              */
             
             UIApplication.shared.applicationIconBadgeNumber = 0
-           
+             let ud = UserDefaults.standard
             
             if self.appIsResignedButDidNotEnteredBackground! {
                 
@@ -489,7 +494,13 @@
             }
             
             self.calculateTimeZoneChange()
-            
+          
+          
+          if self.isAppLaunched!{
+            self.isAppLaunched = false
+            self.checkForRegisteredNotifications()
+          }
+          
         }
         
         
@@ -677,11 +688,26 @@
             // UINavigationBar.appearance().backgroundColor = UIColor.white
             // UINavigationBar.appearance().tintColor = UIColor.clear
         }
-        
+      
+      //MARK: Checker Methods
         func checkForAppUpdate(){
             WCPServices().checkForAppUpdates(delegate: self)
         }
-        
+      
+      func checkForRegisteredNotifications(){
+        /*REVERTBACK
+           if User.currentUser.userType == .FDAUser {
+            let application = UIApplication.shared
+            let scheduledNotifications = application.scheduledLocalNotifications!
+            
+            if scheduledNotifications.count < 50{
+              LocalNotification.refreshAllLocalNotification()
+            }
+            
+        }
+        */
+      }
+      
         
         /*
          To get the current App version from App Store and Adds the blocker screen if it is of lower version
@@ -940,8 +966,14 @@
                     if studyId != nil || studyId != ""{
                         
                         var initialVC:UIViewController?
-                        
-                        
+                      
+                      if Gateway.instance.studies?.isEmpty == false {
+                      
+                      let study = Gateway.instance.studies?.filter({$0.studyId == studyId}).first
+                      Study.updateCurrentStudy(study: study!)
+                      }
+                      
+                      
                         let navigationController =  (self.window?.rootViewController as! UINavigationController)
                         let menuVC = navigationController.viewControllers.last
                         if  menuVC is FDASlideMenuViewController {
@@ -1672,7 +1704,13 @@
             
             if passcodeParentControllerWhileSetup != nil {
               
-              self.perform(#selector(dismissTaskViewController), with: self, afterDelay: 2)
+              if #available(iOS 11.0, *) {
+               self.perform(#selector(dismissTaskViewController), with: self, afterDelay: 2)
+              } else {
+                self.dismissTaskViewController()
+              }
+              
+              
               
             }
             else{

@@ -1804,7 +1804,51 @@ class DBHandler: NSObject {
         }
         completionHandler(notificationList)
     }
+  
+  class func getRecentLocalNotification(completionHandler:@escaping (Array<AppLocalNotification>) -> ()){
     
+    let realm = try! Realm()
+    let todayDate = Date()
+    //let dbNotifications = realm.objects(DBLocalNotification.self).filter({$0.startDate! <= todayDate && $0.endDate! >= todayDate})
+    let dbNotifications = realm.objects(DBLocalNotification.self).sorted(byKeyPath: "startDate", ascending: true).filter({$0.startDate! >= todayDate}) //filter({$0.startDate! <= todayDate}).sorted(byKeyPath: "startDate", ascending: true)
+    
+    var notificationList:Array<AppLocalNotification> = []
+    
+    var i = 0
+    for dbnotification in dbNotifications {
+      
+      if i == 50{
+        break
+      }
+      
+      let notification = AppLocalNotification()
+      
+      notification.id = dbnotification.id
+      notification.title = dbnotification.title
+      notification.message = dbnotification.message
+      notification.studyId = dbnotification.studyId
+      notification.activityId = dbnotification.activityId
+      notification.type =    AppNotification.NotificationType(rawValue:dbnotification.notificationType!)!
+      
+      notification.subType = AppNotification.NotificationSubType(rawValue:dbnotification.subType!)!
+      
+      notification.audience = Audience(rawValue:dbnotification.audience!)!
+      //notification.date =  dbnotification.date
+      
+      notification.read = dbnotification.isRead
+      notification.startDate = dbnotification.startDate
+      notification.endDate = dbnotification.endDate
+      
+      notificationList.append(notification)
+      
+      i += 1
+    }
+    completionHandler(notificationList)
+  }
+  
+  
+  
+  
     class func isNotificationSetFor(notification:String,completionHandler:@escaping (Bool) -> ()){
         let realm = try! Realm()
        
@@ -1871,5 +1915,23 @@ class DBHandler: NSObject {
         })
         
     }
+  
+  
+  class func deleteDBLocalNotification(activityId:String){
     
+    let realm = try! Realm()
+    
+    let dbNotifications = realm.objects(DBNotification.self).filter("activityId == %@",activityId)
+    if dbNotifications.count > 0 {
+      
+      for dbNotification in dbNotifications{
+        
+      try! realm.write({
+        realm.delete(dbNotification)
+      })
+        
+      }
+    }
+  }
+
 }

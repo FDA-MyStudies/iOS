@@ -541,10 +541,10 @@ class ActivitiesViewController : UIViewController{
                 
                 //remove local notification
                 LocalNotification.removeLocalNotificationfor(studyId:activity.studyId!, activityid:activity.actvityId!)
-                /* REVERTBACK
+              
                 DBHandler.deleteDBLocalNotification(activityId: activity.actvityId!,studyId:activity.studyId!)
                 LocalNotification.refreshAllLocalNotification()
-               */
+               
               
             }
             

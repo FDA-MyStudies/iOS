@@ -100,6 +100,13 @@ let kActiveFetalKickCounterDuration = "duration"
 let kActiveFetalKickCounterInstructionText = "text"
 let kActiveFetalKickCounterkickCounts = "kickCount"
 
+
+//Completion Text
+
+let kActiveTaskCompletionStepText = "Tap Done to submit responses. Responses cannot be modified after submission."
+
+
+
 enum ActiveStepType:String{
     // Active Steps.
     case audioStep = "audio"
@@ -340,7 +347,7 @@ class ActivityActiveStep: ActivityStep {
                         && maximumConsecutiveFailures! >= 1{
                     
                     
-                    return ORKOrderedTask.spatialSpanMemoryTask(withIdentifier:  key!, intendedUseDescription:
+                    let orderedTask =  ORKOrderedTask.spatialSpanMemoryTask(withIdentifier:  key!, intendedUseDescription:
                         self.text!,
                                                                 initialSpan: formatDict?[kActiveSpatialSpanMemoryInitialSpan] as! Int,
                                                                 minimumSpan: formatDict?[kActiveSpatialSpanMemoryMinimumSpan] as! Int,
@@ -352,6 +359,9 @@ class ActivityActiveStep: ActivityStep {
                                                                 customTargetPluralName: customPluralName,
                                                                 requireReversal: (formatDict?[kActiveSpatialSpanMemoryRequireReversal])! as! Bool ,
                                                                 options: self.options!)
+                      
+                      (orderedTask.steps.last as! ORKCompletionStep).text = NSLocalizedString(kActiveTaskCompletionStepText, comment: "")
+                      return orderedTask
                     }
                     else{
                         return nil
@@ -406,10 +416,12 @@ class ActivityActiveStep: ActivityStep {
                 
                 if  Utilities.isValidValue(someObject:formatDict?[kActiveTowerOfHanoiNumberOfDisks] as AnyObject?)
                 {
-                    return ORKOrderedTask.towerOfHanoiTask(withIdentifier: key!,
+                    var orderedTask =  ORKOrderedTask.towerOfHanoiTask(withIdentifier: key!,
                                                            intendedUseDescription: self.text!,
                                                            numberOfDisks: formatDict?[kActiveTowerOfHanoiNumberOfDisks] as! UInt ,
                                                            options:self.options!)
+                  (orderedTask.steps.last as! ORKCompletionStep).text = NSLocalizedString(kActiveTaskCompletionStepText, comment: "")
+                  return orderedTask
                 }
                 else{
                     Logger.sharedInstance.debug("towerOfHanoi:formatDict has null values:\(formatDict)")

@@ -499,6 +499,7 @@ class ProfileViewController: UIViewController, SlideMenuControllerDelegate {
      self.removeProgressIndicator()
   }
   
+   /*OLDREVERTBACK
   func registerLocalNotification(){
     LocalNotification.registerLocalNotificationForJoinedStudies(completionHandler: { (done) in
       print("completed")
@@ -506,13 +507,13 @@ class ProfileViewController: UIViewController, SlideMenuControllerDelegate {
 
     })
   }
-  
-  /*REVERTBACK
+  */
+ 
   func registerLocalNotification(){
     LocalNotification.refreshAllLocalNotification()
     self.removeProgressIndicator()
   }
-  */
+ 
 
     /**
      

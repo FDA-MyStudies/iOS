@@ -695,17 +695,23 @@
         }
       
       func checkForRegisteredNotifications(){
-        /*REVERTBACK
+       
            if User.currentUser.userType == .FDAUser {
             let application = UIApplication.shared
-            let scheduledNotifications = application.scheduledLocalNotifications!
+            var scheduledNotifications = application.scheduledLocalNotifications!
+            
             
             if scheduledNotifications.count < 50{
+              
               LocalNotification.refreshAllLocalNotification()
+              
+              scheduledNotifications = application.scheduledLocalNotifications!
+              print("All Scheduled Notifs: \(scheduledNotifications)")
+              
             }
             
         }
-        */
+        
       }
       
         

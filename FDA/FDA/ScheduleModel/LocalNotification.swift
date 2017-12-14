@@ -326,6 +326,9 @@ class LocalNotification: NSObject {
           
           //Reschedule top 50 Local Notifications
           LocalNotification.scheduleNotificationOn(date: notification.startDate!, message: notification.message!, userInfo: userInfo)
+          
+           
+          
         }
       }
     }

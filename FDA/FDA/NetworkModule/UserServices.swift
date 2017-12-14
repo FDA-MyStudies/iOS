@@ -610,7 +610,8 @@ class UserServices: NSObject {
         user.userId     = response[kUserId] as! String
         user.verified   = response[kUserVerified] as! Bool
         user.authToken  = response[kUserAuthToken] as! String
-        
+      
+        user.refreshToken = response[kRefreshToken] as! String
         
          StudyFilterHandler.instance.previousAppliedFilters = []
         
@@ -630,6 +631,7 @@ class UserServices: NSObject {
                 let ud = UserDefaults.standard
                 ud.set(user.authToken, forKey:kUserAuthToken)
                 ud.set(user.userId!, forKey: kUserId)
+              
                 ud.synchronize()
                 
                 DBHandler().saveCurrentUser(user: user)
@@ -675,7 +677,9 @@ class UserServices: NSObject {
         let userSettings = Settings()
         userSettings.setSettings(dict: settings as NSDictionary)
         user.settings = userSettings
-        
+      
+        DBHandler.saveUserSettingsToDatabase()
+      
         //profile
         let profile = response[kUserProfile] as! Dictionary<String, Any>
         user.emailId = profile[kUserEmailId] as? String

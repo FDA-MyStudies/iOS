@@ -129,9 +129,9 @@ class ActivitiesViewController : UIViewController{
                 self.refreshControl?.endRefreshing()
             }
           
-          DispatchQueue.main.async {
+          //DispatchQueue.main.async {
             self.loadActivitiesFromDatabase()
-          }
+         // }
           
         }
     }
@@ -601,11 +601,14 @@ class ActivitiesViewController : UIViewController{
                     Study.currentStudy?.activitiesLocalNotificationUpdated = true
                     DBHandler.saveRegisteredLocaNotification(notificationList: notificationlist)
                     DBHandler.updateLocalNotificaitonUpdated(studyId: (Study.currentStudy?.studyId)!,status: true)
+                  LocalNotification.refreshAllLocalNotification()
                 }
                 
             }
         }
-        
+      let application = UIApplication.shared
+      let scheduledNotifications = application.scheduledLocalNotifications!
+      print("ALL Scheduled Local Notifications:::::--- \(scheduledNotifications)")
         
         self.checkIfFetelKickCountRunning()
         

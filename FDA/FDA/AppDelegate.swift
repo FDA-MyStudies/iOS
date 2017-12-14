@@ -531,7 +531,9 @@
                 self.updateNotification()
                 self.handleLocalAndRemoteNotification(userInfoDetails: userInfo as! Dictionary<String, Any>)
             }
-            
+          
+          //UIUtilities.showAlertWithTitleAndMessage(title: "Notif", message: "REMOTE NOTIFICATION:" + "\(userInfo)" as NSString)
+          
             if userInfo.count > 0 && userInfo.keys.contains(kType){
                 self.updateNotification()
             }
@@ -2134,8 +2136,11 @@
                                     withCompletionHandler completionHandler: @escaping () -> Void) {
             
             
-            
+          
             let userInfo = response.notification.request.content.userInfo
+          
+          //UIUtilities.showAlertWithTitleAndMessage(title: "Notif", message: "REMOTE NOTIFICATION:" + "\(userInfo)" as NSString)
+          
             print("REMOTE NOTIFICATION:" + "\(userInfo)")
             print("application state \(UIApplication.shared.applicationState.rawValue)")
             UIApplication.shared.applicationIconBadgeNumber = 0

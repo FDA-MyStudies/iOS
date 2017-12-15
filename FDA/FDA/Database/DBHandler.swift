@@ -1407,9 +1407,16 @@ class DBHandler: NSObject {
         statData.startDate = date
         statData.data = data
         statData.fkDuration = fkDuration
-        
+      
+      
+//      let stats = dbStatistics?.statisticsData.filter({
+//        $0.startDate == date && $0.data == data
+//      })
+//
+//      print("Date:\(date), Data:\(data), ActivityId:\(activityId), Key:\(key), statsCount: \(stats?.count)")
+      
         try! realm.write({
-            if dbStatistics != nil {
+            if dbStatistics != nil  {
                 dbStatistics?.statisticsData.append(statData)
             }
             if dbChart != nil {

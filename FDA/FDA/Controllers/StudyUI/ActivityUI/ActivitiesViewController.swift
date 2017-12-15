@@ -1624,4 +1624,98 @@ class ActivitySchedules:UIView,UITableViewDelegate,UITableViewDataSource{
     }()
 }
 
+class responseDataFetch:NMWebServiceDelegate{
+  /*
+  var dataSourceKeysForLabkey:Array<Dictionary<String,String>> = []
+  
+  
+  init() {
+    
+  }
+  
+  func sendRequestToGetDashboardResponse(){
+    
+    if self.dataSourceKeysForLabkey.count != 0 {
+      let details = self.dataSourceKeysForLabkey.first
+      let activityId = details?["activityId"]
+      var tableName = activityId
+      let activity = Study.currentStudy?.activities.filter({$0.actvityId == activityId}).first
+      var keys = details?["keys"]
+      if activity?.type == ActivityType.activeTask {
+        if activity?.taskSubType == "fetalKickCounter"{
+          //                keys = "\"count\",duration,FetalKickId"
+          //                tableName = activityId!+activityId!
+          
+          keys = "\"count\",duration"
+          tableName = activityId!+activityId!
+        }
+        else if activity?.taskSubType == "towerOfHanoi"{
+          keys = "numberOfMoves"
+          tableName = activityId!+activityId!
+        }
+        else if activity?.taskSubType == "spatialSpanMemory"{
+          keys = "NumberofGames,Score,NumberofFailures"
+          tableName = activityId!+activityId!
+        }
+      }
+      let participantId = Study.currentStudy?.userParticipateState.participantId
+      LabKeyServices().getParticipantResponse(tableName:tableName!,activityId: activityId!, keys: keys!, participantId: participantId!, delegate: self)
+    }
+    else{
+     
+      
+      //save response in database
+      
+      let responses = StudyDashboard.instance.dashboardResponse
+      for  response in responses{
+        
+        let activityId = response.activityId
+        let activity = Study.currentStudy?.activities.filter({$0.actvityId == activityId}).first
+        var key = response.key
+        if activity?.type == ActivityType.activeTask {
+          
+          if activity?.taskSubType == "fetalKickCounter" || activity?.taskSubType == "towerOfHanoi"{
+            key = activityId!
+          }
+          
+        }
+        
+        
+        let values = response.values
+        for value in values{
+          let responseValue = value["value"] as! Float
+          let count = value["count"] as! Float
+          let date = StudyDashboardViewController.labkeyDateFormatter.date(from: value["date"] as! String)
+          let localDateAsString = StudyDashboardViewController.localDateFormatter.string(from: date!)
+          
+          let localDate = StudyDashboardViewController.localDateFormatter.date(from: localDateAsString)
+          DBHandler.saveStatisticsDataFor(activityId: activityId!, key: key!, data:responseValue, fkDuration:Int(count),date:localDate!)
+        }
+        
+        
+      }
+      let key = "LabKeyResponse" + (Study.currentStudy?.studyId)!
+      UserDefaults.standard.set(true, forKey: key)
+      // print("Labkey response \(StudyDashboard.instance.dashboardResponse)")
+    }
+    
+    //https://hphci-fdama-te-ds-01.labkey.com/mobileAppStudy-executeSQL.api?participantId=1a3d0d308df81024f8bfd7f11f7a0168&sql=SELECT%20*%20FROM%20Q1
+    
+    
+  }
+  
+  
+  func startedRequest(_ manager: NetworkManager, requestName: NSString) {
+    Logger.sharedInstance.info(" START requestname : \(requestName)")
+  }
+  func finishedRequest(_ manager: NetworkManager, requestName: NSString, response: AnyObject?) {
+    Logger.sharedInstance.info("requestname : \(requestName) Response : \(response)")
+  }
+  func failedRequest(_ manager: NetworkManager, requestName: NSString, error: NSError) {
+    Logger.sharedInstance.info("requestname : \(requestName)")
+ }
+  
+ */
+}
+
 

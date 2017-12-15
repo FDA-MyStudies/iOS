@@ -270,10 +270,10 @@ class StudyListViewController: UIViewController {
             let todayDate = Date()
             var daysLastSeen = 0
             if previousDate != nil {
-                daysLastSeen = Schedule().getNumberOfDaysBetween(startDate: previousDate!, endDate: todayDate)
+              daysLastSeen = Schedule().getNumberOfDaysBetween(startDate: previousDate!, endDate: todayDate)
+              
             }
-            
-            
+          
             if (previousDate == nil || daysLastSeen >= 7 ) {
                 
                 UIUtilities.showAlertWithTitleAndMessage(title:NSLocalizedString("FDA My Studies", comment: "") as NSString, message: NSLocalizedString(kMessageAppNotificationOffRemainder, comment: "") as NSString)
@@ -332,7 +332,7 @@ class StudyListViewController: UIViewController {
             }
         }
         else {
-            //self.checkIfNotificationEnabled()
+            self.checkIfNotificationEnabled()
             if NotificationHandler.instance.studyId.characters.count > 0 {
                 
                //UIUtilities.showAlertWithTitleAndMessage(title: "Crash", message: "ghfghfg")

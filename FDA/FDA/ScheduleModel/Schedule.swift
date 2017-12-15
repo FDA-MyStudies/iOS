@@ -553,7 +553,7 @@ class Schedule{
         
         return components.weekOfYear! as Int
     }
-    
+  
     func getNumberOfDaysBetween(startDate:Date,endDate:Date) -> Int {
         
         var calendar = Calendar.currentUTC()

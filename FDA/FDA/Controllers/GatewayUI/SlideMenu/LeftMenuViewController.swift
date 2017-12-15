@@ -338,7 +338,7 @@ class LeftMenuViewController : UIViewController, LeftMenuProtocol {
         
         ud.synchronize()
         
-        
+        StudyDashboard.instance.dashboardResponse = []
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         appDelegate.updateKeyAndInitializationVector()
         

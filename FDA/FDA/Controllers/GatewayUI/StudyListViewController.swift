@@ -273,8 +273,8 @@ class StudyListViewController: UIViewController {
               daysLastSeen = Schedule().getNumberOfDaysBetween(startDate: previousDate!, endDate: todayDate)
               
             }
-          
-            if (previousDate == nil || daysLastSeen >= 7 ) {
+          //previousDate == nil ||
+            if ( daysLastSeen >= 7 ) {
                 
                 UIUtilities.showAlertWithTitleAndMessage(title:NSLocalizedString("FDA My Studies", comment: "") as NSString, message: NSLocalizedString(kMessageAppNotificationOffRemainder, comment: "") as NSString)
                 

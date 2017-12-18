@@ -1115,8 +1115,12 @@ extension StudyHomeViewController:ORKTaskViewControllerDelegate{
             }
             
             if stepViewController.step?.identifier == kVisualStepId{
-                self.consentRestorationData = Data()
+                self.consentRestorationData = Data.init(count: 0)
+              
+              if taskViewController.restorationData  != nil {
                 self.consentRestorationData = taskViewController.restorationData
+              }
+              
             }
             else if stepViewController.step?.identifier == kComprehensionInstructionStepIdentifier {
                 
@@ -1124,7 +1128,10 @@ extension StudyHomeViewController:ORKTaskViewControllerDelegate{
                 
                 if  insvisibleConsents == nil{
                     self.consentRestorationData = Data()
+                  
+                  if taskViewController.restorationData != nil{
                     self.consentRestorationData = taskViewController.restorationData
+                  }
                 }
             }
             

@@ -55,13 +55,14 @@ class StudyDashboardViewController : UIViewController{
              appDelegate.checkConsentStatus(controller: self)
         }
         
-        
-        let ud = UserDefaults.standard
-        let key = "LabKeyResponse" + (Study.currentStudy?.studyId)!
-        if !(ud.bool(forKey: key)){
-            self.getDataKeysForCurrentStudy()
-        }
-       
+    //Following To Be Uncommented
+      
+//        let ud = UserDefaults.standard
+//        let key = "LabKeyResponse" + (Study.currentStudy?.studyId)!
+//        if !(ud.bool(forKey: key)){
+//            self.getDataKeysForCurrentStudy()
+//        }
+      
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -70,7 +71,8 @@ class StudyDashboardViewController : UIViewController{
         //unhide navigationbar
        
         self.navigationController?.setNavigationBarHidden(true, animated: true)
-        
+      self.tableView?.reloadData()
+      /*
         if StudyUpdates.studyActivitiesUpdated {
             self.sendRequestToGetDashboardInfo()
         }
@@ -87,8 +89,19 @@ class StudyDashboardViewController : UIViewController{
                 }
             }
         }
+      */
+      
+      
+      DBHandler.loadStatisticsForStudy(studyId: (Study.currentStudy?.studyId)!) { (statiticsList) in
         
-       
+        if statiticsList.count != 0 {
+          StudyDashboard.instance.statistics = statiticsList
+          self.tableView?.reloadData()
+        }
+ }
+      
+      
+      
     }
     
     override func viewDidAppear(_ animated: Bool) {

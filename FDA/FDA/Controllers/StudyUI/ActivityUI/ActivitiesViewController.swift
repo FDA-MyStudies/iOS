@@ -82,7 +82,9 @@ class ActivitiesViewController : UIViewController{
         refreshControl?.attributedTitle = NSAttributedString(string: "Pull to refresh")
         refreshControl?.addTarget(self, action: #selector(refresh(sender:)), for: UIControlEvents.valueChanged)
         tableView?.addSubview(refreshControl!)
-       
+      
+      
+      
 
     }
     
@@ -107,7 +109,10 @@ class ActivitiesViewController : UIViewController{
             self.tableView?.isHidden = false
             self.labelNoNetworkAvailable?.isHidden = true
         }
-        
+      
+      
+      
+      
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -620,7 +625,16 @@ class ActivitiesViewController : UIViewController{
         self.checkIfFetelKickCountRunning()
         
         Logger.sharedInstance.info("Activities Displayed to user")
+      
+      
+      let ud = UserDefaults.standard
+      let key = "LabKeyResponse" + (Study.currentStudy?.studyId)!
+      if !(ud.bool(forKey: key)){
+        let labkeyResponseFetch = ResponseDataFetch.init()
         
+        labkeyResponseFetch.checkUpdates()
+      }
+      
         
     }
     
@@ -1624,13 +1638,72 @@ class ActivitySchedules:UIView,UITableViewDelegate,UITableViewDataSource{
     }()
 }
 
-/*
-class responseDataFetch:NMWebServiceDelegate{
-  /*
+
+class ResponseDataFetch:NMWebServiceDelegate{
+  
   var dataSourceKeysForLabkey:Array<Dictionary<String,String>> = []
+  
+  private static let labkeyDateFormatter: DateFormatter = {
+    //2017/06/13 18:12:13
+    let formatter = DateFormatter()
+    formatter.timeZone = TimeZone.init(identifier: "America/New_York")
+    formatter.dateFormat = "YYYY/MM/dd HH:mm:ss"
+    
+    return formatter
+  }()
+  
+  private static let localDateFormatter: DateFormatter = {
+    //2017/06/13 18:12:13
+    let formatter = DateFormatter()
+    formatter.timeZone = TimeZone.current
+    formatter.dateFormat = "YYYY/MM/dd HH:mm:ss"
+    
+    return formatter
+  }()
   
   
   init() {
+    
+  }
+  
+  func checkUpdates(){
+    if StudyUpdates.studyActivitiesUpdated {
+      self.sendRequestToGetDashboardInfo()
+    }
+    else {
+      
+      DBHandler.loadStatisticsForStudy(studyId: (Study.currentStudy?.studyId)!) { (statiticsList) in
+        
+        if statiticsList.count != 0 {
+          StudyDashboard.instance.statistics = statiticsList
+          
+        }
+        else {
+          self.sendRequestToGetDashboardInfo()
+        }
+      }
+    }
+  }
+  
+  func sendRequestToGetDashboardInfo(){
+    WCPServices().getStudyDashboardInfo(studyId: (Study.currentStudy?.studyId)!, delegate: self)
+  }
+  func handleExecuteSQLResonse(){
+    
+    self.dataSourceKeysForLabkey.removeFirst()
+    self.sendRequestToGetDashboardResponse()
+  }
+  
+  func getDataKeysForCurrentStudy(){
+    
+    DBHandler.getDataSourceKeyForActivity(studyId: (Study.currentStudy?.studyId)!) { (activityKeys) in
+      print(activityKeys)
+      if activityKeys.count > 0 {
+        self.dataSourceKeysForLabkey = activityKeys
+        print("dashboardResponse Called: ")
+        self.sendRequestToGetDashboardResponse()
+      }
+    }
     
   }
   
@@ -1686,10 +1759,10 @@ class responseDataFetch:NMWebServiceDelegate{
         for value in values{
           let responseValue = value["value"] as! Float
           let count = value["count"] as! Float
-          let date = StudyDashboardViewController.labkeyDateFormatter.date(from: value["date"] as! String)
-          let localDateAsString = StudyDashboardViewController.localDateFormatter.string(from: date!)
+          let date = ResponseDataFetch.labkeyDateFormatter.date(from: value["date"] as! String)
+          let localDateAsString = ResponseDataFetch.localDateFormatter.string(from: date!)
           
-          let localDate = StudyDashboardViewController.localDateFormatter.date(from: localDateAsString)
+          let localDate = ResponseDataFetch.localDateFormatter.date(from: localDateAsString)
           DBHandler.saveStatisticsDataFor(activityId: activityId!, key: key!, data:responseValue, fkDuration:Int(count),date:localDate!)
         }
         
@@ -1711,13 +1784,19 @@ class responseDataFetch:NMWebServiceDelegate{
   }
   func finishedRequest(_ manager: NetworkManager, requestName: NSString, response: AnyObject?) {
     Logger.sharedInstance.info("requestname : \(requestName) Response : \(response)")
+    
+    if requestName as String == WCPMethods.studyDashboard.method.methodName {
+      self.getDataKeysForCurrentStudy()
+    }
+    else if requestName as String == ResponseMethods.executeSQL.description{
+      self.handleExecuteSQLResonse()
+    }
+    
   }
   func failedRequest(_ manager: NetworkManager, requestName: NSString, error: NSError) {
     Logger.sharedInstance.info("requestname : \(requestName)")
  }
   
- */
- 
 }
-*/
+
 

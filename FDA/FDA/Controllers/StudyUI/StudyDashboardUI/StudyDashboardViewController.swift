@@ -57,11 +57,11 @@ class StudyDashboardViewController : UIViewController{
         
     //Following To Be Uncommented
       
-//        let ud = UserDefaults.standard
-//        let key = "LabKeyResponse" + (Study.currentStudy?.studyId)!
-//        if !(ud.bool(forKey: key)){
-//            self.getDataKeysForCurrentStudy()
-//        }
+        let ud = UserDefaults.standard
+        let key = "LabKeyResponse" + (Study.currentStudy?.studyId)!
+        if !(ud.bool(forKey: key)){
+            self.getDataKeysForCurrentStudy()
+        }
       
     }
     
@@ -71,8 +71,8 @@ class StudyDashboardViewController : UIViewController{
         //unhide navigationbar
        
         self.navigationController?.setNavigationBarHidden(true, animated: true)
-      self.tableView?.reloadData()
-      /*
+        //self.tableView?.reloadData()
+      
         if StudyUpdates.studyActivitiesUpdated {
             self.sendRequestToGetDashboardInfo()
         }
@@ -89,16 +89,16 @@ class StudyDashboardViewController : UIViewController{
                 }
             }
         }
-      */
       
       
-      DBHandler.loadStatisticsForStudy(studyId: (Study.currentStudy?.studyId)!) { (statiticsList) in
-        
-        if statiticsList.count != 0 {
-          StudyDashboard.instance.statistics = statiticsList
-          self.tableView?.reloadData()
-        }
- }
+      
+//      DBHandler.loadStatisticsForStudy(studyId: (Study.currentStudy?.studyId)!) { (statiticsList) in
+//
+//        if statiticsList.count != 0 {
+//          StudyDashboard.instance.statistics = statiticsList
+//          self.tableView?.reloadData()
+//        }
+// }
       
       
       

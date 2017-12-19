@@ -525,7 +525,8 @@ class ActivitiesViewController : UIViewController{
         var currentActivities:Array<Activity> = []
         var upcomingActivities:Array<Activity> = []
         var pastActivities:Array<Activity> = []
-        
+      
+      var isInActiveActivitiesAreAvailable:Bool! = false
         for activity in activities! {
             
             if activity.state == "active" || activity.state == nil{
@@ -545,17 +546,21 @@ class ActivitiesViewController : UIViewController{
                 //remove notification for inactive activites
                 
                 //remove local notification
-                LocalNotification.removeLocalNotificationfor(studyId:activity.studyId!, activityid:activity.actvityId!)
+               // LocalNotification.removeLocalNotificationfor(studyId:activity.studyId!, activityid:activity.actvityId!)
               
-                DBHandler.deleteDBLocalNotification(activityId: activity.actvityId!,studyId:activity.studyId!)
-                LocalNotification.refreshAllLocalNotification()
-               
+              isInActiveActivitiesAreAvailable = true
+              
+              DBHandler.deleteDBLocalNotification(activityId: activity.actvityId!,studyId:activity.studyId!)
               
             }
             
            
         }
-        
+      
+      if isInActiveActivitiesAreAvailable{
+         LocalNotification.refreshAllLocalNotification()
+      }
+      
         //sort as per start date
         currentActivities.sort(by: {$0.startDate?.compare($1.startDate!) == .orderedAscending})
         upcomingActivities.sort(by: {$0.startDate?.compare($1.startDate!) == .orderedAscending})
@@ -627,13 +632,13 @@ class ActivitiesViewController : UIViewController{
         Logger.sharedInstance.info("Activities Displayed to user")
       
       
-      let ud = UserDefaults.standard
-      let key = "LabKeyResponse" + (Study.currentStudy?.studyId)!
-      if !(ud.bool(forKey: key)){
-        let labkeyResponseFetch = ResponseDataFetch.init()
-        
-        labkeyResponseFetch.checkUpdates()
-      }
+//      let ud = UserDefaults.standard
+//      let key = "LabKeyResponse" + (Study.currentStudy?.studyId)!
+//      if !(ud.bool(forKey: key)){
+//        let labkeyResponseFetch = ResponseDataFetch.init()
+//
+//        labkeyResponseFetch.checkUpdates()
+//      }
       
         
     }

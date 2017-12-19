@@ -215,7 +215,7 @@ class ActivityBuilder {
                                 
                                 let activityStep:ActivityStep?
                                 
-                                if step.isKind(of: ORKQuestionStep.self) || (step.isKind(of: ORKInstructionStep.self) && step.isKind(of: ORKCompletionStep.self) == false){
+                                if step.isKind(of: ORKQuestionStep.self) || (step.isKind(of: ORKInstructionStep.self) == false && step.isKind(of: ORKCompletionStep.self) == false){
                                     activityStep = activityStepArray?[(i!)] as?  ActivityQuestionStep
                                 }
                                 else if step.isKind(of: ORKFormStep.self) || step.isKind(of: RepeatableFormStep.self){

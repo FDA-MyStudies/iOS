@@ -380,10 +380,7 @@ class ActivityQuestionStep: ActivityStep {
                 }
             case .continuousScale:
                 
-                if  Utilities.isValidValue(someObject:formatDict?[kStepQuestionContinuosScaleMaxValue] as AnyObject?)
-                    &&  Utilities.isValidValue(someObject:formatDict?[kStepQuestionContinuosScaleMinValue] as AnyObject?)
-                    &&  Utilities.isValidValue(someObject:formatDict?[kStepQuestionContinuosScaleDefaultValue] as AnyObject?)
-                    &&  Utilities.isValidValue(someObject:formatDict?[kStepQuestionContinuosScaleMaxFractionDigits] as AnyObject?)
+                if     Utilities.isValidValue(someObject:formatDict?[kStepQuestionContinuosScaleMaxFractionDigits] as AnyObject?)
                     && formatDict?[kStepQuestionContinuosScaleVertical] != nil
                     //&& formatDict?[kStepQuestionContinuosScaleMaxDesc] != nil
                     //&&  Utilities.isValidValue(someObject:formatDict?[kStepQuestionScaleMinDesc] as AnyObject?)
@@ -391,13 +388,51 @@ class ActivityQuestionStep: ActivityStep {
                     
                     let maxDesc =   formatDict?[kStepQuestionContinuosScaleMaxDesc] as? String
                     let minDesc =   formatDict?[kStepQuestionContinuosScaleMinDesc] as? String
+                    var maxValue = 0.0
+                    var minValue = -1.0
+                    var defaultValue = 0.0
+                  if Utilities.isValidValue(someObject:formatDict?[kStepQuestionContinuosScaleMaxValue] as AnyObject?){
+                     maxValue = (formatDict?[kStepQuestionContinuosScaleMaxValue] as? Double)!
                     
-                    
+                  }
+                  else{
+                    if let value = (formatDict?[kStepQuestionContinuosScaleMaxValue] as? Double){
+                      
+                      if value > 0 {
+                        minValue = (formatDict?[kStepQuestionContinuosScaleMaxValue] as? Double)!
+                      }
+                  }
+                  }
+                  if Utilities.isValidValue(someObject:formatDict?[kStepQuestionContinuosScaleMaxValue] as AnyObject?){
+                    minValue = (formatDict?[kStepQuestionContinuosScaleMinValue] as? Double)!
+                  }
+                  else{
+                    if let value = (formatDict?[kStepQuestionContinuosScaleMinValue] as? Double){
+                      
+                      if value > 0 {
+                       minValue = (formatDict?[kStepQuestionContinuosScaleMinValue] as? Double)!
+                    }
+                  }
+                    }
+                  
+                  if Utilities.isValidValue(someObject:formatDict?[kStepQuestionContinuosScaleDefaultValue] as AnyObject?){
+                    defaultValue = (formatDict?[kStepQuestionContinuosScaleDefaultValue] as? Double)!
+                  }
+                  else{
+                    if let value = (formatDict?[kStepQuestionContinuosScaleDefaultValue] as? Double){
+                      
+                      if value > 0 {
+                        defaultValue = (formatDict?[kStepQuestionContinuosScaleDefaultValue] as? Double)!
+                      }
+                    }
+                  }
+                  
+                  
                     if (formatDict?[kStepQuestionContinuosScaleMinValue] as? Double)! != (formatDict?[kStepQuestionContinuosScaleMaxValue] as? Double)!{
                     
                     
-                    questionStepAnswerFormat = ORKAnswerFormat.continuousScale(withMaximumValue: (formatDict?[kStepQuestionContinuosScaleMaxValue] as? Double)!,
-                                                                               minimumValue: (formatDict?[kStepQuestionContinuosScaleMinValue] as? Double)!, defaultValue: (formatDict?[kStepQuestionContinuosScaleDefaultValue] as? Double)!, maximumFractionDigits: (formatDict?[kStepQuestionContinuosScaleMaxFractionDigits] as? Int)!,
+                    questionStepAnswerFormat = ORKAnswerFormat.continuousScale(withMaximumValue: maxValue,
+                                                                               minimumValue: minValue, defaultValue: defaultValue, maximumFractionDigits: (formatDict?[kStepQuestionContinuosScaleMaxFractionDigits] as? Int)!,
                                                                                vertical: (formatDict?[kStepQuestionContinuosScaleVertical] as? Bool)!,
                                                                                maximumValueDescription:maxDesc,
                                                                                minimumValueDescription: minDesc)

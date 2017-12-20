@@ -157,37 +157,17 @@ class ActivityBuilder {
                                 
                                 activityStepArray?.append(formStep!)
                                 
-                                
-                                
                             default: break
-                                
-                                
-                                
+                               
                             }
-                            
-                            
-                            
-                            
-                            
                         }
-                        
                     }
-                        
                     else{
-                        
                         Logger.sharedInstance.debug("Activity:stepDict is null:\(stepDict)")
-                        
                         break;
-                        
                     }
                     
                 }
-                
-                
-                
-                
-                
-                
                 
                 if (orkStepArray?.count)! > 0 {
                     
@@ -318,7 +298,7 @@ class ActivityBuilder {
                                                     
                                                 }
                                                 
-                                            case is ORKNumericAnswerFormat ,is ORKScaleAnswerFormat,is ORKTimeIntervalAnswerFormat,is ORKHeightAnswerFormat:
+                                            case is ORKNumericAnswerFormat ,is ORKScaleAnswerFormat,is ORKTimeIntervalAnswerFormat,is ORKHeightAnswerFormat, is ORKContinuousScaleAnswerFormat:
                                                 
                                                 if let operatorValue = dict[kOperator] as? String{
                                                     
@@ -350,11 +330,11 @@ class ActivityBuilder {
                                                         
                                                        predicateQuestionChoiceA = self.getPredicateForTimeInterval(resultSelector: resultSelector!, lhs: lhs!, minimumValue: 0.0, operatorType: operatorType)
                                                         
-                                                    case is ORKScaleAnswerFormat: //Scale & Continuos Scale
+                                                    case is ORKScaleAnswerFormat, is ORKContinuousScaleAnswerFormat: //Scale & Continuos Scale
                                                         
                                                         let minimumValue = (activityStep as! ActivityQuestionStep).formatDict![kMinimumValue] as? Float
                                                         
-                                                        predicateQuestionChoiceA = self.getPredicateForScale(resultSelector: resultSelector!, lhs: lhs!, minimumValue: minimumValue!, operatorType: operatorType,rhs: rhs!)
+                                                        predicateQuestionChoiceA = self.getPredicateForScale(resultSelector: resultSelector!, lhs: lhs!, minimumValue: minimumValue!, operatorType: operatorType,rhs: rhs!, resultType: ((questionStep as! ORKQuestionStep).answerFormat)!,activityStep:activityStep!)
                                                         
                                                     case .none: break
                                                         
@@ -371,7 +351,6 @@ class ActivityBuilder {
                                                         // this means c = value && d =  value
                                                         destination?.append( dict[kDestination]! as! String)
                                                     }
-                                                    
                                                 }
                                                 else{
                                                 }
@@ -661,6 +640,10 @@ class ActivityBuilder {
             
         case .equal: //Equal
             predicate = ORKResultPredicate.predicateForNumericQuestionResult(with: resultSelector, expectedAnswer: Int(lhs))
+        case .notEqual : //NotEqual
+            let equalPredicate = ORKResultPredicate.predicateForNumericQuestionResult(with: resultSelector, expectedAnswer: Int(lhs))
+            predicate = NSCompoundPredicate.init(notPredicateWithSubpredicate: equalPredicate)
+            
         case .greaterThan : //GreaterThan
             
            // predicate =  NSPredicate.init(format:"SUBQUERY(SELF, $x, $x.identifier == $ORK_TASK_IDENTIFIER AND SUBQUERY($x.results, $y, $y.identifier == \"CBQ0\" AND $y.isPreviousResult == 0 AND SUBQUERY($y.results, $z, $z.identifier == \"CBQ0\" AND $z.answer >= 201 AND $z.answer < 401).@count > 0).@count > 0).@count > 0" , argumentArray: [])
@@ -703,12 +686,15 @@ class ActivityBuilder {
             
         case .equal: //Equal
             predicate = ORKResultPredicate.predicateForNumericQuestionResult(with: resultSelector, expectedAnswer: Int(lhs))
-            
+        case .notEqual: //NotEqual
+            let equalPredicate = ORKResultPredicate.predicateForNumericQuestionResult(with: resultSelector, expectedAnswer: Int(lhs))
+            predicate = NSCompoundPredicate.init(notPredicateWithSubpredicate: equalPredicate)
+        
         case .greaterThan : //GreaterThan
-            predicate = ORKResultPredicate.predicateForTimeIntervalQuestionResult(with: resultSelector, minimumExpectedAnswerValue: lhs, maximumExpectedAnswerValue: Double.infinity)
+            predicate = ORKResultPredicate.predicateForTimeIntervalQuestionResult(with: resultSelector, minimumExpectedAnswerValue: lhs + 1, maximumExpectedAnswerValue: Double.infinity)
             
         case .lessThan : //LessThan
-            predicate = ORKResultPredicate.predicateForTimeIntervalQuestionResult(with: resultSelector, minimumExpectedAnswerValue: 0.0, maximumExpectedAnswerValue:lhs )
+            predicate = ORKResultPredicate.predicateForTimeIntervalQuestionResult(with: resultSelector, minimumExpectedAnswerValue: 0.0, maximumExpectedAnswerValue:lhs - 1 )
             
         case .greaterThanOrEqual : //GreaterThanOrEqual
             predicate = ORKResultPredicate.predicateForTimeIntervalQuestionResult(with: resultSelector, minimumExpectedAnswerValue: lhs)
@@ -732,14 +718,40 @@ class ActivityBuilder {
      
      */
     
-    func getPredicateForScale(resultSelector:ORKResultSelector, lhs:Double,minimumValue:Float, operatorType:OperatorType,rhs:Double) ->NSPredicate{
+    func getPredicateForScale(resultSelector:ORKResultSelector, lhs:Double,minimumValue:Float, operatorType:OperatorType,rhs:Double,resultType:ORKAnswerFormat,activityStep:ActivityStep) ->NSPredicate{
         
         var predicate:NSPredicate = NSPredicate()
         
         switch(operatorType){
             
         case .equal: //Equal
-            predicate = ORKResultPredicate.predicateForScaleQuestionResult(with: resultSelector, expectedAnswer: Int(lhs))
+            //
+           
+            if resultType is ORKScaleAnswerFormat{
+                predicate = ORKResultPredicate.predicateForScaleQuestionResult(with: resultSelector, expectedAnswer: Int(lhs))
+            }
+            else{
+                
+                var offset:Double? = 0.0
+                let maxFraction = (activityStep as! ActivityQuestionStep).formatDict![kStepQuestionContinuosScaleMaxFractionDigits] as? Int
+                
+                switch(maxFraction){
+                case 0?:
+                    offset = -0.25
+                case 1?,2?,3?:
+                    offset = 0.0
+                case .none: break
+                case .some(_): break
+                }
+                
+                
+                predicate =  NSPredicate.init(format:"SUBQUERY(SELF, $x, $x.identifier == $ORK_TASK_IDENTIFIER AND SUBQUERY($x.results, $y, $y.identifier == \"\(resultSelector.resultIdentifier)\" AND $y.isPreviousResult == 0 AND SUBQUERY($y.results, $z, $z.identifier == \"\(resultSelector.resultIdentifier)\" AND $z.answer >= \(lhs + offset!) AND $z.answer < \(lhs + 0.1)).@count > 0).@count > 0).@count > 0" , argumentArray: [])
+            }
+            
+        case .notEqual: //Not Equal
+            
+            let equalPredicate = ORKResultPredicate.predicateForNumericQuestionResult(with: resultSelector, expectedAnswer: Int(lhs))
+            predicate = NSCompoundPredicate.init(notPredicateWithSubpredicate: equalPredicate)
             
         case .greaterThan : //GreaterThan
             predicate = ORKResultPredicate.predicateForScaleQuestionResult(with: resultSelector, minimumExpectedAnswerValue: lhs + 1, maximumExpectedAnswerValue: Double.infinity)

@@ -132,6 +132,7 @@
 		6EE93DCC1E93C8850027A5DC /* ResourcesUI.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6EE93DBB1E93C8850027A5DC /* ResourcesUI.plist */; };
 		6EE93DCD1E93C8850027A5DC /* ResourcesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EE93DBC1E93C8850027A5DC /* ResourcesTableViewCell.swift */; };
 		6EE93DCE1E93C8850027A5DC /* ResourcesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EE93DBD1E93C8850027A5DC /* ResourcesViewController.swift */; };
+		6EEB0AFC1FD2811700136EAA /* Labkey_Activity_Latest3.json in Resources */ = {isa = PBXBuildFile; fileRef = 6EEB0AF91FD2811100136EAA /* Labkey_Activity_Latest3.json */; };
 		6EEBA47A1F25FAA100FB0258 /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EEBA4791F25FAA100FB0258 /* HealthKit.framework */; };
 		6EED31A31F1CD7B300A7AF56 /* LatestActive_1B.json in Resources */ = {isa = PBXBuildFile; fileRef = 6EED31A21F1CD7B300A7AF56 /* LatestActive_1B.json */; };
 		6EED7B331E65421D002C1FA3 /* EligibilityBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EED7B321E65421D002C1FA3 /* EligibilityBuilder.swift */; };
@@ -408,6 +409,7 @@
 		6EE93DBB1E93C8850027A5DC /* ResourcesUI.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = ResourcesUI.plist; sourceTree = "<group>"; };
 		6EE93DBC1E93C8850027A5DC /* ResourcesTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResourcesTableViewCell.swift; sourceTree = "<group>"; };
 		6EE93DBD1E93C8850027A5DC /* ResourcesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResourcesViewController.swift; sourceTree = "<group>"; };
+		6EEB0AF91FD2811100136EAA /* Labkey_Activity_Latest3.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Labkey_Activity_Latest3.json; sourceTree = "<group>"; };
 		6EEBA4791F25FAA100FB0258 /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = System/Library/Frameworks/HealthKit.framework; sourceTree = SDKROOT; };
 		6EED31A21F1CD7B300A7AF56 /* LatestActive_1B.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = LatestActive_1B.json; sourceTree = "<group>"; };
 		6EED7B321E65421D002C1FA3 /* EligibilityBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EligibilityBuilder.swift; sourceTree = "<group>"; };
@@ -750,6 +752,7 @@
 		6E9B39BC1E55DFDA0037D09D /* ActivityBuilder */ = {
 			isa = PBXGroup;
 			children = (
+				6EEB0AF91FD2811100136EAA /* Labkey_Activity_Latest3.json */,
 				6E80BC011FB04340008C9B8C /* Labkey_Activity_Latest2.json */,
 				6EAA04881FAF4C6A00214D03 /* Labkey_Activity_Latest.json */,
 				6EED31A21F1CD7B300A7AF56 /* LatestActive_1B.json */,
@@ -1601,6 +1604,7 @@
 				6EC129241E64624F00B90167 /* Acivity_Question.json in Resources */,
 				6E61BCC41F27262F00C156B9 /* ComprehensionFailure.xib in Resources */,
 				6EED31A31F1CD7B300A7AF56 /* LatestActive_1B.json in Resources */,
+				6EEB0AFC1FD2811700136EAA /* Labkey_Activity_Latest3.json in Resources */,
 				6EE8E4D91F17459200028853 /* Eligibility_1B.json in Resources */,
 				94B3DD441E6ED8E500327AE5 /* Profile.plist in Resources */,
 				6E417AD31F4D5DA1007F27DA /* AnanomousFilterData.plist in Resources */,

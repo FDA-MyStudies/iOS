@@ -33,96 +33,6 @@
         "steps": [
                   {
                   "type": "question",
-                  "resultType": "continuousScale",
-                  "key": "CBQ221",
-                  "title": "Condition Branching Question With Continues Scale",
-                  "text": "",
-                  "skippable": true,
-                  "groupName": "",
-                  "repeatable": false,
-                  "repeatableText": "",
-                  "destinations": [
-                                   {
-                                   "condition": "30",
-                                   "operator": "lt",
-                                   "destination": "CBQ1"
-                                   },
-                                   {
-                                   "condition": "",
-                                   "operator": "",
-                                   "destination": "CBQ5"
-                                   }
-                                   ],
-                  "healthDataKey": "",
-                  "format": {
-                  
-                  "maxValue": 100,
-                  
-                  "minValue": 1,
-                  
-                  "default": 0,
-                  
-                  "maxFractionDigits": 2,
-                  
-                  "vertical": false,
-                  
-                  "maxDesc": "Maximum Desc",
-                  
-                  "minDesc": "Minimum Desc",
-                  
-                  "maxImage": "",
-                  
-                  "minImage": ""
-                  
-                  },
-                  "steps": [],
-                  "options": []
-                  },
-                  {
-                  "type": "question",
-                  "resultType": "scale",
-                  "key": "CBQ1",
-                  "title": "Condition Branching Question One",
-                  "text": "",
-                  "skippable": true,
-                  "groupName": "",
-                  "repeatable": false,
-                  "repeatableText": "",
-                  "destinations": [
-                                   {
-                                   "condition": "100",
-                                   "operator": "lte",
-                                   "destination": "CBQ3"
-                                   },
-                                   
-                                   {
-                                   "condition": "100",
-                                   "operator": "gt",
-                                   "destination": "CBQ4"
-                                   },
-                                   {
-                                   "condition": "",
-                                   "operator": "",
-                                   "destination": "CBQ5"
-                                   }
-                                   ],
-                  "healthDataKey": "",
-                  "format": {
-                  "maxValue": 1000,
-                  "minValue": 10,
-                  "step": 90,
-                  "default": 10,
-                  "vertical": false,
-                  "maxDesc": "",
-                  "minDesc": "",
-                  "maxImage": "",
-                  "minImage": ""
-                  },
-                  "steps": [],
-                  "options": []
-                  },
-                  {
-                  "type": "question",
                   "resultType": "numeric",
                   "key": "CBQ3",
                   "title": "Conditional Branching Question With Numeric Reponse",
@@ -132,16 +42,15 @@
                   "repeatable": false,
                   "repeatableText": "",
                   "destinations": [
-                                   
                                    {
                                    "condition": "40.0000",
                                    "operator": "gt",
-                                   "destination": ""
+                                   "destination": "CBQ0"
                                    },
                                    {
-                                   "condition": "",
-                                   "operator": "",
-                                   "destination": "CBQ4"
+                                   "condition": "20.0000",
+                                   "operator": "lte",
+                                   "destination": "CBQ1"
                                    }
                                    ],
                   "healthDataKey": "",
@@ -155,37 +64,7 @@
                   "steps": [],
                   "options": []
                   },
-                  {
-                  "type": "question",
-                  "resultType": "timeInterval",
-                  "key": "CBQ4",
-                  "title": "Conditional Branching Question With Time interval response",
-                  "text": "",
-                  "skippable": true,
-                  "groupName": "",
-                  "repeatable": false,
-                  "repeatableText": "",
-                  "destinations": [
-                                   {
-                                   "condition": "34",
-                                   "operator": "gt",
-                                   "destination": "CBQ0"
-                                   },
-                                   
-                                   {
-                                   "condition": "",
-                                   "operator": "",
-                                   "destination": "CBQ5"
-                                   }
-                                   ],
-                  "healthDataKey": "",
-                  "format": {
-                  "default": 60,
-                  "step": 1
-                  },
-                  "steps": [],
-                  "options": []
-                  },
+                  
                   {
                   "type": "question",
                   "resultType": "height",
@@ -198,9 +77,14 @@
                   "repeatableText": "",
                   "destinations": [
                                    {
-                                   "condition": "5",
+                                   "condition": "50",
                                    "operator": "gt",
                                    "destination": "CBQ0"
+                                   },
+                                   {
+                                   "condition": "4",
+                                   "operator": "lte",
+                                   "destination": "CBQ1"
                                    },
                                    {
                                    "condition": "",
@@ -220,7 +104,32 @@
                   "type": "question",
                   "resultType": "height",
                   "key": "CBQ0",
-                  "title": "Conditional Branching Question With Height Response type",
+                  "title": "Conditional Branching Question With Height Response type 2",
+                  "text": "",
+                  "skippable": true,
+                  "groupName": "",
+                  "repeatable": false,
+                  "repeatableText": "",
+                  "destinations": [
+                                   {
+                                   "condition": "",
+                                   "operator": "",
+                                   "destination": ""
+                                   }
+                                   ],
+                  "healthDataKey": "",
+                  "format": {
+                  "measurementSystem": "US",
+                  "placeholder": ""
+                  },
+                  "steps": [],
+                  "options": []
+                  },
+                  {
+                  "type": "question",
+                  "resultType": "height",
+                  "key": "CBQ1",
+                  "title": "Conditional Branching Question With Height Response type 3",
                   "text": "",
                   "skippable": true,
                   "groupName": "",

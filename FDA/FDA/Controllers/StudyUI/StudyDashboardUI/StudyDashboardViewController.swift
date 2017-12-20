@@ -56,13 +56,13 @@ class StudyDashboardViewController : UIViewController{
         }
         
     //Following To Be Uncommented
-      
+      /*
         let ud = UserDefaults.standard
         let key = "LabKeyResponse" + (Study.currentStudy?.studyId)!
         if !(ud.bool(forKey: key)){
             self.getDataKeysForCurrentStudy()
         }
-      
+      */
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -71,8 +71,9 @@ class StudyDashboardViewController : UIViewController{
         //unhide navigationbar
        
         self.navigationController?.setNavigationBarHidden(true, animated: true)
-        //self.tableView?.reloadData()
-      
+      //Following To Be Uncommented
+        self.tableView?.reloadData()
+      /*
         if StudyUpdates.studyActivitiesUpdated {
             self.sendRequestToGetDashboardInfo()
         }
@@ -89,18 +90,16 @@ class StudyDashboardViewController : UIViewController{
                 }
             }
         }
+   */
       
-      
-      
-//      DBHandler.loadStatisticsForStudy(studyId: (Study.currentStudy?.studyId)!) { (statiticsList) in
-//
-//        if statiticsList.count != 0 {
-//          StudyDashboard.instance.statistics = statiticsList
-//          self.tableView?.reloadData()
-//        }
-// }
-      
-      
+ //Following To Be commented
+      DBHandler.loadStatisticsForStudy(studyId: (Study.currentStudy?.studyId)!) { (statiticsList) in
+
+        if statiticsList.count != 0 {
+          StudyDashboard.instance.statistics = statiticsList
+          self.tableView?.reloadData()
+        }
+ }
       
     }
     
@@ -147,10 +146,7 @@ class StudyDashboardViewController : UIViewController{
         }
 
     }
-        
-    
-    
-    
+  
     
     /**
      
@@ -160,9 +156,7 @@ class StudyDashboardViewController : UIViewController{
     func sendRequestToGetDashboardInfo(){
         WCPServices().getStudyDashboardInfo(studyId: (Study.currentStudy?.studyId)!, delegate: self)
     }
-    
-    
-    
+  
     func sendRequestToGetDashboardResponse(){
         
         

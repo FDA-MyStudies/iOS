@@ -35,6 +35,8 @@ class ActivitiesViewController : UIViewController{
     
     var allActivityList:Array<Dictionary<String,Any>>! = []
     var selectedFilter: ActivityFilterType?
+  //Changes
+  let labkeyResponseFetch = ResponseDataFetch()
     
     //MARK:- Viewcontroller Lifecycle
     fileprivate func presentUpdatedConsent() {
@@ -84,7 +86,7 @@ class ActivitiesViewController : UIViewController{
         tableView?.addSubview(refreshControl!)
       
       
-      
+       //self.getLabkeyResponse()
 
     }
     
@@ -120,7 +122,15 @@ class ActivitiesViewController : UIViewController{
         
         
     }
+  func getLabkeyResponse() {
     
+    let ud = UserDefaults.standard
+    let key = "LabKeyResponse" + (Study.currentStudy?.studyId)!
+    if !(ud.bool(forKey: key)){
+      
+      labkeyResponseFetch.checkUpdates()
+    }
+  }
     func checkForActivitiesUpdates(){
         
         if StudyUpdates.studyActivitiesUpdated {
@@ -1141,6 +1151,7 @@ extension ActivitiesViewController:NMWebServiceDelegate {
         }
         else if requestName as String == WCPMethods.studyDashboard.method.methodName {
            self.sendRequestToGetResourcesInfo()
+          self.getLabkeyResponse()
         }
         else if requestName as String == WCPMethods.resources.method.methodName {
               self.removeProgressIndicator()
@@ -1323,7 +1334,7 @@ extension ActivitiesViewController:ORKTaskViewControllerDelegate{
                     
                     if  (taskViewController.result.results?.count)! > 0 {
                         
-                        let orkStepResult:ORKStepResult? = taskViewController.result.results?[2] as! ORKStepResult
+                        let orkStepResult:ORKStepResult? = taskViewController.result.results?[1] as! ORKStepResult
                         
                         if (orkStepResult?.results?.count)! > 0 {
                             
@@ -1681,7 +1692,9 @@ class ResponseDataFetch:NMWebServiceDelegate{
         
         if statiticsList.count != 0 {
           StudyDashboard.instance.statistics = statiticsList
-          
+           self.getDataKeysForCurrentStudy()
+           let appDelegate = UIApplication.shared.delegate as! AppDelegate
+          appDelegate.addAndRemoveProgress(add: true)
         }
         else {
           self.sendRequestToGetDashboardInfo()
@@ -1706,6 +1719,7 @@ class ResponseDataFetch:NMWebServiceDelegate{
       if activityKeys.count > 0 {
         self.dataSourceKeysForLabkey = activityKeys
         print("dashboardResponse Called: ")
+        
         self.sendRequestToGetDashboardResponse()
       }
     }
@@ -1776,6 +1790,11 @@ class ResponseDataFetch:NMWebServiceDelegate{
       let key = "LabKeyResponse" + (Study.currentStudy?.studyId)!
       UserDefaults.standard.set(true, forKey: key)
       // print("Labkey response \(StudyDashboard.instance.dashboardResponse)")
+      
+      
+      let appDelegate = UIApplication.shared.delegate as! AppDelegate
+      appDelegate.addAndRemoveProgress(add: false)
+      
     }
     
     //https://hphci-fdama-te-ds-01.labkey.com/mobileAppStudy-executeSQL.api?participantId=1a3d0d308df81024f8bfd7f11f7a0168&sql=SELECT%20*%20FROM%20Q1
@@ -1800,6 +1819,12 @@ class ResponseDataFetch:NMWebServiceDelegate{
   }
   func failedRequest(_ manager: NetworkManager, requestName: NSString, error: NSError) {
     Logger.sharedInstance.info("requestname : \(requestName)")
+    if requestName as String == ResponseMethods.executeSQL.description{
+      self.handleExecuteSQLResonse()
+    }
+    else {
+      //self.removeProgressIndicator()
+    }
  }
   
 }

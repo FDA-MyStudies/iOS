@@ -242,8 +242,8 @@ class LabKeyServices: NSObject {
                   //FetalKick
                   if  data["count"] != nil && data["duration"] != nil  {
                     
-                    for responseData in dashBoardResponse{
-                    
+                    //for responseData in dashBoardResponse{
+                     let responseData = dashBoardResponse.first
                     //count
                     let countDetail = data["count"]  as? Dictionary<String,Any>
                     let count = countDetail?["value"] as! Float
@@ -256,9 +256,9 @@ class LabKeyServices: NSObject {
                                        "count":count,
                                        "date":date] as Dictionary<String,Any>
                     
-                      responseData.values.append(valueDetail)
+                    responseData?.values.append(valueDetail)
                     
-                    }
+                   // }
                     
                   } //Speatial Memory
                   else if data["NumberofFailures"] != nil && data["NumberofGames"] != nil   &&   data["Score"] != nil {

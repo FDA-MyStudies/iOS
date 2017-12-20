@@ -177,8 +177,6 @@ class WCPServices: NSObject {
     func getStudyDashboardInfo(studyId:String, delegate:NMWebServiceDelegate){
         
         self.delegate = delegate
-        
-
         let method = WCPMethods.studyDashboard.method
         let params = [kStudyId:studyId]
         self.sendRequestWith(method:method, params: params, headers: nil)

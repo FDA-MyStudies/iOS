@@ -2128,8 +2128,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.hphci.fda.mobilestudies;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "7f5cdde7-f9a9-4e32-bd33-0db3b8db6b78";
-				PROVISIONING_PROFILE_SPECIFIER = FDA_HPHC_AppStore;
+				PROVISIONING_PROFILE = "3dbef759-1ffa-44c3-9c0c-5c26b76e3b4f";
+				PROVISIONING_PROFILE_SPECIFIER = FDA_HPHC_Adhoc;
 				SWIFT_OBJC_BRIDGING_HEADER = "FDA/Controllers/LoginRegisterUI/FDA-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
@@ -2155,8 +2155,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.hphci.fda.mobilestudies;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "7f5cdde7-f9a9-4e32-bd33-0db3b8db6b78";
-				PROVISIONING_PROFILE_SPECIFIER = FDA_HPHC_AppStore;
+				PROVISIONING_PROFILE = "3dbef759-1ffa-44c3-9c0c-5c26b76e3b4f";
+				PROVISIONING_PROFILE_SPECIFIER = FDA_HPHC_Adhoc;
 				SWIFT_OBJC_BRIDGING_HEADER = "FDA/Controllers/LoginRegisterUI/FDA-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 1;

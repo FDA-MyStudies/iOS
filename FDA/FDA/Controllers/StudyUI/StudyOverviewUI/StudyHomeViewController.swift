@@ -952,7 +952,18 @@ extension StudyHomeViewController:NMWebServiceDelegate {
             || requestName as String == RegistrationMethods.updateEligibilityConsentStatus.method.methodName{
             self.unHideSubViews()
             
-            UIUtilities.showAlertWithTitleAndMessage(title:NSLocalizedString(kErrorTitle, comment: "") as NSString, message: error.localizedDescription as NSString)
+            let message = error.localizedDescription as NSString
+            if message.length != 0 {
+                 UIUtilities.showAlertWithTitleAndMessage(title:NSLocalizedString(kErrorTitle, comment: "") as NSString, message: error.localizedDescription as NSString)
+            }
+            else {
+                 //UIUtilities.showAlertWithTitleAndMessage(title:NSLocalizedString(kErrorTitle, comment: "") as NSString, message: "Unknown error occurred. Please try after some time.")
+                UIUtilities.showAlertMessageWithActionHandler(kErrorTitle, message: "Unknown error occurred. Please try after some time.", buttonTitle: kTitleOk, viewControllerUsed: self, action: {
+                    self.navigationController?.popViewController(animated: true)
+                })
+            }
+            
+           
         }
         
         

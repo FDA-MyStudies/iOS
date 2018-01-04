@@ -110,27 +110,20 @@ class StudyHomeViewController : UIViewController{
         else{
             buttonVisitWebsite?.isHidden = false
             visitWebsiteButtonLeadingConstraint?.constant = 0
-            
-            
             viewSeperater?.isHidden = false
         }
         
         // If coming from Activity Resources
-        if hideViewConsentAfterJoining == true{
+        if hideViewConsentAfterJoining == true {
             
-            if Utilities.isValidValue(someObject: Study.currentStudy?.overview.websiteLink as AnyObject? ){
+            if Utilities.isValidValue(someObject: Study.currentStudy?.overview.websiteLink as AnyObject? ) {
                 buttonVisitWebsite?.isHidden = false
                 visitWebsiteButtonLeadingConstraint?.constant = -184
                 self.view.layoutIfNeeded()
                 buttonVisitWebsite?.layoutIfNeeded()
                 
                 buttonJoinStudy?.isHidden = true
-                //buttonVisitWebsite?.backgroundColor = UIColor.red
-                
-                // visitWebsiteButtonTrailingConstraint?.constant =
-                
                 viewSeperater?.isHidden = true
-                
                 buttonViewConsent?.isHidden = true
             }
             else{
@@ -159,7 +152,7 @@ class StudyHomeViewController : UIViewController{
      This method Loads the test data from StudyOverview plist file
      
      */
-    func loadTestData(){
+    func loadTestData() {
         //        let filePath  = Bundle.main.path(forResource: "GatewayOverview", ofType: "json")
         //        let data = NSData(contentsOfFile: filePath!)
         
@@ -173,7 +166,7 @@ class StudyHomeViewController : UIViewController{
             
             //let overviewList = response[kOverViewInfo] as! Array<Dictionary<String,Any>>
             var listOfOverviews:Array<OverviewSection> = []
-            for overview in arrayContent!{
+            for overview in arrayContent! {
                 let overviewObj = OverviewSection(detail: overview as! Dictionary<String, Any>)
                 listOfOverviews.append(overviewObj)
             }
@@ -198,42 +191,7 @@ class StudyHomeViewController : UIViewController{
      This Methd creates eligibility Consent Task
      
      */
-    func createEligibilityConsentTask()   {
-        /*
-         let filePath  = Bundle.main.path(forResource: "ConsentLatest", ofType: "json")
-         let data = NSData(contentsOfFile: filePath!)
-         
-         var response:Dictionary<String,Any>?
-         
-         do {
-         response = try JSONSerialization.jsonObject(with: data! as Data, options: []) as? Dictionary<String,Any>
-         
-         
-         // let consent = dataDict?["Result"]as! Dictionary<String, Any>
-         // ConsentBuilder.currentConsent = ConsentBuilder()
-         // ConsentBuilder.currentConsent?.initWithMetaData(metaDataDict: consent)
-         
-         
-         }catch{
-         
-         }
-         
-         let consent = response?[kConsent] as! Dictionary<String, Any>
-         let eligibility = response?[kEligibility] as! Dictionary<String, Any>
-         
-         if Utilities.isValidObject(someObject: consent as AnyObject?){
-         ConsentBuilder.currentConsent = ConsentBuilder()
-         ConsentBuilder.currentConsent?.initWithMetaData(metaDataDict: consent)
-         }
-         
-         if Utilities.isValidObject(someObject: eligibility as AnyObject?){
-         EligibilityBuilder.currentEligibility = EligibilityBuilder()
-         EligibilityBuilder.currentEligibility?.initEligibilityWithDict(eligibilityDict:eligibility )
-         }
-         
-         */
-        
-        //-------------------------------
+    func createEligibilityConsentTask() {
         
         var eligibilitySteps =  EligibilityBuilder.currentEligibility?.getEligibilitySteps()
         
@@ -246,11 +204,6 @@ class StudyHomeViewController : UIViewController{
             eligibilitySteps?.append(stepDict)
         }
         
-        
-        
-        
-        
-        
         var orkOrderedTask:ORKTask? = ORKOrderedTask(identifier:kEligibilityConsentTask, steps: eligibilitySteps)
         
         if EligibilityBuilder.currentEligibility?.type == .test || EligibilityBuilder.currentEligibility?.type == .both{
@@ -262,8 +215,7 @@ class StudyHomeViewController : UIViewController{
             
             for orkstep in eligibilitySteps!{
                 
-                if  orkstep.isKind(of: ORKQuestionStep.self) && (orkstep as? ORKQuestionStep)?.answerFormat?.questionType == .boolean{
-                    
+                if  orkstep.isKind(of: ORKQuestionStep.self) && (orkstep as? ORKQuestionStep)?.answerFormat?.questionType == .boolean {
                     
                     var defaultStepIdentifier:String = ""
                     
@@ -277,7 +229,7 @@ class StudyHomeViewController : UIViewController{
                     
                     resultSelector =  ORKResultSelector(stepIdentifier: orkstep.identifier, resultIdentifier: orkstep.identifier)
                     
-                    if i! + 1 < (eligibilitySteps?.count)!{
+                    if i! + 1 < (eligibilitySteps?.count)! {
                         defaultStepIdentifier = (eligibilitySteps?[(i!+1)].identifier)!
                     }
                     else{
@@ -287,7 +239,7 @@ class StudyHomeViewController : UIViewController{
                     var correctAnswerArray:Array<Dictionary<String,Any>>? = Array<Dictionary<String,Any>>()
                     
                     
-                    if (EligibilityBuilder.currentEligibility?.correctAnswers?.count)! > 0{
+                    if (EligibilityBuilder.currentEligibility?.correctAnswers?.count)! > 0 {
                         // getting correct answer dict for current step
                         
                         correctAnswerArray = EligibilityBuilder.currentEligibility?.correctAnswers?.filter({($0[kEligibilityCorrectAnswerKey] as? String) == orkstep.identifier})
@@ -296,32 +248,20 @@ class StudyHomeViewController : UIViewController{
                         // there are no correct answers
                     }
                     
-                    
-                    
                     if (correctAnswerArray?.count)! > 0{
                         if (correctAnswerArray?.count)! == 1{
                             // only for correct answer go to next or else go to ineligible screen
                             
-                            
                             let correctAnswerDict = correctAnswerArray?.first
                             
                             let choiceA:Bool! = (correctAnswerDict?[kEligibilityCorrectAnswer] as! Bool)
-                            
                             var predicateQuestionChoiceA:NSPredicate = NSPredicate()
-                            
                             predicateQuestionChoiceA = ORKResultPredicate.predicateForBooleanQuestionResult(with: resultSelector!, expectedAnswer: choiceA)
-                            
                             let inverseChoiceB = (correctAnswerDict?[kEligibilityCorrectAnswer] as? Bool) == true ? false : true
-                            
                             
                             let predicateQuestionChoiceB = ORKResultPredicate.predicateForBooleanQuestionResult(with: resultSelector!, expectedAnswer: inverseChoiceB)
                             
-                            
-                            // destination?.append(defaultStepIdentifier)
                             destination?.append(kInEligibilityStep) // inEligible completion step
-                            
-                            
-                            //choicePredicate.append(predicateQuestionChoiceA)
                             choicePredicate.append(predicateQuestionChoiceB)
                             
                             
@@ -341,30 +281,23 @@ class StudyHomeViewController : UIViewController{
                             
                             var nextStep:ORKStep?
                             
-                            if i! + 1 < (eligibilitySteps?.count)!{
+                            if i! + 1 < (eligibilitySteps?.count)! {
                                 nextStep = (eligibilitySteps?[(i!+1)])!
                             }
                             
-                            if nextStep != nil && nextStep is InEligibilityStep{
+                            if nextStep != nil && nextStep is InEligibilityStep {
                                 // need to jump to validated screen
                                 
                                 let  directRule:ORKDirectStepNavigationRule!
                                 directRule = ORKDirectStepNavigationRule(destinationStepIdentifier: kEligibilityVerifiedScreen)
                                 (orkOrderedTask as! ORKNavigableOrderedTask).setNavigationRule(directRule!, forTriggerStepIdentifier:orkstep.identifier)
-                                
-                            }
-                            else{
+                            }else {
                                 // do nothing assuming that next step is some question step
                             }
-                            
                         }
-                        
-                        
-                    }
-                    else{
+                    }else {
                         // there are no correct answers
                     }
-                    
                     
                     if choicePredicate.count > 0 && (destination?.count)! > 0{
                         print("choices in eligibility \(choicePredicate) ")
@@ -373,43 +306,32 @@ class StudyHomeViewController : UIViewController{
                         (orkOrderedTask as! ORKNavigableOrderedTask).setNavigationRule(predicateRule!, forTriggerStepIdentifier:orkstep.identifier)
                         
                     }
-                    
-                    
-                    
                 }
-                
                 i = i! + 1
             }
-            
-            
         }
         
-        if (orkOrderedTask is ORKNavigableOrderedTask){
+        if (orkOrderedTask is ORKNavigableOrderedTask) {
             
             if self.consentRestorationData != nil {
                 taskViewController = ORKTaskViewController(task: (orkOrderedTask as! ORKNavigableOrderedTask), restorationData: self.consentRestorationData, delegate: self)
-            }
-            else{
+                
+            }else {
                 taskViewController = ORKTaskViewController(task:(orkOrderedTask as! ORKNavigableOrderedTask), taskRun: nil)
                  taskViewController?.outputDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
             }
-        }
-        else{
+        }else {
             
             if self.consentRestorationData != nil {
                 taskViewController = ORKTaskViewController(task: orkOrderedTask, restorationData: self.consentRestorationData, delegate: self)
-            }
-            else{
                 
+            }else {
                 taskViewController = ORKTaskViewController(task:orkOrderedTask, taskRun: nil)
                  taskViewController?.outputDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
             }
-            
         }
         
         taskViewController?.delegate = self
-       
-        
         taskViewController?.title = "Activity"
         taskViewController?.navigationItem.title = nil
         
@@ -421,20 +343,17 @@ class StudyHomeViewController : UIViewController{
             let appdelegate:AppDelegate? = UIApplication.shared.delegate as? AppDelegate
             
             if  appdelegate?.retryView?.isHidden == false{
-            
+                
             appdelegate?.retryView?.isHidden = true
             appdelegate?.retryView?.removeFromSuperview()
             }
-            
         })
         
     }
     
     
     /**
-     
      This Method displays consent Document
-     
      */
     func displayConsentDocument() {
         if Study.currentStudy?.consentDocument != nil {
@@ -446,10 +365,8 @@ class StudyHomeViewController : UIViewController{
     
     
     /**
-     
      This Method is used when the user taps on the pageControl to change its
      current page (Commented as this is not working)
-     
      */
     func didChangePageControlValue() {
         // pageViewController?.scrollToViewController(index: (pageControlView?.currentPage)!)
@@ -457,9 +374,7 @@ class StudyHomeViewController : UIViewController{
     
     
     /**
-     
      This Method is used to push screen back to Studydashboard tabbar controller
-     
      */
     func pushToStudyDashboard(){
         let studyDashboard = self.storyboard?.instantiateViewController(withIdentifier: kStudyDashboardTabbarControllerIdentifier) as! StudyDashboardTabbarViewController
@@ -468,19 +383,17 @@ class StudyHomeViewController : UIViewController{
     
     
     /**
-     
      Method to display taskViewController for passcode setup if
      passcode setup is enabled,called only once after signin.
-     
      */
     func setPassCode() {
-        //Remove Passcode if already exist
         
+        //Remove Passcode if already exist
         ORKPasscodeViewController.removePasscodeFromKeychain()
         
         let passcodeStep = ORKPasscodeStep(identifier: kPasscodeStepIdentifier)
         passcodeStep.passcodeType = .type4Digit
-        //passcodeStep.text = kPasscodeSetUpText
+        
         let task = ORKOrderedTask(identifier: kPasscodeTaskIdentifier, steps: [passcodeStep])
         let taskViewController = ORKTaskViewController.init(task: task, taskRun: nil)
         taskViewController.delegate = self
@@ -508,11 +421,8 @@ class StudyHomeViewController : UIViewController{
     //MARK:- Button Actions
     
     /**
-     
      This Method Join Study button clicked
-     
      @param sender  Accepts UIButton object
-     
      */
     @IBAction func buttonActionJoinStudy(_ sender: UIButton){
         if User.currentUser.userType == UserType.AnonymousUser{
@@ -524,11 +434,7 @@ class StudyHomeViewController : UIViewController{
             signInController.viewLoadFrom = .joinStudy
             self.navigationController?.pushViewController(signInController, animated: true)
             
-            // _ = self.navigationController?.popViewController(animated: true)
-            // self.delegate?.studyHomeJoinStudy()
-        }
-            
-        else{
+        }else {
             
             let currentStudy = Study.currentStudy!
             let participatedStatus = (currentStudy.userParticipateState.status)
@@ -544,15 +450,13 @@ class StudyHomeViewController : UIViewController{
                     else {
                         UIUtilities.showAlertWithTitleAndMessage(title: "", message: NSLocalizedString(kMessageForStudyEnrollingNotAllowed, comment: "") as NSString)
                     }
-                }
-                else if participatedStatus == .Withdrawn {
+                }else if participatedStatus == .Withdrawn {
                     
                     // check if rejoining is allowed after withrdrawn from study
                     if currentStudy.studySettings.rejoinStudyAfterWithdrawn {
                         
                         WCPServices().getEligibilityConsentMetadata(studyId:(Study.currentStudy?.studyId)!, delegate: self as NMWebServiceDelegate)
-                    }
-                    else {
+                    }else {
                         UIUtilities.showAlertWithTitleAndMessage(title: "", message: NSLocalizedString(kMessageForStudyWithdrawnState, comment: "") as NSString)
                     }
                 }
@@ -569,11 +473,8 @@ class StudyHomeViewController : UIViewController{
     
     
     /**
-     
      This method is used to navigate to previous view controller
-     
      @param sender    Accepts any kind of objects
-     
      */
     @IBAction func backButtonAction(_ sender: Any) {
         _ = self.navigationController?.popViewController(animated: true)
@@ -581,11 +482,8 @@ class StudyHomeViewController : UIViewController{
     
     
     /**
-     
      This method is start button Action
-     
      @param sender    Accepts Any kind of object
-     
      */
     @IBAction func starButtonAction(_ sender: Any) {
         
@@ -608,24 +506,14 @@ class StudyHomeViewController : UIViewController{
     
     
     /**
-     
      This method is visit website button action
-     
      @param sender    Accepts UIButton object
-     
      */
     @IBAction func visitWebsiteButtonAction(_ sender: UIButton) {
         
-        //        let loginStoryboard = UIStoryboard.init(name: "Main", bundle:Bundle.main)
-        //        let webViewController = loginStoryboard.instantiateViewController(withIdentifier:"WebViewController") as! UINavigationController
-        //        let webView = webViewController.viewControllers[0] as! WebViewController
-        
-        
         if sender.tag == 1188 {
             //Visit Website
-            // webView.requestLink = Study.currentStudy?.overview.websiteLink
-            //self.navigationController?.present(webViewController, animated: true, completion: nil)
-            
+           
             self.navigateToWebView(link:  Study.currentStudy?.overview.websiteLink, htmlText: nil,isEmailAvailable:false)
             
         } else {
@@ -641,28 +529,18 @@ class StudyHomeViewController : UIViewController{
     /**
      
      This method is unwind to study home
-     
      @param segue    the segue used to connect the View controller
-     
      */
     @IBAction func unwindeToStudyHome(_ segue:UIStoryboardSegue){
-        //unwindStudyHomeSegue
-        //self.buttonActionJoinStudy(UIButton())
         
         self.hideSubViews()
-        
-        
-        
+    
         if (UserDefaults.standard.value(forKey: kPasscodeIsPending) as! Bool?)!{
             UserServices().getUserProfile(self as NMWebServiceDelegate)
         }
         else {
             UserServices().getStudyStates(self)
         }
-        
-        
-        
-        
     }
     
     //MARK:- Segue Methods
@@ -676,45 +554,38 @@ class StudyHomeViewController : UIViewController{
                     //go to study dashboard
                     self.removeProgressIndicator()
                     self.pushToStudyDashboard()
-                }
-                else if studyStatus.status == .yetToJoin {
+                }else if studyStatus.status == .yetToJoin {
                     
                     //check if enrolling is allowed
                     if study.studySettings.enrollingAllowed {
                         WCPServices().getEligibilityConsentMetadata(studyId:(Study.currentStudy?.studyId)!, delegate: self as NMWebServiceDelegate)
-                    }
-                    else {
+                    }else {
                         //unhide view
                         self.removeProgressIndicator()
                         self.unHideSubViews()
                     }
                     
-                }
-                else {
+                }else {
                     //unhide view
                     self.removeProgressIndicator()
                     self.unHideSubViews()
                 }
-            }
-            else{
+            }else {
                 //unhide view
                 self.removeProgressIndicator()
                 self.unHideSubViews()
             }
             
-        }
-        else {
+        }else {
             
             if study.status == .Active {
                 if study.studySettings.enrollingAllowed {
                     WCPServices().getEligibilityConsentMetadata(studyId:(Study.currentStudy?.studyId)!, delegate: self as NMWebServiceDelegate)
-                }
-                else {
+                }else {
                     self.removeProgressIndicator()
                     self.unHideSubViews()
                 }
-            }
-            else {
+            }else {
                 self.removeProgressIndicator()
                 self.unHideSubViews()
             }
@@ -732,12 +603,9 @@ class StudyHomeViewController : UIViewController{
     
     
     /**
-     
      This Method navigates to weblink
-     
      @param link        the link to go for desired destination
      @param htmlText    displays the text in the webview
-     
      */
     func navigateToWebView(link:String?,htmlText:String?, isEmailAvailable:Bool?){
         
@@ -760,12 +628,7 @@ class StudyHomeViewController : UIViewController{
 extension StudyHomeViewController:ComprehensionFailureDelegate{
     func didTapOnRetry() {
         
-        
-        
-        
         self.createEligibilityConsentTask()
-       
-        
     }
     
     func didTapOnCancel(){
@@ -790,7 +653,6 @@ extension StudyHomeViewController: PageViewControllerDelegate {
         if index == 0 {
             // for First Page
             
-            
             UIView.animate(withDuration: 0.1, animations: {
                 self.buttonJoinStudy?.backgroundColor = kUIColorForSubmitButtonBackground
                 self.buttonJoinStudy?.setTitleColor(UIColor.white, for: .normal)
@@ -798,7 +660,6 @@ extension StudyHomeViewController: PageViewControllerDelegate {
             })
         } else {
             // for All other pages
-            
             UIView.animate(withDuration: 0.1, animations: {
                 
                 self.buttonJoinStudy?.backgroundColor = UIColor.white
@@ -816,7 +677,6 @@ extension StudyHomeViewController:NMWebServiceDelegate {
         Logger.sharedInstance.info("requestname : \(requestName)")
         
         if requestName as String == WCPMethods.consentDocument.method.methodName {
-            //self.addProgressIndicator()
         }
         
         self.addProgressIndicator()
@@ -841,11 +701,8 @@ extension StudyHomeViewController:NMWebServiceDelegate {
                     self.isUpdatingIneligibility = false
                 }
                 
-            }
-
-            else {
-                // self.addProgressIndicator()
-                
+            }else {
+             
                 if ConsentBuilder.currentConsent?.consentResult?.consentPdfData?.count == 0 {
                     
                     // Define identifier
@@ -856,8 +713,7 @@ extension StudyHomeViewController:NMWebServiceDelegate {
                     
                     
                     //self.perform(#selector(self.updateEligibilityConsentStatus), with: self, afterDelay: 2.0)
-                }
-                else{
+                }else {
                     UserServices().updateUserEligibilityConsentStatus(eligibilityStatus: true, consentStatus:(ConsentBuilder.currentConsent?.consentStatus)!  , delegate: self)
                 }
             }
@@ -870,12 +726,7 @@ extension StudyHomeViewController:NMWebServiceDelegate {
                 let tokenDict = response?["data"] as! Dictionary<String,Any>
                 if Utilities.isValidObject(someObject: tokenDict as AnyObject?){
                     let apptoken = tokenDict["appToken"] as! String
-                    
-                    // self.addProgressIndicator()
-                    
-                    
-                    
-                    
+                   
                     //update token
                     let currentUserStudyStatus =  User.currentUser.updateStudyStatus(studyId:(Study.currentStudy?.studyId)!  , status: .inProgress)
                     currentUserStudyStatus.participantId = apptoken
@@ -888,39 +739,31 @@ extension StudyHomeViewController:NMWebServiceDelegate {
                     UserServices().updateUserParticipatedStatus(studyStauts: currentUserStudyStatus, delegate: self)
                 }
             }
-            
-            
-            
-            
-            
         }
         
         
-        if requestName as String == RegistrationMethods.updateEligibilityConsentStatus.method.methodName{
+        if requestName as String == RegistrationMethods.updateEligibilityConsentStatus.method.methodName {
             
-            if( User.currentUser.getStudyStatus(studyId:(Study.currentStudy?.studyId)! ) == UserStudyStatus.StudyStatus.inProgress){
+            if( User.currentUser.getStudyStatus(studyId:(Study.currentStudy?.studyId)! ) == UserStudyStatus.StudyStatus.inProgress) {
                 
                 isGettingJoiningDate = true
                 UserServices().getStudyStates(self)
                 
-                
             }
         }
-        //self.removeProgressIndicator()
-        
+       
         if requestName as String == WCPMethods.consentDocument.method.methodName {
             self.removeProgressIndicator()
             self.displayConsentDocument()
         }
         
-        if (requestName as String == RegistrationMethods.studyState.description){
+        if (requestName as String == RegistrationMethods.studyState.description) {
             
             if isGettingJoiningDate {
                 self.pushToStudyDashboard()
                 self.removeProgressIndicator()
                 isGettingJoiningDate = false
-            }
-            else {
+            }else {
                 
                 self.handleResponseForStudyState()
             }
@@ -932,8 +775,7 @@ extension StudyHomeViewController:NMWebServiceDelegate {
             
             if User.currentUser.settings?.passcode == true {
                 self.setPassCode()
-            }
-            else {
+            }else {
                 UserServices().getStudyStates(self)
             }
         }
@@ -955,21 +797,14 @@ extension StudyHomeViewController:NMWebServiceDelegate {
             let message = error.localizedDescription as NSString
             if message.length != 0 {
                  UIUtilities.showAlertWithTitleAndMessage(title:NSLocalizedString(kErrorTitle, comment: "") as NSString, message: error.localizedDescription as NSString)
-            }
-            else {
-                 //UIUtilities.showAlertWithTitleAndMessage(title:NSLocalizedString(kErrorTitle, comment: "") as NSString, message: "Unknown error occurred. Please try after some time.")
+            }else {
+                
                 UIUtilities.showAlertMessageWithActionHandler(kErrorTitle, message: "Unknown error occurred. Please try after some time.", buttonTitle: kTitleOk, viewControllerUsed: self, action: {
                     self.navigationController?.popViewController(animated: true)
                 })
             }
-            
-           
         }
-        
-        
-        
-        
-        //self.removeProgressIndicator()
+       
     }
 }
 
@@ -1017,19 +852,11 @@ extension StudyHomeViewController:ORKTaskViewControllerDelegate{
             print("saved")
             taskResult = taskViewController.restorationData
             
-            if taskViewController.task?.identifier == kEligibilityConsentTask{
-                
-            }
-            else{
-                //activityBuilder?.activity?.restortionData = taskViewController.restorationData
-            }
         }
         
         let lastStepResultIdentifier:String?
         
         lastStepResultIdentifier = (taskViewController.result.results?.last as! ORKStepResult).identifier
-        
-        
         
         if  taskViewController.task?.identifier == kEligibilityConsentTask && reason == ORKTaskViewControllerFinishReason.completed && lastStepResultIdentifier != kInEligibilityStep{
             
@@ -1075,7 +902,6 @@ extension StudyHomeViewController:ORKTaskViewControllerDelegate{
                   
                   UserServices().updateUserParticipatedStatus(studyStauts: currentUserStudyStatus, delegate: self)
                   
-                  
                 }
               
               }
@@ -1098,18 +924,6 @@ extension StudyHomeViewController:ORKTaskViewControllerDelegate{
                 
             }
             
-            //Following to for Step Level Result Saving , rather than Restorted data
-            /*
-             if (activityBuilder?.actvityResult?.result?.count)! < (taskViewController.result.results?.count)!{
-             
-             let orkStepResult:ORKStepResult? = taskViewController.result.results?[(taskViewController.result.results?.count)! - 2] as! ORKStepResult?
-             let activityStepResult:ActivityStepResult? = ActivityStepResult()
-             
-             activityStepResult?.initWithORKStepResult(stepResult: orkStepResult! as ORKStepResult , activityType:(activityBuilder?.actvityResult?.activity?.type)!)
-             activityBuilder?.actvityResult?.result?.append(activityStepResult!)
-             
-             }
-             */
         }
         
         //Handling show and hide of Back Button
@@ -1214,9 +1028,7 @@ extension StudyHomeViewController:ORKTaskViewControllerDelegate{
         }
         else if step.identifier == kConsentSharePdfCompletionStep {
             
-            // let reviewStep:ORKStepResult? = taskViewController.result.results?[(taskViewController.result.results?.count)! - 1] as! ORKStepResult?
-            
-            
+           
             var totalResults =  taskViewController.result.results
             let reviewStep:ORKStepResult?
             
@@ -1319,10 +1131,6 @@ extension StudyHomeViewController:ORKTaskViewControllerDelegate{
             
             //previous step was consent sharing and validation of answers(if comprehension test exists) is already done
             
-            
-            
-            
-            
             // comprehension test is available
             if (ConsentBuilder.currentConsent?.comprehension?.questions?.count)! > 0 {
                 
@@ -1360,9 +1168,6 @@ extension StudyHomeViewController:ORKTaskViewControllerDelegate{
                             if answeredSet.isSubset(of: correctAnswerSet){
                                 userScore = userScore + 1
                             }
-//                            else if (answeredSet.intersection(correctAnswerSet)).isEmpty == false{
-//                                userScore = userScore + 1
-//                            }
                             
                         case .all:
                             

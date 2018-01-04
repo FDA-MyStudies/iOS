@@ -45,54 +45,24 @@ class StudyDashboardViewController : UIViewController{
         statisticsArray = tableviewdata["statistics"] as! NSMutableArray
         
         labelStudyTitle?.text = Study.currentStudy?.name
+        
         //check if consent is udpated
-        
-        //TO BE REMOVED FOLLOWING 
-        
-        //StudyUpdates.studyConsentUpdated = true
         if StudyUpdates.studyConsentUpdated {
             let appDelegate = UIApplication.shared.delegate as! AppDelegate
              appDelegate.checkConsentStatus(controller: self)
         }
         
-    //Following To Be Uncommented
-      /*
-        let ud = UserDefaults.standard
-        let key = "LabKeyResponse" + (Study.currentStudy?.studyId)!
-        if !(ud.bool(forKey: key)){
-            self.getDataKeysForCurrentStudy()
-        }
-      */
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         UIApplication.shared.statusBarStyle = .lightContent
-        //unhide navigationbar
-       
+        
+        //show navigationbar
         self.navigationController?.setNavigationBarHidden(true, animated: true)
-      //Following To Be Uncommented
+    
         self.tableView?.reloadData()
-      /*
-        if StudyUpdates.studyActivitiesUpdated {
-            self.sendRequestToGetDashboardInfo()
-        }
-        else {
-            
-            DBHandler.loadStatisticsForStudy(studyId: (Study.currentStudy?.studyId)!) { (statiticsList) in
-                
-                if statiticsList.count != 0 {
-                    StudyDashboard.instance.statistics = statiticsList
-                    self.tableView?.reloadData()
-                }
-                else {
-                    self.sendRequestToGetDashboardInfo()
-                }
-            }
-        }
-   */
-      
- //Following To Be commented
+ 
       DBHandler.loadStatisticsForStudy(studyId: (Study.currentStudy?.studyId)!) { (statiticsList) in
 
         if statiticsList.count != 0 {
@@ -112,9 +82,7 @@ class StudyDashboardViewController : UIViewController{
 //MARK:- Helper Methods
     
     /**
-     
-     Used to Create Eligibility Consent Task 
-     
+     Used to Create Eligibility Consent Task
      */
     func createEligibilityConsentTask() {
         
@@ -135,7 +103,7 @@ class StudyDashboardViewController : UIViewController{
         present(taskViewController!, animated: true, completion: nil)
     }
     
-    func getDataKeysForCurrentStudy(){
+    func getDataKeysForCurrentStudy() {
         
         DBHandler.getDataSourceKeyForActivity(studyId: (Study.currentStudy?.studyId)!) { (activityKeys) in
             print(activityKeys)
@@ -149,9 +117,7 @@ class StudyDashboardViewController : UIViewController{
   
     
     /**
-     
      Used to send Request To Get Dashboard Info
-     
      */
     func sendRequestToGetDashboardInfo(){
         WCPServices().getStudyDashboardInfo(studyId: (Study.currentStudy?.studyId)!, delegate: self)
@@ -159,38 +125,36 @@ class StudyDashboardViewController : UIViewController{
   
     func sendRequestToGetDashboardResponse(){
         
-        
         if self.dataSourceKeysForLabkey.count != 0 {
             let details = self.dataSourceKeysForLabkey.first
             let activityId = details?["activityId"]
             var tableName = activityId
             let activity = Study.currentStudy?.activities.filter({$0.actvityId == activityId}).first
             var keys = details?["keys"]
+            
             if activity?.type == ActivityType.activeTask {
-              if activity?.taskSubType == "fetalKickCounter"{
-//                keys = "\"count\",duration,FetalKickId"
-//                tableName = activityId!+activityId!
                 
+              if activity?.taskSubType == "fetalKickCounter" {
                 keys = "\"count\",duration"
                 tableName = activityId!+activityId!
-              }
-              else if activity?.taskSubType == "towerOfHanoi"{
+                
+              }else if activity?.taskSubType == "towerOfHanoi" {
                 keys = "numberOfMoves"
                 tableName = activityId!+activityId!
-              }
-              else if activity?.taskSubType == "spatialSpanMemory"{
+                
+              }else if activity?.taskSubType == "spatialSpanMemory" {
                 keys = "NumberofGames,Score,NumberofFailures"
                 tableName = activityId!+activityId!
               }
             }
             let participantId = Study.currentStudy?.userParticipateState.participantId
+            //Get stats from Server
             LabKeyServices().getParticipantResponse(tableName:tableName!,activityId: activityId!, keys: keys!, participantId: participantId!, delegate: self)
         }
         else{
             self.removeProgressIndicator()
             
             //save response in database
-            
             let responses = StudyDashboard.instance.dashboardResponse
             for  response in responses{
                 
@@ -221,16 +185,11 @@ class StudyDashboardViewController : UIViewController{
             }
             let key = "LabKeyResponse" + (Study.currentStudy?.studyId)!
             UserDefaults.standard.set(true, forKey: key)
-           // print("Labkey response \(StudyDashboard.instance.dashboardResponse)")
         }
-        
-        //https://hphci-fdama-te-ds-01.labkey.com/mobileAppStudy-executeSQL.api?participantId=1a3d0d308df81024f8bfd7f11f7a0168&sql=SELECT%20*%20FROM%20Q1
-        
-        
     }
     
     
-    func handleExecuteSQLResonse(){
+    func handleExecuteSQLResponse(){
         
         self.dataSourceKeysForLabkey.removeFirst()
         self.sendRequestToGetDashboardResponse()
@@ -239,11 +198,8 @@ class StudyDashboardViewController : UIViewController{
 //MARK:- Button Actions
     
     /**
-     
      Home button clicked
-     
      @param sender    Accepts any kind of object
-
      */
     @IBAction func homeButtonAction(_ sender: AnyObject){
         self.performSegue(withIdentifier: unwindToStudyListDashboard, sender: self)
@@ -251,11 +207,8 @@ class StudyDashboardViewController : UIViewController{
     
     
     /**
-     
      Share to others button clicked
-     
      @param sender    Accepts any kind of object
-     
      */
     @IBAction func shareButtonAction(_ sender: AnyObject){
         
@@ -277,8 +230,8 @@ class StudyDashboardViewController : UIViewController{
     }
     
     func shareScreenShotByMail() {
+        
         //Create the UIImage
-       
         UIGraphicsBeginImageContextWithOptions(view.bounds.size, self.view.isOpaque, 0.0)
         view.layer.render(in: UIGraphicsGetCurrentContext()!)
         let image = UIGraphicsGetImageFromCurrentImageContext()
@@ -374,11 +327,7 @@ extension StudyDashboardViewController : UITableViewDataSource {
             case TableViewCells.welcomeCell.rawValue:
                 cell = tableView.dequeueReusableCell(withIdentifier: kWelcomeTableViewCell, for: indexPath) as! StudyDashboardWelcomeTableViewCell
                 (cell as! StudyDashboardWelcomeTableViewCell).displayFirstCelldata(data: tableViewData)
-                
-//            case TableViewCells.studyActivityCell.rawValue:
-//                cell = tableView.dequeueReusableCell(withIdentifier: kStudyActivityTableViewCell, for: indexPath) as! StudyDashboardStudyActivitiesTableViewCell
-//                (cell as! StudyDashboardStudyActivitiesTableViewCell).displaySecondCelldata(data: tableViewData)
-                
+               
             case TableViewCells.percentageCell.rawValue:
                 cell = tableView.dequeueReusableCell(withIdentifier: kPercentageTableViewCell, for: indexPath) as! StudyDashboardStudyPercentageTableViewCell
                 (cell as! StudyDashboardStudyPercentageTableViewCell).displayThirdCellData(data: tableViewData)
@@ -388,27 +337,10 @@ extension StudyDashboardViewController : UITableViewDataSource {
             }
             
         }else{
-            
-            //Used for Collection View cell
-           // if tableViewData["isStudy"] as! String == "YES"{
-                
-             //   cell = tableView.dequeueReusableCell(withIdentifier: kActivityTableViewCell, for: indexPath) as! StudyDashboardActivityTableViewCell
-            //    (cell as! StudyDashboardActivityTableViewCell).activityArrayData = todayActivitiesArray
-            //    (cell as! StudyDashboardActivityTableViewCell).activityCollectionView?.reloadData()
-            //}
-                
-            //else if tableViewData["isStudy"] as! String == "NO"{
-                
                 cell = tableView.dequeueReusableCell(withIdentifier: kStatisticsTableViewCell, for: indexPath) as! StudyDashboardStatisticsTableViewCell
-               // (cell as! StudyDashboardStatisticsTableViewCell).statisticsArrayData = statisticsArray
-                
                 (cell as! StudyDashboardStatisticsTableViewCell).displayData()
-                
-                //Used for setting it initially
                 (cell as! StudyDashboardStatisticsTableViewCell).buttonDay?.setTitle("  DAY  ", for: UIControlState.normal)
-                
                 (cell as! StudyDashboardStatisticsTableViewCell).statisticsCollectionView?.reloadData()
-            //}
         }
         return cell!
     }
@@ -437,10 +369,7 @@ extension StudyDashboardViewController:NMWebServiceDelegate {
     }
     
     func finishedRequest(_ manager: NetworkManager, requestName: NSString, response: AnyObject?) {
-        Logger.sharedInstance.info("requestname : \(requestName) response ; \(response)")
-        
        
-        
         if requestName as String == WCPMethods.eligibilityConsent.method.methodName {
             self.removeProgressIndicator()
             self.createEligibilityConsentTask()
@@ -450,7 +379,7 @@ extension StudyDashboardViewController:NMWebServiceDelegate {
             self.tableView?.reloadData()
         }
         else if requestName as String == ResponseMethods.executeSQL.description{
-            self.handleExecuteSQLResonse()
+            self.handleExecuteSQLResponse()
         }
     }
     
@@ -462,12 +391,11 @@ extension StudyDashboardViewController:NMWebServiceDelegate {
             self.removeProgressIndicator()
         }
         else if requestName as String == ResponseMethods.executeSQL.description{
-            self.handleExecuteSQLResonse()
+            self.handleExecuteSQLResponse()
         }
         else {
             self.removeProgressIndicator()
         }
-        //self.removeProgressIndicator()
     }
 }
 
@@ -489,25 +417,19 @@ extension StudyDashboardViewController:ORKTaskViewControllerDelegate{
             taskResult = taskViewController.result
             
             ConsentBuilder.currentConsent?.consentResult?.consentDocument =   ConsentBuilder.currentConsent?.consentDocument
-            
-            ConsentBuilder.currentConsent?.consentResult?.initWithORKTaskResult(taskResult:taskViewController.result )
+             ConsentBuilder.currentConsent?.consentResult?.initWithORKTaskResult(taskResult:taskViewController.result )
             
         case ORKTaskViewControllerFinishReason.failed:
             print("failed")
             taskResult = taskViewController.result
+            
         case ORKTaskViewControllerFinishReason.discarded:
             print("discarded")
             taskResult = taskViewController.result
+            
         case ORKTaskViewControllerFinishReason.saved:
             print("saved")
             taskResult = taskViewController.restorationData
-            
-            if taskViewController.task?.identifier == kEligibilityConsentTask{
-                
-            }
-            else{
-                //activityBuilder?.activity?.restortionData = taskViewController.restorationData
-            }
         }
         taskViewController.dismiss(animated: true, completion: nil)
     }
@@ -568,22 +490,19 @@ extension StudyDashboardViewController:ORKTaskViewControllerDelegate{
 //MARK:- StepViewController Delegate
     
     public func stepViewController(_ stepViewController: ORKStepViewController, didFinishWith direction: ORKStepViewControllerNavigationDirection){
-        
     }
     
     public func stepViewControllerResultDidChange(_ stepViewController: ORKStepViewController){
-        
     }
     
     public func stepViewControllerDidFail(_ stepViewController: ORKStepViewController, withError error: Error?){
-        
     }
     
     func taskViewController(_ taskViewController: ORKTaskViewController, viewControllerFor step: ORKStep) -> ORKStepViewController? {
         
         //CurrentStep is TokenStep
         
-        if step.identifier == kEligibilityTokenStep {
+        if step.identifier == kEligibilityTokenStep { //For EligibilityToken Step
             
             let gatewayStoryboard = UIStoryboard(name: kFetalKickCounterStep, bundle: nil)
             
@@ -593,28 +512,23 @@ extension StudyDashboardViewController:ORKTaskViewControllerDelegate{
             
             return ttController
         }
-        else if step.identifier == kConsentSharePdfCompletionStep {
-            
-            // let reviewStep:ORKStepResult? = taskViewController.result.results?[(taskViewController.result.results?.count)! - 1] as! ORKStepResult?
+        else if step.identifier == kConsentSharePdfCompletionStep { // For SharePdfCompletion Step
             
             var totalResults =  taskViewController.result.results
             let reviewStep:ORKStepResult?
-            
             totalResults = totalResults?.filter({$0.identifier == kReviewTitle})
-            
             reviewStep = totalResults?.first as! ORKStepResult?
             
-            if (reviewStep?.identifier)! == kReviewTitle && (reviewStep?.results?.count)! > 0{
+            if (reviewStep?.identifier)! == kReviewTitle && (reviewStep?.results?.count)! > 0 {
                 let consentSignatureResult:ORKConsentSignatureResult? = reviewStep?.results?.first as? ORKConsentSignatureResult
                 
-                if  consentSignatureResult?.consented == false{
+                if  consentSignatureResult?.consented == false { //User disagreed on Consent
                     taskViewController.dismiss(animated: true
                         , completion: nil)
                     _ = self.navigationController?.popViewController(animated: true)
                     return nil
                     
-                }
-                else{
+                }else { //User consented
                     
                     let documentCopy:ORKConsentDocument = (ConsentBuilder.currentConsent?.consentDocument)!.copy() as! ORKConsentDocument
                     
@@ -625,12 +539,11 @@ extension StudyDashboardViewController:ORKTaskViewControllerDelegate{
                     ttController.consentDocument =  documentCopy
                     return ttController
                 }
-            }
-            else {
+            }else {
                 return nil
             }
         }
-        else if step.identifier == kConsentViewPdfCompletionStep {
+        else if step.identifier == kConsentViewPdfCompletionStep { //For Pdf Completion Step
             
             let reviewSharePdfStep:ORKStepResult? = taskViewController.result.results?.last as! ORKStepResult?
             
@@ -641,24 +554,16 @@ extension StudyDashboardViewController:ORKTaskViewControllerDelegate{
                 
                 let ttController = gatewayStoryboard.instantiateViewController(withIdentifier: kConsentViewPdfStoryboardId) as! ConsentPdfViewerStepViewController
                 ttController.step = step
-                
                 ttController.pdfData = result?.pdfData
-                
                 return ttController
-            }
-            else{
-                //taskViewController.goForward()
+                
+            }else {
                 return nil
             }
-        }
-        else {
+        }else {
             
             return nil
         }
     }
 }
-
-
-
-
 

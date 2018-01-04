@@ -30,9 +30,11 @@ class OverviewSection {
     var websiteLink:String?     //used for Website link
     
     init(){
-        
     }
     
+    /**
+     Initializer with Dictionary of properties
+    */
     init(detail:Dictionary<String, Any>){
         
         /* Checks the Object (Array or Dictionary) is valid or not */
@@ -62,8 +64,7 @@ class OverviewSection {
             if Utilities.isValidValue(someObject: detail[kOverviewWebsiteLink] as AnyObject ) {
                 self.websiteLink = detail[kOverviewWebsiteLink] as? String
             }
-        }
-        else{
+        }else {
             Logger.sharedInstance.debug("Overview Dictionary is null:\(detail)")
         }
     }

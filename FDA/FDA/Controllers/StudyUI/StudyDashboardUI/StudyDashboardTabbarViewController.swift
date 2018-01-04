@@ -11,17 +11,17 @@ import MessageUI
 
 
 class StudyDashboardTabbarViewController: UITabBarController {
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // Do any additional setup after loading the view.
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         self.navigationController?.interactivePopGestureRecognizer?.isEnabled = false
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -31,16 +31,12 @@ class StudyDashboardTabbarViewController: UITabBarController {
     public func shareScreenshotByEmail(image:UIImage!, subject:String!,fileName:String!){
         
         let imageData = UIImagePNGRepresentation(image)
-        
         let mailComposerVC = MFMailComposeViewController()
-        mailComposerVC.mailComposeDelegate = self as! MFMailComposeViewControllerDelegate
-        
-        
+        mailComposerVC.mailComposeDelegate = self as MFMailComposeViewControllerDelegate
         let finalSubject = "\((Study.currentStudy?.name)!)" + " " + subject
         
         mailComposerVC.setSubject(finalSubject)
         mailComposerVC.setMessageBody("", isHTML: false)
-        
         
         let Filename =   "\((Study.currentStudy?.name)!)" + "_" + "\(fileName!)"  + ".png"
         
@@ -60,12 +56,7 @@ class StudyDashboardTabbarViewController: UITabBarController {
                 
             }))
         }
-
-        
-        
     }
-    
-    
 }
 
 extension StudyDashboardTabbarViewController:MFMailComposeViewControllerDelegate{

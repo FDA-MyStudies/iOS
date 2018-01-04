@@ -15,56 +15,42 @@ let kStoryboardIdentifierSlideMenuVC = "FDASlideMenuViewController"
 
 class SplashViewController: UIViewController {
     
-var isAppOpenedForFirstTime:Bool? = false
+    var isAppOpenedForFirstTime:Bool? = false
     
-//MARK:- Viewcontroller Lifecycle
+    //MARK:- Viewcontroller Lifecycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
-         DBHandler().initilizeCurrentUser()
-        //TEMP : Need to get form Realm
-        //let ud = UserDefaults.standard
         
+        DBHandler().initilizeCurrentUser()
         
         self.checkIfAppLaunchedForFirstTime()
         
-        /*Used to Check AuthKey, If exists navigate to HomeController else GatewayDashboard*/
+        // Checks AuthKey, If exists navigate to HomeController else GatewayDashboard
         if User.currentUser.authToken != nil {
-           
-//            DBHandler().initilizeCurrentUser()
-//            User.currentUser.authToken = ud.object(forKey: kUserAuthToken) as! String!
-//            User.currentUser.userId = ud.object(forKey:kUserId) as! String!
-//            User.currentUser.userType = UserType.FDAUser
             
-           let appDelegate = UIApplication.shared.delegate as! AppDelegate
+            let appDelegate = UIApplication.shared.delegate as! AppDelegate
             appDelegate.checkPasscode(viewController: self)
-            
             self.navigateToGatewayDashboard()
-        }
-        else {
+            
+        }else {
             self.navigateToHomeController()
         }
     }
-
+    
     override func viewDidDisappear(_ animated: Bool) {
-        
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     
     /**
-     
      Navigating to Home Screen and load HomeViewController from Login Storyboard
-     
      */
     func navigateToHomeController(){
         
@@ -74,10 +60,8 @@ var isAppOpenedForFirstTime:Bool? = false
     }
     
     
-    /** 
-     
-     Navigate to gateway Dashboard 
-     
+    /**
+     Navigate to gateway Dashboard
      */
     func navigateToGatewayDashboard(){
         self.createMenuView()
@@ -85,41 +69,33 @@ var isAppOpenedForFirstTime:Bool? = false
     
     
     /**
-     
      Navigating to Study list and Load FDASlideMenuViewController from Gateway Storyboard
-     
      */
     func createMenuView() {
         
         let storyboard = UIStoryboard(name: kStoryboardIdentifierGateway, bundle: nil)
-        
         let fda = storyboard.instantiateViewController(withIdentifier: kStoryboardIdentifierSlideMenuVC) as! FDASlideMenuViewController
         fda.automaticallyAdjustsScrollViewInsets = true
         self.navigationController?.pushViewController(fda, animated: true)
     }
     
+    //Update Encryption Key & IV on first time launch
     func checkIfAppLaunchedForFirstTime(){
         
         if isAppOpenedForFirstTime == false{
             
-            
             let currentDate = "\(Date(timeIntervalSinceNow: 0))"
-            
             let currentIndex = currentDate.index(currentDate.endIndex
                 , offsetBy: -13)
             let subStringFromDate = currentDate.substring(to: currentIndex)
             
             let ud = UserDefaults.standard
             
-           
-            
-            if User.currentUser.userType == .FDAUser{
+            if User.currentUser.userType == .FDAUser {
                 
                 let index =  User.currentUser.userId.index(User.currentUser.userId.endIndex
                     , offsetBy: -16)
-                
                 let subKey = User.currentUser.userId.substring(to:index )
-                
                 ud.set("\(subKey + subStringFromDate)", forKey: kEncryptionKey)
             }
             else{
@@ -129,9 +105,7 @@ var isAppOpenedForFirstTime:Bool? = false
             
             if UIDevice.current.model == kIsIphoneSimulator {
                 // simulator
-                
                 ud.set(kdefaultIVForEncryption, forKey: kEncryptionIV)
-                
             }
             else{
                 // not a simulator
@@ -139,18 +113,13 @@ var isAppOpenedForFirstTime:Bool? = false
                 
                 let index =  udid?.index((udid?.endIndex)!
                     , offsetBy: -20)
-                
                 udid = udid?.substring(to: index!)
-                
                 ud.set(udid, forKey: kEncryptionIV)
             }
             
             ud.synchronize()
-            
         }
-        
     }
-
 }
 
 

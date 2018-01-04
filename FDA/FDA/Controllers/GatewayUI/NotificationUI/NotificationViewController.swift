@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 
-class NotificationViewController : UIViewController{
+class NotificationViewController : UIViewController {
     
     @IBOutlet var tableView : UITableView?
     var notificationArray:Array<Any> = []
@@ -32,8 +32,6 @@ class NotificationViewController : UIViewController{
         self.addBackBarButton()
         self.navigationController?.setNavigationBarHidden(false, animated: true)
         
-        
-        
         let ud = UserDefaults.standard
         ud.set(false, forKey: kShowNotification)
         ud.synchronize()
@@ -41,15 +39,11 @@ class NotificationViewController : UIViewController{
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
-        
     }
 
+//MARK:- Helper Methods
     
-//MARK:- 
-    
-    
-    func handleNotificationListResponse(){
+    func handleNotificationListResponse() {
         if (Gateway.instance.notification?.count)! > 0{
             self.loadNotificationFromDatabase()
             self.tableView?.isHidden = false
@@ -59,26 +53,23 @@ class NotificationViewController : UIViewController{
         }
     }
     
-    func loadNotificationFromDatabase(){
+    func loadNotificationFromDatabase() {
         
         DBHandler.loadNotificationListFromDatabase(completionHandler: {(notificationList) in
             
             if notificationList.count > 0 {
                 self.tableView?.isHidden = false
                 
-                //Gateway.instance.notification = notificationList
-                for notification in notificationList{
+                for notification in notificationList {
                     
-                   
-                    if notification.type == AppNotification.NotificationType.Study{
+                    if notification.type == AppNotification.NotificationType.Study {
                         
                         let study = Gateway.instance.studies?.filter({$0.studyId == notification.studyId}).last
-                        
                         if study != nil && self.isUserJoined(study: study!){
                             self.notificationArray.append(notification)
                         }
-                    }
-                    else{
+                        
+                    }else{
                          self.notificationArray.append(notification)
                     }
                 }
@@ -90,28 +81,24 @@ class NotificationViewController : UIViewController{
                 if first is AppLocalNotification {
                   date1 = (first as! AppLocalNotification).startDate
                   
-                }
-                else {
+                }else {
                   date1 = (first as! AppNotification).date
                 }
                 
                 if second is AppLocalNotification {
                   date2 = (second as! AppLocalNotification).startDate
-                }
-                else {
+                    
+                }else {
                   date2 = (second as! AppNotification).date
                 }
-                
                return date1 > date2
                 
               })
               self.notificationArray = sorted
                 self.tableView?.reloadData()
-            }
-            else{
                 
+            }else{
             }
-            
         })
     }
     
@@ -126,19 +113,12 @@ class NotificationViewController : UIViewController{
     }
 
     
-    
-    
-    
-    
     /**
-     
      Used to check the Study State
-     
      @param study    Access the data from Study class
      @return Bool
-     
      */
-    class func checkForStudyState(study:Study) -> Bool{
+    class func checkForStudyState(study:Study) -> Bool {
         
         let currentStudy = study
         let participatedStatus = (currentStudy.userParticipateState.status)
@@ -147,8 +127,7 @@ class NotificationViewController : UIViewController{
         case .Active:
             if participatedStatus == .inProgress {
                 return true
-            }
-            else {
+            }else {
                  UIUtilities.showAlertWithTitleAndMessage(title: "", message: NSLocalizedString("Please join study to go forward.", comment: "") as NSString)
             }
         case .Upcoming:
@@ -163,20 +142,18 @@ class NotificationViewController : UIViewController{
         return false
     }
     
-     func isUserJoined(study:Study) -> Bool{
+     func isUserJoined(study:Study) -> Bool {
         
         let currentStudy = study
         let participatedStatus = (currentStudy.userParticipateState.status)
-        if participatedStatus == .inProgress{
+        if participatedStatus == .inProgress {
             return true
         }
-        
-        
         return false
     }
     
     
-    class func checkForStudyStateAndParticiapantState(study:Study) -> Bool{
+    class func checkForStudyStateAndParticiapantState(study:Study) -> Bool {
         
         let currentStudy = study
         let participatedStatus = (currentStudy.userParticipateState.status)
@@ -185,8 +162,7 @@ class NotificationViewController : UIViewController{
         case .Active:
             if participatedStatus == .inProgress {
                 return true
-            }
-            else {
+            }else {
                return false
             }
         case .Upcoming:
@@ -204,13 +180,10 @@ class NotificationViewController : UIViewController{
     
     
     /**
-     
      Used to push the screen to Study Dashboard
-     
      @param type    Access data from AppNotification class and NotificationSubType Enum
-
      */
-    func pushToStudyDashboard(type:AppNotification.NotificationSubType?){
+    func pushToStudyDashboard(type:AppNotification.NotificationSubType?) {
         
         let viewController:StudyDashboardTabbarViewController?
         let storyboard = UIStoryboard(name: kStudyStoryboard, bundle: nil)
@@ -268,19 +241,18 @@ extension NotificationViewController : UITableViewDelegate{
       
         let appNotification = notificationArray[indexPath.row]
         let appNotif = appNotification as! AppNotification
-        if appNotif.type == AppNotification.NotificationType.Study{
+        if appNotif.type == AppNotification.NotificationType.Study {
         
         if Utilities.isValidValue(someObject: appNotif.studyId as AnyObject?) {
             
             let study = Gateway.instance.studies?.filter({$0.studyId == appNotif.studyId}).last
             
-            if self.isUserJoined(study: study!) && study?.status == .Active{
+            if self.isUserJoined(study: study!) && study?.status == .Active {
                 
                 Study.updateCurrentStudy(study:study! )
                 self.pushToStudyDashboard(type:appNotif.subType )
 
             }
-        
         }
         }
     }

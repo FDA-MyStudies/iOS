@@ -11,6 +11,10 @@ import UIKit
 let kConfirmationSegueIdentifier = "confirmationSegue"
 let kHeaderDescription = "You have chosen to delete your FDA My Studies Account. This will result in automatic withdrawal from all studies.\nBelow is a list of studies that you are a part of and information on how your response data will be handled with each after you withdraw. Please review and confirm."
 
+let kConfirmWithdrawlSelectOptionsAlert = "Please select an option between Delete Data or Retain Data for all studies."
+let kResponseDataDeletedText = "Response data will be deleted"
+let kResponseDataRetainedText = "Response data will be retained"
+
 let kConfirmationCellType = "type"
 let kConfirmationCellTypeOptional = "Optional"
 let kConfrimationOptionalCellIdentifier = "ConfirmationOptionalCell"
@@ -20,6 +24,8 @@ let kConfirmationPlaceholder = "placeHolder"
 let kConfirmationPlist = "Confirmation"
 let kConfirmationNavigationTitle = "DELETE ACCOUNT"
 let kPlistFileType = ".plist"
+
+
 
 class StudyToDelete{
     
@@ -46,7 +52,7 @@ class ConfirmationViewController: UIViewController {
     var studyWithoutWCData:Study?
     var studiesToWithdrawn:Array<StudyToDelete>! = []
     
-//MARK:- View LifeCycle
+    //MARK:- View Controller LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -78,19 +84,19 @@ class ConfirmationViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    func checkWithdrawlConfigurationForNextSuty(){
+    //MARK: Helper Methods
+    func checkWithdrawlConfigurationForNextSuty() {
         
         if joinedStudies.count != 0 {
             
             let study = joinedStudies.first
             
-            if study?.withdrawalConfigration?.type == StudyWithdrawalConfigrationType.notAvailable{
+            if study?.withdrawalConfigration?.type == StudyWithdrawalConfigrationType.notAvailable {
                 
                 Study.updateCurrentStudy(study: study!)
                 self.sendRequestToGetInfoForStudy(study: study!)
                 
-            }
-            else {
+            }else {
                 studiesToDisplay.append(study!)
                 joinedStudies.removeFirst()
                 
@@ -98,12 +104,8 @@ class ConfirmationViewController: UIViewController {
                 print("studies to display \(studiesIds)")
                 
                 self.checkWithdrawlConfigurationForNextSuty()
-                
-               
-                
             }
-        }
-        else {
+        }else {
             
             self.removeProgressIndicator()
             self.createListOfStudiesToDelete()
@@ -111,7 +113,7 @@ class ConfirmationViewController: UIViewController {
         
     }
     
-    func createListOfStudiesToDelete(){
+    func createListOfStudiesToDelete() {
         
         for study in studiesToDisplay {
             var withdrawnStudy = StudyToDelete()
@@ -120,29 +122,26 @@ class ConfirmationViewController: UIViewController {
             
             if study.withdrawalConfigration?.type == StudyWithdrawalConfigrationType.deleteData {
                 withdrawnStudy.shouldDelete = true
-            }
-            else if study.withdrawalConfigration?.type == StudyWithdrawalConfigrationType.noAction {
+                
+            }else if study.withdrawalConfigration?.type == StudyWithdrawalConfigrationType.noAction {
                 withdrawnStudy.shouldDelete = false
             }
             
             studiesToWithdrawn.append(withdrawnStudy)
-            
         }
     }
     
     //MARK:- Webservice Response Handlers
-    func sendRequestToGetInfoForStudy(study:Study){
+    func sendRequestToGetInfoForStudy(study:Study) {
         WCPServices().getStudyInformation(studyId: study.studyId, delegate: self)
     }
     
-//MARK:- Webservice Response Handlers
+    //MARK:- Webservice Response Handlers
     
     /**
-     
      Handle delete account webservice response
-     
      */
-    func handleDeleteAccountResponse(){
+    func handleDeleteAccountResponse() {
         // fdaSlideMenuController()?.navigateToHomeAfterSingout()
         
         let leftController = slideMenuController()?.leftViewController as! LeftMenuViewController
@@ -151,57 +150,41 @@ class ConfirmationViewController: UIViewController {
         
     }
     
-    func handleStudyInformationResonse(){
+    func handleStudyInformationResonse() {
         
         studiesToDisplay.append(Study.currentStudy!)
-        
-        
         joinedStudies.removeFirst()
-            
-        self.checkWithdrawlConfigurationForNextSuty()
         
+        self.checkWithdrawlConfigurationForNextSuty()
         self.tableViewConfirmation?.reloadData()
-       
-        let studiesIds = studiesToDisplay.map({$0.studyId!})
-        print("studies to display \(studiesIds)")
     }
     
-    func handleWithdrawnFromStudyResponse(){
+    func handleWithdrawnFromStudyResponse() {
         
         studiesToWithdrawn.removeFirst()
         self.withdrawnFromNextStudy()
     }
     
-    
-    
-//MARK:- Button Actions
+    //MARK:- Button Actions
     
     /**
-     
-     Delete account button clicked 
-     
+     Delete account button clicked
      @param sender  Accepts UIButton object
-     
      */
     @IBAction func deleteAccountAction(_ sender:UIButton){
-    //UserServices().deleteAccount(self as NMWebServiceDelegate)
         
         var found:Bool = false
         for withdrawnStudy in studiesToWithdrawn {
             if withdrawnStudy.shouldDelete == nil {
-                print("Response not proviced")
-                UIUtilities.showAlertWithMessage(alertMessage: NSLocalizedString("Please select an option between Delete Data or Retain Data for all studies.", comment: ""))
+                
+                UIUtilities.showAlertWithMessage(alertMessage: NSLocalizedString(kConfirmWithdrawlSelectOptionsAlert, comment: ""))
                 found = true
                 break;
             }
-            
         }
-        
         if !found {
             self.withdrawnFromNextStudy()
         }
-        
-        //UserServices().deActivateAccount(self)
     }
     
     func withdrawnFromNextStudy(){
@@ -210,8 +193,7 @@ class ConfirmationViewController: UIViewController {
             
             let studyToWithdrawn = studiesToWithdrawn.first
             LabKeyServices().withdrawFromStudy(studyId: (studyToWithdrawn?.studyId)!, participantId: (studyToWithdrawn?.participantId)!, deleteResponses: (studyToWithdrawn?.shouldDelete)!, delegate: self)
-        }
-        else {
+        }else {
             //call for delete account
             
             let studiesIds = studiesToDisplay.map({$0.studyId!})
@@ -219,16 +201,12 @@ class ConfirmationViewController: UIViewController {
         }
     }
     
-    
     /**
-     
      Donot Delete button action
-     
      @param sender  Accepts UIButton object
-     
      */
-    @IBAction func doNotDeleteAccountAction(_ sender:UIButton){
-         _ = self.navigationController?.popViewController(animated: true)
+    @IBAction func doNotDeleteAccountAction(_ sender:UIButton) {
+        _ = self.navigationController?.popViewController(animated: true)
     }
 }
 
@@ -243,35 +221,30 @@ extension ConfirmationViewController : UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let study = studiesToDisplay[indexPath.row]
-        if study.withdrawalConfigration?.type == StudyWithdrawalConfigrationType.askUser{
-            
+        if study.withdrawalConfigration?.type == StudyWithdrawalConfigrationType.askUser {
             
             let  cell = tableView.dequeueReusableCell(withIdentifier: kConfrimationOptionalCellIdentifier, for: indexPath) as! ConfirmationOptionalTableViewCell
             cell.delegate = self
             cell.study = study
-
+            
             cell.labelTitle?.text = study.name 
             
             return cell
-        }
-        else{
+            
+        }else {
             // for ConfirmationTableViewCell data
             let cell = tableView.dequeueReusableCell(withIdentifier: kConfrimationCellIdentifier, for: indexPath) as! ConfirmationTableViewCell
             cell.labelTitle?.text = study.name
             
             if study.withdrawalConfigration?.type == StudyWithdrawalConfigrationType.deleteData {
-                cell.labelTitleDescription?.text = NSLocalizedString("Response data will be deleted", comment: "")
+                cell.labelTitleDescription?.text = NSLocalizedString(kResponseDataDeletedText, comment: "")
+            }else {
+                cell.labelTitleDescription?.text = NSLocalizedString(kResponseDataRetainedText, comment: "")
             }
-            else {
-                cell.labelTitleDescription?.text = NSLocalizedString("Response data will be retained", comment: "")
-            }
-            
-            
             return cell
         }
     }
 }
-
 
 //MARK:- TableView Delegates
 extension ConfirmationViewController : UITableViewDelegate{
@@ -286,7 +259,7 @@ extension ConfirmationViewController : ConfirmationOptionalDelegate{
     
     func confirmationCell(cell: ConfirmationOptionalTableViewCell, forStudy study: Study, deleteData: Bool) {
         
-        if var withdrawnStudy = self.studiesToWithdrawn.filter({$0.studyId == study.studyId}).last{
+        if var withdrawnStudy = self.studiesToWithdrawn.filter({$0.studyId == study.studyId}).last {
             withdrawnStudy.shouldDelete = deleteData
         }
     }
@@ -304,12 +277,12 @@ extension ConfirmationViewController:NMWebServiceDelegate {
         
         if requestName as String ==  RegistrationMethods.deactivate.description {
             self.removeProgressIndicator()
-             self.handleDeleteAccountResponse()
-        }
-        else if(requestName as String == WCPMethods.studyInfo.rawValue){
+            self.handleDeleteAccountResponse()
+            
+        }else if(requestName as String == WCPMethods.studyInfo.rawValue) {
             self.handleStudyInformationResonse()
-        }
-        else if(requestName as String == ResponseMethods.withdrawFromStudy.description){
+            
+        }else if(requestName as String == ResponseMethods.withdrawFromStudy.description) {
             self.handleWithdrawnFromStudyResponse()
         }
     }
@@ -317,32 +290,28 @@ extension ConfirmationViewController:NMWebServiceDelegate {
     func failedRequest(_ manager: NetworkManager, requestName: NSString, error: NSError) {
         Logger.sharedInstance.info("requestname : \(requestName)")
         
-        
         if error.code == 403 { //unauthorized
             self.removeProgressIndicator()
             UIUtilities.showAlertMessageWithActionHandler(kErrorTitle, message: error.localizedDescription, buttonTitle: kTitleOk, viewControllerUsed: self, action: {
                 self.fdaSlideMenuController()?.navigateToHomeAfterUnauthorizedAccess()
             })
-        }
-        else {
-            if(requestName as String == WCPMethods.studyInfo.rawValue){
+            
+        }else {
+            if(requestName as String == WCPMethods.studyInfo.rawValue) {
                 self.removeProgressIndicator()
-            }
-            else if requestName as String == ResponseMethods.withdrawFromStudy.description{
+                
+            }else if requestName as String == ResponseMethods.withdrawFromStudy.description {
                 if error.localizedDescription.localizedCaseInsensitiveContains("Invalid ParticipantId.") {
                     
                     self.handleWithdrawnFromStudyResponse()
                     
-                }
-                else {
+                }else {
                     self.removeProgressIndicator()
                 }
-            }
-            else {
+            }else {
                 self.removeProgressIndicator()
                 UIUtilities.showAlertWithTitleAndMessage(title:NSLocalizedString(kErrorTitle, comment: "") as NSString, message: error.localizedDescription as NSString)
             }
-            
         }
     }
 }

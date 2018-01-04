@@ -8,6 +8,8 @@
 
 import Foundation
 
+let kComprehensionFailureViewIdentifier = "ComprehensionFailure"
+
 protocol ComprehensionFailureDelegate {
     func didTapOnRetry();
     func didTapOnCancel();
@@ -22,16 +24,13 @@ class ComprehensionFailure: UIView {
     required init?(coder aDecoder: NSCoder) {
         
         super.init(coder: aDecoder)
-        //fatalError("init(coder:) has not been implemented")
-        
-        //Used to set border color for bottom view
-        
+       
+        //sets border color for bottom view
         buttonRetry?.layer.borderColor =   kUicolorForButtonBackground
-        
     }
     class func instanceFromNib(frame:CGRect,detail:Dictionary<String,Any>?) -> ComprehensionFailure {
         
-        let view = UINib(nibName: "ComprehensionFailure", bundle: nil).instantiate(withOwner: nil, options: nil)[0] as! ComprehensionFailure
+        let view = UINib(nibName: kComprehensionFailureViewIdentifier, bundle: nil).instantiate(withOwner: nil, options: nil)[0] as! ComprehensionFailure
         view.frame = frame
         view.buttonRetry?.layer.borderColor =   kUicolorForButtonBackground
         
@@ -40,15 +39,15 @@ class ComprehensionFailure: UIView {
         
     }
     
-    @IBAction func buttonCancelAction(){
+    //MARK: Button Actions
+    @IBAction func buttonCancelAction() {
         self.isHidden =  true
         self.removeFromSuperview()
         self.delegate?.didTapOnCancel()
     }
-    @IBAction func buttonRetryAction(){
+    @IBAction func buttonRetryAction() {
        
-        self.delegate?.didTapOnRetry()
-      
+      self.delegate?.didTapOnRetry()
       self.isHidden =  true
       self.removeFromSuperview()
     }

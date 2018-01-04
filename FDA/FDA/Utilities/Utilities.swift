@@ -12,9 +12,6 @@ import UIKit
 let MAX_WIDTH = 1000
 let MAX_HEIGHT = 100
 
-//let alert = UIAlertView()
-
-//public typealias AlertAction = () -> Void
 
 enum DirectoryType : String{
     case study = "Study"
@@ -76,7 +73,6 @@ class Utilities: NSObject {
     class  func hexStringToUIColor(_ hex:String) -> UIColor {
         
         var cString:String =  hex.trimmingCharacters(in: NSCharacterSet.whitespacesAndNewlines)
-        //hex.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet() as NSCharacterSet).uppercased()
         
         if (cString.hasPrefix("#")) {
             cString = cString.substring(from: cString.characters.index(cString.startIndex, offsetBy: 1))
@@ -127,35 +123,28 @@ class Utilities: NSObject {
         return size
     }
     
-    class func paddingViewForTextFiled(_ textFiled:UITextField)->Void{
-        let paddingView = UIView(frame: CGRect(x: 0, y: 0, width: 20, height: textFiled.frame.height))
-        textFiled.leftView = paddingView
-        textFiled.leftViewMode = UITextFieldViewMode.always
-        // textFiled.layoutIfNeeded()
-    }
-    
     class func clearTheNotificationData(){
         //clearing notificationArray inUserdefaults
         UserDefaults.standard.removeObject(forKey: "NotifName")
         UserDefaults.standard.removeObject(forKey: "NotifTime")
     }
     
+    //MARK: Validation Methods
     class func validateInputValue(value : String, valueType : String)-> Bool{
         
         var valueRegex = ""
         if valueType == "Phone"{
             
-            
         }else if valueType == "Name"{
             valueRegex = "[a-zA-z]+([ '-][a-zA-Z]+)*$"
+            
         }else if valueType == "Email"{
             
             valueRegex = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}"
-        }
-        else if valueType == "Password"{
+            
+        }else if valueType == "Password"{
             
             // password validation for which is length >= 8 && contains any special character
-            
             valueRegex = "^(?=.*[!\"#$%&'()*+,-./:;<=>?@\\^_`{|}~\\[\\]])[0-9A-Za-z!\"#$%&'()*+,-./:;<=>?@\\^_`{|}~\\[\\]]{8,}$"
         }
         
@@ -166,7 +155,6 @@ class Utilities: NSObject {
     
     class func isValidEmail(testStr:String) -> Bool {
         
-        // print("validate calendar: \(testStr)")
         let emailRegEx = "[A-Z0-9a-z._-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}"
         
         let emailTest = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
@@ -179,8 +167,8 @@ class Utilities: NSObject {
         }
     }
     
-    //Used to check all the validations for password
-    class func isPasswordValid( text : String) -> Bool{
+    //checks all the validations for password
+    class func isPasswordValid( text : String) -> Bool {
         let text = text
         
         let lowercaseLetterRegEx  = ".*[a-z]+.*"
@@ -196,8 +184,7 @@ class Utilities: NSObject {
         let texttest1 = NSPredicate(format:"SELF MATCHES %@", numberRegEx)
         let numberresult = texttest1.evaluate(with: text)
         print("\(numberresult)")
-        //".*[!#$%&'()*+,-.:;<>=?@[\]^_{}|~]+.*"
-        //"!@#%&-_=?:;\"'<>,`~\\*\\?\\+\\[\\]\\(\\)\\{\\}\\^\\$\\|\\\\\\.\\/"
+        
         let specialCharacterRegEx  = ".*[!#$%&'()*+,-.:;\\[\\]<>=?@^_{}|~]+.*"
         let texttest2 = NSPredicate(format:"SELF MATCHES %@", specialCharacterRegEx)
         
@@ -205,7 +192,6 @@ class Utilities: NSObject {
         print("\(specialresult)")
         
         let textCountResult = text.characters.count > 7 && text.characters.count <= 64 ? true : false
-        
         
         if capitalresult == false || numberresult == false || specialresult == false || textCountResult ==  false || lowercaseresult == false{
             return false
@@ -215,7 +201,7 @@ class Utilities: NSObject {
     }
     
     
-    class func formatNumber( mobileNumber: NSString)-> NSString{
+    class func formatNumber( mobileNumber: NSString)-> NSString {
         var mobileNumber = mobileNumber
         mobileNumber = mobileNumber.replacingOccurrences(of: "(", with: "") as NSString
         mobileNumber = mobileNumber.replacingOccurrences(of: ")", with: "") as NSString
@@ -227,15 +213,13 @@ class Utilities: NSObject {
         if(length > 10)
         {
             mobileNumber = mobileNumber.substring(from: length - 10) as NSString
-            //print(mobileNumber)
             
         }
         
         return mobileNumber;
     }
     
-    class  func getLength( mobileNumber : NSString) -> Int
-    {
+    class  func getLength( mobileNumber : NSString) -> Int {
         var mobileNumber = mobileNumber
         mobileNumber = mobileNumber.replacingOccurrences(of: "(", with: "") as NSString
         mobileNumber = mobileNumber.replacingOccurrences(of: ")", with: "") as NSString
@@ -244,15 +228,10 @@ class Utilities: NSObject {
         mobileNumber = mobileNumber.replacingOccurrences(of: "+", with: "") as NSString
         
         let length = mobileNumber.length
-        
         return length
     }
     
-    class func checkTextSufficientComplexity(password : String) -> Bool{
-        
-        //let capitalLetterRegEx  = ".*[A-Z]+.*"
-        
-        //€£• _-/:;.,?'|
+    class func checkTextSufficientComplexity(password : String) -> Bool {
         
         let capitalLetterRegEx  = ".*[~!@#$%^&*()_]+.*"
         
@@ -270,13 +249,14 @@ class Utilities: NSObject {
         return capitalresult && numberresult
     }
     
-    class func isValidValue(someObject: AnyObject?) -> Bool {
-      /*
-         Method to validate a value for Null condition
-         @someObject: can be String,Int or Bool
-         returns a Boolean on valid data
-        */
     
+    /*
+     Method to validate a value for Null condition
+     @someObject: can be String,Int or Bool
+     returns a Boolean on valid data
+     */
+    class func isValidValue(someObject: AnyObject?) -> Bool {
+        
         guard let someObject = someObject else {
             // is null
             
@@ -288,100 +268,88 @@ class Utilities: NSObject {
             
             if someObject as? Int != nil && (someObject as? Int)! >= 0 {
                 return true
-            }
-            else if someObject as? String != nil && ((someObject as? String)?.characters.count)! > 0 && (someObject as? String) != ""{
+                
+            }else if someObject as? String != nil && ((someObject as? String)?.characters.count)! > 0 && (someObject as? String) != ""{
                 return true
-            }
-            else if someObject as? Bool != nil && (someObject as! Bool == true || someObject as! Bool == false){
+                
+            }else if someObject as? Bool != nil && (someObject as! Bool == true || someObject as! Bool == false){
                 return true
-            }
-            else  if someObject as? Double != nil && (someObject as? Double)?.isFinite == true && (someObject as? Double)?.isZero == false && (someObject as? Double)! > 0 {
+                
+            }else  if someObject as? Double != nil && (someObject as? Double)?.isFinite == true && (someObject as? Double)?.isZero == false && (someObject as? Double)! > 0 {
                 return true
-            }
-            else if someObject as? Date != nil {
+                
+            }else if someObject as? Date != nil {
                 return true
-            }
-            else{
-                //Logger.sharedInstance.debug("Value is null:\(someObject)")
+                
+            }else{
                 return false
             }
-        }
-        else{
+        }else{
             return false
         }
     }
     
+    /* Method to check if value is of specific Type
+     @someValue:can be any value
+     @type:must a specific class Type
+     returns boolean
+     */
     class func isValidValueAndOfType(someValue:AnyObject? , type:AnyClass )->Bool{
-        /* Method to check if value is of specific Type
-         @someValue:can be any value
-         @type:must a specific class Type
-         returns boolean 
-         NOTE:current not in use, need modifications
-         */
-        
         guard let someObject = someValue else {
             // is null
             
             return false
         }
         // is not null
-        
         if (someObject is NSNull) ==  false {
             
             if (someValue?.isKind(of: type))! && someValue != nil {
                 return true
-            }
-            else{
+            }else{
                 return false
             }
-        }
-        else{
+        }else{
             Logger.sharedInstance.debug("Value is null:\(someObject)")
             return false
         }
     }
     
+    /* Method to Validate Object and checks for Null
+     @someObject: can be either an Array or Dictionary
+     returns a Boolean if someObject is not null
+     */
     class func isValidObject(someObject: AnyObject?)-> Bool{
-        
-        /* Method to Validate Object and checks for Null
-         @someObject: can be either an Array or Dictionary
-         returns a Boolean if someObject is not null
-        */
         
         guard let someObject = someObject else {
             // is null
-            
             return false
         }
         
         if (someObject is NSNull) ==  false {
-            if someObject as? Dictionary<String, Any> != nil  && (someObject as? Dictionary<String, Any>)?.isEmpty == false && ((someObject as? Dictionary<String, Any>)?.count)! > 0{
+            if someObject as? Dictionary<String, Any> != nil  && (someObject as? Dictionary<String, Any>)?.isEmpty == false && ((someObject as? Dictionary<String, Any>)?.count)! > 0 {
                 return true
-            }
-            else if someObject as? NSArray != nil && ((someObject as? NSArray)?.count)! > 0 {
+                
+            }else if someObject as? NSArray != nil && ((someObject as? NSArray)?.count)! > 0 {
                 return true
-            }
-            else{
+                
+            }else {
                 return false
             }
-        }
-        else{
+            
+        }else{
             Logger.sharedInstance.debug("Object is null:\(someObject)")
             return false
         }
     }
     
+    /* Method to get DateFromString for default dateFormatter
+     @dateString:a date String of format "yyyy-MM-dd'T'HH:mm:ssZ"
+     returns date for the specified dateString in same format
+     */
     class func getDateFromString(dateString:String)->Date?{
-        /* Method to get DateFromString for default dateFormatter
-         @dateString:a date String of format "yyyy-MM-dd'T'HH:mm:ssZ"
-         returns date for the specified dateString in same format
-        */
         
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
-        // dateFormatter.timeZone = NSTimeZone(name: "UTC") as TimeZone!
-        
-        //"2016-08-01T08:00:00+0900"
         
         guard let date = dateFormatter.date(from: dateString) else {
             assert(false, "no date from string")
@@ -389,25 +357,22 @@ class Utilities: NSObject {
         }
         
         dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-        // dateFormatter.timeZone = NSTimeZone.local // NSTimeZone(name: "UTC") as TimeZone!
         let finalString = dateFormatter.string(from: date)
         let finalDate = dateFormatter.date(from: finalString)
         return finalDate
         
     }
+    
+    /* Method to get DateFromString for default dateFormatter
+     @dateString:a date String of format "yyyy-MM-dd'T'HH:mm:ssZ"
+     returns date for the specified dateString in same format
+     */
     class func getDateFromStringWithOutTimezone(dateString:String)->Date?{
-        /* Method to get DateFromString for default dateFormatter
-         @dateString:a date String of format "yyyy-MM-dd'T'HH:mm:ssZ"
-         returns date for the specified dateString in same format
-         */
         
         let dateWithoutTimeZoneArray = dateString.components(separatedBy: ".")
         let dateWithourTimeZone = dateWithoutTimeZoneArray[0] as String
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
-        // dateFormatter.timeZone = NSTimeZone(name: "UTC") as TimeZone!
-        
-        //"2016-08-01T08:00:00+0900"
         
         guard let date = dateFormatter.date(from: dateWithourTimeZone) else {
             assert(false, "no date from string")
@@ -415,17 +380,19 @@ class Utilities: NSObject {
         }
         
         dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-        // dateFormatter.timeZone = NSTimeZone.local // NSTimeZone(name: "UTC") as TimeZone!
+        
         let finalString = dateFormatter.string(from: date)
         let finalDate = dateFormatter.date(from: finalString)
         return finalDate
         
     }
+    
+    /* Method to get StringFromDate for default dateFormatter
+     @date:a date  of format "yyyy-MM-dd'T'HH:mm:ssZ"
+     returns dateString for the specified date in same format
+     */
     class func getStringFromDate(date:Date)->String?{
-        /* Method to get StringFromDate for default dateFormatter
-         @date:a date  of format "yyyy-MM-dd'T'HH:mm:ssZ"
-         returns dateString for the specified date in same format
-         */
+        
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
         dateFormatter.timeZone = TimeZone.current
@@ -446,6 +413,7 @@ class Utilities: NSObject {
         return Bundle.main.bundleIdentifier!
     }
     
+    //MARK: Alert handlers
     class func showAlertWithMessage(alertMessage:String)->Void{
         self.showAlertWithTitleAndMessage(title:"", message: alertMessage as NSString)
     }
@@ -475,28 +443,29 @@ class Utilities: NSObject {
 }
 
 extension FileManager {
+    
+    /* Method to get documentDirectory of Application
+     return path of documentDirectory
+     */
     class func documentsDir() -> String {
-        /* Method to get documentDirectory of Application
-         return path of documentDirectory
-        */
-        
         var paths = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true) as [String]
         return paths[0]
     }
     
+    /* Method to get CacheDirectory of Application
+     return path of CacheDirectory
+     */
     class func cachesDir() -> String {
-        /* Method to get CacheDirectory of Application
-         return path of CacheDirectory
-         */
+        
         var paths = NSSearchPathForDirectoriesInDomains(.cachesDirectory, .userDomainMask, true) as [String]
         return paths[0]
     }
     
+    /* Method to create Study or gateway directory
+     @type:DirectoryType can be study or gateway
+     returns a directory path string if exists already or else create One and returns path
+     */
     class func getStorageDirectory(type:DirectoryType) -> String{
-        /* Method to create Study or gateway directory
-         @type:DirectoryType can be study or gateway
-         returns a directory path string if exists already or else create One and returns path
-        */
         
         let fileManager = FileManager.default
         

@@ -15,37 +15,13 @@ public typealias AlertAction = () -> Void
 
 class UIUtilities: NSObject {
     
-    /* Presents alert message */
-    class func showAlertWithTitleAndMessage(title: NSString, message : NSString)->Void {
-        
-        let alert = UIAlertController(title:title as String,message:message as String,preferredStyle: UIAlertControllerStyle.alert)
-          alert.addAction(UIAlertAction(title:NSLocalizedString("OK", comment: ""), style: .default, handler: nil))
-        var rootViewController = UIApplication.shared.keyWindow?.rootViewController
-        if let navigationController = rootViewController as? UINavigationController {
-            rootViewController = navigationController.viewControllers.first
-        }
-        if let tabBarController = rootViewController as? UITabBarController {
-            rootViewController = tabBarController.selectedViewController
-        }
-        rootViewController?.present(alert, animated: true, completion: nil)
-         
-    }
     
-    /* Dismiss alert message*/
-    class func dismissAlert(){
-        alert.dismiss(withClickedButtonIndex: 0, animated: false)
-    }
-    
-    /* Presents alert message */
-    class func showAlertWithMessage(alertMessage:String)->Void{
-        self.showAlertWithTitleAndMessage(title:"", message: alertMessage as NSString)
-    }
-    
+    //MARK: UI changes for textField
     /* Initial Padding space before displaying the texts */
-    class func paddingViewForTextFiled(textFiled:UITextField)->Void{
-        let paddingView =  UIView.init(frame: CGRect(x: 0, y: 0, width: 10, height: textFiled.frame.height))
-        textFiled.leftView = paddingView
-        textFiled.leftViewMode = UITextFieldViewMode.always
+    class func paddingViewForTextField(textField:UITextField)->Void{
+        let paddingView =  UIView.init(frame: CGRect(x: 0, y: 0, width: 10, height: textField.frame.height))
+        textField.leftView = paddingView
+        textField.leftViewMode = UITextFieldViewMode.always
     }
     
     /* Add a border to Textfield
@@ -71,6 +47,7 @@ class UIUtilities: NSObject {
         //"bf7266"
         //"414c6f"
     }
+    //MARK: UI effects & View Changes
     
     /* Used to remove border text field */
     class func removeTheBorderToTextField(textField:UITextField)->UITextField {
@@ -189,6 +166,7 @@ class UIUtilities: NSObject {
         view.layer.borderColor = Utilities.hexStringToUIColor("kInvalidBorderColor").cgColor
     }
     
+    //MARK: JSON serialization helper methods
     class func convertDictionaryIntoString(mutableDic:NSMutableDictionary) ->String{
         
         var jsonString:String!
@@ -212,6 +190,33 @@ class UIUtilities: NSObject {
         catch{
         }
         return socialMediaNamesString
+    }
+    //MARK: Alert composers
+    
+    /* Presents alert message */
+    class func showAlertWithTitleAndMessage(title: NSString, message : NSString)->Void {
+        
+        let alert = UIAlertController(title:title as String,message:message as String,preferredStyle: UIAlertControllerStyle.alert)
+        alert.addAction(UIAlertAction(title:NSLocalizedString("OK", comment: ""), style: .default, handler: nil))
+        var rootViewController = UIApplication.shared.keyWindow?.rootViewController
+        if let navigationController = rootViewController as? UINavigationController {
+            rootViewController = navigationController.viewControllers.first
+        }
+        if let tabBarController = rootViewController as? UITabBarController {
+            rootViewController = tabBarController.selectedViewController
+        }
+        rootViewController?.present(alert, animated: true, completion: nil)
+        
+    }
+    
+    /* Dismiss alert message*/
+    class func dismissAlert(){
+        alert.dismiss(withClickedButtonIndex: 0, animated: false)
+    }
+    
+    /* Presents alert message */
+    class func showAlertWithMessage(alertMessage:String)->Void{
+        self.showAlertWithTitleAndMessage(title:"", message: alertMessage as NSString)
     }
     
     class func showAlertMessageWithTwoActionsAndHandler(_ errorTitle : String,errorMessage : String,errorAlertActionTitle : String ,errorAlertActionTitle2 : String?,viewControllerUsed : UIViewController, action1:@escaping AlertAction, action2:@escaping AlertAction){
@@ -251,8 +256,6 @@ class UIUtilities: NSObject {
         viewControllerUsed.present(alert, animated:true, completion: nil)
     }
     
-    
-    
     class func showAlertMessageWithActionHandler(_ title : String,message : String,buttonTitle : String ,viewControllerUsed : UIViewController, action:@escaping AlertAction){
         
         let alert = UIAlertController(title: title, message: message, preferredStyle:UIAlertControllerStyle.alert)
@@ -270,17 +273,6 @@ class UIUtilities: NSObject {
         alert.addAction(UIAlertAction(title: errorAlertActionTitle, style: UIAlertActionStyle.default, handler: nil))
         viewControllerUsed!.present(alert, animated:true, completion: nil)
     }
-    
-//    //Used to show gif loader
-//    class func showGifLoader() {
-//        GiFHUD.setGifWithImageName("localive_preloader@3x.gif")
-//        GiFHUD.showWithOverlay()
-//    }
-//    
-//    //used to dismiss gif loader
-//    class func hideGifLoader(){
-//        GiFHUD.dismiss()
-//    }
     
 }
 

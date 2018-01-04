@@ -19,11 +19,8 @@ class StudyDashboardActivityCollectionViewCell: UICollectionViewCell {
     
     
     /**
-     
      Used to display Activity cell
-     
      @param data    Accepts data from Dictionary
- 
      */
     func displayTodaysActivities(data : NSDictionary){
         labelTitle?.text = data["title"] as? String

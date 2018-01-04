@@ -9,7 +9,7 @@
 import UIKit
 
 class StudyDashboardActivityTableViewCell: UITableViewCell {
-
+    
     //Fourth cell Outlets
     @IBOutlet var activityCollectionView: UICollectionView?
     
@@ -17,14 +17,11 @@ class StudyDashboardActivityTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
     }
-
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-        // Configure the view for the selected state
     }
-
 }
 
 
@@ -38,7 +35,7 @@ extension StudyDashboardActivityTableViewCell: UICollectionViewDelegate , UIColl
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let activityCellData = activityArrayData.object(at: indexPath.row) as! NSDictionary
-            
+        
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: kActivityCollectionViewCell, for: indexPath) as! StudyDashboardActivityCollectionViewCell
         cell.displayTodaysActivities(data: activityCellData)
         
@@ -46,8 +43,6 @@ extension StudyDashboardActivityTableViewCell: UICollectionViewDelegate , UIColl
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
-        
     }
 }
 

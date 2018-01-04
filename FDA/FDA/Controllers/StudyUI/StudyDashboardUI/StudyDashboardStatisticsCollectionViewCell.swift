@@ -9,16 +9,16 @@
 import UIKit
 
 enum StatisticsType:String{
-   case  Activity
-   case  Sleep
-   case  Weight
-   case  Nutrition
-   case  HeartRate
-   case  BloodGlucose
-   case  ActiveTask
-   case  BabyKicks
-   case  Mood
-   case  Other
+    case  Activity
+    case  Sleep
+    case  Weight
+    case  Nutrition
+    case  HeartRate
+    case  BloodGlucose
+    case  ActiveTask
+    case  BabyKicks
+    case  Mood
+    case  Other
     
     var description:String{
         switch self {
@@ -56,12 +56,14 @@ class StudyDashboardStatisticsCollectionViewCell: UICollectionViewCell {
     @IBOutlet var labelUnit : UILabel?
     var stats:DashboardStatistics!
     
-    
+    /**
+     Display DashboardStats for selected Tab
+     */
     func displayStatisics(data : DashboardStatistics,startDate:Date,endDate:Date?,tab:SelectedTab){
         
-         stats = data
-         labelStatisticsText?.text = data.displayName
-         labelUnit?.text = data.unit?.uppercased()
+        stats = data
+        labelStatisticsText?.text = data.displayName
+        labelUnit?.text = data.unit?.uppercased()
         
         self.displayStateTypeImage()
         
@@ -79,9 +81,8 @@ class StudyDashboardStatisticsCollectionViewCell: UICollectionViewCell {
         
         if stats.statType == nil {
             statisticsImage?.image = UIImage(named: "activity")
-        }
-        else {
-            //let type = StatisticsType(rawValue:stats.statType!)!
+            
+        }else {
             
             switch stats.statType! {
             case  StatisticsType.Activity.description:
@@ -109,15 +110,12 @@ class StudyDashboardStatisticsCollectionViewCell: UICollectionViewCell {
             }
         }
         
-       
+        
     }
     
     /**
-     
      Used to display Statistics cell
-     
      @param data    Accepts the data from Dictionary
-     
      */
     func displayStatisics(data : DashboardStatistics){
         
@@ -125,11 +123,11 @@ class StudyDashboardStatisticsCollectionViewCell: UICollectionViewCell {
         let array = data.statList.map{$0.data}
         
         if  data.calculation! == StatisticsFormula.Maximum.rawValue {
-             let max = array.max()
+            let max = array.max()
             labelStatisticsCount?.text = String(describing: max)
         }
         if  data.calculation! == StatisticsFormula.Minimum.rawValue {
-             let min = array.min()
+            let min = array.min()
             labelStatisticsCount?.text = String(describing: min)
         }
         if  data.calculation! == StatisticsFormula.Average.rawValue {
@@ -141,26 +139,10 @@ class StudyDashboardStatisticsCollectionViewCell: UICollectionViewCell {
             let sumArray = array.reduce(0, +)
             labelStatisticsCount?.text = String(describing: sumArray)
         }
-      //  let max = array.max()
-        
-      //  let min = array.min()
-        
-      //  let sumArray = array.reduce(0, +)
-      //  let avgArrayValue = sumArray / Float(array.count)
-        
-      //  let sumArray1 = array.reduce(0, +)
-        
-      //  print("sum:\(sumArray1) min:\(min) avg:\(avgArrayValue) max: \(max)")
-        
-        
-//        let (position, min) = reduce(enumerate(array), (-1, Int.max)) {
-//            $0.1 < $1.1 ? $0 : $1
-//        }
-
     }
     
     
-    //MARK:- Data Handler
+    //MARK:- Date Handlers
     func handleForDay(date:Date){
         
         let dataList:Array<DBStatisticsData> = stats.statList.filter({$0.startDate! >= date.startOfDay && $0.startDate! <= date.endOfDay!})
@@ -198,15 +180,17 @@ class StudyDashboardStatisticsCollectionViewCell: UICollectionViewCell {
             labelStatisticsCount?.text = "NA"
         }
         else {
-           self.calculate(array: array)
+            self.calculate(array: array)
         }
         
     }
     
+    /**
+     calculates the stats data and Updates Stats Label
+     */
     func calculate(array:Array<Float>){
         
         
-       // let array = data.statList.map{$0.data}
         let data = self.stats!
         
         if  data.calculation! == StatisticsFormula.Maximum.rawValue {
@@ -231,5 +215,5 @@ class StudyDashboardStatisticsCollectionViewCell: UICollectionViewCell {
             labelStatisticsCount?.text = sumValue
         }
     }
-
+    
 }

@@ -9,7 +9,7 @@
 import UIKit
 
 class StudyDashboardStudyActivitiesTableViewCell: UITableViewCell {
-
+    
     //Second cell Outlets
     @IBOutlet var labelCompletedNumber : UILabel?
     @IBOutlet var labelSurveyNumber : UILabel?
@@ -19,21 +19,16 @@ class StudyDashboardStudyActivitiesTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
     }
-
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-        // Configure the view for the selected state
     }
     
     
     /**
-     
-     Used to display Study Activities cell 
-     
+     Used to display Study Activities cell
      @param data    Accepts data from Dictionary
-
      */
     func displaySecondCelldata(data : NSDictionary){
         labelCompletedNumber?.text = String(format:"%@/10",data["completedNumber"] as! String)

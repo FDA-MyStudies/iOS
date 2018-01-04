@@ -9,32 +9,25 @@
 import UIKit
 
 class StudyDashboardWelcomeTableViewCell: UITableViewCell {
-
+    
     //First cell Outlets
     @IBOutlet var labelName : UILabel?
     @IBOutlet var labelStatus : UILabel?
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
     }
-
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
     }
     
     
     /**
-     
      Used to display Welcome cell
-     
      @param data    Accepts data from Dictionary
-     
      */
     func displayFirstCelldata(data : NSDictionary){
-        //labelName?.text = String(format:"Welcome back %@,",data["name"] as! String)
         labelStatus?.text = data["status"] as? String
     }
     

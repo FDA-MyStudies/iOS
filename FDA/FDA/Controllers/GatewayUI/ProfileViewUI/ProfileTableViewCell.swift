@@ -37,11 +37,8 @@ class ProfileTableViewCell: UITableViewCell {
     
     
     /**
-     
      Used to set default values
-     
      @param dict    holds the dictionary of default values
-     
      */
     func setCellData(dict : NSDictionary ){
         
@@ -49,12 +46,10 @@ class ProfileTableViewCell: UITableViewCell {
         
     }
     
-    
+
     /**
      Used to set toggle value for switch
-     
      @param toggleValue    switch Value
-     
      */
     func setToggleValue(indexValue:Int)  {
         
@@ -96,7 +91,6 @@ class ProfileTableViewCell: UITableViewCell {
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         
-        // Configure the view for the selected state
     }
 }
 

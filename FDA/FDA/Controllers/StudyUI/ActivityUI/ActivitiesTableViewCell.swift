@@ -36,12 +36,9 @@ class ActivitiesTableViewCell: UITableViewCell {
 
     
     /**
-     
      Used to change the cell background color
-     
      @param selected    checks if particular cell is selected
      @param animated    used to animate the cell
-     
      */
     override func setSelected(_ selected: Bool, animated: Bool) {
         let color = labelStatus?.backgroundColor
@@ -54,12 +51,9 @@ class ActivitiesTableViewCell: UITableViewCell {
     
     
     /**
-     
      Used to set the cell state ie Highlighted
-     
      @param highlighted    should cell be highlightened
      @param animated    used to animate the cell
-     
      */
     override func setHighlighted(_ highlighted: Bool, animated: Bool) {
         let color = labelStatus?.backgroundColor
@@ -71,12 +65,9 @@ class ActivitiesTableViewCell: UITableViewCell {
     
     
     /**
-     
      Populate the cell data with Activity
-     
      @param activity    Access the value from Activity class
      @param availablityStatus Access the value from ActivityAvailabilityStatus enum
-
      */
     func populateCellDataWithActivity(activity:Activity ,availablityStatus:ActivityAvailabilityStatus){
         
@@ -89,25 +80,13 @@ class ActivitiesTableViewCell: UITableViewCell {
             
             labelRunStatus?.isHidden = false
            
-            
-            
-
-            //update user activity status
-            //self.setUserStatusForActivity(activity: activity)
-            
-            
             if activity.currentRunId == 0 {
                 labelStatus?.isHidden = true
-            }
-            else {
+                
+            }else {
                 labelStatus?.isHidden = false
             }
-            
-            
-            
-            
-        }
-        else {
+        }else {
             
             labelRunStatus?.isHidden = true
             labelStatus?.isHidden = true
@@ -123,8 +102,8 @@ class ActivitiesTableViewCell: UITableViewCell {
             if activity.incompletedRuns != 0 || activity.totalRuns == 0 {
                 self.labelStatus?.backgroundColor =  UIColor.red
                 self.labelStatus?.text = UserActivityStatus.ActivityStatus.abandoned.description
-            }
-            else {
+                
+            }else {
                 self.labelStatus?.backgroundColor =  kGreenColor
                 self.labelStatus?.text = UserActivityStatus.ActivityStatus.completed.description
             }
@@ -133,13 +112,10 @@ class ActivitiesTableViewCell: UITableViewCell {
     
     
     /**
-     
      Used to update User Run Status
-     
      @param activity    Access the value from Activity class
-
      */
-    func updateUserRunStatus(activity:Activity){
+    func updateUserRunStatus(activity:Activity) {
         
         let currentRunId = (activity.totalRuns != 0) ? String(activity.currentRunId) : "0"
         
@@ -148,8 +124,8 @@ class ActivitiesTableViewCell: UITableViewCell {
         if activity.totalRuns <= 1 {
             self.buttonMoreSchedules?.isHidden = true
             self.buttonMoreSchedulesBottomLine?.isHidden = true
-        }
-        else {
+            
+        }else {
             self.buttonMoreSchedules?.isHidden = false
             self.buttonMoreSchedulesBottomLine?.isHidden = false
             let moreSchedulesTitle =  "+" + String(activity.totalRuns - 1) + " more"
@@ -157,13 +133,9 @@ class ActivitiesTableViewCell: UITableViewCell {
         }
     }
     
-    
     /**
-     
      Used to set User Status For Activity
-     
      @param activity    Access the value from Activity class
-
      */
     func setUserStatusForActivity(activity:Activity){
         
@@ -180,20 +152,13 @@ class ActivitiesTableViewCell: UITableViewCell {
             switch userActivityStatus.status {
             case .inProgress:
                 self.labelStatus?.backgroundColor = kYellowColor
-                //self.labelStatus?.text = kResumeSpaces
             case .yetToJoin:
                 self.labelStatus?.backgroundColor = kBlueColor
-                //self.labelStatus?.text = kStartSpaces
             case .abandoned:
                 self.labelStatus?.backgroundColor =  UIColor.red
-                //self.labelStatus?.text = kInCompletedSpaces
             case .completed:
                 self.labelStatus?.backgroundColor = kGreenColor
-                //self.labelStatus?.text = kCompletedSpaces
-                
             }
-            //bookMarkStatus
-            //buttonBookmark?.isSelected = userStudyStatus.bookmarked
         }
         else {
             
@@ -205,8 +170,8 @@ class ActivitiesTableViewCell: UITableViewCell {
                 
                 self.labelStatus?.backgroundColor =  UIColor.red
                 self.labelStatus?.text = UserActivityStatus.ActivityStatus.abandoned.description
-            }
-            else {
+                
+            }else {
                 
                 let activityStatus = UserActivityStatus()
                 activityStatus.status = .yetToJoin
@@ -220,15 +185,10 @@ class ActivitiesTableViewCell: UITableViewCell {
     
     
     /**
-     
      Used to calculate Activity Timings
-     
      @param activity    Access the value from Activity class
-
      */
     func calculateActivityTimings(activity:Activity){
-        
-        //print("name: \(activity.name) - start \(activity.startDate) , end \(activity.endDate)")
         
         var startDate = activity.startDate//?.utcDate()
         var endDate   = activity.endDate//?.utcDate()
@@ -243,7 +203,6 @@ class ActivitiesTableViewCell: UITableViewCell {
     
         let frequency = activity.frequencyType
         
-        //let activityStartTime = ActivitiesTableViewCell.timeFormatter.string(from: startDate!)
         let startDateString = ActivitiesTableViewCell.oneTimeFormatter.string(from: startDate!)
         var endDateString = ""
         if endDate != nil {
@@ -259,20 +218,16 @@ class ActivitiesTableViewCell: UITableViewCell {
         }
        
         switch frequency {
-        case .One_Time:
+        case .One_Time: // Handle for One Time Frequency
             
-           
             if endDate != nil {
-                
                 labelTime?.text = startDateString + " - " + endDateString
-            }
-            else {
-                labelTime?.text = startDateString
                 
+            }else {
+                labelTime?.text = startDateString
             }
-            
-            //print("\(activityStartTime), \(startDateString) to \(endDateString)")
-        case .Daily:
+
+        case .Daily: // Handle for Daily Frequency
             
             var runStartTimingsList:Array<String> = []
             for dict in activity.frequencyRuns!{
@@ -281,12 +236,12 @@ class ActivitiesTableViewCell: UITableViewCell {
                 let runStartTimeAsString =  ActivitiesTableViewCell.timeFormatter.string(from: runStartTime!)
                 runStartTimingsList.append(runStartTimeAsString)
             }
-            let runStartTime =  runStartTimingsList.joined(separator: " | ") //ActivitiesTableViewCell.timeFormatter.string(from: startDate!)
+            let runStartTime =  runStartTimingsList.joined(separator: " | ")
             let dailyStartDate =  ActivitiesTableViewCell.dailyActivityFormatter.string(from: startDate!)
             let endDate = ActivitiesTableViewCell.dailyActivityFormatter.string(from: endDate!)
             labelTime?.text = runStartTime  + "\n" +  dailyStartDate + " to " + endDate
             
-        case .Weekly:
+        case .Weekly: // Handle for Weekly Frequency
             
             var weeklyStartTime = ActivitiesTableViewCell.weeklyformatter.string(from: startDate!)
             weeklyStartTime = weeklyStartTime.replacingOccurrences(of: ",", with: "every")
@@ -294,46 +249,38 @@ class ActivitiesTableViewCell: UITableViewCell {
             
             labelTime?.text = weeklyStartTime + " to " + endDate
             
-        case .Monthly:
+        case .Monthly: // Handle for Monthly Frequency
+            
             var monthlyStartTime = ActivitiesTableViewCell.monthlyformatter.string(from: startDate!)
             monthlyStartTime = monthlyStartTime.replacingOccurrences(of: ",", with: "on")
             monthlyStartTime = monthlyStartTime.replacingOccurrences(of: ";", with: "every month\n")
             
             let endDate = ActivitiesTableViewCell.formatter.string(from: endDate!)
-            
             labelTime?.text = monthlyStartTime + " to " + endDate
 
-        case .Scheduled:
-            
+        case .Scheduled: // Handle for Scheduled Frequency
             
             var runStartDate:Date?
             var runEndDate:Date?
             if activity.currentRun != nil {
                 
-                
              runStartDate = activity.currentRun.startDate
              runEndDate = activity.currentRun.endDate
-            
-            
-                
-            }
-            else {
+
+            }else {
                 
                 let run = activity.activityRuns.filter({$0.runId == activity.currentRunId}).first
                 runStartDate = run?.startDate
                 runEndDate = run?.endDate
                 
             }
-            
             if runEndDate == nil || runStartDate == nil {
                 runStartDate = activity.startDate
                 runEndDate = activity.endDate
             }
-            
             let currentRunStartDate = ActivitiesTableViewCell.oneTimeFormatter.string(from: runStartDate!)
             let currentRunEndDate = ActivitiesTableViewCell.oneTimeFormatter.string(from: runEndDate!)
             labelTime?.text = currentRunStartDate + " - " + currentRunEndDate
-        
         }
     }
     
@@ -341,61 +288,54 @@ class ActivitiesTableViewCell: UITableViewCell {
 //MARK:- Button Action
     
     /**
-     
      Clicked on  MoreSchedules
-     
      @param _    Accepts UIButton object
-
      */
     @IBAction func buttonMoreSchedulesClicked(_ :UIButton){
         self.delegate?.activityCell(cell: self, activity: self.currentActivity)
     }
     
+    /**
+     Formatters for differnt frequency types
+    */
     private static let formatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateFormat = "MMM dd YYYY"
-        //formatter.timeZone = TimeZone.init(abbreviation:"GMT")
         return formatter
     }()
     
     private static let dailyActivityFormatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateFormat = "MMM dd YYYY"
-        //formatter.timeZone = TimeZone.current //.init(abbreviation:"GMT")
         return formatter
     }()
     
     private static let oneTimeFormatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateFormat = "hh:mma, MMM dd YYYY"
-        //formatter.timeZone = TimeZone.init(abbreviation:"GMT")
         return formatter
     }()
     
     private static let weeklyformatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateFormat = "hh:mma , EEE MMM dd YYYY"
-        //formatter.timeZone = TimeZone.init(abbreviation:"GMT")
         return formatter
     }()
 
     private static let monthlyformatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateFormat = "hh:mma , dd ;MMM dd YYYY"
-        //formatter.timeZone = TimeZone.init(abbreviation:"GMT")
         return formatter
     }()
 
     private static let timeFormatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateFormat = "hh:mma"
-        //formatter.timeZone = TimeZone.init(abbreviation:"GMT")
         return formatter
     }()
     private static let dailyFormatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateFormat = "HH:mm:ss"
-        //formatter.timeZone = TimeZone.init(abbreviation:"GMT")
         return formatter
     }()
 }

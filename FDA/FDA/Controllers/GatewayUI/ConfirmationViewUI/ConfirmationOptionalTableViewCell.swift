@@ -31,7 +31,6 @@ class ConfirmationOptionalTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
     }
 
 //MARK:IBActions
@@ -45,49 +44,32 @@ class ConfirmationOptionalTableViewCell: UITableViewCell {
                 imageViewRetainCheckBox?.image = #imageLiteral(resourceName: "notChecked")
                 deleteData = true;
             }
-//            else{
-//                imageViewDeleteCheckBox?.image = #imageLiteral(resourceName: "notChecked")
-//                imageViewRetainCheckBox?.image = #imageLiteral(resourceName: "checked")
-//                deleteData = false;
-//            }
-        }
-        else{
+        }else {
             if (imageViewRetainCheckBox?.image?.isEqual(#imageLiteral(resourceName: "notChecked")))! {
                 imageViewRetainCheckBox?.image = #imageLiteral(resourceName: "checked")
                 imageViewDeleteCheckBox?.image = #imageLiteral(resourceName: "notChecked")
                 deleteData = false;
             }
-//            else{
-//                imageViewRetainCheckBox?.image = #imageLiteral(resourceName: "notChecked")
-//                imageViewDeleteCheckBox?.image = #imageLiteral(resourceName: "checked")
-//                deleteData = true;
-//            }
         }
-        
         self.delegate?.confirmationCell(cell: self, forStudy: study, deleteData: deleteData)
-       
     }
    
     //MARK:Utility methods
     
     func setDefaultDeleteAction(defaultValue:String){
-        
         if defaultValue == kConfirmationOptionalDefaultTypeRetain {
             imageViewRetainCheckBox?.image = #imageLiteral(resourceName: "notChecked")
             imageViewDeleteCheckBox?.image = #imageLiteral(resourceName: "checked")
 
-        }
-        else{
+        }else{
             imageViewDeleteCheckBox?.image = #imageLiteral(resourceName: "checked")
             imageViewRetainCheckBox?.image = #imageLiteral(resourceName: "notChecked")
         }
-        
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
-        // Configure the view for the selected state
     }
 
 }

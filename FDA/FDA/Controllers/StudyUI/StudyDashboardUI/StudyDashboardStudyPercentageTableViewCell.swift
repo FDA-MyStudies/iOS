@@ -9,7 +9,7 @@
 import UIKit
 
 class StudyDashboardStudyPercentageTableViewCell: UITableViewCell {
-
+    
     //Third cell Outlets
     @IBOutlet var labelStudyCompletion : UILabel?
     @IBOutlet var labelStudyAdherence : UILabel?
@@ -23,22 +23,17 @@ class StudyDashboardStudyPercentageTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
     }
-
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
+        
     }
     
     
     /**
-     
      Used to display Study Percentage cell
-     
      @param data    Accepts the data from Dictionary
-
      */
     func displayThirdCellData(data : NSDictionary){
         let currentUser = User.currentUser
@@ -54,7 +49,6 @@ class StudyDashboardStudyPercentageTableViewCell: UITableViewCell {
         studyPercentagePie?.glowMode = .forward
         studyPercentagePie?.glowAmount = 0.1
         studyPercentagePie?.set(colors: blueColor)
-        //studyPercentagePie?.angle = 99/0.27777778
         
         completedPercentagePie?.startAngle = -90
         completedPercentagePie?.progressThickness = 0.25
@@ -66,7 +60,6 @@ class StudyDashboardStudyPercentageTableViewCell: UITableViewCell {
         completedPercentagePie?.glowMode = .forward
         completedPercentagePie?.glowAmount = 0.1
         completedPercentagePie?.set(colors: blueColor)
-        //completedPercentagePie?.angle = 99/0.27777778
         
         if let userStudyStatus = currentUser.participatedStudies.filter({$0.studyId == study?.studyId}).first {
             //update completion %
@@ -85,13 +78,11 @@ class StudyDashboardStudyPercentageTableViewCell: UITableViewCell {
                 self.labelStudyCompletion?.text = String(userStudyStatus.adherence)
                 self.labelStudyAdherence?.text = String(userStudyStatus.completion)
                 
-                
                 studyPercentagePie?.angle = Double(userStudyStatus.completion)/0.27777778
                 completedPercentagePie?.angle = Double(userStudyStatus.adherence)/0.27777778
             }
             
-        }
-        else {
+        }else {
             self.labelStudyCompletion?.text = "0"
             self.labelStudyAdherence?.text = "0"
             

@@ -42,6 +42,7 @@ enum StudyWithdrawalConfigrationType:String{
     case notAvailable = "NotAvailable"
 }
 
+//MARK:ConsentDocument
 struct ConsentDocument {
     
     var htmlString:String?
@@ -68,36 +69,35 @@ struct ConsentDocument {
             if Utilities.isValidValue(someObject: consentDoucumentdict[kConsentDocumentVersion] as AnyObject ){
                 self.version = consentDoucumentdict[kConsentDocumentVersion] as? String
             }
-        }
-        else{
+        }else{
             Logger.sharedInstance.debug("Study Dictionary is null:\(consentDoucumentdict)")
         }
     }
-    
 }
 
+//MARK:Study
 class Study : Hashable {
     
     //MARK:Properties
-    var studyId:String!
+    var studyId:String! //Unique identifier
     var name:String?
-    var version:String?
-    var newVersion:String?
+    var version:String? //Current Version
+    var newVersion:String? //Updated Version
     var identifer:String?
     var category:String?
     var startDate:String?
     var endEnd:String?
-    var status:StudyStatus = .Active
+    var status:StudyStatus = .Active //Current Study Status
     var sponserName:String?
     var description:String?
     var brandingConfiguration:String?
     var logoURL:String?
     var overview:Overview!
     var activities:Array<Activity>! = []
-    var resources:Array<Resource>? = []
+    var resources:Array<Resource>? = [] //Resources for Study & Activities
     var userParticipateState:UserStudyStatus! = nil
     var studySettings:StudySettings!
-    var consentDocument:ConsentDocument?
+    var consentDocument:ConsentDocument? //Study Consent Document
     var signedConsentVersion:String?
     var signedConsentFilePath:String?
     var anchorDate:StudyAnchorDate?
@@ -117,7 +117,9 @@ class Study : Hashable {
     init() {
         
     }
-    
+    /**
+     Study Initializer with dictionary of properties
+     */
     init(studyDetail:Dictionary<String,Any>) {
         
         if Utilities.isValidObject(someObject: studyDetail as AnyObject?){
@@ -155,15 +157,13 @@ class Study : Hashable {
             
             if let userStudyStatus = currentUser.participatedStudies.filter({$0.studyId == self.studyId}).last{
                 self.userParticipateState = userStudyStatus
-            }
-            else {
+                
+            }else {
                 self.userParticipateState = UserStudyStatus()
             }
-        }
-        else{
+        }else {
             Logger.sharedInstance.debug("Study Dictionary is null:\(studyDetail)")
         }
-        
     }
     
     static func ==(lhs: Study, rhs: Study) -> Bool {
@@ -171,18 +171,16 @@ class Study : Hashable {
     }
     
     
-    class func updateCurrentActivity(activity:Activity){
+    class func updateCurrentActivity(activity:Activity) {
         Study.currentActivity = activity
     }
     
-    class  func updateCurrentStudy(study:Study){
+    class  func updateCurrentStudy(study:Study) {
         Study.currentStudy = study
     }
-    
-    
-    
 }
 
+//MARK:StudySettings
 class StudySettings{
     
     var enrollingAllowed = true
@@ -192,7 +190,9 @@ class StudySettings{
     init() {
         
     }
-    
+    /**
+     Initializer with dictionary of properties of settings
+     */
     init(settings:Dictionary<String,Any>) {
         
         if Utilities.isValidObject(someObject: settings as AnyObject?){
@@ -200,11 +200,9 @@ class StudySettings{
             if Utilities.isValidValue(someObject: settings[kStudyEnrolling] as AnyObject ){
                 self.enrollingAllowed = (settings[kStudyEnrolling] as? Bool)!
             }
-            
             if Utilities.isValidValue(someObject: settings[kStudyRejoin] as AnyObject ){
                 self.rejoinStudyAfterWithdrawn = (settings[kStudyRejoin] as? Bool)!
             }
-            
             if Utilities.isValidValue(someObject: settings[kStudyPlatform] as AnyObject ){
                 self.platform = (settings[kStudyPlatform] as? String)!
             }
@@ -212,6 +210,7 @@ class StudySettings{
     }
 }
 
+//MARK:StudyAnchorDate
 class StudyAnchorDate{
     //anchorDate Value
     var date:Date?
@@ -221,9 +220,11 @@ class StudyAnchorDate{
     var anchorDateQuestionKey:String?
     
     init() {
-        
     }
     
+    /**
+     Initializer with ditionary of properties
+     */
     init(detail:Dictionary<String,Any>) {
         
         if Utilities.isValidObject(someObject: detail as AnyObject?){
@@ -248,8 +249,6 @@ class StudyAnchorDate{
                     self.anchorDateQuestionKey = (questionInfo[kStudyAnchorDateQuestionKey] as? String)!
                 }
             }
-            
-            
         }
     }
     
@@ -286,14 +285,17 @@ class StudyAnchorDate{
     }
 }
 
+//MARK:StudyWithdrawalConfigration
 class StudyWithdrawalConfigration {
     var message:String? = ""
-      var type:StudyWithdrawalConfigrationType? = .notAvailable
-    
+    var type:StudyWithdrawalConfigrationType? = .notAvailable
     
     init() {
-        
     }
+    
+    /**
+     Initializer with dictionary of properties
+     */
     init(withdrawalConfigration:Dictionary<String,Any>){
         if Utilities.isValidObject(someObject: withdrawalConfigration as AnyObject?){
             
@@ -307,53 +309,50 @@ class StudyWithdrawalConfigration {
             if Utilities.isValidValue(someObject: withdrawalConfigration[kStudyWithdrawalType] as AnyObject ){
                 self.type = StudyWithdrawalConfigrationType(rawValue:(withdrawalConfigration[kStudyWithdrawalType] as? String)!)
             }
-           
+            
             
         }
         
     }
     
 }
-    struct StudyUpdates{
+//MARK:StudyUpdates
+struct StudyUpdates{
+    
+    static  var studyInfoUpdated = false
+    static  var studyConsentUpdated = false
+    static  var studyActivitiesUpdated = false
+    static  var studyResourcesUpdated = false
+    static  var studyVersion:String? = nil
+    static  var studyStatus:String? = nil
+    
+    init() {
+    }
+    /**
+     Initializer with dictionary of properties
+     */
+    init(detail:Dictionary<String,Any>){
         
-        static  var studyInfoUpdated = false
-        static  var studyConsentUpdated = false
-        static  var studyActivitiesUpdated = false
-        static  var studyResourcesUpdated = false
-        static  var studyVersion:String? = nil
-        static  var studyStatus:String? = nil
-        
-        init() {
+        if Utilities.isValidObject(someObject: detail[kStudyUpdates] as AnyObject?){
             
-        }
-        
-        
-        init(detail:Dictionary<String,Any>){
+            let updates =  detail[kStudyUpdates] as! Dictionary<String,Any>
             
-            if Utilities.isValidObject(someObject: detail[kStudyUpdates] as AnyObject?){
-                
-                let updates =  detail[kStudyUpdates] as! Dictionary<String,Any>
-                
-                if Utilities.isValidValue(someObject: updates[kStudyResources] as AnyObject ){
-                    StudyUpdates.studyResourcesUpdated = (updates[kStudyResources] as? Bool)!
-                }
-                if Utilities.isValidValue(someObject: updates[kStudyInfo] as AnyObject ){
-                    StudyUpdates.studyInfoUpdated = (updates[kStudyInfo] as? Bool)!
-                }
-                if Utilities.isValidValue(someObject: updates[kStudyConsent] as AnyObject ){
-                    StudyUpdates.studyConsentUpdated = (updates[kStudyConsent] as? Bool)!
-                }
-                if Utilities.isValidValue(someObject: updates[kStudyActivities] as AnyObject ){
-                    StudyUpdates.studyActivitiesUpdated = (updates[kStudyActivities] as? Bool)!
-                }
-                if Utilities.isValidValue(someObject: updates["status"] as AnyObject ){
-                    StudyUpdates.studyStatus = updates["status"] as? String
-                }
-                
+            if Utilities.isValidValue(someObject: updates[kStudyResources] as AnyObject ){
+                StudyUpdates.studyResourcesUpdated = (updates[kStudyResources] as? Bool)!
             }
-            
-            StudyUpdates.studyVersion = detail[kStudyCurrentVersion] as? String
-            
+            if Utilities.isValidValue(someObject: updates[kStudyInfo] as AnyObject ){
+                StudyUpdates.studyInfoUpdated = (updates[kStudyInfo] as? Bool)!
+            }
+            if Utilities.isValidValue(someObject: updates[kStudyConsent] as AnyObject ){
+                StudyUpdates.studyConsentUpdated = (updates[kStudyConsent] as? Bool)!
+            }
+            if Utilities.isValidValue(someObject: updates[kStudyActivities] as AnyObject ){
+                StudyUpdates.studyActivitiesUpdated = (updates[kStudyActivities] as? Bool)!
+            }
+            if Utilities.isValidValue(someObject: updates["status"] as AnyObject ){
+                StudyUpdates.studyStatus = updates["status"] as? String
+            }
         }
-        
+        StudyUpdates.studyVersion = detail[kStudyCurrentVersion] as? String
+    }
 }

@@ -35,8 +35,6 @@ class AppNotification {
         case studyEvent
     }
 
-    
-    
     var id:String?
     var type:NotificationType = .Gateway
     var subType:NotificationSubType!
@@ -50,23 +48,25 @@ class AppNotification {
     var read:Bool? = false
     
     init() {
-        
     }
     
+    /**
+     Initializer with dictionary of properties
+    */
     init(detail:Dictionary<String, Any>){
         
-        if Utilities.isValidObject(someObject: detail as AnyObject?){
+        if Utilities.isValidObject(someObject: detail as AnyObject?) {
             
-            if Utilities.isValidValue(someObject: detail[kNotificationId] as AnyObject ){
+            if Utilities.isValidValue(someObject: detail[kNotificationId] as AnyObject ) {
                 self.id = detail[kNotificationId] as? String
             }
-            if Utilities.isValidValue(someObject: detail[kNotificationTitle] as AnyObject ){
+            if Utilities.isValidValue(someObject: detail[kNotificationTitle] as AnyObject ) {
                 self.title = detail[kNotificationTitle] as? String
             }
-            if Utilities.isValidValue(someObject: detail[kNotificationMessage] as AnyObject ){
+            if Utilities.isValidValue(someObject: detail[kNotificationMessage] as AnyObject ) {
                 self.message = detail[kNotificationMessage] as? String
             }
-            if Utilities.isValidValue(someObject: detail[kNotificationType] as AnyObject ){
+            if Utilities.isValidValue(someObject: detail[kNotificationType] as AnyObject ) {
                 self.type = NotificationType(rawValue: detail[kNotificationType] as! String)!
             }
             if Utilities.isValidValue(someObject: detail[kNotificationSubType] as AnyObject ) {
@@ -86,9 +86,7 @@ class AppNotification {
             if Utilities.isValidValue(someObject: detail[kNotificationActivityId] as AnyObject ) {
                 self.activityId =   detail[kNotificationActivityId] as? String
             }
-            
-        }
-        else{
+        }else {
             Logger.sharedInstance.debug("AppNotification Dictionary is null:\(detail)")
         }
     }

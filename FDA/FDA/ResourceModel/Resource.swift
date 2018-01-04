@@ -8,9 +8,6 @@
 
 import Foundation
 
-
-
-
 enum ResourceLevel:String{
     
     case gateway = "gateway"
@@ -26,8 +23,11 @@ let kResourceTitle = "title"
 let kResourceId = "resourcesId"
 let kResourceAudience = "audience"
 
+/**
+ Resource model stores the resource of any Study or Gateway. Each resource has a unique id and have file and anchor data
+ */
 
-class Resource{
+class Resource {
     var level:ResourceLevel?
     var key:String?
     var type:String?
@@ -43,6 +43,9 @@ class Resource{
     var title:String?
     var povAvailable:Bool = false
     
+    /**
+     Default Initializer
+     */
     init() {
         self.level = ResourceLevel.gateway
         self.key = ""
@@ -51,11 +54,13 @@ class Resource{
         self.configration = Dictionary()
         self.title = ""
     }
-    
+    /**
+     initializer method with ditionary of properties
+     */
     init(detail:Dictionary<String, Any>) {
         
         if Utilities.isValidObject(someObject: detail as AnyObject?){
-           
+            
             if (Utilities.isValidValue(someObject: (detail[kResourceId]) as AnyObject)) {
                 self.resourcesId = detail[kResourceId] as? String
             }
@@ -77,8 +82,8 @@ class Resource{
             if (Utilities.isValidValue(someObject: (detail["notificationText"]) as AnyObject)){
                 self.notificationMessage = detail["notificationText"] as? String
             }
-
             
+            //Setting the configuration if any
             if (Utilities.isValidObject(someObject: detail[kResourceConfigration] as AnyObject)) {
                 let configuration = detail[kResourceConfigration] as! Dictionary<String,Any>
                 self.povAvailable = true
@@ -92,26 +97,25 @@ class Resource{
                 self.anchorDateStartDays = configuration["startDays"] as? Int
                 self.anchorDateEndDays = configuration["endDays"] as? Int
                 
-            }
-            else {
+            }else {
                 self.povAvailable = false
             }
             
             if (Utilities.isValidValue(someObject: (detail[kResourceTitle]) as AnyObject)) {
                 self.title = detail[kResourceTitle] as? String
             }
-            
             self.file = File()
             self.file?.setFileForStudy(dict:detail as NSDictionary)
-            
-        }
-        else{
+        }else {
             Logger.sharedInstance.debug("Resource Dictionary is null:\(detail)")
         }
     }
     
+    /**
+     Setter method for resource
+     @param dict, dictionary of properties of resource
+     */
     func setResource(dict:NSDictionary) {
-        
         
         if Utilities.isValidObject(someObject: dict){
             
@@ -119,7 +123,7 @@ class Resource{
                 self.resourcesId = dict[kResourceId] as? String
             }
             if (Utilities.isValidValue(someObject: (dict[kResourceAudience]) as AnyObject)) {
-                 self.audience = Audience(rawValue:dict[kResourceAudience] as! String)
+                self.audience = Audience(rawValue:dict[kResourceAudience] as! String)
             }
             if (Utilities.isValidValue(someObject: (dict[kResourceLevel]) as AnyObject)) {
                 self.level = dict[kResourceLevel] as? ResourceLevel
@@ -137,19 +141,18 @@ class Resource{
             if self.level != nil {
                 
                 if self.level == ResourceLevel.study {
-                    // level = study
+                    // Study Level
                     self.file?.setFileForStudy(dict:dict)
-                }
-                else if self.level == ResourceLevel.gateway {
-                    // level = gateway
                     
+                }else if self.level == ResourceLevel.gateway {
+                    // Gateway Level
                     if (Utilities.isValidValue(someObject: (dict[kResourceFile]) as AnyObject)) {
                         self.file?.setFile(dict: dict[kResourceFile] as! NSDictionary)
                     }
                 }
             }
             
-            
+            //Setting the configurations
             if (Utilities.isValidObject(someObject: dict[kResourceConfigration] as AnyObject)) {
                 let configuration = dict[kResourceConfigration] as! Dictionary<String,Any>
                 self.povAvailable = true
@@ -159,23 +162,17 @@ class Resource{
                 if (Utilities.isValidValue(someObject: (configuration["expiryDate"]) as AnyObject)) {
                     self.endDate = Utilities.getDateFromStringWithFormat("YYYY-MM-dd", resultDate: configuration["expiryDate"] as! String)
                 }
-                
                 self.anchorDateStartDays = configuration["startDays"] as? Int
                 self.anchorDateEndDays = configuration["endDays"] as? Int
                 
-            }
-            else {
+            }else {
                 self.povAvailable = false
             }
             if (Utilities.isValidValue(someObject: (dict[kResourceTitle]) as AnyObject)) {
                 self.title = dict[kResourceTitle] as? String
             }
-
-        }
-        else{
+        }else {
             Logger.sharedInstance.debug("Resource Dictionary is null:\(dict)")
         }
-        
     }
-    
 }

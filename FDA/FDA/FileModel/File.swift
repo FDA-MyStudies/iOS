@@ -56,7 +56,6 @@ class File{
         self.mimeType = MimeType.txt
         self.name = ""
         self.link  = ""
-        //self.localPath = ""
     }
     
     func getMIMEType() -> String {
@@ -71,8 +70,10 @@ class File{
     func getFileLocalPath() -> String {
         return self.localPath!
     }
-    
-    
+    /**
+     setter method for File class
+     @param dict, is dictionary of file properties
+     */
     func setFile(dict:NSDictionary)  {
         
         if Utilities.isValidObject(someObject: dict){
@@ -86,19 +87,15 @@ class File{
             if Utilities.isValidValue(someObject: dict[kFileLink] as AnyObject)  {
                 self.link = dict[kFileLink] as? String
             }
-           
-            
-        }
-        else{
+        }else {
             Logger.sharedInstance.debug("File Dictionary is null:\(dict)")
         }
-        
-        
-        
-        
-        
     }
     
+    /**
+     setter method for File class based on study
+     @param dict, is dictionary of file properties
+     */
     func setFileForStudy(dict:NSDictionary)  {
         
         if Utilities.isValidObject(someObject: dict){
@@ -113,54 +110,16 @@ class File{
                 
                 self.link = dict[kFileLinkForStudy] as? String
                 if (self.link?.contains("http"))!{
-                    //self.link = fileLink
-                }
-                else {
+                    //Do Nothing
+                }else {
                     self.localPath = "BundlePath"
                 }
             }
-            
-            
-            
-        }
-        else{
+        }else {
             Logger.sharedInstance.debug("File Dictionary is null:\(dict)")
         }
     }
     
-    /*
-    func saveDataIntoDocuments(data:NSData) -> Bool {
-        
-        do {
-            var documentsURL = FileManager.documentsDir()
-            
-            var fileURL = NSURL()
-            //check if file exist with same name at specified path
-            if FileManager.default.fileExists(atPath: documentsURL){
-                
-                // get new file name and save it
-                
-                documentsURL = documentsURL.appending("abc")
-                fileURL = NSURL(fileURLWithPath: documentsURL)
-            }
-            else{
-                
-                
-                documentsURL = documentsURL.appending(self.name!)
-                fileURL = NSURL(fileURLWithPath: documentsURL)
-            }
-            try data.write(to: fileURL as URL, options: .atomic)
-            
-            // setting the local path to model object
-            self.localPath = fileURL.absoluteString
-            
-            return true
-        } catch {
-            
-            self.localPath = ""
-            return false
-        }
-    }*/
 }
 
 

@@ -53,22 +53,20 @@ class FetalKickCounterTask {
      */
     func initWithFormat(duration:Float,identifier:String,instructionText:String?)  {
         
-        
-        
         self.identifier = identifier
         self.steps =  [ORKStep]()
         if duration > 0.0{
             self.duration =  duration
-        }
-        else{
+            
+        }else{
             self.duration = 50
             Logger.sharedInstance.warn("Duration is null:\(duration)")
         }
         
         if Utilities.isValidValue(someObject: instructionText as AnyObject?){
              self.instructionText = instructionText
-        }
-        else{
+            
+        }else{
              self.instructionText = ""
         }
         self.maxKickCounts = 0
@@ -85,53 +83,26 @@ class FetalKickCounterTask {
      Getter method to create fetalKickTask
      @returns OrkorderedTask    containing steps
      */
-    
     func getTask() -> ORKOrderedTask {
         
-        
         //create a Intro step
-        
         let introStep = FetalKickIntroStep(identifier: kFetalKickIntroductionStepIdentifier)
         introStep.introTitle =  NSLocalizedString(kFetalKickInstructionStepTitle, comment: "")
       
       if (self.instructionText?.characters.count)! > 0 {
         introStep.subTitle = NSLocalizedString(self.instructionText!, comment: "")
-        //NSLocalizedString(kFetalKickInstructionStepText, comment: "")
+       
       }else {
          introStep.subTitle = NSLocalizedString(kFetalKickInstructionStepText, comment: "")
       }
       
         introStep.displayImage = #imageLiteral(resourceName: "task_img1")
         
-       // let instructionStep = ORKInstructionStep(identifier: kFetalKickInstructionStepIdentifier)
-       // instructionStep.title = NSLocalizedString(kFetalKickInstructionStepTitle, comment: "")
-      // instructionStep.text = NSLocalizedString(kFetalKickInstructionStepText, comment: "")
-        
-       // instructionStep.auxiliaryImage = #imageLiteral(resourceName: "task_img1")
-        
-       // instructionStep.image = #imageLiteral(resourceName: "task_img1")
-        
-       // instructionStep.iconImage = #imageLiteral(resourceName: "task_img1")
-        
         steps?.append(introStep)
       
-      /*
-        //create a Introduction step
-        let introductionStep = ORKInstructionStep(identifier: kFetalKickInstructionStepIdentifier)
-        introductionStep.title = NSLocalizedString(kFetalKickInstructionStepTitle, comment: "")
-        
-        
-        if (self.instructionText?.characters.count)! > 0 {
-            introductionStep.text = NSLocalizedString(self.instructionText!, comment: "")
-            steps?.append(introductionStep)
-        }
-        */
-        
-        
         //create a Fetal Kick Counter Step
         let kickStep = FetalKickCounterStep(identifier: self.identifier!)
         kickStep.counDownTimer = Int(self.duration! )
-        
         
         kickStep.totalCounts = self.maxKickCounts
         kickStep.stepDuration = 30
@@ -145,12 +116,9 @@ class FetalKickCounterTask {
         //create a Completion Step
         let summaryStep = ORKCompletionStep(identifier: kFetalKickCounterStepCompletionTitle)
         summaryStep.title = "Activity Completed"
-        
         summaryStep.image = #imageLiteral(resourceName: "successBlueBig")
         summaryStep.detailText = "Thank you for your time!\n\nTap Done to submit responses. Responses cannot be modified after submission."
        
-        
-        
         steps?.append(summaryStep)
         
         return ORKOrderedTask(identifier: kFetalKickCounterTaskIdentifier, steps: steps)

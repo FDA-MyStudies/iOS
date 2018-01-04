@@ -19,19 +19,17 @@ class FetalKickCounterIntroStepType : ORKStep {
 }
 
 class FetalKickIntroStep: ORKStep {
-    var introTitle:String?
-    var subTitle:String?
+    var introTitle:String? // MainTitle for the Task
+    var subTitle:String? //Subtitle for Task
     var displayImage:UIImage?
 }
 
 class FetalKickIntroStepViewController:  ORKStepViewController {
     
-    //ORKStepViewController ORKActiveStepViewController
-    
-    var titleLabel:UILabel?
+
+    var titleLabel:UILabel? //Custom Title Label
     @IBOutlet weak var descriptionLabel:UILabel?
     var iconImage:UIImage?
-    
     
     @IBOutlet weak var buttonNext:UIButton?   // button to start task as well as increment the counter
     
@@ -59,10 +57,8 @@ class FetalKickIntroStepViewController:  ORKStepViewController {
             self.titleLabel?.text = step.introTitle
             self.descriptionLabel?.text = step.subTitle
             self.iconImage = step.displayImage
-            
             buttonNext?.layer.borderColor =   kUicolorForButtonBackground
         }
-        
     }
     
     override func hasNextStep() -> Bool {

@@ -11,13 +11,12 @@ import ResearchKit
 
 
 class InEligibilityStep: ORKStep {
-   
+    
     func showsProgress() -> Bool {
         return false
     }
 }
 
-//let kStudyWithStudyId = "Study with StudyId"
 
 class InEligibilityStepViewController: ORKStepViewController {
     
@@ -25,7 +24,6 @@ class InEligibilityStepViewController: ORKStepViewController {
     @IBOutlet weak var buttonDone:UIButton?
     @IBOutlet weak var labelDescription:UILabel?
     var descriptionText:String?
-    
     
     //MARK: ORKStepViewController Intitialization Methods
     
@@ -48,17 +46,10 @@ class InEligibilityStepViewController: ORKStepViewController {
         
     }
     
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         buttonDone?.layer.borderColor =   kUicolorForButtonBackground
-        
-        if let step = step as? EligibilityStep {
-            
-        }
-        
     }
     
     //MARK: Methods and Button Actions
@@ -74,8 +65,8 @@ class InEligibilityStepViewController: ORKStepViewController {
     
     @IBAction func buttonActionDone(sender: UIButton?) {
         
-       self.goForward()
-       
+        self.goForward()
+        
     }
     
     override func didReceiveMemoryWarning() {

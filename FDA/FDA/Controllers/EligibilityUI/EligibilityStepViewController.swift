@@ -10,32 +10,26 @@ import UIKit
 import ResearchKit
 import IQKeyboardManagerSwift
 
-//let kMessageValidToken = "Please enter valid token"
-//let kMessageForMissingStudyId = "Unable to Enroll, Please try again later."
-//
-//let kMessageInvalidTokenOrIfStudyDoesNotExist = "Sorry, this token is invalid. Please enter a valid token to continue."
-
 let kStudyWithStudyId = "Study with StudyId"
 let kTitleOK = "OK"
 
 class EligibilityStep: ORKStep {
     var type:String?
-   
+    
     func showsProgress() -> Bool {
         return false
     }
 }
 
-//let kStudyWithStudyId = "Study with StudyId"
 
 class EligibilityStepViewController: ORKStepViewController {
-
+    
     @IBOutlet weak var tokenTextField: UITextField!
     @IBOutlet weak var buttonSubmit:UIButton?
     @IBOutlet weak var labelDescription:UILabel?
     var descriptionText:String?
     
-     var taskResult:EligibilityTokenTaskResult = EligibilityTokenTaskResult(identifier: kFetalKickCounterStepDefaultIdentifier)
+    var taskResult:EligibilityTokenTaskResult = EligibilityTokenTaskResult(identifier: kFetalKickCounterStepDefaultIdentifier)
     
     //MARK: ORKStepViewController Intitialization Methods
     
@@ -65,36 +59,30 @@ class EligibilityStepViewController: ORKStepViewController {
         return orkResult
         
     }
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         buttonSubmit?.layer.borderColor =   kUicolorForButtonBackground
         
-        
         if (self.descriptionText?.characters.count)! > 0{
             labelDescription?.text = self.descriptionText
         }
         
-        
         if let step = step as? EligibilityStep {
             step.type = "token"
-            
-            
         }
         
         IQKeyboardManager.sharedManager().enable = true
     }
-
+    
     //MARK: Methods and Button Actions
-
+    
     func showAlert(message:String){
         let alert = UIAlertController(title:kErrorTitle as String,message:message as String,preferredStyle: UIAlertControllerStyle.alert)
         alert.addAction(UIAlertAction(title:NSLocalizedString(kTitleOK, comment: ""), style: .default, handler: nil))
         
-        
         self.navigationController?.present(alert, animated: true, completion: nil)
-
     }
     
     @IBAction func buttonActionSubmit(sender: UIButton?) {
@@ -102,19 +90,15 @@ class EligibilityStepViewController: ORKStepViewController {
         self.view.endEditing(true)
         let token = tokenTextField.text
         
-        
-        if (token?.characters.count)! > 0 {
-            //(Study.currentStudy?.studyId)!
+        if (token?.isEmpty) == false {
+            
             LabKeyServices().verifyEnrollmentToken(studyId: (Study.currentStudy?.studyId)!, token: token!, delegate: self)
-            
-            
-        }
-        else{
+        }else {
             self.showAlert(title: kTitleMessage, message:kMessageValidToken )
             
         }
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -133,11 +117,10 @@ extension EligibilityStepViewController:UITextFieldDelegate {
         
         if string == " "{
             return false
-        }
-        else{
+            
+        }else {
             return true
         }
-
     }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
@@ -158,13 +141,13 @@ extension EligibilityStepViewController:NMWebServiceDelegate {
         
         self.removeProgressIndicator()
         
-        if (tokenTextField.text?.characters.count)! > 0 {
-             self.taskResult.enrollmentToken = tokenTextField.text!
+        if (tokenTextField.text?.isEmpty) == false {
+            self.taskResult.enrollmentToken = tokenTextField.text!
+            
+        }else {
+            self.taskResult.enrollmentToken = ""
         }
-        else{
-             self.taskResult.enrollmentToken = ""
-        }
-       
+        
         
         self.goForward()
     }
@@ -172,23 +155,17 @@ extension EligibilityStepViewController:NMWebServiceDelegate {
         Logger.sharedInstance.info("requestname : \(requestName)")
         
         self.removeProgressIndicator()
-    if error.localizedDescription.localizedCaseInsensitiveContains(tokenTextField.text!){
-      
-      self.showAlert(message: kMessageInvalidTokenOrIfStudyDoesNotExist) //kMessageForInvalidToken
+        if error.localizedDescription.localizedCaseInsensitiveContains(tokenTextField.text!){
             
-        }
-        else{
+            self.showAlert(message: kMessageInvalidTokenOrIfStudyDoesNotExist) //kMessageForInvalidToken
             
+        }else {
             if error.localizedDescription.localizedCaseInsensitiveContains(kStudyWithStudyId) {
-              
+                
                 self.showAlert(message:kMessageInvalidTokenOrIfStudyDoesNotExist) //kMessageForMissingStudyId
                 
-            }
-                
-            else{
-                
+            }else {
                 self.showAlert(message:error.localizedDescription)
-                
             }
             
         }
@@ -199,7 +176,7 @@ extension EligibilityStepViewController:NMWebServiceDelegate {
 
 open class EligibilityTokenTaskResult: ORKResult {
     open var enrollmentToken:String = ""
-   
+    
     
     override open var description: String {
         get {

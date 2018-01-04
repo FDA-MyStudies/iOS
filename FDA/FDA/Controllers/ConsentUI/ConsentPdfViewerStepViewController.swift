@@ -52,12 +52,8 @@ class ConsentPdfViewerStepViewController: ORKStepViewController {
     }
     
     override func goForward(){
-        
         super.goForward()
-        
     }
-    
-    
     
     //MARK:Button Actions
     
@@ -77,50 +73,38 @@ class ConsentPdfViewerStepViewController: ORKStepViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if let step = step as? ConsentPdfViewerStep {
-            
-        }
-        
-        
-       self.webView?.load(pdfData!, mimeType: "application/pdf", textEncodingName: "UTF-8", baseURL:URL.init(fileURLWithPath: "") )
-         webView?.delegate = self
+        self.webView?.load(pdfData!, mimeType: "application/pdf", textEncodingName: "UTF-8", baseURL:URL.init(fileURLWithPath: "") )
+        webView?.delegate = self
         webView?.scalesPageToFit = true
     }
     
     /*
      sendConsentByMail used for sharing the Consent
      */
-    
     func sendConsentByMail() {
         
         let mailComposerVC = MFMailComposeViewController()
         mailComposerVC.mailComposeDelegate = self
         
-        
         mailComposerVC.setSubject(kEmailSubject)
         mailComposerVC.setMessageBody("", isHTML: false)
         
-      
-      let Filename =   "\((Study.currentStudy?.name)!)" + "_SignedConsent"   + ".pdf"
+        let Filename =   "\((Study.currentStudy?.name)!)" + "_SignedConsent"   + ".pdf"
         
         mailComposerVC.addAttachmentData(pdfData!, mimeType: "application/pdf", fileName: Filename)
-       
-        if MFMailComposeViewController.canSendMail()
-        {
+        
+        if MFMailComposeViewController.canSendMail() {
             self.present(mailComposerVC, animated: true, completion: nil)
-        }
-        else{
+            
+        }else {
             
             let alert = UIAlertController(title:NSLocalizedString(kTitleError, comment: ""),message:"",preferredStyle: UIAlertControllerStyle.alert)
             
             alert.addAction(UIAlertAction.init(title:NSLocalizedString(kTitleOk, comment: ""), style: .default, handler: { (action) in
                 
                 self.dismiss(animated: true, completion: nil)
-                
             }))
         }
-        
-        
     }
     
     
@@ -144,6 +128,7 @@ extension ConsentPdfViewerStepViewController:UIWebViewDelegate{
     func webViewDidFinishLoad(_ webView: UIWebView) {
         self.removeProgressIndicator()
     }
+    
     func webView(_ webView: UIWebView, didFailLoadWithError error: Error) {
         
         self.removeProgressIndicator()
@@ -152,13 +137,11 @@ extension ConsentPdfViewerStepViewController:UIWebViewDelegate{
         let alert = UIAlertController(title:NSLocalizedString(kTitleError, comment: ""),message:error.localizedDescription,preferredStyle: UIAlertControllerStyle.alert)
         
         alert.addAction(UIAlertAction.init(title:buttonTitleOK, style: .default, handler: { (action) in
-            
             self.dismiss(animated: true, completion: nil)
             
         }))
         
         self.present(alert, animated: true, completion: nil)
-        
     }
 }
 

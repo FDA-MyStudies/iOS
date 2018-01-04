@@ -13,10 +13,10 @@ let kConsentCompletionResultIdentifier = "ConsentCompletion"
 let kMainTitle = "Thanks for providing consent for this Study"
 let kSubTitle = "You can now start participating in the Study"
 
+
 /* Consent Completion Step
  @mainTitle: title displayed in Consent Completion UI
  @subTitle: subTitle displayed in Consent Completion UI
- 
  */
 class ConsentCompletionStep: ORKStep {
     var mainTitle:String?
@@ -55,9 +55,7 @@ class ConsentSharePdfStepViewController: ORKStepViewController {
     }
     
     override func goForward(){
-        
         super.goForward()
-        
     }
     
     override var result: ORKStepResult? {
@@ -82,7 +80,7 @@ class ConsentSharePdfStepViewController: ORKStepViewController {
         
         //Generating consentDocumentPdf
         self.consentDocument?.makePDF(completionHandler: { data,error in
-            NSLog("data: \(data)    \n  error: \(error)")
+            NSLog("data: \(String(describing: data))    \n  error: \(String(describing: error))")
             
             self.taskResult.pdfData = data!
             
@@ -94,7 +92,7 @@ class ConsentSharePdfStepViewController: ORKStepViewController {
             
             
             self.removeProgressIndicator()
-            
+            //Navigate to next step
             self.goForward()
             
         })

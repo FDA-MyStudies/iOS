@@ -128,8 +128,6 @@ enum ActiveStepType:String{
     case fetalKickCounter = "fetalKickCounter"
 }
 
-
-
 class ActivityActiveStep: ActivityStep {
     
     var options:ORKPredefinedTaskOption? // predefined task options
@@ -147,7 +145,6 @@ class ActivityActiveStep: ActivityStep {
         activeType = .audioStep
     }
     
-    
     /* Setter method to set Activity Active Steps
      @ stepDict should  should contains all params for ActivityStep
      */
@@ -157,23 +154,22 @@ class ActivityActiveStep: ActivityStep {
             
             super.initWithDict(stepDict: stepDict)
             
-            if Utilities.isValidObject(someObject: stepDict[kActivityStepActiveOptions] as AnyObject ){
+            if Utilities.isValidObject(someObject: stepDict[kActivityStepActiveOptions] as AnyObject ) {
                 
                 for  option:Int in stepDict[kActivityStepActiveOptions] as! [Int] {
                     
                     self.options?.insert(ORKPredefinedTaskOption(rawValue: UInt(option)))
-                    
                 }
             }
             else{
                 self.options = []
             }
             
-            if Utilities.isValidValue(someObject: stepDict[kActivityStepActiveResultType] as AnyObject?){
+            if Utilities.isValidValue(someObject: stepDict[kActivityStepActiveResultType] as AnyObject?) {
                 self.activeType = ActiveStepType(rawValue: stepDict[kActivityStepActiveResultType] as! String)
             }
             
-            if Utilities.isValidObject(someObject: stepDict[kActivityStepActiveFormat] as AnyObject ){
+            if Utilities.isValidObject(someObject: stepDict[kActivityStepActiveFormat] as AnyObject ) {
                 self.formatDict = (stepDict[kActivityStepActiveFormat] as? Dictionary)!
             }
         }
@@ -188,19 +184,14 @@ class ActivityActiveStep: ActivityStep {
      */
     func getActiveTask() -> ORKTask? {
         
-        
-        if Utilities.isValidObject(someObject: self.formatDict as AnyObject?)
-        {
-            // && Utilities.isValidValue(someObject:self.activeType   as AnyObject?)
-            //&& Utilities.isValidValue(someObject: self.options as AnyObject?)
+        if Utilities.isValidObject(someObject: self.formatDict as AnyObject?) {
             switch self.activeType! as ActiveStepType {
                 
             case .audioStep : // creates an Audio step
                 
                 if  Utilities.isValidValue(someObject:formatDict?[kActiveAudioSpeechInstruction] as AnyObject?)
                     && Utilities.isValidValue(someObject:formatDict?[kActiveAudioShortSpeechInstruction] as AnyObject?)
-                    && Utilities.isValidValue(someObject:formatDict?[kActiveAudioDuration] as AnyObject?)
-                {
+                    && Utilities.isValidValue(someObject:formatDict?[kActiveAudioDuration] as AnyObject?) {
                     
                     return ORKOrderedTask.audioTask(withIdentifier: key!,
                                                     intendedUseDescription: title!,
@@ -211,29 +202,23 @@ class ActivityActiveStep: ActivityStep {
                                                     checkAudioLevel: true, options:self.options!)
                     
                     
-                }
-                else{
-                    Logger.sharedInstance.debug("audioStep:formatDict has null values:\(formatDict)")
+                }else {
+                    Logger.sharedInstance.debug("audioStep:formatDict has null values:\(String(describing: formatDict))")
                     return nil
                 }
                 
             case .fitnessStep : // creates an fitness check step
                 
                 if  Utilities.isValidValue(someObject:formatDict?[kActiveFitnessCheckWalkDuration] as AnyObject?)
-                    && Utilities.isValidValue(someObject:formatDict?[kActiveFitnessCheckRestDuration] as AnyObject?)
-                {
+                    && Utilities.isValidValue(someObject:formatDict?[kActiveFitnessCheckRestDuration] as AnyObject?) {
                     
                     return ORKOrderedTask.fitnessCheck(withIdentifier: key!,
                                                        intendedUseDescription: title!,
                                                        walkDuration: formatDict?[kActiveFitnessCheckWalkDuration] as! TimeInterval,
                                                        restDuration: formatDict?[kActiveFitnessCheckRestDuration] as! TimeInterval,
                                                        options: self.options!)
-                    
-                    
-                    
-                }
-                else{
-                    Logger.sharedInstance.debug("fitnessStep:formatDict has null values:\(formatDict)")
+                }else {
+                    Logger.sharedInstance.debug("fitnessStep:formatDict has null values:\(String(describing: formatDict))")
                     return nil
                 }
             case .holePegTestStep : // creates an hole peg test step
@@ -242,9 +227,7 @@ class ActivityActiveStep: ActivityStep {
                     && Utilities.isValidValue(someObject:formatDict?[kActiveHolePegTestNumberOfPegs] as AnyObject?)
                     && Utilities.isValidValue(someObject:formatDict?[kActiveHolePegTestThreshold] as AnyObject?)
                     && Utilities.isValidValue(someObject:formatDict?[kActiveHolePegTestRotated] as AnyObject?)
-                    && Utilities.isValidValue(someObject:formatDict?[kActiveHolePegTestTimeLimit] as AnyObject?)
-                {
-                    
+                    && Utilities.isValidValue(someObject:formatDict?[kActiveHolePegTestTimeLimit] as AnyObject?) {
                     
                     return ORKNavigableOrderedTask.holePegTest(withIdentifier:key!, intendedUseDescription: title!,
                                                                dominantHand: ORKBodySagittal(rawValue: formatDict?[kActiveHolePegTestDominantHand] as! Int)!,
@@ -253,11 +236,8 @@ class ActivityActiveStep: ActivityStep {
                                                                rotated: ((formatDict?[kActiveHolePegTestRotated]) != nil),
                                                                timeLimit: formatDict?[kActiveHolePegTestTimeLimit] as! TimeInterval,
                                                                options: self.options!)
-                    
-                    
-                }
-                else{
-                    Logger.sharedInstance.debug("holePegTestStep:formatDict has null values:\(formatDict)")
+                }else {
+                    Logger.sharedInstance.debug("holePegTestStep:formatDict has null values:\(String(describing: formatDict))")
                     return nil
                 }
             case .psatStep : // creates an PSAT Step
@@ -265,8 +245,7 @@ class ActivityActiveStep: ActivityStep {
                 if  Utilities.isValidValue(someObject:formatDict?[kActivePSATPresentationMode] as AnyObject?)
                     && Utilities.isValidValue(someObject:formatDict?[kActivePSATInterStimulusInterval] as AnyObject?)
                     &&  Utilities.isValidValue(someObject:formatDict?[kActivePSATStimulusDuration] as AnyObject?)
-                    &&  Utilities.isValidValue(someObject:formatDict?[kActivePSATSeriesLength] as AnyObject?)
-                {
+                    &&  Utilities.isValidValue(someObject:formatDict?[kActivePSATSeriesLength] as AnyObject?) {
                     
                     return ORKOrderedTask.psatTask(withIdentifier: key!,
                                                    intendedUseDescription: title!,
@@ -277,13 +256,10 @@ class ActivityActiveStep: ActivityStep {
                                                    options: self.options!)
                     
                     
-                }
-                else{
-                    Logger.sharedInstance.debug("psatStep:formatDict has null values:\(formatDict)")
+                }else {
+                    Logger.sharedInstance.debug("psatStep:formatDict has null values:\(String(describing: formatDict))")
                     return nil
                 }
-                
-                
             case .shortWalkStep: // creates an short walk step
                 
                 if  Utilities.isValidValue(someObject:formatDict?[kActiveShortWalkNumberOfStepsPerLeg] as AnyObject?)
@@ -292,13 +268,10 @@ class ActivityActiveStep: ActivityStep {
                     
                     return ORKOrderedTask.shortWalk(withIdentifier: key!, intendedUseDescription: title!, numberOfStepsPerLeg: formatDict?[kActiveShortWalkNumberOfStepsPerLeg] as! Int, restDuration: formatDict?[kActiveShortWalkRestDuration] as! TimeInterval , options: self.options!)
                     
-                }
-                else{
-                    Logger.sharedInstance.debug("shortWalkStep:formatDict has null values:\(formatDict)")
+                }else {
+                    Logger.sharedInstance.debug("shortWalkStep:formatDict has null values:\(String(describing: formatDict))")
                     return nil
                 }
-                
-                
             case .spatialSpanMemoryStep : // creates a spatial span memory step
                 
                 if  Utilities.isValidValue(someObject:formatDict?[kActiveSpatialSpanMemoryInitialSpan] as AnyObject?)
@@ -307,36 +280,25 @@ class ActivityActiveStep: ActivityStep {
                     && Utilities.isValidValue(someObject:formatDict?[kActiveSpatialSpanMemoryPlaySpeed] as AnyObject?)
                     && Utilities.isValidValue(someObject:formatDict?[kActiveSpatialSpanMemoryMaximumTests] as AnyObject?)
                     && Utilities.isValidValue(someObject:formatDict?[kActiveSpatialSpanMemoryMaximumConsecutiveFailures] as AnyObject?)
-                    && Utilities.isValidValue(someObject:formatDict?[kActiveSpatialSpanMemoryRequireReversal] as AnyObject?)
-                {
-                    
-                    //&& Utilities.isValidValue(someObject:formatDict?[kActiveSpatialSpanMemoryCustomTargetImage] as AnyObject?)
-                        //&& Utilities.isValidValue(someObject:formatDict?[kActiveSpatialSpanMemoryCustomTargetPluralName] as AnyObject?)
-                    
+                    && Utilities.isValidValue(someObject:formatDict?[kActiveSpatialSpanMemoryRequireReversal] as AnyObject?) {
                     
                     let image = UIImage(named:formatDict?[kActiveSpatialSpanMemoryCustomTargetImage] as! String)
                     
-                    
                     let initialSpan = (formatDict?[kActiveSpatialSpanMemoryInitialSpan] as? Int)
                     let minimumSpan = (formatDict?[kActiveSpatialSpanMemoryMinimumSpan] as? Int)
-                    
                     let maximumSpan = (formatDict?[kActiveSpatialSpanMemoryMaximumSpan] as? Int)
-                    
                     let playSpeed = (formatDict?[kActiveSpatialSpanMemoryPlaySpeed] as? Float)
                     let maximumTest = (formatDict?[kActiveSpatialSpanMemoryMaximumTests] as? Int)
-                    
                     let maximumConsecutiveFailures = (formatDict?[kActiveSpatialSpanMemoryMaximumConsecutiveFailures] as? Int)
                   
-                  var customPluralName:String? = "flowers"
+                  var customPluralName:String? = "flowers" //Default Flowers are used
                   
-                  if Utilities.isValidValue(someObject: formatDict?[kActiveSpatialSpanMemoryCustomTargetPluralName]  as AnyObject){
+                  if Utilities.isValidValue(someObject: formatDict?[kActiveSpatialSpanMemoryCustomTargetPluralName]  as AnyObject) {
                     
                     customPluralName = formatDict?[kActiveSpatialSpanMemoryCustomTargetPluralName] as! String?
                     
-                    
                   }
-                  
-                    
+                    //Initilize Spatial Span Memory task only if matches the following criteria
                     if initialSpan! >= 2
                         && initialSpan! >= minimumSpan!
                         && initialSpan! <= maximumSpan!
@@ -344,9 +306,8 @@ class ActivityActiveStep: ActivityStep {
                         && playSpeed! > 0.4
                         && playSpeed! < 21.0
                         && maximumTest! >= 1
-                        && maximumConsecutiveFailures! >= 1{
-                    
-                    
+                        && maximumConsecutiveFailures! >= 1 {
+                
                     let orderedTask =  ORKOrderedTask.spatialSpanMemoryTask(withIdentifier:  key!, intendedUseDescription:
                         self.text!,
                                                                 initialSpan: formatDict?[kActiveSpatialSpanMemoryInitialSpan] as! Int,
@@ -362,22 +323,20 @@ class ActivityActiveStep: ActivityStep {
                       
                       (orderedTask.steps.last as! ORKCompletionStep).text = NSLocalizedString(kActiveTaskCompletionStepText, comment: "")
                       return orderedTask
-                    }
-                    else{
+                        
+                    }else {
                         return nil
                     }
                     
-                }
-                else{
-                    Logger.sharedInstance.debug("spatialSpanMemoryStep:formatDict has null values:\(formatDict)")
+                }else {
+                    Logger.sharedInstance.debug("spatialSpanMemoryStep:formatDict has null values:\(String(describing: formatDict))")
                     return nil
                 }
             case .timedWalkStep : // creates a timed walk step
                 
                 if  Utilities.isValidValue(someObject:formatDict?[kActiveTimedWalkTistanceInMeters] as AnyObject?)
                     && Utilities.isValidValue(someObject:formatDict?[kActiveTimedWalkTimeLimit] as AnyObject?)
-                    &&  Utilities.isValidValue(someObject:formatDict?[kActiveTimedWalkTurnAroundTimeLimit] as AnyObject?)
-                {
+                    &&  Utilities.isValidValue(someObject:formatDict?[kActiveTimedWalkTurnAroundTimeLimit] as AnyObject?) {
                     // includeAssistiveDeviceForm set to false by default
                     
                     return ORKOrderedTask.timedWalk(withIdentifier: key!,
@@ -388,17 +347,15 @@ class ActivityActiveStep: ActivityStep {
                                                     includeAssistiveDeviceForm: false,
                                                     options: self.options!)
                     
-                }
-                else{
-                    Logger.sharedInstance.debug("timedWalkStep:formatDict has null values:\(formatDict)")
+                }else {
+                    Logger.sharedInstance.debug("timedWalkStep:formatDict has null values:\(String(describing: formatDict))")
                     return nil
                 }
             case .toneAudiometryStep : // creates a tone audiometry step
                 
                 if  Utilities.isValidValue(someObject:formatDict?[kActiveToneAudiometrySpeechInstruction] as AnyObject?)
                     && Utilities.isValidValue(someObject:formatDict?[kActiveToneAudiometryShortSpeechInstruction] as AnyObject?)
-                    &&  Utilities.isValidValue(someObject:formatDict?[kActiveToneAudiometryToneDuration] as AnyObject?)
-                {
+                    &&  Utilities.isValidValue(someObject:formatDict?[kActiveToneAudiometryToneDuration] as AnyObject?) {
                     
                     return ORKOrderedTask.toneAudiometryTask(withIdentifier:  key!,
                                                              intendedUseDescription: title!,
@@ -407,46 +364,42 @@ class ActivityActiveStep: ActivityStep {
                                                              toneDuration: formatDict?[kActiveToneAudiometryToneDuration] as! TimeInterval,
                                                              options: self.options!)
                     
-                }
-                else{
-                    Logger.sharedInstance.debug("toneAudiometryStep:formatDict has null values:\(formatDict)")
+                }else {
+                    Logger.sharedInstance.debug("toneAudiometryStep:formatDict has null values:\(String(describing: formatDict))")
                     return nil
                 }
             case .towerOfHanoi : // creates a tower of honoi step
                 
-                if  Utilities.isValidValue(someObject:formatDict?[kActiveTowerOfHanoiNumberOfDisks] as AnyObject?)
-                {
-                    var orderedTask =  ORKOrderedTask.towerOfHanoiTask(withIdentifier: key!,
+                if  Utilities.isValidValue(someObject:formatDict?[kActiveTowerOfHanoiNumberOfDisks] as AnyObject?) {
+                    let orderedTask =  ORKOrderedTask.towerOfHanoiTask(withIdentifier: key!,
                                                            intendedUseDescription: self.text!,
                                                            numberOfDisks: formatDict?[kActiveTowerOfHanoiNumberOfDisks] as! UInt ,
                                                            options:self.options!)
                   (orderedTask.steps.last as! ORKCompletionStep).text = NSLocalizedString(kActiveTaskCompletionStepText, comment: "")
                   return orderedTask
-                }
-                else{
-                    Logger.sharedInstance.debug("towerOfHanoi:formatDict has null values:\(formatDict)")
+                    
+                }else {
+                    Logger.sharedInstance.debug("towerOfHanoi:formatDict has null values:\(String(describing: formatDict))")
                     return nil
                 }
             case .twoFingerTappingIntervalStep : // creates a two finger tapping step
                 
                 if  Utilities.isValidValue(someObject:formatDict?[kActiveTwoFingerTappingIntervalDuration] as AnyObject?)
-                    &&  Utilities.isValidValue(someObject:formatDict?[kActiveTwoFingerTappingIntervalHandOptions] as AnyObject?)
-                {
+                    &&  Utilities.isValidValue(someObject:formatDict?[kActiveTwoFingerTappingIntervalHandOptions] as AnyObject?) {
                     return ORKOrderedTask.twoFingerTappingIntervalTask(withIdentifier: key!,
                                                                        intendedUseDescription: title!,
                                                                        duration: formatDict?[kActiveTwoFingerTappingIntervalDuration] as! TimeInterval,
                                                                        handOptions: ORKPredefinedTaskHandOption(rawValue:formatDict?[kActiveTwoFingerTappingIntervalHandOptions] as! UInt),
                                                                        options: self.options!)
                     
-                }
-                else{
-                    Logger.sharedInstance.debug("twoFingerTappingIntervalStep:formatDict has null values:\(formatDict)")
+                }else {
+                    Logger.sharedInstance.debug("twoFingerTappingIntervalStep:formatDict has null values:\(String(describing: formatDict))")
                     return nil
                 }
                 
             case .tremorTestStep : // creates a tremor test step
                 if  Utilities.isValidValue(someObject:formatDict?[kActiveTremorTestActiveStepDuration] as AnyObject?)
-                    &&  Utilities.isValidValue(someObject:formatDict?[kActiveTremorTestHandOptions] as AnyObject?){
+                    &&  Utilities.isValidValue(someObject:formatDict?[kActiveTremorTestHandOptions] as AnyObject?) {
                     
                     let activeOptions:ORKTremorActiveTaskOption?
                     if Utilities.isValidObject(someObject: formatDict?[kActivityStepActiveOptions] as AnyObject ){
@@ -456,11 +409,10 @@ class ActivityActiveStep: ActivityStep {
                             activeOptions?.insert(ORKTremorActiveTaskOption(rawValue: UInt(option)))
                             
                         }
-                    }
-                    else{
+                        
+                    }else {
                         activeOptions = []
                     }
-                    
                     
                     return ORKOrderedTask.tremorTest(withIdentifier: key!,
                                                      intendedUseDescription: title!,
@@ -468,63 +420,43 @@ class ActivityActiveStep: ActivityStep {
                                                      activeTaskOptions: activeOptions! ,
                                                      handOptions: ORKPredefinedTaskHandOption(rawValue: formatDict?[kActiveTremorTestHandOptions] as! UInt),
                                                      options: self.options!)
-                }
-                else{
-                    Logger.sharedInstance.debug("twoFingerTappingIntervalStep:formatDict has null values:\(formatDict)")
+                }else {
+                    Logger.sharedInstance.debug("twoFingerTappingIntervalStep:formatDict has null values:\(String(describing: formatDict))")
                     return nil
                     
                 }
-                
                 
             case .fetalKickCounter : // creates a fetal kick counter step
                 
                 if  Utilities.isValidValue(someObject:formatDict?[kActiveFetalKickCounterDuration] as AnyObject?)
-                    
-                {
+{
                     let instructionText = self.text!
                     
                     let fetalKickTask:FetalKickCounterTask? = FetalKickCounterTask()
-                    
                     fetalKickTask?.initWithFormat(duration: Float((formatDict?[kActiveFetalKickCounterDuration] as? Int)!), identifier: self.key!, instructionText: instructionText as? String)
                     
-                    if Utilities.isValidValue(someObject: formatDict?[kActiveFetalKickCounterkickCounts] as AnyObject ){
+                    if Utilities.isValidValue(someObject: formatDict?[kActiveFetalKickCounterkickCounts] as AnyObject ) {
                         fetalKickTask?.maxKickCounts =  formatDict?[kActiveFetalKickCounterkickCounts] as! Int
                         
                     }else {
-                      
-                      //TO BE COMMENTED
+                    //Default Fetal Kicks
                       fetalKickTask?.maxKickCounts = 200
-                      //---
                   }
-                  
-                    
                     return fetalKickTask?.getTask()
-                    
-                }
-                else{
-                    Logger.sharedInstance.debug("fetalKickCounter:formatDict has null values:\(formatDict)")
+                }else {
+                    Logger.sharedInstance.debug("fetalKickCounter:formatDict has null values:\(String(describing: formatDict))")
                     return nil
-                    
                 }
-                
-                
+            
             default:
-                
-                Logger.sharedInstance.debug("Case Mismatch:Default Executed null values:\(formatDict)")
-                
+                Logger.sharedInstance.debug("Case Mismatch:Default Executed null values:\(String(describing: formatDict))")
                 return nil
                 
             }
-            
         }
         else{
-            Logger.sharedInstance.debug("Format Dict have null values:\(formatDict)")
+            Logger.sharedInstance.debug("Format Dict have null values:\(String(describing: formatDict))")
             return nil
         }
-        
-        
     }
-    
-    
-    
 }

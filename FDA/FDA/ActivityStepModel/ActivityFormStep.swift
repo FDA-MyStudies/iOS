@@ -14,72 +14,57 @@ let kStepFormSteps = "steps"
 
 class ActivityFormStep: ActivityStep {
     
-    var itemsArray:[Dictionary<String,Any>]
+    var itemsArray:[Dictionary<String,Any>] //itemsArray stores the step details
     
-   
     override init() {
         self.itemsArray = Array()
         super.init()
         
-        
     }
+    /**
+     initializer with step dictiionary containing form items
+     */
     override func initWithDict(stepDict: Dictionary<String, Any>) {
         if Utilities.isValidObject(someObject: stepDict as AnyObject?){
             
             super.initWithDict(stepDict: stepDict)
-            
-            
             if Utilities.isValidObject(someObject: stepDict[kStepFormSteps] as AnyObject ){
                 self.itemsArray = (stepDict[kStepFormSteps] as? [Dictionary<String,Any>])!
             }
-            
-            
         }
         else{
             Logger.sharedInstance.debug("Instruction Step Dictionary is null:\(stepDict)")
         }
     }
     
+    /*
+     method creates the Form step based on the ActivityStep and using itemsArray
+     returns the ORKFormStep
+     NOTE: this method only return formStep of Questions, does not support ActiveTask as items
+     */
     func getFormStep() -> ORKFormStep? {
-        /*
-         method creates the Form step based on the ActivityStep and using itemsArray
-         returns the ORKFormStep
-         NOTE: this method only return formStep of Questions, does not support ActiveTask as items
-         */
+        
         if Utilities.isValidValue(someObject:key  as AnyObject?)
             && Utilities.isValidObject(someObject:self.itemsArray  as AnyObject?) {
             
             let step:ORKFormStep?
             
-            
-           
-            
-            if self.repeatable == true{
+            if self.repeatable == true {
                 
                 step  = RepeatableFormStep(identifier: key!, title:(self.title == nil ? "" : self.title!), text: text!)
-                
-               
-                
                 (step as! RepeatableFormStep).repeatable = true
-                
                 (step as! RepeatableFormStep).repeatableText = self.repeatableText
                 
-                //step?.formItems = [ORKFormItem]()
-            }
-            else{
+            }else {
                 step = ORKFormStep(identifier: key!, title: (self.title == nil ? "" : self.title!), text: text!)
-                //step?.formItems = [ORKFormItem]()
             }
             
-            
-            if  Utilities.isValidValue(someObject:title!  as AnyObject?){
+            if  Utilities.isValidValue(someObject:title!  as AnyObject?) {
                 step?.title = title!
             }
-           
-            if  Utilities.isValidValue(someObject:self.skippable!  as AnyObject?){
-                 step?.isOptional = self.skippable!
+            if  Utilities.isValidValue(someObject:self.skippable!  as AnyObject?) {
+                step?.isOptional = self.skippable!
             }
-            
             
             var formItemsArray = [ORKFormItem]()
             
@@ -93,39 +78,25 @@ class ActivityFormStep: ActivityStep {
                     let orkQuestionStep:ORKQuestionStep = (questionStep?.getQuestionStep())!
                     
                     let formItem01 = ORKFormItem(identifier: orkQuestionStep.identifier, text: orkQuestionStep.title, answerFormat: orkQuestionStep.answerFormat)
-                    
-                    //formItem01.text = orkQuestionStep.text
-                    
-                   
-                    
                     formItem01.placeholder = orkQuestionStep.placeholder == nil ? "" :  orkQuestionStep.placeholder
                     formItem01.isOptional = (questionStep?.skippable)!
-                    //step?.formItems?.append(formItem01)
                     formItemsArray.append(formItem01)
                     
-                }
-                else{
+                }else {
                     Logger.sharedInstance.debug("item Dictionary is null :\(dict)")
                 }
             }
             
-            if self.repeatable == true{
+            if self.repeatable == true {
                 (step as! RepeatableFormStep).initialItemCount = formItemsArray.count
             }
             
             step?.formItems = formItemsArray
-            
             return step
             
-        }
-        else{
+        }else {
             Logger.sharedInstance.debug("Form Data is null ")
-            
             return nil
         }
-        
-        
     }
-    
-    
 }

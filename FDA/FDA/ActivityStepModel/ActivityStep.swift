@@ -39,29 +39,27 @@ enum ActivityStepType:String{
     
 }
 
-
-
-
-
+/**
+ ActivityStep model class resembles ORKStep and stores all the properties of ORKStep. It contains additional properties for particular Step Type.
+*/
 class ActivityStep{
     
-    var activityId:String?
-    var type:ActivityStepType?
+    var activityId:String? //Stores the uniqueId of activity
+    var type:ActivityStepType? // specifies different activitystep types like instruction, question
     
     var resultType:Any?
     var key:String? // Identifier
-    var title:String?
-    var text:String?
+    var title:String? //Title for ORKStep
+    var text:String? // Text for ORKStep
     var  skippable:Bool?
     var groupName:String?
-    var repeatable:Bool?
-    var repeatableText:String?
+    var repeatable:Bool? // used for RepeatableFormStep
+    var repeatableText:String? // used for RepeatableFormStep to add more form steps
     
-    var destinations:Array<Dictionary<String,Any>>?
+    var destinations:Array<Dictionary<String,Any>>? // stores the destination step for branching
     
     /* default Intalizer method */
     init() {
-        
         
         self.activityId = ""
         self.type = .question
@@ -79,7 +77,7 @@ class ActivityStep{
     
     /* initializer method with all params
      */
-    init(activityId:String,type:ActivityStepType,resultType:String,key:String,title:String,text:String,skippable:Bool,groupName:String,repeatable:Bool,repeatableText:String, destinations:Array<Dictionary<String,Any>>) {
+     init(activityId:String,type:ActivityStepType,resultType:String,key:String,title:String,text:String,skippable:Bool,groupName:String,repeatable:Bool,repeatableText:String, destinations:Array<Dictionary<String,Any>>) {
         
         self.activityId = activityId
         self.type = type
@@ -98,8 +96,6 @@ class ActivityStep{
      @stepDict:contains as key:Value pair for all the properties of ActiveStep
      */
     func initWithDict(stepDict:Dictionary<String, Any>){
-        
-        
         
         if Utilities.isValidObject(someObject: stepDict as AnyObject?){
             
@@ -137,12 +133,10 @@ class ActivityStep{
             if Utilities.isValidObject(someObject: stepDict[kActivityStepDestinations] as AnyObject )  {
                 self.destinations = stepDict[kActivityStepDestinations] as? Array<Dictionary<String, Any>>
             }
-            
         }
         else{
             Logger.sharedInstance.debug("Step Dictionary is null:\(stepDict)")
         }
-        
     }
     
     /* method the create ORKStep
@@ -150,8 +144,6 @@ class ActivityStep{
      NOTE:Currently not in Use
      */
     func getNativeStep() -> ORKStep? {
-        
-        
         
         if Utilities.isValidValue(someObject: self.key as AnyObject?){
             return ORKStep(identifier:self.key! )
@@ -161,8 +153,4 @@ class ActivityStep{
         }
         
     }
-    
-    
-    
-    
 }

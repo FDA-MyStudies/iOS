@@ -94,21 +94,17 @@ class ConsentSectionStep{
         self.visualStep = false
 
     }
+    
+    /* setter method which initializes all params
+     @stepDict:contains as key:Value pair for all the properties of ConsentSectionStep
+     */
     func initWithDict(stepDict:Dictionary<String, Any>){
-        
-        /* setter method which initializes all params
-         @stepDict:contains as key:Value pair for all the properties of ConsentSectionStep
-         */
         
         if Utilities.isValidObject(someObject: stepDict as AnyObject?){
             
             if Utilities.isValidValue(someObject: stepDict[kConsentStepType] as AnyObject ){
                 self.type =  ConsentStepSectionType(rawValue:(stepDict[kConsentStepType] as? String)!)
             }
-            
-            
-            
-            
             
             if Utilities.isValidValue(someObject: stepDict[kConsentStepTitle] as AnyObject ){
                 self.title = stepDict[kConsentStepTitle] as? String
@@ -136,7 +132,9 @@ class ConsentSectionStep{
         
     }
     
-
+    /**
+     createConsentSection method returns a ORKConsentSection instance based on the properties
+    */
     func createConsentSection() ->ORKConsentSection {
         
         let consentType:Int? = (self.type?.getIntValue())! >= 0 ? (self.type?.getIntValue()) : -1
@@ -163,12 +161,10 @@ class ConsentSectionStep{
              consentSection.contentURL = URL(string:self.url!)
         }
         
-        
         if self.type == .custom && self.visualStep == true{
             
             consentSection.customImage  = #imageLiteral(resourceName: "task_img2")
         }
-        
         
         return consentSection
     }

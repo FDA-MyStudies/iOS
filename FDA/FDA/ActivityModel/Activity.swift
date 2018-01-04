@@ -51,7 +51,6 @@ let kActivityTaskSubType = "taskSubType"
 enum ActivityType:String{
     case Questionnaire = "questionnaire"
     case activeTask = "task"
-    //case questionnaireAndActiveTask = "QuestionnaireAndActiveTask"
 }
 
 enum Frequency:String {
@@ -82,10 +81,14 @@ enum ActivityState:String {
     case active
     case deleted
 }
+
+/**
+ Model Activity represents a Questionery or Active Task
+*/
 class Activity{
     
     var type:ActivityType?
-    var actvityId:String?
+    var actvityId:String? // Unique id of each activity
     
     var studyId:String?
     var name:String? //this will come in activity list used to display
@@ -101,16 +104,15 @@ class Activity{
     
     var schedule:Schedule?
     var steps:Array<Dictionary<String,Any>>? = []
-    var orkSteps:Array<ORKStep>? = []
+    var orkSteps:Array<ORKStep>? = [] //array of ORKSteps stores each step involved in Questionary
     var activitySteps:Array<ActivityStep>? = []
-    
     
     var frequencyRuns:Array<Dictionary<String, Any>>? = []
     var frequencyType:Frequency = .One_Time
     
     var result:ActivityResult?
 
-    var restortionData:Data?
+    var restortionData:Data? //stores the restortionData for current activity
     var totalRuns = 0
     var currentRunId = 1
     var compeltedRuns = 0
@@ -118,10 +120,11 @@ class Activity{
     var activityRuns:Array<ActivityRun>! = []
     var currentRun:ActivityRun! = nil
     var userParticipationStatus:UserActivityStatus! = nil
-    var taskSubType:String? = ""
+    var taskSubType:String? = "" //used for active tasks
   
+     //Default Initializer
     init() {
-        //Default Initializer
+       
         self.type = .Questionnaire
         
         self.actvityId = ""
@@ -151,46 +154,41 @@ class Activity{
         
         self.activitySteps = Array<ActivityStep>()
         
-        self.frequencyRuns = Array<Dictionary<String, Any>>()
+        self.frequencyRuns = Array<Dictionary<String, Any>>() // contains the runs of Activity
         self.frequencyType = .One_Time
     }
     
     //MARK:Initializer Methods
-    
     init(studyId:String,infoDict:Dictionary<String,Any>) {
-
-    
-    //func initWithStudyActivityList(infoDict:Dictionary<String, Any>) {
-        // initializer for basic data from StudyActivitylist
         
         self.studyId = studyId
         
         //Need to reCheck with actual dictionary when passed
-        if Utilities.isValidObject(someObject: infoDict as AnyObject?){
+        if Utilities.isValidObject(someObject: infoDict as AnyObject?) {
             
-            if Utilities.isValidValue(someObject: infoDict[kActivityId] as AnyObject ){
+            if Utilities.isValidValue(someObject: infoDict[kActivityId] as AnyObject) {
                 self.actvityId = infoDict[kActivityId] as! String?
             }
             
-             if Utilities.isValidValue(someObject: infoDict[kActivityVersion] as AnyObject ){
+             if Utilities.isValidValue(someObject: infoDict[kActivityVersion] as AnyObject) {
                  self.version = infoDict[kActivityVersion] as! String?
              }
             
             
-            if Utilities.isValidValue(someObject: infoDict[kActivityTitle] as AnyObject ){
+            if Utilities.isValidValue(someObject: infoDict[kActivityTitle] as AnyObject) {
                 self.name = infoDict[kActivityTitle] as! String?
             }
-            if Utilities.isValidValue(someObject: infoDict["state"] as AnyObject ){
+            if Utilities.isValidValue(someObject: infoDict["state"] as AnyObject) {
                 self.state = infoDict["state"] as! String?
             }
-            if Utilities.isValidValue(someObject: infoDict[kActivityBranching] as AnyObject ){
+            if Utilities.isValidValue(someObject: infoDict[kActivityBranching] as AnyObject ) {
                 self.branching = infoDict[kActivityBranching] as? Bool
             }
-            if Utilities.isValidValue(someObject: infoDict[kActivityType] as AnyObject ){
+            if Utilities.isValidValue(someObject: infoDict[kActivityType] as AnyObject) {
                 self.type = ActivityType(rawValue: infoDict[kActivityType] as! String)
             }
             
-            if Utilities.isValidValue(someObject: infoDict[kActivityStartTime] as AnyObject ){
+            if Utilities.isValidValue(someObject: infoDict[kActivityStartTime] as AnyObject) {
                  self.startDate =  Utilities.getDateFromStringWithOutTimezone(dateString: (infoDict[kActivityStartTime] as! String?)!)
             }
             else {
@@ -202,8 +200,7 @@ class Activity{
             }
             
             if Utilities.isValidObject(someObject: infoDict[kActivityFrequency] as AnyObject?){
-                //Need to reCheck with actual dictionary when passed
-                
+             
                 let frequencyDict:Dictionary = infoDict[kActivityFrequency] as! Dictionary<String, Any>
                 
                 if Utilities.isValidObject(someObject: frequencyDict[kActivityFrequencyRuns] as AnyObject ){
@@ -236,30 +233,23 @@ class Activity{
     }
     
     //MARK: Setter Methods
+    
+    // method to set  ActivityMetaData
     func setActivityMetaData(activityDict:Dictionary<String,Any>) {
-        // method to set  ActivityMetaData
         
-        if Utilities.isValidObject(someObject: activityDict as AnyObject?){
+        if Utilities.isValidObject(someObject: activityDict as AnyObject?) {
             
             if Utilities.isValidValue(someObject: activityDict[kActivityType] as AnyObject ){
                 self.type? =  ActivityType(rawValue:(activityDict[kActivityType] as? String)!)!
-                print("activity type ===\(self.type) && dict value =\(activityDict[kActivityType])")
+               
             }
-            
-            
             self.setInfo(infoDict: activityDict[kActivityInfoMetaData] as! Dictionary<String,Any>)
-            
-            
-            //Next Phase Branching and Randomization
-            
-           // self.setConfiguration(configurationDict:activityDict[kActivityConfiguration] as! Dictionary<String,Any> )
-            
             
             if Utilities.isValidObject(someObject: activityDict[kActivitySteps] as AnyObject?){
                  self.setStepArray(stepArray:activityDict[kActivitySteps] as! Array )
             }
             else{
-                Logger.sharedInstance.debug("infoDict is null:\(activityDict[kActivitySteps])")
+                Logger.sharedInstance.debug("infoDict is null:\(String(describing: activityDict[kActivitySteps]))")
             }
         }
         else{
@@ -268,58 +258,42 @@ class Activity{
     }
     
     
-    
+    // method to set info part of activity from ActivityMetaData
     func setInfo(infoDict:Dictionary<String,Any>) {
         
-        // method to set info part of activity from ActivityMetaData
-        
         if Utilities.isValidObject(someObject: infoDict as AnyObject?){
-//            if Utilities.isValidValue(someObject: infoDict[kActivityStudyId] as AnyObject ){
-//                self.studyId =   infoDict[kActivityStudyId] as? String
-//            }
-//            if Utilities.isValidValue(someObject: infoDict[kActivityId] as AnyObject ){
-//                self.actvityId =   infoDict[kActivityId] as? String
-//            }
-            
-                        
-            if Utilities.isValidValue(someObject: infoDict["name"] as AnyObject ){
+         
+            if Utilities.isValidValue(someObject: infoDict["name"] as AnyObject ) {
                 self.shortName =   infoDict["name"] as? String
             }
             
-            if Utilities.isValidValue(someObject: infoDict[kActivityVersion] as AnyObject ){
+            if Utilities.isValidValue(someObject: infoDict[kActivityVersion] as AnyObject ) {
                 self.version =  infoDict[kActivityVersion] as? String
             }
-            if Utilities.isValidValue(someObject: infoDict[kActivityStartTime] as AnyObject ){
+            if Utilities.isValidValue(someObject: infoDict[kActivityStartTime] as AnyObject ) {
                 //self.startDate =  Utilities.getDateFromString(dateString: (infoDict[kActivityStartTime] as! String?)!)
             }
-            if Utilities.isValidValue(someObject: infoDict[kActivityEndTime] as AnyObject ){
+            if Utilities.isValidValue(someObject: infoDict[kActivityEndTime] as AnyObject ) {
                 //self.endDate =   Utilities.getDateFromString(dateString: (infoDict[kActivityEndTime] as! String?)!)
             }
-            if Utilities.isValidValue(someObject: infoDict[kActivityLastModified] as AnyObject ){
+            if Utilities.isValidValue(someObject: infoDict[kActivityLastModified] as AnyObject ) {
                 //self.lastModified =   Utilities.getDateFromString(dateString: (infoDict[kActivityLastModified] as! String?)!)
             }
             
-        }
-        else{
+        }else {
             Logger.sharedInstance.debug("infoDict is null:\(infoDict)")
         }
     }
     
+    // method to set Configration
     func setConfiguration(configurationDict:Dictionary<String,Any>)  {
-        // method to set Configration
         
-        if Utilities.isValidObject(someObject: configurationDict as AnyObject?){
-            if Utilities.isValidValue(someObject: configurationDict[kActivityBranching] as AnyObject ){
+        if Utilities.isValidObject(someObject: configurationDict as AnyObject?) {
+            if Utilities.isValidValue(someObject: configurationDict[kActivityBranching] as AnyObject) {
                 self.branching =   configurationDict[kActivityBranching] as? Bool
             }
-            if Utilities.isValidValue(someObject: configurationDict[kActivityRandomization] as AnyObject ){
+            if Utilities.isValidValue(someObject: configurationDict[kActivityRandomization] as AnyObject) {
                 self.randomization =   configurationDict[kActivityId] as? Bool
-            }
-            
-            if Utilities.isValidValue(someObject: configurationDict[kActivityFrequency] as AnyObject ){
-                //Usage of Frequency??
-                
-                //self.frequency =   configurationDict[kActivityFrequency] as? String
             }
         }
         else{
@@ -327,9 +301,9 @@ class Activity{
         }
     }
     
+     //method to set step array
     func setStepArray(stepArray:Array<Dictionary<String,Any>>) {
-        //method to set step array
-        
+       
         if Utilities.isValidObject(someObject: stepArray as AnyObject?){
             self.steps? = stepArray
         }
@@ -348,8 +322,8 @@ class Activity{
         
     }
     
+    //method to set step array
     func setActivityStepArray(stepArray:Array<ActivityStep>) {
-        //method to set step array
         
         if Utilities.isValidObject(someObject: stepArray as AnyObject?){
             self.activitySteps? = stepArray
@@ -359,46 +333,11 @@ class Activity{
         }
     }
     
-    
     func calculateActivityRuns(studyId:String){
         
         Schedule().getRunsForActivity(activity: self, handler: { (runs) in
             if runs.count > 0 {
-                print("activityid: \(self.actvityId) runs \(runs.count)")
                 self.activityRuns = runs
-                
-//                let date = Date()
-//                print("Current Date :\(date.description)")
-//                
-//                var runsBeforeToday:Array<ActivityRun>! = []
-//                var run:ActivityRun!
-//                if self.frequencyType == Frequency.One_Time && activity.endDate == nil {
-//                    //runsBeforeToday = runs
-//                    run = runs.last
-//                }
-//                else {
-//                    
-//                    runsBeforeToday = runs.filter({$0.endDate <= date})
-//                    
-//                    run = runs.filter({$0.startDate <= date && $0.endDate > date}).first //current run
-//                    
-//                }
-//                
-//                
-//                let completedRuns = runs.filter({$0.isCompleted == true})
-//                let incompleteRuns = runsBeforeToday.count - completedRuns.count
-//                
-//                
-//                activity.compeltedRuns = completedRuns.count
-//                activity.incompletedRuns = (incompleteRuns < 0) ? 0 :incompleteRuns
-//                activity.currentRunId =  (run != nil) ? (run?.runId)! : runsBeforeToday.count
-//                activity.totalRuns = runs.count
-//                activity.currentRun = run
-//                activity.activityRuns = runs
-//                
-//                self.updateUserRunStatus(activity: activity)
-                
-//                DBHandler.saveActivityRuns(activityId: (activity.actvityId)!, studyId: (Study.currentStudy?.studyId)!, runs: runs)
             }
         })
     }
@@ -409,15 +348,6 @@ class Activity{
     func setRestortionData(restortionData:Data)  {
         self.restortionData = restortionData
     }
-    
-    
 }
-
-
-
-
-
-
-
 
 

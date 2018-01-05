@@ -47,8 +47,8 @@ class NotificationViewController : UIViewController {
         if (Gateway.instance.notification?.count)! > 0{
             self.loadNotificationFromDatabase()
             self.tableView?.isHidden = false
-        }
-        else {
+            
+        }else {
             self.tableView?.isHidden = true
         }
     }
@@ -62,18 +62,20 @@ class NotificationViewController : UIViewController {
                 
                 for notification in notificationList {
                     
+                    //filter notification
                     if notification.type == AppNotification.NotificationType.Study {
                         
                         let study = Gateway.instance.studies?.filter({$0.studyId == notification.studyId}).last
-                        if study != nil && self.isUserJoined(study: study!){
+                        if study != nil && self.isUserJoined(study: study!) {
                             self.notificationArray.append(notification)
                         }
                         
-                    }else{
+                    }else {
                          self.notificationArray.append(notification)
                     }
                 }
               
+                //Sort Notification according to sort date
               let sorted = self.notificationArray.sorted(by: { (first, second) -> Bool in
                 
                 let date1:Date!
@@ -97,7 +99,7 @@ class NotificationViewController : UIViewController {
               self.notificationArray = sorted
                 self.tableView?.reloadData()
                 
-            }else{
+            }else {
             }
         })
     }
@@ -132,8 +134,10 @@ class NotificationViewController : UIViewController {
             }
         case .Upcoming:
             UIUtilities.showAlertWithTitleAndMessage(title: "", message: NSLocalizedString(kMessageForStudyUpcomingState, comment: "") as NSString)
+            
         case .Paused:
             UIUtilities.showAlertWithTitleAndMessage(title: "", message: NSLocalizedString(kMessageForStudyPausedState, comment: "") as NSString)
+            
         case .Closed:
             UIUtilities.showAlertWithTitleAndMessage(title: "", message: NSLocalizedString(kMessageForStudyClosedState, comment: "") as NSString)
             
@@ -176,8 +180,6 @@ class NotificationViewController : UIViewController {
         
         return false
     }
-    
-    
     
     /**
      Used to push the screen to Study Dashboard
@@ -231,7 +233,6 @@ extension NotificationViewController : UITableViewDataSource {
     }
 }
 
-
 //MARK:- TableView Delegates
 extension NotificationViewController : UITableViewDelegate{
     
@@ -251,7 +252,6 @@ extension NotificationViewController : UITableViewDelegate{
                 
                 Study.updateCurrentStudy(study:study! )
                 self.pushToStudyDashboard(type:appNotif.subType )
-
             }
         }
         }
@@ -268,7 +268,6 @@ extension NotificationViewController:NMWebServiceDelegate {
     }
     
     func finishedRequest(_ manager: NetworkManager, requestName: NSString, response: AnyObject?) {
-        Logger.sharedInstance.info("requestname : \(requestName) Response : \(response)")
         self.removeProgressIndicator()
         
         if requestName as String == WCPMethods.notifications.method.methodName {

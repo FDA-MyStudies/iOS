@@ -49,8 +49,8 @@ class StudyOverviewViewControllerSecond : UIViewController{
         var fontSize = 18.0
         if DeviceType.IS_IPAD || DeviceType.IS_IPHONE_4_OR_LESS {
             fontSize = 13.0
-        }
-        else if DeviceType.IS_IPHONE_5 {
+            
+        }else if DeviceType.IS_IPHONE_5 {
             fontSize = 14.0
         }
         
@@ -67,13 +67,12 @@ class StudyOverviewViewControllerSecond : UIViewController{
         
         if Utilities.isValidValue(someObject: attrStr.string as AnyObject?){
             self.labelDescription?.attributedText = attributedText
-        }
-        else{
+            
+        }else {
             self.labelDescription?.text = ""
         }
         self.labelDescription?.textAlignment = .center
 
-        //labelDescription?.text = overviewSectionDetail.text
         
         UIApplication.shared.statusBarStyle = .lightContent
         
@@ -88,11 +87,8 @@ class StudyOverviewViewControllerSecond : UIViewController{
 //MARK:- Button Actions 
     
     /**
-     
      This method is used to Join Study
-     
      @param sender  Access any kind of objects
-     
      */
     @IBAction func buttonActionJoinStudy(_ sender: Any){
         
@@ -108,11 +104,8 @@ class StudyOverviewViewControllerSecond : UIViewController{
     
     
     /**
-     
      This method is used to Visit website
-     
      @param sender  Access UIButton object
-     
      */
     @IBAction func visitWebsiteButtonAction(_ sender: UIButton) {
         

@@ -12,7 +12,6 @@ class GatewayResourcesListViewController: UIViewController {
 
     @IBOutlet var tableView:UITableView?
     
-    
     func loadResources(){
         
         let plistPath = Bundle.main.path(forResource: "Resources", ofType: ".plist", inDirectory:nil)
@@ -128,14 +127,10 @@ extension GatewayResourcesListViewController:NMWebServiceDelegate {
             
         }
         
-        
-        
     }
     func failedRequest(_ manager: NetworkManager, requestName: NSString, error: NSError) {
         Logger.sharedInstance.info("requestname : \(requestName)")
         self.removeProgressIndicator()
-        
-        
         
     }
 }

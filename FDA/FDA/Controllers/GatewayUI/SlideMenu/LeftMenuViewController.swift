@@ -23,8 +23,6 @@ let kAlertMessageReachoutText = "This feature will be available in the next spri
 let kAlertMessageForSignOut = "Are you sure you want to sign out?"
 let kAlertMessageSignOutSync = "Are you sure you want to sign out? Incomplete activities and activities completed while offline must be re-started when you next sign in."
 
-//"Are you sure you want to Sign Out ? Your data will be lost."
-
 let kAlertSignOutLaterTitle = "Sign Out later"
 
 //MARK:Segue Identifiers
@@ -66,8 +64,6 @@ class LeftMenuViewController : UIViewController, LeftMenuProtocol {
     var signInViewController:UINavigationController!
     var signUpViewController:UINavigationController!
     
-    //var imageHeaderView: ImageHeaderView!
-    
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
@@ -97,7 +93,6 @@ class LeftMenuViewController : UIViewController, LeftMenuProtocol {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        //self.setInitialData()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -107,10 +102,8 @@ class LeftMenuViewController : UIViewController, LeftMenuProtocol {
     
     
     /**
-     
      Used to create Login controller for new user using SignInViewController
      and SignUpViewController
-     
      */
     func createControllersForAnonymousUser(){
         
@@ -128,9 +121,7 @@ class LeftMenuViewController : UIViewController, LeftMenuProtocol {
     
 
     /**
-     
      Used to create Left menu items
-     
      */
     func createLeftmenuItems(){
         
@@ -167,8 +158,6 @@ class LeftMenuViewController : UIViewController, LeftMenuProtocol {
         }
         
         // Setting proportion height of the header and footer view
-       // let height = UIScreen.main.bounds.size.height  * (220.0 / 667.0) //calculate new height
-        
         var height:CGFloat? = 0.0
         height =  (UIScreen.main.bounds.size.height -  CGFloat(menus.count * 70))/2
         
@@ -180,11 +169,8 @@ class LeftMenuViewController : UIViewController, LeftMenuProtocol {
         
     }
     
-    
     /**
-     
      Used to set the initial data for new user
-     
      */
     func setInitialData()  {
         
@@ -214,45 +200,36 @@ class LeftMenuViewController : UIViewController, LeftMenuProtocol {
     
     
     /**
-     
      Used to change the view controller when clicked from the left menu
-     
      @param menu    Accepts the data from enum LeftMenu
-
      */
     func changeViewController(_ menu: LeftMenu) {
         switch menu {
         case .studyList:
             self.slideMenuController()?.changeMainViewController(self.studyListViewController, close: true)
+            
         case .resources:
-              //UIUtilities.showAlertWithTitleAndMessage(title:NSLocalizedString(kAlertMessageText, comment: "") as NSString, message:NSLocalizedString(kAlertMessageReachoutText, comment: "") as NSString)
             self.slideMenuController()?.changeMainViewController(self.resourcesViewController, close: true)
+            
         case .profile_reachOut:
             
             if User.currentUser.userType == .FDAUser {
                 self.slideMenuController()?.changeMainViewController(self.profileviewController, close: true)
                 
-            }
-            else{
+            }else {
                 // go to ReachOut screen
-                //  UIUtilities.showAlertWithTitleAndMessage(title:NSLocalizedString(kAlertMessageText, comment: "") as NSString, message:NSLocalizedString(kAlertMessageReachoutText, comment: "") as NSString)
-                
                 self.slideMenuController()?.changeMainViewController(self.reachoutViewController, close: true)
             }
             
         case .reachOut_signIn:
             if User.currentUser.userType == .FDAUser {
                 // go to reach out
-                  //UIUtilities.showAlertWithTitleAndMessage(title:NSLocalizedString(kAlertMessageText, comment: "") as NSString, message:NSLocalizedString(kAlertMessageReachoutText, comment: "") as NSString)
-                
                 self.slideMenuController()?.changeMainViewController(self.reachoutViewController, close: true)
-            }
-            else{
+                
+            }else {
                 
                 // go sign in
-                //fdaSlideMenuController()?.navigateToHomeControllerForSignin()
                 self.slideMenuController()?.changeMainViewController(self.signInViewController, close: true)
-                
             }
         case .signup:
             self.slideMenuController()?.changeMainViewController(self.signUpViewController, close: true)
@@ -265,11 +242,8 @@ class LeftMenuViewController : UIViewController, LeftMenuProtocol {
 //MARK:- Button Action
     
     /**
-     
      Signout button clicked
-     
      @param sender    Accepts UIButton Object
-
      */
     @IBAction func buttonActionSignOut(_ sender: UIButton) {
         
@@ -280,13 +254,10 @@ class LeftMenuViewController : UIViewController, LeftMenuProtocol {
                                                                      errorAlertActionTitle2: NSLocalizedString(kAlertSignOutLaterTitle, comment: ""), viewControllerUsed: self,
                                                                      action1: {
                                                                         
-                                                                        
                                                                         self.sendRequestToSignOut()
-                                                                        
                                                                         
                 },
                                                                      action2: {
-                                                                        
                 })
             }
             else {
@@ -294,7 +265,6 @@ class LeftMenuViewController : UIViewController, LeftMenuProtocol {
                 UIUtilities.showAlertMessageWithTwoActionsAndHandler(NSLocalizedString(kSignOutText, comment: ""), errorMessage: NSLocalizedString(kAlertMessageForSignOut, comment: ""), errorAlertActionTitle: NSLocalizedString(kSignOutText, comment: ""),
                                                                      errorAlertActionTitle2: NSLocalizedString(kTitleCancel, comment: ""), viewControllerUsed: self,
                                                                      action1: {
-                                                                        
                                                                         
                                                                         self.sendRequestToSignOut()
                                                                         
@@ -312,9 +282,7 @@ class LeftMenuViewController : UIViewController, LeftMenuProtocol {
 
     
     /**
-     
      Send the webservice request to Signout
-     
      */
     func sendRequestToSignOut() {
         UserServices().logoutUser(self as NMWebServiceDelegate)
@@ -322,9 +290,7 @@ class LeftMenuViewController : UIViewController, LeftMenuProtocol {
     
     
     /**
-     
      As the user is Signed out Remove passcode from the keychain
-     
      */
     func signout(){
       
@@ -333,9 +299,6 @@ class LeftMenuViewController : UIViewController, LeftMenuProtocol {
         let ud = UserDefaults.standard
         ud.set(false, forKey: kPasscodeIsPending)
          ud.set(false, forKey: kShowNotification)
-        
-        
-        
         ud.synchronize()
         
         StudyDashboard.instance.dashboardResponse = []
@@ -344,7 +307,6 @@ class LeftMenuViewController : UIViewController, LeftMenuProtocol {
         
         self.changeViewController(.studyList)
         self.createLeftmenuItems()
-        //_ = self.navigationController?.popToRootViewController(animated: true)
     }
 }
 
@@ -353,6 +315,7 @@ class LeftMenuViewController : UIViewController, LeftMenuProtocol {
 extension LeftMenuViewController : UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        
         if let menu = LeftMenu(rawValue: indexPath.row) {
             switch menu {
             case .studyList, .resources, .profile_reachOut,.reachOut_signIn, .signup:
@@ -390,21 +353,17 @@ extension LeftMenuViewController : UITableViewDataSource {
         let dict:Dictionary<String,Any>? = menus[indexPath.row]
         
         if dict?["subTitle"] != nil {
+            
             var cell : LeftMenuCell?
-            
             cell = tableView.dequeueReusableCell(withIdentifier:"cell" , for: indexPath) as? LeftMenuCell
-            
             cell?.populateCellData(data: menus[indexPath.row])
-            
             return cell!
-        }
-        else{
+            
+        }else {
             var cell : LeftMenuResourceTableViewCell?
             
             cell = tableView.dequeueReusableCell(withIdentifier:"LeftMenuResourceCell" , for: indexPath) as? LeftMenuResourceTableViewCell
-            
             cell?.populateCellData(data: menus[indexPath.row])
-            
             return cell!
         }
     }
@@ -423,23 +382,20 @@ extension LeftMenuViewController:NMWebServiceDelegate {
         Logger.sharedInstance.info("requestname : \(requestName)")
         
         if requestName as String ==  RegistrationMethods.logout.description {
-            
             self.signout()
         }
-        
         self.removeProgressIndicator()
     }
     
     func failedRequest(_ manager: NetworkManager, requestName: NSString, error: NSError) {
         Logger.sharedInstance.info("requestname : \(requestName)")
         self.removeProgressIndicator()
+        
         if error.code == 403 { //unauthorized
             UIUtilities.showAlertMessageWithActionHandler(kErrorTitle, message: error.localizedDescription, buttonTitle: kTitleOk, viewControllerUsed: self, action: {
                 self.fdaSlideMenuController()?.navigateToHomeAfterUnauthorizedAccess()
             })
-        }
-        else {
-            
+        }else {
             UIUtilities.showAlertWithTitleAndMessage(title:NSLocalizedString(kErrorTitle, comment: "") as NSString, message: error.localizedDescription as NSString)
         }
     }

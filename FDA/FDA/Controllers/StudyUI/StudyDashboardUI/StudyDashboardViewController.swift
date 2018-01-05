@@ -474,12 +474,11 @@ extension StudyDashboardViewController:ORKTaskViewControllerDelegate{
             if  consentSignatureResult?.didTapOnViewPdf == false{
                 //Directly moving to completion step by skipping Intermediate PDF viewer screen
                 stepViewController.goForward()
-            }
-            else{
+                
+            }else {
                 
             }
-        }
-        else{
+        }else {
             //Back button is enabled
             stepViewController.backButtonItem?.isEnabled = true
             
@@ -511,8 +510,7 @@ extension StudyDashboardViewController:ORKTaskViewControllerDelegate{
             ttController.step = step
             
             return ttController
-        }
-        else if step.identifier == kConsentSharePdfCompletionStep { // For SharePdfCompletion Step
+        } else if step.identifier == kConsentSharePdfCompletionStep { // For SharePdfCompletion Step
             
             var totalResults =  taskViewController.result.results
             let reviewStep:ORKStepResult?

@@ -17,7 +17,6 @@ class LeftMenuCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -27,11 +26,8 @@ class LeftMenuCell: UITableViewCell {
     
     
     /**
-     
      Used to populate Cell Data
-     
      @param data    contains dictionary of type string(key and value)
-
      */
     func populateCellData(data:Dictionary<String,String>){
         menuIcon?.image = UIImage.init(named: data["iconName"]!)

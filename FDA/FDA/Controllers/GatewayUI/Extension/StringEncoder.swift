@@ -23,14 +23,13 @@ extension String {
     }
     
     func containsIgnoringCase(_ find:String) -> Bool{
-        return self.range(of: find, options: .caseInsensitive, range: nil, locale: nil) != nil //rangeOfString(find, options: NSString.CompareOptions.CaseInsensitiveSearch) != nil
+        return self.range(of: find, options: .caseInsensitive, range: nil, locale: nil) != nil
     }
 }
 
 
 extension String {
     var isAlphanumeric: Bool {
-        
         
         if (Int(self) != nil){
             return false

@@ -24,17 +24,12 @@ open class FDASlideMenuViewController: SlideMenuController {
         let controller = storyboard.instantiateViewController(withIdentifier: kStudyListViewControllerIdentifier)
         self.mainViewController = controller
         
-        
-        
-        
          let controller2 = storyboard.instantiateViewController(withIdentifier: kLeftMenuViewControllerIdentifier)
         self.leftViewController = controller2
          super.awakeFromNib()
-         //
-       
+
     }
-//
-    
+
     override open func isTagetViewController() -> Bool {
         if let vc = UIApplication.topViewController() {
             if vc is StudyListViewController ||
@@ -69,10 +64,6 @@ open class FDASlideMenuViewController: SlideMenuController {
         }
     }
     
-//    override open func viewDidLoad() {
-//        super.viewDidLoad()
-//        SlideMenuOptions.leftViewWidth = 300
-//    }
     func navigateToHomeAfterSingout(){
         
         self.leftViewController?.view.isHidden = true
@@ -86,16 +77,11 @@ open class FDASlideMenuViewController: SlideMenuController {
             
             splashVC.navigateToGatewayDashboard()
         }
-        
-       
-        
-        
     }
     
     func navigateToHomeAfterUnauthorizedAccess(){
         
         User.resetCurrentUser()
-        //TEMP
         
         //Delete from database
         DBHandler.deleteAll()
@@ -104,22 +90,18 @@ open class FDASlideMenuViewController: SlideMenuController {
             ORKPasscodeViewController.removePasscodeFromKeychain()
         }
         
-        
         //cancel all local notification
         LocalNotification.cancelAllLocalNotification()
 
-        
         let ud = UserDefaults.standard
         ud.removeObject(forKey: kUserAuthToken)
         ud.removeObject(forKey: kUserId)
         ud.synchronize()
         
-        
         let appDomain = Bundle.main.bundleIdentifier!
         UserDefaults.standard.removePersistentDomain(forName: appDomain)
         UserDefaults.standard.synchronize()
 
-        
         self.leftViewController?.view.isHidden = true
         _ = self.navigationController?.popToRootViewController(animated: true)
     }
@@ -127,12 +109,10 @@ open class FDASlideMenuViewController: SlideMenuController {
     func navigateToHomeControllerForSignin(){
         
         self.performSegue(withIdentifier: "unwindToHomeSignin", sender: self)
-        
     }
     func navigateToHomeControllerForRegister(){
         
         self.performSegue(withIdentifier: "unwindToHomeRegister", sender: self)
-        
     }
 }
 

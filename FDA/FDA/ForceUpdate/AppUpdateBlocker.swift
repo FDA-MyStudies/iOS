@@ -17,8 +17,7 @@ class AppUpdateBlocker: UIView {
     required init?(coder aDecoder: NSCoder) {
         
         super.init(coder: aDecoder)
-        //fatalError("init(coder:) has not been implemented")
-        
+
         //Used to set border color for bottom view
         buttonUpgrade?.layer.borderColor = UIColor.white.cgColor
     }

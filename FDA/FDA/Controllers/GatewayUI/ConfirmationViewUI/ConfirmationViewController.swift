@@ -110,7 +110,6 @@ class ConfirmationViewController: UIViewController {
             self.removeProgressIndicator()
             self.createListOfStudiesToDelete()
         }
-        
     }
     
     func createListOfStudiesToDelete() {
@@ -142,8 +141,7 @@ class ConfirmationViewController: UIViewController {
      Handle delete account webservice response
      */
     func handleDeleteAccountResponse() {
-        // fdaSlideMenuController()?.navigateToHomeAfterSingout()
-        
+       
         let leftController = slideMenuController()?.leftViewController as! LeftMenuViewController
         leftController.changeViewController(.studyList)
         leftController.createLeftmenuItems()

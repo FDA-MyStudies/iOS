@@ -65,7 +65,7 @@ class EligibilityStepViewController: ORKStepViewController {
         
         buttonSubmit?.layer.borderColor =   kUicolorForButtonBackground
         
-        if (self.descriptionText?.characters.count)! > 0{
+        if (self.descriptionText?.characters.count)! > 0 {
             labelDescription?.text = self.descriptionText
         }
         
@@ -78,7 +78,7 @@ class EligibilityStepViewController: ORKStepViewController {
     
     //MARK: Methods and Button Actions
     
-    func showAlert(message:String){
+    func showAlert(message:String) {
         let alert = UIAlertController(title:kErrorTitle as String,message:message as String,preferredStyle: UIAlertControllerStyle.alert)
         alert.addAction(UIAlertAction(title:NSLocalizedString(kTitleOK, comment: ""), style: .default, handler: nil))
         
@@ -136,6 +136,7 @@ extension EligibilityStepViewController:NMWebServiceDelegate {
         self.addProgressIndicator()
         
     }
+    
     func finishedRequest(_ manager: NetworkManager, requestName: NSString, response: AnyObject?) {
         Logger.sharedInstance.info("requestname : \(requestName)")
         
@@ -151,11 +152,12 @@ extension EligibilityStepViewController:NMWebServiceDelegate {
         
         self.goForward()
     }
+    
     func failedRequest(_ manager: NetworkManager, requestName: NSString, error: NSError) {
         Logger.sharedInstance.info("requestname : \(requestName)")
         
         self.removeProgressIndicator()
-        if error.localizedDescription.localizedCaseInsensitiveContains(tokenTextField.text!){
+        if error.localizedDescription.localizedCaseInsensitiveContains(tokenTextField.text!) {
             
             self.showAlert(message: kMessageInvalidTokenOrIfStudyDoesNotExist) //kMessageForInvalidToken
             
@@ -167,7 +169,6 @@ extension EligibilityStepViewController:NMWebServiceDelegate {
             }else {
                 self.showAlert(message:error.localizedDescription)
             }
-            
         }
     }
 }
@@ -176,7 +177,6 @@ extension EligibilityStepViewController:NMWebServiceDelegate {
 
 open class EligibilityTokenTaskResult: ORKResult {
     open var enrollmentToken:String = ""
-    
     
     override open var description: String {
         get {

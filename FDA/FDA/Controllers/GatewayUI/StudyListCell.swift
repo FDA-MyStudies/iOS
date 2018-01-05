@@ -81,9 +81,7 @@ class StudyListCell: UITableViewCell {
     /**
      
      Used to populate the cell data
-     
      @param study    access the data from Study class
-
      */
     func populateCellWith(study:Study){
         selectedStudy = study
@@ -127,11 +125,8 @@ class StudyListCell: UITableViewCell {
     
     
     /**
-     
      Used to set the Study State
-     
      @param study    Access the data from Study Class
-
      */
     func setStudyStatus(study:Study){
         
@@ -151,11 +146,8 @@ class StudyListCell: UITableViewCell {
     
     
     /**
-     
      Used to set UserStatus ForStudy
-     
      @param study    Access the data from Study Class
-     
      */
     func setUserStatusForStudy(study:Study){
         let currentUser = User.currentUser

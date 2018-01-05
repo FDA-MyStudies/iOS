@@ -17,7 +17,6 @@ class JailbrokeBlocker: UIView {
     required init?(coder aDecoder: NSCoder) {
         
         super.init(coder: aDecoder)
-        //fatalError("init(coder:) has not been implemented")
         
         //Used to set border color for bottom view
         buttonUpgrade?.layer.borderColor = UIColor.white.cgColor
@@ -32,7 +31,7 @@ class JailbrokeBlocker: UIView {
     }
 
     @IBAction func buttonUpgradeAction(){
-        UIApplication.shared.openURL(URL(string:"https://itunes.apple.com/us/app/hey-there.../id1032962936?ls=1&mt=8")!)
+        UIApplication.shared.openURL(URL(string:"https://itunes.apple.com/us/app/fda-my-studies/id1242835330?ls=1&mt=8")!)
     }
 
 }

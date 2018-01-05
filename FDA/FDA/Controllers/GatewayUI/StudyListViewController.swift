@@ -14,6 +14,8 @@ let kHelperTextForSearchedStudiesNotFound = "Sorry, no Studies found. Please che
 
 let kHelperTextForOffline = "Sorry, no studies available right now. Please remain signed in to get notified when there are new studies available."
 
+let kNotificationViewControllerIdentifier = "NotificationViewControllerIdentifier"
+
 class StudyListViewController: UIViewController {
     
     @IBOutlet var tableView:UITableView?
@@ -292,9 +294,9 @@ class StudyListViewController: UIViewController {
         
         let ud = UserDefaults.standard
         
-        if (ud.bool(forKey: "FKC") && ud.object(forKey: "FetalKickStartTimeStamp") != nil) {
+        if (ud.bool(forKey: "FKC") && ud.object(forKey: kFetalKickStartTimeStamp) != nil) {
             
-            let studyId = ud.object(forKey: "FetalKickStudyId")  as! String
+            let studyId = ud.object(forKey: kFetalkickStudyId)  as! String
             let study  = Gateway.instance.studies?.filter({$0.studyId == studyId}).last
             
             if (study?.userParticipateState.status == .inProgress && study?.status == .Active) {
@@ -321,7 +323,7 @@ class StudyListViewController: UIViewController {
     func navigateToNotifications(){
         
         let gatewayStoryBoard = UIStoryboard.init(name: kStoryboardIdentifierGateway, bundle: Bundle.main)
-        let notificationController = gatewayStoryBoard.instantiateViewController(withIdentifier:"NotificationViewControllerIdentifier") as! NotificationViewController
+        let notificationController = gatewayStoryBoard.instantiateViewController(withIdentifier:kNotificationViewControllerIdentifier) as! NotificationViewController
         self.navigationController?.pushViewController(notificationController, animated: true)
         
     }

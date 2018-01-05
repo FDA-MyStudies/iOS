@@ -132,23 +132,19 @@ extension SplashViewController:ORKTaskViewControllerDelegate{
     
     public func taskViewController(_ taskViewController: ORKTaskViewController, didFinishWith reason: ORKTaskViewControllerFinishReason, error: Error?) {
         
-        var taskResult:Any?
-        
         switch reason {
             
         case ORKTaskViewControllerFinishReason.completed:
             print("completed")
-            taskResult = taskViewController.result
+           
         case ORKTaskViewControllerFinishReason.failed:
             print("failed")
-            taskResult = taskViewController.result
+        
         case ORKTaskViewControllerFinishReason.discarded:
             print("discarded")
             
-            taskResult = taskViewController.result
         case ORKTaskViewControllerFinishReason.saved:
             print("saved")
-            taskResult = taskViewController.restorationData
             
         }
         taskViewController.dismiss(animated: true, completion: nil)

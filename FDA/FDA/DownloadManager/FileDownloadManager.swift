@@ -13,9 +13,6 @@ protocol FileDownloadManagerDelegates {
     func download(manager:FileDownloadManager,didUpdateProgress progress:Float)
     func download(manager:FileDownloadManager,didFinishDownloadingAtPath path:String)
     func download(manager:FileDownloadManager,didFailedWithError error:Error)
-    
-   
-    
 }
 
 let kdefaultKeyForEncrytion = "passwordpasswordpasswordpassword"
@@ -34,7 +31,7 @@ class FileDownloadManager : NSObject {
         let config = URLSessionConfiguration.default
         sessionManager = Foundation.URLSession.init(configuration: config, delegate: self , delegateQueue: nil)
         let downloadTask = sessionManager.downloadTask(with: request)
-        //sessionManager.delegate = self
+        
         downloadTask.taskDescription = [fileName, fileURL, destinationPath].joined(separator: ",")
         downloadTask.resume()
         
@@ -46,9 +43,6 @@ class FileDownloadManager : NSObject {
         
         downloadingArray.append(downloadModel)
     }
-    
-    
-    
 }
 
 
@@ -64,25 +58,7 @@ extension FileDownloadManager:URLSessionDelegate{
             let progress = Float(receivedBytesCount / totalBytesCount)
             
             self.delegate?.download(manager: self, didUpdateProgress: progress)
-            
-            //downloadModel.startTime!
-            //let timeInterval = self.taskStartedDate.timeIntervalSinceNow
-            //let downloadTime = TimeInterval(-1 * timeInterval)
-            
-            //let speed = Float(totalBytesWritten) / Float(downloadTime)
-            
-            //let remainingContentLength = totalBytesExpectedToWrite - totalBytesWritten
-            
-            //let remainingTime = Int(remainingContentLength) / Int(speed)
-            //let hours = Int(remainingTime) / 3600
-            //let minutes = (Int(remainingTime) - hours * 3600) / 60
-            //let seconds = Int(remainingTime) - hours * 3600 - minutes * 60
-            
-            //print(progress)
-            
-            
         })
-        
     }
     func URLSession(_ session: Foundation.URLSession, downloadTask: URLSessionDownloadTask, didFinishDownloadingToURL location: URL) {
         
@@ -115,24 +91,10 @@ extension FileDownloadManager:URLSessionDelegate{
                         self.delegate?.download(manager: self, didFailedWithError: error)
                     })
                 }
-                // } else {
-                //Opportunity to handle the folder doesnot exists error appropriately.
-                //Move downloaded file to destination
-                //Delegate will be called on the session queue
-                //Otherwise blindly give error Destination folder does not exists
-                
-                //                    if let _ = self.delegate?.downloadRequestDestinationDoestNotExists {
-                //                        self.delegate?.downloadRequestDestinationDoestNotExists?(downloadModel, index: index, location: location)
-                //                    } else {
-                //                        let error = NSError(domain: "FolderDoesNotExist", code: 404, userInfo: [NSLocalizedDescriptionKey : "Destination folder does not exists"])
-                //                        //self.delegate?.downloadRequestDidFailedWithError?(error, downloadModel: downloadModel, index: index)
-                //                    }
-                //  }
                 
                 break
             }
         }
-        
     }
     func URLSession(_ session: Foundation.URLSession, task: URLSessionTask, didCompleteWithError error: NSError?) {
         debugPrint("task id: \(task.taskIdentifier)")
@@ -143,24 +105,18 @@ extension FileDownloadManager:URLSessionDelegate{
         
     }
     public func urlSessionDidFinishEvents(forBackgroundURLSession session: URLSession) {
-        
-        //        if let backgroundCompletion = self.backgroundSessionCompletionHandler {
-        //            DispatchQueue.main.async(execute: {
-        //                backgroundCompletion()
-        //            })
-        //        }
-        //        debugPrint("All tasks are finished")
-        
+    
     }
     
+    /**
+     decrypts file at the URL specified using the  Key & IV, AES256 decryption is used
+     */
     class func decrytFile(pathURL:URL?) -> Data?{
         
         var pathString = "file://" + "\((pathURL?.absoluteString)!)"
         if (pathURL?.absoluteString.contains("file://"))! {
             pathString = (pathURL?.absoluteString)!
         }
-        
-        //let pathString = "file://" + "\((pathURL?.absoluteString)!)"
         
         if !FileManager.default.fileExists(atPath: pathString) {
         
@@ -192,8 +148,7 @@ extension FileDownloadManager:URLSessionDelegate{
             let deCryptedData = Data(deCipherText)
             return deCryptedData
             
-        }
-        catch let error as NSError{
+        }catch let error as NSError {
             
              debugPrint("Decrypting data failed \(error.localizedDescription)")
             print(error)
@@ -201,14 +156,14 @@ extension FileDownloadManager:URLSessionDelegate{
             return nil
         }
            
-        }
-        else{
+        }else {
             return nil
         }
-        
     }
     
-    
+/**
+  encrypts file at the URL specified using the random generated Key & IV, AES256 encryption is used
+ */
    class func encyptFile(pathURL:URL?){
     
     var pathString = "file://" + "\((pathURL?.absoluteString)!)"
@@ -218,7 +173,6 @@ extension FileDownloadManager:URLSessionDelegate{
         if !FileManager.default.fileExists(atPath: pathString) {
             
             do{
-                
                 let ud = UserDefaults.standard
                 
                 var key = ""
@@ -246,25 +200,16 @@ extension FileDownloadManager:URLSessionDelegate{
                 let encryptedData =  Data(ciphertext)
                 
                 do{
-                    
                     try encryptedData.write(to: URL.init(string: pathString)!, options: Data.WritingOptions.atomic)
                     
-                }
-                catch let error as NSError{
+                }catch let error as NSError{
                     print(error)
                     debugPrint("Writing encrypted data to path failed \(error.localizedDescription)")
                 }
-                
-                
-                
-            }
-            catch let error as NSError{
+            }catch let error as NSError {
                 print(error)
                 debugPrint("Encryting data failed \(error.localizedDescription)")
             }
-            
         }
-        
     }
-    
 }

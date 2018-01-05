@@ -124,16 +124,10 @@
     _originalTableView = tableView;
 }
 
-
-
-
 - (void) addMoreAction:(id)sender {
-    
     
     NSMutableArray *mItems = [[[self formStep] formItems] mutableCopy];
     [mItems removeLastObject];
-    
-   // NSInteger count = mItems.count - 1;
     
     NSInteger count = mItems.count ;
     NSInteger suffix = count / _originalFormItems.count ;
@@ -162,60 +156,23 @@
 
         if (self.originalTableView.contentSize.height > self.originalTableView.frame.size.height)
         {
-//            CGPoint offset = CGPointMake(0, self.originalTableView.contentSize.height - self.originalTableView.frame.size.height);
-//            
-//            NSInteger sections = [self.originalTableView numberOfSections];
-//            
-//            NSInteger lastSection = _repeatableTextSection - 1;
-
-            
+          
             NSInteger previousLastSectionRowCount = [_originalTableView numberOfRowsInSection:_repeatableTextSection - 1];
             
             NSIndexPath *scrollToIndexPath;
             
             if (_lastSectionRowCount <= previousLastSectionRowCount) {
                 scrollToIndexPath = [NSIndexPath indexPathForRow:previousLastSectionRowCount - 1 inSection:_repeatableTextSection - 1];
-            }
-            else {
+            }else {
                 scrollToIndexPath = [NSIndexPath indexPathForRow:0 inSection:_repeatableTextSection];
             }
             
             [self.originalTableView scrollToRowAtIndexPath:scrollToIndexPath atScrollPosition:UITableViewScrollPositionTop animated:YES];
-            
-//            UITableViewCell *cell = [_originalTableView cellForRowAtIndexPath:scrollToIndexPath];
-//            [cell becomeFirstResponder];
-            
-            
-            
-            
-            
-            /*
-            NSInteger noOfSections  =  mItems.count - _originalFormItems.count + 1 ;
-            
-            if (self.originalFormItems.count > 2){
-            
-            noOfSections = noOfSections - ((NSInteger*)(noOfSections /_originalFormItems.count) > 0 ? (noOfSections /_originalFormItems.count) : 0);
-            }
-            NSIndexPath *secondLastIndexPath = [NSIndexPath indexPathForRow:0 inSection:noOfSections];
-            
-            
-            [self.originalTableView scrollToRowAtIndexPath:secondLastIndexPath atScrollPosition:UITableViewScrollPositionBottom animated:YES];
-            */
-            //[self.originalTableView setContentOffset:offset animated:YES];
         }
         
     });
 
-    
-    
-    
-    //NSIndexPath *ip = [NSIndexPath indexPathForRow:mItems.count - 1 inSection:0];
-   // [_originalTableView scrollToRowAtIndexPath:ip atScrollPosition:UITableViewScrollPositionBottom animated:YES];
 }
-
-
-
-
 
 /*
 #pragma mark - Navigation

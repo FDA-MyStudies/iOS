@@ -13,8 +13,6 @@ let kResourceName = "fda_preload"
 
 extension UIViewController {
     
-    
-    
     func topMostViewController() -> UIViewController {
         
             if self.presentedViewController == nil {
@@ -33,8 +31,8 @@ extension UIViewController {
     }
     
     func setNavigationBarItem() {
+        
         self.addLeftBarButtonWithImage(UIImage(named: "menu_icn")!)
-        //self.addRightBarButtonWithImage(UIImage(named: "")!)
         self.slideMenuController()?.removeLeftGestures()
         self.slideMenuController()?.removeRightGestures()
         self.slideMenuController()?.addLeftGestures()
@@ -66,48 +64,31 @@ extension UIViewController {
         
         self.navigationController?.navigationBar.isUserInteractionEnabled = false
         
-        
-       
-        
         var view = self.view.viewWithTag(5000)
         if view == nil {
             
            view = UINib(nibName: kNewProgressViewNIB, bundle: nil).instantiate(withOwner: nil, options: nil)[0] as? UIView
             
-            
             let url = Bundle.main.url(forResource: kResourceName, withExtension: "gif")!
             let data = try! Data(contentsOf: url)
             let webView =  view?.subviews.first as! UIWebView
             
-            
-            //webView.load(data, mimeType: "image/gif", textEncodingName: "UTF-8", baseURL: URL())
             webView.loadRequest(URLRequest.init(url: url))
             webView.scalesPageToFit = true
             webView.contentMode = UIViewContentMode.scaleAspectFit
-            
-            
             
            view?.frame = UIScreen.main.bounds
             view?.tag = 5000
             self.view.addSubview(view!)
             view?.alpha = 0
             
-            
-            
             UIView.animate(withDuration: 0.3) {
                 view?.alpha = 1
             }
         }
-        
-        
     }
     
-    
-    
-    
-    
     func removeProgressIndicator(){
-        
         
         self.navigationItem.leftBarButtonItem?.isEnabled = true
         self.navigationItem.rightBarButtonItem?.isEnabled = true

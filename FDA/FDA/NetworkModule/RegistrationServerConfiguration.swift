@@ -35,7 +35,7 @@ enum RegistrationMethods:String {
     
     var description:String{
         switch self {
-        
+            
         default:
             return self.rawValue+".api"
         }
@@ -44,7 +44,7 @@ enum RegistrationMethods:String {
     var method:Method{
         
         switch self {
-       
+            
         case .activityState,.consentPDF,.deleteAccount,.confirmRegistration,.userProfile,.userPreferences,.studyState:
             //GET Methods
             return Method(methodName:(self.rawValue+".api"), methodType: .httpMethodGet, requestType: .requestTypeHTTP)
@@ -58,7 +58,7 @@ enum RegistrationMethods:String {
             
         }
     }
-   
+    
 }
 struct RegistrationServerURLConstants {
     //TODO: Set the server end points
@@ -72,8 +72,8 @@ struct RegistrationServerURLConstants {
     //LabKey Server Test Enviorment
     //static let ProductionURL = "https://hphci-fdama-te-ur-01.labkey.com/fdahpUserRegWS/"
     //static let DevelopmentURL = "https://hphci-fdama-te-ur-01.labkey.com/fdahpUserRegWS/"
-  
-  
+    
+    
     //Labkey UAT Server Staging enviroment
     static let ProductionURL = "https://hphci-fdama-st-ur-01.labkey.com/fdahpUserRegWS/"
     static let DevelopmentURL = "https://hphci-fdama-st-ur-01.labkey.com/fdahpUserRegWS/"
@@ -110,6 +110,6 @@ class RegistrationServerConfiguration: NetworkConfiguration {
     override func shouldParseErrorMessage() -> Bool {
         return false
     }
-
-
+    
+    
 }

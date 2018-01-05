@@ -58,10 +58,6 @@ class ResponseServerConfiguration: NetworkConfiguration {
     static let configuration = ResponseServerConfiguration()
     
     
-    
-    
-    
-    
     //MARK:  Delegates
     override func getProductionURL() -> String {
         return ResponseServerURLConstants.ProductionURL

@@ -11,6 +11,7 @@ import Foundation
 
 import RealmSwift
 
+// DB instance of Notification model
 class DBNotification: Object {
     
     

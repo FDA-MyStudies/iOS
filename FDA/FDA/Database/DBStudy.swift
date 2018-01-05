@@ -9,6 +9,9 @@
 import UIKit
 import RealmSwift
 
+/**
+ DB instance of Study Model
+ */
 class DBStudy: Object {
     
     dynamic var studyId:String!

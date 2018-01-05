@@ -9,6 +9,9 @@
 
 import RealmSwift
 
+/**
+ DB instance of User model 
+ */
 class DBUser: Object {
     
     dynamic var firstName : String = ""
@@ -28,6 +31,5 @@ class DBUser: Object {
     override static func primaryKey() -> String? {
         return "userId"
     }
-    
     
 }

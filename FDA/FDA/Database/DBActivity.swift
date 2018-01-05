@@ -9,6 +9,7 @@
 import UIKit
 import RealmSwift
 
+// DB instance of Activity Model
 class DBActivity: Object {
     
     dynamic var id:String?
@@ -20,7 +21,7 @@ class DBActivity: Object {
     dynamic var shortName:String?
     dynamic var version:String?
     dynamic var lastModified:Date?
-    //dynamic var userStatus:UserActivityStatus.ActivityStatus
+    
     dynamic var startDate:Date?
     dynamic var endDate:Date?
     dynamic var branching:Bool = false

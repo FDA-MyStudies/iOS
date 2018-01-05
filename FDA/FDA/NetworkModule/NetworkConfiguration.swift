@@ -46,9 +46,6 @@ class NetworkProtocols:NetworkConfigurationProtocol{
         return false
     }
     internal func parseError(errorResponse:Dictionary<String,Any>)->NSError{
-        
-//        let error = NSError(domain: NSURLErrorDomain, code:101,userInfo:[NSLocalizedDescriptionKey:"Handle your error here"])
-//        return  error
       
       var errorCode = 0
       if let errResponse = errorResponse["error"] as? [String: Any] {
@@ -61,17 +58,10 @@ class NetworkProtocols:NetworkConfigurationProtocol{
         }
       }
       
-      
       let error = NSError(domain: NSURLErrorDomain, code: 101, userInfo: [NSLocalizedDescriptionKey: "Your error localized description"])
       return  error
       
-      
-      
     }
-
-    
 }
 class NetworkConfiguration: NetworkProtocols {
-
-
 }

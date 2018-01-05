@@ -74,17 +74,13 @@ class NetworkManager {
     }
     
     init() {
-//        do {
-//            reachability =  Reachability.init()
-//        } catch {
-//            print("Unable to create Reachability")
-//        }
+
         reachability =  Reachability.init()
         NotificationCenter.default.addObserver(self, selector: #selector(reachabilityChanged(_:)), name:ReachabilityChangedNotification, object: nil)
     
         do{
             try reachability?.startNotifier()
-        }catch{
+        }catch {
             print("could not start reachability notifier")
         }
     }

@@ -64,9 +64,6 @@ struct NetworkURLConstants {
     
 }
 
-
-
-
 class NetworkConstants: NSObject {
     //TODO: Configure common parameters for requests here.
     class func getCommonRequestParameters()-> NSDictionary? {

@@ -7,12 +7,6 @@
 //
 
 
-//let studyId =  Study.currentStudy?.studyId!
-//let activiyId =  Study.currentActivity?.actvityId!
-//let activityName =  Study.currentActivity?.shortName!
-//let activityVersion = Study.currentActivity?.version!
-//let currentRunId = Study.currentActivity?.currentRunId
-
 import Foundation
 import RealmSwift
 
@@ -26,25 +20,22 @@ class SyncUpdate{
         self.isReachabilityChanged = false
     }
     
-    @objc func updateData(){
+    @objc func updateData() {
        
-        
-        if (NetworkManager.sharedInstance().reachability?.isReachable)!{
+        if (NetworkManager.sharedInstance().reachability?.isReachable)! {
             print("*******************update Data***************")
             
             DispatchQueue.main.asyncAfter(deadline: .now() + 10.0) {
-                // your code here
-                //self.updateRunInformationToServer()
                 self.syncDataToServer()
             }
-            
-            
-        }
-        else {
+        }else {
              print("not available")
         }
     }
     
+    /**
+     SyncData to server, called to sync responses stored in offline mode to server
+    */
     func syncDataToServer() {
         
         let realm = try! Realm()
@@ -58,8 +49,7 @@ class SyncUpdate{
                 do {
                     params = try JSONSerialization.jsonObject(with: (toBeSyncedData?.requestParams)!, options: []) as? Dictionary<String, Any>
                     
-                }
-                catch{
+                }catch {
                     
                 }
             }
@@ -71,8 +61,7 @@ class SyncUpdate{
                 do {
                     headers = try JSONSerialization.jsonObject(with: (toBeSyncedData?.headerParams)!, options: []) as? Dictionary<String, String>
                     
-                }
-                catch{
+                }catch {
                     
                 }
             }
@@ -88,12 +77,9 @@ class SyncUpdate{
                 let method = registrationMethod?.method
                 UserServices().syncOfflineSavedData(method: method!, params: params, headers: headers ,delegate: self)
                 
-                
-            }
-            else if server == "wcp" {
-                
-            }
-            else if server == "response" {
+            }else if server == "wcp" {
+                //Do Nothing
+            }else if server == "response" {
                 
                 let methodName = methodString?.components(separatedBy: ".").first
                 let registrationMethod = ResponseMethods(rawValue:methodName!)
@@ -105,12 +91,13 @@ class SyncUpdate{
             try! realm.write {
                realm.delete(toBeSyncedData!)
             }
-            
         }
     }
     
+    /**
+     updates run information to server
+    */
     func updateRunInformationToServer(){
-        
         
         let realm = try! Realm()
         let dbRuns = realm.objects(DBActivityRun.self).filter({$0.toBeSynced == true})
@@ -120,30 +107,24 @@ class SyncUpdate{
             //get last run
             let run = dbRuns.last
             self.selectedRun = run
-            
             let activity = realm.object(ofType: DBActivity.self, forPrimaryKey: run?.activityId!)
             
-            if activity == nil{
+            if activity == nil {
                 self.findNextRunToSync()
-            }
-            else if activity != nil && activity?.shortName == nil{
+                
+            }else if activity != nil && activity?.shortName == nil {
                 self.findNextRunToSync()
-            }
-            else {
+                
+            }else {
                 
                 let currentUser = User.currentUser
                 if let userStudyStatus = currentUser.participatedStudies.filter({$0.studyId == run?.studyId}).first {
-                    
-                    
-                    
                     
                     let studyId =  run?.studyId
                     let activiyId =  run?.activityId
                     let activityName =  activity?.shortName
                     let activityVersion = activity?.version!
                     let currentRunId = run?.runId
-                    
-                    
                     
                     let info =  [kStudyId:studyId! ,
                                  kActivityId:activiyId! ,
@@ -160,19 +141,13 @@ class SyncUpdate{
                     do {
                         let responseData = try JSONSerialization.jsonObject(with: (run?.responseData)!, options: []) as! [String:Any]
                         data = (responseData["data"] as! Dictionary<String, Any>?)!
+                    }catch {
                     }
-                    catch{
-                        
-                    }
-                    
+                    //save to server
                     LabKeyServices().processResponse(metaData: info, activityType: ActivityType!, responseData: data, participantId: participationid!, delegate: self)
-                    
                 }
             }
-         
-            
-        }
-        else{
+        }else {
             self.selectedRun = nil
         }
     }
@@ -198,16 +173,11 @@ extension SyncUpdate:NMWebServiceDelegate {
     
     func startedRequest(_ manager: NetworkManager, requestName: NSString) {
         Logger.sharedInstance.info("requestname : \(requestName)")
-        
-        
     }
     
     func finishedRequest(_ manager: NetworkManager, requestName: NSString, response: AnyObject?) {
         Logger.sharedInstance.info("requestname : \(requestName) : \(response)")
-        
-       //self.findNextRunToSync()
         self.syncDataToServer()
-       
     }
     
     func failedRequest(_ manager: NetworkManager, requestName: NSString, error: NSError) {

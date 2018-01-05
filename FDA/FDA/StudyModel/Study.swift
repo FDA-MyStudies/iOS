@@ -263,7 +263,7 @@ class StudyAnchorDate{
             if let userStudyStatus = currentUser.participatedStudies.filter({$0.studyId == Study.currentStudy?.studyId}).first {
                 self.date = userStudyStatus.joiningDate
                 
-                DBHandler.saveAncorDate(date: self.date!, studyId: (Study.currentStudy?.studyId)!)
+                DBHandler.saveAnchorDate(date: self.date!, studyId: (Study.currentStudy?.studyId)!)
             }
         }
     }
@@ -272,7 +272,7 @@ class StudyAnchorDate{
         
         if self.anchorDateType == "date-question" {
             self.date = Utilities.getDateFromString(dateString: date)
-            DBHandler.saveAncorDate(date: self.date!, studyId: (Study.currentStudy?.studyId)!)
+            DBHandler.saveAnchorDate(date: self.date!, studyId: (Study.currentStudy?.studyId)!)
         }
     }
     

@@ -71,7 +71,9 @@ class DashboardStatistics {
     init() {
         
     }
-    
+    /**
+     Initializer with dictionary of properties
+    */
     init(detail:Dictionary<String,Any>) {
         
         if Utilities.isValidObject(someObject: detail as AnyObject?){
@@ -149,9 +151,11 @@ class DashboardCharts {
     var statList = List<DBStatisticsData>()
     
     init() {
-    
     }
     
+    /**
+     initializer with dictionary of properties
+    */
     init(detail:Dictionary<String,Any>) {
     
         if Utilities.isValidObject(someObject: detail as AnyObject?){
@@ -204,10 +208,7 @@ class DashboardCharts {
             
             self.studyId = Study.currentStudy?.studyId
           
-          //FOLLOWING LINE COMMENTED:Arun
-            //self.chartId = self.studyId! + self.title!
           self.chartId = self.studyId! + (self.activityId == nil ? "" : self.activityId!) + self.dataSourceKey!
-          //----
         }
     }
 }

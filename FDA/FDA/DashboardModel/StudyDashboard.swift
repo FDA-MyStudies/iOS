@@ -42,7 +42,7 @@ class StudyDashboard: NSObject {
 }
 
 class DashboardResponse{
-    var key:String?
+    var key:String? //Stats key
     var activityId:String?
     var type:String?
     var values:Array<Dictionary<String,Any>> = []

@@ -36,7 +36,7 @@ class ActivitiesViewController : UIViewController{
     
     var allActivityList:Array<Dictionary<String,Any>>! = []
     var selectedFilter: ActivityFilterType? //Holds the applied FilterTypes
-  
+    
     let labkeyResponseFetch = ResponseDataFetch()
     
     //MARK:- Viewcontroller Lifecycle
@@ -58,7 +58,7 @@ class ActivitiesViewController : UIViewController{
         self.navigationItem.title = NSLocalizedString("STUDY ACTIVITIES", comment: "")
         self.tableView?.sectionHeaderHeight = 30
         
-       self.navigationController?.navigationItem.rightBarButtonItem?.tintColor = UIColor.gray
+        self.navigationController?.navigationItem.rightBarButtonItem?.tintColor = UIColor.gray
         
         if (Study.currentStudy?.studyId) != nil {
             if StudyUpdates.studyConsentUpdated {
@@ -67,6 +67,7 @@ class ActivitiesViewController : UIViewController{
             }
         }
         
+        //create refresh control for pull to refresh
         refreshControl = UIRefreshControl()
         refreshControl?.attributedTitle = NSAttributedString(string: "Pull to refresh")
         refreshControl?.addTarget(self, action: #selector(refresh(sender:)), for: UIControlEvents.valueChanged)
@@ -101,17 +102,17 @@ class ActivitiesViewController : UIViewController{
         
         
     }
-  
+    
     //MARK: Helper Methods
     
     func getLabkeyResponse() {
-    
-    let ud = UserDefaults.standard
-    let key = "LabKeyResponse" + (Study.currentStudy?.studyId)!
-    if !(ud.bool(forKey: key)){
-      labkeyResponseFetch.checkUpdates()
+        
+        let ud = UserDefaults.standard
+        let key = "LabKeyResponse" + (Study.currentStudy?.studyId)!
+        if !(ud.bool(forKey: key)){
+            labkeyResponseFetch.checkUpdates()
+        }
     }
-  }
     
     func checkForActivitiesUpdates(){
         
@@ -150,7 +151,7 @@ class ActivitiesViewController : UIViewController{
                 }
                 
             })
-
+            
         }else {
             //check if user navigated from notification
             
@@ -173,7 +174,7 @@ class ActivitiesViewController : UIViewController{
     
     /**
      RegisterNotificationForAnchorDate method sets the notification for the available resource
-    */
+     */
     
     func registerNotificationForAnchorDate(){
         
@@ -185,6 +186,7 @@ class ActivitiesViewController : UIViewController{
                     if resource.startDate == nil && resource.endDate == nil {
                         
                         let anchorDateObject = Study.currentStudy?.anchorDate
+                        //Fetch AnchorData based availablity
                         if(anchorDateObject != nil && (anchorDateObject?.isAnchorDateAvailable())!) {
                             
                             let anchorDate = Study.currentStudy?.anchorDate?.date?.startOfDay
@@ -211,6 +213,7 @@ class ActivitiesViewController : UIViewController{
                                         , completionHandler: { (found) in
                                             if !found {
                                                 
+                                                //Create AppLocalNotification
                                                 let notification = AppLocalNotification()
                                                 notification.id = resource.resourceId! + (Study.currentStudy?.studyId)!
                                                 notification.message = resource.notificationMessage
@@ -223,6 +226,7 @@ class ActivitiesViewController : UIViewController{
                                                 notification.studyId = (Study.currentStudy?.studyId)!
                                                 //notification.activityId = Study.currentActivity?.actvityId
                                                 
+                                                //Save Notification to Database
                                                 DBHandler.saveLocalNotification(notification: notification)
                                                 
                                                 //register notification
@@ -255,12 +259,12 @@ class ActivitiesViewController : UIViewController{
     }
     
     @IBAction func filterButtonAction(_ sender: AnyObject){
-         let frame = self.view.frame
+        let frame = self.view.frame
         
         if self.selectedFilter == nil {
             self.selectedFilter = ActivityFilterType.all
         }
-        
+        //create and load FilterView
         let view = ActivityFilterView.instanceFromNib(frame:frame , selectedIndex:self.selectedFilter!)
         view.delegate = self
         self.tabBarController?.view.addSubview(view)
@@ -283,8 +287,8 @@ class ActivitiesViewController : UIViewController{
     
     func refresh(sender:AnyObject) {
         
-         Logger.sharedInstance.info("Request for study Updated...")
-         WCPServices().getStudyUpdates(study: Study.currentStudy!, delegate: self)
+        Logger.sharedInstance.info("Request for study Updated...")
+        WCPServices().getStudyUpdates(study: Study.currentStudy!, delegate: self)
         //self.sendRequesToGetActivityList()
     }
     
@@ -295,14 +299,14 @@ class ActivitiesViewController : UIViewController{
      Used to load the Actif=vities data from database
      */
     func loadActivitiesFromDatabase(){
-      
+        
         DBHandler.loadActivityListFromDatabase(studyId: (Study.currentStudy?.studyId)!) { (activities) in
             if activities.count > 0 {
                 Study.currentStudy?.activities = activities
-              
+                
                 self.handleActivityListResponse()
-            }
-            else {
+                
+            }else {
                 
                 self.sendRequestToGetActivityStates()
             }
@@ -315,12 +319,13 @@ class ActivitiesViewController : UIViewController{
      */
     func createActivity(){
         
-     
+        //Disable Custom KeyPad with toolbars
         IQKeyboardManager.sharedManager().enable = false
         IQKeyboardManager.sharedManager().enableAutoToolbar = false
         
         if Utilities.isValidObject(someObject: Study.currentActivity?.steps as AnyObject?){
             
+            //Create ActivityBuilder instance
             ActivityBuilder.currentActivityBuilder = ActivityBuilder()
             ActivityBuilder.currentActivityBuilder.initWithActivity(activity:Study.currentActivity! )
         }
@@ -332,7 +337,7 @@ class ActivitiesViewController : UIViewController{
         
         if task != nil {
             
-            
+            //check if restorationData is available
             if Study.currentActivity?.currentRun.restortionData != nil {
                 let restoredData = Study.currentActivity?.currentRun.restortionData
                 
@@ -348,6 +353,7 @@ class ActivitiesViewController : UIViewController{
             
             taskViewController?.title = "Activity"
             
+            //Customize appearance of TaskViewController
             UIView.appearance(whenContainedInInstancesOf: [ORKTaskViewController.self]).tintColor = kUIColorForSubmitButtonBackground
             
             taskViewController?.delegate = self
@@ -376,7 +382,7 @@ class ActivitiesViewController : UIViewController{
         if difference != nil {
             todayDate = todayDate.addingTimeInterval(TimeInterval(difference!))
         }
-
+        
         if activity.startDate != nil && activity.endDate != nil {
             
             let startDateResult = (activity.startDate?.compare(todayDate))! as ComparisonResult
@@ -387,7 +393,7 @@ class ActivitiesViewController : UIViewController{
                 
             }else if startDateResult == .orderedDescending {
                 return .upcoming
-        
+                
             }else if endDateResult == .orderedAscending {
                 return .past
             }
@@ -419,8 +425,8 @@ class ActivitiesViewController : UIViewController{
         var currentActivities:Array<Activity> = []
         var upcomingActivities:Array<Activity> = []
         var pastActivities:Array<Activity> = []
-      
-      var isInActiveActivitiesAreAvailable:Bool! = false
+        
+        var isInActiveActivitiesAreAvailable:Bool! = false
         for activity in activities! {
             
             if activity.state == "active" || activity.state == nil {
@@ -436,17 +442,17 @@ class ActivitiesViewController : UIViewController{
                 }
             }
             else {
-               
-              isInActiveActivitiesAreAvailable = true
-              
-              DBHandler.deleteDBLocalNotification(activityId: activity.actvityId!,studyId:activity.studyId!)
+                
+                isInActiveActivitiesAreAvailable = true
+                
+                DBHandler.deleteDBLocalNotification(activityId: activity.actvityId!,studyId:activity.studyId!)
             }
         }
-      
-      if isInActiveActivitiesAreAvailable {
-         LocalNotification.refreshAllLocalNotification()
-      }
-      
+        
+        if isInActiveActivitiesAreAvailable {
+            LocalNotification.refreshAllLocalNotification()
+        }
+        
         //sort as per start date
         currentActivities.sort(by: {$0.startDate?.compare($1.startDate!) == .orderedAscending})
         upcomingActivities.sort(by: {$0.startDate?.compare($1.startDate!) == .orderedAscending})
@@ -454,7 +460,7 @@ class ActivitiesViewController : UIViewController{
         
         let  sortedCurrentActivities =  currentActivities.sorted(by: { (activity1:Activity, activity2:Activity) -> Bool in
             
-                return (activity1.userParticipationStatus.status.sortIndex < activity2.userParticipationStatus.status.sortIndex)
+            return (activity1.userParticipationStatus.status.sortIndex < activity2.userParticipationStatus.status.sortIndex)
         })
         
         
@@ -470,7 +476,7 @@ class ActivitiesViewController : UIViewController{
         
         if self.selectedFilter == .tasks || self.selectedFilter == .surveys {
             
-             let filterType:ActivityType! =  (selectedFilter == .surveys ? .Questionnaire : .activeTask)
+            let filterType:ActivityType! =  (selectedFilter == .surveys ? .Questionnaire : .activeTask)
             self.updateSectionArray(activityType: filterType)
         }
         
@@ -485,17 +491,18 @@ class ActivitiesViewController : UIViewController{
             
             if !(Study.currentStudy?.activitiesLocalNotificationUpdated)! {
                 
+                //Register LocalNotifications
                 LocalNotification.registerAllLocalNotificationFor(activities: (Study.currentStudy?.activities)!) { (finished,notificationlist) in
                     print("Notification set sucessfully")
                     Study.currentStudy?.activitiesLocalNotificationUpdated = true
                     DBHandler.saveRegisteredLocaNotification(notificationList: notificationlist)
                     DBHandler.updateLocalNotificaitonUpdated(studyId: (Study.currentStudy?.studyId)!,status: true)
-                  LocalNotification.refreshAllLocalNotification()
+                    LocalNotification.refreshAllLocalNotification()
                 }
                 
             }
         }
-
+        
         self.checkIfFetelKickCountRunning()
         
         Logger.sharedInstance.info("Activities Displayed to user")
@@ -515,8 +522,10 @@ class ActivitiesViewController : UIViewController{
         activityStatus.totalRuns = activity.totalRuns
         activityStatus.activityVersion = activity.version
         
+        //Update participationStatus to server
         UserServices().updateUserActivityParticipatedStatus(studyId:activity.studyId!, activityStatus: activityStatus, delegate: self)
         
+        //Update participationStatus to DB
         DBHandler.updateActivityParticipationStatus(activity: activity)
         
         if status == .completed {
@@ -531,36 +540,41 @@ class ActivitiesViewController : UIViewController{
      adherence =  (totalCompletedRuns*100) / (totalCompletedRuns + totalIncompletedRuns)
      
      and alerts the user about the study Completion Status
- 
-    */
+     
+     */
     func updateCompletionAdherence() {
-    
+        
         var totalRuns = 0
         var totalCompletedRuns = 0
         var totalIncompletedRuns = 0
         let activities = Study.currentStudy?.activities //.filter({$0.state == "active"})
-       
-            for activity in activities! {
-                totalRuns += activity.totalRuns
-                totalIncompletedRuns += activity.incompletedRuns
-                totalCompletedRuns += activity.compeltedRuns
-                
-            }
-     
+        
+        //Calculate Runs
+        for activity in activities! {
+            totalRuns += activity.totalRuns
+            totalIncompletedRuns += activity.incompletedRuns
+            totalCompletedRuns += activity.compeltedRuns
+            
+        }
+        
         
         Study.currentStudy?.totalCompleteRuns = totalCompletedRuns
         Study.currentStudy?.totalIncompleteRuns = totalIncompletedRuns
-        
+        //Calculate Completion & Adherence
         let completion = ceil( Double(self.divide(lhs: (totalCompletedRuns + totalIncompletedRuns)*100, rhs: totalRuns)) )
         let adherence = ceil (Double(self.divide(lhs: totalCompletedRuns*100, rhs: (totalCompletedRuns + totalIncompletedRuns))))
         
         let studyid = (Study.currentStudy?.studyId)!
-       
-        let status = User.currentUser.udpateCompletionAndAdherence(studyId:studyid, completion: Int(completion), adherence: Int(adherence))
-        UserServices().udpateCompletionAdherence(studyStauts: status, delegate: self)
-        DBHandler.updateStudyParticipationStatus(study: Study.currentStudy!)
-       
         
+        let status = User.currentUser.udpateCompletionAndAdherence(studyId:studyid, completion: Int(completion), adherence: Int(adherence))
+        
+        //Update to server
+        UserServices().updateCompletionAdherence(studyStauts: status, delegate: self)
+        //Update Local DB
+        DBHandler.updateStudyParticipationStatus(study: Study.currentStudy!)
+        
+        
+        //Compose Alert based on Completion
         let halfCompletionKey = "50pcShown"  + (Study.currentStudy?.studyId)!
         let fullCompletionKey = "100pcShown"  + (Study.currentStudy?.studyId)!
         let missedKey = "totalMissed"  + (Study.currentStudy?.studyId)!
@@ -572,7 +586,7 @@ class ActivitiesViewController : UIViewController{
                 let message =  "The study " + (Study.currentStudy?.name!)! + " is now 50 percent complete. We look forward to your continued participation as the study progresses."
                 UIUtilities.showAlertWithMessage(alertMessage: message)
                 ud.set(true, forKey: halfCompletionKey)
-
+                
             }
             
         }
@@ -587,15 +601,16 @@ class ActivitiesViewController : UIViewController{
             }
         }
         
+        //Alerts User about Completion
         if ud.object(forKey: missedKey) == nil {
             ud.set(totalIncompletedRuns, forKey: missedKey)
             
         }else {
             let previousMissed = ud.object(forKey: missedKey) as! Int
-             ud.set(totalIncompletedRuns, forKey: missedKey)
+            ud.set(totalIncompletedRuns, forKey: missedKey)
             if previousMissed < totalIncompletedRuns {
                 //show alert
-               
+                
                 let message = "We noticed you missed an activity in " + (Study.currentStudy?.name!)! + " today. That’s ok! We know you’re busy, but we encourage you to complete study activities before they expire."
                 UIUtilities.showAlertWithMessage(alertMessage: message)
             }
@@ -649,7 +664,7 @@ class ActivitiesViewController : UIViewController{
         let incompleteRuns = activity.currentRunId - activity.compeltedRuns
         activity.incompletedRuns = (incompleteRuns < 0) ? 0 :incompleteRuns
         if activity.currentRun == nil {
-           //Do Nothing
+            //Do Nothing
             
         }
         else {
@@ -669,19 +684,21 @@ class ActivitiesViewController : UIViewController{
         activityStatus.totalRuns = activity.totalRuns
         activityStatus.activityVersion = activity.version
         
+        //Update User Participation Status to server
         UserServices().updateUserActivityParticipatedStatus(studyId:activity.studyId!, activityStatus: activityStatus, delegate: self)
         
+        //Update User Participation Status to DB
         DBHandler.updateActivityParticipationStatus(activity: activity)
         
         self.updateCompletionAdherence()
         self.tableView?.reloadData()
-
+        
     }
     
     /**
      Handler for studyUpdateResponse
-    */
-     func handleStudyUpdatesResponse() {
+     */
+    func handleStudyUpdatesResponse() {
         
         Study.currentStudy?.newVersion = StudyUpdates.studyVersion
         DBHandler.updateMetaDataToUpdateForStudy(study: Study.currentStudy!, updateDetails: nil)
@@ -739,9 +756,6 @@ extension ActivitiesViewController: UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        // let sectionHeader = tableViewRowDetails?[section] as! NSDictionary
-        // let sectionHeaderData = sectionHeader["items"] as! NSArray
-        
         let rowDetail = tableViewSections[section]
         let activities = rowDetail["activities"] as! Array<Activity>
         if activities.count == 0 {
@@ -797,7 +811,7 @@ extension ActivitiesViewController: UITableViewDataSource{
                 cell = tableView.dequeueReusableCell(withIdentifier: kActivitiesTableViewScheduledCell, for: indexPath) as! ActivitiesTableViewCell
                 cell.delegate = self
             }
-            
+            //Set Cell data
             cell.populateCellDataWithActivity(activity:activity, availablityStatus:availabilityStatus!)
             
             return cell
@@ -840,6 +854,7 @@ extension ActivitiesViewController : UITableViewDelegate{
                             }
                             else {
                                 
+                                //Fetch ActivityMetaData from Server
                                 WCPServices().getStudyActivityMetadata(studyId:(Study.currentStudy?.studyId)! , activityId: (Study.currentActivity?.actvityId)!, activityVersion: (Study.currentActivity?.version)!, delegate: self)
                             }
                         })
@@ -855,7 +870,7 @@ extension ActivitiesViewController : UITableViewDelegate{
             }
             else if activity.userParticipationStatus?.status == .abandoned {
                 debugPrint("run not available")
-                 UIUtilities.showAlertWithMessage(alertMessage: NSLocalizedString(kActivityAbondonedAlertMessage, comment: ""))
+                UIUtilities.showAlertWithMessage(alertMessage: NSLocalizedString(kActivityAbondonedAlertMessage, comment: ""))
             }
             
         case .upcoming,.past: break
@@ -874,7 +889,7 @@ extension ActivitiesViewController:ActivitiesCellDelegate{
         
         let view = ActivitySchedules.instanceFromNib(frame: frame, activity: activity)
         self.tabBarController?.view.addSubview(view)
-       
+        
     }
 }
 
@@ -885,7 +900,7 @@ extension ActivitiesViewController:ActivityFilterViewDelegate{
         // current filter is not same as existing filter
         if self.selectedFilter != selectedIndex {
             
-           // currently filter type is all so no need to fetch all activities
+            // currently filter type is all so no need to fetch all activities
             if self.selectedFilter == .all{
                 
                 let filterType:ActivityType! =  (selectedIndex == .surveys ? .Questionnaire : .activeTask)
@@ -942,7 +957,7 @@ extension ActivitiesViewController:NMWebServiceDelegate {
         }
     }
     
-   
+    
     
     func finishedRequest(_ manager: NetworkManager, requestName: NSString, response: AnyObject?) {
         Logger.sharedInstance.info("requestname : \(requestName) Response : \(response)")
@@ -953,7 +968,7 @@ extension ActivitiesViewController:NMWebServiceDelegate {
             
             //get DashboardInfo
             self.sendRequestToGetDashboardInfo()
-          
+            
             self.loadActivitiesFromDatabase()
             
             if self.refreshControl != nil && (self.refreshControl?.isRefreshing)!{
@@ -961,6 +976,7 @@ extension ActivitiesViewController:NMWebServiceDelegate {
             }
             
             StudyUpdates.studyActivitiesUpdated = false
+            //Update StudymetaData for Study
             DBHandler.updateMetaDataToUpdateForStudy(study: Study.currentStudy!, updateDetails: nil)
             
         }else if requestName as String == WCPMethods.activity.method.methodName {
@@ -968,11 +984,11 @@ extension ActivitiesViewController:NMWebServiceDelegate {
             self.createActivity()
             
         }else if requestName as String == WCPMethods.studyDashboard.method.methodName {
-           self.sendRequestToGetResourcesInfo()
-          self.getLabkeyResponse()
+            self.sendRequestToGetResourcesInfo()
+            self.getLabkeyResponse()
             
         }else if requestName as String == WCPMethods.resources.method.methodName {
-              self.removeProgressIndicator()
+            self.removeProgressIndicator()
             
         }else if requestName as String == ResponseMethods.processResponse.method.methodName {
             self.removeProgressIndicator()
@@ -1023,7 +1039,7 @@ extension ActivitiesViewController:NMWebServiceDelegate {
                     self.tableView?.isHidden = true
                     self.labelNoNetworkAvailable?.isHidden = false
                     
-                     UIUtilities.showAlertWithTitleAndMessage(title:NSLocalizedString(kErrorTitle, comment: "") as NSString, message: error.localizedDescription as NSString)
+                    UIUtilities.showAlertWithTitleAndMessage(title:NSLocalizedString(kErrorTitle, comment: "") as NSString, message: error.localizedDescription as NSString)
                 }
             }else if requestName as String == ResponseMethods.processResponse.method.methodName {
                 
@@ -1059,7 +1075,7 @@ extension ActivitiesViewController:ORKTaskViewControllerDelegate{
     
     public func taskViewController(_ taskViewController: ORKTaskViewController, didFinishWith reason: ORKTaskViewControllerFinishReason, error: Error?) {
         
-        
+        //Enable Custom Keypad with toolbar
         IQKeyboardManager.sharedManager().enable = true
         IQKeyboardManager.sharedManager().enableAutoToolbar = true
         
@@ -1094,10 +1110,10 @@ extension ActivitiesViewController:ORKTaskViewControllerDelegate{
         case ORKTaskViewControllerFinishReason.discarded:
             print("discarded")
             
-             let study = Study.currentStudy
-             let activity = Study.currentActivity
-             activity?.currentRun.restortionData = nil
-             DBHandler.updateActivityRestortionDataFor(activity:activity!, studyId: (study?.studyId)!, restortionData:nil)
+            let study = Study.currentStudy
+            let activity = Study.currentActivity
+            activity?.currentRun.restortionData = nil
+            DBHandler.updateActivityRestortionDataFor(activity:activity!, studyId: (study?.studyId)!, restortionData:nil)
             
             
             let ud = UserDefaults.standard
@@ -1158,7 +1174,7 @@ extension ActivitiesViewController:ORKTaskViewControllerDelegate{
                                 let study = Study.currentStudy
                                 let activity = Study.currentActivity
                                 
-                                
+                                //Create the stats for FetalKick
                                 if fetalKickResult != nil {
                                     
                                     let value = Float((fetalKickResult?.duration)!)/60
@@ -1166,7 +1182,7 @@ extension ActivitiesViewController:ORKTaskViewControllerDelegate{
                                     let dict = ActivityBuilder.currentActivityBuilder.activity?.steps?.first!
                                     let key =   dict?[kActivityStepKey] as! String
                                     
-                                    
+                                    //Save Stats to DB
                                     DBHandler.saveStatisticsDataFor(activityId: (activity?.actvityId)!, key: key, data:value,fkDuration:Int(kickcount), date:Date())
                                     
                                     let ud = UserDefaults.standard
@@ -1179,40 +1195,46 @@ extension ActivitiesViewController:ORKTaskViewControllerDelegate{
                                     ud.synchronize()
                                     
                                 }
-                                case .spatialSpanMemoryStep:
-                                    let activity = Study.currentActivity
-                                    
-                                     let spatialSpanResult:ORKSpatialSpanMemoryResult? = orkStepResult?.results?.first as? ORKSpatialSpanMemoryResult
-                                    
-                                    //get score
-                                    let scores = Float((spatialSpanResult?.score)!)
-                                    let keyScore = "Score"
-                                    DBHandler.saveStatisticsDataFor(activityId: (activity?.actvityId)!, key: keyScore , data:Float(scores),fkDuration:Int(0), date:Date())
-
-                                    //get numberOfFailures
-                                    let numberOfFailures = Float((spatialSpanResult?.numberOfFailures)!)
-                                    let keyNumberOfFailures = "NumberofFailures"
-                                    DBHandler.saveStatisticsDataFor(activityId: (activity?.actvityId)!, key: keyNumberOfFailures , data:Float(numberOfFailures),fkDuration:Int(0), date:Date())
-
-
-                                    //get number of Games
-                                    let numberOfGames = Float((spatialSpanResult?.numberOfGames)!)
-                                    let keyNumberOfGames = "NumberofGames"
-                                    DBHandler.saveStatisticsDataFor(activityId: (activity?.actvityId)!, key: keyNumberOfGames , data:Float(numberOfGames),fkDuration:Int(0), date:Date())
-                                    
+                            case .spatialSpanMemoryStep:
+                                let activity = Study.currentActivity
+                                
+                                //Create stats for SpatialSpanMemoryStep
+                                let spatialSpanResult:ORKSpatialSpanMemoryResult? = orkStepResult?.results?.first as? ORKSpatialSpanMemoryResult
+                                
+                                //get score
+                                let scores = Float((spatialSpanResult?.score)!)
+                                let keyScore = "Score"
+                                //Save Stats to DB
+                                DBHandler.saveStatisticsDataFor(activityId: (activity?.actvityId)!, key: keyScore , data:Float(scores),fkDuration:Int(0), date:Date())
+                                
+                                //get numberOfFailures
+                                let numberOfFailures = Float((spatialSpanResult?.numberOfFailures)!)
+                                let keyNumberOfFailures = "NumberofFailures"
+                                //Save Stats to DB
+                                DBHandler.saveStatisticsDataFor(activityId: (activity?.actvityId)!, key: keyNumberOfFailures , data:Float(numberOfFailures),fkDuration:Int(0), date:Date())
+                                
+                                
+                                //get number of Games
+                                let numberOfGames = Float((spatialSpanResult?.numberOfGames)!)
+                                let keyNumberOfGames = "NumberofGames"
+                                //Save Stats to DB
+                                DBHandler.saveStatisticsDataFor(activityId: (activity?.actvityId)!, key: keyNumberOfGames , data:Float(numberOfGames),fkDuration:Int(0), date:Date())
+                                
                                 break
-                                case .towerOfHanoi:
-                                    
-                                    let activity = Study.currentActivity
-                                    let tohResult:ORKTowerOfHanoiResult? = orkStepResult?.results?.first as? ORKTowerOfHanoiResult
-                                    let key =  ActivityBuilder.currentActivityBuilder.activity?.steps?.first![kActivityStepKey] as? String
-                                    
-                                    let numberOfMoves = tohResult?.moves?.count
-                                    
-                                    DBHandler.saveStatisticsDataFor(activityId: (activity?.actvityId)!, key: key! , data:Float(numberOfMoves!),fkDuration:Int(0), date:Date())
-                                    
+                            case .towerOfHanoi:
+                                
+                                //Create Stats for TowersOfHonoi
+                                let activity = Study.currentActivity
+                                let tohResult:ORKTowerOfHanoiResult? = orkStepResult?.results?.first as? ORKTowerOfHanoiResult
+                                let key =  ActivityBuilder.currentActivityBuilder.activity?.steps?.first![kActivityStepKey] as? String
+                                
+                                let numberOfMoves = tohResult?.moves?.count
+                                
+                                //Save Stats to DB
+                                DBHandler.saveStatisticsDataFor(activityId: (activity?.actvityId)!, key: key! , data:Float(numberOfMoves!),fkDuration:Int(0), date:Date())
+                                
                                 break
-                                    default:break
+                            default:break
                             }
                         }
                     }
@@ -1241,13 +1263,14 @@ extension ActivitiesViewController:ORKTaskViewControllerDelegate{
                 let study = Study.currentStudy
                 let activity = Study.currentActivity
                 
-                 if activity?.type != .activeTask{
-              
-                DBHandler.updateActivityRestortionDataFor(activity:activity!, studyId: (study?.studyId)!, restortionData: taskViewController.restorationData!)
-                activity?.currentRun.restortionData = taskViewController.restorationData!
-                  }
+                if activity?.type != .activeTask{
+                    
+                    //Update RestortionData for Activity in DB
+                    DBHandler.updateActivityRestortionDataFor(activity:activity!, studyId: (study?.studyId)!, restortionData: taskViewController.restorationData!)
+                    activity?.currentRun.restortionData = taskViewController.restorationData!
+                }
                 
-                //Explain
+                
                 let orkStepResult:ORKStepResult? = taskViewController.result.results?[(taskViewController.result.results?.count)! - 2] as! ORKStepResult?
                 let activityStepResult:ActivityStepResult? = ActivityStepResult()
                 if (activity?.activitySteps?.count )! > 0 {
@@ -1300,7 +1323,7 @@ extension ActivitiesViewController:ORKTaskViewControllerDelegate{
                 
                 //disable back button
                 if stepViewController is FetalKickCounterStepViewController{
-                   stepViewController.backButtonItem = nil
+                    stepViewController.backButtonItem = nil
                 }
             }
         }
@@ -1424,170 +1447,173 @@ class ActivitySchedules:UIView,UITableViewDelegate,UITableViewDataSource{
 
 
 class ResponseDataFetch:NMWebServiceDelegate{
-  
-  var dataSourceKeysForLabkey:Array<Dictionary<String,String>> = []
-  
-  private static let labkeyDateFormatter: DateFormatter = {
-    //2017/06/13 18:12:13
-    let formatter = DateFormatter()
-    formatter.timeZone = TimeZone.init(identifier: "America/New_York")
-    formatter.dateFormat = "YYYY/MM/dd HH:mm:ss"
     
-    return formatter
-  }()
-  
-  private static let localDateFormatter: DateFormatter = {
-    //2017/06/13 18:12:13
-    let formatter = DateFormatter()
-    formatter.timeZone = TimeZone.current
-    formatter.dateFormat = "YYYY/MM/dd HH:mm:ss"
+    var dataSourceKeysForLabkey:Array<Dictionary<String,String>> = []
     
-    return formatter
-  }()
-  
-  
-  init() {
-    
-  }
-  
-    //MARK: Helper Methods
-  func checkUpdates(){
-    if StudyUpdates.studyActivitiesUpdated {
-      self.sendRequestToGetDashboardInfo()
+    private static let labkeyDateFormatter: DateFormatter = {
+        //2017/06/13 18:12:13
+        let formatter = DateFormatter()
+        formatter.timeZone = TimeZone.init(identifier: "America/New_York")
+        formatter.dateFormat = "YYYY/MM/dd HH:mm:ss"
         
-    }else {
-      
-      DBHandler.loadStatisticsForStudy(studyId: (Study.currentStudy?.studyId)!) { (statiticsList) in
+        return formatter
+    }()
     
-        if statiticsList.count != 0 {
-          StudyDashboard.instance.statistics = statiticsList
-           self.getDataKeysForCurrentStudy()
-           let appDelegate = UIApplication.shared.delegate as! AppDelegate
-          appDelegate.addAndRemoveProgress(add: true)
+    private static let localDateFormatter: DateFormatter = {
+        //2017/06/13 18:12:13
+        let formatter = DateFormatter()
+        formatter.timeZone = TimeZone.current
+        formatter.dateFormat = "YYYY/MM/dd HH:mm:ss"
+        
+        return formatter
+    }()
+    
+    
+    init() {
+        
+    }
+    
+    //MARK: Helper Methods
+    func checkUpdates(){
+        if StudyUpdates.studyActivitiesUpdated {
+            self.sendRequestToGetDashboardInfo()
             
         }else {
-        //Fetch DashboardInfo
-          self.sendRequestToGetDashboardInfo()
+            
+            //Load Stats List from DB
+            DBHandler.loadStatisticsForStudy(studyId: (Study.currentStudy?.studyId)!) { (statiticsList) in
+                
+                if statiticsList.count != 0 {
+                    StudyDashboard.instance.statistics = statiticsList
+                    self.getDataKeysForCurrentStudy()
+                    let appDelegate = UIApplication.shared.delegate as! AppDelegate
+                    appDelegate.addAndRemoveProgress(add: true)
+                    
+                }else {
+                    //Fetch DashboardInfo
+                    self.sendRequestToGetDashboardInfo()
+                }
+            }
         }
-      }
     }
-  }
-  
-  func sendRequestToGetDashboardInfo(){
-    WCPServices().getStudyDashboardInfo(studyId: (Study.currentStudy?.studyId)!, delegate: self)
-  }
     
-  func handleExecuteSQLResponse(){
+    func sendRequestToGetDashboardInfo(){
+        WCPServices().getStudyDashboardInfo(studyId: (Study.currentStudy?.studyId)!, delegate: self)
+    }
     
-    self.dataSourceKeysForLabkey.removeFirst()
-    self.sendRequestToGetDashboardResponse()
-  }
-  
-  func getDataKeysForCurrentStudy(){
-    
-    DBHandler.getDataSourceKeyForActivity(studyId: (Study.currentStudy?.studyId)!) { (activityKeys) in
-      print(activityKeys)
-      if activityKeys.count > 0 {
-        self.dataSourceKeysForLabkey = activityKeys
-        print("dashboardResponse Called: ")
+    func handleExecuteSQLResponse(){
         
+        self.dataSourceKeysForLabkey.removeFirst()
         self.sendRequestToGetDashboardResponse()
-      }
     }
     
-  }
-  
-  func sendRequestToGetDashboardResponse(){
-    
-    if self.dataSourceKeysForLabkey.count != 0 {
-      let details = self.dataSourceKeysForLabkey.first
-      let activityId = details?["activityId"]
-      var tableName = activityId
-      let activity = Study.currentStudy?.activities.filter({$0.actvityId == activityId}).first
-      var keys = details?["keys"]
-      if activity?.type == ActivityType.activeTask {
-        if activity?.taskSubType == "fetalKickCounter" {
-          //                keys = "\"count\",duration,FetalKickId"
-          //                tableName = activityId!+activityId!
-          
-          keys = "\"count\",duration"
-          tableName = activityId!+activityId!
-        }else if activity?.taskSubType == "towerOfHanoi" {
-          keys = "numberOfMoves"
-          tableName = activityId!+activityId!
-        }else if activity?.taskSubType == "spatialSpanMemory" {
-          keys = "NumberofGames,Score,NumberofFailures"
-          tableName = activityId!+activityId!
-        }
-      }
-      let participantId = Study.currentStudy?.userParticipateState.participantId
-      LabKeyServices().getParticipantResponse(tableName:tableName!,activityId: activityId!, keys: keys!, participantId: participantId!, delegate: self)
-    }else {
-     
-      //save response in database
-      
-      let responses = StudyDashboard.instance.dashboardResponse
-      for  response in responses{
+    func getDataKeysForCurrentStudy(){
         
-        let activityId = response.activityId
-        let activity = Study.currentStudy?.activities.filter({$0.actvityId == activityId}).first
-        var key = response.key
-        if activity?.type == ActivityType.activeTask {
-          
-          if activity?.taskSubType == "fetalKickCounter" || activity?.taskSubType == "towerOfHanoi" {
-            key = activityId!
-          }
-          
+        DBHandler.getDataSourceKeyForActivity(studyId: (Study.currentStudy?.studyId)!) { (activityKeys) in
+            print(activityKeys)
+            if activityKeys.count > 0 {
+                self.dataSourceKeysForLabkey = activityKeys
+                print("dashboardResponse Called: ")
+                
+                //GetDashboardResponse from server
+                self.sendRequestToGetDashboardResponse()
+            }
         }
         
-        let values = response.values
-        for value in values {
-          let responseValue = value["value"] as! Float
-          let count = value["count"] as! Float
-          let date = ResponseDataFetch.labkeyDateFormatter.date(from: value["date"] as! String)
-          let localDateAsString = ResponseDataFetch.localDateFormatter.string(from: date!)
-          
-          let localDate = ResponseDataFetch.localDateFormatter.date(from: localDateAsString)
-          DBHandler.saveStatisticsDataFor(activityId: activityId!, key: key!, data:responseValue, fkDuration:Int(count),date:localDate!)
-        }
-        
-      }
-      let key = "LabKeyResponse" + (Study.currentStudy?.studyId)!
-      UserDefaults.standard.set(true, forKey: key)
-    
-      let appDelegate = UIApplication.shared.delegate as! AppDelegate
-      appDelegate.addAndRemoveProgress(add: false)
-      
     }
     
-    //https://hphci-fdama-te-ds-01.labkey.com/mobileAppStudy-executeSQL.api?participantId=1a3d0d308df81024f8bfd7f11f7a0168&sql=SELECT%20*%20FROM%20Q1
-  }
-  
+    func sendRequestToGetDashboardResponse(){
+        
+        if self.dataSourceKeysForLabkey.count != 0 {
+            let details = self.dataSourceKeysForLabkey.first
+            let activityId = details?["activityId"]
+            var tableName = activityId
+            let activity = Study.currentStudy?.activities.filter({$0.actvityId == activityId}).first
+            var keys = details?["keys"]
+            if activity?.type == ActivityType.activeTask {
+                if activity?.taskSubType == "fetalKickCounter" {
+                    //                keys = "\"count\",duration,FetalKickId"
+                    //                tableName = activityId!+activityId!
+                    
+                    keys = "\"count\",duration"
+                    tableName = activityId!+activityId!
+                }else if activity?.taskSubType == "towerOfHanoi" {
+                    keys = "numberOfMoves"
+                    tableName = activityId!+activityId!
+                }else if activity?.taskSubType == "spatialSpanMemory" {
+                    keys = "NumberofGames,Score,NumberofFailures"
+                    tableName = activityId!+activityId!
+                }
+            }
+            let participantId = Study.currentStudy?.userParticipateState.participantId
+            //Get Survey Response from Server
+            LabKeyServices().getParticipantResponse(tableName:tableName!,activityId: activityId!, keys: keys!, participantId: participantId!, delegate: self)
+        }else {
+            
+            //save response in database
+            
+            let responses = StudyDashboard.instance.dashboardResponse
+            for  response in responses{
+                
+                let activityId = response.activityId
+                let activity = Study.currentStudy?.activities.filter({$0.actvityId == activityId}).first
+                var key = response.key
+                if activity?.type == ActivityType.activeTask {
+                    
+                    if activity?.taskSubType == "fetalKickCounter" || activity?.taskSubType == "towerOfHanoi" {
+                        key = activityId!
+                    }
+                    
+                }
+                
+                let values = response.values
+                for value in values {
+                    let responseValue = value["value"] as! Float
+                    let count = value["count"] as! Float
+                    //SetData Format
+                    let date = ResponseDataFetch.labkeyDateFormatter.date(from: value["date"] as! String)
+                    let localDateAsString = ResponseDataFetch.localDateFormatter.string(from: date!)
+                    
+                    let localDate = ResponseDataFetch.localDateFormatter.date(from: localDateAsString)
+                    //Save Stats to DB
+                    DBHandler.saveStatisticsDataFor(activityId: activityId!, key: key!, data:responseValue, fkDuration:Int(count),date:localDate!)
+                }
+                
+            }
+            let key = "LabKeyResponse" + (Study.currentStudy?.studyId)!
+            UserDefaults.standard.set(true, forKey: key)
+            
+            let appDelegate = UIApplication.shared.delegate as! AppDelegate
+            appDelegate.addAndRemoveProgress(add: false)
+            
+        }
+    }
+    
     //MARK: Webservice Delegates
-  func startedRequest(_ manager: NetworkManager, requestName: NSString) {
-    Logger.sharedInstance.info(" START requestname : \(requestName)")
-  }
-  func finishedRequest(_ manager: NetworkManager, requestName: NSString, response: AnyObject?) {
-    Logger.sharedInstance.info("requestname : \(requestName) Response : \(response)")
+    func startedRequest(_ manager: NetworkManager, requestName: NSString) {
+        Logger.sharedInstance.info(" START requestname : \(requestName)")
+    }
+    func finishedRequest(_ manager: NetworkManager, requestName: NSString, response: AnyObject?) {
+        Logger.sharedInstance.info("requestname : \(requestName) Response : \(response)")
+        
+        if requestName as String == WCPMethods.studyDashboard.method.methodName {
+            self.getDataKeysForCurrentStudy()
+        }
+        else if requestName as String == ResponseMethods.executeSQL.description {
+            self.handleExecuteSQLResponse()
+        }
+        
+    }
+    func failedRequest(_ manager: NetworkManager, requestName: NSString, error: NSError) {
+        Logger.sharedInstance.info("requestname : \(requestName)")
+        if requestName as String == ResponseMethods.executeSQL.description {
+            self.handleExecuteSQLResponse()
+        }
+        else {
+            //Do Nothing
+        }
+    }
     
-    if requestName as String == WCPMethods.studyDashboard.method.methodName {
-      self.getDataKeysForCurrentStudy()
-    }
-    else if requestName as String == ResponseMethods.executeSQL.description {
-      self.handleExecuteSQLResponse()
-    }
-    
-  }
-  func failedRequest(_ manager: NetworkManager, requestName: NSString, error: NSError) {
-    Logger.sharedInstance.info("requestname : \(requestName)")
-    if requestName as String == ResponseMethods.executeSQL.description {
-      self.handleExecuteSQLResponse()
-    }
-    else {
-      //Do Nothing
-    }
- }
-  
 }
 
 

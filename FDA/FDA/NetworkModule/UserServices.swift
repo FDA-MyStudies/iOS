@@ -330,7 +330,7 @@ class UserServices: NSObject {
         self.sendRequestWith(method:method, params: nil, headers: headerParams)
     }
     
-    func udpateCompletionAdherence(studyStauts:UserStudyStatus , delegate:NMWebServiceDelegate){
+    func updateCompletionAdherence(studyStauts:UserStudyStatus , delegate:NMWebServiceDelegate){
         
         self.delegate = delegate
         

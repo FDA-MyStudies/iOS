@@ -21,7 +21,7 @@ class StudyListViewController: UIViewController {
     @IBOutlet var tableView:UITableView?
     @IBOutlet var labelHelperText:UILabel!
     
-    var refreshControl:UIRefreshControl?
+    var refreshControl:UIRefreshControl? //for refreshing studylist
     
     var studyListRequestFailed = false
     var searchView:SearchBarView?
@@ -31,7 +31,7 @@ class StudyListViewController: UIViewController {
     
     var previousStudyList:Array<Study> = []
     
-    var allStudyList:Array<Study> = []
+    var allStudyList:Array<Study> = [] //Gatewaystudylist
     
     //MARK:- Viewcontroller lifecycle
     
@@ -386,7 +386,7 @@ class StudyListViewController: UIViewController {
                 
                 Logger.sharedInstance.info("Sorting Studies")
                 let  sortedstudies2 =  studies.sorted(by: { (study1:Study, study2:Study) -> Bool in
-                    
+                    //sorting based on UserParticipation status
                     if study1.status == study2.status {
                         return (study1.userParticipateState.status.sortIndex < study2.userParticipateState.status.sortIndex)
                     }
@@ -400,6 +400,7 @@ class StudyListViewController: UIViewController {
                 self.allStudyList = sortedstudies2
                 Gateway.instance.studies = sortedstudies2
                 
+                //Applying Filters
                 if StudyFilterHandler.instance.previousAppliedFilters.count > 0 {
                     let previousCollectionData = StudyFilterHandler.instance.previousAppliedFilters
                     
@@ -415,6 +416,7 @@ class StudyListViewController: UIViewController {
                     
                     appDelegate.setDefaultFilters(previousCollectionData: [])
                     
+                    //using default Filters
                     let filterStrings = appDelegate.getDefaultFilterStrings()
                     
                     self.appliedFilter(studyStatus: filterStrings.studyStatus, pariticipationsStatus: filterStrings.pariticipationsStatus, categories:filterStrings.categories, searchText: filterStrings.searchText, bookmarked:filterStrings.bookmark)
@@ -661,7 +663,7 @@ class StudyListViewController: UIViewController {
         if User.currentUser.userType == UserType.FDAUser {
             
             if Study.currentStudy?.status == .Active {
-                
+                //handle accoring to UserStatus
                 let userStudyStatus =  (Study.currentStudy?.userParticipateState.status)!
                 
                 if userStudyStatus == .completed || userStudyStatus == .inProgress {
@@ -715,7 +717,6 @@ class StudyListViewController: UIViewController {
             }
         }else {
             self.checkForStudyUpdate(study: study)
-            
         }
     }
     
@@ -814,8 +815,8 @@ extension StudyListViewController : StudyFilterDelegates{
         else{
             if setStudyStatus.count > 0 {
                 statusFilteredSet = setStudyStatus
-            }
-            else if setpariticipationsStatus.count > 0{
+                
+            } else if setpariticipationsStatus.count > 0 {
                 statusFilteredSet = setpariticipationsStatus
             }
         }
@@ -981,6 +982,7 @@ extension StudyListViewController : searchBarDelegate {
             if StudyFilterHandler.instance.previousAppliedFilters.count > 0 {
                 let previousCollectionData = StudyFilterHandler.instance.previousAppliedFilters
                 
+                //Apply Filters
                 if User.currentUser.userType == .FDAUser {
                     
                     self.appliedFilter(studyStatus: previousCollectionData.first!, pariticipationsStatus: previousCollectionData[2], categories:previousCollectionData[3], searchText: "", bookmarked:(previousCollectionData[1].count > 0 ? true : false))
@@ -991,7 +993,7 @@ extension StudyListViewController : searchBarDelegate {
                 let appDelegate = UIApplication.shared.delegate as! AppDelegate
                 
                 if StudyFilterHandler.instance.filterOptions.count > 0 {
-                    
+                    //setting default Filters
                     let filterStrings = appDelegate.getDefaultFilterStrings()
                     self.appliedFilter(studyStatus: filterStrings.studyStatus, pariticipationsStatus: filterStrings.pariticipationsStatus, categories:filterStrings.categories, searchText: filterStrings.searchText, bookmarked:filterStrings.bookmark)
                 }

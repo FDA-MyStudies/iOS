@@ -69,7 +69,6 @@ class DashboardStatistics {
     var statList = List<DBStatisticsData>()
     
     init() {
-        
     }
     /**
      Initializer with dictionary of properties

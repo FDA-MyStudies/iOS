@@ -248,7 +248,6 @@ class UserServices: NSObject {
         self.delegate = delegate
         
         let user = User.currentUser
-        
         let headerParams = [kUserId : user.userId!]
         
         let settings = [kSettingsRemoteNotifications: (user.settings?.remoteNotifications)! as Bool,
@@ -280,7 +279,6 @@ class UserServices: NSObject {
         self.delegate = delegate
         
         let user = User.currentUser
-        
         let headerParams = [kUserId : user.userId!]
         
         let settings = [kSettingsRemoteNotifications: (user.settings?.remoteNotifications)! as Bool,
@@ -306,9 +304,6 @@ class UserServices: NSObject {
         
         self.sendRequestWith(method:method, params: params, headers: headerParams)
     }
-    
-    
-    
     
     func getUserPreference(_ delegate:NMWebServiceDelegate){
         
@@ -372,12 +367,9 @@ class UserServices: NSObject {
         self.sendRequestWith(method:method, params: params, headers: headerParams)
     }
     
-    
-    
     func updateUserParticipatedStatus(studyStauts:UserStudyStatus, delegate:NMWebServiceDelegate){
         
         self.delegate = delegate
-        
         
         let user = User.currentUser
         let headerParams = [kUserId : user.userId] as Dictionary<String, String>
@@ -391,13 +383,11 @@ class UserServices: NSObject {
         
         self.delegate = delegate
         
-        
         let user = User.currentUser
         let headerParams = [kUserId : user.userId] as Dictionary<String, String>
         let params = [kStudyId:studyId,
                       kActivity:[activityStatus.getParticipatedUserActivityStatus()]] as [String : Any]
         let method = RegistrationMethods.updateActivityState.method
-        
         self.sendRequestWith(method:method, params: params, headers: headerParams)
     }
     
@@ -432,9 +422,7 @@ class UserServices: NSObject {
                       kConsentSharing : ""] as [String : Any]
         let method = RegistrationMethods.updateEligibilityConsentStatus.method
         
-        
         print(" doc == \(ConsentBuilder.currentConsent?.consentResult?.consentPdfData)")
-        
         self.sendRequestWith(method:method, params: params, headers:headerParams)
     }
     
@@ -452,7 +440,7 @@ class UserServices: NSObject {
         self.sendRequestWith(method:method, params: params, headers: headerParams)
     }
     
-    func updateUserActivityState(_ delegate:NMWebServiceDelegate){
+    func updateUserActivityState(_ delegate:NMWebServiceDelegate) {
         
         self.delegate = delegate
         
@@ -522,6 +510,7 @@ class UserServices: NSObject {
         
         if user.verified! && !user.isLoginWithTempPassword {
             
+            //set user type & save current user to DB
             user.userType = UserType.FDAUser
             DBHandler().saveCurrentUser(user: user)
             
@@ -534,9 +523,7 @@ class UserServices: NSObject {
             let ud = UserDefaults.standard
             ud.set(user.authToken, forKey:kUserAuthToken)
             ud.set(user.userId!, forKey: kUserId)
-            
             ud.set(true, forKey: kPasscodeIsPending)
-            
             ud.synchronize()
             
             StudyFilterHandler.instance.previousAppliedFilters = []
@@ -553,7 +540,6 @@ class UserServices: NSObject {
         user.authToken  = response[kUserAuthToken] as! String
         
         user.refreshToken = response[kRefreshToken] as! String
-        
         StudyFilterHandler.instance.previousAppliedFilters = []
         
     }
@@ -573,6 +559,7 @@ class UserServices: NSObject {
                 ud.set(user.authToken, forKey:kUserAuthToken)
                 ud.set(user.userId!, forKey: kUserId)
                 ud.synchronize()
+                //Save Current User to DB
                 DBHandler().saveCurrentUser(user: user)
                 StudyFilterHandler.instance.previousAppliedFilters = []
             }
@@ -582,9 +569,8 @@ class UserServices: NSObject {
     func handleEmailVerifyResponse(response:Dictionary<String, Any>){
         
         let user = User.currentUser
-        // if let varified = response[kUserVerified] as? Bool {
-        
         user.verified = true
+        
         if user.verified! {
             
             if user.authToken != nil {
@@ -600,13 +586,10 @@ class UserServices: NSObject {
                 
                 DBHandler().saveCurrentUser(user: user)
             }
-            
         }
-        // }
     }
     
-    
-    func handleGetUserProfileResponse(response:Dictionary<String, Any>){
+    func handleGetUserProfileResponse(response:Dictionary<String, Any>) {
         
         let user = User.currentUser
         
@@ -625,15 +608,14 @@ class UserServices: NSObject {
         user.lastName = profile[kUserLastName] as? String
     }
     
-    func handleUpdateUserProfileResponse(response:Dictionary<String, Any>){
+    func handleUpdateUserProfileResponse(response:Dictionary<String, Any>) {
     }
     
-    func handleResendEmailConfirmationResponse(response:Dictionary<String, Any>){
+    func handleResendEmailConfirmationResponse(response:Dictionary<String, Any>) {
     }
     
     
-    func handleChangePasswordResponse(response:Dictionary<String, Any>){
-        //INCOMPLETE
+    func handleChangePasswordResponse(response:Dictionary<String, Any>) {
         
         let user = User.currentUser
         if user.verified! {
@@ -655,15 +637,7 @@ class UserServices: NSObject {
     func handleGetPreferenceResponse(response:Dictionary<String, Any>){
         
         let user = User.currentUser
-        
-        //        //settings
-        //        let settings = response[kUserSettings] as! Dictionary<String, Any>
-        //        let userSettings = Settings()
-        //        userSettings.setSettings(dict: settings as NSDictionary)
-        //        user.settings = userSettings
-        
-        
-        
+
         //studies
         if let studies = response[kStudies] as? Array<Dictionary<String, Any>> {
             
@@ -673,8 +647,6 @@ class UserServices: NSObject {
             }
         }
         
-        
-        
         //activities
         if let activites = response[kActivites]  as? Array<Dictionary<String, Any>> {
             for activity in activites {
@@ -682,10 +654,8 @@ class UserServices: NSObject {
                 // user.participatedActivites.append(participatedActivity)
             }
         }
-        
-        
-        
     }
+    
     func handleGetStudyStatesResponse(response:Dictionary<String, Any>){
         let user = User.currentUser
         //studies
@@ -708,12 +678,9 @@ class UserServices: NSObject {
                     user.participatedActivites.append(participatedActivity)
                 }
             }
-            
         }
     }
     func handleUpdateEligibilityConsentStatusResponse(response:Dictionary<String, Any>){
-        
-        
         
     }
     
@@ -721,12 +688,7 @@ class UserServices: NSObject {
         
         let user = User.currentUser
         if Utilities.isValidValue(someObject: response[kConsent] as AnyObject?) {
-            
-            
-            
-            
-            
-            
+            //Do nothing
         }
     }
     
@@ -748,7 +710,6 @@ class UserServices: NSObject {
     }
     
     func handleWithdrawFromStudyResponse(response:Dictionary<String, Any>){
-        
     }
     
     func handleLogoutResponse(response:Dictionary<String, Any>)  {
@@ -869,7 +830,7 @@ extension UserServices:NMWebServiceDelegate{
         }
     }
     func finishedRequest(_ manager: NetworkManager, requestName: NSString, response: AnyObject?) {
-        Logger.sharedInstance.info("RUS Received Data: \(requestName), \(response)")
+        Logger.sharedInstance.info("RUS Received Data: \(requestName), \(String(describing: response))")
         switch requestName {
         case RegistrationMethods.login.description as String:
             
@@ -945,7 +906,7 @@ extension UserServices:NMWebServiceDelegate{
             
             print("Failed: Refresh token Expired")
             
-            if User.currentUser.refreshToken == "" && requestName as String != RegistrationMethods.login.description{
+            if User.currentUser.refreshToken == "" && requestName as String != RegistrationMethods.login.description {
                 //Unauthorized Access
                 
                 //error.localizedDescription = "Your Session is Expired"
@@ -958,13 +919,10 @@ extension UserServices:NMWebServiceDelegate{
                     delegate.failedRequest(manager, requestName: requestName, error: localError)
                 }
                 
-            }
-            else{
+            }else {
                 //Update Refresh Token
                 self.updateToken()
             }
-            
-            
             
         }else {
             
@@ -992,5 +950,4 @@ extension UserServices:NMWebServiceDelegate{
             }
         }
     }
-    
 }

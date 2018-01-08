@@ -25,7 +25,8 @@ enum ResponseMethods:String {
         }
     }
     
-    var method:Method{
+    var method:Method {
+        
         switch self {
         case .getParticipantResponse,.validateEnrollmentToken,.executeSQL:
             return Method(methodName:(self.rawValue+".api"), methodType: .httpMethodGet, requestType: .requestTypeHTTP)
@@ -33,8 +34,6 @@ enum ResponseMethods:String {
             return Method(methodName:(self.rawValue+".api"), methodType: .httpMethodPOST, requestType: .requestTypeHTTP)
         default:
             return Method(methodName:(self.rawValue+".api"), methodType: .httpMethodPOST, requestType: .requestTypeJSON)
-            
-            
         }
     }
     
@@ -75,16 +74,14 @@ class ResponseServerConfiguration: NetworkConfiguration {
     override func shouldParseErrorMessage() -> Bool {
         return true
     }
-    override func parseError(errorResponse:Dictionary<String,Any>)->NSError{
+    override func parseError(errorResponse:Dictionary<String,Any>)->NSError {
         
         var error = NSError(domain: NSURLErrorDomain, code:101,userInfo:[NSLocalizedDescriptionKey:"Could not connect to server"])
         
-        if let errorMessage =  errorResponse["exception"]{
+        if let errorMessage =  errorResponse["exception"] {
             
             error = NSError(domain: NSURLErrorDomain, code:101,userInfo:[NSLocalizedDescriptionKey:errorMessage])
         }
-        
-        
         
         return  error
     }

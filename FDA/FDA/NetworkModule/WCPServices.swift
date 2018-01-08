@@ -434,7 +434,6 @@ class WCPServices: NSObject {
                     
                     let activity = Activity.init(studyId: (Study.currentStudy?.studyId)!, infoDict: activityDict)
                     activityList.append(activity)
-                    
                 }
                 
                 Logger.sharedInstance.info("Activities Parsing Finished")
@@ -460,6 +459,7 @@ class WCPServices: NSObject {
             ActivityBuilder.currentActivityBuilder.initWithActivity(activity:Study.currentActivity! )
         }
         
+        //Save and Update activity meta data
         DBHandler.saveActivityMetaData(activity: Study.currentActivity!, data: response)
         DBHandler.updateActivityMetaData(activity: Study.currentActivity!)
         

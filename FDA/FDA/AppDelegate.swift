@@ -162,6 +162,7 @@
             let ud = UserDefaults.standard
             let setuptimeDiff = ud.value(forKey: ksetUpTimeIdentifier) as? Int
             
+            //Saving time difference
             if setuptimeDiff == nil {
                 ud.set(differenceFromCurrent, forKey: ksetUpTimeIdentifier)
                 ud.set(0, forKey: "offset")
@@ -183,7 +184,7 @@
         
         func checkForAppReopenNotification() {
             
-            //remove if notificatin is available
+            //remove if notification is available
             LocalNotification.removeReopenAppNotification()
             LocalNotification.registerReopenAppNotification()
             
@@ -383,10 +384,11 @@
             let deviceTokenString = deviceToken.reduce("", {$0 + String(format: "%02X", $1)})
             print(deviceTokenString)
             
-            if  User.currentUser.userType == .FDAUser{
+            if  User.currentUser.userType == .FDAUser {
                 
                 User.currentUser.settings?.remoteNotifications = true
                 User.currentUser.settings?.localNotifications = true
+                //Update device Token to Local server
                 UserServices().updateUserProfile(deviceToken: deviceTokenString , delegate: self)
                 
             }
@@ -401,14 +403,14 @@
         func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any]) {
             
             //For iOS 8 & 9
-            if (UIApplication.shared.applicationState == UIApplicationState.background)||(UIApplication.shared.applicationState == UIApplicationState.inactive){
+            if (UIApplication.shared.applicationState == UIApplicationState.background)||(UIApplication.shared.applicationState == UIApplicationState.inactive) {
                 
                 self.updateNotification()
                 self.handleLocalAndRemoteNotification(userInfoDetails: userInfo as! Dictionary<String, Any>)
             }
             
             // userInfo is valid
-            if userInfo.count > 0 && userInfo.keys.contains(kType){
+            if userInfo.count > 0 && userInfo.keys.contains(kType) {
                 self.updateNotification()
                 
             }else {
@@ -511,7 +513,9 @@
                 let application = UIApplication.shared
                 var scheduledNotifications = application.scheduledLocalNotifications!
                 
+                //check if notifications are expired or already fired
                 if scheduledNotifications.count < 50 {
+                    //refresh local notifcation from DB
                     LocalNotification.refreshAllLocalNotification()
                     scheduledNotifications = application.scheduledLocalNotifications!
                     
@@ -545,8 +549,10 @@
                                 let appStoreVersion = (resultArray.first)?[kAppStoreVersion]  as! String
                                 let currentVersion = infoDict?[kCFBundleShortVersion]
                                 
+                                //compare AppStore Version with current
                                 if appStoreVersion != (currentVersion as! String) && appStoreVersion.compare(currentVersion as! String, options: .numeric, range: nil, locale: nil) == ComparisonResult.orderedDescending {
                                     
+                                    // load and Update blockerScreen
                                     self.shouldAddForceUpgradeScreen = true
                                     self.blockerScreen = AppUpdateBlocker.instanceFromNib(frame:(UIApplication.shared.keyWindow?.bounds)!, detail: parsedDict as! Dictionary<String, Any>);
                                     self.blockerScreen?.labelVersionNumber.text = "V-" + appStoreVersion
@@ -616,6 +622,7 @@
             
             let taskViewController:ORKTaskViewController?
             
+            //create orderedTask
             let consentTask:ORKOrderedTask? = ConsentBuilder.currentConsent?.createConsentTask() as! ORKOrderedTask?
             
             taskViewController = ORKTaskViewController(task:consentTask, taskRun: nil)
@@ -636,6 +643,7 @@
             }
             
             self.addAndRemoveProgress(add: false)
+            //present consent task
             topVC?.present(taskViewController!, animated: true, completion: nil)
         }
         
@@ -648,6 +656,7 @@
             
             var initialVC:UIViewController?
             
+            //getting topmost visible controller
             let navigationController =  (self.window?.rootViewController as! UINavigationController)
             let menuVC = navigationController.viewControllers.last
             if  menuVC is FDASlideMenuViewController {
@@ -685,7 +694,7 @@
             
             var notificationType:String? = ""
             var notificationSubType:AppNotification.NotificationSubType? = .Announcement
-            
+            //User info is valid
             if (userInfoDetails.count) > 0 {
                 
                 if Utilities.isValidValue(someObject: userInfoDetails[kNotificationType] as AnyObject) {
@@ -712,7 +721,7 @@
                             let study = Gateway.instance.studies?.filter({$0.studyId == studyId}).first
                             Study.updateCurrentStudy(study: study!)
                         }
-                        
+                        //fetch the visible view controller
                         let navigationController =  (self.window?.rootViewController as! UINavigationController)
                         let menuVC = navigationController.viewControllers.last
                         if  menuVC is FDASlideMenuViewController {
@@ -896,6 +905,7 @@
             _ = topController.navigationController?.popViewController(animated: true)
         }
         
+        //get study updates if exist
         func checkForStudyUpdates() {
             
             if Study.currentStudy != nil && Study.currentStudy?.userParticipateState.status == UserStudyStatus.StudyStatus.inProgress {
@@ -964,6 +974,7 @@
             
             let navigationController =  (self.window?.rootViewController as! UINavigationController)
             
+            //fetch the visible view controller
             if navigationController.viewControllers.count > 0 {
                 let slideMenuController = navigationController.viewControllers.last as? FDASlideMenuViewController
                 
@@ -989,6 +1000,7 @@
             ud.set(true, forKey: kShowNotification)
             ud.synchronize()
             var nav:UINavigationController?
+            //fetch the visible view controller
             let navigationController =  (self.window?.rootViewController as! UINavigationController)
             let menuVC = navigationController.viewControllers.last
             
@@ -1021,6 +1033,7 @@
                 }else {
                     DBHandler.updateMetaDataToUpdateForStudy(study: Study.currentStudy!, updateDetails: nil)
                     
+                    //fetch the visible view controller
                     var nav:UINavigationController?
                     let navigationController =  (self.window?.rootViewController as! UINavigationController)
                     let menuVC = navigationController.viewControllers.last
@@ -1330,7 +1343,7 @@
                         activityBuilder?.actvityResult?.result?.removeLast()
                     }
                     else{
-                        
+                        //Do Nothing
                     }
                 }
                 
@@ -1361,12 +1374,10 @@
                     if  consentSignatureResult?.didTapOnViewPdf == false{
                         //Directly moving to completion step by skipping Intermediate PDF viewer screen
                         stepViewController.goForward()
-                    }
-                    else{
                         
+                    }else {
                     }
-                }
-                else{
+                }else {
                     if taskViewController.task?.identifier == "ConsentTask"{
                         stepViewController.backButtonItem = nil
                     }
@@ -1434,6 +1445,7 @@
                             let documentCopy:ORKConsentDocument = (ConsentBuilder.currentConsent?.consentDocument)!.copy() as! ORKConsentDocument
                             
                             consentSignatureResult?.apply(to: documentCopy)
+                            //instantiating ConsentSharePdfStep
                             let gatewayStoryboard = UIStoryboard(name: kFetalKickCounterStep, bundle: nil)
                             let ttController = gatewayStoryboard.instantiateViewController(withIdentifier: kConsentSharePdfStoryboardId) as! ConsentSharePdfStepViewController
                             ttController.step = step
@@ -1446,6 +1458,7 @@
                     
                 }else if step.identifier == kConsentViewPdfCompletionStep { //For PDFViewerStep
                     
+                    //fetching reviewStep
                     let reviewSharePdfStep:ORKStepResult? = taskViewController.result.results?.last as! ORKStepResult?
                     
                     let result = (reviewSharePdfStep?.results?.first as? ConsentCompletionTaskResult)
@@ -1545,8 +1558,8 @@
                         
                         if (result?.choiceAnswers?.first as! Bool) == true { //User agreed to share
                             return nil
-                        }
-                        else{ //User disagreed to share
+                            
+                        }else { //User disagreed to share
                             taskViewController.dismiss(animated: true, completion: {
                                 
                                 self.popViewControllerAfterConsentDisagree()
@@ -1557,7 +1570,7 @@
                             return nil
                         }
                         
-                    }else{
+                    }else {
                         return nil
                     }
                     
@@ -1591,7 +1604,7 @@
                     }
                 }
                 
-                if self.isComprehensionFailed!{
+                if self.isComprehensionFailed! {
                     
                     if self.retryView != nil {
                         self.retryView?.isHidden = false
@@ -1611,8 +1624,6 @@
                     self.alertVCPresented = nil
                 })
             }
-            
-            
         }
         
         func passcodeViewControllerDidFailAuthentication(_ viewController: UIViewController) {
@@ -1637,7 +1648,7 @@
                                                                     self.window?.addProgressIndicatorOnWindowFromTop()
                                                                     
                                                                     viewController.dismiss(animated: true, completion: {
-                                                                        
+                                                                        //fetch top view controller
                                                                         var topVC = UIApplication.shared.keyWindow?.rootViewController
                                                                         while topVC?.presentedViewController != nil {
                                                                             

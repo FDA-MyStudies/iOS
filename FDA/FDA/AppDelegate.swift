@@ -85,6 +85,8 @@
         var blockerScreen:AppUpdateBlocker?
         var passcodeParentControllerWhileSetup:UIViewController?
         
+        var consentToken:String? = "" //to be used in case of ineligible
+        
         //Register Remote Notification
         func askForNotification(){
             
@@ -1299,7 +1301,7 @@
             if passcodeParentControllerWhileSetup != nil {
                 
                 //Adding delay to allow Keypad to dismiss
-                if #available(iOS 11.0, *) {
+                if #available(iOS 10.3.0, *) {
                     self.perform(#selector(dismissTaskViewController), with: self, afterDelay: 2)
                 } else {
                     self.dismissTaskViewController()

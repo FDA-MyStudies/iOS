@@ -92,6 +92,10 @@ class StudyHomeViewController : UIViewController{
             }
         }
         
+        //ConsentToken will be used in case of ineligibility
+        let appdelegate = UIApplication.shared.delegate as! AppDelegate
+        appdelegate.consentToken = ""
+        
         
     }
     
@@ -874,6 +878,15 @@ extension StudyHomeViewController:ORKTaskViewControllerDelegate{
             DBHandler.saveConsentInformation(study: Study.currentStudy!)
             
             self.addProgressIndicator()
+            
+            
+            //restoring token in case of ineligibility
+            if (ConsentBuilder.currentConsent?.consentResult?.token) == nil ||  (ConsentBuilder.currentConsent?.consentResult?.token)?.isEmpty == true{
+                
+                let appdelegate = UIApplication.shared.delegate as! AppDelegate
+                ConsentBuilder.currentConsent?.consentResult?.token = appdelegate.consentToken
+            }
+            
             LabKeyServices().enrollForStudy(studyId: (Study.currentStudy?.studyId)!, token: (ConsentBuilder.currentConsent?.consentResult?.token)!, delegate: self)
             taskViewController.dismiss(animated: true, completion: nil)        }
         else{

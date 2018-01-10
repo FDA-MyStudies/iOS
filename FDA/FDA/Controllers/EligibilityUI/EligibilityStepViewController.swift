@@ -144,6 +144,9 @@ extension EligibilityStepViewController:NMWebServiceDelegate {
         
         if (tokenTextField.text?.isEmpty) == false {
             self.taskResult.enrollmentToken = tokenTextField.text!
+            //Storing token so that it can be used in case of ineligibility
+            let appdelegate = UIApplication.shared.delegate as! AppDelegate
+            appdelegate.consentToken = tokenTextField.text!
             
         }else {
             self.taskResult.enrollmentToken = ""

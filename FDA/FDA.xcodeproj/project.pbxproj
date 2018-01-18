@@ -92,7 +92,6 @@
 		6EBC8A2B1E8113110020F9E6 /* EligibilityStepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EBC8A2A1E8113110020F9E6 /* EligibilityStepViewController.swift */; };
 		6EBC8A351E8118970020F9E6 /* 200.png in Resources */ = {isa = PBXBuildFile; fileRef = 6EBC8A341E8118970020F9E6 /* 200.png */; };
 		6EC1291F1E64241200B90167 /* ConsentResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EC1291E1E64241200B90167 /* ConsentResult.swift */; };
-		6EC129221E64279100B90167 /* ConsentStepResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EC129211E64279100B90167 /* ConsentStepResult.swift */; };
 		6EC129241E64624F00B90167 /* Acivity_Question.json in Resources */ = {isa = PBXBuildFile; fileRef = 6EC129231E64624F00B90167 /* Acivity_Question.json */; };
 		6EC8019B1E67EF3400CC5966 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EC8019A1E67EF3400CC5966 /* Constants.swift */; };
 		6ECA927F1E499F8C00DA6287 /* StepProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ECA927E1E499F8C00DA6287 /* StepProvider.swift */; };
@@ -367,7 +366,6 @@
 		6EBC8A2A1E8113110020F9E6 /* EligibilityStepViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EligibilityStepViewController.swift; sourceTree = "<group>"; };
 		6EBC8A341E8118970020F9E6 /* 200.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 200.png; sourceTree = "<group>"; };
 		6EC1291E1E64241200B90167 /* ConsentResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConsentResult.swift; sourceTree = "<group>"; };
-		6EC129211E64279100B90167 /* ConsentStepResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConsentStepResult.swift; sourceTree = "<group>"; };
 		6EC129231E64624F00B90167 /* Acivity_Question.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Acivity_Question.json; sourceTree = "<group>"; };
 		6EC8019A1E67EF3400CC5966 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		6ECA927E1E499F8C00DA6287 /* StepProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StepProvider.swift; sourceTree = "<group>"; };
@@ -833,14 +831,6 @@
 			path = ConsentResult;
 			sourceTree = "<group>";
 		};
-		6EC129201E64277900B90167 /* ConsentStepResult */ = {
-			isa = PBXGroup;
-			children = (
-				6EC129211E64279100B90167 /* ConsentStepResult.swift */,
-			);
-			path = ConsentStepResult;
-			sourceTree = "<group>";
-		};
 		6EC801971E67EF2000CC5966 /* Constants */ = {
 			isa = PBXGroup;
 			children = (
@@ -896,7 +886,6 @@
 		6ED1342E1E5EB0110090C976 /* Consent */ = {
 			isa = PBXGroup;
 			children = (
-				6EC129201E64277900B90167 /* ConsentStepResult */,
 				6EC1291B1E6421CB00B90167 /* ConsentResult */,
 				6ED1342F1E5EB0110090C976 /* ConsentBuilder */,
 				6ED134301E5EB0110090C976 /* ConsentStep */,
@@ -1858,7 +1847,6 @@
 				6EED7B391E6574FE002C1FA3 /* FetalKickCounterStep.swift in Sources */,
 				94C13DBC1EC1988600E3AEBF /* ChartsViewController.swift in Sources */,
 				6EC8019B1E67EF3400CC5966 /* Constants.swift in Sources */,
-				6EC129221E64279100B90167 /* ConsentStepResult.swift in Sources */,
 				6E7D2D5C1E433E8800763D4C /* ViewController.swift in Sources */,
 				94B3DD571E6ED8E500327AE5 /* SignUpCompleteViewController.swift in Sources */,
 				94B3DD531E6ED8E500327AE5 /* ForgotPasswordViewController.swift in Sources */,

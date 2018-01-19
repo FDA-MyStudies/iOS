@@ -106,7 +106,7 @@ class ActivityBuilder {
                         
                         if Utilities.isValidValue(someObject: stepDict[kActivityStepType] as AnyObject ) {
                             
-                            switch ActivityStepType(rawValue:stepDict[kActivityStepType] as? String)! as  ActivityStepType {
+                            switch ActivityStepType(rawValue:(stepDict[kActivityStepType] as? String)!)! as  ActivityStepType {
                                 
                             case .instruction:
                                 

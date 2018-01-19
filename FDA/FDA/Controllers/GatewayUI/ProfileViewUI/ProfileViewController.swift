@@ -354,13 +354,13 @@ class ProfileViewController: UIViewController, SlideMenuControllerDelegate {
          ud.set(false, forKey: kShowNotification)
         ud.synchronize()
         
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let appDelegate = (UIApplication.shared.delegate as? AppDelegate)!
         appDelegate.updateKeyAndInitializationVector()
 
         
         
         //fdaSlideMenuController()?.navigateToHomeAfterSingout()
-        let leftController = slideMenuController()?.leftViewController as! LeftMenuViewController
+        let leftController = (slideMenuController()?.leftViewController as? LeftMenuViewController)!
         leftController.changeViewController(.studyList)
         leftController.createLeftmenuItems()
         
@@ -377,13 +377,13 @@ class ProfileViewController: UIViewController, SlideMenuControllerDelegate {
         
         ORKPasscodeViewController.removePasscodeFromKeychain()
         
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let appDelegate = (UIApplication.shared.delegate as? AppDelegate)!
         appDelegate.updateKeyAndInitializationVector()
         
         
         UIUtilities.showAlertMessageWithActionHandler(NSLocalizedString(kTitleMessage, comment: ""), message: NSLocalizedString(kMessageAccountDeletedSuccess, comment: ""), buttonTitle: NSLocalizedString(kTitleOk, comment: ""), viewControllerUsed: self) {
             
-            let leftController = self.slideMenuController()?.leftViewController as! LeftMenuViewController
+            let leftController = (self.slideMenuController()?.leftViewController as? LeftMenuViewController)!
             leftController.changeViewController(.studyList)
             leftController.createLeftmenuItems()
             
@@ -424,13 +424,13 @@ class ProfileViewController: UIViewController, SlideMenuControllerDelegate {
             return
         }
         
-        var passcodeDict:Dictionary<String,Any> =  tableViewRowDetails?[3] as! Dictionary<String, Any>
+        var passcodeDict:Dictionary<String,Any> =  (tableViewRowDetails?[3] as? Dictionary<String, Any>)!
         
         
         let keychainPasscodeDict:Dictionary<String,Any>? = ORKKeychainWrapper.object(forKey: korkPasscode, error: &error)  == nil ? nil : (ORKKeychainWrapper.object(forKey: korkPasscode, error: &error)  as?  Dictionary<String,Any>)
         var istouchIdEnabled:Bool =  false
         if keychainPasscodeDict != nil &&  (keychainPasscodeDict?.count)! > 0{
-            istouchIdEnabled = (keychainPasscodeDict?[ktouchid])! as! Bool
+            istouchIdEnabled = ((keychainPasscodeDict?[ktouchid])! as? Bool)!
         }
         
         print("touch;;;\(istouchIdEnabled)")
@@ -651,7 +651,7 @@ class ProfileViewController: UIViewController, SlideMenuControllerDelegate {
             
         }
         else if let confirmDelete = segue.destination as? ConfirmationViewController {
-            confirmDelete.joinedStudies = sender as! Array<Study>
+            confirmDelete.joinedStudies = (sender as? Array<Study>)!
             
         }
     }
@@ -667,12 +667,12 @@ extension ProfileViewController : UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let tableViewData = tableViewRowDetails?.object(at: indexPath.row) as! NSDictionary
+        let tableViewData = (tableViewRowDetails?.object(at: indexPath.row) as? NSDictionary)!
         
         if indexPath.row <= signupCellLastIndex {
             // for SignUp Cell data
             
-            let  cell = tableView.dequeueReusableCell(withIdentifier: "CommonDetailsCell", for: indexPath) as! SignUpTableViewCell
+            let  cell = (tableView.dequeueReusableCell(withIdentifier: "CommonDetailsCell", for: indexPath) as? SignUpTableViewCell)!
             cell.textFieldValue?.text = ""
             
             var isSecuredEntry : Bool = false
@@ -748,7 +748,7 @@ extension ProfileViewController : UITableViewDataSource {
         else{
             // for ProfileTableViewCell data
             
-            let cell = tableView.dequeueReusableCell(withIdentifier: kProfileTableViewCellIdentifier, for: indexPath) as! ProfileTableViewCell
+            let cell = (tableView.dequeueReusableCell(withIdentifier: kProfileTableViewCellIdentifier, for: indexPath) as? ProfileTableViewCell)!
             cell.setCellData(dict: tableViewData)
             
             
@@ -932,7 +932,7 @@ extension ProfileViewController: ORKPasscodeDelegate {
         self.isPasscodeViewPresented = true
        
         //Recent Changes
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let appDelegate = (UIApplication.shared.delegate as? AppDelegate)!
         appDelegate.appIsResignedButDidNotEnteredBackground = false
 
         self.perform(#selector(dismissTaskViewController), with: self, afterDelay: 1)
@@ -1013,7 +1013,7 @@ extension ProfileViewController:ORKTaskViewControllerDelegate{
             
         }
         
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let appDelegate = (UIApplication.shared.delegate as? AppDelegate)!
         appDelegate.appIsResignedButDidNotEnteredBackground = false
       
       

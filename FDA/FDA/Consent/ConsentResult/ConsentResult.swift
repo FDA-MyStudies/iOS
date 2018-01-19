@@ -56,9 +56,9 @@ class ConsentResult {
     func initWithORKTaskResult(taskResult:ORKTaskResult) {
         for stepResult in taskResult.results! {
             
-            if   ((stepResult as! ORKStepResult).results?.count)! > 0 {
+            if   ((stepResult as? ORKStepResult)!.results?.count)! > 0 {
                 
-                if  let questionstepResult:ORKChoiceQuestionResult? = (stepResult as! ORKStepResult).results?[0] as? ORKChoiceQuestionResult? {
+                if  let questionstepResult:ORKChoiceQuestionResult? = (stepResult as? ORKStepResult)!.results?[0] as? ORKChoiceQuestionResult? {
                     
                     if Utilities.isValidValue(someObject: questionstepResult?.choiceAnswers?[0] as AnyObject?){
                         /* sharing choice result either 1 selected or 2 seleceted
@@ -67,7 +67,7 @@ class ConsentResult {
                     } else{
                         //Do Nothing
                     }
-                } else if let signatureStepResult:ORKConsentSignatureResult? = (stepResult as! ORKStepResult).results?[0] as? ORKConsentSignatureResult? {
+                } else if let signatureStepResult:ORKConsentSignatureResult? = (stepResult as? ORKStepResult)!.results?[0] as? ORKConsentSignatureResult? {
                     
                     signatureStepResult?.apply(to: self.consentDocument!)
                     
@@ -149,7 +149,7 @@ class ConsentResult {
                         }
                     }
                 }
-                else if let tokenStepResult:EligibilityTokenTaskResult? = (stepResult as! ORKStepResult).results?[0] as? EligibilityTokenTaskResult?{
+                else if let tokenStepResult:EligibilityTokenTaskResult? = (stepResult as? ORKStepResult)!.results?[0] as? EligibilityTokenTaskResult?{
                     self.token = tokenStepResult?.enrollmentToken
                 }
             }

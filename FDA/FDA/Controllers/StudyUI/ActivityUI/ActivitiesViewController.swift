@@ -56,7 +56,7 @@ class ActivitiesViewController : UIViewController{
     
     //MARK:- Viewcontroller Lifecycle
     fileprivate func presentUpdatedConsent() {
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let appDelegate = (UIApplication.shared.delegate as? AppDelegate)!
         appDelegate.checkConsentStatus(controller: self)
     }
     
@@ -153,8 +153,8 @@ class ActivitiesViewController : UIViewController{
         
         if (ud.bool(forKey: "FKC") && ud.object(forKey: kFetalKickStartTimeStamp) != nil) {
             
-            let studyId = ud.object(forKey: kFetalkickStudyId)  as! String
-            let activityId = ud.object(forKey: kFetalKickActivityId)  as! String
+            let studyId = (ud.object(forKey: kFetalkickStudyId)  as? String)!
+            let activityId = (ud.object(forKey: kFetalKickActivityId)  as? String)!
             let activity  = Study.currentStudy?.activities?.filter({$0.actvityId == activityId}).last
             
             Study.updateCurrentActivity(activity:activity!)
@@ -175,7 +175,7 @@ class ActivitiesViewController : UIViewController{
                 let activityId = NotificationHandler.instance.activityId
                 
                 let rowDetail = tableViewSections[0]
-                let activities = rowDetail["activities"] as! Array<Activity>
+                let activities = (rowDetail["activities"] as? Array<Activity>)!
                 let index = activities.index(where: {$0.actvityId == activityId})
                 let ip = IndexPath.init(row: index!, section: 0)
                 self.selectedIndexPath = ip
@@ -621,7 +621,7 @@ class ActivitiesViewController : UIViewController{
             ud.set(totalIncompletedRuns, forKey: missedKey)
             
         }else {
-            let previousMissed = ud.object(forKey: missedKey) as! Int
+            let previousMissed = (ud.object(forKey: missedKey) as? Int)!
             ud.set(totalIncompletedRuns, forKey: missedKey)
             if previousMissed < totalIncompletedRuns {
                 //show alert
@@ -772,7 +772,7 @@ extension ActivitiesViewController: UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         let rowDetail = tableViewSections[section]
-        let activities = rowDetail["activities"] as! Array<Activity>
+        let activities = (rowDetail["activities"] as? Array<Activity>)!
         if activities.count == 0 {
             return 1
         }
@@ -785,7 +785,7 @@ extension ActivitiesViewController: UITableViewDataSource{
         
         let dayData = tableViewSections[section]
         
-        let statusText = dayData["title"] as! String
+        let statusText = (dayData["title"] as? String)!
         
         let label = UILabel.init(frame: CGRect(x: 18, y: 0, width: view.frame.size.width, height: view.frame.size.height))
         label.textAlignment = NSTextAlignment.natural
@@ -801,7 +801,7 @@ extension ActivitiesViewController: UITableViewDataSource{
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let rowDetail = tableViewSections[indexPath.section]
-        let activities = rowDetail["activities"] as! Array<Activity>
+        let activities = (rowDetail["activities"] as? Array<Activity>)!
         
         if activities.count == 0 {
             
@@ -810,7 +810,7 @@ extension ActivitiesViewController: UITableViewDataSource{
             return cell
         }
         else {
-            var cell = tableView.dequeueReusableCell(withIdentifier: kActivitiesTableViewCell, for: indexPath) as! ActivitiesTableViewCell
+            var cell = (tableView.dequeueReusableCell(withIdentifier: kActivitiesTableViewCell, for: indexPath) as? ActivitiesTableViewCell)!
             cell.delegate = self
             
             //Cell Data Setup
@@ -823,7 +823,7 @@ extension ActivitiesViewController: UITableViewDataSource{
             //check for scheduled frequency
             if activity.frequencyType == .Scheduled {
                 
-                cell = tableView.dequeueReusableCell(withIdentifier: kActivitiesTableViewScheduledCell, for: indexPath) as! ActivitiesTableViewCell
+                cell = (tableView.dequeueReusableCell(withIdentifier: kActivitiesTableViewScheduledCell, for: indexPath) as? ActivitiesTableViewCell)!
                 cell.delegate = self
             }
             //Set Cell data
@@ -847,7 +847,7 @@ extension ActivitiesViewController : UITableViewDelegate{
         case .current:
             
             let rowDetail = tableViewSections[indexPath.section]
-            let activities = rowDetail["activities"] as! Array<Activity>
+            let activities = (rowDetail["activities"] as? Array<Activity>)!
             
             let activity = activities[indexPath.row]
             //Check for activity run status & if run is available
@@ -944,7 +944,7 @@ extension ActivitiesViewController:ActivityFilterViewDelegate{
         
         var updatedSectionArray:Array<Dictionary<String,Any>>! = []
         for section in tableViewSections {
-            let activities = section[kActivities] as! Array<Activity>
+            let activities = (section[kActivities] as? Array<Activity>)!
             var sectionDict:Dictionary<String,Any>! = section
             sectionDict[kActivities] = activities.filter({$0.type == activityType
             })
@@ -1104,7 +1104,7 @@ extension ActivitiesViewController:ORKTaskViewControllerDelegate{
             let ud = UserDefaults.standard
             if ud.bool(forKey: "FKC") {
                 
-                let runid = ud.object(forKey: "FetalKickCounterRunid") as! Int
+                let runid = (ud.object(forKey: "FetalKickCounterRunid") as? Int)!
                 
                 if Study.currentActivity?.currentRun.runId != runid {
                     //runid is changed
@@ -1174,17 +1174,17 @@ extension ActivitiesViewController:ORKTaskViewControllerDelegate{
                     
                     if  (taskViewController.result.results?.count)! > 0 {
                         
-                        let orkStepResult:ORKStepResult? = taskViewController.result.results?[1] as! ORKStepResult
+                        let orkStepResult:ORKStepResult? = (taskViewController.result.results?[1] as? ORKStepResult)!
                         
                         if (orkStepResult?.results?.count)! > 0 {
                             
-                            let activeTaskResultType =  ActiveStepType(rawValue:ActivityBuilder.currentActivityBuilder.activity?.activitySteps?.first?.resultType as! String)
+                            let activeTaskResultType =  ActiveStepType(rawValue:(ActivityBuilder.currentActivityBuilder.activity?.activitySteps?.first?.resultType as? String)!)
                             
                             switch activeTaskResultType! {
                                 
                             case .fetalKickCounter:
                                 
-                                let fetalKickResult:FetalKickCounterTaskResult? = orkStepResult?.results?.first as! FetalKickCounterTaskResult
+                                let fetalKickResult:FetalKickCounterTaskResult? = orkStepResult?.results?.first as? FetalKickCounterTaskResult
                                 
                                 let study = Study.currentStudy
                                 let activity = Study.currentActivity
@@ -1195,7 +1195,7 @@ extension ActivitiesViewController:ORKTaskViewControllerDelegate{
                                     let value = Float((fetalKickResult?.duration)!)/60
                                     let kickcount = Float((fetalKickResult?.totalKickCount)!)
                                     let dict = ActivityBuilder.currentActivityBuilder.activity?.steps?.first!
-                                    let key =   dict?[kActivityStepKey] as! String
+                                    let key =   (dict?[kActivityStepKey] as? String)!
                                     
                                     //Save Stats to DB
                                     DBHandler.saveStatisticsDataFor(activityId: (activity?.actvityId)!, key: key, data:value,fkDuration:Int(kickcount), date:Date())
@@ -1364,12 +1364,12 @@ extension ActivitiesViewController:ORKTaskViewControllerDelegate{
         
         if step is FetalKickCounterStep {
             
-            let ttController = storyboard.instantiateViewController(withIdentifier: "FetalKickCounterStepViewController") as! FetalKickCounterStepViewController
+            let ttController = (storyboard.instantiateViewController(withIdentifier: "FetalKickCounterStepViewController") as? FetalKickCounterStepViewController)!
             ttController.step = step
             return ttController
         }else if  step is FetalKickIntroStep {
             
-            let ttController = storyboard.instantiateViewController(withIdentifier: "FetalKickIntroStepViewControllerIdentifier") as! FetalKickIntroStepViewController
+            let ttController = (storyboard.instantiateViewController(withIdentifier: "FetalKickIntroStepViewControllerIdentifier") as? FetalKickIntroStepViewController)!
             ttController.step = step
             return ttController
         }else {
@@ -1406,7 +1406,7 @@ class ActivitySchedules:UIView,UITableViewDelegate,UITableViewDataSource{
     }
     
     class func instanceFromNib(frame:CGRect , activity:Activity) -> ActivitySchedules {
-        let view = UINib(nibName: "ActivitySchedules", bundle: nil).instantiate(withOwner: nil, options: nil)[0] as! ActivitySchedules
+        let view = (UINib(nibName: "ActivitySchedules", bundle: nil).instantiate(withOwner: nil, options: nil)[0] as? ActivitySchedules)!
         view.frame = frame
         view.activity = activity
         view.tableview?.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
@@ -1501,7 +1501,7 @@ class ResponseDataFetch:NMWebServiceDelegate{
                 if statiticsList.count != 0 {
                     StudyDashboard.instance.statistics = statiticsList
                     self.getDataKeysForCurrentStudy()
-                    let appDelegate = UIApplication.shared.delegate as! AppDelegate
+                    let appDelegate = (UIApplication.shared.delegate as? AppDelegate)!
                     appDelegate.addAndRemoveProgress(add: true)
                     
                 }else {
@@ -1583,10 +1583,10 @@ class ResponseDataFetch:NMWebServiceDelegate{
                 
                 let values = response.values
                 for value in values {
-                    let responseValue = value["value"] as! Float
-                    let count = value["count"] as! Float
+                    let responseValue = (value["value"] as? Float)!
+                    let count = (value["count"] as? Float)!
                     //SetData Format
-                    let date = ResponseDataFetch.labkeyDateFormatter.date(from: value["date"] as! String)
+                    let date = ResponseDataFetch.labkeyDateFormatter.date(from: (value["date"] as? String)!)
                     let localDateAsString = ResponseDataFetch.localDateFormatter.string(from: date!)
                     
                     let localDate = ResponseDataFetch.localDateFormatter.date(from: localDateAsString)
@@ -1598,7 +1598,7 @@ class ResponseDataFetch:NMWebServiceDelegate{
             let key = "LabKeyResponse" + (Study.currentStudy?.studyId)!
             UserDefaults.standard.set(true, forKey: key)
             
-            let appDelegate = UIApplication.shared.delegate as! AppDelegate
+            let appDelegate = (UIApplication.shared.delegate as? AppDelegate)!
             appDelegate.addAndRemoveProgress(add: false)
             
         }

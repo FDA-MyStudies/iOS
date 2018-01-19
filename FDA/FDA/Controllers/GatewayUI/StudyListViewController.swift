@@ -66,7 +66,7 @@ class StudyListViewController: UIViewController {
         //get Profile data to check for passcode
         //Condition missing
         
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let appDelegate = (UIApplication.shared.delegate as? AppDelegate)!
         
         if User.currentUser.userType == .FDAUser && User.currentUser.settings?.localNotifications == true {
             appDelegate.checkForAppReopenNotification()
@@ -89,7 +89,7 @@ class StudyListViewController: UIViewController {
             return
         }
         self.addRightNavigationItem()
-        let appdelegate = UIApplication.shared.delegate as! AppDelegate
+        let appdelegate = (UIApplication.shared.delegate as? AppDelegate)!
         
         Study.currentStudy = nil
         
@@ -98,7 +98,7 @@ class StudyListViewController: UIViewController {
         
         //Checking if User has missed out setting the passcode/TouchId
         if (ud.value(forKey: kPasscodeIsPending) != nil){
-            ispasscodePending = ud.value(forKey: kPasscodeIsPending) as! Bool?
+            ispasscodePending = (ud.value(forKey: kPasscodeIsPending) as? Bool)!
         }
         
         if ispasscodePending == true {
@@ -287,7 +287,7 @@ class StudyListViewController: UIViewController {
         do {
             let response = try JSONSerialization.jsonObject(with: data! as Data, options: []) as? Dictionary<String,Any>
             
-            let studies = response?[kStudies] as! Array<Dictionary<String,Any>>
+            let studies = (response?[kStudies] as? Array<Dictionary<String,Any>>)!
             var listOfStudies:Array<Study> = []
             for study in studies{
                 let studyModelObj = Study(studyDetail: study)
@@ -311,7 +311,7 @@ class StudyListViewController: UIViewController {
         
         if (ud.bool(forKey: "FKC") && ud.object(forKey: kFetalKickStartTimeStamp) != nil) {
             
-            let studyId = ud.object(forKey: kFetalkickStudyId)  as! String
+            let studyId = (ud.object(forKey: kFetalkickStudyId)  as? String)!
             let study  = Gateway.instance.studies?.filter({$0.studyId == studyId}).last
             
             if (study?.userParticipateState.status == .inProgress && study?.status == .Active) {
@@ -338,7 +338,7 @@ class StudyListViewController: UIViewController {
     func navigateToNotifications(){
         
         let gatewayStoryBoard = UIStoryboard.init(name: kStoryboardIdentifierGateway, bundle: Bundle.main)
-        let notificationController = gatewayStoryBoard.instantiateViewController(withIdentifier:kNotificationViewControllerIdentifier) as! NotificationViewController
+        let notificationController = (gatewayStoryBoard.instantiateViewController(withIdentifier:kNotificationViewControllerIdentifier) as? NotificationViewController)!
         self.navigationController?.pushViewController(notificationController, animated: true)
         
     }
@@ -349,7 +349,7 @@ class StudyListViewController: UIViewController {
     func navigateToStudyHome(){
         
         let studyStoryBoard = UIStoryboard.init(name: kStudyStoryboard, bundle: Bundle.main)
-        let studyHomeController = studyStoryBoard.instantiateViewController(withIdentifier: String(describing: StudyHomeViewController.classForCoder())) as! StudyHomeViewController
+        let studyHomeController = (studyStoryBoard.instantiateViewController(withIdentifier: String(describing: StudyHomeViewController.classForCoder())) as? StudyHomeViewController)!
         studyHomeController.delegate = self
         self.navigationController?.pushViewController(studyHomeController, animated: true)
     }
@@ -361,7 +361,7 @@ class StudyListViewController: UIViewController {
         
         let studyStoryBoard = UIStoryboard.init(name: kStudyStoryboard, bundle: Bundle.main)
         
-        let studyDashboard = studyStoryBoard.instantiateViewController(withIdentifier: kStudyDashboardTabbarControllerIdentifier) as! StudyDashboardTabbarViewController
+        let studyDashboard = (studyStoryBoard.instantiateViewController(withIdentifier: kStudyDashboardTabbarControllerIdentifier) as? StudyDashboardTabbarViewController)!
         
         self.navigationController?.navigationBar.isHidden = true
         self.navigationController?.pushViewController(studyDashboard, animated: animated)
@@ -427,7 +427,7 @@ class StudyListViewController: UIViewController {
                     }
                 }
                 else {
-                    let appDelegate = UIApplication.shared.delegate as! AppDelegate
+                    let appDelegate = (UIApplication.shared.delegate as? AppDelegate)!
                     
                     appDelegate.setDefaultFilters(previousCollectionData: [])
                     
@@ -557,7 +557,7 @@ class StudyListViewController: UIViewController {
         // Pass the selected object to the new view controller.
         
         if segue.identifier == filterListSegue{
-            let filterVc = segue.destination as! StudyFilterViewController
+            let filterVc = (segue.destination as? StudyFilterViewController)!
             if StudyFilterHandler.instance.previousAppliedFilters.count > 0 {
                 filterVc.previousCollectionData = StudyFilterHandler.instance.previousAppliedFilters
             }
@@ -633,7 +633,7 @@ class StudyListViewController: UIViewController {
         
         if (Gateway.instance.studies?.count)! > 0 {
             self.loadStudiesFromDatabase()
-            let appDelegate = UIApplication.shared.delegate as! AppDelegate
+            let appDelegate = (UIApplication.shared.delegate as? AppDelegate)!
             
             if appDelegate.notificationDetails != nil && User.currentUser.userType == .FDAUser {
                 appDelegate.handleLocalAndRemoteNotification(userInfoDetails:appDelegate.notificationDetails! )
@@ -710,7 +710,7 @@ class StudyListViewController: UIViewController {
                     if(study?.version != study?.newVersion){
                         WCPServices().getStudyUpdates(study: study!, delegate: self)
                     }else {
-                        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+                        let appDelegate = (UIApplication.shared.delegate as? AppDelegate)!
                         self.addProgressIndicator()
                         self.perform(#selector(loadStudyDetails), with: self, afterDelay: 1)
                     }
@@ -940,7 +940,7 @@ extension StudyListViewController : UITableViewDataSource {
             cellIdentifier = "anonymousStudyCell"
         }
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as! StudyListCell
+        let cell = (tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as? StudyListCell)!
         
         cell.populateCellWith(study: (self.studiesList[indexPath.row]))
         cell.delegate = self
@@ -1005,7 +1005,7 @@ extension StudyListViewController : searchBarDelegate {
                     self.appliedFilter(studyStatus: previousCollectionData.first!, pariticipationsStatus: [], categories:previousCollectionData[1], searchText: "", bookmarked:false)
                 }
             } else{
-                let appDelegate = UIApplication.shared.delegate as! AppDelegate
+                let appDelegate = (UIApplication.shared.delegate as? AppDelegate)!
                 
                 if StudyFilterHandler.instance.filterOptions.count > 0 {
                     //setting default Filters
@@ -1038,7 +1038,7 @@ extension StudyListViewController : searchBarDelegate {
         
         if self.studiesList.count == 0 {
             
-            let appDelegate = UIApplication.shared.delegate as! AppDelegate
+            let appDelegate = (UIApplication.shared.delegate as? AppDelegate)!
             
             if StudyFilterHandler.instance.filterOptions.count > 0 {
                 
@@ -1089,7 +1089,7 @@ extension StudyListViewController:NMWebServiceDelegate {
     func startedRequest(_ manager: NetworkManager, requestName: NSString) {
         Logger.sharedInstance.info("requestname START : \(requestName)")
         
-        let appdelegate = UIApplication.shared.delegate as! AppDelegate
+        let appdelegate = (UIApplication.shared.delegate as? AppDelegate)!
         appdelegate.window?.addProgressIndicatorOnWindowFromTop()
         
     }
@@ -1098,10 +1098,10 @@ extension StudyListViewController:NMWebServiceDelegate {
         Logger.sharedInstance.info("requestname FINISH: \(requestName) : \(response)")
         
         
-        let appdelegate = UIApplication.shared.delegate as! AppDelegate
+        let appdelegate = (UIApplication.shared.delegate as? AppDelegate)!
         
         if requestName as String == WCPMethods.studyList.rawValue{
-            let responseDict = response as! NSDictionary
+            let responseDict = (response as? NSDictionary)!
             
             
             if self.refreshControl != nil && (self.refreshControl?.isRefreshing)!{
@@ -1142,7 +1142,7 @@ extension StudyListViewController:NMWebServiceDelegate {
     func failedRequest(_ manager: NetworkManager, requestName: NSString, error: NSError) {
         
         Logger.sharedInstance.info("requestname Failed: \(requestName)")
-        let appdelegate = UIApplication.shared.delegate as! AppDelegate
+        let appdelegate = (UIApplication.shared.delegate as? AppDelegate)!
         appdelegate.window?.removeProgressIndicatorFromWindow()
         
         if error.code == 403 { //unauthorized Access
@@ -1178,10 +1178,10 @@ extension StudyListViewController:StudyHomeViewDontrollerDelegate{
     func studyHomeJoinStudy() {
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
             
-            let appdelegate = UIApplication.shared.delegate as! AppDelegate
+            let appdelegate = (UIApplication.shared.delegate as? AppDelegate)!
             appdelegate.window?.removeProgressIndicatorFromWindow()
             
-            let leftController = self.slideMenuController()?.leftViewController as! LeftMenuViewController
+            let leftController = (self.slideMenuController()?.leftViewController as? LeftMenuViewController)!
             leftController.changeViewController(.reachOut_signIn)
         }
     }

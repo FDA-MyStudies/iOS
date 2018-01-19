@@ -279,12 +279,12 @@
                 }else if (launchOptions?[.localNotification] != nil) { //Launched from Local Notification
                     
                     ud1.set("local", forKey: "launch")
-                    let localNotification = launchOptions?[.localNotification] as! UILocalNotification
-                    let notificationDetails = localNotification.userInfo as! Dictionary<String, Any>
+                    let localNotification = (launchOptions?[.localNotification] as? UILocalNotification)!
+                    let notificationDetails = (localNotification.userInfo as? Dictionary<String, Any>)!
                     
                     NotificationHandler.instance.appOpenFromNotification = true
-                    NotificationHandler.instance.studyId = notificationDetails[kStudyId] as! String!
-                    NotificationHandler.instance.activityId = notificationDetails[kActivityId] as! String!
+                    NotificationHandler.instance.studyId = (notificationDetails[kStudyId] as? String)!
+                    NotificationHandler.instance.activityId = (notificationDetails[kActivityId] as? String)!
                     ud1.synchronize()
                     
                 }else { //Regular Launch
@@ -360,7 +360,7 @@
                     
                 } else if(navController as? UINavigationController) != nil
                     &&  (navController as? UINavigationController)?.visibleViewController?.isKind(of: ORKTaskViewController.self) == true
-                    && (((navController as? UINavigationController)?.visibleViewController as! ORKTaskViewController).title != nil && ((navController as? UINavigationController)?.visibleViewController as! ORKTaskViewController).title! == "Activity") {
+                    && (((navController as? UINavigationController)?.visibleViewController as? ORKTaskViewController)!.title != nil && ((navController as? UINavigationController)?.visibleViewController as? ORKTaskViewController)!.title! == "Activity") {
                     
                     if (navController as? UINavigationController)?.visibleViewController?.isKind(of: ORKPasscodeViewController.self) == false {
                         //Request for Passcode
@@ -372,7 +372,7 @@
             //Check if App running on Jailbreak Device
             if AppDelegate.jailbroken(application: application) {
                 
-                let navigationController =  (self.window?.rootViewController as! UINavigationController)
+                let navigationController =  (self.window?.rootViewController as? UINavigationController)!
                 let appBlocker = JailbrokeBlocker.instanceFromNib(frame: navigationController.view.frame, detail: nil);
                 UIApplication.shared.keyWindow?.addSubview(appBlocker);
                 UIApplication.shared.keyWindow?.bringSubview(toFront: appBlocker)
@@ -423,7 +423,7 @@
             if (UIApplication.shared.applicationState == UIApplicationState.background)||(UIApplication.shared.applicationState == UIApplicationState.inactive) {
                 
                 self.updateNotification()
-                self.handleLocalAndRemoteNotification(userInfoDetails: userInfo as! Dictionary<String, Any>)
+                self.handleLocalAndRemoteNotification(userInfoDetails: (userInfo as? Dictionary<String, Any>)!)
             }
             
             // userInfo is valid
@@ -433,14 +433,14 @@
             }else {
                 if (UIApplication.shared.applicationState == UIApplicationState.background || (UIApplication.shared.applicationState == UIApplicationState.inactive)) {
                     //Handle local Notification Received
-                    self.handleLocalNotification(userInfoDetails: userInfo as! Dictionary<String, Any>)
+                    self.handleLocalNotification(userInfoDetails: (userInfo as? Dictionary<String, Any>)!)
                 }
             }
         }
         
         func application(_ application: UIApplication, didReceive notification: UILocalNotification) {
             
-            self.handleLocalNotification(userInfoDetails: notification.userInfo as! Dictionary<String, Any>)
+            self.handleLocalNotification(userInfoDetails: (notification.userInfo as? Dictionary<String, Any>)!)
         }
         
         //MARK: Jailbreak Methods
@@ -498,14 +498,14 @@
         
         func addRetryScreen(viewController:UIViewController?) {
             
-            let navigationController =  (self.window?.rootViewController as! UINavigationController)
+            let navigationController =  (self.window?.rootViewController as? UINavigationController)!
             self.retryView = ComprehensionFailure.instanceFromNib(frame: navigationController.view.frame, detail: nil);
             
             if viewController != nil{
-                retryView?.delegate = viewController as! ComprehensionFailureDelegate
+                retryView?.delegate = (viewController as? ComprehensionFailureDelegate)!
                 
             }else{
-                retryView?.delegate = self as! ComprehensionFailureDelegate
+                retryView?.delegate = (self as? ComprehensionFailureDelegate)!
             }
             UIApplication.shared.keyWindow?.addSubview(retryView!);
             UIApplication.shared.keyWindow?.bringSubview(toFront: retryView!)
@@ -560,18 +560,18 @@
                             
                             let parsedDict = try JSONSerialization.jsonObject(with: data!, options:[])
                             
-                            if ((parsedDict as! [String:Any])[kResultCount] as! Int) == 1 {
+                            if ((parsedDict as? [String:Any])![kResultCount] as? Int)! == 1 {
                                 
-                                let resultArray = ((parsedDict as! [String:Any])[kResultsForAppStore]) as! Array<Dictionary<String,Any>>
-                                let appStoreVersion = (resultArray.first)?[kAppStoreVersion]  as! String
+                                let resultArray = (((parsedDict as? [String:Any])![kResultsForAppStore]) as? Array<Dictionary<String,Any>>)!
+                                let appStoreVersion = ((resultArray.first)?[kAppStoreVersion]  as? String)!
                                 let currentVersion = infoDict?[kCFBundleShortVersion]
                                 
                                 //compare AppStore Version with current
-                                if appStoreVersion != (currentVersion as! String) && appStoreVersion.compare(currentVersion as! String, options: .numeric, range: nil, locale: nil) == ComparisonResult.orderedDescending {
+                                if appStoreVersion != (currentVersion as? String)! && appStoreVersion.compare((currentVersion as? String)!, options: .numeric, range: nil, locale: nil) == ComparisonResult.orderedDescending {
                                     
                                     // load and Update blockerScreen
                                     self.shouldAddForceUpgradeScreen = true
-                                    self.blockerScreen = AppUpdateBlocker.instanceFromNib(frame:(UIApplication.shared.keyWindow?.bounds)!, detail: parsedDict as! Dictionary<String, Any>);
+                                    self.blockerScreen = AppUpdateBlocker.instanceFromNib(frame:(UIApplication.shared.keyWindow?.bounds)!, detail: (parsedDict as? Dictionary<String, Any>)!);
                                     self.blockerScreen?.labelVersionNumber.text = "V-" + appStoreVersion
                                     self.blockerScreen?.labelMessage.text = kBlockerScreenLabelText
                                     
@@ -610,7 +610,7 @@
             if(StudyUpdates.studyConsentUpdated){
                 print("Study consent is updated: Please Present Consent UI")
                 
-                let navigationController =  (self.window?.rootViewController as! UINavigationController)
+                let navigationController =  (self.window?.rootViewController as? UINavigationController)!
                 
                 var topController:UIViewController = navigationController
                 if navigationController.viewControllers.count > 0 {
@@ -674,32 +674,32 @@
             var initialVC:UIViewController?
             
             //getting topmost visible controller
-            let navigationController =  (self.window?.rootViewController as! UINavigationController)
+            let navigationController =  (self.window?.rootViewController as? UINavigationController)!
             let menuVC = navigationController.viewControllers.last
             if  menuVC is FDASlideMenuViewController {
-                let mainController =  (menuVC as! FDASlideMenuViewController).mainViewController
+                let mainController =  (menuVC as? FDASlideMenuViewController)!.mainViewController
                 if mainController is UINavigationController {
-                    let nav = (mainController as! UINavigationController)
+                    let nav = (mainController as? UINavigationController)!
                     initialVC = nav.viewControllers.last
                 }
             }
             
             NotificationHandler.instance.appOpenFromNotification = true
-            NotificationHandler.instance.studyId = userInfoDetails[kStudyId] as! String!
-            NotificationHandler.instance.activityId = userInfoDetails[kActivityId] as! String!
+            NotificationHandler.instance.studyId = (userInfoDetails[kStudyId] as? String)!
+            NotificationHandler.instance.activityId = (userInfoDetails[kActivityId] as? String)!
             
             if !(initialVC is UITabBarController){
                 //push tabbar and switch to activty tab
                 if !(initialVC is StudyListViewController) {
                     
-                    let leftController = (menuVC as! FDASlideMenuViewController).leftViewController as! LeftMenuViewController
+                    let leftController = ((menuVC as? FDASlideMenuViewController)!.leftViewController as? LeftMenuViewController)!
                     leftController.changeViewController(.studyList)
                     leftController.createLeftmenuItems()
                 }
             }
             else {
                 //switch to activty tab
-                (initialVC as! UITabBarController).selectedIndex =  0
+                (initialVC as? UITabBarController)!.selectedIndex =  0
             }
         }
         
@@ -718,7 +718,7 @@
                     notificationType =  userInfoDetails[kNotificationType] as? String
                 }
                 if Utilities.isValidValue(someObject: userInfoDetails[kNotificationSubType] as AnyObject) {
-                    notificationSubType = AppNotification.NotificationSubType(rawValue:userInfoDetails[kNotificationSubType] as! String)
+                    notificationSubType = AppNotification.NotificationSubType(rawValue: (userInfoDetails[kNotificationSubType] as? String)!)
                 }
                 
                 if notificationType == AppNotification.NotificationType.Study.rawValue { //Study Level Notification
@@ -739,12 +739,12 @@
                             Study.updateCurrentStudy(study: study!)
                         }
                         //fetch the visible view controller
-                        let navigationController =  (self.window?.rootViewController as! UINavigationController)
+                        let navigationController =  (self.window?.rootViewController as? UINavigationController)!
                         let menuVC = navigationController.viewControllers.last
                         if  menuVC is FDASlideMenuViewController {
-                            let mainController =  (menuVC as! FDASlideMenuViewController).mainViewController
+                            let mainController =  (menuVC as? FDASlideMenuViewController)!.mainViewController
                             if mainController is UINavigationController {
-                                let nav = (mainController as! UINavigationController)
+                                let nav = (mainController as? UINavigationController)!
                                 initialVC = nav.viewControllers.last
                                 
                             }
@@ -773,12 +773,12 @@
                             }else {
                                 //switch to activity tab
                                 
-                                (initialVC as! UITabBarController).selectedIndex =  (notificationSubType! as AppNotification.NotificationSubType == .Activity) ? 0 : 2
+                                (initialVC as? UITabBarController)!.selectedIndex =  (notificationSubType! as AppNotification.NotificationSubType == .Activity) ? 0 : 2
                             }
                             
                         case .Study,.studyEvent: // Study Notifications
                             
-                            let leftController = (menuVC as! FDASlideMenuViewController).leftViewController as! LeftMenuViewController
+                            let leftController = ((menuVC as? FDASlideMenuViewController)!.leftViewController as? LeftMenuViewController)!
                             
                             if !(initialVC is StudyListViewController) {
                                 
@@ -822,7 +822,7 @@
             
             let studyStoryBoard = UIStoryboard.init(name: kStudyStoryboard, bundle: Bundle.main)
             
-            let studyDashboard = studyStoryBoard.instantiateViewController(withIdentifier: kStudyDashboardTabbarControllerIdentifier) as! StudyDashboardTabbarViewController
+            let studyDashboard = (studyStoryBoard.instantiateViewController(withIdentifier: kStudyDashboardTabbarControllerIdentifier) as? StudyDashboardTabbarViewController)!
             
             studyDashboard.selectedIndex = selectedTab
             viewController.navigationController?.navigationBar.isHidden = true
@@ -870,7 +870,7 @@
                         }
                         
                         if topVC is UIAlertController { //topmost Visible Controller is AlertController
-                            alertVCPresented = topVC as! UIAlertController?
+                            alertVCPresented = (topVC as? UIAlertController)!
                             
                             if (parentController is ORKPasscodeViewController) == false{
                                 topVC?.dismiss(animated: true, completion: nil)
@@ -913,7 +913,7 @@
         
         func popToStudyListViewController() {
             
-            let navigationController =  (self.window?.rootViewController as! UINavigationController)
+            let navigationController =  (self.window?.rootViewController as? UINavigationController)!
             
             var topController:UIViewController = navigationController
             if navigationController.viewControllers.count > 0 {
@@ -953,7 +953,7 @@
             //Update Key & InitializationVector
             self.updateKeyAndInitializationVector()
             
-            let navigationController =  (self.window?.rootViewController as! UINavigationController)
+            let navigationController =  (self.window?.rootViewController as? UINavigationController)!
             
             if navigationController.viewControllers.count > 0 {
                 let slideMenuController = navigationController.viewControllers.last as? FDASlideMenuViewController
@@ -989,11 +989,11 @@
             ud.set(false, forKey: kShowNotification)
             ud.synchronize()
             
-            let navigationController =  (self.window?.rootViewController as! UINavigationController)
+            let navigationController =  (self.window?.rootViewController as? UINavigationController)!
             
             //fetch the visible view controller
             if navigationController.viewControllers.count > 0 {
-                let slideMenuController = navigationController.viewControllers.last as? FDASlideMenuViewController
+                let slideMenuController = (navigationController.viewControllers.last as? FDASlideMenuViewController)!
                 
                 //Remove  progress
                 self.addAndRemoveProgress(add: false)
@@ -1004,7 +1004,7 @@
                     ud.removeObject(forKey: kUserId)
                     ud.synchronize()
                     
-                    let leftController = slideMenuController?.leftViewController as! LeftMenuViewController
+                    let leftController = (slideMenuController.leftViewController as? LeftMenuViewController)!
                     leftController.changeViewController(.reachOut_signIn)
                     leftController.createLeftmenuItems()
                 }
@@ -1018,17 +1018,17 @@
             ud.synchronize()
             var nav:UINavigationController?
             //fetch the visible view controller
-            let navigationController =  (self.window?.rootViewController as! UINavigationController)
+            let navigationController =  (self.window?.rootViewController as? UINavigationController)!
             let menuVC = navigationController.viewControllers.last
             
             if  menuVC is FDASlideMenuViewController {
-                let mainController =  (menuVC as! FDASlideMenuViewController).mainViewController
+                let mainController =  (menuVC as? FDASlideMenuViewController)!.mainViewController
                 
                 if mainController is UINavigationController {
-                    nav = (mainController as! UINavigationController)
+                    nav = (mainController as? UINavigationController)!
                     let studyListVC = nav?.viewControllers.last
                     if studyListVC is StudyListViewController {
-                        (studyListVC as! StudyListViewController).addRightNavigationItem()
+                        (studyListVC as? StudyListViewController)!.addRightNavigationItem()
                         
                     }
                 }
@@ -1052,20 +1052,20 @@
                     
                     //fetch the visible view controller
                     var nav:UINavigationController?
-                    let navigationController =  (self.window?.rootViewController as! UINavigationController)
+                    let navigationController =  (self.window?.rootViewController as? UINavigationController)!
                     let menuVC = navigationController.viewControllers.last
                     
                     if  menuVC is FDASlideMenuViewController {
-                        let mainController =  (menuVC as! FDASlideMenuViewController).mainViewController
+                        let mainController =  (menuVC as? FDASlideMenuViewController)!.mainViewController
                         
                         if mainController is UINavigationController {
-                            nav = (mainController as! UINavigationController)
+                            nav = (mainController as? UINavigationController)!
                             let tabbarVC = nav?.viewControllers.last
                             
                             if tabbarVC is StudyDashboardTabbarViewController {
-                                let studyTabBar = tabbarVC as! StudyDashboardTabbarViewController
+                                let studyTabBar = (tabbarVC as? StudyDashboardTabbarViewController)!
                                 //Storing selected tabbar controller
-                                selectedController = ((studyTabBar.viewControllers?[studyTabBar.selectedIndex]) as! UINavigationController).viewControllers.last
+                                selectedController = ((studyTabBar.viewControllers?[studyTabBar.selectedIndex]) as? UINavigationController)!.viewControllers.last
                             }
                         }
                     }
@@ -1101,10 +1101,10 @@
                             }
                             
                             if self.selectedController is ActivitiesViewController {
-                                (self.selectedController as! ActivitiesViewController).checkForActivitiesUpdates()
+                                (self.selectedController as? ActivitiesViewController)!.checkForActivitiesUpdates()
                                 
                             }else if self.selectedController is ResourcesViewController {
-                                (self.selectedController as! ResourcesViewController).checkForResourceUpdate()
+                                (self.selectedController as? ResourcesViewController)!.checkForResourceUpdate()
                             }
                         }
                     }
@@ -1126,13 +1126,13 @@
         func popViewControllerAfterConsentDisagree() {
             
             if self.selectedController is StudyDashboardViewController {
-                (self.selectedController as! StudyDashboardViewController).homeButtonAction(UIButton())
+                (self.selectedController as? StudyDashboardViewController)!.homeButtonAction(UIButton())
                 
             }else if self.selectedController is ActivitiesViewController {
-                (self.selectedController as! ActivitiesViewController).homeButtonAction(UIButton())
+                (self.selectedController as? ActivitiesViewController)!.homeButtonAction(UIButton())
                 
             }else if self.selectedController is ResourcesViewController {
-                (self.selectedController as! ResourcesViewController).homeButtonAction(UIButton())
+                (self.selectedController as? ResourcesViewController)!.homeButtonAction(UIButton())
             }
         }
         
@@ -1174,15 +1174,15 @@
             if requestName as String == WCPMethods.appUpdates.method.methodName {
                 
                 let appVersion = Utilities.getAppVersion()
-                if appVersion != response?[kCurrentVersion] as! String {
+                if appVersion != (response?[kCurrentVersion] as? String)! {
                     
-                    if response?[kForceUpdate] as! Bool {
+                    if (response?[kForceUpdate] as? Bool)! {
                         
                         self.shouldAddForceUpgradeScreen = true
                         
-                        let version = response?[kCurrentVersion] as! String
+                        let version = (response?[kCurrentVersion] as? String)!
                         
-                        blockerScreen = AppUpdateBlocker.instanceFromNib(frame:(UIApplication.shared.keyWindow?.bounds)!, detail: response as! Dictionary<String, Any>);
+                        blockerScreen = AppUpdateBlocker.instanceFromNib(frame:(UIApplication.shared.keyWindow?.bounds)!, detail: (response as? Dictionary<String, Any>)!);
                         
                         blockerScreen?.labelVersionNumber.text = "V-" + version
                         blockerScreen?.labelMessage.text = response?[kMessage] as? String
@@ -1198,7 +1198,7 @@
                             UIApplication.shared.keyWindow?.addSubview(blockerScreen!)
                         }
                     }else {
-                        UIUtilities.showAlertWithMessage(alertMessage: response?[kMessage] as! String);
+                        UIUtilities.showAlertWithMessage(alertMessage: (response?[kMessage] as? String)!);
                     }
                 }
             }else if requestName as String == WCPMethods.eligibilityConsent.method.methodName {
@@ -1431,7 +1431,7 @@
                     
                     let gatewayStoryboard = UIStoryboard(name: kFetalKickCounterStep, bundle: nil)
                     
-                    let ttController = gatewayStoryboard.instantiateViewController(withIdentifier: kEligibilityStepViewControllerIdentifier) as! EligibilityStepViewController
+                    let ttController = (gatewayStoryboard.instantiateViewController(withIdentifier: kEligibilityStepViewControllerIdentifier) as? EligibilityStepViewController)!
                     ttController.descriptionText = step.text
                     ttController.step = step
                     
@@ -1444,7 +1444,7 @@
                     
                     totalResults = totalResults?.filter({$0.identifier == kReviewTitle})
                     
-                    reviewStep = totalResults?.first as! ORKStepResult?
+                    reviewStep = (totalResults?.first as? ORKStepResult)!
                     
                     if (reviewStep?.identifier)! == kReviewTitle && (reviewStep?.results?.count)! > 0 {
                         let consentSignatureResult:ORKConsentSignatureResult? = reviewStep?.results?.first as? ORKConsentSignatureResult
@@ -1459,12 +1459,12 @@
                         }else { //Consented
                             
                             //Copying consent document
-                            let documentCopy:ORKConsentDocument = (ConsentBuilder.currentConsent?.consentDocument)!.copy() as! ORKConsentDocument
+                            let documentCopy:ORKConsentDocument = ((ConsentBuilder.currentConsent?.consentDocument)!.copy() as? ORKConsentDocument)!
                             
                             consentSignatureResult?.apply(to: documentCopy)
                             //instantiating ConsentSharePdfStep
                             let gatewayStoryboard = UIStoryboard(name: kFetalKickCounterStep, bundle: nil)
-                            let ttController = gatewayStoryboard.instantiateViewController(withIdentifier: kConsentSharePdfStoryboardId) as! ConsentSharePdfStepViewController
+                            let ttController = (gatewayStoryboard.instantiateViewController(withIdentifier: kConsentSharePdfStoryboardId) as? ConsentSharePdfStepViewController)!
                             ttController.step = step
                             ttController.consentDocument =  documentCopy
                             return ttController
@@ -1483,7 +1483,7 @@
                     if (result?.didTapOnViewPdf)!{
                         let gatewayStoryboard = UIStoryboard(name: kFetalKickCounterStep, bundle: nil)
                         
-                        let ttController = gatewayStoryboard.instantiateViewController(withIdentifier: kConsentViewPdfStoryboardId) as! ConsentPdfViewerStepViewController
+                        let ttController = (gatewayStoryboard.instantiateViewController(withIdentifier: kConsentViewPdfStoryboardId) as? ConsentPdfViewerStepViewController)!
                         ttController.step = step
                         //Pdf data is passed to Viewer for display
                         ttController.pdfData = result?.pdfData
@@ -1512,12 +1512,12 @@
                             while  i < (taskViewController.result.results?.count)! {
                                 
                                 
-                                let textChoiceResult:ORKChoiceQuestionResult = ((taskViewController.result.results?[i] as! ORKStepResult).results?.first) as! ORKChoiceQuestionResult
+                                let textChoiceResult:ORKChoiceQuestionResult = (((taskViewController.result.results?[i] as? ORKStepResult)!.results?.first) as? ORKChoiceQuestionResult)!
                                 
                                 let correctAnswerDict:Dictionary<String,Any>? = ConsentBuilder.currentConsent?.comprehension?.correctAnswers?[j]
                                 let answerArray:[String] = (correctAnswerDict?[kConsentComprehensionAnswer] as? [String])!
-                                let evaluationType:Evaluation? = Evaluation(rawValue: correctAnswerDict?[kConsentComprehensionEvaluation] as! String)
-                                let answeredSet = Set(textChoiceResult.choiceAnswers! as! [String])
+                                let evaluationType:Evaluation? = Evaluation(rawValue: (correctAnswerDict?[kConsentComprehensionEvaluation] as? String)!)
+                                let answeredSet = Set((textChoiceResult.choiceAnswers! as? [String])!)
                                 
                                 let correctAnswerSet = Set(answerArray)
                                 //Evaluation Type
@@ -1573,7 +1573,7 @@
                         
                         let result = (shareStep?.results?.first as? ORKChoiceQuestionResult)
                         
-                        if (result?.choiceAnswers?.first as! Bool) == true { //User agreed to share
+                        if (result?.choiceAnswers?.first as? Bool)! == true { //User agreed to share
                             return nil
                             
                         }else { //User disagreed to share
@@ -1730,7 +1730,7 @@
             
             if (UIApplication.shared.applicationState == UIApplicationState.background || (UIApplication.shared.applicationState == UIApplicationState.inactive)) {
                 
-                self.handleLocalAndRemoteNotification(userInfoDetails: userInfo as! Dictionary<String, Any>)
+                self.handleLocalAndRemoteNotification(userInfoDetails: (userInfo as? Dictionary<String, Any>)!)
             }
             
             //UserInfo is valid & contains Type for Notification
@@ -1739,7 +1739,7 @@
                 
             }else {
                 if (UIApplication.shared.applicationState == UIApplicationState.background || (UIApplication.shared.applicationState == UIApplicationState.inactive)) {
-                    self.handleLocalNotification(userInfoDetails: userInfo as! Dictionary<String, Any>)
+                    self.handleLocalNotification(userInfoDetails: (userInfo as? Dictionary<String, Any>)!)
                 }
             }
         }
@@ -1756,7 +1756,7 @@
             
             let url = Bundle.main.url(forResource: kResourceName, withExtension: "gif")!
             let data = try! Data(contentsOf: url)
-            let webView =  view?.subviews.first as! UIWebView
+            let webView =  (view?.subviews.first as? UIWebView)!
             
             webView.loadRequest(URLRequest.init(url: url))
             webView.scalesPageToFit = true
@@ -1786,7 +1786,7 @@
                 
                 let url = Bundle.main.url(forResource: kResourceName, withExtension: "gif")!
                 let data = try! Data(contentsOf: url)
-                let webView =  view?.subviews.first as! UIWebView
+                let webView =  (view?.subviews.first as? UIWebView)!
                 
                 webView.loadRequest(URLRequest.init(url: url))
                 webView.scalesPageToFit = true

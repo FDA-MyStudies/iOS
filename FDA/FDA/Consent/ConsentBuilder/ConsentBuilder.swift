@@ -163,12 +163,12 @@ class ConsentBuilder{
             
             if Utilities.isValidValue(someObject: metaDataDict[kConsentVersion] as AnyObject?){
                 
-                self.version =  metaDataDict[kConsentVersion] as! String?
+                self.version =  (metaDataDict[kConsentVersion] as? String)!
             }
             else{
                 self.version = "No_Version"
             }
-            let visualConsentArray = metaDataDict[kConsentVisualScreens] as! Array<Dictionary<String,Any>>
+            let visualConsentArray = (metaDataDict[kConsentVisualScreens] as? Array<Dictionary<String,Any>>)!
             
             if  Utilities.isValidObject(someObject: visualConsentArray as AnyObject?){
                 for sectionDict in visualConsentArray{
@@ -185,20 +185,20 @@ class ConsentBuilder{
                 
             }
             
-            let consentSharingDict = metaDataDict[kConsentSharing] as! Dictionary<String,Any>
+            let consentSharingDict = (metaDataDict[kConsentSharing] as? Dictionary<String,Any>)!
             
             if  Utilities.isValidObject(someObject: consentSharingDict as AnyObject?){
                 self.sharingConsent?.initWithSharingDict(dict: consentSharingDict)
                 
             }
-            let reviewConsentDict = metaDataDict[kConsentReview] as! Dictionary<String,Any>
+            let reviewConsentDict = (metaDataDict[kConsentReview] as? Dictionary<String,Any>)!
             
             if  Utilities.isValidObject(someObject: reviewConsentDict as AnyObject?){
                 self.reviewConsent?.initWithReviewDict(dict: reviewConsentDict)
                 
             }
             
-            let comprehensionDict = metaDataDict[kConsentComprehension] as! Dictionary<String,Any>
+            let comprehensionDict = (metaDataDict[kConsentComprehension] as? Dictionary<String,Any>)!
             
             if  Utilities.isValidObject(someObject: comprehensionDict as AnyObject?){
                 self.comprehension?.initWithComprehension(dict: comprehensionDict)

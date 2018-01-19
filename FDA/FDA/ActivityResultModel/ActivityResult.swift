@@ -74,7 +74,7 @@ class ActivityResult {
                     
                 }
                 
-                activityStepResult?.initWithORKStepResult(stepResult: stepResult as! ORKStepResult , activityType:(self.activity?.type)!)
+                activityStepResult?.initWithORKStepResult(stepResult: (stepResult as? ORKStepResult)! , activityType:(self.activity?.type)!)
                 
                 //Completion steps results and Instruction step results are ignored
                 if stepResult.identifier != "CompletionStep"

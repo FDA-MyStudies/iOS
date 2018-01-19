@@ -67,8 +67,8 @@ class ActivityFormStep: ActivityStep {
             if self.repeatable == true {
                 
                 step  = RepeatableFormStep(identifier: key!, title:(self.title == nil ? "" : self.title!), text: text!)
-                (step as! RepeatableFormStep).repeatable = true
-                (step as! RepeatableFormStep).repeatableText = self.repeatableText
+                (step as? RepeatableFormStep)!.repeatable = true
+                (step as? RepeatableFormStep)!.repeatableText = self.repeatableText
                 
             }else {
                 step = ORKFormStep(identifier: key!, title: (self.title == nil ? "" : self.title!), text: text!)
@@ -103,7 +103,7 @@ class ActivityFormStep: ActivityStep {
             }
             
             if self.repeatable == true {
-                (step as! RepeatableFormStep).initialItemCount = formItemsArray.count
+                (step as? RepeatableFormStep)!.initialItemCount = formItemsArray.count
             }
             
             step?.formItems = formItemsArray

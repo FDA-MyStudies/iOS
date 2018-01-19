@@ -182,48 +182,48 @@ class Activity{
         if Utilities.isValidObject(someObject: infoDict as AnyObject?) {
             
             if Utilities.isValidValue(someObject: infoDict[kActivityId] as AnyObject) {
-                self.actvityId = infoDict[kActivityId] as! String?
+                self.actvityId = (infoDict[kActivityId] as? String)!
             }
             
              if Utilities.isValidValue(someObject: infoDict[kActivityVersion] as AnyObject) {
-                 self.version = infoDict[kActivityVersion] as! String?
+                 self.version = (infoDict[kActivityVersion] as? String)!
              }
             
             
             if Utilities.isValidValue(someObject: infoDict[kActivityTitle] as AnyObject) {
-                self.name = infoDict[kActivityTitle] as! String?
+                self.name = (infoDict[kActivityTitle] as? String)!
             }
             if Utilities.isValidValue(someObject: infoDict["state"] as AnyObject) {
-                self.state = infoDict["state"] as! String?
+                self.state = (infoDict["state"] as? String)!
             }
             if Utilities.isValidValue(someObject: infoDict[kActivityBranching] as AnyObject ) {
-                self.branching = infoDict[kActivityBranching] as? Bool
+                self.branching = (infoDict[kActivityBranching] as? Bool)!
             }
             if Utilities.isValidValue(someObject: infoDict[kActivityType] as AnyObject) {
-                self.type = ActivityType(rawValue: infoDict[kActivityType] as! String)
+                self.type = ActivityType(rawValue: (infoDict[kActivityType] as? String)!)
             }
             
             if Utilities.isValidValue(someObject: infoDict[kActivityStartTime] as AnyObject) {
-                 self.startDate =  Utilities.getDateFromStringWithOutTimezone(dateString: (infoDict[kActivityStartTime] as! String?)!)
+                 self.startDate =  Utilities.getDateFromStringWithOutTimezone(dateString: (infoDict[kActivityStartTime] as? String)!)
             }
             else {
                 self.startDate = Date()
             }
             
             if Utilities.isValidValue(someObject: infoDict[kActivityEndTime] as AnyObject ){
-                self.endDate =  Utilities.getDateFromStringWithOutTimezone(dateString: (infoDict[kActivityEndTime] as! String?)!)
+                self.endDate =  Utilities.getDateFromStringWithOutTimezone(dateString: (infoDict[kActivityEndTime] as? String)!)
             }
             
             if Utilities.isValidObject(someObject: infoDict[kActivityFrequency] as AnyObject?){
              
-                let frequencyDict:Dictionary = infoDict[kActivityFrequency] as! Dictionary<String, Any>
+                let frequencyDict:Dictionary = (infoDict[kActivityFrequency] as? Dictionary<String, Any>)!
                 
                 if Utilities.isValidObject(someObject: frequencyDict[kActivityFrequencyRuns] as AnyObject ){
                     self.frequencyRuns =  frequencyDict[kActivityFrequencyRuns] as? Array<Dictionary<String,Any>>
                 }
                 
                 if Utilities.isValidValue(someObject: frequencyDict[kActivityFrequencyType] as AnyObject ){
-                    self.frequencyType =  Frequency(rawValue:frequencyDict[kActivityFrequencyType] as! String )!
+                    self.frequencyType =  Frequency(rawValue:(frequencyDict[kActivityFrequencyType] as? String)! )!
                 }
                 
             }
@@ -236,7 +236,7 @@ class Activity{
             }
           
           if Utilities.isValidValue(someObject: infoDict[kActivityTaskSubType] as AnyObject ){
-            self.taskSubType =  infoDict[kActivityTaskSubType] as! String
+            self.taskSubType =  (infoDict[kActivityTaskSubType] as? String)!
           }
           
             self.calculateActivityRuns(studyId: self.studyId!)
@@ -258,10 +258,10 @@ class Activity{
                 self.type? =  ActivityType(rawValue:(activityDict[kActivityType] as? String)!)!
                
             }
-            self.setInfo(infoDict: activityDict[kActivityInfoMetaData] as! Dictionary<String,Any>)
+            self.setInfo(infoDict: (activityDict[kActivityInfoMetaData] as? Dictionary<String,Any>)!)
             
             if Utilities.isValidObject(someObject: activityDict[kActivitySteps] as AnyObject?){
-                 self.setStepArray(stepArray:activityDict[kActivitySteps] as! Array )
+                 self.setStepArray(stepArray:(activityDict[kActivitySteps] as? Array)! )
             }
             else{
                 Logger.sharedInstance.debug("infoDict is null:\(String(describing: activityDict[kActivitySteps]))")

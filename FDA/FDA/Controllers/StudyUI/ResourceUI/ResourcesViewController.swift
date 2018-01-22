@@ -59,7 +59,7 @@ class ResourcesViewController : UIViewController{
         
         
         if StudyUpdates.studyConsentUpdated {
-            let appDelegate = UIApplication.shared.delegate as! AppDelegate
+            let appDelegate = (UIApplication.shared.delegate as? AppDelegate)!
              appDelegate.checkConsentStatus(controller: self)
         }
         
@@ -136,8 +136,8 @@ class ResourcesViewController : UIViewController{
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "ResourceDetailViewControllerIdentifier"{
             
-            let resourceDetail = segue.destination as! ResourcesDetailViewController
-            resourceDetail.resource = sender as! Resource
+            let resourceDetail = (segue.destination as? ResourcesDetailViewController)!
+            resourceDetail.resource = (sender as? Resource)!
             if self.resourceLink != nil{
                 resourceDetail.requestLink = self.resourceLink!
             }
@@ -149,8 +149,8 @@ class ResourcesViewController : UIViewController{
         }
         else if segue.identifier == "ResourceDetailViewSegueIdentifier"{
             
-            let resourceDetail = segue.destination as! ResourcesDetailViewControllerCopy
-            resourceDetail.resource = sender as! Resource
+            let resourceDetail = (segue.destination as? ResourcesDetailViewControllerCopy)!
+            resourceDetail.resource = (sender as? Resource)!
             if self.resourceLink != nil{
                 resourceDetail.requestLink = self.resourceLink!
             }
@@ -408,7 +408,7 @@ class ResourcesViewController : UIViewController{
     func navigateToStudyHome(){
         
         let studyStoryBoard = UIStoryboard.init(name: kStudyStoryboard, bundle: Bundle.main)
-        let studyHomeController = studyStoryBoard.instantiateViewController(withIdentifier: String(describing: StudyHomeViewController.classForCoder())) as! StudyHomeViewController
+        let studyHomeController = (studyStoryBoard.instantiateViewController(withIdentifier: String(describing: StudyHomeViewController.classForCoder())) as? StudyHomeViewController)!
         studyHomeController.hideViewConsentAfterJoining = true
         
         studyHomeController.hidesBottomBarWhenPushed = true
@@ -420,8 +420,8 @@ class ResourcesViewController : UIViewController{
     func navigateToWebView(link:String?,htmlText:String?,pdfData:Data?){
         
         let loginStoryboard = UIStoryboard.init(name: "Main", bundle:Bundle.main)
-        let webViewController = loginStoryboard.instantiateViewController(withIdentifier:"WebViewController") as! UINavigationController
-        let webView = webViewController.viewControllers[0] as! WebViewController
+        let webViewController = (loginStoryboard.instantiateViewController(withIdentifier:"WebViewController") as? UINavigationController)!
+        let webView = (webViewController.viewControllers[0] as? WebViewController)!
         webView.isEmailAvailable = true
         
         if pdfData != nil {
@@ -560,7 +560,7 @@ extension ResourcesViewController : UITableViewDataSource {
         
         let resource = (tableViewRowDetails?[indexPath.row])!
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: kResourcesTableViewCell, for: indexPath) as! ResourcesTableViewCell
+        let cell = (tableView.dequeueReusableCell(withIdentifier: kResourcesTableViewCell, for: indexPath) as? ResourcesTableViewCell)!
         
         //Cell Data Setup
         
@@ -579,7 +579,7 @@ extension ResourcesViewController : UITableViewDataSource {
         else{
             // default cells
             
-            cell.populateCellData(data:resource as! String)
+            cell.populateCellData(data:(resource as? String)!)
         }
         
        
@@ -606,15 +606,15 @@ extension ResourcesViewController : UITableViewDelegate{
             self.performSegue(withIdentifier:"ResourceDetailViewSegueIdentifier" , sender: resource)
         }
         else{
-            if resource as! String == "Leave Study" {
+            if (resource as? String)! == "Leave Study" {
                 self.handleLeaveStudy()
             }
-            else if  resource as! String == "About the Study"{
+            else if  (resource as? String)! == "About the Study"{
                 
                 self.checkDatabaseForStudyInfo(study: Study.currentStudy!)
                 
             }
-            else if  resource as! String == "Consent PDF"{
+            else if  (resource as? String)! == "Consent PDF"{
                 
                 //PENDING
                 
@@ -725,7 +725,7 @@ extension ResourcesViewController:NMWebServiceDelegate {
         else if requestName as String == RegistrationMethods.consentPDF.method.methodName{
             
             self.removeProgressIndicator()
-            let consentDict:Dictionary<String,Any> = (response as! Dictionary<String,Any>)[kConsentPdfKey] as! Dictionary<String, Any>
+            let consentDict:Dictionary<String,Any> = ((response as? Dictionary<String,Any>)![kConsentPdfKey] as? Dictionary<String, Any>)!
             
             if Utilities.isValidObject(someObject:consentDict as AnyObject? ){
                 
@@ -743,7 +743,7 @@ extension ResourcesViewController:NMWebServiceDelegate {
  */
                 
                 if Utilities.isValidValue(someObject: consentDict[kConsentPdfContent] as AnyObject?){
-                    self.saveConsentPdfToLocal(base64dataString: consentDict[kConsentPdfContent] as! String )
+                    self.saveConsentPdfToLocal(base64dataString: (consentDict[kConsentPdfContent] as? String)! )
                 }
                 
                 

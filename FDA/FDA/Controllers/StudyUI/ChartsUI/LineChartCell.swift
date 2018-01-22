@@ -285,7 +285,7 @@ class LineChartCell: GraphChartTableViewCell {
         
         
         
-        (self.graphView as! ORKLineGraphChartView).dataSource = self
+        (self.graphView as? ORKLineGraphChartView)!.dataSource = self
     }
     
     @IBAction func buttonForwardAction(_ sender:UIButton){
@@ -373,8 +373,8 @@ class LineChartCell: GraphChartTableViewCell {
                 
                 let firstFrequency = frequencySet.first
                 let lastFrequency = frequencySet.last
-                let sTime = firstFrequency?["startTime"] as! String
-                let eTime = lastFrequency?["endTime"] as! String
+                let sTime = (firstFrequency?["startTime"] as? String)!
+                let eTime = (lastFrequency?["endTime"] as? String)!
                 
                 let startDate = Utilities.getDateFromString(dateString: sTime)
                 let endDate = Utilities.getDateFromString(dateString: eTime)
@@ -508,8 +508,8 @@ class LineChartCell: GraphChartTableViewCell {
                 
                 let firstFrequency = frequencySet.first
                 let lastFrequency = frequencySet.last
-                let sTime = firstFrequency?["startTime"] as! String
-                let eTime = lastFrequency?["endTime"] as! String
+                let sTime = (firstFrequency?["startTime"] as? String)!
+                let eTime = (lastFrequency?["endTime"] as? String)!
                 
                 let startDate = Utilities.getDateFromString(dateString: sTime)
                 let endDate = Utilities.getDateFromString(dateString: eTime)
@@ -772,8 +772,8 @@ class LineChartCell: GraphChartTableViewCell {
                 points.append(ORKValueRange())
                 
                 let frequency = charActivity?.frequencyRuns?[i]
-                let runStartTime = LineChartCell.dailyFormatter.date(from: frequency?["startTime"] as! String)
-                let endTime = LineChartCell.dailyFormatter.date(from: frequency?["endTime"] as! String)
+                let runStartTime = LineChartCell.dailyFormatter.date(from: (frequency?["startTime"] as? String)!)
+                let endTime = LineChartCell.dailyFormatter.date(from: (frequency?["endTime"] as? String)!)
                 
                 if dataList.count > 0{
                     for j in 0...dataList.count-1 {
@@ -846,7 +846,7 @@ class LineChartCell: GraphChartTableViewCell {
     func replaceXTitleForActiveTask(value:Int,atIndex:Int){
         
         if charActivity?.type == .activeTask {
-            var title = xAxisTitles[atIndex] as! String
+            var title = (xAxisTitles[atIndex] as? String)!
             title = title + "\n" + "\(value)"
             xAxisTitles[atIndex] = title
         }

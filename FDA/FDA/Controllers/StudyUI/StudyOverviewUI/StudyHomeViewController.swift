@@ -108,7 +108,7 @@ class StudyHomeViewController : UIViewController{
         }
         
         //ConsentToken will be used in case of ineligibility
-        let appdelegate = UIApplication.shared.delegate as! AppDelegate
+        let appdelegate = (UIApplication.shared.delegate as? AppDelegate)!
         appdelegate.consentToken = ""
         
         
@@ -186,7 +186,7 @@ class StudyHomeViewController : UIViewController{
             //let overviewList = response[kOverViewInfo] as! Array<Dictionary<String,Any>>
             var listOfOverviews:Array<OverviewSection> = []
             for overview in arrayContent! {
-                let overviewObj = OverviewSection(detail: overview as! Dictionary<String, Any>)
+                let overviewObj = OverviewSection(detail: (overview as? Dictionary<String, Any>)!)
                 listOfOverviews.append(overviewObj)
             }
             
@@ -273,7 +273,7 @@ class StudyHomeViewController : UIViewController{
                             
                             let correctAnswerDict = correctAnswerArray?.first
                             
-                            let choiceA:Bool! = (correctAnswerDict?[kEligibilityCorrectAnswer] as! Bool)
+                            let choiceA:Bool! = (correctAnswerDict?[kEligibilityCorrectAnswer] as? Bool)!
                             var predicateQuestionChoiceA:NSPredicate = NSPredicate()
                             predicateQuestionChoiceA = ORKResultPredicate.predicateForBooleanQuestionResult(with: resultSelector!, expectedAnswer: choiceA)
                             let inverseChoiceB = (correctAnswerDict?[kEligibilityCorrectAnswer] as? Bool) == true ? false : true
@@ -309,7 +309,7 @@ class StudyHomeViewController : UIViewController{
                                 
                                 let  directRule:ORKDirectStepNavigationRule!
                                 directRule = ORKDirectStepNavigationRule(destinationStepIdentifier: kEligibilityVerifiedScreen)
-                                (orkOrderedTask as! ORKNavigableOrderedTask).setNavigationRule(directRule!, forTriggerStepIdentifier:orkstep.identifier)
+                                (orkOrderedTask as? ORKNavigableOrderedTask)!.setNavigationRule(directRule!, forTriggerStepIdentifier:orkstep.identifier)
                             }else {
                                 // do nothing assuming that next step is some question step
                             }
@@ -322,7 +322,7 @@ class StudyHomeViewController : UIViewController{
                         print("choices in eligibility \(choicePredicate) ")
                         predicateRule = ORKPredicateStepNavigationRule(resultPredicates: choicePredicate, destinationStepIdentifiers: destination!, defaultStepIdentifier: defaultStepIdentifier, validateArrays: true)
                         
-                        (orkOrderedTask as! ORKNavigableOrderedTask).setNavigationRule(predicateRule!, forTriggerStepIdentifier:orkstep.identifier)
+                        (orkOrderedTask as? ORKNavigableOrderedTask)!.setNavigationRule(predicateRule!, forTriggerStepIdentifier:orkstep.identifier)
                         
                     }
                 }
@@ -333,10 +333,10 @@ class StudyHomeViewController : UIViewController{
         if (orkOrderedTask is ORKNavigableOrderedTask) {
             
             if self.consentRestorationData != nil {
-                taskViewController = ORKTaskViewController(task: (orkOrderedTask as! ORKNavigableOrderedTask), restorationData: self.consentRestorationData, delegate: self)
+                taskViewController = ORKTaskViewController(task: (orkOrderedTask as? ORKNavigableOrderedTask)!, restorationData: self.consentRestorationData, delegate: self)
                 
             }else {
-                taskViewController = ORKTaskViewController(task:(orkOrderedTask as! ORKNavigableOrderedTask), taskRun: nil)
+                taskViewController = ORKTaskViewController(task:(orkOrderedTask as? ORKNavigableOrderedTask)!, taskRun: nil)
                  taskViewController?.outputDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
             }
         }else {
@@ -396,7 +396,7 @@ class StudyHomeViewController : UIViewController{
      This Method is used to push screen back to Studydashboard tabbar controller
      */
     func pushToStudyDashboard(){
-        let studyDashboard = self.storyboard?.instantiateViewController(withIdentifier: kStudyDashboardTabbarControllerIdentifier) as! StudyDashboardTabbarViewController
+        let studyDashboard = (self.storyboard?.instantiateViewController(withIdentifier: kStudyDashboardTabbarControllerIdentifier) as? StudyDashboardTabbarViewController)!
         self.navigationController?.pushViewController(studyDashboard, animated: true)
     }
     
@@ -449,7 +449,7 @@ class StudyHomeViewController : UIViewController{
             // leftController.changeViewController(.reachOut_signIn)
             
             let loginStoryBoard = UIStoryboard(name: kLoginStoryboardIdentifier, bundle: nil)
-            let signInController = loginStoryBoard.instantiateViewController(withIdentifier:  String(describing: SignInViewController.classForCoder())) as! SignInViewController
+            let signInController = (loginStoryBoard.instantiateViewController(withIdentifier:  String(describing: SignInViewController.classForCoder())) as? SignInViewController)!
             signInController.viewLoadFrom = .joinStudy
             self.navigationController?.pushViewController(signInController, animated: true)
             
@@ -506,7 +506,7 @@ class StudyHomeViewController : UIViewController{
      */
     @IBAction func starButtonAction(_ sender: Any) {
         
-        let button = sender as! UIButton
+        let button = (sender as? UIButton)!
         var userStudyStatus:UserStudyStatus!
         let study = Study.currentStudy
         let user = User.currentUser
@@ -629,8 +629,8 @@ class StudyHomeViewController : UIViewController{
     func navigateToWebView(link:String?,htmlText:String?, isEmailAvailable:Bool?){
         
         let loginStoryboard = UIStoryboard.init(name: "Main", bundle:Bundle.main)
-        let webViewController = loginStoryboard.instantiateViewController(withIdentifier:"WebViewController") as! UINavigationController
-        let webView = webViewController.viewControllers[0] as! WebViewController
+        let webViewController = (loginStoryboard.instantiateViewController(withIdentifier:"WebViewController") as? UINavigationController)!
+        let webView = (webViewController.viewControllers[0] as? WebViewController)!
         webView.isEmailAvailable = isEmailAvailable!
         
         if link != nil {
@@ -742,9 +742,9 @@ extension StudyHomeViewController:NMWebServiceDelegate {
             
             
             if Utilities.isValidObject(someObject: response){
-                let tokenDict = response?["data"] as! Dictionary<String,Any>
+                let tokenDict = (response?["data"] as? Dictionary<String,Any>)!
                 if Utilities.isValidObject(someObject: tokenDict as AnyObject?){
-                    let apptoken = tokenDict["appToken"] as! String
+                    let apptoken = (tokenDict["appToken"] as? String)!
                    
                     //update token
                     let currentUserStudyStatus =  User.currentUser.updateStudyStatus(studyId:(Study.currentStudy?.studyId)!  , status: .inProgress)
@@ -875,7 +875,7 @@ extension StudyHomeViewController:ORKTaskViewControllerDelegate{
         
         let lastStepResultIdentifier:String?
         
-        lastStepResultIdentifier = (taskViewController.result.results?.last as! ORKStepResult).identifier
+        lastStepResultIdentifier = (taskViewController.result.results?.last as? ORKStepResult)!.identifier
         
         if  taskViewController.task?.identifier == kEligibilityConsentTask && reason == ORKTaskViewControllerFinishReason.completed && lastStepResultIdentifier != kInEligibilityStep{
             
@@ -898,7 +898,7 @@ extension StudyHomeViewController:ORKTaskViewControllerDelegate{
             //restoring token in case of ineligibility
             if (ConsentBuilder.currentConsent?.consentResult?.token) == nil ||  (ConsentBuilder.currentConsent?.consentResult?.token)?.isEmpty == true{
                 
-                let appdelegate = UIApplication.shared.delegate as! AppDelegate
+                let appdelegate = (UIApplication.shared.delegate as? AppDelegate)!
                 ConsentBuilder.currentConsent?.consentResult?.token = appdelegate.consentToken
             }
             
@@ -1047,7 +1047,7 @@ extension StudyHomeViewController:ORKTaskViewControllerDelegate{
             
             let gatewayStoryboard = UIStoryboard(name: kFetalKickCounterStep, bundle: nil)
             
-            let ttController = gatewayStoryboard.instantiateViewController(withIdentifier: kEligibilityStepViewControllerIdentifier) as! EligibilityStepViewController
+            let ttController = (gatewayStoryboard.instantiateViewController(withIdentifier: kEligibilityStepViewControllerIdentifier) as? EligibilityStepViewController)!
             
             ttController.descriptionText = step.text
             ttController.step = step
@@ -1077,13 +1077,13 @@ extension StudyHomeViewController:ORKTaskViewControllerDelegate{
                 }
                 else{
                     
-                    let documentCopy:ORKConsentDocument = (ConsentBuilder.currentConsent?.consentDocument)!.copy() as! ORKConsentDocument
+                    let documentCopy:ORKConsentDocument = ((ConsentBuilder.currentConsent?.consentDocument)!.copy() as? ORKConsentDocument)!
                     
                     consentSignatureResult?.apply(to: documentCopy)
                     
                     let gatewayStoryboard = UIStoryboard(name: kFetalKickCounterStep, bundle: nil)
                     
-                    let ttController = gatewayStoryboard.instantiateViewController(withIdentifier: kConsentSharePdfStoryboardId) as! ConsentSharePdfStepViewController
+                    let ttController = (gatewayStoryboard.instantiateViewController(withIdentifier: kConsentSharePdfStoryboardId) as? ConsentSharePdfStepViewController)!
                     ttController.step = step
                     
                     ttController.consentDocument =  documentCopy
@@ -1105,7 +1105,7 @@ extension StudyHomeViewController:ORKTaskViewControllerDelegate{
             if (result?.didTapOnViewPdf)!{
                 let gatewayStoryboard = UIStoryboard(name: kFetalKickCounterStep, bundle: nil)
                 
-                let ttController = gatewayStoryboard.instantiateViewController(withIdentifier: kConsentViewPdfStoryboardId) as! ConsentPdfViewerStepViewController
+                let ttController = (gatewayStoryboard.instantiateViewController(withIdentifier: kConsentViewPdfStoryboardId) as? ConsentPdfViewerStepViewController)!
                 ttController.step = step
                 
                 ttController.pdfData = result?.pdfData
@@ -1121,7 +1121,7 @@ extension StudyHomeViewController:ORKTaskViewControllerDelegate{
             
             let gatewayStoryboard = UIStoryboard(name: kFetalKickCounterStep, bundle: nil)
             
-            let ttController = gatewayStoryboard.instantiateViewController(withIdentifier: kInEligibilityStepViewControllerIdentifier) as! InEligibilityStepViewController
+            let ttController = (gatewayStoryboard.instantiateViewController(withIdentifier: kInEligibilityStepViewControllerIdentifier) as? InEligibilityStepViewController)!
             
             ttController.step = step
             
@@ -1129,7 +1129,7 @@ extension StudyHomeViewController:ORKTaskViewControllerDelegate{
         }
         else if step.identifier == kEligibilityVerifiedScreen{
             let lastStepResultIdentifier : String?
-            lastStepResultIdentifier = (taskViewController.result.results?.last as! ORKStepResult).identifier
+            lastStepResultIdentifier = (taskViewController.result.results?.last as? ORKStepResult)!.identifier
             
             if lastStepResultIdentifier == kInEligibilityStep{
                 
@@ -1175,7 +1175,7 @@ extension StudyHomeViewController:ORKTaskViewControllerDelegate{
                     while  i < (taskViewController.result.results?.count)! {
                         
                         
-                        let textChoiceResult:ORKChoiceQuestionResult = ((taskViewController.result.results?[i] as! ORKStepResult).results?.first) as! ORKChoiceQuestionResult
+                        let textChoiceResult:ORKChoiceQuestionResult = (((taskViewController.result.results?[i] as? ORKStepResult)!.results?.first) as? ORKChoiceQuestionResult)!
                         
                         
                         
@@ -1183,9 +1183,9 @@ extension StudyHomeViewController:ORKTaskViewControllerDelegate{
                         
                         let answerArray:[String] = (correctAnswerDict?[kConsentComprehensionAnswer] as? [String])!
                         
-                        let evaluationType:Evaluation? = Evaluation(rawValue: correctAnswerDict?[kConsentComprehensionEvaluation] as! String)
+                        let evaluationType:Evaluation? = Evaluation(rawValue: (correctAnswerDict?[kConsentComprehensionEvaluation] as? String)!)
                         
-                        let answeredSet = Set(textChoiceResult.choiceAnswers! as! [String])
+                        let answeredSet = Set((textChoiceResult.choiceAnswers! as? [String])!)
                         
                         let correctAnswerSet = Set(answerArray)
                         
@@ -1249,7 +1249,7 @@ extension StudyHomeViewController:ORKTaskViewControllerDelegate{
                 
                 let result = (shareStep?.results?.first as? ORKChoiceQuestionResult)
                 
-                if (result?.choiceAnswers?.first as! Bool) == true{
+                if (result?.choiceAnswers?.first as? Bool)! == true{
                    return nil
                 }
                 else{

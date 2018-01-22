@@ -53,17 +53,17 @@ class StudyDashboardViewController : UIViewController{
         let plistPath = Bundle.main.path(forResource: "StudyDashboard", ofType: ".plist", inDirectory:nil)
         let tableViewRowDetailsdat = NSMutableArray.init(contentsOfFile: plistPath!)
         
-        let tableviewdata = tableViewRowDetailsdat?[0] as! NSDictionary
+        let tableviewdata = (tableViewRowDetailsdat?[0] as? NSDictionary)!
         
-        tableViewRowDetails = tableviewdata["studyActivity"] as! NSMutableArray
-        todayActivitiesArray = tableviewdata["todaysActivity"] as! NSMutableArray
-        statisticsArray = tableviewdata["statistics"] as! NSMutableArray
+        tableViewRowDetails = (tableviewdata["studyActivity"] as? NSMutableArray)!
+        todayActivitiesArray = (tableviewdata["todaysActivity"] as? NSMutableArray)!
+        statisticsArray = (tableviewdata["statistics"] as? NSMutableArray)!
         
         labelStudyTitle?.text = Study.currentStudy?.name
         
         //check if consent is udpated
         if StudyUpdates.studyConsentUpdated {
-            let appDelegate = UIApplication.shared.delegate as! AppDelegate
+            let appDelegate = (UIApplication.shared.delegate as? AppDelegate)!
              appDelegate.checkConsentStatus(controller: self)
         }
         
@@ -187,9 +187,9 @@ class StudyDashboardViewController : UIViewController{
                 
                 let values = response.values
                 for value in values{
-                    let responseValue = value["value"] as! Float
-                    let count = value["count"] as! Float
-                    let date = StudyDashboardViewController.labkeyDateFormatter.date(from: value["date"] as! String)
+                    let responseValue = (value["value"] as? Float)!
+                    let count = (value["count"] as? Float)!
+                    let date = StudyDashboardViewController.labkeyDateFormatter.date(from: (value["date"] as? String)!)
                      let localDateAsString = StudyDashboardViewController.localDateFormatter.string(from: date!)
                     
                      let localDate = StudyDashboardViewController.localDateFormatter.date(from: localDateAsString)
@@ -252,7 +252,7 @@ class StudyDashboardViewController : UIViewController{
         let image = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         
-        (self.tabBarController as! StudyDashboardTabbarViewController).shareScreenshotByEmail(image: image,subject: kEmailSubjectDashboard, fileName: kEmailSubjectDashboard)
+        (self.tabBarController as? StudyDashboardTabbarViewController)!.shareScreenshotByEmail(image: image,subject: kEmailSubjectDashboard, fileName: kEmailSubjectDashboard)
         
        
     }
@@ -296,10 +296,10 @@ extension StudyDashboardViewController : UITableViewDataSource {
             return 50
         }
         
-        let data = self.tableViewRowDetails[indexPath.section] as! NSDictionary
+        let data = (self.tableViewRowDetails[indexPath.section] as? NSDictionary)!
         
         var heightValue : CGFloat = 0
-        if data["isTableViewCell"] as! String == "YES" {
+        if (data["isTableViewCell"] as? String)! == "YES" {
             
             //Used for Table view Height in a cell
             switch indexPath.section {
@@ -313,7 +313,7 @@ extension StudyDashboardViewController : UITableViewDataSource {
             
         }else{
             //Used for Collection View Height in a cell
-            if data["isStudy"] as! String == "YES" {
+            if (data["isStudy"] as? String)! == "YES" {
                 heightValue = 130
             }else{
                 heightValue = 210
@@ -329,33 +329,33 @@ extension StudyDashboardViewController : UITableViewDataSource {
         //Used to display the last cell trends
         if indexPath.section == tableViewRowDetails.count{
             
-            cell = tableView.dequeueReusableCell(withIdentifier: kTrendTableViewCell, for: indexPath) as! StudyDashboardTrendsTableViewCell
+            cell = (tableView.dequeueReusableCell(withIdentifier: kTrendTableViewCell, for: indexPath) as? StudyDashboardTrendsTableViewCell)!
             return cell!
         }
         
-        let tableViewData = tableViewRowDetails.object(at: indexPath.section) as! NSDictionary
+        let tableViewData = (tableViewRowDetails.object(at: indexPath.section) as? NSDictionary)!
         
-        if tableViewData["isTableViewCell"] as! String == "YES" {
+        if (tableViewData["isTableViewCell"] as? String)! == "YES" {
             
             //Used for Table view Cell
             switch indexPath.section {
             case TableViewCells.welcomeCell.rawValue:
-                cell = tableView.dequeueReusableCell(withIdentifier: kWelcomeTableViewCell, for: indexPath) as! StudyDashboardWelcomeTableViewCell
-                (cell as! StudyDashboardWelcomeTableViewCell).displayFirstCelldata(data: tableViewData)
+                cell = (tableView.dequeueReusableCell(withIdentifier: kWelcomeTableViewCell, for: indexPath) as? StudyDashboardWelcomeTableViewCell)!
+                (cell as? StudyDashboardWelcomeTableViewCell)!.displayFirstCelldata(data: tableViewData)
                
             case TableViewCells.percentageCell.rawValue:
-                cell = tableView.dequeueReusableCell(withIdentifier: kPercentageTableViewCell, for: indexPath) as! StudyDashboardStudyPercentageTableViewCell
-                (cell as! StudyDashboardStudyPercentageTableViewCell).displayThirdCellData(data: tableViewData)
+                cell = (tableView.dequeueReusableCell(withIdentifier: kPercentageTableViewCell, for: indexPath) as? StudyDashboardStudyPercentageTableViewCell)!
+                (cell as? StudyDashboardStudyPercentageTableViewCell)!.displayThirdCellData(data: tableViewData)
                 
             default:
                 return cell!
             }
             
         }else{
-                cell = tableView.dequeueReusableCell(withIdentifier: kStatisticsTableViewCell, for: indexPath) as! StudyDashboardStatisticsTableViewCell
-                (cell as! StudyDashboardStatisticsTableViewCell).displayData()
-                (cell as! StudyDashboardStatisticsTableViewCell).buttonDay?.setTitle("  DAY  ", for: UIControlState.normal)
-                (cell as! StudyDashboardStatisticsTableViewCell).statisticsCollectionView?.reloadData()
+                cell = (tableView.dequeueReusableCell(withIdentifier: kStatisticsTableViewCell, for: indexPath) as? StudyDashboardStatisticsTableViewCell)!
+                (cell as? StudyDashboardStatisticsTableViewCell)!.displayData()
+                (cell as? StudyDashboardStatisticsTableViewCell)!.buttonDay?.setTitle("  DAY  ", for: UIControlState.normal)
+                (cell as? StudyDashboardStatisticsTableViewCell)!.statisticsCollectionView?.reloadData()
         }
         return cell!
     }
@@ -520,7 +520,7 @@ extension StudyDashboardViewController:ORKTaskViewControllerDelegate{
             
             let gatewayStoryboard = UIStoryboard(name: kFetalKickCounterStep, bundle: nil)
             
-            let ttController = gatewayStoryboard.instantiateViewController(withIdentifier: kEligibilityStepViewControllerIdentifier) as! EligibilityStepViewController
+            let ttController = (gatewayStoryboard.instantiateViewController(withIdentifier: kEligibilityStepViewControllerIdentifier) as? EligibilityStepViewController)!
             ttController.descriptionText = step.text
             ttController.step = step
             
@@ -543,11 +543,11 @@ extension StudyDashboardViewController:ORKTaskViewControllerDelegate{
                     
                 }else { //User consented
                     
-                    let documentCopy:ORKConsentDocument = (ConsentBuilder.currentConsent?.consentDocument)!.copy() as! ORKConsentDocument
+                    let documentCopy:ORKConsentDocument = ((ConsentBuilder.currentConsent?.consentDocument)!.copy() as? ORKConsentDocument)!
                     
                     consentSignatureResult?.apply(to: documentCopy)
                     let gatewayStoryboard = UIStoryboard(name: kFetalKickCounterStep, bundle: nil)
-                    let ttController = gatewayStoryboard.instantiateViewController(withIdentifier: kConsentSharePdfStoryboardId) as! ConsentSharePdfStepViewController
+                    let ttController = (gatewayStoryboard.instantiateViewController(withIdentifier: kConsentSharePdfStoryboardId) as? ConsentSharePdfStepViewController)!
                     ttController.step = step
                     ttController.consentDocument =  documentCopy
                     return ttController
@@ -565,7 +565,7 @@ extension StudyDashboardViewController:ORKTaskViewControllerDelegate{
             if (result?.didTapOnViewPdf)!{
                 let gatewayStoryboard = UIStoryboard(name: kFetalKickCounterStep, bundle: nil)
                 
-                let ttController = gatewayStoryboard.instantiateViewController(withIdentifier: kConsentViewPdfStoryboardId) as! ConsentPdfViewerStepViewController
+                let ttController = (gatewayStoryboard.instantiateViewController(withIdentifier: kConsentViewPdfStoryboardId) as? ConsentPdfViewerStepViewController)!
                 ttController.step = step
                 ttController.pdfData = result?.pdfData
                 return ttController

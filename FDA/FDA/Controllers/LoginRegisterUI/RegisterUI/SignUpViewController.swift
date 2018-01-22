@@ -127,7 +127,7 @@ class SignUpViewController : UIViewController{
     func agreeToTermsAndConditions(){
         
         self.termsAndCondition?.delegate = self
-        let attributedString =  termsAndCondition?.attributedText.mutableCopy() as! NSMutableAttributedString
+        let attributedString =  (termsAndCondition?.attributedText.mutableCopy() as? NSMutableAttributedString)!
         
         var foundRange = attributedString.mutableString.range(of: "Terms")
         attributedString.addAttribute(NSLinkAttributeName, value:(TermsAndPolicy.currentTermsAndPolicy?.termsURL!)! as String, range: foundRange)
@@ -264,12 +264,12 @@ class SignUpViewController : UIViewController{
      
      */
     @IBAction func agreeButtonAction(_ sender: Any) {
-        if (sender as! UIButton).isSelected{
-            (sender as! UIButton).isSelected = !(sender as! UIButton).isSelected
+        if (sender as? UIButton)!.isSelected{
+            (sender as? UIButton)!.isSelected = !(sender as? UIButton)!.isSelected
             agreedToTerms = false
         }else{
             agreedToTerms = true
-            (sender as! UIButton).isSelected = !(sender as! UIButton).isSelected
+            (sender as? UIButton)!.isSelected = !(sender as? UIButton)!.isSelected
         }
     }
     
@@ -367,8 +367,8 @@ extension SignUpViewController:UITextViewDelegate{
             
         }
         let loginStoryboard = UIStoryboard.init(name: "Main", bundle:Bundle.main)
-        let webViewController = loginStoryboard.instantiateViewController(withIdentifier:"WebViewController") as! UINavigationController
-        let webview = webViewController.viewControllers[0] as! WebViewController
+        let webViewController = (loginStoryboard.instantiateViewController(withIdentifier:"WebViewController") as? UINavigationController)!
+        let webview = (webViewController.viewControllers[0] as? WebViewController)!
         webview.requestLink = link
         webview.title = title
         self.navigationController?.present(webViewController, animated: true, completion: nil)
@@ -399,8 +399,8 @@ extension SignUpViewController : UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let tableViewData = tableViewRowDetails?.object(at: indexPath.row) as! NSDictionary
-        let cell = tableView.dequeueReusableCell(withIdentifier: kSignUpTableViewCellIdentifier, for: indexPath) as! SignUpTableViewCell
+        let tableViewData = (tableViewRowDetails?.object(at: indexPath.row) as? NSDictionary)!
+        let cell = (tableView.dequeueReusableCell(withIdentifier: kSignUpTableViewCellIdentifier, for: indexPath) as? SignUpTableViewCell)!
         
         
         cell.textFieldValue?.text = ""
@@ -562,7 +562,7 @@ extension SignUpViewController:NMWebServiceDelegate {
        self.removeProgressIndicator()
         if requestName .isEqual(to: RegistrationMethods.register.description)   {
             
-            let delegate = UIApplication.shared.delegate as! AppDelegate
+            let delegate = (UIApplication.shared.delegate as? AppDelegate)!
             delegate.calculateTimeZoneChange()
             ORKPasscodeViewController.removePasscodeFromKeychain()
             self.navigateToVerificationController()

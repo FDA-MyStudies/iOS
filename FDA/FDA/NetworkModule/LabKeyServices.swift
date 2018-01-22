@@ -187,7 +187,7 @@ class LabKeyServices: NSObject {
                 if let data =  rowDetail["data"] as? Dictionary<String,Any>{
                     //created date
                     let dateDetail = data["Created"]  as? Dictionary<String,Any>
-                    let date = dateDetail?["value"] as! String
+                    let date = (dateDetail?["value"] as? String)!
                     
                     
                     //FetalKick
@@ -197,11 +197,11 @@ class LabKeyServices: NSObject {
                         let responseData = dashBoardResponse.first
                         //count
                         let countDetail = data["count"]  as? Dictionary<String,Any>
-                        let count = countDetail?["value"] as! Float
+                        let count = (countDetail?["value"] as? Float)!
                         
                         //duration
                         let durationDetail = data["duration"]  as? Dictionary<String,Any>
-                        let duration = durationDetail?["value"] as! Float
+                        let duration = (durationDetail?["value"] as? Float)!
                         
                         let valueDetail = ["value":duration,
                                            "count":count,
@@ -216,7 +216,7 @@ class LabKeyServices: NSObject {
                             if responseData.key == "NumberofFailures" {
                                 //numberOfFailuresDetail
                                 let numberOfFailuresDetail = data["NumberofFailures"]  as? Dictionary<String,Any>
-                                let numberOfFailures = numberOfFailuresDetail?["value"] as! Float
+                                let numberOfFailures = (numberOfFailuresDetail?["value"] as? Float)!
                                 
                                 let valueDetail1 = ["value":numberOfFailures,
                                                     "count":Float(0.0),
@@ -226,7 +226,7 @@ class LabKeyServices: NSObject {
                             }else if responseData.key == "NumberofGames" {
                                 //numberOfGames
                                 let numberOfGamesDetail = data["NumberofGames"]  as? Dictionary<String,Any>
-                                let numberOfGames = numberOfGamesDetail?["value"] as! Float
+                                let numberOfGames = (numberOfGamesDetail?["value"] as? Float)!
                                 
                                 let valueDetail3 = ["value":numberOfGames,
                                                     "count":Float(0.0),
@@ -236,7 +236,7 @@ class LabKeyServices: NSObject {
                             } else if responseData.key == "Score" {
                                 //score
                                 let scoreDetail = data["Score"]  as? Dictionary<String,Any>
-                                let score = scoreDetail?["value"] as! Float
+                                let score = (scoreDetail?["value"] as? Float)!
                                 
                                 let valueDetail2 = ["value":score,
                                                     "count":Float(0.0),

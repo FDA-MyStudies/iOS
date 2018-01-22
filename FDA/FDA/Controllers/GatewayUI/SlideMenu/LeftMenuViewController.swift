@@ -94,15 +94,15 @@ class LeftMenuViewController : UIViewController, LeftMenuProtocol {
         
         let storyboard = UIStoryboard(name: kStoryboardIdentifierGateway, bundle: nil)
         
-        self.studyListViewController = storyboard.instantiateViewController(withIdentifier: String(describing: StudyListViewController.classForCoder())) as! UINavigationController
+        self.studyListViewController = (storyboard.instantiateViewController(withIdentifier: String(describing: StudyListViewController.classForCoder())) as? UINavigationController)!
         
-        self.notificationController = storyboard.instantiateViewController(withIdentifier:  String(describing: NotificationViewController.classForCoder())) as! UINavigationController
+        self.notificationController = (storyboard.instantiateViewController(withIdentifier:  String(describing: NotificationViewController.classForCoder())) as? UINavigationController)!
         
-        self.resourcesViewController = storyboard.instantiateViewController(withIdentifier:  String(describing: GatewayResourcesListViewController.classForCoder())) as! UINavigationController
+        self.resourcesViewController = (storyboard.instantiateViewController(withIdentifier:  String(describing: GatewayResourcesListViewController.classForCoder())) as? UINavigationController)!
         
-        self.profileviewController = storyboard.instantiateViewController(withIdentifier:  String(describing: ProfileViewController.classForCoder())) as! UINavigationController
+        self.profileviewController = (storyboard.instantiateViewController(withIdentifier:  String(describing: ProfileViewController.classForCoder())) as? UINavigationController)!
         
-        self.reachoutViewController = storyboard.instantiateViewController(withIdentifier:  String(describing: ReachoutOptionsViewController.classForCoder())) as! UINavigationController
+        self.reachoutViewController = (storyboard.instantiateViewController(withIdentifier:  String(describing: ReachoutOptionsViewController.classForCoder())) as? UINavigationController)!
         
         self.labelVersion.text = "V" + "\(Utilities.getAppVersion())"
     }
@@ -123,12 +123,12 @@ class LeftMenuViewController : UIViewController, LeftMenuProtocol {
     func createControllersForAnonymousUser(){
         
         let loginStoryBoard = UIStoryboard(name: kLoginStoryboardIdentifier, bundle: nil)
-        let signInController = loginStoryBoard.instantiateViewController(withIdentifier:  String(describing: SignInViewController.classForCoder())) as! SignInViewController
+        let signInController = (loginStoryBoard.instantiateViewController(withIdentifier:  String(describing: SignInViewController.classForCoder())) as? SignInViewController)!
         self.signInViewController = UINavigationController(rootViewController: signInController)
         self.signInViewController.navigationBar.barStyle = .default
          self.signInViewController.navigationBar.isTranslucent = false
         
-        let signUpController = loginStoryBoard.instantiateViewController(withIdentifier:  String(describing: SignUpViewController.classForCoder())) as! SignUpViewController
+        let signUpController = (loginStoryBoard.instantiateViewController(withIdentifier:  String(describing: SignUpViewController.classForCoder())) as? SignUpViewController)!
         self.signUpViewController = UINavigationController(rootViewController: signUpController)
         self.signUpViewController.navigationBar.barStyle = .default
         self.signUpViewController.navigationBar.isTranslucent = false

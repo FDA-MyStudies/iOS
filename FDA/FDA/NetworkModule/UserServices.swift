@@ -511,9 +511,9 @@ class UserServices: NSObject {
     func handleUserLoginResponse(response:Dictionary<String, Any>){
         
         let user = User.currentUser
-        user.userId     = response[kUserId] as! String
-        user.verified   = response[kUserVerified] as! Bool
-        user.authToken  = response[kUserAuthToken] as! String
+        user.userId     = (response[kUserId] as? String)!
+        user.verified   = (response[kUserVerified] as? Bool)!
+        user.authToken  = (response[kUserAuthToken] as? String)!
         if let refreshToken = response[kRefreshToken] as? String {
             user.refreshToken = refreshToken
             
@@ -530,7 +530,7 @@ class UserServices: NSObject {
             DBHandler().saveCurrentUser(user: user)
             
             //Updating Key & Vector
-            let appDelegate = UIApplication.shared.delegate as! AppDelegate
+            let appDelegate = (UIApplication.shared.delegate as? AppDelegate)!
             appDelegate.updateKeyAndInitializationVector()
             
             
@@ -550,11 +550,11 @@ class UserServices: NSObject {
     func handleUserRegistrationResponse(response:Dictionary<String, Any>){
         
         let user = User.currentUser
-        user.userId     = response[kUserId] as! String
-        user.verified   = response[kUserVerified] as! Bool
-        user.authToken  = response[kUserAuthToken] as! String
+        user.userId     = (response[kUserId] as? String)!
+        user.verified   = (response[kUserVerified] as? Bool)!
+        user.authToken  = (response[kUserAuthToken] as? String)!
         
-        user.refreshToken = response[kRefreshToken] as! String
+        user.refreshToken = (response[kRefreshToken] as? String)!
         StudyFilterHandler.instance.previousAppliedFilters = []
         
     }
@@ -609,7 +609,7 @@ class UserServices: NSObject {
         let user = User.currentUser
         
         //settings
-        let settings = response[kUserSettings] as! Dictionary<String, Any>
+        let settings = (response[kUserSettings] as? Dictionary<String, Any>)!
         let userSettings = Settings()
         userSettings.setSettings(dict: settings as NSDictionary)
         user.settings = userSettings
@@ -617,7 +617,7 @@ class UserServices: NSObject {
         DBHandler.saveUserSettingsToDatabase()
         
         //profile
-        let profile = response[kUserProfile] as! Dictionary<String, Any>
+        let profile = (response[kUserProfile] as? Dictionary<String, Any>)!
         user.emailId = profile[kUserEmailId] as? String
         user.firstName = profile[kUserFirstName] as? String
         user.lastName = profile[kUserLastName] as? String
@@ -716,7 +716,7 @@ class UserServices: NSObject {
         let user = User.currentUser
         
         //activities
-        let activites = response[kActivites]  as! Array<Dictionary<String, Any>>
+        let activites = (response[kActivites]  as? Array<Dictionary<String, Any>>)!
         for activity in activites {
             
             //let participatedActivity = UserActivityStatus(detail: activity)
@@ -808,7 +808,7 @@ class UserServices: NSObject {
     func handleUpdateTokenResponse(response:Dictionary<String, Any>){
         
         let user = User.currentUser
-        user.authToken  = response[kUserAuthToken] as! String
+        user.authToken  = (response[kUserAuthToken] as? String)!
         //user.refreshToken = response[kRefreshToken] as! String
         //self.failedRequestServices.headerParams![kUserAuthToken] = user.accessToken
         
@@ -849,59 +849,59 @@ extension UserServices:NMWebServiceDelegate{
         switch requestName {
         case RegistrationMethods.login.description as String:
             
-            self.handleUserLoginResponse(response: response as! Dictionary<String, Any>)
+            self.handleUserLoginResponse(response: (response as? Dictionary<String, Any>)!)
             
         case RegistrationMethods.register.description as String:
             
-            self.handleUserRegistrationResponse(response: response as! Dictionary<String, Any>)
+            self.handleUserRegistrationResponse(response: (response as? Dictionary<String, Any>)!)
             
         case RegistrationMethods.confirmRegistration.description as String:
             
-            self.handleConfirmRegistrationResponse(response: response as! Dictionary<String, Any>)
+            self.handleConfirmRegistrationResponse(response: (response as? Dictionary<String, Any>)!)
             
         case RegistrationMethods.verify.description as String:
             
-            self.handleEmailVerifyResponse(response: response as! Dictionary<String, Any>)
+            self.handleEmailVerifyResponse(response: (response as? Dictionary<String, Any>)!)
             
         case RegistrationMethods.userProfile.description as String:
             
-            self.handleGetUserProfileResponse(response: response as! Dictionary<String, Any>)
+            self.handleGetUserProfileResponse(response: (response as? Dictionary<String, Any>)!)
             
         case RegistrationMethods.updateUserProfile.description as String:
             
-            self.handleUpdateUserProfileResponse(response: response as! Dictionary<String, Any>)
+            self.handleUpdateUserProfileResponse(response: (response as? Dictionary<String, Any>)!)
             
         case RegistrationMethods.userPreferences.description as String:
             
             
-            self.handleGetPreferenceResponse(response: response as! Dictionary<String, Any>)
+            self.handleGetPreferenceResponse(response: (response as? Dictionary<String, Any>)!)
         case RegistrationMethods.changePassword.description as String:
             
-            self.handleChangePasswordResponse(response: response as! Dictionary<String, Any>)
+            self.handleChangePasswordResponse(response: (response as? Dictionary<String, Any>)!)
             
         case RegistrationMethods.updatePreferences.description as String: break //did not handled response
             
         case RegistrationMethods.updateEligibilityConsentStatus.description as String: break
         case RegistrationMethods.consentPDF.description as String: break
         case RegistrationMethods.studyState.description as String:
-            self.handleGetStudyStatesResponse(response:  response as! Dictionary<String, Any>)
+            self.handleGetStudyStatesResponse(response:  (response as? Dictionary<String, Any>)!)
         case RegistrationMethods.updateStudyState.description as String: break
         case RegistrationMethods.updateActivityState.description as String: break
         case RegistrationMethods.activityState.description as String:
-            self.handleGetActivityStatesResponse(response:  response as! Dictionary<String, Any>)
+            self.handleGetActivityStatesResponse(response:  (response as? Dictionary<String, Any>)!)
         case RegistrationMethods.withdraw.description as String: break
         case RegistrationMethods.forgotPassword.description as String: break
             
         case RegistrationMethods.logout.description as String:
-            self.handleLogoutResponse(response: response as! Dictionary<String, Any>)
+            self.handleLogoutResponse(response: (response as? Dictionary<String, Any>)!)
             
         case RegistrationMethods.deleteAccount.description as String:
-            self.handleDeleteAccountResponse(response: response as! Dictionary<String, Any>)
+            self.handleDeleteAccountResponse(response: (response as? Dictionary<String, Any>)!)
             
         case RegistrationMethods.deactivate.description as String:
-            self.handleDeActivateAccountResponse(response: response as! Dictionary<String, Any>)
+            self.handleDeActivateAccountResponse(response: (response as? Dictionary<String, Any>)!)
         case RegistrationMethods.refreshToken.description as String:
-            self.handleUpdateTokenResponse(response: response as! Dictionary<String, Any>)
+            self.handleUpdateTokenResponse(response: (response as? Dictionary<String, Any>)!)
         default : break
         }
         

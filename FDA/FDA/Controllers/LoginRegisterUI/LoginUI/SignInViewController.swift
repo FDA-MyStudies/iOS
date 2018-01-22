@@ -191,10 +191,10 @@ class SignInViewController : UIViewController{
         
         // if textfield have data then we are updating same to model object
         
-        var selectedCell:SignInTableViewCell =  tableView!.cellForRow(at:IndexPath(row:0, section: 0)) as! SignInTableViewCell
+        var selectedCell:SignInTableViewCell =  (tableView!.cellForRow(at:IndexPath(row:0, section: 0)) as? SignInTableViewCell)!
         
         let emailTextFieldValue = selectedCell.textFieldValue?.text
-        selectedCell = tableView!.cellForRow(at:IndexPath(row:1, section: 0)) as! SignInTableViewCell
+        selectedCell = (tableView!.cellForRow(at:IndexPath(row:1, section: 0)) as? SignInTableViewCell)!
         
         let passwordTextFieldValue = selectedCell.textFieldValue?.text
         
@@ -250,7 +250,7 @@ class SignInViewController : UIViewController{
         
         let storyboard = UIStoryboard(name: kStoryboardIdentifierGateway, bundle: nil)
         
-        let changePassword = storyboard.instantiateViewController(withIdentifier: "ChangePasswordViewController") as! ChangePasswordViewController
+        let changePassword = (storyboard.instantiateViewController(withIdentifier: "ChangePasswordViewController") as? ChangePasswordViewController)!
         if viewLoadFrom == .menu {
             changePassword.viewLoadFrom = .menu_login
         }
@@ -284,7 +284,7 @@ class SignInViewController : UIViewController{
         
         let storyboard = UIStoryboard(name: kStoryboardIdentifierGateway, bundle: nil)
         
-        let fda = storyboard.instantiateViewController(withIdentifier: kStoryboardIdentifierSlideMenuVC) as! FDASlideMenuViewController
+        let fda = (storyboard.instantiateViewController(withIdentifier: kStoryboardIdentifierSlideMenuVC) as? FDASlideMenuViewController)!
         fda.automaticallyAdjustsScrollViewInsets = true
         self.navigationController?.pushViewController(fda, animated: true)
     }
@@ -293,7 +293,7 @@ class SignInViewController : UIViewController{
     func agreeToTermsAndConditions(){
         
         self.termsAndCondition?.delegate = self
-        let attributedString =  termsAndCondition?.attributedText.mutableCopy() as! NSMutableAttributedString
+        let attributedString =  (termsAndCondition?.attributedText.mutableCopy() as? NSMutableAttributedString)!
         
         var foundRange = attributedString.mutableString.range(of: "Terms")
         attributedString.addAttribute(NSLinkAttributeName, value:(TermsAndPolicy.currentTermsAndPolicy?.termsURL!)! as String, range: foundRange)
@@ -358,9 +358,9 @@ extension SignInViewController : UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let tableViewData = tableViewRowDetails?.object(at: indexPath.row) as! NSDictionary
+        let tableViewData = (tableViewRowDetails?.object(at: indexPath.row) as? NSDictionary)!
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: kSignInTableViewCellIdentifier, for: indexPath) as! SignInTableViewCell
+        let cell = (tableView.dequeueReusableCell(withIdentifier: kSignInTableViewCellIdentifier, for: indexPath) as? SignInTableViewCell)!
         
         cell.textFieldValue?.text = ""
         var isSecuredEntry : Bool = false
@@ -464,8 +464,8 @@ extension SignInViewController:UITextViewDelegate{
             
         }
         let loginStoryboard = UIStoryboard.init(name: "Main", bundle:Bundle.main)
-        let webViewController = loginStoryboard.instantiateViewController(withIdentifier:"WebViewController") as! UINavigationController
-        let webview = webViewController.viewControllers[0] as! WebViewController
+        let webViewController = (loginStoryboard.instantiateViewController(withIdentifier:"WebViewController") as? UINavigationController)!
+        let webview = (webViewController.viewControllers[0] as? WebViewController)!
         webview.requestLink = link
         webview.title = title
         self.navigationController?.present(webViewController, animated: true, completion: nil)
@@ -506,7 +506,7 @@ extension SignInViewController:NMWebServiceDelegate {
         }
         else
         {
-            let delegate = UIApplication.shared.delegate as! AppDelegate
+            let delegate = (UIApplication.shared.delegate as? AppDelegate)!
             delegate.calculateTimeZoneChange()
         if User.currentUser.verified == true {
             
@@ -526,14 +526,14 @@ extension SignInViewController:NMWebServiceDelegate {
                 }
                 else if viewLoadFrom == .joinStudy {
                     
-                    let leftController = slideMenuController()?.leftViewController as! LeftMenuViewController
+                    let leftController = (slideMenuController()?.leftViewController as? LeftMenuViewController)!
                     leftController.createLeftmenuItems()
                     self.performSegue(withIdentifier: "unwindStudyHomeSegue", sender: self)
                     //_ = self.navigationController?.popViewController(animated: true)
                 }
                 else {
                     
-                    let leftController = slideMenuController()?.leftViewController as! LeftMenuViewController
+                    let leftController = (slideMenuController()?.leftViewController as? LeftMenuViewController)!
                     leftController.createLeftmenuItems()
                     leftController.changeViewController(.studyList)
                 }

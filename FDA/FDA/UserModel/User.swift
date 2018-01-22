@@ -158,7 +158,7 @@ class User{
                 self.emailId = dict[kUserEmailId] as? String
             }
             if Utilities.isValidObject(someObject: dict[kUserSettings] as AnyObject) {
-                self.settings?.setSettings(dict: dict[kUserSettings] as! NSDictionary)
+                self.settings?.setSettings(dict: (dict[kUserSettings] as? NSDictionary)!)
             }
             if Utilities.isValidValue(someObject: dict[kUserId] as AnyObject)  {
                 self.userId = dict[kUserId] as? String
@@ -181,22 +181,22 @@ class User{
         if self.userType == .FDAUser {
             
             if self.userId != nil{
-                dataDict.setValue(self.userId, forKey:(kUserId as NSCopying) as! String)
+                dataDict.setValue(self.userId, forKey:((kUserId as NSCopying) as? String)!)
             }
             let profileDict = NSMutableDictionary()
             
             
             if self.firstName != nil{
-                profileDict.setValue(self.firstName, forKey:(kUserFirstName as NSCopying) as! String)
+                profileDict.setValue(self.firstName, forKey:((kUserFirstName as NSCopying) as? String)!)
                 
             }else {
-                profileDict.setValue("", forKey:(kUserFirstName as NSCopying) as! String)
+                profileDict.setValue("", forKey:((kUserFirstName as NSCopying) as? String)!)
             }
             if self.lastName != nil{
-                profileDict.setValue(self.lastName, forKey:(kUserLastName as NSCopying) as! String)
+                profileDict.setValue(self.lastName, forKey:((kUserLastName as NSCopying) as? String)!)
                 
             }else {
-                profileDict.setValue("", forKey:(kUserLastName as NSCopying) as! String)
+                profileDict.setValue("", forKey:((kUserLastName as NSCopying) as? String)!)
             }
             
             let infoDict = NSMutableDictionary()
@@ -593,26 +593,26 @@ class UserStudyStatus{
         if Utilities.isValidObject(someObject: detail as AnyObject?) {
             
             if  Utilities.isValidValue(someObject: detail[kStudyId] as AnyObject) {
-                self.studyId = detail[kStudyId] as! String
+                self.studyId = (detail[kStudyId] as? String)!
             }
             if Utilities.isValidValue(someObject: detail[kBookmarked] as AnyObject) {
-                self.bookmarked = detail[kBookmarked] as! Bool
+                self.bookmarked = (detail[kBookmarked] as? Bool)!
             }
             if Utilities.isValidValue(someObject: detail[kCompletion] as AnyObject) {
-                self.completion = detail[kCompletion] as! Int
+                self.completion = (detail[kCompletion] as? Int)!
             }
             if Utilities.isValidValue(someObject: detail[kAdherence] as AnyObject) {
-                self.adherence = detail[kAdherence] as! Int
+                self.adherence = (detail[kAdherence] as? Int)!
             }
             if Utilities.isValidValue(someObject: detail[kStudyParticipantId] as AnyObject) {
                 self.participantId = detail[kStudyParticipantId] as? String
             }
             if Utilities.isValidValue(someObject: detail[kStudyEnrolledDate] as AnyObject) {
-                self.joiningDate = Utilities.getDateFromString(dateString: detail[kStudyEnrolledDate] as! String)
+                self.joiningDate = Utilities.getDateFromString(dateString: (detail[kStudyEnrolledDate] as? String)!)
             }
             if Utilities.isValidValue(someObject: detail[kStatus] as AnyObject){
                 
-                let statusValue = detail[kStatus] as! String
+                let statusValue = (detail[kStatus] as? String)!
                 
                 if (StudyStatus.inProgress.paramValue == statusValue) {
                     self.status = .inProgress
@@ -769,31 +769,31 @@ class UserActivityStatus{
         if Utilities.isValidObject(someObject: detail as AnyObject?){
             
             if  Utilities.isValidValue(someObject: detail[kStudyId] as AnyObject){
-                self.studyId = detail[kStudyId] as! String
+                self.studyId = (detail[kStudyId] as? String)!
             }
             if  Utilities.isValidValue(someObject: detail[kActivityId] as AnyObject){
-                self.activityId = detail[kActivityId] as! String
+                self.activityId = (detail[kActivityId] as? String)!
             }
             if  Utilities.isValidValue(someObject: detail[kActivityVersion] as AnyObject){
-                self.activityVersion = detail[kActivityVersion] as! String
+                self.activityVersion = (detail[kActivityVersion] as? String)!
             }
             if Utilities.isValidValue(someObject: detail[kBookmarked] as AnyObject){
-                self.bookmarked = detail[kBookmarked] as! Bool
+                self.bookmarked = (detail[kBookmarked] as? Bool)!
             }
             if Utilities.isValidValue(someObject: detail[kActivityRunId] as AnyObject){
-                self.activityRunId = detail[kActivityRunId] as! String
+                self.activityRunId = (detail[kActivityRunId] as? String)!
             }
             
-            let runDetail = detail["activityRun"] as! Dictionary<String,Any>
+            let runDetail = (detail["activityRun"] as? Dictionary<String,Any>)!
             if Utilities.isValidValue(someObject: runDetail["completed"] as AnyObject){
-                self.compeltedRuns = runDetail["completed"] as! Int
+                self.compeltedRuns = (runDetail["completed"] as? Int)!
             }
             
             self.studyId = studyId
             
             if Utilities.isValidValue(someObject: detail[kActivityStatus] as AnyObject){
                 
-                let statusValue = detail[kActivityStatus] as! String
+                let statusValue = (detail[kActivityStatus] as? String)!
                 
                 if (ActivityStatus.inProgress.paramValue == statusValue) {
                     self.status = .inProgress

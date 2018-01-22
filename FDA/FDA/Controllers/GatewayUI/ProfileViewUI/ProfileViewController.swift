@@ -255,7 +255,6 @@ class ProfileViewController: UIViewController, SlideMenuControllerDelegate {
                                                              errorAlertActionTitle2: NSLocalizedString(kTitleCancel, comment: ""), viewControllerUsed: self,
                                                              action1: {
                                                                 
-                                                                
                                                                 self.sendRequestToSignOut()
                                                                 
                                                                 
@@ -287,7 +286,6 @@ class ProfileViewController: UIViewController, SlideMenuControllerDelegate {
                 UIUtilities.showAlertMessageWithTwoActionsAndHandler(NSLocalizedString(kTitleDeleteAccount, comment: ""), errorMessage: NSLocalizedString(kDeleteAccountConfirmationMessage, comment: ""), errorAlertActionTitle: NSLocalizedString(kTitleDeleteAccount, comment: ""),
                                                                      errorAlertActionTitle2: NSLocalizedString(kTitleCancel, comment: ""), viewControllerUsed: self,
                                                                      action1: {
-                                                                        
                                                                         
                                                                         self.sendRequestToDeleteAccount()
                                                                         
@@ -357,8 +355,6 @@ class ProfileViewController: UIViewController, SlideMenuControllerDelegate {
         let appDelegate = (UIApplication.shared.delegate as? AppDelegate)!
         appDelegate.updateKeyAndInitializationVector()
 
-        
-        
         //fdaSlideMenuController()?.navigateToHomeAfterSingout()
         let leftController = (slideMenuController()?.leftViewController as? LeftMenuViewController)!
         leftController.changeViewController(.studyList)
@@ -514,15 +510,7 @@ class ProfileViewController: UIViewController, SlideMenuControllerDelegate {
      self.removeProgressIndicator()
   }
   
-   /*OLDREVERTBACK
-  func registerLocalNotification(){
-    LocalNotification.registerLocalNotificationForJoinedStudies(completionHandler: { (done) in
-      print("completed")
-      self.removeProgressIndicator()
-
-    })
-  }
-  */
+ 
  
   func registerLocalNotification(){
     LocalNotification.refreshAllLocalNotification()
@@ -556,23 +544,7 @@ class ProfileViewController: UIViewController, SlideMenuControllerDelegate {
         if (user.emailId?.isEmpty)! {
             self.showAlertMessages(textMessage: kMessageAllFieldsAreEmpty)
             return false
-        } /*
-             else if  user.firstName == ""{
-             self.showAlertMessages(textMessage: kMessageFirstNameBlank)
-             return false
-             }
-             else if (user.firstName?.isAlphanumeric)! == false || (user.firstName?.characters.count)! > 100 {
-             self.showAlertMessages(textMessage: kMessageValidFirstName)
-             return false
-             }
-             else if user.lastName == ""{
-             self.showAlertMessages(textMessage: kMessageLastNameBlank)
-             return false
-             
-             }else if user.lastName == "" ||  (user.lastName?.isAlphanumeric)! == false || (user.lastName?.characters.count)! > 100{
-             self.showAlertMessages(textMessage: kMessageValidLastName)
-             return false
-         }*/ else if user.emailId == "" {
+        }  else if user.emailId == "" {
             self.showAlertMessages(textMessage: kMessageEmailBlank)
             return false
         }else if !(Utilities.isValidEmail(testStr: user.emailId!)){
@@ -593,11 +565,6 @@ class ProfileViewController: UIViewController, SlideMenuControllerDelegate {
     func showAlertMessages(textMessage : String){
         UIUtilities.showAlertMessage("", errorMessage: NSLocalizedString(textMessage, comment: ""), errorAlertActionTitle: NSLocalizedString("OK", comment: ""), viewControllerUsed: self)
     }
-    
-    
-    
-    
-    
     
     
     /**
@@ -686,12 +653,6 @@ extension ProfileViewController : UITableViewDataSource {
             
             // TextField properties set up according to index
             switch  textFieldTag {
-                /*
-                 case .FirstNameTag,.LastName:
-                 cell.textFieldValue?.autocapitalizationType = .sentences
-                 
-                 isSecuredEntry = false
-                 */
             case  .Password:
                 
                 cell.buttonChangePassword?.isUserInteractionEnabled =  true
@@ -795,16 +756,7 @@ extension ProfileViewController : UITextFieldDelegate{
         
         let finalString = textField.text! + string
         
-        /*
-         if tag == .FirstNameTag || tag == .LastName {
-         if string == " "  || finalString.characters.count > 100 {
-         return false
-         }
-         else{
-         return true
-         }
-         }
-         else */
+       
         if  tag == .EmailId {
             if string == " " || finalString.characters.count > 255{
                 return false
@@ -826,18 +778,7 @@ extension ProfileViewController : UITextFieldDelegate{
         textField.text =  textField.text?.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
         
         switch textField.tag {
-            /*
-             case TextFieldTags.FirstNameTag.rawValue:
-             
-             user.firstName! =  textField.text!
-             
-             break
-             
-             case TextFieldTags.LastName.rawValue:
-             
-             user.lastName! = textField.text!
-             break
-             */
+           
         case TextFieldTags.EmailId.rawValue:
             user.emailId! = textField.text!
             
@@ -887,18 +828,12 @@ extension ProfileViewController:NMWebServiceDelegate {
         }
         else if requestName as String ==  RegistrationMethods.updateUserProfile.description {
             
-           // UIUtilities.showAlertWithTitleAndMessage(title:NSLocalizedString(kProfileAlertTitleText, comment: "") as NSString, message: NSLocalizedString(kProfileAlertUpdatedText, comment: "") as NSString)
             self.isCellEditable = true
             self.editBarButtonItem?.title = "Edit"
             self.tableViewProfile?.reloadData()
             self.buttonLeadTime?.isUserInteractionEnabled = self.isCellEditable!
              DBHandler.saveUserSettingsToDatabase()
             
-//            if self.isPasscodeViewPresented == true{
-//                self.isPasscodeViewPresented = false
-//
-//                UserServices().getUserProfile(self)
-//            }
         }
         else if requestName as String == RegistrationMethods.deactivate.description{
             self.handleDeleteAccountResponse()
@@ -942,9 +877,6 @@ extension ProfileViewController: ORKPasscodeDelegate {
     func passcodeViewControllerDidFailAuthentication(_ viewController: UIViewController) {
         
     }
-    
-    
-    
     
     
     func passcodeViewControllerDidCancel(_ viewController: UIViewController){

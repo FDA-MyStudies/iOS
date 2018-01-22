@@ -70,7 +70,7 @@ class StudyFilterViewController: UIViewController {
         }
         
         if StudyFilterHandler.instance.filterOptions.count == 0 {
-            let appDelegate = UIApplication.shared.delegate as! AppDelegate
+            let appDelegate = (UIApplication.shared.delegate as? AppDelegate)!
             appDelegate.setDefaultFilters(previousCollectionData: self.previousCollectionData)
         }
 
@@ -175,7 +175,8 @@ extension StudyFilterViewController : UICollectionViewDataSource{//,UICollection
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! FilterListCollectionViewCell
+        let cell = (collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as?
+            FilterListCollectionViewCell)!
 
         let filterOption = StudyFilterHandler.instance.filterOptions[indexPath.row]
         cell.displayCollectionData(data: filterOption)
@@ -244,9 +245,9 @@ extension AppDelegate{
         var i = 0
         
         for options in filterData! {
-            let values = (options as! Dictionary<String,Any>)["studyData"] as! Array<Dictionary<String,Any>>
+            let values = ((options as? Dictionary<String,Any>)!["studyData"] as? Array<Dictionary<String,Any>>)!
             let filterOptions = FilterOptions()
-            filterOptions.title = (options as! Dictionary<String,Any>)["headerText"] as! String!
+            filterOptions.title = ((options as? Dictionary<String,Any>)!["headerText"] as? String)!
             
             var selectedValues:Array<String> = []
             if previousCollectionData.count > 0 {
@@ -259,17 +260,17 @@ extension AppDelegate{
                 var isContained = false
                 
                 let filterValue = FilterValues()
-                filterValue.title = value["name"] as! String!
+                filterValue.title = (value["name"] as? String)!
                 
                 if selectedValues.count > 0 {
-                    isContained = selectedValues.contains(value["name"] as! String)
+                    isContained = selectedValues.contains((value["name"] as? String)!)
                 }
                 
                 if isContained == false {
                     
                     if previousCollectionData.count == 0 {
                         // this means that we are first time accessing the filter screen
-                        filterValue.isSelected =  value["isEnabled"] as! Bool
+                        filterValue.isSelected =  (value["isEnabled"] as? Bool)!
                         
                     }else {
                         // means that filter is already set

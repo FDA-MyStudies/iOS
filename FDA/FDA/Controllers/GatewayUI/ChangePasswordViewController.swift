@@ -145,7 +145,7 @@ class ChangePasswordViewController: UIViewController {
         
         let storyboard = UIStoryboard(name: kStoryboardIdentifierGateway, bundle: nil)
         
-        let fda = storyboard.instantiateViewController(withIdentifier: kStoryboardIdentifierSlideMenuVC) as! FDASlideMenuViewController
+        let fda = (storyboard.instantiateViewController(withIdentifier: kStoryboardIdentifierSlideMenuVC) as? FDASlideMenuViewController)!
         fda.automaticallyAdjustsScrollViewInsets = true
         self.navigationController?.pushViewController(fda, animated: true)
     }
@@ -204,9 +204,9 @@ extension ChangePasswordViewController : UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let tableViewData = tableViewRowDetails?.object(at: indexPath.row) as! NSDictionary
+        let tableViewData = (tableViewRowDetails?.object(at: indexPath.row) as? NSDictionary)!
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: kSignInTableViewCellIdentifier, for: indexPath) as! SignInTableViewCell
+        let cell = (tableView.dequeueReusableCell(withIdentifier: kSignInTableViewCellIdentifier, for: indexPath) as? SignInTableViewCell)!
         
         cell.populateCellData(data: tableViewData, securedText: true)
         var tagIncremental = 100
@@ -315,7 +315,7 @@ extension ChangePasswordViewController:NMWebServiceDelegate {
         else if viewLoadFrom == .menu_login {
           
           //Updating Key & Vector
-          let appDelegate = UIApplication.shared.delegate as! AppDelegate
+          let appDelegate = (UIApplication.shared.delegate as? AppDelegate)!
           appDelegate.updateKeyAndInitializationVector()
           
           //TEMP : Need to save these values in Realm
@@ -327,7 +327,7 @@ extension ChangePasswordViewController:NMWebServiceDelegate {
           
             // do not create menu
             
-            let leftController = slideMenuController()?.leftViewController as! LeftMenuViewController
+            let leftController = (slideMenuController()?.leftViewController as? LeftMenuViewController)!
             leftController.createLeftmenuItems()
             leftController.changeViewController(.studyList)
           
@@ -339,7 +339,7 @@ extension ChangePasswordViewController:NMWebServiceDelegate {
         }
         else if viewLoadFrom == .joinStudy {
             
-            let leftController = slideMenuController()?.leftViewController as! LeftMenuViewController
+            let leftController = (slideMenuController()?.leftViewController as? LeftMenuViewController)!
             leftController.createLeftmenuItems()
             self.performSegue(withIdentifier: "unwindStudyHomeSegue", sender: self)
         }

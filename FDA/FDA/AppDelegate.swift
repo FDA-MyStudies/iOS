@@ -32,8 +32,11 @@
     let kEncryptionIV =  "EncryptionIV"
     let kBlockerScreenLabelText = "Please update to the latest version of app to continue."
     let kConsentUpdatedTitle = "Consent Updated"
-    
-    let kMessageConsentUpdated = "The Consent Document for this study has been updated. Please review the revised Consent terms and provide your Informed Consent, to continue participating in the study."
+   
+   let kMessageConsentUpdatedPartTwo = " Please review the revised Consent terms and provide your Informed Consent, to continue participating in the study."
+   
+    let kMessageConsentUpdated = "The Consent Document for this study has been updated." + kMessageConsentUpdatedPartTwo
+   
     let kReviewTitle = "Review"
     let kPasscodeStepIdentifier = "PasscodeStep"
     let kPasscodeTaskIdentifier = "PassCodeTask"
@@ -304,7 +307,6 @@
         }
         
         func applicationWillResignActive(_ application: UIApplication) {
-            // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
             // Use this method to pause ongoing tasks, disable timers, and invalidate graphics rendering callbacks. Games should use this method to pause the game.
             
             // set Flag to handle background to foreground transition
@@ -312,7 +314,6 @@
         }
         
         func applicationDidEnterBackground(_ application: UIApplication) {
-            // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
             // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
             
             // set Flag to handle foreground to background transition
@@ -338,11 +339,10 @@
             //Check For Updates
             self.checkForAppUpdateForVersion()
             
-            // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
         }
         
         func applicationDidBecomeActive(_ application: UIApplication) {
-            // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+
             // self.window?.isHidden = false
             
             UIApplication.shared.applicationIconBadgeNumber = 0
@@ -351,7 +351,12 @@
                 
                 let navController = application.windows[0].rootViewController
                 
-                if (navController as? UINavigationController) != nil &&  (navController as? UINavigationController)?.visibleViewController?.isKind(of: ORKTaskViewController.self) == false {
+                
+                let isTaskViewControllerVisible = (navController as? UINavigationController)?.visibleViewController?.isKind(of: ORKTaskViewController.self)
+                
+                let navigationTitle = ((navController as? UINavigationController)?.visibleViewController as? ORKTaskViewController)!.title
+                
+                if (navController as? UINavigationController) != nil &&  isTaskViewControllerVisible == false {
                     
                     if (navController as? UINavigationController)?.visibleViewController?.isKind(of: ORKPasscodeViewController.self) == false{
                         //Request for Passcode
@@ -359,8 +364,8 @@
                     }
                     
                 } else if(navController as? UINavigationController) != nil
-                    &&  (navController as? UINavigationController)?.visibleViewController?.isKind(of: ORKTaskViewController.self) == true
-                    && (((navController as? UINavigationController)?.visibleViewController as? ORKTaskViewController)!.title != nil && ((navController as? UINavigationController)?.visibleViewController as? ORKTaskViewController)!.title! == "Activity") {
+                    &&  isTaskViewControllerVisible == true
+                    && (navigationTitle != nil && navigationTitle! == "Activity") {
                     
                     if (navController as? UINavigationController)?.visibleViewController?.isKind(of: ORKPasscodeViewController.self) == false {
                         //Request for Passcode
@@ -420,7 +425,7 @@
         func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any]) {
             
             //For iOS 8 & 9
-            if (UIApplication.shared.applicationState == UIApplicationState.background)||(UIApplication.shared.applicationState == UIApplicationState.inactive) {
+            if (UIApplication.shared.applicationState == .background)||(UIApplication.shared.applicationState == .inactive) {
                 
                 self.updateNotification()
                 self.handleLocalAndRemoteNotification(userInfoDetails: (userInfo as? Dictionary<String, Any>)!)
@@ -431,7 +436,7 @@
                 self.updateNotification()
                 
             }else {
-                if (UIApplication.shared.applicationState == UIApplicationState.background || (UIApplication.shared.applicationState == UIApplicationState.inactive)) {
+                if (UIApplication.shared.applicationState == .background || (UIApplication.shared.applicationState == .inactive)) {
                     //Handle local Notification Received
                     self.handleLocalNotification(userInfoDetails: (userInfo as? Dictionary<String, Any>)!)
                 }

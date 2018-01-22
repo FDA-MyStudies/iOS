@@ -59,7 +59,7 @@ class PageViewController : UIPageViewController{
         
         pageViewDelegate?.pageViewController(pageViewController: self, didUpdatePageCount: orderedViewControllers.count)
         
-        let scrollView = self.view.subviews.filter { $0 is UIScrollView }.first as! UIScrollView
+        let scrollView = (self.view.subviews.filter { $0 is UIScrollView }.first as? UIScrollView)!
         scrollView.delegate = self
     }
     
@@ -135,13 +135,13 @@ class PageViewController : UIPageViewController{
             
             switch viewController {
             case is FirstGatewayOverviewViewController:
-                index = (viewController as! FirstGatewayOverviewViewController).pageIndex
+                index = (viewController as? FirstGatewayOverviewViewController)!.pageIndex
             case is SecondGatewayOverviewViewController:
-                index = (viewController as! SecondGatewayOverviewViewController).pageIndex
+                index = (viewController as? SecondGatewayOverviewViewController)!.pageIndex
             case is StudyOverviewViewControllerFirst:
-                index = (viewController as! StudyOverviewViewControllerFirst).pageIndex
+                index = (viewController as? StudyOverviewViewControllerFirst)!.pageIndex
             case is StudyOverviewViewControllerSecond:
-                index = (viewController as! StudyOverviewViewControllerSecond).pageIndex
+                index = (viewController as? StudyOverviewViewControllerSecond)!.pageIndex
             default:
                 index = 0
             }
@@ -189,7 +189,7 @@ class PageViewController : UIPageViewController{
             storyboard = UIStoryboard.init(name: kStudyStoryboard, bundle: Bundle.main)
             
             //get first overview controller
-            let firstController = storyboard.instantiateViewController(withIdentifier: "FirstViewController") as! StudyOverviewViewControllerFirst
+            let firstController = (storyboard.instantiateViewController(withIdentifier: "FirstViewController") as? StudyOverviewViewControllerFirst)!
             firstController.pageIndex = 0
             firstController.overViewWebsiteLink = overview.websiteLink
             firstController.overviewSectionDetail = overview.sections[0]
@@ -198,7 +198,7 @@ class PageViewController : UIPageViewController{
                 let sections = overview.sections.count
                 for section in 1...(sections-1) {
                     
-                    let restControllers = storyboard.instantiateViewController(withIdentifier: "SecondViewController") as! StudyOverviewViewControllerSecond
+                    let restControllers = (storyboard.instantiateViewController(withIdentifier: "SecondViewController") as? StudyOverviewViewControllerSecond)!
                     restControllers.overviewSectionDetail = overview.sections[section]
                      restControllers.overViewWebsiteLink = overview.websiteLink
                     restControllers.pageIndex = section
@@ -208,7 +208,7 @@ class PageViewController : UIPageViewController{
         }
         else {
             //get first overview controller
-            let firstController = storyboard.instantiateViewController(withIdentifier: "FirstViewController") as! FirstGatewayOverviewViewController
+            let firstController = (storyboard.instantiateViewController(withIdentifier: "FirstViewController") as? FirstGatewayOverviewViewController)!
             firstController.overviewSectionDetail = overview.sections[0]
             firstController.pageIndex = 0
             controllers.append(firstController)
@@ -216,7 +216,7 @@ class PageViewController : UIPageViewController{
             let sections = overview.sections.count
             for section in 1...(sections-1) {
                 
-                let restControllers = storyboard.instantiateViewController(withIdentifier: "SecondViewController") as! SecondGatewayOverviewViewController
+                let restControllers = (storyboard.instantiateViewController(withIdentifier: "SecondViewController") as? SecondGatewayOverviewViewController)!
                 restControllers.overviewSectionDetail = overview.sections[section]
                 restControllers.pageIndex = section
                 controllers.append(restControllers)

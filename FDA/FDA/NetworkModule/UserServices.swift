@@ -223,28 +223,28 @@ class UserServices: NSObject {
     }
     
     
-    func forgotPassword(email:String, delegate:NMWebServiceDelegate){
+    func forgotPassword(email: String, delegate: NMWebServiceDelegate){
         
         self.delegate = delegate
         
         let user = User.currentUser
-        let params = [kUserEmailId : email]
+        let params = [kUserEmailId: email]
         let method = RegistrationMethods.forgotPassword.method
         
         self.sendRequestWith(method:method, params: params, headers:nil )
     }
     
-    func changePassword(oldPassword:String,newPassword:String,delegate:NMWebServiceDelegate){
+    func changePassword(oldPassword: String,newPassword: String,delegate: NMWebServiceDelegate){
         
         self.delegate = delegate
         
         let user = User.currentUser
         let headerParams = [kUserId : user.userId!]
-        let params = [kUserOldPassword:oldPassword,
-                      kUserNewPassword:newPassword]
+        let params = [kUserOldPassword: oldPassword,
+                      kUserNewPassword: newPassword]
         
         let method = RegistrationMethods.changePassword.method
-        self.sendRequestWith(method:method, params: params, headers: headerParams)
+        self.sendRequestWith(method: method, params: params, headers: headerParams)
     }
     
     func getUserProfile(_ delegate:NMWebServiceDelegate){
@@ -253,12 +253,12 @@ class UserServices: NSObject {
         
         let user = User.currentUser
         
-        let headerParams = [kUserId : user.userId!]
+        let headerParams = [kUserId: user.userId!]
         let method = RegistrationMethods.userProfile.method
         self.sendRequestWith(method:method, params: nil, headers: headerParams)
     }
     
-    func updateUserProfile(_ delegate:NMWebServiceDelegate){
+    func updateUserProfile(_ delegate: NMWebServiceDelegate){
         
         self.delegate = delegate
         
@@ -274,63 +274,63 @@ class UserServices: NSObject {
             ] as [String : Any]
         
         let version = Utilities.getAppVersion()
-        let info = [kAppVersion : version,
-                    kOSType :"ios",
-                    kDeviceToken : ""
+        let info = [kAppVersion: version,
+                    kOSType: "ios",
+                    kDeviceToken: ""
         ]
         
         let params = [
-            kUserSettings:settings,
-            kBasicInfo:info,
-            kParticipantInfo : []] as [String : Any]
+            kUserSettings: settings,
+            kBasicInfo: info,
+            kParticipantInfo: []] as [String : Any]
         
         let method = RegistrationMethods.updateUserProfile.method
         
-        self.sendRequestWith(method:method, params: params, headers: headerParams)
+        self.sendRequestWith(method: method, params: params, headers: headerParams)
     }
     
-    func updateUserProfile(deviceToken:String, delegate:NMWebServiceDelegate){
+    func updateUserProfile(deviceToken: String, delegate: NMWebServiceDelegate){
         
         self.delegate = delegate
         
         let user = User.currentUser
-        let headerParams = [kUserId : user.userId!]
+        let headerParams = [kUserId: user.userId!]
         
         let settings = [kSettingsRemoteNotifications: (user.settings?.remoteNotifications)! as Bool,
-                        kSettingsTouchId : (user.settings?.touchId)! as Bool,
-                        kSettingsPassCode : (user.settings?.passcode)! as Bool,
+                        kSettingsTouchId: (user.settings?.touchId)! as Bool,
+                        kSettingsPassCode: (user.settings?.passcode)! as Bool,
                         kSettingsLocalNotifications : (user.settings?.localNotifications)! as Bool,
-                        kSettingsLeadTime : (user.settings?.leadTime)! as String,
-                        kSettingsLocale : (user.settings?.locale)! as String
+                        kSettingsLeadTime: (user.settings?.leadTime)! as String,
+                        kSettingsLocale: (user.settings?.locale)! as String
             ] as [String : Any]
         
         let version = Utilities.getAppVersion()
-        let info = [kAppVersion : version,
-                    kOSType :"ios",
-                    kDeviceToken : deviceToken
+        let info = [kAppVersion: version,
+                    kOSType: "ios",
+                    kDeviceToken: deviceToken
         ]
         
         let params = [
             
             kBasicInfo:info,
-            kParticipantInfo : []] as [String : Any]
+            kParticipantInfo: []] as [String: Any]
         
         let method = RegistrationMethods.updateUserProfile.method
         
-        self.sendRequestWith(method:method, params: params, headers: headerParams)
+        self.sendRequestWith(method: method, params: params, headers: headerParams)
     }
     
-    func getUserPreference(_ delegate:NMWebServiceDelegate){
+    func getUserPreference(_ delegate: NMWebServiceDelegate){
         
         self.delegate = delegate
         
         let user = User.currentUser
-        let headerParams = [kUserId : user.userId!,
+        let headerParams = [kUserId: user.userId!,
                             kUserAuthToken: user.authToken] as Dictionary<String, String>
         
         let method = RegistrationMethods.userPreferences.method
         
-        self.sendRequestWith(method:method, params: nil, headers: headerParams)
+        self.sendRequestWith(method: method, params: nil, headers: headerParams)
     }
     
     
@@ -339,81 +339,81 @@ class UserServices: NSObject {
         self.delegate = delegate
         
         let user = User.currentUser
-        let headerParams = [kUserId : user.userId!] as Dictionary<String, String>
+        let headerParams = [kUserId: user.userId!] as Dictionary<String, String>
         let method = RegistrationMethods.studyState.method
         
-        self.sendRequestWith(method:method, params: nil, headers: headerParams)
+        self.sendRequestWith(method: method, params: nil, headers: headerParams)
     }
     
-    func updateCompletionAdherence(studyStauts:UserStudyStatus , delegate:NMWebServiceDelegate){
+    func updateCompletionAdherence(studyStauts: UserStudyStatus , delegate: NMWebServiceDelegate){
         
         self.delegate = delegate
         
         let user = User.currentUser
-        let headerParams = [kUserId : user.userId!]
+        let headerParams = [kUserId: user.userId!]
         
-        let params = [kStudies:[studyStauts.getCompletionAdherence()]] as [String : Any]
+        let params = [kStudies: [studyStauts.getCompletionAdherence()]] as [String: Any]
         let method = RegistrationMethods.updateStudyState.method
         
-        self.sendRequestWith(method:method, params: params, headers: headerParams)
+        self.sendRequestWith(method: method, params: params, headers: headerParams)
     }
     
-    func updateStudyBookmarkStatus(studyStauts:UserStudyStatus , delegate:NMWebServiceDelegate){
+    func updateStudyBookmarkStatus(studyStauts: UserStudyStatus , delegate: NMWebServiceDelegate){
         self.delegate = delegate
         
         let user = User.currentUser
-        let headerParams = [kUserId : user.userId!]
+        let headerParams = [kUserId: user.userId!]
         
-        let params = [kStudies:[studyStauts.getBookmarkUserStudyStatus()]] as [String : Any]
+        let params = [kStudies: [studyStauts.getBookmarkUserStudyStatus()]] as [String : Any]
         let method = RegistrationMethods.updateStudyState.method
         
-        self.sendRequestWith(method:method, params: params, headers: headerParams)
+        self.sendRequestWith(method: method, params: params, headers: headerParams)
     }
     
-    func updateActivityBookmarkStatus(activityStauts:UserActivityStatus , delegate:NMWebServiceDelegate){
+    func updateActivityBookmarkStatus(activityStauts: UserActivityStatus , delegate: NMWebServiceDelegate){
         self.delegate = delegate
         
         let user = User.currentUser
-        let headerParams = [kUserId : user.userId] as Dictionary<String, String>
+        let headerParams = [kUserId: user.userId] as Dictionary<String, String>
         
-        let params = [kActivites:[activityStauts.getBookmarkUserActivityStatus()]] as [String : Any]
+        let params = [kActivites: [activityStauts.getBookmarkUserActivityStatus()]] as [String : Any]
         let method = RegistrationMethods.updateActivityState.method
         
-        self.sendRequestWith(method:method, params: params, headers: headerParams)
+        self.sendRequestWith(method: method, params: params, headers: headerParams)
     }
     
-    func updateUserParticipatedStatus(studyStauts:UserStudyStatus, delegate:NMWebServiceDelegate){
+    func updateUserParticipatedStatus(studyStauts: UserStudyStatus, delegate:NMWebServiceDelegate){
         
         self.delegate = delegate
         
         let user = User.currentUser
         let headerParams = [kUserId : user.userId] as Dictionary<String, String>
-        let params = [kStudies:[studyStauts.getParticipatedUserStudyStatus()]] as [String : Any]
+        let params = [kStudies: [studyStauts.getParticipatedUserStudyStatus()]] as [String : Any]
         let method = RegistrationMethods.updateStudyState.method
         
-        self.sendRequestWith(method:method, params: params, headers: headerParams)
+        self.sendRequestWith(method: method, params: params, headers: headerParams)
     }
     
-    func updateUserActivityParticipatedStatus(studyId:String, activityStatus:UserActivityStatus, delegate:NMWebServiceDelegate){
+    func updateUserActivityParticipatedStatus(studyId: String, activityStatus: UserActivityStatus, delegate: NMWebServiceDelegate){
         
         self.delegate = delegate
         
         let user = User.currentUser
-        let headerParams = [kUserId : user.userId] as Dictionary<String, String>
-        let params = [kStudyId:studyId,
-                      kActivity:[activityStatus.getParticipatedUserActivityStatus()]] as [String : Any]
+        let headerParams = [kUserId: user.userId] as Dictionary<String, String>
+        let params = [kStudyId: studyId,
+                      kActivity: [activityStatus.getParticipatedUserActivityStatus()]] as [String: Any]
         let method = RegistrationMethods.updateActivityState.method
-        self.sendRequestWith(method:method, params: params, headers: headerParams)
+        self.sendRequestWith(method: method, params: params, headers: headerParams)
     }
     
-    func updateUserEligibilityConsentStatus(eligibilityStatus:Bool,consentStatus:ConsentStatus, delegate:NMWebServiceDelegate){
+    func updateUserEligibilityConsentStatus(eligibilityStatus: Bool,consentStatus: ConsentStatus, delegate: NMWebServiceDelegate){
         
         
         self.delegate = delegate
         
         //INCOMPLETE
         let user = User.currentUser
-        let headerParams = [kUserId : user.userId! as String,
+        let headerParams = [kUserId: user.userId! as String,
                             kUserAuthToken: user.authToken! as String]
         
         let consentVersion:String?
@@ -426,36 +426,36 @@ class UserServices: NSObject {
         
         let base64data = ConsentBuilder.currentConsent?.consentResult?.consentPdfData!.base64EncodedString()
         
-        let consent = [ kConsentDocumentVersion : consentVersion! as String,
-                        kStatus :consentStatus.rawValue,
-                        kConsentpdf : "\(base64data!)" as Any] as [String : Any]
+        let consent = [ kConsentDocumentVersion: consentVersion! as String,
+                        kStatus: consentStatus.rawValue,
+                        kConsentpdf: "\(base64data!)" as Any] as [String: Any]
         
         
-        let params = [kStudyId : (Study.currentStudy?.studyId!)! as String,
-                      kEligibility : eligibilityStatus,
-                      kConsent : consent,
-                      kConsentSharing : ""] as [String : Any]
+        let params = [kStudyId: (Study.currentStudy?.studyId!)! as String,
+                      kEligibility: eligibilityStatus,
+                      kConsent: consent,
+                      kConsentSharing: ""] as [String : Any]
         let method = RegistrationMethods.updateEligibilityConsentStatus.method
         
         print(" doc == \(ConsentBuilder.currentConsent?.consentResult?.consentPdfData)")
-        self.sendRequestWith(method:method, params: params, headers:headerParams)
+        self.sendRequestWith(method: method, params: params, headers: headerParams)
     }
     
-    func getConsentPDFForStudy(studyId:String , delegate:NMWebServiceDelegate) {
+    func getConsentPDFForStudy(studyId: String , delegate: NMWebServiceDelegate) {
         
         self.delegate = delegate
         
         let user = User.currentUser
         let params = [kStudyId: studyId,
-                      "consentVersion":""]
+                      "consentVersion": ""]
         
-        let headerParams = [kUserId : user.userId!]
+        let headerParams = [kUserId: user.userId!]
         let method = RegistrationMethods.consentPDF.method
         
-        self.sendRequestWith(method:method, params: params, headers: headerParams)
+        self.sendRequestWith(method: method, params: params, headers: headerParams)
     }
     
-    func updateUserActivityState(_ delegate:NMWebServiceDelegate) {
+    func updateUserActivityState(_ delegate: NMWebServiceDelegate) {
         
         self.delegate = delegate
         
@@ -463,52 +463,52 @@ class UserServices: NSObject {
         let method = RegistrationMethods.updateActivityState.method
     }
     
-    func getUserActivityState(studyId:String , delegate:NMWebServiceDelegate) {
+    func getUserActivityState(studyId: String , delegate: NMWebServiceDelegate) {
         
         self.delegate = delegate
         
         let user = User.currentUser
         let params = [kStudyId: studyId]
-        let headerParams = [kUserId : user.userId!]
+        let headerParams = [kUserId: user.userId!]
         let method = RegistrationMethods.activityState.method
-        self.sendRequestWith(method:method, params: params, headers: headerParams)
+        self.sendRequestWith(method: method, params: params, headers: headerParams)
     }
     
-    func withdrawFromStudy(studyId:String ,shouldDeleteData:Bool, delegate:NMWebServiceDelegate){
+    func withdrawFromStudy(studyId: String ,shouldDeleteData: Bool, delegate: NMWebServiceDelegate){
         
         
         self.delegate = delegate
         let user = User.currentUser
-        let headerParams = [kUserId : user.userId! as String]
+        let headerParams = [kUserId: user.userId! as String]
         
         let params = [
             kStudyId: studyId,
-            kDeleteData: shouldDeleteData] as [String : Any]
+            kDeleteData: shouldDeleteData] as [String: Any]
         
         let method = RegistrationMethods.withdraw.method
         
-        self.sendRequestWith(method:method, params: params, headers: headerParams)
+        self.sendRequestWith(method: method, params: params, headers: headerParams)
     }
     
     func updateToken(){
         
         let user = User.currentUser
         
-        let param = [kRefreshToken:user.refreshToken!]
+        let param = [kRefreshToken: user.refreshToken!]
         let method = RegistrationMethods.refreshToken.method
-        self.sendRequestWith(method:method, params: param, headers:nil)
+        self.sendRequestWith(method: method, params: param, headers: nil)
         
     }
     
-    func syncOfflineSavedData(method:Method, params:Dictionary<String, Any>?,headers:Dictionary<String, String>? , delegate:NMWebServiceDelegate){
+    func syncOfflineSavedData(method: Method, params: Dictionary<String, Any>?,headers: Dictionary<String, String>? , delegate: NMWebServiceDelegate){
         
         self.delegate = delegate
-        self.sendRequestWith(method:method, params: params, headers: headers)
+        self.sendRequestWith(method: method, params: params, headers: headers)
     }
     
     
     //MARK:Parsers
-    func handleUserLoginResponse(response:Dictionary<String, Any>){
+    func handleUserLoginResponse(response: Dictionary<String, Any>){
         
         let user = User.currentUser
         user.userId     = (response[kUserId] as? String)!
@@ -536,7 +536,7 @@ class UserServices: NSObject {
             
             //TEMP : Need to save these values in Realm
             let ud = UserDefaults.standard
-            ud.set(user.authToken, forKey:kUserAuthToken)
+            ud.set(user.authToken, forKey: kUserAuthToken)
             ud.set(user.userId!, forKey: kUserId)
             ud.set(true, forKey: kPasscodeIsPending)
             ud.synchronize()
@@ -547,7 +547,7 @@ class UserServices: NSObject {
         
     }
     
-    func handleUserRegistrationResponse(response:Dictionary<String, Any>){
+    func handleUserRegistrationResponse(response: Dictionary<String, Any>){
         
         let user = User.currentUser
         user.userId     = (response[kUserId] as? String)!
@@ -559,7 +559,7 @@ class UserServices: NSObject {
         
     }
     
-    func handleConfirmRegistrationResponse(response:Dictionary<String, Any>){
+    func handleConfirmRegistrationResponse(response: Dictionary<String, Any>){
         
         let user = User.currentUser
         if let varified = response[kUserVerified] as? Bool {
@@ -571,7 +571,7 @@ class UserServices: NSObject {
                 
                 //TEMP : Need to save these values in Realm
                 let ud = UserDefaults.standard
-                ud.set(user.authToken, forKey:kUserAuthToken)
+                ud.set(user.authToken, forKey: kUserAuthToken)
                 ud.set(user.userId!, forKey: kUserId)
                 ud.synchronize()
                 //Save Current User to DB
@@ -581,7 +581,7 @@ class UserServices: NSObject {
         }
     }
     
-    func handleEmailVerifyResponse(response:Dictionary<String, Any>){
+    func handleEmailVerifyResponse(response: Dictionary<String, Any>){
         
         let user = User.currentUser
         user.verified = true
@@ -594,7 +594,7 @@ class UserServices: NSObject {
                 
                 //TEMP : Need to save these values in Realm
                 let ud = UserDefaults.standard
-                ud.set(user.authToken, forKey:kUserAuthToken)
+                ud.set(user.authToken, forKey: kUserAuthToken)
                 ud.set(user.userId!, forKey: kUserId)
                 ud.set(true, forKey: kPasscodeIsPending)
                 ud.synchronize()
@@ -604,7 +604,7 @@ class UserServices: NSObject {
         }
     }
     
-    func handleGetUserProfileResponse(response:Dictionary<String, Any>) {
+    func handleGetUserProfileResponse(response: Dictionary<String, Any>) {
         
         let user = User.currentUser
         
@@ -623,14 +623,14 @@ class UserServices: NSObject {
         user.lastName = profile[kUserLastName] as? String
     }
     
-    func handleUpdateUserProfileResponse(response:Dictionary<String, Any>) {
+    func handleUpdateUserProfileResponse(response: Dictionary<String, Any>) {
     }
     
-    func handleResendEmailConfirmationResponse(response:Dictionary<String, Any>) {
+    func handleResendEmailConfirmationResponse(response: Dictionary<String, Any>) {
     }
     
     
-    func handleChangePasswordResponse(response:Dictionary<String, Any>) {
+    func handleChangePasswordResponse(response: Dictionary<String, Any>) {
         
         let user = User.currentUser
         if user.verified! {
@@ -641,7 +641,7 @@ class UserServices: NSObject {
             
             //TEMP : Need to save these values in Realm
             let ud = UserDefaults.standard
-            ud.set(user.authToken, forKey:kUserAuthToken)
+            ud.set(user.authToken, forKey: kUserAuthToken)
             ud.set(user.userId!, forKey: kUserId)
             ud.synchronize()
         }
@@ -649,7 +649,7 @@ class UserServices: NSObject {
     }
     
     
-    func handleGetPreferenceResponse(response:Dictionary<String, Any>){
+    func handleGetPreferenceResponse(response: Dictionary<String, Any>){
         
         let user = User.currentUser
 
@@ -671,7 +671,7 @@ class UserServices: NSObject {
         }
     }
     
-    func handleGetStudyStatesResponse(response:Dictionary<String, Any>){
+    func handleGetStudyStatesResponse(response: Dictionary<String, Any>){
         let user = User.currentUser
         //studies
         user.participatedStudies.removeAll()
@@ -683,7 +683,7 @@ class UserServices: NSObject {
             }
         }
     }
-    func handleGetActivityStatesResponse(response:Dictionary<String, Any>){
+    func handleGetActivityStatesResponse(response: Dictionary<String, Any>){
         let user = User.currentUser
         //activities
         if let activites = response[kActivites]  as? Array<Dictionary<String, Any>> {
@@ -695,11 +695,11 @@ class UserServices: NSObject {
             }
         }
     }
-    func handleUpdateEligibilityConsentStatusResponse(response:Dictionary<String, Any>){
+    func handleUpdateEligibilityConsentStatusResponse(response: Dictionary<String, Any>){
         
     }
     
-    func handleGetConsentPDFResponse(response:Dictionary<String, Any>){
+    func handleGetConsentPDFResponse(response: Dictionary<String, Any>){
         
         let user = User.currentUser
         if Utilities.isValidValue(someObject: response[kConsent] as AnyObject?) {
@@ -707,11 +707,11 @@ class UserServices: NSObject {
         }
     }
     
-    func handleUpdateActivityStateResponse(response:Dictionary<String, Any>){
+    func handleUpdateActivityStateResponse(response: Dictionary<String, Any>){
         
     }
     
-    func handleGetActivityStateResponse(response:Dictionary<String, Any>){
+    func handleGetActivityStateResponse(response: Dictionary<String, Any>){
         
         let user = User.currentUser
         
@@ -724,10 +724,10 @@ class UserServices: NSObject {
         }
     }
     
-    func handleWithdrawFromStudyResponse(response:Dictionary<String, Any>){
+    func handleWithdrawFromStudyResponse(response: Dictionary<String, Any>){
     }
     
-    func handleLogoutResponse(response:Dictionary<String, Any>)  {
+    func handleLogoutResponse(response: Dictionary<String, Any>)  {
         
         //TEMP
         let ud = UserDefaults.standard
@@ -757,7 +757,7 @@ class UserServices: NSObject {
         
     }
     
-    func handleDeleteAccountResponse(response:Dictionary<String, Any>) {
+    func handleDeleteAccountResponse(response: Dictionary<String, Any>) {
         let ud = UserDefaults.standard
         ud.removeObject(forKey: kUserAuthToken)
         ud.removeObject(forKey: kUserId)
@@ -781,7 +781,7 @@ class UserServices: NSObject {
         LocalNotification.cancelAllLocalNotification()
     }
     
-    func handleDeActivateAccountResponse(response:Dictionary<String, Any>) {
+    func handleDeActivateAccountResponse(response: Dictionary<String, Any>) {
         let ud = UserDefaults.standard
         ud.removeObject(forKey: kUserAuthToken)
         ud.removeObject(forKey: kUserId)
@@ -805,7 +805,7 @@ class UserServices: NSObject {
         LocalNotification.cancelAllLocalNotification()
     }
     
-    func handleUpdateTokenResponse(response:Dictionary<String, Any>){
+    func handleUpdateTokenResponse(response: Dictionary<String, Any>){
         
         let user = User.currentUser
         user.authToken  = (response[kUserAuthToken] as? String)!
@@ -824,7 +824,7 @@ class UserServices: NSObject {
     }
     
     
-    private func sendRequestWith(method:Method, params:Dictionary<String, Any>?,headers:Dictionary<String, String>?){
+    private func sendRequestWith(method: Method, params: Dictionary<String, Any>?,headers: Dictionary<String, String>?){
         
         self.requestParams = params
         self.headerParams = headers

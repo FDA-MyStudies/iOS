@@ -52,7 +52,7 @@ let kEligibilityCorrectAnswer = "answer"
 let kEligibilityCorrectAnswerKey = "key"
 
 
-enum EligibilityStepType:String {
+enum EligibilityStepType: String {
     case token = "token"
     case test = "test"
     case both = "combined"
@@ -61,12 +61,12 @@ enum EligibilityStepType:String {
 
 class EligibilityBuilder{
     
-    var type:EligibilityStepType? // type specifies Eligibility Type which can be token, test or both
-    var tokenTitle:String? // Custom token for Eligibility Token step title
+    var type: EligibilityStepType? // type specifies Eligibility Type which can be token, test or both
+    var tokenTitle: String? // Custom token for Eligibility Token step title
     
-    var testArray:Array<Any>? // contains array of Dictionary of steps for the test
-    static var currentEligibility:EligibilityBuilder? = nil
-    var correctAnswers:Array<Dictionary<String,Any>>? // array of Dictionary of step Results
+    var testArray: Array<Any>? // contains array of Dictionary of steps for the test
+    static var currentEligibility: EligibilityBuilder? = nil
+    var correctAnswers: Array<Dictionary<String,Any>>? // array of Dictionary of step Results
     
     /**
      default Intalizer method
@@ -82,7 +82,7 @@ class EligibilityBuilder{
     /**
      initializer method with eligibility Dictionary
     */
-    func initEligibilityWithDict(eligibilityDict:Dictionary<String, Any>)  {
+    func initEligibilityWithDict(eligibilityDict: Dictionary<String, Any>)  {
         
         if Utilities.isValidObject(someObject: eligibilityDict[kEligibilityTest] as AnyObject ){
             self.testArray = eligibilityDict[kEligibilityTest] as! Array<Dictionary<String, Any>>
@@ -106,12 +106,12 @@ class EligibilityBuilder{
         
         if  self.type != nil{
             
-            var stepsArray:[ORKStep]? = [ORKStep]()
+            var stepsArray: [ORKStep]? = [ORKStep]()
             
             if self.type == EligibilityStepType.token { //Token Step
                 
                 // creating Eligibility Token Step
-                let eligibilityStep:EligibilityStep? = EligibilityStep(identifier: kEligibilityTokenStep)
+                let eligibilityStep: EligibilityStep? = EligibilityStep(identifier: kEligibilityTokenStep)
                 eligibilityStep?.type = "TOKEN"
                 
                 if self.tokenTitle != nil {
@@ -143,14 +143,14 @@ class EligibilityBuilder{
                 //test array will hold the questions, correct answers will hold the answers
                 
                 for stepDict in self.testArray!{
-                    let questionStep:ActivityQuestionStep? = ActivityQuestionStep()
+                    let questionStep: ActivityQuestionStep? = ActivityQuestionStep()
                     questionStep?.initWithDict(stepDict: stepDict as! Dictionary<String, Any>)
                     stepsArray?.append((questionStep?.getQuestionStep())!)
                 }
                 
                 // creating InEligibility Completion Step
                 
-                let eligibilityCompletionStep:InEligibilityStep? = InEligibilityStep(identifier: kInEligibilityStep)
+                let eligibilityCompletionStep: InEligibilityStep? = InEligibilityStep(identifier: kInEligibilityStep)
                 
                 stepsArray?.append(eligibilityCompletionStep!)
                 
@@ -158,7 +158,7 @@ class EligibilityBuilder{
                 // for both test & token
                 
                 // creating Token Step
-                let eligibilityStep:EligibilityStep? = EligibilityStep(identifier: kEligibilityTokenStep)
+                let eligibilityStep: EligibilityStep? = EligibilityStep(identifier: kEligibilityTokenStep)
                 eligibilityStep?.type = "TOKEN"
                 
                 if self.tokenTitle != nil {
@@ -177,7 +177,7 @@ class EligibilityBuilder{
                 // creating Test Questions
                 for stepDict in self.testArray!{
                     
-                    let questionStep:ActivityQuestionStep? = ActivityQuestionStep()
+                    let questionStep: ActivityQuestionStep? = ActivityQuestionStep()
                     questionStep?.initWithDict(stepDict: stepDict as! Dictionary<String, Any>)
                     // Questions are mandatory not skippable
                     questionStep?.skippable = false
@@ -186,7 +186,7 @@ class EligibilityBuilder{
                 }
                 
                 // creating InEligibility Completion Step
-                let eligibilityCompletionStep:InEligibilityStep? = InEligibilityStep(identifier: kInEligibilityStep)
+                let eligibilityCompletionStep: InEligibilityStep? = InEligibilityStep(identifier: kInEligibilityStep)
                 
                 stepsArray?.append(eligibilityCompletionStep!)
             }
@@ -216,7 +216,7 @@ class EligibilityBuilder{
     }
 }
 
-class customInstructionStep:ORKInstructionStep{
+class customInstructionStep: ORKInstructionStep{
     func showsProgress() -> Bool {
         return false
     }

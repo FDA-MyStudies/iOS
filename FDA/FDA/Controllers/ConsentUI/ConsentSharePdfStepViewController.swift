@@ -34,8 +34,8 @@ let kSubTitle = "You can now start participating in the Study"
  @subTitle: subTitle displayed in Consent Completion UI
  */
 class ConsentCompletionStep: ORKStep {
-    var mainTitle:String?
-    var subTitle:String?
+    var mainTitle: String?
+    var subTitle: String?
     
     /*
      showsProgress: Displays the step numbers in navigation bar
@@ -48,12 +48,12 @@ class ConsentCompletionStep: ORKStep {
 
 class ConsentSharePdfStepViewController: ORKStepViewController {
     
-    @IBOutlet weak var buttonViewPdf:UIButton? // button to Push to PdfViewer
+    @IBOutlet weak var buttonViewPdf: UIButton? // button to Push to PdfViewer
     
-    @IBOutlet weak var buttonNext:UIButton? // button to take to next step
-    var consentDocument:ORKConsentDocument?
+    @IBOutlet weak var buttonNext: UIButton? // button to take to next step
+    var consentDocument: ORKConsentDocument?
     
-    var taskResult:ConsentCompletionTaskResult = ConsentCompletionTaskResult(identifier: kConsentCompletionResultIdentifier)
+    var taskResult: ConsentCompletionTaskResult = ConsentCompletionTaskResult(identifier: kConsentCompletionResultIdentifier)
     
     
     //MARK:ORKstepView Controller Init methods
@@ -139,9 +139,9 @@ class ConsentSharePdfStepViewController: ORKStepViewController {
 //Overrriding the ORKTaskResult to get customized results
 open class ConsentCompletionTaskResult: ORKResult {
     
-    open var didTapOnViewPdf:Bool = false
+    open var didTapOnViewPdf: Bool = false
     
-    open var pdfData:Data = Data()
+    open var pdfData: Data = Data()
     
     override open var description: String {
         get {

@@ -30,18 +30,18 @@ import RealmSwift
 class DBNotification: Object {
     
     
-    dynamic var id : String?
-    dynamic var title : String?
-    dynamic var message :String?
-    dynamic var studyId : String?
+    dynamic var id: String?
+    dynamic var title: String?
+    dynamic var message: String?
+    dynamic var studyId: String?
    
-    dynamic var notificationType:String?
-    dynamic var subType:String?
-    dynamic var audience:String?
+    dynamic var notificationType: String?
+    dynamic var subType: String?
+    dynamic var audience: String?
     
-    dynamic var activityId :String?
+    dynamic var activityId: String?
     
-    dynamic var date:Date?
+    dynamic var date: Date?
     
     dynamic var isRead = false
     
@@ -54,19 +54,19 @@ class DBNotification: Object {
 class DBLocalNotification: Object {
     
     
-    dynamic var id : String?
-    dynamic var title : String?
-    dynamic var message :String?
-    dynamic var studyId : String?
+    dynamic var id: String?
+    dynamic var title: String?
+    dynamic var message: String?
+    dynamic var studyId: String?
     
-    dynamic var notificationType:String?
-    dynamic var subType:String?
-    dynamic var audience:String?
+    dynamic var notificationType: String?
+    dynamic var subType: String?
+    dynamic var audience: String?
     
-    dynamic var activityId :String?
+    dynamic var activityId: String?
     
-    dynamic var startDate:Date?
-    dynamic var endDate:Date?
+    dynamic var startDate: Date?
+    dynamic var endDate: Date?
     
     dynamic var isRead = false
     

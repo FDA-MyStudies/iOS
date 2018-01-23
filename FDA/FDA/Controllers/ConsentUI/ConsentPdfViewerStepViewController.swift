@@ -45,12 +45,12 @@ class ConsentPdfViewerStep: ORKStep {
  */
 class ConsentPdfViewerStepViewController: ORKStepViewController {
     
-    @IBOutlet var webView : UIWebView?
-    var pdfData:Data?
+    @IBOutlet var webView: UIWebView?
+    var pdfData: Data?
     
-    @IBOutlet weak var buttonEmailPdf:UIBarButtonItem?
+    @IBOutlet weak var buttonEmailPdf: UIBarButtonItem?
     
-    @IBOutlet weak var buttonNext:UIButton?
+    @IBOutlet weak var buttonNext: UIButton?
     
     
     //MARK:ORKstepView Controller Init methods
@@ -88,7 +88,7 @@ class ConsentPdfViewerStepViewController: ORKStepViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.webView?.load(pdfData!, mimeType: "application/pdf", textEncodingName: "UTF-8", baseURL:URL.init(fileURLWithPath: "") )
+        self.webView?.load(pdfData!, mimeType: "application/pdf", textEncodingName: "UTF-8", baseURL: URL.init(fileURLWithPath: "") )
         webView?.delegate = self
         webView?.scalesPageToFit = true
     }
@@ -113,9 +113,9 @@ class ConsentPdfViewerStepViewController: ORKStepViewController {
             
         }else {
             
-            let alert = UIAlertController(title:NSLocalizedString(kTitleError, comment: ""),message:"",preferredStyle: UIAlertControllerStyle.alert)
+            let alert = UIAlertController(title: NSLocalizedString(kTitleError, comment: ""),message: "",preferredStyle: UIAlertControllerStyle.alert)
             
-            alert.addAction(UIAlertAction.init(title:NSLocalizedString(kTitleOk, comment: ""), style: .default, handler: { (action) in
+            alert.addAction(UIAlertAction.init(title: NSLocalizedString(kTitleOk, comment: ""), style: .default, handler: { (action) in
                 
                 self.dismiss(animated: true, completion: nil)
             }))
@@ -131,14 +131,14 @@ class ConsentPdfViewerStepViewController: ORKStepViewController {
 }
 
 //MARK: MailComposer Delegates
-extension ConsentPdfViewerStepViewController:MFMailComposeViewControllerDelegate{
+extension ConsentPdfViewerStepViewController: MFMailComposeViewControllerDelegate{
     func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
         controller.dismiss(animated: true, completion: nil)
     }
 }
 
 //MARK: WebView Delegate
-extension ConsentPdfViewerStepViewController:UIWebViewDelegate{
+extension ConsentPdfViewerStepViewController: UIWebViewDelegate{
     
     func webViewDidFinishLoad(_ webView: UIWebView) {
         self.removeProgressIndicator()
@@ -149,9 +149,9 @@ extension ConsentPdfViewerStepViewController:UIWebViewDelegate{
         self.removeProgressIndicator()
         
         let buttonTitleOK = NSLocalizedString("OK", comment: "")
-        let alert = UIAlertController(title:NSLocalizedString(kTitleError, comment: ""),message:error.localizedDescription,preferredStyle: UIAlertControllerStyle.alert)
+        let alert = UIAlertController(title: NSLocalizedString(kTitleError, comment: ""),message: error.localizedDescription,preferredStyle: UIAlertControllerStyle.alert)
         
-        alert.addAction(UIAlertAction.init(title:buttonTitleOK, style: .default, handler: { (action) in
+        alert.addAction(UIAlertAction.init(title: buttonTitleOK, style: .default, handler: { (action) in
             self.dismiss(animated: true, completion: nil)
             
         }))

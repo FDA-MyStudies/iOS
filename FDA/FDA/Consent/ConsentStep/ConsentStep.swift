@@ -34,7 +34,7 @@ let kConsentStepURL = "url"
 let kConsentStepVisualStep = "visualStep"
 
 
-enum ConsentStepSectionType:String{
+enum ConsentStepSectionType: String{
     case overview = "overview"
     case dataGathering = "dataGathering"
     case privacy = "privacy"
@@ -83,16 +83,16 @@ enum ConsentStepSectionType:String{
 
 class ConsentSectionStep{
     
-    var type:ConsentStepSectionType?
-    var title:String?
+    var type: ConsentStepSectionType?
+    var title: String?
     
-    var text:String?
-    var description:String? // Identifier
+    var text: String?
+    var description: String? // Identifier
    
-    var html:String?
-    var url:String?
+    var html: String?
+    var url: String?
     
-    var visualStep:Bool?
+    var visualStep: Bool?
     
     
     init() {
@@ -113,12 +113,12 @@ class ConsentSectionStep{
     /* setter method which initializes all params
      @stepDict:contains as key:Value pair for all the properties of ConsentSectionStep
      */
-    func initWithDict(stepDict:Dictionary<String, Any>){
+    func initWithDict(stepDict: Dictionary<String, Any>){
         
         if Utilities.isValidObject(someObject: stepDict as AnyObject?){
             
             if Utilities.isValidValue(someObject: stepDict[kConsentStepType] as AnyObject ){
-                self.type =  ConsentStepSectionType(rawValue:(stepDict[kConsentStepType] as? String)!)
+                self.type =  ConsentStepSectionType(rawValue: (stepDict[kConsentStepType] as? String)!)
             }
             
             if Utilities.isValidValue(someObject: stepDict[kConsentStepTitle] as AnyObject ){
@@ -152,9 +152,9 @@ class ConsentSectionStep{
     */
     func createConsentSection() ->ORKConsentSection {
         
-        let consentType:Int? = (self.type?.getIntValue())! >= 0 ? (self.type?.getIntValue()) : -1
+        let consentType: Int? = (self.type?.getIntValue())! >= 0 ? (self.type?.getIntValue()) : -1
         
-        let consentSection:ORKConsentSection!
+        let consentSection: ORKConsentSection!
         
         if self.visualStep == true{
             
@@ -173,7 +173,7 @@ class ConsentSectionStep{
            consentSection.htmlContent =  self.html!
         }
         else if self.url!.isEmpty == false{
-             consentSection.contentURL = URL(string:self.url!)
+             consentSection.contentURL = URL(string: self.url!)
         }
         
         if self.type == .custom && self.visualStep == true{

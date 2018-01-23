@@ -24,17 +24,17 @@
 import Foundation
 
 
-enum UserType:Int{
+enum UserType: Int{
     case AnonymousUser = 0
     case FDAUser
 }
 
-enum LogoutReason:String{
+enum LogoutReason: String{
     case user_action
     case error
     case security_jailbroken
 }
-enum DayValue : String{
+enum DayValue: String{
     case Sun
     case Mon
     case Tue
@@ -43,7 +43,7 @@ enum DayValue : String{
     case Fri
     case Sat
     
-    var dayIndex:Int{
+    var dayIndex: Int{
         switch self {
         case .Sun:
             return 1
@@ -74,21 +74,21 @@ let kPolicy = "privacy"
 //MARK: User
 class User{
     
-    var firstName : String?
-    var lastName :String?
-    var emailId : String?
-    var settings : Settings?
-    var userType : UserType?
-    var userId : String!
-    var password : String? = ""
-    var refreshToken:String! = ""
+    var firstName: String?
+    var lastName: String?
+    var emailId: String?
+    var settings: Settings?
+    var userType: UserType?
+    var userId: String!
+    var password: String? = ""
+    var refreshToken: String! = ""
     
-    var verified : Bool!
+    var verified: Bool!
     var authToken: String!
-    var participatedStudies:Array<UserStudyStatus>! = []
-    var participatedActivites:Array<UserActivityStatus>! = []
-    var logoutReason : LogoutReason = .user_action
-    var isLoginWithTempPassword:Bool = false
+    var participatedStudies: Array<UserStudyStatus>! = []
+    var participatedActivites: Array<UserActivityStatus>! = []
+    var logoutReason: LogoutReason = .user_action
+    var isLoginWithTempPassword: Bool = false
     //sharedInstance
     private static var _currentUser: User?
     
@@ -113,7 +113,7 @@ class User{
         self.refreshToken = ""
     }
     
-    init(firstName:String?,lastName:String?,emailId: String?,userType: UserType?,userId:String?){
+    init(firstName: String?,lastName: String?,emailId: String?,userType: UserType?,userId: String?){
         self.firstName = firstName
         self.lastName = lastName
         self.emailId = emailId
@@ -121,19 +121,19 @@ class User{
         self.userId = userId
     }
     
-    func setFirstName(firstName:String) {
+    func setFirstName(firstName: String) {
         self.firstName = firstName
     }
-    func setLastName(lastName:String) {
+    func setLastName(lastName: String) {
         self.lastName = lastName
     }
-    func setEmailId(emailId:String) {
+    func setEmailId(emailId: String) {
         self.emailId = emailId
     }
-    func setUserType(userType:UserType) {
+    func setUserType(userType: UserType) {
         self.userType = userType
     }
-    func setUserId(userId:String) {
+    func setUserId(userId: String) {
         self.userId = userId
     }
     func getFullName() -> String {
@@ -144,7 +144,7 @@ class User{
      Setter Method for user
      @param dict, contains dictionary of properties of user
      */
-    func setUser(dict:NSDictionary)  {
+    func setUser(dict: NSDictionary)  {
         
         if Utilities.isValidObject(someObject: dict) {
             
@@ -181,38 +181,38 @@ class User{
         if self.userType == .FDAUser {
             
             if self.userId != nil{
-                dataDict.setValue(self.userId, forKey:((kUserId as NSCopying) as? String)!)
+                dataDict.setValue(self.userId, forKey: ((kUserId as NSCopying) as? String)!)
             }
             let profileDict = NSMutableDictionary()
             
             
             if self.firstName != nil{
-                profileDict.setValue(self.firstName, forKey:((kUserFirstName as NSCopying) as? String)!)
+                profileDict.setValue(self.firstName, forKey: ((kUserFirstName as NSCopying) as? String)!)
                 
             }else {
-                profileDict.setValue("", forKey:((kUserFirstName as NSCopying) as? String)!)
+                profileDict.setValue("", forKey: ((kUserFirstName as NSCopying) as? String)!)
             }
             if self.lastName != nil{
-                profileDict.setValue(self.lastName, forKey:((kUserLastName as NSCopying) as? String)!)
+                profileDict.setValue(self.lastName, forKey: ((kUserLastName as NSCopying) as? String)!)
                 
             }else {
-                profileDict.setValue("", forKey:((kUserLastName as NSCopying) as? String)!)
+                profileDict.setValue("", forKey: ((kUserLastName as NSCopying) as? String)!)
             }
             
             let infoDict = NSMutableDictionary()
-            infoDict.setValue(kUserValueForOS, forKey:kUserOS)
+            infoDict.setValue(kUserValueForOS, forKey: kUserOS)
             
             if let version = Bundle.main.infoDictionary?[kCFBundleShortVersionString] as? String {
-                infoDict.setValue(version, forKey:kUserAppVersion)
+                infoDict.setValue(version, forKey: kUserAppVersion)
             }
             
-            dataDict.setObject(profileDict, forKey:kUserProfile as NSCopying)
-            dataDict.setObject(profileDict, forKey:kUserInfo as NSCopying)
+            dataDict.setObject(profileDict, forKey: kUserProfile as NSCopying)
+            dataDict.setObject(profileDict, forKey: kUserInfo as NSCopying)
         }
         return dataDict
     }
     
-    func udpateCompletionAndAdherence(studyId:String,completion:Int,adherence:Int) -> UserStudyStatus{
+    func udpateCompletionAndAdherence(studyId: String,completion: Int,adherence: Int) -> UserStudyStatus{
         
         let studies = self.participatedStudies as Array<UserStudyStatus>
         if let study =   studies.filter({$0.studyId == studyId}).first {
@@ -237,7 +237,7 @@ class User{
     
     //MARK:Study Bookmark
     
-    func isStudyBookmarked(studyId:String) -> Bool{
+    func isStudyBookmarked(studyId: String) -> Bool{
         
         let studies = self.participatedStudies as Array<UserStudyStatus>
         if let study =   studies.filter({$0.studyId == studyId}).first {
@@ -247,7 +247,7 @@ class User{
         
     }
     
-    func bookmarkStudy(studyId:String) -> UserStudyStatus{
+    func bookmarkStudy(studyId: String) -> UserStudyStatus{
         
         let studies = self.participatedStudies as Array<UserStudyStatus>
         if let study =   studies.filter({$0.studyId == studyId}).first {
@@ -272,7 +272,7 @@ class User{
         
     }
     
-    func removeBookbarkStudy(studyId:String) -> UserStudyStatus?{
+    func removeBookbarkStudy(studyId: String) -> UserStudyStatus?{
         
         let studies = self.participatedStudies as Array<UserStudyStatus>
         if let study =   studies.filter({$0.studyId == studyId}).first {
@@ -287,7 +287,7 @@ class User{
     
     
     //MARK:Activity Bookmark
-    func isActivityBookmarked(studyId:String,activityId:String) -> Bool{
+    func isActivityBookmarked(studyId: String,activityId: String) -> Bool{
         
         let activityes = self.participatedActivites as Array<UserActivityStatus>
         if let activity =   activityes.filter({$0.studyId == studyId && $0.activityId == activityId}).first {
@@ -298,7 +298,7 @@ class User{
     }
     
     
-    func bookmarkActivity(studyId:String,activityId:String) -> UserActivityStatus {
+    func bookmarkActivity(studyId: String,activityId: String) -> UserActivityStatus {
         
         let activityes = self.participatedActivites as Array<UserActivityStatus>
         if let activity =   activityes.filter({$0.studyId == studyId && $0.activityId == activityId}).first {
@@ -321,7 +321,7 @@ class User{
         
     }
     
-    func removeBookbarkActivity(studyId:String,activityId:String) {
+    func removeBookbarkActivity(studyId: String,activityId: String) {
         
         let activityes = self.participatedActivites as Array<UserActivityStatus>
         if let activity =   activityes.filter({$0.studyId == studyId && $0.activityId == activityId}).first {
@@ -331,7 +331,7 @@ class User{
     }
     
     //MARK:Study Status
-    func updateStudyStatus(studyId:String,status:UserStudyStatus.StudyStatus)->UserStudyStatus {
+    func updateStudyStatus(studyId: String,status: UserStudyStatus.StudyStatus)->UserStudyStatus {
         
         let studies = self.participatedStudies as Array<UserStudyStatus>
         if let study =   studies.filter({$0.studyId == studyId}).first {
@@ -352,7 +352,7 @@ class User{
         }
     }
     
-    func updateParticipantId(studyId:String,participantId:String)->UserStudyStatus {
+    func updateParticipantId(studyId: String,participantId: String)->UserStudyStatus {
         
         let studies = self.participatedStudies as Array<UserStudyStatus>
         if let study =   studies.filter({$0.studyId == studyId}).first {
@@ -373,7 +373,7 @@ class User{
         }
     }
     
-    func getStudyStatus(studyId:String) -> UserStudyStatus.StudyStatus{
+    func getStudyStatus(studyId: String) -> UserStudyStatus.StudyStatus{
         
         let studies = self.participatedStudies as Array<UserStudyStatus>
         if let study =   studies.filter({$0.studyId == studyId}).first {
@@ -383,7 +383,7 @@ class User{
     }
     
     //MARK:Activity Status
-    func updateActivityStatus(studyId:String,activityId:String,runId:String,status:UserActivityStatus.ActivityStatus) -> UserActivityStatus{
+    func updateActivityStatus(studyId: String,activityId: String,runId: String,status: UserActivityStatus.ActivityStatus) -> UserActivityStatus{
         
         let activityes = self.participatedActivites as Array<UserActivityStatus>
         if let activity =   activityes.filter({$0.activityId == activityId && $0.activityRunId == runId}).first {
@@ -406,7 +406,7 @@ class User{
         }
     }
     
-    func getActivityStatus(studyId:String,activityId:String) -> UserActivityStatus.ActivityStatus?{
+    func getActivityStatus(studyId: String,activityId: String) -> UserActivityStatus.ActivityStatus?{
         
         let activityes = self.participatedActivites as Array<UserActivityStatus>
         if let activity =   activityes.filter({$0.activityId == activityId}).first {
@@ -421,12 +421,12 @@ class User{
 //MARK:User Settings
 class Settings{
     
-    var remoteNotifications : Bool?
-    var localNotifications :Bool?
-    var touchId :Bool?
-    var passcode :Bool?
-    var leadTime :String?
-    var locale : String?
+    var remoteNotifications: Bool?
+    var localNotifications: Bool?
+    var touchId: Bool?
+    var passcode: Bool?
+    var leadTime: String?
+    var locale: String?
     
     init() {
         self.remoteNotifications = false
@@ -437,31 +437,31 @@ class Settings{
         self.locale = ""
     }
     
-    init(remoteNotifications:Bool?,localNotifications:Bool?,touchId: Bool?,passcode:Bool?){
+    init(remoteNotifications: Bool?,localNotifications: Bool?,touchId: Bool?,passcode: Bool?){
         self.remoteNotifications = remoteNotifications
         self.localNotifications = localNotifications
         self.touchId = touchId
         self.passcode = passcode
     }
     
-    func setRemoteNotification(value : Bool) {
+    func setRemoteNotification(value: Bool) {
         self.remoteNotifications = value
     }
-    func setLocalNotification(value : Bool) {
+    func setLocalNotification(value: Bool) {
         self.localNotifications = value
     }
-    func setTouchId(value : Bool) {
+    func setTouchId(value: Bool) {
         self.touchId = value
     }
-    func setPasscode(value : Bool) {
+    func setPasscode(value: Bool) {
         self.passcode = value
     }
-    func setLeadTime(value:String) {
+    func setLeadTime(value: String) {
         self.leadTime = value
     }
     
     
-    func setSettings(dict:NSDictionary) {
+    func setSettings(dict: NSDictionary) {
         
         if Utilities.isValidObject(someObject: dict) {
             
@@ -495,7 +495,7 @@ class Settings{
 //MARK: StudyStatus
 class UserStudyStatus{
     
-    enum StudyStatus:Int {
+    enum StudyStatus: Int {
         
         case yetToJoin
         case notEligible
@@ -503,7 +503,7 @@ class UserStudyStatus{
         case completed
         case Withdrawn
         
-        var sortIndex : Int {
+        var sortIndex: Int {
             switch self {
             case .inProgress:
                 return 0
@@ -518,7 +518,7 @@ class UserStudyStatus{
             }
         }
         
-        var description:String {
+        var description: String {
             switch self {
             case .yetToJoin:
                 return "Yet To Join"
@@ -534,7 +534,7 @@ class UserStudyStatus{
             }
         }
         
-        var closedStudyDescription:String {
+        var closedStudyDescription: String {
             switch self {
             case .yetToJoin:
                 return "No participation"
@@ -550,11 +550,11 @@ class UserStudyStatus{
             }
         }
         
-        var upcomingStudyDescription:String {
+        var upcomingStudyDescription: String {
             return "Yet to Join"
         }
         
-        var paramValue:String {
+        var paramValue: String {
             switch self {
             case .yetToJoin:
                 return "yetToJoin"
@@ -572,14 +572,14 @@ class UserStudyStatus{
         
     }
     
-    var bookmarked:Bool = false
-    var studyId:String! = ""
-    var status:StudyStatus = .yetToJoin
-    var consent:String! = ""
-    var joiningDate:Date!  //User joined Date for study
-    var completion:Int = 0
-    var adherence:Int = 0
-    var participantId:String?
+    var bookmarked: Bool = false
+    var studyId: String! = ""
+    var status: StudyStatus = .yetToJoin
+    var consent: String! = ""
+    var joiningDate: Date!  //User joined Date for study
+    var completion: Int = 0
+    var adherence: Int = 0
+    var participantId: String?
     
     init() {
         
@@ -588,7 +588,7 @@ class UserStudyStatus{
     /**
      Initializer with dictionary of properties of User
      */
-    init(detail:Dictionary<String, Any>) {
+    init(detail: Dictionary<String, Any>) {
         
         if Utilities.isValidObject(someObject: detail as AnyObject?) {
             
@@ -635,8 +635,8 @@ class UserStudyStatus{
     
     func getBookmarkUserStudyStatus() -> Dictionary<String,Any>{
         
-        let studyDetail = [kStudyId:self.studyId,
-                           kBookmarked:self.bookmarked] as [String : Any]
+        let studyDetail = [kStudyId: self.studyId,
+                           kBookmarked: self.bookmarked] as [String : Any]
         return studyDetail
     }
     
@@ -647,15 +647,15 @@ class UserStudyStatus{
             id = self.participantId!
         }
         
-        let studyDetail = [kStudyId:self.studyId,
-                           kStudyStatus:self.status.paramValue,
-                           kStudyParticipantId:id] as [String : Any]
+        let studyDetail = [kStudyId: self.studyId,
+                           kStudyStatus: self.status.paramValue,
+                           kStudyParticipantId: id] as [String : Any]
         return studyDetail
     }
     
     func getCompletionAdherence() -> Dictionary<String,Any>{
-        let studyDetail = [kStudyId:self.studyId,
-                           "completion":completion,
+        let studyDetail = [kStudyId: self.studyId,
+                           "completion": completion,
                            "adherence":adherence] as [String : Any]
         return studyDetail
     }
@@ -664,15 +664,15 @@ class UserStudyStatus{
 
 //MARK: Terms & Policy
 class TermsAndPolicy {
-    var termsURL:String?
-    var policyURL:String?
+    var termsURL: String?
+    var policyURL: String?
     static var currentTermsAndPolicy: TermsAndPolicy?
     init() {
         self.termsURL = ""
         self.policyURL = ""
     }
     //Initializer
-    func initWithDict(dict:Dictionary<String,Any>) {
+    func initWithDict(dict: Dictionary<String,Any>) {
         if Utilities.isValidObject(someObject: dict as AnyObject) {
             
             if Utilities.isValidValue(someObject: dict[kTerms] as AnyObject?)  {
@@ -698,14 +698,14 @@ class TermsAndPolicy {
 //MARK: ActivityStatus
 class UserActivityStatus{
     
-    enum ActivityStatus:Int {
+    enum ActivityStatus: Int {
         case yetToJoin
         case inProgress
         case completed
         case abandoned
         
         
-        var sortIndex : Int {
+        var sortIndex: Int {
             switch self {
             case .inProgress:
                 return 0
@@ -719,7 +719,7 @@ class UserActivityStatus{
                 
             }
         }
-        var description:String {
+        var description: String {
             switch self {
             case .yetToJoin:
                 return "  Start  "
@@ -733,7 +733,7 @@ class UserActivityStatus{
             }
         }
         
-        var paramValue:String {
+        var paramValue: String {
             switch self {
             case .yetToJoin:
                 return "yetToJoin"
@@ -749,22 +749,22 @@ class UserActivityStatus{
         }
     }
     
-    var bookmarked:Bool = false
-    var activityId:String! = ""
-    var studyId:String! = ""
-    var activityVersion:String! = "1.0"
-    var activityRunId:String! = ""
+    var bookmarked: Bool = false
+    var activityId: String! = ""
+    var studyId: String! = ""
+    var activityVersion: String! = "1.0"
+    var activityRunId: String! = ""
     var totalRuns = 0
     var compeltedRuns = 0
     var incompletedRuns = 0
-    var status:ActivityStatus = .yetToJoin
+    var status: ActivityStatus = .yetToJoin
     init() {
         
     }
     /**
      Initializer with dictionary of properties
      */
-    init(detail:Dictionary<String, Any> ,studyId:String){
+    init(detail: Dictionary<String, Any> ,studyId: String){
         
         if Utilities.isValidObject(someObject: detail as AnyObject?){
             
@@ -817,24 +817,24 @@ class UserActivityStatus{
     
     func getBookmarkUserActivityStatus() -> Dictionary<String,Any>{
         
-        let studyDetail = [kStudyId:self.studyId,
-                           kActivityId:self.activityId,
-                           kBookmarked:self.bookmarked] as [String : Any]
+        let studyDetail = [kStudyId: self.studyId,
+                           kActivityId: self.activityId,
+                           kBookmarked: self.bookmarked] as [String : Any]
         return studyDetail
     }
     
     func getParticipatedUserActivityStatus() -> Dictionary<String,Any>{
         
-        let runDetail = [	"total":self.totalRuns,
-                             "completed":self.compeltedRuns,
-                             "missed":self.incompletedRuns]
+        let runDetail = [	"total": self.totalRuns,
+                             "completed": self.compeltedRuns,
+                             "missed": self.incompletedRuns]
         
         let studyDetail = [
-            kActivityId:self.activityId,
-            kActivityRunId:self.activityRunId,
-            kActivityStatus:self.status.paramValue,
-            kActivityVersion:self.activityVersion,
-            "activityRun":runDetail] as [String : Any]
+            kActivityId: self.activityId,
+            kActivityRunId: self.activityRunId,
+            kActivityStatus: self.status.paramValue,
+            kActivityVersion: self.activityVersion,
+            "activityRun": runDetail] as [String : Any]
         
         return studyDetail
     }

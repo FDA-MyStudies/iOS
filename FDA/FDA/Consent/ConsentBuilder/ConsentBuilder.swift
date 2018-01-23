@@ -116,21 +116,21 @@ class ConsentBuilder{
     
     //var consentIdentifier:String? // this id will be used to add to signature
     
-    var consentSectionArray:[ORKConsentSection]
-    var consentStepArray:[ORKStep]
+    var consentSectionArray: [ORKConsentSection]
+    var consentStepArray: [ORKStep]
     
-    var reviewConsent:ReviewConsent?
-    var sharingConsent:SharingConsent?
+    var reviewConsent: ReviewConsent?
+    var sharingConsent: SharingConsent?
     
-    var consentDocument:ORKConsentDocument?
-    var version:String?
-    var consentStatus:ConsentStatus?
-    var consentHasVisualStep:Bool?
+    var consentDocument: ORKConsentDocument?
+    var version: String?
+    var consentStatus: ConsentStatus?
+    var consentHasVisualStep: Bool?
     static var currentConsent: ConsentBuilder? = nil
     
-    var consentResult:ConsentResult?
+    var consentResult: ConsentResult?
     
-    var comprehension:Comprehension?
+    var comprehension: Comprehension?
     
     /* Default Initializer method
      by default sets all params to empty values
@@ -154,7 +154,7 @@ class ConsentBuilder{
     /* initializer method which initializes all params
      @metaDataDict:contains as Dictionaries for all the properties of Consent Step
      */
-    func initWithMetaData(metaDataDict:Dictionary<String, Any>)  {
+    func initWithMetaData(metaDataDict: Dictionary<String, Any>)  {
         
         self.consentStatus = .pending
          self.consentHasVisualStep = false
@@ -173,7 +173,7 @@ class ConsentBuilder{
             if  Utilities.isValidObject(someObject: visualConsentArray as AnyObject?){
                 for sectionDict in visualConsentArray{
                     
-                    let consentSection:ConsentSectionStep? = ConsentSectionStep()
+                    let consentSection: ConsentSectionStep? = ConsentSectionStep()
                     consentSection?.initWithDict(stepDict: sectionDict)
                          consentSectionArray.append((consentSection?.createConsentSection())!)
                     
@@ -269,7 +269,7 @@ class ConsentBuilder{
                consentDocument.sections?.append(contentsOf: self.consentSectionArray)
             }
             
-            let investigatorSignature = ORKConsentSignature(forPersonWithTitle:kConsentSignaturePageTitle, dateFormatString: "MM/dd/YYYY", identifier: "Signature")
+            let investigatorSignature = ORKConsentSignature(forPersonWithTitle: kConsentSignaturePageTitle, dateFormatString: "MM/dd/YYYY", identifier: "Signature")
             
             consentDocument.addSignature(investigatorSignature)
             return consentDocument
@@ -289,10 +289,10 @@ class ConsentBuilder{
     func getComprehensionSteps() -> [ORKStep]? {
 
         if (self.comprehension?.questions?.count)! > 0 {
-            var stepsArray:[ORKStep]? = [ORKStep]()
+            var stepsArray: [ORKStep]? = [ORKStep]()
             for stepDict in (self.comprehension?.questions!)!{
                 //create questionSteps
-                let questionStep:ActivityQuestionStep? = ActivityQuestionStep()
+                let questionStep: ActivityQuestionStep? = ActivityQuestionStep()
                 questionStep?.initWithDict(stepDict: stepDict )
                 
                 questionStep?.skippable = false
@@ -310,12 +310,12 @@ class ConsentBuilder{
      */
     func getReviewConsentStep() -> ConsentReviewStep? {
     
-        let reviewConsentStep:ConsentReviewStep?
+        let reviewConsentStep: ConsentReviewStep?
 
         if  Utilities.isValidValue(someObject: self.reviewConsent?.signatureContent as AnyObject ){
             
             //create Consent Document
-            let consentDocument:ORKConsentDocument? = (self.getConsentDocument() as ORKConsentDocument)
+            let consentDocument: ORKConsentDocument? = (self.getConsentDocument() as ORKConsentDocument)
             consentDocument?.htmlReviewContent = self.reviewConsent?.signatureContent
             consentDocument?.signaturePageContent = NSLocalizedString(kSignaturePageContentText, comment: "")
             
@@ -324,7 +324,7 @@ class ConsentBuilder{
             
         }else{
             //create Consent Document
-            let consentDocument:ORKConsentDocument? = (self.getConsentDocument() as ORKConsentDocument)
+            let consentDocument: ORKConsentDocument? = (self.getConsentDocument() as ORKConsentDocument)
             consentDocument?.signaturePageContent = NSLocalizedString(kSignaturePageContentText, comment: "")
             
             //Initialize review Step
@@ -378,13 +378,13 @@ class ConsentBuilder{
      */
     func createConsentTask() -> ORKTask? {
         
-        let visualConsentStep:VisualConsentStep? = self.getVisualConsentStep()
-        let sharingConsentStep:ConsentSharingStep? = self.getConsentSharingStep()
-        let reviewConsentStep:ConsentReviewStep? = self.getReviewConsentStep()
+        let visualConsentStep: VisualConsentStep? = self.getVisualConsentStep()
+        let sharingConsentStep: ConsentSharingStep? = self.getConsentSharingStep()
+        let reviewConsentStep: ConsentReviewStep? = self.getReviewConsentStep()
         
-        let comprehensionSteps:[ORKStep]? = self.getComprehensionSteps()
+        let comprehensionSteps: [ORKStep]? = self.getComprehensionSteps()
         
-        var stepArray:Array<ORKStep>? = Array()
+        var stepArray: Array<ORKStep>? = Array()
         
         if visualConsentStep != nil{
             
@@ -435,10 +435,10 @@ class ConsentBuilder{
         consentCompletionStep.mainTitle = kConsentCompletionMainTitle
         consentCompletionStep.subTitle =  kConsentCompletionSubTitle
         
-        let consentViewPdfStep = ConsentPdfViewerStep(identifier:kConsentViewPdfCompletionStep )
+        let consentViewPdfStep = ConsentPdfViewerStep(identifier: kConsentViewPdfCompletionStep )
         
         //create Custom completion step
-        let completionStep = CustomCompletionStep(identifier:kConsentCompletionStepIdentifier)
+        let completionStep = CustomCompletionStep(identifier: kConsentCompletionStepIdentifier)
         completionStep.title = NSLocalizedString(kConsentCompletionMainTitle, comment: "")
         
         
@@ -462,12 +462,12 @@ class ConsentBuilder{
 
 struct SharingConsent {
     
-    var shortDesc:String?
-    var longDesc:String?
-    var learnMore:String?
-    var allowWithoutSharing:Bool?
-    var text:String?
-    var title:String?
+    var shortDesc: String?
+    var longDesc: String?
+    var learnMore: String?
+    var allowWithoutSharing: Bool?
+    var text: String?
+    var title: String?
    
     /** Default Initializer
     */
@@ -483,7 +483,7 @@ struct SharingConsent {
     /* initializer method which initializes all params
      @dict:contains as key:Value pair for all the properties of SharingConsent Step
      */
-    public mutating func initWithSharingDict(dict:Dictionary<String, Any>)
+    public mutating func initWithSharingDict(dict: Dictionary<String, Any>)
     {
         
         if Utilities.isValidObject(someObject: dict as AnyObject?){
@@ -526,10 +526,10 @@ struct SharingConsent {
 
 struct ReviewConsent{
     
-    var title:String?
-    var signatureTitle:String?
-    var signatureContent:String?
-    var reasonForConsent:String?
+    var title: String?
+    var signatureTitle: String?
+    var signatureContent: String?
+    var reasonForConsent: String?
     
     init() {
         self.title = ""
@@ -541,7 +541,7 @@ struct ReviewConsent{
     /* initializer method which initializes all params
      @dict:contains as key:Value pair for all the properties of ReviewConsent Step
      */
-    mutating func initWithReviewDict(dict:Dictionary<String, Any>) {
+    mutating func initWithReviewDict(dict: Dictionary<String, Any>) {
         
         if Utilities.isValidObject(someObject: dict as AnyObject?){
             
@@ -568,7 +568,7 @@ struct ReviewConsent{
 
 //MARK:Comprehension Struct
 
-enum Evaluation:String{
+enum Evaluation: String{
     case any = "any"
     case all = "all"
 }
@@ -576,9 +576,9 @@ enum Evaluation:String{
 
 struct Comprehension{
     
-    var passScore:Int?
-    var questions:Array<Dictionary<String,Any>>?
-    var correctAnswers:Array<Dictionary<String,Any>>?
+    var passScore: Int?
+    var questions: Array<Dictionary<String,Any>>?
+    var correctAnswers: Array<Dictionary<String,Any>>?
     
     
     
@@ -591,7 +591,7 @@ struct Comprehension{
     /* initializer method which initializes all params
      @dict:contains as key:Value pair for all the properties of Comprehension Step
      */
-    mutating func initWithComprehension(dict:Dictionary<String, Any>) {
+    mutating func initWithComprehension(dict: Dictionary<String, Any>) {
         
         if Utilities.isValidObject(someObject: dict as AnyObject?){
             
@@ -615,7 +615,7 @@ struct Comprehension{
 
 //MARK: Custom Clases
 
-class ConsentReviewStep:ORKConsentReviewStep {
+class ConsentReviewStep: ORKConsentReviewStep {
     
    /* func showsProgress() -> Bool {
         return true
@@ -623,7 +623,7 @@ class ConsentReviewStep:ORKConsentReviewStep {
     */
 }
 
-class VisualConsentStep:ORKVisualConsentStep {
+class VisualConsentStep: ORKVisualConsentStep {
     
    /* func showsProgress() -> Bool {
         return true
@@ -631,7 +631,7 @@ class VisualConsentStep:ORKVisualConsentStep {
     */
 }
 
-class ConsentSharingStep:ORKConsentSharingStep {
+class ConsentSharingStep: ORKConsentSharingStep {
     
    /* func showsProgress() -> Bool {
         return true
@@ -639,7 +639,7 @@ class ConsentSharingStep:ORKConsentSharingStep {
    */
 }
 
-class CustomCompletionStep:ORKCompletionStep {
+class CustomCompletionStep: ORKCompletionStep {
     
     func showsProgress() -> Bool {
      return true

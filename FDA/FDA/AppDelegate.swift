@@ -807,9 +807,9 @@
                                 leftController.createLeftmenuItems()
                             }
                             
-                        case .Announcement:break
+                        case .Announcement: break
                             
-                        default:break
+                        default: break
                             
                         }
                     }else {
@@ -823,7 +823,7 @@
         }
         
         // Push to tabbar Controller with tabs Activity, Dashboard & Resource
-        func pushToTabbar(viewController:UIViewController,selectedTab:Int) {
+        func pushToTabbar(viewController: UIViewController,selectedTab: Int) {
             
             let studyStoryBoard = UIStoryboard.init(name: kStudyStoryboard, bundle: Bundle.main)
             
@@ -835,7 +835,7 @@
         }
         
         //Verify passcode if enabled or set passcode
-        func checkPasscode(viewController:UIViewController) {
+        func checkPasscode(viewController: UIViewController) {
             
             if User.currentUser.userType == .FDAUser {//FDA user
                 
@@ -866,7 +866,7 @@
                         
                         let passcodeViewController = ORKPasscodeViewController.passcodeAuthenticationViewController(withText: "", delegate: self)
                         var topVC = UIApplication.shared.keyWindow?.rootViewController
-                        var parentController:UIViewController?
+                        var parentController: UIViewController?
                         
                         while topVC?.presentedViewController != nil {
                             
@@ -907,7 +907,7 @@
             }
         }
         
-        func addAndRemoveProgress(add:Bool) {
+        func addAndRemoveProgress(add: Bool) {
             
             if add{
                 self.window?.addProgressIndicatorOnWindow()
@@ -920,7 +920,7 @@
             
             let navigationController =  (self.window?.rootViewController as? UINavigationController)!
             
-            var topController:UIViewController = navigationController
+            var topController: UIViewController = navigationController
             if navigationController.viewControllers.count > 0 {
                 topController = navigationController.viewControllers.first!
             }
@@ -1021,7 +1021,7 @@
             let ud = UserDefaults.standard
             ud.set(true, forKey: kShowNotification)
             ud.synchronize()
-            var nav:UINavigationController?
+            var nav: UINavigationController?
             //fetch the visible view controller
             let navigationController =  (self.window?.rootViewController as? UINavigationController)!
             let menuVC = navigationController.viewControllers.last
@@ -1056,7 +1056,7 @@
                     DBHandler.updateMetaDataToUpdateForStudy(study: Study.currentStudy!, updateDetails: nil)
                     
                     //fetch the visible view controller
-                    var nav:UINavigationController?
+                    var nav: UINavigationController?
                     let navigationController =  (self.window?.rootViewController as? UINavigationController)!
                     let menuVC = navigationController.viewControllers.last
                     
@@ -1075,7 +1075,7 @@
                         }
                     }
                     
-                    let studyStatus = StudyStatus(rawValue:StudyUpdates.studyStatus!)!
+                    let studyStatus = StudyStatus(rawValue: StudyUpdates.studyStatus!)!
                     
                     if studyStatus != .Active { //Study is Active
                         _ = nav?.popToRootViewController(animated: true)
@@ -1094,8 +1094,8 @@
                         default: break
                         }
                         
-                        let alert = UIAlertController(title:"" as String,message:message as String,preferredStyle: UIAlertControllerStyle.alert)
-                        alert.addAction(UIAlertAction(title:NSLocalizedString("OK", comment: ""), style: .default, handler: nil))
+                        let alert = UIAlertController(title: "" as String,message: message as String,preferredStyle: UIAlertControllerStyle.alert)
+                        alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: ""), style: .default, handler: nil))
                     }else {
                         
                         if selectedController != nil {
@@ -1142,7 +1142,7 @@
         }
         
         func dismissTaskViewController() {
-            passcodeParentControllerWhileSetup?.dismiss(animated: true, completion:nil)
+            passcodeParentControllerWhileSetup?.dismiss(animated: true, completion: nil)
             passcodeParentControllerWhileSetup = nil
             
         }
@@ -1152,7 +1152,7 @@
     extension AppDelegate : NMAuthChallengeDelegate{
         
         func networkCredential(_ manager : NetworkManager, challenge : URLAuthenticationChallenge) -> URLCredential{
-            var urlCredential:URLCredential = URLCredential()
+            var urlCredential: URLCredential = URLCredential()
             if challenge.protectionSpace.authenticationMethod == NSURLAuthenticationMethodServerTrust {
                 if challenge.protectionSpace.host == "hphci-fdama-te-ur-01.labkey.com" {
                     urlCredential = URLCredential.init(trust: challenge.protectionSpace.serverTrust!)
@@ -1161,14 +1161,14 @@
             return urlCredential
         }
         
-        func networkChallengeDisposition(_ manager : NetworkManager, challenge : URLAuthenticationChallenge) -> URLSession.AuthChallengeDisposition{
+        func networkChallengeDisposition(_ manager: NetworkManager, challenge: URLAuthenticationChallenge) -> URLSession.AuthChallengeDisposition{
             return URLSession.AuthChallengeDisposition.useCredential
         }
     }
     
     //MARK: Webservices delegates
     
-    extension AppDelegate:NMWebServiceDelegate {
+    extension AppDelegate: NMWebServiceDelegate {
         func startedRequest(_ manager: NetworkManager, requestName: NSString) {
             Logger.sharedInstance.info("requestname : \(requestName)")
             
@@ -1245,7 +1245,7 @@
     }
     
     
-    extension AppDelegate:ORKTaskViewControllerDelegate{
+    extension AppDelegate: ORKTaskViewControllerDelegate{
         //MARK:ORKTaskViewController Delegate
         
         func taskViewControllerSupportsSaveAndRestore(_ taskViewController: ORKTaskViewController) -> Bool {
@@ -1254,7 +1254,7 @@
         
         public func taskViewController(_ taskViewController: ORKTaskViewController, didFinishWith reason: ORKTaskViewControllerFinishReason, error: Error?) {
             
-            var taskResult:Any?
+            var taskResult: Any?
             
             switch reason {
                 
@@ -1265,7 +1265,7 @@
                     
                     //Saving Consent Document
                     ConsentBuilder.currentConsent?.consentResult?.consentDocument =   ConsentBuilder.currentConsent?.consentDocument
-                    ConsentBuilder.currentConsent?.consentResult?.initWithORKTaskResult(taskResult:taskViewController.result )
+                    ConsentBuilder.currentConsent?.consentResult?.initWithORKTaskResult(taskResult: taskViewController.result )
                     
                     //save consent to study
                     Study.currentStudy?.signedConsentVersion = ConsentBuilder.currentConsent?.version!
@@ -1279,7 +1279,7 @@
                     Study.currentStudy?.version = StudyUpdates.studyVersion
                     Study.currentStudy?.newVersion = StudyUpdates.studyVersion
                     StudyUpdates.studyConsentUpdated  = false
-                    DBHandler.updateMetaDataToUpdateForStudy(study: Study.currentStudy!, updateDetails:nil)
+                    DBHandler.updateMetaDataToUpdateForStudy(study: Study.currentStudy!, updateDetails: nil)
                     
                     if self.isComprehensionFailed!{
                         self.isComprehensionFailed = false
@@ -1387,9 +1387,9 @@
                     //Back button is enabled
                     stepViewController.backButtonItem?.isEnabled = true
                     
-                    let orkStepResult:ORKStepResult? = taskViewController.result.results?[(taskViewController.result.results?.count)! - 2] as! ORKStepResult?
+                    let orkStepResult: ORKStepResult? = taskViewController.result.results?[(taskViewController.result.results?.count)! - 2] as! ORKStepResult?
                     
-                    let consentSignatureResult:ConsentCompletionTaskResult? = orkStepResult?.results?.first as? ConsentCompletionTaskResult
+                    let consentSignatureResult: ConsentCompletionTaskResult? = orkStepResult?.results?.first as? ConsentCompletionTaskResult
                     
                     //Checking if Signature is consented after Review Step
                     
@@ -1445,14 +1445,14 @@
                 }else if step.identifier == kConsentSharePdfCompletionStep { //For ConsentShareCompletion Step
                     
                     var totalResults =  taskViewController.result.results
-                    let reviewStep:ORKStepResult?
+                    let reviewStep: ORKStepResult?
                     
                     totalResults = totalResults?.filter({$0.identifier == kReviewTitle})
                     
                     reviewStep = (totalResults?.first as? ORKStepResult)!
                     
                     if (reviewStep?.identifier)! == kReviewTitle && (reviewStep?.results?.count)! > 0 {
-                        let consentSignatureResult:ORKConsentSignatureResult? = reviewStep?.results?.first as? ORKConsentSignatureResult
+                        let consentSignatureResult: ORKConsentSignatureResult? = reviewStep?.results?.first as? ORKConsentSignatureResult
                         
                         if  consentSignatureResult?.consented == false { //Disgreed
                             taskViewController.dismiss(animated: true
@@ -1464,7 +1464,7 @@
                         }else { //Consented
                             
                             //Copying consent document
-                            let documentCopy:ORKConsentDocument = ((ConsentBuilder.currentConsent?.consentDocument)!.copy() as? ORKConsentDocument)!
+                            let documentCopy: ORKConsentDocument = ((ConsentBuilder.currentConsent?.consentDocument)!.copy() as? ORKConsentDocument)!
                             
                             consentSignatureResult?.apply(to: documentCopy)
                             //instantiating ConsentSharePdfStep
@@ -1481,7 +1481,7 @@
                 }else if step.identifier == kConsentViewPdfCompletionStep { //For PDFViewerStep
                     
                     //fetching reviewStep
-                    let reviewSharePdfStep:ORKStepResult? = taskViewController.result.results?.last as! ORKStepResult?
+                    let reviewSharePdfStep: ORKStepResult? = taskViewController.result.results?.last as! ORKStepResult?
                     
                     let result = (reviewSharePdfStep?.results?.first as? ConsentCompletionTaskResult)
                     
@@ -1504,7 +1504,7 @@
                     if (ConsentBuilder.currentConsent?.comprehension?.questions?.count)! > 0 {
                         
                         
-                        let visualStepIndex:Int = (taskViewController.result.results?.index(where: {$0.identifier == kVisualStepId}))!
+                        let visualStepIndex: Int = (taskViewController.result.results?.index(where: {$0.identifier == kVisualStepId}))!
                         
                         if visualStepIndex >= 0 {
                             
@@ -1517,11 +1517,11 @@
                             while  i < (taskViewController.result.results?.count)! {
                                 
                                 
-                                let textChoiceResult:ORKChoiceQuestionResult = (((taskViewController.result.results?[i] as? ORKStepResult)!.results?.first) as? ORKChoiceQuestionResult)!
+                                let textChoiceResult: ORKChoiceQuestionResult = (((taskViewController.result.results?[i] as? ORKStepResult)!.results?.first) as? ORKChoiceQuestionResult)!
                                 
-                                let correctAnswerDict:Dictionary<String,Any>? = ConsentBuilder.currentConsent?.comprehension?.correctAnswers?[j]
-                                let answerArray:[String] = (correctAnswerDict?[kConsentComprehensionAnswer] as? [String])!
-                                let evaluationType:Evaluation? = Evaluation(rawValue: (correctAnswerDict?[kConsentComprehensionEvaluation] as? String)!)
+                                let correctAnswerDict: Dictionary<String,Any>? = ConsentBuilder.currentConsent?.comprehension?.correctAnswers?[j]
+                                let answerArray: [String] = (correctAnswerDict?[kConsentComprehensionAnswer] as? [String])!
+                                let evaluationType: Evaluation? = Evaluation(rawValue: (correctAnswerDict?[kConsentComprehensionEvaluation] as? String)!)
                                 let answeredSet = Set((textChoiceResult.choiceAnswers! as? [String])!)
                                 
                                 let correctAnswerSet = Set(answerArray)
@@ -1570,7 +1570,7 @@
                 }else if step.identifier == kReviewTitle {
                     // if sharing step exists && allowWithoutSharing is set
                     
-                    let shareStep:ORKStepResult? = taskViewController.result.results?.last as! ORKStepResult?
+                    let shareStep: ORKStepResult? = taskViewController.result.results?.last as! ORKStepResult?
                     
                     ConsentBuilder.currentConsent?.sharingConsent?.allowWithoutSharing = true
                     
@@ -1665,7 +1665,7 @@
             }
             
             UIUtilities.showAlertMessageWithTwoActionsAndHandler(NSLocalizedString(kMessagePasscode, comment: ""), errorMessage: NSLocalizedString(kMessagePasscodeSignOut, comment: ""), errorAlertActionTitle: NSLocalizedString(kTitleOK, comment: ""),
-                                                                 errorAlertActionTitle2:NSLocalizedString(kTitleCancel, comment: ""), viewControllerUsed: topVC!,
+                                                                 errorAlertActionTitle2: NSLocalizedString(kTitleCancel, comment: ""), viewControllerUsed: topVC!,
                                                                  action1: {
                                                                     self.window?.addProgressIndicatorOnWindowFromTop()
                                                                     
@@ -1694,7 +1694,7 @@
     
     //MARK:ComprehensionFailureDelegate
     
-    extension AppDelegate:ComprehensionFailureDelegate {
+    extension AppDelegate: ComprehensionFailureDelegate {
         func didTapOnCancel() {
             self.popViewControllerAfterConsentDisagree()
         }

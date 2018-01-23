@@ -45,11 +45,11 @@ let kFetalKickCounterTaskIdentifier = "FetalKickCounterTask"
 
 class FetalKickCounterTask {
     
-    var duration:Float?       // task run time
-    var identifier:String?
-    var steps:[ORKStep]?    // steps involved in fetal kick
-    var instructionText:String?
-    var maxKickCounts:Int?
+    var duration: Float?       // task run time
+    var identifier: String?
+    var steps: [ORKStep]?    // steps involved in fetal kick
+    var instructionText: String?
+    var maxKickCounts: Int?
     /*
      Default Initializer method
      */
@@ -66,7 +66,7 @@ class FetalKickCounterTask {
      Initalizer method to create instance
      @param duration    is task run time in hours
      */
-    func initWithFormat(duration:Float,identifier:String,instructionText:String?)  {
+    func initWithFormat(duration: Float,identifier: String,instructionText: String?)  {
         
         self.identifier = identifier
         self.steps =  [ORKStep]()
@@ -89,7 +89,7 @@ class FetalKickCounterTask {
     
     /* setter method to set totalKickCounts
     */
-    func setMaxKicks(maxKicks:Int) {
+    func setMaxKicks(maxKicks: Int) {
         self.maxKickCounts = maxKicks
     }
     

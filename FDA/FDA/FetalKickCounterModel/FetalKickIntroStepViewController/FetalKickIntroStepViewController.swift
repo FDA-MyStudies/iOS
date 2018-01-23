@@ -27,26 +27,26 @@ import ResearchKit
 
 let kFetalKickIntroStepDefaultIdentifier = "FetalIntroStepIdentifier"
 
-class FetalKickCounterIntroStepType : ORKStep {
+class FetalKickCounterIntroStepType: ORKStep {
     static func stepViewControllerClass() -> FetalKickIntroStepViewController.Type {
         return FetalKickIntroStepViewController.self
     }
 }
 
 class FetalKickIntroStep: ORKStep {
-    var introTitle:String? // MainTitle for the Task
-    var subTitle:String? //Subtitle for Task
-    var displayImage:UIImage?
+    var introTitle: String? // MainTitle for the Task
+    var subTitle: String? //Subtitle for Task
+    var displayImage: UIImage?
 }
 
 class FetalKickIntroStepViewController:  ORKStepViewController {
     
 
-    var titleLabel:UILabel? //Custom Title Label
-    @IBOutlet weak var descriptionLabel:UILabel?
-    var iconImage:UIImage?
+    var titleLabel: UILabel? //Custom Title Label
+    @IBOutlet weak var descriptionLabel: UILabel?
+    var iconImage: UIImage?
     
-    @IBOutlet weak var buttonNext:UIButton?   // button to start task as well as increment the counter
+    @IBOutlet weak var buttonNext: UIButton?   // button to start task as well as increment the counter
     
     //Mark: ORKStepViewController overriden methods
     
@@ -87,7 +87,7 @@ class FetalKickIntroStepViewController:  ORKStepViewController {
     
     //Mark:IBActions
     
-    @IBAction func nextButtonAction(_ sender:UIButton){
+    @IBAction func nextButtonAction(_ sender: UIButton){
         self.goForward()
     }
     

@@ -52,25 +52,25 @@ class FetalKickCounterStepViewController:  ORKStepViewController {
     
     var backgroundTaskIdentifier: UIBackgroundTaskIdentifier?
     
-    @IBOutlet weak var startButton:UIButton?   // button to start task as well as increment the counter
-    @IBOutlet weak var startTitleLabel:UILabel? // displays the title
-    @IBOutlet weak var timerLabel:UILabel?      //  displays the current timer Value
-    @IBOutlet weak var counterTextField:UITextField? // displays current kick counts
-    @IBOutlet weak var editCounterButton:UIButton?  // used to edit the counter value
-    @IBOutlet weak var seperatorLineView:UIView? // separator line
+    @IBOutlet weak var startButton: UIButton?   // button to start task as well as increment the counter
+    @IBOutlet weak var startTitleLabel: UILabel? // displays the title
+    @IBOutlet weak var timerLabel: UILabel?      //  displays the current timer Value
+    @IBOutlet weak var counterTextField: UITextField? // displays current kick counts
+    @IBOutlet weak var editCounterButton: UIButton?  // used to edit the counter value
+    @IBOutlet weak var seperatorLineView: UIView? // separator line
     
-    @IBOutlet weak var submitButton:UIButton? // button to submit response to server
+    @IBOutlet weak var submitButton: UIButton? // button to submit response to server
     
-    @IBOutlet weak var editTimerButton:UIButton?
+    @IBOutlet weak var editTimerButton: UIButton?
     
-    var kickCounter:Int? = 0        // counter
-    var timer:Timer? = Timer()      //  timer for the task
-    var timerValue:Int? = 0         // TimerValue
+    var kickCounter: Int? = 0        // counter
+    var timer: Timer? = Timer()      //  timer for the task
+    var timerValue: Int? = 0         // TimerValue
     
-    var totalTime:Int? = 0          // Total duration
-    var maxKicksAllowed:Int? = 0
+    var totalTime: Int? = 0          // Total duration
+    var maxKicksAllowed: Int? = 0
     
-    var taskResult:FetalKickCounterTaskResult = FetalKickCounterTaskResult(identifier: kFetalKickCounterStepDefaultIdentifier)
+    var taskResult: FetalKickCounterTaskResult = FetalKickCounterTaskResult(identifier: kFetalKickCounterStepDefaultIdentifier)
   
     
     //Mark: ORKStepViewController overriden methods
@@ -106,7 +106,7 @@ class FetalKickCounterStepViewController:  ORKStepViewController {
            
             let ud = UserDefaults.standard
             
-            let activityId = ud.value(forKey:kFetalKickActivityId ) as! String?
+            let activityId = ud.value(forKey: kFetalKickActivityId ) as! String?
             var differenceInSec = 0
             var autoStartTimer = false
             if  ud.bool(forKey: "FKC")
@@ -144,7 +144,7 @@ class FetalKickCounterStepViewController:  ORKStepViewController {
                 
                 if autoStartTimer{
                     
-                    let previousKicks:Int? = ud.value(forKey:kFetalKickCounterValue ) as? Int
+                    let previousKicks: Int? = ud.value(forKey: kFetalKickCounterValue ) as? Int
                     
                     self.kickCounter = (previousKicks == nil ? 0 : previousKicks!)
                     //Update Step Counter Value
@@ -263,7 +263,7 @@ class FetalKickCounterStepViewController:  ORKStepViewController {
      handleTap method detects the tap gesture event
      @param  sender is tapguesture instance
      */
-    func handleTap(_ sender:UITapGestureRecognizer)   {
+    func handleTap(_ sender: UITapGestureRecognizer)   {
         counterTextField?.resignFirstResponder()
     }
     
@@ -331,9 +331,9 @@ class FetalKickCounterStepViewController:  ORKStepViewController {
         
         let hoursMax =   Int(self.totalTime!) / 3600
        
-        var hoursArray:Array<String> = []
-        var minutesArray:Array<String> = []
-        var secondsArray:Array<String> = []
+        var hoursArray: Array<String> = []
+        var minutesArray: Array<String> = []
+        var secondsArray: Array<String> = []
         var i = 0
         while i <= hoursMax{
             hoursArray.append("\(i)" + " h")
@@ -388,14 +388,14 @@ class FetalKickCounterStepViewController:  ORKStepViewController {
     
     //Mark:Button Actions
 
-    @IBAction func editCounterButtonAction(_ sender:UIButton){
+    @IBAction func editCounterButtonAction(_ sender: UIButton){
         counterTextField?.isUserInteractionEnabled = true
         counterTextField?.isHidden = false
         seperatorLineView?.isHidden =  false
         counterTextField?.becomeFirstResponder()
     }
     
-    @IBAction func startButtonAction(_ sender:UIButton){
+    @IBAction func startButtonAction(_ sender: UIButton){
         
         if Int((self.counterTextField?.text)!)! == 0 {
             
@@ -407,7 +407,7 @@ class FetalKickCounterStepViewController:  ORKStepViewController {
                 //save start time stamp
                 let ud = UserDefaults.standard
                 if ud.object(forKey: kFetalKickStartTimeStamp) == nil {
-                    ud.set(Date(),forKey:kFetalKickStartTimeStamp)
+                    ud.set(Date(),forKey: kFetalKickStartTimeStamp)
                 }
                 ud.synchronize()
                 
@@ -415,7 +415,7 @@ class FetalKickCounterStepViewController:  ORKStepViewController {
                 
                 // start button image and start title changed
                 startButton?.setImage(UIImage(named: "kick_btn1.png"), for: .normal)
-                startTitleLabel?.text = NSLocalizedString(kTapToRecordKick, comment:"")
+                startTitleLabel?.text = NSLocalizedString(kTapToRecordKick, comment: "")
             }
             else{
                 self.kickCounter = self.kickCounter! + 1
@@ -445,14 +445,14 @@ class FetalKickCounterStepViewController:  ORKStepViewController {
             }
         }
     }
-    @IBAction func submitButtonAction(_ sender:UIButton) {
+    @IBAction func submitButtonAction(_ sender: UIButton) {
         
         self.taskResult.duration = self.timerValue!
         self.taskResult.totalKickCount = self.kickCounter == nil ? 0 : self.kickCounter!
         self.perform(#selector(self.goForward))
     }
     
-    @IBAction func editTimerButtonAction(_ sender:UIButton){
+    @IBAction func editTimerButtonAction(_ sender: UIButton){
     
         let timerArray = self.getTimerArray()
         let defaultTime = self.getIndexes()
@@ -460,14 +460,14 @@ class FetalKickCounterStepViewController:  ORKStepViewController {
         let acp = ActionSheetMultipleStringPicker(title: kSelectTimeLabel, rows: timerArray, initialSelection: defaultTime, doneBlock: {
                 picker, values, indexes in
           
-            let result:Array<String> =  (indexes as! Array<String>)
+            let result: Array<String> =  (indexes as! Array<String>)
             let hours = result.first?.components(separatedBy: CharacterSet.init(charactersIn: " h"))
             let minutes = result[1].components(separatedBy: CharacterSet.init(charactersIn: " m"))
             let seconds = result.last?.components(separatedBy: CharacterSet.init(charactersIn: " s"))
             
-            let hoursValue:Int = hours?.count != 0 ? Int(hours!.first!)! : 0
-            let minuteValue:Int = minutes.count != 0 ? Int(minutes.first!)! : 0
-            let secondsValue:Int = seconds?.count != 0 ? Int(seconds!.first!)! : 0
+            let hoursValue: Int = hours?.count != 0 ? Int(hours!.first!)! : 0
+            let minuteValue: Int = minutes.count != 0 ? Int(minutes.first!)! : 0
+            let secondsValue: Int = seconds?.count != 0 ? Int(seconds!.first!)! : 0
             
             self.timerValue = hoursValue * 3600 + minuteValue * 60 + secondsValue
           
@@ -510,8 +510,8 @@ class FetalKickCounterStepType : ORKActiveStep {
 
 open class FetalKickCounterTaskResult: ORKResult {
     
-    open var totalKickCount:Int = 0
-    open var duration:Int = 0
+    open var totalKickCount: Int = 0
+    open var duration: Int = 0
     
     override open var description: String {
         get {
@@ -529,9 +529,9 @@ open class FetalKickCounterTaskResult: ORKResult {
 
 
 //Mark: GetureRecognizer delegate
-extension FetalKickCounterStepViewController:UIGestureRecognizerDelegate{
+extension FetalKickCounterStepViewController: UIGestureRecognizerDelegate{
     func gestureRecognizer(_: UIGestureRecognizer,
-                           shouldRecognizeSimultaneouslyWith shouldRecognizeSimultaneouslyWithGestureRecognizer:UIGestureRecognizer) -> Bool {
+                           shouldRecognizeSimultaneouslyWith shouldRecognizeSimultaneouslyWithGestureRecognizer: UIGestureRecognizer) -> Bool {
         return true
     }
 }
@@ -539,7 +539,7 @@ extension FetalKickCounterStepViewController:UIGestureRecognizerDelegate{
 
 
 //Mark:TextField Delegates
-extension FetalKickCounterStepViewController:UITextFieldDelegate {
+extension FetalKickCounterStepViewController: UITextFieldDelegate {
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
         

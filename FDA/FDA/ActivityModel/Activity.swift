@@ -63,7 +63,7 @@ let kActivityRandomization = "randomization"
 let kActivityLastModified = "lastModified"
 let kActivityTaskSubType = "taskSubType"
 
-enum ActivityType: String{
+enum ActivityType: String {
     case Questionnaire = "questionnaire"
     case activeTask = "task"
 }
@@ -75,7 +75,7 @@ enum Frequency: String {
     case Monthly = "Monthly"
     case Scheduled = "Manually Schedule"
     
-    var description: String{
+    var description: String {
         switch self {
         case .One_Time:
             return "One Time"
@@ -100,7 +100,7 @@ enum ActivityState: String {
 /**
  Model Activity represents a Questionery or Active Task
 */
-class Activity{
+class Activity {
     
     var type: ActivityType?
     var actvityId: String? // Unique id of each activity
@@ -210,15 +210,15 @@ class Activity{
                 self.startDate = Date()
             }
             
-            if Utilities.isValidValue(someObject: infoDict[kActivityEndTime] as AnyObject ){
+            if Utilities.isValidValue(someObject: infoDict[kActivityEndTime] as AnyObject ) {
                 self.endDate =  Utilities.getDateFromStringWithOutTimezone(dateString: (infoDict[kActivityEndTime] as? String)!)
             }
             
-            if Utilities.isValidObject(someObject: infoDict[kActivityFrequency] as AnyObject?){
+            if Utilities.isValidObject(someObject: infoDict[kActivityFrequency] as AnyObject?) {
              
                 let frequencyDict: Dictionary = (infoDict[kActivityFrequency] as? Dictionary<String, Any>)!
                 
-                if Utilities.isValidObject(someObject: frequencyDict[kActivityFrequencyRuns] as AnyObject ){
+                if Utilities.isValidObject(someObject: frequencyDict[kActivityFrequencyRuns] as AnyObject ) {
                     self.frequencyRuns =  frequencyDict[kActivityFrequencyRuns] as? Array<Dictionary<String,Any>>
                 }
                 
@@ -230,18 +230,17 @@ class Activity{
             let currentUser = User.currentUser
             if let userActivityStatus = currentUser.participatedActivites.filter({$0.activityId == self.actvityId && $0.studyId == self.studyId}).first {
                 self.userParticipationStatus = userActivityStatus
-            }
-            else {
+                
+            }else {
                 self.userParticipationStatus = UserActivityStatus()
             }
           
-          if Utilities.isValidValue(someObject: infoDict[kActivityTaskSubType] as AnyObject ){
+          if Utilities.isValidValue(someObject: infoDict[kActivityTaskSubType] as AnyObject ) {
             self.taskSubType =  (infoDict[kActivityTaskSubType] as? String)!
           }
           
             self.calculateActivityRuns(studyId: self.studyId!)
-        }
-        else{
+        }else {
             Logger.sharedInstance.debug("infoDict is null:\(infoDict)")
         }
         
@@ -254,20 +253,19 @@ class Activity{
         
         if Utilities.isValidObject(someObject: activityDict as AnyObject?) {
             
-            if Utilities.isValidValue(someObject: activityDict[kActivityType] as AnyObject ){
+            if Utilities.isValidValue(someObject: activityDict[kActivityType] as AnyObject ) {
                 self.type? =  ActivityType(rawValue: (activityDict[kActivityType] as? String)!)!
                
             }
             self.setInfo(infoDict: (activityDict[kActivityInfoMetaData] as? Dictionary<String,Any>)!)
             
-            if Utilities.isValidObject(someObject: activityDict[kActivitySteps] as AnyObject?){
+            if Utilities.isValidObject(someObject: activityDict[kActivitySteps] as AnyObject?) {
                  self.setStepArray(stepArray: (activityDict[kActivitySteps] as? Array)! )
-            }
-            else{
+                
+            }else {
                 Logger.sharedInstance.debug("infoDict is null:\(String(describing: activityDict[kActivitySteps]))")
             }
-        }
-        else{
+        }else {
             Logger.sharedInstance.debug("infoDict is null:\(activityDict)")
         }
     }
@@ -276,7 +274,7 @@ class Activity{
     // method to set info part of activity from ActivityMetaData
     func setInfo(infoDict: Dictionary<String,Any>) {
         
-        if Utilities.isValidObject(someObject: infoDict as AnyObject?){
+        if Utilities.isValidObject(someObject: infoDict as AnyObject?) {
          
             if Utilities.isValidValue(someObject: infoDict["name"] as AnyObject ) {
                 self.shortName =   infoDict["name"] as? String
@@ -310,8 +308,7 @@ class Activity{
             if Utilities.isValidValue(someObject: configurationDict[kActivityRandomization] as AnyObject) {
                 self.randomization =   configurationDict[kActivityId] as? Bool
             }
-        }
-        else{
+        }else {
             Logger.sharedInstance.debug("configurationDict is null:\(configurationDict)")
         }
     }
@@ -321,17 +318,15 @@ class Activity{
        
         if Utilities.isValidObject(someObject: stepArray as AnyObject?){
             self.steps? = stepArray
-        }
-        else{
+        }else {
             Logger.sharedInstance.debug("stepArray is null:\(stepArray)")
         }
     }
     
     func setORKSteps(orkStepArray: [ORKStep])  {
-        if Utilities.isValidObject(someObject: orkStepArray as AnyObject?){
+        if Utilities.isValidObject(someObject: orkStepArray as AnyObject?) {
             self.orkSteps = orkStepArray
-        }
-        else{
+        }else {
             Logger.sharedInstance.debug("stepArray is null:\(orkStepArray)")
         }
         
@@ -340,15 +335,14 @@ class Activity{
     //method to set step array
     func setActivityStepArray(stepArray: Array<ActivityStep>) {
         
-        if Utilities.isValidObject(someObject: stepArray as AnyObject?){
+        if Utilities.isValidObject(someObject: stepArray as AnyObject?) {
             self.activitySteps? = stepArray
-        }
-        else{
+        }else {
             Logger.sharedInstance.debug("stepArray is null:\(stepArray)")
         }
     }
     
-    func calculateActivityRuns(studyId: String){
+    func calculateActivityRuns(studyId: String) {
         
         Schedule().getRunsForActivity(activity: self, handler: { (runs) in
             if runs.count > 0 {

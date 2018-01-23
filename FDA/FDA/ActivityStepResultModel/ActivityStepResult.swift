@@ -44,29 +44,29 @@ let kTowerOfHanoiKeyNumberOfMoves = "numberOfMoves"
 let kFetalKickCounterDuration = "duration"
 let kFetalKickCounterCount = "count"
 
-enum ActiveStepResultType: String{
+enum ActiveStepResultType: String {
     case boolean = "boolean"
     case numeric = "numeric"
 }
 
-enum SpatialSpanMemoryType: Int{
+enum SpatialSpanMemoryType: Int {
     case score = 0
     case numberOfGames = 1
     case numberOfFailures = 2
 }
 
-enum TowerOfHanoiResultType:Int{
+enum TowerOfHanoiResultType:Int {
     case puzzleWasSolved = 0
     case numberOfMoves = 1
 }
 
-enum ActvityStepResultType: String{
+enum ActvityStepResultType: String {
     case formOrActiveTask = "grouped"
     case questionnaire = "questionnaire"
     
 }
 
-class ActivityStepResult{
+class ActivityStepResult {
     
     var type: ActivityStepType?
     weak var step: ActivityStep?
@@ -117,7 +117,7 @@ class ActivityStepResult{
         if (stepResult.results?.count)! > 1 || (self.step != nil && self.step is ActivityFormStep) {
             self.type = .form
         }else {
-            if activityType == .activeTask{
+            if activityType == .activeTask {
                 self.type =  .active
             }
         }
@@ -129,9 +129,9 @@ class ActivityStepResult{
     /* method create ActivityStepResult by initializing params
      @stepDict:contains all ActivityResultStep properties
      */
-    func initWithDict(stepDict: Dictionary<String, Any>){
+    func initWithDict(stepDict: Dictionary<String, Any>) {
         
-        if Utilities.isValidObject(someObject: stepDict as AnyObject?){
+        if Utilities.isValidObject(someObject: stepDict as AnyObject?) {
             
             if Utilities.isValidValue(someObject: stepDict[kActivityStepType] as AnyObject ) {
                 self.type = stepDict[kActivityStepType] as? ActivityStepType
@@ -157,11 +157,11 @@ class ActivityStepResult{
                 }
             }
             
-            if Utilities.isValidValue(someObject: stepDict[kActivityStepSkipped] as AnyObject ){
+            if Utilities.isValidValue(someObject: stepDict[kActivityStepSkipped] as AnyObject ) {
                 self.skipped = stepDict[kActivityStepSkipped] as? Bool
             }
             
-        }else{
+        }else {
             Logger.sharedInstance.debug("Step Result Dictionary is null:\(stepDict)")
         }
         
@@ -239,7 +239,7 @@ class ActivityStepResult{
      */
     func setResultValue(stepResult: ORKStepResult, activityType: ActivityType)  {
         
-        if((stepResult.results?.count)! > 0){
+        if((stepResult.results?.count)! > 0) {
             
             if  activityType == .Questionnaire {
                 // for question Step
@@ -328,8 +328,8 @@ class ActivityStepResult{
                     
                     if isAddMore! {
                         self.value = formResultArray
-                    }
-                    else{
+                        
+                    }else {
                         if localArray.count > 0 {
                             formResultArray.append(localArray)
                         }
@@ -378,7 +378,7 @@ class ActivityStepResult{
 
                                 resultDict?[kActivityStepStartTime] = dateString
                             }
-                            if self.endTime != nil && (Utilities.getStringFromDate(date: self.endTime!) != nil){
+                            if self.endTime != nil && (Utilities.getStringFromDate(date: self.endTime!) != nil) {
                                 
                                 resultDict?[kActivityStepEndTime] = Utilities.getStringFromDate(date: self.endTime!)
                             }else {
@@ -482,12 +482,10 @@ class ActivityStepResult{
                     }
                     self.value = resultArray
                 }
-            }
-            else{
+            }else {
                 // Do Nothing
             }
-        }
-        else{
+        }else {
            //Do Nothing
         }
     }
@@ -537,7 +535,7 @@ class ActivityStepResult{
                     }else {
                         self.value = (stepTypeResult.scaleAnswer as? Double)!
                     }
-                }else{
+                }else {
                     self.value = 0.0
                 }
             }else {
@@ -547,10 +545,10 @@ class ActivityStepResult{
                     if (stepTypeResult.choiceAnswers?.count)! > 0 {
                         self.value = stepTypeResult.choiceAnswers?.first
                         
-                    }else{
+                    }else {
                         self.value = ""
                     }
-                }else{
+                }else {
                     self.value = ""
                 }
             }
@@ -565,7 +563,7 @@ class ActivityStepResult{
                 resultType = self.subTypeForForm
             }
             
-            if Utilities.isValidObject(someObject:stepTypeResult.choiceAnswers as AnyObject?){
+            if Utilities.isValidObject(someObject: stepTypeResult.choiceAnswers as AnyObject?) {
                 if (stepTypeResult.choiceAnswers?.count)! > 0 {
                     
                     if resultType ==  QuestionStepType.imageChoice.rawValue ||  resultType == QuestionStepType.valuePicker.rawValue {
@@ -596,19 +594,19 @@ class ActivityStepResult{
                 if resultType ==  QuestionStepType.imageChoice.rawValue ||  resultType == QuestionStepType.valuePicker.rawValue {
                     self.value = ""
                     
-                }else{
+                }else {
                     self.value = []
                 }
             }
         case ORKQuestionType.multipleChoice.rawValue: //textchoice + imageChoice
             
             let stepTypeResult = (questionstepResult as? ORKChoiceQuestionResult)!
-            if Utilities.isValidObject(someObject: stepTypeResult.choiceAnswers as AnyObject?){
-                if (stepTypeResult.choiceAnswers?.count)! > 1{
+            if Utilities.isValidObject(someObject: stepTypeResult.choiceAnswers as AnyObject?) {
+                if (stepTypeResult.choiceAnswers?.count)! > 1 {
                     
                     var resultArray: Array<String>? = []
                     
-                    for value in stepTypeResult.choiceAnswers!{
+                    for value in stepTypeResult.choiceAnswers! {
                         resultArray?.append("\(value == nil ? "" : value)")
                     }
                     self.value = resultArray
@@ -628,17 +626,17 @@ class ActivityStepResult{
             
             let stepTypeResult = (questionstepResult as? ORKBooleanQuestionResult)!
             
-            if Utilities.isValidValue(someObject: stepTypeResult.booleanAnswer as AnyObject?){
+            if Utilities.isValidValue(someObject: stepTypeResult.booleanAnswer as AnyObject?) {
                 self.value =  stepTypeResult.booleanAnswer! == 1 ? true : false
                 
-            }else{
+            }else {
                 self.value = false
             }
             
         case ORKQuestionType.integer.rawValue: // numeric type
             let stepTypeResult = (questionstepResult as? ORKNumericQuestionResult)!
             
-            if Utilities.isValidValue(someObject: stepTypeResult.numericAnswer as AnyObject?){
+            if Utilities.isValidValue(someObject: stepTypeResult.numericAnswer as AnyObject?) {
                 self.value =  Double(stepTypeResult.numericAnswer!)
                 
             }else {
@@ -648,7 +646,7 @@ class ActivityStepResult{
         case ORKQuestionType.decimal.rawValue: // numeric type
             let stepTypeResult = (questionstepResult as? ORKNumericQuestionResult)!
             
-            if Utilities.isValidValue(someObject: stepTypeResult.numericAnswer as AnyObject?){
+            if Utilities.isValidValue(someObject: stepTypeResult.numericAnswer as AnyObject?) {
                 self.value = Double(stepTypeResult.numericAnswer!)
                 
             }else {
@@ -681,7 +679,7 @@ class ActivityStepResult{
         case ORKQuestionType.dateAndTime.rawValue:
             let stepTypeResult = (questionstepResult as? ORKDateQuestionResult)!
             
-            if Utilities.isValidValue(someObject: stepTypeResult.dateAnswer as AnyObject?){
+            if Utilities.isValidValue(someObject: stepTypeResult.dateAnswer as AnyObject?) {
                 self.value =  Utilities.getStringFromDate(date: stepTypeResult.dateAnswer! )
                 
             }else {
@@ -691,7 +689,7 @@ class ActivityStepResult{
             
             let stepTypeResult = (questionstepResult as? ORKTextQuestionResult)!
             
-            if Utilities.isValidValue(someObject: stepTypeResult.answer as AnyObject?){
+            if Utilities.isValidValue(someObject: stepTypeResult.answer as AnyObject?) {
                 self.value = (stepTypeResult.answer as? String)!
                 
             }else {
@@ -702,7 +700,7 @@ class ActivityStepResult{
             
             let stepTypeResult = (questionstepResult as? ORKTimeIntervalQuestionResult)!
             
-            if Utilities.isValidValue(someObject: stepTypeResult.intervalAnswer as AnyObject?){
+            if Utilities.isValidValue(someObject: stepTypeResult.intervalAnswer as AnyObject?) {
                 self.value = Double(stepTypeResult.intervalAnswer!)/3600
                 
             }else {
@@ -712,7 +710,7 @@ class ActivityStepResult{
         case ORKQuestionType.height.rawValue:
             
             let stepTypeResult = (questionstepResult as? ORKNumericQuestionResult)!
-            if Utilities.isValidValue(someObject: stepTypeResult.numericAnswer as AnyObject?){
+            if Utilities.isValidValue(someObject: stepTypeResult.numericAnswer as AnyObject?) {
                 self.value = Double(stepTypeResult.numericAnswer!)
                 
             }else {

@@ -102,7 +102,7 @@ let kSignaturePageContentText = "I agree to participate in this research study."
 let kConsentSignaturePageContent = "signaturePageContent"
 let kConsentSignaturePageTitle = "Participant"
 
-enum ConsentStatus:String{
+enum ConsentStatus:String {
     case pending = "pending"
     case completed = "completed"
 }
@@ -112,7 +112,7 @@ enum ConsentStatus:String{
 
 //MARK:ConsentBuilder Class
 
-class ConsentBuilder{
+class ConsentBuilder {
     
     //var consentIdentifier:String? // this id will be used to add to signature
     
@@ -159,25 +159,25 @@ class ConsentBuilder{
         self.consentStatus = .pending
          self.consentHasVisualStep = false
         
-        if Utilities.isValidObject(someObject: metaDataDict as AnyObject?){
+        if Utilities.isValidObject(someObject: metaDataDict as AnyObject?) {
             
-            if Utilities.isValidValue(someObject: metaDataDict[kConsentVersion] as AnyObject?){
+            if Utilities.isValidValue(someObject: metaDataDict[kConsentVersion] as AnyObject?) {
                 
                 self.version =  (metaDataDict[kConsentVersion] as? String)!
             }
-            else{
+            else {
                 self.version = "No_Version"
             }
             let visualConsentArray = (metaDataDict[kConsentVisualScreens] as? Array<Dictionary<String,Any>>)!
             
-            if  Utilities.isValidObject(someObject: visualConsentArray as AnyObject?){
-                for sectionDict in visualConsentArray{
+            if  Utilities.isValidObject(someObject: visualConsentArray as AnyObject?) {
+                for sectionDict in visualConsentArray {
                     
                     let consentSection: ConsentSectionStep? = ConsentSectionStep()
                     consentSection?.initWithDict(stepDict: sectionDict)
                          consentSectionArray.append((consentSection?.createConsentSection())!)
                     
-                    if consentSection?.type != .custom{
+                    if consentSection?.type != .custom {
                         self.consentHasVisualStep = true
                     }
                     
@@ -187,20 +187,20 @@ class ConsentBuilder{
             
             let consentSharingDict = (metaDataDict[kConsentSharing] as? Dictionary<String,Any>)!
             
-            if  Utilities.isValidObject(someObject: consentSharingDict as AnyObject?){
+            if  Utilities.isValidObject(someObject: consentSharingDict as AnyObject?) {
                 self.sharingConsent?.initWithSharingDict(dict: consentSharingDict)
                 
             }
             let reviewConsentDict = (metaDataDict[kConsentReview] as? Dictionary<String,Any>)!
             
-            if  Utilities.isValidObject(someObject: reviewConsentDict as AnyObject?){
+            if  Utilities.isValidObject(someObject: reviewConsentDict as AnyObject?) {
                 self.reviewConsent?.initWithReviewDict(dict: reviewConsentDict)
                 
             }
             
             let comprehensionDict = (metaDataDict[kConsentComprehension] as? Dictionary<String,Any>)!
             
-            if  Utilities.isValidObject(someObject: comprehensionDict as AnyObject?){
+            if  Utilities.isValidObject(someObject: comprehensionDict as AnyObject?) {
                 self.comprehension?.initWithComprehension(dict: comprehensionDict)
                 
             }
@@ -219,16 +219,16 @@ class ConsentBuilder{
             
             let invisibleVisualConsents = self.consentSectionArray.filter({$0.type == .onlyInDocument})
             
-            if invisibleVisualConsents.count ==  self.consentSectionArray.count{
+            if invisibleVisualConsents.count ==  self.consentSectionArray.count {
                 return nil
             }
-            else{
+            else {
                 //create Visual Consent Step
                 let visualConsentStep = VisualConsentStep(identifier: kVisualStepId, document: self.getConsentDocument())
                 return visualConsentStep
             }
         }
-        else{
+        else {
             return nil
         }
     }
@@ -239,7 +239,7 @@ class ConsentBuilder{
         if self.consentDocument != nil && Utilities.isValidObject(someObject: self.consentDocument?.sections as AnyObject?)   {
             return self.consentDocument!
         }
-        else{
+        else {
             self.consentDocument = self.createConsentDocument()
             return self.consentDocument!
         }
@@ -256,7 +256,7 @@ class ConsentBuilder{
         
         if Utilities.isValidValue(someObject: "title" as AnyObject )
             && Utilities.isValidValue(someObject: "signaturePageTitle" as AnyObject )
-            && Utilities.isValidValue(someObject: kConsentSignaturePageContent as AnyObject ){
+            && Utilities.isValidValue(someObject: kConsentSignaturePageContent as AnyObject ) {
             
             
             consentDocument.title = Study.currentStudy?.name
@@ -275,7 +275,7 @@ class ConsentBuilder{
             return consentDocument
             
         }
-        else{
+        else {
             
             Logger.sharedInstance.debug("consent Step has null values:")
             return nil
@@ -290,7 +290,7 @@ class ConsentBuilder{
 
         if (self.comprehension?.questions?.count)! > 0 {
             var stepsArray: [ORKStep]? = [ORKStep]()
-            for stepDict in (self.comprehension?.questions!)!{
+            for stepDict in (self.comprehension?.questions!)! {
                 //create questionSteps
                 let questionStep: ActivityQuestionStep? = ActivityQuestionStep()
                 questionStep?.initWithDict(stepDict: stepDict )
@@ -300,7 +300,7 @@ class ConsentBuilder{
             }
             return stepsArray
         }
-        else{
+        else {
             return nil
         }
     }
@@ -312,7 +312,7 @@ class ConsentBuilder{
     
         let reviewConsentStep: ConsentReviewStep?
 
-        if  Utilities.isValidValue(someObject: self.reviewConsent?.signatureContent as AnyObject ){
+        if  Utilities.isValidValue(someObject: self.reviewConsent?.signatureContent as AnyObject ) {
             
             //create Consent Document
             let consentDocument: ORKConsentDocument? = (self.getConsentDocument() as ORKConsentDocument)
@@ -322,7 +322,7 @@ class ConsentBuilder{
              //Initialize review Step
              reviewConsentStep = ConsentReviewStep(identifier: kReviewTitle, signature: (self.getConsentDocument() as ORKConsentDocument).signatures?[0], in: self.getConsentDocument())
             
-        }else{
+        }else {
             //create Consent Document
             let consentDocument: ORKConsentDocument? = (self.getConsentDocument() as ORKConsentDocument)
             consentDocument?.signaturePageContent = NSLocalizedString(kSignaturePageContentText, comment: "")
@@ -354,16 +354,16 @@ class ConsentBuilder{
         
         if Utilities.isValidValue(someObject: self.sharingConsent?.shortDesc as AnyObject )
             && Utilities.isValidValue(someObject: self.sharingConsent?.longDesc as AnyObject )
-            && Utilities.isValidValue(someObject: self.sharingConsent?.learnMore as AnyObject ){
+            && Utilities.isValidValue(someObject: self.sharingConsent?.learnMore as AnyObject ) {
             
             //create shareStep
             let sharingConsentStep = ConsentSharingStep(identifier: kConsentSharing, investigatorShortDescription: (self.sharingConsent?.shortDesc)!, investigatorLongDescription: (self.sharingConsent?.longDesc)!, localizedLearnMoreHTMLContent: (self.sharingConsent?.learnMore)!)
             
-            if Utilities.isValidValue(someObject: self.sharingConsent?.text as AnyObject ){
+            if Utilities.isValidValue(someObject: self.sharingConsent?.text as AnyObject ) {
                 sharingConsentStep.text = self.sharingConsent?.text
             }
            
-            if Utilities.isValidValue(someObject: self.sharingConsent?.title as AnyObject ){
+            if Utilities.isValidValue(someObject: self.sharingConsent?.title as AnyObject ) {
                 sharingConsentStep.title = self.sharingConsent?.title
             }
             return sharingConsentStep
@@ -386,7 +386,7 @@ class ConsentBuilder{
         
         var stepArray: Array<ORKStep>? = Array()
         
-        if visualConsentStep != nil{
+        if visualConsentStep != nil {
             
             if  self.consentHasVisualStep! {
                 stepArray?.append(visualConsentStep!)
@@ -407,7 +407,7 @@ class ConsentBuilder{
             stepArray?.append(comprehensionTestInstructionStep)
             
             // adding questionary
-            for step in comprehensionSteps!{
+            for step in comprehensionSteps! {
                 stepArray?.append(step)
             }
             
@@ -422,10 +422,10 @@ class ConsentBuilder{
         }
         
         
-        if sharingConsentStep != nil{
+        if sharingConsentStep != nil {
             stepArray?.append(sharingConsentStep!)
         }
-        if reviewConsentStep != nil{
+        if reviewConsentStep != nil {
             stepArray?.append(reviewConsentStep!)
         }
         
@@ -451,7 +451,7 @@ class ConsentBuilder{
             let task = ORKNavigableOrderedTask(identifier: kConsentTaskIdentifierText, steps: stepArray)
             return task
         }
-        else{
+        else {
             return nil
         }
     }
@@ -486,23 +486,23 @@ struct SharingConsent {
     public mutating func initWithSharingDict(dict: Dictionary<String, Any>)
     {
         
-        if Utilities.isValidObject(someObject: dict as AnyObject?){
+        if Utilities.isValidObject(someObject: dict as AnyObject?) {
             
-            if Utilities.isValidValue(someObject: dict[kConsentSharingStepShortDesc] as AnyObject ){
+            if Utilities.isValidValue(someObject: dict[kConsentSharingStepShortDesc] as AnyObject ) {
                 self.shortDesc =  (dict[kConsentSharingStepShortDesc] as? String)!
             }
             
-            if Utilities.isValidValue(someObject: dict[kConsentSharingStepLongDesc] as AnyObject ){
+            if Utilities.isValidValue(someObject: dict[kConsentSharingStepLongDesc] as AnyObject ) {
                 self.longDesc = dict[kConsentSharingStepLongDesc] as? String
             }
-            if Utilities.isValidValue(someObject: dict[kConsentSharingSteplearnMore] as AnyObject ){
+            if Utilities.isValidValue(someObject: dict[kConsentSharingSteplearnMore] as AnyObject ) {
                 self.learnMore = dict[kConsentSharingSteplearnMore] as? String
             }
             
-            if Utilities.isValidValue(someObject: dict[kConsentSharingStepText] as AnyObject ){
+            if Utilities.isValidValue(someObject: dict[kConsentSharingStepText] as AnyObject ) {
                 self.text = dict[kConsentSharingStepText] as? String
             }
-            if Utilities.isValidValue(someObject: dict[kConsentSharingStepTitle] as AnyObject ){
+            if Utilities.isValidValue(someObject: dict[kConsentSharingStepTitle] as AnyObject ) {
                 self.title = dict[kConsentSharingStepTitle] as? String
             }
             
@@ -512,8 +512,7 @@ struct SharingConsent {
           
            self.allowWithoutSharing = true
           
-        }
-        else{
+        }else {
             Logger.sharedInstance.debug("ConsentDocument Step Dictionary is null:\(dict)")
         }
         
@@ -524,7 +523,7 @@ struct SharingConsent {
 
 //MARK:ReviewConsent Struct
 
-struct ReviewConsent{
+struct ReviewConsent {
     
     var title: String?
     var signatureTitle: String?
@@ -543,23 +542,23 @@ struct ReviewConsent{
      */
     mutating func initWithReviewDict(dict: Dictionary<String, Any>) {
         
-        if Utilities.isValidObject(someObject: dict as AnyObject?){
+        if Utilities.isValidObject(someObject: dict as AnyObject?) {
             
-            if Utilities.isValidValue(someObject: dict[kConsentReviewStepTitle] as AnyObject ){
+            if Utilities.isValidValue(someObject: dict[kConsentReviewStepTitle] as AnyObject ) {
                 self.title =  (dict[kConsentReviewStepTitle] as? String)!
             }
             
-            if Utilities.isValidValue(someObject: dict[kConsentReviewStepSignatureTitle] as AnyObject ){
+            if Utilities.isValidValue(someObject: dict[kConsentReviewStepSignatureTitle] as AnyObject ) {
                 self.signatureTitle = dict[kConsentReviewStepSignatureTitle] as? String
             }
-            if Utilities.isValidValue(someObject: dict[kConsentReviewStepSignatureContent] as AnyObject ){
+            if Utilities.isValidValue(someObject: dict[kConsentReviewStepSignatureContent] as AnyObject ) {
                 self.signatureContent = dict[kConsentReviewStepSignatureContent] as? String
             }
-            if Utilities.isValidValue(someObject: dict[kConsentReviewStepReasonForConsent] as AnyObject ){
+            if Utilities.isValidValue(someObject: dict[kConsentReviewStepReasonForConsent] as AnyObject ) {
                 self.reasonForConsent = dict[kConsentReviewStepReasonForConsent] as? String
             }
         }
-        else{
+        else {
             Logger.sharedInstance.debug("ConsentDocument Step Dictionary is null:\(dict)")
         }
         
@@ -568,13 +567,13 @@ struct ReviewConsent{
 
 //MARK:Comprehension Struct
 
-enum Evaluation: String{
+enum Evaluation: String {
     case any = "any"
     case all = "all"
 }
 
 
-struct Comprehension{
+struct Comprehension {
     
     var passScore: Int?
     var questions: Array<Dictionary<String,Any>>?
@@ -593,16 +592,16 @@ struct Comprehension{
      */
     mutating func initWithComprehension(dict: Dictionary<String, Any>) {
         
-        if Utilities.isValidObject(someObject: dict as AnyObject?){
+        if Utilities.isValidObject(someObject: dict as AnyObject?) {
             
-            if Utilities.isValidValue(someObject: dict[kConsentComprehensionPassScore] as AnyObject ){
+            if Utilities.isValidValue(someObject: dict[kConsentComprehensionPassScore] as AnyObject ) {
                 self.passScore =  (dict[kConsentComprehensionPassScore] as? Int)!
             }
             
-            if Utilities.isValidObject(someObject: dict[kConsentComprehensionQuestions] as AnyObject ){
+            if Utilities.isValidObject(someObject: dict[kConsentComprehensionQuestions] as AnyObject ) {
                 self.questions = dict[kConsentComprehensionQuestions] as? Array<Dictionary<String,Any>>
             }
-            if Utilities.isValidObject(someObject: dict[kConsentComprehensionCorrectAnswers] as AnyObject ){
+            if Utilities.isValidObject(someObject: dict[kConsentComprehensionCorrectAnswers] as AnyObject ) {
                 self.correctAnswers = dict[kConsentComprehensionCorrectAnswers] as?  Array<Dictionary<String,Any>>
             }
         }

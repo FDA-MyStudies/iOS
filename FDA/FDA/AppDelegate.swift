@@ -106,7 +106,7 @@
         var consentToken:String? = "" //to be used in case of ineligible
         
         //Register Remote Notification
-        func askForNotification(){
+        func askForNotification() {
             
             if #available(iOS 10.0, *) {
                 let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
@@ -128,7 +128,7 @@
         /**
          Updates Key & InitializationVector for Encryption
          */
-        func updateKeyAndInitializationVector(){
+        func updateKeyAndInitializationVector() {
             
             let currentDate = "\(Date(timeIntervalSinceNow: 0))"
             let currentIndex = currentDate.index(currentDate.endIndex
@@ -137,7 +137,7 @@
             
             let ud = UserDefaults.standard
             
-            if User.currentUser.userType ==  .FDAUser{ // Registered/LogedIn User
+            if User.currentUser.userType ==  .FDAUser { // Registered/LogedIn User
                 
                 let index =  User.currentUser.userId.index(User.currentUser.userId.endIndex
                     , offsetBy: -16)
@@ -151,8 +151,7 @@
             if UIDevice.current.model == kIsIphoneSimulator {
                 // simulator
                 ud.set(kdefaultIVForEncryption, forKey: kEncryptionIV)
-            }
-            else{
+            }else {
                 // Device
                 var udid = UIDevice.current.identifierForVendor?.uuidString
                 let index =  udid?.index((udid?.endIndex)!
@@ -166,7 +165,7 @@
         /**
          Handler for TimeZone changes, updates time zone in the local database
          */
-        func calculateTimeZoneChange(){
+        func calculateTimeZoneChange() {
             
             let date = Date().utcDate()
             
@@ -211,7 +210,7 @@
         }
         
         //MARK: Realm Migragion
-        func checkForRealmMigration(){
+        func checkForRealmMigration() {
             
             let config = Realm.Configuration(
                 // Set the new schema version. This must be greater than the previously used
@@ -358,7 +357,7 @@
                 
                 if (navController as? UINavigationController) != nil &&  isTaskViewControllerVisible == false {
                     
-                    if (navController as? UINavigationController)?.visibleViewController?.isKind(of: ORKPasscodeViewController.self) == false{
+                    if (navController as? UINavigationController)?.visibleViewController?.isKind(of: ORKPasscodeViewController.self) == false {
                         //Request for Passcode
                         self.checkPasscode(viewController: navController!)
                     }
@@ -487,7 +486,7 @@
                 try "anyString".write(toFile: path, atomically: true, encoding: String.Encoding.utf8)
                 try fileManager.removeItem(atPath: path)
                 return true
-            } catch {
+            }catch {
                 return false
             }
         }
@@ -506,10 +505,10 @@
             let navigationController =  (self.window?.rootViewController as? UINavigationController)!
             self.retryView = ComprehensionFailure.instanceFromNib(frame: navigationController.view.frame, detail: nil);
             
-            if viewController != nil{
+            if viewController != nil {
                 retryView?.delegate = (viewController as? ComprehensionFailureDelegate)!
                 
-            }else{
+            }else {
                 retryView?.delegate = (self as? ComprehensionFailureDelegate)!
             }
             UIApplication.shared.keyWindow?.addSubview(retryView!);
@@ -525,7 +524,7 @@
         }
         
         //MARK: Checker Methods
-        func checkForAppUpdate(){
+        func checkForAppUpdate() {
             WCPServices().checkForAppUpdates(delegate: self)
         }
         
@@ -612,7 +611,7 @@
             
             self.selectedController = controller
             
-            if(StudyUpdates.studyConsentUpdated){
+            if(StudyUpdates.studyConsentUpdated) {
                 print("Study consent is updated: Please Present Consent UI")
                 
                 let navigationController =  (self.window?.rootViewController as? UINavigationController)!
@@ -674,7 +673,7 @@
          @param userInfoDetails, contains the info for notification
          */
         
-        func handleLocalNotification(userInfoDetails:Dictionary<String,Any>){
+        func handleLocalNotification(userInfoDetails:Dictionary<String,Any>) {
             
             var initialVC:UIViewController?
             
@@ -693,7 +692,7 @@
             NotificationHandler.instance.studyId = (userInfoDetails[kStudyId] as? String)!
             NotificationHandler.instance.activityId = (userInfoDetails[kActivityId] as? String)!
             
-            if !(initialVC is UITabBarController){
+            if !(initialVC is UITabBarController) {
                 //push tabbar and switch to activty tab
                 if !(initialVC is StudyListViewController) {
                     
@@ -766,11 +765,11 @@
                             }
                             
                             var resourceId:String? = ""
-                            if Utilities.isValidValue(someObject: userInfoDetails[kResourceId] as AnyObject){
+                            if Utilities.isValidValue(someObject: userInfoDetails[kResourceId] as AnyObject) {
                                 resourceId = userInfoDetails[kResourceId] as? String
                             }
                             
-                            if !(initialVC is UITabBarController){
+                            if !(initialVC is UITabBarController) {
                                 //push tabbar and switch to activty tab
                                 
                                 self.pushToTabbar(viewController: initialVC!, selectedTab: (notificationSubType! as AppNotification.NotificationSubType == .Activity) ? 0 : 2)
@@ -877,7 +876,7 @@
                         if topVC is UIAlertController { //topmost Visible Controller is AlertController
                             alertVCPresented = (topVC as? UIAlertController)!
                             
-                            if (parentController is ORKPasscodeViewController) == false{
+                            if (parentController is ORKPasscodeViewController) == false {
                                 topVC?.dismiss(animated: true, completion: nil)
                             }
                             topVC = parentController
@@ -909,7 +908,7 @@
         
         func addAndRemoveProgress(add: Bool) {
             
-            if add{
+            if add {
                 self.window?.addProgressIndicatorOnWindow()
             }else {
                 self.window?.removeProgressIndicatorFromWindow()
@@ -1151,7 +1150,7 @@
     //Handling for HTTPS
     extension AppDelegate : NMAuthChallengeDelegate{
         
-        func networkCredential(_ manager : NetworkManager, challenge : URLAuthenticationChallenge) -> URLCredential{
+        func networkCredential(_ manager : NetworkManager, challenge : URLAuthenticationChallenge) -> URLCredential {
             var urlCredential: URLCredential = URLCredential()
             if challenge.protectionSpace.authenticationMethod == NSURLAuthenticationMethodServerTrust {
                 if challenge.protectionSpace.host == "hphci-fdama-te-ur-01.labkey.com" {
@@ -1161,7 +1160,7 @@
             return urlCredential
         }
         
-        func networkChallengeDisposition(_ manager: NetworkManager, challenge: URLAuthenticationChallenge) -> URLSession.AuthChallengeDisposition{
+        func networkChallengeDisposition(_ manager: NetworkManager, challenge: URLAuthenticationChallenge) -> URLSession.AuthChallengeDisposition {
             return URLSession.AuthChallengeDisposition.useCredential
         }
     }
@@ -1245,7 +1244,7 @@
     }
     
     
-    extension AppDelegate: ORKTaskViewControllerDelegate{
+    extension AppDelegate: ORKTaskViewControllerDelegate {
         //MARK:ORKTaskViewController Delegate
         
         func taskViewControllerSupportsSaveAndRestore(_ taskViewController: ORKTaskViewController) -> Bool {
@@ -1281,7 +1280,7 @@
                     StudyUpdates.studyConsentUpdated  = false
                     DBHandler.updateMetaDataToUpdateForStudy(study: Study.currentStudy!, updateDetails: nil)
                     
-                    if self.isComprehensionFailed!{
+                    if self.isComprehensionFailed! {
                         self.isComprehensionFailed = false
                     }
                     
@@ -1356,15 +1355,14 @@
         func taskViewController(_ taskViewController: ORKTaskViewController, stepViewControllerWillAppear stepViewController: ORKStepViewController) {
             
             
-            if taskViewController.task?.identifier == kConsentTaskIdentifier{
+            if taskViewController.task?.identifier == kConsentTaskIdentifier {
                 
                 if (taskViewController.result.results?.count)! > 1{
                     
-                    if activityBuilder?.actvityResult?.result?.count == taskViewController.result.results?.count{
+                    if activityBuilder?.actvityResult?.result?.count == taskViewController.result.results?.count {
                         //Removing the dummy result:Currentstep result which not presented yet
                         activityBuilder?.actvityResult?.result?.removeLast()
-                    }
-                    else{
+                    }else {
                         //Do Nothing
                     }
                 }
@@ -1373,16 +1371,16 @@
                 
                 //For Verified Step , Completion Step, Visual Step, Review Step, Share Pdf Step
                 
-                if  stepViewController.step?.identifier == kConsentCompletionStepIdentifier || stepViewController.step?.identifier == kVisualStepId  || stepViewController.step?.identifier == kConsentSharePdfCompletionStep || stepViewController.step?.identifier == kEligibilityVerifiedScreen{
+                if  stepViewController.step?.identifier == kConsentCompletionStepIdentifier || stepViewController.step?.identifier == kVisualStepId  || stepViewController.step?.identifier == kConsentSharePdfCompletionStep || stepViewController.step?.identifier == kEligibilityVerifiedScreen {
                     
                     
-                    if stepViewController.step?.identifier == kEligibilityVerifiedScreen{
+                    if stepViewController.step?.identifier == kEligibilityVerifiedScreen {
                         stepViewController.continueButtonTitle = kContinueButtonTitle
                     }
                     stepViewController.backButtonItem = nil
                 }
                     //checking if currentstep is View Pdf Step
-                else if stepViewController.step?.identifier == kConsentViewPdfCompletionStep{
+                else if stepViewController.step?.identifier == kConsentViewPdfCompletionStep {
                     
                     //Back button is enabled
                     stepViewController.backButtonItem?.isEnabled = true
@@ -1393,17 +1391,17 @@
                     
                     //Checking if Signature is consented after Review Step
                     
-                    if  consentSignatureResult?.didTapOnViewPdf == false{
+                    if  consentSignatureResult?.didTapOnViewPdf == false {
                         //Directly moving to completion step by skipping Intermediate PDF viewer screen
                         stepViewController.goForward()
                         
                     }else {
                     }
                 }else {
-                    if taskViewController.task?.identifier == "ConsentTask"{
+                    if taskViewController.task?.identifier == "ConsentTask" {
                         stepViewController.backButtonItem = nil
                     }
-                    else{
+                    else {
                         stepViewController.backButtonItem?.isEnabled = true
                     }
                     
@@ -1413,18 +1411,18 @@
         
         //MARK:- StepViewController Delegate
         
-        public func stepViewController(_ stepViewController: ORKStepViewController, didFinishWith direction: ORKStepViewControllerNavigationDirection){
+        public func stepViewController(_ stepViewController: ORKStepViewController, didFinishWith direction: ORKStepViewControllerNavigationDirection) {
         }
         
-        public func stepViewControllerResultDidChange(_ stepViewController: ORKStepViewController){
+        public func stepViewControllerResultDidChange(_ stepViewController: ORKStepViewController) {
         }
         
-        public func stepViewControllerDidFail(_ stepViewController: ORKStepViewController, withError error: Error?){
+        public func stepViewControllerDidFail(_ stepViewController: ORKStepViewController, withError error: Error?) {
         }
         
         func taskViewController(_ taskViewController: ORKTaskViewController, viewControllerFor step: ORKStep) -> ORKStepViewController? {
             
-            if taskViewController.task?.identifier == kConsentTaskIdentifier{
+            if taskViewController.task?.identifier == kConsentTaskIdentifier {
                 
                 
                 //CurrentStep is TokenStep
@@ -1529,7 +1527,7 @@
                                 switch evaluationType! {
                                 case .any:
                                     
-                                    if answeredSet.isSubset(of: correctAnswerSet){
+                                    if answeredSet.isSubset(of: correctAnswerSet) {
                                         userScore = userScore + 1
                                     }
                                 case .all:

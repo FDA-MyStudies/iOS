@@ -143,25 +143,25 @@ let kStepQuestionHeightPlaceholder = "placeholder"
 let kStepQuestionLocationUseCurrentLocation = "useCurrentLocation"
 
 
-enum DateRange: String{
+enum DateRange: String {
     case untilCurrent = "untilCurrent"
     case afterCurrent = "afterCurrent"
     case custom = "custom"
     case defaultValue = ""
 }
 
-enum DateStyle: String{
+enum DateStyle: String {
     case date = "Date"
     case dateAndTime = "Date-Time"
 }
 
-enum HeightMeasurementSystem: String{
+enum HeightMeasurementSystem: String {
     case local  = "Local"
     case metric  = "Metric"
     case us  = "US"
 }
 
-enum QuestionStepType: String{
+enum QuestionStepType: String {
     
     
     // Step for  Boolean question.
@@ -248,7 +248,7 @@ enum QuestionStepType: String{
     
 }
 
-enum PHIType: String{
+enum PHIType: String {
     case notPHI = "NotPHI"
     case limited = "Limited"
     case phi = "PHI"
@@ -275,7 +275,7 @@ class ActivityQuestionStep: ActivityStep {
     // Setter method with Step Dictionary
     override func initWithDict(stepDict: Dictionary<String, Any>) {
         
-        if Utilities.isValidObject(someObject: stepDict as AnyObject?){
+        if Utilities.isValidObject(someObject: stepDict as AnyObject?) {
             
             super.initWithDict(stepDict: stepDict)
             
@@ -285,8 +285,7 @@ class ActivityQuestionStep: ActivityStep {
             if Utilities.isValidValue(someObject: stepDict[kStepQuestionHealthDataKey] as AnyObject ) {
                 self.healthDataKey = stepDict[kStepQuestionHealthDataKey] as! String?
             }
-        }
-        else{
+        }else {
             Logger.sharedInstance.debug("Question Step Dictionary is null:\(stepDict)")
         }
         
@@ -327,12 +326,12 @@ class ActivityQuestionStep: ActivityStep {
                     var defaultValue = defaultPosition * stepsValue
                     
                     //Setting the default Value if Exist
-                    if defaultValue > (formatDict?[kStepQuestionScaleMaxValue] as? Int)!{
+                    if defaultValue > (formatDict?[kStepQuestionScaleMaxValue] as? Int)! {
                         defaultValue = (formatDict?[kStepQuestionScaleMaxValue] as? Int)!
                     }
                     
                     //Max != Min && isDivisible == true && (stepsValue >= 1 && stepsValue <= 13)
-                    if ((formatDict?[kStepQuestionScaleMaxValue] as? Int)! != (formatDict?[kStepQuestionScaleMinValue] as? Int)!) && divisibleValue == 0 && (stepsValue >= 1 && stepsValue <= 13){
+                    if ((formatDict?[kStepQuestionScaleMaxValue] as? Int)! != (formatDict?[kStepQuestionScaleMinValue] as? Int)!) && divisibleValue == 0 && (stepsValue >= 1 && stepsValue <= 13) {
                         
                         questionStepAnswerFormat = ORKAnswerFormat.scale(withMaximumValue: (formatDict?[kStepQuestionScaleMaxValue] as? Int)!,
                                                                          minimumValue: (formatDict?[kStepQuestionScaleMinValue] as? Int)!,
@@ -355,13 +354,11 @@ class ActivityQuestionStep: ActivityStep {
                             (questionStepAnswerFormat as? ORKScaleAnswerFormat)!.minimumImage = minNormalImage
                             (questionStepAnswerFormat as? ORKScaleAnswerFormat)!.maximumImage = maxNormalImage
                         }
-                    }
-                    else{
+                    }else {
                         return nil
                     }
                     //questionStep?.placeholder =???
-                }
-                else{
+                }else {
                     Logger.sharedInstance.debug("Scale Question Step has null values:\(String(describing: formatDict))")
                     return nil
                 }
@@ -670,7 +667,7 @@ class ActivityQuestionStep: ActivityStep {
                     answerFormat.multipleLines = (formatDict?[kStepQuestionTextMultipleLines] as? Bool)!
                     questionStepAnswerFormat = answerFormat
                     
-                }else{
+                }else {
                     Logger.sharedInstance.debug("text has null values:\(formatDict)")
                     return nil
                 }
@@ -751,7 +748,7 @@ class ActivityQuestionStep: ActivityStep {
             questionStep?.text = text
             return questionStep!
         }
-        else{
+        else {
             Logger.sharedInstance.debug("FormatDict has null values:\(formatDict)")
             return nil
         }
@@ -892,12 +889,12 @@ class ActivityQuestionStep: ActivityStep {
         do {
             resultDict = try JSONSerialization.jsonObject(with: data! as Data, options: []) as? Dictionary<String,Any>
             
-        } catch let error as NSError{
+        }catch let error as NSError {
             print("\(error)")
         }
         
         let categoryDict = (resultDict!["Category"] as? Dictionary<String,String>)!
-        if let category =  categoryDict[self.healthDataKey!]{
+        if let category =  categoryDict[self.healthDataKey!] {
             let unitDict = (resultDict!["Unit"] as? Dictionary<String,Any>)!
             if let unitsArray = unitDict[category] as? Array<String> {
                 if unitsArray.contains(unit) {

@@ -59,19 +59,19 @@ enum ActivityStepType:String{
 */
 class ActivityStep{
     
-    var activityId:String? //Stores the uniqueId of activity
-    var type:ActivityStepType? // specifies different activitystep types like instruction, question
+    var activityId: String? //Stores the uniqueId of activity
+    var type: ActivityStepType? // specifies different activitystep types like instruction, question
     
-    var resultType:Any?
-    var key:String? // Identifier
-    var title:String? //Title for ORKStep
-    var text:String? // Text for ORKStep
-    var  skippable:Bool?
-    var groupName:String?
-    var repeatable:Bool? // used for RepeatableFormStep
-    var repeatableText:String? // used for RepeatableFormStep to add more form steps
+    var resultType: Any?
+    var key: String? // Identifier
+    var title: String? //Title for ORKStep
+    var text: String? // Text for ORKStep
+    var  skippable: Bool?
+    var groupName: String?
+    var repeatable: Bool? // used for RepeatableFormStep
+    var repeatableText: String? // used for RepeatableFormStep to add more form steps
     
-    var destinations:Array<Dictionary<String,Any>>? // stores the destination step for branching
+    var destinations: Array<Dictionary<String,Any>>? // stores the destination step for branching
     
     /* default Intalizer method */
     init() {
@@ -92,7 +92,7 @@ class ActivityStep{
     
     /* initializer method with all params
      */
-     init(activityId:String,type:ActivityStepType,resultType:String,key:String,title:String,text:String,skippable:Bool,groupName:String,repeatable:Bool,repeatableText:String, destinations:Array<Dictionary<String,Any>>) {
+     init(activityId: String,type: ActivityStepType,resultType: String,key: String,title: String,text: String,skippable: Bool,groupName: String,repeatable: Bool,repeatableText: String, destinations: Array<Dictionary<String,Any>>) {
         
         self.activityId = activityId
         self.type = type
@@ -110,7 +110,7 @@ class ActivityStep{
     /* setter method which initializes all params
      @stepDict:contains as key:Value pair for all the properties of ActiveStep
      */
-    func initWithDict(stepDict:Dictionary<String, Any>){
+    func initWithDict(stepDict: Dictionary<String, Any>){
         
         if Utilities.isValidObject(someObject: stepDict as AnyObject?){
             
@@ -161,7 +161,7 @@ class ActivityStep{
     func getNativeStep() -> ORKStep? {
         
         if Utilities.isValidValue(someObject: self.key as AnyObject?){
-            return ORKStep(identifier:self.key! )
+            return ORKStep(identifier: self.key! )
         }
         else{
             return nil

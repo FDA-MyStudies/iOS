@@ -25,9 +25,9 @@ import Foundation
 import ResearchKit
 class ActivityInstructionStep: ActivityStep {
     
-    var image:UIImage? //Used for custom image if exist
-    var imageLocalPath:String? //Used for saving the custom image if exists any
-    var imageServerURL:String?
+    var image: UIImage? //Used for custom image if exist
+    var imageLocalPath: String? //Used for saving the custom image if exists any
+    var imageServerURL: String?
     
     //Default Initializer
     override init() {
@@ -55,7 +55,7 @@ class ActivityInstructionStep: ActivityStep {
      */
     func getInstructionStep() -> ORKInstructionStep? {
         
-        if   Utilities.isValidValue(someObject:title  as AnyObject?) && Utilities.isValidValue(someObject:text  as AnyObject?) && Utilities.isValidValue(someObject:key  as AnyObject?)   {
+        if   Utilities.isValidValue(someObject: title  as AnyObject?) && Utilities.isValidValue(someObject: text  as AnyObject?) && Utilities.isValidValue(someObject: key  as AnyObject?)   {
             
             let instructionStep = ORKInstructionStep(identifier: key!)
             

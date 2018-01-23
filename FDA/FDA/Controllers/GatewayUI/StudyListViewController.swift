@@ -33,20 +33,20 @@ let kNotificationViewControllerIdentifier = "NotificationViewControllerIdentifie
 
 class StudyListViewController: UIViewController {
     
-    @IBOutlet var tableView:UITableView?
-    @IBOutlet var labelHelperText:UILabel!
+    @IBOutlet var tableView: UITableView?
+    @IBOutlet var labelHelperText: UILabel!
     
-    var refreshControl:UIRefreshControl? //for refreshing studylist
+    var refreshControl: UIRefreshControl? //for refreshing studylist
     
     var studyListRequestFailed = false
-    var searchView:SearchBarView?
+    var searchView: SearchBarView?
     
-    var isComingFromFilterScreen : Bool = false
-    var studiesList:Array<Study> = []
+    var isComingFromFilterScreen: Bool = false
+    var studiesList: Array<Study> = []
     
-    var previousStudyList:Array<Study> = []
+    var previousStudyList: Array<Study> = []
     
-    var allStudyList:Array<Study> = [] //Gatewaystudylist
+    var allStudyList: Array<Study> = [] //Gatewaystudylist
     
     //MARK:- Viewcontroller lifecycle
     
@@ -94,7 +94,7 @@ class StudyListViewController: UIViewController {
         Study.currentStudy = nil
         
         let ud = UserDefaults.standard
-        var ispasscodePending:Bool? = false
+        var ispasscodePending: Bool? = false
         
         //Checking if User has missed out setting the passcode/TouchId
         if (ud.value(forKey: kPasscodeIsPending) != nil){
@@ -197,7 +197,7 @@ class StudyListViewController: UIViewController {
         
         let searchButton = UIButton.init(type: .custom)
         searchButton.setImage(#imageLiteral(resourceName: "search_small"), for: UIControlState.normal)
-        searchButton.addTarget(self, action:#selector(self.searchButtonAction(_:)), for: UIControlEvents.touchUpInside)
+        searchButton.addTarget(self, action: #selector(self.searchButtonAction(_:)), for: .touchUpInside)
         searchButton.frame = CGRect.init(x: 0, y: 4, width: 30, height: 30)
         return searchButton
     }
@@ -206,7 +206,7 @@ class StudyListViewController: UIViewController {
         
         let filterButton = UIButton.init(type: .custom)
         filterButton.setImage(#imageLiteral(resourceName: "filterIcon"), for: UIControlState.normal)
-        filterButton.addTarget(self, action:#selector(self.filterAction(_:)), for: UIControlEvents.touchUpInside)
+        filterButton.addTarget(self, action: #selector(self.filterAction(_:)), for: .touchUpInside)
         filterButton.frame = CGRect.init(x: 40, y: 4, width: 30, height: 30)
         return filterButton
     }
@@ -215,7 +215,7 @@ class StudyListViewController: UIViewController {
         let button = UIButton.init(type: .custom)
         
         button.setImage(#imageLiteral(resourceName: "notification_grey"), for: UIControlState.normal)
-        button.addTarget(self, action:#selector(self.buttonActionNotification(_:)), for: UIControlEvents.touchUpInside)
+        button.addTarget(self, action:#selector(self.buttonActionNotification(_:)), for: .touchUpInside)
         button.frame = CGRect.init(x: 80, y: 4, width: 30, height: 30)
         return button
     }
@@ -223,7 +223,7 @@ class StudyListViewController: UIViewController {
     
     func addNotificationIndication() -> UILabel{
         
-        let label = UILabel.init(frame:CGRect.init(x: 100, y: 4, width: 10, height: 10) )
+        let label = UILabel.init(frame: CGRect.init(x: 100, y: 4, width: 10, height: 10) )
         label.font = UIFont.systemFont(ofSize: 10)
         label.textColor = UIColor.white
         
@@ -268,7 +268,7 @@ class StudyListViewController: UIViewController {
             
             if ( daysLastSeen >= 7 ) { //Notification is disabled for 7 or more Days
                 
-                UIUtilities.showAlertWithTitleAndMessage(title:NSLocalizedString("FDA My Studies", comment: "") as NSString, message: NSLocalizedString(kMessageAppNotificationOffRemainder, comment: "") as NSString)
+                UIUtilities.showAlertWithTitleAndMessage(title: NSLocalizedString("FDA My Studies", comment: "") as NSString, message: NSLocalizedString(kMessageAppNotificationOffRemainder, comment: "") as NSString)
                 
                 ud.set(Date(), forKey: "NotificationRemainder")
                 ud.synchronize()
@@ -288,7 +288,7 @@ class StudyListViewController: UIViewController {
             let response = try JSONSerialization.jsonObject(with: data! as Data, options: []) as? Dictionary<String,Any>
             
             let studies = (response?[kStudies] as? Array<Dictionary<String,Any>>)!
-            var listOfStudies:Array<Study> = []
+            var listOfStudies: Array<Study> = []
             for study in studies{
                 let studyModelObj = Study(studyDetail: study)
                 listOfStudies.append(studyModelObj)
@@ -338,7 +338,7 @@ class StudyListViewController: UIViewController {
     func navigateToNotifications(){
         
         let gatewayStoryBoard = UIStoryboard.init(name: kStoryboardIdentifierGateway, bundle: Bundle.main)
-        let notificationController = (gatewayStoryBoard.instantiateViewController(withIdentifier:kNotificationViewControllerIdentifier) as? NotificationViewController)!
+        let notificationController = (gatewayStoryBoard.instantiateViewController(withIdentifier: kNotificationViewControllerIdentifier) as? NotificationViewController)!
         self.navigationController?.pushViewController(notificationController, animated: true)
         
     }
@@ -357,7 +357,7 @@ class StudyListViewController: UIViewController {
     /**
      Navigate the screen to Study Dashboard tabbar viewcontroller screen
      */
-    func pushToStudyDashboard(animated:Bool = true){
+    func pushToStudyDashboard(animated: Bool = true){
         
         let studyStoryBoard = UIStoryboard.init(name: kStudyStoryboard, bundle: Bundle.main)
         
@@ -400,7 +400,7 @@ class StudyListViewController: UIViewController {
                 self.tableView?.isHidden = false
                 
                 Logger.sharedInstance.info("Sorting Studies")
-                let  sortedstudies2 =  studies.sorted(by: { (study1:Study, study2:Study) -> Bool in
+                let  sortedstudies2 =  studies.sorted(by: { (study1: Study, study2: Study) -> Bool in
                     //sorting based on UserParticipation status
                     if study1.status == study2.status {
                         return (study1.userParticipateState.status.sortIndex < study2.userParticipateState.status.sortIndex)
@@ -420,10 +420,10 @@ class StudyListViewController: UIViewController {
                     let previousCollectionData = StudyFilterHandler.instance.previousAppliedFilters
                     
                     if User.currentUser.userType == .FDAUser {
-                        self.appliedFilter(studyStatus: previousCollectionData.first!, pariticipationsStatus: previousCollectionData[2], categories:previousCollectionData[3], searchText: "", bookmarked:(previousCollectionData[1].count > 0 ? true : false))
+                        self.appliedFilter(studyStatus: previousCollectionData.first!, pariticipationsStatus: previousCollectionData[2], categories: previousCollectionData[3], searchText: "", bookmarked: (previousCollectionData[1].count > 0 ? true : false))
                     }
                     else{
-                        self.appliedFilter(studyStatus: previousCollectionData.first!, pariticipationsStatus: [], categories:previousCollectionData[1], searchText: "", bookmarked:false)
+                        self.appliedFilter(studyStatus: previousCollectionData.first!, pariticipationsStatus: [], categories: previousCollectionData[1], searchText: "", bookmarked: false)
                     }
                 }
                 else {
@@ -434,7 +434,7 @@ class StudyListViewController: UIViewController {
                     //using default Filters
                     let filterStrings = appDelegate.getDefaultFilterStrings()
                     
-                    self.appliedFilter(studyStatus: filterStrings.studyStatus, pariticipationsStatus: filterStrings.pariticipationsStatus, categories:filterStrings.categories, searchText: filterStrings.searchText, bookmarked:filterStrings.bookmark)
+                    self.appliedFilter(studyStatus: filterStrings.studyStatus, pariticipationsStatus: filterStrings.pariticipationsStatus, categories: filterStrings.categories, searchText: filterStrings.searchText, bookmarked: filterStrings.bookmark)
                 }
                 self.checkIfFetelKickCountRunning()
             }
@@ -457,9 +457,9 @@ class StudyListViewController: UIViewController {
     /**
      Sort Studies based on the Study Status
      */
-    func getSortedStudies(studies:Array<Study>) -> Array<Study>{
+    func getSortedStudies(studies: Array<Study>) -> Array<Study>{
         
-        let  sortedstudies2 =  studies.sorted(by: { (study1:Study, study2:Study) -> Bool in
+        let  sortedstudies2 =  studies.sorted(by: { (study1: Study, study2: Study) -> Bool in
             
             if study1.status == study2.status {
                 return (study1.userParticipateState.status.sortIndex < study2.userParticipateState.status.sortIndex)
@@ -474,11 +474,11 @@ class StudyListViewController: UIViewController {
      Navigate to notification screen on button clicked
      @param sender    accepts UIBarButtonItem in sender
      */
-    @IBAction func buttonActionNotification(_ sender:UIBarButtonItem){
+    @IBAction func buttonActionNotification(_ sender: UIBarButtonItem){
         self.navigateToNotifications()
     }
     
-    func refresh(sender:AnyObject) {
+    func refresh(sender: AnyObject) {
         self.sendRequestToGetStudyList()
     }
     
@@ -486,22 +486,22 @@ class StudyListViewController: UIViewController {
      Navigate to StudyFilter screen on button clicked
      @param sender    accepts UIBarButtonItem in sender
      */
-    @IBAction func filterAction(_ sender:UIBarButtonItem){
+    @IBAction func filterAction(_ sender: UIBarButtonItem){
         
         isComingFromFilterScreen = true
         self.performSegue(withIdentifier: filterListSegue, sender: nil)
     }
     
-    @IBAction func searchButtonAction(_ sender:UIBarButtonItem){
+    @IBAction func searchButtonAction(_ sender: UIBarButtonItem){
         
-        self.searchView = SearchBarView.instanceFromNib(frame:CGRect.init(x: 0, y: -200, width: self.view.frame.size.width, height: 64.0), detail: nil);
+        self.searchView = SearchBarView.instanceFromNib(frame: CGRect.init(x: 0, y: -200, width: self.view.frame.size.width, height: 64.0), detail: nil);
         
         UIView.animate(withDuration: 0.2,
                        delay: 0.0,
                        options: UIViewAnimationOptions.preferredFramesPerSecond60,
                        animations: { () -> Void in
                         
-                        self.searchView?.frame = CGRect(x:0 , y:0 , width:self.view.frame.size.width , height: 64.0)
+                        self.searchView?.frame = CGRect(x: 0 , y: 0 , width: self.view.frame.size.width , height: 64.0)
                         
                         self.searchView?.textFieldSearch?.becomeFirstResponder()
                         self.searchView?.delegate = self
@@ -565,13 +565,13 @@ class StudyListViewController: UIViewController {
         }
     }
     
-    @IBAction func unwindToStudyList(_ segue:UIStoryboardSegue){
+    @IBAction func unwindToStudyList(_ segue: UIStoryboardSegue){
         //unwindStudyListSegue
     }
     
     
     //MARK:- Database Methods
-    func checkDatabaseForStudyInfo(study:Study){
+    func checkDatabaseForStudyInfo(study: Study){
         
         DBHandler.loadStudyOverview(studyId: (study.studyId)!) { (overview) in
             if overview != nil {
@@ -600,7 +600,7 @@ class StudyListViewController: UIViewController {
      Send the webservice request to get Study Info
      @param study    Access the data from the study class
      */
-    func sendRequestToGetStudyInfo(study:Study){
+    func sendRequestToGetStudyInfo(study: Study){
         WCPServices().getStudyInformation(studyId: study.studyId, delegate: self)
     }
     
@@ -617,7 +617,7 @@ class StudyListViewController: UIViewController {
      Send the webservice request to Update BookMarkStatus
      @param userStudyStatus    Access the data from UserStudyStatus
      */
-    func sendRequestToUpdateBookMarkStatus(userStudyStatus:UserStudyStatus){
+    func sendRequestToUpdateBookMarkStatus(userStudyStatus: UserStudyStatus){
         UserServices().updateStudyBookmarkStatus(studyStauts: userStudyStatus, delegate: self)
     }
     
@@ -636,7 +636,7 @@ class StudyListViewController: UIViewController {
             let appDelegate = (UIApplication.shared.delegate as? AppDelegate)!
             
             if appDelegate.notificationDetails != nil && User.currentUser.userType == .FDAUser {
-                appDelegate.handleLocalAndRemoteNotification(userInfoDetails:appDelegate.notificationDetails! )
+                appDelegate.handleLocalAndRemoteNotification(userInfoDetails: appDelegate.notificationDetails! )
             }
         }else {
             self.tableView?.isHidden = true
@@ -763,12 +763,12 @@ extension StudyListViewController : StudyFilterDelegates{
     //Based on applied filter call WS
     func appliedFilter(studyStatus: Array<String>, pariticipationsStatus: Array<String>, categories: Array<String>, searchText: String, bookmarked: Bool) {
         
-        var previousCollectionData:Array<Array<String>> = []
+        var previousCollectionData: Array<Array<String>> = []
         
         previousCollectionData.append(studyStatus)
         
         if User.currentUser.userType == .FDAUser {
-            previousCollectionData.append((bookmarked == true ? ["Bookmarked"]:[]))
+            previousCollectionData.append((bookmarked == true ? ["Bookmarked"]: []))
             previousCollectionData.append(pariticipationsStatus)
         }
         
@@ -779,25 +779,25 @@ extension StudyListViewController : StudyFilterDelegates{
         StudyFilterHandler.instance.searchText = ""
         
         //filter by study category
-        var categoryFilteredStudies:Array<Study>! = []
+        var categoryFilteredStudies: Array<Study>! = []
         if categories.count > 0 {
             categoryFilteredStudies =  self.allStudyList.filter({categories.contains($0.category!)})
         }
         
         //filter by study status
-        var statusFilteredStudies:Array<Study>! = []
+        var statusFilteredStudies: Array<Study>! = []
         if studyStatus.count > 0 {
             statusFilteredStudies =  self.allStudyList.filter({studyStatus.contains($0.status.rawValue)})
         }
         
         //filter by study status
-        var pariticipationsStatusFilteredStudies:Array<Study>! = []
+        var pariticipationsStatusFilteredStudies: Array<Study>! = []
         if pariticipationsStatus.count > 0 {
             pariticipationsStatusFilteredStudies =  self.allStudyList.filter({pariticipationsStatus.contains($0.userParticipateState.status.description)})
         }
         
         //filter by bookmark
-        var bookmarkedStudies:Array<Study>! = []
+        var bookmarkedStudies: Array<Study>! = []
         
         if bookmarked {
             
@@ -805,7 +805,7 @@ extension StudyListViewController : StudyFilterDelegates{
         }
         
         //filter by searched Text
-        var searchTextFilteredStudies:Array<Study>! = []
+        var searchTextFilteredStudies: Array<Study>! = []
         if searchText.characters.count > 0 {
             searchTextFilteredStudies = self.allStudyList.filter({
                 ($0.name?.containsIgnoringCase(searchText))! || ($0.category?.containsIgnoringCase(searchText))! || ($0.description?.containsIgnoringCase(searchText))! || ($0.sponserName?.containsIgnoringCase(searchText))!
@@ -886,7 +886,7 @@ extension StudyListViewController : StudyFilterDelegates{
         }
         
         //Assigning Filtered result to Studlist
-        let allStudiesArray:Array<Study> = Array(allFilteredSet)
+        let allStudiesArray: Array<Study> = Array(allFilteredSet)
         
         if searchText.characters.count == 0 && bookmarked == false && studyStatus.count == 0 &&
             pariticipationsStatus.count == 0 && categories.count == 0 {
@@ -974,7 +974,7 @@ extension StudyListViewController : StudyListDelegates {
     func studyBookmarked(_ cell: StudyListCell, bookmarked: Bool, forStudy study: Study) {
         
         let user = User.currentUser
-        var userStudyStatus:UserStudyStatus!
+        var userStudyStatus: UserStudyStatus!
         if bookmarked {
             userStudyStatus =  user.bookmarkStudy(studyId: study.studyId!)
         }else {
@@ -1000,9 +1000,9 @@ extension StudyListViewController : searchBarDelegate {
                 //Apply Filters
                 if User.currentUser.userType == .FDAUser {
                     
-                    self.appliedFilter(studyStatus: previousCollectionData.first!, pariticipationsStatus: previousCollectionData[2], categories:previousCollectionData[3], searchText: "", bookmarked:(previousCollectionData[1].count > 0 ? true : false))
+                    self.appliedFilter(studyStatus: previousCollectionData.first!, pariticipationsStatus: previousCollectionData[2], categories: previousCollectionData[3], searchText: "", bookmarked: (previousCollectionData[1].count > 0 ? true : false))
                 }else {
-                    self.appliedFilter(studyStatus: previousCollectionData.first!, pariticipationsStatus: [], categories:previousCollectionData[1], searchText: "", bookmarked:false)
+                    self.appliedFilter(studyStatus: previousCollectionData.first!, pariticipationsStatus: [], categories: previousCollectionData[1], searchText: "", bookmarked: false)
                 }
             } else{
                 let appDelegate = (UIApplication.shared.delegate as? AppDelegate)!
@@ -1010,7 +1010,7 @@ extension StudyListViewController : searchBarDelegate {
                 if StudyFilterHandler.instance.filterOptions.count > 0 {
                     //setting default Filters
                     let filterStrings = appDelegate.getDefaultFilterStrings()
-                    self.appliedFilter(studyStatus: filterStrings.studyStatus, pariticipationsStatus: filterStrings.pariticipationsStatus, categories:filterStrings.categories, searchText: filterStrings.searchText, bookmarked:filterStrings.bookmark)
+                    self.appliedFilter(studyStatus: filterStrings.studyStatus, pariticipationsStatus: filterStrings.pariticipationsStatus, categories: filterStrings.categories, searchText: filterStrings.searchText, bookmarked: filterStrings.bookmark)
                 }
             }
         }
@@ -1044,12 +1044,12 @@ extension StudyListViewController : searchBarDelegate {
                 
                 let filterStrings = appDelegate.getDefaultFilterStrings()
                 
-                self.appliedFilter(studyStatus: filterStrings.studyStatus, pariticipationsStatus: filterStrings.pariticipationsStatus, categories:filterStrings.categories, searchText: filterStrings.searchText, bookmarked:filterStrings.bookmark)
+                self.appliedFilter(studyStatus: filterStrings.studyStatus, pariticipationsStatus: filterStrings.pariticipationsStatus, categories: filterStrings.categories, searchText: filterStrings.searchText, bookmarked: filterStrings.bookmark)
             }
         }
         
         //filter by searched Text
-        var searchTextFilteredStudies:Array<Study>! = []
+        var searchTextFilteredStudies: Array<Study>! = []
         if text.characters.count > 0 {
             searchTextFilteredStudies = self.allStudyList.filter({
                 ($0.name?.containsIgnoringCase(text))! || ($0.category?.containsIgnoringCase(text))! || ($0.description?.containsIgnoringCase(text))! || ($0.sponserName?.containsIgnoringCase(text))!
@@ -1084,7 +1084,7 @@ extension StudyListViewController : searchBarDelegate {
 
 
 //MARK:- Webservices Delegates
-extension StudyListViewController:NMWebServiceDelegate {
+extension StudyListViewController: NMWebServiceDelegate {
     
     func startedRequest(_ manager: NetworkManager, requestName: NSString) {
         Logger.sharedInstance.info("requestname START : \(requestName)")
@@ -1166,7 +1166,7 @@ extension StudyListViewController:NMWebServiceDelegate {
                 if self.refreshControl != nil && (self.refreshControl?.isRefreshing)! {
                     self.refreshControl?.endRefreshing()
                 }
-                UIUtilities.showAlertWithTitleAndMessage(title:NSLocalizedString(kErrorTitle, comment: "") as NSString, message: error.localizedDescription as NSString)
+                UIUtilities.showAlertWithTitleAndMessage(title: NSLocalizedString(kErrorTitle, comment: "") as NSString, message: error.localizedDescription as NSString)
             }
         }
     }
@@ -1174,7 +1174,7 @@ extension StudyListViewController:NMWebServiceDelegate {
 
 
 //MARK:- StudyHomeViewDontroller Delegate
-extension StudyListViewController:StudyHomeViewDontrollerDelegate{
+extension StudyListViewController: StudyHomeViewDontrollerDelegate{
     func studyHomeJoinStudy() {
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
             
@@ -1189,7 +1189,7 @@ extension StudyListViewController:StudyHomeViewDontrollerDelegate{
 
 
 //MARK:- ORKTaskViewController Delegate
-extension StudyListViewController:ORKTaskViewControllerDelegate{
+extension StudyListViewController: ORKTaskViewControllerDelegate{
     
     func taskViewControllerSupportsSaveAndRestore(_ taskViewController: ORKTaskViewController) -> Bool {
         return true
@@ -1197,7 +1197,7 @@ extension StudyListViewController:ORKTaskViewControllerDelegate{
     
     public func taskViewController(_ taskViewController: ORKTaskViewController, didFinishWith reason: ORKTaskViewControllerFinishReason, error: Error?) {
         
-        var taskResult:Any?
+        var taskResult: Any?
         switch reason {
             
         case ORKTaskViewControllerFinishReason.completed:

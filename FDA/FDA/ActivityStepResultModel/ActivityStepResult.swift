@@ -44,12 +44,12 @@ let kTowerOfHanoiKeyNumberOfMoves = "numberOfMoves"
 let kFetalKickCounterDuration = "duration"
 let kFetalKickCounterCount = "count"
 
-enum ActiveStepResultType:String{
+enum ActiveStepResultType: String{
     case boolean = "boolean"
     case numeric = "numeric"
 }
 
-enum SpatialSpanMemoryType:Int{
+enum SpatialSpanMemoryType: Int{
     case score = 0
     case numberOfGames = 1
     case numberOfFailures = 2
@@ -60,7 +60,7 @@ enum TowerOfHanoiResultType:Int{
     case numberOfMoves = 1
 }
 
-enum ActvityStepResultType:String{
+enum ActvityStepResultType: String{
     case formOrActiveTask = "grouped"
     case questionnaire = "questionnaire"
     
@@ -68,20 +68,20 @@ enum ActvityStepResultType:String{
 
 class ActivityStepResult{
     
-    var type:ActivityStepType?
-    weak var step:ActivityStep?
-    var key:String? // Identifier of step
-    var startTime:Date?
-    var endTime:Date?
-    var skipped:Bool?
+    var type: ActivityStepType?
+    weak var step: ActivityStep?
+    var key: String? // Identifier of step
+    var startTime: Date?
+    var endTime: Date?
+    var skipped: Bool?
     
     /** stores the result value of step, it can be of any type
     */
-    var value:Any?
+    var value: Any?
     
-    var subTypeForForm:String? //Exclusively used for form step to store the formItem type
+    var subTypeForForm: String? //Exclusively used for form step to store the formItem type
     
-    var questionStep:ActivityQuestionStep?
+    var questionStep: ActivityQuestionStep?
     
     /* default initializer method
      */
@@ -105,7 +105,7 @@ class ActivityStepResult{
      @param activityType    holds the activity type
      
      */
-    func initWithORKStepResult(stepResult:ORKStepResult,activityType:ActivityType) {
+    func initWithORKStepResult(stepResult: ORKStepResult,activityType: ActivityType) {
         
         if Utilities.isValidValue(someObject: stepResult.identifier as AnyObject?) {
             self.key = stepResult.identifier
@@ -121,7 +121,7 @@ class ActivityStepResult{
                 self.type =  .active
             }
         }
-        self.setResultValue(stepResult:stepResult ,activityType:activityType )
+        self.setResultValue(stepResult: stepResult ,activityType: activityType )
         
     }
     
@@ -129,7 +129,7 @@ class ActivityStepResult{
     /* method create ActivityStepResult by initializing params
      @stepDict:contains all ActivityResultStep properties
      */
-    func initWithDict(stepDict:Dictionary<String, Any>){
+    func initWithDict(stepDict: Dictionary<String, Any>){
         
         if Utilities.isValidObject(someObject: stepDict as AnyObject?){
             
@@ -142,7 +142,7 @@ class ActivityStepResult{
             if Utilities.isValidValue(someObject: stepDict[kActivityStepStartTime] as AnyObject ) {
                 
                 if Utilities.isValidValue(someObject: Utilities.getDateFromString(dateString:(stepDict[kActivityStepStartTime] as? String)!) as AnyObject?) {
-                    self.startTime =  Utilities.getDateFromString(dateString:(stepDict[kActivityStepStartTime] as? String)!)
+                    self.startTime =  Utilities.getDateFromString(dateString: (stepDict[kActivityStepStartTime] as? String)!)
                 }else {
                     Logger.sharedInstance.debug("Date Conversion is null:\(stepDict)")
                 }
@@ -151,7 +151,7 @@ class ActivityStepResult{
                 
                 if Utilities.isValidValue(someObject: Utilities.getDateFromString(dateString:(stepDict[kActivityStepEndTime] as? String)!) as AnyObject?) {
                     
-                    self.endTime =  Utilities.getDateFromString(dateString:(stepDict[kActivityStepEndTime] as? String)!)
+                    self.endTime =  Utilities.getDateFromString(dateString: (stepDict[kActivityStepEndTime] as? String)!)
                 }else {
                     Logger.sharedInstance.debug("Date Conversion is null:\(stepDict)")
                 }
@@ -237,7 +237,7 @@ class ActivityStepResult{
     /* method saves the result of Current Step
      @stepResult: stepResult which can be result of Questionstep/InstructionStep/ActiveTask
      */
-    func setResultValue(stepResult:ORKStepResult, activityType:ActivityType)  {
+    func setResultValue(stepResult: ORKStepResult, activityType: ActivityType)  {
         
         if((stepResult.results?.count)! > 0){
             
@@ -246,13 +246,13 @@ class ActivityStepResult{
                 
                 if stepResult.results?.count == 1 && self.type != .form {
                     
-                    if  let questionstepResult:ORKQuestionResult? = stepResult.results?.first as? ORKQuestionResult? {
+                    if  let questionstepResult: ORKQuestionResult? = stepResult.results?.first as? ORKQuestionResult? {
                         self.setValue(questionstepResult:questionstepResult! )
                         
                     }else {
                         
                         // for consent step result we are storing the ORKConsentSignatureResult
-                        let consentStepResult:ORKConsentSignatureResult? = (stepResult.results?.first as? ORKConsentSignatureResult?)!
+                        let consentStepResult: ORKConsentSignatureResult? = (stepResult.results?.first as? ORKConsentSignatureResult?)!
                         self.value = consentStepResult;
                         
                     }
@@ -261,18 +261,18 @@ class ActivityStepResult{
                     
                     self.value  = [ActivityStepResult]()
                     var formResultArray:[Any] = [Any]()
-                    var i:Int! = 0
-                    var j:Int! = 0
-                    var isAddMore:Bool? =  false
+                    var i: Int! = 0
+                    var j: Int! = 0
+                    var isAddMore: Bool? =  false
                     
                     if (stepResult.results?.count)! > (self.step as? ActivityFormStep)!.itemsArray.count {
                         isAddMore = true
                     }
-                    var localArray:[Dictionary< String,Any>] = [Dictionary< String,Any>]()
+                    var localArray: [Dictionary< String,Any>] = [Dictionary< String,Any>]()
                     
                     for result in stepResult.results! {
                         
-                        let activityStepResult:ActivityStepResult? = ActivityStepResult()
+                        let activityStepResult: ActivityStepResult? = ActivityStepResult()
                         activityStepResult?.startTime = self.startTime
                         activityStepResult?.endTime = self.endTime
                         activityStepResult?.skipped = self.skipped
@@ -300,7 +300,7 @@ class ActivityStepResult{
                         activityStepResult?.step?.resultType = (itemDict["resultType"] as? String)!
                         if ((result as? ORKQuestionResult) != nil) {
                             
-                            let questionResult:ORKQuestionResult? = (result as? ORKQuestionResult)
+                            let questionResult: ORKQuestionResult? = (result as? ORKQuestionResult)
                             
                             if  Utilities.isValidValue(someObject: (activityStepResult?.step?.resultType as? String as AnyObject)) {
                                 self.subTypeForForm = activityStepResult?.step?.resultType as? String
@@ -309,7 +309,7 @@ class ActivityStepResult{
                                 self.subTypeForForm = ""
                             }
                             
-                            self.setValue(questionstepResult:questionResult!)
+                            self.setValue(questionstepResult: questionResult!)
                             
                             activityStepResult?.value = self.value
                             localArray.append((activityStepResult?.getActivityStepResultDict()!)!)
@@ -339,23 +339,23 @@ class ActivityStepResult{
                 
             }else if (activityType == .activeTask) { //For Active task like Fetal Kick, Spatial Span Memory & Towers of Honoi
                 
-                let activityResult:ORKResult? = stepResult.results?.first
-                var resultArray:Array<Dictionary<String, Any>>? =  Array()
+                let activityResult: ORKResult? = stepResult.results?.first
+                var resultArray: Array<Dictionary<String, Any>>? =  Array()
                 
                 if (activityResult as? ORKSpatialSpanMemoryResult) != nil { // Result Handling for Spatial Span Memory
                     
-                    let stepTypeResult:ORKSpatialSpanMemoryResult? = activityResult as? ORKSpatialSpanMemoryResult
+                    let stepTypeResult: ORKSpatialSpanMemoryResult? = activityResult as? ORKSpatialSpanMemoryResult
                     
                     if Utilities.isValidValue(someObject: stepTypeResult?.score as AnyObject?)
                         && Utilities.isValidValue(someObject: stepTypeResult?.numberOfGames as AnyObject?)
                         && Utilities.isValidValue(someObject: stepTypeResult?.numberOfFailures as AnyObject?) {
                         
                         for i in 0..<3 {
-                            var resultDict:Dictionary<String, Any>? =  Dictionary()
+                            var resultDict: Dictionary<String, Any>? =  Dictionary()
                             
                             resultDict?[kActivityActiveKeyResultType] = ActiveStepResultType.numeric.rawValue
                             
-                            switch SpatialSpanMemoryType(rawValue:i)! as SpatialSpanMemoryType {
+                            switch SpatialSpanMemoryType(rawValue: i)! as SpatialSpanMemoryType {
                             case .score: // score
                                 resultDict?[kActivityActiveStepKey] = kSpatialSpanMemoryKeyScore
                                 resultDict?[kActivityStepResultValue] = stepTypeResult?.score
@@ -399,9 +399,9 @@ class ActivityStepResult{
                     let stepTypeResult:ORKTowerOfHanoiResult? = activityResult as? ORKTowerOfHanoiResult
                     
                     for i in 0..<2 {
-                        var resultDict:Dictionary<String, Any>? =  Dictionary()
+                        var resultDict: Dictionary<String, Any>? =  Dictionary()
                         //Saving puzzleWasSolved & numberOfMoves
-                        if  TowerOfHanoiResultType(rawValue:i) == .puzzleWasSolved { //puzzleWasSolved
+                        if  TowerOfHanoiResultType(rawValue: i) == .puzzleWasSolved { //puzzleWasSolved
                             
                             resultDict?[kActivityActiveStepKey] = kTowerOfHanoiKeyPuzzleWasSolved
                             resultDict?[kActivityStepResultValue] = stepTypeResult?.puzzleWasSolved
@@ -443,10 +443,10 @@ class ActivityStepResult{
                     
                 }
                 else if (activityResult as? FetalKickCounterTaskResult) != nil { //Result handling for FetalKickCounter
-                    let stepTypeResult:FetalKickCounterTaskResult? = activityResult as? FetalKickCounterTaskResult
+                    let stepTypeResult: FetalKickCounterTaskResult? = activityResult as? FetalKickCounterTaskResult
                     
                     for i in 0..<2 {
-                        var resultDict:Dictionary<String, Any>? =  Dictionary()
+                        var resultDict: Dictionary<String, Any>? =  Dictionary()
                         
                         resultDict?[kActivityActiveKeyResultType] = ActiveStepResultType.numeric.rawValue
                         
@@ -496,7 +496,7 @@ class ActivityStepResult{
      setValue method sets the questionStepResult value based on the QuestionStepType
      @param questionstepResult is instance of type ORKQuestionResult
     */
-    func setValue(questionstepResult:ORKQuestionResult) {
+    func setValue(questionstepResult: ORKQuestionResult) {
         switch questionstepResult.questionType.rawValue {
             
         case  ORKQuestionType.scale.rawValue : //scale and continuos scale
@@ -507,7 +507,7 @@ class ActivityStepResult{
                 if Utilities.isValidValue(someObject: stepTypeResult.scaleAnswer as AnyObject?) {
                     
                     if self.step != nil && (self.step as? ActivityQuestionStep) != nil && ((self.step as? ActivityQuestionStep)?.resultType as? String)! == "continuousScale" {
-                        let formatDict:Dictionary<String, Any>
+                        let formatDict: Dictionary<String, Any>
                         
                         formatDict = ((self.step as? ActivityQuestionStep)?.formatDict)!
                         let maxFractionDigit = formatDict[kStepQuestionContinuosScaleMaxFractionDigits]
@@ -542,7 +542,7 @@ class ActivityStepResult{
                 }
             }else {
                 let stepTypeResult = (questionstepResult as? ORKChoiceQuestionResult)!
-                if Utilities.isValidObject(someObject:stepTypeResult.choiceAnswers as AnyObject?) {
+                if Utilities.isValidObject(someObject: stepTypeResult.choiceAnswers as AnyObject?) {
                     
                     if (stepTypeResult.choiceAnswers?.count)! > 0 {
                         self.value = stepTypeResult.choiceAnswers?.first
@@ -558,7 +558,7 @@ class ActivityStepResult{
         case ORKQuestionType.singleChoice.rawValue: //textchoice + value picker + imageChoice
             
             let stepTypeResult = (questionstepResult as? ORKChoiceQuestionResult)!
-            var resultType:String? = (self.step?.resultType as? String)!
+            var resultType: String? = (self.step?.resultType as? String)!
             
             // for form we have to assign the step type of each form item
             if resultType == "grouped" {
@@ -572,15 +572,15 @@ class ActivityStepResult{
                         
                         //for image choice and valuepicker
                         
-                        let resultValue:String! = "\(stepTypeResult.choiceAnswers!.first!)"
+                        let resultValue: String! = "\(stepTypeResult.choiceAnswers!.first!)"
                         
                         self.value = (resultValue == nil ? "" : resultValue)
                         
                     }else {
                         // for text choice
                         
-                        let resultValue:String! = "\(stepTypeResult.choiceAnswers!.first!)"
-                        let resultArray:Array<String>? = ["\(resultValue == nil ? "" : resultValue!)"]
+                        let resultValue: String! = "\(stepTypeResult.choiceAnswers!.first!)"
+                        let resultArray: Array<String>? = ["\(resultValue == nil ? "" : resultValue!)"]
                         self.value = resultArray
                     }
                     
@@ -603,10 +603,10 @@ class ActivityStepResult{
         case ORKQuestionType.multipleChoice.rawValue: //textchoice + imageChoice
             
             let stepTypeResult = (questionstepResult as? ORKChoiceQuestionResult)!
-            if Utilities.isValidObject(someObject:stepTypeResult.choiceAnswers as AnyObject?){
+            if Utilities.isValidObject(someObject: stepTypeResult.choiceAnswers as AnyObject?){
                 if (stepTypeResult.choiceAnswers?.count)! > 1{
                     
-                    var resultArray:Array<String>? = []
+                    var resultArray: Array<String>? = []
                     
                     for value in stepTypeResult.choiceAnswers!{
                         resultArray?.append("\(value == nil ? "" : value)")
@@ -615,8 +615,8 @@ class ActivityStepResult{
                     
                 }else {
                     
-                    let resultValue:String! = "\(stepTypeResult.choiceAnswers!.first!)"
-                    let resultArray:Array<String>? = ["\(resultValue == nil ? "" : resultValue!)"]
+                    let resultValue: String! = "\(stepTypeResult.choiceAnswers!.first!)"
+                    let resultArray: Array<String>? = ["\(resultValue == nil ? "" : resultValue!)"]
                     self.value = resultArray
                 }
                 
@@ -660,9 +660,9 @@ class ActivityStepResult{
             
             if stepTypeResult.dateComponentsAnswer != nil {
                 
-                let hour:Int? = (stepTypeResult.dateComponentsAnswer?.hour == nil ? 0 : stepTypeResult.dateComponentsAnswer?.hour)
-                let minute:Int? = (stepTypeResult.dateComponentsAnswer?.minute == nil ? 0 : stepTypeResult.dateComponentsAnswer?.minute)
-                let seconds:Int? = (stepTypeResult.dateComponentsAnswer?.second == nil ? 0 : stepTypeResult.dateComponentsAnswer?.second)
+                let hour: Int? = (stepTypeResult.dateComponentsAnswer?.hour == nil ? 0 : stepTypeResult.dateComponentsAnswer?.hour)
+                let minute: Int? = (stepTypeResult.dateComponentsAnswer?.minute == nil ? 0 : stepTypeResult.dateComponentsAnswer?.minute)
+                let seconds: Int? = (stepTypeResult.dateComponentsAnswer?.second == nil ? 0 : stepTypeResult.dateComponentsAnswer?.second)
                 
                 self.value = (( hour! < 10 ? ("0" + "\(hour!)") : "\(hour!)") + ":" + ( minute! < 10 ? ("0" + "\(minute!)") : "\(minute!)") + ":" + ( seconds! < 10 ? ("0" + "\(seconds!)") : "\(seconds!)"))
                 
@@ -743,7 +743,7 @@ class ActivityStepResult{
      @step:ActivityStep instance with all properties initialized priorly
      */
     
-    func setStep(step:ActivityStep)  {
+    func setStep(step: ActivityStep)  {
         
         
         self.step = step

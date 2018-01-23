@@ -34,12 +34,12 @@ let kActivityResults = "results"
  */
 class ActivityResult {
     
-    var type:ActivityType?
-    weak var activity:Activity?
-    var startTime:Date?
-    var endTime:Date?
+    var type: ActivityType?
+    weak var activity: Activity?
+    var startTime: Date?
+    var endTime: Date?
    
-    var result:Array<ActivityStepResult>?
+    var result: Array<ActivityStepResult>?
     //MARK: Initializers
     init() {
         self.type = .Questionnaire
@@ -55,7 +55,7 @@ class ActivityResult {
      @param taskResult  is the task Result
      
      */
-    func initWithORKTaskResult(taskResult:ORKTaskResult) {
+    func initWithORKTaskResult(taskResult: ORKTaskResult) {
         
         if Utilities.isValidObject(someObject: self.result as AnyObject?) == false && self.result?.count == 0 {
             
@@ -74,7 +74,7 @@ class ActivityResult {
                     
                 }
                 
-                activityStepResult?.initWithORKStepResult(stepResult: (stepResult as? ORKStepResult)! , activityType:(self.activity?.type)!)
+                activityStepResult?.initWithORKStepResult(stepResult: (stepResult as? ORKStepResult)! , activityType: (self.activity?.type)!)
                 
                 //Completion steps results and Instruction step results are ignored
                 if stepResult.identifier != "CompletionStep"
@@ -103,7 +103,7 @@ class ActivityResult {
      @param activityDict  contains all the activity related data
      */
     
-    func initWithDict(activityDict:Dictionary<String, Any>){
+    func initWithDict(activityDict: Dictionary<String, Any>){
         
         // setter method with Dictionary
         
@@ -117,7 +117,7 @@ class ActivityResult {
             if Utilities.isValidValue(someObject: activityDict[kActivityStartTime] as AnyObject ) {
                 
                 if Utilities.isValidValue(someObject: Utilities.getDateFromString(dateString:(activityDict[kActivityStartTime] as? String)!) as AnyObject?) {
-                    self.startTime =  Utilities.getDateFromString(dateString:(activityDict[kActivityStartTime] as? String)!)
+                    self.startTime =  Utilities.getDateFromString(dateString: (activityDict[kActivityStartTime] as? String)!)
                     
                 }else {
                     Logger.sharedInstance.debug("Date Conversion is null:\(activityDict)")
@@ -126,7 +126,7 @@ class ActivityResult {
             if Utilities.isValidValue(someObject: activityDict[kActivityEndTime] as AnyObject ){
                 
                 if Utilities.isValidValue(someObject: Utilities.getDateFromString(dateString:(activityDict[kActivityEndTime] as? String)!) as AnyObject?) {
-                    self.endTime =  Utilities.getDateFromString(dateString:(activityDict[kActivityEndTime] as? String)!)
+                    self.endTime =  Utilities.getDateFromString(dateString: (activityDict[kActivityEndTime] as? String)!)
                 }else {
                     Logger.sharedInstance.debug("Date Conversion is null:\(activityDict)")
                 }
@@ -138,7 +138,7 @@ class ActivityResult {
     
     
     //MARK: Setter & getter methods for Activity
-    func setActivity(activity:Activity)  {
+    func setActivity(activity: Activity)  {
         
         self.activity = activity
         self.type = activity.type
@@ -151,7 +151,7 @@ class ActivityResult {
     
     
     //MARK: Setter & getter methods for ActivityResult
-    func setActivityResult(activityStepResult:ActivityStepResult)  {
+    func setActivityResult(activityStepResult: ActivityStepResult)  {
         self.result?.append(activityStepResult)
     }
     
@@ -167,7 +167,7 @@ class ActivityResult {
      */
     func getResultDictionary() -> Dictionary<String,Any>? {
         
-        var activityDict:Dictionary<String,Any>? = Dictionary<String,Any>()
+        var activityDict: Dictionary<String,Any>? = Dictionary<String,Any>()
         
         if  self.type != nil {
             if self.type != .activeTask {
@@ -187,7 +187,7 @@ class ActivityResult {
         
         if Utilities.isValidObject(someObject: result as AnyObject?) {
             
-            var activityResultArray :Array<Dictionary<String,Any>> =  Array<Dictionary<String,Any>>()
+            var activityResultArray: Array<Dictionary<String,Any>> =  Array<Dictionary<String,Any>>()
             for stepResult  in result! {
                 let activityStepResult = stepResult as ActivityStepResult
                 

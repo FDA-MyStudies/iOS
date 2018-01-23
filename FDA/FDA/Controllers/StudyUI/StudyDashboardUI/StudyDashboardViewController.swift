@@ -35,10 +35,10 @@ enum TableViewCells: Int {
 
 class StudyDashboardViewController : UIViewController{
     
-    @IBOutlet var tableView : UITableView?
-    @IBOutlet var labelStudyTitle : UILabel?
+    @IBOutlet var tableView: UITableView?
+    @IBOutlet var labelStudyTitle: UILabel?
     
-    var dataSourceKeysForLabkey:Array<Dictionary<String,String>> = []
+    var dataSourceKeysForLabkey: Array<Dictionary<String,String>> = []
     
     var tableViewRowDetails = NSMutableArray()
     var todayActivitiesArray = NSMutableArray()
@@ -50,7 +50,7 @@ class StudyDashboardViewController : UIViewController{
         super.viewDidLoad()
         
         //load plist info
-        let plistPath = Bundle.main.path(forResource: "StudyDashboard", ofType: ".plist", inDirectory:nil)
+        let plistPath = Bundle.main.path(forResource: "StudyDashboard", ofType: ".plist", inDirectory: nil)
         let tableViewRowDetailsdat = NSMutableArray.init(contentsOfFile: plistPath!)
         
         let tableviewdata = (tableViewRowDetailsdat?[0] as? NSDictionary)!
@@ -101,11 +101,11 @@ class StudyDashboardViewController : UIViewController{
      */
     func createEligibilityConsentTask() {
         
-        let taskViewController:ORKTaskViewController?
+        let taskViewController: ORKTaskViewController?
         
-        let consentTask:ORKOrderedTask? = ConsentBuilder.currentConsent?.createConsentTask() as! ORKOrderedTask?
+        let consentTask: ORKOrderedTask? = ConsentBuilder.currentConsent?.createConsentTask() as! ORKOrderedTask?
         
-        taskViewController = ORKTaskViewController(task:consentTask, taskRun: nil)
+        taskViewController = ORKTaskViewController(task: consentTask, taskRun: nil)
         
         taskViewController?.delegate = self
         taskViewController?.outputDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
@@ -164,7 +164,7 @@ class StudyDashboardViewController : UIViewController{
             }
             let participantId = Study.currentStudy?.userParticipateState.participantId
             //Get stats from Server
-            LabKeyServices().getParticipantResponse(tableName:tableName!,activityId: activityId!, keys: keys!, participantId: participantId!, delegate: self)
+            LabKeyServices().getParticipantResponse(tableName: tableName!,activityId: activityId!, keys: keys!, participantId: participantId!, delegate: self)
         }
         else{
             self.removeProgressIndicator()
@@ -193,7 +193,7 @@ class StudyDashboardViewController : UIViewController{
                      let localDateAsString = StudyDashboardViewController.localDateFormatter.string(from: date!)
                     
                      let localDate = StudyDashboardViewController.localDateFormatter.date(from: localDateAsString)
-                    DBHandler.saveStatisticsDataFor(activityId: activityId!, key: key!, data:responseValue, fkDuration:Int(count),date:localDate!)
+                    DBHandler.saveStatisticsDataFor(activityId: activityId!, key: key!, data: responseValue, fkDuration: Int(count),date: localDate!)
                 }
                 
                 
@@ -229,7 +229,7 @@ class StudyDashboardViewController : UIViewController{
         
         
         UIUtilities.showAlertMessageWithTwoActionsAndHandler(NSLocalizedString(kTitleMessage, comment: ""), errorMessage: NSLocalizedString(kMessageForSharingDashboard, comment: ""), errorAlertActionTitle: NSLocalizedString(kTitleOK, comment: ""),
-                                                             errorAlertActionTitle2:NSLocalizedString(kTitleCancel, comment: ""), viewControllerUsed: self,
+                                                             errorAlertActionTitle2: NSLocalizedString(kTitleCancel, comment: ""), viewControllerUsed: self,
                                                              action1: {
                                                                 
                                                                 self.shareScreenShotByMail()
@@ -298,7 +298,7 @@ extension StudyDashboardViewController : UITableViewDataSource {
         
         let data = (self.tableViewRowDetails[indexPath.section] as? NSDictionary)!
         
-        var heightValue : CGFloat = 0
+        var heightValue: CGFloat = 0
         if (data["isTableViewCell"] as? String)! == "YES" {
             
             //Used for Table view Height in a cell
@@ -324,7 +324,7 @@ extension StudyDashboardViewController : UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        var cell : UITableViewCell?
+        var cell: UITableViewCell?
         
         //Used to display the last cell trends
         if indexPath.section == tableViewRowDetails.count{
@@ -416,7 +416,7 @@ extension StudyDashboardViewController:NMWebServiceDelegate {
 
 
 //MARK:- ORKTaskViewController Delegate
-extension StudyDashboardViewController:ORKTaskViewControllerDelegate{
+extension StudyDashboardViewController: ORKTaskViewControllerDelegate{
     
     func taskViewControllerSupportsSaveAndRestore(_ taskViewController: ORKTaskViewController) -> Bool {
         return true
@@ -432,7 +432,7 @@ extension StudyDashboardViewController:ORKTaskViewControllerDelegate{
             taskResult = taskViewController.result
             
             ConsentBuilder.currentConsent?.consentResult?.consentDocument =   ConsentBuilder.currentConsent?.consentDocument
-             ConsentBuilder.currentConsent?.consentResult?.initWithORKTaskResult(taskResult:taskViewController.result )
+             ConsentBuilder.currentConsent?.consentResult?.initWithORKTaskResult(taskResult: taskViewController.result )
             
         case ORKTaskViewControllerFinishReason.failed:
             print("failed")
@@ -480,9 +480,9 @@ extension StudyDashboardViewController:ORKTaskViewControllerDelegate{
             //Back button is enabled
             stepViewController.backButtonItem?.isEnabled = true
             
-            let orkStepResult:ORKStepResult? = taskViewController.result.results?[(taskViewController.result.results?.count)! - 2] as! ORKStepResult?
+            let orkStepResult: ORKStepResult? = taskViewController.result.results?[(taskViewController.result.results?.count)! - 2] as! ORKStepResult?
             
-            let consentSignatureResult:ConsentCompletionTaskResult? = orkStepResult?.results?.first as? ConsentCompletionTaskResult
+            let consentSignatureResult: ConsentCompletionTaskResult? = orkStepResult?.results?.first as? ConsentCompletionTaskResult
             
             //Checking if Signature is consented after Review Step
             
@@ -528,12 +528,12 @@ extension StudyDashboardViewController:ORKTaskViewControllerDelegate{
         } else if step.identifier == kConsentSharePdfCompletionStep { // For SharePdfCompletion Step
             
             var totalResults =  taskViewController.result.results
-            let reviewStep:ORKStepResult?
+            let reviewStep: ORKStepResult?
             totalResults = totalResults?.filter({$0.identifier == kReviewTitle})
             reviewStep = totalResults?.first as! ORKStepResult?
             
             if (reviewStep?.identifier)! == kReviewTitle && (reviewStep?.results?.count)! > 0 {
-                let consentSignatureResult:ORKConsentSignatureResult? = reviewStep?.results?.first as? ORKConsentSignatureResult
+                let consentSignatureResult: ORKConsentSignatureResult? = reviewStep?.results?.first as? ORKConsentSignatureResult
                 
                 if  consentSignatureResult?.consented == false { //User disagreed on Consent
                     taskViewController.dismiss(animated: true
@@ -543,7 +543,7 @@ extension StudyDashboardViewController:ORKTaskViewControllerDelegate{
                     
                 }else { //User consented
                     
-                    let documentCopy:ORKConsentDocument = ((ConsentBuilder.currentConsent?.consentDocument)!.copy() as? ORKConsentDocument)!
+                    let documentCopy: ORKConsentDocument = ((ConsentBuilder.currentConsent?.consentDocument)!.copy() as? ORKConsentDocument)!
                     
                     consentSignatureResult?.apply(to: documentCopy)
                     let gatewayStoryboard = UIStoryboard(name: kFetalKickCounterStep, bundle: nil)
@@ -558,7 +558,7 @@ extension StudyDashboardViewController:ORKTaskViewControllerDelegate{
         }
         else if step.identifier == kConsentViewPdfCompletionStep { //For Pdf Completion Step
             
-            let reviewSharePdfStep:ORKStepResult? = taskViewController.result.results?.last as! ORKStepResult?
+            let reviewSharePdfStep: ORKStepResult? = taskViewController.result.results?.last as! ORKStepResult?
             
             let result = (reviewSharePdfStep?.results?.first as? ConsentCompletionTaskResult)
             

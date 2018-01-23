@@ -24,7 +24,7 @@
 import Foundation
 import ResearchKit
 
-//MARK:Api Constants
+//MARK: Api Constants
 let kActivityType = "type"
 let kActivityInfoMetaData = "metadata"
 
@@ -63,19 +63,19 @@ let kActivityRandomization = "randomization"
 let kActivityLastModified = "lastModified"
 let kActivityTaskSubType = "taskSubType"
 
-enum ActivityType:String{
+enum ActivityType: String{
     case Questionnaire = "questionnaire"
     case activeTask = "task"
 }
 
-enum Frequency:String {
+enum Frequency: String {
     case One_Time = "One time"
     case Daily = "Daily"
     case Weekly = "Weekly"
     case Monthly = "Monthly"
     case Scheduled = "Manually Schedule"
     
-    var description:String{
+    var description: String{
         switch self {
         case .One_Time:
             return "One Time"
@@ -92,7 +92,7 @@ enum Frequency:String {
     }
     
 }
-enum ActivityState:String {
+enum ActivityState: String {
     case active
     case deleted
 }
@@ -102,40 +102,40 @@ enum ActivityState:String {
 */
 class Activity{
     
-    var type:ActivityType?
-    var actvityId:String? // Unique id of each activity
+    var type: ActivityType?
+    var actvityId: String? // Unique id of each activity
     
-    var studyId:String?
-    var name:String? //this will come in activity list used to display
-    var shortName:String? //this will come in meta data
-    var version:String?
-    var state:String?
-    var lastModified:Date?
-    var userStatus:UserActivityStatus.ActivityStatus = .yetToJoin
-    var startDate:Date?
-    var endDate:Date?
-    var branching:Bool?
-    var randomization:Bool?
+    var studyId: String?
+    var name: String? //this will come in activity list used to display
+    var shortName: String? //this will come in meta data
+    var version: String?
+    var state: String?
+    var lastModified: Date?
+    var userStatus: UserActivityStatus.ActivityStatus = .yetToJoin
+    var startDate: Date?
+    var endDate: Date?
+    var branching: Bool?
+    var randomization: Bool?
     
-    var schedule:Schedule?
-    var steps:Array<Dictionary<String,Any>>? = []
-    var orkSteps:Array<ORKStep>? = [] //array of ORKSteps stores each step involved in Questionary
-    var activitySteps:Array<ActivityStep>? = []
+    var schedule: Schedule?
+    var steps: Array<Dictionary<String,Any>>? = []
+    var orkSteps: Array<ORKStep>? = [] //array of ORKSteps stores each step involved in Questionary
+    var activitySteps: Array<ActivityStep>? = []
     
-    var frequencyRuns:Array<Dictionary<String, Any>>? = []
-    var frequencyType:Frequency = .One_Time
+    var frequencyRuns: Array<Dictionary<String, Any>>? = []
+    var frequencyType: Frequency = .One_Time
     
-    var result:ActivityResult?
+    var result: ActivityResult?
 
-    var restortionData:Data? //stores the restortionData for current activity
+    var restortionData: Data? //stores the restortionData for current activity
     var totalRuns = 0
     var currentRunId = 1
     var compeltedRuns = 0
     var incompletedRuns = 0
-    var activityRuns:Array<ActivityRun>! = []
-    var currentRun:ActivityRun! = nil
-    var userParticipationStatus:UserActivityStatus! = nil
-    var taskSubType:String? = "" //used for active tasks
+    var activityRuns: Array<ActivityRun>! = []
+    var currentRun: ActivityRun! = nil
+    var userParticipationStatus: UserActivityStatus! = nil
+    var taskSubType: String? = "" //used for active tasks
   
      //Default Initializer
     init() {
@@ -174,7 +174,7 @@ class Activity{
     }
     
     //MARK:Initializer Methods
-    init(studyId:String,infoDict:Dictionary<String,Any>) {
+    init(studyId: String,infoDict: Dictionary<String,Any>) {
         
         self.studyId = studyId
         
@@ -216,14 +216,14 @@ class Activity{
             
             if Utilities.isValidObject(someObject: infoDict[kActivityFrequency] as AnyObject?){
              
-                let frequencyDict:Dictionary = (infoDict[kActivityFrequency] as? Dictionary<String, Any>)!
+                let frequencyDict: Dictionary = (infoDict[kActivityFrequency] as? Dictionary<String, Any>)!
                 
                 if Utilities.isValidObject(someObject: frequencyDict[kActivityFrequencyRuns] as AnyObject ){
                     self.frequencyRuns =  frequencyDict[kActivityFrequencyRuns] as? Array<Dictionary<String,Any>>
                 }
                 
                 if Utilities.isValidValue(someObject: frequencyDict[kActivityFrequencyType] as AnyObject ){
-                    self.frequencyType =  Frequency(rawValue:(frequencyDict[kActivityFrequencyType] as? String)! )!
+                    self.frequencyType =  Frequency(rawValue: (frequencyDict[kActivityFrequencyType] as? String)! )!
                 }
                 
             }
@@ -250,18 +250,18 @@ class Activity{
     //MARK: Setter Methods
     
     // method to set  ActivityMetaData
-    func setActivityMetaData(activityDict:Dictionary<String,Any>) {
+    func setActivityMetaData(activityDict: Dictionary<String,Any>) {
         
         if Utilities.isValidObject(someObject: activityDict as AnyObject?) {
             
             if Utilities.isValidValue(someObject: activityDict[kActivityType] as AnyObject ){
-                self.type? =  ActivityType(rawValue:(activityDict[kActivityType] as? String)!)!
+                self.type? =  ActivityType(rawValue: (activityDict[kActivityType] as? String)!)!
                
             }
             self.setInfo(infoDict: (activityDict[kActivityInfoMetaData] as? Dictionary<String,Any>)!)
             
             if Utilities.isValidObject(someObject: activityDict[kActivitySteps] as AnyObject?){
-                 self.setStepArray(stepArray:(activityDict[kActivitySteps] as? Array)! )
+                 self.setStepArray(stepArray: (activityDict[kActivitySteps] as? Array)! )
             }
             else{
                 Logger.sharedInstance.debug("infoDict is null:\(String(describing: activityDict[kActivitySteps]))")
@@ -274,7 +274,7 @@ class Activity{
     
     
     // method to set info part of activity from ActivityMetaData
-    func setInfo(infoDict:Dictionary<String,Any>) {
+    func setInfo(infoDict: Dictionary<String,Any>) {
         
         if Utilities.isValidObject(someObject: infoDict as AnyObject?){
          
@@ -301,7 +301,7 @@ class Activity{
     }
     
     // method to set Configration
-    func setConfiguration(configurationDict:Dictionary<String,Any>)  {
+    func setConfiguration(configurationDict: Dictionary<String,Any>)  {
         
         if Utilities.isValidObject(someObject: configurationDict as AnyObject?) {
             if Utilities.isValidValue(someObject: configurationDict[kActivityBranching] as AnyObject) {
@@ -317,7 +317,7 @@ class Activity{
     }
     
      //method to set step array
-    func setStepArray(stepArray:Array<Dictionary<String,Any>>) {
+    func setStepArray(stepArray: Array<Dictionary<String,Any>>) {
        
         if Utilities.isValidObject(someObject: stepArray as AnyObject?){
             self.steps? = stepArray
@@ -327,7 +327,7 @@ class Activity{
         }
     }
     
-    func setORKSteps(orkStepArray:[ORKStep])  {
+    func setORKSteps(orkStepArray: [ORKStep])  {
         if Utilities.isValidObject(someObject: orkStepArray as AnyObject?){
             self.orkSteps = orkStepArray
         }
@@ -338,7 +338,7 @@ class Activity{
     }
     
     //method to set step array
-    func setActivityStepArray(stepArray:Array<ActivityStep>) {
+    func setActivityStepArray(stepArray: Array<ActivityStep>) {
         
         if Utilities.isValidObject(someObject: stepArray as AnyObject?){
             self.activitySteps? = stepArray
@@ -348,7 +348,7 @@ class Activity{
         }
     }
     
-    func calculateActivityRuns(studyId:String){
+    func calculateActivityRuns(studyId: String){
         
         Schedule().getRunsForActivity(activity: self, handler: { (runs) in
             if runs.count > 0 {
@@ -360,7 +360,7 @@ class Activity{
     func getRestortionData() -> Data {
         return self.restortionData!
     }
-    func setRestortionData(restortionData:Data)  {
+    func setRestortionData(restortionData: Data)  {
         self.restortionData = restortionData
     }
 }

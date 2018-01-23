@@ -29,7 +29,7 @@ let kStepFormSteps = "steps"
 
 class ActivityFormStep: ActivityStep {
     
-    var itemsArray:[Dictionary<String,Any>] //itemsArray stores the step details
+    var itemsArray: [Dictionary<String,Any>] //itemsArray stores the step details
     
     override init() {
         self.itemsArray = Array()
@@ -59,10 +59,10 @@ class ActivityFormStep: ActivityStep {
      */
     func getFormStep() -> ORKFormStep? {
         
-        if Utilities.isValidValue(someObject:key  as AnyObject?)
-            && Utilities.isValidObject(someObject:self.itemsArray  as AnyObject?) {
+        if Utilities.isValidValue(someObject: key  as AnyObject?)
+            && Utilities.isValidObject(someObject: self.itemsArray  as AnyObject?) {
             
-            let step:ORKFormStep?
+            let step: ORKFormStep?
             
             if self.repeatable == true {
                 
@@ -74,10 +74,10 @@ class ActivityFormStep: ActivityStep {
                 step = ORKFormStep(identifier: key!, title: (self.title == nil ? "" : self.title!), text: text!)
             }
             
-            if  Utilities.isValidValue(someObject:title!  as AnyObject?) {
+            if  Utilities.isValidValue(someObject: title!  as AnyObject?) {
                 step?.title = title!
             }
-            if  Utilities.isValidValue(someObject:self.skippable!  as AnyObject?) {
+            if  Utilities.isValidValue(someObject: self.skippable!  as AnyObject?) {
                 step?.isOptional = self.skippable!
             }
             
@@ -85,9 +85,9 @@ class ActivityFormStep: ActivityStep {
             
             for dict in self.itemsArray {
                 
-                if  Utilities.isValidObject(someObject:dict  as AnyObject?){
+                if  Utilities.isValidObject(someObject: dict  as AnyObject?){
                     
-                    let questionStep:ActivityQuestionStep? = ActivityQuestionStep()
+                    let questionStep: ActivityQuestionStep? = ActivityQuestionStep()
                     questionStep?.initWithDict(stepDict: dict)
                     
                     let orkQuestionStep:ORKQuestionStep = (questionStep?.getQuestionStep())!

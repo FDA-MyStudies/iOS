@@ -25,9 +25,9 @@ import UIKit
 
 class LeftMenuResourceTableViewCell: UITableViewCell {
 
-    @IBOutlet var menuIcon:UIImageView?
-    @IBOutlet var labelTitle:UILabel?
-    @IBOutlet var labelCounter:UILabel?
+    @IBOutlet var menuIcon: UIImageView?
+    @IBOutlet var labelTitle: UILabel?
+    @IBOutlet var labelCounter: UILabel?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -42,7 +42,7 @@ class LeftMenuResourceTableViewCell: UITableViewCell {
      Used to populate Cell Data
      @param data    contains dictionary of type string(key and value)
      */
-    func populateCellData(data:Dictionary<String,String>){
+    func populateCellData(data: Dictionary<String,String>){
         menuIcon?.image = UIImage.init(named: data["iconName"]!)
         labelTitle?.text = data["menuTitle"]!
     }

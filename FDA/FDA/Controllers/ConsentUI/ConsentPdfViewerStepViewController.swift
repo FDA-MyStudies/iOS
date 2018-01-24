@@ -53,7 +53,7 @@ class ConsentPdfViewerStepViewController: ORKStepViewController {
     @IBOutlet weak var buttonNext: UIButton?
     
     
-    //MARK:ORKstepView Controller Init methods
+    // MARK:ORKstepView Controller Init methods
     override init(step: ORKStep?) {
         super.init(step: step)
     }
@@ -70,7 +70,7 @@ class ConsentPdfViewerStepViewController: ORKStepViewController {
         super.goForward()
     }
     
-    //MARK:Button Actions
+    // MARK:Button Actions
     
     @IBAction func buttonActionNext(sender: UIBarButtonItem?) {
         
@@ -83,7 +83,7 @@ class ConsentPdfViewerStepViewController: ORKStepViewController {
         
     }
     
-    //MARK:View controller delegates
+    // MARK:View controller delegates
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -130,14 +130,14 @@ class ConsentPdfViewerStepViewController: ORKStepViewController {
     
 }
 
-//MARK: MailComposer Delegates
+// MARK: MailComposer Delegates
 extension ConsentPdfViewerStepViewController: MFMailComposeViewControllerDelegate{
     func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
         controller.dismiss(animated: true, completion: nil)
     }
 }
 
-//MARK: WebView Delegate
+// MARK: WebView Delegate
 extension ConsentPdfViewerStepViewController: UIWebViewDelegate{
     
     func webViewDidFinishLoad(_ webView: UIWebView) {

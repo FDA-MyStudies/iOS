@@ -28,10 +28,10 @@ import UIKit
  */
 class LocalNotification: NSObject {
     
-    static var studies:Array<Study> = [] //StudyList
-    static var notificationList:Array<AppLocalNotification> = [] //NotificationList
-    static var handler:((Bool) -> ()) = {_ in }
-    class func registerLocalNotificationForJoinedStudies(completionHandler:@escaping (Bool) -> ()) {
+    static var studies: Array<Study> = [] //StudyList
+    static var notificationList: Array<AppLocalNotification> = [] //NotificationList
+    static var handler: ((Bool) -> ()) = {_ in }
+    class func registerLocalNotificationForJoinedStudies(completionHandler: @escaping (Bool) -> ()) {
         
         studies = (Gateway.instance.studies?.filter({$0.userParticipateState.status == UserStudyStatus.StudyStatus.inProgress && $0.status == .Active}))!
         
@@ -63,7 +63,7 @@ class LocalNotification: NSObject {
     /**
      registerForStudy method registers all local notification for study and returns and completion handler with bool
      */
-    class func registerForStudy(study:Study,completionHandler:@escaping (Bool) -> ()) {
+    class func registerForStudy(study: Study,completionHandler: @escaping (Bool) -> ()) {
         
         DBHandler.loadActivityListFromDatabase(studyId: study.studyId) { (activities) in
             if activities.count > 0 {
@@ -80,14 +80,14 @@ class LocalNotification: NSObject {
     /**
      registerAllLocalNotificationFor registers local notification for activities based on the frequency type and availability and returns a completion handler with status and array of localNotifications
      */
-    class func registerAllLocalNotificationFor(activities:Array<Activity>,completionHandler:@escaping (Bool,Array<AppLocalNotification>) -> ()) {
+    class func registerAllLocalNotificationFor(activities: Array<Activity>,completionHandler: @escaping (Bool,Array<AppLocalNotification>) -> ()) {
         
         LocalNotification.notificationList.removeAll()
         
         let date = Date()
         for activity in activities {
             
-            var runsBeforeToday:Array<ActivityRun> = []
+            var runsBeforeToday: Array<ActivityRun> = []
             if activity.frequencyType == Frequency.One_Time && activity.endDate == nil {
                 //runsBeforeToday = runs
                 runsBeforeToday = activity.activityRuns
@@ -114,8 +114,8 @@ class LocalNotification: NSObject {
                         
                         let date = run.startDate! // 24 hours before
                         let message = "A new run of the daily activity " + activity.name! + ", is now available. Your participation is important. Please visit the study to complete it now."
-                        let userInfo = [kStudyId:run.studyId,
-                                        kActivityId:run.activityId]
+                        let userInfo = [kStudyId: run.studyId,
+                                        kActivityId: run.activityId]
                         
                         LocalNotification.composeRunNotification(startDate: date, endDate: run.endDate, message: message, run: run)
                         
@@ -126,8 +126,8 @@ class LocalNotification: NSObject {
                         let message2 = ", is now available and is valid until " + LocalNotification.timeFormatter.string(from: run.endDate!)
                         let messgge3 = ". Your participation is important. Please visit the study to complete it now."
                         let message = message1 + message2 + messgge3
-                        let userInfo = [kStudyId:run.studyId,
-                                        kActivityId:run.activityId]
+                        let userInfo = [kStudyId: run.studyId,
+                                        kActivityId: run.activityId]
                         
                         LocalNotification.composeRunNotification(startDate: date, endDate: run.endDate, message: message, run: run)
                     }
@@ -137,8 +137,8 @@ class LocalNotification: NSObject {
                     //expiry notificaiton
                     let date = run.endDate.addingTimeInterval(-24*3600)
                     let message = "The current run of the weekly activity " + activity.name! + " will expire in 24 hours. Your participation is important. Please visit the study to complete it now."
-                    let userInfo = [kStudyId:run.studyId,
-                                    kActivityId:run.activityId]
+                    let userInfo = [kStudyId: run.studyId,
+                                    kActivityId: run.activityId]
                     
                     LocalNotification.composeRunNotification(startDate: date, endDate: run.endDate, message: message, run: run)
                     
@@ -151,8 +151,8 @@ class LocalNotification: NSObject {
                     
                     let date = run.endDate.addingTimeInterval(-72*3600)
                     let message = "The current run of the monthly activity " + activity.name! + " will expire in 3 days. Your participation is important. Please visit the study to complete it now."
-                    let userInfo = [kStudyId:run.studyId,
-                                    kActivityId:run.activityId]
+                    let userInfo = [kStudyId: run.studyId,
+                                    kActivityId: run.activityId]
                     LocalNotification.composeRunNotification(startDate: date, endDate: run.endDate, message: message, run: run)
                     
                     //start notification
@@ -167,8 +167,8 @@ class LocalNotification: NSObject {
                     let message2 = ", is now available and is valid until " + "\(endDate)"
                     let message3 = ". Your participation is important. Please visit the study to complete it now."
                     let message = message1 + message2 + message3
-                    let userInfo = [kStudyId:run.studyId,
-                                    kActivityId:run.activityId]
+                    let userInfo = [kStudyId: run.studyId,
+                                    kActivityId: run.activityId]
                     
                     LocalNotification.composeRunNotification(startDate: date, endDate: run.endDate, message: message, run: run)
                 }
@@ -180,10 +180,10 @@ class LocalNotification: NSObject {
     /**
      composeRunNotification creates a notification for the dates & message of ActivityRun specfied and saves to the notificationList
      */
-    class func composeRunNotification(startDate:Date,endDate:Date,message:String,run:ActivityRun) {
+    class func composeRunNotification(startDate: Date,endDate: Date,message: String,run: ActivityRun) {
         
-        let userInfo = [kStudyId:run.studyId,
-                        kActivityId:run.activityId] as [String:String]
+        let userInfo = [kStudyId: run.studyId,
+                        kActivityId: run.activityId] as [String: String]
         
         //create App local notification object
         
@@ -207,7 +207,7 @@ class LocalNotification: NSObject {
     /**
      scheduleNotificationOn registers local notification
      */
-    class func scheduleNotificationOn(date:Date,message:String,userInfo:Dictionary<String,Any>){
+    class func scheduleNotificationOn(date: Date,message: String,userInfo: Dictionary<String,Any>){
         
         if date > Date() {
             print("NotificationMessage\(message) ** date \(date.description(with: Locale.current))" )
@@ -226,7 +226,7 @@ class LocalNotification: NSObject {
     /**
      removeLocalNotificationfor deletes the notification for studyId & activityId
      */
-    class func removeLocalNotificationfor(studyId:String,activityid:String) {
+    class func removeLocalNotificationfor(studyId: String,activityid: String) {
         
         let allNotificaiton = UIApplication.shared.scheduledLocalNotifications
         
@@ -243,7 +243,7 @@ class LocalNotification: NSObject {
     /**
      removeLocalNotificationfor deletes notification based on studyId
      */
-    class func removeLocalNotificationfor(studyId:String) {
+    class func removeLocalNotificationfor(studyId: String) {
         
         let allNotificaiton = UIApplication.shared.scheduledLocalNotifications
         
@@ -268,7 +268,7 @@ class LocalNotification: NSObject {
     
     class func registerReopenAppNotification() {
         
-        let userInfo = ["registerApp":"mystudies",
+        let userInfo = ["registerApp": "mystudies",
                         ]
         let date = Date().addingTimeInterval(60*60*24*14)
         
@@ -315,8 +315,8 @@ class LocalNotification: NSObject {
                 for notification in localNotifications {
                     
                     //Generate User Info
-                    let userInfo = [kStudyId:notification.studyId!,
-                                    kActivityId:notification.activityId!]
+                    let userInfo = [kStudyId: notification.studyId!,
+                                    kActivityId: notification.activityId!]
                     
                     //Reschedule top 50 Local Notifications
                     LocalNotification.scheduleNotificationOn(date: notification.startDate!, message: notification.message!, userInfo: userInfo)
@@ -339,8 +339,8 @@ class LocalNotification: NSObject {
 }
 
 class NotificationHandler: NSObject {
-    var studyId:String! = ""
-    var activityId:String! = ""
+    var studyId: String! = ""
+    var activityId: String! = ""
     var appOpenFromNotification = false
     static var instance = NotificationHandler()
 }

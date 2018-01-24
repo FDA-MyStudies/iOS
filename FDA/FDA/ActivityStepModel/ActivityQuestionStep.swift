@@ -292,7 +292,7 @@ class ActivityQuestionStep: ActivityStep {
     }
     
     
-    //MARK:Question Step Creation
+    // MARK:Question Step Creation
     
     /* method creates QuestionStep using ActivityStep data
      return ORKQuestionStep

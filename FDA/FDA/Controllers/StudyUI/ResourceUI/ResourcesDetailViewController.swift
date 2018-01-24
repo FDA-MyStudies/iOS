@@ -30,15 +30,15 @@ let resourcesDownloadPath = AKUtility.baseFilePath + "/Resources"
 class ResourcesDetailViewController: UIViewController {
     
     
-    @IBOutlet var webView : UIWebView?
-    @IBOutlet var progressBar : UIProgressView?
+    @IBOutlet var webView: UIWebView?
+    @IBOutlet var progressBar: UIProgressView?
     
-    var activityIndicator:UIActivityIndicatorView!
-    var requestLink:String?
-    var type:String?
+    var activityIndicator: UIActivityIndicatorView!
+    var requestLink: String?
+    var type: String?
     var htmlString: String?
-    var resource:Resource?
-    var isEmailComposerPresented:Bool?
+    var resource: Resource?
+    var isEmailComposerPresented: Bool?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -79,7 +79,7 @@ class ResourcesDetailViewController: UIViewController {
                     }
                     else {
                         let path = resourcesDownloadPath + "/" + (self.resource?.file?.localPath)!
-                        let pdfData = FileDownloadManager.decrytFile(pathURL:URL(string:path))
+                        let pdfData = FileDownloadManager.decrytFile(pathURL: URL(string: path))
                         self.loadWebViewWithData(data: pdfData!)
 
                     }
@@ -96,7 +96,7 @@ class ResourcesDetailViewController: UIViewController {
                 
             }
             else{
-                webView?.loadHTMLString(self.requestLink!, baseURL:nil)
+                webView?.loadHTMLString(self.requestLink!, baseURL: nil)
             }
         }
         else{
@@ -114,15 +114,15 @@ class ResourcesDetailViewController: UIViewController {
         // self.tabBar.isHidden = false
     }
     
-    func loadWebViewWithPath(path:String){
+    func loadWebViewWithPath(path: String){
         
-        let url:URL? = URL.init(string:path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed)!)
+        let url: URL? = URL.init(string:path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed)!)
         let urlRequest = URLRequest(url: url!)
         webView?.loadRequest(urlRequest)
     }
-    func loadWebViewWithData(data:Data){
+    func loadWebViewWithData(data: Data){
        
-        self.webView?.load(data, mimeType: "application/pdf", textEncodingName: "UTF-8", baseURL:URL.init(fileURLWithPath: "") )
+        self.webView?.load(data, mimeType: "application/pdf", textEncodingName: "UTF-8", baseURL: URL.init(fileURLWithPath: "") )
         
 //        let url:URL? = URL.init(string:path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed)!)
 //        let urlRequest = URLRequest(url: url!)
@@ -140,9 +140,9 @@ class ResourcesDetailViewController: UIViewController {
         
         let fileURL =  (self.resource?.file?.link)!
         
-        let url = URL(string:fileURL)
+        let url = URL(string: fileURL)
         
-        var fileName : NSString = url!.lastPathComponent as NSString
+        var fileName: NSString = url!.lastPathComponent as NSString
         
         fileName = AKUtility.getUniqueFileNameWithPath((resourcesDownloadPath as NSString).appendingPathComponent(fileName as String) as NSString)
         
@@ -152,13 +152,13 @@ class ResourcesDetailViewController: UIViewController {
     }
     
     
-    //MARK:Button Actions
+    // MARK:Button Actions
     
-    @IBAction func cancelButtonClicked(_ sender : Any){
+    @IBAction func cancelButtonClicked(_ sender: Any){
         self.dismiss(animated: true, completion: nil)
     }
     
-    @IBAction func buttonActionForward(_ sender : UIBarButtonItem){
+    @IBAction func buttonActionForward(_ sender: UIBarButtonItem){
         
         self.sendEmail()
     }
@@ -169,7 +169,7 @@ class ResourcesDetailViewController: UIViewController {
     }
 }
 
-extension ResourcesDetailViewController:UIWebViewDelegate{
+extension ResourcesDetailViewController: UIWebViewDelegate{
     
     func webViewDidFinishLoad(_ webView: UIWebView) {
         self.activityIndicator.stopAnimating()
@@ -180,9 +180,9 @@ extension ResourcesDetailViewController:UIWebViewDelegate{
         self.activityIndicator.removeFromSuperview()
         
         let buttonTitleOK = NSLocalizedString("OK", comment: "")
-        let alert = UIAlertController(title:NSLocalizedString(kTitleError, comment: ""),message:error.localizedDescription,preferredStyle: UIAlertControllerStyle.alert)
+        let alert = UIAlertController(title: NSLocalizedString(kTitleError, comment: ""),message: error.localizedDescription,preferredStyle: UIAlertControllerStyle.alert)
         
-        alert.addAction(UIAlertAction.init(title:buttonTitleOK, style: .default, handler: { (action) in
+        alert.addAction(UIAlertAction.init(title: buttonTitleOK, style: .default, handler: { (action) in
             
             self.dismiss(animated: true, completion: nil)
             
@@ -195,7 +195,7 @@ extension ResourcesDetailViewController:UIWebViewDelegate{
     }
 }
 
-extension ResourcesDetailViewController:MFMailComposeViewControllerDelegate{
+extension ResourcesDetailViewController: MFMailComposeViewControllerDelegate{
     
     func sendEmail() {
         let composeVC = MFMailComposeViewController()
@@ -248,9 +248,9 @@ extension ResourcesDetailViewController:MFMailComposeViewControllerDelegate{
            
         }
         else{
-            let alert = UIAlertController(title:NSLocalizedString(kTitleError, comment: ""),message:"",preferredStyle: UIAlertControllerStyle.alert)
+            let alert = UIAlertController(title: NSLocalizedString(kTitleError, comment: ""),message: "",preferredStyle: UIAlertControllerStyle.alert)
             
-            alert.addAction(UIAlertAction.init(title:NSLocalizedString("OK", comment: ""), style: .default, handler: { (action) in
+            alert.addAction(UIAlertAction.init(title: NSLocalizedString("OK", comment: ""), style: .default, handler: { (action) in
                 
                 self.dismiss(animated: true, completion: nil)
                 
@@ -269,13 +269,13 @@ extension ResourcesDetailViewController:MFMailComposeViewControllerDelegate{
 }
 
 
-extension ResourcesDetailViewController:FileDownloadManagerDelegates{
+extension ResourcesDetailViewController: FileDownloadManagerDelegates{
     
     func download(manager: FileDownloadManager, didUpdateProgress progress: Float) {
         
         self.progressBar?.progress = progress
     }
-    func download(manager: FileDownloadManager, didFinishDownloadingAtPath path:String) {
+    func download(manager: FileDownloadManager, didFinishDownloadingAtPath path: String) {
         
         
          let fullPath = resourcesDownloadPath + "/" + path
@@ -289,7 +289,7 @@ extension ResourcesDetailViewController:FileDownloadManagerDelegates{
             
             let mimeType = "application/" + "\((self.resource?.file?.mimeType?.rawValue)!)"
             
-            self.webView?.load(data!, mimeType: mimeType, textEncodingName: "UTF-8", baseURL:URL.init(fileURLWithPath: "") )
+            self.webView?.load(data!, mimeType: mimeType, textEncodingName: "UTF-8", baseURL: URL.init(fileURLWithPath: "") )
         }
         
     }

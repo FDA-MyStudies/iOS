@@ -25,21 +25,21 @@ import Foundation
 import UIKit
 import SDWebImage
 
-class StudyOverviewViewControllerSecond : UIViewController{
+class StudyOverviewViewControllerSecond: UIViewController{
     
-    @IBOutlet var buttonJoinStudy : UIButton?
-    @IBOutlet var buttonLearnMore : UIButton?
-    @IBOutlet var buttonVisitWebsite : UIButton?
-    @IBOutlet var labelTitle : UILabel?
-    @IBOutlet var labelDescription : UILabel?
-    @IBOutlet var imageViewStudy : UIImageView?
+    @IBOutlet var buttonJoinStudy: UIButton?
+    @IBOutlet var buttonLearnMore: UIButton?
+    @IBOutlet var buttonVisitWebsite: UIButton?
+    @IBOutlet var labelTitle: UILabel?
+    @IBOutlet var labelDescription: UILabel?
+    @IBOutlet var imageViewStudy: UIImageView?
     
-    var pageIndex:Int!
-    var overViewWebsiteLink:String?
-    var overviewSectionDetail : OverviewSection!
+    var pageIndex: Int!
+    var overViewWebsiteLink: String?
+    var overviewSectionDetail: OverviewSection!
     
     
-//MARK:- Viewcontroller lifecycle
+// MARK:- Viewcontroller lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -47,7 +47,7 @@ class StudyOverviewViewControllerSecond : UIViewController{
         buttonJoinStudy?.layer.borderColor = kUicolorForButtonBackground
         if overviewSectionDetail.imageURL != nil {
             let url = URL.init(string:overviewSectionDetail.imageURL!)
-            imageViewStudy?.sd_setImage(with: url, placeholderImage:nil)
+            imageViewStudy?.sd_setImage(with: url, placeholderImage: nil)
         }
     }
     
@@ -75,9 +75,9 @@ class StudyOverviewViewControllerSecond : UIViewController{
             documentAttributes: nil)
         
         let attributedText: NSMutableAttributedString = NSMutableAttributedString(attributedString: attrStr)
-        attributedText.addAttributes([NSFontAttributeName:UIFont(
+        attributedText.addAttributes([NSFontAttributeName: UIFont(
             name: "HelveticaNeue",
-            size: CGFloat(fontSize))!], range:(attrStr.string as NSString).range(of: attrStr.string))
+            size: CGFloat(fontSize))!], range: (attrStr.string as NSString).range(of: attrStr.string))
         attributedText.addAttribute(NSForegroundColorAttributeName, value: UIColor.black, range: (attrStr.string as NSString).range(of: attrStr.string))
         
         if Utilities.isValidValue(someObject: attrStr.string as AnyObject?){
@@ -99,7 +99,7 @@ class StudyOverviewViewControllerSecond : UIViewController{
         
     }
     
-//MARK:- Button Actions 
+// MARK:- Button Actions 
     
     /**
      This method is used to Join Study
@@ -113,7 +113,7 @@ class StudyOverviewViewControllerSecond : UIViewController{
         }
         else{
             //TEMP
-             UIUtilities.showAlertWithTitleAndMessage(title:NSLocalizedString(kAlertMessageText, comment: "") as NSString, message:NSLocalizedString(kAlertMessageReachoutText, comment: "") as NSString)
+             UIUtilities.showAlertWithTitleAndMessage(title: NSLocalizedString(kAlertMessageText, comment: "") as NSString, message: NSLocalizedString(kAlertMessageReachoutText, comment: "") as NSString)
         }
     }
     
@@ -124,8 +124,8 @@ class StudyOverviewViewControllerSecond : UIViewController{
      */
     @IBAction func visitWebsiteButtonAction(_ sender: UIButton) {
         
-        let loginStoryboard = UIStoryboard.init(name: "Main", bundle:Bundle.main)
-        let webViewController = loginStoryboard.instantiateViewController(withIdentifier:"WebViewController") as! UINavigationController
+        let loginStoryboard = UIStoryboard.init(name: "Main", bundle: Bundle.main)
+        let webViewController = loginStoryboard.instantiateViewController(withIdentifier: "WebViewController") as! UINavigationController
         let webView = webViewController.viewControllers[0] as! WebViewController
         //webView.requestLink = "http://www.fda.gov"
         

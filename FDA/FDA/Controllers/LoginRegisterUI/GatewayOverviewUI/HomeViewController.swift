@@ -25,17 +25,17 @@ import Foundation
 import UIKit
 import SlideMenuControllerSwift
 
-class HomeViewController : UIViewController{
+class HomeViewController: UIViewController{
     
-    @IBOutlet weak var container : UIView!
-    @IBOutlet var pageControlView : UIPageControl?
-    @IBOutlet var buttonLink : UIButton!
-    @IBOutlet var buttonSignin : UIButton!
-    @IBOutlet var buttonRegister : UIButton!
-    @IBOutlet var buttonGetStarted : UIButton?
+    @IBOutlet weak var container: UIView!
+    @IBOutlet var pageControlView: UIPageControl?
+    @IBOutlet var buttonLink: UIButton!
+    @IBOutlet var buttonSignin: UIButton!
+    @IBOutlet var buttonRegister: UIButton!
+    @IBOutlet var buttonGetStarted: UIButton?
     
     
-//MARK:- ViewController Lifecycle
+// MARK:- ViewController Lifecycle
     
     override func loadView() {
         super.loadView()
@@ -48,7 +48,7 @@ class HomeViewController : UIViewController{
         // self.loadTestData()
         self.automaticallyAdjustsScrollViewInsets = false
         //Added to change next screen
-        pageControlView?.addTarget(self, action:#selector(HomeViewController.didChangePageControlValue), for: .valueChanged)
+        pageControlView?.addTarget(self, action: #selector(HomeViewController.didChangePageControlValue), for: .valueChanged)
         
     }
     
@@ -65,7 +65,7 @@ class HomeViewController : UIViewController{
         
     }
     
-//MARK:- 
+// MARK:- 
     
     /**
  
@@ -77,7 +77,7 @@ class HomeViewController : UIViewController{
         //        let data = NSData(contentsOfFile: filePath!)
         
         //load plist info
-        let plistPath = Bundle.main.path(forResource: "GatewayOverview", ofType: ".plist", inDirectory:nil)
+        let plistPath = Bundle.main.path(forResource: "GatewayOverview", ofType: ".plist", inDirectory: nil)
         let arrayContent = NSMutableArray.init(contentsOfFile: plistPath!)
         
         do {
@@ -85,7 +85,7 @@ class HomeViewController : UIViewController{
             
             
             //let overviewList = response[kOverViewInfo] as! Array<Dictionary<String,Any>>
-            var listOfOverviews:Array<OverviewSection> = []
+            var listOfOverviews: Array<OverviewSection> = []
             for overview in arrayContent!{
                 let overviewObj = OverviewSection(detail: overview as! Dictionary<String, Any>)
                 listOfOverviews.append(overviewObj)
@@ -105,7 +105,7 @@ class HomeViewController : UIViewController{
     }
     
     
-//MARK:- Segue Methods
+// MARK:- Segue Methods
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let pageViewController = segue.destination as? PageViewController {
@@ -136,7 +136,7 @@ class HomeViewController : UIViewController{
     }
     
     
-//MARK:- Button Actions
+// MARK:- Button Actions
     
     /**
      
@@ -175,7 +175,7 @@ class HomeViewController : UIViewController{
     @IBAction func linkButtonAction(_ sender: Any) {
         
         let loginStoryboard = UIStoryboard.init(name: "Main", bundle:Bundle.main)
-        let webViewController = loginStoryboard.instantiateViewController(withIdentifier:"WebViewController") as! UINavigationController
+        let webViewController = loginStoryboard.instantiateViewController(withIdentifier: "WebViewController") as! UINavigationController
         let webView = webViewController.viewControllers[0] as! WebViewController
         webView.requestLink = "http://www.fda.gov"
         self.navigationController?.present(webViewController, animated: true, completion: nil)
@@ -189,7 +189,7 @@ class HomeViewController : UIViewController{
      @param segue   the segue which is connected to 1 controller to another
      
      */
-    @IBAction func unwindForLogout(_ segue:UIStoryboardSegue){
+    @IBAction func unwindForLogout(_ segue: UIStoryboardSegue){
         
         
     }
@@ -202,7 +202,7 @@ class HomeViewController : UIViewController{
      @param segue   the segue which is connected to 1 controller to another
      
      */
-    @IBAction func unwindForRegister(_ segue:UIStoryboardSegue){
+    @IBAction func unwindForRegister(_ segue: UIStoryboardSegue){
         DispatchQueue.main.asyncAfter(deadline: .now()) {
             // your code here
             self.buttonRegister.sendActions(for: .touchUpInside)
@@ -217,7 +217,7 @@ class HomeViewController : UIViewController{
      @param segue   the segue which is connected to 1 controller to another
      
      */
-    @IBAction func unwindForSignIn(_ segue:UIStoryboardSegue){
+    @IBAction func unwindForSignIn(_ segue: UIStoryboardSegue){
         
         DispatchQueue.main.asyncAfter(deadline: .now()) {
             // your code here
@@ -227,7 +227,7 @@ class HomeViewController : UIViewController{
 }
 
 
-//MARK:- Page Control Delegates for handling Counts
+// MARK:- Page Control Delegates for handling Counts
 extension HomeViewController: PageViewControllerDelegate {
     
     func pageViewController(pageViewController: PageViewController, didUpdatePageCount count: Int){

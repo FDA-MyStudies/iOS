@@ -31,16 +31,16 @@ protocol NetworkConfigurationProtocol {
 }
 class  Method {
     
-    let methodName:String
-    let methodType:HTTPMethod
-    let requestType:RequestType
-    init(methodName:String,methodType:HTTPMethod,requestType:RequestType){
+    let methodName: String
+    let methodType: HTTPMethod
+    let requestType: RequestType
+    init(methodName: String,methodType: HTTPMethod,requestType: RequestType){
         self.methodName = methodName
         self.methodType = methodType
         self.requestType = requestType
     }
 }
-class NetworkProtocols:NetworkConfigurationProtocol{
+class NetworkProtocols: NetworkConfigurationProtocol{
     
     internal func getDefaultRequestParameters() -> Dictionary<String, Any> {
         return Dictionary()
@@ -60,7 +60,7 @@ class NetworkProtocols:NetworkConfigurationProtocol{
     internal func shouldParseErrorMessage() -> Bool {
         return false
     }
-    internal func parseError(errorResponse:Dictionary<String,Any>)->NSError{
+    internal func parseError(errorResponse: Dictionary<String,Any>)->NSError{
       
       var errorCode = 0
       if let errResponse = errorResponse["error"] as? [String: Any] {

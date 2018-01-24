@@ -48,7 +48,7 @@ class StudyListViewController: UIViewController {
     
     var allStudyList: Array<Study> = [] //Gatewaystudylist
     
-    //MARK:- Viewcontroller lifecycle
+    // MARK:- Viewcontroller lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -152,7 +152,7 @@ class StudyListViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    //MARK:- Helper Methods
+    // MARK:- Helper Methods
     
     /**
      addRightNavigationItem method updates the navigation bar items for current controller , by adding Notification Button, Notification Indicator & Filter Button
@@ -469,7 +469,7 @@ class StudyListViewController: UIViewController {
         return sortedstudies2
     }
     
-    //MARK:- Button Actions
+    // MARK:- Button Actions
     /**
      Navigate to notification screen on button clicked
      @param sender    accepts UIBarButtonItem in sender
@@ -519,7 +519,7 @@ class StudyListViewController: UIViewController {
         })
     }
     
-    //MARK:- Custom Bar Buttons
+    // MARK:- Custom Bar Buttons
     /**
      Used to add left bar button item
      */
@@ -551,7 +551,7 @@ class StudyListViewController: UIViewController {
         self.navigationItem.setRightBarButton(barItem, animated: true)
     }
     
-    //MARK:- Segue Methods
+    // MARK:- Segue Methods
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
@@ -570,7 +570,7 @@ class StudyListViewController: UIViewController {
     }
     
     
-    //MARK:- Database Methods
+    // MARK:- Database Methods
     func checkDatabaseForStudyInfo(study: Study){
         
         DBHandler.loadStudyOverview(studyId: (study.studyId)!) { (overview) in
@@ -586,7 +586,7 @@ class StudyListViewController: UIViewController {
     }
     
     
-    //MARK:- Webservice Requests
+    // MARK:- Webservice Requests
     
     /**
      Send the webservice request to get Study List
@@ -622,7 +622,7 @@ class StudyListViewController: UIViewController {
     }
     
     
-    //MARK:- Webservice Responses
+    // MARK:- Webservice Responses
     
     /**
      Handle the Study list webservice response
@@ -757,7 +757,7 @@ class StudyListViewController: UIViewController {
 }
 
 
-//MARK:- Applied filter delegate
+// MARK:- Applied filter delegate
 extension StudyListViewController : StudyFilterDelegates{
     
     //Based on applied filter call WS
@@ -923,7 +923,7 @@ extension StudyListViewController : StudyFilterDelegates{
     }
 }
 
-//MARK:- TableView Data source
+// MARK:- TableView Data source
 extension StudyListViewController : UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -950,7 +950,7 @@ extension StudyListViewController : UITableViewDataSource {
 }
 
 
-//MARK:- TableView Delegates
+// MARK:- TableView Delegates
 extension StudyListViewController :  UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -968,7 +968,7 @@ extension StudyListViewController :  UITableViewDelegate {
     }
 }
 
-//MARK:- StudyList Delegates
+// MARK:- StudyList Delegates
 extension StudyListViewController : StudyListDelegates {
     
     func studyBookmarked(_ cell: StudyListCell, bookmarked: Bool, forStudy study: Study) {
@@ -984,7 +984,7 @@ extension StudyListViewController : StudyListDelegates {
     }
 }
 
-//MARK:SearchBarDelegate
+// MARK:SearchBarDelegate
 extension StudyListViewController : searchBarDelegate {
     func didTapOnCancel() {
         
@@ -1083,7 +1083,7 @@ extension StudyListViewController : searchBarDelegate {
 }
 
 
-//MARK:- Webservices Delegates
+// MARK:- Webservices Delegates
 extension StudyListViewController: NMWebServiceDelegate {
     
     func startedRequest(_ manager: NetworkManager, requestName: NSString) {
@@ -1173,7 +1173,7 @@ extension StudyListViewController: NMWebServiceDelegate {
 }
 
 
-//MARK:- StudyHomeViewDontroller Delegate
+// MARK:- StudyHomeViewDontroller Delegate
 extension StudyListViewController: StudyHomeViewDontrollerDelegate{
     func studyHomeJoinStudy() {
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
@@ -1188,7 +1188,7 @@ extension StudyListViewController: StudyHomeViewDontrollerDelegate{
 }
 
 
-//MARK:- ORKTaskViewController Delegate
+// MARK:- ORKTaskViewController Delegate
 extension StudyListViewController: ORKTaskViewControllerDelegate{
     
     func taskViewControllerSupportsSaveAndRestore(_ taskViewController: ORKTaskViewController) -> Bool {

@@ -25,19 +25,19 @@ import UIKit
 import CryptoSwift
 
 protocol FileDownloadManagerDelegates {
-    func download(manager:FileDownloadManager,didUpdateProgress progress:Float)
-    func download(manager:FileDownloadManager,didFinishDownloadingAtPath path:String)
-    func download(manager:FileDownloadManager,didFailedWithError error:Error)
+    func download(manager: FileDownloadManager,didUpdateProgress progress: Float)
+    func download(manager: FileDownloadManager,didFinishDownloadingAtPath path: String)
+    func download(manager: FileDownloadManager,didFailedWithError error: Error)
 }
 
 let kdefaultKeyForEncrytion = "passwordpasswordpasswordpassword"
 let kdefaultIVForEncryption = "drowssapdrowssap"
 
-class FileDownloadManager : NSObject {
+class FileDownloadManager: NSObject {
     
     var sessionManager: Foundation.URLSession!
     open var downloadingArray: [FileDownloadModel] = []
-    var delegate:FileDownloadManagerDelegates?
+    var delegate: FileDownloadManagerDelegates?
     let taskStartedDate = Date()
     func downloadFile(_ fileName: String, fileURL: String, destinationPath: String){
         
@@ -62,7 +62,7 @@ class FileDownloadManager : NSObject {
 
 
 
-extension FileDownloadManager:URLSessionDelegate{
+extension FileDownloadManager: URLSessionDelegate{
     
     func URLSession(_ session: Foundation.URLSession, downloadTask: URLSessionDownloadTask, didWriteData bytesWritten: Int64, totalBytesWritten: Int64, totalBytesExpectedToWrite: Int64) {
         
@@ -85,7 +85,7 @@ extension FileDownloadManager:URLSessionDelegate{
                 let basePath = downloadModel.destinationPath == "" ? AKUtility.baseFilePath : downloadModel.destinationPath
                 let destinationPath = (basePath as NSString).appendingPathComponent(fileName as String)
                 
-                let fileManager : FileManager = FileManager.default
+                let fileManager: FileManager = FileManager.default
                 
                 //If all set just move downloaded file to the destination
                 //if fileManager.fileExists(atPath: basePath) {
@@ -99,7 +99,7 @@ extension FileDownloadManager:URLSessionDelegate{
                     
                     FileDownloadManager.encyptFile(pathURL: fileURL)
                     
-                    self.delegate?.download(manager: self, didFinishDownloadingAtPath:fileName as String)
+                    self.delegate?.download(manager: self, didFinishDownloadingAtPath: fileName as String)
                 } catch let error as NSError {
                     debugPrint("Error while moving downloaded file to destination path:\(error)")
                     DispatchQueue.main.async(execute: { () -> Void in
@@ -126,7 +126,7 @@ extension FileDownloadManager:URLSessionDelegate{
     /**
      decrypts file at the URL specified using the  Key & IV, AES256 decryption is used
      */
-    class func decrytFile(pathURL:URL?) -> Data?{
+    class func decrytFile(pathURL: URL?) -> Data?{
         
         var pathString = "file://" + "\((pathURL?.absoluteString)!)"
         if (pathURL?.absoluteString.contains("file://"))! {
@@ -179,7 +179,7 @@ extension FileDownloadManager:URLSessionDelegate{
 /**
   encrypts file at the URL specified using the random generated Key & IV, AES256 encryption is used
  */
-   class func encyptFile(pathURL:URL?){
+   class func encyptFile(pathURL: URL?){
     
     var pathString = "file://" + "\((pathURL?.absoluteString)!)"
     if (pathURL?.absoluteString.contains("file://"))! {

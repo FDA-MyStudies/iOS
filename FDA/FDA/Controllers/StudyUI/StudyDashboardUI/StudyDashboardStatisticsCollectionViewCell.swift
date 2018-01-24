@@ -23,7 +23,7 @@
 
 import UIKit
 
-enum StatisticsType:String{
+enum StatisticsType: String{
     case  Activity
     case  Sleep
     case  Weight
@@ -35,7 +35,7 @@ enum StatisticsType:String{
     case  Mood
     case  Other
     
-    var description:String{
+    var description: String{
         switch self {
         case  .Activity:
             return "Activity"
@@ -65,16 +65,16 @@ enum StatisticsType:String{
 class StudyDashboardStatisticsCollectionViewCell: UICollectionViewCell {
     
     //Statistics cell
-    @IBOutlet var statisticsImage : UIImageView?
-    @IBOutlet var labelStatisticsText : UILabel?
-    @IBOutlet var labelStatisticsCount : UILabel?
-    @IBOutlet var labelUnit : UILabel?
-    var stats:DashboardStatistics!
+    @IBOutlet var statisticsImage: UIImageView?
+    @IBOutlet var labelStatisticsText: UILabel?
+    @IBOutlet var labelStatisticsCount: UILabel?
+    @IBOutlet var labelUnit: UILabel?
+    var stats: DashboardStatistics!
     
     /**
      Display DashboardStats for selected Tab
      */
-    func displayStatisics(data : DashboardStatistics,startDate:Date,endDate:Date?,tab:SelectedTab){
+    func displayStatisics(data: DashboardStatistics,startDate: Date,endDate: Date?,tab: SelectedTab){
         
         stats = data
         labelStatisticsText?.text = data.displayName
@@ -132,7 +132,7 @@ class StudyDashboardStatisticsCollectionViewCell: UICollectionViewCell {
      Used to display Statistics cell
      @param data    Accepts the data from Dictionary
      */
-    func displayStatisics(data : DashboardStatistics){
+    func displayStatisics(data: DashboardStatistics){
         
         labelStatisticsText?.text = data.displayName
         let array = data.statList.map{$0.data}
@@ -157,10 +157,10 @@ class StudyDashboardStatisticsCollectionViewCell: UICollectionViewCell {
     }
     
     
-    //MARK:- Date Handlers
-    func handleForDay(date:Date){
+    // MARK:- Date Handlers
+    func handleForDay(date: Date){
         
-        let dataList:Array<DBStatisticsData> = stats.statList.filter({$0.startDate! >= date.startOfDay && $0.startDate! <= date.endOfDay!})
+        let dataList: Array<DBStatisticsData> = stats.statList.filter({$0.startDate! >= date.startOfDay && $0.startDate! <= date.endOfDay!})
         
         let array = dataList.map{$0.data}
         
@@ -171,9 +171,9 @@ class StudyDashboardStatisticsCollectionViewCell: UICollectionViewCell {
             self.calculate(array: array)
         }
     }
-    func handleForWeek(startDate:Date,endDate:Date){
+    func handleForWeek(startDate: Date,endDate: Date){
         
-        let dataList:Array<DBStatisticsData> = stats.statList.filter({$0.startDate! >= startDate && $0.startDate! <= endDate})
+        let dataList: Array<DBStatisticsData> = stats.statList.filter({$0.startDate! >= startDate && $0.startDate! <= endDate})
         
         let array = dataList.map{$0.data}
         
@@ -185,9 +185,9 @@ class StudyDashboardStatisticsCollectionViewCell: UICollectionViewCell {
         }
         
     }
-    func handleForMonth(date:Date){
+    func handleForMonth(date: Date){
         
-        let dataList:Array<DBStatisticsData> = stats.statList.filter({$0.startDate! >= date.startOfMonth() && $0.startDate! <= date.endOfMonth()})
+        let dataList: Array<DBStatisticsData> = stats.statList.filter({$0.startDate! >= date.startOfMonth() && $0.startDate! <= date.endOfMonth()})
         
         let array = dataList.map{$0.data}
         
@@ -203,14 +203,14 @@ class StudyDashboardStatisticsCollectionViewCell: UICollectionViewCell {
     /**
      calculates the stats data and Updates Stats Label
      */
-    func calculate(array:Array<Float>){
+    func calculate(array: Array<Float>){
         
         
         let data = self.stats!
         
         if  data.calculation! == StatisticsFormula.Maximum.rawValue {
             let max = array.max()
-            let maxValue:String! = String(format:"%.2f", max!)
+            let maxValue: String! = String(format:"%.2f", max!)
             labelStatisticsCount?.text = maxValue
         }
         if  data.calculation! == StatisticsFormula.Minimum.rawValue {

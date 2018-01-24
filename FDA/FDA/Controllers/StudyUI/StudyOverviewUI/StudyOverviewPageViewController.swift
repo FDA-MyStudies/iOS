@@ -24,9 +24,9 @@
 import Foundation
 import UIKit
 
-class StudyOverviewPageViewController : UIPageViewController{
+class StudyOverviewPageViewController: UIPageViewController{
     
-//MARK:- Viewcontroller Lifecycle
+// MARK:- Viewcontroller Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -52,7 +52,7 @@ class StudyOverviewPageViewController : UIPageViewController{
         
     }
     
-//MARK:-
+// MARK:-
     
     /**
      
@@ -82,7 +82,7 @@ class StudyOverviewPageViewController : UIPageViewController{
 }
 
 
-//MARK:- Page View Controller delegates
+// MARK:- Page View Controller delegates
 extension StudyOverviewPageViewController: UIPageViewControllerDataSource {
     
     func pageViewController(_ pageViewController: UIPageViewController,

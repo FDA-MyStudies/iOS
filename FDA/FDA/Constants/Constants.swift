@@ -23,7 +23,7 @@
 
 import Foundation
 
-//Mark:- Alert Constants
+// MARK:- Alert Constants
 
 let kTermsAndConditionLink = "http://www.google.com"
 let kPrivacyPolicyLink = "http://www.facebook.com"
@@ -56,27 +56,27 @@ let kDeleteAccountConfirmationMessage = "Are you sure you wish to permanently de
 let kMessageAccountDeletedSuccess = "Account has been deleted"
 let kMessageAppNotificationOffRemainder = "Stay up-to-date! Turn ON notifications and reminders in app and phone settings to get notified about study activity in a timely manner."
 
-//MARK:- Signin Constants
+// MARK:- Signin Constants
 let kSignInTitleText = "SIGN IN"
 let kSignInTableViewCellIdentifier = "DetailsCell"
 
-//MARK:- ForgotPassword Constants
+// MARK:- ForgotPassword Constants
 let kForgotPasswordTitleText = "PASSWORD HELP"
 let kForgotPasswordResponseMessage = "We have sent a temporary password to your registered email. Please login with temporary password and change your password."
 
-//MARK:- SignUp Constants
+// MARK:- SignUp Constants
 let kSignUpTitleText = "SIGN UP"
 let kAgreeToTermsAndConditionsText = "I Agree to the Terms and Privacy Policy"
 let kTermsText = "Terms"
 let kPrivacyPolicyText = "Privacy Policy"
 let kSignUpTableViewCellIdentifier = "CommonDetailsCell"
 
-//MARK:- NOTIFICATIONS Constants
+// MARK:- NOTIFICATIONS Constants
 let kNotificationsTitleText = "NOTIFICATIONS"
 let kNotificationTableViewCellIdentifier = "NotificationCell"
 
 
-//MARK:- Validations Message during signup and sign in process
+// MARK:- Validations Message during signup and sign in process
 
 let kMessageFirstNameBlank = "Please enter your first name."
 let kMessageLastNameBlank = "Please enter your last name."
@@ -105,7 +105,7 @@ let kMessageNewPasswordBlank = "Please enter your new password."
 let kMessageValidateChangePassword = "New password and old password are same."
 
 
-//MARK:- ChangePassword Constants
+// MARK:- ChangePassword Constants
 let kChangePasswordTitleText = "CHANGE PASSWORD"
 let kCreatePasswordTitleText = "CREATE PASSWORD"
 let kChangePawwordCellIdentifer = "changePasswordCell"
@@ -117,15 +117,15 @@ let kMessageValidLastName = "Please enter valid last name. Please use letters(le
 
 let kMessageValidateOldAndNewPasswords = "Old password and New password should not be same."
 
-//MARK:-VerificationController
+// MARK:-VerificationController
 let kMessageVerificationCodeEmpty = "Please enter valid Verification Code"
 
-//MARK:- FeedbackviewController constants
+// MARK:- FeedbackviewController constants
 let kFeedbackTableViewCellIdentifier1 = "FeedbackCellFirst"
 let kFeedbackTableViewCellIdentifier2 = "FeedbackCellSecond"
 let kMessageFeedbackSubmittedSuccessfuly = "Thank you for providing feedback. Your gesture is appreciated."
 
-//MARK:- ContactUsviewController constants
+// MARK:- ContactUsviewController constants
 let kContactUsTableViewCellIdentifier = "ContactUsCell"
 let kMessageSubjectBlankCheck = "Please enter subject"
 let kMessageMessageBlankCheck = "Please enter message"
@@ -133,7 +133,7 @@ let kMessageContactedSuccessfuly = "Thank you for contacting us. We will get bac
 let kMessageTextViewPlaceHolder = ""
 
 
-//MARK:- ActivitiesViewController constants
+// MARK:- ActivitiesViewController constants
 let kBackgroundTableViewColor = UIColor.init(red: 216/255.0, green: 227/255.0, blue: 230/255.0, alpha: 1)
 let kActivitiesTableViewCell = "ActivitiesCell"
 let kActivitiesTableViewScheduledCell = "ActivitiesCellScheduled"
@@ -148,11 +148,11 @@ let kStartSpaces = "  Start  "
 let kCompletedSpaces = "  Completed  "
 let kInCompletedSpaces = "  Incompleted  "
 
-//MARK:- ResourcesViewController constants
+// MARK:- ResourcesViewController constants
 let kResourcesTableViewCell = "ResourcesCell"
 
 
-//MARK:- StudyDashboardViewController constants
+// MARK:- StudyDashboardViewController constants
 let kWelcomeTableViewCell = "welcomeCell"
 let kStudyActivityTableViewCell = "studyActivityCell"
 let kPercentageTableViewCell = "percentageCell"
@@ -173,7 +173,7 @@ let kMonth = "MONTH"
 let kWeekSpaces = "  WEEK  "
 let kWeek = "WEEK"
 
-//MARK:- Eligibility constants
+// MARK:- Eligibility constants
 
 let kMessageForInvalidToken = "Please enter valid enrollment token"
 
@@ -183,7 +183,7 @@ let kMessageForMissingStudyId = "Unable to Enroll, Please try again later."
 let kMessageInvalidTokenOrIfStudyDoesNotExist = "Sorry, this token is invalid. Please enter a valid token to continue."
 
 
-//MARK:- StudyHomeMessages
+// MARK:- StudyHomeMessages
 let kMessageForStudyUpcomingState = "This study is an upcoming one and isn't yet open for enrolling participants. Please check back later."
 let kMessageForStudyPausedState = "This study has been temporarily paused. Please check back later."
 let kMessageForStudyPausedAfterJoiningState = "The study has been temporarily paused. You can participate in activities once it is resumed. Please check back later."
@@ -192,14 +192,14 @@ let kMessageForStudyWithdrawnState = "Sorry, this study currently does not allow
 let kMessageForStudyEnrollingNotAllowed = "Sorry, enrollment for this study has been closed for now. Please check back later or explore other studies you could join."
 
 
-//MARK:- StudyDashboardViewController segues
+// MARK:- StudyDashboardViewController segues
 let unwindToStudyListDashboard = "unwindToStudyListDashboardIdentifier"
 
 
-//MARK:- FilterListViewController Segue
+// MARK:- FilterListViewController Segue
 let filterListSegue = "filterscreenSegue"
 
-//MARK:- Staging User Details
+// MARK:- Staging User Details
 
 let kStagingUserEmailId = "aqibm@boston-technology.com"
 let kIsStagingUser = "StagingUser"

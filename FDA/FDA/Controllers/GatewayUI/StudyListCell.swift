@@ -25,29 +25,29 @@ import UIKit
 import SDWebImage
 
 protocol StudyListDelegates {
-    func studyBookmarked(_ cell:StudyListCell, bookmarked:Bool,forStudy study:Study)
+    func studyBookmarked(_ cell: StudyListCell, bookmarked: Bool,forStudy study: Study)
 }
 
 class StudyListCell: UITableViewCell {
 
-    @IBOutlet var labelStudyUserStatus:UILabel?
-    @IBOutlet var labelStudyTitle:UILabel?
-    @IBOutlet var labelStudyShortDescription:UILabel?
-    @IBOutlet var labelStudySponserName:UILabel?
-    @IBOutlet var labelStudyCategoryType:UILabel?
-    @IBOutlet var labelCompletionValue:UILabel?
-    @IBOutlet var labelAdherenceValue:UILabel?
-    @IBOutlet var labelStudyStatus:UILabel?
-    @IBOutlet var buttonBookmark:UIButton?
-    @IBOutlet var progressBarCompletion:UIProgressView?
-    @IBOutlet var progressBarAdherence:UIProgressView?
-    @IBOutlet var studyLogoImage:UIImageView?
-    @IBOutlet var studyUserStatusIcon:UIImageView?
-    @IBOutlet var studyStatusIndicator:UIView?
-    @IBOutlet var categoryBG:UIView?
+    @IBOutlet var labelStudyUserStatus: UILabel?
+    @IBOutlet var labelStudyTitle: UILabel?
+    @IBOutlet var labelStudyShortDescription: UILabel?
+    @IBOutlet var labelStudySponserName: UILabel?
+    @IBOutlet var labelStudyCategoryType: UILabel?
+    @IBOutlet var labelCompletionValue: UILabel?
+    @IBOutlet var labelAdherenceValue: UILabel?
+    @IBOutlet var labelStudyStatus: UILabel?
+    @IBOutlet var buttonBookmark: UIButton?
+    @IBOutlet var progressBarCompletion: UIProgressView?
+    @IBOutlet var progressBarAdherence: UIProgressView?
+    @IBOutlet var studyLogoImage: UIImageView?
+    @IBOutlet var studyUserStatusIcon: UIImageView?
+    @IBOutlet var studyStatusIndicator: UIView?
+    @IBOutlet var categoryBG: UIView?
     
-    var selectedStudy:Study!
-    var delegate:StudyListDelegates? = nil
+    var selectedStudy: Study!
+    var delegate: StudyListDelegates? = nil
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -98,7 +98,7 @@ class StudyListCell: UITableViewCell {
      Used to populate the cell data
      @param study    access the data from Study class
      */
-    func populateCellWith(study:Study){
+    func populateCellWith(study: Study){
         selectedStudy = study
         labelStudyTitle?.text = study.name
         
@@ -114,7 +114,7 @@ class StudyListCell: UITableViewCell {
         
         let attributedString =  labelStudySponserName?.attributedText?.mutableCopy() as! NSMutableAttributedString
         
-        let foundRange = attributedString.mutableString.range(of:study.category!)
+        let foundRange = attributedString.mutableString.range(of: study.category!)
         attributedString.addAttributes([NSFontAttributeName:UIFont(name: "HelveticaNeue-Bold", size: 12)!], range: foundRange)
         labelStudySponserName?.attributedText = attributedString
         
@@ -143,7 +143,7 @@ class StudyListCell: UITableViewCell {
      Used to set the Study State
      @param study    Access the data from Study Class
      */
-    func setStudyStatus(study:Study){
+    func setStudyStatus(study: Study){
         
         labelStudyStatus?.text = study.status.rawValue.uppercased()
         
@@ -164,7 +164,7 @@ class StudyListCell: UITableViewCell {
      Used to set UserStatus ForStudy
      @param study    Access the data from Study Class
      */
-    func setUserStatusForStudy(study:Study){
+    func setUserStatusForStudy(study: Study){
         let currentUser = User.currentUser
         if let userStudyStatus = currentUser.participatedStudies.filter({$0.studyId == study.studyId}).first {
             
@@ -224,7 +224,7 @@ class StudyListCell: UITableViewCell {
     }
     
     
-//MARK:- Button Actions
+// MARK:- Button Actions
     
     /**
      
@@ -234,7 +234,7 @@ class StudyListCell: UITableViewCell {
      @param sender    Accepts UIButton object
      
      */
-    @IBAction func buttonBookmardAction(_ sender:UIButton){
+    @IBAction func buttonBookmardAction(_ sender: UIButton){
         if sender.isSelected {
             sender.isSelected = false
         }

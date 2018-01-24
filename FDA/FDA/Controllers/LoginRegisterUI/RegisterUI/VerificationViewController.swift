@@ -34,39 +34,35 @@ let kChangePasswordViewControllerIdentifier = "ChangePasswordViewController"
 
 let kNotificationRegistrationIsPending = "NotificationRegistrationIsPending"
 
-enum VerificationLoadFrom:Int{
+enum VerificationLoadFrom: Int{
     case forgotPassword
     case login
     case signup
     case joinStudy
 }
 
-class VerificationViewController : UIViewController{
+class VerificationViewController: UIViewController{
     
-    @IBOutlet var buttonContinue : UIButton?
-    @IBOutlet var buttonResendEmail : UIButton?
-    @IBOutlet var labelVerificationMessage : UILabel?
-    @IBOutlet var textFieldEmail :UITextField?
-    @IBOutlet var textFieldVerificationCode : UITextField?
+    @IBOutlet var buttonContinue: UIButton?
+    @IBOutlet var buttonResendEmail: UIButton?
+    @IBOutlet var labelVerificationMessage: UILabel?
+    @IBOutlet var textFieldEmail: UITextField?
+    @IBOutlet var textFieldVerificationCode: UITextField?
     
-    var labelMessage : String?
-    var isFromForgotPassword :Bool =  false
-    var emailId:String?
-    var shouldCreateMenu:Bool = true
-    var viewLoadFrom:VerificationLoadFrom = .signup
+    var labelMessage: String?
+    var isFromForgotPassword: Bool =  false
+    var emailId: String?
+    var shouldCreateMenu: Bool = true
+    var viewLoadFrom: VerificationLoadFrom = .signup
     
     
-//MARK:- View Controllere Lifecycle
+// MARK:- View Controllere Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
         //Used to set border color for bottom view
         buttonContinue?.layer.borderColor = kUicolorForButtonBackground
         self.title = NSLocalizedString("", comment: "")
-        
-        //let message = labelVerificationMessage?.text
-        //let modifiedMessage = message?.replacingOccurrences(of: kDefaultEmail, with: User.currentUser.emailId!)
-        //labelVerificationMessage?.text = modifiedMessage
         
         if labelMessage != nil {
             labelVerificationMessage?.text = labelMessage
@@ -92,7 +88,7 @@ class VerificationViewController : UIViewController{
     }
     
     
-//MARK:- Button Actions
+// MARK:- Button Actions
  
     /**
      
@@ -101,7 +97,7 @@ class VerificationViewController : UIViewController{
      @param sender  accepts any object
      
      */
-    @IBAction func buttonActionBack(_ sender : UIButton){
+    @IBAction func buttonActionBack(_ sender: UIButton){
         _ = self.navigationController?.popViewController(animated: true)
     }
     
@@ -113,25 +109,17 @@ class VerificationViewController : UIViewController{
      @param sender  accepts anyy object
      
      */
-    @IBAction func continueTwoButtonAction( _ sender : UIButton){
+    @IBAction func continueTwoButtonAction( _ sender: UIButton){
         
         self.view.endEditing(true)
-//        if ((textFieldEmail?.text)!.isEmpty) && (self.textFieldVerificationCode?.text == "") {
-//            self.showAlertMessages(textMessage: kMessageAllFieldsAreEmpty)
-//        }else if (textFieldEmail?.text)! == "" {
-//            self.showAlertMessages(textMessage: kMessageEmailBlank)
-//            
-//        }else if !(Utilities.isValidEmail(testStr: (textFieldEmail?.text)!)) {
-//            self.showAlertMessages(textMessage: kMessageValidEmail)
-//            
-//        }else
+        
         if self.textFieldVerificationCode?.text == ""{
             self.showAlertMessages(textMessage: kMessageVerificationCodeEmpty)
             
         }else{
             print("Call the webservice")
             
-            UserServices().verifyEmail(emailId:self.emailId!,  verificationCode:(self.textFieldVerificationCode?.text)! , delegate: self)
+            UserServices().verifyEmail(emailId: self.emailId!,  verificationCode:(self.textFieldVerificationCode?.text)! , delegate: self)
             
         }
     }
@@ -147,7 +135,7 @@ class VerificationViewController : UIViewController{
     @IBAction func continueButtonAction(_ sender: Any) {
         
         if (textFieldVerificationCode?.text?.characters.count)! > 0 {
-             UserServices().verifyEmail(emailId:User.currentUser.emailId!,  verificationCode:(self.textFieldVerificationCode?.text)! , delegate: self)
+             UserServices().verifyEmail(emailId: User.currentUser.emailId!,  verificationCode:(self.textFieldVerificationCode?.text)! , delegate: self)
         }
         else{
              self.showAlertMessages(textMessage: kMessageVerificationCodeEmpty)
@@ -164,7 +152,7 @@ class VerificationViewController : UIViewController{
      */
     @IBAction func resendEmailButtonAction(_ sender: UIButton){
         
-        var finalEmail:String = User.currentUser.emailId!
+        var finalEmail: String = User.currentUser.emailId!
         
         if viewLoadFrom == .forgotPassword {
             finalEmail = self.emailId!
@@ -179,7 +167,7 @@ class VerificationViewController : UIViewController{
     }
 
     
-//MARK:- Segue Methods
+// MARK:- Segue Methods
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         if let singupCompletion = segue.destination as? SignUpCompleteViewController {
@@ -193,7 +181,7 @@ class VerificationViewController : UIViewController{
     }
     
     
-//MARK:- Utility Methods
+// MARK:- Utility Methods
 
     /**
      
@@ -202,7 +190,7 @@ class VerificationViewController : UIViewController{
      @param textMessage     The message which is used to display in alert
      
      */
-    func showAlertMessages(textMessage : String){
+    func showAlertMessages(textMessage: String){
         UIUtilities.showAlertMessage("", errorMessage: NSLocalizedString(textMessage, comment: ""), errorAlertActionTitle: NSLocalizedString("OK", comment: ""), viewControllerUsed: self)
     }
 
@@ -240,7 +228,7 @@ class VerificationViewController : UIViewController{
 }
 
 
-//MARK:- TextField Delegates
+// MARK:- TextField Delegates
 extension VerificationViewController:UITextFieldDelegate{
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
@@ -268,8 +256,8 @@ extension VerificationViewController:UITextFieldDelegate{
 }
 
 
-//MARK:- Webservice Delegates
-extension VerificationViewController:NMWebServiceDelegate {
+// MARK:- Webservice Delegates
+extension VerificationViewController: NMWebServiceDelegate {
     
     func startedRequest(_ manager: NetworkManager, requestName: NSString) {
         
@@ -294,30 +282,24 @@ extension VerificationViewController:NMWebServiceDelegate {
                 self.performSegue(withIdentifier: "signInUnwindSegue", sender: self)
             }
             else if viewLoadFrom == .joinStudy {
-                //pop to study home
-//                let leftController = slideMenuController()?.leftViewController as! LeftMenuViewController
-//                leftController.createLeftmenuItems()
-//                self.performSegue(withIdentifier: "unwindStudyHomeSegue", sender: self)
                 
-                let appDelegate = UIApplication.shared.delegate as! AppDelegate
+                let appDelegate = (UIApplication.shared.delegate as? AppDelegate)!
                 appDelegate.checkPasscode(viewController: self)
                 
                 self.navigateToSignUpCompletionStep()
             }
             else{
-                let appDelegate = UIApplication.shared.delegate as! AppDelegate
+                let appDelegate = (UIApplication.shared.delegate as? AppDelegate)!
                 appDelegate.checkPasscode(viewController: self)
                 
                 self.navigateToSignUpCompletionStep()
             }
-        }
-        else {
+        } else {
             
             if requestName as String == RegistrationMethods.resendConfirmation.description {
-                UIUtilities.showAlertWithTitleAndMessage(title:NSLocalizedString(kAlertMessageText, comment: "") as NSString, message:NSLocalizedString(kAlertMessageResendEmail, comment: "") as NSString)
-            }
-            else{
-                UIUtilities.showAlertWithTitleAndMessage(title:NSLocalizedString(kAlertMessageText, comment: "") as NSString, message:NSLocalizedString(kAlertMessageVerifyEmail, comment: "") as NSString)
+                UIUtilities.showAlertWithTitleAndMessage(title: NSLocalizedString(kAlertMessageText, comment: "") as NSString, message:NSLocalizedString(kAlertMessageResendEmail, comment: "") as NSString)
+            } else {
+                UIUtilities.showAlertWithTitleAndMessage(title: NSLocalizedString(kAlertMessageText, comment: "") as NSString, message: NSLocalizedString(kAlertMessageVerifyEmail, comment: "") as NSString)
             }
         }
     }
@@ -333,13 +315,13 @@ extension VerificationViewController:NMWebServiceDelegate {
         }
         else {
             
-            UIUtilities.showAlertWithTitleAndMessage(title:NSLocalizedString(kErrorTitle, comment: "") as NSString, message: error.localizedDescription as NSString)
+            UIUtilities.showAlertWithTitleAndMessage(title: NSLocalizedString(kErrorTitle, comment: "") as NSString, message: error.localizedDescription as NSString)
         }
     }
 }
 
-//MARK:- ORKTaskViewController Delegate
-extension VerificationViewController:ORKTaskViewControllerDelegate{
+// MARK:- ORKTaskViewController Delegate
+extension VerificationViewController: ORKTaskViewControllerDelegate{
     
     func taskViewControllerSupportsSaveAndRestore(_ taskViewController: ORKTaskViewController) -> Bool {
         return true
@@ -347,7 +329,7 @@ extension VerificationViewController:ORKTaskViewControllerDelegate{
     
     public func taskViewController(_ taskViewController: ORKTaskViewController, didFinishWith reason: ORKTaskViewControllerFinishReason, error: Error?) {
         
-        var taskResult:Any?
+        var taskResult: Any?
         
         switch reason {
             

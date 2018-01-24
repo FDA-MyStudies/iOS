@@ -24,7 +24,7 @@
 import Foundation
 import ResearchKit
 
-//MARK: Api Constants
+// MARK: Api Constants
 
 let kActivityStepType = "type"
 
@@ -41,7 +41,7 @@ let kActivityStepDestinations = "destinations"
 
 
 
-//MARK:Enum for ActivityStepType
+// MARK:Enum for ActivityStepType
 enum ActivityStepType:String{
     case form = "form"
     case instruction = "instruction"

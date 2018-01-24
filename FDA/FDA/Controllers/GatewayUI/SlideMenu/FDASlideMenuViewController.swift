@@ -85,10 +85,10 @@ open class FDASlideMenuViewController: SlideMenuController {
         _ = self.navigationController?.popToRootViewController(animated: true)
         
     
-        let navVC:UINavigationController = UIApplication.shared.keyWindow?.rootViewController as! UINavigationController
+        let navVC: UINavigationController = UIApplication.shared.keyWindow?.rootViewController as! UINavigationController
         
         if navVC.viewControllers.count > 0 {
-            let splashVC:SplashViewController = navVC.viewControllers.first as! SplashViewController
+            let splashVC: SplashViewController = navVC.viewControllers.first as! SplashViewController
             
             splashVC.navigateToGatewayDashboard()
         }

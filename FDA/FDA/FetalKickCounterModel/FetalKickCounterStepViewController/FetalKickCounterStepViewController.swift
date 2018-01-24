@@ -73,7 +73,7 @@ class FetalKickCounterStepViewController:  ORKStepViewController {
     var taskResult: FetalKickCounterTaskResult = FetalKickCounterTaskResult(identifier: kFetalKickCounterStepDefaultIdentifier)
   
     
-    //Mark: ORKStepViewController overriden methods
+    // MARK: ORKStepViewController overriden methods
     
     override init(step: ORKStep?) {
         super.init(step: step)
@@ -187,7 +187,7 @@ class FetalKickCounterStepViewController:  ORKStepViewController {
     }
     
     
-    //Mark:Helper Methods
+    // MARK:Helper Methods
     
     /*
      updates the timer value
@@ -386,7 +386,7 @@ class FetalKickCounterStepViewController:  ORKStepViewController {
     }
     
     
-    //Mark:Button Actions
+    // MARK:Button Actions
 
     @IBAction func editCounterButtonAction(_ sender: UIButton){
         counterTextField?.isUserInteractionEnabled = true
@@ -528,7 +528,7 @@ open class FetalKickCounterTaskResult: ORKResult {
 
 
 
-//Mark: GetureRecognizer delegate
+// MARK: GetureRecognizer delegate
 extension FetalKickCounterStepViewController: UIGestureRecognizerDelegate{
     func gestureRecognizer(_: UIGestureRecognizer,
                            shouldRecognizeSimultaneouslyWith shouldRecognizeSimultaneouslyWithGestureRecognizer: UIGestureRecognizer) -> Bool {
@@ -538,7 +538,7 @@ extension FetalKickCounterStepViewController: UIGestureRecognizerDelegate{
 
 
 
-//Mark:TextField Delegates
+// MARK:TextField Delegates
 extension FetalKickCounterStepViewController: UITextFieldDelegate {
     
     func textFieldDidBeginEditing(_ textField: UITextField) {

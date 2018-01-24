@@ -24,17 +24,17 @@
 import Foundation
 import UIKit
 
-enum CompletionLoadFrom:Int{
+enum CompletionLoadFrom: Int{
     case signup
     case joinStudy
 }
-class SignUpCompleteViewController : UIViewController{
+class SignUpCompleteViewController: UIViewController{
     
-    @IBOutlet var buttonNext : UIButton?
-    var shouldCreateMenu:Bool = true
-    var viewLoadFrom:CompletionLoadFrom = .signup
+    @IBOutlet var buttonNext: UIButton?
+    var shouldCreateMenu: Bool = true
+    var viewLoadFrom: CompletionLoadFrom = .signup
     
-    //MARK:- ViewController Lifecycle
+    // MARK:- ViewController Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -43,7 +43,7 @@ class SignUpCompleteViewController : UIViewController{
         self.title = NSLocalizedString("", comment: "")
         
         
-        let settings:Settings? = Settings.init()
+        let settings: Settings? = Settings.init()
         
         settings?.remoteNotifications = true
         settings?.localNotifications = true
@@ -73,7 +73,7 @@ class SignUpCompleteViewController : UIViewController{
     }
     
     
-    //MARK:- button Actions
+    // MARK:- button Actions
     
     /**
      
@@ -101,7 +101,7 @@ class SignUpCompleteViewController : UIViewController{
     }
     
     
-    //MARK:- Utility Methods
+    // MARK:- Utility Methods
     
     /**
      
@@ -136,8 +136,8 @@ class SignUpCompleteViewController : UIViewController{
 
 
 
-//MARK:- UserService Response handler
-extension SignUpCompleteViewController:NMWebServiceDelegate {
+// MARK:- UserService Response handler
+extension SignUpCompleteViewController: NMWebServiceDelegate {
     
     func startedRequest(_ manager: NetworkManager, requestName: NSString) {
         Logger.sharedInstance.info("requestname : \(requestName)")
@@ -168,7 +168,7 @@ extension SignUpCompleteViewController:NMWebServiceDelegate {
         Logger.sharedInstance.info("requestname : \(requestName)")
         self.removeProgressIndicator()
         
-        UIUtilities.showAlertWithTitleAndMessage(title:NSLocalizedString(kErrorTitle, comment: "") as NSString, message: error.localizedDescription as NSString)
+        UIUtilities.showAlertWithTitleAndMessage(title: NSLocalizedString(kErrorTitle, comment: "") as NSString, message: error.localizedDescription as NSString)
     }
 }
 

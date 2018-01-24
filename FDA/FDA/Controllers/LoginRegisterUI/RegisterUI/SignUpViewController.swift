@@ -27,7 +27,7 @@ import IQKeyboardManagerSwift
 
 let kVerifyMessageFromSignUp = "An email has been sent to xyz@gmail.com. Please type in the Verification Code received in the email to complete the verification step."
 
-enum SignUpLoadFrom:Int{
+enum SignUpLoadFrom: Int{
     case gatewayOverview
     case login        // from gateway login-> signup
     case menu        // from menu
@@ -36,25 +36,25 @@ enum SignUpLoadFrom:Int{
 }
 
 
-class SignUpViewController : UIViewController{
+class SignUpViewController: UIViewController{
     
-    var tableViewRowDetails : NSMutableArray?
-    var agreedToTerms : Bool = false
+    var tableViewRowDetails: NSMutableArray?
+    var agreedToTerms: Bool = false
     var confirmPassword = ""
-    var user:User!
+    var user: User!
     
-    @IBOutlet var tableView : UITableView?
-    @IBOutlet var tableViewFooterView : UIView?
-    @IBOutlet var buttonSubmit : UIButton?
+    @IBOutlet var tableView: UITableView?
+    @IBOutlet var tableViewFooterView: UIView?
+    @IBOutlet var buttonSubmit: UIButton?
     
-    @IBOutlet var buttonAgree : UIButton?
-    @IBOutlet var labelTermsAndConditions : FRHyperLabel?
-    @IBOutlet var termsAndCondition:LinkTextView?
-    var viewLoadFrom:SignUpLoadFrom = .menu
+    @IBOutlet var buttonAgree: UIButton?
+    @IBOutlet var labelTermsAndConditions: FRHyperLabel?
+    @IBOutlet var termsAndCondition: LinkTextView?
+    var viewLoadFrom: SignUpLoadFrom = .menu
     var termsPageOpened = false
 
 
-//MARK:- ViewController Lifecycle
+// MARK:- ViewController Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -65,18 +65,18 @@ class SignUpViewController : UIViewController{
         self.title = NSLocalizedString(kSignUpTitleText, comment: "")
         
         //load plist info
-        let plistPath = Bundle.main.path(forResource: "SignUpPlist", ofType: ".plist", inDirectory:nil)
+        let plistPath = Bundle.main.path(forResource: "SignUpPlist", ofType: ".plist", inDirectory: nil)
         tableViewRowDetails = NSMutableArray.init(contentsOfFile: plistPath!)
         
         //Automatically takes care  of text field become first responder and scroll of tableview
         IQKeyboardManager.sharedManager().enable = true
         
         //info button
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(image:UIImage.init(named:"info"), style: .done, target: self, action: #selector(self.buttonInfoAction(_:)))
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(image: UIImage.init(named: "info"), style: .done, target: self, action: #selector(self.buttonInfoAction(_:)))
        
         
         //Used for background tap dismiss keyboard
-        let tapGestureRecognizer : UITapGestureRecognizer = UITapGestureRecognizer.init(target: self, action: #selector(SignUpViewController.dismissKeyboard))
+        let tapGestureRecognizer: UITapGestureRecognizer = UITapGestureRecognizer.init(target: self, action: #selector(SignUpViewController.dismissKeyboard))
         self.tableView?.addGestureRecognizer(tapGestureRecognizer)
         
         //unhide navigationbar
@@ -117,7 +117,7 @@ class SignUpViewController : UIViewController{
         
     }
     
-//MARK:- Utility Methods
+// MARK:- Utility Methods
     
     /**
      
@@ -137,7 +137,7 @@ class SignUpViewController : UIViewController{
         
         termsAndCondition?.attributedText = attributedString
         
-        termsAndCondition?.linkTextAttributes = [NSForegroundColorAttributeName:Utilities.getUIColorFromHex(0x007CBA)]
+        termsAndCondition?.linkTextAttributes = [NSForegroundColorAttributeName: Utilities.getUIColorFromHex(0x007CBA)]
         
     }
     
@@ -164,32 +164,16 @@ class SignUpViewController : UIViewController{
         if  (self.user.emailId?.isEmpty)! && (self.user.password?.isEmpty)! && confirmPassword.isEmpty {
             self.showAlertMessages(textMessage: kMessageAllFieldsAreEmpty)
             return false
-        } /* else if user.firstName == "" {
-            self.showAlertMessages(textMessage: kMessageFirstNameBlank)
-            return false
-        }
-        else if(user.firstName?.isAlphanumeric)! == false || (user.firstName?.characters.count)! > 100{
-            self.showAlertMessages(textMessage: kMessageValidFirstName)
-            return false
-        }
-        else if user.lastName == ""{
-            self.showAlertMessages(textMessage: kMessageLastNameBlank)
-            return false
-        }else if(user.lastName?.isAlphanumeric)! == false || (user.lastName?.characters.count)! > 100{
-            self.showAlertMessages(textMessage: kMessageValidLastName)
-            return false
-        } */
-        else if self.user.emailId == "" {
+        } else if self.user.emailId == "" {
             self.showAlertMessages(textMessage: kMessageEmailBlank)
             return false
-        }
-        else if !(Utilities.isValidEmail(testStr: self.user.emailId!)){
+        } else if !(Utilities.isValidEmail(testStr: self.user.emailId!)) {
             self.showAlertMessages(textMessage: kMessageValidEmail)
             return false
-        }else if self.user.password == ""{
+        } else if self.user.password == "" {
             self.showAlertMessages(textMessage: kMessagePasswordBlank)
             return false
-        }else if Utilities.isPasswordValid(text: (self.user.password)!) == false  {
+        } else if Utilities.isPasswordValid(text: (self.user.password)!) == false  {
             self.showAlertMessages(textMessage: kMessageValidatePasswordComplexity)
             return false
         }
@@ -215,7 +199,7 @@ class SignUpViewController : UIViewController{
      @param textMessage     data which we need to display in the alert
      
      */
-    func showAlertMessages(textMessage : String){
+    func showAlertMessages(textMessage: String){
         UIUtilities.showAlertMessage("", errorMessage: NSLocalizedString(textMessage, comment: ""), errorAlertActionTitle: NSLocalizedString("OK", comment: ""), viewControllerUsed: self)
     }
     
@@ -230,7 +214,7 @@ class SignUpViewController : UIViewController{
     }
     
     
-//MARK:- Button Actions
+// MARK:- Button Actions
     
     /**
 
@@ -281,12 +265,12 @@ class SignUpViewController : UIViewController{
      @param sender  Accepts any object
      
      */
-    @IBAction func buttonInfoAction(_ sender:Any){
-        UIUtilities.showAlertWithTitleAndMessage(title:"Why Register?", message:kRegistrationInfoMessage as NSString)
+    @IBAction func buttonInfoAction(_ sender: Any){
+        UIUtilities.showAlertWithTitleAndMessage(title: "Why Register?", message: kRegistrationInfoMessage as NSString)
     }
 
     
-//MARK:- Segue Method
+// MARK:- Segue Method
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let verificationController = segue.destination as? VerificationViewController {
@@ -316,8 +300,8 @@ class SignUpViewController : UIViewController{
 }
 
 
-//MARK:- Gesture Delegate
-extension SignUpViewController:UIGestureRecognizerDelegate{
+// MARK:- Gesture Delegate
+extension SignUpViewController: UIGestureRecognizerDelegate{
     func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
         if gestureRecognizer.isKind(of: UITapGestureRecognizer.classForCoder()) {
             if gestureRecognizer.numberOfTouches == 2 {
@@ -329,8 +313,8 @@ extension SignUpViewController:UIGestureRecognizerDelegate{
 }
 
 
-//MARK:- UITextView Delegate
-class LinkTextView:UITextView{
+// MARK:- UITextView Delegate
+class LinkTextView: UITextView{
     
     override func canPerformAction(_ action: Selector, withSender sender: Any?) -> Bool {
         return false
@@ -352,13 +336,13 @@ class LinkTextView:UITextView{
 }
 
 
-//MARK:- Textfield Delegate
-extension SignUpViewController:UITextViewDelegate{
+// MARK:- Textfield Delegate
+extension SignUpViewController: UITextViewDelegate{
     
     func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange) -> Bool {
         
-        var link:String =   (TermsAndPolicy.currentTermsAndPolicy?.termsURL)! //kTermsAndConditionLink
-        var title:String = kNavigationTitleTerms
+        var link: String =   (TermsAndPolicy.currentTermsAndPolicy?.termsURL)! //kTermsAndConditionLink
+        var title: String = kNavigationTitleTerms
         if (URL.absoluteString == TermsAndPolicy.currentTermsAndPolicy?.policyURL ) {
             //kPrivacyPolicyLink
             print("terms")
@@ -366,8 +350,8 @@ extension SignUpViewController:UITextViewDelegate{
             title = kNavigationTitlePrivacyPolicy
             
         }
-        let loginStoryboard = UIStoryboard.init(name: "Main", bundle:Bundle.main)
-        let webViewController = (loginStoryboard.instantiateViewController(withIdentifier:"WebViewController") as? UINavigationController)!
+        let loginStoryboard = UIStoryboard.init(name: "Main", bundle: Bundle.main)
+        let webViewController = (loginStoryboard.instantiateViewController(withIdentifier: "WebViewController") as? UINavigationController)!
         let webview = (webViewController.viewControllers[0] as? WebViewController)!
         webview.requestLink = link
         webview.title = title
@@ -390,8 +374,8 @@ extension SignUpViewController:UITextViewDelegate{
 }
 
 
-//MARK:- TableView Datasource
-extension SignUpViewController : UITableViewDataSource {
+// MARK:- TableView Datasource
+extension SignUpViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return tableViewRowDetails!.count
@@ -404,12 +388,12 @@ extension SignUpViewController : UITableViewDataSource {
         
         
         cell.textFieldValue?.text = ""
-        var isSecuredEntry : Bool = false
+        var isSecuredEntry: Bool = false
         
         cell.textFieldValue?.tag = indexPath.row
         
-        var keyBoardType:UIKeyboardType? =  UIKeyboardType.default
-        let textFieldTag = TextFieldTags(rawValue:indexPath.row)!
+        var keyBoardType: UIKeyboardType? =  UIKeyboardType.default
+        let textFieldTag = TextFieldTags(rawValue: indexPath.row)!
         
         //Cell TextField data setup
         switch  textFieldTag {
@@ -430,7 +414,7 @@ extension SignUpViewController : UITableViewDataSource {
             keyBoardType = .emailAddress
             isSecuredEntry = false
             cell.textFieldValue?.text = self.user.emailId
-        default:break
+        default: break
         }
         //Cell Data Setup
         cell.populateCellData(data: tableViewData, securedText: isSecuredEntry,keyboardType: keyBoardType)
@@ -441,8 +425,8 @@ extension SignUpViewController : UITableViewDataSource {
 }
 
 
-//MARK:- TableView Delegates
-extension SignUpViewController : UITableViewDelegate{
+// MARK:- TableView Delegates
+extension SignUpViewController: UITableViewDelegate{
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
@@ -451,8 +435,8 @@ extension SignUpViewController : UITableViewDelegate{
 }
 
 
-//MARK:- Textfield Delegate
-extension SignUpViewController : UITextFieldDelegate{
+// MARK:- Textfield Delegate
+extension SignUpViewController: UITextFieldDelegate{
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
         print(textField.tag)
@@ -463,19 +447,8 @@ extension SignUpViewController : UITextFieldDelegate{
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         
-        let tag:TextFieldTags = TextFieldTags(rawValue: textField.tag)!
+        let tag: TextFieldTags = TextFieldTags(rawValue: textField.tag)!
          let finalString = textField.text! + string
-        
-        /*
-        if tag == .FirstNameTag || tag == .LastName {
-            if string == " "  || finalString.characters.count > 100 {
-                return false
-            }
-            else{
-                return true
-            }
-        }
-        else */
         
         if string == " " {
             return false
@@ -512,7 +485,7 @@ extension SignUpViewController : UITextFieldDelegate{
         
         textField.text =  textField.text?.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
         
-        let tag:TextFieldTags = TextFieldTags(rawValue: textField.tag)!
+        let tag: TextFieldTags = TextFieldTags(rawValue: textField.tag)!
         
         switch tag {
         /*
@@ -544,8 +517,8 @@ extension SignUpViewController : UITextFieldDelegate{
 }
 
 
-//MARK:- Webservice delegates
-extension SignUpViewController:NMWebServiceDelegate {
+// MARK:- Webservice delegates
+extension SignUpViewController: NMWebServiceDelegate {
     
     func startedRequest(_ manager: NetworkManager, requestName: NSString) {
         
@@ -575,7 +548,7 @@ extension SignUpViewController:NMWebServiceDelegate {
     func failedRequest(_ manager: NetworkManager, requestName: NSString, error: NSError) {
         Logger.sharedInstance.info("requestname : \(requestName)")
         self.removeProgressIndicator()
-        UIUtilities.showAlertWithTitleAndMessage(title:NSLocalizedString(kErrorTitle, comment: "") as NSString, message: error.localizedDescription as NSString)
+        UIUtilities.showAlertWithTitleAndMessage(title: NSLocalizedString(kErrorTitle, comment: "") as NSString, message: error.localizedDescription as NSString)
     }
 }
 

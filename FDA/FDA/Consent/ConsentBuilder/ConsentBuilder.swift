@@ -110,7 +110,7 @@ enum ConsentStatus:String {
 
 
 
-//MARK:ConsentBuilder Class
+// MARK:ConsentBuilder Class
 
 class ConsentBuilder {
     
@@ -458,7 +458,7 @@ class ConsentBuilder {
 }
 
 
-//MARK:SharingConsent Struct
+// MARK:SharingConsent Struct
 
 struct SharingConsent {
     
@@ -521,7 +521,7 @@ struct SharingConsent {
 }
 
 
-//MARK:ReviewConsent Struct
+// MARK:ReviewConsent Struct
 
 struct ReviewConsent {
     
@@ -565,7 +565,7 @@ struct ReviewConsent {
     }
 }
 
-//MARK:Comprehension Struct
+// MARK:Comprehension Struct
 
 enum Evaluation: String {
     case any = "any"
@@ -612,7 +612,7 @@ struct Comprehension {
     }
 }
 
-//MARK: Custom Clases
+// MARK: Custom Clases
 
 class ConsentReviewStep: ORKConsentReviewStep {
     

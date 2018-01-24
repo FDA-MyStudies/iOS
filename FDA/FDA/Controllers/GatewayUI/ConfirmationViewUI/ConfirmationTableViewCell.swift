@@ -25,8 +25,8 @@ import UIKit
 
 class ConfirmationTableViewCell: UITableViewCell {
 
-     @IBOutlet var labelTitle:UILabel?
-     @IBOutlet var labelTitleDescription:UILabel?
+     @IBOutlet var labelTitle: UILabel?
+     @IBOutlet var labelTitleDescription: UILabel?
     
     override func awakeFromNib() {
         super.awakeFromNib()

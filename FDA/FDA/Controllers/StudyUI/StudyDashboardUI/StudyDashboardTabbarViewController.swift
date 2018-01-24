@@ -43,7 +43,7 @@ class StudyDashboardTabbarViewController: UITabBarController {
     }
     
     
-    public func shareScreenshotByEmail(image:UIImage!, subject:String!,fileName:String!){
+    public func shareScreenshotByEmail(image: UIImage!, subject: String!,fileName: String!){
         
         let imageData = UIImagePNGRepresentation(image)
         let mailComposerVC = MFMailComposeViewController()
@@ -63,9 +63,9 @@ class StudyDashboardTabbarViewController: UITabBarController {
         }
         else{
             
-            let alert = UIAlertController(title:NSLocalizedString(kTitleError, comment: ""),message:"",preferredStyle: UIAlertControllerStyle.alert)
+            let alert = UIAlertController(title: NSLocalizedString(kTitleError, comment: ""),message: "",preferredStyle: UIAlertControllerStyle.alert)
             
-            alert.addAction(UIAlertAction.init(title:NSLocalizedString(kTitleOk, comment: ""), style: .default, handler: { (action) in
+            alert.addAction(UIAlertAction.init(title: NSLocalizedString(kTitleOk, comment: ""), style: .default, handler: { (action) in
                 
                 self.dismiss(animated: true, completion: nil)
                 
@@ -74,7 +74,7 @@ class StudyDashboardTabbarViewController: UITabBarController {
     }
 }
 
-extension StudyDashboardTabbarViewController:MFMailComposeViewControllerDelegate{
+extension StudyDashboardTabbarViewController: MFMailComposeViewControllerDelegate{
     func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
         controller.dismiss(animated: true, completion: nil)
     }

@@ -97,7 +97,7 @@ class ViewController: UIViewController {
     
     
     
-    //MARK: methods
+    // MARK: methods
     
     
     func kickCounterTaskTest()   {
@@ -279,7 +279,7 @@ class ViewController: UIViewController {
 
 
 extension ViewController:ORKTaskViewControllerDelegate{
-    //MARK:ORKTaskViewController Delegate
+    // MARK:ORKTaskViewController Delegate
     
     
     func taskViewControllerSupportsSaveAndRestore(_ taskViewController: ORKTaskViewController) -> Bool {
@@ -349,7 +349,7 @@ extension ViewController:ORKTaskViewControllerDelegate{
         }
     }
     
-    //MARK:StepViewController Delegate
+    // MARK:StepViewController Delegate
     public func stepViewController(_ stepViewController: ORKStepViewController, didFinishWith direction: ORKStepViewControllerNavigationDirection){
         
     }

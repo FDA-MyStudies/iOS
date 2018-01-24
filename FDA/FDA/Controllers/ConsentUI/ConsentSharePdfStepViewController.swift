@@ -56,7 +56,7 @@ class ConsentSharePdfStepViewController: ORKStepViewController {
     var taskResult: ConsentCompletionTaskResult = ConsentCompletionTaskResult(identifier: kConsentCompletionResultIdentifier)
     
     
-    //MARK:ORKstepView Controller Init methods
+    // MARK:ORKstepView Controller Init methods
     override init(step: ORKStep?) {
         super.init(step: step)
     }
@@ -82,7 +82,7 @@ class ConsentSharePdfStepViewController: ORKStepViewController {
     }
     
     
-    //MARK:Button Actions
+    // MARK:Button Actions
     
     @IBAction func buttonActionNext(sender: UIButton?) {
         self.taskResult.didTapOnViewPdf = false
@@ -113,7 +113,7 @@ class ConsentSharePdfStepViewController: ORKStepViewController {
         })
     }
     
-    //MARK:View controller delegates
+    // MARK:View controller delegates
     
     override func viewDidLoad() {
         super.viewDidLoad()

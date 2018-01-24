@@ -22,9 +22,9 @@
  */
 
 import Foundation
-//MARK:- ActivitySchedules Class
+// MARK:- ActivitySchedules Class
 
-enum ActivityFilterType:Int {
+enum ActivityFilterType: Int {
     case all = 0
     case surveys
     case tasks
@@ -32,25 +32,25 @@ enum ActivityFilterType:Int {
 
 
 protocol ActivityFilterViewDelegate {
-    func setSelectedFilter(selectedIndex:ActivityFilterType)
+    func setSelectedFilter(selectedIndex: ActivityFilterType)
 }
 
 
-class ActivityFilterView:UIView,UITableViewDelegate,UITableViewDataSource{
+class ActivityFilterView: UIView,UITableViewDelegate,UITableViewDataSource{
     
-    @IBOutlet var tableview:UITableView?
-    @IBOutlet var buttonCancel:UIButton!
-    @IBOutlet var heightLayoutConstraint:NSLayoutConstraint!
-    var delegate:ActivityFilterViewDelegate?
+    @IBOutlet var tableview: UITableView?
+    @IBOutlet var buttonCancel: UIButton!
+    @IBOutlet var heightLayoutConstraint: NSLayoutConstraint!
+    var delegate: ActivityFilterViewDelegate?
     var filterArray = ["All","Surveys", "Tasks"]
-    var selectedIndex:ActivityFilterType  = ActivityFilterType(rawValue: 0)!
+    var selectedIndex: ActivityFilterType  = ActivityFilterType(rawValue: 0)!
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         //fatalError("init(coder:) has not been implemented")
     }
     
-    class func instanceFromNib(frame:CGRect , selectedIndex:ActivityFilterType) -> ActivityFilterView {
+    class func instanceFromNib(frame: CGRect , selectedIndex: ActivityFilterType) -> ActivityFilterView {
         let view = UINib(nibName: "ActivityFilterView", bundle: nil).instantiate(withOwner: nil, options: nil)[0] as! ActivityFilterView
         view.frame = frame
        
@@ -61,15 +61,15 @@ class ActivityFilterView:UIView,UITableViewDelegate,UITableViewDataSource{
         view.tableview?.dataSource = view
         let height = (3*44) + 104
         let maxViewHeight = Int(UIScreen.main.bounds.size.height - 67)
-        view.heightLayoutConstraint.constant = CGFloat((height > maxViewHeight) ? maxViewHeight:height)
+        view.heightLayoutConstraint.constant = CGFloat((height > maxViewHeight) ? maxViewHeight: height)
         view.layoutIfNeeded()
         
         return view
     }
     
     
-    //MARK:- Button Action
-    @IBAction func buttonCancelClicked(_:UIButton) {
+    // MARK:- Button Action
+    @IBAction func buttonCancelClicked(_: UIButton) {
         self.removeFromSuperview()
     }
     

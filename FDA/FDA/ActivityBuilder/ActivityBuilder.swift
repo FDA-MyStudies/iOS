@@ -94,7 +94,7 @@ class ActivityBuilder {
             
             switch (activity?.type!)! as ActivityType {
                 
-            //MARK: Questionnaire
+            // MARK: Questionnaire
             case .Questionnaire:
                 
                 // creating step array
@@ -414,7 +414,7 @@ class ActivityBuilder {
                         return nil
                     }
                 }
-            //MARK: Active Task
+            // MARK: Active Task
             case .activeTask:
                 
                 for var stepDict in (activity?.steps!)! {
@@ -485,7 +485,7 @@ class ActivityBuilder {
         return nil
         self.actvityResult?.setActivity(activity: self.activity!)
     }
-    //MARK: Predicates For QuestionTypes
+    // MARK: Predicates For QuestionTypes
     
     /*
      getPredicateForNumeric generates predicate for the Numeric Question Type

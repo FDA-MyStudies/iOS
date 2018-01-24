@@ -28,13 +28,13 @@ let kConsentDocumentType = "type"
 let kConsentDocumentVersion = "version"
 let kConsentDocumentContent = "content"
 
-enum StudyStatus:String{
+enum StudyStatus: String{
     case Active
     case Upcoming
     case Closed
     case Paused
     
-    var sortIndex : Int {
+    var sortIndex: Int {
         switch self {
         case .Active:
             return 0
@@ -57,12 +57,12 @@ enum StudyWithdrawalConfigrationType:String{
     case notAvailable = "NotAvailable"
 }
 
-//MARK:ConsentDocument
+// MARK:ConsentDocument
 struct ConsentDocument {
     
-    var htmlString:String?
-    var mimeType:MimeType?
-    var version:String?
+    var htmlString: String?
+    var mimeType: MimeType?
+    var version: String?
     
     mutating func initialize(){
         self.mimeType = .html
@@ -70,11 +70,11 @@ struct ConsentDocument {
         self.version = "No_Version"
     }
     
-    mutating func initData(consentDoucumentdict:Dictionary<String,Any>){
+    mutating func initData(consentDoucumentdict: Dictionary<String,Any>){
         if Utilities.isValidObject(someObject: consentDoucumentdict as AnyObject?){
             
             if Utilities.isValidValue(someObject: consentDoucumentdict[kConsentDocumentType] as AnyObject ){
-                self.mimeType = MimeType(rawValue:consentDoucumentdict[kConsentDocumentType] as! String)
+                self.mimeType = MimeType(rawValue: consentDoucumentdict[kConsentDocumentType] as! String)
             }
             
             if Utilities.isValidValue(someObject: consentDoucumentdict[kConsentDocumentContent] as AnyObject ){
@@ -90,32 +90,32 @@ struct ConsentDocument {
     }
 }
 
-//MARK:Study
-class Study : Hashable {
+// MARK:Study
+class Study: Hashable {
     
-    //MARK:Properties
-    var studyId:String! //Unique identifier
-    var name:String?
-    var version:String? //Current Version
-    var newVersion:String? //Updated Version
-    var identifer:String?
-    var category:String?
-    var startDate:String?
-    var endEnd:String?
-    var status:StudyStatus = .Active //Current Study Status
-    var sponserName:String?
-    var description:String?
-    var brandingConfiguration:String?
-    var logoURL:String?
-    var overview:Overview!
-    var activities:Array<Activity>! = []
-    var resources:Array<Resource>? = [] //Resources for Study & Activities
-    var userParticipateState:UserStudyStatus! = nil
-    var studySettings:StudySettings!
-    var consentDocument:ConsentDocument? //Study Consent Document
-    var signedConsentVersion:String?
-    var signedConsentFilePath:String?
-    var anchorDate:StudyAnchorDate?
+    // MARK:Properties
+    var studyId: String! //Unique identifier
+    var name: String?
+    var version: String? //Current Version
+    var newVersion: String? //Updated Version
+    var identifer: String?
+    var category: String?
+    var startDate: String?
+    var endEnd: String?
+    var status: StudyStatus = .Active //Current Study Status
+    var sponserName: String?
+    var description: String?
+    var brandingConfiguration: String?
+    var logoURL: String?
+    var overview: Overview!
+    var activities: Array<Activity>! = []
+    var resources: Array<Resource>? = [] //Resources for Study & Activities
+    var userParticipateState: UserStudyStatus! = nil
+    var studySettings: StudySettings!
+    var consentDocument: ConsentDocument? //Study Consent Document
+    var signedConsentVersion: String?
+    var signedConsentFilePath: String?
+    var anchorDate: StudyAnchorDate?
     var activitiesLocalNotificationUpdated = false
     var totalIncompleteRuns = 0
     var totalCompleteRuns = 0
@@ -124,10 +124,10 @@ class Study : Hashable {
         return self.studyId.hashValue
     }
     
-    var withdrawalConfigration:StudyWithdrawalConfigration?
+    var withdrawalConfigration: StudyWithdrawalConfigration?
     
-    static var currentStudy:Study? = nil
-    static var currentActivity:Activity? = nil
+    static var currentStudy: Study? = nil
+    static var currentActivity: Activity? = nil
     
     init() {
         
@@ -135,7 +135,7 @@ class Study : Hashable {
     /**
      Study Initializer with dictionary of properties
      */
-    init(studyDetail:Dictionary<String,Any>) {
+    init(studyDetail: Dictionary<String,Any>) {
         
         if Utilities.isValidObject(someObject: studyDetail as AnyObject?){
             
@@ -186,16 +186,16 @@ class Study : Hashable {
     }
     
     
-    class func updateCurrentActivity(activity:Activity) {
+    class func updateCurrentActivity(activity: Activity) {
         Study.currentActivity = activity
     }
     
-    class  func updateCurrentStudy(study:Study) {
+    class  func updateCurrentStudy(study: Study) {
         Study.currentStudy = study
     }
 }
 
-//MARK:StudySettings
+// MARK:StudySettings
 class StudySettings{
     
     var enrollingAllowed = true
@@ -208,7 +208,7 @@ class StudySettings{
     /**
      Initializer with dictionary of properties of settings
      */
-    init(settings:Dictionary<String,Any>) {
+    init(settings: Dictionary<String,Any>) {
         
         if Utilities.isValidObject(someObject: settings as AnyObject?){
             
@@ -225,14 +225,14 @@ class StudySettings{
     }
 }
 
-//MARK:StudyAnchorDate
+// MARK:StudyAnchorDate
 class StudyAnchorDate{
     //anchorDate Value
-    var date:Date?
-    var anchorDateType:String?
-    var anchorDateActivityId:String?
-    var anchorDateActivityVersion:String?
-    var anchorDateQuestionKey:String?
+    var date: Date?
+    var anchorDateType: String?
+    var anchorDateActivityId: String?
+    var anchorDateActivityVersion: String?
+    var anchorDateQuestionKey: String?
     
     init() {
     }
@@ -240,7 +240,7 @@ class StudyAnchorDate{
     /**
      Initializer with ditionary of properties
      */
-    init(detail:Dictionary<String,Any>) {
+    init(detail: Dictionary<String,Any>) {
         
         if Utilities.isValidObject(someObject: detail as AnyObject?){
             
@@ -267,7 +267,7 @@ class StudyAnchorDate{
         }
     }
     
-    func updateAnchorDate(date:Date){
+    func updateAnchorDate(date: Date){
         self.date = date
     }
     
@@ -283,7 +283,7 @@ class StudyAnchorDate{
         }
     }
     
-    func setAnchorDateFromQuestion(date:String){
+    func setAnchorDateFromQuestion(date: String){
         
         if self.anchorDateType == "date-question" {
             self.date = Utilities.getDateFromString(dateString: date)
@@ -300,10 +300,10 @@ class StudyAnchorDate{
     }
 }
 
-//MARK:StudyWithdrawalConfigration
+// MARK:StudyWithdrawalConfigration
 class StudyWithdrawalConfigration {
-    var message:String? = ""
-    var type:StudyWithdrawalConfigrationType? = .notAvailable
+    var message: String? = ""
+    var type: StudyWithdrawalConfigrationType? = .notAvailable
     
     init() {
     }
@@ -311,7 +311,7 @@ class StudyWithdrawalConfigration {
     /**
      Initializer with dictionary of properties
      */
-    init(withdrawalConfigration:Dictionary<String,Any>){
+    init(withdrawalConfigration: Dictionary<String,Any>){
         if Utilities.isValidObject(someObject: withdrawalConfigration as AnyObject?){
             
             if Utilities.isValidValue(someObject: withdrawalConfigration[kStudyWithdrawalMessage] as AnyObject ){
@@ -331,22 +331,22 @@ class StudyWithdrawalConfigration {
     }
     
 }
-//MARK:StudyUpdates
+// MARK:StudyUpdates
 struct StudyUpdates{
     
     static  var studyInfoUpdated = false
     static  var studyConsentUpdated = false
     static  var studyActivitiesUpdated = false
     static  var studyResourcesUpdated = false
-    static  var studyVersion:String? = nil
-    static  var studyStatus:String? = nil
+    static  var studyVersion: String? = nil
+    static  var studyStatus: String? = nil
     
     init() {
     }
     /**
      Initializer with dictionary of properties
      */
-    init(detail:Dictionary<String,Any>){
+    init(detail: Dictionary<String,Any>){
         
         if Utilities.isValidObject(someObject: detail[kStudyUpdates] as AnyObject?){
             

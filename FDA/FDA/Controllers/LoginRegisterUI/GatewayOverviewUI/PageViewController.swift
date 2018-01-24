@@ -35,14 +35,14 @@ protocol PageViewControllerDelegate: class {
                             didUpdatePageIndex index: Int)
 }
 
-class PageViewController : UIPageViewController{
+class PageViewController: UIPageViewController{
     
     weak var pageViewDelegate: PageViewControllerDelegate?
-    var overview : Overview!
+    var overview: Overview!
     var currentIndex = 0
     
     
-//MARK:- ViewController Lifecycle
+// MARK:- ViewController Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -76,7 +76,7 @@ class PageViewController : UIPageViewController{
     }
     
     
-//MARK:- Scroll Delegates
+// MARK:- Scroll Delegates
     
     /**
      
@@ -182,7 +182,7 @@ class PageViewController : UIPageViewController{
      */
     private func getOverviewViewControllers() -> [UIViewController] {
         
-        var controllers:Array<UIViewController> = []
+        var controllers: Array<UIViewController> = []
         var storyboard = UIStoryboard.init(name: kLoginStoryboardIdentifier, bundle: Bundle.main)
         
         if overview.type == .study {
@@ -228,7 +228,7 @@ class PageViewController : UIPageViewController{
 }
 
 
-//MARK:- UIPageViewController DataSource
+// MARK:- UIPageViewController DataSource
 extension PageViewController: UIPageViewControllerDataSource {
     
     func pageViewController(_ pageViewController: UIPageViewController,
@@ -267,7 +267,7 @@ extension PageViewController: UIPageViewControllerDataSource {
 }
 
 
-//MARK:- UIPageViewControllerDelegate
+// MARK:- UIPageViewControllerDelegate
 extension PageViewController: UIPageViewControllerDelegate {
     
     func pageViewController(_ pageViewController: UIPageViewController,
@@ -290,7 +290,7 @@ extension PageViewController: UIPageViewControllerDelegate {
 }
 
 
-//MARK:- UIScrollview delegates
+// MARK:- UIScrollview delegates
 extension PageViewController: UIScrollViewDelegate{
    
     func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {

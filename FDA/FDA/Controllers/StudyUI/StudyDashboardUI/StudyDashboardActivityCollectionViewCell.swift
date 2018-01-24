@@ -26,18 +26,18 @@ import UIKit
 class StudyDashboardActivityCollectionViewCell: UICollectionViewCell {
     
     //Todays activities cell
-    @IBOutlet var labelTitle : UILabel?
-    @IBOutlet var labelCompletedCount : UILabel?
-    @IBOutlet var labelCompletedSurveyTask : UILabel?
-    @IBOutlet var labelPendingCount : UILabel?
-    @IBOutlet var labelPendingSurveyTask : UILabel?
+    @IBOutlet var labelTitle: UILabel?
+    @IBOutlet var labelCompletedCount: UILabel?
+    @IBOutlet var labelCompletedSurveyTask: UILabel?
+    @IBOutlet var labelPendingCount: UILabel?
+    @IBOutlet var labelPendingSurveyTask: UILabel?
     
     
     /**
      Used to display Activity cell
      @param data    Accepts data from Dictionary
      */
-    func displayTodaysActivities(data : NSDictionary){
+    func displayTodaysActivities(data: NSDictionary){
         labelTitle?.text = data["title"] as? String
         labelCompletedCount?.text = data["completedCount"] as? String
         labelPendingCount?.text = data["pendingCount"] as? String

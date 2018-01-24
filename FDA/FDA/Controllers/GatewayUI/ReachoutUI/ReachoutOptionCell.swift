@@ -25,7 +25,7 @@ import UIKit
 
 class ReachoutOptionCell: UITableViewCell {
     
-    @IBOutlet var labelTitle:UILabel?
+    @IBOutlet var labelTitle: UILabel?
     
     override func awakeFromNib() {
         super.awakeFromNib()

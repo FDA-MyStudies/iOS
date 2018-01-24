@@ -24,7 +24,7 @@
 import UIKit
 
 
-enum WCPMethods:String {
+enum WCPMethods: String {
     
     //TODO : Write exact name for request method
     case gatewayInfo
@@ -43,12 +43,12 @@ enum WCPMethods:String {
     case studyUpdates
     case appUpdates
     
-    var method:Method{
+    var method: Method{
         switch self {
         case .feedback,.contactUs:
-            return Method(methodName:self.rawValue, methodType: .httpMethodPOST, requestType: .requestTypeJSON)
+            return Method(methodName: self.rawValue, methodType: .httpMethodPOST, requestType: .requestTypeJSON)
         default:
-            return Method(methodName:self.rawValue, methodType: .httpMethodGet, requestType: .requestTypeHTTP)
+            return Method(methodName: self.rawValue, methodType: .httpMethodGet, requestType: .requestTypeHTTP)
             
         }
     }
@@ -105,7 +105,7 @@ class WCPConfiguration: NetworkConfiguration {
     
     static let configuration = WCPConfiguration()
     
-    //MARK:  Delegates
+    // MARK:  Delegates
     override func getProductionURL() -> String {
         return WCPServerURLConstants.ProductionURL
     }
@@ -118,10 +118,10 @@ class WCPConfiguration: NetworkConfiguration {
         let token = Utilities.getBundleIdentifier() + ":" + "ee91a4f6-d9c4-4ee9-a0e2-5682c5b1c916"
         let base64token = "Basic " + token.toBase64()
         
-        let headers = ["Authorization":base64token]
+        let headers = ["Authorization": base64token]
         return headers
     }
-    override func getDefaultRequestParameters() -> [String : Any] {
+    override func getDefaultRequestParameters() -> [String: Any] {
         return Dictionary()
     }
     override func shouldParseErrorMessage() -> Bool {

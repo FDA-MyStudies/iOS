@@ -25,8 +25,8 @@ import UIKit
 
 class FeedBackTableViewCell: UITableViewCell {
 
-    @IBOutlet var labelHeadingText : UILabel?
-    @IBOutlet var textViewFeedbackText : UITextView?
+    @IBOutlet var labelHeadingText: UILabel?
+    @IBOutlet var textViewFeedbackText: UITextView?
     
     override func awakeFromNib() {
         super.awakeFromNib()

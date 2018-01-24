@@ -29,7 +29,7 @@ let kStudyWithStudyId = "Study with StudyId"
 let kTitleOK = "OK"
 
 class EligibilityStep: ORKStep {
-    var type:String?
+    var type: String?
     
     func showsProgress() -> Bool {
         return false
@@ -40,13 +40,13 @@ class EligibilityStep: ORKStep {
 class EligibilityStepViewController: ORKStepViewController {
     
     @IBOutlet weak var tokenTextField: UITextField!
-    @IBOutlet weak var buttonSubmit:UIButton?
-    @IBOutlet weak var labelDescription:UILabel?
-    var descriptionText:String?
+    @IBOutlet weak var buttonSubmit: UIButton?
+    @IBOutlet weak var labelDescription: UILabel?
+    var descriptionText: String?
     
-    var taskResult:EligibilityTokenTaskResult = EligibilityTokenTaskResult(identifier: kFetalKickCounterStepDefaultIdentifier)
+    var taskResult: EligibilityTokenTaskResult = EligibilityTokenTaskResult(identifier: kFetalKickCounterStepDefaultIdentifier)
     
-    //MARK: ORKStepViewController Intitialization Methods
+    // MARK: ORKStepViewController Intitialization Methods
     
     override init(step: ORKStep?) {
         super.init(step: step)
@@ -91,11 +91,11 @@ class EligibilityStepViewController: ORKStepViewController {
         IQKeyboardManager.sharedManager().enable = true
     }
     
-    //MARK: Methods and Button Actions
+    // MARK: Methods and Button Actions
     
-    func showAlert(message:String) {
-        let alert = UIAlertController(title:kErrorTitle as String,message:message as String,preferredStyle: UIAlertControllerStyle.alert)
-        alert.addAction(UIAlertAction(title:NSLocalizedString(kTitleOK, comment: ""), style: .default, handler: nil))
+    func showAlert(message: String) {
+        let alert = UIAlertController(title: kErrorTitle as String,message: message as String,preferredStyle: UIAlertControllerStyle.alert)
+        alert.addAction(UIAlertAction(title: NSLocalizedString(kTitleOK, comment: ""), style: .default, handler: nil))
         
         self.navigationController?.present(alert, animated: true, completion: nil)
     }
@@ -109,7 +109,7 @@ class EligibilityStepViewController: ORKStepViewController {
             
             LabKeyServices().verifyEnrollmentToken(studyId: (Study.currentStudy?.studyId)!, token: token!, delegate: self)
         }else {
-            self.showAlert(title: kTitleMessage, message:kMessageValidToken )
+            self.showAlert(title: kTitleMessage, message: kMessageValidToken )
             
         }
     }
@@ -120,8 +120,8 @@ class EligibilityStepViewController: ORKStepViewController {
     }
 }
 
-//MARK: TextField Delegates
-extension EligibilityStepViewController:UITextFieldDelegate {
+// MARK: TextField Delegates
+extension EligibilityStepViewController: UITextFieldDelegate {
     func textFieldDidEndEditing(_ textField: UITextField) {
     }
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
@@ -143,8 +143,8 @@ extension EligibilityStepViewController:UITextFieldDelegate {
     
 }
 
-//MARK: Webservice Delegates
-extension EligibilityStepViewController:NMWebServiceDelegate {
+// MARK: Webservice Delegates
+extension EligibilityStepViewController: NMWebServiceDelegate {
     func startedRequest(_ manager: NetworkManager, requestName: NSString) {
         Logger.sharedInstance.info("requestname : \(requestName)")
         
@@ -182,19 +182,19 @@ extension EligibilityStepViewController:NMWebServiceDelegate {
         }else {
             if error.localizedDescription.localizedCaseInsensitiveContains(kStudyWithStudyId) {
                 
-                self.showAlert(message:kMessageInvalidTokenOrIfStudyDoesNotExist) //kMessageForMissingStudyId
+                self.showAlert(message: kMessageInvalidTokenOrIfStudyDoesNotExist) //kMessageForMissingStudyId
                 
             }else {
-                self.showAlert(message:error.localizedDescription)
+                self.showAlert(message: error.localizedDescription)
             }
         }
     }
 }
 
-//MARK: ORKResult overriding
+// MARK: ORKResult overriding
 
 open class EligibilityTokenTaskResult: ORKResult {
-    open var enrollmentToken:String = ""
+    open var enrollmentToken: String = ""
     
     override open var description: String {
         get {

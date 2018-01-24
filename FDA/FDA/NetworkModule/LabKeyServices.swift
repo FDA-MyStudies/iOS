@@ -32,58 +32,58 @@ let kDeleteResponses        = "deleteResponses"
 class LabKeyServices: NSObject {
     
     let networkManager = NetworkManager.sharedInstance()
-    var delegate:NMWebServiceDelegate! = nil
-    var activityId:String!  //Temp: replace with request parameters
-    var keys:String!  //Temp: replace with request parameters
-    var requestParams:Dictionary<String,Any>? = [:]
-    var headerParams:Dictionary<String,String>? = [:]
+    var delegate: NMWebServiceDelegate! = nil
+    var activityId: String!  //Temp: replace with request parameters
+    var keys: String!  //Temp: replace with request parameters
+    var requestParams: Dictionary<String,Any>? = [:]
+    var headerParams: Dictionary<String,String>? = [:]
     
     
-    //MARK:Requests
-    func enrollForStudy(studyId:String, token:String , delegate:NMWebServiceDelegate) {
+    // MARK:Requests
+    func enrollForStudy(studyId: String, token: String , delegate: NMWebServiceDelegate) {
         self.delegate = delegate
         let method = ResponseMethods.enroll.method
         
-        let params = [kEnrollmentToken:token,
-                      kStudyId:studyId]
+        let params = [kEnrollmentToken: token,
+                      kStudyId: studyId]
         
-        self.sendRequestWith(method:method, params: params, headers: nil)
+        self.sendRequestWith(method: method, params: params, headers: nil)
     }
     
-    func verifyEnrollmentToken(studyId:String,token:String, delegate:NMWebServiceDelegate) {
+    func verifyEnrollmentToken(studyId: String,token: String, delegate: NMWebServiceDelegate) {
         
         self.delegate = delegate
         
         let method = ResponseMethods.validateEnrollmentToken.method
         
-        let params = [kEnrollmentToken:token,
-                      kStudyId:studyId
+        let params = [kEnrollmentToken: token,
+                      kStudyId: studyId
         ]
         
         self.sendRequestWith(method:method, params: params, headers: nil)
     }
     
-    func withdrawFromStudy(studyId:String,participantId:String,deleteResponses:Bool,delegate:NMWebServiceDelegate){
+    func withdrawFromStudy(studyId: String,participantId: String,deleteResponses: Bool,delegate: NMWebServiceDelegate){
         self.delegate = delegate
         let method = ResponseMethods.withdrawFromStudy.method
         
         let params = [
-            kParticipantId:participantId,
-            kDeleteResponses:deleteResponses
+            kParticipantId: participantId,
+            kDeleteResponses: deleteResponses
             ] as [String : Any]
         
-        self.sendRequestWith(method:method, params: params, headers: nil)
+        self.sendRequestWith(method: method, params: params, headers: nil)
     }
     
-    func processResponse(metaData:Dictionary<String,Any>,activityType:String,responseData:Dictionary<String,Any>,participantId:String,delegate:NMWebServiceDelegate) {
+    func processResponse(metaData: Dictionary<String,Any>,activityType: String,responseData: Dictionary<String,Any>,participantId: String,delegate: NMWebServiceDelegate) {
         
         self.delegate = delegate
         let method = ResponseMethods.processResponse.method
         
-        let params = [kActivityType:activityType ,
-                      kActivityInfoMetaData:metaData,
+        let params = [kActivityType: activityType ,
+                      kActivityInfoMetaData: metaData,
                       kParticipantId: participantId,
-                      kActivityResponseData :responseData
+                      kActivityResponseData: responseData
             ] as [String : Any]
         
         print("processresponse \(params)")
@@ -91,7 +91,7 @@ class LabKeyServices: NSObject {
         
     }
     
-    func processResponse(responseData:Dictionary<String,Any>, delegate:NMWebServiceDelegate) {
+    func processResponse(responseData: Dictionary<String,Any>, delegate: NMWebServiceDelegate) {
         self.delegate = delegate
         
         let method = ResponseMethods.processResponse.method
@@ -108,27 +108,27 @@ class LabKeyServices: NSObject {
             
             
             
-            let info =  [kStudyId:studyId! ,
-                         kActivityId:activiyId! ,
-                         kActivityName:activityName! ,
-                         "version" :activityVersion! ,
-                         kActivityRunId:"\(currentRunId!)"
-                ] as [String : String]
+            let info =  [kStudyId: studyId! ,
+                         kActivityId: activiyId! ,
+                         kActivityName: activityName! ,
+                         "version": activityVersion! ,
+                         kActivityRunId: "\(currentRunId!)"
+                ] as [String: String]
             
             let ActivityType = Study.currentActivity?.type?.rawValue
             
-            let params = [kActivityType:ActivityType! ,
-                          kActivityInfoMetaData:info,
+            let params = [kActivityType: ActivityType! ,
+                          kActivityInfoMetaData: info,
                           kParticipantId: userStudyStatus.participantId! as String,
-                          kActivityResponseData :responseData
-                ] as [String : Any]
+                          kActivityResponseData: responseData
+                ] as [String: Any]
             
             print("processresponse \(params)")
-            self.sendRequestWith(method:method, params: params, headers: nil)
+            self.sendRequestWith(method: method, params: params, headers: nil)
         }
     }
     
-    func getParticipantResponse(tableName:String,activityId:String,keys:String,participantId:String,delegate:NMWebServiceDelegate){
+    func getParticipantResponse(tableName: String,activityId: String,keys: String,participantId: String,delegate: NMWebServiceDelegate){
         
         self.delegate = delegate
         self.activityId = activityId
@@ -138,35 +138,35 @@ class LabKeyServices: NSObject {
         let params = [
             
             kParticipantId: participantId,
-            "sql" :query
+            "sql": query
             ] as [String : Any]
         
-        self.sendRequestWith(method:method, params: params, headers: nil)
+        self.sendRequestWith(method: method, params: params, headers: nil)
     }
     
-    func syncOfflineSavedData(method:Method, params:Dictionary<String, Any>?,headers:Dictionary<String, String>? , delegate:NMWebServiceDelegate){
+    func syncOfflineSavedData(method: Method, params: Dictionary<String, Any>?,headers: Dictionary<String, String>? , delegate: NMWebServiceDelegate){
         
         self.delegate = delegate
-        self.sendRequestWith(method:method, params: params!, headers: headers)
+        self.sendRequestWith(method: method, params: params!, headers: headers)
     }
     
-    //MARK:Parsers
-    func handleEnrollForStudy(response:Dictionary<String, Any>){
+    // MARK:Parsers
+    func handleEnrollForStudy(response: Dictionary<String, Any>){
     }
     
-    func handleVerifyEnrollmentToken(response:Dictionary<String, Any>){
+    func handleVerifyEnrollmentToken(response: Dictionary<String, Any>){
     }
     
-    func handleWithdrawFromStudy(response:Dictionary<String, Any>){
+    func handleWithdrawFromStudy(response: Dictionary<String, Any>){
     }
     
-    func handleProcessResponse(response:Dictionary<String, Any>){
+    func handleProcessResponse(response: Dictionary<String, Any>){
     }
     
     
-    func handleGetParticipantResponse(response:Dictionary<String, Any>){
+    func handleGetParticipantResponse(response: Dictionary<String, Any>){
         
-        var dashBoardResponse:Array<DashboardResponse> = []
+        var dashBoardResponse: Array<DashboardResponse> = []
         let keysArray = self.keys.components(separatedBy: ",")
         for  key in keysArray{
             
@@ -203,9 +203,9 @@ class LabKeyServices: NSObject {
                         let durationDetail = data["duration"]  as? Dictionary<String,Any>
                         let duration = (durationDetail?["value"] as? Float)!
                         
-                        let valueDetail = ["value":duration,
-                                           "count":count,
-                                           "date":date] as Dictionary<String,Any>
+                        let valueDetail = ["value": duration,
+                                           "count": count,
+                                           "date": date] as Dictionary<String,Any>
                         
                         responseData?.values.append(valueDetail)
                         
@@ -218,9 +218,9 @@ class LabKeyServices: NSObject {
                                 let numberOfFailuresDetail = data["NumberofFailures"]  as? Dictionary<String,Any>
                                 let numberOfFailures = (numberOfFailuresDetail?["value"] as? Float)!
                                 
-                                let valueDetail1 = ["value":numberOfFailures,
-                                                    "count":Float(0.0),
-                                                    "date":date] as Dictionary<String,Any>
+                                let valueDetail1 = ["value": numberOfFailures,
+                                                    "count": Float(0.0),
+                                                    "date": date] as Dictionary<String,Any>
                                 responseData.values.append(valueDetail1)
                                 
                             }else if responseData.key == "NumberofGames" {
@@ -228,9 +228,9 @@ class LabKeyServices: NSObject {
                                 let numberOfGamesDetail = data["NumberofGames"]  as? Dictionary<String,Any>
                                 let numberOfGames = (numberOfGamesDetail?["value"] as? Float)!
                                 
-                                let valueDetail3 = ["value":numberOfGames,
-                                                    "count":Float(0.0),
-                                                    "date":date] as Dictionary<String,Any>
+                                let valueDetail3 = ["value": numberOfGames,
+                                                    "count": Float(0.0),
+                                                    "date": date] as Dictionary<String,Any>
                                 
                                 responseData.values.append(valueDetail3)
                             } else if responseData.key == "Score" {
@@ -238,9 +238,9 @@ class LabKeyServices: NSObject {
                                 let scoreDetail = data["Score"]  as? Dictionary<String,Any>
                                 let score = (scoreDetail?["value"] as? Float)!
                                 
-                                let valueDetail2 = ["value":score,
-                                                    "count":Float(0.0),
-                                                    "date":date] as Dictionary<String,Any>
+                                let valueDetail2 = ["value": score,
+                                                    "count": Float(0.0),
+                                                    "date": date] as Dictionary<String,Any>
                                 
                                 responseData.values.append(valueDetail2)
                             }
@@ -253,9 +253,9 @@ class LabKeyServices: NSObject {
                                 
                                 if Utilities.isValidValue(someObject: keyValue["value"] as AnyObject?) {
                                     let value = keyValue["value"] as! Float
-                                    let valueDetail = ["value":value,
-                                                       "count":Float(0.0),
-                                                       "date":date] as Dictionary<String,Any>
+                                    let valueDetail = ["value": value,
+                                                       "count": Float(0.0),
+                                                       "date": date] as Dictionary<String,Any>
                                     
                                     responseData.values.append(valueDetail)
                                 }
@@ -269,7 +269,7 @@ class LabKeyServices: NSObject {
         StudyDashboard.instance.saveDashboardResponse(responseList: dashBoardResponse)
     }
     
-    private func sendRequestWith(method:Method, params:Dictionary<String, Any>,headers:Dictionary<String, String>?){
+    private func sendRequestWith(method: Method, params: Dictionary<String, Any>,headers: Dictionary<String, String>?){
         
         self.requestParams = params
         self.headerParams = headers
@@ -281,7 +281,7 @@ class LabKeyServices: NSObject {
                                       delegate: self)
     }
 }
-extension LabKeyServices:NMWebServiceDelegate{
+extension LabKeyServices: NMWebServiceDelegate{
     func startedRequest(_ manager: NetworkManager, requestName: NSString) {
         if delegate != nil {
             delegate.startedRequest(manager, requestName: requestName)

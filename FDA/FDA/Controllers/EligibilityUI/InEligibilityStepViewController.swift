@@ -36,11 +36,11 @@ class InEligibilityStep: ORKStep {
 class InEligibilityStepViewController: ORKStepViewController {
     
     
-    @IBOutlet weak var buttonDone:UIButton?
-    @IBOutlet weak var labelDescription:UILabel?
-    var descriptionText:String?
+    @IBOutlet weak var buttonDone: UIButton?
+    @IBOutlet weak var labelDescription: UILabel?
+    var descriptionText: String?
     
-    //MARK: ORKStepViewController Intitialization Methods
+    // MARK: ORKStepViewController Intitialization Methods
     
     override init(step: ORKStep?) {
         super.init(step: step)
@@ -67,11 +67,11 @@ class InEligibilityStepViewController: ORKStepViewController {
         buttonDone?.layer.borderColor =   kUicolorForButtonBackground
     }
     
-    //MARK: Methods and Button Actions
+    // MARK: Methods and Button Actions
     
-    func showAlert(message:String){
-        let alert = UIAlertController(title:kErrorTitle as String,message:message as String,preferredStyle: UIAlertControllerStyle.alert)
-        alert.addAction(UIAlertAction(title:NSLocalizedString(kTitleOK, comment: ""), style: .default, handler: nil))
+    func showAlert(message: String){
+        let alert = UIAlertController(title: kErrorTitle as String,message: message as String,preferredStyle: UIAlertControllerStyle.alert)
+        alert.addAction(UIAlertAction(title: NSLocalizedString(kTitleOK, comment: ""), style: .default, handler: nil))
         
         
         self.navigationController?.present(alert, animated: true, completion: nil)

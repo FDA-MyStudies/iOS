@@ -28,13 +28,13 @@ import UIKit
 //Used to do filter based on Apply and Cancel actions
 protocol StudyFilterDelegates {
     
-    func appliedFilter(studyStatus : Array<String>, pariticipationsStatus : Array<String>, categories: Array<String> , searchText:String,bookmarked:Bool)
+    func appliedFilter(studyStatus: Array<String>, pariticipationsStatus: Array<String>, categories: Array<String> , searchText: String,bookmarked: Bool)
     
-    func didCancelFilter(_ cancel:Bool)
+    func didCancelFilter(_ cancel: Bool)
     
 }
 
-enum FilterType:Int {
+enum FilterType: Int {
     case studyStatus = 0
     case bookMark
     case participantStatus
@@ -45,20 +45,20 @@ enum FilterType:Int {
 
 class StudyFilterViewController: UIViewController {
 
-    @IBOutlet weak var collectionView : UICollectionView?
+    @IBOutlet weak var collectionView: UICollectionView?
     
-    @IBOutlet weak var cancelButton : UIButton?
-    @IBOutlet weak var applyButton : UIButton?
+    @IBOutlet weak var cancelButton: UIButton?
+    @IBOutlet weak var applyButton: UIButton?
     
-    var delegate : StudyFilterDelegates?
-    var studyStatus : Array<String> = []
-    var pariticipationsStatus : Array<String> = []
+    var delegate: StudyFilterDelegates?
+    var studyStatus: Array<String> = []
+    var pariticipationsStatus: Array<String> = []
     var categories: Array<String> = []
-    var searchText:String = ""
+    var searchText: String = ""
     var bookmark = true
-    var previousCollectionData:Array<Array<String>> = []
+    var previousCollectionData: Array<Array<String>> = []
     
-    //MARK:- Viewcontroller lifecycle
+    // MARK:- Viewcontroller lifecycle
     override func viewDidLoad() {
         
         super.viewDidLoad()
@@ -90,7 +90,7 @@ class StudyFilterViewController: UIViewController {
     }
     
     
-    //MARK:- Button Actions
+    // MARK:- Button Actions
     
     /**
      Navigate to Studylist screen on Apply button clicked
@@ -102,7 +102,7 @@ class StudyFilterViewController: UIViewController {
         //categories = ["Food Safety","Observational Studies","Cosmetics Safety"]
         //pariticipationsStatus = ["Food Safety","Observational Studies"]
         
-        var i:Int = 0
+        var i: Int = 0
         var isbookmarked = false
        
         for filterOptions in StudyFilterHandler.instance.filterOptions {
@@ -127,7 +127,7 @@ class StudyFilterViewController: UIViewController {
                     
                 case .category:
                     categories.append(value.title)
-                default:break
+                default: break
                 }
             }
             i = i + 1
@@ -138,7 +138,7 @@ class StudyFilterViewController: UIViewController {
         
         if User.currentUser.userType == .FDAUser {
         if isbookmarked {
-            previousCollectionData.append((bookmark == true ? ["Bookmarked"]:[]))
+            previousCollectionData.append((bookmark == true ? ["Bookmarked"]: []))
         }else {
             previousCollectionData.append([])
             bookmark = false
@@ -151,7 +151,7 @@ class StudyFilterViewController: UIViewController {
         previousCollectionData.append(pariticipationsStatus)
         previousCollectionData.append(categories.count == 0 ? [] : categories)
         
-        delegate?.appliedFilter(studyStatus: studyStatus, pariticipationsStatus: pariticipationsStatus, categories: categories,searchText:searchText,bookmarked: bookmark)
+        delegate?.appliedFilter(studyStatus: studyStatus, pariticipationsStatus: pariticipationsStatus, categories: categories,searchText: searchText,bookmarked: bookmark)
         self.dismiss(animated: true, completion: nil)
         
     }
@@ -167,8 +167,8 @@ class StudyFilterViewController: UIViewController {
     }
 }
 
-////MARK:- Collection Data source & Delegate
-extension StudyFilterViewController : UICollectionViewDataSource{//,UICollectionViewDelegate {
+//// MARK:- Collection Data source & Delegate
+extension StudyFilterViewController: UICollectionViewDataSource{//,UICollectionViewDelegate {
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return StudyFilterHandler.instance.filterOptions.count //filterData!.count
@@ -189,14 +189,14 @@ extension StudyFilterViewController : UICollectionViewDataSource{//,UICollection
 
 extension StudyFilterViewController:PinterestLayoutDelegate{
     // 1. Returns the photo height
-    func collectionView(_ collectionView:UICollectionView, heightForPhotoAtIndexPath indexPath:IndexPath , withWidth width:CGFloat) -> CGFloat {
+    func collectionView(_ collectionView: UICollectionView, heightForPhotoAtIndexPath indexPath: IndexPath , withWidth width: CGFloat) -> CGFloat {
         
         let filterOptions = StudyFilterHandler.instance.filterOptions[indexPath.row]
         var headerHeight = 0
         if filterOptions.title.count > 0 {
             headerHeight = 40
         }
-        let height:CGFloat = CGFloat((filterOptions.filterValues.count * 50) + headerHeight)
+        let height: CGFloat = CGFloat((filterOptions.filterValues.count * 50) + headerHeight)
         return height
     }
     
@@ -207,19 +207,19 @@ extension StudyFilterViewController:PinterestLayoutDelegate{
 }
 
 class StudyFilterHandler {
-    var filterOptions:Array<FilterOptions> = []
-    var previousAppliedFilters:Array<Array<String>> = []
+    var filterOptions: Array<FilterOptions> = []
+    var previousAppliedFilters: Array<Array<String>> = []
     var searchText = ""
     static var instance = StudyFilterHandler()
 }
 
 class FilterOptions{
-    var title:String!
-    var filterValues:Array<FilterValues> = []
+    var title: String!
+    var filterValues: Array<FilterValues> = []
 }
 class FilterValues {
     
-    var title:String!
+    var title: String!
     var isSelected = false
 }
 
@@ -228,20 +228,20 @@ extension AppDelegate{
     /**
      setter method to set the default filter options if none are selected
     */
-    func setDefaultFilters(previousCollectionData:Array<Array<String>>) {
+    func setDefaultFilters(previousCollectionData: Array<Array<String>>) {
         
-    var filterData : NSMutableArray?
+    var filterData: NSMutableArray?
         var resource = "AnanomousFilterData"
         
         if User.currentUser.userType == .FDAUser {
             resource = "FilterData"
         }
         
-        let plistPath = Bundle.main.path(forResource: resource, ofType: ".plist", inDirectory:nil)
+        let plistPath = Bundle.main.path(forResource: resource, ofType: ".plist", inDirectory: nil)
         filterData = NSMutableArray.init(contentsOfFile: plistPath!)!
         
         StudyFilterHandler.instance.filterOptions = []
-        var filterOptionsList:Array<FilterOptions> = []
+        var filterOptionsList: Array<FilterOptions> = []
         var i = 0
         
         for options in filterData! {
@@ -249,12 +249,12 @@ extension AppDelegate{
             let filterOptions = FilterOptions()
             filterOptions.title = ((options as? Dictionary<String,Any>)!["headerText"] as? String)!
             
-            var selectedValues:Array<String> = []
+            var selectedValues: Array<String> = []
             if previousCollectionData.count > 0 {
                 selectedValues = previousCollectionData[i]
             }
             
-            var filterValues:Array<FilterValues> = []
+            var filterValues: Array<FilterValues> = []
             for value in values {
                 
                 var isContained = false
@@ -298,15 +298,15 @@ extension AppDelegate{
      categories: array of categories
     */
     
-    func getDefaultFilterStrings()->(studyStatus:Array<String>,pariticipationsStatus : Array<String>,categories: Array<String>,searchText:String,bookmark:Bool){
+    func getDefaultFilterStrings()->(studyStatus: Array<String>,pariticipationsStatus: Array<String>,categories: Array<String>,searchText: String,bookmark: Bool){
         
-        var studyStatus : Array<String> = []
-        var pariticipationsStatus : Array<String> = []
+        var studyStatus: Array<String> = []
+        var pariticipationsStatus: Array<String> = []
         var categories: Array<String> = []
         var bookmark = true
         
         
-        var i:Int = 0
+        var i: Int = 0
         var isbookmarked = false
         
         //Parsing the filter options
@@ -332,7 +332,7 @@ extension AppDelegate{
                     
                 case .category:
                     categories.append(value.title)
-                default:break
+                default: break
                 }
             }
             i = i + 1
@@ -345,7 +345,7 @@ extension AppDelegate{
             
         }
         
-        return(studyStatus:studyStatus,pariticipationsStatus : pariticipationsStatus,categories:categories,searchText:"",bookmark:bookmark)
+        return(studyStatus: studyStatus,pariticipationsStatus : pariticipationsStatus,categories: categories,searchText: "",bookmark: bookmark)
     }
     
     

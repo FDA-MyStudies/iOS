@@ -24,7 +24,7 @@
 import Foundation
 import ResearchKit
 
-//MARK: Api Constants
+// MARK: Api Constants
 let kActivityType = "type"
 let kActivityInfoMetaData = "metadata"
 
@@ -173,7 +173,7 @@ class Activity {
         self.frequencyType = .One_Time
     }
     
-    //MARK:Initializer Methods
+    // MARK:Initializer Methods
     init(studyId: String,infoDict: Dictionary<String,Any>) {
         
         self.studyId = studyId
@@ -246,7 +246,7 @@ class Activity {
         
     }
     
-    //MARK: Setter Methods
+    // MARK: Setter Methods
     
     // method to set  ActivityMetaData
     func setActivityMetaData(activityDict: Dictionary<String,Any>) {

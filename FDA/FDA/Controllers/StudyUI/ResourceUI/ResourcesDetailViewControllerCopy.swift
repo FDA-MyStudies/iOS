@@ -29,19 +29,19 @@ import SafariServices
 
 class ResourcesDetailViewControllerCopy: UIViewController {
     
-    @IBOutlet var webViewContainer : UIView?
-     var webView : WKWebView?
+    @IBOutlet var webViewContainer: UIView?
+     var webView: WKWebView?
     
-    @IBOutlet var progressBar : UIProgressView?
-    @IBOutlet var bottomToolBar : UIToolbar?
+    @IBOutlet var progressBar: UIProgressView?
+    @IBOutlet var bottomToolBar: UIToolbar?
     
     
-    var activityIndicator:UIActivityIndicatorView!
-    var requestLink:String?
-    var type:String?
+    var activityIndicator: UIActivityIndicatorView!
+    var requestLink: String?
+    var type: String?
     var htmlString: String?
-    var resource:Resource?
-    var isEmailComposerPresented:Bool?
+    var resource: Resource?
+    var isEmailComposerPresented: Bool?
     
     override func viewDidLoad() {
         
@@ -203,7 +203,7 @@ class ResourcesDetailViewControllerCopy: UIViewController {
     }
     
     
-    //MARK:Button Actions
+    // MARK:Button Actions
     
     @IBAction func cancelButtonClicked(_ sender : Any){
         self.dismiss(animated: true, completion: nil)

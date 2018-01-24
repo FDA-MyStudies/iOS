@@ -25,10 +25,10 @@ import UIKit
 
 class ReachoutOptionsViewController: UIViewController {
 
-    @IBOutlet var tableView:UITableView?
+    @IBOutlet var tableView: UITableView?
     
     
-//MARK:- Viewcontroller Lifecycle
+// MARK:- Viewcontroller Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -58,8 +58,8 @@ class ReachoutOptionsViewController: UIViewController {
     
 }
 
-//MARK:- TableView Datasource
-extension ReachoutOptionsViewController : UITableViewDataSource {
+// MARK:- TableView Datasource
+extension ReachoutOptionsViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 2
@@ -86,8 +86,8 @@ extension ReachoutOptionsViewController : UITableViewDataSource {
     }
 }
 
-//MARK:- TableView Delegates
-extension ReachoutOptionsViewController :  UITableViewDelegate {
+// MARK:- TableView Delegates
+extension ReachoutOptionsViewController:  UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)

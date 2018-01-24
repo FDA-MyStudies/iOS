@@ -27,12 +27,12 @@ import UIKit
 let kVerifyViewControllerSegue = "VerifyViewControllerSegue"
 let kVerficationMessageFromForgotPassword = "Your registered email(xyz@gmail.com) is pending verification. Enter the Verification Code received on this email to complete verification and try the Forgot Password action again."
 
-class ForgotPasswordViewController : UIViewController{
+class ForgotPasswordViewController: UIViewController{
     
-    @IBOutlet var buttonSubmit : UIButton?
-    @IBOutlet var textFieldEmail : UITextField?
+    @IBOutlet var buttonSubmit: UIButton?
+    @IBOutlet var textFieldEmail: UITextField?
     
-//MARK:- ViewController Delegates
+// MARK:- ViewController Delegates
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,7 +42,7 @@ class ForgotPasswordViewController : UIViewController{
         self.title = NSLocalizedString(kForgotPasswordTitleText, comment: "")
         
         //Used for background tap dismiss keyboard
-        let gestureRecognizwe : UITapGestureRecognizer = UITapGestureRecognizer.init(target: self, action: #selector(SignInViewController.dismissKeyboard))
+        let gestureRecognizwe: UITapGestureRecognizer = UITapGestureRecognizer.init(target: self, action: #selector(SignInViewController.dismissKeyboard))
         self.view?.addGestureRecognizer(gestureRecognizwe)
         
         self.addBackBarButton()
@@ -64,7 +64,7 @@ class ForgotPasswordViewController : UIViewController{
         
     }
     
-//MARK:- Utility Methods
+// MARK:- Utility Methods
     
     /**
      
@@ -93,12 +93,12 @@ class ForgotPasswordViewController : UIViewController{
      @param textMessage     used to display in the alert message
     
      */
-    func showAlertMessages(textMessage : String){
+    func showAlertMessages(textMessage: String){
         UIUtilities.showAlertMessage("", errorMessage: NSLocalizedString(textMessage, comment: ""), errorAlertActionTitle: NSLocalizedString("OK", comment: ""), viewControllerUsed: self)
     }
     
     
-//MARK:- Button Action
+// MARK:- Button Action
     
     /**
      
@@ -119,18 +119,18 @@ class ForgotPasswordViewController : UIViewController{
         }else{
             print("Call the Webservice")
             //User.currentUser.emailId = textFieldEmail?.text!
-            UserServices().forgotPassword(email:(textFieldEmail?.text)!,delegate: self)
+            UserServices().forgotPassword(email: (textFieldEmail?.text)!,delegate: self)
         }
     }
     
     
-//MARK:- Segue Methods
+// MARK:- Segue Methods
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         if let verifyController = segue.destination as? VerificationViewController {
             
             let message = kVerficationMessageFromForgotPassword
-            let modifiedMessage = message.replacingOccurrences(of: kDefaultEmail, with:(textFieldEmail?.text)!)
+            let modifiedMessage = message.replacingOccurrences(of: kDefaultEmail, with: (textFieldEmail?.text)!)
             
             verifyController.labelMessage = modifiedMessage
             verifyController.viewLoadFrom = .forgotPassword
@@ -140,8 +140,8 @@ class ForgotPasswordViewController : UIViewController{
 }
 
 
-//MARK:- Webservices Delegates
-extension ForgotPasswordViewController:NMWebServiceDelegate {
+// MARK:- Webservices Delegates
+extension ForgotPasswordViewController: NMWebServiceDelegate {
     
     func startedRequest(_ manager: NetworkManager, requestName: NSString) {
         Logger.sharedInstance.info("requestname : \(requestName)")
@@ -164,7 +164,7 @@ extension ForgotPasswordViewController:NMWebServiceDelegate {
         else{
             // for resend email
             
-              UIUtilities.showAlertWithTitleAndMessage(title:NSLocalizedString(kAlertMessageText, comment: "") as NSString, message:NSLocalizedString(kAlertMessageResendEmail, comment: "") as NSString)
+              UIUtilities.showAlertWithTitleAndMessage(title: NSLocalizedString(kAlertMessageText, comment: "") as NSString, message: NSLocalizedString(kAlertMessageResendEmail, comment: "") as NSString)
             
         }
     }
@@ -177,39 +177,25 @@ extension ForgotPasswordViewController:NMWebServiceDelegate {
         if requestName as String == RegistrationMethods.forgotPassword.description && error.code == 403{
             
             self.navigateToVerifyViewController()
-            
-            /*
-            UIUtilities.showAlertMessageWithTwoActionsAndHandler(NSLocalizedString(kTitleMessage, comment: "") , errorMessage: error.localizedDescription, errorAlertActionTitle: NSLocalizedString("Ok", comment: ""),
-                                                                 errorAlertActionTitle2: NSLocalizedString("Resend Email", comment: ""), viewControllerUsed: self,
-                                                                 action1: {
-            },
-                                                                 action2: {
-                                                                    
-                                                                    UserServices().resendEmailConfirmation(emailId:(self.textFieldEmail?.text)!,delegate:self)
-                                                                    
-            })
- */
-
         }
         else{
             // if resend email fails
-             UIUtilities.showAlertWithTitleAndMessage(title:NSLocalizedString(kTitleError, comment: "") as NSString, message: error.localizedDescription as NSString)
+             UIUtilities.showAlertWithTitleAndMessage(title: NSLocalizedString(kTitleError, comment: "") as NSString, message: error.localizedDescription as NSString)
         }
     }
 }
 
 
-//MARK:- TextField Delegates
+// MARK:- TextField Delegates
 extension ForgotPasswordViewController:UITextFieldDelegate{
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         
         let finalString = textField.text! + string
         
-        if string == " " || finalString.characters.count > 255{
+        if string == " " || finalString.count > 255 {
             return false
-        }
-        else{
+        } else {
             return true
         }
     }

@@ -97,7 +97,7 @@ class ActivityStepResult {
         self.subTypeForForm = ""
         
     }
-    //MARK: Utility Method
+    // MARK: Utility Method
     
     /*
      initializer method for the class
@@ -735,7 +735,7 @@ class ActivityStepResult {
     }
     
     
-    //MARK: Setter & Getter methods for Step
+    // MARK: Setter & Getter methods for Step
     
     /* Method to Initialize step
      @step:ActivityStep instance with all properties initialized priorly

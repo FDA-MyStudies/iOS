@@ -26,23 +26,23 @@ import UIKit
 let kActivityTitle = "title"
 
 protocol ActivitiesCellDelegate {
-    func activityCell(cell:ActivitiesTableViewCell, activity:Activity)
+    func activityCell(cell: ActivitiesTableViewCell, activity: Activity)
 }
 
 class ActivitiesTableViewCell: UITableViewCell {
 
-    @IBOutlet var imageIcon : UIImageView?
-    @IBOutlet var labelDays : UILabel?
-    @IBOutlet var labelHeading : UILabel?
-    @IBOutlet var labelTime : UILabel?
-    @IBOutlet var labelStatus : UILabel?
-    @IBOutlet var labelRunStatus : UILabel?
-    @IBOutlet var buttonMoreSchedules : UIButton?
-    @IBOutlet var buttonMoreSchedulesBottomLine : UIView?
+    @IBOutlet var imageIcon: UIImageView?
+    @IBOutlet var labelDays: UILabel?
+    @IBOutlet var labelHeading: UILabel?
+    @IBOutlet var labelTime: UILabel?
+    @IBOutlet var labelStatus: UILabel?
+    @IBOutlet var labelRunStatus: UILabel?
+    @IBOutlet var buttonMoreSchedules: UIButton?
+    @IBOutlet var buttonMoreSchedulesBottomLine: UIView?
     
-    var delegate:ActivitiesCellDelegate?
-    var currentActivity:Activity! = nil
-    var availabilityStatus:ActivityAvailabilityStatus = .current
+    var delegate: ActivitiesCellDelegate?
+    var currentActivity: Activity! = nil
+    var availabilityStatus: ActivityAvailabilityStatus = .current
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -84,7 +84,7 @@ class ActivitiesTableViewCell: UITableViewCell {
      @param activity    Access the value from Activity class
      @param availablityStatus Access the value from ActivityAvailabilityStatus enum
      */
-    func populateCellDataWithActivity(activity:Activity ,availablityStatus:ActivityAvailabilityStatus){
+    func populateCellDataWithActivity(activity: Activity ,availablityStatus: ActivityAvailabilityStatus){
         
         self.availabilityStatus = availablityStatus
         self.currentActivity = activity
@@ -130,7 +130,7 @@ class ActivitiesTableViewCell: UITableViewCell {
      Used to update User Run Status
      @param activity    Access the value from Activity class
      */
-    func updateUserRunStatus(activity:Activity) {
+    func updateUserRunStatus(activity: Activity) {
         
         let currentRunId = (activity.totalRuns != 0) ? String(activity.currentRunId) : "0"
         
@@ -152,7 +152,7 @@ class ActivitiesTableViewCell: UITableViewCell {
      Used to set User Status For Activity
      @param activity    Access the value from Activity class
      */
-    func setUserStatusForActivity(activity:Activity){
+    func setUserStatusForActivity(activity: Activity){
         
         let currentUser = User.currentUser
         
@@ -203,7 +203,7 @@ class ActivitiesTableViewCell: UITableViewCell {
      Used to calculate Activity Timings
      @param activity    Access the value from Activity class
      */
-    func calculateActivityTimings(activity:Activity){
+    func calculateActivityTimings(activity: Activity){
         
         var startDate = activity.startDate//?.utcDate()
         var endDate   = activity.endDate//?.utcDate()
@@ -244,7 +244,7 @@ class ActivitiesTableViewCell: UITableViewCell {
 
         case .Daily: // Handle for Daily Frequency
             
-            var runStartTimingsList:Array<String> = []
+            var runStartTimingsList: Array<String> = []
             for dict in activity.frequencyRuns!{
                 let startTime = dict[kScheduleStartTime] as! String
                 let runStartTime = ActivitiesTableViewCell.dailyFormatter.date(from: startTime)
@@ -275,8 +275,8 @@ class ActivitiesTableViewCell: UITableViewCell {
 
         case .Scheduled: // Handle for Scheduled Frequency
             
-            var runStartDate:Date?
-            var runEndDate:Date?
+            var runStartDate: Date?
+            var runEndDate: Date?
             if activity.currentRun != nil {
                 
              runStartDate = activity.currentRun.startDate
@@ -300,13 +300,13 @@ class ActivitiesTableViewCell: UITableViewCell {
     }
     
     
-//MARK:- Button Action
+// MARK:- Button Action
     
     /**
      Clicked on  MoreSchedules
      @param _    Accepts UIButton object
      */
-    @IBAction func buttonMoreSchedulesClicked(_ :UIButton){
+    @IBAction func buttonMoreSchedulesClicked(_ : UIButton){
         self.delegate?.activityCell(cell: self, activity: self.currentActivity)
     }
     

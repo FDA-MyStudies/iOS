@@ -32,25 +32,25 @@ let kConfirmationOptionalDefaultTypeDelete = "delete"
 
 
 protocol ConfirmationOptionalDelegate {
-    func confirmationCell(cell:ConfirmationOptionalTableViewCell , forStudy study:Study, deleteData:Bool)
+    func confirmationCell(cell: ConfirmationOptionalTableViewCell , forStudy study: Study, deleteData: Bool)
 }
 class ConfirmationOptionalTableViewCell: UITableViewCell {
 
-    @IBOutlet var buttonDeleteData:UIButton?
-    @IBOutlet var buttonRetainData:UIButton?
-    @IBOutlet var labelTitle:UILabel?
+    @IBOutlet var buttonDeleteData: UIButton?
+    @IBOutlet var buttonRetainData: UIButton?
+    @IBOutlet var labelTitle: UILabel?
     @IBOutlet var imageViewDeleteCheckBox: UIImageView?
     @IBOutlet var imageViewRetainCheckBox: UIImageView?
-    var study:Study!
-    var delegate:ConfirmationOptionalDelegate? = nil
+    var study: Study!
+    var delegate: ConfirmationOptionalDelegate? = nil
     
     override func awakeFromNib() {
         super.awakeFromNib()
     }
 
-//MARK:IBActions
+// MARK:IBActions
     
-    @IBAction func deleteOrRetainDataButtonAction(_ sender:UIButton?){
+    @IBAction func deleteOrRetainDataButtonAction(_ sender: UIButton?){
         
         var deleteData = false
         if sender?.tag == kDeleteButtonTag {
@@ -69,9 +69,9 @@ class ConfirmationOptionalTableViewCell: UITableViewCell {
         self.delegate?.confirmationCell(cell: self, forStudy: study, deleteData: deleteData)
     }
    
-    //MARK:Utility methods
+    // MARK:Utility methods
     
-    func setDefaultDeleteAction(defaultValue:String){
+    func setDefaultDeleteAction(defaultValue: String){
         if defaultValue == kConfirmationOptionalDefaultTypeRetain {
             imageViewRetainCheckBox?.image = #imageLiteral(resourceName: "notChecked")
             imageViewDeleteCheckBox?.image = #imageLiteral(resourceName: "checked")

@@ -31,9 +31,9 @@ public typealias AlertAction = () -> Void
 class UIUtilities: NSObject {
     
     
-    //MARK: UI changes for textField
+    // MARK: UI changes for textField
     /* Initial Padding space before displaying the texts */
-    class func paddingViewForTextField(textField:UITextField)->Void{
+    class func paddingViewForTextField(textField: UITextField) ->Void {
         let paddingView =  UIView.init(frame: CGRect(x: 0, y: 0, width: 10, height: textField.frame.height))
         textField.leftView = paddingView
         textField.leftViewMode = UITextFieldViewMode.always
@@ -53,7 +53,7 @@ class UIUtilities: NSObject {
     }
     
     /* Used to show invalid input for that particular textfield */
-    class func getTextfieldWithInvalidInputBorder(textField:UITextField, layerBorderColor : String, backgroundColor : String) {
+    class func getTextfieldWithInvalidInputBorder(textField: UITextField, layerBorderColor: String, backgroundColor: String) {
         
         //textField.borderStyle =  UITextBorderStyle.RoundedRect
         textField.layer.borderWidth = 2
@@ -62,10 +62,10 @@ class UIUtilities: NSObject {
         //"bf7266"
         //"414c6f"
     }
-    //MARK: UI effects & View Changes
+    // MARK: UI effects & View Changes
     
     /* Used to remove border text field */
-    class func removeTheBorderToTextField(textField:UITextField)->UITextField {
+    class func removeTheBorderToTextField(textField: UITextField)->UITextField {
         
         textField.borderStyle =  UITextBorderStyle.none
         textField.layer.borderWidth = 0
@@ -76,7 +76,7 @@ class UIUtilities: NSObject {
         
     }
     
-    class func segmentSeparatorColor(color:UIColor,segment:UISegmentedControl) -> UIImage {
+    class func segmentSeparatorColor(color: UIColor,segment: UISegmentedControl) -> UIImage {
         
         // let rect = CGRectMake(0.0, 0.0, 1.5, segment.frame.size.height)
         
@@ -91,7 +91,7 @@ class UIUtilities: NSObject {
         
     }
     
-    class func applyBlurrEffect()-> UIVisualEffectView
+    class func applyBlurrEffect() -> UIVisualEffectView
     {
         
         let blurEffect = UIBlurEffect.init(style: UIBlurEffectStyle.dark)
@@ -102,7 +102,7 @@ class UIUtilities: NSObject {
         return visualEffect
     }
     
-    class func applyBlurrEffectForFrequency()-> UIVisualEffectView
+    class func applyBlurrEffectForFrequency() -> UIVisualEffectView
     {
         
         let blurEffect = UIBlurEffect.init(style: UIBlurEffectStyle.dark)
@@ -114,7 +114,7 @@ class UIUtilities: NSObject {
     }
     
     
-    class func removeBlurFromFrequency(fromView : UIView) {
+    class func removeBlurFromFrequency(fromView: UIView) {
         for subView in fromView.subviews{
             if subView.tag == 500{
                 subView.removeFromSuperview()
@@ -122,7 +122,7 @@ class UIUtilities: NSObject {
         }
     }
     
-    class func removeBlur(fromView : UIView) {
+    class func removeBlur(fromView: UIView) {
         for subView in fromView.subviews{
             if subView.tag == 100{
                 subView.removeFromSuperview()
@@ -131,7 +131,7 @@ class UIUtilities: NSObject {
     }
     
     /* Performs spinning action using CoreAnimation */
-    class func addSpinAnimation(withDuration duration : CFTimeInterval)-> CABasicAnimation{
+    class func addSpinAnimation(withDuration duration: CFTimeInterval)-> CABasicAnimation{
         let animation = CABasicAnimation(keyPath: "transform.rotation.z")
         animation.fromValue = 0
         animation.toValue = 360
@@ -145,9 +145,9 @@ class UIUtilities: NSObject {
         return hexColors as NSArray
     }
     
-    class  func addFadedGreenView(view:UIView) ->UIView{
+    class  func addFadedGreenView(view: UIView) ->UIView{
         
-        let greenView = UIView.init(frame:view.frame)
+        let greenView = UIView.init(frame: view.frame)
         greenView.backgroundColor = Utilities.hexStringToUIColor("1eebb4")
         greenView.alpha = 0.5
         greenView.tag = 200
@@ -156,7 +156,7 @@ class UIUtilities: NSObject {
         return greenView
     }
     
-    class  func addFadedGreenViewForFrequencyAttributes(view:UIView) ->UIView{
+    class  func addFadedGreenViewForFrequencyAttributes(view: UIView) ->UIView{
         
         let greenView = UIView.init(frame:view.frame)
         greenView.backgroundColor = Utilities.hexStringToUIColor("1eebb4")
@@ -167,24 +167,24 @@ class UIUtilities: NSObject {
         return greenView
     }
     
-    class func setWhiteBorderOnView(view : UIView, borderWidth : CGFloat, cornerRadius : CGFloat){
+    class func setWhiteBorderOnView(view: UIView, borderWidth: CGFloat, cornerRadius: CGFloat){
         
         view.layer.borderWidth = borderWidth
         view.layer.cornerRadius = cornerRadius
         view.layer.borderColor = UIColor.white.cgColor
     }
     
-    class func setRedBorderOnView(view : UIView, borderWidth : CGFloat, cornerRadius : CGFloat){
+    class func setRedBorderOnView(view: UIView, borderWidth: CGFloat, cornerRadius: CGFloat){
         
         view.layer.borderWidth = borderWidth
         view.layer.cornerRadius = cornerRadius
         view.layer.borderColor = Utilities.hexStringToUIColor("kInvalidBorderColor").cgColor
     }
     
-    //MARK: JSON serialization helper methods
-    class func convertDictionaryIntoString(mutableDic:NSMutableDictionary) ->String{
+    // MARK: JSON serialization helper methods
+    class func convertDictionaryIntoString(mutableDic: NSMutableDictionary) -> String{
         
-        var jsonString:String!
+        var jsonString: String!
         do{
             let jsonData: NSData = try JSONSerialization.data(withJSONObject: mutableDic, options: JSONSerialization.WritingOptions.prettyPrinted) as NSData
             jsonString = NSString(data: jsonData as Data, encoding: String.Encoding.utf8.rawValue)! as String
@@ -195,9 +195,9 @@ class UIUtilities: NSObject {
         return jsonString
     }
     
-    class func convertNSMutableArrayIntoString(mutableArray:NSMutableArray) ->String {
+    class func convertNSMutableArrayIntoString(mutableArray: NSMutableArray) -> String {
         
-        var socialMediaNamesString:String!
+        var socialMediaNamesString: String!
         do{
             let jsonData: NSData = try JSONSerialization.data(withJSONObject: mutableArray, options: JSONSerialization.WritingOptions.prettyPrinted) as NSData
             socialMediaNamesString = NSString(data: jsonData as Data, encoding: String.Encoding.utf8.rawValue)! as String
@@ -206,13 +206,13 @@ class UIUtilities: NSObject {
         }
         return socialMediaNamesString
     }
-    //MARK: Alert composers
+    // MARK: Alert composers
     
     /* Presents alert message */
-    class func showAlertWithTitleAndMessage(title: NSString, message : NSString)->Void {
+    class func showAlertWithTitleAndMessage(title: NSString, message : NSString) -> Void {
         
-        let alert = UIAlertController(title:title as String,message:message as String,preferredStyle: UIAlertControllerStyle.alert)
-        alert.addAction(UIAlertAction(title:NSLocalizedString("OK", comment: ""), style: .default, handler: nil))
+        let alert = UIAlertController(title: title as String,message: message as String,preferredStyle: UIAlertControllerStyle.alert)
+        alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: ""), style: .default, handler: nil))
         var rootViewController = UIApplication.shared.keyWindow?.rootViewController
         if let navigationController = rootViewController as? UINavigationController {
             rootViewController = navigationController.viewControllers.first
@@ -230,11 +230,11 @@ class UIUtilities: NSObject {
     }
     
     /* Presents alert message */
-    class func showAlertWithMessage(alertMessage:String)->Void{
-        self.showAlertWithTitleAndMessage(title:"", message: alertMessage as NSString)
+    class func showAlertWithMessage(alertMessage: String)->Void{
+        self.showAlertWithTitleAndMessage(title: "", message: alertMessage as NSString)
     }
     
-    class func showAlertMessageWithTwoActionsAndHandler(_ errorTitle : String,errorMessage : String,errorAlertActionTitle : String ,errorAlertActionTitle2 : String?,viewControllerUsed : UIViewController, action1:@escaping AlertAction, action2:@escaping AlertAction){
+    class func showAlertMessageWithTwoActionsAndHandler(_ errorTitle: String,errorMessage : String,errorAlertActionTitle : String ,errorAlertActionTitle2: String?,viewControllerUsed : UIViewController, action1: @escaping AlertAction, action2: @escaping AlertAction){
         let alert = UIAlertController(title: errorTitle, message: errorMessage, preferredStyle:UIAlertControllerStyle.alert)
         
         alert.addAction(UIAlertAction(title: errorAlertActionTitle, style: UIAlertActionStyle.default, handler: { (action) in
@@ -246,10 +246,10 @@ class UIUtilities: NSObject {
             }))
         }
         
-        viewControllerUsed.present(alert, animated:true, completion: nil)
+        viewControllerUsed.present(alert, animated: true, completion: nil)
     }
     
-    class func showAlertMessageWithThreeActionsAndHandler(_ errorTitle : String,errorMessage : String,errorAlertActionTitle : String ,errorAlertActionTitle2 : String?,errorAlertActionTitle3 : String?,viewControllerUsed : UIViewController, action1:@escaping AlertAction, action2:@escaping AlertAction,action3:@escaping AlertAction){
+    class func showAlertMessageWithThreeActionsAndHandler(_ errorTitle : String,errorMessage : String,errorAlertActionTitle : String ,errorAlertActionTitle2 : String?,errorAlertActionTitle3 : String?,viewControllerUsed : UIViewController, action1: @escaping AlertAction, action2: @escaping AlertAction,action3: @escaping AlertAction){
         let alert = UIAlertController(title: errorTitle, message: errorMessage, preferredStyle:UIAlertControllerStyle.alert)
         
         alert.addAction(UIAlertAction(title: errorAlertActionTitle, style: UIAlertActionStyle.default, handler: { (action) in
@@ -268,12 +268,12 @@ class UIUtilities: NSObject {
         }
         
         
-        viewControllerUsed.present(alert, animated:true, completion: nil)
+        viewControllerUsed.present(alert, animated: true, completion: nil)
     }
     
-    class func showAlertMessageWithActionHandler(_ title : String,message : String,buttonTitle : String ,viewControllerUsed : UIViewController, action:@escaping AlertAction){
+    class func showAlertMessageWithActionHandler(_ title: String,message: String,buttonTitle : String ,viewControllerUsed: UIViewController, action: @escaping AlertAction){
         
-        let alert = UIAlertController(title: title, message: message, preferredStyle:UIAlertControllerStyle.alert)
+        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.alert)
         
         alert.addAction(UIAlertAction(title: buttonTitle, style: UIAlertActionStyle.default, handler: { (alertAction) in
             action()
@@ -283,7 +283,7 @@ class UIUtilities: NSObject {
         viewControllerUsed.present(alert, animated:true, completion: nil)
     }
     
-    class func showAlertMessage(_ errorTitle : String,errorMessage : String,errorAlertActionTitle : String ,viewControllerUsed : UIViewController?){
+    class func showAlertMessage(_ errorTitle: String, errorMessage: String, errorAlertActionTitle : String ,viewControllerUsed: UIViewController?){
         let alert = UIAlertController(title: errorTitle, message: errorMessage, preferredStyle:UIAlertControllerStyle.alert)
         alert.addAction(UIAlertAction(title: errorAlertActionTitle, style: UIAlertActionStyle.default, handler: nil))
         viewControllerUsed!.present(alert, animated:true, completion: nil)

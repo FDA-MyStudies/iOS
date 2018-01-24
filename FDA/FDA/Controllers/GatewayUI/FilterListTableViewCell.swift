@@ -25,8 +25,8 @@ import UIKit
 
 class FilterListTableViewCell: UITableViewCell {
     
-    @IBOutlet weak var name : UILabel?
-    @IBOutlet weak var imageSelected : UIImageView?
+    @IBOutlet weak var name: UILabel?
+    @IBOutlet weak var imageSelected: UIImageView?
 
     override func awakeFromNib() {
         super.awakeFromNib()

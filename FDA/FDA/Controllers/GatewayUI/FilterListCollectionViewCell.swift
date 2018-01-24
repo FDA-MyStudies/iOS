@@ -25,15 +25,15 @@ import UIKit
 
 class FilterListCollectionViewCell: UICollectionViewCell {
     
-    @IBOutlet weak var tableView : UITableView?
-    @IBOutlet weak var tableViewHeader : UIView?
-    @IBOutlet weak var labelHeaderTitle : UILabel?
+    @IBOutlet weak var tableView: UITableView?
+    @IBOutlet weak var tableViewHeader: UIView?
+    @IBOutlet weak var labelHeaderTitle: UILabel?
     
     var headerName = ""
     var studyData = NSMutableArray()
-    var filterOptions:FilterOptions!
+    var filterOptions: FilterOptions!
     
-    func displayCollectionData(data : FilterOptions){
+    func displayCollectionData(data: FilterOptions){
     
         //studyData = data["studyData"] as! NSMutableArray
         filterOptions = data
@@ -58,7 +58,7 @@ class FilterListCollectionViewCell: UICollectionViewCell {
 }
 
 
-extension FilterListCollectionViewCell : UITableViewDelegate , UITableViewDataSource{
+extension FilterListCollectionViewCell: UITableViewDelegate , UITableViewDataSource{
 
     
     

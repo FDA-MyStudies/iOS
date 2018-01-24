@@ -32,7 +32,7 @@ class SplashViewController: UIViewController {
     
     var isAppOpenedForFirstTime:Bool? = false
     
-    //MARK:- Viewcontroller Lifecycle
+    // MARK:- Viewcontroller Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -138,7 +138,7 @@ class SplashViewController: UIViewController {
 }
 
 
-//MARK:- ORKTaskViewController Delegate
+// MARK:- ORKTaskViewController Delegate
 extension SplashViewController:ORKTaskViewControllerDelegate{
     
     func taskViewControllerSupportsSaveAndRestore(_ taskViewController: ORKTaskViewController) -> Bool {

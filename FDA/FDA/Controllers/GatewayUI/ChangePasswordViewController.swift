@@ -24,13 +24,13 @@
 import UIKit
 import IQKeyboardManagerSwift
 
-enum CPTextFeildTags : Int {
+enum CPTextFeildTags: Int {
     case oldPassword = 100
     case newPassword
     case confirmPassword
 }
 
-enum ChangePasswordLoadFrom:Int{
+enum ChangePasswordLoadFrom :Int{
     case login
     case menu_login
     case profile
@@ -39,18 +39,18 @@ enum ChangePasswordLoadFrom:Int{
 
 class ChangePasswordViewController: UIViewController {
     
-    @IBOutlet var tableView : UITableView?
-    @IBOutlet var buttonSubmit : UIButton?
+    @IBOutlet var tableView: UITableView?
+    @IBOutlet var buttonSubmit: UIButton?
     
-    var tableViewRowDetails : NSMutableArray?
+    var tableViewRowDetails: NSMutableArray?
     var newPassword = ""
     var oldPassword = ""
     var confirmPassword = ""
-    var temporaryPassword:String = ""
-    var viewLoadFrom:ChangePasswordLoadFrom = .profile
+    var temporaryPassword: String = ""
+    var viewLoadFrom: ChangePasswordLoadFrom = .profile
     
     
-//MARK:- ViewController Lifecycle
+// MARK:- ViewController Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -65,7 +65,7 @@ class ChangePasswordViewController: UIViewController {
         IQKeyboardManager.sharedManager().enable = true
         
         //Used for background tap dismiss keyboard
-        let tapGesture : UITapGestureRecognizer = UITapGestureRecognizer.init(target: self, action: #selector(ChangePasswordViewController.dismissKeyboard))
+        let tapGesture: UITapGestureRecognizer = UITapGestureRecognizer.init(target: self, action: #selector(ChangePasswordViewController.dismissKeyboard))
         self.tableView?.addGestureRecognizer(tapGesture)
         
         
@@ -103,7 +103,7 @@ class ChangePasswordViewController: UIViewController {
         }
     }
 
-//MARK:- Utility Methods
+// MARK:- Utility Methods
     /**
      
      Used to show the alert using Utility
@@ -111,7 +111,7 @@ class ChangePasswordViewController: UIViewController {
      @param textMessage   used to display the text in the alert
      
      */
-    func showAlertMessages(textMessage : String){
+    func showAlertMessages(textMessage: String){
         UIUtilities.showAlertMessage("", errorMessage: NSLocalizedString(textMessage, comment: ""), errorAlertActionTitle: NSLocalizedString("OK", comment: ""), viewControllerUsed: self)
     }
     
@@ -151,7 +151,7 @@ class ChangePasswordViewController: UIViewController {
     }
     
     
-//MARK:- Button Actions
+// MARK:- Button Actions
     
     /**
      
@@ -195,7 +195,7 @@ class ChangePasswordViewController: UIViewController {
     }
 }
 
-//MARK:- TableView Data source
+// MARK:- TableView Data source
 extension ChangePasswordViewController : UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -224,8 +224,8 @@ extension ChangePasswordViewController : UITableViewDataSource {
 }
 
 
-//MARK:- TableView Delegates
-extension ChangePasswordViewController :  UITableViewDelegate {
+// MARK:- TableView Delegates
+extension ChangePasswordViewController:  UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
@@ -234,8 +234,8 @@ extension ChangePasswordViewController :  UITableViewDelegate {
 }
 
 
-//MARK:- Textfield Delegate
-extension ChangePasswordViewController : UITextFieldDelegate{
+// MARK:- Textfield Delegate
+extension ChangePasswordViewController: UITextFieldDelegate{
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
         print(textField.tag)
@@ -292,8 +292,8 @@ extension ChangePasswordViewController : UITextFieldDelegate{
 }
 
 
-//MARK:- Webservice delegates
-extension ChangePasswordViewController:NMWebServiceDelegate {
+// MARK:- Webservice delegates
+extension ChangePasswordViewController: NMWebServiceDelegate {
     
     func startedRequest(_ manager: NetworkManager, requestName: NSString) {
         Logger.sharedInstance.info("requestname : \(requestName)")
@@ -356,7 +356,7 @@ extension ChangePasswordViewController:NMWebServiceDelegate {
             })
         }
         else {
-          UIUtilities.showAlertWithTitleAndMessage(title:NSLocalizedString(kErrorTitle, comment: "") as NSString, message: error.localizedDescription as NSString)
+          UIUtilities.showAlertWithTitleAndMessage(title: NSLocalizedString(kErrorTitle, comment: "") as NSString, message: error.localizedDescription as NSString)
         }
     }
 }

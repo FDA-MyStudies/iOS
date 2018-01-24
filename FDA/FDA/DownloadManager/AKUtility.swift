@@ -34,18 +34,18 @@ open class AKUtility: NSObject {
     }()
 
     open class func getUniqueFileNameWithPath(_ filePath : NSString) -> NSString {
-        let fullFileName        : NSString = filePath.lastPathComponent as NSString
-        let fileName            : NSString = fullFileName.deletingPathExtension as NSString
-        let fileExtension       : NSString = fullFileName.pathExtension as NSString
-        var suggestedFileName   : NSString = fileName
+        let fullFileName: NSString = filePath.lastPathComponent as NSString
+        let fileName: NSString = fullFileName.deletingPathExtension as NSString
+        let fileExtension: NSString = fullFileName.pathExtension as NSString
+        var suggestedFileName: NSString = fileName
         
-        var isUnique            : Bool = false
-        var fileNumber          : Int = 0
+        var isUnique: Bool = false
+        var fileNumber: Int = 0
         
-        let fileManger          : FileManager = FileManager.default
+        let fileManger: FileManager = FileManager.default
         
         repeat {
-            var fileDocDirectoryPath : NSString?
+            var fileDocDirectoryPath: NSString?
             
             if fileExtension.length > 0 {
                 fileDocDirectoryPath = "\(filePath.deletingLastPathComponent)/\(suggestedFileName).\(fileExtension)" as NSString?
@@ -53,7 +53,7 @@ open class AKUtility: NSObject {
                 fileDocDirectoryPath = "\(filePath.deletingLastPathComponent)/\(suggestedFileName)" as NSString?
             }
             
-            let isFileAlreadyExists : Bool = fileManger.fileExists(atPath: fileDocDirectoryPath! as String)
+            let isFileAlreadyExists: Bool = fileManger.fileExists(atPath: fileDocDirectoryPath! as String)
             
             if isFileAlreadyExists {
                 fileNumber += 1
@@ -70,8 +70,8 @@ open class AKUtility: NSObject {
         return suggestedFileName
     }
     
-    open class func calculateFileSizeInUnit(_ contentLength : Int64) -> Float {
-        let dataLength : Float64 = Float64(contentLength)
+    open class func calculateFileSizeInUnit(_ contentLength: Int64) -> Float {
+        let dataLength: Float64 = Float64(contentLength)
         if dataLength >= (1024.0*1024.0*1024.0) {
             return Float(dataLength/(1024.0*1024.0*1024.0))
         } else if dataLength >= 1024.0*1024.0 {
@@ -83,7 +83,7 @@ open class AKUtility: NSObject {
         }
     }
     
-    open class func calculateUnit(_ contentLength : Int64) -> NSString {
+    open class func calculateUnit(_ contentLength: Int64) -> NSString {
         if(contentLength >= (1024*1024*1024)) {
             return "GB"
         } else if contentLength >= (1024*1024) {
@@ -95,8 +95,8 @@ open class AKUtility: NSObject {
         }
     }
     
-    open class func addSkipBackupAttributeToItemAtURL(_ docDirectoryPath : NSString) -> Bool {
-        let url : URL = URL(fileURLWithPath: docDirectoryPath as String)
+    open class func addSkipBackupAttributeToItemAtURL(_ docDirectoryPath: NSString) -> Bool {
+        let url: URL = URL(fileURLWithPath: docDirectoryPath as String)
         let fileManager = FileManager.default
         if fileManager.fileExists(atPath: url.path) {
             

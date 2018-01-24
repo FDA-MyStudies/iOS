@@ -23,7 +23,7 @@
 
 import Foundation
 
-enum ResourceLevel:String{
+enum ResourceLevel: String{
     
     case gateway = "gateway"
     case study = "study"
@@ -43,20 +43,20 @@ let kResourceAudience = "audience"
  */
 
 class Resource {
-    var level:ResourceLevel?
-    var key:String?
-    var type:String?
-    var notificationMessage:String?
-    var file:File?
-    var audience:Audience?
-    var resourcesId:String?
-    var configration:Dictionary<String, Any>?
-    var startDate:Date?
-    var endDate:Date?
-    var anchorDateStartDays:Int?
-    var anchorDateEndDays:Int?
-    var title:String?
-    var povAvailable:Bool = false
+    var level: ResourceLevel?
+    var key: String?
+    var type: String?
+    var notificationMessage: String?
+    var file: File?
+    var audience: Audience?
+    var resourcesId: String?
+    var configration: Dictionary<String, Any>?
+    var startDate: Date?
+    var endDate: Date?
+    var anchorDateStartDays: Int?
+    var anchorDateEndDays: Int?
+    var title: String?
+    var povAvailable: Bool = false
     
     /**
      Default Initializer
@@ -72,7 +72,7 @@ class Resource {
     /**
      initializer method with ditionary of properties
      */
-    init(detail:Dictionary<String, Any>) {
+    init(detail: Dictionary<String, Any>) {
         
         if Utilities.isValidObject(someObject: detail as AnyObject?){
             
@@ -120,7 +120,7 @@ class Resource {
                 self.title = detail[kResourceTitle] as? String
             }
             self.file = File()
-            self.file?.setFileForStudy(dict:detail as NSDictionary)
+            self.file?.setFileForStudy(dict: detail as NSDictionary)
         }else {
             Logger.sharedInstance.debug("Resource Dictionary is null:\(detail)")
         }
@@ -130,7 +130,7 @@ class Resource {
      Setter method for resource
      @param dict, dictionary of properties of resource
      */
-    func setResource(dict:NSDictionary) {
+    func setResource(dict: NSDictionary) {
         
         if Utilities.isValidObject(someObject: dict){
             

@@ -28,8 +28,8 @@ import IQKeyboardManagerSwift
 
 struct FeedbackDetail {
     
-    static var feedback:String = ""
-    static var subject:String = ""
+    static var feedback: String = ""
+    static var subject: String = ""
     
     init(){
         FeedbackDetail.feedback = ""
@@ -37,14 +37,14 @@ struct FeedbackDetail {
     }
 }
 
-class FeedBackViewController : UIViewController{
+class FeedBackViewController: UIViewController{
     
-    @IBOutlet var buttonSubmit : UIButton?
-    @IBOutlet var tableView : UITableView?
-    var feedbackText:String = ""
+    @IBOutlet var buttonSubmit: UIButton?
+    @IBOutlet var tableView: UITableView?
+    var feedbackText: String = ""
     
     
-//MARK:- ViewController Lifecycle
+// MARK:- ViewController Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -79,7 +79,7 @@ class FeedBackViewController : UIViewController{
     }
     
     
-//MARK:- Button Actions
+// MARK:- Button Actions
     
     /**
      
@@ -89,7 +89,7 @@ class FeedBackViewController : UIViewController{
      @param sender  accepts any object
      
      */
-    @IBAction func buttonSubmitAciton(_ sender:UIButton){
+    @IBAction func buttonSubmitAciton(_ sender: UIButton){
         //print("\(ContactUsFeilds.firstName)")
         if FeedbackDetail.subject.isEmpty && FeedbackDetail.feedback.isEmpty {
             UIUtilities.showAlertWithMessage(alertMessage: NSLocalizedString(kMessageAllFieldsAreEmpty, comment: ""))
@@ -107,7 +107,7 @@ class FeedBackViewController : UIViewController{
 }
 
 
-//MARK:- TableView Datasource
+// MARK:- TableView Datasource
 extension FeedBackViewController: UITableViewDataSource{
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -117,7 +117,7 @@ extension FeedBackViewController: UITableViewDataSource{
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         //let tableViewData = tableViewRowDetails?.object(at: indexPath.row) as! NSDictionary
         
-        var cell : UITableViewCell?
+        var cell: UITableViewCell?
         
         if indexPath.row == 0{
             cell = tableView.dequeueReusableCell(withIdentifier: kFeedbackTableViewCellIdentifier1, for: indexPath) as! FeedBackTableViewCell
@@ -147,7 +147,7 @@ extension FeedBackViewController: UITableViewDataSource{
 }
 
 
-//MARK:- TableView Delegates
+// MARK:- TableView Delegates
 extension FeedBackViewController : UITableViewDelegate{
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -156,7 +156,7 @@ extension FeedBackViewController : UITableViewDelegate{
 }
 
 
-//MARK:- UITextview Delegate
+// MARK:- UITextview Delegate
 extension FeedBackViewController: UITextViewDelegate {
     
     func textViewDidChange(_ textView: UITextView) {
@@ -191,8 +191,8 @@ extension FeedBackViewController: UITextViewDelegate {
 }
 
 
-//MARK:- Textfield Delegate
-extension FeedBackViewController : UITextFieldDelegate{
+// MARK:- Textfield Delegate
+extension FeedBackViewController: UITextFieldDelegate{
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
         
@@ -207,8 +207,8 @@ extension FeedBackViewController : UITextFieldDelegate{
 }
 
 
-//MARK- Webservice Delegates
-extension FeedBackViewController:NMWebServiceDelegate {
+// MARK- Webservice Delegates
+extension FeedBackViewController: NMWebServiceDelegate {
     
     func startedRequest(_ manager: NetworkManager, requestName: NSString) {
         
@@ -229,7 +229,7 @@ extension FeedBackViewController:NMWebServiceDelegate {
         
         self.removeProgressIndicator()
         Logger.sharedInstance.info("requestname : \(requestName)")
-        UIUtilities.showAlertWithTitleAndMessage(title:NSLocalizedString("Error", comment: "") as NSString, message: error.localizedDescription as NSString)
+        UIUtilities.showAlertWithTitleAndMessage(title: NSLocalizedString("Error", comment: "") as NSString, message: error.localizedDescription as NSString)
     }
 }
 

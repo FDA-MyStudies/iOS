@@ -25,13 +25,13 @@ import Foundation
 import UIKit
 
 
-class NotificationViewController : UIViewController {
+class NotificationViewController: UIViewController {
     
-    @IBOutlet var tableView : UITableView?
-    var notificationArray:Array<Any> = []
+    @IBOutlet var tableView: UITableView?
+    var notificationArray: Array<Any> = []
     
     
-//MARK:- ViewController LifeCycle
+// MARK:- ViewController LifeCycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,7 +39,7 @@ class NotificationViewController : UIViewController {
         self.title = NSLocalizedString(kNotificationsTitleText, comment: "")
         
         self.loadLocalNotification()
-        WCPServices().getNotification(skip:0, delegate: self)
+        WCPServices().getNotification(skip: 0, delegate: self)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -56,7 +56,7 @@ class NotificationViewController : UIViewController {
         super.viewDidAppear(animated)
     }
 
-//MARK:- Helper Methods
+// MARK:- Helper Methods
     
     func handleNotificationListResponse() {
         if (Gateway.instance.notification?.count)! > 0{
@@ -93,8 +93,8 @@ class NotificationViewController : UIViewController {
                 //Sort Notification according to sort date
               let sorted = self.notificationArray.sorted(by: { (first, second) -> Bool in
                 
-                let date1:Date!
-                let date2:Date!
+                let date1: Date!
+                let date2: Date!
                 if first is AppLocalNotification {
                   date1 = (first as! AppLocalNotification).startDate
                   
@@ -135,7 +135,7 @@ class NotificationViewController : UIViewController {
      @param study    Access the data from Study class
      @return Bool
      */
-    class func checkForStudyState(study:Study) -> Bool {
+    class func checkForStudyState(study: Study) -> Bool {
         
         let currentStudy = study
         let participatedStatus = (currentStudy.userParticipateState.status)
@@ -161,7 +161,7 @@ class NotificationViewController : UIViewController {
         return false
     }
     
-     func isUserJoined(study:Study) -> Bool {
+     func isUserJoined(study: Study) -> Bool {
         
         let currentStudy = study
         let participatedStatus = (currentStudy.userParticipateState.status)
@@ -172,7 +172,7 @@ class NotificationViewController : UIViewController {
     }
     
     
-    class func checkForStudyStateAndParticiapantState(study:Study) -> Bool {
+    class func checkForStudyStateAndParticiapantState(study: Study) -> Bool {
         
         let currentStudy = study
         let participatedStatus = (currentStudy.userParticipateState.status)
@@ -200,9 +200,9 @@ class NotificationViewController : UIViewController {
      Used to push the screen to Study Dashboard
      @param type    Access data from AppNotification class and NotificationSubType Enum
      */
-    func pushToStudyDashboard(type:AppNotification.NotificationSubType?) {
+    func pushToStudyDashboard(type: AppNotification.NotificationSubType?) {
         
-        let viewController:StudyDashboardTabbarViewController?
+        let viewController: StudyDashboardTabbarViewController?
         let storyboard = UIStoryboard(name: kStudyStoryboard, bundle: nil)
         if type != nil {
             
@@ -230,17 +230,17 @@ class NotificationViewController : UIViewController {
     }
 }
 
-//MARK:- TableView Datasource
-extension NotificationViewController : UITableViewDataSource {
+// MARK:- TableView Datasource
+extension NotificationViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return notificationArray.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        var cell : NotificationTableViewCell?
+        var cell: NotificationTableViewCell?
         
-        cell = tableView.dequeueReusableCell(withIdentifier:kNotificationTableViewCellIdentifier , for: indexPath) as? NotificationTableViewCell
+        cell = tableView.dequeueReusableCell(withIdentifier: kNotificationTableViewCellIdentifier , for: indexPath) as? NotificationTableViewCell
         
         cell?.populateCellWith(notification: (notificationArray[indexPath.row]))
         cell?.backgroundColor = UIColor.clear
@@ -248,8 +248,8 @@ extension NotificationViewController : UITableViewDataSource {
     }
 }
 
-//MARK:- TableView Delegates
-extension NotificationViewController : UITableViewDelegate{
+// MARK:- TableView Delegates
+extension NotificationViewController: UITableViewDelegate{
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
@@ -265,8 +265,8 @@ extension NotificationViewController : UITableViewDelegate{
             
             if self.isUserJoined(study: study!) && study?.status == .Active {
                 
-                Study.updateCurrentStudy(study:study! )
-                self.pushToStudyDashboard(type:appNotif.subType )
+                Study.updateCurrentStudy(study: study! )
+                self.pushToStudyDashboard(type: appNotif.subType )
             }
         }
         }
@@ -274,8 +274,8 @@ extension NotificationViewController : UITableViewDelegate{
 }
 
 
-//MARK:- WebService Delegate
-extension NotificationViewController:NMWebServiceDelegate {
+// MARK:- WebService Delegate
+extension NotificationViewController: NMWebServiceDelegate {
     
     func startedRequest(_ manager: NetworkManager, requestName: NSString) {
         Logger.sharedInstance.info("requestname : \(requestName)")

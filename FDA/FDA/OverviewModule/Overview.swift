@@ -26,23 +26,23 @@ import UIKit
 let kOverViewWebsiteLink = "studyWebsite"
 
 class Overview {
-    enum OverviewType:Int {
+    enum OverviewType: Int {
         case gateway
         case study
     }
-    var sections:Array<OverviewSection>!
-    var type:OverviewType = .gateway
-    var websiteLink:String?
+    var sections: Array<OverviewSection>!
+    var type: OverviewType = .gateway
+    var websiteLink: String?
 }
 
 class OverviewSection {
     
-    var title:String?           //title of overview
-    var type:String?            //type of overview video/image
-    var imageURL:String?        //download url of image
-    var text:String?            //short description
-    var link:String?            //used for media link
-    var websiteLink:String?     //used for Website link
+    var title: String?           //title of overview
+    var type: String?            //type of overview video/image
+    var imageURL: String?        //download url of image
+    var text: String?            //short description
+    var link: String?            //used for media link
+    var websiteLink: String?     //used for Website link
     
     init(){
     }
@@ -50,7 +50,7 @@ class OverviewSection {
     /**
      Initializer with Dictionary of properties
     */
-    init(detail:Dictionary<String, Any>){
+    init(detail: Dictionary<String, Any>){
         
         /* Checks the Object (Array or Dictionary) is valid or not */
         if Utilities.isValidObject(someObject: detail as AnyObject?){

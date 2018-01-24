@@ -37,7 +37,7 @@ class ConsentResult {
     var token: String?
     var consentPath: String?
     
-    //MARK: Initializers
+    // MARK: Initializers
     init() {
         
         self.startTime = Date()
@@ -196,7 +196,7 @@ class ConsentResult {
     }
     
     
-    //MARK: Setter & getter methods for ActivityResult
+    // MARK: Setter & getter methods for ActivityResult
     func setActivityResult(activityStepResult: ActivityStepResult)  {
         self.result?.append(activityStepResult)
     }

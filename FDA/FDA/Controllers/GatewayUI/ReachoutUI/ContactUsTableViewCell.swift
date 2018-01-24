@@ -23,7 +23,7 @@
 
 import UIKit
 
-enum ContactTextFieldTags : Int {
+enum ContactTextFieldTags: Int {
     case FirstName = 0
     case Email
     case Subject
@@ -31,8 +31,8 @@ enum ContactTextFieldTags : Int {
 
 class ContactUsTableViewCell: UITableViewCell {
 
-    @IBOutlet var labelType : UILabel?
-    @IBOutlet var textFieldValue : UITextField?
+    @IBOutlet var labelType: UILabel?
+    @IBOutlet var textFieldValue: UITextField?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -53,7 +53,7 @@ class ContactUsTableViewCell: UITableViewCell {
      @param keyboardType    used to select what kind of a keyboard is required
      
      */
-    func populateCellData(data : NSDictionary, keyboardType:UIKeyboardType?){
+    func populateCellData(data: NSDictionary, keyboardType: UIKeyboardType?){
         
         labelType?.text = NSLocalizedString((data["helpText"] as? String)!, comment: "")
         textFieldValue?.placeholder = NSLocalizedString((data["placeHolder"] as? String)!, comment: "")

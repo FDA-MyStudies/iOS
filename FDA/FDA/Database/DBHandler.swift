@@ -116,7 +116,7 @@ class DBHandler: NSObject {
         }
     }
     
-     //MARK:Study
+     // MARK:Study
     /* Save studies 
      @params: studies - Array
      */
@@ -510,7 +510,7 @@ class DBHandler: NSObject {
         
     }
     
-     //MARK:Activity
+     // MARK:Activity
     
     /**
      Saves Activities to DB
@@ -1010,7 +1010,7 @@ class DBHandler: NSObject {
         
     }
     
-    //MARK:-  Activity MetaData
+    // MARK:-  Activity MetaData
     
     /**
      saves activity meta data to DB
@@ -1083,7 +1083,7 @@ class DBHandler: NSObject {
         }
     }
 
-    //MARK:- Dashboard - Statistics
+    // MARK:- Dashboard - Statistics
     
     /**
      Saves the dashboard Stats to Database.
@@ -1188,7 +1188,7 @@ class DBHandler: NSObject {
         
     }
     
-    //MARK:- Dashboard - Charts
+    // MARK:- Dashboard - Charts
     
     /**
      saves Charts for the study in DB
@@ -1380,7 +1380,7 @@ class DBHandler: NSObject {
         return completionHandler(activityAndQuestionKeys)
     }
     
-    //MARK:- RESOURCES
+    // MARK:- RESOURCES
     
     /**
      Saves Resources for Study To DB
@@ -1532,7 +1532,7 @@ class DBHandler: NSObject {
         })
     }
     
-     //MARK:- NOTIFICATION
+     // MARK:- NOTIFICATION
     /**
      saves notification to DB
     */
@@ -1737,7 +1737,7 @@ class DBHandler: NSObject {
         
     }
 
-    //MARK:- DELETE
+    // MARK:- DELETE
     class func deleteAll(){
         
         let realm = DBHandler.getRealmObject()!

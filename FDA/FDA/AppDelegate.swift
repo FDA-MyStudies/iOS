@@ -87,23 +87,23 @@
         
         var iscomingFromForgotPasscode:Bool? =  false
         
-        var isAppLaunched:Bool? = false
+        var isAppLaunched: Bool? = false
         
         let healthStore = HKHealthStore()
         var containerViewController: ResearchContainerViewController? {
             return window?.rootViewController as? ResearchContainerViewController
         }
         
-        var selectedController:UIViewController?
+        var selectedController: UIViewController?
         
         var shouldAddForceUpgradeScreen = false
         
-        var retryView:ComprehensionFailure?
+        var retryView: ComprehensionFailure?
         
-        var blockerScreen:AppUpdateBlocker?
-        var passcodeParentControllerWhileSetup:UIViewController?
+        var blockerScreen: AppUpdateBlocker?
+        var passcodeParentControllerWhileSetup: UIViewController?
         
-        var consentToken:String? = "" //to be used in case of ineligible
+        var consentToken: String? = "" //to be used in case of ineligible
         
         //Register Remote Notification
         func askForNotification() {
@@ -141,7 +141,7 @@
                 
                 let index =  User.currentUser.userId.index(User.currentUser.userId.endIndex
                     , offsetBy: -16)
-                let subKey = User.currentUser.userId.substring(to:index ) // 36 - 12 =  24 characters
+                let subKey = User.currentUser.userId.substring(to: index ) // 36 - 12 =  24 characters
                 ud.set("\(subKey + subStringFromDate)", forKey: kEncryptionKey)
                 
             }else { // Anonymous User
@@ -209,7 +209,7 @@
             
         }
         
-        //MARK: Realm Migragion
+        // MARK: Realm Migragion
         func checkForRealmMigration() {
             
             let config = Realm.Configuration(
@@ -236,7 +236,7 @@
             let _ = try! Realm()
         }
         
-        //MARK: App Delegates
+        // MARK: App Delegates
         
         func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
             // Override point for customization after application launch.
@@ -258,7 +258,7 @@
             SyncUpdate.currentSyncUpdate = SyncUpdate()
             
             //Register observer for Network change
-            NotificationCenter.default.addObserver(SyncUpdate.currentSyncUpdate as Any , selector: #selector(SyncUpdate.currentSyncUpdate?.updateData), name:ReachabilityChangedNotification, object: nil)
+            NotificationCenter.default.addObserver(SyncUpdate.currentSyncUpdate as Any , selector: #selector(SyncUpdate.currentSyncUpdate?.updateData), name: ReachabilityChangedNotification, object: nil)
             
             let ud1 = UserDefaults.standard
             
@@ -398,7 +398,7 @@
             // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
         }
         
-        //MARK:- NOTIFICATION
+        // MARK:- NOTIFICATION
         
         func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
             
@@ -447,7 +447,7 @@
             self.handleLocalNotification(userInfoDetails: (notification.userInfo as? Dictionary<String, Any>)!)
         }
         
-        //MARK: Jailbreak Methods
+        // MARK: Jailbreak Methods
         
         public static func jailbroken(application: UIApplication) -> Bool {
             guard let cydiaUrlScheme = NSURL(string: "cydia://package/com.example.package") else { return isJailbroken() }
@@ -498,9 +498,9 @@
             return true
         }
         
-        //MARK: Add Retry Screen
+        // MARK: Add Retry Screen
         
-        func addRetryScreen(viewController:UIViewController?) {
+        func addRetryScreen(viewController: UIViewController?) {
             
             let navigationController =  (self.window?.rootViewController as? UINavigationController)!
             self.retryView = ComprehensionFailure.instanceFromNib(frame: navigationController.view.frame, detail: nil);
@@ -515,7 +515,7 @@
             UIApplication.shared.keyWindow?.bringSubview(toFront: retryView!)
         }
         
-        //MARK:Custom Navigation Bar
+        // MARK:Custom Navigation Bar
         
         func customizeNavigationBar() {
             UINavigationBar.appearance().titleTextAttributes = [
@@ -523,7 +523,7 @@
             ]
         }
         
-        //MARK: Checker Methods
+        // MARK: Checker Methods
         func checkForAppUpdate() {
             WCPServices().checkForAppUpdates(delegate: self)
         }
@@ -551,9 +551,9 @@
             
             let infoDict = Bundle.main.infoDictionary
             let appId =  infoDict?[kBundleIdentier]
-            let url:URL = URL.init(string:"http://itunes.apple.com/lookup?bundleId=\(appId!)" )!
+            let url: URL = URL.init(string: "http://itunes.apple.com/lookup?bundleId=\(appId!)" )!
             
-            var request =   URLRequest(url:url)
+            var request =   URLRequest(url: url)
             request.cachePolicy = .reloadIgnoringLocalCacheData
             let session = URLSession.shared
             session.dataTask(with: request) {(data, response, error) -> Void in
@@ -562,11 +562,11 @@
                     DispatchQueue.main.async {
                         do {
                             
-                            let parsedDict = try JSONSerialization.jsonObject(with: data!, options:[])
+                            let parsedDict = try JSONSerialization.jsonObject(with: data!, options: [])
                             
-                            if ((parsedDict as? [String:Any])![kResultCount] as? Int)! == 1 {
+                            if ((parsedDict as? [String: Any])![kResultCount] as? Int)! == 1 {
                                 
-                                let resultArray = (((parsedDict as? [String:Any])![kResultsForAppStore]) as? Array<Dictionary<String,Any>>)!
+                                let resultArray = (((parsedDict as? [String: Any])![kResultsForAppStore]) as? Array<Dictionary<String,Any>>)!
                                 let appStoreVersion = ((resultArray.first)?[kAppStoreVersion]  as? String)!
                                 let currentVersion = infoDict?[kCFBundleShortVersion]
                                 
@@ -607,7 +607,7 @@
         /**
          check the  current Consent Status for Updated Version
          */
-        func checkConsentStatus(controller:UIViewController) {
+        func checkConsentStatus(controller: UIViewController) {
             
             self.selectedController = controller
             
@@ -616,13 +616,13 @@
                 
                 let navigationController =  (self.window?.rootViewController as? UINavigationController)!
                 
-                var topController:UIViewController = navigationController
+                var topController: UIViewController = navigationController
                 if navigationController.viewControllers.count > 0 {
                     topController = navigationController.viewControllers.first!
                 }
                 
                 UIUtilities.showAlertMessageWithTwoActionsAndHandler(NSLocalizedString(kConsentUpdatedTitle, comment: ""), errorMessage: NSLocalizedString(kMessageConsentUpdated, comment: ""), errorAlertActionTitle: NSLocalizedString(kReviewTitle, comment: ""),
-                                                                     errorAlertActionTitle2:nil, viewControllerUsed: topController,
+                                                                     errorAlertActionTitle2: nil, viewControllerUsed: topController,
                                                                      action1: {
                                                                         
                                                                         self.addAndRemoveProgress(add: true)
@@ -641,12 +641,12 @@
          */
         func createEligibilityConsentTask() {
             
-            let taskViewController:ORKTaskViewController?
+            let taskViewController: ORKTaskViewController?
             
             //create orderedTask
-            let consentTask:ORKOrderedTask? = ConsentBuilder.currentConsent?.createConsentTask() as! ORKOrderedTask?
+            let consentTask: ORKOrderedTask? = ConsentBuilder.currentConsent?.createConsentTask() as! ORKOrderedTask?
             
-            taskViewController = ORKTaskViewController(task:consentTask, taskRun: nil)
+            taskViewController = ORKTaskViewController(task: consentTask, taskRun: nil)
             
             taskViewController?.delegate = self
             taskViewController?.outputDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
@@ -673,9 +673,9 @@
          @param userInfoDetails, contains the info for notification
          */
         
-        func handleLocalNotification(userInfoDetails:Dictionary<String,Any>) {
+        func handleLocalNotification(userInfoDetails: Dictionary<String,Any>) {
             
-            var initialVC:UIViewController?
+            var initialVC: UIViewController?
             
             //getting topmost visible controller
             let navigationController =  (self.window?.rootViewController as? UINavigationController)!
@@ -711,10 +711,10 @@
          Handler for local & remote notification
          @param userInfoDetails, contains the info for notification
          */
-        func handleLocalAndRemoteNotification(userInfoDetails:Dictionary<String,Any>) {
+        func handleLocalAndRemoteNotification(userInfoDetails: Dictionary<String,Any>) {
             
-            var notificationType:String? = ""
-            var notificationSubType:AppNotification.NotificationSubType? = .Announcement
+            var notificationType: String? = ""
+            var notificationSubType: AppNotification.NotificationSubType? = .Announcement
             //User info is valid
             if (userInfoDetails.count) > 0 {
                 
@@ -727,7 +727,7 @@
                 
                 if notificationType == AppNotification.NotificationType.Study.rawValue { //Study Level Notification
                     
-                    var studyId:String? = ""
+                    var studyId: String? = ""
                     
                     if Utilities.isValidValue(someObject: userInfoDetails[kStudyId] as AnyObject) {
                         studyId = userInfoDetails[kStudyId] as? String
@@ -735,7 +735,7 @@
                     
                     if studyId != nil || studyId != "" {
                         
-                        var initialVC:UIViewController?
+                        var initialVC: UIViewController?
                         
                         if Gateway.instance.studies?.isEmpty == false {
                             
@@ -758,13 +758,13 @@
                         switch notificationSubType! as AppNotification.NotificationSubType {
                         case .Activity, .Resource: //Activity & Resource  Notifications
                             
-                            var activityId:String? = ""
+                            var activityId: String? = ""
                             
                             if Utilities.isValidValue(someObject: userInfoDetails[kActivityId] as AnyObject) {
                                 activityId = userInfoDetails[kActivityId] as? String
                             }
                             
-                            var resourceId:String? = ""
+                            var resourceId: String? = ""
                             if Utilities.isValidValue(someObject: userInfoDetails[kResourceId] as AnyObject) {
                                 resourceId = userInfoDetails[kResourceId] as? String
                             }
@@ -1165,7 +1165,7 @@
         }
     }
     
-    //MARK: Webservices delegates
+    // MARK: Webservices delegates
     
     extension AppDelegate: NMWebServiceDelegate {
         func startedRequest(_ manager: NetworkManager, requestName: NSString) {
@@ -1245,7 +1245,7 @@
     
     
     extension AppDelegate: ORKTaskViewControllerDelegate {
-        //MARK:ORKTaskViewController Delegate
+        // MARK:ORKTaskViewController Delegate
         
         func taskViewControllerSupportsSaveAndRestore(_ taskViewController: ORKTaskViewController) -> Bool {
             return true
@@ -1409,7 +1409,7 @@
             }
         }
         
-        //MARK:- StepViewController Delegate
+        // MARK:- StepViewController Delegate
         
         public func stepViewController(_ stepViewController: ORKStepViewController, didFinishWith direction: ORKStepViewControllerNavigationDirection) {
         }
@@ -1605,7 +1605,7 @@
         }
     }
     
-    //MARK: Passcode Delegate
+    // MARK: Passcode Delegate
     extension AppDelegate: ORKPasscodeDelegate {
         func passcodeViewControllerDidFinish(withSuccess viewController: UIViewController) {
             containerViewController?.contentHidden = false
@@ -1690,7 +1690,7 @@
         }
     }
     
-    //MARK:ComprehensionFailureDelegate
+    // MARK:ComprehensionFailureDelegate
     
     extension AppDelegate: ComprehensionFailureDelegate {
         func didTapOnCancel() {
@@ -1703,7 +1703,7 @@
         }
     }
     
-    //MARK: UNUserNotification Delegate
+    // MARK: UNUserNotification Delegate
     
     @available(iOS 10, *)
     extension AppDelegate : UNUserNotificationCenterDelegate {

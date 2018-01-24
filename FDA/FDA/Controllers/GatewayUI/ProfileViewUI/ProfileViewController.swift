@@ -53,7 +53,7 @@ let korkPasscode = "ORKPasscode"
 
 
 // Cell Toggle Switch Types
-enum ToggelSwitchTags:Int{
+enum ToggelSwitchTags: Int{
     case usePasscode = 3
     case useTouchId = 6
     case receivePush = 4
@@ -62,24 +62,24 @@ enum ToggelSwitchTags:Int{
 
 class ProfileViewController: UIViewController, SlideMenuControllerDelegate {
     
-    var tableViewRowDetails : NSMutableArray?
-    var datePickerView:UIDatePicker?
-    var isCellEditable:Bool?
+    var tableViewRowDetails: NSMutableArray?
+    var datePickerView: UIDatePicker?
+    var isCellEditable: Bool?
     var user = User.currentUser
-    var isPasscodeViewPresented:Bool = false
+    var isPasscodeViewPresented: Bool = false
     
-    var passcodeStateIsEditing:Bool = false
+    var passcodeStateIsEditing: Bool = false
     
     var isProfileEdited = false
     
-    @IBOutlet var tableViewProfile : UITableView?
-    @IBOutlet var tableViewFooterViewProfile : UIView?
-    @IBOutlet var buttonLeadTime:UIButton?
-    @IBOutlet var editBarButtonItem:UIBarButtonItem?
-    @IBOutlet var tableTopConstraint:NSLayoutConstraint?
+    @IBOutlet var tableViewProfile: UITableView?
+    @IBOutlet var tableViewFooterViewProfile: UIView?
+    @IBOutlet var buttonLeadTime: UIButton?
+    @IBOutlet var editBarButtonItem: UIBarButtonItem?
+    @IBOutlet var tableTopConstraint: NSLayoutConstraint?
     
     
-//MARK:- ViewController Lifecycle
+// MARK:- ViewController Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -92,7 +92,7 @@ class ProfileViewController: UIViewController, SlideMenuControllerDelegate {
         tableViewRowDetails = NSMutableArray.init(contentsOfFile: plistPath!)
         
         //Resigning First Responder on outside tap
-        let gestureRecognizer : UITapGestureRecognizer = UITapGestureRecognizer.init(target: self, action: #selector(ProfileViewController.dismissKeyboard))
+        let gestureRecognizer: UITapGestureRecognizer = UITapGestureRecognizer.init(target: self, action: #selector(ProfileViewController.dismissKeyboard))
         self.tableViewProfile?.addGestureRecognizer(gestureRecognizer)
         
         //Initial data setup
@@ -135,7 +135,7 @@ class ProfileViewController: UIViewController, SlideMenuControllerDelegate {
         print("Left menu is closed")
     }
     
-//MARK:- Button Actions
+// MARK:- Button Actions
     
     /**
      
@@ -146,7 +146,7 @@ class ProfileViewController: UIViewController, SlideMenuControllerDelegate {
      */
     
     
-    @IBAction func buttonActionChangePassCode(_ sender:UIButton){
+    @IBAction func buttonActionChangePassCode(_ sender: UIButton){
         
         let passcodeViewController = ORKPasscodeViewController.passcodeEditingViewController(withText: "", delegate: self, passcodeType: .type4Digit)
         passcodeStateIsEditing = true
@@ -162,7 +162,7 @@ class ProfileViewController: UIViewController, SlideMenuControllerDelegate {
      @param sender    Accepts UIbarButtonItem
 
      */
-    @IBAction func editBarButtonAction(_ sender:UIBarButtonItem){
+    @IBAction func editBarButtonAction(_ sender: UIBarButtonItem){
         
         if self.isCellEditable! == false  {
             self.isCellEditable =  true
@@ -196,7 +196,7 @@ class ProfileViewController: UIViewController, SlideMenuControllerDelegate {
         let alertView = UIAlertController(title: kLeadTimeSelectText, message: "\n\n\n\n\n\n\n\n\n\n\n", preferredStyle: UIAlertControllerStyle.actionSheet);
         
         
-        datePickerView = UIDatePicker.init(frame:CGRect(x: 10, y: 30, width: alertView.view.frame.size.width - 40, height: 216) )
+        datePickerView = UIDatePicker.init(frame: CGRect(x: 10, y: 30, width: alertView.view.frame.size.width - 40, height: 216) )
         
         datePickerView?.datePickerMode = .countDownTimer
         
@@ -213,14 +213,14 @@ class ProfileViewController: UIViewController, SlideMenuControllerDelegate {
             
             let calender:Calendar? = Calendar.current
             
-            if Utilities.isValidValue(someObject:self.datePickerView?.date as AnyObject? )  {
+            if Utilities.isValidValue(someObject: self.datePickerView?.date as AnyObject? )  {
                 
                 let dateComponent = calender?.dateComponents([.hour, .minute], from: (self.datePickerView?.date)!)
                 
                 
                 // title =  hour : minute,  if hour < 10, hour =  "0" + hour ,if minute < 10, minute =  "0" + minute
                 
-                let title:String! = (((dateComponent?.hour)! as Int) < 10 ? "0\((dateComponent?.hour)! as Int)" : "\((dateComponent?.hour)! as Int)") + ":"
+                let title: String! = (((dateComponent?.hour)! as Int) < 10 ? "0\((dateComponent?.hour)! as Int)" : "\((dateComponent?.hour)! as Int)") + ":"
                     
                     + (((dateComponent?.minute)! as Int) < 10 ? "0\((dateComponent?.minute)! as Int)" : "\((dateComponent?.minute)! as Int)")
                 
@@ -302,7 +302,7 @@ class ProfileViewController: UIViewController, SlideMenuControllerDelegate {
     }
     
     
-//MARK:- Utility Methods
+// MARK:- Utility Methods
     
     /**
      
@@ -330,7 +330,7 @@ class ProfileViewController: UIViewController, SlideMenuControllerDelegate {
      
      */
     func sendRequestToDeleteAccount(){
-        let studies:Array<String> = []
+        let studies: Array<String> = []
         UserServices().deActivateAccount(listOfStudyIds: studies, delegate: self)
     }
     
@@ -406,12 +406,12 @@ class ProfileViewController: UIViewController, SlideMenuControllerDelegate {
         self.buttonLeadTime?.isUserInteractionEnabled =  false
         
         
-        var touchIdEnabled:Bool? = true
+        var touchIdEnabled: Bool? = true
         
         
         // 1. Create a authentication context
         let authenticationContext = LAContext()
-        var error:NSError?
+        var error: NSError?
         
         // 2. Check if the device has a fingerprint sensor
         // If not, show the user an alert view and bail out!
@@ -420,11 +420,11 @@ class ProfileViewController: UIViewController, SlideMenuControllerDelegate {
             return
         }
         
-        var passcodeDict:Dictionary<String,Any> =  (tableViewRowDetails?[3] as? Dictionary<String, Any>)!
+        var passcodeDict: Dictionary<String,Any> =  (tableViewRowDetails?[3] as? Dictionary<String, Any>)!
         
         
-        let keychainPasscodeDict:Dictionary<String,Any>? = ORKKeychainWrapper.object(forKey: korkPasscode, error: &error)  == nil ? nil : (ORKKeychainWrapper.object(forKey: korkPasscode, error: &error)  as?  Dictionary<String,Any>)
-        var istouchIdEnabled:Bool =  false
+        let keychainPasscodeDict: Dictionary<String,Any>? = ORKKeychainWrapper.object(forKey: korkPasscode, error: &error)  == nil ? nil : (ORKKeychainWrapper.object(forKey: korkPasscode, error: &error)  as?  Dictionary<String,Any>)
+        var istouchIdEnabled: Bool =  false
         if keychainPasscodeDict != nil &&  (keychainPasscodeDict?.count)! > 0{
             istouchIdEnabled = ((keychainPasscodeDict?[ktouchid])! as? Bool)!
         }
@@ -450,15 +450,15 @@ class ProfileViewController: UIViewController, SlideMenuControllerDelegate {
      @param Sender  has to be a UISwitch
      
      */
-    func toggleValueChanged(_ sender:UISwitch)  {
+    func toggleValueChanged(_ sender: UISwitch)  {
         
         isProfileEdited = true
         
-        let toggle:UISwitch? = sender as UISwitch
+        let toggle: UISwitch? = sender as UISwitch
         
         if  user.settings != nil {
             
-            switch ToggelSwitchTags(rawValue:sender.tag)! as ToggelSwitchTags{
+            switch ToggelSwitchTags(rawValue: sender.tag)! as ToggelSwitchTags{
             case .usePasscode:
                 user.settings?.passcode = toggle?.isOn
                 
@@ -525,7 +525,7 @@ class ProfileViewController: UIViewController, SlideMenuControllerDelegate {
      @param sender  Accepts UIbutton Object
      
      */
-    func pushToChangePassword(_ sender:UIButton)  {
+    func pushToChangePassword(_ sender: UIButton)  {
         self.performSegue(withIdentifier: kChangePasswordSegueIdentifier, sender: nil)
     }
     
@@ -562,7 +562,7 @@ class ProfileViewController: UIViewController, SlideMenuControllerDelegate {
      @param textMessage    message to be displayed
      
      */
-    func showAlertMessages(textMessage : String){
+    func showAlertMessages(textMessage: String){
         UIUtilities.showAlertMessage("", errorMessage: NSLocalizedString(textMessage, comment: ""), errorAlertActionTitle: NSLocalizedString("OK", comment: ""), viewControllerUsed: self)
     }
     
@@ -587,7 +587,7 @@ class ProfileViewController: UIViewController, SlideMenuControllerDelegate {
                 self.navigationController?.present(taskViewController, animated: false, completion: nil)
             }
             else{
-                let passcodeViewController = ORKPasscodeViewController.passcodeAuthenticationViewController(withText: "", delegate:self)
+                let passcodeViewController = ORKPasscodeViewController.passcodeAuthenticationViewController(withText: "", delegate: self)
                 
                 self.navigationController?.present(passcodeViewController, animated: false, completion: nil)
             }
@@ -604,7 +604,7 @@ class ProfileViewController: UIViewController, SlideMenuControllerDelegate {
     }
     
     
-//MARK:- Segue Method
+// MARK:- Segue Method
     
     /**
      
@@ -625,8 +625,8 @@ class ProfileViewController: UIViewController, SlideMenuControllerDelegate {
 }
 
 
-//MARK:- TableView Data source
-extension ProfileViewController : UITableViewDataSource {
+// MARK:- TableView Data source
+extension ProfileViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return tableViewRowDetails!.count
@@ -642,14 +642,14 @@ extension ProfileViewController : UITableViewDataSource {
             let  cell = (tableView.dequeueReusableCell(withIdentifier: "CommonDetailsCell", for: indexPath) as? SignUpTableViewCell)!
             cell.textFieldValue?.text = ""
             
-            var isSecuredEntry : Bool = false
+            var isSecuredEntry: Bool = false
             cell.isUserInteractionEnabled = self.isCellEditable!
             
             cell.textFieldValue?.tag = indexPath.row
             cell.textFieldValue?.delegate = self
             
-            var keyBoardType:UIKeyboardType? =  UIKeyboardType.default
-            let textFieldTag = TextFieldTags(rawValue:indexPath.row)!
+            var keyBoardType: UIKeyboardType? =  UIKeyboardType.default
+            let textFieldTag = TextFieldTags(rawValue: indexPath.row)!
             
             // TextField properties set up according to index
             switch  textFieldTag {
@@ -663,11 +663,11 @@ extension ProfileViewController : UITableViewDataSource {
                 cell.isUserInteractionEnabled = true
                 
                 isSecuredEntry = true
-            case .EmailId :
+            case .EmailId:
                 keyBoardType = .emailAddress
                 isSecuredEntry = false
                 
-            case .ConfirmPassword : //ChangePasscode
+            case .ConfirmPassword: //ChangePasscode
                 
                 cell.textFieldValue?.isHidden = true
                 cell.buttonChangePassword?.isHidden =  false
@@ -731,8 +731,8 @@ extension ProfileViewController : UITableViewDataSource {
     }
 }
 
-//MARK:- TableView Delegates
-extension ProfileViewController : UITableViewDelegate{
+// MARK:- TableView Delegates
+extension ProfileViewController: UITableViewDelegate{
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
@@ -740,8 +740,8 @@ extension ProfileViewController : UITableViewDelegate{
     }
 }
 
-//MARK:- Textfield Delegate
-extension ProfileViewController : UITextFieldDelegate{
+// MARK:- Textfield Delegate
+extension ProfileViewController: UITextFieldDelegate{
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
         print(textField.tag)
@@ -751,7 +751,7 @@ extension ProfileViewController : UITextFieldDelegate{
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         
-        let tag:TextFieldTags = TextFieldTags(rawValue: textField.tag)!
+        let tag: TextFieldTags = TextFieldTags(rawValue: textField.tag)!
         // Disabling space editing
         
         let finalString = textField.text! + string
@@ -798,8 +798,8 @@ extension ProfileViewController : UITextFieldDelegate{
 }
 
 
-//MARK:- UserService Response handler
-extension ProfileViewController:NMWebServiceDelegate {
+// MARK:- UserService Response handler
+extension ProfileViewController: NMWebServiceDelegate {
     
     func startedRequest(_ manager: NetworkManager, requestName: NSString) {
         Logger.sharedInstance.info("requestname : \(requestName)")
@@ -852,13 +852,13 @@ extension ProfileViewController:NMWebServiceDelegate {
         }
         else {
             
-            UIUtilities.showAlertWithTitleAndMessage(title:NSLocalizedString(kErrorTitle, comment: "") as NSString, message: error.localizedDescription as NSString)
+            UIUtilities.showAlertWithTitleAndMessage(title: NSLocalizedString(kErrorTitle, comment: "") as NSString, message: error.localizedDescription as NSString)
         }
     }
 }
 
 
-//MARK:- ORKPasscode Delegate
+// MARK:- ORKPasscode Delegate
 extension ProfileViewController: ORKPasscodeDelegate {
     
     func passcodeViewControllerDidFinish(withSuccess viewController: UIViewController) {
@@ -894,8 +894,8 @@ extension ProfileViewController: ORKPasscodeDelegate {
 
 
 
-//MARK:- ORKTaskViewController Delegate
-extension ProfileViewController:ORKTaskViewControllerDelegate{
+// MARK:- ORKTaskViewController Delegate
+extension ProfileViewController: ORKTaskViewControllerDelegate{
     
     func taskViewControllerSupportsSaveAndRestore(_ taskViewController: ORKTaskViewController) -> Bool {
         return true
@@ -903,7 +903,7 @@ extension ProfileViewController:ORKTaskViewControllerDelegate{
     
     public func taskViewController(_ taskViewController: ORKTaskViewController, didFinishWith reason: ORKTaskViewControllerFinishReason, error: Error?) {
         
-        var taskResult:Any?
+        var taskResult: Any?
         
         switch reason {
             
@@ -935,7 +935,7 @@ extension ProfileViewController:ORKTaskViewControllerDelegate{
             print("discarded")
             
             if taskViewController.task?.identifier != "ChangePassCodeTask"{
-                user.settings?.passcode = user.settings?.passcode == true ? false : true
+                user.settings?.passcode = user.settings?.passcode == true ? false: true
             }
             
             taskResult = taskViewController.result

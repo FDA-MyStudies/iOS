@@ -25,7 +25,7 @@ import UIKit
 
 class ResourcesListCell: UITableViewCell {
 
-    @IBOutlet var labelResourceTitle:UILabel?
+    @IBOutlet var labelResourceTitle: UILabel?
     
     override func awakeFromNib() {
         super.awakeFromNib()

@@ -26,34 +26,25 @@ import UIKit
 import MediaPlayer
 import AVKit
 
-class FirstGatewayOverviewViewController : UIViewController{
+class FirstGatewayOverviewViewController: UIViewController{
     
-    var tableViewRowDetails : NSMutableArray!
+    var tableViewRowDetails: NSMutableArray!
     
-    @IBOutlet var imageViewBackgroundImage : UIImageView?
-    @IBOutlet var buttonWatchVideo : UIButton?
-    @IBOutlet var buttonGetStarted : UIButton?
-    @IBOutlet var labelDescriptionText : UILabel?
-    @IBOutlet var labelTitleText : UILabel?
+    @IBOutlet var imageViewBackgroundImage: UIImageView?
+    @IBOutlet var buttonWatchVideo: UIButton?
+    @IBOutlet var buttonGetStarted: UIButton?
+    @IBOutlet var labelDescriptionText: UILabel?
+    @IBOutlet var labelTitleText: UILabel?
     
-    var pageIndex:Int!
-    var overviewSectionDetail : OverviewSection!
-    var moviePlayer:MPMoviePlayerViewController!
-    var playerViewController:AVPlayerViewController!
+    var pageIndex: Int!
+    var overviewSectionDetail: OverviewSection!
+    var moviePlayer: MPMoviePlayerViewController!
+    var playerViewController: AVPlayerViewController!
     
     
-//MARK:- View Controller Lifecycle
+// MARK:- View Controller Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        // create effect
-        //let blur = UIBlurEffect(style: UIBlurEffectStyle.dark)
-        
-        // add effect to an effect view
-        //let effectView = UIVisualEffectView(effect: blur)
-        //effectView.frame = (imageViewBackgroundImage?.frame)!
-        //self.imageViewBackgroundImage?.addSubview(effectView)
-    
         
         if overviewSectionDetail.link == nil {
             buttonWatchVideo?.isHidden = true
@@ -82,7 +73,7 @@ class FirstGatewayOverviewViewController : UIViewController{
         
     }
     
-//MARK:- Movie Player methods
+// MARK:- Movie Player methods
     
     /**
      
@@ -103,7 +94,7 @@ class FirstGatewayOverviewViewController : UIViewController{
     }
     
     
-//MARK:- Button Action
+// MARK:- Button Action
     
     /**
      
@@ -121,15 +112,6 @@ class FirstGatewayOverviewViewController : UIViewController{
         else {
             
             let url = URL.init(string: urlString)
-            
-//            moviePlayer = MPMoviePlayerViewController(contentURL:url)
-//            moviePlayer.moviePlayer.movieSourceType = .streaming
-//            
-//            NotificationCenter.default.addObserver(self, selector:#selector(StudyOverviewViewControllerFirst.moviePlayBackDidFinish(notification:)),
-//            name: NSNotification.Name.MPMoviePlayerPlaybackDidFinish,
-//            object: moviePlayer.moviePlayer)
-//            
-//            self.present(moviePlayer, animated: true, completion: nil)
             
             let player = AVPlayer(url: url!)
             NotificationCenter.default.addObserver(self, selector:#selector(StudyOverviewViewControllerFirst.playerDidFinishPlaying(note:)),

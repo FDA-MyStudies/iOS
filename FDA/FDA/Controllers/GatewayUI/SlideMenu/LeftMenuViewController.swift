@@ -40,7 +40,7 @@ let kAlertMessageSignOutSync = "Are you sure you want to sign out? Incomplete ac
 
 let kAlertSignOutLaterTitle = "Sign Out later"
 
-//MARK:Segue Identifiers
+// MARK:Segue Identifiers
 let kLoginStoryboardIdentifier = "Login"
 
 
@@ -52,11 +52,11 @@ enum LeftMenu: Int {
     case signup
 }
 
-protocol LeftMenuProtocol : class {
+protocol LeftMenuProtocol: class {
     func changeViewController(_ menu: LeftMenu)
 }
 
-class LeftMenuViewController : UIViewController, LeftMenuProtocol {
+class LeftMenuViewController: UIViewController, LeftMenuProtocol {
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var labelVersion: UILabel!
@@ -64,11 +64,11 @@ class LeftMenuViewController : UIViewController, LeftMenuProtocol {
     @IBOutlet weak var tableFooterView: UIView!
     @IBOutlet weak var buttonSignOut: UIButton?
     
-    var menus = [ ["menuTitle":"Home",
-                   "iconName":"home_menu1-1"],
+    var menus = [ ["menuTitle": "Home",
+                   "iconName": "home_menu1-1"],
                   
-                  ["menuTitle":"Resources",
-                   "iconName":"resources_menu1"],
+                  ["menuTitle": "Resources",
+                   "iconName": "resources_menu1"],
                   ]
     var studyListViewController: UINavigationController!
     var notificationController: UIViewController!
@@ -76,14 +76,14 @@ class LeftMenuViewController : UIViewController, LeftMenuProtocol {
     var profileviewController: UIViewController!
     var nonMenuViewController: UIViewController!
     var reachoutViewController: UINavigationController!
-    var signInViewController:UINavigationController!
-    var signUpViewController:UINavigationController!
+    var signInViewController: UINavigationController!
+    var signUpViewController: UINavigationController!
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
     
-//MARK:- ViewController Lifecycle
+// MARK:- ViewController Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -144,41 +144,41 @@ class LeftMenuViewController : UIViewController, LeftMenuProtocol {
         
         let user = User.currentUser
         
-        menus = [ ["menuTitle":"Home",
-                   "iconName":"home_menu1-1"],
+        menus = [ ["menuTitle": "Home",
+                   "iconName": "home_menu1-1"],
                   
-                  ["menuTitle":"Resources",
-                   "iconName":"resources_menu1"],
+                  ["menuTitle": "Resources",
+                   "iconName": "resources_menu1"],
         ]
         
         if user.userType == .FDAUser {
-            menus.append(["menuTitle":"My Account",
-                          "iconName":"profile_menu1"])
-            menus.append(["menuTitle":"Reach Out",
-                          "iconName":"reachout_menu1"])
+            menus.append(["menuTitle": "My Account",
+                          "iconName": "profile_menu1"])
+            menus.append(["menuTitle": "Reach Out",
+                          "iconName": "reachout_menu1"])
            
             self.buttonSignOut?.isHidden = false
         }
         else{
-            menus.append(["menuTitle":"Reach Out",
-                          "iconName":"reachout_menu1"])
+            menus.append(["menuTitle": "Reach Out",
+                          "iconName": "reachout_menu1"])
 
-            menus.append(["menuTitle":"Sign In",
-                          "iconName":"signin_menu1"])
+            menus.append(["menuTitle": "Sign In",
+                          "iconName": "signin_menu1"])
             
-            menus.append(["menuTitle":"New User?",
+            menus.append(["menuTitle": "New User?",
                           "iconName":"newuser_menu1",
-                          "subTitle":"Sign up"])
+                          "subTitle": "Sign up"])
              self.buttonSignOut?.isHidden = true
         }
         
         // Setting proportion height of the header and footer view
-        var height:CGFloat? = 0.0
+        var height: CGFloat? = 0.0
         height =  (UIScreen.main.bounds.size.height -  CGFloat(menus.count * 70))/2
         
         self.tableHeaderView.frame.size = CGSize(width: self.tableHeaderView!.frame.size.width, height: height!)
         self.tableFooterView.frame.size = CGSize(width: self.tableFooterView!.frame.size.width, height: height!)
-        self.tableView.frame.size = CGSize(width:self.tableView.frame.width, height:UIScreen.main.bounds.size.height  )
+        self.tableView.frame.size = CGSize(width: self.tableView.frame.width, height: UIScreen.main.bounds.size.height  )
         
         self.tableView.reloadData()
         
@@ -191,17 +191,17 @@ class LeftMenuViewController : UIViewController, LeftMenuProtocol {
         
         let user = User.currentUser
         if user.userType == .FDAUser {
-            menus.append(["menuTitle":"My Account",
-                          "iconName":"profile_menu1"])
+            menus.append(["menuTitle": "My Account",
+                          "iconName": "profile_menu1"])
             self.tableView.tableFooterView?.isHidden = false
         }
         else{
-            menus.append(["menuTitle":"Sign In",
-                          "iconName":"signin_menu1"])
+            menus.append(["menuTitle": "Sign In",
+                          "iconName": "signin_menu1"])
             
-            menus.append(["menuTitle":"New User?",
-                          "iconName":"newuser_menu1",
-                          "subTitle":"Sign up"])
+            menus.append(["menuTitle": "New User?",
+                          "iconName": "newuser_menu1",
+                          "subTitle": "Sign up"])
             self.tableView.tableFooterView?.isHidden = true
         }
         
@@ -209,7 +209,7 @@ class LeftMenuViewController : UIViewController, LeftMenuProtocol {
         let height = UIScreen.main.bounds.size.height  * (220.0 / 667.0) //calculate new height
         self.tableView.tableHeaderView?.frame.size = CGSize(width: self.tableView.tableHeaderView!.frame.size.width, height: height)
         self.tableView.tableFooterView?.frame.size = CGSize(width: self.tableView.tableFooterView!.frame.size.width, height: height)
-        self.tableView.frame.size = CGSize(width:self.tableView.frame.width, height:UIScreen.main.bounds.size.height)
+        self.tableView.frame.size = CGSize(width: self.tableView.frame.width, height: UIScreen.main.bounds.size.height)
         self.tableView.reloadData()
     }
     
@@ -254,7 +254,7 @@ class LeftMenuViewController : UIViewController, LeftMenuProtocol {
     }
     
     
-//MARK:- Button Action
+// MARK:- Button Action
     
     /**
      Signout button clicked
@@ -326,8 +326,8 @@ class LeftMenuViewController : UIViewController, LeftMenuProtocol {
 }
 
 
-//MARK:- UITableView Delegate
-extension LeftMenuViewController : UITableViewDelegate {
+// MARK:- UITableView Delegate
+extension LeftMenuViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
@@ -356,8 +356,8 @@ extension LeftMenuViewController : UITableViewDelegate {
 }
 
 
-//MARK:- UITableView DataSource
-extension LeftMenuViewController : UITableViewDataSource {
+// MARK:- UITableView DataSource
+extension LeftMenuViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return menus.count
@@ -365,19 +365,19 @@ extension LeftMenuViewController : UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let dict:Dictionary<String,Any>? = menus[indexPath.row]
+        let dict: Dictionary<String,Any>? = menus[indexPath.row]
         
         if dict?["subTitle"] != nil {
             
-            var cell : LeftMenuCell?
-            cell = tableView.dequeueReusableCell(withIdentifier:"cell" , for: indexPath) as? LeftMenuCell
+            var cell: LeftMenuCell?
+            cell = tableView.dequeueReusableCell(withIdentifier: "cell" , for: indexPath) as? LeftMenuCell
             cell?.populateCellData(data: menus[indexPath.row])
             return cell!
             
         }else {
-            var cell : LeftMenuResourceTableViewCell?
+            var cell: LeftMenuResourceTableViewCell?
             
-            cell = tableView.dequeueReusableCell(withIdentifier:"LeftMenuResourceCell" , for: indexPath) as? LeftMenuResourceTableViewCell
+            cell = tableView.dequeueReusableCell(withIdentifier: "LeftMenuResourceCell" , for: indexPath) as? LeftMenuResourceTableViewCell
             cell?.populateCellData(data: menus[indexPath.row])
             return cell!
         }
@@ -385,8 +385,8 @@ extension LeftMenuViewController : UITableViewDataSource {
 }
 
 
-//MARK:- UserService Response handler
-extension LeftMenuViewController:NMWebServiceDelegate {
+// MARK:- UserService Response handler
+extension LeftMenuViewController: NMWebServiceDelegate {
     
     func startedRequest(_ manager: NetworkManager, requestName: NSString) {
         Logger.sharedInstance.info("requestname : \(requestName)")
@@ -411,7 +411,7 @@ extension LeftMenuViewController:NMWebServiceDelegate {
                 self.fdaSlideMenuController()?.navigateToHomeAfterUnauthorizedAccess()
             })
         }else {
-            UIUtilities.showAlertWithTitleAndMessage(title:NSLocalizedString(kErrorTitle, comment: "") as NSString, message: error.localizedDescription as NSString)
+            UIUtilities.showAlertWithTitleAndMessage(title: NSLocalizedString(kErrorTitle, comment: "") as NSString, message: error.localizedDescription as NSString)
         }
     }
 }

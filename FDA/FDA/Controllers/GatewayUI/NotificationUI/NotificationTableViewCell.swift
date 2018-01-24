@@ -25,8 +25,8 @@ import UIKit
 
 class NotificationTableViewCell: UITableViewCell {
     
-    @IBOutlet var labelNotificationText : UILabel?
-    @IBOutlet var labelNotificationTime : UILabel?
+    @IBOutlet var labelNotificationText: UILabel?
+    @IBOutlet var labelNotificationTime: UILabel?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -42,7 +42,7 @@ class NotificationTableViewCell: UITableViewCell {
      Used to populate cell data
      @param appNotification    Access the data from AppNotification class
      */
-    func populateCellWith(notification:Any?) {
+    func populateCellWith(notification: Any?) {
         
         if notification is AppNotification {
             let appNotification = notification as! AppNotification
@@ -84,7 +84,7 @@ class NotificationTableViewCell: UITableViewCell {
     private static let formatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateFormat = "MMM dd YYYY"
-        formatter.timeZone = TimeZone.init(abbreviation:"GMT")
+        formatter.timeZone = TimeZone.init(abbreviation: "GMT")
         return formatter
     }()
 }

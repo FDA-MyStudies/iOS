@@ -25,7 +25,7 @@ import UIKit
 import RealmSwift
 
 
-enum StatisticsFormula:String{
+enum StatisticsFormula: String{
    case Summation
    case Average
    case Maximum
@@ -33,7 +33,7 @@ enum StatisticsFormula:String{
 
 }
 
-enum ChartTimeRange:String{
+enum ChartTimeRange: String{
     
    case  days_of_week //s,m,t..s   f = daily
    case  days_of_month // 1,2,3,4..31   f = daily
@@ -46,23 +46,23 @@ enum ChartTimeRange:String{
 
 class StudyDashboard: NSObject {
     
-    var statistics:Array<DashboardStatistics>! = []
-    var charts:Array<DashboardCharts>! = []
-    var dashboardResponse:Array<DashboardResponse> = []
+    var statistics: Array<DashboardStatistics>! = []
+    var charts: Array<DashboardCharts>! = []
+    var dashboardResponse: Array<DashboardResponse> = []
     static var instance = StudyDashboard()
     
-    func saveDashboardResponse(responseList:Array<DashboardResponse>){
+    func saveDashboardResponse(responseList: Array<DashboardResponse>){
         self.dashboardResponse.append(contentsOf: responseList)
     }
 }
 
 class DashboardResponse{
-    var key:String? //Stats key
-    var activityId:String?
-    var type:String?
-    var values:Array<Dictionary<String,Any>> = []
-    var date:String?
-    var isPHI:String?
+    var key: String? //Stats key
+    var activityId: String?
+    var type: String?
+    var values: Array<Dictionary<String,Any>> = []
+    var date: String?
+    var isPHI: String?
     
     init() {
         
@@ -70,17 +70,17 @@ class DashboardResponse{
 }
 class DashboardStatistics {
     
-    var statisticsId:String?
-    var studyId:String?
-    var title:String?
-    var displayName:String?
-    var unit:String?
-    var calculation:String?
-    var statType:String?
-    var activityId:String?
-    var activityVersion:String?
-    var dataSourceType:String?
-    var dataSourceKey:String?
+    var statisticsId: String?
+    var studyId: String?
+    var title: String?
+    var displayName: String?
+    var unit: String?
+    var calculation: String?
+    var statType: String?
+    var activityId: String?
+    var activityVersion: String?
+    var dataSourceType: String?
+    var dataSourceKey: String?
     var statList = List<DBStatisticsData>()
     
     init() {
@@ -88,7 +88,7 @@ class DashboardStatistics {
     /**
      Initializer with dictionary of properties
     */
-    init(detail:Dictionary<String,Any>) {
+    init(detail: Dictionary<String,Any>) {
         
         if Utilities.isValidObject(someObject: detail as AnyObject?){
             
@@ -139,27 +139,27 @@ class DashboardStatistics {
 class DashboardCharts {
     
     //basic
-    var chartId:String?
-    var studyId:String?
-    var title:String?
-    var displayName:String?
-    var chartType:String?
-    var scrollable:Bool = true
+    var chartId: String?
+    var studyId: String?
+    var title: String?
+    var displayName: String?
+    var chartType: String?
+    var scrollable: Bool = true
     
     //datasource
-    var activityId:String?
-    var activityVersion:String?
-    var dataSourceType:String?
-    var dataSourceKey:String?
-    var dataSourceTimeRange:String?
-    var startTime:Date?
-    var endTime:Date?
+    var activityId: String?
+    var activityVersion: String?
+    var dataSourceType: String?
+    var dataSourceKey: String?
+    var dataSourceTimeRange: String?
+    var startTime: Date?
+    var endTime: Date?
     
     
     //settings
-    var barColor:String?
-    var numberOfPoints:Int = 0
-    var chartSubType:String?
+    var barColor: String?
+    var numberOfPoints: Int = 0
+    var chartSubType: String?
     
     
     var statList = List<DBStatisticsData>()
@@ -170,7 +170,7 @@ class DashboardCharts {
     /**
      initializer with dictionary of properties
     */
-    init(detail:Dictionary<String,Any>) {
+    init(detail: Dictionary<String,Any>) {
     
         if Utilities.isValidObject(someObject: detail as AnyObject?){
             

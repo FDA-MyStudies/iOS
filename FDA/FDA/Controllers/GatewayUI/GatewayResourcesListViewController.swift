@@ -25,17 +25,17 @@ import UIKit
 
 class GatewayResourcesListViewController: UIViewController {
 
-    @IBOutlet var tableView:UITableView?
+    @IBOutlet var tableView: UITableView?
     
     func loadResources(){
         
-        let plistPath = Bundle.main.path(forResource: "Resources", ofType: ".plist", inDirectory:nil)
+        let plistPath = Bundle.main.path(forResource: "Resources", ofType: ".plist", inDirectory: nil)
         let arrayContent = NSMutableArray.init(contentsOfFile: plistPath!)
         
         do {
            
            // let resources = response[kResources] as! Array<Dictionary<String,Any>>
-            var listOfResources:Array<Resource>! = []
+            var listOfResources: Array<Resource>! = []
             for resource in arrayContent!{
                 let resourceObj = Resource(detail: resource as! Dictionary<String, Any>)
                 listOfResources.append(resourceObj)
@@ -89,8 +89,8 @@ class GatewayResourcesListViewController: UIViewController {
     }
 
 }
-//MARK: TableView Data source
-extension GatewayResourcesListViewController : UITableViewDataSource {
+// MARK: TableView Data source
+extension GatewayResourcesListViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return (Gateway.instance.resources?.count)!
@@ -110,8 +110,8 @@ extension GatewayResourcesListViewController : UITableViewDataSource {
     }
 }
 
-//MARK: TableView Delegates
-extension GatewayResourcesListViewController :  UITableViewDelegate {
+// MARK: TableView Delegates
+extension GatewayResourcesListViewController:  UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)

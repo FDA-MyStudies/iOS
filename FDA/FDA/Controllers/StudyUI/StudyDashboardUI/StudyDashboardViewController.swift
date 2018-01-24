@@ -33,7 +33,7 @@ enum TableViewCells: Int {
     case percentageCell
 }
 
-class StudyDashboardViewController : UIViewController{
+class StudyDashboardViewController: UIViewController{
     
     @IBOutlet var tableView: UITableView?
     @IBOutlet var labelStudyTitle: UILabel?
@@ -45,7 +45,7 @@ class StudyDashboardViewController : UIViewController{
     var statisticsArray = NSMutableArray()
     
     
-//MARK:- ViewController Lifecycle
+// MARK:- ViewController Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -94,7 +94,7 @@ class StudyDashboardViewController : UIViewController{
     }
     
     
-//MARK:- Helper Methods
+// MARK:- Helper Methods
     
     /**
      Used to Create Eligibility Consent Task
@@ -210,7 +210,7 @@ class StudyDashboardViewController : UIViewController{
         self.sendRequestToGetDashboardResponse()
     }
     
-//MARK:- Button Actions
+// MARK:- Button Actions
     
     /**
      Home button clicked
@@ -278,7 +278,7 @@ class StudyDashboardViewController : UIViewController{
 }
 
 
-//MARK:- TableView Datasource
+// MARK:- TableView Datasource
 extension StudyDashboardViewController : UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -362,7 +362,7 @@ extension StudyDashboardViewController : UITableViewDataSource {
 }
 
 
-//MARK:- TableView Delegates
+// MARK:- TableView Delegates
 extension StudyDashboardViewController : UITableViewDelegate{
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
@@ -375,7 +375,7 @@ extension StudyDashboardViewController : UITableViewDelegate{
 }
 
 
-//MARK:- Webservice Delegates
+// MARK:- Webservice Delegates
 extension StudyDashboardViewController:NMWebServiceDelegate {
     
     func startedRequest(_ manager: NetworkManager, requestName: NSString) {
@@ -415,7 +415,7 @@ extension StudyDashboardViewController:NMWebServiceDelegate {
 }
 
 
-//MARK:- ORKTaskViewController Delegate
+// MARK:- ORKTaskViewController Delegate
 extension StudyDashboardViewController: ORKTaskViewControllerDelegate{
     
     func taskViewControllerSupportsSaveAndRestore(_ taskViewController: ORKTaskViewController) -> Bool {
@@ -501,7 +501,7 @@ extension StudyDashboardViewController: ORKTaskViewControllerDelegate{
     }
     
 
-//MARK:- StepViewController Delegate
+// MARK:- StepViewController Delegate
     
     public func stepViewController(_ stepViewController: ORKStepViewController, didFinishWith direction: ORKStepViewControllerNavigationDirection){
     }

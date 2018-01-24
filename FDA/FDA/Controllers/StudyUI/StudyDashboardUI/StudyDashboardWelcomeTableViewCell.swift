@@ -26,8 +26,8 @@ import UIKit
 class StudyDashboardWelcomeTableViewCell: UITableViewCell {
     
     //First cell Outlets
-    @IBOutlet var labelName : UILabel?
-    @IBOutlet var labelStatus : UILabel?
+    @IBOutlet var labelName: UILabel?
+    @IBOutlet var labelStatus: UILabel?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -42,7 +42,7 @@ class StudyDashboardWelcomeTableViewCell: UITableViewCell {
      Used to display Welcome cell
      @param data    Accepts data from Dictionary
      */
-    func displayFirstCelldata(data : NSDictionary){
+    func displayFirstCelldata(data: NSDictionary){
         labelStatus?.text = data["status"] as? String
     }
     

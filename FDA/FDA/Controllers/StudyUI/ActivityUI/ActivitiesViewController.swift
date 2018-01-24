@@ -54,7 +54,7 @@ class ActivitiesViewController : UIViewController{
     
     let labkeyResponseFetch = ResponseDataFetch()
     
-    //MARK:- Viewcontroller Lifecycle
+    // MARK:- Viewcontroller Lifecycle
     fileprivate func presentUpdatedConsent() {
         let appDelegate = (UIApplication.shared.delegate as? AppDelegate)!
         appDelegate.checkConsentStatus(controller: self)
@@ -118,7 +118,7 @@ class ActivitiesViewController : UIViewController{
         
     }
     
-    //MARK: Helper Methods
+    // MARK: Helper Methods
     
     func getLabkeyResponse() {
         
@@ -263,7 +263,7 @@ class ActivitiesViewController : UIViewController{
     }
     
     
-    //MARK:- Button Actions
+    // MARK:- Button Actions
     
     /**
      Home Button Clicked
@@ -285,7 +285,7 @@ class ActivitiesViewController : UIViewController{
         self.tabBarController?.view.addSubview(view)
     }
     
-    //MARK: Helper Methods
+    // MARK: Helper Methods
     func checkForDashBoardInfo(){
         
         DBHandler.loadStatisticsForStudy(studyId: (Study.currentStudy?.studyId)!) { (statiticsList) in
@@ -308,7 +308,7 @@ class ActivitiesViewController : UIViewController{
     }
     
     
-    //MARK:-
+    // MARK:-
     
     /**
      Used to load the Actif=vities data from database
@@ -731,7 +731,7 @@ class ActivitiesViewController : UIViewController{
         
     }
     
-    //MARK: Api Calls
+    // MARK: Api Calls
     
     /**
      Used to send Request To Get ActivityStates
@@ -758,7 +758,7 @@ class ActivitiesViewController : UIViewController{
 }
 
 
-//MARK:- TableView Datasource
+// MARK:- TableView Datasource
 extension ActivitiesViewController: UITableViewDataSource{
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -835,8 +835,8 @@ extension ActivitiesViewController: UITableViewDataSource{
 }
 
 
-//MARK:- TableView Delegates
-extension ActivitiesViewController : UITableViewDelegate{
+// MARK:- TableView Delegates
+extension ActivitiesViewController: UITableViewDelegate{
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
@@ -894,8 +894,8 @@ extension ActivitiesViewController : UITableViewDelegate{
     }
 }
 
-//MARK:- ActivitiesCell Delegate
-extension ActivitiesViewController:ActivitiesCellDelegate{
+// MARK:- ActivitiesCell Delegate
+extension ActivitiesViewController: ActivitiesCellDelegate{
     
     func activityCell(cell: ActivitiesTableViewCell, activity: Activity) {
         
@@ -908,8 +908,8 @@ extension ActivitiesViewController:ActivitiesCellDelegate{
     }
 }
 
-//MARK:- ActivityFilterDelegate
-extension ActivitiesViewController:ActivityFilterViewDelegate{
+// MARK:- ActivityFilterDelegate
+extension ActivitiesViewController: ActivityFilterViewDelegate{
     func setSelectedFilter(selectedIndex: ActivityFilterType) {
         
         // current filter is not same as existing filter
@@ -918,7 +918,7 @@ extension ActivitiesViewController:ActivityFilterViewDelegate{
             // currently filter type is all so no need to fetch all activities
             if self.selectedFilter == .all{
                 
-                let filterType:ActivityType! =  (selectedIndex == .surveys ? .Questionnaire : .activeTask)
+                let filterType: ActivityType! =  (selectedIndex == .surveys ? .Questionnaire : .activeTask)
                 self.updateSectionArray(activityType: filterType)
                 
             }else {// existing filterType is either Task or Surveys
@@ -942,7 +942,7 @@ extension ActivitiesViewController:ActivityFilterViewDelegate{
     
     func updateSectionArray(activityType: ActivityType)  {
         
-        var updatedSectionArray:Array<Dictionary<String,Any>>! = []
+        var updatedSectionArray: Array<Dictionary<String,Any>>! = []
         for section in tableViewSections {
             let activities = (section[kActivities] as? Array<Activity>)!
             var sectionDict: Dictionary<String,Any>! = section
@@ -959,7 +959,7 @@ extension ActivitiesViewController:ActivityFilterViewDelegate{
 }
 
 
-//MARK:- Webservice Delegates
+// MARK:- Webservice Delegates
 extension ActivitiesViewController: NMWebServiceDelegate {
     
     func startedRequest(_ manager: NetworkManager, requestName: NSString) {
@@ -1081,8 +1081,8 @@ extension ActivitiesViewController: NMWebServiceDelegate {
     }
 }
 
-//MARK:- ORKTaskViewController Delegate
-extension ActivitiesViewController:ORKTaskViewControllerDelegate{
+// MARK:- ORKTaskViewController Delegate
+extension ActivitiesViewController: ORKTaskViewControllerDelegate{
     
     func taskViewControllerSupportsSaveAndRestore(_ taskViewController: ORKTaskViewController) -> Bool {
         return true
@@ -1345,7 +1345,7 @@ extension ActivitiesViewController:ORKTaskViewControllerDelegate{
     }
     
     
-    //MARK:- StepViewController Delegate
+    // MARK:- StepViewController Delegate
     public func stepViewController(_ stepViewController: ORKStepViewController, didFinishWith direction: ORKStepViewControllerNavigationDirection){
         
     }
@@ -1391,7 +1391,7 @@ extension ActivitiesViewController:UITabBarControllerDelegate{
     
 }
 
-//MARK:- ActivitySchedules Class
+// MARK:- ActivitySchedules Class
 class ActivitySchedules:UIView,UITableViewDelegate,UITableViewDataSource{
     
     @IBOutlet var tableview: UITableView?
@@ -1421,12 +1421,12 @@ class ActivitySchedules:UIView,UITableViewDelegate,UITableViewDataSource{
     }
     
     
-    //MARK:- Button Action
+    // MARK:- Button Action
     @IBAction func buttonCancelClicked(_:UIButton) {
         self.removeFromSuperview()
     }
     
-    //MARK: Tableview Delegates
+    // MARK: Tableview Delegates
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
@@ -1488,7 +1488,7 @@ class ResponseDataFetch:NMWebServiceDelegate{
         
     }
     
-    //MARK: Helper Methods
+    // MARK: Helper Methods
     func checkUpdates(){
         if StudyUpdates.studyActivitiesUpdated {
             self.sendRequestToGetDashboardInfo()
@@ -1604,7 +1604,7 @@ class ResponseDataFetch:NMWebServiceDelegate{
         }
     }
     
-    //MARK: Webservice Delegates
+    // MARK: Webservice Delegates
     func startedRequest(_ manager: NetworkManager, requestName: NSString) {
         Logger.sharedInstance.info(" START requestname : \(requestName)")
     }

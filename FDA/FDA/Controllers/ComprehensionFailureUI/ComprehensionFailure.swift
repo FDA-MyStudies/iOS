@@ -31,11 +31,11 @@ protocol ComprehensionFailureDelegate {
 }
 class ComprehensionFailure: UIView {
     
-    @IBOutlet weak var buttonCancel:UIButton!
-    @IBOutlet weak var buttonRetry:UIButton!
-    @IBOutlet weak var labelDescription:UILabel!
+    @IBOutlet weak var buttonCancel: UIButton!
+    @IBOutlet weak var buttonRetry: UIButton!
+    @IBOutlet weak var labelDescription: UILabel!
     
-    var delegate:ComprehensionFailureDelegate?
+    var delegate: ComprehensionFailureDelegate?
     required init?(coder aDecoder: NSCoder) {
         
         super.init(coder: aDecoder)
@@ -43,7 +43,7 @@ class ComprehensionFailure: UIView {
         //sets border color for bottom view
         buttonRetry?.layer.borderColor =   kUicolorForButtonBackground
     }
-    class func instanceFromNib(frame:CGRect,detail:Dictionary<String,Any>?) -> ComprehensionFailure {
+    class func instanceFromNib(frame: CGRect,detail: Dictionary<String,Any>?) -> ComprehensionFailure {
         
         let view = UINib(nibName: kComprehensionFailureViewIdentifier, bundle: nil).instantiate(withOwner: nil, options: nil)[0] as! ComprehensionFailure
         view.frame = frame
@@ -54,7 +54,7 @@ class ComprehensionFailure: UIView {
         
     }
     
-    //MARK: Button Actions
+    // MARK: Button Actions
     @IBAction func buttonCancelAction() {
         self.isHidden =  true
         self.removeFromSuperview()

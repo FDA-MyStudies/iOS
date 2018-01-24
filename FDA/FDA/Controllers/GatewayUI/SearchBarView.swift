@@ -25,15 +25,15 @@ import Foundation
 
 protocol searchBarDelegate {
     func didTapOnCancel()
-    func  search(text:String)
+    func  search(text: String)
 }
 
 
 class SearchBarView: UIView {
     
-    @IBOutlet weak var textFieldSearch:UITextField?
-    @IBOutlet weak var buttonCancel:UIButton?
-    @IBOutlet weak var viewBackground:UIView?
+    @IBOutlet weak var textFieldSearch: UITextField?
+    @IBOutlet weak var buttonCancel: UIButton?
+    @IBOutlet weak var viewBackground: UIView?
     var delegate: searchBarDelegate?
     
     required init?(coder aDecoder: NSCoder) {
@@ -42,32 +42,25 @@ class SearchBarView: UIView {
         //fatalError("init(coder:) has not been implemented")
         
     }
-    class func instanceFromNib(frame:CGRect,detail:Dictionary<String,Any>?) -> SearchBarView {
+    class func instanceFromNib(frame: CGRect,detail: Dictionary<String,Any>?) -> SearchBarView {
         
         let view = UINib(nibName: "SearchBarView", bundle: nil).instantiate(withOwner: nil, options: nil)[0] as! SearchBarView
         view.frame = frame
         view.layoutIfNeeded()
         
-        
-        
         view.viewBackground?.layer.cornerRadius = 3.0
         view.viewBackground?.clipsToBounds = true
         
-        
-        
         return view
-        
     }
     
     @IBAction func buttonCancelAction(){
-        
-        
         
         UIView.animate(withDuration: 0.2,
                        delay: 0.1,
                        options: UIViewAnimationOptions.preferredFramesPerSecond60,
                        animations: { () -> Void in
-                        self.frame = CGRect(x:0 , y:-300 , width:self.frame.size.width , height: 64.0)
+                        self.frame = CGRect(x: 0 , y: -300 , width: self.frame.size.width , height: 64.0)
                         
                         
         }, completion: { (finished) -> Void in
@@ -78,7 +71,7 @@ class SearchBarView: UIView {
     }
 }
 
-extension SearchBarView : UITextFieldDelegate{
+extension SearchBarView: UITextFieldDelegate{
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
         print(textField.tag)

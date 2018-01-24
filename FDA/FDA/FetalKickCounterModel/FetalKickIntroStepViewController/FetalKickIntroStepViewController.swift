@@ -48,7 +48,7 @@ class FetalKickIntroStepViewController:  ORKStepViewController {
     
     @IBOutlet weak var buttonNext: UIButton?   // button to start task as well as increment the counter
     
-    //Mark: ORKStepViewController overriden methods
+    // MARK: ORKStepViewController overriden methods
     
     override init(step: ORKStep?) {
         super.init(step: step)
@@ -85,7 +85,7 @@ class FetalKickIntroStepViewController:  ORKStepViewController {
         super.goForward()
     }
     
-    //Mark:IBActions
+    // MARK:IBActions
     
     @IBAction func nextButtonAction(_ sender: UIButton){
         self.goForward()

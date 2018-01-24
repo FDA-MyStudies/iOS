@@ -27,7 +27,7 @@ import UIKit
 let kLabelText = "LabelName"
 let kToggleValue = "ToggleValue"
 
-enum ProfileTableViewCellType:Int {
+enum ProfileTableViewCellType: Int {
     case usePasscode = 3
     case useTouchId = 6
     case receivePushNotifications = 4
@@ -37,8 +37,8 @@ enum ProfileTableViewCellType:Int {
 
 class ProfileTableViewCell: UITableViewCell {
     
-    @IBOutlet var labelName : UILabel?
-    @IBOutlet var switchToggle : UISwitch?
+    @IBOutlet var labelName: UILabel?
+    @IBOutlet var switchToggle: UISwitch?
    
     
     override func awakeFromNib() {
@@ -55,7 +55,7 @@ class ProfileTableViewCell: UITableViewCell {
      Used to set default values
      @param dict    holds the dictionary of default values
      */
-    func setCellData(dict : NSDictionary ){
+    func setCellData(dict: NSDictionary ){
         
         self.labelName?.text = NSLocalizedString((dict[kLabelText] as? String)!, comment: "")
         
@@ -66,10 +66,10 @@ class ProfileTableViewCell: UITableViewCell {
      Used to set toggle value for switch
      @param toggleValue    switch Value
      */
-    func setToggleValue(indexValue:Int)  {
+    func setToggleValue(indexValue: Int)  {
         
         let user = User.currentUser
-        switch ProfileTableViewCellType(rawValue:indexValue)! as ProfileTableViewCellType{
+        switch ProfileTableViewCellType(rawValue: indexValue)! as ProfileTableViewCellType{
         case .usePasscode:
             if Utilities.isValidValue(someObject: user.settings?.passcode as AnyObject?){
                 self.switchToggle?.isOn = (user.settings?.passcode)!

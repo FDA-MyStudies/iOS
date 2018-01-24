@@ -24,7 +24,7 @@
 import Foundation
 import MobileCoreServices
 
-enum MimeType:String{
+enum MimeType: String{
     
     case txt = "text" //text/plain
     case html = "html" //text/html
@@ -50,7 +50,7 @@ enum MimeType:String{
     
 }
 
-//MARK: Api Constants
+// MARK: Api Constants
 let kFileMIMEType = "mimeType"
 let kFileName = "name"
 let kFileLink = "link"
@@ -59,12 +59,12 @@ let kFileTypeForStudy = "type"
 let kFileTitleForStudy = "title"
 let kFileLinkForStudy = "content"
 
-//MARK: File class
+// MARK: File class
 class File{
-    var mimeType : MimeType?
-    var name : String?
-    var link : String?
-    var localPath : String?
+    var mimeType: MimeType?
+    var name: String?
+    var link: String?
+    var localPath: String?
     
     
     init() {
@@ -89,7 +89,7 @@ class File{
      setter method for File class
      @param dict, is dictionary of file properties
      */
-    func setFile(dict:NSDictionary)  {
+    func setFile(dict: NSDictionary)  {
         
         if Utilities.isValidObject(someObject: dict){
             
@@ -111,7 +111,7 @@ class File{
      setter method for File class based on study
      @param dict, is dictionary of file properties
      */
-    func setFileForStudy(dict:NSDictionary)  {
+    func setFileForStudy(dict: NSDictionary)  {
         
         if Utilities.isValidObject(someObject: dict){
             

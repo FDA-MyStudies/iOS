@@ -27,31 +27,31 @@ import MediaPlayer
 import SDWebImage
 import ResearchKit
 import AVKit
-class StudyOverviewViewControllerFirst : UIViewController{
+class StudyOverviewViewControllerFirst: UIViewController{
     
-    @IBOutlet var buttonJoinStudy : UIButton?
-    @IBOutlet var buttonWatchVideo : UIButton?
-    @IBOutlet var buttonVisitWebsite : UIButton?
-    @IBOutlet var labelTitle : UILabel?
-    @IBOutlet var labelDescription : UILabel?
-    @IBOutlet var imageViewStudy : UIImageView?
+    @IBOutlet var buttonJoinStudy: UIButton?
+    @IBOutlet var buttonWatchVideo: UIButton?
+    @IBOutlet var buttonVisitWebsite: UIButton?
+    @IBOutlet var labelTitle: UILabel?
+    @IBOutlet var labelDescription: UILabel?
+    @IBOutlet var imageViewStudy: UIImageView?
     
-    var pageIndex:Int!
-    var overViewWebsiteLink : String?
-    var overviewSectionDetail : OverviewSection!
-    var moviePlayer:MPMoviePlayerViewController!
-    var playerViewController:AVPlayerViewController!
+    var pageIndex: Int!
+    var overViewWebsiteLink: String?
+    var overviewSectionDetail: OverviewSection!
+    var moviePlayer: MPMoviePlayerViewController!
+    var playerViewController: AVPlayerViewController!
     //var player:AVPlayer!
     
-//MARK:- Viewcontroller Lifecycle
+// MARK:- Viewcontroller Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
         //Used to set border color for bottom view
         buttonJoinStudy?.layer.borderColor = kUicolorForButtonBackground
         if overviewSectionDetail.imageURL != nil {
-            let url = URL.init(string:overviewSectionDetail.imageURL!)
-            imageViewStudy?.sd_setImage(with: url, placeholderImage:nil)
+            let url = URL.init(string: overviewSectionDetail.imageURL!)
+            imageViewStudy?.sd_setImage(with: url, placeholderImage: nil)
         }
         
         if overviewSectionDetail.link != nil {
@@ -115,7 +115,7 @@ class StudyOverviewViewControllerFirst : UIViewController{
     }
     
     
-//MARK:-
+// MARK:-
     
     /** 
      
@@ -137,7 +137,7 @@ class StudyOverviewViewControllerFirst : UIViewController{
     }
     
    
-//MARK:- Button Actions
+// MARK:- Button Actions
     
     /**
      
@@ -163,7 +163,7 @@ class StudyOverviewViewControllerFirst : UIViewController{
                 //Didn't work
             }
             
-            let url : NSURL = NSURL(string: overviewSectionDetail.link!)!
+            let url: NSURL = NSURL(string: overviewSectionDetail.link!)!
 
             let player = AVPlayer(url: url as URL)
             NotificationCenter.default.addObserver(self, selector:#selector(StudyOverviewViewControllerFirst.playerDidFinishPlaying(note:)),
@@ -205,7 +205,7 @@ class StudyOverviewViewControllerFirst : UIViewController{
         
         if overViewWebsiteLink != nil {
             
-            let loginStoryboard = UIStoryboard.init(name: "Main", bundle:Bundle.main)
+            let loginStoryboard = UIStoryboard.init(name: "Main", bundle: Bundle.main)
             let webViewController = loginStoryboard.instantiateViewController(withIdentifier:"WebViewController") as! UINavigationController
             let webView = webViewController.viewControllers[0] as! WebViewController
             
@@ -216,8 +216,8 @@ class StudyOverviewViewControllerFirst : UIViewController{
 }
 
 
-//MARK:- Webservice Delegates
-extension StudyOverviewViewControllerFirst:NMWebServiceDelegate {
+// MARK:- Webservice Delegates
+extension StudyOverviewViewControllerFirst: NMWebServiceDelegate {
     
     func startedRequest(_ manager: NetworkManager, requestName: NSString) {
         Logger.sharedInstance.info("requestname : \(requestName)")

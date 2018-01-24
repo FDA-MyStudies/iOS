@@ -26,11 +26,11 @@ import UIKit
 class StudyDashboardStudyPercentageTableViewCell: UITableViewCell {
     
     //Third cell Outlets
-    @IBOutlet var labelStudyCompletion : UILabel?
-    @IBOutlet var labelStudyAdherence : UILabel?
+    @IBOutlet var labelStudyCompletion: UILabel?
+    @IBOutlet var labelStudyAdherence: UILabel?
     
-    @IBOutlet var studyPercentagePie : KDCircularProgress?
-    @IBOutlet var completedPercentagePie : KDCircularProgress?
+    @IBOutlet var studyPercentagePie: KDCircularProgress?
+    @IBOutlet var completedPercentagePie: KDCircularProgress?
     
     let blueColor = UIColor.init(red: 56/255, green: 124/255, blue: 186/255, alpha: 1)
     let greyColor = UIColor.init(red: 216/255, green: 227/255, blue: 230/255, alpha: 1)
@@ -50,7 +50,7 @@ class StudyDashboardStudyPercentageTableViewCell: UITableViewCell {
      Used to display Study Percentage cell
      @param data    Accepts the data from Dictionary
      */
-    func displayThirdCellData(data : NSDictionary){
+    func displayThirdCellData(data: NSDictionary){
         let currentUser = User.currentUser
         let study = Study.currentStudy
         

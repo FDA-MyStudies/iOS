@@ -29,17 +29,17 @@ let kConsentPdfKey = "consent"
 
 let kUnwindToStudyListIdentifier = "unwindeToStudyListResourcesIdentifier"
 
-class ResourcesViewController : UIViewController{
+class ResourcesViewController: UIViewController{
     
-    var tableViewRowDetails : [AnyObject]? = []
+    var tableViewRowDetails: [AnyObject]? = []
     
-    @IBOutlet var tableView : UITableView?
-    var resourceLink:String?
-    var fileType:String?
-    var navigateToStudyOverview:Bool? = false
+    @IBOutlet var tableView: UITableView?
+    var resourceLink: String?
+    var fileType: String?
+    var navigateToStudyOverview: Bool? = false
     var withdrawlInformationNotFound = false
     
-    var shouldDeleteData:Bool? = false
+    var shouldDeleteData: Bool? = false
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -106,7 +106,7 @@ class ResourcesViewController : UIViewController{
     func checkForResourceUpdate(){
         
         if StudyUpdates.studyResourcesUpdated {
-            WCPServices().getResourcesForStudy(studyId:(Study.currentStudy?.studyId)!, delegate: self)
+            WCPServices().getResourcesForStudy(studyId: (Study.currentStudy?.studyId)!, delegate: self)
         }
         else {
             self.loadResourceFromDatabase()
@@ -128,7 +128,7 @@ class ResourcesViewController : UIViewController{
                  self.handleResourcesReponse()
             }
             else {
-                 WCPServices().getResourcesForStudy(studyId:(Study.currentStudy?.studyId)!, delegate: self)
+                 WCPServices().getResourcesForStudy(studyId: (Study.currentStudy?.studyId)!, delegate: self)
             }
         }
     }
@@ -172,7 +172,7 @@ class ResourcesViewController : UIViewController{
     func addDefaultList(){
         
         //add default List
-        let plistPath = Bundle.main.path(forResource: "ResourcesUI", ofType: ".plist", inDirectory:nil)
+        let plistPath = Bundle.main.path(forResource: "ResourcesUI", ofType: ".plist", inDirectory: nil)
         
         let array = NSMutableArray(contentsOfFile: plistPath!) as [AnyObject]?
         
@@ -282,8 +282,8 @@ class ResourcesViewController : UIViewController{
                                             var notificationDate = startAnchorDate?.startOfDay
                                             notificationDate = notificationDate?.addingTimeInterval(43200)
                                             let message = resource.notificationMessage
-                                            let userInfo = ["studyId":(Study.currentStudy?.studyId)!,
-                                                            "type":"resource"];
+                                            let userInfo = ["studyId": (Study.currentStudy?.studyId)!,
+                                                            "type": "resource"];
                                             LocalNotification.scheduleNotificationOn(date: notificationDate!, message: message!, userInfo: userInfo)
                                         }
                                 })
@@ -417,10 +417,10 @@ class ResourcesViewController : UIViewController{
     }
     
     
-    func navigateToWebView(link:String?,htmlText:String?,pdfData:Data?){
+    func navigateToWebView(link: String?,htmlText: String?,pdfData: Data?){
         
-        let loginStoryboard = UIStoryboard.init(name: "Main", bundle:Bundle.main)
-        let webViewController = (loginStoryboard.instantiateViewController(withIdentifier:"WebViewController") as? UINavigationController)!
+        let loginStoryboard = UIStoryboard.init(name: "Main", bundle: Bundle.main)
+        let webViewController = (loginStoryboard.instantiateViewController(withIdentifier: "WebViewController") as? UINavigationController)!
         let webView = (webViewController.viewControllers[0] as? WebViewController)!
         webView.isEmailAvailable = true
         
@@ -433,7 +433,7 @@ class ResourcesViewController : UIViewController{
     
     
     
-    func checkDatabaseForStudyInfo(study:Study){
+    func checkDatabaseForStudyInfo(study: Study){
         
         DBHandler.loadStudyOverview(studyId: (study.studyId)!) { (overview) in
             if overview != nil {
@@ -447,7 +447,7 @@ class ResourcesViewController : UIViewController{
             }
         }
     }
-    func sendRequestToGetStudyInfo(study:Study){
+    func sendRequestToGetStudyInfo(study: Study){
         
         
         
@@ -461,9 +461,9 @@ class ResourcesViewController : UIViewController{
         
         let fullPath = path + "/" + consentPath!
         
-        let pdfData = FileDownloadManager.decrytFile(pathURL:URL.init(string: fullPath))
+        let pdfData = FileDownloadManager.decrytFile(pathURL: URL.init(string: fullPath))
         
-        var isPDF:Bool = false
+        var isPDF: Bool = false
         if (pdfData?.count)! >= 1024 //only check if bigger
         {
             var pdfBytes = [UInt8]()
@@ -471,7 +471,7 @@ class ResourcesViewController : UIViewController{
             let pdfHeader = NSData(bytes: pdfBytes, length: 4)
             
             let myRange: Range = 0..<1024
-            let foundRange = pdfData?.range(of: pdfHeader as Data, options: .anchored, in:myRange) //rangeOfData(pdfHeader, options: nil, range: NSMakeRange(0, 1024))
+            let foundRange = pdfData?.range(of: pdfHeader as Data, options: .anchored, in: myRange) //rangeOfData(pdfHeader, options: nil, range: NSMakeRange(0, 1024))
             if foundRange != nil && (foundRange?.count)! > 0
             {
                 isPDF = true
@@ -485,18 +485,18 @@ class ResourcesViewController : UIViewController{
         }
         
         if pdfData != nil && isPDF{
-            self.navigateToWebView(link: "", htmlText: "",pdfData:pdfData)
+            self.navigateToWebView(link: "", htmlText: "",pdfData: pdfData)
         }
     }
     
     
-    func saveConsentPdfToLocal(base64dataString:String){
+    func saveConsentPdfToLocal(base64dataString: String){
         
         let consentData = NSData(base64Encoded: base64dataString, options: .ignoreUnknownCharacters)
         
-        var fullPath:String!
+        var fullPath: String!
         let path =  AKUtility.baseFilePath + "/study"
-        let fileName:String = "Consent" +  "_" + "\((Study.currentStudy?.studyId)!)" + ".pdf"
+        let fileName: String = "Consent" +  "_" + "\((Study.currentStudy?.studyId)!)" + ".pdf"
         
         fullPath = path + "/" + fileName
         
@@ -511,15 +511,15 @@ class ResourcesViewController : UIViewController{
                 try FileManager.default.removeItem(atPath: fullPath)
                 
             }
-            FileManager.default.createFile(atPath:fullPath , contents: consentData as Data?, attributes: [:])
+            FileManager.default.createFile(atPath: fullPath , contents: consentData as Data?, attributes: [:])
             
             let defaultPath = fullPath
             
             fullPath = "file://" + "\(fullPath!)"
             
-            try consentData?.write(to:  URL(string:fullPath!)!)
+            try consentData?.write(to:  URL(string: fullPath!)!)
             
-            FileDownloadManager.encyptFile(pathURL: URL(string:defaultPath!)!)
+            FileDownloadManager.encyptFile(pathURL: URL(string: defaultPath!)!)
             
             Study.currentStudy?.signedConsentFilePath = fileName
             DBHandler.saveConsentInformation(study: Study.currentStudy!)
@@ -534,7 +534,7 @@ class ResourcesViewController : UIViewController{
 
     }
     
-    func withdrawalFromStudy(deleteResponse:Bool)  {
+    func withdrawalFromStudy(deleteResponse: Bool)  {
         //TBD: uncomment following for UAT
         let participantId = Study.currentStudy?.userParticipateState.participantId
          LabKeyServices().withdrawFromStudy(studyId: (Study.currentStudy?.studyId)!, participantId: participantId!, deleteResponses: deleteResponse, delegate: self)
@@ -546,8 +546,8 @@ class ResourcesViewController : UIViewController{
 }
 
 
-//MARK: TableView Data source
-extension ResourcesViewController : UITableViewDataSource {
+// MARK: TableView Data source
+extension ResourcesViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
@@ -579,7 +579,7 @@ extension ResourcesViewController : UITableViewDataSource {
         else{
             // default cells
             
-            cell.populateCellData(data:(resource as? String)!)
+            cell.populateCellData(data: (resource as? String)!)
         }
         
        
@@ -591,8 +591,8 @@ extension ResourcesViewController : UITableViewDataSource {
     }
 }
 
-//MARK: TableView Delegates
-extension ResourcesViewController : UITableViewDelegate{
+// MARK: TableView Delegates
+extension ResourcesViewController: UITableViewDelegate{
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
@@ -603,7 +603,7 @@ extension ResourcesViewController : UITableViewDelegate{
             
             resourceLink = (resource as? Resource)?.file?.getFileLink()
             fileType = (resource as? Resource)?.file?.getMIMEType()
-            self.performSegue(withIdentifier:"ResourceDetailViewSegueIdentifier" , sender: resource)
+            self.performSegue(withIdentifier: "ResourceDetailViewSegueIdentifier" , sender: resource)
         }
         else{
             if (resource as? String)! == "Leave Study" {
@@ -639,7 +639,7 @@ extension ResourcesViewController : UITableViewDelegate{
 }
 
 
-extension ResourcesViewController:NMWebServiceDelegate {
+extension ResourcesViewController: NMWebServiceDelegate {
     func startedRequest(_ manager: NetworkManager, requestName: NSString) {
         Logger.sharedInstance.info("requestname : \(requestName)")
         self.addProgressIndicator()
@@ -666,7 +666,7 @@ extension ResourcesViewController:NMWebServiceDelegate {
             
             //clear all local data storage
             let currentUser = User.currentUser
-            let userActivityStatusList:Array<UserActivityStatus> = currentUser.participatedActivites.filter({$0.studyId == (Study.currentStudy?.studyId)!})
+            let userActivityStatusList: Array<UserActivityStatus> = currentUser.participatedActivites.filter({$0.studyId == (Study.currentStudy?.studyId)!})
                 
             for activityStatus in userActivityStatusList {
                 let index =  currentUser.participatedActivites.index(where: {$0.activityId == activityStatus.activityId})
@@ -676,7 +676,7 @@ extension ResourcesViewController:NMWebServiceDelegate {
             }
                 
             //clear database storage
-            DBHandler.deleteStudyData(studyId:(Study.currentStudy?.studyId)!)
+            DBHandler.deleteStudyData(studyId: (Study.currentStudy?.studyId)!)
             
             //clear local notification for study
             LocalNotification.removeLocalNotificationfor(studyId: (Study.currentStudy?.studyId)!)
@@ -725,9 +725,9 @@ extension ResourcesViewController:NMWebServiceDelegate {
         else if requestName as String == RegistrationMethods.consentPDF.method.methodName{
             
             self.removeProgressIndicator()
-            let consentDict:Dictionary<String,Any> = ((response as? Dictionary<String,Any>)![kConsentPdfKey] as? Dictionary<String, Any>)!
+            let consentDict: Dictionary<String,Any> = ((response as? Dictionary<String,Any>)![kConsentPdfKey] as? Dictionary<String, Any>)!
             
-            if Utilities.isValidObject(someObject:consentDict as AnyObject? ){
+            if Utilities.isValidObject(someObject: consentDict as AnyObject? ){
                 
                 if Utilities.isValidValue(someObject: consentDict[kConsentVersion] as AnyObject?){
                     Study.currentStudy?.signedConsentVersion = consentDict[kConsentVersion] as? String
@@ -790,13 +790,13 @@ extension ResourcesViewController:NMWebServiceDelegate {
                 }
                 else {
                    self.removeProgressIndicator()
-                    UIUtilities.showAlertWithTitleAndMessage(title:NSLocalizedString(kErrorTitle, comment: "") as NSString, message: error.localizedDescription as NSString)
+                    UIUtilities.showAlertWithTitleAndMessage(title: NSLocalizedString(kErrorTitle, comment: "") as NSString, message: error.localizedDescription as NSString)
                 }
             }
             else {
                 
                 self.removeProgressIndicator()
-                UIUtilities.showAlertWithTitleAndMessage(title:NSLocalizedString(kErrorTitle, comment: "") as NSString, message: error.localizedDescription as NSString)
+                UIUtilities.showAlertWithTitleAndMessage(title: NSLocalizedString(kErrorTitle, comment: "") as NSString, message: error.localizedDescription as NSString)
                 //-- checkDB if there is resources
                 self.checkForResourceUpdate()
                 //--
@@ -812,7 +812,7 @@ public extension String {
     var htmlDecoded: String {
         guard let encodedData = self.data(using: .utf8) else { return self }
         
-        let attributedOptions: [String : Any] = [
+        let attributedOptions: [String: Any] = [
             NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType,
             NSCharacterEncodingDocumentAttribute: String.Encoding.utf8.rawValue]
         

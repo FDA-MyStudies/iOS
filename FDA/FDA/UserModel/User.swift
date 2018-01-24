@@ -71,7 +71,7 @@ let kCFBundleShortVersionString = "CFBundleShortVersionString"
 let kTerms = "terms"
 let kPolicy = "privacy"
 
-//MARK: User
+// MARK: User
 class User{
     
     var firstName: String?
@@ -235,7 +235,7 @@ class User{
         }
     }
     
-    //MARK:Study Bookmark
+    // MARK:Study Bookmark
     
     func isStudyBookmarked(studyId: String) -> Bool{
         
@@ -286,7 +286,7 @@ class User{
     
     
     
-    //MARK:Activity Bookmark
+    // MARK:Activity Bookmark
     func isActivityBookmarked(studyId: String,activityId: String) -> Bool{
         
         let activityes = self.participatedActivites as Array<UserActivityStatus>
@@ -330,7 +330,7 @@ class User{
         }
     }
     
-    //MARK:Study Status
+    // MARK:Study Status
     func updateStudyStatus(studyId: String,status: UserStudyStatus.StudyStatus)->UserStudyStatus {
         
         let studies = self.participatedStudies as Array<UserStudyStatus>
@@ -382,7 +382,7 @@ class User{
         return .yetToJoin
     }
     
-    //MARK:Activity Status
+    // MARK:Activity Status
     func updateActivityStatus(studyId: String,activityId: String,runId: String,status: UserActivityStatus.ActivityStatus) -> UserActivityStatus{
         
         let activityes = self.participatedActivites as Array<UserActivityStatus>
@@ -418,7 +418,7 @@ class User{
     
 }
 
-//MARK:User Settings
+// MARK:User Settings
 class Settings{
     
     var remoteNotifications: Bool?
@@ -492,7 +492,7 @@ class Settings{
     }
 }
 
-//MARK: StudyStatus
+// MARK: StudyStatus
 class UserStudyStatus{
     
     enum StudyStatus: Int {
@@ -662,7 +662,7 @@ class UserStudyStatus{
     
 }
 
-//MARK: Terms & Policy
+// MARK: Terms & Policy
 class TermsAndPolicy {
     var termsURL: String?
     var policyURL: String?
@@ -695,7 +695,7 @@ class TermsAndPolicy {
     
 }
 
-//MARK: ActivityStatus
+// MARK: ActivityStatus
 class UserActivityStatus{
     
     enum ActivityStatus: Int {

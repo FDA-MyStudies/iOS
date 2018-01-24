@@ -31,19 +31,19 @@ let kScheduleEndTime = "endTime"
  */
 class Schedule{
     
-    var frequency:Frequency = .One_Time
-    var startTime:Date!
-    var endTime:Date?
-    var lastRunTime:Date? = nil
-    var nextRunTime:Date!
-    weak var activity:Activity!
-    var activityRuns:Array<ActivityRun>! = []
-    var dailyFrequencyTimings:Array<Dictionary<String,Any>> = []
+    var frequency: Frequency = .One_Time
+    var startTime: Date!
+    var endTime: Date?
+    var lastRunTime: Date? = nil
+    var nextRunTime: Date!
+    weak var activity: Activity!
+    var activityRuns: Array<ActivityRun>! = []
+    var dailyFrequencyTimings: Array<Dictionary<String,Any>> = []
     
-    var scheduledTimings:Array<Dictionary<String,Any>> = []
+    var scheduledTimings: Array<Dictionary<String,Any>> = []
     var currentRunId = 0
     
-    var completionHandler:((Array<ActivityRun>) -> ())? = nil
+    var completionHandler: ((Array<ActivityRun>) -> ())? = nil
     
     init(){
     }
@@ -51,7 +51,7 @@ class Schedule{
     /**
      initializer method with dictionary used to initialize Scheduler
      */
-    init(detail:Dictionary<String,Any>){
+    init(detail: Dictionary<String,Any>){
         
         if Utilities.isValidObject(someObject: detail as AnyObject?){
             
@@ -95,7 +95,7 @@ class Schedule{
      getRunsForActivity returns completion handler with array of ActivityRun
      @param activity, for which runs needed to be calculated
      */
-    func getRunsForActivity(activity:Activity,handler:@escaping (Array<ActivityRun>) -> ()){
+    func getRunsForActivity(activity: Activity,handler: @escaping (Array<ActivityRun>) -> ()){
         
         //get joiningDate
         let studyStatus = User.currentUser.participatedStudies.filter({$0.studyId == activity.studyId}).last
@@ -104,7 +104,7 @@ class Schedule{
         let start = activity.startDate?.utcDate()
         
         self.completionHandler = handler
-        var endDateResult:ComparisonResult? = nil
+        var endDateResult: ComparisonResult? = nil
         if activity.endDate != nil {
             let end = activity.endDate?.utcDate()
             endDateResult = (end?.compare(joiningDate!))! as ComparisonResult
@@ -177,8 +177,8 @@ class Schedule{
         
         let numberOfDays = self.getNumberOfDaysBetween(startDate: startTime, endDate: endTime!)
         print("numberOfDays \(numberOfDays)")
-        var runStartDate:Date? = startTime
-        var runEndDate:Date? = nil
+        var runStartDate: Date? = startTime
+        var runEndDate: Date? = nil
         let calendar = Calendar.currentUTC()
         for day in 1...numberOfDays {
             
@@ -207,10 +207,10 @@ class Schedule{
         let targetDay = 1 //server configurable
         
         //first day
-        var runStartDate = calendar.date(byAdding:.weekday, value:(targetDay - dayOfWeek), to: updatedStartTime)
+        var runStartDate = calendar.date(byAdding: .weekday, value: (targetDay - dayOfWeek), to: updatedStartTime)
         var runId = 1
         while runStartDate?.compare(updatedEndTime!) == .orderedAscending {
-            var runEndDate =  calendar.date(byAdding:.second, value:((7*86400) - 1), to: runStartDate!)
+            var runEndDate =  calendar.date(byAdding: .second, value:((7*86400) - 1), to: runStartDate!)
             if runEndDate?.compare(updatedEndTime!) == .orderedDescending {
                 runEndDate = updatedEndTime
             }
@@ -223,7 +223,7 @@ class Schedule{
             activityRuns.append(activityRun)
             
             //save range
-            runStartDate = calendar.date(byAdding:.second, value:1, to: runEndDate!)
+            runStartDate = calendar.date(byAdding: .second, value: 1, to: runEndDate!)
             runId += 1
         }
         
@@ -239,7 +239,7 @@ class Schedule{
         var runStartDate = updatedStartTime
         var runId = 1
         while runStartDate.compare(updatedEndTime!) == .orderedAscending {
-            let nextRunStartDate =  calendar.date(byAdding:.month, value:1*runId, to: updatedStartTime)
+            let nextRunStartDate =  calendar.date(byAdding: .month, value: 1*runId, to: updatedStartTime)
             var runEndDate = calendar.date(byAdding: .second, value: -1, to: nextRunStartDate!)
             //save range
             if runEndDate?.compare(updatedEndTime!) == .orderedDescending {
@@ -286,9 +286,9 @@ class Schedule{
                 var minutes = Int((hoursAndMins[1]))
                 var second = Int((hoursAndMins[2]))
                 
-                var runStartDate =  calendar.date(byAdding:.hour, value: hour!, to: startDate!)
-                runStartDate = calendar.date(byAdding:.minute, value: minutes!, to: runStartDate!)
-                runStartDate = calendar.date(byAdding:.second, value: second!, to: runStartDate!)
+                var runStartDate =  calendar.date(byAdding: .hour, value: hour!, to: startDate!)
+                runStartDate = calendar.date(byAdding: .minute, value: minutes!, to: runStartDate!)
+                runStartDate = calendar.date(byAdding: .second, value: second!, to: runStartDate!)
                 
                 
                 //run end time creation
@@ -298,9 +298,9 @@ class Schedule{
                 minutes = Int((hoursAndMins[1]))
                 second = Int((hoursAndMins[2]))
                 
-                var runEndDate =  calendar.date(byAdding:.hour, value: hour!, to: startDate!)
-                runEndDate = calendar.date(byAdding:.minute, value: minutes!, to: runEndDate!)
-                runEndDate = calendar.date(byAdding:.second, value: second!, to: runEndDate!)
+                var runEndDate =  calendar.date(byAdding: .hour, value: hour!, to: startDate!)
+                runEndDate = calendar.date(byAdding: .minute, value: minutes!, to: runEndDate!)
+                runEndDate = calendar.date(byAdding: .second, value: second!, to: runEndDate!)
                 
                 runStartDate = runStartDate?.utcDate()
                 
@@ -321,7 +321,7 @@ class Schedule{
                     runId += 1
                 }
             }
-            startDateShortStyle =  calendar.date(byAdding:.day, value: 1, to: startDateShortStyle!)
+            startDateShortStyle =  calendar.date(byAdding: .day, value: 1, to: startDateShortStyle!)
         }
     }
     
@@ -366,7 +366,7 @@ class Schedule{
         }
     }
     
-    //MARK:Utility Methods
+    // MARK:Utility Methods
     
     public static var _formatter: DateFormatter?
     public static var formatter: DateFormatter! {
@@ -377,7 +377,7 @@ class Schedule{
                 let formatter = DateFormatter()
                 formatter.dateFormat = "YYYY-mm-dd"
                 formatter.dateStyle = .short
-                formatter.timeZone = TimeZone.init(abbreviation:"UTC")
+                formatter.timeZone = TimeZone.init(abbreviation: "UTC")
                 _formatter = formatter
                 return formatter
             }
@@ -408,8 +408,8 @@ class Schedule{
         }
     }
     
-    //MARK:-
-    func getCurrentWeekDay(date:Date) -> Int{
+    // MARK:-
+    func getCurrentWeekDay(date: Date) -> Int{
         
         let calendar = Calendar.currentUTC()
         let component = calendar.dateComponents([.weekday], from: date)
@@ -424,7 +424,7 @@ class Schedule{
         return (endDate!)
     }
     
-    func getNumberOfWeeksBetween(startDate:Date,endDate:Date) -> Int {
+    func getNumberOfWeeksBetween(startDate: Date,endDate: Date) -> Int {
         let calendar = Calendar.currentUTC()
         let date1 = calendar.startOfDay(for: startDate)
         let date2 = calendar.startOfDay(for: endDate) //calendar.startOfDay(for: endDate)
@@ -435,7 +435,7 @@ class Schedule{
         return components.weekOfYear! as Int
     }
     
-    func getNumberOfDaysBetween(startDate:Date,endDate:Date) -> Int {
+    func getNumberOfDaysBetween(startDate: Date,endDate: Date) -> Int {
         
         var calendar = Calendar.currentUTC()
         
@@ -453,16 +453,16 @@ class Schedule{
 
 class ActivityRun {
     
-    var startDate:Date!
-    var endDate:Date!
-    var complitionDate:Date!
-    var runId:Int = 1
-    var studyId:String!
-    var activityId:String!
-    var isCompleted:Bool = false
-    var restortionData:Data?
-    var toBeSynced:Bool = false
-    var responseData:Data?
+    var startDate: Date!
+    var endDate: Date!
+    var complitionDate: Date!
+    var runId: Int = 1
+    var studyId: String!
+    var activityId: String!
+    var isCompleted: Bool = false
+    var restortionData: Data?
+    var toBeSynced: Bool = false
+    var responseData: Data?
     
 }
 
@@ -477,7 +477,7 @@ extension Calendar{
 
 extension Date{
     
-    public static var todayUTC:Date{
+    public static var todayUTC: Date{
         let timezone = TimeZone(abbreviation: "UTC")!
         var dateComponents = Calendar.current.dateComponents(in: timezone, from: Date())
         dateComponents.calendar = Calendar.currentUTC()

@@ -24,25 +24,25 @@
 import UIKit
 
 
-enum Audience:String{
+enum Audience: String{
     case All
     case Participants
     case Limited
 }
 
-class AppLocalNotification:AppNotification{
-    var startDate:Date?
-    var endDate:Date?
+class AppLocalNotification: AppNotification{
+    var startDate: Date?
+    var endDate: Date?
 }
 
 class AppNotification {
     
-    enum NotificationType:String{
+    enum NotificationType: String{
         case Gateway
         case Study
     }
     
-    enum NotificationSubType:String{
+    enum NotificationSubType: String{
         case Announcement
         case Study
         case Resource
@@ -50,17 +50,17 @@ class AppNotification {
         case studyEvent
     }
 
-    var id:String?
-    var type:NotificationType = .Gateway
-    var subType:NotificationSubType!
-    var audience:Audience!
-    var title:String?
-    var message:String?
-    var studyId:String?
-    var date:Date?
+    var id: String?
+    var type: NotificationType = .Gateway
+    var subType: NotificationSubType!
+    var audience: Audience!
+    var title: String?
+    var message: String?
+    var studyId: String?
+    var date: Date?
     
-    var activityId:String?
-    var read:Bool? = false
+    var activityId: String?
+    var read: Bool? = false
     
     init() {
     }
@@ -68,7 +68,7 @@ class AppNotification {
     /**
      Initializer with dictionary of properties
     */
-    init(detail:Dictionary<String, Any>){
+    init(detail: Dictionary<String, Any>){
         
         if Utilities.isValidObject(someObject: detail as AnyObject?) {
             

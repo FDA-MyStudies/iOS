@@ -24,15 +24,15 @@
 import UIKit
 import Foundation
 
-enum SignInTableViewTags : Int {
+enum SignInTableViewTags: Int {
     case EmailId = 0
     case Password
 }
 
 class SignInTableViewCell: UITableViewCell {
     
-    @IBOutlet var labelType : UILabel?
-    @IBOutlet var textFieldValue : UITextField?
+    @IBOutlet var labelType: UILabel?
+    @IBOutlet var textFieldValue: UITextField?
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -54,7 +54,7 @@ class SignInTableViewCell: UITableViewCell {
      @param securedText    Used to check weather the text fiels is secured or not
     
     */
-    func populateCellData(data : NSDictionary , securedText : Bool){
+    func populateCellData(data: NSDictionary , securedText: Bool){
         
         textFieldValue?.isSecureTextEntry = false
         if securedText == true {

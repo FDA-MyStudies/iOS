@@ -28,8 +28,8 @@ let kMessageForSharingCharts = "This action will create a shareable image file o
 
 class ChartsViewController: UIViewController {
 
-    @IBOutlet weak var tableView:UITableView!
-    @IBOutlet weak var backButton:UIButton!
+    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var backButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -66,7 +66,7 @@ class ChartsViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    @IBAction func backButtonAction(_ sender:UIButton){
+    @IBAction func backButtonAction(_ sender: UIButton){
         self.navigationController?.popViewController(animated: true)
     }
     
@@ -75,7 +75,7 @@ class ChartsViewController: UIViewController {
         if StudyDashboard.instance.charts.count > 0{
             
             UIUtilities.showAlertMessageWithTwoActionsAndHandler(NSLocalizedString(kTitleMessage, comment: ""), errorMessage: NSLocalizedString(kMessageForSharingCharts, comment: ""), errorAlertActionTitle: NSLocalizedString(kTitleOK, comment: ""),
-                                                                 errorAlertActionTitle2:NSLocalizedString(kTitleCancel, comment: ""), viewControllerUsed: self,
+                                                                 errorAlertActionTitle2: NSLocalizedString(kTitleCancel, comment: ""), viewControllerUsed: self,
                                                                  action1: {
                                                                     
                                                                    self.shareScreenShotByMail()
@@ -113,7 +113,7 @@ class ChartsViewController: UIViewController {
         tableView.contentOffset = savedContentOffset
         tableView.frame = savedFrame
         
-        (self.tabBarController as! StudyDashboardTabbarViewController).shareScreenshotByEmail(image: image, subject: kEmailSubjectCharts,fileName:kEmailSubjectCharts)
+        (self.tabBarController as! StudyDashboardTabbarViewController).shareScreenshotByEmail(image: image, subject: kEmailSubjectCharts,fileName: kEmailSubjectCharts)
     
     }
     
@@ -129,10 +129,10 @@ class ChartsViewController: UIViewController {
 
 }
 
-extension ChartsViewController:UITableViewDelegate{
+extension ChartsViewController: UITableViewDelegate{
     
 }
-extension ChartsViewController:UITableViewDataSource{
+extension ChartsViewController: UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 1

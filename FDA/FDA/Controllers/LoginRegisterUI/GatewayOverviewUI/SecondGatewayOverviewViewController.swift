@@ -24,17 +24,17 @@
 import Foundation
 import UIKit
 
-class SecondGatewayOverviewViewController : UIViewController{
+class SecondGatewayOverviewViewController: UIViewController{
     
-    @IBOutlet var imageViewBackgroundImage : UIImageView?
-    @IBOutlet var labelHeadingText : UILabel?
-    @IBOutlet var labelDescriptionText : UILabel?
-    @IBOutlet var buttonGetStarted : UIButton?
+    @IBOutlet var imageViewBackgroundImage: UIImageView?
+    @IBOutlet var labelHeadingText: UILabel?
+    @IBOutlet var labelDescriptionText: UILabel?
+    @IBOutlet var buttonGetStarted: UIButton?
     
-    var overviewSectionDetail : OverviewSection!
-    var pageIndex:Int!
+    var overviewSectionDetail: OverviewSection!
+    var pageIndex: Int!
     
-//MARK:- ViewController Lifecycle
+// MARK:- ViewController Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -66,7 +66,7 @@ class SecondGatewayOverviewViewController : UIViewController{
     }
     
     
-//MARK:-
+// MARK:-
     
     /**
      
@@ -83,7 +83,7 @@ class SecondGatewayOverviewViewController : UIViewController{
     }
 
     
-//MARK:- Button Actions
+// MARK:- Button Actions
     
     /**
      

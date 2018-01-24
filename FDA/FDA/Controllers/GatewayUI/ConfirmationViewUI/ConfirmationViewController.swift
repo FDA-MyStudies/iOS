@@ -44,9 +44,9 @@ let kPlistFileType = ".plist"
 
 class StudyToDelete{
     
-    var studyId:String!
-    var shouldDelete:Bool?
-    var participantId:String!
+    var studyId: String!
+    var shouldDelete: Bool?
+    var participantId: String!
     
     init() {
         
@@ -54,25 +54,25 @@ class StudyToDelete{
 }
 class ConfirmationViewController: UIViewController {
     
-    var tableViewRowDetails : NSMutableArray?
+    var tableViewRowDetails: NSMutableArray?
     
-    @IBOutlet var tableViewConfirmation : UITableView?
-    @IBOutlet var tableViewHeaderViewConfirmation : UIView?
-    @IBOutlet var tableViewFooterViewConfirmation : UIView?
-    @IBOutlet var buttonDeleteAccount:UIButton?
-    @IBOutlet var buttonDoNotDeleteAccount:UIButton?
-    @IBOutlet var LabelHeaderDescription:UILabel?
-    var studiesToDisplay:Array<Study>! = []
-    var joinedStudies:Array<Study>! = []
-    var studyWithoutWCData:Study?
-    var studiesToWithdrawn:Array<StudyToDelete>! = []
+    @IBOutlet var tableViewConfirmation: UITableView?
+    @IBOutlet var tableViewHeaderViewConfirmation: UIView?
+    @IBOutlet var tableViewFooterViewConfirmation: UIView?
+    @IBOutlet var buttonDeleteAccount: UIButton?
+    @IBOutlet var buttonDoNotDeleteAccount: UIButton?
+    @IBOutlet var LabelHeaderDescription: UILabel?
+    var studiesToDisplay: Array<Study>! = []
+    var joinedStudies: Array<Study>! = []
+    var studyWithoutWCData: Study?
+    var studiesToWithdrawn: Array<StudyToDelete>! = []
     
-    //MARK:- View Controller LifeCycle
+    // MARK:- View Controller LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
         //Load plist info
-        let plistPath = Bundle.main.path(forResource: kConfirmationPlist, ofType:kPlistFileType , inDirectory:nil)
+        let plistPath = Bundle.main.path(forResource: kConfirmationPlist, ofType: kPlistFileType , inDirectory: nil)
         tableViewRowDetails = NSMutableArray.init(contentsOfFile: plistPath!)
         
         // setting the headerdescription
@@ -99,7 +99,7 @@ class ConfirmationViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    //MARK: Helper Methods
+    // MARK: Helper Methods
     func checkWithdrawlConfigurationForNextSuty() {
         
         if joinedStudies.count != 0 {
@@ -145,12 +145,12 @@ class ConfirmationViewController: UIViewController {
         }
     }
     
-    //MARK:- Webservice Response Handlers
-    func sendRequestToGetInfoForStudy(study:Study) {
+    // MARK:- Webservice Response Handlers
+    func sendRequestToGetInfoForStudy(study: Study) {
         WCPServices().getStudyInformation(studyId: study.studyId, delegate: self)
     }
     
-    //MARK:- Webservice Response Handlers
+    // MARK:- Webservice Response Handlers
     
     /**
      Handle delete account webservice response
@@ -178,15 +178,15 @@ class ConfirmationViewController: UIViewController {
         self.withdrawnFromNextStudy()
     }
     
-    //MARK:- Button Actions
+    // MARK:- Button Actions
     
     /**
      Delete account button clicked
      @param sender  Accepts UIButton object
      */
-    @IBAction func deleteAccountAction(_ sender:UIButton){
+    @IBAction func deleteAccountAction(_ sender: UIButton){
         
-        var found:Bool = false
+        var found: Bool = false
         for withdrawnStudy in studiesToWithdrawn {
             if withdrawnStudy.shouldDelete == nil {
                 
@@ -218,14 +218,14 @@ class ConfirmationViewController: UIViewController {
      Donot Delete button action
      @param sender  Accepts UIButton object
      */
-    @IBAction func doNotDeleteAccountAction(_ sender:UIButton) {
+    @IBAction func doNotDeleteAccountAction(_ sender: UIButton) {
         _ = self.navigationController?.popViewController(animated: true)
     }
 }
 
 
-//MARK:- TableView Data source
-extension ConfirmationViewController : UITableViewDataSource {
+// MARK:- TableView Data source
+extension ConfirmationViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return studiesToDisplay.count
@@ -259,8 +259,8 @@ extension ConfirmationViewController : UITableViewDataSource {
     }
 }
 
-//MARK:- TableView Delegates
-extension ConfirmationViewController : UITableViewDelegate{
+// MARK:- TableView Delegates
+extension ConfirmationViewController: UITableViewDelegate{
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
@@ -268,7 +268,7 @@ extension ConfirmationViewController : UITableViewDelegate{
     }
 }
 
-extension ConfirmationViewController : ConfirmationOptionalDelegate{
+extension ConfirmationViewController: ConfirmationOptionalDelegate{
     
     func confirmationCell(cell: ConfirmationOptionalTableViewCell, forStudy study: Study, deleteData: Bool) {
         
@@ -278,8 +278,8 @@ extension ConfirmationViewController : ConfirmationOptionalDelegate{
     }
 }
 
-//MARK:- UserService Response handler
-extension ConfirmationViewController:NMWebServiceDelegate {
+// MARK:- UserService Response handler
+extension ConfirmationViewController: NMWebServiceDelegate {
     func startedRequest(_ manager: NetworkManager, requestName: NSString) {
         Logger.sharedInstance.info("requestname : \(requestName)")
         self.addProgressIndicator()
@@ -323,7 +323,7 @@ extension ConfirmationViewController:NMWebServiceDelegate {
                 }
             }else {
                 self.removeProgressIndicator()
-                UIUtilities.showAlertWithTitleAndMessage(title:NSLocalizedString(kErrorTitle, comment: "") as NSString, message: error.localizedDescription as NSString)
+                UIUtilities.showAlertWithTitleAndMessage(title: NSLocalizedString(kErrorTitle, comment: "") as NSString, message: error.localizedDescription as NSString)
             }
         }
     }

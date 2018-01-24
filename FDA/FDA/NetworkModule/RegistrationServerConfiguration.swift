@@ -22,7 +22,7 @@
  */
 
 import UIKit
-enum RegistrationMethods:String {
+enum RegistrationMethods: String {
     //TODO : Write exact name for request method
     case login
     case register
@@ -48,7 +48,7 @@ enum RegistrationMethods:String {
     case refreshToken
     
     
-    var description:String{
+    var description: String{
         switch self {
             
         default:
@@ -56,19 +56,19 @@ enum RegistrationMethods:String {
         }
     }
     
-    var method:Method{
+    var method: Method{
         
         switch self {
             
         case .activityState,.consentPDF,.deleteAccount,.confirmRegistration,.userProfile,.userPreferences,.studyState:
             //GET Methods
-            return Method(methodName:(self.rawValue+".api"), methodType: .httpMethodGet, requestType: .requestTypeHTTP)
+            return Method(methodName: (self.rawValue+".api"), methodType: .httpMethodGet, requestType: .requestTypeHTTP)
         case .withdraw,.logout, .deactivate:
             //DELETE Methods
-            return Method(methodName:(self.rawValue+".api"), methodType: .httpMethodDELETE, requestType: .requestTypeJSON)
+            return Method(methodName: (self.rawValue+".api"), methodType: .httpMethodDELETE, requestType: .requestTypeJSON)
         default:
             //POST Methods
-            return Method(methodName:(self.rawValue+".api"), methodType: .httpMethodPOST, requestType: .requestTypeJSON)
+            return Method(methodName: (self.rawValue+".api"), methodType: .httpMethodPOST, requestType: .requestTypeJSON)
             
             
         }
@@ -103,7 +103,7 @@ class RegistrationServerConfiguration: NetworkConfiguration {
     static let configuration = RegistrationServerConfiguration()
     
     
-    //MARK:  Delegates
+    // MARK:  Delegates
     override func getProductionURL() -> String {
         return RegistrationServerURLConstants.ProductionURL
     }
@@ -111,11 +111,11 @@ class RegistrationServerConfiguration: NetworkConfiguration {
         return RegistrationServerURLConstants.DevelopmentURL
     }
     
-    override func getDefaultHeaders() -> [String : String] {
+    override func getDefaultHeaders() -> [String: String] {
         
         //let ud = UserDefaults.standard
         if User.currentUser.authToken != nil {
-            return [kUserAuthToken:User.currentUser.authToken]
+            return [kUserAuthToken: User.currentUser.authToken]
         }
         return Dictionary()
     }

@@ -40,7 +40,7 @@ class ActivityResult {
     var endTime: Date?
    
     var result: Array<ActivityStepResult>?
-    //MARK: Initializers
+    // MARK: Initializers
     init() {
         self.type = .Questionnaire
         self.activity = Activity()
@@ -137,7 +137,7 @@ class ActivityResult {
     }
     
     
-    //MARK: Setter & getter methods for Activity
+    // MARK: Setter & getter methods for Activity
     func setActivity(activity: Activity)  {
         
         self.activity = activity
@@ -150,7 +150,7 @@ class ActivityResult {
     }
     
     
-    //MARK: Setter & getter methods for ActivityResult
+    // MARK: Setter & getter methods for ActivityResult
     func setActivityResult(activityStepResult: ActivityStepResult)  {
         self.result?.append(activityStepResult)
     }

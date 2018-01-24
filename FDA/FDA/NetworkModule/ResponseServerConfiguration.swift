@@ -22,7 +22,7 @@
  */
 
 import UIKit
-enum ResponseMethods:String {
+enum ResponseMethods: String {
     //TODO : Write exact name for request method
     case enroll
     case validateEnrollmentToken
@@ -32,7 +32,7 @@ enum ResponseMethods:String {
     case executeSQL
     
     
-    var description:String{
+    var description: String{
         switch self {
             
         default:
@@ -40,15 +40,15 @@ enum ResponseMethods:String {
         }
     }
     
-    var method:Method {
+    var method: Method {
         
         switch self {
         case .getParticipantResponse,.validateEnrollmentToken,.executeSQL:
-            return Method(methodName:(self.rawValue+".api"), methodType: .httpMethodGet, requestType: .requestTypeHTTP)
+            return Method(methodName: (self.rawValue+".api"), methodType: .httpMethodGet, requestType: .requestTypeHTTP)
         case .withdrawFromStudy:
-            return Method(methodName:(self.rawValue+".api"), methodType: .httpMethodPOST, requestType: .requestTypeHTTP)
+            return Method(methodName: (self.rawValue+".api"), methodType: .httpMethodPOST, requestType: .requestTypeHTTP)
         default:
-            return Method(methodName:(self.rawValue+".api"), methodType: .httpMethodPOST, requestType: .requestTypeJSON)
+            return Method(methodName: (self.rawValue+".api"), methodType: .httpMethodPOST, requestType: .requestTypeJSON)
         }
     }
     
@@ -72,7 +72,7 @@ class ResponseServerConfiguration: NetworkConfiguration {
     static let configuration = ResponseServerConfiguration()
     
     
-    //MARK:  Delegates
+    // MARK:  Delegates
     override func getProductionURL() -> String {
         return ResponseServerURLConstants.ProductionURL
     }
@@ -80,22 +80,22 @@ class ResponseServerConfiguration: NetworkConfiguration {
         return ResponseServerURLConstants.DevelopmentURL
     }
     
-    override func getDefaultHeaders() -> [String : String] {
+    override func getDefaultHeaders() -> [String: String] {
         return Dictionary()
     }
-    override func getDefaultRequestParameters() -> [String : Any] {
+    override func getDefaultRequestParameters() -> [String: Any] {
         return Dictionary()
     }
     override func shouldParseErrorMessage() -> Bool {
         return true
     }
-    override func parseError(errorResponse:Dictionary<String,Any>)->NSError {
+    override func parseError(errorResponse: Dictionary<String,Any>)->NSError {
         
-        var error = NSError(domain: NSURLErrorDomain, code:101,userInfo:[NSLocalizedDescriptionKey:"Could not connect to server"])
+        var error = NSError(domain: NSURLErrorDomain, code: 101,userInfo: [NSLocalizedDescriptionKey:"Could not connect to server"])
         
         if let errorMessage =  errorResponse["exception"] {
             
-            error = NSError(domain: NSURLErrorDomain, code:101,userInfo:[NSLocalizedDescriptionKey:errorMessage])
+            error = NSError(domain: NSURLErrorDomain, code: 101,userInfo:[NSLocalizedDescriptionKey:errorMessage])
         }
         
         return  error

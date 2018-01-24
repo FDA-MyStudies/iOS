@@ -24,7 +24,7 @@
 import UIKit
 import Foundation
 
-enum TextFieldTags : Int {
+enum TextFieldTags: Int {
    // case FirstNameTag = 0
    // case LastName
     case EmailId = 0
@@ -34,9 +34,9 @@ enum TextFieldTags : Int {
 
 class SignUpTableViewCell: UITableViewCell {
     
-    @IBOutlet var labelType : UILabel?
-    @IBOutlet var textFieldValue : UITextField?
-    @IBOutlet var buttonChangePassword : UIButton? // this button will be extensively used for profile screen
+    @IBOutlet var labelType: UILabel?
+    @IBOutlet var textFieldValue: UITextField?
+    @IBOutlet var buttonChangePassword: UIButton? // this button will be extensively used for profile screen
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -59,7 +59,7 @@ class SignUpTableViewCell: UITableViewCell {
      @param keyboardType    allows which kind of keyboard to use
      
      */
-    func populateCellData(data : NSDictionary , securedText : Bool, keyboardType:UIKeyboardType?){
+    func populateCellData(data: NSDictionary , securedText: Bool, keyboardType: UIKeyboardType?){
         
         textFieldValue?.isSecureTextEntry = false
         if securedText == true {
@@ -84,7 +84,7 @@ class SignUpTableViewCell: UITableViewCell {
      @param tag    is the cell index
      
      */
-    func setCellData(tag:TextFieldTags)  {
+    func setCellData(tag: TextFieldTags)  {
         let user = User.currentUser
         switch tag {
             

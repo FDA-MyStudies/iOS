@@ -28,10 +28,10 @@ import IQKeyboardManagerSwift
 /* Contact us field description*/
 struct ContactUsFeilds {
     
-    static var firstName:String = ""
-    static var email:String = ""
-    static var subject:String = ""
-    static var message:String = ""
+    static var firstName: String = ""
+    static var email: String = ""
+    static var subject: String = ""
+    static var message: String = ""
     
   init(){
         ContactUsFeilds.firstName = ""
@@ -41,18 +41,18 @@ struct ContactUsFeilds {
     }
 }
 
-class ContactUsViewController : UIViewController{
+class ContactUsViewController: UIViewController{
     
-    var tableViewRowDetails : NSMutableArray?
+    var tableViewRowDetails: NSMutableArray?
     
-    @IBOutlet var buttonSubmit : UIButton?
-    @IBOutlet var tableView : UITableView?
-    @IBOutlet var tableViewFooter : UIView?
-    @IBOutlet var feedbackTextView : UITextView?
-    var previousContentHeight:Double = 0.0
+    @IBOutlet var buttonSubmit: UIButton?
+    @IBOutlet var tableView: UITableView?
+    @IBOutlet var tableViewFooter: UIView?
+    @IBOutlet var feedbackTextView: UITextView?
+    var previousContentHeight: Double = 0.0
     
     
-//MARK:- ViewController LifeCycle
+// MARK:- ViewController LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -65,7 +65,7 @@ class ContactUsViewController : UIViewController{
         IQKeyboardManager.sharedManager().enable = true
         
         //load plist info
-        let plistPath = Bundle.main.path(forResource: "ContactUs", ofType: ".plist", inDirectory:nil)
+        let plistPath = Bundle.main.path(forResource: "ContactUs", ofType: ".plist", inDirectory: nil)
         tableViewRowDetails = NSMutableArray.init(contentsOfFile: plistPath!)
         
         self.addBackBarButton()
@@ -74,7 +74,7 @@ class ContactUsViewController : UIViewController{
         self.tableView?.rowHeight = UITableViewAutomaticDimension
         
         //Used for background tap dismiss keyboard
-        let tapGestureRecognizer : UITapGestureRecognizer = UITapGestureRecognizer.init(target: self, action: #selector(ContactUsViewController.handleTapGesture))
+        let tapGestureRecognizer: UITapGestureRecognizer = UITapGestureRecognizer.init(target: self, action: #selector(ContactUsViewController.handleTapGesture))
         self.tableView?.addGestureRecognizer(tapGestureRecognizer)
     }
     
@@ -93,7 +93,7 @@ class ContactUsViewController : UIViewController{
         
     }
     
-    func handleTapGesture(gesture:UIGestureRecognizer){
+    func handleTapGesture(gesture: UIGestureRecognizer){
         
         let location = gesture.location(in: gesture.view)
         if location.y > 245 {
@@ -105,7 +105,7 @@ class ContactUsViewController : UIViewController{
         
     }
     
-//MARK:- Button Actions
+// MARK:- Button Actions
     
     /**
      
@@ -115,7 +115,7 @@ class ContactUsViewController : UIViewController{
      @param sender  accepts any object
      
      */
-    @IBAction func buttonSubmitAciton(_ sender:UIButton){
+    @IBAction func buttonSubmitAciton(_ sender: UIButton){
         print("\(ContactUsFeilds.firstName)")
         
         if (ContactUsFeilds.firstName.isEmpty && ContactUsFeilds.email.isEmpty && ContactUsFeilds.subject.isEmpty && ContactUsFeilds.message.isEmpty){
@@ -144,7 +144,7 @@ class ContactUsViewController : UIViewController{
 }
 
 
-//MARK:- TableView Datasource
+// MARK:- TableView Datasource
 extension ContactUsViewController: UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -167,8 +167,8 @@ extension ContactUsViewController: UITableViewDataSource{
             
             cell.textFieldValue?.tag = indexPath.row
             
-            var keyBoardType : UIKeyboardType? =  UIKeyboardType.default
-            let textFieldTag = ContactTextFieldTags(rawValue:indexPath.row)!
+            var keyBoardType: UIKeyboardType? =  UIKeyboardType.default
+            let textFieldTag = ContactTextFieldTags(rawValue: indexPath.row)!
             
             //Cell ContactTextField data setup
             switch  textFieldTag {
@@ -191,8 +191,8 @@ extension ContactUsViewController: UITableViewDataSource{
 }
 
 
-//MARK:- TableView Delegates
-extension ContactUsViewController : UITableViewDelegate{
+// MARK:- TableView Delegates
+extension ContactUsViewController: UITableViewDelegate{
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
@@ -200,7 +200,7 @@ extension ContactUsViewController : UITableViewDelegate{
 }
 
 
-//MARK:- TextView Delegates
+// MARK:- TextView Delegates
 extension ContactUsViewController: UITextViewDelegate {
 
     func textViewDidChange(_ textView: UITextView) {
@@ -234,8 +234,8 @@ extension ContactUsViewController: UITextViewDelegate {
 }
 
 
-//MARK:- Textfield Delegate
-extension ContactUsViewController : UITextFieldDelegate{
+// MARK:- Textfield Delegate
+extension ContactUsViewController: UITextFieldDelegate{
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
         
@@ -244,7 +244,7 @@ extension ContactUsViewController : UITextFieldDelegate{
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         
-        let tag:ContactTextFieldTags = ContactTextFieldTags(rawValue: textField.tag)!
+        let tag: ContactTextFieldTags = ContactTextFieldTags(rawValue: textField.tag)!
         let finalString = textField.text! + string
       
         
@@ -268,7 +268,7 @@ extension ContactUsViewController : UITextFieldDelegate{
         
         textField.text =  textField.text?.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
         
-        let tag:ContactTextFieldTags = ContactTextFieldTags(rawValue: textField.tag)!
+        let tag: ContactTextFieldTags = ContactTextFieldTags(rawValue: textField.tag)!
         
         switch tag {
            
@@ -292,8 +292,8 @@ extension ContactUsViewController : UITextFieldDelegate{
 }
 
 
-//MARK:- Tableview cell class initialization
-class TextviewCell:UITableViewCell{
+// MARK:- Tableview cell class initialization
+class TextviewCell: UITableViewCell{
     
     @IBOutlet var labelTitle: UILabel?
     @IBOutlet var textView : UITextView?
@@ -311,8 +311,8 @@ class TextviewCell:UITableViewCell{
 }
 
 
-//MARK:- Webservice Delegates
-extension ContactUsViewController:NMWebServiceDelegate {
+// MARK:- Webservice Delegates
+extension ContactUsViewController: NMWebServiceDelegate {
     func startedRequest(_ manager: NetworkManager, requestName: NSString) {
         
         Logger.sharedInstance.info("requestname : \(requestName)")
@@ -331,7 +331,7 @@ extension ContactUsViewController:NMWebServiceDelegate {
         
         self.removeProgressIndicator()
         Logger.sharedInstance.info("requestname : \(requestName)")
-        UIUtilities.showAlertWithTitleAndMessage(title:NSLocalizedString("Error", comment: "") as NSString, message: error.localizedDescription as NSString)
+        UIUtilities.showAlertWithTitleAndMessage(title: NSLocalizedString("Error", comment: "") as NSString, message: error.localizedDescription as NSString)
     }
 }
 

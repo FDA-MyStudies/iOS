@@ -29,25 +29,25 @@ import SlideMenuControllerSwift
 let kVerifyMessageFromSignIn = "Your registered email is pending verification. Please type in the Verification Code received in the email to complete this step and proceed to using the app."
 
 
-enum SignInLoadFrom:Int{
+enum SignInLoadFrom: Int{
     case gatewayOverview
     case joinStudy
     case menu
 }
 
-class SignInViewController : UIViewController{
+class SignInViewController: UIViewController{
     
-    @IBOutlet var tableView : UITableView?
-    @IBOutlet var buttonSignIn : UIButton?
+    @IBOutlet var tableView: UITableView?
+    @IBOutlet var buttonSignIn: UIButton?
     @IBOutlet var buttonSignUp: UIButton?
-    @IBOutlet var termsAndCondition:LinkTextView?
-    var viewLoadFrom:SignInLoadFrom = .menu
-    var tableViewRowDetails : NSMutableArray?
+    @IBOutlet var termsAndCondition: LinkTextView?
+    var viewLoadFrom: SignInLoadFrom = .menu
+    var tableViewRowDetails: NSMutableArray?
     var user = User.currentUser
     var termsPageOpened = false
     
     
-//MARK:- ViewController Lifecycle
+// MARK:- ViewController Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -57,19 +57,19 @@ class SignInViewController : UIViewController{
         self.title = NSLocalizedString(kSignInTitleText, comment: "")
         
         //load plist info
-        let plistPath = Bundle.main.path(forResource: "SignInPlist", ofType: ".plist", inDirectory:nil)
+        let plistPath = Bundle.main.path(forResource: "SignInPlist", ofType: ".plist", inDirectory: nil)
         tableViewRowDetails = NSMutableArray.init(contentsOfFile: plistPath!)
         
         //Automatically takes care  of text field become first responder and scroll of tableview
         IQKeyboardManager.sharedManager().enable = true
         
         //Used for background tap dismiss keyboard
-        let gestureRecognizer : UITapGestureRecognizer = UITapGestureRecognizer.init(target: self, action: #selector(SignInViewController.dismissKeyboard))
+        let gestureRecognizer: UITapGestureRecognizer = UITapGestureRecognizer.init(target: self, action: #selector(SignInViewController.dismissKeyboard))
         self.tableView?.addGestureRecognizer(gestureRecognizer)
         
         
         //info button
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(image:UIImage.init(named:"info"), style: .done, target: self, action: #selector(self.buttonInfoAction(_:)))
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(image: UIImage.init(named: "info"), style: .done, target: self, action: #selector(self.buttonInfoAction(_:)))
         
         
         //unhide navigationbar
@@ -80,7 +80,7 @@ class SignInViewController : UIViewController{
         if let attributedTitle = buttonSignUp?.attributedTitle(for: .normal) {
             let mutableAttributedTitle = NSMutableAttributedString(attributedString: attributedTitle)
             
-            mutableAttributedTitle.addAttribute(NSForegroundColorAttributeName, value: UIColor.init(colorLiteralRed: 0/255.0, green: 124/255.0, blue: 186/255.0, alpha: 1.0), range: NSRange(location:10,length:7))
+            mutableAttributedTitle.addAttribute(NSForegroundColorAttributeName, value: UIColor.init(colorLiteralRed: 0/255.0, green: 124/255.0, blue: 186/255.0, alpha: 1.0), range: NSRange(location: 10,length: 7))
             
             buttonSignUp?.setAttributedTitle(mutableAttributedTitle, for: .normal)
         }
@@ -128,7 +128,7 @@ class SignInViewController : UIViewController{
     }
     
     
-//MARK:- Button Action
+// MARK:- Button Action
     
     /**
      
@@ -175,12 +175,12 @@ class SignInViewController : UIViewController{
      @param sender    accepts any object
 
      */
-    @IBAction func buttonInfoAction(_ sender:Any){
-        UIUtilities.showAlertWithTitleAndMessage(title:"Why Register?", message:kRegistrationInfoMessage as NSString)
+    @IBAction func buttonInfoAction(_ sender: Any){
+        UIUtilities.showAlertWithTitleAndMessage(title: "Why Register?", message: kRegistrationInfoMessage as NSString)
     }
     
 
-//MARK:-
+// MARK:-
     
     /**
      
@@ -191,18 +191,18 @@ class SignInViewController : UIViewController{
         
         // if textfield have data then we are updating same to model object
         
-        var selectedCell:SignInTableViewCell =  (tableView!.cellForRow(at:IndexPath(row:0, section: 0)) as? SignInTableViewCell)!
+        var selectedCell: SignInTableViewCell =  (tableView!.cellForRow(at: IndexPath(row: 0, section: 0)) as? SignInTableViewCell)!
         
         let emailTextFieldValue = selectedCell.textFieldValue?.text
-        selectedCell = (tableView!.cellForRow(at:IndexPath(row:1, section: 0)) as? SignInTableViewCell)!
+        selectedCell = (tableView!.cellForRow(at: IndexPath(row: 1, section: 0)) as? SignInTableViewCell)!
         
         let passwordTextFieldValue = selectedCell.textFieldValue?.text
         
         
-        if emailTextFieldValue?.isEmpty == false &&  (emailTextFieldValue?.characters.count)! > 0{
+        if emailTextFieldValue?.isEmpty == false &&  (emailTextFieldValue?.count)! > 0{
             user.emailId = emailTextFieldValue
         }
-        if passwordTextFieldValue?.isEmpty == false && (passwordTextFieldValue?.characters.count)! > 0{
+        if passwordTextFieldValue?.isEmpty == false && (passwordTextFieldValue?.count)! > 0{
             user.password = passwordTextFieldValue
         }
         self.tableView?.reloadData()
@@ -216,7 +216,7 @@ class SignInViewController : UIViewController{
      @param textMessage     Used to display the alert text
      
      */
-    func showAlertMessages(textMessage : String){
+    func showAlertMessages(textMessage: String){
         UIUtilities.showAlertMessage("", errorMessage: NSLocalizedString(textMessage, comment: ""), errorAlertActionTitle: NSLocalizedString("OK", comment: ""), viewControllerUsed: self)
     }
     
@@ -303,14 +303,14 @@ class SignInViewController : UIViewController{
         
         termsAndCondition?.attributedText = attributedString
         
-        termsAndCondition?.linkTextAttributes = [NSForegroundColorAttributeName:Utilities.getUIColorFromHex(0x007CBA)]
+        termsAndCondition?.linkTextAttributes = [NSForegroundColorAttributeName: Utilities.getUIColorFromHex(0x007CBA)]
         
     }
     
     
-//MARK:- Segue Methods
+// MARK:- Segue Methods
     
-    @IBAction func unwindFromVerification(_ segue:UIStoryboardSegue){
+    @IBAction func unwindFromVerification(_ segue: UIStoryboardSegue){
         
     }
     
@@ -350,7 +350,7 @@ class SignInViewController : UIViewController{
 }
 
 
-//MARK:- TableView Data source
+// MARK:- TableView Data source
 extension SignInViewController : UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -363,7 +363,7 @@ extension SignInViewController : UITableViewDataSource {
         let cell = (tableView.dequeueReusableCell(withIdentifier: kSignInTableViewCellIdentifier, for: indexPath) as? SignInTableViewCell)!
         
         cell.textFieldValue?.text = ""
-        var isSecuredEntry : Bool = false
+        var isSecuredEntry: Bool = false
         if indexPath.row == SignInTableViewTags.Password.rawValue{
             isSecuredEntry = true
         }
@@ -379,8 +379,8 @@ extension SignInViewController : UITableViewDataSource {
 }
 
 
-//MARK:- TableView Delegates
-extension SignInViewController :  UITableViewDelegate {
+// MARK:- TableView Delegates
+extension SignInViewController:  UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
@@ -389,8 +389,8 @@ extension SignInViewController :  UITableViewDelegate {
 }
 
 
-//MARK:- Textfield Delegate
-extension SignInViewController : UITextFieldDelegate{
+// MARK:- Textfield Delegate
+extension SignInViewController: UITextFieldDelegate{
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
         print(textField.tag)
@@ -399,7 +399,7 @@ extension SignInViewController : UITextFieldDelegate{
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         
-        let tag:SignInTableViewTags = SignInTableViewTags(rawValue: textField.tag)!
+        let tag: SignInTableViewTags = SignInTableViewTags(rawValue: textField.tag)!
         
         if tag == .EmailId {
             if string == " " {
@@ -437,7 +437,7 @@ extension SignInViewController : UITextFieldDelegate{
     }
 }
 
-extension SignInViewController:UIGestureRecognizerDelegate{
+extension SignInViewController: UIGestureRecognizerDelegate{
     func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
         if gestureRecognizer.isKind(of: UITapGestureRecognizer.classForCoder()) {
             if gestureRecognizer.numberOfTouches == 2 {
@@ -450,12 +450,12 @@ extension SignInViewController:UIGestureRecognizerDelegate{
 
 
 
-extension SignInViewController:UITextViewDelegate{
+extension SignInViewController: UITextViewDelegate{
     
     func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange) -> Bool {
         
-        var link:String =   (TermsAndPolicy.currentTermsAndPolicy?.termsURL)! //kTermsAndConditionLink
-        var title:String = kNavigationTitleTerms
+        var link: String =   (TermsAndPolicy.currentTermsAndPolicy?.termsURL)! //kTermsAndConditionLink
+        var title: String = kNavigationTitleTerms
         if (URL.absoluteString == TermsAndPolicy.currentTermsAndPolicy?.policyURL ) {
             //kPrivacyPolicyLink
             print("terms")
@@ -463,8 +463,8 @@ extension SignInViewController:UITextViewDelegate{
             title = kNavigationTitlePrivacyPolicy
             
         }
-        let loginStoryboard = UIStoryboard.init(name: "Main", bundle:Bundle.main)
-        let webViewController = (loginStoryboard.instantiateViewController(withIdentifier:"WebViewController") as? UINavigationController)!
+        let loginStoryboard = UIStoryboard.init(name: "Main", bundle: Bundle.main)
+        let webViewController = (loginStoryboard.instantiateViewController(withIdentifier: "WebViewController") as? UINavigationController)!
         let webview = (webViewController.viewControllers[0] as? WebViewController)!
         webview.requestLink = link
         webview.title = title
@@ -489,8 +489,8 @@ extension SignInViewController:UITextViewDelegate{
 
 
 
-//MARK:- Webservices Delegate
-extension SignInViewController:NMWebServiceDelegate {
+// MARK:- Webservices Delegate
+extension SignInViewController: NMWebServiceDelegate {
     
     func startedRequest(_ manager: NetworkManager, requestName: NSString) {
         Logger.sharedInstance.info("requestname : \(requestName)")
@@ -551,7 +551,7 @@ extension SignInViewController:NMWebServiceDelegate {
         
         self.removeProgressIndicator()
         
-        UIUtilities.showAlertWithTitleAndMessage(title:NSLocalizedString(kErrorTitle, comment: "") as NSString, message: error.localizedDescription as NSString)
+        UIUtilities.showAlertWithTitleAndMessage(title: NSLocalizedString(kErrorTitle, comment: "") as NSString, message: error.localizedDescription as NSString)
     }
 }
 

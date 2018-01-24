@@ -29,7 +29,7 @@ extension UIViewController{
         
         let customView = UIView.init(frame: CGRect.init(x: -15, y: 0, width: 46, height: 36))
         
-        let backbutton:UIButton = UIButton.init(frame: customView.frame)
+        let backbutton: UIButton = UIButton.init(frame: customView.frame)
         backbutton.setImage(#imageLiteral(resourceName: "backIcon"), for: .normal)
         backbutton.addTarget(self, action: #selector(self.popController), for: .touchUpInside)
         customView.addSubview(backbutton)
@@ -40,7 +40,7 @@ extension UIViewController{
         
         let customView = UIView.init(frame: CGRect.init(x: -15, y: 0, width: 46, height: 36))
         
-        let backbutton:UIButton = UIButton.init(frame: customView.frame)
+        let backbutton: UIButton = UIButton.init(frame: customView.frame)
         backbutton.setImage(#imageLiteral(resourceName: "homeIcon"), for: .normal)
         backbutton.addTarget(self, action: #selector(self.popToSpecificController), for: .touchUpInside)
         customView.addSubview(backbutton)
@@ -50,7 +50,7 @@ extension UIViewController{
     
     public func popToSpecificController() {
         
-        var identifier:String? = ""
+        var identifier: String? = ""
         
         switch self {
         case is ResourcesViewController:

@@ -73,7 +73,7 @@ class ActivityBuilder {
             self.activity = activity
             self.actvityResult = ActivityResult()
             self.actvityResult?.setActivity(activity: self.activity!)
-        }else {
+        } else {
             Logger.sharedInstance.debug("Activity:activity.steps is null:\(activity)")
         }
     }
@@ -134,7 +134,7 @@ class ActivityBuilder {
                             default: break
                             }
                         }
-                    }else {
+                    } else {
                         Logger.sharedInstance.debug("Activity:stepDict is null:\(stepDict)")
                         break;
                     }
@@ -161,7 +161,7 @@ class ActivityBuilder {
                         if self.activity?.branching == true { //For Branching/Navigable Task
                             task =  ORKNavigableOrderedTask(identifier: (activity?.actvityId)!, steps: orkStepArray)
                             
-                        }else { //For OrderedTask
+                        } else { //For OrderedTask
                             task =  ORKOrderedTask(identifier: (activity?.actvityId)!, steps: orkStepArray)
                         }
                     }
@@ -178,10 +178,10 @@ class ActivityBuilder {
                                 if step.isKind(of: ORKQuestionStep.self) || (step.isKind(of: ORKInstructionStep.self) == false && step.isKind(of: ORKCompletionStep.self) == false) {
                                     activityStep = activityStepArray?[(i!)] as?  ActivityQuestionStep
                                     
-                                }else if step.isKind(of: ORKFormStep.self) || step.isKind(of: RepeatableFormStep.self) {
+                                } else if step.isKind(of: ORKFormStep.self) || step.isKind(of: RepeatableFormStep.self) {
                                     activityStep = activityStepArray?[(i!)] as?  ActivityFormStep
                                     
-                                }else {
+                                } else {
                                     activityStep = activityStepArray?[(i!)] as?  ActivityInstructionStep
                                 }
                                 
@@ -193,7 +193,7 @@ class ActivityBuilder {
                                     if i! + 1 < (activityStepArray?.count)! {
                                         defaultStepIdentifier = (activityStepArray?[(i!+1)].key)!
                                         
-                                    }else { //Setting Completion Step as Default destination
+                                    } else { //Setting Completion Step as Default destination
                                         defaultStepIdentifier = kCompletionStep
                                     }
                                     
@@ -209,13 +209,13 @@ class ActivityBuilder {
                                     if step.isKind(of: ORKQuestionStep.self) {
                                         questionStep = (step as? ORKQuestionStep)!
                                         
-                                    }else if step is RepeatableFormStep {
+                                    } else if step is RepeatableFormStep {
                                         questionStep = (step as? RepeatableFormStep)!
                                         
-                                    }else if step is ORKFormStep {
+                                    } else if step is ORKFormStep {
                                         questionStep = (step as? ORKFormStep)!
                                         
-                                    }else {
+                                    } else {
                                         questionStep = (step as? ORKInstructionStep)!
                                     }
                                     
@@ -242,7 +242,7 @@ class ActivityBuilder {
                                                     // this means c = value & d = ""
                                                     destination?.append( kCompletionStep )
                                                     
-                                                }else {
+                                                } else {
                                                     // this means c = value && d =  value
                                                     destination?.append( (dict[kDestination]! as? String)!)
                                                 }
@@ -273,7 +273,7 @@ class ActivityBuilder {
                                                         if ((questionStep as? ORKQuestionStep)!.answerFormat! is ORKHeightAnswerFormat ) {
                                                             minimumValue = 0
                                                             
-                                                        }else {
+                                                        } else {
                                                             style = ((activityStep as? ActivityQuestionStep)!.formatDict![kStepQuestionNumericStyle] as? String)!
                                                         }
                                                         
@@ -300,11 +300,11 @@ class ActivityBuilder {
                                                         // this means c = value & d = ""
                                                         destination?.append( kCompletionStep )
                                                         
-                                                    }else {
+                                                    } else {
                                                         // this means c = value && d =  value
                                                         destination?.append( (dict[kDestination]! as? String)!)
                                                     }
-                                                }else {
+                                                } else {
                                                 }
                                                 
                                             case is ORKBooleanAnswerFormat :
@@ -314,11 +314,11 @@ class ActivityBuilder {
                                                 if (dict[kCondtion] as? String)!.caseInsensitiveCompare("true") ==  ComparisonResult.orderedSame {
                                                     boolValue = true
                                                     
-                                                }else {
+                                                } else {
                                                     if (dict[kCondtion] as? String)!.caseInsensitiveCompare("false") ==  ComparisonResult.orderedSame {
                                                         boolValue = false
                                                         
-                                                    }else if (dict[kCondtion] as? String)! == "" {
+                                                    } else if (dict[kCondtion] as? String)! == "" {
                                                         boolValue = nil
                                                         if Utilities.isValidValue(someObject: dict[kDestination] as AnyObject? ) {
                                                             
@@ -337,13 +337,13 @@ class ActivityBuilder {
                                                     // this means c = value & d = ""
                                                     destination?.append( kCompletionStep )
                                                     
-                                                }else {
+                                                } else {
                                                     // this means c = value && d =  value
                                                     destination?.append( (dict[kDestination]! as? String)!)
                                                 }
                                             default: break
                                             }
-                                        }else {
+                                        } else {
                                             // it means condition is empty
                                             if dict[kCondtion] != nil && (dict[kCondtion] as? String)! == "" {
                                                 

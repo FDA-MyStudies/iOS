@@ -81,7 +81,7 @@ enum ConsentStepSectionType: String{
     
 }
 
-class ConsentSectionStep{
+class ConsentSectionStep {
     
     var type: ConsentStepSectionType?
     var title: String?
@@ -140,8 +140,7 @@ class ConsentSectionStep{
                 self.visualStep = stepDict[kConsentStepVisualStep] as? Bool
             }
             
-        }
-        else{
+        } else {
             Logger.sharedInstance.debug("ConsentDocument Step Dictionary is null:\(stepDict)")
         }
         
@@ -156,27 +155,24 @@ class ConsentSectionStep{
         
         let consentSection: ORKConsentSection!
         
-        if self.visualStep == true{
+        if self.visualStep == true {
             
             consentSection = ORKConsentSection(type: ORKConsentSectionType(rawValue: consentType! )!)
-        }
-        else{
+        } else {
             consentSection = ORKConsentSection(type: ORKConsentSectionType.onlyInDocument)
         }
         consentSection.title = self.title!
         consentSection.summary = self.text!
         
-        if self.description?.isEmpty == false{
+        if self.description?.isEmpty == false {
             consentSection.content = self.description!
-        }
-        else if self.html!.isEmpty == false{
+        } else if self.html!.isEmpty == false {
            consentSection.htmlContent =  self.html!
-        }
-        else if self.url!.isEmpty == false{
+        } else if self.url!.isEmpty == false {
              consentSection.contentURL = URL(string: self.url!)
         }
         
-        if self.type == .custom && self.visualStep == true{
+        if self.type == .custom && self.visualStep == true {
             
             consentSection.customImage  = #imageLiteral(resourceName: "task_img2")
         }

@@ -88,35 +88,17 @@ class SignUpTableViewCell: UITableViewCell {
         let user = User.currentUser
         switch tag {
             
-        /*
-        case .FirstNameTag:
-            if Utilities.isValidValue(someObject: user.firstName as AnyObject?) {
-                self.textFieldValue?.text =  user.firstName
-            }
-            else{
-                self.textFieldValue?.text = ""
-            }
-        case .LastName:
-            if Utilities.isValidValue(someObject: user.lastName as AnyObject?) {
-                self.textFieldValue?.text =  user.lastName
-            }
-            else{
-                self.textFieldValue?.text = ""
-            }
-        */
         case .EmailId:
             if Utilities.isValidValue(someObject: user.emailId as AnyObject?) {
                 self.textFieldValue?.text =  user.emailId
-            }
-            else{
+            } else {
                 self.textFieldValue?.text = ""
             }
             
         case .Password:
             if Utilities.isValidValue(someObject: user.password as AnyObject?) {
                 self.textFieldValue?.text =  user.password
-            }
-            else{
+            } else {
                 self.textFieldValue?.text = ""
             }
             

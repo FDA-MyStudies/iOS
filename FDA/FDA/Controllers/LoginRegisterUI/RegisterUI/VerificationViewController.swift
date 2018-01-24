@@ -109,14 +109,14 @@ class VerificationViewController: UIViewController{
      @param sender  accepts anyy object
      
      */
-    @IBAction func continueTwoButtonAction( _ sender: UIButton){
+    @IBAction func continueTwoButtonAction( _ sender: UIButton) {
         
         self.view.endEditing(true)
         
-        if self.textFieldVerificationCode?.text == ""{
+        if self.textFieldVerificationCode?.text == "" {
             self.showAlertMessages(textMessage: kMessageVerificationCodeEmpty)
             
-        }else{
+        } else {
             print("Call the webservice")
             
             UserServices().verifyEmail(emailId: self.emailId!,  verificationCode:(self.textFieldVerificationCode?.text)! , delegate: self)
@@ -136,8 +136,7 @@ class VerificationViewController: UIViewController{
         
         if (textFieldVerificationCode?.text?.characters.count)! > 0 {
              UserServices().verifyEmail(emailId: User.currentUser.emailId!,  verificationCode:(self.textFieldVerificationCode?.text)! , delegate: self)
-        }
-        else{
+        } else {
              self.showAlertMessages(textMessage: kMessageVerificationCodeEmpty)
         }
     }
@@ -160,8 +159,7 @@ class VerificationViewController: UIViewController{
        
         if (finalEmail.isEmpty) || !(Utilities.isValidEmail(testStr: finalEmail)) {
              self.showAlertMessages(textMessage: kMessageValidEmail)
-        }
-        else{
+        } else {
              UserServices().resendEmailConfirmation(emailId: finalEmail, delegate: self)
         }
     }
@@ -218,8 +216,7 @@ class VerificationViewController: UIViewController{
         
         if shouldCreateMenu {
             fda.viewLoadFrom = .login
-        }
-        else{
+        } else {
             fda.viewLoadFrom = .menu_login
         }
         
@@ -235,10 +232,9 @@ extension VerificationViewController:UITextFieldDelegate{
         
         let finalString = textField.text! + string
         
-        if string == " " || finalString.characters.count > 255{
+        if string == " " || finalString.characters.count > 255 {
             return false
-        }
-        else{
+        } else {
             return true
         }
     }
@@ -280,15 +276,13 @@ extension VerificationViewController: NMWebServiceDelegate {
                 //pop to login
                 
                 self.performSegue(withIdentifier: "signInUnwindSegue", sender: self)
-            }
-            else if viewLoadFrom == .joinStudy {
+            } else if viewLoadFrom == .joinStudy {
                 
                 let appDelegate = (UIApplication.shared.delegate as? AppDelegate)!
                 appDelegate.checkPasscode(viewController: self)
                 
                 self.navigateToSignUpCompletionStep()
-            }
-            else{
+            } else {
                 let appDelegate = (UIApplication.shared.delegate as? AppDelegate)!
                 appDelegate.checkPasscode(viewController: self)
                 
@@ -312,8 +306,7 @@ extension VerificationViewController: NMWebServiceDelegate {
             UIUtilities.showAlertMessageWithActionHandler(kErrorTitle, message: error.localizedDescription, buttonTitle: kTitleOk, viewControllerUsed: self, action: {
                 _ = self.navigationController?.popToRootViewController(animated: true)
             })
-        }
-        else {
+        } else {
             
             UIUtilities.showAlertWithTitleAndMessage(title: NSLocalizedString(kErrorTitle, comment: "") as NSString, message: error.localizedDescription as NSString)
         }

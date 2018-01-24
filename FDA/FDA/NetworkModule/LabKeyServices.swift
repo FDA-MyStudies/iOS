@@ -223,7 +223,7 @@ class LabKeyServices: NSObject {
                                                     "date": date] as Dictionary<String,Any>
                                 responseData.values.append(valueDetail1)
                                 
-                            }else if responseData.key == "NumberofGames" {
+                            } else if responseData.key == "NumberofGames" {
                                 //numberOfGames
                                 let numberOfGamesDetail = data["NumberofGames"]  as? Dictionary<String,Any>
                                 let numberOfGames = (numberOfGamesDetail?["value"] as? Float)!
@@ -246,7 +246,7 @@ class LabKeyServices: NSObject {
                             }
                         }
                         
-                    }else {
+                    } else {
                         for responseData in dashBoardResponse {
                             
                             if let keyValue = data[responseData.key!] as? Dictionary<String,Any> {

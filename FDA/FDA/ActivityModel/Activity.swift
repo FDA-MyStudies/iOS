@@ -205,8 +205,7 @@ class Activity {
             
             if Utilities.isValidValue(someObject: infoDict[kActivityStartTime] as AnyObject) {
                  self.startDate =  Utilities.getDateFromStringWithOutTimezone(dateString: (infoDict[kActivityStartTime] as? String)!)
-            }
-            else {
+            } else {
                 self.startDate = Date()
             }
             
@@ -231,7 +230,7 @@ class Activity {
             if let userActivityStatus = currentUser.participatedActivites.filter({$0.activityId == self.actvityId && $0.studyId == self.studyId}).first {
                 self.userParticipationStatus = userActivityStatus
                 
-            }else {
+            } else {
                 self.userParticipationStatus = UserActivityStatus()
             }
           
@@ -240,7 +239,7 @@ class Activity {
           }
           
             self.calculateActivityRuns(studyId: self.studyId!)
-        }else {
+        } else {
             Logger.sharedInstance.debug("infoDict is null:\(infoDict)")
         }
         
@@ -262,10 +261,10 @@ class Activity {
             if Utilities.isValidObject(someObject: activityDict[kActivitySteps] as AnyObject?) {
                  self.setStepArray(stepArray: (activityDict[kActivitySteps] as? Array)! )
                 
-            }else {
+            } else {
                 Logger.sharedInstance.debug("infoDict is null:\(String(describing: activityDict[kActivitySteps]))")
             }
-        }else {
+        } else {
             Logger.sharedInstance.debug("infoDict is null:\(activityDict)")
         }
     }
@@ -293,7 +292,7 @@ class Activity {
                 //self.lastModified =   Utilities.getDateFromString(dateString: (infoDict[kActivityLastModified] as! String?)!)
             }
             
-        }else {
+        } else {
             Logger.sharedInstance.debug("infoDict is null:\(infoDict)")
         }
     }
@@ -308,7 +307,7 @@ class Activity {
             if Utilities.isValidValue(someObject: configurationDict[kActivityRandomization] as AnyObject) {
                 self.randomization =   configurationDict[kActivityId] as? Bool
             }
-        }else {
+        } else {
             Logger.sharedInstance.debug("configurationDict is null:\(configurationDict)")
         }
     }
@@ -318,7 +317,7 @@ class Activity {
        
         if Utilities.isValidObject(someObject: stepArray as AnyObject?){
             self.steps? = stepArray
-        }else {
+        } else {
             Logger.sharedInstance.debug("stepArray is null:\(stepArray)")
         }
     }
@@ -326,7 +325,7 @@ class Activity {
     func setORKSteps(orkStepArray: [ORKStep])  {
         if Utilities.isValidObject(someObject: orkStepArray as AnyObject?) {
             self.orkSteps = orkStepArray
-        }else {
+        } else {
             Logger.sharedInstance.debug("stepArray is null:\(orkStepArray)")
         }
         
@@ -337,7 +336,7 @@ class Activity {
         
         if Utilities.isValidObject(someObject: stepArray as AnyObject?) {
             self.activitySteps? = stepArray
-        }else {
+        } else {
             Logger.sharedInstance.debug("stepArray is null:\(stepArray)")
         }
     }

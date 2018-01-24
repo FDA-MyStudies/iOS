@@ -66,8 +66,7 @@ class Schedule{
             if Utilities.isValidValue(someObject: detail[kActivityFrequency] as AnyObject ){
                 self.frequency = Frequency(rawValue: detail[kActivityFrequency] as! String)!
             }
-        }
-        else{
+        } else {
             Logger.sharedInstance.debug("Schedule Dictionary is null:\(detail)")
         }
     }
@@ -116,13 +115,11 @@ class Schedule{
             if self.completionHandler != nil {
                 self.completionHandler!(self.activityRuns)
             }
-        }
-        else {
+        } else {
             //check if user joined before activity is started
             if startDateResult == .orderedDescending {
                 self.startTime = start
-            }
-            else {
+            } else {
                 self.startTime = joiningDate
             }
             
@@ -373,7 +370,7 @@ class Schedule{
         get {
             if let f = _formatter {
                 return f
-            }else {
+            } else {
                 let formatter = DateFormatter()
                 formatter.dateFormat = "YYYY-mm-dd"
                 formatter.dateStyle = .short
@@ -394,7 +391,7 @@ class Schedule{
             
             if let f = _formatter2 {
                 return f
-            }else {
+            } else {
                 let formatter = DateFormatter()
                 formatter.dateFormat = "YYYY-mm-dd"
                 formatter.dateStyle = .short

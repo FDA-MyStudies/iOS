@@ -118,10 +118,10 @@ class StudyFilterViewController: UIViewController {
                     pariticipationsStatus.append(value.title)
                 case .bookMark:
                     
-                    if User.currentUser.userType == .FDAUser{
+                    if User.currentUser.userType == .FDAUser {
                         bookmark = (value.isSelected)
                         isbookmarked = true
-                    }else {
+                    } else {
                         categories.append(value.title)
                     }
                     
@@ -139,11 +139,11 @@ class StudyFilterViewController: UIViewController {
         if User.currentUser.userType == .FDAUser {
         if isbookmarked {
             previousCollectionData.append((bookmark == true ? ["Bookmarked"]: []))
-        }else {
+        } else {
             previousCollectionData.append([])
             bookmark = false
         }
-        }else {
+        } else {
             previousCollectionData.append(categories)
             bookmark = false
             
@@ -161,14 +161,14 @@ class StudyFilterViewController: UIViewController {
      Navigate to Studylist screen on Cancel button clicked
      @param sender    accepts Anyobject in sender
      */
-    @IBAction func cancelButtonAction(_ sender: AnyObject){
+    @IBAction func cancelButtonAction(_ sender: AnyObject) {
         self.delegate?.didCancelFilter(true)
         self.dismiss(animated: true, completion: nil)
     }
 }
 
 //// MARK:- Collection Data source & Delegate
-extension StudyFilterViewController: UICollectionViewDataSource{//,UICollectionViewDelegate {
+extension StudyFilterViewController: UICollectionViewDataSource {//,UICollectionViewDelegate {
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return StudyFilterHandler.instance.filterOptions.count //filterData!.count
@@ -187,7 +187,7 @@ extension StudyFilterViewController: UICollectionViewDataSource{//,UICollectionV
 }
 
 
-extension StudyFilterViewController:PinterestLayoutDelegate{
+extension StudyFilterViewController:PinterestLayoutDelegate {
     // 1. Returns the photo height
     func collectionView(_ collectionView: UICollectionView, heightForPhotoAtIndexPath indexPath: IndexPath , withWidth width: CGFloat) -> CGFloat {
         
@@ -272,11 +272,11 @@ extension AppDelegate{
                         // this means that we are first time accessing the filter screen
                         filterValue.isSelected =  (value["isEnabled"] as? Bool)!
                         
-                    }else {
+                    } else {
                         // means that filter is already set
                         filterValue.isSelected = false
                     }
-                }else {
+                } else {
                     filterValue.isSelected = true
                 }
                 
@@ -326,7 +326,7 @@ extension AppDelegate{
                     if User.currentUser.userType == .FDAUser {
                         bookmark = (value.isSelected)
                         isbookmarked = true
-                    }else {
+                    } else {
                         categories.append(value.title)
                     }
                     
@@ -340,7 +340,7 @@ extension AppDelegate{
     
         if User.currentUser.userType == .FDAUser {
                 bookmark = false
-        }else {
+        } else {
             bookmark = false
             
         }

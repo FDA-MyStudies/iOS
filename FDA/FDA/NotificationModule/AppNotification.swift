@@ -101,7 +101,7 @@ class AppNotification {
             if Utilities.isValidValue(someObject: detail[kNotificationActivityId] as AnyObject ) {
                 self.activityId =   detail[kNotificationActivityId] as? String
             }
-        }else {
+        } else {
             Logger.sharedInstance.debug("AppNotification Dictionary is null:\(detail)")
         }
     }

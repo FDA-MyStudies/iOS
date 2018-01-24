@@ -458,7 +458,7 @@ class WCPServices: NSObject {
                 //save in database
                 DBHandler.saveActivities(activityies: (Study.currentStudy?.activities)!)
             }
-        }else {
+        } else {
             Logger.sharedInstance.debug("activities is null:\(activities)")
         }
         

@@ -90,8 +90,7 @@ class SignUpViewController: UIViewController{
         
         if termsPageOpened {
             termsPageOpened = false
-        }
-        else {
+        } else {
             //unhide navigationbar
             self.navigationController?.setNavigationBarHidden(false, animated: true)
             
@@ -101,8 +100,7 @@ class SignUpViewController: UIViewController{
            
             if viewLoadFrom == .menu{
                 self.setNavigationBarItem()
-            }
-            else {
+            } else {
                 self.addBackBarButton()
             }
             UIApplication.shared.statusBarStyle = .default
@@ -176,16 +174,13 @@ class SignUpViewController: UIViewController{
         } else if Utilities.isPasswordValid(text: (self.user.password)!) == false  {
             self.showAlertMessages(textMessage: kMessageValidatePasswordComplexity)
             return false
-        }
-        else if (self.user.password)! == user.emailId {
+        } else if (self.user.password)! == user.emailId {
             self.showAlertMessages(textMessage: kMessagePasswordMatchingToOtherFeilds)
             return false
-        }
-        else if confirmPassword == "" {
+        } else if confirmPassword == "" {
             self.showAlertMessages(textMessage: kMessageProfileConfirmPasswordBlank)
             return false
-        }
-        else if (self.user.password != confirmPassword){
+        } else if (self.user.password != confirmPassword) {
             self.showAlertMessages(textMessage: kMessageValidatePasswords)
             return false
         }
@@ -230,9 +225,9 @@ class SignUpViewController: UIViewController{
         
         if self.validateAllFields() == true {
             
-            if !(agreedToTerms){
+            if !(agreedToTerms) {
                 self.showAlertMessages(textMessage: kMessageAgreeToTermsAndConditions)
-            }else{
+            } else {
                 //Call the Webservice
                 UserServices().registerUser(self as NMWebServiceDelegate)
             }
@@ -251,7 +246,7 @@ class SignUpViewController: UIViewController{
         if (sender as? UIButton)!.isSelected{
             (sender as? UIButton)!.isSelected = !(sender as? UIButton)!.isSelected
             agreedToTerms = false
-        }else{
+        } else {
             agreedToTerms = true
             (sender as? UIButton)!.isSelected = !(sender as? UIButton)!.isSelected
         }
@@ -457,16 +452,13 @@ extension SignUpViewController: UITextFieldDelegate{
         if  tag == .EmailId {
             if string == " " || finalString.characters.count > 255{
                 return false
-            }
-            else{
+            } else {
                 return true
             }
-        }
-        else if tag == .Password || tag == .ConfirmPassword {
+        } else if tag == .Password || tag == .ConfirmPassword {
             if finalString.characters.count > 64 {
                 return false
-            }
-            else{
+            } else {
                 if (range.location == textField.text?.characters.count && string == " ") {
                     
                     textField.text = textField.text?.appending("\u{00a0}")
@@ -474,8 +466,7 @@ extension SignUpViewController: UITextFieldDelegate{
                 }
                 return true
             }
-        }
-        else{
+        } else {
             return true
         }
     }
@@ -539,8 +530,7 @@ extension SignUpViewController: NMWebServiceDelegate {
             delegate.calculateTimeZoneChange()
             ORKPasscodeViewController.removePasscodeFromKeychain()
             self.navigateToVerificationController()
-        }
-        else{
+        } else {
             self.agreeToTermsAndConditions()
         }
     }

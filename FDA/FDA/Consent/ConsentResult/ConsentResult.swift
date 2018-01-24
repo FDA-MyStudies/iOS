@@ -64,7 +64,7 @@ class ConsentResult {
                         /* sharing choice result either 1 selected or 2 seleceted
                          */
                         
-                    } else{
+                    } else {
                         //Do Nothing
                     }
                 } else if let signatureStepResult: ORKConsentSignatureResult? = (stepResult as? ORKStepResult)!.results?[0] as? ORKConsentSignatureResult? {
@@ -114,8 +114,7 @@ class ConsentResult {
                             print(error.localizedDescription)
                         }
                     })
-                    }
-                    else{
+                    } else {
                        
                         var fullPath: String!
                         let path =  AKUtility.baseFilePath + "/study"
@@ -148,8 +147,7 @@ class ConsentResult {
                             print(error.localizedDescription)
                         }
                     }
-                }
-                else if let tokenStepResult: EligibilityTokenTaskResult? = (stepResult as? ORKStepResult)!.results?[0] as? EligibilityTokenTaskResult?{
+                } else if let tokenStepResult: EligibilityTokenTaskResult? = (stepResult as? ORKStepResult)!.results?[0] as? EligibilityTokenTaskResult? {
                     self.token = tokenStepResult?.enrollmentToken
                 }
             }
@@ -175,22 +173,19 @@ class ConsentResult {
                 
                 if Utilities.isValidValue(someObject: Utilities.getDateFromString(dateString:(activityDict[kActivityStartTime] as? String)!) as AnyObject?) {
                     self.startTime =  Utilities.getDateFromString(dateString: (activityDict[kActivityStartTime] as? String)!)
-                }
-                else{
+                } else {
                     Logger.sharedInstance.debug("Date Conversion is null:\(activityDict)")
                 }
             }
-            if Utilities.isValidValue(someObject: activityDict[kActivityEndTime] as AnyObject ){
+            if Utilities.isValidValue(someObject: activityDict[kActivityEndTime] as AnyObject ) {
                 
                 if Utilities.isValidValue(someObject: Utilities.getDateFromString(dateString:(activityDict[kActivityEndTime] as? String)!) as AnyObject?) {
                     self.endTime =  Utilities.getDateFromString(dateString: (activityDict[kActivityEndTime] as? String)!)
-                }
-                else{
+                } else {
                     Logger.sharedInstance.debug("Date Conversion is null:\(activityDict)")
                 }
             }
-        }
-        else{
+        } else {
             Logger.sharedInstance.debug("activityDict Result Dictionary is null:\(activityDict)")
         }
     }

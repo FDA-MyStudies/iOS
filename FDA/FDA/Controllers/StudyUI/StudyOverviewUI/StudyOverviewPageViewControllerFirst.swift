@@ -27,7 +27,7 @@ import MediaPlayer
 import SDWebImage
 import ResearchKit
 import AVKit
-class StudyOverviewViewControllerFirst: UIViewController{
+class StudyOverviewViewControllerFirst: UIViewController {
     
     @IBOutlet var buttonJoinStudy: UIButton?
     @IBOutlet var buttonWatchVideo: UIButton?
@@ -56,8 +56,7 @@ class StudyOverviewViewControllerFirst: UIViewController{
         
         if overviewSectionDetail.link != nil {
             buttonWatchVideo?.isHidden = false
-        }
-        else{
+        } else {
              buttonWatchVideo?.isHidden =  true
         }
     }
@@ -74,8 +73,7 @@ class StudyOverviewViewControllerFirst: UIViewController{
         var fontSize = 18.0
         if DeviceType.IS_IPAD || DeviceType.IS_IPHONE_4_OR_LESS {
             fontSize = 13.0
-        }
-        else if DeviceType.IS_IPHONE_5 {
+        } else if DeviceType.IS_IPHONE_5 {
             fontSize = 14.0
         }
         
@@ -90,10 +88,9 @@ class StudyOverviewViewControllerFirst: UIViewController{
             size: CGFloat(fontSize))!], range:(attrStr.string as NSString).range(of: attrStr.string))
         attributedText.addAttribute(NSForegroundColorAttributeName, value: UIColor.white, range: (attrStr.string as NSString).range(of: attrStr.string))
         
-        if Utilities.isValidValue(someObject: attrStr.string as AnyObject?){
+        if Utilities.isValidValue(someObject: attrStr.string as AnyObject?) {
              self.labelDescription?.attributedText = attributedText
-        }
-        else{
+        } else {
              self.labelDescription?.text = ""
         }
        self.labelDescription?.textAlignment = .center
@@ -154,8 +151,7 @@ class StudyOverviewViewControllerFirst: UIViewController{
     
         if  extenstion == nil || extenstion?.characters.count == 0 {
             UIApplication.shared.openURL(url!)
-        }
-        else {
+        } else {
             
             do{
                 try AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayback)

@@ -89,20 +89,20 @@ class File{
      setter method for File class
      @param dict, is dictionary of file properties
      */
-    func setFile(dict: NSDictionary)  {
+    func setFile(dict: NSDictionary) {
         
-        if Utilities.isValidObject(someObject: dict){
+        if Utilities.isValidObject(someObject: dict) {
             
-            if Utilities.isValidValue(someObject: dict[kFileMIMEType] as AnyObject)   {
+            if Utilities.isValidValue(someObject: dict[kFileMIMEType] as AnyObject) {
                 self.mimeType = dict[kFileMIMEType] as? MimeType
             }
-            if Utilities.isValidValue(someObject: dict[kFileName] as AnyObject)  {
+            if Utilities.isValidValue(someObject: dict[kFileName] as AnyObject) {
                 self.name = dict[kFileName] as? String
             }
-            if Utilities.isValidValue(someObject: dict[kFileLink] as AnyObject)  {
+            if Utilities.isValidValue(someObject: dict[kFileLink] as AnyObject) {
                 self.link = dict[kFileLink] as? String
             }
-        }else {
+        } else {
             Logger.sharedInstance.debug("File Dictionary is null:\(dict)")
         }
     }
@@ -113,24 +113,24 @@ class File{
      */
     func setFileForStudy(dict: NSDictionary)  {
         
-        if Utilities.isValidObject(someObject: dict){
+        if Utilities.isValidObject(someObject: dict) {
             
-            if Utilities.isValidValue(someObject: dict[kFileTypeForStudy] as AnyObject)   {
+            if Utilities.isValidValue(someObject: dict[kFileTypeForStudy] as AnyObject) {
                 self.mimeType = MimeType(rawValue:dict[kFileTypeForStudy] as! String)
             }
-            if Utilities.isValidValue(someObject: dict[kFileTitleForStudy] as AnyObject)  {
+            if Utilities.isValidValue(someObject: dict[kFileTitleForStudy] as AnyObject) {
                 self.name = dict[kFileTitleForStudy] as? String
             }
-            if Utilities.isValidValue(someObject: dict[kFileLinkForStudy] as AnyObject)  {
+            if Utilities.isValidValue(someObject: dict[kFileLinkForStudy] as AnyObject) {
                 
                 self.link = dict[kFileLinkForStudy] as? String
-                if (self.link?.contains("http"))!{
+                if (self.link?.contains("http"))! {
                     //Do Nothing
-                }else {
+                } else {
                     self.localPath = "BundlePath"
                 }
             }
-        }else {
+        } else {
             Logger.sharedInstance.debug("File Dictionary is null:\(dict)")
         }
     }

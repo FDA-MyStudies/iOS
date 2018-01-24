@@ -106,7 +106,7 @@ class ActivitiesViewController : UIViewController{
             self.tableView?.isHidden = true
             self.labelNoNetworkAvailable?.isHidden = false
             
-        }else {
+        } else {
             self.tableView?.isHidden = false
             self.labelNoNetworkAvailable?.isHidden = true
         }
@@ -134,8 +134,7 @@ class ActivitiesViewController : UIViewController{
         if StudyUpdates.studyActivitiesUpdated {
             
             self.sendRequestToGetActivityStates()
-        }
-        else {
+        } else {
             
             if self.refreshControl != nil && (self.refreshControl?.isRefreshing)!{
                 self.refreshControl?.endRefreshing()
@@ -167,7 +166,7 @@ class ActivitiesViewController : UIViewController{
                 
             })
             
-        }else {
+        } else {
             //check if user navigated from notification
             
             if NotificationHandler.instance.activityId.characters.count > 0 {
@@ -292,8 +291,7 @@ class ActivitiesViewController : UIViewController{
             
             if statiticsList.count != 0 {
                 //Do Nothing
-            }
-            else {
+            } else {
                 self.sendRequestToGetDashboardInfo()
             }
         }
@@ -321,7 +319,7 @@ class ActivitiesViewController : UIViewController{
                 
                 self.handleActivityListResponse()
                 
-            }else {
+            } else {
                 
                 self.sendRequestToGetActivityStates()
             }
@@ -358,7 +356,7 @@ class ActivitiesViewController : UIViewController{
                 
                 let result: ORKResult?
                 taskViewController = ORKTaskViewController(task: task, restorationData: restoredData, delegate: self)
-            }else {
+            } else {
                 
                 taskViewController = ORKTaskViewController(task: task, taskRun: nil)
                 taskViewController?.outputDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
@@ -376,7 +374,7 @@ class ActivitiesViewController : UIViewController{
             taskControllerPresented = true
             present(taskViewController!, animated: true, completion: nil)
             
-        }else {
+        } else {
             //Task creation failed
             UIUtilities.showAlertMessage(kAlertMessageText, errorMessage: NSLocalizedString("Invalid Data!", comment: ""), errorAlertActionTitle: NSLocalizedString("OK", comment: ""), viewControllerUsed: self)
         }
@@ -406,21 +404,20 @@ class ActivitiesViewController : UIViewController{
             if startDateResult == .orderedAscending && endDateResult == .orderedDescending{
                 return .current
                 
-            }else if startDateResult == .orderedDescending {
+            } else if startDateResult == .orderedDescending {
                 return .upcoming
                 
-            }else if endDateResult == .orderedAscending {
+            } else if endDateResult == .orderedAscending {
                 return .past
             }
-        }
-        else if activity.startDate != nil {
+        } else if activity.startDate != nil {
             
             let startDateResult = (activity.startDate?.compare(todayDate))! as ComparisonResult
             
             if startDateResult == .orderedAscending{
                 return .current
                 
-            }else if startDateResult == .orderedDescending {
+            } else if startDateResult == .orderedDescending {
                 return .upcoming
             }
         }
@@ -455,8 +452,7 @@ class ActivitiesViewController : UIViewController{
                 case .past:
                     pastActivities.append(activity)
                 }
-            }
-            else {
+            } else {
                 
                 isInActiveActivitiesAreAvailable = true
                 
@@ -620,7 +616,7 @@ class ActivitiesViewController : UIViewController{
         if ud.object(forKey: missedKey) == nil {
             ud.set(totalIncompletedRuns, forKey: missedKey)
             
-        }else {
+        } else {
             let previousMissed = (ud.object(forKey: missedKey) as? Int)!
             ud.set(totalIncompletedRuns, forKey: missedKey)
             if previousMissed < totalIncompletedRuns {
@@ -681,8 +677,7 @@ class ActivitiesViewController : UIViewController{
         if activity.currentRun == nil {
             //Do Nothing
             
-        }
-        else {
+        } else {
             //Status is not completed
             if activity.userParticipationStatus.status != UserActivityStatus.ActivityStatus.completed {
                 
@@ -722,10 +717,10 @@ class ActivitiesViewController : UIViewController{
         if StudyUpdates.studyConsentUpdated {
             presentUpdatedConsent()
             
-        }else if StudyUpdates.studyInfoUpdated {
+        } else if StudyUpdates.studyInfoUpdated {
             WCPServices().getStudyInformation(studyId: (Study.currentStudy?.studyId)!, delegate: self)
             
-        }else {
+        } else {
             self.checkForActivitiesUpdates()
         }
         
@@ -808,8 +803,7 @@ extension ActivitiesViewController: UITableViewDataSource{
             let cell = tableView.dequeueReusableCell(withIdentifier: "noData", for: indexPath)
             cell.isUserInteractionEnabled = false
             return cell
-        }
-        else {
+        } else {
             var cell = (tableView.dequeueReusableCell(withIdentifier: kActivitiesTableViewCell, for: indexPath) as? ActivitiesTableViewCell)!
             cell.delegate = self
             
@@ -866,8 +860,7 @@ extension ActivitiesViewController: UITableViewDelegate{
                         DBHandler.loadActivityMetaData(activity: activities[indexPath.row], completionHandler: { (found) in
                             if found {
                                 self.createActivity()
-                            }
-                            else {
+                            } else {
                                 
                                 //Fetch ActivityMetaData from Server
                                 WCPServices().getStudyActivityMetadata(studyId: (Study.currentStudy?.studyId)! , activityId: (Study.currentActivity?.actvityId)!, activityVersion: (Study.currentActivity?.version)!, delegate: self)
@@ -877,13 +870,12 @@ extension ActivitiesViewController: UITableViewDelegate{
                         self.updateActivityStatusToInProgress()
                         self.selectedIndexPath = indexPath
                         
-                    }else {
+                    } else {
                         debugPrint("run is completed")
                     }
                 }
                 
-            }
-            else if activity.userParticipationStatus?.status == .abandoned {
+            } else if activity.userParticipationStatus?.status == .abandoned {
                 debugPrint("run not available")
                 UIUtilities.showAlertWithMessage(alertMessage: NSLocalizedString(kActivityAbondonedAlertMessage, comment: ""))
             }
@@ -921,7 +913,7 @@ extension ActivitiesViewController: ActivityFilterViewDelegate{
                 let filterType: ActivityType! =  (selectedIndex == .surveys ? .Questionnaire : .activeTask)
                 self.updateSectionArray(activityType: filterType)
                 
-            }else {// existing filterType is either Task or Surveys
+            } else {// existing filterType is either Task or Surveys
                 
                 //load all the sections from scratch
                 self.tableViewSections = []
@@ -935,7 +927,7 @@ extension ActivitiesViewController: ActivityFilterViewDelegate{
             }
             self.selectedFilter = selectedIndex
             self.tableView?.reloadData()
-        }else {
+        } else {
             //current and newly selected filter types are same
         }
     }
@@ -967,7 +959,7 @@ extension ActivitiesViewController: NMWebServiceDelegate {
         
         if (requestName as String == RegistrationMethods.updateStudyState.method.methodName) ||  (requestName as String == RegistrationMethods.updateActivityState.method.methodName) ||
             (requestName as String == WCPMethods.studyDashboard.method.methodName) || (requestName as String == WCPMethods.resources.method.methodName){
-        }else {
+        } else {
             self.addProgressIndicator()
         }
     }
@@ -979,7 +971,7 @@ extension ActivitiesViewController: NMWebServiceDelegate {
         
         if requestName as String == RegistrationMethods.activityState.method.methodName {
             self.sendRequesToGetActivityList()
-        }else if requestName as String == WCPMethods.activityList.method.methodName {
+        } else if requestName as String == WCPMethods.activityList.method.methodName {
             
             //get DashboardInfo
             self.sendRequestToGetDashboardInfo()
@@ -994,23 +986,23 @@ extension ActivitiesViewController: NMWebServiceDelegate {
             //Update StudymetaData for Study
             DBHandler.updateMetaDataToUpdateForStudy(study: Study.currentStudy!, updateDetails: nil)
             
-        }else if requestName as String == WCPMethods.activity.method.methodName {
+        } else if requestName as String == WCPMethods.activity.method.methodName {
             self.removeProgressIndicator()
             self.createActivity()
             
-        }else if requestName as String == WCPMethods.studyDashboard.method.methodName {
+        } else if requestName as String == WCPMethods.studyDashboard.method.methodName {
             self.sendRequestToGetResourcesInfo()
             self.getLabkeyResponse()
             
-        }else if requestName as String == WCPMethods.resources.method.methodName {
+        } else if requestName as String == WCPMethods.resources.method.methodName {
             self.removeProgressIndicator()
             
-        }else if requestName as String == ResponseMethods.processResponse.method.methodName {
+        } else if requestName as String == ResponseMethods.processResponse.method.methodName {
             self.removeProgressIndicator()
             //self.updateRunStatusToComplete()
             self.checkForActivitiesUpdates()
             
-        }else if requestName as String == WCPMethods.studyUpdates.method.methodName {
+        } else if requestName as String == WCPMethods.studyUpdates.method.methodName {
             
             Logger.sharedInstance.info("Handling response for study updates...")
             if Study.currentStudy?.version == StudyUpdates.studyVersion {
@@ -1020,11 +1012,11 @@ extension ActivitiesViewController: NMWebServiceDelegate {
                 if self.refreshControl != nil && (self.refreshControl?.isRefreshing)! {
                     self.refreshControl?.endRefreshing()
                 }
-            }else {
+            } else {
                 self.handleStudyUpdatesResponse()
             }
             
-        }else if requestName as String == WCPMethods.studyInfo.method.methodName {
+        } else if requestName as String == WCPMethods.studyInfo.method.methodName {
             
             StudyUpdates.studyInfoUpdated = false
             DBHandler.updateMetaDataToUpdateForStudy(study: Study.currentStudy!, updateDetails: nil)
@@ -1049,14 +1041,14 @@ extension ActivitiesViewController: NMWebServiceDelegate {
                 //self.sendRequesToGetActivityList()
                 if (error.code != NoNetworkErrorCode) {
                     self.loadActivitiesFromDatabase()
-                }else {
+                } else {
                     
                     self.tableView?.isHidden = true
                     self.labelNoNetworkAvailable?.isHidden = false
                     
                     UIUtilities.showAlertWithTitleAndMessage(title: NSLocalizedString(kErrorTitle, comment: "") as NSString, message: error.localizedDescription as NSString)
                 }
-            }else if requestName as String == ResponseMethods.processResponse.method.methodName {
+            } else if requestName as String == ResponseMethods.processResponse.method.methodName {
                 
                 if (error.code == NoNetworkErrorCode) {
                     //Users are notified when their responses don’t get submitted due to network issues and are notified that the responses will be automatically submitted once the app has network available again.
@@ -1109,12 +1101,10 @@ extension ActivitiesViewController: ORKTaskViewControllerDelegate{
                 if Study.currentActivity?.currentRun.runId != runid {
                     //runid is changed
                     self.updateRunStatusForRunId(runId: runid)
-                }
-                else {
+                } else {
                     self.updateRunStatusToComplete()
                 }
-            }
-            else {
+            } else {
                 
                 self.updateRunStatusToComplete()
             }
@@ -1148,8 +1138,7 @@ extension ActivitiesViewController: ORKTaskViewControllerDelegate{
             
             if taskViewController.task?.identifier == "ConsentTask" {
                 //Do Nothing
-            }
-            else{
+            } else {
                 ActivityBuilder.currentActivityBuilder.activity?.restortionData = taskViewController.restorationData
             }
             
@@ -1158,8 +1147,7 @@ extension ActivitiesViewController: ORKTaskViewControllerDelegate{
         
         if  taskViewController.task?.identifier == "ConsentTask" {
             consentbuilder?.consentResult?.initWithORKTaskResult(taskResult:taskViewController.result )
-        }
-        else{
+        } else {
             
             if reason == ORKTaskViewControllerFinishReason.completed {
                 ActivityBuilder.currentActivityBuilder.actvityResult?.initWithORKTaskResult(taskResult: taskViewController.result)
@@ -1273,7 +1261,7 @@ extension ActivitiesViewController: ORKTaskViewControllerDelegate{
             
             if activityBuilder?.actvityResult?.result?.count == taskViewController.result.results?.count {
                 activityBuilder?.actvityResult?.result?.removeLast()
-            }else {
+            } else {
                 
                 let study = Study.currentStudy
                 let activity = Study.currentActivity
@@ -1367,12 +1355,12 @@ extension ActivitiesViewController: ORKTaskViewControllerDelegate{
             let ttController = (storyboard.instantiateViewController(withIdentifier: "FetalKickCounterStepViewController") as? FetalKickCounterStepViewController)!
             ttController.step = step
             return ttController
-        }else if  step is FetalKickIntroStep {
+        } else if  step is FetalKickIntroStep {
             
             let ttController = (storyboard.instantiateViewController(withIdentifier: "FetalKickIntroStepViewControllerIdentifier") as? FetalKickIntroStepViewController)!
             ttController.step = step
             return ttController
-        }else {
+        } else {
             return nil
         }
     }
@@ -1442,10 +1430,11 @@ class ActivitySchedules:UIView,UITableViewDelegate,UITableViewDataSource{
         let activityRun = self.activity.activityRuns[indexPath.row]
         cell.textLabel?.text = ActivitySchedules.formatter.string(from: activityRun.startDate) + " - "
             + ActivitySchedules.formatter.string(from: activityRun.endDate)
+        
         if activityRun.runId == self.activity.currentRunId {
             cell.textLabel?.textColor = kBlueColor
-        }
-        else if activityRun.runId < self.activity.currentRunId {
+            
+        } else if activityRun.runId < self.activity.currentRunId {
             cell.textLabel?.textColor = UIColor.gray
         }
         cell.textLabel?.textAlignment = .center
@@ -1493,7 +1482,7 @@ class ResponseDataFetch:NMWebServiceDelegate{
         if StudyUpdates.studyActivitiesUpdated {
             self.sendRequestToGetDashboardInfo()
             
-        }else {
+        } else {
             
             //Load Stats List from DB
             DBHandler.loadStatisticsForStudy(studyId: (Study.currentStudy?.studyId)!) { (statiticsList) in
@@ -1504,7 +1493,7 @@ class ResponseDataFetch:NMWebServiceDelegate{
                     let appDelegate = (UIApplication.shared.delegate as? AppDelegate)!
                     appDelegate.addAndRemoveProgress(add: true)
                     
-                }else {
+                } else {
                     //Fetch DashboardInfo
                     self.sendRequestToGetDashboardInfo()
                 }
@@ -1552,10 +1541,10 @@ class ResponseDataFetch:NMWebServiceDelegate{
                     
                     keys = "\"count\",duration"
                     tableName = activityId!+activityId!
-                }else if activity?.taskSubType == "towerOfHanoi" {
+                } else if activity?.taskSubType == "towerOfHanoi" {
                     keys = "numberOfMoves"
                     tableName = activityId!+activityId!
-                }else if activity?.taskSubType == "spatialSpanMemory" {
+                } else if activity?.taskSubType == "spatialSpanMemory" {
                     keys = "NumberofGames,Score,NumberofFailures"
                     tableName = activityId!+activityId!
                 }
@@ -1563,7 +1552,7 @@ class ResponseDataFetch:NMWebServiceDelegate{
             let participantId = Study.currentStudy?.userParticipateState.participantId
             //Get Survey Response from Server
             LabKeyServices().getParticipantResponse(tableName: tableName!,activityId: activityId!, keys: keys!, participantId: participantId!, delegate: self)
-        }else {
+        } else {
             
             //save response in database
             
@@ -1613,8 +1602,8 @@ class ResponseDataFetch:NMWebServiceDelegate{
         
         if requestName as String == WCPMethods.studyDashboard.method.methodName {
             self.getDataKeysForCurrentStudy()
-        }
-        else if requestName as String == ResponseMethods.executeSQL.description {
+            
+        } else if requestName as String == ResponseMethods.executeSQL.description {
             self.handleExecuteSQLResponse()
         }
         
@@ -1623,8 +1612,8 @@ class ResponseDataFetch:NMWebServiceDelegate{
         Logger.sharedInstance.info("requestname : \(requestName)")
         if requestName as String == ResponseMethods.executeSQL.description {
             self.handleExecuteSQLResponse()
-        }
-        else {
+            
+        } else {
             //Do Nothing
         }
     }

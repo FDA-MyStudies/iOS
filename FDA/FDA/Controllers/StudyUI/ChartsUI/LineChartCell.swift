@@ -135,8 +135,7 @@ class LineChartCell: GraphChartTableViewCell {
         if chart.scrollable {
             self.buttonForward.isHidden = false
             self.buttonBackward.isHidden = false
-        }
-        else {
+        } else {
             self.buttonForward.isHidden = true
             self.buttonBackward.isHidden = true
         }
@@ -203,10 +202,9 @@ class LineChartCell: GraphChartTableViewCell {
             xAxisTitles = Calendar.current.shortMonthSymbols
             
             for i in 0...11{
-                if (i == 0 || i == 3 || i == 6 || i == 9 || i == 11){
+                if (i == 0 || i == 3 || i == 6 || i == 9 || i == 11) {
                     
-                }
-                else {
+                } else {
                     xAxisTitles[i] = ""
                 }
             }
@@ -367,8 +365,7 @@ class LineChartCell: GraphChartTableViewCell {
                 
                 self.handleRunsForDate(startDate: startDate!, endDate: endDate! ,runs: frequencySet)
 
-            }
-            else {
+            } else {
                 xAxisTitles = []
                 plotPoints = []
                 self.graphView.reloadData()
@@ -500,8 +497,7 @@ class LineChartCell: GraphChartTableViewCell {
                 labelAxisValue.attributedText = attributedText //stringStartDate + " - " + stringEndDate
                 
                 self.handleRunsForDate(startDate: startDate!, endDate: endDate! ,runs: frequencySet)
-            }
-            else {
+            } else {
                 xAxisTitles = []
                 plotPoints = []
                 self.graphView.reloadData()
@@ -575,10 +571,9 @@ class LineChartCell: GraphChartTableViewCell {
         
         for i in 1...numDays{
             
-            if i == 1 || i == 5 || i == 10 || i == 15 || i == 20 || i == 25 || i == numDays{
+            if i == 1 || i == 5 || i == 10 || i == 15 || i == 20 || i == 25 || i == numDays {
               xAxisTitles.append(String(i))
-            }
-            else {
+            } else {
               xAxisTitles.append("")
             }
             
@@ -608,16 +603,16 @@ class LineChartCell: GraphChartTableViewCell {
         
     }
     
-    func handleDaysOfWeekForStartDate(startDate: Date,endDate: Date){
+    func handleDaysOfWeekForStartDate(startDate: Date,endDate: Date) {
         
         let dataList: Array<DBStatisticsData> = currentChart.statList.filter({$0.startDate! >= startDate && $0.startDate! <= endDate})
         
-        let array = dataList.map{$0.data}
+        let array = dataList.map{$0.data }
         var points: Array<ORKValueRange> = []
        
         plotPoints = []
         
-        for i in 1...xAxisTitles.count{
+        for i in 1...xAxisTitles.count {
             
             
             points.append(ORKValueRange())
@@ -807,13 +802,9 @@ class LineChartCell: GraphChartTableViewCell {
                     let fk = data.fkDuration
                     points.append(ORKValueRange(value: Double(value)))
                     self.replaceXTitleForActiveTask(value: fk, atIndex: i)
-                }
-                else {
+                } else {
                     points.append(ORKValueRange())
                 }
-                
-                
-                
                 
             }
             
@@ -822,7 +813,7 @@ class LineChartCell: GraphChartTableViewCell {
         self.graphView.reloadData()
     }
     
-    func replaceXTitleForActiveTask(value: Int,atIndex: Int){
+    func replaceXTitleForActiveTask(value: Int,atIndex: Int) {
         
         if charActivity?.type == .activeTask {
             var title = (xAxisTitles[atIndex] as? String)!

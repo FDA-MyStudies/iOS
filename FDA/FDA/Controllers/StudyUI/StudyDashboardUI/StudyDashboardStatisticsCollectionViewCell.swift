@@ -97,7 +97,7 @@ class StudyDashboardStatisticsCollectionViewCell: UICollectionViewCell {
         if stats.statType == nil {
             statisticsImage?.image = UIImage(named: "activity")
             
-        }else {
+        } else {
             
             switch stats.statType! {
             case  StatisticsType.Activity.description:
@@ -164,10 +164,9 @@ class StudyDashboardStatisticsCollectionViewCell: UICollectionViewCell {
         
         let array = dataList.map{$0.data}
         
-        if array.count == 0{
+        if array.count == 0 {
             labelStatisticsCount?.text = "NA"
-        }
-        else {
+        } else {
             self.calculate(array: array)
         }
     }
@@ -177,10 +176,9 @@ class StudyDashboardStatisticsCollectionViewCell: UICollectionViewCell {
         
         let array = dataList.map{$0.data}
         
-        if array.count == 0{
+        if array.count == 0 {
             labelStatisticsCount?.text = "NA"
-        }
-        else {
+        } else {
             self.calculate(array: array)
         }
         
@@ -191,10 +189,9 @@ class StudyDashboardStatisticsCollectionViewCell: UICollectionViewCell {
         
         let array = dataList.map{$0.data}
         
-        if array.count == 0{
+        if array.count == 0 {
             labelStatisticsCount?.text = "NA"
-        }
-        else {
+        } else {
             self.calculate(array: array)
         }
         

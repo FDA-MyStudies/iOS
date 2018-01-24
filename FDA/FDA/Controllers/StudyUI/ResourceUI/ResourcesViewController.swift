@@ -83,11 +83,11 @@ class ResourcesViewController: UIViewController{
         
         if Study.currentStudy?.withdrawalConfigration?.message == nil && ( Study.currentStudy?.withdrawalConfigration?.type == nil || Study.currentStudy?.withdrawalConfigration?.type == .notAvailable ){
             WCPServices().getStudyInformation(studyId: (Study.currentStudy?.studyId)!, delegate: self)
-        }
-        else if StudyUpdates.studyInfoUpdated {
+            
+        } else if StudyUpdates.studyInfoUpdated {
             WCPServices().getStudyInformation(studyId: (Study.currentStudy?.studyId)!, delegate: self)
-        }
-        else {
+            
+        } else {
             self.checkForResourceUpdate()
         }
         
@@ -107,8 +107,7 @@ class ResourcesViewController: UIViewController{
         
         if StudyUpdates.studyResourcesUpdated {
             WCPServices().getResourcesForStudy(studyId: (Study.currentStudy?.studyId)!, delegate: self)
-        }
-        else {
+        } else {
             self.loadResourceFromDatabase()
         }
     }
@@ -126,8 +125,8 @@ class ResourcesViewController: UIViewController{
             if resources.count != 0 {
                  Study.currentStudy?.resources = resources
                  self.handleResourcesReponse()
-            }
-            else {
+                
+            } else {
                  WCPServices().getResourcesForStudy(studyId: (Study.currentStudy?.studyId)!, delegate: self)
             }
         }
@@ -146,8 +145,7 @@ class ResourcesViewController: UIViewController{
             }
             resourceDetail.hidesBottomBarWhenPushed = true
             
-        }
-        else if segue.identifier == "ResourceDetailViewSegueIdentifier"{
+        } else if segue.identifier == "ResourceDetailViewSegueIdentifier" {
             
             let resourceDetail = (segue.destination as? ResourcesDetailViewControllerCopy)!
             resourceDetail.resource = (sender as? Resource)!
@@ -248,16 +246,8 @@ class ResourcesViewController: UIViewController{
                             if ((startDateResult == .orderedAscending || startDateResult == .orderedSame) && (endDateResult == .orderedDescending || endDateResult == .orderedSame)){
                                 
                                 tableViewRowDetails?.append(resource)
-                            }
-                                //                        else if startDateResult == .orderedDescending {
-                                //                            print("upcoming")
-                                //                            return .upcoming
-                                //                        }
-                                //                        else if endDateResult == .orderedAscending {
-                                //                            print("past")
-                                //                            return .past
-                                //                        }
-                            else if startDateResult == .orderedDescending {
+                                
+                            } else if startDateResult == .orderedDescending {
                                 //upcoming
                                 let notfiId = resource.resourcesId! + (Study.currentStudy?.studyId)!
                                 DBHandler.isNotificationSetFor(notification: notfiId
@@ -287,36 +277,26 @@ class ResourcesViewController: UIViewController{
                                             LocalNotification.scheduleNotificationOn(date: notificationDate!, message: message!, userInfo: userInfo)
                                         }
                                 })
-                                
-                                
+                               
                             }
                         }
                         
-                        
-                        
-                    }
-                    else {
+                    } else {
                         tableViewRowDetails?.append(resource)
                     }
                     
-                    
-                }
-                else {
+                } else {
                     tableViewRowDetails?.append(resource)
                 }
-            }
-            else {
+            } else {
                  tableViewRowDetails?.append(resource)
             }
             
         }
         
         
-        
-        
         tableView?.isHidden =  false
         tableView?.reloadData()
-        
         
         StudyUpdates.studyResourcesUpdated = false
         DBHandler.updateMetaDataToUpdateForStudy(study: Study.currentStudy!, updateDetails: nil)
@@ -439,8 +419,8 @@ class ResourcesViewController: UIViewController{
             if overview != nil {
                 study.overview = overview
                 self.navigateToStudyHome()
-            }
-            else {
+                
+            } else {
                 
                 self.navigateToStudyOverview = true
                 self.sendRequestToGetStudyInfo(study: study)
@@ -476,8 +456,7 @@ class ResourcesViewController: UIViewController{
             {
                 isPDF = true
                 print("pdf")
-            }
-            else {
+            } else {
                 isPDF = false
                 print("not pdf")
                 UserServices().getConsentPDFForStudy(studyId: (Study.currentStudy?.studyId)!, delegate: self)
@@ -569,14 +548,12 @@ extension ResourcesViewController: UITableViewDataSource {
             
             if Utilities.isValidValue(someObject: (resource as? Resource)?.title as AnyObject) {
                 cell.populateCellData(data: ((resource as? Resource)?.title)!)
-            }
-            else{
+            } else {
                 cell.labelTitle?.text = ""
             }
             
             
-        }
-        else{
+        } else {
             // default cells
             
             cell.populateCellData(data: (resource as? String)!)
@@ -604,32 +581,28 @@ extension ResourcesViewController: UITableViewDelegate{
             resourceLink = (resource as? Resource)?.file?.getFileLink()
             fileType = (resource as? Resource)?.file?.getMIMEType()
             self.performSegue(withIdentifier: "ResourceDetailViewSegueIdentifier" , sender: resource)
-        }
-        else{
+            
+        } else {
             if (resource as? String)! == "Leave Study" {
                 self.handleLeaveStudy()
-            }
-            else if  (resource as? String)! == "About the Study"{
+                
+            } else if  (resource as? String)! == "About the Study" {
                 
                 self.checkDatabaseForStudyInfo(study: Study.currentStudy!)
-                
-            }
-            else if  (resource as? String)! == "Consent PDF"{
+
+            } else if  (resource as? String)! == "Consent PDF" {
                 
                 //PENDING
                 
                 if  Study.currentStudy?.signedConsentFilePath != nil {
                 
                     self.pushToResourceDetails()
-                }
-                else{
+                } else {
                     
                     UserServices().getConsentPDFForStudy(studyId: (Study.currentStudy?.studyId)!, delegate: self)
                     
                 }
-            }
-                
-            else{
+            } else {
                 
             }
         }
@@ -662,7 +635,7 @@ extension ResourcesViewController: NMWebServiceDelegate {
             UserServices().withdrawFromStudy(studyId: (Study.currentStudy?.studyId)!, shouldDeleteData: self.shouldDeleteData!
                 , delegate: self)
         }
-        else if requestName as String == RegistrationMethods.withdraw.method.methodName{
+        else if requestName as String == RegistrationMethods.withdraw.method.methodName {
             
             //clear all local data storage
             let currentUser = User.currentUser
@@ -690,13 +663,12 @@ extension ResourcesViewController: NMWebServiceDelegate {
             self.performSegue(withIdentifier: "unwindeToStudyListResourcesIdentifier", sender: self)
 
    
-        }
-        else  if requestName as String == RegistrationMethods.updatePreferences.method.methodName{
+        } else  if requestName as String == RegistrationMethods.updatePreferences.method.methodName {
            // self.navigationController?.navigationBar.isHidden = false
            // self.performSegue(withIdentifier: "unwindeToStudyListResourcesIdentifier", sender: self)
             self.removeProgressIndicator()
-        }
-        else if(requestName as String == WCPMethods.studyInfo.rawValue){
+            
+        } else if(requestName as String == WCPMethods.studyInfo.rawValue) {
             
             
             StudyUpdates.studyInfoUpdated = false
@@ -709,38 +681,30 @@ extension ResourcesViewController: NMWebServiceDelegate {
                 self.tabBarController?.tabBar.isHidden = true
                 
                 self.navigateToStudyHome()
-            }
-            else if self.withdrawlInformationNotFound {
+                
+            } else if self.withdrawlInformationNotFound {
                 
                 self.removeProgressIndicator()
                 self.withdrawlInformationNotFound = false
                 self.handleLeaveStudy()
-            }
-            else {
+                
+            } else {
                 self.checkForResourceUpdate()
             }
             self.removeProgressIndicator()
             
-        }
-        else if requestName as String == RegistrationMethods.consentPDF.method.methodName{
+        } else if requestName as String == RegistrationMethods.consentPDF.method.methodName {
             
             self.removeProgressIndicator()
             let consentDict: Dictionary<String,Any> = ((response as? Dictionary<String,Any>)![kConsentPdfKey] as? Dictionary<String, Any>)!
             
-            if Utilities.isValidObject(someObject: consentDict as AnyObject? ){
+            if Utilities.isValidObject(someObject: consentDict as AnyObject? ) {
                 
-                if Utilities.isValidValue(someObject: consentDict[kConsentVersion] as AnyObject?){
+                if Utilities.isValidValue(someObject: consentDict[kConsentVersion] as AnyObject?) {
                     Study.currentStudy?.signedConsentVersion = consentDict[kConsentVersion] as? String
-                }
-                else{
+                } else {
                     Study.currentStudy?.signedConsentVersion = "No_Version"
                 }
-                
-                /* supposed that mime type of consent remains pdf
-                if Utilities.isValidValue(someObject: consentDict[kFileMIMEType] as AnyObject?){
-                    Study.currentStudy?.signedConsentVersion = consentDict[kConsentVersion] as? String
-                }
- */
                 
                 if Utilities.isValidValue(someObject: consentDict[kConsentPdfContent] as AnyObject?){
                     self.saveConsentPdfToLocal(base64dataString: (consentDict[kConsentPdfContent] as? String)! )
@@ -750,8 +714,7 @@ extension ResourcesViewController: NMWebServiceDelegate {
             }
             
             
-        }
-        else if(requestName as String == WCPMethods.studyInfo.rawValue){
+        } else if(requestName as String == WCPMethods.studyInfo.rawValue) {
             self.removeProgressIndicator()
         }
         
@@ -766,8 +729,7 @@ extension ResourcesViewController: NMWebServiceDelegate {
             UIUtilities.showAlertMessageWithActionHandler(kErrorTitle, message: error.localizedDescription, buttonTitle: kTitleOk, viewControllerUsed: self, action: {
                 self.fdaSlideMenuController()?.navigateToHomeAfterUnauthorizedAccess()
             })
-        }
-        else {
+        } else {
             
             if requestName as String == WCPMethods.resources.method.methodName {
                 
@@ -779,21 +741,18 @@ extension ResourcesViewController: NMWebServiceDelegate {
                 self.tableView?.reloadData()
                 
                 
-            }
-            else if requestName as String == ResponseMethods.withdrawFromStudy.description {
+            } else if requestName as String == ResponseMethods.withdrawFromStudy.description {
                 
                 if error.localizedDescription.localizedCaseInsensitiveContains("Invalid ParticipantId.") {
                     
                     
                     UserServices().withdrawFromStudy(studyId: (Study.currentStudy?.studyId)!, shouldDeleteData: self.shouldDeleteData!
                         , delegate: self)
-                }
-                else {
+                } else {
                    self.removeProgressIndicator()
                     UIUtilities.showAlertWithTitleAndMessage(title: NSLocalizedString(kErrorTitle, comment: "") as NSString, message: error.localizedDescription as NSString)
                 }
-            }
-            else {
+            } else {
                 
                 self.removeProgressIndicator()
                 UIUtilities.showAlertWithTitleAndMessage(title: NSLocalizedString(kErrorTitle, comment: "") as NSString, message: error.localizedDescription as NSString)

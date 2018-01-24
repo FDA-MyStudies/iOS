@@ -46,8 +46,7 @@ class ActivityFormStep: ActivityStep {
             if Utilities.isValidObject(someObject: stepDict[kStepFormSteps] as AnyObject ){
                 self.itemsArray = (stepDict[kStepFormSteps] as? [Dictionary<String,Any>])!
             }
-        }
-        else{
+        } else {
             Logger.sharedInstance.debug("Instruction Step Dictionary is null:\(stepDict)")
         }
     }
@@ -70,7 +69,7 @@ class ActivityFormStep: ActivityStep {
                 (step as? RepeatableFormStep)!.repeatable = true
                 (step as? RepeatableFormStep)!.repeatableText = self.repeatableText
                 
-            }else {
+            } else {
                 step = ORKFormStep(identifier: key!, title: (self.title == nil ? "" : self.title!), text: text!)
             }
             
@@ -97,7 +96,7 @@ class ActivityFormStep: ActivityStep {
                     formItem01.isOptional = (questionStep?.skippable)!
                     formItemsArray.append(formItem01)
                     
-                }else {
+                } else {
                     Logger.sharedInstance.debug("item Dictionary is null :\(dict)")
                 }
             }
@@ -109,7 +108,7 @@ class ActivityFormStep: ActivityStep {
             step?.formItems = formItemsArray
             return step
             
-        }else {
+        } else {
             Logger.sharedInstance.debug("Form Data is null ")
             return nil
         }

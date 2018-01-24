@@ -46,7 +46,7 @@ class FilterListTableViewCell: UITableViewCell {
         
         if filterValue.isSelected{
             self.imageSelected?.image = UIImage(named:"checked")
-        }else{
+        } else {
             self.imageSelected?.image = UIImage(named:"notChecked")
         }
     }

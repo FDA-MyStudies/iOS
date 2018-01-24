@@ -108,8 +108,7 @@ class FirstGatewayOverviewViewController: UIViewController{
         if urlString.contains("youtube"){
             let url = URL.init(string: urlString)
             UIApplication.shared.openURL(url!)
-        }
-        else {
+        } else {
             
             let url = URL.init(string: urlString)
             

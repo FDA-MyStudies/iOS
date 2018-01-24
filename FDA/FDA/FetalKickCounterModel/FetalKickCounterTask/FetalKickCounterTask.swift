@@ -73,15 +73,15 @@ class FetalKickCounterTask {
         if duration > 0.0{
             self.duration =  duration
             
-        }else{
+        } else {
             self.duration = 50
             Logger.sharedInstance.warn("Duration is null:\(duration)")
         }
         
-        if Utilities.isValidValue(someObject: instructionText as AnyObject?){
+        if Utilities.isValidValue(someObject: instructionText as AnyObject?) {
              self.instructionText = instructionText
             
-        }else{
+        } else {
              self.instructionText = ""
         }
         self.maxKickCounts = 0
@@ -107,7 +107,7 @@ class FetalKickCounterTask {
       if (self.instructionText?.characters.count)! > 0 {
         introStep.subTitle = NSLocalizedString(self.instructionText!, comment: "")
        
-      }else {
+      } else {
          introStep.subTitle = NSLocalizedString(kFetalKickInstructionStepText, comment: "")
       }
       

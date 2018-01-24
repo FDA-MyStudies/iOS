@@ -55,7 +55,7 @@ class LocalNotification: NSObject {
                 }
             }
             
-        }else {
+        } else {
             handler(true)
         }
     }
@@ -70,8 +70,7 @@ class LocalNotification: NSObject {
                 LocalNotification.registerAllLocalNotificationFor(activities: activities, completionHandler: { (done) in
                     completionHandler(true)
                 })
-            }
-            else {
+            } else {
                 completionHandler(true)
             }
         }
@@ -92,7 +91,7 @@ class LocalNotification: NSObject {
                 //runsBeforeToday = runs
                 runsBeforeToday = activity.activityRuns
                 
-            }else {
+            } else {
                 
                 runsBeforeToday = activity.activityRuns.filter({$0.endDate >= date})
             }
@@ -119,7 +118,7 @@ class LocalNotification: NSObject {
                         
                         LocalNotification.composeRunNotification(startDate: date, endDate: run.endDate, message: message, run: run)
                         
-                    }else {
+                    } else {
                         
                         let date = run.startDate! // 24 hours before
                         let message1 = "A new run of the daily activity " + activity.name!

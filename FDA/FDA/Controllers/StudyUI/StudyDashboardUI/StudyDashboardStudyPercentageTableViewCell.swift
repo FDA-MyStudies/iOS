@@ -87,8 +87,7 @@ class StudyDashboardStudyPercentageTableViewCell: UITableViewCell {
                 
                 studyPercentagePie?.angle = 0
                 completedPercentagePie?.angle = 0
-            }
-            else {
+            } else {
                 
                 self.labelStudyCompletion?.text = String(userStudyStatus.adherence)
                 self.labelStudyAdherence?.text = String(userStudyStatus.completion)

@@ -352,7 +352,7 @@ class ActivityBuilder {
                                                     // means we ahave valid destination
                                                     defaultStepIdentifier = (dict[kDestination]! as? String)!
                                                     
-                                                }else {
+                                                } else {
                                                     // invalid destination i.e condition = "" && destination = ""
                                                     defaultStepIdentifier = kCompletionStep
                                                 }
@@ -376,28 +376,28 @@ class ActivityBuilder {
                                                     (task as? ORKNavigableOrderedTask)!.setNavigationRule(directRule, forTriggerStepIdentifier: step.identifier)
                                                 }
                                             }
-                                        }else {
+                                        } else {
                                             // if both destination and condition are empty
                                             let  directRule: ORKDirectStepNavigationRule!
                                             
                                             if defaultStepExist == false {
                                                 directRule = ORKDirectStepNavigationRule(destinationStepIdentifier: kCompletionStep)
-                                            }else {
+                                            } else {
                                                 directRule = ORKDirectStepNavigationRule(destinationStepIdentifier: defaultStepIdentifier)
                                             }
                                             
                                             (task as? ORKNavigableOrderedTask)!.setNavigationRule(directRule!, forTriggerStepIdentifier:step.identifier)
                                         }
-                                    }else {
+                                    } else {
                                         
                                         predicateRule = ORKPredicateStepNavigationRule(resultPredicates: choicePredicate, destinationStepIdentifiers: destination!, defaultStepIdentifier: defaultStepIdentifier, validateArrays: true)
                                         
                                         (task as? ORKNavigableOrderedTask)!.setNavigationRule(predicateRule!, forTriggerStepIdentifier:step.identifier)
                                     }
-                                }else {
+                                } else {
                                     //destination array is empty - Do Nothing
                                 }
-                            }else {
+                            } else {
                                 //this is not question step
                             }
                             i = i! + 1
@@ -407,10 +407,10 @@ class ActivityBuilder {
                         
                         if (self.activity?.branching)! {
                             return (task as? ORKNavigableOrderedTask)!
-                        }else {
+                        } else {
                             return (task as? ORKOrderedTask)!
                         }
-                    }else {
+                    } else {
                         return nil
                     }
                 }
@@ -456,7 +456,7 @@ class ActivityBuilder {
                             }
                         }
                         
-                    }else {
+                    } else {
                         Logger.sharedInstance.debug("Activity:stepDict is null:\(stepDict)")
                         break;
                     }
@@ -475,11 +475,11 @@ class ActivityBuilder {
                     }
                     return task!
                     
-                }else {
+                } else {
                     return nil
                 }
             }
-        }else {
+        } else {
             Logger.sharedInstance.debug("activity is null:\(activity)")
         }
         return nil
@@ -508,10 +508,10 @@ class ActivityBuilder {
                 if style == "Decimal"{
                     predicate =  NSPredicate.init(format: "SUBQUERY(SELF, $x, $x.identifier == $ORK_TASK_IDENTIFIER AND SUBQUERY($x.results, $y, $y.identifier == \"\(resultSelector.resultIdentifier)\" AND $y.isPreviousResult == 0 AND SUBQUERY($y.results, $z, $z.identifier == \"\(resultSelector.resultIdentifier)\" AND $z.answer >= \(lhs) AND $z.answer < \(lhs + 0.1)).@count > 0).@count > 0).@count > 0" , argumentArray: [])
                     
-                }else {
+                } else {
                     predicate = ORKResultPredicate.predicateForNumericQuestionResult(with: resultSelector, expectedAnswer: Int(lhs))
                 }
-            }else {
+            } else {
                 predicate = ORKResultPredicate.predicateForNumericQuestionResult(with: resultSelector, expectedAnswer: Int(lhs))
             }
             
@@ -522,10 +522,10 @@ class ActivityBuilder {
                 
                 if style == "Decimal" {
                     equalPredicate =  NSPredicate.init(format: "SUBQUERY(SELF, $x, $x.identifier == $ORK_TASK_IDENTIFIER AND SUBQUERY($x.results, $y, $y.identifier == \"\(resultSelector.resultIdentifier)\" AND $y.isPreviousResult == 0 AND SUBQUERY($y.results, $z, $z.identifier == \"\(resultSelector.resultIdentifier)\" AND $z.answer >= \(lhs) AND $z.answer < \(lhs + 0.1)).@count > 0).@count > 0).@count > 0" , argumentArray: [])
-                }else {
+                } else {
                     equalPredicate = ORKResultPredicate.predicateForNumericQuestionResult(with: resultSelector, expectedAnswer: Int(lhs))
                 }
-            }else {
+            } else {
                 equalPredicate = ORKResultPredicate.predicateForNumericQuestionResult(with: resultSelector, expectedAnswer: Int(lhs))
             }
             
@@ -609,7 +609,7 @@ class ActivityBuilder {
             
             if resultType is ORKScaleAnswerFormat {
                 predicate = ORKResultPredicate.predicateForScaleQuestionResult(with: resultSelector, expectedAnswer: Int(lhs))
-            }else {
+            } else {
                 
                 var offset: Double? = 0.0
                 let maxFraction = (activityStep as? ActivityQuestionStep)!.formatDict![kStepQuestionContinuosScaleMaxFractionDigits] as? Int

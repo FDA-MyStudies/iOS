@@ -76,9 +76,6 @@ extension SearchBarView: UITextFieldDelegate{
     func textFieldDidBeginEditing(_ textField: UITextField) {
         print(textField.tag)
         
-        
-        
-        
     }
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
@@ -87,16 +84,14 @@ extension SearchBarView: UITextFieldDelegate{
         let finalString = textField.text! + string
         
         
-        if textField == textFieldSearch{
+        if textField == textFieldSearch {
             
-            if finalString != nil && finalString.characters.count > 500{
+            if finalString != nil && finalString.characters.count > 500 {
                 return false
-            }
-            else{
+            } else {
                 return true
             }
-        }
-        else{
+        } else {
             
             return false
         }

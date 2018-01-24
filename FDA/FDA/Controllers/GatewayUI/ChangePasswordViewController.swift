@@ -76,8 +76,7 @@ class ChangePasswordViewController: UIViewController {
             oldPassword = temporaryPassword
             tableViewRowDetails?.removeObject(at: 0)
             self.title = NSLocalizedString(kCreatePasswordTitleText, comment: "")
-        }
-        else {
+        } else {
             self.title = NSLocalizedString(kChangePasswordTitleText, comment: "")
         }
     }
@@ -163,33 +162,24 @@ class ChangePasswordViewController: UIViewController {
      */
     @IBAction func submitButtonAction(_ sender: Any) {
         
-        if self.oldPassword.isEmpty && self.newPassword.isEmpty && self.confirmPassword.isEmpty{
+        if self.oldPassword.isEmpty && self.newPassword.isEmpty && self.confirmPassword.isEmpty {
              self.showAlertMessages(textMessage: kMessageAllFieldsAreEmpty)
-        }
-        else if self.oldPassword == ""{
+        } else if self.oldPassword == "" {
             self.showAlertMessages(textMessage: kMessageCurrentPasswordBlank)
             
-        }else if self.newPassword == ""{
+        } else if self.newPassword == "" {
             self.showAlertMessages(textMessage: kMessageNewPasswordBlank)
-        }
-        else if self.confirmPassword == ""{
+        } else if self.confirmPassword == "" {
              self.showAlertMessages(textMessage: kMessageProfileConfirmPasswordBlank)
-        }
-        else if Utilities.isPasswordValid(text: self.newPassword) == false{
+        } else if Utilities.isPasswordValid(text: self.newPassword) == false {
             self.showAlertMessages(textMessage: kMessageValidatePasswordComplexity)
             
-        }
-        else if self.newPassword == User.currentUser.emailId {
+        } else if self.newPassword == User.currentUser.emailId {
             self.showAlertMessages(textMessage: kMessagePasswordMatchingToOtherFeilds)
             
-        }
-        //else if  self.oldPassword == self.newPassword{
-        //     self.showAlertMessages(textMessage: kMessageValidateOldAndNewPasswords)
-        //}
-        else if self.newPassword != self.confirmPassword{
+        } else if self.newPassword != self.confirmPassword {
             self.showAlertMessages(textMessage: kMessageProfileValidatePasswords)
-        }
-        else{
+        } else {
            self.requestToChangePassword()
         }
     }
@@ -213,8 +203,7 @@ extension ChangePasswordViewController : UITableViewDataSource {
         if temporaryPassword.characters.count > 0{
             
             tagIncremental = 101
-        }
-        else {
+        } else {
             cell.textFieldValue?.isEnabled = true
         }
         cell.textFieldValue?.tag = indexPath.row + tagIncremental
@@ -251,8 +240,7 @@ extension ChangePasswordViewController: UITextFieldDelegate{
         if tag == .newPassword || tag == .confirmPassword {
             if finalString.characters.count > 64 {
                 return false
-            }
-            else{
+            } else {
                 if (range.location == textField.text?.characters.count && string == " ") {
                     
                     textField.text = textField.text?.appending("\u{00a0}")
@@ -260,8 +248,7 @@ extension ChangePasswordViewController: UITextFieldDelegate{
                 }
                 return true
             }
-        }
-        else{
+        } else {
             
             if (range.location == textField.text?.characters.count && string == " ") {
                 
@@ -311,8 +298,7 @@ extension ChangePasswordViewController: NMWebServiceDelegate {
                 _ = self.navigationController?.popViewController(animated: true)
                 
             }
-        }
-        else if viewLoadFrom == .menu_login {
+        } else if viewLoadFrom == .menu_login {
           
           //Updating Key & Vector
           let appDelegate = (UIApplication.shared.delegate as? AppDelegate)!
@@ -331,13 +317,11 @@ extension ChangePasswordViewController: NMWebServiceDelegate {
             leftController.createLeftmenuItems()
             leftController.changeViewController(.studyList)
           
-        }
-        else if viewLoadFrom == .login {
+        } else if viewLoadFrom == .login {
             //create menu
             
             self.createMenuView()
-        }
-        else if viewLoadFrom == .joinStudy {
+        } else if viewLoadFrom == .joinStudy {
             
             let leftController = (slideMenuController()?.leftViewController as? LeftMenuViewController)!
             leftController.createLeftmenuItems()
@@ -354,8 +338,7 @@ extension ChangePasswordViewController: NMWebServiceDelegate {
             UIUtilities.showAlertMessageWithActionHandler(kErrorTitle, message: error.localizedDescription, buttonTitle: kTitleOk, viewControllerUsed: self, action: {
                 self.fdaSlideMenuController()?.navigateToHomeAfterUnauthorizedAccess()
             })
-        }
-        else {
+        } else {
           UIUtilities.showAlertWithTitleAndMessage(title: NSLocalizedString(kErrorTitle, comment: "") as NSString, message: error.localizedDescription as NSString)
         }
     }

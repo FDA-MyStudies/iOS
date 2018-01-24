@@ -148,16 +148,16 @@ class Utilities: NSObject {
     class func validateInputValue(value: String, valueType: String)-> Bool{
         
         var valueRegex = ""
-        if valueType == "Phone"{
+        if valueType == "Phone" {
             
-        }else if valueType == "Name"{
+        } else if valueType == "Name" {
             valueRegex = "[a-zA-z]+([ '-][a-zA-Z]+)*$"
             
-        }else if valueType == "Email"{
+        } else if valueType == "Email" {
             
             valueRegex = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}"
             
-        }else if valueType == "Password"{
+        } else if valueType == "Password" {
             
             // password validation for which is length >= 8 && contains any special character
             valueRegex = "^(?=.*[!\"#$%&'()*+,-./:;<=>?@\\^_`{|}~\\[\\]])[0-9A-Za-z!\"#$%&'()*+,-./:;<=>?@\\^_`{|}~\\[\\]]{8,}$"
@@ -176,8 +176,7 @@ class Utilities: NSObject {
         
         if testStr.characters.count > 255 {
             return false
-        }
-        else{
+        } else {
             return emailTest.evaluate(with: testStr)
         }
     }
@@ -284,22 +283,22 @@ class Utilities: NSObject {
             if someObject as? Int != nil && (someObject as? Int)! >= 0 {
                 return true
                 
-            }else if someObject as? String != nil && ((someObject as? String)?.characters.count)! > 0 && (someObject as? String) != ""{
+            } else if someObject as? String != nil && ((someObject as? String)?.characters.count)! > 0 && (someObject as? String) != "" {
                 return true
                 
-            }else if someObject as? Bool != nil && (someObject as! Bool == true || someObject as! Bool == false){
+            } else if someObject as? Bool != nil && (someObject as! Bool == true || someObject as! Bool == false){
                 return true
                 
-            }else  if someObject as? Double != nil && (someObject as? Double)?.isFinite == true && (someObject as? Double)?.isZero == false && (someObject as? Double)! > 0 {
+            } else  if someObject as? Double != nil && (someObject as? Double)?.isFinite == true && (someObject as? Double)?.isZero == false && (someObject as? Double)! > 0 {
                 return true
                 
-            }else if someObject as? Date != nil {
+            } else if someObject as? Date != nil {
                 return true
                 
-            }else{
+            } else {
                 return false
             }
-        }else{
+        } else {
             return false
         }
     }
@@ -320,10 +319,10 @@ class Utilities: NSObject {
             
             if (someValue?.isKind(of: type))! && someValue != nil {
                 return true
-            }else{
+            } else {
                 return false
             }
-        }else{
+        } else {
             Logger.sharedInstance.debug("Value is null:\(someObject)")
             return false
         }
@@ -333,7 +332,7 @@ class Utilities: NSObject {
      @someObject: can be either an Array or Dictionary
      returns a Boolean if someObject is not null
      */
-    class func isValidObject(someObject: AnyObject?) -> Bool{
+    class func isValidObject(someObject: AnyObject?) -> Bool {
         
         guard let someObject = someObject else {
             // is null
@@ -344,14 +343,14 @@ class Utilities: NSObject {
             if someObject as? Dictionary<String, Any> != nil  && (someObject as? Dictionary<String, Any>)?.isEmpty == false && ((someObject as? Dictionary<String, Any>)?.count)! > 0 {
                 return true
                 
-            }else if someObject as? NSArray != nil && ((someObject as? NSArray)?.count)! > 0 {
+            } else if someObject as? NSArray != nil && ((someObject as? NSArray)?.count)! > 0 {
                 return true
                 
-            }else {
+            } else {
                 return false
             }
             
-        }else{
+        } else {
             Logger.sharedInstance.debug("Object is null:\(someObject)")
             return false
         }

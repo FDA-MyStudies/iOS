@@ -89,12 +89,11 @@ class SignUpCompleteViewController: UIViewController{
         appDelegate.updateKeyAndInitializationVector()
         
        
-        if self.viewLoadFrom == .joinStudy{
+        if self.viewLoadFrom == .joinStudy {
             let leftController = slideMenuController()?.leftViewController as! LeftMenuViewController
             leftController.createLeftmenuItems()
             self.performSegue(withIdentifier: "unwindStudyHomeSegue", sender: self)
-        }
-        else {
+        } else {
             self.navigateToGatewayDashboard()
         }
         
@@ -108,11 +107,10 @@ class SignUpCompleteViewController: UIViewController{
      Used to Navigate StudyList after completion
      
      */
-    func navigateToGatewayDashboard(){
+    func navigateToGatewayDashboard() {
         if shouldCreateMenu {
             self.createMenuView()
-        }
-        else {
+        } else {
             let leftController = slideMenuController()?.leftViewController as! LeftMenuViewController
             leftController.createLeftmenuItems()
             leftController.changeViewController(.studyList)

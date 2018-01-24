@@ -151,8 +151,7 @@ extension ChartsViewController: UITableViewDataSource{
             let cell = tableView.dequeueReusableCell(withIdentifier: "lineChart") as! LineChartCell
             cell.setupLineChart(chart: chart)
             return cell
-        }
-        else {
+        } else {
             let cell = UITableViewCell()
             return cell
         }

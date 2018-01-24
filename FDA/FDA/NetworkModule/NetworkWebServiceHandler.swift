@@ -87,9 +87,9 @@ class NetworkWebServiceHandler: NSObject, URLSessionDelegate {
             mParams = NSMutableDictionary.init(dictionary: commonParams!)
         }
         if  params != nil {
-            if mParams != nil{
+            if mParams != nil {
                 mParams!.addEntries(from:params! as! [AnyHashable : Any])
-            }else{
+            } else {
                 mParams = NSMutableDictionary.init(dictionary: params!)
             }
         }
@@ -109,16 +109,14 @@ class NetworkWebServiceHandler: NSObject, URLSessionDelegate {
         if  defaultHeaders != nil {
             if mParams != nil {
                 mParams!.addEntries(from: defaultHeaders as! [AnyHashable: Any])
-            }
-            else {
+            } else {
                 mParams = NSMutableDictionary.init(dictionary: defaultHeaders!)
             }
         }
         if userHeaders != nil && userHeaders!.count > 0  {
             if mParams != nil {
                 mParams!.addEntries(from: userHeaders as! [AnyHashable: Any])
-            }
-            else {
+            } else {
                 mParams = NSMutableDictionary.init(dictionary: userHeaders!)
             }
         }
@@ -206,13 +204,13 @@ class NetworkWebServiceHandler: NSObject, URLSessionDelegate {
         
         if (httpRequestString?.length == 0) {
             requestString = baseURLString
-        }else {
+        } else {
             requestString = String(format:"%@?%@",baseURLString,httpRequestString!) as NSString!
         }
         
         if #available(iOS 9, *) {
             requestString = requestString.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed) as NSString!
-        }else{
+        } else {
             requestString = requestString.addingPercentEscapes(using: String.Encoding.utf8.rawValue) as NSString!
         }
         
@@ -236,7 +234,7 @@ class NetworkWebServiceHandler: NSObject, URLSessionDelegate {
       if requestName as String == RegistrationMethods.refreshToken.method.methodName{
          httpHeaders = defaultheaders
         
-      }else {
+      } else {
          httpHeaders = self.getCombinedHeaders(headers, defaultHeaders: defaultheaders)
       }
       
@@ -274,14 +272,14 @@ class NetworkWebServiceHandler: NSObject, URLSessionDelegate {
                     DispatchQueue.main.async {
                         self.handleResponse(data, response: response, requestName: requestName, error: error as NSError?)
                     }
-                }else {
+                } else {
                     DispatchQueue.main.async {
                         self.delegate?.failedRequest(self.networkManager!, requestName: requestName!,error: error! as NSError)
                     }
                 }
                 }.resume()
             
-        }else{
+        } else {
             if ((delegate?.failedRequest) != nil) {
         
                 let error1 = NSError(domain: NSURLErrorDomain, code:NoNetworkErrorCode,userInfo:[NSLocalizedDescriptionKey:"You seem to be offline. Please connect to a network to proceed with this action."])
@@ -295,7 +293,7 @@ class NetworkWebServiceHandler: NSObject, URLSessionDelegate {
         if (error != nil) {
             if shouldRetryRequest && maxRequestRetryCount > 0  {
                 maxRequestRetryCount -= 1
-            }else {
+            } else {
                 
                 if error?.code == -1001 { //Could not connect to the server.
                 }
@@ -304,7 +302,7 @@ class NetworkWebServiceHandler: NSObject, URLSessionDelegate {
                 }
 
             }
-        }else {
+        } else {
             let status = NetworkConstants.checkResponseHeaders(response!)
             let statusCode = status.0
             var error1 : NSError?
@@ -324,7 +322,7 @@ class NetworkWebServiceHandler: NSObject, URLSessionDelegate {
                     if (responseDict != nil) {
                         delegate?.finishedRequest(networkManager!, requestName: requestName!,response: responseDict!)
                         
-                    }else {
+                    } else {
                         var dictionary = NSDictionary()
                         print("response Dictionary Nil")
                         
@@ -342,7 +340,7 @@ class NetworkWebServiceHandler: NSObject, URLSessionDelegate {
                         }
                     }
                 }
-            }else {
+            } else {
                 
                 if self.configuration.shouldParseErrorMessage() {
                   
@@ -355,7 +353,7 @@ class NetworkWebServiceHandler: NSObject, URLSessionDelegate {
                         print("Serilization error")
                     }
                     error1 = self.configuration.parseError(errorResponse: responseDict!)
-                }else {
+                } else {
                     
                     error1 = NSError(domain: NSURLErrorDomain, code:statusCode,userInfo:[NSLocalizedDescriptionKey: status.1])
                 }

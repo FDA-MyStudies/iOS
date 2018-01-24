@@ -194,13 +194,13 @@ class FetalKickCounterStepViewController:  ORKStepViewController {
      */
     func setCounterValue(){
         
-            if self.kickCounter! < 10{
+            if self.kickCounter! < 10 {
                 counterTextField?.text = "00" + "\(self.kickCounter!)"
                 
-            }else if self.kickCounter! >= 10 && self.kickCounter! < 100{
+            } else if self.kickCounter! >= 10 && self.kickCounter! < 100 {
                 counterTextField?.text = "0" + "\(self.kickCounter!)"
                 
-            }else {
+            } else {
                 counterTextField?.text = "\(self.kickCounter!)"
             }
     }
@@ -216,26 +216,26 @@ class FetalKickCounterStepViewController:  ORKStepViewController {
                 self.timer?.invalidate()
                 self.timer = nil
                
-                DispatchQueue.main.async{
+                DispatchQueue.main.async {
 
                     self.startButton?.isHidden = true
                     self.startTitleLabel?.isHidden = true
                     self.submitButton?.isHidden =  false
                 }
                 
-            }else {
+            } else {
                 self.timerValue = self.timerValue! + 1
             }
             
             if self.timerValue! >= 0 {
                 
-                DispatchQueue.main.async{
+                DispatchQueue.main.async {
                     
-                    if self.timerValue! > self.totalTime!{
+                    if self.timerValue! > self.totalTime! {
                     self.setResults()
                     self.showAlertOnCompletion()
                        
-                    }else {
+                    } else {
                     self.editCounterButton?.isHidden = false
                     self.setTimerValue()
                     
@@ -416,15 +416,14 @@ class FetalKickCounterStepViewController:  ORKStepViewController {
                 // start button image and start title changed
                 startButton?.setImage(UIImage(named: "kick_btn1.png"), for: .normal)
                 startTitleLabel?.text = NSLocalizedString(kTapToRecordKick, comment: "")
-            }
-            else{
+            } else {
                 self.kickCounter = self.kickCounter! + 1
                 
                 editCounterButton?.isHidden = false
                 self.counterTextField?.text =  self.kickCounter! < 10 ?  ("0\(self.kickCounter!)" == "00" ? "000" : "00\(self.kickCounter!)") : (self.kickCounter! >= 100 ? "\(self.kickCounter!)" : "0\(self.kickCounter!)" )
             }
             
-        }else {
+        } else {
             if self.kickCounter! < self.maxKicksAllowed! {
                self.kickCounter = self.kickCounter! + 1
                 
@@ -436,11 +435,11 @@ class FetalKickCounterStepViewController:  ORKStepViewController {
                 self.showAlertOnCompletion()
               }
               
-            }else if self.kickCounter! == self.maxKicksAllowed! {
+            } else if self.kickCounter! == self.maxKicksAllowed! {
                 self.setResults()
                self.showAlertOnCompletion()
                 
-            }else if self.kickCounter! > self.maxKicksAllowed! {
+            } else if self.kickCounter! > self.maxKicksAllowed! {
                 self.showAlertForGreaterValues()
             }
         }
@@ -481,7 +480,7 @@ class FetalKickCounterStepViewController:  ORKStepViewController {
             
             Utilities.showAlertWithTitleAndMessage(title: kMessage as NSString, message: ("Please select a valid time(Max " + value + ")") as NSString)
             
-          }else {
+          } else {
              self.setTimerValue()
           }
                 return
@@ -576,34 +575,29 @@ extension FetalKickCounterStepViewController: UITextFieldDelegate {
                 textField.text = "000"
                 self.kickCounter = 000
             }
-        }
-        else{
+        } else {
             self.kickCounter = Int((counterTextField?.text)!)
             
-            if textField.text?.count == 2{
+            if textField.text?.count == 2 {
                 counterTextField?.text = "0" + textField.text!
                 self.kickCounter  = (Int((counterTextField?.text)!))
-            }
-            else if (textField.text?.count)! >= 3{
+            } else if (textField.text?.count)! >= 3 {
                 let finalValue = (Int((counterTextField?.text)!))
                 
-                if finalValue! < 10{
+                if finalValue! < 10 {
                     counterTextField?.text = "00" + "\(finalValue!)"
-                }
-                else if finalValue! >= 10 && finalValue! < 100{
+                } else if finalValue! >= 10 && finalValue! < 100 {
                      counterTextField?.text = "0" + "\(finalValue!)"
-                }
-                else {
+                } else {
                      counterTextField?.text = "\(finalValue!)"
                 }
                 
-            }
-            else if textField.text?.count == 1 {
+            } else if textField.text?.count == 1 {
                 let finalValue = (Int((counterTextField?.text)!))
                 counterTextField?.text = "00" + "\(finalValue!)"
             }
             
-            if self.kickCounter == self.maxKicksAllowed!{
+            if self.kickCounter == self.maxKicksAllowed! {
                 self.setResults()
                 self.showAlertOnCompletion()
             }
@@ -618,16 +612,16 @@ extension FetalKickCounterStepViewController: UITextFieldDelegate {
         
         if textField == counterTextField && finalString.count > 0 {
             
-            if Int(finalString)! <= self.maxKicksAllowed!{
+            if Int(finalString)! <= self.maxKicksAllowed! {
                 
                 return true
                 
-            }else {
+            } else {
                 
                 self.showAlertForGreaterValues()
                 return false
             }
-        }else {
+        } else {
             return true
         }
     }

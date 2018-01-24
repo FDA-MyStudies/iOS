@@ -24,7 +24,7 @@
 import Foundation
 import UIKit
 
-class StudyOverviewPageViewController: UIPageViewController{
+class StudyOverviewPageViewController: UIPageViewController {
     
 // MARK:- Viewcontroller Lifecycle
     override func viewDidLoad() {

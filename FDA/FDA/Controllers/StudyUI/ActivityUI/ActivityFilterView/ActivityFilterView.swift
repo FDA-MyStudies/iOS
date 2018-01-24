@@ -90,8 +90,7 @@ class ActivityFilterView: UIView,UITableViewDelegate,UITableViewDataSource{
         
         if indexPath.row == self.selectedIndex.rawValue {
             cell.textLabel?.textColor = kBlueColor
-        }
-        else  {
+        } else {
             cell.textLabel?.textColor = UIColor.gray
         }
         cell.textLabel?.textAlignment = .center

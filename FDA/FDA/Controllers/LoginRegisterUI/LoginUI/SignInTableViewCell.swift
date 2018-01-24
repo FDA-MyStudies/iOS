@@ -54,7 +54,7 @@ class SignInTableViewCell: UITableViewCell {
      @param securedText    Used to check weather the text fiels is secured or not
     
     */
-    func populateCellData(data: NSDictionary , securedText: Bool){
+    func populateCellData(data: NSDictionary , securedText: Bool) {
         
         textFieldValue?.isSecureTextEntry = false
         if securedText == true {

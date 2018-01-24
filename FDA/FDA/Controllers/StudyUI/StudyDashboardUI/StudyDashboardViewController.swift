@@ -153,11 +153,11 @@ class StudyDashboardViewController: UIViewController{
                 keys = "\"count\",duration"
                 tableName = activityId!+activityId!
                 
-              }else if activity?.taskSubType == "towerOfHanoi" {
+              } else if activity?.taskSubType == "towerOfHanoi" {
                 keys = "numberOfMoves"
                 tableName = activityId!+activityId!
                 
-              }else if activity?.taskSubType == "spatialSpanMemory" {
+              } else if activity?.taskSubType == "spatialSpanMemory" {
                 keys = "NumberofGames,Score,NumberofFailures"
                 tableName = activityId!+activityId!
               }
@@ -165,8 +165,8 @@ class StudyDashboardViewController: UIViewController{
             let participantId = Study.currentStudy?.userParticipateState.participantId
             //Get stats from Server
             LabKeyServices().getParticipantResponse(tableName: tableName!,activityId: activityId!, keys: keys!, participantId: participantId!, delegate: self)
-        }
-        else{
+            
+        } else {
             self.removeProgressIndicator()
             
             //save response in database
@@ -311,11 +311,11 @@ extension StudyDashboardViewController : UITableViewDataSource {
                 return 0
             }
             
-        }else{
+        } else {
             //Used for Collection View Height in a cell
             if (data["isStudy"] as? String)! == "YES" {
                 heightValue = 130
-            }else{
+            } else {
                 heightValue = 210
             }
         }
@@ -351,7 +351,7 @@ extension StudyDashboardViewController : UITableViewDataSource {
                 return cell!
             }
             
-        }else{
+        } else {
                 cell = (tableView.dequeueReusableCell(withIdentifier: kStatisticsTableViewCell, for: indexPath) as? StudyDashboardStatisticsTableViewCell)!
                 (cell as? StudyDashboardStatisticsTableViewCell)!.displayData()
                 (cell as? StudyDashboardStatisticsTableViewCell)!.buttonDay?.setTitle("  DAY  ", for: UIControlState.normal)
@@ -456,8 +456,8 @@ extension StudyDashboardViewController: ORKTaskViewControllerDelegate{
             if activityBuilder?.actvityResult?.result?.count == taskViewController.result.results?.count{
                 //Removing the dummy result:Currentstep result which not presented yet
                 activityBuilder?.actvityResult?.result?.removeLast()
-            }
-            else{
+                
+            } else {
                 
             }
         }
@@ -469,13 +469,13 @@ extension StudyDashboardViewController: ORKTaskViewControllerDelegate{
         if  stepViewController.step?.identifier == kConsentCompletionStepIdentifier || stepViewController.step?.identifier == kVisualStepId || stepViewController.step?.identifier == kReviewTitle || stepViewController.step?.identifier == kConsentSharePdfCompletionStep{
             
             
-            if stepViewController.step?.identifier == kEligibilityVerifiedScreen{
+            if stepViewController.step?.identifier == kEligibilityVerifiedScreen {
                 stepViewController.continueButtonTitle = kContinueButtonTitle
             }
             stepViewController.backButtonItem = nil
         }
             //checking if currentstep is View Pdf Step
-        else if stepViewController.step?.identifier == kConsentViewPdfCompletionStep{
+        else if stepViewController.step?.identifier == kConsentViewPdfCompletionStep {
             
             //Back button is enabled
             stepViewController.backButtonItem?.isEnabled = true
@@ -490,10 +490,10 @@ extension StudyDashboardViewController: ORKTaskViewControllerDelegate{
                 //Directly moving to completion step by skipping Intermediate PDF viewer screen
                 stepViewController.goForward()
                 
-            }else {
+            } else {
                 
             }
-        }else {
+        } else {
             //Back button is enabled
             stepViewController.backButtonItem?.isEnabled = true
             
@@ -541,7 +541,7 @@ extension StudyDashboardViewController: ORKTaskViewControllerDelegate{
                     _ = self.navigationController?.popViewController(animated: true)
                     return nil
                     
-                }else { //User consented
+                } else { //User consented
                     
                     let documentCopy: ORKConsentDocument = ((ConsentBuilder.currentConsent?.consentDocument)!.copy() as? ORKConsentDocument)!
                     
@@ -552,11 +552,10 @@ extension StudyDashboardViewController: ORKTaskViewControllerDelegate{
                     ttController.consentDocument =  documentCopy
                     return ttController
                 }
-            }else {
+            } else {
                 return nil
             }
-        }
-        else if step.identifier == kConsentViewPdfCompletionStep { //For Pdf Completion Step
+        } else if step.identifier == kConsentViewPdfCompletionStep { //For Pdf Completion Step
             
             let reviewSharePdfStep: ORKStepResult? = taskViewController.result.results?.last as! ORKStepResult?
             
@@ -570,10 +569,10 @@ extension StudyDashboardViewController: ORKTaskViewControllerDelegate{
                 ttController.pdfData = result?.pdfData
                 return ttController
                 
-            }else {
+            } else {
                 return nil
             }
-        }else {
+        } else {
             
             return nil
         }

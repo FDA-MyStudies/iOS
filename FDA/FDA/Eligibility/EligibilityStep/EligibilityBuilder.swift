@@ -128,7 +128,7 @@ class EligibilityBuilder{
                 eligibilityValidationStep.image =  #imageLiteral(resourceName: "successBlueBig")
                 stepsArray?.append(eligibilityValidationStep)
                 
-            }else if self.type == EligibilityStepType.test { //Eligibility Test
+            } else if self.type == EligibilityStepType.test { //Eligibility Test
                 // for only test
                 
                 // add the Instruction step for eligibility Test
@@ -154,7 +154,7 @@ class EligibilityBuilder{
                 
                 stepsArray?.append(eligibilityCompletionStep!)
                 
-            }else {
+            } else {
                 // for both test & token
                 
                 // creating Token Step
@@ -205,11 +205,10 @@ class EligibilityBuilder{
                 }
                 
                 return stepsArray!
-            }else {
+            } else {
                 return nil
             }
-        }
-        else{
+        } else {
             Logger.sharedInstance.debug("consent Step has null values:")
             return nil
         }

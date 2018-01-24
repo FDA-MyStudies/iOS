@@ -98,10 +98,10 @@ class ActivitiesTableViewCell: UITableViewCell {
             if activity.currentRunId == 0 {
                 labelStatus?.isHidden = true
                 
-            }else {
+            } else {
                 labelStatus?.isHidden = false
             }
-        }else {
+        } else {
             
             labelRunStatus?.isHidden = true
             labelStatus?.isHidden = true
@@ -118,7 +118,7 @@ class ActivitiesTableViewCell: UITableViewCell {
                 self.labelStatus?.backgroundColor =  UIColor.red
                 self.labelStatus?.text = UserActivityStatus.ActivityStatus.abandoned.description
                 
-            }else {
+            } else {
                 self.labelStatus?.backgroundColor =  kGreenColor
                 self.labelStatus?.text = UserActivityStatus.ActivityStatus.completed.description
             }
@@ -140,7 +140,7 @@ class ActivitiesTableViewCell: UITableViewCell {
             self.buttonMoreSchedules?.isHidden = true
             self.buttonMoreSchedulesBottomLine?.isHidden = true
             
-        }else {
+        } else {
             self.buttonMoreSchedules?.isHidden = false
             self.buttonMoreSchedulesBottomLine?.isHidden = false
             let moreSchedulesTitle =  "+" + String(activity.totalRuns - 1) + " more"
@@ -174,8 +174,7 @@ class ActivitiesTableViewCell: UITableViewCell {
             case .completed:
                 self.labelStatus?.backgroundColor = kGreenColor
             }
-        }
-        else {
+        } else {
             
             self.labelStatus?.backgroundColor = kBlueColor
             
@@ -186,7 +185,7 @@ class ActivitiesTableViewCell: UITableViewCell {
                 self.labelStatus?.backgroundColor =  UIColor.red
                 self.labelStatus?.text = UserActivityStatus.ActivityStatus.abandoned.description
                 
-            }else {
+            } else {
                 
                 let activityStatus = UserActivityStatus()
                 activityStatus.status = .yetToJoin
@@ -226,8 +225,7 @@ class ActivitiesTableViewCell: UITableViewCell {
         
         if activity.type == ActivityType.activeTask{
              imageIcon?.image = UIImage.init(named: "taskIcon")
-        }
-        else {
+        } else {
             
             imageIcon?.image = UIImage.init(named: "surveyIcon")
         }
@@ -238,7 +236,7 @@ class ActivitiesTableViewCell: UITableViewCell {
             if endDate != nil {
                 labelTime?.text = startDateString + " - " + endDateString
                 
-            }else {
+            } else {
                 labelTime?.text = startDateString
             }
 
@@ -282,7 +280,7 @@ class ActivitiesTableViewCell: UITableViewCell {
              runStartDate = activity.currentRun.startDate
              runEndDate = activity.currentRun.endDate
 
-            }else {
+            } else {
                 
                 let run = activity.activityRuns.filter({$0.runId == activity.currentRunId}).first
                 runStartDate = run?.startDate

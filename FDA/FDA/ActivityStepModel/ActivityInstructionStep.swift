@@ -43,8 +43,7 @@ class ActivityInstructionStep: ActivityStep {
         if Utilities.isValidObject(someObject: stepDict as AnyObject?){
             super.initWithDict(stepDict: stepDict)
             
-        }
-        else{
+        } else {
             Logger.sharedInstance.debug("Instruction Step Dictionary is null:\(stepDict)")
         }
         
@@ -62,8 +61,7 @@ class ActivityInstructionStep: ActivityStep {
             instructionStep.title = NSLocalizedString(title!, comment: "")
             instructionStep.text = text!
             return instructionStep
-        }
-        else{
+        } else {
             Logger.sharedInstance.debug("Instruction Step Data is null ")
             return nil
         }

@@ -128,8 +128,7 @@ class PageViewController: UIPageViewController{
         
         if  (prevViewController != nil) {
             index = orderedViewControllers.index(of: prevViewController!)!
-        }
-        else {
+        } else {
         
             let viewController = self.viewControllers?.last
             
@@ -205,8 +204,7 @@ class PageViewController: UIPageViewController{
                     controllers.append(restControllers)
                 }
             }
-        }
-        else {
+        } else {
             //get first overview controller
             let firstController = (storyboard.instantiateViewController(withIdentifier: "FirstViewController") as? FirstGatewayOverviewViewController)!
             firstController.overviewSectionDetail = overview.sections[0]
@@ -281,8 +279,7 @@ extension PageViewController: UIPageViewControllerDelegate {
             //print("transitionCompleted \(previousViewControllers)")
             
             self.notifyTutorialDelegateOfNewIndex(prevViewController: nil)
-        }
-        else {
+        } else {
             self.notifyTutorialDelegateOfNewIndex(prevViewController: previousViewControllers.last!)
         }
         

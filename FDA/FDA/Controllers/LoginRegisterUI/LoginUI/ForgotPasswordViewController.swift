@@ -113,10 +113,10 @@ class ForgotPasswordViewController: UIViewController{
         if textFieldEmail?.text == "" {
             self.showAlertMessages(textMessage: kMessageEmailBlank)
             
-        }else if !(Utilities.isValidEmail(testStr: (textFieldEmail?.text)!)) {
+        } else if !(Utilities.isValidEmail(testStr: (textFieldEmail?.text)!)) {
             self.showAlertMessages(textMessage: kMessageValidEmail)
             
-        }else{
+        } else {
             print("Call the Webservice")
             //User.currentUser.emailId = textFieldEmail?.text!
             UserServices().forgotPassword(email: (textFieldEmail?.text)!,delegate: self)
@@ -160,8 +160,7 @@ extension ForgotPasswordViewController: NMWebServiceDelegate {
                 _ = self.navigationController?.popViewController(animated: true)
                 
             }
-        }
-        else{
+        } else {
             // for resend email
             
               UIUtilities.showAlertWithTitleAndMessage(title: NSLocalizedString(kAlertMessageText, comment: "") as NSString, message: NSLocalizedString(kAlertMessageResendEmail, comment: "") as NSString)
@@ -177,8 +176,7 @@ extension ForgotPasswordViewController: NMWebServiceDelegate {
         if requestName as String == RegistrationMethods.forgotPassword.description && error.code == 403{
             
             self.navigateToVerifyViewController()
-        }
-        else{
+        } else {
             // if resend email fails
              UIUtilities.showAlertWithTitleAndMessage(title: NSLocalizedString(kTitleError, comment: "") as NSString, message: error.localizedDescription as NSString)
         }

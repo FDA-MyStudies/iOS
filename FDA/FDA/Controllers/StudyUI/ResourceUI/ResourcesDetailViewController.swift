@@ -72,12 +72,11 @@ class ResourcesDetailViewController: UIViewController {
                 
                 if self.resource?.file?.localPath != nil {
                     
-                    if self.resource?.file?.localPath == "BundlePath"{
+                    if self.resource?.file?.localPath == "BundlePath" {
                         
                         let path = Bundle.main.path(forResource: self.resource?.file?.link!, ofType: ".pdf")
                         self.loadWebViewWithPath(path: path!)
-                    }
-                    else {
+                    } else {
                         let path = resourcesDownloadPath + "/" + (self.resource?.file?.localPath)!
                         let pdfData = FileDownloadManager.decrytFile(pathURL: URL(string: path))
                         self.loadWebViewWithData(data: pdfData!)
@@ -85,8 +84,7 @@ class ResourcesDetailViewController: UIViewController {
                     }
                     
                                       //self.loadWebViewWithPath(path: (self.resource?.file?.localPath)!)
-                }
-                else {
+                } else {
                    //let path = resourcesDownloadPath + "/PDF_linking.pdf"
                     self.startDownloadingfile()
                     //let pdfData = FileDownloadManager.decrytFile(pathURL:URL(string:path))
@@ -94,12 +92,10 @@ class ResourcesDetailViewController: UIViewController {
                 }
                 
                 
-            }
-            else{
+            } else {
                 webView?.loadHTMLString(self.requestLink!, baseURL: nil)
             }
-        }
-        else{
+        } else {
             
         }
        // webView?.scalesPageToFit = true
@@ -114,13 +110,13 @@ class ResourcesDetailViewController: UIViewController {
         // self.tabBar.isHidden = false
     }
     
-    func loadWebViewWithPath(path: String){
+    func loadWebViewWithPath(path: String) {
         
         let url: URL? = URL.init(string:path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed)!)
         let urlRequest = URLRequest(url: url!)
         webView?.loadRequest(urlRequest)
     }
-    func loadWebViewWithData(data: Data){
+    func loadWebViewWithData(data: Data) {
        
         self.webView?.load(data, mimeType: "application/pdf", textEncodingName: "UTF-8", baseURL: URL.init(fileURLWithPath: "") )
         
@@ -129,7 +125,7 @@ class ResourcesDetailViewController: UIViewController {
 //        webView?.loadRequest(urlRequest)
     }
     
-    func startDownloadingfile(){
+    func startDownloadingfile() {
         
         if !FileManager.default.fileExists(atPath: resourcesDownloadPath) {
             try! FileManager.default.createDirectory(atPath: resourcesDownloadPath, withIntermediateDirectories: true, attributes: nil)
@@ -216,8 +212,7 @@ extension ResourcesDetailViewController: MFMailComposeViewControllerDelegate{
                 catch{
                     
                 }
-            }
-            else {
+            } else {
                 
                 do {
                     
@@ -234,8 +229,7 @@ extension ResourcesDetailViewController: MFMailComposeViewControllerDelegate{
             
             
             
-        }
-        else {
+        } else {
             composeVC.setMessageBody((resource?.file?.link)!, isHTML: true)
         }
         
@@ -244,10 +238,7 @@ extension ResourcesDetailViewController: MFMailComposeViewControllerDelegate{
         {
             self.present(composeVC, animated: true, completion: nil)
             
-            
-           
-        }
-        else{
+        } else {
             let alert = UIAlertController(title: NSLocalizedString(kTitleError, comment: ""),message: "",preferredStyle: UIAlertControllerStyle.alert)
             
             alert.addAction(UIAlertAction.init(title: NSLocalizedString("OK", comment: ""), style: .default, handler: { (action) in
@@ -283,7 +274,7 @@ extension ResourcesDetailViewController: FileDownloadManagerDelegates{
         
         let data = FileDownloadManager.decrytFile(pathURL: URL.init(string: fullPath))
         
-        if data != nil{
+        if data != nil {
             self.resource?.file?.localPath = path
             // self.loadWebViewWithPath(path: path)
             

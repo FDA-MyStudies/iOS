@@ -95,10 +95,9 @@ class SignInViewController: UIViewController{
         User.resetCurrentUser()
         user = User.currentUser
         
-        if viewLoadFrom == .gatewayOverview || viewLoadFrom == .joinStudy{
+        if viewLoadFrom == .gatewayOverview || viewLoadFrom == .joinStudy {
             self.addBackBarButton()
-        }
-        else {
+        } else {
             self.setNavigationBarItem()
         }
         
@@ -143,22 +142,21 @@ class SignInViewController: UIViewController{
         self.view.endEditing(true)
         if (user.emailId?.isEmpty)! && (user.password?.isEmpty)! {
             self.showAlertMessages(textMessage: kMessageAllFieldsAreEmpty)
-        }else if user.emailId == "" {
+        } else if user.emailId == "" {
             self.showAlertMessages(textMessage: kMessageEmailBlank)
             
-        }else if !(Utilities.isValidEmail(testStr: user.emailId!)) {
+        } else if !(Utilities.isValidEmail(testStr: user.emailId!)) {
             self.showAlertMessages(textMessage: kMessageValidEmail)
             
-        }else if user.password == ""{
+        } else if user.password == "" {
             self.showAlertMessages(textMessage: kMessagePasswordBlank)
             
-        }else{
+        } else {
             
             let ud = UserDefaults.standard
             if user.emailId == kStagingUserEmailId {
                 ud.set(true, forKey: kIsStagingUser)
-            }
-            else {
+            } else {
                 ud.set(false, forKey: kIsStagingUser)
             }
             ud.synchronize()
@@ -253,11 +251,9 @@ class SignInViewController: UIViewController{
         let changePassword = (storyboard.instantiateViewController(withIdentifier: "ChangePasswordViewController") as? ChangePasswordViewController)!
         if viewLoadFrom == .menu {
             changePassword.viewLoadFrom = .menu_login
-        }
-        else if viewLoadFrom == .joinStudy {
+        } else if viewLoadFrom == .joinStudy {
             changePassword.viewLoadFrom = .joinStudy
-        }
-        else {
+        } else {
             changePassword.viewLoadFrom = .login
         }
         changePassword.temporaryPassword = User.currentUser.password!
@@ -319,11 +315,9 @@ class SignInViewController: UIViewController{
         if let signUpController = segue.destination as? SignUpViewController {
             if viewLoadFrom == .menu {
                 signUpController.viewLoadFrom = .menu_login
-            }
-            else if(viewLoadFrom == .joinStudy){
+            } else if(viewLoadFrom == .joinStudy) {
                 signUpController.viewLoadFrom = .joinStudy_login
-            }
-            else {
+            } else {
                 signUpController.viewLoadFrom = .login
             }
             
@@ -333,12 +327,10 @@ class SignInViewController: UIViewController{
             if viewLoadFrom == .menu {
                 verificationController.shouldCreateMenu = false
                 verificationController.viewLoadFrom = .login
-            }
-            else if viewLoadFrom == .joinStudy {
+            } else if viewLoadFrom == .joinStudy {
                 verificationController.viewLoadFrom = .joinStudy
                 verificationController.shouldCreateMenu = false
-            }
-            else if viewLoadFrom == .gatewayOverview{
+            } else if viewLoadFrom == .gatewayOverview {
                 
                 verificationController.viewLoadFrom = .login
                 verificationController.shouldCreateMenu = true
@@ -364,10 +356,9 @@ extension SignInViewController : UITableViewDataSource {
         
         cell.textFieldValue?.text = ""
         var isSecuredEntry: Bool = false
-        if indexPath.row == SignInTableViewTags.Password.rawValue{
+        if indexPath.row == SignInTableViewTags.Password.rawValue {
             isSecuredEntry = true
-        }
-        else{
+        } else {
             cell.textFieldValue?.keyboardType = .emailAddress
         }
         
@@ -404,12 +395,10 @@ extension SignInViewController: UITextFieldDelegate{
         if tag == .EmailId {
             if string == " " {
                 return false
-            }
-            else{
+            } else {
                 return true
             }
-        }
-        else{
+        } else {
             if (range.location == textField.text?.characters.count && string == " ") {
                 
                 textField.text = textField.text?.appending("\u{00a0}")
@@ -503,9 +492,7 @@ extension SignInViewController: NMWebServiceDelegate {
         
         if requestName as String == WCPMethods.termsPolicy.method.methodName {
             self.agreeToTermsAndConditions()
-        }
-        else
-        {
+        } else {
             let delegate = (UIApplication.shared.delegate as? AppDelegate)!
             delegate.calculateTimeZoneChange()
         if User.currentUser.verified == true {
@@ -518,28 +505,24 @@ extension SignInViewController: NMWebServiceDelegate {
             
             if User.currentUser.isLoginWithTempPassword {
                 self.navigateToChangePassword()
-            }
-            else {
+            } else {
                 
                 if viewLoadFrom == .gatewayOverview {
                     self.navigateToGatewayDashboard()
-                }
-                else if viewLoadFrom == .joinStudy {
+                } else if viewLoadFrom == .joinStudy {
                     
                     let leftController = (slideMenuController()?.leftViewController as? LeftMenuViewController)!
                     leftController.createLeftmenuItems()
                     self.performSegue(withIdentifier: "unwindStudyHomeSegue", sender: self)
                     //_ = self.navigationController?.popViewController(animated: true)
-                }
-                else {
+                } else {
                     
                     let leftController = (slideMenuController()?.leftViewController as? LeftMenuViewController)!
                     leftController.createLeftmenuItems()
                     leftController.changeViewController(.studyList)
                 }
             }
-        }
-        else {
+        } else {
             
             self.navigateToVerifyController()
         }

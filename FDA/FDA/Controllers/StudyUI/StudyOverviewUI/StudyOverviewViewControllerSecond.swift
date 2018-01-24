@@ -65,7 +65,7 @@ class StudyOverviewViewControllerSecond: UIViewController{
         if DeviceType.IS_IPAD || DeviceType.IS_IPHONE_4_OR_LESS {
             fontSize = 13.0
             
-        }else if DeviceType.IS_IPHONE_5 {
+        } else if DeviceType.IS_IPHONE_5 {
             fontSize = 14.0
         }
         
@@ -80,10 +80,10 @@ class StudyOverviewViewControllerSecond: UIViewController{
             size: CGFloat(fontSize))!], range: (attrStr.string as NSString).range(of: attrStr.string))
         attributedText.addAttribute(NSForegroundColorAttributeName, value: UIColor.black, range: (attrStr.string as NSString).range(of: attrStr.string))
         
-        if Utilities.isValidValue(someObject: attrStr.string as AnyObject?){
+        if Utilities.isValidValue(someObject: attrStr.string as AnyObject?) {
             self.labelDescription?.attributedText = attributedText
             
-        }else {
+        } else {
             self.labelDescription?.text = ""
         }
         self.labelDescription?.textAlignment = .center
@@ -107,11 +107,10 @@ class StudyOverviewViewControllerSecond: UIViewController{
      */
     @IBAction func buttonActionJoinStudy(_ sender: Any){
         
-        if User.currentUser.userType == UserType.AnonymousUser{
+        if User.currentUser.userType == UserType.AnonymousUser {
             let leftController = slideMenuController()?.leftViewController as! LeftMenuViewController
             leftController.changeViewController(.reachOut_signIn)
-        }
-        else{
+        } else {
             //TEMP
              UIUtilities.showAlertWithTitleAndMessage(title: NSLocalizedString(kAlertMessageText, comment: "") as NSString, message: NSLocalizedString(kAlertMessageReachoutText, comment: "") as NSString)
         }

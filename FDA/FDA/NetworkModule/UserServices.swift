@@ -419,8 +419,7 @@ class UserServices: NSObject {
         let consentVersion: String?
         if (ConsentBuilder.currentConsent?.version?.characters.count)! > 0 {
             consentVersion = ConsentBuilder.currentConsent?.version!
-        }
-        else{
+        } else {
             consentVersion = "1"
         }
         
@@ -934,12 +933,12 @@ extension UserServices: NMWebServiceDelegate{
                     delegate.failedRequest(manager, requestName: requestName, error: localError)
                 }
                 
-            }else {
+            } else {
                 //Update Refresh Token
                 self.updateToken()
             }
             
-        }else {
+        } else {
             
             if delegate != nil {
                 

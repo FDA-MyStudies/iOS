@@ -84,7 +84,7 @@ struct ConsentDocument {
             if Utilities.isValidValue(someObject: consentDoucumentdict[kConsentDocumentVersion] as AnyObject ){
                 self.version = consentDoucumentdict[kConsentDocumentVersion] as? String
             }
-        }else{
+        } else {
             Logger.sharedInstance.debug("Study Dictionary is null:\(consentDoucumentdict)")
         }
     }
@@ -173,10 +173,10 @@ class Study: Hashable {
             if let userStudyStatus = currentUser.participatedStudies.filter({$0.studyId == self.studyId}).last{
                 self.userParticipateState = userStudyStatus
                 
-            }else {
+            } else {
                 self.userParticipateState = UserStudyStatus()
             }
-        }else {
+        } else {
             Logger.sharedInstance.debug("Study Dictionary is null:\(studyDetail)")
         }
     }
@@ -311,17 +311,16 @@ class StudyWithdrawalConfigration {
     /**
      Initializer with dictionary of properties
      */
-    init(withdrawalConfigration: Dictionary<String,Any>){
-        if Utilities.isValidObject(someObject: withdrawalConfigration as AnyObject?){
+    init(withdrawalConfigration: Dictionary<String,Any>) {
+        if Utilities.isValidObject(someObject: withdrawalConfigration as AnyObject?) {
             
-            if Utilities.isValidValue(someObject: withdrawalConfigration[kStudyWithdrawalMessage] as AnyObject ){
+            if Utilities.isValidValue(someObject: withdrawalConfigration[kStudyWithdrawalMessage] as AnyObject ) {
                 self.message = (withdrawalConfigration[kStudyWithdrawalMessage] as? String)!
-            }
-            else{
+            } else {
                 self.message = ""
             }
             
-            if Utilities.isValidValue(someObject: withdrawalConfigration[kStudyWithdrawalType] as AnyObject ){
+            if Utilities.isValidValue(someObject: withdrawalConfigration[kStudyWithdrawalType] as AnyObject ) {
                 self.type = StudyWithdrawalConfigrationType(rawValue:(withdrawalConfigration[kStudyWithdrawalType] as? String)!)
             }
             
@@ -332,7 +331,7 @@ class StudyWithdrawalConfigration {
     
 }
 // MARK:StudyUpdates
-struct StudyUpdates{
+struct StudyUpdates {
     
     static  var studyInfoUpdated = false
     static  var studyConsentUpdated = false

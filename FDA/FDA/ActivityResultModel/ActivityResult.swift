@@ -87,7 +87,7 @@ class ActivityResult {
                     if activityStepResult?.step != nil && (activityStepResult?.step is ActivityInstructionStep) == false {
                         self.result?.append(activityStepResult!)
                         
-                    }else{
+                    } else {
                         if self.activity?.type == .activeTask {
                             self.result?.append(activityStepResult!)
                         }
@@ -119,19 +119,19 @@ class ActivityResult {
                 if Utilities.isValidValue(someObject: Utilities.getDateFromString(dateString:(activityDict[kActivityStartTime] as? String)!) as AnyObject?) {
                     self.startTime =  Utilities.getDateFromString(dateString: (activityDict[kActivityStartTime] as? String)!)
                     
-                }else {
+                } else {
                     Logger.sharedInstance.debug("Date Conversion is null:\(activityDict)")
                 }
             }
-            if Utilities.isValidValue(someObject: activityDict[kActivityEndTime] as AnyObject ){
+            if Utilities.isValidValue(someObject: activityDict[kActivityEndTime] as AnyObject ) {
                 
                 if Utilities.isValidValue(someObject: Utilities.getDateFromString(dateString:(activityDict[kActivityEndTime] as? String)!) as AnyObject?) {
                     self.endTime =  Utilities.getDateFromString(dateString: (activityDict[kActivityEndTime] as? String)!)
-                }else {
+                } else {
                     Logger.sharedInstance.debug("Date Conversion is null:\(activityDict)")
                 }
             }
-        }else {
+        } else {
             Logger.sharedInstance.debug("activityDict Result Dictionary is null:\(activityDict)")
         }
     }

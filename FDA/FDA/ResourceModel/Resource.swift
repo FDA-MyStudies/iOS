@@ -112,7 +112,7 @@ class Resource {
                 self.anchorDateStartDays = configuration["startDays"] as? Int
                 self.anchorDateEndDays = configuration["endDays"] as? Int
                 
-            }else {
+            } else {
                 self.povAvailable = false
             }
             
@@ -121,7 +121,7 @@ class Resource {
             }
             self.file = File()
             self.file?.setFileForStudy(dict: detail as NSDictionary)
-        }else {
+        } else {
             Logger.sharedInstance.debug("Resource Dictionary is null:\(detail)")
         }
     }
@@ -159,7 +159,7 @@ class Resource {
                     // Study Level
                     self.file?.setFileForStudy(dict:dict)
                     
-                }else if self.level == ResourceLevel.gateway {
+                } else if self.level == ResourceLevel.gateway {
                     // Gateway Level
                     if (Utilities.isValidValue(someObject: (dict[kResourceFile]) as AnyObject)) {
                         self.file?.setFile(dict: dict[kResourceFile] as! NSDictionary)
@@ -180,13 +180,13 @@ class Resource {
                 self.anchorDateStartDays = configuration["startDays"] as? Int
                 self.anchorDateEndDays = configuration["endDays"] as? Int
                 
-            }else {
+            } else {
                 self.povAvailable = false
             }
             if (Utilities.isValidValue(someObject: (dict[kResourceTitle]) as AnyObject)) {
                 self.title = dict[kResourceTitle] as? String
             }
-        }else {
+        } else {
             Logger.sharedInstance.debug("Resource Dictionary is null:\(dict)")
         }
     }

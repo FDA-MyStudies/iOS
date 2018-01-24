@@ -60,8 +60,7 @@ class StudyDashboardTabbarViewController: UITabBarController {
         if MFMailComposeViewController.canSendMail()
         {
             self.present(mailComposerVC, animated: true, completion: nil)
-        }
-        else{
+        } else {
             
             let alert = UIAlertController(title: NSLocalizedString(kTitleError, comment: ""),message: "",preferredStyle: UIAlertControllerStyle.alert)
             

@@ -33,14 +33,13 @@ class FilterListCollectionViewCell: UICollectionViewCell {
     var studyData = NSMutableArray()
     var filterOptions: FilterOptions!
     
-    func displayCollectionData(data: FilterOptions){
+    func displayCollectionData(data: FilterOptions) {
     
         //studyData = data["studyData"] as! NSMutableArray
         filterOptions = data
-        if filterOptions.title.characters.count == 0{
+        if filterOptions.title.characters.count == 0 {
             tableView?.tableHeaderView = nil
-        }
-        else {
+        } else {
             labelHeaderTitle?.text = filterOptions.title
             tableView?.tableHeaderView = tableViewHeader
         }

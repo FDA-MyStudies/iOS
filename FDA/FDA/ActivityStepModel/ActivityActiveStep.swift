@@ -175,8 +175,7 @@ class ActivityActiveStep: ActivityStep {
                     
                     self.options?.insert(ORKPredefinedTaskOption(rawValue: UInt(option)))
                 }
-            }
-            else{
+            } else {
                 self.options = []
             }
             
@@ -187,8 +186,7 @@ class ActivityActiveStep: ActivityStep {
             if Utilities.isValidObject(someObject: stepDict[kActivityStepActiveFormat] as AnyObject ) {
                 self.formatDict = (stepDict[kActivityStepActiveFormat] as? Dictionary)!
             }
-        }
-        else{
+        } else {
             Logger.sharedInstance.debug("Question Step Dictionary is null:\(stepDict)")
         }
         
@@ -217,7 +215,7 @@ class ActivityActiveStep: ActivityStep {
                                                     checkAudioLevel: true, options: self.options!)
                     
                     
-                }else {
+                } else {
                     Logger.sharedInstance.debug("audioStep:formatDict has null values:\(String(describing: formatDict))")
                     return nil
                 }
@@ -232,7 +230,7 @@ class ActivityActiveStep: ActivityStep {
                                                        walkDuration: (formatDict?[kActiveFitnessCheckWalkDuration] as? TimeInterval)!,
                                                        restDuration: (formatDict?[kActiveFitnessCheckRestDuration] as? TimeInterval)!,
                                                        options: self.options!)
-                }else {
+                } else {
                     Logger.sharedInstance.debug("fitnessStep:formatDict has null values:\(String(describing: formatDict))")
                     return nil
                 }
@@ -251,7 +249,7 @@ class ActivityActiveStep: ActivityStep {
                                                                rotated: ((formatDict?[kActiveHolePegTestRotated]) != nil),
                                                                timeLimit: (formatDict?[kActiveHolePegTestTimeLimit] as? TimeInterval)!,
                                                                options: self.options!)
-                }else {
+                } else {
                     Logger.sharedInstance.debug("holePegTestStep:formatDict has null values:\(String(describing: formatDict))")
                     return nil
                 }
@@ -271,7 +269,7 @@ class ActivityActiveStep: ActivityStep {
                                                    options: self.options!)
                     
                     
-                }else {
+                } else {
                     Logger.sharedInstance.debug("psatStep:formatDict has null values:\(String(describing: formatDict))")
                     return nil
                 }
@@ -283,7 +281,7 @@ class ActivityActiveStep: ActivityStep {
                     
                     return ORKOrderedTask.shortWalk(withIdentifier: key!, intendedUseDescription: title!, numberOfStepsPerLeg: (formatDict?[kActiveShortWalkNumberOfStepsPerLeg] as? Int)!, restDuration: (formatDict?[kActiveShortWalkRestDuration] as? TimeInterval)! , options: self.options!)
                     
-                }else {
+                } else {
                     Logger.sharedInstance.debug("shortWalkStep:formatDict has null values:\(String(describing: formatDict))")
                     return nil
                 }
@@ -339,11 +337,11 @@ class ActivityActiveStep: ActivityStep {
                       (orderedTask.steps.last as? ORKCompletionStep)!.text = NSLocalizedString(kActiveTaskCompletionStepText, comment: "")
                       return orderedTask
                         
-                    }else {
+                    } else {
                         return nil
                     }
                     
-                }else {
+                } else {
                     Logger.sharedInstance.debug("spatialSpanMemoryStep:formatDict has null values:\(String(describing: formatDict))")
                     return nil
                 }
@@ -362,7 +360,7 @@ class ActivityActiveStep: ActivityStep {
                                                     includeAssistiveDeviceForm: false,
                                                     options: self.options!)
                     
-                }else {
+                } else {
                     Logger.sharedInstance.debug("timedWalkStep:formatDict has null values:\(String(describing: formatDict))")
                     return nil
                 }
@@ -379,7 +377,7 @@ class ActivityActiveStep: ActivityStep {
                                                              toneDuration: (formatDict?[kActiveToneAudiometryToneDuration] as? TimeInterval)!,
                                                              options: self.options!)
                     
-                }else {
+                } else {
                     Logger.sharedInstance.debug("toneAudiometryStep:formatDict has null values:\(String(describing: formatDict))")
                     return nil
                 }
@@ -393,7 +391,7 @@ class ActivityActiveStep: ActivityStep {
                   (orderedTask.steps.last as? ORKCompletionStep)!.text = NSLocalizedString(kActiveTaskCompletionStepText, comment: "")
                   return orderedTask
                     
-                }else {
+                } else {
                     Logger.sharedInstance.debug("towerOfHanoi:formatDict has null values:\(String(describing: formatDict))")
                     return nil
                 }
@@ -407,7 +405,7 @@ class ActivityActiveStep: ActivityStep {
                                                                        handOptions: ORKPredefinedTaskHandOption(rawValue:(formatDict?[kActiveTwoFingerTappingIntervalHandOptions] as? UInt)!),
                                                                        options: self.options!)
                     
-                }else {
+                } else {
                     Logger.sharedInstance.debug("twoFingerTappingIntervalStep:formatDict has null values:\(String(describing: formatDict))")
                     return nil
                 }
@@ -425,7 +423,7 @@ class ActivityActiveStep: ActivityStep {
                             
                         }
                         
-                    }else {
+                    } else {
                         activeOptions = []
                     }
                     
@@ -435,7 +433,7 @@ class ActivityActiveStep: ActivityStep {
                                                      activeTaskOptions: activeOptions! ,
                                                      handOptions: ORKPredefinedTaskHandOption(rawValue: (formatDict?[kActiveTremorTestHandOptions] as? UInt)!),
                                                      options: self.options!)
-                }else {
+                } else {
                     Logger.sharedInstance.debug("twoFingerTappingIntervalStep:formatDict has null values:\(String(describing: formatDict))")
                     return nil
                     
@@ -453,12 +451,12 @@ class ActivityActiveStep: ActivityStep {
                     if Utilities.isValidValue(someObject: formatDict?[kActiveFetalKickCounterkickCounts] as AnyObject ) {
                         fetalKickTask?.maxKickCounts =  (formatDict?[kActiveFetalKickCounterkickCounts] as? Int)!
                         
-                    }else {
+                    } else {
                     //Default Fetal Kicks
                       fetalKickTask?.maxKickCounts = 200
                   }
                     return fetalKickTask?.getTask()
-                }else {
+                } else {
                     Logger.sharedInstance.debug("fetalKickCounter:formatDict has null values:\(String(describing: formatDict))")
                     return nil
                 }
@@ -468,8 +466,7 @@ class ActivityActiveStep: ActivityStep {
                 return nil
                 
             }
-        }
-        else{
+        } else {
             Logger.sharedInstance.debug("Format Dict have null values:\(String(describing: formatDict))")
             return nil
         }

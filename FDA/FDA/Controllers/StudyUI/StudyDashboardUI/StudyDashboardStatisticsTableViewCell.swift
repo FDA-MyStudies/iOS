@@ -130,7 +130,7 @@ class StudyDashboardStatisticsTableViewCell: UITableViewCell {
             labelDateValue?.attributedText = attributedStartDate
             self.buttonForward?.isEnabled = false
             
-        }else if sender.tag == 12{
+        } else if sender.tag == 12 {
             //Week clicked
             buttonWeek?.setTitle(kWeekSpaces, for: UIControlState.normal)
             buttonDay?.setTitle(kDay, for: UIControlState.normal)
@@ -154,7 +154,7 @@ class StudyDashboardStatisticsTableViewCell: UITableViewCell {
             labelDateValue?.attributedText = attributedText//stringStartDate + " - " + stringEndDate
             self.buttonForward?.isEnabled = false
             
-        }else if sender.tag == 13 {
+        } else if sender.tag == 13 {
             
             //Months clicked
             buttonMonth?.setTitle(kMonthSpaces, for: UIControlState.normal)
@@ -327,7 +327,7 @@ extension StudyDashboardStatisticsTableViewCell: UICollectionViewDelegate, UICol
         if selectedTab == .Week {
             cell.displayStatisics(data: stats, startDate: startDateOfWeek!, endDate: endDateOfWeek, tab: selectedTab)
             
-        }else {
+        } else {
             cell.displayStatisics(data: stats, startDate: todaysDate, endDate: nil, tab: selectedTab)
         }
         

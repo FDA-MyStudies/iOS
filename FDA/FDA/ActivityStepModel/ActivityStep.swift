@@ -148,8 +148,7 @@ class ActivityStep{
             if Utilities.isValidObject(someObject: stepDict[kActivityStepDestinations] as AnyObject )  {
                 self.destinations = stepDict[kActivityStepDestinations] as? Array<Dictionary<String, Any>>
             }
-        }
-        else{
+        } else {
             Logger.sharedInstance.debug("Step Dictionary is null:\(stepDict)")
         }
     }
@@ -162,8 +161,7 @@ class ActivityStep{
         
         if Utilities.isValidValue(someObject: self.key as AnyObject?){
             return ORKStep(identifier: self.key! )
-        }
-        else{
+        } else {
             return nil
         }
         

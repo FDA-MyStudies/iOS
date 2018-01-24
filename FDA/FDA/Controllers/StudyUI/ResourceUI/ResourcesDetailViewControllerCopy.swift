@@ -108,16 +108,15 @@ class ResourcesDetailViewControllerCopy: UIViewController {
             
             activityIndicator.startAnimating()
              self.activityIndicator.hidesWhenStopped = true
-            if self.resource?.file?.mimeType == .pdf{
+            if self.resource?.file?.mimeType == .pdf {
                 
                 if self.resource?.file?.localPath != nil {
                     
-                    if self.resource?.file?.localPath == "BundlePath"{
+                    if self.resource?.file?.localPath == "BundlePath" {
                         
                         let path = Bundle.main.path(forResource: self.resource?.file?.link!, ofType: ".pdf")
                         self.loadWebViewWithPath(path: path!)
-                    }
-                    else {
+                    } else {
                         let path = resourcesDownloadPath + "/" + (self.resource?.file?.localPath)!
                         let pdfData = FileDownloadManager.decrytFile(pathURL:URL(string:path))
                         self.loadWebViewWithData(data: pdfData!)
@@ -125,26 +124,19 @@ class ResourcesDetailViewControllerCopy: UIViewController {
                     }
                     
                                       //self.loadWebViewWithPath(path: (self.resource?.file?.localPath)!)
-                }
-                else {
+                } else {
                    //let path = resourcesDownloadPath + "/PDF_linking.pdf"
                     self.startDownloadingfile()
                     //let pdfData = FileDownloadManager.decrytFile(pathURL:URL(string:path))
                     //self.loadWebViewWithData(data: pdfData!)
                 }
-                
-                
-            }
-            else{
+            } else {
                 
                  webView?.allowsBackForwardNavigationGestures = true
                 
                 _ = webView?.loadHTMLString(self.requestLink!, baseURL: nil)
-                 
-               
             }
-        }
-        else{
+        } else {
             
         }
         
@@ -159,7 +151,7 @@ class ResourcesDetailViewControllerCopy: UIViewController {
         // self.tabBar.isHidden = false
     }
     
-    func loadWebViewWithPath(path:String){
+    func loadWebViewWithPath(path:String) {
         
         let url:URL? = URL.init(string:path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed)!)
         let urlRequest = URLRequest(url: url!)
@@ -205,21 +197,20 @@ class ResourcesDetailViewControllerCopy: UIViewController {
     
     // MARK:Button Actions
     
-    @IBAction func cancelButtonClicked(_ sender : Any){
+    @IBAction func cancelButtonClicked(_ sender : Any) {
         self.dismiss(animated: true, completion: nil)
     }
     
-    @IBAction func buttonActionForward(_ sender : UIBarButtonItem){
+    @IBAction func buttonActionForward(_ sender : UIBarButtonItem) {
         
         self.sendEmail()
     }
     
-    @IBAction func buttonActionBack(_ sender : UIBarButtonItem){
+    @IBAction func buttonActionBack(_ sender : UIBarButtonItem) {
        
         if (webView?.canGoBack)!{
            _ =  webView?.goBack()
-        }
-        else if webView?.backForwardList.backList.count == 0 {
+        } else if webView?.backForwardList.backList.count == 0 {
             if  self.resource?.file?.mimeType != .pdf {
                 _ = webView?.loadHTMLString(self.requestLink!, baseURL: nil)
 
@@ -227,8 +218,8 @@ class ResourcesDetailViewControllerCopy: UIViewController {
         }
     }
     
-    @IBAction func buttonActionGoForward(_ sender : UIBarButtonItem){
-        if (webView?.canGoForward)!{
+    @IBAction func buttonActionGoForward(_ sender : UIBarButtonItem) {
+        if (webView?.canGoForward)! {
            _ = webView?.goForward()
         }
     }
@@ -239,7 +230,7 @@ class ResourcesDetailViewControllerCopy: UIViewController {
     }
 }
 
-extension ResourcesDetailViewControllerCopy:UIWebViewDelegate{
+extension ResourcesDetailViewControllerCopy:UIWebViewDelegate {
     
     func webViewDidFinishLoad(_ webView: UIWebView) {
         self.activityIndicator.stopAnimating()
@@ -423,8 +414,7 @@ extension ResourcesDetailViewControllerCopy:MFMailComposeViewControllerDelegate{
                 catch{
                     
                 }
-            }
-            else {
+            } else {
                 
                 do {
                     
@@ -438,11 +428,7 @@ extension ResourcesDetailViewControllerCopy:MFMailComposeViewControllerDelegate{
                     print("error \(error)")
                 }
             }
-            
-            
-            
-        }
-        else {
+        } else {
             composeVC.setMessageBody((resource?.file?.link)!, isHTML: true)
         }
         
@@ -451,10 +437,7 @@ extension ResourcesDetailViewControllerCopy:MFMailComposeViewControllerDelegate{
         {
             self.present(composeVC, animated: true, completion: nil)
             
-            
-           
-        }
-        else{
+        } else {
             let alert = UIAlertController(title:NSLocalizedString(kTitleError, comment: ""),message:"",preferredStyle: UIAlertControllerStyle.alert)
             
             alert.addAction(UIAlertAction.init(title:NSLocalizedString("OK", comment: ""), style: .default, handler: { (action) in

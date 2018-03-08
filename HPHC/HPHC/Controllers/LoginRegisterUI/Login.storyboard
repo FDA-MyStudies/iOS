@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="QEr-gp-3T2">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="QEr-gp-3T2">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
@@ -13,14 +14,18 @@
     <customFonts key="customFonts">
         <array key="HelveticaNeue.ttc">
             <string>HelveticaNeue</string>
+            <string>HelveticaNeue-Bold</string>
             <string>HelveticaNeue-Medium</string>
+        </array>
+        <array key="HelveticaNeueLights.ttc">
+            <string>HelveticaNeue-Light</string>
         </array>
     </customFonts>
     <scenes>
         <!--Home View Controller-->
         <scene sceneID="BW6-xM-cJn">
             <objects>
-                <viewController storyboardIdentifier="HomeViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="35J-FP-kDe" customClass="HomeViewController" customModule="FDA" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="HomeViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="35J-FP-kDe" customClass="HomeViewController" customModule="HPHC" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="fA9-R7-fCb"/>
                         <viewControllerLayoutGuide type="bottom" id="m6o-Mj-jRm"/>
@@ -36,7 +41,7 @@
                                 </connections>
                             </containerView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zqZ-PQ-IFe">
-                                <rect key="frame" x="253" y="16" width="100" height="30"/>
+                                <rect key="frame" x="253" y="36" width="100" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="KD3-2e-eDS"/>
                                 </constraints>
@@ -69,9 +74,7 @@
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="layer.clipsToBounds" value="YES"/>
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
-                                        <integer key="value" value="1"/>
-                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="layer.borderWidth" value="YES"/>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="getStartedButtonClicked:" destination="35J-FP-kDe" eventType="touchUpInside" id="eQK-yY-WMU"/>
@@ -165,7 +168,7 @@
         <!--Sign Up View Controller-->
         <scene sceneID="3pS-vh-67E">
             <objects>
-                <viewController storyboardIdentifier="SignUpViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="0Vw-2B-bh0" customClass="SignUpViewController" customModule="FDA" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SignUpViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="0Vw-2B-bh0" customClass="SignUpViewController" customModule="HPHC" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="l2V-rH-CiO"/>
                         <viewControllerLayoutGuide type="bottom" id="4eV-uF-c5b"/>
@@ -211,7 +214,7 @@
                                                 <action selector="agreeButtonAction:" destination="0Vw-2B-bh0" eventType="touchUpInside" id="AWk-PU-8Q7"/>
                                             </connections>
                                         </button>
-                                        <textView clipsSubviews="YES" contentMode="scaleToFill" editable="NO" usesAttributedText="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3tc-VH-6CI" customClass="LinkTextView" customModule="FDA" customModuleProvider="target">
+                                        <textView clipsSubviews="YES" contentMode="scaleToFill" editable="NO" usesAttributedText="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3tc-VH-6CI" customClass="LinkTextView" customModule="HPHC" customModuleProvider="target">
                                             <rect key="frame" x="49" y="20" width="307" height="64"/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <constraints>
@@ -271,7 +274,7 @@
                                     </constraints>
                                 </view>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="CommonDetailsCell" rowHeight="62" id="CCX-dp-GMs" customClass="SignUpTableViewCell" customModule="FDA" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="CommonDetailsCell" rowHeight="62" id="CCX-dp-GMs" customClass="SignUpTableViewCell" customModule="HPHC" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="62"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="CCX-dp-GMs" id="HO0-G6-1Al">
@@ -279,13 +282,13 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="First Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="16" translatesAutoresizingMaskIntoConstraints="NO" id="bgt-ED-RZb">
-                                                    <rect key="frame" x="23" y="13" width="88" height="21"/>
+                                                    <rect key="frame" x="30" y="9.5" width="88" height="21"/>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="18"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="enter first name" textAlignment="right" minimumFontSize="16" translatesAutoresizingMaskIntoConstraints="NO" id="Fai-CW-7wU">
-                                                    <rect key="frame" x="138" y="4" width="219" height="40"/>
+                                                    <rect key="frame" x="145" y="1" width="205" height="40"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="40" id="Xjh-wg-1tE"/>
                                                     </constraints>
@@ -298,7 +301,7 @@
                                                     </connections>
                                                 </textField>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MHj-RX-w6G">
-                                                    <rect key="frame" x="20" y="61" width="337" height="1"/>
+                                                    <rect key="frame" x="27" y="58" width="323" height="1"/>
                                                     <color key="backgroundColor" red="0.84705882352941175" green="0.8901960784313725" blue="0.90196078431372551" alpha="1" colorSpace="calibratedRGB"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="1" id="v51-zI-w4i"/>
@@ -378,7 +381,7 @@
         <!--Page View Controller-->
         <scene sceneID="sGH-Wv-EgY">
             <objects>
-                <pageViewController storyboardIdentifier="PageViewController" autoresizesArchivedViewToFullSize="NO" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="iKt-1T-sAG" customClass="PageViewController" customModule="FDA" customModuleProvider="target" sceneMemberID="viewController">
+                <pageViewController storyboardIdentifier="PageViewController" autoresizesArchivedViewToFullSize="NO" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="iKt-1T-sAG" customClass="PageViewController" customModule="HPHC" customModuleProvider="target" sceneMemberID="viewController">
                     <nil key="simulatedTopBarMetrics"/>
                 </pageViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jko-8N-yFH" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -388,7 +391,7 @@
         <!--First Gateway Overview View Controller-->
         <scene sceneID="p0B-P3-hHQ">
             <objects>
-                <viewController storyboardIdentifier="FirstViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="q1c-F7-xg0" customClass="FirstGatewayOverviewViewController" customModule="FDA" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="FirstViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="q1c-F7-xg0" customClass="FirstGatewayOverviewViewController" customModule="HPHC" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="nAz-WP-Nbo"/>
                         <viewControllerLayoutGuide type="bottom" id="lLb-72-cxP"/>
@@ -505,7 +508,7 @@
         <!--Second Gateway Overview View Controller-->
         <scene sceneID="lv7-bL-5k5">
             <objects>
-                <viewController storyboardIdentifier="SecondViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="VsY-HQ-RAI" customClass="SecondGatewayOverviewViewController" customModule="FDA" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SecondViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="VsY-HQ-RAI" customClass="SecondGatewayOverviewViewController" customModule="HPHC" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="FeW-GH-X1V"/>
                         <viewControllerLayoutGuide type="bottom" id="Mop-tL-hXD"/>
@@ -620,7 +623,6 @@
                     <toolbarItems/>
                     <nil key="simulatedTopBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="PKu-fU-nTZ">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -635,7 +637,7 @@
         <!--Sign In View Controller-->
         <scene sceneID="Wzw-LZ-jON">
             <objects>
-                <viewController storyboardIdentifier="SignInViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="A51-y2-CGR" customClass="SignInViewController" customModule="FDA" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SignInViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="A51-y2-CGR" customClass="SignInViewController" customModule="HPHC" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="SnD-H7-w6h"/>
                         <viewControllerLayoutGuide type="bottom" id="yoe-20-K0y"/>
@@ -661,7 +663,7 @@
                                     <constraint firstAttribute="height" constant="140" id="S9i-b1-mhZ"/>
                                 </constraints>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="DetailsCell" rowHeight="62" id="JAX-jX-xGG" customClass="SignInTableViewCell" customModule="FDA" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="DetailsCell" rowHeight="62" id="JAX-jX-xGG" customClass="SignInTableViewCell" customModule="HPHC" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="62"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="JAX-jX-xGG" id="rDE-gj-WFC">
@@ -669,13 +671,13 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Email" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OtJ-TT-gO6">
-                                                    <rect key="frame" x="23" y="19" width="45" height="21"/>
+                                                    <rect key="frame" x="30" y="15.5" width="45" height="21"/>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="18"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="enter email" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="TVv-OZ-IiD">
-                                                    <rect key="frame" x="89" y="11" width="268" height="40"/>
+                                                    <rect key="frame" x="96" y="8" width="254" height="40"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="40" id="zWF-Ta-4kl"/>
                                                     </constraints>
@@ -688,7 +690,7 @@
                                                     </connections>
                                                 </textField>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gW8-1a-nBO">
-                                                    <rect key="frame" x="20" y="60" width="337" height="1"/>
+                                                    <rect key="frame" x="27" y="57" width="323" height="1"/>
                                                     <color key="backgroundColor" red="0.84705882349999995" green="0.89019607840000003" blue="0.90196078430000004" alpha="1" colorSpace="calibratedRGB"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="1" id="tym-l4-egW"/>
@@ -753,7 +755,7 @@
                                     <segue destination="0Vw-2B-bh0" kind="show" id="VqN-my-PFn"/>
                                 </connections>
                             </button>
-                            <textView clipsSubviews="YES" contentMode="scaleToFill" editable="NO" usesAttributedText="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kEu-ol-yfS" customClass="LinkTextView" customModule="FDA" customModuleProvider="target">
+                            <textView clipsSubviews="YES" contentMode="scaleToFill" editable="NO" usesAttributedText="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kEu-ol-yfS" customClass="LinkTextView" customModule="HPHC" customModuleProvider="target">
                                 <rect key="frame" x="10" y="425" width="355" height="74"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
@@ -837,7 +839,7 @@
         <!--Forgot Password View Controller-->
         <scene sceneID="TRs-tS-d3H">
             <objects>
-                <viewController id="Gsh-dt-7LH" customClass="ForgotPasswordViewController" customModule="FDA" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="Gsh-dt-7LH" customClass="ForgotPasswordViewController" customModule="HPHC" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="zqM-oj-3kz"/>
                         <viewControllerLayoutGuide type="bottom" id="BZC-lG-1rb"/>
@@ -931,7 +933,7 @@
         <!--Verification View Controller-->
         <scene sceneID="lrB-zr-Jf9">
             <objects>
-                <viewController id="slw-Bf-fNL" customClass="VerificationViewController" customModule="FDA" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="slw-Bf-fNL" customClass="VerificationViewController" customModule="HPHC" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="xxR-vI-Jb5"/>
                         <viewControllerLayoutGuide type="bottom" id="IdW-NN-bRV"/>
@@ -1044,7 +1046,7 @@
         <!--Sign Up Complete View Controller-->
         <scene sceneID="cUY-UG-3yT">
             <objects>
-                <viewController id="3kT-ho-jWT" customClass="SignUpCompleteViewController" customModule="FDA" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="3kT-ho-jWT" customClass="SignUpCompleteViewController" customModule="HPHC" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="buQ-Ae-01a"/>
                         <viewControllerLayoutGuide type="bottom" id="Bl3-YX-IlU"/>
@@ -1124,7 +1126,7 @@
         <!--Verification View Controller-->
         <scene sceneID="vdI-lO-BU2">
             <objects>
-                <viewController id="KuI-8R-b3A" customClass="VerificationViewController" customModule="FDA" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="KuI-8R-b3A" customClass="VerificationViewController" customModule="HPHC" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="LEA-Yh-r79"/>
                         <viewControllerLayoutGuide type="bottom" id="uHO-fJ-tCX"/>
@@ -1259,7 +1261,7 @@
         <image name="welcomeBg" width="375" height="667"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Wsb-hw-1LK"/>
-        <segue reference="VqN-my-PFn"/>
+        <segue reference="EeA-Hk-jBe"/>
+        <segue reference="Xbj-IV-jBd"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -2114,7 +2114,7 @@
 				INFOPLIST_FILE = HPHC/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.hphci.fda.mobilestudies;
+				PRODUCT_BUNDLE_IDENTIFIER = com.hphc.mystudies;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "3dbef759-1ffa-44c3-9c0c-5c26b76e3b4f";
 				PROVISIONING_PROFILE_SPECIFIER = FDA_HPHC_Adhoc;
@@ -2141,7 +2141,7 @@
 				INFOPLIST_FILE = HPHC/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.hphci.fda.mobilestudies;
+				PRODUCT_BUNDLE_IDENTIFIER = com.hphc.mystudies;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "3dbef759-1ffa-44c3-9c0c-5c26b76e3b4f";
 				PROVISIONING_PROFILE_SPECIFIER = FDA_HPHC_Adhoc;

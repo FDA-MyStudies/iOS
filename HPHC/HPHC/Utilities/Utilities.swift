@@ -64,8 +64,8 @@ class Utilities: NSObject {
         
         let title: String = pstr + " " + bstr
         let attributedString = NSMutableAttributedString(string: title)
-        let stringAttributes1 = [NSFontAttributeName:UIFont(name: plainFontName, size: size)!]
-        let stringAttributes2 = [NSFontAttributeName:UIFont(name: boldFontName, size: size)!]
+        let stringAttributes1 = [NSAttributedStringKey.font:UIFont(name: plainFontName, size: size)!]
+        let stringAttributes2 = [NSAttributedStringKey.font:UIFont(name: boldFontName, size: size)!]
         
         attributedString.addAttributes(stringAttributes1, range: (title as NSString).range(of: pstr))
         attributedString.addAttributes(stringAttributes2, range: (title as NSString).range(of: bstr))
@@ -132,7 +132,7 @@ class Utilities: NSObject {
     
     class func frameForText(_ text: String, font: UIFont) -> CGSize {
         
-        let attrString = NSAttributedString.init(string: text, attributes: [NSFontAttributeName: font])
+        let attrString = NSAttributedString.init(string: text, attributes: [NSAttributedStringKey.font: font])
         let rect = attrString.boundingRect(with: CGSize(width: MAX_WIDTH,height: MAX_HEIGHT), options: NSStringDrawingOptions.usesLineFragmentOrigin, context: nil)
         let size = CGSize(width: rect.size.width, height: rect.size.height)
         return size

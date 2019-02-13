@@ -93,7 +93,7 @@ class ContactUsViewController: UIViewController{
         
     }
     
-    func handleTapGesture(gesture: UIGestureRecognizer){
+    @objc func handleTapGesture(gesture: UIGestureRecognizer){
         
         let location = gesture.location(in: gesture.view)
         if location.y > 245 {

@@ -29,19 +29,19 @@ import RealmSwift
  */
 class DBUser: Object {
     
-    dynamic var firstName: String = ""
-    dynamic var lastName: String = ""
-    dynamic var emailId: String = ""
+    @objc dynamic var firstName: String = ""
+    @objc dynamic var lastName: String = ""
+    @objc dynamic var emailId: String = ""
    
-    dynamic var userId: String = ""
-    dynamic var verified: Bool = false
-    dynamic var authToken: String = ""
-    dynamic var userType: Int = UserType.AnonymousUser.rawValue
+    @objc dynamic var userId: String = ""
+    @objc dynamic var verified: Bool = false
+    @objc dynamic var authToken: String = ""
+    @objc dynamic var userType: Int = UserType.AnonymousUser.rawValue
    
-    dynamic var passcodeEnabled: Bool = true
-    dynamic var remoteNotificationEnabled: Bool = false
-    dynamic var localNotificationEnabled: Bool = false
-    dynamic var refreshToken: String = ""
+    @objc dynamic var passcodeEnabled: Bool = true
+    @objc dynamic var remoteNotificationEnabled: Bool = false
+    @objc dynamic var localNotificationEnabled: Bool = false
+    @objc dynamic var refreshToken: String = ""
   
     override static func primaryKey() -> String? {
         return "userId"

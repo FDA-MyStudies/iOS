@@ -473,7 +473,7 @@ class StudyListViewController: UIViewController {
         self.navigateToNotifications()
     }
     
-    func refresh(sender: AnyObject) {
+    @objc func refresh(sender: AnyObject) {
         self.sendRequestToGetStudyList()
     }
     
@@ -729,7 +729,7 @@ class StudyListViewController: UIViewController {
         }
     }
     
-    func loadStudyDetails() {
+    @objc func loadStudyDetails() {
         let study = Study.currentStudy
         DBHandler.loadStudyDetailsToUpdate(studyId: (study?.studyId)!, completionHandler: { (success) in
             
@@ -1209,7 +1209,7 @@ extension StudyListViewController: ORKTaskViewControllerDelegate{
         self.perform(#selector(dismisscontroller), with: self, afterDelay: 1.5)
     }
     
-    func dismisscontroller() {
+    @objc func dismisscontroller() {
         self.dismiss(animated: true, completion: nil)
     }
     

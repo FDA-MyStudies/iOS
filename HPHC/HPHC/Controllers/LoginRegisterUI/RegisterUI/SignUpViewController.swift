@@ -128,14 +128,14 @@ class SignUpViewController: UIViewController{
         let attributedString =  (termsAndCondition?.attributedText.mutableCopy() as? NSMutableAttributedString)!
         
         var foundRange = attributedString.mutableString.range(of: "Terms")
-        attributedString.addAttribute(NSLinkAttributeName, value:(TermsAndPolicy.currentTermsAndPolicy?.termsURL!)! as String, range: foundRange)
+        attributedString.addAttribute(NSAttributedStringKey.link, value:(TermsAndPolicy.currentTermsAndPolicy?.termsURL!)! as String, range: foundRange)
         
         foundRange = attributedString.mutableString.range(of: "Privacy Policy")
-        attributedString.addAttribute(NSLinkAttributeName, value:(TermsAndPolicy.currentTermsAndPolicy?.policyURL!)! as String  , range: foundRange)
+        attributedString.addAttribute(NSAttributedStringKey.link, value:(TermsAndPolicy.currentTermsAndPolicy?.policyURL!)! as String  , range: foundRange)
         
         termsAndCondition?.attributedText = attributedString
         
-        termsAndCondition?.linkTextAttributes = [NSForegroundColorAttributeName: Utilities.getUIColorFromHex(0x007CBA)]
+        termsAndCondition?.linkTextAttributes = [NSAttributedStringKey.foregroundColor.rawValue: Utilities.getUIColorFromHex(0x007CBA)]
         
     }
     
@@ -145,7 +145,7 @@ class SignUpViewController: UIViewController{
      Dismiss key board when clicked on Background
      
      */
-    func dismissKeyboard(){
+    @objc func dismissKeyboard(){
         self.view.endEditing(true)
     }
     

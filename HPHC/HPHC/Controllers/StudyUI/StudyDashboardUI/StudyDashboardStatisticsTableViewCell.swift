@@ -66,7 +66,7 @@ class StudyDashboardStatisticsTableViewCell: UITableViewCell {
         let color = Utilities.getUIColorFromHex(0x007CBA)
         
         let attributedStartDate: NSMutableAttributedString = NSMutableAttributedString(string: stringDate)
-        attributedStartDate.addAttribute(NSForegroundColorAttributeName, value: color, range: NSMakeRange(0, 2))
+        attributedStartDate.addAttribute(NSAttributedStringKey.foregroundColor, value: color, range: NSMakeRange(0, 2))
         labelDateValue?.attributedText = attributedStartDate
         self.buttonForward?.isEnabled = false
         
@@ -86,10 +86,10 @@ class StudyDashboardStatisticsTableViewCell: UITableViewCell {
         let color = Utilities.getUIColorFromHex(0x007CBA)
         
         let attributedStartDate: NSMutableAttributedString = NSMutableAttributedString(string: stringStartDate)
-        attributedStartDate.addAttribute(NSForegroundColorAttributeName, value: color, range: NSMakeRange(0, 2))
+        attributedStartDate.addAttribute(NSAttributedStringKey.foregroundColor, value: color, range: NSMakeRange(0, 2))
         
         let attributedEndDate: NSMutableAttributedString = NSMutableAttributedString(string: stringEndDate)
-        attributedEndDate.addAttribute(NSForegroundColorAttributeName, value: color, range: NSMakeRange(0, 2))
+        attributedEndDate.addAttribute(NSAttributedStringKey.foregroundColor, value: color, range: NSMakeRange(0, 2))
         
         
         attributedStartDate.append(attributedEndDate)
@@ -126,7 +126,7 @@ class StudyDashboardStatisticsTableViewCell: UITableViewCell {
             let color = Utilities.getUIColorFromHex(0x007CBA)
             
             let attributedStartDate: NSMutableAttributedString = NSMutableAttributedString(string: stringDate)
-            attributedStartDate.addAttribute(NSForegroundColorAttributeName, value: color, range: NSMakeRange(0, 2))
+            attributedStartDate.addAttribute(NSAttributedStringKey.foregroundColor, value: color, range: NSMakeRange(0, 2))
             labelDateValue?.attributedText = attributedStartDate
             self.buttonForward?.isEnabled = false
             
@@ -194,7 +194,7 @@ class StudyDashboardStatisticsTableViewCell: UITableViewCell {
             let color = Utilities.getUIColorFromHex(0x007CBA)
             
             let attributedStartDate: NSMutableAttributedString = NSMutableAttributedString(string: stringDate)
-            attributedStartDate.addAttribute(NSForegroundColorAttributeName, value: color, range: NSMakeRange(0, 2))
+            attributedStartDate.addAttribute(NSAttributedStringKey.foregroundColor, value: color, range: NSMakeRange(0, 2))
             labelDateValue?.attributedText = attributedStartDate
             
             
@@ -251,7 +251,7 @@ class StudyDashboardStatisticsTableViewCell: UITableViewCell {
             let color = Utilities.getUIColorFromHex(0x007CBA)
             
             let attributedStartDate: NSMutableAttributedString = NSMutableAttributedString(string: stringDate)
-            attributedStartDate.addAttribute(NSForegroundColorAttributeName, value: color, range: NSMakeRange(0, 2))
+            attributedStartDate.addAttribute(NSAttributedStringKey.foregroundColor, value: color, range: NSMakeRange(0, 2))
             labelDateValue?.attributedText = attributedStartDate
             
         case .Week:
@@ -268,10 +268,10 @@ class StudyDashboardStatisticsTableViewCell: UITableViewCell {
             let color = Utilities.getUIColorFromHex(0x007CBA)
             
             let attributedStartDate:NSMutableAttributedString = NSMutableAttributedString(string: stringStartDate)
-            attributedStartDate.addAttribute(NSForegroundColorAttributeName, value: color, range: NSMakeRange(0, 2))
+            attributedStartDate.addAttribute(NSAttributedStringKey.foregroundColor, value: color, range: NSMakeRange(0, 2))
             
             let attributedEndDate: NSMutableAttributedString = NSMutableAttributedString(string: stringEndDate)
-            attributedEndDate.addAttribute(NSForegroundColorAttributeName, value: color, range: NSMakeRange(0, 2))
+            attributedEndDate.addAttribute(NSAttributedStringKey.foregroundColor, value: color, range: NSMakeRange(0, 2))
             attributedStartDate.append(attributedEndDate)
             
             labelDateValue?.attributedText = attributedStartDate //stringStartDate + " - " + stringEndDate

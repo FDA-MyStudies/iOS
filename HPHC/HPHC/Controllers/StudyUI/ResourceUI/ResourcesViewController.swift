@@ -771,9 +771,11 @@ public extension String {
     var htmlDecoded: String {
         guard let encodedData = self.data(using: .utf8) else { return self }
         
-        let attributedOptions: [String: Any] = [
-            NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType,
-            NSCharacterEncodingDocumentAttribute: String.Encoding.utf8.rawValue]
+        let attributedOptions: [NSAttributedString.DocumentReadingOptionKey : Any] = [
+            .documentType: NSAttributedString.DocumentType.html,
+            .characterEncoding: String.Encoding.utf8.rawValue
+        ]
+        
         
         do {
             let attributedString = try NSAttributedString(data: encodedData,

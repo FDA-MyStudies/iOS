@@ -79,14 +79,14 @@ class StudyOverviewViewControllerFirst: UIViewController {
         
         let attrStr = try! NSAttributedString(
             data: (overviewSectionDetail.text?.data(using: String.Encoding.unicode, allowLossyConversion: true)!)!,
-            options: [ NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType],
+            options: [ NSAttributedString.DocumentReadingOptionKey.documentType: NSAttributedString.DocumentType.html],
             documentAttributes: nil)
         
         let attributedText: NSMutableAttributedString = NSMutableAttributedString(attributedString: attrStr)
-        attributedText.addAttributes([NSFontAttributeName:UIFont(
+        attributedText.addAttributes([NSAttributedStringKey.font:UIFont(
             name: "HelveticaNeue",
             size: CGFloat(fontSize))!], range:(attrStr.string as NSString).range(of: attrStr.string))
-        attributedText.addAttribute(NSForegroundColorAttributeName, value: UIColor.white, range: (attrStr.string as NSString).range(of: attrStr.string))
+        attributedText.addAttribute(NSAttributedStringKey.foregroundColor, value: UIColor.white, range: (attrStr.string as NSString).range(of: attrStr.string))
         
         if Utilities.isValidValue(someObject: attrStr.string as AnyObject?) {
              self.labelDescription?.attributedText = attributedText
@@ -128,7 +128,7 @@ class StudyOverviewViewControllerFirst: UIViewController {
         moviePlayer.dismiss(animated: true, completion: nil)
     }
     
-    func playerDidFinishPlaying(note: NSNotification) {
+    @objc func playerDidFinishPlaying(note: NSNotification) {
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: nil)
         self.playerViewController.dismiss(animated: true, completion: nil)
     }

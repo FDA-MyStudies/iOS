@@ -120,7 +120,7 @@ class ChangePasswordViewController: UIViewController {
      Dismiss key board when clicked on Background
      
      */
-    func dismissKeyboard(){
+    @objc func dismissKeyboard(){
         self.view.endEditing(true)
     }
     

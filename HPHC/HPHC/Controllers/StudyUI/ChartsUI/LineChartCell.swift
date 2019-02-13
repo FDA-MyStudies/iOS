@@ -70,10 +70,10 @@ class LineChartCell: GraphChartTableViewCell {
         let color = Utilities.getUIColorFromHex(0x007CBA)
         
         let attributedStartDate: NSMutableAttributedString = NSMutableAttributedString(string: stringStartDate)
-        attributedStartDate.addAttribute(NSForegroundColorAttributeName, value: color, range: NSMakeRange(0, 2))
+        attributedStartDate.addAttribute(NSAttributedStringKey.foregroundColor, value: color, range: NSMakeRange(0, 2))
         
         let attributedEndDate: NSMutableAttributedString = NSMutableAttributedString(string: stringEndDate)
-        attributedEndDate.addAttribute(NSForegroundColorAttributeName, value: color, range: NSMakeRange(0, 2))
+        attributedEndDate.addAttribute(NSAttributedStringKey.foregroundColor, value: color, range: NSMakeRange(0, 2))
         
         
         attributedStartDate.append(attributedEndDate)
@@ -89,10 +89,10 @@ class LineChartCell: GraphChartTableViewCell {
         let color = Utilities.getUIColorFromHex(0x007CBA)
         
         let attributedStartDate: NSMutableAttributedString = NSMutableAttributedString(string: stringStartDate2)
-        attributedStartDate.addAttribute(NSForegroundColorAttributeName, value: color, range: NSMakeRange(0, 2))
+        attributedStartDate.addAttribute(NSAttributedStringKey.foregroundColor, value: color, range: NSMakeRange(0, 2))
         
         let attributedEndDate: NSMutableAttributedString = NSMutableAttributedString(string: stringEndDate)
-        attributedEndDate.addAttribute(NSForegroundColorAttributeName, value: color, range: NSMakeRange(0, 2))
+        attributedEndDate.addAttribute(NSAttributedStringKey.foregroundColor, value: color, range: NSMakeRange(0, 2))
         
         
         attributedStartDate.append(attributedEndDate)

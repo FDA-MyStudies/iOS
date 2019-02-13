@@ -80,7 +80,7 @@ class SignInViewController: UIViewController{
         if let attributedTitle = buttonSignUp?.attributedTitle(for: .normal) {
             let mutableAttributedTitle = NSMutableAttributedString(attributedString: attributedTitle)
             
-            mutableAttributedTitle.addAttribute(NSForegroundColorAttributeName, value: UIColor.init(colorLiteralRed: 0/255.0, green: 124/255.0, blue: 186/255.0, alpha: 1.0), range: NSRange(location: 10,length: 7))
+            mutableAttributedTitle.addAttribute(NSAttributedStringKey.foregroundColor, value: #colorLiteral(red: 0, green: 0.4862745098, blue: 0.7294117647, alpha: 1) , range: NSRange(location: 10,length: 7))
             
             buttonSignUp?.setAttributedTitle(mutableAttributedTitle, for: .normal)
         }
@@ -224,7 +224,7 @@ class SignInViewController: UIViewController{
      Dismiss key board when clicked on Background
      
      */
-    func dismissKeyboard(){
+    @objc func dismissKeyboard(){
         self.view.endEditing(true)
     }
     
@@ -292,14 +292,14 @@ class SignInViewController: UIViewController{
         let attributedString =  (termsAndCondition?.attributedText.mutableCopy() as? NSMutableAttributedString)!
         
         var foundRange = attributedString.mutableString.range(of: "Terms")
-        attributedString.addAttribute(NSLinkAttributeName, value:(TermsAndPolicy.currentTermsAndPolicy?.termsURL!)! as String, range: foundRange)
+        attributedString.addAttribute(NSAttributedStringKey.link, value:(TermsAndPolicy.currentTermsAndPolicy?.termsURL!)! as String, range: foundRange)
         
         foundRange = attributedString.mutableString.range(of: "Privacy Policy")
-        attributedString.addAttribute(NSLinkAttributeName, value:(TermsAndPolicy.currentTermsAndPolicy?.policyURL!)! as String  , range: foundRange)
+        attributedString.addAttribute(NSAttributedStringKey.link, value:(TermsAndPolicy.currentTermsAndPolicy?.policyURL!)! as String  , range: foundRange)
         
         termsAndCondition?.attributedText = attributedString
         
-        termsAndCondition?.linkTextAttributes = [NSForegroundColorAttributeName: Utilities.getUIColorFromHex(0x007CBA)]
+        termsAndCondition?.linkTextAttributes = [NSAttributedStringKey.foregroundColor.rawValue: Utilities.getUIColorFromHex(0x007CBA)]
         
     }
     

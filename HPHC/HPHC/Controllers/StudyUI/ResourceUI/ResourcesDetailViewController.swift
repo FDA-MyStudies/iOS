@@ -144,7 +144,11 @@ class ResourcesDetailViewController: UIViewController {
         
         let fdm = FileDownloadManager()
         fdm.delegate = self
-        fdm.downloadFile(fileName as String, fileURL: fileURL.addingPercentEscapes(using: String.Encoding(rawValue: String.Encoding.utf8.rawValue))!, destinationPath: resourcesDownloadPath)
+        guard let encodedUrl = fileURL.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) else {
+            return
+        } // Tush
+        
+        fdm.downloadFile(fileName as String, fileURL: encodedUrl , destinationPath: resourcesDownloadPath)
     }
     
     

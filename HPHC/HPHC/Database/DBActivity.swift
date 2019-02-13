@@ -27,30 +27,30 @@ import RealmSwift
 // DB instance of Activity Model
 class DBActivity: Object {
     
-    dynamic var id: String?
-    dynamic var type: String?
-    dynamic var actvityId: String?
-    dynamic var state: String?
-    dynamic var studyId: String?
-    dynamic var name: String?
-    dynamic var shortName: String?
-    dynamic var version: String?
-    dynamic var lastModified: Date?
+    @objc dynamic var id: String?
+    @objc dynamic var type: String?
+    @objc dynamic var actvityId: String?
+    @objc dynamic var state: String?
+    @objc dynamic var studyId: String?
+    @objc dynamic var name: String?
+    @objc dynamic var shortName: String?
+    @objc dynamic var version: String?
+    @objc dynamic var lastModified: Date?
     
-    dynamic var startDate: Date?
-    dynamic var endDate: Date?
-    dynamic var branching: Bool = false
-    dynamic var randomization: Bool = false
+    @objc dynamic var startDate: Date?
+    @objc dynamic var endDate: Date?
+    @objc dynamic var branching: Bool = false
+    @objc dynamic var randomization: Bool = false
     
     
-    dynamic var frequencyRunsData: Data?
-    dynamic var frequencyType: String?
+    @objc dynamic var frequencyRunsData: Data?
+    @objc dynamic var frequencyType: String?
     
-    dynamic var currentRunId: String?
-    dynamic var participationStatus: Int = 0
-    dynamic var completedRuns: Int = 0
+    @objc dynamic var currentRunId: String?
+    @objc dynamic var participationStatus: Int = 0
+    @objc dynamic var completedRuns: Int = 0
   
-    dynamic var taskSubType: String?
+    @objc dynamic var taskSubType: String?
   
     var activityRuns = List<DBActivityRun>()
     
@@ -61,23 +61,23 @@ class DBActivity: Object {
 }
 class DBActivityMetaData:Object {
     
-    dynamic var actvityId: String?
-    dynamic var studyId: String?
-    dynamic var metaData: Data?
+    @objc dynamic var actvityId: String?
+    @objc dynamic var studyId: String?
+    @objc dynamic var metaData: Data?
     
 }
 class DBActivityRun: Object {
     
-    dynamic  var startDate: Date!
-    dynamic  var endDate: Date!
-    dynamic  var complitionDate: Date!
-    dynamic  var runId: Int = 1
-    dynamic  var studyId: String!
-    dynamic  var activityId: String!
-    dynamic  var isCompleted: Bool = false
-    dynamic  var restortionData: Data?
-    dynamic  var toBeSynced: Bool = false
-    dynamic  var responseData: Data?
+    @objc dynamic  var startDate: Date!
+    @objc dynamic  var endDate: Date!
+    @objc dynamic  var complitionDate: Date!
+    @objc dynamic  var runId: Int = 1
+    @objc dynamic  var studyId: String!
+    @objc dynamic  var activityId: String!
+    @objc dynamic  var isCompleted: Bool = false
+    @objc dynamic  var restortionData: Data?
+    @objc dynamic  var toBeSynced: Bool = false
+    @objc dynamic  var responseData: Data?
     
 }
 

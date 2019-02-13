@@ -309,7 +309,7 @@ class ProfileViewController: UIViewController, SlideMenuControllerDelegate {
      Dismiss key board when clicked on Background
      
      */
-    func dismissKeyboard(){
+    @objc func dismissKeyboard(){
         self.view.endEditing(true)
     }
     
@@ -450,7 +450,7 @@ class ProfileViewController: UIViewController, SlideMenuControllerDelegate {
      @param Sender  has to be a UISwitch
      
      */
-    func toggleValueChanged(_ sender: UISwitch)  {
+    @objc func toggleValueChanged(_ sender: UISwitch)  {
         
         isProfileEdited = true
         
@@ -500,7 +500,7 @@ class ProfileViewController: UIViewController, SlideMenuControllerDelegate {
         }
     }
   
-  func cancelAllLocalNotifications(){
+  @objc func cancelAllLocalNotifications(){
     
     UIApplication.shared.cancelAllLocalNotifications()
     let application = UIApplication.shared
@@ -512,7 +512,7 @@ class ProfileViewController: UIViewController, SlideMenuControllerDelegate {
   
  
  
-  func registerLocalNotification(){
+  @objc func registerLocalNotification(){
     LocalNotification.refreshAllLocalNotification()
     self.removeProgressIndicator()
   }
@@ -525,7 +525,7 @@ class ProfileViewController: UIViewController, SlideMenuControllerDelegate {
      @param sender  Accepts UIbutton Object
      
      */
-    func pushToChangePassword(_ sender: UIButton)  {
+    @objc func pushToChangePassword(_ sender: UIButton)  {
         self.performSegue(withIdentifier: kChangePasswordSegueIdentifier, sender: nil)
     }
     
@@ -957,7 +957,7 @@ extension ProfileViewController: ORKTaskViewControllerDelegate{
 //        })
     }
   
-  func dismissTaskViewController() {
+  @objc func dismissTaskViewController() {
     self.dismiss(animated: true, completion: {
  })
   }

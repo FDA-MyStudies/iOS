@@ -67,7 +67,9 @@ class LocalNotification: NSObject {
         
         DBHandler.loadActivityListFromDatabase(studyId: study.studyId) { (activities) in
             if activities.count > 0 {
-                LocalNotification.registerAllLocalNotificationFor(activities: activities, completionHandler: { (done) in
+              
+                LocalNotification.registerAllLocalNotificationFor(activities: activities, completionHandler: {
+                    (done,_)   in
                     completionHandler(true)
                 })
             } else {

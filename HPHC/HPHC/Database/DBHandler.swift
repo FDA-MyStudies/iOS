@@ -977,7 +977,9 @@ class DBHandler: NSObject {
             }else {
                 
                 runsBeforeToday = runs.filter({$0.endDate <= date})
-                run = runs.filter({$0.startDate <= date && $0.endDate > date}).first //current run
+                let firstRun: [DBActivityRun] = runs.filter({$0.startDate <= date && $0.endDate > date})
+                run = firstRun.first
+                //run = runs.filter({$0.startDate <= date && $0.endDate > date}).first //current run
             }
             
             let currentRunId =  (run != nil) ? (run?.runId)! : runsBeforeToday.count

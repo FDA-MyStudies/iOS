@@ -519,7 +519,7 @@
         
         func customizeNavigationBar() {
             UINavigationBar.appearance().titleTextAttributes = [
-                NSFontAttributeName: UIFont(name: "HelveticaNeue-Medium", size: 18)!
+                NSAttributedStringKey.font: UIFont(name: "HelveticaNeue-Medium", size: 18)!
             ]
         }
         
@@ -1116,7 +1116,7 @@
             }
         }
         
-        func updateEligibilityConsentStatus() {
+        @objc func updateEligibilityConsentStatus() {
             
             let notificationName = Notification.Name(kPDFCreationNotificationId)
             
@@ -1140,7 +1140,7 @@
             }
         }
         
-        func dismissTaskViewController() {
+        @objc func dismissTaskViewController() {
             passcodeParentControllerWhileSetup?.dismiss(animated: true, completion: nil)
             passcodeParentControllerWhileSetup = nil
             

@@ -208,7 +208,7 @@ class FetalKickCounterStepViewController:  ORKStepViewController {
     /**
      Updates the timer Value
     */
-    func setCounter() {
+    @objc func setCounter() {
         
         DispatchQueue.global(qos: .background).async {
             if self.timerValue! < 0 {
@@ -263,14 +263,14 @@ class FetalKickCounterStepViewController:  ORKStepViewController {
      handleTap method detects the tap gesture event
      @param  sender is tapguesture instance
      */
-    func handleTap(_ sender: UITapGestureRecognizer)   {
+    @objc func handleTap(_ sender: UITapGestureRecognizer)   {
         counterTextField?.resignFirstResponder()
     }
     
     /**
      stores the details of ongoing Fetal Kick task in local datatbase
     */
-    func appMovedToBackground() {
+    @objc func appMovedToBackground() {
         
         let ud = UserDefaults.standard
         if ud.object(forKey: kFetalKickStartTimeStamp) != nil{
@@ -295,7 +295,7 @@ class FetalKickCounterStepViewController:  ORKStepViewController {
     /**
      Resets the keys when app becomes Active
     */
-    func appBecameActive() {
+    @objc func appBecameActive() {
         
         let ud = UserDefaults.standard
         ud.set(false, forKey: "FKC")

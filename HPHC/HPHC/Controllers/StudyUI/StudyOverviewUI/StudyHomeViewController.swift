@@ -381,7 +381,7 @@ class StudyHomeViewController: UIViewController{
      This Method is used when the user taps on the pageControl to change its
      current page (Commented as this is not working)
      */
-    func didChangePageControlValue() {
+    @objc func didChangePageControlValue() {
         // pageViewController?.scrollToViewController(index: (pageControlView?.currentPage)!)
     }
     
@@ -418,7 +418,7 @@ class StudyHomeViewController: UIViewController{
         
     }
     
-    func updateEligibilityConsentStatus(){
+    @objc func updateEligibilityConsentStatus(){
         
         let notificationName = Notification.Name(kPDFCreationNotificationId)
         // Post notification

@@ -30,20 +30,20 @@ import RealmSwift
 class DBNotification: Object {
     
     
-    dynamic var id: String?
-    dynamic var title: String?
-    dynamic var message: String?
-    dynamic var studyId: String?
+    @objc dynamic var id: String?
+    @objc dynamic var title: String?
+    @objc dynamic var message: String?
+    @objc dynamic var studyId: String?
    
-    dynamic var notificationType: String?
-    dynamic var subType: String?
-    dynamic var audience: String?
+    @objc dynamic var notificationType: String?
+    @objc dynamic var subType: String?
+    @objc dynamic var audience: String?
     
-    dynamic var activityId: String?
+    @objc dynamic var activityId: String?
     
-    dynamic var date: Date?
+    @objc dynamic var date: Date?
     
-    dynamic var isRead = false
+    @objc dynamic var isRead = false
     
     override static func primaryKey() -> String? {
         return "id"
@@ -54,21 +54,21 @@ class DBNotification: Object {
 class DBLocalNotification: Object {
     
     
-    dynamic var id: String?
-    dynamic var title: String?
-    dynamic var message: String?
-    dynamic var studyId: String?
+    @objc dynamic var id: String?
+    @objc dynamic var title: String?
+    @objc dynamic var message: String?
+    @objc dynamic var studyId: String?
     
-    dynamic var notificationType: String?
-    dynamic var subType: String?
-    dynamic var audience: String?
+    @objc dynamic var notificationType: String?
+    @objc dynamic var subType: String?
+    @objc dynamic var audience: String?
     
-    dynamic var activityId: String?
+    @objc dynamic var activityId: String?
     
-    dynamic var startDate: Date?
-    dynamic var endDate: Date?
+    @objc dynamic var startDate: Date?
+    @objc dynamic var endDate: Date?
     
-    dynamic var isRead = false
+    @objc dynamic var isRead = false
     
     override static func primaryKey() -> String? {
         return "id"

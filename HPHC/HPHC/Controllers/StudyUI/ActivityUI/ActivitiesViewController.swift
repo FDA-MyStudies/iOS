@@ -298,7 +298,7 @@ class ActivitiesViewController : UIViewController{
     }
     
     
-    func refresh(sender:AnyObject) {
+    @objc func refresh(sender:AnyObject) {
         
         Logger.sharedInstance.info("Request for study Updated...")
         WCPServices().getStudyUpdates(study: Study.currentStudy!, delegate: self)

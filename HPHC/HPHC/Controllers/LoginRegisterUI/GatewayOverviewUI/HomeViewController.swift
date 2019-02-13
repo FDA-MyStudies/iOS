@@ -131,7 +131,7 @@ class HomeViewController: UIViewController{
      change its current page (Commented as this is not working)
  
      */
-    func didChangePageControlValue() {
+    @objc func didChangePageControlValue() {
         //pageViewController?.scrollToViewController(index: (pageControlView?.currentPage)!)
     }
     

@@ -48,7 +48,7 @@ extension UIViewController{
         navigationItem.leftBarButtonItem = UIBarButtonItem.init(customView: customView)
     }
     
-    public func popToSpecificController() {
+    @objc public func popToSpecificController() {
         
         var identifier: String? = ""
         
@@ -67,7 +67,7 @@ extension UIViewController{
     }
     
     
-    public func popController() {
+    @objc public func popController() {
        _ = self.navigationController?.popViewController(animated: true)
     }
 }

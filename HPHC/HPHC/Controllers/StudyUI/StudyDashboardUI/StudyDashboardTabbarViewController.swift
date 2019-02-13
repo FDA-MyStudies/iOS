@@ -45,7 +45,7 @@ class StudyDashboardTabbarViewController: UITabBarController {
     
     public func shareScreenshotByEmail(image: UIImage!, subject: String!,fileName: String!){
         
-        let imageData = UIImagePNGRepresentation(image)
+        let imageData = image.pngData()
         let mailComposerVC = MFMailComposeViewController()
         mailComposerVC.mailComposeDelegate = self as MFMailComposeViewControllerDelegate
         let finalSubject = "\((Study.currentStudy?.name)!)" + " " + subject
@@ -62,7 +62,7 @@ class StudyDashboardTabbarViewController: UITabBarController {
             self.present(mailComposerVC, animated: true, completion: nil)
         } else {
             
-            let alert = UIAlertController(title: NSLocalizedString(kTitleError, comment: ""),message: "",preferredStyle: UIAlertControllerStyle.alert)
+            let alert = UIAlertController(title: NSLocalizedString(kTitleError, comment: ""),message: "",preferredStyle: UIAlertController.Style.alert)
             
             alert.addAction(UIAlertAction.init(title: NSLocalizedString(kTitleOk, comment: ""), style: .default, handler: { (action) in
                 

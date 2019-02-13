@@ -97,7 +97,7 @@ class PageViewController: UIPageViewController{
     
      */
     private func scrollToViewController(viewController: UIViewController,
-                                        direction: UIPageViewControllerNavigationDirection = .forward) {
+                                        direction: UIPageViewController.NavigationDirection = .forward) {
         setViewControllers([viewController],
                            direction: direction,
                            animated: true,
@@ -160,7 +160,7 @@ class PageViewController: UIPageViewController{
         
         if let firstViewController = viewControllers?.first,
             let currentIndex = orderedViewControllers.index(of: firstViewController) {
-            let direction: UIPageViewControllerNavigationDirection = newIndex >= currentIndex ? .forward : .reverse
+            let direction: UIPageViewController.NavigationDirection = newIndex >= currentIndex ? .forward : .reverse
             let nextViewController = orderedViewControllers[newIndex]
             scrollToViewController(viewController: nextViewController, direction: direction)
         }

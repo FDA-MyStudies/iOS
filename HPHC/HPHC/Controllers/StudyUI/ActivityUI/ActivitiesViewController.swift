@@ -66,7 +66,7 @@ class ActivitiesViewController : UIViewController{
         selectedFilter = ActivityFilterType.all
         
         self.tableView?.estimatedRowHeight = 126
-        self.tableView?.rowHeight = UITableViewAutomaticDimension
+        self.tableView?.rowHeight = UITableView.automaticDimension
         
         self.tabBarController?.delegate = self
         
@@ -85,7 +85,7 @@ class ActivitiesViewController : UIViewController{
         //create refresh control for pull to refresh
         refreshControl = UIRefreshControl()
         refreshControl?.attributedTitle = NSAttributedString(string: "Pull to refresh")
-        refreshControl?.addTarget(self, action: #selector(refresh(sender:)), for: UIControlEvents.valueChanged)
+        refreshControl?.addTarget(self, action: #selector(refresh(sender:)), for: UIControl.Event.valueChanged)
         tableView?.addSubview(refreshControl!)
     }
     

@@ -193,7 +193,7 @@ class ProfileViewController: UIViewController, SlideMenuControllerDelegate {
     @IBAction func buttonActionLeadTime(_ sender: UIButton) {
         
         
-        let alertView = UIAlertController(title: kLeadTimeSelectText, message: "\n\n\n\n\n\n\n\n\n\n\n", preferredStyle: UIAlertControllerStyle.actionSheet);
+        let alertView = UIAlertController(title: kLeadTimeSelectText, message: "\n\n\n\n\n\n\n\n\n\n\n", preferredStyle: UIAlertController.Style.actionSheet);
         
         
         datePickerView = UIDatePicker.init(frame: CGRect(x: 10, y: 30, width: alertView.view.frame.size.width - 40, height: 216) )
@@ -208,7 +208,7 @@ class ProfileViewController: UIViewController, SlideMenuControllerDelegate {
         
         alertView.view.addSubview(datePickerView!)
         
-        let action =   UIAlertAction(title: kActionSheetDoneButtonTitle, style: UIAlertActionStyle.default, handler: {
+        let action =   UIAlertAction(title: kActionSheetDoneButtonTitle, style: UIAlertAction.Style.default, handler: {
             action in
             
             let calender:Calendar? = Calendar.current
@@ -230,7 +230,7 @@ class ProfileViewController: UIViewController, SlideMenuControllerDelegate {
             }
             
         })
-        let actionCancel =   UIAlertAction(title: kActionSheetCancelButtonTitle, style: UIAlertActionStyle.default, handler: {
+        let actionCancel =   UIAlertAction(title: kActionSheetCancelButtonTitle, style: UIAlertAction.Style.default, handler: {
             action in
             
         })

@@ -58,7 +58,7 @@ class FeedBackViewController: UIViewController{
 
         
         self.tableView?.estimatedRowHeight = 123
-        self.tableView?.rowHeight = UITableViewAutomaticDimension
+        self.tableView?.rowHeight = UITableView.automaticDimension
         
         self.addBackBarButton()
     }

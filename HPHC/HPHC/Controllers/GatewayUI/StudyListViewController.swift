@@ -77,7 +77,7 @@ class StudyListViewController: UIViewController {
         
         refreshControl = UIRefreshControl()
         refreshControl?.attributedTitle = NSAttributedString(string: "Pull to refresh")
-        refreshControl?.addTarget(self, action: #selector(refresh(sender:)), for: UIControlEvents.valueChanged)
+        refreshControl?.addTarget(self, action: #selector(refresh(sender:)), for: UIControl.Event.valueChanged)
         tableView?.addSubview(refreshControl!)
         
     }
@@ -116,7 +116,7 @@ class StudyListViewController: UIViewController {
         
         if User.currentUser.userType == .FDAUser { //For LoggedIn User
             self.tableView?.estimatedRowHeight = 145
-            self.tableView?.rowHeight = UITableViewAutomaticDimension
+            self.tableView?.rowHeight = UITableView.automaticDimension
             
             if (self.fdaSlideMenuController()?.isLeftOpen())! {
                 //Do Nothing
@@ -126,7 +126,7 @@ class StudyListViewController: UIViewController {
             }
         } else { //For ananomous User
             self.tableView?.estimatedRowHeight = 140
-            self.tableView?.rowHeight = UITableViewAutomaticDimension
+            self.tableView?.rowHeight = UITableView.automaticDimension
             //Fetch StudyList
             self.sendRequestToGetStudyList()
         }
@@ -195,7 +195,7 @@ class StudyListViewController: UIViewController {
     func addSearchButton() -> UIButton{
         
         let searchButton = UIButton.init(type: .custom)
-        searchButton.setImage(#imageLiteral(resourceName: "search_small"), for: UIControlState.normal)
+        searchButton.setImage(#imageLiteral(resourceName: "search_small"), for: UIControl.State.normal)
         searchButton.addTarget(self, action: #selector(self.searchButtonAction(_:)), for: .touchUpInside)
         searchButton.frame = CGRect.init(x: 0, y: 4, width: 30, height: 30)
         return searchButton
@@ -204,7 +204,7 @@ class StudyListViewController: UIViewController {
     func addFilterButton() -> UIButton{
         
         let filterButton = UIButton.init(type: .custom)
-        filterButton.setImage(#imageLiteral(resourceName: "filterIcon"), for: UIControlState.normal)
+        filterButton.setImage(#imageLiteral(resourceName: "filterIcon"), for: UIControl.State.normal)
         filterButton.addTarget(self, action: #selector(self.filterAction(_:)), for: .touchUpInside)
         filterButton.frame = CGRect.init(x: 40, y: 4, width: 30, height: 30)
         return filterButton
@@ -213,7 +213,7 @@ class StudyListViewController: UIViewController {
     func addNotificationButton() -> UIButton{
         let button = UIButton.init(type: .custom)
         
-        button.setImage(#imageLiteral(resourceName: "notification_grey"), for: UIControlState.normal)
+        button.setImage(#imageLiteral(resourceName: "notification_grey"), for: UIControl.State.normal)
         button.addTarget(self, action:#selector(self.buttonActionNotification(_:)), for: .touchUpInside)
         button.frame = CGRect.init(x: 80, y: 4, width: 30, height: 30)
         return button
@@ -493,7 +493,7 @@ class StudyListViewController: UIViewController {
         
         UIView.animate(withDuration: 0.2,
                        delay: 0.0,
-                       options: UIViewAnimationOptions.preferredFramesPerSecond60,
+                       options: UIView.AnimationOptions.preferredFramesPerSecond60,
                        animations: { () -> Void in
                         
                         self.searchView?.frame = CGRect(x: 0 , y: 0 , width: self.view.frame.size.width , height: 64.0)

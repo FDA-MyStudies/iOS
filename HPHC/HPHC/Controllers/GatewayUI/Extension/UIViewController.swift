@@ -63,7 +63,7 @@ extension UIViewController {
     
     func showAlert(title: String,message: String){
         
-          let alert = UIAlertController(title: title,message: message,preferredStyle: UIAlertControllerStyle.alert)
+          let alert = UIAlertController(title: title,message: message,preferredStyle: UIAlertController.Style.alert)
           alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
          
           self.present(alert, animated: true, completion: nil)
@@ -90,7 +90,7 @@ extension UIViewController {
             
             webView.loadRequest(URLRequest.init(url: url))
             webView.scalesPageToFit = true
-            webView.contentMode = UIViewContentMode.scaleAspectFit
+            webView.contentMode = UIView.ContentMode.scaleAspectFit
             
            view?.frame = UIScreen.main.bounds
             view?.tag = 5000

@@ -80,7 +80,7 @@ class SignInViewController: UIViewController{
         if let attributedTitle = buttonSignUp?.attributedTitle(for: .normal) {
             let mutableAttributedTitle = NSMutableAttributedString(attributedString: attributedTitle)
             
-            mutableAttributedTitle.addAttribute(NSAttributedStringKey.foregroundColor, value: #colorLiteral(red: 0, green: 0.4862745098, blue: 0.7294117647, alpha: 1) , range: NSRange(location: 10,length: 7))
+            mutableAttributedTitle.addAttribute(NSAttributedString.Key.foregroundColor, value: #colorLiteral(red: 0, green: 0.4862745098, blue: 0.7294117647, alpha: 1) , range: NSRange(location: 10,length: 7))
             
             buttonSignUp?.setAttributedTitle(mutableAttributedTitle, for: .normal)
         }
@@ -292,14 +292,14 @@ class SignInViewController: UIViewController{
         let attributedString =  (termsAndCondition?.attributedText.mutableCopy() as? NSMutableAttributedString)!
         
         var foundRange = attributedString.mutableString.range(of: "Terms")
-        attributedString.addAttribute(NSAttributedStringKey.link, value:(TermsAndPolicy.currentTermsAndPolicy?.termsURL!)! as String, range: foundRange)
+        attributedString.addAttribute(NSAttributedString.Key.link, value:(TermsAndPolicy.currentTermsAndPolicy?.termsURL!)! as String, range: foundRange)
         
         foundRange = attributedString.mutableString.range(of: "Privacy Policy")
-        attributedString.addAttribute(NSAttributedStringKey.link, value:(TermsAndPolicy.currentTermsAndPolicy?.policyURL!)! as String  , range: foundRange)
+        attributedString.addAttribute(NSAttributedString.Key.link, value:(TermsAndPolicy.currentTermsAndPolicy?.policyURL!)! as String  , range: foundRange)
         
         termsAndCondition?.attributedText = attributedString
         
-        termsAndCondition?.linkTextAttributes = [NSAttributedStringKey.foregroundColor.rawValue: Utilities.getUIColorFromHex(0x007CBA)]
+        termsAndCondition?.linkTextAttributes = convertToOptionalNSAttributedStringKeyDictionary([NSAttributedString.Key.foregroundColor.rawValue: Utilities.getUIColorFromHex(0x007CBA)])
         
     }
     
@@ -539,3 +539,9 @@ extension SignInViewController: NMWebServiceDelegate {
 }
 
 
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertToOptionalNSAttributedStringKeyDictionary(_ input: [String: Any]?) -> [NSAttributedString.Key: Any]? {
+	guard let input = input else { return nil }
+	return Dictionary(uniqueKeysWithValues: input.map { key, value in (NSAttributedString.Key(rawValue: key), value)})
+}

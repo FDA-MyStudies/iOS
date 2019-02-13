@@ -58,7 +58,7 @@ class SearchBarView: UIView {
         
         UIView.animate(withDuration: 0.2,
                        delay: 0.1,
-                       options: UIViewAnimationOptions.preferredFramesPerSecond60,
+                       options: UIView.AnimationOptions.preferredFramesPerSecond60,
                        animations: { () -> Void in
                         self.frame = CGRect(x: 0 , y: -300 , width: self.frame.size.width , height: 64.0)
                         

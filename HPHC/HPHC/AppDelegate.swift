@@ -238,7 +238,7 @@
         
         // MARK: App Delegates
         
-        func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+        func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
             // Override point for customization after application launch.
             
             self.isAppLaunched = true
@@ -379,7 +379,7 @@
                 let navigationController =  (self.window?.rootViewController as? UINavigationController)!
                 let appBlocker = JailbrokeBlocker.instanceFromNib(frame: navigationController.view.frame, detail: nil);
                 UIApplication.shared.keyWindow?.addSubview(appBlocker);
-                UIApplication.shared.keyWindow?.bringSubview(toFront: appBlocker)
+                UIApplication.shared.keyWindow?.bringSubviewToFront(appBlocker)
                 
             }
             
@@ -512,14 +512,14 @@
                 retryView?.delegate = (self as? ComprehensionFailureDelegate)!
             }
             UIApplication.shared.keyWindow?.addSubview(retryView!);
-            UIApplication.shared.keyWindow?.bringSubview(toFront: retryView!)
+            UIApplication.shared.keyWindow?.bringSubviewToFront(retryView!)
         }
         
         // MARK:Custom Navigation Bar
         
         func customizeNavigationBar() {
             UINavigationBar.appearance().titleTextAttributes = [
-                NSAttributedStringKey.font: UIFont(name: "HelveticaNeue-Medium", size: 18)!
+                NSAttributedString.Key.font: UIFont(name: "HelveticaNeue-Medium", size: 18)!
             ]
         }
         
@@ -1093,7 +1093,7 @@
                         default: break
                         }
                         
-                        let alert = UIAlertController(title: "" as String,message: message as String,preferredStyle: UIAlertControllerStyle.alert)
+                        let alert = UIAlertController(title: "" as String,message: message as String,preferredStyle: UIAlertController.Style.alert)
                         alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: ""), style: .default, handler: nil))
                     }else {
                         
@@ -1731,7 +1731,7 @@
             print("application state \(UIApplication.shared.applicationState.rawValue)")
             UIApplication.shared.applicationIconBadgeNumber = 0
             
-            if (UIApplication.shared.applicationState == UIApplicationState.background || (UIApplication.shared.applicationState == UIApplicationState.inactive)) {
+            if (UIApplication.shared.applicationState == UIApplication.State.background || (UIApplication.shared.applicationState == UIApplication.State.inactive)) {
                 
                 self.handleLocalAndRemoteNotification(userInfoDetails: (userInfo as? Dictionary<String, Any>)!)
             }
@@ -1741,7 +1741,7 @@
                 self.updateNotification()
                 
             }else {
-                if (UIApplication.shared.applicationState == UIApplicationState.background || (UIApplication.shared.applicationState == UIApplicationState.inactive)) {
+                if (UIApplication.shared.applicationState == UIApplication.State.background || (UIApplication.shared.applicationState == UIApplication.State.inactive)) {
                     self.handleLocalNotification(userInfoDetails: (userInfo as? Dictionary<String, Any>)!)
                 }
             }
@@ -1763,7 +1763,7 @@
             
             webView.loadRequest(URLRequest.init(url: url))
             webView.scalesPageToFit = true
-            webView.contentMode = UIViewContentMode.scaleAspectFit
+            webView.contentMode = UIView.ContentMode.scaleAspectFit
             
             var frame = UIScreen.main.bounds
             frame.origin.y += 64
@@ -1793,7 +1793,7 @@
                 
                 webView.loadRequest(URLRequest.init(url: url))
                 webView.scalesPageToFit = true
-                webView.contentMode = UIViewContentMode.scaleAspectFit
+                webView.contentMode = UIView.ContentMode.scaleAspectFit
                 
                 var frame = UIScreen.main.bounds
                 

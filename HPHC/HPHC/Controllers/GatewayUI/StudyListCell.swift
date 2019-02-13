@@ -115,7 +115,7 @@ class StudyListCell: UITableViewCell {
         let attributedString =  labelStudySponserName?.attributedText?.mutableCopy() as! NSMutableAttributedString
         
         let foundRange = attributedString.mutableString.range(of: study.category!)
-        attributedString.addAttributes([NSAttributedStringKey.font:UIFont(name: "HelveticaNeue-Bold", size: 12)!], range: foundRange)
+        attributedString.addAttributes([NSAttributedString.Key.font:UIFont(name: "HelveticaNeue-Bold", size: 12)!], range: foundRange)
         labelStudySponserName?.attributedText = attributedString
         
         studyLogoImage?.image = #imageLiteral(resourceName: "placeholder")

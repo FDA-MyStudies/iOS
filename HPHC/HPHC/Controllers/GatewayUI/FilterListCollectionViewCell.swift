@@ -47,7 +47,7 @@ class FilterListCollectionViewCell: UICollectionViewCell {
         tableView?.reloadData()
         
         self.tableView?.estimatedRowHeight = 50
-        self.tableView?.rowHeight = UITableViewAutomaticDimension
+        self.tableView?.rowHeight = UITableView.automaticDimension
         
         labelHeaderTitle?.sizeToFit()
         

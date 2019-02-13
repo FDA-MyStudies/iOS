@@ -66,7 +66,7 @@ class StudyDashboardStatisticsTableViewCell: UITableViewCell {
         let color = Utilities.getUIColorFromHex(0x007CBA)
         
         let attributedStartDate: NSMutableAttributedString = NSMutableAttributedString(string: stringDate)
-        attributedStartDate.addAttribute(NSAttributedStringKey.foregroundColor, value: color, range: NSMakeRange(0, 2))
+        attributedStartDate.addAttribute(NSAttributedString.Key.foregroundColor, value: color, range: NSMakeRange(0, 2))
         labelDateValue?.attributedText = attributedStartDate
         self.buttonForward?.isEnabled = false
         
@@ -86,10 +86,10 @@ class StudyDashboardStatisticsTableViewCell: UITableViewCell {
         let color = Utilities.getUIColorFromHex(0x007CBA)
         
         let attributedStartDate: NSMutableAttributedString = NSMutableAttributedString(string: stringStartDate)
-        attributedStartDate.addAttribute(NSAttributedStringKey.foregroundColor, value: color, range: NSMakeRange(0, 2))
+        attributedStartDate.addAttribute(NSAttributedString.Key.foregroundColor, value: color, range: NSMakeRange(0, 2))
         
         let attributedEndDate: NSMutableAttributedString = NSMutableAttributedString(string: stringEndDate)
-        attributedEndDate.addAttribute(NSAttributedStringKey.foregroundColor, value: color, range: NSMakeRange(0, 2))
+        attributedEndDate.addAttribute(NSAttributedString.Key.foregroundColor, value: color, range: NSMakeRange(0, 2))
         
         
         attributedStartDate.append(attributedEndDate)
@@ -107,13 +107,13 @@ class StudyDashboardStatisticsTableViewCell: UITableViewCell {
         
         if sender.tag == 11{
             //Day clicked
-            buttonDay?.setTitle(kDaySpaces, for: UIControlState.normal)
-            buttonWeek?.setTitle(kWeek, for: UIControlState.normal)
-            buttonMonth?.setTitle(kMonth, for: UIControlState.normal)
+            buttonDay?.setTitle(kDaySpaces, for: UIControl.State.normal)
+            buttonWeek?.setTitle(kWeek, for: UIControl.State.normal)
+            buttonMonth?.setTitle(kMonth, for: UIControl.State.normal)
             
-            buttonDay?.setTitleColor(UIColor.white, for: UIControlState.normal)
-            buttonWeek?.setTitleColor(kGreyColor, for: UIControlState.normal)
-            buttonMonth?.setTitleColor(kGreyColor, for: UIControlState.normal)
+            buttonDay?.setTitleColor(UIColor.white, for: UIControl.State.normal)
+            buttonWeek?.setTitleColor(kGreyColor, for: UIControl.State.normal)
+            buttonMonth?.setTitleColor(kGreyColor, for: UIControl.State.normal)
             
             buttonDay?.backgroundColor = kDarkBlueColor
             buttonWeek?.backgroundColor = UIColor.white
@@ -126,19 +126,19 @@ class StudyDashboardStatisticsTableViewCell: UITableViewCell {
             let color = Utilities.getUIColorFromHex(0x007CBA)
             
             let attributedStartDate: NSMutableAttributedString = NSMutableAttributedString(string: stringDate)
-            attributedStartDate.addAttribute(NSAttributedStringKey.foregroundColor, value: color, range: NSMakeRange(0, 2))
+            attributedStartDate.addAttribute(NSAttributedString.Key.foregroundColor, value: color, range: NSMakeRange(0, 2))
             labelDateValue?.attributedText = attributedStartDate
             self.buttonForward?.isEnabled = false
             
         } else if sender.tag == 12 {
             //Week clicked
-            buttonWeek?.setTitle(kWeekSpaces, for: UIControlState.normal)
-            buttonDay?.setTitle(kDay, for: UIControlState.normal)
-            buttonMonth?.setTitle(kMonth, for: UIControlState.normal)
+            buttonWeek?.setTitle(kWeekSpaces, for: UIControl.State.normal)
+            buttonDay?.setTitle(kDay, for: UIControl.State.normal)
+            buttonMonth?.setTitle(kMonth, for: UIControl.State.normal)
             
-            buttonWeek?.setTitleColor(UIColor.white, for: UIControlState.normal)
-            buttonDay?.setTitleColor(kGreyColor, for: UIControlState.normal)
-            buttonMonth?.setTitleColor(kGreyColor, for: UIControlState.normal)
+            buttonWeek?.setTitleColor(UIColor.white, for: UIControl.State.normal)
+            buttonDay?.setTitleColor(kGreyColor, for: UIControl.State.normal)
+            buttonMonth?.setTitleColor(kGreyColor, for: UIControl.State.normal)
             
             buttonWeek?.backgroundColor = kDarkBlueColor
             buttonDay?.backgroundColor = UIColor.white
@@ -157,13 +157,13 @@ class StudyDashboardStatisticsTableViewCell: UITableViewCell {
         } else if sender.tag == 13 {
             
             //Months clicked
-            buttonMonth?.setTitle(kMonthSpaces, for: UIControlState.normal)
-            buttonDay?.setTitle(kDay, for: UIControlState.normal)
-            buttonWeek?.setTitle(kWeek, for: UIControlState.normal)
+            buttonMonth?.setTitle(kMonthSpaces, for: UIControl.State.normal)
+            buttonDay?.setTitle(kDay, for: UIControl.State.normal)
+            buttonWeek?.setTitle(kWeek, for: UIControl.State.normal)
             
-            buttonMonth?.setTitleColor(UIColor.white, for: UIControlState.normal)
-            buttonDay?.setTitleColor(kGreyColor, for: UIControlState.normal)
-            buttonWeek?.setTitleColor(kGreyColor, for: UIControlState.normal)
+            buttonMonth?.setTitleColor(UIColor.white, for: UIControl.State.normal)
+            buttonDay?.setTitleColor(kGreyColor, for: UIControl.State.normal)
+            buttonWeek?.setTitleColor(kGreyColor, for: UIControl.State.normal)
             
             buttonMonth?.backgroundColor = kDarkBlueColor
             buttonDay?.backgroundColor = UIColor.white
@@ -194,7 +194,7 @@ class StudyDashboardStatisticsTableViewCell: UITableViewCell {
             let color = Utilities.getUIColorFromHex(0x007CBA)
             
             let attributedStartDate: NSMutableAttributedString = NSMutableAttributedString(string: stringDate)
-            attributedStartDate.addAttribute(NSAttributedStringKey.foregroundColor, value: color, range: NSMakeRange(0, 2))
+            attributedStartDate.addAttribute(NSAttributedString.Key.foregroundColor, value: color, range: NSMakeRange(0, 2))
             labelDateValue?.attributedText = attributedStartDate
             
             
@@ -251,7 +251,7 @@ class StudyDashboardStatisticsTableViewCell: UITableViewCell {
             let color = Utilities.getUIColorFromHex(0x007CBA)
             
             let attributedStartDate: NSMutableAttributedString = NSMutableAttributedString(string: stringDate)
-            attributedStartDate.addAttribute(NSAttributedStringKey.foregroundColor, value: color, range: NSMakeRange(0, 2))
+            attributedStartDate.addAttribute(NSAttributedString.Key.foregroundColor, value: color, range: NSMakeRange(0, 2))
             labelDateValue?.attributedText = attributedStartDate
             
         case .Week:
@@ -268,10 +268,10 @@ class StudyDashboardStatisticsTableViewCell: UITableViewCell {
             let color = Utilities.getUIColorFromHex(0x007CBA)
             
             let attributedStartDate:NSMutableAttributedString = NSMutableAttributedString(string: stringStartDate)
-            attributedStartDate.addAttribute(NSAttributedStringKey.foregroundColor, value: color, range: NSMakeRange(0, 2))
+            attributedStartDate.addAttribute(NSAttributedString.Key.foregroundColor, value: color, range: NSMakeRange(0, 2))
             
             let attributedEndDate: NSMutableAttributedString = NSMutableAttributedString(string: stringEndDate)
-            attributedEndDate.addAttribute(NSAttributedStringKey.foregroundColor, value: color, range: NSMakeRange(0, 2))
+            attributedEndDate.addAttribute(NSAttributedString.Key.foregroundColor, value: color, range: NSMakeRange(0, 2))
             attributedStartDate.append(attributedEndDate)
             
             labelDateValue?.attributedText = attributedStartDate //stringStartDate + " - " + stringEndDate

@@ -52,7 +52,7 @@ class WebViewController : UIViewController{
         
         
         //Used to add a loader
-        activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: .gray)
+        activityIndicator = UIActivityIndicatorView(style: .gray)
         activityIndicator.center = CGPoint(x: self.view.frame.midX, y: self.view.frame.midY-100)
         self.view.addSubview(activityIndicator)
         activityIndicator.startAnimating()
@@ -145,7 +145,7 @@ class WebViewController : UIViewController{
             self.present(mailComposerVC, animated: true, completion: nil)
         }
         else{
-            let alert = UIAlertController(title:NSLocalizedString(kTitleError, comment: ""),message:"",preferredStyle: UIAlertControllerStyle.alert)
+            let alert = UIAlertController(title:NSLocalizedString(kTitleError, comment: ""),message:"",preferredStyle: UIAlertController.Style.alert)
             
             alert.addAction(UIAlertAction.init(title:NSLocalizedString("OK", comment: ""), style: .default, handler: { (action) in
                 

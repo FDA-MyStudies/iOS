@@ -71,7 +71,7 @@ class ContactUsViewController: UIViewController{
         self.addBackBarButton()
         
         self.tableView?.estimatedRowHeight = 62
-        self.tableView?.rowHeight = UITableViewAutomaticDimension
+        self.tableView?.rowHeight = UITableView.automaticDimension
         
         //Used for background tap dismiss keyboard
         let tapGestureRecognizer: UITapGestureRecognizer = UITapGestureRecognizer.init(target: self, action: #selector(ContactUsViewController.handleTapGesture))

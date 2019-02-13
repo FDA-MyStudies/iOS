@@ -83,10 +83,10 @@ class StudyOverviewViewControllerFirst: UIViewController {
             documentAttributes: nil)
         
         let attributedText: NSMutableAttributedString = NSMutableAttributedString(attributedString: attrStr)
-        attributedText.addAttributes([NSAttributedStringKey.font:UIFont(
+        attributedText.addAttributes([NSAttributedString.Key.font:UIFont(
             name: "HelveticaNeue",
             size: CGFloat(fontSize))!], range:(attrStr.string as NSString).range(of: attrStr.string))
-        attributedText.addAttribute(NSAttributedStringKey.foregroundColor, value: UIColor.white, range: (attrStr.string as NSString).range(of: attrStr.string))
+        attributedText.addAttribute(NSAttributedString.Key.foregroundColor, value: UIColor.white, range: (attrStr.string as NSString).range(of: attrStr.string))
         
         if Utilities.isValidValue(someObject: attrStr.string as AnyObject?) {
              self.labelDescription?.attributedText = attributedText
@@ -154,7 +154,7 @@ class StudyOverviewViewControllerFirst: UIViewController {
         } else {
             
             do{
-                try AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayback)
+                try AVAudioSession.sharedInstance().setMode(.moviePlayback)
             } catch {
                 //Didn't work
             }
@@ -237,3 +237,8 @@ extension StudyOverviewViewControllerFirst: NMWebServiceDelegate {
     }
 }
 
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertFromAVAudioSessionCategory(_ input: AVAudioSession.Category) -> String {
+	return input.rawValue
+}

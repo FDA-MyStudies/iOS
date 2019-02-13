@@ -95,10 +95,10 @@ class FetalKickCounterStepViewController:  ORKStepViewController {
         var initialTime = 0
         
         let notificationCenter = NotificationCenter.default
-        notificationCenter.addObserver(self, selector: #selector(appMovedToBackground), name: Notification.Name.UIApplicationWillResignActive, object: nil)
+        notificationCenter.addObserver(self, selector: #selector(appMovedToBackground), name: UIApplication.willResignActiveNotification, object: nil)
         
         
-        notificationCenter.addObserver(self, selector: #selector(appBecameActive), name: Notification.Name.UIApplicationDidBecomeActive, object: nil)
+        notificationCenter.addObserver(self, selector: #selector(appBecameActive), name: UIApplication.didBecomeActiveNotification, object: nil)
         
          submitButton?.layer.borderColor =   kUicolorForButtonBackground
         
@@ -411,7 +411,7 @@ class FetalKickCounterStepViewController:  ORKStepViewController {
                 }
                 ud.synchronize()
                 
-                RunLoop.main.add(self.timer!, forMode: .commonModes)
+                RunLoop.main.add(self.timer!, forMode: RunLoop.Mode.common)
                 
                 // start button image and start title changed
                 startButton?.setImage(UIImage(named: "kick_btn1.png"), for: .normal)

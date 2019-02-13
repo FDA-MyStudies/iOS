@@ -99,7 +99,7 @@ class ResourcesDetailViewControllerCopy: UIViewController {
         
         if self.resource?.file?.link != nil {
             
-            activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: .gray)
+            activityIndicator = UIActivityIndicatorView(style: .gray)
             activityIndicator.center = CGPoint(x: self.view.frame.midX, y: self.view.frame.midY-100)
             
            
@@ -242,7 +242,7 @@ extension ResourcesDetailViewControllerCopy:UIWebViewDelegate {
       
         
         let buttonTitleOK = NSLocalizedString("OK", comment: "")
-        let alert = UIAlertController(title:NSLocalizedString(kTitleError, comment: ""),message:error.localizedDescription,preferredStyle: UIAlertControllerStyle.alert)
+        let alert = UIAlertController(title:NSLocalizedString(kTitleError, comment: ""),message:error.localizedDescription,preferredStyle: UIAlertController.Style.alert)
         
         alert.addAction(UIAlertAction.init(title:buttonTitleOK, style: .default, handler: { (action) in
             
@@ -439,7 +439,7 @@ extension ResourcesDetailViewControllerCopy:MFMailComposeViewControllerDelegate{
             self.present(composeVC, animated: true, completion: nil)
             
         } else {
-            let alert = UIAlertController(title:NSLocalizedString(kTitleError, comment: ""),message:"",preferredStyle: UIAlertControllerStyle.alert)
+            let alert = UIAlertController(title:NSLocalizedString(kTitleError, comment: ""),message:"",preferredStyle: UIAlertController.Style.alert)
             
             alert.addAction(UIAlertAction.init(title:NSLocalizedString("OK", comment: ""), style: .default, handler: { (action) in
                 

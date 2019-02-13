@@ -113,7 +113,7 @@ class ConsentPdfViewerStepViewController: ORKStepViewController {
             
         }else {
             
-            let alert = UIAlertController(title: NSLocalizedString(kTitleError, comment: ""),message: "",preferredStyle: UIAlertControllerStyle.alert)
+            let alert = UIAlertController(title: NSLocalizedString(kTitleError, comment: ""),message: "",preferredStyle: UIAlertController.Style.alert)
             
             alert.addAction(UIAlertAction.init(title: NSLocalizedString(kTitleOk, comment: ""), style: .default, handler: { (action) in
                 
@@ -149,7 +149,7 @@ extension ConsentPdfViewerStepViewController: UIWebViewDelegate{
         self.removeProgressIndicator()
         
         let buttonTitleOK = NSLocalizedString("OK", comment: "")
-        let alert = UIAlertController(title: NSLocalizedString(kTitleError, comment: ""),message: error.localizedDescription,preferredStyle: UIAlertControllerStyle.alert)
+        let alert = UIAlertController(title: NSLocalizedString(kTitleError, comment: ""),message: error.localizedDescription,preferredStyle: UIAlertController.Style.alert)
         
         alert.addAction(UIAlertAction.init(title: buttonTitleOK, style: .default, handler: { (action) in
             self.dismiss(animated: true, completion: nil)

@@ -354,7 +354,7 @@ extension StudyDashboardViewController : UITableViewDataSource {
         } else {
                 cell = (tableView.dequeueReusableCell(withIdentifier: kStatisticsTableViewCell, for: indexPath) as? StudyDashboardStatisticsTableViewCell)!
                 (cell as? StudyDashboardStatisticsTableViewCell)!.displayData()
-                (cell as? StudyDashboardStatisticsTableViewCell)!.buttonDay?.setTitle("  DAY  ", for: UIControlState.normal)
+                (cell as? StudyDashboardStatisticsTableViewCell)!.buttonDay?.setTitle("  DAY  ", for: UIControl.State.normal)
                 (cell as? StudyDashboardStatisticsTableViewCell)!.statisticsCollectionView?.reloadData()
         }
         return cell!

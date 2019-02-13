@@ -73,7 +73,7 @@ class ResourcesViewController: UIViewController{
         super.viewWillAppear(animated)
         
         self.tableView?.estimatedRowHeight = 65
-        self.tableView?.rowHeight = UITableViewAutomaticDimension
+        self.tableView?.rowHeight = UITableView.automaticDimension
         
         self.addHomeButton()
          UIApplication.shared.statusBarStyle = .default

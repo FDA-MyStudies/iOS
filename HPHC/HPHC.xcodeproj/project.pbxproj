@@ -72,8 +72,6 @@
 		6EB7401C1E9CFAD700A4C773 /* 01.png in Resources */ = {isa = PBXBuildFile; fileRef = 6EB7401B1E9CFAD700A4C773 /* 01.png */; };
 		6EB740261E9D028000A4C773 /* FetalKickIntroStepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EB740251E9D028000A4C773 /* FetalKickIntroStepViewController.swift */; };
 		6EB740281E9D1F8700A4C773 /* 03.png in Resources */ = {isa = PBXBuildFile; fileRef = 6EB740271E9D1F8700A4C773 /* 03.png */; };
-		6EB767861FBEF34300E3095E /* ResearchKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EB7677A1FBEDBFB00E3095E /* ResearchKit.framework */; };
-		6EB767871FBEF34300E3095E /* ResearchKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6EB7677A1FBEDBFB00E3095E /* ResearchKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		6EBC2E801E94FB5300828CA1 /* StudyDashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EBC2E751E94FB5300828CA1 /* StudyDashboardViewController.swift */; };
 		6EBC2E811E94FB5300828CA1 /* StudyDashboard.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6EBC2E761E94FB5300828CA1 /* StudyDashboard.plist */; };
 		6EBC2E821E94FB5300828CA1 /* StudyDashboardActivityCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EBC2E771E94FB5300828CA1 /* StudyDashboardActivityCollectionViewCell.swift */; };
@@ -142,6 +140,8 @@
 		6EF05A991E4DC36400CD7661 /* StepProvider.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6EF05A981E4DC36400CD7661 /* StepProvider.plist */; };
 		6EF2FCEF1E72CDE900B5F212 /* LeftMenuResourceTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EF2FCEE1E72CDE900B5F212 /* LeftMenuResourceTableViewCell.swift */; };
 		6EF748BF1E69645700F1E89E /* LatestActive_Taskdocument.json in Resources */ = {isa = PBXBuildFile; fileRef = 6EF748BE1E69645700F1E89E /* LatestActive_Taskdocument.json */; };
+		78FA1CBD221546E700627B92 /* ResearchKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 78FA1CBA221546D800627B92 /* ResearchKit.framework */; };
+		78FA1CBE221546E700627B92 /* ResearchKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 78FA1CBA221546D800627B92 /* ResearchKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		940577A81E767AC60043215C /* ChangePasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 940577A71E767AC60043215C /* ChangePasswordViewController.swift */; };
 		940577AC1E767C8D0043215C /* ChangePasswordData.plist in Resources */ = {isa = PBXBuildFile; fileRef = 940577AB1E767C8D0043215C /* ChangePasswordData.plist */; };
 		941909B51E52FA9B001B01C5 /* Study.swift in Sources */ = {isa = PBXBuildFile; fileRef = 941909B41E52FA9B001B01C5 /* Study.swift */; };
@@ -218,23 +218,23 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		6EB767791FBEDBFB00E3095E /* PBXContainerItemProxy */ = {
+		78FA1CB9221546D800627B92 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 6EB767731FBEDBFA00E3095E /* ResearchKit.xcodeproj */;
+			containerPortal = 78FA1CB3221546D700627B92 /* ResearchKit.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = B183A5951A8535D100C76870;
 			remoteInfo = ResearchKit;
 		};
-		6EB7677B1FBEDBFB00E3095E /* PBXContainerItemProxy */ = {
+		78FA1CBB221546D800627B92 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 6EB767731FBEDBFA00E3095E /* ResearchKit.xcodeproj */;
+			containerPortal = 78FA1CB3221546D700627B92 /* ResearchKit.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 86CC8E9A1AC09332001CCD89;
 			remoteInfo = ResearchKitTests;
 		};
-		6EB767881FBEF34300E3095E /* PBXContainerItemProxy */ = {
+		78FA1CBF221546E700627B92 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 6EB767731FBEDBFA00E3095E /* ResearchKit.xcodeproj */;
+			containerPortal = 78FA1CB3221546D700627B92 /* ResearchKit.xcodeproj */;
 			proxyType = 1;
 			remoteGlobalIDString = B183A4731A8535D100C76870;
 			remoteInfo = ResearchKit;
@@ -248,7 +248,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				6EB767871FBEF34300E3095E /* ResearchKit.framework in Embed Frameworks */,
+				78FA1CBE221546E700627B92 /* ResearchKit.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -328,7 +328,6 @@
 		6EB7401B1E9CFAD700A4C773 /* 01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 01.png; sourceTree = "<group>"; };
 		6EB740251E9D028000A4C773 /* FetalKickIntroStepViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FetalKickIntroStepViewController.swift; sourceTree = "<group>"; };
 		6EB740271E9D1F8700A4C773 /* 03.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 03.png; sourceTree = "<group>"; };
-		6EB767731FBEDBFA00E3095E /* ResearchKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = ResearchKit.xcodeproj; sourceTree = "<group>"; };
 		6EBC2E751E94FB5300828CA1 /* StudyDashboardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudyDashboardViewController.swift; sourceTree = "<group>"; };
 		6EBC2E761E94FB5300828CA1 /* StudyDashboard.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = StudyDashboard.plist; sourceTree = "<group>"; };
 		6EBC2E771E94FB5300828CA1 /* StudyDashboardActivityCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudyDashboardActivityCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -401,6 +400,7 @@
 		6EF2FCEE1E72CDE900B5F212 /* LeftMenuResourceTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LeftMenuResourceTableViewCell.swift; sourceTree = "<group>"; };
 		6EF748BE1E69645700F1E89E /* LatestActive_Taskdocument.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = LatestActive_Taskdocument.json; sourceTree = "<group>"; };
 		747BA7FE3153184E586C3AFA /* Pods_HPHCTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HPHCTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		78FA1CB3221546D700627B92 /* ResearchKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ResearchKit.xcodeproj; path = ../RK2.0/ResearchKit/ResearchKit.xcodeproj; sourceTree = "<group>"; };
 		940577A71E767AC60043215C /* ChangePasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChangePasswordViewController.swift; sourceTree = "<group>"; };
 		940577AB1E767C8D0043215C /* ChangePasswordData.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = ChangePasswordData.plist; sourceTree = "<group>"; };
 		941909B41E52FA9B001B01C5 /* Study.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Study.swift; sourceTree = "<group>"; };
@@ -487,8 +487,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				6EEBA47A1F25FAA100FB0258 /* HealthKit.framework in Frameworks */,
-				6EB767861FBEF34300E3095E /* ResearchKit.framework in Frameworks */,
 				972663AD23F7242B537B8E82 /* Pods_HPHC.framework in Frameworks */,
+				78FA1CBD221546E700627B92 /* ResearchKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -599,7 +599,7 @@
 		6E7D2D4D1E433E8700763D4C = {
 			isa = PBXGroup;
 			children = (
-				6EB767731FBEDBFA00E3095E /* ResearchKit.xcodeproj */,
+				78FA1CB3221546D700627B92 /* ResearchKit.xcodeproj */,
 				6E7D2D581E433E8700763D4C /* HPHC */,
 				6E7D2D571E433E8700763D4C /* Products */,
 				62CD35D6D8DE746AB43D70D6 /* Pods */,
@@ -741,15 +741,6 @@
 				6EB740251E9D028000A4C773 /* FetalKickIntroStepViewController.swift */,
 			);
 			path = FetalKickIntroStepViewController;
-			sourceTree = "<group>";
-		};
-		6EB767741FBEDBFA00E3095E /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				6EB7677A1FBEDBFB00E3095E /* ResearchKit.framework */,
-				6EB7677C1FBEDBFB00E3095E /* ResearchKitTests.xctest */,
-			);
-			name = Products;
 			sourceTree = "<group>";
 		};
 		6EBC8A271E8112B80020F9E6 /* EligibilityUI */ = {
@@ -1038,6 +1029,15 @@
 			path = FetalKickCounterStep;
 			sourceTree = "<group>";
 		};
+		78FA1CB4221546D700627B92 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				78FA1CBA221546D800627B92 /* ResearchKit.framework */,
+				78FA1CBC221546D800627B92 /* ResearchKitTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		941909B11E52FA78001B01C5 /* StudyModel */ = {
 			isa = PBXGroup;
 			children = (
@@ -1305,7 +1305,7 @@
 			buildRules = (
 			);
 			dependencies = (
-				6EB767891FBEF34300E3095E /* PBXTargetDependency */,
+				78FA1CC0221546E700627B92 /* PBXTargetDependency */,
 			);
 			name = HPHC;
 			productName = FDA;
@@ -1392,8 +1392,8 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
-					ProductGroup = 6EB767741FBEDBFA00E3095E /* Products */;
-					ProjectRef = 6EB767731FBEDBFA00E3095E /* ResearchKit.xcodeproj */;
+					ProductGroup = 78FA1CB4221546D700627B92 /* Products */;
+					ProjectRef = 78FA1CB3221546D700627B92 /* ResearchKit.xcodeproj */;
 				},
 			);
 			projectRoot = "";
@@ -1404,18 +1404,18 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		6EB7677A1FBEDBFB00E3095E /* ResearchKit.framework */ = {
+		78FA1CBA221546D800627B92 /* ResearchKit.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
 			path = ResearchKit.framework;
-			remoteRef = 6EB767791FBEDBFB00E3095E /* PBXContainerItemProxy */;
+			remoteRef = 78FA1CB9221546D800627B92 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		6EB7677C1FBEDBFB00E3095E /* ResearchKitTests.xctest */ = {
+		78FA1CBC221546D800627B92 /* ResearchKitTests.xctest */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.cfbundle;
 			path = ResearchKitTests.xctest;
-			remoteRef = 6EB7677B1FBEDBFB00E3095E /* PBXContainerItemProxy */;
+			remoteRef = 78FA1CBB221546D800627B92 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -1709,10 +1709,10 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		6EB767891FBEF34300E3095E /* PBXTargetDependency */ = {
+		78FA1CC0221546E700627B92 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = ResearchKit;
-			targetProxy = 6EB767881FBEF34300E3095E /* PBXContainerItemProxy */;
+			targetProxy = 78FA1CBF221546E700627B92 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 

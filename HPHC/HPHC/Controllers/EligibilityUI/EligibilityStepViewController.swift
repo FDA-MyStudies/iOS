@@ -88,7 +88,7 @@ class EligibilityStepViewController: ORKStepViewController {
             step.type = "token"
         }
         
-        IQKeyboardManager.sharedManager().enable = true
+        // IQKeyboardManager.sharedManager().enable = true
     }
     
     // MARK: Methods and Button Actions

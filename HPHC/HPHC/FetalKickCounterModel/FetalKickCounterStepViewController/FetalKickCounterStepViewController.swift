@@ -157,7 +157,7 @@ class FetalKickCounterStepViewController:  ORKStepViewController {
             })
             
             // enables the IQKeyboardManager
-            IQKeyboardManager.sharedManager().enable = true
+            // IQKeyboardManager.sharedManager().enable = true
             
             // adding guesture to view to support outside tap
             let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(FetalKickCounterStepViewController.handleTap(_:)))

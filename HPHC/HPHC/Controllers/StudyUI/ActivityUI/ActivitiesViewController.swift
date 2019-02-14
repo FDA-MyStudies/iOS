@@ -333,8 +333,8 @@ class ActivitiesViewController : UIViewController{
     func createActivity(){
         
         //Disable Custom KeyPad with toolbars
-        IQKeyboardManager.sharedManager().enable = false
-        IQKeyboardManager.sharedManager().enableAutoToolbar = false
+       // IQKeyboardManager.sharedManager().enable = false
+        IQKeyboardManager.shared.enableAutoToolbar = false
         
         if Utilities.isValidObject(someObject: Study.currentActivity?.steps as AnyObject?){
             
@@ -1083,8 +1083,8 @@ extension ActivitiesViewController: ORKTaskViewControllerDelegate{
     public func taskViewController(_ taskViewController: ORKTaskViewController, didFinishWith reason: ORKTaskViewControllerFinishReason, error: Error?) {
         
         //Enable Custom Keypad with toolbar
-        IQKeyboardManager.sharedManager().enable = true
-        IQKeyboardManager.sharedManager().enableAutoToolbar = true
+        // IQKeyboardManager.sharedManager().enable = true
+        IQKeyboardManager.shared.enableAutoToolbar = true
         
         var taskResult: Any?
         

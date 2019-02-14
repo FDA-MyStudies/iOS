@@ -73,7 +73,7 @@ class StudyListViewController: UIViewController {
         }
         
         isComingFromFilterScreen = false
-        IQKeyboardManager.sharedManager().enable = true
+        // IQKeyboardManager.sharedManager().enable = true
         
         refreshControl = UIRefreshControl()
         refreshControl?.attributedTitle = NSAttributedString(string: "Pull to refresh")

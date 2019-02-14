@@ -84,7 +84,7 @@ class ProfileViewController: UIViewController, SlideMenuControllerDelegate {
         super.viewDidLoad()
         
         //First responder handler for textfields
-        IQKeyboardManager.sharedManager().enable = true
+        // IQKeyboardManager.sharedManager().enable = true
         
         //Load plist info
         let plistPath = Bundle.main.path(forResource: "Profile", ofType: ".plist", inDirectory:nil)

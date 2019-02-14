@@ -244,6 +244,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         self.isAppLaunched = true
         IQKeyboardManager.shared.enable = true
+        print(Utilities.isStandaloneApp(),"standalone")
         self.customizeNavigationBar()
         Fabric.with([Crashlytics.self])
         

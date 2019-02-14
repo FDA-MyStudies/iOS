@@ -60,6 +60,19 @@ struct iOSVersion {
 
 class Utilities: NSObject {
     
+    class func isStandaloneApp() -> Bool {
+        
+        var infoDict: NSDictionary?
+        if let path = Bundle.main.path(forResource: "Info", ofType: "plist") {
+            infoDict = NSDictionary(contentsOfFile: path)
+        }
+        
+        guard infoDict != nil else {return false}
+        
+        return Bool(infoDict!["IsStandaloneStudyApp"] as? String ?? "") ?? false
+        
+    }
+    
     class func getAttributedText(plainString pstr: String, boldString bstr: String, fontSize size: CGFloat,plainFontName: String,boldFontName: String) -> NSAttributedString {
         
         let title: String = pstr + " " + bstr

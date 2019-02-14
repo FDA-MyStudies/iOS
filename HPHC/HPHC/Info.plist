@@ -34,6 +34,8 @@
 			</dict>
 		</array>
 	</dict>
+	<key>IsStandaloneStudyApp</key>
+	<string>$(IS_STANDALONE_STUDY)</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSAppTransportSecurity</key>

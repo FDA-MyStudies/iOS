@@ -509,6 +509,7 @@ extension SignInViewController: NMWebServiceDelegate {
                 
                 if viewLoadFrom == .gatewayOverview {
                     self.navigateToGatewayDashboard()
+                    
                 } else if viewLoadFrom == .joinStudy {
                     
                     let leftController = (slideMenuController()?.leftViewController as? LeftMenuViewController)!

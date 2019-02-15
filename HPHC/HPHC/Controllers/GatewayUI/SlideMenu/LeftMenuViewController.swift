@@ -70,6 +70,11 @@ class LeftMenuViewController: UIViewController, LeftMenuProtocol {
                   ["menuTitle": "Resources",
                    "iconName": "resources_menu1"],
                   ]
+    // standalone
+    var studyTabBarController: UITabBarController!
+    var studyHomeViewController: UINavigationController!
+    
+    // Gateway & standalone
     var studyListViewController: UINavigationController!
     var notificationController: UIViewController!
     var resourcesViewController: UINavigationController!
@@ -92,6 +97,26 @@ class LeftMenuViewController: UIViewController, LeftMenuProtocol {
         
         self.tableView.separatorColor = UIColor(red: 224/255, green: 224/255, blue: 224/255, alpha: 1.0)
         
+        if Utilities.isStandaloneApp() {
+            setupStandaloneMenu()
+        } else {
+            setupGatewayMenu()
+        }
+        
+        self.labelVersion.text = "V" + "\(Utilities.getAppVersion())"
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        self.view.isHidden = false
+    }
+    
+    
+    final private func setupGatewayMenu(){
+        
         let storyboard = UIStoryboard(name: kStoryboardIdentifierGateway, bundle: nil)
         
         self.studyListViewController = (storyboard.instantiateViewController(withIdentifier: String(describing: StudyListViewController.classForCoder())) as? UINavigationController)!
@@ -104,16 +129,31 @@ class LeftMenuViewController: UIViewController, LeftMenuProtocol {
         
         self.reachoutViewController = (storyboard.instantiateViewController(withIdentifier:  String(describing: ReachoutOptionsViewController.classForCoder())) as? UINavigationController)!
         
-        self.labelVersion.text = "V" + "\(Utilities.getAppVersion())"
     }
     
-    override func viewWillAppear(_ animated: Bool) {
+    final private func setupStandaloneMenu(){
+        
+        let studyStoryBoard = UIStoryboard.init(name: kStudyStoryboard, bundle: Bundle.main)
+        /*for standalone*/
+        self.studyTabBarController = studyStoryBoard.instantiateViewController(withIdentifier: kStudyDashboardTabbarControllerIdentifier) as! StudyDashboardTabbarViewController
+        
+        let storyboard = UIStoryboard(name: kStoryboardIdentifierGateway, bundle: nil)
+        
+        self.studyListViewController = storyboard.instantiateViewController(withIdentifier: String(describing: StudyListViewController.classForCoder())) as? UINavigationController
+        
+        
+        self.studyHomeViewController = studyStoryBoard.instantiateViewController(withIdentifier: String(describing: "StudyHomeNavigationController")) as? UINavigationController //for standalone
+        
+        self.notificationController = storyboard.instantiateViewController(withIdentifier:  String(describing: NotificationViewController.classForCoder())) as? UINavigationController
+        
+        self.resourcesViewController = storyboard.instantiateViewController(withIdentifier:  String(describing: GatewayResourcesListViewController.classForCoder())) as? UINavigationController
+        
+        self.profileviewController = storyboard.instantiateViewController(withIdentifier:  String(describing: ProfileViewController.classForCoder())) as? UINavigationController
+        
+        self.reachoutViewController = storyboard.instantiateViewController(withIdentifier:  String(describing: ReachoutOptionsViewController.classForCoder())) as? UINavigationController
+        
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        self.view.isHidden = false
-    }
     
     
     /**
@@ -219,9 +259,18 @@ class LeftMenuViewController: UIViewController, LeftMenuProtocol {
      @param menu    Accepts the data from enum LeftMenu
      */
     func changeViewController(_ menu: LeftMenu) {
+        
+        let isStandalone = Utilities.isStandaloneApp()
+        
         switch menu {
         case .studyList:
-            self.slideMenuController()?.changeMainViewController(self.studyListViewController, close: true)
+            
+            if isStandalone {
+                self.slideMenuController()?.changeMainViewController(self.studyTabBarController, close: true)
+            } else {
+                self.slideMenuController()?.changeMainViewController(self.studyListViewController, close: true)
+            }
+            
             
         case .resources:
             self.slideMenuController()?.changeMainViewController(self.resourcesViewController, close: true)
@@ -300,7 +349,66 @@ class LeftMenuViewController: UIViewController, LeftMenuProtocol {
      Send the webservice request to Signout
      */
     func sendRequestToSignOut() {
-        UserServices().logoutUser(self as NMWebServiceDelegate)
+        
+        if Utilities.isStandaloneApp() {
+            
+            ORKPasscodeViewController.removePasscodeFromKeychain()
+            
+            let ud = UserDefaults.standard
+            ud.set(false, forKey: kPasscodeIsPending)
+            ud.set(false, forKey: kShowNotification)
+            
+            
+            
+            ud.synchronize()
+            
+            StudyDashboard.instance.dashboardResponse = []
+            let appDelegate = UIApplication.shared.delegate as! AppDelegate
+            appDelegate.updateKeyAndInitializationVector()
+            
+            
+            //let ud = UserDefaults.standard
+            ud.removeObject(forKey: kUserAuthToken)
+            ud.removeObject(forKey: kUserId)
+            ud.synchronize()
+            
+            let email = ud.string(forKey: "useremail")
+            let password = ud.string(forKey: "userpassword")
+            
+            let appDomain = Bundle.main.bundleIdentifier!
+            UserDefaults.standard.removePersistentDomain(forName: appDomain)
+            UserDefaults.standard.synchronize()
+            
+            ud.set(email, forKey: "useremail")
+            ud.set(password, forKey:"userpassword")
+            ud.synchronize()
+            
+            //Delete from database
+            DBHandler.resetAuthToken()
+            
+            //reset user object
+            User.resetCurrentUser()
+            
+            //delete complete database
+            //DBHandler.deleteAll()
+            
+            //cancel all local notification
+            LocalNotification.cancelAllLocalNotification()
+            
+            //reset Filters
+            StudyFilterHandler.instance.previousAppliedFilters = []
+            StudyFilterHandler.instance.searchText = ""
+            
+            //self.changeViewController(.studyList)
+            //self.createLeftmenuItems()
+            //UserServices().logoutUser(self as NMWebServiceDelegate)
+            self.navigationController?.popToRootViewController(animated: true)
+            
+        } else {
+            
+            UserServices().logoutUser(self as NMWebServiceDelegate)
+        }
+        
     }
     
     

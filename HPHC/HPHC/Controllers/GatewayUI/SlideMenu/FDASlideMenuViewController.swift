@@ -25,6 +25,7 @@ import UIKit
 import SlideMenuControllerSwift
 
 let kStudyListViewControllerIdentifier = "StudyListViewController"
+let kStudyHomeViewControllerIdentifier = "StudyHomeNavigationController"
 let kLeftMenuViewControllerIdentifier = "LeftMenuViewController"
 
 open class FDASlideMenuViewController: SlideMenuController {
@@ -35,23 +36,44 @@ open class FDASlideMenuViewController: SlideMenuController {
        
         SlideMenuOptions.leftViewWidth = UIScreen.main.bounds.size.width * 0.81
         let storyboard = UIStoryboard(name: kStoryboardIdentifierGateway, bundle: nil)
-        //kStreamerDashBoard
-        let controller = storyboard.instantiateViewController(withIdentifier: kStudyListViewControllerIdentifier)
-        self.mainViewController = controller
         
-         let controller2 = storyboard.instantiateViewController(withIdentifier: kLeftMenuViewControllerIdentifier)
+        if Utilities.isStandaloneApp() {
+            let studyStoryBoard = UIStoryboard.init(name: kStudyStoryboard, bundle: Bundle.main)
+            //let studyHomeViewController = studyStoryBoard.instantiateViewController(withIdentifier: String(describing: kStudyHomeViewControllerIdentifier)) as! UINavigationController //for standalone
+            let studyTabBarController = studyStoryBoard.instantiateViewController(withIdentifier: kStudyDashboardTabbarControllerIdentifier) as! StudyDashboardTabbarViewController
+            self.mainViewController = studyTabBarController
+            
+        } else {
+            
+            //Gateway- Studylist
+            let controller = storyboard.instantiateViewController(withIdentifier: kStudyListViewControllerIdentifier)
+            self.mainViewController = controller
+        }
+        
+        let controller2 = storyboard.instantiateViewController(withIdentifier: kLeftMenuViewControllerIdentifier)
         self.leftViewController = controller2
-         super.awakeFromNib()
+        super.awakeFromNib()
 
     }
 
     override open func isTagetViewController() -> Bool {
+        
         if let vc = UIApplication.topViewController() {
-            if vc is StudyListViewController ||
-                vc is NotificationViewController ||
-                vc is GatewayResourcesListViewController ||
-                vc is ProfileViewController {
-                return true
+            
+            if Utilities.isStandaloneApp() {
+                if vc is StudyHomeViewController ||
+                    vc is NotificationViewController ||
+                    vc is GatewayResourcesListViewController ||
+                    vc is ProfileViewController {
+                    return true
+                }
+            } else {
+                if vc is StudyListViewController ||
+                    vc is NotificationViewController ||
+                    vc is GatewayResourcesListViewController ||
+                    vc is ProfileViewController {
+                    return true
+                }
             }
         }
         return false

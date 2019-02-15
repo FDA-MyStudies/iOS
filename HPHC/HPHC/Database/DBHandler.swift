@@ -104,6 +104,19 @@ class DBHandler: NSObject {
         })
     }
     
+    class func resetAuthToken(){
+        
+        let realm = try! Realm()
+        let dbUsers = realm.objects(DBUser.self)
+        let dbUser = dbUsers.last
+        
+        try! realm.write({
+            
+            dbUser?.authToken = ""
+            dbUser?.userType =  UserType.AnonymousUser.rawValue//(user.userType?.rawValue)!
+            
+        })
+    }
     
     /* Used to delete current logged in user*/
     class func deleteCurrentUser(){

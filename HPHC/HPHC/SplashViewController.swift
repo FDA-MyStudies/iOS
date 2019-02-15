@@ -45,24 +45,25 @@ class SplashViewController: UIViewController {
         self.checkIfAppLaunchedForFirstTime()
         
         // Checks AuthKey, If exists navigate to HomeController else GatewayDashboard
-        if User.currentUser.authToken != nil {
+        if Utilities.isStandaloneApp() {
+            self.initilizeStudyForStandaloneApp()
+        } else {
             
-            let appDelegate = UIApplication.shared.delegate as! AppDelegate
-            appDelegate.checkPasscode(viewController: self)
-            self.navigateToGatewayDashboard()
-            
-        }else {
-            self.navigateToHomeController()
+            if User.currentUser.authToken != nil {
+                
+                let appDelegate = UIApplication.shared.delegate as! AppDelegate
+                appDelegate.checkPasscode(viewController: self)
+                self.navigateToGatewayDashboard()
+                
+            }else {
+                    /*Gateway App*/
+                    self.navigateToHomeController()
+                
+            }
         }
+       
     }
-    
-    override func viewDidDisappear(_ animated: Bool) {
-    }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-    }
-    
+
     
     /**
      Navigating to Home Screen and load HomeViewController from Login Storyboard
@@ -74,14 +75,97 @@ class SplashViewController: UIViewController {
         self.navigationController?.pushViewController(homeViewController, animated: true)
     }
     
+    func initilizeStudyForStandaloneApp() {
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(SplashViewController.studySetupComplete), name: NSNotification.Name(rawValue: "StudySetupCompleted"), object: nil)
+        
+        StandaloneStudy().setupStandaloneStudy()
+        
+    }
+    
+    func initilizeStudyOverview() {
+        
+        let plistPath = Bundle.main.path(forResource: "StudyOverview", ofType: ".plist", inDirectory:nil)
+        let arrayContent = NSMutableArray.init(contentsOfFile: plistPath!)
+        
+        do {
+            
+            var listOfOverviews:Array<OverviewSection> = []
+            for overview in arrayContent!{
+                let overviewObj = OverviewSection(detail: overview as! Dictionary<String, Any>)
+                listOfOverviews.append(overviewObj)
+            }
+            
+            //create new Overview object
+            let overview = Overview()
+            overview.type = .study
+            overview.sections = listOfOverviews
+            
+            Study.currentStudy?.overview = overview
+            //assgin to Gateway
+            //Gateway.instance.overview = overview
+            
+            self.navigateToStudyHomeController()
+            
+            
+        } catch {
+            print("json error: \(error.localizedDescription)")
+        }
+    }
+    
+    func navigateToStudyHomeController() {
+        //StudyHomeViewController
+        let studyStoryBoard = UIStoryboard.init(name: kStudyStoryboard, bundle: Bundle.main)
+        let studyHomeController = studyStoryBoard.instantiateViewController(withIdentifier: String(describing: StudyHomeViewController.classForCoder())) as! StudyHomeViewController
+        //studyHomeController.delegate = self
+        self.navigationController?.pushViewController(studyHomeController, animated: true)
+    }
     
     /**
      Navigate to gateway Dashboard
      */
     func navigateToGatewayDashboard(){
+        
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue:"StudySetupCompleted"), object: nil)
         self.createMenuView()
+        
     }
     
+    @objc func studySetupComplete(){
+        print("studySetupComplete")
+        //self.navigateToGatewayDashboard()
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue:"StudySetupCompleted"), object: nil)
+        
+        if User.currentUser.authToken != nil && User.currentUser.authToken.characters.count > 0{
+            
+            let appDelegate = UIApplication.shared.delegate as! AppDelegate
+            appDelegate.checkPasscode(viewController: self)
+            
+            //self.navigateToGatewayDashboard()
+            
+            
+            let userStudyStatus =  (Study.currentStudy?.userParticipateState.status)!
+            let ud = UserDefaults.standard
+            if ud.bool(forKey: "joined")
+                //|| userStudyStatus == .yetToJoin
+            {
+                self.navigateToGatewayDashboard()
+            }
+            else {
+                self.navigateToStudyHomeController()
+            }
+        }
+        else {
+            
+            /*Gateway App*/
+            //self.navigateToHomeController()
+            
+            /*Standalone App*/
+            self.navigateToStudyHomeController()
+        }
+        
+        
+    }
     
     /**
      Navigating to Study list and Load FDASlideMenuViewController from Gateway Storyboard

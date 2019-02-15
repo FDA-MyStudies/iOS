@@ -141,6 +141,7 @@
 		6EF2FCEF1E72CDE900B5F212 /* LeftMenuResourceTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EF2FCEE1E72CDE900B5F212 /* LeftMenuResourceTableViewCell.swift */; };
 		6EF748BF1E69645700F1E89E /* LatestActive_Taskdocument.json in Resources */ = {isa = PBXBuildFile; fileRef = 6EF748BE1E69645700F1E89E /* LatestActive_Taskdocument.json */; };
 		7878B311221574D80052FC23 /* StandaloneStudy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7878B30E221574D80052FC23 /* StandaloneStudy.swift */; };
+		7878B31D2216C6E20052FC23 /* HPHCTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7878B31C2216C6E20052FC23 /* HPHCTests.swift */; };
 		78FA1CBD221546E700627B92 /* ResearchKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 78FA1CBA221546D800627B92 /* ResearchKit.framework */; };
 		78FA1CBE221546E700627B92 /* ResearchKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 78FA1CBA221546D800627B92 /* ResearchKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		940577A81E767AC60043215C /* ChangePasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 940577A71E767AC60043215C /* ChangePasswordViewController.swift */; };
@@ -219,6 +220,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		7878B31F2216C6E20052FC23 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6E7D2D4E1E433E8700763D4C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 6E7D2D551E433E8700763D4C;
+			remoteInfo = HPHC;
+		};
 		78FA1CB9221546D800627B92 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 78FA1CB3221546D700627B92 /* ResearchKit.xcodeproj */;
@@ -402,6 +410,9 @@
 		6EF748BE1E69645700F1E89E /* LatestActive_Taskdocument.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = LatestActive_Taskdocument.json; sourceTree = "<group>"; };
 		747BA7FE3153184E586C3AFA /* Pods_HPHCTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HPHCTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7878B30E221574D80052FC23 /* StandaloneStudy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StandaloneStudy.swift; sourceTree = "<group>"; };
+		7878B31A2216C6E10052FC23 /* HPHCTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HPHCTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		7878B31C2216C6E20052FC23 /* HPHCTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HPHCTests.swift; sourceTree = "<group>"; };
+		7878B31E2216C6E20052FC23 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		78FA1CB3221546D700627B92 /* ResearchKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ResearchKit.xcodeproj; path = ../RK2.0/ResearchKit/ResearchKit.xcodeproj; sourceTree = "<group>"; };
 		940577A71E767AC60043215C /* ChangePasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChangePasswordViewController.swift; sourceTree = "<group>"; };
 		940577AB1E767C8D0043215C /* ChangePasswordData.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = ChangePasswordData.plist; sourceTree = "<group>"; };
@@ -491,6 +502,13 @@
 				6EEBA47A1F25FAA100FB0258 /* HealthKit.framework in Frameworks */,
 				972663AD23F7242B537B8E82 /* Pods_HPHC.framework in Frameworks */,
 				78FA1CBD221546E700627B92 /* ResearchKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7878B3172216C6E10052FC23 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -603,6 +621,7 @@
 			children = (
 				78FA1CB3221546D700627B92 /* ResearchKit.xcodeproj */,
 				6E7D2D581E433E8700763D4C /* HPHC */,
+				7878B31B2216C6E20052FC23 /* HPHCTests */,
 				6E7D2D571E433E8700763D4C /* Products */,
 				62CD35D6D8DE746AB43D70D6 /* Pods */,
 				5E6053B2479953DCC93BD8D4 /* Frameworks */,
@@ -613,6 +632,7 @@
 			isa = PBXGroup;
 			children = (
 				6E7D2D561E433E8700763D4C /* HPHC.app */,
+				7878B31A2216C6E10052FC23 /* HPHCTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1031,6 +1051,15 @@
 			path = FetalKickCounterStep;
 			sourceTree = "<group>";
 		};
+		7878B31B2216C6E20052FC23 /* HPHCTests */ = {
+			isa = PBXGroup;
+			children = (
+				7878B31C2216C6E20052FC23 /* HPHCTests.swift */,
+				7878B31E2216C6E20052FC23 /* Info.plist */,
+			);
+			path = HPHCTests;
+			sourceTree = "<group>";
+		};
 		78FA1CB4221546D700627B92 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -1315,13 +1344,31 @@
 			productReference = 6E7D2D561E433E8700763D4C /* HPHC.app */;
 			productType = "com.apple.product-type.application";
 		};
+		7878B3192216C6E10052FC23 /* HPHCTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7878B3252216C6E20052FC23 /* Build configuration list for PBXNativeTarget "HPHCTests" */;
+			buildPhases = (
+				7878B3162216C6E10052FC23 /* Sources */,
+				7878B3172216C6E10052FC23 /* Frameworks */,
+				7878B3182216C6E10052FC23 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				7878B3202216C6E20052FC23 /* PBXTargetDependency */,
+			);
+			name = HPHCTests;
+			productName = HPHCTests;
+			productReference = 7878B31A2216C6E10052FC23 /* HPHCTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
 		6E7D2D4E1E433E8700763D4C /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0820;
+				LastSwiftUpdateCheck = 1010;
 				LastUpgradeCheck = 1010;
 				ORGANIZATIONNAME = BTC;
 				TargetAttributes = {
@@ -1341,6 +1388,12 @@
 								enabled = 1;
 							};
 						};
+					};
+					7878B3192216C6E10052FC23 = {
+						CreatedOnToolsVersion = 10.1;
+						DevelopmentTeam = T5N3W5L4HF;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 6E7D2D551E433E8700763D4C;
 					};
 				};
 			};
@@ -1402,6 +1455,7 @@
 			projectRoot = "";
 			targets = (
 				6E7D2D551E433E8700763D4C /* HPHC */,
+				7878B3192216C6E10052FC23 /* HPHCTests */,
 			);
 		};
 /* End PBXProject section */
@@ -1495,6 +1549,13 @@
 				6E7D2D8C1E4340B200763D4C /* UserProfile.plist in Resources */,
 				6E7D2D901E43526100763D4C /* Register.plist in Resources */,
 				48A24C3C1E839CFD009E849E /* 25-study-activities.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7878B3182216C6E10052FC23 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1710,9 +1771,22 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		7878B3162216C6E10052FC23 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7878B31D2216C6E20052FC23 /* HPHCTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		7878B3202216C6E20052FC23 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 6E7D2D551E433E8700763D4C /* HPHC */;
+			targetProxy = 7878B31F2216C6E20052FC23 /* PBXContainerItemProxy */;
+		};
 		78FA1CC0221546E700627B92 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = ResearchKit;
@@ -1909,6 +1983,55 @@
 			};
 			name = Release;
 		};
+		7878B3212216C6E20052FC23 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = T5N3W5L4HF;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = HPHCTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.btc.HPHCTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/HPHC.app/HPHC";
+			};
+			name = Debug;
+		};
+		7878B3222216C6E20052FC23 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = T5N3W5L4HF;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = HPHCTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.btc.HPHCTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/HPHC.app/HPHC";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -1926,6 +2049,15 @@
 			buildConfigurations = (
 				6E7D2D7F1E433E8800763D4C /* Debug */,
 				6E7D2D801E433E8800763D4C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		7878B3252216C6E20052FC23 /* Build configuration list for PBXNativeTarget "HPHCTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7878B3212216C6E20052FC23 /* Debug */,
+				7878B3222216C6E20052FC23 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

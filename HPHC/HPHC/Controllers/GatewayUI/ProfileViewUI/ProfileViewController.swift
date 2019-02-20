@@ -422,11 +422,14 @@ class ProfileViewController: UIViewController, SlideMenuControllerDelegate {
         
         var passcodeDict: Dictionary<String,Any> =  (tableViewRowDetails?[3] as? Dictionary<String, Any>)!
         
+    
+        let keychainPasscodeDict = try! ORKKeychainWrapper.object(forKey: korkPasscode) as? [String:Any]
         
-        let keychainPasscodeDict: Dictionary<String,Any>? = ORKKeychainWrapper.object(forKey: korkPasscode, error: &error)  == nil ? nil : (ORKKeychainWrapper.object(forKey: korkPasscode, error: &error)  as?  Dictionary<String,Any>)
+//        let keychainPasscodeDict: Dictionary<String,Any>? = ORKKeychainWrapper.object(forKey: korkPasscode) == nil ? nil : (ORKKeychainWrapper.object(forKey: korkPasscode)  as?  Dictionary<String,Any>)
+        
         var istouchIdEnabled: Bool =  false
-        if keychainPasscodeDict != nil &&  (keychainPasscodeDict?.count)! > 0{
-            istouchIdEnabled = ((keychainPasscodeDict?[ktouchid])! as? Bool)!
+        if let keychainDict = keychainPasscodeDict, keychainDict.count > 0 {
+            istouchIdEnabled = keychainDict[ktouchid] as? Bool ?? false
         }
         
         print("touch;;;\(istouchIdEnabled)")

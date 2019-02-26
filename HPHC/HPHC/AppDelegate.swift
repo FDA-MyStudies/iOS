@@ -355,7 +355,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             
             let isTaskViewControllerVisible = (navController as? UINavigationController)?.visibleViewController?.isKind(of: ORKTaskViewController.self)
             
-            let navigationTitle = ((navController as? UINavigationController)?.visibleViewController as? ORKTaskViewController)!.title
+            guard let navigation = (navController as? UINavigationController)?.visibleViewController as? ORKTaskViewController, let navigationTitle = navigation.title else {return}
             
             if (navController as? UINavigationController) != nil &&  isTaskViewControllerVisible == false {
                 
@@ -366,7 +366,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 
             } else if(navController as? UINavigationController) != nil
                 &&  isTaskViewControllerVisible == true
-                && (navigationTitle != nil && navigationTitle! == "Activity") {
+                && navigationTitle == "Activity" {
                 
                 if (navController as? UINavigationController)?.visibleViewController?.isKind(of: ORKPasscodeViewController.self) == false {
                     //Request for Passcode

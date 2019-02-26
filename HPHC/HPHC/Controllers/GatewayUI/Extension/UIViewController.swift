@@ -79,26 +79,37 @@ extension UIViewController {
         
         self.navigationController?.navigationBar.isUserInteractionEnabled = false
         
-        var view = self.view.viewWithTag(5000)
-        if view == nil {
+        var progressView = self.view.viewWithTag(5000)
+        if progressView == nil {
             
-           view = UINib(nibName: kNewProgressViewNIB, bundle: nil).instantiate(withOwner: nil, options: nil)[0] as? UIView
+            progressView = UINib(nibName: kNewProgressViewNIB, bundle: nil).instantiate(withOwner: nil, options: nil)[0] as? UIView
             
             let url = Bundle.main.url(forResource: kResourceName, withExtension: "gif")!
-            let data = try! Data(contentsOf: url)
-            let webView =  view?.subviews.first as! UIWebView
+           
+            let webView =  progressView?.subviews.first as! UIWebView
+            webView.loadRequest(URLRequest(url: url))
+
+            UI: do {
+                webView.scalesPageToFit = true
+                webView.contentMode = UIView.ContentMode.scaleAspectFit
+                progressView!.alpha = 0
+                progressView!.tag = 5000
+            }
             
-            webView.loadRequest(URLRequest.init(url: url))
-            webView.scalesPageToFit = true
-            webView.contentMode = UIView.ContentMode.scaleAspectFit
-            
-           view?.frame = UIScreen.main.bounds
-            view?.tag = 5000
-            self.view.addSubview(view!)
-            view?.alpha = 0
-            
+            layout: do {
+                self.view.addSubview(progressView!)
+                progressView!.translatesAutoresizingMaskIntoConstraints = false
+                
+                NSLayoutConstraint.activate([
+                    progressView!.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
+                    progressView!.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
+                    progressView!.bottomAnchor.constraint(equalTo: self.view.bottomAnchor),
+                    progressView!.topAnchor.constraint(equalTo: self.view.topAnchor)
+                    ])
+            }
+
             UIView.animate(withDuration: 0.3) {
-                view?.alpha = 1
+                progressView!.alpha = 1
             }
         }
     }

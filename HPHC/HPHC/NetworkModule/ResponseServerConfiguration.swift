@@ -60,8 +60,8 @@ struct ResponseServerURLConstants {
     //static let DevelopmentURL = "https://hphci-fdama-te-ds-01.labkey.com/mobileappstudy-"
     
     //Labkey UAT Server
-    static let ProductionURL = "https://hphci-fdama-st-ds-01.labkey.com/mobileappstudy-"
-    static let DevelopmentURL = "https://hphci-fdama-st-ds-01.labkey.com/mobileappstudy-"
+    static let ProductionURL = "https://hpresp-stage.lkcompliant.net/mobileappstudy-"
+    static let DevelopmentURL = "https://hpresp-stage.lkcompliant.net/mobileappstudy-"
     
     //Labkey Production Server
     //static let ProductionURL = "https://hphci-fdama-pr-ds-01.labkey.com/mobileappstudy-"

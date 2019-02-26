@@ -82,30 +82,17 @@ struct WCPServerURLConstants {
     //static let ProductionURL = "http://23.89.199.27:8080/StudyMetaData/"
     //static let DevelopmentURL = "http://23.89.199.27:8080/StudyMetaData/"
     
-    
-    //New SerVerForDevelopment
-    //static let ProductionURL = "http://192.168.0.26:8080/StudyMetaData/"
-    //static let DevelopmentURL = "http://192.168.0.26:8080/StudyMetaData/"
-    
-    
-    
-    //Production
-    //static let ProductionURL = "http://192.168.0.50:8080/StudyMetaData/"
-    //static let DevelopmentURL = "http://192.168.0.50:8080/StudyMetaData/"
-    
-    
-    //Dev
-    //static let ProductionURL = "http://192.168.0.50:8080/StudyMetaData-DEV/"
-    //static let DevelopmentURL = "http://192.168.0.50:8080/StudyMetaData-DEV/"
-    
+
     
     //local
     //static let ProductionURL = "http://192.168.0.32:8080/StudyMetaData/"
     //static let DevelopmentURL = "http://192.168.0.32:8080/StudyMetaData/"
     
     //local 2
-    static let ProductionURL = "http://172.246.126.44:8080/StudyMetaData/"
-    static let DevelopmentURL = "http://172.246.126.44:8080/StudyMetaData/"
+    static let ProductionURL = "https://hpwcp-stage.lkcompliant.net/StudyMetaData/"
+    static let DevelopmentURL = "https://hpwcp-stage.lkcompliant.net/StudyMetaData/"
+    
+    
 }
 
 class WCPConfiguration: NetworkConfiguration {

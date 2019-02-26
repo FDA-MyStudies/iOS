@@ -80,7 +80,7 @@ class EligibilityStepViewController: ORKStepViewController {
         
         buttonSubmit?.layer.borderColor =   kUicolorForButtonBackground
         
-        if (self.descriptionText?.characters.count)! > 0 {
+        if (self.descriptionText?.count)! > 0 {
             labelDescription?.text = self.descriptionText
         }
         
@@ -88,9 +88,30 @@ class EligibilityStepViewController: ORKStepViewController {
             step.type = "token"
         }
         
-        // IQKeyboardManager.sharedManager().enable = true
+        addCancelButton()
+    }
+
+    
+    private func addCancelButton() {
+        
+        let button = UIButton(type: .system)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setTitle("Cancel", for: .normal)
+        button.addTarget(self, action: #selector(EligibilityStepViewController.cancelButton), for: .touchUpInside)
+
+        self.view.addSubview(button)
+        
+        NSLayoutConstraint.activate([
+            button.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: -100),
+            button.heightAnchor.constraint(equalToConstant: 40),
+            button.widthAnchor.constraint(equalToConstant: 90),
+            button.centerXAnchor.constraint(equalTo: self.view.centerXAnchor)
+            ])
     }
     
+    @objc func cancelButton(){
+        self.dismiss(animated: true, completion: nil)
+    }
     // MARK: Methods and Button Actions
     
     func showAlert(message: String) {

@@ -8,6 +8,11 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="HelveticaNeue.ttc">
+            <string>HelveticaNeue</string>
+        </array>
+    </customFonts>
     <scenes>
         <!--Splash View Controller-->
         <scene sceneID="4El-4s-WVk">
@@ -21,16 +26,16 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="splash" translatesAutoresizingMaskIntoConstraints="NO" id="yXb-vr-OpV">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="splash" translatesAutoresizingMaskIntoConstraints="NO" id="yXb-vr-OpV">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="yXb-vr-OpV" firstAttribute="top" secondItem="0ec-0V-rcO" secondAttribute="top" id="1jY-jo-FCh"/>
                             <constraint firstItem="yXb-vr-OpV" firstAttribute="leading" secondItem="0ec-0V-rcO" secondAttribute="leading" id="61I-TR-Ivc"/>
                             <constraint firstAttribute="trailing" secondItem="yXb-vr-OpV" secondAttribute="trailing" id="LyO-7w-Qkl"/>
-                            <constraint firstItem="W6h-X5-dpN" firstAttribute="top" secondItem="yXb-vr-OpV" secondAttribute="bottom" id="Sl5-VQ-aFB"/>
-                            <constraint firstItem="yXb-vr-OpV" firstAttribute="top" secondItem="t0d-0H-4KL" secondAttribute="bottom" constant="-20" id="Soa-ij-qX8"/>
+                            <constraint firstAttribute="bottom" secondItem="yXb-vr-OpV" secondAttribute="bottom" id="VZb-VS-1zm"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="5OT-6C-bEH"/>

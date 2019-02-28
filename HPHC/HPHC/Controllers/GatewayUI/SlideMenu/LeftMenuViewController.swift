@@ -311,6 +311,8 @@ class LeftMenuViewController: UIViewController, LeftMenuProtocol {
      */
     @IBAction func buttonActionSignOut(_ sender: UIButton) {
         
+     
+        
         DBHandler.isDataAvailableToSync { (available) in
             if(available){
                 
@@ -498,7 +500,7 @@ extension LeftMenuViewController: NMWebServiceDelegate {
     
     func startedRequest(_ manager: NetworkManager, requestName: NSString) {
         Logger.sharedInstance.info("requestname : \(requestName)")
-        self.addProgressIndicator()
+        UIApplication.shared.keyWindow?.addProgressIndicatorOnWindowFromTop()
     }
     
     func finishedRequest(_ manager: NetworkManager, requestName: NSString, response: AnyObject?) {
@@ -507,12 +509,12 @@ extension LeftMenuViewController: NMWebServiceDelegate {
         if requestName as String ==  RegistrationMethods.logout.description {
             self.signout()
         }
-        self.removeProgressIndicator()
+        UIApplication.shared.keyWindow?.addProgressIndicatorOnWindowFromTop()
     }
     
     func failedRequest(_ manager: NetworkManager, requestName: NSString, error: NSError) {
         Logger.sharedInstance.info("requestname : \(requestName)")
-        self.removeProgressIndicator()
+        UIApplication.shared.keyWindow?.addProgressIndicatorOnWindowFromTop()
         
         if error.code == 403 { //unauthorized
             UIUtilities.showAlertMessageWithActionHandler(kErrorTitle, message: error.localizedDescription, buttonTitle: kTitleOk, viewControllerUsed: self, action: {

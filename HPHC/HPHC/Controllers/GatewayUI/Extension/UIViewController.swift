@@ -88,7 +88,7 @@ extension UIViewController {
            
             let webView =  progressView?.subviews.first as! UIWebView
             webView.loadRequest(URLRequest(url: url))
-
+            
             UI: do {
                 webView.scalesPageToFit = true
                 webView.contentMode = UIView.ContentMode.scaleAspectFit
@@ -103,10 +103,14 @@ extension UIViewController {
                 NSLayoutConstraint.activate([
                     progressView!.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
                     progressView!.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
-                    progressView!.bottomAnchor.constraint(equalTo: self.view.bottomAnchor),
-                    progressView!.topAnchor.constraint(equalTo: self.view.topAnchor)
+                    progressView!.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.size.width),
+                    progressView!.heightAnchor.constraint(equalToConstant: UIScreen.main.bounds.size.height)
+                    //progressView!.bottomAnchor.constraint(equalTo: self.view.bottomAnchor),
+                    //progressView!.topAnchor.constraint(equalTo: self.view.topAnchor)
                     ])
             }
+            
+            
 
             UIView.animate(withDuration: 0.3) {
                 progressView!.alpha = 1

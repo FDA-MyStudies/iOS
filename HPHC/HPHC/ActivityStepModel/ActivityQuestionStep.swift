@@ -444,15 +444,15 @@ class ActivityQuestionStep: ActivityStep {
                     
                     let textChoiceArray: [ORKTextChoice]?
                     
-                    var defaultValue = (formatDict?[kStepQuestionTextScaleDefault] as? Int)!
+                    let defaultValue = (formatDict?[kStepQuestionTextScaleDefault] as? Int)!
                     self.textScaleDefaultValue = "\(defaultValue)"
                     
                     textChoiceArray = self.getTextChoices(dataArray: (formatDict?[kStepQuestionTextScaleTextChoices] as? NSArray)!)
                     
-                    defaultValue = self.textScaleDefaultIndex!
+                    //defaultValue = self.textScaleDefaultIndex!
                     
                     questionStepAnswerFormat = ORKAnswerFormat.textScale(with: textChoiceArray!,
-                                                                         defaultIndex: defaultValue,
+                                                                         defaultIndex: defaultValue-1,
                                                                          vertical: (formatDict?[kStepQuestionTextScaleVertical] as? Bool)!)
                 } else {
                     Logger.sharedInstance.debug("Text Scale Question Step has null values:\(String(describing: formatDict))")

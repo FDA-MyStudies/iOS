@@ -19,7 +19,7 @@
 	<key>CFBundleShortVersionString</key>
 	<string>1.3</string>
 	<key>CFBundleVersion</key>
-	<string>1.46</string>
+	<string>1.49</string>
 	<key>Fabric</key>
 	<dict>
 		<key>APIKey</key>
@@ -47,6 +47,8 @@
 	</dict>
 	<key>NSCameraUsageDescription</key>
 	<string>$(PRODUCT_NAME) would like to access your camera</string>
+	<key>NSFaceIDUsageDescription</key>
+	<string>$(PRODUCT_NAME) would like to use Face ID for passcode setup.</string>
 	<key>NSHealthShareUsageDescription</key>
 	<string>$(PRODUCT_NAME) would like to access your Health App data</string>
 	<key>NSHealthUpdateUsageDescription</key>
@@ -57,6 +59,8 @@
 	<string>$(PRODUCT_NAME) would like to access your michrophone</string>
 	<key>NSMotionUsageDescription</key>
 	<string>$(PRODUCT_NAME) would like to use Motion data</string>
+	<key>NSSpeechRecognitionUsageDescription</key>
+	<string>$(PRODUCT_NAME) would like to use Speech Recognition for the task to give more accurate result.</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Verdana Italic.ttf</string>
@@ -72,7 +76,6 @@
 	<string>Main</string>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
-		<string>armv7</string>
 		<string>healthkit</string>
 	</array>
 	<key>UISupportedInterfaceOrientations</key>

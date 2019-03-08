@@ -571,6 +571,8 @@ class ActivityQuestionStep: ActivityStep {
                                 unit = HKUnit.init(from: localizedQuestionStepAnswerFormatUnit)
                             }
                             questionStepAnswerFormat = ORKHealthKitQuantityTypeAnswerFormat.init(quantityType: HKQuantityType.quantityType(forIdentifier: quantityTypeId)!, unit: unit, style: ORKNumericAnswerStyle.decimal)
+                          
+                            
                         } else {
                             
                             if minValue != nil || maxValue != nil {
@@ -643,11 +645,7 @@ class ActivityQuestionStep: ActivityStep {
                     
                     var answerFormat = ORKAnswerFormat.textAnswerFormat()
                     
-                    if Utilities.isValidValue(someObject: formatDict?[kStepQuestionTextMaxLength] as AnyObject?) {
-                        answerFormat.maximumLength = (formatDict?[kStepQuestionTextMaxLength] as? Int)!
-                    } else {
-                        answerFormat.maximumLength = 0
-                    }
+                   
                     
                     if Utilities.isValidValue(someObject: formatDict?[kStepQuestionTextValidationRegex] as AnyObject?) && Utilities.isValidValue(someObject: formatDict?[kStepQuestionTextInvalidMessage] as AnyObject?) {
                         
@@ -664,6 +662,13 @@ class ActivityQuestionStep: ActivityStep {
                     } else {
                         answerFormat.invalidMessage = nil
                     }
+                    
+                    if Utilities.isValidValue(someObject: formatDict?[kStepQuestionTextMaxLength] as AnyObject?) {
+                        answerFormat.maximumLength = (formatDict?[kStepQuestionTextMaxLength] as? Int)!
+                    } else {
+                        answerFormat.maximumLength = 0
+                    }
+                    
                     answerFormat.multipleLines = (formatDict?[kStepQuestionTextMultipleLines] as? Bool)!
                     questionStepAnswerFormat = answerFormat
                     

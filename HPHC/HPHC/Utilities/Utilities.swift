@@ -402,7 +402,7 @@ class Utilities: NSObject {
         dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
         
         guard let date = dateFormatter.date(from: dateWithourTimeZone) else {
-            assert(false, "no date from string")
+            //assert(false, "no date from string")
             return nil
         }
         
@@ -412,6 +412,16 @@ class Utilities: NSObject {
         let finalDate = dateFormatter.date(from: finalString)
         return finalDate
         
+    }
+    
+    class func findDateFromString(dateString: String) -> Date? {
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        
+       // let finalString = dateFormatter.string(from: date)
+        let finalDate = dateFormatter.date(from: dateString)
+        return finalDate
     }
     
     /* Method to get StringFromDate for default dateFormatter

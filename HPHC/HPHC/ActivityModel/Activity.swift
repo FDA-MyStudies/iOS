@@ -136,7 +136,8 @@ class Activity {
     var currentRun: ActivityRun! = nil
     var userParticipationStatus: UserActivityStatus! = nil
     var taskSubType: String? = "" //used for active tasks
-  
+    var anchorDate:AnchorDate? = nil
+    
      //Default Initializer
     init() {
        
@@ -205,8 +206,6 @@ class Activity {
             
             if Utilities.isValidValue(someObject: infoDict[kActivityStartTime] as AnyObject) {
                  self.startDate =  Utilities.getDateFromStringWithOutTimezone(dateString: (infoDict[kActivityStartTime] as? String)!)
-            } else {
-                self.startDate = Date()
             }
             
             if Utilities.isValidValue(someObject: infoDict[kActivityEndTime] as AnyObject ) {
@@ -226,6 +225,14 @@ class Activity {
                 }
                 
             }
+            
+            //AnchorDate
+            let anchorDateDetail = infoDict["anchorDate"] as? [String:Any]
+            if (anchorDateDetail != nil) {
+                setActivityAvailability(anchorDateDetail ?? [:])
+            }
+            
+            
             let currentUser = User.currentUser
             if let userActivityStatus = currentUser.participatedActivites.filter({$0.activityId == self.actvityId && $0.studyId == self.studyId}).first {
                 self.userParticipationStatus = userActivityStatus
@@ -238,7 +245,9 @@ class Activity {
             self.taskSubType =  (infoDict[kActivityTaskSubType] as? String)!
           }
           
-            self.calculateActivityRuns(studyId: self.studyId!)
+            if self.startDate != nil {
+                self.calculateActivityRuns(studyId: self.studyId!)
+            }
         } else {
             Logger.sharedInstance.debug("infoDict is null:\(infoDict)")
         }
@@ -312,6 +321,27 @@ class Activity {
         }
     }
     
+    func setActivityAvailability(_ availability:[String:Any]) {
+
+        self.anchorDate = AnchorDate.init(availability)
+        
+        if self.anchorDate?.sourceType == "EnrollmentDate" {
+            let enrollmentDate = Study.currentStudy?.userParticipateState.joiningDate
+            
+           
+            let startDateInterval = TimeInterval(60*60*24*(self.anchorDate?.startDays)!)
+            let endDateInterval = TimeInterval(60*60*24*(self.anchorDate?.endDays)!)
+            
+            //one Time frequency
+            let startAnchorDate = enrollmentDate?.addingTimeInterval(startDateInterval)
+            var endAnchorDate = enrollmentDate?.addingTimeInterval(endDateInterval)
+            
+            self.startDate = startAnchorDate
+            self.endDate = endAnchorDate
+        }
+        
+    }
+    
      //method to set step array
     func setStepArray(stepArray: Array<Dictionary<String,Any>>) {
        
@@ -356,6 +386,73 @@ class Activity {
     func setRestortionData(restortionData: Data)  {
         self.restortionData = restortionData
     }
+    
+    func updateLifeTime(_ anchorDate:AnchorDate, frequency:Frequency) -> (Date?,Date?){
+        guard let date = anchorDate.anchorDateValue else {
+            return (nil,nil)
+        }
+        
+        var startDate:Date!
+        var endDate:Date!
+        
+        switch frequency {
+        case .One_Time:
+            
+            let startDateInterval = TimeInterval(60*60*24*(self.anchorDate?.startDays)!)
+            let endDateInterval = TimeInterval(60*60*24*(self.anchorDate?.endDays)!)
+            
+            startDate = date.addingTimeInterval(startDateInterval)
+            endDate = date.addingTimeInterval(endDateInterval)
+            
+        case .Daily:
+            
+            let startDateInterval = TimeInterval(60*60*24*(self.anchorDate?.startDays)!)
+            let endDateInterval = TimeInterval(60*60*24*(self.anchorDate?.repeatInterval)!)
+            startDate = date.addingTimeInterval(startDateInterval)
+            endDate = startDate.addingTimeInterval(endDateInterval)
+            
+        case .Weekly:
+            let startDateInterval = TimeInterval(60*60*24*(self.anchorDate?.startDays)!)
+            let endDateInterval = TimeInterval(60*60*24*7*(self.anchorDate?.repeatInterval)! - 1)
+            startDate = date.addingTimeInterval(startDateInterval)
+            endDate = startDate.addingTimeInterval(endDateInterval)
+        default:
+            break
+        }
+        
+        return (startDate,endDate)
+    }
+    
 }
 
+
+class AnchorDate {
+    
+    var sourceType:String?
+    var sourceActivityId:String?
+    var sourceKey:String?
+    var startDays:Int = 0
+    var startTime:String?
+    var endDays:Int = 0
+    var repeatInterval:Int = 0
+    var endTime:String?
+    var anchorDateValue:Date?
+    
+    init(_ anchorDateDetail:[String:Any]) {
+        
+        self.sourceType = anchorDateDetail["sourceType"] as? String
+        self.sourceActivityId = anchorDateDetail["sourceActivityId"] as? String
+        self.sourceKey = anchorDateDetail["sourceKey"] as? String
+        
+        let anchorStart = anchorDateDetail["start"] as? [String:Any]
+        self.startDays = anchorStart?["anchorDays"] as? Int ?? 0
+        self.startTime = anchorStart?["time"] as? String
+        
+        let anchorEnd = anchorDateDetail["end"] as? [String:Any]
+        self.endDays = anchorEnd?["anchorDays"] as? Int ?? 0
+        self.endTime = anchorEnd?["time"] as? String
+        self.repeatInterval = anchorEnd?["repeatInterval"] as? Int ?? 0
+    
+    }
+}
 

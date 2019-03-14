@@ -678,7 +678,8 @@ class DBHandler: NSObject {
     class func loadActivityListFromDatabase(studyId: String,completionHandler: @escaping (Array<Activity>) -> ()){
         
         let realm = DBHandler.getRealmObject()!
-        let dbActivities = realm.objects(DBActivity.self).filter("studyId == %@",studyId)
+        //let dbActivities = realm.objects(DBActivity.self).filter("studyId == %@",studyId)
+        let dbActivities = realm.objects(DBActivity.self).filter({$0.studyId == studyId && $0.startDate != nil})
         var date = Date().utcDate()
         
         let difference = UserDefaults.standard.value(forKey: "offset") as? Int

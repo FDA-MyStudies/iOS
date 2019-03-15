@@ -327,17 +327,11 @@ class Activity {
         
         if self.anchorDate?.sourceType == "EnrollmentDate" {
             let enrollmentDate = Study.currentStudy?.userParticipateState.joiningDate
-            
+            self.anchorDate?.anchorDateValue = enrollmentDate
+            let lifeTime = self.updateLifeTime(self.anchorDate!, frequency: self.frequencyType)
            
-            let startDateInterval = TimeInterval(60*60*24*(self.anchorDate?.startDays)!)
-            let endDateInterval = TimeInterval(60*60*24*(self.anchorDate?.endDays)!)
-            
-            //one Time frequency
-            let startAnchorDate = enrollmentDate?.addingTimeInterval(startDateInterval)
-            var endAnchorDate = enrollmentDate?.addingTimeInterval(endDateInterval)
-            
-            self.startDate = startAnchorDate
-            self.endDate = endAnchorDate
+            self.startDate = lifeTime.0
+            self.endDate = lifeTime.1
         }
         
     }
@@ -392,6 +386,12 @@ class Activity {
             return (nil,nil)
         }
         
+        return updateLifeTime(date, frequency: frequency)
+        
+    }
+    
+    func updateLifeTime(_ date:Date, frequency:Frequency) -> (Date?,Date?) {
+        
         var startDate:Date!
         var endDate:Date!
         
@@ -412,12 +412,27 @@ class Activity {
             endDate = startDate.addingTimeInterval(endDateInterval)
             
         case .Weekly:
+            
             let startDateInterval = TimeInterval(60*60*24*(self.anchorDate?.startDays)!)
             let endDateInterval = TimeInterval(60*60*24*7*(self.anchorDate?.repeatInterval)! - 1)
             startDate = date.addingTimeInterval(startDateInterval)
             endDate = startDate.addingTimeInterval(endDateInterval)
-        default:
-            break
+        case .Monthly:
+            
+            let startDateInterval = TimeInterval(60*60*24*(self.anchorDate?.startDays)!)
+            let endDateInterval = TimeInterval(-1)
+            startDate = date.addingTimeInterval(startDateInterval)
+            let calender = Calendar.current
+            endDate = calender.date(byAdding: .month, value: (self.anchorDate?.repeatInterval)!, to: startDate)
+            endDate = endDate.addingTimeInterval(endDateInterval)
+        case .Scheduled:
+            
+            let startDateInterval = TimeInterval(60*60*24*(self.anchorDate?.startDays)!)
+            let endDateInterval = TimeInterval(60*60*24*(self.anchorDate?.endDays)!-1)
+            
+            startDate = date.addingTimeInterval(startDateInterval)
+            endDate = date.addingTimeInterval(endDateInterval)
+            
         }
         
         return (startDate,endDate)
@@ -454,5 +469,11 @@ class AnchorDate {
         self.repeatInterval = anchorEnd?["repeatInterval"] as? Int ?? 0
     
     }
-}
+    
+    func updateUserResponseAnchorDate(_ response:[String:Any]) {
+        let results = response["results"] as! Array<Dictionary<String,Any>> //[[String : Any]]
+        //"studyId == %@",studyId
+        //let anchorDateResult = results.filter("key == %@","self.sourceKey")
+    }
+}		
 

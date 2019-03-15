@@ -634,6 +634,16 @@ class DBHandler: NSObject {
             dbActivityRuns.append(dbActivityRun)
         }
         
+        //save anchor date
+        dbActivity.sourceType = activity.anchorDate?.sourceType
+        dbActivity.sourceActivityId = activity.anchorDate?.sourceActivityId
+        dbActivity.sourceKey = activity.anchorDate?.sourceKey
+        dbActivity.startDays = activity.anchorDate?.startDays ?? 0
+        dbActivity.startTime = activity.anchorDate?.startTime
+        dbActivity.endDays = activity.anchorDate?.endDays ?? 0
+        dbActivity.repeatInterval = activity.anchorDate?.repeatInterval ?? 0
+        dbActivity.endTime = activity.anchorDate?.endTime
+        
         dbActivity.activityRuns.append(objectsIn: dbActivityRuns)
         return dbActivity
     }
@@ -653,6 +663,95 @@ class DBHandler: NSObject {
         try? realm.write({
             dbActivity?.restortionData = restortionData
         })
+    }
+    
+    class func updateTargetActivityAnchorDateDetail(studyId:String, activityId:String, response:[String:Any]) -> Bool {
+        
+        let realm = DBHandler.getRealmObject()!
+        let dbActivities = realm.objects(DBActivity.self).filter({$0.sourceActivityId == activityId && $0.studyId == studyId && $0.startDate == nil})
+        let dbActivity = dbActivities.last
+        if dbActivity != nil {
+            let results = response["results"] as! Array<Dictionary<String,Any>>
+            let sourceKey = (dbActivity?.sourceKey)!
+            let dictionary = results.filter({$0["key"] as! String == sourceKey}).first
+            let userInputDate = dictionary?["value"] as? String
+            
+            //user might have skipped
+            if userInputDate != nil {
+                print(userInputDate)
+                let date = Utilities.getDateFromString(dateString: userInputDate!)
+                let frequency = Frequency(rawValue: (dbActivity?.frequencyType)!)!
+                let lifeTime = DBHandler.getLifeTime(date!,
+                                                     frequency:frequency,
+                                                     startDays: (dbActivity?.startDays)!,
+                                                     endDays: (dbActivity?.endDays)!,
+                                                     repeatInterval: (dbActivity?.repeatInterval)!)
+                
+                try? realm.write({
+                    dbActivity?.startDate = lifeTime.0
+                    dbActivity?.endDate = lifeTime.1
+                })
+                return true
+            }
+            
+          
+        }
+       
+       return false
+    }
+    
+    class func getLifeTime(_ date:Date,
+                           frequency:Frequency,
+                           startDays:Int,
+                           endDays:Int,
+                           repeatInterval:Int) -> (Date?,Date?) {
+        
+        
+        var startDate:Date!
+        var endDate:Date!
+   
+        
+        switch frequency {
+        case .One_Time:
+            
+            let startDateInterval = TimeInterval(60*60*24*(startDays))
+            let endDateInterval = TimeInterval(60*60*24*(endDays))
+            
+            startDate = date.addingTimeInterval(startDateInterval)
+            endDate = date.addingTimeInterval(endDateInterval)
+            
+        case .Daily:
+            
+            let startDateInterval = TimeInterval(60*60*24*(startDays))
+            let endDateInterval = TimeInterval(60*60*24*(repeatInterval))
+            startDate = date.addingTimeInterval(startDateInterval)
+            endDate = startDate.addingTimeInterval(endDateInterval)
+            
+        case .Weekly:
+            
+            let startDateInterval = TimeInterval(60*60*24*(startDays))
+            let endDateInterval = TimeInterval(60*60*24*7*(repeatInterval) - 1)
+            startDate = date.addingTimeInterval(startDateInterval)
+            endDate = startDate.addingTimeInterval(endDateInterval)
+        case .Monthly:
+            
+            let startDateInterval = TimeInterval(60*60*24*(startDays))
+            let endDateInterval = TimeInterval(-1)
+            startDate = date.addingTimeInterval(startDateInterval)
+            let calender = Calendar.current
+            endDate = calender.date(byAdding: .month, value: (repeatInterval), to: startDate)
+            endDate = endDate.addingTimeInterval(endDateInterval)
+        case .Scheduled:
+            
+            let startDateInterval = TimeInterval(60*60*24*(startDays))
+            let endDateInterval = TimeInterval(60*60*24*(endDays)-1)
+            
+            startDate = date.addingTimeInterval(startDateInterval)
+            endDate = date.addingTimeInterval(endDateInterval)
+            
+        }
+        
+        return (startDate,endDate)
     }
     
     /**

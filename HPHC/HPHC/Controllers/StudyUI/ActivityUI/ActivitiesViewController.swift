@@ -848,7 +848,7 @@ extension ActivitiesViewController: UITableViewDelegate{
             if activity.currentRun != nil {
                 if activity.userParticipationStatus != nil {
                     let activityRunParticipationStatus = activity.userParticipationStatus
-                    if activityRunParticipationStatus?.status == .yetToJoin || activityRunParticipationStatus?.status == .inProgress
+                    if activityRunParticipationStatus?.status == .yetToJoin || activityRunParticipationStatus?.status == .inProgress || activityRunParticipationStatus?.status == .completed
                         
                     {
                         Study.updateCurrentActivity(activity: activities[indexPath.row])
@@ -1151,10 +1151,17 @@ extension ActivitiesViewController: ORKTaskViewControllerDelegate{
             
             if reason == ORKTaskViewControllerFinishReason.completed {
                 ActivityBuilder.currentActivityBuilder.actvityResult?.initWithORKTaskResult(taskResult: taskViewController.result)
-                print("\(ActivityBuilder.currentActivityBuilder.actvityResult?.getResultDictionary())")
+                let resposne = ActivityBuilder.currentActivityBuilder.actvityResult?.getResultDictionary()
+                print("\(ActivityBuilder.currentActivityBuilder.actvityResult?.getResultDictionary()?.preetyJSON())")
                 
+                //check if current activity is source of some to some other activity
+                let activityId = Study.currentActivity?.actvityId
+                let studyId = Study.currentStudy?.studyId
                 
+                let lifeTimeUpdated = DBHandler.updateTargetActivityAnchorDateDetail(studyId: studyId!, activityId: activityId!, response: resposne!)
+               
                 Study.currentActivity?.userStatus = .completed
+                
                 
                 
                 if ActivityBuilder.currentActivityBuilder.actvityResult?.type == ActivityType.activeTask {
@@ -1242,6 +1249,8 @@ extension ActivitiesViewController: ORKTaskViewControllerDelegate{
                         }
                     }
                 }
+                
+                
                 
                 //send response to labkey
                 LabKeyServices().processResponse(responseData:(ActivityBuilder.currentActivityBuilder.actvityResult?.getResultDictionary())! , delegate: self)

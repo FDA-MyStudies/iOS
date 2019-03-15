@@ -338,6 +338,84 @@ class ActivityTest: XCTestCase {
         XCTAssertEqual(expectedEndDate?.timeIntervalSinceReferenceDate, lifeTime.1?.timeIntervalSinceReferenceDate)
         
     }
+    
+    func testActivityLifeTimeForMonthlyFrequencyAsValue() {
+        let dateValue = "2019-01-31 12:00:00"
+        
+        let schedule:[String:Any] = [
+            "startTime": "",
+            "endTime": "",
+            "anchorDate": [
+                "sourceType": "EnrollmentDate",
+                "sourceActivityId": "anct",
+                "sourceKey": "anc",
+                "start": [
+                    "anchorDays": 0,
+                    "time": "13:00:00"
+                ],
+                "end": [
+                    "anchorDays": 0,
+                    "repeatInterval":1,
+                    "time": "13:00:00"
+                ]
+            ]
+        ]
+        
+        activity.setActivityAvailability(schedule["anchorDate"] as! [String : Any])
+        
+        let date = Utilities.findDateFromString(dateString: dateValue)
+        activity.anchorDate?.anchorDateValue = date
+        let frequency:Frequency = Frequency.Monthly
+        
+        let expectedStartDate = Utilities.findDateFromString(dateString: "2019-01-31 12:00:00")
+        let expectedEndDate = Utilities.findDateFromString(dateString: "2019-02-28 11:59:59")
+        
+        let lifeTime = activity.updateLifeTime(activity.anchorDate!, frequency: frequency)
+        XCTAssertNotNil(lifeTime.0)
+        XCTAssertNotNil(lifeTime.1)
+        XCTAssertEqual(expectedStartDate?.timeIntervalSinceReferenceDate, lifeTime.0?.timeIntervalSinceReferenceDate)
+        XCTAssertEqual(expectedEndDate?.timeIntervalSinceReferenceDate, lifeTime.1?.timeIntervalSinceReferenceDate)
+        
+    }
+    
+    func testActivityLifeTimeForScheduledFrequencyAsValue() {
+        let dateValue = "2019-01-31 12:00:00"
+        
+        let schedule:[String:Any] = [
+            "startTime": "",
+            "endTime": "",
+            "anchorDate": [
+                "sourceType": "EnrollmentDate",
+                "sourceActivityId": "anct",
+                "sourceKey": "anc",
+                "start": [
+                    "anchorDays": -10,
+                    "time": "13:00:00"
+                ],
+                "end": [
+                    "anchorDays": 10,
+                    "repeatInterval":1,
+                    "time": "13:00:00"
+                ]
+            ]
+        ]
+        
+        activity.setActivityAvailability(schedule["anchorDate"] as! [String : Any])
+        
+        let date = Utilities.findDateFromString(dateString: dateValue)
+        activity.anchorDate?.anchorDateValue = date
+        let frequency:Frequency = Frequency.Scheduled
+        
+        let expectedStartDate = Utilities.findDateFromString(dateString: "2019-01-16 12:00:00")
+        let expectedEndDate = Utilities.findDateFromString(dateString: "2019-02-10 11:59:59")
+        
+        let lifeTime = activity.updateLifeTime(activity.anchorDate!, frequency: frequency)
+        XCTAssertNotNil(lifeTime.0)
+        XCTAssertNotNil(lifeTime.1)
+        XCTAssertEqual(expectedStartDate?.timeIntervalSinceReferenceDate, lifeTime.0?.timeIntervalSinceReferenceDate)
+        XCTAssertEqual(expectedEndDate?.timeIntervalSinceReferenceDate, lifeTime.1?.timeIntervalSinceReferenceDate)
+        
+    }
 
     func testPerformanceExample() {
         // This is an example of a performance test case.

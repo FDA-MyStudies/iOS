@@ -49,6 +49,16 @@ class DBActivity: Object {
     @objc dynamic var currentRunId: String?
     @objc dynamic var participationStatus: Int = 0
     @objc dynamic var completedRuns: Int = 0
+    
+    @objc dynamic var sourceType:String?
+    @objc dynamic var sourceActivityId:String?
+    @objc dynamic var sourceKey:String?
+    @objc dynamic var startDays:Int = 0
+    @objc dynamic var startTime:String?
+    @objc dynamic var endDays:Int = 0
+    @objc dynamic var repeatInterval:Int = 0
+    @objc dynamic var endTime:String?
+    //@objc dynamic var anchorDateValue:Date?
   
     @objc dynamic var taskSubType: String?
   

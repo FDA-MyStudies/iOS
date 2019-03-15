@@ -10,7 +10,7 @@
             "startTime": "",
             "endTime": "",
             "anchorDate": {
-                    "sourceType": "EnrollmentDate",
+                    "sourceType": "ActivityResponse",
                     "sourceActivityId": "anct",
                     "sourceKey": "anc",
                     "start": {
@@ -45,7 +45,7 @@
         },
         {
             "activityId": "anct",
-            "activityVersion": "1.0",
+            "activityVersion": "1.1",
             "title": "AnchorTest",
             "type": "questionnaire",
             "startTime": "2019-03-12T00:00:00.000-0700",

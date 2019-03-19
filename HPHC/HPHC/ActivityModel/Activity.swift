@@ -330,8 +330,20 @@ class Activity {
             self.anchorDate?.anchorDateValue = enrollmentDate
             let lifeTime = self.updateLifeTime(self.anchorDate!, frequency: self.frequencyType)
            
-            self.startDate = lifeTime.0
-            self.endDate = lifeTime.1
+            //update start date
+            var startDateString =  Utilities.formatterShort?.string(from: lifeTime.0!)
+            let startTime =  (self.anchorDate?.startTime == nil) ? "00:00:00" : (self.anchorDate?.startTime)!
+            startDateString = (startDateString ?? "") + " " + startTime
+            let startdate = Utilities.findDateFromString(dateString: startDateString ?? "")
+            
+            //update end date
+            var endDateString =  Utilities.formatterShort?.string(from: lifeTime.1!)
+            let endTime =  (self.anchorDate?.endTime == nil) ? "00:00:00" : (self.anchorDate?.endTime)!
+            endDateString = (endDateString ?? "") + " " + endTime
+            let endDate = Utilities.findDateFromString(dateString: endDateString ?? "")
+            
+            self.startDate = startdate
+            self.endDate = endDate
         }
         
     }

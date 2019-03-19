@@ -369,6 +369,27 @@ class Utilities: NSObject {
         }
     }
     
+    public static var _formatterShort: DateFormatter?
+    public static var formatterShort: DateFormatter! {
+        
+        get{
+            
+            if let f = _formatterShort {
+                return f
+            } else {
+                let formatter = DateFormatter()
+                formatter.dateFormat = "yyyy-MM-dd"
+                //formatter.dateStyle = .short
+                formatter.timeZone = TimeZone.current // TimeZone.init(abbreviation:"IST")
+                _formatterShort = formatter
+                return formatter
+            }
+        }
+        set(newValue){
+            _formatterShort = newValue
+        }
+    }
+    
     /* Method to get DateFromString for default dateFormatter
      @dateString:a date String of format "yyyy-MM-dd'T'HH:mm:ssZ"
      returns date for the specified dateString in same format

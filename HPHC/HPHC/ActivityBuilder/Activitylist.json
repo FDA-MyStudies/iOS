@@ -64,8 +64,22 @@
             "activityVersion": "1.0",
             "title": "Baby Kick Recorder",
             "type": "task",
-            "startTime": "2019-02-20T05:30:00.000-0800",
-            "endTime": "2019-03-21T23:59:59.000-0700",
+            "startTime": "",
+            "endTime": "",
+            "anchorDate": {
+                "sourceType": "EnrollmentDate",
+                "sourceActivityId": "",
+                "sourceKey": "",
+                "start": {
+                    "anchorDays": 10,
+                    "time": "05:30:00"
+                },
+                "end": {
+                    "anchorDays": 20,
+                    "repeatInterval": 5,
+                    "time": "23:59:59"
+                }
+            },
             "branching": false,
             "lastModified": "2019-02-19T02:26:00.000-0800",
             "state": "active",

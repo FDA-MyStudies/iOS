@@ -1152,7 +1152,7 @@ extension ActivitiesViewController: ORKTaskViewControllerDelegate{
             if reason == ORKTaskViewControllerFinishReason.completed {
                 ActivityBuilder.currentActivityBuilder.actvityResult?.initWithORKTaskResult(taskResult: taskViewController.result)
                 let resposne = ActivityBuilder.currentActivityBuilder.actvityResult?.getResultDictionary()
-                print("\(ActivityBuilder.currentActivityBuilder.actvityResult?.getResultDictionary()?.preetyJSON())")
+                //print("\(ActivityBuilder.currentActivityBuilder.actvityResult?.getResultDictionary()?.preetyJSON())")
                 
                 //check if current activity is source of some to some other activity
                 let activityId = Study.currentActivity?.actvityId

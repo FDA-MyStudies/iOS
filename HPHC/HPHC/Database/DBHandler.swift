@@ -670,6 +670,8 @@ class DBHandler: NSObject {
         let realm = DBHandler.getRealmObject()!
         let dbActivities = realm.objects(DBActivity.self).filter({$0.sourceActivityId == activityId && $0.studyId == studyId && $0.startDate == nil})
         let dbActivity = dbActivities.last
+        
+        //Todo: handle for multiple activity.
         if dbActivity != nil {
             let results = response["results"] as! Array<Dictionary<String,Any>>
             let sourceKey = (dbActivity?.sourceKey)!
@@ -678,7 +680,7 @@ class DBHandler: NSObject {
             
             //user might have skipped
             if userInputDate != nil {
-                print(userInputDate)
+              
                 let date = Utilities.getDateFromString(dateString: userInputDate!)
                 let frequency = Frequency(rawValue: (dbActivity?.frequencyType)!)!
                 let lifeTime = DBHandler.getLifeTime(date!,
@@ -687,20 +689,51 @@ class DBHandler: NSObject {
                                                      endDays: (dbActivity?.endDays)!,
                                                      repeatInterval: (dbActivity?.repeatInterval)!)
                 
-                try? realm.write({
-                    dbActivity?.startDate = lifeTime.0
-                    dbActivity?.endDate = lifeTime.1
-                })
+                if lifeTime.0 != nil && lifeTime.1 != nil {
+                   //calcuate runs for activity
+                    let date = DBHandler.getCurrentDateWithTimeDifference()
+                    let activity = DBHandler.getActivityFromDBActivity(dbActivity!, runDate: date)
+                    activity.startDate = lifeTime.0
+                    activity.endDate = lifeTime.1
+                    Schedule().getRunsForActivity(activity: activity, handler: { (runs) in
+                        if runs.count > 0 {
+                            activity.activityRuns = runs
+                            
+                            //save overview
+                            let dbActivityRuns = List<DBActivityRun>()
+                            for activityRun in activity.activityRuns {
+                                
+                                let dbActivityRun = DBActivityRun()
+                                dbActivityRun.startDate = activityRun.startDate
+                                dbActivityRun.endDate = activityRun.endDate
+                                dbActivityRun.activityId = activity.actvityId
+                                dbActivityRun.studyId = activity.studyId
+                                dbActivityRun.runId = activityRun.runId
+                                dbActivityRun.isCompleted = activityRun.isCompleted
+                                dbActivityRuns.append(dbActivityRun)
+                            }
+                            
+                            
+                            try? realm.write({
+                                dbActivity?.activityRuns.append(objectsIn: dbActivityRuns)
+                                dbActivity?.startDate = lifeTime.0
+                                dbActivity?.endDate = lifeTime.1
+                            })
+
+                        }
+                    })
+                    
+                }
+                
                 return true
             }
             
-          
         }
        
        return false
     }
     
-    class func getLifeTime(_ date:Date,
+    private class func getLifeTime(_ date:Date,
                            frequency:Frequency,
                            startDays:Int,
                            endDays:Int,
@@ -779,6 +812,19 @@ class DBHandler: NSObject {
         let realm = DBHandler.getRealmObject()!
         //let dbActivities = realm.objects(DBActivity.self).filter("studyId == %@",studyId)
         let dbActivities = realm.objects(DBActivity.self).filter({$0.studyId == studyId && $0.startDate != nil})
+    
+        let date = DBHandler.getCurrentDateWithTimeDifference()
+        var activities: Array<Activity> = []
+        for dbActivity in dbActivities {
+            
+            let activity = DBHandler.getActivityFromDBActivity(dbActivity,runDate: date)
+            activities.append(activity)
+        }
+        completionHandler(activities)
+    }
+    
+    private class func getCurrentDateWithTimeDifference() -> Date {
+        
         var date = Date().utcDate()
         
         let difference = UserDefaults.standard.value(forKey: "offset") as? Int
@@ -786,111 +832,111 @@ class DBHandler: NSObject {
             date = date.addingTimeInterval(TimeInterval(difference!))
         }
         
-        var activities: Array<Activity> = []
-        for dbActivity in dbActivities {
-            
-            //create activity instance
-            let activity = Activity()
-            activity.actvityId  = dbActivity.actvityId
-            activity.studyId    = dbActivity.studyId
-            activity.name       = dbActivity.name
-            activity.startDate  = dbActivity.startDate
-            activity.endDate    = dbActivity.endDate
-            activity.type       = ActivityType(rawValue: dbActivity.type!)
-            activity.frequencyType = Frequency(rawValue: dbActivity.frequencyType!)!
-            activity.totalRuns = dbActivity.activityRuns.count
-            activity.version = dbActivity.version
-            activity.branching = dbActivity.branching
-            activity.state = dbActivity.state
-            activity.taskSubType = dbActivity.taskSubType
-            do {
-                let frequencyRuns = try JSONSerialization.jsonObject(with: dbActivity.frequencyRunsData!, options: []) as! [String: Any]
-                activity.frequencyRuns = frequencyRuns["data"] as! Array<Dictionary<String, Any>>?
-                
-            }catch {
-            }
-            
-            if activity.totalRuns != 0 {
-                
-                //create activity run
-                var runs: Array<ActivityRun> = []
-                for dbRun in dbActivity.activityRuns {
-                    let run = ActivityRun()
-                    run .activityId = dbRun.activityId
-                    run.complitionDate = dbRun.complitionDate
-                    run.startDate = dbRun.startDate
-                    run.endDate = dbRun.endDate
-                    run.runId = dbRun.runId
-                    run.studyId = dbRun.studyId
-                    run.isCompleted = dbRun.isCompleted
-                    run.restortionData = dbRun.restortionData
-                    runs.append(run)
-                }
-                activity.activityRuns = runs
-                
-                var runsBeforeToday: Array<ActivityRun>! = []
-                var run: ActivityRun!
-                
-                if activity.frequencyType == Frequency.One_Time && activity.endDate == nil {
-                    run = runs.last
-                    
-                }else {
-                    
-                    runsBeforeToday = runs.filter({$0.endDate <= date})
-                    run = runs.filter({$0.startDate <= date && $0.endDate > date}).first //current run
-                }
-                
-                let completedRuns = runs.filter({$0.isCompleted == true})
-                activity.compeltedRuns = completedRuns.count
-                activity.currentRunId =  (run != nil) ? (run?.runId)!: runsBeforeToday.count
-                activity.currentRun = run
-                activity.compeltedRuns = dbActivity.completedRuns
-                
-                let userStatus = UserActivityStatus()
-                userStatus.activityId = dbActivity.actvityId
-                userStatus.activityRunId = String(activity.currentRunId)
-                userStatus.studyId = dbActivity.studyId
-                
-                if String(activity.currentRunId) == dbActivity.currentRunId {
-                    userStatus.status = UserActivityStatus.ActivityStatus(rawValue: dbActivity.participationStatus)!
-                }
-                
-                userStatus.compeltedRuns = activity.compeltedRuns
-                userStatus.incompletedRuns = activity.incompletedRuns
-                userStatus.totalRuns = activity.totalRuns
-                
-                let incompleteRuns = activity.currentRunId - activity.compeltedRuns
-                activity.incompletedRuns = (incompleteRuns < 0) ? 0 :incompleteRuns
-                
-                if activity.currentRun == nil {
-                    userStatus.status = UserActivityStatus.ActivityStatus.abandoned
-                  
-                }else {
-                    
-                    if userStatus.status != UserActivityStatus.ActivityStatus.completed {
-
-                        var incompleteRuns = activity.currentRunId - activity.compeltedRuns
-                        incompleteRuns -= 1
-                        activity.incompletedRuns = (incompleteRuns < 0) ? 0 :incompleteRuns
-                    }
-                   
-                }
-                activity.userParticipationStatus = userStatus
-                
-                //append to user class participatesStudies also
-                let activityStatus = User.currentUser.participatedActivites.filter({$0.activityId == activity.actvityId && $0.studyId == activity.studyId}).first
-                let index = User.currentUser.participatedActivites.index(where: {$0.activityId == activity.actvityId && $0.studyId == activity.studyId })
-                if activityStatus != nil {
-                    User.currentUser.participatedActivites[index!] = userStatus
-                    
-                }else {
-                    User.currentUser.participatedActivites.append(userStatus)
-                }
-            }
+        return date
+    }
+    
+    private class func getActivityFromDBActivity(_ dbActivity:DBActivity, runDate date:Date) -> Activity {
         
-            activities.append(activity)
+        //create activity instance
+        let activity = Activity()
+        activity.actvityId  = dbActivity.actvityId
+        activity.studyId    = dbActivity.studyId
+        activity.name       = dbActivity.name
+        activity.startDate  = dbActivity.startDate
+        activity.endDate    = dbActivity.endDate
+        activity.type       = ActivityType(rawValue: dbActivity.type!)
+        activity.frequencyType = Frequency(rawValue: dbActivity.frequencyType!)!
+        activity.totalRuns = dbActivity.activityRuns.count
+        activity.version = dbActivity.version
+        activity.branching = dbActivity.branching
+        activity.state = dbActivity.state
+        activity.taskSubType = dbActivity.taskSubType
+        do {
+            let frequencyRuns = try JSONSerialization.jsonObject(with: dbActivity.frequencyRunsData!, options: []) as! [String: Any]
+            activity.frequencyRuns = frequencyRuns["data"] as! Array<Dictionary<String, Any>>?
+            
+        }catch {
         }
-        completionHandler(activities)
+        
+        if activity.totalRuns != 0 {
+            
+            //create activity run
+            var runs: Array<ActivityRun> = []
+            for dbRun in dbActivity.activityRuns {
+                let run = ActivityRun()
+                run .activityId = dbRun.activityId
+                run.complitionDate = dbRun.complitionDate
+                run.startDate = dbRun.startDate
+                run.endDate = dbRun.endDate
+                run.runId = dbRun.runId
+                run.studyId = dbRun.studyId
+                run.isCompleted = dbRun.isCompleted
+                run.restortionData = dbRun.restortionData
+                runs.append(run)
+            }
+            activity.activityRuns = runs
+            
+            var runsBeforeToday: Array<ActivityRun>! = []
+            var run: ActivityRun!
+            
+            if activity.frequencyType == Frequency.One_Time && activity.endDate == nil {
+                run = runs.last
+                
+            }else {
+                
+                runsBeforeToday = runs.filter({$0.endDate <= date})
+                run = runs.filter({$0.startDate <= date && $0.endDate > date}).first //current run
+            }
+            
+            let completedRuns = runs.filter({$0.isCompleted == true})
+            activity.compeltedRuns = completedRuns.count
+            activity.currentRunId =  (run != nil) ? (run?.runId)!: runsBeforeToday.count
+            activity.currentRun = run
+            activity.compeltedRuns = dbActivity.completedRuns
+            
+            let userStatus = UserActivityStatus()
+            userStatus.activityId = dbActivity.actvityId
+            userStatus.activityRunId = String(activity.currentRunId)
+            userStatus.studyId = dbActivity.studyId
+            
+            if String(activity.currentRunId) == dbActivity.currentRunId {
+                userStatus.status = UserActivityStatus.ActivityStatus(rawValue: dbActivity.participationStatus)!
+            }
+            
+            userStatus.compeltedRuns = activity.compeltedRuns
+            userStatus.incompletedRuns = activity.incompletedRuns
+            userStatus.totalRuns = activity.totalRuns
+            
+            let incompleteRuns = activity.currentRunId - activity.compeltedRuns
+            activity.incompletedRuns = (incompleteRuns < 0) ? 0 :incompleteRuns
+            
+            if activity.currentRun == nil {
+                userStatus.status = UserActivityStatus.ActivityStatus.abandoned
+                
+            }else {
+                
+                if userStatus.status != UserActivityStatus.ActivityStatus.completed {
+                    
+                    var incompleteRuns = activity.currentRunId - activity.compeltedRuns
+                    incompleteRuns -= 1
+                    activity.incompletedRuns = (incompleteRuns < 0) ? 0 :incompleteRuns
+                }
+                
+            }
+            activity.userParticipationStatus = userStatus
+            
+            //append to user class participatesStudies also
+            let activityStatus = User.currentUser.participatedActivites.filter({$0.activityId == activity.actvityId && $0.studyId == activity.studyId}).first
+            let index = User.currentUser.participatedActivites.index(where: {$0.activityId == activity.actvityId && $0.studyId == activity.studyId })
+            if activityStatus != nil {
+                User.currentUser.participatedActivites[index!] = userStatus
+                
+            }else {
+                User.currentUser.participatedActivites.append(userStatus)
+            }
+        }
+        
+        return activity
     }
     
     /**

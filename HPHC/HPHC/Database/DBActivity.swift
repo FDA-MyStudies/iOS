@@ -44,7 +44,9 @@ class DBActivity: Object {
     
     
     @objc dynamic var frequencyRunsData: Data?
+    @objc dynamic var anchorRunsData: Data?
     @objc dynamic var frequencyType: String?
+    @objc dynamic var schedulingType:String?
     
     @objc dynamic var currentRunId: String?
     @objc dynamic var participationStatus: Int = 0

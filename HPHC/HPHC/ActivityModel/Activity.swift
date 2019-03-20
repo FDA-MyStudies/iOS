@@ -42,6 +42,7 @@ let kActivityConfiguration = "configuration"
 
 let kActivityFrequency = "frequency"
 let kActivityFrequencyRuns = "runs"
+let kActivityManualAnchorRuns = "anchorRuns"
 let kActivityFrequencyType = "type"
 
 let kActivityStartTime = "startTime"
@@ -97,6 +98,11 @@ enum ActivityState: String {
     case deleted
 }
 
+enum ActivityScheduleType: String {
+    case regular = "Regular"
+    case anchorDate = "AnchorDate"
+}
+
 /**
  Model Activity represents a Questionery or Active Task
 */
@@ -123,6 +129,7 @@ class Activity {
     var activitySteps: Array<ActivityStep>? = []
     
     var frequencyRuns: Array<Dictionary<String, Any>>? = []
+    var anchorRuns: Array<Dictionary<String, Any>>? = [] // scheduled mannuly for anchor date
     var frequencyType: Frequency = .One_Time
     
     var result: ActivityResult?
@@ -137,6 +144,7 @@ class Activity {
     var userParticipationStatus: UserActivityStatus! = nil
     var taskSubType: String? = "" //used for active tasks
     var anchorDate:AnchorDate? = nil
+    var schedulingType:ActivityScheduleType = .regular
     
      //Default Initializer
     init() {
@@ -207,7 +215,10 @@ class Activity {
             if Utilities.isValidValue(someObject: infoDict[kActivityStartTime] as AnyObject) {
                  self.startDate =  Utilities.getDateFromStringWithOutTimezone(dateString: (infoDict[kActivityStartTime] as? String)!)
             }
-            
+            if Utilities.isValidValue(someObject: infoDict["schedulingType"] as AnyObject) {
+                let scheduleValue = infoDict["schedulingType"] as? String ?? "Regular"
+                self.schedulingType = ActivityScheduleType(rawValue: scheduleValue)! 
+            }
             if Utilities.isValidValue(someObject: infoDict[kActivityEndTime] as AnyObject ) {
                 self.endDate =  Utilities.getDateFromStringWithOutTimezone(dateString: (infoDict[kActivityEndTime] as? String)!)
             }
@@ -218,6 +229,9 @@ class Activity {
                 
                 if Utilities.isValidObject(someObject: frequencyDict[kActivityFrequencyRuns] as AnyObject ) {
                     self.frequencyRuns =  frequencyDict[kActivityFrequencyRuns] as? Array<Dictionary<String,Any>>
+                }
+                if Utilities.isValidObject(someObject: frequencyDict[kActivityManualAnchorRuns] as AnyObject ) {
+                    self.anchorRuns =  frequencyDict[kActivityManualAnchorRuns] as? Array<Dictionary<String,Any>>
                 }
                 
                 if Utilities.isValidValue(someObject: frequencyDict[kActivityFrequencyType] as AnyObject ){
@@ -244,10 +258,10 @@ class Activity {
           if Utilities.isValidValue(someObject: infoDict[kActivityTaskSubType] as AnyObject ) {
             self.taskSubType =  (infoDict[kActivityTaskSubType] as? String)!
           }
-          
-            if self.startDate != nil {
+           
+        if self.startDate != nil {
                 self.calculateActivityRuns(studyId: self.studyId!)
-            }
+        }
         } else {
             Logger.sharedInstance.debug("infoDict is null:\(infoDict)")
         }

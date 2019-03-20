@@ -325,23 +325,57 @@ class Schedule{
     //ScheduledRuns Setter
     func setScheduledRuns(){
         
-        scheduledTimings = activity.frequencyRuns!
         
         let offset = UserDefaults.standard.value(forKey: "offset") as? Int
         let activityEndTime = endTime?.addingTimeInterval(TimeInterval(offset!))
-        
         var runId = 1
+        
+        let schedulingType = activity.schedulingType
+        if schedulingType == .anchorDate {
+            
+        }
+        else {
+            scheduledTimings = activity.frequencyRuns!
+        }
+        
+        //scheduledTimings = activity.frequencyRuns!
+        
+       
         for timing in scheduledTimings {
             
-            //run start time creation
-            let scheduledStartTime = timing[kScheduleStartTime]
-            let runStartDate =  Utilities.getDateFromStringWithOutTimezone(dateString: scheduledStartTime! as! String)
             
-            //run end time creation
-            let scheduledEndTime = timing[kScheduleEndTime]
-            let runEndDate = Utilities.getDateFromStringWithOutTimezone(dateString: scheduledEndTime! as! String)
+            var runStartDate:Date?
+            var runEndDate:Date?
             
-            //print("start date \(runStartDate!) , end date \(runEndDate!)")
+            if schedulingType == .anchorDate {
+                let startDays = timing["startDays"] as? Int ?? 0
+                let endDays = timing["endDays"] as? Int ?? 0
+                let time = timing["time"] as? String ?? "00:00:00"
+                
+                let anchorDate = activity.anchorDate?.anchorDateValue
+                
+                let startDateInterval = TimeInterval(60*60*24*(startDays))
+                let endDateInterval = TimeInterval(60*60*24*(endDays)-1)
+                
+                runStartDate = anchorDate?.addingTimeInterval(startDateInterval)
+                runEndDate = anchorDate?.addingTimeInterval(endDateInterval)
+                
+                runStartDate = getDateAfterAddingTimeComponent(time, date: runStartDate!)
+                runEndDate = getDateAfterAddingTimeComponent(time, date: runEndDate!)
+                
+            }
+            else {
+                
+                //run start time creation
+                let scheduledStartTime = timing[kScheduleStartTime]
+                 runStartDate =  Utilities.getDateFromStringWithOutTimezone(dateString: scheduledStartTime! as! String)
+                
+                //run end time creation
+                let scheduledEndTime = timing[kScheduleEndTime]
+                 runEndDate = Utilities.getDateFromStringWithOutTimezone(dateString: scheduledEndTime! as! String)
+            }
+            
+            print("start date \(runStartDate!) , end date \(runEndDate!)")
             
             let offset = UserDefaults.standard.value(forKey: "offset") as? Int
             let updatedStartTime = runStartDate?.addingTimeInterval(TimeInterval(offset!))
@@ -361,6 +395,22 @@ class Schedule{
                 }
             }
         }
+    }
+    
+    func getDateAfterAddingTimeComponent(_ time:String, date: Date) -> Date? {
+        
+        var datetime:Date! = date
+        let calendar = Calendar.currentUTC()
+        let hoursAndMins = time.components(separatedBy: ":")
+        let hour = Int((hoursAndMins[0]))
+        let minutes = Int((hoursAndMins[1]))
+        let second = Int((hoursAndMins[2]))
+        
+        datetime =  calendar.date(byAdding: .hour, value: hour!, to: datetime)
+        datetime = calendar.date(byAdding: .minute, value: minutes!, to: datetime)
+        datetime = calendar.date(byAdding: .second, value: second!, to: datetime)
+        
+        return datetime
     }
     
     // MARK:Utility Methods

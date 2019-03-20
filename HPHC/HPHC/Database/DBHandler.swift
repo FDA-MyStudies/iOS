@@ -606,6 +606,7 @@ class DBHandler: NSObject {
         
         dbActivity.branching = activity.branching!
         dbActivity.frequencyType = activity.frequencyType.rawValue
+        dbActivity.schedulingType = activity.schedulingType.rawValue
         dbActivity.currentRunId = activity.userParticipationStatus.activityRunId
         dbActivity.participationStatus = activity.userParticipationStatus.status.rawValue
         dbActivity.completedRuns = activity.userParticipationStatus.compeltedRuns
@@ -619,6 +620,16 @@ class DBHandler: NSObject {
             
         }catch {
         }
+        
+        do {
+            let json = ["data": activity.anchorRuns]
+            let data =  try JSONSerialization.data(withJSONObject: json, options: JSONSerialization.WritingOptions.prettyPrinted)
+            dbActivity.anchorRunsData = data
+            
+        }catch {
+        }
+        
+        
         
         //save overview
         let dbActivityRuns = List<DBActivityRun>()
@@ -689,12 +700,25 @@ class DBHandler: NSObject {
                                                      endDays: (dbActivity?.endDays)!,
                                                      repeatInterval: (dbActivity?.repeatInterval)!)
                 
-                if lifeTime.0 != nil && lifeTime.1 != nil {
+                
+                //update start date
+                var startDateString =  Utilities.formatterShort?.string(from: lifeTime.0!)
+                let startTime =  (dbActivity?.startTime == nil) ? "00:00:00" : (dbActivity?.startTime)!
+                startDateString = (startDateString ?? "") + " " + startTime
+                let startdate = Utilities.findDateFromString(dateString: startDateString ?? "")
+                
+                //update end date
+                var endDateString =  Utilities.formatterShort?.string(from: lifeTime.1!)
+                let endTime =  (dbActivity?.endTime == nil) ? "23:59:59" : (dbActivity?.endTime)!
+                endDateString = (endDateString ?? "") + " " + endTime
+                let endDate = Utilities.findDateFromString(dateString: endDateString ?? "")
+                
+                if startdate != nil && endDate != nil {
                    //calcuate runs for activity
                     let date = DBHandler.getCurrentDateWithTimeDifference()
                     let activity = DBHandler.getActivityFromDBActivity(dbActivity!, runDate: date)
-                    activity.startDate = lifeTime.0
-                    activity.endDate = lifeTime.1
+                    activity.startDate = startdate
+                    activity.endDate = endDate
                     Schedule().getRunsForActivity(activity: activity, handler: { (runs) in
                         if runs.count > 0 {
                             activity.activityRuns = runs
@@ -716,8 +740,8 @@ class DBHandler: NSObject {
                             
                             try? realm.write({
                                 dbActivity?.activityRuns.append(objectsIn: dbActivityRuns)
-                                dbActivity?.startDate = lifeTime.0
-                                dbActivity?.endDate = lifeTime.1
+                                dbActivity?.startDate = startdate
+                                dbActivity?.endDate = endDate
                             })
 
                         }
@@ -846,6 +870,7 @@ class DBHandler: NSObject {
         activity.endDate    = dbActivity.endDate
         activity.type       = ActivityType(rawValue: dbActivity.type!)
         activity.frequencyType = Frequency(rawValue: dbActivity.frequencyType!)!
+        activity.schedulingType = ActivityScheduleType(rawValue: dbActivity.schedulingType!)!
         activity.totalRuns = dbActivity.activityRuns.count
         activity.version = dbActivity.version
         activity.branching = dbActivity.branching
@@ -854,6 +879,13 @@ class DBHandler: NSObject {
         do {
             let frequencyRuns = try JSONSerialization.jsonObject(with: dbActivity.frequencyRunsData!, options: []) as! [String: Any]
             activity.frequencyRuns = frequencyRuns["data"] as! Array<Dictionary<String, Any>>?
+            
+        }catch {
+        }
+        
+        do {
+            let frequencyRuns = try JSONSerialization.jsonObject(with: dbActivity.frequencyRunsData!, options: []) as! [String: Any]
+            activity.anchorRuns = frequencyRuns["data"] as! Array<Dictionary<String, Any>>?
             
         }catch {
         }

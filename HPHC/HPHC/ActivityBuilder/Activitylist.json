@@ -144,8 +144,23 @@
             "activityVersion": "1.1",
             "title": "Recent Short Term Illnesses",
             "type": "questionnaire",
-            "startTime": "2019-02-23T00:00:00.000-0800",
-            "endTime": "2019-03-30T17:00:00.000-0700",
+            "startTime": "",
+            "endTime": "",
+            "schedulingType": "AnchorDate",
+            "anchorDate": {
+                "sourceType": "EnrollmentDate",
+                "sourceActivityId": "",
+                "sourceKey": "",
+                "start": {
+                    "anchorDays": 10,
+                    "time": "05:30:00"
+                },
+                "end": {
+                    "anchorDays": 20,
+                    "repeatInterval": 5,
+                    "time": "23:59:59"
+                }
+            },
             "branching": true,
             "lastModified": "2019-02-27T01:41:30.000-0800",
             "state": "active",
@@ -165,7 +180,13 @@
                         "startTime": "2019-03-12T10:30:00.000-0700",
                         "endTime": "2019-03-30T10:30:00.000-0700"
                     }
-                ]
+                ],
+                "anchorRuns": [{
+                    "startDays": 10,
+                    "endDays": 20,
+                    "time": "13:00:00"
+                }]
+
             }
         },
         {

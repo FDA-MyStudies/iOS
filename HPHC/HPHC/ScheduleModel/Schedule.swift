@@ -332,7 +332,7 @@ class Schedule{
         
         let schedulingType = activity.schedulingType
         if schedulingType == .anchorDate {
-            
+            scheduledTimings = activity.anchorRuns!
         }
         else {
             scheduledTimings = activity.frequencyRuns!

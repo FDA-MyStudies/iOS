@@ -103,6 +103,11 @@ enum ActivityScheduleType: String {
     case anchorDate = "AnchorDate"
 }
 
+enum AnchorDateSourceType: String {
+    case enrollmentDate = "EnrollmentDate"
+    case activityResponse = "ActivityResponse"
+}
+
 /**
  Model Activity represents a Questionery or Active Task
 */

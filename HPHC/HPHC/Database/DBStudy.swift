@@ -159,21 +159,28 @@ class DBStatisticsData: Object {
 
 class DBResources:Object {
     
-   @objc dynamic  var studyId: String?
-   @objc dynamic  var level: String?
-   @objc dynamic  var key: String?
-   @objc dynamic  var type: String?
-   @objc dynamic  var audience: String?
-   @objc dynamic  var resourceId: String?
-   @objc dynamic  var notificationMessage: String?
-   @objc dynamic  var startDate: Date?
-   @objc dynamic  var endDate: Date?
-   @objc dynamic  var anchorDateStartDays: Int = 0
-   @objc dynamic  var anchorDateEndDays: Int = 0
-   @objc dynamic  var title: String?
-   @objc dynamic  var serverUrl: String?
-   @objc dynamic  var localPath: String?
-   @objc dynamic  var povAvailable: Bool = false
+    @objc dynamic  var studyId: String?
+    @objc dynamic  var level: String?
+    @objc dynamic  var key: String?
+    @objc dynamic  var type: String?
+    @objc dynamic  var audience: String?
+    @objc dynamic  var resourceId: String?
+    @objc dynamic  var notificationMessage: String?
+    @objc dynamic  var startDate: Date?
+    @objc dynamic  var endDate: Date?
+    @objc dynamic  var anchorDateStartDays: Int = 0
+    @objc dynamic  var anchorDateEndDays: Int = 0
+    @objc dynamic  var title: String?
+    @objc dynamic  var serverUrl: String?
+    @objc dynamic  var localPath: String?
+    @objc dynamic  var povAvailable: Bool = false
+    
+    @objc dynamic  var availabilityType: String?
+    @objc dynamic  var sourceType: String?
+    @objc dynamic  var sourceActivityId: String?
+    @objc dynamic  var sourceKey: String?
+    @objc dynamic  var startTime: String?
+    @objc dynamic  var endTime: String?
     
     override static func primaryKey() -> String? {
         return "resourceId"

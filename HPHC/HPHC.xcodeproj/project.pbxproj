@@ -148,6 +148,7 @@
 		782AF87C221D247D000025CF /* StudyTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 782AF87B221D247D000025CF /* StudyTest.swift */; };
 		7878B311221574D80052FC23 /* StandaloneStudy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7878B30E221574D80052FC23 /* StandaloneStudy.swift */; };
 		7878B31D2216C6E20052FC23 /* HPHCTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7878B31C2216C6E20052FC23 /* HPHCTests.swift */; };
+		89831393224399FC0000BEB5 /* ResourceList.json in Resources */ = {isa = PBXBuildFile; fileRef = 89831392224399FC0000BEB5 /* ResourceList.json */; };
 		940577A81E767AC60043215C /* ChangePasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 940577A71E767AC60043215C /* ChangePasswordViewController.swift */; };
 		940577AC1E767C8D0043215C /* ChangePasswordData.plist in Resources */ = {isa = PBXBuildFile; fileRef = 940577AB1E767C8D0043215C /* ChangePasswordData.plist */; };
 		941909B51E52FA9B001B01C5 /* Study.swift in Sources */ = {isa = PBXBuildFile; fileRef = 941909B41E52FA9B001B01C5 /* Study.swift */; };
@@ -422,6 +423,7 @@
 		7878B31A2216C6E10052FC23 /* HPHCTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HPHCTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7878B31C2216C6E20052FC23 /* HPHCTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HPHCTests.swift; sourceTree = "<group>"; };
 		7878B31E2216C6E20052FC23 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		89831392224399FC0000BEB5 /* ResourceList.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = ResourceList.json; sourceTree = "<group>"; };
 		940577A71E767AC60043215C /* ChangePasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChangePasswordViewController.swift; sourceTree = "<group>"; };
 		940577AB1E767C8D0043215C /* ChangePasswordData.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = ChangePasswordData.plist; sourceTree = "<group>"; };
 		941909B41E52FA9B001B01C5 /* Study.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Study.swift; sourceTree = "<group>"; };
@@ -683,6 +685,7 @@
 				948710261E546C2200246109 /* NotificationModule */,
 				486B511D1E6951E400B98EBC /* UIReference screens */,
 				6E9B39BC1E55DFDA0037D09D /* ActivityBuilder */,
+				8983138F224399810000BEB5 /* JsonFiles */,
 				6E7D2D591E433E8800763D4C /* AppDelegate.swift */,
 				6E7D2D5B1E433E8800763D4C /* ViewController.swift */,
 				94B3DD0A1E6EC47700327AE5 /* SplashViewController.swift */,
@@ -722,19 +725,7 @@
 		6E9B39BC1E55DFDA0037D09D /* ActivityBuilder */ = {
 			isa = PBXGroup;
 			children = (
-				6ED5B05C1FCDBD7C00925352 /* Labkey_Activity_Latest4.json */,
-				6EEB0AF91FD2811100136EAA /* Labkey_Activity_Latest3.json */,
-				6E80BC011FB04340008C9B8C /* Labkey_Activity_Latest2.json */,
-				6EAA04881FAF4C6A00214D03 /* Labkey_Activity_Latest.json */,
-				6EED31A21F1CD7B300A7AF56 /* LatestActive_1B.json */,
-				6E5F751A1EF4109500ABA308 /* Labkey_Activity11.json */,
-				6EDABCCD1EBA41EE005F3AA6 /* Labkey_Activity.json */,
-				6EF748BE1E69645700F1E89E /* LatestActive_Taskdocument.json */,
-				6EC129231E64624F00B90167 /* Acivity_Question.json */,
-				6ED9D5DA1E5B2D5100A0719D /* ActiveTask.json */,
-				6EABD0321E56FE2000623D94 /* TaskSchema.json */,
 				6E9B39BF1E55DFF10037D09D /* ActivityBuilder.swift */,
-				6EF51C9422324E3700BF8D4E /* Activitylist.json */,
 			);
 			path = ActivityBuilder;
 			sourceTree = "<group>";
@@ -1078,6 +1069,26 @@
 				6E5287B02237EB820083DF33 /* ActivityTest.swift */,
 			);
 			path = HPHCTests;
+			sourceTree = "<group>";
+		};
+		8983138F224399810000BEB5 /* JsonFiles */ = {
+			isa = PBXGroup;
+			children = (
+				6ED5B05C1FCDBD7C00925352 /* Labkey_Activity_Latest4.json */,
+				6EEB0AF91FD2811100136EAA /* Labkey_Activity_Latest3.json */,
+				6E80BC011FB04340008C9B8C /* Labkey_Activity_Latest2.json */,
+				6EAA04881FAF4C6A00214D03 /* Labkey_Activity_Latest.json */,
+				6EED31A21F1CD7B300A7AF56 /* LatestActive_1B.json */,
+				6E5F751A1EF4109500ABA308 /* Labkey_Activity11.json */,
+				6EDABCCD1EBA41EE005F3AA6 /* Labkey_Activity.json */,
+				6EF748BE1E69645700F1E89E /* LatestActive_Taskdocument.json */,
+				6EC129231E64624F00B90167 /* Acivity_Question.json */,
+				6ED9D5DA1E5B2D5100A0719D /* ActiveTask.json */,
+				6EABD0321E56FE2000623D94 /* TaskSchema.json */,
+				6EF51C9422324E3700BF8D4E /* Activitylist.json */,
+				89831392224399FC0000BEB5 /* ResourceList.json */,
+			);
+			path = JsonFiles;
 			sourceTree = "<group>";
 		};
 		941909B11E52FA78001B01C5 /* StudyModel */ = {
@@ -1518,6 +1529,7 @@
 				6EE93DCC1E93C8850027A5DC /* ResourcesUI.plist in Resources */,
 				6EBC2E811E94FB5300828CA1 /* StudyDashboard.plist in Resources */,
 				6E7D2D641E433E8800763D4C /* LaunchScreen.storyboard in Resources */,
+				89831393224399FC0000BEB5 /* ResourceList.json in Resources */,
 				48C736561EC5C83D002D000F /* study_dashboard.png in Resources */,
 				6EF748BF1E69645700F1E89E /* LatestActive_Taskdocument.json in Resources */,
 				6EAA048B1FAF4C6E00214D03 /* Labkey_Activity_Latest.json in Resources */,

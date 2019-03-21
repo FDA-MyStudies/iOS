@@ -29,6 +29,11 @@ enum ResourceLevel: String{
     case study = "study"
 }
 
+enum ResourceAvailabilityType: String {
+    case regular = "Regular"
+    case anchorDate = "AnchorDate"
+}
+
 let kResourceLevel = "level"
 let kResourceKey = "key"
 let kResourceType = "type"
@@ -57,6 +62,14 @@ class Resource {
     var anchorDateEndDays: Int?
     var title: String?
     var povAvailable: Bool = false
+    
+    //AnchorDate Values
+    var availabilityType : ResourceAvailabilityType = .regular
+    var sourceType : AnchorDateSourceType?
+    var sourceActivityId : String?
+    var sourceKey : String?
+    var startTime : String?
+    var endTime : String?
     
     /**
      Default Initializer
@@ -102,15 +115,41 @@ class Resource {
             if (Utilities.isValidObject(someObject: detail[kResourceConfigration] as AnyObject)) {
                 let configuration = detail[kResourceConfigration] as! Dictionary<String,Any>
                 self.povAvailable = true
+                
                 if (Utilities.isValidValue(someObject: (configuration["availableDate"]) as AnyObject)) {
                     self.startDate = Utilities.getDateFromStringWithFormat("YYYY-MM-dd", resultDate: configuration["availableDate"] as! String)
                 }
                 if (Utilities.isValidValue(someObject: (configuration["expiryDate"]) as AnyObject)) {
-                    self.startDate = Utilities.getDateFromStringWithFormat("YYYY-MM-dd", resultDate: configuration["expiryDate"] as! String)
+                    self.endDate = Utilities.getDateFromStringWithFormat("YYYY-MM-dd", resultDate: configuration["expiryDate"] as! String)
                 }
                 
                 self.anchorDateStartDays = configuration["startDays"] as? Int
                 self.anchorDateEndDays = configuration["endDays"] as? Int
+                
+                if (Utilities.isValidValue(someObject: (configuration["availabilityType"]) as AnyObject)){
+                    self.availabilityType =  ResourceAvailabilityType(rawValue: configuration["availabilityType"] as? String ?? "Regular")!
+                }
+                
+                if (Utilities.isValidValue(someObject: (configuration["sourceType"]) as AnyObject)){
+                    self.sourceType =  AnchorDateSourceType(rawValue: configuration["sourceType"] as? String ?? "EnrollmentDate")!
+                }
+                
+                if (Utilities.isValidValue(someObject: (configuration["sourceActivityId"]) as AnyObject)){
+                    self.sourceActivityId = configuration["sourceActivityId"] as? String
+                }
+                
+                if (Utilities.isValidValue(someObject: (configuration["sourceKey"]) as AnyObject)){
+                    self.sourceKey = configuration["sourceKey"] as? String
+                }
+                if (Utilities.isValidValue(someObject: (configuration["startTime"]) as AnyObject)){
+                    self.startTime = configuration["startTime"] as? String
+                }
+                if (Utilities.isValidValue(someObject: (configuration["endTime"]) as AnyObject)){
+                    self.endTime = configuration["endTime"] as? String
+                }
+                
+             
+                
                 
             } else {
                 self.povAvailable = false

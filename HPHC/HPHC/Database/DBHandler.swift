@@ -1638,8 +1638,7 @@ class DBHandler: NSObject {
                
                 realm.delete(dbResource!)
             })
-            
-            
+     
         }
 
         if dbResourcesList.count > 0 {
@@ -1670,6 +1669,13 @@ class DBHandler: NSObject {
             dbResource.anchorDateStartDays = resource.anchorDateStartDays!
         }
         
+        dbResource.availabilityType = resource.availabilityType.rawValue
+        dbResource.sourceType = resource.sourceType?.rawValue
+        dbResource.sourceActivityId = resource.sourceActivityId
+        dbResource.sourceKey = resource.sourceKey
+        dbResource.startTime = resource.startTime
+        dbResource.endTime = resource.endTime
+        
         return dbResource
     }
     
@@ -1679,7 +1685,7 @@ class DBHandler: NSObject {
     class func loadResourcesForStudy(studyId: String,completionHandler: @escaping (Array<Resource>) -> ()) {
         
         let realm = DBHandler.getRealmObject()!
-        let dbResourceList = realm.objects(DBResources.self).filter("studyId == %@",studyId)
+        let dbResourceList = realm.objects(DBResources.self).filter({$0.studyId == studyId && ($0.povAvailable == false || $0.startDate != nil)})
         
         var resourceList: Array<Resource> = []
         for dbResource in dbResourceList {
@@ -1696,6 +1702,13 @@ class DBHandler: NSObject {
             resource.povAvailable = dbResource.povAvailable
             resource.notificationMessage = dbResource.notificationMessage
             resource.level = ResourceLevel(rawValue: dbResource.level!)
+            
+            resource.availabilityType = ResourceAvailabilityType(rawValue:dbResource.availabilityType!)!
+            resource.sourceType = (dbResource.sourceType != nil) ? AnchorDateSourceType(rawValue:dbResource.sourceType!)! : nil
+            resource.sourceActivityId = dbResource.sourceActivityId
+            resource.sourceKey = dbResource.sourceKey
+            resource.startTime = dbResource.startTime
+            resource.endTime = dbResource.endTime
             
             let file = File()
             file.link = dbResource.serverUrl

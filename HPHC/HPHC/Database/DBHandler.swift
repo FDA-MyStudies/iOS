@@ -680,81 +680,80 @@ class DBHandler: NSObject {
         
         let realm = DBHandler.getRealmObject()!
         let dbActivities = realm.objects(DBActivity.self).filter({$0.sourceActivityId == activityId && $0.studyId == studyId && $0.startDate == nil})
-        let dbActivity = dbActivities.last
         
-        //Todo: handle for multiple activity.
-        if dbActivity != nil {
-            let results = response["results"] as! Array<Dictionary<String,Any>>
-            let sourceKey = (dbActivity?.sourceKey)!
-            let dictionary = results.filter({$0["key"] as! String == sourceKey}).first
-            let userInputDate = dictionary?["value"] as? String
-            
-            //user might have skipped
-            if userInputDate != nil {
-              
-                let date = Utilities.getDateFromString(dateString: userInputDate!)
-                let frequency = Frequency(rawValue: (dbActivity?.frequencyType)!)!
-                let lifeTime = DBHandler.getLifeTime(date!,
-                                                     frequency:frequency,
-                                                     startDays: (dbActivity?.startDays)!,
-                                                     endDays: (dbActivity?.endDays)!,
-                                                     repeatInterval: (dbActivity?.repeatInterval)!)
-                
-                
-                //update start date
-                var startDateString =  Utilities.formatterShort?.string(from: lifeTime.0!)
-                let startTime =  (dbActivity?.startTime == nil) ? "00:00:00" : (dbActivity?.startTime)!
-                startDateString = (startDateString ?? "") + " " + startTime
-                let startdate = Utilities.findDateFromString(dateString: startDateString ?? "")
-                
-                //update end date
-                var endDateString =  Utilities.formatterShort?.string(from: lifeTime.1!)
-                let endTime =  (dbActivity?.endTime == nil) ? "23:59:59" : (dbActivity?.endTime)!
-                endDateString = (endDateString ?? "") + " " + endTime
-                let endDate = Utilities.findDateFromString(dateString: endDateString ?? "")
-                
-                if startdate != nil && endDate != nil {
-                   //calcuate runs for activity
-                    let date = DBHandler.getCurrentDateWithTimeDifference()
-                    let activity = DBHandler.getActivityFromDBActivity(dbActivity!, runDate: date)
-                    activity.startDate = startdate
-                    activity.endDate = endDate
-                    Schedule().getRunsForActivity(activity: activity, handler: { (runs) in
-                        if runs.count > 0 {
-                            activity.activityRuns = runs
-                            
-                            //save overview
-                            let dbActivityRuns = List<DBActivityRun>()
-                            for activityRun in activity.activityRuns {
-                                
-                                let dbActivityRun = DBActivityRun()
-                                dbActivityRun.startDate = activityRun.startDate
-                                dbActivityRun.endDate = activityRun.endDate
-                                dbActivityRun.activityId = activity.actvityId
-                                dbActivityRun.studyId = activity.studyId
-                                dbActivityRun.runId = activityRun.runId
-                                dbActivityRun.isCompleted = activityRun.isCompleted
-                                dbActivityRuns.append(dbActivityRun)
-                            }
-                            
-                            
-                            try? realm.write({
-                                dbActivity?.activityRuns.append(objectsIn: dbActivityRuns)
-                                dbActivity?.startDate = startdate
-                                dbActivity?.endDate = endDate
-                            })
-
-                        }
+        guard let dbActivity = dbActivities.last else {
+            return false
+        }
+        
+        //get source question value and key
+        let results = response["results"] as! Array<Dictionary<String,Any>>
+        let sourceKey = (dbActivity.sourceKey)!
+        let dictionary = results.filter({$0["key"] as! String == sourceKey}).first
+        
+        guard let userInputDate = dictionary?["value"] as? String else{
+            return false
+        }
+        
+        
+        let date = Utilities.getDateFromString(dateString: userInputDate)
+        let frequency = Frequency(rawValue: (dbActivity.frequencyType)!)!
+        let lifeTime = DBHandler.getLifeTime(date!,
+                                             frequency:frequency,
+                                             startDays: (dbActivity.startDays),
+                                             endDays: (dbActivity.endDays),
+                                             repeatInterval: (dbActivity.repeatInterval))
+        
+        
+        //update start date
+        var startDateString =  Utilities.formatterShort?.string(from: lifeTime.0!)
+        let startTime =  (dbActivity.startTime == nil) ? "00:00:00" : (dbActivity.startTime)!
+        startDateString = (startDateString ?? "") + " " + startTime
+        let startdate = Utilities.findDateFromString(dateString: startDateString ?? "")
+        
+        //update end date
+        var endDateString =  Utilities.formatterShort?.string(from: lifeTime.1!)
+        let endTime =  (dbActivity.endTime == nil) ? "23:59:59" : (dbActivity.endTime)!
+        endDateString = (endDateString ?? "") + " " + endTime
+        let endDate = Utilities.findDateFromString(dateString: endDateString ?? "")
+        
+        if startdate != nil && endDate != nil {
+            //calcuate runs for activity
+            let date = DBHandler.getCurrentDateWithTimeDifference()
+            let activity = DBHandler.getActivityFromDBActivity(dbActivity, runDate: date)
+            activity.startDate = startdate
+            activity.endDate = endDate
+            Schedule().getRunsForActivity(activity: activity, handler: { (runs) in
+                if runs.count > 0 {
+                    activity.activityRuns = runs
+                    
+                    //save overview
+                    let dbActivityRuns = List<DBActivityRun>()
+                    for activityRun in activity.activityRuns {
+                        
+                        let dbActivityRun = DBActivityRun()
+                        dbActivityRun.startDate = activityRun.startDate
+                        dbActivityRun.endDate = activityRun.endDate
+                        dbActivityRun.activityId = activity.actvityId
+                        dbActivityRun.studyId = activity.studyId
+                        dbActivityRun.runId = activityRun.runId
+                        dbActivityRun.isCompleted = activityRun.isCompleted
+                        dbActivityRuns.append(dbActivityRun)
+                    }
+                    
+                    
+                    try? realm.write({
+                        dbActivity.activityRuns.append(objectsIn: dbActivityRuns)
+                        dbActivity.startDate = startdate
+                        dbActivity.endDate = endDate
+                        dbActivity.anchorDateValue = date
                     })
                     
                 }
-                
-                return true
-            }
+            })
             
         }
-       
-       return false
+        
+        return false
     }
     
     private class func getLifeTime(_ date:Date,
@@ -1679,6 +1678,12 @@ class DBHandler: NSObject {
         return dbResource
     }
     
+    
+    class func isResourcesEmpty()->Bool {
+         let realm = DBHandler.getRealmObject()!
+         return realm.objects(DBResources.self).isEmpty
+    }
+    
     /**
      loads resources for study from DB
     */
@@ -1727,6 +1732,55 @@ class DBHandler: NSObject {
         let realm = DBHandler.getRealmObject()!
         let dbResourceList: Array<DBResources> = realm.objects(DBResources.self).filter({$0.studyId == studyId && $0.povAvailable == true})
         completionHandler(dbResourceList)
+    }
+    
+    class func resourceListFor(_ studyId:String, activityId:String?, questionKey:String?) -> Array<DBResources> {
+        
+        let realm = DBHandler.getRealmObject()!
+        var dbResourceList: Array<DBResources> = realm.objects(DBResources.self).filter({$0.studyId == studyId && $0.povAvailable == true && $0.startDate == nil})
+        
+        if activityId != nil {
+          dbResourceList = dbResourceList.filter({$0.sourceActivityId == activityId})
+        }
+        if questionKey != nil {
+            dbResourceList = dbResourceList.filter({$0.sourceKey == questionKey})
+        }
+        
+        return dbResourceList
+    }
+    
+    class func  updateResourceLifeTime(_ studyId:String, activityId:String?, questionKey:String?, anchorDateValue:Date) {
+        
+        let realm = DBHandler.getRealmObject()!
+        let resourceList = DBHandler.resourceListFor(studyId,activityId: activityId, questionKey: questionKey)
+        
+        
+        for resource in resourceList {
+            
+            let startDateInterval = TimeInterval(60*60*24*(resource.anchorDateStartDays))
+            let endDateInterval = TimeInterval(60*60*24*(resource.anchorDateEndDays))
+            
+            let startDate = anchorDateValue.addingTimeInterval(startDateInterval)
+            let endDate = anchorDateValue.addingTimeInterval(endDateInterval)
+            
+            try? realm.write({
+                resource.startDate = startDate
+                resource.endDate = endDate
+            })
+          
+        }
+        
+    }
+   // class func loadResourcesForStudy(studyId: String,completionHandler: @escaping (Array<Resource>) -> ())
+    
+    class func activitiesWithAnchorDateAvailable(studyId:String, completionHandler: @escaping (Bool) -> ()){
+        let realm = DBHandler.getRealmObject()!
+        let dbActivities = realm.objects(DBActivity.self).filter({$0.studyId == studyId && $0.startDate != nil && $0.anchorDateValue != nil})
+        for activity in dbActivities {
+            DBHandler.updateResourceLifeTime(studyId, activityId: activity.sourceActivityId, questionKey: activity.sourceKey, anchorDateValue: activity.anchorDateValue!)
+        }
+        print("Completed")
+        completionHandler(true)
     }
     
     class func updateResourceLocalPath(resourceId: String,path: String) {

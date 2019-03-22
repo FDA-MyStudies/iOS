@@ -11,7 +11,7 @@
             "availability": {}
         },
         {
-            "title": "Resource 1",
+            "title": "Resource Anchor Date",
             "type": "text",
             "resourcesId": "10448",
             "content": "<p>A new resource has been updated</p>",
@@ -20,12 +20,12 @@
             "availability": {
                 "availableDate": "",
                 "expiryDate": "",
-                "startDays": 0,
-                "endDays": 0,
+                "startDays": 10,
+                "endDays": 20,
                 "availabilityType": "AnchorDate",
-                "sourceType":"EnrollmentDate",
-                "sourceActivityId":"",
-                "sourceKey":"" ,
+                "sourceType":"ActivityResponse",
+                "sourceActivityId":"anct",
+                "sourceKey":"anc" ,
                 "startTime":"05:00:00",
                 "endTime":"23:00:00",
             }
@@ -33,7 +33,7 @@
         {
             "title": "Resource 2",
             "type": "text",
-            "resourcesId": "10448",
+            "resourcesId": "10450",
             "content": "<p>A new resource has been updated</p>",
             "audience": "All",
             "notificationText": "A new resource available",

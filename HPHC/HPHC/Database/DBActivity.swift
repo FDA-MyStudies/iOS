@@ -60,7 +60,7 @@ class DBActivity: Object {
     @objc dynamic var endDays:Int = 0
     @objc dynamic var repeatInterval:Int = 0
     @objc dynamic var endTime:String?
-    //@objc dynamic var anchorDateValue:Date?
+    @objc dynamic var anchorDateValue:Date?
   
     @objc dynamic var taskSubType: String?
   

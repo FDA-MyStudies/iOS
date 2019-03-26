@@ -1487,7 +1487,7 @@ class ResponseDataFetch:NMWebServiceDelegate{
     }
     
     // MARK: Helper Methods
-    func checkUpdates(){
+    func checkUpdates() {
         if StudyUpdates.studyActivitiesUpdated {
             self.sendRequestToGetDashboardInfo()
             
@@ -1516,8 +1516,10 @@ class ResponseDataFetch:NMWebServiceDelegate{
     
     func handleExecuteSQLResponse(){
         
-        self.dataSourceKeysForLabkey.removeFirst()
-        self.sendRequestToGetDashboardResponse()
+        if !self.dataSourceKeysForLabkey.isEmpty {
+            self.dataSourceKeysForLabkey.removeFirst()
+        }
+         self.sendRequestToGetDashboardResponse()
     }
     
     func getDataKeysForCurrentStudy(){
@@ -1535,7 +1537,7 @@ class ResponseDataFetch:NMWebServiceDelegate{
         
     }
     
-    func sendRequestToGetDashboardResponse(){
+    func sendRequestToGetDashboardResponse() {
         
         if self.dataSourceKeysForLabkey.count != 0 {
             let details = self.dataSourceKeysForLabkey.first

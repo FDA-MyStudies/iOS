@@ -70,6 +70,7 @@ class Resource {
     var sourceKey : String?
     var startTime : String?
     var endTime : String?
+    var availableToday = false
     
     /**
      Default Initializer

@@ -1749,16 +1749,18 @@ class DBHandler: NSObject {
         return dbResourceList
     }
     
-    class func  updateResourceLifeTime(_ studyId:String, activityId:String?, questionKey:String?, anchorDateValue:Date) {
+    class func  updateResourceLifeTime(_ studyId:String, activityId:String?, questionKey:String?, anchorDateValue:Date) -> (Bool) {
         
         let realm = DBHandler.getRealmObject()!
         let resourceList = DBHandler.resourceListFor(studyId,activityId: activityId, questionKey: questionKey)
         
-        
+        var resourceUpdatedStatus = false
         for resource in resourceList {
             
-            let startDateInterval = TimeInterval(60*60*24*(resource.anchorDateStartDays))
-            let endDateInterval = TimeInterval(60*60*24*(resource.anchorDateEndDays))
+            resourceUpdatedStatus = true
+            
+            let startDateInterval = TimeInterval(60*60*24*(resource.anchorDateStartDays)) //start of day
+            let endDateInterval = TimeInterval(60*60*24*(resource.anchorDateEndDays+1) - 1) // end of day
             
             let startDate = anchorDateValue.addingTimeInterval(startDateInterval)
             let endDate = anchorDateValue.addingTimeInterval(endDateInterval)
@@ -1769,18 +1771,22 @@ class DBHandler: NSObject {
             })
           
         }
+        return resourceUpdatedStatus
         
     }
    // class func loadResourcesForStudy(studyId: String,completionHandler: @escaping (Array<Resource>) -> ())
     
-    class func activitiesWithAnchorDateAvailable(studyId:String, completionHandler: @escaping (Bool) -> ()){
+    class func activitiesWithAnchorDateAvailable(studyId:String, completionHandler: @escaping (Bool) -> ()) {
+       
         let realm = DBHandler.getRealmObject()!
         let dbActivities = realm.objects(DBActivity.self).filter({$0.studyId == studyId && $0.startDate != nil && $0.anchorDateValue != nil})
+        
+        var anchorDateAvailable = false
         for activity in dbActivities {
-            DBHandler.updateResourceLifeTime(studyId, activityId: activity.sourceActivityId, questionKey: activity.sourceKey, anchorDateValue: activity.anchorDateValue!)
+          anchorDateAvailable = DBHandler.updateResourceLifeTime(studyId, activityId: activity.sourceActivityId, questionKey: activity.sourceKey, anchorDateValue: activity.anchorDateValue!)
         }
         print("Completed")
-        completionHandler(true)
+        completionHandler(anchorDateAvailable)
     }
     
     class func updateResourceLocalPath(resourceId: String,path: String) {

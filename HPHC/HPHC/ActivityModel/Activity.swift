@@ -343,7 +343,7 @@ class Activity {
     func setActivityAvailability(_ availability:[String:Any]) {
 
         self.anchorDate = AnchorDate.init(availability)
-        
+        //Issue:
         if self.anchorDate?.sourceType == "EnrollmentDate" {
             let enrollmentDate = Study.currentStudy?.userParticipateState.joiningDate
             self.anchorDate?.anchorDateValue = enrollmentDate

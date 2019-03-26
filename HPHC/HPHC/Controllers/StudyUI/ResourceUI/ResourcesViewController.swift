@@ -132,7 +132,11 @@ class ResourcesViewController: UIViewController{
             WCPServices().getResourcesForStudy(studyId: (Study.currentStudy?.studyId)!, delegate: self)
         }
         else {
-            DBHandler.activitiesWithAnchorDateAvailable(studyId: (Study.currentStudy?.studyId)!) { (finised) in
+            DBHandler.activitiesWithAnchorDateAvailable(studyId: (Study.currentStudy?.studyId)!) { (updated) in
+                
+                if updated {
+                    //update local notification.
+                }
                 
                 DBHandler.loadResourcesForStudy(studyId: (Study.currentStudy?.studyId)!) { (resources) in
                     if resources.count != 0 {
@@ -219,17 +223,25 @@ class ResourcesViewController: UIViewController{
             
             if resource.startDate != nil && resource.endDate != nil {
                 
+                
                 let start = resource.startDate?.startOfDay
                 let end = resource.endDate?.endOfDay
                 
                 let startDateResult = (start?.compare(todayDate))! as ComparisonResult
                 let endDateResult = (end?.compare(todayDate))! as ComparisonResult
                 
-                
+                //compare lifetime
                 if ((startDateResult == .orderedAscending || startDateResult == .orderedSame) && (endDateResult == .orderedDescending || endDateResult == .orderedSame)){
                     print("current")
                     
                     tableViewRowDetails?.append(resource)
+                    
+                    //compare for today
+                    let endOfToday = resource.startDate?.endOfDay
+                    
+                    if (todayDate >= start! && todayDate <= endOfToday!){
+                        resource.availableToday = true
+                    }
                     
                 }
             }
@@ -586,12 +598,13 @@ extension ResourcesViewController: UITableViewDataSource {
         
         if (resource as? Resource) != nil {
             // resources cell
-            
-            if Utilities.isValidValue(someObject: (resource as? Resource)?.title as AnyObject) {
-                cell.populateCellData(data: ((resource as? Resource)?.title)!)
+            let res = resource as! Resource
+            if Utilities.isValidValue(someObject: res.title as AnyObject) {
+                cell.populateCellData(data: (res.title)!)
             } else {
                 cell.labelTitle?.text = ""
             }
+            cell.animateAvailability(for: res)
             
             
         } else {
@@ -600,7 +613,7 @@ extension ResourcesViewController: UITableViewDataSource {
             cell.populateCellData(data: (resource as? String)!)
         }
         
-       
+        
         
         //cell.accessoryType = .disclosureIndicator
         

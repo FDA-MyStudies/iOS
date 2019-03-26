@@ -252,7 +252,11 @@ class LabKeyServices: NSObject {
                             if let keyValue = data[responseData.key!] as? Dictionary<String,Any> {
                                 
                                 if Utilities.isValidValue(someObject: keyValue["value"] as AnyObject?) {
-                                    let value = keyValue["value"] as! Float
+                                    var value:Float = 0.0
+                                    if let n = keyValue["value"] as? NSNumber {
+                                        value = n.floatValue
+                                    }
+                                    //let value = keyValue["value"] as! Float
                                     let valueDetail = ["value": value,
                                                        "count": Float(0.0),
                                                        "date": date] as Dictionary<String,Any>

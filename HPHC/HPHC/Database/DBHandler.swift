@@ -696,6 +696,8 @@ class DBHandler: NSObject {
         
         
         let date = Utilities.getDateFromString(dateString: userInputDate)
+        
+        // seperate method from here
         let frequency = Frequency(rawValue: (dbActivity.frequencyType)!)!
         let lifeTime = DBHandler.getLifeTime(date!,
                                              frequency:frequency,
@@ -718,8 +720,9 @@ class DBHandler: NSObject {
         
         if startdate != nil && endDate != nil {
             //calcuate runs for activity
-            let date = DBHandler.getCurrentDateWithTimeDifference()
-            let activity = DBHandler.getActivityFromDBActivity(dbActivity, runDate: date)
+            let currentdate = DBHandler.getCurrentDateWithTimeDifference()
+            
+            let activity = DBHandler.getActivityFromDBActivity(dbActivity, runDate: currentdate)
             activity.startDate = startdate
             activity.endDate = endDate
             Schedule().getRunsForActivity(activity: activity, handler: { (runs) in
@@ -754,6 +757,72 @@ class DBHandler: NSObject {
         }
         
         return false
+    }
+    
+    class func updateActivityLifeTimeFor(_ dbActivity:DBActivity, anchorDate:Date) {
+        
+        let date = anchorDate
+        let realm = DBHandler.getRealmObject()!
+        
+        
+        let frequency = Frequency(rawValue: (dbActivity.frequencyType)!)!
+        let lifeTime = DBHandler.getLifeTime(date,
+                                             frequency:frequency,
+                                             startDays: (dbActivity.startDays),
+                                             endDays: (dbActivity.endDays),
+                                             repeatInterval: (dbActivity.repeatInterval))
+        
+        
+        //update start date
+        var startDateString =  Utilities.formatterShort?.string(from: lifeTime.0!)
+        let startTime =  (dbActivity.startTime == nil) ? "00:00:00" : (dbActivity.startTime)!
+        startDateString = (startDateString ?? "") + " " + startTime
+        let startdate = Utilities.findDateFromString(dateString: startDateString ?? "")
+        
+        //update end date
+        var endDateString =  Utilities.formatterShort?.string(from: lifeTime.1!)
+        let endTime =  (dbActivity.endTime == nil) ? "23:59:59" : (dbActivity.endTime)!
+        endDateString = (endDateString ?? "") + " " + endTime
+        let endDate = Utilities.findDateFromString(dateString: endDateString ?? "")
+        
+        if startdate != nil && endDate != nil {
+            //calcuate runs for activity
+            let currentDate = DBHandler.getCurrentDateWithTimeDifference()
+            
+            let activity = DBHandler.getActivityFromDBActivity(dbActivity, runDate: currentDate)
+            activity.startDate = startdate
+            activity.endDate = endDate
+            Schedule().getRunsForActivity(activity: activity, handler: { (runs) in
+                //if runs.count > 0 {
+                    activity.activityRuns = runs
+                    
+                    //save overview
+                    let dbActivityRuns = List<DBActivityRun>()
+                    for activityRun in activity.activityRuns {
+                        
+                        let dbActivityRun = DBActivityRun()
+                        dbActivityRun.startDate = activityRun.startDate
+                        dbActivityRun.endDate = activityRun.endDate
+                        dbActivityRun.activityId = activity.actvityId
+                        dbActivityRun.studyId = activity.studyId
+                        dbActivityRun.runId = activityRun.runId
+                        dbActivityRun.isCompleted = activityRun.isCompleted
+                        dbActivityRuns.append(dbActivityRun)
+                    }
+                    
+                    
+                    try? realm.write({
+                        dbActivity.activityRuns.append(objectsIn: dbActivityRuns)
+                        dbActivity.startDate = startdate
+                        dbActivity.endDate = endDate
+                        dbActivity.anchorDateValue = date
+                    })
+                    
+               // }
+               
+            })
+            
+        }
     }
     
     private class func getLifeTime(_ date:Date,
@@ -808,6 +877,12 @@ class DBHandler: NSObject {
         }
         
         return (startDate,endDate)
+    }
+    
+    class func getActivitiesWithEmptyAnchorDateValue(_ studyId:String) -> [DBActivity] {
+        let realm = DBHandler.getRealmObject()!
+        let dbActivities:Array<DBActivity> = realm.objects(DBActivity.self).filter({$0.studyId == studyId && $0.anchorDateValue == nil && $0.sourceType == "ActivityResponse"})
+        return dbActivities
     }
     
     /**

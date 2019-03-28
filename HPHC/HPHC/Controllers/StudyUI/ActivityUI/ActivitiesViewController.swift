@@ -110,6 +110,8 @@ class ActivitiesViewController : UIViewController{
             self.tableView?.isHidden = false
             self.labelNoNetworkAvailable?.isHidden = true
         }
+        
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -308,6 +310,18 @@ class ActivitiesViewController : UIViewController{
     
     // MARK:-
     
+    func fetchActivityAnchorDateResponseFromLabkey() {
+        
+        AnchorDateHandler().fetchActivityAnchorDateResponseFromLabkey { (status) in
+            print("Finished 1")
+            if status {
+                self.loadActivitiesFromDatabase()
+            }
+            
+        }
+        print("Finished 0")
+    }
+    
     /**
      Used to load the Actif=vities data from database
      */
@@ -318,6 +332,7 @@ class ActivitiesViewController : UIViewController{
                 Study.currentStudy?.activities = activities
                 
                 self.handleActivityListResponse()
+                self.fetchActivityAnchorDateResponseFromLabkey()
                 
             } else {
                 
@@ -1472,7 +1487,7 @@ class ResponseDataFetch:NMWebServiceDelegate{
         return formatter
     }()
     
-    private static let localDateFormatter: DateFormatter = {
+    public static let localDateFormatter: DateFormatter = {
         //2017/06/13 18:12:13
         let formatter = DateFormatter()
         formatter.timeZone = TimeZone.current

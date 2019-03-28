@@ -33,6 +33,20 @@ enum HTTPMethod : NSInteger {
     case httpMethodPUT
     case httpMethodPOST
     case httpMethodDELETE
+    
+    var methodTypeAsString:String {
+        switch self {
+        case .httpMethodGet:
+            return "GET"
+        case .httpMethodPOST:
+            return "POST"
+        case .httpMethodPUT:
+            return "PUT"
+        case .httpMethodDELETE:
+            return "DELETE"
+        }
+    }
+ 
 }
 
 struct DefaultHeaders {

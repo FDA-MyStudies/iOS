@@ -149,6 +149,7 @@
 		7878B311221574D80052FC23 /* StandaloneStudy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7878B30E221574D80052FC23 /* StandaloneStudy.swift */; };
 		7878B31D2216C6E20052FC23 /* HPHCTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7878B31C2216C6E20052FC23 /* HPHCTests.swift */; };
 		89831393224399FC0000BEB5 /* ResourceList.json in Resources */ = {isa = PBXBuildFile; fileRef = 89831392224399FC0000BEB5 /* ResourceList.json */; };
+		89903062224A502C00B3A85C /* AnchorDateHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89903061224A502C00B3A85C /* AnchorDateHandler.swift */; };
 		89CD64BA2244CAA600008178 /* ResourceAnchorTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89CD64B92244CAA600008178 /* ResourceAnchorTest.swift */; };
 		940577A81E767AC60043215C /* ChangePasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 940577A71E767AC60043215C /* ChangePasswordViewController.swift */; };
 		940577AC1E767C8D0043215C /* ChangePasswordData.plist in Resources */ = {isa = PBXBuildFile; fileRef = 940577AB1E767C8D0043215C /* ChangePasswordData.plist */; };
@@ -425,6 +426,7 @@
 		7878B31C2216C6E20052FC23 /* HPHCTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HPHCTests.swift; sourceTree = "<group>"; };
 		7878B31E2216C6E20052FC23 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		89831392224399FC0000BEB5 /* ResourceList.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = ResourceList.json; sourceTree = "<group>"; };
+		89903061224A502C00B3A85C /* AnchorDateHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnchorDateHandler.swift; sourceTree = "<group>"; };
 		89CD64B92244CAA600008178 /* ResourceAnchorTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResourceAnchorTest.swift; sourceTree = "<group>"; };
 		940577A71E767AC60043215C /* ChangePasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChangePasswordViewController.swift; sourceTree = "<group>"; };
 		940577AB1E767C8D0043215C /* ChangePasswordData.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = ChangePasswordData.plist; sourceTree = "<group>"; };
@@ -965,6 +967,7 @@
 				6EE93DB81E93C8850027A5DC /* ActivitiesTableViewCell.swift */,
 				6EE93DB91E93C8850027A5DC /* ActivitiesViewController.swift */,
 				942591C31EA8A2650010D892 /* ActivitySchedules.xib */,
+				89903061224A502C00B3A85C /* AnchorDateHandler.swift */,
 			);
 			path = ActivityUI;
 			sourceTree = "<group>";
@@ -1719,6 +1722,7 @@
 				6EBC2E801E94FB5300828CA1 /* StudyDashboardViewController.swift in Sources */,
 				941909B51E52FA9B001B01C5 /* Study.swift in Sources */,
 				94B3DD471E6ED8E500327AE5 /* ResourcesListCell.swift in Sources */,
+				89903062224A502C00B3A85C /* AnchorDateHandler.swift in Sources */,
 				7878B311221574D80052FC23 /* StandaloneStudy.swift in Sources */,
 				94B5F2F41ECA354800BC0336 /* LocalNotification.swift in Sources */,
 				6EA889BC1E6FD16B00F160A1 /* ConfirmationViewController.swift in Sources */,

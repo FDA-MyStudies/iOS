@@ -315,7 +315,10 @@ class ActivitiesViewController : UIViewController{
         AnchorDateHandler().fetchActivityAnchorDateResponseFromLabkey { (status) in
             print("Finished 1")
             if status {
-                self.loadActivitiesFromDatabase()
+                DispatchQueue.main.async {
+                    self.loadActivitiesFromDatabase()
+                }
+                
             }
             
         }
@@ -332,7 +335,7 @@ class ActivitiesViewController : UIViewController{
                 Study.currentStudy?.activities = activities
                 
                 self.handleActivityListResponse()
-                self.fetchActivityAnchorDateResponseFromLabkey()
+                //self.fetchActivityAnchorDateResponseFromLabkey()
                 
             } else {
                 
@@ -1160,24 +1163,22 @@ extension ActivitiesViewController: ORKTaskViewControllerDelegate{
             self.checkForActivitiesUpdates()
         }
         
+        
+        let activityId = Study.currentActivity?.actvityId
+        let studyId = Study.currentStudy?.studyId
+        var response:[String:Any]? = nil
+        
         if  taskViewController.task?.identifier == "ConsentTask" {
             consentbuilder?.consentResult?.initWithORKTaskResult(taskResult:taskViewController.result )
         } else {
             
             if reason == ORKTaskViewControllerFinishReason.completed {
+                
                 ActivityBuilder.currentActivityBuilder.actvityResult?.initWithORKTaskResult(taskResult: taskViewController.result)
-                let resposne = ActivityBuilder.currentActivityBuilder.actvityResult?.getResultDictionary()
-                //print("\(ActivityBuilder.currentActivityBuilder.actvityResult?.getResultDictionary()?.preetyJSON())")
                 
-                //check if current activity is source of some to some other activity
-                let activityId = Study.currentActivity?.actvityId
-                let studyId = Study.currentStudy?.studyId
+                response = ActivityBuilder.currentActivityBuilder.actvityResult?.getResultDictionary()
                 
-                let lifeTimeUpdated = DBHandler.updateTargetActivityAnchorDateDetail(studyId: studyId!, activityId: activityId!, response: resposne!)
-               
                 Study.currentActivity?.userStatus = .completed
-                
-                
                 
                 if ActivityBuilder.currentActivityBuilder.actvityResult?.type == ActivityType.activeTask {
                     
@@ -1268,13 +1269,17 @@ extension ActivitiesViewController: ORKTaskViewControllerDelegate{
                 
                 
                 //send response to labkey
-                LabKeyServices().processResponse(responseData:(ActivityBuilder.currentActivityBuilder.actvityResult?.getResultDictionary())! , delegate: self)
+                LabKeyServices().processResponse(responseData:response!, delegate: self)
             }
         }
         taskViewController.dismiss(animated: true, completion: {
-            self.tableView?.reloadData()
-            if self.isAnchorDateSet {
-                self.registerNotificationForAnchorDate()
+           
+            let lifeTimeUpdated = DBHandler.updateTargetActivityAnchorDateDetail(studyId: studyId!, activityId: activityId!, response: response!)
+            if lifeTimeUpdated {
+                self.loadActivitiesFromDatabase()
+            }
+            else {
+                 self.tableView?.reloadData()
             }
         })
     }

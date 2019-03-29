@@ -771,6 +771,13 @@ extension StudyHomeViewController: NMWebServiceDelegate {
         if (requestName as String == RegistrationMethods.studyState.description) {
             
             if isGettingJoiningDate {
+                
+                //update in Study
+                let currentUser = User.currentUser
+                if let userStudyStatus = currentUser.participatedStudies.filter({$0.studyId == Study.currentStudy?.studyId}).last{
+                    Study.currentStudy?.userParticipateState = userStudyStatus
+                    
+                }
                 self.pushToStudyDashboard()
                 self.removeProgressIndicator()
                 isGettingJoiningDate = false

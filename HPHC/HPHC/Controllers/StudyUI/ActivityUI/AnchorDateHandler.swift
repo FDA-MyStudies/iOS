@@ -10,16 +10,19 @@ import UIKit
 
 class EmptyAnchordDates {
     
-    var activity:DBActivity!
-    var sourceKeysSet:Set<String> = []
-    var sourceKeys:String {
-        return Array(self.sourceKeysSet).joined(separator: ",")
+    enum FetchAnchorDateFor {
+        case activity
+        case resource
     }
+    
+    var activity:DBActivity!
+    var resource:DBResources!
     var sourceKey:String!
     var sourceActivityId:String!
     var anchorDate:Date?
     var sourceFormId:String!
     var isFinishedFetching:Bool = false
+    var fetchAnchorDateFor:FetchAnchorDateFor = .activity
     
     init() {
         
@@ -41,25 +44,58 @@ class AnchorDateHandler {
         handler = completionHandler
         //get activities from database for anchor date is not present
         let activities = DBHandler.getActivitiesWithEmptyAnchorDateValue((Study.currentStudy?.studyId)!)
-        
+               
         guard activities.count != 0 else {
             return handler(false)
         }
         
         for activity in activities {
             
+            let act = User.currentUser.participatedActivites.filter({$0.activityId == activity.sourceActivityId}).last
+            
+            if act != nil && (act?.status == UserActivityStatus.ActivityStatus.completed) {
+                
+                let emptyAnchorDateDetail = EmptyAnchordDates()
+                emptyAnchorDateDetail.activity = activity
+                emptyAnchorDateDetail.sourceKey = activity.sourceKey
+                emptyAnchorDateDetail.sourceActivityId = activity.sourceActivityId
+                emptyAnchorDatesList.append(emptyAnchorDateDetail)
+            }
+        
+        }
+        
+        guard emptyAnchorDatesList.count != 0 else {
+            return handler(false)
+        }
+        
+        sendRequestToFetchResponse()
+        
+    }
+    
+    func fetchActivityAnchorDateForResourceFromLabke(_ completionHandler: @escaping AnchordDateFetchCompletionHandler){
+        
+        let resources = DBHandler.getResourceWithEmptyAnchorDateValue((Study.currentStudy?.studyId)!)
+        
+        guard resources.count != 0 else {
+            return handler(false)
+        }
+        
+        for resource in resources {
+            
             let emptyAnchorDateDetail = EmptyAnchordDates()
-            emptyAnchorDateDetail.activity = activity
-            emptyAnchorDateDetail.sourceKey = activity.sourceKey
-            emptyAnchorDateDetail.sourceActivityId = activity.sourceActivityId
+            emptyAnchorDateDetail.fetchAnchorDateFor = .resource
+            emptyAnchorDateDetail.resource = resource
+            emptyAnchorDateDetail.sourceKey = resource.sourceKey
+            emptyAnchorDateDetail.sourceActivityId = resource.sourceActivityId
             emptyAnchorDatesList.append(emptyAnchorDateDetail)
             
         }
         
         sendRequestToFetchResponse()
         
-        
     }
+    
+    
     
     func sendRequestToFetchResponse() {
         
@@ -74,7 +110,7 @@ class AnchorDateHandler {
         //send request to get response
         
         let keys = emptyAnchorDateDetail.sourceKey!
-        let tableName = emptyAnchorDateDetail.activity.sourceActivityId
+        let tableName = emptyAnchorDateDetail.sourceActivityId
         //let activityId = emptyAnchorDateDetail.activity.sourceActivityId
         
         let method = ResponseMethods.executeSQL.method
@@ -93,6 +129,7 @@ class AnchorDateHandler {
         let participantId:String = (Study.currentStudy?.userParticipateState.participantId)! //"214b3c8b672c735988df8c139fed8abe"
         var urlString = ResponseServerURLConstants.DevelopmentURL + method.methodName + "?" + kParticipantId + "=" + participantId + "&sql=" + query
         urlString = urlString.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)!
+        
         let requstUrl = URL(string:urlString)
         var request = URLRequest.init(url: requstUrl!, cachePolicy: URLRequest.CachePolicy.reloadIgnoringLocalCacheData, timeoutInterval: NetworkConnectionConstants.ConnectionTimeoutInterval)
         request.httpMethod = method.methodType.methodTypeAsString
@@ -103,14 +140,29 @@ class AnchorDateHandler {
             if (error != nil) {
                 print(error as Any)
                 emptyAnchorDateDetail.isFinishedFetching = true
+                self.sendRequestToFetchResponse()
             } else {
                 
-                DispatchQueue.main.async {
-                    guard let response = try? JSONSerialization.jsonObject(with: data!, options: .allowFragments) as! [String:Any] else {
-                        return
-                    }
+                let status = NetworkConstants.checkResponseHeaders(response!)
+                let statusCode = status.0
+                if statusCode == 200 || statusCode == 0 {
                     
-                    if let rows = response["rows"] as? Array<Dictionary<String,Any>> {
+                    //DispatchQueue.main.async {
+                        
+                        guard let response = try? JSONSerialization.jsonObject(with: data!, options: .allowFragments) as! [String:Any] else {
+                            
+                            emptyAnchorDateDetail.isFinishedFetching = true
+                            self.sendRequestToFetchResponse()
+                            
+                            return
+                        }
+                        
+                        guard let rows = response["rows"] as? Array<Dictionary<String,Any>> , rows.count > 0 else {
+                            emptyAnchorDateDetail.isFinishedFetching = true
+                            self.sendRequestToFetchResponse()
+                            return
+                        }
+                        
                         for rowDetail in rows {
                             if let data =  rowDetail["data"] as? Dictionary<String,Any>{
                                 
@@ -123,8 +175,14 @@ class AnchorDateHandler {
                                 
                             }
                         }
-                    }
+                    //}
                 }
+                else {
+                    emptyAnchorDateDetail.isFinishedFetching = true
+                    self.sendRequestToFetchResponse()
+                }
+                
+                
             }
         })
         
@@ -138,7 +196,12 @@ class AnchorDateHandler {
         let listItems = emptyAnchorDatesList.filter({$0.anchorDate != nil && $0.isFinishedFetching == true})
         for item in listItems {
             print("DB")
-            DBHandler.updateActivityLifeTimeFor(item.activity, anchorDate: item.anchorDate!)
+            if item.fetchAnchorDateFor == .activity {
+                DBHandler.updateActivityLifeTimeFor(item.activity, anchorDate: item.anchorDate!)
+            }
+            else if item.fetchAnchorDateFor == .resource {
+                DBHandler.saveLifeTimeFor(resource: item.resource, anchorDate: item.anchorDate!)
+            }
         }
         print("Log DB Finished - \(Date().timeIntervalSince1970)")
         handler(true)

@@ -199,9 +199,9 @@ class Activity {
                 self.actvityId = (infoDict[kActivityId] as? String)!
             }
             
-             if Utilities.isValidValue(someObject: infoDict[kActivityVersion] as AnyObject) {
-                 self.version = (infoDict[kActivityVersion] as? String)!
-             }
+            if Utilities.isValidValue(someObject: infoDict[kActivityVersion] as AnyObject) {
+                self.version = (infoDict[kActivityVersion] as? String)!
+            }
             
             
             if Utilities.isValidValue(someObject: infoDict[kActivityTitle] as AnyObject) {
@@ -218,7 +218,7 @@ class Activity {
             }
             
             if Utilities.isValidValue(someObject: infoDict[kActivityStartTime] as AnyObject) {
-                 self.startDate =  Utilities.getDateFromStringWithOutTimezone(dateString: (infoDict[kActivityStartTime] as? String)!)
+                self.startDate =  Utilities.getDateFromStringWithOutTimezone(dateString: (infoDict[kActivityStartTime] as? String)!)
             }
             if Utilities.isValidValue(someObject: infoDict["schedulingType"] as AnyObject) {
                 let scheduleValue = infoDict["schedulingType"] as? String ?? "Regular"
@@ -229,7 +229,7 @@ class Activity {
             }
             
             if Utilities.isValidObject(someObject: infoDict[kActivityFrequency] as AnyObject?) {
-             
+                
                 let frequencyDict: Dictionary = (infoDict[kActivityFrequency] as? Dictionary<String, Any>)!
                 
                 if Utilities.isValidObject(someObject: frequencyDict[kActivityFrequencyRuns] as AnyObject ) {
@@ -247,7 +247,7 @@ class Activity {
             
             //AnchorDate
             let anchorDateDetail = infoDict["anchorDate"] as? [String:Any]
-            if (anchorDateDetail != nil) {
+            if (anchorDateDetail != nil && self.schedulingType == .anchorDate) {
                 setActivityAvailability(anchorDateDetail ?? [:])
             }
             
@@ -259,14 +259,14 @@ class Activity {
             } else {
                 self.userParticipationStatus = UserActivityStatus()
             }
-          
-          if Utilities.isValidValue(someObject: infoDict[kActivityTaskSubType] as AnyObject ) {
-            self.taskSubType =  (infoDict[kActivityTaskSubType] as? String)!
-          }
-           
-        if self.startDate != nil {
+            
+            if Utilities.isValidValue(someObject: infoDict[kActivityTaskSubType] as AnyObject ) {
+                self.taskSubType =  (infoDict[kActivityTaskSubType] as? String)!
+            }
+              
+            if self.startDate != nil {
                 self.calculateActivityRuns(studyId: self.studyId!)
-        }
+            }
         } else {
             Logger.sharedInstance.debug("infoDict is null:\(infoDict)")
         }
@@ -343,9 +343,16 @@ class Activity {
     func setActivityAvailability(_ availability:[String:Any]) {
 
         self.anchorDate = AnchorDate.init(availability)
-        //Issue:
+        //Issue: Crash with joining date for first time
         if self.anchorDate?.sourceType == "EnrollmentDate" {
-            let enrollmentDate = Study.currentStudy?.userParticipateState.joiningDate
+            var enrollmentDate = Study.currentStudy?.userParticipateState.joiningDate
+            
+            //update start date
+            var startDateStringEnrollment =  Utilities.formatterShort?.string(from: enrollmentDate!)
+            let startTimeEnrollment =  "00:00:00"
+            startDateStringEnrollment = (startDateStringEnrollment ?? "") + " " + startTimeEnrollment
+            enrollmentDate = Utilities.findDateFromString(dateString: startDateStringEnrollment ?? "")
+            
             self.anchorDate?.anchorDateValue = enrollmentDate
             let lifeTime = self.updateLifeTime(self.anchorDate!, frequency: self.frequencyType)
            
@@ -443,7 +450,7 @@ class Activity {
             endDate = startDate.addingTimeInterval(endDateInterval)
             
         case .Weekly:
-            
+           
             let startDateInterval = TimeInterval(60*60*24*(self.anchorDate?.startDays)!)
             let endDateInterval = TimeInterval(60*60*24*7*(self.anchorDate?.repeatInterval)! - 1)
             startDate = date.addingTimeInterval(startDateInterval)
@@ -484,6 +491,9 @@ class AnchorDate {
     var endTime:String?
     var anchorDateValue:Date?
     
+    init() {
+        
+    }
     init(_ anchorDateDetail:[String:Any]) {
         
         self.sourceType = anchorDateDetail["sourceType"] as? String

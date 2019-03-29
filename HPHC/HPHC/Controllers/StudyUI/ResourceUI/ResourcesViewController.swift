@@ -132,6 +132,8 @@ class ResourcesViewController: UIViewController{
             WCPServices().getResourcesForStudy(studyId: (Study.currentStudy?.studyId)!, delegate: self)
         }
         else {
+            
+            //Bug
             DBHandler.activitiesWithAnchorDateAvailable(studyId: (Study.currentStudy?.studyId)!) { (updated) in
                 
                 if updated {

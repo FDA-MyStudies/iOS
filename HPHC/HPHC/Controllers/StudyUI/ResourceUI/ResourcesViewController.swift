@@ -121,8 +121,10 @@ class ResourcesViewController: UIViewController{
     
     func updateAnchorDateLifeTime() {
         
-        DBHandler.activitiesWithAnchorDateAvailable(studyId: (Study.currentStudy?.studyId)!) { (finised) in
-            //self.loadResourceFromDatabase()
+        AnchorDateHandler().fetchActivityAnchorDateForResourceFromLabkey { (status) in
+            if status {
+                self.loadResourceFromDatabase()
+            }
         }
     }
     
@@ -132,24 +134,15 @@ class ResourcesViewController: UIViewController{
             WCPServices().getResourcesForStudy(studyId: (Study.currentStudy?.studyId)!, delegate: self)
         }
         else {
-            
-            //Bug
-            DBHandler.activitiesWithAnchorDateAvailable(studyId: (Study.currentStudy?.studyId)!) { (updated) in
-                
-                if updated {
-                    //update local notification.
-                }
-                
-                DBHandler.loadResourcesForStudy(studyId: (Study.currentStudy?.studyId)!) { (resources) in
-                    if resources.count != 0 {
-                        Study.currentStudy?.resources = resources
-                        self.handleResourcesReponse()
-                        //self.updateAnchorDateLifeTime()
-                        
-                    } else {
-                        WCPServices().getResourcesForStudy(studyId: (Study.currentStudy?.studyId)!, delegate: self)
-                    }
-                }
+            DBHandler.loadResourcesForStudy(studyId: (Study.currentStudy?.studyId)!) { (resources) in
+                //if resources.count != 0 {
+                    Study.currentStudy?.resources = resources
+                    self.handleResourcesReponse()
+                    self.updateAnchorDateLifeTime()
+                    
+//                } else {
+//                    WCPServices().getResourcesForStudy(studyId: (Study.currentStudy?.studyId)!, delegate: self)
+//                }
             }
         }
         
@@ -226,8 +219,8 @@ class ResourcesViewController: UIViewController{
             if resource.startDate != nil && resource.endDate != nil {
                 
                 
-                let start = resource.startDate?.startOfDay
-                let end = resource.endDate?.endOfDay
+                let start = resource.startDate//.startOfDay
+                let end = resource.endDate//.endOfDay
                 
                 let startDateResult = (start?.compare(todayDate))! as ComparisonResult
                 let endDateResult = (end?.compare(todayDate))! as ComparisonResult
@@ -239,7 +232,7 @@ class ResourcesViewController: UIViewController{
                     tableViewRowDetails?.append(resource)
                     
                     //compare for today
-                    let endOfToday = resource.startDate?.endOfDay
+                    let endOfToday = resource.startDate//.endOfDay
                     
                     if (todayDate >= start! && todayDate <= endOfToday!){
                         resource.availableToday = true

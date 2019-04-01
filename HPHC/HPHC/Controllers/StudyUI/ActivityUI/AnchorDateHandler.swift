@@ -72,23 +72,33 @@ class AnchorDateHandler {
         
     }
     
-    func fetchActivityAnchorDateForResourceFromLabke(_ completionHandler: @escaping AnchordDateFetchCompletionHandler){
+    func fetchActivityAnchorDateForResourceFromLabkey(_ completionHandler: @escaping AnchordDateFetchCompletionHandler){
         
         let resources = DBHandler.getResourceWithEmptyAnchorDateValue((Study.currentStudy?.studyId)!)
-        
+        handler = completionHandler
         guard resources.count != 0 else {
             return handler(false)
         }
         
         for resource in resources {
             
-            let emptyAnchorDateDetail = EmptyAnchordDates()
-            emptyAnchorDateDetail.fetchAnchorDateFor = .resource
-            emptyAnchorDateDetail.resource = resource
-            emptyAnchorDateDetail.sourceKey = resource.sourceKey
-            emptyAnchorDateDetail.sourceActivityId = resource.sourceActivityId
-            emptyAnchorDatesList.append(emptyAnchorDateDetail)
+            let act = User.currentUser.participatedActivites.filter({$0.activityId == resource.sourceActivityId}).last
             
+            if act != nil && (act?.status == UserActivityStatus.ActivityStatus.completed) {
+                
+                let emptyAnchorDateDetail = EmptyAnchordDates()
+                emptyAnchorDateDetail.fetchAnchorDateFor = .resource
+                emptyAnchorDateDetail.resource = resource
+                emptyAnchorDateDetail.sourceKey = resource.sourceKey
+                emptyAnchorDateDetail.sourceActivityId = resource.sourceActivityId
+                emptyAnchorDatesList.append(emptyAnchorDateDetail)
+            }
+            
+            
+        }
+        
+        guard emptyAnchorDatesList.count != 0 else {
+            return handler(false)
         }
         
         sendRequestToFetchResponse()
@@ -147,7 +157,7 @@ class AnchorDateHandler {
                 let statusCode = status.0
                 if statusCode == 200 || statusCode == 0 {
                     
-                    //DispatchQueue.main.async {
+                    DispatchQueue.main.async {
                         
                         guard let response = try? JSONSerialization.jsonObject(with: data!, options: .allowFragments) as! [String:Any] else {
                             
@@ -175,7 +185,7 @@ class AnchorDateHandler {
                                 
                             }
                         }
-                    //}
+                    }
                 }
                 else {
                     emptyAnchorDateDetail.isFinishedFetching = true
@@ -200,7 +210,13 @@ class AnchorDateHandler {
                 DBHandler.updateActivityLifeTimeFor(item.activity, anchorDate: item.anchorDate!)
             }
             else if item.fetchAnchorDateFor == .resource {
-                DBHandler.saveLifeTimeFor(resource: item.resource, anchorDate: item.anchorDate!)
+                
+                var startDateStringEnrollment =  Utilities.formatterShort?.string(from: item.anchorDate!)
+                let startTimeEnrollment =  "00:00:00"
+                startDateStringEnrollment = (startDateStringEnrollment ?? "") + " " + startTimeEnrollment
+                let anchorDate = Utilities.findDateFromString(dateString: startDateStringEnrollment ?? "")
+                
+                DBHandler.saveLifeTimeFor(resource: item.resource, anchorDate: anchorDate!)
             }
         }
         print("Log DB Finished - \(Date().timeIntervalSince1970)")

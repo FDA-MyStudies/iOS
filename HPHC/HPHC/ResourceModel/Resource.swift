@@ -245,11 +245,60 @@ class Resource {
             } else {
                 self.povAvailable = false
             }
+            
+            self.calculateAvailability()
+            
             if (Utilities.isValidValue(someObject: (dict[kResourceTitle]) as AnyObject)) {
                 self.title = dict[kResourceTitle] as? String
             }
         } else {
             Logger.sharedInstance.debug("Resource Dictionary is null:\(dict)")
         }
+    }
+    
+    
+    func calculateAvailability() {
+        
+        if self.sourceType == AnchorDateSourceType.enrollmentDate {
+            var enrollmentDate = Study.currentStudy?.userParticipateState.joiningDate
+            
+            //update start date
+            var startDateStringEnrollment =  Utilities.formatterShort?.string(from: enrollmentDate!)
+            let startTimeEnrollment =  "00:00:00"
+            startDateStringEnrollment = (startDateStringEnrollment ?? "") + " " + startTimeEnrollment
+            enrollmentDate = Utilities.findDateFromString(dateString: startDateStringEnrollment ?? "")
+            
+           
+            let lifeTime = self.updateLifeTime(enrollmentDate!)
+            
+            //update start date
+            var startDateString =  Utilities.formatterShort?.string(from: lifeTime.0!)
+            let startTime =  (self.startTime == nil) ? "00:00:00" : (self.startTime)!
+            startDateString = (startDateString ?? "") + " " + startTime
+            let startdate = Utilities.findDateFromString(dateString: startDateString ?? "")
+            
+            //update end date
+            var endDateString =  Utilities.formatterShort?.string(from: lifeTime.1!)
+            let endTime =  (self.endTime == nil) ? "23:59:59" : (self.endTime)!
+            endDateString = (endDateString ?? "") + " " + endTime
+            let endDate = Utilities.findDateFromString(dateString: endDateString ?? "")
+            
+            self.startDate = startdate
+            self.endDate = endDate
+        }
+    }
+    
+    func updateLifeTime(_ date:Date) -> (Date?,Date?) {
+        
+        var startDate:Date!
+        var endDate:Date!
+        
+        let startDateInterval = TimeInterval(60*60*24*(self.anchorDateStartDays)!)
+        let endDateInterval = TimeInterval(60*60*24*(self.anchorDateEndDays)!)
+        
+        startDate = date.addingTimeInterval(startDateInterval)
+        endDate = date.addingTimeInterval(endDateInterval)
+        return (startDate,endDate)
+          
     }
 }

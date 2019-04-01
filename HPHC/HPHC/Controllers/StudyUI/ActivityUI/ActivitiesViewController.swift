@@ -335,7 +335,7 @@ class ActivitiesViewController : UIViewController{
                 Study.currentStudy?.activities = activities
                 
                 self.handleActivityListResponse()
-                //self.fetchActivityAnchorDateResponseFromLabkey()
+                self.fetchActivityAnchorDateResponseFromLabkey()
                 
             } else {
                 
@@ -1274,13 +1274,19 @@ extension ActivitiesViewController: ORKTaskViewControllerDelegate{
         }
         taskViewController.dismiss(animated: true, completion: {
            
-            let lifeTimeUpdated = DBHandler.updateTargetActivityAnchorDateDetail(studyId: studyId!, activityId: activityId!, response: response!)
-            if lifeTimeUpdated {
-                self.loadActivitiesFromDatabase()
+            if reason == ORKTaskViewControllerFinishReason.completed {
+                let lifeTimeUpdated = DBHandler.updateTargetActivityAnchorDateDetail(studyId: studyId!, activityId: activityId!, response: response!)
+                if lifeTimeUpdated {
+                    self.loadActivitiesFromDatabase()
+                }
+                else {
+                    self.tableView?.reloadData()
+                }
             }
             else {
-                 self.tableView?.reloadData()
+                self.tableView?.reloadData()
             }
+           
         })
     }
     

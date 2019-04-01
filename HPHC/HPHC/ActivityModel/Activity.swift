@@ -452,7 +452,7 @@ class Activity {
         case .Weekly:
            
             let startDateInterval = TimeInterval(60*60*24*(self.anchorDate?.startDays)!)
-            let endDateInterval = TimeInterval(60*60*24*7*(self.anchorDate?.repeatInterval)! - 1)
+            let endDateInterval = TimeInterval(60*60*24*7*(self.anchorDate?.repeatInterval)!)
             startDate = date.addingTimeInterval(startDateInterval)
             endDate = startDate.addingTimeInterval(endDateInterval)
         case .Monthly:

@@ -201,7 +201,7 @@ class Schedule{
         
         let dayOfWeek = self.getCurrentWeekDay(date: updatedStartTime)
         let calendar = Calendar.currentUTC()
-        let targetDay = 1 //server configurable
+        let targetDay = self.getCurrentWeekDay(date: activity.startDate!) //server configurable
         
         //first day
         var runStartDate = calendar.date(byAdding: .weekday, value: (targetDay - dayOfWeek), to: updatedStartTime)
@@ -360,8 +360,20 @@ class Schedule{
                 runStartDate = anchorDate?.addingTimeInterval(startDateInterval)
                 runEndDate = anchorDate?.addingTimeInterval(endDateInterval)
                 
-                runStartDate = getDateAfterAddingTimeComponent(time, date: runStartDate!)
-                runEndDate = getDateAfterAddingTimeComponent(time, date: runEndDate!)
+                //update start date
+                var startDateString =  Utilities.formatterShort?.string(from: runStartDate!)
+                let startTime =  timing["time"] as? String ?? "00:00:00"
+                startDateString = (startDateString ?? "") + " " + startTime
+                let startdate = Utilities.findDateFromString(dateString: startDateString ?? "")
+                
+                //update end date
+                var endDateString =  Utilities.formatterShort?.string(from: runEndDate!)
+                let endTime =  timing["time"] as? String ?? "23:59:59"
+                endDateString = (endDateString ?? "") + " " + endTime
+                let endDate = Utilities.findDateFromString(dateString: endDateString ?? "")
+                
+                runStartDate = startdate//getDateAfterAddingTimeComponent(time, date: runStartDate!)
+                runEndDate = endDate//getDateAfterAddingTimeComponent(time, date: runEndDate!)
                 
             }
             else {

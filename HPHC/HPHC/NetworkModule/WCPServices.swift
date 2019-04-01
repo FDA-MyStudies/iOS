@@ -311,21 +311,21 @@ class WCPServices: NSObject {
     func handleResourceForStudy(response: Dictionary<String, Any>){
         
         //Testing
-        let filePath  = Bundle.main.path(forResource: "ResourceList", ofType: "json")
-        let data = NSData(contentsOfFile: filePath!)
-        
-        var resources:Array<Dictionary<String,Any>> = []
-        do {
-            let res = try JSONSerialization.jsonObject(with: data! as Data, options: []) as? Dictionary<String,Any>
-            
-            resources = res?[kResources] as! Array<Dictionary<String,Any>>
-        }
-        catch {
-            print("json error: \(error.localizedDescription)")
-        }
+//        let filePath  = Bundle.main.path(forResource: "ResourceList", ofType: "json")
+//        let data = NSData(contentsOfFile: filePath!)
+//
+//        var resources:Array<Dictionary<String,Any>> = []
+//        do {
+//            let res = try JSONSerialization.jsonObject(with: data! as Data, options: []) as? Dictionary<String,Any>
+//
+//            resources = res?[kResources] as! Array<Dictionary<String,Any>>
+//        }
+//        catch {
+//            print("json error: \(error.localizedDescription)")
+//        }
         
         //Actual
-        //let resources = response[kResources] as! Array<Dictionary<String,Any>>
+        let resources = response[kResources] as! Array<Dictionary<String,Any>>
         var listOfResources: Array<Resource>! = []
         for resource in resources{
             let resourceObj = Resource()

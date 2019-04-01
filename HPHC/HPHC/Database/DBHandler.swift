@@ -700,6 +700,9 @@ class DBHandler: NSObject {
         for activity in dbActivities {
             self.updateActivityLifeTimeFor(activity, anchorDate: date!)
         }
+        
+        DBHandler.updateResourceLifeTime(studyId, activityId: activityId, questionKey: sourceKey, anchorDateValue: date!)
+        
         return true
     }
     
@@ -903,7 +906,7 @@ class DBHandler: NSObject {
         }
         
         do {
-            let frequencyRuns = try JSONSerialization.jsonObject(with: dbActivity.frequencyRunsData!, options: []) as! [String: Any]
+            let frequencyRuns = try JSONSerialization.jsonObject(with: dbActivity.anchorRunsData!, options: []) as! [String: Any]
             activity.anchorRuns = frequencyRuns["data"] as! Array<Dictionary<String, Any>>?
             
         }catch {
@@ -1712,7 +1715,7 @@ class DBHandler: NSObject {
     
     class func getResourceWithEmptyAnchorDateValue(_ studyId:String) -> [DBResources] {
         let realm = DBHandler.getRealmObject()!
-        let dbResources:Array<DBResources> = realm.objects(DBResources.self).filter({$0.studyId == studyId && $0.startDate == nil && $0.availabilityType == "ActivityResponse"})
+        let dbResources:Array<DBResources> = realm.objects(DBResources.self).filter({$0.studyId == studyId && $0.startDate == nil && $0.sourceType == "ActivityResponse"})
         return dbResources
     }
     
@@ -1791,12 +1794,17 @@ class DBHandler: NSObject {
       
         let resourceList = DBHandler.resourceListFor(studyId,activityId: activityId, questionKey: questionKey)
         
+        var startDateStringEnrollment =  Utilities.formatterShort?.string(from: anchorDateValue)
+        let startTimeEnrollment =  "00:00:00"
+        startDateStringEnrollment = (startDateStringEnrollment ?? "") + " " + startTimeEnrollment
+        let anchorDate = Utilities.findDateFromString(dateString: startDateStringEnrollment ?? "")
+        
         var resourceUpdatedStatus = false
         for resource in resourceList {
             
             resourceUpdatedStatus = true
             
-            self.saveLifeTimeFor(resource: resource, anchorDate: anchorDateValue)
+            self.saveLifeTimeFor(resource: resource, anchorDate: anchorDate!)
           
         }
         return resourceUpdatedStatus
@@ -1809,8 +1817,21 @@ class DBHandler: NSObject {
         let startDateInterval = TimeInterval(60*60*24*(resource.anchorDateStartDays)) //start of day
         let endDateInterval = TimeInterval(60*60*24*(resource.anchorDateEndDays+1) - 1) // end of day
         
-        let startDate = anchorDate.addingTimeInterval(startDateInterval)
-        let endDate = anchorDate.addingTimeInterval(endDateInterval)
+        var startDate = anchorDate.addingTimeInterval(startDateInterval)
+        var endDate = anchorDate.addingTimeInterval(endDateInterval)
+        
+        
+        //update start date
+        var startDateString =  Utilities.formatterShort?.string(from: startDate)
+        let startTime =  (resource.startTime == nil) ? "00:00:00" : (resource.startTime)!
+        startDateString = (startDateString ?? "") + " " + startTime
+        startDate = Utilities.findDateFromString(dateString: startDateString ?? "")!
+        
+        //update end date
+        var endDateString =  Utilities.formatterShort?.string(from: endDate)
+        let endTime =  (resource.endTime == nil) ? "23:59:59" : (resource.endTime)!
+        endDateString = (endDateString ?? "") + " " + endTime
+        endDate = Utilities.findDateFromString(dateString: endDateString ?? "")!
         
         try? realm.write({
             resource.startDate = startDate

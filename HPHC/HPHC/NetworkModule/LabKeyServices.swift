@@ -27,7 +27,7 @@ import UIKit
 let kEnrollmentToken        = "token"
 let kParticipantId          = "participantId"
 let kEnrollmentTokenValid   = "valid"
-let kDeleteResponses        = "deleteResponses"
+let kDeleteResponses        = "delete"
 
 class LabKeyServices: NSObject {
     

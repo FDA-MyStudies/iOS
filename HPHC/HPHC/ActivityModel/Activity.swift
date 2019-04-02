@@ -263,8 +263,8 @@ class Activity {
             if Utilities.isValidValue(someObject: infoDict[kActivityTaskSubType] as AnyObject ) {
                 self.taskSubType =  (infoDict[kActivityTaskSubType] as? String)!
             }
-              
-            if self.startDate != nil {
+           
+            if self.startDate != nil && (self.schedulingType == .regular || self.anchorDate?.sourceType == "EnrollmentDate"){
                 self.calculateActivityRuns(studyId: self.studyId!)
             }
         } else {
@@ -484,6 +484,7 @@ class AnchorDate {
     var sourceType:String?
     var sourceActivityId:String?
     var sourceKey:String?
+    var sourceFormKey:String?
     var startDays:Int = 0
     var startTime:String?
     var endDays:Int = 0
@@ -499,6 +500,7 @@ class AnchorDate {
         self.sourceType = anchorDateDetail["sourceType"] as? String
         self.sourceActivityId = anchorDateDetail["sourceActivityId"] as? String
         self.sourceKey = anchorDateDetail["sourceKey"] as? String
+        self.sourceFormKey = anchorDateDetail["sourceFormKey"] as? String
         
         let anchorStart = anchorDateDetail["start"] as? [String:Any]
         self.startDays = anchorStart?["anchorDays"] as? Int ?? 0

@@ -649,6 +649,7 @@ class DBHandler: NSObject {
         dbActivity.sourceType = activity.anchorDate?.sourceType
         dbActivity.sourceActivityId = activity.anchorDate?.sourceActivityId
         dbActivity.sourceKey = activity.anchorDate?.sourceKey
+        dbActivity.sourceFormKey = activity.anchorDate?.sourceFormKey
         dbActivity.startDays = activity.anchorDate?.startDays ?? 0
         dbActivity.startTime = activity.anchorDate?.startTime
         dbActivity.endDays = activity.anchorDate?.endDays ?? 0
@@ -687,10 +688,23 @@ class DBHandler: NSObject {
         
         //get source question value and key
         let results = response["results"] as! Array<Dictionary<String,Any>>
+        var quesStepKey:String
+        var dictionary:[String:Any] = [:]
         let sourceKey = (dbActivity.sourceKey)!
-        let dictionary = results.filter({$0["key"] as! String == sourceKey}).first
+        if dbActivity.sourceFormKey != nil {
+            quesStepKey = dbActivity.sourceFormKey!
+            let quesResults = results.filter({$0["key"] as! String == quesStepKey}).first
+            let resultsArray =  ((quesResults!["value"] as? [[Any]])?.first) as? [[String:Any]]
+            dictionary = resultsArray!.filter({$0["key"] as! String == sourceKey}).first!
+            
+        }
+        else {
+            dictionary = results.filter({$0["key"] as! String == sourceKey}).first!
+        }
         
-        guard let userInputDate = dictionary?["value"] as? String else{
+        //let dictionary = results.filter({$0["key"] as! String == sourceKey}).first
+        
+        guard let userInputDate = dictionary["value"] as? String else{
             return false
         }
         
@@ -995,6 +1009,7 @@ class DBHandler: NSObject {
         anchorDate.sourceType = dbActivity.sourceType
         anchorDate.sourceActivityId = dbActivity.sourceActivityId
         anchorDate.sourceKey = dbActivity.sourceKey
+        anchorDate.sourceFormKey = dbActivity.sourceFormKey
         anchorDate.startDays = dbActivity.startDays
         anchorDate.startTime = dbActivity.startTime
         anchorDate.endDays = dbActivity.endDays
@@ -1707,6 +1722,7 @@ class DBHandler: NSObject {
         dbResource.sourceType = resource.sourceType?.rawValue
         dbResource.sourceActivityId = resource.sourceActivityId
         dbResource.sourceKey = resource.sourceKey
+        dbResource.sourceFormKey = resource.sourceFormKey
         dbResource.startTime = resource.startTime
         dbResource.endTime = resource.endTime
         
@@ -1752,6 +1768,7 @@ class DBHandler: NSObject {
             resource.sourceType = (dbResource.sourceType != nil) ? AnchorDateSourceType(rawValue:dbResource.sourceType!)! : nil
             resource.sourceActivityId = dbResource.sourceActivityId
             resource.sourceKey = dbResource.sourceKey
+            resource.sourceFormKey = dbResource.sourceFormKey
             resource.startTime = dbResource.startTime
             resource.endTime = dbResource.endTime
             
@@ -1789,6 +1806,7 @@ class DBHandler: NSObject {
         return dbResourceList
     }
     
+    @discardableResult
     class func  updateResourceLifeTime(_ studyId:String, activityId:String?, questionKey:String?, anchorDateValue:Date) -> (Bool) {
         
       

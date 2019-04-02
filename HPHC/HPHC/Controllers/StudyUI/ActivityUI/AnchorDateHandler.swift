@@ -19,6 +19,7 @@ class EmptyAnchordDates {
     var resource:DBResources!
     var sourceKey:String!
     var sourceActivityId:String!
+    var sourceFormKey:String?
     var anchorDate:Date?
     var sourceFormId:String!
     var isFinishedFetching:Bool = false
@@ -49,7 +50,7 @@ class AnchorDateHandler {
             return handler(false)
         }
         
-        for activity in activities {
+          for activity in activities {
             
             let act = User.currentUser.participatedActivites.filter({$0.activityId == activity.sourceActivityId}).last
             
@@ -59,6 +60,7 @@ class AnchorDateHandler {
                 emptyAnchorDateDetail.activity = activity
                 emptyAnchorDateDetail.sourceKey = activity.sourceKey
                 emptyAnchorDateDetail.sourceActivityId = activity.sourceActivityId
+                emptyAnchorDateDetail.sourceFormKey = activity.sourceFormKey
                 emptyAnchorDatesList.append(emptyAnchorDateDetail)
             }
         
@@ -91,6 +93,7 @@ class AnchorDateHandler {
                 emptyAnchorDateDetail.resource = resource
                 emptyAnchorDateDetail.sourceKey = resource.sourceKey
                 emptyAnchorDateDetail.sourceActivityId = resource.sourceActivityId
+                emptyAnchorDateDetail.sourceFormKey = resource.sourceFormKey
                 emptyAnchorDatesList.append(emptyAnchorDateDetail)
             }
             
@@ -117,14 +120,15 @@ class AnchorDateHandler {
             return
         }
         
-        //send request to get response
+        //send request to get response"
         
         let keys = emptyAnchorDateDetail.sourceKey!
-        let tableName = emptyAnchorDateDetail.sourceActivityId
+        let formKey:String = emptyAnchorDateDetail.sourceFormKey ?? ""
+        let tableName = emptyAnchorDateDetail.sourceActivityId + formKey
         //let activityId = emptyAnchorDateDetail.activity.sourceActivityId
         
         let method = ResponseMethods.executeSQL.method
-        let query:String = "SELECT " + keys + ",Created" + " FROM " + tableName!
+        let query:String = "SELECT " + keys + ",Created" + " FROM " + tableName
         //        let params = [
         //
         //            kParticipantId: "214b3c8b672c735988df8c139fed8abe",

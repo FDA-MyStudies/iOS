@@ -67,6 +67,7 @@ class Resource {
     var availabilityType : ResourceAvailabilityType = .regular
     var sourceType : AnchorDateSourceType?
     var sourceActivityId : String?
+    var sourceFormKey : String?
     var sourceKey : String?
     var startTime : String?
     var endTime : String?
@@ -142,6 +143,7 @@ class Resource {
                 if (Utilities.isValidValue(someObject: (configuration["sourceKey"]) as AnyObject)){
                     self.sourceKey = configuration["sourceKey"] as? String
                 }
+                
                 if (Utilities.isValidValue(someObject: (configuration["startTime"]) as AnyObject)){
                     self.startTime = configuration["startTime"] as? String
                 }
@@ -234,6 +236,9 @@ class Resource {
                 
                 if (Utilities.isValidValue(someObject: (configuration["sourceKey"]) as AnyObject)){
                     self.sourceKey = configuration["sourceKey"] as? String
+                }
+                if (Utilities.isValidValue(someObject: (configuration["sourceFormKey"]) as AnyObject)){
+                    self.sourceFormKey = configuration["sourceFormKey"] as? String
                 }
                 if (Utilities.isValidValue(someObject: (configuration["startTime"]) as AnyObject)){
                     self.startTime = configuration["startTime"] as? String

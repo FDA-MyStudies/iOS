@@ -335,7 +335,7 @@ class ActivitiesViewController : UIViewController{
                 Study.currentStudy?.activities = activities
                 
                 self.handleActivityListResponse()
-                self.fetchActivityAnchorDateResponseFromLabkey()
+                //self.fetchActivityAnchorDateResponseFromLabkey()
                 
             } else {
                 

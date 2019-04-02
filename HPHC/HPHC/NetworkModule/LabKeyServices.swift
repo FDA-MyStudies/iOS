@@ -303,7 +303,7 @@ extension LabKeyServices: NMWebServiceDelegate{
             self.handleEnrollForStudy(response: response as! Dictionary<String, Any>)
         case ResponseMethods.getParticipantResponse.description as String: break
         case ResponseMethods.executeSQL.description as String:
-            self.handleGetParticipantResponse1(response: response as! Dictionary<String, Any>)
+            self.handleGetParticipantResponse(response: response as! Dictionary<String, Any>)
         case ResponseMethods.processResponse.description as String: break
         case ResponseMethods.withdrawFromStudy.description as String: break
         default:

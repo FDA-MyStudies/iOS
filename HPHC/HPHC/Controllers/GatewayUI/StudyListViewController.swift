@@ -496,7 +496,9 @@ class StudyListViewController: UIViewController {
                        options: UIView.AnimationOptions.preferredFramesPerSecond60,
                        animations: { () -> Void in
                         
-                        self.searchView?.frame = CGRect(x: 0 , y: 0 , width: self.view.frame.size.width , height: 64.0)
+                        let y:CGFloat = DeviceType.IS_IPHONE_X_OR_HIGH ? 20.0 : 0.0
+                        
+                        self.searchView?.frame = CGRect(x: 0 , y: y , width: self.view.frame.size.width , height: 64.0)
                         
                         self.searchView?.textFieldSearch?.becomeFirstResponder()
                         self.searchView?.delegate = self
@@ -505,7 +507,7 @@ class StudyListViewController: UIViewController {
                         
                         self.navigationController?.view.addSubview(self.searchView!)
                         
-                        if StudyFilterHandler.instance.searchText.characters.count > 0 {
+                        if StudyFilterHandler.instance.searchText.count > 0 {
                             self.searchView?.textFieldSearch?.text = StudyFilterHandler.instance.searchText
                         }
                         

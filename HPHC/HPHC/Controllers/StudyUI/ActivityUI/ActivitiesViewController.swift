@@ -330,7 +330,7 @@ class ActivitiesViewController : UIViewController{
      */
     func loadActivitiesFromDatabase(){
         
-        if DBHandler.isActivitiesEmpty() {
+        if DBHandler.isActivitiesEmpty((Study.currentStudy?.studyId)!) {
             self.sendRequestToGetActivityStates()
         }
         else {

@@ -414,7 +414,7 @@ class ActivityActiveStep: ActivityStep {
                 if  Utilities.isValidValue(someObject: formatDict?[kActiveTremorTestActiveStepDuration] as AnyObject?)
                     &&  Utilities.isValidValue(someObject: formatDict?[kActiveTremorTestHandOptions] as AnyObject?) {
                     
-                    let activeOptions:ORKTremorActiveTaskOption?
+                    var activeOptions:ORKTremorActiveTaskOption?
                     if Utilities.isValidObject(someObject: formatDict?[kActivityStepActiveOptions] as AnyObject ){
                         activeOptions = nil
                         for  option:Int in (formatDict?[kActivityStepActiveOptions] as? [Int])! {

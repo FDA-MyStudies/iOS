@@ -108,7 +108,7 @@ class ResourcesViewController: UIViewController{
         if StudyUpdates.studyResourcesUpdated {
             WCPServices().getResourcesForStudy(studyId: (Study.currentStudy?.studyId)!, delegate: self)
         } else {
-            self.loadResourceFromDatabase()
+            self.checkIfResourcePresent()
         }
     }
     
@@ -128,25 +128,24 @@ class ResourcesViewController: UIViewController{
         }
     }
     
-    func loadResourceFromDatabase() {
-        
-        if DBHandler.isResourcesEmpty() {
+    func checkIfResourcePresent(){
+        if DBHandler.isResourcesEmpty((Study.currentStudy?.studyId)!) {
             WCPServices().getResourcesForStudy(studyId: (Study.currentStudy?.studyId)!, delegate: self)
         }
         else {
-            DBHandler.loadResourcesForStudy(studyId: (Study.currentStudy?.studyId)!) { (resources) in
-                //if resources.count != 0 {
-                    Study.currentStudy?.resources = resources
-                    self.handleResourcesReponse()
-                    self.updateAnchorDateLifeTime()
-                    
-//                } else {
-//                    WCPServices().getResourcesForStudy(studyId: (Study.currentStudy?.studyId)!, delegate: self)
-//                }
-            }
+            self.loadResourceFromDatabase()
+        }
+    }
+    
+    func loadResourceFromDatabase() {
+        
+        
+        DBHandler.loadResourcesForStudy(studyId: (Study.currentStudy?.studyId)!) { (resources) in
+            Study.currentStudy?.resources = resources
+            self.handleResourcesReponse()
+            self.updateAnchorDateLifeTime()
         }
         
-    
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

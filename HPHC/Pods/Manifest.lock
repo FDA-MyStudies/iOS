@@ -2,17 +2,17 @@ PODS:
   - ActionSheetPicker-3.0 (2.3.0)
   - Crashlytics (3.12.0):
     - Fabric (~> 1.9.0)
-  - CryptoSwift (0.14.0)
+  - CryptoSwift (1.0.0)
   - Fabric (1.9.0)
-  - IQKeyboardManagerSwift (6.2.0)
-  - Realm (3.13.1):
-    - Realm/Headers (= 3.13.1)
-  - Realm/Headers (3.13.1)
-  - RealmSwift (3.13.1):
-    - Realm (= 3.13.1)
-  - SDWebImage (4.4.5):
-    - SDWebImage/Core (= 4.4.5)
-  - SDWebImage/Core (4.4.5)
+  - IQKeyboardManagerSwift (6.2.1)
+  - Realm (3.14.1):
+    - Realm/Headers (= 3.14.1)
+  - Realm/Headers (3.14.1)
+  - RealmSwift (3.14.1):
+    - Realm (= 3.14.1)
+  - SDWebImage (5.0.0):
+    - SDWebImage/Core (= 5.0.0)
+  - SDWebImage/Core (5.0.0)
   - SlideMenuControllerSwift (4.0.0)
 
 DEPENDENCIES:
@@ -40,14 +40,14 @@ SPEC REPOS:
 SPEC CHECKSUMS:
   ActionSheetPicker-3.0: eef157d75e151f255c5333d26656c7fbfe905a51
   Crashlytics: 07fb167b1694128c1c9a5a5cc319b0e9c3ca0933
-  CryptoSwift: 35a10419f4dbf0619c13f8c1c180037e115323fa
+  CryptoSwift: d81eeaa59dc5a8d03720fe919a6fd07b51f7439f
   Fabric: f988e33c97f08930a413e08123064d2e5f68d655
-  IQKeyboardManagerSwift: b07ccf9d8cafe993dcd6cb794eb4ba34611a0c4e
-  Realm: 50071da38fe079e0735e47c9f2eae738c68c5996
-  RealmSwift: 8a1e6a02b7a08cd17a31e3115143fb69fe5f3fb9
-  SDWebImage: ecc03494e973b93b80213649d32175f8d2d17d4d
+  IQKeyboardManagerSwift: 0f0ae8935360b4003e6ea1ac7c19898f01e2f7c7
+  Realm: e12c9c2387d05c5bba3a9c394838f5870e85763b
+  RealmSwift: a82eab9b04c3e1616082c7e17aa300740847769c
+  SDWebImage: 5de80a0302de9e377e62f47d2fa1304efff0e55f
   SlideMenuControllerSwift: 021d6318201c53d4d4d3710517d43d6c556c7dd0
 
 PODFILE CHECKSUM: cc687ff0833e7e583723f7e416ed0ac077195960
 
-COCOAPODS: 1.6.0
+COCOAPODS: 1.6.1

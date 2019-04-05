@@ -826,7 +826,7 @@ class ActivityQuestionStep: ActivityStep {
      */
     func getImageChoices(dataArray: NSArray) -> [ORKImageChoice]? {
         
-        let imageChoiceArray: [ORKImageChoice]?
+        var imageChoiceArray: [ORKImageChoice]?
         imageChoiceArray = [ORKImageChoice]()
         
         if Utilities.isValidObject(someObject: dataArray) {

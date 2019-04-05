@@ -458,15 +458,15 @@ class Activity {
         case .Monthly:
             
             let startDateInterval = TimeInterval(60*60*24*(self.anchorDate?.startDays)!)
-            let endDateInterval = TimeInterval(-1)
+            //let endDateInterval = TimeInterval(-1)
             startDate = date.addingTimeInterval(startDateInterval)
             let calender = Calendar.current
             endDate = calender.date(byAdding: .month, value: (self.anchorDate?.repeatInterval)!, to: startDate)
-            endDate = endDate.addingTimeInterval(endDateInterval)
+            //endDate = endDate.addingTimeInterval(endDateInterval)
         case .Scheduled:
             
             let startDateInterval = TimeInterval(60*60*24*(self.anchorDate?.startDays)!)
-            let endDateInterval = TimeInterval(60*60*24*(self.anchorDate?.endDays)!-1)
+            let endDateInterval = TimeInterval(60*60*24*(self.anchorDate?.endDays)!)
             
             startDate = date.addingTimeInterval(startDateInterval)
             endDate = date.addingTimeInterval(endDateInterval)

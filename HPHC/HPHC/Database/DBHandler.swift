@@ -691,7 +691,7 @@ class DBHandler: NSObject {
         var quesStepKey:String
         var dictionary:[String:Any] = [:]
         let sourceKey = (dbActivity.sourceKey)!
-        if dbActivity.sourceFormKey != nil {
+        if dbActivity.sourceFormKey != nil && dbActivity.sourceFormKey!.count > 0{
             quesStepKey = dbActivity.sourceFormKey!
             let quesResults = results.filter({$0["key"] as! String == quesStepKey}).first
             let resultsArray =  ((quesResults!["value"] as? [[Any]])?.first) as? [[String:Any]]
@@ -722,9 +722,14 @@ class DBHandler: NSObject {
     
     class func updateActivityLifeTimeFor(_ dbActivity:DBActivity, anchorDate:Date) {
         
-        let date = anchorDate
+        var date = anchorDate
         let realm = DBHandler.getRealmObject()!
         
+        //update start date
+        var startDateStringEnrollment =  Utilities.formatterShort?.string(from: date)
+        let startTimeEnrollment =  "00:00:00"
+        startDateStringEnrollment = (startDateStringEnrollment ?? "") + " " + startTimeEnrollment
+        date = Utilities.findDateFromString(dateString: startDateStringEnrollment ?? "")!
         
         let frequency = Frequency(rawValue: (dbActivity.frequencyType)!)!
         let lifeTime = DBHandler.getLifeTime(date,
@@ -817,21 +822,22 @@ class DBHandler: NSObject {
         case .Weekly:
             
             let startDateInterval = TimeInterval(60*60*24*(startDays))
-            let endDateInterval = TimeInterval(60*60*24*7*(repeatInterval) - 1)
+            let endDateInterval = TimeInterval(60*60*24*7*(repeatInterval))
             startDate = date.addingTimeInterval(startDateInterval)
             endDate = startDate.addingTimeInterval(endDateInterval)
         case .Monthly:
             
             let startDateInterval = TimeInterval(60*60*24*(startDays))
-            let endDateInterval = TimeInterval(-1)
             startDate = date.addingTimeInterval(startDateInterval)
+            
+            //let endDateInterval = TimeInterval(-1)
             let calender = Calendar.current
             endDate = calender.date(byAdding: .month, value: (repeatInterval), to: startDate)
-            endDate = endDate.addingTimeInterval(endDateInterval)
+            //endDate = endDate.addingTimeInterval(endDateInterval)
         case .Scheduled:
             
             let startDateInterval = TimeInterval(60*60*24*(startDays))
-            let endDateInterval = TimeInterval(60*60*24*(endDays)-1)
+            let endDateInterval = TimeInterval(60*60*24*(endDays))
             
             startDate = date.addingTimeInterval(startDateInterval)
             endDate = date.addingTimeInterval(endDateInterval)
@@ -1735,13 +1741,13 @@ class DBHandler: NSObject {
         return dbResources
     }
     
-    class func isActivitiesEmpty()->Bool {
+    class func isActivitiesEmpty(_ studyId:String)->Bool {
         let realm = DBHandler.getRealmObject()!
-        return realm.objects(DBActivity.self).isEmpty
+        return realm.objects(DBActivity.self).filter({$0.studyId == studyId}).count == 0
     }
-    class func isResourcesEmpty()->Bool {
+    class func isResourcesEmpty(_ studyId:String)->Bool {
          let realm = DBHandler.getRealmObject()!
-         return realm.objects(DBResources.self).isEmpty
+         return realm.objects(DBResources.self).filter({$0.studyId == studyId}).count == 0
     }
     
     /**

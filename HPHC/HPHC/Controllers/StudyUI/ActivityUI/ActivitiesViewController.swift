@@ -330,16 +330,22 @@ class ActivitiesViewController : UIViewController{
      */
     func loadActivitiesFromDatabase(){
         
-        DBHandler.loadActivityListFromDatabase(studyId: (Study.currentStudy?.studyId)!) { (activities) in
-            if activities.count > 0 {
-                Study.currentStudy?.activities = activities
-                
-                self.handleActivityListResponse()
-                //self.fetchActivityAnchorDateResponseFromLabkey()
-                
-            } else {
-                
-                self.sendRequestToGetActivityStates()
+        if DBHandler.isActivitiesEmpty() {
+            self.sendRequestToGetActivityStates()
+        }
+        else {
+            
+            DBHandler.loadActivityListFromDatabase(studyId: (Study.currentStudy?.studyId)!) { (activities) in
+                if activities.count > 0 {
+                    Study.currentStudy?.activities = activities
+                    
+                    self.handleActivityListResponse()
+                    self.fetchActivityAnchorDateResponseFromLabkey()
+                    
+                } else {
+                    
+                    //self.sendRequestToGetActivityStates()
+                }
             }
         }
     }

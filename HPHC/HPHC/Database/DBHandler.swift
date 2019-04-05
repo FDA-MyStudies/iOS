@@ -1735,6 +1735,10 @@ class DBHandler: NSObject {
         return dbResources
     }
     
+    class func isActivitiesEmpty()->Bool {
+        let realm = DBHandler.getRealmObject()!
+        return realm.objects(DBActivity.self).isEmpty
+    }
     class func isResourcesEmpty()->Bool {
          let realm = DBHandler.getRealmObject()!
          return realm.objects(DBResources.self).isEmpty

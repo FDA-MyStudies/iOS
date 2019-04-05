@@ -456,22 +456,22 @@ class WCPServices: NSObject {
         
         Logger.sharedInstance.info("Activities Parsing Start")
         
-        //Testing
-        let filePath  = Bundle.main.path(forResource: "Activitylist", ofType: "json")
-        let data = NSData(contentsOfFile: filePath!)
-        
-        var activities:Array<Dictionary<String,Any>> = []
-        do {
-            let res = try JSONSerialization.jsonObject(with: data! as Data, options: []) as? Dictionary<String,Any>
-            
-            activities = res?[kActivites] as! Array<Dictionary<String, Any>>
-        }
-        catch {
-            print("json error: \(error.localizedDescription)")
-        }
+//        //Testing
+//        let filePath  = Bundle.main.path(forResource: "Activitylist", ofType: "json")
+//        let data = NSData(contentsOfFile: filePath!)
+//
+//        var activities:Array<Dictionary<String,Any>> = []
+//        do {
+//            let res = try JSONSerialization.jsonObject(with: data! as Data, options: []) as? Dictionary<String,Any>
+//
+//            activities = res?[kActivites] as! Array<Dictionary<String, Any>>
+//        }
+//        catch {
+//            print("json error: \(error.localizedDescription)")
+//        }
         
         //Actual
-        //let activities = response[kActivites] as! Array<Dictionary<String,Any>>
+        let activities = response[kActivites] as! Array<Dictionary<String,Any>>
         
         if Utilities.isValidObject(someObject: activities as AnyObject? ) {
             

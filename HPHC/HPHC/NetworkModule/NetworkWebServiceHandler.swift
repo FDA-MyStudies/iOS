@@ -90,7 +90,12 @@ class NetworkWebServiceHandler: NSObject, URLSessionDelegate {
     }
     
     fileprivate func getBaseURLString(_ requestName : NSString) -> NSString {
-        return NSString.init(format: "%@%@", self .getServerURLString(),requestName)
+        
+        var serverPath = self .getServerURLString()
+//        if requestName == "studyList" {
+//            serverPath = "https://hpwcp-stage.lkcompliant.net/StudyMetaData/"
+//        }
+        return NSString.init(format: "%@%@", serverPath,requestName)
     }
     
     fileprivate func getCombinedWithCommonParams(_ params : NSDictionary?) -> NSDictionary? {

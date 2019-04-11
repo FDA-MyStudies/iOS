@@ -120,8 +120,12 @@ class Study: Hashable {
     var totalIncompleteRuns = 0
     var totalCompleteRuns = 0
     
-    var hashValue: Int {
-        return self.studyId.hashValue
+//    var hashValue: Int {
+//        return hash(into: &self.studyId)//self.studyId.hashValue
+//
+//    }
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(self.studyId)
     }
     
     var withdrawalConfigration: StudyWithdrawalConfigration?

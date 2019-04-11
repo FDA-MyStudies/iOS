@@ -45,7 +45,9 @@ class SignInViewController: UIViewController{
     var tableViewRowDetails: NSMutableArray?
     var user = User.currentUser
     var termsPageOpened = false
-    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .default
+    }
     
 // MARK:- ViewController Lifecycle
     
@@ -111,7 +113,8 @@ class SignInViewController: UIViewController{
         
         self.tableView?.reloadData()
         
-        UIApplication.shared.statusBarStyle = .default
+        //UIApplication.shared.statusBarStyle = .default
+        setNeedsStatusBarAppearanceUpdate()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -399,7 +402,7 @@ extension SignInViewController: UITextFieldDelegate{
                 return true
             }
         } else {
-            if (range.location == textField.text?.characters.count && string == " ") {
+            if (range.location == textField.text?.count && string == " ") {
                 
                 textField.text = textField.text?.appending("\u{00a0}")
                 return false

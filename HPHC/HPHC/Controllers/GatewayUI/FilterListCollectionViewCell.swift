@@ -37,7 +37,7 @@ class FilterListCollectionViewCell: UICollectionViewCell {
     
         //studyData = data["studyData"] as! NSMutableArray
         filterOptions = data
-        if filterOptions.title.characters.count == 0 {
+        if filterOptions.title.count == 0 {
             tableView?.tableHeaderView = nil
         } else {
             labelHeaderTitle?.text = filterOptions.title

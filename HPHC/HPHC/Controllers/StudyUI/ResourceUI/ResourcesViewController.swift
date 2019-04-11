@@ -40,6 +40,9 @@ class ResourcesViewController: UIViewController{
     var withdrawlInformationNotFound = false
     
     var shouldDeleteData: Bool? = false
+    override var preferredStatusBarStyle: UIStatusBarStyle{
+        return .default
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -76,7 +79,8 @@ class ResourcesViewController: UIViewController{
         self.tableView?.rowHeight = UITableView.automaticDimension
         
         self.addHomeButton()
-         UIApplication.shared.statusBarStyle = .default
+        setNeedsStatusBarAppearanceUpdate()
+         //UIApplication.shared.statusBarStyle = .default
         self.navigationController?.setNavigationBarHidden(false, animated: true)
         
         self.tabBarController?.tabBar.isHidden = false

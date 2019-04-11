@@ -417,7 +417,7 @@ class UserServices: NSObject {
                             kUserAuthToken: user.authToken! as String]
         
         let consentVersion: String?
-        if (ConsentBuilder.currentConsent?.version?.characters.count)! > 0 {
+        if (ConsentBuilder.currentConsent?.version?.count)! > 0 {
             consentVersion = ConsentBuilder.currentConsent?.version!
         } else {
             consentVersion = "1"

@@ -136,7 +136,7 @@ class SplashViewController: UIViewController {
         //self.navigateToGatewayDashboard()
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue:"StudySetupCompleted"), object: nil)
         
-        if User.currentUser.authToken != nil && User.currentUser.authToken.characters.count > 0{
+        if User.currentUser.authToken != nil && User.currentUser.authToken.count > 0{
             
             let appDelegate = UIApplication.shared.delegate as! AppDelegate
             appDelegate.checkPasscode(viewController: self)
@@ -186,15 +186,14 @@ class SplashViewController: UIViewController {
             let currentDate = "\(Date(timeIntervalSinceNow: 0))"
             let currentIndex = currentDate.index(currentDate.endIndex
                 , offsetBy: -13)
-            let subStringFromDate = currentDate.substring(to: currentIndex)
-            
+            let subStringFromDate = String(currentDate[..<currentIndex])
             let ud = UserDefaults.standard
             
             if User.currentUser.userType == .FDAUser {
                 
                 let index =  User.currentUser.userId.index(User.currentUser.userId.endIndex
                     , offsetBy: -16)
-                let subKey = User.currentUser.userId.substring(to:index )
+                let subKey = String(User.currentUser.userId[..<index])
                 ud.set("\(subKey + subStringFromDate)", forKey: kEncryptionKey)
             }
             else{
@@ -212,7 +211,7 @@ class SplashViewController: UIViewController {
                 
                 let index =  udid?.index((udid?.endIndex)!
                     , offsetBy: -20)
-                udid = udid?.substring(to: index!)
+                udid = String((udid?[..<index!])!)
                 ud.set(udid, forKey: kEncryptionIV)
             }
             

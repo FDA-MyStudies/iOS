@@ -171,7 +171,7 @@ class ActivitiesViewController : UIViewController{
         } else {
             //check if user navigated from notification
             
-            if NotificationHandler.instance.activityId.characters.count > 0 {
+            if NotificationHandler.instance.activityId.count > 0 {
                 
                 let activityId = NotificationHandler.instance.activityId
                 

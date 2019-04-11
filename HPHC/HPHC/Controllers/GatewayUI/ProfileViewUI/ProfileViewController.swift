@@ -761,7 +761,7 @@ extension ProfileViewController: UITextFieldDelegate{
         
        
         if  tag == .EmailId {
-            if string == " " || finalString.characters.count > 255{
+            if string == " " || finalString.count > 255{
                 return false
             }
             else{
@@ -824,7 +824,7 @@ extension ProfileViewController: NMWebServiceDelegate {
         else if requestName as String ==  RegistrationMethods.userProfile.description {
             self.tableViewProfile?.reloadData()
             
-            if (user.settings?.leadTime?.characters.count)! > 0 {
+            if (user.settings?.leadTime?.count)! > 0 {
                 self.buttonLeadTime?.setTitle(user.settings?.leadTime, for: .normal)
             }
             

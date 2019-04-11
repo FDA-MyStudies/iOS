@@ -169,7 +169,7 @@ extension FeedBackViewController: UITextViewDelegate {
     }
     func textViewDidEndEditing(_ textView: UITextView) {
         print("textViewDidEndEditing")
-        if textView.tag == 101 && textView.text.characters.count == 0 {
+        if textView.tag == 101 && textView.text.count == 0 {
             textView.text = "Enter your feedback here"
             textView.textColor = UIColor.lightGray
             textView.tag = 100

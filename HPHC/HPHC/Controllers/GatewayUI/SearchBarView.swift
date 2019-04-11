@@ -86,7 +86,7 @@ extension SearchBarView: UITextFieldDelegate{
         
         if textField == textFieldSearch {
             
-            if finalString != nil && finalString.characters.count > 500 {
+            if finalString != nil && finalString.count > 500 {
                 return false
             } else {
                 return true
@@ -103,7 +103,7 @@ extension SearchBarView: UITextFieldDelegate{
         
         textField.resignFirstResponder()
         
-        if textField.text != nil && (textField.text?.characters.count)! > 0 {
+        if textField.text != nil && (textField.text?.count)! > 0 {
             self.delegate?.search(text: textField.text!)
         }
         

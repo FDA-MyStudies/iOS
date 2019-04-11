@@ -43,7 +43,9 @@ class StudyDashboardViewController: UIViewController{
     var tableViewRowDetails = NSMutableArray()
     var todayActivitiesArray = NSMutableArray()
     var statisticsArray = NSMutableArray()
-    
+    override var preferredStatusBarStyle: UIStatusBarStyle{
+        return .lightContent
+    }
     
 // MARK:- ViewController Lifecycle
     override func viewDidLoad() {
@@ -71,7 +73,8 @@ class StudyDashboardViewController: UIViewController{
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        UIApplication.shared.statusBarStyle = .lightContent
+        //UIApplication.shared.statusBarStyle = .lightContent
+        setNeedsStatusBarAppearanceUpdate()
         
         //show navigationbar
         self.navigationController?.setNavigationBarHidden(true, animated: true)

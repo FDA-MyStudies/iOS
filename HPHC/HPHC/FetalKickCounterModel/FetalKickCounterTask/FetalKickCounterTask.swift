@@ -104,7 +104,7 @@ class FetalKickCounterTask {
         let introStep = FetalKickIntroStep(identifier: kFetalKickIntroductionStepIdentifier)
         introStep.introTitle =  NSLocalizedString(kFetalKickInstructionStepTitle, comment: "")
       
-      if (self.instructionText?.characters.count)! > 0 {
+      if (self.instructionText?.count)! > 0 {
         introStep.subTitle = NSLocalizedString(self.instructionText!, comment: "")
        
       } else {

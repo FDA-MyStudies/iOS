@@ -31,7 +31,9 @@ class ForgotPasswordViewController: UIViewController{
     
     @IBOutlet var buttonSubmit: UIButton?
     @IBOutlet var textFieldEmail: UITextField?
-    
+    override var preferredStatusBarStyle: UIStatusBarStyle{
+        return .default
+    }
 // MARK:- ViewController Delegates
     
     override func viewDidLoad() {
@@ -54,7 +56,8 @@ class ForgotPasswordViewController: UIViewController{
         //unhide navigationbar
         self.navigationController?.setNavigationBarHidden(false, animated: true)
         
-        UIApplication.shared.statusBarStyle = .default
+        //UIApplication.shared.statusBarStyle = .default
+        setNeedsStatusBarAppearanceUpdate()
         
     }
     

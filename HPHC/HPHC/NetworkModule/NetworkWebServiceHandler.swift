@@ -91,7 +91,7 @@ class NetworkWebServiceHandler: NSObject, URLSessionDelegate {
     
     fileprivate func getBaseURLString(_ requestName : NSString) -> NSString {
         
-        var serverPath = self .getServerURLString()
+        let serverPath = self .getServerURLString()
 //        if requestName == "studyList" {
 //            serverPath = "https://hpwcp-stage.lkcompliant.net/StudyMetaData/"
 //        }
@@ -164,9 +164,9 @@ class NetworkWebServiceHandler: NSObject, URLSessionDelegate {
             for key in allKeys! {
                 url = (url as String) + String(format: "%@=%@&",String(describing: key), parameters?[key as! String] as! CVarArg )
             }
-            let length = url.characters.count-1
+            let length = url.count-1
             let index = url.index(url.startIndex, offsetBy: length)
-            url = url.substring(to: index) //url.substring(to: length)
+            url =  String(url[..<index])//url.substring(to: index) //url.substring(to: length)
         }
         return url as NSString
         

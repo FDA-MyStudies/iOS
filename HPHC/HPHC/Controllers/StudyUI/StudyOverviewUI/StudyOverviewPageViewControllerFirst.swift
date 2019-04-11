@@ -42,7 +42,9 @@ class StudyOverviewViewControllerFirst: UIViewController {
     var moviePlayer: MPMoviePlayerViewController!
     var playerViewController: AVPlayerViewController!
     //var player:AVPlayer!
-    
+    override var preferredStatusBarStyle: UIStatusBarStyle{
+        return .lightContent
+    }
 // MARK:- Viewcontroller Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -95,7 +97,8 @@ class StudyOverviewViewControllerFirst: UIViewController {
         }
        self.labelDescription?.textAlignment = .center
         
-        UIApplication.shared.statusBarStyle = .lightContent
+        //UIApplication.shared.statusBarStyle = .lightContent
+        setNeedsStatusBarAppearanceUpdate()
         
         //self.labelDescription?.text = overviewSectionDetail.text!
         
@@ -149,7 +152,7 @@ class StudyOverviewViewControllerFirst: UIViewController {
         let url = URL.init(string: urlString)
         let extenstion = url?.pathExtension
     
-        if  extenstion == nil || extenstion?.characters.count == 0 {
+        if  extenstion == nil || extenstion?.count == 0 {
             UIApplication.shared.openURL(url!)
         } else {
             

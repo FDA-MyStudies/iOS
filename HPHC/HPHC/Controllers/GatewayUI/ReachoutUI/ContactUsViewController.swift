@@ -213,7 +213,7 @@ extension ContactUsViewController: UITextViewDelegate {
     }
     func textViewDidEndEditing(_ textView: UITextView) {
         print("textViewDidEndEditing")
-        if textView.tag == 101 && textView.text.characters.count == 0 {
+        if textView.tag == 101 && textView.text.count == 0 {
             textView.text = kMessageTextViewPlaceHolder
             textView.textColor = UIColor.lightGray
             textView.tag = 100
@@ -253,7 +253,7 @@ extension ContactUsViewController: UITextFieldDelegate{
         }
         
         if  tag == .Email {
-            if string == " " || finalString.characters.count > 255{
+            if string == " " || finalString.count > 255{
                 return false
             }
             else{

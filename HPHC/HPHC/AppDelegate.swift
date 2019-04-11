@@ -134,7 +134,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let currentDate = "\(Date(timeIntervalSinceNow: 0))"
         let currentIndex = currentDate.index(currentDate.endIndex
             , offsetBy: -13)
-        let subStringFromDate = currentDate.substring(to: currentIndex)
+        let subStringFromDate = String(currentDate[..<currentIndex])
         
         let ud = UserDefaults.standard
         
@@ -142,7 +142,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             
             let index =  User.currentUser.userId.index(User.currentUser.userId.endIndex
                 , offsetBy: -16)
-            let subKey = User.currentUser.userId.substring(to: index ) // 36 - 12 =  24 characters
+            let subKey = String(User.currentUser.userId[..<index]) //User.currentUser.userId.substring(to: index ) // 36 - 12 =  24 characters
             ud.set("\(subKey + subStringFromDate)", forKey: kEncryptionKey)
             
         }else { // Anonymous User
@@ -157,7 +157,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             var udid = UIDevice.current.identifierForVendor?.uuidString
             let index =  udid?.index((udid?.endIndex)!
                 , offsetBy: -20)
-            udid = udid?.substring(to: index!)
+            udid = String((udid?[..<index!])!)//udid?.substring(to: index!)
             ud.set(udid, forKey: kEncryptionIV)
         }
         ud.synchronize()
@@ -168,15 +168,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
      */
     func calculateTimeZoneChange() {
         
-        let date = Date().utcDate()
+        //let date = Date().utcDate()
         
-        let timeZoneUTC = TimeZone(abbreviation: "UTC")
-        let timeZoneAutoCurrent = TimeZone.autoupdatingCurrent
+        //let timeZoneUTC = TimeZone(abbreviation: "UTC")
+        //let timeZoneAutoCurrent = TimeZone.autoupdatingCurrent
         let timeZoneCurrent = TimeZone.current
         
-        let differenceFromUTC = timeZoneUTC?.secondsFromGMT()
+        //let differenceFromUTC = timeZoneUTC?.secondsFromGMT()
         let differenceFromCurrent = timeZoneCurrent.secondsFromGMT()
-        let differenceFromAutoCurrent = timeZoneCurrent.secondsFromGMT()
+        //let differenceFromAutoCurrent = timeZoneCurrent.secondsFromGMT()
         
         //Saving TimeZone to User Defaults
         let ud = UserDefaults.standard

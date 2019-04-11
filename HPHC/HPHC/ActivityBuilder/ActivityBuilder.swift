@@ -369,7 +369,7 @@ class ActivityBuilder {
                                             
                                             for destinationId in destination! {
                                                 
-                                                if destinationId.characters.count != 0 {
+                                                if destinationId.count != 0 {
                                                     
                                                     let  directRule = ORKDirectStepNavigationRule(destinationStepIdentifier: destinationId)
                                                     

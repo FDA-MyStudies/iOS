@@ -73,6 +73,10 @@ class StudyHomeViewController: UIViewController{
         }
     }
     
+    override var preferredStatusBarStyle: UIStatusBarStyle{
+        return .default
+    }
+    
     func hideSubViews(){
         for subview in self.view.subviews{
             subview.isHidden = true;
@@ -350,7 +354,8 @@ class StudyHomeViewController: UIViewController{
         
         UIView.appearance(whenContainedInInstancesOf: [ORKTaskViewController.self]).tintColor = kUIColorForSubmitButtonBackground
         
-        UIApplication.shared.statusBarStyle = .default
+        //UIApplication.shared.statusBarStyle = .default
+        setNeedsStatusBarAppearanceUpdate()
         present(taskViewController!, animated: true, completion: {
             
             let appdelegate: AppDelegate? = UIApplication.shared.delegate as? AppDelegate

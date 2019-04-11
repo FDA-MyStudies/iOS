@@ -52,7 +52,9 @@ class SignUpViewController: UIViewController{
     @IBOutlet var termsAndCondition: LinkTextView?
     var viewLoadFrom: SignUpLoadFrom = .menu
     var termsPageOpened = false
-
+    override var preferredStatusBarStyle: UIStatusBarStyle{
+        return .default
+    }
 
 // MARK:- ViewController Lifecycle
     
@@ -103,8 +105,8 @@ class SignUpViewController: UIViewController{
             } else {
                 self.addBackBarButton()
             }
-            UIApplication.shared.statusBarStyle = .default
-            
+ 
+            setNeedsStatusBarAppearanceUpdate()
             self.tableView?.reloadData()
         }
     }
@@ -450,16 +452,16 @@ extension SignUpViewController: UITextFieldDelegate{
         }
         
         if  tag == .EmailId {
-            if string == " " || finalString.characters.count > 255{
+            if string == " " || finalString.count > 255{
                 return false
             } else {
                 return true
             }
         } else if tag == .Password || tag == .ConfirmPassword {
-            if finalString.characters.count > 64 {
+            if finalString.count > 64 {
                 return false
             } else {
-                if (range.location == textField.text?.characters.count && string == " ") {
+                if (range.location == textField.text?.count && string == " ") {
                     
                     textField.text = textField.text?.appending("\u{00a0}")
                     return false

@@ -48,7 +48,9 @@ class ChangePasswordViewController: UIViewController {
     var confirmPassword = ""
     var temporaryPassword: String = ""
     var viewLoadFrom: ChangePasswordLoadFrom = .profile
-    
+    override var preferredStatusBarStyle: UIStatusBarStyle{
+        return .default
+    }
     
 // MARK:- ViewController Lifecycle
     override func viewDidLoad() {
@@ -72,7 +74,7 @@ class ChangePasswordViewController: UIViewController {
         //unhide navigationbar
         self.navigationController?.setNavigationBarHidden(false, animated: true)
         
-        if temporaryPassword.characters.count > 0{
+        if temporaryPassword.count > 0{
             oldPassword = temporaryPassword
             tableViewRowDetails?.removeObject(at: 0)
             self.title = NSLocalizedString(kCreatePasswordTitleText, comment: "")
@@ -86,8 +88,9 @@ class ChangePasswordViewController: UIViewController {
         
         self.addBackBarButton()
         
-        UIApplication.shared.statusBarStyle = .default
+        //UIApplication.shared.statusBarStyle = .default
     }
+    
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -200,7 +203,7 @@ extension ChangePasswordViewController : UITableViewDataSource {
         
         cell.populateCellData(data: tableViewData, securedText: true)
         var tagIncremental = 100
-        if temporaryPassword.characters.count > 0{
+        if temporaryPassword.count > 0{
             
             tagIncremental = 101
         } else {
@@ -238,10 +241,10 @@ extension ChangePasswordViewController: UITextFieldDelegate{
         
         
         if tag == .newPassword || tag == .confirmPassword {
-            if finalString.characters.count > 64 {
+            if finalString.count > 64 {
                 return false
             } else {
-                if (range.location == textField.text?.characters.count && string == " ") {
+                if (range.location == textField.text?.count && string == " ") {
                     
                     textField.text = textField.text?.appending("\u{00a0}")
                     return false
@@ -250,7 +253,7 @@ extension ChangePasswordViewController: UITextFieldDelegate{
             }
         } else {
             
-            if (range.location == textField.text?.characters.count && string == " ") {
+            if (range.location == textField.text?.count && string == " ") {
                 
                 textField.text = textField.text?.appending("\u{00a0}")
                 return false

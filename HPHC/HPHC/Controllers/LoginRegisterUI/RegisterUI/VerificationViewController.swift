@@ -134,7 +134,7 @@ class VerificationViewController: UIViewController{
      */
     @IBAction func continueButtonAction(_ sender: Any) {
         
-        if (textFieldVerificationCode?.text?.characters.count)! > 0 {
+        if (textFieldVerificationCode?.text?.count)! > 0 {
              UserServices().verifyEmail(emailId: User.currentUser.emailId!,  verificationCode:(self.textFieldVerificationCode?.text)! , delegate: self)
         } else {
              self.showAlertMessages(textMessage: kMessageVerificationCodeEmpty)
@@ -232,7 +232,7 @@ extension VerificationViewController:UITextFieldDelegate{
         
         let finalString = textField.text! + string
         
-        if string == " " || finalString.characters.count > 255 {
+        if string == " " || finalString.count > 255 {
             return false
         } else {
             return true

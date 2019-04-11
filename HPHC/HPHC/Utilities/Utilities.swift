@@ -104,10 +104,11 @@ class Utilities: NSObject {
         var cString: String =  hex.trimmingCharacters(in: NSCharacterSet.whitespacesAndNewlines)
         
         if (cString.hasPrefix("#")) {
-            cString = cString.substring(from: cString.characters.index(cString.startIndex, offsetBy: 1))
+            let index = cString.index(cString.startIndex, offsetBy: 1)
+            cString =  String(cString[index...])//cString.substring(from: cString.index(cString.startIndex, offsetBy: 1))
         }
         
-        if ((cString.characters.count) != 6) {
+        if ((cString.count) != 6) {
             return UIColor.gray
         }
         
@@ -188,7 +189,7 @@ class Utilities: NSObject {
         
         let emailTest = NSPredicate(format: "SELF MATCHES %@", emailRegEx)
         
-        if testStr.characters.count > 255 {
+        if testStr.count > 255 {
             return false
         } else {
             return emailTest.evaluate(with: testStr)
@@ -219,7 +220,7 @@ class Utilities: NSObject {
         let specialresult = texttest2.evaluate(with: text)
         print("\(specialresult)")
         
-        let textCountResult = text.characters.count > 7 && text.characters.count <= 64 ? true : false
+        let textCountResult = text.count > 7 && text.count <= 64 ? true : false
         
         if capitalresult == false || numberresult == false || specialresult == false || textCountResult ==  false || lowercaseresult == false{
             return false
@@ -297,7 +298,7 @@ class Utilities: NSObject {
             if someObject as? Int != nil && (someObject as? Int)! >= 0 {
                 return true
                 
-            } else if someObject as? String != nil && ((someObject as? String)?.characters.count)! > 0 && (someObject as? String) != "" {
+            } else if someObject as? String != nil && ((someObject as? String)?.count)! > 0 && (someObject as? String) != "" {
                 return true
                 
             } else if someObject as? Bool != nil && (someObject as! Bool == true || someObject as! Bool == false){

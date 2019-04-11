@@ -47,7 +47,9 @@ class StudyListViewController: UIViewController {
     var previousStudyList: Array<Study> = []
     
     var allStudyList: Array<Study> = [] //Gatewaystudylist
-    
+    override var preferredStatusBarStyle: UIStatusBarStyle{
+        return .default
+    }
     // MARK:- Viewcontroller lifecycle
     
     override func viewDidLoad() {
@@ -131,8 +133,8 @@ class StudyListViewController: UIViewController {
             self.sendRequestToGetStudyList()
         }
         
-        UIApplication.shared.statusBarStyle = .default
-        
+        //UIApplication.shared.statusBarStyle = .default
+        setNeedsStatusBarAppearanceUpdate()
         //Checking if registering notification is pending
         if ud.value(forKey: kNotificationRegistrationIsPending) != nil && ud.bool(forKey: kNotificationRegistrationIsPending) == true{
             appdelegate.askForNotification()
@@ -318,7 +320,7 @@ class StudyListViewController: UIViewController {
             }
         } else {
             self.checkIfNotificationEnabled()
-            if NotificationHandler.instance.studyId.characters.count > 0 {
+            if NotificationHandler.instance.studyId.count > 0 {
                 
                 let studyId = NotificationHandler.instance.studyId
                 let study = Gateway.instance.studies?.filter({$0.studyId == studyId}).first
@@ -801,7 +803,7 @@ extension StudyListViewController : StudyFilterDelegates{
         
         //filter by searched Text
         var searchTextFilteredStudies: Array<Study>! = []
-        if searchText.characters.count > 0 {
+        if searchText.count > 0 {
             searchTextFilteredStudies = self.allStudyList.filter({
                 ($0.name?.containsIgnoringCase(searchText))! || ($0.category?.containsIgnoringCase(searchText))! || ($0.description?.containsIgnoringCase(searchText))! || ($0.sponserName?.containsIgnoringCase(searchText))!
                 
@@ -877,7 +879,7 @@ extension StudyListViewController : StudyFilterDelegates{
         //Assigning Filtered result to Studlist
         let allStudiesArray: Array<Study> = Array(allFilteredSet)
         
-        if searchText.characters.count == 0 && bookmarked == false && studyStatus.count == 0 &&
+        if searchText.count == 0 && bookmarked == false && studyStatus.count == 0 &&
             pariticipationsStatus.count == 0 && categories.count == 0 {
             
             self.studiesList = self.allStudyList
@@ -980,7 +982,7 @@ extension StudyListViewController : searchBarDelegate {
         
         if self.studiesList.count == 0 && self.previousStudyList.count > 0 {
             self.studiesList = self.previousStudyList
-        } else if searchView?.textFieldSearch?.text?.characters.count == 0 {
+        } else if searchView?.textFieldSearch?.text?.count == 0 {
             
             if StudyFilterHandler.instance.previousAppliedFilters.count > 0 {
                 let previousCollectionData = StudyFilterHandler.instance.previousAppliedFilters
@@ -1038,7 +1040,7 @@ extension StudyListViewController : searchBarDelegate {
         
         //filter by searched Text
         var searchTextFilteredStudies: Array<Study>! = []
-        if text.characters.count > 0 {
+        if text.count > 0 {
             searchTextFilteredStudies = self.allStudyList.filter({
                 ($0.name?.containsIgnoringCase(text))! || ($0.category?.containsIgnoringCase(text))! || ($0.description?.containsIgnoringCase(text))! || ($0.sponserName?.containsIgnoringCase(text))!
                 

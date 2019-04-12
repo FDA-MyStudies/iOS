@@ -89,7 +89,7 @@
     
     NSInteger sections = [super numberOfSectionsInTableView:tableView];
     
-    NSLog(@"sections-> %d", sections);
+    NSLog(@"sections-> %ld", (long)sections);
 
     if (sections - 1 == section) {
         if ([view.subviews.lastObject isKindOfClass:[UIButton class]]) {
@@ -172,14 +172,14 @@
         if (self.originalTableView.contentSize.height > self.originalTableView.frame.size.height)
         {
           
-            NSInteger previousLastSectionRowCount = [_originalTableView numberOfRowsInSection:_repeatableTextSection - 1];
+            NSInteger previousLastSectionRowCount = [self.originalTableView numberOfRowsInSection:self.repeatableTextSection - 1];
             
             NSIndexPath *scrollToIndexPath;
             
-            if (_lastSectionRowCount <= previousLastSectionRowCount) {
-                scrollToIndexPath = [NSIndexPath indexPathForRow:previousLastSectionRowCount - 1 inSection:_repeatableTextSection - 1];
+            if (self.lastSectionRowCount <= previousLastSectionRowCount) {
+                scrollToIndexPath = [NSIndexPath indexPathForRow:previousLastSectionRowCount - 1 inSection:self.repeatableTextSection - 1];
             }else {
-                scrollToIndexPath = [NSIndexPath indexPathForRow:0 inSection:_repeatableTextSection];
+                scrollToIndexPath = [NSIndexPath indexPathForRow:0 inSection:self.repeatableTextSection];
             }
             
             [self.originalTableView scrollToRowAtIndexPath:scrollToIndexPath atScrollPosition:UITableViewScrollPositionTop animated:YES];

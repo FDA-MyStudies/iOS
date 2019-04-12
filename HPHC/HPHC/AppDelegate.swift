@@ -810,7 +810,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                         
                     case .Announcement: break
                         
-                    default: break
+                    //default: break
                         
                     }
                 }else {
@@ -1003,7 +1003,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             
             //Remove  progress
             self.addAndRemoveProgress(add: false)
-            if slideMenuController != nil {
+            //if slideMenuController != nil {
                 User.resetCurrentUser()
                 let ud = UserDefaults.standard
                 ud.removeObject(forKey: kUserAuthToken)
@@ -1013,7 +1013,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 let leftController = (slideMenuController.leftViewController as? LeftMenuViewController)!
                 leftController.changeViewController(.reachOut_signIn)
                 leftController.createLeftmenuItems()
-            }
+            //}
         }
     }
     
@@ -1537,7 +1537,7 @@ extension AppDelegate: ORKTaskViewControllerDelegate {
                                 if answeredSet == correctAnswerSet {
                                     userScore = userScore + 1
                                 }
-                            default: break
+                            //default: break
                             }
                             
                             j+=1
@@ -1760,7 +1760,7 @@ extension UIWindow{
         let view = UINib(nibName: kNewProgressViewNIB, bundle: nil).instantiate(withOwner: nil, options: nil)[0] as? UIView
         
         let url = Bundle.main.url(forResource: kResourceName, withExtension: "gif")!
-        let data = try! Data(contentsOf: url)
+        _ = try! Data(contentsOf: url)
         let webView =  (view?.subviews.first as? UIWebView)!
         
         webView.loadRequest(URLRequest.init(url: url))
@@ -1783,21 +1783,21 @@ extension UIWindow{
      */
     func addProgressIndicatorOnWindowFromTop() {
         
-        var view = self.viewWithTag(50000)
+        let view = self.viewWithTag(50000)
         if view == nil {
             
             let view = UINib(nibName: kNewProgressViewNIB, bundle: nil).instantiate(withOwner: nil, options: nil)[0] as? UIView
             
             
             let url = Bundle.main.url(forResource: kResourceName, withExtension: "gif")!
-            let data = try! Data(contentsOf: url)
+            _ = try! Data(contentsOf: url)
             let webView =  (view?.subviews.first as? UIWebView)!
             
             webView.loadRequest(URLRequest.init(url: url))
             webView.scalesPageToFit = true
             webView.contentMode = UIView.ContentMode.scaleAspectFit
             
-            var frame = UIScreen.main.bounds
+            let frame = UIScreen.main.bounds
             
             view?.frame = frame
             view?.tag = 50000

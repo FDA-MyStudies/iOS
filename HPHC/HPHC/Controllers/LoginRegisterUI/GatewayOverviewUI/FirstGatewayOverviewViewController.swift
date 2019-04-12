@@ -40,7 +40,9 @@ class FirstGatewayOverviewViewController: UIViewController{
     var overviewSectionDetail: OverviewSection!
     var moviePlayer: MPMoviePlayerViewController!
     var playerViewController: AVPlayerViewController!
-    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
     
 // MARK:- View Controller Lifecycle
     override func viewDidLoad() {
@@ -59,7 +61,8 @@ class FirstGatewayOverviewViewController: UIViewController{
         labelDescriptionText?.text = overviewSectionDetail.text
         imageViewBackgroundImage?.image = UIImage.init(named: overviewSectionDetail.imageURL!)
         
-        UIApplication.shared.statusBarStyle = .lightContent
+        //UIApplication.shared.statusBarStyle = .lightContent
+        setNeedsStatusBarAppearanceUpdate()
 
     }
     

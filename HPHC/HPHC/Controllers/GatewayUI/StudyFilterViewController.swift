@@ -127,7 +127,7 @@ class StudyFilterViewController: UIViewController {
                     
                 case .category:
                     categories.append(value.title)
-                default: break
+                //default: break
                 }
             }
             i = i + 1
@@ -332,7 +332,7 @@ extension AppDelegate{
                     
                 case .category:
                     categories.append(value.title)
-                default: break
+                //default: break
                 }
             }
             i = i + 1

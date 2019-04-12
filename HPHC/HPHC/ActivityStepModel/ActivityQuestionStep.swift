@@ -583,7 +583,7 @@ class ActivityQuestionStep: ActivityStep {
                         }
                     }
                 } else {
-                    Logger.sharedInstance.debug("numeric has null values:\(formatDict)")
+                    Logger.sharedInstance.debug("numeric has null values:\(String(describing: formatDict))")
                     return nil
                 }
             case .timeOfDay:
@@ -627,12 +627,11 @@ class ActivityQuestionStep: ActivityStep {
                         
                         questionStepAnswerFormat = ORKAnswerFormat.dateTime(withDefaultDate: defaultDate as Date?, minimumDate: minimumDate as Date?, maximumDate: maximumDate as Date?, calendar: NSCalendar.current)
                         
-                    default:
-                        break
+                    //default:break
                     }
                     
                 } else {
-                    Logger.sharedInstance.debug("date has null values:\(formatDict)")
+                    Logger.sharedInstance.debug("date has null values:\(String(describing: formatDict))")
                     return nil
                 }
             case .text:
@@ -673,7 +672,7 @@ class ActivityQuestionStep: ActivityStep {
                     questionStepAnswerFormat = answerFormat
                     
                 } else {
-                    Logger.sharedInstance.debug("text has null values:\(formatDict)")
+                    Logger.sharedInstance.debug("text has null values:\(String(describing: formatDict))")
                     return nil
                 }
             case .email:
@@ -752,7 +751,7 @@ class ActivityQuestionStep: ActivityStep {
             questionStep?.text = text
             return questionStep!
         } else {
-            Logger.sharedInstance.debug("FormatDict has null values:\(formatDict)")
+            Logger.sharedInstance.debug("FormatDict has null values:\(String(describing: formatDict))")
             return nil
         }
     }
@@ -857,8 +856,8 @@ class ActivityQuestionStep: ActivityStep {
                         let selectedImageData  = NSData(base64Encoded: ((dict[kStepQuestionImageChoiceSelectedImage] as? String)!), options: .ignoreUnknownCharacters)
                         
                         //Create image Instance from Data
-                        let normalImage: UIImage = UIImage(data: (normalImageData as? Data)!)!
-                        let selectedImage: UIImage =  UIImage(data: (selectedImageData as? Data)!)!
+                        let normalImage: UIImage = UIImage(data: (normalImageData as Data?)!)!
+                        let selectedImage: UIImage =  UIImage(data: (selectedImageData as Data?)!)!
                         
                         //Create ORKImageChoice
                         let  choice = ORKImageChoice( normalImage: normalImage ,  selectedImage: selectedImage , text: dict[kStepQuestionImageChoiceText] as? String, value: value  as NSCoding & NSCopying & NSObjectProtocol )
@@ -869,7 +868,7 @@ class ActivityQuestionStep: ActivityStep {
                     }
                 } else {
                     return nil
-                    Logger.sharedInstance.debug("ORKImageChoice Dictionary is null :\(dataArray[i])")
+                    //Logger.sharedInstance.debug("ORKImageChoice Dictionary is null :\(dataArray[i])")
                 }
             }
         } else {

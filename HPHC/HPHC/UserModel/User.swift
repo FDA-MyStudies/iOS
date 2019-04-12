@@ -402,7 +402,7 @@ class User{
             self.participatedActivites.append(activityStatus)
             return activityStatus
             
-            Logger.sharedInstance.info("User Activity Status: activity is updated : \(studyId)")
+            //Logger.sharedInstance.info("User Activity Status: activity is updated : \(studyId)")
         }
     }
     

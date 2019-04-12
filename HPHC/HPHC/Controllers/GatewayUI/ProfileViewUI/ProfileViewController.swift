@@ -692,7 +692,7 @@ extension ProfileViewController: UITableViewDataSource {
                 
                 cell.buttonChangePassword?.addTarget(self, action:#selector(buttonActionChangePassCode), for: .touchUpInside)
                 
-            default: break
+            //default: break
             }
             //Cell data setup
             cell.populateCellData(data: tableViewData, securedText: isSecuredEntry,keyboardType: keyBoardType)

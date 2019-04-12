@@ -186,7 +186,7 @@ extension ContactUsViewController: UITableViewDataSource{
             cell.backgroundColor = UIColor.clear
             return cell
         }
-        return cell
+        //return cell
     }
 }
 
@@ -284,9 +284,9 @@ extension ContactUsViewController: UITextFieldDelegate{
             ContactUsFeilds.subject = textField.text!
             break
             
-        default:
-            print("No Matching data Found")
-            break
+//        default:
+//            print("No Matching data Found")
+//            break
         }
     }
 }

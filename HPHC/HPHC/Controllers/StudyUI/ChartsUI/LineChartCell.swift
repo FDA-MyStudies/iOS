@@ -116,7 +116,7 @@ class LineChartCell: GraphChartTableViewCell {
         
         
         
-        var points: Array<ORKValueRange> = []
+        var _: Array<ORKValueRange> = []
         
        
         let activity = Study.currentStudy?.activities.filter({$0.actvityId == chart.activityId}).last
@@ -156,8 +156,8 @@ class LineChartCell: GraphChartTableViewCell {
             
         case .days_of_week:
             
-            print("start of Week \(Date().startOfWeek)")
-            print("end of Week \(Date().endOfWeek)")
+            print("start of Week \(String(describing: Date().startOfWeek))")
+            print("end of Week \(String(describing: Date().endOfWeek))")
             
             startDateOfWeek = Date().startOfWeek
             endDateOfWeek = Date().endOfWeek
@@ -259,7 +259,7 @@ class LineChartCell: GraphChartTableViewCell {
             
             
             
-        default: break
+        //default: break
             
         }
         
@@ -559,7 +559,7 @@ class LineChartCell: GraphChartTableViewCell {
         
         let dataList: Array<DBStatisticsData> = currentChart.statList.filter({$0.startDate! >= date.startOfMonth() && $0.startDate! <= date.endOfMonth()})
         
-        let array = dataList.map{$0.data}
+       // let array = dataList.map{$0.data}
         var points: Array<ORKValueRange> = []
         xAxisTitles = []
         plotPoints = []
@@ -607,12 +607,12 @@ class LineChartCell: GraphChartTableViewCell {
         
         let dataList: Array<DBStatisticsData> = currentChart.statList.filter({$0.startDate! >= startDate && $0.startDate! <= endDate})
         
-        let array = dataList.map{$0.data }
+       // let array = dataList.map{$0.data }
         var points: Array<ORKValueRange> = []
        
         plotPoints = []
         
-        for i in 1...xAxisTitles.count {
+        for _ in 1...xAxisTitles.count {
             
             
             points.append(ORKValueRange())
@@ -650,7 +650,7 @@ class LineChartCell: GraphChartTableViewCell {
         
         let dataList: Array<DBStatisticsData> = currentChart.statList.filter({$0.startDate! >= date.startOfYear() && $0.startDate! <= date.endOfYear()})
         
-        let array = dataList.map{$0.data}
+       // let array = dataList.map{$0.data}
         var points: Array<ORKValueRange> = []
        
         plotPoints = []
@@ -686,7 +686,7 @@ class LineChartCell: GraphChartTableViewCell {
         
          let dataList: Array<DBStatisticsData> = currentChart.statList.filter({$0.startDate! >= date.startOfMonth() && $0.startDate! <= date.endOfMonth()})
         
-        let array = dataList.map{$0.data}
+        //let array = dataList.map{$0.data}
         var points: Array<ORKValueRange> = []
         xAxisTitles = []
         plotPoints = []
@@ -731,7 +731,7 @@ class LineChartCell: GraphChartTableViewCell {
         
         let dataList: Array<DBStatisticsData> = currentChart.statList.filter({$0.startDate! >= date.startOfDay && $0.startDate! <= date.endOfDay!})
         
-        let array = dataList.map{$0.data}
+       // let array = dataList.map{$0.data}
         var points: Array<ORKValueRange> = []
         xAxisTitles = []
         plotPoints = []

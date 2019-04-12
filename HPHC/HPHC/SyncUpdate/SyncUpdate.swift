@@ -190,7 +190,7 @@ extension SyncUpdate: NMWebServiceDelegate {
     }
     
     func finishedRequest(_ manager: NetworkManager, requestName: NSString, response: AnyObject?) {
-        Logger.sharedInstance.info("requestname : \(requestName) : \(response)")
+        Logger.sharedInstance.info("requestname : \(requestName) : \(String(describing:response))")
         self.syncDataToServer()
     }
     

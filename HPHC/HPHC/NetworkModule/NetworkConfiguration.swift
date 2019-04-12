@@ -66,7 +66,7 @@ class NetworkProtocols: NetworkConfigurationProtocol{
       if let errResponse = errorResponse["error"] as? [String: Any] {
         if let errCD = errResponse["code"] as? Int {
           errorCode = errCD
-          let errorDesc = errResponse["message"]
+            let errorDesc = errResponse["message"] as? String ?? "Something went wrong"
           
           let error = NSError(domain: NSURLErrorDomain, code: errorCode, userInfo: [NSLocalizedDescriptionKey: errorDesc])
           return  error

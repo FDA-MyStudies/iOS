@@ -270,7 +270,7 @@ class Schedule{
             numberOfDays = 1;
         }
         
-        for day in 0...numberOfDays {
+        for _ in 0...numberOfDays {
             
             let startDate = startDateShortStyle
             
@@ -350,7 +350,7 @@ class Schedule{
             if schedulingType == .anchorDate {
                 let startDays = timing["startDays"] as? Int ?? 0
                 let endDays = timing["endDays"] as? Int ?? 0
-                let time = timing["time"] as? String ?? "00:00:00"
+                _ = timing["time"] as? String ?? "00:00:00"
                 
                 let anchorDate = activity.anchorDate?.anchorDateValue
                 
@@ -496,7 +496,7 @@ class Schedule{
     
     func getNumberOfDaysBetween(startDate: Date,endDate: Date) -> Int {
         
-        var calendar = Calendar.currentUTC()
+        let calendar = Calendar.currentUTC()
         
         // Replace the hour (time) of both dates with 00:00
         let date1 = startDate.startOfDay //calendar.startOfDay(for: startDate)

@@ -708,7 +708,7 @@ class StudyListViewController: UIViewController {
                     if(study?.version != study?.newVersion){
                         WCPServices().getStudyUpdates(study: study!, delegate: self)
                     } else {
-                        let appDelegate = (UIApplication.shared.delegate as? AppDelegate)!
+                        //let appDelegate = (UIApplication.shared.delegate as? AppDelegate)!
                         self.addProgressIndicator()
                         self.perform(#selector(loadStudyDetails), with: self, afterDelay: 1)
                     }
@@ -1085,13 +1085,13 @@ extension StudyListViewController: NMWebServiceDelegate {
     }
     
     func finishedRequest(_ manager: NetworkManager, requestName: NSString, response: AnyObject?) {
-        Logger.sharedInstance.info("requestname FINISH: \(requestName) : \(response)")
+        Logger.sharedInstance.info("requestname FINISH: \(requestName) : \(String(describing:response))")
         
         
         let appdelegate = (UIApplication.shared.delegate as? AppDelegate)!
         
         if requestName as String == WCPMethods.studyList.rawValue{
-            let responseDict = (response as? NSDictionary)!
+            //let responseDict = (response as? NSDictionary)!
             
             
             if self.refreshControl != nil && (self.refreshControl?.isRefreshing)!{

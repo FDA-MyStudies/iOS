@@ -74,6 +74,7 @@ class StudyDashboardViewController: UIViewController{
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         //UIApplication.shared.statusBarStyle = .lightContent
+        
         setNeedsStatusBarAppearanceUpdate()
         
         //show navigationbar

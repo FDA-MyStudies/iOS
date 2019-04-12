@@ -116,10 +116,10 @@ extension StandaloneStudy:NMWebServiceDelegate {
     }
     
     func finishedRequest(_ manager: NetworkManager, requestName: NSString, response: AnyObject?) {
-        Logger.sharedInstance.info("requestname FINISH: \(requestName) : \(response)")
+        Logger.sharedInstance.info("requestname FINISH: \(requestName) : \(String(describing:response))")
         
         
-        let appdelegate = UIApplication.shared.delegate as! AppDelegate
+        //let appdelegate = UIApplication.shared.delegate as! AppDelegate
         
         
         if(requestName as String == WCPMethods.studyList.rawValue){

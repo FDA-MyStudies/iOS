@@ -322,23 +322,23 @@ extension VerificationViewController: ORKTaskViewControllerDelegate{
     
     public func taskViewController(_ taskViewController: ORKTaskViewController, didFinishWith reason: ORKTaskViewControllerFinishReason, error: Error?) {
         
-        var taskResult: Any?
+        //var taskResult: Any?
         
         switch reason {
             
         case ORKTaskViewControllerFinishReason.completed:
             print("completed")
-            taskResult = taskViewController.result
+            //taskResult = taskViewController.result
         case ORKTaskViewControllerFinishReason.failed:
             print("failed")
-            taskResult = taskViewController.result
+            //taskResult = taskViewController.result
         case ORKTaskViewControllerFinishReason.discarded:
             print("discarded")
             
-            taskResult = taskViewController.result
+            //taskResult = taskViewController.result
         case ORKTaskViewControllerFinishReason.saved:
             print("saved")
-            taskResult = taskViewController.restorationData
+            //taskResult = taskViewController.restorationData
             
         }
         taskViewController.dismiss(animated: true, completion: nil)

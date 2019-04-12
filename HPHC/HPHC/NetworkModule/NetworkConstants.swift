@@ -86,8 +86,8 @@ class NetworkConstants: NSObject {
     }
     
     class func getCommonHeaderParameters() -> NSDictionary? {
-        let cookie = UserDefaults.standard.value(forKey: "cookies")
-        var headers : NSDictionary? =  nil
+        //let cookie = UserDefaults.standard.value(forKey: "cookies")
+        let headers : NSDictionary? =  nil
         /*
         if (cookie != nil && (cookie as AnyObject).length > 0){
             headers = ["cookie" : cookie!]

@@ -38,7 +38,9 @@ class WebViewController : UIViewController{
     var isEmailAvailable:Bool? = false
     
     var htmlString: String?
-    
+    override var preferredStatusBarStyle: UIStatusBarStyle{
+        return .default
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -97,7 +99,8 @@ class WebViewController : UIViewController{
         
         webView?.delegate = self
         webView?.scalesPageToFit = true
-        UIApplication.shared.statusBarStyle = .default
+        //UIApplication.shared.statusBarStyle = .default
+        setNeedsStatusBarAppearanceUpdate()
     }
     
     override func viewDidAppear(_ animated: Bool) {

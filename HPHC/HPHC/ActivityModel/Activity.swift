@@ -514,7 +514,7 @@ class AnchorDate {
     }
     
     func updateUserResponseAnchorDate(_ response:[String:Any]) {
-        let results = response["results"] as! Array<Dictionary<String,Any>> //[[String : Any]]
+        //let results = response["results"] as! Array<Dictionary<String,Any>> //[[String : Any]]
         //"studyId == %@",studyId
         //let anchorDateResult = results.filter("key == %@","self.sourceKey")
     }

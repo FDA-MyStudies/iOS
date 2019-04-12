@@ -154,7 +154,7 @@ class ActivitiesViewController : UIViewController{
         
         if (ud.bool(forKey: "FKC") && ud.object(forKey: kFetalKickStartTimeStamp) != nil) {
             
-            let studyId = (ud.object(forKey: kFetalkickStudyId)  as? String)!
+            //let studyId = (ud.object(forKey: kFetalkickStudyId)  as? String)!
             let activityId = (ud.object(forKey: kFetalKickActivityId)  as? String)!
             let activity  = Study.currentStudy?.activities?.filter({$0.actvityId == activityId}).last
             
@@ -219,7 +219,7 @@ class ActivitiesViewController : UIViewController{
                                 
                                 endAnchorDate = endAnchorDate?.endOfDay
                                 let startDateResult = (startAnchorDate?.compare(todayDate))! as ComparisonResult
-                                let endDateResult = (endAnchorDate?.compare(todayDate))! as ComparisonResult
+                                //let endDateResult = (endAnchorDate?.compare(todayDate))! as ComparisonResult
                                 self.isAnchorDateSet = false
                                 
                                 if startDateResult == .orderedDescending {
@@ -378,7 +378,7 @@ class ActivitiesViewController : UIViewController{
             if Study.currentActivity?.currentRun.restortionData != nil {
                 let restoredData = Study.currentActivity?.currentRun.restortionData
                 
-                let result: ORKResult?
+                //let result: ORKResult?
                 taskViewController = ORKTaskViewController(task: task, restorationData: restoredData, delegate: self)
             } else {
                 
@@ -915,7 +915,7 @@ extension ActivitiesViewController: ActivitiesCellDelegate{
     
     func activityCell(cell: ActivitiesTableViewCell, activity: Activity) {
         
-        var frame = self.view.frame
+        let frame = self.view.frame
         //frame.size.height += 114
         
         let view = ActivitySchedules.instanceFromNib(frame: frame, activity: activity)
@@ -991,7 +991,7 @@ extension ActivitiesViewController: NMWebServiceDelegate {
     
     
     func finishedRequest(_ manager: NetworkManager, requestName: NSString, response: AnyObject?) {
-        Logger.sharedInstance.info("requestname : \(requestName) Response : \(response)")
+        Logger.sharedInstance.info("requestname : \(requestName) Response : \(String(describing:response))")
         
         if requestName as String == RegistrationMethods.activityState.method.methodName {
             self.sendRequesToGetActivityList()
@@ -1203,7 +1203,7 @@ extension ActivitiesViewController: ORKTaskViewControllerDelegate{
                                 
                                 let fetalKickResult:FetalKickCounterTaskResult? = orkStepResult?.results?.first as? FetalKickCounterTaskResult
                                 
-                                let study = Study.currentStudy
+                                //let study = Study.currentStudy
                                 let activity = Study.currentActivity
                                 
                                 //Create the stats for FetalKick
@@ -1327,7 +1327,7 @@ extension ActivitiesViewController: ORKTaskViewControllerDelegate{
                 }
                 activityStepResult?.initWithORKStepResult(stepResult: orkStepResult! as ORKStepResult , activityType: (ActivityBuilder.currentActivityBuilder.actvityResult?.type)!)
                 
-                let dictionary = activityStepResult?.getActivityStepResultDict()
+               // let dictionary = activityStepResult?.getActivityStepResultDict()
                 
                 
                 //check for anchor date
@@ -1641,7 +1641,7 @@ class ResponseDataFetch:NMWebServiceDelegate{
         Logger.sharedInstance.info(" START requestname : \(requestName)")
     }
     func finishedRequest(_ manager: NetworkManager, requestName: NSString, response: AnyObject?) {
-        Logger.sharedInstance.info("requestname : \(requestName) Response : \(response)")
+        Logger.sharedInstance.info("requestname : \(requestName) Response : \(String(describing:response) )")
         
         if requestName as String == WCPMethods.studyDashboard.method.methodName {
             self.getDataKeysForCurrentStudy()

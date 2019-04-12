@@ -279,8 +279,8 @@ class WCPServices: NSObject {
     }
     
     func handleEligibilityConsentMetaData(response: Dictionary<String, Any>){
-        var consent = response[kConsent] as! Dictionary<String, Any>
-        var eligibility = response[kEligibility] as! Dictionary<String, Any>
+        let consent = response[kConsent] as! Dictionary<String, Any>
+        let eligibility = response[kEligibility] as! Dictionary<String, Any>
         
         if Utilities.isValidObject(someObject: consent as AnyObject?){
             ConsentBuilder.currentConsent = ConsentBuilder()
@@ -589,8 +589,8 @@ extension WCPServices:NMWebServiceDelegate{
         case .studyUpdates:
             self.handleStudyUpdates(response: response as! Dictionary<String, Any>)
         case .appUpdates: break
-        default:
-            print("Request was not sent proper method name")
+//        default:
+//            print("Request was not sent proper method name")
         }
         
         if delegate != nil {

@@ -558,7 +558,7 @@ class ResourcesViewController: UIViewController{
             
             
         } catch let error as NSError {
-            print("error writing to url \(fullPath)")
+            print("error writing to url \(String(describing: fullPath))")
             print(error.localizedDescription)
         }
 
@@ -670,7 +670,7 @@ extension ResourcesViewController: NMWebServiceDelegate {
         self.addProgressIndicator()
     }
     func finishedRequest(_ manager: NetworkManager, requestName: NSString, response: AnyObject?) {
-        Logger.sharedInstance.info("requestname : \(requestName) response : \(response)" )
+        Logger.sharedInstance.info("requestname : \(requestName) response : \(String(describing: response))" )
         
         
         

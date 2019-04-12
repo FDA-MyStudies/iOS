@@ -69,7 +69,7 @@ enum ActvityStepResultType: String {
 class ActivityStepResult {
     
     var type: ActivityStepType?
-    weak var step: ActivityStep?
+    var step: ActivityStep?
     var key: String? // Identifier of step
     var startTime: Date?
     var endTime: Date?
@@ -637,7 +637,7 @@ class ActivityStepResult {
             let stepTypeResult = (questionstepResult as? ORKNumericQuestionResult)!
             
             if Utilities.isValidValue(someObject: stepTypeResult.numericAnswer as AnyObject?) {
-                self.value =  Double(stepTypeResult.numericAnswer!)
+                self.value =  Double(truncating:stepTypeResult.numericAnswer!)
                 
             } else {
                 self.value = 0.0
@@ -647,7 +647,7 @@ class ActivityStepResult {
             let stepTypeResult = (questionstepResult as? ORKNumericQuestionResult)!
             
             if Utilities.isValidValue(someObject: stepTypeResult.numericAnswer as AnyObject?) {
-                self.value = Double(stepTypeResult.numericAnswer!)
+                self.value = Double(truncating:stepTypeResult.numericAnswer!)
                 
             } else {
                 self.value = 0.0
@@ -701,7 +701,7 @@ class ActivityStepResult {
             let stepTypeResult = (questionstepResult as? ORKTimeIntervalQuestionResult)!
             
             if Utilities.isValidValue(someObject: stepTypeResult.intervalAnswer as AnyObject?) {
-                self.value = Double(stepTypeResult.intervalAnswer!)/3600
+                self.value = Double(truncating:stepTypeResult.intervalAnswer!)/3600
                 
             } else {
                 self.value = 0.0
@@ -711,7 +711,7 @@ class ActivityStepResult {
             
             let stepTypeResult = (questionstepResult as? ORKNumericQuestionResult)!
             if Utilities.isValidValue(someObject: stepTypeResult.numericAnswer as AnyObject?) {
-                self.value = Double(stepTypeResult.numericAnswer!)
+                self.value = Double(truncating:stepTypeResult.numericAnswer!)
                 
             } else {
                 self.value = 0.0

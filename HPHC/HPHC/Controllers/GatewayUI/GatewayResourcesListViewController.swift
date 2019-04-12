@@ -132,7 +132,7 @@ extension GatewayResourcesListViewController:NMWebServiceDelegate {
         self.addProgressIndicator()
     }
     func finishedRequest(_ manager: NetworkManager, requestName: NSString, response: AnyObject?) {
-        Logger.sharedInstance.info("requestname : \(requestName) response : \(response)" )
+        Logger.sharedInstance.info("requestname : \(requestName) response : \(String(describing:response))" )
         
         self.removeProgressIndicator()
         

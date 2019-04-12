@@ -276,7 +276,7 @@ extension ChangePasswordViewController: UITextFieldDelegate{
         case .confirmPassword:
             self.confirmPassword = textField.text!
             break
-        default: break
+        //default: break
         }
     }
 }

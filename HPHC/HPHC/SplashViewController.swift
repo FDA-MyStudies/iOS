@@ -144,7 +144,7 @@ class SplashViewController: UIViewController {
             //self.navigateToGatewayDashboard()
             
             
-            let userStudyStatus =  (Study.currentStudy?.userParticipateState.status)!
+           // let userStudyStatus =  (Study.currentStudy?.userParticipateState.status)!
             let ud = UserDefaults.standard
             if ud.bool(forKey: "joined")
                 //|| userStudyStatus == .yetToJoin

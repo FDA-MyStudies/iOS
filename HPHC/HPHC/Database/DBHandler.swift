@@ -1679,7 +1679,7 @@ class DBHandler: NSObject {
             }
         }
         
-        var newlist = resources
+        let newlist = resources
         let dbResourceIds: Array<String> = dbResourcesArray.map({$0.resourceId!})
         let resourceIds: Array<String>  = newlist.map({$0.resourcesId!})
         let dbset: Set<String> = Set(dbResourceIds)

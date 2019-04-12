@@ -130,7 +130,7 @@ class ConfirmationViewController: UIViewController {
     func createListOfStudiesToDelete() {
         
         for study in studiesToDisplay {
-            var withdrawnStudy = StudyToDelete()
+            let withdrawnStudy = StudyToDelete()
             withdrawnStudy.studyId = study.studyId
             withdrawnStudy.participantId = study.userParticipateState.participantId
             
@@ -272,7 +272,7 @@ extension ConfirmationViewController: ConfirmationOptionalDelegate{
     
     func confirmationCell(cell: ConfirmationOptionalTableViewCell, forStudy study: Study, deleteData: Bool) {
         
-        if var withdrawnStudy = self.studiesToWithdrawn.filter({$0.studyId == study.studyId}).last {
+        if let withdrawnStudy = self.studiesToWithdrawn.filter({$0.studyId == study.studyId}).last {
             withdrawnStudy.shouldDelete = deleteData
         }
     }

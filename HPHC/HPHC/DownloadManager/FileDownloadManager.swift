@@ -79,7 +79,7 @@ extension FileDownloadManager: URLSessionDelegate{
         
         debugPrint("didFinishDownloadingToURL location \(location)")
         
-        for (index, downloadModel) in downloadingArray.enumerated() {
+        for (_, downloadModel) in downloadingArray.enumerated() {
             if downloadTask.isEqual(downloadModel.task) {
                 let fileName = downloadModel.fileName as NSString
                 let basePath = downloadModel.destinationPath == "" ? AKUtility.baseFilePath : downloadModel.destinationPath
@@ -112,8 +112,8 @@ extension FileDownloadManager: URLSessionDelegate{
         }
     }
     func URLSession(_ session: Foundation.URLSession, task: URLSessionTask, didCompleteWithError error: NSError?) {
-        debugPrint("task id: \(task.taskIdentifier)")
-        debugPrint("Completed with error \(error?.localizedDescription)")
+       // debugPrint("task id: \(task.taskIdentifier)")
+       // debugPrint("Completed with error \(error?.localizedDescription)")
         if error != nil {
             self.delegate?.download(manager: self, didFailedWithError: error!)
         }

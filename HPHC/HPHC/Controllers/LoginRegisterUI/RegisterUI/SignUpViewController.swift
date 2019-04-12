@@ -411,7 +411,7 @@ extension SignUpViewController: UITableViewDataSource {
             keyBoardType = .emailAddress
             isSecuredEntry = false
             cell.textFieldValue?.text = self.user.emailId
-        default: break
+        //default: break
         }
         //Cell Data Setup
         cell.populateCellData(data: tableViewData, securedText: isSecuredEntry,keyboardType: keyBoardType)
@@ -502,9 +502,9 @@ extension SignUpViewController: UITextFieldDelegate{
             confirmPassword = textField.text!
             break
             
-        default:
-            print("No Matching data Found")
-            break
+//        default:
+//            print("No Matching data Found")
+//            break
         }
     }
 }

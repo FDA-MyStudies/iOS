@@ -1195,7 +1195,7 @@ extension StudyHomeViewController: ORKTaskViewControllerDelegate{
                             }
                             
                             
-                        default: break
+                        //default: break
                             
                         }
                         

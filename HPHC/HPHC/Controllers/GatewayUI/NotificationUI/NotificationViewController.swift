@@ -193,7 +193,7 @@ class NotificationViewController: UIViewController {
             
         }
         
-        return false
+        //return false
     }
     
     /**

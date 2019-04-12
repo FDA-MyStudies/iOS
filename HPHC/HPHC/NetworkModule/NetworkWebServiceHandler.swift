@@ -270,7 +270,7 @@ class NetworkWebServiceHandler: NSObject, URLSessionDelegate {
             
             request.httpMethod=self.getRequestMethod(method) as String
             if httpHeaders != nil {
-                request.allHTTPHeaderFields = httpHeaders! as! [String : String]
+                request.allHTTPHeaderFields = httpHeaders! as? [String : String]
             }
             self.fireRequest(request, requestName: requestName)
             

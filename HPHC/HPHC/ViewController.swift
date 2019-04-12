@@ -48,13 +48,13 @@ class ViewController: UIViewController {
         
         
         
-        user.bookmarkStudy(studyId: "121")
+        //user.bookmarkStudy(studyId: "121")
         
-        user.updateStudyStatus(studyId: "121", status:.yetToJoin)
+        //user.updateStudyStatus(studyId: "121", status:.yetToJoin)
         
-        user.bookmarkActivity(studyId: "121", activityId: "151")
+       // user.bookmarkActivity(studyId: "121", activityId: "151")
         
-        print(user.getStudyStatus(studyId: "121").description)
+       // print(user.getStudyStatus(studyId: "121").description)
         
         //not available
 //        let start = "2017-03-01"
@@ -252,11 +252,11 @@ class ViewController: UIViewController {
                 }
                 
                 //activities
-                let activites = dict[kActivites]  as! Array<Dictionary<String, Any>>
-                for activity in activites {
-                   // let participatedActivity = UserActivityStatus(detail: activity)
-                    //user.participatedActivites.append(participatedActivity)
-                }
+                _ = dict[kActivites]  as! Array<Dictionary<String, Any>>
+//                for activity in activites {
+//                   // let participatedActivity = UserActivityStatus(detail: activity)
+//                    //user.participatedActivites.append(participatedActivity)
+//                }
                 
             }
         }

@@ -52,6 +52,8 @@ class ActivitiesViewController : UIViewController{
     var allActivityList: Array<Dictionary<String,Any>>! = []
     var selectedFilter: ActivityFilterType? //Holds the applied FilterTypes
     
+    private var managedResult: [String: Any] = [:]
+    
     let labkeyResponseFetch = ResponseDataFetch()
     
     // MARK:- Viewcontroller Lifecycle
@@ -1110,6 +1112,8 @@ extension ActivitiesViewController: ORKTaskViewControllerDelegate{
         // IQKeyboardManager.sharedManager().enable = true
         IQKeyboardManager.shared.enableAutoToolbar = true
         
+        self.managedResult.removeAll()
+        
         var taskResult: Any?
         
         switch reason {
@@ -1389,6 +1393,29 @@ extension ActivitiesViewController: ORKTaskViewControllerDelegate{
     
     func taskViewController(_ taskViewController: ORKTaskViewController, viewControllerFor step: ORKStep) -> ORKStepViewController? {
         
+        
+        if let result = taskViewController.result.stepResult(forStepIdentifier: step.identifier) {
+            self.managedResult[step.identifier] = result
+        }
+        
+        if let step = step as? QuestionStep, step.answerFormat?.isKind(of: ORKTextChoiceAnswerFormat.self) ?? false {
+            
+            var textChoiceQuestionController :TextChoiceQuestionController
+            
+            var result = taskViewController.result.result(forIdentifier: step.identifier)
+            result = ( result == nil ) ? self.managedResult[step.identifier] as? ORKStepResult : result
+            
+            if let result = result  {
+                textChoiceQuestionController = TextChoiceQuestionController(step: step, result: result)
+            } else {
+                textChoiceQuestionController = TextChoiceQuestionController(step: step)
+            }
+            
+            
+            return textChoiceQuestionController
+        }
+        
+        
         let storyboard = UIStoryboard.init(name: "FetalKickCounter", bundle: nil)
         
         if step is FetalKickCounterStep {
@@ -1404,7 +1431,21 @@ extension ActivitiesViewController: ORKTaskViewControllerDelegate{
         } else {
             return nil
         }
+        
     }
+    
+    
+    func taskViewController(_ taskViewController: ORKTaskViewController, didChange result: ORKTaskResult) {
+        
+        // Saving the TextChoiceQuestionController result to publish it later.
+        if taskViewController.currentStepViewController?.isKind(of: TextChoiceQuestionController.self) ?? false {
+            if let result = result.stepResult(forStepIdentifier: taskViewController.currentStepViewController?.step?.identifier ?? "") {
+                self.managedResult[result.identifier] = result
+            }
+        }
+    }
+    
+    
 }
 
 extension ActivitiesViewController:UITabBarControllerDelegate{

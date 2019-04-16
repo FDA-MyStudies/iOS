@@ -64,7 +64,7 @@ class ActivityBuilder {
         }
         self.actvityResult = ActivityResult()
         self.actvityResult?.setActivity(activity: self.activity!)
-        NSLog("self.actvityResult? \(self.actvityResult?.activity)")
+        NSLog("self.actvityResult? \(self.actvityResult?.activity as Any)")
         
     }
     
@@ -369,7 +369,7 @@ class ActivityBuilder {
                                             
                                             for destinationId in destination! {
                                                 
-                                                if destinationId.characters.count != 0 {
+                                                if destinationId.count != 0 {
                                                     
                                                     let  directRule = ORKDirectStepNavigationRule(destinationStepIdentifier: destinationId)
                                                     
@@ -480,10 +480,10 @@ class ActivityBuilder {
                 }
             }
         } else {
-            Logger.sharedInstance.debug("activity is null:\(activity)")
+            Logger.sharedInstance.debug("activity is null:\(activity as Any)")
         }
         return nil
-        self.actvityResult?.setActivity(activity: self.activity!)
+        // self.actvityResult?.setActivity(activity: self.activity!)
     }
     // MARK: Predicates For QuestionTypes
     
@@ -544,7 +544,7 @@ class ActivityBuilder {
         case .lessThanOrEqual : //LessThanOrEqual
             predicate = ORKResultPredicate.predicateForNumericQuestionResult(with: resultSelector, maximumExpectedAnswerValue: lhs)                                                        case .range :break //Range
             
-        default: break
+            // default: break
             
         }
         return predicate
@@ -584,7 +584,7 @@ class ActivityBuilder {
             
         case .range : break
             
-        default: break
+            // default: break
             
         }
         return predicate
@@ -646,7 +646,7 @@ class ActivityBuilder {
         case .range:
             predicate = ORKResultPredicate.predicateForScaleQuestionResult(with: resultSelector, minimumExpectedAnswerValue: lhs, maximumExpectedAnswerValue: rhs  )
             
-        default: break
+            // default: break
             
         }
         return predicate

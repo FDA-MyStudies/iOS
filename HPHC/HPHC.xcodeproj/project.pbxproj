@@ -145,6 +145,14 @@
 		6EF2FCEF1E72CDE900B5F212 /* LeftMenuResourceTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EF2FCEE1E72CDE900B5F212 /* LeftMenuResourceTableViewCell.swift */; };
 		6EF51C9522324E3700BF8D4E /* Activitylist.json in Resources */ = {isa = PBXBuildFile; fileRef = 6EF51C9422324E3700BF8D4E /* Activitylist.json */; };
 		6EF748BF1E69645700F1E89E /* LatestActive_Taskdocument.json in Resources */ = {isa = PBXBuildFile; fileRef = 6EF748BE1E69645700F1E89E /* LatestActive_Taskdocument.json */; };
+		6F0221792264729E00A2DBC8 /* TextChoiceCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F0221772264729D00A2DBC8 /* TextChoiceCell.xib */; };
+		6F02217A2264729E00A2DBC8 /* OtherTextChoiceCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F0221782264729E00A2DBC8 /* OtherTextChoiceCell.xib */; };
+		6F5AAF80225DE699002C8FF6 /* Activity_Metadata_Other.json in Resources */ = {isa = PBXBuildFile; fileRef = 6F5AAF7F225DE699002C8FF6 /* Activity_Metadata_Other.json */; };
+		6FB89C1B225F40EB00420A7B /* TextChoiceQuestionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB89C1A225F40EA00420A7B /* TextChoiceQuestionController.swift */; };
+		6FB89C1D225F40F400420A7B /* SurveyTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB89C1C225F40F400420A7B /* SurveyTask.swift */; };
+		6FB89C24225F410500420A7B /* OtherTextChoiceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB89C20225F410500420A7B /* OtherTextChoiceCell.swift */; };
+		6FB89C25225F410500420A7B /* TextChoiceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB89C21225F410500420A7B /* TextChoiceCell.swift */; };
+		6FB89C28225F416C00420A7B /* Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB89C27225F416C00420A7B /* Cell.swift */; };
 		782AF87C221D247D000025CF /* StudyTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 782AF87B221D247D000025CF /* StudyTest.swift */; };
 		7878B311221574D80052FC23 /* StandaloneStudy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7878B30E221574D80052FC23 /* StandaloneStudy.swift */; };
 		7878B31D2216C6E20052FC23 /* HPHCTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7878B31C2216C6E20052FC23 /* HPHCTests.swift */; };
@@ -419,6 +427,14 @@
 		6EF2FCEE1E72CDE900B5F212 /* LeftMenuResourceTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LeftMenuResourceTableViewCell.swift; sourceTree = "<group>"; };
 		6EF51C9422324E3700BF8D4E /* Activitylist.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Activitylist.json; sourceTree = "<group>"; };
 		6EF748BE1E69645700F1E89E /* LatestActive_Taskdocument.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = LatestActive_Taskdocument.json; sourceTree = "<group>"; };
+		6F0221772264729D00A2DBC8 /* TextChoiceCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TextChoiceCell.xib; sourceTree = "<group>"; };
+		6F0221782264729E00A2DBC8 /* OtherTextChoiceCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OtherTextChoiceCell.xib; sourceTree = "<group>"; };
+		6F5AAF7F225DE699002C8FF6 /* Activity_Metadata_Other.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Activity_Metadata_Other.json; sourceTree = "<group>"; };
+		6FB89C1A225F40EA00420A7B /* TextChoiceQuestionController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextChoiceQuestionController.swift; sourceTree = "<group>"; };
+		6FB89C1C225F40F400420A7B /* SurveyTask.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SurveyTask.swift; sourceTree = "<group>"; };
+		6FB89C20225F410500420A7B /* OtherTextChoiceCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OtherTextChoiceCell.swift; sourceTree = "<group>"; };
+		6FB89C21225F410500420A7B /* TextChoiceCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextChoiceCell.swift; sourceTree = "<group>"; };
+		6FB89C27225F416C00420A7B /* Cell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cell.swift; sourceTree = "<group>"; };
 		747BA7FE3153184E586C3AFA /* Pods_HPHCTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HPHCTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		782AF87B221D247D000025CF /* StudyTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyTest.swift; sourceTree = "<group>"; };
 		7878B30E221574D80052FC23 /* StandaloneStudy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StandaloneStudy.swift; sourceTree = "<group>"; };
@@ -961,6 +977,7 @@
 		6EE93DB61E93C8850027A5DC /* ActivityUI */ = {
 			isa = PBXGroup;
 			children = (
+				6FB89C17225F40CF00420A7B /* QuestionStepController */,
 				6E4D72F91F3C2E0F00BF88B7 /* ActivityFilterView */,
 				6EE93DBE1E93C8850027A5DC /* StudyDashboardUI */,
 				6EE93DB71E93C8850027A5DC /* Activities.plist */,
@@ -1065,6 +1082,27 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		6FB89C17225F40CF00420A7B /* QuestionStepController */ = {
+			isa = PBXGroup;
+			children = (
+				6FB89C1E225F410500420A7B /* Views */,
+				6FB89C1A225F40EA00420A7B /* TextChoiceQuestionController.swift */,
+				6FB89C1C225F40F400420A7B /* SurveyTask.swift */,
+			);
+			path = QuestionStepController;
+			sourceTree = "<group>";
+		};
+		6FB89C1E225F410500420A7B /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				6F0221772264729D00A2DBC8 /* TextChoiceCell.xib */,
+				6F0221782264729E00A2DBC8 /* OtherTextChoiceCell.xib */,
+				6FB89C20225F410500420A7B /* OtherTextChoiceCell.swift */,
+				6FB89C21225F410500420A7B /* TextChoiceCell.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		7878B31B2216C6E20052FC23 /* HPHCTests */ = {
 			isa = PBXGroup;
 			children = (
@@ -1093,6 +1131,7 @@
 				6EABD0321E56FE2000623D94 /* TaskSchema.json */,
 				6EF51C9422324E3700BF8D4E /* Activitylist.json */,
 				89831392224399FC0000BEB5 /* ResourceList.json */,
+				6F5AAF7F225DE699002C8FF6 /* Activity_Metadata_Other.json */,
 			);
 			path = JsonFiles;
 			sourceTree = "<group>";
@@ -1140,6 +1179,7 @@
 				94334F8B1E701EB700755444 /* NavigationBackButton.swift */,
 				946CA5E81E728C2300CC8535 /* StringEncoder.swift */,
 				6E8D910C223B9FD800C082C9 /* Dictionary.swift */,
+				6FB89C27225F416C00420A7B /* Cell.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -1539,6 +1579,7 @@
 				6E7D2D641E433E8800763D4C /* LaunchScreen.storyboard in Resources */,
 				89831393224399FC0000BEB5 /* ResourceList.json in Resources */,
 				48C736561EC5C83D002D000F /* study_dashboard.png in Resources */,
+				6F02217A2264729E00A2DBC8 /* OtherTextChoiceCell.xib in Resources */,
 				6EF748BF1E69645700F1E89E /* LatestActive_Taskdocument.json in Resources */,
 				6EAA048B1FAF4C6E00214D03 /* Labkey_Activity_Latest.json in Resources */,
 				6EAB39A91E4B0B4A003442B8 /* Resources.plist in Resources */,
@@ -1563,6 +1604,7 @@
 				6EA889C51E701E8200F160A1 /* Confirmation.plist in Resources */,
 				6E14F2031F0224AD00EA8D1E /* Notification.json in Resources */,
 				6EB740281E9D1F8700A4C773 /* 03.png in Resources */,
+				6F0221792264729E00A2DBC8 /* TextChoiceCell.xib in Resources */,
 				484ACBFC1F28A82B00BCC819 /* FilterData.plist in Resources */,
 				6EE93DC91E93C8850027A5DC /* Activities.plist in Resources */,
 				94B3DD521E6ED8E500327AE5 /* LoginAssets.xcassets in Resources */,
@@ -1581,6 +1623,7 @@
 				6EB7401C1E9CFAD700A4C773 /* 01.png in Resources */,
 				6E7D2D8C1E4340B200763D4C /* UserProfile.plist in Resources */,
 				6E7D2D901E43526100763D4C /* Register.plist in Resources */,
+				6F5AAF80225DE699002C8FF6 /* Activity_Metadata_Other.json in Resources */,
 				48A24C3C1E839CFD009E849E /* 25-study-activities.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1687,6 +1730,7 @@
 				94334F8A1E7005BF00755444 /* LeftMenuCell.swift in Sources */,
 				946CA5E91E728C2300CC8535 /* StringEncoder.swift in Sources */,
 				6E4CECB61F31B41C005E0832 /* PinterestLayout.swift in Sources */,
+				6FB89C28225F416C00420A7B /* Cell.swift in Sources */,
 				94D20E9F1E9DFFE7005C3531 /* DBActivity.swift in Sources */,
 				4884E35A1E827E6A002DA0B9 /* ContactUsTableViewCell.swift in Sources */,
 				6EE93D901E93B5700027A5DC /* ConsentSharePdfStepViewController.swift in Sources */,
@@ -1708,6 +1752,7 @@
 				6ECE8BFB1EAF0E3A00A025F5 /* HealthClientType.swift in Sources */,
 				94B3DD4A1E6ED8E500327AE5 /* StudyListCell.swift in Sources */,
 				94B3DD5A1E6ED8E500327AE5 /* SignUpViewController.swift in Sources */,
+				6FB89C1B225F40EB00420A7B /* TextChoiceQuestionController.swift in Sources */,
 				6ED86F641EA6498D00365AF0 /* RepeatableFormStepViewController.m in Sources */,
 				9491F7F81E825F5D0018C15E /* DBHandler.swift in Sources */,
 				6ED134361E5EB0370090C976 /* ConsentStep.swift in Sources */,
@@ -1735,6 +1780,7 @@
 				6E183AB31E966230005D7A27 /* FileDownloadManager.swift in Sources */,
 				9487102A1E546C3800246109 /* AppNotification.swift in Sources */,
 				94B3DD421E6ED8E500327AE5 /* NotificationTableViewCell.swift in Sources */,
+				6FB89C1D225F40F400420A7B /* SurveyTask.swift in Sources */,
 				484ACBF61F2896A500BCC819 /* FilterListCollectionViewCell.swift in Sources */,
 				6ED8A2E61E447AA2004DEC01 /* Formatter.swift in Sources */,
 				94334F8C1E701EB700755444 /* NavigationBackButton.swift in Sources */,
@@ -1746,6 +1792,7 @@
 				94B5F2F41ECA354800BC0336 /* LocalNotification.swift in Sources */,
 				6EA889BC1E6FD16B00F160A1 /* ConfirmationViewController.swift in Sources */,
 				6EED7B3D1E65752C002C1FA3 /* FetalKickCounterTask.swift in Sources */,
+				6FB89C24225F410500420A7B /* OtherTextChoiceCell.swift in Sources */,
 				6E183AB51E966230005D7A27 /* AKUtility.swift in Sources */,
 				6EA889BE1E6FD20000F160A1 /* ConfirmationTableViewCell.swift in Sources */,
 				6E9B39C01E55DFF10037D09D /* ActivityBuilder.swift in Sources */,
@@ -1772,6 +1819,7 @@
 				6E9E81D61ECEDA770007B492 /* SyncUpdate.swift in Sources */,
 				94334F7C1E6FE60900755444 /* LeftMenuViewController.swift in Sources */,
 				482062521E68532300C7A7AF /* UIUtilities.swift in Sources */,
+				6FB89C25225F410500420A7B /* TextChoiceCell.swift in Sources */,
 				6E7D2D8A1E43400100763D4C /* User.swift in Sources */,
 				94B3DD461E6ED8E500327AE5 /* ProfileViewController.swift in Sources */,
 				94B3DD5E1E6ED8E500327AE5 /* StudyOverviewPageViewController.swift in Sources */,

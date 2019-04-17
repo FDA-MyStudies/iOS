@@ -315,9 +315,9 @@ class ActivitiesViewController : UIViewController{
         AnchorDateHandler().fetchActivityAnchorDateResponseFromLabkey { (status) in
             print("Finished 1")
             if status {
-                DispatchQueue.main.async {
+                //DispatchQueue.main.async {
                     self.loadActivitiesFromDatabase()
-                }
+                //}
                 
             }
             

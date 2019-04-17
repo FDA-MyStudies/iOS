@@ -565,6 +565,8 @@ class StudyHomeViewController: UIViewController{
         let study = Study.currentStudy!
         if let studyStatus = currentUser.participatedStudies.filter({$0.studyId == Study.currentStudy?.studyId}).last {
             
+            Study.currentStudy?.userParticipateState = studyStatus
+            
             if study.status == .Active {
                 if studyStatus.status == .inProgress {
                     //go to study dashboard

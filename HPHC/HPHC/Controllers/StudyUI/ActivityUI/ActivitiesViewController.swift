@@ -1495,11 +1495,11 @@ class ResponseDataFetch:NMWebServiceDelegate{
     
     var dataSourceKeysForLabkey: Array<Dictionary<String,String>> = []
     
-    private static let labkeyDateFormatter: DateFormatter = {
+     static let labkeyDateFormatter: DateFormatter = {
         //2017/06/13 18:12:13
         let formatter = DateFormatter()
         formatter.timeZone = TimeZone.init(identifier: "America/New_York")
-        formatter.dateFormat = "YYYY/MM/dd HH:mm:ss"
+        formatter.dateFormat = "YYYY-MM-dd HH:mm:ss.SSS"
         
         return formatter
     }()

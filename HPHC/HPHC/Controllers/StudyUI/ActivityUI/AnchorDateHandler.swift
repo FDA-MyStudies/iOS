@@ -151,6 +151,7 @@ class AnchorDateHandler {
         
         let session = URLSession.shared
         let dataTask = session.dataTask(with: request as URLRequest, completionHandler: { (data, response, error) -> Void in
+            
             if (error != nil) {
                 print(error as Any)
                 emptyAnchorDateDetail.isFinishedFetching = true
@@ -182,7 +183,7 @@ class AnchorDateHandler {
                                 
                                 let anchorDateObject = data[emptyAnchorDateDetail.sourceKey] as? [String:String]
                                 let anchorDateString = anchorDateObject?["value"]// as! String
-                                let date = ResponseDataFetch.localDateFormatter.date(from: anchorDateString!)
+                                let date = ResponseDataFetch.labkeyDateFormatter.date(from: anchorDateString!)
                                 emptyAnchorDateDetail.anchorDate = date
                                 emptyAnchorDateDetail.isFinishedFetching = true
                                 self.sendRequestToFetchResponse()

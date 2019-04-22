@@ -355,7 +355,7 @@ class Schedule{
                 let anchorDate = activity.anchorDate?.anchorDateValue
                 
                 let startDateInterval = TimeInterval(60*60*24*(startDays))
-                let endDateInterval = TimeInterval(60*60*24*(endDays)-1)
+                let endDateInterval = TimeInterval(60*60*24*(endDays))
                 
                 runStartDate = anchorDate?.addingTimeInterval(startDateInterval)
                 runEndDate = anchorDate?.addingTimeInterval(endDateInterval)

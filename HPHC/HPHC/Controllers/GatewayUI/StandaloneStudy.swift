@@ -89,7 +89,7 @@ class StandaloneStudy: NSObject {
                 if studies.count > 0 {
                     Logger.sharedInstance.info(studies)
                     
-                    let study = studies.filter({$0.studyId == "PreganancyStudy"})
+                    let study = studies.filter({$0.studyId == "Staging1"})
                     
                     Study.updateCurrentStudy(study:study.last!)
                     self.getStudyDashboardInfo()

@@ -143,17 +143,17 @@ class SplashViewController: UIViewController {
             
             //self.navigateToGatewayDashboard()
             
-            
-           // let userStudyStatus =  (Study.currentStudy?.userParticipateState.status)!
-            let ud = UserDefaults.standard
-            if ud.bool(forKey: "joined")
-                //|| userStudyStatus == .yetToJoin
-            {
-                self.navigateToGatewayDashboard()
-            }
-            else {
-                self.navigateToStudyHomeController()
-            }
+            self.createMenuView()
+//            let userStudyStatus =  (Study.currentStudy?.userParticipateState.status)!
+//           // let ud = UserDefaults.standard
+//            if ud.bool(forKey: "joined")
+//                //|| userStudyStatus == .yetToJoin
+//            {
+//                self.navigateToGatewayDashboard()
+//            }
+//            else {
+//                self.navigateToStudyHomeController()
+//            }
         }
         else {
             
@@ -161,7 +161,8 @@ class SplashViewController: UIViewController {
             //self.navigateToHomeController()
             
             /*Standalone App*/
-            self.navigateToStudyHomeController()
+            //self.navigateToStudyHomeController()
+            self.createMenuView()
         }
         
         

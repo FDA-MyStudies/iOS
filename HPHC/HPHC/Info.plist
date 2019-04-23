@@ -61,6 +61,8 @@
 	<string>$(PRODUCT_NAME) would like to use Motion data</string>
 	<key>NSSpeechRecognitionUsageDescription</key>
 	<string>$(PRODUCT_NAME) would like to use Speech Recognition for the task to give more accurate result.</string>
+	<key>StandaloneStudyId</key>
+	<string>YourStudyId</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Verdana Italic.ttf</string>

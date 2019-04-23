@@ -37,6 +37,7 @@ class StudyDashboardViewController: UIViewController{
     
     @IBOutlet var tableView: UITableView?
     @IBOutlet var labelStudyTitle: UILabel?
+    @IBOutlet var buttonHome:UIButton!
     
     var dataSourceKeysForLabkey: Array<Dictionary<String,String>> = []
     
@@ -76,6 +77,15 @@ class StudyDashboardViewController: UIViewController{
         //UIApplication.shared.statusBarStyle = .lightContent
         
         setNeedsStatusBarAppearanceUpdate()
+        
+        
+        //Standalone App Settings
+        if Utilities.isStandaloneApp() {
+            buttonHome.setImage(UIImage(named: "menu_icn"), for: .normal)
+            buttonHome.tag = 200
+            self.slideMenuController()?.removeLeftGestures()
+            self.slideMenuController()?.removeRightGestures()
+        }
         
         //show navigationbar
         self.navigationController?.setNavigationBarHidden(true, animated: true)
@@ -221,7 +231,13 @@ class StudyDashboardViewController: UIViewController{
      @param sender    Accepts any kind of object
      */
     @IBAction func homeButtonAction(_ sender: AnyObject){
-        self.performSegue(withIdentifier: unwindToStudyListDashboard, sender: self)
+        let button = sender as! UIButton
+        if button.tag == 200 {
+            self.slideMenuController()?.openLeft()
+        }
+        else {
+           self.performSegue(withIdentifier: unwindToStudyListDashboard, sender: self)
+        }
     }
     
     

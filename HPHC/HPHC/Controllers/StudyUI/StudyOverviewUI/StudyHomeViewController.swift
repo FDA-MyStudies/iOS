@@ -102,7 +102,7 @@ class StudyHomeViewController: UIViewController{
         // pageViewController?.overview = Gateway.instance.overview
         self.navigationController?.setNavigationBarHidden(true, animated: true)
         
-        if User.currentUser.userType == UserType.AnonymousUser {
+        if User.currentUser.userType == UserType.AnonymousUser{
             buttonStar.isHidden = true
         } else {
             if User.currentUser.isStudyBookmarked(studyId: (Study.currentStudy?.studyId)!) {
@@ -115,7 +115,25 @@ class StudyHomeViewController: UIViewController{
         appdelegate.consentToken = ""
         
         
+        
+        //Standalone App Settings
+        if Utilities.isStandaloneApp() {
+            buttonStar.isHidden = true
+            //buttonBack.isHidden = true
+            buttonBack.setImage(UIImage(named: "menu_icn"), for: .normal)
+            buttonBack.tag = 200
+            self.slideMenuController()?.leftPanGesture?.isEnabled = false
+           // self.slideMenuController()?.removeLeftGestures()
+            //self.slideMenuController()?.removeRightGestures()
+//            if User.currentUser.authToken != nil {
+//                self.unwindeToStudyHome(nil)
+//            }
+        }
+        
     }
+    
+    
+    
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -351,11 +369,12 @@ class StudyHomeViewController: UIViewController{
         taskViewController?.delegate = self
         taskViewController?.title = "Activity"
         taskViewController?.navigationItem.title = nil
-        
+        taskViewController?.isNavigationBarHidden = false
         UIView.appearance(whenContainedInInstancesOf: [ORKTaskViewController.self]).tintColor = kUIColorForSubmitButtonBackground
         
         //UIApplication.shared.statusBarStyle = .default
         setNeedsStatusBarAppearanceUpdate()
+        
         present(taskViewController!, animated: true, completion: {
             
             let appdelegate: AppDelegate? = UIApplication.shared.delegate as? AppDelegate
@@ -494,7 +513,13 @@ class StudyHomeViewController: UIViewController{
      @param sender    Accepts any kind of objects
      */
     @IBAction func backButtonAction(_ sender: Any) {
-        _ = self.navigationController?.popViewController(animated: true)
+        let button = sender as! UIButton
+        if button.tag == 200 {
+            self.slideMenuController()?.openLeft()
+        }
+        else {
+            _ = self.navigationController?.popViewController(animated: true)
+        }
     }
     
     
@@ -548,11 +573,11 @@ class StudyHomeViewController: UIViewController{
      This method is unwind to study home
      @param segue    the segue used to connect the View controller
      */
-    @IBAction func unwindeToStudyHome(_ segue: UIStoryboardSegue){
+    @IBAction func unwindeToStudyHome(_ segue: UIStoryboardSegue?){
         
         self.hideSubViews()
-    
-        if (UserDefaults.standard.value(forKey: kPasscodeIsPending) as! Bool?)!{
+
+        if (UserDefaults.standard.bool(forKey: kPasscodeIsPending)) {
             UserServices().getUserProfile(self as NMWebServiceDelegate)
         } else {
             UserServices().getStudyStates(self)

@@ -25,6 +25,7 @@ import UIKit
 import ResearchKit
 import IQKeyboardManagerSwift
 
+
 let kStudyWithStudyId = "Study with StudyId"
 let kTitleOK = "OK"
 
@@ -88,17 +89,35 @@ class EligibilityStepViewController: ORKStepViewController {
             step.type = "token"
         }
         
-        addCancelButton()
+       // addCancelButton()
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+   
+        let footerView = ORKNavigationContainerView()
+        footerView.translatesAutoresizingMaskIntoConstraints = false
+        footerView.neverHasContinueButton = true
+        footerView.cancelButtonItem = self.cancelButtonItem
+        footerView.skipEnabled = false
+        self.view.addSubview(footerView)
+        
+        NSLayoutConstraint.activate([
+            footerView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: 0),
+            footerView.heightAnchor.constraint(equalToConstant: 100),
+            footerView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 0),
+            footerView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: 0)
+            ])
+    }
     
     private func addCancelButton() {
         
         let button = UIButton(type: .system)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle("Cancel", for: .normal)
-        button.addTarget(self, action: #selector(EligibilityStepViewController.cancelButton), for: .touchUpInside)
+        button.addTarget(self, action: #selector(getter: self.cancelButtonItem?.action), for: .touchUpInside)
 
+        
         self.view.addSubview(button)
         
         NSLayoutConstraint.activate([
@@ -110,7 +129,9 @@ class EligibilityStepViewController: ORKStepViewController {
     }
     
     @objc func cancelButton(){
+        
         self.dismiss(animated: true, completion: nil)
+        
     }
     // MARK: Methods and Button Actions
     

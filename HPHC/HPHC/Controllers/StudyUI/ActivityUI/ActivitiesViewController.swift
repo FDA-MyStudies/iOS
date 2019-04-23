@@ -95,7 +95,13 @@ class ActivitiesViewController : UIViewController{
         self.navigationController?.interactivePopGestureRecognizer?.isEnabled = false
         UIApplication.shared.statusBarStyle = .default
         
-        self.addHomeButton()
+        if Utilities.isStandaloneApp() {
+            self.setNavigationBarItem()
+        }
+        else {
+            self.addHomeButton()
+        }
+       
         
         if !taskControllerPresented {
             taskControllerPresented = false

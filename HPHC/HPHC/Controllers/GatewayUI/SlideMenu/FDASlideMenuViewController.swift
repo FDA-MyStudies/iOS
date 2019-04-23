@@ -39,9 +39,15 @@ open class FDASlideMenuViewController: SlideMenuController {
         
         if Utilities.isStandaloneApp() {
             let studyStoryBoard = UIStoryboard.init(name: kStudyStoryboard, bundle: Bundle.main)
-            //let studyHomeViewController = studyStoryBoard.instantiateViewController(withIdentifier: String(describing: kStudyHomeViewControllerIdentifier)) as! UINavigationController //for standalone
-            let studyTabBarController = studyStoryBoard.instantiateViewController(withIdentifier: kStudyDashboardTabbarControllerIdentifier) as! StudyDashboardTabbarViewController
-            self.mainViewController = studyTabBarController
+            
+            if Study.currentStudy?.userParticipateState.status == .inProgress {
+                let studyTabBarController = studyStoryBoard.instantiateViewController(withIdentifier: kStudyDashboardTabbarControllerIdentifier) as! StudyDashboardTabbarViewController
+                self.mainViewController = studyTabBarController
+            }
+            else {
+                let studyHomeViewController = studyStoryBoard.instantiateViewController(withIdentifier: String(describing: kStudyHomeViewControllerIdentifier)) as! UINavigationController
+                self.mainViewController = studyHomeViewController
+            }
             
         } else {
             

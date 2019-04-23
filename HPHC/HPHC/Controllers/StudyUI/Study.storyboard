@@ -1196,6 +1196,7 @@
                     <navigationItem key="navigationItem" id="KBN-qp-L97"/>
                     <nil key="simulatedTopBarMetrics"/>
                     <connections>
+                        <outlet property="buttonHome" destination="LYX-5F-scC" id="svD-79-Aof"/>
                         <outlet property="labelStudyTitle" destination="TFh-y2-sZW" id="nVn-F1-dWU"/>
                         <outlet property="tableView" destination="CGF-M8-TqW" id="cLn-VA-rfv"/>
                         <segue destination="ulG-kV-I7n" kind="unwind" identifier="unwindToStudyListDashboardIdentifier" unwindAction="unwindToStudyList:" id="Xcl-BD-lVy"/>

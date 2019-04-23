@@ -44,8 +44,13 @@ class StandaloneStudy: NSObject {
     }
     
     func setupStandaloneStudy() {
-        //self.getStudyStates()
-        self.createStudyForStandalone()
+        if User.currentUser.authToken != nil && User.currentUser.authToken.count > 0{
+            self.getStudyStates()
+        }
+        else {
+            self.createStudyForStandalone()
+        }
+       
     }
     
     func getStudyStates() {
@@ -89,7 +94,7 @@ class StandaloneStudy: NSObject {
                 if studies.count > 0 {
                     Logger.sharedInstance.info(studies)
                     
-                    let study = studies.filter({$0.studyId == "Staging1"})
+                    let study = studies.filter({$0.studyId == "deg"})
                     
                     Study.updateCurrentStudy(study:study.last!)
                     self.getStudyDashboardInfo()

@@ -515,13 +515,13 @@ extension SignInViewController: NMWebServiceDelegate {
                     
                 } else if viewLoadFrom == .joinStudy {
                     
-                    if Utilities.isStandaloneApp() {
-                        self.navigateToGatewayDashboard()
-                    } else {
+                    //if Utilities.isStandaloneApp() {
+                    //    self.navigateToGatewayDashboard()
+                    //} else {
                         let leftController = (slideMenuController()?.leftViewController as? LeftMenuViewController)!
                         leftController.createLeftmenuItems()
                         self.performSegue(withIdentifier: "unwindStudyHomeSegue", sender: self)
-                    }
+                    //}
                     
                     //_ = self.navigationController?.popViewController(animated: true)
                 } else {

@@ -231,7 +231,7 @@
 		866DA5291D63D04700C9AF3F /* ORKOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 866DA51D1D63D04700C9AF3F /* ORKOperation.h */; };
 		866DA52A1D63D04700C9AF3F /* ORKOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 866DA51E1D63D04700C9AF3F /* ORKOperation.m */; };
 		866F86011A96CBF3007B282C /* ORKSurveyAnswerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 866F86001A96CBF3007B282C /* ORKSurveyAnswerCell.m */; };
-		86AD910A1AB7AD1E00361FEB /* ORKNavigationContainerView.h in Headers */ = {isa = PBXBuildFile; fileRef = 86AD91081AB7AD1E00361FEB /* ORKNavigationContainerView.h */; };
+		86AD910A1AB7AD1E00361FEB /* ORKNavigationContainerView.h in Headers */ = {isa = PBXBuildFile; fileRef = 86AD91081AB7AD1E00361FEB /* ORKNavigationContainerView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		86AD910B1AB7AD1E00361FEB /* ORKNavigationContainerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 86AD91091AB7AD1E00361FEB /* ORKNavigationContainerView.m */; };
 		86AD910D1AB7AE4100361FEB /* ORKNavigationContainerView_Internal.h in Headers */ = {isa = PBXBuildFile; fileRef = 86AD910C1AB7AE4100361FEB /* ORKNavigationContainerView_Internal.h */; };
 		86AD91101AB7B8A600361FEB /* ORKActiveStepView.h in Headers */ = {isa = PBXBuildFile; fileRef = 86AD910E1AB7B8A600361FEB /* ORKActiveStepView.h */; };
@@ -3484,6 +3484,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 				Base,
 				tr,

@@ -266,7 +266,14 @@ class LeftMenuViewController: UIViewController, LeftMenuProtocol {
         case .studyList:
             
             if isStandalone {
-                self.slideMenuController()?.changeMainViewController(self.studyTabBarController, close: true)
+                if Study.currentStudy?.userParticipateState.status == .inProgress {
+                     self.slideMenuController()?.changeMainViewController(self.studyTabBarController, close: true)
+                }
+                else {
+                    self.slideMenuController()?.changeMainViewController(self.studyHomeViewController, close: true)
+                }
+                
+               
             } else {
                 self.slideMenuController()?.changeMainViewController(self.studyListViewController, close: true)
             }

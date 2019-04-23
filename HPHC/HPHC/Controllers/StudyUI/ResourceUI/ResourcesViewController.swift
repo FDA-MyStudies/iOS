@@ -78,7 +78,12 @@ class ResourcesViewController: UIViewController{
         self.tableView?.estimatedRowHeight = 65
         self.tableView?.rowHeight = UITableView.automaticDimension
         
-        self.addHomeButton()
+        if Utilities.isStandaloneApp() {
+            self.setNavigationBarItem()
+        }
+        else {
+            self.addHomeButton()
+        }
         setNeedsStatusBarAppearanceUpdate()
          //UIApplication.shared.statusBarStyle = .default
         self.navigationController?.setNavigationBarHidden(false, animated: true)

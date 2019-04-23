@@ -189,7 +189,7 @@
         <!--Navigation Controller-->
         <scene sceneID="dfM-ha-eKb">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="m43-3P-pth" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="StudyHomeNavigationController" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" navigationBarHidden="YES" id="m43-3P-pth" sceneMemberID="viewController">
                     <toolbarItems/>
                     <nil key="simulatedTopBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="1Sg-W7-ndU">

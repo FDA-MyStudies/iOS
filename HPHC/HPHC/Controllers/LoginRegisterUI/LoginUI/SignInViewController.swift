@@ -124,7 +124,7 @@ class SignInViewController: UIViewController{
     
     override func viewWillDisappear(_ animated: Bool) {
         //hide navigationbar
-        if viewLoadFrom == .gatewayOverview{
+        if viewLoadFrom == .gatewayOverview || Utilities.isStandaloneApp(){
             self.navigationController?.setNavigationBarHidden(true, animated: true)
         }
     }
@@ -515,9 +515,14 @@ extension SignInViewController: NMWebServiceDelegate {
                     
                 } else if viewLoadFrom == .joinStudy {
                     
-                    let leftController = (slideMenuController()?.leftViewController as? LeftMenuViewController)!
-                    leftController.createLeftmenuItems()
-                    self.performSegue(withIdentifier: "unwindStudyHomeSegue", sender: self)
+                    if Utilities.isStandaloneApp() {
+                        self.navigateToGatewayDashboard()
+                    } else {
+                        let leftController = (slideMenuController()?.leftViewController as? LeftMenuViewController)!
+                        leftController.createLeftmenuItems()
+                        self.performSegue(withIdentifier: "unwindStudyHomeSegue", sender: self)
+                    }
+                    
                     //_ = self.navigationController?.popViewController(animated: true)
                 } else {
                     

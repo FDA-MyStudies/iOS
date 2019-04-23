@@ -1998,7 +1998,7 @@
 				ENABLE_BITCODE = YES;
 				INFOPLIST_FILE = HPHC/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
-				IS_STANDALONE_STUDY = false;
+				IS_STANDALONE_STUDY = true;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.hphci.fda.mobilestudies;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2029,7 +2029,7 @@
 				ENABLE_BITCODE = YES;
 				INFOPLIST_FILE = HPHC/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
-				IS_STANDALONE_STUDY = false;
+				IS_STANDALONE_STUDY = true;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.hphci.fda.mobilestudies;
 				PRODUCT_NAME = "$(TARGET_NAME)";

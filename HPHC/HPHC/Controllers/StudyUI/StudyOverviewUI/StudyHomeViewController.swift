@@ -116,7 +116,11 @@ class StudyHomeViewController: UIViewController{
         
         
         
-        
+        if Utilities.isStandaloneApp() {
+            if User.currentUser.authToken != nil && User.currentUser.authToken.count > 0 {
+                self.unwindeToStudyHome(nil)
+            }
+        }
         
     }
     

@@ -499,43 +499,38 @@ extension SignInViewController: NMWebServiceDelegate {
         } else {
             let delegate = (UIApplication.shared.delegate as? AppDelegate)!
             delegate.calculateTimeZoneChange()
-        if User.currentUser.verified == true {
-            
-            let ud = UserDefaults.standard
-            ud.set(true, forKey: kNotificationRegistrationIsPending)
-            ud.synchronize()
-            
-            ORKPasscodeViewController.removePasscodeFromKeychain()
-            
-            if User.currentUser.isLoginWithTempPassword {
-                self.navigateToChangePassword()
-            } else {
+            if User.currentUser.verified == true {
                 
-                if viewLoadFrom == .gatewayOverview {
-                    self.navigateToGatewayDashboard()
+                let ud = UserDefaults.standard
+                ud.set(true, forKey: kNotificationRegistrationIsPending)
+                ud.synchronize()
+                
+                ORKPasscodeViewController.removePasscodeFromKeychain()
+                
+                if User.currentUser.isLoginWithTempPassword {
+                    self.navigateToChangePassword()
+                } else {
                     
-                } else if viewLoadFrom == .joinStudy {
-                    
-                    //if Utilities.isStandaloneApp() {
-                    //    self.navigateToGatewayDashboard()
-                    //} else {
+                    if viewLoadFrom == .gatewayOverview {
+                        self.navigateToGatewayDashboard()
+                        
+                    } else if viewLoadFrom == .joinStudy {
+                        
                         let leftController = (slideMenuController()?.leftViewController as? LeftMenuViewController)!
                         leftController.createLeftmenuItems()
                         self.performSegue(withIdentifier: "unwindStudyHomeSegue", sender: self)
-                    //}
-                    
-                    //_ = self.navigationController?.popViewController(animated: true)
-                } else {
-                    
-                    let leftController = (slideMenuController()?.leftViewController as? LeftMenuViewController)!
-                    leftController.createLeftmenuItems()
-                    leftController.changeViewController(.studyList)
+                        
+                    } else {
+                        
+                        let leftController = (slideMenuController()?.leftViewController as? LeftMenuViewController)!
+                        leftController.createLeftmenuItems()
+                        leftController.changeViewController(.studyList)
+                    }
                 }
+            } else {
+                
+                self.navigateToVerifyController()
             }
-        } else {
-            
-            self.navigateToVerifyController()
-        }
         }
     }
     

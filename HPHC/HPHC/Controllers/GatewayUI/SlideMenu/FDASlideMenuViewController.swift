@@ -30,7 +30,9 @@ let kLeftMenuViewControllerIdentifier = "LeftMenuViewController"
 
 open class FDASlideMenuViewController: SlideMenuController {
     
-    
+    override open var preferredStatusBarStyle: UIStatusBarStyle{
+        return .default
+    }
     override open func awakeFromNib() {
         
        

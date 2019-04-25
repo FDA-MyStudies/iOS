@@ -657,7 +657,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         UIView.appearance(whenContainedInInstancesOf: [ORKTaskViewController.self]).tintColor = kUIColorForSubmitButtonBackground
         
-        UIApplication.shared.statusBarStyle = .default
+        //UIApplication.shared.statusBarStyle = .default
         
         var topVC = UIApplication.shared.keyWindow?.rootViewController
         //Fetching the current Visible Controller

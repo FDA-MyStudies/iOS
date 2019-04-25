@@ -224,13 +224,13 @@ class NetworkWebServiceHandler: NSObject, URLSessionDelegate {
         if (httpRequestString?.length == 0) {
             requestString = baseURLString
         } else {
-            requestString = String(format:"%@?%@",baseURLString,httpRequestString!) as NSString!
+            requestString = String(format:"%@?%@",baseURLString,httpRequestString!) as NSString?
         }
         
         if #available(iOS 9, *) {
-            requestString = requestString.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed) as NSString!
+            requestString = requestString.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed) as NSString?
         } else {
-            requestString = requestString.addingPercentEscapes(using: String.Encoding.utf8.rawValue) as NSString!
+            requestString = requestString.addingPercentEscapes(using: String.Encoding.utf8.rawValue) as NSString?
         }
         
         let requestUrl = URL(string: requestString as String)!

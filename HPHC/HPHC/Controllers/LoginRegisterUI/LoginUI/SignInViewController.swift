@@ -92,6 +92,7 @@ class SignInViewController: UIViewController{
         super.viewWillAppear(animated)
         
         //unhide navigationbar
+       
         self.navigationController?.setNavigationBarHidden(false, animated: true)
         
         User.resetCurrentUser()

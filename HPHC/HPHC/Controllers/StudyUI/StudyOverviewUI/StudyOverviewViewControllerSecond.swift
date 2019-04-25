@@ -89,7 +89,7 @@ class StudyOverviewViewControllerSecond: UIViewController{
         self.labelDescription?.textAlignment = .center
 
         
-        UIApplication.shared.statusBarStyle = .lightContent
+        //UIApplication.shared.statusBarStyle = .lightContent
         
     }
     

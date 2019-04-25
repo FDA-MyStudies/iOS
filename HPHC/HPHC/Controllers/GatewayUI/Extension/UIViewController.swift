@@ -26,6 +26,11 @@ import QuickLook
 
 let kResourceName = "fda_preload"
 
+extension UINavigationController {
+    open override var childForStatusBarStyle: UIViewController? {
+        return visibleViewController
+    }
+}
 extension UIViewController {
     
     func topMostViewController() -> UIViewController {

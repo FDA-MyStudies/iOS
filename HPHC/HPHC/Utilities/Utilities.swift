@@ -74,6 +74,18 @@ class Utilities: NSObject {
         
     }
     
+    class func standaloneStudyId() -> String {
+        
+        var infoDict: NSDictionary?
+        if let path = Bundle.main.path(forResource: "Info", ofType: "plist") {
+            infoDict = NSDictionary(contentsOfFile: path)
+        }
+        
+        guard infoDict != nil else {return ""}
+        
+        return String(infoDict!["StandaloneStudyId"] as? String ?? "")
+    }
+    
     class func getAttributedText(plainString pstr: String, boldString bstr: String, fontSize size: CGFloat,plainFontName: String,boldFontName: String) -> NSAttributedString {
         
         let title: String = pstr + " " + bstr

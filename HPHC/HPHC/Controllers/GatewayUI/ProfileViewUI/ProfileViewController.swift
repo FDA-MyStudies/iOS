@@ -277,9 +277,16 @@ class ProfileViewController: UIViewController, SlideMenuControllerDelegate {
         
         if (Gateway.instance.studies?.count)! > 0 {
             let studies = Gateway.instance.studies
-            let joinedStudies = studies?.filter({$0.userParticipateState.status == .inProgress || $0.userParticipateState.status == .completed})
-            
-            if joinedStudies?.count != 0 {
+            var joinedStudies:[Study] = []
+            if Utilities.isStandaloneApp() {
+                let standaloneStudyId = Utilities.standaloneStudyId()
+                joinedStudies = studies?.filter({($0.userParticipateState.status == .inProgress || $0.userParticipateState.status == .completed) && ($0.studyId == standaloneStudyId)}) ?? []
+            }
+            else {
+                joinedStudies = studies?.filter({$0.userParticipateState.status == .inProgress || $0.userParticipateState.status == .completed}) ?? []
+            }
+        
+            if joinedStudies.count != 0 {
                 self.performSegue(withIdentifier: "confirmationSegue", sender: joinedStudies)
             }
             else {

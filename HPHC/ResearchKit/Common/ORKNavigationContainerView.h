@@ -34,6 +34,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @class ORKBorderedButton;
+
 @interface ORKNavigationContainerView : UIView
 
 @property (nonatomic, strong, nullable) UIBarButtonItem *continueButtonItem;

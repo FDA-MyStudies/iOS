@@ -93,8 +93,8 @@ class StandaloneStudy: NSObject {
             DBHandler.loadStudyListFromDatabase { (studies) in
                 if studies.count > 0 {
                     Logger.sharedInstance.info(studies)
-                    
-                    let study = studies.filter({$0.studyId == "deg"})
+                    let standaloneStudyId = Utilities.standaloneStudyId()
+                    let study = studies.filter({$0.studyId == standaloneStudyId})
                     
                     Study.updateCurrentStudy(study:study.last!)
                     self.getStudyDashboardInfo()

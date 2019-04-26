@@ -26,6 +26,8 @@ import UIKit
 let kConfirmationSegueIdentifier = "confirmationSegue"
 let kHeaderDescription = "You have chosen to delete your FDA My Studies Account. This will result in automatic withdrawal from all studies.\nBelow is a list of studies that you are a part of and information on how your response data will be handled with each after you withdraw. Please review and confirm."
 
+let kHeaderDescriptionStandalone = "You have chosen to delete your FDA My Studies Account. This will result in automatic withdrawal from study.\nBelow is the study that you are a part of and information on how your response data will be handled after you withdraw. Please review and confirm."
+
 let kConfirmWithdrawlSelectOptionsAlert = "Please select an option between Delete Data or Retain Data for all studies."
 let kResponseDataDeletedText = "Response data will be deleted"
 let kResponseDataRetainedText = "Response data will be retained"
@@ -76,7 +78,7 @@ class ConfirmationViewController: UIViewController {
         tableViewRowDetails = NSMutableArray.init(contentsOfFile: plistPath!)
         
         // setting the headerdescription
-        self.LabelHeaderDescription?.text = kHeaderDescription
+        self.LabelHeaderDescription?.text = Utilities.isStandaloneApp() ? kHeaderDescriptionStandalone : kHeaderDescription
         
         // setting border color for footer buttons
         self.buttonDeleteAccount?.layer.borderColor = kUicolorForButtonBackground

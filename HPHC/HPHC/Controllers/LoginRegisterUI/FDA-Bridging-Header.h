@@ -24,3 +24,4 @@
 #import "FRHyperLabel.h"
 #include "RepeatableFormStepViewController.h"
 #include "RepeatableFormStep.h"
+#import <ResearchKit/ORKNavigationContainerView.h>

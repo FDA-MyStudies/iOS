@@ -109,6 +109,14 @@ class WCPServices: NSObject {
     var delegate: NMWebServiceDelegate! = nil
     
     // MARK:Requests
+    func getStudyBasicInfo(_ delegate:NMWebServiceDelegate) {
+        
+        self.delegate = delegate
+        
+        let method = WCPMethods.study.method
+        let params:Dictionary<String, String> = ["studyId":Utilities.standaloneStudyId()]
+        self.sendRequestWith(method: method, params: params, headers: nil)
+    }
     func getStudyList(_ delegate: NMWebServiceDelegate){
         
         self.delegate = delegate
@@ -260,6 +268,9 @@ class WCPServices: NSObject {
     }
     
     // MARK:Parsers
+    func handleStudyBasicInfo(response: Dictionary<String, Any>){
+        print("handleStudyBasicInfo")
+    }
     func handleStudyList(response: Dictionary<String, Any>){
         
         Logger.sharedInstance.info("Studies Parsing Start")
@@ -565,6 +576,8 @@ extension WCPServices:NMWebServiceDelegate{
         switch methodName {
         case .gatewayInfo:
             self.handleResourceListForGateway(response: response as! Dictionary<String, Any>)
+        case .study:
+            self.handleStudyBasicInfo(response: response as! Dictionary<String, Any>)
         case .studyList:
             self.handleStudyList(response: response as! Dictionary<String, Any>)
         case .eligibilityConsent:

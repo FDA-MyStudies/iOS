@@ -27,6 +27,7 @@ import UIKit
 enum WCPMethods: String {
     
     //TODO : Write exact name for request method
+    case study
     case gatewayInfo
     case studyList
     case eligibilityConsent

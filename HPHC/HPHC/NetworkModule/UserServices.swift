@@ -135,7 +135,8 @@ class UserServices: NSObject {
         
         let user = User.currentUser
         let params = [kUserEmailId: user.emailId!,
-                      kUserPassword: user.password!]
+                      kUserPassword: user.password!,
+                      "appId":Utilities.getBundleIdentifier()]
         
         let method = RegistrationMethods.login.method
         
@@ -151,6 +152,7 @@ class UserServices: NSObject {
         
         let params = [kUserEmailId: user.emailId!,
                       kUserPassword: user.password!,
+                      "appId":Utilities.getBundleIdentifier()
                       ]
         
         let method = RegistrationMethods.register.method

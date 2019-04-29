@@ -46,7 +46,7 @@ enum RegistrationMethods: String {
     case deactivate
     case verify
     case refreshToken
-    
+    case versionInfo
     
     var description: String{
         switch self {
@@ -60,7 +60,7 @@ enum RegistrationMethods: String {
         
         switch self {
             
-        case .activityState,.consentPDF,.deleteAccount,.confirmRegistration,.userProfile,.userPreferences,.studyState:
+        case .activityState, .consentPDF, .deleteAccount, .confirmRegistration, .userProfile, .userPreferences, .studyState, .versionInfo:
             //GET Methods
             return Method(methodName: (self.rawValue+".api"), methodType: .httpMethodGet, requestType: .requestTypeHTTP)
         case .withdraw,.logout, .deactivate:
@@ -80,8 +80,8 @@ struct RegistrationServerURLConstants {
     
     
     //Testing server
-    static let ProductionURL = "https://hpreg-stage.lkcompliant.net/fdahpUserRegWS/"
-    static let DevelopmentURL = "https://hpreg-stage.lkcompliant.net/fdahpUserRegWS/"
+    //static let ProductionURL = "https://hpreg-stage.lkcompliant.net/fdahpUserRegWS/"
+    //static let DevelopmentURL = "https://hpreg-stage.lkcompliant.net/fdahpUserRegWS/"
     
     
     //LabKey Server Test Enviorment
@@ -98,7 +98,9 @@ struct RegistrationServerURLConstants {
     
     //---
     
-    
+    // Local
+    static let ProductionURL = "http://192.168.0.44:8085/labkey/fdahpUserRegWS/"
+    static let DevelopmentURL = "http://192.168.0.44:8085/labkey/fdahpUserRegWS/"
     
     
     //Labkey Production Server Staging enviroment

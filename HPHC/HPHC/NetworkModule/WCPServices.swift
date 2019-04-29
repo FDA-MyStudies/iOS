@@ -249,6 +249,7 @@ class WCPServices: NSObject {
         self.sendRequestWith(method: method, params: headerParams, headers: nil)
         
     }
+    
     func checkForAppUpdates(delegate: NMWebServiceDelegate){
         
         self.delegate = delegate

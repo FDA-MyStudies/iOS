@@ -251,7 +251,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UIView.appearance(whenContainedInInstancesOf: [ORKTaskViewController.self]).tintColor = kUIColorForSubmitButtonBackground
         
         //Check For Updates
-        self.checkForAppUpdateForVersion()
+        //self.checkForAppUpdateForVersion()
+        self.checkForAppUpdate()
         
         if UIApplication.shared.applicationIconBadgeNumber > 0 {
             UIApplication.shared.applicationIconBadgeNumber = 0
@@ -338,7 +339,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         //Check For Updates
-        self.checkForAppUpdateForVersion()
+        self.checkForAppUpdate()
         
     }
     
@@ -526,8 +527,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     // MARK: Checker Methods
+    
+    /**
+     To get the current App version from App Store and Adds the blocker screen if it is of lower version
+     */
     func checkForAppUpdate() {
-        WCPServices().checkForAppUpdates(delegate: self)
+        UserServices().checkForAppUpdates(delegate: self)
     }
     
     func checkForRegisteredNotifications() {
@@ -544,62 +549,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 
             }
         }
-    }
-    
-    /**
-     To get the current App version from App Store and Adds the blocker screen if it is of lower version
-     */
-    func checkForAppUpdateForVersion() {
-        
-        let infoDict = Bundle.main.infoDictionary
-        let appId =  infoDict?[kBundleIdentier]
-        let url: URL = URL.init(string: "http://itunes.apple.com/lookup?bundleId=\(appId!)" )!
-        
-        var request =   URLRequest(url: url)
-        request.cachePolicy = .reloadIgnoringLocalCacheData
-        let session = URLSession.shared
-        session.dataTask(with: request) {(data, response, error) -> Void in
-            
-            if data != nil {
-                DispatchQueue.main.async {
-                    do {
-                        
-                        let parsedDict = try JSONSerialization.jsonObject(with: data!, options: [])
-                        
-                        if ((parsedDict as? [String: Any])![kResultCount] as? Int)! == 1 {
-                            
-                            let resultArray = (((parsedDict as? [String: Any])![kResultsForAppStore]) as? Array<Dictionary<String,Any>>)!
-                            let appStoreVersion = ((resultArray.first)?[kAppStoreVersion]  as? String)!
-                            let currentVersion = infoDict?[kCFBundleShortVersion]
-                            
-                            //compare AppStore Version with current
-                            if appStoreVersion != (currentVersion as? String)! && appStoreVersion.compare((currentVersion as? String)!, options: .numeric, range: nil, locale: nil) == ComparisonResult.orderedDescending {
-                                
-                                // load and Update blockerScreen
-                                self.shouldAddForceUpgradeScreen = true
-                                self.blockerScreen = AppUpdateBlocker.instanceFromNib(frame:(UIApplication.shared.keyWindow?.bounds)!, detail: (parsedDict as? Dictionary<String, Any>)!);
-                                self.blockerScreen?.labelVersionNumber.text = "V-" + appStoreVersion
-                                self.blockerScreen?.labelMessage.text = kBlockerScreenLabelText
-                                
-                                
-                                if User.currentUser.userType == .FDAUser {
-                                    //FDA user
-                                    if User.currentUser.settings?.passcode! == false {
-                                        UIApplication.shared.keyWindow?.addSubview(self.blockerScreen!)
-                                    }
-                                }else {
-                                    UIApplication.shared.keyWindow?.addSubview(self.blockerScreen!)
-                                }
-                            }else {//Do Nothing
-                            }
-                        }
-                    }catch {
-                    }
-                }
-            }else {
-                //Do Nothing
-            }
-            }.resume()
     }
     
     func sendRequestToSignOut() {
@@ -1149,6 +1098,49 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
 }
+
+typealias JSONDictionary = [String: Any]
+// MARK:- Handle network responses
+extension AppDelegate {
+    
+    /// Handle App update
+    private func handleAppUpdateResponse(response: JSONDictionary){
+        
+        if let iosDict = response["ios"] as? JSONDictionary,
+           let latestVersion = iosDict["latestVersion"] as? String,
+            let ForceUpdate = iosDict["ForceUpdate"] as? String {
+            
+            let appVersion = Utilities.getAppVersion()
+            guard let isForceUpdate = Bool(ForceUpdate) else {return}
+            
+            // latestVersion = "2.0" make it mutable to test and uncomment
+            if appVersion != latestVersion, latestVersion.compare(appVersion, options: .numeric, range: nil, locale: nil) == ComparisonResult.orderedDescending, isForceUpdate {
+        
+                // load and Update blockerScreen
+                self.shouldAddForceUpgradeScreen = true
+                self.blockerScreen = AppUpdateBlocker.instanceFromNib(frame:(UIApplication.shared.keyWindow?.bounds)!, detail: [:])
+                self.blockerScreen?.labelVersionNumber.text = "V- " + latestVersion
+                self.blockerScreen?.labelMessage.text = kBlockerScreenLabelText
+                
+                
+                if User.currentUser.userType == .FDAUser {
+                    //FDA user
+                    if User.currentUser.settings?.passcode! == false {
+                        UIApplication.shared.keyWindow?.addSubview(self.blockerScreen!)
+                    }
+                }else {
+                    UIApplication.shared.keyWindow?.addSubview(self.blockerScreen!)
+                }
+                
+            }
+        
+        }
+        
+    }
+    
+    
+}
+
 //Handling for HTTPS
 extension AppDelegate : NMAuthChallengeDelegate{
     
@@ -1177,36 +1169,13 @@ extension AppDelegate: NMWebServiceDelegate {
     }
     func finishedRequest(_ manager: NetworkManager, requestName: NSString, response: AnyObject?) {
         
-        if requestName as String == WCPMethods.appUpdates.method.methodName {
+        if requestName as String == RegistrationMethods.versionInfo.method.methodName {
             
-            let appVersion = Utilities.getAppVersion()
-            if appVersion != (response?[kCurrentVersion] as? String)! {
-                
-                if (response?[kForceUpdate] as? Bool)! {
-                    
-                    self.shouldAddForceUpgradeScreen = true
-                    
-                    let version = (response?[kCurrentVersion] as? String)!
-                    
-                    blockerScreen = AppUpdateBlocker.instanceFromNib(frame:(UIApplication.shared.keyWindow?.bounds)!, detail: (response as? Dictionary<String, Any>)!);
-                    
-                    blockerScreen?.labelVersionNumber.text = "V-" + version
-                    blockerScreen?.labelMessage.text = response?[kMessage] as? String
-                    
-                    
-                    if User.currentUser.userType == .FDAUser {
-                        //FDA user
-                        
-                        if User.currentUser.settings?.passcode! == false {
-                            UIApplication.shared.keyWindow?.addSubview(blockerScreen!)
-                        }
-                    }else {
-                        UIApplication.shared.keyWindow?.addSubview(blockerScreen!)
-                    }
-                }else {
-                    UIUtilities.showAlertWithMessage(alertMessage: (response?[kMessage] as? String)!);
-                }
+            if let response = response as? JSONDictionary {
+                handleAppUpdateResponse(response: response)
             }
+            
+
         }else if requestName as String == WCPMethods.eligibilityConsent.method.methodName {
             self.createEligibilityConsentTask()
             

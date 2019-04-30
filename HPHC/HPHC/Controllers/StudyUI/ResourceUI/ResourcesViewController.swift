@@ -446,7 +446,7 @@ class ResourcesViewController: UIViewController{
         let studyStoryBoard = UIStoryboard.init(name: kStudyStoryboard, bundle: Bundle.main)
         let studyHomeController = (studyStoryBoard.instantiateViewController(withIdentifier: String(describing: StudyHomeViewController.classForCoder())) as? StudyHomeViewController)!
         studyHomeController.hideViewConsentAfterJoining = true
-        
+        studyHomeController.loadViewFrom = .resource
         studyHomeController.hidesBottomBarWhenPushed = true
         self.navigationController?.pushViewController(studyHomeController, animated: true)
         

@@ -14,7 +14,7 @@ class StandaloneStudy: NSObject {
     
     func createStudyForStandalone() {
         
-        WCPServices().getStudyList(self)
+        WCPServices().getStudyBasicInfo(self)//.getStudyList(self)
         
 //        let studyDetail = ["category":"Drug Safety",
 //                           "logo":"https://hphci-fdama-st-wcp-01.labkey.com/fdaResources/studylogo/STUDY_HT_06072017020809.jpeg?v=1513764405945",
@@ -127,7 +127,7 @@ extension StandaloneStudy:NMWebServiceDelegate {
         //let appdelegate = UIApplication.shared.delegate as! AppDelegate
         
         
-        if(requestName as String == WCPMethods.studyList.rawValue){
+        if(requestName as String == WCPMethods.study.rawValue){
             self.handleStudyListResponse()
         }
         

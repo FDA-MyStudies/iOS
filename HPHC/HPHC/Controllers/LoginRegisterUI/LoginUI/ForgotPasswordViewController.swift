@@ -44,7 +44,7 @@ class ForgotPasswordViewController: UIViewController{
         self.title = NSLocalizedString(kForgotPasswordTitleText, comment: "")
         
         //Used for background tap dismiss keyboard
-        let gestureRecognizwe: UITapGestureRecognizer = UITapGestureRecognizer.init(target: self, action: #selector(SignInViewController.dismissKeyboard))
+        let gestureRecognizwe: UITapGestureRecognizer = UITapGestureRecognizer.init(target: self, action: #selector(ForgotPasswordViewController.dismissKeyboard))
         self.view?.addGestureRecognizer(gestureRecognizwe)
         
         self.addBackBarButton()
@@ -74,7 +74,7 @@ class ForgotPasswordViewController: UIViewController{
      Dismiss key board when clicked on Background
      
      */
-    func dismissKeyboard(){
+    @objc func dismissKeyboard(){
         self.view.endEditing(true)
     }
     

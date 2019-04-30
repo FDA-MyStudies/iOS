@@ -270,6 +270,20 @@ class WCPServices: NSObject {
     // MARK:Parsers
     func handleStudyBasicInfo(response: Dictionary<String, Any>){
         print("handleStudyBasicInfo")
+        
+        let studies = response[kStudies] as! Array<Dictionary<String,Any>>
+        var listOfStudies: Array<Study> = []
+        for study in studies{
+            let studyModelObj = Study(studyDetail: study)
+            listOfStudies.append(studyModelObj)
+        }
+        Logger.sharedInstance.info("Studies Parsing Finished")
+        //assgin to Gateway
+        Gateway.instance.studies = listOfStudies
+        
+        Logger.sharedInstance.info("Studies Saving in DB")
+        //save in database
+        DBHandler().saveStudies(studies: listOfStudies)
     }
     func handleStudyList(response: Dictionary<String, Any>){
         

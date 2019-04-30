@@ -43,7 +43,11 @@ let kShareConsentFailureAlert = "You can't join study without sharing your data"
 protocol StudyHomeViewDontrollerDelegate {
     func studyHomeJoinStudy()
 }
-
+enum StudyHomeLoadFrom: Int{
+    case resource
+    case home
+    
+}
 class StudyHomeViewController: UIViewController{
     
     @IBOutlet weak var container: UIView!
@@ -62,7 +66,7 @@ class StudyHomeViewController: UIViewController{
     var isGettingJoiningDate = false
     var delegate: StudyHomeViewDontrollerDelegate?
     var hideViewConsentAfterJoining = false
-    
+    var loadViewFrom:StudyHomeLoadFrom = .home
     var isUpdatingIneligibility: Bool = false
     
     var consentRestorationData: Data?
@@ -116,7 +120,7 @@ class StudyHomeViewController: UIViewController{
         
         
         
-        if Utilities.isStandaloneApp() {
+        if Utilities.isStandaloneApp() && loadViewFrom == .home {
             if User.currentUser.authToken != nil && User.currentUser.authToken.count > 0 {
                 self.unwindeToStudyHome(nil)
             }
@@ -169,11 +173,13 @@ class StudyHomeViewController: UIViewController{
         }
         
         //Standalone App Settings
-        if Utilities.isStandaloneApp() {
+        if Utilities.isStandaloneApp(){
             buttonStar.isHidden = true
-            buttonBack.setImage(UIImage(named: "menu_icn"), for: .normal)
-            buttonBack.tag = 200
-            self.slideMenuController()?.leftPanGesture?.isEnabled = false
+            if loadViewFrom == .home {
+                buttonBack.setImage(UIImage(named: "menu_icn"), for: .normal)
+                buttonBack.tag = 200
+                self.slideMenuController()?.leftPanGesture?.isEnabled = false
+            }
         }
         
     }

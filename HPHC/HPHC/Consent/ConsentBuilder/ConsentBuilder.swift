@@ -439,8 +439,8 @@ class ConsentBuilder {
         
         //create Custom completion step
         let completionStep = CustomCompletionStep(identifier: kConsentCompletionStepIdentifier)
-        completionStep.title = NSLocalizedString(kConsentCompletionMainTitle, comment: "")
-        
+        completionStep.detailText = NSLocalizedString(kConsentCompletionMainTitle, comment: "")
+       
         
         if (stepArray?.count)! > 0 {
             

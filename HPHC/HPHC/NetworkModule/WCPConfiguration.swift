@@ -86,12 +86,12 @@ struct WCPServerURLConstants {
 
     
     //local
-    static let ProductionURL = "http://192.168.0.44:8080/StudyMetaData/"
-    static let DevelopmentURL = "http://192.168.0.44:8080/StudyMetaData/"
+    //static let ProductionURL = "http://192.168.0.44:8080/StudyMetaData/"
+    //static let DevelopmentURL = "http://192.168.0.44:8080/StudyMetaData/"
     
     //local 2
-    //static let ProductionURL = "https://hpwcp-stage.lkcompliant.net/StudyMetaData/"
-    //static let DevelopmentURL = "https://hpwcp-stage.lkcompliant.net/StudyMetaData/"
+    static let ProductionURL = "https://hpwcp-stage.lkcompliant.net/StudyMetaData/"
+    static let DevelopmentURL = "https://hpwcp-stage.lkcompliant.net/StudyMetaData/"
     
     
 }

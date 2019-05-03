@@ -777,18 +777,21 @@ class UserServices: NSObject {
         UserDefaults.standard.removePersistentDomain(forName: appDomain)
         UserDefaults.standard.synchronize()
         
-        //reset user object
-        User.resetCurrentUser()
-        
         //Delete from database
         DBHandler.deleteCurrentUser()
         
+        //reset user object
+        User.resetCurrentUser()
         
         //delete complete database
         DBHandler.deleteAll()
         
         //cancel all local notification
         LocalNotification.cancelAllLocalNotification()
+        
+        //reset Filters
+        StudyFilterHandler.instance.previousAppliedFilters = []
+        StudyFilterHandler.instance.searchText = ""
     }
     
     func handleDeActivateAccountResponse(response: Dictionary<String, Any>) {
@@ -801,18 +804,21 @@ class UserServices: NSObject {
         UserDefaults.standard.removePersistentDomain(forName: appDomain)
         UserDefaults.standard.synchronize()
         
-        //reset user object
-        User.resetCurrentUser()
-        
         //Delete from database
         DBHandler.deleteCurrentUser()
         
+        //reset user object
+        User.resetCurrentUser()
         
         //delete complete database
         DBHandler.deleteAll()
         
         //cancel all local notification
         LocalNotification.cancelAllLocalNotification()
+        
+        //reset Filters
+        StudyFilterHandler.instance.previousAppliedFilters = []
+        StudyFilterHandler.instance.searchText = ""
     }
     
     func handleUpdateTokenResponse(response: Dictionary<String, Any>){

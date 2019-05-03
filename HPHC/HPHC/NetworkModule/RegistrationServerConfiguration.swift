@@ -80,8 +80,8 @@ struct RegistrationServerURLConstants {
     
     
     //Testing server
-    //static let ProductionURL = "https://hpreg-stage.lkcompliant.net/fdahpUserRegWS/"
-    //static let DevelopmentURL = "https://hpreg-stage.lkcompliant.net/fdahpUserRegWS/"
+    static let ProductionURL = "https://hpreg-stage.lkcompliant.net/fdahpUserRegWS/"
+    static let DevelopmentURL = "https://hpreg-stage.lkcompliant.net/fdahpUserRegWS/"
     
     
     //LabKey Server Test Enviorment
@@ -99,8 +99,8 @@ struct RegistrationServerURLConstants {
     //---
     
     // Local
-    static let ProductionURL = "http://192.168.0.44:8085/labkey/fdahpUserRegWS/"
-    static let DevelopmentURL = "http://192.168.0.44:8085/labkey/fdahpUserRegWS/"
+    //static let ProductionURL = "http://192.168.0.44:8085/labkey/fdahpUserRegWS/"
+    //static let DevelopmentURL = "http://192.168.0.44:8085/labkey/fdahpUserRegWS/"
     
     
     //Labkey Production Server Staging enviroment

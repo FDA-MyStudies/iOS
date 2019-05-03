@@ -52,6 +52,7 @@ enum LeftMenu: Int {
     case signup
 }
 
+
 protocol LeftMenuProtocol: class {
     func changeViewController(_ menu: LeftMenu)
 }
@@ -64,12 +65,14 @@ class LeftMenuViewController: UIViewController, LeftMenuProtocol {
     @IBOutlet weak var tableFooterView: UIView!
     @IBOutlet weak var buttonSignOut: UIButton?
     
-    var menus = [ ["menuTitle": "Home",
-                   "iconName": "home_menu1-1"],
+    var menus: [[String: Any]] = [ ["menuTitle": "Home",
+                   "iconName": "home_menu1-1",
+                   "menuType": LeftMenu.studyList],
                   
                   ["menuTitle": "Resources",
-                   "iconName": "resources_menu1"],
-                  ]
+                   "iconName": "resources_menu1",
+                   "menuType": LeftMenu.resources],
+    ]
     // standalone
     var studyTabBarController: UITabBarController!
     var studyHomeViewController: UINavigationController!
@@ -185,30 +188,40 @@ class LeftMenuViewController: UIViewController, LeftMenuProtocol {
         let user = User.currentUser
         
         menus = [ ["menuTitle": "Home",
-                   "iconName": "home_menu1-1"],
-                  
-                  ["menuTitle": "Resources",
-                   "iconName": "resources_menu1"],
+                   "iconName": "home_menu1-1",
+            "menuType": LeftMenu.studyList]
         ]
+        
+        if !Utilities.isStandaloneApp() {
+            
+            menus.append(["menuTitle": "Resources",
+             "iconName": "resources_menu1",
+                "menuType": LeftMenu.resources])
+        }
         
         if user.userType == .FDAUser {
             menus.append(["menuTitle": "My Account",
-                          "iconName": "profile_menu1"])
+                          "iconName": "profile_menu1",
+                "menuType": LeftMenu.profile_reachOut])
             menus.append(["menuTitle": "Reach Out",
-                          "iconName": "reachout_menu1"])
+                          "iconName": "reachout_menu1",
+                "menuType": LeftMenu.reachOut_signIn])
            
             self.buttonSignOut?.isHidden = false
         }
         else{
             menus.append(["menuTitle": "Reach Out",
-                          "iconName": "reachout_menu1"])
+                          "iconName": "reachout_menu1",
+                "menuType": LeftMenu.profile_reachOut])
 
             menus.append(["menuTitle": "Sign In",
-                          "iconName": "signin_menu1"])
+                          "iconName": "signin_menu1",
+                "menuType": LeftMenu.reachOut_signIn])
             
             menus.append(["menuTitle": "New User?",
                           "iconName":"newuser_menu1",
-                          "subTitle": "Sign up"])
+                          "subTitle": "Sign up",
+                "menuType": LeftMenu.signup])
              self.buttonSignOut?.isHidden = true
         }
         
@@ -460,7 +473,8 @@ extension LeftMenuViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         tableView.deselectRow(at: indexPath, animated: true)
-        if let menu = LeftMenu(rawValue: indexPath.row) {
+        
+        if let menu = menus[indexPath.row]["menuType"] as? LeftMenu {
             self.changeViewController(menu)
         }
     }

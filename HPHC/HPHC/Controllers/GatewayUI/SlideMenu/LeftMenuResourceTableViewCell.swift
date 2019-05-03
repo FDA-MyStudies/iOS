@@ -42,8 +42,8 @@ class LeftMenuResourceTableViewCell: UITableViewCell {
      Used to populate Cell Data
      @param data    contains dictionary of type string(key and value)
      */
-    func populateCellData(data: Dictionary<String,String>){
-        menuIcon?.image = UIImage.init(named: data["iconName"]!)
-        labelTitle?.text = data["menuTitle"]!
+    func populateCellData(data: Dictionary<String,Any>){
+        menuIcon?.image = UIImage.init(named: data["iconName"] as! String)
+        labelTitle?.text = data["menuTitle"] as? String
     }
 }

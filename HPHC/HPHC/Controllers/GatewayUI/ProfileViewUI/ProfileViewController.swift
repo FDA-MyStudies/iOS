@@ -274,7 +274,7 @@ class ProfileViewController: UIViewController, SlideMenuControllerDelegate {
      
      */
     @IBAction func buttonActionDeleteAccount(_ sender: UIButton) {
-        
+      
         if (Gateway.instance.studies?.count)! > 0 {
             let studies = Gateway.instance.studies
             var joinedStudies:[Study] = []
@@ -285,7 +285,7 @@ class ProfileViewController: UIViewController, SlideMenuControllerDelegate {
             else {
                 joinedStudies = studies?.filter({$0.userParticipateState.status == .inProgress || $0.userParticipateState.status == .completed}) ?? []
             }
-        
+
             if joinedStudies.count != 0 {
                 self.performSegue(withIdentifier: "confirmationSegue", sender: joinedStudies)
             }
@@ -293,13 +293,13 @@ class ProfileViewController: UIViewController, SlideMenuControllerDelegate {
                 UIUtilities.showAlertMessageWithTwoActionsAndHandler(NSLocalizedString(kTitleDeleteAccount, comment: ""), errorMessage: NSLocalizedString(kDeleteAccountConfirmationMessage, comment: ""), errorAlertActionTitle: NSLocalizedString(kTitleDeleteAccount, comment: ""),
                                                                      errorAlertActionTitle2: NSLocalizedString(kTitleCancel, comment: ""), viewControllerUsed: self,
                                                                      action1: {
-                                                                        
+
                                                                         self.sendRequestToDeleteAccount()
-                                                                        
-                                                                        
+
+
                 },
                                                                      action2: {
-                                                                        
+
                 })
             }
         }
@@ -386,9 +386,21 @@ class ProfileViewController: UIViewController, SlideMenuControllerDelegate {
         
         UIUtilities.showAlertMessageWithActionHandler(NSLocalizedString(kTitleMessage, comment: ""), message: NSLocalizedString(kMessageAccountDeletedSuccess, comment: ""), buttonTitle: NSLocalizedString(kTitleOk, comment: ""), viewControllerUsed: self) {
             
-            let leftController = (self.slideMenuController()?.leftViewController as? LeftMenuViewController)!
-            leftController.changeViewController(.studyList)
-            leftController.createLeftmenuItems()
+            
+            if Utilities.isStandaloneApp() {
+                
+                UIApplication.shared.keyWindow?.addProgressIndicatorOnWindowFromTop()
+                Study.currentStudy = nil
+                self.slideMenuController()?.leftViewController?.navigationController?.popToRootViewController(animated: true)
+                DispatchQueue.main.asyncAfter(deadline: .now()+1) {
+                    UIApplication.shared.keyWindow?.removeProgressIndicatorFromWindow()
+                }
+            }
+            else {
+                let leftController = (self.slideMenuController()?.leftViewController as? LeftMenuViewController)!
+                leftController.changeViewController(.studyList)
+                leftController.createLeftmenuItems()
+            }
             
         }
     }

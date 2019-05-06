@@ -372,64 +372,9 @@ class LeftMenuViewController: UIViewController, LeftMenuProtocol {
      */
     func sendRequestToSignOut() {
         
-        if Utilities.isStandaloneApp() {
-            
-            ORKPasscodeViewController.removePasscodeFromKeychain()
-            
-            let ud = UserDefaults.standard
-            ud.set(false, forKey: kPasscodeIsPending)
-            ud.set(false, forKey: kShowNotification)
-            
-            
-            
-            ud.synchronize()
-            
-            StudyDashboard.instance.dashboardResponse = []
-            let appDelegate = UIApplication.shared.delegate as! AppDelegate
-            appDelegate.updateKeyAndInitializationVector()
-            
-            
-            //let ud = UserDefaults.standard
-            ud.removeObject(forKey: kUserAuthToken)
-            ud.removeObject(forKey: kUserId)
-            ud.synchronize()
-            
-            let email = ud.string(forKey: "useremail")
-            let password = ud.string(forKey: "userpassword")
-            
-            let appDomain = Bundle.main.bundleIdentifier!
-            UserDefaults.standard.removePersistentDomain(forName: appDomain)
-            UserDefaults.standard.synchronize()
-            
-            ud.set(email, forKey: "useremail")
-            ud.set(password, forKey:"userpassword")
-            ud.synchronize()
-            
-            //Delete from database
-            DBHandler.resetAuthToken()
-            
-            //reset user object
-            User.resetCurrentUser()
-            
-            //delete complete database
-            //DBHandler.deleteAll()
-            
-            //cancel all local notification
-            LocalNotification.cancelAllLocalNotification()
-            
-            //reset Filters
-            StudyFilterHandler.instance.previousAppliedFilters = []
-            StudyFilterHandler.instance.searchText = ""
-            
-            //self.changeViewController(.studyList)
-            //self.createLeftmenuItems()
-            //UserServices().logoutUser(self as NMWebServiceDelegate)
-            self.navigationController?.popToRootViewController(animated: true)
-            
-        } else {
-            
-            UserServices().logoutUser(self as NMWebServiceDelegate)
-        }
+        
+        UserServices().logoutUser(self as NMWebServiceDelegate)
+        
         
     }
     
@@ -443,15 +388,23 @@ class LeftMenuViewController: UIViewController, LeftMenuProtocol {
         
         let ud = UserDefaults.standard
         ud.set(false, forKey: kPasscodeIsPending)
-         ud.set(false, forKey: kShowNotification)
+        ud.set(false, forKey: kShowNotification)
         ud.synchronize()
         
         StudyDashboard.instance.dashboardResponse = []
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         appDelegate.updateKeyAndInitializationVector()
         
-        self.changeViewController(.studyList)
-        self.createLeftmenuItems()
+        if !Utilities.isStandaloneApp() {
+            self.changeViewController(.studyList)
+            self.createLeftmenuItems()
+        }
+        else {
+            UIApplication.shared.keyWindow?.removeProgressIndicatorFromWindow()
+            self.navigationController?.popToRootViewController(animated: true)
+        }
+        
+       
     }
 }
 

@@ -155,18 +155,12 @@ extension StandaloneStudy:NMWebServiceDelegate {
         appdelegate.window?.removeProgressIndicatorFromWindow()
         
         if error.code == 403 { //unauthorized
-//            UIUtilities.showAlertMessageWithActionHandler(kErrorTitle, message: error.localizedDescription, buttonTitle: kTitleOk, viewControllerUsed: self, action: {
-//                self.fdaSlideMenuController()?.navigateToHomeAfterUnauthorizedAccess()
-//            })
+           self.createStudyForStandalone()
         }
         else {
             
             UIUtilities.showAlertWithMessage(alertMessage: error.localizedDescription)
-//            UIUtilities.showAlertMessageWithActionHandler(kErrorTitle, message: error.localizedDescription, buttonTitle: kTitleOk, viewControllerUsed: self, action: {
-//                self.fdaSlideMenuController()?.navigateToHomeAfterUnauthorizedAccess()
-//            })
-
-         
+  
         }
     }
 }

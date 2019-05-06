@@ -158,10 +158,21 @@ class ConfirmationViewController: UIViewController {
      Handle delete account webservice response
      */
     func handleDeleteAccountResponse() {
-       
-        let leftController = slideMenuController()?.leftViewController as! LeftMenuViewController
-        leftController.changeViewController(.studyList)
-        leftController.createLeftmenuItems()
+        
+        if Utilities.isStandaloneApp() {
+            UIApplication.shared.keyWindow?.addProgressIndicatorOnWindowFromTop()
+            Study.currentStudy = nil
+            self.slideMenuController()?.leftViewController?.navigationController?.popToRootViewController(animated: true)
+            DispatchQueue.main.asyncAfter(deadline: .now()+1) {
+                UIApplication.shared.keyWindow?.removeProgressIndicatorFromWindow()
+            }
+        }
+        else {
+            
+            let leftController = slideMenuController()?.leftViewController as! LeftMenuViewController
+            leftController.changeViewController(.studyList)
+            leftController.createLeftmenuItems()
+        }
         
     }
     

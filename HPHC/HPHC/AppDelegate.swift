@@ -950,19 +950,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if navigationController.viewControllers.count > 0 {
             let slideMenuController = (navigationController.viewControllers.last as? FDASlideMenuViewController)!
             
-            //Remove  progress
-            self.addAndRemoveProgress(add: false)
-            //if slideMenuController != nil {
-                User.resetCurrentUser()
-                let ud = UserDefaults.standard
-                ud.removeObject(forKey: kUserAuthToken)
-                ud.removeObject(forKey: kUserId)
-                ud.synchronize()
-                
+            if !Utilities.isStandaloneApp() {
                 let leftController = (slideMenuController.leftViewController as? LeftMenuViewController)!
                 leftController.changeViewController(.reachOut_signIn)
                 leftController.createLeftmenuItems()
-            //}
+                self.addAndRemoveProgress(add: false)
+            }
+            else {
+                UIApplication.shared.keyWindow?.removeProgressIndicatorFromWindow()
+                navigationController.popToRootViewController(animated: true)
+                DispatchQueue.main.asyncAfter(deadline: .now()+1) {
+                    UIApplication.shared.keyWindow?.removeProgressIndicatorFromWindow()
+                }
+            }
+           
+            
         }
     }
     

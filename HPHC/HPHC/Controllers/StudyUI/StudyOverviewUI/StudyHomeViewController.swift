@@ -843,26 +843,36 @@ extension StudyHomeViewController: NMWebServiceDelegate {
         Logger.sharedInstance.info("requestname : \(requestName)")
         self.removeProgressIndicator()
         
-        if requestName as String == WCPMethods.consentDocument.method.methodName {
-            //self.removeProgressIndicator()
+        if error.code == 403 { //unauthorized Access
+            let appdelegate = (UIApplication.shared.delegate as? AppDelegate)!
+            appdelegate.window?.removeProgressIndicatorFromWindow()
+            UIUtilities.showAlertMessageWithActionHandler(kErrorTitle, message: error.localizedDescription, buttonTitle: kTitleOk, viewControllerUsed: self, action: {
+                self.fdaSlideMenuController()?.navigateToHomeAfterUnauthorizedAccess()
+            })
         }
-        
-        if requestName as String == ResponseMethods.enroll.description
-            || requestName as String == RegistrationMethods.updateStudyState.method.methodName
-            || requestName as String == RegistrationMethods.updateEligibilityConsentStatus.method.methodName{
-            self.unHideSubViews()
+        else {
             
-            let message = error.localizedDescription as NSString
-            if message.length != 0 {
-                UIUtilities.showAlertWithTitleAndMessage(title: NSLocalizedString(kErrorTitle, comment: "") as NSString, message: error.localizedDescription as NSString)
-            } else {
-                
-                UIUtilities.showAlertMessageWithActionHandler(kErrorTitle, message: "Unknown error occurred. Please try after some time.", buttonTitle: kTitleOk, viewControllerUsed: self, action: {
-                    self.navigationController?.popViewController(animated: true)
-                })
+            if requestName as String == WCPMethods.consentDocument.method.methodName {
+                //self.removeProgressIndicator()
             }
+            
+            if requestName as String == ResponseMethods.enroll.description
+                || requestName as String == RegistrationMethods.updateStudyState.method.methodName
+                || requestName as String == RegistrationMethods.updateEligibilityConsentStatus.method.methodName{
+                self.unHideSubViews()
+                
+                let message = error.localizedDescription as NSString
+                if message.length != 0 {
+                    UIUtilities.showAlertWithTitleAndMessage(title: NSLocalizedString(kErrorTitle, comment: "") as NSString, message: error.localizedDescription as NSString)
+                } else {
+                    
+                    UIUtilities.showAlertMessageWithActionHandler(kErrorTitle, message: "Unknown error occurred. Please try after some time.", buttonTitle: kTitleOk, viewControllerUsed: self, action: {
+                        self.navigationController?.popViewController(animated: true)
+                    })
+                }
+            }
+            
         }
-        
     }
 }
 

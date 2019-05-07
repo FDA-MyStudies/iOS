@@ -718,7 +718,21 @@ extension ResourcesViewController: NMWebServiceDelegate {
             
             self.removeProgressIndicator()
             self.navigationController?.navigationBar.isHidden = false
-            self.performSegue(withIdentifier: "unwindeToStudyListResourcesIdentifier", sender: self)
+            
+            if Utilities.isStandaloneApp() {
+                
+                UIApplication.shared.keyWindow?.addProgressIndicatorOnWindowFromTop()
+                Study.currentStudy = nil
+                self.slideMenuController()?.leftViewController?.navigationController?.popToRootViewController(animated: true)
+                DispatchQueue.main.asyncAfter(deadline: .now()+1) {
+                    UIApplication.shared.keyWindow?.removeProgressIndicatorFromWindow()
+                }
+            }
+            else {
+                self.performSegue(withIdentifier: "unwindeToStudyListResourcesIdentifier", sender: self)
+            }
+            
+           
 
    
         } else  if requestName as String == RegistrationMethods.updatePreferences.method.methodName {

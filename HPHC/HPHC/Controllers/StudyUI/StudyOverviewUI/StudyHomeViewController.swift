@@ -175,10 +175,12 @@ class StudyHomeViewController: UIViewController{
         //Standalone App Settings
         if Utilities.isStandaloneApp(){
             buttonStar.isHidden = true
+            buttonBack.isHidden = true
             if loadViewFrom == .home {
                 buttonBack.setImage(UIImage(named: "menu_icn"), for: .normal)
                 buttonBack.tag = 200
                 self.slideMenuController()?.leftPanGesture?.isEnabled = false
+                
             }
         }
         
@@ -190,6 +192,37 @@ class StudyHomeViewController: UIViewController{
         
     }
     
+    func logout() {
+        
+        if User.currentUser.authToken != nil && User.currentUser.authToken.count > 0 {
+            //logout
+            
+            let user = User.currentUser
+            let headerParams = [kUserId: user.userId!]
+            let params = [kUserLogoutReason: user.logoutReason.rawValue]
+            
+            let method = RegistrationMethods.logout.method
+            NetworkManager.sharedInstance().composeRequest(RegistrationServerConfiguration.configuration,
+                                                           method: method,
+                                                           params: params as NSDictionary,
+                                                           headers:headerParams as NSDictionary,
+                                                           delegate: self)
+            
+            let appDomain = Bundle.main.bundleIdentifier!
+            UserDefaults.standard.removePersistentDomain(forName: appDomain)
+            UserDefaults.standard.synchronize()
+            
+            //Delete from database
+            DBHandler.deleteCurrentUser()
+            
+            //reset user object
+            User.resetCurrentUser()
+            
+            //remove passcode
+            ORKPasscodeViewController.removePasscodeFromKeychain()
+        }
+        
+    }
     
     // MARK:-
     
@@ -470,6 +503,12 @@ class StudyHomeViewController: UIViewController{
      @param sender  Accepts UIButton object
      */
     @IBAction func buttonActionJoinStudy(_ sender: UIButton){
+    
+    
+        if Utilities.isStandaloneApp() {
+            logout()
+        }
+        
         if User.currentUser.userType == UserType.AnonymousUser{
             // let leftController = slideMenuController()?.leftViewController as! LeftMenuViewController
             // leftController.changeViewController(.reachOut_signIn)
@@ -725,12 +764,16 @@ extension StudyHomeViewController: PageViewControllerDelegate {
 extension StudyHomeViewController: NMWebServiceDelegate {
     
     func startedRequest(_ manager: NetworkManager, requestName: NSString) {
-        Logger.sharedInstance.info("requestname : \(requestName)")
+        Logger.sharedInstance.info("requestname startedRequest : \(requestName)")
         
-        if requestName as String == WCPMethods.consentDocument.method.methodName {
+        if requestName as String == RegistrationMethods.logout.method.methodName{
+            
+        }
+        else {
+            self.addProgressIndicator()
         }
         
-        self.addProgressIndicator()
+        
     }
     
     func finishedRequest(_ manager: NetworkManager, requestName: NSString, response: AnyObject?) {
@@ -1180,7 +1223,7 @@ extension StudyHomeViewController: ORKTaskViewControllerDelegate{
                 DBHandler.updateStudyParticipationStatus(study: Study.currentStudy!)
                 
                 
-                
+                self.unHideSubViews()
                 self.dismiss(animated: true, completion: {
                     
                     self.isUpdatingIneligibility = true

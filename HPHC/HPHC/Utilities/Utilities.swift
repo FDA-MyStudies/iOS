@@ -307,7 +307,7 @@ class Utilities: NSObject {
         
         if (someObject is NSNull) ==  false {
             
-            if someObject as? Int != nil && (someObject as? Int)! >= 0 {
+            if someObject as? Int != nil && ((someObject as? Int)! >= 0 || (someObject as? Int)! < 0) {
                 return true
                 
             } else if someObject as? String != nil && ((someObject as? String)?.count)! > 0 && (someObject as? String) != "" {

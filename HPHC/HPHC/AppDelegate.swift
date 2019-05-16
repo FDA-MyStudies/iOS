@@ -1098,7 +1098,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
 }
 
-typealias JSONDictionary = [String: Any]
 // MARK:- Handle network responses
 extension AppDelegate {
     

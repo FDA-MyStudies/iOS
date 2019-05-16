@@ -15,16 +15,18 @@ struct OtherChoice {
     let otherTitle: String
     let placeholder: String
     let isMandatory: Bool
+    let detailText: String
     lazy var otherChoiceText = ""
     let isExclusive: Bool
     
-    init(isShowOtherCell: Bool = false, isShowOtherField: Bool = true, otherTitle: String = "Other", placeholder: String = "enter here",isMandatory: Bool = true,isExclusive: Bool = false ) {
+    init(isShowOtherCell: Bool = false, isShowOtherField: Bool = true, otherTitle: String = "Other", placeholder: String = "enter here",isMandatory: Bool = true,isExclusive: Bool = false, detailText: String = "" ) {
         self.isShowOtherField = isShowOtherField
         self.otherTitle = otherTitle
         self.placeholder = placeholder
         self.isMandatory = isMandatory
         self.isShowOtherCell = isShowOtherCell
         self.isExclusive = isExclusive
+        self.detailText = detailText
     }
 }
 
@@ -64,7 +66,7 @@ class TextChoiceQuestionController: ORKQuestionStepViewController {
             } else {
                 otherChoiceDict = ["selected": otherChoice.otherTitle]
             }
-            choices.append(otherChoiceDict)
+            choices.append(otherChoiceDict as  Any)
         }
         
         if self.answerFormat?.style == .multipleChoice {
@@ -84,7 +86,7 @@ class TextChoiceQuestionController: ORKQuestionStepViewController {
     lazy var textChoices: [ORKTextChoice]! = []
     lazy private(set) var selectedChoices: [ORKTextChoice] = []
     lazy var searchChoices: [ORKTextChoice] = []
-    var answers: [String]?
+    lazy var answers: [String]? = []
     
     private(set) var isOtherCellSelected = false
     
@@ -105,7 +107,7 @@ class TextChoiceQuestionController: ORKQuestionStepViewController {
     lazy var otherChoice = OtherChoice()
     
     var isShowSearchBar: Bool {
-        return self.textChoices.count > 6
+        return self.textChoices.count > 5
     }
     
     // Contructors
@@ -118,9 +120,16 @@ class TextChoiceQuestionController: ORKQuestionStepViewController {
         
         if let stepResult = (result as? ORKStepResult),
             let choiceResult = stepResult.result(forIdentifier: step.identifier) as? ORKChoiceQuestionResult,
-            let choices = choiceResult.choiceAnswers as? [String] {
+            let choices = choiceResult.choiceAnswers {
             
-            self.answers = choices
+            for choice in choices {
+                
+                if let choice = choice as? String {
+                    self.answers?.append(choice)
+                } else if let choiceDict = choice as? JSONDictionary, let otherChoice = choiceDict["text"] as? String {
+                    self.answers?.append(otherChoice)
+                }
+            }
             
         }
     }
@@ -158,6 +167,7 @@ class TextChoiceQuestionController: ORKQuestionStepViewController {
         
         tableView?.isHidden = false
         self.tableView?.reloadData()
+        self.updateNextOrContinueBtnState()
         
     }
     
@@ -453,18 +463,21 @@ class TextChoiceQuestionController: ORKQuestionStepViewController {
     
     private func didTapOnOtherCell(didSelect: Bool) {
         
-        let otherCellIndex = self.isSearching ? IndexPath(row: self.searchChoices.count, section: 0) : IndexPath(row: self.textChoices.count, section: 0)
-        
         if didSelect {
             
             self.isOtherCellSelected = true
             updateSelectedChoice(choice: nil, didSelected: true)
             self.tableView?.reloadData()
-            let cell = self.tableView?.cellForRow(at: otherCellIndex) as? OtherTextChoiceCell
-            if self.otherChoice.isShowOtherField, cell?.otherField.text == "" {
-                cell?.otherField.becomeFirstResponder()
-            }
             
+            if isSearching {
+                view.endEditing(true) // Will be handled in search bar end editing delegate
+            } else {
+                let otherCellIndex = IndexPath(row: self.textChoices.count, section: 0)
+                let cell = self.tableView?.cellForRow(at: otherCellIndex) as? OtherTextChoiceCell
+                if self.otherChoice.isShowOtherField, cell?.otherField.text == "" {
+                    cell?.otherField.becomeFirstResponder()
+                }
+            }
             
         } else {
             self.isOtherCellSelected = false
@@ -510,7 +523,7 @@ extension TextChoiceQuestionController: UITableViewDataSource, UITableViewDelega
             cell.delegate = self
             cell.otherField.text = self.otherChoice.otherChoiceText
             cell.otherField.placeholder = otherChoice.placeholder
-            cell.detailedTextLbl.text = "fafa" // TBD
+            cell.detailedTextLbl.text = otherChoice.detailText // TBD
             cell.titleLbl.text = self.otherChoice.otherTitle
             
             if self.isOtherCellSelected {
@@ -633,10 +646,10 @@ extension TextChoiceQuestionController: UISearchBarDelegate {
         } else {
             self.searchChoices = textChoices.filter({$0.text.localizedLowercase.contains(searchText.localizedLowercase)})
         }
-        let offset = tableView?.contentOffset
+        ///let offset = tableView?.contentOffset
         self.tableView?.reloadData()
-        tableView?.layoutIfNeeded() // Force layout so things are updated before resetting the contentOffset.
-        tableView?.setContentOffset(offset!, animated: false)
+        //tableView?.layoutIfNeeded() // Force layout so things are updated before resetting the contentOffset.
+        //tableView?.setContentOffset(offset!, animated: false)
     }
     
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
@@ -656,19 +669,25 @@ extension TextChoiceQuestionController: UISearchBarDelegate {
         searchBar.text = ""
         self.searchChoices = []
         self.isSearching = false
+        
         self.tableView?.reloadData()
         
-        if !isOtherCellSelected {
+        let otherCellIndex = IndexPath(row: self.textChoices.count, section: 0)
+        self.tableView?.scrollToRow(at: otherCellIndex, at: .bottom, animated: true)
+        
+        if !self.isOtherCellSelected {
             self.tableView?.setContentOffset(CGPoint(x: 0, y: -1), animated: true)
         } else {
-            
-            let otherCellIndex = IndexPath(row: self.textChoices.count, section: 0)
-            self.tableView?.scrollToRow(at: otherCellIndex, at: .middle, animated: true)
-            if let cell = tableView?.cellForRow(at: IndexPath(row: self.textChoices.count, section: 0)) as? OtherTextChoiceCell {
-                if cell.otherField?.text?.isEmpty ?? true {
-                    cell.otherField.becomeFirstResponder()
-                } else {
-                    self.tableView?.setContentOffset(CGPoint(x: 0, y: -1), animated: true)
+            let totalSec = 30 * self.textChoices.count
+            let deadlineTime = DispatchTime.now() + .milliseconds(totalSec)
+            DispatchQueue.main.asyncAfter(deadline: deadlineTime) {
+                
+                if let cell = self.tableView?.cellForRow(at: IndexPath(row: self.textChoices.count, section: 0)) as? OtherTextChoiceCell {
+                    if (cell.otherField?.text?.isEmpty ?? true) && self.otherChoice.isShowOtherField {
+                        cell.otherField.becomeFirstResponder()
+                    } else {
+                        self.tableView?.setContentOffset(CGPoint(x: 0, y: -1), animated: true)
+                    }
                 }
             }
         }

@@ -801,7 +801,7 @@ class ActivityQuestionStep: ActivityStep {
                     let isMandatory = otherDict["isMandatory"] as? Bool ?? false
                     let textFieldReq = otherDict["textfieldReq"] as? Bool ?? false
         
-                    otherChoice = OtherChoice(isShowOtherCell: true, isShowOtherField: textFieldReq, otherTitle: text, placeholder: placeholder, isMandatory: isMandatory,isExclusive: isExclusive)
+                    otherChoice = OtherChoice(isShowOtherCell: true, isShowOtherField: textFieldReq, otherTitle: text, placeholder: placeholder, isMandatory: isMandatory,isExclusive: isExclusive,detailText: detail)
                     
                     continue // No need to add other text choice
                 }

@@ -369,7 +369,7 @@ class WCPServices: NSObject {
     
     func handleStudyDashboard(response: Dictionary<String, Any>){
         
-        let dashboard = response["dashboard"] as! Dictionary<String, Any>
+        guard let dashboard = response["dashboard"] as? Dictionary<String, Any> else { return }
         
         if Utilities.isValidObject(someObject: dashboard as AnyObject?){
             

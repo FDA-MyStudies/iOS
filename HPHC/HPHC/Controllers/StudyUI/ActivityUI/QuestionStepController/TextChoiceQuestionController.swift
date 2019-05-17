@@ -107,7 +107,11 @@ class TextChoiceQuestionController: ORKQuestionStepViewController {
     lazy var otherChoice = OtherChoice()
     
     var isShowSearchBar: Bool {
-        return self.textChoices.count > 5
+        if self.otherChoice.isShowOtherCell {
+            return self.textChoices.count > 5
+        } else {
+            return self.textChoices.count > 6
+        }
     }
     
     // Contructors
@@ -672,8 +676,11 @@ extension TextChoiceQuestionController: UISearchBarDelegate {
         
         self.tableView?.reloadData()
         
-        let otherCellIndex = IndexPath(row: self.textChoices.count, section: 0)
-        self.tableView?.scrollToRow(at: otherCellIndex, at: .bottom, animated: true)
+        if self.otherChoice.isShowOtherCell {
+            let otherCellIndex = IndexPath(row: self.textChoices.count, section: 0)
+            self.tableView?.scrollToRow(at: otherCellIndex, at: .bottom, animated: true)
+        }
+      
         
         if !self.isOtherCellSelected {
             self.tableView?.setContentOffset(CGPoint(x: 0, y: -1), animated: true)

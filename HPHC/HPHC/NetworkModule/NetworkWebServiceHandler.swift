@@ -339,16 +339,7 @@ class NetworkWebServiceHandler: NSObject, URLSessionDelegate {
                         delegate?.finishedRequest(networkManager!, requestName: requestName!,response: responseDict!)
                         
                     } else {
-                        var dictionary = NSDictionary()
-                        print("response Dictionary Nil")
                         
-                        if let httpResponse = response as? HTTPURLResponse {
-                            if let contentType = httpResponse.allHeaderFields["Status Message"] as? String {
-                                // use contentType here
-                                dictionary = ["Status Message": contentType]
-                                
-                            }
-                        }
                         error1 = NSError(domain: NSURLErrorDomain, code: 300,userInfo:[NSLocalizedDescriptionKey:"Could not connect to server. Please try again later."])
                         
                         if ((delegate?.failedRequest) != nil) {

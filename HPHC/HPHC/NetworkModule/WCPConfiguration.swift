@@ -40,6 +40,7 @@ enum WCPMethods: String {
     case contactUs
     case studyUpdates
     case appUpdates
+    case versionInfo
     
     var method: Method{
         switch self {
@@ -47,7 +48,6 @@ enum WCPMethods: String {
             return Method(methodName: self.rawValue, methodType: .httpMethodPOST, requestType: .requestTypeJSON)
         default:
             return Method(methodName: self.rawValue, methodType: .httpMethodGet, requestType: .requestTypeHTTP)
-            
         }
     }
 }

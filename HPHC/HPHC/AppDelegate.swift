@@ -529,7 +529,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
      To get the current App version from App Store and Adds the blocker screen if it is of lower version
      */
     func checkForAppUpdate() {
-        UserServices().checkForAppUpdates(delegate: self)
+        WCPServices().checkForAppUpdates(delegate: self)
     }
     
     func checkForRegisteredNotifications() {
@@ -1106,7 +1106,7 @@ extension AppDelegate {
         
         if let iosDict = response["ios"] as? JSONDictionary,
            let latestVersion = iosDict["latestVersion"] as? String,
-            let ForceUpdate = iosDict["ForceUpdate"] as? String {
+            let ForceUpdate = iosDict["forceUpdate"] as? String {
             
             let appVersion = Utilities.getAppVersion()
             guard let isForceUpdate = Bool(ForceUpdate) else {return}
@@ -1167,7 +1167,7 @@ extension AppDelegate: NMWebServiceDelegate {
     }
     func finishedRequest(_ manager: NetworkManager, requestName: NSString, response: AnyObject?) {
         
-        if requestName as String == RegistrationMethods.versionInfo.method.methodName {
+        if requestName as String == WCPMethods.versionInfo.method.methodName {
             
             if let response = response as? JSONDictionary {
                 handleAppUpdateResponse(response: response)

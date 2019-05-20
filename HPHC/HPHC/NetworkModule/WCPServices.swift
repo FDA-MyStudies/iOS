@@ -106,6 +106,14 @@ class WCPServices: NSObject {
     var delegate: NMWebServiceDelegate! = nil
     
     // MARK:Requests
+    
+    func checkForAppUpdates(delegate: NMWebServiceDelegate){
+        
+        self.delegate = delegate
+        let method = WCPMethods.versionInfo.method
+        self.sendRequestWith(method: method, params: nil, headers: nil)
+    }
+    
     func getStudyBasicInfo(_ delegate:NMWebServiceDelegate) {
         
         self.delegate = delegate
@@ -255,6 +263,7 @@ class WCPServices: NSObject {
         
     }
     
+    /*
     func checkForAppUpdates(delegate: NMWebServiceDelegate){
         
         self.delegate = delegate
@@ -263,6 +272,7 @@ class WCPServices: NSObject {
                             kOSType: "ios"]
         self.sendRequestWith(method: method, params: headerParams, headers: nil)
     }
+     */
     
     // MARK:Parsers
     func handleStudyBasicInfo(response: Dictionary<String, Any>){
@@ -631,8 +641,8 @@ extension WCPServices:NMWebServiceDelegate{
         case .studyUpdates:
             self.handleStudyUpdates(response: response as! Dictionary<String, Any>)
         case .appUpdates: break
-//        default:
-//            print("Request was not sent proper method name")
+            
+        default: break
         }
         
         if delegate != nil {

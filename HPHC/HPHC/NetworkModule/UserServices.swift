@@ -118,12 +118,13 @@ class UserServices: NSObject {
     
     // MARK: Requests
     
+    /*
     func checkForAppUpdates(delegate: NMWebServiceDelegate){
         
         self.delegate = delegate
         let method = RegistrationMethods.versionInfo.method
         self.sendRequestWith(method: method, params: nil, headers: nil)
-    }
+    }*/
     
     
     func loginUser(_ delegate: NMWebServiceDelegate){

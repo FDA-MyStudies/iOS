@@ -574,6 +574,69 @@ class ResourcesViewController: UIViewController{
         //UserServices().withdrawFromStudy(studyId: (Study.currentStudy?.studyId)!, shouldDeleteData: deleteResponse, delegate: self)
     }
     
+    private func handleResponseForWithdraw(response: JSONDictionary) {
+        //clear all local data storage
+        let currentUser = User.currentUser
+        let userActivityStatusList: [UserActivityStatus] = currentUser.participatedActivites.filter({$0.studyId == (Study.currentStudy?.studyId)!})
+        
+        for activityStatus in userActivityStatusList {
+            let index =  currentUser.participatedActivites.firstIndex(where: {$0.activityId == activityStatus.activityId})
+            currentUser.participatedActivites.remove(at: index!)
+            //currentUser.participatedActivites.remove
+            
+        }
+        
+        //clear database storage
+        DBHandler.deleteStudyData(studyId: (Study.currentStudy?.studyId)!)
+        
+        //clear local notification for study
+        LocalNotification.removeLocalNotificationfor(studyId: (Study.currentStudy?.studyId)!)
+        
+        //udpate status to false so notification can be registered again
+        Study.currentStudy?.activitiesLocalNotificationUpdated = false
+        DBHandler.updateLocalNotificaitonUpdated(studyId: (Study.currentStudy?.studyId)!,status: false)
+        
+        self.removeProgressIndicator()
+        self.navigationController?.navigationBar.isHidden = false
+        
+        if Utilities.isStandaloneApp() {
+            
+            UIApplication.shared.keyWindow?.addProgressIndicatorOnWindowFromTop()
+            Study.currentStudy = nil
+            self.slideMenuController()?.leftViewController?.navigationController?.popToRootViewController(animated: true)
+            DispatchQueue.main.asyncAfter(deadline: .now()+1) {
+                UIApplication.shared.keyWindow?.removeProgressIndicatorFromWindow()
+            }
+        }
+        else {
+            self.performSegue(withIdentifier: "unwindeToStudyListResourcesIdentifier", sender: self)
+        }
+        
+    }
+    
+    private func handleStudyInfoResponse(response: JSONDictionary) {
+        StudyUpdates.studyInfoUpdated = false
+        DBHandler.updateMetaDataToUpdateForStudy(study: Study.currentStudy!, updateDetails: nil)
+        
+        if self.navigateToStudyOverview == true{
+            self.removeProgressIndicator()
+            // this means that about the study has been tapped and get study info has been called
+            self.navigateToStudyOverview = false
+            self.tabBarController?.tabBar.isHidden = true
+            
+            self.navigateToStudyHome()
+            
+        } else if self.withdrawlInformationNotFound {
+            
+            self.removeProgressIndicator()
+            self.withdrawlInformationNotFound = false
+            self.handleLeaveStudy()
+            
+        } else {
+            self.checkForResourceUpdate()
+        }
+        self.removeProgressIndicator()
+    }
     
 }
 
@@ -674,96 +737,44 @@ extension ResourcesViewController: NMWebServiceDelegate {
     func finishedRequest(_ manager: NetworkManager, requestName: NSString, response: AnyObject?) {
         Logger.sharedInstance.info("requestname : \(requestName) response : \(String(describing: response))" )
         
-        
-        
-        if requestName as String == WCPMethods.resources.method.methodName {
+        switch requestName as String {
             
+        case WCPMethods.resources.method.methodName:
             self.removeProgressIndicator()
-           // self.handleResourcesReponse()
+            // self.handleResourcesReponse()
             self.loadResourceFromDatabase()
             
-            
-        }
-        else if requestName as String == ResponseMethods.withdrawFromStudy.method.methodName {
-            
-             //self.addProgressIndicator()
+        case ResponseMethods.withdrawFromStudy.method.methodName:
+            //self.addProgressIndicator()
             UserServices().withdrawFromStudy(studyId: (Study.currentStudy?.studyId)!, shouldDeleteData: self.shouldDeleteData!
                 , delegate: self)
-        }
-        else if requestName as String == RegistrationMethods.withdraw.method.methodName {
             
-            //clear all local data storage
-            let currentUser = User.currentUser
-            let userActivityStatusList: Array<UserActivityStatus> = currentUser.participatedActivites.filter({$0.studyId == (Study.currentStudy?.studyId)!})
-                
-            for activityStatus in userActivityStatusList {
-                let index =  currentUser.participatedActivites.index(where: {$0.activityId == activityStatus.activityId})
-                currentUser.participatedActivites.remove(at: index!)
-                //currentUser.participatedActivites.remove
-                    
-            }
-                
-            //clear database storage
-            DBHandler.deleteStudyData(studyId: (Study.currentStudy?.studyId)!)
-            
-            //clear local notification for study
-            LocalNotification.removeLocalNotificationfor(studyId: (Study.currentStudy?.studyId)!)
-            
-            //udpate status to false so notification can be registered again
-            Study.currentStudy?.activitiesLocalNotificationUpdated = false
-            DBHandler.updateLocalNotificaitonUpdated(studyId: (Study.currentStudy?.studyId)!,status: false)
-            
-            self.removeProgressIndicator()
-            self.navigationController?.navigationBar.isHidden = false
-            
-            if Utilities.isStandaloneApp() {
-                
-                UIApplication.shared.keyWindow?.addProgressIndicatorOnWindowFromTop()
-                Study.currentStudy = nil
-                self.slideMenuController()?.leftViewController?.navigationController?.popToRootViewController(animated: true)
-                DispatchQueue.main.asyncAfter(deadline: .now()+1) {
-                    UIApplication.shared.keyWindow?.removeProgressIndicatorFromWindow()
+        case RegistrationMethods.withdraw.method.methodName:
+            // Handle for withdraw account
+            if !Utilities.isStandaloneApp() {
+                if let response = response as? JSONDictionary {
+                    handleResponseForWithdraw(response: response)
                 }
-            }
-            else {
-                self.performSegue(withIdentifier: "unwindeToStudyListResourcesIdentifier", sender: self)
-            }
-            
-           
-
-   
-        } else  if requestName as String == RegistrationMethods.updatePreferences.method.methodName {
-           // self.navigationController?.navigationBar.isHidden = false
-           // self.performSegue(withIdentifier: "unwindeToStudyListResourcesIdentifier", sender: self)
-            self.removeProgressIndicator()
-            
-        } else if(requestName as String == WCPMethods.studyInfo.rawValue) {
-            
-            
-            StudyUpdates.studyInfoUpdated = false
-            DBHandler.updateMetaDataToUpdateForStudy(study: Study.currentStudy!, updateDetails: nil)
-            
-            if self.navigateToStudyOverview == true{
-                self.removeProgressIndicator()
-                // this means that about the study has been tapped and get study info has been called
-                self.navigateToStudyOverview = false
-                self.tabBarController?.tabBar.isHidden = true
-                
-                self.navigateToStudyHome()
-                
-            } else if self.withdrawlInformationNotFound {
-                
-                self.removeProgressIndicator()
-                self.withdrawlInformationNotFound = false
-                self.handleLeaveStudy()
-                
             } else {
-                self.checkForResourceUpdate()
+               UserServices().deActivateAccount(listOfStudyIds: [Study.currentStudy?.studyId ?? ""], delegate: self)
             }
+            
+        case RegistrationMethods.deactivate.method.methodName :
+            if let response = response as? JSONDictionary {
+                handleResponseForWithdraw(response: response)
+            }
+            
+        case RegistrationMethods.updatePreferences.method.methodName:
+            // self.navigationController?.navigationBar.isHidden = false
+            // self.performSegue(withIdentifier: "unwindeToStudyListResourcesIdentifier", sender: self)
             self.removeProgressIndicator()
             
-        } else if requestName as String == RegistrationMethods.consentPDF.method.methodName {
+        case WCPMethods.studyInfo.rawValue:
+            if let response = response as? JSONDictionary {
+                handleStudyInfoResponse(response: response)
+            }
             
+        case RegistrationMethods.consentPDF.method.methodName:
             self.removeProgressIndicator()
             let consentDict: Dictionary<String,Any> = ((response as? Dictionary<String,Any>)![kConsentPdfKey] as? Dictionary<String, Any>)!
             
@@ -778,15 +789,14 @@ extension ResourcesViewController: NMWebServiceDelegate {
                 if Utilities.isValidValue(someObject: consentDict[kConsentPdfContent] as AnyObject?){
                     self.saveConsentPdfToLocal(base64dataString: (consentDict[kConsentPdfContent] as? String)! )
                 }
-                
-                
             }
             
-            
-        } else if(requestName as String == WCPMethods.studyInfo.rawValue) {
+        default:
             self.removeProgressIndicator()
+            break
+            
         }
-        
+     
         
     }
     func failedRequest(_ manager: NetworkManager, requestName: NSString, error: NSError) {

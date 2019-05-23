@@ -83,7 +83,7 @@ class LabKeyServices: NSObject {
                       kActivityResponseData: responseData
             ] as [String : Any]
         
-        print("processresponse \(params)")
+        print("processresponse \(params.preetyJSON())")
         self.sendRequestWith(method:method, params: params, headers: nil)
         
     }

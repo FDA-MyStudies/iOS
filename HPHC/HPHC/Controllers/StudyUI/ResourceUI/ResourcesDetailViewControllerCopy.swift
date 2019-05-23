@@ -27,7 +27,7 @@ import SafariServices
 class ResourcesDetailViewControllerCopy: UIViewController {
     
     @IBOutlet var webViewContainer: UIView?
-     var webView: WKWebView?
+    var webView: WKWebView?
     
     @IBOutlet var progressBar: UIProgressView?
     @IBOutlet var bottomToolBar: UIToolbar?
@@ -160,7 +160,8 @@ class ResourcesDetailViewControllerCopy: UIViewController {
         _ = webView?.load(urlRequest)
        // webView?.loadRequest(urlRequest)
     }
-    func loadWebViewWithData(data:Data){
+    
+    func loadWebViewWithData(data: Data) {
         
          webView?.allowsBackForwardNavigationGestures = true
         

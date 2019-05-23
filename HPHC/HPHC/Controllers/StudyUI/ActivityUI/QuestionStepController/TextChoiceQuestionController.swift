@@ -62,9 +62,9 @@ class TextChoiceQuestionController: ORKQuestionStepViewController {
         if self.isOtherCellSelected {
             var otherChoiceDict: [String:Any]!
             if self.otherChoice.isShowOtherField {
-                otherChoiceDict = ["selected": otherChoice.otherTitle,"text":otherChoice.otherChoiceText]
+                otherChoiceDict = ["other": otherChoice.otherTitle,"text":otherChoice.otherChoiceText]
             } else {
-                otherChoiceDict = ["selected": otherChoice.otherTitle]
+                otherChoiceDict = ["other": otherChoice.otherTitle]
             }
             choices.append(otherChoiceDict as  Any)
         }

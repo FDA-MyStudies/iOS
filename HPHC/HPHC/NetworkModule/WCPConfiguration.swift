@@ -107,7 +107,8 @@ class WCPConfiguration: NetworkConfiguration {
     
     override func getDefaultHeaders() -> [String : String] {
         
-        let token = "com.hphci.fda.mobilestudies" + ":" + "ee91a4f6-d9c4-4ee9-a0e2-5682c5b1c916"
+        let token = "AvxfEsgX9u" + ":" + "ee91a4f6-d9c4-4ee9-a0e2-5682c5b1c916"
+        //com.hphci.fda.mobilestudies
         let base64token = "Basic " + token.toBase64()
        
         let headers = ["Authorization": base64token]

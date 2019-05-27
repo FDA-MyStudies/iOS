@@ -500,11 +500,6 @@ class StudyHomeViewController: UIViewController{
      @param sender  Accepts UIButton object
      */
     @IBAction func buttonActionJoinStudy(_ sender: UIButton){
-    
-    
-        if Utilities.isStandaloneApp() {
-            logout()
-        }
         
         if User.currentUser.userType == UserType.AnonymousUser{
             // let leftController = slideMenuController()?.leftViewController as! LeftMenuViewController
@@ -522,6 +517,11 @@ class StudyHomeViewController: UIViewController{
             
             switch currentStudy.status {
             case .Active:
+                
+                if Utilities.isStandaloneApp() {
+                    logout()
+                }
+                
                 if participatedStatus == .yetToJoin || participatedStatus == .notEligible {
                     
                     //check if enrolling is allowed
@@ -661,6 +661,10 @@ class StudyHomeViewController: UIViewController{
                 //unhide view
                 self.removeProgressIndicator()
                 self.unHideSubViews()
+                if Utilities.isStandaloneApp() {
+                    self.buttonBack.isHidden = true
+                    self.buttonStar.isHidden = true
+                }
             }
             
         } else {

@@ -76,33 +76,17 @@ struct RegistrationServerURLConstants {
     //TODO: Set the server end points
     
     
-    //Testing server
+    //Staging server
     static let ProductionURL = "https://hpreg-stage.lkcompliant.net/fdahpUserRegWS/"
     static let DevelopmentURL = "https://hpreg-stage.lkcompliant.net/fdahpUserRegWS/"
-    
-    
-    //LabKey Server Test Enviorment
-    //static let ProductionURL = "https://hphci-fdama-te-ur-01.labkey.com/fdahpUserRegWS/"
-    //static let DevelopmentURL = "https://hphci-fdama-te-ur-01.labkey.com/fdahpUserRegWS/"
-    
-    
-    //Currently in Use
-    
-    
-    //Labkey UAT Server Staging enviroment
-    //static let ProductionURL = "https://hphci-fdama-st-ur-01.labkey.com/fdahpUserRegWS/"
-    //static let DevelopmentURL = "https://hphci-fdama-st-ur-01.labkey.com/fdahpUserRegWS/"
-    
-    //---
+  
     
     // Local
     //static let ProductionURL = "http://192.168.0.44:8085/labkey/fdahpUserRegWS/"
     //static let DevelopmentURL = "http://192.168.0.44:8085/labkey/fdahpUserRegWS/"
     
     
-    //Labkey Production Server Staging enviroment
-    //static let ProductionURL = "https://hphci-fdama-pr-ur-01.labkey.com/fdahpUserRegWS/"
-    //static let DevelopmentURL = "https://hphci-fdama-pr-ur-01.labkey.com/fdahpUserRegWS/"
+   
     
     
 }

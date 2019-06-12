@@ -30,7 +30,7 @@ class HomeViewController: UIViewController{
     @IBOutlet var buttonSignin: UIButton!
     @IBOutlet var buttonRegister: UIButton!
     @IBOutlet var buttonGetStarted: UIButton?
-    
+    var websiteName:String!
     
 // MARK:- ViewController Lifecycle
     
@@ -47,6 +47,12 @@ class HomeViewController: UIViewController{
         //Added to change next screen
         pageControlView?.addTarget(self, action: #selector(HomeViewController.didChangePageControlValue), for: .valueChanged)
         
+        var infoDict: NSDictionary?
+        if let path = Bundle.main.path(forResource: "Info", ofType: "plist") {
+            infoDict = NSDictionary(contentsOfFile: path)
+        }
+        websiteName = infoDict!["WebsiteLink"] as! String
+        buttonLink.setTitle(websiteName, for: .normal)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -174,7 +180,7 @@ class HomeViewController: UIViewController{
         let loginStoryboard = UIStoryboard.init(name: "Main", bundle:Bundle.main)
         let webViewController = loginStoryboard.instantiateViewController(withIdentifier: "WebViewController") as! UINavigationController
         let webView = webViewController.viewControllers[0] as! WebViewController
-        webView.requestLink = "http://www.fda.gov"
+        webView.requestLink = "https://" + websiteName
         self.navigationController?.present(webViewController, animated: true, completion: nil)
     }
     

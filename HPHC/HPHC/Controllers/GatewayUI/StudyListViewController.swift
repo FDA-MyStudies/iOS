@@ -52,8 +52,13 @@ class StudyListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        var infoDict: NSDictionary?
+        if let path = Bundle.main.path(forResource: "Info", ofType: "plist") {
+            infoDict = NSDictionary(contentsOfFile: path)
+        }
+        let navTitle = infoDict!["ProductTitleName"] as! String
         let titleLabel = UILabel()
-        titleLabel.text = NSLocalizedString("FDA My Studies", comment: "")
+        titleLabel.text = NSLocalizedString(navTitle, comment: "")
         titleLabel.font = UIFont(name: "HelveticaNeue-Medium", size: 18)
         titleLabel.textAlignment = .left
         titleLabel.textColor = Utilities.getUIColorFromHex(0x007cba)

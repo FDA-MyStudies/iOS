@@ -77,14 +77,16 @@ struct RegistrationServerURLConstants {
     
     
     //Staging server
-    static let ProductionURL = "https://hpreg-stage.lkcompliant.net/fdahpUserRegWS/"
-    static let DevelopmentURL = "https://hpreg-stage.lkcompliant.net/fdahpUserRegWS/"
+    //static let ProductionURL = "https://hpreg-stage.lkcompliant.net/fdahpUserRegWS/"
+    //static let DevelopmentURL = "https://hpreg-stage.lkcompliant.net/fdahpUserRegWS/"
   
     
     // Local
-    //static let ProductionURL = "http://192.168.0.44:8085/labkey/fdahpUserRegWS/"
-    //static let DevelopmentURL = "http://192.168.0.44:8085/labkey/fdahpUserRegWS/"
-    
+    static let ProductionURL = "http://192.168.0.44:8085/labkey/fdahpUserRegWS/"
+    static let DevelopmentURL = "http://192.168.0.44:8085/labkey/fdahpUserRegWS/"
+
+ //   static let ProductionURL = "http://192.168.0.125:8081/labkey/fdahpUserRegWS/"
+//    static let DevelopmentURL = "http://192.168.0.125:8081/labkey/fdahpUserRegWS/"
     
    
     
@@ -106,10 +108,17 @@ class RegistrationServerConfiguration: NetworkConfiguration {
         
         //let ud = UserDefaults.standard
         if User.currentUser.authToken != nil {
-            return [kUserAuthToken: User.currentUser.authToken]
+            return [kUserAuthToken: User.currentUser.authToken,
+                    "applicationId": StudyConstant.appID,
+                    "orgId": StudyConstant.orgId]
         }
-        return Dictionary()
+        else {
+            return [
+                    "applicationId": StudyConstant.appID,
+                    "orgId": StudyConstant.orgId]
+        }
     }
+    
     override func getDefaultRequestParameters() -> [String : Any] {
         return Dictionary()
     }

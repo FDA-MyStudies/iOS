@@ -57,12 +57,12 @@ struct WCPServerURLConstants {
     //TODO: Set the server end points
     
     //local
-    //static let ProductionURL = "http://192.168.0.44:8080/StudyMetaData/"
-    //static let DevelopmentURL = "http://192.168.0.44:8080/StudyMetaData/"
+    static let ProductionURL = "http://192.168.0.44:8080/StudyMetaData/"
+    static let DevelopmentURL = "http://192.168.0.44:8080/StudyMetaData/"
     
     //Staging
-    static let ProductionURL = "https://hpwcp-stage.lkcompliant.net/StudyMetaData/"
-    static let DevelopmentURL = "https://hpwcp-stage.lkcompliant.net/StudyMetaData/"
+    //static let ProductionURL = "https://hpwcp-stage.lkcompliant.net/StudyMetaData/"
+    //static let DevelopmentURL = "https://hpwcp-stage.lkcompliant.net/StudyMetaData/"
     
     
 }
@@ -84,8 +84,10 @@ class WCPConfiguration: NetworkConfiguration {
         let token = "AvxfEsgX9u" + ":" + "ee91a4f6-d9c4-4ee9-a0e2-5682c5b1c916"
         //com.hphci.fda.mobilestudies
         let base64token = "Basic " + token.toBase64()
-       
-        let headers = ["Authorization": base64token]
+        
+        let headers = ["Authorization": base64token,
+                       "applicationId": StudyConstant.appID,
+                       "orgId": StudyConstant.orgId]
         return headers
     }
     override func getDefaultRequestParameters() -> [String: Any] {
@@ -94,5 +96,12 @@ class WCPConfiguration: NetworkConfiguration {
     override func shouldParseErrorMessage() -> Bool {
         return false
     }
+    
+}
+
+struct StudyConstant {
+    
+    static let appID = "Gateway002"
+    static let orgId = "OrgName"
     
 }

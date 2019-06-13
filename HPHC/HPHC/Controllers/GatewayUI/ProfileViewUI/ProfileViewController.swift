@@ -287,7 +287,17 @@ class ProfileViewController: UIViewController, SlideMenuControllerDelegate {
                 self.performSegue(withIdentifier: "confirmationSegue", sender: joinedStudies)
             }
             else {
-                UIUtilities.showAlertMessageWithTwoActionsAndHandler(NSLocalizedString(kTitleDeleteAccount, comment: ""), errorMessage: NSLocalizedString(kDeleteAccountConfirmationMessage, comment: ""), errorAlertActionTitle: NSLocalizedString(kTitleDeleteAccount, comment: ""),
+                
+                var infoDict: NSDictionary?
+                if let path = Bundle.main.path(forResource: "Info", ofType: "plist") {
+                    infoDict = NSDictionary(contentsOfFile: path)
+                }
+                let navTitle = infoDict!["ProductTitleName"] as! String
+                
+                var descriptionText =  kDeleteAccountConfirmationMessage
+                descriptionText = descriptionText.replacingOccurrences(of: "#APPNAME#", with: navTitle)
+                
+                UIUtilities.showAlertMessageWithTwoActionsAndHandler(NSLocalizedString(kTitleDeleteAccount, comment: ""), errorMessage: NSLocalizedString(descriptionText, comment: ""), errorAlertActionTitle: NSLocalizedString(kTitleDeleteAccount, comment: ""),
                                                                      errorAlertActionTitle2: NSLocalizedString(kTitleCancel, comment: ""), viewControllerUsed: self,
                                                                      action1: {
 

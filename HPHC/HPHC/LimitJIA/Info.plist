@@ -5,7 +5,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
-	<string>CARRA registry</string>
+	<string>CARRA Registry</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -89,6 +89,10 @@
 	<key>WebsiteLink</key>
 	<string>www.carragroup.org</string>
 	<key>ProductTitleName</key>
-	<string>CARRA registry</string>
+	<string>CARRA Registry</string>
+	<key>ApplicationID</key>
+	<string>LIMITJIA001</string>
+	<key>OrganizationID</key>
+	<string>OrgName</string>
 </dict>
 </plist>

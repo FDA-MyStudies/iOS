@@ -77,13 +77,17 @@ struct RegistrationServerURLConstants {
     
     
     //Staging server
-    static let ProductionURL = "https://hpreg-stage.lkcompliant.net/fdahpUserRegWS/"
-    static let DevelopmentURL = "https://hpreg-stage.lkcompliant.net/fdahpUserRegWS/"
+    //static let ProductionURL = "https://hpreg-stage.lkcompliant.net/fdahpUserRegWS/"
+    //static let DevelopmentURL = "https://hpreg-stage.lkcompliant.net/fdahpUserRegWS/"
   
     
-    // Local
-    //static let ProductionURL = "http://192.168.0.44:8085/labkey/fdahpUserRegWS/"
-    //static let DevelopmentURL = "http://192.168.0.44:8085/labkey/fdahpUserRegWS/"
+    // Local - naveen
+    //static let ProductionURL = "http://192.168.0.125:8081/labkey/fdahpUserRegWS/"
+    //static let DevelopmentURL = "http://192.168.0.125:8081/labkey/fdahpUserRegWS/"
+    
+    //local - btc
+    static let ProductionURL = "http://192.168.0.44:8085/labkey/fdahpUserRegWS/"
+    static let DevelopmentURL = "http://192.168.0.44:8085/labkey/fdahpUserRegWS/"
     
     
    
@@ -104,17 +108,24 @@ class RegistrationServerConfiguration: NetworkConfiguration {
     
     override func getDefaultHeaders() -> [String: String] {
         
+        
+        var infoDict: NSDictionary?
+        if let path = Bundle.main.path(forResource: "Info", ofType: "plist") {
+            infoDict = NSDictionary(contentsOfFile: path)
+        }
+        let appId = infoDict!["ApplicationID"] as! String
+        let orgId = infoDict!["OrganizationID"] as! String
+        
         //let ud = UserDefaults.standard
         if User.currentUser.authToken != nil {
-           return [kUserAuthToken: User.currentUser.authToken]
            return [kUserAuthToken: User.currentUser.authToken,
-                               "applicationId": "ppID",
-                              "orgId": "orgId"]
+                               "applicationId": appId,
+                              "orgId": orgId]
                  }
               else {
                       return [
-                             "applicationId": "appID",
-                              "orgId": "orgId"]
+                             "applicationId": appId,
+                              "orgId": orgId]
         }
            
               return Dictionary()

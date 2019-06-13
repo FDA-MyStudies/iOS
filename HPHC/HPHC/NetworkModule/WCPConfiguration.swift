@@ -56,13 +56,13 @@ enum WCPMethods: String {
 struct WCPServerURLConstants {
     //TODO: Set the server end points
     
-    //local
-    //static let ProductionURL = "http://192.168.0.44:8080/StudyMetaData/"
-    //static let DevelopmentURL = "http://192.168.0.44:8080/StudyMetaData/"
+    //local - btc
+    static let ProductionURL = "http://192.168.0.44:8080/StudyMetaData/"
+    static let DevelopmentURL = "http://192.168.0.44:8080/StudyMetaData/"
     
     //Staging
-    static let ProductionURL = "https://hpwcp-stage.lkcompliant.net/StudyMetaData/"
-    static let DevelopmentURL = "https://hpwcp-stage.lkcompliant.net/StudyMetaData/"
+    //static let ProductionURL = "https://hpwcp-stage.lkcompliant.net/StudyMetaData/"
+    //static let DevelopmentURL = "https://hpwcp-stage.lkcompliant.net/StudyMetaData/"
     
     
 }
@@ -81,13 +81,20 @@ class WCPConfiguration: NetworkConfiguration {
     
     override func getDefaultHeaders() -> [String : String] {
         
+        var infoDict: NSDictionary?
+        if let path = Bundle.main.path(forResource: "Info", ofType: "plist") {
+            infoDict = NSDictionary(contentsOfFile: path)
+        }
+        let appId = infoDict!["ApplicationID"] as! String
+        let orgId = infoDict!["OrganizationID"] as! String
+        
         let token = "AvxfEsgX9u" + ":" + "ee91a4f6-d9c4-4ee9-a0e2-5682c5b1c916"
         //com.hphci.fda.mobilestudies
         let base64token = "Basic " + token.toBase64()
        
         let headers = ["Authorization": base64token,
-                       "applicationId": "appID",
-                       "orgId": "orgId"]
+                       "applicationId": appId,
+                       "orgId": orgId]
 
         return headers
     }

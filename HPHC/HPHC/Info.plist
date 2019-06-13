@@ -90,5 +90,9 @@
 	<string>www.fda.gov</string>
 	<key>ProductTitleName</key>
 	<string>FDA My Studies</string>
+	<key>ApplicationID</key>
+	<string>Gateway001</string>
+	<key>OrganizationID</key>
+	<string>OrgName</string>
 </dict>
 </plist>

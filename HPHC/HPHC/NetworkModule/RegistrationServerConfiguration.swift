@@ -106,9 +106,19 @@ class RegistrationServerConfiguration: NetworkConfiguration {
         
         //let ud = UserDefaults.standard
         if User.currentUser.authToken != nil {
-            return [kUserAuthToken: User.currentUser.authToken]
+           return [kUserAuthToken: User.currentUser.authToken]
+           return [kUserAuthToken: User.currentUser.authToken,
+                               "applicationId": "ppID",
+                              "orgId": "orgId"]
+                 }
+              else {
+                      return [
+                             "applicationId": "appID",
+                              "orgId": "orgId"]
         }
-        return Dictionary()
+           
+              return Dictionary()
+
     }
     override func getDefaultRequestParameters() -> [String : Any] {
         return Dictionary()

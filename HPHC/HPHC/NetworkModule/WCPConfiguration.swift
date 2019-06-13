@@ -85,7 +85,10 @@ class WCPConfiguration: NetworkConfiguration {
         //com.hphci.fda.mobilestudies
         let base64token = "Basic " + token.toBase64()
        
-        let headers = ["Authorization": base64token]
+        let headers = ["Authorization": base64token,
+                       "applicationId": "appID",
+                       "orgId": "orgId"]
+
         return headers
     }
     override func getDefaultRequestParameters() -> [String: Any] {

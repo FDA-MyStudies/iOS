@@ -77,8 +77,8 @@ struct RegistrationServerURLConstants {
     
     
     //Staging server
-    //static let ProductionURL = "https://hpreg-stage.lkcompliant.net/fdahpUserRegWS/"
-    //static let DevelopmentURL = "https://hpreg-stage.lkcompliant.net/fdahpUserRegWS/"
+    static let ProductionURL = "https://hpreg-stage.lkcompliant.net/fdahpUserRegWS/"
+    static let DevelopmentURL = "https://hpreg-stage.lkcompliant.net/fdahpUserRegWS/"
   
     
     // Local - naveen
@@ -86,8 +86,8 @@ struct RegistrationServerURLConstants {
     //static let DevelopmentURL = "http://192.168.0.125:8081/labkey/fdahpUserRegWS/"
     
     //local - btc
-    static let ProductionURL = "http://192.168.0.44:8085/labkey/fdahpUserRegWS/"
-    static let DevelopmentURL = "http://192.168.0.44:8085/labkey/fdahpUserRegWS/"
+    //static let ProductionURL = "http://192.168.0.44:8085/labkey/fdahpUserRegWS/"
+    //static let DevelopmentURL = "http://192.168.0.44:8085/labkey/fdahpUserRegWS/"
     
     
    

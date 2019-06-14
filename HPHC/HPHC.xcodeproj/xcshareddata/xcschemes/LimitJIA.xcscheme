@@ -5,22 +5,6 @@
    <BuildAction
       parallelizeBuildables = "YES"
       buildImplicitDependencies = "YES">
-      <BuildActionEntries>
-         <BuildActionEntry
-            buildForTesting = "YES"
-            buildForRunning = "YES"
-            buildForProfiling = "YES"
-            buildForArchiving = "YES"
-            buildForAnalyzing = "YES">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "6E7D2D551E433E8700763D4C"
-               BuildableName = "HPHC.app"
-               BlueprintName = "HPHC"
-               ReferencedContainer = "container:HPHC.xcodeproj">
-            </BuildableReference>
-         </BuildActionEntry>
-      </BuildActionEntries>
    </BuildAction>
    <TestAction
       buildConfiguration = "Debug"
@@ -74,9 +58,9 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "6E7D2D551E433E8700763D4C"
-            BuildableName = "HPHC.app"
-            BlueprintName = "HPHC"
+            BlueprintIdentifier = "89893E1422B0F70E00A846CE"
+            BuildableName = "LimitJIA.app"
+            BlueprintName = "LimitJIA"
             ReferencedContainer = "container:HPHC.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -85,7 +69,7 @@
       buildConfiguration = "Debug">
    </AnalyzeAction>
    <ArchiveAction
-      buildConfiguration = "Release"
+      buildConfiguration = "Debug"
       revealArchiveInOrganizer = "YES">
    </ArchiveAction>
 </Scheme>

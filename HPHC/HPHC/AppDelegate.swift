@@ -361,7 +361,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 
                 if (navController as? UINavigationController)?.visibleViewController?.isKind(of: ORKPasscodeViewController.self) == false {
                     //Request for Passcode
-                    self.checkPasscode(viewController: navController!)
+                    //self.checkPasscode(viewController: navController!)
                 }
                 
             } else if(navController as? UINavigationController) != nil
@@ -370,10 +370,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 
                 if (navController as? UINavigationController)?.visibleViewController?.isKind(of: ORKPasscodeViewController.self) == false {
                     //Request for Passcode
-                    self.checkPasscode(viewController: navController!)
+                    //self.checkPasscode(viewController: navController!)
                 }
             } else if(navController as? UIViewController) != nil {
-                self.checkPasscode(viewController: navController!)
+               // self.checkPasscode(viewController: navController!)
             }
         }
         

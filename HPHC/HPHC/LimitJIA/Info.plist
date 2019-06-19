@@ -2,6 +2,8 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>ApplicationID</key>
+	<string>LIMITJIA001</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
@@ -19,7 +21,7 @@
 	<key>CFBundleShortVersionString</key>
 	<string>1.0</string>
 	<key>CFBundleVersion</key>
-	<string>1</string>
+	<string>2</string>
 	<key>Fabric</key>
 	<dict>
 		<key>APIKey</key>
@@ -61,6 +63,10 @@
 	<string>$(PRODUCT_NAME) would like to use Motion data</string>
 	<key>NSSpeechRecognitionUsageDescription</key>
 	<string>$(PRODUCT_NAME) would like to use Speech Recognition for the task to give more accurate result.</string>
+	<key>OrganizationID</key>
+	<string>OrgName</string>
+	<key>ProductTitleName</key>
+	<string>CARRA Registry</string>
 	<key>StandaloneStudyId</key>
 	<string>appstudy2</string>
 	<key>UIAppFonts</key>
@@ -88,11 +94,5 @@
 	<true/>
 	<key>WebsiteLink</key>
 	<string>www.carragroup.org</string>
-	<key>ProductTitleName</key>
-	<string>CARRA Registry</string>
-	<key>ApplicationID</key>
-	<string>LIMITJIA001</string>
-	<key>OrganizationID</key>
-	<string>OrgName</string>
 </dict>
 </plist>

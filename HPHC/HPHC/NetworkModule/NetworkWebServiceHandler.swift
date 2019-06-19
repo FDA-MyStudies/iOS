@@ -247,12 +247,12 @@ class NetworkWebServiceHandler: NSObject, URLSessionDelegate {
         }
         let httpHeaders : NSDictionary?
       
-      if requestName as String == RegistrationMethods.refreshToken.method.methodName{
-         httpHeaders = defaultheaders
-        
-      } else {
+//      if requestName as String == RegistrationMethods.refreshToken.method.methodName{
+//         httpHeaders = defaultheaders
+//
+//      } else {
          httpHeaders = self.getCombinedHeaders(headers, defaultHeaders: defaultheaders)
-      }
+      //}
       
         let baseURLString : NSString = self.getBaseURLString(requestName)
         let requestUrl = URL(string: baseURLString as String)

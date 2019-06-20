@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>ApplicationID</key>
-	<string>Gateway001</string>
+	<string>FMSA001</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
@@ -66,7 +66,7 @@
 	<key>OrganizationID</key>
 	<string>OrgName</string>
 	<key>ProductTitleName</key>
-	<string>FDA My Studies</string>
+	<string>FDA MyStudies</string>
 	<key>StandaloneStudyId</key>
 	<string>appstudy2</string>
 	<key>UIAppFonts</key>

@@ -61,10 +61,15 @@ struct WCPServerURLConstants {
     //static let DevelopmentURL = "http://192.168.0.44:8080/StudyMetaData/"
     
     //Staging
-    static let ProductionURL = "https://hpwcp-stage.lkcompliant.net/StudyMetaData/"
-    static let DevelopmentURL = "https://hpwcp-stage.lkcompliant.net/StudyMetaData/"
+   // static let ProductionURL = "https://hpwcp-stage.lkcompliant.net/StudyMetaData/"
+   // static let DevelopmentURL = "https://hpwcp-stage.lkcompliant.net/StudyMetaData/"
     
-    
+    static var DevelopmentURL:String {
+        return UserDefaults.standard.value(forKey: "WCPBaseURL") as? String ?? "https://hpwcp-stage.lkcompliant.net/StudyMetaData/"
+    }
+    static var ProductionURL:String {
+        return UserDefaults.standard.value(forKey: "WCPBaseURL") as? String ?? "https://hpwcp-stage.lkcompliant.net/StudyMetaData/"
+    }
 }
 
 class WCPConfiguration: NetworkConfiguration {

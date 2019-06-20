@@ -155,6 +155,8 @@
 		8923429022B122D50059F910 /* LoginAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 94B3DD2D1E6ED8E500327AE5 /* LoginAssets.xcassets */; };
 		8923429122B122DF0059F910 /* LoginAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 94B3DD2D1E6ED8E500327AE5 /* LoginAssets.xcassets */; };
 		8923429522B1296A0059F910 /* GatewayOverview.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8923429322B128EC0059F910 /* GatewayOverview.plist */; };
+		8948349D22BB9C59000B7BFA /* HPHCSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8948349C22BB9C59000B7BFA /* HPHCSettings.swift */; };
+		8948349F22BB9D56000B7BFA /* HPHCSettings.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8948349E22BB9D56000B7BFA /* HPHCSettings.xib */; };
 		89831393224399FC0000BEB5 /* ResourceList.json in Resources */ = {isa = PBXBuildFile; fileRef = 89831392224399FC0000BEB5 /* ResourceList.json */; };
 		89893E1922B0F70E00A846CE /* UIApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94334F861E70055A00755444 /* UIApplication.swift */; };
 		89893E1A22B0F70E00A846CE /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94334F851E70055A00755444 /* UIViewController.swift */; };
@@ -683,6 +685,8 @@
 		8923428E22B11BFC0059F910 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LimitJIA.storyboard; sourceTree = "<group>"; };
 		8923429322B128EC0059F910 /* GatewayOverview.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = GatewayOverview.plist; sourceTree = "<group>"; };
 		8923429A22B12FAE0059F910 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8948349C22BB9C59000B7BFA /* HPHCSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HPHCSettings.swift; sourceTree = "<group>"; };
+		8948349E22BB9D56000B7BFA /* HPHCSettings.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HPHCSettings.xib; sourceTree = "<group>"; };
 		89831392224399FC0000BEB5 /* ResourceList.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = ResourceList.json; sourceTree = "<group>"; };
 		89893EFF22B0F70E00A846CE /* LimitJIA.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LimitJIA.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		89893F0322B0F87800A846CE /* LimitJIA.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = LimitJIA.xcassets; sourceTree = "<group>"; };
@@ -925,6 +929,7 @@
 		6E7D2D581E433E8700763D4C /* HPHC */ = {
 			isa = PBXGroup;
 			children = (
+				8948349922BB9C2F000B7BFA /* Settings */,
 				8923429222B128910059F910 /* LimitJIA */,
 				6ED593711F011D5B00AC3636 /* Fonts */,
 				94878B861EC982C30064E1D4 /* FDA.entitlements */,
@@ -1380,6 +1385,15 @@
 				8923429322B128EC0059F910 /* GatewayOverview.plist */,
 			);
 			path = LimitJIA;
+			sourceTree = "<group>";
+		};
+		8948349922BB9C2F000B7BFA /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				8948349C22BB9C59000B7BFA /* HPHCSettings.swift */,
+				8948349E22BB9D56000B7BFA /* HPHCSettings.xib */,
+			);
+			path = Settings;
 			sourceTree = "<group>";
 		};
 		8983138F224399810000BEB5 /* JsonFiles */ = {
@@ -1914,6 +1928,7 @@
 				6EEB0AFC1FD2811700136EAA /* Labkey_Activity_Latest3.json in Resources */,
 				6EE8E4D91F17459200028853 /* Eligibility_1B.json in Resources */,
 				94B3DD441E6ED8E500327AE5 /* Profile.plist in Resources */,
+				8948349F22BB9D56000B7BFA /* HPHCSettings.xib in Resources */,
 				6E417AD31F4D5DA1007F27DA /* AnanomousFilterData.plist in Resources */,
 				6EB7401C1E9CFAD700A4C773 /* 01.png in Resources */,
 				6E7D2D8C1E4340B200763D4C /* UserProfile.plist in Resources */,
@@ -2210,6 +2225,7 @@
 				6ED134361E5EB0370090C976 /* ConsentStep.swift in Sources */,
 				6EE93DCA1E93C8850027A5DC /* ActivitiesTableViewCell.swift in Sources */,
 				94B3DD501E6ED8E500327AE5 /* SecondGatewayOverviewViewController.swift in Sources */,
+				8948349D22BB9C59000B7BFA /* HPHCSettings.swift in Sources */,
 				6EF2FCEF1E72CDE900B5F212 /* LeftMenuResourceTableViewCell.swift in Sources */,
 				941909B81E5310D6001B01C5 /* Gateway.swift in Sources */,
 				94B3DD451E6ED8E500327AE5 /* ProfileTableViewCell.swift in Sources */,

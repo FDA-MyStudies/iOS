@@ -60,6 +60,11 @@ class HomeViewController: UIViewController{
         
         //hide navigationbar
         self.navigationController?.setNavigationBarHidden(true, animated: true)
+        
+        //HPHCSettings().setupDefaultURLs()
+        //HPHCSettings().showSettings(self) {
+            
+       // }
     }
     
     override func viewDidAppear(_ animated: Bool) {

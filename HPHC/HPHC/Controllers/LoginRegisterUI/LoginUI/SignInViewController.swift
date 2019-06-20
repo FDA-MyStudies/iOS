@@ -139,21 +139,21 @@ class SignInViewController: UIViewController{
      
      */
     @IBAction func signInButtonAction(_ sender: Any) {
-        
+    
         self.view.endEditing(true)
         if (user.emailId?.isEmpty)! && (user.password?.isEmpty)! {
             self.showAlertMessages(textMessage: kMessageAllFieldsAreEmpty)
         } else if user.emailId == "" {
             self.showAlertMessages(textMessage: kMessageEmailBlank)
-            
+
         } else if !(Utilities.isValidEmail(testStr: user.emailId!)) {
             self.showAlertMessages(textMessage: kMessageValidEmail)
-            
+
         } else if user.password == "" {
             self.showAlertMessages(textMessage: kMessagePasswordBlank)
-            
+
         } else {
-            
+
             let ud = UserDefaults.standard
             if user.emailId == kStagingUserEmailId {
                 ud.set(true, forKey: kIsStagingUser)
@@ -161,7 +161,7 @@ class SignInViewController: UIViewController{
                 ud.set(false, forKey: kIsStagingUser)
             }
             ud.synchronize()
-            
+
             UserServices().loginUser(self)
         }
     }

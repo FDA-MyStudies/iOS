@@ -1314,8 +1314,11 @@ extension AppDelegate: ORKTaskViewControllerDelegate {
                 let notificationName = Notification.Name(kPDFCreationNotificationId)
                 
                 // Register to receive notification
-                NotificationCenter.default.addObserver(self, selector: #selector(self.updateEligibilityConsentStatus), name: notificationName, object: nil)
-                self.perform(#selector(self.updateEligibilityConsentStatus), with: self, afterDelay: 2.0)
+                //NotificationCenter.default.addObserver(self, selector: #selector(self.updateEligibilityConsentStatus), name: notificationName, object: nil)
+                DispatchQueue.main.asyncAfter(deadline: .now()+3) {
+                    self.updateEligibilityConsentStatus()
+                }
+                //self.perform(#selector(self.updateEligibilityConsentStatus), with: self, afterDelay: 2.0)
                 
             }else {
                 //Update Consent Status to server

@@ -1109,6 +1109,35 @@ extension ActivitiesViewController: ORKTaskViewControllerDelegate{
         return true
     }
     
+    /// This method will update the result for other choices for each step
+    fileprivate func updateResultForChoiceQuestions(_ taskViewController: ORKTaskViewController) {
+        if let results = taskViewController.result.results as? [ORKStepResult]{
+            
+            for result in results {
+                if let choiceResult = result.results?.first as? ORKChoiceQuestionResult, let answers = choiceResult.answer as? [Any] {
+                    var selectedChoices: [Any] = []
+                    
+                    var otherChoiceDict = answers.filter({$0 as? JSONDictionary != nil}).first as? JSONDictionary
+                    let otherValueKey = "otherValue"
+                    if let otherValue = otherChoiceDict?[otherValueKey] as? String {
+                        otherChoiceDict?.removeValue(forKey: otherValueKey)
+                        answers.forEach { (value) in
+                            if let value = value as? String {
+                                if value != otherValue {
+                                    selectedChoices.append(value)
+                                }
+                            } else {
+                                selectedChoices.append(otherChoiceDict!)
+                            }
+                        }
+                        choiceResult.answer = selectedChoices
+                    }
+                    
+                }
+            }
+        }
+    }
+    
     public func taskViewController(_ taskViewController: ORKTaskViewController, didFinishWith reason: ORKTaskViewControllerFinishReason, error: Error?) {
         
         //Enable Custom Keypad with toolbar
@@ -1116,6 +1145,8 @@ extension ActivitiesViewController: ORKTaskViewControllerDelegate{
         IQKeyboardManager.shared.enableAutoToolbar = true
         
         self.managedResult.removeAll()
+        
+        updateResultForChoiceQuestions(taskViewController)
         
         var taskResult: Any?
         
@@ -1174,6 +1205,9 @@ extension ActivitiesViewController: ORKTaskViewControllerDelegate{
             }
             
             self.checkForActivitiesUpdates()
+            
+        @unknown default:
+            break
         }
         
         

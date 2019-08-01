@@ -143,6 +143,7 @@
 		6F0221792264729E00A2DBC8 /* TextChoiceCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F0221772264729D00A2DBC8 /* TextChoiceCell.xib */; };
 		6F02217A2264729E00A2DBC8 /* OtherTextChoiceCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F0221782264729E00A2DBC8 /* OtherTextChoiceCell.xib */; };
 		6F5AAF80225DE699002C8FF6 /* Activity_Metadata_Other.json in Resources */ = {isa = PBXBuildFile; fileRef = 6F5AAF7F225DE699002C8FF6 /* Activity_Metadata_Other.json */; };
+		6FB8609A22DF5574001CA26D /* HPHCSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8948349C22BB9C59000B7BFA /* HPHCSettings.swift */; };
 		6FB89C1B225F40EB00420A7B /* TextChoiceQuestionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB89C1A225F40EA00420A7B /* TextChoiceQuestionController.swift */; };
 		6FB89C1D225F40F400420A7B /* SurveyTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB89C1C225F40F400420A7B /* SurveyTask.swift */; };
 		6FB89C24225F410500420A7B /* OtherTextChoiceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB89C20225F410500420A7B /* OtherTextChoiceCell.swift */; };
@@ -3000,6 +3001,7 @@
 				89893E3922B0F70E00A846CE /* ConsentStep.swift in Sources */,
 				89893E3A22B0F70E00A846CE /* ActivitiesTableViewCell.swift in Sources */,
 				89893E3B22B0F70E00A846CE /* SecondGatewayOverviewViewController.swift in Sources */,
+				6FB8609A22DF5574001CA26D /* HPHCSettings.swift in Sources */,
 				89893E3C22B0F70E00A846CE /* LeftMenuResourceTableViewCell.swift in Sources */,
 				89893E3D22B0F70E00A846CE /* Gateway.swift in Sources */,
 				89893E3E22B0F70E00A846CE /* ProfileTableViewCell.swift in Sources */,

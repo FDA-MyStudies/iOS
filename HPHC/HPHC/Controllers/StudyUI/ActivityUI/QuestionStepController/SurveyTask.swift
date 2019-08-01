@@ -9,7 +9,7 @@
 import Foundation
 import ResearchKit
 
-
+/*
 public var textChoiceQuestionTask: ORKOrderedTask = {
     
     let textChoiceOneText = NSLocalizedString("Chandigarh", comment: "")
@@ -51,6 +51,7 @@ public var textChoiceQuestionTask: ORKOrderedTask = {
     
     return ORKOrderedTask(identifier: "textChoiceQuestionTask", steps: [questionStep, thirdQuestionStep, newQuestionStep, forthQuestionStep])
 }()
+*/
 
 class QuestionStep: ORKQuestionStep {
     

@@ -18,8 +18,9 @@ struct OtherChoice {
     let detailText: String
     lazy var otherChoiceText = ""
     let isExclusive: Bool
+    let value: String
     
-    init(isShowOtherCell: Bool = false, isShowOtherField: Bool = true, otherTitle: String = "Other", placeholder: String = "enter here",isMandatory: Bool = true,isExclusive: Bool = false, detailText: String = "" ) {
+    init(isShowOtherCell: Bool = false, isShowOtherField: Bool = true, otherTitle: String = "Other", placeholder: String = "enter here",isMandatory: Bool = true,isExclusive: Bool = false, detailText: String = "", value: String = "") {
         self.isShowOtherField = isShowOtherField
         self.otherTitle = otherTitle
         self.placeholder = placeholder
@@ -27,6 +28,7 @@ struct OtherChoice {
         self.isShowOtherCell = isShowOtherCell
         self.isExclusive = isExclusive
         self.detailText = detailText
+        self.value = value
     }
 }
 
@@ -62,11 +64,12 @@ class TextChoiceQuestionController: ORKQuestionStepViewController {
         if self.isOtherCellSelected {
             var otherChoiceDict: [String:Any]!
             if self.otherChoice.isShowOtherField {
-                otherChoiceDict = ["other": otherChoice.otherTitle,"text":otherChoice.otherChoiceText]
+                otherChoiceDict = ["other": otherChoice.otherTitle,"text":otherChoice.otherChoiceText,"otherValue": otherChoice.value]
             } else {
-                otherChoiceDict = ["other": otherChoice.otherTitle]
+                otherChoiceDict = ["other": otherChoice.otherTitle,"otherValue": otherChoice.value]
             }
-            choices.append(otherChoiceDict as  Any)
+            choices.append(otherChoiceDict  as  Any)
+            choices.append(otherChoice.value)
         }
         
         if self.answerFormat?.style == .multipleChoice {
@@ -187,6 +190,9 @@ class TextChoiceQuestionController: ORKQuestionStepViewController {
         
         self.otherChoice = step.otherChoice
         
+        if let indexOfOtherChoiceValue = self.answers?.firstIndex(of: self.otherChoice.value) {
+            self.answers?.remove(at: indexOfOtherChoiceValue)
+        }
         /// Update the selected result here
         if let answers = self.answers {
             for answer in answers {

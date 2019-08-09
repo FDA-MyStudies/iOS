@@ -7,7 +7,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
-	<string>FMS iBD</string>
+	<string>mSPARC</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -66,7 +66,7 @@
 	<key>OrganizationID</key>
 	<string>OrgName</string>
 	<key>ProductTitleName</key>
-	<string>FMS iBD</string>
+	<string>mSPARC</string>
 	<key>StandaloneStudyId</key>
 	<string>appstudy2</string>
 	<key>UIAppFonts</key>
@@ -92,7 +92,9 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<true/>
+	<key>WebsiteButtonTitle</key>
+	<string>Foundation</string>
 	<key>WebsiteLink</key>
-	<string>www.fda.gov</string>
+	<string>www.crohnscolitisfoundation.org</string>
 </dict>
 </plist>

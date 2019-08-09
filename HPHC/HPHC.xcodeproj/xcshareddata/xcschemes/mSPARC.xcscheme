@@ -7,16 +7,16 @@
       buildImplicitDependencies = "YES">
       <BuildActionEntries>
          <BuildActionEntry
-            buildForTesting = "YES"
+            buildForTesting = "NO"
             buildForRunning = "YES"
             buildForProfiling = "YES"
             buildForArchiving = "YES"
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "6E7D2D551E433E8700763D4C"
-               BuildableName = "HPHC.app"
-               BlueprintName = "HPHC"
+               BlueprintIdentifier = "89DBF74422F9893000AB3EF2"
+               BuildableName = "mSPARC.app"
+               BlueprintName = "mSPARC"
                ReferencedContainer = "container:HPHC.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -26,36 +26,15 @@
       buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
-      codeCoverageEnabled = "YES"
-      onlyGenerateCoverageForSpecifiedTargets = "YES"
       shouldUseLaunchSchemeArgsEnv = "YES">
-      <CodeCoverageTargets>
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "6E7D2D551E433E8700763D4C"
-            BuildableName = "HPHC.app"
-            BlueprintName = "HPHC"
-            ReferencedContainer = "container:HPHC.xcodeproj">
-         </BuildableReference>
-      </CodeCoverageTargets>
       <Testables>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "7878B3192216C6E10052FC23"
-               BuildableName = "HPHCTests.xctest"
-               BlueprintName = "HPHCTests"
-               ReferencedContainer = "container:HPHC.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "6E7D2D551E433E8700763D4C"
-            BuildableName = "HPHC.app"
-            BlueprintName = "HPHC"
+            BlueprintIdentifier = "89DBF74422F9893000AB3EF2"
+            BuildableName = "mSPARC.app"
+            BlueprintName = "mSPARC"
             ReferencedContainer = "container:HPHC.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -76,19 +55,12 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "6E7D2D551E433E8700763D4C"
-            BuildableName = "HPHC.app"
-            BlueprintName = "HPHC"
+            BlueprintIdentifier = "89DBF74422F9893000AB3EF2"
+            BuildableName = "mSPARC.app"
+            BlueprintName = "mSPARC"
             ReferencedContainer = "container:HPHC.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
-      <EnvironmentVariables>
-         <EnvironmentVariable
-            key = "OS_ACTIVITY_MODE"
-            value = "disable"
-            isEnabled = "YES">
-         </EnvironmentVariable>
-      </EnvironmentVariables>
       <AdditionalOptions>
       </AdditionalOptions>
    </LaunchAction>
@@ -102,9 +74,9 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "6E7D2D551E433E8700763D4C"
-            BuildableName = "HPHC.app"
-            BlueprintName = "HPHC"
+            BlueprintIdentifier = "89DBF74422F9893000AB3EF2"
+            BuildableName = "mSPARC.app"
+            BlueprintName = "mSPARC"
             ReferencedContainer = "container:HPHC.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -113,7 +85,7 @@
       buildConfiguration = "Debug">
    </AnalyzeAction>
    <ArchiveAction
-      buildConfiguration = "Debug"
+      buildConfiguration = "Release"
       revealArchiveInOrganizer = "YES">
    </ArchiveAction>
 </Scheme>

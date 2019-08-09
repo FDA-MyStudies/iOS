@@ -283,9 +283,10 @@ class UserServices: NSObject {
             ] as [String: Any]
         
         let version = Utilities.getAppVersion()
+        let token = Utilities.getBundleIdentifier()
         let info = [kAppVersion: version,
                     kOSType: "ios",
-                    kDeviceToken: ""
+                    kDeviceToken: token
         ]
         
         let params = [

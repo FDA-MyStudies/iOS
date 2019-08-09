@@ -16,6 +16,12 @@ target 'HPHC' do
   pod 'RealmSwift'
   pod 'CryptoSwift'
   pod 'ActionSheetPicker-3.0'
+ 
+ target 'HPHCTests' do
+   inherit! :search_paths
+   
+   pod 'Mockingjay', '3.0.0-alpha.1'
+ end
   
 end
 

@@ -668,6 +668,13 @@ class TermsAndPolicy {
         self.termsURL = ""
         self.policyURL = ""
     }
+    
+    
+    func initWith(terms:String, policy:String) {
+         self.termsURL = terms
+        self.policyURL = policy
+    }
+    
     //Initializer
     func initWithDict(dict: Dictionary<String,Any>) {
         if Utilities.isValidObject(someObject: dict as AnyObject) {

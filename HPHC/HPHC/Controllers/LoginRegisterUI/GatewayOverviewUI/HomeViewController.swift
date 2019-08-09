@@ -36,7 +36,7 @@ class HomeViewController: UIViewController{
     
     override func loadView() {
         super.loadView()
-        self.loadTestData()
+        self.loadGatewayUI()
     }
     
     override func viewDidLoad() {
@@ -47,12 +47,12 @@ class HomeViewController: UIViewController{
         //Added to change next screen
         pageControlView?.addTarget(self, action: #selector(HomeViewController.didChangePageControlValue), for: .valueChanged)
         
-        var infoDict: NSDictionary?
-        if let path = Bundle.main.path(forResource: "Info", ofType: "plist") {
-            infoDict = NSDictionary(contentsOfFile: path)
-        }
-        websiteName = infoDict!["WebsiteLink"] as! String
-        buttonLink.setTitle(websiteName, for: .normal)
+       
+        let infoDict = Utilities.getBrandingDetails()
+        websiteName = infoDict?[BrandingConstant.WebsiteLink] as! String
+        let title = infoDict?[BrandingConstant.WebsiteButtonTitle] as? String
+        
+        buttonLink.setTitle(title != nil ? title : websiteName, for: .normal)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -80,19 +80,16 @@ class HomeViewController: UIViewController{
        This method is used to load Initial data setup
     
      */
-    func loadTestData(){
-        //        let filePath  = Bundle.main.path(forResource: "GatewayOverview", ofType: "json")
-        //        let data = NSData(contentsOfFile: filePath!)
-        
+    
+    
+    func loadGatewayUI(){
+       
         //load plist info
         let plistPath = Bundle.main.path(forResource: "GatewayOverview", ofType: ".plist", inDirectory: nil)
         let arrayContent = NSMutableArray.init(contentsOfFile: plistPath!)
         
         do {
-            //let response = try JSONSerialization.jsonObject(with: data! as Data, options: []) as? Dictionary<String,Any>
-            
-            
-            //let overviewList = response[kOverViewInfo] as! Array<Dictionary<String,Any>>
+           
             var listOfOverviews: Array<OverviewSection> = []
             for overview in arrayContent!{
                 let overviewObj = OverviewSection(detail: overview as! Dictionary<String, Any>)
@@ -107,7 +104,7 @@ class HomeViewController: UIViewController{
             //assgin to Gateway
             Gateway.instance.overview = overview
             
-        } catch {
+        } catch let error{
             print("json error: \(error.localizedDescription)")
         }
     }

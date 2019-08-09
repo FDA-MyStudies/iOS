@@ -270,7 +270,14 @@ class LocalNotification: NSObject {
                         ]
         let date = Date().addingTimeInterval(60*60*24*14)
         
-        let message = "It’s been a while since you visited the FDA My Studies app. Please consider continuing your participation in any studies in which you’re enrolled."
+        
+        var infoDict: NSDictionary?
+        if let path = Bundle.main.path(forResource: "Info", ofType: "plist") {
+            infoDict = NSDictionary(contentsOfFile: path)
+        }
+        let navTitle = infoDict!["ProductTitleName"] as! String
+        
+        let message = "It’s been a while since you visited the \(navTitle) app. Please consider continuing your participation in any studies in which you’re enrolled."
         
         let notification = UILocalNotification()
         notification.fireDate = date

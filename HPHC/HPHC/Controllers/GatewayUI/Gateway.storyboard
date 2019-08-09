@@ -678,13 +678,13 @@
                                             <color key="textColor" red="0.0" green="0.48627450979999998" blue="0.72941176470000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="v1.0.6" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gES-c2-7do">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Powered by FDA MyStudies" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gES-c2-7do">
                                             <rect key="frame" x="34" y="71.5" width="212" height="15"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="15" id="7XJ-rL-MEz"/>
                                             </constraints>
-                                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
-                                            <color key="textColor" white="0.5" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                            <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="12"/>
+                                            <color key="textColor" red="0.50196078431372548" green="0.49803921568627452" blue="0.49803921568627452" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
@@ -717,11 +717,23 @@
                                                 <action selector="buttonActionSignOut:" destination="cb4-N4-R1j" eventType="touchUpInside" id="Axm-MB-tjF"/>
                                             </connections>
                                         </button>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ng8-aL-gj9">
+                                            <rect key="frame" x="36" y="143.5" width="331" height="14"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="14" id="Ndx-nV-38m"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
+                                            <color key="textColor" red="0.50196078431372548" green="0.49803921568627452" blue="0.49803921568627452" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
                                     </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     <constraints>
                                         <constraint firstItem="0DE-kF-2Xl" firstAttribute="centerY" secondItem="u0K-d2-T6j" secondAttribute="centerY" multiplier="1.39325" id="BaT-4c-Mss"/>
                                         <constraint firstItem="0DE-kF-2Xl" firstAttribute="leading" secondItem="u0K-d2-T6j" secondAttribute="leading" constant="34" id="Qlf-48-V4e"/>
+                                        <constraint firstItem="ng8-aL-gj9" firstAttribute="top" secondItem="0DE-kF-2Xl" secondAttribute="bottom" id="eGY-vc-z9S"/>
+                                        <constraint firstItem="ng8-aL-gj9" firstAttribute="leading" secondItem="u0K-d2-T6j" secondAttribute="leading" constant="36" id="flQ-Vp-voL"/>
+                                        <constraint firstAttribute="trailing" secondItem="ng8-aL-gj9" secondAttribute="trailing" constant="8" id="tHx-vA-D4n"/>
                                     </constraints>
                                 </view>
                                 <prototypes>
@@ -838,7 +850,7 @@
                     <connections>
                         <outlet property="buttonSignOut" destination="0DE-kF-2Xl" id="JGo-wu-dbJ"/>
                         <outlet property="labelProductName" destination="tRN-H1-1nF" id="5OA-Ij-LnX"/>
-                        <outlet property="labelVersion" destination="gES-c2-7do" id="grn-hT-R3G"/>
+                        <outlet property="labelVersion" destination="ng8-aL-gj9" id="eNU-rE-GE6"/>
                         <outlet property="tableFooterView" destination="u0K-d2-T6j" id="4N9-5B-nCt"/>
                         <outlet property="tableHeaderView" destination="nRC-BO-z7A" id="YuC-BK-8iD"/>
                         <outlet property="tableView" destination="jQu-mb-q7O" id="CnQ-cw-pG9"/>

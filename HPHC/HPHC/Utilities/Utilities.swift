@@ -58,6 +58,16 @@ struct iOSVersion {
 
 class Utilities: NSObject {
     
+    
+    class func getBrandingDetails() -> NSDictionary? {
+        
+        var infoDict: NSDictionary?
+        if let path = Bundle.main.path(forResource: "Branding", ofType: "plist") {
+            infoDict = NSDictionary(contentsOfFile: path)
+        }
+        return infoDict!
+    }
+    
     class func isStandaloneApp() -> Bool {
         
         var infoDict: NSDictionary?

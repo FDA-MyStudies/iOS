@@ -35,8 +35,12 @@ class ResourcesViewController: UIViewController{
     var fileType: String?
     var navigateToStudyOverview: Bool? = false
     var withdrawlInformationNotFound = false
-    
     var shouldDeleteData: Bool? = false
+    
+    var leaveStudy:String = "Leave Study"
+    var aboutTheStudy:String = "About the Study"
+    var consentPDF:String = "Consent PDF"
+    
     override var preferredStatusBarStyle: UIStatusBarStyle{
         return .default
     }
@@ -64,7 +68,15 @@ class ResourcesViewController: UIViewController{
         }
         
         
+        //Branding
+        let brandingDetail = Utilities.getBrandingDetails()
+        if let leavetitle =  brandingDetail?[BrandingConstant.LeaveStudy] as? String{
+            leaveStudy = leavetitle
+        }
         
+        if let consent =  brandingDetail?[BrandingConstant.ConsentPDF] as? String{
+            consentPDF = consent
+        }
         
     }
     
@@ -192,13 +204,17 @@ class ResourcesViewController: UIViewController{
     func addDefaultList(){
         
         //add default List
-        let plistPath = Bundle.main.path(forResource: "ResourcesUI", ofType: ".plist", inDirectory: nil)
         
-        let array = NSMutableArray(contentsOfFile: plistPath!) as [AnyObject]?
+        tableViewRowDetails?.append(aboutTheStudy as AnyObject)
+        tableViewRowDetails?.append(consentPDF as AnyObject)
         
-        for title in array!{
-            tableViewRowDetails?.append(title)
-        }
+//        let plistPath = Bundle.main.path(forResource: "ResourcesUI", ofType: ".plist", inDirectory: nil)
+//
+//        let array = NSMutableArray(contentsOfFile: plistPath!) as [AnyObject]?
+//
+//        for title in array!{
+//            tableViewRowDetails?.append(title)
+//        }
         
     }
     
@@ -206,7 +222,7 @@ class ResourcesViewController: UIViewController{
         
         //append Leave Study row
         //if (Study.currentStudy?.studySettings.rejoinStudyAfterWithdrawn)! != false {
-            tableViewRowDetails?.append("Leave Study" as AnyObject)
+            tableViewRowDetails?.append(leaveStudy as AnyObject)
         //}
     }
     
@@ -700,14 +716,14 @@ extension ResourcesViewController: UITableViewDelegate{
             self.performSegue(withIdentifier: "ResourceDetailViewSegueIdentifier" , sender: resource)
             
         } else {
-            if (resource as? String)! == "Leave Study" {
+            if (resource as? String)! == leaveStudy {
                 self.handleLeaveStudy()
                 
-            } else if  (resource as? String)! == "About the Study" {
+            } else if  (resource as? String)! == aboutTheStudy {
                 
                 self.checkDatabaseForStudyInfo(study: Study.currentStudy!)
 
-            } else if  (resource as? String)! == "Consent PDF" {
+            } else if  (resource as? String)! == consentPDF {
                 
                 //PENDING
                 

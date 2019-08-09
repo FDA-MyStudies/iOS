@@ -5,6 +5,13 @@ PODS:
   - CryptoSwift (1.0.0)
   - Fabric (1.9.0)
   - IQKeyboardManagerSwift (6.2.1)
+  - Mockingjay (3.0.0-alpha.1):
+    - Mockingjay/Core (= 3.0.0-alpha.1)
+    - Mockingjay/XCTest (= 3.0.0-alpha.1)
+  - Mockingjay/Core (3.0.0-alpha.1):
+    - URITemplate (~> 3.0)
+  - Mockingjay/XCTest (3.0.0-alpha.1):
+    - Mockingjay/Core
   - Realm (3.14.1):
     - Realm/Headers (= 3.14.1)
   - Realm/Headers (3.14.1)
@@ -14,6 +21,7 @@ PODS:
     - SDWebImage/Core (= 5.0.0)
   - SDWebImage/Core (5.0.0)
   - SlideMenuControllerSwift (4.0.0)
+  - URITemplate (3.0.0)
 
 DEPENDENCIES:
   - ActionSheetPicker-3.0
@@ -21,6 +29,7 @@ DEPENDENCIES:
   - CryptoSwift
   - Fabric
   - IQKeyboardManagerSwift
+  - Mockingjay (= 3.0.0-alpha.1)
   - RealmSwift
   - SDWebImage
   - SlideMenuControllerSwift
@@ -32,10 +41,12 @@ SPEC REPOS:
     - CryptoSwift
     - Fabric
     - IQKeyboardManagerSwift
+    - Mockingjay
     - Realm
     - RealmSwift
     - SDWebImage
     - SlideMenuControllerSwift
+    - URITemplate
 
 SPEC CHECKSUMS:
   ActionSheetPicker-3.0: eef157d75e151f255c5333d26656c7fbfe905a51
@@ -43,11 +54,13 @@ SPEC CHECKSUMS:
   CryptoSwift: d81eeaa59dc5a8d03720fe919a6fd07b51f7439f
   Fabric: f988e33c97f08930a413e08123064d2e5f68d655
   IQKeyboardManagerSwift: 0f0ae8935360b4003e6ea1ac7c19898f01e2f7c7
+  Mockingjay: 0f7c5aa49c7f1b95621cee3c79b557141f5a225c
   Realm: e12c9c2387d05c5bba3a9c394838f5870e85763b
   RealmSwift: a82eab9b04c3e1616082c7e17aa300740847769c
   SDWebImage: 5de80a0302de9e377e62f47d2fa1304efff0e55f
   SlideMenuControllerSwift: 021d6318201c53d4d4d3710517d43d6c556c7dd0
+  URITemplate: 58e0d47f967006c5d59888af5356c4a8ed3b197d
 
-PODFILE CHECKSUM: cc687ff0833e7e583723f7e416ed0ac077195960
+PODFILE CHECKSUM: 0c53fbb80cfd3a63f71f06546b5b62aacc71cefd
 
 COCOAPODS: 1.6.1

@@ -19,9 +19,9 @@
 	<key>WebsiteButtonTitle</key>
 	<string>www.carragroup.org</string>
 	<key>TermsAndConditionURL</key>
-	<string>http://online.crohnscolitisfoundation.org/site/DocServer/mSPARC_Privacy_Policy_07302019.pdf?docID=35367</string>
+	<string>https://www.fda.gov/AboutFDA/AboutThisWebsite/WebsitePolicies/</string>
 	<key>PrivacyPolicyURL</key>
-	<string>http://online.crohnscolitisfoundation.org/site/DocServer/mSPARC_Privacy_Policy_07302019.pdf?docID=35367</string>
+	<string>https://www.fda.gov/AboutFDA/AboutThisWebsite/WebsitePolicies/#privacy</string>
 	<key>ValidatedTitle</key>
 	<string>You’re In</string>
 </dict>

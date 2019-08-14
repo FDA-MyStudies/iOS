@@ -49,6 +49,16 @@
                ReferencedContainer = "container:HPHC.xcodeproj">
             </BuildableReference>
          </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "89055917230149AD005FB284"
+               BuildableName = "HPHCUITests.xctest"
+               BlueprintName = "HPHCUITests"
+               ReferencedContainer = "container:HPHC.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference

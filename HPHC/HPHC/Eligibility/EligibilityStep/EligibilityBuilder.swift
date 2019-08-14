@@ -36,7 +36,7 @@ let kEligibilityCompletionTitle = "You are Eligible!"
 let kEligibilityStep = "steps"
 
 let kEligibilityValidateScreen = "ValidatedScreen"
-let kEligibilityValidationDescriptionText = "Your ID has been validated. You are eligible to join the Study.Please click Continue to proceed to the Consent section."
+let kEligibilityValidationDescriptionText = "Your token has been validated. You are eligible to join the study. Please tap Get Started to proceed to the consent section."
 let kEligibilityValidationTitle = "Validated!"
 
 let kEligibilityTestInstructionStep = "EligibilityTestInstructionStep"

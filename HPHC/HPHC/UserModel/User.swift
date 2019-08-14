@@ -573,7 +573,7 @@ class UserStudyStatus{
     var studyId: String! = ""
     var status: StudyStatus = .yetToJoin
     var consent: String! = ""
-    var joiningDate: Date!  //User joined Date for study
+    var joiningDate: Date!//User joined Date for study
     var completion: Int = 0
     var adherence: Int = 0
     var participantId: String?

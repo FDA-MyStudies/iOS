@@ -234,6 +234,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let _ = try! Realm()
     }
     
+    func fireNotiffication(intervel:Int) {
+        
+        let content = UNMutableNotificationContent()
+        content.body = "message"
+        
+        content.sound = UNNotificationSound.default
+        let date = Date().addingTimeInterval(TimeInterval(intervel))
+        var timeInterval = date.timeIntervalSinceNow
+
+        
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: timeInterval, repeats: false)
+        let id = Utilities.randomString(length: 10)
+        let request = UNNotificationRequest(identifier: id, content: content, trigger: trigger)
+        let center = UNUserNotificationCenter.current()
+        center.add(request)
+    }
+    
     // MARK: App Delegates
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
@@ -299,6 +316,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 ud.synchronize()
             }
         }
+        
+       // self.fireNotiffication(intervel: 10)
+       // self.fireNotiffication(intervel: 15)
         
         //Check if Database needs migration
         self.checkForRealmMigration()
@@ -539,16 +559,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func checkForRegisteredNotifications() {
         
         if User.currentUser.userType == .FDAUser {
-            let application = UIApplication.shared
-            var scheduledNotifications = application.scheduledLocalNotifications!
+           
+            let center = UNUserNotificationCenter.current()
+            center.getPendingNotificationRequests(completionHandler: { requests in
+                print(requests)
+                if requests.count < 50 {
+                     LocalNotification.refreshAllLocalNotification()
+                }
+            })
             
             //check if notifications are expired or already fired
-            if scheduledNotifications.count < 50 {
-                //refresh local notifcation from DB
-                LocalNotification.refreshAllLocalNotification()
-                scheduledNotifications = application.scheduledLocalNotifications!
-                
-            }
+//            if scheduledNotifications.count < 50 {
+//                //refresh local notifcation from DB
+//                LocalNotification.refreshAllLocalNotification()
+//                scheduledNotifications = application.scheduledLocalNotifications!
+//
+//            }
         }
     }
     

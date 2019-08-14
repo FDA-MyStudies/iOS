@@ -25,3 +25,8 @@ target 'HPHC' do
   
 end
 
+target 'HPHCUITests' do
+  use_frameworks!
+  pod 'Embassy'
+  pod 'EnvoyAmbassador'
+end

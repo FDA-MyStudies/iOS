@@ -146,7 +146,8 @@ class ActivitiesViewController : UIViewController{
             if self.refreshControl != nil && (self.refreshControl?.isRefreshing)!{
                 self.refreshControl?.endRefreshing()
             }
-            self.loadActivitiesFromDatabase()
+            //self.loadActivitiesFromDatabase()
+            self.fetchActivityAnchorDateResponseFromLabkey()
         }
     }
     
@@ -256,7 +257,7 @@ class ActivitiesViewController : UIViewController{
                                                 let message = resource.notificationMessage
                                                 let userInfo = ["studyId": (Study.currentStudy?.studyId)!,
                                                                 "type": "resource"];
-                                                LocalNotification.scheduleNotificationOn(date: notificationDate!, message: message!, userInfo: userInfo)
+                                                LocalNotification.scheduleNotificationOn(date: notificationDate!, message: message!, userInfo: userInfo, id: notification.id)
                                             }
                                     })
                                 }
@@ -319,12 +320,12 @@ class ActivitiesViewController : UIViewController{
         
         AnchorDateHandler().fetchActivityAnchorDateResponseFromLabkey { (status) in
             print("Finished 1")
-            if status {
+            //if status {
                 //DispatchQueue.main.async {
                     self.loadActivitiesFromDatabase()
                 //}
                 
-            }
+            //}
             
         }
         print("Finished 0")
@@ -345,7 +346,7 @@ class ActivitiesViewController : UIViewController{
                     Study.currentStudy?.activities = activities
                     
                     self.handleActivityListResponse()
-                    self.fetchActivityAnchorDateResponseFromLabkey()
+                    
                     
                 } else {
                     
@@ -1005,7 +1006,8 @@ extension ActivitiesViewController: NMWebServiceDelegate {
             //get DashboardInfo
             self.sendRequestToGetDashboardInfo()
             
-            self.loadActivitiesFromDatabase()
+            self.fetchActivityAnchorDateResponseFromLabkey()
+           // self.loadActivitiesFromDatabase()
             
             if self.refreshControl != nil && (self.refreshControl?.isRefreshing)!{
                 self.refreshControl?.endRefreshing()
@@ -1014,6 +1016,8 @@ extension ActivitiesViewController: NMWebServiceDelegate {
             StudyUpdates.studyActivitiesUpdated = false
             //Update StudymetaData for Study
             DBHandler.updateMetaDataToUpdateForStudy(study: Study.currentStudy!, updateDetails: nil)
+            
+            
             
         } else if requestName as String == WCPMethods.activity.method.methodName {
             self.removeProgressIndicator()

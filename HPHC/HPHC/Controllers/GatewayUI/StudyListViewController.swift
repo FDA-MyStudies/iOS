@@ -704,7 +704,7 @@ class StudyListViewController: UIViewController {
                 
                 let userStudyStatus =  (Study.currentStudy?.userParticipateState.status)!
                 
-                if userStudyStatus == .completed || userStudyStatus == .inProgress {
+                if userStudyStatus == .completed || userStudyStatus == .inProgress{
                     
                     // check if study version is udpated
                     if(study?.version != study?.newVersion){

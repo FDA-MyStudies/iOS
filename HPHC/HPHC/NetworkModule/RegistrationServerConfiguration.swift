@@ -91,9 +91,17 @@ struct RegistrationServerURLConstants {
     
     //static let ProductionURL = "http://192.168.0.125:8081/labkey/fdahpUserRegWS/"
     static var DevelopmentURL:String {
+        
+        if isUITesting {
+            return  "http://localhost:8080/fdahpUserRegWS/"
+        }
         return UserDefaults.standard.value(forKey: "URBaseURL") as? String ?? "https://hpreg-stage.lkcompliant.net/fdahpUserRegWS/"
     }
     static var ProductionURL:String {
+        //return  "http://localhost:8080/fdahpUserRegWS/"
+        if isUITesting {
+            return  "http://localhost:8080/"
+        }
         return UserDefaults.standard.value(forKey: "URBaseURL") as? String ?? "https://hpreg-stage.lkcompliant.net/fdahpUserRegWS/"
     }
    

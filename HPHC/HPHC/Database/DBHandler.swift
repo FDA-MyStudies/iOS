@@ -38,23 +38,72 @@ class DBHandler: NSObject {
     /* Used to save user details like userid, authkey, first name , last name etc*/
     func saveCurrentUser(user: User){
         
-        let dbUser = DBUser()
-        dbUser.userType = (user.userType?.rawValue)!
-        dbUser.emailId = user.emailId!
-        dbUser.authToken = user.authToken
-        dbUser.userId = user.userId
-        //dbUser.firstName = user.firstName
-        //dbUser.lastName = user.lastName
-        dbUser.verified = user.verified
-      
-        dbUser.refreshToken = user.refreshToken
-        
         let realm = DBHandler.getRealmObject()!
-        print("DBPath : varealm.configuration.fileURL)")
-        try? realm.write({
-            realm.add(dbUser, update: true)
+        let dbUsers = realm.objects(DBUser.self)
+        var dbUser = dbUsers.last
+        
+        if dbUser == nil {
             
-        })
+            dbUser = DBUser()
+            dbUser?.userType = (user.userType?.rawValue)!
+            dbUser?.emailId = user.emailId!
+            dbUser?.authToken = user.authToken
+            dbUser?.userId = user.userId
+            //dbUser.firstName = user.firstName
+            //dbUser.lastName = user.lastName
+            dbUser?.verified = user.verified
+            
+            dbUser?.refreshToken = user.refreshToken
+            
+            try? realm.write({
+                realm.add(dbUser!, update: true)
+                
+            })
+        }
+        else {
+            let user = User.currentUser
+            do {
+                try realm.write({
+                    
+                    dbUser?.userType = (user.userType?.rawValue)!
+                    dbUser?.emailId = user.emailId!
+                    dbUser?.authToken = user.authToken
+                    
+                    //dbUser.firstName = user.firstName
+                    //dbUser.lastName = user.lastName
+                    dbUser?.verified = user.verified
+                    
+                    dbUser?.refreshToken = user.refreshToken
+                    
+                })
+            } catch let error {
+                print(error)
+            }
+            
+//            try? realm.write({
+//
+//                dbUser?.userType = (user.userType?.rawValue)!
+//                dbUser?.emailId = user.emailId!
+//                dbUser?.authToken = user.authToken
+//                dbUser?.userId = user.userId
+//                //dbUser.firstName = user.firstName
+//                //dbUser.lastName = user.lastName
+//                dbUser?.verified = user.verified
+//
+//                dbUser?.refreshToken = user.refreshToken
+//
+//            })
+           
+        }
+        
+        
+        
+       
+//        print("DBPath : varealm.configuration.fileURL)")
+//        try? realm.write({
+//            realm.add(dbUser!, update: true)
+//
+//        })
     }
     
     /* Used to initialize the current logged in user*/
@@ -93,7 +142,7 @@ class DBHandler: NSObject {
         
         try? realm.write({
             
-             let user = User.currentUser
+            let user = User.currentUser
             dbUser?.passcodeEnabled = (user.settings?.passcode)!
             dbUser?.localNotificationEnabled = (user.settings?.localNotifications)!
             dbUser?.remoteNotificationEnabled = (user.settings?.remoteNotifications)!
@@ -541,7 +590,6 @@ class DBHandler: NSObject {
                 dbActivity = dbActivityArray.filter({$0.actvityId == activity.actvityId!}).last
                 
                 if dbActivity == nil {
-                    
                     dbActivity = DBHandler.getDBActivity(activity: activity)
                     dbActivities.append(dbActivity!)
                 }

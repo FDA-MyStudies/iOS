@@ -141,6 +141,11 @@ class ActivitiesViewController : UIViewController{
         if StudyUpdates.studyActivitiesUpdated {
             
             self.sendRequestToGetActivityStates()
+            
+            //udpate status to false so notification can be registered again
+            Study.currentStudy?.activitiesLocalNotificationUpdated = false
+            DBHandler.updateLocalNotificaitonUpdated(studyId: (Study.currentStudy?.studyId)!,status: false)
+            
         } else {
             
             if self.refreshControl != nil && (self.refreshControl?.isRefreshing)!{
@@ -521,17 +526,21 @@ class ActivitiesViewController : UIViewController{
             self.updateSectionArray(activityType: filterType)
         }
         
-        self.tableView?.reloadData()
+        DispatchQueue.main.async {
+            
+            self.tableView?.reloadData()
+            self.tableView?.isHidden = false
+            self.labelNoNetworkAvailable?.isHidden = true
+            self.updateCompletionAdherence()
+        }
         
-        self.tableView?.isHidden = false
-        self.labelNoNetworkAvailable?.isHidden = true
         
-        self.updateCompletionAdherence()
+        
         
         if (User.currentUser.settings?.localNotifications)! {
-            
+            print("localNotifications enabled")
             if !(Study.currentStudy?.activitiesLocalNotificationUpdated)! {
-                
+                print("Registerig Notification")
                 //Register LocalNotifications
                 LocalNotification.registerAllLocalNotificationFor(activities: (Study.currentStudy?.activities)!) { (finished,notificationlist) in
                     print("Notification set sucessfully")

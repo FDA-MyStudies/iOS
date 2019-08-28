@@ -147,7 +147,6 @@ class StudyListViewController: UIViewController {
             self.labelHelperText.isHidden =  false
             self.labelHelperText.text = kHelperTextForOffline
         }
-        
     }
     
     override func didReceiveMemoryWarning() {

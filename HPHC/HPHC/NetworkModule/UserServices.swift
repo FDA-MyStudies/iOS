@@ -833,7 +833,7 @@ class UserServices: NSObject {
        // let requestParams = self.failedRequestServices.requestParams == nil ? nil : self.failedRequestServices.requestParams
         
         let headerParams = self.failedRequestServices.headerParams == nil ? [:] : self.failedRequestServices.headerParams
-        
+//
         self.sendRequestWith(method: self.failedRequestServices.method, params: (self.requestParams == nil ?  nil : self.requestParams) , headers: headerParams)
         
     }
@@ -951,7 +951,10 @@ extension UserServices: NMWebServiceDelegate{
                 
             } else {
                 //Update Refresh Token
-                self.updateToken()
+               
+                    self.updateToken()
+                
+                
             }
             
         } else {

@@ -129,7 +129,7 @@ class EligibilityBuilder{
                 else {
                      eligibilityValidationStep.title = kEligibilityValidationTitle
                 }
-                eligibilityValidationStep.title = kEligibilityValidationTitle
+               
                 eligibilityValidationStep.image =  #imageLiteral(resourceName: "successBlueBig")
                 stepsArray?.append(eligibilityValidationStep)
                 

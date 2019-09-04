@@ -1,4 +1,4 @@
-framework module Mockingjay {
+module Mockingjay {
   umbrella header "Mockingjay-umbrella.h"
 
   export *

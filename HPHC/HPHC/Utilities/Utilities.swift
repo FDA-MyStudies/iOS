@@ -421,7 +421,7 @@ class Utilities: NSObject {
         dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
         
         guard let date = dateFormatter.date(from: dateString) else {
-            assert(false, "no date from string")
+            //assert(false, "no date from string")
             return nil
         }
         

@@ -634,7 +634,7 @@ class ActivitiesViewController : UIViewController{
             
             if !(ud.bool(forKey: halfCompletionKey)) {
                 let message =  "The study " + (Study.currentStudy?.name!)! + " is now 50 percent complete. We look forward to your continued participation as the study progresses."
-                UIUtilities.showAlertWithMessage(alertMessage: message)
+                //UIUtilities.showAlertWithMessage(alertMessage: message)
                 ud.set(true, forKey: halfCompletionKey)
                 
             }
@@ -887,7 +887,7 @@ extension ActivitiesViewController: UITableViewDelegate{
             if activity.currentRun != nil {
                 if activity.userParticipationStatus != nil {
                     let activityRunParticipationStatus = activity.userParticipationStatus
-                    if activityRunParticipationStatus?.status == .yetToJoin || activityRunParticipationStatus?.status == .inProgress || activityRunParticipationStatus?.status == .completed
+                    if activityRunParticipationStatus?.status == .yetToJoin || activityRunParticipationStatus?.status == .inProgress
                         
                     {
                         Study.updateCurrentActivity(activity: activities[indexPath.row])

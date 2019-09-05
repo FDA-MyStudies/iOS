@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>JoinStudyButtonTitle</key>
-	<string>Get Started!</string>
+	<string>Join Study</string>
 	<key>ViewConsentButtonTitle</key>
 	<string>View Consent</string>
 	<key>VisitWebsiteButtonTitle</key>

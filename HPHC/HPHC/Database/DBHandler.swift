@@ -2099,13 +2099,13 @@ class DBHandler: NSObject {
     
     var notificationList: Array<AppLocalNotification> = []
     
-    var i = 0
-    for dbnotification in dbNotifications {
-      
+
+    for (i,dbnotification) in dbNotifications.enumerated() {
+        
       if i == 50{
         break
       }
-      
+      //1test001dfsgNotification01PFJ3M
       let notification = AppLocalNotification()
       
       notification.id = dbnotification.id
@@ -2123,7 +2123,6 @@ class DBHandler: NSObject {
       notification.endDate = dbnotification.endDate
       notificationList.append(notification)
       
-      i += 1
     }
     completionHandler(notificationList)
   }

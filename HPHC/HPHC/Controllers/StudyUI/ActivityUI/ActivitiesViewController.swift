@@ -122,6 +122,8 @@ class ActivitiesViewController : UIViewController{
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
+        let message =  "The study " + (Study.currentStudy?.name!)! + " is 100 percent complete. Thank you for your participation."
+       // UIUtilities.showAlertWithMessage(alertMessage: message)
         
     }
     
@@ -490,7 +492,6 @@ class ActivitiesViewController : UIViewController{
             } else {
                 
                 isInActiveActivitiesAreAvailable = true
-                
                 DBHandler.deleteDBLocalNotification(activityId: activity.actvityId!,studyId: activity.studyId!)
             }
         }
@@ -1168,21 +1169,21 @@ extension ActivitiesViewController: ORKTaskViewControllerDelegate{
         case ORKTaskViewControllerFinishReason.completed:
             print("completed")
             taskResult = taskViewController.result
-            let ud = UserDefaults.standard
-            if ud.bool(forKey: "FKC") {
-                
-                let runid = (ud.object(forKey: "FetalKickCounterRunid") as? Int)!
-                
-                if Study.currentActivity?.currentRun.runId != runid {
-                    //runid is changed
-                    self.updateRunStatusForRunId(runId: runid)
-                } else {
-                    self.updateRunStatusToComplete()
-                }
-            } else {
-                
-                self.updateRunStatusToComplete()
-            }
+//            let ud = UserDefaults.standard
+//            if ud.bool(forKey: "FKC") {
+//
+//                let runid = (ud.object(forKey: "FetalKickCounterRunid") as? Int)!
+//
+//                if Study.currentActivity?.currentRun.runId != runid {
+//                    //runid is changed
+//                    self.updateRunStatusForRunId(runId: runid)
+//                } else {
+//                    self.updateRunStatusToComplete()
+//                }
+//            } else {
+//
+//                self.updateRunStatusToComplete()
+//            }
             
         case ORKTaskViewControllerFinishReason.failed:
             print("failed")
@@ -1335,6 +1336,24 @@ extension ActivitiesViewController: ORKTaskViewControllerDelegate{
         taskViewController.dismiss(animated: true, completion: {
            
             if reason == ORKTaskViewControllerFinishReason.completed {
+                
+                
+                let ud = UserDefaults.standard
+                if ud.bool(forKey: "FKC") {
+                    
+                    let runid = (ud.object(forKey: "FetalKickCounterRunid") as? Int)!
+                    
+                    if Study.currentActivity?.currentRun.runId != runid {
+                        //runid is changed
+                        self.updateRunStatusForRunId(runId: runid)
+                    } else {
+                        self.updateRunStatusToComplete()
+                    }
+                } else {
+                    
+                    self.updateRunStatusToComplete()
+                }
+
                 let lifeTimeUpdated = DBHandler.updateTargetActivityAnchorDateDetail(studyId: studyId!, activityId: activityId!, response: response!)
                 if lifeTimeUpdated {
                     self.loadActivitiesFromDatabase()

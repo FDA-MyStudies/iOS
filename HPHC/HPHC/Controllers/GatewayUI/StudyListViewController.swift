@@ -172,6 +172,15 @@ class StudyListViewController: UIViewController {
         let label = self.addNotificationIndication()
         view.addSubview(label)
         
+        let ud = UserDefaults.standard
+        let showNotification = ud.bool(forKey: kShowNotification)
+        
+        if showNotification {
+            label.isHidden = false
+        } else {
+            label.isHidden = true
+        }
+        
         //  filter Button
         let filterButton = self.addFilterButton()
         view.addSubview(filterButton)
@@ -185,14 +194,7 @@ class StudyListViewController: UIViewController {
         let barButton = UIBarButtonItem.init(customView: view)
         self.navigationItem.rightBarButtonItems = [barButton ]
         
-        let ud = UserDefaults.standard
-        let showNotification = ud.bool(forKey: kShowNotification)
         
-        if showNotification {
-            label.isHidden = false
-        } else {
-            label.isHidden = true
-        }
     }
     
     func addSearchButton() -> UIButton{

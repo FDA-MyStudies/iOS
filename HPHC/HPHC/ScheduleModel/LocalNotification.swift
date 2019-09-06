@@ -186,10 +186,10 @@ class LocalNotification: NSObject {
         
         //create App local notification object
         
-        let randomString = Utilities.randomString(length: 5)
+        //let randomString = Utilities.randomString(length: 5)
         
         let notification = AppLocalNotification()
-        notification.id =  String(run.runId) + run.activityId + run.studyId + randomString
+        notification.id =  String(run.runId) + run.activityId + run.studyId
         notification.message = message
         notification.activityId = run.activityId
         notification.title = ""
@@ -214,6 +214,7 @@ class LocalNotification: NSObject {
             content.body = message
             content.userInfo = userInfo
             content.sound = UNNotificationSound.default
+            content.badge = 1
             
             let timeInterval = date.timeIntervalSinceNow
             print("Time \(timeInterval)")

@@ -583,15 +583,17 @@ class DBHandler: NSObject {
         let dbActivityArray = realm.objects(DBActivity.self).filter({$0.studyId == study?.studyId})
         
         var dbActivities: Array<DBActivity> = []
+        var activityUpdated = false
         for activity in activityies {
           
             var dbActivity: DBActivity?
             if dbActivityArray.count != 0 {
                 dbActivity = dbActivityArray.filter({$0.actvityId == activity.actvityId!}).last
                 
-                if dbActivity == nil {
+                if dbActivity == nil { //newly added activity
                     dbActivity = DBHandler.getDBActivity(activity: activity)
                     dbActivities.append(dbActivity!)
+                    activityUpdated  = true
                 }
                 else {
                     
@@ -606,6 +608,7 @@ class DBHandler: NSObject {
                         let updatedActivity = DBHandler.getDBActivity(activity: activity)
                         dbActivities.append(updatedActivity)
                         DBHandler.deleteMetaDataForActivity(activityId: activity.actvityId!, studyId: activity.studyId!)
+                        activityUpdated = true
                         
                     }else {
                          try? realm.write({
@@ -621,8 +624,20 @@ class DBHandler: NSObject {
             }else {
                 dbActivity = DBHandler.getDBActivity(activity: activity)
                 dbActivities.append(dbActivity!)
+                activityUpdated = true
             }
         }
+        
+        //keys for alerts
+        if activityUpdated {
+            let ud = UserDefaults.standard
+            let halfCompletionKey = "50pcShown"  + (Study.currentStudy?.studyId)!
+            let fullCompletionKey = "100pcShown"  + (Study.currentStudy?.studyId)!
+            ud.set(false, forKey: halfCompletionKey)
+            ud.set(false, forKey: fullCompletionKey)
+        }
+        
+  
         
         if dbActivities.count > 0 {
             try? realm.write({
@@ -2063,7 +2078,7 @@ class DBHandler: NSObject {
         
         let realm = DBHandler.getRealmObject()!
         let todayDate = Date()
-        let dbNotifications = realm.objects(DBLocalNotification.self).filter({$0.startDate! <= todayDate && $0.endDate! >= todayDate})
+        let dbNotifications = realm.objects(DBLocalNotification.self).sorted(byKeyPath: "startDate", ascending: false).filter({$0.startDate! <= todayDate && $0.endDate! >= todayDate})
         
         var notificationList: Array<AppLocalNotification> = []
         for dbnotification in dbNotifications {
@@ -2084,6 +2099,7 @@ class DBHandler: NSObject {
             notification.endDate = dbnotification.endDate
             notificationList.append(notification)
         }
+        
         completionHandler(notificationList)
     }
   

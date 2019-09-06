@@ -240,6 +240,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         content.body = "message"
         
         content.sound = UNNotificationSound.default
+        content.badge = 1
         let date = Date().addingTimeInterval(TimeInterval(intervel))
         var timeInterval = date.timeIntervalSinceNow
 
@@ -317,8 +318,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         }
         
-       // self.fireNotiffication(intervel: 10)
-       // self.fireNotiffication(intervel: 15)
+        //self.fireNotiffication(intervel: 10)
+        //self.fireNotiffication(intervel: 15)
         
         //Check if Database needs migration
         self.checkForRealmMigration()

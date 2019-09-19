@@ -57,8 +57,8 @@ struct WCPServerURLConstants {
     //TODO: Set the server end points
     
     //local - btc
-    //static let ProductionURL = "http://192.168.0.44:8080/StudyMetaData/"
-    //static let DevelopmentURL = "http://192.168.0.44:8080/StudyMetaData/"
+//    static let ProductionURL = "http://192.168.0.44:8080/StudyMetaData/"
+//    static let DevelopmentURL = "http://192.168.0.44:8080/StudyMetaData/"
     
     //Staging
    // static let ProductionURL = "https://hpwcp-stage.lkcompliant.net/StudyMetaData/"

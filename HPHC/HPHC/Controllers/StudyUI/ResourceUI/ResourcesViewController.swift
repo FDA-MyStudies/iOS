@@ -420,7 +420,7 @@ class ResourcesViewController: UIViewController{
                                                                     
                                                                 case .deleteData:
                                                                     
-                                                                    UIUtilities.showAlertMessageWithTwoActionsAndHandler(NSLocalizedString("Tap OK to confirm your withdrawal from the study. Tap cancel to remain enrolled in the study.", comment: ""), errorMessage: NSLocalizedString("", comment: ""), errorAlertActionTitle: NSLocalizedString("OK", comment: ""),
+                                                                    UIUtilities.showAlertMessageWithTwoActionsAndHandler(NSLocalizedString("Are you sure? Tap Ok to confirm.", comment: ""), errorMessage: NSLocalizedString("", comment: ""), errorAlertActionTitle: NSLocalizedString("Ok", comment: ""),
                                                                                                                          errorAlertActionTitle2: NSLocalizedString("Cancel", comment: ""), viewControllerUsed: self,
                                                                                                                          action1: {
                                                                                                                             self.shouldDeleteData = true
@@ -432,7 +432,7 @@ class ResourcesViewController: UIViewController{
                                                                     
                                                                 case .noAction :
                                                                     
-                                                                    UIUtilities.showAlertMessageWithTwoActionsAndHandler(NSLocalizedString("Tap OK to confirm your withdrawal from the study. Tap cancel to remain enrolled in the study.", comment: ""), errorMessage: NSLocalizedString("", comment: ""), errorAlertActionTitle: NSLocalizedString("OK", comment: ""),
+                                                                    UIUtilities.showAlertMessageWithTwoActionsAndHandler(NSLocalizedString("Are you sure? Tap Ok to confirm.", comment: ""), errorMessage: NSLocalizedString("", comment: ""), errorAlertActionTitle: NSLocalizedString("Ok", comment: ""),
                                                                                                                          errorAlertActionTitle2: NSLocalizedString("Cancel", comment: ""), viewControllerUsed: self,
                                                                                                                          action1: {
                                                                                                                             self.shouldDeleteData = false

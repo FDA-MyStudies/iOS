@@ -41,7 +41,8 @@ let kProfileTitleText = "My Account"
 let kSignOutText = "Sign Out"
 let kLabelName = "LabelName"
 
-let kUseTouchIdOrPasscode = "Use Touch ID/Passcode to Access App"
+let kUseTouchIdOrPasscode = "Use Passcode or Touch ID to access app"
+let kUseFaceIdOrPasscode = "Use Passcode or Face ID to access app"
 
 let kUsePasscodeToAccessApp = "Use Passcode to access app"
 
@@ -453,23 +454,25 @@ class ProfileViewController: UIViewController, SlideMenuControllerDelegate {
             return
         }
         
-//        let keychainPasscodeDict: Dictionary<String,Any>? = ORKKeychainWrapper.object(forKey: korkPasscode) == nil ? nil : (ORKKeychainWrapper.object(forKey: korkPasscode)  as?  Dictionary<String,Any>)
-        
+
         var istouchIdEnabled: Bool =  false
         if keychainPasscodeDict.count > 0 {
             istouchIdEnabled = keychainPasscodeDict[ktouchid] as? Bool ?? false
         }
         
-        print("touch;;;\(istouchIdEnabled)")
         
-        if touchIdEnabled! && istouchIdEnabled {
-            passcodeDict[kLabelName] =  kUseTouchIdOrPasscode
-            tableViewRowDetails?.replaceObject(at: 3, with: passcodeDict)
+        var touchLabelText = kUsePasscodeToAccessApp
+        if istouchIdEnabled {
+            if authenticationContext.biometryType == .faceID {
+                touchLabelText = kUseFaceIdOrPasscode
+            }
+            else if authenticationContext.biometryType == .touchID{
+                touchLabelText = kUseTouchIdOrPasscode
+            }
         }
-        else{
-            passcodeDict[kLabelName] =  kUsePasscodeToAccessApp
-            tableViewRowDetails?.replaceObject(at: 3, with: passcodeDict)
-        }
+        passcodeDict[kLabelName] =  touchLabelText
+        tableViewRowDetails?.replaceObject(at: 3, with: passcodeDict)
+        
         
     }
     

@@ -1127,6 +1127,57 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
     }
     
+    //MARK: - Consent Handlers
+    func studyEnrollmentFinished() {
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "NotificationStudyEnrollmentCompleted"), object: nil)
+    }
+    func studyEnrollmentFailed(error:NSError?) {
+        
+        NotificationCenter.default.post(name:NSNotification.Name(rawValue: "NotificationStudyEnrollmentFailed"), object: error)
+        //let message = error.localizedDescription
+        //UIUtilities.showAlertWithTitleAndMessage(title: NSLocalizedString(kErrorTitle, comment: "") as NSString, message: message as NSString)
+    }
+    
+    func studyEnrollmentStarted(taskViewController:ORKTaskViewController) {
+        
+        //Saving Consent Document
+        ConsentBuilder.currentConsent?.consentResult?.consentDocument =   ConsentBuilder.currentConsent?.consentDocument
+        ConsentBuilder.currentConsent?.consentResult?.initWithORKTaskResult(taskResult: taskViewController.result )
+        
+        //save consent to study
+        Study.currentStudy?.signedConsentVersion = ConsentBuilder.currentConsent?.version!
+        Study.currentStudy?.signedConsentFilePath = ConsentBuilder.currentConsent?.consentResult?.consentPath!
+        
+        // save also in DB
+        DBHandler.saveConsentInformation(study: Study.currentStudy!)
+        
+        
+        //update consent is updaeted in db
+        Study.currentStudy?.version = StudyUpdates.studyVersion
+        Study.currentStudy?.newVersion = StudyUpdates.studyVersion
+        StudyUpdates.studyConsentUpdated  = false
+        DBHandler.updateMetaDataToUpdateForStudy(study: Study.currentStudy!, updateDetails: nil)
+        
+        if self.isComprehensionFailed! {
+            self.isComprehensionFailed = false
+        }
+        
+        ConsentBuilder.currentConsent?.consentStatus = .completed
+        //self.addAndRemoveProgress(add: true)
+        
+        if ConsentBuilder.currentConsent?.consentResult?.consentPdfData?.count == 0 {
+            
+            DispatchQueue.main.asyncAfter(deadline: .now()+3) {
+                self.updateEligibilityConsentStatus()
+            }
+            
+            
+        }else {
+            //Update Consent Status to server
+            UserServices().updateUserEligibilityConsentStatus(eligibilityStatus: true, consentStatus:(ConsentBuilder.currentConsent?.consentStatus)!  , delegate: self)
+        }
+    }
+    
 }
 
 // MARK:- Handle network responses
@@ -1218,6 +1269,7 @@ extension AppDelegate: NMWebServiceDelegate {
         }else if requestName as String == RegistrationMethods.updateEligibilityConsentStatus.method.methodName {
             
             self.addAndRemoveProgress(add: false)
+            self.studyEnrollmentFinished()
             
         }else if (requestName as String == WCPMethods.studyUpdates.rawValue) {
             self.handleStudyUpdatedInformation()
@@ -1263,26 +1315,26 @@ extension AppDelegate: ORKTaskViewControllerDelegate {
             if taskViewController.task?.identifier == kConsentTaskIdentifier {
                 
                 //Saving Consent Document
-                ConsentBuilder.currentConsent?.consentResult?.consentDocument =   ConsentBuilder.currentConsent?.consentDocument
-                ConsentBuilder.currentConsent?.consentResult?.initWithORKTaskResult(taskResult: taskViewController.result )
-                
-                //save consent to study
-                Study.currentStudy?.signedConsentVersion = ConsentBuilder.currentConsent?.version!
-                Study.currentStudy?.signedConsentFilePath = ConsentBuilder.currentConsent?.consentResult?.consentPath!
-                
-                // save also in DB
-                DBHandler.saveConsentInformation(study: Study.currentStudy!)
-                
-                
-                //update consent is updaeted in db
-                Study.currentStudy?.version = StudyUpdates.studyVersion
-                Study.currentStudy?.newVersion = StudyUpdates.studyVersion
-                StudyUpdates.studyConsentUpdated  = false
-                DBHandler.updateMetaDataToUpdateForStudy(study: Study.currentStudy!, updateDetails: nil)
-                
-                if self.isComprehensionFailed! {
-                    self.isComprehensionFailed = false
-                }
+//                ConsentBuilder.currentConsent?.consentResult?.consentDocument =   ConsentBuilder.currentConsent?.consentDocument
+//                ConsentBuilder.currentConsent?.consentResult?.initWithORKTaskResult(taskResult: taskViewController.result )
+//
+//                //save consent to study
+//                Study.currentStudy?.signedConsentVersion = ConsentBuilder.currentConsent?.version!
+//                Study.currentStudy?.signedConsentFilePath = ConsentBuilder.currentConsent?.consentResult?.consentPath!
+//
+//                // save also in DB
+//                DBHandler.saveConsentInformation(study: Study.currentStudy!)
+//
+//
+//                //update consent is updaeted in db
+//                Study.currentStudy?.version = StudyUpdates.studyVersion
+//                Study.currentStudy?.newVersion = StudyUpdates.studyVersion
+//                StudyUpdates.studyConsentUpdated  = false
+//                DBHandler.updateMetaDataToUpdateForStudy(study: Study.currentStudy!, updateDetails: nil)
+//
+//                if self.isComprehensionFailed! {
+//                    self.isComprehensionFailed = false
+//                }
                 
             }else { //other surveys/Active tasks/ Passcode
                 taskResult = taskViewController.result
@@ -1332,25 +1384,23 @@ extension AppDelegate: ORKTaskViewControllerDelegate {
         
         if taskViewController.task?.identifier == kConsentTaskIdentifier && reason == ORKTaskViewControllerFinishReason.completed {
             
-            ConsentBuilder.currentConsent?.consentStatus = .completed
-            self.addAndRemoveProgress(add: true)
+            //
             
-            if ConsentBuilder.currentConsent?.consentResult?.consentPdfData?.count == 0 {
-                
-                // Define identifier
-                let notificationName = Notification.Name(kPDFCreationNotificationId)
-                
-                // Register to receive notification
-                //NotificationCenter.default.addObserver(self, selector: #selector(self.updateEligibilityConsentStatus), name: notificationName, object: nil)
-                DispatchQueue.main.asyncAfter(deadline: .now()+3) {
-                    self.updateEligibilityConsentStatus()
-                }
-                //self.perform(#selector(self.updateEligibilityConsentStatus), with: self, afterDelay: 2.0)
-                
-            }else {
-                //Update Consent Status to server
-                UserServices().updateUserEligibilityConsentStatus(eligibilityStatus: true, consentStatus:(ConsentBuilder.currentConsent?.consentStatus)!  , delegate: self)
-            }
+            
+//            ConsentBuilder.currentConsent?.consentStatus = .completed
+//            self.addAndRemoveProgress(add: true)
+//
+//            if ConsentBuilder.currentConsent?.consentResult?.consentPdfData?.count == 0 {
+//
+//                DispatchQueue.main.asyncAfter(deadline: .now()+3) {
+//                    self.updateEligibilityConsentStatus()
+//                }
+//
+//
+//            }else {
+//                //Update Consent Status to server
+//                UserServices().updateUserEligibilityConsentStatus(eligibilityStatus: true, consentStatus:(ConsentBuilder.currentConsent?.consentStatus)!  , delegate: self)
+//            }
         }
     }
     
@@ -1374,7 +1424,10 @@ extension AppDelegate: ORKTaskViewControllerDelegate {
             
             //For Verified Step , Completion Step, Visual Step, Review Step, Share Pdf Step
             
-            if  stepViewController.step?.identifier == kConsentCompletionStepIdentifier || stepViewController.step?.identifier == kVisualStepId  || stepViewController.step?.identifier == kConsentSharePdfCompletionStep || stepViewController.step?.identifier == kEligibilityVerifiedScreen {
+            if  stepViewController.step?.identifier == kConsentCompletionStepIdentifier
+                || stepViewController.step?.identifier == kVisualStepId
+                || stepViewController.step?.identifier == kConsentSharePdfCompletionStep
+                || stepViewController.step?.identifier == kEligibilityVerifiedScreen {
                 
                 
                 if stepViewController.step?.identifier == kEligibilityVerifiedScreen {
@@ -1386,7 +1439,7 @@ extension AppDelegate: ORKTaskViewControllerDelegate {
             else if stepViewController.step?.identifier == kConsentViewPdfCompletionStep {
                 
                 //Back button is enabled
-                stepViewController.backButtonItem?.isEnabled = true
+                stepViewController.backButtonItem = nil
                 
                 let orkStepResult: ORKStepResult? = taskViewController.result.results?[(taskViewController.result.results?.count)! - 2] as! ORKStepResult?
                 
@@ -1473,6 +1526,14 @@ extension AppDelegate: ORKTaskViewControllerDelegate {
                         let ttController = (gatewayStoryboard.instantiateViewController(withIdentifier: kConsentSharePdfStoryboardId) as? ConsentSharePdfStepViewController)!
                         ttController.step = step
                         ttController.consentDocument =  documentCopy
+                        
+                        //start enrollment process
+                       
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                                self.studyEnrollmentStarted(taskViewController: taskViewController)
+                            }
+                        
+                        
                         return ttController
                     }
                 }else {

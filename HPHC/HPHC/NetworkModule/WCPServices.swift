@@ -125,6 +125,7 @@ class WCPServices: NSObject {
     }
     func getStudyList(_ delegate: NMWebServiceDelegate){
         
+        print("StudyList Start \(Date())")
         self.delegate = delegate
         
         let method = WCPMethods.studyList.method
@@ -295,6 +296,7 @@ class WCPServices: NSObject {
     }
     func handleStudyList(response: Dictionary<String, Any>){
         
+        print("StudyList Parsing Start \(Date().timeIntervalSince1970)")
         Logger.sharedInstance.info("Studies Parsing Start")
         
         let studies = response[kStudies] as! Array<Dictionary<String,Any>>
@@ -310,6 +312,7 @@ class WCPServices: NSObject {
         Logger.sharedInstance.info("Studies Saving in DB")
         //save in database
         DBHandler().saveStudies(studies: listOfStudies)
+        print("StudyList Parsing Finished \(Date().timeIntervalSince1970)")
     }
     
     func handleEligibilityConsentMetaData(response: Dictionary<String, Any>){
@@ -608,7 +611,8 @@ extension WCPServices:NMWebServiceDelegate{
         }
     }
     func finishedRequest(_ manager: NetworkManager, requestName: NSString, response: AnyObject?) {
-        
+       
+        print("StudyList Finished \(Date())")
         Logger.sharedInstance.info("WCP Received Data: \(requestName)")
         let methodName = WCPMethods(rawValue: requestName as String)!
         

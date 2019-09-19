@@ -292,7 +292,7 @@ extension LabKeyServices: NMWebServiceDelegate{
     }
     
     func finishedRequest(_ manager: NetworkManager, requestName: NSString, response: AnyObject?) {
-        
+      
         switch requestName {
         case ResponseMethods.validateEnrollmentToken.description as String: break
             

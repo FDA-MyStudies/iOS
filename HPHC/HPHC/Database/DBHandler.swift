@@ -346,7 +346,7 @@ class DBHandler: NSObject {
             study.withdrawalConfigration = withdrawalInfo
             studies.append(study)
         }
-        
+       
         completionHandler(studies)
     }
 
@@ -1042,7 +1042,7 @@ class DBHandler: NSObject {
         userStatus.totalRuns = activity.totalRuns
         
         let incompleteRuns = activity.currentRunId - activity.compeltedRuns
-        activity.incompletedRuns = (incompleteRuns < 0) ? 0 :incompleteRuns
+        activity.incompletedRuns = ((incompleteRuns < 0) || activity.totalRuns == 0) ? 0 :incompleteRuns
         
         if activity.currentRun == nil {
             userStatus.status = UserActivityStatus.ActivityStatus.abandoned

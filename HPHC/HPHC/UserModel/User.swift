@@ -707,6 +707,7 @@ class UserActivityStatus{
         case inProgress
         case completed
         case abandoned
+        case expired
         
         
         var sortIndex: Int {
@@ -719,6 +720,8 @@ class UserActivityStatus{
                 return 2
             case .abandoned:
                 return 3
+            case .expired:
+                return 4
                 
                 
             }
@@ -733,6 +736,8 @@ class UserActivityStatus{
                 return "  Completed  "
             case .abandoned:
                 return "  Incomplete  "
+            case .expired:
+                return "  Expired  "
                 
             }
         }
@@ -747,7 +752,8 @@ class UserActivityStatus{
                 return "completed"
             case .abandoned:
                 return "abandoned"
-                
+            case .expired:
+                return "expired"
                 
             }
         }

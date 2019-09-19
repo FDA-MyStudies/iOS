@@ -1556,7 +1556,7 @@
         <image name="rightIconBlue" width="8" height="13.666666984558105"/>
         <image name="rightIconGrey" width="8" height="14.333333015441895"/>
         <image name="shareIcon" width="15.333333015441895" height="22.666666030883789"/>
-        <image name="splash" width="375" height="667"/>
+        <image name="splash" width="414" height="736"/>
         <image name="staticIcon1" width="24" height="24"/>
         <image name="surveyIcon" width="21.333333969116211" height="21.333333969116211"/>
     </resources>

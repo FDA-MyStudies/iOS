@@ -421,7 +421,7 @@ class UserServices: NSObject {
         
         self.delegate = delegate
         
-        //INCOMPLETE
+       
         let user = User.currentUser
         let headerParams = [kUserId: user.userId! as String,
                             kUserAuthToken: user.authToken! as String]

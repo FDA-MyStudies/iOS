@@ -111,6 +111,7 @@ class NotificationViewController: UIViewController {
                 
               })
               self.notificationArray = sorted
+              self.tableView?.isHidden = false
               self.tableView?.reloadData()
                 
             }else {

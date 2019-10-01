@@ -3,11 +3,11 @@
 <plist version="1.0">
 <dict>
 	<key>JoinStudyButtonTitle</key>
-	<string>Join mSPARC</string>
+	<string>Join IBD PROdigy</string>
 	<key>ViewConsentButtonTitle</key>
-	<string>mSPARC Registration</string>
+	<string>IBD PROdigy Registration</string>
 	<key>VisitWebsiteButtonTitle</key>
-	<string>Visit SPARC</string>
+	<string>Visit Crohn’s &amp; Colitis Foundation</string>
 	<key>ConsentPDF</key>
 	<string>App Registration</string>
 	<key>LeaveStudy</key>

@@ -2187,7 +2187,7 @@
 						TestTargetID = 6E7D2D551E433E8700763D4C;
 					};
 					89DBF74422F9893000AB3EF2 = {
-						DevelopmentTeam = FWLLYUH7XR;
+						DevelopmentTeam = MUEVRP9QCH;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -3756,13 +3756,13 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1.3;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = FWLLYUH7XR;
+				DEVELOPMENT_TEAM = MUEVRP9QCH;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = "$(SRCROOT)/HPHC/Sparc/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				IS_STANDALONE_STUDY = false;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.fda.sparc;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ccf.IBDPROdigy;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "HPHC/Controllers/LoginRegisterUI/FDA-Bridging-Header.h";
@@ -3787,13 +3787,13 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1.3;
-				DEVELOPMENT_TEAM = FWLLYUH7XR;
+				DEVELOPMENT_TEAM = MUEVRP9QCH;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = "$(SRCROOT)/HPHC/Sparc/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				IS_STANDALONE_STUDY = false;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.fda.sparc;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ccf.IBDPROdigy;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "HPHC/Controllers/LoginRegisterUI/FDA-Bridging-Header.h";

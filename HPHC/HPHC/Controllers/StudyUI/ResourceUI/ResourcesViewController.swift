@@ -378,7 +378,7 @@ class ResourcesViewController: UIViewController{
         var withdrawalType = Study.currentStudy?.withdrawalConfigration?.type
         
         if withdrawalMessage == nil {
-            withdrawalMessage = "Are you sure you want to leave Study ?"
+            withdrawalMessage = "Are you sure you want to " + leaveStudy + "?"
         }
         
         if withdrawalType == nil || withdrawalType == .notAvailable {
@@ -390,7 +390,7 @@ class ResourcesViewController: UIViewController{
         }
         
         
-        UIUtilities.showAlertMessageWithTwoActionsAndHandler(NSLocalizedString("Leave Study?", comment: ""), errorMessage: NSLocalizedString(withdrawalMessage!, comment: ""), errorAlertActionTitle: NSLocalizedString("Proceed", comment: ""),
+        UIUtilities.showAlertMessageWithTwoActionsAndHandler(NSLocalizedString((leaveStudy + " ?"), comment: ""), errorMessage: NSLocalizedString(withdrawalMessage!, comment: ""), errorAlertActionTitle: NSLocalizedString("Proceed", comment: ""),
                                                              errorAlertActionTitle2: NSLocalizedString("Cancel", comment: ""), viewControllerUsed: self,
                                                              action1: {
                                                                 

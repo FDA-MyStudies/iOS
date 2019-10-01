@@ -4,9 +4,9 @@
 <array>
 	<dict>
 		<key>title</key>
-		<string>Welcome! </string>
+		<string>IBD PROdigy</string>
 		<key>text</key>
-		<string>The Crohn’s &amp; Colitis Foundation’s mission:To cure Crohn&apos;s disease and ulcerative colitis, and to improve the quality of life of children and adults affected by these diseases</string>
+		<string>Welcome to IBD PROdigy, the Crohn’s &amp; Colitis Foundation’s research participant tracking app. You are the expert on your IBD! We know your journey is unique. By learning from you, we can advance research and accelerate progress toward cures.</string>
 		<key>type</key>
 		<string>video</string>
 		<key>image</key>

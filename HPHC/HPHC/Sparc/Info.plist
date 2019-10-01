@@ -7,7 +7,8 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
-	<string>mSPARC</string>
+	<string>IBD PROdigy
+</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -21,7 +22,7 @@
 	<key>CFBundleShortVersionString</key>
 	<string>1.0</string>
 	<key>CFBundleVersion</key>
-	<string>2</string>
+	<string>1</string>
 	<key>Fabric</key>
 	<dict>
 		<key>APIKey</key>
@@ -66,7 +67,7 @@
 	<key>OrganizationID</key>
 	<string>OrgName</string>
 	<key>ProductTitleName</key>
-	<string>mSPARC</string>
+	<string>IBD PROdigy</string>
 	<key>StandaloneStudyId</key>
 	<string>appstudy2</string>
 	<key>UIAppFonts</key>

@@ -287,7 +287,8 @@ class LocalNotification: NSObject {
         
         let userInfo = ["registerApp": "mystudies",
                         ]
-        let date = Date().addingTimeInterval(60*60*24*14)
+        //let date = Date().addingTimeInterval(60*60*24*14)
+        let date = Date().addingTimeInterval(60)
         
         
         var infoDict: NSDictionary?

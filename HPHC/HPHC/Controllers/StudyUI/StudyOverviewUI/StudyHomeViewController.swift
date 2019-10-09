@@ -306,7 +306,7 @@ class StudyHomeViewController: UIViewController {
 
         let consentTask: ORKOrderedTask? = ConsentBuilder.currentConsent?.createConsentTask() as! ORKOrderedTask?
 
-        for stepDict in (consentTask?.steps)! {
+        for stepDict in (consentTask?.steps)! { 
             eligibilitySteps?.append(stepDict)
         }
 
@@ -861,14 +861,14 @@ extension StudyHomeViewController: NMWebServiceDelegate {
                 // self.removeProgressIndicator()
             }
 
-            if requestName as String == ResponseMethods.enroll.description {
+            else if requestName as String == ResponseMethods.enroll.description {
                 unHideSubViews()
                 
                 self.studyEnrollmentFailed(error: error)
                 
                
             }
-            if requestName as String == RegistrationMethods.updateStudyState.method.methodName
+            else if requestName as String == RegistrationMethods.updateStudyState.method.methodName
                 || requestName as String == RegistrationMethods.updateEligibilityConsentStatus.method.methodName {
                 unHideSubViews()
 
@@ -880,6 +880,9 @@ extension StudyHomeViewController: NMWebServiceDelegate {
                         self.navigationController?.popViewController(animated: true)
                     })
                 }
+            }
+            else {
+                 UIUtilities.showAlertWithTitleAndMessage(title: NSLocalizedString(kErrorTitle, comment: "") as NSString, message: error.localizedDescription as NSString)
             }
         }
     }

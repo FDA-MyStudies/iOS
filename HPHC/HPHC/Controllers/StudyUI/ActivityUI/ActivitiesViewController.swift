@@ -1110,7 +1110,10 @@ extension ActivitiesViewController: NMWebServiceDelegate {
                 
             }
             else {
-                UIUtilities.showAlertWithTitleAndMessage(title: NSLocalizedString(kErrorTitle, comment: "") as NSString, message: error.localizedDescription as NSString)
+                if error.code != 300 {
+                    UIUtilities.showAlertWithTitleAndMessage(title: NSLocalizedString(kErrorTitle, comment: "") as NSString, message: error.localizedDescription as NSString)
+                }
+                
             }
         }
     }

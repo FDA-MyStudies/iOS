@@ -29,6 +29,9 @@ let kHelperTextForOffline = "Sorry, no studies available right now. Please remai
 let kNotificationViewControllerIdentifier = "NotificationViewControllerIdentifier"
 
 class StudyListViewController: UIViewController {
+    
+    // MARK:- Outlets
+    
     @IBOutlet var tableView: UITableView?
     @IBOutlet var labelHelperText: UILabel!
 
@@ -539,6 +542,7 @@ class StudyListViewController: UIViewController {
 
         if segue.identifier == filterListSegue {
             let filterVc = (segue.destination as? StudyFilterViewController)!
+           
             if StudyFilterHandler.instance.previousAppliedFilters.count > 0 {
                 filterVc.previousCollectionData = StudyFilterHandler.instance.previousAppliedFilters
             }

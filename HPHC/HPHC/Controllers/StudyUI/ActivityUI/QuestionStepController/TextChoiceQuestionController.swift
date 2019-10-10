@@ -32,6 +32,25 @@ struct OtherChoice {
     }
 }
 
+class QuestionStep: ORKQuestionStep {
+    
+    lazy var otherChoice = OtherChoice()
+    
+    init(identifier: String, title: String?, question: String, answer: ORKAnswerFormat,otherChoice: OtherChoice) {
+        super.init(identifier: identifier)
+        self.title = title
+        self.question = question
+        self.answerFormat = answer
+        self.otherChoice = otherChoice
+    }
+    
+    required init(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+}
+
 class TextChoiceQuestionController: ORKQuestionStepViewController {
     
     

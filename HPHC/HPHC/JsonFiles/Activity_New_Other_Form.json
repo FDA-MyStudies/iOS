@@ -1,0 +1,3608 @@
+{
+    "message": "SUCCESS",
+    "activity": {
+        "type": "questionnaire",
+        "metadata": {
+            "studyId": "SPARCIBDSTAGING",
+            "activityId": "IBDbaseline",
+            "name": "IBDbaseline",
+            "version": "1.0",
+            "lastModified": "2019-03-14T09:25:51.000-0700",
+            "startDate": "2019-03-14T12:26:00.000-0700",
+            "endDate": "2019-03-15T12:26:00.000-0700"
+        },
+        "steps": [
+            {
+                "type": "form",
+                "resultType": "grouped",
+                "key": "IBDmeddetails",
+                "title": "",
+                "text": "",
+                "skippable": true,
+                "groupName": "",
+                "repeatable": true,
+                "repeatableText": "I have more medications to add",
+                "destinations": [
+                    {
+                        "condition": "",
+                        "operator": "",
+                        "destination": "IBDabx"
+                    }
+                ],
+                "healthDataKey": "",
+                "format": {},
+                "steps": [
+                    {
+                        "type": "question",
+                        "resultType": "textChoice",
+                        "key": "IBDmedlist",
+                        "title": "IBD medication",
+                        "text": "",
+                        "skippable": true,
+                        "groupName": "",
+                        "repeatable": false,
+                        "repeatableText": "",
+                        "destinations": [],
+                        "healthDataKey": "",
+                        "format": {
+                            "textChoices": [
+                                {
+                                    "text": "7-Mercaptopurine, (7MP, Purinethol)",
+                                    "value": "6-Mercaptopurine",
+                                    "detail": "",
+                                    "exclusive": false
+                                },
+                                {
+                                    "text": "Adalimumab (Humira)",
+                                    "value": "Adalimumab",
+                                    "detail": "",
+                                    "exclusive": false
+                                },
+                                {
+                                    "text":"Other choice",
+                                    "value":"3",
+                                    "detail":"",
+                                    "exclusive":false,
+                                    "other":{
+                                        "placeholder":"other medication",
+                                        "isMandatory":true,
+                                        "textfieldReq":true
+                                    }
+                                }
+                            ],
+                            "selectionStyle": "Single"
+                        },
+                        "steps": [],
+                        "options": []
+                    }
+                ],
+                "options": []
+            },
+            {
+                "type": "instruction",
+                "resultType": "",
+                "key": "IBDwelcome",
+                "title": "Thank you for participating in SPARC IBD!",
+                "text": "We would like to learn a little bit about you to better understand how your Inflammatory Bowel Disease (IBD) is currently affecting you. Please answer the survey below, which asks questions about your background, current IBD medications, and IBD symptoms.\r\nThanks again for your participation!",
+                "skippable": false,
+                "groupName": "",
+                "repeatable": false,
+                "repeatableText": "",
+                "destinations": [
+                    {
+                        "condition": "",
+                        "operator": "",
+                        "destination": "IBDethnicity"
+                    }
+                ],
+                "healthDataKey": "",
+                "format": {},
+                "steps": [],
+                "options": []
+            },
+            {
+                "type": "question",
+                "resultType": "textChoice",
+                "key": "IBDethnicity",
+                "title": "Please identify your ethnicity?",
+                "text": "",
+                "skippable": true,
+                "groupName": "",
+                "repeatable": false,
+                "repeatableText": "",
+                "destinations": [
+                    {
+                        "condition": "HispanicLatino",
+                        "operator": "",
+                        "destination": "IBDrace"
+                    },
+                    {
+                        "condition": "NotHispanicLatino",
+                        "operator": "",
+                        "destination": "IBDrace"
+                    },
+                    {
+                        "condition": "",
+                        "operator": "",
+                        "destination": "IBDrace"
+                    }
+                ],
+                "healthDataKey": "",
+                "format": {
+                    "textChoices": [
+                        {
+                            "text": "Hispanic or Latino",
+                            "value": "HispanicLatino",
+                            "detail": "",
+                            "exclusive": false
+                        },
+                        {
+                            "text": "Not Hispanic or Latino",
+                            "value": "NotHispanicLatino",
+                            "detail": "",
+                            "exclusive": false
+                        }
+                    ],
+                    "selectionStyle": "Single"
+                },
+                "steps": [],
+                "options": []
+            },
+            {
+                "type": "question",
+                "resultType": "textChoice",
+                "key": "IBDrace",
+                "title": "Which of the following best describe you? (Select all that apply)",
+                "text": "",
+                "skippable": true,
+                "groupName": "",
+                "repeatable": false,
+                "repeatableText": "",
+                "destinations": [
+                    {
+                        "condition": "white",
+                        "operator": "",
+                        "destination": "IBDcountry"
+                    },
+                    {
+                        "condition": "BlackAfrAm",
+                        "operator": "",
+                        "destination": "IBDcountry"
+                    },
+                    {
+                        "condition": "Asian",
+                        "operator": "",
+                        "destination": "IBDcountry"
+                    },
+                    {
+                        "condition": "AIAN",
+                        "operator": "",
+                        "destination": "IBDcountry"
+                    },
+                    {
+                        "condition": "NHOPI",
+                        "operator": "",
+                        "destination": "IBDcountry"
+                    },
+                    {
+                        "condition": "otherrace",
+                        "operator": "",
+                        "destination": "IBDcountry"
+                    },
+                    {
+                        "condition": "",
+                        "operator": "",
+                        "destination": "IBDcountry"
+                    }
+                ],
+                "healthDataKey": "",
+                "format": {
+                    "textChoices": [
+                        {
+                            "text": "White",
+                            "value": "white",
+                            "detail": "",
+                            "exclusive": false
+                        },
+                        {
+                            "text": "Black or African American",
+                            "value": "BlackAfrAm",
+                            "detail": "",
+                            "exclusive": false
+                        },
+                        {
+                            "text": "Asian or Asian American",
+                            "value": "Asian",
+                            "detail": "",
+                            "exclusive": false
+                        },
+                        {
+                            "text": "American Indian or Alaska Native",
+                            "value": "AIAN",
+                            "detail": "",
+                            "exclusive": false
+                        },
+                        {
+                            "text": "Native Hawaiian or other Pacific Islander",
+                            "value": "NHOPI",
+                            "detail": "",
+                            "exclusive": false
+                        },
+                        {
+                            "text": "Other race",
+                            "value": "otherrace",
+                            "detail": "",
+                            "exclusive": false
+                        }
+                    ],
+                    "selectionStyle": "Multiple"
+                },
+                "steps": [],
+                "options": []
+            },
+            {
+                "type": "question",
+                "resultType": "textChoice",
+                "key": "IBDcountry",
+                "title": "In what country were you born?",
+                "text": "",
+                "skippable": true,
+                "groupName": "",
+                "repeatable": false,
+                "repeatableText": "",
+                "destinations": [
+                    {
+                        "condition": "US",
+                        "operator": "",
+                        "destination": "IBDgender"
+                    },
+                    {
+                        "condition": "Australia",
+                        "operator": "",
+                        "destination": "IBDgender"
+                    },
+                    {
+                        "condition": "Brazil",
+                        "operator": "",
+                        "destination": "IBDgender"
+                    },
+                    {
+                        "condition": "Canada",
+                        "operator": "",
+                        "destination": "IBDgender"
+                    },
+                    {
+                        "condition": "China",
+                        "operator": "",
+                        "destination": "IBDgender"
+                    },
+                    {
+                        "condition": "France",
+                        "operator": "",
+                        "destination": "IBDgender"
+                    },
+                    {
+                        "condition": "Germany",
+                        "operator": "",
+                        "destination": "IBDgender"
+                    },
+                    {
+                        "condition": "India",
+                        "operator": "",
+                        "destination": "IBDgender"
+                    },
+                    {
+                        "condition": "Italy",
+                        "operator": "",
+                        "destination": "IBDgender"
+                    },
+                    {
+                        "condition": "Japan",
+                        "operator": "",
+                        "destination": "IBDgender"
+                    },
+                    {
+                        "condition": "Mexico",
+                        "operator": "",
+                        "destination": "IBDgender"
+                    },
+                    {
+                        "condition": "NewZealand",
+                        "operator": "",
+                        "destination": "IBDgender"
+                    },
+                    {
+                        "condition": "Russia",
+                        "operator": "",
+                        "destination": "IBDgender"
+                    },
+                    {
+                        "condition": "Spain",
+                        "operator": "",
+                        "destination": "IBDgender"
+                    },
+                    {
+                        "condition": "UnitedKingdom",
+                        "operator": "",
+                        "destination": "IBDgender"
+                    },
+                    {
+                        "condition": "Othercountry",
+                        "operator": "",
+                        "destination": "IBDgender"
+                    },
+                    {
+                        "condition": "",
+                        "operator": "",
+                        "destination": "IBDgender"
+                    }
+                ],
+                "healthDataKey": "",
+                "format": {
+                    "textChoices": [
+                        {
+                            "text": "United States",
+                            "value": "US",
+                            "detail": "",
+                            "exclusive": false
+                        },
+                        {
+                            "text": "Australia",
+                            "value": "Australia",
+                            "detail": "",
+                            "exclusive": false
+                        },
+                        {
+                            "text": "Brazil",
+                            "value": "Brazil",
+                            "detail": "",
+                            "exclusive": false
+                        },
+                        {
+                            "text": "Canada",
+                            "value": "Canada",
+                            "detail": "",
+                            "exclusive": false
+                        },
+                        {
+                            "text": "China",
+                            "value": "China",
+                            "detail": "",
+                            "exclusive": false
+                        },
+                        {
+                            "text": "France",
+                            "value": "France",
+                            "detail": "",
+                            "exclusive": false
+                        },
+                        {
+                            "text": "Germany",
+                            "value": "Germany",
+                            "detail": "",
+                            "exclusive": false
+                        },
+                        {
+                            "text": "India",
+                            "value": "India",
+                            "detail": "",
+                            "exclusive": false
+                        },
+                        {
+                            "text": "Italy",
+                            "value": "Italy",
+                            "detail": "",
+                            "exclusive": false
+                        },
+                        {
+                            "text": "Japan",
+                            "value": "Japan",
+                            "detail": "",
+                            "exclusive": false
+                        },
+                        {
+                            "text": "Mexico",
+                            "value": "Mexico",
+                            "detail": "",
+                            "exclusive": false
+                        },
+                        {
+                            "text": "New Zealand",
+                            "value": "NewZealand",
+                            "detail": "",
+                            "exclusive": false
+                        },
+                        {
+                            "text": "Russia",
+                            "value": "Russia",
+                            "detail": "",
+                            "exclusive": false
+                        },
+                        {
+                            "text": "Spain",
+                            "value": "Spain",
+                            "detail": "",
+                            "exclusive": false
+                        },
+                        {
+                            "text": "United Kingdom",
+                            "value": "UnitedKingdom",
+                            "detail": "",
+                            "exclusive": false
+                        },
+                        {
+                            "text": "Other",
+                            "value": "Othercountry",
+                            "detail": "",
+                            "exclusive": false
+                        }
+                    ],
+                    "selectionStyle": "Single"
+                },
+                "steps": [],
+                "options": []
+            },
+            {
+                "type": "question",
+                "resultType": "textChoice",
+                "key": "IBDgender",
+                "title": "How would you describe your gender identity? (Select all that apply)",
+                "text": "",
+                "skippable": true,
+                "groupName": "",
+                "repeatable": false,
+                "repeatableText": "",
+                "destinations": [
+                    {
+                        "condition": "man",
+                        "operator": "",
+                        "destination": "IBDschool"
+                    },
+                    {
+                        "condition": "woman",
+                        "operator": "",
+                        "destination": "IBDschool"
+                    },
+                    {
+                        "condition": "nonbinary",
+                        "operator": "",
+                        "destination": "IBDschool"
+                    },
+                    {
+                        "condition": "trans",
+                        "operator": "",
+                        "destination": "IBDschool"
+                    },
+                    {
+                        "condition": "prefernoanswer",
+                        "operator": "",
+                        "destination": "IBDschool"
+                    },
+                    {
+                        "condition": "",
+                        "operator": "",
+                        "destination": "IBDschool"
+                    }
+                ],
+                "healthDataKey": "",
+                "format": {
+                    "textChoices": [
+                        {
+                            "text": "Man",
+                            "value": "man",
+                            "detail": "",
+                            "exclusive": false
+                        },
+                        {
+                            "text": "Woman",
+                            "value": "woman",
+                            "detail": "",
+                            "exclusive": false
+                        },
+                        {
+                            "text": "Non-binary",
+                            "value": "nonbinary",
+                            "detail": "",
+                            "exclusive": false
+                        },
+                        {
+                            "text": "Transgender",
+                            "value": "trans",
+                            "detail": "",
+                            "exclusive": false
+                        },
+                        {
+                            "text": "Prefer not to answer",
+                            "value": "prefernoanswer",
+                            "detail": "",
+                            "exclusive": false
+                        }
+                    ],
+                    "selectionStyle": "Multiple"
+                },
+                "steps": [],
+                "options": []
+            },
+            {
+                "type": "question",
+                "resultType": "textChoice",
+                "key": "IBDschool",
+                "title": "What is the highest level of school you have completed or the highest degree you have received?",
+                "text": "",
+                "skippable": true,
+                "groupName": "",
+                "repeatable": false,
+                "repeatableText": "",
+                "destinations": [
+                    {
+                        "condition": "nodiploma",
+                        "operator": "",
+                        "destination": "IBDincome"
+                    },
+                    {
+                        "condition": "highschooldiploma",
+                        "operator": "",
+                        "destination": "IBDincome"
+                    },
+                    {
+                        "condition": "somecollege",
+                        "operator": "",
+                        "destination": "IBDincome"
+                    },
+                    {
+                        "condition": "associate",
+                        "operator": "",
+                        "destination": "IBDincome"
+                    },
+                    {
+                        "condition": "bachelor",
+                        "operator": "",
+                        "destination": "IBDincome"
+                    },
+                    {
+                        "condition": "graduate",
+                        "operator": "",
+                        "destination": "IBDincome"
+                    },
+                    {
+                        "condition": "",
+                        "operator": "",
+                        "destination": "IBDincome"
+                    }
+                ],
+                "healthDataKey": "",
+                "format": {
+                    "textChoices": [
+                        {
+                            "text": "Less than a high school diploma",
+                            "value": "nodiploma",
+                            "detail": "",
+                            "exclusive": false
+                        },
+                        {
+                            "text": "High school degree or equivalent",
+                            "value": "highschooldiploma",
+                            "detail": "e.g. GED",
+                            "exclusive": false
+                        },
+                        {
+                            "text": "Some college, no degree",
+                            "value": "somecollege",
+                            "detail": "",
+                            "exclusive": false
+                        },
+                        {
+                            "text": "Associate degree",
+                            "value": "associate",
+                            "detail": "",
+                            "exclusive": false
+                        },
+                        {
+                            "text": "Bachelor degree",
+                            "value": "bachelor",
+                            "detail": "",
+                            "exclusive": false
+                        },
+                        {
+                            "text": "Graduate degree",
+                            "value": "graduate",
+                            "detail": "e.g. MA, MD, PhD",
+                            "exclusive": false
+                        }
+                    ],
+                    "selectionStyle": "Single"
+                },
+                "steps": [],
+                "options": []
+            },
+            {
+                "type": "question",
+                "resultType": "textChoice",
+                "key": "IBDincome",
+                "title": "What is your total annual household income?",
+                "text": "",
+                "skippable": true,
+                "groupName": "",
+                "repeatable": false,
+                "repeatableText": "",
+                "destinations": [
+                    {
+                        "condition": "less20",
+                        "operator": "",
+                        "destination": "IBDsmoking"
+                    },
+                    {
+                        "condition": "20to35",
+                        "operator": "",
+                        "destination": "IBDsmoking"
+                    },
+                    {
+                        "condition": "35to50",
+                        "operator": "",
+                        "destination": "IBDsmoking"
+                    },
+                    {
+                        "condition": "50to75",
+                        "operator": "",
+                        "destination": "IBDsmoking"
+                    },
+                    {
+                        "condition": "75to100",
+                        "operator": "",
+                        "destination": "IBDsmoking"
+                    },
+                    {
+                        "condition": "100to150",
+                        "operator": "",
+                        "destination": "IBDsmoking"
+                    },
+                    {
+                        "condition": "over150",
+                        "operator": "",
+                        "destination": "IBDsmoking"
+                    },
+                    {
+                        "condition": "prefernoanswer",
+                        "operator": "",
+                        "destination": "IBDsmoking"
+                    },
+                    {
+                        "condition": "",
+                        "operator": "",
+                        "destination": "IBDsmoking"
+                    }
+                ],
+                "healthDataKey": "",
+                "format": {
+                    "textChoices": [
+                        {
+                            "text": "Less than $20,000",
+                            "value": "less20",
+                            "detail": "",
+                            "exclusive": false
+                        },
+                        {
+                            "text": "$20,000 to $34,999",
+                            "value": "20to35",
+                            "detail": "",
+                            "exclusive": false
+                        },
+                        {
+                            "text": "$35,000 to $49,999",
+                            "value": "35to50",
+                            "detail": "",
+                            "exclusive": false
+                        },
+                        {
+                            "text": "$50,000 to $74,999",
+                            "value": "50to75",
+                            "detail": "",
+                            "exclusive": false
+                        },
+                        {
+                            "text": "$75,000 to $99,999",
+                            "value": "75to100",
+                            "detail": "",
+                            "exclusive": false
+                        },
+                        {
+                            "text": "$100,000 to $149,999",
+                            "value": "100to150",
+                            "detail": "",
+                            "exclusive": false
+                        },
+                        {
+                            "text": "Over $150,000",
+                            "value": "over150",
+                            "detail": "",
+                            "exclusive": false
+                        },
+                        {
+                            "text": "Prefer not to answer",
+                            "value": "prefernoanswer",
+                            "detail": "",
+                            "exclusive": false
+                        }
+                    ],
+                    "selectionStyle": "Single"
+                },
+                "steps": [],
+                "options": []
+            },
+            {
+                "type": "question",
+                "resultType": "textChoice",
+                "key": "IBDsmoking",
+                "title": "Do you currently smoke at least 7 cigarettes or e-cigarettes with tobacco per week?",
+                "text": "",
+                "skippable": true,
+                "groupName": "",
+                "repeatable": false,
+                "repeatableText": "",
+                "destinations": [
+                    {
+                        "condition": "Yes",
+                        "operator": "",
+                        "destination": "IBDtravel"
+                    },
+                    {
+                        "condition": "No",
+                        "operator": "",
+                        "destination": "IBDtravel"
+                    },
+                    {
+                        "condition": "",
+                        "operator": "",
+                        "destination": "IBDtravel"
+                    }
+                ],
+                "healthDataKey": "",
+                "format": {
+                    "textChoices": [
+                        {
+                            "text": "Yes",
+                            "value": "Yes",
+                            "detail": "",
+                            "exclusive": false
+                        },
+                        {
+                            "text": "No",
+                            "value": "No",
+                            "detail": "",
+                            "exclusive": false
+                        }
+                    ],
+                    "selectionStyle": "Single"
+                },
+                "steps": [],
+                "options": []
+            },
+            {
+                "type": "question",
+                "resultType": "textChoice",
+                "key": "IBDtravel",
+                "title": "How long did it take you to travel here for today's visit?",
+                "text": "",
+                "skippable": true,
+                "groupName": "",
+                "repeatable": false,
+                "repeatableText": "",
+                "destinations": [
+                    {
+                        "condition": "30min",
+                        "operator": "",
+                        "destination": "IBDcurrentmed"
+                    },
+                    {
+                        "condition": "30to60min",
+                        "operator": "",
+                        "destination": "IBDcurrentmed"
+                    },
+                    {
+                        "condition": "60to120min",
+                        "operator": "",
+                        "destination": "IBDcurrentmed"
+                    },
+                    {
+                        "condition": "over120min",
+                        "operator": "",
+                        "destination": "IBDcurrentmed"
+                    },
+                    {
+                        "condition": "",
+                        "operator": "",
+                        "destination": "IBDcurrentmed"
+                    }
+                ],
+                "healthDataKey": "",
+                "format": {
+                    "textChoices": [
+                        {
+                            "text": "Less than 30mins",
+                            "value": "30min",
+                            "detail": "",
+                            "exclusive": false
+                        },
+                        {
+                            "text": "Between 30mins-1hr",
+                            "value": "30to60min",
+                            "detail": "",
+                            "exclusive": false
+                        },
+                        {
+                            "text": "Between1-2hrs",
+                            "value": "60to120min",
+                            "detail": "",
+                            "exclusive": false
+                        },
+                        {
+                            "text": "More than 2hrs",
+                            "value": "over120min",
+                            "detail": "",
+                            "exclusive": false
+                        }
+                    ],
+                    "selectionStyle": "Single"
+                },
+                "steps": [],
+                "options": []
+            },
+            {
+                "type": "question",
+                "resultType": "textChoice",
+                "key": "IBDcurrentmed",
+                "title": "Are you currently taking medication for your IBD?",
+                "text": "",
+                "skippable": true,
+                "groupName": "",
+                "repeatable": false,
+                "repeatableText": "",
+                "destinations": [
+                    {
+                        "condition": "Yes",
+                        "operator": "",
+                        "destination": "IBDmeddetails"
+                    },
+                    {
+                        "condition": "No",
+                        "operator": "",
+                        "destination": "IBDmeddetails"
+                    },
+                    {
+                        "condition": "",
+                        "operator": "",
+                        "destination": "IBDmeddetails"
+                    }
+                ],
+                "healthDataKey": "",
+                "format": {
+                    "textChoices": [
+                        {
+                            "text": "Yes",
+                            "value": "Yes",
+                            "detail": "",
+                            "exclusive": false
+                        },
+                        {
+                            "text": "No",
+                            "value": "No",
+                            "detail": "",
+                            "exclusive": false
+                        }
+                    ],
+                    "selectionStyle": "Single"
+                },
+                "steps": [],
+                "options": []
+            },
+            {
+                "type": "question",
+                "resultType": "textChoice",
+                "key": "IBDabx",
+                "title": "Are you currently taking any antibiotic for a reason related to your IBD?",
+                "text": "",
+                "skippable": true,
+                "groupName": "",
+                "repeatable": false,
+                "repeatableText": "",
+                "destinations": [
+                    {
+                        "condition": "Yes",
+                        "operator": "",
+                        "destination": "IBDabxmed"
+                    },
+                    {
+                        "condition": "No",
+                        "operator": "",
+                        "destination": "IBDabxmed"
+                    },
+                    {
+                        "condition": "",
+                        "operator": "",
+                        "destination": "IBDabxmed"
+                    }
+                ],
+                "healthDataKey": "",
+                "format": {
+                    "textChoices": [
+                        {
+                            "text": "Yes",
+                            "value": "Yes",
+                            "detail": "",
+                            "exclusive": false
+                        },
+                        {
+                            "text": "No",
+                            "value": "No",
+                            "detail": "",
+                            "exclusive": false
+                        }
+                    ],
+                    "selectionStyle": "Single"
+                },
+                "steps": [],
+                "options": []
+            },
+            {
+                "type": "question",
+                "resultType": "textChoice",
+                "key": "IBDabxmed",
+                "title": "Antibiotic",
+                "text": "",
+                "skippable": true,
+                "groupName": "",
+                "repeatable": false,
+                "repeatableText": "",
+                "destinations": [
+                    {
+                        "condition": "AmoxicillinClavulanate",
+                        "operator": "",
+                        "destination": "IBDabxroute"
+                    },
+                    {
+                        "condition": "Ciprofloxacin",
+                        "operator": "",
+                        "destination": "IBDabxroute"
+                    },
+                    {
+                        "condition": "Metronidazole",
+                        "operator": "",
+                        "destination": "IBDabxroute"
+                    },
+                    {
+                        "condition": "Rifaximin",
+                        "operator": "",
+                        "destination": "IBDabxroute"
+                    },
+                    {
+                        "condition": "SulfamethoxazoleTrimethoprim",
+                        "operator": "",
+                        "destination": "IBDabxroute"
+                    },
+                    {
+                        "condition": "Vancomycin",
+                        "operator": "",
+                        "destination": "IBDabxroute"
+                    },
+                    {
+                        "condition": "notsure",
+                        "operator": "",
+                        "destination": "IBDabxroute"
+                    },
+                    {
+                        "condition": "otherabx",
+                        "operator": "",
+                        "destination": "IBDabxroute"
+                    },
+                    {
+                        "condition": "",
+                        "operator": "",
+                        "destination": "IBDabxroute"
+                    }
+                ],
+                "healthDataKey": "",
+                "format": {
+                    "textChoices": [
+                        {
+                            "text": "Amoxicillin Clavulanate (Augmentin)",
+                            "value": "AmoxicillinClavulanate",
+                            "detail": "",
+                            "exclusive": false
+                        },
+                        {
+                            "text": "Ciprofloxacin (Cipro)",
+                            "value": "Ciprofloxacin",
+                            "detail": "",
+                            "exclusive": false
+                        },
+                        {
+                            "text": "Metronidazole (Flagyl)",
+                            "value": "Metronidazole",
+                            "detail": "",
+                            "exclusive": false
+                        },
+                        {
+                            "text": "Rifaximin (Xifaxan)",
+                            "value": "Rifaximin",
+                            "detail": "",
+                            "exclusive": false
+                        },
+                        {
+                            "text": "Sulfamethoxazole and trimethoprim (Bactrim, ceptra)",
+                            "value": "SulfamethoxazoleTrimethoprim",
+                            "detail": "",
+                            "exclusive": false
+                        },
+                        {
+                            "text": "Vancomycin (Vancocin®)",
+                            "value": "Vancomycin",
+                            "detail": "",
+                            "exclusive": false
+                        },
+                        {
+                            "text": "Not sure",
+                            "value": "notsure",
+                            "detail": "",
+                            "exclusive": false
+                        },
+                        {
+                            "text": "Other",
+                            "value": "otherabx",
+                            "detail": "",
+                            "exclusive": false
+                        }
+                    ],
+                    "selectionStyle": "Single"
+                },
+                "steps": [],
+                "options": []
+            },
+            {
+                "type": "question",
+                "resultType": "textChoice",
+                "key": "IBDabxroute",
+                "title": "Route of administration",
+                "text": "How do you take your antibiotic?",
+                "skippable": true,
+                "groupName": "",
+                "repeatable": false,
+                "repeatableText": "",
+                "destinations": [
+                    {
+                        "condition": "abxdrops",
+                        "operator": "",
+                        "destination": "IBDabxstart"
+                    },
+                    {
+                        "condition": "abxinjection",
+                        "operator": "",
+                        "destination": "IBDabxstart"
+                    },
+                    {
+                        "condition": "abxintravenous",
+                        "operator": "",
+                        "destination": "IBDabxstart"
+                    },
+                    {
+                        "condition": "abxoral",
+                        "operator": "",
+                        "destination": "IBDabxstart"
+                    },
+                    {
+                        "condition": "abxrectal",
+                        "operator": "",
+                        "destination": "IBDabxstart"
+                    },
+                    {
+                        "condition": "abxvaginal",
+                        "operator": "",
+                        "destination": "IBDabxstart"
+                    },
+                    {
+                        "condition": "abxtopical",
+                        "operator": "",
+                        "destination": "IBDabxstart"
+                    },
+                    {
+                        "condition": "abxotherroute",
+                        "operator": "",
+                        "destination": "IBDabxstart"
+                    },
+                    {
+                        "condition": "",
+                        "operator": "",
+                        "destination": "IBDabxstart"
+                    }
+                ],
+                "healthDataKey": "",
+                "format": {
+                    "textChoices": [
+                        {
+                            "text": "Drops",
+                            "value": "abxdrops",
+                            "detail": "",
+                            "exclusive": false
+                        },
+                        {
+                            "text": "Injection",
+                            "value": "abxinjection",
+                            "detail": "",
+                            "exclusive": false
+                        },
+                        {
+                            "text": "Intravenous (through the vein)",
+                            "value": "abxintravenous",
+                            "detail": "",
+                            "exclusive": false
+                        },
+                        {
+                            "text": "Oral",
+                            "value": "abxoral",
+                            "detail": "",
+                            "exclusive": false
+                        },
+                        {
+                            "text": "Rectal",
+                            "value": "abxrectal",
+                            "detail": "",
+                            "exclusive": false
+                        },
+                        {
+                            "text": "Vaginal",
+                            "value": "abxvaginal",
+                            "detail": "",
+                            "exclusive": false
+                        },
+                        {
+                            "text": "Topical (lotion or cream)",
+                            "value": "abxtopical",
+                            "detail": "",
+                            "exclusive": false
+                        },
+                        {
+                            "text": "Other",
+                            "value": "abxotherroute",
+                            "detail": "",
+                            "exclusive": false
+                        }
+                    ],
+                    "selectionStyle": "Single"
+                },
+                "steps": [],
+                "options": []
+            },
+            {
+                "type": "question",
+                "resultType": "date",
+                "key": "IBDabxstart",
+                "title": "Approximately when did you start taking this medication?",
+                "text": "Please enter the date in the format MM/DD/YYYY",
+                "skippable": true,
+                "groupName": "",
+                "repeatable": false,
+                "repeatableText": "",
+                "destinations": [
+                    {
+                        "condition": "",
+                        "operator": "",
+                        "destination": "IBDprobiotic"
+                    }
+                ],
+                "healthDataKey": "",
+                "format": {
+                    "style": "Date",
+                    "minDate": "",
+                    "maxDate": "",
+                    "default": "",
+                    "dateRange": "untilCurrent"
+                },
+                "steps": [],
+                "options": []
+            },
+            {
+                "type": "question",
+                "resultType": "boolean",
+                "key": "IBDprobiotic",
+                "title": "Are you currently taking any probiotic?",
+                "text": "",
+                "skippable": true,
+                "groupName": "",
+                "repeatable": false,
+                "repeatableText": "",
+                "destinations": [
+                    {
+                        "condition": "true",
+                        "operator": "",
+                        "destination": "IBDprotype"
+                    },
+                    {
+                        "condition": "false",
+                        "operator": "",
+                        "destination": "IBDprotype"
+                    },
+                    {
+                        "condition": "",
+                        "operator": "",
+                        "destination": "IBDprotype"
+                    }
+                ],
+                "healthDataKey": "",
+                "format": {},
+                "steps": [],
+                "options": []
+            },
+            {
+                "type": "question",
+                "resultType": "textChoice",
+                "key": "IBDprotype",
+                "title": "Probiotic",
+                "text": "",
+                "skippable": true,
+                "groupName": "",
+                "repeatable": false,
+                "repeatableText": "",
+                "destinations": [
+                    {
+                        "condition": "VSL3",
+                        "operator": "",
+                        "destination": "IBDsymptoms"
+                    },
+                    {
+                        "condition": "otherprobiotic",
+                        "operator": "",
+                        "destination": "IBDsymptoms"
+                    },
+                    {
+                        "condition": "",
+                        "operator": "",
+                        "destination": "IBDsymptoms"
+                    }
+                ],
+                "healthDataKey": "",
+                "format": {
+                    "textChoices": [
+                        {
+                            "text": "Probiotic - VSL3",
+                            "value": "VSL3",
+                            "detail": "",
+                            "exclusive": false
+                        },
+                        {
+                            "text": "Other",
+                            "value": "otherprobiotic",
+                            "detail": "",
+                            "exclusive": false
+                        }
+                    ],
+                    "selectionStyle": "Single"
+                },
+                "steps": [],
+                "options": []
+            },
+            {
+                "type": "instruction",
+                "resultType": "",
+                "key": "IBDsymptoms",
+                "title": "IBD Symptoms module",
+                "text": "Now, we would like to learn a little more about your symptoms and how your IBD is affecting you.",
+                "skippable": false,
+                "groupName": "",
+                "repeatable": false,
+                "repeatableText": "",
+                "destinations": [
+                    {
+                        "condition": "",
+                        "operator": "",
+                        "destination": "IBDpast6months"
+                    }
+                ],
+                "healthDataKey": "",
+                "format": {},
+                "steps": [],
+                "options": []
+            },
+            {
+                "type": "question",
+                "resultType": "textChoice",
+                "key": "IBDpast6months",
+                "title": "Which of the following best describe your IBD over past 6 months?",
+                "text": "",
+                "skippable": true,
+                "groupName": "",
+                "repeatable": false,
+                "repeatableText": "",
+                "destinations": [
+                    {
+                        "condition": "constantlyactive",
+                        "operator": "",
+                        "destination": "IBDdailyBM"
+                    },
+                    {
+                        "condition": "oftenactive",
+                        "operator": "",
+                        "destination": "IBDdailyBM"
+                    },
+                    {
+                        "condition": "sometimesactive",
+                        "operator": "",
+                        "destination": "IBDdailyBM"
+                    },
+                    {
+                        "condition": "occasionallyactive",
+                        "operator": "",
+                        "destination": "IBDdailyBM"
+                    },
+                    {
+                        "condition": "rarelyactive",
+                        "operator": "",
+                        "destination": "IBDdailyBM"
+                    },
+                    {
+                        "condition": "remission",
+                        "operator": "",
+                        "destination": "IBDdailyBM"
+                    },
+                    {
+                        "condition": "",
+                        "operator": "",
+                        "destination": "IBDdailyBM"
+                    }
+                ],
+                "healthDataKey": "",
+                "format": {
+                    "textChoices": [
+                        {
+                            "text": "Constantly active, giving me symptoms every day",
+                            "value": "constantlyactive",
+                            "detail": "",
+                            "exclusive": false
+                        },
+                        {
+                            "text": "Often active, giving me symptoms most days",
+                            "value": "oftenactive",
+                            "detail": "",
+                            "exclusive": false
+                        },
+                        {
+                            "text": "Sometimes active, giving me symptoms on same days",
+                            "value": "sometimesactive",
+                            "detail": "",
+                            "exclusive": false
+                        },
+                        {
+                            "text": "Occasionally active, giving me symptoms 1-2 days/month",
+                            "value": "occasionallyactive",
+                            "detail": "",
+                            "exclusive": false
+                        },
+                        {
+                            "text": "Rarely active, giving me symptoms on a few days in the past 6 months",
+                            "value": "rarelyactive",
+                            "detail": "",
+                            "exclusive": false
+                        },
+                        {
+                            "text": "I was well in the past 6 months, what I consider a remission or absence of symptoms",
+                            "value": "remission",
+                            "detail": "",
+                            "exclusive": false
+                        }
+                    ],
+                    "selectionStyle": "Single"
+                },
+                "steps": [],
+                "options": []
+            },
+            {
+                "type": "question",
+                "resultType": "valuePicker",
+                "key": "IBDdailyBM",
+                "title": "When you are well, number of bowel movements typically each day",
+                "text": "",
+                "skippable": true,
+                "groupName": "",
+                "repeatable": false,
+                "repeatableText": "",
+                "destinations": [
+                    {
+                        "condition": "",
+                        "operator": "",
+                        "destination": "7daysSymptoms"
+                    }
+                ],
+                "healthDataKey": "",
+                "format": {
+                    "textChoices": [
+                        {
+                            "text": "0",
+                            "value": "0",
+                            "detail": "",
+                            "exclusive": true
+                        },
+                        {
+                            "text": "1",
+                            "value": "1",
+                            "detail": "",
+                            "exclusive": true
+                        },
+                        {
+                            "text": "2",
+                            "value": "2",
+                            "detail": "",
+                            "exclusive": true
+                        },
+                        {
+                            "text": "3",
+                            "value": "3",
+                            "detail": "",
+                            "exclusive": true
+                        },
+                        {
+                            "text": "4",
+                            "value": "4",
+                            "detail": "",
+                            "exclusive": true
+                        },
+                        {
+                            "text": "5",
+                            "value": "5",
+                            "detail": "",
+                            "exclusive": true
+                        },
+                        {
+                            "text": "6",
+                            "value": "6",
+                            "detail": "",
+                            "exclusive": true
+                        },
+                        {
+                            "text": "7",
+                            "value": "7",
+                            "detail": "",
+                            "exclusive": true
+                        },
+                        {
+                            "text": "8",
+                            "value": "8",
+                            "detail": "",
+                            "exclusive": true
+                        },
+                        {
+                            "text": "9",
+                            "value": "9",
+                            "detail": "",
+                            "exclusive": true
+                        },
+                        {
+                            "text": "10",
+                            "value": "10",
+                            "detail": "",
+                            "exclusive": true
+                        },
+                        {
+                            "text": "11",
+                            "value": "11",
+                            "detail": "",
+                            "exclusive": true
+                        },
+                        {
+                            "text": "12",
+                            "value": "12",
+                            "detail": "",
+                            "exclusive": true
+                        },
+                        {
+                            "text": "13",
+                            "value": "13",
+                            "detail": "",
+                            "exclusive": true
+                        },
+                        {
+                            "text": "14",
+                            "value": "14",
+                            "detail": "",
+                            "exclusive": true
+                        },
+                        {
+                            "text": "15",
+                            "value": "15",
+                            "detail": "",
+                            "exclusive": true
+                        },
+                        {
+                            "text": "16",
+                            "value": "16",
+                            "detail": "",
+                            "exclusive": true
+                        },
+                        {
+                            "text": "17",
+                            "value": "17",
+                            "detail": "",
+                            "exclusive": true
+                        },
+                        {
+                            "text": "18",
+                            "value": "18",
+                            "detail": "",
+                            "exclusive": true
+                        },
+                        {
+                            "text": "19",
+                            "value": "19",
+                            "detail": "",
+                            "exclusive": true
+                        },
+                        {
+                            "text": "20",
+                            "value": "20",
+                            "detail": "",
+                            "exclusive": true
+                        },
+                        {
+                            "text": "NA, I have an ostomy",
+                            "value": "NAostomy",
+                            "detail": "",
+                            "exclusive": true
+                        }
+                    ]
+                },
+                "steps": [],
+                "options": []
+            },
+            {
+                "type": "instruction",
+                "resultType": "",
+                "key": "7daysSymptoms",
+                "title": "For the remaining questions, please think about the symptoms you have been experiencing over past 7 days:",
+                "text": "IF YOU PREPARED FOR A COLONOSCOPY DURING THE LAST 7 DAYS, DO NOT CONSIDER THE DAY(S) THAT YOU PREPARED FOR YOUR COLONOSCOPY OR THE DAY OF THE COLONOSCOPY WHEN ANSWERING THESE QUESTIONS",
+                "skippable": false,
+                "groupName": "",
+                "repeatable": false,
+                "repeatableText": "",
+                "destinations": [
+                    {
+                        "condition": "",
+                        "operator": "",
+                        "destination": "IBDavgBM"
+                    }
+                ],
+                "healthDataKey": "",
+                "format": {},
+                "steps": [],
+                "options": []
+            },
+            {
+                "type": "question",
+                "resultType": "textChoice",
+                "key": "IBDavgBM",
+                "title": "Average number of bowel movements per day",
+                "text": "",
+                "skippable": true,
+                "groupName": "",
+                "repeatable": false,
+                "repeatableText": "",
+                "destinations": [
+                    {
+                        "condition": "one",
+                        "operator": "",
+                        "destination": "IBDstoolfreq"
+                    },
+                    {
+                        "condition": "two",
+                        "operator": "",
+                        "destination": "IBDstoolfreq"
+                    },
+                    {
+                        "condition": "three",
+                        "operator": "",
+                        "destination": "IBDstoolfreq"
+                    },
+                    {
+                        "condition": "four",
+                        "operator": "",
+                        "destination": "IBDstoolfreq"
+                    },
+                    {
+                        "condition": "five",
+                        "operator": "",
+                        "destination": "IBDstoolfreq"
+                    },
+                    {
+                        "condition": "six",
+                        "operator": "",
+                        "destination": "IBDstoolfreq"
+                    },
+                    {
+                        "condition": "seven",
+                        "operator": "",
+                        "destination": "IBDstoolfreq"
+                    },
+                    {
+                        "condition": "eight",
+                        "operator": "",
+                        "destination": "IBDstoolfreq"
+                    },
+                    {
+                        "condition": "nine",
+                        "operator": "",
+                        "destination": "IBDstoolfreq"
+                    },
+                    {
+                        "condition": "ten",
+                        "operator": "",
+                        "destination": "IBDstoolfreq"
+                    },
+                    {
+                        "condition": "eleven",
+                        "operator": "",
+                        "destination": "IBDstoolfreq"
+                    },
+                    {
+                        "condition": "twelve",
+                        "operator": "",
+                        "destination": "IBDstoolfreq"
+                    },
+                    {
+                        "condition": "thirteen",
+                        "operator": "",
+                        "destination": "IBDstoolfreq"
+                    },
+                    {
+                        "condition": "fourteen",
+                        "operator": "",
+                        "destination": "IBDstoolfreq"
+                    },
+                    {
+                        "condition": "fifteen",
+                        "operator": "",
+                        "destination": "IBDstoolfreq"
+                    },
+                    {
+                        "condition": "sixteen",
+                        "operator": "",
+                        "destination": "IBDstoolfreq"
+                    },
+                    {
+                        "condition": "seventeen",
+                        "operator": "",
+                        "destination": "IBDstoolfreq"
+                    },
+                    {
+                        "condition": "eighteen",
+                        "operator": "",
+                        "destination": "IBDstoolfreq"
+                    },
+                    {
+                        "condition": "nineteen",
+                        "operator": "",
+                        "destination": "IBDstoolfreq"
+                    },
+                    {
+                        "condition": "twenty",
+                        "operator": "",
+                        "destination": "IBDstoolfreq"
+                    },
+                    {
+                        "condition": "NAostomy",
+                        "operator": "",
+                        "destination": "IBDstoolfreq"
+                    },
+                    {
+                        "condition": "",
+                        "operator": "",
+                        "destination": "IBDstoolfreq"
+                    }
+                ],
+                "healthDataKey": "",
+                "format": {
+                    "textChoices": [
+                        {
+                            "text": "1",
+                            "value": "one",
+                            "detail": "",
+                            "exclusive": false
+                        },
+                        {
+                            "text": "2",
+                            "value": "two",
+                            "detail": "",
+                            "exclusive": false
+                        },
+                        {
+                            "text": "3",
+                            "value": "three",
+                            "detail": "",
+                            "exclusive": false
+                        },
+                        {
+                            "text": "4",
+                            "value": "four",
+                            "detail": "",
+                            "exclusive": false
+                        },
+                        {
+                            "text": "5",
+                            "value": "five",
+                            "detail": "",
+                            "exclusive": false
+                        },
+                        {
+                            "text": "6",
+                            "value": "six",
+                            "detail": "",
+                            "exclusive": false
+                        },
+                        {
+                            "text": "7",
+                            "value": "seven",
+                            "detail": "",
+                            "exclusive": false
+                        },
+                        {
+                            "text": "8",
+                            "value": "eight",
+                            "detail": "",
+                            "exclusive": false
+                        },
+                        {
+                            "text": "9",
+                            "value": "nine",
+                            "detail": "",
+                            "exclusive": false
+                        },
+                        {
+                            "text": "10",
+                            "value": "ten",
+                            "detail": "",
+                            "exclusive": false
+                        },
+                        {
+                            "text": "11",
+                            "value": "eleven",
+                            "detail": "",
+                            "exclusive": false
+                        },
+                        {
+                            "text": "12",
+                            "value": "twelve",
+                            "detail": "",
+                            "exclusive": false
+                        },
+                        {
+                            "text": "13",
+                            "value": "thirteen",
+                            "detail": "",
+                            "exclusive": false
+                        },
+                        {
+                            "text": "14",
+                            "value": "fourteen",
+                            "detail": "",
+                            "exclusive": false
+                        },
+                        {
+                            "text": "15",
+                            "value": "fifteen",
+                            "detail": "",
+                            "exclusive": false
+                        },
+                        {
+                            "text": "16",
+                            "value": "sixteen",
+                            "detail": "",
+                            "exclusive": false
+                        },
+                        {
+                            "text": "17",
+                            "value": "seventeen",
+                            "detail": "",
+                            "exclusive": false
+                        },
+                        {
+                            "text": "18",
+                            "value": "eighteen",
+                            "detail": "",
+                            "exclusive": false
+                        },
+                        {
+                            "text": "19",
+                            "value": "nineteen",
+                            "detail": "",
+                            "exclusive": false
+                        },
+                        {
+                            "text": "20",
+                            "value": "twenty",
+                            "detail": "",
+                            "exclusive": false
+                        },
+                        {
+                            "text": "Not applicable, I have an ostomy",
+                            "value": "NAostomy",
+                            "detail": "",
+                            "exclusive": false
+                        }
+                    ],
+                    "selectionStyle": "Single"
+                },
+                "steps": [],
+                "options": []
+            },
+            {
+                "type": "question",
+                "resultType": "textChoice",
+                "key": "IBDstoolfreq",
+                "title": "My stool frequency has been:",
+                "text": "",
+                "skippable": true,
+                "groupName": "",
+                "repeatable": false,
+                "repeatableText": "",
+                "destinations": [
+                    {
+                        "condition": "lessthannormal",
+                        "operator": "",
+                        "destination": "IBDsoftstool"
+                    },
+                    {
+                        "condition": "normal",
+                        "operator": "",
+                        "destination": "IBDsoftstool"
+                    },
+                    {
+                        "condition": "1to2more",
+                        "operator": "",
+                        "destination": "IBDsoftstool"
+                    },
+                    {
+                        "condition": "3to4more",
+                        "operator": "",
+                        "destination": "IBDsoftstool"
+                    },
+                    {
+                        "condition": "5more",
+                        "operator": "",
+                        "destination": "IBDsoftstool"
+                    },
+                    {
+                        "condition": "NAostomy",
+                        "operator": "",
+                        "destination": "IBDsoftstool"
+                    },
+                    {
+                        "condition": "",
+                        "operator": "",
+                        "destination": "IBDsoftstool"
+                    }
+                ],
+                "healthDataKey": "",
+                "format": {
+                    "textChoices": [
+                        {
+                            "text": "Less stool than normal",
+                            "value": "lessthannormal",
+                            "detail": "",
+                            "exclusive": false
+                        },
+                        {
+                            "text": "Normal (same as when I am well)",
+                            "value": "normal",
+                            "detail": "",
+                            "exclusive": false
+                        },
+                        {
+                            "text": "1-2 stools per day more than normal",
+                            "value": "1to2more",
+                            "detail": "",
+                            "exclusive": false
+                        },
+                        {
+                            "text": "3-4 stools per day more than normal",
+                            "value": "3to4more",
+                            "detail": "",
+                            "exclusive": false
+                        },
+                        {
+                            "text": "5 or more stools per day more than normal",
+                            "value": "5more",
+                            "detail": "",
+                            "exclusive": false
+                        },
+                        {
+                            "text": "Not applicable, I have an ostomy",
+                            "value": "NAostomy",
+                            "detail": "",
+                            "exclusive": false
+                        }
+                    ],
+                    "selectionStyle": "Single"
+                },
+                "steps": [],
+                "options": []
+            },
+            {
+                "type": "question",
+                "resultType": "textChoice",
+                "key": "IBDsoftstool",
+                "title": "Average number of liquid/very soft stools per day",
+                "text": "",
+                "skippable": true,
+                "groupName": "",
+                "repeatable": false,
+                "repeatableText": "",
+                "destinations": [
+                    {
+                        "condition": "one",
+                        "operator": "",
+                        "destination": "IBDrectalbleed"
+                    },
+                    {
+                        "condition": "two",
+                        "operator": "",
+                        "destination": "IBDrectalbleed"
+                    },
+                    {
+                        "condition": "three",
+                        "operator": "",
+                        "destination": "IBDrectalbleed"
+                    },
+                    {
+                        "condition": "four",
+                        "operator": "",
+                        "destination": "IBDrectalbleed"
+                    },
+                    {
+                        "condition": "five",
+                        "operator": "",
+                        "destination": "IBDrectalbleed"
+                    },
+                    {
+                        "condition": "six",
+                        "operator": "",
+                        "destination": "IBDrectalbleed"
+                    },
+                    {
+                        "condition": "seven",
+                        "operator": "",
+                        "destination": "IBDrectalbleed"
+                    },
+                    {
+                        "condition": "eight",
+                        "operator": "",
+                        "destination": "IBDrectalbleed"
+                    },
+                    {
+                        "condition": "nine",
+                        "operator": "",
+                        "destination": "IBDrectalbleed"
+                    },
+                    {
+                        "condition": "ten",
+                        "operator": "",
+                        "destination": "IBDrectalbleed"
+                    },
+                    {
+                        "condition": "eleven",
+                        "operator": "",
+                        "destination": "IBDrectalbleed"
+                    },
+                    {
+                        "condition": "twelve",
+                        "operator": "",
+                        "destination": "IBDrectalbleed"
+                    },
+                    {
+                        "condition": "thirteen",
+                        "operator": "",
+                        "destination": "IBDrectalbleed"
+                    },
+                    {
+                        "condition": "fourteen",
+                        "operator": "",
+                        "destination": "IBDrectalbleed"
+                    },
+                    {
+                        "condition": "fifteen",
+                        "operator": "",
+                        "destination": "IBDrectalbleed"
+                    },
+                    {
+                        "condition": "sixteen",
+                        "operator": "",
+                        "destination": "IBDrectalbleed"
+                    },
+                    {
+                        "condition": "seventeen",
+                        "operator": "",
+                        "destination": "IBDrectalbleed"
+                    },
+                    {
+                        "condition": "eighteen",
+                        "operator": "",
+                        "destination": "IBDrectalbleed"
+                    },
+                    {
+                        "condition": "nineteen",
+                        "operator": "",
+                        "destination": "IBDrectalbleed"
+                    },
+                    {
+                        "condition": "twenty",
+                        "operator": "",
+                        "destination": "IBDrectalbleed"
+                    },
+                    {
+                        "condition": "NAostomy",
+                        "operator": "",
+                        "destination": "IBDrectalbleed"
+                    },
+                    {
+                        "condition": "",
+                        "operator": "",
+                        "destination": "IBDrectalbleed"
+                    }
+                ],
+                "healthDataKey": "",
+                "format": {
+                    "textChoices": [
+                        {
+                            "text": "1",
+                            "value": "one",
+                            "detail": "",
+                            "exclusive": false
+                        },
+                        {
+                            "text": "2",
+                            "value": "two",
+                            "detail": "",
+                            "exclusive": false
+                        },
+                        {
+                            "text": "3",
+                            "value": "three",
+                            "detail": "",
+                            "exclusive": false
+                        },
+                        {
+                            "text": "4",
+                            "value": "four",
+                            "detail": "",
+                            "exclusive": false
+                        },
+                        {
+                            "text": "5",
+                            "value": "five",
+                            "detail": "",
+                            "exclusive": false
+                        },
+                        {
+                            "text": "6",
+                            "value": "six",
+                            "detail": "",
+                            "exclusive": false
+                        },
+                        {
+                            "text": "7",
+                            "value": "seven",
+                            "detail": "",
+                            "exclusive": false
+                        },
+                        {
+                            "text": "8",
+                            "value": "eight",
+                            "detail": "",
+                            "exclusive": false
+                        },
+                        {
+                            "text": "9",
+                            "value": "nine",
+                            "detail": "",
+                            "exclusive": false
+                        },
+                        {
+                            "text": "10",
+                            "value": "ten",
+                            "detail": "",
+                            "exclusive": false
+                        },
+                        {
+                            "text": "11",
+                            "value": "eleven",
+                            "detail": "",
+                            "exclusive": false
+                        },
+                        {
+                            "text": "12",
+                            "value": "twelve",
+                            "detail": "",
+                            "exclusive": false
+                        },
+                        {
+                            "text": "13",
+                            "value": "thirteen",
+                            "detail": "",
+                            "exclusive": false
+                        },
+                        {
+                            "text": "14",
+                            "value": "fourteen",
+                            "detail": "",
+                            "exclusive": false
+                        },
+                        {
+                            "text": "15",
+                            "value": "fifteen",
+                            "detail": "",
+                            "exclusive": false
+                        },
+                        {
+                            "text": "16",
+                            "value": "sixteen",
+                            "detail": "",
+                            "exclusive": false
+                        },
+                        {
+                            "text": "17",
+                            "value": "seventeen",
+                            "detail": "",
+                            "exclusive": false
+                        },
+                        {
+                            "text": "18",
+                            "value": "eighteen",
+                            "detail": "",
+                            "exclusive": false
+                        },
+                        {
+                            "text": "19",
+                            "value": "nineteen",
+                            "detail": "",
+                            "exclusive": false
+                        },
+                        {
+                            "text": "20",
+                            "value": "twenty",
+                            "detail": "",
+                            "exclusive": false
+                        },
+                        {
+                            "text": "Not applicable, I have an ostomy",
+                            "value": "NAostomy",
+                            "detail": "",
+                            "exclusive": false
+                        }
+                    ],
+                    "selectionStyle": "Single"
+                },
+                "steps": [],
+                "options": []
+            },
+            {
+                "type": "question",
+                "resultType": "textChoice",
+                "key": "IBDrectalbleed",
+                "title": "Rectal Bleeding",
+                "text": "",
+                "skippable": true,
+                "groupName": "",
+                "repeatable": false,
+                "repeatableText": "",
+                "destinations": [
+                    {
+                        "condition": "noblood",
+                        "operator": "",
+                        "destination": "IBDpassblood"
+                    },
+                    {
+                        "condition": "someblood",
+                        "operator": "",
+                        "destination": "IBDpassblood"
+                    },
+                    {
+                        "condition": "frequentblood",
+                        "operator": "",
+                        "destination": "IBDpassblood"
+                    },
+                    {
+                        "condition": "",
+                        "operator": "",
+                        "destination": "IBDpassblood"
+                    }
+                ],
+                "healthDataKey": "",
+                "format": {
+                    "textChoices": [
+                        {
+                            "text": "No blood seen",
+                            "value": "noblood",
+                            "detail": "",
+                            "exclusive": false
+                        },
+                        {
+                            "text": "Blood less than 50% of the time",
+                            "value": "someblood",
+                            "detail": "",
+                            "exclusive": false
+                        },
+                        {
+                            "text": "Blood more than 50% of the time",
+                            "value": "frequentblood",
+                            "detail": "",
+                            "exclusive": false
+                        }
+                    ],
+                    "selectionStyle": "Single"
+                },
+                "steps": [],
+                "options": []
+            },
+            {
+                "type": "question",
+                "resultType": "boolean",
+                "key": "IBDpassblood",
+                "title": "Have you had bowel movement(s) when you passed blood alone?",
+                "text": "",
+                "skippable": true,
+                "groupName": "",
+                "repeatable": false,
+                "repeatableText": "",
+                "destinations": [
+                    {
+                        "condition": "true",
+                        "operator": "",
+                        "destination": "IBDabpain"
+                    },
+                    {
+                        "condition": "false",
+                        "operator": "",
+                        "destination": "IBDabpain"
+                    },
+                    {
+                        "condition": "",
+                        "operator": "",
+                        "destination": "IBDabpain"
+                    }
+                ],
+                "healthDataKey": "",
+                "format": {},
+                "steps": [],
+                "options": []
+            },
+            {
+                "type": "question",
+                "resultType": "textChoice",
+                "key": "IBDabpain",
+                "title": "Abdominal pain",
+                "text": "",
+                "skippable": true,
+                "groupName": "",
+                "repeatable": false,
+                "repeatableText": "",
+                "destinations": [
+                    {
+                        "condition": "none",
+                        "operator": "",
+                        "destination": "IBDstoolurgency"
+                    },
+                    {
+                        "condition": "mild",
+                        "operator": "",
+                        "destination": "IBDstoolurgency"
+                    },
+                    {
+                        "condition": "moderate",
+                        "operator": "",
+                        "destination": "IBDstoolurgency"
+                    },
+                    {
+                        "condition": "severe",
+                        "operator": "",
+                        "destination": "IBDstoolurgency"
+                    },
+                    {
+                        "condition": "",
+                        "operator": "",
+                        "destination": "IBDstoolurgency"
+                    }
+                ],
+                "healthDataKey": "",
+                "format": {
+                    "textChoices": [
+                        {
+                            "text": "None",
+                            "value": "none",
+                            "detail": "",
+                            "exclusive": false
+                        },
+                        {
+                            "text": "Mild",
+                            "value": "mild",
+                            "detail": "",
+                            "exclusive": false
+                        },
+                        {
+                            "text": "Moderate",
+                            "value": "moderate",
+                            "detail": "",
+                            "exclusive": false
+                        },
+                        {
+                            "text": "Severe",
+                            "value": "severe",
+                            "detail": "",
+                            "exclusive": false
+                        }
+                    ],
+                    "selectionStyle": "Single"
+                },
+                "steps": [],
+                "options": []
+            },
+            {
+                "type": "question",
+                "resultType": "textChoice",
+                "key": "IBDstoolurgency",
+                "title": "Stool urgency",
+                "text": "",
+                "skippable": true,
+                "groupName": "",
+                "repeatable": false,
+                "repeatableText": "",
+                "destinations": [
+                    {
+                        "condition": "none",
+                        "operator": "",
+                        "destination": "IBDwellbeing"
+                    },
+                    {
+                        "condition": "mild",
+                        "operator": "",
+                        "destination": "IBDwellbeing"
+                    },
+                    {
+                        "condition": "moderate",
+                        "operator": "",
+                        "destination": "IBDwellbeing"
+                    },
+                    {
+                        "condition": "modsevere",
+                        "operator": "",
+                        "destination": "IBDwellbeing"
+                    },
+                    {
+                        "condition": "severe",
+                        "operator": "",
+                        "destination": "IBDwellbeing"
+                    },
+                    {
+                        "condition": "NAostomy",
+                        "operator": "",
+                        "destination": "IBDwellbeing"
+                    },
+                    {
+                        "condition": "",
+                        "operator": "",
+                        "destination": "IBDwellbeing"
+                    }
+                ],
+                "healthDataKey": "",
+                "format": {
+                    "textChoices": [
+                        {
+                            "text": "None. I can wait 15 minutes or longer to have a bowel movement.",
+                            "value": "none",
+                            "detail": "",
+                            "exclusive": false
+                        },
+                        {
+                            "text": "Mild. I need to get to the bathroom within 5-15 minutes.",
+                            "value": "mild",
+                            "detail": "",
+                            "exclusive": false
+                        },
+                        {
+                            "text": "Moderate. I need to get to the bathroom within 2-5 minutes.",
+                            "value": "moderate",
+                            "detail": "",
+                            "exclusive": false
+                        },
+                        {
+                            "text": "Moderately severe. I need to get to the bathroom in less than 2 minutes.",
+                            "value": "modsevere",
+                            "detail": "",
+                            "exclusive": false
+                        },
+                        {
+                            "text": "Severe. Sometimes I am unable to make it to the bathroom in time.",
+                            "value": "severe",
+                            "detail": "",
+                            "exclusive": false
+                        },
+                        {
+                            "text": "Not applicable, I have an ostomy",
+                            "value": "NAostomy",
+                            "detail": "",
+                            "exclusive": false
+                        }
+                    ],
+                    "selectionStyle": "Single"
+                },
+                "steps": [],
+                "options": []
+            },
+            {
+                "type": "question",
+                "resultType": "textChoice",
+                "key": "IBDwellbeing",
+                "title": "General well-being",
+                "text": "",
+                "skippable": true,
+                "groupName": "",
+                "repeatable": false,
+                "repeatableText": "",
+                "destinations": [
+                    {
+                        "condition": "well",
+                        "operator": "",
+                        "destination": "IBDPain"
+                    },
+                    {
+                        "condition": "unwell",
+                        "operator": "",
+                        "destination": "IBDPain"
+                    },
+                    {
+                        "condition": "poor",
+                        "operator": "",
+                        "destination": "IBDPain"
+                    },
+                    {
+                        "condition": "verypoor",
+                        "operator": "",
+                        "destination": "IBDPain"
+                    },
+                    {
+                        "condition": "terrible",
+                        "operator": "",
+                        "destination": "IBDPain"
+                    },
+                    {
+                        "condition": "",
+                        "operator": "",
+                        "destination": "IBDPain"
+                    }
+                ],
+                "healthDataKey": "",
+                "format": {
+                    "textChoices": [
+                        {
+                            "text": "Generally well",
+                            "value": "well",
+                            "detail": "",
+                            "exclusive": false
+                        },
+                        {
+                            "text": "Slightly under par",
+                            "value": "unwell",
+                            "detail": "",
+                            "exclusive": false
+                        },
+                        {
+                            "text": "Poor",
+                            "value": "poor",
+                            "detail": "",
+                            "exclusive": false
+                        },
+                        {
+                            "text": "Very poor",
+                            "value": "verypoor",
+                            "detail": "",
+                            "exclusive": false
+                        },
+                        {
+                            "text": "Terrible",
+                            "value": "terrible",
+                            "detail": "",
+                            "exclusive": false
+                        }
+                    ],
+                    "selectionStyle": "Single"
+                },
+                "steps": [],
+                "options": []
+            },
+            {
+                "type": "form",
+                "resultType": "grouped",
+                "key": "IBDPain",
+                "title": "",
+                "text": "",
+                "skippable": true,
+                "groupName": "",
+                "repeatable": false,
+                "repeatableText": "",
+                "destinations": [
+                    {
+                        "condition": "",
+                        "operator": "",
+                        "destination": "IBDsocial"
+                    }
+                ],
+                "healthDataKey": "",
+                "format": {},
+                "steps": [
+                    {
+                        "type": "question",
+                        "resultType": "textChoice",
+                        "key": "IBDpainrestrict",
+                        "title": "In the past seven days, how often did pain restrict your social life to your home?",
+                        "text": "",
+                        "skippable": true,
+                        "groupName": "",
+                        "repeatable": false,
+                        "repeatableText": "",
+                        "destinations": [],
+                        "healthDataKey": "",
+                        "format": {
+                            "textChoices": [
+                                {
+                                    "text": "Not at all",
+                                    "value": "notatall",
+                                    "detail": "",
+                                    "exclusive": false
+                                },
+                                {
+                                    "text": "A little bit",
+                                    "value": "alittlebit",
+                                    "detail": "",
+                                    "exclusive": false
+                                },
+                                {
+                                    "text": "Somewhat",
+                                    "value": "somewhat",
+                                    "detail": "",
+                                    "exclusive": false
+                                },
+                                {
+                                    "text": "Quite a bit",
+                                    "value": "quiteabit",
+                                    "detail": "",
+                                    "exclusive": false
+                                },
+                                {
+                                    "text": "Very much",
+                                    "value": "verymuch",
+                                    "detail": "",
+                                    "exclusive": false
+                                }
+                            ],
+                            "selectionStyle": "Single"
+                        },
+                        "steps": [],
+                        "options": []
+                    },
+                    {
+                        "type": "question",
+                        "resultType": "textChoice",
+                        "key": "IBDpainlife",
+                        "title": "In the past seven days, how much did pain interfere with your enjoyment of life?",
+                        "text": "",
+                        "skippable": true,
+                        "groupName": "",
+                        "repeatable": false,
+                        "repeatableText": "",
+                        "destinations": [],
+                        "healthDataKey": "",
+                        "format": {
+                            "textChoices": [
+                                {
+                                    "text": "Not at all",
+                                    "value": "notatall",
+                                    "detail": "",
+                                    "exclusive": false
+                                },
+                                {
+                                    "text": "A little bit",
+                                    "value": "alittlebit",
+                                    "detail": "",
+                                    "exclusive": false
+                                },
+                                {
+                                    "text": "Somewhat",
+                                    "value": "somewhat",
+                                    "detail": "",
+                                    "exclusive": false
+                                },
+                                {
+                                    "text": "Quite a bit",
+                                    "value": "quiteabit",
+                                    "detail": "",
+                                    "exclusive": false
+                                },
+                                {
+                                    "text": "Very much",
+                                    "value": "verymuch",
+                                    "detail": "",
+                                    "exclusive": false
+                                }
+                            ],
+                            "selectionStyle": "Single"
+                        },
+                        "steps": [],
+                        "options": []
+                    },
+                    {
+                        "type": "question",
+                        "resultType": "textChoice",
+                        "key": "IBDpainfocus",
+                        "title": "In the past 7 days, how much did pain interfere with your ability to concentrate?",
+                        "text": "",
+                        "skippable": true,
+                        "groupName": "",
+                        "repeatable": false,
+                        "repeatableText": "",
+                        "destinations": [],
+                        "healthDataKey": "",
+                        "format": {
+                            "textChoices": [
+                                {
+                                    "text": "Not at all",
+                                    "value": "notatall",
+                                    "detail": "",
+                                    "exclusive": false
+                                },
+                                {
+                                    "text": "A little bit",
+                                    "value": "alittlebit",
+                                    "detail": "",
+                                    "exclusive": false
+                                },
+                                {
+                                    "text": "Somewhat",
+                                    "value": "somewhat",
+                                    "detail": "",
+                                    "exclusive": false
+                                },
+                                {
+                                    "text": "Quite a bit",
+                                    "value": "quiteabit",
+                                    "detail": "",
+                                    "exclusive": false
+                                },
+                                {
+                                    "text": "Very much",
+                                    "value": "verymuch",
+                                    "detail": "",
+                                    "exclusive": false
+                                }
+                            ],
+                            "selectionStyle": "Single"
+                        },
+                        "steps": [],
+                        "options": []
+                    },
+                    {
+                        "type": "question",
+                        "resultType": "textChoice",
+                        "key": "IBDpainwork",
+                        "title": "In the past seven days, how much did pain interfere with your ability to work (including work at home)?",
+                        "text": "",
+                        "skippable": true,
+                        "groupName": "",
+                        "repeatable": false,
+                        "repeatableText": "",
+                        "destinations": [],
+                        "healthDataKey": "",
+                        "format": {
+                            "textChoices": [
+                                {
+                                    "text": "Not at all",
+                                    "value": "notatall",
+                                    "detail": "",
+                                    "exclusive": false
+                                },
+                                {
+                                    "text": "A little bit",
+                                    "value": "alittlebit",
+                                    "detail": "",
+                                    "exclusive": false
+                                },
+                                {
+                                    "text": "Somewhat",
+                                    "value": "somewhat",
+                                    "detail": "",
+                                    "exclusive": false
+                                },
+                                {
+                                    "text": "Quite a bit",
+                                    "value": "quiteabit",
+                                    "detail": "",
+                                    "exclusive": false
+                                },
+                                {
+                                    "text": "Very much",
+                                    "value": "verymuch",
+                                    "detail": "",
+                                    "exclusive": false
+                                }
+                            ],
+                            "selectionStyle": "Single"
+                        },
+                        "steps": [],
+                        "options": []
+                    },
+                    {
+                        "type": "question",
+                        "resultType": "textChoice",
+                        "key": "IBDpaindaily",
+                        "title": "In the past seven days, how much did pain interfere with your day to day activities?",
+                        "text": "",
+                        "skippable": true,
+                        "groupName": "",
+                        "repeatable": false,
+                        "repeatableText": "",
+                        "destinations": [],
+                        "healthDataKey": "",
+                        "format": {
+                            "textChoices": [
+                                {
+                                    "text": "Not at all",
+                                    "value": "notatall",
+                                    "detail": "",
+                                    "exclusive": false
+                                },
+                                {
+                                    "text": "A little bit",
+                                    "value": "alittlebit",
+                                    "detail": "",
+                                    "exclusive": false
+                                },
+                                {
+                                    "text": "Somewhat",
+                                    "value": "somewhat",
+                                    "detail": "",
+                                    "exclusive": false
+                                },
+                                {
+                                    "text": "Quite a bit",
+                                    "value": "quiteabit",
+                                    "detail": "",
+                                    "exclusive": false
+                                },
+                                {
+                                    "text": "Very much",
+                                    "value": "verymuch",
+                                    "detail": "",
+                                    "exclusive": false
+                                }
+                            ],
+                            "selectionStyle": "Single"
+                        },
+                        "steps": [],
+                        "options": []
+                    },
+                    {
+                        "type": "question",
+                        "resultType": "textChoice",
+                        "key": "IBDpainathome",
+                        "title": "In the past seven days, how much did pain interfere with work around the home?",
+                        "text": "",
+                        "skippable": true,
+                        "groupName": "",
+                        "repeatable": false,
+                        "repeatableText": "",
+                        "destinations": [],
+                        "healthDataKey": "",
+                        "format": {
+                            "textChoices": [
+                                {
+                                    "text": "Not at all",
+                                    "value": "notatall",
+                                    "detail": "",
+                                    "exclusive": false
+                                },
+                                {
+                                    "text": "A little bit",
+                                    "value": "alittlebit",
+                                    "detail": "",
+                                    "exclusive": false
+                                },
+                                {
+                                    "text": "Somewhat",
+                                    "value": "somewhat",
+                                    "detail": "",
+                                    "exclusive": false
+                                },
+                                {
+                                    "text": "Quite a bit",
+                                    "value": "quiteabit",
+                                    "detail": "",
+                                    "exclusive": false
+                                },
+                                {
+                                    "text": "Very much",
+                                    "value": "verymuch",
+                                    "detail": "",
+                                    "exclusive": false
+                                }
+                            ],
+                            "selectionStyle": "Single"
+                        },
+                        "steps": [],
+                        "options": []
+                    },
+                    {
+                        "type": "question",
+                        "resultType": "textChoice",
+                        "key": "IBDpainsocial",
+                        "title": "In the past seven days, how much did pain interfere with your ability to participate in social activities?",
+                        "text": "",
+                        "skippable": true,
+                        "groupName": "",
+                        "repeatable": false,
+                        "repeatableText": "",
+                        "destinations": [],
+                        "healthDataKey": "",
+                        "format": {
+                            "textChoices": [
+                                {
+                                    "text": "Not at all",
+                                    "value": "notatall",
+                                    "detail": "",
+                                    "exclusive": false
+                                },
+                                {
+                                    "text": "A little bit",
+                                    "value": "alittlebit",
+                                    "detail": "",
+                                    "exclusive": false
+                                },
+                                {
+                                    "text": "Somewhat",
+                                    "value": "somewhat",
+                                    "detail": "",
+                                    "exclusive": false
+                                },
+                                {
+                                    "text": "Quite a bit",
+                                    "value": "quiteabit",
+                                    "detail": "",
+                                    "exclusive": false
+                                },
+                                {
+                                    "text": "Very much",
+                                    "value": "verymuch",
+                                    "detail": "",
+                                    "exclusive": false
+                                }
+                            ],
+                            "selectionStyle": "Single"
+                        },
+                        "steps": [],
+                        "options": []
+                    },
+                    {
+                        "type": "question",
+                        "resultType": "textChoice",
+                        "key": "IBDpainchores",
+                        "title": "How much did pain interfere with your household chores?",
+                        "text": "",
+                        "skippable": true,
+                        "groupName": "",
+                        "repeatable": false,
+                        "repeatableText": "",
+                        "destinations": [],
+                        "healthDataKey": "",
+                        "format": {
+                            "textChoices": [
+                                {
+                                    "text": "Not at all",
+                                    "value": "notatall",
+                                    "detail": "",
+                                    "exclusive": false
+                                },
+                                {
+                                    "text": "A little bit",
+                                    "value": "alittlebit",
+                                    "detail": "",
+                                    "exclusive": false
+                                },
+                                {
+                                    "text": "Somewhat",
+                                    "value": "somewhat",
+                                    "detail": "",
+                                    "exclusive": false
+                                },
+                                {
+                                    "text": "Quite a bit",
+                                    "value": "quiteabit",
+                                    "detail": "",
+                                    "exclusive": false
+                                },
+                                {
+                                    "text": "Very much",
+                                    "value": "verymuch",
+                                    "detail": "",
+                                    "exclusive": false
+                                }
+                            ],
+                            "selectionStyle": "Single"
+                        },
+                        "steps": [],
+                        "options": []
+                    }
+                ],
+                "options": []
+            },
+            {
+                "type": "form",
+                "resultType": "grouped",
+                "key": "IBDsocial",
+                "title": "",
+                "text": "",
+                "skippable": true,
+                "groupName": "",
+                "repeatable": false,
+                "repeatableText": "",
+                "destinations": [
+                    {
+                        "condition": "",
+                        "operator": "",
+                        "destination": "IBDfatigue"
+                    }
+                ],
+                "healthDataKey": "",
+                "format": {},
+                "steps": [
+                    {
+                        "type": "question",
+                        "resultType": "textChoice",
+                        "key": "IBDactivites",
+                        "title": "In the past seven days, I am satisfied with my ability to do things for fun with others.",
+                        "text": "",
+                        "skippable": true,
+                        "groupName": "",
+                        "repeatable": false,
+                        "repeatableText": "",
+                        "destinations": [],
+                        "healthDataKey": "",
+                        "format": {
+                            "textChoices": [
+                                {
+                                    "text": "Not at all",
+                                    "value": "notatall",
+                                    "detail": "",
+                                    "exclusive": false
+                                },
+                                {
+                                    "text": "A little bit",
+                                    "value": "alittlebit",
+                                    "detail": "",
+                                    "exclusive": false
+                                },
+                                {
+                                    "text": "Somewhat",
+                                    "value": "somewhat",
+                                    "detail": "",
+                                    "exclusive": false
+                                },
+                                {
+                                    "text": "Quite a bit",
+                                    "value": "quiteabit",
+                                    "detail": "",
+                                    "exclusive": false
+                                },
+                                {
+                                    "text": "Very much",
+                                    "value": "verymuch",
+                                    "detail": "",
+                                    "exclusive": false
+                                }
+                            ],
+                            "selectionStyle": "Single"
+                        },
+                        "steps": [],
+                        "options": []
+                    },
+                    {
+                        "type": "question",
+                        "resultType": "textChoice",
+                        "key": "IBDfamily",
+                        "title": "In the past seven days, I am satisfied with my ability to do things for my family .",
+                        "text": "",
+                        "skippable": true,
+                        "groupName": "",
+                        "repeatable": false,
+                        "repeatableText": "",
+                        "destinations": [],
+                        "healthDataKey": "",
+                        "format": {
+                            "textChoices": [
+                                {
+                                    "text": "Not at all",
+                                    "value": "notatall",
+                                    "detail": "",
+                                    "exclusive": false
+                                },
+                                {
+                                    "text": "A little bit",
+                                    "value": "alittlebit",
+                                    "detail": "",
+                                    "exclusive": false
+                                },
+                                {
+                                    "text": "Somewhat",
+                                    "value": "somewhat",
+                                    "detail": "",
+                                    "exclusive": false
+                                },
+                                {
+                                    "text": "Quite a bit",
+                                    "value": "quiteabit",
+                                    "detail": "",
+                                    "exclusive": false
+                                },
+                                {
+                                    "text": "Very much",
+                                    "value": "verymuch",
+                                    "detail": "",
+                                    "exclusive": false
+                                }
+                            ],
+                            "selectionStyle": "Single"
+                        },
+                        "steps": [],
+                        "options": []
+                    },
+                    {
+                        "type": "question",
+                        "resultType": "textChoice",
+                        "key": "IBDfriends",
+                        "title": "In the past seven days, I am satisfied with my ability to meet the needs of my friends.",
+                        "text": "",
+                        "skippable": true,
+                        "groupName": "",
+                        "repeatable": false,
+                        "repeatableText": "",
+                        "destinations": [],
+                        "healthDataKey": "",
+                        "format": {
+                            "textChoices": [
+                                {
+                                    "text": "Not at all",
+                                    "value": "notatall",
+                                    "detail": "",
+                                    "exclusive": false
+                                },
+                                {
+                                    "text": "A little bit",
+                                    "value": "alittlebit",
+                                    "detail": "",
+                                    "exclusive": false
+                                },
+                                {
+                                    "text": "Somewhat",
+                                    "value": "somewhat",
+                                    "detail": "",
+                                    "exclusive": false
+                                },
+                                {
+                                    "text": "Quite a bit",
+                                    "value": "quiteabit",
+                                    "detail": "",
+                                    "exclusive": false
+                                },
+                                {
+                                    "text": "Very much",
+                                    "value": "verymuch",
+                                    "detail": "",
+                                    "exclusive": false
+                                }
+                            ],
+                            "selectionStyle": "Single"
+                        },
+                        "steps": [],
+                        "options": []
+                    },
+                    {
+                        "type": "question",
+                        "resultType": "textChoice",
+                        "key": "IBDwork",
+                        "title": "In the past seven days, I am satisfied with my ability to do the work that is really important to me (include work at home).",
+                        "text": "",
+                        "skippable": true,
+                        "groupName": "",
+                        "repeatable": false,
+                        "repeatableText": "",
+                        "destinations": [],
+                        "healthDataKey": "",
+                        "format": {
+                            "textChoices": [
+                                {
+                                    "text": "Not at all",
+                                    "value": "notatall",
+                                    "detail": "",
+                                    "exclusive": false
+                                },
+                                {
+                                    "text": "A little bit",
+                                    "value": "alittlebit",
+                                    "detail": "",
+                                    "exclusive": false
+                                },
+                                {
+                                    "text": "Somewhat",
+                                    "value": "somewhat",
+                                    "detail": "",
+                                    "exclusive": false
+                                },
+                                {
+                                    "text": "Quite a bit",
+                                    "value": "quiteabit",
+                                    "detail": "",
+                                    "exclusive": false
+                                },
+                                {
+                                    "text": "Very much",
+                                    "value": "verymuch",
+                                    "detail": "",
+                                    "exclusive": false
+                                }
+                            ],
+                            "selectionStyle": "Single"
+                        },
+                        "steps": [],
+                        "options": []
+                    }
+                ],
+                "options": []
+            },
+            {
+                "type": "form",
+                "resultType": "grouped",
+                "key": "IBDfatigue",
+                "title": "",
+                "text": "",
+                "skippable": true,
+                "groupName": "",
+                "repeatable": false,
+                "repeatableText": "",
+                "destinations": [
+                    {
+                        "condition": "",
+                        "operator": "",
+                        "destination": "IBDcongrats"
+                    }
+                ],
+                "healthDataKey": "",
+                "format": {},
+                "steps": [
+                    {
+                        "type": "question",
+                        "resultType": "textChoice",
+                        "key": "IBDfrustrated",
+                        "title": "In the past seven days, I am frustrated by being too tired to do things I want to do.",
+                        "text": "",
+                        "skippable": true,
+                        "groupName": "",
+                        "repeatable": false,
+                        "repeatableText": "",
+                        "destinations": [],
+                        "healthDataKey": "",
+                        "format": {
+                            "textChoices": [
+                                {
+                                    "text": "Not at all",
+                                    "value": "notatall",
+                                    "detail": "",
+                                    "exclusive": false
+                                },
+                                {
+                                    "text": "A little bit",
+                                    "value": "alittlebit",
+                                    "detail": "",
+                                    "exclusive": false
+                                },
+                                {
+                                    "text": "Somewhat",
+                                    "value": "somewhat",
+                                    "detail": "",
+                                    "exclusive": false
+                                },
+                                {
+                                    "text": "Quite a bit",
+                                    "value": "quiteabit",
+                                    "detail": "",
+                                    "exclusive": false
+                                },
+                                {
+                                    "text": "Very much",
+                                    "value": "verymuch",
+                                    "detail": "",
+                                    "exclusive": false
+                                }
+                            ],
+                            "selectionStyle": "Single"
+                        },
+                        "steps": [],
+                        "options": []
+                    },
+                    {
+                        "type": "question",
+                        "resultType": "textChoice",
+                        "key": "IBDfatigued",
+                        "title": "In the past seven days, I feel fatigued.",
+                        "text": "",
+                        "skippable": true,
+                        "groupName": "",
+                        "repeatable": false,
+                        "repeatableText": "",
+                        "destinations": [],
+                        "healthDataKey": "",
+                        "format": {
+                            "textChoices": [
+                                {
+                                    "text": "Not at all",
+                                    "value": "notatall",
+                                    "detail": "",
+                                    "exclusive": false
+                                },
+                                {
+                                    "text": "A little bit",
+                                    "value": "alittlebit",
+                                    "detail": "",
+                                    "exclusive": false
+                                },
+                                {
+                                    "text": "Somewhat",
+                                    "value": "somewhat",
+                                    "detail": "",
+                                    "exclusive": false
+                                },
+                                {
+                                    "text": "Quite a bit",
+                                    "value": "quiteabit",
+                                    "detail": "",
+                                    "exclusive": false
+                                },
+                                {
+                                    "text": "Very much",
+                                    "value": "verymuch",
+                                    "detail": "",
+                                    "exclusive": false
+                                }
+                            ],
+                            "selectionStyle": "Single"
+                        },
+                        "steps": [],
+                        "options": []
+                    },
+                    {
+                        "type": "question",
+                        "resultType": "textChoice",
+                        "key": "IBDstarting",
+                        "title": "In the past seven days, I have trouble starting things because I am tired.",
+                        "text": "",
+                        "skippable": true,
+                        "groupName": "",
+                        "repeatable": false,
+                        "repeatableText": "",
+                        "destinations": [],
+                        "healthDataKey": "",
+                        "format": {
+                            "textChoices": [
+                                {
+                                    "text": "Not at all",
+                                    "value": "notatall",
+                                    "detail": "",
+                                    "exclusive": false
+                                },
+                                {
+                                    "text": "A little bit",
+                                    "value": "alittlebit",
+                                    "detail": "",
+                                    "exclusive": false
+                                },
+                                {
+                                    "text": "Somewhat",
+                                    "value": "somewhat",
+                                    "detail": "",
+                                    "exclusive": false
+                                },
+                                {
+                                    "text": "Quite a bit",
+                                    "value": "quiteabit",
+                                    "detail": "",
+                                    "exclusive": false
+                                },
+                                {
+                                    "text": "Very much",
+                                    "value": "verymuch",
+                                    "detail": "",
+                                    "exclusive": false
+                                }
+                            ],
+                            "selectionStyle": "Single"
+                        },
+                        "steps": [],
+                        "options": []
+                    },
+                    {
+                        "type": "question",
+                        "resultType": "textChoice",
+                        "key": "IBDrundown",
+                        "title": "In the past seven days, how run-down did you feel on average?",
+                        "text": "",
+                        "skippable": true,
+                        "groupName": "",
+                        "repeatable": false,
+                        "repeatableText": "",
+                        "destinations": [],
+                        "healthDataKey": "",
+                        "format": {
+                            "textChoices": [
+                                {
+                                    "text": "Not at all",
+                                    "value": "notatall",
+                                    "detail": "",
+                                    "exclusive": false
+                                },
+                                {
+                                    "text": "A little bit",
+                                    "value": "alittlebit",
+                                    "detail": "",
+                                    "exclusive": false
+                                },
+                                {
+                                    "text": "Somewhat",
+                                    "value": "somewhat",
+                                    "detail": "",
+                                    "exclusive": false
+                                },
+                                {
+                                    "text": "Quite a bit",
+                                    "value": "quiteabit",
+                                    "detail": "",
+                                    "exclusive": false
+                                },
+                                {
+                                    "text": "Very much",
+                                    "value": "verymuch",
+                                    "detail": "",
+                                    "exclusive": false
+                                }
+                            ],
+                            "selectionStyle": "Single"
+                        },
+                        "steps": [],
+                        "options": []
+                    },
+                    {
+                        "type": "question",
+                        "resultType": "textChoice",
+                        "key": "IBDavgfatigue",
+                        "title": "In the past seven days, how fatigued were you on average?",
+                        "text": "",
+                        "skippable": true,
+                        "groupName": "",
+                        "repeatable": false,
+                        "repeatableText": "",
+                        "destinations": [],
+                        "healthDataKey": "",
+                        "format": {
+                            "textChoices": [
+                                {
+                                    "text": "Not at all",
+                                    "value": "notatall",
+                                    "detail": "",
+                                    "exclusive": false
+                                },
+                                {
+                                    "text": "A little bit",
+                                    "value": "alittlebit",
+                                    "detail": "",
+                                    "exclusive": false
+                                },
+                                {
+                                    "text": "Somewhat",
+                                    "value": "somewhat",
+                                    "detail": "",
+                                    "exclusive": false
+                                },
+                                {
+                                    "text": "Quite a bit",
+                                    "value": "quiteabit",
+                                    "detail": "",
+                                    "exclusive": false
+                                },
+                                {
+                                    "text": "Very much",
+                                    "value": "verymuch",
+                                    "detail": "",
+                                    "exclusive": false
+                                }
+                            ],
+                            "selectionStyle": "Single"
+                        },
+                        "steps": [],
+                        "options": []
+                    },
+                    {
+                        "type": "question",
+                        "resultType": "textChoice",
+                        "key": "IBDtootired",
+                        "title": "In the past seven days, how often were you too tired to enjoy life?",
+                        "text": "",
+                        "skippable": true,
+                        "groupName": "",
+                        "repeatable": false,
+                        "repeatableText": "",
+                        "destinations": [],
+                        "healthDataKey": "",
+                        "format": {
+                            "textChoices": [
+                                {
+                                    "text": "Never",
+                                    "value": "never",
+                                    "detail": "",
+                                    "exclusive": false
+                                },
+                                {
+                                    "text": "Rarely",
+                                    "value": "rarely",
+                                    "detail": "",
+                                    "exclusive": false
+                                },
+                                {
+                                    "text": "Sometimes",
+                                    "value": "sometimes",
+                                    "detail": "",
+                                    "exclusive": false
+                                },
+                                {
+                                    "text": "Often",
+                                    "value": "often",
+                                    "detail": "",
+                                    "exclusive": false
+                                },
+                                {
+                                    "text": "Always",
+                                    "value": "always",
+                                    "detail": "",
+                                    "exclusive": false
+                                }
+                            ],
+                            "selectionStyle": "Single"
+                        },
+                        "steps": [],
+                        "options": []
+                    },
+                    {
+                        "type": "question",
+                        "resultType": "textChoice",
+                        "key": "IBDclearthink",
+                        "title": "In the past seven days, how often were you too tired to think clearly?",
+                        "text": "",
+                        "skippable": true,
+                        "groupName": "",
+                        "repeatable": false,
+                        "repeatableText": "",
+                        "destinations": [],
+                        "healthDataKey": "",
+                        "format": {
+                            "textChoices": [
+                                {
+                                    "text": "Never",
+                                    "value": "never",
+                                    "detail": "",
+                                    "exclusive": false
+                                },
+                                {
+                                    "text": "Rarely",
+                                    "value": "rarely",
+                                    "detail": "",
+                                    "exclusive": false
+                                },
+                                {
+                                    "text": "Sometimes",
+                                    "value": "sometimes",
+                                    "detail": "",
+                                    "exclusive": false
+                                },
+                                {
+                                    "text": "Often",
+                                    "value": "often",
+                                    "detail": "",
+                                    "exclusive": false
+                                },
+                                {
+                                    "text": "Always",
+                                    "value": "always",
+                                    "detail": "",
+                                    "exclusive": false
+                                }
+                            ],
+                            "selectionStyle": "Single"
+                        },
+                        "steps": [],
+                        "options": []
+                    },
+                    {
+                        "type": "question",
+                        "resultType": "textChoice",
+                        "key": "IBDfatiguework",
+                        "title": "In the past seven days, how often did your fatigue limit you at work (including work at home)?",
+                        "text": "",
+                        "skippable": true,
+                        "groupName": "",
+                        "repeatable": false,
+                        "repeatableText": "",
+                        "destinations": [],
+                        "healthDataKey": "",
+                        "format": {
+                            "textChoices": [
+                                {
+                                    "text": "Never",
+                                    "value": "never",
+                                    "detail": "",
+                                    "exclusive": false
+                                },
+                                {
+                                    "text": "Rarely",
+                                    "value": "rarely",
+                                    "detail": "",
+                                    "exclusive": false
+                                },
+                                {
+                                    "text": "Sometimes",
+                                    "value": "sometimes",
+                                    "detail": "",
+                                    "exclusive": false
+                                },
+                                {
+                                    "text": "Often",
+                                    "value": "often",
+                                    "detail": "",
+                                    "exclusive": false
+                                },
+                                {
+                                    "text": "Always",
+                                    "value": "always",
+                                    "detail": "",
+                                    "exclusive": false
+                                }
+                            ],
+                            "selectionStyle": "Single"
+                        },
+                        "steps": [],
+                        "options": []
+                    }
+                ],
+                "options": []
+            },
+            {
+                "type": "instruction",
+                "resultType": "",
+                "key": "IBDcongrats",
+                "title": "Congratulations, you have completed the SPARC baseline survey!",
+                "text": "Please tap on the \"Done\" on the next screen and hand the electronic device to the coordinator. Thank you again for your participation in SPARC IBD.",
+                "skippable": false,
+                "groupName": "",
+                "repeatable": false,
+                "repeatableText": "",
+                "destinations": [
+                    {
+                        "condition": "",
+                        "operator": "",
+                        "destination": ""
+                    }
+                ],
+                "healthDataKey": "",
+                "format": {},
+                "steps": [],
+                "options": []
+            }
+        ]
+    }
+}

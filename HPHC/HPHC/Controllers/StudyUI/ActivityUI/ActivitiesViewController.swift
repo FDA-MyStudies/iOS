@@ -370,7 +370,7 @@ class ActivitiesViewController : UIViewController{
     func createActivity(){
         
         //Disable Custom KeyPad with toolbars
-       // IQKeyboardManager.sharedManager().enable = false
+//        IQKeyboardManager.sharedManager().enable = false
         IQKeyboardManager.shared.enableAutoToolbar = false
         
         if Utilities.isValidObject(someObject: Study.currentActivity?.steps as AnyObject?){

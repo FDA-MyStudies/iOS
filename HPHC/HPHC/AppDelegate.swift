@@ -644,6 +644,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         self.addAndRemoveProgress(add: false)
         //present consent task
+        taskViewController?.modalPresentationStyle = .fullScreen
         topVC?.present(taskViewController!, animated: true, completion: nil)
     }
     
@@ -836,6 +837,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     passcodeParentControllerWhileSetup = viewController
                     isPasscodePresented = true
                     blockerScreen?.isHidden = true
+                    taskViewController.modalPresentationStyle = .fullScreen
                     viewController.present(taskViewController, animated: false, completion: nil)
                     
                 }else {
@@ -872,6 +874,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                         if isComprehensionFailed! {
                             self.retryView?.isHidden = true
                         }
+                        passcodeViewController.modalPresentationStyle = .fullScreen
                         topVC!.present(passcodeViewController, animated: false, completion: nil)
                     }
                 }

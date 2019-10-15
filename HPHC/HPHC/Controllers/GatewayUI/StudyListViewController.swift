@@ -367,7 +367,7 @@ class StudyListViewController: UIViewController {
         let taskViewController = ORKTaskViewController(task: task, taskRun: nil)
         taskViewController.delegate = self
         taskViewController.isNavigationBarHidden = true
-
+        taskViewController.modalPresentationStyle = .fullScreen
         navigationController?.present(taskViewController, animated: false, completion: {
             self.tableView?.isHidden = false
         })

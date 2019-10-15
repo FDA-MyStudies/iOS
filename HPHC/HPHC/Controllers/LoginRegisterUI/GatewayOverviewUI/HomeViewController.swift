@@ -63,8 +63,8 @@ class HomeViewController: UIViewController{
         
         // Ask for network configuration in Debug mode
         #if DEBUG
-            HPHCSettings().setupDefaultURLs()
-            HPHCSettings().showSettings(self){}
+            //HPHCSettings().setupDefaultURLs()
+            //HPHCSettings().showSettings(self){}
         #endif
         
     }

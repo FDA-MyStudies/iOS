@@ -409,6 +409,7 @@ class ActivitiesViewController : UIViewController{
             taskViewController?.delegate = self
             UIApplication.shared.statusBarStyle = .default
             taskControllerPresented = true
+            taskViewController?.modalPresentationStyle = .fullScreen
             present(taskViewController!, animated: true, completion: nil)
             
         } else {

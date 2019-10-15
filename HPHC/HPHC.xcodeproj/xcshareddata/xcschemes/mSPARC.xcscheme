@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "89DBF74422F9893000AB3EF2"
-               BuildableName = "mSPARC.app"
+               BuildableName = "IBD PROdigy.app"
                BlueprintName = "mSPARC"
                ReferencedContainer = "container:HPHC.xcodeproj">
             </BuildableReference>
@@ -31,7 +31,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "89DBF74422F9893000AB3EF2"
-            BuildableName = "mSPARC.app"
+            BuildableName = "IBD PROdigy.app"
             BlueprintName = "mSPARC"
             ReferencedContainer = "container:HPHC.xcodeproj">
          </BuildableReference>
@@ -54,7 +54,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "89DBF74422F9893000AB3EF2"
-            BuildableName = "mSPARC.app"
+            BuildableName = "IBD PROdigy.app"
             BlueprintName = "mSPARC"
             ReferencedContainer = "container:HPHC.xcodeproj">
          </BuildableReference>
@@ -71,7 +71,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "89DBF74422F9893000AB3EF2"
-            BuildableName = "mSPARC.app"
+            BuildableName = "IBD PROdigy.app"
             BlueprintName = "mSPARC"
             ReferencedContainer = "container:HPHC.xcodeproj">
          </BuildableReference>

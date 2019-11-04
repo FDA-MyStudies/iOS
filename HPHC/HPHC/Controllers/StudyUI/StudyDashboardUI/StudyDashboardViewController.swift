@@ -126,6 +126,7 @@ class StudyDashboardViewController: UIViewController{
         UIView.appearance(whenContainedInInstancesOf: [ORKTaskViewController.self]).tintColor = kUIColorForSubmitButtonBackground
         
         UIApplication.shared.statusBarStyle = .default
+        taskViewController?.navigationBar.prefersLargeTitles = false
         taskViewController?.modalPresentationStyle = .fullScreen
         present(taskViewController!, animated: true, completion: nil)
     }

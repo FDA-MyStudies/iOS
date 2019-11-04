@@ -1,21 +1,21 @@
 /*
  License Agreement for FDA My Studies
-Copyright © 2017-2019 Harvard Pilgrim Health Care Institute (HPHCI) and its Contributors. Permission is
-hereby granted, free of charge, to any person obtaining a copy of this software and associated
-documentation files (the &quot;Software&quot;), to deal in the Software without restriction, including without
-limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the
-Software, and to permit persons to whom the Software is furnished to do so, subject to the following
-conditions:
-The above copyright notice and this permission notice shall be included in all copies or substantial
-portions of the Software.
-Funding Source: Food and Drug Administration (“Funding Agency”) effective 18 September 2014 as
-Contract no. HHSF22320140030I/HHSF22301006T (the “Prime Contract”).
-THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
-INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR
-PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
-LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT
-OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
-OTHER DEALINGS IN THE SOFTWARE.
+ Copyright © 2017-2019 Harvard Pilgrim Health Care Institute (HPHCI) and its Contributors. Permission is
+ hereby granted, free of charge, to any person obtaining a copy of this software and associated
+ documentation files (the &quot;Software&quot;), to deal in the Software without restriction, including without
+ limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the
+ Software, and to permit persons to whom the Software is furnished to do so, subject to the following
+ conditions:
+ The above copyright notice and this permission notice shall be included in all copies or substantial
+ portions of the Software.
+ Funding Source: Food and Drug Administration (“Funding Agency”) effective 18 September 2014 as
+ Contract no. HHSF22320140030I/HHSF22301006T (the “Prime Contract”).
+ THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
+ INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR
+ PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
+ LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT
+ OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
+ OTHER DEALINGS IN THE SOFTWARE.
  */
 
 import Foundation
@@ -26,27 +26,24 @@ class SyncUpdate{
     var isReachabilityChanged: Bool
     static var currentSyncUpdate: SyncUpdate? = nil
     var selectedRun: DBActivityRun?
-   
+    
     init() {
         self.isReachabilityChanged = false
     }
     
     @objc func updateData() {
-       
+        
         if (NetworkManager.sharedInstance().reachability?.isReachable)! {
             print("*******************update Data***************")
-            
-            DispatchQueue.main.asyncAfter(deadline: .now() + 10.0) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 5.0) {
                 self.syncDataToServer()
             }
-        }else {
-             print("not available")
         }
     }
     
     /**
      SyncData to server, called to sync responses stored in offline mode to server
-    */
+     */
     func syncDataToServer() {
         
         let realm = try! Realm()
@@ -54,27 +51,20 @@ class SyncUpdate{
         if toBeSyncedData != nil {
             
             //request params
-            var params: Dictionary<String, Any>? = nil
+            var params: Dictionary<String, Any>?
+            
             if toBeSyncedData?.requestParams != nil {
                 
-                do {
-                    params = try JSONSerialization.jsonObject(with: (toBeSyncedData?.requestParams)!, options: []) as? Dictionary<String, Any>
-                    
-                }catch {
-                    
-                }
+                params = try? JSONSerialization.jsonObject(with: (toBeSyncedData?.requestParams)!, options: []) as? Dictionary<String, Any>
+                
             }
             
             //header params
-            var headers: Dictionary<String, String>? = nil
+            var headers: Dictionary<String, String>?
+            
             if toBeSyncedData?.headerParams != nil {
                 
-                do {
-                    headers = try JSONSerialization.jsonObject(with: (toBeSyncedData?.headerParams)!, options: []) as? Dictionary<String, String>
-                    
-                }catch {
-                    
-                }
+                headers = try? JSONSerialization.jsonObject(with: (toBeSyncedData?.headerParams)!, options: []) as? Dictionary<String, String>
             }
             
             
@@ -88,9 +78,9 @@ class SyncUpdate{
                 let method = registrationMethod?.method
                 UserServices().syncOfflineSavedData(method: method!, params: params, headers: headers ,delegate: self)
                 
-            }else if server == "wcp" {
+            } else if server == "wcp" {
                 //Do Nothing
-            }else if server == "response" {
+            } else if server == "response" {
                 
                 let methodName = methodString?.components(separatedBy: ".").first
                 let registrationMethod = ResponseMethods(rawValue: methodName!)
@@ -100,14 +90,14 @@ class SyncUpdate{
             
             //delete current database object
             try! realm.write {
-               realm.delete(toBeSyncedData!)
+                realm.delete(toBeSyncedData!)
             }
         }
     }
     
     /**
      updates run information to server
-    */
+     */
     func updateRunInformationToServer(){
         
         let realm = try! Realm()

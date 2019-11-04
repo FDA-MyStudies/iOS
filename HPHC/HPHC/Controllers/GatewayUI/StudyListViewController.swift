@@ -367,6 +367,7 @@ class StudyListViewController: UIViewController {
         let taskViewController = ORKTaskViewController(task: task, taskRun: nil)
         taskViewController.delegate = self
         taskViewController.isNavigationBarHidden = true
+        taskViewController.navigationBar.prefersLargeTitles = false
         taskViewController.modalPresentationStyle = .fullScreen
         navigationController?.present(taskViewController, animated: false, completion: {
             self.tableView?.isHidden = false
@@ -406,7 +407,7 @@ class StudyListViewController: UIViewController {
                     let previousCollectionData = StudyFilterHandler.instance.previousAppliedFilters
 
                     if User.currentUser.userType == .FDAUser {
-                        self.appliedFilter(studyStatus: previousCollectionData.first!, pariticipationsStatus: previousCollectionData[2], categories: previousCollectionData[3], searchText: "", bookmarked: previousCollectionData[1].count > 0 ? true : false)
+                        self.appliedFilter(studyStatus: previousCollectionData.first!, pariticipationsStatus: previousCollectionData[2], categories: previousCollectionData[3], searchText: "", bookmarked: previousCollectionData[1].count > 0 ? true : false) // TBD: Crashed 
                     } else {
                         self.appliedFilter(studyStatus: previousCollectionData.first!, pariticipationsStatus: [], categories: previousCollectionData[1], searchText: "", bookmarked: false)
                     }

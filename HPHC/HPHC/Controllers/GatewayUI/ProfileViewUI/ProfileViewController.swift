@@ -618,6 +618,7 @@ class ProfileViewController: UIViewController, SlideMenuControllerDelegate {
                 let taskViewController = ORKTaskViewController.init(task: task, taskRun: nil)
                 taskViewController.delegate = self
                 taskViewController.isNavigationBarHidden = true
+                taskViewController.navigationBar.prefersLargeTitles = false
                 taskViewController.modalPresentationStyle = .fullScreen
                 self.navigationController?.present(taskViewController, animated: false, completion: nil)
             }

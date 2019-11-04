@@ -432,6 +432,7 @@ class StudyHomeViewController: UIViewController {
 
         // UIApplication.shared.statusBarStyle = .default
         setNeedsStatusBarAppearanceUpdate()
+        taskViewController?.navigationBar.prefersLargeTitles = false
         taskViewController?.modalPresentationStyle = .fullScreen
         present(taskViewController!, animated: true, completion: {
             let appdelegate: AppDelegate? = UIApplication.shared.delegate as? AppDelegate
@@ -486,6 +487,7 @@ class StudyHomeViewController: UIViewController {
         taskViewController.delegate = self
 
         taskViewController.isNavigationBarHidden = true
+        taskViewController.navigationBar.prefersLargeTitles = false
         taskViewController.modalPresentationStyle = .fullScreen
         navigationController?.present(taskViewController, animated: false, completion: nil)
     }

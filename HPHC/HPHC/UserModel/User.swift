@@ -644,14 +644,14 @@ class UserStudyStatus{
             id = self.participantId!
         }
         
-        let studyDetail = [kStudyId: self.studyId,
+        let studyDetail = [kStudyId: self.studyId!,
                            kStudyStatus: self.status.paramValue,
                            kStudyParticipantId: id] as [String : Any]
         return studyDetail
     }
     
     func getCompletionAdherence() -> Dictionary<String,Any>{
-        let studyDetail = [kStudyId: self.studyId,
+        let studyDetail = [kStudyId: self.studyId!,
                            "completion": completion,
                            "adherence":adherence] as [String : Any]
         return studyDetail

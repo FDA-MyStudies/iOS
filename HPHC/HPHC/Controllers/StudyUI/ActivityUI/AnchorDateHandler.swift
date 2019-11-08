@@ -124,6 +124,9 @@ class AnchorDateHandler {
     
     func sendRequestToFetchResponse() {
         
+        if Study.currentStudy == nil {
+            return
+        }
         guard let emptyAnchorDateDetail = emptyAnchorDatesList.filter({$0.isFinishedFetching == false}).first else {
             
             print("Log API Finished - \(Date().timeIntervalSince1970)")

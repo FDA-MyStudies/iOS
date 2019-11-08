@@ -194,12 +194,12 @@ class StudyListCell: UITableViewCell {
             switch userStudyStatus.status {
             case .inProgress:
                 studyUserStatusIcon?.image = #imageLiteral(resourceName: "in_progress_icn")
-                DBHandler.getCompletion(studyId: study.studyId!, completionHandler: { (completion, adherence) in
-                    if completion > 0 {
-                        self.progressBarCompletion?.progress = Float(completion)/100
-                        self.labelCompletionValue?.text = String(completion) + "%"
-                    }
-                })
+//                DBHandler.getCompletion(studyId: study.studyId!, completionHandler: { (completion, adherence) in
+//                    if completion > 0 {
+//                        self.progressBarCompletion?.progress = Float(completion)/100
+//                        self.labelCompletionValue?.text = String(completion) + "%"
+//                    }
+//                })
             case .yetToJoin:
                 studyUserStatusIcon?.image = #imageLiteral(resourceName: "yet_to_join_icn")
             case .notEligible:

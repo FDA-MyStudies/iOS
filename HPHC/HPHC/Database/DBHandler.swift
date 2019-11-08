@@ -231,7 +231,7 @@ class DBHandler: NSObject {
         }
         
         try? realm.write({
-            realm.add(dbStudies, update: true)
+            realm.add(dbStudies, update: .modified)//add(dbStudies, update: true)
             
         })
         

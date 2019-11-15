@@ -24,5 +24,7 @@
 	<string>http://online.crohnscolitisfoundation.org/site/DocServer/mSPARC_Privacy_Policy_07302019.pdf?docID=35367</string>
 	<key>ValidatedTitle</key>
 	<string>Validated!</string>
+	<key>AllowFeedback</key>
+	<true/>
 </dict>
 </plist>

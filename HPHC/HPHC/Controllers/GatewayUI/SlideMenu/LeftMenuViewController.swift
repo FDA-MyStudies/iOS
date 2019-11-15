@@ -85,6 +85,8 @@ class LeftMenuViewController: UIViewController, LeftMenuProtocol {
     var signInViewController: UINavigationController!
     var signUpViewController: UINavigationController!
     
+    var shouldAllowToGiveFeedback = true
+    
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
@@ -94,6 +96,9 @@ class LeftMenuViewController: UIViewController, LeftMenuProtocol {
         super.viewDidLoad()
         
         self.view.isHidden = true
+        
+        let branding = Utilities.getBrandingDetails()
+        shouldAllowToGiveFeedback = branding!["AllowFeedback"] as! Bool
         self.createLeftmenuItems()
         
         var infoDict: NSDictionary?
@@ -102,6 +107,8 @@ class LeftMenuViewController: UIViewController, LeftMenuProtocol {
         }
         let navTitle = infoDict!["ProductTitleName"] as! String
         labelProductName.text = navTitle
+        
+        
         
         self.tableView.separatorColor = UIColor(red: 224/255, green: 224/255, blue: 224/255, alpha: 1.0)
         
@@ -208,16 +215,23 @@ class LeftMenuViewController: UIViewController, LeftMenuProtocol {
             menus.append(["menuTitle": "My Account",
                           "iconName": "profile_menu1",
                 "menuType": LeftMenu.profile_reachOut])
-            menus.append(["menuTitle": "Reach Out",
+            
+            if shouldAllowToGiveFeedback {
+                menus.append(["menuTitle": "Reach Out",
                           "iconName": "reachout_menu1",
                 "menuType": LeftMenu.reachOut_signIn])
+            }
+            
            
             self.buttonSignOut?.isHidden = false
         }
         else{
-            menus.append(["menuTitle": "Reach Out",
+            if shouldAllowToGiveFeedback {
+                menus.append(["menuTitle": "Reach Out",
                           "iconName": "reachout_menu1",
                 "menuType": LeftMenu.profile_reachOut])
+            }
+            
 
             menus.append(["menuTitle": "Sign In",
                           "iconName": "signin_menu1",

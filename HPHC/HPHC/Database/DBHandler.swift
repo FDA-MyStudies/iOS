@@ -716,6 +716,19 @@ class DBHandler: NSObject {
         dbActivity.repeatInterval = activity.anchorDate?.repeatInterval ?? 0
         dbActivity.endTime = activity.anchorDate?.endTime
         
+        //participant property metadata
+        if let ppMetaData = activity.anchorDate?.ppMetaData {
+            dbActivity.propertyId = ppMetaData.propertyId
+            dbActivity.propertyType = ppMetaData.propertyType
+            dbActivity.propertyDataFormat = ppMetaData.propertyDataFormat
+            dbActivity.shouldRefresh = ppMetaData.shouldRefresh
+            dbActivity.dataSource = ppMetaData.dataSource
+            dbActivity.status = ppMetaData.status
+            dbActivity.externalPropertyId = ppMetaData.externalPropertyId
+            dbActivity.dateOfEntryId = ppMetaData.dateOfEntryId
+        }
+       
+        
         dbActivity.activityRuns.append(objectsIn: dbActivityRuns)
         return dbActivity
     }
@@ -1081,6 +1094,20 @@ class DBHandler: NSObject {
         anchorDate.endDays = dbActivity.endDays
         anchorDate.repeatInterval = dbActivity.repeatInterval
         anchorDate.endTime = dbActivity.endTime
+        
+        
+        if dbActivity.sourceType == AnchorDateSourceType.participantProperty.rawValue {
+            var metadata = AnchorDate.PPMetaData()
+            metadata.propertyId = dbActivity.propertyId
+            metadata.propertyType = dbActivity.propertyType
+            metadata.propertyDataFormat = dbActivity.propertyDataFormat
+            metadata.shouldRefresh = dbActivity.shouldRefresh
+            metadata.dataSource = dbActivity.dataSource
+            metadata.status = dbActivity.status
+            metadata.externalPropertyId = dbActivity.externalPropertyId
+            metadata.dateOfEntryId = dbActivity.dateOfEntryId
+            anchorDate.ppMetaData = metadata
+        }
         activity.anchorDate = anchorDate
         
         return activity

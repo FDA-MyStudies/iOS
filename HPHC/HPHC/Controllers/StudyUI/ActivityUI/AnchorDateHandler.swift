@@ -20,7 +20,20 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 import UIKit
 
-class EmptyAnchordDates {
+
+class ParticipantPropertyMetaData{
+       var propertyId: String = ""
+       
+       var externalPropertyId: String?
+       
+       var externalPropertyValue: String?
+       
+       var dateOfEntryId: String?
+       
+       var dateOfEntryValue: String?
+}
+
+class EmptyAnchorDates {
     
     enum FetchAnchorDateFor {
         case activity
@@ -35,6 +48,7 @@ class EmptyAnchordDates {
     var anchorDate:Date?
     var sourceFormId:String!
     var isFinishedFetching:Bool = false
+    var participantPropertyMetaData:ParticipantPropertyMetaData?
     var fetchAnchorDateFor:FetchAnchorDateFor = .activity
     
     init() {
@@ -46,7 +60,7 @@ class EmptyAnchordDates {
 class AnchorDateHandler {
     
     
-    var emptyAnchorDatesList:[EmptyAnchordDates] = []
+    lazy var emptyAnchorDatesList:[EmptyAnchorDates] = []
     typealias AnchordDateFetchCompletionHandler = (_ success:Bool)->Void
     var handler:AnchordDateFetchCompletionHandler!
     
@@ -55,6 +69,7 @@ class AnchorDateHandler {
         print("Log Started - \(Date().timeIntervalSince1970)")
         
         handler = completionHandler
+        
         //get activities from database for anchor date is not present
         let activities = DBHandler.getActivitiesWithEmptyAnchorDateValue((Study.currentStudy?.studyId)!)
                
@@ -68,7 +83,7 @@ class AnchorDateHandler {
             
             if act != nil && (act?.status == UserActivityStatus.ActivityStatus.completed) {
                 
-                let emptyAnchorDateDetail = EmptyAnchordDates()
+                let emptyAnchorDateDetail = EmptyAnchorDates()
                 emptyAnchorDateDetail.activity = activity
                 emptyAnchorDateDetail.sourceKey = activity.sourceKey
                 emptyAnchorDateDetail.sourceActivityId = activity.sourceActivityId
@@ -100,7 +115,7 @@ class AnchorDateHandler {
             
             if act != nil && (act?.status == UserActivityStatus.ActivityStatus.completed) {
                 
-                let emptyAnchorDateDetail = EmptyAnchordDates()
+                let emptyAnchorDateDetail = EmptyAnchorDates()
                 emptyAnchorDateDetail.fetchAnchorDateFor = .resource
                 emptyAnchorDateDetail.resource = resource
                 emptyAnchorDateDetail.sourceKey = resource.sourceKey
@@ -117,6 +132,52 @@ class AnchorDateHandler {
         }
         
         sendRequestToFetchResponse()
+        
+    }
+    
+    ///Participant Property values received from Response Server saved in Database.
+    ///Saved value will be used to compare from the values Saved on UR Server.
+    ///In case DB Saved values is most recent then liftime of that activity has to be calculated again.
+    ///Newly calculated then saved UR Server.
+    func findActivitiesToUpdateSchedule() {
+        
+        
+        //get activities from database for anchor date is not present
+        let activities = DBHandler.getActivitiesWithEmptyAnchorDateValue((Study.currentStudy?.studyId)!)
+               
+        guard activities.count != 0 else {
+            return handler(false)
+        }
+        
+          for activity in activities {
+            
+            let participatedActivityStatus = User.currentUser.participatedActivites.filter({$0.activityId == activity.actvityId}).last
+            
+            if participatedActivityStatus != nil && (participatedActivityStatus?.status == UserActivityStatus.ActivityStatus.completed) {
+                
+                let emptyAnchorDateDetail = EmptyAnchorDates()
+                emptyAnchorDateDetail.fetchAnchorDateFor = .activity
+                emptyAnchorDateDetail.participantPropertyMetaData = ParticipantPropertyMetaData()
+                emptyAnchorDateDetail.participantPropertyMetaData?.propertyId = activity.propertyId
+                emptyAnchorDateDetail.participantPropertyMetaData?.externalPropertyId = activity.externalPropertyId
+                emptyAnchorDateDetail.participantPropertyMetaData?.propertyId = activity.dateOfEntryId
+                emptyAnchorDatesList.append(emptyAnchorDateDetail)
+            }
+        
+        }
+        
+//        let activitiesWithParticipantProperty =  Study.currentStudy?.activities.filter(
+//        {$0.anchorDate?.sourceType == AnchorDateSourceType.participantProperty.rawValue})
+//
+//        for activity in activitiesWithParticipantProperty! {
+//            let extPPValue = activity.anchorDate?.ppMetaData?.externalPropertyValue
+//            let participatedActivityStatus = User.currentUser.participatedActivites.filter({$0.activityId == activity.actvityId}).last
+//
+//            if extPPValue != participatedActivityStatus?.anchorDateVersion {
+//                // Anchor date is updated, should calculated life time again
+//            }
+//
+//        }
         
     }
     
@@ -140,20 +201,11 @@ class AnchorDateHandler {
         let keys = emptyAnchorDateDetail.sourceKey!
         let formKey:String = emptyAnchorDateDetail.sourceFormKey ?? ""
         let tableName = emptyAnchorDateDetail.sourceActivityId + formKey
-        //let activityId = emptyAnchorDateDetail.activity.sourceActivityId
+        
         
         let method = ResponseMethods.executeSQL.method
         let query:String = "SELECT " + keys + ",Created" + " FROM " + tableName
-        //        let params = [
-        //
-        //            kParticipantId: "214b3c8b672c735988df8c139fed8abe",
-        //            "sql": query
-        //            ] as [String : Any]
-        //
-        //
-        //        guard let data = try? JSONSerialization.data(withJSONObject: params, options: JSONSerialization.WritingOptions.prettyPrinted) else {
-        //            return
-        //        }
+       
         
         let participantId:String = (Study.currentStudy?.userParticipateState.participantId)! //"214b3c8b672c735988df8c139fed8abe"
         var urlString = ResponseServerURLConstants.DevelopmentURL + method.methodName + "?" + kParticipantId + "=" + participantId + "&sql=" + query

@@ -103,6 +103,7 @@ enum ActivityScheduleType: String {
 enum AnchorDateSourceType: String {
     case enrollmentDate = "EnrollmentDate"
     case activityResponse = "ActivityResponse"
+    case participantProperty = "ParticipantProperty"
 }
 
 /**
@@ -264,6 +265,7 @@ class Activity {
             if self.startDate != nil && (self.schedulingType == .regular || self.anchorDate?.sourceType == "EnrollmentDate"){
                 self.calculateActivityRuns(studyId: self.studyId!)
             }
+            
         } else {
             Logger.sharedInstance.debug("infoDict is null:\(infoDict)")
         }
@@ -340,7 +342,7 @@ class Activity {
     func setActivityAvailability(_ availability:[String:Any]) {
 
         self.anchorDate = AnchorDate.init(availability)
-        //Issue: Crash with joining date for first time
+        
         if self.anchorDate?.sourceType == "EnrollmentDate" {
             var enrollmentDate = Study.currentStudy?.userParticipateState.joiningDate
             
@@ -478,6 +480,23 @@ class Activity {
 
 class AnchorDate {
     
+    struct PPMetaData {
+        var propertyId:String!
+        var propertyType:String!
+        var propertyDataFormat:String!
+        var shouldRefresh:Bool!
+        var dataSource:String!
+        var status:String!
+        var externalPropertyId:String?
+        var dateOfEntryId:String?
+        var externalPropertyValue:String?
+        var dateOfEntryValue:String?
+        
+        init() {
+            
+        }
+    }
+    
     var sourceType:String?
     var sourceActivityId:String?
     var sourceKey:String?
@@ -488,6 +507,7 @@ class AnchorDate {
     var repeatInterval:Int = 0
     var endTime:String?
     var anchorDateValue:Date?
+    var ppMetaData:PPMetaData?
     
     init() {
         
@@ -507,6 +527,22 @@ class AnchorDate {
         self.endDays = anchorEnd?["anchorDays"] as? Int ?? 0
         self.endTime = anchorEnd?["time"] as? String
         self.repeatInterval = anchorEnd?["repeatInterval"] as? Int ?? 0
+        
+        if let propertyMetadata = anchorDateDetail["propertyMetadata"] as? [String:Any] {
+            var ppMetadata = PPMetaData()
+            ppMetadata.dataSource = propertyMetadata["dataSource"] as? String ?? "Other"
+            ppMetadata.dateOfEntryId = propertyMetadata["dateOfEntryId"] as? String
+            ppMetadata.externalPropertyId = propertyMetadata["externalPropertyId"] as? String
+            ppMetadata.propertyId = propertyMetadata["propertyId"] as? String
+            ppMetadata.propertyDataFormat = propertyMetadata["propertyDataFormat"] as? String
+            ppMetadata.status = propertyMetadata["status"] as? String
+            ppMetadata.shouldRefresh = propertyMetadata["shouldRefresh"] as? Bool
+            ppMetadata.propertyType = propertyMetadata["propertyType"] as? String
+            
+            self.ppMetaData = ppMetadata
+            
+        }
+        
     
     }
     

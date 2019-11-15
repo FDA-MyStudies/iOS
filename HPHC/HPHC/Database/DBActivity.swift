@@ -58,6 +58,16 @@ class DBActivity: Object {
     @objc dynamic var endDays:Int = 0
     @objc dynamic var repeatInterval:Int = 0
     @objc dynamic var endTime:String?
+    @objc dynamic var propertyId:String!
+    @objc dynamic var propertyType:String!
+    @objc dynamic var propertyDataFormat:String!
+    @objc dynamic var shouldRefresh:Bool = false
+    @objc dynamic var dataSource:String!
+    @objc dynamic var status:String!
+    @objc dynamic var externalPropertyId:String!
+    @objc dynamic var externalPropertyValue:String!
+    @objc dynamic var dateOfEntryId:String!
+    @objc dynamic var dateOfEntryValue:String!
     @objc dynamic var anchorDateValue:Date?
   
     @objc dynamic var taskSubType: String?

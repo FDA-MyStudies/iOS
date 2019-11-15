@@ -320,6 +320,26 @@ class ActivitiesViewController : UIViewController{
         //self.sendRequesToGetActivityList()
     }
     
+    ///Participant Property values received from Response Server saved in Database.
+    ///Saved value will be used to compare from the values Saved on UR Server.
+    ///In case DB Saved values is most recent then liftime of that activity has to be calculated again.
+    ///Newly calculated then saved UR Server.
+    func findActivitiesToUpdateSchedule() {
+        
+        let activitiesWithParticipantProperty =  Study.currentStudy?.activities.filter(
+        {$0.anchorDate?.sourceType == AnchorDateSourceType.participantProperty.rawValue})
+        
+        for activity in activitiesWithParticipantProperty! {
+            let extPPValue = activity.anchorDate?.ppMetaData?.externalPropertyValue
+            let participatedActivityStatus = User.currentUser.participatedActivites.filter({$0.activityId == activity.actvityId}).last
+            
+            if extPPValue != participatedActivityStatus?.anchorDateVersion {
+                // Anchor date is updated, should calculated life time again
+            }
+            
+        }
+        
+    }
     
     // MARK:-
     

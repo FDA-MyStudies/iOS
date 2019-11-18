@@ -345,11 +345,20 @@ class ActivitiesViewController : UIViewController{
     
     func fetchActivityAnchorDateResponseFromLabkey() {
         
+        func fetchParticipantPropertyValues() {
+            AnchorDateHandler().findActivitiesToUpdateSchedule { (status) in
+                print("PP life time updated")
+                self.loadActivitiesFromDatabase()
+                
+                //update UR
+            }
+        }
+        
         AnchorDateHandler().fetchActivityAnchorDateResponseFromLabkey { (status) in
             print("Finished 1")
             //if status {
                 //DispatchQueue.main.async {
-                    self.loadActivitiesFromDatabase()
+                    fetchParticipantPropertyValues()
                 //}
                 
             //}
@@ -358,6 +367,8 @@ class ActivitiesViewController : UIViewController{
         print("Finished 0")
     }
     
+    
+    
     /**
      Used to load the Actif=vities data from database
      */
@@ -365,8 +376,7 @@ class ActivitiesViewController : UIViewController{
         
         if DBHandler.isActivitiesEmpty((Study.currentStudy?.studyId)!) {
             self.sendRequestToGetActivityStates()
-        }
-        else {
+        } else {
             
             DBHandler.loadActivityListFromDatabase(studyId: (Study.currentStudy?.studyId)!) { (activities) in
                 if activities.count > 0 {

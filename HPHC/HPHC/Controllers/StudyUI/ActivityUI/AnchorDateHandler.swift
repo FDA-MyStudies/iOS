@@ -139,49 +139,57 @@ class AnchorDateHandler {
     ///Saved value will be used to compare from the values Saved on UR Server.
     ///In case DB Saved values is most recent then liftime of that activity has to be calculated again.
     ///Newly calculated then saved UR Server.
-    func findActivitiesToUpdateSchedule() {
+    func findActivitiesToUpdateSchedule(_ completionHandler: @escaping AnchordDateFetchCompletionHandler) {
         
+        handler = completionHandler
         
         //get activities from database for anchor date is not present
-        let activities = DBHandler.getActivitiesWithEmptyAnchorDateValue((Study.currentStudy?.studyId)!)
-               
+        let activities = DBHandler.getActivitiesWithParticipantPropertyType((Study.currentStudy?.studyId)!)
+        
         guard activities.count != 0 else {
             return handler(false)
         }
         
-          for activity in activities {
+        for activity in activities {
             
             let participatedActivityStatus = User.currentUser.participatedActivites.filter({$0.activityId == activity.actvityId}).last
             
-            if participatedActivityStatus != nil && (participatedActivityStatus?.status == UserActivityStatus.ActivityStatus.completed) {
+            //if participatedActivityStatus != nil && (participatedActivityStatus?.status == UserActivityStatus.ActivityStatus.completed) {
                 
                 let emptyAnchorDateDetail = EmptyAnchorDates()
                 emptyAnchorDateDetail.fetchAnchorDateFor = .activity
+                emptyAnchorDateDetail.activity = activity
                 emptyAnchorDateDetail.participantPropertyMetaData = ParticipantPropertyMetaData()
                 emptyAnchorDateDetail.participantPropertyMetaData?.propertyId = activity.propertyId
                 emptyAnchorDateDetail.participantPropertyMetaData?.externalPropertyId = activity.externalPropertyId
-                emptyAnchorDateDetail.participantPropertyMetaData?.propertyId = activity.dateOfEntryId
+                emptyAnchorDateDetail.participantPropertyMetaData?.dateOfEntryId = activity.dateOfEntryId
                 emptyAnchorDatesList.append(emptyAnchorDateDetail)
-            }
-        
+           // }
+            
         }
         
-//        let activitiesWithParticipantProperty =  Study.currentStudy?.activities.filter(
-//        {$0.anchorDate?.sourceType == AnchorDateSourceType.participantProperty.rawValue})
-//
-//        for activity in activitiesWithParticipantProperty! {
-//            let extPPValue = activity.anchorDate?.ppMetaData?.externalPropertyValue
-//            let participatedActivityStatus = User.currentUser.participatedActivites.filter({$0.activityId == activity.actvityId}).last
-//
-//            if extPPValue != participatedActivityStatus?.anchorDateVersion {
-//                // Anchor date is updated, should calculated life time again
-//            }
-//
-//        }
+        guard emptyAnchorDatesList.count != 0 else {
+            return handler(false)
+        }
         
+        //sendRequestToFetchResponse()
+        
+        //facking data store
+        fakePPData()
     }
     
-    
+    func fakePPData() {
+        
+        for anchorDate in emptyAnchorDatesList {
+            
+            anchorDate.anchorDate = Date().addingTimeInterval(3600*24*2)
+            anchorDate.participantPropertyMetaData?.externalPropertyValue = "x7"
+            anchorDate.participantPropertyMetaData?.dateOfEntryValue = "17-11-2017 21:55:44"
+            anchorDate.isFinishedFetching = true
+        }
+        
+        self.saveParticipantPropertyAnchorDateInDB()
+    }
     
     func sendRequestToFetchResponse() {
         
@@ -231,7 +239,7 @@ class AnchorDateHandler {
                     
                     DispatchQueue.main.async {
                         
-                        guard let response = try? JSONSerialization.jsonObject(with: data!, options: .allowFragments) as! [String:Any] else {
+                        guard let response = try? JSONSerialization.jsonObject(with: data!, options: .allowFragments) as? [String:Any] else {
                             
                             emptyAnchorDateDetail.isFinishedFetching = true
                             self.sendRequestToFetchResponse()
@@ -292,6 +300,31 @@ class AnchorDateHandler {
             }
         }
         print("Log DB Finished - \(Date().timeIntervalSince1970)")
+        handler(true)
+    }
+    
+    func saveParticipantPropertyAnchorDateInDB() {
+        
+        let listItems = emptyAnchorDatesList.filter({$0.anchorDate != nil && $0.isFinishedFetching == true})
+        for item in listItems {
+            if item.fetchAnchorDateFor == .activity {
+                
+                let previouslyStoredEXPValue = item.activity.externalPropertyValue ?? nil
+                let newReceivedEXPValue = item.participantPropertyMetaData?.externalPropertyValue
+                
+                //check if any value exists otherwise treat it as new value OR values is updated
+                if previouslyStoredEXPValue == nil || previouslyStoredEXPValue != newReceivedEXPValue {
+                    //Value is chagnes and reschedule activity life time
+                    DBHandler.updateActivityLifeTimeFor(item.activity,
+                                                        anchorDate: item.anchorDate!,
+                                                        externalIdValue: item.participantPropertyMetaData?.externalPropertyValue,
+                                                        dateOfEntryValue: item.participantPropertyMetaData?.dateOfEntryValue)
+                }
+                
+            } else if item.fetchAnchorDateFor == .resource {
+                // Handle for resource
+            }
+        }
         handler(true)
     }
     

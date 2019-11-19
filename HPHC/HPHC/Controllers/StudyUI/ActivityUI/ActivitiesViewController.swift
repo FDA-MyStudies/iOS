@@ -1559,7 +1559,7 @@ extension ActivitiesViewController:UITabBarControllerDelegate{
         let tabBarIndex = tabBarController.selectedIndex
         if tabBarIndex == 0 {
             //do your stuff
-            self.checkForActivitiesUpdates()
+            //self.checkForActivitiesUpdates()
         }
     }
     

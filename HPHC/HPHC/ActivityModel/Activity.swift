@@ -240,7 +240,7 @@ class Activity {
                 if Utilities.isValidValue(someObject: frequencyDict[kActivityFrequencyType] as AnyObject ){
                     self.frequencyType =  Frequency(rawValue: (frequencyDict[kActivityFrequencyType] as? String)! )!
                 }
-                
+                    
             }
             
             //AnchorDate

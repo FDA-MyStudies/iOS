@@ -90,7 +90,7 @@ class ActivitiesViewController : UIViewController{
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
+        print("ActivitiesViewController - viewWillAppear")
         self.navigationController?.interactivePopGestureRecognizer?.isEnabled = false
         UIApplication.shared.statusBarStyle = .default
         
@@ -122,7 +122,7 @@ class ActivitiesViewController : UIViewController{
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        let message =  "The study " + (Study.currentStudy?.name!)! + " is 100 percent complete. Thank you for your participation."
+        //let message =  "The study " + (Study.currentStudy?.name!)! + " is 100 percent complete. Thank you for your participation."
        // UIUtilities.showAlertWithMessage(alertMessage: message)
         
     }
@@ -324,7 +324,7 @@ class ActivitiesViewController : UIViewController{
     // MARK:-
     
     func fetchActivityAnchorDateResponseFromLabkey() {
-        
+        print("fetchActivityAnchorDateResponseFromLabkey")
         AnchorDateHandler().fetchActivityAnchorDateResponseFromLabkey { (status) in
             print("Finished 1")
             //if status {
@@ -1529,7 +1529,7 @@ extension ActivitiesViewController:UITabBarControllerDelegate{
         let tabBarIndex = tabBarController.selectedIndex
         if tabBarIndex == 0 {
             //do your stuff
-            self.checkForActivitiesUpdates()
+            //self.checkForActivitiesUpdates()
         }
     }
     

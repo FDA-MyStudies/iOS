@@ -26,8 +26,7 @@ import RealmSwift
 import CallKit
 import IQKeyboardManagerSwift
 
-let kEncryptionKey = "EncryptionKey"
-let kEncryptionIV =  "EncryptionIV"
+
 let kBlockerScreenLabelText = "Please update to the latest version of app to continue."
 let kConsentUpdatedTitle = "Consent Updated"
 
@@ -133,31 +132,35 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             , offsetBy: -13)
         let subStringFromDate = String(currentDate[..<currentIndex])
         
-        let ud = UserDefaults.standard
+        //let ud = UserDefaults.standard
         
         if User.currentUser.userType ==  .FDAUser { // Registered/LogedIn User
             
             let index =  User.currentUser.userId.index(User.currentUser.userId.endIndex
                 , offsetBy: -16)
             let subKey = String(User.currentUser.userId[..<index]) //User.currentUser.userId.substring(to: index ) // 36 - 12 =  24 characters
-            ud.set("\(subKey + subStringFromDate)", forKey: kEncryptionKey)
-            
+            //ud.set("\(subKey + subStringFromDate)", forKey: kEncryptionKey)
+            FDAKeychain.shared[kEncryptionKey] = subKey + subStringFromDate
         }else { // Anonymous User
-            ud.set(currentDate + kDefaultPasscodeString, forKey: kEncryptionKey)
+            //ud.set(currentDate + kDefaultPasscodeString, forKey: kEncryptionKey)
+            FDAKeychain.shared[kEncryptionKey] = kEncryptionKey
         }
         
         if UIDevice.current.model == kIsIphoneSimulator {
             // simulator
-            ud.set(kdefaultIVForEncryption, forKey: kEncryptionIV)
+            //ud.set(kdefaultIVForEncryption, forKey: kEncryptionIV)
+            FDAKeychain.shared[kEncryptionIV] = kdefaultIVForEncryption
         }else {
             // Device
             var udid = UIDevice.current.identifierForVendor?.uuidString
             let index =  udid?.index((udid?.endIndex)!
                 , offsetBy: -20)
             udid = String((udid?[..<index!])!)//udid?.substring(to: index!)
-            ud.set(udid, forKey: kEncryptionIV)
+            //ud.set(udid, forKey: kEncryptionIV)
+            FDAKeychain.shared[kEncryptionIV] = udid
+            
         }
-        ud.synchronize()
+        //ud.synchronize()
     }
     
     /**
@@ -208,15 +211,35 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     // MARK: Realm Migragion
+    func generateRealmKeys() {
+        
+        //Realm Encryption key generation
+        if FDAKeychain.shared[kRealmEncryptionKeychainKey] == nil{
+            // Generate 64 bytes of random data to serve as the encryption key
+            var realmKey = kRealmEncryptionDefaultKey
+            var key = Data(count: 64)
+            let result = key.withUnsafeMutableBytes {
+                SecRandomCopyBytes(kSecRandomDefault, 64, $0.baseAddress!)
+            }
+            if result == errSecSuccess {
+                realmKey = key.base64EncodedString()
+            } else {
+                print("Problem generating random bytes")
+                
+            }
+            FDAKeychain.shared[kRealmEncryptionKeychainKey] = realmKey
+        }
+    }
+    
     func checkForRealmMigration() {
         
-        let config = Realm.Configuration(
-            // Set the new schema version. This must be greater than the previously used
-            // version (if you've never set a schema version before, the version is 0).
-            schemaVersion: 3,
-            
-            // Set the block which will be called automatically when opening a Realm with
-            // a schema version lower than the one set above
+        self.generateRealmKeys()
+        
+        let key = FDAKeychain.shared[kRealmEncryptionKeychainKey]
+        let keyData = Data.init(base64Encoded: key!)
+       
+        let config = Realm.Configuration(encryptionKey:keyData,
+            schemaVersion: 1,
             migrationBlock: { migration, oldSchemaVersion in
                 // We haven’t migrated anything yet, so oldSchemaVersion == 0
                 if (oldSchemaVersion < 1) {
@@ -231,7 +254,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // Now that we've told Realm how to handle the schema change, opening the file
         // will automatically perform the migration
-        let _ = try! Realm()
+        //let _ = try! Realm()
     }
     
     func fireNotiffication(intervel:Int) {

@@ -25,13 +25,17 @@ class DBHandler: NSObject {
 
     fileprivate class func getRealmObject() -> Realm! {
         
+        let key = FDAKeychain.shared[kRealmEncryptionKeychainKey]
+        let data = Data.init(base64Encoded: key!)
+        let encryptionConfig = Realm.Configuration(encryptionKey: data)
         var realm: Realm!
         do {
-            realm = try Realm()
-        } catch {
-            return nil
+            realm = try Realm(configuration: encryptionConfig)
+        } catch let error{
+             print(error)
         }
         return realm
+        
     }
     
     
@@ -47,13 +51,13 @@ class DBHandler: NSObject {
             dbUser = DBUser()
             dbUser?.userType = (user.userType?.rawValue)!
             dbUser?.emailId = user.emailId!
-            dbUser?.authToken = user.authToken
+            //dbUser?.authToken = user.authToken
             dbUser?.userId = user.userId
             //dbUser.firstName = user.firstName
             //dbUser.lastName = user.lastName
             dbUser?.verified = user.verified
             
-            dbUser?.refreshToken = user.refreshToken
+            //dbUser?.refreshToken = user.refreshToken
             
             try? realm.write({
                 realm.add(dbUser!, update: true)
@@ -107,7 +111,7 @@ class DBHandler: NSObject {
     }
     
     /* Used to initialize the current logged in user*/
-    func initilizeCurrentUser(){
+    func initilizeCurrentUser() -> Bool{
         
         let realm = DBHandler.getRealmObject()!
         let dbUsers = realm.objects(DBUser.self)
@@ -118,11 +122,11 @@ class DBHandler: NSObject {
             currentUser.firstName = dbUser?.firstName
             currentUser.lastName  = dbUser?.lastName
             currentUser.verified = dbUser?.verified
-            currentUser.authToken = dbUser?.authToken
+            //currentUser.authToken = dbUser?.authToken
             currentUser.userId = dbUser?.userId
             currentUser.emailId = dbUser?.emailId
             currentUser.userType =  (dbUser?.userType).map { UserType(rawValue: $0) }!
-            currentUser.refreshToken = dbUser?.refreshToken
+            //currentUser.refreshToken = dbUser?.refreshToken
           
             let settings = Settings()
             settings.localNotifications = dbUser?.localNotificationEnabled
@@ -130,8 +134,10 @@ class DBHandler: NSObject {
             settings.remoteNotifications = dbUser?.remoteNotificationEnabled
             
             currentUser.settings = settings
+            
+            return true
         }
-        
+        return false
     }
     
     class func saveUserSettingsToDatabase(){

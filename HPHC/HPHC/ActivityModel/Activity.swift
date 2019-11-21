@@ -40,6 +40,7 @@ let kActivityConfiguration = "configuration"
 let kActivityFrequency = "frequency"
 let kActivityFrequencyRuns = "runs"
 let kActivityManualAnchorRuns = "anchorRuns"
+let kActivityCustomScheduleAddMoreRuns = "addNewRuns"
 let kActivityFrequencyType = "type"
 
 let kActivityStartTime = "startTime"
@@ -134,7 +135,7 @@ class Activity {
     var frequencyRuns: Array<Dictionary<String, Any>>? = []
     var anchorRuns: Array<Dictionary<String, Any>>? = [] // scheduled mannuly for anchor date
     var frequencyType: Frequency = .One_Time
-    
+    var addNewCustomRuns:Bool = false
     var result: ActivityResult?
 
     var restortionData: Data? //stores the restortionData for current activity
@@ -239,6 +240,9 @@ class Activity {
                 
                 if Utilities.isValidValue(someObject: frequencyDict[kActivityFrequencyType] as AnyObject ){
                     self.frequencyType =  Frequency(rawValue: (frequencyDict[kActivityFrequencyType] as? String)! )!
+                }
+                if Utilities.isValidValue(someObject: frequencyDict[kActivityCustomScheduleAddMoreRuns] as AnyObject ){
+                    self.addNewCustomRuns = frequencyDict[kActivityCustomScheduleAddMoreRuns] as? Bool ?? false
                 }
                     
             }

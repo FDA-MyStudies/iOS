@@ -703,12 +703,12 @@ class TermsAndPolicy {
 class UserActivityStatus{
     
     struct CustomScheduleRuns {
-        var activityStartDate:String
-        var activityEndDate:String
+        var runStartDate:String
+        var runEndDate:String
         
         init(value:[String:String]) {
-            self.activityEndDate = value["activityEndDate"] ?? ""
-            self.activityStartDate = value["activityStartDate"] ?? ""
+            self.runEndDate = value["runEndDate"] ?? ""
+            self.runStartDate = value["runStartDate"] ?? ""
         }
     }
     

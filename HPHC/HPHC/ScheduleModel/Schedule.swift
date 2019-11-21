@@ -320,7 +320,7 @@ class Schedule{
     }
     
     //ScheduledRuns Setter
-    func setScheduledRuns(){
+    func setScheduledRuns() {
         
         
         let offset = UserDefaults.standard.value(forKey: "offset") as? Int
@@ -335,9 +335,7 @@ class Schedule{
             scheduledTimings = activity.frequencyRuns!
         }
         
-        //scheduledTimings = activity.frequencyRuns!
-        
-       
+    
         for timing in scheduledTimings {
             
             
@@ -350,7 +348,7 @@ class Schedule{
                 _ = timing["time"] as? String ?? "00:00:00"
                 
                 let anchorDate = activity.anchorDate?.anchorDateValue
-                
+            
                 let startDateInterval = TimeInterval(60*60*24*(startDays))
                 let endDateInterval = TimeInterval(60*60*24*(endDays))
                 
@@ -403,8 +401,114 @@ class Schedule{
                     runId += 1
                 }
             }
+            
+            
         }
     }
+    
+    func scheduleRunsForAddMoreRuns() {
+        
+        let offset = UserDefaults.standard.value(forKey: "offset") as? Int ?? 0
+        let activityEndTime = endTime?.addingTimeInterval(TimeInterval(offset))
+        var runId = 1
+        //let previousScheduledruns = activity.userParticipationStatus.customScheduleRuns
+        
+        func saveCalculatedRun(runStartDate:Date?, runEndDate:Date?, offset:Int, runId:Int) {
+            
+            let updatedStartTime = runStartDate?.addingTimeInterval(TimeInterval(offset))
+            
+            //Save runs
+            if activityEndTime! > updatedStartTime! {
+                
+                let updatedEndTime = runEndDate?.addingTimeInterval(TimeInterval(offset))
+                if !(updatedEndTime! < startTime) {
+                    //appent in activityRun array
+                    let activityRun = ActivityRun()
+                    activityRun.runId = runId
+                    activityRun.startDate = updatedStartTime
+                    activityRun.endDate = updatedEndTime
+                    activityRuns.append(activityRun)
+                    
+                    
+                }
+            }
+        }
+        
+        func calcualtePreviousRuns(previousScheduledruns:[UserActivityStatus.CustomScheduleRuns]) {
+            
+            for previousRun in previousScheduledruns {
+                
+                var runStartDate:Date?
+                var runEndDate:Date?
+                
+                //run start time creation
+                let scheduledStartTime = previousRun.runStartDate
+                runStartDate =  Utilities.getDateFromStringWithOutTimezone(dateString: scheduledStartTime )
+                
+                //run end time creation
+                let scheduledEndTime = previousRun.runEndDate
+                runEndDate = Utilities.getDateFromStringWithOutTimezone(dateString: scheduledEndTime )
+                
+                saveCalculatedRun(runStartDate: runStartDate,
+                                  runEndDate: runEndDate,
+                                  offset: offset,
+                                  runId: runId)
+                runId += 1
+              
+            }
+        }
+        
+        func calculateNewRuns() {
+            
+            for timing in scheduledTimings {
+                
+                
+                var runStartDate:Date?
+                var runEndDate:Date?
+                
+                
+                let startDays = timing["startDays"] as? Int ?? 0
+                let endDays = timing["endDays"] as? Int ?? 0
+                _ = timing["time"] as? String ?? "00:00:00"
+                
+                let anchorDate = activity.anchorDate?.anchorDateValue
+                
+                let startDateInterval = TimeInterval(60*60*24*(startDays))
+                let endDateInterval = TimeInterval(60*60*24*(endDays))
+                
+                runStartDate = anchorDate?.addingTimeInterval(startDateInterval)
+                runEndDate = anchorDate?.addingTimeInterval(endDateInterval)
+                
+                //update start date
+                var startDateString =  Utilities.formatterShort?.string(from: runStartDate!)
+                let startTime =  timing["time"] as? String ?? "00:00:00"
+                startDateString = (startDateString ?? "") + " " + startTime
+                let startdate = Utilities.findDateFromString(dateString: startDateString ?? "")
+                
+                //update end date
+                var endDateString =  Utilities.formatterShort?.string(from: runEndDate!)
+                let endTime =  timing["time"] as? String ?? "23:59:59"
+                endDateString = (endDateString ?? "") + " " + endTime
+                let endDate = Utilities.findDateFromString(dateString: endDateString ?? "")
+                
+                runStartDate = startdate//getDateAfterAddingTimeComponent(time, date: runStartDate!)
+                runEndDate = endDate//getDateAfterAddingTimeComponent(time, date: runEndDate!)
+                
+                saveCalculatedRun(runStartDate: runStartDate,
+                                  runEndDate: runEndDate,
+                                  offset: offset,
+                                  runId: (activityRuns.count+1))
+                
+            }
+        }
+      
+        calcualtePreviousRuns(previousScheduledruns: activity.userParticipationStatus.customScheduleRuns)
+        calculateNewRuns()
+        
+    }
+        
+        
+    
     
     func getDateAfterAddingTimeComponent(_ time:String, date: Date) -> Date? {
         

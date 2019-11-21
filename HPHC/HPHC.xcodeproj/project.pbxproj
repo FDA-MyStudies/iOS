@@ -385,6 +385,9 @@
 		8905592A23016852005FB284 /* UITestingHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8905592923016852005FB284 /* UITestingHelpers.swift */; };
 		8905592C230169FF005FB284 /* LoginVCTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8905592B230169FF005FB284 /* LoginVCTests.swift */; };
 		8923429122B122DF0059F910 /* LoginAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 94B3DD2D1E6ED8E500327AE5 /* LoginAssets.xcassets */; };
+		8926D7EA2383F25C00558F4E /* KeyChain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8926D7E92383F25C00558F4E /* KeyChain.swift */; };
+		8926D7EB2383F4E000558F4E /* KeyChain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8926D7E92383F25C00558F4E /* KeyChain.swift */; };
+		8926D7EC2383F4E100558F4E /* KeyChain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8926D7E92383F25C00558F4E /* KeyChain.swift */; };
 		892726DB22F98E2700893A00 /* GatewayOverview.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6FDCDD2822C22766008891D9 /* GatewayOverview.plist */; };
 		892726DC22F98E4100893A00 /* GatewayOverview.plist in Resources */ = {isa = PBXBuildFile; fileRef = 486304D51E6FE77C003CD406 /* GatewayOverview.plist */; };
 		89362583231FE869005FE541 /* UITestingHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8905592923016852005FB284 /* UITestingHelpers.swift */; };
@@ -967,6 +970,7 @@
 		8923428E22B11BFC0059F910 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LimitJIA.storyboard; sourceTree = "<group>"; };
 		8923429322B128EC0059F910 /* GatewayOverview.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = GatewayOverview.plist; sourceTree = "<group>"; };
 		8923429A22B12FAE0059F910 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8926D7E92383F25C00558F4E /* KeyChain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyChain.swift; sourceTree = "<group>"; };
 		8948349C22BB9C59000B7BFA /* HPHCSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HPHCSettings.swift; sourceTree = "<group>"; };
 		8948349E22BB9D56000B7BFA /* HPHCSettings.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HPHCSettings.xib; sourceTree = "<group>"; };
 		89831392224399FC0000BEB5 /* ResourceList.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = ResourceList.json; sourceTree = "<group>"; };
@@ -1248,6 +1252,7 @@
 		6E7D2D581E433E8700763D4C /* HPHC */ = {
 			isa = PBXGroup;
 			children = (
+				8926D7E62383F23100558F4E /* KeychainStore */,
 				6F10BB15234DDFDA006388E2 /* Branding */,
 				8948349922BB9C2F000B7BFA /* Settings */,
 				6ED593711F011D5B00AC3636 /* Fonts */,
@@ -1755,6 +1760,14 @@
 				890FC1CD22FC538E0020F80F /* Branding.plist */,
 			);
 			path = LimitJIA;
+			sourceTree = "<group>";
+		};
+		8926D7E62383F23100558F4E /* KeychainStore */ = {
+			isa = PBXGroup;
+			children = (
+				8926D7E92383F25C00558F4E /* KeyChain.swift */,
+			);
+			path = KeychainStore;
 			sourceTree = "<group>";
 		};
 		8948349922BB9C2F000B7BFA /* Settings */ = {
@@ -2832,6 +2845,7 @@
 				6EBC2E871E94FB5300828CA1 /* StudyDashboardStudyPercentageTableViewCell.swift in Sources */,
 				9432C49C1E83CEEF00EB419C /* DBStudy.swift in Sources */,
 				4884E3541E82665C002DA0B9 /* FeedBackTableViewCell.swift in Sources */,
+				8926D7EA2383F25C00558F4E /* KeyChain.swift in Sources */,
 				6EE93DCE1E93C8850027A5DC /* ResourcesViewController.swift in Sources */,
 				6ECE8BFB1EAF0E3A00A025F5 /* HealthClientType.swift in Sources */,
 				94B3DD4A1E6ED8E500327AE5 /* StudyListCell.swift in Sources */,
@@ -3102,6 +3116,7 @@
 				6FC12B5E22FD60FE0075940B /* ActivityFormStep.swift in Sources */,
 				6FC12B5F22FD60FE0075940B /* StudyDashboardStudyActivitiesTableViewCell.swift in Sources */,
 				6FC12B6022FD60FE0075940B /* SignInTableViewCell.swift in Sources */,
+				8926D7EC2383F4E100558F4E /* KeyChain.swift in Sources */,
 				6FC12B6122FD60FE0075940B /* Resource.swift in Sources */,
 				6FC12B6222FD60FE0075940B /* ContactUsViewController.swift in Sources */,
 				6FC12B6322FD60FE0075940B /* Reachability.swift in Sources */,
@@ -3278,6 +3293,7 @@
 				89DBF7D222F9893000AB3EF2 /* ActivityFormStep.swift in Sources */,
 				89DBF7D322F9893000AB3EF2 /* StudyDashboardStudyActivitiesTableViewCell.swift in Sources */,
 				89DBF7D422F9893000AB3EF2 /* SignInTableViewCell.swift in Sources */,
+				8926D7EB2383F4E000558F4E /* KeyChain.swift in Sources */,
 				89DBF7D522F9893000AB3EF2 /* Resource.swift in Sources */,
 				89DBF7D622F9893000AB3EF2 /* ContactUsViewController.swift in Sources */,
 				89DBF7D722F9893000AB3EF2 /* Reachability.swift in Sources */,
@@ -3539,7 +3555,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 12;
+				CURRENT_PROJECT_VERSION = 13;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = LC58YCKU3U;
 				ENABLE_BITCODE = NO;
@@ -3571,7 +3587,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 12;
+				CURRENT_PROJECT_VERSION = 13;
 				DEVELOPMENT_TEAM = LC58YCKU3U;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = "$(SRCROOT)/HPHC/Branding/LimitJIA/Info.plist";

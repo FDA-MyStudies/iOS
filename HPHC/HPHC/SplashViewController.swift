@@ -37,8 +37,19 @@ class SplashViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         
-        DBHandler().initilizeCurrentUser()
+        //self.generateRealmKeys()
         
+        if DBHandler().initilizeCurrentUser() {
+            
+            if let authToken = FDAKeychain.shared[kUserAuthTokenKeychainKey] {
+                User.currentUser.authToken = authToken
+            }
+            if let refreshToken = FDAKeychain.shared[kUserRefreshTokenKeychainKey] {
+                User.currentUser.refreshToken = refreshToken
+            }
+        }
+        
+       
         self.checkIfAppLaunchedForFirstTime()
         
         // Checks AuthKey, If exists navigate to HomeController else GatewayDashboard
@@ -53,12 +64,12 @@ class SplashViewController: UIViewController {
                 self.navigateToGatewayDashboard()
                 
             }else {
-                    /*Gateway App*/
-                    self.navigateToHomeController()
+                /*Gateway App*/
+                self.navigateToHomeController()
                 
             }
         }
-       
+        
     }
 
     
@@ -177,43 +188,15 @@ class SplashViewController: UIViewController {
     }
     
     //Update Encryption Key & IV on first time launch
-    func checkIfAppLaunchedForFirstTime(){
+    func checkIfAppLaunchedForFirstTime() {
         
         if isAppOpenedForFirstTime == false{
             
-            let currentDate = "\(Date(timeIntervalSinceNow: 0))"
-            let currentIndex = currentDate.index(currentDate.endIndex
-                , offsetBy: -13)
-            let subStringFromDate = String(currentDate[..<currentIndex])
-            let ud = UserDefaults.standard
             
-            if User.currentUser.userType == .FDAUser {
-                
-                let index =  User.currentUser.userId.index(User.currentUser.userId.endIndex
-                    , offsetBy: -16)
-                let subKey = String(User.currentUser.userId[..<index])
-                ud.set("\(subKey + subStringFromDate)", forKey: kEncryptionKey)
-            }
-            else{
-                ud.set(currentDate + kDefaultPasscodeString, forKey: kEncryptionKey)
-            }
+            let appDelegate =  UIApplication.shared.delegate as? AppDelegate
+            appDelegate?.updateKeyAndInitializationVector()
             
             
-            if UIDevice.current.model == kIsIphoneSimulator {
-                // simulator
-                ud.set(kdefaultIVForEncryption, forKey: kEncryptionIV)
-            }
-            else{
-                // not a simulator
-                var udid = UIDevice.current.identifierForVendor?.uuidString
-                
-                let index =  udid?.index((udid?.endIndex)!
-                    , offsetBy: -20)
-                udid = String((udid?[..<index!])!)
-                ud.set(udid, forKey: kEncryptionIV)
-            }
-            
-            ud.synchronize()
         }
     }
 }

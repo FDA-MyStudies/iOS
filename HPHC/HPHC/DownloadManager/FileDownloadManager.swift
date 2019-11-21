@@ -140,14 +140,14 @@ class FileDownloadManager: NSObject,URLSessionDelegate,URLSessionDownloadDelegat
             var key = ""
             var initializationVector = ""
             
-            if ud.value(forKey: kEncryptionKey) != nil {
-                key = ud.value(forKey: kEncryptionKey) as! String
+            if let ekey = FDAKeychain.shared[kEncryptionKey] {
+                key = ekey//ud.value(forKey: kEncryptionKey) as! String
             }
             else{
                 key = kdefaultKeyForEncrytion
             }
-            if ud.value(forKey: kEncryptionIV) != nil {
-                initializationVector = ud.value(forKey: kEncryptionIV) as! String
+            if let ekey = FDAKeychain.shared[kEncryptionIV] {
+                initializationVector = ekey//ud.value(forKey: kEncryptionIV) as! String
             }
             else{
                 initializationVector = kdefaultIVForEncryption

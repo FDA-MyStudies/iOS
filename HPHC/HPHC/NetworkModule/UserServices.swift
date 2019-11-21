@@ -543,10 +543,10 @@ class UserServices: NSObject {
             appDelegate.updateKeyAndInitializationVector()
             
             
-            //TEMP : Need to save these values in Realm
+            FDAKeychain.shared[kUserAuthTokenKeychainKey] = user.authToken
+            FDAKeychain.shared[kUserRefreshTokenKeychainKey] = user.refreshToken
+        
             let ud = UserDefaults.standard
-            ud.set(user.authToken, forKey: kUserAuthToken)
-            ud.set(user.userId!, forKey: kUserId)
             ud.set(true, forKey: kPasscodeIsPending)
             ud.synchronize()
             
@@ -578,11 +578,9 @@ class UserServices: NSObject {
                 
                 user.userType = UserType.FDAUser
                 
-                //TEMP : Need to save these values in Realm
-                let ud = UserDefaults.standard
-                ud.set(user.authToken, forKey: kUserAuthToken)
-                ud.set(user.userId!, forKey: kUserId)
-                ud.synchronize()
+                 FDAKeychain.shared[kUserAuthTokenKeychainKey] = user.authToken
+                 FDAKeychain.shared[kUserRefreshTokenKeychainKey] = user.refreshToken
+                
                 //Save Current User to DB
                 DBHandler().saveCurrentUser(user: user)
                 StudyFilterHandler.instance.previousAppliedFilters = []
@@ -601,12 +599,13 @@ class UserServices: NSObject {
                 
                 user.userType = UserType.FDAUser
                 
-                //TEMP : Need to save these values in Realm
+                FDAKeychain.shared[kUserAuthTokenKeychainKey] = user.authToken
+                FDAKeychain.shared[kUserRefreshTokenKeychainKey] = user.refreshToken
+                
                 let ud = UserDefaults.standard
-                ud.set(user.authToken, forKey: kUserAuthToken)
-                ud.set(user.userId!, forKey: kUserId)
                 ud.set(true, forKey: kPasscodeIsPending)
                 ud.synchronize()
+                
                 
                 DBHandler().saveCurrentUser(user: user)
             }
@@ -650,7 +649,6 @@ class UserServices: NSObject {
             
             //TEMP : Need to save these values in Realm
             let ud = UserDefaults.standard
-            ud.set(user.authToken, forKey: kUserAuthToken)
             ud.set(user.userId!, forKey: kUserId)
             ud.synchronize()
         }
@@ -738,12 +736,7 @@ class UserServices: NSObject {
     
     func handleLogoutResponse(response: Dictionary<String, Any>)  {
         
-        //TEMP
-        let ud = UserDefaults.standard
-        ud.removeObject(forKey: kUserAuthToken)
-        ud.removeObject(forKey: kUserId)
-        ud.synchronize()
-        
+       
         let appDomain = Bundle.main.bundleIdentifier!
         UserDefaults.standard.removePersistentDomain(forName: appDomain)
         UserDefaults.standard.synchronize()
@@ -763,14 +756,15 @@ class UserServices: NSObject {
         //reset Filters
         StudyFilterHandler.instance.previousAppliedFilters = []
         StudyFilterHandler.instance.searchText = ""
+        
+        //delete keychain values
+        FDAKeychain.shared[kUserAuthTokenKeychainKey] = nil
+        FDAKeychain.shared[kUserRefreshTokenKeychainKey] = nil
         
     }
     
     func handleDeleteAccountResponse(response: Dictionary<String, Any>) {
-        let ud = UserDefaults.standard
-        ud.removeObject(forKey: kUserAuthToken)
-        ud.removeObject(forKey: kUserId)
-        ud.synchronize()
+      
         
         let appDomain = Bundle.main.bundleIdentifier!
         UserDefaults.standard.removePersistentDomain(forName: appDomain)
@@ -791,6 +785,7 @@ class UserServices: NSObject {
         //reset Filters
         StudyFilterHandler.instance.previousAppliedFilters = []
         StudyFilterHandler.instance.searchText = ""
+    
     }
     
     func handleDeActivateAccountResponse(response: Dictionary<String, Any>) {
@@ -824,8 +819,9 @@ class UserServices: NSObject {
         
         let user = User.currentUser
         user.authToken  = (response[kUserAuthToken] as? String)!
-        //user.refreshToken = response[kRefreshToken] as! String
-        //self.failedRequestServices.headerParams![kUserAuthToken] = user.accessToken
+        
+        FDAKeychain.shared[kUserAuthTokenKeychainKey] = user.authToken
+        FDAKeychain.shared[kUserRefreshTokenKeychainKey] = user.refreshToken
         
         DBHandler().saveCurrentUser(user: user)
         //re-send request which failed due to session expired

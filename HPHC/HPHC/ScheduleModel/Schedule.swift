@@ -507,6 +507,8 @@ class Schedule{
         }
       
         calcualtePreviousRuns(previousScheduledruns: activity.userParticipationStatus.customScheduleRuns)
+        
+        scheduledTimings = activity.anchorRuns!
         calculateNewRuns()
         
     }

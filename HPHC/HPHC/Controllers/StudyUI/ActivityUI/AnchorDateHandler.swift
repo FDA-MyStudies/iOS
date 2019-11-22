@@ -182,8 +182,8 @@ class AnchorDateHandler {
         
         for anchorDate in emptyAnchorDatesList {
             
-            anchorDate.anchorDate = Date().addingTimeInterval(3600*24*2)
-            anchorDate.participantPropertyMetaData?.externalPropertyValue = "x7"
+            anchorDate.anchorDate = Date().addingTimeInterval(3600*24*10)
+            anchorDate.participantPropertyMetaData?.externalPropertyValue = "x8"
             anchorDate.participantPropertyMetaData?.dateOfEntryValue = "17-11-2017 21:55:44"
             anchorDate.isFinishedFetching = true
         }

@@ -1,52 +1,112 @@
 {
     "message": "SUCCESS",
     "activities": [{
-        "activityId": "activetaskdaily",
-        "activityVersion": "1.0",
-        "title": "activetaskdailytitle",
-        "type": "task",
-        "startTime": "",
-        "endTime": "",
-        "branching": false,
-        "lastModified": "2019-03-27T11:26:34.000+0530",
-        "state": "active",
-        "taskSubType": "fetalKickCounter",
-        "schedulingType": "AnchorDate",
-        "anchorDate": {
-            "sourceType": "ParticipantProperty",
-            "sourceActivityId": "anchornameTitle",
-            "sourceKey": "anchornamequest",
-            "sourceFormKey": "",
-            "propertyMetadata": {
-                "propertyId": "appointmentDate",
-                "propertyType": "PostEnrollment",
-                "propertyDataFormat": "date",
-                "shouldRefresh": true,
-                "dataSource": "ExternalSystem",
-                "status": "active",
-                "externalPropertyId": "appointmentDateExternalId",
-                "dateOfEntryId": "appointmentDateDateOfEntry"
-            },
+            "activityId": "activetaskdaily",
+            "activityVersion": "1.0",
+            "title": "activetaskdailytitle",
+            "type": "task",
+            "startTime": "",
+            "endTime": "",
+            "branching": false,
+            "lastModified": "2019-03-27T11:26:34.000+0530",
+            "state": "active",
+            "taskSubType": "fetalKickCounter",
+            "schedulingType": "AnchorDate",
+            "anchorDate": {
+                "sourceType": "ParticipantProperty",
+                "sourceActivityId": "anchornameTitle",
+                "sourceKey": "anchornamequest",
+                "sourceFormKey": "",
+                "propertyMetadata": {
+                    "propertyId": "appointmentDate",
+                    "propertyType": "PostEnrollment",
+                    "propertyDataFormat": "date",
+                    "shouldRefresh": true,
+                    "dataSource": "ExternalSystem",
+                    "status": "active",
+                    "externalPropertyId": "appointmentDateExternalId",
+                    "dateOfEntryId": "appointmentDateDateOfEntry"
+                },
 
-            "start": {
-                "anchorDays": 0,
-                "dayOfWeek": 0,
-                "dateOfMonth": "",
-                "time": "06:25:00"
+                "start": {
+                    "anchorDays": 0,
+                    "dayOfWeek": 0,
+                    "dateOfMonth": "",
+                    "time": "06:25:00"
+                },
+                "end": {
+                    "anchorDays": 0,
+                    "repeatInterval": 4,
+                    "time": "23:59:59"
+                }
             },
-            "end": {
-                "anchorDays": 0,
-                "repeatInterval": 4,
-                "time": "23:59:59"
+            "frequency": {
+                "type": "Daily",
+                "runs": [{
+                    "startTime": "06:25:00",
+                    "endTime": "23:59:59"
+                }],
+                "anchorRuns": []
             }
         },
-        "frequency": {
-            "type": "Daily",
-            "runs": [{
-                "startTime": "06:25:00",
-                "endTime": "23:59:59"
-            }],
-            "anchorRuns": []
+        {
+            "activityId": "activetaskmanual",
+            "activityVersion": "1.0",
+            "title": "activetaskmanualtitle",
+            "type": "task",
+            "startTime": "",
+            "endTime": "",
+            "branching": false,
+            "lastModified": "2019-03-27T11:30:50.000+0530",
+            "state": "active",
+            "taskSubType": "fetalKickCounter",
+            "schedulingType": "AnchorDate",
+            "anchorDate": {
+                "sourceType": "ParticipantProperty",
+                "sourceActivityId": "anchornameTitle",
+                "sourceKey": "anchornamequest",
+                "propertyMetadata": {
+                    "propertyId": "makingDate",
+                    "propertyType": "PostEnrollment",
+                    "propertyDataFormat": "date",
+                    "shouldRefresh": true,
+                    "dataSource": "ExternalSystem",
+                    "status": "active",
+                    "externalPropertyId": "makingDateExternalId",
+                    "dateOfEntryId": "makingDateDateOfEntry"
+                },
+                "sourceFormKey": "",
+                "start": {
+                    "anchorDays": 2,
+                    "dayOfWeek": 0,
+                    "dateOfMonth": "",
+                    "time": "05:30:00"
+                },
+                "end": {
+                    "anchorDays": 8,
+                    "repeatInterval": 0,
+                    "time": "05:30:00"
+                }
+            },
+            "frequency": {
+                "type": "Manually Schedule",
+                "addNewRuns": true,
+                "runs": [{
+                        "startTime": "",
+                        "endTime": ""
+                    },
+                    {
+                        "startTime": "",
+                        "endTime": ""
+                    }
+                ],
+                "anchorRuns": [{
+                        "startDays": 2,
+                        "endDays": 5,
+                        "time": "05:30:00"
+                    }
+                ]
+            }
         }
-    }]
+    ]
 }

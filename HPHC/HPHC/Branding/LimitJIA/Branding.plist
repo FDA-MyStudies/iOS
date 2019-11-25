@@ -19,9 +19,9 @@
 	<key>WebsiteButtonTitle</key>
 	<string>www.carragroup.org</string>
 	<key>TermsAndConditionURL</key>
-	<string>https://www.fda.gov/AboutFDA/AboutThisWebsite/WebsitePolicies/</string>
+	<string>https://carragroup.org/privacy-policy</string>
 	<key>PrivacyPolicyURL</key>
-	<string>https://www.fda.gov/AboutFDA/AboutThisWebsite/WebsitePolicies/#privacy</string>
+	<string>https://carragroup.org/privacy-policy</string>
 	<key>ValidatedTitle</key>
 	<string>You’re In</string>
 	<key>AllowFeedback</key>

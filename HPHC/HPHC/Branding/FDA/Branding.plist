@@ -26,5 +26,7 @@
 	<string>Validated!</string>
 	<key>AllowFeedback</key>
 	<true/>
+	<key>HideConsentButtonStudyHome</key>
+	<false/>
 </dict>
 </plist>

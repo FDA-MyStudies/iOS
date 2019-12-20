@@ -204,7 +204,7 @@ class LeftMenuViewController: UIViewController, LeftMenuProtocol {
             "menuType": LeftMenu.studyList]
         ]
         
-        if !Utilities.isStandaloneApp() {
+        if !Utilities.isStandaloneApp() && AppConfiguration.isShowMenuResourceButton {
             
             menus.append(["menuTitle": "Resources",
              "iconName": "resources_menu1",

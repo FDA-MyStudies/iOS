@@ -54,9 +54,12 @@ class StudyHomeViewController: UIViewController {
     @IBOutlet var buttonJoinStudy: UIButton?
     @IBOutlet var visitWebsiteButtonLeadingConstraint: NSLayoutConstraint?
     @IBOutlet var visitWebsiteButtonTrailingConstraint: NSLayoutConstraint?
+    @IBOutlet var visitConsentButtonLeadingConstraint: NSLayoutConstraint?
+    @IBOutlet var visitConsentButtonTrailingConstraint: NSLayoutConstraint?
     @IBOutlet var buttonVisitWebsite: UIButton?
     @IBOutlet var buttonViewConsent: UIButton?
     @IBOutlet var viewBottombarBg: UIView?
+    @IBOutlet var viewBottombar: UIView!
     @IBOutlet var viewSeperater: UIView?
 
     var isStudyBookMarked = false
@@ -188,7 +191,18 @@ class StudyHomeViewController: UIViewController {
             visitWebsiteButtonLeadingConstraint?.constant = 0
             viewSeperater?.isHidden = false
         }
+        
+        if !AppConfiguration.shouldShowConsentButtonOnStudyHome {
+            buttonViewConsent?.isHidden = true
+            viewSeperater?.isHidden = true
+            visitConsentButtonTrailingConstraint?.constant = -(buttonViewConsent!.bounds.size.width + 6)
+        }
 
+        if buttonViewConsent!.isHidden && buttonVisitWebsite!.isHidden {
+            viewBottombarBg?.isHidden = true
+            viewBottombar.isHidden = true
+        }
+        
         // If coming from Activity Resources
         if hideViewConsentAfterJoining == true {
             if Utilities.isValidValue(someObject: Study.currentStudy?.overview.websiteLink as AnyObject?) {

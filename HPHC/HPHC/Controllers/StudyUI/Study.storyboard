@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15400" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="cD3-IQ-4Md">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="cD3-IQ-4Md">
     <device id="retina5_9" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15404"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -174,8 +174,10 @@
                         <outlet property="buttonVisitWebsite" destination="bc7-W1-fmy" id="dup-O5-ydO"/>
                         <outlet property="container" destination="XyM-as-imD" id="zg6-NZ-qCM"/>
                         <outlet property="pageControlView" destination="spx-SF-bV8" id="Tpx-Rw-4mV"/>
+                        <outlet property="viewBottombar" destination="y7Z-cw-zy2" id="Kyy-XV-faI"/>
                         <outlet property="viewBottombarBg" destination="eJ6-PH-Hb3" id="oZa-5V-gYl"/>
                         <outlet property="viewSeperater" destination="7Ld-sF-BcO" id="Pgb-Nh-btu"/>
+                        <outlet property="visitConsentButtonTrailingConstraint" destination="yXS-Rh-Bkq" id="m6y-TO-Txy"/>
                         <outlet property="visitWebsiteButtonLeadingConstraint" destination="NmZ-a5-G3L" id="VdA-wA-sHA"/>
                         <outlet property="visitWebsiteButtonTrailingConstraint" destination="Qmg-8e-ce5" id="npf-Js-NJW"/>
                     </connections>

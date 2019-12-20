@@ -47,13 +47,36 @@ class SignUpCompleteViewController: UIViewController{
         settings?.touchId = true
         settings?.passcode = true
         
-        User.currentUser.settings = settings
         
-        UserServices().updateUserProfile(self as NMWebServiceDelegate)
+       
+        
+        UIUtilities.showAlertMessageWithTwoActionsAndHandler("",
+                                                             errorMessage: "Do you wish to set up Passcode or Face ID/Touch ID protection for this app? (You can also choose to do this later by visiting the app's Settings screen.)",
+                                                             errorAlertActionTitle: "No",
+                                                             errorAlertActionTitle2: "Yes",
+                                                             viewControllerUsed: self,
+                                                             action1: {
+                                                                //No
+                                                                settings?.touchId = false
+                                                                settings?.passcode = false
+                                                                User.currentUser.settings = settings
+                                                                UserServices().updateUserProfile(self as NMWebServiceDelegate)
+                                                                
+                                                                
+        }) {
+            //Yes
+            print("hello")
+            settings?.touchId = true
+            settings?.passcode = true
+            User.currentUser.settings = settings
+            UserServices().updateUserProfile(self as NMWebServiceDelegate)
+            
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
         
         
     }

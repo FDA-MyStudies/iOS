@@ -23,7 +23,8 @@ import Foundation
 struct AppConfiguration {
     
     private struct JSONKey {
-        static let isShowMenuResourceButton = "isShowMenuResourceButton"
+        static let isShowMenuResourceButton = "shouldShowMenuResourceButton"
+        static let shouldShowConsentButtonOnStudyHome = "shouldShowConsentButtonOnStudyHome"
     }
     
     private static var appConfig: JSONDictionary {
@@ -36,5 +37,9 @@ struct AppConfiguration {
     
     static var isShowMenuResourceButton: Bool {
         return appConfig[JSONKey.isShowMenuResourceButton] as? Bool ?? true
+    }
+    
+    static var shouldShowConsentButtonOnStudyHome:Bool {
+        return appConfig[JSONKey.shouldShowConsentButtonOnStudyHome] as? Bool ?? true
     }
 }

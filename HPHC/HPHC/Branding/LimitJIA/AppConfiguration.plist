@@ -6,5 +6,7 @@
 	<true/>
 	<key>shouldShowConsentButtonOnStudyHome</key>
 	<true/>
+	<key>showConsentInStudyResources</key>
+	<true/>
 </dict>
 </plist>

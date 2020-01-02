@@ -25,6 +25,7 @@ struct AppConfiguration {
     private struct JSONKey {
         static let isShowMenuResourceButton = "shouldShowMenuResourceButton"
         static let shouldShowConsentButtonOnStudyHome = "shouldShowConsentButtonOnStudyHome"
+        static let showConsentInStudyResources = "showConsentInStudyResources"
     }
     
     private static var appConfig: JSONDictionary {
@@ -41,5 +42,8 @@ struct AppConfiguration {
     
     static var shouldShowConsentButtonOnStudyHome:Bool {
         return appConfig[JSONKey.shouldShowConsentButtonOnStudyHome] as? Bool ?? true
+    }
+    static var showConsentInStudyResources:Bool {
+        return appConfig[JSONKey.showConsentInStudyResources] as? Bool ?? true
     }
 }

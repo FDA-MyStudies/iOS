@@ -228,16 +228,16 @@ class SignUpViewController: UIViewController{
     @IBAction func submitButtonAction(_ sender: Any) {
         
         self.view.endEditing(true)
-        self.navigateToVerificationController()
-//        if self.validateAllFields() == true {
-//
-//            if !(agreedToTerms) {
-//                self.showAlertMessages(textMessage: kMessageAgreeToTermsAndConditions)
-//            } else {
-//                //Call the Webservice
-//                UserServices().registerUser(self as NMWebServiceDelegate)
-//            }
-//        }
+      
+        if self.validateAllFields() == true {
+
+            if !(agreedToTerms) {
+                self.showAlertMessages(textMessage: kMessageAgreeToTermsAndConditions)
+            } else {
+                //Call the Webservice
+                UserServices().registerUser(self as NMWebServiceDelegate)
+            }
+        }
     }
     
     

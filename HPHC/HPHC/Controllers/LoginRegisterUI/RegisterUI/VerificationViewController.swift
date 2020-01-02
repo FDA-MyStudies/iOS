@@ -130,12 +130,12 @@ class VerificationViewController: UIViewController{
      
      */
     @IBAction func continueButtonAction(_ sender: Any) {
-        self.navigateToSignUpCompletionStep()
-//        if (textFieldVerificationCode?.text?.count)! > 0 {
-//             UserServices().verifyEmail(emailId: User.currentUser.emailId!,  verificationCode:(self.textFieldVerificationCode?.text)! , delegate: self)
-//        } else {
-//             self.showAlertMessages(textMessage: kMessageVerificationCodeEmpty)
-//        }
+        
+        if (textFieldVerificationCode?.text?.count)! > 0 {
+             UserServices().verifyEmail(emailId: User.currentUser.emailId!,  verificationCode:(self.textFieldVerificationCode?.text)! , delegate: self)
+        } else {
+             self.showAlertMessages(textMessage: kMessageVerificationCodeEmpty)
+        }
     }
     
     

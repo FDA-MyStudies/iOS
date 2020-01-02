@@ -198,22 +198,18 @@ class StudyHomeViewController: UIViewController {
             visitConsentButtonTrailingConstraint?.constant = -(buttonViewConsent!.bounds.size.width + 6)
         }
 
-        if buttonViewConsent!.isHidden && buttonVisitWebsite!.isHidden {
-            viewBottombarBg?.isHidden = true
-            viewBottombar.isHidden = true
-        }
-        
+
         // If coming from Activity Resources
         if hideViewConsentAfterJoining == true {
             if Utilities.isValidValue(someObject: Study.currentStudy?.overview.websiteLink as AnyObject?) {
                 buttonVisitWebsite?.isHidden = false
-                visitWebsiteButtonLeadingConstraint?.constant = -184
                 view.layoutIfNeeded()
                 buttonVisitWebsite?.layoutIfNeeded()
 
                 buttonJoinStudy?.isHidden = true
                 viewSeperater?.isHidden = true
                 buttonViewConsent?.isHidden = true
+                visitConsentButtonTrailingConstraint?.constant = -(buttonViewConsent!.bounds.size.width + 6)
             } else {
                 buttonVisitWebsite?.isHidden = true
                 buttonVisitWebsite?.isUserInteractionEnabled = false
@@ -222,6 +218,11 @@ class StudyHomeViewController: UIViewController {
                 viewSeperater?.isHidden = true
                 buttonViewConsent?.isHidden = true
             }
+        }
+        
+        if buttonViewConsent!.isHidden && buttonVisitWebsite!.isHidden {
+            viewBottombarBg?.isHidden = true
+            viewBottombar.isHidden = true
         }
 
         // Standalone App Settings

@@ -206,7 +206,10 @@ class ResourcesViewController: UIViewController{
         //add default List
         
         tableViewRowDetails?.append(aboutTheStudy as AnyObject)
-        tableViewRowDetails?.append(consentPDF as AnyObject)
+        if AppConfiguration.showConsentInStudyResources {
+            tableViewRowDetails?.append(consentPDF as AnyObject)
+        }
+        
         
 //        let plistPath = Bundle.main.path(forResource: "ResourcesUI", ofType: ".plist", inDirectory: nil)
 //

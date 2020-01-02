@@ -44,14 +44,14 @@ class SignUpCompleteViewController: UIViewController{
         
         settings?.remoteNotifications = true
         settings?.localNotifications = true
-        settings?.touchId = true
-        settings?.passcode = true
+        //settings?.touchId = true
+        //settings?.passcode = true
         
+        self.hideViews()
         
-       
         
         UIUtilities.showAlertMessageWithTwoActionsAndHandler("",
-                                                             errorMessage: "Do you wish to set up Passcode or Face ID/Touch ID protection for this app? (You can also choose to do this later by visiting the app's Settings screen.)",
+                                                             errorMessage: "Do you wish to set up Passcode or FaceID/TouchID protection for this app? (You can do this later in the My Account area).",
                                                              errorAlertActionTitle: "No",
                                                              errorAlertActionTitle2: "Yes",
                                                              viewControllerUsed: self,
@@ -70,6 +70,7 @@ class SignUpCompleteViewController: UIViewController{
             settings?.passcode = true
             User.currentUser.settings = settings
             UserServices().updateUserProfile(self as NMWebServiceDelegate)
+            
             
         }
     }
@@ -92,6 +93,17 @@ class SignUpCompleteViewController: UIViewController{
         self.navigationController?.setNavigationBarHidden(true, animated: true)
     }
     
+    func hideViews() {
+        for view in self.view.subviews {
+            view.isHidden = true
+        }
+    }
+    
+    func unUideViews() {
+        for view in self.view.subviews {
+            view.isHidden = false
+        }
+    }
     
     // MARK:- button Actions
     
@@ -170,13 +182,24 @@ extension SignUpCompleteViewController: NMWebServiceDelegate {
             
             DBHandler.saveUserSettingsToDatabase()
             
-            let appDelegate = UIApplication.shared.delegate as! AppDelegate
-            appDelegate.checkPasscode(viewController: self.navigationController!)
-
             let ud = UserDefaults.standard
             ud.set(false, forKey: kPasscodeIsPending)
             ud.set(false, forKey: kShowNotification)
             ud.synchronize()
+            
+            
+            
+            if User.currentUser.settings!.passcode! {
+                let appDelegate = UIApplication.shared.delegate as! AppDelegate
+                appDelegate.checkPasscode(viewController: self.navigationController!)
+                self.unUideViews()
+            }
+            else {
+                self.navigateToGatewayDashboard()
+            }
+            
+            
+            
             
             
         }

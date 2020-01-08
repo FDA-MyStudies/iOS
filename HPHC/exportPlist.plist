@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!--
+   exportPlist.plist
+   HPHC
+
+   Created by Surender on 07/01/20.
+   Copyright (c) 2020 BTC. All rights reserved.
+-->
+<plist version="1.0">
+    <dict>
+        <key>method</key>
+        <string>app-store</string>
+        <key>teamID</key>
+        <string>FWLLYUH7XR</string>
+        <key>destination</key>
+        <string>upload</string>
+    </dict>
+</plist>

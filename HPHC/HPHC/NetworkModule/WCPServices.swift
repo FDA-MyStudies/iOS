@@ -535,22 +535,22 @@ class WCPServices: NSObject {
     
     func handleGetStudyActivityMetadata(response: Dictionary<String, Any>){
         
-        /*
-        let filePath  = Bundle.main.path(forResource: "Activity_Metadata_Other", ofType: "json")
-        let data = NSData(contentsOfFile: filePath!)
-        
-        var activities: [String:Any] = [:]
-        
-        do {
-            let res = try JSONSerialization.jsonObject(with: data! as Data, options: []) as? Dictionary<String,Any>
-            
-            activities = res?[kActivity] as! [String: Any]
-        }
-        catch {
-            print("json error: \(error.localizedDescription)")
-        }
-        */
-       // Study.currentActivity?.setActivityMetaData(activityDict: activities)
+//        let filePath  = Bundle.main.path(forResource: "ActivityMetadata TEST1", ofType: "json") //Activity_Metadata_Other
+//        let data = NSData(contentsOfFile: filePath!)
+//
+//        var activities: [String:Any] = [:]
+//
+//        do {
+//            let res = try JSONSerialization.jsonObject(with: data! as Data, options: []) as? Dictionary<String,Any>
+//
+//            activities = res?[kActivity] as! [String: Any]
+////            print("1---\(activities)")
+//        }
+//        catch {
+//            print("json error: \(error.localizedDescription)")
+//        }
+//
+//        Study.currentActivity?.setActivityMetaData(activityDict: activities)
         
         Study.currentActivity?.setActivityMetaData(activityDict: response[kActivity] as! Dictionary<String, Any>)
         

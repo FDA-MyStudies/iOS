@@ -229,7 +229,7 @@ class ActivityBuilder {
                                             
                                             switch (questionStep as? ORKQuestionStep)!.answerFormat {
                                                 
-                                            case is ORKTextChoiceAnswerFormat, is ORKTextScaleAnswerFormat, is ORKImageChoiceAnswerFormat:
+                                            case is ORKTextChoiceAnswerFormat, is ORKTextScaleAnswerFormat, is ORKImageChoiceAnswerFormat, is ORKValuePickerAnswerFormat:
                                                 
                                                 predicateQuestionChoiceA = ORKResultPredicate.predicateForChoiceQuestionResult(with: resultSelector! , expectedAnswerValue: dict[kCondtion] as! NSCoding & NSCopying & NSObjectProtocol)
                                                 
@@ -243,7 +243,7 @@ class ActivityBuilder {
                                                     // this means c = value && d =  value
                                                     destination?.append( (dict[kDestination]! as? String)!)
                                                 }
-                                                
+                                            
                                             case is ORKNumericAnswerFormat ,is ORKScaleAnswerFormat,is ORKTimeIntervalAnswerFormat,is ORKHeightAnswerFormat, is ORKContinuousScaleAnswerFormat,is ORKHealthKitQuantityTypeAnswerFormat:
                                                 
                                                 if let operatorValue = dict[kOperator] as? String {

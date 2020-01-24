@@ -1,0 +1,311 @@
+{
+    "message": "SUCCESS",
+    "activity": {
+        "type": "questionnaire",
+        "metadata": {
+            "activityId" : "TestUveitis",
+            "endDate" : "",
+            "lastModified" : "2020-01-22T06:57:01.000-0800",
+            "name" : "TestUveitis",
+            "startDate" : "2019-07-11T00:00:00.000-0700",
+            "studyId" : "Arthritis001",
+            "version" : "1.2"
+        },
+        "steps": [
+            {
+                "type": "question",
+                "resultType": "valuePicker",
+                "key": "valuePicker",
+                "title": "VALUE PICKER Navigable",
+                "text": "desc",
+                "skippable": true,
+                "groupName": "",
+                "repeatable": false,
+                "repeatableText": "",
+                "destinations": [
+                    {
+                        "condition": "one",
+                        "operator": "",
+                        "destination": "textChoice2"
+                    },
+                    {
+                        "condition": "two",
+                        "operator": "",
+                        "destination": "textChoice3"
+                    },
+                    {
+                        "condition": "three",
+                        "operator": "",
+                        "destination": "textChoice4"
+                    },
+                    {
+                        "condition": "",
+                        "operator": "",
+                        "destination": "textChoice4"
+                    }
+                ],
+                "healthDataKey": "",
+                "format": {
+                    "textChoices": [
+                        {
+                            "text": "1st",
+                            "value": "one",
+                            "detail": "one desc",
+                            "exclusive": true
+                        },
+                        {
+                            "text": "2nd",
+                            "value": "two",
+                            "detail": "sec desc",
+                            "exclusive": false
+                        },
+                        {
+                            "text": "3rd",
+                            "value": "three",
+                            "detail": "three desc",
+                            "exclusive": false
+                        },
+                        {
+                            "text":"Other choice",
+                            "value":"3",
+                            "detail":"",
+                            "exclusive":false,
+                            "other":{
+                                "placeholder":"other medication",
+                                "isMandatory":true,
+                                "textfieldReq":true
+                            }
+                        }
+                        
+                    ],
+                    "selectionStyle": "Single"
+                },
+                "steps": [],
+                "options": []
+            },
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            {
+                "type": "question",
+                "resultType": "textChoice",
+                "key": "textChoice2",
+                "title": "Question MultiChoice2",
+                "text": "desc",
+                "skippable": false,
+                "groupName": "",
+                "repeatable": false,
+                "repeatableText": "",
+                "destinations": [
+                    {
+                        "condition": "one",
+                        "operator": "",
+                        "destination": "Q2"
+                    },
+                    {
+                        "condition": "two",
+                        "operator": "",
+                        "destination": "Q2"
+                    },
+                    {
+                        "condition": "three",
+                        "operator": "",
+                        "destination": "Q2"
+                    },
+                    {
+                        "condition": "",
+                        "operator": "",
+                        "destination": "Q2"
+                    }
+                ],
+                "healthDataKey": "",
+                "format": {
+                    "textChoices": [
+                        {
+                            "text": "1st",
+                            "value": "one",
+                            "detail": "",
+                            "exclusive": true
+                        },
+                        {
+                            "text": "2nd",
+                            "value": "two",
+                            "detail": "sec desc",
+                            "exclusive": false
+                        },
+                        {
+                            "text": "3rd",
+                            "value": "three",
+                            "detail": "",
+                            "exclusive": false
+                        },
+                        {
+                            "text":"Other choice",
+                            "value":"3",
+                            "detail":"",
+                            "exclusive":false,
+                            "other":{
+                                "placeholder":"other medication",
+                                "isMandatory":true,
+                                "textfieldReq":true
+                            }
+                        }
+                        
+                    ],
+                    "selectionStyle": "Multiple"
+                },
+                "steps": [],
+                "options": []
+            },
+            {
+                "type": "question",
+                "resultType": "textChoice",
+                "key": "textChoice3",
+                "title": "Question MultiChoice3",
+                "text": "desc",
+                "skippable": false,
+                "groupName": "",
+                "repeatable": false,
+                "repeatableText": "",
+                "destinations": [
+                    {
+                        "condition": "one",
+                        "operator": "",
+                        "destination": "Q2"
+                    },
+                    {
+                        "condition": "two",
+                        "operator": "",
+                        "destination": "Q2"
+                    },
+                    {
+                        "condition": "three",
+                        "operator": "",
+                        "destination": "Q2"
+                    },
+                    {
+                        "condition": "",
+                        "operator": "",
+                        "destination": "Q2"
+                    }
+                ],
+                "healthDataKey": "",
+                "format": {
+                    "textChoices": [
+                        {
+                            "text": "1st",
+                            "value": "one",
+                            "detail": "",
+                            "exclusive": true
+                        },
+                        {
+                            "text": "2nd",
+                            "value": "two",
+                            "detail": "sec desc",
+                            "exclusive": false
+                        },
+                        {
+                            "text": "3rd",
+                            "value": "three",
+                            "detail": "",
+                            "exclusive": false
+                        },
+                        {
+                            "text":"Other choice",
+                            "value":"3",
+                            "detail":"",
+                            "exclusive":false,
+                            "other":{
+                                "placeholder":"other medication",
+                                "isMandatory":true,
+                                "textfieldReq":true
+                            }
+                        }
+                        
+                    ],
+                    "selectionStyle": "Multiple"
+                },
+                "steps": [],
+                "options": []
+            },
+            {
+                "type": "question",
+                "resultType": "textChoice",
+                "key": "textChoice4",
+                "title": "Question MultiChoice4",
+                "text": "desc",
+                "skippable": false,
+                "groupName": "",
+                "repeatable": false,
+                "repeatableText": "",
+                "destinations": [
+                    {
+                        "condition": "one",
+                        "operator": "",
+                        "destination": "Q2"
+                    },
+                    {
+                        "condition": "two",
+                        "operator": "",
+                        "destination": "Q2"
+                    },
+                    {
+                        "condition": "three",
+                        "operator": "",
+                        "destination": "Q2"
+                    },
+                    {
+                        "condition": "",
+                        "operator": "",
+                        "destination": "Q2"
+                    }
+                ],
+                "healthDataKey": "",
+                "format": {
+                    "textChoices": [
+                        {
+                            "text": "1st",
+                            "value": "one",
+                            "detail": "",
+                            "exclusive": true
+                        },
+                        {
+                            "text": "2nd",
+                            "value": "two",
+                            "detail": "sec desc",
+                            "exclusive": false
+                        },
+                        {
+                            "text": "3rd",
+                            "value": "three",
+                            "detail": "",
+                            "exclusive": false
+                        },
+                        {
+                            "text":"Other choice",
+                            "value":"3",
+                            "detail":"",
+                            "exclusive":false,
+                            "other":{
+                                "placeholder":"other medication",
+                                "isMandatory":true,
+                                "textfieldReq":true
+                            }
+                        }
+                        
+                    ],
+                    "selectionStyle": "Multiple"
+                },
+                "steps": [],
+                "options": []
+            }
+        ]
+    }
+}

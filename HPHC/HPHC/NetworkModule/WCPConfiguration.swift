@@ -60,16 +60,20 @@ struct WCPServerURLConstants {
 //    static let ProductionURL = "http://192.168.0.44:8080/StudyMetaData/"
 //    static let DevelopmentURL = "http://192.168.0.44:8080/StudyMetaData/"
     
+    //local 2 - btc
+        static let ProductionURL = "http://192.168.0.152:8088/StudyMetaData/"
+        static let DevelopmentURL = "http://192.168.0.152:8088/StudyMetaData/"
+    
     //Staging
    // static let ProductionURL = "https://hpwcp-stage.lkcompliant.net/StudyMetaData/"
    // static let DevelopmentURL = "https://hpwcp-stage.lkcompliant.net/StudyMetaData/"
     
-    static var DevelopmentURL:String {
-        return UserDefaults.standard.value(forKey: "WCPBaseURL") as? String ?? "https://hpwcp-stage.lkcompliant.net/StudyMetaData/"
-    }
-    static var ProductionURL:String {
-        return UserDefaults.standard.value(forKey: "WCPBaseURL") as? String ?? "https://hpwcp-stage.lkcompliant.net/StudyMetaData/"
-    }
+//    static var DevelopmentURL:String {
+//        return UserDefaults.standard.value(forKey: "WCPBaseURL") as? String ?? "https://hpwcp-stage.lkcompliant.net/StudyMetaData/"
+//    }
+//    static var ProductionURL:String {
+//        return UserDefaults.standard.value(forKey: "WCPBaseURL") as? String ?? "https://hpwcp-stage.lkcompliant.net/StudyMetaData/"
+//    }
 }
 
 class WCPConfiguration: NetworkConfiguration {

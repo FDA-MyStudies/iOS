@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="cD3-IQ-4Md">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="cD3-IQ-4Md">
     <device id="retina5_9" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -760,10 +760,9 @@
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ujA-js-JkO" customClass="KDCircularProgress" customModule="HPHC" customModuleProvider="target">
                                                     <rect key="frame" x="7" y="3" width="180" height="194"/>
                                                     <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="THE STUDY IS" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="XjP-9a-aCO">
-                                                            <rect key="frame" x="62.666666666666671" y="50" width="55" height="34"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="YOU ARE" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="XjP-9a-aCO">
+                                                            <rect key="frame" x="62.666666666666671" y="67" width="55" height="12"/>
                                                             <constraints>
-                                                                <constraint firstAttribute="height" constant="34" id="GnX-4I-iWb"/>
                                                                 <constraint firstAttribute="width" constant="55" id="qVU-0W-ax9"/>
                                                             </constraints>
                                                             <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="10"/>
@@ -777,13 +776,17 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="%" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="J3t-SP-0pl">
-                                                            <rect key="frame" x="108" y="92" width="16" height="20"/>
+                                                            <rect key="frame" x="108" y="87" width="16" height="20"/>
                                                             <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="16"/>
                                                             <color key="textColor" red="0.54901960780000003" green="0.58431372550000005" blue="0.63921568630000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="COMPLETE" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="1se-Ih-SJx">
-                                                            <rect key="frame" x="62.666666666666671" y="119" width="54.666666666666671" height="12"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="DONE WITH THE STUDY" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="1se-Ih-SJx">
+                                                            <rect key="frame" x="62.666666666666671" y="115" width="55" height="30"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="30" id="LDI-ec-HFO"/>
+                                                                <constraint firstAttribute="width" constant="55" id="XFE-Fp-eZc"/>
+                                                            </constraints>
                                                             <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="10"/>
                                                             <color key="textColor" red="0.54901960780000003" green="0.58431372550000005" blue="0.63921568630000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
@@ -794,11 +797,11 @@
                                                         <constraint firstItem="1se-Ih-SJx" firstAttribute="centerX" secondItem="ujA-js-JkO" secondAttribute="centerX" id="6uU-kv-Nol"/>
                                                         <constraint firstItem="7z2-GP-epO" firstAttribute="centerX" secondItem="ujA-js-JkO" secondAttribute="centerX" id="HNr-zw-ml0"/>
                                                         <constraint firstItem="7z2-GP-epO" firstAttribute="centerY" secondItem="ujA-js-JkO" secondAttribute="centerY" id="MkN-fj-C3O"/>
-                                                        <constraint firstItem="7z2-GP-epO" firstAttribute="top" secondItem="XjP-9a-aCO" secondAttribute="bottom" constant="-5" id="OrF-ac-jKh"/>
+                                                        <constraint firstItem="7z2-GP-epO" firstAttribute="top" secondItem="XjP-9a-aCO" secondAttribute="bottom" id="OrF-ac-jKh"/>
                                                         <constraint firstItem="XjP-9a-aCO" firstAttribute="centerX" secondItem="ujA-js-JkO" secondAttribute="centerX" id="dfm-cb-a2L"/>
                                                         <constraint firstItem="J3t-SP-0pl" firstAttribute="top" secondItem="XjP-9a-aCO" secondAttribute="bottom" constant="8" id="rV8-U0-AL4"/>
                                                         <constraint firstItem="J3t-SP-0pl" firstAttribute="leading" secondItem="7z2-GP-epO" secondAttribute="trailing" constant="1" id="ugE-6j-Yiz"/>
-                                                        <constraint firstItem="1se-Ih-SJx" firstAttribute="top" secondItem="7z2-GP-epO" secondAttribute="bottom" constant="4" id="zTi-li-mVW"/>
+                                                        <constraint firstItem="1se-Ih-SJx" firstAttribute="top" secondItem="7z2-GP-epO" secondAttribute="bottom" id="zTi-li-mVW"/>
                                                     </constraints>
                                                 </view>
                                                 <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3Q8-4M-yXU">

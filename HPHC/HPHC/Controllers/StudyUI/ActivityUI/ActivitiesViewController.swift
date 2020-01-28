@@ -70,6 +70,8 @@ class ActivitiesViewController : UIViewController{
         self.tabBarController?.delegate = self
         
         self.navigationItem.title = NSLocalizedString("STUDY ACTIVITIES", comment: "")
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor:Utilities.getUIColorFromHex(0x007CBA)]
+        
         self.tableView?.sectionHeaderHeight = 30
         
         self.navigationController?.navigationItem.rightBarButtonItem?.tintColor = UIColor.gray

@@ -280,6 +280,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
+        let plistPath = Bundle.main.path(forResource: "GatewayOverview", ofType: ".plist", inDirectory: nil)
+        print("Gateway---\(plistPath)")
+        
         self.isAppLaunched = true
         IQKeyboardManager.shared.enable = true
         print(Utilities.isStandaloneApp(),"standalone")

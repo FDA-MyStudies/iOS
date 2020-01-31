@@ -152,6 +152,7 @@
 		6F41B86423AC938500D4F624 /* AppConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F41B86123AC937200D4F624 /* AppConfiguration.swift */; };
 		6F52327E23D9883800995A78 /* ActivityMetadata TEST1.json in Resources */ = {isa = PBXBuildFile; fileRef = 6F52327D23D9883800995A78 /* ActivityMetadata TEST1.json */; };
 		6F5AAF80225DE699002C8FF6 /* Activity_Metadata_Other.json in Resources */ = {isa = PBXBuildFile; fileRef = 6F5AAF7F225DE699002C8FF6 /* Activity_Metadata_Other.json */; };
+		6F6C3E5923E413D100C3BBE6 /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 94B3DD2C1E6ED8E500327AE5 /* Login.storyboard */; };
 		6F6EC33323E1577B0056AD55 /* UIApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94334F861E70055A00755444 /* UIApplication.swift */; };
 		6F6EC33423E1577B0056AD55 /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94334F851E70055A00755444 /* UIViewController.swift */; };
 		6F6EC33523E1577B0056AD55 /* SignUpTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B3DD361E6ED8E500327AE5 /* SignUpTableViewCell.swift */; };
@@ -350,7 +351,6 @@
 		6F6EC3FB23E1577B0056AD55 /* NewProgressView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6EDDB6591EE05E4C00C79337 /* NewProgressView.xib */; };
 		6F6EC3FC23E1577B0056AD55 /* fda_preload.gif in Resources */ = {isa = PBXBuildFile; fileRef = 6EDDB6601EE05FDC00C79337 /* fda_preload.gif */; };
 		6F6EC3FD23E1577B0056AD55 /* StudyOverview.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4833E9E21E712C2B0032D244 /* StudyOverview.plist */; };
-		6F6EC3FE23E1577B0056AD55 /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 94B3DD2C1E6ED8E500327AE5 /* Login.storyboard */; };
 		6F6EC3FF23E1577B0056AD55 /* ActivitySchedules.xib in Resources */ = {isa = PBXBuildFile; fileRef = 942591C31EA8A2650010D892 /* ActivitySchedules.xib */; };
 		6F6EC40023E1577B0056AD55 /* Activity_New_Other_Form.json in Resources */ = {isa = PBXBuildFile; fileRef = 6F10BB18234DE45D006388E2 /* Activity_New_Other_Form.json */; };
 		6F6EC40123E1577B0056AD55 /* StudyList.json in Resources */ = {isa = PBXBuildFile; fileRef = 94B3DD201E6ED8E500327AE5 /* StudyList.json */; };
@@ -2757,7 +2757,6 @@
 				6F6EC3FB23E1577B0056AD55 /* NewProgressView.xib in Resources */,
 				6F6EC3FC23E1577B0056AD55 /* fda_preload.gif in Resources */,
 				6F6EC3FD23E1577B0056AD55 /* StudyOverview.plist in Resources */,
-				6F6EC3FE23E1577B0056AD55 /* Login.storyboard in Resources */,
 				6F6EC3FF23E1577B0056AD55 /* ActivitySchedules.xib in Resources */,
 				6F6EC40023E1577B0056AD55 /* Activity_New_Other_Form.json in Resources */,
 				6F6EC40123E1577B0056AD55 /* StudyList.json in Resources */,
@@ -2777,6 +2776,7 @@
 				6F6EC40D23E1577B0056AD55 /* Acivity_Question.json in Resources */,
 				6F6EC40E23E1577B0056AD55 /* ComprehensionFailure.xib in Resources */,
 				6F6EC40F23E1577B0056AD55 /* LatestActive_1B.json in Resources */,
+				6F6C3E5923E413D100C3BBE6 /* Login.storyboard in Resources */,
 				6F6EC41023E1577B0056AD55 /* Labkey_Activity_Latest3.json in Resources */,
 				6F6EC41123E1577B0056AD55 /* Eligibility_1B.json in Resources */,
 				6F6EC41323E1577B0056AD55 /* Profile.plist in Resources */,
@@ -4430,7 +4430,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				IS_STANDALONE_STUDY = false;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.ccf.IBDPROdigy;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ccf.IBDPROdigy2;
 				PRODUCT_NAME = "IBD PROdigy";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "HPHC/Controllers/LoginRegisterUI/FDA-Bridging-Header.h";
@@ -4462,7 +4462,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				IS_STANDALONE_STUDY = false;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.ccf.IBDPROdigy;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ccf.IBDPROdigy2;
 				PRODUCT_NAME = "IBD PROdigy";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "HPHC/Controllers/LoginRegisterUI/FDA-Bridging-Header.h";

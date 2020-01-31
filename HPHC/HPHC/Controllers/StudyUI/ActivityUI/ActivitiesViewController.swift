@@ -351,6 +351,7 @@ class ActivitiesViewController : UIViewController{
                 self.loadActivitiesFromDatabase()
                 
                 //update UR
+              self.syncParticipantPropertyValuesOnUserRegistration()
             }
         }
         
@@ -367,7 +368,41 @@ class ActivitiesViewController : UIViewController{
         print("Finished 0")
     }
     
+  func syncParticipantPropertyValuesOnUserRegistration() {
     
+    //get activities from database with ParticipantProperty as anchor date
+    let activities = DBHandler.getActivitiesWithParticipantPropertyType((Study.currentStudy?.studyId)!)
+    var activitiesToSync = [[String:Any]]()
+    for activity in activities {
+      
+      var ppValue = ["activityId":activity.actvityId,
+                     "activityStartDate": activity.startDate?.description,
+                     "activityEndDate": activity.endDate?.description,
+                     "anchorDateVersion": activity.externalPropertyValue,
+                     "anchorDatecreatedDate": activity.dateOfEntryValue] as [String : Any]
+      
+      //check activity frequency
+      var activitiesRuns = [[String:String]]()
+      if activity.frequencyType == Frequency.Scheduled.rawValue {
+        let runs = activity.activityRuns
+        for run in runs {
+          let runDetail = ["runStartDate":run.startDate.description,
+                           "runEndDate":run.endDate.description]
+          activitiesRuns.append(runDetail)
+        }
+        
+        ppValue["customScheduleRuns"] = activitiesRuns
+      }
+      
+      activitiesToSync.append(ppValue)
+      
+    }
+    
+    if activitiesToSync.count > 0 {
+      UserServices().updateActivityWithParticipantPropertyDetail(studyId: Study.currentStudy!.studyId, activities: activitiesToSync as! [[String : Any]], delegate: self)
+    }
+    
+  }
     
     /**
      Used to load the Actif=vities data from database

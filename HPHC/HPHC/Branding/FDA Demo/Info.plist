@@ -53,6 +53,8 @@
 	<string>$(PRODUCT_NAME) would like to use Face ID for passcode setup.</string>
 	<key>NSHealthShareUsageDescription</key>
 	<string>$(PRODUCT_NAME) would like to access your Health App data</string>
+	<key>LSApplicationCategoryType</key>
+	<string></string>
 	<key>NSHealthUpdateUsageDescription</key>
 	<string>$(PRODUCT_NAME) would like to update your Health App data</string>
 	<key>NSLocationWhenInUseUsageDescription</key>

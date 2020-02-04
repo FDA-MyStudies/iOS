@@ -1205,7 +1205,7 @@
 		6F52327D23D9883800995A78 /* ActivityMetadata TEST1.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "ActivityMetadata TEST1.json"; sourceTree = "<group>"; };
 		6F5AAF7F225DE699002C8FF6 /* Activity_Metadata_Other.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Activity_Metadata_Other.json; sourceTree = "<group>"; };
 		6F6EC42223E1577B0056AD55 /* HPHC Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "HPHC Demo.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		6F6EC42323E1577C0056AD55 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = /Users/tusharkatyal/Documents/Tushar/New_FDA/HPHC/Info.plist; sourceTree = "<absolute>"; };
+		6F6EC42323E1577C0056AD55 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = "/Users/tusharkatyal/Documents/Tushar/New_FDA/HPHC/HPHC/Branding/FDA Demo/Info.plist"; sourceTree = "<absolute>"; };
 		6F8A861723E160F00096D791 /* FDADemo.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = FDADemo.storyboard; sourceTree = "<group>"; };
 		6F8A861C23E16CD40096D791 /* Branding.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Branding.plist; sourceTree = "<group>"; };
 		6F8A861F23E185B50096D791 /* AppConfiguration.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = AppConfiguration.plist; sourceTree = "<group>"; };
@@ -4200,7 +4200,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = FWLLYUH7XR;
 				ENABLE_BITCODE = NO;
-				INFOPLIST_FILE = "$(SRCROOT)/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/HPHC/Branding/FDA Demo/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				IS_STANDALONE_STUDY = false;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -4231,7 +4231,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = FWLLYUH7XR;
 				ENABLE_BITCODE = NO;
-				INFOPLIST_FILE = "$(SRCROOT)/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/HPHC/Branding/FDA Demo/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				IS_STANDALONE_STUDY = false;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

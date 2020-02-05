@@ -2222,7 +2222,7 @@ class DBHandler: NSObject {
     
     let realm = DBHandler.getRealmObject()!
     
-    let dbNotifications = realm.objects(DBNotification.self).filter("activityId == %@ && studyId == %@",activityId,studyId)
+    let dbNotifications = realm.objects(DBLocalNotification.self).filter("activityId == %@ && studyId == %@",activityId,studyId)//DBNotification
     if dbNotifications.count > 0 {
       
       for dbNotification in dbNotifications{

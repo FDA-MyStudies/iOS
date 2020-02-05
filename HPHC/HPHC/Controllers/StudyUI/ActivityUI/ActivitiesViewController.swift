@@ -575,8 +575,6 @@ class ActivitiesViewController : UIViewController{
             if !(Study.currentStudy?.activitiesLocalNotificationUpdated)! {
                 print("Registerig Notification")
                 //Register LocalNotifications
-                LocalNotification.removeLocalNotificationfor(studyId: (Study.currentStudy?.studyId)!)
-                print("bufCurrentStudyArray---\(bufCurrentStudyArray.count)---\(Study.currentStudy?.activities.count)")
                 LocalNotification.registerAllLocalNotificationFor(activities: bufCurrentStudyArray) { (finished,notificationlist) in
                     print("Notification set sucessfully")
                     Study.currentStudy?.activitiesLocalNotificationUpdated = true

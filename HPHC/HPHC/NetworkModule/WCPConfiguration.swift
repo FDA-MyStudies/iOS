@@ -69,8 +69,8 @@ struct WCPServerURLConstants {
     static let DevelopmentURL = "https://hpwcp-stage.lkcompliant.net/StudyMetaData/"
     
     //    Demo
-//    static let ProductionURL = "https://wcp.demo.mystudiesapp.org/fdahpStudyDesigner/"
-//    static let DevelopmentURL = "https://wcp.demo.mystudiesapp.org/fdahpStudyDesigner/"
+//    static let ProductionURL = "https://wcp.demo.mystudiesapp.org/StudyMetaData/"
+//    static let DevelopmentURL = "https://wcp.demo.mystudiesapp.org/StudyMetaData/"//fdahpStudyDesigner
     
 //    static var DevelopmentURL:String {
 //        return UserDefaults.standard.value(forKey: "WCPBaseURL") as? String ?? "https://hpwcp-stage.lkcompliant.net/StudyMetaData/"

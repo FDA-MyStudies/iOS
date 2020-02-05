@@ -213,6 +213,13 @@ class ActivitiesViewController : UIViewController{
                 self.tableView?.selectRow(at: ip, animated: true, scrollPosition: .middle)
                 self.tableView?.delegate?.tableView!(self.tableView!, didSelectRowAt: ip)
                 }
+                else {
+                    if let studyId = NotificationHandler.instance.studyId, let activityIdRemove = NotificationHandler.instance.activityId  {
+                        LocalNotification.removeLocalNotificationfor(studyId: studyId, activityid: activityIdRemove)
+                        DBHandler.deleteDBLocalNotification(activityId: activityIdRemove,studyId: studyId)
+                    }
+                    
+                }
                 NotificationHandler.instance.activityId = ""
                     
             }
@@ -491,6 +498,7 @@ class ActivitiesViewController : UIViewController{
         tableViewSections = []
         allActivityList = []
         let activities = Study.currentStudy?.activities
+        var bufCurrentStudyArray: Array<Activity>! = []
         
         var currentActivities: Array<Activity> = []
         var upcomingActivities: Array<Activity> = []
@@ -498,22 +506,25 @@ class ActivitiesViewController : UIViewController{
         
         var isInActiveActivitiesAreAvailable: Bool! = false
         for activity in activities! {
-            
             if activity.state == "active" || activity.state == nil {
-                
+                print("activity.active---\(activity.state)---\(activity.actvityId)")
                 let status =  self.getActivityAvailabilityStatus(activity: activity)
                 switch status {
                 case .current:
                     currentActivities.append(activity)
+                    bufCurrentStudyArray.append(activity)
                 case .upcoming:
                     upcomingActivities.append(activity)
+                    bufCurrentStudyArray.append(activity)
                 case .past:
                     pastActivities.append(activity)
+                    bufCurrentStudyArray.append(activity)
                 }
             } else {
-                
+                print("activity.Delete---\(activity.state)---\(activity.actvityId)")
                 isInActiveActivitiesAreAvailable = true
                 DBHandler.deleteDBLocalNotification(activityId: activity.actvityId!,studyId: activity.studyId!)
+//                LocalNotification.removeLocalNotificationfor(studyId: activity.studyId!, activityid: activity.actvityId!)
             }
         }
         
@@ -564,7 +575,9 @@ class ActivitiesViewController : UIViewController{
             if !(Study.currentStudy?.activitiesLocalNotificationUpdated)! {
                 print("Registerig Notification")
                 //Register LocalNotifications
-                LocalNotification.registerAllLocalNotificationFor(activities: (Study.currentStudy?.activities)!) { (finished,notificationlist) in
+                LocalNotification.removeLocalNotificationfor(studyId: (Study.currentStudy?.studyId)!)
+                print("bufCurrentStudyArray---\(bufCurrentStudyArray.count)---\(Study.currentStudy?.activities.count)")
+                LocalNotification.registerAllLocalNotificationFor(activities: bufCurrentStudyArray) { (finished,notificationlist) in
                     print("Notification set sucessfully")
                     Study.currentStudy?.activitiesLocalNotificationUpdated = true
                     DBHandler.saveRegisteredLocaNotification(notificationList: notificationlist)

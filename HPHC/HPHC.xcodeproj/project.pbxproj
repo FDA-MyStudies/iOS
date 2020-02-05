@@ -938,7 +938,7 @@
 		94FF031F1E952B0A009F191B /* ReachoutOptionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94FF031E1E952B0A009F191B /* ReachoutOptionCell.swift */; };
 		951EC5B5601293CE0771D248 /* libPods-HPHCTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AF448A6C2B509B3DB605C42 /* libPods-HPHCTests.a */; };
 		972663AD23F7242B537B8E82 /* Pods_HPHC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC9CA22924E3FDD2E7D31960 /* Pods_HPHC.framework */; };
-		C96D29D523E9545100C6AB6C /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6F6EC42323E1577C0056AD55 /* Info.plist */; };
+		C96FFF3223E970A100E12B8B /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C96FFF2F23E970A100E12B8B /* Info.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -1206,7 +1206,6 @@
 		6F52327D23D9883800995A78 /* ActivityMetadata TEST1.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "ActivityMetadata TEST1.json"; sourceTree = "<group>"; };
 		6F5AAF7F225DE699002C8FF6 /* Activity_Metadata_Other.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Activity_Metadata_Other.json; sourceTree = "<group>"; };
 		6F6EC42223E1577B0056AD55 /* HPHC Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "HPHC Demo.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		6F6EC42323E1577C0056AD55 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = "/Users/govindprasad/Documents/GovindPrasadC/BTC Project/FDA/HPHC/HPHC/Branding/FDA Demo/Info.plist"; sourceTree = "<absolute>"; };
 		6F8A861723E160F00096D791 /* FDADemo.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = FDADemo.storyboard; sourceTree = "<group>"; };
 		6F8A861C23E16CD40096D791 /* Branding.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Branding.plist; sourceTree = "<group>"; };
 		6F8A861F23E185B50096D791 /* AppConfiguration.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = AppConfiguration.plist; sourceTree = "<group>"; };
@@ -1329,6 +1328,7 @@
 		9A6334C0EA7AE2035BEB653F /* Pods-mSPARC.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mSPARC.debug.xcconfig"; path = "Pods/Target Support Files/Pods-mSPARC/Pods-mSPARC.debug.xcconfig"; sourceTree = "<group>"; };
 		A2CE974C81943F2AB0C602C1 /* Pods-HPHCTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HPHCTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-HPHCTests/Pods-HPHCTests.release.xcconfig"; sourceTree = "<group>"; };
 		B73AAB785148005861A9500D /* Pods-LimitJIA.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LimitJIA.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LimitJIA/Pods-LimitJIA.debug.xcconfig"; sourceTree = "<group>"; };
+		C96FFF2F23E970A100E12B8B /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CCE3E1542247957EC71E0986 /* Pods-mSPARC.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mSPARC.release.xcconfig"; path = "Pods/Target Support Files/Pods-mSPARC/Pods-mSPARC.release.xcconfig"; sourceTree = "<group>"; };
 		E4CF7BB238C017BF7E2A6346 /* Pods_HPHCUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HPHCUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EB4B78DC194D3CE076AD6A7F /* Pods-LimitJIA.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LimitJIA.release.xcconfig"; path = "Pods/Target Support Files/Pods-LimitJIA/Pods-LimitJIA.release.xcconfig"; sourceTree = "<group>"; };
@@ -1965,11 +1965,11 @@
 		6F6EC42623E157B40056AD55 /* FDA Demo */ = {
 			isa = PBXGroup;
 			children = (
+				C96FFF2F23E970A100E12B8B /* Info.plist */,
 				6F8A862A23E188AB0096D791 /* FDA Demo.xcassets */,
 				6F8A862323E186AE0096D791 /* GatewayOverview.plist */,
 				6F8A861F23E185B50096D791 /* AppConfiguration.plist */,
 				6F8A861C23E16CD40096D791 /* Branding.plist */,
-				6F6EC42323E1577C0056AD55 /* Info.plist */,
 				6F8A861723E160F00096D791 /* FDADemo.storyboard */,
 			);
 			path = "FDA Demo";
@@ -2750,7 +2750,7 @@
 				6F6EC3F223E1577B0056AD55 /* StepProvider.plist in Resources */,
 				6F6EC3F323E1577B0056AD55 /* ProgressView.xib in Resources */,
 				6F6EC3F423E1577B0056AD55 /* FetalKickCounter.storyboard in Resources */,
-				C96D29D523E9545100C6AB6C /* Info.plist in Resources */,
+				C96FFF3223E970A100E12B8B /* Info.plist in Resources */,
 				6F6EC3F623E1577B0056AD55 /* ChangePasswordData.plist in Resources */,
 				6F6EC3F723E1577B0056AD55 /* Labkey_Activity.json in Resources */,
 				6F6EC3F823E1577B0056AD55 /* Consent.json in Resources */,

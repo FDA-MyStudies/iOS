@@ -79,6 +79,10 @@ struct RegistrationServerURLConstants {
     //Staging server
     static let ProductionURL = "https://hpreg-stage.lkcompliant.net/fdahpUserRegWS/"
     static let DevelopmentURL = "https://hpreg-stage.lkcompliant.net/fdahpUserRegWS/"
+    
+    //Demo server
+//    static let ProductionURL = "https://reg.demo.mystudiesapp.org/"
+//    static let DevelopmentURL = "https://reg.demo.mystudiesapp.org/"
   
     
     // Local - naveen

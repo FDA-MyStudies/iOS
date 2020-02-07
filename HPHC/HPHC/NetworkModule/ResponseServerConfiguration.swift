@@ -54,12 +54,12 @@ struct ResponseServerURLConstants {
     //TODO: Set the server end points
     
 //    //Labkey UAT Server
-    static let ProductionURL = "https://hpresp-stage.lkcompliant.net/mobileappstudy-"
-    static let DevelopmentURL = "https://hpresp-stage.lkcompliant.net/mobileappstudy-"
+//    static let ProductionURL = "https://hpresp-stage.lkcompliant.net/mobileappstudy-"
+//    static let DevelopmentURL = "https://hpresp-stage.lkcompliant.net/mobileappstudy-"
     
     //Labkey Demo Server
-//       static let ProductionURL = "https://resp.demo.mystudiesapp.org/"
-//       static let DevelopmentURL = "https://resp.demo.mystudiesapp.org/"
+       static let ProductionURL = "https://resp.demo.mystudiesapp.org/"
+       static let DevelopmentURL = "https://resp.demo.mystudiesapp.org/"
     
 }
 class ResponseServerConfiguration: NetworkConfiguration {
@@ -95,3 +95,4 @@ class ResponseServerConfiguration: NetworkConfiguration {
         return  error
     }
 }
+

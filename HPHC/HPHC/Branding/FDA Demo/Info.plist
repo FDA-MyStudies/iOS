@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>ApplicationID</key>
-	<string>FMSA001</string>
+	<string>FMSDEMO001</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
@@ -19,7 +19,7 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.3</string>
+	<string>$(MARKETING_VERSION)</string>
 	<key>CFBundleVersion</key>
 	<string>$(CURRENT_PROJECT_VERSION)</string>
 	<key>Fabric</key>
@@ -38,6 +38,8 @@
 	</dict>
 	<key>IsStandaloneStudyApp</key>
 	<string>$(IS_STANDALONE_STUDY)</string>
+	<key>LSApplicationCategoryType</key>
+	<string></string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSAppTransportSecurity</key>
@@ -53,8 +55,6 @@
 	<string>$(PRODUCT_NAME) would like to use Face ID for passcode setup.</string>
 	<key>NSHealthShareUsageDescription</key>
 	<string>$(PRODUCT_NAME) would like to access your Health App data</string>
-	<key>LSApplicationCategoryType</key>
-	<string></string>
 	<key>NSHealthUpdateUsageDescription</key>
 	<string>$(PRODUCT_NAME) would like to update your Health App data</string>
 	<key>NSLocationWhenInUseUsageDescription</key>

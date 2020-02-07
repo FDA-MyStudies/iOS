@@ -211,9 +211,9 @@ class AnchorDateHandler {
       keys = keys + "," + externalPropertyId
     }
     
-//    if let dateOfEntryId = emptyAnchorDateDetail.participantPropertyMetaData?.dateOfEntryId {
-//      keys = keys + "," + dateOfEntryId
-//    }
+    if let dateOfEntryId = emptyAnchorDateDetail.participantPropertyMetaData?.dateOfEntryId {
+      keys = keys + "," + dateOfEntryId
+    }
     
     
     let tableName = "ParticipantProperties"

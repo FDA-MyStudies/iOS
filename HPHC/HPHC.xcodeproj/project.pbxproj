@@ -642,6 +642,241 @@
 		89956AB823EDA19C005CB333 /* Pods_HPHC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 89956AB723EDA19C005CB333 /* Pods_HPHC.framework */; };
 		89956ABB23EDA1E3005CB333 /* Pods_HPHC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 89956ABA23EDA1E3005CB333 /* Pods_HPHC.framework */; };
 		89956ABC23EDA1E3005CB333 /* Pods_HPHC.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 89956ABA23EDA1E3005CB333 /* Pods_HPHC.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		89C5EE8023F16CFE00649359 /* UIApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94334F861E70055A00755444 /* UIApplication.swift */; };
+		89C5EE8123F16CFE00649359 /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94334F851E70055A00755444 /* UIViewController.swift */; };
+		89C5EE8223F16CFE00649359 /* SignUpTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B3DD361E6ED8E500327AE5 /* SignUpTableViewCell.swift */; };
+		89C5EE8323F16CFE00649359 /* NotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B3DD191E6ED8E500327AE5 /* NotificationViewController.swift */; };
+		89C5EE8423F16CFE00649359 /* LeftMenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94334F891E7005BF00755444 /* LeftMenuCell.swift */; };
+		89C5EE8523F16CFE00649359 /* StringEncoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 946CA5E81E728C2300CC8535 /* StringEncoder.swift */; };
+		89C5EE8623F16CFE00649359 /* PinterestLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E4CECB51F31B41C005E0832 /* PinterestLayout.swift */; };
+		89C5EE8723F16CFE00649359 /* Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB89C27225F416C00420A7B /* Cell.swift */; };
+		89C5EE8823F16CFE00649359 /* DBActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94D20E9E1E9DFFE7005C3531 /* DBActivity.swift */; };
+		89C5EE8923F16CFE00649359 /* ContactUsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4884E3591E827E6A002DA0B9 /* ContactUsTableViewCell.swift */; };
+		89C5EE8A23F16CFE00649359 /* ConsentSharePdfStepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EE93D8F1E93B5700027A5DC /* ConsentSharePdfStepViewController.swift */; };
+		89C5EE8B23F16CFE00649359 /* FRHyperLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 94B3DD261E6ED8E500327AE5 /* FRHyperLabel.m */; };
+		89C5EE8C23F16CFE00649359 /* StepProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ECA927E1E499F8C00DA6287 /* StepProvider.swift */; };
+		89C5EE8D23F16CFE00649359 /* ActivityInstructionStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ED1B22D1E54256700BF463F /* ActivityInstructionStep.swift */; };
+		89C5EE8E23F16CFE00649359 /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B3DD0A1E6EC47700327AE5 /* SplashViewController.swift */; };
+		89C5EE8F23F16CFE00649359 /* ResearchContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E2B25F21EAE3F1D00E2DFB2 /* ResearchContainerViewController.swift */; };
+		89C5EE9023F16CFE00649359 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ED8A2E51E447AA2004DEC01 /* Logger.swift */; };
+		89C5EE9123F16CFE00649359 /* EligibilityBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EED7B321E65421D002C1FA3 /* EligibilityBuilder.swift */; };
+		89C5EE9223F16CFE00649359 /* NetworkConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94CD96E41E4AF61800946477 /* NetworkConstants.swift */; };
+		89C5EE9323F16CFE00649359 /* RepeatableFormStep.m in Sources */ = {isa = PBXBuildFile; fileRef = 6ED86F601EA6498D00365AF0 /* RepeatableFormStep.m */; };
+		89C5EE9423F16CFE00649359 /* StudyDashboardTabbarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EBC2E7D1E94FB5300828CA1 /* StudyDashboardTabbarViewController.swift */; };
+		89C5EE9523F16CFE00649359 /* ConfirmationOptionalTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EA889BF1E6FD22800F160A1 /* ConfirmationOptionalTableViewCell.swift */; };
+		89C5EE9623F16CFE00649359 /* StudyDashboardStudyPercentageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EBC2E7C1E94FB5300828CA1 /* StudyDashboardStudyPercentageTableViewCell.swift */; };
+		89C5EE9723F16CFE00649359 /* DBStudy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9432C49B1E83CEEF00EB419C /* DBStudy.swift */; };
+		89C5EE9823F16CFE00649359 /* FeedBackTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4884E3531E82665C002DA0B9 /* FeedBackTableViewCell.swift */; };
+		89C5EE9923F16CFE00649359 /* KeyChain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8926D7E92383F25C00558F4E /* KeyChain.swift */; };
+		89C5EE9A23F16CFE00649359 /* ResourcesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EE93DBD1E93C8850027A5DC /* ResourcesViewController.swift */; };
+		89C5EE9B23F16CFE00649359 /* HealthClientType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ECE8BFA1EAF0E3A00A025F5 /* HealthClientType.swift */; };
+		89C5EE9C23F16CFE00649359 /* StudyListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B3DD211E6ED8E500327AE5 /* StudyListCell.swift */; };
+		89C5EE9D23F16CFE00649359 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B3DD371E6ED8E500327AE5 /* SignUpViewController.swift */; };
+		89C5EE9E23F16CFE00649359 /* TextChoiceQuestionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB89C1A225F40EA00420A7B /* TextChoiceQuestionController.swift */; };
+		89C5EE9F23F16CFE00649359 /* RepeatableFormStepViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6ED86F621EA6498D00365AF0 /* RepeatableFormStepViewController.m */; };
+		89C5EEA023F16CFE00649359 /* DBHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9491F7F71E825F5D0018C15E /* DBHandler.swift */; };
+		89C5EEA123F16CFE00649359 /* ConsentStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ED134351E5EB0370090C976 /* ConsentStep.swift */; };
+		89C5EEA223F16CFE00649359 /* ActivitiesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EE93DB81E93C8850027A5DC /* ActivitiesTableViewCell.swift */; };
+		89C5EEA323F16CFE00649359 /* SecondGatewayOverviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B3DD2B1E6ED8E500327AE5 /* SecondGatewayOverviewViewController.swift */; };
+		89C5EEA423F16CFE00649359 /* HPHCSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8948349C22BB9C59000B7BFA /* HPHCSettings.swift */; };
+		89C5EEA523F16CFE00649359 /* LeftMenuResourceTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EF2FCEE1E72CDE900B5F212 /* LeftMenuResourceTableViewCell.swift */; };
+		89C5EEA623F16CFE00649359 /* Gateway.swift in Sources */ = {isa = PBXBuildFile; fileRef = 941909B71E5310D6001B01C5 /* Gateway.swift */; };
+		89C5EEA723F16CFE00649359 /* ProfileTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B3DD1C1E6ED8E500327AE5 /* ProfileTableViewCell.swift */; };
+		89C5EEA823F16CFE00649359 /* FetalKickCounterStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EED7B381E6574FE002C1FA3 /* FetalKickCounterStep.swift */; };
+		89C5EEA923F16CFE00649359 /* ChartsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94C13DBB1EC1988600E3AEBF /* ChartsViewController.swift */; };
+		89C5EEAA23F16CFE00649359 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EC8019A1E67EF3400CC5966 /* Constants.swift */; };
+		89C5EEAB23F16CFE00649359 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E7D2D5B1E433E8800763D4C /* ViewController.swift */; };
+		89C5EEAC23F16CFE00649359 /* UITestingHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8905592923016852005FB284 /* UITestingHelpers.swift */; };
+		89C5EEAD23F16CFE00649359 /* SignUpCompleteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B3DD341E6ED8E500327AE5 /* SignUpCompleteViewController.swift */; };
+		89C5EEAE23F16CFE00649359 /* ForgotPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B3DD2F1E6ED8E500327AE5 /* ForgotPasswordViewController.swift */; };
+		89C5EEAF23F16CFE00649359 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94CD96E51E4AF61800946477 /* NetworkManager.swift */; };
+		89C5EEB023F16CFE00649359 /* FDASlideMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94334F7F1E6FE65600755444 /* FDASlideMenuViewController.swift */; };
+		89C5EEB123F16CFE00649359 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E7D2D591E433E8800763D4C /* AppDelegate.swift */; };
+		89C5EEB223F16CFE00649359 /* StudyHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4833E9DE1E7126900032D244 /* StudyHomeViewController.swift */; };
+		89C5EEB323F16CFE00649359 /* ConsentPdfViewerStepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ED1D06E1EA884BD00E5A794 /* ConsentPdfViewerStepViewController.swift */; };
+		89C5EEB423F16CFE00649359 /* Dictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E8D910C223B9FD800C082C9 /* Dictionary.swift */; };
+		89C5EEB523F16CFE00649359 /* StudyDashboardStatisticsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EBC2E7A1E94FB5300828CA1 /* StudyDashboardStatisticsTableViewCell.swift */; };
+		89C5EEB623F16CFE00649359 /* ConsentBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ED134331E5EB0280090C976 /* ConsentBuilder.swift */; };
+		89C5EEB723F16CFE00649359 /* JailbrokeBlocker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E91D6801ECD662E0012F49F /* JailbrokeBlocker.swift */; };
+		89C5EEB823F16CFE00649359 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B3DD291E6ED8E500327AE5 /* HomeViewController.swift */; };
+		89C5EEB923F16CFE00649359 /* FileDownloadManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E183AB01E966230005D7A27 /* FileDownloadManager.swift */; };
+		89C5EEBA23F16CFE00649359 /* AppNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 948710291E546C3800246109 /* AppNotification.swift */; };
+		89C5EEBB23F16CFE00649359 /* NotificationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B3DD181E6ED8E500327AE5 /* NotificationTableViewCell.swift */; };
+		89C5EEBC23F16CFE00649359 /* SurveyTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB89C1C225F40F400420A7B /* SurveyTask.swift */; };
+		89C5EEBD23F16CFE00649359 /* FilterListCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 484ACBF51F2896A500BCC819 /* FilterListCollectionViewCell.swift */; };
+		89C5EEBE23F16CFE00649359 /* Formatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ED8A2E31E447AA2004DEC01 /* Formatter.swift */; };
+		89C5EEBF23F16CFE00649359 /* NavigationBackButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94334F8B1E701EB700755444 /* NavigationBackButton.swift */; };
+		89C5EEC023F16CFE00649359 /* StudyDashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EBC2E751E94FB5300828CA1 /* StudyDashboardViewController.swift */; };
+		89C5EEC123F16CFE00649359 /* Study.swift in Sources */ = {isa = PBXBuildFile; fileRef = 941909B41E52FA9B001B01C5 /* Study.swift */; };
+		89C5EEC223F16CFE00649359 /* ResourcesListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B3DD1E1E6ED8E500327AE5 /* ResourcesListCell.swift */; };
+		89C5EEC323F16CFE00649359 /* AnchorDateHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89903061224A502C00B3A85C /* AnchorDateHandler.swift */; };
+		89C5EEC423F16CFE00649359 /* StandaloneStudy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7878B30E221574D80052FC23 /* StandaloneStudy.swift */; };
+		89C5EEC523F16CFE00649359 /* LocalNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B5F2F31ECA354800BC0336 /* LocalNotification.swift */; };
+		89C5EEC623F16CFE00649359 /* ConfirmationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EA889BB1E6FD16B00F160A1 /* ConfirmationViewController.swift */; };
+		89C5EEC723F16CFE00649359 /* FetalKickCounterTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EED7B3C1E65752C002C1FA3 /* FetalKickCounterTask.swift */; };
+		89C5EEC823F16CFE00649359 /* OtherTextChoiceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB89C20225F410500420A7B /* OtherTextChoiceCell.swift */; };
+		89C5EEC923F16CFE00649359 /* AKUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E183AB21E966230005D7A27 /* AKUtility.swift */; };
+		89C5EECA23F16CFE00649359 /* ConfirmationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EA889BD1E6FD20000F160A1 /* ConfirmationTableViewCell.swift */; };
+		89C5EECB23F16CFE00649359 /* ActivityBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E9B39BF1E55DFF10037D09D /* ActivityBuilder.swift */; };
+		89C5EECC23F16CFE00649359 /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ECA92841E49B5CF00DA6287 /* File.swift */; };
+		89C5EECD23F16CFE00649359 /* StudyDashboardActivityCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EBC2E771E94FB5300828CA1 /* StudyDashboardActivityCollectionViewCell.swift */; };
+		89C5EECE23F16CFE00649359 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B3DD321E6ED8E500327AE5 /* SignInViewController.swift */; };
+		89C5EECF23F16CFE00649359 /* StudyDashboardTrendsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EBC2E7E1E94FB5300828CA1 /* StudyDashboardTrendsTableViewCell.swift */; };
+		89C5EED023F16CFE00649359 /* ResponseServerConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9432C2F81E4C4993005984EC /* ResponseServerConfiguration.swift */; };
+		89C5EED123F16CFE00649359 /* ResourcesDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E183AA81E962AA4005D7A27 /* ResourcesDetailViewController.swift */; };
+		89C5EED223F16CFE00649359 /* NetworkWebServiceHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94CD96E61E4AF61800946477 /* NetworkWebServiceHandler.swift */; };
+		89C5EED323F16CFE00649359 /* AppConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F41B86123AC937200D4F624 /* AppConfiguration.swift */; };
+		89C5EED423F16CFE00649359 /* Encoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EB7187B1E77C01900E293EF /* Encoder.swift */; };
+		89C5EED523F16CFE00649359 /* ActivityActiveStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ED1B22B1E54256700BF463F /* ActivityActiveStep.swift */; };
+		89C5EED623F16CFE00649359 /* LineChartCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94C13DBD1EC19E4700E3AEBF /* LineChartCell.swift */; };
+		89C5EED723F16CFE00649359 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 481DFA4B1E6EEB70004C39EF /* WebViewController.swift */; };
+		89C5EED823F16CFE00649359 /* ActivityResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ED1B2231E54254900BF463F /* ActivityResult.swift */; };
+		89C5EED923F16CFE00649359 /* StudyFilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48567FE01F14FB3C00857193 /* StudyFilterViewController.swift */; };
+		89C5EEDA23F16CFE00649359 /* UserServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9432C2FA1E4C9EF8005984EC /* UserServices.swift */; };
+		89C5EEDB23F16CFE00649359 /* ReachoutOptionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94FF031E1E952B0A009F191B /* ReachoutOptionCell.swift */; };
+		89C5EEDC23F16CFE00649359 /* FeedBackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4884E3511E825E7D002DA0B9 /* FeedBackViewController.swift */; };
+		89C5EEDD23F16CFE00649359 /* PageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B3DD2A1E6ED8E500327AE5 /* PageViewController.swift */; };
+		89C5EEDE23F16CFE00649359 /* ResourcesDetailViewControllerCopy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E90D23F1EF40D2100F5140F /* ResourcesDetailViewControllerCopy.swift */; };
+		89C5EEDF23F16CFE00649359 /* ReachoutOptionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94FF031A1E95275D009F191B /* ReachoutOptionsViewController.swift */; };
+		89C5EEE023F16CFE00649359 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ECA92871E49F0CD00DA6287 /* Utilities.swift */; };
+		89C5EEE123F16CFE00649359 /* SyncUpdate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E9E81D51ECEDA770007B492 /* SyncUpdate.swift */; };
+		89C5EEE223F16CFE00649359 /* LeftMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94334F7B1E6FE60900755444 /* LeftMenuViewController.swift */; };
+		89C5EEE323F16CFE00649359 /* UIUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 482062511E68532300C7A7AF /* UIUtilities.swift */; };
+		89C5EEE423F16CFE00649359 /* TextChoiceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB89C21225F410500420A7B /* TextChoiceCell.swift */; };
+		89C5EEE523F16CFE00649359 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E7D2D891E43400100763D4C /* User.swift */; };
+		89C5EEE623F16CFE00649359 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B3DD1D1E6ED8E500327AE5 /* ProfileViewController.swift */; };
+		89C5EEE723F16CFE00649359 /* StudyOverviewPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B3DD3D1E6ED8E500327AE5 /* StudyOverviewPageViewController.swift */; };
+		89C5EEE823F16CFE00649359 /* InEligibilityStepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E31DC681F17AF9C00C3E1DB /* InEligibilityStepViewController.swift */; };
+		89C5EEE923F16CFE00649359 /* Schedule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ED1B21D1E54252500BF463F /* Schedule.swift */; };
+		89C5EEEA23F16CFE00649359 /* GatewayResourcesListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B3DD1F1E6ED8E500327AE5 /* GatewayResourcesListViewController.swift */; };
+		89C5EEEB23F16CFE00649359 /* ActivityQuestionStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ED1B22E1E54256700BF463F /* ActivityQuestionStep.swift */; };
+		89C5EEEC23F16CFE00649359 /* KDCircularProgress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 482CC61D1EC5F52E00BFE8C6 /* KDCircularProgress.swift */; };
+		89C5EEED23F16CFE00649359 /* DBNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EF0466A1ED1C943008098BB /* DBNotification.swift */; };
+		89C5EEEE23F16CFE00649359 /* ActivitiesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EE93DB91E93C8850027A5DC /* ActivitiesViewController.swift */; };
+		89C5EEEF23F16CFE00649359 /* Activity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ED1B2201E54253800BF463F /* Activity.swift */; };
+		89C5EEF023F16CFE00649359 /* SearchBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E4D86DF1F38A740003DBDD8 /* SearchBarView.swift */; };
+		89C5EEF123F16CFE00649359 /* AppUpdateBlocker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94C6BD431EB8513300D4AA72 /* AppUpdateBlocker.swift */; };
+		89C5EEF223F16CFE00649359 /* FetalKickIntroStepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EB740251E9D028000A4C773 /* FetalKickIntroStepViewController.swift */; };
+		89C5EEF323F16CFE00649359 /* DBUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9491F7F91E825FA80018C15E /* DBUser.swift */; };
+		89C5EEF423F16CFE00649359 /* ActivityStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ED1B22F1E54256700BF463F /* ActivityStep.swift */; };
+		89C5EEF523F16CFE00649359 /* FilterListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 484ACBFF1F28BC8800BCC819 /* FilterListTableViewCell.swift */; };
+		89C5EEF623F16CFE00649359 /* StudyDashboardActivityTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EBC2E781E94FB5300828CA1 /* StudyDashboardActivityTableViewCell.swift */; };
+		89C5EEF723F16CFE00649359 /* ConsentResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EC1291E1E64241200B90167 /* ConsentResult.swift */; };
+		89C5EEF823F16CFE00649359 /* WCPConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94CD96EE1E4B16D900946477 /* WCPConfiguration.swift */; };
+		89C5EEF923F16CFE00649359 /* StudyOverviewPageViewControllerFirst.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B3DD3E1E6ED8E500327AE5 /* StudyOverviewPageViewControllerFirst.swift */; };
+		89C5EEFA23F16CFE00649359 /* Overview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 941909BA1E533AA9001B01C5 /* Overview.swift */; };
+		89C5EEFB23F16CFE00649359 /* StudyDashboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94C5504F1EBA153F007740D0 /* StudyDashboard.swift */; };
+		89C5EEFC23F16CFE00649359 /* ChangePasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 940577A71E767AC60043215C /* ChangePasswordViewController.swift */; };
+		89C5EEFD23F16CFE00649359 /* ComprehensionFailure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E61BCC51F27271000C156B9 /* ComprehensionFailure.swift */; };
+		89C5EEFE23F16CFE00649359 /* ActivityFilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E7DC76B1F69479C001A05B6 /* ActivityFilterView.swift */; };
+		89C5EEFF23F16CFE00649359 /* VerificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B3DD381E6ED8E500327AE5 /* VerificationViewController.swift */; };
+		89C5EF0023F16CFE00649359 /* FirstGatewayOverviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B3DD281E6ED8E500327AE5 /* FirstGatewayOverviewViewController.swift */; };
+		89C5EF0123F16CFE00649359 /* ResearchContainerSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E2B25F11EAE3F1D00E2DFB2 /* ResearchContainerSegue.swift */; };
+		89C5EF0223F16CFE00649359 /* WCPServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94C602301E51C7D500CB72F7 /* WCPServices.swift */; };
+		89C5EF0323F16CFE00649359 /* LabKeyServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9487102B1E54870000246109 /* LabKeyServices.swift */; };
+		89C5EF0423F16CFE00649359 /* FileDownloadModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E183AB11E966230005D7A27 /* FileDownloadModel.swift */; };
+		89C5EF0523F16CFE00649359 /* StudyDashboardStatisticsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EBC2E791E94FB5300828CA1 /* StudyDashboardStatisticsCollectionViewCell.swift */; };
+		89C5EF0623F16CFE00649359 /* ActivityStepResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ED1B2271E54255900BF463F /* ActivityStepResult.swift */; };
+		89C5EF0723F16CFE00649359 /* NetworkConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94CD96EC1E4AFAFF00946477 /* NetworkConfiguration.swift */; };
+		89C5EF0823F16CFE00649359 /* RegistrationServerConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9432C2F61E4C483D005984EC /* RegistrationServerConfiguration.swift */; };
+		89C5EF0923F16CFE00649359 /* EligibilityStepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EBC8A2A1E8113110020F9E6 /* EligibilityStepViewController.swift */; };
+		89C5EF0A23F16CFE00649359 /* ResourcesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EE93DBC1E93C8850027A5DC /* ResourcesTableViewCell.swift */; };
+		89C5EF0B23F16CFE00649359 /* StudyOverviewViewControllerSecond.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B3DD3F1E6ED8E500327AE5 /* StudyOverviewViewControllerSecond.swift */; };
+		89C5EF0C23F16CFE00649359 /* ActivityFormStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ED1B22C1E54256700BF463F /* ActivityFormStep.swift */; };
+		89C5EF0D23F16CFE00649359 /* StudyDashboardStudyActivitiesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EBC2E7B1E94FB5300828CA1 /* StudyDashboardStudyActivitiesTableViewCell.swift */; };
+		89C5EF0E23F16CFE00649359 /* SignInTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B3DD311E6ED8E500327AE5 /* SignInTableViewCell.swift */; };
+		89C5EF0F23F16CFE00649359 /* Resource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ECA92811E49B3BB00DA6287 /* Resource.swift */; };
+		89C5EF1023F16CFE00649359 /* ContactUsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4884E3571E827E5B002DA0B9 /* ContactUsViewController.swift */; };
+		89C5EF1123F16CFE00649359 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94CD96E71E4AF61800946477 /* Reachability.swift */; };
+		89C5EF1223F16CFE00649359 /* StudyDashboardWelcomeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EBC2E7F1E94FB5300828CA1 /* StudyDashboardWelcomeTableViewCell.swift */; };
+		89C5EF1323F16CFE00649359 /* StudyListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B3DD221E6ED8E500327AE5 /* StudyListViewController.swift */; };
+		89C5EF1423F16CFE00649359 /* FetalKickCounterStepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EED7B3A1E65751D002C1FA3 /* FetalKickCounterStepViewController.swift */; };
+		89C5EF1623F16CFE00649359 /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EEBA4791F25FAA100FB0258 /* HealthKit.framework */; };
+		89C5EF1723F16CFE00649359 /* Pods_HPHC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 89956AB723EDA19C005CB333 /* Pods_HPHC.framework */; };
+		89C5EF1823F16CFE00649359 /* Pods_HPHC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 89956AB423EDA184005CB333 /* Pods_HPHC.framework */; };
+		89C5EF1923F16CFE00649359 /* Pods_HPHC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC9CA22924E3FDD2E7D31960 /* Pods_HPHC.framework */; };
+		89C5EF1A23F16CFE00649359 /* ResearchKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EF0BC3C2223D1D6004F2357 /* ResearchKit.framework */; };
+		89C5EF1B23F16CFE00649359 /* (null) in Frameworks */ = {isa = PBXBuildFile; };
+		89C5EF1D23F16CFE00649359 /* 45.png in Resources */ = {isa = PBXBuildFile; fileRef = 6EE93D911E93B8C30027A5DC /* 45.png */; };
+		89C5EF1E23F16CFE00649359 /* Study.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 94B3DD3A1E6ED8E500327AE5 /* Study.storyboard */; };
+		89C5EF1F23F16CFE00649359 /* SearchBarView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6E4D86DB1F389DF1003DBDD8 /* SearchBarView.xib */; };
+		89C5EF2023F16CFE00649359 /* Labkey_Activity_Latest4.json in Resources */ = {isa = PBXBuildFile; fileRef = 6ED5B05C1FCDBD7C00925352 /* Labkey_Activity_Latest4.json */; };
+		89C5EF2123F16CFE00649359 /* LoginAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 94B3DD2D1E6ED8E500327AE5 /* LoginAssets.xcassets */; };
+		89C5EF2223F16CFE00649359 /* ConsentLatest.json in Resources */ = {isa = PBXBuildFile; fileRef = 6E93C7E01EE2EC26006788B1 /* ConsentLatest.json */; };
+		89C5EF2323F16CFE00649359 /* TaskSchema.json in Resources */ = {isa = PBXBuildFile; fileRef = 6EABD0321E56FE2000623D94 /* TaskSchema.json */; };
+		89C5EF2423F16CFE00649359 /* 55V2.png in Resources */ = {isa = PBXBuildFile; fileRef = 48A24C3D1E839D03009E849E /* 55V2.png */; };
+		89C5EF2623F16CFE00649359 /* Labkey_Activity_Latest2.json in Resources */ = {isa = PBXBuildFile; fileRef = 6E80BC011FB04340008C9B8C /* Labkey_Activity_Latest2.json */; };
+		89C5EF2723F16CFE00649359 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6E7D2D621E433E8800763D4C /* LaunchScreen.storyboard */; };
+		89C5EF2823F16CFE00649359 /* 13.png in Resources */ = {isa = PBXBuildFile; fileRef = 48567FDC1F14F72900857193 /* 13.png */; };
+		89C5EF2923F16CFE00649359 /* UserPreferences.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6E7D2D8D1E43445600763D4C /* UserPreferences.plist */; };
+		89C5EF2A23F16CFE00649359 /* AppGlossary.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 9450598E1F29FA2C007906A7 /* AppGlossary.pdf */; };
+		89C5EF2B23F16CFE00649359 /* Verdana Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6ED593721F011D5B00AC3636 /* Verdana Italic.ttf */; };
+		89C5EF2C23F16CFE00649359 /* SignUpPlist.plist in Resources */ = {isa = PBXBuildFile; fileRef = 94B3DD351E6ED8E500327AE5 /* SignUpPlist.plist */; };
+		89C5EF2D23F16CFE00649359 /* ActiveTask.json in Resources */ = {isa = PBXBuildFile; fileRef = 6ED9D5DA1E5B2D5100A0719D /* ActiveTask.json */; };
+		89C5EF2E23F16CFE00649359 /* ActivityMetadata TEST1.json in Resources */ = {isa = PBXBuildFile; fileRef = 6F52327D23D9883800995A78 /* ActivityMetadata TEST1.json */; };
+		89C5EF2F23F16CFE00649359 /* AppUpdateBlocker.xib in Resources */ = {isa = PBXBuildFile; fileRef = 94C6BD451EB8515000D4AA72 /* AppUpdateBlocker.xib */; };
+		89C5EF3023F16CFE00649359 /* 200.png in Resources */ = {isa = PBXBuildFile; fileRef = 6EBC8A341E8118970020F9E6 /* 200.png */; };
+		89C5EF3123F16CFE00649359 /* Gateway.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6EE5756B1E891440009BAA25 /* Gateway.xcassets */; };
+		89C5EF3223F16CFE00649359 /* ActivityFilterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6E7DC76C1F69479C001A05B6 /* ActivityFilterView.xib */; };
+		89C5EF3323F16CFE00649359 /* Labkey_Activity11.json in Resources */ = {isa = PBXBuildFile; fileRef = 6E5F751A1EF4109500ABA308 /* Labkey_Activity11.json */; };
+		89C5EF3423F16CFE00649359 /* Study.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 94B3DD3B1E6ED8E500327AE5 /* Study.xcassets */; };
+		89C5EF3523F16CFE00649359 /* Units.json in Resources */ = {isa = PBXBuildFile; fileRef = 6ED5B0581FCD550F00925352 /* Units.json */; };
+		89C5EF3623F16CFE00649359 /* ResourcesUI.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6EE93DBB1E93C8850027A5DC /* ResourcesUI.plist */; };
+		89C5EF3723F16CFE00649359 /* StudyDashboard.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6EBC2E761E94FB5300828CA1 /* StudyDashboard.plist */; };
+		89C5EF3823F16CFE00649359 /* ResourceList.json in Resources */ = {isa = PBXBuildFile; fileRef = 89831392224399FC0000BEB5 /* ResourceList.json */; };
+		89C5EF3923F16CFE00649359 /* study_dashboard.png in Resources */ = {isa = PBXBuildFile; fileRef = 48C736551EC5C83D002D000F /* study_dashboard.png */; };
+		89C5EF3A23F16CFE00649359 /* OtherTextChoiceCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F0221782264729E00A2DBC8 /* OtherTextChoiceCell.xib */; };
+		89C5EF3B23F16CFE00649359 /* LatestActive_Taskdocument.json in Resources */ = {isa = PBXBuildFile; fileRef = 6EF748BE1E69645700F1E89E /* LatestActive_Taskdocument.json */; };
+		89C5EF3C23F16CFE00649359 /* Labkey_Activity_Latest.json in Resources */ = {isa = PBXBuildFile; fileRef = 6EAA04881FAF4C6A00214D03 /* Labkey_Activity_Latest.json */; };
+		89C5EF3D23F16CFE00649359 /* Resources.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6EAB39A81E4B0B4A003442B8 /* Resources.plist */; };
+		89C5EF3E23F16CFE00649359 /* JailbrokeBlocker.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6E91D6811ECD662E0012F49F /* JailbrokeBlocker.xib */; };
+		89C5EF3F23F16CFE00649359 /* Activitylist.json in Resources */ = {isa = PBXBuildFile; fileRef = 6EF51C9422324E3700BF8D4E /* Activitylist.json */; };
+		89C5EF4023F16CFE00649359 /* StepProvider.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6EF05A981E4DC36400CD7661 /* StepProvider.plist */; };
+		89C5EF4123F16CFE00649359 /* ProgressView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 946CA5EC1E72DCA300CC8535 /* ProgressView.xib */; };
+		89C5EF4223F16CFE00649359 /* FetalKickCounter.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6ECF75CF1E6EF140008C935E /* FetalKickCounter.storyboard */; };
+		89C5EF4423F16CFE00649359 /* ChangePasswordData.plist in Resources */ = {isa = PBXBuildFile; fileRef = 940577AB1E767C8D0043215C /* ChangePasswordData.plist */; };
+		89C5EF4523F16CFE00649359 /* Labkey_Activity.json in Resources */ = {isa = PBXBuildFile; fileRef = 6EDABCCD1EBA41EE005F3AA6 /* Labkey_Activity.json */; };
+		89C5EF4623F16CFE00649359 /* Consent.json in Resources */ = {isa = PBXBuildFile; fileRef = 6ED134371E5F1B110090C976 /* Consent.json */; };
+		89C5EF4723F16CFE00649359 /* SignInPlist.plist in Resources */ = {isa = PBXBuildFile; fileRef = 94B3DD301E6ED8E500327AE5 /* SignInPlist.plist */; };
+		89C5EF4823F16CFE00649359 /* 24-study-dashboard.png in Resources */ = {isa = PBXBuildFile; fileRef = 48A24C371E839CF9009E849E /* 24-study-dashboard.png */; };
+		89C5EF4923F16CFE00649359 /* NewProgressView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6EDDB6591EE05E4C00C79337 /* NewProgressView.xib */; };
+		89C5EF4A23F16CFE00649359 /* fda_preload.gif in Resources */ = {isa = PBXBuildFile; fileRef = 6EDDB6601EE05FDC00C79337 /* fda_preload.gif */; };
+		89C5EF4B23F16CFE00649359 /* StudyOverview.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4833E9E21E712C2B0032D244 /* StudyOverview.plist */; };
+		89C5EF4C23F16CFE00649359 /* ActivitySchedules.xib in Resources */ = {isa = PBXBuildFile; fileRef = 942591C31EA8A2650010D892 /* ActivitySchedules.xib */; };
+		89C5EF4D23F16CFE00649359 /* Activity_New_Other_Form.json in Resources */ = {isa = PBXBuildFile; fileRef = 6F10BB18234DE45D006388E2 /* Activity_New_Other_Form.json */; };
+		89C5EF4E23F16CFE00649359 /* StudyList.json in Resources */ = {isa = PBXBuildFile; fileRef = 94B3DD201E6ED8E500327AE5 /* StudyList.json */; };
+		89C5EF4F23F16CFE00649359 /* Confirmation.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6EA889C41E701E8200F160A1 /* Confirmation.plist */; };
+		89C5EF5123F16CFE00649359 /* Notification.json in Resources */ = {isa = PBXBuildFile; fileRef = 6E14F2021F0224AD00EA8D1E /* Notification.json */; };
+		89C5EF5223F16CFE00649359 /* 03.png in Resources */ = {isa = PBXBuildFile; fileRef = 6EB740271E9D1F8700A4C773 /* 03.png */; };
+		89C5EF5323F16CFE00649359 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6E7D2D5D1E433E8800763D4C /* Main.storyboard */; };
+		89C5EF5423F16CFE00649359 /* TextChoiceCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F0221772264729D00A2DBC8 /* TextChoiceCell.xib */; };
+		89C5EF5523F16CFE00649359 /* FilterData.plist in Resources */ = {isa = PBXBuildFile; fileRef = 484ACBFB1F28A82B00BCC819 /* FilterData.plist */; };
+		89C5EF5723F16CFE00649359 /* Activities.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6EE93DB71E93C8850027A5DC /* Activities.plist */; };
+		89C5EF5823F16CFE00649359 /* FetalKickCounter.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6ECF75D11E6EF1E7008C935E /* FetalKickCounter.xcassets */; };
+		89C5EF5923F16CFE00649359 /* ContactUs.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4884E35B1E827F8F002DA0B9 /* ContactUs.plist */; };
+		89C5EF5A23F16CFE00649359 /* FetalKickTest.json in Resources */ = {isa = PBXBuildFile; fileRef = 6EB740171E9CD38100A4C773 /* FetalKickTest.json */; };
+		89C5EF5B23F16CFE00649359 /* Gateway.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 94B3DD151E6ED8E500327AE5 /* Gateway.storyboard */; };
+		89C5EF5C23F16CFE00649359 /* Acivity_Question.json in Resources */ = {isa = PBXBuildFile; fileRef = 6EC129231E64624F00B90167 /* Acivity_Question.json */; };
+		89C5EF5D23F16CFE00649359 /* ComprehensionFailure.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6E61BCC31F27262F00C156B9 /* ComprehensionFailure.xib */; };
+		89C5EF5E23F16CFE00649359 /* LatestActive_1B.json in Resources */ = {isa = PBXBuildFile; fileRef = 6EED31A21F1CD7B300A7AF56 /* LatestActive_1B.json */; };
+		89C5EF5F23F16CFE00649359 /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 94B3DD2C1E6ED8E500327AE5 /* Login.storyboard */; };
+		89C5EF6023F16CFE00649359 /* Labkey_Activity_Latest3.json in Resources */ = {isa = PBXBuildFile; fileRef = 6EEB0AF91FD2811100136EAA /* Labkey_Activity_Latest3.json */; };
+		89C5EF6123F16CFE00649359 /* Eligibility_1B.json in Resources */ = {isa = PBXBuildFile; fileRef = 6EE8E4D81F17459200028853 /* Eligibility_1B.json */; };
+		89C5EF6223F16CFE00649359 /* Profile.plist in Resources */ = {isa = PBXBuildFile; fileRef = 94B3DD1B1E6ED8E500327AE5 /* Profile.plist */; };
+		89C5EF6323F16CFE00649359 /* HPHCSettings.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8948349E22BB9D56000B7BFA /* HPHCSettings.xib */; };
+		89C5EF6423F16CFE00649359 /* AnanomousFilterData.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6E417AD21F4D5DA1007F27DA /* AnanomousFilterData.plist */; };
+		89C5EF6523F16CFE00649359 /* 01.png in Resources */ = {isa = PBXBuildFile; fileRef = 6EB7401B1E9CFAD700A4C773 /* 01.png */; };
+		89C5EF6623F16CFE00649359 /* UserProfile.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6E7D2D8B1E4340B200763D4C /* UserProfile.plist */; };
+		89C5EF6723F16CFE00649359 /* Register.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6E7D2D8F1E43526100763D4C /* Register.plist */; };
+		89C5EF6823F16CFE00649359 /* Activity_Metadata_Other.json in Resources */ = {isa = PBXBuildFile; fileRef = 6F5AAF7F225DE699002C8FF6 /* Activity_Metadata_Other.json */; };
+		89C5EF6923F16CFE00649359 /* 25-study-activities.png in Resources */ = {isa = PBXBuildFile; fileRef = 48A24C3B1E839CFD009E849E /* 25-study-activities.png */; };
+		89C5EF6E23F16CFE00649359 /* ResearchKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6EF0BC3C2223D1D6004F2357 /* ResearchKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		89C5EF7A23F16DB000649359 /* AppConfiguration.plist in Resources */ = {isa = PBXBuildFile; fileRef = 89C5EF7423F16DB000649359 /* AppConfiguration.plist */; };
+		89C5EF7B23F16DB000649359 /* GatewayOverview.plist in Resources */ = {isa = PBXBuildFile; fileRef = 89C5EF7523F16DB000649359 /* GatewayOverview.plist */; };
+		89C5EF7C23F16DB000649359 /* FDADemo.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 89C5EF7623F16DB000649359 /* FDADemo.storyboard */; };
+		89C5EF7D23F16DB000649359 /* FDA Demo.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 89C5EF7723F16DB000649359 /* FDA Demo.xcassets */; };
+		89C5EF7E23F16DB000649359 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 89C5EF7823F16DB000649359 /* Info.plist */; };
+		89C5EF7F23F16DB000649359 /* Branding.plist in Resources */ = {isa = PBXBuildFile; fileRef = 89C5EF7923F16DB000649359 /* Branding.plist */; };
 		89CD64BA2244CAA600008178 /* ResourceAnchorTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89CD64B92244CAA600008178 /* ResourceAnchorTest.swift */; };
 		89D686A022EAEBEF008F4226 /* StudyList.json in Resources */ = {isa = PBXBuildFile; fileRef = 94B3DD201E6ED8E500327AE5 /* StudyList.json */; };
 		89DBF74922F9893000AB3EF2 /* UIApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94334F861E70055A00755444 /* UIApplication.swift */; };
@@ -987,6 +1222,13 @@
 			remoteGlobalIDString = 6E7D2D551E433E8700763D4C;
 			remoteInfo = HPHC;
 		};
+		89C5EE7D23F16CFE00649359 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6EF0BC352223D1D5004F2357 /* ResearchKit.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = B183A4731A8535D100C76870;
+			remoteInfo = ResearchKit;
+		};
 		89DBF74622F9893000AB3EF2 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 6EF0BC352223D1D5004F2357 /* ResearchKit.xcodeproj */;
@@ -1022,6 +1264,17 @@
 			dstSubfolderSpec = 10;
 			files = (
 				6FC12BB922FD60FE0075940B /* ResearchKit.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		89C5EF6D23F16CFE00649359 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				89C5EF6E23F16CFE00649359 /* ResearchKit.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1254,6 +1507,14 @@
 		89956AB423EDA184005CB333 /* Pods_HPHC.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Pods_HPHC.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		89956AB723EDA19C005CB333 /* Pods_HPHC.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Pods_HPHC.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		89956ABA23EDA1E3005CB333 /* Pods_HPHC.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Pods_HPHC.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		89C5EF7223F16CFE00649359 /* MyStudies.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyStudies.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		89C5EF7323F16CFE00649359 /* HPHC Demo copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "HPHC Demo copy-Info.plist"; path = "/Users/surender/Documents/Surender/Projects/FDA/FDA_git/HPHC/HPHC Demo copy-Info.plist"; sourceTree = "<absolute>"; };
+		89C5EF7423F16DB000649359 /* AppConfiguration.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = AppConfiguration.plist; sourceTree = "<group>"; };
+		89C5EF7523F16DB000649359 /* GatewayOverview.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = GatewayOverview.plist; sourceTree = "<group>"; };
+		89C5EF7623F16DB000649359 /* FDADemo.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = FDADemo.storyboard; sourceTree = "<group>"; };
+		89C5EF7723F16DB000649359 /* FDA Demo.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "FDA Demo.xcassets"; sourceTree = "<group>"; };
+		89C5EF7823F16DB000649359 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		89C5EF7923F16DB000649359 /* Branding.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Branding.plist; sourceTree = "<group>"; };
 		89CD64B92244CAA600008178 /* ResourceAnchorTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResourceAnchorTest.swift; sourceTree = "<group>"; };
 		89DBF74022F94B0300AB3EF2 /* Branding.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Branding.plist; sourceTree = "<group>"; };
 		89DBF83222F9893000AB3EF2 /* IBD PROdigy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "IBD PROdigy.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1394,6 +1655,19 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		89C5EF1523F16CFE00649359 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				89C5EF1623F16CFE00649359 /* HealthKit.framework in Frameworks */,
+				89C5EF1723F16CFE00649359 /* Pods_HPHC.framework in Frameworks */,
+				89C5EF1823F16CFE00649359 /* Pods_HPHC.framework in Frameworks */,
+				89C5EF1923F16CFE00649359 /* Pods_HPHC.framework in Frameworks */,
+				89C5EF1A23F16CFE00649359 /* ResearchKit.framework in Frameworks */,
+				89C5EF1B23F16CFE00649359 /* (null) in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		89DBF7DB22F9893000AB3EF2 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -1529,6 +1803,7 @@
 				62CD35D6D8DE746AB43D70D6 /* Pods */,
 				5E6053B2479953DCC93BD8D4 /* Frameworks */,
 				6FEDF4B623472056000C18CF /* Recovered References */,
+				89C5EF7323F16CFE00649359 /* HPHC Demo copy-Info.plist */,
 			);
 			sourceTree = "<group>";
 		};
@@ -1541,6 +1816,7 @@
 				6FC12BBD22FD60FE0075940B /* LimitJIA.app */,
 				89055918230149AD005FB284 /* HPHCUITests.xctest */,
 				6F6EC42223E1577B0056AD55 /* HPHC Demo.app */,
+				89C5EF7223F16CFE00649359 /* MyStudies.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1969,6 +2245,7 @@
 			children = (
 				6F41B86123AC937200D4F624 /* AppConfiguration.swift */,
 				8905590F230148E4005FB284 /* FDA */,
+				89C5EE7823F16C1600649359 /* MyStudiesDemo */,
 				6F6EC42623E157B40056AD55 /* FDA Demo */,
 				6FDCDD2622C226BF008891D9 /* Sparc */,
 				8923429222B128910059F910 /* LimitJIA */,
@@ -2115,6 +2392,19 @@
 				6F10BB18234DE45D006388E2 /* Activity_New_Other_Form.json */,
 			);
 			path = JsonFiles;
+			sourceTree = "<group>";
+		};
+		89C5EE7823F16C1600649359 /* MyStudiesDemo */ = {
+			isa = PBXGroup;
+			children = (
+				89C5EF7423F16DB000649359 /* AppConfiguration.plist */,
+				89C5EF7923F16DB000649359 /* Branding.plist */,
+				89C5EF7723F16DB000649359 /* FDA Demo.xcassets */,
+				89C5EF7623F16DB000649359 /* FDADemo.storyboard */,
+				89C5EF7523F16DB000649359 /* GatewayOverview.plist */,
+				89C5EF7823F16DB000649359 /* Info.plist */,
+			);
+			path = MyStudiesDemo;
 			sourceTree = "<group>";
 		};
 		941909B11E52FA78001B01C5 /* StudyModel */ = {
@@ -2477,6 +2767,28 @@
 			productReference = 89055918230149AD005FB284 /* HPHCUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
+		89C5EE7B23F16CFE00649359 /* MyStudies */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 89C5EF6F23F16CFE00649359 /* Build configuration list for PBXNativeTarget "MyStudies" */;
+			buildPhases = (
+				89C5EE7E23F16CFE00649359 /* [CP] Check Pods Manifest.lock */,
+				89C5EE7F23F16CFE00649359 /* Sources */,
+				89C5EF1523F16CFE00649359 /* Frameworks */,
+				89C5EF1C23F16CFE00649359 /* Resources */,
+				89C5EF6B23F16CFE00649359 /* [CP] Embed Pods Frameworks */,
+				89C5EF6C23F16CFE00649359 /* ShellScript */,
+				89C5EF6D23F16CFE00649359 /* Embed Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				89C5EE7C23F16CFE00649359 /* PBXTargetDependency */,
+			);
+			name = MyStudies;
+			productName = FDA;
+			productReference = 89C5EF7223F16CFE00649359 /* MyStudies.app */;
+			productType = "com.apple.product-type.application";
+		};
 		89DBF74422F9893000AB3EF2 /* mSPARC */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 89DBF82F22F9893000AB3EF2 /* Build configuration list for PBXNativeTarget "mSPARC" */;
@@ -2545,6 +2857,10 @@
 						DevelopmentTeam = 3485DDCN2M;
 						ProvisioningStyle = Automatic;
 						TestTargetID = 6E7D2D551E433E8700763D4C;
+					};
+					89C5EE7B23F16CFE00649359 = {
+						DevelopmentTeam = FWLLYUH7XR;
+						ProvisioningStyle = Automatic;
 					};
 					89DBF74422F9893000AB3EF2 = {
 						DevelopmentTeam = MUEVRP9QCH;
@@ -2615,6 +2931,7 @@
 				6FC12AD022FD60FE0075940B /* LimitJIA */,
 				89055917230149AD005FB284 /* HPHCUITests */,
 				6F6EC32E23E1577B0056AD55 /* HPHC Demo */,
+				89C5EE7B23F16CFE00649359 /* MyStudies */,
 			);
 		};
 /* End PBXProject section */
@@ -2901,6 +3218,92 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		89C5EF1C23F16CFE00649359 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				89C5EF1D23F16CFE00649359 /* 45.png in Resources */,
+				89C5EF1E23F16CFE00649359 /* Study.storyboard in Resources */,
+				89C5EF1F23F16CFE00649359 /* SearchBarView.xib in Resources */,
+				89C5EF2023F16CFE00649359 /* Labkey_Activity_Latest4.json in Resources */,
+				89C5EF2123F16CFE00649359 /* LoginAssets.xcassets in Resources */,
+				89C5EF2223F16CFE00649359 /* ConsentLatest.json in Resources */,
+				89C5EF2323F16CFE00649359 /* TaskSchema.json in Resources */,
+				89C5EF2423F16CFE00649359 /* 55V2.png in Resources */,
+				89C5EF7B23F16DB000649359 /* GatewayOverview.plist in Resources */,
+				89C5EF2623F16CFE00649359 /* Labkey_Activity_Latest2.json in Resources */,
+				89C5EF2723F16CFE00649359 /* LaunchScreen.storyboard in Resources */,
+				89C5EF2823F16CFE00649359 /* 13.png in Resources */,
+				89C5EF2923F16CFE00649359 /* UserPreferences.plist in Resources */,
+				89C5EF2A23F16CFE00649359 /* AppGlossary.pdf in Resources */,
+				89C5EF2B23F16CFE00649359 /* Verdana Italic.ttf in Resources */,
+				89C5EF2C23F16CFE00649359 /* SignUpPlist.plist in Resources */,
+				89C5EF2D23F16CFE00649359 /* ActiveTask.json in Resources */,
+				89C5EF2E23F16CFE00649359 /* ActivityMetadata TEST1.json in Resources */,
+				89C5EF2F23F16CFE00649359 /* AppUpdateBlocker.xib in Resources */,
+				89C5EF3023F16CFE00649359 /* 200.png in Resources */,
+				89C5EF7D23F16DB000649359 /* FDA Demo.xcassets in Resources */,
+				89C5EF3123F16CFE00649359 /* Gateway.xcassets in Resources */,
+				89C5EF7C23F16DB000649359 /* FDADemo.storyboard in Resources */,
+				89C5EF3223F16CFE00649359 /* ActivityFilterView.xib in Resources */,
+				89C5EF3323F16CFE00649359 /* Labkey_Activity11.json in Resources */,
+				89C5EF3423F16CFE00649359 /* Study.xcassets in Resources */,
+				89C5EF3523F16CFE00649359 /* Units.json in Resources */,
+				89C5EF3623F16CFE00649359 /* ResourcesUI.plist in Resources */,
+				89C5EF3723F16CFE00649359 /* StudyDashboard.plist in Resources */,
+				89C5EF3823F16CFE00649359 /* ResourceList.json in Resources */,
+				89C5EF7A23F16DB000649359 /* AppConfiguration.plist in Resources */,
+				89C5EF7F23F16DB000649359 /* Branding.plist in Resources */,
+				89C5EF3923F16CFE00649359 /* study_dashboard.png in Resources */,
+				89C5EF3A23F16CFE00649359 /* OtherTextChoiceCell.xib in Resources */,
+				89C5EF3B23F16CFE00649359 /* LatestActive_Taskdocument.json in Resources */,
+				89C5EF3C23F16CFE00649359 /* Labkey_Activity_Latest.json in Resources */,
+				89C5EF3D23F16CFE00649359 /* Resources.plist in Resources */,
+				89C5EF3E23F16CFE00649359 /* JailbrokeBlocker.xib in Resources */,
+				89C5EF3F23F16CFE00649359 /* Activitylist.json in Resources */,
+				89C5EF7E23F16DB000649359 /* Info.plist in Resources */,
+				89C5EF4023F16CFE00649359 /* StepProvider.plist in Resources */,
+				89C5EF4123F16CFE00649359 /* ProgressView.xib in Resources */,
+				89C5EF4223F16CFE00649359 /* FetalKickCounter.storyboard in Resources */,
+				89C5EF4423F16CFE00649359 /* ChangePasswordData.plist in Resources */,
+				89C5EF4523F16CFE00649359 /* Labkey_Activity.json in Resources */,
+				89C5EF4623F16CFE00649359 /* Consent.json in Resources */,
+				89C5EF4723F16CFE00649359 /* SignInPlist.plist in Resources */,
+				89C5EF4823F16CFE00649359 /* 24-study-dashboard.png in Resources */,
+				89C5EF4923F16CFE00649359 /* NewProgressView.xib in Resources */,
+				89C5EF4A23F16CFE00649359 /* fda_preload.gif in Resources */,
+				89C5EF4B23F16CFE00649359 /* StudyOverview.plist in Resources */,
+				89C5EF4C23F16CFE00649359 /* ActivitySchedules.xib in Resources */,
+				89C5EF4D23F16CFE00649359 /* Activity_New_Other_Form.json in Resources */,
+				89C5EF4E23F16CFE00649359 /* StudyList.json in Resources */,
+				89C5EF4F23F16CFE00649359 /* Confirmation.plist in Resources */,
+				89C5EF5123F16CFE00649359 /* Notification.json in Resources */,
+				89C5EF5223F16CFE00649359 /* 03.png in Resources */,
+				89C5EF5323F16CFE00649359 /* Main.storyboard in Resources */,
+				89C5EF5423F16CFE00649359 /* TextChoiceCell.xib in Resources */,
+				89C5EF5523F16CFE00649359 /* FilterData.plist in Resources */,
+				89C5EF5723F16CFE00649359 /* Activities.plist in Resources */,
+				89C5EF5823F16CFE00649359 /* FetalKickCounter.xcassets in Resources */,
+				89C5EF5923F16CFE00649359 /* ContactUs.plist in Resources */,
+				89C5EF5A23F16CFE00649359 /* FetalKickTest.json in Resources */,
+				89C5EF5B23F16CFE00649359 /* Gateway.storyboard in Resources */,
+				89C5EF5C23F16CFE00649359 /* Acivity_Question.json in Resources */,
+				89C5EF5D23F16CFE00649359 /* ComprehensionFailure.xib in Resources */,
+				89C5EF5E23F16CFE00649359 /* LatestActive_1B.json in Resources */,
+				89C5EF5F23F16CFE00649359 /* Login.storyboard in Resources */,
+				89C5EF6023F16CFE00649359 /* Labkey_Activity_Latest3.json in Resources */,
+				89C5EF6123F16CFE00649359 /* Eligibility_1B.json in Resources */,
+				89C5EF6223F16CFE00649359 /* Profile.plist in Resources */,
+				89C5EF6323F16CFE00649359 /* HPHCSettings.xib in Resources */,
+				89C5EF6423F16CFE00649359 /* AnanomousFilterData.plist in Resources */,
+				89C5EF6523F16CFE00649359 /* 01.png in Resources */,
+				89C5EF6623F16CFE00649359 /* UserProfile.plist in Resources */,
+				89C5EF6723F16CFE00649359 /* Register.plist in Resources */,
+				89C5EF6823F16CFE00649359 /* Activity_Metadata_Other.json in Resources */,
+				89C5EF6923F16CFE00649359 /* 25-study-activities.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3217,6 +3620,67 @@
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
+		};
+		89C5EE7E23F16CFE00649359 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-HPHC-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		89C5EF6B23F16CFE00649359 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-HPHC/Pods-HPHC-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/ActionSheetPicker-3.0/ActionSheetPicker_3_0.framework",
+				"${BUILT_PRODUCTS_DIR}/CryptoSwift/CryptoSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/IQKeyboardManagerSwift/IQKeyboardManagerSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
+				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
+				"${BUILT_PRODUCTS_DIR}/SlideMenuControllerSwift/SlideMenuControllerSwift.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ActionSheetPicker_3_0.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CryptoSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManagerSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SlideMenuControllerSwift.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-HPHC/Pods-HPHC-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		89C5EF6C23F16CFE00649359 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Fabric/run\" 24faf2a83c3fd824044bfbcc2b7b4be24b8b28a1 c33a12b8c295fb1886720465e29ecebd81ee14abcd7c7e2f37553d09a685b735\n";
 		};
 		89DBF82B22F9893000AB3EF2 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -3799,6 +4263,162 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		89C5EE7F23F16CFE00649359 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				89C5EE8023F16CFE00649359 /* UIApplication.swift in Sources */,
+				89C5EE8123F16CFE00649359 /* UIViewController.swift in Sources */,
+				89C5EE8223F16CFE00649359 /* SignUpTableViewCell.swift in Sources */,
+				89C5EE8323F16CFE00649359 /* NotificationViewController.swift in Sources */,
+				89C5EE8423F16CFE00649359 /* LeftMenuCell.swift in Sources */,
+				89C5EE8523F16CFE00649359 /* StringEncoder.swift in Sources */,
+				89C5EE8623F16CFE00649359 /* PinterestLayout.swift in Sources */,
+				89C5EE8723F16CFE00649359 /* Cell.swift in Sources */,
+				89C5EE8823F16CFE00649359 /* DBActivity.swift in Sources */,
+				89C5EE8923F16CFE00649359 /* ContactUsTableViewCell.swift in Sources */,
+				89C5EE8A23F16CFE00649359 /* ConsentSharePdfStepViewController.swift in Sources */,
+				89C5EE8B23F16CFE00649359 /* FRHyperLabel.m in Sources */,
+				89C5EE8C23F16CFE00649359 /* StepProvider.swift in Sources */,
+				89C5EE8D23F16CFE00649359 /* ActivityInstructionStep.swift in Sources */,
+				89C5EE8E23F16CFE00649359 /* SplashViewController.swift in Sources */,
+				89C5EE8F23F16CFE00649359 /* ResearchContainerViewController.swift in Sources */,
+				89C5EE9023F16CFE00649359 /* Logger.swift in Sources */,
+				89C5EE9123F16CFE00649359 /* EligibilityBuilder.swift in Sources */,
+				89C5EE9223F16CFE00649359 /* NetworkConstants.swift in Sources */,
+				89C5EE9323F16CFE00649359 /* RepeatableFormStep.m in Sources */,
+				89C5EE9423F16CFE00649359 /* StudyDashboardTabbarViewController.swift in Sources */,
+				89C5EE9523F16CFE00649359 /* ConfirmationOptionalTableViewCell.swift in Sources */,
+				89C5EE9623F16CFE00649359 /* StudyDashboardStudyPercentageTableViewCell.swift in Sources */,
+				89C5EE9723F16CFE00649359 /* DBStudy.swift in Sources */,
+				89C5EE9823F16CFE00649359 /* FeedBackTableViewCell.swift in Sources */,
+				89C5EE9923F16CFE00649359 /* KeyChain.swift in Sources */,
+				89C5EE9A23F16CFE00649359 /* ResourcesViewController.swift in Sources */,
+				89C5EE9B23F16CFE00649359 /* HealthClientType.swift in Sources */,
+				89C5EE9C23F16CFE00649359 /* StudyListCell.swift in Sources */,
+				89C5EE9D23F16CFE00649359 /* SignUpViewController.swift in Sources */,
+				89C5EE9E23F16CFE00649359 /* TextChoiceQuestionController.swift in Sources */,
+				89C5EE9F23F16CFE00649359 /* RepeatableFormStepViewController.m in Sources */,
+				89C5EEA023F16CFE00649359 /* DBHandler.swift in Sources */,
+				89C5EEA123F16CFE00649359 /* ConsentStep.swift in Sources */,
+				89C5EEA223F16CFE00649359 /* ActivitiesTableViewCell.swift in Sources */,
+				89C5EEA323F16CFE00649359 /* SecondGatewayOverviewViewController.swift in Sources */,
+				89C5EEA423F16CFE00649359 /* HPHCSettings.swift in Sources */,
+				89C5EEA523F16CFE00649359 /* LeftMenuResourceTableViewCell.swift in Sources */,
+				89C5EEA623F16CFE00649359 /* Gateway.swift in Sources */,
+				89C5EEA723F16CFE00649359 /* ProfileTableViewCell.swift in Sources */,
+				89C5EEA823F16CFE00649359 /* FetalKickCounterStep.swift in Sources */,
+				89C5EEA923F16CFE00649359 /* ChartsViewController.swift in Sources */,
+				89C5EEAA23F16CFE00649359 /* Constants.swift in Sources */,
+				89C5EEAB23F16CFE00649359 /* ViewController.swift in Sources */,
+				89C5EEAC23F16CFE00649359 /* UITestingHelpers.swift in Sources */,
+				89C5EEAD23F16CFE00649359 /* SignUpCompleteViewController.swift in Sources */,
+				89C5EEAE23F16CFE00649359 /* ForgotPasswordViewController.swift in Sources */,
+				89C5EEAF23F16CFE00649359 /* NetworkManager.swift in Sources */,
+				89C5EEB023F16CFE00649359 /* FDASlideMenuViewController.swift in Sources */,
+				89C5EEB123F16CFE00649359 /* AppDelegate.swift in Sources */,
+				89C5EEB223F16CFE00649359 /* StudyHomeViewController.swift in Sources */,
+				89C5EEB323F16CFE00649359 /* ConsentPdfViewerStepViewController.swift in Sources */,
+				89C5EEB423F16CFE00649359 /* Dictionary.swift in Sources */,
+				89C5EEB523F16CFE00649359 /* StudyDashboardStatisticsTableViewCell.swift in Sources */,
+				89C5EEB623F16CFE00649359 /* ConsentBuilder.swift in Sources */,
+				89C5EEB723F16CFE00649359 /* JailbrokeBlocker.swift in Sources */,
+				89C5EEB823F16CFE00649359 /* HomeViewController.swift in Sources */,
+				89C5EEB923F16CFE00649359 /* FileDownloadManager.swift in Sources */,
+				89C5EEBA23F16CFE00649359 /* AppNotification.swift in Sources */,
+				89C5EEBB23F16CFE00649359 /* NotificationTableViewCell.swift in Sources */,
+				89C5EEBC23F16CFE00649359 /* SurveyTask.swift in Sources */,
+				89C5EEBD23F16CFE00649359 /* FilterListCollectionViewCell.swift in Sources */,
+				89C5EEBE23F16CFE00649359 /* Formatter.swift in Sources */,
+				89C5EEBF23F16CFE00649359 /* NavigationBackButton.swift in Sources */,
+				89C5EEC023F16CFE00649359 /* StudyDashboardViewController.swift in Sources */,
+				89C5EEC123F16CFE00649359 /* Study.swift in Sources */,
+				89C5EEC223F16CFE00649359 /* ResourcesListCell.swift in Sources */,
+				89C5EEC323F16CFE00649359 /* AnchorDateHandler.swift in Sources */,
+				89C5EEC423F16CFE00649359 /* StandaloneStudy.swift in Sources */,
+				89C5EEC523F16CFE00649359 /* LocalNotification.swift in Sources */,
+				89C5EEC623F16CFE00649359 /* ConfirmationViewController.swift in Sources */,
+				89C5EEC723F16CFE00649359 /* FetalKickCounterTask.swift in Sources */,
+				89C5EEC823F16CFE00649359 /* OtherTextChoiceCell.swift in Sources */,
+				89C5EEC923F16CFE00649359 /* AKUtility.swift in Sources */,
+				89C5EECA23F16CFE00649359 /* ConfirmationTableViewCell.swift in Sources */,
+				89C5EECB23F16CFE00649359 /* ActivityBuilder.swift in Sources */,
+				89C5EECC23F16CFE00649359 /* File.swift in Sources */,
+				89C5EECD23F16CFE00649359 /* StudyDashboardActivityCollectionViewCell.swift in Sources */,
+				89C5EECE23F16CFE00649359 /* SignInViewController.swift in Sources */,
+				89C5EECF23F16CFE00649359 /* StudyDashboardTrendsTableViewCell.swift in Sources */,
+				89C5EED023F16CFE00649359 /* ResponseServerConfiguration.swift in Sources */,
+				89C5EED123F16CFE00649359 /* ResourcesDetailViewController.swift in Sources */,
+				89C5EED223F16CFE00649359 /* NetworkWebServiceHandler.swift in Sources */,
+				89C5EED323F16CFE00649359 /* AppConfiguration.swift in Sources */,
+				89C5EED423F16CFE00649359 /* Encoder.swift in Sources */,
+				89C5EED523F16CFE00649359 /* ActivityActiveStep.swift in Sources */,
+				89C5EED623F16CFE00649359 /* LineChartCell.swift in Sources */,
+				89C5EED723F16CFE00649359 /* WebViewController.swift in Sources */,
+				89C5EED823F16CFE00649359 /* ActivityResult.swift in Sources */,
+				89C5EED923F16CFE00649359 /* StudyFilterViewController.swift in Sources */,
+				89C5EEDA23F16CFE00649359 /* UserServices.swift in Sources */,
+				89C5EEDB23F16CFE00649359 /* ReachoutOptionCell.swift in Sources */,
+				89C5EEDC23F16CFE00649359 /* FeedBackViewController.swift in Sources */,
+				89C5EEDD23F16CFE00649359 /* PageViewController.swift in Sources */,
+				89C5EEDE23F16CFE00649359 /* ResourcesDetailViewControllerCopy.swift in Sources */,
+				89C5EEDF23F16CFE00649359 /* ReachoutOptionsViewController.swift in Sources */,
+				89C5EEE023F16CFE00649359 /* Utilities.swift in Sources */,
+				89C5EEE123F16CFE00649359 /* SyncUpdate.swift in Sources */,
+				89C5EEE223F16CFE00649359 /* LeftMenuViewController.swift in Sources */,
+				89C5EEE323F16CFE00649359 /* UIUtilities.swift in Sources */,
+				89C5EEE423F16CFE00649359 /* TextChoiceCell.swift in Sources */,
+				89C5EEE523F16CFE00649359 /* User.swift in Sources */,
+				89C5EEE623F16CFE00649359 /* ProfileViewController.swift in Sources */,
+				89C5EEE723F16CFE00649359 /* StudyOverviewPageViewController.swift in Sources */,
+				89C5EEE823F16CFE00649359 /* InEligibilityStepViewController.swift in Sources */,
+				89C5EEE923F16CFE00649359 /* Schedule.swift in Sources */,
+				89C5EEEA23F16CFE00649359 /* GatewayResourcesListViewController.swift in Sources */,
+				89C5EEEB23F16CFE00649359 /* ActivityQuestionStep.swift in Sources */,
+				89C5EEEC23F16CFE00649359 /* KDCircularProgress.swift in Sources */,
+				89C5EEED23F16CFE00649359 /* DBNotification.swift in Sources */,
+				89C5EEEE23F16CFE00649359 /* ActivitiesViewController.swift in Sources */,
+				89C5EEEF23F16CFE00649359 /* Activity.swift in Sources */,
+				89C5EEF023F16CFE00649359 /* SearchBarView.swift in Sources */,
+				89C5EEF123F16CFE00649359 /* AppUpdateBlocker.swift in Sources */,
+				89C5EEF223F16CFE00649359 /* FetalKickIntroStepViewController.swift in Sources */,
+				89C5EEF323F16CFE00649359 /* DBUser.swift in Sources */,
+				89C5EEF423F16CFE00649359 /* ActivityStep.swift in Sources */,
+				89C5EEF523F16CFE00649359 /* FilterListTableViewCell.swift in Sources */,
+				89C5EEF623F16CFE00649359 /* StudyDashboardActivityTableViewCell.swift in Sources */,
+				89C5EEF723F16CFE00649359 /* ConsentResult.swift in Sources */,
+				89C5EEF823F16CFE00649359 /* WCPConfiguration.swift in Sources */,
+				89C5EEF923F16CFE00649359 /* StudyOverviewPageViewControllerFirst.swift in Sources */,
+				89C5EEFA23F16CFE00649359 /* Overview.swift in Sources */,
+				89C5EEFB23F16CFE00649359 /* StudyDashboard.swift in Sources */,
+				89C5EEFC23F16CFE00649359 /* ChangePasswordViewController.swift in Sources */,
+				89C5EEFD23F16CFE00649359 /* ComprehensionFailure.swift in Sources */,
+				89C5EEFE23F16CFE00649359 /* ActivityFilterView.swift in Sources */,
+				89C5EEFF23F16CFE00649359 /* VerificationViewController.swift in Sources */,
+				89C5EF0023F16CFE00649359 /* FirstGatewayOverviewViewController.swift in Sources */,
+				89C5EF0123F16CFE00649359 /* ResearchContainerSegue.swift in Sources */,
+				89C5EF0223F16CFE00649359 /* WCPServices.swift in Sources */,
+				89C5EF0323F16CFE00649359 /* LabKeyServices.swift in Sources */,
+				89C5EF0423F16CFE00649359 /* FileDownloadModel.swift in Sources */,
+				89C5EF0523F16CFE00649359 /* StudyDashboardStatisticsCollectionViewCell.swift in Sources */,
+				89C5EF0623F16CFE00649359 /* ActivityStepResult.swift in Sources */,
+				89C5EF0723F16CFE00649359 /* NetworkConfiguration.swift in Sources */,
+				89C5EF0823F16CFE00649359 /* RegistrationServerConfiguration.swift in Sources */,
+				89C5EF0923F16CFE00649359 /* EligibilityStepViewController.swift in Sources */,
+				89C5EF0A23F16CFE00649359 /* ResourcesTableViewCell.swift in Sources */,
+				89C5EF0B23F16CFE00649359 /* StudyOverviewViewControllerSecond.swift in Sources */,
+				89C5EF0C23F16CFE00649359 /* ActivityFormStep.swift in Sources */,
+				89C5EF0D23F16CFE00649359 /* StudyDashboardStudyActivitiesTableViewCell.swift in Sources */,
+				89C5EF0E23F16CFE00649359 /* SignInTableViewCell.swift in Sources */,
+				89C5EF0F23F16CFE00649359 /* Resource.swift in Sources */,
+				89C5EF1023F16CFE00649359 /* ContactUsViewController.swift in Sources */,
+				89C5EF1123F16CFE00649359 /* Reachability.swift in Sources */,
+				89C5EF1223F16CFE00649359 /* StudyDashboardWelcomeTableViewCell.swift in Sources */,
+				89C5EF1323F16CFE00649359 /* StudyListViewController.swift in Sources */,
+				89C5EF1423F16CFE00649359 /* FetalKickCounterStepViewController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		89DBF74822F9893000AB3EF2 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -3977,6 +4597,11 @@
 			isa = PBXTargetDependency;
 			target = 6E7D2D551E433E8700763D4C /* HPHC */;
 			targetProxy = 8905591D230149AD005FB284 /* PBXContainerItemProxy */;
+		};
+		89C5EE7C23F16CFE00649359 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = ResearchKit;
+			targetProxy = 89C5EE7D23F16CFE00649359 /* PBXContainerItemProxy */;
 		};
 		89DBF74522F9893000AB3EF2 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -4428,6 +5053,70 @@
 			};
 			name = Release;
 		};
+		89C5EF7023F16CFE00649359 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7BDC002620C7855C409516D3 /* Pods-HPHC.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = HPHC/FDA.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = FWLLYUH7XR;
+				ENABLE_BITCODE = NO;
+				INFOPLIST_FILE = "HPHC Demo copy-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IS_STANDALONE_STUDY = false;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.hphci.fda.MyS1;
+				PRODUCT_NAME = MyStudies;
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "HPHC/Controllers/LoginRegisterUI/FDA-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		89C5EF7123F16CFE00649359 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3BCFFA0DAD500A9A04C582CD /* Pods-HPHC.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = HPHC/FDA.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = FWLLYUH7XR;
+				ENABLE_BITCODE = NO;
+				INFOPLIST_FILE = "HPHC Demo copy-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IS_STANDALONE_STUDY = false;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.hphci.fda.MyS1;
+				PRODUCT_NAME = MyStudies;
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "HPHC/Controllers/LoginRegisterUI/FDA-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
 		89DBF83022F9893000AB3EF2 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 9A6334C0EA7AE2035BEB653F /* Pods-mSPARC.debug.xcconfig */;
@@ -4545,6 +5234,15 @@
 			buildConfigurations = (
 				89055920230149AD005FB284 /* Debug */,
 				89055921230149AD005FB284 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		89C5EF6F23F16CFE00649359 /* Build configuration list for PBXNativeTarget "MyStudies" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				89C5EF7023F16CFE00649359 /* Debug */,
+				89C5EF7123F16CFE00649359 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

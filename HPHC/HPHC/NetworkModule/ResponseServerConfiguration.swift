@@ -58,9 +58,11 @@ struct ResponseServerURLConstants {
 //    static let DevelopmentURL = "https://hpresp-stage.lkcompliant.net/mobileappstudy-"
     
     //Labkey Demo Server
-       static let ProductionURL = "https://resp.demo.mystudiesapp.org/"
-       static let DevelopmentURL = "https://resp.demo.mystudiesapp.org/"
-    
+       static let ProductionURL = "https://resp.demo.mystudiesapp.org/mobileappstudy-"
+       static let DevelopmentURL = "https://resp.demo.mystudiesapp.org/mobileappstudy-"
+//    mobileappstudy-validateenrollmenttoken.api?
+  
+//  https://resp.demo.mystudiesapp.org/validateEnrollmentToken.api?studyId=StudyDemo01&token=GGFTQAXFT
 }
 class ResponseServerConfiguration: NetworkConfiguration {
     static let configuration = ResponseServerConfiguration()

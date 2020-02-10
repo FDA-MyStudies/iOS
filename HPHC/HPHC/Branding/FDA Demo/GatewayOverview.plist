@@ -26,29 +26,5 @@
 		<key>videoLink</key>
 		<string></string>
 	</dict>
-	<dict>
-		<key>title</key>
-		<string>Improving Health Outcomes</string>
-		<key>text</key>
-		<string>Explore and participate in studies for which you are eligible and help generate more data, better insights and improved outcomes.</string>
-		<key>type</key>
-		<string></string>
-		<key>image</key>
-		<string>img_02</string>
-		<key>videoLink</key>
-		<string></string>
-	</dict>
-	<dict>
-		<key>title</key>
-		<string>Protecting Your Privacy</string>
-		<key>text</key>
-		<string>All studies in this app have been approved by an Institutional Review Board, follow strict federal research guidelines, and securely store your responses to ensure your privacy is always protected.</string>
-		<key>type</key>
-		<string></string>
-		<key>image</key>
-		<string>img_03</string>
-		<key>videoLink</key>
-		<string></string>
-	</dict>
 </array>
 </plist>

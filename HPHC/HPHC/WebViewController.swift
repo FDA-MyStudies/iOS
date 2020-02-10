@@ -70,7 +70,7 @@ class WebViewController : UIViewController{
         if self.requestLink != nil && (self.requestLink?.count)! > 0 {
             let url = URL.init(string:self.requestLink!)
             let urlRequest = URLRequest.init(url: url!)
-            
+            print("11---\(url)")
             webView?.loadRequest(urlRequest)
             
         }

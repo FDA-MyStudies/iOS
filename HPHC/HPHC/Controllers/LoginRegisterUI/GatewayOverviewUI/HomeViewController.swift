@@ -184,7 +184,8 @@ class HomeViewController: UIViewController{
         let loginStoryboard = UIStoryboard.init(name: "Main", bundle:Bundle.main)
         let webViewController = loginStoryboard.instantiateViewController(withIdentifier: "WebViewController") as! UINavigationController
         let webView = webViewController.viewControllers[0] as! WebViewController
-        webView.requestLink = "https://" + websiteName
+        let urlString: String = (websiteName.containsIgnoringCase("https")) ? websiteName : ("https://" + websiteName)
+        webView.requestLink = urlString
         self.navigationController?.present(webViewController, animated: true, completion: nil)
     }
     

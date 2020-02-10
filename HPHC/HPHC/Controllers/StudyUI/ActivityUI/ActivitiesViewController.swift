@@ -189,23 +189,10 @@ class ActivitiesViewController : UIViewController{
             if NotificationHandler.instance.activityId.count > 0 {
                 
                 let activityId = NotificationHandler.instance.activityId
-                print("debug---activityId---\(activityId)")
                 let rowDetail = tableViewSections[0]
                 let activities = (rowDetail["activities"] as? Array<Activity>)!
                 
-                for activities in activities {
-                    print("ALL---activities---\(activities.actvityId)")
-                }
-                
-//                print("debug---activities---\(activities)")
                 let index = activities.index(where: {$0.actvityId == activityId})
-                print("debug---index2---\(index)")
-//                let ip = IndexPath.init(row: index!, section: 0)
-//                self.selectedIndexPath = ip
-//                self.tableView?.selectRow(at: ip, animated: true, scrollPosition: .middle)
-//                self.tableView?.delegate?.tableView!(self.tableView!, didSelectRowAt: ip)
-//
-//                NotificationHandler.instance.activityId = ""
                 
                 if let index = index {
                 let ip = IndexPath.init(row: index, section: 0)
@@ -507,7 +494,7 @@ class ActivitiesViewController : UIViewController{
         var isInActiveActivitiesAreAvailable: Bool! = false
         for activity in activities! {
             if activity.state == "active" || activity.state == nil {
-                print("activity.active---\(activity.state)---\(activity.actvityId)")
+              
                 let status =  self.getActivityAvailabilityStatus(activity: activity)
                 switch status {
                 case .current:
@@ -521,7 +508,6 @@ class ActivitiesViewController : UIViewController{
                     bufCurrentStudyArray.append(activity)
                 }
             } else {
-                print("activity.Delete---\(activity.state)---\(activity.actvityId)")
                 isInActiveActivitiesAreAvailable = true
                 DBHandler.deleteDBLocalNotification(activityId: activity.actvityId!,studyId: activity.studyId!)
 //                LocalNotification.removeLocalNotificationfor(studyId: activity.studyId!, activityid: activity.actvityId!)

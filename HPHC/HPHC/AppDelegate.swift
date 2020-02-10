@@ -281,7 +281,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         
         let plistPath = Bundle.main.path(forResource: "GatewayOverview", ofType: ".plist", inDirectory: nil)
-        print("Gateway---\(plistPath)")
         
         self.isAppLaunched = true
         IQKeyboardManager.shared.enable = true

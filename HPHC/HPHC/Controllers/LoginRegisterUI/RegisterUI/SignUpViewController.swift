@@ -90,8 +90,6 @@ class SignUpViewController: UIViewController{
         TermsAndPolicy.currentTermsAndPolicy?.initWith(terms: terms, policy: policyURL)
         self.agreeToTermsAndConditions()
       
-      //New Demo
-//      termsAndCondition?.isSelectable = false
     }
     
     override func viewWillAppear(_ animated: Bool) {

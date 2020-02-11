@@ -312,6 +312,9 @@ class SignInViewController: UIViewController{
         termsAndCondition?.attributedText = attributedString
         
         termsAndCondition?.linkTextAttributes = convertToOptionalNSAttributedStringKeyDictionary([NSAttributedString.Key.foregroundColor.rawValue: Utilities.getUIColorFromHex(0x007CBA)])
+      
+      //New Demo
+//      termsAndCondition?.isSelectable = false
         
     }
     

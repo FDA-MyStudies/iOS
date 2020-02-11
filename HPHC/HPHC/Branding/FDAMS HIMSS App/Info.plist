@@ -3,11 +3,11 @@
 <plist version="1.0">
 <dict>
 	<key>ApplicationID</key>
-	<string>FMSDEMO001</string>
+	<string>BTCHIM01</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
-	<string>$(PRODUCT_NAME)</string>
+	<string>FDAMS HIMSS App</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -68,7 +68,7 @@
 	<key>OrganizationID</key>
 	<string>OrgName</string>
 	<key>ProductTitleName</key>
-	<string>MyStudies Sample App</string>
+	<string>FDAMS HIMSS App</string>
 	<key>StandaloneStudyId</key>
 	<string>appstudy2</string>
 	<key>UIAppFonts</key>

@@ -59,6 +59,7 @@ class LeftMenuViewController: UIViewController, LeftMenuProtocol {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var labelVersion: UILabel!
     @IBOutlet weak var labelProductName: UILabel!
+    @IBOutlet weak var labelPoweredBy: UILabel!
     @IBOutlet weak var tableHeaderView: UIView!
     @IBOutlet weak var tableFooterView: UIView!
     @IBOutlet weak var buttonSignOut: UIButton?
@@ -107,6 +108,7 @@ class LeftMenuViewController: UIViewController, LeftMenuProtocol {
         }
         let navTitle = infoDict!["ProductTitleName"] as! String
         labelProductName.text = navTitle
+//        labelPoweredBy.text = "Powered by \(navTitle)"
         
         
         

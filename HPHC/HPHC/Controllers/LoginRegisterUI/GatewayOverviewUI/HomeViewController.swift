@@ -53,6 +53,9 @@ class HomeViewController: UIViewController{
         let title = infoDict?[BrandingConstant.WebsiteButtonTitle] as? String
         
         buttonLink.setTitle(title != nil ? title : websiteName, for: .normal)
+      
+      //Demo
+//      buttonLink.isEnabled = false
     }
     
     override func viewWillAppear(_ animated: Bool) {

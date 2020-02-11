@@ -585,20 +585,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if User.currentUser.userType == .FDAUser {
            
             let center = UNUserNotificationCenter.current()
-            center.getPendingNotificationRequests(completionHandler: { requests in
-                print(requests)
-                if requests.count < 50 {
-                     LocalNotification.refreshAllLocalNotification()
-                }
-            })
-            
-            //check if notifications are expired or already fired
-//            if scheduledNotifications.count < 50 {
-//                //refresh local notifcation from DB
-//                LocalNotification.refreshAllLocalNotification()
-//                scheduledNotifications = application.scheduledLocalNotifications!
-//
-//            }
+            center.getPendingNotificationRequests(
+                completionHandler: { requests in
+                    print(requests)
+                    if requests.count < 50 {
+                        DispatchQueue.main.async {
+                             LocalNotification.refreshAllLocalNotification()
+                        }
+                    }
+                })
         }
     }
     
@@ -1847,16 +1842,13 @@ extension UIWindow{
      Adds progress below navigation bar
      */
     func addProgressIndicatorOnWindow() {
-        
-        let view = UINib(nibName: kNewProgressViewNIB, bundle: nil).instantiate(withOwner: nil, options: nil)[0] as? UIView
-        
-        let url = Bundle.main.url(forResource: kResourceName, withExtension: "gif")!
-        _ = try! Data(contentsOf: url)
-        let webView =  (view?.subviews.first as? UIWebView)!
-        
-        webView.loadRequest(URLRequest.init(url: url))
-        webView.scalesPageToFit = true
-        webView.contentMode = UIView.ContentMode.scaleAspectFit
+
+        let view = UINib(nibName: kNewProgressViewNIB, bundle: nil).instantiate(
+            withOwner: nil, options: nil)[0] as? UIView
+
+        let fdaGif = UIImage.gifImageWithName(kResourceName)
+        let imageView = view?.subviews.first as? UIImageView
+        imageView?.image = fdaGif
         
         var frame = UIScreen.main.bounds
         frame.origin.y += 64
@@ -1876,17 +1868,13 @@ extension UIWindow{
         
         let view = self.viewWithTag(50000)
         if view == nil {
+
+            let view = UINib(nibName: kNewProgressViewNIB, bundle: nil).instantiate(
+                withOwner: nil, options: nil)[0] as? UIView
             
-            let view = UINib(nibName: kNewProgressViewNIB, bundle: nil).instantiate(withOwner: nil, options: nil)[0] as? UIView
-            
-            
-            let url = Bundle.main.url(forResource: kResourceName, withExtension: "gif")!
-            _ = try! Data(contentsOf: url)
-            let webView =  (view?.subviews.first as? UIWebView)!
-            
-            webView.loadRequest(URLRequest.init(url: url))
-            webView.scalesPageToFit = true
-            webView.contentMode = UIView.ContentMode.scaleAspectFit
+            let fdaGif = UIImage.gifImageWithName(kResourceName)
+            let imageView = view?.subviews.first as? UIImageView
+            imageView?.image = fdaGif
             
             let frame = UIScreen.main.bounds
             

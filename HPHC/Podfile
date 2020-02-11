@@ -14,7 +14,7 @@ def main_pods
   pod 'RealmSwift'
   pod 'CryptoSwift'
   pod 'ActionSheetPicker-3.0'
-  
+
 end
 
 target 'HPHC' do
@@ -37,7 +37,6 @@ target 'LimitJIA' do
   main_pods
   
 end
-
 
 target 'HPHCUITests' do
   use_frameworks!

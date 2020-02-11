@@ -1,13 +1,13 @@
 PODS:
-  - ActionSheetPicker-3.0 (2.3.0)
+  - ActionSheetPicker-3.0 (2.4.1)
   - Crashlytics (3.14.0):
     - Fabric (~> 1.10.2)
-  - CryptoSwift (1.1.3)
-  - Embassy (4.1.0)
+  - CryptoSwift (1.3.0)
+  - Embassy (4.1.1)
   - EnvoyAmbassador (4.0.5):
     - Embassy (~> 4.0)
   - Fabric (1.10.2)
-  - IQKeyboardManagerSwift (6.5.2)
+  - IQKeyboardManagerSwift (6.5.5)
   - Mockingjay (3.0.0-alpha.1):
     - Mockingjay/Core (= 3.0.0-alpha.1)
     - Mockingjay/XCTest (= 3.0.0-alpha.1)
@@ -15,14 +15,14 @@ PODS:
     - URITemplate (~> 3.0)
   - Mockingjay/XCTest (3.0.0-alpha.1):
     - Mockingjay/Core
-  - Realm (3.20.0):
-    - Realm/Headers (= 3.20.0)
-  - Realm/Headers (3.20.0)
-  - RealmSwift (3.20.0):
-    - Realm (= 3.20.0)
-  - SDWebImage (5.2.5):
-    - SDWebImage/Core (= 5.2.5)
-  - SDWebImage/Core (5.2.5)
+  - Realm (4.3.2):
+    - Realm/Headers (= 4.3.2)
+  - Realm/Headers (4.3.2)
+  - RealmSwift (4.3.2):
+    - Realm (= 4.3.2)
+  - SDWebImage (5.5.2):
+    - SDWebImage/Core (= 5.5.2)
+  - SDWebImage/Core (5.5.2)
   - SlideMenuControllerSwift (5.0.0)
   - URITemplate (3.0.0)
 
@@ -65,20 +65,20 @@ CHECKOUT OPTIONS:
     :git: https://github.com/AtomicSLLC/SlideMenuControllerSwift.git
 
 SPEC CHECKSUMS:
-  ActionSheetPicker-3.0: eef157d75e151f255c5333d26656c7fbfe905a51
+  ActionSheetPicker-3.0: d236f0b663123e4b404a3bc04b338c1e805ac910
   Crashlytics: 540b7e5f5da5a042647227a5e3ac51d85eed06df
-  CryptoSwift: 6b6e488df0598b3e9fa49254ed1a65e8c1b1e10b
-  Embassy: 296c51c4b16b8377b413f48f413a99aa736adc22
+  CryptoSwift: 1283821600233bdbeb96d7b389c3288c3bf77211
+  Embassy: eb36dc783ea20b792426461bbaff8c3f256e0331
   EnvoyAmbassador: 21cef10e70d003801c68ba5281948684a4e25486
   Fabric: 706c8b8098fff96c33c0db69cbf81f9c551d0d74
-  IQKeyboardManagerSwift: c75366f1f19590e8caeae45fcd5815c9289d6099
+  IQKeyboardManagerSwift: 0fb93310284665245591f50f7a5e38de615960b7
   Mockingjay: 0f7c5aa49c7f1b95621cee3c79b557141f5a225c
-  Realm: 8b2ca5bc6479a91f379b6b42b5922e396cd5ba5a
-  RealmSwift: 1949ef26a279e1845bd51d591b9103adfcd121df
-  SDWebImage: 4eabf2fa6695c95c47724214417a9c036c965e4a
+  Realm: 5e92902e2875dff4bb0fd02f67bb737c3d5db2bc
+  RealmSwift: 9a360fc7bae04fc2e308a34fbd899d5faa2d6b22
+  SDWebImage: 4d5c027c935438f341ed33dbac53ff9f479922ca
   SlideMenuControllerSwift: d740ea24105a658fe6a8c256f2bf5832fee7c047
   URITemplate: 58e0d47f967006c5d59888af5356c4a8ed3b197d
 
-PODFILE CHECKSUM: eb98436fddffe7ccf6d518b1dcbecbe453d71291
+PODFILE CHECKSUM: c829cb7faec2f040bf7dfa881d476ec310aed81b
 
 COCOAPODS: 1.8.4

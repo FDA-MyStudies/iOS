@@ -71,71 +71,72 @@ extension UIViewController {
           self.present(alert, animated: true, completion: nil)
     }
     
-    func addProgressIndicator(){
-        
+    func addProgressIndicator() {
+
         self.navigationItem.leftBarButtonItem?.isEnabled = false
         self.navigationItem.rightBarButtonItem?.isEnabled = true
         self.navigationItem.backBarButtonItem?.isEnabled = false
         slideMenuController()?.removeLeftGestures()
         slideMenuController()?.view.isUserInteractionEnabled = false
-        
+
         self.navigationController?.navigationBar.isUserInteractionEnabled = false
-        
+
         var progressView = self.view.viewWithTag(5000)
         if progressView == nil {
+
+            progressView = UINib(nibName: kNewProgressViewNIB, bundle: nil).instantiate(
+                withOwner: nil, options: nil)[0] as? UIView
+
+            let fdaGif = UIImage.gifImageWithName(kResourceName)
+            let imageView = progressView?.subviews.first as? UIImageView
+            imageView?.image = fdaGif
             
-            progressView = UINib(nibName: kNewProgressViewNIB, bundle: nil).instantiate(withOwner: nil, options: nil)[0] as? UIView
-            
-            let url = Bundle.main.url(forResource: kResourceName, withExtension: "gif")!
-           
-            let webView =  progressView?.subviews.first as! UIWebView
-            webView.loadRequest(URLRequest(url: url))
-            
-            UI: do {
-                webView.scalesPageToFit = true
-                webView.contentMode = UIView.ContentMode.scaleAspectFit
+            UI:do {
                 progressView!.alpha = 0
                 progressView!.tag = 5000
             }
-            
-            layout: do {
+
+            layout:do {
                 self.view.addSubview(progressView!)
+               
                 progressView!.translatesAutoresizingMaskIntoConstraints = false
-                
-                NSLayoutConstraint.activate([
-                    progressView!.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
-                    progressView!.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
-                    progressView!.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.size.width),
-                    progressView!.heightAnchor.constraint(equalToConstant: UIScreen.main.bounds.size.height)
-                    //progressView!.bottomAnchor.constraint(equalTo: self.view.bottomAnchor),
-                    //progressView!.topAnchor.constraint(equalTo: self.view.topAnchor)
+
+                NSLayoutConstraint.activate(
+                    [
+                        progressView!.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
+                        progressView!.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
+                        progressView!.widthAnchor.constraint(
+                            equalToConstant: UIScreen.main.bounds.size.width),
+                        progressView!.heightAnchor.constraint(
+                            equalToConstant: UIScreen.main.bounds.size.height),
                     ])
             }
-            
-            
 
             UIView.animate(withDuration: 0.3) {
                 progressView!.alpha = 1
             }
         }
     }
-    
-    func removeProgressIndicator(){
-        
+
+    func removeProgressIndicator() {
+
         self.navigationItem.leftBarButtonItem?.isEnabled = true
         self.navigationItem.rightBarButtonItem?.isEnabled = true
         self.navigationItem.backBarButtonItem?.isEnabled = true
-        
-         self.navigationController?.navigationBar.isUserInteractionEnabled = true
-        
-        let view = self.view.viewWithTag(5000) //as UIView
-        
+
+        self.navigationController?.navigationBar.isUserInteractionEnabled = true
+
+        let view = self.view.viewWithTag(5000)  //as UIView
+
         slideMenuController()?.view.isUserInteractionEnabled = true
         slideMenuController()?.addLeftGestures()
-        
-        UIView.animate(withDuration: 0.2, animations: {
-            view?.alpha = 0
-        }) { (completed) in
+
+        UIView.animate(
+            withDuration: 0.2,
+            animations: {
+                view?.alpha = 0
+            }
+        ) { (completed) in
             view?.removeFromSuperview()
         }
     }

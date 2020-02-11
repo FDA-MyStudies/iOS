@@ -23,19 +23,15 @@ import RealmSwift
 
 class DBHandler: NSObject {
 
-    fileprivate class func getRealmObject() -> Realm! {
-        
+    private static var realm: Realm = {
         let key = FDAKeychain.shared[kRealmEncryptionKeychainKey]
         let data = Data.init(base64Encoded: key!)
         let encryptionConfig = Realm.Configuration(encryptionKey: data)
-        var realm: Realm!
-        do {
-            realm = try Realm(configuration: encryptionConfig)
-        } catch let error{
-             print(error)
-        }
-        return realm
-        
+        return try! Realm(configuration: encryptionConfig)
+    }()
+    
+    fileprivate class func getRealmObject() -> Realm? {
+        return DBHandler.realm
     }
     
     
@@ -60,7 +56,7 @@ class DBHandler: NSObject {
             //dbUser?.refreshToken = user.refreshToken
             
             try? realm.write({
-                realm.add(dbUser!, update: true)
+              realm.add(dbUser!, update: .all)
                 
             })
         }
@@ -383,7 +379,7 @@ class DBHandler: NSObject {
         
         try? realm.write({
             
-            realm.add(dbStudies,update: true)
+          realm.add(dbStudies,update: .all)
             dbStudy?.websiteLink = overview.websiteLink
 
         })
@@ -647,7 +643,7 @@ class DBHandler: NSObject {
         
         if dbActivities.count > 0 {
             try? realm.write({
-                realm.add(dbActivities, update: true)
+              realm.add(dbActivities, update: .all)
             })
         }
         Logger.sharedInstance.info("Activities Saved in DB")
@@ -1495,7 +1491,7 @@ class DBHandler: NSObject {
         
         if dbStatisticsList.count > 0 {
             try? realm.write({
-                realm.add(dbStatisticsList, update: true)
+              realm.add(dbStatisticsList, update: .all)
                 
             })
         }
@@ -1602,7 +1598,7 @@ class DBHandler: NSObject {
         
         if dbChartsList.count > 0 {
             try? realm.write({
-                realm.add(dbChartsList, update: true)
+              realm.add(dbChartsList, update: .all)
                 
             })
         }
@@ -1815,7 +1811,7 @@ class DBHandler: NSObject {
 
         if dbResourcesList.count > 0 {
             try? realm.write({
-                realm.add(dbResourcesList, update: true)
+              realm.add(dbResourcesList, update: .all)
                 
             })
         }
@@ -2047,7 +2043,7 @@ class DBHandler: NSObject {
         }
         
         try? realm.write({
-            realm.add(dbNotificationList, update: true)
+          realm.add(dbNotificationList, update: .all)
             
         })
     }
@@ -2122,7 +2118,7 @@ class DBHandler: NSObject {
         dbNotification.endDate = notification.endDate
         
         try? realm.write({
-            realm.add(dbNotification, update: true)
+          realm.add(dbNotification, update: .all)
             
         })
     }

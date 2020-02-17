@@ -26,5 +26,9 @@
 	<string>Validated!</string>
 	<key>AllowFeedback</key>
 	<true/>
+	<key>NavigationTitleName</key>
+	<string>IBD PROdigy</string>
+	<key>PoweredByTitleName</key>
+	<string>IBD PROdigy</string>
 </dict>
 </plist>

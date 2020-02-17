@@ -55,11 +55,7 @@ class StudyListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        var infoDict: NSDictionary?
-        if let path = Bundle.main.path(forResource: "Info", ofType: "plist") {
-            infoDict = NSDictionary(contentsOfFile: path)
-        }
-        let navTitle = infoDict!["ProductTitleName"] as! String
+      let navTitle = Branding.NavigationTitleName
         let titleLabel = UILabel()
         titleLabel.text = NSLocalizedString(navTitle, comment: "")
         titleLabel.font = UIFont(name: "HelveticaNeue-Medium", size: 18)

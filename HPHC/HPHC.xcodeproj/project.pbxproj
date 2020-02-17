@@ -633,6 +633,11 @@
 		8948349D22BB9C59000B7BFA /* HPHCSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8948349C22BB9C59000B7BFA /* HPHCSettings.swift */; };
 		8948349F22BB9D56000B7BFA /* HPHCSettings.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8948349E22BB9D56000B7BFA /* HPHCSettings.xib */; };
 		895C3ED923F2C3F9000F4558 /* FDADemo.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 89C5EF7623F16DB000649359 /* FDADemo.storyboard */; };
+		8973F76D23F6B657008F5B22 /* Branding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8973F76C23F6B657008F5B22 /* Branding.swift */; };
+		8973F76E23F6B657008F5B22 /* Branding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8973F76C23F6B657008F5B22 /* Branding.swift */; };
+		8973F76F23F6B657008F5B22 /* Branding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8973F76C23F6B657008F5B22 /* Branding.swift */; };
+		8973F77023F6B657008F5B22 /* Branding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8973F76C23F6B657008F5B22 /* Branding.swift */; };
+		8973F77123F6B657008F5B22 /* Branding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8973F76C23F6B657008F5B22 /* Branding.swift */; };
 		89831393224399FC0000BEB5 /* ResourceList.json in Resources */ = {isa = PBXBuildFile; fileRef = 89831392224399FC0000BEB5 /* ResourceList.json */; };
 		89893F0522B1115300A846CE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6E7D2D5D1E433E8800763D4C /* Main.storyboard */; };
 		89893F0622B1125300A846CE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6E7D2D601E433E8800763D4C /* Assets.xcassets */; };
@@ -1506,6 +1511,7 @@
 		8926D7E92383F25C00558F4E /* KeyChain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyChain.swift; sourceTree = "<group>"; };
 		8948349C22BB9C59000B7BFA /* HPHCSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HPHCSettings.swift; sourceTree = "<group>"; };
 		8948349E22BB9D56000B7BFA /* HPHCSettings.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HPHCSettings.xib; sourceTree = "<group>"; };
+		8973F76C23F6B657008F5B22 /* Branding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Branding.swift; sourceTree = "<group>"; };
 		89831392224399FC0000BEB5 /* ResourceList.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = ResourceList.json; sourceTree = "<group>"; };
 		8987BC7722F8446000F6EECC /* Pods_HPHC.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Pods_HPHC.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		89893F0322B0F87800A846CE /* LimitJIA.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = LimitJIA.xcassets; sourceTree = "<group>"; };
@@ -2250,6 +2256,7 @@
 			isa = PBXGroup;
 			children = (
 				6F41B86123AC937200D4F624 /* AppConfiguration.swift */,
+				8973F76C23F6B657008F5B22 /* Branding.swift */,
 				8905590F230148E4005FB284 /* FDA */,
 				89C5EE7823F16C1600649359 /* FDAMS HIMSS App */,
 				6F6EC42623E157B40056AD55 /* FDA Demo */,
@@ -3889,6 +3896,7 @@
 				6E7D2D8A1E43400100763D4C /* User.swift in Sources */,
 				94B3DD461E6ED8E500327AE5 /* ProfileViewController.swift in Sources */,
 				94B3DD5E1E6ED8E500327AE5 /* StudyOverviewPageViewController.swift in Sources */,
+				8973F76D23F6B657008F5B22 /* Branding.swift in Sources */,
 				6E31DC691F17AF9C00C3E1DB /* InEligibilityStepViewController.swift in Sources */,
 				6ED1B21E1E54252500BF463F /* Schedule.swift in Sources */,
 				94B3DD481E6ED8E500327AE5 /* GatewayResourcesListViewController.swift in Sources */,
@@ -4046,6 +4054,7 @@
 				6F6EC39823E1577B0056AD55 /* User.swift in Sources */,
 				6F6EC39923E1577B0056AD55 /* ProfileViewController.swift in Sources */,
 				6F6EC39A23E1577B0056AD55 /* StudyOverviewPageViewController.swift in Sources */,
+				8973F77023F6B657008F5B22 /* Branding.swift in Sources */,
 				6F6EC39B23E1577B0056AD55 /* InEligibilityStepViewController.swift in Sources */,
 				6F6EC39C23E1577B0056AD55 /* Schedule.swift in Sources */,
 				6F6EC39D23E1577B0056AD55 /* GatewayResourcesListViewController.swift in Sources */,
@@ -4203,6 +4212,7 @@
 				6FC12B3822FD60FE0075940B /* ProfileViewController.swift in Sources */,
 				6FC12B3922FD60FE0075940B /* StudyOverviewPageViewController.swift in Sources */,
 				6FC12B3A22FD60FE0075940B /* InEligibilityStepViewController.swift in Sources */,
+				8973F76F23F6B657008F5B22 /* Branding.swift in Sources */,
 				6FC12B3B22FD60FE0075940B /* Schedule.swift in Sources */,
 				6FC12B3C22FD60FE0075940B /* GatewayResourcesListViewController.swift in Sources */,
 				6FC12B3D22FD60FE0075940B /* ActivityQuestionStep.swift in Sources */,
@@ -4382,6 +4392,7 @@
 				89C5EEE523F16CFE00649359 /* User.swift in Sources */,
 				89C5EEE623F16CFE00649359 /* ProfileViewController.swift in Sources */,
 				89C5EEE723F16CFE00649359 /* StudyOverviewPageViewController.swift in Sources */,
+				8973F77123F6B657008F5B22 /* Branding.swift in Sources */,
 				89C5EEE823F16CFE00649359 /* InEligibilityStepViewController.swift in Sources */,
 				89C5EEE923F16CFE00649359 /* Schedule.swift in Sources */,
 				89C5EEEA23F16CFE00649359 /* GatewayResourcesListViewController.swift in Sources */,
@@ -4539,6 +4550,7 @@
 				89DBF7AC22F9893000AB3EF2 /* ProfileViewController.swift in Sources */,
 				89DBF7AD22F9893000AB3EF2 /* StudyOverviewPageViewController.swift in Sources */,
 				89DBF7AE22F9893000AB3EF2 /* InEligibilityStepViewController.swift in Sources */,
+				8973F76E23F6B657008F5B22 /* Branding.swift in Sources */,
 				89DBF7AF22F9893000AB3EF2 /* Schedule.swift in Sources */,
 				89DBF7B022F9893000AB3EF2 /* GatewayResourcesListViewController.swift in Sources */,
 				89DBF7B122F9893000AB3EF2 /* ActivityQuestionStep.swift in Sources */,

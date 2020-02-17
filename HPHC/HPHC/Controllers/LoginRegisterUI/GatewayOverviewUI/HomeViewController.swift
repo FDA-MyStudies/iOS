@@ -47,10 +47,8 @@ class HomeViewController: UIViewController{
         //Added to change next screen
         pageControlView?.addTarget(self, action: #selector(HomeViewController.didChangePageControlValue), for: .valueChanged)
         
-       
-        let infoDict = Utilities.getBrandingDetails()
-        websiteName = infoDict?[BrandingConstant.WebsiteLink] as! String
-        let title = infoDict?[BrandingConstant.WebsiteButtonTitle] as? String
+        websiteName = Branding.WebsiteLink
+        let title = Branding.WebsiteButtonTitle
         
         buttonLink.setTitle(title != nil ? title : websiteName, for: .normal)
       

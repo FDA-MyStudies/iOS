@@ -81,12 +81,11 @@ class SignUpViewController: UIViewController{
         //unhide navigationbar
         self.navigationController?.setNavigationBarHidden(false, animated: true)
         
-        //WCPServices().getTermsPolicy(delegate: self)
-        let brandingDetail = Utilities.getBrandingDetails()
-        TermsAndPolicy.currentTermsAndPolicy =  TermsAndPolicy()
-        guard let policyURL = brandingDetail?[BrandingConstant.PrivacyPolicyURL] as? String,let terms = brandingDetail?[BrandingConstant.TermsAndConditionURL] as? String else {
-            return
-        }
+        //WCPServices().getTermsPolicy(delegate: self)\
+      TermsAndPolicy.currentTermsAndPolicy =  TermsAndPolicy()
+      let policyURL = Branding.PrivacyPolicyURL
+      let terms = Branding.TermsAndConditionURL
+      
         TermsAndPolicy.currentTermsAndPolicy?.initWith(terms: terms, policy: policyURL)
         self.agreeToTermsAndConditions()
       

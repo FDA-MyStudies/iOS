@@ -200,22 +200,3 @@ let filterListSegue = "filterscreenSegue"
 
 let kStagingUserEmailId = "aqibm@boston-technology.com"
 let kIsStagingUser = "StagingUser"
-
-
-
-
-struct BrandingConstant {
-    
-    
-    static let JoinStudyButtonTitle = "JoinStudyButtonTitle"
-    static let ViewConsentButtonTitle = "ViewConsentButtonTitle"
-    static let VisitWebsiteButtonTitle = "VisitWebsiteButtonTitle"
-    static let ConsentPDF = "ConsentPDF"
-    static let LeaveStudy = "LeaveStudy"
-    static let LeaveStudyConfirmationText = "LeaveStudyConfirmationText"
-    static let WebsiteLink = "WebsiteLink"
-    static let WebsiteButtonTitle = "WebsiteButtonTitle"
-    static let TermsAndConditionURL = "TermsAndConditionURL"
-    static let PrivacyPolicyURL = "PrivacyPolicyURL"
-    static let ValidatedTitle = "ValidatedTitle" 
-}

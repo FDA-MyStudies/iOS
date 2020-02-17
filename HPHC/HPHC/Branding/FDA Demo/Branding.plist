@@ -26,5 +26,9 @@
 	<string>Validated!</string>
 	<key>AllowFeedback</key>
 	<false/>
+	<key>NavigationTitleName</key>
+	<string>FDA MyStudies Demo</string>
+	<key>PoweredByTitleName</key>
+	<string>FDA MyStudies</string>
 </dict>
 </plist>

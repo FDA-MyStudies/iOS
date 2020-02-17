@@ -20,9 +20,9 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 import Foundation
 
-struct AppConfiguration {
+enum AppConfiguration {
     
-    private struct JSONKey {
+    private enum JSONKey {
         static let isShowMenuResourceButton = "shouldShowMenuResourceButton"
         static let shouldShowConsentButtonOnStudyHome = "shouldShowConsentButtonOnStudyHome"
         static let showConsentInStudyResources = "showConsentInStudyResources"

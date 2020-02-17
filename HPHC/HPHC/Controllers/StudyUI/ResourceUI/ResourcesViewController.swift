@@ -69,14 +69,9 @@ class ResourcesViewController: UIViewController{
         
         
         //Branding
-        let brandingDetail = Utilities.getBrandingDetails()
-        if let leavetitle =  brandingDetail?[BrandingConstant.LeaveStudy] as? String{
-            leaveStudy = leavetitle
-        }
+        leaveStudy = Branding.LeaveStudy
         
-        if let consent =  brandingDetail?[BrandingConstant.ConsentPDF] as? String{
-            consentPDF = consent
-        }
+        consentPDF = Branding.ConsentPDF
         
     }
     
@@ -513,17 +508,17 @@ class ResourcesViewController: UIViewController{
         
         let fullPath = path + "/" + consentPath!
         
-        let pdfData = FileDownloadManager.decrytFile(pathURL: URL.init(string: fullPath))
+        guard let pdfData = FileDownloadManager.decrytFile(pathURL: URL(string: fullPath))
+          else {return}
         
         var isPDF: Bool = false
-        if (pdfData?.count)! >= 1024 //only check if bigger
-        {
+        if pdfData.count >= 1024 { // only check if bigger
             var pdfBytes = [UInt8]()
             pdfBytes = [ 0x25, 0x50, 0x44, 0x46]
             let pdfHeader = NSData(bytes: pdfBytes, length: 4)
             
             let myRange: Range = 0..<1024
-            let foundRange = pdfData?.range(of: pdfHeader as Data, options: .anchored, in: myRange) //rangeOfData(pdfHeader, options: nil, range: NSMakeRange(0, 1024))
+            let foundRange = pdfData.range(of: pdfHeader as Data, options: .anchored, in: myRange) //rangeOfData(pdfHeader, options: nil, range: NSMakeRange(0, 1024))
             if foundRange != nil && (foundRange?.count)! > 0
             {
                 isPDF = true
@@ -535,7 +530,7 @@ class ResourcesViewController: UIViewController{
             }
         }
         
-        if pdfData != nil && isPDF{
+        if isPDF {
             self.navigateToWebView(link: "", htmlText: "",pdfData: pdfData)
         }
     }

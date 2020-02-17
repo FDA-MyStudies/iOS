@@ -98,19 +98,11 @@ class LeftMenuViewController: UIViewController, LeftMenuProtocol {
         
         self.view.isHidden = true
         
-        let branding = Utilities.getBrandingDetails()
-        shouldAllowToGiveFeedback = branding!["AllowFeedback"] as! Bool
+      shouldAllowToGiveFeedback = Branding.AllowFeedback
         self.createLeftmenuItems()
         
-        var infoDict: NSDictionary?
-        if let path = Bundle.main.path(forResource: "Info", ofType: "plist") {
-            infoDict = NSDictionary(contentsOfFile: path)
-        }
-        let navTitle = infoDict!["ProductTitleName"] as! String
-        labelProductName.text = navTitle
-//        labelPoweredBy.text = "Powered by \(navTitle)"
-        
-        
+        labelPoweredBy.text = "Powered by \(Branding.PoweredByTitleName)"
+        labelProductName.text = Branding.NavigationTitleName
         
         self.tableView.separatorColor = UIColor(red: 224/255, green: 224/255, blue: 224/255, alpha: 1.0)
         

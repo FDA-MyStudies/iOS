@@ -1,21 +1,21 @@
 /*
  License Agreement for FDA My Studies
-Copyright © 2017-2019 Harvard Pilgrim Health Care Institute (HPHCI) and its Contributors. Permission is
-hereby granted, free of charge, to any person obtaining a copy of this software and associated
-documentation files (the &quot;Software&quot;), to deal in the Software without restriction, including without
-limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the
-Software, and to permit persons to whom the Software is furnished to do so, subject to the following
-conditions:
-The above copyright notice and this permission notice shall be included in all copies or substantial
-portions of the Software.
-Funding Source: Food and Drug Administration (“Funding Agency”) effective 18 September 2014 as
-Contract no. HHSF22320140030I/HHSF22301006T (the “Prime Contract”).
-THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
-INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR
-PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
-LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT
-OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
-OTHER DEALINGS IN THE SOFTWARE.
+ Copyright © 2017-2019 Harvard Pilgrim Health Care Institute (HPHCI) and its Contributors. Permission is
+ hereby granted, free of charge, to any person obtaining a copy of this software and associated
+ documentation files (the &quot;Software&quot;), to deal in the Software without restriction, including without
+ limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the
+ Software, and to permit persons to whom the Software is furnished to do so, subject to the following
+ conditions:
+ The above copyright notice and this permission notice shall be included in all copies or substantial
+ portions of the Software.
+ Funding Source: Food and Drug Administration (“Funding Agency”) effective 18 September 2014 as
+ Contract no. HHSF22320140030I/HHSF22301006T (the “Prime Contract”).
+ THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
+ INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR
+ PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
+ LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT
+ OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
+ OTHER DEALINGS IN THE SOFTWARE.
  */
 
 import Foundation
@@ -52,6 +52,10 @@ class ActivitiesViewController : UIViewController{
     private var managedResult: [String: Any] = [:]
     
     let labkeyResponseFetch = ResponseDataFetch()
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .default
+    }
     
     // MARK:- Viewcontroller Lifecycle
     fileprivate func presentUpdatedConsent() {
@@ -92,15 +96,13 @@ class ActivitiesViewController : UIViewController{
         super.viewWillAppear(animated)
         
         self.navigationController?.interactivePopGestureRecognizer?.isEnabled = false
-        UIApplication.shared.statusBarStyle = .default
-        
+       
         if Utilities.isStandaloneApp() {
             self.setNavigationBarItem()
         }
         else {
             self.addHomeButton()
         }
-       
         
         if !taskControllerPresented {
             taskControllerPresented = false
@@ -118,15 +120,7 @@ class ActivitiesViewController : UIViewController{
         
         
     }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        
-        let message =  "The study " + (Study.currentStudy?.name!)! + " is 100 percent complete. Thank you for your participation."
-       // UIUtilities.showAlertWithMessage(alertMessage: message)
-        
-    }
-    
+  
     // MARK: Helper Methods
     
     func getLabkeyResponse() {
@@ -144,15 +138,13 @@ class ActivitiesViewController : UIViewController{
             
             self.sendRequestToGetActivityStates()
             
-            //udpate status to false so notification can be registered again
+            // Update status to false so notification can be registered again.
             Study.currentStudy?.activitiesLocalNotificationUpdated = false
-            DBHandler.updateLocalNotificaitonUpdated(studyId: (Study.currentStudy?.studyId)!,status: false)
+            DBHandler.updateLocalNotificaitonUpdated(studyId: (Study.currentStudy?.studyId)!, status: false)
             
         } else {
             
-            if self.refreshControl != nil && (self.refreshControl?.isRefreshing)!{
-                self.refreshControl?.endRefreshing()
-            }
+            self.refreshControl?.endRefreshing()
             //self.loadActivitiesFromDatabase()
             self.fetchActivityAnchorDateResponseFromLabkey()
         }
@@ -190,7 +182,7 @@ class ActivitiesViewController : UIViewController{
                 
                 let rowDetail = tableViewSections[0]
                 let activities = (rowDetail["activities"] as? Array<Activity>)!
-                let index = activities.index(where: {$0.actvityId == activityId})
+                let index = activities.firstIndex(where: {$0.actvityId == activityId})
                 let ip = IndexPath.init(row: index!, section: 0)
                 self.selectedIndexPath = ip
                 self.tableView?.selectRow(at: ip, animated: true, scrollPosition: .middle)
@@ -345,64 +337,72 @@ class ActivitiesViewController : UIViewController{
     
     func fetchActivityAnchorDateResponseFromLabkey() {
         
-        func fetchParticipantPropertyValues() {
-            AnchorDateHandler().findActivitiesToUpdateSchedule { (status) in
-                print("PP life time updated")
-                self.loadActivitiesFromDatabase()
-                
-                //update UR
-              self.syncParticipantPropertyValuesOnUserRegistration()
+        guard let currentStudy = Study.currentStudy
+            else {return}
+        ActivitiesViewController.updateActivitiesAnchorDateLifeTime(for: currentStudy) { [weak self] in
+            self?.loadActivitiesFromDatabase()
+            DispatchQueue.main.async {
+                self?.syncParticipantPropertyValuesOnUserRegistration(for: currentStudy)
             }
         }
+    }
+    
+    final class func updateActivitiesAnchorDateLifeTime(for study: Study, completion:(() -> Void)? = nil) {
         
-        AnchorDateHandler().fetchActivityAnchorDateResponseFromLabkey { (status) in
-            print("Finished 1")
-            //if status {
-                //DispatchQueue.main.async {
-                    fetchParticipantPropertyValues()
-                //}
+        let groupQuery = DispatchGroup()
+        
+        groupQuery.enter()
+        AnchorDateHandler(study: study).queryAnchorDateForActivityResponseActivities { (status) in
+            Logger.sharedInstance.info("AD for AR Resource fetch: ", status)
+            groupQuery.leave()
+        }
+        
+        groupQuery.enter()
+        AnchorDateHandler(study: study).queryParticipantPropertiesForActivities { (status) in
+            Logger.sharedInstance.info("AD for PP Resource fetch: ", status)
+            groupQuery.leave()
+        }
+        
+        groupQuery.notify(queue: .main) {
+            completion?()
+        }
+    }
+    
+    
+    func syncParticipantPropertyValuesOnUserRegistration(for study: Study) {
+        
+        // Get activities from database with ParticipantProperty as anchor date.
+        let activities = DBHandler.participantPropertyActivities(study.studyId)
+        var activitiesToSync: [JSONDictionary] = []
+        for activity in activities {
+            
+            var ppValue = ["activityId":activity.actvityId ?? "",
+                           "activityStartDate": activity.startDate?.description ?? "",
+                           "activityEndDate": activity.endDate?.description ?? "",
+                           "anchorDateVersion": activity.externalPropertyValue ?? "",
+                           "anchorDatecreatedDate": activity.dateOfEntryValue ?? ""] as JSONDictionary
+            
+            // Check activity frequency.
+            var activitiesRuns = [[String:String]]()
+            if activity.frequencyType == Frequency.Scheduled.rawValue {
+                let runs = activity.activityRuns
+                for run in runs {
+                    let runDetail = ["runStartDate":run.startDate.description,
+                                     "runEndDate":run.endDate.description]
+                    activitiesRuns.append(runDetail)
+                }
                 
-            //}
+                ppValue["customScheduleRuns"] = activitiesRuns
+            }
+            
+            activitiesToSync.append(ppValue)
             
         }
-        print("Finished 0")
-    }
-    
-  func syncParticipantPropertyValuesOnUserRegistration() {
-    
-    //get activities from database with ParticipantProperty as anchor date
-    let activities = DBHandler.getActivitiesWithParticipantPropertyType((Study.currentStudy?.studyId)!)
-    var activitiesToSync = [[String:Any]]()
-    for activity in activities {
-      
-      var ppValue = ["activityId":activity.actvityId,
-                     "activityStartDate": activity.startDate?.description,
-                     "activityEndDate": activity.endDate?.description,
-                     "anchorDateVersion": activity.externalPropertyValue,
-                     "anchorDatecreatedDate": activity.dateOfEntryValue] as [String : Any]
-      
-      //check activity frequency
-      var activitiesRuns = [[String:String]]()
-      if activity.frequencyType == Frequency.Scheduled.rawValue {
-        let runs = activity.activityRuns
-        for run in runs {
-          let runDetail = ["runStartDate":run.startDate.description,
-                           "runEndDate":run.endDate.description]
-          activitiesRuns.append(runDetail)
-        }
         
-        ppValue["customScheduleRuns"] = activitiesRuns
-      }
-      
-      activitiesToSync.append(ppValue)
-      
+        if activitiesToSync.count > 0 {
+            UserServices().updateActivityWithParticipantPropertyDetail(studyId: Study.currentStudy!.studyId, activities: activitiesToSync , delegate: self)
+        }
     }
-    
-    if activitiesToSync.count > 0 {
-      UserServices().updateActivityWithParticipantPropertyDetail(studyId: Study.currentStudy!.studyId, activities: activitiesToSync as! [[String : Any]], delegate: self)
-    }
-    
-  }
     
     /**
      Used to load the Actif=vities data from database
@@ -418,11 +418,6 @@ class ActivitiesViewController : UIViewController{
                     Study.currentStudy?.activities = activities
                     
                     self.handleActivityListResponse()
-                    
-                    
-                } else {
-                    
-                    //self.sendRequestToGetActivityStates()
                 }
             }
         }
@@ -435,7 +430,7 @@ class ActivitiesViewController : UIViewController{
     func createActivity(){
         
         //Disable Custom KeyPad with toolbars
-//        IQKeyboardManager.sharedManager().enable = false
+        //        IQKeyboardManager.sharedManager().enable = false
         IQKeyboardManager.shared.enableAutoToolbar = false
         
         if Utilities.isValidObject(someObject: Study.currentActivity?.steps as AnyObject?){
@@ -603,24 +598,23 @@ class ActivitiesViewController : UIViewController{
             self.updateCompletionAdherence()
         }
         
-        
-        
-        
-        if (User.currentUser.settings?.localNotifications)! {
-            print("localNotifications enabled")
-            if !(Study.currentStudy?.activitiesLocalNotificationUpdated)! {
-                print("Registerig Notification")
-                //Register LocalNotifications
-                LocalNotification.registerAllLocalNotificationFor(activities: (Study.currentStudy?.activities)!) { (finished,notificationlist) in
-                    print("Notification set sucessfully")
-                    Study.currentStudy?.activitiesLocalNotificationUpdated = true
-                    DBHandler.saveRegisteredLocaNotification(notificationList: notificationlist)
-                    DBHandler.updateLocalNotificaitonUpdated(studyId: (Study.currentStudy?.studyId)!,status: true)
-                    LocalNotification.refreshAllLocalNotification()
+        DispatchQueue.main.async {
+           if (User.currentUser.settings?.localNotifications)! {
+                print("localNotifications enabled")
+                if !(Study.currentStudy?.activitiesLocalNotificationUpdated)! {
+                    print("Registerig Notification")
+                    //Register LocalNotifications
+                    LocalNotification.registerAllLocalNotificationFor(activities: (Study.currentStudy?.activities)!) { (finished,notificationlist) in
+                        print("Notification set sucessfully")
+                        Study.currentStudy?.activitiesLocalNotificationUpdated = true
+                        DBHandler.saveRegisteredLocaNotification(notificationList: notificationlist)
+                        DBHandler.updateLocalNotificaitonUpdated(studyId: (Study.currentStudy?.studyId)!,status: true)
+                        LocalNotification.refreshAllLocalNotification()
+                    }
                 }
-                
             }
         }
+        
         
         self.checkIfFetelKickCountRunning()
         
@@ -1085,7 +1079,7 @@ extension ActivitiesViewController: NMWebServiceDelegate {
             self.sendRequestToGetDashboardInfo()
             
             self.fetchActivityAnchorDateResponseFromLabkey()
-           // self.loadActivitiesFromDatabase()
+            // self.loadActivitiesFromDatabase()
             
             if self.refreshControl != nil && (self.refreshControl?.isRefreshing)!{
                 self.refreshControl?.endRefreshing()
@@ -1107,7 +1101,11 @@ extension ActivitiesViewController: NMWebServiceDelegate {
             
         } else if requestName as String == WCPMethods.resources.method.methodName {
             self.removeProgressIndicator()
-            
+            DispatchQueue.main.async {
+                if let study = Study.currentStudy {
+                    ResourcesViewController.updateResourcesAnchorDateLifeTime(for: study)
+                }
+            }
         } else if requestName as String == ResponseMethods.processResponse.method.methodName {
             self.removeProgressIndicator()
             //self.updateRunStatusToComplete()
@@ -1240,21 +1238,21 @@ extension ActivitiesViewController: ORKTaskViewControllerDelegate{
         case ORKTaskViewControllerFinishReason.completed:
             print("completed")
             taskResult = taskViewController.result
-//            let ud = UserDefaults.standard
-//            if ud.bool(forKey: "FKC") {
-//
-//                let runid = (ud.object(forKey: "FetalKickCounterRunid") as? Int)!
-//
-//                if Study.currentActivity?.currentRun.runId != runid {
-//                    //runid is changed
-//                    self.updateRunStatusForRunId(runId: runid)
-//                } else {
-//                    self.updateRunStatusToComplete()
-//                }
-//            } else {
-//
-//                self.updateRunStatusToComplete()
-//            }
+            //            let ud = UserDefaults.standard
+            //            if ud.bool(forKey: "FKC") {
+            //
+            //                let runid = (ud.object(forKey: "FetalKickCounterRunid") as? Int)!
+            //
+            //                if Study.currentActivity?.currentRun.runId != runid {
+            //                    //runid is changed
+            //                    self.updateRunStatusForRunId(runId: runid)
+            //                } else {
+            //                    self.updateRunStatusToComplete()
+            //                }
+            //            } else {
+            //
+            //                self.updateRunStatusToComplete()
+            //            }
             
         case ORKTaskViewControllerFinishReason.failed:
             print("failed")
@@ -1405,7 +1403,7 @@ extension ActivitiesViewController: ORKTaskViewControllerDelegate{
             }
         }
         taskViewController.dismiss(animated: true, completion: {
-           
+            
             if reason == ORKTaskViewControllerFinishReason.completed {
                 
                 
@@ -1424,7 +1422,7 @@ extension ActivitiesViewController: ORKTaskViewControllerDelegate{
                     
                     self.updateRunStatusToComplete()
                 }
-
+                
                 let lifeTimeUpdated = DBHandler.updateTargetActivityAnchorDateDetail(studyId: studyId!, activityId: activityId!, response: response!)
                 if lifeTimeUpdated {
                     self.loadActivitiesFromDatabase()
@@ -1436,7 +1434,7 @@ extension ActivitiesViewController: ORKTaskViewControllerDelegate{
             else {
                 self.tableView?.reloadData()
             }
-           
+            
         })
     }
     
@@ -1471,7 +1469,7 @@ extension ActivitiesViewController: ORKTaskViewControllerDelegate{
                 }
                 activityStepResult?.initWithORKStepResult(stepResult: orkStepResult! as ORKStepResult , activityType: (ActivityBuilder.currentActivityBuilder.actvityResult?.type)!)
                 
-               // let dictionary = activityStepResult?.getActivityStepResultDict()
+                // let dictionary = activityStepResult?.getActivityStepResultDict()
                 
                 
                 //check for anchor date
@@ -1672,11 +1670,11 @@ class ActivitySchedules:UIView,UITableViewDelegate,UITableViewDataSource{
 }
 
 
-class ResponseDataFetch:NMWebServiceDelegate{
+class ResponseDataFetch: NMWebServiceDelegate{
     
     var dataSourceKeysForLabkey: Array<Dictionary<String,String>> = []
     
-     static let labkeyDateFormatter: DateFormatter = {
+    static let labkeyDateFormatter: DateFormatter = {
         //2017/06/13 18:12:13
         let formatter = DateFormatter()
         formatter.timeZone = TimeZone.init(identifier: "America/New_York")
@@ -1732,7 +1730,7 @@ class ResponseDataFetch:NMWebServiceDelegate{
         if !self.dataSourceKeysForLabkey.isEmpty {
             self.dataSourceKeysForLabkey.removeFirst()
         }
-         self.sendRequestToGetDashboardResponse()
+        self.sendRequestToGetDashboardResponse()
     }
     
     func getDataKeysForCurrentStudy(){

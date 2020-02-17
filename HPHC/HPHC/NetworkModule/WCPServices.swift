@@ -335,7 +335,7 @@ class WCPServices: NSObject {
     func handleResourceListForGateway(response: Dictionary<String, Any>) {
         
         let resources = response[kResources] as! Array<Dictionary<String,Any>>
-        var listOfResources: Array<Resource>! = []
+        var listOfResources: [Resource] = []
         for resource in resources{
             let resourceObj = Resource(detail: resource)
             listOfResources.append(resourceObj)
@@ -362,17 +362,14 @@ class WCPServices: NSObject {
 //        }
         
         //Actual
-        let resources = response[kResources] as! Array<Dictionary<String,Any>>
-        var listOfResources: Array<Resource>! = []
-        for resource in resources{
+        let resources = response[kResources] as! [JSONDictionary]
+        var listOfResources: [Resource] = []
+        for resource in resources {
             let resourceObj = Resource()
-            resourceObj.level = ResourceLevel.study
-            resourceObj.setResource(dict: resource as NSDictionary)
-            
+            resourceObj.setResourceForStudy(dict: resource)
             listOfResources.append(resourceObj)
         }
-        
-        
+
         //save in database
         DBHandler.saveResourcesForStudy(studyId: (Study.currentStudy?.studyId)!, resources: listOfResources)
         

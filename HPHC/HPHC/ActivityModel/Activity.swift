@@ -147,7 +147,7 @@ class Activity {
     var currentRun: ActivityRun! = nil
     var userParticipationStatus: UserActivityStatus! = nil
     var taskSubType: String? = "" //used for active tasks
-    var anchorDate:AnchorDate? = nil
+    var anchorDate: AnchorDate? = nil
     var schedulingType:ActivityScheduleType = .regular
     
      //Default Initializer
@@ -248,11 +248,10 @@ class Activity {
             }
             
             //AnchorDate
-            let anchorDateDetail = infoDict["anchorDate"] as? [String:Any]
+            let anchorDateDetail = infoDict["anchorDate"] as? JSONDictionary
             if (anchorDateDetail != nil && self.schedulingType == .anchorDate) {
                 setActivityAvailability(anchorDateDetail ?? [:])
             }
-            
             
             let currentUser = User.currentUser
             if let userActivityStatus = currentUser.participatedActivites.filter({$0.activityId == self.actvityId && $0.studyId == self.studyId}).first {
@@ -345,7 +344,7 @@ class Activity {
     
     func setActivityAvailability(_ availability:[String:Any]) {
 
-        self.anchorDate = AnchorDate.init(availability)
+        self.anchorDate = AnchorDate(availability)
         
         if self.anchorDate?.sourceType == "EnrollmentDate" {
             var enrollmentDate = Study.currentStudy?.userParticipateState.joiningDate
@@ -501,17 +500,17 @@ class AnchorDate {
         }
     }
     
-    var sourceType:String?
-    var sourceActivityId:String?
-    var sourceKey:String?
-    var sourceFormKey:String?
-    var startDays:Int = 0
-    var startTime:String?
-    var endDays:Int = 0
-    var repeatInterval:Int = 0
-    var endTime:String?
-    var anchorDateValue:Date?
-    var ppMetaData:PPMetaData?
+    var sourceType: String?
+    var sourceActivityId: String?
+    var sourceKey: String?
+    var sourceFormKey: String?
+    var startDays: Int = 0
+    var startTime: String?
+    var endDays: Int = 0
+    var repeatInterval: Int = 0
+    var endTime: String?
+    var anchorDateValue: Date?
+    var ppMetaData: PPMetaData?
     
     init() {
         

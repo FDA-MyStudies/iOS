@@ -153,7 +153,7 @@ class Utilities: NSObject {
         return dateString
     }
     
-    class func getDateFromStringWithFormat(_ dateFormate: String,resultDate: String)->Date {
+    class func getDateFromStringWithFormat(_ dateFormate: String,resultDate: String) -> Date? {
         
         let formatter = DateFormatter()
         formatter.locale = Locale(identifier: "us")
@@ -161,7 +161,7 @@ class Utilities: NSObject {
         formatter.dateFormat = dateFormate
         let resDate = formatter.date(from: resultDate)
         
-        return  resDate!
+        return  resDate
     }
     
     class func frameForText(_ text: String, font: UIFont) -> CGSize {

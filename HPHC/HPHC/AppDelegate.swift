@@ -238,20 +238,32 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let key = FDAKeychain.shared[kRealmEncryptionKeychainKey]
         let keyData = Data.init(base64Encoded: key!)
        
-        let config = Realm.Configuration(encryptionKey:keyData,
-            schemaVersion: 1,
+        //TODO: Use Encryption code commented below instead of this.
+        let config = Realm.Configuration(
+            schemaVersion: 4,
             migrationBlock: { migration, oldSchemaVersion in
                 // We haven’t migrated anything yet, so oldSchemaVersion == 0
-                if (oldSchemaVersion < 1) {
+                if (oldSchemaVersion < 4) {
                     // Nothing to do!
                     // Realm will automatically detect new properties and removed properties
                     // And will update the schema on disk automatically
                 }
         })
         
+//        let config = Realm.Configuration(encryptionKey:keyData,
+//            schemaVersion: 1,
+//            migrationBlock: { migration, oldSchemaVersion in
+//                // We haven’t migrated anything yet, so oldSchemaVersion == 0
+//                if (oldSchemaVersion < 1) {
+//                    // Nothing to do!
+//                    // Realm will automatically detect new properties and removed properties
+//                    // And will update the schema on disk automatically
+//                }
+//        })
+        
         // Tell Realm to use this new configuration object for the default Realm
         Realm.Configuration.defaultConfiguration = config
-        
+        print(Realm.Configuration.defaultConfiguration)
         // Now that we've told Realm how to handle the schema change, opening the file
         // will automatically perform the migration
         //let _ = try! Realm()

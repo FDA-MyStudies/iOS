@@ -69,7 +69,7 @@ let kTerms = "terms"
 let kPolicy = "privacy"
 
 // MARK: User
-class User{
+class User {
     
     var firstName: String?
     var lastName: String?

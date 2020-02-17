@@ -74,6 +74,10 @@ class DBActivity: Object {
   
     var activityRuns = List<DBActivityRun>()
     
+    var hasAnchorDate: Bool {
+        return anchorDateValue != nil
+    }
+    
     override static func primaryKey() -> String? {
         return "id"
     }

@@ -377,6 +377,7 @@ class UserServices: NSObject {
       let params = [kStudyId: studyId,
                     kActivity: activities] as [String: Any]
       let method = RegistrationMethods.updateActivityState.method
+     //TODO: Uncomment this and verify the params as API failing.
       self.sendRequestWith(method: method, params: params, headers: headerParams)
   }
     

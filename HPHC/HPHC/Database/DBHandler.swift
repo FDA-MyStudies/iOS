@@ -27,7 +27,7 @@ class DBHandler: NSObject {
         let key = FDAKeychain.shared[kRealmEncryptionKeychainKey]
         let data = Data.init(base64Encoded: key!)
         let encryptionConfig = Realm.Configuration(encryptionKey: data)
-        return try! Realm(configuration: encryptionConfig)
+        return try! Realm()
     }()
     
     fileprivate class func getRealmObject() -> Realm? {
@@ -940,15 +940,20 @@ class DBHandler: NSObject {
         return (startDate,endDate)
     }
     
-    class func getActivitiesWithEmptyAnchorDateValue(_ studyId:String) -> [DBActivity] {
+    class func activityResponseEmptyAnchorDateValueActivities(_ studyId: String) -> [DBActivity] {
         let realm = DBHandler.getRealmObject()!
-        let dbActivities:Array<DBActivity> = realm.objects(DBActivity.self).filter({$0.studyId == studyId && $0.anchorDateValue == nil && $0.sourceType == "ActivityResponse"})
+        let dbActivities: [DBActivity] = realm.objects(DBActivity.self)
+            .filter { $0.studyId == studyId
+                && $0.anchorDateValue == nil
+                && $0.sourceType == AnchorDateSourceType.activityResponse.rawValue }
         return dbActivities
     }
     
-    class func getActivitiesWithParticipantPropertyType(_ studyId:String) -> [DBActivity] {
+    class func participantPropertyActivities(_ studyId: String) -> [DBActivity] {
         let realm = DBHandler.getRealmObject()!
-        let dbActivities:Array<DBActivity> = realm.objects(DBActivity.self).filter({$0.studyId == studyId && $0.sourceType == "ParticipantProperty"})
+        let dbActivities: [DBActivity] = realm.objects(DBActivity.self)
+            .filter {$0.studyId == studyId
+                && $0.sourceType == AnchorDateSourceType.participantProperty.rawValue}
         return dbActivities
     }
     
@@ -1746,12 +1751,13 @@ class DBHandler: NSObject {
     /**
      Saves Resources for Study To DB
     */
-    class func saveResourcesForStudy(studyId: String,resources: Array<Resource>){
+    class func saveResourcesForStudy(studyId: String, resources: [Resource]) {
         
         let realm = DBHandler.getRealmObject()!
-        let dbResourcesArray = realm.objects(DBResources.self).filter({$0.studyId == studyId})
+        let dbResourcesArray = realm.objects(DBResources.self).filter {$0.studyId == studyId}
         
-        var dbResourcesList: Array<DBResources> = []
+        var dbResourcesList: [DBResources] = []
+        
         for resource in resources {
             
             var dbResource: DBResources?
@@ -1763,9 +1769,9 @@ class DBHandler: NSObject {
                     dbResource = DBHandler.getDBResource(resource: resource)
                     dbResource?.studyId = studyId
                     dbResourcesList.append(dbResource!)
-                }else {
+                } else {
                     
-                    try? realm.write({
+                    try? realm.write {
                       
                         dbResource?.title = resource.title
                        
@@ -1782,7 +1788,10 @@ class DBHandler: NSObject {
                             dbResource?.anchorDateEndDays = resource.anchorDateEndDays!
                             dbResource?.anchorDateStartDays = resource.anchorDateStartDays!
                         }
-                    })
+                        if let participantMetaData = resource.ppMetaData {
+                             dbResource?.participantMetaData = DBParticipantPropertyMetadata(ppMetaData: participantMetaData)
+                        }
+                    }
                 }
             }else {
                 
@@ -1799,25 +1808,22 @@ class DBHandler: NSObject {
         let set: Set<String> = Set(resourceIds)
         
         let toBeDelete = dbset.subtracting(set)
+        
         for aId in toBeDelete {
             let dbResource = dbResourcesArray.filter({$0.resourceId == aId}).last
-            
-            try? realm.write({
-               
+            try? realm.write {
                 realm.delete(dbResource!)
-            })
-     
+            }
         }
 
         if dbResourcesList.count > 0 {
-            try? realm.write({
+            try? realm.write {
               realm.add(dbResourcesList, update: .all)
-                
-            })
+            }
         }
     }
     
-    private class func getDBResource(resource: Resource)->DBResources {
+    private class func getDBResource(resource: Resource)-> DBResources {
         
         let dbResource = DBResources()
         dbResource.resourceId = resource.resourcesId
@@ -1845,12 +1851,30 @@ class DBHandler: NSObject {
         dbResource.startTime = resource.startTime
         dbResource.endTime = resource.endTime
         
+        if let participantMetaData = resource.ppMetaData {
+             dbResource.participantMetaData = DBParticipantPropertyMetadata(ppMetaData: participantMetaData)
+        }
+        
         return dbResource
     }
     
-    class func getResourceWithEmptyAnchorDateValue(_ studyId:String) -> [DBResources] {
+    class func activityResponseEmptyAnchorDateResource(_ studyId: String) -> [DBResources] {
         let realm = DBHandler.getRealmObject()!
-        let dbResources:Array<DBResources> = realm.objects(DBResources.self).filter({$0.studyId == studyId && $0.startDate == nil && $0.sourceType == "ActivityResponse"})
+        let dbResources: [DBResources] = realm.objects(DBResources.self)
+            .filter {$0.studyId == studyId
+                && $0.startDate == nil
+                && $0.sourceType == AnchorDateSourceType.activityResponse.rawValue}
+        
+        return dbResources
+    }
+    
+    
+    class func participantPropertyResources(_ studyId: String) -> [DBResources] {
+        let realm = DBHandler.getRealmObject()!
+        let dbResources: [DBResources] = realm.objects(DBResources.self)
+            .filter {$0.studyId == studyId
+                && $0.sourceType == AnchorDateSourceType.participantProperty.rawValue}
+        
         return dbResources
     }
     
@@ -1866,7 +1890,7 @@ class DBHandler: NSObject {
     /**
      loads resources for study from DB
     */
-    class func loadResourcesForStudy(studyId: String,completionHandler: @escaping (Array<Resource>) -> ()) {
+    class func loadResourcesForStudy(studyId: String,completionHandler: @escaping ([Resource]) -> ()) {
         
         let realm = DBHandler.getRealmObject()!
         let dbResourceList = realm.objects(DBResources.self).filter({$0.studyId == studyId && ($0.povAvailable == false || $0.startDate != nil)})
@@ -1894,7 +1918,9 @@ class DBHandler: NSObject {
             resource.sourceFormKey = dbResource.sourceFormKey
             resource.startTime = dbResource.startTime
             resource.endTime = dbResource.endTime
-            
+            if let participantMetaData = dbResource.participantMetaData {
+                 resource.ppMetaData = ParticipantPropertyMetadata(ppMetaData: participantMetaData)
+            }
             let file = File()
             file.link = dbResource.serverUrl
             file.localPath = dbResource.localPath
@@ -1952,7 +1978,7 @@ class DBHandler: NSObject {
         
     }
     
-    class func saveLifeTimeFor(resource:DBResources, anchorDate:Date) {
+    class func saveLifeTimeFor(resource: DBResources, anchorDate: Date, ppMetaData: PropertyMetaData? = nil) {
         
         let realm = DBHandler.getRealmObject()!
         let startDateInterval = TimeInterval(60*60*24*(resource.anchorDateStartDays)) //start of day
@@ -1974,10 +2000,13 @@ class DBHandler: NSObject {
         endDateString = (endDateString ?? "") + " " + endTime
         endDate = Utilities.findDateFromString(dateString: endDateString ?? "")!
         
-        try? realm.write({
+        try? realm.write {
             resource.startDate = startDate
             resource.endDate = endDate
-        })
+            resource.participantMetaData?.propertyValue = ppMetaData?.propertyValue
+            resource.participantMetaData?.externalPropertyValue = ppMetaData?.externalPropertyValue
+            resource.participantMetaData?.dateOfEntryValue = ppMetaData?.dateOfEntryValue
+        }
     }
    // class func loadResourcesForStudy(studyId: String,completionHandler: @escaping (Array<Resource>) -> ())
     

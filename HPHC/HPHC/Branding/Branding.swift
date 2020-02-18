@@ -64,7 +64,7 @@ enum Branding {
   }
   
   static var WebsiteButtonTitle:String {
-      return brandConfig[JSONKey.WebsiteButtonTitle] as? String ?? ""
+    return brandConfig[JSONKey.WebsiteButtonTitle] as? String ?? Branding.WebsiteLink
   }
   
   static var TermsAndConditionURL: String {

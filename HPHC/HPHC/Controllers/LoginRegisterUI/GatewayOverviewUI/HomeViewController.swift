@@ -50,7 +50,7 @@ class HomeViewController: UIViewController{
         websiteName = Branding.WebsiteLink
         let title = Branding.WebsiteButtonTitle
         
-        buttonLink.setTitle(title != nil ? title : websiteName, for: .normal)
+        buttonLink.setTitle(title, for: .normal)
       
     }
     

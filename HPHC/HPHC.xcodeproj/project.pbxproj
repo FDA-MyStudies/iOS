@@ -1472,7 +1472,7 @@
 		6F41B86123AC937200D4F624 /* AppConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppConfiguration.swift; sourceTree = "<group>"; };
 		6F52327D23D9883800995A78 /* ActivityMetadata TEST1.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "ActivityMetadata TEST1.json"; sourceTree = "<group>"; };
 		6F5AAF7F225DE699002C8FF6 /* Activity_Metadata_Other.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Activity_Metadata_Other.json; sourceTree = "<group>"; };
-		6F6EC42223E1577B0056AD55 /* HPHC Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "HPHC Demo.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		6F6EC42223E1577B0056AD55 /* FDA MyStudies Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "FDA MyStudies Demo.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6F8A861723E160F00096D791 /* FDADemo.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = FDADemo.storyboard; sourceTree = "<group>"; };
 		6F8A861C23E16CD40096D791 /* Branding.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Branding.plist; sourceTree = "<group>"; };
 		6F8A861F23E185B50096D791 /* AppConfiguration.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = AppConfiguration.plist; sourceTree = "<group>"; };
@@ -1518,7 +1518,6 @@
 		89903061224A502C00B3A85C /* AnchorDateHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnchorDateHandler.swift; sourceTree = "<group>"; };
 		89956ABA23EDA1E3005CB333 /* Pods_HPHC.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Pods_HPHC.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		89C5EF7223F16CFE00649359 /* FDAMS HIMSS App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "FDAMS HIMSS App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		89C5EF7323F16CFE00649359 /* HPHC Demo copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "HPHC Demo copy-Info.plist"; path = "/Users/surender/Documents/Surender/Projects/FDA/FDA_git/HPHC/HPHC Demo copy-Info.plist"; sourceTree = "<absolute>"; };
 		89C5EF7423F16DB000649359 /* AppConfiguration.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = AppConfiguration.plist; sourceTree = "<group>"; };
 		89C5EF7523F16DB000649359 /* GatewayOverview.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = GatewayOverview.plist; sourceTree = "<group>"; };
 		89C5EF7623F16DB000649359 /* FDADemo.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = FDADemo.storyboard; sourceTree = "<group>"; };
@@ -1815,7 +1814,6 @@
 				62CD35D6D8DE746AB43D70D6 /* Pods */,
 				5E6053B2479953DCC93BD8D4 /* Frameworks */,
 				6FEDF4B623472056000C18CF /* Recovered References */,
-				89C5EF7323F16CFE00649359 /* HPHC Demo copy-Info.plist */,
 			);
 			sourceTree = "<group>";
 		};
@@ -1827,7 +1825,7 @@
 				89DBF83222F9893000AB3EF2 /* IBD PROdigy.app */,
 				6FC12BBD22FD60FE0075940B /* LimitJIA.app */,
 				89055918230149AD005FB284 /* HPHCUITests.xctest */,
-				6F6EC42223E1577B0056AD55 /* HPHC Demo.app */,
+				6F6EC42223E1577B0056AD55 /* FDA MyStudies Demo.app */,
 				89C5EF7223F16CFE00649359 /* FDAMS HIMSS App.app */,
 			);
 			name = Products;
@@ -2698,9 +2696,9 @@
 			productReference = 6E7D2D561E433E8700763D4C /* HPHC.app */;
 			productType = "com.apple.product-type.application";
 		};
-		6F6EC32E23E1577B0056AD55 /* HPHC Demo */ = {
+		6F6EC32E23E1577B0056AD55 /* FDA MyStudies Demo */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 6F6EC41F23E1577B0056AD55 /* Build configuration list for PBXNativeTarget "HPHC Demo" */;
+			buildConfigurationList = 6F6EC41F23E1577B0056AD55 /* Build configuration list for PBXNativeTarget "FDA MyStudies Demo" */;
 			buildPhases = (
 				6F6EC33123E1577B0056AD55 /* [CP] Check Pods Manifest.lock */,
 				6F6EC33223E1577B0056AD55 /* Sources */,
@@ -2715,9 +2713,9 @@
 			dependencies = (
 				6F6EC32F23E1577B0056AD55 /* PBXTargetDependency */,
 			);
-			name = "HPHC Demo";
+			name = "FDA MyStudies Demo";
 			productName = FDA;
-			productReference = 6F6EC42223E1577B0056AD55 /* HPHC Demo.app */;
+			productReference = 6F6EC42223E1577B0056AD55 /* FDA MyStudies Demo.app */;
 			productType = "com.apple.product-type.application";
 		};
 		6FC12AD022FD60FE0075940B /* LimitJIA */ = {
@@ -2944,7 +2942,7 @@
 				89DBF74422F9893000AB3EF2 /* mSPARC */,
 				6FC12AD022FD60FE0075940B /* LimitJIA */,
 				89055917230149AD005FB284 /* HPHCUITests */,
-				6F6EC32E23E1577B0056AD55 /* HPHC Demo */,
+				6F6EC32E23E1577B0056AD55 /* FDA MyStudies Demo */,
 				89C5EE7B23F16CFE00649359 /* FDAMS HIMSS App */,
 			);
 		};
@@ -4871,7 +4869,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.hphci.fda.mobilestudiesDemo;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "FDA MyStudies Demo";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "HPHC/Controllers/LoginRegisterUI/FDA-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
@@ -4903,7 +4901,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.hphci.fda.mobilestudiesDemo;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "FDA MyStudies Demo";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "HPHC/Controllers/LoginRegisterUI/FDA-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -5092,7 +5090,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = FWLLYUH7XR;
 				ENABLE_BITCODE = NO;
-				INFOPLIST_FILE = "HPHC Demo copy-Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/HPHC/Branding/FDAMS HIMSS App/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				IS_STANDALONE_STUDY = false;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -5124,7 +5122,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = FWLLYUH7XR;
 				ENABLE_BITCODE = NO;
-				INFOPLIST_FILE = "HPHC Demo copy-Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/HPHC/Branding/FDAMS HIMSS App/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				IS_STANDALONE_STUDY = false;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -5226,7 +5224,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		6F6EC41F23E1577B0056AD55 /* Build configuration list for PBXNativeTarget "HPHC Demo" */ = {
+		6F6EC41F23E1577B0056AD55 /* Build configuration list for PBXNativeTarget "FDA MyStudies Demo" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				6F6EC42023E1577B0056AD55 /* Debug */,

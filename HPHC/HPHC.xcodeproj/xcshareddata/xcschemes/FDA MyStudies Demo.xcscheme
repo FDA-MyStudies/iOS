@@ -15,8 +15,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "6F6EC32E23E1577B0056AD55"
-               BuildableName = "HPHC Demo.app"
-               BlueprintName = "HPHC Demo"
+               BuildableName = "FDA MyStudies Demo.app"
+               BlueprintName = "FDA MyStudies Demo"
                ReferencedContainer = "container:HPHC.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -45,8 +45,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "6F6EC32E23E1577B0056AD55"
-            BuildableName = "HPHC Demo.app"
-            BlueprintName = "HPHC Demo"
+            BuildableName = "FDA MyStudies Demo.app"
+            BlueprintName = "FDA MyStudies Demo"
             ReferencedContainer = "container:HPHC.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -62,8 +62,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "6F6EC32E23E1577B0056AD55"
-            BuildableName = "HPHC Demo.app"
-            BlueprintName = "HPHC Demo"
+            BuildableName = "FDA MyStudies Demo.app"
+            BlueprintName = "FDA MyStudies Demo"
             ReferencedContainer = "container:HPHC.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>

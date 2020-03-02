@@ -342,7 +342,7 @@ class Activity {
         }
     }
     
-    func setActivityAvailability(_ availability:[String:Any]) {
+    func setActivityAvailability(_ availability: [String:Any]) {
 
         self.anchorDate = AnchorDate(availability)
         

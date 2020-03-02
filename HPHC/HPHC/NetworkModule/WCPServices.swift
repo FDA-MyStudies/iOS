@@ -513,7 +513,7 @@ class WCPServices: NSObject {
                 var activityList: Array<Activity> = []
                 for activityDict in activities{
                     
-                    let activity = Activity.init(studyId: (Study.currentStudy?.studyId)!, infoDict: activityDict)
+                    let activity = Activity(studyId: (Study.currentStudy?.studyId)!, infoDict: activityDict)
                     activityList.append(activity)
                 }
                 

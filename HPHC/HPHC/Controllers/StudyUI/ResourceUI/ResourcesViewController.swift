@@ -1,21 +1,21 @@
 /*
  License Agreement for FDA My Studies
-Copyright © 2017-2019 Harvard Pilgrim Health Care Institute (HPHCI) and its Contributors. Permission is
-hereby granted, free of charge, to any person obtaining a copy of this software and associated
-documentation files (the &quot;Software&quot;), to deal in the Software without restriction, including without
-limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the
-Software, and to permit persons to whom the Software is furnished to do so, subject to the following
-conditions:
-The above copyright notice and this permission notice shall be included in all copies or substantial
-portions of the Software.
-Funding Source: Food and Drug Administration (“Funding Agency”) effective 18 September 2014 as
-Contract no. HHSF22320140030I/HHSF22301006T (the “Prime Contract”).
-THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
-INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR
-PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
-LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT
-OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
-OTHER DEALINGS IN THE SOFTWARE.
+ Copyright © 2017-2019 Harvard Pilgrim Health Care Institute (HPHCI) and its Contributors. Permission is
+ hereby granted, free of charge, to any person obtaining a copy of this software and associated
+ documentation files (the &quot;Software&quot;), to deal in the Software without restriction, including without
+ limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the
+ Software, and to permit persons to whom the Software is furnished to do so, subject to the following
+ conditions:
+ The above copyright notice and this permission notice shall be included in all copies or substantial
+ portions of the Software.
+ Funding Source: Food and Drug Administration (“Funding Agency”) effective 18 September 2014 as
+ Contract no. HHSF22320140030I/HHSF22301006T (the “Prime Contract”).
+ THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
+ INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR
+ PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
+ LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT
+ OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
+ OTHER DEALINGS IN THE SOFTWARE.
  */
 
 import Foundation
@@ -65,7 +65,7 @@ class ResourcesViewController: UIViewController{
         
         if StudyUpdates.studyConsentUpdated {
             let appDelegate = (UIApplication.shared.delegate as? AppDelegate)!
-             appDelegate.checkConsentStatus(controller: self)
+            appDelegate.checkConsentStatus(controller: self)
         }
         
         
@@ -95,7 +95,7 @@ class ResourcesViewController: UIViewController{
             self.addHomeButton()
         }
         setNeedsStatusBarAppearanceUpdate()
-         //UIApplication.shared.statusBarStyle = .default
+        //UIApplication.shared.statusBarStyle = .default
         self.navigationController?.setNavigationBarHidden(false, animated: true)
         
         self.tabBarController?.tabBar.isHidden = false
@@ -119,7 +119,7 @@ class ResourcesViewController: UIViewController{
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-               
+        
     }
     
     func checkForResourceUpdate(){
@@ -134,7 +134,7 @@ class ResourcesViewController: UIViewController{
     func checkForInfoUpdate(){
         
         if StudyUpdates.studyInfoUpdated {
-             WCPServices().getStudyInformation(studyId: (Study.currentStudy?.studyId)!, delegate: self)
+            WCPServices().getStudyInformation(studyId: (Study.currentStudy?.studyId)!, delegate: self)
         }
     }
     
@@ -155,7 +155,10 @@ class ResourcesViewController: UIViewController{
         }
         
         groupQuery.notify(queue: .main) {
-           completion?()
+            completion?()
+            DispatchQueue.main.async {
+                 ResourcesViewController.scheduleNotificationForResources()
+            }
         }
     }
     
@@ -228,13 +231,13 @@ class ResourcesViewController: UIViewController{
         tableViewRowDetails?.append(aboutTheStudy as AnyObject)
         tableViewRowDetails?.append(consentPDF as AnyObject)
         
-//        let plistPath = Bundle.main.path(forResource: "ResourcesUI", ofType: ".plist", inDirectory: nil)
-//
-//        let array = NSMutableArray(contentsOfFile: plistPath!) as [AnyObject]?
-//
-//        for title in array!{
-//            tableViewRowDetails?.append(title)
-//        }
+        //        let plistPath = Bundle.main.path(forResource: "ResourcesUI", ofType: ".plist", inDirectory: nil)
+        //
+        //        let array = NSMutableArray(contentsOfFile: plistPath!) as [AnyObject]?
+        //
+        //        for title in array!{
+        //            tableViewRowDetails?.append(title)
+        //        }
         
     }
     
@@ -242,7 +245,7 @@ class ResourcesViewController: UIViewController{
         
         //append Leave Study row
         //if (Study.currentStudy?.studySettings.rejoinStudyAfterWithdrawn)! != false {
-            tableViewRowDetails?.append(leaveStudy as AnyObject)
+        tableViewRowDetails?.append(leaveStudy as AnyObject)
         //}
     }
     
@@ -284,14 +287,63 @@ class ResourcesViewController: UIViewController{
             else {
                 tableViewRowDetails?.append(resource)
             }
-
+            
         }
+        
         tableView?.isHidden =  false
         tableView?.reloadData()
         
         StudyUpdates.studyResourcesUpdated = false
         DBHandler.updateMetaDataToUpdateForStudy(study: Study.currentStudy!, updateDetails: nil)
     }
+    
+    
+    class func scheduleNotificationForResources(){
+        
+        guard let study = Study.currentStudy,
+            let resources = study.resources else {return}
+        
+        for resource in resources {
+            
+            if resource.povAvailable,
+                let startDate = resource.startDate,
+                let endDate = resource.endDate,
+                resource.availabilityType == .anchorDate {
+                
+                let notfiId = resource.resourcesId! + study.studyId
+                DBHandler.isNotificationSetFor(notification: notfiId
+                    , completionHandler: { (found) in
+                        if !found {
+                            
+                            let notification = AppLocalNotification()
+                            notification.id = notfiId
+                            notification.message = resource.notificationMessage
+                            notification.title = "New Resource Available"
+                            notification.startDate = startDate
+                            notification.endDate = endDate
+                            notification.type = AppNotification.NotificationType.Study
+                            notification.subType = AppNotification.NotificationSubType.Resource
+                            notification.audience = Audience.Limited
+                            notification.studyId = (Study.currentStudy?.studyId)!
+                            //notification.activityId = Study.currentActivity?.actvityId
+                            
+                            DBHandler.saveLocalNotification(notification: notification)
+                            
+                            //register notification
+//                            var notificationDate = startDate.startOfDay
+//                            notificationDate = notificationDate.addingTimeInterval(43200)
+                            let message = resource.notificationMessage
+                            let userInfo = ["studyId": study.studyId ?? "",
+                                            "type": "resource"] as JSONDictionary
+                            if startDate > Date() {
+                                 LocalNotification.scheduleNotificationOn(date: startDate, message: message!, userInfo: userInfo, id: notification.id)
+                            }
+                        }
+                })
+            }
+        }
+    }
+    
     
     func handleLeaveStudy() {
         
@@ -433,7 +485,7 @@ class ResourcesViewController: UIViewController{
         let fullPath = path + "/" + consentPath!
         
         guard let pdfData = FileDownloadManager.decrytFile(pathURL: URL(string: fullPath))
-          else {return}
+            else {return}
         
         var isPDF: Bool = false
         if pdfData.count >= 1024 { // only check if bigger
@@ -501,13 +553,13 @@ class ResourcesViewController: UIViewController{
             print("error writing to url \(String(describing: fullPath))")
             print(error.localizedDescription)
         }
-
+        
     }
     
     func withdrawalFromStudy(deleteResponse: Bool)  {
         //TBD: uncomment following for UAT
         let participantId = Study.currentStudy?.userParticipateState.participantId
-         LabKeyServices().withdrawFromStudy(studyId: (Study.currentStudy?.studyId)!, participantId: participantId!, deleteResponses: deleteResponse, delegate: self)
+        LabKeyServices().withdrawFromStudy(studyId: (Study.currentStudy?.studyId)!, participantId: participantId!, deleteResponses: deleteResponse, delegate: self)
         
         //UserServices().withdrawFromStudy(studyId: (Study.currentStudy?.studyId)!, shouldDeleteData: deleteResponse, delegate: self)
     }
@@ -644,13 +696,13 @@ extension ResourcesViewController: UITableViewDelegate{
             } else if  (resource as? String)! == aboutTheStudy {
                 
                 self.checkDatabaseForStudyInfo(study: Study.currentStudy!)
-
+                
             } else if  (resource as? String)! == consentPDF {
                 
                 //PENDING
                 
                 if  Study.currentStudy?.signedConsentFilePath != nil {
-                
+                    
                     self.pushToResourceDetails()
                 } else {
                     
@@ -694,7 +746,7 @@ extension ResourcesViewController: NMWebServiceDelegate {
                     handleResponseForWithdraw(response: response)
                 }
             } else {
-               UserServices().deActivateAccount(listOfStudyIds: [Study.currentStudy?.studyId ?? ""], delegate: self)
+                UserServices().deActivateAccount(listOfStudyIds: [Study.currentStudy?.studyId ?? ""], delegate: self)
             }
             
         case RegistrationMethods.deactivate.method.methodName :
@@ -734,15 +786,15 @@ extension ResourcesViewController: NMWebServiceDelegate {
             break
             
         }
-     
+        
         
     }
     func failedRequest(_ manager: NetworkManager, requestName: NSString, error: NSError) {
         Logger.sharedInstance.info("requestname : \(requestName)")
-       
+        
         
         if error.code == 403 { //unauthorized
-             self.removeProgressIndicator()
+            self.removeProgressIndicator()
             UIUtilities.showAlertMessageWithActionHandler(kErrorTitle, message: error.localizedDescription, buttonTitle: kTitleOk, viewControllerUsed: self, action: {
                 self.fdaSlideMenuController()?.navigateToHomeAfterUnauthorizedAccess()
             })
@@ -750,7 +802,7 @@ extension ResourcesViewController: NMWebServiceDelegate {
             
             if requestName as String == WCPMethods.resources.method.methodName {
                 
-                 self.removeProgressIndicator()
+                self.removeProgressIndicator()
                 tableViewRowDetails = []
                 self.addDefaultList()
                 self.appendLeaveStudy()
@@ -766,7 +818,7 @@ extension ResourcesViewController: NMWebServiceDelegate {
                     UserServices().withdrawFromStudy(studyId: (Study.currentStudy?.studyId)!, shouldDeleteData: self.shouldDeleteData!
                         , delegate: self)
                 } else {
-                   self.removeProgressIndicator()
+                    self.removeProgressIndicator()
                     UIUtilities.showAlertWithTitleAndMessage(title: NSLocalizedString(kErrorTitle, comment: "") as NSString, message: error.localizedDescription as NSString)
                 }
             } else {

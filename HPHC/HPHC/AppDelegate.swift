@@ -240,10 +240,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
        
         //TODO: Use Encryption code commented below instead of this.
         let config = Realm.Configuration(
-            schemaVersion: 4,
+            schemaVersion: 2,
             migrationBlock: { migration, oldSchemaVersion in
                 // We haven’t migrated anything yet, so oldSchemaVersion == 0
-                if (oldSchemaVersion < 4) {
+                if (oldSchemaVersion < 2
+                    ) {
                     // Nothing to do!
                     // Realm will automatically detect new properties and removed properties
                     // And will update the schema on disk automatically
@@ -251,10 +252,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         })
         
 //        let config = Realm.Configuration(encryptionKey:keyData,
-//            schemaVersion: 1,
+//            schemaVersion: 2,
 //            migrationBlock: { migration, oldSchemaVersion in
 //                // We haven’t migrated anything yet, so oldSchemaVersion == 0
-//                if (oldSchemaVersion < 1) {
+//                if (oldSchemaVersion < 2) {
 //                    // Nothing to do!
 //                    // Realm will automatically detect new properties and removed properties
 //                    // And will update the schema on disk automatically

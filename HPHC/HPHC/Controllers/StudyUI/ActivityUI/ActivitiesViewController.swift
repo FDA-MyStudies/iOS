@@ -90,6 +90,7 @@ class ActivitiesViewController : UIViewController{
         refreshControl?.attributedTitle = NSAttributedString(string: "Pull to refresh")
         refreshControl?.addTarget(self, action: #selector(refresh(sender:)), for: UIControl.Event.valueChanged)
         tableView?.addSubview(refreshControl!)
+        self.addProgressIndicator()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -143,8 +144,6 @@ class ActivitiesViewController : UIViewController{
             DBHandler.updateLocalNotificaitonUpdated(studyId: (Study.currentStudy?.studyId)!, status: false)
             
         } else {
-            
-            self.refreshControl?.endRefreshing()
             //self.loadActivitiesFromDatabase()
             self.fetchActivityAnchorDateResponseFromLabkey()
         }
@@ -193,82 +192,6 @@ class ActivitiesViewController : UIViewController{
         }
     }
     
-    /**
-     RegisterNotificationForAnchorDate method sets the notification for the available resource
-     */
-    
-    func registerNotificationForAnchorDate(){
-        
-        DBHandler.getResourcesWithAnchorDateAvailable(studyId: (Study.currentStudy?.studyId)!) { (resourcesList) in
-            if resourcesList.count > 0 {
-                let todayDate = Date()
-                for resource in resourcesList {
-                    
-                    if resource.startDate == nil && resource.endDate == nil {
-                        
-                        let anchorDateObject = Study.currentStudy?.anchorDate
-                        //Fetch AnchorData based availablity
-                        if(anchorDateObject != nil && (anchorDateObject?.isAnchorDateAvailable())!) {
-                            
-                            let anchorDate = Study.currentStudy?.anchorDate?.date?.startOfDay
-                            
-                            if anchorDate != nil {
-                                
-                                //also anchor date condition
-                                let startDateInterval = TimeInterval(60*60*24*(resource.anchorDateStartDays))
-                                
-                                let endDateInterval = TimeInterval(60*60*24*(resource.anchorDateEndDays))
-                                
-                                let startAnchorDate = anchorDate?.addingTimeInterval(startDateInterval)
-                                var endAnchorDate = anchorDate?.addingTimeInterval(endDateInterval)
-                                
-                                endAnchorDate = endAnchorDate?.endOfDay
-                                let startDateResult = (startAnchorDate?.compare(todayDate))! as ComparisonResult
-                                //let endDateResult = (endAnchorDate?.compare(todayDate))! as ComparisonResult
-                                self.isAnchorDateSet = false
-                                
-                                if startDateResult == .orderedDescending {
-                                    //upcoming
-                                    let notfiId = resource.resourceId! + (Study.currentStudy?.studyId)!
-                                    DBHandler.isNotificationSetFor(notification: notfiId
-                                        , completionHandler: { (found) in
-                                            if !found {
-                                                
-                                                //Create AppLocalNotification
-                                                let notification = AppLocalNotification()
-                                                notification.id = resource.resourceId! + (Study.currentStudy?.studyId)!
-                                                notification.message = resource.notificationMessage
-                                                notification.title = "New Resource Available"
-                                                notification.startDate = startAnchorDate
-                                                notification.endDate = endAnchorDate
-                                                notification.type = AppNotification.NotificationType.Study
-                                                notification.subType = AppNotification.NotificationSubType.Resource
-                                                notification.audience = Audience.Limited
-                                                notification.studyId = (Study.currentStudy?.studyId)!
-                                                //notification.activityId = Study.currentActivity?.actvityId
-                                                
-                                                //Save Notification to Database
-                                                DBHandler.saveLocalNotification(notification: notification)
-                                                
-                                                //register notification
-                                                var notificationDate = startAnchorDate?.startOfDay
-                                                notificationDate = notificationDate?.addingTimeInterval(43200)
-                                                let message = resource.notificationMessage
-                                                let userInfo = ["studyId": (Study.currentStudy?.studyId)!,
-                                                                "type": "resource"];
-                                                LocalNotification.scheduleNotificationOn(date: notificationDate!, message: message!, userInfo: userInfo, id: notification.id)
-                                            }
-                                    })
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    }
-    
-    
     // MARK:- Button Actions
     
     /**
@@ -306,9 +229,12 @@ class ActivitiesViewController : UIViewController{
     
     
     @objc func refresh(sender:AnyObject) {
-        
+//        DBHandler.deleteStudyData(studyId: Study.currentStudy!.studyId)
+//        StudyUpdates.studyActivitiesUpdated = true
+        checkForActivitiesUpdates()
         Logger.sharedInstance.info("Request for study Updated...")
-        WCPServices().getStudyUpdates(study: Study.currentStudy!, delegate: self)
+        
+//        WCPServices().getStudyUpdates(study: Study.currentStudy!, delegate: self)
         //self.sendRequesToGetActivityList()
     }
     
@@ -341,7 +267,8 @@ class ActivitiesViewController : UIViewController{
             else {return}
         ActivitiesViewController.updateActivitiesAnchorDateLifeTime(for: currentStudy) { [weak self] in
             self?.loadActivitiesFromDatabase()
-            DispatchQueue.main.async {
+            self?.refreshControl?.endRefreshing()
+            DispatchQueue.main.async { [weak self] in
                 self?.syncParticipantPropertyValuesOnUserRegistration(for: currentStudy)
             }
         }
@@ -413,12 +340,16 @@ class ActivitiesViewController : UIViewController{
             self.sendRequestToGetActivityStates()
         } else {
             
-            DBHandler.loadActivityListFromDatabase(studyId: (Study.currentStudy?.studyId)!) { (activities) in
+            DBHandler.loadActivityListFromDatabase(studyId: (Study.currentStudy?.studyId)!) { [weak self] (activities) in
+               
                 if activities.count > 0 {
                     Study.currentStudy?.activities = activities
-                    
-                    self.handleActivityListResponse()
+                    self?.handleActivityListResponse()
+                } else {
+                    self?.labelNoNetworkAvailable?.text = "Sorry, no activities available right now."
                 }
+                
+                self?.removeProgressIndicator()
             }
         }
     }
@@ -590,13 +521,11 @@ class ActivitiesViewController : UIViewController{
             self.updateSectionArray(activityType: filterType)
         }
         
-        DispatchQueue.main.async {
-            
-            self.tableView?.reloadData()
-            self.tableView?.isHidden = false
-            self.labelNoNetworkAvailable?.isHidden = true
-            self.updateCompletionAdherence()
-        }
+
+        self.tableView?.reloadData()
+        self.tableView?.isHidden = false
+        self.labelNoNetworkAvailable?.isHidden = true
+        self.updateCompletionAdherence()
         
         DispatchQueue.main.async {
            if (User.currentUser.settings?.localNotifications)! {
@@ -1064,9 +993,7 @@ extension ActivitiesViewController: NMWebServiceDelegate {
         } else {
             self.addProgressIndicator()
         }
-    }
-    
-    
+    }    
     
     func finishedRequest(_ manager: NetworkManager, requestName: NSString, response: AnyObject?) {
         Logger.sharedInstance.info("requestname : \(requestName) Response : \(String(describing:response))")
@@ -1075,21 +1002,13 @@ extension ActivitiesViewController: NMWebServiceDelegate {
             self.sendRequesToGetActivityList()
         } else if requestName as String == WCPMethods.activityList.method.methodName {
             
-            //get DashboardInfo
-            self.sendRequestToGetDashboardInfo()
-            
-            self.fetchActivityAnchorDateResponseFromLabkey()
-            // self.loadActivitiesFromDatabase()
-            
-            if self.refreshControl != nil && (self.refreshControl?.isRefreshing)!{
-                self.refreshControl?.endRefreshing()
-            }
-            
             StudyUpdates.studyActivitiesUpdated = false
-            //Update StudymetaData for Study
+            // Update StudymetaData for Study
             DBHandler.updateMetaDataToUpdateForStudy(study: Study.currentStudy!, updateDetails: nil)
-            
-            
+            // findActivitiesToUpdateSchedule()
+            self.fetchActivityAnchorDateResponseFromLabkey()
+            // get DashboardInfo
+            self.sendRequestToGetDashboardInfo()
             
         } else if requestName as String == WCPMethods.activity.method.methodName {
             self.removeProgressIndicator()
@@ -1100,7 +1019,6 @@ extension ActivitiesViewController: NMWebServiceDelegate {
             self.getLabkeyResponse()
             
         } else if requestName as String == WCPMethods.resources.method.methodName {
-            self.removeProgressIndicator()
             DispatchQueue.main.async {
                 if let study = Study.currentStudy {
                     ResourcesViewController.updateResourcesAnchorDateLifeTime(for: study)

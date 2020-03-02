@@ -148,6 +148,9 @@
 		6F8385BE23F2B162002D39E9 /* UIImage+Gif.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F8385BD23F2B162002D39E9 /* UIImage+Gif.swift */; };
 		6F8385BF23F2B162002D39E9 /* UIImage+Gif.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F8385BD23F2B162002D39E9 /* UIImage+Gif.swift */; };
 		6F8385C023F2B162002D39E9 /* UIImage+Gif.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F8385BD23F2B162002D39E9 /* UIImage+Gif.swift */; };
+		6FA4F58F23FC295600195A72 /* DateHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FA4F58C23FC295600195A72 /* DateHelper.swift */; };
+		6FA4F59023FC295600195A72 /* DateHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FA4F58C23FC295600195A72 /* DateHelper.swift */; };
+		6FA4F59123FC295600195A72 /* DateHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FA4F58C23FC295600195A72 /* DateHelper.swift */; };
 		6FB89C1B225F40EB00420A7B /* TextChoiceQuestionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB89C1A225F40EA00420A7B /* TextChoiceQuestionController.swift */; };
 		6FB89C1D225F40F400420A7B /* SurveyTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB89C1C225F40F400420A7B /* SurveyTask.swift */; };
 		6FB89C24225F410500420A7B /* OtherTextChoiceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB89C20225F410500420A7B /* OtherTextChoiceCell.swift */; };
@@ -952,6 +955,7 @@
 		6F10BB18234DE45D006388E2 /* Activity_New_Other_Form.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Activity_New_Other_Form.json; sourceTree = "<group>"; };
 		6F5AAF7F225DE699002C8FF6 /* Activity_Metadata_Other.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Activity_Metadata_Other.json; sourceTree = "<group>"; };
 		6F8385BD23F2B162002D39E9 /* UIImage+Gif.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Gif.swift"; sourceTree = "<group>"; };
+		6FA4F58C23FC295600195A72 /* DateHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateHelper.swift; sourceTree = "<group>"; };
 		6FB89C1A225F40EA00420A7B /* TextChoiceQuestionController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextChoiceQuestionController.swift; sourceTree = "<group>"; };
 		6FB89C1C225F40F400420A7B /* SurveyTask.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SurveyTask.swift; sourceTree = "<group>"; };
 		6FB89C20225F410500420A7B /* OtherTextChoiceCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OtherTextChoiceCell.swift; sourceTree = "<group>"; };
@@ -1438,6 +1442,7 @@
 		6ECA92861E49F0BA00DA6287 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				6FA4F58C23FC295600195A72 /* DateHelper.swift */,
 				6ECA92871E49F0CD00DA6287 /* Utilities.swift */,
 				482062511E68532300C7A7AF /* UIUtilities.swift */,
 			);
@@ -2848,6 +2853,7 @@
 				946CA5E91E728C2300CC8535 /* StringEncoder.swift in Sources */,
 				6E4CECB61F31B41C005E0832 /* PinterestLayout.swift in Sources */,
 				6FB89C28225F416C00420A7B /* Cell.swift in Sources */,
+				6FA4F58F23FC295600195A72 /* DateHelper.swift in Sources */,
 				94D20E9F1E9DFFE7005C3531 /* DBActivity.swift in Sources */,
 				4884E35A1E827E6A002DA0B9 /* ContactUsTableViewCell.swift in Sources */,
 				6EE93D901E93B5700027A5DC /* ConsentSharePdfStepViewController.swift in Sources */,
@@ -3006,6 +3012,7 @@
 				6FC12ADA22FD60FE0075940B /* StringEncoder.swift in Sources */,
 				6FC12ADB22FD60FE0075940B /* PinterestLayout.swift in Sources */,
 				6FC12ADC22FD60FE0075940B /* Cell.swift in Sources */,
+				6FA4F59123FC295600195A72 /* DateHelper.swift in Sources */,
 				6FC12ADD22FD60FE0075940B /* DBActivity.swift in Sources */,
 				6FC12ADE22FD60FE0075940B /* ContactUsTableViewCell.swift in Sources */,
 				6FC12ADF22FD60FE0075940B /* ConsentSharePdfStepViewController.swift in Sources */,
@@ -3186,6 +3193,7 @@
 				89DBF74E22F9893000AB3EF2 /* StringEncoder.swift in Sources */,
 				89DBF74F22F9893000AB3EF2 /* PinterestLayout.swift in Sources */,
 				89DBF75022F9893000AB3EF2 /* Cell.swift in Sources */,
+				6FA4F59023FC295600195A72 /* DateHelper.swift in Sources */,
 				89DBF75122F9893000AB3EF2 /* DBActivity.swift in Sources */,
 				89DBF75222F9893000AB3EF2 /* ContactUsTableViewCell.swift in Sources */,
 				89DBF75322F9893000AB3EF2 /* ConsentSharePdfStepViewController.swift in Sources */,
@@ -3745,7 +3753,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 18;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = MUEVRP9QCH;
 				ENABLE_BITCODE = NO;
@@ -3777,7 +3785,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 18;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = MUEVRP9QCH;
 				ENABLE_BITCODE = NO;

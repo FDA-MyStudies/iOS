@@ -60,7 +60,6 @@ class AnchorDateQueryMetaData {
     var sourceFormKey: String?
     var anchorDate: Date?
     var sourceFormId: String!
-    var isFinishedFetching: Bool = false
     var participantPropertyMetaData: PropertyMetaData?
     var fetchAnchorDateFor: FetchAnchorDateFor = .activity
     
@@ -306,7 +305,6 @@ class AnchorDateHandler {
             anchorDate.anchorDate = Date().addingTimeInterval(3600*24*10)
             anchorDate.participantPropertyMetaData?.externalPropertyValue = "x8"
             anchorDate.participantPropertyMetaData?.dateOfEntryValue = "17-11-2017 21:55:44"
-            anchorDate.isFinishedFetching = true
         }
         
         self.saveParticipantPropertyAnchorDateInDB()
@@ -342,7 +340,6 @@ class AnchorDateHandler {
         let session = URLSession.shared
         let dataTask = session.dataTask(with: request, completionHandler: { (data, response, error) -> Void in
             
-            emptyAnchorDateDetail.isFinishedFetching = true
             if (error != nil) {
                 print(error as Any)
                 completion()
@@ -399,8 +396,6 @@ class AnchorDateHandler {
         let session = URLSession.shared
         let dataTask = session.dataTask(with: request as URLRequest, completionHandler: { (data, response, error) -> Void in
             
-            
-            emptyAnchorDateDetail.isFinishedFetching = true
             if (error != nil) {
                 print(error as Any)
                 completion()
@@ -438,13 +433,13 @@ class AnchorDateHandler {
     func saveAnchorDateInDatabase() {
         
         print("Log DB Started - \(Date().timeIntervalSince1970)")
-        let listItems = anchorDateMetaDataList.filter({$0.anchorDate != nil && $0.isFinishedFetching == true})
+        let listItems = anchorDateMetaDataList.filter({$0.anchorDate != nil})
         for item in listItems {
             print("DB")
-            if item.fetchAnchorDateFor == .activity, let dbActivity = item.activity {
-                
-                DBHandler.updateActivityLifeTimeFor(dbActivity, anchorDate: item.anchorDate!)
-                
+            if item.fetchAnchorDateFor == .activity,
+                let dbActivity = item.activity,
+                let anchorDate = item.anchorDate {
+                DBHandler.updateActivityLifeTimeFor(dbActivity, anchorDate: anchorDate)
             } else if item.fetchAnchorDateFor == .resource, let dbResource = item.resource {
                 
                 var startDateStringEnrollment =  Utilities.formatterShort?.string(from: item.anchorDate!)
@@ -460,20 +455,34 @@ class AnchorDateHandler {
     
     func saveParticipantPropertyAnchorDateInDB() {
         
-        let listItems = anchorDateMetaDataList.filter({$0.anchorDate != nil && $0.isFinishedFetching == true})
+        let listItems = anchorDateMetaDataList.filter({$0.anchorDate != nil})
         for item in listItems {
             if item.fetchAnchorDateFor == .activity, let dbActivity = item.activity {
                 
-                let previouslyStoredEXPValue = dbActivity.externalPropertyValue
-                let newReceivedEXPValue = item.participantPropertyMetaData?.externalPropertyValue
+                let oldEXPValue = dbActivity.externalPropertyValue
+                let newEXPValue = item.participantPropertyMetaData?.externalPropertyValue
                 
-                // check if any value exists otherwise treat it as new value OR values is updated
-                if previouslyStoredEXPValue == nil || previouslyStoredEXPValue != newReceivedEXPValue {
-                    // Value is chagnes and reschedule activity life time
+                let oldAnchorDate = dbActivity.anchorDateValue
+                var newAnchorDate = item.anchorDate
+             
+                func updateActivity() {
+                    guard let anchorDate = item.anchorDate else {return}
+                    self.study.activitiesLocalNotificationUpdated = false
+                    DBHandler.updateLocalNotificaitonUpdated(studyId: study.studyId, status: false)
                     DBHandler.updateActivityLifeTimeFor(dbActivity,
-                                                        anchorDate: item.anchorDate!,
-                                                        externalIdValue: item.participantPropertyMetaData?.externalPropertyValue,
-                                                        dateOfEntryValue: item.participantPropertyMetaData?.dateOfEntryValue)
+                    anchorDate: anchorDate,
+                    externalIdValue: newEXPValue,
+                    dateOfEntryValue: item.participantPropertyMetaData?.dateOfEntryValue)
+                }
+                
+                // Check if any value exists otherwise treat it as new value OR values is updated.
+                if oldEXPValue == nil {
+                    updateActivity() // First time PP queried.
+                } else if oldAnchorDate != newAnchorDate { // Anchor Date updated
+                    updateActivity()
+                } else if oldEXPValue != newEXPValue {
+                    // Save the exp value to DB
+                    // TODO: Need to handle this scenario
                 }
                 
             } else if item.fetchAnchorDateFor == .resource, let dbResource = item.resource {

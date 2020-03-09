@@ -27,13 +27,12 @@ class DBHandler: NSObject {
         let key = FDAKeychain.shared[kRealmEncryptionKeychainKey]
         let data = Data.init(base64Encoded: key!)
         let encryptionConfig = Realm.Configuration(encryptionKey: data)
-        return try! Realm()
+        return try! Realm(configuration: encryptionConfig)
     }()
     
     fileprivate class func getRealmObject() -> Realm? {
         return DBHandler.realm
     }
-    
     
     /* Used to save user details like userid, authkey, first name , last name etc*/
     func saveCurrentUser(user: User){
@@ -598,8 +597,9 @@ class DBHandler: NSObject {
                     activityUpdated  = true
                 } else {
                     
-                    //check if version is updated
-                    if dbActivity?.version != activity.version {
+                    // Check if version is updated.
+                    // FIXME: Remove the one_time check from here.
+                    if dbActivity?.version != activity.version || activity.frequencyType == .One_Time {
                         // let ppMetaData = ParticipantPropertyMetadata
                         try? realm.write({
                             realm.delete((dbActivity?.activityRuns)!)
@@ -612,7 +612,7 @@ class DBHandler: NSObject {
                         DBHandler.deleteMetaDataForActivity(activityId: activity.actvityId!, studyId: activity.studyId!)
                         activityUpdated = true
                         
-                    }else {
+                    } else {
                         try? realm.write({
                             
                             dbActivity?.currentRunId = activity.userParticipationStatus.activityRunId
@@ -787,98 +787,44 @@ class DBHandler: NSObject {
     class func updateActivityLifeTimeFor(_ dbActivity: DBActivity, anchorDate: Date ,
                                          externalIdValue: String? = nil, dateOfEntryValue: String? = nil) {
         
-        defer {
-            let realm = getRealmObject()
-            
-            try? realm?.write {
-                // PP values
-                dbActivity.anchorDateValue = anchorDate
-                dbActivity.externalPropertyValue = externalIdValue
-                dbActivity.dateOfEntryValue = dateOfEntryValue
-            }
-        }
-        
         guard let frequencyType = dbActivity.frequencyType,
             let frequency = Frequency(rawValue: frequencyType) else {
                 return
         }
         
-        guard frequency != .Scheduled else {
+        switch frequency {
+            
+        case .One_Time:
+            ActivityDiskService.scheduleRunsFor(oneTime: dbActivity,
+                                                anchorDate: anchorDate,
+                                                externalIdValue: externalIdValue,
+                                                dateOfEntryValue: dateOfEntryValue,
+                                                frequency: frequency)
+            return
+            
+        case .Scheduled:
             updateLifeTimeFor(scheduled: dbActivity,
             anchorDate: anchorDate,
             externalIdValue: externalIdValue,
             dateOfEntryValue: dateOfEntryValue, frequency: frequency)
-            return
+            break
+            
+        case .Daily, .Weekly, .Monthly:
+            ActivityDiskService.scheduleRunsFor(other: dbActivity,
+                                                anchorDate: anchorDate,
+                                                externalIdValue: externalIdValue,
+                                                dateOfEntryValue: dateOfEntryValue,
+                                                frequency: frequency)
+            break
         }
         
-        guard let realm = getRealmObject(),
-            let updatedAnchorDate = DateHelper.updateTime(of: anchorDate) else {
-                return
-        }
+        let realm = getRealmObject()
         
-        let lifeTime = getLifeTime(updatedAnchorDate,
-                                             frequency:frequency,
-                                             startDays: (dbActivity.startDays),
-                                             endDays: (dbActivity.endDays),
-                                             repeatInterval: (dbActivity.repeatInterval))
-        var anchorStartDate = lifeTime.0
-        var anchorEndDate = lifeTime.1
-        
-        // Update Start date and time.
-        if let startTime = dbActivity.startTime {
-            anchorStartDate = DateHelper.updateTime(of: anchorStartDate, with: startTime)
-        } else {
-            anchorStartDate = dbActivity.startDate ?? Date() // FIXME: need to verify this scenario
-        }
-        // Update End date and time.
-        if let endTime = dbActivity.endTime {
-            anchorEndDate = DateHelper.updateTime(of: anchorEndDate, with: endTime)
-        } else {
-            anchorEndDate = dbActivity.endDate
-        }
-      
-        if let startDate = anchorStartDate {
-            
-            // Calcuate runs for activity
-            let currentDate = getCurrentDateWithTimeDifference()
-            let activity = getActivityFromDBActivity(dbActivity, runDate: currentDate)
-            activity.startDate = startDate
-            activity.endDate = anchorEndDate
-            activity.anchorDate?.anchorDateValue = anchorDate
-            
-
-            // Delete old scheduled runs
-            try? realm.write {
-                realm.delete(dbActivity.activityRuns)
-            }
-            
-            Schedule().getRunsForActivity(activity: activity, handler: { (runs) in
-  
-                activity.activityRuns = runs
-                
-                // Create runs
-                let dbActivityRuns = List<DBActivityRun>()
-                for activityRun in activity.activityRuns {
-                    
-                    let dbActivityRun = DBActivityRun()
-                    dbActivityRun.startDate = activityRun.startDate
-                    dbActivityRun.endDate = activityRun.endDate
-                    dbActivityRun.activityId = activity.actvityId
-                    dbActivityRun.studyId = activity.studyId
-                    dbActivityRun.runId = activityRun.runId
-                    dbActivityRun.isCompleted = activityRun.isCompleted
-                    dbActivityRuns.append(dbActivityRun)
-                }
-                
-                
-                try? realm.write {
-                    dbActivity.activityRuns.append(objectsIn: dbActivityRuns)
-                    dbActivity.startDate = startDate
-                    dbActivity.endDate = anchorEndDate
-                }
-                
-            })
-            
+        try? realm?.write {
+            // PP values
+            dbActivity.anchorDateValue = anchorDate
+            dbActivity.externalPropertyValue = externalIdValue
+            dbActivity.dateOfEntryValue = dateOfEntryValue
         }
     }
  
@@ -934,17 +880,7 @@ class DBHandler: NSObject {
         activity.startDate = anchorStartDate
         activity.endDate = anchorEndDate
         activity.anchorDate?.anchorDateValue = anchorDate
-       // activity.addNewCustomRuns = false
-        
-        defer {
-            try? realm.write {
-                // PP values
-                dbActivity.anchorDateValue = anchorDate
-                dbActivity.externalPropertyValue = externalIdValue
-                dbActivity.dateOfEntryValue = dateOfEntryValue
-            }
-        }
-        
+       
         func adjustDateFor(newRun: ActivityRun, lastRun: ActivityRun) -> ActivityRun? {
             
             if lastRun.startDate > currentDate, lastRun.endDate > currentDate { // previous run upcoming
@@ -1090,7 +1026,7 @@ class DBHandler: NSObject {
         })
     }
     
-    private class func getLifeTime(_ date:Date,
+    class func getLifeTime(_ date:Date,
                                    frequency:Frequency,
                                    startDays:Int,
                                    endDays:Int,
@@ -1209,7 +1145,7 @@ class DBHandler: NSObject {
         completionHandler(activities)
     }
     
-    private class func getCurrentDateWithTimeDifference() -> Date {
+    class func getCurrentDateWithTimeDifference() -> Date {
         
         var date = Date().utcDate()
         
@@ -1221,7 +1157,7 @@ class DBHandler: NSObject {
         return date
     }
     
-    private class func getActivityFromDBActivity(_ dbActivity: DBActivity, runDate date:Date) -> Activity {
+    class func getActivityFromDBActivity(_ dbActivity: DBActivity, runDate date:Date) -> Activity {
         
         //create activity instance
         let activity = Activity()

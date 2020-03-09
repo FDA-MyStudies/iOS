@@ -236,31 +236,31 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.generateRealmKeys()
         
         let key = FDAKeychain.shared[kRealmEncryptionKeychainKey]
-        let keyData = Data.init(base64Encoded: key!)
+        let keyData = Data(base64Encoded: key!)
        
         //TODO: Use Encryption code commented below instead of this.
-        let config = Realm.Configuration(
-            schemaVersion: 2,
-            migrationBlock: { migration, oldSchemaVersion in
-                // We haven’t migrated anything yet, so oldSchemaVersion == 0
-                if (oldSchemaVersion < 2
-                    ) {
-                    // Nothing to do!
-                    // Realm will automatically detect new properties and removed properties
-                    // And will update the schema on disk automatically
-                }
-        })
-        
-//        let config = Realm.Configuration(encryptionKey:keyData,
+//        let config = Realm.Configuration(
 //            schemaVersion: 2,
 //            migrationBlock: { migration, oldSchemaVersion in
 //                // We haven’t migrated anything yet, so oldSchemaVersion == 0
-//                if (oldSchemaVersion < 2) {
+//                if (oldSchemaVersion < 2
+//                    ) {
 //                    // Nothing to do!
 //                    // Realm will automatically detect new properties and removed properties
 //                    // And will update the schema on disk automatically
 //                }
 //        })
+        
+        let config = Realm.Configuration(encryptionKey:keyData,
+            schemaVersion: 2,
+            migrationBlock: { migration, oldSchemaVersion in
+                // We haven’t migrated anything yet, so oldSchemaVersion == 0
+                if (oldSchemaVersion < 2) {
+                    // Nothing to do!
+                    // Realm will automatically detect new properties and removed properties
+                    // And will update the schema on disk automatically
+                }
+        })
         
         // Tell Realm to use this new configuration object for the default Realm
         Realm.Configuration.defaultConfiguration = config

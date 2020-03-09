@@ -101,7 +101,7 @@ class DBActivityRun: Object {
     @objc dynamic  var restortionData: Data?
     @objc dynamic  var toBeSynced: Bool = false
     @objc dynamic  var responseData: Data?
-
+ 
 }
 
 

@@ -19,9 +19,9 @@
 	<key>WebsiteButtonTitle</key>
 	<string>www.fda.gov</string>
 	<key>TermsAndConditionURL</key>
-	<string>https://wcp.demo.mystudiesapp.org/fdahpStudyDesigner/termsAndCondition.do</string>
+	<string>https://wcp.demo.mystudiesapp.org/fdahpStudyDesigner/TermsAndConditions.do</string>
 	<key>PrivacyPolicyURL</key>
-	<string>https://wcp.demo.mystudiesapp.org/fdahpStudyDesigner/termsAndCondition.do</string>
+	<string>https://wcp.demo.mystudiesapp.org/fdahpStudyDesigner/TermsAndConditions.do</string>
 	<key>ValidatedTitle</key>
 	<string>Validated!</string>
 	<key>AllowFeedback</key>

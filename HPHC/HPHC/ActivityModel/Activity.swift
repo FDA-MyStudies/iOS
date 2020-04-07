@@ -40,6 +40,7 @@ let kActivityConfiguration = "configuration"
 let kActivityFrequency = "frequency"
 let kActivityFrequencyRuns = "runs"
 let kActivityManualAnchorRuns = "anchorRuns"
+let kActivityCustomScheduleAddMoreRuns = "addNewRuns"
 let kActivityFrequencyType = "type"
 
 let kActivityStartTime = "startTime"
@@ -103,6 +104,7 @@ enum ActivityScheduleType: String {
 enum AnchorDateSourceType: String {
     case enrollmentDate = "EnrollmentDate"
     case activityResponse = "ActivityResponse"
+    case participantProperty = "ParticipantProperty"
 }
 
 /**
@@ -133,7 +135,7 @@ class Activity {
     var frequencyRuns: Array<Dictionary<String, Any>>? = []
     var anchorRuns: Array<Dictionary<String, Any>>? = [] // scheduled mannuly for anchor date
     var frequencyType: Frequency = .One_Time
-    
+    var addNewCustomRuns:Bool = false
     var result: ActivityResult?
 
     var restortionData: Data? //stores the restortionData for current activity
@@ -145,7 +147,7 @@ class Activity {
     var currentRun: ActivityRun! = nil
     var userParticipationStatus: UserActivityStatus! = nil
     var taskSubType: String? = "" //used for active tasks
-    var anchorDate:AnchorDate? = nil
+    var anchorDate: AnchorDate? = nil
     var schedulingType:ActivityScheduleType = .regular
     
      //Default Initializer
@@ -239,15 +241,17 @@ class Activity {
                 if Utilities.isValidValue(someObject: frequencyDict[kActivityFrequencyType] as AnyObject ){
                     self.frequencyType =  Frequency(rawValue: (frequencyDict[kActivityFrequencyType] as? String)! )!
                 }
-                
+                if Utilities.isValidValue(someObject: frequencyDict[kActivityCustomScheduleAddMoreRuns] as AnyObject ){
+                    self.addNewCustomRuns = frequencyDict[kActivityCustomScheduleAddMoreRuns] as? Bool ?? false
+                }
+                    
             }
             
             //AnchorDate
-            let anchorDateDetail = infoDict["anchorDate"] as? [String:Any]
+            let anchorDateDetail = infoDict["anchorDate"] as? JSONDictionary
             if (anchorDateDetail != nil && self.schedulingType == .anchorDate) {
                 setActivityAvailability(anchorDateDetail ?? [:])
             }
-            
             
             let currentUser = User.currentUser
             if let userActivityStatus = currentUser.participatedActivites.filter({$0.activityId == self.actvityId && $0.studyId == self.studyId}).first {
@@ -264,6 +268,7 @@ class Activity {
             if self.startDate != nil && (self.schedulingType == .regular || self.anchorDate?.sourceType == "EnrollmentDate"){
                 self.calculateActivityRuns(studyId: self.studyId!)
             }
+            
         } else {
             Logger.sharedInstance.debug("infoDict is null:\(infoDict)")
         }
@@ -337,10 +342,10 @@ class Activity {
         }
     }
     
-    func setActivityAvailability(_ availability:[String:Any]) {
+    func setActivityAvailability(_ availability: [String:Any]) {
 
-        self.anchorDate = AnchorDate.init(availability)
-        //Issue: Crash with joining date for first time
+        self.anchorDate = AnchorDate(availability)
+        
         if self.anchorDate?.sourceType == "EnrollmentDate" {
             var enrollmentDate = Study.currentStudy?.userParticipateState.joiningDate
             
@@ -478,16 +483,34 @@ class Activity {
 
 class AnchorDate {
     
-    var sourceType:String?
-    var sourceActivityId:String?
-    var sourceKey:String?
-    var sourceFormKey:String?
-    var startDays:Int = 0
-    var startTime:String?
-    var endDays:Int = 0
-    var repeatInterval:Int = 0
-    var endTime:String?
-    var anchorDateValue:Date?
+    struct PPMetaData {
+        var propertyId:String!
+        var propertyType:String!
+        var propertyDataFormat:String!
+        var shouldRefresh:Bool!
+        var dataSource:String!
+        var status:String!
+        var externalPropertyId:String?
+        var dateOfEntryId:String?
+        var externalPropertyValue:String?
+        var dateOfEntryValue:String?
+        
+        init() {
+            
+        }
+    }
+    
+    var sourceType: String?
+    var sourceActivityId: String?
+    var sourceKey: String?
+    var sourceFormKey: String?
+    var startDays: Int = 0
+    var startTime: String?
+    var endDays: Int = 0
+    var repeatInterval: Int = 0
+    var endTime: String?
+    var anchorDateValue: Date?
+    var ppMetaData: PPMetaData?
     
     init() {
         
@@ -507,6 +530,22 @@ class AnchorDate {
         self.endDays = anchorEnd?["anchorDays"] as? Int ?? 0
         self.endTime = anchorEnd?["time"] as? String
         self.repeatInterval = anchorEnd?["repeatInterval"] as? Int ?? 0
+        
+        if let propertyMetadata = anchorDateDetail["propertyMetadata"] as? [String:Any] {
+            var ppMetadata = PPMetaData()
+            ppMetadata.dataSource = propertyMetadata["dataSource"] as? String ?? "Other"
+            ppMetadata.dateOfEntryId = propertyMetadata["dateOfEntryId"] as? String
+            ppMetadata.externalPropertyId = propertyMetadata["externalPropertyId"] as? String
+            ppMetadata.propertyId = propertyMetadata["propertyId"] as? String
+            ppMetadata.propertyDataFormat = propertyMetadata["propertyDataFormat"] as? String
+            ppMetadata.status = propertyMetadata["status"] as? String
+            ppMetadata.shouldRefresh = propertyMetadata["shouldRefresh"] as? Bool
+            ppMetadata.propertyType = propertyMetadata["propertyType"] as? String
+            
+            self.ppMetaData = ppMetadata
+            
+        }
+        
     
     }
     

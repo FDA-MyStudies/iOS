@@ -1,21 +1,21 @@
 /*
  License Agreement for FDA My Studies
-Copyright © 2017-2019 Harvard Pilgrim Health Care Institute (HPHCI) and its Contributors. Permission is
-hereby granted, free of charge, to any person obtaining a copy of this software and associated
-documentation files (the &quot;Software&quot;), to deal in the Software without restriction, including without
-limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the
-Software, and to permit persons to whom the Software is furnished to do so, subject to the following
-conditions:
-The above copyright notice and this permission notice shall be included in all copies or substantial
-portions of the Software.
-Funding Source: Food and Drug Administration (“Funding Agency”) effective 18 September 2014 as
-Contract no. HHSF22320140030I/HHSF22301006T (the “Prime Contract”).
-THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
-INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR
-PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
-LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT
-OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
-OTHER DEALINGS IN THE SOFTWARE.
+ Copyright © 2017-2019 Harvard Pilgrim Health Care Institute (HPHCI) and its Contributors. Permission is
+ hereby granted, free of charge, to any person obtaining a copy of this software and associated
+ documentation files (the &quot;Software&quot;), to deal in the Software without restriction, including without
+ limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the
+ Software, and to permit persons to whom the Software is furnished to do so, subject to the following
+ conditions:
+ The above copyright notice and this permission notice shall be included in all copies or substantial
+ portions of the Software.
+ Funding Source: Food and Drug Administration (“Funding Agency”) effective 18 September 2014 as
+ Contract no. HHSF22320140030I/HHSF22301006T (the “Prime Contract”).
+ THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
+ INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR
+ PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
+ LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT
+ OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
+ OTHER DEALINGS IN THE SOFTWARE.
  */
 
 import Foundation
@@ -37,13 +37,14 @@ class ResourcesViewController: UIViewController{
     var withdrawlInformationNotFound = false
     var shouldDeleteData: Bool? = false
     
-    var leaveStudy:String = "Leave Study"
-    var aboutTheStudy:String = "About the Study"
-    var consentPDF:String = "Consent PDF"
+    var leaveStudy: String = "Leave Study"
+    var aboutTheStudy: String = "About the Study"
+    var consentPDF: String = "Consent PDF"
     
     override var preferredStatusBarStyle: UIStatusBarStyle{
         return .default
     }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -64,7 +65,7 @@ class ResourcesViewController: UIViewController{
         
         if StudyUpdates.studyConsentUpdated {
             let appDelegate = (UIApplication.shared.delegate as? AppDelegate)!
-             appDelegate.checkConsentStatus(controller: self)
+            appDelegate.checkConsentStatus(controller: self)
         }
         
         
@@ -89,7 +90,7 @@ class ResourcesViewController: UIViewController{
             self.addHomeButton()
         }
         setNeedsStatusBarAppearanceUpdate()
-         //UIApplication.shared.statusBarStyle = .default
+        //UIApplication.shared.statusBarStyle = .default
         self.navigationController?.setNavigationBarHidden(false, animated: true)
         
         self.tabBarController?.tabBar.isHidden = false
@@ -113,7 +114,7 @@ class ResourcesViewController: UIViewController{
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-               
+        
     }
     
     func checkForResourceUpdate(){
@@ -128,15 +129,30 @@ class ResourcesViewController: UIViewController{
     func checkForInfoUpdate(){
         
         if StudyUpdates.studyInfoUpdated {
-             WCPServices().getStudyInformation(studyId: (Study.currentStudy?.studyId)!, delegate: self)
+            WCPServices().getStudyInformation(studyId: (Study.currentStudy?.studyId)!, delegate: self)
         }
     }
     
-    func updateAnchorDateLifeTime() {
+    final class func updateResourcesAnchorDateLifeTime(for study: Study, completion:(() -> Void)? = nil) {
         
-        AnchorDateHandler().fetchActivityAnchorDateForResourceFromLabkey { (status) in
-            if status {
-                self.loadResourceFromDatabase()
+        let groupQuery = DispatchGroup()
+        
+        groupQuery.enter()
+        AnchorDateHandler(study: study).queryAnchorDateForActivityResponseResources { (status) in
+            Logger.sharedInstance.info("AD for AR Resource fetch: ", status)
+            groupQuery.leave()
+        }
+        
+        groupQuery.enter()
+        AnchorDateHandler(study: study).queryParticipantPropertiesForResources { (status) in
+            Logger.sharedInstance.info("AD for PP Resource fetch: ", status)
+            groupQuery.leave()
+        }
+        
+        groupQuery.notify(queue: .main) {
+            completion?()
+            DispatchQueue.main.async {
+                 ResourcesViewController.scheduleNotificationForResources()
             }
         }
     }
@@ -152,13 +168,20 @@ class ResourcesViewController: UIViewController{
     
     func loadResourceFromDatabase() {
         
-        
-        DBHandler.loadResourcesForStudy(studyId: (Study.currentStudy?.studyId)!) { (resources) in
-            Study.currentStudy?.resources = resources
-            self.handleResourcesReponse()
-            self.updateAnchorDateLifeTime()
+        func updateResouceTable() {
+            DBHandler.loadResourcesForStudy(studyId: (Study.currentStudy?.studyId)!) { [unowned self] (resources) in
+                Study.currentStudy?.resources = resources
+                self.handleResourcesReponse()
+            }
         }
+        updateResouceTable() // Load form DB
         
+        // Update resouces in DB with Anchor Dates & load again.
+        if let study = Study.currentStudy {
+            ResourcesViewController.updateResourcesAnchorDateLifeTime(for: study) {
+                updateResouceTable()
+            }
+        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -206,13 +229,13 @@ class ResourcesViewController: UIViewController{
         }
         
         
-//        let plistPath = Bundle.main.path(forResource: "ResourcesUI", ofType: ".plist", inDirectory: nil)
-//
-//        let array = NSMutableArray(contentsOfFile: plistPath!) as [AnyObject]?
-//
-//        for title in array!{
-//            tableViewRowDetails?.append(title)
-//        }
+        //        let plistPath = Bundle.main.path(forResource: "ResourcesUI", ofType: ".plist", inDirectory: nil)
+        //
+        //        let array = NSMutableArray(contentsOfFile: plistPath!) as [AnyObject]?
+        //
+        //        for title in array!{
+        //            tableViewRowDetails?.append(title)
+        //        }
         
     }
     
@@ -220,7 +243,7 @@ class ResourcesViewController: UIViewController{
         
         //append Leave Study row
         //if (Study.currentStudy?.studySettings.rejoinStudyAfterWithdrawn)! != false {
-            tableViewRowDetails?.append(leaveStudy as AnyObject)
+        tableViewRowDetails?.append(leaveStudy as AnyObject)
         //}
     }
     
@@ -262,105 +285,8 @@ class ResourcesViewController: UIViewController{
             else {
                 tableViewRowDetails?.append(resource)
             }
-
+            
         }
-
-        
-        
-        //Add resources list
-//        for  resource in (Study.currentStudy?.resources)!{
-//
-//            if resource.povAvailable{
-//                //check for startDate and endDate
-//                if resource.startDate != nil && resource.endDate != nil {
-//
-//                    let start = resource.startDate?.startOfDay
-//                    let end = resource.endDate?.endOfDay
-//
-//                    let startDateResult = (start?.compare(todayDate))! as ComparisonResult
-//                    let endDateResult = (end?.compare(todayDate))! as ComparisonResult
-//
-//
-//                    if ((startDateResult == .orderedAscending || startDateResult == .orderedSame) && (endDateResult == .orderedDescending || endDateResult == .orderedSame)){
-//                        print("current")
-//
-//                        tableViewRowDetails?.append(resource)
-//
-//                    }
-//                } //check for anchorDate
-//                else if resource.anchorDateStartDays != nil && resource.anchorDateEndDays != nil {
-//
-//                    let anchorDateObject = Study.currentStudy?.anchorDate
-//                    if(anchorDateObject != nil && (anchorDateObject?.isAnchorDateAvailable())!) {
-//
-//
-//
-//                        let anchorDate = Study.currentStudy?.anchorDate?.date?.startOfDay
-//
-//                        if anchorDate != nil {
-//
-//                            //also anchor date condition
-//                            let startDateInterval = TimeInterval(60*60*24*(resource.anchorDateStartDays)!)
-//                            let endDateInterval = TimeInterval(60*60*24*(resource.anchorDateEndDays)!)
-//
-//                            let startAnchorDate = anchorDate?.addingTimeInterval(startDateInterval)
-//                            var endAnchorDate = anchorDate?.addingTimeInterval(endDateInterval)
-//
-//                            endAnchorDate = endAnchorDate?.endOfDay
-//                            let startDateResult = (startAnchorDate?.compare(todayDate))! as ComparisonResult
-//                            let endDateResult = (endAnchorDate?.compare(todayDate))! as ComparisonResult
-//
-//                            if ((startDateResult == .orderedAscending || startDateResult == .orderedSame) && (endDateResult == .orderedDescending || endDateResult == .orderedSame)){
-//
-//                                tableViewRowDetails?.append(resource)
-//
-//                            } else if startDateResult == .orderedDescending {
-//                                //upcoming
-//                                let notfiId = resource.resourcesId! + (Study.currentStudy?.studyId)!
-//                                DBHandler.isNotificationSetFor(notification: notfiId
-//                                    , completionHandler: { (found) in
-//                                        if !found {
-//
-//                                            let notification = AppLocalNotification()
-//                                            notification.id = resource.resourcesId! + (Study.currentStudy?.studyId)!
-//                                            notification.message = resource.notificationMessage
-//                                            notification.title = "New Resource Available"
-//                                            notification.startDate = startAnchorDate
-//                                            notification.endDate = endAnchorDate
-//                                            notification.type = AppNotification.NotificationType.Study
-//                                            notification.subType = AppNotification.NotificationSubType.Resource
-//                                            notification.audience = Audience.Limited
-//                                            notification.studyId = (Study.currentStudy?.studyId)!
-//                                            //notification.activityId = Study.currentActivity?.actvityId
-//
-//                                            DBHandler.saveLocalNotification(notification: notification)
-//
-//                                            //register notification
-//                                            var notificationDate = startAnchorDate?.startOfDay
-//                                            notificationDate = notificationDate?.addingTimeInterval(43200)
-//                                            let message = resource.notificationMessage
-//                                            let userInfo = ["studyId": (Study.currentStudy?.studyId)!,
-//                                                            "type": "resource"];
-//                                            LocalNotification.scheduleNotificationOn(date: notificationDate!, message: message!, userInfo: userInfo)
-//                                        }
-//                                })
-//
-//                            }
-//                        }
-//
-//                    } else {
-//                        tableViewRowDetails?.append(resource)
-//                    }
-//
-//                } else {
-//                    tableViewRowDetails?.append(resource)
-//                }
-//            } else {
-//                 tableViewRowDetails?.append(resource)
-//            }
-//
-//        }
-        
         
         tableView?.isHidden =  false
         tableView?.reloadData()
@@ -368,6 +294,54 @@ class ResourcesViewController: UIViewController{
         StudyUpdates.studyResourcesUpdated = false
         DBHandler.updateMetaDataToUpdateForStudy(study: Study.currentStudy!, updateDetails: nil)
     }
+    
+    
+    class func scheduleNotificationForResources(){
+        
+        guard let study = Study.currentStudy,
+            let resources = study.resources else {return}
+        
+        for resource in resources {
+            
+            if resource.povAvailable,
+                let startDate = resource.startDate,
+                let endDate = resource.endDate,
+                resource.availabilityType == .anchorDate {
+                
+                let notfiId = resource.resourcesId! + study.studyId
+                DBHandler.isNotificationSetFor(notification: notfiId
+                    , completionHandler: { (found) in
+                        if !found {
+                            
+                            let notification = AppLocalNotification()
+                            notification.id = notfiId
+                            notification.message = resource.notificationMessage
+                            notification.title = "New Resource Available"
+                            notification.startDate = startDate
+                            notification.endDate = endDate
+                            notification.type = AppNotification.NotificationType.Study
+                            notification.subType = AppNotification.NotificationSubType.Resource
+                            notification.audience = Audience.Limited
+                            notification.studyId = (Study.currentStudy?.studyId)!
+                            //notification.activityId = Study.currentActivity?.actvityId
+                            
+                            DBHandler.saveLocalNotification(notification: notification)
+                            
+                            //register notification
+//                            var notificationDate = startDate.startOfDay
+//                            notificationDate = notificationDate.addingTimeInterval(43200)
+                            let message = resource.notificationMessage
+                            let userInfo = ["studyId": study.studyId ?? "",
+                                            "type": "resource"] as JSONDictionary
+                            if startDate > Date() {
+                                 LocalNotification.scheduleNotificationOn(date: startDate, message: message!, userInfo: userInfo, id: notification.id)
+                            }
+                        }
+                })
+            }
+        }
+    }
+    
     
     func handleLeaveStudy() {
         
@@ -509,7 +483,7 @@ class ResourcesViewController: UIViewController{
         let fullPath = path + "/" + consentPath!
         
         guard let pdfData = FileDownloadManager.decrytFile(pathURL: URL(string: fullPath))
-          else {return}
+            else {return}
         
         var isPDF: Bool = false
         if pdfData.count >= 1024 { // only check if bigger
@@ -577,13 +551,13 @@ class ResourcesViewController: UIViewController{
             print("error writing to url \(String(describing: fullPath))")
             print(error.localizedDescription)
         }
-
+        
     }
     
     func withdrawalFromStudy(deleteResponse: Bool)  {
         //TBD: uncomment following for UAT
         let participantId = Study.currentStudy?.userParticipateState.participantId
-         LabKeyServices().withdrawFromStudy(studyId: (Study.currentStudy?.studyId)!, participantId: participantId!, deleteResponses: deleteResponse, delegate: self)
+        LabKeyServices().withdrawFromStudy(studyId: (Study.currentStudy?.studyId)!, participantId: participantId!, deleteResponses: deleteResponse, delegate: self)
         
         //UserServices().withdrawFromStudy(studyId: (Study.currentStudy?.studyId)!, shouldDeleteData: deleteResponse, delegate: self)
     }
@@ -720,13 +694,13 @@ extension ResourcesViewController: UITableViewDelegate{
             } else if  (resource as? String)! == aboutTheStudy {
                 
                 self.checkDatabaseForStudyInfo(study: Study.currentStudy!)
-
+                
             } else if  (resource as? String)! == consentPDF {
                 
                 //PENDING
                 
                 if  Study.currentStudy?.signedConsentFilePath != nil {
-                
+                    
                     self.pushToResourceDetails()
                 } else {
                     
@@ -770,7 +744,7 @@ extension ResourcesViewController: NMWebServiceDelegate {
                     handleResponseForWithdraw(response: response)
                 }
             } else {
-               UserServices().deActivateAccount(listOfStudyIds: [Study.currentStudy?.studyId ?? ""], delegate: self)
+                UserServices().deActivateAccount(listOfStudyIds: [Study.currentStudy?.studyId ?? ""], delegate: self)
             }
             
         case RegistrationMethods.deactivate.method.methodName :
@@ -810,15 +784,15 @@ extension ResourcesViewController: NMWebServiceDelegate {
             break
             
         }
-     
+        
         
     }
     func failedRequest(_ manager: NetworkManager, requestName: NSString, error: NSError) {
         Logger.sharedInstance.info("requestname : \(requestName)")
-       
+        
         
         if error.code == 403 { //unauthorized
-             self.removeProgressIndicator()
+            self.removeProgressIndicator()
             UIUtilities.showAlertMessageWithActionHandler(kErrorTitle, message: error.localizedDescription, buttonTitle: kTitleOk, viewControllerUsed: self, action: {
                 self.fdaSlideMenuController()?.navigateToHomeAfterUnauthorizedAccess()
             })
@@ -826,7 +800,7 @@ extension ResourcesViewController: NMWebServiceDelegate {
             
             if requestName as String == WCPMethods.resources.method.methodName {
                 
-                 self.removeProgressIndicator()
+                self.removeProgressIndicator()
                 tableViewRowDetails = []
                 self.addDefaultList()
                 self.appendLeaveStudy()
@@ -842,7 +816,7 @@ extension ResourcesViewController: NMWebServiceDelegate {
                     UserServices().withdrawFromStudy(studyId: (Study.currentStudy?.studyId)!, shouldDeleteData: self.shouldDeleteData!
                         , delegate: self)
                 } else {
-                   self.removeProgressIndicator()
+                    self.removeProgressIndicator()
                     UIUtilities.showAlertWithTitleAndMessage(title: NSLocalizedString(kErrorTitle, comment: "") as NSString, message: error.localizedDescription as NSString)
                 }
             } else {

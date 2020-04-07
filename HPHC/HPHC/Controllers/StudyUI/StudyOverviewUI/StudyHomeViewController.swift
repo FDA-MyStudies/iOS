@@ -1135,8 +1135,11 @@ extension StudyHomeViewController: ORKTaskViewControllerDelegate {
                     ttController.step = step
                     ttController.consentDocument = documentCopy
                     
-                    //start enrollment process
-                    if Study.currentStudy?.userParticipateState.status == UserStudyStatus.StudyStatus.yetToJoin {
+                    let currentStatus = Study.currentStudy?.userParticipateState.status
+                    if  currentStatus == .yetToJoin
+                      || currentStatus == .notEligible
+                      || (currentStatus == .Withdrawn
+                      && Study.currentStudy?.studySettings.rejoinStudyAfterWithdrawn ?? false)  {
                         DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                             self.studyEnrollmentStarted(taskViewController: taskViewController)
                         }

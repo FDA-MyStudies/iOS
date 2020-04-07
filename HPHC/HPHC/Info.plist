@@ -52,13 +52,13 @@
 	<key>NSFaceIDUsageDescription</key>
 	<string>$(PRODUCT_NAME) would like to use Face ID for passcode setup.</string>
 	<key>NSHealthShareUsageDescription</key>
-	<string>$(PRODUCT_NAME) would like to access your Health App data</string>
+	<string>$(PRODUCT_NAME) would like to access your Health App data.</string>
 	<key>NSHealthUpdateUsageDescription</key>
-	<string>$(PRODUCT_NAME) would like to update your Health App data</string>
+	<string>$(PRODUCT_NAME) would like to update your Health App data.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>$(PRODUCT_NAME) would like to access your Location when using the app</string>
 	<key>NSMicrophoneUsageDescription</key>
-	<string>$(PRODUCT_NAME) would like to access your michrophone</string>
+	<string>$(PRODUCT_NAME) would like to access your microphone</string>
 	<key>NSMotionUsageDescription</key>
 	<string>$(PRODUCT_NAME) would like to use Motion data</string>
 	<key>NSSpeechRecognitionUsageDescription</key>

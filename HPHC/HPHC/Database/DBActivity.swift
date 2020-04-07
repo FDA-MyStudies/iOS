@@ -48,21 +48,34 @@ class DBActivity: Object {
     @objc dynamic var currentRunId: String?
     @objc dynamic var participationStatus: Int = 0
     @objc dynamic var completedRuns: Int = 0
-    
     @objc dynamic var sourceType:String?
     @objc dynamic var sourceActivityId:String?
     @objc dynamic var sourceKey:String?
     @objc dynamic var sourceFormKey:String?
-    @objc dynamic var startDays:Int = 0
-    @objc dynamic var startTime:String?
-    @objc dynamic var endDays:Int = 0
-    @objc dynamic var repeatInterval:Int = 0
-    @objc dynamic var endTime:String?
+    @objc dynamic var startDays: Int = 0
+    @objc dynamic var startTime: String?
+    @objc dynamic var endDays: Int = 0
+    @objc dynamic var repeatInterval: Int = 0
+    @objc dynamic var endTime: String?
+    @objc dynamic var propertyId: String!
+    @objc dynamic var propertyType:String!
+    @objc dynamic var propertyDataFormat:String!
+    @objc dynamic var shouldRefresh: Bool = false
+    @objc dynamic var dataSource:String!
+    @objc dynamic var status:String!
+    @objc dynamic var externalPropertyId:String!
+    @objc dynamic var externalPropertyValue:String!
+    @objc dynamic var dateOfEntryId:String!
+    @objc dynamic var dateOfEntryValue:String!
     @objc dynamic var anchorDateValue:Date?
-  
+    @objc dynamic var addNewCustomRuns: Bool = false
     @objc dynamic var taskSubType: String?
   
     var activityRuns = List<DBActivityRun>()
+    
+    var hasAnchorDate: Bool {
+        return anchorDateValue != nil
+    }
     
     override static func primaryKey() -> String? {
         return "id"
@@ -88,7 +101,7 @@ class DBActivityRun: Object {
     @objc dynamic  var restortionData: Data?
     @objc dynamic  var toBeSynced: Bool = false
     @objc dynamic  var responseData: Data?
-    
+ 
 }
 
 

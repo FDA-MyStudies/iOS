@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "A4ED113D38492F631BC6DBF8BB3D1D8E"
-               BuildableName = "libURITemplate.a"
-               BlueprintName = "URITemplate"
+               BlueprintIdentifier = "ED59832FEC00583A30616F320E87DA3F"
+               BuildableName = "Pods_HPHC_Demo.framework"
+               BlueprintName = "Pods-HPHC Demo"
                ReferencedContainer = "container:Pods.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -47,6 +47,15 @@
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
       debugDocumentVersioning = "YES">
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "ED59832FEC00583A30616F320E87DA3F"
+            BuildableName = "Pods_HPHC_Demo.framework"
+            BlueprintName = "Pods-HPHC Demo"
+            ReferencedContainer = "container:Pods.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">

@@ -133,7 +133,7 @@ class StudyDashboardViewController: UIViewController{
     
     func getDataKeysForCurrentStudy() {
         
-        DBHandler.getDataSourceKeyForActivity(studyId: (Study.currentStudy?.studyId)!) { (activityKeys) in
+        DBHandler.getDataSourceKeyForActivity(studyId: Study.currentStudy?.studyId ?? "") { (activityKeys) in
             print(activityKeys)
             if activityKeys.count > 0 {
                 self.dataSourceKeysForLabkey = activityKeys

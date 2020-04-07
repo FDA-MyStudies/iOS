@@ -154,7 +154,7 @@ class DBStatisticsData: Object {
     @objc dynamic var fkDuration: Int = 0
 }
 
-class DBResources:Object {
+class DBResources: Object {
     
     @objc dynamic  var studyId: String?
     @objc dynamic  var level: String?
@@ -180,6 +180,8 @@ class DBResources:Object {
     
     @objc dynamic  var startTime: String?
     @objc dynamic  var endTime: String?
+    
+    @objc dynamic var participantMetaData: DBParticipantPropertyMetadata?
     
     override static func primaryKey() -> String? {
         return "resourceId"

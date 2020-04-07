@@ -367,6 +367,19 @@ class UserServices: NSObject {
         
         self.sendRequestWith(method: method, params: params, headers: headerParams)
     }
+  
+  func updateActivityWithParticipantPropertyDetail(studyId: String, activities: [[String:Any]], delegate: NMWebServiceDelegate){
+      
+      self.delegate = delegate
+      
+      let user = User.currentUser
+      let headerParams = [kUserId: user.userId] as Dictionary<String, String>
+      let params = [kStudyId: studyId,
+                    kActivity: activities] as [String: Any]
+      let method = RegistrationMethods.updateActivityState.method
+     //TODO: Uncomment this and verify the params as API failing.
+      self.sendRequestWith(method: method, params: params, headers: headerParams)
+  }
     
     func updateStudyBookmarkStatus(studyStauts: UserStudyStatus , delegate: NMWebServiceDelegate){
         self.delegate = delegate
@@ -692,7 +705,29 @@ class UserServices: NSObject {
     }
     func handleGetActivityStatesResponse(response: Dictionary<String, Any>){
         let user = User.currentUser
-        //activities
+        //Activity_Metadata_Other
+        
+        //Comment out when done
+//        let filePath  = Bundle.main.path(forResource: "Activity_Metadata_Other", ofType: "json")
+//        let data = NSData(contentsOfFile: filePath!)
+//
+//        do {
+//            let res = try JSONSerialization.jsonObject(with: data! as Data, options: []) as? Dictionary<String,Any>
+//
+//            if let activites = res![kActivites]  as? Array<Dictionary<String, Any>> {
+//                if Study.currentStudy != nil {
+//                    for activity in activites {
+//                        let participatedActivity = UserActivityStatus(detail: activity,studyId:(Study.currentStudy?.studyId)!)
+//                        user.participatedActivites.append(participatedActivity)
+//                    }
+//                }
+//            }
+//        }
+//        catch {
+//            print("json error: \(error.localizedDescription)")
+//        }
+        
+        //Acutal Code : activities
         if let activites = response[kActivites]  as? Array<Dictionary<String, Any>> {
             if Study.currentStudy != nil {
                 for activity in activites {

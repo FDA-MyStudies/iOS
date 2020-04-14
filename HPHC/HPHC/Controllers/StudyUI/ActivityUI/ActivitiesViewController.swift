@@ -186,10 +186,10 @@ class ActivitiesViewController : UIViewController{
                 let index = activities.index(where: {$0.actvityId == activityId})
                 
                 if let index = index {
-                let ip = IndexPath.init(row: index, section: 0)
-                self.selectedIndexPath = ip
-                self.tableView?.selectRow(at: ip, animated: true, scrollPosition: .middle)
-                self.tableView?.delegate?.tableView!(self.tableView!, didSelectRowAt: ip)
+                    let ip = IndexPath.init(row: index, section: 0)
+                    self.selectedIndexPath = ip
+                    self.tableView?.selectRow(at: ip, animated: true, scrollPosition: .middle)
+                    self.tableView?.delegate?.tableView!(self.tableView!, didSelectRowAt: ip)
                 }
                 else {
                     if let studyId = NotificationHandler.instance.studyId, let activityIdRemove = NotificationHandler.instance.activityId  {
@@ -199,7 +199,7 @@ class ActivitiesViewController : UIViewController{
                     
                 }
                 NotificationHandler.instance.activityId = ""
-                    
+                
             }
         }
     }
@@ -476,11 +476,11 @@ class ActivitiesViewController : UIViewController{
         tableViewSections = []
         allActivityList = []
         let activities = Study.currentStudy?.activities
-        var bufCurrentStudyArray: Array<Activity>! = []
+        var bufCurrentStudyArray: [Activity] = []
         
-        var currentActivities: Array<Activity> = []
-        var upcomingActivities: Array<Activity> = []
-        var pastActivities: Array<Activity> = []
+        var currentActivities: [Activity] = []
+        var upcomingActivities: [Activity] = []
+        var pastActivities: [Activity] = []
         
         var isInActiveActivitiesAreAvailable: Bool! = false
         for activity in activities! {
@@ -569,7 +569,8 @@ class ActivitiesViewController : UIViewController{
      Used to update Activity Run Status
      @param status    Accepts data from UserActivityStatus class and ActivityStatus enum
      */
-    func updateActivityRunStuatus(status: UserActivityStatus.ActivityStatus){
+    @discardableResult
+    func updateActivityRunStatus(status: UserActivityStatus.ActivityStatus) -> Bool{
         
         let activity = Study.currentActivity!
         
@@ -585,10 +586,10 @@ class ActivitiesViewController : UIViewController{
         //Update participationStatus to DB
         DBHandler.updateActivityParticipationStatus(activity: activity)
         
-        if status == .completed {
+        if status == .completed && activity.frequencyType != .Ongoing {
             self.updateCompletionAdherence()
         }
-        
+        return true
     }
     
     /**
@@ -608,12 +609,14 @@ class ActivitiesViewController : UIViewController{
         
         //Calculate Runs
         for activity in activities! {
+            if activity.frequencyType == .Ongoing {
+                continue // No need to consider Ongoing activity completion.
+            }
             totalRuns += activity.totalRuns
             totalIncompletedRuns += activity.incompletedRuns
             totalCompletedRuns += activity.compeltedRuns
             
         }
-        
         
         Study.currentStudy?.totalCompleteRuns = totalCompletedRuns
         Study.currentStudy?.totalIncompleteRuns = totalIncompletedRuns
@@ -688,7 +691,7 @@ class ActivitiesViewController : UIViewController{
      Used to update Activity Status To InProgress
      */
     func updateActivityStatusToInProgress(){
-        self.updateActivityRunStuatus(status: .inProgress)
+        self.updateActivityRunStatus(status: .inProgress)
     }
     
     
@@ -696,16 +699,36 @@ class ActivitiesViewController : UIViewController{
      Used to update Activity Status To Complete
      */
     func updateActivityStatusToComplete(){
-        self.updateActivityRunStuatus(status: .completed)
+        self.updateActivityRunStatus(status: .completed)
     }
     
     //save completed staus in database
     func updateRunStatusToComplete(){
         
-        let activity = Study.currentActivity!
-        activity.compeltedRuns += 1
-        DBHandler.updateRunToComplete(runId: activity.currentRunId, activityId: activity.actvityId!, studyId: activity.studyId!)
-        self.updateActivityStatusToComplete()
+        guard let currentActivity = Study.currentActivity else {return}
+        currentActivity.compeltedRuns += 1
+        
+        if currentActivity.frequencyType != .Ongoing {
+            DBHandler.updateRunToComplete(runId: currentActivity.currentRunId,
+                                          activityId: currentActivity.actvityId!,
+                                          studyId: currentActivity.studyId!)
+            self.updateActivityStatusToComplete()
+        } else {
+            // Everytime user completed the ongoing run, increase it's total runs.
+            currentActivity.totalRuns += 1
+            if self.updateActivityRunStatus(status: .yetToJoin) {
+                if let updatedRun = DBHandler.updateOngoingRunOnComplete(with: currentActivity.currentRunId,
+                activityId: currentActivity.actvityId!,
+                studyId: currentActivity.studyId!) {
+                    currentActivity.currentRun = updatedRun
+                    currentActivity.currentRunId = updatedRun.runId
+                }
+            }
+            // Schedule another run
+        }
+        DispatchQueue.main.async {
+            self.loadActivitiesFromDatabase()
+        }
     }
     
     /**
@@ -894,7 +917,9 @@ extension ActivitiesViewController: UITableViewDelegate{
             if activity.currentRun != nil {
                 if activity.userParticipationStatus != nil {
                     let activityRunParticipationStatus = activity.userParticipationStatus
-                    if activityRunParticipationStatus?.status == .yetToJoin || activityRunParticipationStatus?.status == .inProgress
+                    if activityRunParticipationStatus?.status == .yetToJoin
+                        || activityRunParticipationStatus?.status == .inProgress
+                        || activityRunParticipationStatus?.status == .completed
                         
                     {
                         Study.updateCurrentActivity(activity: activities[indexPath.row])
@@ -1078,41 +1103,13 @@ extension ActivitiesViewController: NMWebServiceDelegate {
             UIUtilities.showAlertMessageWithActionHandler(kErrorTitle, message: error.localizedDescription, buttonTitle: kTitleOk, viewControllerUsed: self, action: {
                 self.fdaSlideMenuController()?.navigateToHomeAfterUnauthorizedAccess()
             })
-        } else {
-            if requestName as String == RegistrationMethods.activityState.method.methodName {
-                //self.sendRequesToGetActivityList()
-                if (error.code != NoNetworkErrorCode) {
-                    self.loadActivitiesFromDatabase()
-                } else {
-                    
-                    self.tableView?.isHidden = true
-                    self.labelNoNetworkAvailable?.isHidden = false
-                    
-                    UIUtilities.showAlertWithTitleAndMessage(title: NSLocalizedString(kErrorTitle, comment: "") as NSString, message: error.localizedDescription as NSString)
-                }
-            } else if requestName as String == ResponseMethods.processResponse.method.methodName {
-                
-                if (error.code == NoNetworkErrorCode) {
-                    //Users are notified when their responses don’t get submitted due to network issues and are notified that the responses will be automatically submitted once the app has network available again.
-                    //                UIUtilities.showAlertWithMessage(alertMessage: "Your responses don’t get submitted due to network issue, but we have saved it locally, we will automatically submit once the app has network available again.")
-                    //
-                    //                if error.code == CouldNotConnectToServerCode {
-                    //                    UIUtilities.showAlertWithMessage(alertMessage: "Your responses don’t get submitted due to connectiviy with our server, but we have saved it locally, we will automatically submit once the app has network available again.")
-                    //                }
-                    //let data = ActivityBuilder.currentActivityBuilder.actvityResult?.getResultDictionary()
-                    //DBHandler.saveResponseDataFor(activity: Study.currentActivity!, toBeSynced: true, data: data!)
-                    
-                }
-                
-            }
-            else if requestName as String == RegistrationMethods.updateStudyState.method.methodName {
-                
-            }
-            else {
-                if error.code != 300 {
-                    UIUtilities.showAlertWithTitleAndMessage(title: NSLocalizedString(kErrorTitle, comment: "") as NSString, message: error.localizedDescription as NSString)
-                }
-                
+        } else if requestName as String == RegistrationMethods.activityState.method.methodName {
+            //self.sendRequesToGetActivityList()
+            if (error.code != NoNetworkErrorCode) {
+                self.loadActivitiesFromDatabase()
+            } else {
+                self.tableView?.isHidden = true
+                self.labelNoNetworkAvailable?.isHidden = false
             }
         }
     }
@@ -1764,10 +1761,9 @@ class ResponseDataFetch: NMWebServiceDelegate{
         
     }
     func failedRequest(_ manager: NetworkManager, requestName: NSString, error: NSError) {
-        Logger.sharedInstance.info("requestname : \(requestName)")
+        Logger.sharedInstance.info("failed requestname : \(requestName)")
         if requestName as String == ResponseMethods.executeSQL.description {
             self.handleExecuteSQLResponse()
-            
         } else {
             //Do Nothing
         }

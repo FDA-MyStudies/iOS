@@ -94,7 +94,7 @@ class DashboardStatistics {
                 self.title = detail["title"] as? String
             }
             else {
-                self.title = "123"
+                self.title = ""
             }
             if Utilities.isValidValue(someObject: detail["displayName"] as AnyObject ){
                 self.displayName = detail["displayName"] as? String

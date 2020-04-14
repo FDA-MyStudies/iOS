@@ -703,7 +703,7 @@ class UserServices: NSObject {
             }
         }
     }
-    func handleGetActivityStatesResponse(response: Dictionary<String, Any>){
+    func handleGetActivityStatesResponse(response: JSONDictionary){
         let user = User.currentUser
         //Activity_Metadata_Other
         

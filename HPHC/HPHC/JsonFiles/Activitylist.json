@@ -1,110 +1,360 @@
 {
-    "message": "SUCCESS",
-    "activities": [{
-            "activityId": "activetaskdaily",
+    "message":"SUCCESS",
+    "activities":[
+        {
+            "activityId": "zxc",
             "activityVersion": "1.0",
-            "title": "activetaskdailytitle",
-            "type": "task",
-            "startTime": "",
+            "title": "zxc",
+            "type": "questionnaire",
+            "startTime": "2020-03-12T00:00:00.000-0700",
             "endTime": "",
             "branching": false,
-            "lastModified": "2019-03-27T11:26:34.000+0530",
+            "lastModified": "2020-03-12T06:55:19.000-0700",
             "state": "active",
-            "taskSubType": "fetalKickCounter",
-            "schedulingType": "AnchorDate",
+            "taskSubType": "",
+            "schedulingType": "Regular",
             "anchorDate": {
-                "sourceType": "ParticipantProperty",
-                "sourceActivityId": "anchornameTitle",
-                "sourceKey": "anchornamequest",
+                "sourceType": "",
+                "sourceActivityId": "",
+                "sourceKey": "",
                 "sourceFormKey": "",
                 "propertyMetadata": {
-                    "propertyId": "appointmentDate",
-                    "propertyType": "PostEnrollment",
-                    "propertyDataFormat": "date",
-                    "shouldRefresh": true,
-                    "dataSource": "ExternalSystem",
-                    "status": "active",
-                    "externalPropertyId": "appointmentDateExternalId",
-                    "dateOfEntryId": "appointmentDateDateOfEntry"
+                    "propertyId": "",
+                    "propertyType": "",
+                    "propertyDataFormat": "",
+                    "shouldRefresh": false,
+                    "dataSource": "",
+                    "status": "",
+                    "externalPropertyId": "",
+                    "dateOfEntryId": ""
                 },
-
                 "start": {
                     "anchorDays": 0,
                     "dayOfWeek": 0,
                     "dateOfMonth": "",
-                    "time": "06:25:00"
+                    "time": ""
                 },
                 "end": {
                     "anchorDays": 0,
-                    "repeatInterval": 4,
-                    "time": "23:59:59"
+                    "repeatInterval": 0,
+                    "time": ""
                 }
             },
             "frequency": {
-                "type": "Daily",
-                "runs": [{
-                    "startTime": "06:25:00",
-                    "endTime": "23:59:59"
-                }],
+                "type": "One time",
+                "addNewRuns": false,
+                "runs": [],
                 "anchorRuns": []
             }
         },
         {
-            "activityId": "activetaskmanual",
+            "activityId": "check_response",
             "activityVersion": "1.0",
-            "title": "activetaskmanualtitle",
-            "type": "task",
-            "startTime": "",
-            "endTime": "",
+            "title": "check_response",
+            "type": "questionnaire",
+            "startTime": "2020-03-04T19:34:00.000-0800",
+            "endTime": "2020-03-12T06:55:19.000-0700",
             "branching": false,
-            "lastModified": "2019-03-27T11:30:50.000+0530",
-            "state": "active",
-            "taskSubType": "fetalKickCounter",
-            "schedulingType": "AnchorDate",
+            "lastModified": "2020-03-12T06:55:19.000-0700",
+            "state": "deleted",
+            "taskSubType": "",
+            "schedulingType": "Regular",
             "anchorDate": {
-                "sourceType": "ParticipantProperty",
-                "sourceActivityId": "anchornameTitle",
-                "sourceKey": "anchornamequest",
-                "propertyMetadata": {
-                    "propertyId": "makingDate",
-                    "propertyType": "PostEnrollment",
-                    "propertyDataFormat": "date",
-                    "shouldRefresh": true,
-                    "dataSource": "ExternalSystem",
-                    "status": "active",
-                    "externalPropertyId": "makingDateExternalId",
-                    "dateOfEntryId": "makingDateDateOfEntry"
-                },
+                "sourceType": "",
+                "sourceActivityId": "",
+                "sourceKey": "",
                 "sourceFormKey": "",
+                "propertyMetadata": {
+                    "propertyId": "",
+                    "propertyType": "",
+                    "propertyDataFormat": "",
+                    "shouldRefresh": false,
+                    "dataSource": "",
+                    "status": "",
+                    "externalPropertyId": "",
+                    "dateOfEntryId": ""
+                },
                 "start": {
-                    "anchorDays": 2,
+                    "anchorDays": 0,
                     "dayOfWeek": 0,
                     "dateOfMonth": "",
-                    "time": "05:30:00"
+                    "time": ""
                 },
                 "end": {
-                    "anchorDays": 8,
+                    "anchorDays": 0,
                     "repeatInterval": 0,
-                    "time": "05:30:00"
+                    "time": ""
+                }
+            },
+            "frequency": {
+                "type": "Daily",
+                "addNewRuns": false,
+                "runs": [
+                    {
+                        "startTime": "19:34:00",
+                        "endTime": "23:59:59"
+                    }
+                ],
+                "anchorRuns": []
+            }
+        },
+        {
+            "activityId": "23326",
+            "activityVersion": "1.0",
+            "title": "23326",
+            "type": "questionnaire",
+            "startTime": "2020-01-19T00:00:00.000-0800",
+            "endTime": "",
+            "branching": false,
+            "lastModified": "2020-01-19T22:11:19.000-0800",
+            "state": "active",
+            "taskSubType": "",
+            "schedulingType": "Regular",
+            "anchorDate": {
+                "sourceType": "",
+                "sourceActivityId": "",
+                "sourceKey": "",
+                "sourceFormKey": "",
+                "propertyMetadata": {
+                    "propertyId": "",
+                    "propertyType": "",
+                    "propertyDataFormat": "",
+                    "shouldRefresh": false,
+                    "dataSource": "",
+                    "status": "",
+                    "externalPropertyId": "",
+                    "dateOfEntryId": ""
+                },
+                "start": {
+                    "anchorDays": 0,
+                    "dayOfWeek": 0,
+                    "dateOfMonth": "",
+                    "time": ""
+                },
+                "end": {
+                    "anchorDays": 0,
+                    "repeatInterval": 0,
+                    "time": ""
+                }
+            },
+            "frequency": {
+                "type": "One time",
+                "addNewRuns": false,
+                "runs": [],
+                "anchorRuns": []
+            }
+        },
+        {
+            "activityId": "qwes",
+            "activityVersion": "1.0",
+            "title": "Form Step22",
+            "type": "questionnaire",
+            "startTime": "2020-01-15T00:00:00.000-0800",
+            "endTime": "",
+            "branching": false,
+            "lastModified": "2020-01-15T23:53:21.000-0800",
+            "state": "active",
+            "taskSubType": "",
+            "schedulingType": "Regular",
+            "anchorDate": {
+                "sourceType": "",
+                "sourceActivityId": "",
+                "sourceKey": "",
+                "sourceFormKey": "",
+                "propertyMetadata": {
+                    "propertyId": "",
+                    "propertyType": "",
+                    "propertyDataFormat": "",
+                    "shouldRefresh": false,
+                    "dataSource": "",
+                    "status": "",
+                    "externalPropertyId": "",
+                    "dateOfEntryId": ""
+                },
+                "start": {
+                    "anchorDays": 0,
+                    "dayOfWeek": 0,
+                    "dateOfMonth": "",
+                    "time": ""
+                },
+                "end": {
+                    "anchorDays": 0,
+                    "repeatInterval": 0,
+                    "time": ""
+                }
+            },
+            "frequency": {
+                "type": "One time",
+                "addNewRuns": false,
+                "runs": [],
+                "anchorRuns": []
+            }
+        },
+        {
+            "activityId": "Custom0901",
+            "activityVersion": "1.0",
+            "title": "Custom Scehdule",
+            "type": "questionnaire",
+            "startTime": "2020-01-09T18:38:00.000-0800",
+            "endTime": "2020-01-17T19:38:00.000-0800",
+            "branching": false,
+            "lastModified": "2020-01-09T05:12:36.000-0800",
+            "state": "active",
+            "taskSubType": "",
+            "schedulingType": "Regular",
+            "anchorDate": {
+                "sourceType": "",
+                "sourceActivityId": "",
+                "sourceKey": "",
+                "sourceFormKey": "",
+                "propertyMetadata": {
+                    "propertyId": "",
+                    "propertyType": "",
+                    "propertyDataFormat": "",
+                    "shouldRefresh": false,
+                    "dataSource": "",
+                    "status": "",
+                    "externalPropertyId": "",
+                    "dateOfEntryId": ""
+                },
+                "start": {
+                    "anchorDays": 0,
+                    "dayOfWeek": 0,
+                    "dateOfMonth": "",
+                    "time": ""
+                },
+                "end": {
+                    "anchorDays": 0,
+                    "repeatInterval": 0,
+                    "time": ""
                 }
             },
             "frequency": {
                 "type": "Manually Schedule",
-                "addNewRuns": true,
-                "runs": [{
-                        "startTime": "",
-                        "endTime": ""
+                "addNewRuns": false,
+                "runs": [
+                    {
+                        "startTime": "2020-01-09T19:38:00.000-0800",
+                        "endTime": "2020-01-14T19:38:00.000-0800"
                     },
                     {
-                        "startTime": "",
-                        "endTime": ""
+                        "startTime": "2020-01-15T18:38:00.000-0800",
+                        "endTime": "2020-01-17T18:38:00.000-0800"
                     }
                 ],
-                "anchorRuns": [{
-                        "startDays": 2,
-                        "endDays": 5,
-                        "time": "05:30:00"
+                "anchorRuns": []
+            }
+        },
+        {
+            "activityId": "weeklyTest01",
+            "activityVersion": "1.0",
+            "title": "Chart-Stat-Question",
+            "type": "questionnaire",
+            "startTime": "2020-04-09T13:55:00.000-0700",
+            "endTime": "2020-04-13T23:59:59.000-0700",
+            "branching": false,
+            "lastModified": "2020-04-09T01:23:06.000-0700",
+            "state": "active",
+            "taskSubType": "",
+            "schedulingType": "Regular",
+            "anchorDate": {
+                "sourceType": "",
+                "sourceActivityId": "",
+                "sourceKey": "",
+                "sourceFormKey": "",
+                "propertyMetadata": {
+                    "propertyId": "",
+                    "propertyType": "",
+                    "propertyDataFormat": "",
+                    "shouldRefresh": false,
+                    "dataSource": "",
+                    "status": "",
+                    "externalPropertyId": "",
+                    "dateOfEntryId": ""
+                },
+                "start": {
+                    "anchorDays": 0,
+                    "dayOfWeek": 0,
+                    "dateOfMonth": "",
+                    "time": ""
+                },
+                "end": {
+                    "anchorDays": 0,
+                    "repeatInterval": 0,
+                    "time": ""
+                }
+            },
+            "frequency": {
+                "type": "Daily",
+                "addNewRuns": false,
+                "runs": [
+                    {
+                        "startTime": "14:45:00",
+                        "endTime": "14:50:59"
+                    },
+                    {
+                        "startTime": "14:52:00",
+                        "endTime": "14:58:59"
+                    },
+                    {
+                        "startTime": "15:05:00",
+                        "endTime": "15:10:59"
+                    },
+                    {
+                        "startTime": "15:12:00",
+                        "endTime": "23:59:59"
                     }
+                ],
+                "anchorRuns": []
+            }
+        },
+        {
+            "activityId":"test_PP_manual",
+            "activityVersion":"1.0",
+            "title":"Form Step",
+            "type":"questionnaire",
+            "startTime":"",
+            "endTime":"",
+            "branching":false,
+            "lastModified":"2019-11-24T23:37:30.000-0800",
+            "state":"active",
+            "taskSubType":"",
+            "schedulingType":"Regular",
+            "anchorDate":{
+                "sourceType":"",
+                "sourceActivityId":"",
+                "sourceKey":"",
+                "sourceFormKey":"",
+                "propertyMetadata":{
+                    "propertyId":"",
+                    "propertyType":"",
+                    "propertyDataFormat":"",
+                    "shouldRefresh":false,
+                    "dataSource":"",
+                    "status":"",
+                    "externalPropertyId":"",
+                    "dateOfEntryId":""
+                },
+                "start":{
+                    "anchorDays":0,
+                    "dayOfWeek":0,
+                    "dateOfMonth":"",
+                    "time":""
+                },
+                "end":{
+                    "anchorDays":0,
+                    "repeatInterval":0,
+                    "time":""
+                }
+            },
+            "frequency":{
+                "type":"OnGoing",
+                "addNewRuns":false,
+                "runs":[
+                    
+                ],
+                "anchorRuns":[
+                    
                 ]
             }
         }

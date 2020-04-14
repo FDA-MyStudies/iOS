@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "2264F692AD3F85862EB821B14108FAC0"
-               BuildableName = "libPods-HPHCTests.a"
-               BlueprintName = "Pods-HPHCTests"
+               BlueprintIdentifier = "CB3F420F551728E581C8F593B1C5AF39"
+               BuildableName = "Pods_HPHC_QA.framework"
+               BlueprintName = "Pods-HPHC QA"
                ReferencedContainer = "container:Pods.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>

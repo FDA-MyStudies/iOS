@@ -27,7 +27,7 @@ class DBHandler: NSObject {
         let key = FDAKeychain.shared[kRealmEncryptionKeychainKey]
         let data = Data.init(base64Encoded: key!)
         let encryptionConfig = Realm.Configuration(encryptionKey: data)
-        return try! Realm(configuration: encryptionConfig)
+        return try! Realm()
     }()
     
     fileprivate class func getRealmObject() -> Realm? {
@@ -816,6 +816,8 @@ class DBHandler: NSObject {
                                                 dateOfEntryValue: dateOfEntryValue,
                                                 frequency: frequency)
             break
+        default:
+            return
         }
         
         let realm = getRealmObject()
@@ -1081,8 +1083,9 @@ class DBHandler: NSObject {
             
             startDate = date.addingTimeInterval(startDateInterval)
             endDate = date.addingTimeInterval(endDateInterval)
-            break
-            
+        case .Ongoing:
+            startDate = Date() // TODO :- test ongoing
+            endDate = nil
         }
         
         return (startDate,endDate)
@@ -1129,14 +1132,16 @@ class DBHandler: NSObject {
         
         let realm = DBHandler.getRealmObject()!
         //let dbActivities = realm.objects(DBActivity.self).filter("studyId == %@",studyId)
-        let dbActivities = realm.objects(DBActivity.self).filter({$0.studyId == studyId && $0.startDate != nil})
-        
+//        let dbActivities = realm.objects(DBActivity.self).filter({$0.studyId == studyId && $0.startDate != nil})
+        let dbActivities = realm.objects(DBActivity.self)
+            .filter{($0.studyId == studyId && $0.startDate != nil)
+                || ($0.studyId == studyId && $0.frequencyType == Frequency.Ongoing.rawValue)}
+    
         let date = DBHandler.getCurrentDateWithTimeDifference()
         var activities: [Activity] = []
         for dbActivity in dbActivities {
             let activity = DBHandler.getActivityFromDBActivity(dbActivity,runDate: date)
             if activity.schedulingType == .anchorDate && activity.anchorDate?.anchorDateValue == nil {
-                print(activity.schedulingType,  activity.anchorDate?.anchorDateValue)
                 continue  // If anchor date is yet to be updated, no need to show those activities.
             } else {
                 activities.append(activity)
@@ -1168,6 +1173,9 @@ class DBHandler: NSObject {
         activity.endDate    = dbActivity.endDate
         activity.type       = ActivityType(rawValue: dbActivity.type!)
         activity.frequencyType = Frequency(rawValue: dbActivity.frequencyType!)!
+        if activity.frequencyType == .Ongoing && activity.startDate == nil {
+            activity.startDate = Date()
+        }
         activity.schedulingType = ActivityScheduleType(rawValue: dbActivity.schedulingType!)!
         activity.totalRuns = dbActivity.activityRuns.count
         activity.version = dbActivity.version
@@ -1206,16 +1214,18 @@ class DBHandler: NSObject {
                 run.responseData = dbRun.responseData
                 runs.append(run)
             }
+            if activity.frequencyType == .Ongoing {
+                runs.first?.startDate = activity.startDate // Current Date.
+            }
             activity.activityRuns = runs
             
             var runsBeforeToday: Array<ActivityRun>! = []
             var run: ActivityRun!
             
-            if activity.frequencyType == Frequency.One_Time && activity.endDate == nil {
+            if (activity.frequencyType == Frequency.One_Time && activity.endDate == nil)
+                || activity.frequencyType == .Ongoing {
                 run = runs.last
-                
-            }else {
-                
+            } else {
                 runsBeforeToday = runs.filter({$0.endDate <= date})
                 run = runs.filter({$0.startDate <= date && $0.endDate > date}).first //current run
             }
@@ -1367,7 +1377,7 @@ class DBHandler: NSObject {
         
     }
     
-    class func updateRunToComplete(runId:Int,activityId: String,studyId: String){
+    class func updateRunToComplete(runId: Int,activityId: String,studyId: String){
         
         let realm = DBHandler.getRealmObject()!
         let dbRuns = realm.objects(DBActivityRun.self).filter("studyId == %@ && activityId == %@ && runId == %d",studyId,activityId,runId)
@@ -1377,6 +1387,23 @@ class DBHandler: NSObject {
             dbRun?.isCompleted = true
         })
         
+    }
+    
+    class func updateOngoingRunOnComplete(with currentRunId: Int,activityId: String,
+                                          studyId: String) -> ActivityRun? {
+        let realm = DBHandler.getRealmObject()!
+        guard let onGoingRun = realm.objects(DBActivityRun.self)
+            .filter("studyId == %@ && activityId == %@ && runId == %d",
+                    studyId,activityId,currentRunId).last
+            else {return nil}
+        try? realm.write {
+            onGoingRun.runId = currentRunId + 1
+            onGoingRun.responseData = nil
+            onGoingRun.restortionData = nil
+            onGoingRun.complitionDate = nil
+        }
+        let updatedRun = ActivityRun(dbRun: onGoingRun)
+        return updatedRun
     }
     
     class func updateActivityParticipationStatus(activity: Activity){

@@ -1,0 +1,6 @@
+framework module Pods_HPHC_QA {
+  umbrella header "Pods-HPHC QA-umbrella.h"
+
+  export *
+  module * { export * }
+}

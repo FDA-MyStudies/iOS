@@ -490,7 +490,7 @@ class WCPServices: NSObject {
         
         Logger.sharedInstance.info("Activities Parsing Start")
         
-        //Testing
+//        //Testing
 //        let filePath  = Bundle.main.path(forResource: "Activitylist", ofType: "json")
 //        let data = NSData(contentsOfFile: filePath!)
 //
@@ -505,7 +505,7 @@ class WCPServices: NSObject {
 //        }
         
         //Actual
-        let activities = response[kActivites] as! Array<Dictionary<String,Any>>
+         let activities = response[kActivites] as! Array<Dictionary<String,Any>>
         
         if Utilities.isValidObject(someObject: activities as AnyObject? ) {
             

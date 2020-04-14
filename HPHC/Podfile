@@ -38,14 +38,14 @@ target 'LimitJIA' do
   
 end
 
-target 'HPHC Demo' do
+target 'FDAMS HIMSS App' do
   # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
   use_frameworks!
   main_pods
   
 end
 
-target 'FDAMS HIMSS App' do
+target 'HPHC QA' do
   # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
   use_frameworks!
   main_pods

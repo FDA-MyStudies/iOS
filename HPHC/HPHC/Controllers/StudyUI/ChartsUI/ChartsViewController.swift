@@ -30,27 +30,12 @@ class ChartsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
-        
         self.title = NSLocalizedString("TRENDS", comment: "")
-        //self.addBackBarButton()
-        
-        //unhide navigationbar
-        //self.navigationController?.setNavigationBarHidden(false, animated: true)
-        
-    
-
     }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-       
-        //UINavigationBar.appearance().tintColor = UIColor.red
-        
-        
-        
         DBHandler.loadChartsForStudy(studyId: (Study.currentStudy?.studyId)!) { (chartList) in
-            
             if chartList.count != 0 {
                 StudyDashboard.instance.charts = chartList
                 self.tableView?.reloadData()
@@ -75,17 +60,13 @@ class ChartsViewController: UIViewController {
                                                                  errorAlertActionTitle2: NSLocalizedString(kTitleCancel, comment: ""), viewControllerUsed: self,
                                                                  action1: {
                                                                     
-                                                                   self.shareScreenShotByMail()
-                                                                    },
-            
+                                                                    self.shareScreenShotByMail()
+            },
+                                                                 
                                                                  action2: {
                                                                     
                                                                     
             })
-
-            
-            
-            
             
         }
         
@@ -134,17 +115,16 @@ extension ChartsViewController: UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 1
     }
+    
     func numberOfSections(in tableView: UITableView) -> Int {
         return StudyDashboard.instance.charts.count
     }
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell{
-        
-       
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let chart = StudyDashboard.instance.charts[indexPath.section]
         
         if chart.chartType == "line-chart"{
-            
             let cell = tableView.dequeueReusableCell(withIdentifier: "lineChart") as! LineChartCell
             cell.setupLineChart(chart: chart)
             return cell

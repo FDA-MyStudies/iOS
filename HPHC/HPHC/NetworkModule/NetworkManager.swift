@@ -81,34 +81,32 @@ class NetworkManager {
     var reachability : Reachability? = nil
     
     
-    class func isNetworkAvailable()-> Bool{
+    class func isNetworkAvailable() -> Bool{
         return self.sharedInstance().networkAvailability
     }
     
     init() {
-
-        reachability =  Reachability.init()
-        NotificationCenter.default.addObserver(self, selector: #selector(reachabilityChanged(_:)), name:ReachabilityChangedNotification, object: nil)
-    
-        do{
-            try reachability?.startNotifier()
-        }catch {
-            print("could not start reachability notifier")
-        }
+        
+        reachability =  try? Reachability()
+        NotificationCenter.default.addObserver(self, selector: #selector(reachabilityChanged(_:)),
+                                               name: Notification.Name.reachabilityChanged, object: nil)
+        try? reachability?.startNotifier()
     }
     
-    class func sharedInstance()-> NetworkManager {
+    class func sharedInstance() -> NetworkManager {
         self.instance = self.instance ?? NetworkManager()
         return self.instance!
     }
     
     @objc func reachabilityChanged(_ notification: Notification) {
         
-        if self.reachability!.isReachable {
+        if self.reachability!.connection == .wifi
+            || self.reachability!.connection == .cellular {
             networkAvailability = true
         } else {
             networkAvailability = false
         }
+        SyncUpdate.currentSyncUpdate.updateData(isReachable: networkAvailability)
     }
     
     func composeRequest(_ requestName: NSString, requestType : RequestType , method : HTTPMethod , params : NSDictionary?, headers : NSDictionary?, delegate : NMWebServiceDelegate){

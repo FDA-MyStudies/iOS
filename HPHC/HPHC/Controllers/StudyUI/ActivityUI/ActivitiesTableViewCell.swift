@@ -36,6 +36,7 @@ class ActivitiesTableViewCell: UITableViewCell {
     @IBOutlet var labelRunStatus: UILabel?
     @IBOutlet var buttonMoreSchedules: UIButton?
     @IBOutlet var buttonMoreSchedulesBottomLine: UIView?
+    @IBOutlet var labelStatusTopConstraint: NSLayoutConstraint?
     
     var delegate: ActivitiesCellDelegate?
     var currentActivity: Activity! = nil
@@ -134,7 +135,14 @@ class ActivitiesTableViewCell: UITableViewCell {
         
         let currentRunId = (activity.totalRuns != 0) ? String(activity.currentRunId) : "0"
         
-        self.labelRunStatus?.text = "Run: " + currentRunId + "/" + String(activity.totalRuns) + ", " + String(activity.compeltedRuns) + " done" + ", " + String(activity.incompletedRuns) + " missed"
+        var runStatus: String
+        if activity.frequencyType != .Ongoing {
+            runStatus = "Run: " + currentRunId + "/" + String(activity.totalRuns) + ", " + String(activity.compeltedRuns) + " done" + ", " + String(activity.incompletedRuns) + " missed"
+        } else {
+            runStatus = "Run(s): \(activity.compeltedRuns) Done"
+        }
+        
+        self.labelRunStatus?.text = runStatus
         
         if activity.totalRuns <= 1 {
             self.buttonMoreSchedules?.isHidden = true
@@ -231,7 +239,7 @@ class ActivitiesTableViewCell: UITableViewCell {
             
             imageIcon?.image = UIImage.init(named: "surveyIcon")
         }
-       
+        labelStatusTopConstraint?.constant = 7
         switch frequency {
         case .One_Time: // Handle for One Time Frequency
             
@@ -296,6 +304,10 @@ class ActivitiesTableViewCell: UITableViewCell {
             let currentRunStartDate = ActivitiesTableViewCell.oneTimeFormatter.string(from: runStartDate!)
             let currentRunEndDate = ActivitiesTableViewCell.oneTimeFormatter.string(from: runEndDate!)
             labelTime?.text = currentRunStartDate + " - " + currentRunEndDate
+            
+        case .Ongoing:
+            labelTime?.text = ""
+            labelStatusTopConstraint?.constant = -18
         }
     }
     

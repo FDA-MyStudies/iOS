@@ -889,7 +889,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <button opaque="NO" tag="11" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Snh-ik-r6y">
-                                                    <rect key="frame" x="202.33333333333334" y="14" width="30" height="20"/>
+                                                    <rect key="frame" x="202" y="14" width="30" height="20"/>
                                                     <color key="backgroundColor" red="0.0" green="0.48627450979999998" blue="0.72941176470000002" alpha="1" colorSpace="calibratedRGB"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="20" id="eDL-W0-mX6"/>
@@ -910,7 +910,7 @@
                                                     </connections>
                                                 </button>
                                                 <button opaque="NO" tag="12" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kn0-VV-AHj">
-                                                    <rect key="frame" x="249.33333333333337" y="14" width="35" height="20"/>
+                                                    <rect key="frame" x="249" y="14" width="35" height="20"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="20" id="k5b-G9-GQf"/>
                                                     </constraints>
@@ -930,7 +930,7 @@
                                                     </connections>
                                                 </button>
                                                 <button opaque="NO" tag="13" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="z17-KH-Jlb">
-                                                    <rect key="frame" x="300.33333333333331" y="14" width="45" height="20"/>
+                                                    <rect key="frame" x="300" y="14" width="45" height="20"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="20" id="4pe-Jk-1Hu"/>
                                                     </constraints>
@@ -950,7 +950,7 @@
                                                     </connections>
                                                 </button>
                                                 <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gBF-J9-AJ6">
-                                                    <rect key="frame" x="345.33333333333331" y="14" width="14.666666666666686" height="22"/>
+                                                    <rect key="frame" x="345" y="14" width="15" height="22"/>
                                                     <state key="normal" image="calenderIcon"/>
                                                 </button>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="C6q-cY-e1F">
@@ -1529,6 +1529,7 @@
                                             <outlet property="labelHeading" destination="AfA-Oz-waF" id="XB5-oA-OXj"/>
                                             <outlet property="labelRunStatus" destination="awn-oW-cWh" id="SBz-u7-58R"/>
                                             <outlet property="labelStatus" destination="XbX-KG-vXg" id="Ne4-6C-Rbt"/>
+                                            <outlet property="labelStatusTopConstraint" destination="l6F-Xr-6rh" id="4nk-hS-ECK"/>
                                             <outlet property="labelTime" destination="X8A-Rm-SyQ" id="bPp-hw-giW"/>
                                         </connections>
                                     </tableViewCell>

@@ -91,7 +91,7 @@ class Schedule{
      getRunsForActivity returns completion handler with array of ActivityRun
      @param activity, for which runs needed to be calculated
      */
-    func getRunsForActivity(activity: Activity,handler: @escaping (Array<ActivityRun>) -> ()){
+    func getRunsForActivity(activity: Activity,handler: @escaping ([ActivityRun]) -> ()){
         
         //get joiningDate
         let studyStatus = User.currentUser.participatedStudies.filter({$0.studyId == activity.studyId}).last
@@ -144,11 +144,28 @@ class Schedule{
             self.setMonthlyRuns()
         case Frequency.Scheduled:
             self.setScheduledRuns()
+        case .Ongoing:
+            self.setOngoingRun()
         }
         
         if self.completionHandler != nil {
             self.completionHandler!(self.activityRuns)
         }
+    }
+    
+    //One Time Run setter
+    func setOngoingRun(){
+        let totalCompletedRuns = self.activity.userParticipationStatus.compeltedRuns
+        let offset = UserDefaults.standard.value(forKey: "offset") as? Int
+        let updatedStartTime = startTime.addingTimeInterval(TimeInterval(offset!))
+        let updatedEndTime = endTime?.addingTimeInterval(TimeInterval(offset!))
+        
+        let activityRun = ActivityRun()
+        activityRun.runId = totalCompletedRuns + 1
+        activityRun.startDate = updatedStartTime
+        activityRun.endDate = updatedEndTime
+        
+        activityRuns.append(activityRun)
     }
     
     //One Time Run setter
@@ -618,6 +635,19 @@ class ActivityRun {
     var toBeSynced: Bool = false
     var responseData: Data?
     
+    init() {}
+    
+    init(dbRun: DBActivityRun) {
+        activityId = dbRun.activityId
+        complitionDate = dbRun.complitionDate
+        startDate = dbRun.startDate
+        endDate = dbRun.endDate
+        runId = dbRun.runId
+        studyId = dbRun.studyId
+        isCompleted = dbRun.isCompleted
+        restortionData = dbRun.restortionData
+        responseData = dbRun.responseData
+    }
 }
 
 extension Calendar{

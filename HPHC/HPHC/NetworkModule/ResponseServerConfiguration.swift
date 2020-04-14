@@ -51,19 +51,19 @@ enum ResponseMethods: String {
     
 }
 struct ResponseServerURLConstants {
-    //TODO: Set the server end points
+
+    // Labkey UAT Server
+     static let ProductionURL = "https://hpresp-stage.lkcompliant.net/mobileappstudy-"
+     static let DevelopmentURL = "https://hpresp-stage.lkcompliant.net/mobileappstudy-"
     
-//    //Labkey UAT Server
-//    static let ProductionURL = "https://hpresp-stage.lkcompliant.net/mobileappstudy-"
-//    static let DevelopmentURL = "https://hpresp-stage.lkcompliant.net/mobileappstudy-"
+    // Labkey Demo Server
+    // static let ProductionURL = "https://resp.demo.mystudiesapp.org/mobileappstudy-"
+    // static let DevelopmentURL = "https://resp.demo.mystudiesapp.org/mobileappstudy-"
     
-    //Labkey Demo Server
-       static let ProductionURL = "https://resp.demo.mystudiesapp.org/mobileappstudy-"
-       static let DevelopmentURL = "https://resp.demo.mystudiesapp.org/mobileappstudy-"
-//    mobileappstudy-validateenrollmenttoken.api?
-  
-//  https://resp.demo.mystudiesapp.org/validateEnrollmentToken.api?studyId=StudyDemo01&token=GGFTQAXFT
+//    static let ProductionURL = ""
+//    static let DevelopmentURL = ""
 }
+
 class ResponseServerConfiguration: NetworkConfiguration {
     static let configuration = ResponseServerConfiguration()
     

@@ -267,7 +267,6 @@ static const CGFloat cardTopBottomMargin = 2.0;
         self.accessoryView.hidden = _selectedItem ? NO : YES;
         self.shortLabel.textColor = _selectedItem ? [self tintColor] : [UIColor blackColor];
         self.longLabel.textColor = _selectedItem ? [[self tintColor] colorWithAlphaComponent:192.0 / 255.0] : [UIColor ork_darkGrayColor];
-
     }
 }
 

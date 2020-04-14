@@ -57,19 +57,20 @@ struct WCPServerURLConstants {
     //TODO: Set the server end points
     
     //local - btc
-//    static let ProductionURL = "http://192.168.0.190:7878/StudyMetaData/"
-//    static let DevelopmentURL = "http://192.168.0.190:7878/StudyMetaData/"
-   
-    //Staging
-    static let ProductionURL = "https://hpwcp-stage.lkcompliant.net/StudyMetaData/"
-    static let DevelopmentURL = "https://hpwcp-stage.lkcompliant.net/StudyMetaData/"
+    //    static let ProductionURL = "http://192.168.0.44:3429/StudyMetaData/"
+    //    static let DevelopmentURL = "192.168.0.44:3429/StudyMetaData/"
     
-//    static var DevelopmentURL:String {
-//        return UserDefaults.standard.value(forKey: "WCPBaseURL") as? String ?? "https://hpwcp-stage.lkcompliant.net/StudyMetaData/"
-//    }
-//    static var ProductionURL:String {
-//        return UserDefaults.standard.value(forKey: "WCPBaseURL") as? String ?? "https://hpwcp-stage.lkcompliant.net/StudyMetaData/"
-//    }
+    //AWS  - btc
+    static let ProductionURL = "http://18.222.7.100:8080/StudyMetaData/"
+    static let DevelopmentURL = "http://18.222.7.100:8080/StudyMetaData/"
+    
+    //Staging
+    // static let ProductionURL = "https://hpwcp-stage.lkcompliant.net/StudyMetaData/"
+    //    static let DevelopmentURL = "https://hpwcp-stage.lkcompliant.net/StudyMetaData/"
+    
+    //    Demo
+    //    static let ProductionURL = "https://wcp.demo.mystudiesapp.org/StudyMetaData/"
+    //    static let DevelopmentURL = "https://wcp.demo.mystudiesapp.org/StudyMetaData/"//fdahpStudyDesigner
 }
 
 class WCPConfiguration: NetworkConfiguration {

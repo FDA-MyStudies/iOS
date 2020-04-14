@@ -73,6 +73,7 @@ enum Frequency: String {
     case Weekly = "Weekly"
     case Monthly = "Monthly"
     case Scheduled = "Manually Schedule"
+    case Ongoing = "Ongoing"
     
     var description: String {
         switch self {
@@ -86,7 +87,8 @@ enum Frequency: String {
             return "Monthly"
         case .Scheduled:
             return "As Scheduled"
-        
+        case .Ongoing:
+            return "Ongoing"
         }
     }
     
@@ -265,7 +267,11 @@ class Activity {
                 self.taskSubType =  (infoDict[kActivityTaskSubType] as? String)!
             }
            
-            if self.startDate != nil && (self.schedulingType == .regular || self.anchorDate?.sourceType == "EnrollmentDate"){
+            if self.startDate != nil && (self.schedulingType == .regular
+                || self.anchorDate?.sourceType == "EnrollmentDate"){
+                self.calculateActivityRuns(studyId: self.studyId!)
+            } else if self.frequencyType == .Ongoing {
+                self.startDate = Date()
                 self.calculateActivityRuns(studyId: self.studyId!)
             }
             
@@ -473,6 +479,8 @@ class Activity {
             startDate = date.addingTimeInterval(startDateInterval)
             endDate = date.addingTimeInterval(endDateInterval)
             
+        case .Ongoing:
+            return (nil, nil)
         }
         
         return (startDate,endDate)

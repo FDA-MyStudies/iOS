@@ -918,10 +918,8 @@ extension ActivitiesViewController: UITableViewDelegate{
                 if activity.userParticipationStatus != nil {
                     let activityRunParticipationStatus = activity.userParticipationStatus
                     if activityRunParticipationStatus?.status == .yetToJoin
-                        || activityRunParticipationStatus?.status == .inProgress
-                        || activityRunParticipationStatus?.status == .completed
+                        || activityRunParticipationStatus?.status == .inProgress {
                         
-                    {
                         Study.updateCurrentActivity(activity: activities[indexPath.row])
                         
                         //Following to be commented

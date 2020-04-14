@@ -37,7 +37,7 @@ enum ActivityDiskService {
                                    repeatInterval: dbActivity.repeatInterval)
         
         guard var anchorStartDate = lifeTime.0,
-            var anchorEndDate = lifeTime.1 else {
+            let anchorEndDate = lifeTime.1 else {
                 //
                 return // TODO:
         }

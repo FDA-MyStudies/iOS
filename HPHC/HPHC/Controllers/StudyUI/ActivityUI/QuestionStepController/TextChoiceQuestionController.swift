@@ -456,10 +456,18 @@ class TextChoiceQuestionController: ORKQuestionStepViewController {
         
     }
     
+    override func skipForward() {
+        print("Skipped")
+        self.answers = []
+        self.selectedChoices = []
+        self.isOtherCellSelected = false
+        super.skipForward()
+    }
+    
     override func goForward() {
-        //super.delegate?.stepViewControllerResultDidChange(self)
-        
-        if self.otherChoice.isMandatory, self.otherChoice.otherChoiceText == "" || self.otherChoice.otherChoiceText == " ",self.isOtherCellSelected {
+      
+        if self.otherChoice.otherChoiceText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty,
+            self.isOtherCellSelected {
             
             let alertVC = UIAlertController(title: "Answer required", message: "Please provide an input for the text field too.", preferredStyle: .alert)
             
@@ -470,7 +478,6 @@ class TextChoiceQuestionController: ORKQuestionStepViewController {
                 }
                 self.updateNextOrContinueBtnState()
             }
-            
             
             alertVC.addAction(okAction)
             self.present(alertVC, animated: true, completion: nil)
@@ -658,7 +665,7 @@ extension TextChoiceQuestionController: OtherTextChoiceCellDelegate {
     
     func didEndEditing(with text: String?) {
         /// Use the text
-        self.otherChoice.otherChoiceText = text ?? ""
+        self.otherChoice.otherChoiceText = (text ?? "").trimmingCharacters(in: .whitespacesAndNewlines)
         self.tableView?.setContentOffset(CGPoint(x: 0, y: -1), animated: true)
     }
 }

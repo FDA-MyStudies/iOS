@@ -175,9 +175,7 @@ class DashboardCharts {
             if Utilities.isValidValue(someObject: detail["title"] as AnyObject ){
                 self.title = detail["title"] as? String
             }
-            else {
-                self.title = "123"
-            }
+        
             if Utilities.isValidValue(someObject: detail["displayName"] as AnyObject ){
                 self.displayName = detail["displayName"] as? String
             }

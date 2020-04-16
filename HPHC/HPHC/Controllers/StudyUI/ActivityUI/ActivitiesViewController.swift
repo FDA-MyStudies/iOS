@@ -183,7 +183,7 @@ class ActivitiesViewController : UIViewController{
                 let rowDetail = tableViewSections[0]
                 let activities = (rowDetail["activities"] as? Array<Activity>)!
                 
-                let index = activities.index(where: {$0.actvityId == activityId})
+                let index = activities.firstIndex (where: {$0.actvityId == activityId})
                 
                 if let index = index {
                     let ip = IndexPath.init(row: index, section: 0)
@@ -475,7 +475,7 @@ class ActivitiesViewController : UIViewController{
         
         tableViewSections = []
         allActivityList = []
-        let activities = Study.currentStudy?.activities
+        let activities = Study.currentStudy?.activities.filter({$0.startDate != nil})
         var bufCurrentStudyArray: [Activity] = []
         
         var currentActivities: [Activity] = []
@@ -501,7 +501,6 @@ class ActivitiesViewController : UIViewController{
             } else {
                 isInActiveActivitiesAreAvailable = true
                 DBHandler.deleteDBLocalNotification(activityId: activity.actvityId!,studyId: activity.studyId!)
-//                LocalNotification.removeLocalNotificationfor(studyId: activity.studyId!, activityid: activity.actvityId!)
             }
         }
         
@@ -509,18 +508,40 @@ class ActivitiesViewController : UIViewController{
             LocalNotification.refreshAllLocalNotification()
         }
         
-        //sort as per start date
-        currentActivities.sort(by: {$0.startDate?.compare($1.startDate!) == .orderedAscending})
+        let currentOngoingActivities = currentActivities.filter({$0.frequencyType == .Ongoing}).sorted(by: { (a1, a2) -> Bool in
+            if let date1 = a1.lastModified, let date2 = a2.lastModified {
+                return date1.compare(date2) == .orderedDescending
+            }
+            return false
+        })
+        
+        currentActivities = currentActivities.filter({$0.frequencyType != .Ongoing}).sorted(by: {$0.startDate?.compare($1.startDate!) == .orderedAscending})
+        
         upcomingActivities.sort(by: {$0.startDate?.compare($1.startDate!) == .orderedAscending})
         pastActivities.sort(by: {$0.startDate?.compare($1.startDate!) == .orderedAscending})
         
-        let  sortedCurrentActivities =  currentActivities.sorted(by: { (activity1: Activity, activity2: Activity) -> Bool in
-            
-            return (activity1.userParticipationStatus.status.sortIndex < activity2.userParticipationStatus.status.sortIndex)
-        })
+        let currentCompletedAndIncompletedActivities = currentActivities.filter { (activity) -> Bool in
+            let participationStatus = activity.userParticipationStatus.status
+            return participationStatus == .completed ||
+                participationStatus == .abandoned ||
+                participationStatus == .expired
+        }.sorted { (activity1, activity2) -> Bool in
+            return activity1.userParticipationStatus.status.sortIndex <
+                activity2.userParticipationStatus.status.sortIndex
+        }
         
+        let currentYetToStartAndInProgressActivities = currentActivities.filter { (activity) -> Bool in
+            let participationStatus = activity.userParticipationStatus.status
+            return participationStatus == .yetToJoin ||
+                participationStatus == .inProgress
+        }.sorted { (activity1, activity2) -> Bool in
+            return activity1.userParticipationStatus.status.sortIndex <
+                activity2.userParticipationStatus.status.sortIndex
+        }
         
-        let currentDetails = ["title": "CURRENT","activities": sortedCurrentActivities] as [String : Any]
+        let allTypeCurrentActivities = currentYetToStartAndInProgressActivities + currentOngoingActivities + currentCompletedAndIncompletedActivities
+        
+        let currentDetails = ["title": "CURRENT","activities": allTypeCurrentActivities] as [String : Any]
         let upcomingDetails = ["title": "UPCOMING","activities": upcomingActivities] as [String : Any]
         let pastDetails = ["title": "PAST","activities": pastActivities] as [String : Any]
         
@@ -543,13 +564,10 @@ class ActivitiesViewController : UIViewController{
         self.updateCompletionAdherence()
         
         DispatchQueue.main.async {
-           if (User.currentUser.settings?.localNotifications)! {
-                print("localNotifications enabled")
+           if User.currentUser.settings?.localNotifications ?? false {
                 if !(Study.currentStudy?.activitiesLocalNotificationUpdated)! {
-                    print("Registerig Notification")
                     //Register LocalNotifications
                     LocalNotification.registerAllLocalNotificationFor(activities: (Study.currentStudy?.activities)!) { (finished,notificationlist) in
-                        print("Notification set sucessfully")
                         Study.currentStudy?.activitiesLocalNotificationUpdated = true
                         DBHandler.saveRegisteredLocaNotification(notificationList: notificationlist)
                         DBHandler.updateLocalNotificaitonUpdated(studyId: (Study.currentStudy?.studyId)!,status: true)
@@ -558,11 +576,8 @@ class ActivitiesViewController : UIViewController{
                 }
             }
         }
-        
-        
+
         self.checkIfFetelKickCountRunning()
-        
-        Logger.sharedInstance.info("Activities Displayed to user")
     }
     
     /**
@@ -641,23 +656,17 @@ class ActivitiesViewController : UIViewController{
         
         let ud = UserDefaults.standard
         if completion > 50 && completion < 100 {
-            
             if !(ud.bool(forKey: halfCompletionKey)) {
-                let message =  "The study " + (Study.currentStudy?.name!)! + " is now 50 percent complete. We look forward to your continued participation as the study progresses."
                 //UIUtilities.showAlertWithMessage(alertMessage: message)
                 ud.set(true, forKey: halfCompletionKey)
-                
             }
-            
         }
         
         if completion == 100 {
-            
             if !(ud.bool(forKey: fullCompletionKey)) {
                 let message =  "The study " + (Study.currentStudy?.name!)! + " is 100 percent complete. Thank you for your participation."
                 UIUtilities.showAlertWithMessage(alertMessage: message)
                 ud.set(true, forKey: fullCompletionKey)
-                
             }
         }
         

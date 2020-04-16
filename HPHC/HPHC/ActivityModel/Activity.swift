@@ -204,6 +204,9 @@ class Activity {
                 self.version = (infoDict[kActivityVersion] as? String)!
             }
             
+            if let lastModified = infoDict[kActivityLastModified] as? String {
+                self.lastModified =  Utilities.getDateFromString(dateString: lastModified)
+            }
             
             if Utilities.isValidValue(someObject: infoDict[kActivityTitle] as AnyObject) {
                 self.name = (infoDict[kActivityTitle] as? String)!
@@ -324,8 +327,8 @@ class Activity {
             if Utilities.isValidValue(someObject: infoDict[kActivityEndTime] as AnyObject ) {
                 //self.endDate =   Utilities.getDateFromString(dateString: (infoDict[kActivityEndTime] as! String?)!)
             }
-            if Utilities.isValidValue(someObject: infoDict[kActivityLastModified] as AnyObject ) {
-                //self.lastModified =   Utilities.getDateFromString(dateString: (infoDict[kActivityLastModified] as! String?)!)
+            if let lastModified = infoDict[kActivityLastModified] as? String {
+                self.lastModified =  Utilities.getDateFromString(dateString: lastModified)
             }
             
         } else {

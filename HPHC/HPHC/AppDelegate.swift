@@ -395,7 +395,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let keyData = Data(base64Encoded: key!)
        
         let config = Realm.Configuration(
-            //encryptionKey:keyData,
+            encryptionKey:keyData,
             schemaVersion: 1,
             migrationBlock: { migration, oldSchemaVersion in
                 // We haven’t migrated anything yet, so oldSchemaVersion == 0

@@ -848,9 +848,7 @@ class UserActivityStatus{
                     self.customScheduleRuns.append(CustomScheduleRuns(value: run))
                 }
             }
-        
-            
-            
+  
         }else{
             Logger.sharedInstance.debug("UserStudyStatus Dictionary is null:\(detail)")
         }

@@ -27,7 +27,7 @@ class DBHandler: NSObject {
         let key = FDAKeychain.shared[kRealmEncryptionKeychainKey]
         let data = Data.init(base64Encoded: key!)
         let encryptionConfig = Realm.Configuration(encryptionKey: data)
-        return try! Realm()
+        return try! Realm(configuration: encryptionConfig)
     }()
     
     fileprivate class func getRealmObject() -> Realm? {
@@ -653,7 +653,7 @@ class DBHandler: NSObject {
      fetches DBActivity from DB
      return an instance of DBActivity
      */
-    private class func getDBActivity(activity: Activity)-> DBActivity {
+    private class func getDBActivity(activity: Activity) -> DBActivity {
         
         let dbActivity = DBActivity()
         
@@ -665,7 +665,7 @@ class DBHandler: NSObject {
         dbActivity.endDate = activity.endDate
         dbActivity.version = activity.version
         dbActivity.state = activity.state
-        
+        dbActivity.lastModified = activity.lastModified
         dbActivity.branching = activity.branching!
         dbActivity.frequencyType = activity.frequencyType.rawValue
         dbActivity.schedulingType = activity.schedulingType.rawValue
@@ -800,7 +800,7 @@ class DBHandler: NSObject {
                                                 externalIdValue: externalIdValue,
                                                 dateOfEntryValue: dateOfEntryValue,
                                                 frequency: frequency)
-            return
+            break
             
         case .Scheduled:
             updateLifeTimeFor(scheduled: dbActivity,
@@ -1173,6 +1173,7 @@ class DBHandler: NSObject {
         activity.endDate    = dbActivity.endDate
         activity.type       = ActivityType(rawValue: dbActivity.type!)
         activity.frequencyType = Frequency(rawValue: dbActivity.frequencyType!)!
+        activity.lastModified = dbActivity.lastModified
         if activity.frequencyType == .Ongoing && activity.startDate == nil {
             activity.startDate = Date()
         }

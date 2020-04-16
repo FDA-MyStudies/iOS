@@ -1312,7 +1312,7 @@
                                                                 <constraint firstAttribute="height" constant="0.5" id="T2g-T8-zI5"/>
                                                             </constraints>
                                                         </view>
-                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="t9Q-NY-zVY">
+                                                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="t9Q-NY-zVY">
                                                             <rect key="frame" x="15" y="4" width="27" height="22"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="22" id="KeT-0X-hou"/>
@@ -1323,7 +1323,7 @@
                                                                 <action selector="buttonBackwardAction:" destination="efL-BG-Ieh" eventType="touchUpInside" id="xeG-L1-2dG"/>
                                                             </connections>
                                                         </button>
-                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ENw-Wv-v2u">
+                                                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ENw-Wv-v2u">
                                                             <rect key="frame" x="333" y="4" width="27" height="22"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="27" id="KyK-tq-42u"/>
@@ -1334,7 +1334,7 @@
                                                                 <action selector="buttonForwardAction:" destination="efL-BG-Ieh" eventType="touchUpInside" id="2yx-TN-vv7"/>
                                                             </connections>
                                                         </button>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="10 May 2017" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cao-rB-R9F">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="  " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cao-rB-R9F">
                                                             <rect key="frame" x="50" y="8" width="275" height="14"/>
                                                             <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
                                                             <color key="textColor" red="0.60515886549999998" green="0.63864618539999995" blue="0.68651282790000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1840,25 +1840,21 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" fixedFrame="YES" progressViewStyle="bar" translatesAutoresizingMaskIntoConstraints="NO" id="Opj-CP-tJy">
-                                <rect key="frame" x="0.0" y="1" width="375" height="3"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="progressTintColor" red="0.28627450980000002" green="0.71372549019999998" blue="0.8980392157" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            </progressView>
-                            <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="51q-E2-3o9">
-                                <rect key="frame" x="0.0" y="47" width="375" height="765"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <connections>
-                                    <outlet property="delegate" destination="0YV-mj-82E" id="eai-DC-l0D"/>
-                                </connections>
-                            </webView>
+                            <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Me1-lW-0P8">
+                                <rect key="frame" x="0.0" y="44" width="375" height="734"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <wkWebViewConfiguration key="configuration">
+                                    <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
+                                    <wkPreferences key="preferences"/>
+                                </wkWebViewConfiguration>
+                            </wkWebView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="51q-E2-3o9" firstAttribute="top" secondItem="i4g-Zk-UnV" secondAttribute="top" constant="3" id="MsJ-i4-ONd"/>
-                            <constraint firstItem="i4g-Zk-UnV" firstAttribute="trailing" secondItem="51q-E2-3o9" secondAttribute="trailing" id="QS9-Vi-9DD"/>
-                            <constraint firstAttribute="bottom" secondItem="51q-E2-3o9" secondAttribute="bottom" id="X7Z-vi-Rc6"/>
-                            <constraint firstItem="51q-E2-3o9" firstAttribute="leading" secondItem="i4g-Zk-UnV" secondAttribute="leading" id="hLI-wg-lwP"/>
+                            <constraint firstItem="i4g-Zk-UnV" firstAttribute="trailing" secondItem="Me1-lW-0P8" secondAttribute="trailing" id="4lp-ad-wJx"/>
+                            <constraint firstItem="Me1-lW-0P8" firstAttribute="top" secondItem="i4g-Zk-UnV" secondAttribute="top" id="ZTr-Wh-Toz"/>
+                            <constraint firstItem="i4g-Zk-UnV" firstAttribute="bottom" secondItem="Me1-lW-0P8" secondAttribute="bottom" id="dcc-LW-PHV"/>
+                            <constraint firstItem="Me1-lW-0P8" firstAttribute="leading" secondItem="i4g-Zk-UnV" secondAttribute="leading" id="htE-N6-Q7X"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="i4g-Zk-UnV"/>
                     </view>
@@ -1872,13 +1868,12 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="progressBar" destination="Opj-CP-tJy" id="zav-j2-6pd"/>
-                        <outlet property="webView" destination="51q-E2-3o9" id="Dah-ge-0h2"/>
+                        <outlet property="webView" destination="Me1-lW-0P8" id="tba-ch-n7E"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tce-5G-MZF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2140" y="5901"/>
+            <point key="canvasLocation" x="2140" y="5900.9852216748768"/>
         </scene>
         <!--Resources Detail View Controller Copy-->
         <scene sceneID="cUw-Lb-m0G">

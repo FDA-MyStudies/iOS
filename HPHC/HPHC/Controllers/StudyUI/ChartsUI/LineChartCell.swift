@@ -20,9 +20,6 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 import UIKit
 
-
-
-
 class GraphChartTableViewCell: UITableViewCell {
     @IBOutlet weak var graphView: ORKGraphChartView!
 }
@@ -50,6 +47,17 @@ class LineChartCell: GraphChartTableViewCell {
     var max: Float = 0.0
     var min: Float = 0.0
 
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        self.labelTitle.text = ""
+        self.labelAxisValue.text = ""
+        self.buttonForward.isHidden = true
+        self.buttonBackward.isHidden = true
+        plotPoints = []
+        xAxisTitles = []
+        self.graphView.dataSource = nil
+        self.graphView.reloadData()
+    }
     
     func getWeeklyAttributedText() -> NSAttributedString {
         
@@ -91,12 +99,12 @@ class LineChartCell: GraphChartTableViewCell {
     
     func setupLineChart(chart: DashboardCharts){
         
-        
-        self.graphView.tintColor = UIColor.gray
-        
         currentChart = chart
-        
+
+        self.graphView.tintColor = UIColor.gray
         labelTitle.text = chart.displayName
+        
+        guard !chart.statList.isEmpty else {return}
         let array = chart.statList.map{$0.data}
         if array.count != 0 {
             max = array.max()!
@@ -106,7 +114,7 @@ class LineChartCell: GraphChartTableViewCell {
         guard let activity = Study.currentStudy?.activities
             .filter({$0.actvityId == chart.activityId}).last else {return}
         
-        if activity.frequencyType == .Ongoing, activity.frequencyRuns!.isEmpty {
+        if activity.frequencyType == .Ongoing {
             // Setup frequency runs
             var frequencyRuns: [JSONDictionary] = []
             for response in chart.statList {

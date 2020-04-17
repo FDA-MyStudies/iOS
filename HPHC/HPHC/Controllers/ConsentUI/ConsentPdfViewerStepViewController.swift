@@ -82,17 +82,18 @@ class ConsentPdfViewerStepViewController: ORKStepViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        if let pdfData = self.pdfData {
-            self.webView.load(pdfData, mimeType: "application/pdf",
-                              characterEncodingName: "UTF-8",
-                              baseURL: URL(fileURLWithPath: ""))
-            webView.contentScaleFactor = 1.0
-            webView.navigationDelegate = self
-        }
-        
+        webView.contentScaleFactor = 1.0
+        webView.navigationDelegate = self
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        if let pdfData = self.pdfData {
+            self.webView.load(pdfData,
+                              mimeType: "application/pdf",
+                              characterEncodingName: "UTF-8",
+                              baseURL: URL(fileURLWithPath: ""))
+        }
+    }
     /*
      sendConsentByMail used for sharing the Consent
      */

@@ -86,7 +86,8 @@ class ConsentPdfViewerStepViewController: ORKStepViewController {
         webView.navigationDelegate = self
     }
     
-    override func viewWillAppear(_ animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
+      super.viewDidAppear(animated)
         if let pdfData = self.pdfData {
             self.webView.load(pdfData,
                               mimeType: "application/pdf",

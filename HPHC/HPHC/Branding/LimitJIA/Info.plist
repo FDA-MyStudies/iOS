@@ -2,8 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>ITSAppUsesNonExemptEncryption</key>
-	<false/>
 	<key>ApplicationID</key>
 	<string>LIMITJIA001</string>
 	<key>CFBundleDevelopmentRegion</key>
@@ -38,6 +36,8 @@
 			</dict>
 		</array>
 	</dict>
+	<key>ITSAppUsesNonExemptEncryption</key>
+	<false/>
 	<key>IsStandaloneStudyApp</key>
 	<string>$(IS_STANDALONE_STUDY)</string>
 	<key>LSRequiresIPhoneOS</key>

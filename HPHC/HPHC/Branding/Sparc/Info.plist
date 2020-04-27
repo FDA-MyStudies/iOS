@@ -2,8 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>ITSAppUsesNonExemptEncryption</key>
-	<false/>
 	<key>ApplicationID</key>
 	<string>CCFSIBD001</string>
 	<key>CFBundleDevelopmentRegion</key>
@@ -38,6 +36,8 @@
 			</dict>
 		</array>
 	</dict>
+	<key>ITSAppUsesNonExemptEncryption</key>
+	<false/>
 	<key>IsStandaloneStudyApp</key>
 	<string>$(IS_STANDALONE_STUDY)</string>
 	<key>LSRequiresIPhoneOS</key>
@@ -66,7 +66,7 @@
 	<key>NSSpeechRecognitionUsageDescription</key>
 	<string>$(PRODUCT_NAME) would like to use Speech Recognition for the task to give more accurate result.</string>
 	<key>OrganizationID</key>
-	<string>OrgName</string>
+	<string>CACFND</string>
 	<key>ProductTitleName</key>
 	<string>IBD PROdigy</string>
 	<key>StandaloneStudyId</key>

@@ -289,11 +289,7 @@ class ProfileViewController: UIViewController, SlideMenuControllerDelegate {
             }
             else {
                 
-                var infoDict: NSDictionary?
-                if let path = Bundle.main.path(forResource: "Info", ofType: "plist") {
-                    infoDict = NSDictionary(contentsOfFile: path)
-                }
-                let navTitle = infoDict!["ProductTitleName"] as! String
+                let navTitle = Branding.productTitle
                 
                 var descriptionText =  kDeleteAccountConfirmationMessage
                 descriptionText = descriptionText.replacingOccurrences(of: "#APPNAME#", with: navTitle)

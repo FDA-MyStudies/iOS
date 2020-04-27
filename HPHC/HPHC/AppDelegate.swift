@@ -87,6 +87,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var isAppLaunched: Bool? = false
     
     let healthStore = HKHealthStore()
+    
     var containerViewController: ResearchContainerViewController? {
         return window?.rootViewController as? ResearchContainerViewController
     }
@@ -98,29 +99,182 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var retryView: ComprehensionFailure?
     
     var blockerScreen: AppUpdateBlocker?
+    
     var passcodeParentControllerWhileSetup: UIViewController?
     
     var consentToken: String? = "" //to be used in case of ineligible
     
-    //Register Remote Notification
-    func askForNotification() {
+    // MARK: App Delegates
+    
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        // Override point for customization after application launch.
+
+        self.isAppLaunched = true
+        IQKeyboardManager.shared.enable = true
+     
+        self.customizeNavigationBar()
+        Fabric.with([Crashlytics.self])
         
-        if #available(iOS 10.0, *) {
-            let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
-            UNUserNotificationCenter.current().requestAuthorization(
-                options: authOptions,
-                completionHandler: {_, _ in })
-            
-            // For iOS 10 display notification (sent via APNS)
-            UNUserNotificationCenter.current().delegate = self
-            
-        }else {
-            let settings: UIUserNotificationSettings =
-                UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil)
-            UIApplication.shared.registerUserNotificationSettings(settings)
+        UIView.appearance(whenContainedInInstancesOf: [ORKTaskViewController.self]).tintColor = kUIColorForSubmitButtonBackground
+        
+        self.checkForAppUpdate()
+        
+        if UIApplication.shared.applicationIconBadgeNumber > 0 {
+            UIApplication.shared.applicationIconBadgeNumber = 0
         }
-        UIApplication.shared.registerForRemoteNotifications()
+        
+        let ud1 = UserDefaults.standard
+        
+        //Check if App is launched because of Notification Received
+        if (launchOptions != nil && launchOptions?[.sourceApplication] == nil) {
+            
+            ud1.set("not null", forKey: "launch")
+            
+            // Launched from push notification
+            let notification = launchOptions?[.remoteNotification]
+            
+            if Utilities.isValidObject(someObject: notification as AnyObject) { // Launched from Remote Notification
+                
+                notificationDetails = notification as? Dictionary<String, Any>
+                
+                let ud = UserDefaults.standard
+                ud.set(true, forKey: kShowNotification)
+                ud.synchronize()
+                
+            } else if (launchOptions?[.localNotification] != nil) { //Launched from Local Notification
+                
+                ud1.set("local", forKey: "launch")
+                let localNotification = (launchOptions?[.localNotification] as? UILocalNotification)!
+                let notificationDetails = (localNotification.userInfo as? Dictionary<String, Any>)!
+                
+                NotificationHandler.instance.appOpenFromNotification = true
+                NotificationHandler.instance.studyId = (notificationDetails[kStudyId] as? String)!
+                NotificationHandler.instance.activityId = (notificationDetails[kActivityId] as? String)!
+                ud1.synchronize()
+                
+            } else { //Regular Launch
+                
+                ud1.set("invalid", forKey: "launch")
+                UIApplication.shared.applicationIconBadgeNumber = 0
+                
+                let ud = UserDefaults.standard
+                ud.set(false, forKey: kShowNotification)
+                ud.synchronize()
+            }
+        }
+        
+        //self.fireNotiffication(intervel: 10)
+        //self.fireNotiffication(intervel: 15)
+        
+        //Check if Database needs migration
+        self.checkForRealmMigration()
+        return true
     }
+    
+    func applicationWillResignActive(_ application: UIApplication) {
+        self.appIsResignedButDidNotEnteredBackground = true
+    }
+    
+    func applicationDidEnterBackground(_ application: UIApplication) {
+        self.appIsResignedButDidNotEnteredBackground = false
+    }
+    
+    
+    func application(_ application: UIApplication, performFetchWithCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
+    }
+    
+    
+    func applicationWillEnterForeground(_ application: UIApplication) {
+        
+        self.checkPasscode(viewController: (application.windows[0].rootViewController)!)
+        
+        self.checkForStudyUpdates()
+        
+        let number = UIApplication.shared.applicationIconBadgeNumber
+        if number >= 1 {
+            self.updateNotification()
+        }
+        
+        //Check For Updates
+        self.checkForAppUpdate()
+        
+    }
+    
+    func applicationDidBecomeActive(_ application: UIApplication) {
+        
+        // self.window?.isHidden = false
+        
+        UIApplication.shared.applicationIconBadgeNumber = 0
+        
+        if self.appIsResignedButDidNotEnteredBackground! {
+            
+            let navController = application.windows[0].rootViewController
+            
+            
+            let isTaskViewControllerVisible = (navController as? UINavigationController)?.visibleViewController?.isKind(of: ORKTaskViewController.self)
+            
+           // guard let navigation = (navController as? UINavigationController)?.visibleViewController as? ORKTaskViewController, let navigationTitle = navigation.title else {return}
+            
+            let navigationTitle = ((navController as? UINavigationController)?.visibleViewController as? ORKTaskViewController)?.title ?? ""
+            
+            if (navController as? UINavigationController) != nil &&  isTaskViewControllerVisible == false {
+                
+                if (navController as? UINavigationController)?.visibleViewController?.isKind(of: ORKPasscodeViewController.self) == false {
+                    //Request for Passcode
+                    //self.checkPasscode(viewController: navController!)
+                }
+                
+            } else if(navController as? UINavigationController) != nil
+                &&  isTaskViewControllerVisible == true
+                && navigationTitle == "Activity" {
+                
+                if (navController as? UINavigationController)?.visibleViewController?.isKind(of: ORKPasscodeViewController.self) == false {
+                    //Request for Passcode
+                    //self.checkPasscode(viewController: navController!)
+                }
+            } else if(navController as? UIViewController) != nil {
+               // self.checkPasscode(viewController: navController!)
+            }
+        }
+        
+        //Check if App running on Jailbreak Device
+        if AppDelegate.jailbroken(application: application) {
+            
+            let navigationController =  (self.window?.rootViewController as? UINavigationController)!
+            let appBlocker = JailbrokeBlocker.instanceFromNib(frame: navigationController.view.frame, detail: nil);
+            UIApplication.shared.keyWindow?.addSubview(appBlocker);
+            UIApplication.shared.keyWindow?.bringSubviewToFront(appBlocker)
+            
+        }
+        
+        //Update TimeZone Changes if any
+        self.calculateTimeZoneChange()
+        
+        if self.isAppLaunched! {
+            self.isAppLaunched = false
+            
+            //Update Local Notifications
+            self.checkForRegisteredNotifications()
+        }
+    }
+    
+    //Register Remote Notification
+  func askForNotification() {
+    
+    UNUserNotificationCenter.current().delegate = self
+    UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) {
+      (granted, error) in
+      
+      // print("Permission granted: \(granted)")
+      // 1. Check if permission granted
+      guard granted else { return }
+      // 2. Attempt registration for remote notifications on the main thread
+      DispatchQueue.main.async {
+        UIApplication.shared.registerForRemoteNotifications()
+      }
+    }
+    
+  }
     
     /**
      Updates Key & InitializationVector for Encryption
@@ -236,13 +390,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.generateRealmKeys()
         
         let key = FDAKeychain.shared[kRealmEncryptionKeychainKey]
-        let keyData = Data.init(base64Encoded: key!)
+        let keyData = Data(base64Encoded: key!)
        
-        let config = Realm.Configuration(encryptionKey:keyData,
+        let config = Realm.Configuration(
+            encryptionKey:keyData,
             schemaVersion: 1,
             migrationBlock: { migration, oldSchemaVersion in
                 // We haven’t migrated anything yet, so oldSchemaVersion == 0
-                if (oldSchemaVersion < 1) {
+                if (oldSchemaVersion < 2) {
                     // Nothing to do!
                     // Realm will automatically detect new properties and removed properties
                     // And will update the schema on disk automatically
@@ -251,222 +406,34 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // Tell Realm to use this new configuration object for the default Realm
         Realm.Configuration.defaultConfiguration = config
-        
+        print(config)
         // Now that we've told Realm how to handle the schema change, opening the file
         // will automatically perform the migration
-        //let _ = try! Realm()
-    }
-    
-    func fireNotiffication(intervel:Int) {
-        
-        let content = UNMutableNotificationContent()
-        content.body = "message"
-        
-        content.sound = UNNotificationSound.default
-        content.badge = 1
-        let date = Date().addingTimeInterval(TimeInterval(intervel))
-        var timeInterval = date.timeIntervalSinceNow
 
-        
-        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: timeInterval, repeats: false)
-        let id = Utilities.randomString(length: 10)
-        let request = UNNotificationRequest(identifier: id, content: content, trigger: trigger)
-        let center = UNUserNotificationCenter.current()
-        center.add(request)
-    }
-    
-    // MARK: App Delegates
-    
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
-        
-        self.isAppLaunched = true
-        IQKeyboardManager.shared.enable = true
-        print(Utilities.isStandaloneApp(),"standalone")
-        self.customizeNavigationBar()
-        Fabric.with([Crashlytics.self])
-        
-        UIView.appearance(whenContainedInInstancesOf: [ORKTaskViewController.self]).tintColor = kUIColorForSubmitButtonBackground
-        
-        //Check For Updates
-        //self.checkForAppUpdateForVersion()
-        self.checkForAppUpdate()
-        
-        if UIApplication.shared.applicationIconBadgeNumber > 0 {
-            UIApplication.shared.applicationIconBadgeNumber = 0
-        }
-        
-        SyncUpdate.currentSyncUpdate = SyncUpdate()
-        
-        //Register observer for Network change
-        NotificationCenter.default.addObserver(SyncUpdate.currentSyncUpdate as Any , selector: #selector(SyncUpdate.currentSyncUpdate?.updateData), name: ReachabilityChangedNotification, object: nil)
-        
-        let ud1 = UserDefaults.standard
-        
-        //Check if App is launched because of Notification Received
-        if (launchOptions != nil && launchOptions?[.sourceApplication] == nil) {
-            
-            ud1.set("not null", forKey: "launch")
-            
-            // Launched from push notification
-            let notification = launchOptions?[.remoteNotification]
-            
-            if Utilities.isValidObject(someObject: notification as AnyObject) { // Launched from Remote Notification
-                
-                notificationDetails = notification as? Dictionary<String, Any>
-                
-                let ud = UserDefaults.standard
-                ud.set(true, forKey: kShowNotification)
-                ud.synchronize()
-                
-            }else if (launchOptions?[.localNotification] != nil) { //Launched from Local Notification
-                
-                ud1.set("local", forKey: "launch")
-                let localNotification = (launchOptions?[.localNotification] as? UILocalNotification)!
-                let notificationDetails = (localNotification.userInfo as? Dictionary<String, Any>)!
-                
-                NotificationHandler.instance.appOpenFromNotification = true
-                NotificationHandler.instance.studyId = (notificationDetails[kStudyId] as? String)!
-                NotificationHandler.instance.activityId = (notificationDetails[kActivityId] as? String)!
-                ud1.synchronize()
-                
-            }else { //Regular Launch
-                
-                ud1.set("invalid", forKey: "launch")
-                UIApplication.shared.applicationIconBadgeNumber = 0
-                
-                let ud = UserDefaults.standard
-                ud.set(false, forKey: kShowNotification)
-                ud.synchronize()
-            }
-        }
-        
-        //self.fireNotiffication(intervel: 10)
-        //self.fireNotiffication(intervel: 15)
-        
-        //Check if Database needs migration
-        self.checkForRealmMigration()
-        return true
-    }
-    
-    func applicationWillResignActive(_ application: UIApplication) {
-        // Use this method to pause ongoing tasks, disable timers, and invalidate graphics rendering callbacks. Games should use this method to pause the game.
-        
-        // set Flag to handle background to foreground transition
-        self.appIsResignedButDidNotEnteredBackground = true
-    }
-    
-    func applicationDidEnterBackground(_ application: UIApplication) {
-        // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
-        
-        // set Flag to handle foreground to background transition
-        self.appIsResignedButDidNotEnteredBackground = false
-    }
-    
-    
-    func application(_ application: UIApplication, performFetchWithCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
-    }
-    
-    
-    func applicationWillEnterForeground(_ application: UIApplication) {
-        
-        self.checkPasscode(viewController: (application.windows[0].rootViewController)!)
-        
-        self.checkForStudyUpdates()
-        
-        let number = UIApplication.shared.applicationIconBadgeNumber
-        if number >= 1 {
-            self.updateNotification()
-        }
-        
-        //Check For Updates
-        self.checkForAppUpdate()
-        
-    }
-    
-    func applicationDidBecomeActive(_ application: UIApplication) {
-        
-        // self.window?.isHidden = false
-        
-        UIApplication.shared.applicationIconBadgeNumber = 0
-        
-        if self.appIsResignedButDidNotEnteredBackground! {
-            
-            let navController = application.windows[0].rootViewController
-            
-            
-            let isTaskViewControllerVisible = (navController as? UINavigationController)?.visibleViewController?.isKind(of: ORKTaskViewController.self)
-            
-           // guard let navigation = (navController as? UINavigationController)?.visibleViewController as? ORKTaskViewController, let navigationTitle = navigation.title else {return}
-            
-            let navigationTitle = ((navController as? UINavigationController)?.visibleViewController as? ORKTaskViewController)?.title ?? ""
-            
-            if (navController as? UINavigationController) != nil &&  isTaskViewControllerVisible == false {
-                
-                if (navController as? UINavigationController)?.visibleViewController?.isKind(of: ORKPasscodeViewController.self) == false {
-                    //Request for Passcode
-                    //self.checkPasscode(viewController: navController!)
-                }
-                
-            } else if(navController as? UINavigationController) != nil
-                &&  isTaskViewControllerVisible == true
-                && navigationTitle == "Activity" {
-                
-                if (navController as? UINavigationController)?.visibleViewController?.isKind(of: ORKPasscodeViewController.self) == false {
-                    //Request for Passcode
-                    //self.checkPasscode(viewController: navController!)
-                }
-            } else if(navController as? UIViewController) != nil {
-               // self.checkPasscode(viewController: navController!)
-            }
-        }
-        
-        //Check if App running on Jailbreak Device
-        if AppDelegate.jailbroken(application: application) {
-            
-            let navigationController =  (self.window?.rootViewController as? UINavigationController)!
-            let appBlocker = JailbrokeBlocker.instanceFromNib(frame: navigationController.view.frame, detail: nil);
-            UIApplication.shared.keyWindow?.addSubview(appBlocker);
-            UIApplication.shared.keyWindow?.bringSubviewToFront(appBlocker)
-            
-        }
-        
-        //Update TimeZone Changes if any
-        self.calculateTimeZoneChange()
-        
-        if self.isAppLaunched! {
-            self.isAppLaunched = false
-            
-            //Update Local Notifications
-            self.checkForRegisteredNotifications()
-        }
-    }
-    
-    func applicationWillTerminate(_ application: UIApplication) {
-        // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
     
     // MARK:- NOTIFICATION
     
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
         
-        let deviceTokenString = deviceToken.reduce("", {$0 + String(format: "%02X", $1)})
-        print("Token: \(deviceTokenString)")
+        // 1. Convert device token to string
+        let tokenParts = deviceToken.map { data -> String in
+            return String(format: "%02.2hhx", data)
+        }
+        let token = tokenParts.joined()
         
         if  User.currentUser.userType == .FDAUser {
             
             User.currentUser.settings?.remoteNotifications = true
             User.currentUser.settings?.localNotifications = true
             //Update device Token to Local server
-            UserServices().updateUserProfile(deviceToken: deviceTokenString , delegate: self)
+            UserServices().updateUserProfile(deviceToken: token , delegate: self)
             
         }
-        
     }
+    
     func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
-        
         print("Token Registration failed  \(error)")
-        
     }
     
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any]) {
@@ -585,20 +552,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if User.currentUser.userType == .FDAUser {
            
             let center = UNUserNotificationCenter.current()
-            center.getPendingNotificationRequests(completionHandler: { requests in
-                print(requests)
-                if requests.count < 50 {
-                     LocalNotification.refreshAllLocalNotification()
-                }
-            })
-            
-            //check if notifications are expired or already fired
-//            if scheduledNotifications.count < 50 {
-//                //refresh local notifcation from DB
-//                LocalNotification.refreshAllLocalNotification()
-//                scheduledNotifications = application.scheduledLocalNotifications!
-//
-//            }
+            center.getPendingNotificationRequests(
+                completionHandler: { requests in
+                    print(requests)
+                    if requests.count < 50 {
+                        DispatchQueue.main.async {
+                             LocalNotification.refreshAllLocalNotification()
+                        }
+                    }
+                })
         }
     }
     
@@ -1184,8 +1146,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //update consent is updaeted in db
         Study.currentStudy?.version = StudyUpdates.studyVersion
         Study.currentStudy?.newVersion = StudyUpdates.studyVersion
-        StudyUpdates.studyConsentUpdated  = false
-        DBHandler.updateMetaDataToUpdateForStudy(study: Study.currentStudy!, updateDetails: nil)
         
         if self.isComprehensionFailed! {
             self.isComprehensionFailed = false
@@ -1195,16 +1155,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //self.addAndRemoveProgress(add: true)
         
         if ConsentBuilder.currentConsent?.consentResult?.consentPdfData?.count == 0 {
-            
             DispatchQueue.main.asyncAfter(deadline: .now()+3) {
                 self.updateEligibilityConsentStatus()
+                StudyUpdates.studyConsentUpdated  = false
+                DBHandler.updateMetaDataToUpdateForStudy(study: Study.currentStudy!, updateDetails: nil)
             }
-            
-            
-        }else {
-            //Update Consent Status to server
+        } else {
+            // Update Consent Status to server
             UserServices().updateUserEligibilityConsentStatus(eligibilityStatus: true, consentStatus:(ConsentBuilder.currentConsent?.consentStatus)!  , delegate: self)
+            StudyUpdates.studyConsentUpdated  = false
+            DBHandler.updateMetaDataToUpdateForStudy(study: Study.currentStudy!, updateDetails: nil)
         }
+  
     }
     
 }
@@ -1847,16 +1809,13 @@ extension UIWindow{
      Adds progress below navigation bar
      */
     func addProgressIndicatorOnWindow() {
-        
-        let view = UINib(nibName: kNewProgressViewNIB, bundle: nil).instantiate(withOwner: nil, options: nil)[0] as? UIView
-        
-        let url = Bundle.main.url(forResource: kResourceName, withExtension: "gif")!
-        _ = try! Data(contentsOf: url)
-        let webView =  (view?.subviews.first as? UIWebView)!
-        
-        webView.loadRequest(URLRequest.init(url: url))
-        webView.scalesPageToFit = true
-        webView.contentMode = UIView.ContentMode.scaleAspectFit
+
+        let view = UINib(nibName: kNewProgressViewNIB, bundle: nil).instantiate(
+            withOwner: nil, options: nil)[0] as? UIView
+
+        let fdaGif = UIImage.gifImageWithName(kResourceName)
+        let imageView = view?.subviews.first as? UIImageView
+        imageView?.image = fdaGif
         
         var frame = UIScreen.main.bounds
         frame.origin.y += 64
@@ -1876,17 +1835,13 @@ extension UIWindow{
         
         let view = self.viewWithTag(50000)
         if view == nil {
+
+            let view = UINib(nibName: kNewProgressViewNIB, bundle: nil).instantiate(
+                withOwner: nil, options: nil)[0] as? UIView
             
-            let view = UINib(nibName: kNewProgressViewNIB, bundle: nil).instantiate(withOwner: nil, options: nil)[0] as? UIView
-            
-            
-            let url = Bundle.main.url(forResource: kResourceName, withExtension: "gif")!
-            _ = try! Data(contentsOf: url)
-            let webView =  (view?.subviews.first as? UIWebView)!
-            
-            webView.loadRequest(URLRequest.init(url: url))
-            webView.scalesPageToFit = true
-            webView.contentMode = UIView.ContentMode.scaleAspectFit
+            let fdaGif = UIImage.gifImageWithName(kResourceName)
+            let imageView = view?.subviews.first as? UIImageView
+            imageView?.image = fdaGif
             
             let frame = UIScreen.main.bounds
             

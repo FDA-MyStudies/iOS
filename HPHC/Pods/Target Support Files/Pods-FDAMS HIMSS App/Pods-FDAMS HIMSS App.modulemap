@@ -1,0 +1,6 @@
+framework module Pods_FDAMS_HIMSS_App {
+  umbrella header "Pods-FDAMS HIMSS App-umbrella.h"
+
+  export *
+  module * { export * }
+}

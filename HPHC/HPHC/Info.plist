@@ -2,6 +2,8 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>ITSAppUsesNonExemptEncryption</key>
+	<false/>
 	<key>ApplicationID</key>
 	<string>FMSA001</string>
 	<key>CFBundleDevelopmentRegion</key>
@@ -19,7 +21,7 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.3</string>
+	<string>$(MARKETING_VERSION)</string>
 	<key>CFBundleVersion</key>
 	<string>$(CURRENT_PROJECT_VERSION)</string>
 	<key>Fabric</key>
@@ -52,13 +54,13 @@
 	<key>NSFaceIDUsageDescription</key>
 	<string>$(PRODUCT_NAME) would like to use Face ID for passcode setup.</string>
 	<key>NSHealthShareUsageDescription</key>
-	<string>$(PRODUCT_NAME) would like to access your Health App data</string>
+	<string>$(PRODUCT_NAME) would like to access your Health App data.</string>
 	<key>NSHealthUpdateUsageDescription</key>
-	<string>$(PRODUCT_NAME) would like to update your Health App data</string>
+	<string>$(PRODUCT_NAME) would like to update your Health App data.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>$(PRODUCT_NAME) would like to access your Location when using the app</string>
 	<key>NSMicrophoneUsageDescription</key>
-	<string>$(PRODUCT_NAME) would like to access your michrophone</string>
+	<string>$(PRODUCT_NAME) would like to access your microphone</string>
 	<key>NSMotionUsageDescription</key>
 	<string>$(PRODUCT_NAME) would like to use Motion data</string>
 	<key>NSSpeechRecognitionUsageDescription</key>

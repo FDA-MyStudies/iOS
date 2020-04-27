@@ -41,8 +41,21 @@ class LabKeyServices: NSObject {
         self.delegate = delegate
         let method = ResponseMethods.enroll.method
         
-        let params = [kEnrollmentToken: token,
-                      kStudyId: studyId]
+        let currentConsent = ConsentBuilder.currentConsent
+        let consentResult = currentConsent?.consentResult
+        
+        var userDataSharing: String
+        if let isShareData = consentResult?.isShareDataWithPublic {
+          userDataSharing = "\(isShareData)"
+        } else {
+          userDataSharing = "NA"
+        }
+        
+        let params = [
+            kEnrollmentToken: token,
+            kStudyId: studyId,
+            "allowDataSharing": userDataSharing
+        ]
         
         self.sendRequestWith(method: method, params: params, headers: nil)
     }
@@ -129,11 +142,22 @@ class LabKeyServices: NSObject {
         
         self.delegate = delegate
         self.activityId = activityId
-        self.keys = keys
+        
+        var key = keys
+        var table = tableName
+        
+        if key.contains("-") {
+            key = "\"\(key)\""
+        }
+        if table.contains("-") {
+            table = "\"\(table)\""
+        }
+        self.keys = key
         let method = ResponseMethods.executeSQL.method
-        let query = "SELECT " + keys + ",Created" + " FROM " + tableName
+        
+        let query = "SELECT " + key + ",Created" + " FROM " + table
+        
         let params = [
-            
             kParticipantId: participantId,
             "sql": query
             ] as [String : Any]
@@ -313,15 +337,13 @@ extension LabKeyServices: NMWebServiceDelegate{
     }
     
     func failedRequest(_ manager: NetworkManager, requestName: NSString, error: NSError) {
+        
         if delegate != nil {
             delegate.failedRequest(manager, requestName: requestName, error: error)
         }
-        
         if requestName as String == ResponseMethods.processResponse.description {
-            
             if (error.code == NoNetworkErrorCode) {
-                //save in database
-                print("save in database")
+                // Save in database
                 DBHandler.saveRequestInformation(params: self.requestParams, headers: self.headerParams, method: requestName as String, server: "response")
             }
         }

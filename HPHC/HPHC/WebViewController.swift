@@ -21,10 +21,11 @@ OTHER DEALINGS IN THE SOFTWARE.
 import Foundation
 import UIKit
 import MessageUI
+import WebKit
 
 class WebViewController : UIViewController{
     
-    @IBOutlet var webView : UIWebView?
+    @IBOutlet weak var webView : WKWebView!
     @IBOutlet var barItemShare : UIBarButtonItem?
     
     var activityIndicator:UIActivityIndicatorView!
@@ -47,18 +48,14 @@ class WebViewController : UIViewController{
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        
-        
-        //Used to add a loader
+
+        // Used to add a loader
         activityIndicator = UIActivityIndicatorView(style: .gray)
         activityIndicator.center = CGPoint(x: self.view.frame.midX, y: self.view.frame.midY-100)
         self.view.addSubview(activityIndicator)
         activityIndicator.startAnimating()
-        
-        
-        
-        if self.isEmailAvailable == false{
+
+        if self.isEmailAvailable == false {
             
         barItemShare?.isEnabled = false
         self.navigationItem.rightBarButtonItem = nil
@@ -67,43 +64,28 @@ class WebViewController : UIViewController{
         }
         
         
-        if self.requestLink != nil && (self.requestLink?.count)! > 0 {
-            let url = URL.init(string:self.requestLink!)
-            let urlRequest = URLRequest.init(url: url!)
-            
-            webView?.loadRequest(urlRequest)
-            
-        }
-        else if self.htmlString != nil {
-            
-            webView?.loadHTMLString(self.htmlString!, baseURL: nil)
-            
-            
-        }
-        else if self.pdfData != nil {
-            
-            self.webView?.load(pdfData!, mimeType: "application/pdf", textEncodingName: "UTF-8", baseURL:URL.init(fileURLWithPath: "") )
-            
-        }
-        else{
-            //VisitWebsite
-            
+        if let requestLink =  requestLink,
+            !requestLink.isEmpty,
+            let url = URL(string: requestLink) {
+            let urlRequest = URLRequest(url: url)
+            webView.load(urlRequest)
+        } else if let html = self.htmlString {
+            webView.loadHTMLString(html, baseURL: nil)
+        } else if let pdfData = pdfData {
+            self.webView.load(pdfData, mimeType: "application/pdf",
+                               characterEncodingName: "UTF-8",
+                               baseURL: URL(fileURLWithPath: ""))
+        } else {
+            // VisitWebsite
             self.activityIndicator.stopAnimating()
             self.activityIndicator.removeFromSuperview()
-            
-            
         }
+
+        webView.navigationDelegate = self
+        webView.contentScaleFactor = 1.0
         
-        webView?.delegate = self
-        webView?.scalesPageToFit = true
         //UIApplication.shared.statusBarStyle = .default
         setNeedsStatusBarAppearanceUpdate()
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        
-        
     }
     
     @IBAction func cancelButtonClicked(_ sender : Any){
@@ -117,14 +99,11 @@ class WebViewController : UIViewController{
    
     func sendConsentByMail() {
         let mailComposerVC = MFMailComposeViewController()
-        mailComposerVC.mailComposeDelegate = self
         
+        mailComposerVC.mailComposeDelegate = self
         
         mailComposerVC.setSubject("Consent")
        
-         //let data:Data?
-       
-        
         if self.pdfData != nil{
            
             let consentName:String! = (Study.currentStudy?.name!)! + "_SignedConsent"
@@ -135,9 +114,6 @@ class WebViewController : UIViewController{
         }
         else if self.htmlString != nil {
             mailComposerVC.setMessageBody(self.htmlString!, isHTML: true)
-           
-        }
-        else{
         }
         
         if MFMailComposeViewController.canSendMail()
@@ -159,39 +135,24 @@ class WebViewController : UIViewController{
     
 }
 
-extension WebViewController:MFMailComposeViewControllerDelegate{
+extension WebViewController: MFMailComposeViewControllerDelegate{
     func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
         controller.dismiss(animated: true, completion: nil)
     }
 }
-extension WebViewController:UIWebViewDelegate{
+
+extension WebViewController: WKNavigationDelegate {
     
-    func webViewDidFinishLoad(_ webView: UIWebView) {
+    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         self.activityIndicator.stopAnimating()
         self.activityIndicator.removeFromSuperview()
     }
-    func webView(_ webView: UIWebView, didFailLoadWithError error: Error) {
+    
+    func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
         self.activityIndicator.stopAnimating()
         self.activityIndicator.removeFromSuperview()
-        debugPrint("\(error.localizedDescription)")
-        
-//        let buttonTitleOK = NSLocalizedString("OK", comment: "")
-//        let alert = UIAlertController(title:NSLocalizedString(kTitleError, comment: ""),message:error.localizedDescription,preferredStyle: UIAlertControllerStyle.alert)
-//        
-//        alert.addAction(UIAlertAction.init(title:buttonTitleOK, style: .default, handler: { (action) in
-//            
-//            self.dismiss(animated: true, completion: nil)
-//            
-//        }))
-//        
-//        
-//        self.present(alert, animated: true, completion: nil)
-        
-        
     }
 }
-
-
 
 
 

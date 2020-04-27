@@ -20,23 +20,21 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 import UIKit
 
-
-
-
 class GraphChartTableViewCell: UITableViewCell {
     @IBOutlet weak var graphView: ORKGraphChartView!
 }
 
 class LineChartCell: GraphChartTableViewCell {
+    
     @IBOutlet weak var labelTitle: UILabel!
     @IBOutlet weak var labelAxisValue: UILabel!
     @IBOutlet weak var buttonForward: UIButton!
     @IBOutlet weak var buttonBackward: UIButton!
+    
     var currentChart: DashboardCharts!
     var frequencyPageIndex = 0
     var frequencyPageSize = 5
     var pageNumber = 0
-    
     
     var hourOfDayDate = Date()
     var startDateOfWeek: Date?
@@ -44,22 +42,24 @@ class LineChartCell: GraphChartTableViewCell {
 
     var charActivity: Activity?
 
-    var plotPoints: Array<Array<ORKValueRange>> = []
-    var xAxisTitles: Array! = []
+    var plotPoints: [[ORKValueRange]] = []
+    var xAxisTitles: [Any] = []
     var max: Float = 0.0
     var min: Float = 0.0
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-    }
 
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        self.labelTitle.text = ""
+        self.labelAxisValue.text = ""
+        self.buttonForward.isHidden = true
+        self.buttonBackward.isHidden = true
+        plotPoints = []
+        xAxisTitles = []
+        self.graphView.dataSource = nil
+        self.graphView.reloadData()
     }
     
-    func getWeeklyAttributedText()->NSAttributedString{
+    func getWeeklyAttributedText() -> NSAttributedString {
         
         let stringStartDate = LineChartCell.formatter.string(from: startDateOfWeek!) + " - "
         let stringEndDate = LineChartCell.formatter.string(from: endDateOfWeek!)
@@ -99,24 +99,35 @@ class LineChartCell: GraphChartTableViewCell {
     
     func setupLineChart(chart: DashboardCharts){
         
-        
-        self.graphView.tintColor = UIColor.gray
-        
         currentChart = chart
-        
+
+        self.graphView.tintColor = UIColor.gray
         labelTitle.text = chart.displayName
+        
+        guard !chart.statList.isEmpty else {return}
         let array = chart.statList.map{$0.data}
         if array.count != 0 {
             max = array.max()!
             min = array.min()!
         }
+
+        guard let activity = Study.currentStudy?.activities
+            .filter({$0.actvityId == chart.activityId}).last else {return}
         
-        
-        
-        var _: Array<ORKValueRange> = []
-        
-       
-        let activity = Study.currentStudy?.activities.filter({$0.actvityId == chart.activityId}).last
+        if activity.frequencyType == .Ongoing {
+            // Setup frequency runs
+            var frequencyRuns: [JSONDictionary] = []
+            for response in chart.statList {
+                if let submittedDate = response.startDate {
+                    let runInfo: JSONDictionary = [
+                        "startTime": submittedDate.description,
+                        "endTime": submittedDate.description,
+                    ]
+                    frequencyRuns.append(runInfo)
+                }
+            }
+            activity.frequencyRuns = frequencyRuns
+        }
         
         charActivity = activity
         
@@ -223,21 +234,9 @@ class LineChartCell: GraphChartTableViewCell {
         
             
         case .runs:
-            
             labelTitle.text = chart.displayName! + " (per run)"
-            
             self.buttonForward.isEnabled = true
-            let stringStartDate = LineChartCell.formatter.string(from: (charActivity?.startDate!)!)
-            let stringEndDate = LineChartCell.formatter.string(from: (charActivity?.endDate!)!)
-            
-            let attributedText = self.getSchedulesAttributedText(stringStartDate: stringStartDate, stringEndDate: stringEndDate)
-            
-            
-            labelAxisValue.attributedText = attributedText//stringStartDate + " - " + stringEndDate
-            
-            let runs = self.getNextSetOfFrequencyRuns()
-            
-            self.handleRunsForDate(startDate: (charActivity?.startDate)! , endDate: (charActivity?.endDate)! ,runs: runs)
+            plotForRunsType()
             
         case .hours_of_day:
             
@@ -341,31 +340,8 @@ class LineChartCell: GraphChartTableViewCell {
             self.buttonForward.isEnabled = true
             self.buttonBackward.isEnabled = true
             pageNumber += 1
-            frequencyPageIndex = frequencyPageSize*pageNumber
-            let frequencySet = self.getNextSetOfFrequencyRuns()
-            
-            if frequencySet.count != 0 {
-                
-                let firstFrequency = frequencySet.first
-                let lastFrequency = frequencySet.last
-                let sTime = (firstFrequency?["startTime"] as? String)!
-                let eTime = (lastFrequency?["endTime"] as? String)!
-                
-                let startDate = Utilities.getDateFromString(dateString: sTime)
-                let endDate = Utilities.getDateFromString(dateString: eTime)
-                
-                let stringStartDate = LineChartCell.formatter.string(from: startDate!)
-                let stringEndDate = LineChartCell.formatter.string(from: endDate!)
-                let attributedText = self.getSchedulesAttributedText(stringStartDate: stringStartDate, stringEndDate: stringEndDate)
-                
-                labelAxisValue.attributedText = attributedText//stringStartDate + " - " + stringEndDate
-                
-                self.handleRunsForDate(startDate: startDate!, endDate: endDate! ,runs: frequencySet)
-
-            } else {
-                xAxisTitles = []
-                plotPoints = []
-                self.graphView.reloadData()
+            if !plotForRunsType() {
+                pageNumber -= 1
             }
             
             
@@ -474,32 +450,9 @@ class LineChartCell: GraphChartTableViewCell {
             self.buttonForward.isEnabled = true
             self.buttonBackward.isEnabled = true
             pageNumber -= 1
-            frequencyPageIndex = frequencyPageSize*pageNumber
-            let frequencySet = self.getNextSetOfFrequencyRuns()
-            
-            if frequencySet.count != 0 {
-                
-                let firstFrequency = frequencySet.first
-                let lastFrequency = frequencySet.last
-                let sTime = (firstFrequency?["startTime"] as? String)!
-                let eTime = (lastFrequency?["endTime"] as? String)!
-                
-                let startDate = Utilities.getDateFromString(dateString: sTime)
-                let endDate = Utilities.getDateFromString(dateString: eTime)
-                
-                let stringStartDate = LineChartCell.formatter.string(from: startDate!)
-                let stringEndDate = LineChartCell.formatter.string(from: endDate!)
-                let attributedText = self.getSchedulesAttributedText(stringStartDate: stringStartDate, stringEndDate: stringEndDate)
-                
-                labelAxisValue.attributedText = attributedText //stringStartDate + " - " + stringEndDate
-                
-                self.handleRunsForDate(startDate: startDate!, endDate: endDate! ,runs: frequencySet)
-            } else {
-                xAxisTitles = []
-                plotPoints = []
-                self.graphView.reloadData()
+            if !plotForRunsType() {
+                pageNumber += 1 // Showing the last page.
             }
-            
             
         case .hours_of_day:
             
@@ -525,27 +478,45 @@ class LineChartCell: GraphChartTableViewCell {
         }
     }
     
-    func getNextSetOfFrequencyRuns() -> Array<Dictionary<String,Any>>{
-       
-//        var pagesize = frequencyPageSize
-//        if (frequencyPageIndex + frequencyPageSize) > (charActivity?.frequencyRuns?.count)!{
-//            // pagesize = (frequencyPageIndex + frequencyPageSize) - (charActivity?.frequencyRuns?.count)!
-//            pagesize = (charActivity?.frequencyRuns?.count)!
-//        }
-//        pagesize =  pagesize - 1
-//        let frequencyRunsSet = charActivity?.frequencyRuns?[frequencyPageIndex..<pagesize]
-//        print("frequency \(frequencyRunsSet)")
-//        return frequencyRunsSet!
+    @discardableResult
+    private func plotForRunsType() -> Bool {
         
-        var frequencyRunsSet: Array<Dictionary<String,Any>> = []
+        frequencyPageIndex = frequencyPageSize * pageNumber
+        let frequencySet = self.getNextSetOfFrequencyRuns()
+        
+        if !frequencySet.isEmpty {
+          
+            let sTime = frequencySet.first?["startTime"] as? String ?? ""
+            let eTime = frequencySet.last?["endTime"] as? String ?? ""
+            
+            guard let startDate = Utilities.getDateFromString(dateString: sTime) ??
+                DateHelper.formattedRunDateFromString(date: sTime),
+            let endDate = Utilities.getDateFromString(dateString: eTime) ??
+                DateHelper.formattedRunDateFromString(date: eTime) else { return false}
+            
+            let stringStartDate = LineChartCell.formatter.string(from: startDate)
+            let stringEndDate = LineChartCell.formatter.string(from: endDate)
+            let attributedText = self.getSchedulesAttributedText(stringStartDate: stringStartDate, stringEndDate: stringEndDate)
+            
+            labelAxisValue.attributedText = attributedText
+            
+            self.handleRunsForDate(startDate: startDate, endDate: endDate ,runs: frequencySet)
+            return true
+        } else {
+            self.graphView.reloadData()
+            return false
+        }
+    }
+    
+    func getNextSetOfFrequencyRuns() -> [JSONDictionary] {
+        
+        var frequencyRunsSet: [JSONDictionary] = []
         for index in frequencyPageIndex...((frequencyPageIndex+frequencyPageSize)-1){
             if index < ((charActivity?.frequencyRuns?.count)!) && index >= 0{
                 let run = charActivity?.frequencyRuns?[index]
                 frequencyRunsSet.append(run!)
             }
-          
         }
-        print("frequency \(frequencyRunsSet)")
         return frequencyRunsSet
     }
     
@@ -777,16 +748,22 @@ class LineChartCell: GraphChartTableViewCell {
         self.graphView.reloadData()
     }
     
-    func handleRunsForDate(startDate: Date,endDate: Date,runs: Array<Dictionary<String,Any>>){
+    func handleRunsForDate(startDate: Date, endDate: Date, runs: [JSONDictionary]){
         
-        let dataList: Array<DBStatisticsData> = currentChart.statList.filter({$0.startDate! >= startDate && $0.startDate! <= endDate})
+        // Adjust the range
+        let updatedStartTime = startDate.addingTimeInterval(-1)
+        let updatedEndTime = endDate.addingTimeInterval(1)
         
-        let array = dataList.map{$0.data}
-        var points: Array<ORKValueRange> = []
+        let dataList: [DBStatisticsData] = currentChart.statList
+            .filter {$0.startDate! >= updatedStartTime && $0.startDate! <= updatedEndTime}
+        
+        let array = dataList.compactMap { $0.data }
+        var points: [ORKValueRange] = []
+        
         xAxisTitles = []
         plotPoints = []
         
-        if ((runs.count) > 0){
+        if !runs.isEmpty {
             
             for i in 0...(runs.count - 1) {
                 

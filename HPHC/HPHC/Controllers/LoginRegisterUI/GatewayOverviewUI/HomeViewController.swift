@@ -47,12 +47,11 @@ class HomeViewController: UIViewController{
         //Added to change next screen
         pageControlView?.addTarget(self, action: #selector(HomeViewController.didChangePageControlValue), for: .valueChanged)
         
-       
-        let infoDict = Utilities.getBrandingDetails()
-        websiteName = infoDict?[BrandingConstant.WebsiteLink] as! String
-        let title = infoDict?[BrandingConstant.WebsiteButtonTitle] as? String
+        websiteName = Branding.WebsiteLink
+        let title = Branding.WebsiteButtonTitle
         
-        buttonLink.setTitle(title != nil ? title : websiteName, for: .normal)
+        buttonLink.setTitle(title, for: .normal)
+      
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -184,7 +183,8 @@ class HomeViewController: UIViewController{
         let loginStoryboard = UIStoryboard.init(name: "Main", bundle:Bundle.main)
         let webViewController = loginStoryboard.instantiateViewController(withIdentifier: "WebViewController") as! UINavigationController
         let webView = webViewController.viewControllers[0] as! WebViewController
-        webView.requestLink = "https://" + websiteName
+        let urlString: String = (websiteName.containsIgnoringCase("https")) ? websiteName : ("https://" + websiteName)
+        webView.requestLink = urlString
         self.navigationController?.present(webViewController, animated: true, completion: nil)
     }
     

@@ -1,21 +1,21 @@
 /*
  License Agreement for FDA My Studies
-Copyright © 2017-2019 Harvard Pilgrim Health Care Institute (HPHCI) and its Contributors. Permission is
-hereby granted, free of charge, to any person obtaining a copy of this software and associated
-documentation files (the &quot;Software&quot;), to deal in the Software without restriction, including without
-limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the
-Software, and to permit persons to whom the Software is furnished to do so, subject to the following
-conditions:
-The above copyright notice and this permission notice shall be included in all copies or substantial
-portions of the Software.
-Funding Source: Food and Drug Administration (“Funding Agency”) effective 18 September 2014 as
-Contract no. HHSF22320140030I/HHSF22301006T (the “Prime Contract”).
-THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
-INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR
-PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
-LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT
-OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
-OTHER DEALINGS IN THE SOFTWARE.
+ Copyright © 2017-2019 Harvard Pilgrim Health Care Institute (HPHCI) and its Contributors. Permission is
+ hereby granted, free of charge, to any person obtaining a copy of this software and associated
+ documentation files (the &quot;Software&quot;), to deal in the Software without restriction, including without
+ limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the
+ Software, and to permit persons to whom the Software is furnished to do so, subject to the following
+ conditions:
+ The above copyright notice and this permission notice shall be included in all copies or substantial
+ portions of the Software.
+ Funding Source: Food and Drug Administration (“Funding Agency”) effective 18 September 2014 as
+ Contract no. HHSF22320140030I/HHSF22301006T (the “Prime Contract”).
+ THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
+ INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR
+ PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
+ LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT
+ OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
+ OTHER DEALINGS IN THE SOFTWARE.
  */
 
 import Foundation
@@ -53,6 +53,10 @@ class ActivitiesViewController : UIViewController{
     
     let labkeyResponseFetch = ResponseDataFetch()
     
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .default
+    }
+    
     // MARK:- Viewcontroller Lifecycle
     fileprivate func presentUpdatedConsent() {
         let appDelegate = (UIApplication.shared.delegate as? AppDelegate)!
@@ -70,6 +74,8 @@ class ActivitiesViewController : UIViewController{
         self.tabBarController?.delegate = self
         
         self.navigationItem.title = NSLocalizedString("STUDY ACTIVITIES", comment: "")
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor:Utilities.getUIColorFromHex(0x007CBA)]
+        
         self.tableView?.sectionHeaderHeight = 30
         
         self.navigationController?.navigationItem.rightBarButtonItem?.tintColor = UIColor.gray
@@ -86,21 +92,20 @@ class ActivitiesViewController : UIViewController{
         refreshControl?.attributedTitle = NSAttributedString(string: "Pull to refresh")
         refreshControl?.addTarget(self, action: #selector(refresh(sender:)), for: UIControl.Event.valueChanged)
         tableView?.addSubview(refreshControl!)
+        self.addProgressIndicator()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         print("ActivitiesViewController - viewWillAppear")
         self.navigationController?.interactivePopGestureRecognizer?.isEnabled = false
-        UIApplication.shared.statusBarStyle = .default
-        
+       
         if Utilities.isStandaloneApp() {
             self.setNavigationBarItem()
         }
         else {
             self.addHomeButton()
         }
-       
         
         if !taskControllerPresented {
             taskControllerPresented = false
@@ -118,21 +123,13 @@ class ActivitiesViewController : UIViewController{
         
         
     }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        
-        //let message =  "The study " + (Study.currentStudy?.name!)! + " is 100 percent complete. Thank you for your participation."
-       // UIUtilities.showAlertWithMessage(alertMessage: message)
-        
-    }
-    
+  
     // MARK: Helper Methods
     
     func getLabkeyResponse() {
         
         let ud = UserDefaults.standard
-        let key = "LabKeyResponse" + (Study.currentStudy?.studyId)!
+        let key = "LabKeyResponse" + (Study.currentStudy?.studyId ?? "")
         if !(ud.bool(forKey: key)){
             labkeyResponseFetch.checkUpdates()
         }
@@ -144,15 +141,11 @@ class ActivitiesViewController : UIViewController{
             
             self.sendRequestToGetActivityStates()
             
-            //udpate status to false so notification can be registered again
+            // Update status to false so notification can be registered again.
             Study.currentStudy?.activitiesLocalNotificationUpdated = false
-            DBHandler.updateLocalNotificaitonUpdated(studyId: (Study.currentStudy?.studyId)!,status: false)
+            DBHandler.updateLocalNotificaitonUpdated(studyId: Study.currentStudy?.studyId ?? "", status: false)
             
         } else {
-            
-            if self.refreshControl != nil && (self.refreshControl?.isRefreshing)!{
-                self.refreshControl?.endRefreshing()
-            }
             //self.loadActivitiesFromDatabase()
             self.fetchActivityAnchorDateResponseFromLabkey()
         }
@@ -187,95 +180,29 @@ class ActivitiesViewController : UIViewController{
             if NotificationHandler.instance.activityId.count > 0 {
                 
                 let activityId = NotificationHandler.instance.activityId
-                
                 let rowDetail = tableViewSections[0]
                 let activities = (rowDetail["activities"] as? Array<Activity>)!
-                let index = activities.index(where: {$0.actvityId == activityId})
-                let ip = IndexPath.init(row: index!, section: 0)
-                self.selectedIndexPath = ip
-                self.tableView?.selectRow(at: ip, animated: true, scrollPosition: .middle)
-                self.tableView?.delegate?.tableView!(self.tableView!, didSelectRowAt: ip)
                 
-                NotificationHandler.instance.activityId = ""
-            }
-        }
-    }
-    
-    /**
-     RegisterNotificationForAnchorDate method sets the notification for the available resource
-     */
-    
-    func registerNotificationForAnchorDate(){
-        
-        DBHandler.getResourcesWithAnchorDateAvailable(studyId: (Study.currentStudy?.studyId)!) { (resourcesList) in
-            if resourcesList.count > 0 {
-                let todayDate = Date()
-                for resource in resourcesList {
-                    
-                    if resource.startDate == nil && resource.endDate == nil {
-                        
-                        let anchorDateObject = Study.currentStudy?.anchorDate
-                        //Fetch AnchorData based availablity
-                        if(anchorDateObject != nil && (anchorDateObject?.isAnchorDateAvailable())!) {
-                            
-                            let anchorDate = Study.currentStudy?.anchorDate?.date?.startOfDay
-                            
-                            if anchorDate != nil {
-                                
-                                //also anchor date condition
-                                let startDateInterval = TimeInterval(60*60*24*(resource.anchorDateStartDays))
-                                
-                                let endDateInterval = TimeInterval(60*60*24*(resource.anchorDateEndDays))
-                                
-                                let startAnchorDate = anchorDate?.addingTimeInterval(startDateInterval)
-                                var endAnchorDate = anchorDate?.addingTimeInterval(endDateInterval)
-                                
-                                endAnchorDate = endAnchorDate?.endOfDay
-                                let startDateResult = (startAnchorDate?.compare(todayDate))! as ComparisonResult
-                                //let endDateResult = (endAnchorDate?.compare(todayDate))! as ComparisonResult
-                                self.isAnchorDateSet = false
-                                
-                                if startDateResult == .orderedDescending {
-                                    //upcoming
-                                    let notfiId = resource.resourceId! + (Study.currentStudy?.studyId)!
-                                    DBHandler.isNotificationSetFor(notification: notfiId
-                                        , completionHandler: { (found) in
-                                            if !found {
-                                                
-                                                //Create AppLocalNotification
-                                                let notification = AppLocalNotification()
-                                                notification.id = resource.resourceId! + (Study.currentStudy?.studyId)!
-                                                notification.message = resource.notificationMessage
-                                                notification.title = "New Resource Available"
-                                                notification.startDate = startAnchorDate
-                                                notification.endDate = endAnchorDate
-                                                notification.type = AppNotification.NotificationType.Study
-                                                notification.subType = AppNotification.NotificationSubType.Resource
-                                                notification.audience = Audience.Limited
-                                                notification.studyId = (Study.currentStudy?.studyId)!
-                                                //notification.activityId = Study.currentActivity?.actvityId
-                                                
-                                                //Save Notification to Database
-                                                DBHandler.saveLocalNotification(notification: notification)
-                                                
-                                                //register notification
-                                                var notificationDate = startAnchorDate?.startOfDay
-                                                notificationDate = notificationDate?.addingTimeInterval(43200)
-                                                let message = resource.notificationMessage
-                                                let userInfo = ["studyId": (Study.currentStudy?.studyId)!,
-                                                                "type": "resource"];
-                                                LocalNotification.scheduleNotificationOn(date: notificationDate!, message: message!, userInfo: userInfo, id: notification.id)
-                                            }
-                                    })
-                                }
-                            }
-                        }
-                    }
+                let index = activities.firstIndex (where: {$0.actvityId == activityId})
+                
+                if let index = index {
+                    let ip = IndexPath.init(row: index, section: 0)
+                    self.selectedIndexPath = ip
+                    self.tableView?.selectRow(at: ip, animated: true, scrollPosition: .middle)
+                    self.tableView?.delegate?.tableView!(self.tableView!, didSelectRowAt: ip)
                 }
+                else {
+                    if let studyId = NotificationHandler.instance.studyId, let activityIdRemove = NotificationHandler.instance.activityId  {
+                        LocalNotification.removeLocalNotificationfor(studyId: studyId, activityid: activityIdRemove)
+                        DBHandler.deleteDBLocalNotification(activityId: activityIdRemove,studyId: studyId)
+                    }
+                    
+                }
+                NotificationHandler.instance.activityId = ""
+                
             }
         }
     }
-    
     
     // MARK:- Button Actions
     
@@ -302,7 +229,7 @@ class ActivitiesViewController : UIViewController{
     // MARK: Helper Methods
     func checkForDashBoardInfo(){
         
-        DBHandler.loadStatisticsForStudy(studyId: (Study.currentStudy?.studyId)!) { (statiticsList) in
+        DBHandler.loadStatisticsForStudy(studyId: Study.currentStudy?.studyId ?? "") { (statiticsList) in
             
             if statiticsList.count != 0 {
                 //Do Nothing
@@ -314,51 +241,127 @@ class ActivitiesViewController : UIViewController{
     
     
     @objc func refresh(sender:AnyObject) {
-        
+//        DBHandler.deleteStudyData(studyId: Study.currentStudy!.studyId)
+//        StudyUpdates.studyActivitiesUpdated = true
+        checkForActivitiesUpdates()
         Logger.sharedInstance.info("Request for study Updated...")
-        WCPServices().getStudyUpdates(study: Study.currentStudy!, delegate: self)
+        
+//        WCPServices().getStudyUpdates(study: Study.currentStudy!, delegate: self)
         //self.sendRequesToGetActivityList()
     }
     
+    ///Participant Property values received from Response Server saved in Database.
+    ///Saved value will be used to compare from the values Saved on UR Server.
+    ///In case DB Saved values is most recent then liftime of that activity has to be calculated again.
+    ///Newly calculated then saved UR Server.
+    func findActivitiesToUpdateSchedule() {
+        
+        let activitiesWithParticipantProperty =  Study.currentStudy?.activities.filter(
+        {$0.anchorDate?.sourceType == AnchorDateSourceType.participantProperty.rawValue})
+        
+        for activity in activitiesWithParticipantProperty! {
+            let extPPValue = activity.anchorDate?.ppMetaData?.externalPropertyValue
+            let participatedActivityStatus = User.currentUser.participatedActivites.filter({$0.activityId == activity.actvityId}).last
+            
+            if extPPValue != participatedActivityStatus?.anchorDateVersion {
+                // Anchor date is updated, should calculated life time again
+            }
+            
+        }
+        
+    }
     
     // MARK:-
     
     func fetchActivityAnchorDateResponseFromLabkey() {
-        print("fetchActivityAnchorDateResponseFromLabkey")
-        AnchorDateHandler().fetchActivityAnchorDateResponseFromLabkey { (status) in
-            print("Finished 1")
-            //if status {
-                //DispatchQueue.main.async {
-                    self.loadActivitiesFromDatabase()
-                //}
+        
+        guard let currentStudy = Study.currentStudy
+            else {return}
+        ActivitiesViewController.updateActivitiesAnchorDateLifeTime(for: currentStudy) { [weak self] in
+            self?.loadActivitiesFromDatabase()
+            self?.refreshControl?.endRefreshing()
+            DispatchQueue.main.async { [weak self] in
+                self?.syncParticipantPropertyValuesOnUserRegistration(for: currentStudy)
+            }
+        }
+    }
+    
+    final class func updateActivitiesAnchorDateLifeTime(for study: Study, completion:(() -> Void)? = nil) {
+        
+        let groupQuery = DispatchGroup()
+        
+        groupQuery.enter()
+        AnchorDateHandler(study: study).queryAnchorDateForActivityResponseActivities { (status) in
+            Logger.sharedInstance.info("AD for AR Resource fetch: ", status)
+            groupQuery.leave()
+        }
+        
+        groupQuery.enter()
+        AnchorDateHandler(study: study).queryParticipantPropertiesForActivities { (status) in
+            Logger.sharedInstance.info("AD for PP Resource fetch: ", status)
+            groupQuery.leave()
+        }
+        
+        groupQuery.notify(queue: .main) {
+            completion?()
+        }
+    }
+    
+    
+    func syncParticipantPropertyValuesOnUserRegistration(for study: Study) {
+        
+        // Get activities from database with ParticipantProperty as anchor date.
+        let activities = DBHandler.participantPropertyActivities(study.studyId)
+        var activitiesToSync: [JSONDictionary] = []
+        for activity in activities {
+            
+            var ppValue = ["activityId":activity.actvityId ?? "",
+                           "activityStartDate": activity.startDate?.description ?? "",
+                           "activityEndDate": activity.endDate?.description ?? "",
+                           "anchorDateVersion": activity.externalPropertyValue ?? "",
+                           "anchorDatecreatedDate": activity.dateOfEntryValue ?? ""] as JSONDictionary
+            
+            // Check activity frequency.
+            var activitiesRuns = [[String:String]]()
+            if activity.frequencyType == Frequency.Scheduled.rawValue {
+                let runs = activity.activityRuns
+                for run in runs {
+                    let runDetail = ["runStartDate":run.startDate.description,
+                                     "runEndDate":run.endDate.description]
+                    activitiesRuns.append(runDetail)
+                }
                 
-            //}
+                ppValue["customScheduleRuns"] = activitiesRuns
+            }
+            
+            activitiesToSync.append(ppValue)
             
         }
-        print("Finished 0")
+        
+        if activitiesToSync.count > 0 {
+            UserServices().updateActivityWithParticipantPropertyDetail(studyId: Study.currentStudy!.studyId, activities: activitiesToSync , delegate: self)
+        }
     }
     
     /**
      Used to load the Actif=vities data from database
      */
     func loadActivitiesFromDatabase(){
-        
-        if DBHandler.isActivitiesEmpty((Study.currentStudy?.studyId)!) {
+        guard let studyID = Study.currentStudy?.studyId else { return }
+        if DBHandler.isActivitiesEmpty(studyID) {
             self.sendRequestToGetActivityStates()
-        }
-        else {
+        } else {
             
-            DBHandler.loadActivityListFromDatabase(studyId: (Study.currentStudy?.studyId)!) { (activities) in
+            DBHandler.loadActivityListFromDatabase(studyId: studyID) { [weak self] (activities) in
+               
                 if activities.count > 0 {
                     Study.currentStudy?.activities = activities
-                    
-                    self.handleActivityListResponse()
-                    
-                    
+                    self?.handleActivityListResponse()
                 } else {
-                    
-                    //self.sendRequestToGetActivityStates()
+                    self?.labelNoNetworkAvailable?.text = "Sorry, no activities available right now."
                 }
+                
+                self?.removeProgressIndicator()
             }
         }
     }
@@ -370,7 +373,7 @@ class ActivitiesViewController : UIViewController{
     func createActivity(){
         
         //Disable Custom KeyPad with toolbars
-//        IQKeyboardManager.sharedManager().enable = false
+        //        IQKeyboardManager.sharedManager().enable = false
         IQKeyboardManager.shared.enableAutoToolbar = false
         
         if Utilities.isValidObject(someObject: Study.currentActivity?.steps as AnyObject?){
@@ -472,28 +475,30 @@ class ActivitiesViewController : UIViewController{
         
         tableViewSections = []
         allActivityList = []
-        let activities = Study.currentStudy?.activities
+        let activities = Study.currentStudy?.activities.filter({$0.startDate != nil})
+        var bufCurrentStudyArray: [Activity] = []
         
-        var currentActivities: Array<Activity> = []
-        var upcomingActivities: Array<Activity> = []
-        var pastActivities: Array<Activity> = []
+        var currentActivities: [Activity] = []
+        var upcomingActivities: [Activity] = []
+        var pastActivities: [Activity] = []
         
         var isInActiveActivitiesAreAvailable: Bool! = false
         for activity in activities! {
-            
             if activity.state == "active" || activity.state == nil {
-                
+              
                 let status =  self.getActivityAvailabilityStatus(activity: activity)
                 switch status {
                 case .current:
                     currentActivities.append(activity)
+                    bufCurrentStudyArray.append(activity)
                 case .upcoming:
                     upcomingActivities.append(activity)
+                    bufCurrentStudyArray.append(activity)
                 case .past:
                     pastActivities.append(activity)
+                    bufCurrentStudyArray.append(activity)
                 }
             } else {
-                
                 isInActiveActivitiesAreAvailable = true
                 DBHandler.deleteDBLocalNotification(activityId: activity.actvityId!,studyId: activity.studyId!)
             }
@@ -503,18 +508,40 @@ class ActivitiesViewController : UIViewController{
             LocalNotification.refreshAllLocalNotification()
         }
         
-        //sort as per start date
-        currentActivities.sort(by: {$0.startDate?.compare($1.startDate!) == .orderedAscending})
+        let currentOngoingActivities = currentActivities.filter({$0.frequencyType == .Ongoing}).sorted(by: { (a1, a2) -> Bool in
+            if let date1 = a1.lastModified, let date2 = a2.lastModified {
+                return date1.compare(date2) == .orderedDescending
+            }
+            return false
+        })
+        
+        currentActivities = currentActivities.filter({$0.frequencyType != .Ongoing}).sorted(by: {$0.startDate?.compare($1.startDate!) == .orderedAscending})
+        
         upcomingActivities.sort(by: {$0.startDate?.compare($1.startDate!) == .orderedAscending})
         pastActivities.sort(by: {$0.startDate?.compare($1.startDate!) == .orderedAscending})
         
-        let  sortedCurrentActivities =  currentActivities.sorted(by: { (activity1: Activity, activity2: Activity) -> Bool in
-            
-            return (activity1.userParticipationStatus.status.sortIndex < activity2.userParticipationStatus.status.sortIndex)
-        })
+        let currentCompletedAndIncompletedActivities = currentActivities.filter { (activity) -> Bool in
+            let participationStatus = activity.userParticipationStatus.status
+            return participationStatus == .completed ||
+                participationStatus == .abandoned ||
+                participationStatus == .expired
+        }.sorted { (activity1, activity2) -> Bool in
+            return activity1.userParticipationStatus.status.sortIndex <
+                activity2.userParticipationStatus.status.sortIndex
+        }
         
+        let currentYetToStartAndInProgressActivities = currentActivities.filter { (activity) -> Bool in
+            let participationStatus = activity.userParticipationStatus.status
+            return participationStatus == .yetToJoin ||
+                participationStatus == .inProgress
+        }.sorted { (activity1, activity2) -> Bool in
+            return activity1.userParticipationStatus.status.sortIndex <
+                activity2.userParticipationStatus.status.sortIndex
+        }
         
-        let currentDetails = ["title": "CURRENT","activities": sortedCurrentActivities] as [String : Any]
+        let allTypeCurrentActivities = currentYetToStartAndInProgressActivities + currentOngoingActivities + currentCompletedAndIncompletedActivities
+        
+        let currentDetails = ["title": "CURRENT","activities": allTypeCurrentActivities] as [String : Any]
         let upcomingDetails = ["title": "UPCOMING","activities": upcomingActivities] as [String : Any]
         let pastDetails = ["title": "PAST","activities": pastActivities] as [String : Any]
         
@@ -530,43 +557,36 @@ class ActivitiesViewController : UIViewController{
             self.updateSectionArray(activityType: filterType)
         }
         
+
+        self.tableView?.reloadData()
+        self.tableView?.isHidden = false
+        self.labelNoNetworkAvailable?.isHidden = true
+        self.updateCompletionAdherence()
+        
         DispatchQueue.main.async {
-            
-            self.tableView?.reloadData()
-            self.tableView?.isHidden = false
-            self.labelNoNetworkAvailable?.isHidden = true
-            self.updateCompletionAdherence()
-        }
-        
-        
-        
-        
-        if (User.currentUser.settings?.localNotifications)! {
-            print("localNotifications enabled")
-            if !(Study.currentStudy?.activitiesLocalNotificationUpdated)! {
-                print("Registerig Notification")
-                //Register LocalNotifications
-                LocalNotification.registerAllLocalNotificationFor(activities: (Study.currentStudy?.activities)!) { (finished,notificationlist) in
-                    print("Notification set sucessfully")
-                    Study.currentStudy?.activitiesLocalNotificationUpdated = true
-                    DBHandler.saveRegisteredLocaNotification(notificationList: notificationlist)
-                    DBHandler.updateLocalNotificaitonUpdated(studyId: (Study.currentStudy?.studyId)!,status: true)
-                    LocalNotification.refreshAllLocalNotification()
+           if User.currentUser.settings?.localNotifications ?? false {
+                if !(Study.currentStudy?.activitiesLocalNotificationUpdated)! {
+                    //Register LocalNotifications
+                    LocalNotification.registerAllLocalNotificationFor(activities: Study.currentStudy?.activities ?? []) { (finished,notificationlist) in
+                        Study.currentStudy?.activitiesLocalNotificationUpdated = true
+                        DBHandler.saveRegisteredLocaNotification(notificationList: notificationlist)
+                        DBHandler.updateLocalNotificaitonUpdated(studyId: Study.currentStudy?.studyId ?? "",
+                                                                 status: true)
+                        LocalNotification.refreshAllLocalNotification()
+                    }
                 }
-                
             }
         }
-        
+
         self.checkIfFetelKickCountRunning()
-        
-        Logger.sharedInstance.info("Activities Displayed to user")
     }
     
     /**
      Used to update Activity Run Status
      @param status    Accepts data from UserActivityStatus class and ActivityStatus enum
      */
-    func updateActivityRunStuatus(status: UserActivityStatus.ActivityStatus){
+    @discardableResult
+    func updateActivityRunStatus(status: UserActivityStatus.ActivityStatus) -> Bool{
         
         let activity = Study.currentActivity!
         
@@ -582,10 +602,10 @@ class ActivitiesViewController : UIViewController{
         //Update participationStatus to DB
         DBHandler.updateActivityParticipationStatus(activity: activity)
         
-        if status == .completed {
+        if status == .completed && activity.frequencyType != .Ongoing {
             self.updateCompletionAdherence()
         }
-        
+        return true
     }
     
     /**
@@ -605,12 +625,14 @@ class ActivitiesViewController : UIViewController{
         
         //Calculate Runs
         for activity in activities! {
+            if activity.frequencyType == .Ongoing {
+                continue // No need to consider Ongoing activity completion.
+            }
             totalRuns += activity.totalRuns
             totalIncompletedRuns += activity.incompletedRuns
             totalCompletedRuns += activity.compeltedRuns
             
         }
-        
         
         Study.currentStudy?.totalCompleteRuns = totalCompletedRuns
         Study.currentStudy?.totalIncompleteRuns = totalIncompletedRuns
@@ -618,7 +640,7 @@ class ActivitiesViewController : UIViewController{
         let completion = ceil( Double(self.divide(lhs: (totalCompletedRuns + totalIncompletedRuns)*100, rhs: totalRuns)) )
         let adherence = ceil (Double(self.divide(lhs: totalCompletedRuns*100, rhs: (totalCompletedRuns + totalIncompletedRuns))))
         
-        let studyid = (Study.currentStudy?.studyId)!
+        let studyid = Study.currentStudy?.studyId ?? ""
         
         let status = User.currentUser.udpateCompletionAndAdherence(studyId: studyid, completion: Int(completion), adherence: Int(adherence))
         
@@ -635,23 +657,17 @@ class ActivitiesViewController : UIViewController{
         
         let ud = UserDefaults.standard
         if completion > 50 && completion < 100 {
-            
             if !(ud.bool(forKey: halfCompletionKey)) {
-                let message =  "The study " + (Study.currentStudy?.name!)! + " is now 50 percent complete. We look forward to your continued participation as the study progresses."
                 //UIUtilities.showAlertWithMessage(alertMessage: message)
                 ud.set(true, forKey: halfCompletionKey)
-                
             }
-            
         }
         
         if completion == 100 {
-            
             if !(ud.bool(forKey: fullCompletionKey)) {
                 let message =  "The study " + (Study.currentStudy?.name!)! + " is 100 percent complete. Thank you for your participation."
                 UIUtilities.showAlertWithMessage(alertMessage: message)
                 ud.set(true, forKey: fullCompletionKey)
-                
             }
         }
         
@@ -685,7 +701,7 @@ class ActivitiesViewController : UIViewController{
      Used to update Activity Status To InProgress
      */
     func updateActivityStatusToInProgress(){
-        self.updateActivityRunStuatus(status: .inProgress)
+        self.updateActivityRunStatus(status: .inProgress)
     }
     
     
@@ -693,16 +709,36 @@ class ActivitiesViewController : UIViewController{
      Used to update Activity Status To Complete
      */
     func updateActivityStatusToComplete(){
-        self.updateActivityRunStuatus(status: .completed)
+        self.updateActivityRunStatus(status: .completed)
     }
     
     //save completed staus in database
     func updateRunStatusToComplete(){
         
-        let activity = Study.currentActivity!
-        activity.compeltedRuns += 1
-        DBHandler.updateRunToComplete(runId: activity.currentRunId, activityId: activity.actvityId!, studyId: activity.studyId!)
-        self.updateActivityStatusToComplete()
+        guard let currentActivity = Study.currentActivity else {return}
+        currentActivity.compeltedRuns += 1
+        
+        if currentActivity.frequencyType != .Ongoing {
+            DBHandler.updateRunToComplete(runId: currentActivity.currentRunId,
+                                          activityId: currentActivity.actvityId!,
+                                          studyId: currentActivity.studyId!)
+            self.updateActivityStatusToComplete()
+        } else {
+            // Everytime user completed the ongoing run, increase it's total runs.
+            currentActivity.totalRuns += 1
+            if self.updateActivityRunStatus(status: .yetToJoin) {
+                if let updatedRun = DBHandler.updateOngoingRunOnComplete(with: currentActivity.currentRunId,
+                activityId: currentActivity.actvityId!,
+                studyId: currentActivity.studyId!) {
+                    currentActivity.currentRun = updatedRun
+                    currentActivity.currentRunId = updatedRun.runId
+                }
+            }
+            // Schedule another run
+        }
+        DispatchQueue.main.async {
+            self.loadActivitiesFromDatabase()
+        }
     }
     
     /**
@@ -761,7 +797,8 @@ class ActivitiesViewController : UIViewController{
             presentUpdatedConsent()
             
         } else if StudyUpdates.studyInfoUpdated {
-            WCPServices().getStudyInformation(studyId: (Study.currentStudy?.studyId)!, delegate: self)
+            guard let studyID = Study.currentStudy?.studyId else { return }
+            WCPServices().getStudyInformation(studyId: studyID, delegate: self)
             
         } else {
             self.checkForActivitiesUpdates()
@@ -775,7 +812,8 @@ class ActivitiesViewController : UIViewController{
      Used to send Request To Get ActivityStates
      */
     func sendRequestToGetActivityStates(){
-        UserServices().getUserActivityState(studyId: (Study.currentStudy?.studyId)!, delegate: self)
+        guard let studyID = Study.currentStudy?.studyId else { return }
+        UserServices().getUserActivityState(studyId: studyID, delegate: self)
     }
     
     
@@ -783,14 +821,17 @@ class ActivitiesViewController : UIViewController{
      Used to send Request To Get ActivityList
      */
     func sendRequesToGetActivityList(){
-        WCPServices().getStudyActivityList(studyId: (Study.currentStudy?.studyId)!, delegate: self)
+        guard let studyID = Study.currentStudy?.studyId else {return}
+        WCPServices().getStudyActivityList(studyId: studyID, delegate: self)
     }
     
     func sendRequestToGetDashboardInfo(){
-        WCPServices().getStudyDashboardInfo(studyId: (Study.currentStudy?.studyId)!, delegate: self)
+        guard let studyID = Study.currentStudy?.studyId else {return}
+        WCPServices().getStudyDashboardInfo(studyId: studyID, delegate: self)
     }
     func sendRequestToGetResourcesInfo(){
-        WCPServices().getResourcesForStudy(studyId:(Study.currentStudy?.studyId)!, delegate: self)
+        guard let studyID = Study.currentStudy?.studyId else {return}
+        WCPServices().getResourcesForStudy(studyId: studyID, delegate: self)
     }
     
 }
@@ -891,9 +932,9 @@ extension ActivitiesViewController: UITableViewDelegate{
             if activity.currentRun != nil {
                 if activity.userParticipationStatus != nil {
                     let activityRunParticipationStatus = activity.userParticipationStatus
-                    if activityRunParticipationStatus?.status == .yetToJoin || activityRunParticipationStatus?.status == .inProgress
+                    if activityRunParticipationStatus?.status == .yetToJoin
+                        || activityRunParticipationStatus?.status == .inProgress {
                         
-                    {
                         Study.updateCurrentActivity(activity: activities[indexPath.row])
                         
                         //Following to be commented
@@ -905,8 +946,14 @@ extension ActivitiesViewController: UITableViewDelegate{
                                 self.createActivity()
                             } else {
                                 
-                                //Fetch ActivityMetaData from Server
-                                WCPServices().getStudyActivityMetadata(studyId: (Study.currentStudy?.studyId)! , activityId: (Study.currentActivity?.actvityId)!, activityVersion: (Study.currentActivity?.version)!, delegate: self)
+                                if let studyID = Study.currentStudy?.studyId,
+                                    let activityID = Study.currentActivity?.actvityId,
+                                    let version = Study.currentActivity?.version {
+                                    WCPServices().getStudyActivityMetadata(studyId: studyID,
+                                                                           activityId: activityID,
+                                                                           activityVersion: version,
+                                                                           delegate: self)
+                                }
                             }
                         })
                         
@@ -1005,9 +1052,7 @@ extension ActivitiesViewController: NMWebServiceDelegate {
         } else {
             self.addProgressIndicator()
         }
-    }
-    
-    
+    }    
     
     func finishedRequest(_ manager: NetworkManager, requestName: NSString, response: AnyObject?) {
         Logger.sharedInstance.info("requestname : \(requestName) Response : \(String(describing:response))")
@@ -1016,21 +1061,13 @@ extension ActivitiesViewController: NMWebServiceDelegate {
             self.sendRequesToGetActivityList()
         } else if requestName as String == WCPMethods.activityList.method.methodName {
             
-            //get DashboardInfo
-            self.sendRequestToGetDashboardInfo()
-            
-            self.fetchActivityAnchorDateResponseFromLabkey()
-           // self.loadActivitiesFromDatabase()
-            
-            if self.refreshControl != nil && (self.refreshControl?.isRefreshing)!{
-                self.refreshControl?.endRefreshing()
-            }
-            
             StudyUpdates.studyActivitiesUpdated = false
-            //Update StudymetaData for Study
+            // Update StudymetaData for Study
             DBHandler.updateMetaDataToUpdateForStudy(study: Study.currentStudy!, updateDetails: nil)
-            
-            
+            // findActivitiesToUpdateSchedule()
+            self.fetchActivityAnchorDateResponseFromLabkey()
+            // get DashboardInfo
+            self.sendRequestToGetDashboardInfo()
             
         } else if requestName as String == WCPMethods.activity.method.methodName {
             self.removeProgressIndicator()
@@ -1041,8 +1078,11 @@ extension ActivitiesViewController: NMWebServiceDelegate {
             self.getLabkeyResponse()
             
         } else if requestName as String == WCPMethods.resources.method.methodName {
-            self.removeProgressIndicator()
-            
+            DispatchQueue.main.async {
+                if let study = Study.currentStudy {
+                    ResourcesViewController.updateResourcesAnchorDateLifeTime(for: study)
+                }
+            }
         } else if requestName as String == ResponseMethods.processResponse.method.methodName {
             self.removeProgressIndicator()
             //self.updateRunStatusToComplete()
@@ -1082,41 +1122,13 @@ extension ActivitiesViewController: NMWebServiceDelegate {
             UIUtilities.showAlertMessageWithActionHandler(kErrorTitle, message: error.localizedDescription, buttonTitle: kTitleOk, viewControllerUsed: self, action: {
                 self.fdaSlideMenuController()?.navigateToHomeAfterUnauthorizedAccess()
             })
-        } else {
-            if requestName as String == RegistrationMethods.activityState.method.methodName {
-                //self.sendRequesToGetActivityList()
-                if (error.code != NoNetworkErrorCode) {
-                    self.loadActivitiesFromDatabase()
-                } else {
-                    
-                    self.tableView?.isHidden = true
-                    self.labelNoNetworkAvailable?.isHidden = false
-                    
-                    UIUtilities.showAlertWithTitleAndMessage(title: NSLocalizedString(kErrorTitle, comment: "") as NSString, message: error.localizedDescription as NSString)
-                }
-            } else if requestName as String == ResponseMethods.processResponse.method.methodName {
-                
-                if (error.code == NoNetworkErrorCode) {
-                    //Users are notified when their responses don’t get submitted due to network issues and are notified that the responses will be automatically submitted once the app has network available again.
-                    //                UIUtilities.showAlertWithMessage(alertMessage: "Your responses don’t get submitted due to network issue, but we have saved it locally, we will automatically submit once the app has network available again.")
-                    //
-                    //                if error.code == CouldNotConnectToServerCode {
-                    //                    UIUtilities.showAlertWithMessage(alertMessage: "Your responses don’t get submitted due to connectiviy with our server, but we have saved it locally, we will automatically submit once the app has network available again.")
-                    //                }
-                    //let data = ActivityBuilder.currentActivityBuilder.actvityResult?.getResultDictionary()
-                    //DBHandler.saveResponseDataFor(activity: Study.currentActivity!, toBeSynced: true, data: data!)
-                    
-                }
-                
-            }
-            else if requestName as String == RegistrationMethods.updateStudyState.method.methodName {
-                
-            }
-            else {
-                if error.code != 300 {
-                    UIUtilities.showAlertWithTitleAndMessage(title: NSLocalizedString(kErrorTitle, comment: "") as NSString, message: error.localizedDescription as NSString)
-                }
-                
+        } else if requestName as String == RegistrationMethods.activityState.method.methodName {
+            //self.sendRequesToGetActivityList()
+            if (error.code != NoNetworkErrorCode) {
+                self.loadActivitiesFromDatabase()
+            } else {
+                self.tableView?.isHidden = true
+                self.labelNoNetworkAvailable?.isHidden = false
             }
         }
     }
@@ -1175,21 +1187,21 @@ extension ActivitiesViewController: ORKTaskViewControllerDelegate{
         case ORKTaskViewControllerFinishReason.completed:
             print("completed")
             taskResult = taskViewController.result
-//            let ud = UserDefaults.standard
-//            if ud.bool(forKey: "FKC") {
-//
-//                let runid = (ud.object(forKey: "FetalKickCounterRunid") as? Int)!
-//
-//                if Study.currentActivity?.currentRun.runId != runid {
-//                    //runid is changed
-//                    self.updateRunStatusForRunId(runId: runid)
-//                } else {
-//                    self.updateRunStatusToComplete()
-//                }
-//            } else {
-//
-//                self.updateRunStatusToComplete()
-//            }
+            //            let ud = UserDefaults.standard
+            //            if ud.bool(forKey: "FKC") {
+            //
+            //                let runid = (ud.object(forKey: "FetalKickCounterRunid") as? Int)!
+            //
+            //                if Study.currentActivity?.currentRun.runId != runid {
+            //                    //runid is changed
+            //                    self.updateRunStatusForRunId(runId: runid)
+            //                } else {
+            //                    self.updateRunStatusToComplete()
+            //                }
+            //            } else {
+            //
+            //                self.updateRunStatusToComplete()
+            //            }
             
         case ORKTaskViewControllerFinishReason.failed:
             print("failed")
@@ -1340,7 +1352,7 @@ extension ActivitiesViewController: ORKTaskViewControllerDelegate{
             }
         }
         taskViewController.dismiss(animated: true, completion: {
-           
+            
             if reason == ORKTaskViewControllerFinishReason.completed {
                 
                 
@@ -1359,7 +1371,7 @@ extension ActivitiesViewController: ORKTaskViewControllerDelegate{
                     
                     self.updateRunStatusToComplete()
                 }
-
+                
                 let lifeTimeUpdated = DBHandler.updateTargetActivityAnchorDateDetail(studyId: studyId!, activityId: activityId!, response: response!)
                 if lifeTimeUpdated {
                     self.loadActivitiesFromDatabase()
@@ -1371,7 +1383,7 @@ extension ActivitiesViewController: ORKTaskViewControllerDelegate{
             else {
                 self.tableView?.reloadData()
             }
-           
+            
         })
     }
     
@@ -1406,7 +1418,7 @@ extension ActivitiesViewController: ORKTaskViewControllerDelegate{
                 }
                 activityStepResult?.initWithORKStepResult(stepResult: orkStepResult! as ORKStepResult , activityType: (ActivityBuilder.currentActivityBuilder.actvityResult?.type)!)
                 
-               // let dictionary = activityStepResult?.getActivityStepResultDict()
+                // let dictionary = activityStepResult?.getActivityStepResultDict()
                 
                 
                 //check for anchor date
@@ -1607,11 +1619,11 @@ class ActivitySchedules:UIView,UITableViewDelegate,UITableViewDataSource{
 }
 
 
-class ResponseDataFetch:NMWebServiceDelegate{
+class ResponseDataFetch: NMWebServiceDelegate{
     
     var dataSourceKeysForLabkey: Array<Dictionary<String,String>> = []
     
-     static let labkeyDateFormatter: DateFormatter = {
+    static let labkeyDateFormatter: DateFormatter = {
         //2017/06/13 18:12:13
         let formatter = DateFormatter()
         formatter.timeZone = TimeZone.init(identifier: "America/New_York")
@@ -1642,7 +1654,7 @@ class ResponseDataFetch:NMWebServiceDelegate{
         } else {
             
             //Load Stats List from DB
-            DBHandler.loadStatisticsForStudy(studyId: (Study.currentStudy?.studyId)!) { (statiticsList) in
+            DBHandler.loadStatisticsForStudy(studyId: Study.currentStudy?.studyId ?? "") { (statiticsList) in
                 
                 if statiticsList.count != 0 {
                     StudyDashboard.instance.statistics = statiticsList
@@ -1659,7 +1671,8 @@ class ResponseDataFetch:NMWebServiceDelegate{
     }
     
     func sendRequestToGetDashboardInfo(){
-        WCPServices().getStudyDashboardInfo(studyId: (Study.currentStudy?.studyId)!, delegate: self)
+        guard let studyID = Study.currentStudy?.studyId else { return }
+        WCPServices().getStudyDashboardInfo(studyId: studyID, delegate: self)
     }
     
     func handleExecuteSQLResponse(){
@@ -1667,12 +1680,12 @@ class ResponseDataFetch:NMWebServiceDelegate{
         if !self.dataSourceKeysForLabkey.isEmpty {
             self.dataSourceKeysForLabkey.removeFirst()
         }
-         self.sendRequestToGetDashboardResponse()
+        self.sendRequestToGetDashboardResponse()
     }
     
     func getDataKeysForCurrentStudy(){
         
-        DBHandler.getDataSourceKeyForActivity(studyId: (Study.currentStudy?.studyId)!) { (activityKeys) in
+        DBHandler.getDataSourceKeyForActivity(studyId: Study.currentStudy?.studyId ?? "") { (activityKeys) in
             print(activityKeys)
             if activityKeys.count > 0 {
                 self.dataSourceKeysForLabkey = activityKeys
@@ -1743,7 +1756,7 @@ class ResponseDataFetch:NMWebServiceDelegate{
                 }
                 
             }
-            let key = "LabKeyResponse" + (Study.currentStudy?.studyId)!
+            let key = "LabKeyResponse" + (Study.currentStudy?.studyId ?? "")
             UserDefaults.standard.set(true, forKey: key)
             
             let appDelegate = (UIApplication.shared.delegate as? AppDelegate)!
@@ -1768,10 +1781,9 @@ class ResponseDataFetch:NMWebServiceDelegate{
         
     }
     func failedRequest(_ manager: NetworkManager, requestName: NSString, error: NSError) {
-        Logger.sharedInstance.info("requestname : \(requestName)")
+        Logger.sharedInstance.info("failed requestname : \(requestName)")
         if requestName as String == ResponseMethods.executeSQL.description {
             self.handleExecuteSQLResponse()
-            
         } else {
             //Do Nothing
         }

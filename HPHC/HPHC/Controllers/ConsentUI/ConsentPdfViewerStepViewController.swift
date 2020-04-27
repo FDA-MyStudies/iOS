@@ -21,6 +21,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 import UIKit
 import MessageUI
 import ResearchKit
+import WebKit
 
 let kPdfMimeType = "application/pdf"
 let kUTF8Encoding = "UTF-8"
@@ -42,7 +43,7 @@ class ConsentPdfViewerStep: ORKStep {
  */
 class ConsentPdfViewerStepViewController: ORKStepViewController {
     
-    @IBOutlet var webView: UIWebView?
+    @IBOutlet weak var webView: WKWebView!
     var pdfData: Data?
     
     @IBOutlet weak var buttonEmailPdf: UIBarButtonItem?
@@ -70,26 +71,30 @@ class ConsentPdfViewerStepViewController: ORKStepViewController {
     // MARK:Button Actions
     
     @IBAction func buttonActionNext(sender: UIBarButtonItem?) {
-        
         self.goForward()
     }
     
     @IBAction func buttonActionEmailPdf(sender: UIBarButtonItem?) {
-        
         self.sendConsentByMail()
-        
     }
     
     // MARK:View controller delegates
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        self.webView?.load(pdfData!, mimeType: "application/pdf", textEncodingName: "UTF-8", baseURL: URL.init(fileURLWithPath: "") )
-        webView?.delegate = self
-        webView?.scalesPageToFit = true
+        webView.contentScaleFactor = 1.0
+        webView.navigationDelegate = self
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+      super.viewDidAppear(animated)
+        if let pdfData = self.pdfData {
+            self.webView.load(pdfData,
+                              mimeType: "application/pdf",
+                              characterEncodingName: "UTF-8",
+                              baseURL: URL(fileURLWithPath: ""))
+        }
+    }
     /*
      sendConsentByMail used for sharing the Consent
      */
@@ -100,7 +105,7 @@ class ConsentPdfViewerStepViewController: ORKStepViewController {
         
         mailComposerVC.setSubject(kEmailSubject)
         mailComposerVC.setMessageBody("", isHTML: false)
-        
+       
         let Filename =   "\((Study.currentStudy?.name)!)" + "_SignedConsent"   + ".pdf"
         
         mailComposerVC.addAttachmentData(pdfData!, mimeType: "application/pdf", fileName: Filename)
@@ -135,14 +140,14 @@ extension ConsentPdfViewerStepViewController: MFMailComposeViewControllerDelegat
 }
 
 // MARK: WebView Delegate
-extension ConsentPdfViewerStepViewController: UIWebViewDelegate{
+extension ConsentPdfViewerStepViewController: WKNavigationDelegate{
     
-    func webViewDidFinishLoad(_ webView: UIWebView) {
+    
+    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         self.removeProgressIndicator()
     }
     
-    func webView(_ webView: UIWebView, didFailLoadWithError error: Error) {
-        
+    func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
         self.removeProgressIndicator()
         
         let buttonTitleOK = NSLocalizedString("OK", comment: "")
@@ -155,6 +160,7 @@ extension ConsentPdfViewerStepViewController: UIWebViewDelegate{
         
         self.present(alert, animated: true, completion: nil)
     }
+    
 }
 
 

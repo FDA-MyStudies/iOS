@@ -84,11 +84,10 @@ class SignInViewController: UIViewController{
             buttonSignUp?.setAttributedTitle(mutableAttributedTitle, for: .normal)
         }
         
-        let brandingDetail = Utilities.getBrandingDetails()
         TermsAndPolicy.currentTermsAndPolicy =  TermsAndPolicy()
-        guard let policyURL = brandingDetail?[BrandingConstant.PrivacyPolicyURL] as? String,let terms = brandingDetail?[BrandingConstant.TermsAndConditionURL] as? String else {
-           return
-        }
+      
+        let policyURL = Branding.PrivacyPolicyURL
+        let terms = Branding.TermsAndConditionURL
         TermsAndPolicy.currentTermsAndPolicy?.initWith(terms: terms, policy: policyURL)
         self.agreeToTermsAndConditions()
         

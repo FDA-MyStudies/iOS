@@ -335,7 +335,7 @@ class WCPServices: NSObject {
     func handleResourceListForGateway(response: Dictionary<String, Any>) {
         
         let resources = response[kResources] as! Array<Dictionary<String,Any>>
-        var listOfResources: Array<Resource>! = []
+        var listOfResources: [Resource] = []
         for resource in resources{
             let resourceObj = Resource(detail: resource)
             listOfResources.append(resourceObj)
@@ -362,17 +362,14 @@ class WCPServices: NSObject {
 //        }
         
         //Actual
-        let resources = response[kResources] as! Array<Dictionary<String,Any>>
-        var listOfResources: Array<Resource>! = []
-        for resource in resources{
+        let resources = response[kResources] as! [JSONDictionary]
+        var listOfResources: [Resource] = []
+        for resource in resources {
             let resourceObj = Resource()
-            resourceObj.level = ResourceLevel.study
-            resourceObj.setResource(dict: resource as NSDictionary)
-            
+            resourceObj.setResourceForStudy(dict: resource)
             listOfResources.append(resourceObj)
         }
-        
-        
+
         //save in database
         DBHandler.saveResourcesForStudy(studyId: (Study.currentStudy?.studyId)!, resources: listOfResources)
         
@@ -508,7 +505,7 @@ class WCPServices: NSObject {
 //        }
         
         //Actual
-        let activities = response[kActivites] as! Array<Dictionary<String,Any>>
+         let activities = response[kActivites] as! Array<Dictionary<String,Any>>
         
         if Utilities.isValidObject(someObject: activities as AnyObject? ) {
             
@@ -516,7 +513,7 @@ class WCPServices: NSObject {
                 var activityList: Array<Activity> = []
                 for activityDict in activities{
                     
-                    let activity = Activity.init(studyId: (Study.currentStudy?.studyId)!, infoDict: activityDict)
+                    let activity = Activity(studyId: (Study.currentStudy?.studyId)!, infoDict: activityDict)
                     activityList.append(activity)
                 }
                 
@@ -535,22 +532,22 @@ class WCPServices: NSObject {
     
     func handleGetStudyActivityMetadata(response: Dictionary<String, Any>){
         
-        /*
-        let filePath  = Bundle.main.path(forResource: "Activity_Metadata_Other", ofType: "json")
-        let data = NSData(contentsOfFile: filePath!)
-        
-        var activities: [String:Any] = [:]
-        
-        do {
-            let res = try JSONSerialization.jsonObject(with: data! as Data, options: []) as? Dictionary<String,Any>
-            
-            activities = res?[kActivity] as! [String: Any]
-        }
-        catch {
-            print("json error: \(error.localizedDescription)")
-        }
-        */
-       // Study.currentActivity?.setActivityMetaData(activityDict: activities)
+//        let filePath  = Bundle.main.path(forResource: "ActivityMetadata TEST1", ofType: "json") //Activity_Metadata_Other
+//        let data = NSData(contentsOfFile: filePath!)
+//
+//        var activities: [String:Any] = [:]
+//
+//        do {
+//            let res = try JSONSerialization.jsonObject(with: data! as Data, options: []) as? Dictionary<String,Any>
+//
+//            activities = res?[kActivity] as! [String: Any]
+////            print("1---\(activities)")
+//        }
+//        catch {
+//            print("json error: \(error.localizedDescription)")
+//        }
+//
+//        Study.currentActivity?.setActivityMetaData(activityDict: activities)
         
         Study.currentActivity?.setActivityMetaData(activityDict: response[kActivity] as! Dictionary<String, Any>)
         

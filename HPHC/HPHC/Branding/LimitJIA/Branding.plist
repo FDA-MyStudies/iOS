@@ -26,5 +26,9 @@
 	<string>You’re In</string>
 	<key>AllowFeedback</key>
 	<false/>
+	<key>NavigationTitleName</key>
+	<string>CARRA Registry</string>
+	<key>PoweredByTitleName</key>
+	<string>Powered by FDA MyStudies</string>
 </dict>
 </plist>

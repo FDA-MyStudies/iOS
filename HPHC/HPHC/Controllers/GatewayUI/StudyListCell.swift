@@ -18,6 +18,7 @@ OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE
 OTHER DEALINGS IN THE SOFTWARE.
  */
 
+// import SDWebImage
 import UIKit
 import SDWebImage
 
@@ -46,19 +47,13 @@ class StudyListCell: UITableViewCell {
     var selectedStudy: Study!
     var delegate: StudyListDelegates? = nil
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
+    /// Cell cleanup.
+    override func prepareForReuse() {
+        super.prepareForReuse()
+          studyLogoImage?.image = UIImage(named: "placeholder")
     }
-
-    /**
-     
-     Used to change the cell background color
-     
-     @param selected    checks if particular cell is selected
-     @param animated    used to animate the cell
-
-     */
+    
+    /// Used to change the cell background color.
     override func setSelected(_ selected: Bool, animated: Bool) {
         let color = studyStatusIndicator?.backgroundColor
         let color2 = categoryBG?.backgroundColor
@@ -97,6 +92,9 @@ class StudyListCell: UITableViewCell {
      */
     func populateCellWith(study: Study){
         selectedStudy = study
+        // logo
+        updateStudyImage(study)
+           
         labelStudyTitle?.text = study.name
         
         labelStudyShortDescription?.text = study.description
@@ -115,8 +113,6 @@ class StudyListCell: UITableViewCell {
         attributedString.addAttributes([NSAttributedString.Key.font:UIFont(name: "HelveticaNeue-Bold", size: 12)!], range: foundRange)
         labelStudySponserName?.attributedText = attributedString
         
-        studyLogoImage?.image = #imageLiteral(resourceName: "placeholder")
-        
         //study status
         self.setStudyStatus(study: study)
         
@@ -126,14 +122,6 @@ class StudyListCell: UITableViewCell {
         else {
             //set participatedStudies
             self.setUserStatusForStudy(study: study)
-        }
-        //logo
-        if study.logoURL != nil {
-            
-            let url = URL.init(string: study.logoURL!)
-            studyLogoImage?.sd_setImage(with: url, completed: { (image, error, cache, url) in
-                
-            })  //.sd_setImage(with: url, placeholderImage: #imageLiteral(resourceName: "placeholder"))
         }
     }
     
@@ -194,12 +182,6 @@ class StudyListCell: UITableViewCell {
             switch userStudyStatus.status {
             case .inProgress:
                 studyUserStatusIcon?.image = #imageLiteral(resourceName: "in_progress_icn")
-//                DBHandler.getCompletion(studyId: study.studyId!, completionHandler: { (completion, adherence) in
-//                    if completion > 0 {
-//                        self.progressBarCompletion?.progress = Float(completion)/100
-//                        self.labelCompletionValue?.text = String(completion) + "%"
-//                    }
-//                })
             case .yetToJoin:
                 studyUserStatusIcon?.image = #imageLiteral(resourceName: "yet_to_join_icn")
             case .notEligible:
@@ -210,8 +192,7 @@ class StudyListCell: UITableViewCell {
                 studyUserStatusIcon?.image = #imageLiteral(resourceName: "completed_icn")
                 
             }
-            
-            //bookMarkStatus
+            // bookMarkStatus
             buttonBookmark?.isSelected = userStudyStatus.bookmarked
         }
         else {
@@ -225,15 +206,25 @@ class StudyListCell: UITableViewCell {
     
 // MARK:- Button Actions
     
-    /**
-     
-     Button bookmark clicked and delegate it back to Study home and 
-     Study list View controller
-     
-     @param sender    Accepts UIButton object
-     
-     */
-    @IBAction func buttonBookmardAction(_ sender: UIButton){
+  /// Updates the icon for `Study`
+     /// - Parameter study: Instance of Study.
+     fileprivate func updateStudyImage(_ study: Study) {
+         // Update study logo using SDWEBImage and cache it.
+         if let logoURLString = study.logoURL,
+             let url = URL(string: logoURLString) {
+             studyLogoImage?.sd_setImage(with: url, placeholderImage: nil, options: .progressiveLoad, completed: { [weak self] (image, error, _, _) in
+                 if let image = image {
+                     self?.studyLogoImage?.image = image
+                 }
+             })
+         }
+     }
+  
+    // MARK:- Button Actions
+    
+    /// Button bookmark clicked and delegate it back to Study home and
+    /// Study list View controller.
+    @IBAction func buttonBookmardAction(_ sender: UIButton) {
         if sender.isSelected {
             sender.isSelected = false
         }

@@ -74,11 +74,7 @@ class ConfirmationViewController: UIViewController {
         let plistPath = Bundle.main.path(forResource: kConfirmationPlist, ofType: kPlistFileType , inDirectory: nil)
         tableViewRowDetails = NSMutableArray.init(contentsOfFile: plistPath!)
         
-        var infoDict: NSDictionary?
-        if let path = Bundle.main.path(forResource: "Info", ofType: "plist") {
-            infoDict = NSDictionary(contentsOfFile: path)
-        }
-        let navTitle = infoDict!["ProductTitleName"] as! String
+        let navTitle = Branding.productTitle
         
         var descriptionText =  Utilities.isStandaloneApp() ? kHeaderDescriptionStandalone : kHeaderDescription
         descriptionText = descriptionText.replacingOccurrences(of: "#APPNAME#", with: navTitle)

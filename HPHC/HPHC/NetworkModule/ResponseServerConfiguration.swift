@@ -44,6 +44,8 @@ enum ResponseMethods: String {
             return Method(methodName: (self.rawValue+".api"), methodType: .httpMethodGet, requestType: .requestTypeHTTP)
         case .withdrawFromStudy, .getParticipantResponse,.validateEnrollmentToken:
             return Method(methodName: (self.rawValue+".api"), methodType: .httpMethodPOST, requestType: .requestTypeHTTP)
+        case .enroll:
+            return Method(methodName: (self.rawValue+".api"), methodType: .httpMethodPOST, requestType: .requestTypeHTTP)
         default:
             return Method(methodName: (self.rawValue+".api"), methodType: .httpMethodPOST, requestType: .requestTypeJSON)
         }
@@ -51,13 +53,19 @@ enum ResponseMethods: String {
     
 }
 struct ResponseServerURLConstants {
-    //TODO: Set the server end points
+
+    // Labkey UAT Server
+     static let ProductionURL = "https://hpresp-stage.lkcompliant.net/mobileappstudy-"
+     static let DevelopmentURL = "https://hpresp-stage.lkcompliant.net/mobileappstudy-"
     
-    //Labkey UAT Server
-    static let ProductionURL = "https://hpresp-stage.lkcompliant.net/mobileappstudy-"
-    static let DevelopmentURL = "https://hpresp-stage.lkcompliant.net/mobileappstudy-"
+    // Labkey Demo Server
+    // static let ProductionURL = "https://resp.demo.mystudiesapp.org/mobileappstudy-"
+    // static let DevelopmentURL = "https://resp.demo.mystudiesapp.org/mobileappstudy-"
     
+//    static let ProductionURL = ""
+//    static let DevelopmentURL = ""
 }
+
 class ResponseServerConfiguration: NetworkConfiguration {
     static let configuration = ResponseServerConfiguration()
     
@@ -91,3 +99,4 @@ class ResponseServerConfiguration: NetworkConfiguration {
         return  error
     }
 }
+

@@ -69,7 +69,7 @@ let kTerms = "terms"
 let kPolicy = "privacy"
 
 // MARK: User
-class User{
+class User {
     
     var firstName: String?
     var lastName: String?
@@ -702,6 +702,16 @@ class TermsAndPolicy {
 // MARK: ActivityStatus
 class UserActivityStatus{
     
+    struct CustomScheduleRuns {
+        var runStartDate:String
+        var runEndDate:String
+        
+        init(value:[String:String]) {
+            self.runEndDate = value["runEndDate"] ?? ""
+            self.runStartDate = value["runStartDate"] ?? ""
+        }
+    }
+    
     enum ActivityStatus: Int {
         case yetToJoin
         case inProgress
@@ -767,6 +777,14 @@ class UserActivityStatus{
     var totalRuns = 0
     var compeltedRuns = 0
     var incompletedRuns = 0
+    
+    var activityStartDate:String?
+    var activityEndDate:String?
+    var anchorDateVersion:String?
+    var lastModifiedDate:String?
+    var anchorDatecreatedDate:String?
+    lazy var customScheduleRuns:[CustomScheduleRuns] = []
+
     var status: ActivityStatus = .yetToJoin
     init() {
         
@@ -818,6 +836,19 @@ class UserActivityStatus{
                     self.status = .abandoned
                 }
             }
+            
+            self.activityStartDate = detail["activityStartDate"] as? String
+            self.activityEndDate = detail["activityEndDate"] as? String
+            self.anchorDateVersion = detail["anchorDateVersion"] as? String
+            self.lastModifiedDate = detail["lastModifiedDate"] as? String
+            self.anchorDatecreatedDate = detail["anchorDatecreatedDate"] as? String
+         
+            if let customRuns = detail["customScheduleRuns"] as? [[String:String]] {
+                for run in customRuns {
+                    self.customScheduleRuns.append(CustomScheduleRuns(value: run))
+                }
+            }
+  
         }else{
             Logger.sharedInstance.debug("UserStudyStatus Dictionary is null:\(detail)")
         }

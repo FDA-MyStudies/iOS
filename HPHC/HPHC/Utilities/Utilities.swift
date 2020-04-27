@@ -58,16 +58,6 @@ struct iOSVersion {
 
 class Utilities: NSObject {
     
-    
-    class func getBrandingDetails() -> NSDictionary? {
-        
-        var infoDict: NSDictionary?
-        if let path = Bundle.main.path(forResource: "Branding", ofType: "plist") {
-            infoDict = NSDictionary(contentsOfFile: path)
-        }
-        return infoDict!
-    }
-    
     class func isStandaloneApp() -> Bool {
         
         var infoDict: NSDictionary?
@@ -153,7 +143,7 @@ class Utilities: NSObject {
         return dateString
     }
     
-    class func getDateFromStringWithFormat(_ dateFormate: String,resultDate: String)->Date {
+    class func getDateFromStringWithFormat(_ dateFormate: String,resultDate: String) -> Date? {
         
         let formatter = DateFormatter()
         formatter.locale = Locale(identifier: "us")
@@ -161,7 +151,7 @@ class Utilities: NSObject {
         formatter.dateFormat = dateFormate
         let resDate = formatter.date(from: resultDate)
         
-        return  resDate!
+        return  resDate
     }
     
     class func frameForText(_ text: String, font: UIFont) -> CGSize {

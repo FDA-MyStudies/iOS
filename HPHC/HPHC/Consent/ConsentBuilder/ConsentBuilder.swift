@@ -368,7 +368,7 @@ class ConsentBuilder {
             stepArray?.append(comprehensionCompletionStep)
         }
 
-        if sharingConsentStep != nil {
+        if sharingConsentStep != nil, !StudyUpdates.studyConsentUpdated {
             stepArray?.append(sharingConsentStep!)
         }
         if reviewConsentStep != nil {

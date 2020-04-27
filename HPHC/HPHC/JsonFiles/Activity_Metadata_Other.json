@@ -1,155 +1,24 @@
 {
-    "message": "SUCCESS",
-    "activity": {
-        "type": "questionnaire",
-        "metadata": {
-            "studyId": "Study03",
-            "activityId": "Que-textChoice",
-            "name": "Que-textChoice",
-            "version": "1.2",
-            "lastModified": "2019-04-09T07:18:42.000-0700",
-            "startDate": "2019-04-05T12:10:00.000-0700",
-            "endDate": "2019-04-24T23:59:59.000-0700"
-        },
-        "steps": [
-            {
-                "type": "question",
-                "resultType": "textChoice",
-                "key": "textChoice",
-                "title": "Question MultiChoice",
-                "text": "desc",
-                "skippable": false,
-                "groupName": "",
-                "repeatable": false,
-                "repeatableText": "",
-                "destinations": [
-                    {
-                        "condition": "one",
-                        "operator": "",
-                        "destination": "Q2"
-                    },
-                    {
-                        "condition": "two",
-                        "operator": "",
-                        "destination": "Q2"
-                    },
-                    {
-                        "condition": "three",
-                        "operator": "",
-                        "destination": "Q2"
-                    },
-                    {
-                        "condition": "",
-                        "operator": "",
-                        "destination": "Q2"
-                    }
-                ],
-                "healthDataKey": "",
-                "format": {
-                    "textChoices": [
-                        {
-                            "text": "1st",
-                            "value": "one",
-                            "detail": "",
-                            "exclusive": true
-                        },
-                        {
-                            "text": "2nd",
-                            "value": "two",
-                            "detail": "sec desc",
-                            "exclusive": false
-                        },
-                        {
-                            "text": "3rd",
-                            "value": "three",
-                            "detail": "",
-                            "exclusive": false
-                        },
-                        {
-                            "text":"Other choice",
-                            "value":"3",
-                            "detail":"",
-                            "exclusive":false,
-                            "other":{
-                                "placeholder":"other medication",
-                                "isMandatory":true,
-                                "textfieldReq":true
-                            }
-                        }
-                        
-                    ],
-                    "selectionStyle": "Multiple"
-                },
-                "steps": [],
-                "options": []
-            },
-            {
-                "type": "form",
-                "resultType": "grouped",
-                "key": "Q2",
-                "title": "",
-                "text": "",
-                "skippable": true,
-                "groupName": "",
-                "repeatable": true,
-                "repeatableText": "Want to do add more?Click here",
-                "destinations": [
-                    {
-                        "condition": "",
-                        "operator": "",
-                        "destination": ""
-                    }
-                ],
-                "healthDataKey": "",
-                "format": {},
-                "steps": [
-                    {
-                        "type": "question",
-                        "resultType": "text",
-                        "key": "Q3",
-                        "title": "What is your name?",
-                        "text": "",
-                        "skippable": true,
-                        "groupName": "",
-                        "repeatable": false,
-                        "repeatableText": "",
-                        "destinations": [],
-                        "healthDataKey": "",
-                        "format": {
-                            "maxLength": 20,
-                            "validationRegex": "^([A-Za-z0-9 ]|[']*)+$",
-                            "invalidMessage": "Invalid Input. Please try again.",
-                            "multipleLines": true,
-                            "placeholder": "Enter your name."
-                        },
-                        "steps": [],
-                        "options": []
-                    },
-                    {
-                        "type": "question",
-                        "resultType": "date",
-                        "key": "Q4",
-                        "title": "What is your date of birth?",
-                        "text": "",
-                        "skippable": false,
-                        "groupName": "",
-                        "repeatable": false,
-                        "repeatableText": "",
-                        "destinations": [],
-                        "healthDataKey": "",
-                        "format": {
-                            "style": "Date",
-                            "minDate": "",
-                            "maxDate": "",
-                            "default": "",
-                            "dateRange": "untilCurrent"
-                        },
-                        "steps": [],
-                        "options": []
-                    }
-                ],
-                "options": []
-            }
-        ]
-    }
+    "activities": [{
+        "activityId": "activetaskmanual",
+        "activityVersion": "1.0",
+        "activityRunId": "",
+        "activityState": "",
+        "bookmarked": false,
+        "activityStartDate": "2019-03-27T11:30:50.000+0530",
+        "activityEndDate": "2019-03-27T11:30:50.000+0530",
+        "anchorDateVersion": "x7",
+        "anchorDatecreatedDate": "2019-03-27T11:30:50.000+0530",
+        "lastModifiedDate": "",
+        "customScheduleRuns": [{
+            "runStartDate": "2019-11-26T11:30:50.000+0530",
+            "runEndDate": "2019-12-02T11:30:50.000+0530"
+        }],
+        "activityRun": {
+            "total": 0,
+            "completed": 0,
+            "missed": 0
+        }
+
+    }]
 }

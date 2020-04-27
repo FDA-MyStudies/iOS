@@ -14,7 +14,7 @@ def main_pods
   pod 'RealmSwift'
   pod 'CryptoSwift'
   pod 'ActionSheetPicker-3.0'
-  
+
 end
 
 target 'HPHC' do
@@ -38,6 +38,26 @@ target 'LimitJIA' do
   
 end
 
+target 'FDAMS HIMSS App' do
+  # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
+  use_frameworks!
+  main_pods
+  
+end
+
+target 'HPHC QA' do
+  # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
+  use_frameworks!
+  main_pods
+  
+end
+
+target 'MyStudies COVID-19' do
+  # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
+  use_frameworks!
+  main_pods
+  
+end
 
 target 'HPHCUITests' do
   use_frameworks!

@@ -70,7 +70,8 @@ class StudyHomeViewController: UIViewController {
     var isUpdatingIneligibility: Bool = false
 
     var consentRestorationData: Data?
-
+    lazy var isStudyActivitiesPresented = false
+    
     var pageViewController: PageViewController? {
         didSet {
             pageViewController?.pageViewDelegate = self
@@ -160,18 +161,14 @@ class StudyHomeViewController: UIViewController {
             }
         }
 
-        let brandingDetail = Utilities.getBrandingDetails()
-        let joinStudyTitle = brandingDetail?[BrandingConstant.JoinStudyButtonTitle] as? String
-        if joinStudyTitle != nil {
-            buttonJoinStudy?.setTitle(joinStudyTitle, for: .normal)
-        }
-
-        if let visitWebsite = brandingDetail?[BrandingConstant.VisitWebsiteButtonTitle] as? String {
-            buttonVisitWebsite?.setTitle(visitWebsite, for: .normal)
-        }
-        if let viewConsent = brandingDetail?[BrandingConstant.ViewConsentButtonTitle] as? String {
-            buttonViewConsent?.setTitle(viewConsent, for: .normal)
-        }
+      let joinStudyTitle = Branding.JoinStudyButtonTitle
+      buttonJoinStudy?.setTitle(joinStudyTitle, for: .normal)
+      
+      let visitWebsite = Branding.VisitWebsiteButtonTitle
+      buttonVisitWebsite?.setTitle(visitWebsite, for: .normal)
+      
+      let viewConsent = Branding.ViewConsentButtonTitle
+      buttonViewConsent?.setTitle(viewConsent, for: .normal)
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -482,6 +479,8 @@ class StudyHomeViewController: UIViewController {
      This Method is used to push screen back to Studydashboard tabbar controller
      */
     func pushToStudyDashboard() {
+        guard !isStudyActivitiesPresented else { return }
+        isStudyActivitiesPresented = true
         let studyDashboard = (storyboard?.instantiateViewController(withIdentifier: kStudyDashboardTabbarControllerIdentifier) as? StudyDashboardTabbarViewController)!
         navigationController?.pushViewController(studyDashboard, animated: true)
     }
@@ -1140,12 +1139,15 @@ extension StudyHomeViewController: ORKTaskViewControllerDelegate {
                     ttController.consentDocument = documentCopy
                     
                     //start enrollment process
-                    if Study.currentStudy?.userParticipateState.status == UserStudyStatus.StudyStatus.yetToJoin {
+                    let currentStatus = Study.currentStudy?.userParticipateState.status
+                    if  currentStatus == .yetToJoin
+                      || currentStatus == .notEligible
+                      || (currentStatus == .Withdrawn
+                      && Study.currentStudy?.studySettings.rejoinStudyAfterWithdrawn ?? false) {
                         DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                             self.studyEnrollmentStarted(taskViewController: taskViewController)
                         }
                     }
-                    
                     return ttController
                 }
             } else {

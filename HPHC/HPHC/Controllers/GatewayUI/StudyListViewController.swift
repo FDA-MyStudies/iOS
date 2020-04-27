@@ -55,11 +55,7 @@ class StudyListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        var infoDict: NSDictionary?
-        if let path = Bundle.main.path(forResource: "Info", ofType: "plist") {
-            infoDict = NSDictionary(contentsOfFile: path)
-        }
-        let navTitle = infoDict!["ProductTitleName"] as! String
+      let navTitle = Branding.NavigationTitleName
         let titleLabel = UILabel()
         titleLabel.text = NSLocalizedString(navTitle, comment: "")
         titleLabel.font = UIFont(name: "HelveticaNeue-Medium", size: 18)
@@ -138,13 +134,15 @@ class StudyListViewController: UIViewController {
             sendRequestToGetStudyList()
         }
 
-        // UIApplication.shared.statusBarStyle = .default
         setNeedsStatusBarAppearanceUpdate()
+      
         // Checking if registering notification is pending
-        if ud.value(forKey: kNotificationRegistrationIsPending) != nil, ud.bool(forKey: kNotificationRegistrationIsPending) == true {
-            appdelegate.askForNotification()
+        if ud.bool(forKey: kNotificationRegistrationIsPending) {
+            DispatchQueue.main.async {
+                appdelegate.askForNotification()
+            }
         }
-
+        
         // Handling StudyList Request Failure condition
         if studyListRequestFailed {
             labelHelperText.isHidden = false
@@ -261,7 +259,7 @@ class StudyListViewController: UIViewController {
             }
 
             if daysLastSeen >= 7 { // Notification is disabled for 7 or more Days
-                UIUtilities.showAlertWithTitleAndMessage(title: NSLocalizedString("FDA My Studies", comment: "") as NSString, message: NSLocalizedString(kMessageAppNotificationOffRemainder, comment: "") as NSString)
+              UIUtilities.showAlertWithTitleAndMessage(title: NSLocalizedString(Branding.productTitle, comment: "") as NSString, message: NSLocalizedString(kMessageAppNotificationOffRemainder, comment: "") as NSString)
 
                 ud.set(Date(), forKey: "NotificationRemainder")
                 ud.synchronize()

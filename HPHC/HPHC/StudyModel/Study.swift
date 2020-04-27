@@ -337,12 +337,12 @@ class StudyWithdrawalConfigration {
 // MARK:StudyUpdates
 struct StudyUpdates {
     
-    static  var studyInfoUpdated = false
-    static  var studyConsentUpdated = false
-    static  var studyActivitiesUpdated = false
-    static  var studyResourcesUpdated = false
-    static  var studyVersion: String? = nil
-    static  var studyStatus: String? = nil
+    static var studyInfoUpdated = false
+    static var studyConsentUpdated = false
+    static var studyActivitiesUpdated = false
+    static var studyResourcesUpdated = false
+    static var studyVersion: String? = nil
+    static var studyStatus: String? = nil
     
     init() {
     }
@@ -365,7 +365,8 @@ struct StudyUpdates {
                 StudyUpdates.studyConsentUpdated = (updates[kStudyConsent] as? Bool)!
             }
             if Utilities.isValidValue(someObject: updates[kStudyActivities] as AnyObject ){
-                StudyUpdates.studyActivitiesUpdated = (updates[kStudyActivities] as? Bool)!
+               // StudyUpdates.studyActivitiesUpdated = (updates[kStudyActivities] as? Bool)!
+                StudyUpdates.studyActivitiesUpdated = true // FIXME : Remove this line of code and uncomment above.
             }
             if Utilities.isValidValue(someObject: updates["status"] as AnyObject ){
                 StudyUpdates.studyStatus = updates["status"] as? String

@@ -87,12 +87,12 @@ class LocalNotification: NSObject {
         for activity in activities {
             
             var runsBeforeToday: Array<ActivityRun> = []
-            if activity.frequencyType == Frequency.One_Time && activity.endDate == nil {
+            if (activity.frequencyType == Frequency.One_Time
+                || activity.frequencyType == .Ongoing)
+                && activity.endDate == nil {
                 //runsBeforeToday = runs
                 runsBeforeToday = activity.activityRuns
-                
             } else {
-                
                 runsBeforeToday = activity.activityRuns.filter({$0.endDate >= date})
             }
             
@@ -114,7 +114,7 @@ class LocalNotification: NSObject {
                         let date = run.startDate! // 24 hours before
                         let message = "A new run of the daily activity " + activity.name! + ", is now available. Your participation is important. Please visit the study to complete it now."
                         //let userInfo = [kStudyId: run.studyId,
-                         //               kActivityId: run.activityId]
+                        //               kActivityId: run.activityId]
                         
                         LocalNotification.composeRunNotification(startDate: date, endDate: run.endDate, message: message, run: run)
                         
@@ -125,8 +125,8 @@ class LocalNotification: NSObject {
                         let message2 = ", is now available and is valid until " + LocalNotification.timeFormatter.string(from: run.endDate!)
                         let messgge3 = ". Your participation is important. Please visit the study to complete it now."
                         let message = message1 + message2 + messgge3
-//                        let userInfo = [kStudyId: run.studyId,
-//                                        kActivityId: run.activityId]
+                        //                        let userInfo = [kStudyId: run.studyId,
+                        //                                        kActivityId: run.activityId]
                         
                         LocalNotification.composeRunNotification(startDate: date, endDate: run.endDate, message: message, run: run)
                     }
@@ -136,8 +136,8 @@ class LocalNotification: NSObject {
                     //expiry notificaiton
                     let date = run.endDate.addingTimeInterval(-24*3600)
                     let message = "The current run of the weekly activity " + activity.name! + " will expire in 24 hours. Your participation is important. Please visit the study to complete it now."
-//                    let userInfo = [kStudyId: run.studyId,
-//                                    kActivityId: run.activityId]
+                    //                    let userInfo = [kStudyId: run.studyId,
+                    //                                    kActivityId: run.activityId]
                     
                     LocalNotification.composeRunNotification(startDate: date, endDate: run.endDate, message: message, run: run)
                     
@@ -150,8 +150,8 @@ class LocalNotification: NSObject {
                     
                     let date = run.endDate.addingTimeInterval(-72*3600)
                     let message = "The current run of the monthly activity " + activity.name! + " will expire in 3 days. Your participation is important. Please visit the study to complete it now."
-//                    let userInfo = [kStudyId: run.studyId,
-//                                    kActivityId: run.activityId]
+                    //                    let userInfo = [kStudyId: run.studyId,
+                    //                                    kActivityId: run.activityId]
                     LocalNotification.composeRunNotification(startDate: date, endDate: run.endDate, message: message, run: run)
                     
                     //start notification
@@ -166,10 +166,11 @@ class LocalNotification: NSObject {
                     let message2 = ", is now available and is valid until " + "\(endDate)"
                     let message3 = ". Your participation is important. Please visit the study to complete it now."
                     let message = message1 + message2 + message3
-//                    let userInfo = [kStudyId: run.studyId,
-//                                    kActivityId: run.activityId]
+                    //                    let userInfo = [kStudyId: run.studyId,
+                    //                                    kActivityId: run.activityId]
                     
                     LocalNotification.composeRunNotification(startDate: date, endDate: run.endDate, message: message, run: run)
+                default: break
                 }
             }
         }

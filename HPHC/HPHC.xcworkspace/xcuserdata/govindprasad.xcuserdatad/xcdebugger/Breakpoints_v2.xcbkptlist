@@ -1,0 +1,312 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Bucket
+   uuid = "07A301F5-6447-4EBF-91F6-CCADB32F9D64"
+   type = "0"
+   version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "9827A6AB-AE1C-45A1-B6AC-B1662134B19C"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "HPHC/Controllers/StudyUI/ActivityUI/ActivitiesViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "194"
+            endingLineNumber = "194"
+            landmarkName = "checkIfFetelKickCountRunning()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "9827A6AB-AE1C-45A1-B6AC-B1662134B19C - 1e9c77e8b49d3910"
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "HPHC.ActivitiesViewController.checkIfFetelKickCountRunning() -&gt; ()"
+                  moduleName = "HPHC"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/govindprasad/Documents/GovindPrasadC/BTC%20Project/FDA/HPHC/HPHC/Controllers/StudyUI/ActivityUI/ActivitiesViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "194"
+                  endingLineNumber = "194"
+                  offsetFromSymbolStart = "1254">
+               </Location>
+               <Location
+                  uuid = "9827A6AB-AE1C-45A1-B6AC-B1662134B19C - 1e9c77e8b49d3910"
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "HPHC.ActivitiesViewController.checkIfFetelKickCountRunning() -&gt; ()"
+                  moduleName = "HPHC"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/govindprasad/Documents/GovindPrasadC/BTC%20Project/FDA/HPHC/HPHC/Controllers/StudyUI/ActivityUI/ActivitiesViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "194"
+                  endingLineNumber = "194"
+                  offsetFromSymbolStart = "5565">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "8EEF7F7C-DA1D-4812-BC31-A83B3C058729"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "HPHC/Controllers/StudyUI/ActivityUI/ActivitiesViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "166"
+            endingLineNumber = "166"
+            landmarkName = "checkIfFetelKickCountRunning()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "6FEC3502-620F-4E65-B8F4-FAD2C038689C"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "HPHC/NetworkModule/NetworkWebServiceHandler.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "313"
+            endingLineNumber = "313"
+            landmarkName = "handleResponse(_:response:requestName:error:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "5FFF8060-0817-466E-8461-E36ED0AC8F83"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "HPHC/NetworkModule/NetworkWebServiceHandler.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "279"
+            endingLineNumber = "279"
+            landmarkName = "fireRequest(_:requestName:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "56B918F2-24FD-487F-A639-A6A255A2C2A4"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "HPHC/Controllers/StudyUI/ActivityUI/ActivitiesViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "191"
+            endingLineNumber = "191"
+            landmarkName = "checkIfFetelKickCountRunning()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "4AD3FEFF-43FB-4E5F-9ACB-D70C2793A9B7"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "HPHC/Controllers/StudyUI/ActivityUI/ActivitiesViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "210"
+            endingLineNumber = "210"
+            landmarkName = "checkIfFetelKickCountRunning()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "AE805D2A-2F94-4E86-B8F7-1A6CAE1BB597"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "HPHC/Controllers/StudyUI/ActivityUI/ActivitiesViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "216"
+            endingLineNumber = "216"
+            landmarkName = "checkIfFetelKickCountRunning()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "34C02093-D2E8-490A-8E42-7394C2E017CF"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "HPHC/ScheduleModel/LocalNotification.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "236"
+            endingLineNumber = "236"
+            landmarkName = "removeLocalNotificationfor(studyId:activityid:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "235571D8-E983-427D-BFED-7FFAB8F53FFC"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "HPHC/Controllers/StudyUI/ActivityUI/ActivitiesViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "510"
+            endingLineNumber = "510"
+            landmarkName = "handleActivityListResponse()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "23F4142E-F560-4EC1-8A5F-04480C3A6E4E"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "HPHC/ScheduleModel/LocalNotification.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "114"
+            endingLineNumber = "114"
+            landmarkName = "registerAllLocalNotificationFor(activities:completionHandler:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "23F4142E-F560-4EC1-8A5F-04480C3A6E4E - a423f23359ef6f6f"
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "static HPHC.LocalNotification.registerAllLocalNotificationFor(activities: Swift.Array&lt;HPHC.Activity&gt;, completionHandler: (Swift.Bool, Swift.Array&lt;HPHC.AppLocalNotification&gt;) -&gt; ()) -&gt; ()"
+                  moduleName = "HPHC"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/govindprasad/Documents/GovindPrasadC/BTC%20Project/FDA/HPHC/HPHC/ScheduleModel/LocalNotification.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "112"
+                  endingLineNumber = "112"
+                  offsetFromSymbolStart = "4180">
+               </Location>
+               <Location
+                  uuid = "23F4142E-F560-4EC1-8A5F-04480C3A6E4E - 4178aa04be40e202"
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "function signature specialization &lt;Arg[1] = Dead, Arg[2] = Owned To Guaranteed&gt; of function signature specialization &lt;Arg[1] = [Closure Propagated : closure #1 (Swift.Bool, Swift.Array&lt;HPHC.AppLocalNotification&gt;) -&gt; () in closure #1 (Swift.Array&lt;HPHC.Activity&gt;) -&gt; () in static HPHC.LocalNotification.registerForStudy(study: HPHC.Study, completionHandler: (Swift.Bool) -&gt; ()) -&gt; (), Argument Types : [@escaping @callee_guaranteed (@unowned Swift.Bool) -&gt; ()]&gt; of static HPHC.LocalNotification.registerAllLocalNotificationFor(activities: Swift.Array&lt;HPHC.Activity&gt;, completionHandler: (Swift.Bool, Swift.Array&lt;HPHC.AppLocalNotification&gt;) -&gt; ()) -&gt; ()"
+                  moduleName = "HPHC"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/govindprasad/Documents/GovindPrasadC/BTC%20Project/FDA/HPHC/HPHC/ScheduleModel/LocalNotification.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "112"
+                  endingLineNumber = "112"
+                  offsetFromSymbolStart = "4228">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "DDA1798B-CFB1-44F9-8AFB-FDBFBFD61383"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "HPHC/Controllers/StudyUI/ActivityUI/ActivitiesViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "525"
+            endingLineNumber = "525"
+            landmarkName = "handleActivityListResponse()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "E61368DB-4ADF-4BA9-A60D-41787608DD30"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "HPHC/ScheduleModel/LocalNotification.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "92"
+            endingLineNumber = "92"
+            landmarkName = "registerAllLocalNotificationFor(activities:completionHandler:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "E61368DB-4ADF-4BA9-A60D-41787608DD30 - a423f23359ef6f6f"
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "static HPHC.LocalNotification.registerAllLocalNotificationFor(activities: Swift.Array&lt;HPHC.Activity&gt;, completionHandler: (Swift.Bool, Swift.Array&lt;HPHC.AppLocalNotification&gt;) -&gt; ()) -&gt; ()"
+                  moduleName = "HPHC"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/govindprasad/Documents/GovindPrasadC/BTC%20Project/FDA/HPHC/HPHC/ScheduleModel/LocalNotification.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "90"
+                  endingLineNumber = "90"
+                  offsetFromSymbolStart = "2208">
+               </Location>
+               <Location
+                  uuid = "E61368DB-4ADF-4BA9-A60D-41787608DD30 - 4178aa04be40e202"
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "function signature specialization &lt;Arg[1] = Dead, Arg[2] = Owned To Guaranteed&gt; of function signature specialization &lt;Arg[1] = [Closure Propagated : closure #1 (Swift.Bool, Swift.Array&lt;HPHC.AppLocalNotification&gt;) -&gt; () in closure #1 (Swift.Array&lt;HPHC.Activity&gt;) -&gt; () in static HPHC.LocalNotification.registerForStudy(study: HPHC.Study, completionHandler: (Swift.Bool) -&gt; ()) -&gt; (), Argument Types : [@escaping @callee_guaranteed (@unowned Swift.Bool) -&gt; ()]&gt; of static HPHC.LocalNotification.registerAllLocalNotificationFor(activities: Swift.Array&lt;HPHC.Activity&gt;, completionHandler: (Swift.Bool, Swift.Array&lt;HPHC.AppLocalNotification&gt;) -&gt; ()) -&gt; ()"
+                  moduleName = "HPHC"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/govindprasad/Documents/GovindPrasadC/BTC%20Project/FDA/HPHC/HPHC/ScheduleModel/LocalNotification.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "90"
+                  endingLineNumber = "90"
+                  offsetFromSymbolStart = "2108">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "E5396590-E5E0-4EE7-9842-9CF6A5A7C0C9"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "HPHC/Controllers/StudyUI/ActivityUI/ActivitiesViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "610"
+            endingLineNumber = "610"
+            landmarkName = "updateActivityRunStuatus(status:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
+</Bucket>

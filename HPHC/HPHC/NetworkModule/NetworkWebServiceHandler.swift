@@ -319,6 +319,8 @@ class NetworkWebServiceHandler: NSObject, URLSessionDelegate {
 
             }
         } else {
+          
+          print("response---\(response)")
             let status = NetworkConstants.checkResponseHeaders(response!)
             let statusCode = status.0
             var error1 : NSError?
@@ -359,6 +361,7 @@ class NetworkWebServiceHandler: NSObject, URLSessionDelegate {
                     }catch {
                         print("Serilization error")
                     }
+                  
                     error1 = self.configuration.parseError(errorResponse: responseDict!)
                 } else {
                     

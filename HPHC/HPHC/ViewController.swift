@@ -193,10 +193,10 @@ class ViewController: UIViewController {
                     
                     for i in 0 ..< responseArray.count {
                         
-                        if Utilities.isValidObject(someObject:responseArray[i] as AnyObject? )  {
-                            let resource:Resource? = Resource()
+                        if let resourceDict = responseArray[i] as? JSONDictionary  {
+                            let resource: Resource? = Resource()
                             
-                            resource?.setResource(dict:(responseArray[i] as? NSDictionary)! )
+                            resource?.setResourceForStudy(dict: resourceDict)
                             responseArray.adding(resource as Any)
                         }
                         

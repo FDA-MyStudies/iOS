@@ -20,15 +20,14 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 import UIKit
 import MessageUI
-
+import WebKit
 
 let resourcesDownloadPath = AKUtility.baseFilePath + "/Resources"
 
 class ResourcesDetailViewController: UIViewController {
     
     
-    @IBOutlet var webView: UIWebView?
-    @IBOutlet var progressBar: UIProgressView?
+    @IBOutlet weak var webView: WKWebView!
     
     var activityIndicator: UIActivityIndicatorView!
     var requestLink: String?
@@ -52,52 +51,51 @@ class ResourcesDetailViewController: UIViewController {
         UIApplication.shared.statusBarStyle = .default
         
         if self.isEmailComposerPresented == false{
-        
-        
-        if self.resource?.file?.link != nil {
-            
-            activityIndicator = UIActivityIndicatorView(style: .gray)
-            activityIndicator.center = CGPoint(x: self.view.frame.midX, y: self.view.frame.midY-100)
-            
-           
-            self.view.addSubview(activityIndicator)
             
             
-            activityIndicator.startAnimating()
-            
-            if self.resource?.file?.mimeType == .pdf{
+            if self.resource?.file?.link != nil {
                 
-                if self.resource?.file?.localPath != nil {
+                activityIndicator = UIActivityIndicatorView(style: .gray)
+                activityIndicator.center = CGPoint(x: self.view.frame.midX, y: self.view.frame.midY-100)
+                
+                
+                self.view.addSubview(activityIndicator)
+                
+                
+                activityIndicator.startAnimating()
+                
+                if self.resource?.file?.mimeType == .pdf{
                     
-                    if self.resource?.file?.localPath == "BundlePath" {
+                    if self.resource?.file?.localPath != nil {
                         
-                        let path = Bundle.main.path(forResource: self.resource?.file?.link!, ofType: ".pdf")
-                        self.loadWebViewWithPath(path: path!)
+                        if self.resource?.file?.localPath == "BundlePath" {
+                            
+                            let path = Bundle.main.path(forResource: self.resource?.file?.link!, ofType: ".pdf")
+                            self.loadWebViewWithPath(path: path!)
+                        } else {
+                            let path = resourcesDownloadPath + "/" + (self.resource?.file?.localPath)!
+                            let pdfData = FileDownloadManager.decrytFile(pathURL: URL(string: path))
+                            self.loadWebViewWithData(data: pdfData!)
+                            
+                        }
+                        
+                        //self.loadWebViewWithPath(path: (self.resource?.file?.localPath)!)
                     } else {
-                        let path = resourcesDownloadPath + "/" + (self.resource?.file?.localPath)!
-                        let pdfData = FileDownloadManager.decrytFile(pathURL: URL(string: path))
-                        self.loadWebViewWithData(data: pdfData!)
-
+                        //let path = resourcesDownloadPath + "/PDF_linking.pdf"
+                        self.startDownloadingfile()
+                        //let pdfData = FileDownloadManager.decrytFile(pathURL:URL(string:path))
+                        //self.loadWebViewWithData(data: pdfData!)
                     }
                     
-                                      //self.loadWebViewWithPath(path: (self.resource?.file?.localPath)!)
+                    
                 } else {
-                   //let path = resourcesDownloadPath + "/PDF_linking.pdf"
-                    self.startDownloadingfile()
-                    //let pdfData = FileDownloadManager.decrytFile(pathURL:URL(string:path))
-                    //self.loadWebViewWithData(data: pdfData!)
+                    webView?.loadHTMLString(self.requestLink!, baseURL: nil)
                 }
-                
-                
             } else {
-                webView?.loadHTMLString(self.requestLink!, baseURL: nil)
+                
             }
-        } else {
-            
-        }
-       // webView?.scalesPageToFit = true
-        webView?.delegate = self
-        self.webView?.scalesPageToFit = true
+            webView.navigationDelegate = self
+            webView.contentScaleFactor = 1.0
         }
         
         UIApplication.shared.statusBarStyle = .default
@@ -108,18 +106,15 @@ class ResourcesDetailViewController: UIViewController {
     }
     
     func loadWebViewWithPath(path: String) {
-        
-        let url: URL? = URL.init(string:path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed)!)
-        let urlRequest = URLRequest(url: url!)
-        webView?.loadRequest(urlRequest)
+        let url = URL(fileURLWithPath: path)
+        let urlRequest = URLRequest(url: url)
+        webView.load(urlRequest)
     }
+    
     func loadWebViewWithData(data: Data) {
-       
-        self.webView?.load(data, mimeType: "application/pdf", textEncodingName: "UTF-8", baseURL: URL.init(fileURLWithPath: "") )
-        
-//        let url:URL? = URL.init(string:path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed)!)
-//        let urlRequest = URLRequest(url: url!)
-//        webView?.loadRequest(urlRequest)
+        self.webView.load(data, mimeType: "application/pdf",
+                          characterEncodingName: "UTF-8",
+                          baseURL: URL(fileURLWithPath: ""))
     }
     
     func startDownloadingfile() {
@@ -166,13 +161,14 @@ class ResourcesDetailViewController: UIViewController {
     }
 }
 
-extension ResourcesDetailViewController: UIWebViewDelegate{
+extension ResourcesDetailViewController: WKNavigationDelegate {
     
-    func webViewDidFinishLoad(_ webView: UIWebView) {
+    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         self.activityIndicator.stopAnimating()
         self.activityIndicator.removeFromSuperview()
     }
-    func webView(_ webView: UIWebView, didFailLoadWithError error: Error) {
+    
+    func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
         self.activityIndicator.stopAnimating()
         self.activityIndicator.removeFromSuperview()
         
@@ -185,10 +181,7 @@ extension ResourcesDetailViewController: UIWebViewDelegate{
             
         }))
         
-        
         self.present(alert, animated: true, completion: nil)
-        
-        
     }
 }
 
@@ -261,33 +254,26 @@ extension ResourcesDetailViewController: MFMailComposeViewControllerDelegate{
 }
 
 
-extension ResourcesDetailViewController: FileDownloadManagerDelegates{
+extension ResourcesDetailViewController: FileDownloadManagerDelegates {
     
-    func download(manager: FileDownloadManager, didUpdateProgress progress: Float) {
-        
-        self.progressBar?.progress = progress
-    }
+    func download(manager: FileDownloadManager, didUpdateProgress progress: Float) {}
+    
     func download(manager: FileDownloadManager, didFinishDownloadingAtPath path: String) {
         
-        
-         let fullPath = resourcesDownloadPath + "/" + path
-        
+        let fullPath = resourcesDownloadPath + "/" + path
         
         let data = FileDownloadManager.decrytFile(pathURL: URL.init(string: fullPath))
         
-        if data != nil {
+        if let pdfData = data {
             self.resource?.file?.localPath = path
-            // self.loadWebViewWithPath(path: path)
-            
             let mimeType = "application/" + "\((self.resource?.file?.mimeType?.rawValue)!)"
-            
-            self.webView?.load(data!, mimeType: mimeType, textEncodingName: "UTF-8", baseURL: URL.init(fileURLWithPath: "") )
+            self.webView.load(pdfData, mimeType: mimeType,
+                              characterEncodingName: "UTF-8",
+                              baseURL: URL(fileURLWithPath: ""))
         }
         
     }
-    func download(manager: FileDownloadManager, didFailedWithError error: Error) {
-        
-    }
     
+    func download(manager: FileDownloadManager, didFailedWithError error: Error) {}
     
 }

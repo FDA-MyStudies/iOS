@@ -122,14 +122,8 @@ class EligibilityBuilder{
                 eligibilityValidationStep.text = kEligibilityValidationDescriptionText
                 
                 //Branding
-                let brandingDetail = Utilities.getBrandingDetails()
-                if let validationTitle =  brandingDetail?[BrandingConstant.ValidatedTitle] as? String{
-                    eligibilityValidationStep.title = validationTitle
-                }
-                else {
-                     eligibilityValidationStep.title = kEligibilityValidationTitle
-                }
-               
+                eligibilityValidationStep.title = Branding.ValidatedTitle
+              
                 eligibilityValidationStep.image =  #imageLiteral(resourceName: "successBlueBig")
                 stepsArray?.append(eligibilityValidationStep)
                 

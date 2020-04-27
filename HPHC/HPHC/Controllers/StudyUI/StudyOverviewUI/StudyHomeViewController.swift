@@ -70,7 +70,8 @@ class StudyHomeViewController: UIViewController {
     var isUpdatingIneligibility: Bool = false
 
     var consentRestorationData: Data?
-
+    lazy var isStudyActivitiesPresented = false
+    
     var pageViewController: PageViewController? {
         didSet {
             pageViewController?.pageViewDelegate = self
@@ -478,6 +479,8 @@ class StudyHomeViewController: UIViewController {
      This Method is used to push screen back to Studydashboard tabbar controller
      */
     func pushToStudyDashboard() {
+        guard !isStudyActivitiesPresented else { return }
+        isStudyActivitiesPresented = true
         let studyDashboard = (storyboard?.instantiateViewController(withIdentifier: kStudyDashboardTabbarControllerIdentifier) as? StudyDashboardTabbarViewController)!
         navigationController?.pushViewController(studyDashboard, animated: true)
     }

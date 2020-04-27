@@ -815,9 +815,6 @@
 		897C1A032451A49A00559770 /* FetalKickCounterStepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EED7B3A1E65751D002C1FA3 /* FetalKickCounterStepViewController.swift */; };
 		897C1A052451A49A00559770 /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EEBA4791F25FAA100FB0258 /* HealthKit.framework */; };
 		897C1A062451A49A00559770 /* ResearchKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EF0BC3C2223D1D6004F2357 /* ResearchKit.framework */; };
-		897C1A072451A49A00559770 /* (null) in Frameworks */ = {isa = PBXBuildFile; };
-		897C1A082451A49A00559770 /* Pods_HPHC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 89956ABA23EDA1E3005CB333 /* Pods_HPHC.framework */; };
-		897C1A092451A49A00559770 /* (null) in Frameworks */ = {isa = PBXBuildFile; };
 		897C1A0B2451A49A00559770 /* 45.png in Resources */ = {isa = PBXBuildFile; fileRef = 6EE93D911E93B8C30027A5DC /* 45.png */; };
 		897C1A0C2451A49A00559770 /* Study.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 94B3DD3A1E6ED8E500327AE5 /* Study.storyboard */; };
 		897C1A0D2451A49A00559770 /* SearchBarView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6E4D86DB1F389DF1003DBDD8 /* SearchBarView.xib */; };
@@ -892,7 +889,6 @@
 		897C1A562451A49A00559770 /* Activity_Metadata_Other.json in Resources */ = {isa = PBXBuildFile; fileRef = 6F5AAF7F225DE699002C8FF6 /* Activity_Metadata_Other.json */; };
 		897C1A572451A49A00559770 /* 25-study-activities.png in Resources */ = {isa = PBXBuildFile; fileRef = 48A24C3B1E839CFD009E849E /* 25-study-activities.png */; };
 		897C1A5B2451A49A00559770 /* ResearchKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6EF0BC3C2223D1D6004F2357 /* ResearchKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		897C1A5C2451A49A00559770 /* Pods_HPHC.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 89956ABA23EDA1E3005CB333 /* Pods_HPHC.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		897C1A682451A61100559770 /* Branding.plist in Resources */ = {isa = PBXBuildFile; fileRef = 897C1A652451A61100559770 /* Branding.plist */; };
 		897C1A692451A61100559770 /* AppConfiguration.plist in Resources */ = {isa = PBXBuildFile; fileRef = 897C1A662451A61100559770 /* AppConfiguration.plist */; };
 		89831393224399FC0000BEB5 /* ResourceList.json in Resources */ = {isa = PBXBuildFile; fileRef = 89831392224399FC0000BEB5 /* ResourceList.json */; };
@@ -1438,6 +1434,8 @@
 		951EC5B5601293CE0771D248 /* libPods-HPHCTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AF448A6C2B509B3DB605C42 /* libPods-HPHCTests.a */; };
 		AD9F0493EECFB6152C406D2F /* (null) in Frameworks */ = {isa = PBXBuildFile; };
 		B393223A6EE713DE81AB98F6 /* Pods_FDAMS_HIMSS_App.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 80162EB0842AABC6DBF4AC42 /* Pods_FDAMS_HIMSS_App.framework */; };
+		BE8AD49A9BA10D1234FFBC8E /* Pods_HPHC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E2D90F2C47BDF9FED6C49B6 /* Pods_HPHC.framework */; };
+		CBC434BA8726769325131A30 /* Pods_MyStudies_COVID_19.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E99EF4C4C9BC14DB219CE1D /* Pods_MyStudies_COVID_19.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -1560,7 +1558,6 @@
 			dstSubfolderSpec = 10;
 			files = (
 				897C1A5B2451A49A00559770 /* ResearchKit.framework in Embed Frameworks */,
-				897C1A5C2451A49A00559770 /* Pods_HPHC.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1605,10 +1602,14 @@
 		03861C0986EB555CA76A23C3 /* Pods-MyStudies.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyStudies.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MyStudies/Pods-MyStudies.debug.xcconfig"; sourceTree = "<group>"; };
 		06214F04AE75328F0A3780E6 /* Pods-HPHCUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HPHCUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-HPHCUITests/Pods-HPHCUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		0AF448A6C2B509B3DB605C42 /* libPods-HPHCTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-HPHCTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		1E2D90F2C47BDF9FED6C49B6 /* Pods_HPHC.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HPHC.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		1E99EF4C4C9BC14DB219CE1D /* Pods_MyStudies_COVID_19.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MyStudies_COVID_19.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		1EFA1190F3C85DB6D199D25F /* Pods_FDA_MyStudies__COVID_19.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FDA_MyStudies__COVID_19.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2568EA2C0BCE313BAB2B3B29 /* Pods_mSPARC.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_mSPARC.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		38F5640CBD79F5037B27D635 /* Pods-HPHC QA.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HPHC QA.release.xcconfig"; path = "Pods/Target Support Files/Pods-HPHC QA/Pods-HPHC QA.release.xcconfig"; sourceTree = "<group>"; };
 		3BCFFA0DAD500A9A04C582CD /* Pods-HPHC.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HPHC.release.xcconfig"; path = "Pods/Target Support Files/Pods-HPHC/Pods-HPHC.release.xcconfig"; sourceTree = "<group>"; };
 		414C7A7B347A68A89869556B /* Pods-HPHCUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HPHCUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-HPHCUITests/Pods-HPHCUITests.release.xcconfig"; sourceTree = "<group>"; };
+		448C934AFFAA8C70697714AE /* Pods-MyStudies COVID-19.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyStudies COVID-19.release.xcconfig"; path = "Pods/Target Support Files/Pods-MyStudies COVID-19/Pods-MyStudies COVID-19.release.xcconfig"; sourceTree = "<group>"; };
 		481DFA4B1E6EEB70004C39EF /* WebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 		482062511E68532300C7A7AF /* UIUtilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIUtilities.swift; sourceTree = "<group>"; };
 		482CC61D1EC5F52E00BFE8C6 /* KDCircularProgress.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KDCircularProgress.swift; sourceTree = "<group>"; };
@@ -1785,6 +1786,7 @@
 		6FDCDD2F22C2377F008891D9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = HPHC/Base.lproj/Sparc.storyboard; sourceTree = SOURCE_ROOT; };
 		6FDEFDA823F5A0F50067534C /* DBParticipantPropertyMetadata.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBParticipantPropertyMetadata.swift; sourceTree = "<group>"; };
 		6FDEFDB123F67E7E0067534C /* Data+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Data+Extensions.swift"; sourceTree = "<group>"; };
+		6FF8CCB82451D249009B68EE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		782AF87B221D247D000025CF /* StudyTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyTest.swift; sourceTree = "<group>"; };
 		7878B30E221574D80052FC23 /* StandaloneStudy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StandaloneStudy.swift; sourceTree = "<group>"; };
 		7878B31A2216C6E10052FC23 /* HPHCTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HPHCTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1811,8 +1813,7 @@
 		8948349C22BB9C59000B7BFA /* HPHCSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HPHCSettings.swift; sourceTree = "<group>"; };
 		8948349E22BB9D56000B7BFA /* HPHCSettings.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HPHCSettings.xib; sourceTree = "<group>"; };
 		8973F76C23F6B657008F5B22 /* Branding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Branding.swift; sourceTree = "<group>"; };
-		897C1A602451A49A00559770 /* COVID-19.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "COVID-19.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		897C1A612451A49A00559770 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = /Users/surender/Documents/Surender/Projects/FDA/FDA_git/HPHC/Info.plist; sourceTree = "<absolute>"; };
+		897C1A602451A49A00559770 /* COVID19.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = COVID19.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		897C1A652451A61100559770 /* Branding.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Branding.plist; sourceTree = "<group>"; };
 		897C1A662451A61100559770 /* AppConfiguration.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = AppConfiguration.plist; sourceTree = "<group>"; };
 		89831392224399FC0000BEB5 /* ResourceList.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = ResourceList.json; sourceTree = "<group>"; };
@@ -1909,6 +1910,7 @@
 		94D20E9E1E9DFFE7005C3531 /* DBActivity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DBActivity.swift; sourceTree = "<group>"; };
 		94FF031A1E95275D009F191B /* ReachoutOptionsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReachoutOptionsViewController.swift; sourceTree = "<group>"; };
 		94FF031E1E952B0A009F191B /* ReachoutOptionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReachoutOptionCell.swift; sourceTree = "<group>"; };
+		9973A5DBDE7C181889DFEC54 /* Pods-MyStudies COVID-19.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyStudies COVID-19.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MyStudies COVID-19/Pods-MyStudies COVID-19.debug.xcconfig"; sourceTree = "<group>"; };
 		9A6334C0EA7AE2035BEB653F /* Pods-mSPARC.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mSPARC.debug.xcconfig"; path = "Pods/Target Support Files/Pods-mSPARC/Pods-mSPARC.debug.xcconfig"; sourceTree = "<group>"; };
 		A2AC4F1561D036D38BF95C7E /* Pods-FDAMS HIMSS App.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FDAMS HIMSS App.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FDAMS HIMSS App/Pods-FDAMS HIMSS App.debug.xcconfig"; sourceTree = "<group>"; };
 		A2CE974C81943F2AB0C602C1 /* Pods-HPHCTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HPHCTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-HPHCTests/Pods-HPHCTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -1930,6 +1932,7 @@
 				041AEB90AC42096B113333ED /* (null) in Frameworks */,
 				89956ABB23EDA1E3005CB333 /* Pods_HPHC.framework in Frameworks */,
 				AD9F0493EECFB6152C406D2F /* (null) in Frameworks */,
+				BE8AD49A9BA10D1234FFBC8E /* Pods_HPHC.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1982,9 +1985,7 @@
 			files = (
 				897C1A052451A49A00559770 /* HealthKit.framework in Frameworks */,
 				897C1A062451A49A00559770 /* ResearchKit.framework in Frameworks */,
-				897C1A072451A49A00559770 /* (null) in Frameworks */,
-				897C1A082451A49A00559770 /* Pods_HPHC.framework in Frameworks */,
-				897C1A092451A49A00559770 /* (null) in Frameworks */,
+				CBC434BA8726769325131A30 /* Pods_MyStudies_COVID_19.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2060,6 +2061,9 @@
 				2568EA2C0BCE313BAB2B3B29 /* Pods_mSPARC.framework */,
 				80162EB0842AABC6DBF4AC42 /* Pods_FDAMS_HIMSS_App.framework */,
 				87A4F9AAE7A1B8C36C9FBDDF /* Pods_HPHC_QA.framework */,
+				1EFA1190F3C85DB6D199D25F /* Pods_FDA_MyStudies__COVID_19.framework */,
+				1E2D90F2C47BDF9FED6C49B6 /* Pods_HPHC.framework */,
+				1E99EF4C4C9BC14DB219CE1D /* Pods_MyStudies_COVID_19.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -2083,6 +2087,8 @@
 				6666A99A4FE2BB8CB72673EE /* Pods-FDAMS HIMSS App.release.xcconfig */,
 				9052BDFCCBA34907500A7158 /* Pods-HPHC QA.debug.xcconfig */,
 				38F5640CBD79F5037B27D635 /* Pods-HPHC QA.release.xcconfig */,
+				9973A5DBDE7C181889DFEC54 /* Pods-MyStudies COVID-19.debug.xcconfig */,
+				448C934AFFAA8C70697714AE /* Pods-MyStudies COVID-19.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -2151,7 +2157,7 @@
 				6F6EC42223E1577B0056AD55 /* FDA MyStudies Demo.app */,
 				89C5EF7223F16CFE00649359 /* FDAMS HIMSS App.app */,
 				6FD61CCB244597F200B71685 /* HPHC QA.app */,
-				897C1A602451A49A00559770 /* COVID-19.app */,
+				897C1A602451A49A00559770 /* COVID19.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -2723,10 +2729,10 @@
 		897C1A642451A53D00559770 /* COVID-19 */ = {
 			isa = PBXGroup;
 			children = (
+				6FF8CCB82451D249009B68EE /* Info.plist */,
 				89006EF02451B1D500B624FD /* COVID-19.storyboard */,
 				89006EF12451B1D500B624FD /* COVID-19.xcassets */,
 				899C387D2451AB88003A56BA /* GatewayOverview.plist */,
-				897C1A612451A49A00559770 /* Info.plist */,
 				897C1A662451A61100559770 /* AppConfiguration.plist */,
 				897C1A652451A61100559770 /* Branding.plist */,
 			);
@@ -3152,16 +3158,15 @@
 			productReference = 89055918230149AD005FB284 /* HPHCUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
-		897C19642451A49A00559770 /* FDA MyStudies: COVID-19 */ = {
+		897C19642451A49A00559770 /* MyStudies COVID-19 */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 897C1A5D2451A49A00559770 /* Build configuration list for PBXNativeTarget "FDA MyStudies: COVID-19" */;
+			buildConfigurationList = 897C1A5D2451A49A00559770 /* Build configuration list for PBXNativeTarget "MyStudies COVID-19" */;
 			buildPhases = (
 				897C19672451A49A00559770 /* [CP] Check Pods Manifest.lock */,
 				897C19682451A49A00559770 /* Sources */,
 				897C1A042451A49A00559770 /* Frameworks */,
 				897C1A0A2451A49A00559770 /* Resources */,
 				897C1A582451A49A00559770 /* [CP] Embed Pods Frameworks */,
-				897C1A592451A49A00559770 /* ShellScript */,
 				897C1A5A2451A49A00559770 /* Embed Frameworks */,
 			);
 			buildRules = (
@@ -3169,9 +3174,9 @@
 			dependencies = (
 				897C19652451A49A00559770 /* PBXTargetDependency */,
 			);
-			name = "FDA MyStudies: COVID-19";
+			name = "MyStudies COVID-19";
 			productName = FDA;
-			productReference = 897C1A602451A49A00559770 /* COVID-19.app */;
+			productReference = 897C1A602451A49A00559770 /* COVID19.app */;
 			productType = "com.apple.product-type.application";
 		};
 		89C5EE7B23F16CFE00649359 /* FDAMS HIMSS App */ = {
@@ -3348,7 +3353,7 @@
 				6F6EC32E23E1577B0056AD55 /* FDA MyStudies Demo */,
 				89C5EE7B23F16CFE00649359 /* FDAMS HIMSS App */,
 				6FD61BCF244597F200B71685 /* HPHC QA */,
-				897C19642451A49A00559770 /* FDA MyStudies: COVID-19 */,
+				897C19642451A49A00559770 /* MyStudies COVID-19 */,
 			);
 		};
 /* End PBXProject section */
@@ -4152,7 +4157,7 @@
 			);
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-HPHC-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-MyStudies COVID-19-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -4165,7 +4170,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-HPHC/Pods-HPHC-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-MyStudies COVID-19/Pods-MyStudies COVID-19-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/ActionSheetPicker-3.0/ActionSheetPicker_3_0.framework",
 				"${BUILT_PRODUCTS_DIR}/CryptoSwift/CryptoSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/IQKeyboardManagerSwift/IQKeyboardManagerSwift.framework",
@@ -4186,21 +4191,8 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-HPHC/Pods-HPHC-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-MyStudies COVID-19/Pods-MyStudies COVID-19-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
-		};
-		897C1A592451A49A00559770 /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Fabric/run\" 24faf2a83c3fd824044bfbcc2b7b4be24b8b28a1 c33a12b8c295fb1886720465e29ecebd81ee14abcd7c7e2f37553d09a685b735\n";
 		};
 		89C5EE7E23F16CFE00649359 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -5913,7 +5905,7 @@
 		};
 		897C1A5E2451A49A00559770 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 7BDC002620C7855C409516D3 /* Pods-HPHC.debug.xcconfig */;
+			baseConfigurationReference = 9973A5DBDE7C181889DFEC54 /* Pods-MyStudies COVID-19.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -5922,18 +5914,18 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				CURRENT_PROJECT_VERSION = 6;
+				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = FWLLYUH7XR;
 				ENABLE_BITCODE = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
-				INFOPLIST_FILE = "$(SRCROOT)/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/HPHC/Branding/COVID-19/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				IS_STANDALONE_STUDY = false;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.hphci.fda.mobilestudies.covid19;
-				PRODUCT_NAME = "COVID-19";
+				PRODUCT_NAME = COVID19;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "HPHC/Controllers/LoginRegisterUI/FDA-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -5946,7 +5938,7 @@
 		};
 		897C1A5F2451A49A00559770 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3BCFFA0DAD500A9A04C582CD /* Pods-HPHC.release.xcconfig */;
+			baseConfigurationReference = 448C934AFFAA8C70697714AE /* Pods-MyStudies COVID-19.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -5955,18 +5947,18 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 6;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = FWLLYUH7XR;
 				ENABLE_BITCODE = NO;
 				GCC_OPTIMIZATION_LEVEL = s;
-				INFOPLIST_FILE = "$(SRCROOT)/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/HPHC/Branding/COVID-19/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				IS_STANDALONE_STUDY = false;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.hphci.fda.mobilestudies.covid19;
-				PRODUCT_NAME = "COVID-19";
+				PRODUCT_NAME = COVID19;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "HPHC/Controllers/LoginRegisterUI/FDA-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -6171,7 +6163,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		897C1A5D2451A49A00559770 /* Build configuration list for PBXNativeTarget "FDA MyStudies: COVID-19" */ = {
+		897C1A5D2451A49A00559770 /* Build configuration list for PBXNativeTarget "MyStudies COVID-19" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				897C1A5E2451A49A00559770 /* Debug */,

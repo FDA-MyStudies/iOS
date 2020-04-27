@@ -2,6 +2,8 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>ProductTitleName</key>
+	<string>COVID MyStudies</string>
 	<key>JoinStudyButtonTitle</key>
 	<string>Join Study</string>
 	<key>ViewConsentButtonTitle</key>
@@ -27,7 +29,7 @@
 	<key>AllowFeedback</key>
 	<true/>
 	<key>NavigationTitleName</key>
-	<string>FDA MyStudies</string>
+	<string>COVID MyStudies</string>
 	<key>PoweredByTitleName</key>
 	<string>Powered by FDA MyStudies</string>
 </dict>

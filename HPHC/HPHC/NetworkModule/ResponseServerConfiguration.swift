@@ -44,6 +44,8 @@ enum ResponseMethods: String {
             return Method(methodName: (self.rawValue+".api"), methodType: .httpMethodGet, requestType: .requestTypeHTTP)
         case .withdrawFromStudy, .getParticipantResponse,.validateEnrollmentToken:
             return Method(methodName: (self.rawValue+".api"), methodType: .httpMethodPOST, requestType: .requestTypeHTTP)
+        case .enroll:
+            return Method(methodName: (self.rawValue+".api"), methodType: .httpMethodPOST, requestType: .requestTypeHTTP)
         default:
             return Method(methodName: (self.rawValue+".api"), methodType: .httpMethodPOST, requestType: .requestTypeJSON)
         }

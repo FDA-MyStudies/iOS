@@ -31,6 +31,9 @@ class ConsentResult {
     var consentPdfData: Data?
     var result: Array<ActivityStepResult>?
     
+    /// A boolean indicating user allows their data to be shared publically.
+    var isShareDataWithPublic: Bool?
+    
     var token: String?
     var consentPath: String?
     
@@ -55,16 +58,13 @@ class ConsentResult {
             
             if   ((stepResult as? ORKStepResult)!.results?.count)! > 0 {
                 
-                if  let questionstepResult: ORKChoiceQuestionResult? = (stepResult as? ORKStepResult)!.results?[0] as? ORKChoiceQuestionResult? {
-                    
-                    if Utilities.isValidValue(someObject: questionstepResult?.choiceAnswers?[0] as AnyObject?){
-                        /* sharing choice result either 1 selected or 2 seleceted
-                         */
-                        
-                    } else {
-                        //Do Nothing
-                    }
-                } else if let signatureStepResult: ORKConsentSignatureResult? = (stepResult as? ORKStepResult)!.results?[0] as? ORKConsentSignatureResult? {
+                if stepResult.identifier == kConsentSharing,
+                  let stepResult = stepResult as? ORKStepResult,
+                  let sharingChoiceResult = stepResult.results?.first as? ORKChoiceQuestionResult?,
+                  let userResponse = sharingChoiceResult?.choiceAnswers?.first as? Bool {
+                  self.isShareDataWithPublic = userResponse
+                } else if let signatureStepResult = (stepResult as? ORKStepResult)!
+                    .results?[0] as? ORKConsentSignatureResult? {
                     
                     signatureStepResult?.apply(to: self.consentDocument!)
                     

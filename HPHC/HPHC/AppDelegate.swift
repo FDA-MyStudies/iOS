@@ -259,24 +259,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     //Register Remote Notification
-    func askForNotification() {
-        
-        if #available(iOS 10.0, *) {
-            let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
-            UNUserNotificationCenter.current().requestAuthorization(
-                options: authOptions,
-                completionHandler: {_, _ in })
-            
-            // For iOS 10 display notification (sent via APNS)
-            UNUserNotificationCenter.current().delegate = self
-            
-        }else {
-            let settings: UIUserNotificationSettings =
-                UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil)
-            UIApplication.shared.registerUserNotificationSettings(settings)
-        }
+  func askForNotification() {
+    
+    UNUserNotificationCenter.current().delegate = self
+    UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) {
+      (granted, error) in
+      
+      // print("Permission granted: \(granted)")
+      // 1. Check if permission granted
+      guard granted else { return }
+      // 2. Attempt registration for remote notifications on the main thread
+      DispatchQueue.main.async {
         UIApplication.shared.registerForRemoteNotifications()
+      }
     }
+    
+  }
     
     /**
      Updates Key & InitializationVector for Encryption
@@ -411,40 +409,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         print(config)
         // Now that we've told Realm how to handle the schema change, opening the file
         // will automatically perform the migration
-        //let _ = try! Realm()
-    }
-    
-    func fireNotiffication(intervel:Int) {
-        
-        let content = UNMutableNotificationContent()
-        content.body = "message"
-        
-        content.sound = UNNotificationSound.default
-        content.badge = 1
-        let date = Date().addingTimeInterval(TimeInterval(intervel))
-        var timeInterval = date.timeIntervalSinceNow
 
-        
-        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: timeInterval, repeats: false)
-        let id = Utilities.randomString(length: 10)
-        let request = UNNotificationRequest(identifier: id, content: content, trigger: trigger)
-        let center = UNUserNotificationCenter.current()
-        center.add(request)
     }
     
     // MARK:- NOTIFICATION
     
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
         
-        let deviceTokenString = deviceToken.reduce("", {$0 + String(format: "%02X", $1)})
-        print("Token: \(deviceTokenString)")
+        // 1. Convert device token to string
+        let tokenParts = deviceToken.map { data -> String in
+            return String(format: "%02.2hhx", data)
+        }
+        let token = tokenParts.joined()
         
         if  User.currentUser.userType == .FDAUser {
             
             User.currentUser.settings?.remoteNotifications = true
             User.currentUser.settings?.localNotifications = true
             //Update device Token to Local server
-            UserServices().updateUserProfile(deviceToken: deviceTokenString , delegate: self)
+            UserServices().updateUserProfile(deviceToken: token , delegate: self)
             
         }
     }
@@ -1163,8 +1146,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //update consent is updaeted in db
         Study.currentStudy?.version = StudyUpdates.studyVersion
         Study.currentStudy?.newVersion = StudyUpdates.studyVersion
-        StudyUpdates.studyConsentUpdated  = false
-        DBHandler.updateMetaDataToUpdateForStudy(study: Study.currentStudy!, updateDetails: nil)
         
         if self.isComprehensionFailed! {
             self.isComprehensionFailed = false
@@ -1174,16 +1155,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //self.addAndRemoveProgress(add: true)
         
         if ConsentBuilder.currentConsent?.consentResult?.consentPdfData?.count == 0 {
-            
             DispatchQueue.main.asyncAfter(deadline: .now()+3) {
                 self.updateEligibilityConsentStatus()
+                StudyUpdates.studyConsentUpdated  = false
+                DBHandler.updateMetaDataToUpdateForStudy(study: Study.currentStudy!, updateDetails: nil)
             }
-            
-            
-        }else {
-            //Update Consent Status to server
+        } else {
+            // Update Consent Status to server
             UserServices().updateUserEligibilityConsentStatus(eligibilityStatus: true, consentStatus:(ConsentBuilder.currentConsent?.consentStatus)!  , delegate: self)
+            StudyUpdates.studyConsentUpdated  = false
+            DBHandler.updateMetaDataToUpdateForStudy(study: Study.currentStudy!, updateDetails: nil)
         }
+  
     }
     
 }

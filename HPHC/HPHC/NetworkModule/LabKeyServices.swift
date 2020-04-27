@@ -41,8 +41,21 @@ class LabKeyServices: NSObject {
         self.delegate = delegate
         let method = ResponseMethods.enroll.method
         
-        let params = [kEnrollmentToken: token,
-                      kStudyId: studyId]
+        let currentConsent = ConsentBuilder.currentConsent
+        let consentResult = currentConsent?.consentResult
+        
+        var userDataSharing: String
+        if let isShareData = consentResult?.isShareDataWithPublic {
+          userDataSharing = "\(isShareData)"
+        } else {
+          userDataSharing = "NA"
+        }
+        
+        let params = [
+            kEnrollmentToken: token,
+            kStudyId: studyId,
+            "allowDataSharing": userDataSharing
+        ]
         
         self.sendRequestWith(method: method, params: params, headers: nil)
     }

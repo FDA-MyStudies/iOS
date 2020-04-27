@@ -129,7 +129,7 @@ class ActivitiesViewController : UIViewController{
     func getLabkeyResponse() {
         
         let ud = UserDefaults.standard
-        let key = "LabKeyResponse" + (Study.currentStudy?.studyId)!
+        let key = "LabKeyResponse" + (Study.currentStudy?.studyId ?? "")
         if !(ud.bool(forKey: key)){
             labkeyResponseFetch.checkUpdates()
         }
@@ -143,7 +143,7 @@ class ActivitiesViewController : UIViewController{
             
             // Update status to false so notification can be registered again.
             Study.currentStudy?.activitiesLocalNotificationUpdated = false
-            DBHandler.updateLocalNotificaitonUpdated(studyId: (Study.currentStudy?.studyId)!, status: false)
+            DBHandler.updateLocalNotificaitonUpdated(studyId: Study.currentStudy?.studyId ?? "", status: false)
             
         } else {
             //self.loadActivitiesFromDatabase()
@@ -229,7 +229,7 @@ class ActivitiesViewController : UIViewController{
     // MARK: Helper Methods
     func checkForDashBoardInfo(){
         
-        DBHandler.loadStatisticsForStudy(studyId: (Study.currentStudy?.studyId)!) { (statiticsList) in
+        DBHandler.loadStatisticsForStudy(studyId: Study.currentStudy?.studyId ?? "") { (statiticsList) in
             
             if statiticsList.count != 0 {
                 //Do Nothing
@@ -347,12 +347,12 @@ class ActivitiesViewController : UIViewController{
      Used to load the Actif=vities data from database
      */
     func loadActivitiesFromDatabase(){
-        
-        if DBHandler.isActivitiesEmpty((Study.currentStudy?.studyId)!) {
+        guard let studyID = Study.currentStudy?.studyId else { return }
+        if DBHandler.isActivitiesEmpty(studyID) {
             self.sendRequestToGetActivityStates()
         } else {
             
-            DBHandler.loadActivityListFromDatabase(studyId: (Study.currentStudy?.studyId)!) { [weak self] (activities) in
+            DBHandler.loadActivityListFromDatabase(studyId: studyID) { [weak self] (activities) in
                
                 if activities.count > 0 {
                     Study.currentStudy?.activities = activities
@@ -567,10 +567,11 @@ class ActivitiesViewController : UIViewController{
            if User.currentUser.settings?.localNotifications ?? false {
                 if !(Study.currentStudy?.activitiesLocalNotificationUpdated)! {
                     //Register LocalNotifications
-                    LocalNotification.registerAllLocalNotificationFor(activities: (Study.currentStudy?.activities)!) { (finished,notificationlist) in
+                    LocalNotification.registerAllLocalNotificationFor(activities: Study.currentStudy?.activities ?? []) { (finished,notificationlist) in
                         Study.currentStudy?.activitiesLocalNotificationUpdated = true
                         DBHandler.saveRegisteredLocaNotification(notificationList: notificationlist)
-                        DBHandler.updateLocalNotificaitonUpdated(studyId: (Study.currentStudy?.studyId)!,status: true)
+                        DBHandler.updateLocalNotificaitonUpdated(studyId: Study.currentStudy?.studyId ?? "",
+                                                                 status: true)
                         LocalNotification.refreshAllLocalNotification()
                     }
                 }
@@ -639,7 +640,7 @@ class ActivitiesViewController : UIViewController{
         let completion = ceil( Double(self.divide(lhs: (totalCompletedRuns + totalIncompletedRuns)*100, rhs: totalRuns)) )
         let adherence = ceil (Double(self.divide(lhs: totalCompletedRuns*100, rhs: (totalCompletedRuns + totalIncompletedRuns))))
         
-        let studyid = (Study.currentStudy?.studyId)!
+        let studyid = Study.currentStudy?.studyId ?? ""
         
         let status = User.currentUser.udpateCompletionAndAdherence(studyId: studyid, completion: Int(completion), adherence: Int(adherence))
         
@@ -796,7 +797,8 @@ class ActivitiesViewController : UIViewController{
             presentUpdatedConsent()
             
         } else if StudyUpdates.studyInfoUpdated {
-            WCPServices().getStudyInformation(studyId: (Study.currentStudy?.studyId)!, delegate: self)
+            guard let studyID = Study.currentStudy?.studyId else { return }
+            WCPServices().getStudyInformation(studyId: studyID, delegate: self)
             
         } else {
             self.checkForActivitiesUpdates()
@@ -810,7 +812,8 @@ class ActivitiesViewController : UIViewController{
      Used to send Request To Get ActivityStates
      */
     func sendRequestToGetActivityStates(){
-        UserServices().getUserActivityState(studyId: (Study.currentStudy?.studyId)!, delegate: self)
+        guard let studyID = Study.currentStudy?.studyId else { return }
+        UserServices().getUserActivityState(studyId: studyID, delegate: self)
     }
     
     
@@ -818,14 +821,17 @@ class ActivitiesViewController : UIViewController{
      Used to send Request To Get ActivityList
      */
     func sendRequesToGetActivityList(){
-        WCPServices().getStudyActivityList(studyId: (Study.currentStudy?.studyId)!, delegate: self)
+        guard let studyID = Study.currentStudy?.studyId else {return}
+        WCPServices().getStudyActivityList(studyId: studyID, delegate: self)
     }
     
     func sendRequestToGetDashboardInfo(){
-        WCPServices().getStudyDashboardInfo(studyId: (Study.currentStudy?.studyId)!, delegate: self)
+        guard let studyID = Study.currentStudy?.studyId else {return}
+        WCPServices().getStudyDashboardInfo(studyId: studyID, delegate: self)
     }
     func sendRequestToGetResourcesInfo(){
-        WCPServices().getResourcesForStudy(studyId:(Study.currentStudy?.studyId)!, delegate: self)
+        guard let studyID = Study.currentStudy?.studyId else {return}
+        WCPServices().getResourcesForStudy(studyId: studyID, delegate: self)
     }
     
 }
@@ -940,8 +946,14 @@ extension ActivitiesViewController: UITableViewDelegate{
                                 self.createActivity()
                             } else {
                                 
-                                //Fetch ActivityMetaData from Server
-                                WCPServices().getStudyActivityMetadata(studyId: (Study.currentStudy?.studyId)! , activityId: (Study.currentActivity?.actvityId)!, activityVersion: (Study.currentActivity?.version)!, delegate: self)
+                                if let studyID = Study.currentStudy?.studyId,
+                                    let activityID = Study.currentActivity?.actvityId,
+                                    let version = Study.currentActivity?.version {
+                                    WCPServices().getStudyActivityMetadata(studyId: studyID,
+                                                                           activityId: activityID,
+                                                                           activityVersion: version,
+                                                                           delegate: self)
+                                }
                             }
                         })
                         
@@ -1642,7 +1654,7 @@ class ResponseDataFetch: NMWebServiceDelegate{
         } else {
             
             //Load Stats List from DB
-            DBHandler.loadStatisticsForStudy(studyId: (Study.currentStudy?.studyId)!) { (statiticsList) in
+            DBHandler.loadStatisticsForStudy(studyId: Study.currentStudy?.studyId ?? "") { (statiticsList) in
                 
                 if statiticsList.count != 0 {
                     StudyDashboard.instance.statistics = statiticsList
@@ -1659,7 +1671,8 @@ class ResponseDataFetch: NMWebServiceDelegate{
     }
     
     func sendRequestToGetDashboardInfo(){
-        WCPServices().getStudyDashboardInfo(studyId: (Study.currentStudy?.studyId)!, delegate: self)
+        guard let studyID = Study.currentStudy?.studyId else { return }
+        WCPServices().getStudyDashboardInfo(studyId: studyID, delegate: self)
     }
     
     func handleExecuteSQLResponse(){
@@ -1743,7 +1756,7 @@ class ResponseDataFetch: NMWebServiceDelegate{
                 }
                 
             }
-            let key = "LabKeyResponse" + (Study.currentStudy?.studyId)!
+            let key = "LabKeyResponse" + (Study.currentStudy?.studyId ?? "")
             UserDefaults.standard.set(true, forKey: key)
             
             let appDelegate = (UIApplication.shared.delegate as? AppDelegate)!

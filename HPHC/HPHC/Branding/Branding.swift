@@ -25,6 +25,7 @@ enum Branding {
     static let AllowFeedback = "AllowFeedback"
     static let NavigationTitleName = "NavigationTitleName"
     static let PoweredByTitleName = "PoweredByTitleName"
+    static let ProductTitleName = "ProductTitleName"
   }
   
   private static var brandConfig: JSONDictionary {
@@ -91,4 +92,8 @@ enum Branding {
       return brandConfig[JSONKey.PoweredByTitleName] as? String ?? ""
   }
   
+  /// AppName
+  static var productTitle: String {
+    return brandConfig[JSONKey.ProductTitleName] as? String ?? ""
+  }
 }

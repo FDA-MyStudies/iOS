@@ -136,7 +136,7 @@ class ContactUsViewController: UIViewController{
             UIUtilities.showAlertWithMessage(alertMessage: NSLocalizedString(kMessageValidEmail, comment: ""))
         }
         else {
-            WCPServices().sendUserContactUsRequest(delegate: self)
+            UserServices().sendUserContactUsRequest(delegate: self)
         }
     }
 }
@@ -151,7 +151,6 @@ extension ContactUsViewController: UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
        
-        let cell = UITableViewCell()
         if indexPath.row == 3 {
             
             let cell = tableView.dequeueReusableCell(withIdentifier: "textviewCell", for: indexPath) as! TextviewCell

@@ -36,16 +36,12 @@ enum WCPMethods: String {
     case termsPolicy
     case notifications
     case consentDocument
-    case feedback
-    case contactUs
     case studyUpdates
     case appUpdates
     case versionInfo
     
     var method: Method{
         switch self {
-        case .feedback,.contactUs:
-            return Method(methodName: self.rawValue, methodType: .httpMethodPOST, requestType: .requestTypeJSON)
         default:
             return Method(methodName: self.rawValue, methodType: .httpMethodGet, requestType: .requestTypeHTTP)
         }
@@ -61,12 +57,15 @@ struct WCPServerURLConstants {
     //    static let DevelopmentURL = "192.168.0.44:3429/StudyMetaData/"
     
     //AWS  - btc
-        static let ProductionURL = "http://18.222.7.100:8080/StudyMetaData/"
-        static let DevelopmentURL = "http://18.222.7.100:8080/StudyMetaData/"
-    
+    //        static let ProductionURL = "http://18.222.7.100:8080/StudyMetaData/"
+    //        static let DevelopmentURL = "http://18.222.7.100:8080/StudyMetaData/"
+    //
     //Staging
-//    static let ProductionURL = "https://hpwcp-stage.lkcompliant.net/StudyMetaData/"
-//    static let DevelopmentURL = "https://hpwcp-stage.lkcompliant.net/StudyMetaData/"
+    //    static let ProductionURL = "https://hpwcp-stage.lkcompliant.net/StudyMetaData/"
+    //    static let DevelopmentURL = "https://hpwcp-stage.lkcompliant.net/StudyMetaData/"
+    
+    static let ProductionURL = "https://hpwcp.lkcompliant.net/StudyMetaData/"
+    static let DevelopmentURL = "https://hpwcp.lkcompliant.net/StudyMetaData/"
     
     //    Demo
     //    static let ProductionURL = "https://wcp.demo.mystudiesapp.org/StudyMetaData/"

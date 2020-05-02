@@ -44,6 +44,8 @@ enum RegistrationMethods: String {
     case verify
     case refreshToken
     case versionInfo
+    case feedback
+    case contactUs
     
     var description: String{
         switch self {
@@ -66,52 +68,24 @@ enum RegistrationMethods: String {
         default:
             //POST Methods
             return Method(methodName: (self.rawValue+".api"), methodType: .httpMethodPOST, requestType: .requestTypeJSON)
-            
-            
         }
     }
-    
+
 }
 struct RegistrationServerURLConstants {
-    //TODO: Set the server end points
-    
-    
+
     //Staging server
-    static let ProductionURL = "https://hpreg-stage.lkcompliant.net/fdahpUserRegWS/"
-    static let DevelopmentURL = "https://hpreg-stage.lkcompliant.net/fdahpUserRegWS/"
+    //    static let ProductionURL = "https://hpreg-stage.lkcompliant.net/fdahpUserRegWS/"
+    //    static let DevelopmentURL = "https://hpreg-stage.lkcompliant.net/fdahpUserRegWS/"
     
     //Demo server
-//    static let ProductionURL = "https://reg.demo.mystudiesapp.org/fdahpUserRegWS/"
-//    static let DevelopmentURL = "https://reg.demo.mystudiesapp.org/fdahpUserRegWS/"
-  
+    //    static let ProductionURL = "https://reg.demo.mystudiesapp.org/fdahpUserRegWS/"
+    //    static let DevelopmentURL = "https://reg.demo.mystudiesapp.org/fdahpUserRegWS/"
     
-    // Local - naveen
-    //static let ProductionURL = "http://192.168.0.125:8081/labkey/fdahpUserRegWS/"
-    //static let DevelopmentURL = "http://192.168.0.125:8081/labkey/fdahpUserRegWS/"
-    
-    //local - btc
-    //static let ProductionURL = "http://192.168.0.44:8085/labkey/fdahpUserRegWS/"
-    //static let DevelopmentURL = "http://192.168.0.44:8085/labkey/fdahpUserRegWS/"
-    
-    //static let ProductionURL = "http://192.168.0.125:8081/labkey/fdahpUserRegWS/"
-//    static var DevelopmentURL:String {
-//
-//        if isUITesting {
-//            return  "http://localhost:8080/fdahpUserRegWS/"
-//        }
-//        return UserDefaults.standard.value(forKey: "URBaseURL") as? String ?? "https://hpreg-stage.lkcompliant.net/fdahpUserRegWS/"
-//    }
-//    static var ProductionURL:String {
-//        //return  "http://localhost:8080/fdahpUserRegWS/"
-//        if isUITesting {
-//            return  "http://localhost:8080/"
-//        }
-//        return UserDefaults.standard.value(forKey: "URBaseURL") as? String ?? "https://hpreg-stage.lkcompliant.net/fdahpUserRegWS/"
-//    }
-   
-    
-    
+    static let ProductionURL = "https://hpreg.lkcompliant.net/fdahpUserRegWS/"
+    static let DevelopmentURL = "https://hpreg.lkcompliant.net/fdahpUserRegWS/"
 }
+
 class RegistrationServerConfiguration: NetworkConfiguration {
     static let configuration = RegistrationServerConfiguration()
     
@@ -136,19 +110,19 @@ class RegistrationServerConfiguration: NetworkConfiguration {
         
         //let ud = UserDefaults.standard
         if User.currentUser.authToken != nil {
-           return [kUserAuthToken: User.currentUser.authToken,
-                               "applicationId": appId,
-                              "orgId": orgId]
-                 }
-              else {
-                      return [
-                             "applicationId": appId,
-                              "orgId": orgId]
+            return [kUserAuthToken: User.currentUser.authToken,
+                    "applicationId": appId,
+                    "orgId": orgId
+            ]
         }
-           
-              return Dictionary()
-
+        else {
+            return [
+                "applicationId": appId,
+                "orgId": orgId
+            ]
+        }
     }
+    
     override func getDefaultRequestParameters() -> [String : Any] {
         return Dictionary()
     }

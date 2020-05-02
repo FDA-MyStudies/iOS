@@ -121,7 +121,6 @@ class ActivitiesViewController : UIViewController{
             self.labelNoNetworkAvailable?.isHidden = true
         }
         
-        
     }
   
     // MARK: Helper Methods
@@ -241,13 +240,7 @@ class ActivitiesViewController : UIViewController{
     
     
     @objc func refresh(sender:AnyObject) {
-//        DBHandler.deleteStudyData(studyId: Study.currentStudy!.studyId)
-//        StudyUpdates.studyActivitiesUpdated = true
-        checkForActivitiesUpdates()
-        Logger.sharedInstance.info("Request for study Updated...")
-        
-//        WCPServices().getStudyUpdates(study: Study.currentStudy!, delegate: self)
-        //self.sendRequesToGetActivityList()
+        WCPServices().getStudyUpdates(study: Study.currentStudy!, delegate: self)
     }
     
     ///Participant Property values received from Response Server saved in Database.
@@ -1091,13 +1084,9 @@ extension ActivitiesViewController: NMWebServiceDelegate {
         } else if requestName as String == WCPMethods.studyUpdates.method.methodName {
             
             Logger.sharedInstance.info("Handling response for study updates...")
+            self.removeProgressIndicator()
             if Study.currentStudy?.version == StudyUpdates.studyVersion {
-                
-                self.loadActivitiesFromDatabase()
-                self.removeProgressIndicator()
-                if self.refreshControl != nil && (self.refreshControl?.isRefreshing)! {
-                    self.refreshControl?.endRefreshing()
-                }
+                self.checkForActivitiesUpdates()
             } else {
                 self.handleStudyUpdatesResponse()
             }

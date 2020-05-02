@@ -70,7 +70,7 @@
 	<key>NSSpeechRecognitionUsageDescription</key>
 	<string>$(PRODUCT_NAME) would like to use Speech Recognition for the task to give more accurate result.</string>
 	<key>OrganizationID</key>
-	<string>OrgName</string>
+	<string>FDAHPH</string>
 	<key>ProductTitleName</key>
 	<string>FDA MyStudies: COVID-19</string>
 	<key>StandaloneStudyId</key>

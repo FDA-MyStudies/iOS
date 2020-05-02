@@ -1091,6 +1091,12 @@ class DBHandler: NSObject {
         return (startDate,endDate)
     }
     
+    class func updateAnchorExternalValue(for dbActivity: DBActivity, externalVaue: String) {
+      try? realm.write {
+        dbActivity.externalPropertyValue = externalVaue
+        }
+    }
+  
     class func activityResponseEmptyAnchorDateValueActivities(_ studyId: String) -> [DBActivity] {
         let realm = DBHandler.getRealmObject()!
         let dbActivities: [DBActivity] = realm.objects(DBActivity.self)

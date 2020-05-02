@@ -367,19 +367,43 @@ class UserServices: NSObject {
         
         self.sendRequestWith(method: method, params: params, headers: headerParams)
     }
-  
-  func updateActivityWithParticipantPropertyDetail(studyId: String, activities: [[String:Any]], delegate: NMWebServiceDelegate){
-      
-      self.delegate = delegate
-      
-      let user = User.currentUser
-      let headerParams = [kUserId: user.userId] as Dictionary<String, String>
-      let params = [kStudyId: studyId,
-                    kActivity: activities] as [String: Any]
-      let method = RegistrationMethods.updateActivityState.method
-     //TODO: Uncomment this and verify the params as API failing.
-      self.sendRequestWith(method: method, params: params, headers: headerParams)
-  }
+    
+    func updateActivityWithParticipantPropertyDetail(studyId: String, activities: [[String:Any]], delegate: NMWebServiceDelegate){
+        
+        self.delegate = delegate
+        
+        let user = User.currentUser
+        let headerParams = [kUserId: user.userId] as Dictionary<String, String>
+        let params = [kStudyId: studyId,
+                      kActivity: activities] as [String: Any]
+        let method = RegistrationMethods.updateActivityState.method
+        //TODO: Uncomment this and verify the params as API failing.
+        self.sendRequestWith(method: method, params: params, headers: headerParams)
+    }
+    
+    func sendUserFeedback(delegate: NMWebServiceDelegate){
+        
+        self.delegate = delegate
+        
+        let method = RegistrationMethods.feedback.method
+        let params = [kFeedbackBody: FeedbackDetail.feedback,
+                      kFeedbackSubject: FeedbackDetail.subject]
+        self.sendRequestWith(method: method, params: params, headers: nil)
+        
+    }
+    
+    func sendUserContactUsRequest(delegate: NMWebServiceDelegate){
+        
+        self.delegate = delegate
+        
+        let method = RegistrationMethods.contactUs.method
+        let params = [kFeedbackBody:ContactUsFeilds.message,
+                      kFeedbackSubject:ContactUsFeilds.subject,
+                      kContactusEmail:ContactUsFeilds.email,
+                      kContactusFirstname:ContactUsFeilds.firstName]
+        self.sendRequestWith(method: method, params: params, headers: nil)
+        
+    }
     
     func updateStudyBookmarkStatus(studyStauts: UserStudyStatus , delegate: NMWebServiceDelegate){
         self.delegate = delegate
@@ -1009,9 +1033,14 @@ extension UserServices: NMWebServiceDelegate{
                 
                 var errorInfo = error.userInfo
                 var localError = error
-                if error.code == 403{
+                if error.code == 403 {
                     errorInfo = ["NSLocalizedDescription": "Your Session is Expired"]
                     localError  = NSError.init(domain: error.domain, code: 403, userInfo: errorInfo)
+                } else if error.code == 400,
+                    requestName as String == RegistrationMethods.login.description
+                    || requestName as String == RegistrationMethods.login.description {
+                    errorInfo = ["NSLocalizedDescription": "Sorry, an error occurred and your feedback could not be sent to the organization. Please retry in some time."]
+                    localError  = NSError.init(domain: error.domain, code: 400, userInfo: errorInfo)
                 }
                 
                 delegate.failedRequest(manager, requestName: requestName, error: localError)

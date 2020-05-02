@@ -231,30 +231,6 @@ class WCPServices: NSObject {
         
     }
     
-    func sendUserFeedback(delegate: NMWebServiceDelegate){
-        
-        self.delegate = delegate
-        
-        let method = WCPMethods.feedback.method
-        let params = [kFeedbackBody: FeedbackDetail.feedback,
-                      kFeedbackSubject: FeedbackDetail.subject]
-        self.sendRequestWith(method: method, params: params, headers: nil)
-        
-    }
-    
-    func sendUserContactUsRequest(delegate: NMWebServiceDelegate){
-        
-        self.delegate = delegate
-        
-        let method = WCPMethods.contactUs.method
-        let params = [kFeedbackBody:ContactUsFeilds.message,
-                      kFeedbackSubject:ContactUsFeilds.subject,
-                      kContactusEmail:ContactUsFeilds.email,
-                      kContactusFirstname:ContactUsFeilds.firstName]
-        self.sendRequestWith(method: method, params: params, headers: nil)
-        
-    }
-    
     func getStudyUpdates(study: Study,delegate: NMWebServiceDelegate){
         self.delegate = delegate
         
@@ -638,8 +614,6 @@ extension WCPServices:NMWebServiceDelegate{
             self.handleTermsAndPolicy(response:response as! Dictionary<String, Any> )
         case .notifications:
             self.handleGetNotification(response:response as! Dictionary<String, Any> )
-        case .contactUs,.feedback:
-            self.handleContactUsAndFeedback(response:response as! Dictionary<String, Any> )
         case .studyUpdates:
             self.handleStudyUpdates(response: response as! Dictionary<String, Any>)
         case .appUpdates: break

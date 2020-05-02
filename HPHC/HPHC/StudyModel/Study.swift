@@ -365,8 +365,7 @@ struct StudyUpdates {
                 StudyUpdates.studyConsentUpdated = (updates[kStudyConsent] as? Bool)!
             }
             if Utilities.isValidValue(someObject: updates[kStudyActivities] as AnyObject ){
-               // StudyUpdates.studyActivitiesUpdated = (updates[kStudyActivities] as? Bool)!
-                StudyUpdates.studyActivitiesUpdated = true // FIXME : Remove this line of code and uncomment above.
+               StudyUpdates.studyActivitiesUpdated = (updates[kStudyActivities] as? Bool)!
             }
             if Utilities.isValidValue(someObject: updates["status"] as AnyObject ){
                 StudyUpdates.studyStatus = updates["status"] as? String

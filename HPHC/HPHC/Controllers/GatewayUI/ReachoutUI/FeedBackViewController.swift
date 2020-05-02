@@ -100,7 +100,7 @@ class FeedBackViewController: UIViewController{
             UIUtilities.showAlertWithMessage(alertMessage: NSLocalizedString("Please provide your feedback", comment: ""))
         }
         else {
-            WCPServices().sendUserFeedback(delegate: self)
+            UserServices().sendUserFeedback(delegate: self)
         }
     }
 }

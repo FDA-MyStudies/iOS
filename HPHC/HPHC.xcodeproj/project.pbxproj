@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		041AEB90AC42096B113333ED /* (null) in Frameworks */ = {isa = PBXBuildFile; };
+		0AC749DEEBB80752CF6DA249 /* Pods_HPHC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FFEEF39245A061C003FE556 /* Pods_HPHC.framework */; };
 		115AC82E6D91856C6361D981 /* Pods_LimitJIA.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B3AB6BB340BA150D5A31DFA /* Pods_LimitJIA.framework */; };
 		481DFA4C1E6EEB70004C39EF /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 481DFA4B1E6EEB70004C39EF /* WebViewController.swift */; };
 		482062521E68532300C7A7AF /* UIUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 482062511E68532300C7A7AF /* UIUtilities.swift */; };
@@ -17,17 +17,12 @@
 		484ACBF61F2896A500BCC819 /* FilterListCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 484ACBF51F2896A500BCC819 /* FilterListCollectionViewCell.swift */; };
 		484ACBFC1F28A82B00BCC819 /* FilterData.plist in Resources */ = {isa = PBXBuildFile; fileRef = 484ACBFB1F28A82B00BCC819 /* FilterData.plist */; };
 		484ACC001F28BC8800BCC819 /* FilterListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 484ACBFF1F28BC8800BCC819 /* FilterListTableViewCell.swift */; };
-		48567FDD1F14F72900857193 /* 13.png in Resources */ = {isa = PBXBuildFile; fileRef = 48567FDC1F14F72900857193 /* 13.png */; };
 		48567FE11F14FB3C00857193 /* StudyFilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48567FE01F14FB3C00857193 /* StudyFilterViewController.swift */; };
 		4884E3521E825E7D002DA0B9 /* FeedBackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4884E3511E825E7D002DA0B9 /* FeedBackViewController.swift */; };
 		4884E3541E82665C002DA0B9 /* FeedBackTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4884E3531E82665C002DA0B9 /* FeedBackTableViewCell.swift */; };
 		4884E3581E827E5B002DA0B9 /* ContactUsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4884E3571E827E5B002DA0B9 /* ContactUsViewController.swift */; };
 		4884E35A1E827E6A002DA0B9 /* ContactUsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4884E3591E827E6A002DA0B9 /* ContactUsTableViewCell.swift */; };
 		4884E35C1E827F8F002DA0B9 /* ContactUs.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4884E35B1E827F8F002DA0B9 /* ContactUs.plist */; };
-		48A24C381E839CF9009E849E /* 24-study-dashboard.png in Resources */ = {isa = PBXBuildFile; fileRef = 48A24C371E839CF9009E849E /* 24-study-dashboard.png */; };
-		48A24C3C1E839CFD009E849E /* 25-study-activities.png in Resources */ = {isa = PBXBuildFile; fileRef = 48A24C3B1E839CFD009E849E /* 25-study-activities.png */; };
-		48A24C3E1E839D03009E849E /* 55V2.png in Resources */ = {isa = PBXBuildFile; fileRef = 48A24C3D1E839D03009E849E /* 55V2.png */; };
-		48C736561EC5C83D002D000F /* study_dashboard.png in Resources */ = {isa = PBXBuildFile; fileRef = 48C736551EC5C83D002D000F /* study_dashboard.png */; };
 		5FAA63209EAD7B1D88D2CF48 /* Pods_HPHC_QA.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 87A4F9AAE7A1B8C36C9FBDDF /* Pods_HPHC_QA.framework */; };
 		6E14F2031F0224AD00EA8D1E /* Notification.json in Resources */ = {isa = PBXBuildFile; fileRef = 6E14F2021F0224AD00EA8D1E /* Notification.json */; };
 		6E183AA91E962AA4005D7A27 /* ResourcesDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E183AA81E962AA4005D7A27 /* ResourcesDetailViewController.swift */; };
@@ -70,9 +65,7 @@
 		6EABD0331E56FE2000623D94 /* TaskSchema.json in Resources */ = {isa = PBXBuildFile; fileRef = 6EABD0321E56FE2000623D94 /* TaskSchema.json */; };
 		6EB7187C1E77C01900E293EF /* Encoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EB7187B1E77C01900E293EF /* Encoder.swift */; };
 		6EB740181E9CD38100A4C773 /* FetalKickTest.json in Resources */ = {isa = PBXBuildFile; fileRef = 6EB740171E9CD38100A4C773 /* FetalKickTest.json */; };
-		6EB7401C1E9CFAD700A4C773 /* 01.png in Resources */ = {isa = PBXBuildFile; fileRef = 6EB7401B1E9CFAD700A4C773 /* 01.png */; };
 		6EB740261E9D028000A4C773 /* FetalKickIntroStepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EB740251E9D028000A4C773 /* FetalKickIntroStepViewController.swift */; };
-		6EB740281E9D1F8700A4C773 /* 03.png in Resources */ = {isa = PBXBuildFile; fileRef = 6EB740271E9D1F8700A4C773 /* 03.png */; };
 		6EBC2E801E94FB5300828CA1 /* StudyDashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EBC2E751E94FB5300828CA1 /* StudyDashboardViewController.swift */; };
 		6EBC2E811E94FB5300828CA1 /* StudyDashboard.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6EBC2E761E94FB5300828CA1 /* StudyDashboard.plist */; };
 		6EBC2E821E94FB5300828CA1 /* StudyDashboardActivityCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EBC2E771E94FB5300828CA1 /* StudyDashboardActivityCollectionViewCell.swift */; };
@@ -85,7 +78,6 @@
 		6EBC2E891E94FB5300828CA1 /* StudyDashboardTrendsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EBC2E7E1E94FB5300828CA1 /* StudyDashboardTrendsTableViewCell.swift */; };
 		6EBC2E8A1E94FB5300828CA1 /* StudyDashboardWelcomeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EBC2E7F1E94FB5300828CA1 /* StudyDashboardWelcomeTableViewCell.swift */; };
 		6EBC8A2B1E8113110020F9E6 /* EligibilityStepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EBC8A2A1E8113110020F9E6 /* EligibilityStepViewController.swift */; };
-		6EBC8A351E8118970020F9E6 /* 200.png in Resources */ = {isa = PBXBuildFile; fileRef = 6EBC8A341E8118970020F9E6 /* 200.png */; };
 		6EC1291F1E64241200B90167 /* ConsentResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EC1291E1E64241200B90167 /* ConsentResult.swift */; };
 		6EC129241E64624F00B90167 /* Acivity_Question.json in Resources */ = {isa = PBXBuildFile; fileRef = 6EC129231E64624F00B90167 /* Acivity_Question.json */; };
 		6EC8019B1E67EF3400CC5966 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EC8019A1E67EF3400CC5966 /* Constants.swift */; };
@@ -123,7 +115,6 @@
 		6EE5756C1E891440009BAA25 /* Gateway.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6EE5756B1E891440009BAA25 /* Gateway.xcassets */; };
 		6EE8E4D91F17459200028853 /* Eligibility_1B.json in Resources */ = {isa = PBXBuildFile; fileRef = 6EE8E4D81F17459200028853 /* Eligibility_1B.json */; };
 		6EE93D901E93B5700027A5DC /* ConsentSharePdfStepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EE93D8F1E93B5700027A5DC /* ConsentSharePdfStepViewController.swift */; };
-		6EE93D921E93B8C30027A5DC /* 45.png in Resources */ = {isa = PBXBuildFile; fileRef = 6EE93D911E93B8C30027A5DC /* 45.png */; };
 		6EE93DC91E93C8850027A5DC /* Activities.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6EE93DB71E93C8850027A5DC /* Activities.plist */; };
 		6EE93DCA1E93C8850027A5DC /* ActivitiesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EE93DB81E93C8850027A5DC /* ActivitiesTableViewCell.swift */; };
 		6EE93DCB1E93C8850027A5DC /* ActivitiesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EE93DB91E93C8850027A5DC /* ActivitiesViewController.swift */; };
@@ -313,24 +304,20 @@
 		6FC12B6622FD60FE0075940B /* FetalKickCounterStepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EED7B3A1E65751D002C1FA3 /* FetalKickCounterStepViewController.swift */; };
 		6FC12B6822FD60FE0075940B /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EEBA4791F25FAA100FB0258 /* HealthKit.framework */; };
 		6FC12B6A22FD60FE0075940B /* ResearchKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EF0BC3C2223D1D6004F2357 /* ResearchKit.framework */; };
-		6FC12B6C22FD60FE0075940B /* 45.png in Resources */ = {isa = PBXBuildFile; fileRef = 6EE93D911E93B8C30027A5DC /* 45.png */; };
 		6FC12B6D22FD60FE0075940B /* Study.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 94B3DD3A1E6ED8E500327AE5 /* Study.storyboard */; };
 		6FC12B6E22FD60FE0075940B /* SearchBarView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6E4D86DB1F389DF1003DBDD8 /* SearchBarView.xib */; };
 		6FC12B6F22FD60FE0075940B /* Labkey_Activity_Latest4.json in Resources */ = {isa = PBXBuildFile; fileRef = 6ED5B05C1FCDBD7C00925352 /* Labkey_Activity_Latest4.json */; };
 		6FC12B7022FD60FE0075940B /* LoginAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 94B3DD2D1E6ED8E500327AE5 /* LoginAssets.xcassets */; };
 		6FC12B7122FD60FE0075940B /* ConsentLatest.json in Resources */ = {isa = PBXBuildFile; fileRef = 6E93C7E01EE2EC26006788B1 /* ConsentLatest.json */; };
 		6FC12B7222FD60FE0075940B /* TaskSchema.json in Resources */ = {isa = PBXBuildFile; fileRef = 6EABD0321E56FE2000623D94 /* TaskSchema.json */; };
-		6FC12B7322FD60FE0075940B /* 55V2.png in Resources */ = {isa = PBXBuildFile; fileRef = 48A24C3D1E839D03009E849E /* 55V2.png */; };
 		6FC12B7522FD60FE0075940B /* Labkey_Activity_Latest2.json in Resources */ = {isa = PBXBuildFile; fileRef = 6E80BC011FB04340008C9B8C /* Labkey_Activity_Latest2.json */; };
 		6FC12B7622FD60FE0075940B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6E7D2D621E433E8800763D4C /* LaunchScreen.storyboard */; };
-		6FC12B7722FD60FE0075940B /* 13.png in Resources */ = {isa = PBXBuildFile; fileRef = 48567FDC1F14F72900857193 /* 13.png */; };
 		6FC12B7822FD60FE0075940B /* UserPreferences.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6E7D2D8D1E43445600763D4C /* UserPreferences.plist */; };
 		6FC12B7922FD60FE0075940B /* AppGlossary.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 9450598E1F29FA2C007906A7 /* AppGlossary.pdf */; };
 		6FC12B7A22FD60FE0075940B /* Verdana Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6ED593721F011D5B00AC3636 /* Verdana Italic.ttf */; };
 		6FC12B7B22FD60FE0075940B /* SignUpPlist.plist in Resources */ = {isa = PBXBuildFile; fileRef = 94B3DD351E6ED8E500327AE5 /* SignUpPlist.plist */; };
 		6FC12B7C22FD60FE0075940B /* ActiveTask.json in Resources */ = {isa = PBXBuildFile; fileRef = 6ED9D5DA1E5B2D5100A0719D /* ActiveTask.json */; };
 		6FC12B7D22FD60FE0075940B /* AppUpdateBlocker.xib in Resources */ = {isa = PBXBuildFile; fileRef = 94C6BD451EB8515000D4AA72 /* AppUpdateBlocker.xib */; };
-		6FC12B7E22FD60FE0075940B /* 200.png in Resources */ = {isa = PBXBuildFile; fileRef = 6EBC8A341E8118970020F9E6 /* 200.png */; };
 		6FC12B7F22FD60FE0075940B /* Gateway.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6EE5756B1E891440009BAA25 /* Gateway.xcassets */; };
 		6FC12B8022FD60FE0075940B /* ActivityFilterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6E7DC76C1F69479C001A05B6 /* ActivityFilterView.xib */; };
 		6FC12B8122FD60FE0075940B /* Labkey_Activity11.json in Resources */ = {isa = PBXBuildFile; fileRef = 6E5F751A1EF4109500ABA308 /* Labkey_Activity11.json */; };
@@ -339,7 +326,6 @@
 		6FC12B8422FD60FE0075940B /* ResourcesUI.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6EE93DBB1E93C8850027A5DC /* ResourcesUI.plist */; };
 		6FC12B8522FD60FE0075940B /* StudyDashboard.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6EBC2E761E94FB5300828CA1 /* StudyDashboard.plist */; };
 		6FC12B8622FD60FE0075940B /* ResourceList.json in Resources */ = {isa = PBXBuildFile; fileRef = 89831392224399FC0000BEB5 /* ResourceList.json */; };
-		6FC12B8722FD60FE0075940B /* study_dashboard.png in Resources */ = {isa = PBXBuildFile; fileRef = 48C736551EC5C83D002D000F /* study_dashboard.png */; };
 		6FC12B8822FD60FE0075940B /* OtherTextChoiceCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F0221782264729E00A2DBC8 /* OtherTextChoiceCell.xib */; };
 		6FC12B8922FD60FE0075940B /* LatestActive_Taskdocument.json in Resources */ = {isa = PBXBuildFile; fileRef = 6EF748BE1E69645700F1E89E /* LatestActive_Taskdocument.json */; };
 		6FC12B8A22FD60FE0075940B /* Labkey_Activity_Latest.json in Resources */ = {isa = PBXBuildFile; fileRef = 6EAA04881FAF4C6A00214D03 /* Labkey_Activity_Latest.json */; };
@@ -353,7 +339,6 @@
 		6FC12B9222FD60FE0075940B /* Labkey_Activity.json in Resources */ = {isa = PBXBuildFile; fileRef = 6EDABCCD1EBA41EE005F3AA6 /* Labkey_Activity.json */; };
 		6FC12B9322FD60FE0075940B /* Consent.json in Resources */ = {isa = PBXBuildFile; fileRef = 6ED134371E5F1B110090C976 /* Consent.json */; };
 		6FC12B9422FD60FE0075940B /* SignInPlist.plist in Resources */ = {isa = PBXBuildFile; fileRef = 94B3DD301E6ED8E500327AE5 /* SignInPlist.plist */; };
-		6FC12B9522FD60FE0075940B /* 24-study-dashboard.png in Resources */ = {isa = PBXBuildFile; fileRef = 48A24C371E839CF9009E849E /* 24-study-dashboard.png */; };
 		6FC12B9622FD60FE0075940B /* NewProgressView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6EDDB6591EE05E4C00C79337 /* NewProgressView.xib */; };
 		6FC12B9722FD60FE0075940B /* fda_preload.gif in Resources */ = {isa = PBXBuildFile; fileRef = 6EDDB6601EE05FDC00C79337 /* fda_preload.gif */; };
 		6FC12B9822FD60FE0075940B /* StudyOverview.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4833E9E21E712C2B0032D244 /* StudyOverview.plist */; };
@@ -362,7 +347,6 @@
 		6FC12B9B22FD60FE0075940B /* StudyList.json in Resources */ = {isa = PBXBuildFile; fileRef = 94B3DD201E6ED8E500327AE5 /* StudyList.json */; };
 		6FC12B9C22FD60FE0075940B /* Confirmation.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6EA889C41E701E8200F160A1 /* Confirmation.plist */; };
 		6FC12B9D22FD60FE0075940B /* Notification.json in Resources */ = {isa = PBXBuildFile; fileRef = 6E14F2021F0224AD00EA8D1E /* Notification.json */; };
-		6FC12B9E22FD60FE0075940B /* 03.png in Resources */ = {isa = PBXBuildFile; fileRef = 6EB740271E9D1F8700A4C773 /* 03.png */; };
 		6FC12B9F22FD60FE0075940B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6E7D2D5D1E433E8800763D4C /* Main.storyboard */; };
 		6FC12BA022FD60FE0075940B /* TextChoiceCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F0221772264729D00A2DBC8 /* TextChoiceCell.xib */; };
 		6FC12BA122FD60FE0075940B /* FilterData.plist in Resources */ = {isa = PBXBuildFile; fileRef = 484ACBFB1F28A82B00BCC819 /* FilterData.plist */; };
@@ -379,11 +363,9 @@
 		6FC12BAD22FD60FE0075940B /* Profile.plist in Resources */ = {isa = PBXBuildFile; fileRef = 94B3DD1B1E6ED8E500327AE5 /* Profile.plist */; };
 		6FC12BAE22FD60FE0075940B /* HPHCSettings.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8948349E22BB9D56000B7BFA /* HPHCSettings.xib */; };
 		6FC12BAF22FD60FE0075940B /* AnanomousFilterData.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6E417AD21F4D5DA1007F27DA /* AnanomousFilterData.plist */; };
-		6FC12BB022FD60FE0075940B /* 01.png in Resources */ = {isa = PBXBuildFile; fileRef = 6EB7401B1E9CFAD700A4C773 /* 01.png */; };
 		6FC12BB122FD60FE0075940B /* UserProfile.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6E7D2D8B1E4340B200763D4C /* UserProfile.plist */; };
 		6FC12BB222FD60FE0075940B /* Register.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6E7D2D8F1E43526100763D4C /* Register.plist */; };
 		6FC12BB322FD60FE0075940B /* Activity_Metadata_Other.json in Resources */ = {isa = PBXBuildFile; fileRef = 6F5AAF7F225DE699002C8FF6 /* Activity_Metadata_Other.json */; };
-		6FC12BB422FD60FE0075940B /* 25-study-activities.png in Resources */ = {isa = PBXBuildFile; fileRef = 48A24C3B1E839CFD009E849E /* 25-study-activities.png */; };
 		6FC12BB922FD60FE0075940B /* ResearchKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6EF0BC3C2223D1D6004F2357 /* ResearchKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		6FC12BBF22FD62E10075940B /* GatewayOverview.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8923429322B128EC0059F910 /* GatewayOverview.plist */; };
 		6FC12BC022FD62E50075940B /* Branding.plist in Resources */ = {isa = PBXBuildFile; fileRef = 890FC1CD22FC538E0020F80F /* Branding.plist */; };
@@ -545,18 +527,15 @@
 		6FD61C6E244597F200B71685 /* FetalKickCounterStepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EED7B3A1E65751D002C1FA3 /* FetalKickCounterStepViewController.swift */; };
 		6FD61C70244597F200B71685 /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EEBA4791F25FAA100FB0258 /* HealthKit.framework */; };
 		6FD61C71244597F200B71685 /* ResearchKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EF0BC3C2223D1D6004F2357 /* ResearchKit.framework */; };
-		6FD61C76244597F200B71685 /* 45.png in Resources */ = {isa = PBXBuildFile; fileRef = 6EE93D911E93B8C30027A5DC /* 45.png */; };
 		6FD61C77244597F200B71685 /* Study.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 94B3DD3A1E6ED8E500327AE5 /* Study.storyboard */; };
 		6FD61C78244597F200B71685 /* SearchBarView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6E4D86DB1F389DF1003DBDD8 /* SearchBarView.xib */; };
 		6FD61C79244597F200B71685 /* Labkey_Activity_Latest4.json in Resources */ = {isa = PBXBuildFile; fileRef = 6ED5B05C1FCDBD7C00925352 /* Labkey_Activity_Latest4.json */; };
 		6FD61C7A244597F200B71685 /* LoginAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 94B3DD2D1E6ED8E500327AE5 /* LoginAssets.xcassets */; };
 		6FD61C7B244597F200B71685 /* ConsentLatest.json in Resources */ = {isa = PBXBuildFile; fileRef = 6E93C7E01EE2EC26006788B1 /* ConsentLatest.json */; };
 		6FD61C7C244597F200B71685 /* TaskSchema.json in Resources */ = {isa = PBXBuildFile; fileRef = 6EABD0321E56FE2000623D94 /* TaskSchema.json */; };
-		6FD61C7D244597F200B71685 /* 55V2.png in Resources */ = {isa = PBXBuildFile; fileRef = 48A24C3D1E839D03009E849E /* 55V2.png */; };
 		6FD61C7E244597F200B71685 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6E7D2D601E433E8800763D4C /* Assets.xcassets */; };
 		6FD61C7F244597F200B71685 /* Labkey_Activity_Latest2.json in Resources */ = {isa = PBXBuildFile; fileRef = 6E80BC011FB04340008C9B8C /* Labkey_Activity_Latest2.json */; };
 		6FD61C80244597F200B71685 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6E7D2D621E433E8800763D4C /* LaunchScreen.storyboard */; };
-		6FD61C81244597F200B71685 /* 13.png in Resources */ = {isa = PBXBuildFile; fileRef = 48567FDC1F14F72900857193 /* 13.png */; };
 		6FD61C82244597F200B71685 /* UserPreferences.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6E7D2D8D1E43445600763D4C /* UserPreferences.plist */; };
 		6FD61C83244597F200B71685 /* AppGlossary.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 9450598E1F29FA2C007906A7 /* AppGlossary.pdf */; };
 		6FD61C84244597F200B71685 /* Verdana Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6ED593721F011D5B00AC3636 /* Verdana Italic.ttf */; };
@@ -565,7 +544,6 @@
 		6FD61C87244597F200B71685 /* ActivityMetadata TEST1.json in Resources */ = {isa = PBXBuildFile; fileRef = 6F52327D23D9883800995A78 /* ActivityMetadata TEST1.json */; };
 		6FD61C88244597F200B71685 /* AppConfiguration.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6F41B85923AC92F900D4F624 /* AppConfiguration.plist */; };
 		6FD61C89244597F200B71685 /* AppUpdateBlocker.xib in Resources */ = {isa = PBXBuildFile; fileRef = 94C6BD451EB8515000D4AA72 /* AppUpdateBlocker.xib */; };
-		6FD61C8A244597F200B71685 /* 200.png in Resources */ = {isa = PBXBuildFile; fileRef = 6EBC8A341E8118970020F9E6 /* 200.png */; };
 		6FD61C8B244597F200B71685 /* Gateway.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6EE5756B1E891440009BAA25 /* Gateway.xcassets */; };
 		6FD61C8C244597F200B71685 /* ActivityFilterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6E7DC76C1F69479C001A05B6 /* ActivityFilterView.xib */; };
 		6FD61C8D244597F200B71685 /* Labkey_Activity11.json in Resources */ = {isa = PBXBuildFile; fileRef = 6E5F751A1EF4109500ABA308 /* Labkey_Activity11.json */; };
@@ -574,7 +552,6 @@
 		6FD61C90244597F200B71685 /* ResourcesUI.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6EE93DBB1E93C8850027A5DC /* ResourcesUI.plist */; };
 		6FD61C91244597F200B71685 /* StudyDashboard.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6EBC2E761E94FB5300828CA1 /* StudyDashboard.plist */; };
 		6FD61C92244597F200B71685 /* ResourceList.json in Resources */ = {isa = PBXBuildFile; fileRef = 89831392224399FC0000BEB5 /* ResourceList.json */; };
-		6FD61C93244597F200B71685 /* study_dashboard.png in Resources */ = {isa = PBXBuildFile; fileRef = 48C736551EC5C83D002D000F /* study_dashboard.png */; };
 		6FD61C94244597F200B71685 /* OtherTextChoiceCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F0221782264729E00A2DBC8 /* OtherTextChoiceCell.xib */; };
 		6FD61C95244597F200B71685 /* LatestActive_Taskdocument.json in Resources */ = {isa = PBXBuildFile; fileRef = 6EF748BE1E69645700F1E89E /* LatestActive_Taskdocument.json */; };
 		6FD61C96244597F200B71685 /* Labkey_Activity_Latest.json in Resources */ = {isa = PBXBuildFile; fileRef = 6EAA04881FAF4C6A00214D03 /* Labkey_Activity_Latest.json */; };
@@ -589,7 +566,6 @@
 		6FD61C9F244597F200B71685 /* Labkey_Activity.json in Resources */ = {isa = PBXBuildFile; fileRef = 6EDABCCD1EBA41EE005F3AA6 /* Labkey_Activity.json */; };
 		6FD61CA0244597F200B71685 /* Consent.json in Resources */ = {isa = PBXBuildFile; fileRef = 6ED134371E5F1B110090C976 /* Consent.json */; };
 		6FD61CA1244597F200B71685 /* SignInPlist.plist in Resources */ = {isa = PBXBuildFile; fileRef = 94B3DD301E6ED8E500327AE5 /* SignInPlist.plist */; };
-		6FD61CA2244597F200B71685 /* 24-study-dashboard.png in Resources */ = {isa = PBXBuildFile; fileRef = 48A24C371E839CF9009E849E /* 24-study-dashboard.png */; };
 		6FD61CA3244597F200B71685 /* NewProgressView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6EDDB6591EE05E4C00C79337 /* NewProgressView.xib */; };
 		6FD61CA4244597F200B71685 /* fda_preload.gif in Resources */ = {isa = PBXBuildFile; fileRef = 6EDDB6601EE05FDC00C79337 /* fda_preload.gif */; };
 		6FD61CA5244597F200B71685 /* StudyOverview.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4833E9E21E712C2B0032D244 /* StudyOverview.plist */; };
@@ -599,7 +575,6 @@
 		6FD61CA9244597F200B71685 /* StudyList.json in Resources */ = {isa = PBXBuildFile; fileRef = 94B3DD201E6ED8E500327AE5 /* StudyList.json */; };
 		6FD61CAA244597F200B71685 /* Confirmation.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6EA889C41E701E8200F160A1 /* Confirmation.plist */; };
 		6FD61CAB244597F200B71685 /* Notification.json in Resources */ = {isa = PBXBuildFile; fileRef = 6E14F2021F0224AD00EA8D1E /* Notification.json */; };
-		6FD61CAC244597F200B71685 /* 03.png in Resources */ = {isa = PBXBuildFile; fileRef = 6EB740271E9D1F8700A4C773 /* 03.png */; };
 		6FD61CAD244597F200B71685 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6E7D2D5D1E433E8800763D4C /* Main.storyboard */; };
 		6FD61CAE244597F200B71685 /* TextChoiceCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F0221772264729D00A2DBC8 /* TextChoiceCell.xib */; };
 		6FD61CAF244597F200B71685 /* FilterData.plist in Resources */ = {isa = PBXBuildFile; fileRef = 484ACBFB1F28A82B00BCC819 /* FilterData.plist */; };
@@ -617,11 +592,9 @@
 		6FD61CBB244597F200B71685 /* Profile.plist in Resources */ = {isa = PBXBuildFile; fileRef = 94B3DD1B1E6ED8E500327AE5 /* Profile.plist */; };
 		6FD61CBC244597F200B71685 /* HPHCSettings.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8948349E22BB9D56000B7BFA /* HPHCSettings.xib */; };
 		6FD61CBD244597F200B71685 /* AnanomousFilterData.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6E417AD21F4D5DA1007F27DA /* AnanomousFilterData.plist */; };
-		6FD61CBE244597F200B71685 /* 01.png in Resources */ = {isa = PBXBuildFile; fileRef = 6EB7401B1E9CFAD700A4C773 /* 01.png */; };
 		6FD61CBF244597F200B71685 /* UserProfile.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6E7D2D8B1E4340B200763D4C /* UserProfile.plist */; };
 		6FD61CC0244597F200B71685 /* Register.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6E7D2D8F1E43526100763D4C /* Register.plist */; };
 		6FD61CC1244597F200B71685 /* Activity_Metadata_Other.json in Resources */ = {isa = PBXBuildFile; fileRef = 6F5AAF7F225DE699002C8FF6 /* Activity_Metadata_Other.json */; };
-		6FD61CC2244597F200B71685 /* 25-study-activities.png in Resources */ = {isa = PBXBuildFile; fileRef = 48A24C3B1E839CFD009E849E /* 25-study-activities.png */; };
 		6FD61CC6244597F200B71685 /* ResearchKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6EF0BC3C2223D1D6004F2357 /* ResearchKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		6FDEFDA923F5A0F50067534C /* DBParticipantPropertyMetadata.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FDEFDA823F5A0F50067534C /* DBParticipantPropertyMetadata.swift */; };
 		6FDEFDAA23F5A0F50067534C /* DBParticipantPropertyMetadata.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FDEFDA823F5A0F50067534C /* DBParticipantPropertyMetadata.swift */; };
@@ -815,17 +788,14 @@
 		897C1A032451A49A00559770 /* FetalKickCounterStepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EED7B3A1E65751D002C1FA3 /* FetalKickCounterStepViewController.swift */; };
 		897C1A052451A49A00559770 /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EEBA4791F25FAA100FB0258 /* HealthKit.framework */; };
 		897C1A062451A49A00559770 /* ResearchKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EF0BC3C2223D1D6004F2357 /* ResearchKit.framework */; };
-		897C1A0B2451A49A00559770 /* 45.png in Resources */ = {isa = PBXBuildFile; fileRef = 6EE93D911E93B8C30027A5DC /* 45.png */; };
 		897C1A0C2451A49A00559770 /* Study.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 94B3DD3A1E6ED8E500327AE5 /* Study.storyboard */; };
 		897C1A0D2451A49A00559770 /* SearchBarView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6E4D86DB1F389DF1003DBDD8 /* SearchBarView.xib */; };
 		897C1A0E2451A49A00559770 /* Labkey_Activity_Latest4.json in Resources */ = {isa = PBXBuildFile; fileRef = 6ED5B05C1FCDBD7C00925352 /* Labkey_Activity_Latest4.json */; };
 		897C1A0F2451A49A00559770 /* LoginAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 94B3DD2D1E6ED8E500327AE5 /* LoginAssets.xcassets */; };
 		897C1A102451A49A00559770 /* ConsentLatest.json in Resources */ = {isa = PBXBuildFile; fileRef = 6E93C7E01EE2EC26006788B1 /* ConsentLatest.json */; };
 		897C1A112451A49A00559770 /* TaskSchema.json in Resources */ = {isa = PBXBuildFile; fileRef = 6EABD0321E56FE2000623D94 /* TaskSchema.json */; };
-		897C1A122451A49A00559770 /* 55V2.png in Resources */ = {isa = PBXBuildFile; fileRef = 48A24C3D1E839D03009E849E /* 55V2.png */; };
 		897C1A142451A49A00559770 /* Labkey_Activity_Latest2.json in Resources */ = {isa = PBXBuildFile; fileRef = 6E80BC011FB04340008C9B8C /* Labkey_Activity_Latest2.json */; };
 		897C1A152451A49A00559770 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6E7D2D621E433E8800763D4C /* LaunchScreen.storyboard */; };
-		897C1A162451A49A00559770 /* 13.png in Resources */ = {isa = PBXBuildFile; fileRef = 48567FDC1F14F72900857193 /* 13.png */; };
 		897C1A172451A49A00559770 /* UserPreferences.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6E7D2D8D1E43445600763D4C /* UserPreferences.plist */; };
 		897C1A182451A49A00559770 /* AppGlossary.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 9450598E1F29FA2C007906A7 /* AppGlossary.pdf */; };
 		897C1A192451A49A00559770 /* Verdana Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6ED593721F011D5B00AC3636 /* Verdana Italic.ttf */; };
@@ -833,7 +803,6 @@
 		897C1A1B2451A49A00559770 /* ActiveTask.json in Resources */ = {isa = PBXBuildFile; fileRef = 6ED9D5DA1E5B2D5100A0719D /* ActiveTask.json */; };
 		897C1A1C2451A49A00559770 /* ActivityMetadata TEST1.json in Resources */ = {isa = PBXBuildFile; fileRef = 6F52327D23D9883800995A78 /* ActivityMetadata TEST1.json */; };
 		897C1A1E2451A49A00559770 /* AppUpdateBlocker.xib in Resources */ = {isa = PBXBuildFile; fileRef = 94C6BD451EB8515000D4AA72 /* AppUpdateBlocker.xib */; };
-		897C1A1F2451A49A00559770 /* 200.png in Resources */ = {isa = PBXBuildFile; fileRef = 6EBC8A341E8118970020F9E6 /* 200.png */; };
 		897C1A202451A49A00559770 /* Gateway.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6EE5756B1E891440009BAA25 /* Gateway.xcassets */; };
 		897C1A212451A49A00559770 /* ActivityFilterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6E7DC76C1F69479C001A05B6 /* ActivityFilterView.xib */; };
 		897C1A222451A49A00559770 /* Labkey_Activity11.json in Resources */ = {isa = PBXBuildFile; fileRef = 6E5F751A1EF4109500ABA308 /* Labkey_Activity11.json */; };
@@ -842,7 +811,6 @@
 		897C1A252451A49A00559770 /* ResourcesUI.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6EE93DBB1E93C8850027A5DC /* ResourcesUI.plist */; };
 		897C1A262451A49A00559770 /* StudyDashboard.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6EBC2E761E94FB5300828CA1 /* StudyDashboard.plist */; };
 		897C1A272451A49A00559770 /* ResourceList.json in Resources */ = {isa = PBXBuildFile; fileRef = 89831392224399FC0000BEB5 /* ResourceList.json */; };
-		897C1A282451A49A00559770 /* study_dashboard.png in Resources */ = {isa = PBXBuildFile; fileRef = 48C736551EC5C83D002D000F /* study_dashboard.png */; };
 		897C1A292451A49A00559770 /* OtherTextChoiceCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F0221782264729E00A2DBC8 /* OtherTextChoiceCell.xib */; };
 		897C1A2A2451A49A00559770 /* LatestActive_Taskdocument.json in Resources */ = {isa = PBXBuildFile; fileRef = 6EF748BE1E69645700F1E89E /* LatestActive_Taskdocument.json */; };
 		897C1A2B2451A49A00559770 /* Labkey_Activity_Latest.json in Resources */ = {isa = PBXBuildFile; fileRef = 6EAA04881FAF4C6A00214D03 /* Labkey_Activity_Latest.json */; };
@@ -856,7 +824,6 @@
 		897C1A342451A49A00559770 /* Labkey_Activity.json in Resources */ = {isa = PBXBuildFile; fileRef = 6EDABCCD1EBA41EE005F3AA6 /* Labkey_Activity.json */; };
 		897C1A352451A49A00559770 /* Consent.json in Resources */ = {isa = PBXBuildFile; fileRef = 6ED134371E5F1B110090C976 /* Consent.json */; };
 		897C1A362451A49A00559770 /* SignInPlist.plist in Resources */ = {isa = PBXBuildFile; fileRef = 94B3DD301E6ED8E500327AE5 /* SignInPlist.plist */; };
-		897C1A372451A49A00559770 /* 24-study-dashboard.png in Resources */ = {isa = PBXBuildFile; fileRef = 48A24C371E839CF9009E849E /* 24-study-dashboard.png */; };
 		897C1A382451A49A00559770 /* NewProgressView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6EDDB6591EE05E4C00C79337 /* NewProgressView.xib */; };
 		897C1A392451A49A00559770 /* fda_preload.gif in Resources */ = {isa = PBXBuildFile; fileRef = 6EDDB6601EE05FDC00C79337 /* fda_preload.gif */; };
 		897C1A3A2451A49A00559770 /* StudyOverview.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4833E9E21E712C2B0032D244 /* StudyOverview.plist */; };
@@ -866,7 +833,6 @@
 		897C1A3E2451A49A00559770 /* StudyList.json in Resources */ = {isa = PBXBuildFile; fileRef = 94B3DD201E6ED8E500327AE5 /* StudyList.json */; };
 		897C1A3F2451A49A00559770 /* Confirmation.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6EA889C41E701E8200F160A1 /* Confirmation.plist */; };
 		897C1A402451A49A00559770 /* Notification.json in Resources */ = {isa = PBXBuildFile; fileRef = 6E14F2021F0224AD00EA8D1E /* Notification.json */; };
-		897C1A412451A49A00559770 /* 03.png in Resources */ = {isa = PBXBuildFile; fileRef = 6EB740271E9D1F8700A4C773 /* 03.png */; };
 		897C1A422451A49A00559770 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6E7D2D5D1E433E8800763D4C /* Main.storyboard */; };
 		897C1A432451A49A00559770 /* TextChoiceCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F0221772264729D00A2DBC8 /* TextChoiceCell.xib */; };
 		897C1A442451A49A00559770 /* FilterData.plist in Resources */ = {isa = PBXBuildFile; fileRef = 484ACBFB1F28A82B00BCC819 /* FilterData.plist */; };
@@ -883,11 +849,9 @@
 		897C1A502451A49A00559770 /* Profile.plist in Resources */ = {isa = PBXBuildFile; fileRef = 94B3DD1B1E6ED8E500327AE5 /* Profile.plist */; };
 		897C1A512451A49A00559770 /* HPHCSettings.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8948349E22BB9D56000B7BFA /* HPHCSettings.xib */; };
 		897C1A522451A49A00559770 /* AnanomousFilterData.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6E417AD21F4D5DA1007F27DA /* AnanomousFilterData.plist */; };
-		897C1A532451A49A00559770 /* 01.png in Resources */ = {isa = PBXBuildFile; fileRef = 6EB7401B1E9CFAD700A4C773 /* 01.png */; };
 		897C1A542451A49A00559770 /* UserProfile.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6E7D2D8B1E4340B200763D4C /* UserProfile.plist */; };
 		897C1A552451A49A00559770 /* Register.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6E7D2D8F1E43526100763D4C /* Register.plist */; };
 		897C1A562451A49A00559770 /* Activity_Metadata_Other.json in Resources */ = {isa = PBXBuildFile; fileRef = 6F5AAF7F225DE699002C8FF6 /* Activity_Metadata_Other.json */; };
-		897C1A572451A49A00559770 /* 25-study-activities.png in Resources */ = {isa = PBXBuildFile; fileRef = 48A24C3B1E839CFD009E849E /* 25-study-activities.png */; };
 		897C1A5B2451A49A00559770 /* ResearchKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6EF0BC3C2223D1D6004F2357 /* ResearchKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		897C1A682451A61100559770 /* Branding.plist in Resources */ = {isa = PBXBuildFile; fileRef = 897C1A652451A61100559770 /* Branding.plist */; };
 		897C1A692451A61100559770 /* AppConfiguration.plist in Resources */ = {isa = PBXBuildFile; fileRef = 897C1A662451A61100559770 /* AppConfiguration.plist */; };
@@ -896,8 +860,6 @@
 		89893F0622B1125300A846CE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6E7D2D601E433E8800763D4C /* Assets.xcassets */; };
 		89893F0722B112A000A846CE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6E7D2D621E433E8800763D4C /* LaunchScreen.storyboard */; };
 		89903062224A502C00B3A85C /* AnchorDateHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89903061224A502C00B3A85C /* AnchorDateHandler.swift */; };
-		89956ABB23EDA1E3005CB333 /* Pods_HPHC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 89956ABA23EDA1E3005CB333 /* Pods_HPHC.framework */; };
-		89956ABC23EDA1E3005CB333 /* Pods_HPHC.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 89956ABA23EDA1E3005CB333 /* Pods_HPHC.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		899C387F2451AB89003A56BA /* GatewayOverview.plist in Resources */ = {isa = PBXBuildFile; fileRef = 899C387D2451AB88003A56BA /* GatewayOverview.plist */; };
 		89C5EE8023F16CFE00649359 /* UIApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94334F861E70055A00755444 /* UIApplication.swift */; };
 		89C5EE8123F16CFE00649359 /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94334F851E70055A00755444 /* UIViewController.swift */; };
@@ -1050,17 +1012,14 @@
 		89C5EF1423F16CFE00649359 /* FetalKickCounterStepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EED7B3A1E65751D002C1FA3 /* FetalKickCounterStepViewController.swift */; };
 		89C5EF1623F16CFE00649359 /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EEBA4791F25FAA100FB0258 /* HealthKit.framework */; };
 		89C5EF1A23F16CFE00649359 /* ResearchKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EF0BC3C2223D1D6004F2357 /* ResearchKit.framework */; };
-		89C5EF1D23F16CFE00649359 /* 45.png in Resources */ = {isa = PBXBuildFile; fileRef = 6EE93D911E93B8C30027A5DC /* 45.png */; };
 		89C5EF1E23F16CFE00649359 /* Study.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 94B3DD3A1E6ED8E500327AE5 /* Study.storyboard */; };
 		89C5EF1F23F16CFE00649359 /* SearchBarView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6E4D86DB1F389DF1003DBDD8 /* SearchBarView.xib */; };
 		89C5EF2023F16CFE00649359 /* Labkey_Activity_Latest4.json in Resources */ = {isa = PBXBuildFile; fileRef = 6ED5B05C1FCDBD7C00925352 /* Labkey_Activity_Latest4.json */; };
 		89C5EF2123F16CFE00649359 /* LoginAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 94B3DD2D1E6ED8E500327AE5 /* LoginAssets.xcassets */; };
 		89C5EF2223F16CFE00649359 /* ConsentLatest.json in Resources */ = {isa = PBXBuildFile; fileRef = 6E93C7E01EE2EC26006788B1 /* ConsentLatest.json */; };
 		89C5EF2323F16CFE00649359 /* TaskSchema.json in Resources */ = {isa = PBXBuildFile; fileRef = 6EABD0321E56FE2000623D94 /* TaskSchema.json */; };
-		89C5EF2423F16CFE00649359 /* 55V2.png in Resources */ = {isa = PBXBuildFile; fileRef = 48A24C3D1E839D03009E849E /* 55V2.png */; };
 		89C5EF2623F16CFE00649359 /* Labkey_Activity_Latest2.json in Resources */ = {isa = PBXBuildFile; fileRef = 6E80BC011FB04340008C9B8C /* Labkey_Activity_Latest2.json */; };
 		89C5EF2723F16CFE00649359 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6E7D2D621E433E8800763D4C /* LaunchScreen.storyboard */; };
-		89C5EF2823F16CFE00649359 /* 13.png in Resources */ = {isa = PBXBuildFile; fileRef = 48567FDC1F14F72900857193 /* 13.png */; };
 		89C5EF2923F16CFE00649359 /* UserPreferences.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6E7D2D8D1E43445600763D4C /* UserPreferences.plist */; };
 		89C5EF2A23F16CFE00649359 /* AppGlossary.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 9450598E1F29FA2C007906A7 /* AppGlossary.pdf */; };
 		89C5EF2B23F16CFE00649359 /* Verdana Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6ED593721F011D5B00AC3636 /* Verdana Italic.ttf */; };
@@ -1068,7 +1027,6 @@
 		89C5EF2D23F16CFE00649359 /* ActiveTask.json in Resources */ = {isa = PBXBuildFile; fileRef = 6ED9D5DA1E5B2D5100A0719D /* ActiveTask.json */; };
 		89C5EF2E23F16CFE00649359 /* ActivityMetadata TEST1.json in Resources */ = {isa = PBXBuildFile; fileRef = 6F52327D23D9883800995A78 /* ActivityMetadata TEST1.json */; };
 		89C5EF2F23F16CFE00649359 /* AppUpdateBlocker.xib in Resources */ = {isa = PBXBuildFile; fileRef = 94C6BD451EB8515000D4AA72 /* AppUpdateBlocker.xib */; };
-		89C5EF3023F16CFE00649359 /* 200.png in Resources */ = {isa = PBXBuildFile; fileRef = 6EBC8A341E8118970020F9E6 /* 200.png */; };
 		89C5EF3123F16CFE00649359 /* Gateway.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6EE5756B1E891440009BAA25 /* Gateway.xcassets */; };
 		89C5EF3223F16CFE00649359 /* ActivityFilterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6E7DC76C1F69479C001A05B6 /* ActivityFilterView.xib */; };
 		89C5EF3323F16CFE00649359 /* Labkey_Activity11.json in Resources */ = {isa = PBXBuildFile; fileRef = 6E5F751A1EF4109500ABA308 /* Labkey_Activity11.json */; };
@@ -1077,7 +1035,6 @@
 		89C5EF3623F16CFE00649359 /* ResourcesUI.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6EE93DBB1E93C8850027A5DC /* ResourcesUI.plist */; };
 		89C5EF3723F16CFE00649359 /* StudyDashboard.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6EBC2E761E94FB5300828CA1 /* StudyDashboard.plist */; };
 		89C5EF3823F16CFE00649359 /* ResourceList.json in Resources */ = {isa = PBXBuildFile; fileRef = 89831392224399FC0000BEB5 /* ResourceList.json */; };
-		89C5EF3923F16CFE00649359 /* study_dashboard.png in Resources */ = {isa = PBXBuildFile; fileRef = 48C736551EC5C83D002D000F /* study_dashboard.png */; };
 		89C5EF3A23F16CFE00649359 /* OtherTextChoiceCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F0221782264729E00A2DBC8 /* OtherTextChoiceCell.xib */; };
 		89C5EF3B23F16CFE00649359 /* LatestActive_Taskdocument.json in Resources */ = {isa = PBXBuildFile; fileRef = 6EF748BE1E69645700F1E89E /* LatestActive_Taskdocument.json */; };
 		89C5EF3C23F16CFE00649359 /* Labkey_Activity_Latest.json in Resources */ = {isa = PBXBuildFile; fileRef = 6EAA04881FAF4C6A00214D03 /* Labkey_Activity_Latest.json */; };
@@ -1091,7 +1048,6 @@
 		89C5EF4523F16CFE00649359 /* Labkey_Activity.json in Resources */ = {isa = PBXBuildFile; fileRef = 6EDABCCD1EBA41EE005F3AA6 /* Labkey_Activity.json */; };
 		89C5EF4623F16CFE00649359 /* Consent.json in Resources */ = {isa = PBXBuildFile; fileRef = 6ED134371E5F1B110090C976 /* Consent.json */; };
 		89C5EF4723F16CFE00649359 /* SignInPlist.plist in Resources */ = {isa = PBXBuildFile; fileRef = 94B3DD301E6ED8E500327AE5 /* SignInPlist.plist */; };
-		89C5EF4823F16CFE00649359 /* 24-study-dashboard.png in Resources */ = {isa = PBXBuildFile; fileRef = 48A24C371E839CF9009E849E /* 24-study-dashboard.png */; };
 		89C5EF4923F16CFE00649359 /* NewProgressView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6EDDB6591EE05E4C00C79337 /* NewProgressView.xib */; };
 		89C5EF4A23F16CFE00649359 /* fda_preload.gif in Resources */ = {isa = PBXBuildFile; fileRef = 6EDDB6601EE05FDC00C79337 /* fda_preload.gif */; };
 		89C5EF4B23F16CFE00649359 /* StudyOverview.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4833E9E21E712C2B0032D244 /* StudyOverview.plist */; };
@@ -1100,7 +1056,6 @@
 		89C5EF4E23F16CFE00649359 /* StudyList.json in Resources */ = {isa = PBXBuildFile; fileRef = 94B3DD201E6ED8E500327AE5 /* StudyList.json */; };
 		89C5EF4F23F16CFE00649359 /* Confirmation.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6EA889C41E701E8200F160A1 /* Confirmation.plist */; };
 		89C5EF5123F16CFE00649359 /* Notification.json in Resources */ = {isa = PBXBuildFile; fileRef = 6E14F2021F0224AD00EA8D1E /* Notification.json */; };
-		89C5EF5223F16CFE00649359 /* 03.png in Resources */ = {isa = PBXBuildFile; fileRef = 6EB740271E9D1F8700A4C773 /* 03.png */; };
 		89C5EF5323F16CFE00649359 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6E7D2D5D1E433E8800763D4C /* Main.storyboard */; };
 		89C5EF5423F16CFE00649359 /* TextChoiceCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F0221772264729D00A2DBC8 /* TextChoiceCell.xib */; };
 		89C5EF5523F16CFE00649359 /* FilterData.plist in Resources */ = {isa = PBXBuildFile; fileRef = 484ACBFB1F28A82B00BCC819 /* FilterData.plist */; };
@@ -1118,11 +1073,9 @@
 		89C5EF6223F16CFE00649359 /* Profile.plist in Resources */ = {isa = PBXBuildFile; fileRef = 94B3DD1B1E6ED8E500327AE5 /* Profile.plist */; };
 		89C5EF6323F16CFE00649359 /* HPHCSettings.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8948349E22BB9D56000B7BFA /* HPHCSettings.xib */; };
 		89C5EF6423F16CFE00649359 /* AnanomousFilterData.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6E417AD21F4D5DA1007F27DA /* AnanomousFilterData.plist */; };
-		89C5EF6523F16CFE00649359 /* 01.png in Resources */ = {isa = PBXBuildFile; fileRef = 6EB7401B1E9CFAD700A4C773 /* 01.png */; };
 		89C5EF6623F16CFE00649359 /* UserProfile.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6E7D2D8B1E4340B200763D4C /* UserProfile.plist */; };
 		89C5EF6723F16CFE00649359 /* Register.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6E7D2D8F1E43526100763D4C /* Register.plist */; };
 		89C5EF6823F16CFE00649359 /* Activity_Metadata_Other.json in Resources */ = {isa = PBXBuildFile; fileRef = 6F5AAF7F225DE699002C8FF6 /* Activity_Metadata_Other.json */; };
-		89C5EF6923F16CFE00649359 /* 25-study-activities.png in Resources */ = {isa = PBXBuildFile; fileRef = 48A24C3B1E839CFD009E849E /* 25-study-activities.png */; };
 		89C5EF6E23F16CFE00649359 /* ResearchKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6EF0BC3C2223D1D6004F2357 /* ResearchKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		89C5EF7A23F16DB000649359 /* AppConfiguration.plist in Resources */ = {isa = PBXBuildFile; fileRef = 89C5EF7423F16DB000649359 /* AppConfiguration.plist */; };
 		89C5EF7B23F16DB000649359 /* GatewayOverview.plist in Resources */ = {isa = PBXBuildFile; fileRef = 89C5EF7523F16DB000649359 /* GatewayOverview.plist */; };
@@ -1278,24 +1231,20 @@
 		89DBF7DA22F9893000AB3EF2 /* FetalKickCounterStepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EED7B3A1E65751D002C1FA3 /* FetalKickCounterStepViewController.swift */; };
 		89DBF7DC22F9893000AB3EF2 /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EEBA4791F25FAA100FB0258 /* HealthKit.framework */; };
 		89DBF7DE22F9893000AB3EF2 /* ResearchKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EF0BC3C2223D1D6004F2357 /* ResearchKit.framework */; };
-		89DBF7E122F9893000AB3EF2 /* 45.png in Resources */ = {isa = PBXBuildFile; fileRef = 6EE93D911E93B8C30027A5DC /* 45.png */; };
 		89DBF7E222F9893000AB3EF2 /* Study.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 94B3DD3A1E6ED8E500327AE5 /* Study.storyboard */; };
 		89DBF7E322F9893000AB3EF2 /* SearchBarView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6E4D86DB1F389DF1003DBDD8 /* SearchBarView.xib */; };
 		89DBF7E422F9893000AB3EF2 /* Labkey_Activity_Latest4.json in Resources */ = {isa = PBXBuildFile; fileRef = 6ED5B05C1FCDBD7C00925352 /* Labkey_Activity_Latest4.json */; };
 		89DBF7E522F9893000AB3EF2 /* LoginAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 94B3DD2D1E6ED8E500327AE5 /* LoginAssets.xcassets */; };
 		89DBF7E622F9893000AB3EF2 /* ConsentLatest.json in Resources */ = {isa = PBXBuildFile; fileRef = 6E93C7E01EE2EC26006788B1 /* ConsentLatest.json */; };
 		89DBF7E722F9893000AB3EF2 /* TaskSchema.json in Resources */ = {isa = PBXBuildFile; fileRef = 6EABD0321E56FE2000623D94 /* TaskSchema.json */; };
-		89DBF7E822F9893000AB3EF2 /* 55V2.png in Resources */ = {isa = PBXBuildFile; fileRef = 48A24C3D1E839D03009E849E /* 55V2.png */; };
 		89DBF7EA22F9893000AB3EF2 /* Labkey_Activity_Latest2.json in Resources */ = {isa = PBXBuildFile; fileRef = 6E80BC011FB04340008C9B8C /* Labkey_Activity_Latest2.json */; };
 		89DBF7EB22F9893000AB3EF2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6E7D2D621E433E8800763D4C /* LaunchScreen.storyboard */; };
-		89DBF7EC22F9893000AB3EF2 /* 13.png in Resources */ = {isa = PBXBuildFile; fileRef = 48567FDC1F14F72900857193 /* 13.png */; };
 		89DBF7ED22F9893000AB3EF2 /* UserPreferences.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6E7D2D8D1E43445600763D4C /* UserPreferences.plist */; };
 		89DBF7EE22F9893000AB3EF2 /* AppGlossary.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 9450598E1F29FA2C007906A7 /* AppGlossary.pdf */; };
 		89DBF7EF22F9893000AB3EF2 /* Verdana Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6ED593721F011D5B00AC3636 /* Verdana Italic.ttf */; };
 		89DBF7F022F9893000AB3EF2 /* SignUpPlist.plist in Resources */ = {isa = PBXBuildFile; fileRef = 94B3DD351E6ED8E500327AE5 /* SignUpPlist.plist */; };
 		89DBF7F122F9893000AB3EF2 /* ActiveTask.json in Resources */ = {isa = PBXBuildFile; fileRef = 6ED9D5DA1E5B2D5100A0719D /* ActiveTask.json */; };
 		89DBF7F222F9893000AB3EF2 /* AppUpdateBlocker.xib in Resources */ = {isa = PBXBuildFile; fileRef = 94C6BD451EB8515000D4AA72 /* AppUpdateBlocker.xib */; };
-		89DBF7F322F9893000AB3EF2 /* 200.png in Resources */ = {isa = PBXBuildFile; fileRef = 6EBC8A341E8118970020F9E6 /* 200.png */; };
 		89DBF7F422F9893000AB3EF2 /* Gateway.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6EE5756B1E891440009BAA25 /* Gateway.xcassets */; };
 		89DBF7F522F9893000AB3EF2 /* ActivityFilterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6E7DC76C1F69479C001A05B6 /* ActivityFilterView.xib */; };
 		89DBF7F622F9893000AB3EF2 /* Labkey_Activity11.json in Resources */ = {isa = PBXBuildFile; fileRef = 6E5F751A1EF4109500ABA308 /* Labkey_Activity11.json */; };
@@ -1304,7 +1253,6 @@
 		89DBF7F922F9893000AB3EF2 /* ResourcesUI.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6EE93DBB1E93C8850027A5DC /* ResourcesUI.plist */; };
 		89DBF7FA22F9893000AB3EF2 /* StudyDashboard.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6EBC2E761E94FB5300828CA1 /* StudyDashboard.plist */; };
 		89DBF7FB22F9893000AB3EF2 /* ResourceList.json in Resources */ = {isa = PBXBuildFile; fileRef = 89831392224399FC0000BEB5 /* ResourceList.json */; };
-		89DBF7FC22F9893000AB3EF2 /* study_dashboard.png in Resources */ = {isa = PBXBuildFile; fileRef = 48C736551EC5C83D002D000F /* study_dashboard.png */; };
 		89DBF7FD22F9893000AB3EF2 /* OtherTextChoiceCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F0221782264729E00A2DBC8 /* OtherTextChoiceCell.xib */; };
 		89DBF7FE22F9893000AB3EF2 /* LatestActive_Taskdocument.json in Resources */ = {isa = PBXBuildFile; fileRef = 6EF748BE1E69645700F1E89E /* LatestActive_Taskdocument.json */; };
 		89DBF7FF22F9893000AB3EF2 /* Labkey_Activity_Latest.json in Resources */ = {isa = PBXBuildFile; fileRef = 6EAA04881FAF4C6A00214D03 /* Labkey_Activity_Latest.json */; };
@@ -1318,7 +1266,6 @@
 		89DBF80822F9893000AB3EF2 /* Labkey_Activity.json in Resources */ = {isa = PBXBuildFile; fileRef = 6EDABCCD1EBA41EE005F3AA6 /* Labkey_Activity.json */; };
 		89DBF80922F9893000AB3EF2 /* Consent.json in Resources */ = {isa = PBXBuildFile; fileRef = 6ED134371E5F1B110090C976 /* Consent.json */; };
 		89DBF80A22F9893000AB3EF2 /* SignInPlist.plist in Resources */ = {isa = PBXBuildFile; fileRef = 94B3DD301E6ED8E500327AE5 /* SignInPlist.plist */; };
-		89DBF80B22F9893000AB3EF2 /* 24-study-dashboard.png in Resources */ = {isa = PBXBuildFile; fileRef = 48A24C371E839CF9009E849E /* 24-study-dashboard.png */; };
 		89DBF80C22F9893000AB3EF2 /* NewProgressView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6EDDB6591EE05E4C00C79337 /* NewProgressView.xib */; };
 		89DBF80D22F9893000AB3EF2 /* fda_preload.gif in Resources */ = {isa = PBXBuildFile; fileRef = 6EDDB6601EE05FDC00C79337 /* fda_preload.gif */; };
 		89DBF80E22F9893000AB3EF2 /* StudyOverview.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4833E9E21E712C2B0032D244 /* StudyOverview.plist */; };
@@ -1327,7 +1274,6 @@
 		89DBF81122F9893000AB3EF2 /* StudyList.json in Resources */ = {isa = PBXBuildFile; fileRef = 94B3DD201E6ED8E500327AE5 /* StudyList.json */; };
 		89DBF81222F9893000AB3EF2 /* Confirmation.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6EA889C41E701E8200F160A1 /* Confirmation.plist */; };
 		89DBF81322F9893000AB3EF2 /* Notification.json in Resources */ = {isa = PBXBuildFile; fileRef = 6E14F2021F0224AD00EA8D1E /* Notification.json */; };
-		89DBF81422F9893000AB3EF2 /* 03.png in Resources */ = {isa = PBXBuildFile; fileRef = 6EB740271E9D1F8700A4C773 /* 03.png */; };
 		89DBF81522F9893000AB3EF2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6E7D2D5D1E433E8800763D4C /* Main.storyboard */; };
 		89DBF81622F9893000AB3EF2 /* TextChoiceCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F0221772264729D00A2DBC8 /* TextChoiceCell.xib */; };
 		89DBF81722F9893000AB3EF2 /* FilterData.plist in Resources */ = {isa = PBXBuildFile; fileRef = 484ACBFB1F28A82B00BCC819 /* FilterData.plist */; };
@@ -1344,11 +1290,9 @@
 		89DBF82222F9893000AB3EF2 /* Profile.plist in Resources */ = {isa = PBXBuildFile; fileRef = 94B3DD1B1E6ED8E500327AE5 /* Profile.plist */; };
 		89DBF82322F9893000AB3EF2 /* HPHCSettings.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8948349E22BB9D56000B7BFA /* HPHCSettings.xib */; };
 		89DBF82422F9893000AB3EF2 /* AnanomousFilterData.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6E417AD21F4D5DA1007F27DA /* AnanomousFilterData.plist */; };
-		89DBF82522F9893000AB3EF2 /* 01.png in Resources */ = {isa = PBXBuildFile; fileRef = 6EB7401B1E9CFAD700A4C773 /* 01.png */; };
 		89DBF82622F9893000AB3EF2 /* UserProfile.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6E7D2D8B1E4340B200763D4C /* UserProfile.plist */; };
 		89DBF82722F9893000AB3EF2 /* Register.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6E7D2D8F1E43526100763D4C /* Register.plist */; };
 		89DBF82822F9893000AB3EF2 /* Activity_Metadata_Other.json in Resources */ = {isa = PBXBuildFile; fileRef = 6F5AAF7F225DE699002C8FF6 /* Activity_Metadata_Other.json */; };
-		89DBF82922F9893000AB3EF2 /* 25-study-activities.png in Resources */ = {isa = PBXBuildFile; fileRef = 48A24C3B1E839CFD009E849E /* 25-study-activities.png */; };
 		89DBF82E22F9893000AB3EF2 /* ResearchKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6EF0BC3C2223D1D6004F2357 /* ResearchKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		89DBF83422F989EE00AB3EF2 /* Sparc.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6FDCDD2E22C2377F008891D9 /* Sparc.storyboard */; };
 		89DBF83622F989FB00AB3EF2 /* Sparc.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6FDCDD2922C22766008891D9 /* Sparc.xcassets */; };
@@ -1432,9 +1376,7 @@
 		94FF031B1E95275D009F191B /* ReachoutOptionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94FF031A1E95275D009F191B /* ReachoutOptionsViewController.swift */; };
 		94FF031F1E952B0A009F191B /* ReachoutOptionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94FF031E1E952B0A009F191B /* ReachoutOptionCell.swift */; };
 		951EC5B5601293CE0771D248 /* libPods-HPHCTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AF448A6C2B509B3DB605C42 /* libPods-HPHCTests.a */; };
-		AD9F0493EECFB6152C406D2F /* (null) in Frameworks */ = {isa = PBXBuildFile; };
 		B393223A6EE713DE81AB98F6 /* Pods_FDAMS_HIMSS_App.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 80162EB0842AABC6DBF4AC42 /* Pods_FDAMS_HIMSS_App.framework */; };
-		BE8AD49A9BA10D1234FFBC8E /* Pods_HPHC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E2D90F2C47BDF9FED6C49B6 /* Pods_HPHC.framework */; };
 		CBC434BA8726769325131A30 /* Pods_MyStudies_COVID_19.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E99EF4C4C9BC14DB219CE1D /* Pods_MyStudies_COVID_19.framework */; };
 /* End PBXBuildFile section */
 
@@ -1591,7 +1533,6 @@
 			dstSubfolderSpec = 10;
 			files = (
 				89EDB46D2271EFDF0070F16C /* ResearchKit.framework in Embed Frameworks */,
-				89956ABC23EDA1E3005CB333 /* Pods_HPHC.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1618,7 +1559,6 @@
 		484ACBF51F2896A500BCC819 /* FilterListCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterListCollectionViewCell.swift; sourceTree = "<group>"; };
 		484ACBFB1F28A82B00BCC819 /* FilterData.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = FilterData.plist; sourceTree = "<group>"; };
 		484ACBFF1F28BC8800BCC819 /* FilterListTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterListTableViewCell.swift; sourceTree = "<group>"; };
-		48567FDC1F14F72900857193 /* 13.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 13.png; sourceTree = "<group>"; };
 		48567FE01F14FB3C00857193 /* StudyFilterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudyFilterViewController.swift; sourceTree = "<group>"; };
 		486304D51E6FE77C003CD406 /* GatewayOverview.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = GatewayOverview.plist; sourceTree = "<group>"; };
 		4884E3511E825E7D002DA0B9 /* FeedBackViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedBackViewController.swift; sourceTree = "<group>"; };
@@ -1626,10 +1566,6 @@
 		4884E3571E827E5B002DA0B9 /* ContactUsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactUsViewController.swift; sourceTree = "<group>"; };
 		4884E3591E827E6A002DA0B9 /* ContactUsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactUsTableViewCell.swift; sourceTree = "<group>"; };
 		4884E35B1E827F8F002DA0B9 /* ContactUs.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = ContactUs.plist; sourceTree = "<group>"; };
-		48A24C371E839CF9009E849E /* 24-study-dashboard.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "24-study-dashboard.png"; sourceTree = "<group>"; };
-		48A24C3B1E839CFD009E849E /* 25-study-activities.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "25-study-activities.png"; sourceTree = "<group>"; };
-		48A24C3D1E839D03009E849E /* 55V2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 55V2.png; sourceTree = "<group>"; };
-		48C736551EC5C83D002D000F /* study_dashboard.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = study_dashboard.png; sourceTree = "<group>"; };
 		5635221B1914AC7BC16DFBD2 /* Pods-HPHCTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HPHCTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-HPHCTests/Pods-HPHCTests.debug.xcconfig"; sourceTree = "<group>"; };
 		6666A99A4FE2BB8CB72673EE /* Pods-FDAMS HIMSS App.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FDAMS HIMSS App.release.xcconfig"; path = "Pods/Target Support Files/Pods-FDAMS HIMSS App/Pods-FDAMS HIMSS App.release.xcconfig"; sourceTree = "<group>"; };
 		6E14F2021F0224AD00EA8D1E /* Notification.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Notification.json; sourceTree = "<group>"; };
@@ -1678,9 +1614,7 @@
 		6EABD0321E56FE2000623D94 /* TaskSchema.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = TaskSchema.json; sourceTree = "<group>"; };
 		6EB7187B1E77C01900E293EF /* Encoder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Encoder.swift; sourceTree = "<group>"; };
 		6EB740171E9CD38100A4C773 /* FetalKickTest.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = FetalKickTest.json; sourceTree = "<group>"; };
-		6EB7401B1E9CFAD700A4C773 /* 01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 01.png; sourceTree = "<group>"; };
 		6EB740251E9D028000A4C773 /* FetalKickIntroStepViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FetalKickIntroStepViewController.swift; sourceTree = "<group>"; };
-		6EB740271E9D1F8700A4C773 /* 03.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 03.png; sourceTree = "<group>"; };
 		6EBC2E751E94FB5300828CA1 /* StudyDashboardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudyDashboardViewController.swift; sourceTree = "<group>"; };
 		6EBC2E761E94FB5300828CA1 /* StudyDashboard.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = StudyDashboard.plist; sourceTree = "<group>"; };
 		6EBC2E771E94FB5300828CA1 /* StudyDashboardActivityCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudyDashboardActivityCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -1693,7 +1627,6 @@
 		6EBC2E7E1E94FB5300828CA1 /* StudyDashboardTrendsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudyDashboardTrendsTableViewCell.swift; sourceTree = "<group>"; };
 		6EBC2E7F1E94FB5300828CA1 /* StudyDashboardWelcomeTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudyDashboardWelcomeTableViewCell.swift; sourceTree = "<group>"; };
 		6EBC8A2A1E8113110020F9E6 /* EligibilityStepViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EligibilityStepViewController.swift; sourceTree = "<group>"; };
-		6EBC8A341E8118970020F9E6 /* 200.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 200.png; sourceTree = "<group>"; };
 		6EC1291E1E64241200B90167 /* ConsentResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConsentResult.swift; sourceTree = "<group>"; };
 		6EC129231E64624F00B90167 /* Acivity_Question.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Acivity_Question.json; sourceTree = "<group>"; };
 		6EC8019A1E67EF3400CC5966 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
@@ -1734,7 +1667,6 @@
 		6EE5756B1E891440009BAA25 /* Gateway.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Gateway.xcassets; sourceTree = "<group>"; };
 		6EE8E4D81F17459200028853 /* Eligibility_1B.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Eligibility_1B.json; sourceTree = "<group>"; };
 		6EE93D8F1E93B5700027A5DC /* ConsentSharePdfStepViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConsentSharePdfStepViewController.swift; sourceTree = "<group>"; };
-		6EE93D911E93B8C30027A5DC /* 45.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 45.png; sourceTree = "<group>"; };
 		6EE93DB71E93C8850027A5DC /* Activities.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Activities.plist; sourceTree = "<group>"; };
 		6EE93DB81E93C8850027A5DC /* ActivitiesTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivitiesTableViewCell.swift; sourceTree = "<group>"; };
 		6EE93DB91E93C8850027A5DC /* ActivitiesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivitiesViewController.swift; sourceTree = "<group>"; };
@@ -1787,6 +1719,7 @@
 		6FDEFDA823F5A0F50067534C /* DBParticipantPropertyMetadata.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBParticipantPropertyMetadata.swift; sourceTree = "<group>"; };
 		6FDEFDB123F67E7E0067534C /* Data+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Data+Extensions.swift"; sourceTree = "<group>"; };
 		6FF8CCB82451D249009B68EE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6FFEEF39245A061C003FE556 /* Pods_HPHC.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Pods_HPHC.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		782AF87B221D247D000025CF /* StudyTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyTest.swift; sourceTree = "<group>"; };
 		7878B30E221574D80052FC23 /* StandaloneStudy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StandaloneStudy.swift; sourceTree = "<group>"; };
 		7878B31A2216C6E10052FC23 /* HPHCTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HPHCTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1929,10 +1862,7 @@
 			files = (
 				6EEBA47A1F25FAA100FB0258 /* HealthKit.framework in Frameworks */,
 				89EDB46C2271EFDF0070F16C /* ResearchKit.framework in Frameworks */,
-				041AEB90AC42096B113333ED /* (null) in Frameworks */,
-				89956ABB23EDA1E3005CB333 /* Pods_HPHC.framework in Frameworks */,
-				AD9F0493EECFB6152C406D2F /* (null) in Frameworks */,
-				BE8AD49A9BA10D1234FFBC8E /* Pods_HPHC.framework in Frameworks */,
+				0AC749DEEBB80752CF6DA249 /* Pods_HPHC.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2021,22 +1951,6 @@
 			path = "External Libraries";
 			sourceTree = "<group>";
 		};
-		486B511D1E6951E400B98EBC /* UIReference screens */ = {
-			isa = PBXGroup;
-			children = (
-				6EB740271E9D1F8700A4C773 /* 03.png */,
-				6EE93D911E93B8C30027A5DC /* 45.png */,
-				6EB7401B1E9CFAD700A4C773 /* 01.png */,
-				6EBC8A341E8118970020F9E6 /* 200.png */,
-				48A24C371E839CF9009E849E /* 24-study-dashboard.png */,
-				48A24C3B1E839CFD009E849E /* 25-study-activities.png */,
-				48A24C3D1E839D03009E849E /* 55V2.png */,
-				48C736551EC5C83D002D000F /* study_dashboard.png */,
-				48567FDC1F14F72900857193 /* 13.png */,
-			);
-			path = "UIReference screens";
-			sourceTree = "<group>";
-		};
 		4884E3501E825E54002DA0B9 /* ReachoutUI */ = {
 			isa = PBXGroup;
 			children = (
@@ -2054,6 +1968,7 @@
 		5E6053B2479953DCC93BD8D4 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				6FFEEF39245A061C003FE556 /* Pods_HPHC.framework */,
 				6EEBA4791F25FAA100FB0258 /* HealthKit.framework */,
 				E4CF7BB238C017BF7E2A6346 /* Pods_HPHCUITests.framework */,
 				0AF448A6C2B509B3DB605C42 /* libPods-HPHCTests.a */,
@@ -2201,7 +2116,6 @@
 				941909B11E52FA78001B01C5 /* StudyModel */,
 				941909B91E533A82001B01C5 /* OverviewModule */,
 				948710261E546C2200246109 /* NotificationModule */,
-				486B511D1E6951E400B98EBC /* UIReference screens */,
 				6E9B39BC1E55DFDA0037D09D /* ActivityBuilder */,
 				8983138F224399810000BEB5 /* JsonFiles */,
 				6E7D2D591E433E8800763D4C /* AppDelegate.swift */,
@@ -3042,7 +2956,6 @@
 				6E7D2D531E433E8700763D4C /* Frameworks */,
 				6E7D2D541E433E8700763D4C /* Resources */,
 				4F7E7DB7672068C53C399511 /* [CP] Embed Pods Frameworks */,
-				94AB05721E7924F40079E718 /* ShellScript */,
 				89EDB4702271EFE00070F16C /* Embed Frameworks */,
 			);
 			buildRules = (
@@ -3083,7 +2996,6 @@
 				6FC12AD422FD60FE0075940B /* Sources */,
 				6FC12B6722FD60FE0075940B /* Frameworks */,
 				6FC12B6B22FD60FE0075940B /* Resources */,
-				6FC12BB622FD60FE0075940B /* ShellScript */,
 				6FC12BB822FD60FE0075940B /* Embed Frameworks */,
 				6CD0561426A6124E98052A6B /* [CP] Embed Pods Frameworks */,
 			);
@@ -3209,7 +3121,6 @@
 				89DBF74822F9893000AB3EF2 /* Sources */,
 				89DBF7DB22F9893000AB3EF2 /* Frameworks */,
 				89DBF7E022F9893000AB3EF2 /* Resources */,
-				89DBF82B22F9893000AB3EF2 /* ShellScript */,
 				89DBF82D22F9893000AB3EF2 /* Embed Frameworks */,
 				6D1BA71143484B6318B3FD0C /* [CP] Embed Pods Frameworks */,
 			);
@@ -3380,18 +3291,15 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6EE93D921E93B8C30027A5DC /* 45.png in Resources */,
 				94B3DD5C1E6ED8E500327AE5 /* Study.storyboard in Resources */,
 				6E4D86DC1F389DF1003DBDD8 /* SearchBarView.xib in Resources */,
 				6ED5B05D1FCDBD8200925352 /* Labkey_Activity_Latest4.json in Resources */,
 				8923429122B122DF0059F910 /* LoginAssets.xcassets in Resources */,
 				6E93C7E11EE2EC26006788B1 /* ConsentLatest.json in Resources */,
 				6EABD0331E56FE2000623D94 /* TaskSchema.json in Resources */,
-				48A24C3E1E839D03009E849E /* 55V2.png in Resources */,
 				89893F0622B1125300A846CE /* Assets.xcassets in Resources */,
 				6E80BC041FB04350008C9B8C /* Labkey_Activity_Latest2.json in Resources */,
 				89893F0722B112A000A846CE /* LaunchScreen.storyboard in Resources */,
-				48567FDD1F14F72900857193 /* 13.png in Resources */,
 				6E7D2D8E1E43445600763D4C /* UserPreferences.plist in Resources */,
 				9450598F1F29FA2C007906A7 /* AppGlossary.pdf in Resources */,
 				6ED593731F011D5B00AC3636 /* Verdana Italic.ttf in Resources */,
@@ -3400,7 +3308,6 @@
 				6F52327E23D9883800995A78 /* ActivityMetadata TEST1.json in Resources */,
 				6F41B85C23AC92F900D4F624 /* AppConfiguration.plist in Resources */,
 				94C6BD461EB8515000D4AA72 /* AppUpdateBlocker.xib in Resources */,
-				6EBC8A351E8118970020F9E6 /* 200.png in Resources */,
 				6EE5756C1E891440009BAA25 /* Gateway.xcassets in Resources */,
 				6E7DC76E1F69479C001A05B6 /* ActivityFilterView.xib in Resources */,
 				6E5F751B1EF4109500ABA308 /* Labkey_Activity11.json in Resources */,
@@ -3409,7 +3316,6 @@
 				6EE93DCC1E93C8850027A5DC /* ResourcesUI.plist in Resources */,
 				6EBC2E811E94FB5300828CA1 /* StudyDashboard.plist in Resources */,
 				89831393224399FC0000BEB5 /* ResourceList.json in Resources */,
-				48C736561EC5C83D002D000F /* study_dashboard.png in Resources */,
 				6F02217A2264729E00A2DBC8 /* OtherTextChoiceCell.xib in Resources */,
 				6EF748BF1E69645700F1E89E /* LatestActive_Taskdocument.json in Resources */,
 				6EAA048B1FAF4C6E00214D03 /* Labkey_Activity_Latest.json in Resources */,
@@ -3424,7 +3330,6 @@
 				6EDABCCE1EBA41EE005F3AA6 /* Labkey_Activity.json in Resources */,
 				6ED134381E5F1B110090C976 /* Consent.json in Resources */,
 				94B3DD541E6ED8E500327AE5 /* SignInPlist.plist in Resources */,
-				48A24C381E839CF9009E849E /* 24-study-dashboard.png in Resources */,
 				6EDDB65A1EE05E4C00C79337 /* NewProgressView.xib in Resources */,
 				6EDDB6611EE05FDC00C79337 /* fda_preload.gif in Resources */,
 				4833E9E31E712C2B0032D244 /* StudyOverview.plist in Resources */,
@@ -3434,7 +3339,6 @@
 				94B3DD491E6ED8E500327AE5 /* StudyList.json in Resources */,
 				6EA889C51E701E8200F160A1 /* Confirmation.plist in Resources */,
 				6E14F2031F0224AD00EA8D1E /* Notification.json in Resources */,
-				6EB740281E9D1F8700A4C773 /* 03.png in Resources */,
 				89893F0522B1115300A846CE /* Main.storyboard in Resources */,
 				6F0221792264729E00A2DBC8 /* TextChoiceCell.xib in Resources */,
 				484ACBFC1F28A82B00BCC819 /* FilterData.plist in Resources */,
@@ -3452,11 +3356,9 @@
 				94B3DD441E6ED8E500327AE5 /* Profile.plist in Resources */,
 				8948349F22BB9D56000B7BFA /* HPHCSettings.xib in Resources */,
 				6E417AD31F4D5DA1007F27DA /* AnanomousFilterData.plist in Resources */,
-				6EB7401C1E9CFAD700A4C773 /* 01.png in Resources */,
 				6E7D2D8C1E4340B200763D4C /* UserProfile.plist in Resources */,
 				6E7D2D901E43526100763D4C /* Register.plist in Resources */,
 				6F5AAF80225DE699002C8FF6 /* Activity_Metadata_Other.json in Resources */,
-				48A24C3C1E839CFD009E849E /* 25-study-activities.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3471,17 +3373,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6FC12B6C22FD60FE0075940B /* 45.png in Resources */,
 				6FC12B6D22FD60FE0075940B /* Study.storyboard in Resources */,
 				6FC12B6E22FD60FE0075940B /* SearchBarView.xib in Resources */,
 				6FC12B6F22FD60FE0075940B /* Labkey_Activity_Latest4.json in Resources */,
 				6FC12B7022FD60FE0075940B /* LoginAssets.xcassets in Resources */,
 				6FC12B7122FD60FE0075940B /* ConsentLatest.json in Resources */,
 				6FC12B7222FD60FE0075940B /* TaskSchema.json in Resources */,
-				6FC12B7322FD60FE0075940B /* 55V2.png in Resources */,
 				6FC12B7522FD60FE0075940B /* Labkey_Activity_Latest2.json in Resources */,
 				6FC12B7622FD60FE0075940B /* LaunchScreen.storyboard in Resources */,
-				6FC12B7722FD60FE0075940B /* 13.png in Resources */,
 				6F41B86023AC932100D4F624 /* AppConfiguration.plist in Resources */,
 				6FC12B7822FD60FE0075940B /* UserPreferences.plist in Resources */,
 				6FC12B7922FD60FE0075940B /* AppGlossary.pdf in Resources */,
@@ -3490,7 +3389,6 @@
 				6FC12BC122FD62EA0075940B /* LimitJIA.xcassets in Resources */,
 				6FC12B7C22FD60FE0075940B /* ActiveTask.json in Resources */,
 				6FC12B7D22FD60FE0075940B /* AppUpdateBlocker.xib in Resources */,
-				6FC12B7E22FD60FE0075940B /* 200.png in Resources */,
 				6FC12B7F22FD60FE0075940B /* Gateway.xcassets in Resources */,
 				6FC12B8022FD60FE0075940B /* ActivityFilterView.xib in Resources */,
 				6FC12B8122FD60FE0075940B /* Labkey_Activity11.json in Resources */,
@@ -3499,7 +3397,6 @@
 				6FC12B8422FD60FE0075940B /* ResourcesUI.plist in Resources */,
 				6FC12B8522FD60FE0075940B /* StudyDashboard.plist in Resources */,
 				6FC12B8622FD60FE0075940B /* ResourceList.json in Resources */,
-				6FC12B8722FD60FE0075940B /* study_dashboard.png in Resources */,
 				6FC12BBF22FD62E10075940B /* GatewayOverview.plist in Resources */,
 				6FC12B8822FD60FE0075940B /* OtherTextChoiceCell.xib in Resources */,
 				6FC12B8922FD60FE0075940B /* LatestActive_Taskdocument.json in Resources */,
@@ -3515,7 +3412,6 @@
 				6FC12B9222FD60FE0075940B /* Labkey_Activity.json in Resources */,
 				6FC12B9322FD60FE0075940B /* Consent.json in Resources */,
 				6FC12B9422FD60FE0075940B /* SignInPlist.plist in Resources */,
-				6FC12B9522FD60FE0075940B /* 24-study-dashboard.png in Resources */,
 				6FC12B9622FD60FE0075940B /* NewProgressView.xib in Resources */,
 				6FC12B9722FD60FE0075940B /* fda_preload.gif in Resources */,
 				6FC12B9822FD60FE0075940B /* StudyOverview.plist in Resources */,
@@ -3524,7 +3420,6 @@
 				6FC12B9B22FD60FE0075940B /* StudyList.json in Resources */,
 				6FC12B9C22FD60FE0075940B /* Confirmation.plist in Resources */,
 				6FC12B9D22FD60FE0075940B /* Notification.json in Resources */,
-				6FC12B9E22FD60FE0075940B /* 03.png in Resources */,
 				6FC12B9F22FD60FE0075940B /* Main.storyboard in Resources */,
 				6FC12BA022FD60FE0075940B /* TextChoiceCell.xib in Resources */,
 				6FC12BA122FD60FE0075940B /* FilterData.plist in Resources */,
@@ -3541,11 +3436,9 @@
 				6FC12BAD22FD60FE0075940B /* Profile.plist in Resources */,
 				6FC12BAE22FD60FE0075940B /* HPHCSettings.xib in Resources */,
 				6FC12BAF22FD60FE0075940B /* AnanomousFilterData.plist in Resources */,
-				6FC12BB022FD60FE0075940B /* 01.png in Resources */,
 				6FC12BB122FD60FE0075940B /* UserProfile.plist in Resources */,
 				6FC12BB222FD60FE0075940B /* Register.plist in Resources */,
 				6FC12BB322FD60FE0075940B /* Activity_Metadata_Other.json in Resources */,
-				6FC12BB422FD60FE0075940B /* 25-study-activities.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3553,18 +3446,15 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6FD61C76244597F200B71685 /* 45.png in Resources */,
 				6FD61C77244597F200B71685 /* Study.storyboard in Resources */,
 				6FD61C78244597F200B71685 /* SearchBarView.xib in Resources */,
 				6FD61C79244597F200B71685 /* Labkey_Activity_Latest4.json in Resources */,
 				6FD61C7A244597F200B71685 /* LoginAssets.xcassets in Resources */,
 				6FD61C7B244597F200B71685 /* ConsentLatest.json in Resources */,
 				6FD61C7C244597F200B71685 /* TaskSchema.json in Resources */,
-				6FD61C7D244597F200B71685 /* 55V2.png in Resources */,
 				6FD61C7E244597F200B71685 /* Assets.xcassets in Resources */,
 				6FD61C7F244597F200B71685 /* Labkey_Activity_Latest2.json in Resources */,
 				6FD61C80244597F200B71685 /* LaunchScreen.storyboard in Resources */,
-				6FD61C81244597F200B71685 /* 13.png in Resources */,
 				6FD61C82244597F200B71685 /* UserPreferences.plist in Resources */,
 				6FD61C83244597F200B71685 /* AppGlossary.pdf in Resources */,
 				6FD61C84244597F200B71685 /* Verdana Italic.ttf in Resources */,
@@ -3573,7 +3463,6 @@
 				6FD61C87244597F200B71685 /* ActivityMetadata TEST1.json in Resources */,
 				6FD61C88244597F200B71685 /* AppConfiguration.plist in Resources */,
 				6FD61C89244597F200B71685 /* AppUpdateBlocker.xib in Resources */,
-				6FD61C8A244597F200B71685 /* 200.png in Resources */,
 				6FD61C8B244597F200B71685 /* Gateway.xcassets in Resources */,
 				6FD61C8C244597F200B71685 /* ActivityFilterView.xib in Resources */,
 				6FD61C8D244597F200B71685 /* Labkey_Activity11.json in Resources */,
@@ -3582,7 +3471,6 @@
 				6FD61C90244597F200B71685 /* ResourcesUI.plist in Resources */,
 				6FD61C91244597F200B71685 /* StudyDashboard.plist in Resources */,
 				6FD61C92244597F200B71685 /* ResourceList.json in Resources */,
-				6FD61C93244597F200B71685 /* study_dashboard.png in Resources */,
 				6FD61C94244597F200B71685 /* OtherTextChoiceCell.xib in Resources */,
 				6FD61C95244597F200B71685 /* LatestActive_Taskdocument.json in Resources */,
 				6FD61C96244597F200B71685 /* Labkey_Activity_Latest.json in Resources */,
@@ -3597,7 +3485,6 @@
 				6FD61C9F244597F200B71685 /* Labkey_Activity.json in Resources */,
 				6FD61CA0244597F200B71685 /* Consent.json in Resources */,
 				6FD61CA1244597F200B71685 /* SignInPlist.plist in Resources */,
-				6FD61CA2244597F200B71685 /* 24-study-dashboard.png in Resources */,
 				6FD61CA3244597F200B71685 /* NewProgressView.xib in Resources */,
 				6FD61CA4244597F200B71685 /* fda_preload.gif in Resources */,
 				6FD61CA5244597F200B71685 /* StudyOverview.plist in Resources */,
@@ -3607,7 +3494,6 @@
 				6FD61CA9244597F200B71685 /* StudyList.json in Resources */,
 				6FD61CAA244597F200B71685 /* Confirmation.plist in Resources */,
 				6FD61CAB244597F200B71685 /* Notification.json in Resources */,
-				6FD61CAC244597F200B71685 /* 03.png in Resources */,
 				6FD61CAD244597F200B71685 /* Main.storyboard in Resources */,
 				6FD61CAE244597F200B71685 /* TextChoiceCell.xib in Resources */,
 				6FD61CAF244597F200B71685 /* FilterData.plist in Resources */,
@@ -3626,11 +3512,9 @@
 				6FD61CBB244597F200B71685 /* Profile.plist in Resources */,
 				6FD61CBC244597F200B71685 /* HPHCSettings.xib in Resources */,
 				6FD61CBD244597F200B71685 /* AnanomousFilterData.plist in Resources */,
-				6FD61CBE244597F200B71685 /* 01.png in Resources */,
 				6FD61CBF244597F200B71685 /* UserProfile.plist in Resources */,
 				6FD61CC0244597F200B71685 /* Register.plist in Resources */,
 				6FD61CC1244597F200B71685 /* Activity_Metadata_Other.json in Resources */,
-				6FD61CC2244597F200B71685 /* 25-study-activities.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3653,7 +3537,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				897C1A0B2451A49A00559770 /* 45.png in Resources */,
 				897C1A0C2451A49A00559770 /* Study.storyboard in Resources */,
 				89006EF22451B1D500B624FD /* COVID-19.storyboard in Resources */,
 				897C1A0D2451A49A00559770 /* SearchBarView.xib in Resources */,
@@ -3661,12 +3544,10 @@
 				897C1A0F2451A49A00559770 /* LoginAssets.xcassets in Resources */,
 				897C1A102451A49A00559770 /* ConsentLatest.json in Resources */,
 				897C1A112451A49A00559770 /* TaskSchema.json in Resources */,
-				897C1A122451A49A00559770 /* 55V2.png in Resources */,
 				897C1A682451A61100559770 /* Branding.plist in Resources */,
 				89006EF32451B1D500B624FD /* COVID-19.xcassets in Resources */,
 				897C1A142451A49A00559770 /* Labkey_Activity_Latest2.json in Resources */,
 				897C1A152451A49A00559770 /* LaunchScreen.storyboard in Resources */,
-				897C1A162451A49A00559770 /* 13.png in Resources */,
 				897C1A172451A49A00559770 /* UserPreferences.plist in Resources */,
 				897C1A182451A49A00559770 /* AppGlossary.pdf in Resources */,
 				897C1A192451A49A00559770 /* Verdana Italic.ttf in Resources */,
@@ -3674,7 +3555,6 @@
 				897C1A1B2451A49A00559770 /* ActiveTask.json in Resources */,
 				897C1A1C2451A49A00559770 /* ActivityMetadata TEST1.json in Resources */,
 				897C1A1E2451A49A00559770 /* AppUpdateBlocker.xib in Resources */,
-				897C1A1F2451A49A00559770 /* 200.png in Resources */,
 				897C1A202451A49A00559770 /* Gateway.xcassets in Resources */,
 				897C1A212451A49A00559770 /* ActivityFilterView.xib in Resources */,
 				897C1A222451A49A00559770 /* Labkey_Activity11.json in Resources */,
@@ -3683,7 +3563,6 @@
 				897C1A252451A49A00559770 /* ResourcesUI.plist in Resources */,
 				897C1A262451A49A00559770 /* StudyDashboard.plist in Resources */,
 				897C1A272451A49A00559770 /* ResourceList.json in Resources */,
-				897C1A282451A49A00559770 /* study_dashboard.png in Resources */,
 				897C1A292451A49A00559770 /* OtherTextChoiceCell.xib in Resources */,
 				897C1A2A2451A49A00559770 /* LatestActive_Taskdocument.json in Resources */,
 				897C1A2B2451A49A00559770 /* Labkey_Activity_Latest.json in Resources */,
@@ -3697,7 +3576,6 @@
 				897C1A342451A49A00559770 /* Labkey_Activity.json in Resources */,
 				897C1A352451A49A00559770 /* Consent.json in Resources */,
 				897C1A362451A49A00559770 /* SignInPlist.plist in Resources */,
-				897C1A372451A49A00559770 /* 24-study-dashboard.png in Resources */,
 				897C1A382451A49A00559770 /* NewProgressView.xib in Resources */,
 				897C1A392451A49A00559770 /* fda_preload.gif in Resources */,
 				897C1A3A2451A49A00559770 /* StudyOverview.plist in Resources */,
@@ -3707,7 +3585,6 @@
 				897C1A3E2451A49A00559770 /* StudyList.json in Resources */,
 				897C1A3F2451A49A00559770 /* Confirmation.plist in Resources */,
 				897C1A402451A49A00559770 /* Notification.json in Resources */,
-				897C1A412451A49A00559770 /* 03.png in Resources */,
 				897C1A422451A49A00559770 /* Main.storyboard in Resources */,
 				897C1A432451A49A00559770 /* TextChoiceCell.xib in Resources */,
 				897C1A442451A49A00559770 /* FilterData.plist in Resources */,
@@ -3724,13 +3601,11 @@
 				897C1A502451A49A00559770 /* Profile.plist in Resources */,
 				897C1A512451A49A00559770 /* HPHCSettings.xib in Resources */,
 				897C1A522451A49A00559770 /* AnanomousFilterData.plist in Resources */,
-				897C1A532451A49A00559770 /* 01.png in Resources */,
 				897C1A542451A49A00559770 /* UserProfile.plist in Resources */,
 				899C387F2451AB89003A56BA /* GatewayOverview.plist in Resources */,
 				897C1A552451A49A00559770 /* Register.plist in Resources */,
 				897C1A562451A49A00559770 /* Activity_Metadata_Other.json in Resources */,
 				897C1A692451A61100559770 /* AppConfiguration.plist in Resources */,
-				897C1A572451A49A00559770 /* 25-study-activities.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3738,18 +3613,15 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				89C5EF1D23F16CFE00649359 /* 45.png in Resources */,
 				89C5EF1E23F16CFE00649359 /* Study.storyboard in Resources */,
 				89C5EF1F23F16CFE00649359 /* SearchBarView.xib in Resources */,
 				89C5EF2023F16CFE00649359 /* Labkey_Activity_Latest4.json in Resources */,
 				89C5EF2123F16CFE00649359 /* LoginAssets.xcassets in Resources */,
 				89C5EF2223F16CFE00649359 /* ConsentLatest.json in Resources */,
 				89C5EF2323F16CFE00649359 /* TaskSchema.json in Resources */,
-				89C5EF2423F16CFE00649359 /* 55V2.png in Resources */,
 				89C5EF7B23F16DB000649359 /* GatewayOverview.plist in Resources */,
 				89C5EF2623F16CFE00649359 /* Labkey_Activity_Latest2.json in Resources */,
 				89C5EF2723F16CFE00649359 /* LaunchScreen.storyboard in Resources */,
-				89C5EF2823F16CFE00649359 /* 13.png in Resources */,
 				89C5EF2923F16CFE00649359 /* UserPreferences.plist in Resources */,
 				89C5EF2A23F16CFE00649359 /* AppGlossary.pdf in Resources */,
 				89C5EF2B23F16CFE00649359 /* Verdana Italic.ttf in Resources */,
@@ -3758,7 +3630,6 @@
 				89C5EF2E23F16CFE00649359 /* ActivityMetadata TEST1.json in Resources */,
 				89C5EF2F23F16CFE00649359 /* AppUpdateBlocker.xib in Resources */,
 				895C3ED923F2C3F9000F4558 /* FDADemo.storyboard in Resources */,
-				89C5EF3023F16CFE00649359 /* 200.png in Resources */,
 				89C5EF7D23F16DB000649359 /* FDA Demo.xcassets in Resources */,
 				89C5EF3123F16CFE00649359 /* Gateway.xcassets in Resources */,
 				89C5EF3223F16CFE00649359 /* ActivityFilterView.xib in Resources */,
@@ -3770,7 +3641,6 @@
 				89C5EF3823F16CFE00649359 /* ResourceList.json in Resources */,
 				89C5EF7A23F16DB000649359 /* AppConfiguration.plist in Resources */,
 				89C5EF7F23F16DB000649359 /* Branding.plist in Resources */,
-				89C5EF3923F16CFE00649359 /* study_dashboard.png in Resources */,
 				89C5EF3A23F16CFE00649359 /* OtherTextChoiceCell.xib in Resources */,
 				89C5EF3B23F16CFE00649359 /* LatestActive_Taskdocument.json in Resources */,
 				89C5EF3C23F16CFE00649359 /* Labkey_Activity_Latest.json in Resources */,
@@ -3784,7 +3654,6 @@
 				89C5EF4523F16CFE00649359 /* Labkey_Activity.json in Resources */,
 				89C5EF4623F16CFE00649359 /* Consent.json in Resources */,
 				89C5EF4723F16CFE00649359 /* SignInPlist.plist in Resources */,
-				89C5EF4823F16CFE00649359 /* 24-study-dashboard.png in Resources */,
 				89C5EF4923F16CFE00649359 /* NewProgressView.xib in Resources */,
 				89C5EF4A23F16CFE00649359 /* fda_preload.gif in Resources */,
 				89C5EF4B23F16CFE00649359 /* StudyOverview.plist in Resources */,
@@ -3793,7 +3662,6 @@
 				89C5EF4E23F16CFE00649359 /* StudyList.json in Resources */,
 				89C5EF4F23F16CFE00649359 /* Confirmation.plist in Resources */,
 				89C5EF5123F16CFE00649359 /* Notification.json in Resources */,
-				89C5EF5223F16CFE00649359 /* 03.png in Resources */,
 				89C5EF5323F16CFE00649359 /* Main.storyboard in Resources */,
 				89C5EF5423F16CFE00649359 /* TextChoiceCell.xib in Resources */,
 				89C5EF5523F16CFE00649359 /* FilterData.plist in Resources */,
@@ -3811,11 +3679,9 @@
 				89C5EF6223F16CFE00649359 /* Profile.plist in Resources */,
 				89C5EF6323F16CFE00649359 /* HPHCSettings.xib in Resources */,
 				89C5EF6423F16CFE00649359 /* AnanomousFilterData.plist in Resources */,
-				89C5EF6523F16CFE00649359 /* 01.png in Resources */,
 				89C5EF6623F16CFE00649359 /* UserProfile.plist in Resources */,
 				89C5EF6723F16CFE00649359 /* Register.plist in Resources */,
 				89C5EF6823F16CFE00649359 /* Activity_Metadata_Other.json in Resources */,
-				89C5EF6923F16CFE00649359 /* 25-study-activities.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3823,18 +3689,15 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				89DBF7E122F9893000AB3EF2 /* 45.png in Resources */,
 				89DBF7E222F9893000AB3EF2 /* Study.storyboard in Resources */,
 				89DBF7E322F9893000AB3EF2 /* SearchBarView.xib in Resources */,
 				89DBF7E422F9893000AB3EF2 /* Labkey_Activity_Latest4.json in Resources */,
 				89DBF7E522F9893000AB3EF2 /* LoginAssets.xcassets in Resources */,
 				89DBF7E622F9893000AB3EF2 /* ConsentLatest.json in Resources */,
 				89DBF7E722F9893000AB3EF2 /* TaskSchema.json in Resources */,
-				89DBF7E822F9893000AB3EF2 /* 55V2.png in Resources */,
 				89DBF7EA22F9893000AB3EF2 /* Labkey_Activity_Latest2.json in Resources */,
 				89DBF83622F989FB00AB3EF2 /* Sparc.xcassets in Resources */,
 				89DBF7EB22F9893000AB3EF2 /* LaunchScreen.storyboard in Resources */,
-				89DBF7EC22F9893000AB3EF2 /* 13.png in Resources */,
 				89DBF7ED22F9893000AB3EF2 /* UserPreferences.plist in Resources */,
 				89DBF7EE22F9893000AB3EF2 /* AppGlossary.pdf in Resources */,
 				89DBF7EF22F9893000AB3EF2 /* Verdana Italic.ttf in Resources */,
@@ -3842,7 +3705,6 @@
 				89DBF7F122F9893000AB3EF2 /* ActiveTask.json in Resources */,
 				6F41B85E23AC930B00D4F624 /* AppConfiguration.plist in Resources */,
 				89DBF7F222F9893000AB3EF2 /* AppUpdateBlocker.xib in Resources */,
-				89DBF7F322F9893000AB3EF2 /* 200.png in Resources */,
 				89DBF7F422F9893000AB3EF2 /* Gateway.xcassets in Resources */,
 				89DBF83422F989EE00AB3EF2 /* Sparc.storyboard in Resources */,
 				89DBF7F522F9893000AB3EF2 /* ActivityFilterView.xib in Resources */,
@@ -3852,7 +3714,6 @@
 				89DBF7F922F9893000AB3EF2 /* ResourcesUI.plist in Resources */,
 				89DBF7FA22F9893000AB3EF2 /* StudyDashboard.plist in Resources */,
 				89DBF7FB22F9893000AB3EF2 /* ResourceList.json in Resources */,
-				89DBF7FC22F9893000AB3EF2 /* study_dashboard.png in Resources */,
 				89DBF7FD22F9893000AB3EF2 /* OtherTextChoiceCell.xib in Resources */,
 				89DBF7FE22F9893000AB3EF2 /* LatestActive_Taskdocument.json in Resources */,
 				89DBF7FF22F9893000AB3EF2 /* Labkey_Activity_Latest.json in Resources */,
@@ -3866,7 +3727,6 @@
 				89DBF80822F9893000AB3EF2 /* Labkey_Activity.json in Resources */,
 				89DBF80922F9893000AB3EF2 /* Consent.json in Resources */,
 				89DBF80A22F9893000AB3EF2 /* SignInPlist.plist in Resources */,
-				89DBF80B22F9893000AB3EF2 /* 24-study-dashboard.png in Resources */,
 				89DBF80C22F9893000AB3EF2 /* NewProgressView.xib in Resources */,
 				89DBF80D22F9893000AB3EF2 /* fda_preload.gif in Resources */,
 				89DBF80E22F9893000AB3EF2 /* StudyOverview.plist in Resources */,
@@ -3876,7 +3736,6 @@
 				89DBF81222F9893000AB3EF2 /* Confirmation.plist in Resources */,
 				892726DB22F98E2700893A00 /* GatewayOverview.plist in Resources */,
 				89DBF81322F9893000AB3EF2 /* Notification.json in Resources */,
-				89DBF81422F9893000AB3EF2 /* 03.png in Resources */,
 				89DBF81522F9893000AB3EF2 /* Main.storyboard in Resources */,
 				89DBF81622F9893000AB3EF2 /* TextChoiceCell.xib in Resources */,
 				89DBF81722F9893000AB3EF2 /* FilterData.plist in Resources */,
@@ -3893,11 +3752,9 @@
 				89DBF82222F9893000AB3EF2 /* Profile.plist in Resources */,
 				89DBF82322F9893000AB3EF2 /* HPHCSettings.xib in Resources */,
 				89DBF82422F9893000AB3EF2 /* AnanomousFilterData.plist in Resources */,
-				89DBF82522F9893000AB3EF2 /* 01.png in Resources */,
 				89DBF82622F9893000AB3EF2 /* UserProfile.plist in Resources */,
 				89DBF82722F9893000AB3EF2 /* Register.plist in Resources */,
 				89DBF82822F9893000AB3EF2 /* Activity_Metadata_Other.json in Resources */,
-				89DBF82922F9893000AB3EF2 /* 25-study-activities.png in Resources */,
 				89DBF83722F989FE00AB3EF2 /* Branding.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -4038,19 +3895,6 @@
 			showEnvVarsInLog = 0;
 		};
 		6F6EC41C23E1577B0056AD55 /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Fabric/run\" 24faf2a83c3fd824044bfbcc2b7b4be24b8b28a1 c33a12b8c295fb1886720465e29ecebd81ee14abcd7c7e2f37553d09a685b735\n";
-		};
-		6FC12BB622FD60FE0075940B /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -4255,19 +4099,6 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Fabric/run\" 24faf2a83c3fd824044bfbcc2b7b4be24b8b28a1 c33a12b8c295fb1886720465e29ecebd81ee14abcd7c7e2f37553d09a685b735\n";
 		};
-		89DBF82B22F9893000AB3EF2 /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Fabric/run\" 24faf2a83c3fd824044bfbcc2b7b4be24b8b28a1 c33a12b8c295fb1886720465e29ecebd81ee14abcd7c7e2f37553d09a685b735\n";
-		};
 		8D2C5B3AD544C453A00EC3BB /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -4289,19 +4120,6 @@
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
-		};
-		94AB05721E7924F40079E718 /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Fabric/run\" 24faf2a83c3fd824044bfbcc2b7b4be24b8b28a1 c33a12b8c295fb1886720465e29ecebd81ee14abcd7c7e2f37553d09a685b735\n";
 		};
 		C872B313DD02BA18462846BA /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -5602,7 +5420,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "HPHC/Controllers/LoginRegisterUI/FDA-Bridging-Header.h";
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -5684,7 +5502,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 4;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = LC58YCKU3U;
 				ENABLE_BITCODE = NO;
@@ -5697,7 +5515,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "HPHC/Controllers/LoginRegisterUI/FDA-Bridging-Header.h";
-				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -5717,7 +5535,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_TEAM = LC58YCKU3U;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = "$(SRCROOT)/HPHC/Branding/LimitJIA/Info.plist";
@@ -5729,7 +5547,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "HPHC/Controllers/LoginRegisterUI/FDA-Bridging-Header.h";
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -5795,7 +5613,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "HPHC/Controllers/LoginRegisterUI/FDA-Bridging-Header.h";
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -5914,7 +5732,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 6;
+				CURRENT_PROJECT_VERSION = 3;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = FWLLYUH7XR;
 				ENABLE_BITCODE = NO;
@@ -5923,7 +5741,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				IS_STANDALONE_STUDY = false;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.hphci.fda.mobilestudies.covid19;
 				PRODUCT_NAME = COVID19;
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -5947,7 +5765,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 6;
+				CURRENT_PROJECT_VERSION = 3;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = FWLLYUH7XR;
 				ENABLE_BITCODE = NO;
@@ -5956,12 +5774,12 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				IS_STANDALONE_STUDY = false;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.hphci.fda.mobilestudies.covid19;
 				PRODUCT_NAME = COVID19;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "HPHC/Controllers/LoginRegisterUI/FDA-Bridging-Header.h";
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -6045,7 +5863,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 21;
+				CURRENT_PROJECT_VERSION = 22;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = MUEVRP9QCH;
 				ENABLE_BITCODE = NO;
@@ -6057,7 +5875,7 @@
 				PRODUCT_NAME = "IBD PROdigy";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "HPHC/Controllers/LoginRegisterUI/FDA-Bridging-Header.h";
-				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -6077,7 +5895,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 21;
+				CURRENT_PROJECT_VERSION = 22;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = MUEVRP9QCH;
 				ENABLE_BITCODE = NO;
@@ -6089,7 +5907,7 @@
 				PRODUCT_NAME = "IBD PROdigy";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "HPHC/Controllers/LoginRegisterUI/FDA-Bridging-Header.h";
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 				VERSIONING_SYSTEM = "apple-generic";

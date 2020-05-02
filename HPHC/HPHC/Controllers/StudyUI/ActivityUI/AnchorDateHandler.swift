@@ -463,7 +463,7 @@ class AnchorDateHandler {
                 let newEXPValue = item.participantPropertyMetaData?.externalPropertyValue
                 
                 let oldAnchorDate = dbActivity.anchorDateValue
-                var newAnchorDate = item.anchorDate
+                let newAnchorDate = item.anchorDate
              
                 func updateActivity() {
                     guard let anchorDate = item.anchorDate else {return}
@@ -476,15 +476,12 @@ class AnchorDateHandler {
                 }
                 
                 // Check if any value exists otherwise treat it as new value OR values is updated.
-                if oldEXPValue == nil {
-                    updateActivity() // First time PP queried.
-                } else if oldAnchorDate != newAnchorDate { // Anchor Date updated
-                    updateActivity()
-                } else if oldEXPValue != newEXPValue {
-                    // Save the exp value to DB
-                    // TODO: Need to handle this scenario
+              if oldEXPValue == nil || oldAnchorDate != newAnchorDate {
+                    updateActivity() // First time PP queried or Anchor Date updated
+                } else if oldEXPValue != newEXPValue, let newEXPValue = newEXPValue {
+                    DBHandler.updateAnchorExternalValue(for: dbActivity, externalVaue: newEXPValue)
                 }
-                
+    
             } else if item.fetchAnchorDateFor == .resource, let dbResource = item.resource {
                 // Handle for resource
                 print("Handle response here")

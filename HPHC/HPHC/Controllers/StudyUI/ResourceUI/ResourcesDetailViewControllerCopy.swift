@@ -41,6 +41,10 @@ class ResourcesDetailViewControllerCopy: UIViewController {
     var isEmailComposerPresented: Bool?
     var fdm:FileDownloadManager = FileDownloadManager()
     
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .default
+    }
+    
     override func viewDidLoad() {
         
         super.viewDidLoad()
@@ -123,10 +127,20 @@ class ResourcesDetailViewControllerCopy: UIViewController {
                     
                                       //self.loadWebViewWithPath(path: (self.resource?.file?.localPath)!)
                 } else {
-                   //let path = resourcesDownloadPath + "/PDF_linking.pdf"
-                    self.startDownloadingfile()
-                    //let pdfData = FileDownloadManager.decrytFile(pathURL:URL(string:path))
-                    //self.loadWebViewWithData(data: pdfData!)
+                   //
+                    if let link = self.resource?.file?.link,
+                        let fileName = URL(string: link)?.lastPathComponent {
+                        let path = resourcesDownloadPath + "/" + fileName
+                        DispatchQueue.main.async {
+                            if let pdfData = FileDownloadManager.decrytFile(pathURL: URL(string: path)) {
+                                self.loadWebViewWithData(data: pdfData)
+                            } else {
+                                self.startDownloadingfile()
+                            }
+                        }
+                    } else {
+                       self.startDownloadingfile()
+                    }
                 }
             } else {
                 
@@ -141,13 +155,8 @@ class ResourcesDetailViewControllerCopy: UIViewController {
         webView?.uiDelegate = self
         webView?.navigationDelegate = self
         }
-        
-        UIApplication.shared.statusBarStyle = .default
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
-        // self.tabBar.isHidden = false
-    }
     
     func loadWebViewWithPath(path:String) {
         

@@ -29,7 +29,7 @@ let kDeleteResponses        = "delete"
 class LabKeyServices: NSObject {
     
     let networkManager = NetworkManager.sharedInstance()
-    var delegate: NMWebServiceDelegate! = nil
+    weak var delegate: NMWebServiceDelegate?
     var activityId: String!  //Temp: replace with request parameters
     var keys: String!  //Temp: replace with request parameters
     var requestParams: Dictionary<String,Any>? = [:]
@@ -310,9 +310,7 @@ class LabKeyServices: NSObject {
 }
 extension LabKeyServices: NMWebServiceDelegate{
     func startedRequest(_ manager: NetworkManager, requestName: NSString) {
-        if delegate != nil {
-            delegate.startedRequest(manager, requestName: requestName)
-        }
+        delegate?.startedRequest(manager, requestName: requestName)
     }
     
     func finishedRequest(_ manager: NetworkManager, requestName: NSString, response: AnyObject?) {
@@ -331,16 +329,16 @@ extension LabKeyServices: NMWebServiceDelegate{
             print("Request was not sent with proper method name")
         }
         
-        if delegate != nil {
-            delegate.finishedRequest(manager, requestName: requestName, response: response)
-        }
+    
+        delegate?.finishedRequest(manager, requestName: requestName, response: response)
+    
     }
     
     func failedRequest(_ manager: NetworkManager, requestName: NSString, error: NSError) {
         
-        if delegate != nil {
-            delegate.failedRequest(manager, requestName: requestName, error: error)
-        }
+        
+        delegate?.failedRequest(manager, requestName: requestName, error: error)
+        
         if requestName as String == ResponseMethods.processResponse.description {
             if (error.code == NoNetworkErrorCode) {
                 // Save in database

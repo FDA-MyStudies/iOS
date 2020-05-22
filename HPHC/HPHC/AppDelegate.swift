@@ -27,7 +27,9 @@ import CallKit
 import IQKeyboardManagerSwift
 
 
-let kBlockerScreenLabelText = "Please update to the latest version of app to continue."
+let kBlockerScreenLabelText = "Please update to the latest version of the app to continue."
+let kAppStoreUpdateText = "Please go to AppStore to update to the latest version of the app."
+
 let kConsentUpdatedTitle = "Consent Updated"
 
 let kMessageConsentUpdatedPartTwo = " Please review the revised Consent terms and provide your Informed Consent, to continue participating in the study."
@@ -1184,22 +1186,23 @@ extension AppDelegate {
             let appVersion = Utilities.getAppVersion()
             guard let isForceUpdate = Bool(ForceUpdate) else {return}
             
-            // latestVersion = "2.0" make it mutable to test and uncomment
-            if appVersion != latestVersion, latestVersion.compare(appVersion, options: .numeric, range: nil, locale: nil) == ComparisonResult.orderedDescending, isForceUpdate {
+            if appVersion != latestVersion,
+                latestVersion.compare(appVersion, options: .numeric, range: nil, locale: nil)
+                    == ComparisonResult.orderedDescending,
+                isForceUpdate {
         
                 // load and Update blockerScreen
                 self.shouldAddForceUpgradeScreen = true
-                self.blockerScreen = AppUpdateBlocker.instanceFromNib(frame:(UIApplication.shared.keyWindow?.bounds)!, detail: [:])
-                self.blockerScreen?.labelVersionNumber.text = "V- " + latestVersion
-                self.blockerScreen?.labelMessage.text = kBlockerScreenLabelText
-                
+                self.blockerScreen = AppUpdateBlocker.instanceFromNib(frame:(UIApplication.shared.keyWindow?.bounds)!,
+                                                                      detail: [:])
+                self.blockerScreen?.configureView(with: latestVersion)
                 
                 if User.currentUser.userType == .FDAUser {
                     //FDA user
                     if User.currentUser.settings?.passcode! == false {
                         UIApplication.shared.keyWindow?.addSubview(self.blockerScreen!)
                     }
-                }else {
+                } else {
                     UIApplication.shared.keyWindow?.addSubview(self.blockerScreen!)
                 }
                 

@@ -25,25 +25,48 @@ class AppUpdateBlocker: UIView {
     @IBOutlet var buttonUpgrade: UIButton!
     @IBOutlet var labelMessage: UILabel!
     @IBOutlet var labelVersionNumber: UILabel!
+    @IBOutlet var appIconView: UIImageView!
+    
+    var appIcon: UIImage? {
+        guard let iconsDictionary = Bundle.main.infoDictionary?["CFBundleIcons"] as? NSDictionary,
+            let primaryIconsDictionary = iconsDictionary["CFBundlePrimaryIcon"] as? NSDictionary,
+            let iconFiles = primaryIconsDictionary["CFBundleIconFiles"] as? NSArray,
+            // First will be smallest for the device class, last will be the largest for device class
+            let lastIcon = iconFiles.lastObject as? String,
+            let icon = UIImage(named: lastIcon) else {
+                return nil
+        }
+        return icon
+    }
     
     required init?(coder aDecoder: NSCoder) {
-        
         super.init(coder: aDecoder)
-
-        //Used to set border color for bottom view
-        buttonUpgrade?.layer.borderColor = UIColor.white.cgColor
     }
+ 
     class func instanceFromNib(frame: CGRect,detail: Dictionary<String,Any>) -> AppUpdateBlocker {
-        
         let view = UINib(nibName: "AppUpdateBlocker", bundle: nil).instantiate(withOwner: nil, options: nil)[0] as! AppUpdateBlocker
         view.frame = frame
         view.layoutIfNeeded()
         return view
-        
     }
-
+    
+    func configureView(with latestVersion: String) {
+        self.buttonUpgrade.layer.borderColor = #colorLiteral(red: 0, green: 0.4862745098, blue: 0.7294117647, alpha: 1)
+        self.labelMessage.text = kBlockerScreenLabelText
+        self.appIconView.image = self.appIcon
+    }
+    
     @IBAction func buttonUpgradeAction(){
-        UIApplication.shared.openURL(URL(string: "https://itunes.apple.com/us/app/fda-my-studies/id1242835330?ls=1&mt=8")!)
+        guard let appleID = AppConfiguration.appleID, !appleID.isEmpty else {
+            // Ask user to update from AppStore.
+            Utilities.showAlertWithMessage(alertMessage: kAppStoreUpdateText)
+            return
+        }
+        let appStoreLink = "https://apps.apple.com/app/apple-store"
+        let appLink = appStoreLink + "/id" + appleID
+        if let url = URL(string: appLink), UIApplication.shared.canOpenURL(url) {
+            UIApplication.shared.open(url, options: [:], completionHandler: nil)
+        }
     }
 
 }

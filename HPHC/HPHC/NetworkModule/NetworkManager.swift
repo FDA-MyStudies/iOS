@@ -22,7 +22,7 @@ import Foundation
 import UIKit
 
 
-protocol NMWebServiceDelegate{
+protocol NMWebServiceDelegate: class{
     /**
      *  Called when request is fired.Use this to show any activity indicator
      *

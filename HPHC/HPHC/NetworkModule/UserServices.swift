@@ -109,7 +109,7 @@ struct FailedUserServices {
 class UserServices: NSObject {
     
     let networkManager = NetworkManager.sharedInstance()
-    var delegate: NMWebServiceDelegate! = nil
+    weak var delegate: NMWebServiceDelegate?
     var requestParams: Dictionary<String,Any>? = [:]
     var headerParams: Dictionary<String,String>? = [:]
     var method: Method!
@@ -925,10 +925,9 @@ class UserServices: NSObject {
 extension UserServices: NMWebServiceDelegate{
     func startedRequest(_ manager: NetworkManager, requestName: NSString) {
         //  Logger.sharedInstance.info("RUS Request Called: \(requestName)")
-        if delegate != nil {
-            delegate.startedRequest(manager, requestName: requestName)
-        }
+        delegate?.startedRequest(manager, requestName: requestName)
     }
+    
     func finishedRequest(_ manager: NetworkManager, requestName: NSString, response: AnyObject?) {
         Logger.sharedInstance.info("RUS Received Data: \(requestName), \(String(describing: response))")
         switch requestName {
@@ -990,9 +989,9 @@ extension UserServices: NMWebServiceDelegate{
         default : break
         }
         
-        if delegate != nil {
-            delegate.finishedRequest(manager, requestName: requestName, response: response)
-        }
+      
+        delegate?.finishedRequest(manager, requestName: requestName, response: response)
+        
     }
     
     
@@ -1015,9 +1014,9 @@ extension UserServices: NMWebServiceDelegate{
                 
                 let localError  = NSError.init(domain: error.domain, code: 403, userInfo: errorInfo)
                 
-                if delegate != nil {
-                    delegate.failedRequest(manager, requestName: requestName, error: localError)
-                }
+                
+                delegate?.failedRequest(manager, requestName: requestName, error: localError)
+                
                 
             } else {
                 //Update Refresh Token
@@ -1037,13 +1036,13 @@ extension UserServices: NMWebServiceDelegate{
                     errorInfo = ["NSLocalizedDescription": "Your Session is Expired"]
                     localError  = NSError.init(domain: error.domain, code: 403, userInfo: errorInfo)
                 } else if error.code == 400,
-                    requestName as String == RegistrationMethods.login.description
-                    || requestName as String == RegistrationMethods.login.description {
+                    requestName as String == RegistrationMethods.feedback.description
+                    || requestName as String == RegistrationMethods.contactUs.description {
                     errorInfo = ["NSLocalizedDescription": "Sorry, an error occurred and your feedback could not be sent to the organization. Please retry in some time."]
                     localError  = NSError.init(domain: error.domain, code: 400, userInfo: errorInfo)
                 }
                 
-                delegate.failedRequest(manager, requestName: requestName, error: localError)
+                delegate?.failedRequest(manager, requestName: requestName, error: localError)
             }
             
             //handle failed request due to network connectivity

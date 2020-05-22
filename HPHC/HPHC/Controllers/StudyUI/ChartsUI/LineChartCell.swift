@@ -31,7 +31,6 @@ class LineChartCell: GraphChartTableViewCell {
     @IBOutlet weak var buttonForward: UIButton!
     @IBOutlet weak var buttonBackward: UIButton!
     
-    var currentChart: DashboardCharts!
     var frequencyPageIndex = 0
     var frequencyPageSize = 5
     var pageNumber = 0
@@ -47,12 +46,21 @@ class LineChartCell: GraphChartTableViewCell {
     var max: Float = 0.0
     var min: Float = 0.0
 
+    var currentChart: DashboardCharts! {
+      didSet {
+        self.graphView.dataSource = self
+        self.graphView.reloadData()
+      }
+    }
+
     override func prepareForReuse() {
         super.prepareForReuse()
         self.labelTitle.text = ""
         self.labelAxisValue.text = ""
         self.buttonForward.isHidden = true
         self.buttonBackward.isHidden = true
+        max = 0.0
+        min = 0.0
         plotPoints = []
         xAxisTitles = []
         self.graphView.dataSource = nil
@@ -259,9 +267,6 @@ class LineChartCell: GraphChartTableViewCell {
             
         }
         
-        
-        
-        (self.graphView as? ORKLineGraphChartView)!.dataSource = self
     }
     
     @IBAction func buttonForwardAction(_ sender: UIButton){
@@ -480,32 +485,36 @@ class LineChartCell: GraphChartTableViewCell {
     
     @discardableResult
     private func plotForRunsType() -> Bool {
-        
-        frequencyPageIndex = frequencyPageSize * pageNumber
-        let frequencySet = self.getNextSetOfFrequencyRuns()
-        
-        if !frequencySet.isEmpty {
-          
-            let sTime = frequencySet.first?["startTime"] as? String ?? ""
-            let eTime = frequencySet.last?["endTime"] as? String ?? ""
-            
-            guard let startDate = Utilities.getDateFromString(dateString: sTime) ??
-                DateHelper.formattedRunDateFromString(date: sTime),
-            let endDate = Utilities.getDateFromString(dateString: eTime) ??
-                DateHelper.formattedRunDateFromString(date: eTime) else { return false}
-            
-            let stringStartDate = LineChartCell.formatter.string(from: startDate)
-            let stringEndDate = LineChartCell.formatter.string(from: endDate)
-            let attributedText = self.getSchedulesAttributedText(stringStartDate: stringStartDate, stringEndDate: stringEndDate)
-            
-            labelAxisValue.attributedText = attributedText
-            
-            self.handleRunsForDate(startDate: startDate, endDate: endDate ,runs: frequencySet)
-            return true
-        } else {
-            self.graphView.reloadData()
-            return false
-        }
+
+      frequencyPageIndex = frequencyPageSize * pageNumber
+      let frequencySet = self.getNextSetOfFrequencyRuns()
+
+      if frequencySet.isEmpty {
+        self.graphView.reloadData()
+        return false
+      } else {
+        let sTime = frequencySet.first?["startTime"] as? String ?? ""
+        let eTime = frequencySet.last?["endTime"] as? String ?? ""
+
+        guard
+          let startDate = Utilities.getDateFromStringWithOutTimezone(dateString: sTime)
+            ?? DateHelper.formattedRunDateFromString(date: sTime),
+          let endDate = Utilities.getDateFromStringWithOutTimezone(dateString: eTime)
+            ?? DateHelper.formattedRunDateFromString(date: eTime)
+        else { return false }
+
+        let stringStartDate = LineChartCell.formatter.string(from: startDate)
+        let stringEndDate = LineChartCell.formatter.string(from: endDate)
+        let attributedText = self.getSchedulesAttributedText(
+          stringStartDate: stringStartDate,
+          stringEndDate: stringEndDate
+        )
+
+        labelAxisValue.attributedText = attributedText
+
+        self.handleRunsForDate(startDate: startDate, endDate: endDate, runs: frequencySet)
+        return true
+      }
     }
     
     func getNextSetOfFrequencyRuns() -> [JSONDictionary] {
@@ -754,8 +763,14 @@ class LineChartCell: GraphChartTableViewCell {
         let updatedStartTime = startDate.addingTimeInterval(-1)
         let updatedEndTime = endDate.addingTimeInterval(1)
         
-        let dataList: [DBStatisticsData] = currentChart.statList
+        var dataList: [DBStatisticsData] = currentChart.statList
             .filter {$0.startDate! >= updatedStartTime && $0.startDate! <= updatedEndTime}
+        
+        if !currentChart.scrollable, dataList.count > frequencyPageSize {
+          // If the chart is not scrollable, only show the latest responses based on the page size.
+          let frequencyPageSizeData = dataList.suffix(from: dataList.count - frequencyPageSize)
+          dataList = Array(frequencyPageSizeData)
+        }
         
         let array = dataList.compactMap { $0.data }
         var points: [ORKValueRange] = []

@@ -26,6 +26,8 @@ enum AppConfiguration {
         static let isShowMenuResourceButton = "shouldShowMenuResourceButton"
         static let shouldShowConsentButtonOnStudyHome = "shouldShowConsentButtonOnStudyHome"
         static let showConsentInStudyResources = "showConsentInStudyResources"
+        static let appleID = "appleId"
+        static let studyCompletionMessage = "studyCompletionMessage"
     }
     
     private static var appConfig: JSONDictionary {
@@ -45,5 +47,13 @@ enum AppConfiguration {
     }
     static var showConsentInStudyResources:Bool {
         return appConfig[JSONKey.showConsentInStudyResources] as? Bool ?? true
+    }
+    
+    static var appleID: String? {
+        return appConfig[JSONKey.appleID] as? String ?? ""
+    }
+    
+    static var studyCompletionMessage: String? {
+        return appConfig[JSONKey.studyCompletionMessage] as? String
     }
 }

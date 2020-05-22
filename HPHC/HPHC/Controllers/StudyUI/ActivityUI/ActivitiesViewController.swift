@@ -658,7 +658,12 @@ class ActivitiesViewController : UIViewController{
         
         if completion == 100 {
             if !(ud.bool(forKey: fullCompletionKey)) {
-                let message =  "The study " + (Study.currentStudy?.name!)! + " is 100 percent complete. Thank you for your participation."
+                var message = ""
+                if let configurationMessage = AppConfiguration.studyCompletionMessage {
+                    message = configurationMessage
+                } else {
+                    message = "The study " + (Study.currentStudy?.name ?? "") + " is 100 percent complete. Thank you for your participation."
+                }
                 UIUtilities.showAlertWithMessage(alertMessage: message)
                 ud.set(true, forKey: fullCompletionKey)
             }
@@ -674,7 +679,7 @@ class ActivitiesViewController : UIViewController{
             if previousMissed < totalIncompletedRuns {
                 //show alert
                 
-                let message = "We noticed you missed an activity in " + (Study.currentStudy?.name!)! + " today. That’s ok! We know you’re busy, but we encourage you to complete study activities before they expire."
+                let message = "We noticed you missed an activity in " + (Study.currentStudy?.name!)! + " today. That’s Ok! We know you’re busy, but we encourage you to complete study activities before they expire."
                 UIUtilities.showAlertWithMessage(alertMessage: message)
             }
         }

@@ -1,5 +1,5 @@
 PODS:
-  - ActionSheetPicker-3.0 (2.4.2)
+  - ActionSheetPicker-3.0 (2.5.0)
   - Crashlytics (3.14.0):
     - Fabric (~> 1.10.2)
   - CryptoSwift (1.3.1)
@@ -15,14 +15,14 @@ PODS:
     - URITemplate (~> 3.0)
   - Mockingjay/XCTest (3.0.0-alpha.1):
     - Mockingjay/Core
-  - Realm (4.4.1):
-    - Realm/Headers (= 4.4.1)
-  - Realm/Headers (4.4.1)
-  - RealmSwift (4.4.1):
-    - Realm (= 4.4.1)
-  - SDWebImage (5.7.3):
-    - SDWebImage/Core (= 5.7.3)
-  - SDWebImage/Core (5.7.3)
+  - Realm (5.0.0):
+    - Realm/Headers (= 5.0.0)
+  - Realm/Headers (5.0.0)
+  - RealmSwift (5.0.0):
+    - Realm (= 5.0.0)
+  - SDWebImage (5.8.0):
+    - SDWebImage/Core (= 5.8.0)
+  - SDWebImage/Core (5.8.0)
   - SlideMenuControllerSwift (5.0.0)
   - URITemplate (3.0.0)
 
@@ -65,7 +65,7 @@ CHECKOUT OPTIONS:
     :git: https://github.com/AtomicSLLC/SlideMenuControllerSwift.git
 
 SPEC CHECKSUMS:
-  ActionSheetPicker-3.0: 5b62e07b00bd970509cf5ece99cb7447eae5dd0d
+  ActionSheetPicker-3.0: 6d79f6f3b98e2b21d218dd65a39f634ff37a27e5
   Crashlytics: 540b7e5f5da5a042647227a5e3ac51d85eed06df
   CryptoSwift: f12f037f6d0fcd6d48c96db0071b653de64e6c4d
   Embassy: eb36dc783ea20b792426461bbaff8c3f256e0331
@@ -73,12 +73,12 @@ SPEC CHECKSUMS:
   Fabric: 706c8b8098fff96c33c0db69cbf81f9c551d0d74
   IQKeyboardManagerSwift: 0fb93310284665245591f50f7a5e38de615960b7
   Mockingjay: 0f7c5aa49c7f1b95621cee3c79b557141f5a225c
-  Realm: 4eb04d7487bd43c0581256f40b424eafb711deff
-  RealmSwift: 3eb8924ff7100df5928c7602f71d0fec51e7c9c5
-  SDWebImage: 97351f6582ceca541ea294ba66a1fcb342a331c2
+  Realm: 76066d333de26f97e9caedaa85ee3ff4a62ca265
+  RealmSwift: c1bdff09b422569dc6881410d9ccf712bcdb79b0
+  SDWebImage: 84000f962cbfa70c07f19d2234cbfcf5d779b5dc
   SlideMenuControllerSwift: d740ea24105a658fe6a8c256f2bf5832fee7c047
   URITemplate: 58e0d47f967006c5d59888af5356c4a8ed3b197d
 
-PODFILE CHECKSUM: 2684d1d711ea5ace65d69ca3459082174a52057c
+PODFILE CHECKSUM: b1f05fbad51523f9bad664a5bf55307c1a9b56f8
 
 COCOAPODS: 1.9.1

@@ -103,7 +103,7 @@ let kStudyAnchorDateQuestionInfo = "questionInfo"
 
 class WCPServices: NSObject {
     let networkManager = NetworkManager.sharedInstance()
-    var delegate: NMWebServiceDelegate! = nil
+    weak var delegate: NMWebServiceDelegate?
     var delegateSource: NMWebServiceDelegate?
     
     // MARK:Requests
@@ -281,14 +281,11 @@ class WCPServices: NSObject {
             let studyModelObj = Study(studyDetail: study)
             listOfStudies.append(studyModelObj)
         }
-        Logger.sharedInstance.info("Studies Parsing Finished")
-        //assgin to Gateway
+        // Assign to Gateway
         Gateway.instance.studies = listOfStudies
-        
-        Logger.sharedInstance.info("Studies Saving in DB")
-        //save in database
+
+        // Save in database
         DBHandler().saveStudies(studies: listOfStudies)
-        print("StudyList Parsing Finished \(Date().timeIntervalSince1970)")
     }
     
     func handleEligibilityConsentMetaData(response: Dictionary<String, Any>){
@@ -577,12 +574,12 @@ class WCPServices: NSObject {
     
 }
 extension WCPServices:NMWebServiceDelegate{
+    
     func startedRequest(_ manager: NetworkManager, requestName: NSString) {
         Logger.sharedInstance.info("WCP Request Called: \(requestName)")
-        if delegate != nil {
-            delegate.startedRequest(manager, requestName: requestName)
-        }
+        delegate?.startedRequest(manager, requestName: requestName)
     }
+    
     func finishedRequest(_ manager: NetworkManager, requestName: NSString, response: AnyObject?) {
        
         print("StudyList Finished \(Date())")
@@ -621,14 +618,13 @@ extension WCPServices:NMWebServiceDelegate{
         default: break
         }
         
-        if delegate != nil {
-            delegate.finishedRequest(manager, requestName: requestName, response: response)
-        }
+      
+        delegate?.finishedRequest(manager, requestName: requestName, response: response)
+        
         
     }
+    
     func failedRequest(_ manager: NetworkManager, requestName: NSString, error: NSError) {
-        if delegate != nil {
-            delegate.failedRequest(manager, requestName: requestName, error: error)
-        }
+        delegate?.failedRequest(manager, requestName: requestName, error: error)
     }
 }

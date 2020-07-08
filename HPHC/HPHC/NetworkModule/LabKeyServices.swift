@@ -44,12 +44,7 @@ class LabKeyServices: NSObject {
         let currentConsent = ConsentBuilder.currentConsent
         let consentResult = currentConsent?.consentResult
         
-        var userDataSharing: String
-        if let isShareData = consentResult?.isShareDataWithPublic {
-          userDataSharing = "\(isShareData)"
-        } else {
-          userDataSharing = "NA"
-        }
+        var userDataSharing = consentResult?.isShareDataWithPublic ? "\(isShareData)" : "NA"
         
         let params = [
             kEnrollmentToken: token,

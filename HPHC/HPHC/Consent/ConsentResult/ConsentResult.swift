@@ -70,7 +70,7 @@ class ConsentResult {
                     
                     if self.consentPdfData?.count == 0 {
                     self.consentPath = "Consent" +  "_" + "\((Study.currentStudy?.studyId)!)" + ".pdf"
-        
+
                     self.consentDocument?.makePDF(completionHandler: { data,error in
                         print("data: \(String(describing: data))    \n  error: \(String(describing: error))")
                         

@@ -468,7 +468,8 @@ class ActivitiesViewController : UIViewController{
         
         tableViewSections = []
         allActivityList = []
-        let activities = Study.currentStudy?.activities.filter({$0.startDate != nil})
+        guard let activities = Study.currentStudy?.activities.filter({$0.startDate != nil})
+          else {return}
         var bufCurrentStudyArray: [Activity] = []
         
         var currentActivities: [Activity] = []
@@ -476,7 +477,7 @@ class ActivitiesViewController : UIViewController{
         var pastActivities: [Activity] = []
         
         var isInActiveActivitiesAreAvailable: Bool! = false
-        for activity in activities! {
+        for activity in activities {
             if activity.state == "active" || activity.state == nil {
               
                 let status =  self.getActivityAvailabilityStatus(activity: activity)

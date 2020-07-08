@@ -1137,7 +1137,8 @@ class DBHandler: NSObject {
      loads activity list from DB for the study provided
      return completion handler with array of activities
      */
-    class func loadActivityListFromDatabase(studyId: String,completionHandler: @escaping (Array<Activity>) -> ()){
+    class func loadActivityListFromDatabase(studyId: String,
+                                            completionHandler: @escaping ([Activity]) -> Void) {
         
         let realm = DBHandler.getRealmObject()!
         //let dbActivities = realm.objects(DBActivity.self).filter("studyId == %@",studyId)
@@ -1150,7 +1151,9 @@ class DBHandler: NSObject {
         var activities: [Activity] = []
         for dbActivity in dbActivities {
             let activity = DBHandler.getActivityFromDBActivity(dbActivity,runDate: date)
-            if activity.schedulingType == .anchorDate && activity.anchorDate?.anchorDateValue == nil {
+            if activity.schedulingType == .anchorDate
+              && activity.anchorDate?.anchorDateValue == nil
+              && activity.anchorDate?.sourceType != AnchorDateSourceType.enrollmentDate.rawValue {
                 continue  // If anchor date is yet to be updated, no need to show those activities.
             } else {
                 activities.append(activity)

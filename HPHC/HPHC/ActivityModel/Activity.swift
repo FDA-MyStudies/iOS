@@ -270,8 +270,9 @@ class Activity {
                 self.taskSubType =  (infoDict[kActivityTaskSubType] as? String)!
             }
            
-            if self.startDate != nil && (self.schedulingType == .regular
-                || self.anchorDate?.sourceType == "EnrollmentDate"){
+            if self.startDate != nil
+              && (self.schedulingType == .regular
+                || self.anchorDate?.sourceType == "EnrollmentDate") {
                 self.calculateActivityRuns(studyId: self.studyId!)
             } else if self.frequencyType == .Ongoing {
                 self.startDate = Date()

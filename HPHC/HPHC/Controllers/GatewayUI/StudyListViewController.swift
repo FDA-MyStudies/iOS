@@ -475,7 +475,7 @@ class StudyListViewController: UIViewController {
     }
 
     @IBAction func searchButtonAction(_: UIBarButtonItem) {
-        searchView = SearchBarView.instanceFromNib(frame: CGRect(x: 0, y: -200, width: view.frame.size.width, height: 64.0), detail: nil)
+        searchView = SearchBarView.instanceFromNib(frame: CGRect(x: 0, y: -200, width: view.frame.size.width, height: 74.0), detail: nil)
 
         UIView.animate(withDuration: 0.2,
                        delay: 0.0,
@@ -484,7 +484,7 @@ class StudyListViewController: UIViewController {
 
                            let y: CGFloat = DeviceType.IS_IPHONE_X_OR_HIGH ? 20.0 : 0.0
 
-                           self.searchView?.frame = CGRect(x: 0, y: y, width: self.view.frame.size.width, height: 64.0)
+                           self.searchView?.frame = CGRect(x: 0, y: y, width: self.view.frame.size.width, height: 74.0)
 
                            self.searchView?.textFieldSearch?.becomeFirstResponder()
                            self.searchView?.delegate = self
@@ -974,7 +974,7 @@ extension StudyListViewController: searchBarDelegate {
     /** Searches for the text provided in the filtered StudyList
      @text: serachText irrespective of case
      */
-    func search(text: String) {
+    func search(text: String, studyId: String) {
         if studiesList.count == 0 {
             let appDelegate = (UIApplication.shared.delegate as? AppDelegate)!
 
@@ -984,12 +984,36 @@ extension StudyListViewController: searchBarDelegate {
                 appliedFilter(studyStatus: filterStrings.studyStatus, pariticipationsStatus: filterStrings.pariticipationsStatus, categories: filterStrings.categories, searchText: filterStrings.searchText, bookmarked: filterStrings.bookmark)
             }
         }
+        
+        print("allStudyList---\(allStudyList)")
+        
+        for arr in allStudyList {
+            print("arr---\(arr.studyId)")
+        }
 
         // filter by searched Text
         var searchTextFilteredStudies: [Study]! = []
         if text.count > 0 {
+            if studyId.isEmpty {
+                
+                searchTextFilteredStudies = allStudyList.filter {
+                    ($0.name?.containsIgnoringCase(text))! || ($0.category?.containsIgnoringCase(text))! || ($0.description?.containsIgnoringCase(text))! || ($0.sponserName?.containsIgnoringCase(text))!
+                }
+                
+                StudyFilterHandler.instance.searchText = text
+                
+                previousStudyList = studiesList
+                studiesList = getSortedStudies(studies: searchTextFilteredStudies)
+                
+                if studiesList.count == 0 {
+                    labelHelperText.text = kHelperTextForSearchedStudiesNotFound
+                    tableView?.isHidden = true
+                    labelHelperText.isHidden = false
+                }
+            }
+            else {
             searchTextFilteredStudies = allStudyList.filter {
-                ($0.name?.containsIgnoringCase(text))! || ($0.category?.containsIgnoringCase(text))! || ($0.description?.containsIgnoringCase(text))! || ($0.sponserName?.containsIgnoringCase(text))!
+                ($0.studyId == studyId)
             }
 
             StudyFilterHandler.instance.searchText = text
@@ -1001,6 +1025,7 @@ extension StudyListViewController: searchBarDelegate {
                 labelHelperText.text = kHelperTextForSearchedStudiesNotFound
                 tableView?.isHidden = true
                 labelHelperText.isHidden = false
+            }
             }
         } else {
             StudyFilterHandler.instance.searchText = ""

@@ -22,7 +22,7 @@ import Foundation
 
 protocol searchBarDelegate {
     func didTapOnCancel()
-    func  search(text: String)
+    func  search(text: String, studyId: String)
 }
 
 
@@ -31,6 +31,8 @@ class SearchBarView: UIView {
     @IBOutlet weak var textFieldSearch: UITextField?
     @IBOutlet weak var buttonCancel: UIButton?
     @IBOutlet weak var viewBackground: UIView?
+    @IBOutlet weak var switchToken: UISwitch?
+    @IBOutlet weak var labelToken: UILabel?
     var delegate: searchBarDelegate?
     
     required init?(coder aDecoder: NSCoder) {
@@ -101,7 +103,7 @@ extension SearchBarView: UITextFieldDelegate{
         textField.resignFirstResponder()
         
         if textField.text != nil && (textField.text?.count)! > 0 {
-            self.delegate?.search(text: textField.text!)
+            self.delegate?.search(text: textField.text!, studyId: textField.text!) // SEE
         }
         
         

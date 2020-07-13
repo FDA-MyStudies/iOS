@@ -37,6 +37,17 @@ class LabKeyServices: NSObject {
     
     
     // MARK:Requests
+  func searchStudy(studyId: String, delegate: NMWebServiceDelegate) {
+      self.delegate = delegate
+      let method = ResponseMethods.resolveEnrollmentToken.method
+      
+      let params = [
+          kEnrollmentToken: studyId,
+      ]
+      
+      self.sendRequestWith(method: method, params: params, headers: nil)
+  }
+  
     func enrollForStudy(studyId: String, token: String , delegate: NMWebServiceDelegate) {
         self.delegate = delegate
         let method = ResponseMethods.enroll.method
@@ -187,6 +198,7 @@ class LabKeyServices: NSObject {
     func handleGetParticipantResponse1(response: Dictionary<String, Any>){
         print(response)
     }
+  
     func handleGetParticipantResponse(response: Dictionary<String, Any>){
         
         var dashBoardResponse: Array<DashboardResponse> = []

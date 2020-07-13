@@ -975,32 +975,92 @@ extension StudyListViewController: searchBarDelegate {
      @text: serachText irrespective of case
      */
     func search(text: String, studyId: String) {
+        if !studyId.isEmpty {
+            StudyFilterHandler.instance.searchText = text
+            LabKeyServices().searchStudy(studyId: studyId, delegate: self) //"BGYRPKLDG"
+        }
+        else {
+            if studiesList.count == 0 {
+                let appDelegate = (UIApplication.shared.delegate as? AppDelegate)!
+                
+                if StudyFilterHandler.instance.filterOptions.count > 0 {
+                    let filterStrings = appDelegate.getDefaultFilterStrings()
+                    
+                    appliedFilter(studyStatus: filterStrings.studyStatus, pariticipationsStatus: filterStrings.pariticipationsStatus, categories: filterStrings.categories, searchText: filterStrings.searchText, bookmarked: filterStrings.bookmark)
+                }
+            }
+            
+            // filter by searched Text
+            var searchTextFilteredStudies: [Study]! = []
+            if text.count > 0 {
+                if studyId.isEmpty {
+                    
+                    searchTextFilteredStudies = allStudyList.filter {
+                        ($0.name?.containsIgnoringCase(text))! || ($0.category?.containsIgnoringCase(text))! || ($0.description?.containsIgnoringCase(text))! || ($0.sponserName?.containsIgnoringCase(text))!
+                    }
+                    
+                    StudyFilterHandler.instance.searchText = text
+                    
+                    previousStudyList = studiesList
+                    studiesList = getSortedStudies(studies: searchTextFilteredStudies)
+                    
+                    if studiesList.count == 0 {
+                        labelHelperText.text = kHelperTextForSearchedStudiesNotFound
+                        tableView?.isHidden = true
+                        labelHelperText.isHidden = false
+                    }
+                }
+                else {
+                    searchTextFilteredStudies = allStudyList.filter {
+                        ($0.studyId == studyId)
+                    }
+                    
+                    StudyFilterHandler.instance.searchText = text
+                    
+                    previousStudyList = studiesList
+                    studiesList = getSortedStudies(studies: searchTextFilteredStudies)
+                    
+                    if studiesList.count == 0 {
+                        labelHelperText.text = kHelperTextForSearchedStudiesNotFound
+                        tableView?.isHidden = true
+                        labelHelperText.isHidden = false
+                    }
+                }
+            } else {
+                StudyFilterHandler.instance.searchText = ""
+            }
+            
+            tableView?.reloadData()
+            
+            if studiesList.count > 0 {
+                if searchView != nil {
+                    searchView?.removeFromSuperview()
+                    slideMenuController()?.leftPanGesture?.isEnabled = true
+                }
+            }
+        }
+    }
+    
+    func tokenSearch(studyId: String) {
+        
         if studiesList.count == 0 {
             let appDelegate = (UIApplication.shared.delegate as? AppDelegate)!
-
+            
             if StudyFilterHandler.instance.filterOptions.count > 0 {
                 let filterStrings = appDelegate.getDefaultFilterStrings()
-
+                
                 appliedFilter(studyStatus: filterStrings.studyStatus, pariticipationsStatus: filterStrings.pariticipationsStatus, categories: filterStrings.categories, searchText: filterStrings.searchText, bookmarked: filterStrings.bookmark)
             }
         }
         
-        print("allStudyList---\(allStudyList)")
-        
-        for arr in allStudyList {
-            print("arr---\(arr.studyId)")
-        }
-
         // filter by searched Text
         var searchTextFilteredStudies: [Study]! = []
-        if text.count > 0 {
-            if studyId.isEmpty {
-                
+        if studyId.count > 0 {
+            if !studyId.isEmpty {
                 searchTextFilteredStudies = allStudyList.filter {
-                    ($0.name?.containsIgnoringCase(text))! || ($0.category?.containsIgnoringCase(text))! || ($0.description?.containsIgnoringCase(text))! || ($0.sponserName?.containsIgnoringCase(text))!
+                    ($0.studyId.caseInsensitiveCompare(studyId) == .orderedSame)
+                    
                 }
-                
-                StudyFilterHandler.instance.searchText = text
                 
                 previousStudyList = studiesList
                 studiesList = getSortedStudies(studies: searchTextFilteredStudies)
@@ -1011,32 +1071,26 @@ extension StudyListViewController: searchBarDelegate {
                     labelHelperText.isHidden = false
                 }
             }
-            else {
-            searchTextFilteredStudies = allStudyList.filter {
-                ($0.studyId == studyId)
-            }
-
-            StudyFilterHandler.instance.searchText = text
-
-            previousStudyList = studiesList
-            studiesList = getSortedStudies(studies: searchTextFilteredStudies)
-
-            if studiesList.count == 0 {
-                labelHelperText.text = kHelperTextForSearchedStudiesNotFound
-                tableView?.isHidden = true
-                labelHelperText.isHidden = false
-            }
-            }
         } else {
             StudyFilterHandler.instance.searchText = ""
         }
-
+        
         tableView?.reloadData()
-
+        
         if studiesList.count > 0 {
             if searchView != nil {
                 searchView?.removeFromSuperview()
                 slideMenuController()?.leftPanGesture?.isEnabled = true
+            }
+        }
+    }
+    
+    func handleResolveEnrollmentToken(response: Dictionary<String, Any>){
+        print(response)
+        if let studyId = response["studyId"] as? String {
+            print("rows \(studyId)")
+            if !studyId.isEmpty {
+                tokenSearch(studyId: studyId)
             }
         }
     }
@@ -1090,6 +1144,10 @@ extension StudyListViewController: NMWebServiceDelegate {
             }
 
         } else if requestName as String == RegistrationMethods.updateStudyState.description {
+            appdelegate.window?.removeProgressIndicatorFromWindow()
+        }
+        else if requestName as String == ResponseMethods.resolveEnrollmentToken.description {
+        self.handleResolveEnrollmentToken(response: response as! Dictionary<String, Any>)
             appdelegate.window?.removeProgressIndicatorFromWindow()
         }
     }

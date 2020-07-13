@@ -22,7 +22,7 @@ import Foundation
 
 protocol searchBarDelegate {
     func didTapOnCancel()
-    func  search(text: String, studyId: String)
+    func search(text: String, studyId: String)
 }
 
 
@@ -101,9 +101,10 @@ extension SearchBarView: UITextFieldDelegate{
         textField.text =  textField.text?.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
         
         textField.resignFirstResponder()
+        let switchVal = switchToken?.isOn
         
         if textField.text != nil && (textField.text?.count)! > 0 {
-            self.delegate?.search(text: textField.text!, studyId: textField.text!) // SEE
+            self.delegate?.search(text: textField.text!, studyId: (switchVal ?? false ? textField.text! : "")) // SEE
         }
         
         

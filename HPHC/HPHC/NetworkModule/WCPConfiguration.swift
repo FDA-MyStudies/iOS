@@ -61,11 +61,11 @@ struct WCPServerURLConstants {
     //        static let DevelopmentURL = "http://18.222.7.100:8080/StudyMetaData/"
     //
     //Staging
-//        static let ProductionURL = "https://hpwcp-stage.lkcompliant.net/StudyMetaData/"
-//        static let DevelopmentURL = "https://hpwcp-stage.lkcompliant.net/StudyMetaData/"
+        static let ProductionURL = "https://hpwcp-stage.lkcompliant.net/StudyMetaData/"
+        static let DevelopmentURL = "https://hpwcp-stage.lkcompliant.net/StudyMetaData/"
     
-    static let ProductionURL = "https://hpwcp.lkcompliant.net/StudyMetaData/"
-    static let DevelopmentURL = "https://hpwcp.lkcompliant.net/StudyMetaData/"
+//    static let ProductionURL = "https://hpwcp.lkcompliant.net/StudyMetaData/"
+//    static let DevelopmentURL = "https://hpwcp.lkcompliant.net/StudyMetaData/"
     
     //    Demo
     //    static let ProductionURL = "https://wcp.demo.mystudiesapp.org/StudyMetaData/"

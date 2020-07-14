@@ -517,13 +517,19 @@ class StudyListViewController: UIViewController {
     
     @objc func indexChanged(_ sender: UISegmentedControl) {
         if sender.selectedSegmentIndex == 0 {
+            let text = searchView?.textFieldSearch?.text
+            searchView?.textFieldSearch?.text = ""
             searchView?.textFieldSearch?.placeholder = "Enter a token"
             searchView?.textFieldSearch?.resignFirstResponder()
             searchView?.textFieldSearch?.becomeFirstResponder()
+            searchView?.textFieldSearch?.text = text
         } else if sender.selectedSegmentIndex == 1 {
+            let text = searchView?.textFieldSearch?.text
+            searchView?.textFieldSearch?.text = ""
             searchView?.textFieldSearch?.placeholder = "Enter keyword(s)"
             searchView?.textFieldSearch?.resignFirstResponder()
             searchView?.textFieldSearch?.becomeFirstResponder()
+            searchView?.textFieldSearch?.text = text
         }
     }
 
@@ -1036,22 +1042,6 @@ extension StudyListViewController: searchBarDelegate {
                         labelHelperText.isHidden = false
                     }
                 }
-                else {
-                    searchTextFilteredStudies = allStudyList.filter {
-                        ($0.studyId == studyId)
-                    }
-                    
-                    StudyFilterHandler.instance.searchText = text
-                    
-                    previousStudyList = studiesList
-                    studiesList = getSortedStudies(studies: searchTextFilteredStudies)
-                    
-                    if studiesList.count == 0 {
-                        labelHelperText.text = kHelperTextForSearchedStudiesNotFound
-                        tableView?.isHidden = true
-                        labelHelperText.isHidden = false
-                    }
-                }
             } else {
                 StudyFilterHandler.instance.searchText = ""
             }
@@ -1195,6 +1185,19 @@ extension StudyListViewController: NMWebServiceDelegate {
                 studyListRequestFailed = true
                 loadStudiesFromDatabase()
 
+            } else if requestName as String == ResponseMethods.resolveEnrollmentToken.description {
+                previousStudyList = studiesList
+                studiesList = []
+                
+                if studiesList.count == 0 {
+                    labelHelperText.text = kHelperTextForSearchedStudiesNotFound
+                    tableView?.isHidden = true
+                    labelHelperText.isHidden = false
+                }
+                tableView?.reloadData()
+                if refreshControl != nil, (refreshControl?.isRefreshing)! {
+                    refreshControl?.endRefreshing()
+                }
             } else {
                 if requestName as String == RegistrationMethods.userProfile.description {}
 

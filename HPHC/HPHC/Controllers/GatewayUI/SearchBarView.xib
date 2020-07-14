@@ -10,11 +10,11 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="SearchBarView" customModule="COVID19" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="373" height="74"/>
+            <rect key="frame" x="0.0" y="0.0" width="373" height="104"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xyq-ug-M4x">
-                    <rect key="frame" x="307" y="27" width="48" height="40"/>
+                    <rect key="frame" x="307" y="56.5" width="48" height="30"/>
                     <state key="normal" title="Cancel">
                         <color key="titleColor" red="0.4239494800567627" green="0.44984912872314453" blue="0.5297245979309082" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </state>
@@ -23,18 +23,18 @@
                     </connections>
                 </button>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1wb-t2-VOs">
-                    <rect key="frame" x="18" y="36" width="281" height="33"/>
+                    <rect key="frame" x="18" y="52" width="281" height="39"/>
                     <subviews>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="search_small" translatesAutoresizingMaskIntoConstraints="NO" id="Uy2-kH-egr">
-                            <rect key="frame" x="16" y="7" width="16" height="17"/>
+                            <rect key="frame" x="16" y="7" width="22" height="23"/>
                             <constraints>
                                 <constraint firstAttribute="width" secondItem="Uy2-kH-egr" secondAttribute="height" multiplier="18:19" id="eth-Uc-k4Q"/>
                             </constraints>
                         </imageView>
-                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="search" textAlignment="natural" clearsOnBeginEditing="YES" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="x0y-MY-FMc">
-                            <rect key="frame" x="48" y="7" width="225" height="19"/>
+                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Enter a token" textAlignment="natural" clearsOnBeginEditing="YES" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="x0y-MY-FMc">
+                            <rect key="frame" x="54" y="10" width="219" height="19"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                            <textInputTraits key="textInputTraits" keyboardType="alphabet" returnKeyType="search"/>
+                            <textInputTraits key="textInputTraits" keyboardType="alphabet" returnKeyType="search" smartInsertDeleteType="no" smartQuotesType="no"/>
                             <connections>
                                 <outlet property="delegate" destination="iN0-l3-epB" id="0Do-ze-A10"/>
                             </connections>
@@ -50,40 +50,49 @@
                         <constraint firstItem="Uy2-kH-egr" firstAttribute="top" secondItem="1wb-t2-VOs" secondAttribute="top" constant="7" id="ydB-tV-mcc"/>
                     </constraints>
                 </view>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Search Token" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7Rb-1u-tkt">
-                    <rect key="frame" x="18" y="10" width="78.5" height="16"/>
-                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="12"/>
-                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Search study by" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7Rb-1u-tkt">
+                    <rect key="frame" x="18" y="10" width="97.5" height="32"/>
+                    <fontDescription key="fontDescription" type="boldSystem" pointSize="12"/>
+                    <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="fjn-8C-xgk">
-                    <rect key="frame" x="104.5" y="3" width="51" height="31"/>
-                </switch>
+                <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="Hr1-BD-AHJ">
+                    <rect key="frame" x="127.5" y="14" width="143" height="25"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="24" id="fiZ-Fk-6sl"/>
+                    </constraints>
+                    <segments>
+                        <segment title="token"/>
+                        <segment title="keyword"/>
+                    </segments>
+                    <color key="tintColor" red="0.0" green="0.48627450980392156" blue="0.72941176470588232" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="selectedSegmentTintColor" red="0.0" green="0.48627450979999998" blue="0.72941176470000002" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                </segmentedControl>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="1wb-t2-VOs" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="18" id="0al-8z-41N"/>
-                <constraint firstItem="1wb-t2-VOs" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="36" id="75M-Vb-BWj"/>
-                <constraint firstAttribute="bottom" secondItem="xyq-ug-M4x" secondAttribute="bottom" constant="7" id="EAG-id-Klt"/>
+                <constraint firstItem="1wb-t2-VOs" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="52" id="75M-Vb-BWj"/>
+                <constraint firstItem="Hr1-BD-AHJ" firstAttribute="leading" secondItem="7Rb-1u-tkt" secondAttribute="trailing" constant="12" id="FXz-X3-l2b"/>
                 <constraint firstItem="7Rb-1u-tkt" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="10" id="HSt-Vh-vrP"/>
                 <constraint firstItem="1wb-t2-VOs" firstAttribute="top" secondItem="7Rb-1u-tkt" secondAttribute="bottom" constant="10" id="V0i-zL-M8w"/>
-                <constraint firstItem="fjn-8C-xgk" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="3" id="YpG-Wa-MLP"/>
-                <constraint firstItem="xyq-ug-M4x" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="27" id="g6o-ud-nCY"/>
                 <constraint firstItem="xyq-ug-M4x" firstAttribute="leading" secondItem="1wb-t2-VOs" secondAttribute="trailing" constant="8" id="hgC-Cd-bfs"/>
-                <constraint firstAttribute="bottom" secondItem="1wb-t2-VOs" secondAttribute="bottom" constant="5" id="hgq-yo-Vqc"/>
+                <constraint firstAttribute="bottom" secondItem="1wb-t2-VOs" secondAttribute="bottom" constant="13" id="hgq-yo-Vqc"/>
                 <constraint firstAttribute="trailing" secondItem="xyq-ug-M4x" secondAttribute="trailing" constant="18" id="oTE-1i-FGx"/>
-                <constraint firstItem="fjn-8C-xgk" firstAttribute="leading" secondItem="7Rb-1u-tkt" secondAttribute="trailing" constant="8" id="rjh-xc-vpD"/>
+                <constraint firstItem="xyq-ug-M4x" firstAttribute="centerY" secondItem="1wb-t2-VOs" secondAttribute="centerY" id="sW6-Be-m3U"/>
+                <constraint firstItem="Hr1-BD-AHJ" firstAttribute="centerY" secondItem="7Rb-1u-tkt" secondAttribute="centerY" id="ul2-5D-p3g"/>
                 <constraint firstItem="1wb-t2-VOs" firstAttribute="leading" secondItem="7Rb-1u-tkt" secondAttribute="leading" id="wuE-C8-HFC"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
                 <outlet property="buttonCancel" destination="xyq-ug-M4x" id="34b-UB-YRC"/>
                 <outlet property="labelToken" destination="7Rb-1u-tkt" id="364-T7-4CM"/>
-                <outlet property="switchToken" destination="fjn-8C-xgk" id="3Zl-CS-eN2"/>
+                <outlet property="segementToken" destination="Hr1-BD-AHJ" id="4zc-wf-HBv"/>
                 <outlet property="textFieldSearch" destination="x0y-MY-FMc" id="4ZW-9Y-5mv"/>
                 <outlet property="viewBackground" destination="1wb-t2-VOs" id="l1d-Vj-f7w"/>
             </connections>
-            <point key="canvasLocation" x="-12.5" y="-389"/>
+            <point key="canvasLocation" x="-13.6" y="-389.5052473763119"/>
         </view>
     </objects>
     <resources>

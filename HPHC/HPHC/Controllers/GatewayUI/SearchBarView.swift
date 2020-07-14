@@ -31,7 +31,7 @@ class SearchBarView: UIView {
     @IBOutlet weak var textFieldSearch: UITextField?
     @IBOutlet weak var buttonCancel: UIButton?
     @IBOutlet weak var viewBackground: UIView?
-    @IBOutlet weak var switchToken: UISwitch?
+    @IBOutlet weak var segementToken: UISegmentedControl?
     @IBOutlet weak var labelToken: UILabel?
     var delegate: searchBarDelegate?
     
@@ -101,10 +101,10 @@ extension SearchBarView: UITextFieldDelegate{
         textField.text =  textField.text?.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
         
         textField.resignFirstResponder()
-        let switchVal = switchToken?.isOn
+        let switchVal = segementToken?.selectedSegmentIndex == 0 ? true : false
         
         if textField.text != nil && (textField.text?.count)! > 0 {
-            self.delegate?.search(text: textField.text!, studyId: (switchVal ?? false ? textField.text! : "")) // SEE
+            self.delegate?.search(text: textField.text!, studyId: (switchVal ? textField.text! : ""))
         }
         
         

@@ -475,7 +475,7 @@ class StudyListViewController: UIViewController {
     }
 
     @IBAction func searchButtonAction(_: UIBarButtonItem) {
-        searchView = SearchBarView.instanceFromNib(frame: CGRect(x: 0, y: -200, width: view.frame.size.width, height: 74.0), detail: nil)
+        searchView = SearchBarView.instanceFromNib(frame: CGRect(x: 0, y: -200, width: view.frame.size.width, height: 104.0), detail: nil)
 
         UIView.animate(withDuration: 0.2,
                        delay: 0.0,
@@ -484,11 +484,24 @@ class StudyListViewController: UIViewController {
 
                            let y: CGFloat = DeviceType.IS_IPHONE_X_OR_HIGH ? 20.0 : 0.0
 
-                           self.searchView?.frame = CGRect(x: 0, y: y, width: self.view.frame.size.width, height: 74.0)
+                           self.searchView?.frame = CGRect(x: 0, y: y, width: self.view.frame.size.width, height: 104.0)
 
                            self.searchView?.textFieldSearch?.becomeFirstResponder()
                            self.searchView?.delegate = self
-
+                        
+                        let titleTextAttributesSelected = [NSAttributedString.Key.foregroundColor: UIColor.white]
+                        let titleTextAttributesUnSelected = [NSAttributedString.Key.foregroundColor: UIColor.gray]
+                        self.searchView?.segementToken?.setTitleTextAttributes(titleTextAttributesUnSelected, for: .normal)
+                        self.searchView?.segementToken?.setTitleTextAttributes(titleTextAttributesSelected, for: .selected)
+                        self.searchView?.segementToken?.layer.borderWidth = 2
+                        self.searchView?.segementToken?.layer.cornerRadius = 0.5
+                        self.searchView?.segementToken?.layer.borderColor = Utilities.getUIColorFromHex(0x007CBA).cgColor
+                        self.searchView?.segementToken?.layer.masksToBounds = true
+                        self.searchView?.segementToken?.backgroundColor = .white
+                        self.searchView?.segementToken?.layer.backgroundColor = UIColor.white.cgColor
+                        self.searchView?.segementToken?.removeBorders()
+                        self.searchView?.segementToken?.addTarget(self, action: #selector(self.indexChanged(_:)), for: .valueChanged)
+                        
                            self.slideMenuController()?.leftPanGesture?.isEnabled = false
 
                            self.navigationController?.view.addSubview(self.searchView!)
@@ -501,6 +514,19 @@ class StudyListViewController: UIViewController {
 
         })
     }
+    
+    @objc func indexChanged(_ sender: UISegmentedControl) {
+        if sender.selectedSegmentIndex == 0 {
+            searchView?.textFieldSearch?.placeholder = "Enter a token"
+            searchView?.textFieldSearch?.resignFirstResponder()
+            searchView?.textFieldSearch?.becomeFirstResponder()
+        } else if sender.selectedSegmentIndex == 1 {
+            searchView?.textFieldSearch?.placeholder = "Enter keyword(s)"
+            searchView?.textFieldSearch?.resignFirstResponder()
+            searchView?.textFieldSearch?.becomeFirstResponder()
+        }
+    }
+
 
     // MARK: - Custom Bar Buttons
 

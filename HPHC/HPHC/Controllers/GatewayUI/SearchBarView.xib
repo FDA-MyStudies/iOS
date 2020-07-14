@@ -10,11 +10,11 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="SearchBarView" customModule="COVID19" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="373" height="104"/>
+            <rect key="frame" x="0.0" y="0.0" width="373" height="114"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xyq-ug-M4x">
-                    <rect key="frame" x="307" y="56.5" width="48" height="30"/>
+                    <rect key="frame" x="307" y="64.5" width="48" height="30"/>
                     <state key="normal" title="Cancel">
                         <color key="titleColor" red="0.4239494800567627" green="0.44984912872314453" blue="0.5297245979309082" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </state>
@@ -23,16 +23,16 @@
                     </connections>
                 </button>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1wb-t2-VOs">
-                    <rect key="frame" x="18" y="52" width="281" height="39"/>
+                    <rect key="frame" x="18" y="58" width="281" height="43"/>
                     <subviews>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="search_small" translatesAutoresizingMaskIntoConstraints="NO" id="Uy2-kH-egr">
-                            <rect key="frame" x="16" y="7" width="22" height="23"/>
+                            <rect key="frame" x="16" y="7" width="25.5" height="27"/>
                             <constraints>
                                 <constraint firstAttribute="width" secondItem="Uy2-kH-egr" secondAttribute="height" multiplier="18:19" id="eth-Uc-k4Q"/>
                             </constraints>
                         </imageView>
                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Enter a token" textAlignment="natural" clearsOnBeginEditing="YES" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="x0y-MY-FMc">
-                            <rect key="frame" x="54" y="10" width="219" height="19"/>
+                            <rect key="frame" x="57.5" y="12" width="215.5" height="19"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <textInputTraits key="textInputTraits" keyboardType="alphabet" returnKeyType="search" smartInsertDeleteType="no" smartQuotesType="no"/>
                             <connections>
@@ -51,13 +51,13 @@
                     </constraints>
                 </view>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Search study by" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7Rb-1u-tkt">
-                    <rect key="frame" x="18" y="10" width="97.5" height="32"/>
+                    <rect key="frame" x="18" y="18" width="97.5" height="36"/>
                     <fontDescription key="fontDescription" type="boldSystem" pointSize="12"/>
                     <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="Hr1-BD-AHJ">
-                    <rect key="frame" x="127.5" y="14" width="143" height="25"/>
+                    <rect key="frame" x="127.5" y="24" width="143" height="25"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="24" id="fiZ-Fk-6sl"/>
@@ -73,10 +73,10 @@
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="1wb-t2-VOs" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="18" id="0al-8z-41N"/>
-                <constraint firstItem="1wb-t2-VOs" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="52" id="75M-Vb-BWj"/>
+                <constraint firstItem="1wb-t2-VOs" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="58" id="75M-Vb-BWj"/>
                 <constraint firstItem="Hr1-BD-AHJ" firstAttribute="leading" secondItem="7Rb-1u-tkt" secondAttribute="trailing" constant="12" id="FXz-X3-l2b"/>
-                <constraint firstItem="7Rb-1u-tkt" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="10" id="HSt-Vh-vrP"/>
-                <constraint firstItem="1wb-t2-VOs" firstAttribute="top" secondItem="7Rb-1u-tkt" secondAttribute="bottom" constant="10" id="V0i-zL-M8w"/>
+                <constraint firstItem="7Rb-1u-tkt" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="18" id="HSt-Vh-vrP"/>
+                <constraint firstItem="1wb-t2-VOs" firstAttribute="top" secondItem="7Rb-1u-tkt" secondAttribute="bottom" constant="4" id="V0i-zL-M8w"/>
                 <constraint firstItem="xyq-ug-M4x" firstAttribute="leading" secondItem="1wb-t2-VOs" secondAttribute="trailing" constant="8" id="hgC-Cd-bfs"/>
                 <constraint firstAttribute="bottom" secondItem="1wb-t2-VOs" secondAttribute="bottom" constant="13" id="hgq-yo-Vqc"/>
                 <constraint firstAttribute="trailing" secondItem="xyq-ug-M4x" secondAttribute="trailing" constant="18" id="oTE-1i-FGx"/>

@@ -46,6 +46,7 @@ class StudyListViewController: UIViewController {
     var previousStudyList: [Study] = []
 
     var allStudyList: [Study] = [] // Gatewaystudylist
+    var previousSegmentStateKeyWord = false
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .default
     }
@@ -501,6 +502,9 @@ class StudyListViewController: UIViewController {
                         self.searchView?.segementToken?.layer.backgroundColor = UIColor.white.cgColor
                         self.searchView?.segementToken?.removeBorders()
                         self.searchView?.segementToken?.addTarget(self, action: #selector(self.indexChanged(_:)), for: .valueChanged)
+                        self.searchView?.segementToken?.selectedSegmentIndex = self.previousSegmentStateKeyWord ? 1 : 0
+                        self.segmentPlaceholderSelection(self.searchView?.segementToken)
+                        
                         
                            self.slideMenuController()?.leftPanGesture?.isEnabled = false
 
@@ -516,20 +520,26 @@ class StudyListViewController: UIViewController {
     }
     
     @objc func indexChanged(_ sender: UISegmentedControl) {
-        if sender.selectedSegmentIndex == 0 {
+        segmentPlaceholderSelection(sender)
+    }
+    
+    func segmentPlaceholderSelection(_ sender: UISegmentedControl?) {
+        if sender?.selectedSegmentIndex == 0 {
             let text = searchView?.textFieldSearch?.text
             searchView?.textFieldSearch?.text = ""
             searchView?.textFieldSearch?.placeholder = "Enter a token"
             searchView?.textFieldSearch?.resignFirstResponder()
             searchView?.textFieldSearch?.becomeFirstResponder()
             searchView?.textFieldSearch?.text = text
-        } else if sender.selectedSegmentIndex == 1 {
+            previousSegmentStateKeyWord = false
+        } else if sender?.selectedSegmentIndex == 1 {
             let text = searchView?.textFieldSearch?.text
             searchView?.textFieldSearch?.text = ""
             searchView?.textFieldSearch?.placeholder = "Enter keyword(s)"
             searchView?.textFieldSearch?.resignFirstResponder()
             searchView?.textFieldSearch?.becomeFirstResponder()
             searchView?.textFieldSearch?.text = text
+            previousSegmentStateKeyWord = true
         }
     }
 

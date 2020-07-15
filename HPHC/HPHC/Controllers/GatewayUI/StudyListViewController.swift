@@ -965,6 +965,7 @@ extension StudyListViewController: StudyListDelegates {
 
 extension StudyListViewController: searchBarDelegate {
     func didTapOnCancel() {
+        searchView?.textFieldSearch?.text = ""
         slideMenuController()?.leftPanGesture?.isEnabled = true
 
         if studiesList.count == 0, previousStudyList.count > 0 {

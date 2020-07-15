@@ -46,7 +46,7 @@ class StudyListViewController: UIViewController {
     var previousStudyList: [Study] = []
 
     var allStudyList: [Study] = [] // Gatewaystudylist
-    var previousSegmentStateKeyWord = false
+    static var previousSegmentStateKeyWord = false
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .default
     }
@@ -451,6 +451,26 @@ class StudyListViewController: UIViewController {
         })
         return sortedstudies2
     }
+    
+    func segmentPlaceholderSelection(_ sender: UISegmentedControl?) {
+        if sender?.selectedSegmentIndex == 0 {
+            let text = searchView?.textFieldSearch?.text
+            searchView?.textFieldSearch?.text = ""
+            searchView?.textFieldSearch?.placeholder = "Enter a token"
+            searchView?.textFieldSearch?.resignFirstResponder()
+            searchView?.textFieldSearch?.becomeFirstResponder()
+            searchView?.textFieldSearch?.text = text
+            StudyListViewController.previousSegmentStateKeyWord = false
+        } else if sender?.selectedSegmentIndex == 1 {
+            let text = searchView?.textFieldSearch?.text
+            searchView?.textFieldSearch?.text = ""
+            searchView?.textFieldSearch?.placeholder = "Enter keyword(s)"
+            searchView?.textFieldSearch?.resignFirstResponder()
+            searchView?.textFieldSearch?.becomeFirstResponder()
+            searchView?.textFieldSearch?.text = text
+            StudyListViewController.previousSegmentStateKeyWord = true
+        }
+    }
 
     // MARK: - Button Actions
 
@@ -477,18 +497,18 @@ class StudyListViewController: UIViewController {
 
     @IBAction func searchButtonAction(_: UIBarButtonItem) {
         searchView = SearchBarView.instanceFromNib(frame: CGRect(x: 0, y: -200, width: view.frame.size.width, height: 104.0), detail: nil)
-
+        
         UIView.animate(withDuration: 0.2,
                        delay: 0.0,
                        options: UIView.AnimationOptions.preferredFramesPerSecond60,
                        animations: { () -> Void in
-
-                           let y: CGFloat = DeviceType.IS_IPHONE_X_OR_HIGH ? 20.0 : 0.0
-
-                           self.searchView?.frame = CGRect(x: 0, y: y, width: self.view.frame.size.width, height: 104.0)
-
-                           self.searchView?.textFieldSearch?.becomeFirstResponder()
-                           self.searchView?.delegate = self
+                        
+                        let y: CGFloat = DeviceType.IS_IPHONE_X_OR_HIGH ? 20.0 : 0.0
+                        
+                        self.searchView?.frame = CGRect(x: 0, y: y, width: self.view.frame.size.width, height: 104.0)
+                        
+                        self.searchView?.textFieldSearch?.becomeFirstResponder()
+                        self.searchView?.delegate = self
                         
                         let titleTextAttributesSelected = [NSAttributedString.Key.foregroundColor: UIColor.white]
                         let titleTextAttributesUnSelected = [NSAttributedString.Key.foregroundColor: UIColor.gray]
@@ -501,48 +521,21 @@ class StudyListViewController: UIViewController {
                         self.searchView?.segementToken?.backgroundColor = .white
                         self.searchView?.segementToken?.layer.backgroundColor = UIColor.white.cgColor
                         self.searchView?.segementToken?.removeBorders()
-                        self.searchView?.segementToken?.addTarget(self, action: #selector(self.indexChanged(_:)), for: .valueChanged)
-                        self.searchView?.segementToken?.selectedSegmentIndex = self.previousSegmentStateKeyWord ? 1 : 0
+                        
+                        self.searchView?.segementToken?.selectedSegmentIndex = StudyListViewController.previousSegmentStateKeyWord ? 1 : 0
                         self.segmentPlaceholderSelection(self.searchView?.segementToken)
+                        self.slideMenuController()?.leftPanGesture?.isEnabled = false
                         
+                        self.navigationController?.view.addSubview(self.searchView!)
                         
-                           self.slideMenuController()?.leftPanGesture?.isEnabled = false
-
-                           self.navigationController?.view.addSubview(self.searchView!)
-
-                           if StudyFilterHandler.instance.searchText.count > 0 {
-                               self.searchView?.textFieldSearch?.text = StudyFilterHandler.instance.searchText
-                           }
-
-                       }, completion: { (_) -> Void in
-
+                        if StudyFilterHandler.instance.searchText.count > 0 {
+                            self.searchView?.textFieldSearch?.text = StudyFilterHandler.instance.searchText
+                        }
+                        
+        }, completion: { (_) -> Void in
+            
         })
     }
-    
-    @objc func indexChanged(_ sender: UISegmentedControl) {
-        segmentPlaceholderSelection(sender)
-    }
-    
-    func segmentPlaceholderSelection(_ sender: UISegmentedControl?) {
-        if sender?.selectedSegmentIndex == 0 {
-            let text = searchView?.textFieldSearch?.text
-            searchView?.textFieldSearch?.text = ""
-            searchView?.textFieldSearch?.placeholder = "Enter a token"
-            searchView?.textFieldSearch?.resignFirstResponder()
-            searchView?.textFieldSearch?.becomeFirstResponder()
-            searchView?.textFieldSearch?.text = text
-            previousSegmentStateKeyWord = false
-        } else if sender?.selectedSegmentIndex == 1 {
-            let text = searchView?.textFieldSearch?.text
-            searchView?.textFieldSearch?.text = ""
-            searchView?.textFieldSearch?.placeholder = "Enter keyword(s)"
-            searchView?.textFieldSearch?.resignFirstResponder()
-            searchView?.textFieldSearch?.becomeFirstResponder()
-            searchView?.textFieldSearch?.text = text
-            previousSegmentStateKeyWord = true
-        }
-    }
-
 
     // MARK: - Custom Bar Buttons
 

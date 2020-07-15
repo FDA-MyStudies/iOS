@@ -69,14 +69,24 @@
                     <color key="tintColor" red="0.0" green="0.48627450980392156" blue="0.72941176470588232" alpha="1" colorSpace="calibratedRGB"/>
                     <color key="selectedSegmentTintColor" red="0.0" green="0.48627450979999998" blue="0.72941176470000002" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                 </segmentedControl>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zHK-is-ScR" userLabel="Segment Button">
+                    <rect key="frame" x="127.5" y="24" width="143" height="24"/>
+                    <connections>
+                        <action selector="segmentPressed:" destination="iN0-l3-epB" eventType="touchUpInside" id="kLd-CR-mPh"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="1wb-t2-VOs" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="18" id="0al-8z-41N"/>
                 <constraint firstItem="1wb-t2-VOs" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="58" id="75M-Vb-BWj"/>
+                <constraint firstItem="zHK-is-ScR" firstAttribute="width" secondItem="Hr1-BD-AHJ" secondAttribute="width" id="CX0-IX-giq"/>
                 <constraint firstItem="Hr1-BD-AHJ" firstAttribute="leading" secondItem="7Rb-1u-tkt" secondAttribute="trailing" constant="12" id="FXz-X3-l2b"/>
                 <constraint firstItem="7Rb-1u-tkt" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="18" id="HSt-Vh-vrP"/>
+                <constraint firstItem="zHK-is-ScR" firstAttribute="centerX" secondItem="Hr1-BD-AHJ" secondAttribute="centerX" id="NnL-Su-dL4"/>
+                <constraint firstItem="zHK-is-ScR" firstAttribute="centerY" secondItem="Hr1-BD-AHJ" secondAttribute="centerY" id="Pux-qP-kIO"/>
                 <constraint firstItem="1wb-t2-VOs" firstAttribute="top" secondItem="7Rb-1u-tkt" secondAttribute="bottom" constant="4" id="V0i-zL-M8w"/>
+                <constraint firstItem="zHK-is-ScR" firstAttribute="height" secondItem="Hr1-BD-AHJ" secondAttribute="height" id="Vas-xk-xuq"/>
                 <constraint firstItem="xyq-ug-M4x" firstAttribute="leading" secondItem="1wb-t2-VOs" secondAttribute="trailing" constant="8" id="hgC-Cd-bfs"/>
                 <constraint firstAttribute="bottom" secondItem="1wb-t2-VOs" secondAttribute="bottom" constant="13" id="hgq-yo-Vqc"/>
                 <constraint firstAttribute="trailing" secondItem="xyq-ug-M4x" secondAttribute="trailing" constant="18" id="oTE-1i-FGx"/>

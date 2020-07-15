@@ -53,6 +53,36 @@ class SearchBarView: UIView {
         return view
     }
     
+    @IBAction func segmentPressed(_ sender: UIButton) {
+        if segementToken?.selectedSegmentIndex == 1 {
+            segementToken?.selectedSegmentIndex = 0
+        }
+        else {
+            segementToken?.selectedSegmentIndex = 1
+        }
+        segmentPlaceholderSelection(segementToken)
+    }
+    
+    func segmentPlaceholderSelection(_ sender: UISegmentedControl?) {
+        if sender?.selectedSegmentIndex == 0 {
+            let text = textFieldSearch?.text
+            textFieldSearch?.text = ""
+            textFieldSearch?.placeholder = "Enter a token"
+            textFieldSearch?.resignFirstResponder()
+            textFieldSearch?.becomeFirstResponder()
+            textFieldSearch?.text = text
+            StudyListViewController.previousSegmentStateKeyWord = false
+        } else if sender?.selectedSegmentIndex == 1 {
+            let text = textFieldSearch?.text
+            textFieldSearch?.text = ""
+            textFieldSearch?.placeholder = "Enter keyword(s)"
+            textFieldSearch?.resignFirstResponder()
+            textFieldSearch?.becomeFirstResponder()
+            textFieldSearch?.text = text
+            StudyListViewController.previousSegmentStateKeyWord = true
+        }
+    }
+    
     @IBAction func buttonCancelAction(){
         
         UIView.animate(withDuration: 0.2,

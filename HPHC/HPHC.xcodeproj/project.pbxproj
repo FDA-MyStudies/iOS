@@ -3188,10 +3188,6 @@
 						ProvisioningStyle = Automatic;
 						TestTargetID = 6E7D2D551E433E8700763D4C;
 					};
-					897C19642451A49A00559770 = {
-						DevelopmentTeam = FWLLYUH7XR;
-						ProvisioningStyle = Automatic;
-					};
 					89C5EE7B23F16CFE00649359 = {
 						DevelopmentTeam = FWLLYUH7XR;
 						ProvisioningStyle = Automatic;
@@ -5701,7 +5697,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 9;
+				CURRENT_PROJECT_VERSION = 10;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = FWLLYUH7XR;
 				ENABLE_BITCODE = NO;
@@ -5737,7 +5733,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 9;
+				CURRENT_PROJECT_VERSION = 10;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = FWLLYUH7XR;
 				ENABLE_BITCODE = NO;

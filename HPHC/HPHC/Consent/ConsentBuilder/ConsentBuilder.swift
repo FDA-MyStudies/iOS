@@ -46,6 +46,7 @@ let kConsentSharingStepAllowWithoutSharing = "allowWithoutSharing"
 
 let kConsentReviewStepTitle = "title"
 let kConsentReviewStepSignatureTitle = "signatureTitle"
+let kConsentReviewConsentByLAR = "consentByLAR"
 let kConsentReviewStepSignatureContent = "reviewHTML"
 let kConsentReviewStepReasonForConsent = "reasonForConsent"
 
@@ -112,6 +113,7 @@ class ConsentBuilder {
 
     var consentDocument: ORKConsentDocument?
     var version: String?
+    var consentHasLAR: Bool = false
     var consentStatus: ConsentStatus?
     var consentHasVisualStep: Bool?
     static var currentConsent: ConsentBuilder?
@@ -132,6 +134,7 @@ class ConsentBuilder {
         consentResult = ConsentResult()
         consentDocument = ORKConsentDocument()
         version = ""
+        consentHasLAR = false
         consentHasVisualStep = false
 
         comprehension = Comprehension()
@@ -143,6 +146,8 @@ class ConsentBuilder {
     func initWithMetaData(metaDataDict: [String: Any]) {
         consentStatus = .pending
         consentHasVisualStep = false
+      
+      print("metaDataDict---\(metaDataDict)")
 
         if Utilities.isValidObject(someObject: metaDataDict as AnyObject?) {
             if Utilities.isValidValue(someObject: metaDataDict[kConsentVersion] as AnyObject?) {
@@ -173,6 +178,14 @@ class ConsentBuilder {
 
             if Utilities.isValidObject(someObject: reviewConsentDict as AnyObject?) {
                 reviewConsent?.initWithReviewDict(dict: reviewConsentDict)
+                let valLAR = reviewConsent?.consentByLAR ?? "No"
+              if valLAR.caseInsensitiveCompare("yes") == .orderedSame {
+                consentHasLAR = true
+              }
+              else {
+                consentHasLAR = false
+              }
+              print("consentHasLAR---\(consentHasLAR)---\(valLAR)")
             }
 
             let comprehensionDict = (metaDataDict[kConsentComprehension] as? [String: Any])!
@@ -368,6 +381,13 @@ class ConsentBuilder {
             stepArray?.append(comprehensionCompletionStep)
         }
 
+        if !consentHasLAR {
+            let larArr1 = appendLAR()
+            stepArray?.append(larArr1)
+            let larArr2 = appendLARParticipant()
+            stepArray?.append(larArr2)
+        }
+      
         if sharingConsentStep != nil, !StudyUpdates.studyConsentUpdated {
             stepArray?.append(sharingConsentStep!)
         }
@@ -391,13 +411,52 @@ class ConsentBuilder {
             stepArray?.append(consentCompletionStep)
             stepArray?.append(consentViewPdfStep)
             // stepArray?.append(completionStep)
+            print("stepArray---\(stepArray)")
 
-            let task = ORKNavigableOrderedTask(identifier: kConsentTaskIdentifierText, steps: stepArray)
+           let task = ORKNavigableOrderedTask(identifier: kConsentTaskIdentifierText, steps: stepArray)
+//            if !consentHasLAR {
+//                let larArr1 = appendLAR()
+//                let larArr2 = appendLARParticipant()
+//                
+//                let predicate2 = ORKResultPredicate.predicateForChoiceQuestionResult(with: ORKResultSelector(resultIdentifier: larArr2.identifier), expectedAnswerValue: 1 as NSCoding & NSCopying & NSObjectProtocol)
+//                
+//                //Mutiple Predicates
+//                let predicate3 = ORKResultPredicate.predicateForChoiceQuestionResult(with: ORKResultSelector(resultIdentifier: sharingConsentStep?.identifier ?? larArr2.identifier), expectedAnswerValue: 2 as NSCoding & NSCopying & NSObjectProtocol)
+//                
+//                let predi = [predicate3, predicate2]
+//                let desti = [larArr2.identifier, sharingConsentStep?.identifier ?? larArr2.identifier]
+//                
+//                let rule4 = ORKPredicateStepNavigationRule(resultPredicates: predi, destinationStepIdentifiers: desti, defaultStepIdentifier: larArr1.identifier, validateArrays: true)
+//                
+//                task.setNavigationRule(rule4, forTriggerStepIdentifier: larArr1.identifier)
+//                
+//            }
+            
             return task
         } else {
             return nil
         }
     }
+  
+  func appendLAR() -> LARConsentStep {
+      let eligibilityStep: LARConsentStep? = LARConsentStep(identifier: kLARConsentStep)
+  //    eligibilityStep?.type = "TOKEN"
+      
+//      if self.tokenTitle != nil {
+          eligibilityStep?.text = "self.tokenTitle!"
+//      }
+      return eligibilityStep!
+    }
+    
+    func appendLARParticipant() -> LARConsentParticipantStep {
+          let eligibilityStep: LARConsentParticipantStep? = LARConsentParticipantStep(identifier: kLARConsentParticipantStep)
+      //    eligibilityStep?.type = "TOKEN"
+          
+    //      if self.tokenTitle != nil {
+              eligibilityStep?.text = "self.tokenTitle!"
+    //      }
+          return eligibilityStep!
+        }
 }
 
 // MARK: SharingConsent Struct
@@ -463,12 +522,14 @@ struct ReviewConsent {
     var signatureTitle: String?
     var signatureContent: String?
     var reasonForConsent: String?
+    var consentByLAR: String?
 
     init() {
         title = ""
         signatureTitle = ""
         signatureContent = ""
         reasonForConsent = ""
+        consentByLAR = ""
     }
 
     /* initializer method which initializes all params
@@ -488,6 +549,9 @@ struct ReviewConsent {
             }
             if Utilities.isValidValue(someObject: dict[kConsentReviewStepReasonForConsent] as AnyObject) {
                 reasonForConsent = dict[kConsentReviewStepReasonForConsent] as? String
+            }
+            if Utilities.isValidValue(someObject: dict[kConsentReviewConsentByLAR] as AnyObject) {
+                consentByLAR = dict[kConsentReviewConsentByLAR] as? String
             }
         } else {
             Logger.sharedInstance.debug("ConsentDocument Step Dictionary is null:\(dict)")

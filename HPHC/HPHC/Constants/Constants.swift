@@ -100,7 +100,7 @@ let kMessageAgreeToTermsAndConditions = "Please agree to terms and conditions."
 
 let kMessageNewPasswordBlank = "Please enter your new password."
 let kMessageValidateChangePassword = "New password and old password are same."
-
+let kMessageRelationship = "Please enter your relationship to the participant."
 
 // MARK:- ChangePassword Constants
 let kChangePasswordTitleText = "CHANGE PASSWORD"

@@ -27,9 +27,14 @@ let kEligibilityTokenStep = "EligibilityTokenStep"
 
 let kInEligibilityStep = "InEligibilityStep"
 
+let kLARConsentStep = "LARConsentStep"
+let kLARConsentParticipantStep = "LARConsentParticipantStep"
+
 let kFetalKickCounterStep = "FetalKickCounter"
 let kEligibilityStepViewControllerIdentifier = "EligibilityStepViewController"
 let kInEligibilityStepViewControllerIdentifier = "InEligibilityStepViewController"
+let kLARStepViewControllerIdentifier = "LARConsentStepViewController"
+let kLARPartiStepViewControllerIdentifier = "LARConsentParticipantViewController"
 
 let kConsentTaskIdentifier = "ConsentTask"
 let kStudyDashboardViewControllerIdentifier = "StudyDashboardViewController"
@@ -911,7 +916,7 @@ extension StudyHomeViewController: ORKTaskViewControllerDelegate {
         return true
     }
 
-    public func taskViewController(_ taskViewController: ORKTaskViewController, didFinishWith reason: ORKTaskViewControllerFinishReason, error error: Error?) {
+    public func taskViewController(_ taskViewController: ORKTaskViewController, didFinishWith reason: ORKTaskViewControllerFinishReason, error: Error?) {
         consentRestorationData = nil
 
         if taskViewController.task?.identifier == kPasscodeTaskIdentifier {
@@ -925,6 +930,8 @@ extension StudyHomeViewController: ORKTaskViewControllerDelegate {
             })
             return
         }
+        
+        
 
         var taskResult: Any?
         switch reason {
@@ -1012,6 +1019,7 @@ extension StudyHomeViewController: ORKTaskViewControllerDelegate {
     }
 
     func taskViewController(_ taskViewController: ORKTaskViewController, stepViewControllerWillAppear stepViewController: ORKStepViewController) {
+        print("95---")
         if (taskViewController.result.results?.count)! > 1 {
             if activityBuilder?.actvityResult?.result?.count == taskViewController.result.results?.count {
                 // Removing the dummy result:Currentstep result which not presented yet
@@ -1076,7 +1084,12 @@ extension StudyHomeViewController: ORKTaskViewControllerDelegate {
                 stepViewController.goForward()
             } else {}
             
-        } else {
+        }
+        else if stepIndentifer == kLARConsentParticipantStep {
+            print("kLARConsentParticipantStep---Task-willAppear")
+            stepViewController.goForward()
+        }
+        else {
             // Back button is enabled
 
             if taskViewController.task?.identifier == kEligibilityConsentTask {
@@ -1086,18 +1099,39 @@ extension StudyHomeViewController: ORKTaskViewControllerDelegate {
             }
         }
     }
+    
+//    func taskViewController(_ taskViewController: ORKTaskViewController, shouldPresent step: ORKStep) -> Bool {
+//        print("16---")
+//        let stepIndentifer = step.identifier
+//        if stepIndentifer == kLARConsentStep {
+//            taskViewController.currentStepViewController?.goForward()
+////            stepViewController.goForward()
+//            return true
+//        }
+//        return true
+//    }
 
     // MARK: - StepViewController Delegate
 
-    public func stepViewController(_: ORKStepViewController, didFinishWith _: ORKStepViewControllerNavigationDirection) {}
+    public func stepViewController(_: ORKStepViewController, didFinishWith _: ORKStepViewControllerNavigationDirection) {
+      print("1---")
+  }
 
-    public func stepViewControllerResultDidChange(_: ORKStepViewController) {}
+    public func stepViewControllerResultDidChange(_: ORKStepViewController) {
+      print("2---")
+  }
 
-    public func stepViewControllerDidFail(_: ORKStepViewController, withError _: Error?) {}
+    public func stepViewControllerDidFail(_: ORKStepViewController, withError _: Error?) {
+      
+      print("3---")
+  }
 
     func taskViewController(_ taskViewController: ORKTaskViewController, viewControllerFor step: ORKStep) -> ORKStepViewController? {
+        
+        
+        
         // CurrentStep is TokenStep
-
+print("6---\(step.identifier)")
         if step.identifier == kEligibilityTokenStep {
             let gatewayStoryboard = UIStoryboard(name: kFetalKickCounterStep, bundle: nil)
 
@@ -1291,8 +1325,37 @@ extension StudyHomeViewController: ORKTaskViewControllerDelegate {
             } else {
                 return nil
             }
+        } else if step.identifier == kLARConsentStep {
+            let gatewayStoryboard = UIStoryboard(name: kFetalKickCounterStep, bundle: nil)
+
+            let ttController = (gatewayStoryboard.instantiateViewController(withIdentifier: kLARStepViewControllerIdentifier) as? LARConsentStepViewController)!
+            ttController.step = step
+
+            return ttController
+        } else if step.identifier == kLARConsentParticipantStep {
+            let gatewayStoryboard = UIStoryboard(name: kFetalKickCounterStep, bundle: nil)
+            
+            let ttController = (gatewayStoryboard.instantiateViewController(withIdentifier: kLARPartiStepViewControllerIdentifier) as? LARConsentParticipantViewController)!
+            ttController.step = step
+            
+            return ttController
         } else {
             return nil
         }
     }
+  
+  func taskViewController(_ taskViewController: ORKTaskViewController, didChange result: ORKTaskResult) {
+    print("4---")
+  }
+  
+  func taskViewController(_ taskViewController: ORKTaskViewController, stepViewControllerWillDisappear stepViewController: ORKStepViewController, navigationDirection direction: ORKStepViewControllerNavigationDirection) {
+    print("5---")
+    
+//    let step = stepViewController.step!
+//    if step.identifier == kLARConsentStep {
+//        print("5---\(step.identifier)")
+//        taskViewController.delegate?.taskViewController?(taskViewController, shouldPresent: ORKStep(identifier: "ConsentSharingStep")) //sharing MobileTesting
+//    }
+  }
+  
 }

@@ -55,6 +55,9 @@ struct WCPServerURLConstants {
     //local - btc
     //    static let ProductionURL = "http://192.168.0.44:3429/StudyMetaData/"
     //    static let DevelopmentURL = "192.168.0.44:3429/StudyMetaData/"
+  
+  //    static let ProductionURL = "https://104.197.211.26:8083/StudyMetaData/"
+  //    static let DevelopmentURL = "https://104.197.211.26:8083/StudyMetaData/"
     
     //AWS  - btc
     //        static let ProductionURL = "http://18.222.7.100:8080/StudyMetaData/"

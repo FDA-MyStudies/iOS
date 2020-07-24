@@ -558,6 +558,7 @@ class WCPServices: NSObject {
     func handleStudyUpdates(response: Dictionary<String, Any>){
         
         if Utilities.isValidObject(someObject: response as AnyObject?){
+          print("response---\(response)")
             _ = StudyUpdates(detail: response)
         }
     }

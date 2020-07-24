@@ -362,7 +362,7 @@ class NetworkWebServiceHandler: NSObject, URLSessionDelegate {
                         print("Serilization error")
                     }
                   
-                    error1 = self.configuration.parseError(errorResponse: responseDict!)
+                  error1 = self.configuration.parseError(errorResponse: responseDict ?? [:])
                 } else {
                     
                     error1 = NSError(domain: NSURLErrorDomain, code:statusCode,userInfo:[NSLocalizedDescriptionKey: status.1])

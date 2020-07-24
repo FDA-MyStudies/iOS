@@ -74,6 +74,9 @@ enum RegistrationMethods: String {
 }
 struct RegistrationServerURLConstants {
 
+//  static let ProductionURL = "https://35.222.67.4:8082/myStudiesUserMgmtWS/"
+//  static let DevelopmentURL = "https://35.222.67.4:8082/myStudiesUserMgmtWS/"
+  
     //Staging server
         static let ProductionURL = "https://hpreg-stage.lkcompliant.net/fdahpUserRegWS/"
         static let DevelopmentURL = "https://hpreg-stage.lkcompliant.net/fdahpUserRegWS/"

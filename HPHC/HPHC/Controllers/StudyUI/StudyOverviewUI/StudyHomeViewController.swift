@@ -1325,13 +1325,6 @@ print("6---\(step.identifier)")
             } else {
                 return nil
             }
-        } else if step.identifier == kLARConsentStep {
-            let gatewayStoryboard = UIStoryboard(name: kFetalKickCounterStep, bundle: nil)
-
-            let ttController = (gatewayStoryboard.instantiateViewController(withIdentifier: kLARStepViewControllerIdentifier) as? LARConsentStepViewController)!
-            ttController.step = step
-
-            return ttController
         } else if step.identifier == kLARConsentParticipantStep {
             let gatewayStoryboard = UIStoryboard(name: kFetalKickCounterStep, bundle: nil)
             

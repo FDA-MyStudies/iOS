@@ -352,9 +352,6 @@ class ConsentBuilder {
         if visualConsentStep != nil {
             if consentHasVisualStep! {
                 stepArray?.append(visualConsentStep!)
-            } else {
-                //  means all steps are custom only included in documents and there are no Visual Step
-                // Do Nothing
             }
         }
 
@@ -438,25 +435,34 @@ class ConsentBuilder {
         }
     }
   
-  func appendLAR() -> LARConsentStep {
-      let eligibilityStep: LARConsentStep? = LARConsentStep(identifier: kLARConsentStep)
-  //    eligibilityStep?.type = "TOKEN"
-      
-//      if self.tokenTitle != nil {
-          eligibilityStep?.text = "self.tokenTitle!"
-//      }
-      return eligibilityStep!
+    func appendLAR() -> ORKStep {
+
+        let textChoices = [
+            ORKTextChoice(text: LocalizableString.consentMyselfChoice.localizedString,
+                          value: "choice_1" as NSCoding & NSCopying & NSObjectProtocol),
+            ORKTextChoice(text: LocalizableString.consentOtherChoice.localizedString,
+                          value: "choice_2" as NSCoding & NSCopying & NSObjectProtocol)
+        ]
+
+        let answerFormat = ORKAnswerFormat.choiceAnswerFormat(with: .singleChoice, textChoices: textChoices)
+        let informedConsentStep = ORKQuestionStep(identifier: kLARConsentStep,
+                                                  title: nil,
+                                                  question: LocalizableString.consentOptionQuestion.localizedString,
+                                                  answer: answerFormat)
+        informedConsentStep.text = LocalizableString.consentLARTitle.localizedString
+        informedConsentStep.isOptional = false
+        return informedConsentStep
     }
     
     func appendLARParticipant() -> LARConsentParticipantStep {
-          let eligibilityStep: LARConsentParticipantStep? = LARConsentParticipantStep(identifier: kLARConsentParticipantStep)
-      //    eligibilityStep?.type = "TOKEN"
-          
-    //      if self.tokenTitle != nil {
-              eligibilityStep?.text = "self.tokenTitle!"
-    //      }
-          return eligibilityStep!
-        }
+        let eligibilityStep: LARConsentParticipantStep? = LARConsentParticipantStep(identifier: kLARConsentParticipantStep)
+        //    eligibilityStep?.type = "TOKEN"
+
+        //      if self.tokenTitle != nil {
+        eligibilityStep?.text = "self.tokenTitle!"
+        //      }
+        return eligibilityStep!
+    }
 }
 
 // MARK: SharingConsent Struct

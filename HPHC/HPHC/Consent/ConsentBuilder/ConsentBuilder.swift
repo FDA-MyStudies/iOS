@@ -113,7 +113,7 @@ class ConsentBuilder {
 
     var consentDocument: ORKConsentDocument?
     var version: String?
-    var consentHasLAR: Bool = false
+    
     var consentStatus: ConsentStatus?
     var consentHasVisualStep: Bool?
     static var currentConsent: ConsentBuilder?
@@ -343,114 +343,72 @@ class ConsentBuilder {
         let visualConsentStep: VisualConsentStep? = getVisualConsentStep()
         let sharingConsentStep: ConsentSharingStep? = getConsentSharingStep()
         let reviewConsentStep: ConsentReviewStep? = getReviewConsentStep()
-
+        
         let comprehensionSteps: [ORKStep]? = getComprehensionSteps()
         reviewConsentStep?.stepViewControllerClass()
-
+        
         var stepArray: [ORKStep]? = Array()
-
+        
         if visualConsentStep != nil {
             if consentHasVisualStep! {
                 stepArray?.append(visualConsentStep!)
             }
         }
-
+        
         // comprehension steps
         if comprehensionSteps != nil, (comprehensionSteps?.count)! > 0 {
             // adding Instruction Step for Comprehenion
             let comprehensionTestInstructionStep = customInstructionStep(identifier: kComprehensionInstructionStepIdentifier)
             comprehensionTestInstructionStep.text = kConsentComprehensionTestText
-
+            
             comprehensionTestInstructionStep.title = kConsentComprehensionTestTitle
             stepArray?.append(comprehensionTestInstructionStep)
-
+            
             // adding questionary
             for step in comprehensionSteps! {
                 stepArray?.append(step)
             }
-
+            
             // adding Completion Step
             let comprehensionCompletionStep = customInstructionStep(identifier: kComprehensionCompletionStepIdentifier)
             comprehensionCompletionStep.text = kComprehensionCompletionText
-
+            
             comprehensionCompletionStep.title = kComprehensionCompletionTitle
             comprehensionCompletionStep.image = #imageLiteral(resourceName: "successBlueBig")
             stepArray?.append(comprehensionCompletionStep)
         }
-
+        
         if !consentHasLAR {
             let larArr1 = appendLAR()
             stepArray?.append(larArr1)
             let larArr2 = appendLARParticipant()
             stepArray?.append(larArr2)
         }
-      
+        
         if sharingConsentStep != nil, !StudyUpdates.studyConsentUpdated {
             stepArray?.append(sharingConsentStep!)
         }
         if reviewConsentStep != nil {
             stepArray?.append(reviewConsentStep!)
         }
-
+        
         // PDF Generation Step
         let consentCompletionStep = ConsentCompletionStep(identifier: kConsentSharePdfCompletionStep)
         consentCompletionStep.mainTitle = kConsentCompletionMainTitle
         consentCompletionStep.subTitle = kConsentCompletionSubTitle
-
+        
         // PDF Viewer Step
         let consentViewPdfStep = ConsentPdfViewerStep(identifier: kConsentViewPdfCompletionStep)
-
+        
         // Final completion step
         let completionStep = CustomCompletionStep(identifier: kConsentCompletionStepIdentifier)
         completionStep.detailText = NSLocalizedString(kConsentCompletionMainTitle, comment: "")
-
+        
         if (stepArray?.count)! > 0 {
             stepArray?.append(consentCompletionStep)
             stepArray?.append(consentViewPdfStep)
             // stepArray?.append(completionStep)
-            print("stepArray---\(stepArray)")
-
-           let task = ORKNavigableOrderedTask(identifier: kConsentTaskIdentifierText, steps: stepArray)
-            if !consentHasLAR {
-                var LARIdentifier1 = String()
-                if !(sharingConsentStep?.identifier.isEmpty ?? true) {
-                    LARIdentifier1 = sharingConsentStep?.identifier ?? ""
-                }
-                 else if !(reviewConsentStep?.identifier.isEmpty ?? true) {
-                     LARIdentifier1 = reviewConsentStep?.identifier ?? ""
-                 }
-                else {
-                    LARIdentifier1 = consentCompletionStep.identifier
-                }
-                print("LARIdentifier1---\(LARIdentifier1)")
-                
-                let predicate2 = ORKResultPredicate.predicateForChoiceQuestionResult(with: ORKResultSelector(resultIdentifier: LARIdentifier1), expectedAnswerValue: "Choice_1" as NSCoding & NSCopying & NSObjectProtocol)
-                
-                //Mutiple Predicates
-                let predicate3 = ORKResultPredicate.predicateForChoiceQuestionResult(with: ORKResultSelector(resultIdentifier: kLARConsentParticipantStep), expectedAnswerValue: "Choice_2" as NSCoding & NSCopying & NSObjectProtocol)
-                
-                let predi = [predicate3, predicate2]
-                let desti = [kLARConsentParticipantStep, LARIdentifier1]
-                
-                let rule4 = ORKPredicateStepNavigationRule(resultPredicates: predi, destinationStepIdentifiers: desti, defaultStepIdentifier: LARIdentifier1, validateArrays: true)
-                
-//                task.setNavigationRule(rule4, forTriggerStepIdentifier: kLARConsentStep)
-                //\\
-                
-                var resultSelector = ORKResultSelector(stepIdentifier: String(describing: kLARConsentStep), resultIdentifier: String(describing: LARIdentifier1))
-                let predicateFormItem01 = ORKResultPredicate.predicateForChoiceQuestionResult(with: resultSelector, expectedAnswerValue: "Choice_1" as NSCoding & NSCopying & NSObjectProtocol)
-                
-                resultSelector = ORKResultSelector(stepIdentifier: String(describing: kLARConsentStep), resultIdentifier: String(describing: LARIdentifier1))
-                let predicateFormItem02 = ORKResultPredicate.predicateForChoiceQuestionResult(with: resultSelector, expectedAnswerValue: "Choice_2" as NSCoding & NSCopying & NSObjectProtocol)
-                
-                
-                let predicateEligible = NSCompoundPredicate(andPredicateWithSubpredicates: [predicateFormItem01, predicateFormItem02])
-                let predicateRule = ORKPredicateStepNavigationRule(resultPredicatesAndDestinationStepIdentifiers: [ (predicateEligible, String(describing: kLARConsentStep)) ])
-                
-                
-//                task.setNavigationRule(predicateRule, forTriggerStepIdentifier: String(describing: kLARConsentStep))
-                
-            }
+            let task = ORKNavigableOrderedTask(identifier: kConsentTaskIdentifierText, steps: stepArray)
             
             return task
         } else {
@@ -459,7 +417,6 @@ class ConsentBuilder {
     }
   
     func appendLAR() -> ORKQuestionStep {
-        
         let textChoices = [
             ORKTextChoice(text: LocalizableString.consentMyselfChoice.localizedString,
                           value: "Choice_1" as NSCoding & NSCopying & NSObjectProtocol),
@@ -493,7 +450,6 @@ class ConsentBuilder {
         }catch {
             //Do Nothing
         }
-        
         
         let relationAnswerFormat = ORKAnswerFormat.textAnswerFormat(withValidationRegularExpression: regex, invalidMessage: "Invalid")
         relationAnswerFormat.multipleLines = false

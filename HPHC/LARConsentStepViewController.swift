@@ -131,10 +131,10 @@ class LARConsentStepViewController: ORKStepViewController {
         
         self.view.endEditing(true)
         if !hasOnBehalfSelected {
-            self.goForward()
+//            self.goForward()
 //           let _ = self.taskViewController?.delegate?.taskViewController?(self.taskViewController!, shouldPresent: ORKStep(identifier: "sharing MobileTesting"))
         } else {
-            self.goForward()
+//            self.goForward()
         }
     }
     

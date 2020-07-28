@@ -29,6 +29,8 @@ let kInEligibilityStep = "InEligibilityStep"
 
 let kLARConsentStep = "LARConsentStep"
 let kLARConsentParticipantStep = "LARConsentParticipantStep"
+let kLARConsentParticipantStepItem1 = "LARConsentParticipantStepItem1"
+let kLARConsentParticipantStepItem2 = "LARConsentParticipantStepItem2"
 
 let kFetalKickCounterStep = "FetalKickCounter"
 let kEligibilityStepViewControllerIdentifier = "EligibilityStepViewController"
@@ -327,7 +329,49 @@ class StudyHomeViewController: UIViewController {
             eligibilitySteps?.append(stepDict)
         }
 
-        var orkOrderedTask: ORKTask? = ORKOrderedTask(identifier: kEligibilityConsentTask, steps: eligibilitySteps)
+        var orkOrderedTask: ORKTask? = ORKNavigableOrderedTask(identifier: kEligibilityConsentTask, steps: eligibilitySteps) //ORKOrderedTask
+        
+//        if !consentHasLAR {
+            var LARIdentifier1 = "Review" //String()
+//            if !(sharingConsentStep?.identifier.isEmpty ?? true) {
+//                LARIdentifier1 = sharingConsentStep?.identifier ?? ""
+//            }
+//            else if !(reviewConsentStep?.identifier.isEmpty ?? true) {
+//                LARIdentifier1 = reviewConsentStep?.identifier ?? ""
+//            }
+//            else {
+//                LARIdentifier1 = consentCompletionStep.identifier
+//            }
+            print("LARIdentifier1---\(LARIdentifier1)")
+            
+            let predicate2 = ORKResultPredicate.predicateForChoiceQuestionResult(with: ORKResultSelector(resultIdentifier: LARIdentifier1), expectedAnswerValue: "Choice_1" as NSCoding & NSCopying & NSObjectProtocol)
+            
+            //Mutiple Predicates
+            let predicate3 = ORKResultPredicate.predicateForChoiceQuestionResult(with: ORKResultSelector(resultIdentifier: kLARConsentParticipantStep), expectedAnswerValue: "Choice_2" as NSCoding & NSCopying & NSObjectProtocol)
+            
+            let predi = [predicate3, predicate2]
+            let desti = [kLARConsentParticipantStep, LARIdentifier1]
+            
+            let rule4 = ORKPredicateStepNavigationRule(resultPredicates: predi, destinationStepIdentifiers: desti, defaultStepIdentifier: LARIdentifier1, validateArrays: true)
+            
+            //                task.setNavigationRule(rule4, forTriggerStepIdentifier: kLARConsentStep)
+            //\\
+            
+            var resultSelector = ORKResultSelector(stepIdentifier: String(describing: kLARConsentStep), resultIdentifier: String(describing: LARIdentifier1))
+            let predicateFormItem01 = ORKResultPredicate.predicateForChoiceQuestionResult(with: resultSelector, expectedAnswerValue: "Choice_1" as NSCoding & NSCopying & NSObjectProtocol)
+            
+            resultSelector = ORKResultSelector(stepIdentifier: String(describing: kLARConsentStep), resultIdentifier: String(describing: LARIdentifier1))
+            let predicateFormItem02 = ORKResultPredicate.predicateForChoiceQuestionResult(with: resultSelector, expectedAnswerValue: "Choice_2" as NSCoding & NSCopying & NSObjectProtocol)
+            
+            
+            let predicateEligible = NSCompoundPredicate(andPredicateWithSubpredicates: [predicateFormItem01, predicateFormItem02])
+            let predicateRule = ORKPredicateStepNavigationRule(resultPredicatesAndDestinationStepIdentifiers: [ (predicateEligible, String(describing: kLARConsentStep)) ])
+            
+            
+//            (orkOrderedTask as? ORKNavigableOrderedTask)!.setNavigationRule(predicateRule, forTriggerStepIdentifier: String(describing: kLARConsentStep))
+            
+//        }
+        
 
         if EligibilityBuilder.currentEligibility?.type == .test || EligibilityBuilder.currentEligibility?.type == .both {
             orkOrderedTask = ORKNavigableOrderedTask(identifier: kEligibilityConsentTask, steps: eligibilitySteps)
@@ -424,6 +468,8 @@ class StudyHomeViewController: UIViewController {
         }
 
         if orkOrderedTask is ORKNavigableOrderedTask {
+            (orkOrderedTask as? ORKNavigableOrderedTask)!.setNavigationRule(rule4, forTriggerStepIdentifier: kLARConsentStep)
+            
             if consentRestorationData != nil {
                 taskViewController = ORKTaskViewController(task: (orkOrderedTask as? ORKNavigableOrderedTask)!, restorationData: consentRestorationData, delegate: self)
 
@@ -1084,10 +1130,9 @@ extension StudyHomeViewController: ORKTaskViewControllerDelegate {
                 stepViewController.goForward()
             } else {}
             
-        }
-        else if stepIndentifer == kLARConsentParticipantStep {
-            print("kLARConsentParticipantStep---Task-willAppear")
-            stepViewController.goForward()
+        } else if stepIndentifer == kLARConsentStep || stepIndentifer == kLARConsentParticipantStep {
+            stepViewController.backButtonItem?.isEnabled = true
+            stepViewController.cancelButtonItem?.isEnabled = true
         }
         else {
             // Back button is enabled
@@ -1326,12 +1371,7 @@ print("6---\(step.identifier)")
                 return nil
             }
         } else if step.identifier == kLARConsentParticipantStep {
-            let gatewayStoryboard = UIStoryboard(name: kFetalKickCounterStep, bundle: nil)
-            
-            let ttController = (gatewayStoryboard.instantiateViewController(withIdentifier: kLARPartiStepViewControllerIdentifier) as? LARConsentParticipantViewController)!
-            ttController.step = step
-            
-            return ttController
+            return nil
         } else {
             return nil
         }

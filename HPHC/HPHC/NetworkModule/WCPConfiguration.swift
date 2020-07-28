@@ -60,12 +60,12 @@ struct WCPServerURLConstants {
   //    static let DevelopmentURL = "https://104.197.211.26:8083/StudyMetaData/"
     
     //AWS  - btc
-    //        static let ProductionURL = "http://18.222.7.100:8080/StudyMetaData/"
-    //        static let DevelopmentURL = "http://18.222.7.100:8080/StudyMetaData/"
+            static let ProductionURL = "http://18.222.7.100:8080/StudyMetaData/"
+            static let DevelopmentURL = "http://18.222.7.100:8080/StudyMetaData/"
     //
     //Staging
-        static let ProductionURL = "https://hpwcp-stage.lkcompliant.net/StudyMetaData/"
-        static let DevelopmentURL = "https://hpwcp-stage.lkcompliant.net/StudyMetaData/"
+//        static let ProductionURL = "https://hpwcp-stage.lkcompliant.net/StudyMetaData/"
+//        static let DevelopmentURL = "https://hpwcp-stage.lkcompliant.net/StudyMetaData/"
     
 //    static let ProductionURL = "https://hpwcp.lkcompliant.net/StudyMetaData/"
 //    static let DevelopmentURL = "https://hpwcp.lkcompliant.net/StudyMetaData/"

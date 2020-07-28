@@ -411,23 +411,46 @@ class ConsentBuilder {
             print("stepArray---\(stepArray)")
 
            let task = ORKNavigableOrderedTask(identifier: kConsentTaskIdentifierText, steps: stepArray)
-//            if !consentHasLAR {
-//                let larArr1 = appendLAR()
-//                let larArr2 = appendLARParticipant()
-//                
-//                let predicate2 = ORKResultPredicate.predicateForChoiceQuestionResult(with: ORKResultSelector(resultIdentifier: larArr2.identifier), expectedAnswerValue: 1 as NSCoding & NSCopying & NSObjectProtocol)
-//                
-//                //Mutiple Predicates
-//                let predicate3 = ORKResultPredicate.predicateForChoiceQuestionResult(with: ORKResultSelector(resultIdentifier: sharingConsentStep?.identifier ?? larArr2.identifier), expectedAnswerValue: 2 as NSCoding & NSCopying & NSObjectProtocol)
-//                
-//                let predi = [predicate3, predicate2]
-//                let desti = [larArr2.identifier, sharingConsentStep?.identifier ?? larArr2.identifier]
-//                
-//                let rule4 = ORKPredicateStepNavigationRule(resultPredicates: predi, destinationStepIdentifiers: desti, defaultStepIdentifier: larArr1.identifier, validateArrays: true)
-//                
-//                task.setNavigationRule(rule4, forTriggerStepIdentifier: larArr1.identifier)
-//                
-//            }
+            if !consentHasLAR {
+                var LARIdentifier1 = String()
+                if !(sharingConsentStep?.identifier.isEmpty ?? true) {
+                    LARIdentifier1 = sharingConsentStep?.identifier ?? ""
+                }
+                 else if !(reviewConsentStep?.identifier.isEmpty ?? true) {
+                     LARIdentifier1 = reviewConsentStep?.identifier ?? ""
+                 }
+                else {
+                    LARIdentifier1 = consentCompletionStep.identifier
+                }
+                print("LARIdentifier1---\(LARIdentifier1)")
+                
+                let predicate2 = ORKResultPredicate.predicateForChoiceQuestionResult(with: ORKResultSelector(resultIdentifier: LARIdentifier1), expectedAnswerValue: "Choice_1" as NSCoding & NSCopying & NSObjectProtocol)
+                
+                //Mutiple Predicates
+                let predicate3 = ORKResultPredicate.predicateForChoiceQuestionResult(with: ORKResultSelector(resultIdentifier: kLARConsentParticipantStep), expectedAnswerValue: "Choice_2" as NSCoding & NSCopying & NSObjectProtocol)
+                
+                let predi = [predicate3, predicate2]
+                let desti = [kLARConsentParticipantStep, LARIdentifier1]
+                
+                let rule4 = ORKPredicateStepNavigationRule(resultPredicates: predi, destinationStepIdentifiers: desti, defaultStepIdentifier: LARIdentifier1, validateArrays: true)
+                
+//                task.setNavigationRule(rule4, forTriggerStepIdentifier: kLARConsentStep)
+                //\\
+                
+                var resultSelector = ORKResultSelector(stepIdentifier: String(describing: kLARConsentStep), resultIdentifier: String(describing: LARIdentifier1))
+                let predicateFormItem01 = ORKResultPredicate.predicateForChoiceQuestionResult(with: resultSelector, expectedAnswerValue: "Choice_1" as NSCoding & NSCopying & NSObjectProtocol)
+                
+                resultSelector = ORKResultSelector(stepIdentifier: String(describing: kLARConsentStep), resultIdentifier: String(describing: LARIdentifier1))
+                let predicateFormItem02 = ORKResultPredicate.predicateForChoiceQuestionResult(with: resultSelector, expectedAnswerValue: "Choice_2" as NSCoding & NSCopying & NSObjectProtocol)
+                
+                
+                let predicateEligible = NSCompoundPredicate(andPredicateWithSubpredicates: [predicateFormItem01, predicateFormItem02])
+                let predicateRule = ORKPredicateStepNavigationRule(resultPredicatesAndDestinationStepIdentifiers: [ (predicateEligible, String(describing: kLARConsentStep)) ])
+                
+                
+//                task.setNavigationRule(predicateRule, forTriggerStepIdentifier: String(describing: kLARConsentStep))
+                
+            }
             
             return task
         } else {
@@ -435,15 +458,15 @@ class ConsentBuilder {
         }
     }
   
-    func appendLAR() -> ORKStep {
-
+    func appendLAR() -> ORKQuestionStep {
+        
         let textChoices = [
             ORKTextChoice(text: LocalizableString.consentMyselfChoice.localizedString,
-                          value: "choice_1" as NSCoding & NSCopying & NSObjectProtocol),
+                          value: "Choice_1" as NSCoding & NSCopying & NSObjectProtocol),
             ORKTextChoice(text: LocalizableString.consentOtherChoice.localizedString,
-                          value: "choice_2" as NSCoding & NSCopying & NSObjectProtocol)
+                          value: "Choice_2" as NSCoding & NSCopying & NSObjectProtocol)
         ]
-
+        
         let answerFormat = ORKAnswerFormat.choiceAnswerFormat(with: .singleChoice, textChoices: textChoices)
         let informedConsentStep = ORKQuestionStep(identifier: kLARConsentStep,
                                                   title: nil,
@@ -454,14 +477,66 @@ class ConsentBuilder {
         return informedConsentStep
     }
     
-    func appendLARParticipant() -> LARConsentParticipantStep {
-        let eligibilityStep: LARConsentParticipantStep? = LARConsentParticipantStep(identifier: kLARConsentParticipantStep)
-        //    eligibilityStep?.type = "TOKEN"
-
-        //      if self.tokenTitle != nil {
-        eligibilityStep?.text = "self.tokenTitle!"
-        //      }
-        return eligibilityStep!
+    func appendLARParticipant() -> ORKFormStep {
+        
+        let step = ORKFormStep(identifier: kLARConsentParticipantStep,
+                               title: nil, text: "")
+        
+        // A first field, for entering an integer.
+        let relationshipText = LocalizableString.consentLARParticipantSectionTitle.localizedString
+        let relationSectionTitleItem = ORKFormItem(sectionTitle: relationshipText)
+        
+        var regex = NSRegularExpression()
+        do
+        {
+            regex = try NSRegularExpression.init(pattern: "[a-zA-Z]" , options: [])
+        }catch {
+            //Do Nothing
+        }
+        
+        
+        let relationAnswerFormat = ORKAnswerFormat.textAnswerFormat(withValidationRegularExpression: regex, invalidMessage: "Invalid")
+        relationAnswerFormat.multipleLines = false
+        relationAnswerFormat.keyboardType = .asciiCapable
+        relationAnswerFormat.maximumLength = 100
+        
+        let placeHolder = NSLocalizedString("Required", comment: "")
+        let relationItem = ORKFormItem(identifier: "relationItem",
+                                       text: "", answerFormat: relationAnswerFormat)
+        relationItem.placeholder = placeHolder
+        relationItem.isOptional = false
+        
+        let nameDescription = LocalizableString.consentLARParticipantNameDesc.localizedString
+        let nameDescItem = ORKFormItem(sectionTitle: nameDescription)
+        
+        let firstNameText = LocalizableString.consentLARParticipantFirstName.localizedString
+        relationAnswerFormat.maximumLength = 200
+        let firstNameItem = ORKFormItem(identifier: kLARConsentParticipantStepItem1,
+                                        text: firstNameText, answerFormat: relationAnswerFormat)
+        
+        firstNameItem.placeholder = placeHolder
+        firstNameItem.isOptional = false
+        
+        // A second field, for entering a time interval.
+        let lastNameText = LocalizableString.consentLARParticipantLastName.localizedString
+        let lastNameItem = ORKFormItem(identifier: kLARConsentParticipantStepItem2,
+                                       text: lastNameText, answerFormat: relationAnswerFormat)
+        lastNameItem.placeholder = placeHolder
+        lastNameItem.isOptional = false
+        
+        
+        step.formItems = [
+            relationSectionTitleItem,
+            relationItem,
+            nameDescItem,
+            firstNameItem,
+            lastNameItem
+            
+        ]
+        
+        step.isOptional = false
+        
+        return step
     }
 }
 

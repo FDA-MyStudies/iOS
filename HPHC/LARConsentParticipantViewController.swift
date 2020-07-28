@@ -50,7 +50,6 @@ class LARConsentParticipantViewController: ORKStepViewController {
     required init?(coder aDecoder: NSCoder) {
         print("92---")
         super.init(coder: aDecoder)
-        self.goForward()
     }
     
     override func hasNextStep() -> Bool {
@@ -67,7 +66,6 @@ class LARConsentParticipantViewController: ORKStepViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        goForward()
         print("93---")
         
         self.taskViewController?.navigationBar.isHidden = true
@@ -78,7 +76,6 @@ class LARConsentParticipantViewController: ORKStepViewController {
     override func viewWillAppear(_ animated: Bool) {
             super.viewWillAppear(animated)
         print("94---")
-//        self.goForward()
             self.navigationController?.isToolbarHidden = true
         }
     
@@ -102,7 +99,7 @@ class LARConsentParticipantViewController: ORKStepViewController {
         }
         else {
             self.view.endEditing(true)
-            self.goForward()
+//            self.goForward()
         }
     }
     

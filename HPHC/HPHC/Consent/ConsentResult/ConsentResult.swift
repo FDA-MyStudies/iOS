@@ -20,6 +20,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 import Foundation
 import ResearchKit
+import PDFKit
 
 class ConsentResult {
     
@@ -71,10 +72,13 @@ class ConsentResult {
                     if self.consentPdfData?.count == 0 {
                     self.consentPath = "Consent" +  "_" + "\((Study.currentStudy?.studyId)!)" + ".pdf"
 
+                        var secondFullPath = ""
+                        var thirdFullPath = ""
+                        var fullPath: String!
                     self.consentDocument?.makePDF(completionHandler: { data,error in
                         print("data: \(String(describing: data))    \n  error: \(String(describing: error))")
                         
-                        var fullPath: String!
+                        
                         let path =  AKUtility.baseFilePath + "/study"
                         let fileName: String = "Consent" +  "_" + "\((Study.currentStudy?.studyId)!)" + ".pdf"
                         
@@ -99,9 +103,9 @@ class ConsentResult {
                             
                             let defaultPath = fullPath
                             fullPath = "file://" + "\(fullPath!)"
-                            
+                            print("fullPath---\(fullPath)")
                             try data?.write(to:  URL(string:fullPath!)!)
-                            FileDownloadManager.encyptFile(pathURL: URL(string: defaultPath!)!)
+//                            FileDownloadManager.encyptFile(pathURL: URL(string: defaultPath!)!)
                             
                             let notificationName = Notification.Name(kPDFCreationNotificationId)
                             // Post notification
@@ -110,6 +114,50 @@ class ConsentResult {
                         } catch let error as NSError {
                             print(error.localizedDescription)
                         }
+                        
+                        
+                        
+                        
+                        if !consentHasLAR {
+                        let title = "Consent by a Legally Authorized Representative"
+                        let body = "I am signing the consent document on behalf of the participant, as a legally-authorized representative of the participant."
+                        let image = signatureStepResult?.signature?.signatureImage ?? UIImage() // UIImage()
+                        let contact = ""
+                        
+                        let pdfCreator = PDFCreator(title: title, body: body, image: image, contact: contact)
+                        let pdfData = pdfCreator.createFlyer()
+                        
+                        
+                            secondFullPath = path + "/" + "second.pdf"
+                            thirdFullPath = path + "/" + "third.pdf"
+                        do {
+                            
+                            if FileManager.default.fileExists(atPath: secondFullPath){
+                                try FileManager.default.removeItem(atPath: secondFullPath)
+                            }
+                            FileManager.default.createFile(atPath:secondFullPath , contents: pdfData, attributes: [:])
+                            
+                            let defaultPath = secondFullPath
+                            secondFullPath = "file://" + "\(secondFullPath)"
+                            print("2fullPath---\(secondFullPath)")
+                            try pdfData.write(to:  URL(string:secondFullPath)!)
+//                            FileDownloadManager.encyptFile(pathURL: URL(string: defaultPath!)!)
+                            
+//                            let notificationName = Notification.Name(kPDFCreationNotificationId)
+//                            // Post notification
+//                            NotificationCenter.default.post(name: notificationName, object: nil)
+                            self.mergePdfFiles(sourcePdfFiles: [fullPath,secondFullPath], destPdfFile: thirdFullPath)
+                            
+                        }
+                        catch let error as NSError {
+                                                   print(error.localizedDescription)
+                                               }
+                        
+                            
+                            
+                        
+                        }
+                        
                     })
                     } else {
                        
@@ -136,6 +184,8 @@ class ConsentResult {
                             }
                             FileManager.default.createFile(atPath:fullPath , contents: data, attributes: [:])
                             fullPath = "file://" + "\(fullPath!)"
+                            
+                            print("fullPath---\(fullPath)")
                             
                             try data?.write(to:  URL(string: fullPath!)!)
                             FileDownloadManager.encyptFile(pathURL: URL(string: fullPath!)!)
@@ -223,5 +273,15 @@ class ConsentResult {
         }
         
         return activityDict!
+    }
+    
+    func mergePdfFiles(sourcePdfFiles:[String], destPdfFile:String) {
+        let pdfDoc1 = PDFDocument(url: URL(string: sourcePdfFiles[0])!)!
+        
+        let pdfDoc2 = PDFDocument(url: URL(string: sourcePdfFiles[1])!)!
+        let page2 = pdfDoc2.page(at: 0)!
+        pdfDoc1.removePage(at: 1)
+        pdfDoc1.insert(page2, at: 1)
+        pdfDoc1.write(toFile: destPdfFile)
     }
 }

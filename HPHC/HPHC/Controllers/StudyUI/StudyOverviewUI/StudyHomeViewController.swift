@@ -1043,7 +1043,6 @@ extension StudyHomeViewController: ORKTaskViewControllerDelegate {
     }
 
     func taskViewController(_ taskViewController: ORKTaskViewController, stepViewControllerWillAppear stepViewController: ORKStepViewController) {
-        print("95---")
         if (taskViewController.result.results?.count)! > 1 {
             if activityBuilder?.actvityResult?.result?.count == taskViewController.result.results?.count {
                 // Removing the dummy result:Currentstep result which not presented yet
@@ -1122,17 +1121,6 @@ extension StudyHomeViewController: ORKTaskViewControllerDelegate {
             }
         }
     }
-    
-//    func taskViewController(_ taskViewController: ORKTaskViewController, shouldPresent step: ORKStep) -> Bool {
-//        print("16---")
-//        let stepIndentifer = step.identifier
-//        if stepIndentifer == kLARConsentStep {
-//            taskViewController.currentStepViewController?.goForward()
-////            stepViewController.goForward()
-//            return true
-//        }
-//        return true
-//    }
 
     // MARK: - StepViewController Delegate
 

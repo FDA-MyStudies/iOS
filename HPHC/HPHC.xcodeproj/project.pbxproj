@@ -627,6 +627,12 @@
 		7878B31D2216C6E20052FC23 /* HPHCTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7878B31C2216C6E20052FC23 /* HPHCTests.swift */; };
 		82ED02EDDA9A111295A73287 /* Pods_mSPARC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2568EA2C0BCE313BAB2B3B29 /* Pods_mSPARC.framework */; };
 		83E41E58CE40BA32BA0F019B /* Pods_HPHCUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E4CF7BB238C017BF7E2A6346 /* Pods_HPHCUITests.framework */; };
+		84E8D61724D161B6008C38D5 /* PDFCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E8D61624D161B6008C38D5 /* PDFCreator.swift */; };
+		84E8D61824D161B6008C38D5 /* PDFCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E8D61624D161B6008C38D5 /* PDFCreator.swift */; };
+		84E8D61924D161B6008C38D5 /* PDFCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E8D61624D161B6008C38D5 /* PDFCreator.swift */; };
+		84E8D61A24D161B6008C38D5 /* PDFCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E8D61624D161B6008C38D5 /* PDFCreator.swift */; };
+		84E8D61B24D161B6008C38D5 /* PDFCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E8D61624D161B6008C38D5 /* PDFCreator.swift */; };
+		84E8D61C24D161B6008C38D5 /* PDFCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E8D61624D161B6008C38D5 /* PDFCreator.swift */; };
 		89006EF22451B1D500B624FD /* COVID-19.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 89006EF02451B1D500B624FD /* COVID-19.storyboard */; };
 		89006EF32451B1D500B624FD /* COVID-19.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 89006EF12451B1D500B624FD /* COVID-19.xcassets */; };
 		89055913230148FD005FB284 /* Branding.plist in Resources */ = {isa = PBXBuildFile; fileRef = 89055912230148FD005FB284 /* Branding.plist */; };
@@ -1750,6 +1756,7 @@
 		7878B31E2216C6E20052FC23 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7BDC002620C7855C409516D3 /* Pods-HPHC.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HPHC.debug.xcconfig"; path = "Pods/Target Support Files/Pods-HPHC/Pods-HPHC.debug.xcconfig"; sourceTree = "<group>"; };
 		80162EB0842AABC6DBF4AC42 /* Pods_FDAMS_HIMSS_App.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FDAMS_HIMSS_App.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		84E8D61624D161B6008C38D5 /* PDFCreator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFCreator.swift; sourceTree = "<group>"; };
 		87A4F9AAE7A1B8C36C9FBDDF /* Pods_HPHC_QA.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HPHC_QA.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		89006EF02451B1D500B624FD /* COVID-19.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "COVID-19.storyboard"; sourceTree = "<group>"; };
 		89006EF12451B1D500B624FD /* COVID-19.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "COVID-19.xcassets"; sourceTree = "<group>"; };
@@ -2073,6 +2080,7 @@
 		6E7D2D4D1E433E8700763D4C = {
 			isa = PBXGroup;
 			children = (
+				84E8D61624D161B6008C38D5 /* PDFCreator.swift */,
 				6EF0BC352223D1D5004F2357 /* ResearchKit.xcodeproj */,
 				6E7D2D581E433E8700763D4C /* HPHC */,
 				7878B31B2216C6E20052FC23 /* HPHCTests */,
@@ -4160,6 +4168,7 @@
 				94B3DD501E6ED8E500327AE5 /* SecondGatewayOverviewViewController.swift in Sources */,
 				8948349D22BB9C59000B7BFA /* HPHCSettings.swift in Sources */,
 				6EF2FCEF1E72CDE900B5F212 /* LeftMenuResourceTableViewCell.swift in Sources */,
+				84E8D61724D161B6008C38D5 /* PDFCreator.swift in Sources */,
 				941909B81E5310D6001B01C5 /* Gateway.swift in Sources */,
 				94B3DD451E6ED8E500327AE5 /* ProfileTableViewCell.swift in Sources */,
 				6EED7B391E6574FE002C1FA3 /* FetalKickCounterStep.swift in Sources */,
@@ -4334,6 +4343,7 @@
 				6FC12AF722FD60FE0075940B /* SecondGatewayOverviewViewController.swift in Sources */,
 				6FC12AF822FD60FE0075940B /* HPHCSettings.swift in Sources */,
 				6FC12AF922FD60FE0075940B /* LeftMenuResourceTableViewCell.swift in Sources */,
+				84E8D61924D161B6008C38D5 /* PDFCreator.swift in Sources */,
 				6FC12AFA22FD60FE0075940B /* Gateway.swift in Sources */,
 				6FC12AFB22FD60FE0075940B /* ProfileTableViewCell.swift in Sources */,
 				6FC12AFC22FD60FE0075940B /* FetalKickCounterStep.swift in Sources */,
@@ -4498,6 +4508,7 @@
 				6FD61BF8244597F200B71685 /* ActivitiesTableViewCell.swift in Sources */,
 				6FD61BF9244597F200B71685 /* SecondGatewayOverviewViewController.swift in Sources */,
 				6FD61BFA244597F200B71685 /* HPHCSettings.swift in Sources */,
+				84E8D61B24D161B6008C38D5 /* PDFCreator.swift in Sources */,
 				6FD61BFB244597F200B71685 /* LeftMenuResourceTableViewCell.swift in Sources */,
 				6FD61BFC244597F200B71685 /* Gateway.swift in Sources */,
 				6FD61BFD244597F200B71685 /* ProfileTableViewCell.swift in Sources */,
@@ -4684,6 +4695,7 @@
 				897C198D2451A49A00559770 /* ActivitiesTableViewCell.swift in Sources */,
 				897C198E2451A49A00559770 /* SecondGatewayOverviewViewController.swift in Sources */,
 				897C198F2451A49A00559770 /* HPHCSettings.swift in Sources */,
+				84E8D61C24D161B6008C38D5 /* PDFCreator.swift in Sources */,
 				897C19902451A49A00559770 /* LeftMenuResourceTableViewCell.swift in Sources */,
 				897C19912451A49A00559770 /* Gateway.swift in Sources */,
 				897C19922451A49A00559770 /* ProfileTableViewCell.swift in Sources */,
@@ -4936,6 +4948,7 @@
 				6F90AB4D24693DD200F4D1BE /* UIView+Extensions.swift in Sources */,
 				89C5EEFC23F16CFE00649359 /* ChangePasswordViewController.swift in Sources */,
 				89C5EEFD23F16CFE00649359 /* ComprehensionFailure.swift in Sources */,
+				84E8D61A24D161B6008C38D5 /* PDFCreator.swift in Sources */,
 				89C5EEFE23F16CFE00649359 /* ActivityFilterView.swift in Sources */,
 				89C5EEFF23F16CFE00649359 /* VerificationViewController.swift in Sources */,
 				89C5EF0023F16CFE00649359 /* FirstGatewayOverviewViewController.swift in Sources */,
@@ -5008,6 +5021,7 @@
 				89DBF76B22F9893000AB3EF2 /* SecondGatewayOverviewViewController.swift in Sources */,
 				89DBF76C22F9893000AB3EF2 /* HPHCSettings.swift in Sources */,
 				89DBF76D22F9893000AB3EF2 /* LeftMenuResourceTableViewCell.swift in Sources */,
+				84E8D61824D161B6008C38D5 /* PDFCreator.swift in Sources */,
 				89DBF76E22F9893000AB3EF2 /* Gateway.swift in Sources */,
 				89DBF76F22F9893000AB3EF2 /* ProfileTableViewCell.swift in Sources */,
 				89DBF77022F9893000AB3EF2 /* FetalKickCounterStep.swift in Sources */,

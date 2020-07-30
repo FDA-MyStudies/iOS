@@ -388,6 +388,8 @@ class NetworkWebServiceHandler: NSObject, URLSessionDelegate {
                 challengeDisposition = challengeDelegate?.networkChallengeDisposition(networkManager!, challenge: challenge)
             }
             completionHandler(challengeDisposition,credential)
+        } else {
+            completionHandler(.performDefaultHandling, nil)
         }
     }
 }

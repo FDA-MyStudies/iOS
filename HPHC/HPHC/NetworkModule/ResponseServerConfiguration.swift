@@ -55,17 +55,9 @@ enum ResponseMethods: String {
 
 struct ResponseServerURLConstants {
     
-    // Labkey UAT Server
-    static let ProductionURL = "https://hpresp-stage.lkcompliant.net/mobileappstudy-"
-    static let DevelopmentURL = "https://hpresp-stage.lkcompliant.net/mobileappstudy-"
+    static let ProductionURL = API.responseURL
+    static let DevelopmentURL = API.responseURL
     
-    // Labkey Demo Server
-    // static let ProductionURL = "https://resp.demo.mystudiesapp.org/mobileappstudy-"
-    // static let DevelopmentURL = "https://resp.demo.mystudiesapp.org/mobileappstudy-"
-    
-    
-//    static let ProductionURL =  "https://hpresp.lkcompliant.net/mobileappstudy-"
-//    static let DevelopmentURL =  "https://hpresp.lkcompliant.net/mobileappstudy-"
 }
 
 class ResponseServerConfiguration: NetworkConfiguration {

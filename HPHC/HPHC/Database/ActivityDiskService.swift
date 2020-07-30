@@ -225,7 +225,7 @@ enum ActivityDiskService {
             // Create runs
             let dbActivityRuns = List<DBActivityRun>()
             for activityRun in runs {
-                
+
                 let dbActivityRun = DBActivityRun()
                 dbActivityRun.startDate = activityRun.startDate
                 dbActivityRun.endDate = activityRun.endDate

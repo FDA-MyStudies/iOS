@@ -344,7 +344,11 @@ class WCPServices: NSObject {
         }
 
         //save in database
-        DBHandler.saveResourcesForStudy(studyId: (Study.currentStudy?.studyId)!, resources: listOfResources)
+        if let studyID = Study.currentStudy?.studyId {
+            DBHandler.saveResourcesForStudy(studyId: studyID,
+                                            resources: listOfResources)
+        }
+
         
         //assign to Gateway
         Study.currentStudy?.resources = listOfResources

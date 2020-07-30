@@ -40,7 +40,7 @@ class Schedule{
     var scheduledTimings: Array<Dictionary<String,Any>> = []
     var currentRunId = 0
     
-    var completionHandler: ((Array<ActivityRun>) -> ())? = nil
+    var completionHandler: (([ActivityRun]) -> ())? 
     
     init(){
     }
@@ -468,7 +468,7 @@ class Schedule{
                 
                 runId += 1
             }
-            self.activity.activityRuns = oldRuns
+            self.activityRuns = oldRuns
         }
         
         func calculateNewRuns() {

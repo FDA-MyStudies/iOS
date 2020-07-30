@@ -296,20 +296,7 @@ class AnchorDateHandler {
         }
         
     }
-    
-    
-    func fakePPData() {
         
-        for anchorDate in anchorDateMetaDataList {
-            
-            anchorDate.anchorDate = Date().addingTimeInterval(3600*24*10)
-            anchorDate.participantPropertyMetaData?.externalPropertyValue = "x8"
-            anchorDate.participantPropertyMetaData?.dateOfEntryValue = "17-11-2017 21:55:44"
-        }
-        
-        self.saveParticipantPropertyAnchorDateInDB()
-    }
-    
     func requestAnchorDateForParticipantProperty(for emptyAnchorDateDetail: AnchorDateQueryMetaData,
                                                completion:  @escaping () -> Void) {
     

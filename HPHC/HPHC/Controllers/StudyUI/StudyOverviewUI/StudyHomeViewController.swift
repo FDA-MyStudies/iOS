@@ -29,8 +29,9 @@ let kInEligibilityStep = "InEligibilityStep"
 
 let kLARConsentStep = "LARConsentStep"
 let kLARConsentParticipantStep = "LARConsentParticipantStep"
-let kLARConsentParticipantStepItem1 = "LARConsentParticipantStepItem1"
-let kLARConsentParticipantStepItem2 = "LARConsentParticipantStepItem2"
+let kLARConsentParticipantRelationItem = "LARConsentParticipantRelationItem"
+let kLARConsentParticipantFirstName = "LARConsentParticipantFirstName"
+let kLARConsentParticipantLastName = "LARConsentParticipantLastName"
 
 let kFetalKickCounterStep = "FetalKickCounter"
 let kEligibilityStepViewControllerIdentifier = "EligibilityStepViewController"

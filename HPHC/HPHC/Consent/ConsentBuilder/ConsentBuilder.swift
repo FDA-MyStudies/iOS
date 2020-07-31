@@ -405,6 +405,7 @@ class ConsentBuilder {
         completionStep.detailText = NSLocalizedString(kConsentCompletionMainTitle, comment: "")
         
         if (stepArray?.count)! > 0 {
+            
             stepArray?.append(consentCompletionStep)
             stepArray?.append(consentViewPdfStep)
             // stepArray?.append(completionStep)
@@ -457,7 +458,7 @@ class ConsentBuilder {
         relationAnswerFormat.maximumLength = 100
         
         let placeHolder = NSLocalizedString("Required", comment: "")
-        let relationItem = ORKFormItem(identifier: "relationItem",
+        let relationItem = ORKFormItem(identifier: kLARConsentParticipantRelationItem,
                                        text: "", answerFormat: relationAnswerFormat)
         relationItem.placeholder = placeHolder
         relationItem.isOptional = false
@@ -467,7 +468,7 @@ class ConsentBuilder {
         
         let firstNameText = LocalizableString.consentLARParticipantFirstName.localizedString
         relationAnswerFormat.maximumLength = 200
-        let firstNameItem = ORKFormItem(identifier: kLARConsentParticipantStepItem1,
+        let firstNameItem = ORKFormItem(identifier: kLARConsentParticipantFirstName,
                                         text: firstNameText, answerFormat: relationAnswerFormat)
         
         firstNameItem.placeholder = placeHolder
@@ -475,7 +476,7 @@ class ConsentBuilder {
         
         // A second field, for entering a time interval.
         let lastNameText = LocalizableString.consentLARParticipantLastName.localizedString
-        let lastNameItem = ORKFormItem(identifier: kLARConsentParticipantStepItem2,
+        let lastNameItem = ORKFormItem(identifier: kLARConsentParticipantLastName,
                                        text: lastNameText, answerFormat: relationAnswerFormat)
         lastNameItem.placeholder = placeHolder
         lastNameItem.isOptional = false

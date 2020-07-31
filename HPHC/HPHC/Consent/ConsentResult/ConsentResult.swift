@@ -94,10 +94,21 @@ class ConsentResult {
                         self.consentPdfData = data
                         self.consentPath = fileName
                         
+                        let fileNameLAR: String = "Consent" +  "_" + "\((Study.currentStudy?.studyId)!)" + "LAR" + ".pdf"
+                        
+                            secondFullPath = path + "/" + "second.pdf"
+                            thirdFullPath = path + "/" + fileNameLAR
+                        
                         do {
                             
                             if FileManager.default.fileExists(atPath: fullPath){
                                 try FileManager.default.removeItem(atPath: fullPath)
+                            }
+                            if FileManager.default.fileExists(atPath: secondFullPath){
+                                try FileManager.default.removeItem(atPath: secondFullPath)
+                            }
+                            if FileManager.default.fileExists(atPath: thirdFullPath){
+                                try FileManager.default.removeItem(atPath: thirdFullPath)
                             }
                             FileManager.default.createFile(atPath:fullPath , contents: data, attributes: [:])
                             
@@ -107,29 +118,33 @@ class ConsentResult {
                             try data?.write(to:  URL(string:fullPath!)!)
 //                            FileDownloadManager.encyptFile(pathURL: URL(string: defaultPath!)!)
                             
+                            if consentHasLAR {
                             let notificationName = Notification.Name(kPDFCreationNotificationId)
                             // Post notification
                             NotificationCenter.default.post(name: notificationName, object: nil)
+                            }
                             
                         } catch let error as NSError {
                             print(error.localizedDescription)
                         }
                         
                         
+                        let participantFormStepResult = taskResult.stepResult(forStepIdentifier: kLARConsentParticipantStep)
+                        let participantRelation = (participantFormStepResult?.result(forIdentifier: kLARConsentParticipantRelationItem) as! ORKTextQuestionResult).textAnswer ?? ""
+                        let participantFirstName = (participantFormStepResult?.result(forIdentifier: kLARConsentParticipantFirstName) as! ORKTextQuestionResult).textAnswer ?? ""
+                        let participantLastName = (participantFormStepResult?.result(forIdentifier: kLARConsentParticipantLastName) as! ORKTextQuestionResult).textAnswer ?? ""
+                        
+                        print("participantFirstName---\(participantFirstName)")
                         
                         
                         if !consentHasLAR {
                         let title = "Consent by a Legally Authorized Representative"
                         let body = "I am signing the consent document on behalf of the participant, as a legally-authorized representative of the participant."
                         let image = signatureStepResult?.signature?.signatureImage ?? UIImage() // UIImage()
-                        let contact = ""
                         
-                        let pdfCreator = PDFCreator(title: title, body: body, image: image, contact: contact)
+                            let pdfCreator = PDFCreator(title: title, body: body, image: image, relation: participantRelation, firstName: participantFirstName, lastName: participantLastName)
                         let pdfData = pdfCreator.createFlyer()
                         
-                        
-                            secondFullPath = path + "/" + "second.pdf"
-                            thirdFullPath = path + "/" + "third.pdf"
                         do {
                             
                             if FileManager.default.fileExists(atPath: secondFullPath){
@@ -143,10 +158,29 @@ class ConsentResult {
                             try pdfData.write(to:  URL(string:secondFullPath)!)
 //                            FileDownloadManager.encyptFile(pathURL: URL(string: defaultPath!)!)
                             
-//                            let notificationName = Notification.Name(kPDFCreationNotificationId)
-//                            // Post notification
-//                            NotificationCenter.default.post(name: notificationName, object: nil)
-                            self.mergePdfFiles(sourcePdfFiles: [fullPath,secondFullPath], destPdfFile: thirdFullPath)
+                            
+                            let initialPDFReturned =  self.mergePdfFiles(sourcePdfFiles: [fullPath,secondFullPath], destPdfFile: thirdFullPath)
+                            
+                            if initialPDFReturned {
+                                do {
+                                if FileManager.default.fileExists(atPath: secondFullPath) {
+                                    try FileManager.default.removeItem(atPath: secondFullPath)
+                                }
+                                } catch {
+                                    
+                                }
+                                
+                                let data1 = try Data(contentsOf: URL(string: secondFullPath)!)
+                                
+//                                let pdfDoc = PDFDocument(url: URL(string: thirdFullPath)!)!
+                                self.consentPdfData = data1//pdfDoc.dataRepresentation()
+                                
+                                self.consentPath = fileNameLAR
+                                let notificationName = Notification.Name(kPDFCreationNotificationId)
+                                // Post notification
+                                NotificationCenter.default.post(name: notificationName, object: nil)
+                                
+                            }
                             
                         }
                         catch let error as NSError {
@@ -184,8 +218,6 @@ class ConsentResult {
                             }
                             FileManager.default.createFile(atPath:fullPath , contents: data, attributes: [:])
                             fullPath = "file://" + "\(fullPath!)"
-                            
-                            print("fullPath---\(fullPath)")
                             
                             try data?.write(to:  URL(string: fullPath!)!)
                             FileDownloadManager.encyptFile(pathURL: URL(string: fullPath!)!)
@@ -275,13 +307,35 @@ class ConsentResult {
         return activityDict!
     }
     
-    func mergePdfFiles(sourcePdfFiles:[String], destPdfFile:String) {
+    func mergePdfFiles(sourcePdfFiles:[String], destPdfFile:String) -> Bool {
+        let pdfDoc3 = PDFDocument()
         let pdfDoc1 = PDFDocument(url: URL(string: sourcePdfFiles[0])!)!
+        let page1 = pdfDoc1.page(at: 0)!
         
         let pdfDoc2 = PDFDocument(url: URL(string: sourcePdfFiles[1])!)!
         let page2 = pdfDoc2.page(at: 0)!
-        pdfDoc1.removePage(at: 1)
-        pdfDoc1.insert(page2, at: 1)
-        pdfDoc1.write(toFile: destPdfFile)
+//        pdfDoc1.removePage(at: 1)
+//        pdfDoc1.insert(page2, at: 1)
+        
+        pdfDoc3.insert(page1, at: 0)
+        pdfDoc3.insert(page2, at: 1)
+        
+        
+        
+//        let valData = pdfDoc1.dataRepresentation()
+        pdfDoc3.write(toFile: destPdfFile)
+        let data = pdfDoc3.dataRepresentation()
+        
+        let cgDoc = pdfDoc3.documentRef
+        
+        
+//        do {
+//        try data?.write(to:  URL(string:destPdfFile)!)
+//        }
+//        catch {
+//
+//        }
+        
+        return true
     }
 }

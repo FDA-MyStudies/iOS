@@ -46,7 +46,8 @@ class PDFCreator: NSObject {
       kCGPDFContextTitle: title
     ]
     let format = UIGraphicsPDFRendererFormat()
-    format.documentInfo = pdfMetaData as [String: Any]
+    format.documentI
+    nfo = pdfMetaData as [String: Any]
     
     // 2
     let pageWidth = 8.5 * 72.0
@@ -66,13 +67,28 @@ class PDFCreator: NSObject {
         let body2TextBottom = addBody2Text(pageRect: pageRect, textTop: body1TextBottom + 34.0, title1: "Participant first name:", title2: firstName)
     let lastNameBottom = addBody2Text(pageRect: pageRect, textTop: body2TextBottom + 14.0, title1: "Participant last name:", title2: lastName)
         
-      let signatureImageBottom = addImage(pageRect: pageRect, imageTop: lastNameBottom + 18.0)
+      let signatureImageBottom = addImage(pageRect: pageRect, imageTop: lastNameBottom + 14.0)
         let context = context.cgContext
-        drawLine(context, pageRect: pageRect, top: signatureImageBottom + 5, xValue: 10)
-        
+        drawLine(context, XValueStart: 10, top: signatureImageBottom + 5, xValueEnd: (CGFloat(1 * (pageWidth / 4)) + 10))
         let signatureTextBottom = addBody3Text(pageRect: pageRect, textTop: signatureImageBottom + 14.0, title: "(Signature)", xValue: 10)
-        drawLine(context, pageRect: pageRect, top: signatureImageBottom + 5, xValue: (CGFloat(3 * pageWidth / 4)) )
-        let dateTextBottom = addBody3Text(pageRect: pageRect, textTop: signatureImageBottom + 14.0, title: "(Date)", xValue: 10)
+        
+        drawLine(context, XValueStart: 454, top: signatureImageBottom + 5, xValueEnd: CGFloat(pageWidth - 20))
+        let dateHeaddingBottom = addBody3Text(pageRect: pageRect, textTop: signatureImageBottom + 14.0, title: "(Date)", xValue: 454)
+        let dateTextBottom = addBody3Text(pageRect: pageRect, textTop: signatureImageBottom - 16, title: firstName, xValue: 454)
+//        print("pageWidth---\(pageWidth)---\(CGFloat(3 * (pageWidth / 4)) + 10)")
+        
+        
+        let firstTextBottom = addBody3Text(pageRect: pageRect, textTop: dateHeaddingBottom + 14.0, title: firstName, xValue: 10)
+        drawLine(context, XValueStart: 10, top: firstTextBottom + 5, xValueEnd: (CGFloat(1 * (pageWidth / 4)) + 10))
+        let firstHeaddingTextBottom = addBody3Text(pageRect: pageRect, textTop: firstTextBottom + 14.0, title: "(First name)", xValue: 10)
+        
+        let lastTextBottom = addBody3Text(pageRect: pageRect, textTop: dateHeaddingBottom + 14.0, title: lastName, xValue: (CGFloat(1.3 * (pageWidth / 4)) + 10))
+        drawLine(context, XValueStart: (CGFloat(1.3 * (pageWidth / 4)) + 10), top: firstTextBottom + 5, xValueEnd: (CGFloat(2.5 * (pageWidth / 4)) + 10))
+        let lastHeaddingTextBottom = addBody3Text(pageRect: pageRect, textTop: firstTextBottom + 14.0, title: "(Last name)", xValue: (CGFloat(1.3 * (pageWidth / 4)) + 10))
+        
+        let relationshipTextBottom = addBody3Text(pageRect: pageRect, textTop: dateHeaddingBottom + 14.0, title: relation, xValue: 454)
+        drawLine(context, XValueStart: 454, top: firstTextBottom + 5, xValueEnd: CGFloat(pageWidth - 20))
+        let relationshipHeaddingTextBottom = addBody3Text(pageRect: pageRect, textTop: firstTextBottom + 14.0, title: "(Relationship to participant)", xValue: 446)
         
         
       
@@ -160,13 +176,14 @@ class PDFCreator: NSObject {
   }
     
     func addBody3Text(pageRect: CGRect, textTop: CGFloat, title: String, xValue: CGFloat) -> CGFloat {
+//        print("xValue---\(xValue)")
       let titleFont = UIFont.systemFont(ofSize: 12.0, weight: .regular)
       // 2
       let titleAttributes: [NSAttributedString.Key: Any] =
         [NSAttributedString.Key.font: titleFont]
       let attributedTitle = NSMutableAttributedString(string: title, attributes: titleAttributes)
       // 3
-      let textRect = CGRect(x: 10, y: textTop, width: pageRect.width - 20,
+      let textRect = CGRect(x: xValue, y: textTop, width: pageRect.width - 20,
                             height: pageRect.height - textTop - pageRect.height / 5.0)
       attributedTitle.draw(in: textRect)
       
@@ -198,13 +215,14 @@ class PDFCreator: NSObject {
     return imageRect.origin.y + imageRect.size.height
   }
     
-    func drawLine(_ drawContext: CGContext, pageRect: CGRect, top: CGFloat, xValue: CGFloat) {
+    func drawLine(_ drawContext: CGContext, XValueStart: CGFloat, top: CGFloat, xValueEnd: CGFloat) {
+        print("xValue---\(XValueStart)")
         drawContext.saveGState()
         drawContext.setLineWidth(1.0)
         
         // 3
-        drawContext.move(to: CGPoint(x: xValue, y: top))
-        drawContext.addLine(to: CGPoint(x: pageRect.width / 4, y: top))
+        drawContext.move(to: CGPoint(x: XValueStart, y: top))
+        drawContext.addLine(to: CGPoint(x: xValueEnd, y: top))
         drawContext.strokePath()
         drawContext.restoreGState()
     }

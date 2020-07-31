@@ -1348,14 +1348,15 @@ print("6---\(step.identifier)")
         
         if result.results?.last?.identifier == kLARConsentStep {
             if let val = result.stepResult(forStepIdentifier: kLARConsentStep) {
-                print("val---\(val)")
+                
+                let participantRelation = (val.result(forIdentifier: kLARConsentStep) as! ORKChoiceQuestionResult).choiceAnswers?.first as? String ?? "Choice_1"
+               
+                if participantRelation == "Choice_1" {
+                    consentHasLAR = false
+                   
+                }
             }
         }
-        
-        //    if step.identifier == kLARConsentStep {
-        //        result.results
-        //    }
-        print("4---")
     }
   
   func taskViewController(_ taskViewController: ORKTaskViewController, stepViewControllerWillDisappear stepViewController: ORKStepViewController, navigationDirection direction: ORKStepViewControllerNavigationDirection) {

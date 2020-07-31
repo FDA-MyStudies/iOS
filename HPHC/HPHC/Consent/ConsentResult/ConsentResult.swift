@@ -118,7 +118,7 @@ class ConsentResult {
                             try data?.write(to:  URL(string:fullPath!)!)
 //                            FileDownloadManager.encyptFile(pathURL: URL(string: defaultPath!)!)
                             
-                            if !consentHasLAR {
+                            if !consentHasLAR { //consentHasLAR {
                             let notificationName = Notification.Name(kPDFCreationNotificationId)
                             // Post notification
                             NotificationCenter.default.post(name: notificationName, object: nil)
@@ -129,67 +129,66 @@ class ConsentResult {
                         }
                         
                         
-                        let participantFormStepResult = taskResult.stepResult(forStepIdentifier: kLARConsentParticipantStep)
-                        let participantRelation = (participantFormStepResult?.result(forIdentifier: kLARConsentParticipantRelationItem) as! ORKTextQuestionResult).textAnswer ?? ""
-                        let participantFirstName = (participantFormStepResult?.result(forIdentifier: kLARConsentParticipantFirstName) as! ORKTextQuestionResult).textAnswer ?? ""
-                        let participantLastName = (participantFormStepResult?.result(forIdentifier: kLARConsentParticipantLastName) as! ORKTextQuestionResult).textAnswer ?? ""
-                        
-                        print("participantFirstName---\(participantFirstName)")
-                        
-                        
                         if consentHasLAR {
-                        let title = "Consent by a Legally Authorized Representative"
-                        let body = "I am signing the consent document on behalf of the participant, as a legally-authorized representative of the participant."
-                        let image = signatureStepResult?.signature?.signatureImage ?? UIImage() // UIImage()
-                        
+                            let participantFormStepResult = taskResult.stepResult(forStepIdentifier: kLARConsentParticipantStep)
+                            let participantRelation = (participantFormStepResult?.result(forIdentifier: kLARConsentParticipantRelationItem) as! ORKTextQuestionResult).textAnswer ?? ""
+                            let participantFirstName = (participantFormStepResult?.result(forIdentifier: kLARConsentParticipantFirstName) as! ORKTextQuestionResult).textAnswer ?? ""
+                            let participantLastName = (participantFormStepResult?.result(forIdentifier: kLARConsentParticipantLastName) as! ORKTextQuestionResult).textAnswer ?? ""
+                            
+                            print("participantFirstName---\(participantFirstName)")
+                            
+                            let title = "Consent by a Legally Authorized Representative"
+                            let body = "I am signing the consent document on behalf of the participant, as a legally-authorized representative of the participant."
+                            let image = signatureStepResult?.signature?.signatureImage ?? UIImage() // UIImage()
+                            
                             let pdfCreator = PDFCreator(title: title, body: body, image: image, relation: participantRelation, firstName: participantFirstName, lastName: participantLastName)
-                        let pdfData = pdfCreator.createFlyer()
-                        
-                        do {
+                            let pdfData = pdfCreator.createFlyer()
                             
-                            if FileManager.default.fileExists(atPath: secondFullPath){
-                                try FileManager.default.removeItem(atPath: secondFullPath)
-                            }
-                            FileManager.default.createFile(atPath:secondFullPath , contents: pdfData, attributes: [:])
-                            
-                            let defaultPath = secondFullPath
-                            secondFullPath = "file://" + "\(secondFullPath)"
-                            print("2fullPath---\(secondFullPath)")
-                            try pdfData.write(to:  URL(string:secondFullPath)!)
-//                            FileDownloadManager.encyptFile(pathURL: URL(string: defaultPath!)!)
-                            
-                            
-                            let initialPDFReturned =  self.mergePdfFiles(sourcePdfFiles: [fullPath,secondFullPath], destPdfFile: thirdFullPath)
-                            
-                            if initialPDFReturned {
-                                do {
-                                if FileManager.default.fileExists(atPath: secondFullPath) {
+                            do {
+                                
+                                if FileManager.default.fileExists(atPath: secondFullPath){
                                     try FileManager.default.removeItem(atPath: secondFullPath)
                                 }
-                                } catch {
+                                FileManager.default.createFile(atPath:secondFullPath , contents: pdfData, attributes: [:])
+                                
+                                let defaultPath = secondFullPath
+                                secondFullPath = "file://" + "\(secondFullPath)"
+                                print("2fullPath---\(secondFullPath)")
+                                try pdfData.write(to:  URL(string:secondFullPath)!)
+                                //                            FileDownloadManager.encyptFile(pathURL: URL(string: defaultPath!)!)
+                                
+                                
+                                let initialPDFReturned =  self.mergePdfFiles(sourcePdfFiles: [fullPath,secondFullPath], destPdfFile: thirdFullPath)
+                                
+                                if initialPDFReturned {
+                                    do {
+                                        if FileManager.default.fileExists(atPath: secondFullPath) {
+                                            try FileManager.default.removeItem(atPath: secondFullPath)
+                                        }
+                                    } catch {
+                                        
+                                    }
+                                    
+                                    let data1 = try Data(contentsOf: URL(string: secondFullPath)!)
+                                    
+                                    //                                let pdfDoc = PDFDocument(url: URL(string: thirdFullPath)!)!
+                                    self.consentPdfData = data1//pdfDoc.dataRepresentation()
+                                    
+                                    self.consentPath = fileNameLAR
+                                    let notificationName = Notification.Name(kPDFCreationNotificationId)
+                                    // Post notification
+                                    NotificationCenter.default.post(name: notificationName, object: nil)
                                     
                                 }
                                 
-                                let data1 = try Data(contentsOf: URL(string: secondFullPath)!)
-                                
-//                                let pdfDoc = PDFDocument(url: URL(string: thirdFullPath)!)!
-                                self.consentPdfData = data1//pdfDoc.dataRepresentation()
-                                
-                                self.consentPath = fileNameLAR
-                                let notificationName = Notification.Name(kPDFCreationNotificationId)
-                                // Post notification
-                                NotificationCenter.default.post(name: notificationName, object: nil)
-                                
+                            }
+                            catch let error as NSError {
+                                print(error.localizedDescription)
                             }
                             
-                        }
-                        catch let error as NSError {
-                                                   print(error.localizedDescription)
-                                               }
-                        
                             
                             
-                        
+                            
                         }
                         
                     })

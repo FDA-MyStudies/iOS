@@ -445,7 +445,7 @@ class StudyHomeViewController: UIViewController {
         }
         
         if orkOrderedTask is ORKNavigableOrderedTask {
-            if consentHasLAR {//LAR Rele Addition
+            if consentHasLAR {//LAR
                 (orkOrderedTask as? ORKNavigableOrderedTask)!.setNavigationRule(LARRule, forTriggerStepIdentifier: kLARConsentStep)
             }
             

@@ -378,7 +378,7 @@ class ConsentBuilder {
             stepArray?.append(comprehensionCompletionStep)
         }
         
-        if !consentHasLAR {
+        if consentHasLAR {
             let larArr1 = appendLAR()
             stepArray?.append(larArr1)
             let larArr2 = appendLARParticipant()

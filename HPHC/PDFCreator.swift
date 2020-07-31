@@ -71,7 +71,9 @@ class PDFCreator: NSObject {
         drawLine(context, pageRect: pageRect, top: signatureImageBottom + 5, xValue: 10)
         
         let signatureTextBottom = addBody3Text(pageRect: pageRect, textTop: signatureImageBottom + 14.0, title: "(Signature)", xValue: 10)
-        drawLine(context, pageRect: pageRect, top: signatureImageBottom + 5, xValue: CGFloat(-(pageWidth - 10)))
+        drawLine(context, pageRect: pageRect, top: signatureImageBottom + 5, xValue: (CGFloat(3 * pageWidth / 4)) )
+        let dateTextBottom = addBody3Text(pageRect: pageRect, textTop: signatureImageBottom + 14.0, title: "(Date)", xValue: 10)
+        
         
       
 //      let context = context.cgContext

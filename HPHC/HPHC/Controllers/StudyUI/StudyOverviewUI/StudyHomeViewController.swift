@@ -328,7 +328,7 @@ class StudyHomeViewController: UIViewController {
         
         let consentTask: ORKOrderedTask? = ConsentBuilder.currentConsent?.createConsentTask() as! ORKOrderedTask?
         var LARIdentifier1 = "Review" //FinalStep
-        if !consentHasLAR {
+        if consentHasLAR {
             let index = consentTask?.index(of: ORKStep(identifier: kLARConsentStep)) ?? 0
             let val : Int = Int(index) + 2
             let LARNextStep = consentTask?.steps[val].identifier ?? ""
@@ -445,7 +445,7 @@ class StudyHomeViewController: UIViewController {
         }
         
         if orkOrderedTask is ORKNavigableOrderedTask {
-            if !consentHasLAR {//LAR Rele Addition
+            if consentHasLAR {//LAR Rele Addition
                 (orkOrderedTask as? ORKNavigableOrderedTask)!.setNavigationRule(LARRule, forTriggerStepIdentifier: kLARConsentStep)
             }
             

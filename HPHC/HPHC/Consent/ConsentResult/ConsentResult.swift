@@ -118,7 +118,7 @@ class ConsentResult {
                             try data?.write(to:  URL(string:fullPath!)!)
 //                            FileDownloadManager.encyptFile(pathURL: URL(string: defaultPath!)!)
                             
-                            if consentHasLAR {
+                            if !consentHasLAR {
                             let notificationName = Notification.Name(kPDFCreationNotificationId)
                             // Post notification
                             NotificationCenter.default.post(name: notificationName, object: nil)
@@ -137,7 +137,7 @@ class ConsentResult {
                         print("participantFirstName---\(participantFirstName)")
                         
                         
-                        if !consentHasLAR {
+                        if consentHasLAR {
                         let title = "Consent by a Legally Authorized Representative"
                         let body = "I am signing the consent document on behalf of the participant, as a legally-authorized representative of the participant."
                         let image = signatureStepResult?.signature?.signatureImage ?? UIImage() // UIImage()

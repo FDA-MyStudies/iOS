@@ -89,7 +89,7 @@ class ConsentPdfViewerStepViewController: ORKStepViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        if !consentHasLAR {
+        if consentHasLAR {
             let path =  AKUtility.baseFilePath + "/study"
             let fileNameLAR: String = "Consent" +  "_" + "\((Study.currentStudy?.studyId)!)" + "LAR" + ".pdf"
             let pdfFilePath = path + "/" + fileNameLAR

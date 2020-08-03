@@ -45,7 +45,6 @@ class PDFCreator: NSObject {
     }
     
     func createFlyer() -> Data {
-        // 1
         let pdfMetaData = [
             kCGPDFContextCreator: "",
             kCGPDFContextAuthor: "",
@@ -54,18 +53,14 @@ class PDFCreator: NSObject {
         let format = UIGraphicsPDFRendererFormat()
         format.documentInfo = pdfMetaData as [String: Any]
         
-        // 2
         let pageWidth = 8.5 * 72.0
         let pageHeight = 11 * 72.0
         let pageRect = CGRect(x: 0, y: 0, width: pageWidth, height: pageHeight)
         
-        // 3
         let renderer = UIGraphicsPDFRenderer(bounds: pageRect, format: format)
-        // 4
         let data = renderer.pdfData { (context) in
-            // 5
+            
             context.beginPage()
-            // 6
             
             let titleBottom = addTitle(pageRect: pageRect)
             let body1TextBottom = addBody1Text(pageRect: pageRect, textTop: titleBottom + 24.0)
@@ -95,6 +90,7 @@ class PDFCreator: NSObject {
             drawLine(context, XValueStart: 454, top: firstTextBottom + 5, xValueEnd: CGFloat(pageWidth - 20))
             let relationshipHeaddingTextBottom = addBody3Text(pageRect: pageRect, textTop: firstTextBottom + 14.0, title: "(Relationship to participant)", xValue: 435)
             
+            drawPageNumber(2, pageWidth: CGFloat(pageWidth), pageHeight: CGFloat(pageHeight))
             
             //            let pageCountBottom = addBody3Text(pageRect: pageRect, textTop: firstTextBottom + 224.0, title: "Page 2 of 2", xValue: (CGFloat(1.5 * (pageWidth / 4)) + 10))
             
@@ -202,6 +198,23 @@ class PDFCreator: NSObject {
         drawContext.addLine(to: CGPoint(x: xValueEnd, y: top))
         drawContext.strokePath()
         drawContext.restoreGState()
+    }
+    
+    func drawPageNumber(_ pageNum: Int, pageWidth: CGFloat, pageHeight: CGFloat) {
+        let theFont = UIFont.systemFont(ofSize: 12, weight: .medium)
+        
+        let pageString = NSMutableAttributedString(string: "Page \(pageNum) of 2")
+        pageString.addAttribute(NSAttributedString.Key.font, value: theFont, range: NSRange(location: 0, length: pageString.length))
+        
+        let pageStringSize =  pageString.size()
+        
+        let stringRect = CGRect(x: (pageWidth - pageStringSize.width) / 2.0,
+                                y: pageHeight - (pageStringSize.height) / 2.0 - 15,
+                                width: pageStringSize.width,
+                                height: pageStringSize.height)
+        
+        pageString.draw(in: stringRect)
+        
     }
     
 }

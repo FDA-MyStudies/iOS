@@ -67,33 +67,28 @@ class PDFCreator: NSObject {
             let body2TextBottom = addBody2Text(pageRect: pageRect, textTop: body1TextBottom + 34.0, title1: "Participant first name:", title2: participantFirstName)
             let lastNameBottom = addBody2Text(pageRect: pageRect, textTop: body2TextBottom + 14.0, title1: "Participant last name:", title2: participantLastName)
             
-            let signatureImageBottom = addImage(pageRect: pageRect, imageTop: lastNameBottom + 14.0)
+            let signatureImageBottom = addImage(pageRect: pageRect, imageTop: lastNameBottom + 6.0)
             let context = context.cgContext
             drawLine(context, XValueStart: 10, top: signatureImageBottom + 5, xValueEnd: (CGFloat(1 * (pageWidth / 4)) + 10))
-            let signatureTextBottom = addBody3Text(pageRect: pageRect, textTop: signatureImageBottom + 14.0, title: "(Signature)", xValue: 15)
+            _ = addBody3Text(pageRect: pageRect, textTop: signatureImageBottom + 14.0, title: "(Signature)", xValue: 15)
             
             drawLine(context, XValueStart: 454, top: signatureImageBottom + 5, xValueEnd: CGFloat(pageWidth - 20))
             let dateHeaddingBottom = addBody3Text(pageRect: pageRect, textTop: signatureImageBottom + 14.0, title: "(Date)", xValue: 556)
-            let dateTextBottom = addBody3Text(pageRect: pageRect, textTop: signatureImageBottom - 16, title: startTime, xValue: 522)
-            //        print("pageWidth---\(pageWidth)---\(CGFloat(3 * (pageWidth / 4)) + 10)")
+            _ = addBody3Text(pageRect: pageRect, textTop: signatureImageBottom - 16, title: startTime, xValue: 522)
             
-            
-            let firstTextBottom = addBody3Text(pageRect: pageRect, textTop: dateHeaddingBottom + 14.0, title: firstName, xValue: 15)
+            let firstTextBottom = addBody3Text(pageRect: pageRect, textTop: dateHeaddingBottom + 22.0, title: firstName, xValue: 15)
             drawLine(context, XValueStart: 10, top: firstTextBottom + 5, xValueEnd: (CGFloat(1 * (pageWidth / 4)) + 10))
-            let firstHeaddingTextBottom = addBody3Text(pageRect: pageRect, textTop: firstTextBottom + 14.0, title: "(First name)", xValue: 15)
+            _ = addBody3Text(pageRect: pageRect, textTop: firstTextBottom + 14.0, title: "(First name)", xValue: 15)
             
-            let lastTextBottom = addBody3Text(pageRect: pageRect, textTop: dateHeaddingBottom + 14.0, title: lastName, xValue: (CGFloat(1.3 * (pageWidth / 4)) + 10))
+            _ = addBody3Text(pageRect: pageRect, textTop: dateHeaddingBottom + 22.0, title: lastName, xValue: (CGFloat(1.3 * (pageWidth / 4)) + 10))
             drawLine(context, XValueStart: (CGFloat(1.3 * (pageWidth / 4)) + 10), top: firstTextBottom + 5, xValueEnd: (CGFloat(2.5 * (pageWidth / 4)) + 10))
-            let lastHeaddingTextBottom = addBody3Text(pageRect: pageRect, textTop: firstTextBottom + 14.0, title: "(Last name)", xValue: (CGFloat(1.3 * (pageWidth / 4)) + 10))
+            _ = addBody3Text(pageRect: pageRect, textTop: firstTextBottom + 14.0, title: "(Last name)", xValue: (CGFloat(1.3 * (pageWidth / 4)) + 10))
             
-            let relationshipTextBottom = addBody3Text(pageRect: pageRect, textTop: dateHeaddingBottom + 14.0, title: relation, xValue: 454)
+            _ = addBody3Text(pageRect: pageRect, textTop: dateHeaddingBottom + 22.0, title: relation, xValue: 454)
             drawLine(context, XValueStart: 454, top: firstTextBottom + 5, xValueEnd: CGFloat(pageWidth - 20))
-            let relationshipHeaddingTextBottom = addBody3Text(pageRect: pageRect, textTop: firstTextBottom + 14.0, title: "(Relationship to participant)", xValue: 435)
+            _ = addBody3Text(pageRect: pageRect, textTop: firstTextBottom + 14.0, title: "(Relationship to participant)", xValue: 435)
             
             drawPageNumber(2, pageWidth: CGFloat(pageWidth), pageHeight: CGFloat(pageHeight))
-            
-            //            let pageCountBottom = addBody3Text(pageRect: pageRect, textTop: firstTextBottom + 224.0, title: "Page 2 of 2", xValue: (CGFloat(1.5 * (pageWidth / 4)) + 10))
-            
         }
         
         return data
@@ -181,8 +176,8 @@ class PDFCreator: NSObject {
     }
     
     func addImage(pageRect: CGRect, imageTop: CGFloat) -> CGFloat {
-        let scaledWidth = pageRect.width / 4 // image.size.width * aspectRatio
-        let scaledHeight = pageRect.width / 4
+        let scaledWidth = pageRect.width / 4.5 // image.size.width * aspectRatio
+        let scaledHeight = pageRect.width / 4.5
         
         let imageRect = CGRect(x: 15, y: imageTop,
                                width: scaledWidth, height: scaledHeight) // / 4

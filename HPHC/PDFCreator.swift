@@ -75,17 +75,17 @@ class PDFCreator: NSObject {
             let signatureImageBottom = addImage(pageRect: pageRect, imageTop: lastNameBottom + 14.0)
             let context = context.cgContext
             drawLine(context, XValueStart: 10, top: signatureImageBottom + 5, xValueEnd: (CGFloat(1 * (pageWidth / 4)) + 10))
-            let signatureTextBottom = addBody3Text(pageRect: pageRect, textTop: signatureImageBottom + 14.0, title: "(Signature)", xValue: 10)
+            let signatureTextBottom = addBody3Text(pageRect: pageRect, textTop: signatureImageBottom + 14.0, title: "(Signature)", xValue: 15)
             
             drawLine(context, XValueStart: 454, top: signatureImageBottom + 5, xValueEnd: CGFloat(pageWidth - 20))
             let dateHeaddingBottom = addBody3Text(pageRect: pageRect, textTop: signatureImageBottom + 14.0, title: "(Date)", xValue: 556)
-            let dateTextBottom = addBody3Text(pageRect: pageRect, textTop: signatureImageBottom - 16, title: "03/12/2020", xValue: 522)
+            let dateTextBottom = addBody3Text(pageRect: pageRect, textTop: signatureImageBottom - 16, title: startTime, xValue: 522)
             //        print("pageWidth---\(pageWidth)---\(CGFloat(3 * (pageWidth / 4)) + 10)")
             
             
-            let firstTextBottom = addBody3Text(pageRect: pageRect, textTop: dateHeaddingBottom + 14.0, title: firstName, xValue: 10)
+            let firstTextBottom = addBody3Text(pageRect: pageRect, textTop: dateHeaddingBottom + 14.0, title: firstName, xValue: 15)
             drawLine(context, XValueStart: 10, top: firstTextBottom + 5, xValueEnd: (CGFloat(1 * (pageWidth / 4)) + 10))
-            let firstHeaddingTextBottom = addBody3Text(pageRect: pageRect, textTop: firstTextBottom + 14.0, title: "(First name)", xValue: 10)
+            let firstHeaddingTextBottom = addBody3Text(pageRect: pageRect, textTop: firstTextBottom + 14.0, title: "(First name)", xValue: 15)
             
             let lastTextBottom = addBody3Text(pageRect: pageRect, textTop: dateHeaddingBottom + 14.0, title: lastName, xValue: (CGFloat(1.3 * (pageWidth / 4)) + 10))
             drawLine(context, XValueStart: (CGFloat(1.3 * (pageWidth / 4)) + 10), top: firstTextBottom + 5, xValueEnd: (CGFloat(2.5 * (pageWidth / 4)) + 10))
@@ -93,7 +93,7 @@ class PDFCreator: NSObject {
             
             let relationshipTextBottom = addBody3Text(pageRect: pageRect, textTop: dateHeaddingBottom + 14.0, title: relation, xValue: 454)
             drawLine(context, XValueStart: 454, top: firstTextBottom + 5, xValueEnd: CGFloat(pageWidth - 20))
-            let relationshipHeaddingTextBottom = addBody3Text(pageRect: pageRect, textTop: firstTextBottom + 14.0, title: "(Relationship to participant)", xValue: 440)
+            let relationshipHeaddingTextBottom = addBody3Text(pageRect: pageRect, textTop: firstTextBottom + 14.0, title: "(Relationship to participant)", xValue: 435)
             
             
             //            let pageCountBottom = addBody3Text(pageRect: pageRect, textTop: firstTextBottom + 224.0, title: "Page 2 of 2", xValue: (CGFloat(1.5 * (pageWidth / 4)) + 10))
@@ -110,7 +110,7 @@ class PDFCreator: NSObject {
         let attributedTitle = NSAttributedString(string: title, attributes: titleAttributes)
         let titleStringSize = attributedTitle.size()
         
-        let titleStringRect = CGRect(x: 10,
+        let titleStringRect = CGRect(x: 15,
                                      y: 36, width: titleStringSize.width,
                                      height: titleStringSize.height)
         
@@ -128,7 +128,7 @@ class PDFCreator: NSObject {
             NSAttributedString.Key.font: textFont
         ]
         let attributedText = NSAttributedString(string: body, attributes: textAttributes)
-        let textRect = CGRect(x: 10, y: textTop, width: pageRect.width - 20,
+        let textRect = CGRect(x: 15, y: textTop, width: pageRect.width - 20,
                               height: pageRect.height - textTop - pageRect.height / 5.0)
         attributedText.draw(in: textRect)
         
@@ -154,12 +154,12 @@ class PDFCreator: NSObject {
         let attributedTitle: NSMutableAttributedString = attributedTitle1
         attributedTitle.append(attributedTitle2)
         
-        let textRect = CGRect(x: 10, y: textTop, width: pageRect.width - 20,
+        let textRect = CGRect(x: 15, y: textTop, width: pageRect.width - 20,
                               height: pageRect.height - textTop - pageRect.height / 5.0)
         attributedTitle.draw(in: textRect)
         
         let titleStringSize = attributedTitle.size()
-        let titleStringRect = CGRect(x: 10,
+        let titleStringRect = CGRect(x: 15,
                                      y: textTop , width: titleStringSize.width,
                                      height: titleStringSize.height)
         
@@ -188,7 +188,7 @@ class PDFCreator: NSObject {
         let scaledWidth = pageRect.width / 4 // image.size.width * aspectRatio
         let scaledHeight = pageRect.width / 4
         
-        let imageRect = CGRect(x: 10, y: imageTop,
+        let imageRect = CGRect(x: 15, y: imageTop,
                                width: scaledWidth, height: scaledHeight) // / 4
         image.draw(in: imageRect)
         return imageRect.origin.y + imageRect.size.height

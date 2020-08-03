@@ -36,6 +36,7 @@ class WebViewController : UIViewController{
     var isEmailAvailable:Bool? = false
     
     var htmlString: String?
+    var isLAR: Bool = false
     override var preferredStatusBarStyle: UIStatusBarStyle{
         return .default
     }
@@ -63,8 +64,14 @@ class WebViewController : UIViewController{
             barItemShare = nil
         }
         
-        
-        if let requestLink =  requestLink,
+        if isLAR {
+            let path =  AKUtility.baseFilePath + "/study"
+            let fileNameLAR: String = "Consent" +  "_" + "\((Study.currentStudy?.studyId)!)" + "LAR" + ".pdf"
+            let pdfFilePath = path + "/" + fileNameLAR
+            let urlRequest = URLRequest.init(url: URL(fileURLWithPath: pdfFilePath) )
+            self.webView.load(urlRequest)
+
+        } else if let requestLink =  requestLink,
             !requestLink.isEmpty,
             let url = URL(string: requestLink) {
             let urlRequest = URLRequest(url: url)
@@ -73,8 +80,8 @@ class WebViewController : UIViewController{
             webView.loadHTMLString(html, baseURL: nil)
         } else if let pdfData = pdfData {
             self.webView.load(pdfData, mimeType: "application/pdf",
-                               characterEncodingName: "UTF-8",
-                               baseURL: URL(fileURLWithPath: ""))
+                              characterEncodingName: "UTF-8",
+                              baseURL: URL(fileURLWithPath: ""))
         } else {
             // VisitWebsite
             self.activityIndicator.stopAnimating()

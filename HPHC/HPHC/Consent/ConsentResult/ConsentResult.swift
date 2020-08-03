@@ -154,12 +154,11 @@ class ConsentResult {
                                 
                                 do {
                                     
-                                    if FileManager.default.fileExists(atPath: secondFullPath){
+                                    if FileManager.default.fileExists(atPath: secondFullPath) {
                                         try FileManager.default.removeItem(atPath: secondFullPath)
                                     }
                                     FileManager.default.createFile(atPath:secondFullPath , contents: pdfData, attributes: [:])
                                     
-                                    let defaultPath = secondFullPath
                                     secondFullPath = "file://" + "\(secondFullPath)"
                                     print("2fullPath---\(secondFullPath)")
                                     try pdfData.write(to:  URL(string:secondFullPath)!)

@@ -95,6 +95,14 @@ class ConsentPdfViewerStepViewController: ORKStepViewController {
             let pdfFilePath = path + "/" + fileNameLAR
             let urlRequest = URLRequest.init(url: URL(fileURLWithPath: pdfFilePath) )
             self.webView.load(urlRequest)
+            
+//                        guard let pdfData1 = FileDownloadManager.decrytFile(pathURL: URL(string: pdfFilePath))
+//                        else {return}
+//
+//                            self.webView.load(pdfData1,
+//                                              mimeType: "application/pdf",
+//                                              characterEncodingName: "UTF-8",
+//                                              baseURL: URL(fileURLWithPath: ""))
         }
         else {
             if let pdfData = self.pdfData {
@@ -172,7 +180,3 @@ extension ConsentPdfViewerStepViewController: WKNavigationDelegate{
     }
     
 }
-
-
-
-

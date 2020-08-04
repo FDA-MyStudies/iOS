@@ -38,14 +38,25 @@ enum LocalizableString: String {
     case consentMyselfChoice = "I am signing the consent form on behalf of myself."
     case consentOtherChoice = """
     I am signing the consent form or on behalf of the patient / participant
-    in the capacity of a legally authorised representative.
+    in the capacity of a legally authorized representative.
     """
     case consentLARTitle = "The next few steps will capture your informed consent for participation in this study."
     case consentOptionQuestion = "Please select the appropriate option below"
     case consentLARParticipantSectionTitle = "Please specify your relationship to the participant"
-    case consentLARParticipantNameDesc = "Please enter the participant first and last name below"
+    case consentLARParticipantNameDesc = "Please enter the participant's first and last name below"
     case consentLARParticipantFirstName = "Participant's First Name           "
     case consentLARParticipantLastName = "Participant's Last Name"
+    
+    case consentLARParticipantFirstName2 = "Participant first name:"
+    case consentLARParticipantLastName2 = "Participant last name:"
+    case consentLARParticipantSignature = "Signature"
+    case consentLARParticipantDate = "Date"
+    case consentLARFirstName = "First name"
+    case consentLARLastName = "Last name"
+    case consentLARParticipantRelationship = "Relationship to participant"
+    case consentLARPDFTitle = "Consent by a Legally Authorized Representative"
+    case consentLARPDFBody = "I am signing the consent document on behalf of the participant, as a legally-authorized representative of the participant."
+    
 
     var localizedString: String { return NSLocalizedString(rawValue, comment: "") }
 }

@@ -64,29 +64,29 @@ class PDFCreator: NSObject {
             
             let titleBottom = addTitle(pageRect: pageRect)
             let body1TextBottom = addBody1Text(pageRect: pageRect, textTop: titleBottom + 24.0)
-            let body2TextBottom = addBody2Text(pageRect: pageRect, textTop: body1TextBottom + 34.0, title1: "Participant first name:", title2: participantFirstName)
-            let lastNameBottom = addBody2Text(pageRect: pageRect, textTop: body2TextBottom + 14.0, title1: "Participant last name:", title2: participantLastName)
+            let body2TextBottom = addBody2Text(pageRect: pageRect, textTop: body1TextBottom + 34.0, title1: LocalizableString.consentLARParticipantFirstName2.localizedString, title2: participantFirstName)
+            let lastNameBottom = addBody2Text(pageRect: pageRect, textTop: body2TextBottom + 14.0, title1: LocalizableString.consentLARParticipantLastName2.localizedString, title2: participantLastName)
             
             let signatureImageBottom = addImage(pageRect: pageRect, imageTop: lastNameBottom + 6.0)
             let context = context.cgContext
             drawLine(context, XValueStart: 10, top: signatureImageBottom + 5, xValueEnd: (CGFloat(1 * (pageWidth / 4)) + 10))
-            _ = addBody3Text(pageRect: pageRect, textTop: signatureImageBottom + 14.0, title: "(Signature)", xValue: 15)
+            _ = addBody3Text(pageRect: pageRect, textTop: signatureImageBottom + 14.0, title: "(\(LocalizableString.consentLARParticipantSignature.localizedString))", xValue: 15)
             
             drawLine(context, XValueStart: 454, top: signatureImageBottom + 5, xValueEnd: CGFloat(pageWidth - 20))
-            let dateHeaddingBottom = addBody3Text(pageRect: pageRect, textTop: signatureImageBottom + 14.0, title: "(Date)", xValue: 556)
+            let dateHeaddingBottom = addBody3Text(pageRect: pageRect, textTop: signatureImageBottom + 14.0, title: "(\(LocalizableString.consentLARParticipantDate.localizedString))", xValue: 556)
             _ = addBody3Text(pageRect: pageRect, textTop: signatureImageBottom - 16, title: startTime, xValue: 522)
             
             let firstTextBottom = addBody3Text(pageRect: pageRect, textTop: dateHeaddingBottom + 22.0, title: firstName, xValue: 15)
             drawLine(context, XValueStart: 10, top: firstTextBottom + 5, xValueEnd: (CGFloat(1 * (pageWidth / 4)) + 10))
-            _ = addBody3Text(pageRect: pageRect, textTop: firstTextBottom + 14.0, title: "(First name)", xValue: 15)
+            _ = addBody3Text(pageRect: pageRect, textTop: firstTextBottom + 14.0, title: "(\(LocalizableString.consentLARFirstName.localizedString))", xValue: 15)
             
             _ = addBody3Text(pageRect: pageRect, textTop: dateHeaddingBottom + 22.0, title: lastName, xValue: (CGFloat(1.3 * (pageWidth / 4)) + 10))
             drawLine(context, XValueStart: (CGFloat(1.3 * (pageWidth / 4)) + 10), top: firstTextBottom + 5, xValueEnd: (CGFloat(2.5 * (pageWidth / 4)) + 10))
-            _ = addBody3Text(pageRect: pageRect, textTop: firstTextBottom + 14.0, title: "(Last name)", xValue: (CGFloat(1.3 * (pageWidth / 4)) + 10))
+            _ = addBody3Text(pageRect: pageRect, textTop: firstTextBottom + 14.0, title: "(\(LocalizableString.consentLARLastName.localizedString))", xValue: (CGFloat(1.3 * (pageWidth / 4)) + 10))
             
             _ = addBody3Text(pageRect: pageRect, textTop: dateHeaddingBottom + 22.0, title: relation, xValue: 454)
             drawLine(context, XValueStart: 454, top: firstTextBottom + 5, xValueEnd: CGFloat(pageWidth - 20))
-            _ = addBody3Text(pageRect: pageRect, textTop: firstTextBottom + 14.0, title: "(Relationship to participant)", xValue: 435)
+            _ = addBody3Text(pageRect: pageRect, textTop: firstTextBottom + 14.0, title: "(\(LocalizableString.consentLARParticipantRelationship.localizedString))", xValue: 435)
             
             drawPageNumber(2, pageWidth: CGFloat(pageWidth), pageHeight: CGFloat(pageHeight))
         }

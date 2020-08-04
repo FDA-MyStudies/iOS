@@ -134,10 +134,8 @@ class ConsentResult {
                                 let participantFirstName = (participantFormStepResult?.result(forIdentifier: kLARConsentParticipantFirstName) as! ORKTextQuestionResult).textAnswer ?? ""
                                 let participantLastName = (participantFormStepResult?.result(forIdentifier: kLARConsentParticipantLastName) as! ORKTextQuestionResult).textAnswer ?? ""
                                 
-                                print("participantFirstName---\(participantFirstName)")
-                                
-                                let title = "Consent by a Legally Authorized Representative"
-                                let body = "I am signing the consent document on behalf of the participant, as a legally-authorized representative of the participant."
+                                let title = LocalizableString.consentLARPDFTitle.localizedString
+                                let body = LocalizableString.consentLARPDFBody.localizedString
                                 let image = signatureStepResult?.signature?.signatureImage ?? UIImage() // UIImage()
                                 let firstName = signatureStepResult?.signature?.givenName ?? ""
                                 let lastName = signatureStepResult?.signature?.familyName ?? ""

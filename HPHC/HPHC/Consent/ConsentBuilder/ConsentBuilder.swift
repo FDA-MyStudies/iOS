@@ -467,7 +467,7 @@ class ConsentBuilder {
         let nameDescItem = ORKFormItem(sectionTitle: nameDescription)
         
         let firstNameText = LocalizableString.consentLARParticipantFirstName.localizedString
-        relationAnswerFormat.maximumLength = 200
+        relationAnswerFormat.maximumLength = 250
         let firstNameItem = ORKFormItem(identifier: kLARConsentParticipantFirstName,
                                         text: firstNameText, answerFormat: relationAnswerFormat)
         

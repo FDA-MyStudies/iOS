@@ -440,26 +440,18 @@ class ConsentBuilder {
         let step = ORKFormStep(identifier: kLARConsentParticipantStep,
                                title: nil, text: "")
         
-        // A first field, for entering an integer.
+        // A first field, for entering a relationship.
         let relationshipText = LocalizableString.consentLARParticipantSectionTitle.localizedString
         let relationSectionTitleItem = ORKFormItem(sectionTitle: relationshipText)
         
-        var regex = NSRegularExpression()
-        do
-        {
-            regex = try NSRegularExpression.init(pattern: "[a-zA-Z]" , options: [])
-        }catch {
-            //Do Nothing
-        }
-        
-        let relationAnswerFormat = ORKAnswerFormat.textAnswerFormat(withValidationRegularExpression: regex, invalidMessage: "Invalid")
+        let relationAnswerFormat = ORKAnswerFormat.textAnswerFormat()
         relationAnswerFormat.multipleLines = false
-        relationAnswerFormat.keyboardType = .asciiCapable
-        relationAnswerFormat.maximumLength = 100
+        relationAnswerFormat.keyboardType = .namePhonePad
+        relationAnswerFormat.maximumLength = 250
         
         let placeHolder = NSLocalizedString("Required", comment: "")
         let relationItem = ORKFormItem(identifier: kLARConsentParticipantRelationItem,
-                                       text: "", answerFormat: relationAnswerFormat)
+                                       text: " ", answerFormat: relationAnswerFormat)
         relationItem.placeholder = placeHolder
         relationItem.isOptional = false
         
@@ -467,7 +459,7 @@ class ConsentBuilder {
         let nameDescItem = ORKFormItem(sectionTitle: nameDescription)
         
         let firstNameText = LocalizableString.consentLARParticipantFirstName.localizedString
-        relationAnswerFormat.maximumLength = 250
+        relationAnswerFormat.maximumLength = 100
         let firstNameItem = ORKFormItem(identifier: kLARConsentParticipantFirstName,
                                         text: firstNameText, answerFormat: relationAnswerFormat)
         
@@ -481,7 +473,6 @@ class ConsentBuilder {
         lastNameItem.placeholder = placeHolder
         lastNameItem.isOptional = false
         
-        
         step.formItems = [
             relationSectionTitleItem,
             relationItem,
@@ -494,6 +485,21 @@ class ConsentBuilder {
         step.isOptional = false
         
         return step
+    }
+
+    func LARBranchingRule() -> ORKStepNavigationRule {
+
+        let reviewIdentifier = "Review" //FinalStep
+        let predicate1 = ORKResultPredicate.predicateForChoiceQuestionResult(with: ORKResultSelector(resultIdentifier: kLARConsentStep), expectedAnswerValue: "Choice_1" as NSCoding & NSCopying & NSObjectProtocol)
+
+         //Mutiple Predicates
+         let predicate2 = ORKResultPredicate.predicateForChoiceQuestionResult(with: ORKResultSelector(resultIdentifier: kLARConsentStep), expectedAnswerValue: "Choice_2" as NSCoding & NSCopying & NSObjectProtocol)
+
+         let predi = [predicate2, predicate1]
+         let desti = [kLARConsentParticipantStep, reviewIdentifier]
+
+         return ORKPredicateStepNavigationRule(resultPredicates: predi, destinationStepIdentifiers: desti, defaultStepIdentifier: reviewIdentifier, validateArrays: true)
+
     }
 }
 

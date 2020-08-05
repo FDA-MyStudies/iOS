@@ -47,15 +47,18 @@ enum LocalizableString: String {
     case consentLARParticipantFirstName = "Participant's First Name           "
     case consentLARParticipantLastName = "Participant's Last Name"
     
-    case consentLARParticipantFirstName2 = "Participant first name:"
-    case consentLARParticipantLastName2 = "Participant last name:"
+    case consentLARParticipantFirstName2 = "Participant first name: "
+    case consentLARParticipantLastName2 = "Participant last name: "
     case consentLARParticipantSignature = "Signature"
     case consentLARParticipantDate = "Date"
     case consentLARFirstName = "First name"
     case consentLARLastName = "Last name"
     case consentLARParticipantRelationship = "Relationship to participant"
     case consentLARPDFTitle = "Consent by a Legally Authorized Representative"
-    case consentLARPDFBody = "I am signing the consent document on behalf of the participant, as a legally-authorized representative of the participant."
+    case consentLARPDFBody = """
+    I am signing the consent document on behalf of the participant,
+    as a legally-authorized representative of the participant.
+    """
     
 
     var localizedString: String { return NSLocalizedString(rawValue, comment: "") }

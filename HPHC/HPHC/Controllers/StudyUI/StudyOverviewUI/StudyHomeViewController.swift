@@ -81,7 +81,7 @@ class StudyHomeViewController: UIViewController {
 
     var consentRestorationData: Data?
     lazy var isStudyActivitiesPresented = false
-    
+
     var pageViewController: PageViewController? {
         didSet {
             pageViewController?.pageViewDelegate = self
@@ -340,15 +340,8 @@ class StudyHomeViewController: UIViewController {
         }
         
         var orkOrderedTask: ORKTask? = ORKNavigableOrderedTask(identifier: kEligibilityConsentTask, steps: eligibilitySteps)
-        let predicate1 = ORKResultPredicate.predicateForChoiceQuestionResult(with: ORKResultSelector(resultIdentifier: kLARConsentStep), expectedAnswerValue: "Choice_1" as NSCoding & NSCopying & NSObjectProtocol)
-        
-        //Mutiple Predicates
-        let predicate2 = ORKResultPredicate.predicateForChoiceQuestionResult(with: ORKResultSelector(resultIdentifier: kLARConsentStep), expectedAnswerValue: "Choice_2" as NSCoding & NSCopying & NSObjectProtocol)
-        
-        let predi = [predicate2, predicate1]
-        let desti = [kLARConsentParticipantStep, LARIdentifier1]
-        
-        let LARRule = ORKPredicateStepNavigationRule(resultPredicates: predi, destinationStepIdentifiers: desti, defaultStepIdentifier: LARIdentifier1, validateArrays: true)
+
+        let LARRule = ConsentBuilder.currentConsent?.LARBranchingRule()
         
         if EligibilityBuilder.currentEligibility?.type == .test || EligibilityBuilder.currentEligibility?.type == .both {
             orkOrderedTask = ORKNavigableOrderedTask(identifier: kEligibilityConsentTask, steps: eligibilitySteps)
@@ -445,8 +438,8 @@ class StudyHomeViewController: UIViewController {
         }
         
         if orkOrderedTask is ORKNavigableOrderedTask {
-            if consentHasLAR {//LAR
-                (orkOrderedTask as? ORKNavigableOrderedTask)!.setNavigationRule(LARRule, forTriggerStepIdentifier: kLARConsentStep)
+            if consentHasLAR, let rule = LARRule {//LAR
+                (orkOrderedTask as? ORKNavigableOrderedTask)!.setNavigationRule(rule, forTriggerStepIdentifier: kLARConsentStep)
             }
             
             if consentRestorationData != nil {
@@ -1108,7 +1101,7 @@ extension StudyHomeViewController: ORKTaskViewControllerDelegate {
                 stepViewController.goForward()
             } else {}
             
-        } else if stepIndentifer == kLARConsentStep || stepIndentifer == kLARConsentParticipantStep {
+        } else if stepIndentifer == kLARConsentParticipantStep {
             stepViewController.backButtonItem?.isEnabled = true
             stepViewController.cancelButtonItem?.isEnabled = true
         }
@@ -1251,7 +1244,7 @@ print("6---\(step.identifier)")
 
             // comprehension test is available
             if (ConsentBuilder.currentConsent?.comprehension?.questions?.count)! > 0 {
-                let visualStepIndex: Int = (taskViewController.result.results?.index(where: { $0.identifier == kComprehensionInstructionStepIdentifier }))!
+                let visualStepIndex: Int = (taskViewController.result.results?.firstIndex(where: { $0.identifier == kComprehensionInstructionStepIdentifier }))!
 
                 if visualStepIndex >= 0 {
                     var i = visualStepIndex + 1 // holds the index of  question
@@ -1344,19 +1337,24 @@ print("6---\(step.identifier)")
         }
     }
   
-    func taskViewController(_ taskViewController: ORKTaskViewController, didChange result: ORKTaskResult) {
-        
+    fileprivate func updatedLARStatus(with result: ORKTaskResult) {
         if result.results?.last?.identifier == kLARConsentStep {
             if let val = result.stepResult(forStepIdentifier: kLARConsentStep) {
-                
-                let participantRelation = (val.result(forIdentifier: kLARConsentStep) as! ORKChoiceQuestionResult).choiceAnswers?.first as? String ?? "Choice_1"
-               
-                if participantRelation == "Choice_1" {
+
+                let participantRelation = (val.result(forIdentifier: kLARConsentStep) as? ORKChoiceQuestionResult)?.choiceAnswers?.first as? String
+
+                if let selectedChoice = participantRelation,
+                    selectedChoice == "Choice_1" {
                     consentHasLAR = false
-                   
+                } else {
+                    consentHasLAR = true
                 }
             }
         }
+    }
+
+    func taskViewController(_ taskViewController: ORKTaskViewController, didChange result: ORKTaskResult) {
+        updatedLARStatus(with: result)
     }
   
   func taskViewController(_ taskViewController: ORKTaskViewController, stepViewControllerWillDisappear stepViewController: ORKStepViewController, navigationDirection direction: ORKStepViewControllerNavigationDirection) {

@@ -71,12 +71,10 @@ class ConsentResult {
                     
                     if self.consentPdfData?.count == 0 {
                         self.consentPath = "Consent" +  "_" + "\((Study.currentStudy?.studyId)!)" + ".pdf"
-                        
-                        var secondFullPath = ""
-                        var thirdFullPath = ""
+
                         var fullPath: String!
                         self.consentDocument?.makePDF(completionHandler: { data,error in
-                            print("data: \(String(describing: data))    \n  error: \(String(describing: error))")
+  //                          print("data: \(String(describing: data))    \n  error: \(String(describing: error))")
                             
                             
                             let path =  AKUtility.baseFilePath + "/study"
@@ -89,50 +87,26 @@ class ConsentResult {
                             if !FileManager.default.fileExists(atPath: path) {
                                 try! FileManager.default.createDirectory(atPath: path, withIntermediateDirectories: true, attributes: nil)
                             }
-                            
-                            self.consentPdfData = Data()
+
                             self.consentPdfData = data
                             self.consentPath = fileName
-                            
-                            let fileNameLAR: String = "Consent" +  "_" + "\((Study.currentStudy?.studyId)!)" + "LAR" + ".pdf"
-                            
-                            secondFullPath = path + "/" + "second.pdf"
-                            thirdFullPath = path + "/" + fileNameLAR
-                            
-                            do {
-                                
-                                if FileManager.default.fileExists(atPath: fullPath){
-                                    try FileManager.default.removeItem(atPath: fullPath)
-                                }
-                                if FileManager.default.fileExists(atPath: secondFullPath){
-                                    try FileManager.default.removeItem(atPath: secondFullPath)
-                                }
-                                if FileManager.default.fileExists(atPath: thirdFullPath){
-                                    try FileManager.default.removeItem(atPath: thirdFullPath)
-                                }
-                                FileManager.default.createFile(atPath:fullPath , contents: data, attributes: [:])
-                                
-                                let defaultPath = fullPath
-                                fullPath = "file://" + "\(fullPath!)"
-                                try data?.write(to:  URL(string:fullPath!)!)
-                                
-                                if !consentHasLAR { //consentHasLAR {
-                                    FileDownloadManager.encyptFile(pathURL: URL(string: defaultPath!)!)
-                                    let notificationName = Notification.Name(kPDFCreationNotificationId)
-                                    // Post notification
-                                    NotificationCenter.default.post(name: notificationName, object: nil)
-                                }
-                                
-                            } catch let error as NSError {
-                                print(error.localizedDescription)
+
+                            if FileManager.default.fileExists(atPath: fullPath){
+                                try? FileManager.default.removeItem(atPath: fullPath)
                             }
-                            
-                            
+
+                            FileManager.default.createFile(atPath: fullPath , contents: data, attributes: [:])
+
+                            let defaultPath = fullPath
+                            fullPath = "file://" + "\(fullPath!)"
+                            try? data?.write(to:  URL(string:fullPath!)!)
+
                             if consentHasLAR {
+                                var LARSignedPDFPath = path + "/" + "second.pdf"
                                 let participantFormStepResult = taskResult.stepResult(forStepIdentifier: kLARConsentParticipantStep)
-                                let participantRelation = (participantFormStepResult?.result(forIdentifier: kLARConsentParticipantRelationItem) as! ORKTextQuestionResult).textAnswer ?? ""
-                                let participantFirstName = (participantFormStepResult?.result(forIdentifier: kLARConsentParticipantFirstName) as! ORKTextQuestionResult).textAnswer ?? ""
-                                let participantLastName = (participantFormStepResult?.result(forIdentifier: kLARConsentParticipantLastName) as! ORKTextQuestionResult).textAnswer ?? ""
+                                let participantRelation = (participantFormStepResult?.result(forIdentifier: kLARConsentParticipantRelationItem) as? ORKTextQuestionResult)?.textAnswer ?? ""
+                                let participantFirstName = (participantFormStepResult?.result(forIdentifier: kLARConsentParticipantFirstName) as? ORKTextQuestionResult)?.textAnswer ?? ""
+                                let participantLastName = (participantFormStepResult?.result(forIdentifier: kLARConsentParticipantLastName) as? ORKTextQuestionResult)?.textAnswer ?? ""
                                 
                                 let title = LocalizableString.consentLARPDFTitle.localizedString
                                 let body = LocalizableString.consentLARPDFBody.localizedString
@@ -149,47 +123,23 @@ class ConsentResult {
                                 
                                 let pdfCreator = PDFCreator(title: title, body: body, image: image, relation: participantRelation, participantFirstName: participantFirstName, participantLastName: participantLastName, startTime: startDate, firstName: firstName, lastName: lastName)
                                 let pdfData = pdfCreator.createFlyer()
-                                
-                                do {
-                                    
-                                    if FileManager.default.fileExists(atPath: secondFullPath) {
-                                        try FileManager.default.removeItem(atPath: secondFullPath)
-                                    }
-                                    FileManager.default.createFile(atPath:secondFullPath , contents: pdfData, attributes: [:])
-                                    
-                                    secondFullPath = "file://" + "\(secondFullPath)"
-                                    print("2fullPath---\(secondFullPath)")
-                                    try pdfData.write(to:  URL(string:secondFullPath)!)
-                                    //                                FileDownloadManager.encyptFile(pathURL: URL(string: thirdFullPath)!)
-                                    
-                                    
-                                    let initialPDFReturned =  self.mergePdfFiles(sourcePdfFiles: [fullPath,secondFullPath], destPdfFile: thirdFullPath)
-                                    
-                                    if initialPDFReturned {
-                                        do {
-                                            if FileManager.default.fileExists(atPath: secondFullPath) {
-                                                try FileManager.default.removeItem(atPath: secondFullPath)
-                                            }
-                                        } catch {
-                                            
-                                        }
-                                        
-                                        let data1 = try Data(contentsOf: URL(string: secondFullPath)!)
-                                        
-                                        //                                let pdfDoc = PDFDocument(url: URL(string: thirdFullPath)!)!
-                                        self.consentPdfData = data1//pdfDoc.dataRepresentation()
-                                        
-                                        self.consentPath = fileNameLAR
-                                        let notificationName = Notification.Name(kPDFCreationNotificationId)
-                                        // Post notification
-                                        NotificationCenter.default.post(name: notificationName, object: nil)
-                                        
-                                    }
+
+                                if FileManager.default.fileExists(atPath: LARSignedPDFPath) {
+                                    try? FileManager.default.removeItem(atPath: LARSignedPDFPath)
                                 }
-                                catch let error as NSError {
-                                    print(error.localizedDescription)
+                                FileManager.default.createFile(atPath: LARSignedPDFPath , contents: pdfData, attributes: [:])
+
+                                LARSignedPDFPath = "file://" + "\(LARSignedPDFPath)"
+
+                                if let updatedPDFData = self.mergePdfFiles(rkPDFPath: fullPath,
+                                                                       LARPdfPath: LARSignedPDFPath) {
+                                    try? updatedPDFData.write(to:  URL(string:fullPath!)!)
+                                    self.consentPdfData = updatedPDFData
                                 }
                             }
+                            FileDownloadManager.encyptFile(pathURL: URL(string: defaultPath!)!)
+                            NotificationCenter.default.post(name: Notification.Name(kPDFCreationNotificationId),
+                                                            object: nil)
                             
                         })
                     } else {
@@ -306,35 +256,21 @@ class ConsentResult {
         return activityDict!
     }
     
-    func mergePdfFiles(sourcePdfFiles:[String], destPdfFile:String) -> Bool {
-        let pdfDoc3 = PDFDocument()
-        let pdfDoc1 = PDFDocument(url: URL(string: sourcePdfFiles[0])!)!
-        let page1 = pdfDoc1.page(at: 0)!
+    func mergePdfFiles(rkPDFPath: String, LARPdfPath: String) -> Data? {
+
+        guard let rkURL = URL(string: rkPDFPath),
+            let LARURL = URL(string: LARPdfPath),
+            let rkPDF = PDFDocument(url: rkURL),
+            let larPDF = PDFDocument(url: LARURL) else { return nil
+        }
+
+        rkPDF.removePage(at: rkPDF.pageCount - 1)
+
+        guard let page2 = larPDF.page(at: 0) else {
+            return nil
+        }
+        rkPDF.insert(page2, at: rkPDF.pageCount)
         
-        let pdfDoc2 = PDFDocument(url: URL(string: sourcePdfFiles[1])!)!
-        let page2 = pdfDoc2.page(at: 0)!
-//        pdfDoc1.removePage(at: 1)
-//        pdfDoc1.insert(page2, at: 1)
-        
-        pdfDoc3.insert(page1, at: 0)
-        pdfDoc3.insert(page2, at: 1)
-        
-        
-        
-//        let valData = pdfDoc1.dataRepresentation()
-        pdfDoc3.write(toFile: destPdfFile)
-        let data = pdfDoc3.dataRepresentation()
-        
-        let cgDoc = pdfDoc3.documentRef
-        
-        
-//        do {
-//        try data?.write(to:  URL(string:destPdfFile)!)
-//        }
-//        catch {
-//
-//        }
-        
-        return true
+        return rkPDF.dataRepresentation()
     }
 }

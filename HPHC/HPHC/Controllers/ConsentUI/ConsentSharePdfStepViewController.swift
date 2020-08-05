@@ -89,27 +89,13 @@ class ConsentSharePdfStepViewController: ORKStepViewController {
     }
     
     @IBAction func buttonActionViewPdf(sender: UIButton?) {
-        
-        self.addProgressIndicator()
-        
-        //Generating consentDocumentPdf
-        self.consentDocument?.makePDF(completionHandler: { data,error in
-            NSLog("data: \(String(describing: data))    \n  error: \(String(describing: error))")
-            
-            self.taskResult.pdfData = data!
-            
-            self.taskResult.didTapOnViewPdf = true
-            
-            //Saving ConsentPdfData
-            ConsentBuilder.currentConsent?.consentResult?.consentPdfData = Data()
-            ConsentBuilder.currentConsent?.consentResult?.consentPdfData = data
-            
-            
-            self.removeProgressIndicator()
-            //Navigate to next step
-            self.goForward()
-            
-        })
+        guard let PDFData = ConsentBuilder.currentConsent?.consentResult?.consentPdfData else {
+            return
+        }
+        self.taskResult.pdfData = PDFData
+        self.taskResult.didTapOnViewPdf = true
+        //Navigate to next step
+        self.goForward()
     }
     
     // MARK:View controller delegates
@@ -129,21 +115,14 @@ class ConsentSharePdfStepViewController: ORKStepViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(enrollmentCompleted), name: NSNotification.Name(rawValue: "NotificationStudyEnrollmentCompleted"), object: nil)
         
         NotificationCenter.default.addObserver(self, selector: #selector(enrollmentFailed), name: NSNotification.Name(rawValue: "NotificationStudyEnrollmentFailed"), object: nil)
-        
-        //if Study.currentStudy?.userParticipateState.status == UserStudyStatus.StudyStatus.yetToJoin {
+
             activityIndicator.startAnimating()
             //hide views until enrollment completed
             buttonNext?.isHidden = true
             buttonViewPdf?.isHidden = true
             labelTitle.isHidden = true
             lableDescription.isHidden = true
-//        }
-//        else {
-//            activityIndicator.isHidden = true
-//        }
-        
-       
-        
+
     }
     override func viewWillDisappear(_ animated: Bool) {
       super.viewWillDisappear(animated)

@@ -610,8 +610,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let taskViewController: ORKTaskViewController?
         
         //create orderedTask
-        let consentTask: ORKOrderedTask? = ConsentBuilder.currentConsent?.createConsentTask() as! ORKOrderedTask?
-        
+        let consentTask = ConsentBuilder.currentConsent?.createConsentTask()
+
+        if consentHasLAR, let rule = ConsentBuilder.currentConsent?.LARBranchingRule() {//LAR
+            (consentTask as? ORKNavigableOrderedTask)?.setNavigationRule(rule, forTriggerStepIdentifier: kLARConsentStep)
+        }
         taskViewController = ORKTaskViewController(task: consentTask, taskRun: nil)
         
         taskViewController?.delegate = self
@@ -1211,7 +1214,24 @@ extension AppDelegate {
         }
         
     }
-    
+
+    /// Updates the user LAR status from result to generate the Consent PDF
+    /// - Parameter result: LAR steps result.
+    fileprivate func updatedLARStatus(with result: ORKTaskResult) {
+        if result.results?.last?.identifier == kLARConsentStep {
+            if let val = result.stepResult(forStepIdentifier: kLARConsentStep) {
+
+                let participantRelation = (val.result(forIdentifier: kLARConsentStep) as? ORKChoiceQuestionResult)?.choiceAnswers?.first as? String
+
+                if let selectedChoice = participantRelation,
+                    selectedChoice == "Choice_1" {
+                    consentHasLAR = false
+                } else {
+                    consentHasLAR = true
+                }
+            }
+        }
+    }
     
 }
 
@@ -1289,10 +1309,14 @@ extension AppDelegate: NMWebServiceDelegate {
     }
 }
 
+ // MARK: - ORKTaskViewController Delegate
 
 extension AppDelegate: ORKTaskViewControllerDelegate {
-    // MARK:ORKTaskViewController Delegate
-    
+
+    func taskViewController(_ taskViewController: ORKTaskViewController, didChange result: ORKTaskResult) {
+        updatedLARStatus(with: result)
+    }
+
     func taskViewControllerSupportsSaveAndRestore(_ taskViewController: ORKTaskViewController) -> Bool {
         return true
     }
@@ -1375,42 +1399,20 @@ extension AppDelegate: ORKTaskViewControllerDelegate {
         }else {
             taskViewController.dismiss(animated: true, completion: nil)
         }
-        
-        if taskViewController.task?.identifier == kConsentTaskIdentifier && reason == ORKTaskViewControllerFinishReason.completed {
-            
-            //
-            
-            
-//            ConsentBuilder.currentConsent?.consentStatus = .completed
-//            self.addAndRemoveProgress(add: true)
-//
-//            if ConsentBuilder.currentConsent?.consentResult?.consentPdfData?.count == 0 {
-//
-//                DispatchQueue.main.asyncAfter(deadline: .now()+3) {
-//                    self.updateEligibilityConsentStatus()
-//                }
-//
-//
-//            }else {
-//                //Update Consent Status to server
-//                UserServices().updateUserEligibilityConsentStatus(eligibilityStatus: true, consentStatus:(ConsentBuilder.currentConsent?.consentStatus)!  , delegate: self)
-//            }
-        }
+
     }
     
     
     func taskViewController(_ taskViewController: ORKTaskViewController, stepViewControllerWillAppear stepViewController: ORKStepViewController) {
         
-        
+        let stepIdentifier = stepViewController.step?.identifier
+
         if taskViewController.task?.identifier == kConsentTaskIdentifier {
             
             if (taskViewController.result.results?.count)! > 1{
-                
                 if activityBuilder?.actvityResult?.result?.count == taskViewController.result.results?.count {
                     //Removing the dummy result:Currentstep result which not presented yet
                     activityBuilder?.actvityResult?.result?.removeLast()
-                }else {
-                    //Do Nothing
                 }
             }
             
@@ -1418,19 +1420,16 @@ extension AppDelegate: ORKTaskViewControllerDelegate {
             
             //For Verified Step , Completion Step, Visual Step, Review Step, Share Pdf Step
             
-            if  stepViewController.step?.identifier == kConsentCompletionStepIdentifier
-                || stepViewController.step?.identifier == kVisualStepId
-                || stepViewController.step?.identifier == kConsentSharePdfCompletionStep
-                || stepViewController.step?.identifier == kEligibilityVerifiedScreen {
-                
-                
-                if stepViewController.step?.identifier == kEligibilityVerifiedScreen {
+            if  stepIdentifier == kConsentCompletionStepIdentifier
+                || stepIdentifier == kVisualStepId
+                || stepIdentifier == kConsentSharePdfCompletionStep
+                || stepIdentifier == kEligibilityVerifiedScreen {
+
+                if stepIdentifier == kEligibilityVerifiedScreen {
                     stepViewController.continueButtonTitle = kContinueButtonTitle
                 }
                 stepViewController.backButtonItem = nil
-            }
-                //checking if currentstep is View Pdf Step
-            else if stepViewController.step?.identifier == kConsentViewPdfCompletionStep {
+            } else if stepIdentifier == kConsentViewPdfCompletionStep {
                 
                 //Back button is enabled
                 stepViewController.backButtonItem = nil
@@ -1440,21 +1439,20 @@ extension AppDelegate: ORKTaskViewControllerDelegate {
                 let consentSignatureResult: ConsentCompletionTaskResult? = orkStepResult?.results?.first as? ConsentCompletionTaskResult
                 
                 //Checking if Signature is consented after Review Step
-                
                 if  consentSignatureResult?.didTapOnViewPdf == false {
                     //Directly moving to completion step by skipping Intermediate PDF viewer screen
                     stepViewController.goForward()
-                    
-                }else {
                 }
-            }else {
+            } else if stepIdentifier == kLARConsentParticipantStep {
+                stepViewController.backButtonItem?.isEnabled = true
+                stepViewController.cancelButtonItem?.isEnabled = true
+            } else {
                 if taskViewController.task?.identifier == "ConsentTask" {
                     stepViewController.backButtonItem = nil
                 }
                 else {
                     stepViewController.backButtonItem?.isEnabled = true
                 }
-                
             }
         }
     }
@@ -1571,10 +1569,10 @@ extension AppDelegate: ORKTaskViewControllerDelegate {
                         
                         //Pass score Calculation
                         while  i < (taskViewController.result.results?.count)! {
-                            
-                            
+
+
                             let textChoiceResult: ORKChoiceQuestionResult = (((taskViewController.result.results?[i] as? ORKStepResult)!.results?.first) as? ORKChoiceQuestionResult)!
-                            
+
                             let correctAnswerDict: Dictionary<String,Any>? = ConsentBuilder.currentConsent?.comprehension?.correctAnswers?[j]
                             let answerArray: [String] = (correctAnswerDict?[kConsentComprehensionAnswer] as? [String])!
                             let evaluationType: Evaluation? = Evaluation(rawValue: (correctAnswerDict?[kConsentComprehensionEvaluation] as? String)!)

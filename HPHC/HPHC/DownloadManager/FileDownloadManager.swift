@@ -133,7 +133,7 @@ class FileDownloadManager: NSObject,URLSessionDelegate,URLSessionDownloadDelegat
         
         if !FileManager.default.fileExists(atPath: pathString) {
         
-        do{
+        do {
             
             let ud = UserDefaults.standard
             

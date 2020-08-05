@@ -87,30 +87,12 @@ class ConsentPdfViewerStepViewController: ORKStepViewController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        
-        if consentHasLAR {
-            let path =  AKUtility.baseFilePath + "/study"
-            let fileNameLAR: String = "Consent" +  "_" + "\((Study.currentStudy?.studyId)!)" + "LAR" + ".pdf"
-            let pdfFilePath = path + "/" + fileNameLAR
-            let urlRequest = URLRequest.init(url: URL(fileURLWithPath: pdfFilePath) )
-            self.webView.load(urlRequest)
-            
-//                        guard let pdfData1 = FileDownloadManager.decrytFile(pathURL: URL(string: pdfFilePath))
-//                        else {return}
-//
-//                            self.webView.load(pdfData1,
-//                                              mimeType: "application/pdf",
-//                                              characterEncodingName: "UTF-8",
-//                                              baseURL: URL(fileURLWithPath: ""))
-        }
-        else {
-            if let pdfData = self.pdfData {
-                self.webView.load(pdfData,
-                                  mimeType: "application/pdf",
-                                  characterEncodingName: "UTF-8",
-                                  baseURL: URL(fileURLWithPath: ""))
-            }
+      super.viewDidAppear(animated)
+        if let pdfData = self.pdfData {
+            self.webView.load(pdfData,
+                              mimeType: "application/pdf",
+                              characterEncodingName: "UTF-8",
+                              baseURL: URL(fileURLWithPath: ""))
         }
     }
     /*
@@ -180,3 +162,7 @@ extension ConsentPdfViewerStepViewController: WKNavigationDelegate{
     }
     
 }
+
+
+
+

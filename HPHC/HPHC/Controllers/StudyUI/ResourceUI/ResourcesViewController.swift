@@ -438,21 +438,17 @@ class ResourcesViewController: UIViewController{
     }
     
     
-    func navigateToWebView(link: String?,htmlText: String?,pdfData: Data?,LAR: Bool?){
-        
+    func navigateToWebView(link: String?,htmlText: String?,pdfData: Data?){
+
         let loginStoryboard = UIStoryboard.init(name: "Main", bundle: Bundle.main)
         let webViewController = (loginStoryboard.instantiateViewController(withIdentifier: "WebViewController") as? UINavigationController)!
         let webView = (webViewController.viewControllers[0] as? WebViewController)!
         webView.isEmailAvailable = true
         
-        if LAR ?? false {
-            webView.isLAR = true
+        if pdfData != nil {
+            webView.pdfData = pdfData
         }
-        else {
-            if pdfData != nil {
-                webView.pdfData = pdfData
-            }
-        }
+
         self.navigationController?.present(webViewController, animated: true, completion: nil)
     }
     
@@ -482,14 +478,6 @@ class ResourcesViewController: UIViewController{
     func pushToResourceDetails(){
         
         let path = AKUtility.baseFilePath + "/study"
-        
-        let fileNameLAR: String = "Consent" +  "_" + "\((Study.currentStudy?.studyId)!)" + "LAR" + ".pdf"
-        let pdfFilePath = path + "/" + fileNameLAR
-        if FileManager.default.fileExists(atPath: pdfFilePath) {
-            self.navigateToWebView(link: "", htmlText: "",pdfData: nil, LAR: true)
-        }
-        else {
-        
         let consentPath = Study.currentStudy?.signedConsentFilePath
         
         let fullPath = path + "/" + consentPath!
@@ -517,8 +505,7 @@ class ResourcesViewController: UIViewController{
         }
         
         if isPDF {
-            self.navigateToWebView(link: "", htmlText: "",pdfData: pdfData, LAR: false)
-        }
+            self.navigateToWebView(link: "", htmlText: "",pdfData: pdfData)
         }
     }
     

@@ -50,29 +50,10 @@ enum WCPMethods: String {
 
 
 struct WCPServerURLConstants {
-    //TODO: Set the server end points
-    
-    //local - btc
-    //    static let ProductionURL = "http://192.168.0.44:3429/StudyMetaData/"
-    //    static let DevelopmentURL = "192.168.0.44:3429/StudyMetaData/"
-  
-  //    static let ProductionURL = "https://104.197.211.26:8083/StudyMetaData/"
-  //    static let DevelopmentURL = "https://104.197.211.26:8083/StudyMetaData/"
-    
-    //AWS  - btc
-            static let ProductionURL = "http://18.222.7.100:8080/StudyMetaData/"
-            static let DevelopmentURL = "http://18.222.7.100:8080/StudyMetaData/"
-    //
-    //Staging
-//        static let ProductionURL = "https://hpwcp-stage.lkcompliant.net/StudyMetaData/"
-//        static let DevelopmentURL = "https://hpwcp-stage.lkcompliant.net/StudyMetaData/"
-    
-//    static let ProductionURL = "https://hpwcp.lkcompliant.net/StudyMetaData/"
-//    static let DevelopmentURL = "https://hpwcp.lkcompliant.net/StudyMetaData/"
-    
-    //    Demo
-    //    static let ProductionURL = "https://wcp.demo.mystudiesapp.org/StudyMetaData/"
-    //    static let DevelopmentURL = "https://wcp.demo.mystudiesapp.org/StudyMetaData/"//fdahpStudyDesigner
+
+    static let ProductionURL = API.wcpURL
+    static let DevelopmentURL = API.wcpURL
+
 }
 
 class WCPConfiguration: NetworkConfiguration {

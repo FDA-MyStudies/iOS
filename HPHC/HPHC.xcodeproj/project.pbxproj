@@ -136,6 +136,13 @@
 		6F0221792264729E00A2DBC8 /* TextChoiceCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F0221772264729D00A2DBC8 /* TextChoiceCell.xib */; };
 		6F02217A2264729E00A2DBC8 /* OtherTextChoiceCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F0221782264729E00A2DBC8 /* OtherTextChoiceCell.xib */; };
 		6F10BB19234DE45D006388E2 /* Activity_New_Other_Form.json in Resources */ = {isa = PBXBuildFile; fileRef = 6F10BB18234DE45D006388E2 /* Activity_New_Other_Form.json */; };
+		6F1E2FA924DADA7900BA1798 /* LocalizableString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F1E2FA824DADA7900BA1798 /* LocalizableString.swift */; };
+		6F1E2FAA24DADA7900BA1798 /* LocalizableString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F1E2FA824DADA7900BA1798 /* LocalizableString.swift */; };
+		6F1E2FAB24DADA7900BA1798 /* LocalizableString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F1E2FA824DADA7900BA1798 /* LocalizableString.swift */; };
+		6F1E2FAC24DADA7900BA1798 /* LocalizableString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F1E2FA824DADA7900BA1798 /* LocalizableString.swift */; };
+		6F1E2FAD24DADA7900BA1798 /* LocalizableString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F1E2FA824DADA7900BA1798 /* LocalizableString.swift */; };
+		6F1E2FAE24DADA7900BA1798 /* LocalizableString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F1E2FA824DADA7900BA1798 /* LocalizableString.swift */; };
+		6F1E2FAF24DADA7900BA1798 /* LocalizableString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F1E2FA824DADA7900BA1798 /* LocalizableString.swift */; };
 		6F211945240CF27E008AF0BD /* ActivityDiskService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F211944240CF27E008AF0BD /* ActivityDiskService.swift */; };
 		6F41B85C23AC92F900D4F624 /* AppConfiguration.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6F41B85923AC92F900D4F624 /* AppConfiguration.plist */; };
 		6F41B85E23AC930B00D4F624 /* AppConfiguration.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6F41B85D23AC930B00D4F624 /* AppConfiguration.plist */; };
@@ -145,20 +152,13 @@
 		6F41B86423AC938500D4F624 /* AppConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F41B86123AC937200D4F624 /* AppConfiguration.swift */; };
 		6F52327E23D9883800995A78 /* ActivityMetadata TEST1.json in Resources */ = {isa = PBXBuildFile; fileRef = 6F52327D23D9883800995A78 /* ActivityMetadata TEST1.json */; };
 		6F5500A32448A1E600AF4968 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6F5500A02448A1E600AF4968 /* GoogleService-Info.plist */; };
-		6F58A83124CED65D009322B3 /* LocalizableString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F58A82F24CED65B009322B3 /* LocalizableString.swift */; };
-		6F58A83224CED65D009322B3 /* LocalizableString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F58A82F24CED65B009322B3 /* LocalizableString.swift */; };
-		6F58A83324CED65D009322B3 /* LocalizableString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F58A82F24CED65B009322B3 /* LocalizableString.swift */; };
-		6F58A83424CED65D009322B3 /* LocalizableString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F58A82F24CED65B009322B3 /* LocalizableString.swift */; };
-		6F58A83524CED65D009322B3 /* LocalizableString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F58A82F24CED65B009322B3 /* LocalizableString.swift */; };
-		6F58A83624CED65D009322B3 /* LocalizableString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F58A82F24CED65B009322B3 /* LocalizableString.swift */; };
-		6F58A83724CED65D009322B3 /* LocalizableString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F58A82F24CED65B009322B3 /* LocalizableString.swift */; };
-		6F58A83824CED65D009322B3 /* Localizable.strings.txt in Resources */ = {isa = PBXBuildFile; fileRef = 6F58A83024CED65B009322B3 /* Localizable.strings.txt */; };
-		6F58A83924CED65D009322B3 /* Localizable.strings.txt in Resources */ = {isa = PBXBuildFile; fileRef = 6F58A83024CED65B009322B3 /* Localizable.strings.txt */; };
-		6F58A83A24CED65D009322B3 /* Localizable.strings.txt in Resources */ = {isa = PBXBuildFile; fileRef = 6F58A83024CED65B009322B3 /* Localizable.strings.txt */; };
-		6F58A83B24CED65D009322B3 /* Localizable.strings.txt in Resources */ = {isa = PBXBuildFile; fileRef = 6F58A83024CED65B009322B3 /* Localizable.strings.txt */; };
-		6F58A83C24CED65D009322B3 /* Localizable.strings.txt in Resources */ = {isa = PBXBuildFile; fileRef = 6F58A83024CED65B009322B3 /* Localizable.strings.txt */; };
-		6F58A83D24CED65D009322B3 /* Localizable.strings.txt in Resources */ = {isa = PBXBuildFile; fileRef = 6F58A83024CED65B009322B3 /* Localizable.strings.txt */; };
-		6F58A83E24CED65D009322B3 /* Localizable.strings.txt in Resources */ = {isa = PBXBuildFile; fileRef = 6F58A83024CED65B009322B3 /* Localizable.strings.txt */; };
+		6F58A84724D177F4009322B3 /* APIConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F58A84424D177F4009322B3 /* APIConfiguration.swift */; };
+		6F58A84824D177F4009322B3 /* APIConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F58A84424D177F4009322B3 /* APIConfiguration.swift */; };
+		6F58A84924D177F4009322B3 /* APIConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F58A84424D177F4009322B3 /* APIConfiguration.swift */; };
+		6F58A84A24D177F4009322B3 /* APIConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F58A84424D177F4009322B3 /* APIConfiguration.swift */; };
+		6F58A84B24D177F4009322B3 /* APIConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F58A84424D177F4009322B3 /* APIConfiguration.swift */; };
+		6F58A84C24D177F4009322B3 /* APIConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F58A84424D177F4009322B3 /* APIConfiguration.swift */; };
+		6F58A84D24D177F4009322B3 /* APIConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F58A84424D177F4009322B3 /* APIConfiguration.swift */; };
 		6F5AAF80225DE699002C8FF6 /* Activity_Metadata_Other.json in Resources */ = {isa = PBXBuildFile; fileRef = 6F5AAF7F225DE699002C8FF6 /* Activity_Metadata_Other.json */; };
 		6F90AB4A24693DD200F4D1BE /* UIView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F90AB4924693DD200F4D1BE /* UIView+Extensions.swift */; };
 		6F90AB4B24693DD200F4D1BE /* UIView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F90AB4924693DD200F4D1BE /* UIView+Extensions.swift */; };
@@ -1715,6 +1715,7 @@
 		6F0221772264729D00A2DBC8 /* TextChoiceCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TextChoiceCell.xib; sourceTree = "<group>"; };
 		6F0221782264729E00A2DBC8 /* OtherTextChoiceCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OtherTextChoiceCell.xib; sourceTree = "<group>"; };
 		6F10BB18234DE45D006388E2 /* Activity_New_Other_Form.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Activity_New_Other_Form.json; sourceTree = "<group>"; };
+		6F1E2FA824DADA7900BA1798 /* LocalizableString.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalizableString.swift; sourceTree = "<group>"; };
 		6F211944240CF27E008AF0BD /* ActivityDiskService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityDiskService.swift; sourceTree = "<group>"; };
 		6F41B85923AC92F900D4F624 /* AppConfiguration.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = AppConfiguration.plist; sourceTree = "<group>"; };
 		6F41B85D23AC930B00D4F624 /* AppConfiguration.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = AppConfiguration.plist; sourceTree = "<group>"; };
@@ -1722,8 +1723,9 @@
 		6F41B86123AC937200D4F624 /* AppConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppConfiguration.swift; sourceTree = "<group>"; };
 		6F52327D23D9883800995A78 /* ActivityMetadata TEST1.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "ActivityMetadata TEST1.json"; sourceTree = "<group>"; };
 		6F5500A02448A1E600AF4968 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		6F58A82F24CED65B009322B3 /* LocalizableString.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalizableString.swift; sourceTree = "<group>"; };
-		6F58A83024CED65B009322B3 /* Localizable.strings.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Localizable.strings.txt; sourceTree = "<group>"; };
+		6F58A84424D177F4009322B3 /* APIConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIConfiguration.swift; sourceTree = "<group>"; };
+		6F58A84E24D17896009322B3 /* Staging.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Staging.xcconfig; sourceTree = "<group>"; };
+		6F58A85624D17ABA009322B3 /* Production.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Production.xcconfig; sourceTree = "<group>"; };
 		6F5AAF7F225DE699002C8FF6 /* Activity_Metadata_Other.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Activity_Metadata_Other.json; sourceTree = "<group>"; };
 		6F6EC42223E1577B0056AD55 /* FDA MyStudies Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "FDA MyStudies Demo.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6F8A861723E160F00096D791 /* FDADemo.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = FDADemo.storyboard; sourceTree = "<group>"; };
@@ -2082,6 +2084,8 @@
 			children = (
 				84E8D61624D161B6008C38D5 /* PDFCreator.swift */,
 				6EF0BC352223D1D5004F2357 /* ResearchKit.xcodeproj */,
+				6F58A84E24D17896009322B3 /* Staging.xcconfig */,
+				6F58A85624D17ABA009322B3 /* Production.xcconfig */,
 				6E7D2D581E433E8700763D4C /* HPHC */,
 				7878B31B2216C6E20052FC23 /* HPHCTests */,
 				89055919230149AD005FB284 /* HPHCUITests */,
@@ -2547,8 +2551,7 @@
 		6F58A82E24CED65B009322B3 /* Localizable */ = {
 			isa = PBXGroup;
 			children = (
-				6F58A82F24CED65B009322B3 /* LocalizableString.swift */,
-				6F58A83024CED65B009322B3 /* Localizable.strings.txt */,
+				6F1E2FA824DADA7900BA1798 /* LocalizableString.swift */,
 			);
 			path = Localizable;
 			sourceTree = "<group>";
@@ -2971,6 +2974,7 @@
 		94CD96E31E4AF61800946477 /* NetworkModule */ = {
 			isa = PBXGroup;
 			children = (
+				6F58A84424D177F4009322B3 /* APIConfiguration.swift */,
 				94CD96E41E4AF61800946477 /* NetworkConstants.swift */,
 				94CD96EC1E4AFAFF00946477 /* NetworkConfiguration.swift */,
 				94CD96E51E4AF61800946477 /* NetworkManager.swift */,
@@ -3183,7 +3187,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1020;
-				LastUpgradeCheck = 1140;
+				LastUpgradeCheck = 1160;
 				ORGANIZATIONNAME = BTC;
 				TargetAttributes = {
 					6E7D2D551E433E8700763D4C = {
@@ -3350,7 +3354,6 @@
 				6EBC2E811E94FB5300828CA1 /* StudyDashboard.plist in Resources */,
 				89831393224399FC0000BEB5 /* ResourceList.json in Resources */,
 				6F02217A2264729E00A2DBC8 /* OtherTextChoiceCell.xib in Resources */,
-				6F58A83824CED65D009322B3 /* Localizable.strings.txt in Resources */,
 				6EF748BF1E69645700F1E89E /* LatestActive_Taskdocument.json in Resources */,
 				6EAA048B1FAF4C6E00214D03 /* Labkey_Activity_Latest.json in Resources */,
 				6EAB39A91E4B0B4A003442B8 /* Resources.plist in Resources */,
@@ -3400,7 +3403,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6F58A83B24CED65D009322B3 /* Localizable.strings.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3422,7 +3424,6 @@
 				6FC12B7A22FD60FE0075940B /* Verdana Italic.ttf in Resources */,
 				6FC12B7B22FD60FE0075940B /* SignUpPlist.plist in Resources */,
 				6FC12BC122FD62EA0075940B /* LimitJIA.xcassets in Resources */,
-				6F58A83A24CED65D009322B3 /* Localizable.strings.txt in Resources */,
 				6FC12B7C22FD60FE0075940B /* ActiveTask.json in Resources */,
 				6FC12B7D22FD60FE0075940B /* AppUpdateBlocker.xib in Resources */,
 				6FC12B7F22FD60FE0075940B /* Gateway.xcassets in Resources */,
@@ -3551,7 +3552,6 @@
 				6FD61CBF244597F200B71685 /* UserProfile.plist in Resources */,
 				6FD61CC0244597F200B71685 /* Register.plist in Resources */,
 				6FD61CC1244597F200B71685 /* Activity_Metadata_Other.json in Resources */,
-				6F58A83D24CED65D009322B3 /* Localizable.strings.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3643,7 +3643,6 @@
 				897C1A552451A49A00559770 /* Register.plist in Resources */,
 				897C1A562451A49A00559770 /* Activity_Metadata_Other.json in Resources */,
 				897C1A692451A61100559770 /* AppConfiguration.plist in Resources */,
-				6F58A83E24CED65D009322B3 /* Localizable.strings.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3720,7 +3719,6 @@
 				89C5EF6623F16CFE00649359 /* UserProfile.plist in Resources */,
 				89C5EF6723F16CFE00649359 /* Register.plist in Resources */,
 				89C5EF6823F16CFE00649359 /* Activity_Metadata_Other.json in Resources */,
-				6F58A83C24CED65D009322B3 /* Localizable.strings.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3767,7 +3765,6 @@
 				89DBF80922F9893000AB3EF2 /* Consent.json in Resources */,
 				89DBF80A22F9893000AB3EF2 /* SignInPlist.plist in Resources */,
 				89DBF80C22F9893000AB3EF2 /* NewProgressView.xib in Resources */,
-				6F58A83924CED65D009322B3 /* Localizable.strings.txt in Resources */,
 				89DBF80D22F9893000AB3EF2 /* fda_preload.gif in Resources */,
 				89DBF80E22F9893000AB3EF2 /* StudyOverview.plist in Resources */,
 				89DBF80F22F9893000AB3EF2 /* Login.storyboard in Resources */,
@@ -4163,6 +4160,7 @@
 				6FB89C1B225F40EB00420A7B /* TextChoiceQuestionController.swift in Sources */,
 				6ED86F641EA6498D00365AF0 /* RepeatableFormStepViewController.m in Sources */,
 				9491F7F81E825F5D0018C15E /* DBHandler.swift in Sources */,
+				6F58A84724D177F4009322B3 /* APIConfiguration.swift in Sources */,
 				6ED134361E5EB0370090C976 /* ConsentStep.swift in Sources */,
 				6EE93DCA1E93C8850027A5DC /* ActivitiesTableViewCell.swift in Sources */,
 				94B3DD501E6ED8E500327AE5 /* SecondGatewayOverviewViewController.swift in Sources */,
@@ -4250,7 +4248,7 @@
 				94C6BD441EB8513300D4AA72 /* AppUpdateBlocker.swift in Sources */,
 				6EB740261E9D028000A4C773 /* FetalKickIntroStepViewController.swift in Sources */,
 				9491F7FA1E825FA80018C15E /* DBUser.swift in Sources */,
-				6F58A83124CED65D009322B3 /* LocalizableString.swift in Sources */,
+				6F1E2FA924DADA7900BA1798 /* LocalizableString.swift in Sources */,
 				6ED1B2341E54256700BF463F /* ActivityStep.swift in Sources */,
 				484ACC001F28BC8800BCC819 /* FilterListTableViewCell.swift in Sources */,
 				6EBC2E831E94FB5300828CA1 /* StudyDashboardActivityTableViewCell.swift in Sources */,
@@ -4293,8 +4291,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				89F2EAAB23F289320026DA0B /* UIImage+Gif.swift in Sources */,
-				6F58A83424CED65D009322B3 /* LocalizableString.swift in Sources */,
+				6F58A84A24D177F4009322B3 /* APIConfiguration.swift in Sources */,
 				8973F77023F6B657008F5B22 /* Branding.swift in Sources */,
+				6F1E2FAC24DADA7900BA1798 /* LocalizableString.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4336,9 +4335,9 @@
 				6FC12AF122FD60FE0075940B /* SignUpViewController.swift in Sources */,
 				6FC12AF222FD60FE0075940B /* TextChoiceQuestionController.swift in Sources */,
 				6FC12AF322FD60FE0075940B /* RepeatableFormStepViewController.m in Sources */,
-				6F58A83324CED65D009322B3 /* LocalizableString.swift in Sources */,
 				6FC12AF422FD60FE0075940B /* DBHandler.swift in Sources */,
 				6FC12AF522FD60FE0075940B /* ConsentStep.swift in Sources */,
+				6F58A84924D177F4009322B3 /* APIConfiguration.swift in Sources */,
 				6FC12AF622FD60FE0075940B /* ActivitiesTableViewCell.swift in Sources */,
 				6FC12AF722FD60FE0075940B /* SecondGatewayOverviewViewController.swift in Sources */,
 				6FC12AF822FD60FE0075940B /* HPHCSettings.swift in Sources */,
@@ -4426,6 +4425,7 @@
 				6FC12B4422FD60FE0075940B /* FetalKickIntroStepViewController.swift in Sources */,
 				6FC12B4522FD60FE0075940B /* DBUser.swift in Sources */,
 				6FC12B4622FD60FE0075940B /* ActivityStep.swift in Sources */,
+				6F1E2FAB24DADA7900BA1798 /* LocalizableString.swift in Sources */,
 				6FC12B4722FD60FE0075940B /* FilterListTableViewCell.swift in Sources */,
 				6FC12B4822FD60FE0075940B /* StudyDashboardActivityTableViewCell.swift in Sources */,
 				6FC12B4922FD60FE0075940B /* ConsentResult.swift in Sources */,
@@ -4501,9 +4501,9 @@
 				6FD61BF2244597F200B71685 /* StudyListCell.swift in Sources */,
 				6FD61BF3244597F200B71685 /* SignUpViewController.swift in Sources */,
 				6FD61BF4244597F200B71685 /* TextChoiceQuestionController.swift in Sources */,
-				6F58A83624CED65D009322B3 /* LocalizableString.swift in Sources */,
 				6FD61BF5244597F200B71685 /* RepeatableFormStepViewController.m in Sources */,
 				6FD61BF6244597F200B71685 /* DBHandler.swift in Sources */,
+				6F58A84C24D177F4009322B3 /* APIConfiguration.swift in Sources */,
 				6FD61BF7244597F200B71685 /* ConsentStep.swift in Sources */,
 				6FD61BF8244597F200B71685 /* ActivitiesTableViewCell.swift in Sources */,
 				6FD61BF9244597F200B71685 /* SecondGatewayOverviewViewController.swift in Sources */,
@@ -4591,6 +4591,7 @@
 				6FD61C4A244597F200B71685 /* AppUpdateBlocker.swift in Sources */,
 				6FD61C4B244597F200B71685 /* FetalKickIntroStepViewController.swift in Sources */,
 				6FD61C4C244597F200B71685 /* DBUser.swift in Sources */,
+				6F1E2FAE24DADA7900BA1798 /* LocalizableString.swift in Sources */,
 				6FD61C4D244597F200B71685 /* ActivityStep.swift in Sources */,
 				6FD61C4E244597F200B71685 /* FilterListTableViewCell.swift in Sources */,
 				6FD61C4F244597F200B71685 /* StudyDashboardActivityTableViewCell.swift in Sources */,
@@ -4688,9 +4689,9 @@
 				897C19872451A49A00559770 /* StudyListCell.swift in Sources */,
 				897C19882451A49A00559770 /* SignUpViewController.swift in Sources */,
 				897C19892451A49A00559770 /* TextChoiceQuestionController.swift in Sources */,
-				6F58A83724CED65D009322B3 /* LocalizableString.swift in Sources */,
 				897C198A2451A49A00559770 /* RepeatableFormStepViewController.m in Sources */,
 				897C198B2451A49A00559770 /* DBHandler.swift in Sources */,
+				6F58A84D24D177F4009322B3 /* APIConfiguration.swift in Sources */,
 				897C198C2451A49A00559770 /* ConsentStep.swift in Sources */,
 				897C198D2451A49A00559770 /* ActivitiesTableViewCell.swift in Sources */,
 				897C198E2451A49A00559770 /* SecondGatewayOverviewViewController.swift in Sources */,
@@ -4778,6 +4779,7 @@
 				897C19DF2451A49A00559770 /* AppUpdateBlocker.swift in Sources */,
 				897C19E02451A49A00559770 /* FetalKickIntroStepViewController.swift in Sources */,
 				897C19E12451A49A00559770 /* DBUser.swift in Sources */,
+				6F1E2FAF24DADA7900BA1798 /* LocalizableString.swift in Sources */,
 				897C19E22451A49A00559770 /* ActivityStep.swift in Sources */,
 				897C19E32451A49A00559770 /* FilterListTableViewCell.swift in Sources */,
 				897C19E42451A49A00559770 /* StudyDashboardActivityTableViewCell.swift in Sources */,
@@ -4887,6 +4889,7 @@
 				89C5EEC023F16CFE00649359 /* StudyDashboardViewController.swift in Sources */,
 				89C5EEC123F16CFE00649359 /* Study.swift in Sources */,
 				89C5EEC223F16CFE00649359 /* ResourcesListCell.swift in Sources */,
+				6F1E2FAD24DADA7900BA1798 /* LocalizableString.swift in Sources */,
 				89C5EEC323F16CFE00649359 /* AnchorDateHandler.swift in Sources */,
 				89C5EEC423F16CFE00649359 /* StandaloneStudy.swift in Sources */,
 				89C5EEC523F16CFE00649359 /* LocalNotification.swift in Sources */,
@@ -4940,6 +4943,7 @@
 				89C5EEF423F16CFE00649359 /* ActivityStep.swift in Sources */,
 				89C5EEF523F16CFE00649359 /* FilterListTableViewCell.swift in Sources */,
 				89C5EEF623F16CFE00649359 /* StudyDashboardActivityTableViewCell.swift in Sources */,
+				6F58A84B24D177F4009322B3 /* APIConfiguration.swift in Sources */,
 				89C5EEF723F16CFE00649359 /* ConsentResult.swift in Sources */,
 				89C5EEF823F16CFE00649359 /* WCPConfiguration.swift in Sources */,
 				89C5EEF923F16CFE00649359 /* StudyOverviewPageViewControllerFirst.swift in Sources */,
@@ -4968,7 +4972,6 @@
 				89C5EF0E23F16CFE00649359 /* SignInTableViewCell.swift in Sources */,
 				89C5EF0F23F16CFE00649359 /* Resource.swift in Sources */,
 				89C5EF1023F16CFE00649359 /* ContactUsViewController.swift in Sources */,
-				6F58A83524CED65D009322B3 /* LocalizableString.swift in Sources */,
 				89C5EF1123F16CFE00649359 /* Reachability.swift in Sources */,
 				89C5EF1223F16CFE00649359 /* StudyDashboardWelcomeTableViewCell.swift in Sources */,
 				89C5EF1323F16CFE00649359 /* StudyListViewController.swift in Sources */,
@@ -5014,9 +5017,9 @@
 				89DBF76522F9893000AB3EF2 /* SignUpViewController.swift in Sources */,
 				89DBF76622F9893000AB3EF2 /* TextChoiceQuestionController.swift in Sources */,
 				89DBF76722F9893000AB3EF2 /* RepeatableFormStepViewController.m in Sources */,
-				6F58A83224CED65D009322B3 /* LocalizableString.swift in Sources */,
 				89DBF76822F9893000AB3EF2 /* DBHandler.swift in Sources */,
 				89DBF76922F9893000AB3EF2 /* ConsentStep.swift in Sources */,
+				6F58A84824D177F4009322B3 /* APIConfiguration.swift in Sources */,
 				89DBF76A22F9893000AB3EF2 /* ActivitiesTableViewCell.swift in Sources */,
 				89DBF76B22F9893000AB3EF2 /* SecondGatewayOverviewViewController.swift in Sources */,
 				89DBF76C22F9893000AB3EF2 /* HPHCSettings.swift in Sources */,
@@ -5104,6 +5107,7 @@
 				89DBF7B822F9893000AB3EF2 /* FetalKickIntroStepViewController.swift in Sources */,
 				89DBF7B922F9893000AB3EF2 /* DBUser.swift in Sources */,
 				89DBF7BA22F9893000AB3EF2 /* ActivityStep.swift in Sources */,
+				6F1E2FAA24DADA7900BA1798 /* LocalizableString.swift in Sources */,
 				89DBF7BB22F9893000AB3EF2 /* FilterListTableViewCell.swift in Sources */,
 				89DBF7BC22F9893000AB3EF2 /* StudyDashboardActivityTableViewCell.swift in Sources */,
 				89DBF7BD22F9893000AB3EF2 /* ConsentResult.swift in Sources */,
@@ -5229,6 +5233,7 @@
 /* Begin XCBuildConfiguration section */
 		6E7D2D7C1E433E8800763D4C /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6F58A84E24D17896009322B3 /* Staging.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
@@ -5289,6 +5294,7 @@
 		};
 		6E7D2D7D1E433E8800763D4C /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6F58A84E24D17896009322B3 /* Staging.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
@@ -5493,7 +5499,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 9;
+				CURRENT_PROJECT_VERSION = 11;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = LC58YCKU3U;
 				ENABLE_BITCODE = NO;
@@ -5529,7 +5535,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 9;
+				CURRENT_PROJECT_VERSION = 11;
 				DEVELOPMENT_TEAM = LC58YCKU3U;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = "$(SRCROOT)/HPHC/Branding/LimitJIA/Info.plist";
@@ -5751,7 +5757,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = FWLLYUH7XR;
 				ENABLE_BITCODE = NO;
@@ -5787,7 +5793,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = FWLLYUH7XR;
 				ENABLE_BITCODE = NO;

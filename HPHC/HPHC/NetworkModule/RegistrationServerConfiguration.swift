@@ -78,15 +78,13 @@ struct RegistrationServerURLConstants {
 //  static let DevelopmentURL = "https://35.222.67.4:8082/myStudiesUserMgmtWS/"
   
     //Staging server
-        static let ProductionURL = "https://hpreg-stage.lkcompliant.net/fdahpUserRegWS/"
-        static let DevelopmentURL = "https://hpreg-stage.lkcompliant.net/fdahpUserRegWS/"
+    static let ProductionURL = API.registrationURL
+    static let DevelopmentURL = API.registrationURL
     
     //Demo server
     //    static let ProductionURL = "https://reg.demo.mystudiesapp.org/fdahpUserRegWS/"
     //    static let DevelopmentURL = "https://reg.demo.mystudiesapp.org/fdahpUserRegWS/"
-    
-//    static let ProductionURL = "https://hpreg.lkcompliant.net/fdahpUserRegWS/"
-//    static let DevelopmentURL = "https://hpreg.lkcompliant.net/fdahpUserRegWS/"
+
 }
 
 class RegistrationServerConfiguration: NetworkConfiguration {

@@ -104,5 +104,11 @@
 	<string>Foundation</string>
 	<key>WebsiteLink</key>
 	<string>www.crohnscolitisfoundation.org</string>
+    <key>REGISTRATION_URL</key>
+    <string>$(REGISTRATION_URL)</string>
+    <key>RESPONSE_URL</key>
+    <string>$(RESPONSE_URL)</string>
+    <key>WCP_URL</key>
+    <string>$(WCP_URL)</string>
 </dict>
 </plist>

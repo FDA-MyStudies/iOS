@@ -586,7 +586,7 @@ class ResourcesViewController: UIViewController{
         
         self.removeProgressIndicator()
         self.navigationController?.navigationBar.isHidden = false
-        
+
         if Utilities.isStandaloneApp() {
             
             UIApplication.shared.keyWindow?.addProgressIndicatorOnWindowFromTop()

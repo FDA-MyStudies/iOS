@@ -46,6 +46,8 @@ let kStudyDashboardTabbarControllerIdentifier = "StudyDashboardTabbarViewControl
 let kShareConsentFailureAlert = "You can't join study without sharing your data"
 
 var consentHasLAR: Bool = false
+var isAdditionalSign: Bool = false
+var additionalArrSign: [String] = []
 
 protocol StudyHomeViewDontrollerDelegate {
     func studyHomeJoinStudy()

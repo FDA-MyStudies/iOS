@@ -47,6 +47,8 @@ let kConsentSharingStepAllowWithoutSharing = "allowWithoutSharing"
 let kConsentReviewStepTitle = "title"
 let kConsentReviewStepSignatureTitle = "signatureTitle"
 let kConsentReviewConsentByLAR = "consentByLAR"
+let kConsentReviewAdditionalSignature = "additionalSignature"
+let kConsentReviewAdditionalArrSignature = "signatures"
 let kConsentReviewStepSignatureContent = "reviewHTML"
 let kConsentReviewStepReasonForConsent = "reasonForConsent"
 
@@ -185,7 +187,17 @@ class ConsentBuilder {
               else {
                 consentHasLAR = false
               }
-              print("consentHasLAR---\(consentHasLAR)---\(valLAR)")
+                let valAdditionalSign = reviewConsent?.additionalSignature ?? "No"
+                if valAdditionalSign.caseInsensitiveCompare("yes") == .orderedSame {
+                  isAdditionalSign = true
+                }
+                else {
+                  isAdditionalSign = false
+                }
+                
+                let arrAdditionalSignatures = reviewConsent?.additionalArrSignatures ?? []
+                additionalArrSign = arrAdditionalSignatures
+             
             }
 
             let comprehensionDict = (metaDataDict[kConsentComprehension] as? [String: Any])!
@@ -567,6 +579,8 @@ struct ReviewConsent {
     var signatureContent: String?
     var reasonForConsent: String?
     var consentByLAR: String?
+    var additionalSignature: String?
+    var additionalArrSignatures: [String]?
 
     init() {
         title = ""
@@ -574,6 +588,8 @@ struct ReviewConsent {
         signatureContent = ""
         reasonForConsent = ""
         consentByLAR = ""
+        additionalSignature = ""
+        additionalArrSignatures = []
     }
 
     /* initializer method which initializes all params
@@ -596,6 +612,15 @@ struct ReviewConsent {
             }
             if Utilities.isValidValue(someObject: dict[kConsentReviewConsentByLAR] as AnyObject) {
                 consentByLAR = dict[kConsentReviewConsentByLAR] as? String
+            }
+            if Utilities.isValidValue(someObject: dict[kConsentReviewAdditionalSignature] as AnyObject) {
+                additionalSignature = dict[kConsentReviewAdditionalSignature] as? String
+            }
+            if Utilities.isValidValue(someObject: dict[kConsentReviewAdditionalArrSignature] as AnyObject) {
+                additionalArrSignatures = dict[kConsentReviewAdditionalArrSignature] as? [String]
+                if additionalArrSignatures?.count ?? 0 < 1 {
+                    additionalSignature = "No"
+                }
             }
         } else {
             Logger.sharedInstance.debug("ConsentDocument Step Dictionary is null:\(dict)")

@@ -59,7 +59,10 @@ enum LocalizableString: String {
     I am signing the consent document on behalf of the participant,
     as a legally-authorized representative of the participant.
     """
-    
+    case consentAddSignStudyStaffSignature = "Study Staff Signature(s)"
+    case consentAddSignCoordinator = "- Coordinator"
+    case consentAddSignParticipantName = "Participant's Name (printed)"
+    case consentAddSignParticipantSignature = "Participant's Signature"
 
     var localizedString: String { return NSLocalizedString(rawValue, comment: "") }
 }

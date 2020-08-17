@@ -319,6 +319,8 @@ class Utilities: NSObject {
             } else if someObject as? Date != nil {
                 return true
                 
+            } else if someObject as? [String] != nil && ((someObject as? [String])?.count)! > 0 && (someObject as? [String]) != [] {
+                return true
             } else {
                 return false
             }

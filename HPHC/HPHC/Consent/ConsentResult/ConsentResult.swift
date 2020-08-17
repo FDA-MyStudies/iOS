@@ -71,10 +71,10 @@ class ConsentResult {
                     
                     if self.consentPdfData?.count == 0 {
                         self.consentPath = "Consent" +  "_" + "\((Study.currentStudy?.studyId)!)" + ".pdf"
-
+                        
                         var fullPath: String!
                         self.consentDocument?.makePDF(completionHandler: { data,error in
-  //                          print("data: \(String(describing: data))    \n  error: \(String(describing: error))")
+                            //                          print("data: \(String(describing: data))    \n  error: \(String(describing: error))")
                             
                             
                             let path =  AKUtility.baseFilePath + "/study"
@@ -87,29 +87,29 @@ class ConsentResult {
                             if !FileManager.default.fileExists(atPath: path) {
                                 try! FileManager.default.createDirectory(atPath: path, withIntermediateDirectories: true, attributes: nil)
                             }
-
+                            
                             self.consentPdfData = data
                             self.consentPath = fileName
-
+                            
                             if FileManager.default.fileExists(atPath: fullPath){
                                 try? FileManager.default.removeItem(atPath: fullPath)
                             }
-
+                            
                             FileManager.default.createFile(atPath: fullPath , contents: data, attributes: [:])
-
+                            
                             let defaultPath = fullPath
                             fullPath = "file://" + "\(fullPath!)"
                             try? data?.write(to:  URL(string:fullPath!)!)
-
-                            if consentHasLAR {
+                            
+                            if isAdditionalSign || consentHasLAR {
                                 var LARSignedPDFPath = path + "/" + "second.pdf"
                                 let participantFormStepResult = taskResult.stepResult(forStepIdentifier: kLARConsentParticipantStep)
-                                let participantRelation = (participantFormStepResult?.result(forIdentifier: kLARConsentParticipantRelationItem) as? ORKTextQuestionResult)?.textAnswer ?? ""
-                                let participantFirstName = (participantFormStepResult?.result(forIdentifier: kLARConsentParticipantFirstName) as? ORKTextQuestionResult)?.textAnswer ?? ""
-                                let participantLastName = (participantFormStepResult?.result(forIdentifier: kLARConsentParticipantLastName) as? ORKTextQuestionResult)?.textAnswer ?? ""
+                                let participantRelation = consentHasLAR ? (participantFormStepResult?.result(forIdentifier: kLARConsentParticipantRelationItem) as? ORKTextQuestionResult)?.textAnswer ?? "" : ""
+                                let participantFirstName = consentHasLAR ? (participantFormStepResult?.result(forIdentifier: kLARConsentParticipantFirstName) as? ORKTextQuestionResult)?.textAnswer ?? "" : ""
+                                let participantLastName = consentHasLAR ?  (participantFormStepResult?.result(forIdentifier: kLARConsentParticipantLastName) as? ORKTextQuestionResult)?.textAnswer ?? "" : ""
                                 
-                                let title = LocalizableString.consentLARPDFTitle.localizedString
-                                let body = LocalizableString.consentLARPDFBody.localizedString
+                                let title = consentHasLAR ? LocalizableString.consentLARPDFTitle.localizedString : kConsentSignaturePageTitle
+                                let body = consentHasLAR ?  LocalizableString.consentLARPDFBody.localizedString : kSignaturePageContentText
                                 let image = signatureStepResult?.signature?.signatureImage ?? UIImage() // UIImage()
                                 let firstName = signatureStepResult?.signature?.givenName ?? ""
                                 let lastName = signatureStepResult?.signature?.familyName ?? ""
@@ -121,18 +121,25 @@ class ConsentResult {
                                 inputFormatter.dateFormat = "dd/MM/yyyy"
                                 startDate = inputFormatter.string(from: showDate!)
                                 
-                                let pdfCreator = PDFCreator(title: title, body: body, image: image, relation: participantRelation, participantFirstName: participantFirstName, participantLastName: participantLastName, startTime: startDate, firstName: firstName, lastName: lastName)
+                                var pageCount = 0
+                                if let rkURL = URL(string: fullPath) {
+                                    let rkPDF = PDFDocument(url: rkURL)
+                                    pageCount = rkPDF?.pageCount ?? 0
+                                }
+                                //                                print("consentHasLAR---\(consentHasLAR)---\(isAdditionalSign)")
+                                let pdfCreator = PDFCreator(title: title, body: body, image: image, relation: participantRelation, participantFirstName: participantFirstName, participantLastName: participantLastName, startTime: startDate, firstName: firstName, lastName: lastName, isLAR: consentHasLAR, isAdditionalSign: isAdditionalSign, additionalArrSign: additionalArrSign, pageCount: pageCount)
                                 let pdfData = pdfCreator.createFlyer()
-
+                                
                                 if FileManager.default.fileExists(atPath: LARSignedPDFPath) {
                                     try? FileManager.default.removeItem(atPath: LARSignedPDFPath)
                                 }
                                 FileManager.default.createFile(atPath: LARSignedPDFPath , contents: pdfData, attributes: [:])
-
+                                
                                 LARSignedPDFPath = "file://" + "\(LARSignedPDFPath)"
-
+                                print("LARSignedPDFPath---\(LARSignedPDFPath)")
+                                
                                 if let updatedPDFData = self.mergePdfFiles(rkPDFPath: fullPath,
-                                                                       LARPdfPath: LARSignedPDFPath) {
+                                                                           LARPdfPath: LARSignedPDFPath) {
                                     try? updatedPDFData.write(to:  URL(string:fullPath!)!)
                                     self.consentPdfData = updatedPDFData
                                 }

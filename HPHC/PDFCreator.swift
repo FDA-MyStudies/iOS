@@ -36,6 +36,10 @@ class PDFCreator: NSObject {
     let additionalArrSign: [String]
     let pageCount: Int
     
+    let pageWidth = 612.0
+    let pageHeight = 792.0
+    let pageRect = CGRect(x: 0, y: 0, width: 612.0, height: 792.0)
+    
     init(title: String, body: String, image: UIImage, relation: String, participantFirstName: String, participantLastName: String, startTime: String, firstName: String, lastName: String, isLAR: Bool, isAdditionalSign: Bool, additionalArrSign: [String], pageCount: Int) { //
         self.title = title
         self.body = body
@@ -61,55 +65,51 @@ class PDFCreator: NSObject {
         let format = UIGraphicsPDFRendererFormat()
         format.documentInfo = pdfMetaData as [String: Any]
         
-        let pageWidth = 8.5 * 72.0
-        let pageHeight = 11 * 72.0
-        let pageRect = CGRect(x: 0, y: 0, width: pageWidth, height: pageHeight)
-        
         let renderer = UIGraphicsPDFRenderer(bounds: pageRect, format: format)
         let data = renderer.pdfData { (context) in
             
             context.beginPage()
             let context = context.cgContext
             
-            let titleBottom = addTitle(pageRect: pageRect)
-            var body1TextBottom = addBody1Text(pageRect: pageRect, textTop: titleBottom + 24.0)
+            let titleBottom = addTitle()
+            var body1TextBottom = addBody1TextParagraph(textTop: titleBottom + 24.0)
             
             if isLAR {
-                let body2TextBottom = addBody2Text(pageRect: pageRect, textTop: body1TextBottom + 24.0, title1: LocalizableString.consentLARParticipantFirstName2.localizedString, title2: participantFirstName)
-                let lastNameBottom = addBody2Text(pageRect: pageRect, textTop: body2TextBottom + 12.0, title1: LocalizableString.consentLARParticipantLastName2.localizedString, title2: participantLastName)
+                let body2TextBottom = addBody2TextSideBySide(textTop: body1TextBottom + 24.0, title1: LocalizableString.consentLARParticipantFirstName2.localizedString, title2: participantFirstName)
+                let lastNameBottom = addBody2TextSideBySide(textTop: body2TextBottom + 12.0, title1: LocalizableString.consentLARParticipantLastName2.localizedString, title2: participantLastName)
                 
-                let signatureImageBottom = addImage(pageRect: pageRect, imageTop: lastNameBottom + 6.0, xValue: 15)
+                let signatureImageBottom = addImage(imageTop: lastNameBottom + 6.0, xValue: 15)
                 
                 drawLine(context, XValueStart: 10, top: signatureImageBottom + 5, xValueEnd: (CGFloat(1 * (pageWidth / 4)) + 10))
-                _ = addBody3Text(pageRect: pageRect, textTop: signatureImageBottom + 14.0, title: "(\(LocalizableString.consentLARParticipantSignature.localizedString))", xValue: 15)
+                _ = addBody1TextRegular(textTop: signatureImageBottom + 14.0, title: "(\(LocalizableString.consentLARParticipantSignature.localizedString))", xValue: 15)
                 
                 drawLine(context, XValueStart: 454, top: signatureImageBottom + 5, xValueEnd: CGFloat(pageWidth - 20))
-                body1TextBottom = addBody3Text(pageRect: pageRect, textTop: signatureImageBottom + 14.0, title: "(\(LocalizableString.consentLARParticipantDate.localizedString))", xValue: 556)
-                _ = addBody3Text(pageRect: pageRect, textTop: signatureImageBottom - 16, title: startTime, xValue: 522)
+                body1TextBottom = addBody1TextRegular(textTop: signatureImageBottom + 14.0, title: "(\(LocalizableString.consentLARParticipantDate.localizedString))", xValue: 556)
+                _ = addBody1TextRegular(textTop: signatureImageBottom - 16, title: startTime, xValue: 522)
             }
             else {
                 body1TextBottom = body1TextBottom + 104.0
             }
             
-            let firstTextBottom = addBody3Text(pageRect: pageRect, textTop: body1TextBottom + 22.0, title: isLAR ? firstName : "\(firstName) \(lastName))", xValue: 15)
+            let firstTextBottom = addBody1TextRegular(textTop: body1TextBottom + 22.0, title: isLAR ? firstName : "\(firstName) \(lastName))", xValue: 15)
             drawLine(context, XValueStart: 10, top: firstTextBottom + 5, xValueEnd: (CGFloat(1 * (pageWidth / 4)) + 10))
-            _ = addBody3Text(pageRect: pageRect, textTop: firstTextBottom + 14.0, title: isLAR ? "(\(LocalizableString.consentLARFirstName.localizedString))" : LocalizableString.consentAddSignParticipantName.localizedString, xValue: 15)
+            _ = addBody1TextRegular(textTop: firstTextBottom + 14.0, title: isLAR ? "(\(LocalizableString.consentLARFirstName.localizedString))" : LocalizableString.consentAddSignParticipantName.localizedString, xValue: 15)
             
             if isLAR {
-                _ = addBody3Text(pageRect: pageRect, textTop: body1TextBottom + 22.0, title: lastName, xValue: (CGFloat(1.3 * (pageWidth / 4)) + 10))
+                _ = addBody1TextRegular(textTop: body1TextBottom + 22.0, title: lastName, xValue: (CGFloat(1.3 * (pageWidth / 4)) + 10))
             }
             else {
-                _ = addImage(pageRect: pageRect, imageTop: firstTextBottom - 84.0, xValue: (CGFloat(1.3 * (pageWidth / 4)) + 10))
+                _ = addImage(imageTop: firstTextBottom - 84.0, xValue: (CGFloat(1.3 * (pageWidth / 4)) + 10))
             }
             drawLine(context, XValueStart: (CGFloat(1.3 * (pageWidth / 4)) + 10), top: firstTextBottom + 5, xValueEnd: (CGFloat(2.5 * (pageWidth / 4)) + 10))
-            _ = addBody3Text(pageRect: pageRect, textTop: firstTextBottom + 14.0, title: isLAR ? "(\(LocalizableString.consentLARLastName.localizedString))" : LocalizableString.consentAddSignParticipantSignature.localizedString, xValue: (CGFloat(1.3 * (pageWidth / 4)) + 10))
+            _ = addBody1TextRegular(textTop: firstTextBottom + 14.0, title: isLAR ? "(\(LocalizableString.consentLARLastName.localizedString))" : LocalizableString.consentAddSignParticipantSignature.localizedString, xValue: (CGFloat(1.3 * (pageWidth / 4)) + 10))
             
-            _ = addBody3Text(pageRect: pageRect, textTop: body1TextBottom + 22.0, title: isLAR ? relation : startTime, xValue: 454)
+            _ = addBody1TextRegular(textTop: body1TextBottom + 22.0, title: isLAR ? relation : startTime, xValue: 454)
             drawLine(context, XValueStart: 454, top: firstTextBottom + 5, xValueEnd: CGFloat(pageWidth - 20))
-            _ = addBody3Text(pageRect: pageRect, textTop: firstTextBottom + 14.0, title:  isLAR ? "(\(LocalizableString.consentLARParticipantRelationship.localizedString))" : LocalizableString.consentLARParticipantDate.localizedString, xValue: isLAR ? 435 : 454)
+            _ = addBody1TextRegular(textTop: firstTextBottom + 14.0, title:  isLAR ? "(\(LocalizableString.consentLARParticipantRelationship.localizedString))" : LocalizableString.consentLARParticipantDate.localizedString, xValue: isLAR ? 435 : 454)
             
             if isAdditionalSign {
-                addSign(pageRect: pageRect, top: firstTextBottom, context: context)
+                addSign(top: firstTextBottom, context: context)
             }
             
             drawPageNumber(pageCount, pageWidth: CGFloat(pageWidth), pageHeight: CGFloat(pageHeight))
@@ -118,36 +118,36 @@ class PDFCreator: NSObject {
         return data
     }
     
-    func addSign(pageRect: CGRect, top: CGFloat, context: CGContext) {
-        let studyStaffSignatureBottom = addBody4Text(pageRect: pageRect, textTop: top + 56.0, title: LocalizableString.consentAddSignStudyStaffSignature.localizedString, xValue: 15)
+    func addSign(top: CGFloat, context: CGContext) {
+        let studyStaffSignatureBottom = addBody1TextBold(textTop: top + 56.0, title: LocalizableString.consentAddSignStudyStaffSignature.localizedString, xValue: 15)
         
         var topVal = studyStaffSignatureBottom
         let signatureArr = additionalArrSign
         
         for i in 1 ... signatureArr.count {
-            topVal = helperAddMultipleSign(pageRect: pageRect, top: topVal, context: context, headerText: "- \(signatureArr[i - 1])")
+            topVal = helperAddMultipleSign(top: topVal, context: context, headerText: "- \(signatureArr[i - 1])")
         }
     }
     
-    func helperAddMultipleSign(pageRect: CGRect, top: CGFloat, context: CGContext, headerText: String) -> CGFloat {
-        let topValueForLater = addBody4Text(pageRect: pageRect, textTop: top + 12.0, title: headerText, xValue: 15)
+    func helperAddMultipleSign(top: CGFloat, context: CGContext, headerText: String) -> CGFloat {
+        let topValueForLater = addBody1TextBold(textTop: top + 12.0, title: headerText, xValue: 15)
         
         drawLine(context, XValueStart: 15, top: topValueForLater + 30, xValueEnd: 147)
-        let bottomValue = addBody3Text(pageRect: pageRect, textTop: topValueForLater + 34.0, title: "(\(LocalizableString.consentLARFirstName.localizedString))", xValue: 15)
+        let bottomValue = addBody1TextRegular(textTop: topValueForLater + 34.0, title: "(\(LocalizableString.consentLARFirstName.localizedString))", xValue: 15)
         
         drawLine(context, XValueStart: 166, top: topValueForLater + 30, xValueEnd: 296)
-        _ = addBody3Text(pageRect: pageRect, textTop: topValueForLater + 34.0, title: "(\(LocalizableString.consentLARLastName.localizedString))", xValue: 166)
+        _ = addBody1TextRegular(textTop: topValueForLater + 34.0, title: "(\(LocalizableString.consentLARLastName.localizedString))", xValue: 166)
         
         drawLine(context, XValueStart: 315, top: topValueForLater + 30, xValueEnd: 445)
-        _ = addBody3Text(pageRect: pageRect, textTop: topValueForLater + 34.0, title: "(\(LocalizableString.consentLARParticipantSignature.localizedString))", xValue: 315)
+        _ = addBody1TextRegular(textTop: topValueForLater + 34.0, title: "(\(LocalizableString.consentLARParticipantSignature.localizedString))", xValue: 315)
         
         drawLine(context, XValueStart: 464, top: topValueForLater + 30, xValueEnd: 594)
-        _ = addBody3Text(pageRect: pageRect, textTop: topValueForLater + 34.0, title: "(\(LocalizableString.consentLARParticipantDate.localizedString))", xValue: 464)
+        _ = addBody1TextRegular(textTop: topValueForLater + 34.0, title: "(\(LocalizableString.consentLARParticipantDate.localizedString))", xValue: 464)
         
         return bottomValue
     }
     
-    func addTitle(pageRect: CGRect) -> CGFloat {
+    func addTitle() -> CGFloat {
         let titleFont = UIFont.systemFont(ofSize: 13.0, weight: .bold)
         let titleAttributes: [NSAttributedString.Key: Any] =
             [NSAttributedString.Key.font: titleFont]
@@ -162,7 +162,7 @@ class PDFCreator: NSObject {
         return titleStringRect.origin.y + titleStringRect.size.height
     }
     
-    func addBody1Text(pageRect: CGRect, textTop: CGFloat) -> CGFloat {
+    func addBody1TextParagraph(textTop: CGFloat) -> CGFloat {
         let textFont = UIFont.systemFont(ofSize: 12.0, weight: .regular)
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.alignment = .natural
@@ -184,7 +184,7 @@ class PDFCreator: NSObject {
         return titleStringRect.origin.y + titleStringRect.size.height
     }
     
-    func addBody2Text(pageRect: CGRect, textTop: CGFloat, title1: String, title2: String) -> CGFloat {
+    func addBody2TextSideBySide(textTop: CGFloat, title1: String, title2: String) -> CGFloat {
         let titleFont = UIFont.systemFont(ofSize: 12.0, weight: .regular)
         let titleFont2 = UIFont.systemFont(ofSize: 12.0, weight: .bold)
         let titleAttributes: [NSAttributedString.Key: Any] =
@@ -210,7 +210,7 @@ class PDFCreator: NSObject {
         return titleStringRect.origin.y + titleStringRect.size.height
     }
     
-    func addBody3Text(pageRect: CGRect, textTop: CGFloat, title: String, xValue: CGFloat) -> CGFloat {
+    func addBody1TextRegular(textTop: CGFloat, title: String, xValue: CGFloat) -> CGFloat {
         let titleFont = UIFont.systemFont(ofSize: 12.0, weight: .regular)
         // 2
         let titleAttributes: [NSAttributedString.Key: Any] =
@@ -228,7 +228,7 @@ class PDFCreator: NSObject {
         return titleStringRect.origin.y + titleStringRect.size.height
     }
     
-    func addBody4Text(pageRect: CGRect, textTop: CGFloat, title: String, xValue: CGFloat) -> CGFloat {
+    func addBody1TextBold(textTop: CGFloat, title: String, xValue: CGFloat) -> CGFloat {
         let titleFont = UIFont.systemFont(ofSize: 12.0, weight: .bold)
         // 2
         let titleAttributes: [NSAttributedString.Key: Any] =
@@ -246,7 +246,7 @@ class PDFCreator: NSObject {
         return titleStringRect.origin.y + titleStringRect.size.height
     }
     
-    func addImage(pageRect: CGRect, imageTop: CGFloat, xValue: CGFloat) -> CGFloat {
+    func addImage(imageTop: CGFloat, xValue: CGFloat) -> CGFloat {
         let scaledWidth = CGFloat(80)
         let scaledHeight = CGFloat(80)
         

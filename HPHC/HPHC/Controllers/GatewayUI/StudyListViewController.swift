@@ -1019,6 +1019,7 @@ extension StudyListViewController: searchBarDelegate {
             if studiesList.count == 0 {
                 let appDelegate = (UIApplication.shared.delegate as? AppDelegate)!
                 
+            
                 if StudyFilterHandler.instance.filterOptions.count > 0 {
                     let filterStrings = appDelegate.getDefaultFilterStrings()
                     
@@ -1031,7 +1032,7 @@ extension StudyListViewController: searchBarDelegate {
             if text.count > 0 {
                 if studyId.isEmpty {
                     
-                    searchTextFilteredStudies = allStudyList.filter {
+                    searchTextFilteredStudies = studiesList.filter {
                         ($0.name?.containsIgnoringCase(text))! || ($0.category?.containsIgnoringCase(text))! || ($0.description?.containsIgnoringCase(text))! || ($0.sponserName?.containsIgnoringCase(text))!
                     }
                     
@@ -1077,7 +1078,7 @@ extension StudyListViewController: searchBarDelegate {
         var searchTextFilteredStudies: [Study]! = []
         if studyId.count > 0 {
             if !studyId.isEmpty {
-                searchTextFilteredStudies = allStudyList.filter {
+                searchTextFilteredStudies = studiesList.filter {
                     ($0.studyId.caseInsensitiveCompare(studyId) == .orderedSame)
                     
                 }

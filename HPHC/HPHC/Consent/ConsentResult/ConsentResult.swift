@@ -109,7 +109,7 @@ class ConsentResult {
                                 let participantLastName = consentHasLAR ?  (participantFormStepResult?.result(forIdentifier: kLARConsentParticipantLastName) as? ORKTextQuestionResult)?.textAnswer ?? "" : ""
                                 
                                 let title = consentHasLAR ? LocalizableString.consentLARPDFTitle.localizedString : kConsentSignaturePageTitle
-                                let body = consentHasLAR ?  LocalizableString.consentLARPDFBody.localizedString : kSignaturePageContentText
+                                let body = consentHasLAR ?  LocalizableString.consentOtherChoice.localizedString : kSignaturePageContentText
                                 let image = signatureStepResult?.signature?.signatureImage ?? UIImage() // UIImage()
                                 let firstName = signatureStepResult?.signature?.givenName ?? ""
                                 let lastName = signatureStepResult?.signature?.familyName ?? ""
@@ -118,7 +118,7 @@ class ConsentResult {
                                 let inputFormatter = DateFormatter()
                                 inputFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss z"
                                 let showDate = inputFormatter.date(from: startDate)
-                                inputFormatter.dateFormat = "dd/MM/yyyy"
+                                inputFormatter.dateFormat = "MM/dd/yyyy"
                                 startDate = inputFormatter.string(from: showDate!)
                                 
                                 var pageCount = 0
@@ -126,8 +126,8 @@ class ConsentResult {
                                     let rkPDF = PDFDocument(url: rkURL)
                                     pageCount = rkPDF?.pageCount ?? 0
                                 }
-                                //                                print("consentHasLAR---\(consentHasLAR)---\(isAdditionalSign)")
-                                let pdfCreator = PDFCreator(title: title, body: body, image: image, relation: participantRelation, participantFirstName: participantFirstName, participantLastName: participantLastName, startTime: startDate, firstName: firstName, lastName: lastName, isLAR: consentHasLAR, isAdditionalSign: isAdditionalSign, additionalArrSign: additionalArrSign, pageCount: pageCount)
+                                
+                                let pdfCreator = PDFCreator(title: title, body: body, image: image, relation: participantRelation.capitalized, participantFirstName: participantFirstName.capitalized, participantLastName: participantLastName.capitalized, startTime: startDate, firstName: firstName.capitalized, lastName: lastName.capitalized, isLAR: consentHasLAR, isAdditionalSign: isAdditionalSign, additionalArrSign: additionalArrSign, pageCount: pageCount)
                                 let pdfData = pdfCreator.createFlyer()
                                 
                                 if FileManager.default.fileExists(atPath: LARSignedPDFPath) {

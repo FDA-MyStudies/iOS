@@ -458,8 +458,9 @@ class ConsentBuilder {
         
         let relationAnswerFormat = ORKAnswerFormat.textAnswerFormat()
         relationAnswerFormat.multipleLines = false
-        relationAnswerFormat.keyboardType = .namePhonePad
+        relationAnswerFormat.keyboardType = .asciiCapable
         relationAnswerFormat.maximumLength = 250
+        relationAnswerFormat.autocapitalizationType = .words
         
         let placeHolder = NSLocalizedString("Required", comment: "")
         let relationItem = ORKFormItem(identifier: kLARConsentParticipantRelationItem,

@@ -36,10 +36,7 @@ enum LocalizableString: String {
 
     // MARK: - LAR Consent
     case consentMyselfChoice = "I am signing the consent form on behalf of myself."
-    case consentOtherChoice = """
-    I am signing the consent form or on behalf of the patient / participant
-    in the capacity of a legally authorized representative.
-    """
+    case consentOtherChoice = "I am signing the consent form on behalf of the study participant as their legally authorized representative."
     case consentLARTitle = "The next few steps will capture your informed consent for participation in this study."
     case consentOptionQuestion = "Please select the appropriate option below"
     case consentLARParticipantSectionTitle = "Please specify your relationship to the participant"
@@ -55,10 +52,8 @@ enum LocalizableString: String {
     case consentLARLastName = "Last name"
     case consentLARParticipantRelationship = "Relationship to participant"
     case consentLARPDFTitle = "Consent by a Legally Authorized Representative"
-    case consentLARPDFBody = """
-    I am signing the consent document on behalf of the participant,
-    as a legally-authorized representative of the participant.
-    """
+    
+    // MARK: - Additional Signature
     case consentAddSignStudyStaffSignature = "Study Staff Signature(s)"
     case consentAddSignCoordinator = "- Coordinator"
     case consentAddSignParticipantName = "Participant's Name (printed)"

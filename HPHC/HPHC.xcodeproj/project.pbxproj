@@ -627,6 +627,12 @@
 		7878B31D2216C6E20052FC23 /* HPHCTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7878B31C2216C6E20052FC23 /* HPHCTests.swift */; };
 		82ED02EDDA9A111295A73287 /* Pods_mSPARC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2568EA2C0BCE313BAB2B3B29 /* Pods_mSPARC.framework */; };
 		83E41E58CE40BA32BA0F019B /* Pods_HPHCUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E4CF7BB238C017BF7E2A6346 /* Pods_HPHCUITests.framework */; };
+		8401E80E24ED41B100AB4D18 /* Local.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 8401E80D24ED41B100AB4D18 /* Local.xcconfig */; };
+		8401E80F24ED41B100AB4D18 /* Local.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 8401E80D24ED41B100AB4D18 /* Local.xcconfig */; };
+		8401E81024ED41B100AB4D18 /* Local.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 8401E80D24ED41B100AB4D18 /* Local.xcconfig */; };
+		8401E81124ED41B100AB4D18 /* Local.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 8401E80D24ED41B100AB4D18 /* Local.xcconfig */; };
+		8401E81224ED41B100AB4D18 /* Local.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 8401E80D24ED41B100AB4D18 /* Local.xcconfig */; };
+		8401E81324ED41B100AB4D18 /* Local.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 8401E80D24ED41B100AB4D18 /* Local.xcconfig */; };
 		84E8D61724D161B6008C38D5 /* PDFCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E8D61624D161B6008C38D5 /* PDFCreator.swift */; };
 		84E8D61824D161B6008C38D5 /* PDFCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E8D61624D161B6008C38D5 /* PDFCreator.swift */; };
 		84E8D61924D161B6008C38D5 /* PDFCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E8D61624D161B6008C38D5 /* PDFCreator.swift */; };
@@ -1758,6 +1764,7 @@
 		7878B31E2216C6E20052FC23 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7BDC002620C7855C409516D3 /* Pods-HPHC.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HPHC.debug.xcconfig"; path = "Pods/Target Support Files/Pods-HPHC/Pods-HPHC.debug.xcconfig"; sourceTree = "<group>"; };
 		80162EB0842AABC6DBF4AC42 /* Pods_FDAMS_HIMSS_App.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FDAMS_HIMSS_App.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8401E80D24ED41B100AB4D18 /* Local.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Local.xcconfig; sourceTree = "<group>"; };
 		84E8D61624D161B6008C38D5 /* PDFCreator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFCreator.swift; sourceTree = "<group>"; };
 		87A4F9AAE7A1B8C36C9FBDDF /* Pods_HPHC_QA.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HPHC_QA.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		89006EF02451B1D500B624FD /* COVID-19.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "COVID-19.storyboard"; sourceTree = "<group>"; };
@@ -2086,6 +2093,7 @@
 				6EF0BC352223D1D5004F2357 /* ResearchKit.xcodeproj */,
 				6F58A84E24D17896009322B3 /* Staging.xcconfig */,
 				6F58A85624D17ABA009322B3 /* Production.xcconfig */,
+				8401E80D24ED41B100AB4D18 /* Local.xcconfig */,
 				6E7D2D581E433E8700763D4C /* HPHC */,
 				7878B31B2216C6E20052FC23 /* HPHCTests */,
 				89055919230149AD005FB284 /* HPHCUITests */,
@@ -3335,6 +3343,7 @@
 				6E93C7E11EE2EC26006788B1 /* ConsentLatest.json in Resources */,
 				6EABD0331E56FE2000623D94 /* TaskSchema.json in Resources */,
 				89893F0622B1125300A846CE /* Assets.xcassets in Resources */,
+				8401E80E24ED41B100AB4D18 /* Local.xcconfig in Resources */,
 				6E80BC041FB04350008C9B8C /* Labkey_Activity_Latest2.json in Resources */,
 				89893F0722B112A000A846CE /* LaunchScreen.storyboard in Resources */,
 				6E7D2D8E1E43445600763D4C /* UserPreferences.plist in Resources */,
@@ -3463,6 +3472,7 @@
 				6FC12BA222FD60FE0075940B /* Activities.plist in Resources */,
 				6FC12BA322FD60FE0075940B /* FetalKickCounter.xcassets in Resources */,
 				6FC12BA422FD60FE0075940B /* ContactUs.plist in Resources */,
+				8401E81024ED41B100AB4D18 /* Local.xcconfig in Resources */,
 				6FC12BA522FD60FE0075940B /* FetalKickTest.json in Resources */,
 				6FC12BA622FD60FE0075940B /* Gateway.storyboard in Resources */,
 				6FC12BA722FD60FE0075940B /* Acivity_Question.json in Resources */,
@@ -3505,6 +3515,7 @@
 				6FD61C8D244597F200B71685 /* Labkey_Activity11.json in Resources */,
 				6FD61C8E244597F200B71685 /* Study.xcassets in Resources */,
 				6FD61C8F244597F200B71685 /* Units.json in Resources */,
+				8401E81224ED41B100AB4D18 /* Local.xcconfig in Resources */,
 				6FD61C90244597F200B71685 /* ResourcesUI.plist in Resources */,
 				6FD61C91244597F200B71685 /* StudyDashboard.plist in Resources */,
 				6FD61C92244597F200B71685 /* ResourceList.json in Resources */,
@@ -3596,6 +3607,7 @@
 				897C1A212451A49A00559770 /* ActivityFilterView.xib in Resources */,
 				897C1A222451A49A00559770 /* Labkey_Activity11.json in Resources */,
 				897C1A232451A49A00559770 /* Study.xcassets in Resources */,
+				8401E81324ED41B100AB4D18 /* Local.xcconfig in Resources */,
 				897C1A242451A49A00559770 /* Units.json in Resources */,
 				897C1A252451A49A00559770 /* ResourcesUI.plist in Resources */,
 				897C1A262451A49A00559770 /* StudyDashboard.plist in Resources */,
@@ -3672,6 +3684,7 @@
 				89C5EF3223F16CFE00649359 /* ActivityFilterView.xib in Resources */,
 				89C5EF3323F16CFE00649359 /* Labkey_Activity11.json in Resources */,
 				89C5EF3423F16CFE00649359 /* Study.xcassets in Resources */,
+				8401E81124ED41B100AB4D18 /* Local.xcconfig in Resources */,
 				89C5EF3523F16CFE00649359 /* Units.json in Resources */,
 				89C5EF3623F16CFE00649359 /* ResourcesUI.plist in Resources */,
 				89C5EF3723F16CFE00649359 /* StudyDashboard.plist in Resources */,
@@ -3746,6 +3759,7 @@
 				89DBF83422F989EE00AB3EF2 /* Sparc.storyboard in Resources */,
 				89DBF7F522F9893000AB3EF2 /* ActivityFilterView.xib in Resources */,
 				89DBF7F622F9893000AB3EF2 /* Labkey_Activity11.json in Resources */,
+				8401E80F24ED41B100AB4D18 /* Local.xcconfig in Resources */,
 				89DBF7F722F9893000AB3EF2 /* Study.xcassets in Resources */,
 				89DBF7F822F9893000AB3EF2 /* Units.json in Resources */,
 				89DBF7F922F9893000AB3EF2 /* ResourcesUI.plist in Resources */,
@@ -5358,7 +5372,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 107;
+				CURRENT_PROJECT_VERSION = 108;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = FWLLYUH7XR;
 				ENABLE_BITCODE = NO;
@@ -5394,7 +5408,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 107;
+				CURRENT_PROJECT_VERSION = 108;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = FWLLYUH7XR;
 				ENABLE_BITCODE = NO;

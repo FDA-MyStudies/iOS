@@ -9,6 +9,10 @@ import UIKit
 import SlideMenuControllerSwift
 
 extension UIApplication {
+    /// The top most view controller
+    static var topMostViewController: UIViewController? {
+        return UIApplication.shared.keyWindow?.rootViewController?.visibViewController
+    }
     
     class func topViewController(_ viewController: UIViewController? = UIApplication.shared.keyWindow?.rootViewController) -> UIViewController? {
         if let nav = viewController as? UINavigationController {

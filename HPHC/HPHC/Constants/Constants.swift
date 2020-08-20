@@ -200,3 +200,4 @@ let filterListSegue = "filterscreenSegue"
 
 let kStagingUserEmailId = "aqibm@boston-technology.com"
 let kIsStagingUser = "StagingUser"
+let kFailedToConnectAppleMail = "Failed to connect to Apple Mail app"

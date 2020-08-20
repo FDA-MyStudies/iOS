@@ -29,6 +29,18 @@ extension UINavigationController {
     }
 }
 extension UIViewController {
+    /// The visible view controller from a given view controller
+    var visibViewController: UIViewController? {
+        if let navigationController = self as? UINavigationController {
+            return navigationController.topViewController?.visibViewController
+        } else if let tabBarController = self as? UITabBarController {
+            return tabBarController.selectedViewController?.visibViewController
+        } else if let presentedViewController = presentedViewController {
+            return presentedViewController.visibViewController
+        } else {
+            return self
+        }
+    }
     
     func topMostViewController() -> UIViewController {
         

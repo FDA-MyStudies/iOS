@@ -73,6 +73,10 @@
 	<string>FDAHPH</string>
 	<key>ProductTitleName</key>
 	<string>FDA MyStudies</string>
+	<key>REGISTRATION_URL</key>
+	<string>$(REGISTRATION_URL)</string>
+	<key>RESPONSE_URL</key>
+	<string>$(RESPONSE_URL)</string>
 	<key>StandaloneStudyId</key>
 	<string>appstudy2</string>
 	<key>UIAppFonts</key>
@@ -100,10 +104,6 @@
 	<string>Light</string>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<true/>
-    <key>REGISTRATION_URL</key>
-    <string>$(REGISTRATION_URL)</string>
-    <key>RESPONSE_URL</key>
-    <string>$(RESPONSE_URL)</string>
 	<key>WCP_URL</key>
 	<string>$(WCP_URL)</string>
 	<key>WebsiteLink</key>

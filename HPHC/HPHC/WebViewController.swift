@@ -128,13 +128,15 @@ class WebViewController : UIViewController{
             self.present(mailComposerVC, animated: true, completion: nil)
         }
         else{
-            let alert = UIAlertController(title:NSLocalizedString(kTitleError, comment: ""),message:"",preferredStyle: UIAlertController.Style.alert)
+            let alert = UIAlertController(title:NSLocalizedString(kTitleError, comment: ""),message:kFailedToConnectAppleMail, preferredStyle: UIAlertController.Style.alert)
             
             alert.addAction(UIAlertAction.init(title:NSLocalizedString("OK", comment: ""), style: .default, handler: { (action) in
                 
-                self.dismiss(animated: true, completion: nil)
+//                self.dismiss(animated: true, completion: nil)
                 
             }))
+            UIApplication.topMostViewController?.present(alert, animated: true, completion: nil)
+
         }
         
         

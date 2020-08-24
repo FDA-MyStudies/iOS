@@ -2269,8 +2269,6 @@
 		6ED1342F1E5EB0110090C976 /* ConsentBuilder */ = {
 			isa = PBXGroup;
 			children = (
-				6E93C7E01EE2EC26006788B1 /* ConsentLatest.json */,
-				6ED134371E5F1B110090C976 /* Consent.json */,
 				6ED134331E5EB0280090C976 /* ConsentBuilder.swift */,
 			);
 			path = ConsentBuilder;
@@ -2400,7 +2398,6 @@
 		6EED7B2E1E6541FF002C1FA3 /* Eligibility */ = {
 			isa = PBXGroup;
 			children = (
-				6EE8E4D81F17459200028853 /* Eligibility_1B.json */,
 				6EED7B2F1E6541FF002C1FA3 /* EligibilityStep */,
 			);
 			path = Eligibility;
@@ -2417,7 +2414,6 @@
 		6EED7B351E6574E5002C1FA3 /* FetalKickCounterTask */ = {
 			isa = PBXGroup;
 			children = (
-				6EB740171E9CD38100A4C773 /* FetalKickTest.json */,
 				6EED7B3C1E65752C002C1FA3 /* FetalKickCounterTask.swift */,
 			);
 			path = FetalKickCounterTask;
@@ -2737,7 +2733,6 @@
 		8401E83124EE7EAC00AB4D18 /* ActivityStep */ = {
 			isa = PBXGroup;
 			children = (
-				6ED5B0581FCD550F00925352 /* Units.json */,
 				6ED1B22B1E54256700BF463F /* ActivityActiveStep.swift */,
 				6ED1B22C1E54256700BF463F /* ActivityFormStep.swift */,
 				6ED1B22D1E54256700BF463F /* ActivityInstructionStep.swift */,
@@ -2933,7 +2928,6 @@
 			isa = PBXGroup;
 			children = (
 				7878B30E221574D80052FC23 /* StandaloneStudy.swift */,
-				94B3DD201E6ED8E500327AE5 /* StudyList.json */,
 				94B3DD221E6ED8E500327AE5 /* StudyListViewController.swift */,
 				48567FE01F14FB3C00857193 /* StudyFilterViewController.swift */,
 			);
@@ -3031,6 +3025,13 @@
 		8983138F224399810000BEB5 /* JsonFiles */ = {
 			isa = PBXGroup;
 			children = (
+				6EE8E4D81F17459200028853 /* Eligibility_1B.json */,
+				6E93C7E01EE2EC26006788B1 /* ConsentLatest.json */,
+				6ED134371E5F1B110090C976 /* Consent.json */,
+				6E14F2021F0224AD00EA8D1E /* Notification.json */,
+				6ED5B0581FCD550F00925352 /* Units.json */,
+				6EB740171E9CD38100A4C773 /* FetalKickTest.json */,
+				94B3DD201E6ED8E500327AE5 /* StudyList.json */,
 				6F52327D23D9883800995A78 /* ActivityMetadata TEST1.json */,
 				6ED5B05C1FCDBD7C00925352 /* Labkey_Activity_Latest4.json */,
 				6EEB0AF91FD2811100136EAA /* Labkey_Activity_Latest3.json */,
@@ -3115,7 +3116,6 @@
 		948710261E546C2200246109 /* Notification */ = {
 			isa = PBXGroup;
 			children = (
-				6E14F2021F0224AD00EA8D1E /* Notification.json */,
 				948710291E546C3800246109 /* AppNotification.swift */,
 			);
 			path = Notification;

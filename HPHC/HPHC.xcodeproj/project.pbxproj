@@ -2073,13 +2073,13 @@
 			path = ActivityFilterView;
 			sourceTree = "<group>";
 		};
-		6E61BCC01F27260400C156B9 /* ComprehensionUI */ = {
+		6E61BCC01F27260400C156B9 /* Comprehension */ = {
 			isa = PBXGroup;
 			children = (
 				6E61BCC31F27262F00C156B9 /* ComprehensionFailure.xib */,
 				6E61BCC51F27271000C156B9 /* ComprehensionFailure.swift */,
 			);
-			name = ComprehensionUI;
+			name = Comprehension;
 			path = ComprehensionFailureUI;
 			sourceTree = "<group>";
 		};
@@ -2255,13 +2255,6 @@
 				482062511E68532300C7A7AF /* UIUtilities.swift */,
 			);
 			path = Utils;
-			sourceTree = "<group>";
-		};
-		6ECF75CC1E6EF105008C935E /* FetalKickCounterUI */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = FetalKickCounterUI;
 			sourceTree = "<group>";
 		};
 		6ED1342E1E5EB0110090C976 /* Consent */ = {
@@ -2616,8 +2609,10 @@
 			children = (
 				8401E82F24EE681D00AB4D18 /* ActivitySchedule */,
 				6E4D72F91F3C2E0F00BF88B7 /* ActivityFilterView */,
+				6E61BCC01F27260400C156B9 /* Comprehension */,
 				94C6BD401EB850F100D4AA72 /* ForceUpdate */,
 				6E91D67F1ECD662E0012F49F /* JailbrokeBlocker */,
+				844F37E524F3F620003B724F /* PinterestLayout */,
 				8401E82A24EE632000AB4D18 /* Progress */,
 			);
 			path = "UIViews+Additions";
@@ -2934,6 +2929,41 @@
 			path = PDFCreator;
 			sourceTree = "<group>";
 		};
+		844F37E224F3F5A9003B724F /* StudyUI */ = {
+			isa = PBXGroup;
+			children = (
+				7878B30E221574D80052FC23 /* StandaloneStudy.swift */,
+				94B3DD201E6ED8E500327AE5 /* StudyList.json */,
+				94B3DD221E6ED8E500327AE5 /* StudyListViewController.swift */,
+				48567FE01F14FB3C00857193 /* StudyFilterViewController.swift */,
+			);
+			path = StudyUI;
+			sourceTree = "<group>";
+		};
+		844F37E324F3F5D4003B724F /* ChangePasswordUI */ = {
+			isa = PBXGroup;
+			children = (
+				940577A71E767AC60043215C /* ChangePasswordViewController.swift */,
+			);
+			path = ChangePasswordUI;
+			sourceTree = "<group>";
+		};
+		844F37E424F3F609003B724F /* GateWayResourcesUI */ = {
+			isa = PBXGroup;
+			children = (
+				94B3DD1F1E6ED8E500327AE5 /* GatewayResourcesListViewController.swift */,
+			);
+			path = GateWayResourcesUI;
+			sourceTree = "<group>";
+		};
+		844F37E524F3F620003B724F /* PinterestLayout */ = {
+			isa = PBXGroup;
+			children = (
+				6E4CECB51F31B41C005E0832 /* PinterestLayout.swift */,
+			);
+			path = PinterestLayout;
+			sourceTree = "<group>";
+		};
 		8905590F230148E4005FB284 /* FDA */ = {
 			isa = PBXGroup;
 			children = (
@@ -3109,10 +3139,8 @@
 			isa = PBXGroup;
 			children = (
 				6EE93D8C1E93B4ED0027A5DC /* ConsentUI */,
-				6E61BCC01F27260400C156B9 /* ComprehensionUI */,
 				6EBC8A271E8112B80020F9E6 /* EligibilityUI */,
 				8401E83024EE7E0300AB4D18 /* FetalKickUI */,
-				6ECF75CC1E6EF105008C935E /* FetalKickCounterUI */,
 				94B3DD141E6ED8E500327AE5 /* GatewayUI */,
 				94B3DD231E6ED8E500327AE5 /* LoginRegisterUI */,
 				8401E84424EE8A7300AB4D18 /* PDFCreator */,
@@ -3128,18 +3156,14 @@
 		94B3DD141E6ED8E500327AE5 /* GatewayUI */ = {
 			isa = PBXGroup;
 			children = (
-				94334F771E6FE4A600755444 /* SlideMenu */,
+				844F37E424F3F609003B724F /* GateWayResourcesUI */,
+				844F37E324F3F5D4003B724F /* ChangePasswordUI */,
 				6EA889B81E6FD14000F160A1 /* ConfirmationViewUI */,
+				844F37E224F3F5A9003B724F /* StudyUI */,
+				94334F771E6FE4A600755444 /* SlideMenu */,
 				94B3DD171E6ED8E500327AE5 /* NotificationUI */,
 				94B3DD1A1E6ED8E500327AE5 /* ProfileViewUI */,
 				4884E3501E825E54002DA0B9 /* ReachoutUI */,
-				7878B30E221574D80052FC23 /* StandaloneStudy.swift */,
-				94B3DD1F1E6ED8E500327AE5 /* GatewayResourcesListViewController.swift */,
-				94B3DD201E6ED8E500327AE5 /* StudyList.json */,
-				94B3DD221E6ED8E500327AE5 /* StudyListViewController.swift */,
-				48567FE01F14FB3C00857193 /* StudyFilterViewController.swift */,
-				6E4CECB51F31B41C005E0832 /* PinterestLayout.swift */,
-				940577A71E767AC60043215C /* ChangePasswordViewController.swift */,
 			);
 			path = GatewayUI;
 			sourceTree = "<group>";
@@ -5513,7 +5537,7 @@
 /* Begin XCBuildConfiguration section */
 		6E7D2D7C1E433E8800763D4C /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6F58A84E24D17896009322B3 /* Staging.xcconfig */;
+			baseConfigurationReference = 8401E80D24ED41B100AB4D18 /* Local.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
@@ -5574,7 +5598,7 @@
 		};
 		6E7D2D7D1E433E8800763D4C /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6F58A84E24D17896009322B3 /* Staging.xcconfig */;
+			baseConfigurationReference = 8401E80D24ED41B100AB4D18 /* Local.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;

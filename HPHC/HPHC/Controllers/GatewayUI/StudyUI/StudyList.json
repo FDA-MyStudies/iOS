@@ -1,0 +1,65 @@
+{
+  "studies" : [
+    {
+      "category" : "Observational Studies",
+      "sponsorName" : "fda",
+      "studyVersion" : "1.0",
+      "status" : "Active",
+      "studyId" : "MyStudies01",
+      "title" : "MyStudies01",
+      "tagline" : "MyStudies01",
+      "settings" : {
+        "platform" : "all",
+        "rejoin" : true,
+        "enrolling" : true
+      },
+      "logo" : "http:\/\/18.222.7.100:8080\/fdaResources\/studylogo\/STUDY_MM_04292020143103.jpg?v=1589203182520"
+    },
+    {
+      "category" : "Observational Studies",
+      "sponsorName" : "CDC",
+      "studyVersion" : "0.0",
+      "status" : "Upcoming",
+      "studyId" : "TestStudy0001",
+      "title" : "TestStudy0001",
+      "tagline" : "TestStudy0001",
+      "settings" : {
+        "platform" : "all",
+        "rejoin" : true,
+        "enrolling" : false
+      },
+      "logo" : "http:\/\/18.222.7.100:8080\/fdaResources\/studylogo\/STUDY_TT_05052020043905.jpg?v=1589203182521"
+    },
+    {
+      "category" : "Observational Studies",
+      "sponsorName" : "CDC",
+      "studyVersion" : "0.0",
+      "status" : "Upcoming",
+      "studyId" : "TestStudy0005",
+      "title" : "TestStudy0005",
+      "tagline" : "TestStudy0001",
+      "settings" : {
+        "platform" : "all",
+        "rejoin" : true,
+        "enrolling" : false
+      },
+      "logo" : "http:\/\/18.222.7.100:8080\/fdaResources\/studylogo\/STUDY_TT_05052020043905.jpg?v=1589203182521"
+    },
+    {
+      "category" : "Observational Studies",
+      "sponsorName" : "CDC",
+      "studyVersion" : "0.0",
+      "status" : "Upcoming",
+      "studyId" : "TestStudy0006",
+      "title" : "TestStudy0006",
+      "tagline" : "TestStudy0001",
+      "settings" : {
+        "platform" : "all",
+        "rejoin" : true,
+        "enrolling" : false
+      },
+      "logo" : "http:\/\/18.222.7.100:8080\/fdaResources\/studylogo\/STUDY_TT_05052020043905.jpg?v=1589203182521"
+    }
+  ],
+  "message" : "SUCCESS"
+}

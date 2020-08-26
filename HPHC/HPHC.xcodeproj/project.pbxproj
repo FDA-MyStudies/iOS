@@ -2630,7 +2630,6 @@
 			children = (
 				8401E83424EE83A100AB4D18 /* CollectionView */,
 				8401E83324EE839200AB4D18 /* TableView */,
-				94C13DBD1EC19E4700E3AEBF /* LineChartCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -2757,6 +2756,7 @@
 			children = (
 				6FB89C1E225F410500420A7B /* QuestionStep */,
 				8401E84324EE890400AB4D18 /* Register */,
+				845B86BA24F64C10009213BE /* LineChart */,
 				8401E84224EE88EC00AB4D18 /* Login */,
 				8401E84124EE888400AB4D18 /* SlideMenu */,
 				8401E83B24EE85DC00AB4D18 /* Filter */,
@@ -2958,6 +2958,14 @@
 			path = PinterestLayout;
 			sourceTree = "<group>";
 		};
+		845B86BA24F64C10009213BE /* LineChart */ = {
+			isa = PBXGroup;
+			children = (
+				94C13DBD1EC19E4700E3AEBF /* LineChartCell.swift */,
+			);
+			path = LineChart;
+			sourceTree = "<group>";
+		};
 		8905590F230148E4005FB284 /* FDA */ = {
 			isa = PBXGroup;
 			children = (
@@ -3124,13 +3132,13 @@
 		9491F7F41E825F0D0018C15E /* Database */ = {
 			isa = PBXGroup;
 			children = (
+				6F211944240CF27E008AF0BD /* ActivityDiskService.swift */,
 				9491F7F71E825F5D0018C15E /* DBHandler.swift */,
 				9491F7F91E825FA80018C15E /* DBUser.swift */,
 				9432C49B1E83CEEF00EB419C /* DBStudy.swift */,
 				94D20E9E1E9DFFE7005C3531 /* DBActivity.swift */,
 				6EF0466A1ED1C943008098BB /* DBNotification.swift */,
 				6FDEFDA823F5A0F50067534C /* DBParticipantPropertyMetadata.swift */,
-				6F211944240CF27E008AF0BD /* ActivityDiskService.swift */,
 			);
 			path = Database;
 			sourceTree = "<group>";

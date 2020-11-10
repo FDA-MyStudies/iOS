@@ -212,7 +212,7 @@ class UserServices: NSObject {
         self.delegate = delegate
         
         let user = User.currentUser
-        let headerParams = [kUserAuthToken: user.authToken] as Dictionary<String,String>
+        let headerParams = [kUserAuthToken: user.authToken] as? Dictionary<String,String>
         let method = RegistrationMethods.deleteAccount.method
         self.sendRequestWith(method: method, params: nil, headers: headerParams)
     }
@@ -223,7 +223,7 @@ class UserServices: NSObject {
         
         let user = User.currentUser
         let headerParams = [kUserAuthToken: user.authToken,
-                            kUserId: user.userId!] as Dictionary<String,String>
+                            kUserId: user.userId!] as? Dictionary<String,String>
         
         let params = [kDeactivateAccountDeleteData: listOfStudyIds]
         
@@ -336,7 +336,7 @@ class UserServices: NSObject {
         
         let user = User.currentUser
         let headerParams = [kUserId: user.userId!,
-                            kUserAuthToken: user.authToken] as Dictionary<String, String>
+                            kUserAuthToken: user.authToken] as? Dictionary<String, String>
         
         let method = RegistrationMethods.userPreferences.method
         
@@ -373,7 +373,7 @@ class UserServices: NSObject {
         self.delegate = delegate
         
         let user = User.currentUser
-        let headerParams = [kUserId: user.userId] as Dictionary<String, String>
+        let headerParams = [kUserId: user.userId] as? Dictionary<String, String>
         let params = [kStudyId: studyId,
                       kActivity: activities] as [String: Any]
         let method = RegistrationMethods.updateActivityState.method
@@ -421,7 +421,7 @@ class UserServices: NSObject {
         self.delegate = delegate
         
         let user = User.currentUser
-        let headerParams = [kUserId: user.userId] as Dictionary<String, String>
+        let headerParams = [kUserId: user.userId] as? Dictionary<String, String>
         
         let params = [kActivites: [activityStauts.getBookmarkUserActivityStatus()]] as [String : Any]
         let method = RegistrationMethods.updateActivityState.method
@@ -434,7 +434,7 @@ class UserServices: NSObject {
         self.delegate = delegate
         
         let user = User.currentUser
-        let headerParams = [kUserId: user.userId] as Dictionary<String, String>
+        let headerParams = [kUserId: user.userId] as? Dictionary<String, String>
         let params = [kStudies: [studyStauts.getParticipatedUserStudyStatus()]] as [String: Any]
         let method = RegistrationMethods.updateStudyState.method
         
@@ -446,7 +446,7 @@ class UserServices: NSObject {
         self.delegate = delegate
         
         let user = User.currentUser
-        let headerParams = [kUserId: user.userId] as Dictionary<String, String>
+        let headerParams = [kUserId: user.userId] as? Dictionary<String, String>
         let params = [kStudyId: studyId,
                       kActivity: [activityStatus.getParticipatedUserActivityStatus()]] as [String: Any]
         let method = RegistrationMethods.updateActivityState.method

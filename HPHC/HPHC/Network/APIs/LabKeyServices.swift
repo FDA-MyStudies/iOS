@@ -134,7 +134,7 @@ class LabKeyServices: NSObject {
                          kActivityName: activityName! ,
                          "version": activityVersion! ,
                          kActivityRunId: "\(currentRunId!)"
-                ] as [String: String]
+                ] as? [String: String]
             
             let ActivityType = Study.currentActivity?.type?.rawValue
             

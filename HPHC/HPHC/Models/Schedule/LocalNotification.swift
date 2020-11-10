@@ -183,7 +183,7 @@ class LocalNotification: NSObject {
     class func composeRunNotification(startDate: Date,endDate: Date,message: String,run: ActivityRun) {
         
         _ = [kStudyId: run.studyId,
-                        kActivityId: run.activityId] as [String: String]
+                        kActivityId: run.activityId] as? [String: String]
         
         //create App local notification object
         

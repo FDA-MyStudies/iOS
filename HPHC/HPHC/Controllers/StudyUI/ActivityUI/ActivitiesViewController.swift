@@ -735,9 +735,6 @@ class ActivitiesViewController : UIViewController{
             }
             // Schedule another run
         }
-        DispatchQueue.main.async {
-            self.loadActivitiesFromDatabase()
-        }
     }
     
     /**

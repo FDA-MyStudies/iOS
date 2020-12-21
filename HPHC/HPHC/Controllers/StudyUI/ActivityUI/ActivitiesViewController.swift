@@ -1048,7 +1048,7 @@ extension ActivitiesViewController: NMWebServiceDelegate {
         } else {
             self.addProgressIndicator()
         }
-    }    
+    }
     
     func finishedRequest(_ manager: NetworkManager, requestName: NSString, response: AnyObject?) {
         Logger.sharedInstance.info("requestname : \(requestName) Response : \(String(describing:response))")
@@ -1336,47 +1336,42 @@ extension ActivitiesViewController: ORKTaskViewControllerDelegate{
                         }
                     }
                 }
-                
-                
-                
                 //send response to labkey
                 LabKeyServices().processResponse(responseData:response!, delegate: self)
+              
+              let ud = UserDefaults.standard
+              if ud.bool(forKey: "FKC") {
+                let runid = (ud.object(forKey: "FetalKickCounterRunid") as? Int)!
+                
+                if Study.currentActivity?.currentRun.runId != runid {
+                  //runid is changed
+                  self.updateRunStatusForRunId(runId: runid)
+                } else {
+                  self.updateRunStatusToComplete()
+                }
+              } else {
+                self.updateRunStatusToComplete()
+              }
             }
         }
-        taskViewController.dismiss(animated: true, completion: {
-            
-            if reason == ORKTaskViewControllerFinishReason.completed {
-                
-                
-                let ud = UserDefaults.standard
-                if ud.bool(forKey: "FKC") {
-                    
-                    let runid = (ud.object(forKey: "FetalKickCounterRunid") as? Int)!
-                    
-                    if Study.currentActivity?.currentRun.runId != runid {
-                        //runid is changed
-                        self.updateRunStatusForRunId(runId: runid)
-                    } else {
-                        self.updateRunStatusToComplete()
-                    }
-                } else {
-                    
-                    self.updateRunStatusToComplete()
-                }
-                
-                let lifeTimeUpdated = DBHandler.updateTargetActivityAnchorDateDetail(studyId: studyId!, activityId: activityId!, response: response!)
-                if lifeTimeUpdated {
-                    self.loadActivitiesFromDatabase()
-                }
-                else {
-                    self.tableView?.reloadData()
-                }
-            }
-            else {
-                self.tableView?.reloadData()
-            }
-            
-        })
+      
+      taskViewController.dismiss(animated: true, completion: {
+        
+        if reason == ORKTaskViewControllerFinishReason.completed {
+          
+          let lifeTimeUpdated = DBHandler.updateTargetActivityAnchorDateDetail(studyId: studyId!, activityId: activityId!, response: response!)
+          if lifeTimeUpdated {
+            self.loadActivitiesFromDatabase()
+          }
+          else {
+            self.tableView?.reloadData()
+          }
+        }
+        else {
+          self.tableView?.reloadData()
+        }
+        
+      })
     }
     
     func taskViewController(_ taskViewController: ORKTaskViewController, stepViewControllerWillAppear stepViewController: ORKStepViewController) {

@@ -3535,10 +3535,6 @@
 						DevelopmentTeam = FWLLYUH7XR;
 						ProvisioningStyle = Automatic;
 					};
-					89DBF74422F9893000AB3EF2 = {
-						DevelopmentTeam = MUEVRP9QCH;
-						ProvisioningStyle = Automatic;
-					};
 				};
 			};
 			buildConfigurationList = 6E7D2D511E433E8700763D4C /* Build configuration list for PBXProject "HPHC" */;
@@ -5545,7 +5541,7 @@
 /* Begin XCBuildConfiguration section */
 		6E7D2D7C1E433E8800763D4C /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 8401E80D24ED41B100AB4D18 /* Local.xcconfig */;
+			baseConfigurationReference = 6F58A85624D17ABA009322B3 /* Production.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
@@ -5606,7 +5602,7 @@
 		};
 		6E7D2D7D1E433E8800763D4C /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 8401E80D24ED41B100AB4D18 /* Local.xcconfig */;
+			baseConfigurationReference = 6F58A85624D17ABA009322B3 /* Production.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
@@ -6069,7 +6065,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 4;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = FWLLYUH7XR;
 				ENABLE_BITCODE = NO;
@@ -6105,7 +6101,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 4;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = FWLLYUH7XR;
 				ENABLE_BITCODE = NO;
@@ -6209,10 +6205,10 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = HPHC/FDA.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 26;
+				CURRENT_PROJECT_VERSION = 3;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = MUEVRP9QCH;
 				ENABLE_BITCODE = NO;
@@ -6223,6 +6219,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ccf.IBDPROdigy;
 				PRODUCT_NAME = "IBD PROdigy";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -6244,10 +6241,10 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = HPHC/FDA.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 26;
+				CURRENT_PROJECT_VERSION = 3;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = MUEVRP9QCH;
 				ENABLE_BITCODE = NO;
@@ -6258,6 +6255,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ccf.IBDPROdigy;
 				PRODUCT_NAME = "IBD PROdigy";
 				PROVISIONING_PROFILE_SPECIFIER = "";

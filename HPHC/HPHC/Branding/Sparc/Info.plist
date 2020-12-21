@@ -19,7 +19,7 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.0</string>
+	<string>$(MARKETING_VERSION)</string>
 	<key>CFBundleVersion</key>
 	<string>$(CURRENT_PROJECT_VERSION)</string>
 	<key>Fabric</key>
@@ -73,6 +73,10 @@
 	<string>CACFND</string>
 	<key>ProductTitleName</key>
 	<string>IBD PROdigy</string>
+	<key>REGISTRATION_URL</key>
+	<string>$(REGISTRATION_URL)</string>
+	<key>RESPONSE_URL</key>
+	<string>$(RESPONSE_URL)</string>
 	<key>StandaloneStudyId</key>
 	<string>appstudy2</string>
 	<key>UIAppFonts</key>
@@ -100,15 +104,11 @@
 	<string>Light</string>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<true/>
+	<key>WCP_URL</key>
+	<string>$(WCP_URL)</string>
 	<key>WebsiteButtonTitle</key>
 	<string>Foundation</string>
 	<key>WebsiteLink</key>
 	<string>www.crohnscolitisfoundation.org</string>
-    <key>REGISTRATION_URL</key>
-    <string>$(REGISTRATION_URL)</string>
-    <key>RESPONSE_URL</key>
-    <string>$(RESPONSE_URL)</string>
-    <key>WCP_URL</key>
-    <string>$(WCP_URL)</string>
 </dict>
 </plist>

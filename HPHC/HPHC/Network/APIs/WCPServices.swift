@@ -120,7 +120,7 @@ class WCPServices: NSObject {
         self.delegate = delegate
         
         let method = WCPMethods.study.method
-        let params:Dictionary<String, String> = ["studyId":Utilities.standaloneStudyId()]
+        let params:Dictionary<String, String> = ["studyId":AppDetails.standaloneStudyId]
         self.sendRequestWith(method: method, params: params, headers: nil)
     }
     func getStudyList(_ delegate: NMWebServiceDelegate){

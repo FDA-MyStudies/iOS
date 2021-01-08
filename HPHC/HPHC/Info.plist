@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>ApplicationID</key>
-	<string>FMSA001</string>
+	<string>$(APPLICATION_ID)</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
@@ -70,7 +70,7 @@
 	<key>NSSpeechRecognitionUsageDescription</key>
 	<string>$(PRODUCT_NAME) would like to use Speech Recognition for the task to give more accurate result.</string>
 	<key>OrganizationID</key>
-	<string>FDAHPH</string>
+	<string>$(ORGANIZATION_ID)</string>
 	<key>ProductTitleName</key>
 	<string>FDA MyStudies</string>
 	<key>REGISTRATION_URL</key>
@@ -78,7 +78,7 @@
 	<key>RESPONSE_URL</key>
 	<string>$(RESPONSE_URL)</string>
 	<key>StandaloneStudyId</key>
-	<string>appstudy2</string>
+	<string>$(STANDALONE_STUDY_ID)</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Verdana Italic.ttf</string>

@@ -105,7 +105,7 @@ class StandaloneStudy: NSObject {
             DBHandler.loadStudyListFromDatabase { (studies) in
                 if studies.count > 0 {
                     
-                    let standaloneStudyId = Utilities.standaloneStudyId()
+                    let standaloneStudyId = AppDetails.standaloneStudyId
                     let study = studies.filter({$0.studyId == standaloneStudyId})
                     Gateway.instance.studies = studies
                     Study.updateCurrentStudy(study:study.last!)

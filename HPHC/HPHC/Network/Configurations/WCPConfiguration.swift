@@ -69,13 +69,9 @@ class WCPConfiguration: NetworkConfiguration {
     }
     
     override func getDefaultHeaders() -> [String : String] {
-        
-        var infoDict: NSDictionary?
-        if let path = Bundle.main.path(forResource: "Info", ofType: "plist") {
-            infoDict = NSDictionary(contentsOfFile: path)
-        }
-        let appId = infoDict!["ApplicationID"] as! String
-        let orgId = infoDict!["OrganizationID"] as! String
+      
+      let appId = AppDetails.applicationID
+      let orgId = AppDetails.organizationID
         
         let token = "AvxfEsgX9u" + ":" + "ee91a4f6-d9c4-4ee9-a0e2-5682c5b1c916"
         //com.hphci.fda.mobilestudies

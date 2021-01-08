@@ -277,7 +277,7 @@ class ProfileViewController: UIViewController, SlideMenuControllerDelegate {
             let studies = Gateway.instance.studies
             var joinedStudies:[Study] = []
             if Utilities.isStandaloneApp() {
-                let standaloneStudyId = Utilities.standaloneStudyId()
+                let standaloneStudyId = AppDetails.standaloneStudyId
                 joinedStudies = studies?.filter({($0.userParticipateState.status == .inProgress || $0.userParticipateState.status == .completed) && ($0.studyId == standaloneStudyId)}) ?? []
             }
             else {

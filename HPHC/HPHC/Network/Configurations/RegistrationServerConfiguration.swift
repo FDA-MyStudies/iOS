@@ -101,13 +101,8 @@ class RegistrationServerConfiguration: NetworkConfiguration {
     
     override func getDefaultHeaders() -> [String: String] {
         
-        
-        var infoDict: NSDictionary?
-        if let path = Bundle.main.path(forResource: "Info", ofType: "plist") {
-            infoDict = NSDictionary(contentsOfFile: path)
-        }
-        let appId = infoDict!["ApplicationID"] as! String
-        let orgId = infoDict!["OrganizationID"] as! String
+      let appId = AppDetails.applicationID
+      let orgId = AppDetails.organizationID
         
         //let ud = UserDefaults.standard
         if User.currentUser.authToken != nil {

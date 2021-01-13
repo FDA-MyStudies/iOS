@@ -43,7 +43,7 @@ let kConsentTaskIdentifier = "ConsentTask"
 let kStudyDashboardViewControllerIdentifier = "StudyDashboardViewController"
 let kStudyDashboardTabbarControllerIdentifier = "StudyDashboardTabbarViewControllerIdentifier"
 
-let kShareConsentFailureAlert = "You can't join study without sharing your data"
+let kShareConsentFailureAlert = NSLocalizedString("You can't join study without sharing your data", comment: "")
 
 var consentHasLAR: Bool = false
 var isAdditionalSign: Bool = false
@@ -913,11 +913,12 @@ extension StudyHomeViewController: NMWebServiceDelegate {
                 || requestName as String == RegistrationMethods.updateEligibilityConsentStatus.method.methodName {
                 unHideSubViews()
 
+                let kUnknownErrorOccurred = NSLocalizedString("Unknown error occurred. Please try after some time.", comment: "")
                 let message = error.localizedDescription as NSString
                 if message.length != 0 {
-                    UIUtilities.showAlertWithTitleAndMessage(title: NSLocalizedString(kErrorTitle, comment: "") as NSString, message: error.localizedDescription as NSString)
+                    UIUtilities.showAlertWithTitleAndMessage(title: kErrorTitle as NSString, message: error.localizedDescription as NSString)
                 } else {
-                    UIUtilities.showAlertMessageWithActionHandler(kErrorTitle, message: "Unknown error occurred. Please try after some time.", buttonTitle: kTitleOk, viewControllerUsed: self, action: {
+                    UIUtilities.showAlertMessageWithActionHandler(kErrorTitle, message: kUnknownErrorOccurred, buttonTitle: kTitleOk, viewControllerUsed: self, action: {
                         self.navigationController?.popViewController(animated: true)
                     })
                 }
@@ -1324,7 +1325,7 @@ print("6---\(step.identifier)")
                     dismiss(animated: true, completion: {
                         self.navigationController?.popViewController(animated: true)
 
-                        UIUtilities.showAlertWithTitleAndMessage(title: "Message", message: NSLocalizedString(kShareConsentFailureAlert, comment: "") as NSString)
+                      UIUtilities.showAlertWithTitleAndMessage(title: kTitleMessage as NSString, message: kShareConsentFailureAlert as NSString)
                     })
                     return nil
                 }

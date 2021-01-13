@@ -38,7 +38,7 @@ class ResourcesViewController: UIViewController{
     var shouldDeleteData: Bool? = false
     
     var leaveStudy: String = "Leave Study"
-    var aboutTheStudy: String = "About the Study"
+    var aboutTheStudy: String = NSLocalizedString("About the Study", comment: "")
     var consentPDF: String = "Consent PDF"
     
     override var preferredStatusBarStyle: UIStatusBarStyle{
@@ -363,7 +363,7 @@ class ResourcesViewController: UIViewController{
         
         
         UIUtilities.showAlertMessageWithTwoActionsAndHandler(NSLocalizedString((leaveStudy + " ?"), comment: ""), errorMessage: NSLocalizedString(withdrawalMessage!, comment: ""), errorAlertActionTitle: NSLocalizedString("Proceed", comment: ""),
-                                                             errorAlertActionTitle2: NSLocalizedString("Cancel", comment: ""), viewControllerUsed: self,
+                                                             errorAlertActionTitle2: kTitleCancel, viewControllerUsed: self,
                                                              action1: {
                                                                 
                                                                 
@@ -371,7 +371,7 @@ class ResourcesViewController: UIViewController{
                                                                     
                                                                 case .askUser :
                                                                     
-                                                                    UIUtilities.showAlertMessageWithThreeActionsAndHandler(kImportantNoteMessage, errorMessage: "You are choosing to leave the study. Please choose if your response data can be retained and used for research purposes OR if your response data should be deleted.", errorAlertActionTitle: "Retain my data", errorAlertActionTitle2: "Delete my data", errorAlertActionTitle3: "Cancel", viewControllerUsed: self, action1: {
+                                                                    UIUtilities.showAlertMessageWithThreeActionsAndHandler(kImportantNoteMessage, errorMessage: "You are choosing to leave the study. Please choose if your response data can be retained and used for research purposes OR if your response data should be deleted.", errorAlertActionTitle: "Retain my data", errorAlertActionTitle2: "Delete my data", errorAlertActionTitle3: kTitleCancel, viewControllerUsed: self, action1: {
                                                                         // Retain Action
                                                                         
                                                                         self.shouldDeleteData = false
@@ -393,7 +393,7 @@ class ResourcesViewController: UIViewController{
                                                                 case .deleteData:
                                                                     
                                                                     UIUtilities.showAlertMessageWithTwoActionsAndHandler(NSLocalizedString("Are you sure? Tap Ok to confirm.", comment: ""), errorMessage: NSLocalizedString("", comment: ""), errorAlertActionTitle: NSLocalizedString("Ok", comment: ""),
-                                                                                                                         errorAlertActionTitle2: NSLocalizedString("Cancel", comment: ""), viewControllerUsed: self,
+                                                                                                                         errorAlertActionTitle2: kTitleCancel, viewControllerUsed: self,
                                                                                                                          action1: {
                                                                                                                             self.shouldDeleteData = true
                                                                                                                             self.withdrawalFromStudy(deleteResponse: true)
@@ -405,7 +405,7 @@ class ResourcesViewController: UIViewController{
                                                                 case .noAction :
                                                                     
                                                                     UIUtilities.showAlertMessageWithTwoActionsAndHandler(NSLocalizedString("Are you sure? Tap Ok to confirm.", comment: ""), errorMessage: NSLocalizedString("", comment: ""), errorAlertActionTitle: NSLocalizedString("Ok", comment: ""),
-                                                                                                                         errorAlertActionTitle2: NSLocalizedString("Cancel", comment: ""), viewControllerUsed: self,
+                                                                                                                         errorAlertActionTitle2: kTitleCancel, viewControllerUsed: self,
                                                                                                                          action1: {
                                                                                                                             self.shouldDeleteData = false
                                                                                                                             self.withdrawalFromStudy(deleteResponse: false)

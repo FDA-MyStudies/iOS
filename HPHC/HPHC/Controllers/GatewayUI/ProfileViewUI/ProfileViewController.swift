@@ -25,30 +25,31 @@ import SlideMenuControllerSwift
 
 let kProfileTableViewCellIdentifier = "ProfileTableViewCell"
 
-let kLeadTimeSelectText = "Select Lead Time"
-let kActionSheetDoneButtonTitle = "Done"
-let kActionSheetCancelButtonTitle = "Cancel"
+let kLeadTimeSelectText = NSLocalizedString("Select Lead Time", comment: "")
+let kActionSheetDoneButtonTitle = NSLocalizedString("Done", comment: "")
 
 let kChangePasswordSegueIdentifier = "changePasswordSegue"
 let kErrorTitle = ""
-let kProfileAlertTitleText = "Profile"
-let kProfileAlertUpdatedText = "Profile updated Successfully."
+let kProfileAlertTitleText = NSLocalizedString("Profile", comment: "")
+let kProfileAlertUpdatedText = NSLocalizedString("Profile updated Successfully.", comment: "")
 
 let signupCellLastIndex = 2
 
-let kProfileTitleText = "My Account"
+let kProfileTitleText = NSLocalizedString("My Account", comment: "")
 
-let kSignOutText = "Sign Out"
+let kSignOutText = NSLocalizedString("Sign Out", comment: "")
 let kLabelName = "LabelName"
 
-let kUseTouchIdOrPasscode = "Use Passcode or Touch ID to access app"
-let kUseFaceIdOrPasscode = "Use Passcode or Face ID to access app"
+let kUseTouchIdOrPasscode = NSLocalizedString("Use Passcode or Touch ID to access app", comment: "")
+let kUseFaceIdOrPasscode = NSLocalizedString("Use Passcode or Face ID to access app", comment: "")
 
-let kUsePasscodeToAccessApp = "Use Passcode to access app"
+let kUsePasscodeToAccessApp = NSLocalizedString("Use Passcode to access app", comment: "")
+let kSaveText = NSLocalizedString("Save", comment: "")
+let kChangePasscodeText = NSLocalizedString("Change Passcode", comment: "")
+let kEditText = NSLocalizedString("Edit", comment: "")
 
 let ktouchid = "touchIdEnabled"
 let korkPasscode = "ORKPasscode"
-
 
 // Cell Toggle Switch Types
 enum ToggelSwitchTags: Int{
@@ -167,7 +168,7 @@ class ProfileViewController: UIViewController, SlideMenuControllerDelegate {
             
             self.buttonLeadTime?.isUserInteractionEnabled =  true
             
-            self.editBarButtonItem?.title = "Save"
+            self.editBarButtonItem?.title = kSaveText
             self.editBarButtonItem?.tintColor = UIColor.black
         }
         else{
@@ -228,7 +229,7 @@ class ProfileViewController: UIViewController, SlideMenuControllerDelegate {
             }
             
         })
-        let actionCancel =   UIAlertAction(title: kActionSheetCancelButtonTitle, style: UIAlertAction.Style.default, handler: {
+        let actionCancel =   UIAlertAction(title: kTitleCancel, style: UIAlertAction.Style.default, handler: {
             action in
             
         })
@@ -249,7 +250,7 @@ class ProfileViewController: UIViewController, SlideMenuControllerDelegate {
      */
     @IBAction func buttonActionSignOut(_ sender: UIButton) {
         
-        UIUtilities.showAlertMessageWithTwoActionsAndHandler(NSLocalizedString(kSignOutText, comment: ""), errorMessage: NSLocalizedString(kAlertMessageForSignOut, comment: ""), errorAlertActionTitle: NSLocalizedString(kSignOutText, comment: ""),
+        UIUtilities.showAlertMessageWithTwoActionsAndHandler(kSignOutText, errorMessage: NSLocalizedString(kAlertMessageForSignOut, comment: ""), errorAlertActionTitle: kSignOutText,
                                                              errorAlertActionTitle2: NSLocalizedString(kTitleCancel, comment: ""), viewControllerUsed: self,
                                                              action1: {
                                                                 
@@ -423,7 +424,7 @@ class ProfileViewController: UIViewController, SlideMenuControllerDelegate {
         else{
             Logger.sharedInstance.debug("settings/LeadTime is null")
         }
-        self.title = NSLocalizedString(kProfileTitleText, comment: "")
+        self.title = kProfileTitleText
         self.isCellEditable =  true
         
         self.buttonLeadTime?.isUserInteractionEnabled =  false
@@ -593,7 +594,7 @@ class ProfileViewController: UIViewController, SlideMenuControllerDelegate {
      
      */
     func showAlertMessages(textMessage: String){
-        UIUtilities.showAlertMessage("", errorMessage: NSLocalizedString(textMessage, comment: ""), errorAlertActionTitle: NSLocalizedString("OK", comment: ""), viewControllerUsed: self)
+        UIUtilities.showAlertMessage("", errorMessage: NSLocalizedString(textMessage, comment: ""), errorAlertActionTitle: kTitleOKCapital, viewControllerUsed: self)
     }
     
     
@@ -703,7 +704,7 @@ extension ProfileViewController: UITableViewDataSource {
                 
                 cell.textFieldValue?.isHidden = true
                 cell.buttonChangePassword?.isHidden =  false
-                cell.buttonChangePassword?.setTitle("Change Passcode", for: .normal)
+                cell.buttonChangePassword?.setTitle(kChangePasscodeText, for: .normal)
                 
                 if User.currentUser.settings?.passcode == true {
                     cell.buttonChangePassword?.isUserInteractionEnabled =  true
@@ -861,7 +862,7 @@ extension ProfileViewController: NMWebServiceDelegate {
         else if requestName as String ==  RegistrationMethods.updateUserProfile.description {
             
             self.isCellEditable = true
-            self.editBarButtonItem?.title = "Edit"
+            self.editBarButtonItem?.title = kEditText
             self.tableViewProfile?.reloadData()
             self.buttonLeadTime?.isUserInteractionEnabled = self.isCellEditable!
              DBHandler.saveUserSettingsToDatabase()

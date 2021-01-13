@@ -39,13 +39,15 @@ class FeedBackViewController: UIViewController{
     @IBOutlet var buttonSubmit: UIButton?
     @IBOutlet var tableView: UITableView?
     var feedbackText: String = ""
+    let kLeaveFeedbackTitle = NSLocalizedString("LEAVE US YOUR FEEDBACK", comment: "")
+    let kEnterFeedback = NSLocalizedString("Enter your feedback here", comment: "")
     
     
 // MARK:- ViewController Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.navigationItem.title =  NSLocalizedString("LEAVE US YOUR FEEDBACK", comment: "")
+        self.navigationItem.title =  kLeaveFeedbackTitle
         
         //Used to set border color for bottom view
         buttonSubmit?.layer.borderColor = kUicolorForButtonBackground
@@ -94,7 +96,7 @@ class FeedBackViewController: UIViewController{
             UIUtilities.showAlertWithMessage(alertMessage: NSLocalizedString(kMessageAllFieldsAreEmpty, comment: ""))
         }
         else if FeedbackDetail.subject.isEmpty {
-            UIUtilities.showAlertWithMessage(alertMessage: NSLocalizedString("Please enter message", comment: ""))
+            UIUtilities.showAlertWithMessage(alertMessage: kMessageMessageBlankCheck)
         }
         else if FeedbackDetail.feedback.isEmpty {
             UIUtilities.showAlertWithMessage(alertMessage: NSLocalizedString("Please provide your feedback", comment: ""))
@@ -169,7 +171,7 @@ extension FeedBackViewController: UITextViewDelegate {
     func textViewDidEndEditing(_ textView: UITextView) {
         print("textViewDidEndEditing")
         if textView.tag == 101 && textView.text.count == 0 {
-            textView.text = "Enter your feedback here"
+            textView.text = kEnterFeedback
             textView.textColor = UIColor.lightGray
             textView.tag = 100
         }

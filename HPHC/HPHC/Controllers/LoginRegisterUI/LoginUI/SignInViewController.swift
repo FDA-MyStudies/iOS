@@ -23,8 +23,7 @@ import UIKit
 import IQKeyboardManagerSwift
 import SlideMenuControllerSwift
 
-let kVerifyMessageFromSignIn = "Your registered email is pending verification. Please type in the Verification Code received in the email to complete this step and proceed to using the app."
-
+let kVerifyMessageFromSignIn = NSLocalizedString("Your registered email is pending verification. Please type in the Verification Code received in the email to complete this step and proceed to using the app.", comment: "")
 
 enum SignInLoadFrom: Int{
     case gatewayOverview
@@ -185,7 +184,7 @@ class SignInViewController: UIViewController{
 
      */
     @IBAction func buttonInfoAction(_ sender: Any){
-        UIUtilities.showAlertWithTitleAndMessage(title: "Why Register?", message: kRegistrationInfoMessage as NSString)
+      UIUtilities.showAlertWithTitleAndMessage(title: kWhyRegisterText as NSString, message: kRegistrationInfoMessage as NSString)
     }
     
 
@@ -226,7 +225,7 @@ class SignInViewController: UIViewController{
      
      */
     func showAlertMessages(textMessage: String){
-        UIUtilities.showAlertMessage("", errorMessage: NSLocalizedString(textMessage, comment: ""), errorAlertActionTitle: NSLocalizedString("OK", comment: ""), viewControllerUsed: self)
+        UIUtilities.showAlertMessage("", errorMessage: NSLocalizedString(textMessage, comment: ""), errorAlertActionTitle: kTitleOKCapital, viewControllerUsed: self)
     }
     
     

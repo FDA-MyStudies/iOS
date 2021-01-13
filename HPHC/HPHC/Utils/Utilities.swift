@@ -480,7 +480,7 @@ class Utilities: NSObject {
     class func showAlertWithTitleAndMessage(title: NSString, message : NSString)->Void {
         alert.title = title as String
         alert.message = message as String
-        alert.addButton(withTitle: "OK")
+        alert.addButton(withTitle: kTitleOKCapital)
         alert.show()
     }
     

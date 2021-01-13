@@ -23,9 +23,8 @@ import UIKit
 
 let kDefaultEmail = "xyz@gmail.com"
 let kSignupCompletionSegue = "signupCompletionSegue"
-let kAlertMessageText = "Message"
-let kAlertMessageVerifyEmail = "Please verify your email address."
-let kAlertMessageResendEmail = "An email verification code has been sent to your registered email."
+let kAlertMessageVerifyEmail = NSLocalizedString("Please verify your email address.", comment: "")
+let kAlertMessageResendEmail = NSLocalizedString("An email verification code has been sent to your registered email.", comment: "")
 
 let kChangePasswordViewControllerIdentifier = "ChangePasswordViewController"
 
@@ -186,7 +185,7 @@ class VerificationViewController: UIViewController{
      
      */
     func showAlertMessages(textMessage: String){
-        UIUtilities.showAlertMessage("", errorMessage: NSLocalizedString(textMessage, comment: ""), errorAlertActionTitle: NSLocalizedString("OK", comment: ""), viewControllerUsed: self)
+        UIUtilities.showAlertMessage("", errorMessage: NSLocalizedString(textMessage, comment: ""), errorAlertActionTitle: kTitleOKCapital, viewControllerUsed: self)
     }
 
     
@@ -288,9 +287,9 @@ extension VerificationViewController: NMWebServiceDelegate {
         } else {
             
             if requestName as String == RegistrationMethods.resendConfirmation.description {
-                UIUtilities.showAlertWithTitleAndMessage(title: NSLocalizedString(kAlertMessageText, comment: "") as NSString, message:NSLocalizedString(kAlertMessageResendEmail, comment: "") as NSString)
+                UIUtilities.showAlertWithTitleAndMessage(title: kTitleMessage as NSString, message:kAlertMessageResendEmail as NSString)
             } else {
-                UIUtilities.showAlertWithTitleAndMessage(title: NSLocalizedString(kAlertMessageText, comment: "") as NSString, message: NSLocalizedString(kAlertMessageVerifyEmail, comment: "") as NSString)
+                UIUtilities.showAlertWithTitleAndMessage(title: kTitleMessage as NSString, message: kAlertMessageVerifyEmail as NSString)
             }
         }
     }
@@ -305,7 +304,7 @@ extension VerificationViewController: NMWebServiceDelegate {
             })
         } else {
             
-            UIUtilities.showAlertWithTitleAndMessage(title: NSLocalizedString(kErrorTitle, comment: "") as NSString, message: error.localizedDescription as NSString)
+            UIUtilities.showAlertWithTitleAndMessage(title: kErrorTitle as NSString, message: error.localizedDescription as NSString)
         }
     }
 }

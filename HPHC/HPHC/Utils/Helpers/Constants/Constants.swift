@@ -41,92 +41,95 @@ let NoNetworkErrorCode = -101
 let CouldNotConnectToServerCode = -1001
 
 //Display Constants
-let kTitleError = "Error"
-let kTitleMessage = "Message"
-let kImportantNoteMessage = "Important Note"
-let kTitleOk = "Ok"
-let kTitleCancel = "Cancel"
-let kTitleDeleteAccount = "Delete Account"
-let kRegistrationInfoMessage = "Registration (or sign up) for the app  is requested only to provide you with a seamless experience of using the app. Your registration information does not become part of the data collected for any study(ies) housed in the app. Each study has its own consent process and your data for the study will not be collected without you providing your informed consent prior to joining the study."
+let kTitleError = NSLocalizedString("Error", comment: "")
+let kTitleMessage = NSLocalizedString("Message", comment: "")
+let kImportantNoteMessage = NSLocalizedString("Important Note", comment: "")
+let kTitleOk = NSLocalizedString("Ok", comment: "")
+let kTitleOKCapital = NSLocalizedString("OK", comment: "")
+let kTitleCancel = NSLocalizedString("Cancel", comment: "")
+let kTitleDeleteAccount = NSLocalizedString("Delete Account", comment: "")
+let kRegistrationInfoMessage = NSLocalizedString("Registration (or sign up) for the app  is requested only to provide you with a seamless experience of using the app. Your registration information does not become part of the data collected for any study(ies) housed in the app. Each study has its own consent process and your data for the study will not be collected without you providing your informed consent prior to joining the study.", comment: "")
 
-let kDeleteAccountConfirmationMessage = "Are you sure you wish to permanently delete your #APPNAME# account? You will need to register again if you wish to join a study."
-let kMessageAccountDeletedSuccess = "Account has been deleted"
-let kMessageAppNotificationOffRemainder = "Stay up-to-date! Turn ON notifications and reminders in app and phone settings to get notified about study activity in a timely manner."
+let kDeleteAccountConfirmationMessage = NSLocalizedString("Are you sure you wish to permanently delete your #APPNAME# account? You will need to register again if you wish to join a study.", comment: "")
+let kMessageAccountDeletedSuccess = NSLocalizedString("Account has been deleted", comment: "")
+let kMessageAppNotificationOffRemainder = NSLocalizedString("Stay up-to-date! Turn ON notifications and reminders in app and phone settings to get notified about study activity in a timely manner.", comment: "")
 
 // MARK:- Signin Constants
-let kSignInTitleText = "SIGN IN"
+let kSignInTitleText = NSLocalizedString("SIGN IN", comment: "")
+let kWhyRegisterText = NSLocalizedString("Why Register?", comment: "")
 let kSignInTableViewCellIdentifier = "DetailsCell"
 
+
 // MARK:- ForgotPassword Constants
-let kForgotPasswordTitleText = "PASSWORD HELP"
-let kForgotPasswordResponseMessage = "We have sent a temporary password to your registered email. Please login with temporary password and change your password."
+let kForgotPasswordTitleText = NSLocalizedString("PASSWORD HELP", comment: "")
+let kForgotPasswordResponseMessage = NSLocalizedString("We have sent a temporary password to your registered email. Please login with temporary password and change your password.", comment: "")
 
 // MARK:- SignUp Constants
-let kSignUpTitleText = "SIGN UP"
-let kAgreeToTermsAndConditionsText = "I Agree to the Terms and Privacy Policy"
-let kTermsText = "Terms"
-let kPrivacyPolicyText = "Privacy Policy"
+let kSignUpTitleText = NSLocalizedString("SIGN UP", comment: "")
+let kAgreeToTermsAndConditionsText = NSLocalizedString("I Agree to the Terms and Privacy Policy", comment: "")
+let kTermsText = NSLocalizedString("Terms", comment: "")
+let kPrivacyPolicyText = NSLocalizedString("Privacy Policy", comment: "")
 let kSignUpTableViewCellIdentifier = "CommonDetailsCell"
 
 // MARK:- NOTIFICATIONS Constants
-let kNotificationsTitleText = "NOTIFICATIONS"
+let kNotificationsTitleText = NSLocalizedString("NOTIFICATIONS", comment: "")
 let kNotificationTableViewCellIdentifier = "NotificationCell"
 
 
 // MARK:- Validations Message during signup and sign in process
 
-let kMessageFirstNameBlank = "Please enter your first name."
-let kMessageLastNameBlank = "Please enter your last name."
-let kMessageEmailBlank = "Please enter your email address."
-let kMessagePasswordBlank = "Please enter your password."
+let kMessageFirstNameBlank = NSLocalizedString("Please enter your first name.", comment: "")
+let kMessageLastNameBlank = NSLocalizedString("Please enter your last name.", comment: "")
+let kMessageEmailBlank = NSLocalizedString("Please enter your email address.", comment: "")
+let kMessagePasswordBlank = NSLocalizedString("Please enter your password.", comment: "")
 
-let kMessageCurrentPasswordBlank = "Please enter your current password."
+let kMessageCurrentPasswordBlank = NSLocalizedString("Please enter your current password.", comment: "")
 
-let kMessageProfileConfirmPasswordBlank = "Please confirm your password."
-let kMessageConfirmPasswordBlank = "Please confirm the password."
+let kMessageProfileConfirmPasswordBlank = NSLocalizedString("Please confirm your password.", comment: "")
+let kMessageConfirmPasswordBlank = NSLocalizedString("Please confirm the password.", comment: "")
 
-let kMessagePasswordMatchingToOtherFeilds = "Your password should not match with email id"
-
-
-let kMessageValidEmail = "Please enter valid email address."
-
-let kMessageValidatePasswords = "The Password and Confirm password fields don't match."
-let kMessageProfileValidatePasswords = "New password and confirm password fields don't match."
+let kMessagePasswordMatchingToOtherFeilds = NSLocalizedString("Your password should not match with email id", comment: "")
 
 
-let kMessageValidatePasswordCharacters = "Password should have minimum of 8 characters."
-let kMessageValidatePasswordComplexity = "Your password MUST be 8-64 characters and contain each of the following: An uppercase letter, A lower case letter, A number 0-9, a special character: \\ ! # % & ‘ () * + , - . : < > = ? @ [] ^ _ { } | ~ *"
-let kMessageAgreeToTermsAndConditions = "Please agree to terms and conditions."
+let kMessageValidEmail = NSLocalizedString("Please enter valid email address.", comment: "")
 
-let kMessageNewPasswordBlank = "Please enter your new password."
-let kMessageValidateChangePassword = "New password and old password are same."
-let kMessageRelationship = "Please enter your relationship to the participant."
+let kMessageValidatePasswords = NSLocalizedString("The Password and Confirm password fields don't match.", comment: "")
+let kMessageProfileValidatePasswords = NSLocalizedString("New password and confirm password fields don't match.", comment: "")
+
+
+let kMessageValidatePasswordCharacters = NSLocalizedString("Password should have minimum of 8 characters.", comment: "")
+let kMessageValidatePasswordComplexity = NSLocalizedString("Your password MUST be 8-64 characters and contain each of the following: An uppercase letter, A lower case letter, A number 0-9, a special character: \\ ! # % & ‘ () * + , - . : < > = ? @ [] ^ _ { } | ~ *", comment: "")
+let kMessageAgreeToTermsAndConditions = NSLocalizedString("Please agree to terms and conditions.", comment: "")
+
+let kMessageNewPasswordBlank = NSLocalizedString("Please enter your new password.", comment: "")
+let kMessageValidateChangePassword = NSLocalizedString("New password and old password are same.", comment: "")
+let kMessageRelationship = NSLocalizedString("Please enter your relationship to the participant.", comment: "")
 
 // MARK:- ChangePassword Constants
-let kChangePasswordTitleText = "CHANGE PASSWORD"
-let kCreatePasswordTitleText = "CREATE PASSWORD"
+let kChangePasswordTitleText = NSLocalizedString("CHANGE PASSWORD", comment: "")
+let kCreatePasswordTitleText = NSLocalizedString("CREATE PASSWORD", comment: "")
 let kChangePawwordCellIdentifer = "changePasswordCell"
-let kChangePasswordResponseMessage = "Your password has been changed successfully"
+let kChangePasswordResponseMessage = NSLocalizedString("Your password has been changed successfully", comment: "")
 
-let kMessageAllFieldsAreEmpty = "Please enter all the fields"
-let kMessageValidFirstName = "Please enter valid first name. Please use letters(length:1 - 100 characters)."
-let kMessageValidLastName = "Please enter valid last name. Please use letters(length:1 - 100 characters)."
+let kMessageAllFieldsAreEmpty = NSLocalizedString("Please enter all the fields", comment: "")
+let kMessageValidFirstName = NSLocalizedString("Please enter valid first name. Please use letters(length:1 - 100 characters).", comment: "")
+let kMessageValidLastName = NSLocalizedString("Please enter valid last name. Please use letters(length:1 - 100 characters).", comment: "")
 
-let kMessageValidateOldAndNewPasswords = "Old password and New password should not be same."
+let kMessageValidateOldAndNewPasswords = NSLocalizedString("Old password and New password should not be same.", comment: "")
 
 // MARK:-VerificationController
-let kMessageVerificationCodeEmpty = "Please enter valid Verification Code"
+let kMessageVerificationCodeEmpty = NSLocalizedString("Please enter valid Verification Code", comment: "")
 
 // MARK:- FeedbackviewController constants
 let kFeedbackTableViewCellIdentifier1 = "FeedbackCellFirst"
 let kFeedbackTableViewCellIdentifier2 = "FeedbackCellSecond"
-let kMessageFeedbackSubmittedSuccessfuly = "Thank you for providing feedback. Your gesture is appreciated."
+let kMessageFeedbackSubmittedSuccessfuly = NSLocalizedString("Thank you for providing feedback. Your gesture is appreciated.", comment: "")
 
 // MARK:- ContactUsviewController constants
 let kContactUsTableViewCellIdentifier = "ContactUsCell"
-let kMessageSubjectBlankCheck = "Please enter subject"
-let kMessageMessageBlankCheck = "Please enter message"
-let kMessageContactedSuccessfuly = "Thank you for contacting us. We will get back to you on your email address at the earliest."
+let kMessageSubjectBlankCheck = NSLocalizedString("Please enter subject", comment: "")
+let kMessageMessageBlankCheck = NSLocalizedString("Please enter message", comment: "")
+let kMessageContactedSuccessfuly = NSLocalizedString("Thank you for contacting us. We will get back to you on your email address at the earliest.", comment: "")
 let kMessageTextViewPlaceHolder = ""
 
 
@@ -140,10 +143,10 @@ let kBlueColor = UIColor.init(red: 0/255.0, green: 124/255.0, blue: 186/255.0, a
 let kGreenColor = UIColor.init(red: 76/255.0, green: 175/255.0, blue: 80/255.0, alpha: 1.0)
 
 
-let kResumeSpaces = "  Resume  "
-let kStartSpaces = "  Start  "
-let kCompletedSpaces = "  Completed  "
-let kInCompletedSpaces = "  Incompleted  "
+let kResumeSpaces = NSLocalizedString("  Resume  ", comment: "")
+let kStartSpaces = NSLocalizedString("  Start  ", comment: "")
+let kCompletedSpaces = NSLocalizedString("  Completed  ", comment: "")
+let kInCompletedSpaces = NSLocalizedString("  Incompleted  ", comment: "")
 
 // MARK:- ResourcesViewController constants
 let kResourcesTableViewCell = "ResourcesCell"
@@ -172,21 +175,21 @@ let kWeek = "WEEK"
 
 // MARK:- Eligibility constants
 
-let kMessageForInvalidToken = "Please enter valid enrollment token"
+let kMessageForInvalidToken = NSLocalizedString("Please enter valid enrollment token", comment: "")
 
-let kMessageValidToken = "Please enter valid token"
-let kMessageForMissingStudyId = "Unable to Enroll, Please try again later."
+let kMessageValidToken = NSLocalizedString("Please enter valid token", comment: "")
+let kMessageForMissingStudyId = NSLocalizedString("Unable to Enroll, Please try again later.", comment: "")
 
-let kMessageInvalidTokenOrIfStudyDoesNotExist = "Sorry, this token is invalid. Please enter a valid token to continue."
+let kMessageInvalidTokenOrIfStudyDoesNotExist = NSLocalizedString("Sorry, this token is invalid. Please enter a valid token to continue.", comment: "")
 
 
 // MARK:- StudyHomeMessages
-let kMessageForStudyUpcomingState = "This study is an upcoming one and isn't yet open for enrolling participants. Please check back later."
-let kMessageForStudyPausedState = "This study has been temporarily paused. Please check back later."
-let kMessageForStudyPausedAfterJoiningState = "The study has been temporarily paused. You can participate in activities once it is resumed. Please check back later."
-let kMessageForStudyClosedState = "This study has been closed."
-let kMessageForStudyWithdrawnState = "Sorry, this study currently does not allow previously enrolled participants to rejoin the study after they have withdrawn from the study. Please check back later or explore other studies"
-let kMessageForStudyEnrollingNotAllowed = "Sorry, enrollment for this study has been closed for now. Please check back later or explore other studies you could join."
+let kMessageForStudyUpcomingState = NSLocalizedString("This study is an upcoming one and isn't yet open for enrolling participants. Please check back later.", comment: "")
+let kMessageForStudyPausedState = NSLocalizedString("This study has been temporarily paused. Please check back later.", comment: "")
+let kMessageForStudyPausedAfterJoiningState = NSLocalizedString("The study has been temporarily paused. You can participate in activities once it is resumed. Please check back later.", comment: "")
+let kMessageForStudyClosedState = NSLocalizedString("This study has been closed.", comment: "")
+let kMessageForStudyWithdrawnState = NSLocalizedString("Sorry, this study currently does not allow previously enrolled participants to rejoin the study after they have withdrawn from the study. Please check back later or explore other studies", comment: "")
+let kMessageForStudyEnrollingNotAllowed = NSLocalizedString("Sorry, enrollment for this study has been closed for now. Please check back later or explore other studies you could join.", comment: "")
 
 
 // MARK:- StudyDashboardViewController segues
@@ -200,4 +203,4 @@ let filterListSegue = "filterscreenSegue"
 
 let kStagingUserEmailId = "aqibm@boston-technology.com"
 let kIsStagingUser = "StagingUser"
-let kFailedToConnectAppleMail = "Failed to connect to Apple Mail app"
+let kFailedToConnectAppleMail = NSLocalizedString("Failed to connect to Apple Mail app", comment: "")

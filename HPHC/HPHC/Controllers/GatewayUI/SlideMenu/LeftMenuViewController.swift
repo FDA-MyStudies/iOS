@@ -24,18 +24,20 @@ import SlideMenuControllerSwift
 let kLeftMenuSubtitle = "subTitle"
 let kLeftMenuTitle = "menuTitle"
 let kLeftMenuIconName = "iconName"
-let kLeftMenuCellTitleHome = "Home"
-let kLeftMenuCellTitleResources = "Resources"
-let kLeftMenuCellTitleProfile = "My Account"
-let kLeftMenuCellTitleSignIn = "Sign In"
-let kLeftMenuCellTitleNewUser = "New User?"
-let kLeftMenuCellSubTitleValue = "Sign up"
-let kAlertMessageReachoutText = "This feature will be available in the next sprint."
+let kLeftMenuCellTitleHome = NSLocalizedString("Home", comment: "")
+let kLeftMenuCellTitleResources = NSLocalizedString("Resources", comment: "")
+let kLeftMenuCellTitleProfile = NSLocalizedString("My Account", comment: "")
+let kLeftMenuCellTitleSignIn = NSLocalizedString("Sign In", comment: "")
+let kLeftMenuCellTitleNewUser = NSLocalizedString("New User?", comment: "")
+let kLeftMenuCellTitleReachOut = NSLocalizedString("Reach Out", comment: "")
+let kLeftMenuCellSubTitleValue = NSLocalizedString("Sign up", comment: "")
 
-let kAlertMessageForSignOut = "Are you sure you want to sign out?"
-let kAlertMessageSignOutSync = "Are you sure you want to sign out? Incomplete activities and activities completed while offline must be re-started when you next sign in."
+let kAlertMessageReachoutText = NSLocalizedString("This feature will be available in the next sprint.", comment: "")
 
-let kAlertSignOutLaterTitle = "Sign Out later"
+let kAlertMessageForSignOut = NSLocalizedString("Are you sure you want to sign out?", comment: "")
+let kAlertMessageSignOutSync = NSLocalizedString("Are you sure you want to sign out? Incomplete activities and activities completed while offline must be re-started when you next sign in.", comment: "")
+
+let kAlertSignOutLaterTitle = NSLocalizedString("Sign Out later", comment: "")
 
 // MARK:Segue Identifiers
 let kLoginStoryboardIdentifier = "Login"
@@ -64,11 +66,11 @@ class LeftMenuViewController: UIViewController, LeftMenuProtocol {
     @IBOutlet weak var tableFooterView: UIView!
     @IBOutlet weak var buttonSignOut: UIButton?
     
-    var menus: [[String: Any]] = [ ["menuTitle": "Home",
+    var menus: [[String: Any]] = [ ["menuTitle": kLeftMenuCellTitleHome,
                    "iconName": "home_menu1-1",
                    "menuType": LeftMenu.studyList],
                   
-                  ["menuTitle": "Resources",
+                  ["menuTitle": kLeftMenuCellTitleResources,
                    "iconName": "resources_menu1",
                    "menuType": LeftMenu.resources],
     ]
@@ -193,25 +195,25 @@ class LeftMenuViewController: UIViewController, LeftMenuProtocol {
         
         let user = User.currentUser
         
-        menus = [ ["menuTitle": "Home",
+        menus = [ ["menuTitle": kLeftMenuCellTitleHome,
                    "iconName": "home_menu1-1",
             "menuType": LeftMenu.studyList]
         ]
         
         if !Utilities.isStandaloneApp() && AppConfiguration.isShowMenuResourceButton {
             
-            menus.append(["menuTitle": "Resources",
+            menus.append(["menuTitle": kLeftMenuCellTitleResources,
              "iconName": "resources_menu1",
                 "menuType": LeftMenu.resources])
         }
         
         if user.userType == .FDAUser {
-            menus.append(["menuTitle": "My Account",
+            menus.append(["menuTitle": kLeftMenuCellTitleProfile,
                           "iconName": "profile_menu1",
                 "menuType": LeftMenu.profile_reachOut])
             
             if shouldAllowToGiveFeedback {
-                menus.append(["menuTitle": "Reach Out",
+                menus.append(["menuTitle": kLeftMenuCellTitleReachOut,
                           "iconName": "reachout_menu1",
                 "menuType": LeftMenu.reachOut_signIn])
             }
@@ -221,19 +223,19 @@ class LeftMenuViewController: UIViewController, LeftMenuProtocol {
         }
         else{
             if shouldAllowToGiveFeedback {
-                menus.append(["menuTitle": "Reach Out",
+                menus.append(["menuTitle": kLeftMenuCellTitleReachOut,
                           "iconName": "reachout_menu1",
                 "menuType": LeftMenu.profile_reachOut])
             }
             
 
-            menus.append(["menuTitle": "Sign In",
+            menus.append(["menuTitle": kLeftMenuCellTitleSignIn,
                           "iconName": "signin_menu1",
                 "menuType": LeftMenu.reachOut_signIn])
             
-            menus.append(["menuTitle": "New User?",
+            menus.append(["menuTitle": kLeftMenuCellTitleNewUser,
                           "iconName":"newuser_menu1",
-                          "subTitle": "Sign up",
+                          "subTitle": kLeftMenuCellSubTitleValue,
                 "menuType": LeftMenu.signup])
              self.buttonSignOut?.isHidden = true
         }
@@ -257,17 +259,17 @@ class LeftMenuViewController: UIViewController, LeftMenuProtocol {
         
         let user = User.currentUser
         if user.userType == .FDAUser {
-            menus.append(["menuTitle": "My Account",
+            menus.append(["menuTitle": kLeftMenuCellTitleProfile,
                           "iconName": "profile_menu1"])
             self.tableView.tableFooterView?.isHidden = false
         }
         else{
-            menus.append(["menuTitle": "Sign In",
+            menus.append(["menuTitle": kLeftMenuCellTitleSignIn,
                           "iconName": "signin_menu1"])
             
-            menus.append(["menuTitle": "New User?",
+            menus.append(["menuTitle": kLeftMenuCellTitleNewUser,
                           "iconName": "newuser_menu1",
-                          "subTitle": "Sign up"])
+                          "subTitle": kLeftMenuCellSubTitleValue])
             self.tableView.tableFooterView?.isHidden = true
         }
         
@@ -349,8 +351,8 @@ class LeftMenuViewController: UIViewController, LeftMenuProtocol {
         DBHandler.isDataAvailableToSync { (available) in
             if(available){
                 
-                UIUtilities.showAlertMessageWithTwoActionsAndHandler(NSLocalizedString(kSignOutText, comment: ""), errorMessage: NSLocalizedString(kAlertMessageSignOutSync, comment: ""), errorAlertActionTitle: NSLocalizedString(kSignOutText, comment: ""),
-                                                                     errorAlertActionTitle2: NSLocalizedString(kAlertSignOutLaterTitle, comment: ""), viewControllerUsed: self,
+                UIUtilities.showAlertMessageWithTwoActionsAndHandler(kSignOutText, errorMessage: kAlertMessageSignOutSync, errorAlertActionTitle: kSignOutText,
+                                                                     errorAlertActionTitle2: kAlertSignOutLaterTitle, viewControllerUsed: self,
                                                                      action1: {
                                                                         
                                                                         self.sendRequestToSignOut()
@@ -361,8 +363,8 @@ class LeftMenuViewController: UIViewController, LeftMenuProtocol {
             }
             else {
                 
-                UIUtilities.showAlertMessageWithTwoActionsAndHandler(NSLocalizedString(kSignOutText, comment: ""), errorMessage: NSLocalizedString(kAlertMessageForSignOut, comment: ""), errorAlertActionTitle: NSLocalizedString(kSignOutText, comment: ""),
-                                                                     errorAlertActionTitle2: NSLocalizedString(kTitleCancel, comment: ""), viewControllerUsed: self,
+                UIUtilities.showAlertMessageWithTwoActionsAndHandler(kSignOutText, errorMessage: kAlertMessageForSignOut, errorAlertActionTitle: kSignOutText,
+                                                                     errorAlertActionTitle2: kTitleCancel, viewControllerUsed: self,
                                                                      action1: {
                                                                         
                                                                         self.sendRequestToSignOut()
@@ -508,7 +510,7 @@ extension LeftMenuViewController: NMWebServiceDelegate {
                 self.fdaSlideMenuController()?.navigateToHomeAfterUnauthorizedAccess()
             })
         }else {
-            UIUtilities.showAlertWithTitleAndMessage(title: NSLocalizedString(kErrorTitle, comment: "") as NSString, message: error.localizedDescription as NSString)
+            UIUtilities.showAlertWithTitleAndMessage(title: kErrorTitle as NSString, message: error.localizedDescription as NSString)
         }
     }
 }

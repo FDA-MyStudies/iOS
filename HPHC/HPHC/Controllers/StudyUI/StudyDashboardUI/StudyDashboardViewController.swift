@@ -247,7 +247,7 @@ class StudyDashboardViewController: UIViewController{
     @IBAction func shareButtonAction(_ sender: AnyObject){
         
         
-        UIUtilities.showAlertMessageWithTwoActionsAndHandler(NSLocalizedString(kTitleMessage, comment: ""), errorMessage: NSLocalizedString(kMessageForSharingDashboard, comment: ""), errorAlertActionTitle: NSLocalizedString(kTitleOK, comment: ""),
+        UIUtilities.showAlertMessageWithTwoActionsAndHandler(NSLocalizedString(kTitleMessage, comment: ""), errorMessage: NSLocalizedString(kMessageForSharingDashboard, comment: ""), errorAlertActionTitle: kTitleOKCapital,
                                                              errorAlertActionTitle2: NSLocalizedString(kTitleCancel, comment: ""), viewControllerUsed: self,
                                                              action1: {
                                                                 

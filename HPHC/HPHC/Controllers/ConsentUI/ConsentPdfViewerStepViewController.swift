@@ -152,7 +152,7 @@ extension ConsentPdfViewerStepViewController: WKNavigationDelegate{
     func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
         self.removeProgressIndicator()
         
-        let buttonTitleOK = NSLocalizedString("OK", comment: "")
+        let buttonTitleOK = kTitleOKCapital
         let alert = UIAlertController(title: NSLocalizedString(kTitleError, comment: ""),message: error.localizedDescription,preferredStyle: UIAlertController.Style.alert)
         
         alert.addAction(UIAlertAction.init(title: buttonTitleOK, style: .default, handler: { (action) in

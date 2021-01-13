@@ -30,6 +30,7 @@ class SignUpCompleteViewController: UIViewController{
     @IBOutlet var buttonNext: UIButton?
     var shouldCreateMenu: Bool = true
     var viewLoadFrom: CompletionLoadFrom = .signup
+    let kPasscodeDoYouWish = NSLocalizedString("Do you wish to set up Passcode or FaceID/TouchID protection for this app? (You can do this later in the My Account area).", comment: "")
     
     // MARK:- ViewController Lifecycle
     override func viewDidLoad() {
@@ -49,9 +50,8 @@ class SignUpCompleteViewController: UIViewController{
         
         self.hideViews()
         
-        
         UIUtilities.showAlertMessageWithTwoActionsAndHandler("",
-                                                             errorMessage: "Do you wish to set up Passcode or FaceID/TouchID protection for this app? (You can do this later in the My Account area).",
+                                                             errorMessage: kPasscodeDoYouWish,
                                                              errorAlertActionTitle: "No",
                                                              errorAlertActionTitle2: "Yes",
                                                              viewControllerUsed: self,

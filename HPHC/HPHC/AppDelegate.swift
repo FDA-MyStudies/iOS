@@ -63,8 +63,6 @@ let kCurrentVersion = "currentVersion"
 let kForceUpdate = "forceUpdate"
 let kMessage = "message"
 let kVisualStepId = "visual"
-let kMessageString = "Message"
-
 
 @UIApplicationMain
 
@@ -1071,7 +1069,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     }
                     
                     let alert = UIAlertController(title: "" as String,message: message as String,preferredStyle: UIAlertController.Style.alert)
-                    alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: ""), style: .default, handler: nil))
+                    alert.addAction(UIAlertAction(title: kTitleOKCapital, style: .default, handler: nil))
                 }else {
                     
                     if selectedController != nil {
@@ -1641,7 +1639,7 @@ extension AppDelegate: ORKTaskViewControllerDelegate {
                             self.popViewControllerAfterConsentDisagree()
                             
                             //Alert User
-                            UIUtilities.showAlertWithTitleAndMessage(title: "Message", message: NSLocalizedString(kShareConsentFailureAlert, comment: "") as NSString)
+                          UIUtilities.showAlertWithTitleAndMessage(title: kTitleMessage as NSString, message: NSLocalizedString(kShareConsentFailureAlert, comment: "") as NSString)
                         })
                         return nil
                     }
@@ -1718,7 +1716,7 @@ extension AppDelegate: ORKPasscodeDelegate {
             topVC = topVC?.presentedViewController
         }
         
-        UIUtilities.showAlertMessageWithTwoActionsAndHandler(NSLocalizedString(kMessagePasscode, comment: ""), errorMessage: NSLocalizedString(kMessagePasscodeSignOut, comment: ""), errorAlertActionTitle: NSLocalizedString(kTitleOK, comment: ""),
+        UIUtilities.showAlertMessageWithTwoActionsAndHandler(NSLocalizedString(kMessagePasscode, comment: ""), errorMessage: NSLocalizedString(kMessagePasscodeSignOut, comment: ""), errorAlertActionTitle: kTitleOKCapital,
                                                              errorAlertActionTitle2: NSLocalizedString(kTitleCancel, comment: ""), viewControllerUsed: topVC!,
                                                              action1: {
                                                                 self.window?.addProgressIndicatorOnWindowFromTop()

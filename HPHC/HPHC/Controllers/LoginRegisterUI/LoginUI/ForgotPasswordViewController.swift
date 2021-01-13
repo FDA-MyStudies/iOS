@@ -22,7 +22,7 @@ import Foundation
 import UIKit
 
 let kVerifyViewControllerSegue = "VerifyViewControllerSegue"
-let kVerficationMessageFromForgotPassword = "Your registered email(xyz@gmail.com) is pending verification. Enter the Verification Code received on this email to complete verification and try the Forgot Password action again."
+let kVerficationMessageFromForgotPassword = NSLocalizedString("Your registered email(xyz@gmail.com) is pending verification. Enter the Verification Code received on this email to complete verification and try the Forgot Password action again.", comment: "")
 
 class ForgotPasswordViewController: UIViewController{
     
@@ -94,7 +94,7 @@ class ForgotPasswordViewController: UIViewController{
     
      */
     func showAlertMessages(textMessage: String){
-        UIUtilities.showAlertMessage("", errorMessage: NSLocalizedString(textMessage, comment: ""), errorAlertActionTitle: NSLocalizedString("OK", comment: ""), viewControllerUsed: self)
+        UIUtilities.showAlertMessage("", errorMessage: NSLocalizedString(textMessage, comment: ""), errorAlertActionTitle: kTitleOKCapital, viewControllerUsed: self)
     }
     
     
@@ -163,7 +163,7 @@ extension ForgotPasswordViewController: NMWebServiceDelegate {
         } else {
             // for resend email
             
-              UIUtilities.showAlertWithTitleAndMessage(title: NSLocalizedString(kAlertMessageText, comment: "") as NSString, message: NSLocalizedString(kAlertMessageResendEmail, comment: "") as NSString)
+              UIUtilities.showAlertWithTitleAndMessage(title: NSLocalizedString(kTitleMessage, comment: "") as NSString, message: NSLocalizedString(kAlertMessageResendEmail, comment: "") as NSString)
             
         }
     }

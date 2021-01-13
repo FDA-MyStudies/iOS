@@ -155,6 +155,7 @@
 		7878B31D2216C6E20052FC23 /* HPHCTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7878B31C2216C6E20052FC23 /* HPHCTests.swift */; };
 		83E41E58CE40BA32BA0F019B /* Pods_HPHCUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E4CF7BB238C017BF7E2A6346 /* Pods_HPHCUITests.framework */; };
 		846C695D25A83F8A002B9F42 /* AppDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846C695C25A83F8A002B9F42 /* AppDetails.swift */; };
+		846C698A25A872D8002B9F42 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 846C698C25A872D8002B9F42 /* Localizable.strings */; };
 		84E8D61724D161B6008C38D5 /* PDFCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E8D61624D161B6008C38D5 /* PDFCreator.swift */; };
 		89055913230148FD005FB284 /* Branding.plist in Resources */ = {isa = PBXBuildFile; fileRef = 89055912230148FD005FB284 /* Branding.plist */; };
 		8905591B230149AD005FB284 /* HPHCUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8905591A230149AD005FB284 /* HPHCUITests.swift */; };
@@ -480,6 +481,9 @@
 		80162EB0842AABC6DBF4AC42 /* Pods_FDAMS_HIMSS_App.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FDAMS_HIMSS_App.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		846C695B25A83F49002B9F42 /* Default.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Default.xcconfig; sourceTree = "<group>"; };
 		846C695C25A83F8A002B9F42 /* AppDetails.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDetails.swift; sourceTree = "<group>"; };
+		846C697D25A86360002B9F42 /* Staging.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Staging.xcconfig; sourceTree = "<group>"; };
+		846C698B25A872D8002B9F42 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		846C698F25A872E4002B9F42 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
 		84E8D61624D161B6008C38D5 /* PDFCreator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFCreator.swift; sourceTree = "<group>"; };
 		87A4F9AAE7A1B8C36C9FBDDF /* Pods_HPHC_QA.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HPHC_QA.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		89055912230148FD005FB284 /* Branding.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Branding.plist; sourceTree = "<group>"; };
@@ -747,6 +751,7 @@
 		6E7D2D581E433E8700763D4C /* HPHC */ = {
 			isa = PBXGroup;
 			children = (
+				846C697D25A86360002B9F42 /* Staging.xcconfig */,
 				846C695A25A83F49002B9F42 /* Environments */,
 				6F10BB15234DDFDA006388E2 /* Branding */,
 				6ECA92861E49F0BA00DA6287 /* Utils */,
@@ -759,6 +764,7 @@
 				6E7D2D591E433E8800763D4C /* AppDelegate.swift */,
 				94878B861EC982C30064E1D4 /* FDA.entitlements */,
 				6E7D2D651E433E8800763D4C /* Info.plist */,
+				846C698C25A872D8002B9F42 /* Localizable.strings */,
 			);
 			path = HPHC;
 			sourceTree = "<group>";
@@ -2068,6 +2074,7 @@
 				6EE93DCC1E93C8850027A5DC /* ResourcesUI.plist in Resources */,
 				6EBC2E811E94FB5300828CA1 /* StudyDashboard.plist in Resources */,
 				89831393224399FC0000BEB5 /* ResourceList.json in Resources */,
+				846C698A25A872D8002B9F42 /* Localizable.strings in Resources */,
 				6F02217A2264729E00A2DBC8 /* OtherTextChoiceCell.xib in Resources */,
 				6EF748BF1E69645700F1E89E /* LatestActive_Taskdocument.json in Resources */,
 				6EAA048B1FAF4C6E00214D03 /* Labkey_Activity_Latest.json in Resources */,
@@ -2457,6 +2464,15 @@
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
 		};
+		846C698C25A872D8002B9F42 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				846C698B25A872D8002B9F42 /* en */,
+				846C698F25A872E4002B9F42 /* es */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
 		8923428D22B11BFC0059F910 /* LimitJIA.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -2470,7 +2486,7 @@
 /* Begin XCBuildConfiguration section */
 		6E7D2D7C1E433E8800763D4C /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 846C695B25A83F49002B9F42 /* Default.xcconfig */;
+			baseConfigurationReference = 846C697D25A86360002B9F42 /* Staging.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
@@ -2531,7 +2547,7 @@
 		};
 		6E7D2D7D1E433E8800763D4C /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 846C695B25A83F49002B9F42 /* Default.xcconfig */;
+			baseConfigurationReference = 846C697D25A86360002B9F42 /* Staging.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;

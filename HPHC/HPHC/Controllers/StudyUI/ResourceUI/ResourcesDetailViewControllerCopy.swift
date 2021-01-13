@@ -250,11 +250,9 @@ extension ResourcesDetailViewControllerCopy:UIWebViewDelegate {
     func webView(_ webView: UIWebView, didFailLoadWithError error: Error) {
         self.activityIndicator.stopAnimating()
       
-        
-        let buttonTitleOK = NSLocalizedString("OK", comment: "")
         let alert = UIAlertController(title:NSLocalizedString(kTitleError, comment: ""),message:error.localizedDescription,preferredStyle: UIAlertController.Style.alert)
         
-        alert.addAction(UIAlertAction.init(title:buttonTitleOK, style: .default, handler: { (action) in
+        alert.addAction(UIAlertAction.init(title:kTitleOKCapital, style: .default, handler: { (action) in
             
             self.dismiss(animated: true, completion: nil)
             
@@ -316,7 +314,7 @@ extension ResourcesDetailViewControllerCopy:WKUIDelegate,WKNavigationDelegate{
                 textField.isSecureTextEntry = true
                 passwordTextField = textField
             }
-            alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { action in
+            alertController.addAction(UIAlertAction(title: kTitleCancel, style: .cancel, handler: { action in
                 completionHandler(.cancelAuthenticationChallenge, nil)
             }))
             alertController.addAction(UIAlertAction(title: "Log In", style: .default, handler: { action in
@@ -363,7 +361,7 @@ extension ResourcesDetailViewControllerCopy:WKUIDelegate,WKNavigationDelegate{
         print("webView:\(webView) runJavaScriptAlertPanelWithMessage:\(message) initiatedByFrame:\(frame) completionHandler:\(completionHandler)")
         
         let alertController = UIAlertController(title: frame.request.url?.host, message: message, preferredStyle: .alert)
-        alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
+        alertController.addAction(UIAlertAction(title: kTitleOKCapital, style: .default, handler: { action in
             completionHandler()
         }))
         present(alertController, animated: true, completion: nil)
@@ -373,10 +371,10 @@ extension ResourcesDetailViewControllerCopy:WKUIDelegate,WKNavigationDelegate{
         print("webView:\(webView) runJavaScriptConfirmPanelWithMessage:\(message) initiatedByFrame:\(frame) completionHandler:\(completionHandler)")
         
         let alertController = UIAlertController(title: frame.request.url?.host, message: message, preferredStyle: .alert)
-        alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { action in
+        alertController.addAction(UIAlertAction(title: kTitleCancel, style: .cancel, handler: { action in
             completionHandler(false)
         }))
-        alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
+        alertController.addAction(UIAlertAction(title: kTitleOKCapital, style: .default, handler: { action in
             completionHandler(true)
         }))
         present(alertController, animated: true, completion: nil)
@@ -391,10 +389,10 @@ extension ResourcesDetailViewControllerCopy:WKUIDelegate,WKNavigationDelegate{
             textField.text = defaultText
             alertTextField = textField
         }
-        alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { action in
+        alertController.addAction(UIAlertAction(title: kTitleCancel, style: .cancel, handler: { action in
             completionHandler(nil)
         }))
-        alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
+        alertController.addAction(UIAlertAction(title: kTitleOKCapital, style: .default, handler: { action in
             completionHandler(alertTextField.text)
         }))
         present(alertController, animated: true, completion: nil)
@@ -411,7 +409,7 @@ extension ResourcesDetailViewControllerCopy:MFMailComposeViewControllerDelegate{
         composeVC.mailComposeDelegate = self
         // Configure the fields of the interface.
         
-        composeVC.setSubject("Resources")
+        composeVC.setSubject(NSLocalizedString("Resources", comment: ""))
         
         if resource?.file?.localPath != nil {
             
@@ -451,7 +449,7 @@ extension ResourcesDetailViewControllerCopy:MFMailComposeViewControllerDelegate{
         } else {
             let alert = UIAlertController(title:NSLocalizedString(kTitleError, comment: ""),message:"",preferredStyle: UIAlertController.Style.alert)
             
-            alert.addAction(UIAlertAction.init(title:NSLocalizedString("OK", comment: ""), style: .default, handler: { (action) in
+            alert.addAction(UIAlertAction.init(title:kTitleOKCapital, style: .default, handler: { (action) in
                 
                 self.dismiss(animated: true, completion: nil)
                 

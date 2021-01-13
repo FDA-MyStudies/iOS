@@ -172,10 +172,9 @@ extension ResourcesDetailViewController: WKNavigationDelegate {
         self.activityIndicator.stopAnimating()
         self.activityIndicator.removeFromSuperview()
         
-        let buttonTitleOK = NSLocalizedString("OK", comment: "")
         let alert = UIAlertController(title: NSLocalizedString(kTitleError, comment: ""),message: error.localizedDescription,preferredStyle: UIAlertController.Style.alert)
         
-        alert.addAction(UIAlertAction.init(title: buttonTitleOK, style: .default, handler: { (action) in
+        alert.addAction(UIAlertAction.init(title: kTitleOKCapital, style: .default, handler: { (action) in
             
             self.dismiss(animated: true, completion: nil)
             
@@ -192,7 +191,7 @@ extension ResourcesDetailViewController: MFMailComposeViewControllerDelegate{
         composeVC.mailComposeDelegate = self
         // Configure the fields of the interface.
         
-        composeVC.setSubject("Resources")
+        composeVC.setSubject(NSLocalizedString("Resources", comment: ""))
         
         if resource?.file?.localPath != nil {
             
@@ -235,7 +234,7 @@ extension ResourcesDetailViewController: MFMailComposeViewControllerDelegate{
         } else {
             let alert = UIAlertController(title: NSLocalizedString(kTitleError, comment: ""),message: kFailedToConnectAppleMail, preferredStyle: UIAlertController.Style.alert)
             
-            alert.addAction(UIAlertAction.init(title: NSLocalizedString("OK", comment: ""), style: .default, handler: { (action) in
+            alert.addAction(UIAlertAction.init(title: kTitleOKCapital, style: .default, handler: { (action) in
                 
 //                self.dismiss(animated: true, completion: nil)
                 

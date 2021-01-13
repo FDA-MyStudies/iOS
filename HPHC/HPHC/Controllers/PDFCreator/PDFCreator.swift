@@ -39,6 +39,8 @@ class PDFCreator: NSObject {
     let pageWidth = 612.0
     let pageHeight = 792.0
     let pageRect = CGRect(x: 0, y: 0, width: 612.0, height: 792.0)
+    let kPage = NSLocalizedString("Page", comment: "")
+    let kof = NSLocalizedString("of", comment: "")
     
     init(title: String, body: String, image: UIImage, relation: String, participantFirstName: String, participantLastName: String, startTime: String, firstName: String, lastName: String, isLAR: Bool, isAdditionalSign: Bool, additionalArrSign: [String], pageCount: Int) { //
         self.title = title
@@ -269,7 +271,7 @@ class PDFCreator: NSObject {
     func drawPageNumber(_ pageNum: Int, pageWidth: CGFloat, pageHeight: CGFloat) {
         let theFont = UIFont.systemFont(ofSize: 12, weight: .medium)
         
-        let pageString = NSMutableAttributedString(string: "Page \(pageNum) of \(pageNum)")
+        let pageString = NSMutableAttributedString(string: "\(kPage) \(pageNum) \(kof) \(pageNum)")
         pageString.addAttribute(NSAttributedString.Key.font, value: theFont, range: NSRange(location: 0, length: pageString.length))
         
         let pageStringSize =  pageString.size()

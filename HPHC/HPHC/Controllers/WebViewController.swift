@@ -130,7 +130,7 @@ class WebViewController : UIViewController{
         else{
             let alert = UIAlertController(title:NSLocalizedString(kTitleError, comment: ""),message:kFailedToConnectAppleMail, preferredStyle: UIAlertController.Style.alert)
             
-            alert.addAction(UIAlertAction.init(title:NSLocalizedString("OK", comment: ""), style: .default, handler: { (action) in
+            alert.addAction(UIAlertAction.init(title:kTitleOKCapital, style: .default, handler: { (action) in
                 
 //                self.dismiss(animated: true, completion: nil)
                 

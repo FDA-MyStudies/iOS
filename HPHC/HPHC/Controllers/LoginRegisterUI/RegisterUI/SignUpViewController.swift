@@ -22,7 +22,7 @@ import Foundation
 import UIKit
 import IQKeyboardManagerSwift
 
-let kVerifyMessageFromSignUp = "An email has been sent to xyz@gmail.com. Please type in the Verification Code received in the email to complete the verification step."
+let kVerifyMessageFromSignUp = NSLocalizedString("An email has been sent to xyz@gmail.com. Please type in the Verification Code received in the email to complete the verification step.", comment: "")
 
 enum SignUpLoadFrom: Int{
     case gatewayOverview
@@ -201,7 +201,7 @@ class SignUpViewController: UIViewController{
      
      */
     func showAlertMessages(textMessage: String){
-        UIUtilities.showAlertMessage("", errorMessage: NSLocalizedString(textMessage, comment: ""), errorAlertActionTitle: NSLocalizedString("OK", comment: ""), viewControllerUsed: self)
+        UIUtilities.showAlertMessage("", errorMessage: NSLocalizedString(textMessage, comment: ""), errorAlertActionTitle: kTitleOKCapital, viewControllerUsed: self)
     }
     
     
@@ -267,7 +267,7 @@ class SignUpViewController: UIViewController{
      
      */
     @IBAction func buttonInfoAction(_ sender: Any){
-        UIUtilities.showAlertWithTitleAndMessage(title: "Why Register?", message: kRegistrationInfoMessage as NSString)
+      UIUtilities.showAlertWithTitleAndMessage(title: kWhyRegisterText as NSString, message: kRegistrationInfoMessage as NSString)
     }
 
     

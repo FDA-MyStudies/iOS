@@ -82,7 +82,7 @@ class StudyListViewController: UIViewController {
         // IQKeyboardManager.sharedManager().enable = true
 
         refreshControl = UIRefreshControl()
-        refreshControl?.attributedTitle = NSAttributedString(string: "Pull to refresh")
+        refreshControl?.attributedTitle = NSAttributedString(string: kPullToRefresh)
         refreshControl?.addTarget(self, action: #selector(refresh(sender:)), for: UIControl.Event.valueChanged)
         tableView?.addSubview(refreshControl!)
     }
@@ -456,7 +456,7 @@ class StudyListViewController: UIViewController {
         if sender?.selectedSegmentIndex == 0 {
             let text = searchView?.textFieldSearch?.text
             searchView?.textFieldSearch?.text = ""
-            searchView?.textFieldSearch?.placeholder = "Enter a token"
+            searchView?.textFieldSearch?.placeholder = kEnterToken
             searchView?.textFieldSearch?.resignFirstResponder()
             searchView?.textFieldSearch?.becomeFirstResponder()
             searchView?.textFieldSearch?.text = text
@@ -464,7 +464,7 @@ class StudyListViewController: UIViewController {
         } else if sender?.selectedSegmentIndex == 1 {
             let text = searchView?.textFieldSearch?.text
             searchView?.textFieldSearch?.text = ""
-            searchView?.textFieldSearch?.placeholder = "Enter keyword(s)"
+            searchView?.textFieldSearch?.placeholder = kEnterKeyword
             searchView?.textFieldSearch?.resignFirstResponder()
             searchView?.textFieldSearch?.becomeFirstResponder()
             searchView?.textFieldSearch?.text = text

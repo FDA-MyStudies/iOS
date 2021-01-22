@@ -302,22 +302,22 @@ extension ResourcesDetailViewControllerCopy:WKUIDelegate,WKNavigationDelegate{
         
         switch (challenge.protectionSpace.authenticationMethod) {
         case NSURLAuthenticationMethodHTTPBasic:
-            let alertController = UIAlertController(title: "Authentication Required", message: webView.url?.host, preferredStyle: .alert)
+            let alertController = UIAlertController(title: kAuthenticationRequired, message: webView.url?.host, preferredStyle: .alert)
             weak var usernameTextField: UITextField!
             alertController.addTextField { textField in
-                textField.placeholder = "Username"
+                textField.placeholder = kUsername
                 usernameTextField = textField
             }
             weak var passwordTextField: UITextField!
             alertController.addTextField { textField in
-                textField.placeholder = "Password"
+                textField.placeholder = kPassword
                 textField.isSecureTextEntry = true
                 passwordTextField = textField
             }
             alertController.addAction(UIAlertAction(title: kTitleCancel, style: .cancel, handler: { action in
                 completionHandler(.cancelAuthenticationChallenge, nil)
             }))
-            alertController.addAction(UIAlertAction(title: "Log In", style: .default, handler: { action in
+            alertController.addAction(UIAlertAction(title: kLogIn, style: .default, handler: { action in
                 guard let username = usernameTextField.text, let password = passwordTextField.text else {
                     completionHandler(.rejectProtectionSpace, nil)
                     return
@@ -346,8 +346,8 @@ extension ResourcesDetailViewControllerCopy:WKUIDelegate,WKNavigationDelegate{
     func webView(_ webView: WKWebView, didFail navigation: WKNavigation, withError error: Error) {
         print("webView:\(webView) didFailNavigation:\(navigation) withError:\(error)")
         
-        let alert = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+        let alert = UIAlertController(title: kTitleError, message: error.localizedDescription, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: kTitleOk, style: .default, handler: nil))
         present(alert, animated: true, completion: nil)
     }
     

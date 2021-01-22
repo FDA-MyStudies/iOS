@@ -797,7 +797,7 @@ class ActivityQuestionStep: ActivityStep {
                 
                 if let otherDict = dict[kORKOTherChoice] as? JSONDictionary {
                     
-                    let placeholder = otherDict["placeholder"] as? String ?? "enter here"
+                    let placeholder = otherDict["placeholder"] as? String ?? kEnterHere
                     let isMandatory = otherDict["isMandatory"] as? Bool ?? false
                     let textFieldReq = otherDict["textfieldReq"] as? Bool ?? false
         

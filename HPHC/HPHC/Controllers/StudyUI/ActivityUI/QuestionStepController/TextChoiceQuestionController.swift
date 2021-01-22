@@ -20,7 +20,7 @@ struct OtherChoice {
     let isExclusive: Bool
     let value: String
     
-    init(isShowOtherCell: Bool = false, isShowOtherField: Bool = true, otherTitle: String = "Other", placeholder: String = "enter here",isMandatory: Bool = true,isExclusive: Bool = false, detailText: String = "", value: String = "") {
+    init(isShowOtherCell: Bool = false, isShowOtherField: Bool = true, otherTitle: String = "Other", placeholder: String = kEnterHere,isMandatory: Bool = true,isExclusive: Bool = false, detailText: String = "", value: String = "") {
         self.isShowOtherField = isShowOtherField
         self.otherTitle = otherTitle
         self.placeholder = placeholder
@@ -322,7 +322,8 @@ class TextChoiceQuestionController: ORKQuestionStepViewController {
         
         searchBar.frame = CGRect()
         searchBar.searchBarStyle = UISearchBar.Style.minimal
-        searchBar.placeholder = " Search"
+        let kSearch = NSLocalizedString(" Search", comment: "")
+        searchBar.placeholder = kSearch
         searchBar.sizeToFit()
         searchBar.showsCancelButton = false
         searchBar.returnKeyType = .done
@@ -469,9 +470,11 @@ class TextChoiceQuestionController: ORKQuestionStepViewController {
         if self.otherChoice.otherChoiceText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty,
             self.isOtherCellSelected {
             
-            let alertVC = UIAlertController(title: "Answer required", message: "Please provide an input for the text field too.", preferredStyle: .alert)
+            let KAnswerRequired = NSLocalizedString("Answer required", comment: "")
+            let kPleaseProvideInput = NSLocalizedString("Please provide an input for the text field too.", comment: "")
+            let alertVC = UIAlertController(title: KAnswerRequired, message: kPleaseProvideInput, preferredStyle: .alert)
             
-            let okAction = UIAlertAction(title: "Ok", style: .default) { [unowned self] (action) in
+            let okAction = UIAlertAction(title: kTitleOk, style: .default) { [unowned self] (action) in
                 alertVC.dismiss(animated: true, completion: nil)
                 if let otherCell = self.tableView?.cellForRow(at: IndexPath(row: self.textChoices.count, section: 0)) as? OtherTextChoiceCell {
                     otherCell.otherField.becomeFirstResponder()

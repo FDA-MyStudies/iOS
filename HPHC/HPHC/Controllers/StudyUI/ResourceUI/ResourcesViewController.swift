@@ -40,7 +40,8 @@ class ResourcesViewController: UIViewController{
     var leaveStudy: String = "Leave Study"
     var aboutTheStudy: String = NSLocalizedString("About the Study", comment: "")
     var consentPDF: String = "Consent PDF"
-    
+    var kAreYouSure: String = NSLocalizedString("Are you sure you want to ", comment: "")
+  
     override var preferredStatusBarStyle: UIStatusBarStyle{
         return .default
     }
@@ -316,7 +317,7 @@ class ResourcesViewController: UIViewController{
                             let notification = AppLocalNotification()
                             notification.id = notfiId
                             notification.message = resource.notificationMessage
-                            notification.title = "New Resource Available"
+                            notification.title = kNewResourceAvailable 
                             notification.startDate = startDate
                             notification.endDate = endDate
                             notification.type = AppNotification.NotificationType.Study
@@ -350,7 +351,7 @@ class ResourcesViewController: UIViewController{
         var withdrawalType = Study.currentStudy?.withdrawalConfigration?.type
         
         if withdrawalMessage == nil {
-            withdrawalMessage = "Are you sure you want to " + leaveStudy + "?"
+            withdrawalMessage = kAreYouSure + leaveStudy + "?"
         }
         
         if withdrawalType == nil || withdrawalType == .notAvailable {
@@ -361,8 +362,8 @@ class ResourcesViewController: UIViewController{
             return
         }
         
-        
-        UIUtilities.showAlertMessageWithTwoActionsAndHandler(NSLocalizedString((leaveStudy + " ?"), comment: ""), errorMessage: NSLocalizedString(withdrawalMessage!, comment: ""), errorAlertActionTitle: NSLocalizedString("Proceed", comment: ""),
+        let kOkConfirm = NSLocalizedString("Are you sure? Tap Ok to confirm.", comment: "")
+        UIUtilities.showAlertMessageWithTwoActionsAndHandler(NSLocalizedString((leaveStudy + " ?"), comment: ""), errorMessage: NSLocalizedString(withdrawalMessage!, comment: ""), errorAlertActionTitle: kProceedTitle,
                                                              errorAlertActionTitle2: kTitleCancel, viewControllerUsed: self,
                                                              action1: {
                                                                 
@@ -370,8 +371,11 @@ class ResourcesViewController: UIViewController{
                                                                 switch withdrawalType! as StudyWithdrawalConfigrationType {
                                                                     
                                                                 case .askUser :
+                                                                  let kChoosingLeave  = NSLocalizedString("You are choosing to leave the study. Please choose if your response data can be retained and used for research purposes OR if your response data should be deleted.", comment: "")
+                                                                  let kRetainData = NSLocalizedString("Retain my data", comment: "")
+                                                                  let kDeleteData = NSLocalizedString("Delete my data", comment: "")
                                                                     
-                                                                    UIUtilities.showAlertMessageWithThreeActionsAndHandler(kImportantNoteMessage, errorMessage: "You are choosing to leave the study. Please choose if your response data can be retained and used for research purposes OR if your response data should be deleted.", errorAlertActionTitle: "Retain my data", errorAlertActionTitle2: "Delete my data", errorAlertActionTitle3: kTitleCancel, viewControllerUsed: self, action1: {
+                                                                    UIUtilities.showAlertMessageWithThreeActionsAndHandler(kImportantNoteMessage, errorMessage: kChoosingLeave, errorAlertActionTitle: kRetainData, errorAlertActionTitle2: kDeleteData, errorAlertActionTitle3: kTitleCancel, viewControllerUsed: self, action1: {
                                                                         // Retain Action
                                                                         
                                                                         self.shouldDeleteData = false
@@ -392,7 +396,7 @@ class ResourcesViewController: UIViewController{
                                                                     
                                                                 case .deleteData:
                                                                     
-                                                                    UIUtilities.showAlertMessageWithTwoActionsAndHandler(NSLocalizedString("Are you sure? Tap Ok to confirm.", comment: ""), errorMessage: NSLocalizedString("", comment: ""), errorAlertActionTitle: NSLocalizedString("Ok", comment: ""),
+                                                                    UIUtilities.showAlertMessageWithTwoActionsAndHandler(kOkConfirm, errorMessage: NSLocalizedString("", comment: ""), errorAlertActionTitle: kTitleOk,
                                                                                                                          errorAlertActionTitle2: kTitleCancel, viewControllerUsed: self,
                                                                                                                          action1: {
                                                                                                                             self.shouldDeleteData = true
@@ -404,7 +408,7 @@ class ResourcesViewController: UIViewController{
                                                                     
                                                                 case .noAction :
                                                                     
-                                                                    UIUtilities.showAlertMessageWithTwoActionsAndHandler(NSLocalizedString("Are you sure? Tap Ok to confirm.", comment: ""), errorMessage: NSLocalizedString("", comment: ""), errorAlertActionTitle: NSLocalizedString("Ok", comment: ""),
+                                                                    UIUtilities.showAlertMessageWithTwoActionsAndHandler(kOkConfirm, errorMessage: NSLocalizedString("", comment: ""), errorAlertActionTitle: kTitleOk,
                                                                                                                          errorAlertActionTitle2: kTitleCancel, viewControllerUsed: self,
                                                                                                                          action1: {
                                                                                                                             self.shouldDeleteData = false

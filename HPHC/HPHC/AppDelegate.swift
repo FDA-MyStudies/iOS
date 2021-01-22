@@ -27,24 +27,25 @@ import CallKit
 import IQKeyboardManagerSwift
 
 
-let kBlockerScreenLabelText = "Please update to the latest version of the app to continue."
-let kAppStoreUpdateText = "Please go to AppStore to update to the latest version of the app."
+let kBlockerScreenLabelText = NSLocalizedString("Please update to the latest version of the app to continue.", comment: "")
+let kAppStoreUpdateText = NSLocalizedString("Please go to AppStore to update to the latest version of the app.", comment: "")
 
-let kConsentUpdatedTitle = "Consent Updated"
+let kConsentUpdatedTitle = NSLocalizedString("Consent Updated", comment: "")
 
-let kMessageConsentUpdatedPartTwo = " Please review the revised Consent terms and provide your Informed Consent, to continue participating in the study."
+let kMessageConsentUpdatedPartTwo = NSLocalizedString(" Please review the revised Consent terms and provide your Informed Consent, to continue participating in the study.", comment: "")
 
-let kMessageConsentUpdated = "The Consent Document for this study has been updated." + kMessageConsentUpdatedPartTwo
+let kMessageConsentUpdated = NSLocalizedString("The Consent Document for this study has been updated.", comment: "") + kMessageConsentUpdatedPartTwo
 
-let kReviewTitle = "Review"
+let kReviewTitleName = NSLocalizedString("Review", comment: "")
+let kReviewIdentifier = "Review"
 let kPasscodeStepIdentifier = "PasscodeStep"
 let kPasscodeTaskIdentifier = "PassCodeTask"
-let kMessagePasscode = "Passcode"
-let kMessagePasscodeSignOut = "You will be signed out and will need to sign in again. Are you sure you want to proceed?"
+let kMessagePasscode = NSLocalizedString("Passcode", comment: "")
+let kMessagePasscodeSignOut = NSLocalizedString("You will be signed out and will need to sign in again. Are you sure you want to proceed?", comment: "")
 let kNewProgressViewNIB = "NewProgressView"
-let kforgotPasscodeTitle = "Forgot Passcode? Sign In Again"
+let kforgotPasscodeTitle = NSLocalizedString("Forgot Passcode? Sign In Again", comment: "")
 let kStudyStoryboard = "Study"
-let kPasscodeSetUpText = "Set up a passcode for the app"
+let kPasscodeSetUpText = NSLocalizedString("Set up a passcode for the app", comment: "")
 let kIphoneSimulator =  "iPhone Simulator"
 
 let kBundleIdentier = "CFBundleIdentifier"
@@ -585,7 +586,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 topController = navigationController.viewControllers.first!
             }
             
-            UIUtilities.showAlertMessageWithTwoActionsAndHandler(NSLocalizedString(kConsentUpdatedTitle, comment: ""), errorMessage: NSLocalizedString(kMessageConsentUpdated, comment: ""), errorAlertActionTitle: NSLocalizedString(kReviewTitle, comment: ""),
+            UIUtilities.showAlertMessageWithTwoActionsAndHandler(kConsentUpdatedTitle, errorMessage: kMessageConsentUpdated, errorAlertActionTitle: kReviewTitleName,
                                                                  errorAlertActionTitle2: nil, viewControllerUsed: topController,
                                                                  action1: {
                                                                     
@@ -1472,7 +1473,7 @@ extension AppDelegate: ORKTaskViewControllerDelegate {
             
             
             //CurrentStep is TokenStep
-            if step.identifier != kEligibilityTokenStep && step.identifier != kConsentSharePdfCompletionStep && step.identifier != kConsentViewPdfCompletionStep && step.identifier != kComprehensionCompletionStepIdentifier && step.identifier != kReviewTitle {
+            if step.identifier != kEligibilityTokenStep && step.identifier != kConsentSharePdfCompletionStep && step.identifier != kConsentViewPdfCompletionStep && step.identifier != kComprehensionCompletionStepIdentifier && step.identifier != kReviewIdentifier {
                 
                 return nil
                 
@@ -1491,11 +1492,11 @@ extension AppDelegate: ORKTaskViewControllerDelegate {
                 var totalResults =  taskViewController.result.results
                 let reviewStep: ORKStepResult?
                 
-                totalResults = totalResults?.filter({$0.identifier == kReviewTitle})
+                totalResults = totalResults?.filter({$0.identifier == kReviewIdentifier})
                 
                 reviewStep = (totalResults?.first as? ORKStepResult)!
                 
-                if (reviewStep?.identifier)! == kReviewTitle && (reviewStep?.results?.count)! > 0 {
+                if (reviewStep?.identifier)! == kReviewIdentifier && (reviewStep?.results?.count)! > 0 {
                     let consentSignatureResult: ORKConsentSignatureResult? = reviewStep?.results?.first as? ORKConsentSignatureResult
                     
                     if  consentSignatureResult?.consented == false { //Disgreed
@@ -1619,7 +1620,7 @@ extension AppDelegate: ORKTaskViewControllerDelegate {
                     return nil
                 }
                 
-            }else if step.identifier == kReviewTitle {
+            }else if step.identifier == kReviewIdentifier {
                 // if sharing step exists && allowWithoutSharing is set
                 
                 let shareStep: ORKStepResult? = taskViewController.result.results?.last as! ORKStepResult?
@@ -1716,7 +1717,7 @@ extension AppDelegate: ORKPasscodeDelegate {
             topVC = topVC?.presentedViewController
         }
         
-        UIUtilities.showAlertMessageWithTwoActionsAndHandler(NSLocalizedString(kMessagePasscode, comment: ""), errorMessage: NSLocalizedString(kMessagePasscodeSignOut, comment: ""), errorAlertActionTitle: kTitleOKCapital,
+        UIUtilities.showAlertMessageWithTwoActionsAndHandler(kMessagePasscode, errorMessage: kMessagePasscodeSignOut, errorAlertActionTitle: kTitleOKCapital,
                                                              errorAlertActionTitle2: NSLocalizedString(kTitleCancel, comment: ""), viewControllerUsed: topVC!,
                                                              action1: {
                                                                 self.window?.addProgressIndicatorOnWindowFromTop()

@@ -22,7 +22,7 @@ import Foundation
 import UIKit
 
 
-let kMessageForSharingDashboard = "This action will create a shareable image file of the dashboard currently seen in this section. Proceed?"
+let kMessageForSharingDashboard = NSLocalizedString("This action will create a shareable image file of the dashboard currently seen in this section. Proceed?", comment: "")
 
 enum TableViewCells: Int {
     case welcomeCell = 0
@@ -247,7 +247,7 @@ class StudyDashboardViewController: UIViewController{
     @IBAction func shareButtonAction(_ sender: AnyObject){
         
         
-        UIUtilities.showAlertMessageWithTwoActionsAndHandler(NSLocalizedString(kTitleMessage, comment: ""), errorMessage: NSLocalizedString(kMessageForSharingDashboard, comment: ""), errorAlertActionTitle: kTitleOKCapital,
+        UIUtilities.showAlertMessageWithTwoActionsAndHandler(kTitleMessage, errorMessage: kMessageForSharingDashboard, errorAlertActionTitle: kTitleOKCapital,
                                                              errorAlertActionTitle2: NSLocalizedString(kTitleCancel, comment: ""), viewControllerUsed: self,
                                                              action1: {
                                                                 
@@ -485,7 +485,7 @@ extension StudyDashboardViewController: ORKTaskViewControllerDelegate{
         
         //For Verified Step , Completion Step, Visual Step, Review Step, Share Pdf Step
         
-        if  stepViewController.step?.identifier == kConsentCompletionStepIdentifier || stepViewController.step?.identifier == kVisualStepId || stepViewController.step?.identifier == kReviewTitle || stepViewController.step?.identifier == kConsentSharePdfCompletionStep{
+        if  stepViewController.step?.identifier == kConsentCompletionStepIdentifier || stepViewController.step?.identifier == kVisualStepId || stepViewController.step?.identifier == kReviewIdentifier || stepViewController.step?.identifier == kConsentSharePdfCompletionStep{
             
             
             if stepViewController.step?.identifier == kEligibilityVerifiedScreen {
@@ -548,10 +548,10 @@ extension StudyDashboardViewController: ORKTaskViewControllerDelegate{
             
             var totalResults =  taskViewController.result.results
             let reviewStep: ORKStepResult?
-            totalResults = totalResults?.filter({$0.identifier == kReviewTitle})
+            totalResults = totalResults?.filter({$0.identifier == kReviewIdentifier})
             reviewStep = totalResults?.first as! ORKStepResult?
             
-            if (reviewStep?.identifier)! == kReviewTitle && (reviewStep?.results?.count)! > 0 {
+            if (reviewStep?.identifier)! == kReviewIdentifier && (reviewStep?.results?.count)! > 0 {
                 let consentSignatureResult: ORKConsentSignatureResult? = reviewStep?.results?.first as? ORKConsentSignatureResult
                 
                 if  consentSignatureResult?.consented == false { //User disagreed on Consent

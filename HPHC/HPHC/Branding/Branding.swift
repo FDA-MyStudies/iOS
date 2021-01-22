@@ -89,7 +89,7 @@ enum Branding {
   }
   
   static var ValidatedTitle:String {
-      return brandConfig[JSONKey.ValidatedTitle] as? String ?? "Validated!"
+      return brandConfig[JSONKey.ValidatedTitle] as? String ?? kEligibilityValidationTitle
   }
   
   static var AllowFeedback:Bool {

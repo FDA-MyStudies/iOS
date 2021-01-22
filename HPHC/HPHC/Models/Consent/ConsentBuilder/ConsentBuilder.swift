@@ -298,7 +298,7 @@ class ConsentBuilder {
             consentDocument?.signaturePageContent = NSLocalizedString(kSignaturePageContentText, comment: "")
 
             // Initialize review Step
-            reviewConsentStep = ConsentReviewStep(identifier: kReviewTitle, signature: (getConsentDocument() as ORKConsentDocument).signatures?[0], in: getConsentDocument())
+            reviewConsentStep = ConsentReviewStep(identifier: kReviewIdentifier, signature: (getConsentDocument() as ORKConsentDocument).signatures?[0], in: getConsentDocument())
 
         } else {
             // create Consent Document
@@ -306,7 +306,7 @@ class ConsentBuilder {
             consentDocument?.signaturePageContent = NSLocalizedString(kSignaturePageContentText, comment: "")
 
             // Initialize review Step
-            reviewConsentStep = ConsentReviewStep(identifier: kReviewTitle, signature: consentDocument?.signatures?[0], in: consentDocument!)
+            reviewConsentStep = ConsentReviewStep(identifier: kReviewIdentifier, signature: consentDocument?.signatures?[0], in: consentDocument!)
         }
 
         if Utilities.isValidValue(someObject: reviewConsent?.signatureTitle as AnyObject) {
@@ -501,17 +501,15 @@ class ConsentBuilder {
     }
 
     func LARBranchingRule() -> ORKStepNavigationRule {
-
-        let reviewIdentifier = "Review" //FinalStep
         let predicate1 = ORKResultPredicate.predicateForChoiceQuestionResult(with: ORKResultSelector(resultIdentifier: kLARConsentStep), expectedAnswerValue: "Choice_1" as NSCoding & NSCopying & NSObjectProtocol)
 
          //Mutiple Predicates
          let predicate2 = ORKResultPredicate.predicateForChoiceQuestionResult(with: ORKResultSelector(resultIdentifier: kLARConsentStep), expectedAnswerValue: "Choice_2" as NSCoding & NSCopying & NSObjectProtocol)
 
          let predi = [predicate2, predicate1]
-         let desti = [kLARConsentParticipantStep, reviewIdentifier]
+         let desti = [kLARConsentParticipantStep, kReviewIdentifier]
 
-         return ORKPredicateStepNavigationRule(resultPredicates: predi, destinationStepIdentifiers: desti, defaultStepIdentifier: reviewIdentifier, validateArrays: true)
+         return ORKPredicateStepNavigationRule(resultPredicates: predi, destinationStepIdentifiers: desti, defaultStepIdentifier: kReviewIdentifier, validateArrays: true)
 
     }
 }

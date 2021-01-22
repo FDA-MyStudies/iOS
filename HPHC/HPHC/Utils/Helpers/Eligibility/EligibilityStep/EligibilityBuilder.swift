@@ -30,20 +30,20 @@ let kEligibilityInEligibleScreen = "InEligibleScreen"
 let kEligibilityInEligibleDescriptionText = "Sorry, You are Ineligible"
 
 let kEligibilityVerifiedScreen = "VerifiedScreen"
-let kEligibilityCompletionDescriptionText = "Your enrollment token has been successfully validated. You are eligible to join the Study.\nPlease click Continue to proceed to the Consent section."
-let kEligibilityCompletionTitle = "You are Eligible!"
+let kEligibilityCompletionDescriptionText = NSLocalizedString("Your enrollment token has been successfully validated. You are eligible to join the Study.\nPlease click Continue to proceed to the Consent section.", comment: "")
+let kEligibilityCompletionTitle = NSLocalizedString("You are Eligible!", comment: "")
 
 let kEligibilityStep = "steps"
 
 let kEligibilityValidateScreen = "ValidatedScreen"
-let kEligibilityValidationDescriptionText = "Your token has been validated. You are eligible to join the study. Please tap Get Started to proceed to the consent section."
-let kEligibilityValidationTitle = "Validated!"
+let kEligibilityValidationDescriptionText = NSLocalizedString("Your token has been validated. You are eligible to join the study. Please tap Get Started to proceed to the consent section.", comment: "")
+let kEligibilityValidationTitle = NSLocalizedString("Validated!", comment: "")
 
 let kEligibilityTestInstructionStep = "EligibilityTestInstructionStep"
 let kEligibilityTestInstructionTestTitle = "Eligibility Test"
-let kEligibilityInstructionTestText = "Please answer some quick questions to confirm your eligibility for this study."
+let kEligibilityInstructionTestText = NSLocalizedString("Please answer some quick questions to confirm your eligibility for this study.", comment: "")
 
-let kEligibilityCompletionTestDescriptionText = "Based on the answers you provided, you are eligible to participate in this study.\nPlease click Continue to proceed to the Consent section."
+let kEligibilityCompletionTestDescriptionText = NSLocalizedString("Based on the answers you provided, you are eligible to participate in this study.\nPlease click Continue to proceed to the Consent section.", comment: "")
 
 let kEligibilityCorrectAnswer = "answer"
 let kEligibilityCorrectAnswerKey = "key"

@@ -26,7 +26,7 @@ let kTermsAndConditionLink = "http://www.google.com"
 let kPrivacyPolicyLink = "http://www.facebook.com"
 let kNavigationTitleTerms = "TERMS"
 let kNavigationTitlePrivacyPolicy = "PRIVACY POLICY"
-
+let kProceedTitle = NSLocalizedString("Proceed", comment: "")
 
 let kAlertPleaseEnterValidValue = "Please Enter Valid Value"
 
@@ -53,6 +53,7 @@ let kRegistrationInfoMessage = NSLocalizedString("Registration (or sign up) for 
 let kDeleteAccountConfirmationMessage = NSLocalizedString("Are you sure you wish to permanently delete your #APPNAME# account? You will need to register again if you wish to join a study.", comment: "")
 let kMessageAccountDeletedSuccess = NSLocalizedString("Account has been deleted", comment: "")
 let kMessageAppNotificationOffRemainder = NSLocalizedString("Stay up-to-date! Turn ON notifications and reminders in app and phone settings to get notified about study activity in a timely manner.", comment: "")
+let kAuthenticationRequired = NSLocalizedString("Authentication Required", comment: "")
 
 // MARK:- Signin Constants
 let kSignInTitleText = NSLocalizedString("SIGN IN", comment: "")
@@ -147,10 +148,11 @@ let kResumeSpaces = NSLocalizedString("  Resume  ", comment: "")
 let kStartSpaces = NSLocalizedString("  Start  ", comment: "")
 let kCompletedSpaces = NSLocalizedString("  Completed  ", comment: "")
 let kInCompletedSpaces = NSLocalizedString("  Incompleted  ", comment: "")
+let kEnterHere = NSLocalizedString("enter here", comment: "")
 
 // MARK:- ResourcesViewController constants
 let kResourcesTableViewCell = "ResourcesCell"
-
+var kNewResourceAvailable: String = NSLocalizedString("New Resource Available", comment: "")
 
 // MARK:- StudyDashboardViewController constants
 let kWelcomeTableViewCell = "welcomeCell"
@@ -166,12 +168,18 @@ let kStatisticsCollectionViewCell = "StatisticsCell"
 let kDarkBlueColor = UIColor.init(red: 0/255.0, green: 124/255.0, blue: 186/255.0, alpha: 1.0)
 let kGreyColor = UIColor.init(red: 140/255.0, green: 149/255.0, blue: 163/255.0, alpha: 1.0)
 
-let kDaySpaces = "  DAY  "
+let kDaySpaces = NSLocalizedString("  DAY  ", comment: "")
 let kDay = "Day"
-let kMonthSpaces = "  MONTH  "
+let kMonthSpaces = NSLocalizedString("  MONTH  ", comment: "")
 let kMonth = "MONTH"
-let kWeekSpaces = "  WEEK  "
+let kWeekSpaces = NSLocalizedString("  WEEK  ", comment: "")
 let kWeek = "WEEK"
+
+let kPullToRefresh = NSLocalizedString("Pull to refresh", comment: "")
+let kTheStudy = NSLocalizedString("The study ", comment: "")
+let k100PercentComplete = NSLocalizedString(" is 100 percent complete. Thank you for your participation.", comment: "")
+let kNoticedMissedActivity = NSLocalizedString("We noticed you missed an activity in ", comment: "")
+let kEncourageCompleteStudy = NSLocalizedString(" today. That’s Ok! We know you’re busy, but we encourage you to complete study activities before they expire.", comment: "")
 
 // MARK:- Eligibility constants
 
@@ -190,6 +198,8 @@ let kMessageForStudyPausedAfterJoiningState = NSLocalizedString("The study has b
 let kMessageForStudyClosedState = NSLocalizedString("This study has been closed.", comment: "")
 let kMessageForStudyWithdrawnState = NSLocalizedString("Sorry, this study currently does not allow previously enrolled participants to rejoin the study after they have withdrawn from the study. Please check back later or explore other studies", comment: "")
 let kMessageForStudyEnrollingNotAllowed = NSLocalizedString("Sorry, enrollment for this study has been closed for now. Please check back later or explore other studies you could join.", comment: "")
+let kEnterToken =  NSLocalizedString("Enter a token", comment: "")
+let kEnterKeyword =  NSLocalizedString("Enter keyword(s)", comment: "")
 
 
 // MARK:- StudyDashboardViewController segues
@@ -204,3 +214,9 @@ let filterListSegue = "filterscreenSegue"
 let kStagingUserEmailId = "aqibm@boston-technology.com"
 let kIsStagingUser = "StagingUser"
 let kFailedToConnectAppleMail = NSLocalizedString("Failed to connect to Apple Mail app", comment: "")
+
+// MARK:- Web View
+
+let kUsername = NSLocalizedString("Username", comment: "")
+let kPassword = NSLocalizedString("Password", comment: "")
+let kLogIn = NSLocalizedString("Log In", comment: "")

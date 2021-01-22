@@ -1032,7 +1032,8 @@ extension StudyHomeViewController: ORKTaskViewControllerDelegate {
             }
             taskViewController.dismiss(animated: true) {
                 if reason == ORKTaskViewControllerFinishReason.failed {
-                    let messge = error == nil ? "Something went wrong please try again later." : error?.localizedDescription
+                  let kSomethingWentWrong = NSLocalizedString("Something went wrong please try again later.", comment: "")
+                    let messge = error == nil ? kSomethingWentWrong : error?.localizedDescription
                     UIUtilities.showAlertWithTitleAndMessage(title: NSLocalizedString(kErrorTitle, comment: "") as NSString, message:messge! as NSString)
                 }
             }
@@ -1057,7 +1058,7 @@ extension StudyHomeViewController: ORKTaskViewControllerDelegate {
             || stepIndentifer == kInEligibilityStep
             || stepIndentifer == kEligibilityValidateScreen
             || stepIndentifer == kConsentSharing
-            || stepIndentifer == kReviewTitle
+            || stepIndentifer == kReviewIdentifier
             || stepIndentifer == kComprehensionInstructionStepIdentifier {
             
             
@@ -1153,7 +1154,7 @@ print("6---\(step.identifier)")
             var totalResults = taskViewController.result.results
             let reviewStep: ORKStepResult?
 
-            totalResults = totalResults?.filter { $0.identifier == kReviewTitle }
+            totalResults = totalResults?.filter { $0.identifier == kReviewIdentifier }
 
             reviewStep = totalResults?.first as! ORKStepResult?
             
@@ -1162,7 +1163,7 @@ print("6---\(step.identifier)")
 //                self.studyEnrollmentFinished()
 //            }
            
-            if (reviewStep?.identifier)! == kReviewTitle, (reviewStep?.results?.count)! > 0 {
+            if (reviewStep?.identifier)! == kReviewIdentifier, (reviewStep?.results?.count)! > 0 {
                 let consentSignatureResult: ORKConsentSignatureResult? = reviewStep?.results?.first as? ORKConsentSignatureResult
 
                 if consentSignatureResult?.consented == false {
@@ -1309,7 +1310,7 @@ print("6---\(step.identifier)")
                 return nil
             }
 
-        } else if step.identifier == kReviewTitle {
+        } else if step.identifier == kReviewIdentifier {
             // if sharing step exists && allowWithoutSharing is set
 
             let shareStep: ORKStepResult? = taskViewController.result.results?.last as! ORKStepResult?

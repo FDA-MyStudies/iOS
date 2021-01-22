@@ -26,7 +26,7 @@ import IQKeyboardManagerSwift
 let kActivities = "activities"
 
 let kActivityUnwindToStudyListIdentifier = "unwindeToStudyListIdentier"
-let kActivityAbondonedAlertMessage = "You missed the previous run of this activity. Please wait till the next run becomes available. Run timings are given on the Activities list screen."
+let kActivityAbondonedAlertMessage = NSLocalizedString("You missed the previous run of this activity. Please wait till the next run becomes available. Run timings are given on the Activities list screen.", comment: "")
 
 enum ActivityAvailabilityStatus:Int{
     case current
@@ -89,7 +89,7 @@ class ActivitiesViewController : UIViewController{
         
         //create refresh control for pull to refresh
         refreshControl = UIRefreshControl()
-        refreshControl?.attributedTitle = NSAttributedString(string: "Pull to refresh")
+        refreshControl?.attributedTitle = NSAttributedString(string: kPullToRefresh)
         refreshControl?.addTarget(self, action: #selector(refresh(sender:)), for: UIControl.Event.valueChanged)
         tableView?.addSubview(refreshControl!)
         self.addProgressIndicator()
@@ -663,7 +663,7 @@ class ActivitiesViewController : UIViewController{
                 if let configurationMessage = AppConfiguration.studyCompletionMessage {
                     message = configurationMessage
                 } else {
-                    message = "The study " + (Study.currentStudy?.name ?? "") + " is 100 percent complete. Thank you for your participation."
+                    message = kTheStudy + (Study.currentStudy?.name ?? "") + k100PercentComplete
                 }
                 UIUtilities.showAlertWithMessage(alertMessage: message)
                 ud.set(true, forKey: fullCompletionKey)
@@ -680,7 +680,7 @@ class ActivitiesViewController : UIViewController{
             if previousMissed < totalIncompletedRuns {
                 //show alert
                 
-                let message = "We noticed you missed an activity in " + (Study.currentStudy?.name!)! + " today. That’s Ok! We know you’re busy, but we encourage you to complete study activities before they expire."
+                let message = kNoticedMissedActivity + (Study.currentStudy?.name!)! + kEncourageCompleteStudy
                 UIUtilities.showAlertWithMessage(alertMessage: message)
             }
         }
@@ -963,7 +963,7 @@ extension ActivitiesViewController: UITableViewDelegate{
                 
             } else if activity.userParticipationStatus?.status == .abandoned {
                 debugPrint("run not available")
-                UIUtilities.showAlertWithMessage(alertMessage: NSLocalizedString(kActivityAbondonedAlertMessage, comment: ""))
+                UIUtilities.showAlertWithMessage(alertMessage: kActivityAbondonedAlertMessage)
             }
             
         case .upcoming,.past: break

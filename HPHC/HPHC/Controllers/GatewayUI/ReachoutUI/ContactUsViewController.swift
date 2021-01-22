@@ -329,7 +329,7 @@ extension ContactUsViewController: NMWebServiceDelegate {
         
         self.removeProgressIndicator()
         Logger.sharedInstance.info("requestname : \(requestName)")
-        UIUtilities.showAlertWithTitleAndMessage(title: NSLocalizedString("Error", comment: "") as NSString, message: error.localizedDescription as NSString)
+        UIUtilities.showAlertWithTitleAndMessage(title: kTitleError as NSString, message: error.localizedDescription as NSString)
     }
 }
 

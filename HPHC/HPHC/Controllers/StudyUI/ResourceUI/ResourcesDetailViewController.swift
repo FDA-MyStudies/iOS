@@ -172,7 +172,7 @@ extension ResourcesDetailViewController: WKNavigationDelegate {
         self.activityIndicator.stopAnimating()
         self.activityIndicator.removeFromSuperview()
         
-        let alert = UIAlertController(title: NSLocalizedString(kTitleError, comment: ""),message: error.localizedDescription,preferredStyle: UIAlertController.Style.alert)
+        let alert = UIAlertController(title: kTitleError,message: error.localizedDescription,preferredStyle: UIAlertController.Style.alert)
         
         alert.addAction(UIAlertAction.init(title: kTitleOKCapital, style: .default, handler: { (action) in
             
@@ -232,7 +232,7 @@ extension ResourcesDetailViewController: MFMailComposeViewControllerDelegate{
             self.present(composeVC, animated: true, completion: nil)
             
         } else {
-            let alert = UIAlertController(title: NSLocalizedString(kTitleError, comment: ""),message: kFailedToConnectAppleMail, preferredStyle: UIAlertController.Style.alert)
+            let alert = UIAlertController(title: kTitleError,message: kFailedToConnectAppleMail, preferredStyle: UIAlertController.Style.alert)
             
             alert.addAction(UIAlertAction.init(title: kTitleOKCapital, style: .default, handler: { (action) in
                 

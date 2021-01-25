@@ -1058,13 +1058,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     switch studyStatus {
                         
                     case .Upcoming:
-                        message = NSLocalizedString(kMessageForStudyUpcomingState, comment: "")
+                        message = kMessageForStudyUpcomingState
                         
                     case .Paused:
-                        message = NSLocalizedString(kMessageForStudyPausedState, comment: "")
+                        message = kMessageForStudyPausedState
                         
                     case .Closed:
-                        message = NSLocalizedString(kMessageForStudyClosedState, comment: "")
+                        message = kMessageForStudyClosedState
                         
                     default: break
                     }
@@ -1718,7 +1718,7 @@ extension AppDelegate: ORKPasscodeDelegate {
         }
         
         UIUtilities.showAlertMessageWithTwoActionsAndHandler(kMessagePasscode, errorMessage: kMessagePasscodeSignOut, errorAlertActionTitle: kTitleOKCapital,
-                                                             errorAlertActionTitle2: NSLocalizedString(kTitleCancel, comment: ""), viewControllerUsed: topVC!,
+                                                             errorAlertActionTitle2: kTitleCancel, viewControllerUsed: topVC!,
                                                              action1: {
                                                                 self.window?.addProgressIndicatorOnWindowFromTop()
                                                                 

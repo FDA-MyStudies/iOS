@@ -93,7 +93,7 @@ class FeedBackViewController: UIViewController{
     @IBAction func buttonSubmitAciton(_ sender: UIButton){
         //print("\(ContactUsFeilds.firstName)")
         if FeedbackDetail.subject.isEmpty && FeedbackDetail.feedback.isEmpty {
-            UIUtilities.showAlertWithMessage(alertMessage: NSLocalizedString(kMessageAllFieldsAreEmpty, comment: ""))
+            UIUtilities.showAlertWithMessage(alertMessage: kMessageAllFieldsAreEmpty)
         }
         else if FeedbackDetail.subject.isEmpty {
             UIUtilities.showAlertWithMessage(alertMessage: kMessageMessageBlankCheck)
@@ -221,7 +221,7 @@ extension FeedBackViewController: NMWebServiceDelegate {
         Logger.sharedInstance.info("requestname : \(requestName)")
         self.removeProgressIndicator()
         
-        UIUtilities.showAlertMessageWithActionHandler("", message: NSLocalizedString(kMessageFeedbackSubmittedSuccessfuly, comment: ""), buttonTitle: kTitleOk, viewControllerUsed: self) {
+        UIUtilities.showAlertMessageWithActionHandler("", message: kMessageFeedbackSubmittedSuccessfuly, buttonTitle: kTitleOk, viewControllerUsed: self) {
             _ = self.navigationController?.popViewController(animated: true)
         }
     }

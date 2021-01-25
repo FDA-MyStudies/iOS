@@ -295,8 +295,8 @@ class ProfileViewController: UIViewController, SlideMenuControllerDelegate {
                 var descriptionText =  kDeleteAccountConfirmationMessage
                 descriptionText = descriptionText.replacingOccurrences(of: "#APPNAME#", with: navTitle)
                 
-                UIUtilities.showAlertMessageWithTwoActionsAndHandler(NSLocalizedString(kTitleDeleteAccount, comment: ""), errorMessage: NSLocalizedString(descriptionText, comment: ""), errorAlertActionTitle: NSLocalizedString(kTitleDeleteAccount, comment: ""),
-                                                                     errorAlertActionTitle2: NSLocalizedString(kTitleCancel, comment: ""), viewControllerUsed: self,
+                UIUtilities.showAlertMessageWithTwoActionsAndHandler(kTitleDeleteAccount, errorMessage: NSLocalizedString(descriptionText, comment: ""), errorAlertActionTitle: kTitleDeleteAccount,
+                                                                     errorAlertActionTitle2: kTitleCancel, viewControllerUsed: self,
                                                                      action1: {
 
                                                                         self.sendRequestToDeleteAccount()
@@ -389,7 +389,7 @@ class ProfileViewController: UIViewController, SlideMenuControllerDelegate {
         appDelegate.updateKeyAndInitializationVector()
         
         
-        UIUtilities.showAlertMessageWithActionHandler(NSLocalizedString(kTitleMessage, comment: ""), message: NSLocalizedString(kMessageAccountDeletedSuccess, comment: ""), buttonTitle: NSLocalizedString(kTitleOk, comment: ""), viewControllerUsed: self) {
+        UIUtilities.showAlertMessageWithActionHandler(kTitleMessage, message: kMessageAccountDeletedSuccess, buttonTitle: kTitleOk, viewControllerUsed: self) {
             
             
             if Utilities.isStandaloneApp() {

@@ -24,11 +24,11 @@ import Foundation
 
 let kTermsAndConditionLink = "http://www.google.com"
 let kPrivacyPolicyLink = "http://www.facebook.com"
-let kNavigationTitleTerms = "TERMS"
-let kNavigationTitlePrivacyPolicy = "PRIVACY POLICY"
+let kNavigationTitleTerms = NSLocalizedString("TERMS", comment: "")
+let kNavigationTitlePrivacyPolicy = NSLocalizedString("PRIVACY POLICY", comment: "")
 let kProceedTitle = NSLocalizedString("Proceed", comment: "")
 
-let kAlertPleaseEnterValidValue = "Please Enter Valid Value"
+let kAlertPleaseEnterValidValue = NSLocalizedString("Please Enter Valid Value", comment: "")
 
 //Used for corner radius Color for sign in , sign up , forgot password etc screens
 let kUicolorForButtonBackground = UIColor.init(red: 0/255.0, green: 124/255.0, blue: 186/255.0, alpha: 1.0).cgColor
@@ -148,6 +148,7 @@ let kResumeSpaces = NSLocalizedString("  Resume  ", comment: "")
 let kStartSpaces = NSLocalizedString("  Start  ", comment: "")
 let kCompletedSpaces = NSLocalizedString("  Completed  ", comment: "")
 let kInCompletedSpaces = NSLocalizedString("  Incompleted  ", comment: "")
+let kExpiredSpaces = NSLocalizedString("  Expired  ", comment: "")
 let kEnterHere = NSLocalizedString("enter here", comment: "")
 
 // MARK:- ResourcesViewController constants
@@ -169,11 +170,11 @@ let kDarkBlueColor = UIColor.init(red: 0/255.0, green: 124/255.0, blue: 186/255.
 let kGreyColor = UIColor.init(red: 140/255.0, green: 149/255.0, blue: 163/255.0, alpha: 1.0)
 
 let kDaySpaces = NSLocalizedString("  DAY  ", comment: "")
-let kDay = "Day"
+let kDay = NSLocalizedString("Day", comment: "")
 let kMonthSpaces = NSLocalizedString("  MONTH  ", comment: "")
-let kMonth = "MONTH"
+let kMonth = NSLocalizedString("MONTH", comment: "")
 let kWeekSpaces = NSLocalizedString("  WEEK  ", comment: "")
-let kWeek = "WEEK"
+let kWeek = NSLocalizedString("WEEK", comment: "")
 
 let kPullToRefresh = NSLocalizedString("Pull to refresh", comment: "")
 let kTheStudy = NSLocalizedString("The study ", comment: "")

@@ -578,15 +578,15 @@ class StudyHomeViewController: UIViewController {
                     if currentStudy.studySettings.rejoinStudyAfterWithdrawn {
                         WCPServices().getEligibilityConsentMetadata(studyId: (Study.currentStudy?.studyId)!, delegate: self as NMWebServiceDelegate)
                     } else {
-                        UIUtilities.showAlertWithTitleAndMessage(title: "", message: NSLocalizedString(kMessageForStudyWithdrawnState, comment: "") as NSString)
+                        UIUtilities.showAlertWithTitleAndMessage(title: "", message: kMessageForStudyWithdrawnState as NSString)
                     }
                 }
             case .Upcoming:
-                UIUtilities.showAlertWithTitleAndMessage(title: "", message: NSLocalizedString(kMessageForStudyUpcomingState, comment: "") as NSString)
+                UIUtilities.showAlertWithTitleAndMessage(title: "", message: kMessageForStudyUpcomingState as NSString)
             case .Paused:
-                UIUtilities.showAlertWithTitleAndMessage(title: "", message: NSLocalizedString(kMessageForStudyPausedState, comment: "") as NSString)
+                UIUtilities.showAlertWithTitleAndMessage(title: "", message: kMessageForStudyPausedState as NSString)
             case .Closed:
-                UIUtilities.showAlertWithTitleAndMessage(title: "", message: NSLocalizedString(kMessageForStudyClosedState, comment: "") as NSString)
+                UIUtilities.showAlertWithTitleAndMessage(title: "", message: kMessageForStudyClosedState as NSString)
             }
         }
     }

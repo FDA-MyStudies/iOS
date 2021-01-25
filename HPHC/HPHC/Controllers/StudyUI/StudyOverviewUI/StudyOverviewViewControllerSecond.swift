@@ -109,7 +109,7 @@ class StudyOverviewViewControllerSecond: UIViewController{
             leftController.changeViewController(.reachOut_signIn)
         } else {
             //TEMP
-             UIUtilities.showAlertWithTitleAndMessage(title: NSLocalizedString(kTitleMessage, comment: "") as NSString, message: NSLocalizedString(kAlertMessageReachoutText, comment: "") as NSString)
+             UIUtilities.showAlertWithTitleAndMessage(title: kTitleMessage as NSString, message: NSLocalizedString(kAlertMessageReachoutText, comment: "") as NSString)
         }
     }
     

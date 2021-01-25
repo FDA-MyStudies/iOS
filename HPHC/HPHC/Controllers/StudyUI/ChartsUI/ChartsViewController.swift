@@ -58,7 +58,7 @@ class ChartsViewController: UIViewController {
         
         if StudyDashboard.instance.charts.count > 0{
             
-            UIUtilities.showAlertMessageWithTwoActionsAndHandler(NSLocalizedString(kTitleMessage, comment: ""), errorMessage: kMessageForSharingCharts, errorAlertActionTitle: kTitleOKCapital,
+            UIUtilities.showAlertMessageWithTwoActionsAndHandler(kTitleMessage, errorMessage: kMessageForSharingCharts, errorAlertActionTitle: kTitleOKCapital,
                                                                  errorAlertActionTitle2: kTitleCancel, viewControllerUsed: self,
                                                                  action1: {
                                                                     

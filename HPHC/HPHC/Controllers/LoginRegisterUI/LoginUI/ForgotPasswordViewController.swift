@@ -38,7 +38,7 @@ class ForgotPasswordViewController: UIViewController{
         
         //Used to set border color for bottom view
         buttonSubmit?.layer.borderColor = kUicolorForButtonBackground
-        self.title = NSLocalizedString(kForgotPasswordTitleText, comment: "")
+        self.title = kForgotPasswordTitleText
         
         //Used for background tap dismiss keyboard
         let gestureRecognizwe: UITapGestureRecognizer = UITapGestureRecognizer.init(target: self, action: #selector(ForgotPasswordViewController.dismissKeyboard))
@@ -155,7 +155,7 @@ extension ForgotPasswordViewController: NMWebServiceDelegate {
         
         
         if requestName as String == RegistrationMethods.forgotPassword.description  {
-            UIUtilities.showAlertMessageWithActionHandler(NSLocalizedString(kTitleMessage, comment: ""), message: NSLocalizedString(kForgotPasswordResponseMessage, comment: "") , buttonTitle: NSLocalizedString(kTitleOk, comment: ""), viewControllerUsed: self) {
+            UIUtilities.showAlertMessageWithActionHandler(kTitleMessage, message: kForgotPasswordResponseMessage , buttonTitle: kTitleOk, viewControllerUsed: self) {
                 
                 _ = self.navigationController?.popViewController(animated: true)
                 
@@ -163,7 +163,7 @@ extension ForgotPasswordViewController: NMWebServiceDelegate {
         } else {
             // for resend email
             
-              UIUtilities.showAlertWithTitleAndMessage(title: NSLocalizedString(kTitleMessage, comment: "") as NSString, message: NSLocalizedString(kAlertMessageResendEmail, comment: "") as NSString)
+              UIUtilities.showAlertWithTitleAndMessage(title: kTitleMessage as NSString, message: NSLocalizedString(kAlertMessageResendEmail, comment: "") as NSString)
             
         }
     }
@@ -178,7 +178,7 @@ extension ForgotPasswordViewController: NMWebServiceDelegate {
             self.navigateToVerifyViewController()
         } else {
             // if resend email fails
-             UIUtilities.showAlertWithTitleAndMessage(title: NSLocalizedString(kTitleError, comment: "") as NSString, message: error.localizedDescription as NSString)
+             UIUtilities.showAlertWithTitleAndMessage(title: kTitleError as NSString, message: error.localizedDescription as NSString)
         }
     }
 }

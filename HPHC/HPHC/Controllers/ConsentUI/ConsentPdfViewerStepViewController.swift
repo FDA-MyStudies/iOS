@@ -115,9 +115,9 @@ class ConsentPdfViewerStepViewController: ORKStepViewController {
             
         }else {
             
-            let alert = UIAlertController(title: NSLocalizedString(kTitleError, comment: ""),message: kFailedToConnectAppleMail, preferredStyle: UIAlertController.Style.alert)
+            let alert = UIAlertController(title: kTitleError,message: kFailedToConnectAppleMail, preferredStyle: UIAlertController.Style.alert)
             
-            alert.addAction(UIAlertAction.init(title: NSLocalizedString(kTitleOk, comment: ""), style: .default, handler: { (action) in
+            alert.addAction(UIAlertAction.init(title: kTitleOk, style: .default, handler: { (action) in
                 
 //                self.dismiss(animated: true, completion: nil)
             }))
@@ -153,7 +153,7 @@ extension ConsentPdfViewerStepViewController: WKNavigationDelegate{
         self.removeProgressIndicator()
         
         let buttonTitleOK = kTitleOKCapital
-        let alert = UIAlertController(title: NSLocalizedString(kTitleError, comment: ""),message: error.localizedDescription,preferredStyle: UIAlertController.Style.alert)
+        let alert = UIAlertController(title: kTitleError,message: error.localizedDescription,preferredStyle: UIAlertController.Style.alert)
         
         alert.addAction(UIAlertAction.init(title: buttonTitleOK, style: .default, handler: { (action) in
             self.dismiss(animated: true, completion: nil)

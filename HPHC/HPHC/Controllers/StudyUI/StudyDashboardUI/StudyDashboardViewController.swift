@@ -248,7 +248,7 @@ class StudyDashboardViewController: UIViewController{
         
         
         UIUtilities.showAlertMessageWithTwoActionsAndHandler(kTitleMessage, errorMessage: kMessageForSharingDashboard, errorAlertActionTitle: kTitleOKCapital,
-                                                             errorAlertActionTitle2: NSLocalizedString(kTitleCancel, comment: ""), viewControllerUsed: self,
+                                                             errorAlertActionTitle2: kTitleCancel, viewControllerUsed: self,
                                                              action1: {
                                                                 
                                                                 self.shareScreenShotByMail()

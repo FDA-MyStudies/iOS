@@ -61,7 +61,7 @@ class SignUpViewController: UIViewController{
         //Used to set border color for bottom view
         buttonSubmit?.layer.borderColor = kUicolorForButtonBackground
         
-        self.title = NSLocalizedString(kSignUpTitleText, comment: "")
+        self.title = kSignUpTitleText
         
         //load plist info
         let plistPath = Bundle.main.path(forResource: "SignUpPlist", ofType: ".plist", inDirectory: nil)

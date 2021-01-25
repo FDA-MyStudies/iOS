@@ -52,7 +52,7 @@ class SignInViewController: UIViewController{
         
         //Used to set border color for bottom view
         buttonSignIn?.layer.borderColor = kUicolorForButtonBackground
-        self.title = NSLocalizedString(kSignInTitleText, comment: "")
+        self.title = kSignInTitleText
         
         //load plist info
         let plistPath = Bundle.main.path(forResource: "SignInPlist", ofType: ".plist", inDirectory: nil)

@@ -33,7 +33,7 @@ class NotificationViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.title = NSLocalizedString(kNotificationsTitleText, comment: "")
+        self.title = kNotificationsTitleText
         
         self.loadLocalNotification()
         WCPServices().getNotification(skip: 0, delegate: self)
@@ -150,13 +150,13 @@ class NotificationViewController: UIViewController {
                  UIUtilities.showAlertWithTitleAndMessage(title: "", message: NSLocalizedString("Please join study to go forward.", comment: "") as NSString)
             }
         case .Upcoming:
-            UIUtilities.showAlertWithTitleAndMessage(title: "", message: NSLocalizedString(kMessageForStudyUpcomingState, comment: "") as NSString)
+            UIUtilities.showAlertWithTitleAndMessage(title: "", message: kMessageForStudyUpcomingState as NSString)
             
         case .Paused:
-            UIUtilities.showAlertWithTitleAndMessage(title: "", message: NSLocalizedString(kMessageForStudyPausedState, comment: "") as NSString)
+            UIUtilities.showAlertWithTitleAndMessage(title: "", message: kMessageForStudyPausedState as NSString)
             
         case .Closed:
-            UIUtilities.showAlertWithTitleAndMessage(title: "", message: NSLocalizedString(kMessageForStudyClosedState, comment: "") as NSString)
+            UIUtilities.showAlertWithTitleAndMessage(title: "", message: kMessageForStudyClosedState as NSString)
             
         }
         

@@ -371,7 +371,7 @@ class FetalKickCounterStepViewController:  ORKStepViewController {
         let message = kConfirmMessage + "\(self.kickCounter!) kicks in " + "\(timeConsumed!)." + kConfirmMessage2
         
         UIUtilities.showAlertMessageWithTwoActionsAndHandler(kTitleMessage, errorMessage: NSLocalizedString(message, comment: ""), errorAlertActionTitle: kProceedTitle,
-                                                             errorAlertActionTitle2: NSLocalizedString(kTitleCancel, comment: ""), viewControllerUsed: self,
+                                                             errorAlertActionTitle2: kTitleCancel, viewControllerUsed: self,
                                                              action1: {
                                                                 
                                                    self.goForward()

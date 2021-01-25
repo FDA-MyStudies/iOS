@@ -74,9 +74,9 @@ class ChangePasswordViewController: UIViewController {
         if temporaryPassword.count > 0{
             oldPassword = temporaryPassword
             tableViewRowDetails?.removeObject(at: 0)
-            self.title = NSLocalizedString(kCreatePasswordTitleText, comment: "")
+            self.title = kCreatePasswordTitleText
         } else {
-            self.title = NSLocalizedString(kChangePasswordTitleText, comment: "")
+            self.title = kChangePasswordTitleText
         }
     }
     
@@ -293,7 +293,7 @@ extension ChangePasswordViewController: NMWebServiceDelegate {
         
         if viewLoadFrom == .profile {
             
-            UIUtilities.showAlertMessageWithActionHandler(NSLocalizedString(kTitleMessage, comment: ""), message: NSLocalizedString(kChangePasswordResponseMessage, comment: "") , buttonTitle: NSLocalizedString(kTitleOk, comment: ""), viewControllerUsed: self) {
+            UIUtilities.showAlertMessageWithActionHandler(kTitleMessage, message: kChangePasswordResponseMessage , buttonTitle: kTitleOk, viewControllerUsed: self) {
                 
                 _ = self.navigationController?.popViewController(animated: true)
                 

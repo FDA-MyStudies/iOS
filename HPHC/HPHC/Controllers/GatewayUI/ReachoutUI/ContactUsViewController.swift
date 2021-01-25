@@ -119,22 +119,22 @@ class ContactUsViewController: UIViewController{
         
         if (ContactUsFeilds.firstName.isEmpty && ContactUsFeilds.email.isEmpty && ContactUsFeilds.subject.isEmpty && ContactUsFeilds.message.isEmpty){
             
-            UIUtilities.showAlertWithMessage(alertMessage: NSLocalizedString(kMessageAllFieldsAreEmpty, comment: ""))
+            UIUtilities.showAlertWithMessage(alertMessage: kMessageAllFieldsAreEmpty)
         }
         else if ContactUsFeilds.firstName.isEmpty {
-            UIUtilities.showAlertWithMessage(alertMessage: NSLocalizedString(kMessageFirstNameBlank, comment: ""))
+            UIUtilities.showAlertWithMessage(alertMessage: kMessageFirstNameBlank)
         }
         else if ContactUsFeilds.email.isEmpty {
-            UIUtilities.showAlertWithMessage(alertMessage: NSLocalizedString(kMessageEmailBlank,comment:""))
+            UIUtilities.showAlertWithMessage(alertMessage: kMessageEmailBlank)
         }
         else if ContactUsFeilds.subject.isEmpty {
-            UIUtilities.showAlertWithMessage(alertMessage: NSLocalizedString(kMessageSubjectBlankCheck, comment: ""))
+            UIUtilities.showAlertWithMessage(alertMessage: kMessageSubjectBlankCheck)
         }
         else if ContactUsFeilds.message.isEmpty {
-            UIUtilities.showAlertWithMessage(alertMessage: NSLocalizedString(kMessageMessageBlankCheck, comment: ""))
+            UIUtilities.showAlertWithMessage(alertMessage: kMessageMessageBlankCheck)
         }
         else if !(Utilities.isValidEmail(testStr: ContactUsFeilds.email)){
-            UIUtilities.showAlertWithMessage(alertMessage: NSLocalizedString(kMessageValidEmail, comment: ""))
+            UIUtilities.showAlertWithMessage(alertMessage: kMessageValidEmail)
         }
         else {
             UserServices().sendUserContactUsRequest(delegate: self)
@@ -320,7 +320,7 @@ extension ContactUsViewController: NMWebServiceDelegate {
         Logger.sharedInstance.info("requestname : \(requestName)")
         self.removeProgressIndicator()
         
-        UIUtilities.showAlertMessageWithActionHandler("", message: NSLocalizedString(kMessageContactedSuccessfuly, comment: ""), buttonTitle: kTitleOk, viewControllerUsed: self) {
+        UIUtilities.showAlertMessageWithActionHandler("", message: kMessageContactedSuccessfuly, buttonTitle: kTitleOk, viewControllerUsed: self) {
             _ = self.navigationController?.popViewController(animated: true)
         }
         

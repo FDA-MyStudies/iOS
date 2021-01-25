@@ -260,7 +260,7 @@ class StudyListViewController: UIViewController {
             }
 
             if daysLastSeen >= 7 { // Notification is disabled for 7 or more Days
-              UIUtilities.showAlertWithTitleAndMessage(title: NSLocalizedString(Branding.productTitle, comment: "") as NSString, message: NSLocalizedString(kMessageAppNotificationOffRemainder, comment: "") as NSString)
+              UIUtilities.showAlertWithTitleAndMessage(title: NSLocalizedString(Branding.productTitle, comment: "") as NSString, message: kMessageAppNotificationOffRemainder as NSString)
 
                 ud.set(Date(), forKey: "NotificationRemainder")
                 ud.synchronize()
@@ -723,7 +723,7 @@ class StudyListViewController: UIViewController {
                 let userStudyStatus = (Study.currentStudy?.userParticipateState.status)!
 
                 if userStudyStatus == .completed || userStudyStatus == .inProgress {
-                    UIUtilities.showAlertWithTitleAndMessage(title: "", message: NSLocalizedString(kMessageForStudyPausedAfterJoiningState, comment: "") as NSString)
+                    UIUtilities.showAlertWithTitleAndMessage(title: "", message: kMessageForStudyPausedAfterJoiningState as NSString)
                 } else {
                     checkForStudyUpdate(study: study)
                 }

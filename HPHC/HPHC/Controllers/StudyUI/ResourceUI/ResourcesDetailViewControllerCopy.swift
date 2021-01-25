@@ -250,7 +250,7 @@ extension ResourcesDetailViewControllerCopy:UIWebViewDelegate {
     func webView(_ webView: UIWebView, didFailLoadWithError error: Error) {
         self.activityIndicator.stopAnimating()
       
-        let alert = UIAlertController(title:NSLocalizedString(kTitleError, comment: ""),message:error.localizedDescription,preferredStyle: UIAlertController.Style.alert)
+        let alert = UIAlertController(title:kTitleError,message:error.localizedDescription,preferredStyle: UIAlertController.Style.alert)
         
         alert.addAction(UIAlertAction.init(title:kTitleOKCapital, style: .default, handler: { (action) in
             
@@ -447,7 +447,7 @@ extension ResourcesDetailViewControllerCopy:MFMailComposeViewControllerDelegate{
             self.present(composeVC, animated: true, completion: nil)
             
         } else {
-            let alert = UIAlertController(title:NSLocalizedString(kTitleError, comment: ""),message:"",preferredStyle: UIAlertController.Style.alert)
+            let alert = UIAlertController(title:kTitleError,message:"",preferredStyle: UIAlertController.Style.alert)
             
             alert.addAction(UIAlertAction.init(title:kTitleOKCapital, style: .default, handler: { (action) in
                 

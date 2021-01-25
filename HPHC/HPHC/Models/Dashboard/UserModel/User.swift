@@ -739,15 +739,15 @@ class UserActivityStatus{
         var description: String {
             switch self {
             case .yetToJoin:
-                return "  Start  "
+                return kStartSpaces
             case .inProgress:
-                return "  Resume  "
+                return kResumeSpaces
             case.completed:
-                return "  Completed  "
+                return kCompletedSpaces
             case .abandoned:
-                return "  Incomplete  "
+                return kInCompletedSpaces
             case .expired:
-                return "  Expired  "
+                return kExpiredSpaces
                 
             }
         }

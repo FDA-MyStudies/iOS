@@ -52,8 +52,8 @@ class SignUpCompleteViewController: UIViewController{
         
         UIUtilities.showAlertMessageWithTwoActionsAndHandler("",
                                                              errorMessage: kPasscodeDoYouWish,
-                                                             errorAlertActionTitle: "No",
-                                                             errorAlertActionTitle2: "Yes",
+                                                             errorAlertActionTitle: kNo,
+                                                             errorAlertActionTitle2: kYes,
                                                              viewControllerUsed: self,
                                                              action1: {
                                                                 //No

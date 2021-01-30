@@ -22,8 +22,8 @@ import UIKit
 import ResearchKit
 
 let kConsentCompletionResultIdentifier = "ConsentCompletion"
-let kMainTitle = "Thanks for providing consent for this Study"
-let kSubTitle = "You can now start participating in the Study"
+let kMainTitle = NSLocalizedString("Thanks for providing consent for this Study", comment: "")
+let kSubTitle = NSLocalizedString("You can now start participating in the Study", comment: "")
 
 
 /* Consent Completion Step

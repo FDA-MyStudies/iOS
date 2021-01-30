@@ -268,3 +268,102 @@
 "Sorry, enrollment for this study has been closed for now. Please check back later or explore other studies you could join."="Sorry, enrollment for this study has been closed for now. Please check back later or explore other studies you could join.";
 
 "Failed to connect to Apple Mail app"="Failed to connect to Apple Mail app";
+
+
+"Connection error"="Connection error";
+"There was a problem, please try again."="There was a problem, please try again.";
+"This resource is currently unavailable."="This resource is currently unavailable.";
+"About the Study"="About the Study";
+"This will also delete your app account."="This will also delete your app account.";
+"I am signing the consent form on behalf of myself."="I am signing the consent form on behalf of myself.";
+
+"I am signing the consent form on behalf of the study participant as their legally authorized representative."="I am signing the consent form on behalf of the study participant as their legally authorized representative.";
+
+"The next few steps will capture your informed consent for participation in this study."="The next few steps will capture your informed consent for participation in this study.";
+"Please select the appropriate option below"="Please select the appropriate option below";
+"Please specify your relationship to the participant"="Please specify your relationship to the participant";
+"Please enter the participant's first and last name below"="Please enter the participant's first and last name below";
+"Participant's First Name           "="Participant's First Name           ";
+"Participant's Last Name"="Participant's Last Name";
+"Participant first name: "="Participant first name: ";
+"Participant last name: "="Participant last name: ";
+"Signature"="Signature";
+"Date"="Date";
+"First name"="First name";
+"Last name"="Last name";
+"Relationship to participant"="Relationship to participant";
+"Consent by a Legally Authorized Representative"="Consent by a Legally Authorized Representative";
+"Study Staff Signature(s)"="Study Staff Signature(s)";
+"- Coordinator"="- Coordinator";
+"Participant's Name (printed)"="Participant's Name (printed)";
+"Participant's Signature"="Participant's Signature";
+
+
+"Your Session is Expired"="Your Session is Expired";
+"Sorry, an error occurred and your feedback could not be sent to the organization. Please retry in some time."="Sorry, an error occurred and your feedback could not be sent to the organization. Please retry in some time.";
+
+"Could not connect to server"="Could not connect to server";
+
+"Cellular"="Cellular";
+"WiFi"="WiFi";
+"No Connection"="No Connection";
+"unavailable"="unavailable";
+
+"Something went wrong"="Something went wrong";
+"Your error localized description"="Your error localized description";
+
+"You seem to be offline. Please connect to a network to proceed with this action."="You seem to be offline. Please connect to a network to proceed with this action.";
+
+"Could not connect to server. Please try again later."="Could not connect to server. Please try again later.";
+
+"Activity Completed"="Activity Completed";
+"Tap Done to submit responses. Responses cannot be modified after submission"="Tap Done to submit responses. Responses cannot be modified after submission";
+
+
+"Comprehension"="Comprehension";
+"Let's do a quick and simple test of your understanding of this Study."="Let's do a quick and simple test of your understanding of this Study.";
+"Great Job!"="Great Job!";
+"You answered all of the questions correctly. Tap on Next to proceed"="You answered all of the questions correctly. Tap on Next to proceed";
+"Thanks for providing consent for this Study"="Thanks for providing consent for this Study";
+"You can now start participating in the Study"="You can now start participating in the Study";
+"I agree to participate in this research study."="I agree to participate in this research study.";
+"Participant"="Participant";
+"No"="No";
+"Yes"="Yes";
+
+
+"Yet To Join"="Yet To Join";
+"In Progress"="In Progress";
+"Completed"="Completed";
+"Not Eligible"="Not Eligible";
+"Withdrawn"="Withdrawn";
+"No participation"="No participation";
+"Partial Participation"="Partial Participation";
+
+
+
+"The activity "="The activity ";
+" will expire in 24 hours. Your participation is important. Please visit the study to complete it now."=" will expire in 24 hours. Your participation is important. Please visit the study to complete it now.";
+
+"A new run of the daily activity "="A new run of the daily activity ";
+", is now available. Your participation is important. Please visit the study to complete it now."=", is now available. Your participation is important. Please visit the study to complete it now.";
+
+", is now available and is valid until "=", is now available and is valid until ";
+". Your participation is important. Please visit the study to complete it now."=". Your participation is important. Please visit the study to complete it now.";
+
+"The current run of the weekly activity "="The current run of the weekly activity ";
+
+"A new run of the weekly activity "="A new run of the weekly activity ";
+", is now available. Please visit the study to complete it now."=", is now available. Please visit the study to complete it now.";
+
+"The current run of the monthly activity "="The current run of the monthly activity ";
+" will expire in 3 days. Your participation is important. Please visit the study to complete it now."=" will expire in 3 days. Your participation is important. Please visit the study to complete it now.";
+
+"A new run of the monthly activity "="A new run of the monthly activity ";
+
+"A new run of the scheduled activity "="A new run of the scheduled activity ";
+
+"It’s been a while since you visited the"="It’s been a while since you visited the";
+"app. Please consider continuing your participation in any studies in which you’re enrolled."="app. Please consider continuing your participation in any studies in which you’re enrolled.";
+
+

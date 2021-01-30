@@ -25,7 +25,6 @@ enum LocalizableString: String {
     // MARK: - Global
     case connectionError = "Connection error"
     case connectionProblem = "There was a problem, please try again."
-    case ok = "Ok"
 
     // MARK: - Resources
     case resourceNotAvailable = "This resource is currently unavailable."

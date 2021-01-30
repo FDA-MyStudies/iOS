@@ -76,21 +76,21 @@ let kConsentViewPdfStoryboardId = "ConsentPdfViewerStepViewControllerIdentifier"
 
 // Comprehenion Instruction Step Keys
 
-let kConsentComprehensionTestTitle = "Comprehension"
-let kConsentComprehensionTestText = "Let's do a quick and simple test of your understanding of this Study."
+let kConsentComprehensionTestTitle = NSLocalizedString("Comprehension", comment: "")
+let kConsentComprehensionTestText = NSLocalizedString("Let's do a quick and simple test of your understanding of this Study.", comment: "")
 let kComprehensionInstructionStepIdentifier = "ComprehensionInstructionStep"
 
 // Comprehension Completion Step Keys
 
-let kComprehensionCompletionTitle = "Great Job!"
-let kComprehensionCompletionText = "You answered all of the questions correctly. Tap on Next to proceed"
+let kComprehensionCompletionTitle = NSLocalizedString("Great Job!", comment: "")
+let kComprehensionCompletionText = NSLocalizedString("You answered all of the questions correctly. Tap on Next to proceed", comment: "")
 let kComprehensionCompletionStepIdentifier = "ComprehensionCompletionStep"
 
 // Consent Completion
 
-let kConsentCompletionMainTitle = "Thanks for providing consent for this Study"
-let kConsentCompletionSubTitle = "You can now start participating in the Study"
-let kSignaturePageContentText = "I agree to participate in this research study."
+let kConsentCompletionMainTitle = NSLocalizedString("Thanks for providing consent for this Study", comment: "")
+let kConsentCompletionSubTitle = NSLocalizedString("You can now start participating in the Study", comment: "")
+let kSignaturePageContentText = NSLocalizedString("I agree to participate in this research study.", comment: "")
 
 // Signature Page
 
@@ -295,7 +295,7 @@ class ConsentBuilder {
             // create Consent Document
             let consentDocument: ORKConsentDocument? = (getConsentDocument() as ORKConsentDocument)
             consentDocument?.htmlReviewContent = reviewConsent?.signatureContent
-            consentDocument?.signaturePageContent = NSLocalizedString(kSignaturePageContentText, comment: "")
+            consentDocument?.signaturePageContent = kSignaturePageContentText
 
             // Initialize review Step
             reviewConsentStep = ConsentReviewStep(identifier: kReviewIdentifier, signature: (getConsentDocument() as ORKConsentDocument).signatures?[0], in: getConsentDocument())
@@ -303,7 +303,7 @@ class ConsentBuilder {
         } else {
             // create Consent Document
             let consentDocument: ORKConsentDocument? = (getConsentDocument() as ORKConsentDocument)
-            consentDocument?.signaturePageContent = NSLocalizedString(kSignaturePageContentText, comment: "")
+            consentDocument?.signaturePageContent = kSignaturePageContentText
 
             // Initialize review Step
             reviewConsentStep = ConsentReviewStep(identifier: kReviewIdentifier, signature: consentDocument?.signatures?[0], in: consentDocument!)
@@ -414,7 +414,7 @@ class ConsentBuilder {
         
         // Final completion step
         let completionStep = CustomCompletionStep(identifier: kConsentCompletionStepIdentifier)
-        completionStep.detailText = NSLocalizedString(kConsentCompletionMainTitle, comment: "")
+        completionStep.detailText = kConsentCompletionMainTitle
         
         if (stepArray?.count)! > 0 {
             

@@ -162,13 +162,13 @@ class StudyListCell: UITableViewCell {
             
             switch study.status {
             case .Active:
-                labelStudyUserStatus?.text = userStudyStatus.status.description
+                labelStudyUserStatus?.text = NSLocalizedString("\(userStudyStatus.status.description)", comment: "")
             case .Closed:
-                labelStudyUserStatus?.text = userStudyStatus.status.closedStudyDescription
+                labelStudyUserStatus?.text = NSLocalizedString("\(userStudyStatus.status.closedStudyDescription)", comment: "")
             case .Upcoming:
-                labelStudyUserStatus?.text = userStudyStatus.status.upcomingStudyDescription
+                labelStudyUserStatus?.text = NSLocalizedString("\(userStudyStatus.status.upcomingStudyDescription)", comment: "")
             default:
-                labelStudyUserStatus?.text = userStudyStatus.status.description
+                labelStudyUserStatus?.text = NSLocalizedString("\(userStudyStatus.status.description)", comment: "")
             }
             
             

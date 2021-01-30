@@ -71,6 +71,8 @@ let kAgreeToTermsAndConditionsText = NSLocalizedString("I Agree to the Terms and
 let kTermsText = NSLocalizedString("Terms", comment: "")
 let kPrivacyPolicyText = NSLocalizedString("Privacy Policy", comment: "")
 let kSignUpTableViewCellIdentifier = "CommonDetailsCell"
+let kNo = NSLocalizedString("No", comment: "")
+let kYes = NSLocalizedString("Yes", comment: "")
 
 // MARK:- NOTIFICATIONS Constants
 let kNotificationsTitleText = NSLocalizedString("NOTIFICATIONS", comment: "")

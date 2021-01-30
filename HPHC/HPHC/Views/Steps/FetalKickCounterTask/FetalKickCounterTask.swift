@@ -127,9 +127,11 @@ class FetalKickCounterTask {
         
         //create a Completion Step
         let summaryStep = ORKCompletionStep(identifier: kFetalKickCounterStepCompletionTitle)
-        summaryStep.title = "Activity Completed"
+        let kActivityCompleted = NSLocalizedString("Activity Completed", comment: "")
+        let kThankYouForTime = NSLocalizedString("Thank you for your time!\n\nTap Done to submit responses. Responses cannot be modified after submission.", comment: "")
+        summaryStep.title = kActivityCompleted
         summaryStep.image = #imageLiteral(resourceName: "successBlueBig")
-        summaryStep.detailText = "Thank you for your time!\n\nTap Done to submit responses. Responses cannot be modified after submission."
+        summaryStep.detailText = kThankYouForTime
        
         steps?.append(summaryStep)
         

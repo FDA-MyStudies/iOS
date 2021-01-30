@@ -144,10 +144,11 @@ class ActivityBuilder {
                     
                     //addding completion step
                     let completionStep = ORKCompletionStep(identifier: kCompletionStep)
-                    
-                    completionStep.title = "Activity Completed"
+                    let kActivityCompleted = NSLocalizedString("Activity Completed", comment: "")
+                    let kTapDoneSubmit = NSLocalizedString("Tap Done to submit responses. Responses cannot be modified after submission", comment: "")
+                    completionStep.title = kActivityCompleted
                     completionStep.image = #imageLiteral(resourceName: "successBlueBig")
-                    completionStep.detailText = "Tap Done to submit responses. Responses cannot be modified after submission"
+                    completionStep.detailText = kTapDoneSubmit
                     orkStepArray?.append(completionStep)
                     
                     //Creating ordered or navigable task

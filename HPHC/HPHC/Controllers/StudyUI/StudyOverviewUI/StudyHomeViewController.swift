@@ -461,8 +461,9 @@ class StudyHomeViewController: UIViewController {
             }
         }
         
+        let kActivity = NSLocalizedString("Activity", comment: "")
         taskViewController?.delegate = self
-        taskViewController?.title = "Activity"
+        taskViewController?.title = kActivity
         taskViewController?.navigationItem.title = nil
         taskViewController?.isNavigationBarHidden = false
         UIView.appearance(whenContainedInInstancesOf: [ORKTaskViewController.self]).tintColor = kUIColorForSubmitButtonBackground

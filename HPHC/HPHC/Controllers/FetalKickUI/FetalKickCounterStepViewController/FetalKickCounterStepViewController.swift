@@ -28,12 +28,12 @@ import ActionSheetPicker_3_0
 
 
 let kFetalKickCounterStepDefaultIdentifier = "defaultIdentifier"
-let kTapToRecordKick = "TAP TO RECORD A KICK"
+let kTapToRecordKick = NSLocalizedString("TAP TO RECORD A KICK", comment: "")
 
-let kConfirmMessage =  "You have recorded "
-let kConfirmMessage2 =  " Proceed to submitting count and time?"
+let kConfirmMessage =  NSLocalizedString("You have recorded ", comment: "")
+let kConfirmMessage2 =  NSLocalizedString(" Proceed to submitting count and time?", comment: "")
 
-let kGreaterValueMessage = "This activity records the time it takes to feel "
+let kGreaterValueMessage = NSLocalizedString("This activity records the time it takes to feel ", comment: "")
 
 let kFetalKickStartTimeStamp = "FetalKickStartTimeStamp"
 let kFetalKickActivityId = "FetalKickActivityId"
@@ -41,7 +41,7 @@ let kFetalKickActivityId = "FetalKickActivityId"
 let kFetalkickStudyId = "FetalKickStudyId"
 let kFetalKickCounterValue = "FetalKickCounterValue"
 let kFetalKickCounterRunId = "FetalKickCounterRunid"
-let kSelectTimeLabel = "Select Time"
+let kSelectTimeLabel = NSLocalizedString("Select Time", comment: "")
 
 class FetalKickCounterStepViewController:  ORKStepViewController {
     
@@ -301,8 +301,11 @@ class FetalKickCounterStepViewController:  ORKStepViewController {
      Alerts User if Kick counts or time is exceeded
     */
     func showAlertForGreaterValues(){
-        
-         let message = kGreaterValueMessage + "\(self.maxKicksAllowed!) kicks, " + "please enter " + "\(self.maxKicksAllowed!) kicks only"
+        let kPleaseEnter = NSLocalizedString("please enter ", comment: "")
+        let kKicks = NSLocalizedString("kicks ", comment: "")
+        let kKicksOnly = NSLocalizedString("kicks only ", comment: "")
+      
+         let message = kGreaterValueMessage + "\(self.maxKicksAllowed!) \(kKicks), " + kPleaseEnter + "\(self.maxKicksAllowed!) \(kKicksOnly)"
         
         Utilities.showAlertWithTitleAndMessage(title: NSLocalizedString(kMessage, comment: "") as NSString, message: message as NSString)
     }
@@ -410,7 +413,7 @@ class FetalKickCounterStepViewController:  ORKStepViewController {
                 
                 // start button image and start title changed
                 startButton?.setImage(UIImage(named: "kick_btn1.png"), for: .normal)
-                startTitleLabel?.text = NSLocalizedString(kTapToRecordKick, comment: "")
+                startTitleLabel?.text = kTapToRecordKick
             } else {
                 self.kickCounter = self.kickCounter! + 1
                 
@@ -473,7 +476,8 @@ class FetalKickCounterStepViewController:  ORKStepViewController {
             
             let value = (hours < 10 ? "0\(hours):" : "\(hours):") + (minutes < 10 ? "0\(minutes):" : "\(minutes):")   + (seconds < 10 ? "0\(seconds)" : "\(seconds)")
             
-            Utilities.showAlertWithTitleAndMessage(title: kMessage as NSString, message: ("Please select a valid time(Max " + value + ")") as NSString)
+            let kSelectTime = NSLocalizedString("Please select a valid time(Max ", comment: "")
+            Utilities.showAlertWithTitleAndMessage(title: kMessage as NSString, message: (kSelectTime + value + ")") as NSString)
             
           } else {
              self.setTimerValue()
@@ -506,16 +510,18 @@ open class FetalKickCounterTaskResult: ORKResult {
     
     open var totalKickCount: Int = 0
     open var duration: Int = 0
+    let kHitCount = NSLocalizedString("hitCount", comment: "")
+    let kDuration = NSLocalizedString("duration", comment: "")
     
     override open var description: String {
         get {
-            return "hitCount:\(totalKickCount), duration:\(duration)"
+            return "\(kHitCount):\(totalKickCount), \(kDuration):\(duration)"
         }
     }
     
     override open var debugDescription: String {
         get {
-            return "hitCount:\(totalKickCount), duration:\(duration)"
+            return "\(kHitCount):\(totalKickCount), \(kDuration):\(duration)"
         }
     }
 }

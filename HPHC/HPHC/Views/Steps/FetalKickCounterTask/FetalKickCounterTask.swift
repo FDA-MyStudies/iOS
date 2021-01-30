@@ -23,18 +23,16 @@ import ResearchKit
 
 
 let kFetalKickInstructionStepIdentifier = "Instruction"
-let kFetalKickInstructionStepTitle = "Fetal Kick Counter"
-let kFetalKickInstructionStepText = "This task needs you to record the number of times you experience fetal kicks in a given duration of time.Also called as the Fetal Kick Counter task, this will help assess the activity of the baby within."
+let kFetalKickInstructionStepTitle = NSLocalizedString("Fetal Kick Counter", comment: "")
+let kFetalKickInstructionStepText = NSLocalizedString("This task needs you to record the number of times you experience fetal kicks in a given duration of time.Also called as the Fetal Kick Counter task, this will help assess the activity of the baby within.", comment: "")
 
 
 let kFetalKickIntroductionStepIdentifier = "FetalKickIntroduction"
 let kFetalKickIntroductionStepTitle = ""
-let kFetalKickIntroductionStepText = "This task needs you to record the number of times you experience fetal kicks in a given duration of time.Also called as the Fetal Kick Counter task, this will help assess the activity of the baby within."
-
 
 let kFetalKickCounterStepIdentifier = "FetalKickCounterStep"
 
-let kFetalKickCounterStepCompletionTitle = "CompletionStep"
+let kFetalKickCounterStepCompletionIdentifier = "CompletionStep"
 let kFetalKickCounterStepCompletionText = "Thank you for your time!"
 
 let kFetalKickCounterTaskIdentifier = "FetalKickCounterTask"
@@ -99,13 +97,13 @@ class FetalKickCounterTask {
         
         //create a Intro step
         let introStep = FetalKickIntroStep(identifier: kFetalKickIntroductionStepIdentifier)
-        introStep.introTitle =  NSLocalizedString(kFetalKickInstructionStepTitle, comment: "")
+        introStep.introTitle =  kFetalKickInstructionStepTitle
       
       if (self.instructionText?.count)! > 0 {
         introStep.subTitle = NSLocalizedString(self.instructionText!, comment: "")
        
       } else {
-         introStep.subTitle = NSLocalizedString(kFetalKickInstructionStepText, comment: "")
+         introStep.subTitle = kFetalKickInstructionStepText
       }
       
         introStep.displayImage = #imageLiteral(resourceName: "task_img1")
@@ -126,7 +124,7 @@ class FetalKickCounterTask {
         steps?.append(kickStep)
         
         //create a Completion Step
-        let summaryStep = ORKCompletionStep(identifier: kFetalKickCounterStepCompletionTitle)
+        let summaryStep = ORKCompletionStep(identifier: kFetalKickCounterStepCompletionIdentifier)
         let kActivityCompleted = NSLocalizedString("Activity Completed", comment: "")
         let kThankYouForTime = NSLocalizedString("Thank you for your time!\n\nTap Done to submit responses. Responses cannot be modified after submission.", comment: "")
         summaryStep.title = kActivityCompleted

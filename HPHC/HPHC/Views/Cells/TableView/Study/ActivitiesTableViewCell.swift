@@ -132,14 +132,21 @@ class ActivitiesTableViewCell: UITableViewCell {
      @param activity    Access the value from Activity class
      */
     func updateUserRunStatus(activity: Activity) {
+      
+        let kRun = NSLocalizedString("Run: ", comment: "")
+        let kdone = NSLocalizedString(" done", comment: "")
+        let kmissed = NSLocalizedString(" missed", comment: "")
+        let kRuns = NSLocalizedString("Run(s):", comment: "")
+        let kDone = NSLocalizedString("Done", comment: "")
+        let kMore = NSLocalizedString("more", comment: "")
         
         let currentRunId = (activity.totalRuns != 0) ? String(activity.currentRunId) : "0"
         
         var runStatus: String
         if activity.frequencyType != .Ongoing {
-            runStatus = "Run: " + currentRunId + "/" + String(activity.totalRuns) + ", " + String(activity.compeltedRuns) + " done" + ", " + String(activity.incompletedRuns) + " missed"
+            runStatus = kRun + currentRunId + "/" + String(activity.totalRuns) + ", " + String(activity.compeltedRuns) + kdone + ", " + String(activity.incompletedRuns) + kmissed
         } else {
-            runStatus = "Run(s): \(activity.compeltedRuns) Done"
+            runStatus = "\(kRuns) \(activity.compeltedRuns) \(kDone)"
         }
         
         self.labelRunStatus?.text = runStatus
@@ -151,7 +158,7 @@ class ActivitiesTableViewCell: UITableViewCell {
         } else {
             self.buttonMoreSchedules?.isHidden = false
             self.buttonMoreSchedulesBottomLine?.isHidden = false
-            let moreSchedulesTitle =  "+" + String(activity.totalRuns - 1) + " more"
+            let moreSchedulesTitle =  "+" + String(activity.totalRuns - 1) + " \(kMore)"
             self.buttonMoreSchedules?.setTitle(moreSchedulesTitle, for: .normal)
         }
     }

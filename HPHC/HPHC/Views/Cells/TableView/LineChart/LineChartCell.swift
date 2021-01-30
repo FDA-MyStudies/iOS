@@ -45,6 +45,7 @@ class LineChartCell: GraphChartTableViewCell {
     var xAxisTitles: [Any] = []
     var max: Float = 0.0
     var min: Float = 0.0
+    let kPerRun = NSLocalizedString(" (per run)", comment: "")
 
     var currentChart: DashboardCharts! {
       didSet {
@@ -242,15 +243,12 @@ class LineChartCell: GraphChartTableViewCell {
         
             
         case .runs:
-            labelTitle.text = chart.displayName! + " (per run)"
+            labelTitle.text = chart.displayName! + kPerRun
             self.buttonForward.isEnabled = true
             plotForRunsType()
             
         case .hours_of_day:
-            
-            
-            
-             labelTitle.text = chart.displayName! + " (per run)"
+            labelTitle.text = chart.displayName! + kPerRun
             
             //current date
             let stringDate = LineChartCell.formatter.string(from: Date())

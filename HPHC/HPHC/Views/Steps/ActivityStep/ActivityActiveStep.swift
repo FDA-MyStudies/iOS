@@ -115,7 +115,7 @@ let kActiveFetalKickCounterkickCounts = "kickCount"
 
 //Completion Text
 
-let kActiveTaskCompletionStepText = "Tap Done to submit responses. Responses cannot be modified after submission."
+let kActiveTaskCompletionStepText = NSLocalizedString("Tap Done to submit responses. Responses cannot be modified after submission.", comment: "")
 
 
 
@@ -331,7 +331,7 @@ class ActivityActiveStep: ActivityStep {
                                                                 requireReversal: ((formatDict?[kActiveSpatialSpanMemoryRequireReversal]) as? Bool)! ,
                                                                 options: self.options!)
                       
-                      (orderedTask.steps.last as? ORKCompletionStep)!.text = NSLocalizedString(kActiveTaskCompletionStepText, comment: "")
+                      (orderedTask.steps.last as? ORKCompletionStep)!.text = kActiveTaskCompletionStepText
                       return orderedTask
                         
                     } else {
@@ -385,7 +385,7 @@ class ActivityActiveStep: ActivityStep {
                                                            intendedUseDescription: self.text!,
                                                            numberOfDisks: (formatDict?[kActiveTowerOfHanoiNumberOfDisks] as? UInt)! ,
                                                            options: self.options!)
-                  (orderedTask.steps.last as? ORKCompletionStep)!.text = NSLocalizedString(kActiveTaskCompletionStepText, comment: "")
+                  (orderedTask.steps.last as? ORKCompletionStep)!.text = kActiveTaskCompletionStepText
                   return orderedTask
                     
                 } else {

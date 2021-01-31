@@ -21,10 +21,10 @@
 import IQKeyboardManagerSwift
 import UIKit
 
-let kHelperTextForFilteredStudiesNotFound = "Sorry, no Studies found. Please try different Filter Options"
-let kHelperTextForSearchedStudiesNotFound = "Sorry, no Studies found. Please check the spelling or try a different search."
+let kHelperTextForFilteredStudiesNotFound = NSLocalizedString("Sorry, no Studies found. Please try different Filter Options", comment: "")
+let kHelperTextForSearchedStudiesNotFound = NSLocalizedString("Sorry, no Studies found. Please check the spelling or try a different search.", comment: "")
 
-let kHelperTextForOffline = "Sorry, no studies available right now. Please remain signed in to get notified when there are new studies available."
+let kHelperTextForOffline = NSLocalizedString("Sorry, no studies available right now. Please remain signed in to get notified when there are new studies available.", comment: "")
 
 let kNotificationViewControllerIdentifier = "NotificationViewControllerIdentifier"
 

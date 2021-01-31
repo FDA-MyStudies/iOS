@@ -406,3 +406,22 @@
 "duration"="duration";
 
 
+"You have chosen to delete your #APPNAME# Account. This will result in automatic withdrawal from all studies.\nBelow is a list of studies that you are a part of and information on how your response data will be handled with each after you withdraw. Please review and confirm."="You have chosen to delete your #APPNAME# Account. This will result in automatic withdrawal from all studies.\nBelow is a list of studies that you are a part of and information on how your response data will be handled with each after you withdraw. Please review and confirm.";
+
+
+"You have chosen to delete your #APPNAME# Account. This will result in automatic withdrawal from study.\nBelow is the study that you are a part of and information on how your response data will be handled after you withdraw. Please review and confirm."="You have chosen to delete your #APPNAME# Account. This will result in automatic withdrawal from study.\nBelow is the study that you are a part of and information on how your response data will be handled after you withdraw. Please review and confirm.";
+
+"Please select an option between Delete Data or Retain Data for all studies."="Please select an option between Delete Data or Retain Data for all studies.";
+
+"Response data will be deleted"="Response data will be deleted";
+"Response data will be retained"="Response data will be retained";
+"Invalid ParticipantId."="Invalid ParticipantId.";
+
+"Sorry, no Studies found. Please try different Filter Options"="Sorry, no Studies found. Please try different Filter Options";
+"Sorry, no Studies found. Please check the spelling or try a different search."="Sorry, no Studies found. Please check the spelling or try a different search.";
+
+"Sorry, no studies available right now. Please remain signed in to get notified when there are new studies available."="Sorry, no studies available right now. Please remain signed in to get notified when there are new studies available.";
+
+
+
+"App Glossary"="App Glossary";

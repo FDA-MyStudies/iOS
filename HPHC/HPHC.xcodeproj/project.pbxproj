@@ -59,7 +59,6 @@
 		6EA889C01E6FD22800F160A1 /* ConfirmationOptionalTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EA889BF1E6FD22800F160A1 /* ConfirmationOptionalTableViewCell.swift */; };
 		6EA889C51E701E8200F160A1 /* Confirmation.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6EA889C41E701E8200F160A1 /* Confirmation.plist */; };
 		6EAA048B1FAF4C6E00214D03 /* Labkey_Activity_Latest.json in Resources */ = {isa = PBXBuildFile; fileRef = 6EAA04881FAF4C6A00214D03 /* Labkey_Activity_Latest.json */; };
-		6EAB39A91E4B0B4A003442B8 /* Resources.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6EAB39A81E4B0B4A003442B8 /* Resources.plist */; };
 		6EABD0331E56FE2000623D94 /* TaskSchema.json in Resources */ = {isa = PBXBuildFile; fileRef = 6EABD0321E56FE2000623D94 /* TaskSchema.json */; };
 		6EB7187C1E77C01900E293EF /* Encoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EB7187B1E77C01900E293EF /* Encoder.swift */; };
 		6EB740181E9CD38100A4C773 /* FetalKickTest.json in Resources */ = {isa = PBXBuildFile; fileRef = 6EB740171E9CD38100A4C773 /* FetalKickTest.json */; };
@@ -156,6 +155,7 @@
 		83E41E58CE40BA32BA0F019B /* Pods_HPHCUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E4CF7BB238C017BF7E2A6346 /* Pods_HPHCUITests.framework */; };
 		846C695D25A83F8A002B9F42 /* AppDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846C695C25A83F8A002B9F42 /* AppDetails.swift */; };
 		846C698A25A872D8002B9F42 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 846C698C25A872D8002B9F42 /* Localizable.strings */; };
+		84AFCF0325C6E4D7000A9712 /* Resources.plist in Resources */ = {isa = PBXBuildFile; fileRef = 84AFCF0525C6E4D7000A9712 /* Resources.plist */; };
 		84E8D61724D161B6008C38D5 /* PDFCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E8D61624D161B6008C38D5 /* PDFCreator.swift */; };
 		89055913230148FD005FB284 /* Branding.plist in Resources */ = {isa = PBXBuildFile; fileRef = 89055912230148FD005FB284 /* Branding.plist */; };
 		8905591B230149AD005FB284 /* HPHCUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8905591A230149AD005FB284 /* HPHCUITests.swift */; };
@@ -376,7 +376,6 @@
 		6EA889BF1E6FD22800F160A1 /* ConfirmationOptionalTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfirmationOptionalTableViewCell.swift; sourceTree = "<group>"; };
 		6EA889C41E701E8200F160A1 /* Confirmation.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Confirmation.plist; sourceTree = "<group>"; };
 		6EAA04881FAF4C6A00214D03 /* Labkey_Activity_Latest.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Labkey_Activity_Latest.json; sourceTree = "<group>"; };
-		6EAB39A81E4B0B4A003442B8 /* Resources.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Resources.plist; sourceTree = "<group>"; };
 		6EABD0321E56FE2000623D94 /* TaskSchema.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = TaskSchema.json; sourceTree = "<group>"; };
 		6EB7187B1E77C01900E293EF /* Encoder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Encoder.swift; sourceTree = "<group>"; };
 		6EB740171E9CD38100A4C773 /* FetalKickTest.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = FetalKickTest.json; sourceTree = "<group>"; };
@@ -484,6 +483,9 @@
 		846C697D25A86360002B9F42 /* Staging.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Staging.xcconfig; sourceTree = "<group>"; };
 		846C698B25A872D8002B9F42 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		846C698F25A872E4002B9F42 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
+		84AFCF0425C6E4D7000A9712 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Base; path = Base.lproj/Resources.plist; sourceTree = "<group>"; };
+		84AFCF0A25C6E519000A9712 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = es; path = es.lproj/Resources.plist; sourceTree = "<group>"; };
+		84AFCF0D25C6E70E000A9712 /* es_MX */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = es_MX; path = es_MX.lproj/Resources.plist; sourceTree = "<group>"; };
 		84E8D61624D161B6008C38D5 /* PDFCreator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFCreator.swift; sourceTree = "<group>"; };
 		87A4F9AAE7A1B8C36C9FBDDF /* Pods_HPHC_QA.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HPHC_QA.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		89055912230148FD005FB284 /* Branding.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Branding.plist; sourceTree = "<group>"; };
@@ -494,7 +496,6 @@
 		890559272301616F005FB284 /* Config.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
 		8905592923016852005FB284 /* UITestingHelpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UITestingHelpers.swift; sourceTree = "<group>"; };
 		8905592B230169FF005FB284 /* LoginVCTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVCTests.swift; sourceTree = "<group>"; };
-		8923428E22B11BFC0059F910 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LimitJIA.storyboard; sourceTree = "<group>"; };
 		8926D7E92383F25C00558F4E /* KeyChain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyChain.swift; sourceTree = "<group>"; };
 		8948349C22BB9C59000B7BFA /* HPHCSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HPHCSettings.swift; sourceTree = "<group>"; };
 		8948349E22BB9D56000B7BFA /* HPHCSettings.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HPHCSettings.xib; sourceTree = "<group>"; };
@@ -867,7 +868,7 @@
 			isa = PBXGroup;
 			children = (
 				6ECA92811E49B3BB00DA6287 /* Resource.swift */,
-				6EAB39A81E4B0B4A003442B8 /* Resources.plist */,
+				84AFCF0525C6E4D7000A9712 /* Resources.plist */,
 			);
 			path = Resource;
 			sourceTree = "<group>";
@@ -1177,7 +1178,6 @@
 				94B3DD151E6ED8E500327AE5 /* Gateway.storyboard */,
 				6ECF75CF1E6EF140008C935E /* FetalKickCounter.storyboard */,
 				6E7D2D621E433E8800763D4C /* LaunchScreen.storyboard */,
-				8923428D22B11BFC0059F910 /* LimitJIA.storyboard */,
 				94B3DD2C1E6ED8E500327AE5 /* Login.storyboard */,
 				6E7D2D5D1E433E8800763D4C /* Main.storyboard */,
 				94B3DD3A1E6ED8E500327AE5 /* Study.storyboard */,
@@ -2078,7 +2078,7 @@
 				6F02217A2264729E00A2DBC8 /* OtherTextChoiceCell.xib in Resources */,
 				6EF748BF1E69645700F1E89E /* LatestActive_Taskdocument.json in Resources */,
 				6EAA048B1FAF4C6E00214D03 /* Labkey_Activity_Latest.json in Resources */,
-				6EAB39A91E4B0B4A003442B8 /* Resources.plist in Resources */,
+				84AFCF0325C6E4D7000A9712 /* Resources.plist in Resources */,
 				6E91D6831ECD662E0012F49F /* JailbrokeBlocker.xib in Resources */,
 				6EF51C9522324E3700BF8D4E /* Activitylist.json in Resources */,
 				6EF05A991E4DC36400CD7661 /* StepProvider.plist in Resources */,
@@ -2473,12 +2473,14 @@
 			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
-		8923428D22B11BFC0059F910 /* LimitJIA.storyboard */ = {
+		84AFCF0525C6E4D7000A9712 /* Resources.plist */ = {
 			isa = PBXVariantGroup;
 			children = (
-				8923428E22B11BFC0059F910 /* Base */,
+				84AFCF0425C6E4D7000A9712 /* Base */,
+				84AFCF0A25C6E519000A9712 /* es */,
+				84AFCF0D25C6E70E000A9712 /* es_MX */,
 			);
-			name = LimitJIA.storyboard;
+			name = Resources.plist;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

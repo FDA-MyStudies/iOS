@@ -21,13 +21,13 @@ OTHER DEALINGS IN THE SOFTWARE.
 import UIKit
 
 let kConfirmationSegueIdentifier = "confirmationSegue"
-let kHeaderDescription = "You have chosen to delete your #APPNAME# Account. This will result in automatic withdrawal from all studies.\nBelow is a list of studies that you are a part of and information on how your response data will be handled with each after you withdraw. Please review and confirm."
+let kHeaderDescription = NSLocalizedString("You have chosen to delete your #APPNAME# Account. This will result in automatic withdrawal from all studies.\nBelow is a list of studies that you are a part of and information on how your response data will be handled with each after you withdraw. Please review and confirm.", comment: "")
 
-let kHeaderDescriptionStandalone = "You have chosen to delete your #APPNAME# Account. This will result in automatic withdrawal from study.\nBelow is the study that you are a part of and information on how your response data will be handled after you withdraw. Please review and confirm."
+let kHeaderDescriptionStandalone = NSLocalizedString("You have chosen to delete your #APPNAME# Account. This will result in automatic withdrawal from study.\nBelow is the study that you are a part of and information on how your response data will be handled after you withdraw. Please review and confirm.", comment: "")
 
-let kConfirmWithdrawlSelectOptionsAlert = "Please select an option between Delete Data or Retain Data for all studies."
-let kResponseDataDeletedText = "Response data will be deleted"
-let kResponseDataRetainedText = "Response data will be retained"
+let kConfirmWithdrawlSelectOptionsAlert = NSLocalizedString("Please select an option between Delete Data or Retain Data for all studies.", comment: "")
+let kResponseDataDeletedText = NSLocalizedString("Response data will be deleted", comment: "")
+let kResponseDataRetainedText = NSLocalizedString("Response data will be retained", comment: "")
 
 let kConfirmationCellType = "type"
 let kConfirmationCellTypeOptional = "Optional"
@@ -205,7 +205,7 @@ class ConfirmationViewController: UIViewController {
         for withdrawnStudy in studiesToWithdrawn {
             if withdrawnStudy.shouldDelete == nil {
                 
-                UIUtilities.showAlertWithMessage(alertMessage: NSLocalizedString(kConfirmWithdrawlSelectOptionsAlert, comment: ""))
+                UIUtilities.showAlertWithMessage(alertMessage: kConfirmWithdrawlSelectOptionsAlert)
                 found = true
                 break;
             }
@@ -265,9 +265,9 @@ extension ConfirmationViewController: UITableViewDataSource {
             cell.labelTitle?.text = study.name
             
             if study.withdrawalConfigration?.type == StudyWithdrawalConfigrationType.deleteData {
-                cell.labelTitleDescription?.text = NSLocalizedString(kResponseDataDeletedText, comment: "")
+                cell.labelTitleDescription?.text = kResponseDataDeletedText
             }else {
-                cell.labelTitleDescription?.text = NSLocalizedString(kResponseDataRetainedText, comment: "")
+                cell.labelTitleDescription?.text = kResponseDataRetainedText
             }
             return cell
         }

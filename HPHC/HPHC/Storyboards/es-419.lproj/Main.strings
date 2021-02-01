@@ -1,0 +1,150 @@
+
+/* Class = "UILabel"; text = "Message"; ObjectID = "2ER-Rg-sXe"; */
+"2ER-Rg-sXe.text" = "Message";
+
+/* Class = "UILabel"; text = "3"; ObjectID = "2Z1-U0-8Iz"; */
+"2Z1-U0-8Iz.text" = "3";
+
+/* Class = "UILabel"; text = "Statistics"; ObjectID = "4nc-7S-kl8"; */
+"4nc-7S-kl8.text" = "Statistics";
+
+/* Class = "UIButton"; normalTitle = "DAY"; ObjectID = "5K4-yU-BVN"; */
+"5K4-yU-BVN.normalTitle" = "DAY";
+
+/* Class = "UILabel"; text = "Today's Activities"; ObjectID = "6wp-3C-Gqw"; */
+"6wp-3C-Gqw.text" = "Today's Activities";
+
+/* Class = "UILabel"; text = "About the Study"; ObjectID = "97T-bG-ujw"; */
+"97T-bG-ujw.text" = "About the Study";
+
+/* Class = "UILabel"; text = "COMPLETED"; ObjectID = "9Gm-yg-ywQ"; */
+"9Gm-yg-ywQ.text" = "COMPLETED";
+
+/* Class = "UILabel"; text = "2 Surveys, 1 task"; ObjectID = "9KQ-jR-WKo"; */
+"9KQ-jR-WKo.text" = "2 Surveys, 1 task";
+
+/* Class = "UILabel"; text = "2"; ObjectID = "9UC-Jd-1m7"; */
+"9UC-Jd-1m7.text" = "2";
+
+/* Class = "UILabel"; text = "Study Completion"; ObjectID = "BUp-ZG-pOn"; */
+"BUp-ZG-pOn.text" = "Study Completion";
+
+/* Class = "UILabel"; text = "SURVEYS"; ObjectID = "FGa-14-YX0"; */
+"FGa-14-YX0.text" = "SURVEYS";
+
+/* Class = "UILabel"; text = "PENDING"; ObjectID = "GN9-j6-XaI"; */
+"GN9-j6-XaI.text" = "PENDING";
+
+/* Class = "UILabel"; text = "45%"; ObjectID = "GgA-yD-kzq"; */
+"GgA-yD-kzq.text" = "45%";
+
+/* Class = "UILabel"; text = "Study Activities"; ObjectID = "IlR-p9-C3d"; */
+"IlR-p9-C3d.text" = "Study Activities";
+
+/* Class = "UILabel"; text = "Weekly"; ObjectID = "Izq-bR-aTL"; */
+"Izq-bR-aTL.text" = "Weekly";
+
+/* Class = "UILabel"; text = "Every Saturday - 02:00 PM"; ObjectID = "Lle-16-u6s"; */
+"Lle-16-u6s.text" = "Every Saturday - 02:00 PM";
+
+/* Class = "UILabel"; text = "4"; ObjectID = "MPP-ft-siq"; */
+"MPP-ft-siq.text" = "4";
+
+/* Class = "UILabel"; text = "TOTAL HOURS OF SLEEP"; ObjectID = "OBs-tE-wLZ"; */
+"OBs-tE-wLZ.text" = "TOTAL HOURS OF SLEEP";
+
+/* Class = "UILabel"; text = "Trends"; ObjectID = "Ora-0a-XGP"; */
+"Ora-0a-XGP.text" = "Trends";
+
+/* Class = "UIButton"; normalTitle = "Submit"; ObjectID = "PJE-uZ-G9M"; */
+"PJE-uZ-G9M.normalTitle" = "Submit";
+
+/* Class = "UILabel"; text = "A STUDY FOR PREGNANT WOMEN"; ObjectID = "PbA-x6-hy6"; */
+"PbA-x6-hy6.text" = "A STUDY FOR PREGNANT WOMEN";
+
+/* Class = "UILabel"; text = "1st Trimester Survey"; ObjectID = "Q8n-qg-kQu"; */
+"Q8n-qg-kQu.text" = "1st Trimester Survey";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "QNO-QE-WW3"; */
+"QNO-QE-WW3.normalTitle" = "Button";
+
+/* Class = "UILabel"; text = "Study Adherence"; ObjectID = "RBU-G3-TIT"; */
+"RBU-G3-TIT.text" = "Study Adherence";
+
+/* Class = "UILabel"; text = "TASKS"; ObjectID = "Ttd-KP-sKN"; */
+"Ttd-KP-sKN.text" = "TASKS";
+
+/* Class = "UIBarButtonItem"; title = "Cancel"; ObjectID = "U5e-0P-U9P"; */
+"U5e-0P-U9P.title" = "Cancel";
+
+/* Class = "UILabel"; text = "3 Completed, 1 Pending, 2 Missed"; ObjectID = "V3b-DD-XbV"; */
+"V3b-DD-XbV.text" = "3 Completed, 1 Pending, 2 Missed";
+
+/* Class = "UILabel"; text = "1 Survey, 1 task"; ObjectID = "WOK-eq-CJE"; */
+"WOK-eq-CJE.text" = "1 Survey, 1 task";
+
+/* Class = "UITextView"; text = "Enter your feedback here"; ObjectID = "Y8U-eC-cGs"; */
+"Y8U-eC-cGs.text" = "Enter your feedback here";
+
+/* Class = "UILabel"; text = "17, MAR 2017 - 24, MAR 2017"; ObjectID = "YDT-f5-CTQ"; */
+"YDT-f5-CTQ.text" = "17, MAR 2017 - 24, MAR 2017";
+
+/* Class = "UIButton"; normalTitle = "Submit"; ObjectID = "Yz6-7F-Utw"; */
+"Yz6-7F-Utw.normalTitle" = "Submit";
+
+/* Class = "UITabBarItem"; title = "Dashboard"; ObjectID = "bZw-X2-8ev"; */
+"bZw-X2-8ev.title" = "Dashboard";
+
+/* Class = "UILabel"; text = "We'd love to hear from you! Please share your thoughts on how we can improve your experience of participating in health studies and contributing to a healthier world! Your feedback will be anonymous."; ObjectID = "bzZ-kN-a6u"; */
+"bzZ-kN-a6u.text" = "We'd love to hear from you! Please share your thoughts on how we can improve your experience of participating in health studies and contributing to a healthier world! Your feedback will be anonymous.";
+
+/* Class = "UILabel"; text = "73%"; ObjectID = "cLq-2v-KCG"; */
+"cLq-2v-KCG.text" = "73%";
+
+/* Class = "UILabel"; text = "ACTIVE"; ObjectID = "cv2-Xk-tyq"; */
+"cv2-Xk-tyq.text" = "ACTIVE";
+
+/* Class = "UITextField"; placeholder = "enter first name"; ObjectID = "deZ-Ym-GNo"; */
+"deZ-Ym-GNo.placeholder" = "enter first name";
+
+/* Class = "UITabBarItem"; title = "Resources"; ObjectID = "e3B-fq-hAL"; */
+"e3B-fq-hAL.title" = "Resources";
+
+/* Class = "UILabel"; text = "Resume"; ObjectID = "eLR-7x-hRP"; */
+"eLR-7x-hRP.text" = "Resume";
+
+/* Class = "UIButton"; normalTitle = "WEEK"; ObjectID = "ePj-VU-Hso"; */
+"ePj-VU-Hso.normalTitle" = "WEEK";
+
+/* Class = "UIButton"; normalTitle = "MONTH"; ObjectID = "h1o-Mh-BeP"; */
+"h1o-Mh-BeP.normalTitle" = "MONTH";
+
+/* Class = "UILabel"; text = "1 Completed, 2 Pending, 2 Missed"; ObjectID = "mfY-yr-nmi"; */
+"mfY-yr-nmi.text" = "1 Completed, 2 Pending, 2 Missed";
+
+/* Class = "UILabel"; text = "Your participation status is:"; ObjectID = "qG1-CM-cDe"; */
+"qG1-CM-cDe.text" = "Your participation status is:";
+
+/* Class = "UILabel"; text = "6"; ObjectID = "rgX-UY-zQT"; */
+"rgX-UY-zQT.text" = "6";
+
+/* Class = "UILabel"; text = "Welcome back!"; ObjectID = "sdG-fX-Et2"; */
+"sdG-fX-Et2.text" = "Welcome back!";
+
+/* Class = "UILabel"; text = "COMPLETED"; ObjectID = "tlh-lV-PnU"; */
+"tlh-lV-PnU.text" = "COMPLETED";
+
+/* Class = "UILabel"; text = "First Name"; ObjectID = "to9-d2-raO"; */
+"to9-d2-raO.text" = "First Name";
+
+/* Class = "UILabel"; text = "In Progress"; ObjectID = "wDc-BD-rWW"; */
+"wDc-BD-rWW.text" = "In Progress";
+
+/* Class = "UILabel"; text = "30"; ObjectID = "y6P-MQ-skz"; */
+"y6P-MQ-skz.text" = "30";
+
+/* Class = "UITextView"; text = "Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda."; ObjectID = "ywM-2r-610"; */
+"ywM-2r-610.text" = "Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.";
+
+/* Class = "UITabBarItem"; title = "Activities"; ObjectID = "z80-Ua-Nhr"; */
+"z80-Ua-Nhr.title" = "Activities";

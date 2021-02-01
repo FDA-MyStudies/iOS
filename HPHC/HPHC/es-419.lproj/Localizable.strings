@@ -1,0 +1,427 @@
+/* 
+  Localizable.strings
+  HPHC
+
+ License Agreement for FDA My Studies
+ Copyright © 2017-2019 Harvard Pilgrim Health Care Institute (HPHCI) and its Contributors. Permission is
+ hereby granted, free of charge, to any person obtaining a copy of this software and associated
+ documentation files (the &quot;Software&quot;), to deal in the Software without restriction, including without
+ limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the
+ Software, and to permit persons to whom the Software is furnished to do so, subject to the following
+ conditions:
+ The above copyright notice and this permission notice shall be included in all copies or substantial
+ portions of the Software.
+ Funding Source: Food and Drug Administration (“Funding Agency”) effective 18 September 2014 as
+ Contract no. HHSF22320140030I/HHSF22301006T (the “Prime Contract”).
+ THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
+ INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR
+ PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
+ LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT
+ OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
+ OTHER DEALINGS IN THE SOFTWARE.
+*/
+
+"Home"="Home";
+"Resources"="Resources";
+"My Account"="My Account";
+"Sign In"="Sign In";
+"New User?"="New User?";
+"Sign up"="Sign up";
+"This feature will be available in the next sprint."="This feature will be available in the next sprint.";
+"Are you sure you want to sign out?"="Are you sure you want to sign out?";
+
+"Are you sure you want to sign out? Incomplete activities and activities completed while offline must be re-started when you next sign in."="Are you sure you want to sign out? Incomplete activities and activities completed while offline must be re-started when you next sign in.";
+
+"Sign Out later"="Sign Out later";
+"Reach Out"="Reach Out";
+
+"Please join study to go forward."="Please join study to go forward.";
+
+"Select Lead Time"="Select Lead Time";
+"Done"="Done";
+"Cancel"="Cancel";
+"Profile"="Profile";
+"Profile updated Successfully."="Profile updated Successfully.";
+"Sign Out"="Sign Out";
+"Use Passcode or Touch ID to access app"="Use Passcode or Touch ID to access app";
+"Use Passcode or Face ID to access app"="Use Passcode or Face ID to access app";
+"Use Passcode to access app"="Use Passcode to access app";
+"Save"="Save";
+"Change Passcode"="Change Passcode";
+"Edit"="Edit";
+
+"LEAVE US YOUR FEEDBACK"="LEAVE US YOUR FEEDBACK";
+"Please enter message"="Please enter message";
+"Please provide your feedback"="Please provide your feedback";
+"Enter your feedback here"="Enter your feedback here";
+
+"CONTACT US"="CONTACT US";
+"REACH OUT"="REACH OUT";
+"Leave Anonymous Feedback"="Leave Anonymous Feedback";
+"Need Help? Contact Us"="Need Help? Contact Us";
+
+"Your registered email(xyz@gmail.com) is pending verification. Enter the Verification Code received on this email to complete verification and try the Forgot Password action again."="Your registered email(xyz@gmail.com) is pending verification. Enter the Verification Code received on this email to complete verification and try the Forgot Password action again.";
+
+"Your registered email is pending verification. Please type in the Verification Code received in the email to complete this step and proceed to using the app."="Your registered email is pending verification. Please type in the Verification Code received in the email to complete this step and proceed to using the app.";
+
+"Why Register?"="Why Register?";
+"Terms"="Terms";
+"Privacy Policy"="Privacy Policy";
+
+"An email has been sent to xyz@gmail.com. Please type in the Verification Code received in the email to complete the verification step."="An email has been sent to xyz@gmail.com. Please type in the Verification Code received in the email to complete the verification step.";
+
+"Message"="Message";
+"Please verify your email address."="Please verify your email address.";
+"An email verification code has been sent to your registered email."="An email verification code has been sent to your registered email.";
+
+
+"Do you wish to set up Passcode or FaceID/TouchID protection for this app? (You can do this later in the My Account area)."="Do you wish to set up Passcode or FaceID/TouchID protection for this app? (You can do this later in the My Account area).";
+
+"Page"="Page";
+"of"="of";
+
+"This action will create a shareable image file of the charts currently seen in this section. Proceed?"="This action will create a shareable image file of the charts currently seen in this section. Proceed?";
+
+"TRENDS"="TRENDS";
+
+"You can't join study without sharing your data"="You can't join study without sharing your data";
+"Unknown error occurred. Please try after some time."="Unknown error occurred. Please try after some time.";
+
+
+"Something went wrong please try again later."="Something went wrong please try again later.";
+
+"enter here"="enter here";
+
+" Search"=" Search";
+
+"Answer required"="Answer required";
+"Please provide an input for the text field too."="Please provide an input for the text field too.";
+
+"This action will create a shareable image file of the dashboard currently seen in this section. Proceed?"="This action will create a shareable image file of the dashboard currently seen in this section. Proceed?";
+
+"  DAY  "="  DAY  ";
+
+"You missed the previous run of this activity. Please wait till the next run becomes available. Run timings are given on the Activities list screen."="You missed the previous run of this activity. Please wait till the next run becomes available. Run timings are given on the Activities list screen.";
+
+"STUDY ACTIVITIES"="STUDY ACTIVITIES";
+"Pull to refresh"="Pull to refresh";
+
+
+"Sorry, no activities available right now."="Sorry, no activities available right now.";
+
+"Activity"="Activity";
+"Invalid Data!"="Invalid Data!";
+"CURRENT"="CURRENT";
+"UPCOMING"="UPCOMING";
+"PAST"="PAST";
+
+
+"The study "="The study ";
+" is 100 percent complete. Thank you for your participation."=" is 100 percent complete. Thank you for your participation.";
+
+"We noticed you missed an activity in "="We noticed you missed an activity in ";
+
+" today. That’s Ok! We know you’re busy, but we encourage you to complete study activities before they expire."=" today. That’s Ok! We know you’re busy, but we encourage you to complete study activities before they expire.";
+
+"New Resource Available"="New Resource Available";
+
+"Are you sure you want to "="Are you sure you want to ";
+"Proceed"="Proceed";
+
+
+"You are choosing to leave the study. Please choose if your response data can be retained and used for research purposes OR if your response data should be deleted."="You are choosing to leave the study. Please choose if your response data can be retained and used for research purposes OR if your response data should be deleted.";
+
+"Retain my data"="Retain my data";
+"Delete my data"="Delete my data";
+
+"Are you sure? Tap Ok to confirm."="Are you sure? Tap Ok to confirm.";
+
+"Authentication Required"="Authentication Required";
+"Username"="Username";
+"Password"="Password";
+"Log In"="Log In";
+"Error"="Error";
+
+
+"Please update to the latest version of the app to continue."="Please update to the latest version of the app to continue.";
+"Please go to AppStore to update to the latest version of the app."="Please go to AppStore to update to the latest version of the app.";
+"Consent Updated"="Consent Updated";
+
+" Please review the revised Consent terms and provide your Informed Consent, to continue participating in the study."=" Please review the revised Consent terms and provide your Informed Consent, to continue participating in the study.";
+
+"The Consent Document for this study has been updated."="The Consent Document for this study has been updated.";
+"Review"="Review";
+"Passcode"="Passcode";
+"You will be signed out and will need to sign in again. Are you sure you want to proceed?"="You will be signed out and will need to sign in again. Are you sure you want to proceed?";
+
+"Forgot Passcode? Sign In Again"="Forgot Passcode? Sign In Again";
+"Set up a passcode for the app"="Set up a passcode for the app";
+"Continue"="Continue";
+
+
+"Validated!"="Validated!";
+"OK"="OK";
+"Enter a token"="Enter a token";
+"Enter keyword(s)"="Enter keyword(s)";
+
+
+"Your enrollment token has been successfully validated. You are eligible to join the Study.\nPlease click Continue to proceed to the Consent section."="Your enrollment token has been successfully validated. You are eligible to join the Study.\nPlease click Continue to proceed to the Consent section.";
+
+"You are Eligible!"="You are Eligible!";
+
+
+"Your token has been validated. You are eligible to join the study. Please tap Get Started to proceed to the consent section."="Your token has been validated. You are eligible to join the study. Please tap Get Started to proceed to the consent section.";
+
+"Eligibility Test"="Eligibility Test";
+"Please answer some quick questions to confirm your eligibility for this study."="Please answer some quick questions to confirm your eligibility for this study.";
+
+"Based on the answers you provided, you are eligible to participate in this study.\nPlease click Continue to proceed to the Consent section."="Based on the answers you provided, you are eligible to participate in this study.\nPlease click Continue to proceed to the Consent section.";
+
+"Change server to"="Change server to";
+
+
+"TERMS"="TERMS";
+"PRIVACY POLICY"="PRIVACY POLICY";
+"Please Enter Valid Value"="Please Enter Valid Value";
+"Error"="Error";
+"Message"="Message";
+"Important Note"="Important Note";
+"Ok"="Ok";
+"Cancel"="Cancel";
+"Delete Account"="Delete Account";
+
+"Registration (or sign up) for the app  is requested only to provide you with a seamless experience of using the app. Your registration information does not become part of the data collected for any study(ies) housed in the app. Each study has its own consent process and your data for the study will not be collected without you providing your informed consent prior to joining the study."="Registration (or sign up) for the app  is requested only to provide you with a seamless experience of using the app. Your registration information does not become part of the data collected for any study(ies) housed in the app. Each study has its own consent process and your data for the study will not be collected without you providing your informed consent prior to joining the study.";
+
+"Are you sure you wish to permanently delete your #APPNAME# account? You will need to register again if you wish to join a study."="Are you sure you wish to permanently delete your #APPNAME# account? You will need to register again if you wish to join a study.";
+
+
+"Account has been deleted"="Account has been deleted";
+
+"Stay up-to-date! Turn ON notifications and reminders in app and phone settings to get notified about study activity in a timely manner."="Stay up-to-date! Turn ON notifications and reminders in app and phone settings to get notified about study activity in a timely manner.";
+
+"SIGN IN"="SIGN IN";
+"PASSWORD HELP"="PASSWORD HELP";
+"We have sent a temporary password to your registered email. Please login with temporary password and change your password."="We have sent a temporary password to your registered email. Please login with temporary password and change your password.";
+"SIGN UP"="SIGN UP";
+"I Agree to the Terms and Privacy Policy"="I Agree to the Terms and Privacy Policy";
+"NOTIFICATIONS"="NOTIFICATIONS";
+"Please enter your first name."="Please enter your first name.";
+"Please enter your last name."="Please enter your last name.";
+"Please enter your email address."="Please enter your email address.";
+"Please enter your password."="Please enter your password.";
+"Please enter your current password."="Please enter your current password.";
+"Please confirm your password."="Please confirm your password.";
+"Please confirm the password."="Please confirm the password.";
+"Your password should not match with email id"="Your password should not match with email id";
+"Please enter valid email address."="Please enter valid email address.";
+"The Password and Confirm password fields don't match."="The Password and Confirm password fields don't match.";
+"New password and confirm password fields don't match."="New password and confirm password fields don't match.";
+"Password should have minimum of 8 characters."="Password should have minimum of 8 characters.";
+
+
+"Your password MUST be 8-64 characters and contain each of the following: An uppercase letter, A lower case letter, A number 0-9, a special character: \\ ! # % & ‘ () * + , - . : < > = ? @ [] ^ _ { } | ~ *"="Your password MUST be 8-64 characters and contain each of the following: An uppercase letter, A lower case letter, A number 0-9, a special character: \\ ! # % & ‘ () * + , - . : < > = ? @ [] ^ _ { } | ~ *";
+
+"Please agree to terms and conditions."="Please agree to terms and conditions.";
+"Please enter your new password."="Please enter your new password.";
+"New password and old password are same."="New password and old password are same.";
+"Please enter your relationship to the participant."="Please enter your relationship to the participant.";
+"CHANGE PASSWORD"="CHANGE PASSWORD";
+"CREATE PASSWORD"="CREATE PASSWORD";
+"Your password has been changed successfully"="Your password has been changed successfully";
+"Please enter all the fields"="Please enter all the fields";
+"Please enter valid first name. Please use letters(length:1 - 100 characters)."="Please enter valid first name. Please use letters(length:1 - 100 characters).";
+"Please enter valid last name. Please use letters(length:1 - 100 characters)."="Please enter valid last name. Please use letters(length:1 - 100 characters).";
+"Old password and New password should not be same."="Old password and New password should not be same.";
+"Please enter valid Verification Code"="Please enter valid Verification Code";
+"Thank you for providing feedback. Your gesture is appreciated."="Thank you for providing feedback. Your gesture is appreciated.";
+"Please enter subject"="Please enter subject";
+"Please enter message"="Please enter message";
+"Thank you for contacting us. We will get back to you on your email address at the earliest."="Thank you for contacting us. We will get back to you on your email address at the earliest.";
+"  Resume  "="  Resume  ";
+"  Start  "="  Start  ";
+"  Completed  "="  Completed  ";
+"  Incompleted  "="  Incompleted  ";
+"  Expired  "="  Expired  ";
+
+"  DAY  "="  DAY  ";
+"Day"="Day";
+"  MONTH  "="  MONTH  ";
+"MONTH"="MONTH";
+"  WEEK  "="  WEEK  ";
+"WEEK"="WEEK";
+"Please enter valid enrollment token"="Please enter valid enrollment token";
+"Please enter valid token"="Please enter valid token";
+"Unable to Enroll, Please try again later."="Unable to Enroll, Please try again later.";
+"Sorry, this token is invalid. Please enter a valid token to continue."="Sorry, this token is invalid. Please enter a valid token to continue.";
+
+
+"This study is an upcoming one and isn't yet open for enrolling participants. Please check back later."="This study is an upcoming one and isn't yet open for enrolling participants. Please check back later.";
+
+"This study has been temporarily paused. Please check back later."="This study has been temporarily paused. Please check back later.";
+
+"The study has been temporarily paused. You can participate in activities once it is resumed. Please check back later."="The study has been temporarily paused. You can participate in activities once it is resumed. Please check back later.";
+
+"This study has been closed."="This study has been closed.";
+
+"Sorry, this study currently does not allow previously enrolled participants to rejoin the study after they have withdrawn from the study. Please check back later or explore other studies"="Sorry, this study currently does not allow previously enrolled participants to rejoin the study after they have withdrawn from the study. Please check back later or explore other studies";
+
+"Sorry, enrollment for this study has been closed for now. Please check back later or explore other studies you could join."="Sorry, enrollment for this study has been closed for now. Please check back later or explore other studies you could join.";
+
+"Failed to connect to Apple Mail app"="Failed to connect to Apple Mail app";
+
+
+"Connection error"="Connection error";
+"There was a problem, please try again."="There was a problem, please try again.";
+"This resource is currently unavailable."="This resource is currently unavailable.";
+"About the Study"="About the Study";
+"This will also delete your app account."="This will also delete your app account.";
+"I am signing the consent form on behalf of myself."="I am signing the consent form on behalf of myself.";
+
+"I am signing the consent form on behalf of the study participant as their legally authorized representative."="I am signing the consent form on behalf of the study participant as their legally authorized representative.";
+
+"The next few steps will capture your informed consent for participation in this study."="The next few steps will capture your informed consent for participation in this study.";
+"Please select the appropriate option below"="Please select the appropriate option below";
+"Please specify your relationship to the participant"="Please specify your relationship to the participant";
+"Please enter the participant's first and last name below"="Please enter the participant's first and last name below";
+"Participant's First Name           "="Participant's First Name           ";
+"Participant's Last Name"="Participant's Last Name";
+"Participant first name: "="Participant first name: ";
+"Participant last name: "="Participant last name: ";
+"Signature"="Signature";
+"Date"="Date";
+"First name"="First name";
+"Last name"="Last name";
+"Relationship to participant"="Relationship to participant";
+"Consent by a Legally Authorized Representative"="Consent by a Legally Authorized Representative";
+"Study Staff Signature(s)"="Study Staff Signature(s)";
+"- Coordinator"="- Coordinator";
+"Participant's Name (printed)"="Participant's Name (printed)";
+"Participant's Signature"="Participant's Signature";
+
+
+"Your Session is Expired"="Your Session is Expired";
+"Sorry, an error occurred and your feedback could not be sent to the organization. Please retry in some time."="Sorry, an error occurred and your feedback could not be sent to the organization. Please retry in some time.";
+
+"Could not connect to server"="Could not connect to server";
+
+"Cellular"="Cellular";
+"WiFi"="WiFi";
+"No Connection"="No Connection";
+"unavailable"="unavailable";
+
+"Something went wrong"="Something went wrong";
+"Your error localized description"="Your error localized description";
+
+"You seem to be offline. Please connect to a network to proceed with this action."="You seem to be offline. Please connect to a network to proceed with this action.";
+
+"Could not connect to server. Please try again later."="Could not connect to server. Please try again later.";
+
+"Activity Completed"="Activity Completed";
+"Tap Done to submit responses. Responses cannot be modified after submission"="Tap Done to submit responses. Responses cannot be modified after submission";
+
+
+"Comprehension"="Comprehension";
+"Let's do a quick and simple test of your understanding of this Study."="Let's do a quick and simple test of your understanding of this Study.";
+"Great Job!"="Great Job!";
+"You answered all of the questions correctly. Tap on Next to proceed"="You answered all of the questions correctly. Tap on Next to proceed";
+"Thanks for providing consent for this Study"="Thanks for providing consent for this Study";
+"You can now start participating in the Study"="You can now start participating in the Study";
+"I agree to participate in this research study."="I agree to participate in this research study.";
+"Participant"="Participant";
+"No"="No";
+"Yes"="Yes";
+
+
+"Yet To Join"="Yet To Join";
+"In Progress"="In Progress";
+"Completed"="Completed";
+"Not Eligible"="Not Eligible";
+"Withdrawn"="Withdrawn";
+"No participation"="No participation";
+"Partial Participation"="Partial Participation";
+
+
+
+"The activity "="The activity ";
+" will expire in 24 hours. Your participation is important. Please visit the study to complete it now."=" will expire in 24 hours. Your participation is important. Please visit the study to complete it now.";
+
+"A new run of the daily activity "="A new run of the daily activity ";
+", is now available. Your participation is important. Please visit the study to complete it now."=", is now available. Your participation is important. Please visit the study to complete it now.";
+
+", is now available and is valid until "=", is now available and is valid until ";
+". Your participation is important. Please visit the study to complete it now."=". Your participation is important. Please visit the study to complete it now.";
+
+"The current run of the weekly activity "="The current run of the weekly activity ";
+
+"A new run of the weekly activity "="A new run of the weekly activity ";
+", is now available. Please visit the study to complete it now."=", is now available. Please visit the study to complete it now.";
+
+"The current run of the monthly activity "="The current run of the monthly activity ";
+" will expire in 3 days. Your participation is important. Please visit the study to complete it now."=" will expire in 3 days. Your participation is important. Please visit the study to complete it now.";
+
+"A new run of the monthly activity "="A new run of the monthly activity ";
+
+"A new run of the scheduled activity "="A new run of the scheduled activity ";
+
+"It’s been a while since you visited the"="It’s been a while since you visited the";
+"app. Please consider continuing your participation in any studies in which you’re enrolled."="app. Please consider continuing your participation in any studies in which you’re enrolled.";
+
+
+"NA"="NA";
+" (per run)"=" (per run)";
+
+"Run: "="Run: ";
+" done"=" done";
+" missed"=" missed";
+"Run(s):"="Run(s):";
+"more"="more";
+
+"Tap Done to submit responses. Responses cannot be modified after submission."="Tap Done to submit responses. Responses cannot be modified after submission.";
+
+
+"Fetal Kick Counter"="Fetal Kick Counter";
+
+"This task needs you to record the number of times you experience fetal kicks in a given duration of time.Also called as the Fetal Kick Counter task, this will help assess the activity of the baby within."="This task needs you to record the number of times you experience fetal kicks in a given duration of time.Also called as the Fetal Kick Counter task, this will help assess the activity of the baby within.";
+
+"Thank you for your time!\n\nTap Done to submit responses. Responses cannot be modified after submission."="Thank you for your time!\n\nTap Done to submit responses. Responses cannot be modified after submission.";
+
+"All"="All";
+"Surveys"="Surveys";
+"Tasks"="Tasks";
+
+"TAP TO RECORD A KICK"="TAP TO RECORD A KICK";
+"You have recorded "="You have recorded ";
+" Proceed to submitting count and time?"=" Proceed to submitting count and time?";
+"This activity records the time it takes to feel "="This activity records the time it takes to feel ";
+"Proceed"="Proceed";
+"Select Time"="Select Time";
+
+"kicks "="kicks ";
+"please enter "="please enter ";
+"kicks only "="kicks only ";
+
+"Please select a valid time(Max "="Please select a valid time(Max ";
+
+"hitCount"="hitCount";
+"duration"="duration";
+
+
+"You have chosen to delete your #APPNAME# Account. This will result in automatic withdrawal from all studies.\nBelow is a list of studies that you are a part of and information on how your response data will be handled with each after you withdraw. Please review and confirm."="You have chosen to delete your #APPNAME# Account. This will result in automatic withdrawal from all studies.\nBelow is a list of studies that you are a part of and information on how your response data will be handled with each after you withdraw. Please review and confirm.";
+
+
+"You have chosen to delete your #APPNAME# Account. This will result in automatic withdrawal from study.\nBelow is the study that you are a part of and information on how your response data will be handled after you withdraw. Please review and confirm."="You have chosen to delete your #APPNAME# Account. This will result in automatic withdrawal from study.\nBelow is the study that you are a part of and information on how your response data will be handled after you withdraw. Please review and confirm.";
+
+"Please select an option between Delete Data or Retain Data for all studies."="Please select an option between Delete Data or Retain Data for all studies.";
+
+"Response data will be deleted"="Response data will be deleted";
+"Response data will be retained"="Response data will be retained";
+"Invalid ParticipantId."="Invalid ParticipantId.";
+
+"Sorry, no Studies found. Please try different Filter Options"="Sorry, no Studies found. Please try different Filter Options";
+"Sorry, no Studies found. Please check the spelling or try a different search."="Sorry, no Studies found. Please check the spelling or try a different search.";
+
+"Sorry, no studies available right now. Please remain signed in to get notified when there are new studies available."="Sorry, no studies available right now. Please remain signed in to get notified when there are new studies available.";
+
+
+
+"App Glossary"="App Glossary";

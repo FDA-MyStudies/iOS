@@ -12,16 +12,13 @@
 		482062521E68532300C7A7AF /* UIUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 482062511E68532300C7A7AF /* UIUtilities.swift */; };
 		482CC61E1EC5F52E00BFE8C6 /* KDCircularProgress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 482CC61D1EC5F52E00BFE8C6 /* KDCircularProgress.swift */; };
 		4833E9DF1E7126900032D244 /* StudyHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4833E9DE1E7126900032D244 /* StudyHomeViewController.swift */; };
-		4833E9E31E712C2B0032D244 /* StudyOverview.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4833E9E21E712C2B0032D244 /* StudyOverview.plist */; };
 		484ACBF61F2896A500BCC819 /* FilterListCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 484ACBF51F2896A500BCC819 /* FilterListCollectionViewCell.swift */; };
-		484ACBFC1F28A82B00BCC819 /* FilterData.plist in Resources */ = {isa = PBXBuildFile; fileRef = 484ACBFB1F28A82B00BCC819 /* FilterData.plist */; };
 		484ACC001F28BC8800BCC819 /* FilterListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 484ACBFF1F28BC8800BCC819 /* FilterListTableViewCell.swift */; };
 		48567FE11F14FB3C00857193 /* StudyFilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48567FE01F14FB3C00857193 /* StudyFilterViewController.swift */; };
 		4884E3521E825E7D002DA0B9 /* FeedBackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4884E3511E825E7D002DA0B9 /* FeedBackViewController.swift */; };
 		4884E3541E82665C002DA0B9 /* FeedBackTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4884E3531E82665C002DA0B9 /* FeedBackTableViewCell.swift */; };
 		4884E3581E827E5B002DA0B9 /* ContactUsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4884E3571E827E5B002DA0B9 /* ContactUsViewController.swift */; };
 		4884E35A1E827E6A002DA0B9 /* ContactUsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4884E3591E827E6A002DA0B9 /* ContactUsTableViewCell.swift */; };
-		4884E35C1E827F8F002DA0B9 /* ContactUs.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4884E35B1E827F8F002DA0B9 /* ContactUs.plist */; };
 		6E14F2031F0224AD00EA8D1E /* Notification.json in Resources */ = {isa = PBXBuildFile; fileRef = 6E14F2021F0224AD00EA8D1E /* Notification.json */; };
 		6E183AA91E962AA4005D7A27 /* ResourcesDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E183AA81E962AA4005D7A27 /* ResourcesDetailViewController.swift */; };
 		6E183AB31E966230005D7A27 /* FileDownloadManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E183AB01E966230005D7A27 /* FileDownloadManager.swift */; };
@@ -30,7 +27,6 @@
 		6E2B25F31EAE3F1D00E2DFB2 /* ResearchContainerSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E2B25F11EAE3F1D00E2DFB2 /* ResearchContainerSegue.swift */; };
 		6E2B25F41EAE3F1D00E2DFB2 /* ResearchContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E2B25F21EAE3F1D00E2DFB2 /* ResearchContainerViewController.swift */; };
 		6E31DC691F17AF9C00C3E1DB /* InEligibilityStepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E31DC681F17AF9C00C3E1DB /* InEligibilityStepViewController.swift */; };
-		6E417AD31F4D5DA1007F27DA /* AnanomousFilterData.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6E417AD21F4D5DA1007F27DA /* AnanomousFilterData.plist */; };
 		6E4CECB61F31B41C005E0832 /* PinterestLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E4CECB51F31B41C005E0832 /* PinterestLayout.swift */; };
 		6E4D86DC1F389DF1003DBDD8 /* SearchBarView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6E4D86DB1F389DF1003DBDD8 /* SearchBarView.xib */; };
 		6E4D86E01F38A740003DBDD8 /* SearchBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E4D86DF1F38A740003DBDD8 /* SearchBarView.swift */; };
@@ -115,7 +111,6 @@
 		6EE93DC91E93C8850027A5DC /* Activities.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6EE93DB71E93C8850027A5DC /* Activities.plist */; };
 		6EE93DCA1E93C8850027A5DC /* ActivitiesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EE93DB81E93C8850027A5DC /* ActivitiesTableViewCell.swift */; };
 		6EE93DCB1E93C8850027A5DC /* ActivitiesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EE93DB91E93C8850027A5DC /* ActivitiesViewController.swift */; };
-		6EE93DCC1E93C8850027A5DC /* ResourcesUI.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6EE93DBB1E93C8850027A5DC /* ResourcesUI.plist */; };
 		6EE93DCD1E93C8850027A5DC /* ResourcesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EE93DBC1E93C8850027A5DC /* ResourcesTableViewCell.swift */; };
 		6EE93DCE1E93C8850027A5DC /* ResourcesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EE93DBD1E93C8850027A5DC /* ResourcesViewController.swift */; };
 		6EEB0AFC1FD2811700136EAA /* Labkey_Activity_Latest3.json in Resources */ = {isa = PBXBuildFile; fileRef = 6EEB0AF91FD2811100136EAA /* Labkey_Activity_Latest3.json */; };
@@ -153,11 +148,21 @@
 		7878B311221574D80052FC23 /* StandaloneStudy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7878B30E221574D80052FC23 /* StandaloneStudy.swift */; };
 		7878B31D2216C6E20052FC23 /* HPHCTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7878B31C2216C6E20052FC23 /* HPHCTests.swift */; };
 		83E41E58CE40BA32BA0F019B /* Pods_HPHCUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E4CF7BB238C017BF7E2A6346 /* Pods_HPHCUITests.framework */; };
+		843B6A5C25C7E1950022B5E9 /* Branding.plist in Resources */ = {isa = PBXBuildFile; fileRef = 843B6A5E25C7E1950022B5E9 /* Branding.plist */; };
+		843B6A7225C808CA0022B5E9 /* Profile.plist in Resources */ = {isa = PBXBuildFile; fileRef = 843B6A7425C808CA0022B5E9 /* Profile.plist */; };
+		843B6A7825C808E00022B5E9 /* ContactUs.plist in Resources */ = {isa = PBXBuildFile; fileRef = 843B6A7A25C808E00022B5E9 /* ContactUs.plist */; };
+		843B6A8225C8095B0022B5E9 /* FilterData.plist in Resources */ = {isa = PBXBuildFile; fileRef = 843B6A8425C8095B0022B5E9 /* FilterData.plist */; };
+		843B6A8825C8097D0022B5E9 /* AnanomousFilterData.plist in Resources */ = {isa = PBXBuildFile; fileRef = 843B6A8A25C8097D0022B5E9 /* AnanomousFilterData.plist */; };
+		843B6A9025C809910022B5E9 /* ChangePasswordData.plist in Resources */ = {isa = PBXBuildFile; fileRef = 843B6A9225C809910022B5E9 /* ChangePasswordData.plist */; };
+		843B6A9825C809E20022B5E9 /* GatewayOverview.plist in Resources */ = {isa = PBXBuildFile; fileRef = 843B6A9A25C809E20022B5E9 /* GatewayOverview.plist */; };
+		843B6AA225C80A170022B5E9 /* SignInPlist.plist in Resources */ = {isa = PBXBuildFile; fileRef = 843B6AA425C80A170022B5E9 /* SignInPlist.plist */; };
+		843B6AA825C80A4A0022B5E9 /* SignUpPlist.plist in Resources */ = {isa = PBXBuildFile; fileRef = 843B6AAA25C80A4A0022B5E9 /* SignUpPlist.plist */; };
+		843B6AAE25C80AAF0022B5E9 /* StudyOverview.plist in Resources */ = {isa = PBXBuildFile; fileRef = 843B6AB025C80AAF0022B5E9 /* StudyOverview.plist */; };
+		843B6AB825C80AF40022B5E9 /* ResourcesUI.plist in Resources */ = {isa = PBXBuildFile; fileRef = 843B6ABA25C80AF40022B5E9 /* ResourcesUI.plist */; };
 		846C695D25A83F8A002B9F42 /* AppDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846C695C25A83F8A002B9F42 /* AppDetails.swift */; };
 		846C698A25A872D8002B9F42 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 846C698C25A872D8002B9F42 /* Localizable.strings */; };
 		84AFCF0325C6E4D7000A9712 /* Resources.plist in Resources */ = {isa = PBXBuildFile; fileRef = 84AFCF0525C6E4D7000A9712 /* Resources.plist */; };
 		84E8D61724D161B6008C38D5 /* PDFCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E8D61624D161B6008C38D5 /* PDFCreator.swift */; };
-		89055913230148FD005FB284 /* Branding.plist in Resources */ = {isa = PBXBuildFile; fileRef = 89055912230148FD005FB284 /* Branding.plist */; };
 		8905591B230149AD005FB284 /* HPHCUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8905591A230149AD005FB284 /* HPHCUITests.swift */; };
 		890559262301615F005FB284 /* UITestBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 890559232301615F005FB284 /* UITestBase.swift */; };
 		890559282301616F005FB284 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 890559272301616F005FB284 /* Config.swift */; };
@@ -165,7 +170,6 @@
 		8905592C230169FF005FB284 /* LoginVCTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8905592B230169FF005FB284 /* LoginVCTests.swift */; };
 		8923429122B122DF0059F910 /* LoginAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 94B3DD2D1E6ED8E500327AE5 /* LoginAssets.xcassets */; };
 		8926D7EA2383F25C00558F4E /* KeyChain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8926D7E92383F25C00558F4E /* KeyChain.swift */; };
-		892726DC22F98E4100893A00 /* GatewayOverview.plist in Resources */ = {isa = PBXBuildFile; fileRef = 486304D51E6FE77C003CD406 /* GatewayOverview.plist */; };
 		8948349D22BB9C59000B7BFA /* HPHCSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8948349C22BB9C59000B7BFA /* HPHCSettings.swift */; };
 		8948349F22BB9D56000B7BFA /* HPHCSettings.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8948349E22BB9D56000B7BFA /* HPHCSettings.xib */; };
 		8973F76D23F6B657008F5B22 /* Branding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8973F76C23F6B657008F5B22 /* Branding.swift */; };
@@ -180,7 +184,6 @@
 		89EDB46D2271EFDF0070F16C /* ResearchKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6EF0BC3C2223D1D6004F2357 /* ResearchKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		89F2EAA923F289280026DA0B /* UIImage+Gif.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89F2EAA623F289280026DA0B /* UIImage+Gif.swift */; };
 		940577A81E767AC60043215C /* ChangePasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 940577A71E767AC60043215C /* ChangePasswordViewController.swift */; };
-		940577AC1E767C8D0043215C /* ChangePasswordData.plist in Resources */ = {isa = PBXBuildFile; fileRef = 940577AB1E767C8D0043215C /* ChangePasswordData.plist */; };
 		941909B51E52FA9B001B01C5 /* Study.swift in Sources */ = {isa = PBXBuildFile; fileRef = 941909B41E52FA9B001B01C5 /* Study.swift */; };
 		941909B81E5310D6001B01C5 /* Gateway.swift in Sources */ = {isa = PBXBuildFile; fileRef = 941909B71E5310D6001B01C5 /* Gateway.swift */; };
 		941909BB1E533AA9001B01C5 /* Overview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 941909BA1E533AA9001B01C5 /* Overview.swift */; };
@@ -206,7 +209,6 @@
 		94B3DD401E6ED8E500327AE5 /* Gateway.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 94B3DD151E6ED8E500327AE5 /* Gateway.storyboard */; };
 		94B3DD421E6ED8E500327AE5 /* NotificationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B3DD181E6ED8E500327AE5 /* NotificationTableViewCell.swift */; };
 		94B3DD431E6ED8E500327AE5 /* NotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B3DD191E6ED8E500327AE5 /* NotificationViewController.swift */; };
-		94B3DD441E6ED8E500327AE5 /* Profile.plist in Resources */ = {isa = PBXBuildFile; fileRef = 94B3DD1B1E6ED8E500327AE5 /* Profile.plist */; };
 		94B3DD451E6ED8E500327AE5 /* ProfileTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B3DD1C1E6ED8E500327AE5 /* ProfileTableViewCell.swift */; };
 		94B3DD461E6ED8E500327AE5 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B3DD1D1E6ED8E500327AE5 /* ProfileViewController.swift */; };
 		94B3DD471E6ED8E500327AE5 /* ResourcesListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B3DD1E1E6ED8E500327AE5 /* ResourcesListCell.swift */; };
@@ -221,11 +223,9 @@
 		94B3DD501E6ED8E500327AE5 /* SecondGatewayOverviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B3DD2B1E6ED8E500327AE5 /* SecondGatewayOverviewViewController.swift */; };
 		94B3DD511E6ED8E500327AE5 /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 94B3DD2C1E6ED8E500327AE5 /* Login.storyboard */; };
 		94B3DD531E6ED8E500327AE5 /* ForgotPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B3DD2F1E6ED8E500327AE5 /* ForgotPasswordViewController.swift */; };
-		94B3DD541E6ED8E500327AE5 /* SignInPlist.plist in Resources */ = {isa = PBXBuildFile; fileRef = 94B3DD301E6ED8E500327AE5 /* SignInPlist.plist */; };
 		94B3DD551E6ED8E500327AE5 /* SignInTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B3DD311E6ED8E500327AE5 /* SignInTableViewCell.swift */; };
 		94B3DD561E6ED8E500327AE5 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B3DD321E6ED8E500327AE5 /* SignInViewController.swift */; };
 		94B3DD571E6ED8E500327AE5 /* SignUpCompleteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B3DD341E6ED8E500327AE5 /* SignUpCompleteViewController.swift */; };
-		94B3DD581E6ED8E500327AE5 /* SignUpPlist.plist in Resources */ = {isa = PBXBuildFile; fileRef = 94B3DD351E6ED8E500327AE5 /* SignUpPlist.plist */; };
 		94B3DD591E6ED8E500327AE5 /* SignUpTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B3DD361E6ED8E500327AE5 /* SignUpTableViewCell.swift */; };
 		94B3DD5A1E6ED8E500327AE5 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B3DD371E6ED8E500327AE5 /* SignUpViewController.swift */; };
 		94B3DD5B1E6ED8E500327AE5 /* VerificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B3DD381E6ED8E500327AE5 /* VerificationViewController.swift */; };
@@ -321,17 +321,13 @@
 		482062511E68532300C7A7AF /* UIUtilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIUtilities.swift; sourceTree = "<group>"; };
 		482CC61D1EC5F52E00BFE8C6 /* KDCircularProgress.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KDCircularProgress.swift; sourceTree = "<group>"; };
 		4833E9DE1E7126900032D244 /* StudyHomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudyHomeViewController.swift; sourceTree = "<group>"; };
-		4833E9E21E712C2B0032D244 /* StudyOverview.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = StudyOverview.plist; sourceTree = "<group>"; };
 		484ACBF51F2896A500BCC819 /* FilterListCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterListCollectionViewCell.swift; sourceTree = "<group>"; };
-		484ACBFB1F28A82B00BCC819 /* FilterData.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = FilterData.plist; sourceTree = "<group>"; };
 		484ACBFF1F28BC8800BCC819 /* FilterListTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterListTableViewCell.swift; sourceTree = "<group>"; };
 		48567FE01F14FB3C00857193 /* StudyFilterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudyFilterViewController.swift; sourceTree = "<group>"; };
-		486304D51E6FE77C003CD406 /* GatewayOverview.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = GatewayOverview.plist; sourceTree = "<group>"; };
 		4884E3511E825E7D002DA0B9 /* FeedBackViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedBackViewController.swift; sourceTree = "<group>"; };
 		4884E3531E82665C002DA0B9 /* FeedBackTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedBackTableViewCell.swift; sourceTree = "<group>"; };
 		4884E3571E827E5B002DA0B9 /* ContactUsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactUsViewController.swift; sourceTree = "<group>"; };
 		4884E3591E827E6A002DA0B9 /* ContactUsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactUsTableViewCell.swift; sourceTree = "<group>"; };
-		4884E35B1E827F8F002DA0B9 /* ContactUs.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = ContactUs.plist; sourceTree = "<group>"; };
 		5635221B1914AC7BC16DFBD2 /* Pods-HPHCTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HPHCTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-HPHCTests/Pods-HPHCTests.debug.xcconfig"; sourceTree = "<group>"; };
 		6666A99A4FE2BB8CB72673EE /* Pods-FDAMS HIMSS App.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FDAMS HIMSS App.release.xcconfig"; path = "Pods/Target Support Files/Pods-FDAMS HIMSS App/Pods-FDAMS HIMSS App.release.xcconfig"; sourceTree = "<group>"; };
 		6E14F2021F0224AD00EA8D1E /* Notification.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Notification.json; sourceTree = "<group>"; };
@@ -342,7 +338,6 @@
 		6E2B25F11EAE3F1D00E2DFB2 /* ResearchContainerSegue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResearchContainerSegue.swift; sourceTree = "<group>"; };
 		6E2B25F21EAE3F1D00E2DFB2 /* ResearchContainerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResearchContainerViewController.swift; sourceTree = "<group>"; };
 		6E31DC681F17AF9C00C3E1DB /* InEligibilityStepViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InEligibilityStepViewController.swift; sourceTree = "<group>"; };
-		6E417AD21F4D5DA1007F27DA /* AnanomousFilterData.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = AnanomousFilterData.plist; sourceTree = "<group>"; };
 		6E4CECB51F31B41C005E0832 /* PinterestLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PinterestLayout.swift; sourceTree = "<group>"; };
 		6E4D86DB1F389DF1003DBDD8 /* SearchBarView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SearchBarView.xib; sourceTree = "<group>"; };
 		6E4D86DF1F38A740003DBDD8 /* SearchBarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchBarView.swift; sourceTree = "<group>"; };
@@ -435,7 +430,6 @@
 		6EE93DB71E93C8850027A5DC /* Activities.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Activities.plist; sourceTree = "<group>"; };
 		6EE93DB81E93C8850027A5DC /* ActivitiesTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivitiesTableViewCell.swift; sourceTree = "<group>"; };
 		6EE93DB91E93C8850027A5DC /* ActivitiesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivitiesViewController.swift; sourceTree = "<group>"; };
-		6EE93DBB1E93C8850027A5DC /* ResourcesUI.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = ResourcesUI.plist; sourceTree = "<group>"; };
 		6EE93DBC1E93C8850027A5DC /* ResourcesTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResourcesTableViewCell.swift; sourceTree = "<group>"; };
 		6EE93DBD1E93C8850027A5DC /* ResourcesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResourcesViewController.swift; sourceTree = "<group>"; };
 		6EEB0AF91FD2811100136EAA /* Labkey_Activity_Latest3.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Labkey_Activity_Latest3.json; sourceTree = "<group>"; };
@@ -478,6 +472,54 @@
 		7878B31E2216C6E20052FC23 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7BDC002620C7855C409516D3 /* Pods-HPHC.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HPHC.debug.xcconfig"; path = "Pods/Target Support Files/Pods-HPHC/Pods-HPHC.debug.xcconfig"; sourceTree = "<group>"; };
 		80162EB0842AABC6DBF4AC42 /* Pods_FDAMS_HIMSS_App.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FDAMS_HIMSS_App.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		843B6A5D25C7E1950022B5E9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Base; path = Base.lproj/Branding.plist; sourceTree = "<group>"; };
+		843B6A6325C7E1C00022B5E9 /* es-419 */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-419"; path = "es-419.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
+		843B6A6425C7E1C40022B5E9 /* es-419 */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-419"; path = "es-419.lproj/Main.strings"; sourceTree = "<group>"; };
+		843B6A6625C7E1CE0022B5E9 /* es-419 */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "es-419"; path = "es-419.lproj/Branding.plist"; sourceTree = "<group>"; };
+		843B6A6C25C7E1D10022B5E9 /* es-419 */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "es-419"; path = "es-419.lproj/Resources.plist"; sourceTree = "<group>"; };
+		843B6A6D25C7E1D20022B5E9 /* es-419 */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-419"; path = "es-419.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		843B6A7025C8089D0022B5E9 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = es; path = es.lproj/Branding.plist; sourceTree = "<group>"; };
+		843B6A7125C808A00022B5E9 /* es_MX */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = es_MX; path = es_MX.lproj/Branding.plist; sourceTree = "<group>"; };
+		843B6A7325C808CA0022B5E9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Base; path = Base.lproj/Profile.plist; sourceTree = "<group>"; };
+		843B6A7525C808D10022B5E9 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = es; path = es.lproj/Profile.plist; sourceTree = "<group>"; };
+		843B6A7625C808D40022B5E9 /* es-419 */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "es-419"; path = "es-419.lproj/Profile.plist"; sourceTree = "<group>"; };
+		843B6A7725C808D50022B5E9 /* es_MX */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = es_MX; path = es_MX.lproj/Profile.plist; sourceTree = "<group>"; };
+		843B6A7925C808E00022B5E9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Base; path = Base.lproj/ContactUs.plist; sourceTree = "<group>"; };
+		843B6A7D25C808E80022B5E9 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = es; path = es.lproj/ContactUs.plist; sourceTree = "<group>"; };
+		843B6A7E25C808EA0022B5E9 /* es-419 */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "es-419"; path = "es-419.lproj/ContactUs.plist"; sourceTree = "<group>"; };
+		843B6A7F25C808EC0022B5E9 /* es_MX */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = es_MX; path = es_MX.lproj/ContactUs.plist; sourceTree = "<group>"; };
+		843B6A8325C8095B0022B5E9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Base; path = Base.lproj/FilterData.plist; sourceTree = "<group>"; };
+		843B6A8525C809620022B5E9 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = es; path = es.lproj/FilterData.plist; sourceTree = "<group>"; };
+		843B6A8625C809640022B5E9 /* es-419 */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "es-419"; path = "es-419.lproj/FilterData.plist"; sourceTree = "<group>"; };
+		843B6A8725C809660022B5E9 /* es_MX */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = es_MX; path = es_MX.lproj/FilterData.plist; sourceTree = "<group>"; };
+		843B6A8925C8097D0022B5E9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Base; path = Base.lproj/AnanomousFilterData.plist; sourceTree = "<group>"; };
+		843B6A8D25C809830022B5E9 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = es; path = es.lproj/AnanomousFilterData.plist; sourceTree = "<group>"; };
+		843B6A8E25C809860022B5E9 /* es-419 */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "es-419"; path = "es-419.lproj/AnanomousFilterData.plist"; sourceTree = "<group>"; };
+		843B6A8F25C809870022B5E9 /* es_MX */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = es_MX; path = es_MX.lproj/AnanomousFilterData.plist; sourceTree = "<group>"; };
+		843B6A9125C809910022B5E9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Base; path = Base.lproj/ChangePasswordData.plist; sourceTree = "<group>"; };
+		843B6A9325C809980022B5E9 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = es; path = es.lproj/ChangePasswordData.plist; sourceTree = "<group>"; };
+		843B6A9425C8099B0022B5E9 /* es-419 */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "es-419"; path = "es-419.lproj/ChangePasswordData.plist"; sourceTree = "<group>"; };
+		843B6A9525C8099E0022B5E9 /* es_MX */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = es_MX; path = es_MX.lproj/ChangePasswordData.plist; sourceTree = "<group>"; };
+		843B6A9925C809E20022B5E9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Base; path = Base.lproj/GatewayOverview.plist; sourceTree = "<group>"; };
+		843B6A9D25C809E90022B5E9 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = es; path = es.lproj/GatewayOverview.plist; sourceTree = "<group>"; };
+		843B6A9E25C809EC0022B5E9 /* es-419 */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "es-419"; path = "es-419.lproj/GatewayOverview.plist"; sourceTree = "<group>"; };
+		843B6A9F25C809EE0022B5E9 /* es_MX */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = es_MX; path = es_MX.lproj/GatewayOverview.plist; sourceTree = "<group>"; };
+		843B6AA325C80A170022B5E9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Base; path = Base.lproj/SignInPlist.plist; sourceTree = "<group>"; };
+		843B6AA525C80A270022B5E9 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = es; path = es.lproj/SignInPlist.plist; sourceTree = "<group>"; };
+		843B6AA625C80A2A0022B5E9 /* es-419 */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "es-419"; path = "es-419.lproj/SignInPlist.plist"; sourceTree = "<group>"; };
+		843B6AA725C80A2B0022B5E9 /* es_MX */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = es_MX; path = es_MX.lproj/SignInPlist.plist; sourceTree = "<group>"; };
+		843B6AA925C80A4A0022B5E9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Base; path = Base.lproj/SignUpPlist.plist; sourceTree = "<group>"; };
+		843B6AAB25C80A560022B5E9 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = es; path = es.lproj/SignUpPlist.plist; sourceTree = "<group>"; };
+		843B6AAC25C80A590022B5E9 /* es-419 */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "es-419"; path = "es-419.lproj/SignUpPlist.plist"; sourceTree = "<group>"; };
+		843B6AAD25C80A5B0022B5E9 /* es_MX */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = es_MX; path = es_MX.lproj/SignUpPlist.plist; sourceTree = "<group>"; };
+		843B6AAF25C80AAF0022B5E9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Base; path = Base.lproj/StudyOverview.plist; sourceTree = "<group>"; };
+		843B6AB325C80AB80022B5E9 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = es; path = es.lproj/StudyOverview.plist; sourceTree = "<group>"; };
+		843B6AB425C80ABA0022B5E9 /* es-419 */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "es-419"; path = "es-419.lproj/StudyOverview.plist"; sourceTree = "<group>"; };
+		843B6AB525C80ABC0022B5E9 /* es_MX */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = es_MX; path = es_MX.lproj/StudyOverview.plist; sourceTree = "<group>"; };
+		843B6AB925C80AF40022B5E9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Base; path = Base.lproj/ResourcesUI.plist; sourceTree = "<group>"; };
+		843B6ABD25C80AFD0022B5E9 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = es; path = es.lproj/ResourcesUI.plist; sourceTree = "<group>"; };
+		843B6ABE25C80B000022B5E9 /* es-419 */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "es-419"; path = "es-419.lproj/ResourcesUI.plist"; sourceTree = "<group>"; };
+		843B6ABF25C80B030022B5E9 /* es_MX */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = es_MX; path = es_MX.lproj/ResourcesUI.plist; sourceTree = "<group>"; };
 		846C695B25A83F49002B9F42 /* Default.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Default.xcconfig; sourceTree = "<group>"; };
 		846C695C25A83F8A002B9F42 /* AppDetails.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDetails.swift; sourceTree = "<group>"; };
 		846C697D25A86360002B9F42 /* Staging.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Staging.xcconfig; sourceTree = "<group>"; };
@@ -488,7 +530,6 @@
 		84AFCF0D25C6E70E000A9712 /* es_MX */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = es_MX; path = es_MX.lproj/Resources.plist; sourceTree = "<group>"; };
 		84E8D61624D161B6008C38D5 /* PDFCreator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFCreator.swift; sourceTree = "<group>"; };
 		87A4F9AAE7A1B8C36C9FBDDF /* Pods_HPHC_QA.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HPHC_QA.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		89055912230148FD005FB284 /* Branding.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Branding.plist; sourceTree = "<group>"; };
 		89055918230149AD005FB284 /* HPHCUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HPHCUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8905591A230149AD005FB284 /* HPHCUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HPHCUITests.swift; sourceTree = "<group>"; };
 		8905591C230149AD005FB284 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -509,7 +550,6 @@
 		8B3AB6BB340BA150D5A31DFA /* Pods_LimitJIA.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LimitJIA.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9052BDFCCBA34907500A7158 /* Pods-HPHC QA.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HPHC QA.debug.xcconfig"; path = "Pods/Target Support Files/Pods-HPHC QA/Pods-HPHC QA.debug.xcconfig"; sourceTree = "<group>"; };
 		940577A71E767AC60043215C /* ChangePasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChangePasswordViewController.swift; sourceTree = "<group>"; };
-		940577AB1E767C8D0043215C /* ChangePasswordData.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = ChangePasswordData.plist; sourceTree = "<group>"; };
 		941909B41E52FA9B001B01C5 /* Study.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Study.swift; sourceTree = "<group>"; };
 		941909B71E5310D6001B01C5 /* Gateway.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Gateway.swift; sourceTree = "<group>"; };
 		941909BA1E533AA9001B01C5 /* Overview.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Overview.swift; sourceTree = "<group>"; };
@@ -536,7 +576,6 @@
 		94B3DD151E6ED8E500327AE5 /* Gateway.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Gateway.storyboard; sourceTree = "<group>"; };
 		94B3DD181E6ED8E500327AE5 /* NotificationTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationTableViewCell.swift; sourceTree = "<group>"; };
 		94B3DD191E6ED8E500327AE5 /* NotificationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationViewController.swift; sourceTree = "<group>"; };
-		94B3DD1B1E6ED8E500327AE5 /* Profile.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Profile.plist; sourceTree = "<group>"; };
 		94B3DD1C1E6ED8E500327AE5 /* ProfileTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileTableViewCell.swift; sourceTree = "<group>"; };
 		94B3DD1D1E6ED8E500327AE5 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		94B3DD1E1E6ED8E500327AE5 /* ResourcesListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResourcesListCell.swift; sourceTree = "<group>"; };
@@ -554,11 +593,9 @@
 		94B3DD2C1E6ED8E500327AE5 /* Login.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
 		94B3DD2D1E6ED8E500327AE5 /* LoginAssets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = LoginAssets.xcassets; sourceTree = "<group>"; };
 		94B3DD2F1E6ED8E500327AE5 /* ForgotPasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForgotPasswordViewController.swift; sourceTree = "<group>"; };
-		94B3DD301E6ED8E500327AE5 /* SignInPlist.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = SignInPlist.plist; sourceTree = "<group>"; };
 		94B3DD311E6ED8E500327AE5 /* SignInTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignInTableViewCell.swift; sourceTree = "<group>"; };
 		94B3DD321E6ED8E500327AE5 /* SignInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		94B3DD341E6ED8E500327AE5 /* SignUpCompleteViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpCompleteViewController.swift; sourceTree = "<group>"; };
-		94B3DD351E6ED8E500327AE5 /* SignUpPlist.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = SignUpPlist.plist; sourceTree = "<group>"; };
 		94B3DD361E6ED8E500327AE5 /* SignUpTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpTableViewCell.swift; sourceTree = "<group>"; };
 		94B3DD371E6ED8E500327AE5 /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		94B3DD381E6ED8E500327AE5 /* VerificationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VerificationViewController.swift; sourceTree = "<group>"; };
@@ -1462,17 +1499,17 @@
 			children = (
 				6EBC2E761E94FB5300828CA1 /* StudyDashboard.plist */,
 				6EA889C41E701E8200F160A1 /* Confirmation.plist */,
-				94B3DD1B1E6ED8E500327AE5 /* Profile.plist */,
-				4884E35B1E827F8F002DA0B9 /* ContactUs.plist */,
-				484ACBFB1F28A82B00BCC819 /* FilterData.plist */,
-				6E417AD21F4D5DA1007F27DA /* AnanomousFilterData.plist */,
-				940577AB1E767C8D0043215C /* ChangePasswordData.plist */,
-				486304D51E6FE77C003CD406 /* GatewayOverview.plist */,
-				94B3DD301E6ED8E500327AE5 /* SignInPlist.plist */,
-				94B3DD351E6ED8E500327AE5 /* SignUpPlist.plist */,
-				4833E9E21E712C2B0032D244 /* StudyOverview.plist */,
+				843B6A7425C808CA0022B5E9 /* Profile.plist */,
+				843B6A7A25C808E00022B5E9 /* ContactUs.plist */,
+				843B6A8425C8095B0022B5E9 /* FilterData.plist */,
+				843B6A8A25C8097D0022B5E9 /* AnanomousFilterData.plist */,
+				843B6A9225C809910022B5E9 /* ChangePasswordData.plist */,
+				843B6A9A25C809E20022B5E9 /* GatewayOverview.plist */,
+				843B6AA425C80A170022B5E9 /* SignInPlist.plist */,
+				843B6AAA25C80A4A0022B5E9 /* SignUpPlist.plist */,
+				843B6AB025C80AAF0022B5E9 /* StudyOverview.plist */,
 				6EE93DB71E93C8850027A5DC /* Activities.plist */,
-				6EE93DBB1E93C8850027A5DC /* ResourcesUI.plist */,
+				843B6ABA25C80AF40022B5E9 /* ResourcesUI.plist */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -1573,7 +1610,7 @@
 			isa = PBXGroup;
 			children = (
 				6F41B85923AC92F900D4F624 /* AppConfiguration.plist */,
-				89055912230148FD005FB284 /* Branding.plist */,
+				843B6A5E25C7E1950022B5E9 /* Branding.plist */,
 			);
 			path = FDA;
 			sourceTree = "<group>";
@@ -2008,6 +2045,7 @@
 				zh_CN,
 				zh_HK,
 				zh_TW,
+				"es-419",
 			);
 			mainGroup = 6E7D2D4D1E433E8700763D4C;
 			productRefGroup = 6E7D2D571E433E8700763D4C /* Products */;
@@ -2061,7 +2099,7 @@
 				6E7D2D8E1E43445600763D4C /* UserPreferences.plist in Resources */,
 				9450598F1F29FA2C007906A7 /* AppGlossary.pdf in Resources */,
 				6ED593731F011D5B00AC3636 /* Verdana Italic.ttf in Resources */,
-				94B3DD581E6ED8E500327AE5 /* SignUpPlist.plist in Resources */,
+				843B6AA825C80A4A0022B5E9 /* SignUpPlist.plist in Resources */,
 				6ED9D5DB1E5B2D5200A0719D /* ActiveTask.json in Resources */,
 				6F52327E23D9883800995A78 /* ActivityMetadata TEST1.json in Resources */,
 				6F41B85C23AC92F900D4F624 /* AppConfiguration.plist in Resources */,
@@ -2071,7 +2109,7 @@
 				6E5F751B1EF4109500ABA308 /* Labkey_Activity11.json in Resources */,
 				94B3DD5D1E6ED8E500327AE5 /* Study.xcassets in Resources */,
 				6ED5B05B1FCD551600925352 /* Units.json in Resources */,
-				6EE93DCC1E93C8850027A5DC /* ResourcesUI.plist in Resources */,
+				843B6AB825C80AF40022B5E9 /* ResourcesUI.plist in Resources */,
 				6EBC2E811E94FB5300828CA1 /* StudyDashboard.plist in Resources */,
 				89831393224399FC0000BEB5 /* ResourceList.json in Resources */,
 				846C698A25A872D8002B9F42 /* Localizable.strings in Resources */,
@@ -2084,14 +2122,14 @@
 				6EF05A991E4DC36400CD7661 /* StepProvider.plist in Resources */,
 				946CA5ED1E72DCA300CC8535 /* ProgressView.xib in Resources */,
 				6ECF75D01E6EF140008C935E /* FetalKickCounter.storyboard in Resources */,
-				89055913230148FD005FB284 /* Branding.plist in Resources */,
-				940577AC1E767C8D0043215C /* ChangePasswordData.plist in Resources */,
+				843B6A5C25C7E1950022B5E9 /* Branding.plist in Resources */,
+				843B6A9025C809910022B5E9 /* ChangePasswordData.plist in Resources */,
 				6EDABCCE1EBA41EE005F3AA6 /* Labkey_Activity.json in Resources */,
 				6ED134381E5F1B110090C976 /* Consent.json in Resources */,
-				94B3DD541E6ED8E500327AE5 /* SignInPlist.plist in Resources */,
+				843B6AA225C80A170022B5E9 /* SignInPlist.plist in Resources */,
 				6EDDB65A1EE05E4C00C79337 /* NewProgressView.xib in Resources */,
 				6EDDB6611EE05FDC00C79337 /* fda_preload.gif in Resources */,
-				4833E9E31E712C2B0032D244 /* StudyOverview.plist in Resources */,
+				843B6AAE25C80AAF0022B5E9 /* StudyOverview.plist in Resources */,
 				94B3DD511E6ED8E500327AE5 /* Login.storyboard in Resources */,
 				942591C41EA8A2650010D892 /* ActivitySchedules.xib in Resources */,
 				6F10BB19234DE45D006388E2 /* Activity_New_Other_Form.json in Resources */,
@@ -2100,10 +2138,10 @@
 				6E14F2031F0224AD00EA8D1E /* Notification.json in Resources */,
 				89893F0522B1115300A846CE /* Main.storyboard in Resources */,
 				6F0221792264729E00A2DBC8 /* TextChoiceCell.xib in Resources */,
-				484ACBFC1F28A82B00BCC819 /* FilterData.plist in Resources */,
+				843B6A8225C8095B0022B5E9 /* FilterData.plist in Resources */,
 				6EE93DC91E93C8850027A5DC /* Activities.plist in Resources */,
 				6ECF75D21E6EF1E7008C935E /* FetalKickCounter.xcassets in Resources */,
-				4884E35C1E827F8F002DA0B9 /* ContactUs.plist in Resources */,
+				843B6A7825C808E00022B5E9 /* ContactUs.plist in Resources */,
 				6EB740181E9CD38100A4C773 /* FetalKickTest.json in Resources */,
 				94B3DD401E6ED8E500327AE5 /* Gateway.storyboard in Resources */,
 				6EC129241E64624F00B90167 /* Acivity_Question.json in Resources */,
@@ -2111,10 +2149,10 @@
 				6EED31A31F1CD7B300A7AF56 /* LatestActive_1B.json in Resources */,
 				6EEB0AFC1FD2811700136EAA /* Labkey_Activity_Latest3.json in Resources */,
 				6EE8E4D91F17459200028853 /* Eligibility_1B.json in Resources */,
-				892726DC22F98E4100893A00 /* GatewayOverview.plist in Resources */,
-				94B3DD441E6ED8E500327AE5 /* Profile.plist in Resources */,
+				843B6A9825C809E20022B5E9 /* GatewayOverview.plist in Resources */,
+				843B6A7225C808CA0022B5E9 /* Profile.plist in Resources */,
 				8948349F22BB9D56000B7BFA /* HPHCSettings.xib in Resources */,
-				6E417AD31F4D5DA1007F27DA /* AnanomousFilterData.plist in Resources */,
+				843B6A8825C8097D0022B5E9 /* AnanomousFilterData.plist in Resources */,
 				6E7D2D8C1E4340B200763D4C /* UserProfile.plist in Resources */,
 				6E7D2D901E43526100763D4C /* Register.plist in Resources */,
 				6F5AAF80225DE699002C8FF6 /* Activity_Metadata_Other.json in Resources */,
@@ -2452,6 +2490,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				6E7D2D5E1E433E8800763D4C /* Base */,
+				843B6A6425C7E1C40022B5E9 /* es-419 */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -2460,8 +2499,130 @@
 			isa = PBXVariantGroup;
 			children = (
 				6E7D2D631E433E8800763D4C /* Base */,
+				843B6A6325C7E1C00022B5E9 /* es-419 */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		843B6A5E25C7E1950022B5E9 /* Branding.plist */ = {
+			isa = PBXVariantGroup;
+			children = (
+				843B6A5D25C7E1950022B5E9 /* Base */,
+				843B6A6625C7E1CE0022B5E9 /* es-419 */,
+				843B6A7025C8089D0022B5E9 /* es */,
+				843B6A7125C808A00022B5E9 /* es_MX */,
+			);
+			name = Branding.plist;
+			sourceTree = "<group>";
+		};
+		843B6A7425C808CA0022B5E9 /* Profile.plist */ = {
+			isa = PBXVariantGroup;
+			children = (
+				843B6A7325C808CA0022B5E9 /* Base */,
+				843B6A7525C808D10022B5E9 /* es */,
+				843B6A7625C808D40022B5E9 /* es-419 */,
+				843B6A7725C808D50022B5E9 /* es_MX */,
+			);
+			name = Profile.plist;
+			sourceTree = "<group>";
+		};
+		843B6A7A25C808E00022B5E9 /* ContactUs.plist */ = {
+			isa = PBXVariantGroup;
+			children = (
+				843B6A7925C808E00022B5E9 /* Base */,
+				843B6A7D25C808E80022B5E9 /* es */,
+				843B6A7E25C808EA0022B5E9 /* es-419 */,
+				843B6A7F25C808EC0022B5E9 /* es_MX */,
+			);
+			name = ContactUs.plist;
+			sourceTree = "<group>";
+		};
+		843B6A8425C8095B0022B5E9 /* FilterData.plist */ = {
+			isa = PBXVariantGroup;
+			children = (
+				843B6A8325C8095B0022B5E9 /* Base */,
+				843B6A8525C809620022B5E9 /* es */,
+				843B6A8625C809640022B5E9 /* es-419 */,
+				843B6A8725C809660022B5E9 /* es_MX */,
+			);
+			name = FilterData.plist;
+			sourceTree = "<group>";
+		};
+		843B6A8A25C8097D0022B5E9 /* AnanomousFilterData.plist */ = {
+			isa = PBXVariantGroup;
+			children = (
+				843B6A8925C8097D0022B5E9 /* Base */,
+				843B6A8D25C809830022B5E9 /* es */,
+				843B6A8E25C809860022B5E9 /* es-419 */,
+				843B6A8F25C809870022B5E9 /* es_MX */,
+			);
+			name = AnanomousFilterData.plist;
+			sourceTree = "<group>";
+		};
+		843B6A9225C809910022B5E9 /* ChangePasswordData.plist */ = {
+			isa = PBXVariantGroup;
+			children = (
+				843B6A9125C809910022B5E9 /* Base */,
+				843B6A9325C809980022B5E9 /* es */,
+				843B6A9425C8099B0022B5E9 /* es-419 */,
+				843B6A9525C8099E0022B5E9 /* es_MX */,
+			);
+			name = ChangePasswordData.plist;
+			sourceTree = "<group>";
+		};
+		843B6A9A25C809E20022B5E9 /* GatewayOverview.plist */ = {
+			isa = PBXVariantGroup;
+			children = (
+				843B6A9925C809E20022B5E9 /* Base */,
+				843B6A9D25C809E90022B5E9 /* es */,
+				843B6A9E25C809EC0022B5E9 /* es-419 */,
+				843B6A9F25C809EE0022B5E9 /* es_MX */,
+			);
+			name = GatewayOverview.plist;
+			sourceTree = "<group>";
+		};
+		843B6AA425C80A170022B5E9 /* SignInPlist.plist */ = {
+			isa = PBXVariantGroup;
+			children = (
+				843B6AA325C80A170022B5E9 /* Base */,
+				843B6AA525C80A270022B5E9 /* es */,
+				843B6AA625C80A2A0022B5E9 /* es-419 */,
+				843B6AA725C80A2B0022B5E9 /* es_MX */,
+			);
+			name = SignInPlist.plist;
+			sourceTree = "<group>";
+		};
+		843B6AAA25C80A4A0022B5E9 /* SignUpPlist.plist */ = {
+			isa = PBXVariantGroup;
+			children = (
+				843B6AA925C80A4A0022B5E9 /* Base */,
+				843B6AAB25C80A560022B5E9 /* es */,
+				843B6AAC25C80A590022B5E9 /* es-419 */,
+				843B6AAD25C80A5B0022B5E9 /* es_MX */,
+			);
+			name = SignUpPlist.plist;
+			sourceTree = "<group>";
+		};
+		843B6AB025C80AAF0022B5E9 /* StudyOverview.plist */ = {
+			isa = PBXVariantGroup;
+			children = (
+				843B6AAF25C80AAF0022B5E9 /* Base */,
+				843B6AB325C80AB80022B5E9 /* es */,
+				843B6AB425C80ABA0022B5E9 /* es-419 */,
+				843B6AB525C80ABC0022B5E9 /* es_MX */,
+			);
+			name = StudyOverview.plist;
+			sourceTree = "<group>";
+		};
+		843B6ABA25C80AF40022B5E9 /* ResourcesUI.plist */ = {
+			isa = PBXVariantGroup;
+			children = (
+				843B6AB925C80AF40022B5E9 /* Base */,
+				843B6ABD25C80AFD0022B5E9 /* es */,
+				843B6ABE25C80B000022B5E9 /* es-419 */,
+				843B6ABF25C80B030022B5E9 /* es_MX */,
+			);
+			name = ResourcesUI.plist;
 			sourceTree = "<group>";
 		};
 		846C698C25A872D8002B9F42 /* Localizable.strings */ = {
@@ -2469,6 +2630,7 @@
 			children = (
 				846C698B25A872D8002B9F42 /* en */,
 				846C698F25A872E4002B9F42 /* es */,
+				843B6A6D25C7E1D20022B5E9 /* es-419 */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
@@ -2479,6 +2641,7 @@
 				84AFCF0425C6E4D7000A9712 /* Base */,
 				84AFCF0A25C6E519000A9712 /* es */,
 				84AFCF0D25C6E70E000A9712 /* es_MX */,
+				843B6A6C25C7E1D10022B5E9 /* es-419 */,
 			);
 			name = Resources.plist;
 			sourceTree = "<group>";

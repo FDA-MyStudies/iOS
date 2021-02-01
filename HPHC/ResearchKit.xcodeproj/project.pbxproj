@@ -924,6 +924,7 @@
 		8419D66D1FB73CC80088D7E5 /* ORKWebViewStep.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORKWebViewStep.m; sourceTree = "<group>"; };
 		8419D6701FB73EC60088D7E5 /* ORKWebViewStepViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORKWebViewStepViewController.h; sourceTree = "<group>"; };
 		8419D6711FB73EC60088D7E5 /* ORKWebViewStepViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORKWebViewStepViewController.m; sourceTree = "<group>"; };
+		843B6A6525C7E1CA0022B5E9 /* es-419 */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-419"; path = "es-419.lproj/ResearchKit.strings"; sourceTree = "<group>"; };
 		861610BF1A8D8EDD00245F7A /* Artwork.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Artwork.xcassets; sourceTree = "<group>"; };
 		861D11A71AA691BB003C98A7 /* ORKScaleSliderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORKScaleSliderView.h; sourceTree = "<group>"; };
 		861D11A81AA691BB003C98A7 /* ORKScaleSliderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORKScaleSliderView.m; sourceTree = "<group>"; };
@@ -4017,6 +4018,7 @@
 				B1B34A051AA10EDF005FAD66 /* ca */,
 				B1B34A061AA10EE4005FAD66 /* ar */,
 				B1B34A061AABBCCDDEEFFAAA /* no */,
+				843B6A6525C7E1CA0022B5E9 /* es-419 */,
 			);
 			name = ResearchKit.strings;
 			sourceTree = "<group>";

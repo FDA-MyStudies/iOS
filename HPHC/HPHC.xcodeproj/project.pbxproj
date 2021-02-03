@@ -38,8 +38,6 @@
 		6E7D2D5C1E433E8800763D4C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E7D2D5B1E433E8800763D4C /* ViewController.swift */; };
 		6E7D2D8A1E43400100763D4C /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E7D2D891E43400100763D4C /* User.swift */; };
 		6E7D2D8C1E4340B200763D4C /* UserProfile.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6E7D2D8B1E4340B200763D4C /* UserProfile.plist */; };
-		6E7D2D8E1E43445600763D4C /* UserPreferences.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6E7D2D8D1E43445600763D4C /* UserPreferences.plist */; };
-		6E7D2D901E43526100763D4C /* Register.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6E7D2D8F1E43526100763D4C /* Register.plist */; };
 		6E7DC76D1F69479C001A05B6 /* ActivityFilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E7DC76B1F69479C001A05B6 /* ActivityFilterView.swift */; };
 		6E7DC76E1F69479C001A05B6 /* ActivityFilterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6E7DC76C1F69479C001A05B6 /* ActivityFilterView.xib */; };
 		6E80BC041FB04350008C9B8C /* Labkey_Activity_Latest2.json in Resources */ = {isa = PBXBuildFile; fileRef = 6E80BC011FB04340008C9B8C /* Labkey_Activity_Latest2.json */; };
@@ -53,7 +51,6 @@
 		6EA889BC1E6FD16B00F160A1 /* ConfirmationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EA889BB1E6FD16B00F160A1 /* ConfirmationViewController.swift */; };
 		6EA889BE1E6FD20000F160A1 /* ConfirmationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EA889BD1E6FD20000F160A1 /* ConfirmationTableViewCell.swift */; };
 		6EA889C01E6FD22800F160A1 /* ConfirmationOptionalTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EA889BF1E6FD22800F160A1 /* ConfirmationOptionalTableViewCell.swift */; };
-		6EA889C51E701E8200F160A1 /* Confirmation.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6EA889C41E701E8200F160A1 /* Confirmation.plist */; };
 		6EAA048B1FAF4C6E00214D03 /* Labkey_Activity_Latest.json in Resources */ = {isa = PBXBuildFile; fileRef = 6EAA04881FAF4C6A00214D03 /* Labkey_Activity_Latest.json */; };
 		6EABD0331E56FE2000623D94 /* TaskSchema.json in Resources */ = {isa = PBXBuildFile; fileRef = 6EABD0321E56FE2000623D94 /* TaskSchema.json */; };
 		6EB7187C1E77C01900E293EF /* Encoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EB7187B1E77C01900E293EF /* Encoder.swift */; };
@@ -159,6 +156,9 @@
 		843B6AA825C80A4A0022B5E9 /* SignUpPlist.plist in Resources */ = {isa = PBXBuildFile; fileRef = 843B6AAA25C80A4A0022B5E9 /* SignUpPlist.plist */; };
 		843B6AAE25C80AAF0022B5E9 /* StudyOverview.plist in Resources */ = {isa = PBXBuildFile; fileRef = 843B6AB025C80AAF0022B5E9 /* StudyOverview.plist */; };
 		843B6AB825C80AF40022B5E9 /* ResourcesUI.plist in Resources */ = {isa = PBXBuildFile; fileRef = 843B6ABA25C80AF40022B5E9 /* ResourcesUI.plist */; };
+		843B6AC625C810520022B5E9 /* Register.plist in Resources */ = {isa = PBXBuildFile; fileRef = 843B6AC825C810520022B5E9 /* Register.plist */; };
+		843B6ACC25C810C30022B5E9 /* UserPreferences.plist in Resources */ = {isa = PBXBuildFile; fileRef = 843B6ACE25C810C30022B5E9 /* UserPreferences.plist */; };
+		843B6AD625C814840022B5E9 /* Confirmation.plist in Resources */ = {isa = PBXBuildFile; fileRef = 843B6AD825C814840022B5E9 /* Confirmation.plist */; };
 		846C695D25A83F8A002B9F42 /* AppDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846C695C25A83F8A002B9F42 /* AppDetails.swift */; };
 		846C698A25A872D8002B9F42 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 846C698C25A872D8002B9F42 /* Localizable.strings */; };
 		84AFCF0325C6E4D7000A9712 /* Resources.plist in Resources */ = {isa = PBXBuildFile; fileRef = 84AFCF0525C6E4D7000A9712 /* Resources.plist */; };
@@ -354,8 +354,6 @@
 		6E7D2D651E433E8800763D4C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6E7D2D891E43400100763D4C /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		6E7D2D8B1E4340B200763D4C /* UserProfile.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = UserProfile.plist; sourceTree = "<group>"; };
-		6E7D2D8D1E43445600763D4C /* UserPreferences.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = UserPreferences.plist; sourceTree = "<group>"; };
-		6E7D2D8F1E43526100763D4C /* Register.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Register.plist; sourceTree = "<group>"; };
 		6E7DC76B1F69479C001A05B6 /* ActivityFilterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityFilterView.swift; sourceTree = "<group>"; };
 		6E7DC76C1F69479C001A05B6 /* ActivityFilterView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ActivityFilterView.xib; sourceTree = "<group>"; };
 		6E80BC011FB04340008C9B8C /* Labkey_Activity_Latest2.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Labkey_Activity_Latest2.json; sourceTree = "<group>"; };
@@ -369,7 +367,6 @@
 		6EA889BB1E6FD16B00F160A1 /* ConfirmationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfirmationViewController.swift; sourceTree = "<group>"; };
 		6EA889BD1E6FD20000F160A1 /* ConfirmationTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfirmationTableViewCell.swift; sourceTree = "<group>"; };
 		6EA889BF1E6FD22800F160A1 /* ConfirmationOptionalTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfirmationOptionalTableViewCell.swift; sourceTree = "<group>"; };
-		6EA889C41E701E8200F160A1 /* Confirmation.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Confirmation.plist; sourceTree = "<group>"; };
 		6EAA04881FAF4C6A00214D03 /* Labkey_Activity_Latest.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Labkey_Activity_Latest.json; sourceTree = "<group>"; };
 		6EABD0321E56FE2000623D94 /* TaskSchema.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = TaskSchema.json; sourceTree = "<group>"; };
 		6EB7187B1E77C01900E293EF /* Encoder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Encoder.swift; sourceTree = "<group>"; };
@@ -520,6 +517,19 @@
 		843B6ABD25C80AFD0022B5E9 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = es; path = es.lproj/ResourcesUI.plist; sourceTree = "<group>"; };
 		843B6ABE25C80B000022B5E9 /* es-419 */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "es-419"; path = "es-419.lproj/ResourcesUI.plist"; sourceTree = "<group>"; };
 		843B6ABF25C80B030022B5E9 /* es_MX */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = es_MX; path = es_MX.lproj/ResourcesUI.plist; sourceTree = "<group>"; };
+		843B6AC325C80F4E0022B5E9 /* es_MX */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es_MX; path = es_MX.lproj/Localizable.strings; sourceTree = "<group>"; };
+		843B6AC725C810520022B5E9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Base; path = Base.lproj/Register.plist; sourceTree = "<group>"; };
+		843B6AC925C810570022B5E9 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = es; path = es.lproj/Register.plist; sourceTree = "<group>"; };
+		843B6ACA25C810590022B5E9 /* es-419 */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "es-419"; path = "es-419.lproj/Register.plist"; sourceTree = "<group>"; };
+		843B6ACB25C8105A0022B5E9 /* es_MX */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = es_MX; path = es_MX.lproj/Register.plist; sourceTree = "<group>"; };
+		843B6ACD25C810C30022B5E9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Base; path = Base.lproj/UserPreferences.plist; sourceTree = "<group>"; };
+		843B6AD125C810C90022B5E9 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = es; path = es.lproj/UserPreferences.plist; sourceTree = "<group>"; };
+		843B6AD225C810CC0022B5E9 /* es-419 */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "es-419"; path = "es-419.lproj/UserPreferences.plist"; sourceTree = "<group>"; };
+		843B6AD525C810D20022B5E9 /* es_MX */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = es_MX; path = es_MX.lproj/UserPreferences.plist; sourceTree = "<group>"; };
+		843B6AD725C814840022B5E9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Base; path = Base.lproj/Confirmation.plist; sourceTree = "<group>"; };
+		843B6ADB25C8148E0022B5E9 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = es; path = es.lproj/Confirmation.plist; sourceTree = "<group>"; };
+		843B6ADC25C814900022B5E9 /* es-419 */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "es-419"; path = "es-419.lproj/Confirmation.plist"; sourceTree = "<group>"; };
+		843B6ADF25C814920022B5E9 /* es_MX */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = es_MX; path = es_MX.lproj/Confirmation.plist; sourceTree = "<group>"; };
 		846C695B25A83F49002B9F42 /* Default.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Default.xcconfig; sourceTree = "<group>"; };
 		846C695C25A83F8A002B9F42 /* AppDetails.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDetails.swift; sourceTree = "<group>"; };
 		846C697D25A86360002B9F42 /* Staging.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Staging.xcconfig; sourceTree = "<group>"; };
@@ -812,8 +822,8 @@
 			children = (
 				6E7D2D891E43400100763D4C /* User.swift */,
 				6E7D2D8B1E4340B200763D4C /* UserProfile.plist */,
-				6E7D2D8F1E43526100763D4C /* Register.plist */,
-				6E7D2D8D1E43445600763D4C /* UserPreferences.plist */,
+				843B6AC825C810520022B5E9 /* Register.plist */,
+				843B6ACE25C810C30022B5E9 /* UserPreferences.plist */,
 			);
 			path = UserModel;
 			sourceTree = "<group>";
@@ -1498,7 +1508,7 @@
 			isa = PBXGroup;
 			children = (
 				6EBC2E761E94FB5300828CA1 /* StudyDashboard.plist */,
-				6EA889C41E701E8200F160A1 /* Confirmation.plist */,
+				843B6AD825C814840022B5E9 /* Confirmation.plist */,
 				843B6A7425C808CA0022B5E9 /* Profile.plist */,
 				843B6A7A25C808E00022B5E9 /* ContactUs.plist */,
 				843B6A8425C8095B0022B5E9 /* FilterData.plist */,
@@ -2096,7 +2106,7 @@
 				89893F0622B1125300A846CE /* Assets.xcassets in Resources */,
 				6E80BC041FB04350008C9B8C /* Labkey_Activity_Latest2.json in Resources */,
 				89893F0722B112A000A846CE /* LaunchScreen.storyboard in Resources */,
-				6E7D2D8E1E43445600763D4C /* UserPreferences.plist in Resources */,
+				843B6ACC25C810C30022B5E9 /* UserPreferences.plist in Resources */,
 				9450598F1F29FA2C007906A7 /* AppGlossary.pdf in Resources */,
 				6ED593731F011D5B00AC3636 /* Verdana Italic.ttf in Resources */,
 				843B6AA825C80A4A0022B5E9 /* SignUpPlist.plist in Resources */,
@@ -2134,7 +2144,7 @@
 				942591C41EA8A2650010D892 /* ActivitySchedules.xib in Resources */,
 				6F10BB19234DE45D006388E2 /* Activity_New_Other_Form.json in Resources */,
 				94B3DD491E6ED8E500327AE5 /* StudyList.json in Resources */,
-				6EA889C51E701E8200F160A1 /* Confirmation.plist in Resources */,
+				843B6AD625C814840022B5E9 /* Confirmation.plist in Resources */,
 				6E14F2031F0224AD00EA8D1E /* Notification.json in Resources */,
 				89893F0522B1115300A846CE /* Main.storyboard in Resources */,
 				6F0221792264729E00A2DBC8 /* TextChoiceCell.xib in Resources */,
@@ -2154,7 +2164,7 @@
 				8948349F22BB9D56000B7BFA /* HPHCSettings.xib in Resources */,
 				843B6A8825C8097D0022B5E9 /* AnanomousFilterData.plist in Resources */,
 				6E7D2D8C1E4340B200763D4C /* UserProfile.plist in Resources */,
-				6E7D2D901E43526100763D4C /* Register.plist in Resources */,
+				843B6AC625C810520022B5E9 /* Register.plist in Resources */,
 				6F5AAF80225DE699002C8FF6 /* Activity_Metadata_Other.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2625,12 +2635,46 @@
 			name = ResourcesUI.plist;
 			sourceTree = "<group>";
 		};
+		843B6AC825C810520022B5E9 /* Register.plist */ = {
+			isa = PBXVariantGroup;
+			children = (
+				843B6AC725C810520022B5E9 /* Base */,
+				843B6AC925C810570022B5E9 /* es */,
+				843B6ACA25C810590022B5E9 /* es-419 */,
+				843B6ACB25C8105A0022B5E9 /* es_MX */,
+			);
+			name = Register.plist;
+			sourceTree = "<group>";
+		};
+		843B6ACE25C810C30022B5E9 /* UserPreferences.plist */ = {
+			isa = PBXVariantGroup;
+			children = (
+				843B6ACD25C810C30022B5E9 /* Base */,
+				843B6AD125C810C90022B5E9 /* es */,
+				843B6AD225C810CC0022B5E9 /* es-419 */,
+				843B6AD525C810D20022B5E9 /* es_MX */,
+			);
+			name = UserPreferences.plist;
+			sourceTree = "<group>";
+		};
+		843B6AD825C814840022B5E9 /* Confirmation.plist */ = {
+			isa = PBXVariantGroup;
+			children = (
+				843B6AD725C814840022B5E9 /* Base */,
+				843B6ADB25C8148E0022B5E9 /* es */,
+				843B6ADC25C814900022B5E9 /* es-419 */,
+				843B6ADF25C814920022B5E9 /* es_MX */,
+			);
+			name = Confirmation.plist;
+			sourceTree = "<group>";
+		};
 		846C698C25A872D8002B9F42 /* Localizable.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
 				846C698B25A872D8002B9F42 /* en */,
 				846C698F25A872E4002B9F42 /* es */,
 				843B6A6D25C7E1D20022B5E9 /* es-419 */,
+				843B6AC325C80F4E0022B5E9 /* es_MX */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";

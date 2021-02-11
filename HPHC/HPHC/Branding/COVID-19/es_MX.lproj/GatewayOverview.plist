@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<dict>
+		<key>title</key>
+		<string>Welcome</string>
+		<key>text</key>
+		<string>The FDA is pleased to offer this application to enable electronic consent for COVID-19 trials. Before you can access informed consent information for a clinical trial or study, you have to register with the app.</string>
+		<key>type</key>
+		<string>video</string>
+		<key>image</key>
+		<string>welcomeBg</string>
+		<key>videoLink</key>
+		<string></string>
+	</dict>
+</array>
+</plist>

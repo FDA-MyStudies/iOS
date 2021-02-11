@@ -1,0 +1,21 @@
+/* 
+  InfoPlist.strings
+  HPHC
+
+  Created by admin on 12/2/21.
+  Copyright © 2021 BTC. All rights reserved.
+*/
+
+"NSCameraUsageDescription"="$(PRODUCT_NAME) would like to access your camera for the task to give more accurate result.";
+"NSFaceIDUsageDescription"="$(PRODUCT_NAME) would like to use Face ID for quick and secure access to the app. ";
+"NSHealthShareUsageDescription"="$(PRODUCT_NAME) would like to access your Health App data to read data from Health to answer questions.";
+"NSHealthUpdateUsageDescription"="$(PRODUCT_NAME) would like to update your Health App data to save your responses.";
+"NSLocationAlwaysAndWhenInUseUsageDescription"="$(PRODUCT_NAME) would like to access your Location to answer location-based questions and will not result in your location automatically getting submitted as a response.";
+
+"NSLocationAlwaysUsageDescription"="$(PRODUCT_NAME) would like to access your Location to answer location-based questions and will not result in your location automatically getting submitted as a response.";
+"NSLocationWhenInUseUsageDescription"="$(PRODUCT_NAME) would like to access your Location to answer location-based questions and will not result in your location automatically getting submitted as a response.";
+"NSMicrophoneUsageDescription"="$(PRODUCT_NAME) would like to access your microphone for the task to give more accurate result.";
+"NSMotionUsageDescription"="$(PRODUCT_NAME) would like to use Motion data for the task to give more accurate result.";
+"NSSpeechRecognitionUsageDescription"="$(PRODUCT_NAME) would like to use Speech Recognition for the task to give more accurate result.";
+"NSLocationWhenInUseUsageDescription"="Hai";
+"NSLocationWhenInUseUsageDescription"="Hai";

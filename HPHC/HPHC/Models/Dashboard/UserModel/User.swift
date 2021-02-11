@@ -520,7 +520,7 @@ class UserStudyStatus{
             case .yetToJoin:
                 return "Yet To Join"
             case .inProgress:
-                return "In Progress"
+                return NSLocalizedString("In Progress", comment: "")
             case.completed:
                 return "Completed"
             case .notEligible:

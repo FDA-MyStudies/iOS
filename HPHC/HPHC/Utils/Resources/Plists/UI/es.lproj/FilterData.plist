@@ -6,12 +6,12 @@
 		<key>isHeaderAvailable</key>
 		<string>YES</string>
 		<key>headerText</key>
-		<string>Study Status</string>
+		<string>Estado del estudio</string>
 		<key>studyData</key>
 		<array>
 			<dict>
 				<key>name</key>
-				<string>Active</string>
+				<string>ACTIVO</string>
 				<key>isEnabled</key>
 				<true/>
 			</dict>
@@ -59,7 +59,7 @@
 		<array>
 			<dict>
 				<key>name</key>
-				<string>In Progress</string>
+				<string>En progreso</string>
 				<key>isEnabled</key>
 				<true/>
 			</dict>
@@ -144,18 +144,18 @@
 				<key>isEnabled</key>
 				<true/>
 			</dict>
-            <dict>
-                <key>name</key>
-                <string>Radiation-Emitting Products</string>
-                <key>isEnabled</key>
-                <true/>
-            </dict>
-            <dict>
-                <key>name</key>
-                <string>Tobacco Use</string>
-                <key>isEnabled</key>
-                <true/>
-            </dict>
+			<dict>
+				<key>name</key>
+				<string>Radiation-Emitting Products</string>
+				<key>isEnabled</key>
+				<true/>
+			</dict>
+			<dict>
+				<key>name</key>
+				<string>Tobacco Use</string>
+				<key>isEnabled</key>
+				<true/>
+			</dict>
 		</array>
 	</dict>
 </array>

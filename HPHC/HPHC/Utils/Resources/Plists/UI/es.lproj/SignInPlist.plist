@@ -4,13 +4,13 @@
 <array>
 	<dict>
 		<key>helpText</key>
-		<string>Email</string>
+		<string>Correo electronico</string>
 		<key>placeHolder</key>
-		<string>enter email</string>
+		<string>ingrese correo electrónico</string>
 	</dict>
 	<dict>
 		<key>helpText</key>
-		<string>Password</string>
+		<string>Contraseña</string>
 		<key>placeHolder</key>
 		<string>enter password</string>
 	</dict>

@@ -4,21 +4,21 @@
 <array>
 	<dict>
 		<key>helpText</key>
-		<string>First Name</string>
+		<string>Primer nombre</string>
 		<key>placeHolder</key>
-		<string>enter first name</string>
+		<string>ingrese el primer nombre</string>
 	</dict>
 	<dict>
 		<key>helpText</key>
-		<string>Email</string>
+		<string>Correo electronico</string>
 		<key>placeHolder</key>
-		<string>enter email</string>
+		<string>ingrese correo electrónico</string>
 	</dict>
 	<dict>
 		<key>helpText</key>
-		<string>Subject</string>
+		<string>Sujeto</string>
 		<key>placeHolder</key>
-		<string>enter subject</string>
+		<string>ingrese el asunto</string>
 	</dict>
 </array>
 </plist>

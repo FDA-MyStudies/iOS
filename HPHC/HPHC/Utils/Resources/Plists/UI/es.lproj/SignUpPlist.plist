@@ -4,19 +4,19 @@
 <array>
 	<dict>
 		<key>helpText</key>
-		<string>Email ID</string>
+		<string>Identificación de correo</string>
 		<key>placeHolder</key>
-		<string>enter email</string>
+		<string>ingrese correo electrónico</string>
 	</dict>
 	<dict>
 		<key>helpText</key>
-		<string>Password</string>
+		<string>Contraseña</string>
 		<key>placeHolder</key>
-		<string>add password</string>
+		<string>agregar contraseña</string>
 	</dict>
 	<dict>
 		<key>helpText</key>
-		<string>Confirm Password</string>
+		<string>Confirmar contraseña</string>
 		<key>placeHolder</key>
 		<string>confirm password</string>
 	</dict>

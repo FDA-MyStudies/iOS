@@ -349,7 +349,6 @@
 		842ECDFB25D5B07600A612DA /* NewProgressView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6EDDB6591EE05E4C00C79337 /* NewProgressView.xib */; };
 		842ECDFC25D5B07600A612DA /* fda_preload.gif in Resources */ = {isa = PBXBuildFile; fileRef = 6EDDB6601EE05FDC00C79337 /* fda_preload.gif */; };
 		842ECDFD25D5B07600A612DA /* StudyOverview.plist in Resources */ = {isa = PBXBuildFile; fileRef = 843B6AB025C80AAF0022B5E9 /* StudyOverview.plist */; };
-		842ECDFE25D5B07600A612DA /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 94B3DD2C1E6ED8E500327AE5 /* Login.storyboard */; };
 		842ECDFF25D5B07600A612DA /* ActivitySchedules.xib in Resources */ = {isa = PBXBuildFile; fileRef = 942591C31EA8A2650010D892 /* ActivitySchedules.xib */; };
 		842ECE0025D5B07600A612DA /* Activity_New_Other_Form.json in Resources */ = {isa = PBXBuildFile; fileRef = 6F10BB18234DE45D006388E2 /* Activity_New_Other_Form.json */; };
 		842ECE0125D5B07600A612DA /* StudyList.json in Resources */ = {isa = PBXBuildFile; fileRef = 94B3DD201E6ED8E500327AE5 /* StudyList.json */; };
@@ -362,7 +361,6 @@
 		842ECE0825D5B07600A612DA /* FetalKickCounter.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6ECF75D11E6EF1E7008C935E /* FetalKickCounter.xcassets */; };
 		842ECE0925D5B07600A612DA /* ContactUs.plist in Resources */ = {isa = PBXBuildFile; fileRef = 843B6A7A25C808E00022B5E9 /* ContactUs.plist */; };
 		842ECE0A25D5B07600A612DA /* FetalKickTest.json in Resources */ = {isa = PBXBuildFile; fileRef = 6EB740171E9CD38100A4C773 /* FetalKickTest.json */; };
-		842ECE0B25D5B07600A612DA /* Gateway.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 94B3DD151E6ED8E500327AE5 /* Gateway.storyboard */; };
 		842ECE0C25D5B07600A612DA /* Acivity_Question.json in Resources */ = {isa = PBXBuildFile; fileRef = 6EC129231E64624F00B90167 /* Acivity_Question.json */; };
 		842ECE0D25D5B07600A612DA /* ComprehensionFailure.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6E61BCC31F27262F00C156B9 /* ComprehensionFailure.xib */; };
 		842ECE0E25D5B07600A612DA /* LatestActive_1B.json in Resources */ = {isa = PBXBuildFile; fileRef = 6EED31A21F1CD7B300A7AF56 /* LatestActive_1B.json */; };
@@ -382,6 +380,8 @@
 		842ECE8525D5BC6100A612DA /* GatewayOverview.plist in Resources */ = {isa = PBXBuildFile; fileRef = 842ECE8725D5BC6100A612DA /* GatewayOverview.plist */; };
 		842ECEA325D5C01500A612DA /* AppConfiguration.plist in Resources */ = {isa = PBXBuildFile; fileRef = 842ECEA525D5C01500A612DA /* AppConfiguration.plist */; };
 		842ECEA925D5C05A00A612DA /* Branding.plist in Resources */ = {isa = PBXBuildFile; fileRef = 842ECEAB25D5C05A00A612DA /* Branding.plist */; };
+		842ECED525D952D500A612DA /* Gateway.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 842ECED825D952D600A612DA /* Gateway.storyboard */; };
+		842ECED625D952D600A612DA /* Gateway.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 842ECED825D952D600A612DA /* Gateway.storyboard */; };
 		843B6A5C25C7E1950022B5E9 /* Branding.plist in Resources */ = {isa = PBXBuildFile; fileRef = 843B6A5E25C7E1950022B5E9 /* Branding.plist */; };
 		843B6A7225C808CA0022B5E9 /* Profile.plist in Resources */ = {isa = PBXBuildFile; fileRef = 843B6A7425C808CA0022B5E9 /* Profile.plist */; };
 		843B6A7825C808E00022B5E9 /* ContactUs.plist in Resources */ = {isa = PBXBuildFile; fileRef = 843B6A7A25C808E00022B5E9 /* ContactUs.plist */; };
@@ -396,6 +396,8 @@
 		843B6AC625C810520022B5E9 /* Register.plist in Resources */ = {isa = PBXBuildFile; fileRef = 843B6AC825C810520022B5E9 /* Register.plist */; };
 		843B6ACC25C810C30022B5E9 /* UserPreferences.plist in Resources */ = {isa = PBXBuildFile; fileRef = 843B6ACE25C810C30022B5E9 /* UserPreferences.plist */; };
 		843B6AD625C814840022B5E9 /* Confirmation.plist in Resources */ = {isa = PBXBuildFile; fileRef = 843B6AD825C814840022B5E9 /* Confirmation.plist */; };
+		846A274E25D96CBF00224B46 /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 846A275125D96CBF00224B46 /* Login.storyboard */; };
+		846A274F25D96CBF00224B46 /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 846A275125D96CBF00224B46 /* Login.storyboard */; };
 		846C695D25A83F8A002B9F42 /* AppDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846C695C25A83F8A002B9F42 /* AppDetails.swift */; };
 		846C698A25A872D8002B9F42 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 846C698C25A872D8002B9F42 /* Localizable.strings */; };
 		84AFCF0325C6E4D7000A9712 /* Resources.plist in Resources */ = {isa = PBXBuildFile; fileRef = 84AFCF0525C6E4D7000A9712 /* Resources.plist */; };
@@ -443,7 +445,6 @@
 		9491F7F81E825F5D0018C15E /* DBHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9491F7F71E825F5D0018C15E /* DBHandler.swift */; };
 		9491F7FA1E825FA80018C15E /* DBUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9491F7F91E825FA80018C15E /* DBUser.swift */; };
 		94B3DD0B1E6EC47700327AE5 /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B3DD0A1E6EC47700327AE5 /* SplashViewController.swift */; };
-		94B3DD401E6ED8E500327AE5 /* Gateway.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 94B3DD151E6ED8E500327AE5 /* Gateway.storyboard */; };
 		94B3DD421E6ED8E500327AE5 /* NotificationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B3DD181E6ED8E500327AE5 /* NotificationTableViewCell.swift */; };
 		94B3DD431E6ED8E500327AE5 /* NotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B3DD191E6ED8E500327AE5 /* NotificationViewController.swift */; };
 		94B3DD451E6ED8E500327AE5 /* ProfileTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B3DD1C1E6ED8E500327AE5 /* ProfileTableViewCell.swift */; };
@@ -458,7 +459,6 @@
 		94B3DD4E1E6ED8E500327AE5 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B3DD291E6ED8E500327AE5 /* HomeViewController.swift */; };
 		94B3DD4F1E6ED8E500327AE5 /* PageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B3DD2A1E6ED8E500327AE5 /* PageViewController.swift */; };
 		94B3DD501E6ED8E500327AE5 /* SecondGatewayOverviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B3DD2B1E6ED8E500327AE5 /* SecondGatewayOverviewViewController.swift */; };
-		94B3DD511E6ED8E500327AE5 /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 94B3DD2C1E6ED8E500327AE5 /* Login.storyboard */; };
 		94B3DD531E6ED8E500327AE5 /* ForgotPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B3DD2F1E6ED8E500327AE5 /* ForgotPasswordViewController.swift */; };
 		94B3DD551E6ED8E500327AE5 /* SignInTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B3DD311E6ED8E500327AE5 /* SignInTableViewCell.swift */; };
 		94B3DD561E6ED8E500327AE5 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B3DD321E6ED8E500327AE5 /* SignInViewController.swift */; };
@@ -743,6 +743,10 @@
 		842ECEAE25D5C06200A612DA /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = es; path = es.lproj/Branding.plist; sourceTree = "<group>"; };
 		842ECEAF25D5C06500A612DA /* es-419 */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "es-419"; path = "es-419.lproj/Branding.plist"; sourceTree = "<group>"; };
 		842ECEB025D5C06700A612DA /* es_MX */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = es_MX; path = es_MX.lproj/Branding.plist; sourceTree = "<group>"; };
+		842ECED725D952D600A612DA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Gateway.storyboard; sourceTree = "<group>"; };
+		842ECEDC25D952E500A612DA /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Gateway.strings; sourceTree = "<group>"; };
+		842ECEDE25D9531E00A612DA /* es-419 */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-419"; path = "es-419.lproj/Gateway.strings"; sourceTree = "<group>"; };
+		842ECEE225D9537600A612DA /* es_MX */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es_MX; path = es_MX.lproj/Gateway.strings; sourceTree = "<group>"; };
 		843B6A5D25C7E1950022B5E9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Base; path = Base.lproj/Branding.plist; sourceTree = "<group>"; };
 		843B6A6325C7E1C00022B5E9 /* es-419 */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-419"; path = "es-419.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
 		843B6A6425C7E1C40022B5E9 /* es-419 */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-419"; path = "es-419.lproj/Main.strings"; sourceTree = "<group>"; };
@@ -804,6 +808,10 @@
 		843B6ADB25C8148E0022B5E9 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = es; path = es.lproj/Confirmation.plist; sourceTree = "<group>"; };
 		843B6ADC25C814900022B5E9 /* es-419 */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "es-419"; path = "es-419.lproj/Confirmation.plist"; sourceTree = "<group>"; };
 		843B6ADF25C814920022B5E9 /* es_MX */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = es_MX; path = es_MX.lproj/Confirmation.plist; sourceTree = "<group>"; };
+		846A275025D96CBF00224B46 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Login.storyboard; sourceTree = "<group>"; };
+		846A275725D96CCA00224B46 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Login.strings; sourceTree = "<group>"; };
+		846A275925D96CD200224B46 /* es-419 */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-419"; path = "es-419.lproj/Login.strings"; sourceTree = "<group>"; };
+		846A275B25D96CD800224B46 /* es_MX */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es_MX; path = es_MX.lproj/Login.strings; sourceTree = "<group>"; };
 		846C695B25A83F49002B9F42 /* Default.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Default.xcconfig; sourceTree = "<group>"; };
 		846C695C25A83F8A002B9F42 /* AppDetails.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDetails.swift; sourceTree = "<group>"; };
 		846C697D25A86360002B9F42 /* Staging.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Staging.xcconfig; sourceTree = "<group>"; };
@@ -857,7 +865,6 @@
 		9491F7F71E825F5D0018C15E /* DBHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DBHandler.swift; sourceTree = "<group>"; };
 		9491F7F91E825FA80018C15E /* DBUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DBUser.swift; sourceTree = "<group>"; };
 		94B3DD0A1E6EC47700327AE5 /* SplashViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
-		94B3DD151E6ED8E500327AE5 /* Gateway.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Gateway.storyboard; sourceTree = "<group>"; };
 		94B3DD181E6ED8E500327AE5 /* NotificationTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationTableViewCell.swift; sourceTree = "<group>"; };
 		94B3DD191E6ED8E500327AE5 /* NotificationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationViewController.swift; sourceTree = "<group>"; };
 		94B3DD1C1E6ED8E500327AE5 /* ProfileTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileTableViewCell.swift; sourceTree = "<group>"; };
@@ -874,7 +881,6 @@
 		94B3DD291E6ED8E500327AE5 /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		94B3DD2A1E6ED8E500327AE5 /* PageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageViewController.swift; sourceTree = "<group>"; };
 		94B3DD2B1E6ED8E500327AE5 /* SecondGatewayOverviewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SecondGatewayOverviewViewController.swift; sourceTree = "<group>"; };
-		94B3DD2C1E6ED8E500327AE5 /* Login.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
 		94B3DD2D1E6ED8E500327AE5 /* LoginAssets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = LoginAssets.xcassets; sourceTree = "<group>"; };
 		94B3DD2F1E6ED8E500327AE5 /* ForgotPasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForgotPasswordViewController.swift; sourceTree = "<group>"; };
 		94B3DD311E6ED8E500327AE5 /* SignInTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignInTableViewCell.swift; sourceTree = "<group>"; };
@@ -1508,10 +1514,10 @@
 		8401E82324EE501500AB4D18 /* Storyboards */ = {
 			isa = PBXGroup;
 			children = (
-				94B3DD151E6ED8E500327AE5 /* Gateway.storyboard */,
+				842ECED825D952D600A612DA /* Gateway.storyboard */,
 				6ECF75CF1E6EF140008C935E /* FetalKickCounter.storyboard */,
 				6E7D2D621E433E8800763D4C /* LaunchScreen.storyboard */,
-				94B3DD2C1E6ED8E500327AE5 /* Login.storyboard */,
+				846A275125D96CBF00224B46 /* Login.storyboard */,
 				6E7D2D5D1E433E8800763D4C /* Main.storyboard */,
 				94B3DD3A1E6ED8E500327AE5 /* Study.storyboard */,
 			);
@@ -2462,7 +2468,7 @@
 				6EDDB65A1EE05E4C00C79337 /* NewProgressView.xib in Resources */,
 				6EDDB6611EE05FDC00C79337 /* fda_preload.gif in Resources */,
 				843B6AAE25C80AAF0022B5E9 /* StudyOverview.plist in Resources */,
-				94B3DD511E6ED8E500327AE5 /* Login.storyboard in Resources */,
+				846A274E25D96CBF00224B46 /* Login.storyboard in Resources */,
 				942591C41EA8A2650010D892 /* ActivitySchedules.xib in Resources */,
 				6F10BB19234DE45D006388E2 /* Activity_New_Other_Form.json in Resources */,
 				94B3DD491E6ED8E500327AE5 /* StudyList.json in Resources */,
@@ -2475,7 +2481,7 @@
 				6ECF75D21E6EF1E7008C935E /* FetalKickCounter.xcassets in Resources */,
 				843B6A7825C808E00022B5E9 /* ContactUs.plist in Resources */,
 				6EB740181E9CD38100A4C773 /* FetalKickTest.json in Resources */,
-				94B3DD401E6ED8E500327AE5 /* Gateway.storyboard in Resources */,
+				842ECED525D952D500A612DA /* Gateway.storyboard in Resources */,
 				6EC129241E64624F00B90167 /* Acivity_Question.json in Resources */,
 				6E61BCC41F27262F00C156B9 /* ComprehensionFailure.xib in Resources */,
 				6EED31A31F1CD7B300A7AF56 /* LatestActive_1B.json in Resources */,
@@ -2549,7 +2555,7 @@
 				842ECDFB25D5B07600A612DA /* NewProgressView.xib in Resources */,
 				842ECDFC25D5B07600A612DA /* fda_preload.gif in Resources */,
 				842ECDFD25D5B07600A612DA /* StudyOverview.plist in Resources */,
-				842ECDFE25D5B07600A612DA /* Login.storyboard in Resources */,
+				846A274F25D96CBF00224B46 /* Login.storyboard in Resources */,
 				842ECDFF25D5B07600A612DA /* ActivitySchedules.xib in Resources */,
 				842ECE0025D5B07600A612DA /* Activity_New_Other_Form.json in Resources */,
 				842ECE0125D5B07600A612DA /* StudyList.json in Resources */,
@@ -2562,7 +2568,7 @@
 				842ECE0825D5B07600A612DA /* FetalKickCounter.xcassets in Resources */,
 				842ECE0925D5B07600A612DA /* ContactUs.plist in Resources */,
 				842ECE0A25D5B07600A612DA /* FetalKickTest.json in Resources */,
-				842ECE0B25D5B07600A612DA /* Gateway.storyboard in Resources */,
+				842ECED625D952D600A612DA /* Gateway.storyboard in Resources */,
 				842ECE0C25D5B07600A612DA /* Acivity_Question.json in Resources */,
 				842ECE0D25D5B07600A612DA /* ComprehensionFailure.xib in Resources */,
 				842ECE0E25D5B07600A612DA /* LatestActive_1B.json in Resources */,
@@ -3166,6 +3172,17 @@
 			name = Branding.plist;
 			sourceTree = "<group>";
 		};
+		842ECED825D952D600A612DA /* Gateway.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				842ECED725D952D600A612DA /* Base */,
+				842ECEDC25D952E500A612DA /* es */,
+				842ECEDE25D9531E00A612DA /* es-419 */,
+				842ECEE225D9537600A612DA /* es_MX */,
+			);
+			name = Gateway.storyboard;
+			sourceTree = "<group>";
+		};
 		843B6A5E25C7E1950022B5E9 /* Branding.plist */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -3318,6 +3335,17 @@
 				843B6ADF25C814920022B5E9 /* es_MX */,
 			);
 			name = Confirmation.plist;
+			sourceTree = "<group>";
+		};
+		846A275125D96CBF00224B46 /* Login.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				846A275025D96CBF00224B46 /* Base */,
+				846A275725D96CCA00224B46 /* es */,
+				846A275925D96CD200224B46 /* es-419 */,
+				846A275B25D96CD800224B46 /* es_MX */,
+			);
+			name = Login.storyboard;
 			sourceTree = "<group>";
 		};
 		846C698C25A872D8002B9F42 /* Localizable.strings */ = {

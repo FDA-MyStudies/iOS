@@ -1,0 +1,102 @@
+
+/* Class = "UITextField"; placeholder = "Enter Verification Code"; ObjectID = "0li-V5-aDa"; */
+"0li-V5-aDa.placeholder" = "Ingrese el código de verificación";
+
+/* Class = "UILabel"; text = "Please enter your registered email to receive password help."; ObjectID = "229-dc-iON"; */
+"229-dc-iON.text" = "Ingrese su correo electrónico registrado para recibir ayuda con la contraseña.";
+
+/* Class = "UILabel"; text = "Verification Step"; ObjectID = "2Iq-sI-1MG"; */
+"2Iq-sI-1MG.text" = "Paso de verificación";
+
+/* Class = "UIButton"; normalTitle = "Forgot password?"; ObjectID = "3eF-aU-RcQ"; */
+"3eF-aU-RcQ.normalTitle" = "¿Se te olvidó tu contraseña?";
+
+/* Class = "UIButton"; normalTitle = "Submit"; ObjectID = "5n7-N7-Pdx"; */
+"5n7-N7-Pdx.normalTitle" = "Enviar";
+
+/* Class = "UITextField"; placeholder = "enter Email"; ObjectID = "867-Vn-0xS"; */
+"867-Vn-0xS.placeholder" = "ingrese correo electrónico";
+
+/* Class = "UIButton"; normalTitle = "Continue"; ObjectID = "93M-Fs-drd"; */
+"93M-Fs-drd.normalTitle" = "Continuar";
+
+/* Class = "UILabel"; text = "Welcome!"; ObjectID = "Ciy-R8-Rn9"; */
+"Ciy-R8-Rn9.text" = "¡Bienvenidos!";
+
+/* Class = "UITextField"; placeholder = "enter first name"; ObjectID = "Fai-CW-7wU"; */
+"Fai-CW-7wU.placeholder" = "ingrese el primer nombre";
+
+/* Class = "UIButton"; normalTitle = "Get Started"; ObjectID = "G1v-Yc-O0B"; */
+"G1v-Yc-O0B.normalTitle" = "Empezar";
+
+/* Class = "UIButton"; normalTitle = "New User?"; ObjectID = "Jyn-tg-ixg"; */
+"Jyn-tg-ixg.normalTitle" = "¿Nuevo usuario?";
+
+/* Class = "UILabel"; text = "This is a one-stop app that houses several Studies being conducted by the FDA. Check out the list of available Studies and join the ones that are relevant to you. We look forward to having you on board!"; ObjectID = "LC2-3W-qRB"; */
+"LC2-3W-qRB.text" = "This is a one-stop app that houses several Studies being conducted by the FDA. Check out the list of available Studies and join the ones that are relevant to you. We look forward to having you on board!";
+
+/* Class = "UILabel"; text = "Improving Health Research Outcomes"; ObjectID = "LIE-7a-UoQ"; */
+"LIE-7a-UoQ.text" = "Improving Health Research Outcomes";
+
+/* Class = "UIButton"; normalTitle = "Sign In"; ObjectID = "Les-Kl-pFS"; */
+"Les-Kl-pFS.normalTitle" = "Registrarse";
+
+/* Class = "UILabel"; text = "This is a one-stop app that houses several Studies being conducted by the FDA. Check out the list of available Studies and join the ones that are relevant to you. We look forward to having you on board!"; ObjectID = "Mhn-wP-OGh"; */
+"Mhn-wP-OGh.text" = "This is a one-stop app that houses several Studies being conducted by the FDA. Check out the list of available Studies and join the ones that are relevant to you. We look forward to having you on board!";
+
+/* Class = "UILabel"; text = "We have sent a verification email to xyz@gmail.com. Please check your email to complete the signup process."; ObjectID = "On0-dU-saR"; */
+"On0-dU-saR.text" = "We have sent a verification email to xyz@gmail.com. Please check your email to complete the signup process.";
+
+/* Class = "UILabel"; text = "Email"; ObjectID = "OtJ-TT-gO6"; */
+"OtJ-TT-gO6.text" = "Identificación de correo";
+
+/* Class = "UIButton"; normalTitle = "Submit"; ObjectID = "QZr-DS-rsL"; */
+"QZr-DS-rsL.normalTitle" = "Enviar";
+
+/* Class = "UITextField"; placeholder = "enter email"; ObjectID = "TVv-OZ-IiD"; */
+"TVv-OZ-IiD.placeholder" = "ingrese correo electrónico";
+
+/* Class = "UIButton"; normalTitle = "Resend Verification Code"; ObjectID = "Tm3-4k-53S"; */
+"Tm3-4k-53S.normalTitle" = "Vuelva a enviar el código de verificación";
+
+/* Class = "UILabel"; text = "Your Sign Up process is now complete"; ObjectID = "WOM-w4-FBB"; */
+"WOM-w4-FBB.text" = "Su proceso de registro ahora está completo";
+
+/* Class = "UIButton"; normalTitle = "Sign in"; ObjectID = "WsS-eE-w8m"; */
+"WsS-eE-w8m.normalTitle" = "Registrarse";
+
+/* Class = "UILabel"; text = "We have sent a verification email to xyz@gmail.com. Please check your email to complete the signup process."; ObjectID = "XNb-iO-aTi"; */
+"XNb-iO-aTi.text" = "We have sent a verification email to xyz@gmail.com. Please check your email to complete the signup process.";
+
+/* Class = "UILabel"; text = "Use Touch ID to access or sign in to app"; ObjectID = "ZIW-P9-7OI"; */
+"ZIW-P9-7OI.text" = "Use Touch ID para acceder o iniciar sesión en la aplicación";
+
+/* Class = "UILabel"; text = "First Name"; ObjectID = "bgt-ED-RZb"; */
+"bgt-ED-RZb.text" = "Primer nombre";
+
+/* Class = "UILabel"; text = "Congrats!"; ObjectID = "d1G-F1-50Q"; */
+"d1G-F1-50Q.text" = "¡Felicidades!";
+
+/* Class = "UITextField"; placeholder = "Enter Verification Code"; ObjectID = "eRj-pM-e3e"; */
+"eRj-pM-e3e.placeholder" = "Ingrese el código de verificación";
+
+/* Class = "UIButton"; normalTitle = "Resend Verification Code"; ObjectID = "gYt-xI-csS"; */
+"gYt-xI-csS.normalTitle" = "Vuelva a enviar el código de verificación";
+
+/* Class = "UIButton"; normalTitle = "Continue"; ObjectID = "pzi-7P-kZh"; */
+"pzi-7P-kZh.normalTitle" = "Continuar";
+
+/* Class = "UILabel"; text = "Verification Step"; ObjectID = "qBm-e0-RzA"; */
+"qBm-e0-RzA.text" = "Paso de verificación";
+
+/* Class = "UIButton"; normalTitle = "Get Started"; ObjectID = "qls-nn-uxZ"; */
+"qls-nn-uxZ.normalTitle" = "Empezar";
+
+/* Class = "UIButton"; normalTitle = "Get Started"; ObjectID = "vIh-lT-4bl"; */
+"vIh-lT-4bl.normalTitle" = "Empezar";
+
+/* Class = "UIButton"; normalTitle = "Next"; ObjectID = "x7K-bc-LZO"; */
+"x7K-bc-LZO.normalTitle" = "Siguiente";
+
+/* Class = "UIButton"; normalTitle = "www.fda.gov"; ObjectID = "zqZ-PQ-IFe"; */
+"zqZ-PQ-IFe.normalTitle" = "www.fda.gov";

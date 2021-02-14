@@ -536,9 +536,9 @@ class ActivitiesViewController : UIViewController{
         
         let allTypeCurrentActivities = currentYetToStartAndInProgressActivities + currentOngoingActivities + currentCompletedAndIncompletedActivities
         
-        let currentDetails = ["title": "CURRENT","activities": allTypeCurrentActivities] as [String : Any]
-        let upcomingDetails = ["title": "UPCOMING","activities": upcomingActivities] as [String : Any]
-        let pastDetails = ["title": "PAST","activities": pastActivities] as [String : Any]
+        let currentDetails = ["title": NSLocalizedString("CURRENT", comment: ""),"activities": allTypeCurrentActivities] as [String : Any]
+        let upcomingDetails = ["title": NSLocalizedString("UPCOMING", comment: ""),"activities": upcomingActivities] as [String : Any]
+        let pastDetails = ["title": NSLocalizedString("PAST", comment: ""),"activities": pastActivities] as [String : Any]
         
         allActivityList.append(currentDetails)
         allActivityList.append(upcomingDetails)

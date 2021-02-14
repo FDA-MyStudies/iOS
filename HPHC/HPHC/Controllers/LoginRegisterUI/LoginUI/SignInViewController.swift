@@ -82,6 +82,14 @@ class SignInViewController: UIViewController{
             
             buttonSignUp?.setAttributedTitle(mutableAttributedTitle, for: .normal)
         }
+      
+      let main_string = NSLocalizedString("By tapping Sign In, you agree to this app's Terms and Privacy Policy", comment: "")
+      
+      let stringAttributes = [
+        NSAttributedString.Key.font : UIFont(name: "HelveticaNeue-Medium", size: 14.0)!,
+        NSAttributedString.Key.foregroundColor : UIColor.systemGray] as [NSAttributedString.Key : Any]
+      let attributedString = NSMutableAttributedString(string: main_string, attributes: stringAttributes)
+      termsAndCondition?.attributedText = attributedString
         
         TermsAndPolicy.currentTermsAndPolicy =  TermsAndPolicy()
       
@@ -301,10 +309,11 @@ class SignInViewController: UIViewController{
         self.termsAndCondition?.delegate = self
         let attributedString =  (termsAndCondition?.attributedText.mutableCopy() as? NSMutableAttributedString)!
         
-        var foundRange = attributedString.mutableString.range(of: "Terms")
+        var foundRange = attributedString.mutableString.range(of: NSLocalizedString("Terms", comment: ""))
         attributedString.addAttribute(NSAttributedString.Key.link, value:(TermsAndPolicy.currentTermsAndPolicy?.termsURL!)! as String, range: foundRange)
+      
         
-        foundRange = attributedString.mutableString.range(of: "Privacy Policy")
+        foundRange = attributedString.mutableString.range(of: NSLocalizedString("Privacy Policy", comment: ""))
         attributedString.addAttribute(NSAttributedString.Key.link, value:(TermsAndPolicy.currentTermsAndPolicy?.policyURL!)! as String  , range: foundRange)
         
         termsAndCondition?.attributedText = attributedString
@@ -457,7 +466,7 @@ extension SignInViewController: UITextViewDelegate{
         
         var link: String =   (TermsAndPolicy.currentTermsAndPolicy?.termsURL)! //kTermsAndConditionLink
         var title: String = kNavigationTitleTerms
-        if (URL.absoluteString == TermsAndPolicy.currentTermsAndPolicy?.policyURL && characterRange.length == String("Privacy Policy").count) {
+        if (URL.absoluteString == TermsAndPolicy.currentTermsAndPolicy?.policyURL && characterRange.length == String(NSLocalizedString("Privacy Policy", comment: "")).count) {
             //kPrivacyPolicyLink
             print("terms")
             link =  (TermsAndPolicy.currentTermsAndPolicy?.policyURL)! // kPrivacyPolicyLink

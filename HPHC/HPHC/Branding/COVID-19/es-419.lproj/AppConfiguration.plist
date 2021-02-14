@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>studyCompletionMessage</key>
-	<string>There are no more activities for this study in the COVID MyStudies app. Thank you for your participation.</string>
+	<string>No hay más actividades para este estudio en la aplicación COVID MyStudies. Gracias por su participación</string>
 	<key>appleId</key>
 	<string>1509692957</string>
 	<key>shouldShowMenuResourceButton</key>

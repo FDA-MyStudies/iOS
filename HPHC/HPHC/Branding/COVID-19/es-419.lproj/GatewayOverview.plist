@@ -4,9 +4,9 @@
 <array>
 	<dict>
 		<key>title</key>
-		<string>Welcome</string>
+		<string>Bienvenidos</string>
 		<key>text</key>
-		<string>The FDA is pleased to offer this application to enable electronic consent for COVID-19 trials. Before you can access informed consent information for a clinical trial or study, you have to register with the app.</string>
+		<string>La FDA se complace en ofrecer esta aplicación para permitir el consentimiento electrónico para los ensayos de COVID-19. Antes de poder acceder a la información de consentimiento informado para un ensayo clínico o estudio, debe registrarse en la aplicación.</string>
 		<key>type</key>
 		<string>video</string>
 		<key>image</key>

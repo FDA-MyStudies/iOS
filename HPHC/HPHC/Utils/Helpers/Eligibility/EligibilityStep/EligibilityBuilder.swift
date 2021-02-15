@@ -40,7 +40,7 @@ let kEligibilityValidationDescriptionText = NSLocalizedString("Your token has be
 let kEligibilityValidationTitle = NSLocalizedString("Validated!", comment: "")
 
 let kEligibilityTestInstructionStep = "EligibilityTestInstructionStep"
-let kEligibilityTestInstructionTestTitle = "Eligibility Test"
+let kEligibilityTestInstructionTestTitle = NSLocalizedString("Eligibility Test", comment: "")
 let kEligibilityInstructionTestText = NSLocalizedString("Please answer some quick questions to confirm your eligibility for this study.", comment: "")
 
 let kEligibilityCompletionTestDescriptionText = NSLocalizedString("Based on the answers you provided, you are eligible to participate in this study.\nPlease click Continue to proceed to the Consent section.", comment: "")

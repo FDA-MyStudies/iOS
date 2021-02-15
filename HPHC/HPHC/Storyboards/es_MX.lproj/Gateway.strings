@@ -117,7 +117,7 @@
 "fcw-4m-iFo.text" = "Configure el tiempo de espera para recordatorios de actividades de estudio";
 
 /* Class = "UILabel"; text = "COMPLETION:"; ObjectID = "fuW-0v-Kj3"; */
-"fuW-0v-Kj3.text" = "COMPLETION:";
+"fuW-0v-Kj3.text" = "Terminación:";
 
 /* Class = "UILabel"; text = "jjj"; ObjectID = "gAZ-xG-Pxt"; */
 "gAZ-xG-Pxt.text" = "jjj";

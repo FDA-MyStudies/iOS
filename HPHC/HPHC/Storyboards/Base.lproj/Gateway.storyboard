@@ -1516,7 +1516,7 @@ Below is a list of studies that you are a part of and information on how your re
                                                         <constraint firstAttribute="width" secondItem="jJh-F0-cga" secondAttribute="height" multiplier="1:1" id="b7c-gM-5Vr"/>
                                                     </constraints>
                                                 </imageView>
-                                                <button opaque="NO" tag="11220" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b2d-cc-iAX">
+                                                <button opaque="NO" tag="11220" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="system" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="b2d-cc-iAX">
                                                     <rect key="frame" x="17" y="38" width="130" height="29"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="130" id="YAK-bd-EdX"/>
@@ -1536,7 +1536,7 @@ Below is a list of studies that you are a part of and information on how your re
                                                         <constraint firstAttribute="width" secondItem="Xgb-dI-JRf" secondAttribute="height" multiplier="1:1" id="sF1-rr-bFP"/>
                                                     </constraints>
                                                 </imageView>
-                                                <button opaque="NO" tag="11221" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OL5-qf-Lfd">
+                                                <button opaque="NO" tag="11221" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="system" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="OL5-qf-Lfd">
                                                     <rect key="frame" x="160" y="38" width="134" height="29"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="134" id="OSm-rl-Hpj"/>

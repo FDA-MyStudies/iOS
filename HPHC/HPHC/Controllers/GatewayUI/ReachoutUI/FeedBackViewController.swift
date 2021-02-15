@@ -140,6 +140,15 @@ extension FeedBackViewController: UITableViewDataSource{
         }
         else{
             cell = tableView.dequeueReusableCell(withIdentifier: "textviewCell", for: indexPath) as! TextviewCell
+          
+          let cell = tableView.dequeueReusableCell(withIdentifier: "textviewCell", for: indexPath) as! TextviewCell
+          
+          if cell.textView?.tag == 100 {
+            cell.textView?.text = kEnterFeedback
+            cell.textView?.textColor = UIColor.lightGray
+            cell.textView?.tag = 100
+          }
+          return cell
         
         }
         

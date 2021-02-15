@@ -71,7 +71,7 @@ class NetworkProtocols: NetworkConfigurationProtocol{
         }
       }
       
-      let error = NSError(domain: NSURLErrorDomain, code: 101, userInfo: [NSLocalizedDescriptionKey: "Your error localized description"])
+      let error = NSError(domain: NSURLErrorDomain, code: 101, userInfo: [NSLocalizedDescriptionKey: NSLocalizedString("Your error localized description", comment: "")])
       return  error
       
     }

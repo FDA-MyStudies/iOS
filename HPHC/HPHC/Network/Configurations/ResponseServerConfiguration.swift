@@ -86,7 +86,7 @@ class ResponseServerConfiguration: NetworkConfiguration {
     }
     override func parseError(errorResponse: Dictionary<String,Any>)->NSError {
         
-        var error = NSError(domain: NSURLErrorDomain, code: 101,userInfo: [NSLocalizedDescriptionKey:"Could not connect to server"])
+        var error = NSError(domain: NSURLErrorDomain, code: 101,userInfo: [NSLocalizedDescriptionKey:NSLocalizedString("Could not connect to server", comment: "")])
         
         if let errorMessage =  errorResponse["exception"] {
             

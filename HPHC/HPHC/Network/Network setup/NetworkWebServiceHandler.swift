@@ -298,7 +298,7 @@ class NetworkWebServiceHandler: NSObject, URLSessionDelegate {
         } else {
             if ((delegate?.failedRequest) != nil) {
         
-                let error1 = NSError(domain: NSURLErrorDomain, code:NoNetworkErrorCode,userInfo:[NSLocalizedDescriptionKey:"You seem to be offline. Please connect to a network to proceed with this action."])
+                let error1 = NSError(domain: NSURLErrorDomain, code:NoNetworkErrorCode,userInfo:[NSLocalizedDescriptionKey:NSLocalizedString("You seem to be offline. Please connect to a network to proceed with this action.", comment: "")])
                 delegate?.failedRequest(networkManager!, requestName: requestName!,error: error1)
             }
         }
@@ -306,6 +306,7 @@ class NetworkWebServiceHandler: NSObject, URLSessionDelegate {
     
      func handleResponse(_ data : Data? , response : URLResponse?, requestName : NSString?,error : NSError?){
        
+      
         if (error != nil) {
             if shouldRetryRequest && maxRequestRetryCount > 0  {
                 maxRequestRetryCount -= 1
@@ -320,7 +321,7 @@ class NetworkWebServiceHandler: NSObject, URLSessionDelegate {
             }
         } else {
           
-          print("response---\(response)")
+          print("response2---\(response)")
             let status = NetworkConstants.checkResponseHeaders(response!)
             let statusCode = status.0
             var error1 : NSError?
@@ -330,6 +331,7 @@ class NetworkWebServiceHandler: NSObject, URLSessionDelegate {
                 do{
                     //NSJSONReadingOptions.MutableContainers
                     responseDict = try JSONSerialization.jsonObject(with: data!, options: []) as? NSDictionary
+                  print("response1---\(responseDict)---\(requestName)---\(error)")
 
                 }catch {
                     print("Serilization error")
@@ -342,7 +344,7 @@ class NetworkWebServiceHandler: NSObject, URLSessionDelegate {
                         
                     } else {
                         
-                        error1 = NSError(domain: NSURLErrorDomain, code: 300,userInfo:[NSLocalizedDescriptionKey:"Could not connect to server. Please try again later."])
+                        error1 = NSError(domain: NSURLErrorDomain, code: 300,userInfo:[NSLocalizedDescriptionKey:NSLocalizedString("Could not connect to server. Please try again later.", comment: "")])
                         
                         if ((delegate?.failedRequest) != nil) {
                             delegate?.failedRequest(networkManager!, requestName: requestName!,error:error1!)
@@ -357,6 +359,7 @@ class NetworkWebServiceHandler: NSObject, URLSessionDelegate {
                     do {
                         
                       responseDict = try JSONSerialization.jsonObject(with: data!, options:.allowFragments) as? [String:Any]
+                      print("response1---\(responseDict)---\(requestName)---\(error)")
                         
                     }catch {
                         print("Serilization error")

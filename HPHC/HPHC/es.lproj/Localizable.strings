@@ -27,6 +27,7 @@
 "Sign In"="Registrarse";
 "New User?"="¿Nuevo usuario?";
 "Sign up"="Regístrate";
+"Sign Up"="Regístrate";
 "This feature will be available in the next sprint."="Esta función estará disponible en el próximo sprint.";
 "Are you sure you want to sign out?"="¿Estás segura de que quieres cerrar sesión?";
 
@@ -161,7 +162,7 @@
 
 
 "Validated!"="¡Validado!";
-"OK"="OK";
+"OK"="Ok";
 "Enter a token"="Ingrese un token";
 "Enter keyword(s)"="Inserte palabras claves";
 
@@ -201,7 +202,7 @@
 "PASSWORD HELP"="AYUDA CON CONTRASEÑA";
 "We have sent a temporary password to your registered email. Please login with temporary password and change your password."="Hemos enviado una contraseña temporal a su correo electrónico registrado. Inicie sesión con contraseña temporal y cambie su contraseña.";
 "SIGN UP"="Regístrate";
-"I Agree to the Terms and Privacy Policy"="Acepto los Términos y la Política de privacidad";
+"I Agree to the Terms and Privacy Policy"="Acepto los Condiciones y la Política de privacidad";
 "NOTIFICATIONS"="NOTIFICACIONES";
 "Please enter your first name."="Por favor, introduzca su nombre de pila.";
 "Please enter your last name."="Por favor ingrese su apellido.";
@@ -425,3 +426,27 @@
 "In Progress"="En progreso";
   
 "By tapping Sign In, you agree to this app's Terms and Privacy Policy"="Al tocar Iniciar sesión, acepta los Condiciones y la Política de privacidad de esta aplicación";
+
+"New User? Sign Up"="¿Nuevo Usuario? Regístrate";
+"RESOURCES"="RECURSOS";
+
+
+"Study Status"="Estado del estudio";
+"Active"="ACTIVO";
+"Closed"="Cerrado";
+"Upcoming"="Próximo";
+"Paused"="Pausada";
+"Bookmarked"="Marcado como favorito";
+"Participation Status"="Estado de participación";
+"Categories"="Categorías";
+"Biologics Safety"="Seguridad de los productos biológicos";
+"Clinical Trials"="Ensayos clínicos";
+"Drug Safety"="Seguridad de los medicamentos";
+"Food Safety"="Seguridad alimenticia";
+"Medical Device Safety"="Seguridad de dispositivos médicos";
+"Observational Studies"="Estudios observacionales";
+"Public Health"="Salud pública";
+"Radiation-Emitting Products"="Productos emisores de radiación";
+"Tobacco Use"="El consumo de tabaco";
+
+"DELETE ACCOUNT"="BORRAR CUENTA";

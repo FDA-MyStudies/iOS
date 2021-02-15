@@ -1,0 +1,57 @@
+
+/* Class = "UITextField"; placeholder = "Enter enrollment token"; ObjectID = "1Zu-1M-7Gw"; */
+"1Zu-1M-7Gw.placeholder" = "Ingrese el token de inscripción";
+
+/* Class = "UIBarButtonItem"; title = "Done"; ObjectID = "1qm-qt-0go"; */
+"1qm-qt-0go.title" = "Hecho";
+
+/* Class = "UIButton"; normalTitle = "Next"; ObjectID = "2YV-6t-dEM"; */
+"2YV-6t-dEM.normalTitle" = "Siguiente";
+
+/* Class = "UILabel"; text = "00:00:00"; ObjectID = "6lt-Kp-E0V"; */
+"6lt-Kp-E0V.text" = "00:00:00";
+
+/* Class = "UILabel"; text = "Fetal Kick Counter"; ObjectID = "6vD-yL-Trh"; */
+"6vD-yL-Trh.text" = "Contador de patadas fetales";
+
+/* Class = "UIButton"; normalTitle = "Submit"; ObjectID = "Aqo-FS-uXn"; */
+"Aqo-FS-uXn.normalTitle" = "Enviar";
+
+/* Class = "UILabel"; text = "Not Eligible"; ObjectID = "DRs-0f-pS9"; */
+"DRs-0f-pS9.text" = "No elegible";
+
+/* Class = "UIButton"; normalTitle = "View/Email Consent PDF"; ObjectID = "KFf-Ee-kF6"; */
+"KFf-Ee-kF6.normalTitle" = "Ver / PDF de consentimiento por correo electrónico";
+
+/* Class = "UILabel"; text = "Thanks for providing consent for this Study"; ObjectID = "Pfh-Dn-IUH"; */
+"Pfh-Dn-IUH.text" = "Gracias por consento para este estudio";
+
+/* Class = "UIButton"; normalTitle = "Submit"; ObjectID = "Qzc-1W-fgy"; */
+"Qzc-1W-fgy.normalTitle" = "Enviar";
+
+/* Class = "UILabel"; text = "TAP TO START TIMER"; ObjectID = "Sue-m0-sIi"; */
+"Sue-m0-sIi.text" = "TOQUE PARA INICIAR EL TEMPORIZADOR";
+
+/* Class = "UILabel"; text = "This study allows only pre-screened participants to join the study. If you are one, please enter the enrollment token provided to you for this study."; ObjectID = "blT-Iy-WlF"; */
+"blT-Iy-WlF.text" = "Este estudio permite que sólo los participantes preseleccionados se unan al estudio. si es uno, ingrese el token de inscripción que se le proporcionó para este estudio.";
+
+/* Class = "UINavigationItem"; title = "Consent Document"; ObjectID = "e0E-Qm-Uc8"; */
+"e0E-Qm-Uc8.title" = "Documento de consentimiento";
+
+/* Class = "UILabel"; text = "Eligibility"; ObjectID = "gPT-6p-tqe"; */
+"gPT-6p-tqe.text" = "Eligibility";
+
+/* Class = "UIButton"; normalTitle = "Done"; ObjectID = "mVr-1X-vKQ"; */
+"mVr-1X-vKQ.normalTitle" = "Hecho";
+
+/* Class = "UILabel"; text = "You can now start using the app to participate in the study."; ObjectID = "oQF-1F-Kvh"; */
+"oQF-1F-Kvh.text" = "Ahora puede comenzar a usar la aplicación para participar en el estudio.";
+
+/* Class = "UIButton"; normalTitle = "Done"; ObjectID = "uIj-lV-uyU"; */
+"uIj-lV-uyU.normalTitle" = "Hecho";
+
+/* Class = "UITextField"; text = "000"; ObjectID = "upT-lw-erh"; */
+"upT-lw-erh.text" = "000";
+
+/* Class = "UILabel"; text = "TOTAL KICK COUNT"; ObjectID = "yvB-Wf-hYf"; */
+"yvB-Wf-hYf.text" = "TOTAL KICK COUNT";

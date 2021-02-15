@@ -82,6 +82,16 @@ class SignUpViewController: UIViewController{
         self.navigationController?.setNavigationBarHidden(false, animated: true)
         
         //WCPServices().getTermsPolicy(delegate: self)\
+      
+      let main_string = NSLocalizedString("I Agree to the Terms and Privacy Policy", comment: "")
+      
+      let stringAttributes = [
+        NSAttributedString.Key.font : UIFont(name: "HelveticaNeue", size: 16.0)!,
+        NSAttributedString.Key.foregroundColor : UIColor.systemGray] as [NSAttributedString.Key : Any]
+      let attributedString = NSMutableAttributedString(string: main_string, attributes: stringAttributes)
+      termsAndCondition?.attributedText = attributedString
+      
+      
       TermsAndPolicy.currentTermsAndPolicy =  TermsAndPolicy()
       let policyURL = Branding.PrivacyPolicyURL
       let terms = Branding.TermsAndConditionURL
@@ -133,15 +143,15 @@ class SignUpViewController: UIViewController{
         self.termsAndCondition?.delegate = self
         let attributedString =  (termsAndCondition?.attributedText.mutableCopy() as? NSMutableAttributedString)!
         
-        var foundRange = attributedString.mutableString.range(of: "Terms")
+        var foundRange = attributedString.mutableString.range(of: NSLocalizedString("Terms", comment: ""))
         attributedString.addAttribute(NSAttributedString.Key.link, value:(TermsAndPolicy.currentTermsAndPolicy?.termsURL!)! as String, range: foundRange)
         
-        foundRange = attributedString.mutableString.range(of: "Privacy Policy")
+        foundRange = attributedString.mutableString.range(of: NSLocalizedString("Privacy Policy", comment: ""))
         attributedString.addAttribute(NSAttributedString.Key.link, value:(TermsAndPolicy.currentTermsAndPolicy?.policyURL!)! as String  , range: foundRange)
         
         termsAndCondition?.attributedText = attributedString
         
-        termsAndCondition?.linkTextAttributes = convertToOptionalNSAttributedStringKeyDictionary([NSAttributedString.Key.foregroundColor.rawValue: Utilities.getUIColorFromHex(0x007CBA)])
+      termsAndCondition?.linkTextAttributes = convertToOptionalNSAttributedStringKeyDictionary([NSAttributedString.Key.foregroundColor.rawValue: Utilities.getUIColorFromHex(0x007CBA), NSAttributedString.Key.font.rawValue : "HelveticaNeue-Medium"])
         
     }
     
@@ -344,7 +354,7 @@ extension SignUpViewController: UITextViewDelegate{
         
         var link: String =   (TermsAndPolicy.currentTermsAndPolicy?.termsURL)! //kTermsAndConditionLink
         var title: String = kNavigationTitleTerms
-        if (URL.absoluteString == TermsAndPolicy.currentTermsAndPolicy?.policyURL  && characterRange.length == String("Privacy Policy").count ) {
+        if (URL.absoluteString == TermsAndPolicy.currentTermsAndPolicy?.policyURL  && characterRange.length == String(NSLocalizedString("Privacy Policy", comment: "")).count ) {
             //kPrivacyPolicyLink
             print("terms")
             link =  (TermsAndPolicy.currentTermsAndPolicy?.policyURL)! // kPrivacyPolicyLink

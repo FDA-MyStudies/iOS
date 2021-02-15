@@ -276,16 +276,16 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="First Name" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="16" translatesAutoresizingMaskIntoConstraints="NO" id="bgt-ED-RZb">
-                                                    <rect key="frame" x="35" y="11" width="90" height="42"/>
+                                                    <rect key="frame" x="35" y="11" width="149" height="42"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="90" id="BNL-49-1fd"/>
+                                                        <constraint firstAttribute="width" constant="149" id="BNL-49-1fd"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="18"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="enter first name" textAlignment="right" minimumFontSize="16" translatesAutoresizingMaskIntoConstraints="NO" id="Fai-CW-7wU">
-                                                    <rect key="frame" x="127" y="3" width="257" height="40"/>
+                                                    <rect key="frame" x="186" y="3" width="198" height="40"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="40" id="Xjh-wg-1tE"/>
                                                     </constraints>
@@ -1233,7 +1233,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="Wsb-hw-1LK"/>
+        <segue reference="EeA-Hk-jBe"/>
         <segue reference="VqN-my-PFn"/>
     </inferredMetricsTieBreakers>
     <resources>

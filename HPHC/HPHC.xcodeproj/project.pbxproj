@@ -29,7 +29,6 @@
 		6E2B25F41EAE3F1D00E2DFB2 /* ResearchContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E2B25F21EAE3F1D00E2DFB2 /* ResearchContainerViewController.swift */; };
 		6E31DC691F17AF9C00C3E1DB /* InEligibilityStepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E31DC681F17AF9C00C3E1DB /* InEligibilityStepViewController.swift */; };
 		6E4CECB61F31B41C005E0832 /* PinterestLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E4CECB51F31B41C005E0832 /* PinterestLayout.swift */; };
-		6E4D86DC1F389DF1003DBDD8 /* SearchBarView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6E4D86DB1F389DF1003DBDD8 /* SearchBarView.xib */; };
 		6E4D86E01F38A740003DBDD8 /* SearchBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E4D86DF1F38A740003DBDD8 /* SearchBarView.swift */; };
 		6E5287B12237EB820083DF33 /* ActivityTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E5287B02237EB820083DF33 /* ActivityTest.swift */; };
 		6E5F751B1EF4109500ABA308 /* Labkey_Activity11.json in Resources */ = {isa = PBXBuildFile; fileRef = 6E5F751A1EF4109500ABA308 /* Labkey_Activity11.json */; };
@@ -77,7 +76,6 @@
 		6ECA92851E49B5CF00DA6287 /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ECA92841E49B5CF00DA6287 /* File.swift */; };
 		6ECA92881E49F0CD00DA6287 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ECA92871E49F0CD00DA6287 /* Utilities.swift */; };
 		6ECE8BFB1EAF0E3A00A025F5 /* HealthClientType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ECE8BFA1EAF0E3A00A025F5 /* HealthClientType.swift */; };
-		6ECF75D01E6EF140008C935E /* FetalKickCounter.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6ECF75CF1E6EF140008C935E /* FetalKickCounter.storyboard */; };
 		6ECF75D21E6EF1E7008C935E /* FetalKickCounter.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6ECF75D11E6EF1E7008C935E /* FetalKickCounter.xcassets */; };
 		6ED134341E5EB0280090C976 /* ConsentBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ED134331E5EB0280090C976 /* ConsentBuilder.swift */; };
 		6ED134361E5EB0370090C976 /* ConsentStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ED134351E5EB0370090C976 /* ConsentStep.swift */; };
@@ -309,7 +307,6 @@
 		842ECDCE25D5B07600A612DA /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EEBA4791F25FAA100FB0258 /* HealthKit.framework */; };
 		842ECDCF25D5B07600A612DA /* ResearchKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EF0BC3C2223D1D6004F2357 /* ResearchKit.framework */; };
 		842ECDD225D5B07600A612DA /* Study.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 94B3DD3A1E6ED8E500327AE5 /* Study.storyboard */; };
-		842ECDD325D5B07600A612DA /* SearchBarView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6E4D86DB1F389DF1003DBDD8 /* SearchBarView.xib */; };
 		842ECDD425D5B07600A612DA /* Labkey_Activity_Latest4.json in Resources */ = {isa = PBXBuildFile; fileRef = 6ED5B05C1FCDBD7C00925352 /* Labkey_Activity_Latest4.json */; };
 		842ECDD525D5B07600A612DA /* LoginAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 94B3DD2D1E6ED8E500327AE5 /* LoginAssets.xcassets */; };
 		842ECDD625D5B07600A612DA /* ConsentLatest.json in Resources */ = {isa = PBXBuildFile; fileRef = 6E93C7E01EE2EC26006788B1 /* ConsentLatest.json */; };
@@ -341,7 +338,6 @@
 		842ECDF225D5B07600A612DA /* Activitylist.json in Resources */ = {isa = PBXBuildFile; fileRef = 6EF51C9422324E3700BF8D4E /* Activitylist.json */; };
 		842ECDF325D5B07600A612DA /* StepProvider.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6EF05A981E4DC36400CD7661 /* StepProvider.plist */; };
 		842ECDF425D5B07600A612DA /* ProgressView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 946CA5EC1E72DCA300CC8535 /* ProgressView.xib */; };
-		842ECDF525D5B07600A612DA /* FetalKickCounter.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6ECF75CF1E6EF140008C935E /* FetalKickCounter.storyboard */; };
 		842ECDF725D5B07600A612DA /* ChangePasswordData.plist in Resources */ = {isa = PBXBuildFile; fileRef = 843B6A9225C809910022B5E9 /* ChangePasswordData.plist */; };
 		842ECDF825D5B07600A612DA /* Labkey_Activity.json in Resources */ = {isa = PBXBuildFile; fileRef = 6EDABCCD1EBA41EE005F3AA6 /* Labkey_Activity.json */; };
 		842ECDF925D5B07600A612DA /* Consent.json in Resources */ = {isa = PBXBuildFile; fileRef = 6ED134371E5F1B110090C976 /* Consent.json */; };
@@ -398,6 +394,10 @@
 		843B6AD625C814840022B5E9 /* Confirmation.plist in Resources */ = {isa = PBXBuildFile; fileRef = 843B6AD825C814840022B5E9 /* Confirmation.plist */; };
 		846A274E25D96CBF00224B46 /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 846A275125D96CBF00224B46 /* Login.storyboard */; };
 		846A274F25D96CBF00224B46 /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 846A275125D96CBF00224B46 /* Login.storyboard */; };
+		846A276825DAA72D00224B46 /* FetalKickCounter.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 846A276B25DAA72E00224B46 /* FetalKickCounter.storyboard */; };
+		846A276925DAA72E00224B46 /* FetalKickCounter.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 846A276B25DAA72E00224B46 /* FetalKickCounter.storyboard */; };
+		846A277825DADD4300224B46 /* SearchBarView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 846A277B25DADD4300224B46 /* SearchBarView.xib */; };
+		846A277925DADD4300224B46 /* SearchBarView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 846A277B25DADD4300224B46 /* SearchBarView.xib */; };
 		846C695D25A83F8A002B9F42 /* AppDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846C695C25A83F8A002B9F42 /* AppDetails.swift */; };
 		846C698A25A872D8002B9F42 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 846C698C25A872D8002B9F42 /* Localizable.strings */; };
 		84AFCF0325C6E4D7000A9712 /* Resources.plist in Resources */ = {isa = PBXBuildFile; fileRef = 84AFCF0525C6E4D7000A9712 /* Resources.plist */; };
@@ -594,7 +594,6 @@
 		6E2B25F21EAE3F1D00E2DFB2 /* ResearchContainerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResearchContainerViewController.swift; sourceTree = "<group>"; };
 		6E31DC681F17AF9C00C3E1DB /* InEligibilityStepViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InEligibilityStepViewController.swift; sourceTree = "<group>"; };
 		6E4CECB51F31B41C005E0832 /* PinterestLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PinterestLayout.swift; sourceTree = "<group>"; };
-		6E4D86DB1F389DF1003DBDD8 /* SearchBarView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SearchBarView.xib; sourceTree = "<group>"; };
 		6E4D86DF1F38A740003DBDD8 /* SearchBarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchBarView.swift; sourceTree = "<group>"; };
 		6E5287B02237EB820083DF33 /* ActivityTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityTest.swift; sourceTree = "<group>"; };
 		6E5F751A1EF4109500ABA308 /* Labkey_Activity11.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Labkey_Activity11.json; sourceTree = "<group>"; };
@@ -647,7 +646,6 @@
 		6ECA92841E49B5CF00DA6287 /* File.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
 		6ECA92871E49F0CD00DA6287 /* Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		6ECE8BFA1EAF0E3A00A025F5 /* HealthClientType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HealthClientType.swift; sourceTree = "<group>"; };
-		6ECF75CF1E6EF140008C935E /* FetalKickCounter.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = FetalKickCounter.storyboard; sourceTree = "<group>"; };
 		6ECF75D11E6EF1E7008C935E /* FetalKickCounter.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = FetalKickCounter.xcassets; sourceTree = "<group>"; };
 		6ED134331E5EB0280090C976 /* ConsentBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConsentBuilder.swift; sourceTree = "<group>"; };
 		6ED134351E5EB0370090C976 /* ConsentStep.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConsentStep.swift; sourceTree = "<group>"; };
@@ -812,6 +810,16 @@
 		846A275725D96CCA00224B46 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Login.strings; sourceTree = "<group>"; };
 		846A275925D96CD200224B46 /* es-419 */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-419"; path = "es-419.lproj/Login.strings"; sourceTree = "<group>"; };
 		846A275B25D96CD800224B46 /* es_MX */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es_MX; path = es_MX.lproj/Login.strings; sourceTree = "<group>"; };
+		846A276325DA84C000224B46 /* es_MX */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es_MX; path = es_MX.lproj/Main.strings; sourceTree = "<group>"; };
+		846A276525DA850900224B46 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Main.strings; sourceTree = "<group>"; };
+		846A276A25DAA72E00224B46 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/FetalKickCounter.storyboard; sourceTree = "<group>"; };
+		846A276F25DAA75800224B46 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/FetalKickCounter.strings; sourceTree = "<group>"; };
+		846A277325DAA78C00224B46 /* es-419 */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-419"; path = "es-419.lproj/FetalKickCounter.strings"; sourceTree = "<group>"; };
+		846A277525DAA79500224B46 /* es_MX */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es_MX; path = es_MX.lproj/FetalKickCounter.strings; sourceTree = "<group>"; };
+		846A277A25DADD4300224B46 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/SearchBarView.xib; sourceTree = "<group>"; };
+		846A277F25DADD6500224B46 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/SearchBarView.strings; sourceTree = "<group>"; };
+		846A278125DADD6C00224B46 /* es-419 */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-419"; path = "es-419.lproj/SearchBarView.strings"; sourceTree = "<group>"; };
+		846A278525DADD7500224B46 /* es_MX */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es_MX; path = es_MX.lproj/SearchBarView.strings; sourceTree = "<group>"; };
 		846C695B25A83F49002B9F42 /* Default.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Default.xcconfig; sourceTree = "<group>"; };
 		846C695C25A83F8A002B9F42 /* AppDetails.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDetails.swift; sourceTree = "<group>"; };
 		846C697D25A86360002B9F42 /* Staging.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Staging.xcconfig; sourceTree = "<group>"; };
@@ -1515,7 +1523,7 @@
 			isa = PBXGroup;
 			children = (
 				842ECED825D952D600A612DA /* Gateway.storyboard */,
-				6ECF75CF1E6EF140008C935E /* FetalKickCounter.storyboard */,
+				846A276B25DAA72E00224B46 /* FetalKickCounter.storyboard */,
 				6E7D2D621E433E8800763D4C /* LaunchScreen.storyboard */,
 				846A275125D96CBF00224B46 /* Login.storyboard */,
 				6E7D2D5D1E433E8800763D4C /* Main.storyboard */,
@@ -1766,7 +1774,7 @@
 		8401E83A24EE855300AB4D18 /* SearchBar */ = {
 			isa = PBXGroup;
 			children = (
-				6E4D86DB1F389DF1003DBDD8 /* SearchBarView.xib */,
+				846A277B25DADD4300224B46 /* SearchBarView.xib */,
 				6E4D86DF1F38A740003DBDD8 /* SearchBarView.swift */,
 			);
 			path = SearchBar;
@@ -2425,7 +2433,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				94B3DD5C1E6ED8E500327AE5 /* Study.storyboard in Resources */,
-				6E4D86DC1F389DF1003DBDD8 /* SearchBarView.xib in Resources */,
+				846A277825DADD4300224B46 /* SearchBarView.xib in Resources */,
 				6ED5B05D1FCDBD8200925352 /* Labkey_Activity_Latest4.json in Resources */,
 				8923429122B122DF0059F910 /* LoginAssets.xcassets in Resources */,
 				6E93C7E11EE2EC26006788B1 /* ConsentLatest.json in Resources */,
@@ -2459,7 +2467,7 @@
 				6EF51C9522324E3700BF8D4E /* Activitylist.json in Resources */,
 				6EF05A991E4DC36400CD7661 /* StepProvider.plist in Resources */,
 				946CA5ED1E72DCA300CC8535 /* ProgressView.xib in Resources */,
-				6ECF75D01E6EF140008C935E /* FetalKickCounter.storyboard in Resources */,
+				846A276825DAA72D00224B46 /* FetalKickCounter.storyboard in Resources */,
 				843B6A5C25C7E1950022B5E9 /* Branding.plist in Resources */,
 				843B6A9025C809910022B5E9 /* ChangePasswordData.plist in Resources */,
 				6EDABCCE1EBA41EE005F3AA6 /* Labkey_Activity.json in Resources */,
@@ -2510,7 +2518,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				842ECDD225D5B07600A612DA /* Study.storyboard in Resources */,
-				842ECDD325D5B07600A612DA /* SearchBarView.xib in Resources */,
+				846A277925DADD4300224B46 /* SearchBarView.xib in Resources */,
 				842ECDD425D5B07600A612DA /* Labkey_Activity_Latest4.json in Resources */,
 				842ECDD525D5B07600A612DA /* LoginAssets.xcassets in Resources */,
 				842ECDD625D5B07600A612DA /* ConsentLatest.json in Resources */,
@@ -2546,7 +2554,7 @@
 				842ECDF225D5B07600A612DA /* Activitylist.json in Resources */,
 				842ECDF325D5B07600A612DA /* StepProvider.plist in Resources */,
 				842ECDF425D5B07600A612DA /* ProgressView.xib in Resources */,
-				842ECDF525D5B07600A612DA /* FetalKickCounter.storyboard in Resources */,
+				846A276925DAA72E00224B46 /* FetalKickCounter.storyboard in Resources */,
 				842ECDF725D5B07600A612DA /* ChangePasswordData.plist in Resources */,
 				842ECDF825D5B07600A612DA /* Labkey_Activity.json in Resources */,
 				842ECDF925D5B07600A612DA /* Consent.json in Resources */,
@@ -3115,6 +3123,8 @@
 			children = (
 				6E7D2D5E1E433E8800763D4C /* Base */,
 				843B6A6425C7E1C40022B5E9 /* es-419 */,
+				846A276325DA84C000224B46 /* es_MX */,
+				846A276525DA850900224B46 /* es */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -3346,6 +3356,28 @@
 				846A275B25D96CD800224B46 /* es_MX */,
 			);
 			name = Login.storyboard;
+			sourceTree = "<group>";
+		};
+		846A276B25DAA72E00224B46 /* FetalKickCounter.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				846A276A25DAA72E00224B46 /* Base */,
+				846A276F25DAA75800224B46 /* es */,
+				846A277325DAA78C00224B46 /* es-419 */,
+				846A277525DAA79500224B46 /* es_MX */,
+			);
+			name = FetalKickCounter.storyboard;
+			sourceTree = "<group>";
+		};
+		846A277B25DADD4300224B46 /* SearchBarView.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				846A277A25DADD4300224B46 /* Base */,
+				846A277F25DADD6500224B46 /* es */,
+				846A278125DADD6C00224B46 /* es-419 */,
+				846A278525DADD7500224B46 /* es_MX */,
+			);
+			name = SearchBarView.xib;
 			sourceTree = "<group>";
 		};
 		846C698C25A872D8002B9F42 /* Localizable.strings */ = {

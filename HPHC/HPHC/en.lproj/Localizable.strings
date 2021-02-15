@@ -27,6 +27,7 @@
 "Sign In"="Sign In";
 "New User?"="New User?";
 "Sign up"="Sign up";
+"Sign Up"="Sign Up";
 "This feature will be available in the next sprint."="This feature will be available in the next sprint.";
 "Are you sure you want to sign out?"="Are you sure you want to sign out?";
 
@@ -424,3 +425,31 @@
 
 "App Glossary"="App Glossary";
 "By tapping Sign In, you agree to this app's Terms and Privacy Policy"="By tapping Sign In, you agree to this app's Terms and Privacy Policy";
+
+"New User? Sign Up"="New User? Sign Up";
+"RESOURCES"="RESOURCES";
+
+"Study Status"="Study Status";
+"Active"="Active";
+"Closed"="Closed";
+"Upcoming"="Upcoming";
+"Paused"="Paused";
+"Bookmarked"="Bookmarked";
+"Participation Status"="Participation Status";
+"In Progress"="In Progress";
+"Completed"="Completed";
+"Withdrawn"="Withdrawn";
+"Not Eligible"="Not Eligible";
+"Yet To Join"="Yet To Join";
+"Categories"="Categories";
+"Biologics Safety"="Biologics Safety";
+"Clinical Trials"="Clinical Trials";
+"Drug Safety"="Drug Safety";
+"Food Safety"="Food Safety";
+"Medical Device Safety"="Medical Device Safety";
+"Observational Studies"="Observational Studies";
+"Public Health"="Public Health";
+"Radiation-Emitting Products"="Radiation-Emitting Products";
+"Tobacco Use"="Tobacco Use";
+
+"DELETE ACCOUNT"="DELETE ACCOUNT";

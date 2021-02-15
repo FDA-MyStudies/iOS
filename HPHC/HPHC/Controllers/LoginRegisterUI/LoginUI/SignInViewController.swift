@@ -75,13 +75,24 @@ class SignInViewController: UIViewController{
         
         //WCPServices().getTermsPolicy(delegate: self)
         
-        if let attributedTitle = buttonSignUp?.attributedTitle(for: .normal) {
-            let mutableAttributedTitle = NSMutableAttributedString(attributedString: attributedTitle)
-            
-            mutableAttributedTitle.addAttribute(NSAttributedString.Key.foregroundColor, value: #colorLiteral(red: 0, green: 0.4862745098, blue: 0.7294117647, alpha: 1) , range: NSRange(location: 10,length: 7))
-            
-            buttonSignUp?.setAttributedTitle(mutableAttributedTitle, for: .normal)
-        }
+      if let _ = buttonSignUp?.attributedTitle(for: .normal) {
+        
+        let attrs1 = [
+          NSAttributedString.Key.font : UIFont(name: "HelveticaNeue-Medium", size: 14.0)!,
+          NSAttributedString.Key.foregroundColor : UIColor.systemGray] as [NSAttributedString.Key : Any]
+        
+        let attrs2 = [
+          NSAttributedString.Key.font : UIFont(name: "HelveticaNeue-Medium", size: 14.0)!,
+          NSAttributedString.Key.foregroundColor : #colorLiteral(red: 0, green: 0.4862745098, blue: 0.7294117647, alpha: 1)] as [NSAttributedString.Key : Any]
+        
+        let attributedString1 = NSMutableAttributedString(string:NSLocalizedString("New User?", comment: ""), attributes:attrs1)
+        
+        let attributedString2 = NSMutableAttributedString(string:" " + NSLocalizedString("Sign Up", comment: ""), attributes:attrs2)
+        
+        attributedString1.append(attributedString2)
+        
+        buttonSignUp?.setAttributedTitle(attributedString1, for: .normal)
+      }
       
       let main_string = NSLocalizedString("By tapping Sign In, you agree to this app's Terms and Privacy Policy", comment: "")
       
@@ -90,16 +101,14 @@ class SignInViewController: UIViewController{
         NSAttributedString.Key.foregroundColor : UIColor.systemGray] as [NSAttributedString.Key : Any]
       let attributedString = NSMutableAttributedString(string: main_string, attributes: stringAttributes)
       termsAndCondition?.attributedText = attributedString
-        
-        TermsAndPolicy.currentTermsAndPolicy =  TermsAndPolicy()
+      termsAndCondition?.textAlignment = .center
       
-        let policyURL = Branding.PrivacyPolicyURL
-        let terms = Branding.TermsAndConditionURL
-        TermsAndPolicy.currentTermsAndPolicy?.initWith(terms: terms, policy: policyURL)
-        self.agreeToTermsAndConditions()
-        
-       
-       
+      TermsAndPolicy.currentTermsAndPolicy =  TermsAndPolicy()
+      
+      let policyURL = Branding.PrivacyPolicyURL
+      let terms = Branding.TermsAndConditionURL
+      TermsAndPolicy.currentTermsAndPolicy?.initWith(terms: terms, policy: policyURL)
+      self.agreeToTermsAndConditions()
     }
     
     override func viewWillAppear(_ animated: Bool) {

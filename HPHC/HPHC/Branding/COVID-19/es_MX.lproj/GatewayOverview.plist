@@ -4,7 +4,7 @@
 <array>
 	<dict>
 		<key>title</key>
-		<string>Bienvenidos</string>
+		<string>¡Bienvenidos!</string>
 		<key>text</key>
 		<string>La FDA se complace en ofrecer esta aplicación para permitir el consentimiento electrónico para los ensayos de COVID-19. Antes de poder acceder a la información de consentimiento informado para un ensayo clínico o estudio, debe registrarse en la aplicación.</string>
 		<key>type</key>

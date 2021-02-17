@@ -453,6 +453,7 @@ extension SignUpViewController: UITextFieldDelegate{
         print(textField.tag)
         if textField.tag == TextFieldTags.EmailId.rawValue{
             textField.keyboardType = .emailAddress
+            textField.isSecureTextEntry = false
         }
     }
     
@@ -472,6 +473,7 @@ extension SignUpViewController: UITextFieldDelegate{
                 return true
             }
         } else if tag == .Password || tag == .ConfirmPassword {
+            textField.isSecureTextEntry = true
             if finalString.count > 64 {
                 return false
             } else {
@@ -506,14 +508,17 @@ extension SignUpViewController: UITextFieldDelegate{
         */
         case .EmailId:
             self.user.emailId = textField.text!
+            textField.isSecureTextEntry = false
             break
             
         case .Password:
             self.user.password = textField.text!
+            textField.isSecureTextEntry = true
             break
             
         case .ConfirmPassword:
             confirmPassword = textField.text!
+            textField.isSecureTextEntry = true
             break
             
 //        default:

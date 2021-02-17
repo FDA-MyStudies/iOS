@@ -181,8 +181,17 @@ class Utilities: NSObject {
     }
     
     class func isValidEmail(testStr: String) -> Bool {
+      
+      var emailRegEx = "[A-Z0-9a-z._-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}"
+      let locale = Locale.current.languageCode ?? "en"
+      if locale.hasPrefix("es") {
+        print("isValidEmail--\(locale)")
+        emailRegEx = "[A-Z0-9a-z._-zñáéíóúüA-ZÑÁÉÍÓÚÜ-]+@[A-Za-z0-9.-zñáéíóúüA-ZÑÁÉÍÓÚÜ-]+\\.[A-Za-zzñáéíóúüA-ZÑÁÉÍÓÚÜ-]{2,}"
+//        /^[A-Za-z0-9-zñáéíóúüA-ZÑÁÉÍÓÚÜ-]*$/
+      }
+          
+          
         
-        let emailRegEx = "[A-Z0-9a-z._-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}"
         
         let emailTest = NSPredicate(format: "SELF MATCHES %@", emailRegEx)
         

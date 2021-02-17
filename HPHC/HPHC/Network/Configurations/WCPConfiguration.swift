@@ -69,6 +69,13 @@ class WCPConfiguration: NetworkConfiguration {
     }
     
     override func getDefaultHeaders() -> [String : String] {
+      let locale = Locale.current.languageCode ?? "en"
+      var language = "English"
+      print("locale--\(locale)")
+      if locale.hasPrefix("es") { // true
+          print("Prefix exists")
+        language = "Spanish"
+      }
       
       let appId = AppDetails.applicationID
       let orgId = AppDetails.organizationID
@@ -79,7 +86,8 @@ class WCPConfiguration: NetworkConfiguration {
        
         let headers = ["Authorization": base64token,
                        "applicationId": appId,
-                       "orgId": orgId]
+                       "orgId": orgId,
+                       "language": language]
 
         return headers
     }

@@ -207,6 +207,7 @@ class DBHandler: NSObject {
                     dbStudy?.logoURL = study.logoURL
                     dbStudy?.startDate = study.startDate
                     dbStudy?.endEnd = study.endEnd
+                    dbStudy?.studyLanguage = study.studyLanguage
                     dbStudy?.status = study.status.rawValue
                     dbStudy?.enrolling = study.studySettings.enrollingAllowed
                     dbStudy?.rejoin = study.studySettings.rejoinStudyAfterWithdrawn
@@ -256,6 +257,7 @@ class DBHandler: NSObject {
         dbStudy.version = study.version
         dbStudy.updatedVersion = study.version
         dbStudy.logoURL = study.logoURL
+        dbStudy.studyLanguage = study.studyLanguage
         dbStudy.startDate = study.startDate
         dbStudy.endEnd = study.endEnd
         dbStudy.enrolling = study.studySettings.enrollingAllowed
@@ -298,6 +300,7 @@ class DBHandler: NSObject {
             study.logoURL = dbStudy.logoURL
             study.startDate = dbStudy.startDate
             study.endEnd = dbStudy.endEnd
+            study.studyLanguage = dbStudy.studyLanguage ?? "ENGLISH"
             study.status = StudyStatus(rawValue: dbStudy.status!)!
             study.signedConsentVersion = dbStudy.signedConsentVersion
             study.signedConsentFilePath = dbStudy.signedConsentFilePath

@@ -60,7 +60,7 @@
 "Tm3-4k-53S.normalTitle" = "Vuelva a enviar el código de verificación";
 
 /* Class = "UILabel"; text = "Your Sign Up process is now complete"; ObjectID = "WOM-w4-FBB"; */
-"WOM-w4-FBB.text" = "Su proceso de registro ahora está completo";
+"WOM-w4-FBB.text" = "Su proceso de registro ya está completo";
 
 /* Class = "UIButton"; normalTitle = "Sign in"; ObjectID = "WsS-eE-w8m"; */
 "WsS-eE-w8m.normalTitle" = "Registrarse";

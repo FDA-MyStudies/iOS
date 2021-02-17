@@ -30,6 +30,7 @@ class DBStudy: Object {
     @objc dynamic var name: String?
     @objc dynamic var version: String?
     @objc dynamic var updatedVersion: String?
+    @objc dynamic var studyLanguage: String?
     @objc dynamic var identifer: String?
     @objc dynamic var category: String?
     @objc dynamic var startDate: String?

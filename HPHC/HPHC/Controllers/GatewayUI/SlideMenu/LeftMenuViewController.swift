@@ -432,7 +432,7 @@ extension LeftMenuViewController: UITableViewDelegate {
         if let menu = LeftMenu(rawValue: indexPath.row) {
             switch menu {
             case .studyList, .resources, .profile_reachOut,.reachOut_signIn, .signup:
-                return 70.0
+                return 78.0
             }
         }
         return 0

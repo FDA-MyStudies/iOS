@@ -36,6 +36,7 @@ class StudyListCell: UITableViewCell {
     @IBOutlet var labelCompletionValue: UILabel?
     @IBOutlet var labelAdherenceValue: UILabel?
     @IBOutlet var labelStudyStatus: UILabel?
+    @IBOutlet var labelStudylanguage: UILabel?
     @IBOutlet var buttonBookmark: UIButton?
     @IBOutlet var progressBarCompletion: UIProgressView?
     @IBOutlet var progressBarAdherence: UIProgressView?
@@ -115,6 +116,9 @@ class StudyListCell: UITableViewCell {
         
         //study status
         self.setStudyStatus(study: study)
+      
+        //study status
+        self.setStudyLanguage(study: study)
         
         if User.currentUser.userType == .AnonymousUser {
             // do nothing
@@ -123,6 +127,14 @@ class StudyListCell: UITableViewCell {
             //set participatedStudies
             self.setUserStatusForStudy(study: study)
         }
+    }
+  
+    /**
+     Used to set the Study Language
+     @param study    Access the data from Study Class
+     */
+    func setStudyLanguage(study: Study){
+      labelStudylanguage?.text = study.studyLanguage.uppercased()
     }
     
     

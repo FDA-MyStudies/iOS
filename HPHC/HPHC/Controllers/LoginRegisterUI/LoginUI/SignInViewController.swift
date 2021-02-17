@@ -576,3 +576,22 @@ fileprivate func convertToOptionalNSAttributedStringKeyDictionary(_ input: [Stri
 	guard let input = input else { return nil }
 	return Dictionary(uniqueKeysWithValues: input.map { key, value in (NSAttributedString.Key(rawValue: key), value)})
 }
+
+class CustomTextField: UITextField {
+
+    private func getKeyboardLanguage() -> String? {
+        return "en" // here you can choose keyboard any way you need
+    }
+
+    override var textInputMode: UITextInputMode? {
+        if let language = getKeyboardLanguage() {
+            for tim in UITextInputMode.activeInputModes {
+                if tim.primaryLanguage!.contains(language) {
+                    return tim
+                }
+            }
+        }
+        return super.textInputMode
+    }
+
+}

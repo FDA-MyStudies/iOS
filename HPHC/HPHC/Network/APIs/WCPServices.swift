@@ -31,6 +31,7 @@ let kStudyCategory = "category"
 let kStudySponserName = "sponsorName"
 let kStudyDescription = "description"
 let kStudyTagLine = "tagline"
+let kStudyLanguage = "studyLanguage"
 let kStudyVersion = "studyVersion"
 
 let kStudyStatus = "status"

@@ -57,7 +57,7 @@
 "Enter your feedback here"="Ingrese sus comentarios aquí";
 
 "CONTACT US"="CONTÁCTENOS";
-"REACH OUT"="Alcanzar";
+"REACH OUT"="ALCANZAR";
 "Leave Anonymous Feedback"="Deja un comentario anónimo";
 "Need Help? Contact Us"="¿Necesitas ayuda? Contáctenos";
 
@@ -69,7 +69,7 @@
 "Terms"="Condiciones";
 "Privacy Policy"="Política de privacidad";
 
-"An email has been sent to xyz@gmail.com. Please type in the Verification Code received in the email to complete the verification step."="Se ha enviado un correo electrónico a xyz@gmail.com. Ingrese el código de verificación recibido en el correo electrónico para completar el paso de verificación.";
+"An email has been sent to xyz@gmail.com. Please type in the Verification Code received in the email to complete the verification step."="Se ha enviado un correo electrónico a xyz@gmail.com. Por favor ingrese el código de verificación recibido en el correo electrónico para completar el paso de verificación.";
 
 "Message"="Mensaje";
 "Please verify your email address."="Por favor verifique su dirección de correo electrónico.";
@@ -432,7 +432,7 @@
 
 
 "Study Status"="Estado del estudio";
-"Active"="ACTIVO";
+"Active"="Activo";
 "Closed"="Cerrado";
 "Upcoming"="Próximo";
 "Paused"="Pausada";
@@ -450,3 +450,18 @@
 "Tobacco Use"="El consumo de tabaco";
 
 "DELETE ACCOUNT"="BORRAR CUENTA";
+
+"Settings"="Ajustes";
+
+"The selected study is in the"="El estudio seleccionado se encuentra en el";
+"language"="idioma";
+"Please change language to"="Por favor cambie el idioma a";
+"in your device settings and continue"="en la configuración de su dispositivo y continúe";
+
+"Cosmetics Safety"="Seguridad de los cosméticos";
+
+
+"ACTIVE"="ACTIVO";
+"CLOSED"="CERRADO";
+"UPCOMING"="PRÓXIMAMENTE";
+"PAUSED"="PAUSADA";

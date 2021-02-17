@@ -100,6 +100,7 @@ class Study: Hashable {
     var startDate: String?
     var endEnd: String?
     var status: StudyStatus = .Active //Current Study Status
+    var studyLanguage: String = "ENGLISH"
     var sponserName: String?
     var description: String?
     var brandingConfiguration: String?
@@ -159,6 +160,9 @@ class Study: Hashable {
             }
             if Utilities.isValidValue(someObject: studyDetail[kStudyTagLine] as AnyObject ){
                 self.description = studyDetail[kStudyTagLine] as? String
+            }
+            if Utilities.isValidValue(someObject: studyDetail[kStudyLanguage] as AnyObject ){
+              self.studyLanguage = studyDetail[kStudyLanguage] as? String ?? "ENGLISH"
             }
             if Utilities.isValidValue(someObject: studyDetail[kStudyLogoURL] as AnyObject ) {
                 self.logoURL = studyDetail[kStudyLogoURL] as? String

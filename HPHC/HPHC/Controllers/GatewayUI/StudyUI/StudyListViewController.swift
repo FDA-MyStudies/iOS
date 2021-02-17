@@ -940,11 +940,52 @@ extension StudyListViewController: UITableViewDelegate {
         }
 
         let study = studiesList[indexPath.row]
+      let studyLanguage = study.studyLanguage.uppercased()
+      
+      let locale = Locale.current.languageCode ?? "en"
+      if locale.hasPrefix("es") && studyLanguage == "ENGLISH" {
+        presentLanguageAlert(studyLanguage: "English", study: study)
+      } else if !locale.hasPrefix("es") && studyLanguage == "SPANISH" {
+        presentLanguageAlert(studyLanguage: "Spanish", study: study)
+      } else {
         Study.updateCurrentStudy(study: study)
-
         performTaskBasedOnStudyStatus()
+      }
     }
+  
+  func presentLanguageAlert(studyLanguage: String, study: Study) {
+    let str1 = NSLocalizedString("The selected study is in the", comment: "")
+    let str2 = NSLocalizedString("language", comment: "")
+    let str3 = NSLocalizedString("Please change language to", comment: "")
+    let str4 = NSLocalizedString("in your device settings and continue", comment: "")
+    let kSettings = NSLocalizedString("Settings", comment: "")
+    
+    UIUtilities.showAlertMessageWithTwoActionsAndHandler("", errorMessage: "\(str1) \(studyLanguage) \(str2). \(str3) \(studyLanguage) \(str4)", errorAlertActionTitle: kTitleCancel,
+                                                         errorAlertActionTitle2: kSettings, viewControllerUsed: self,
+          action1: {
+            Study.updateCurrentStudy(study: study)
+            self.performTaskBasedOnStudyStatus()
+          },
+                                                         
+          action2: {
+            guard let settingsUrl = URL(string: UIApplication.openSettingsURLString) else {
+              return
+            }
+            
+            if UIApplication.shared.canOpenURL(settingsUrl) {
+              UIApplication.shared.open(settingsUrl, completionHandler: { (success) in
+                print("Settings opened: \(success)") // Prints true
+              })
+            }
+            
+            Study.updateCurrentStudy(study: study)
+            self.performTaskBasedOnStudyStatus()
+            
+          })
+    
+  }
 }
+
 
 // MARK: - StudyList Delegates
 

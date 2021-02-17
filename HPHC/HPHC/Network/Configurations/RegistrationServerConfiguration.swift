@@ -100,6 +100,13 @@ class RegistrationServerConfiguration: NetworkConfiguration {
     }
     
     override func getDefaultHeaders() -> [String: String] {
+      let locale = Locale.current.languageCode ?? "en"
+      var language = "English"
+      print("locale--\(locale)")
+      if locale.hasPrefix("es") { // true
+          print("Prefix exists")
+        language = "Spanish"
+      }
         
       let appId = AppDetails.applicationID
       let orgId = AppDetails.organizationID
@@ -108,13 +115,15 @@ class RegistrationServerConfiguration: NetworkConfiguration {
         if User.currentUser.authToken != nil {
             return [kUserAuthToken: User.currentUser.authToken,
                     "applicationId": appId,
-                    "orgId": orgId
+                    "orgId": orgId,
+                    "language": language
             ]
         }
         else {
             return [
                 "applicationId": appId,
-                "orgId": orgId
+                "orgId": orgId,
+              "language": language
             ]
         }
     }

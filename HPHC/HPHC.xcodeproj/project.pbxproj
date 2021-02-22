@@ -32,7 +32,6 @@
 		6E4D86E01F38A740003DBDD8 /* SearchBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E4D86DF1F38A740003DBDD8 /* SearchBarView.swift */; };
 		6E5287B12237EB820083DF33 /* ActivityTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E5287B02237EB820083DF33 /* ActivityTest.swift */; };
 		6E5F751B1EF4109500ABA308 /* Labkey_Activity11.json in Resources */ = {isa = PBXBuildFile; fileRef = 6E5F751A1EF4109500ABA308 /* Labkey_Activity11.json */; };
-		6E61BCC41F27262F00C156B9 /* ComprehensionFailure.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6E61BCC31F27262F00C156B9 /* ComprehensionFailure.xib */; };
 		6E61BCC61F27271000C156B9 /* ComprehensionFailure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E61BCC51F27271000C156B9 /* ComprehensionFailure.swift */; };
 		6E7D2D5A1E433E8800763D4C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E7D2D591E433E8800763D4C /* AppDelegate.swift */; };
 		6E7D2D5C1E433E8800763D4C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E7D2D5B1E433E8800763D4C /* ViewController.swift */; };
@@ -44,7 +43,6 @@
 		6E8D910D223B9FD800C082C9 /* Dictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E8D910C223B9FD800C082C9 /* Dictionary.swift */; };
 		6E90D2401EF40D2100F5140F /* ResourcesDetailViewControllerCopy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E90D23F1EF40D2100F5140F /* ResourcesDetailViewControllerCopy.swift */; };
 		6E91D6821ECD662E0012F49F /* JailbrokeBlocker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E91D6801ECD662E0012F49F /* JailbrokeBlocker.swift */; };
-		6E91D6831ECD662E0012F49F /* JailbrokeBlocker.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6E91D6811ECD662E0012F49F /* JailbrokeBlocker.xib */; };
 		6E93C7E11EE2EC26006788B1 /* ConsentLatest.json in Resources */ = {isa = PBXBuildFile; fileRef = 6E93C7E01EE2EC26006788B1 /* ConsentLatest.json */; };
 		6E9B39C01E55DFF10037D09D /* ActivityBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E9B39BF1E55DFF10037D09D /* ActivityBuilder.swift */; };
 		6E9E81D61ECEDA770007B492 /* SyncUpdate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E9E81D51ECEDA770007B492 /* SyncUpdate.swift */; };
@@ -320,7 +318,6 @@
 		842ECDDE25D5B07600A612DA /* SignUpPlist.plist in Resources */ = {isa = PBXBuildFile; fileRef = 843B6AAA25C80A4A0022B5E9 /* SignUpPlist.plist */; };
 		842ECDDF25D5B07600A612DA /* ActiveTask.json in Resources */ = {isa = PBXBuildFile; fileRef = 6ED9D5DA1E5B2D5100A0719D /* ActiveTask.json */; };
 		842ECDE025D5B07600A612DA /* ActivityMetadata TEST1.json in Resources */ = {isa = PBXBuildFile; fileRef = 6F52327D23D9883800995A78 /* ActivityMetadata TEST1.json */; };
-		842ECDE225D5B07600A612DA /* AppUpdateBlocker.xib in Resources */ = {isa = PBXBuildFile; fileRef = 94C6BD451EB8515000D4AA72 /* AppUpdateBlocker.xib */; };
 		842ECDE325D5B07600A612DA /* Gateway.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6EE5756B1E891440009BAA25 /* Gateway.xcassets */; };
 		842ECDE425D5B07600A612DA /* ActivityFilterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6E7DC76C1F69479C001A05B6 /* ActivityFilterView.xib */; };
 		842ECDE525D5B07600A612DA /* Labkey_Activity11.json in Resources */ = {isa = PBXBuildFile; fileRef = 6E5F751A1EF4109500ABA308 /* Labkey_Activity11.json */; };
@@ -334,7 +331,6 @@
 		842ECDED25D5B07600A612DA /* LatestActive_Taskdocument.json in Resources */ = {isa = PBXBuildFile; fileRef = 6EF748BE1E69645700F1E89E /* LatestActive_Taskdocument.json */; };
 		842ECDEE25D5B07600A612DA /* Labkey_Activity_Latest.json in Resources */ = {isa = PBXBuildFile; fileRef = 6EAA04881FAF4C6A00214D03 /* Labkey_Activity_Latest.json */; };
 		842ECDF025D5B07600A612DA /* Resources.plist in Resources */ = {isa = PBXBuildFile; fileRef = 84AFCF0525C6E4D7000A9712 /* Resources.plist */; };
-		842ECDF125D5B07600A612DA /* JailbrokeBlocker.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6E91D6811ECD662E0012F49F /* JailbrokeBlocker.xib */; };
 		842ECDF225D5B07600A612DA /* Activitylist.json in Resources */ = {isa = PBXBuildFile; fileRef = 6EF51C9422324E3700BF8D4E /* Activitylist.json */; };
 		842ECDF325D5B07600A612DA /* StepProvider.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6EF05A981E4DC36400CD7661 /* StepProvider.plist */; };
 		842ECDF425D5B07600A612DA /* ProgressView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 946CA5EC1E72DCA300CC8535 /* ProgressView.xib */; };
@@ -358,7 +354,6 @@
 		842ECE0925D5B07600A612DA /* ContactUs.plist in Resources */ = {isa = PBXBuildFile; fileRef = 843B6A7A25C808E00022B5E9 /* ContactUs.plist */; };
 		842ECE0A25D5B07600A612DA /* FetalKickTest.json in Resources */ = {isa = PBXBuildFile; fileRef = 6EB740171E9CD38100A4C773 /* FetalKickTest.json */; };
 		842ECE0C25D5B07600A612DA /* Acivity_Question.json in Resources */ = {isa = PBXBuildFile; fileRef = 6EC129231E64624F00B90167 /* Acivity_Question.json */; };
-		842ECE0D25D5B07600A612DA /* ComprehensionFailure.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6E61BCC31F27262F00C156B9 /* ComprehensionFailure.xib */; };
 		842ECE0E25D5B07600A612DA /* LatestActive_1B.json in Resources */ = {isa = PBXBuildFile; fileRef = 6EED31A21F1CD7B300A7AF56 /* LatestActive_1B.json */; };
 		842ECE0F25D5B07600A612DA /* Labkey_Activity_Latest3.json in Resources */ = {isa = PBXBuildFile; fileRef = 6EEB0AF91FD2811100136EAA /* Labkey_Activity_Latest3.json */; };
 		842ECE1025D5B07600A612DA /* Eligibility_1B.json in Resources */ = {isa = PBXBuildFile; fileRef = 6EE8E4D81F17459200028853 /* Eligibility_1B.json */; };
@@ -378,6 +373,8 @@
 		842ECEA925D5C05A00A612DA /* Branding.plist in Resources */ = {isa = PBXBuildFile; fileRef = 842ECEAB25D5C05A00A612DA /* Branding.plist */; };
 		842ECED525D952D500A612DA /* Gateway.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 842ECED825D952D600A612DA /* Gateway.storyboard */; };
 		842ECED625D952D600A612DA /* Gateway.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 842ECED825D952D600A612DA /* Gateway.storyboard */; };
+		8432EBA825DF7FF00088854F /* AppUpdateBlocker.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8432EBAB25DF7FF10088854F /* AppUpdateBlocker.xib */; };
+		8432EBA925DF7FF10088854F /* AppUpdateBlocker.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8432EBAB25DF7FF10088854F /* AppUpdateBlocker.xib */; };
 		843B6A5C25C7E1950022B5E9 /* Branding.plist in Resources */ = {isa = PBXBuildFile; fileRef = 843B6A5E25C7E1950022B5E9 /* Branding.plist */; };
 		843B6A7225C808CA0022B5E9 /* Profile.plist in Resources */ = {isa = PBXBuildFile; fileRef = 843B6A7425C808CA0022B5E9 /* Profile.plist */; };
 		843B6A7825C808E00022B5E9 /* ContactUs.plist in Resources */ = {isa = PBXBuildFile; fileRef = 843B6A7A25C808E00022B5E9 /* ContactUs.plist */; };
@@ -401,6 +398,10 @@
 		846C695D25A83F8A002B9F42 /* AppDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846C695C25A83F8A002B9F42 /* AppDetails.swift */; };
 		846C698A25A872D8002B9F42 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 846C698C25A872D8002B9F42 /* Localizable.strings */; };
 		84AFCF0325C6E4D7000A9712 /* Resources.plist in Resources */ = {isa = PBXBuildFile; fileRef = 84AFCF0525C6E4D7000A9712 /* Resources.plist */; };
+		84D3B26325E43B0900780211 /* ComprehensionFailure.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84D3B26625E43B0A00780211 /* ComprehensionFailure.xib */; };
+		84D3B26425E43B0A00780211 /* ComprehensionFailure.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84D3B26625E43B0A00780211 /* ComprehensionFailure.xib */; };
+		84D3B27125E43B9C00780211 /* JailbrokeBlocker.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84D3B27425E43B9C00780211 /* JailbrokeBlocker.xib */; };
+		84D3B27225E43B9C00780211 /* JailbrokeBlocker.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84D3B27425E43B9C00780211 /* JailbrokeBlocker.xib */; };
 		84E8D61724D161B6008C38D5 /* PDFCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E8D61624D161B6008C38D5 /* PDFCreator.swift */; };
 		8905591B230149AD005FB284 /* HPHCUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8905591A230149AD005FB284 /* HPHCUITests.swift */; };
 		890559262301615F005FB284 /* UITestBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 890559232301615F005FB284 /* UITestBase.swift */; };
@@ -477,7 +478,6 @@
 		94C550501EBA153F007740D0 /* StudyDashboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94C5504F1EBA153F007740D0 /* StudyDashboard.swift */; };
 		94C602311E51C7D500CB72F7 /* WCPServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94C602301E51C7D500CB72F7 /* WCPServices.swift */; };
 		94C6BD441EB8513300D4AA72 /* AppUpdateBlocker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94C6BD431EB8513300D4AA72 /* AppUpdateBlocker.swift */; };
-		94C6BD461EB8515000D4AA72 /* AppUpdateBlocker.xib in Resources */ = {isa = PBXBuildFile; fileRef = 94C6BD451EB8515000D4AA72 /* AppUpdateBlocker.xib */; };
 		94CD96E81E4AF61800946477 /* NetworkConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94CD96E41E4AF61800946477 /* NetworkConstants.swift */; };
 		94CD96E91E4AF61800946477 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94CD96E51E4AF61800946477 /* NetworkManager.swift */; };
 		94CD96EA1E4AF61800946477 /* NetworkWebServiceHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94CD96E61E4AF61800946477 /* NetworkWebServiceHandler.swift */; };
@@ -597,7 +597,6 @@
 		6E4D86DF1F38A740003DBDD8 /* SearchBarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchBarView.swift; sourceTree = "<group>"; };
 		6E5287B02237EB820083DF33 /* ActivityTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityTest.swift; sourceTree = "<group>"; };
 		6E5F751A1EF4109500ABA308 /* Labkey_Activity11.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Labkey_Activity11.json; sourceTree = "<group>"; };
-		6E61BCC31F27262F00C156B9 /* ComprehensionFailure.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ComprehensionFailure.xib; sourceTree = "<group>"; };
 		6E61BCC51F27271000C156B9 /* ComprehensionFailure.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComprehensionFailure.swift; sourceTree = "<group>"; };
 		6E7D2D561E433E8700763D4C /* HPHC.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HPHC.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6E7D2D591E433E8800763D4C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -614,7 +613,6 @@
 		6E8D910C223B9FD800C082C9 /* Dictionary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dictionary.swift; sourceTree = "<group>"; };
 		6E90D23F1EF40D2100F5140F /* ResourcesDetailViewControllerCopy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResourcesDetailViewControllerCopy.swift; sourceTree = "<group>"; };
 		6E91D6801ECD662E0012F49F /* JailbrokeBlocker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JailbrokeBlocker.swift; sourceTree = "<group>"; };
-		6E91D6811ECD662E0012F49F /* JailbrokeBlocker.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JailbrokeBlocker.xib; sourceTree = "<group>"; };
 		6E93C7E01EE2EC26006788B1 /* ConsentLatest.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = ConsentLatest.json; sourceTree = "<group>"; };
 		6E9B39BF1E55DFF10037D09D /* ActivityBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityBuilder.swift; sourceTree = "<group>"; };
 		6E9E81D51ECEDA770007B492 /* SyncUpdate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SyncUpdate.swift; sourceTree = "<group>"; };
@@ -745,6 +743,10 @@
 		842ECEDC25D952E500A612DA /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Gateway.strings; sourceTree = "<group>"; };
 		842ECEDE25D9531E00A612DA /* es-419 */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-419"; path = "es-419.lproj/Gateway.strings"; sourceTree = "<group>"; };
 		842ECEE225D9537600A612DA /* es_MX */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es_MX; path = es_MX.lproj/Gateway.strings; sourceTree = "<group>"; };
+		8432EBAA25DF7FF10088854F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/AppUpdateBlocker.xib; sourceTree = "<group>"; };
+		8432EBAD25DF80060088854F /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/AppUpdateBlocker.strings; sourceTree = "<group>"; };
+		8432EBAF25DF80150088854F /* es-419 */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-419"; path = "es-419.lproj/AppUpdateBlocker.strings"; sourceTree = "<group>"; };
+		8432EBB125DF801C0088854F /* es_MX */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es_MX; path = es_MX.lproj/AppUpdateBlocker.strings; sourceTree = "<group>"; };
 		843B6A5D25C7E1950022B5E9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Base; path = Base.lproj/Branding.plist; sourceTree = "<group>"; };
 		843B6A6325C7E1C00022B5E9 /* es-419 */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-419"; path = "es-419.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
 		843B6A6425C7E1C40022B5E9 /* es-419 */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-419"; path = "es-419.lproj/Main.strings"; sourceTree = "<group>"; };
@@ -828,6 +830,14 @@
 		84AFCF0425C6E4D7000A9712 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Base; path = Base.lproj/Resources.plist; sourceTree = "<group>"; };
 		84AFCF0A25C6E519000A9712 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = es; path = es.lproj/Resources.plist; sourceTree = "<group>"; };
 		84AFCF0D25C6E70E000A9712 /* es_MX */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = es_MX; path = es_MX.lproj/Resources.plist; sourceTree = "<group>"; };
+		84D3B26525E43B0A00780211 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/ComprehensionFailure.xib; sourceTree = "<group>"; };
+		84D3B26A25E43B1700780211 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/ComprehensionFailure.strings; sourceTree = "<group>"; };
+		84D3B26C25E43B1C00780211 /* es-419 */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-419"; path = "es-419.lproj/ComprehensionFailure.strings"; sourceTree = "<group>"; };
+		84D3B26E25E43B2100780211 /* es_MX */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es_MX; path = es_MX.lproj/ComprehensionFailure.strings; sourceTree = "<group>"; };
+		84D3B27325E43B9C00780211 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/JailbrokeBlocker.xib; sourceTree = "<group>"; };
+		84D3B27625E43BA300780211 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/JailbrokeBlocker.strings; sourceTree = "<group>"; };
+		84D3B27825E43BAB00780211 /* es-419 */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-419"; path = "es-419.lproj/JailbrokeBlocker.strings"; sourceTree = "<group>"; };
+		84D3B27A25E43BAE00780211 /* es_MX */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es_MX; path = es_MX.lproj/JailbrokeBlocker.strings; sourceTree = "<group>"; };
 		84E8D61624D161B6008C38D5 /* PDFCreator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFCreator.swift; sourceTree = "<group>"; };
 		87A4F9AAE7A1B8C36C9FBDDF /* Pods_HPHC_QA.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HPHC_QA.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		89055918230149AD005FB284 /* HPHCUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HPHCUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -908,7 +918,6 @@
 		94C5504F1EBA153F007740D0 /* StudyDashboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudyDashboard.swift; sourceTree = "<group>"; };
 		94C602301E51C7D500CB72F7 /* WCPServices.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WCPServices.swift; sourceTree = "<group>"; };
 		94C6BD431EB8513300D4AA72 /* AppUpdateBlocker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppUpdateBlocker.swift; sourceTree = "<group>"; };
-		94C6BD451EB8515000D4AA72 /* AppUpdateBlocker.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AppUpdateBlocker.xib; sourceTree = "<group>"; };
 		94CD96E41E4AF61800946477 /* NetworkConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkConstants.swift; sourceTree = "<group>"; };
 		94CD96E51E4AF61800946477 /* NetworkManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		94CD96E61E4AF61800946477 /* NetworkWebServiceHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkWebServiceHandler.swift; sourceTree = "<group>"; };
@@ -1062,7 +1071,7 @@
 		6E61BCC01F27260400C156B9 /* Comprehension */ = {
 			isa = PBXGroup;
 			children = (
-				6E61BCC31F27262F00C156B9 /* ComprehensionFailure.xib */,
+				84D3B26625E43B0A00780211 /* ComprehensionFailure.xib */,
 				6E61BCC51F27271000C156B9 /* ComprehensionFailure.swift */,
 			);
 			name = Comprehension;
@@ -1131,7 +1140,7 @@
 			isa = PBXGroup;
 			children = (
 				6E91D6801ECD662E0012F49F /* JailbrokeBlocker.swift */,
-				6E91D6811ECD662E0012F49F /* JailbrokeBlocker.xib */,
+				84D3B27425E43B9C00780211 /* JailbrokeBlocker.xib */,
 			);
 			path = JailbrokeBlocker;
 			sourceTree = "<group>";
@@ -2205,7 +2214,7 @@
 			isa = PBXGroup;
 			children = (
 				94C6BD431EB8513300D4AA72 /* AppUpdateBlocker.swift */,
-				94C6BD451EB8515000D4AA72 /* AppUpdateBlocker.xib */,
+				8432EBAB25DF7FF10088854F /* AppUpdateBlocker.xib */,
 			);
 			path = ForceUpdate;
 			sourceTree = "<group>";
@@ -2448,7 +2457,7 @@
 				6ED9D5DB1E5B2D5200A0719D /* ActiveTask.json in Resources */,
 				6F52327E23D9883800995A78 /* ActivityMetadata TEST1.json in Resources */,
 				6F41B85C23AC92F900D4F624 /* AppConfiguration.plist in Resources */,
-				94C6BD461EB8515000D4AA72 /* AppUpdateBlocker.xib in Resources */,
+				8432EBA825DF7FF00088854F /* AppUpdateBlocker.xib in Resources */,
 				6EE5756C1E891440009BAA25 /* Gateway.xcassets in Resources */,
 				6E7DC76E1F69479C001A05B6 /* ActivityFilterView.xib in Resources */,
 				6E5F751B1EF4109500ABA308 /* Labkey_Activity11.json in Resources */,
@@ -2463,7 +2472,7 @@
 				6EAA048B1FAF4C6E00214D03 /* Labkey_Activity_Latest.json in Resources */,
 				842ECE7C25D5BB9B00A612DA /* InfoPlist.strings in Resources */,
 				84AFCF0325C6E4D7000A9712 /* Resources.plist in Resources */,
-				6E91D6831ECD662E0012F49F /* JailbrokeBlocker.xib in Resources */,
+				84D3B27125E43B9C00780211 /* JailbrokeBlocker.xib in Resources */,
 				6EF51C9522324E3700BF8D4E /* Activitylist.json in Resources */,
 				6EF05A991E4DC36400CD7661 /* StepProvider.plist in Resources */,
 				946CA5ED1E72DCA300CC8535 /* ProgressView.xib in Resources */,
@@ -2491,7 +2500,7 @@
 				6EB740181E9CD38100A4C773 /* FetalKickTest.json in Resources */,
 				842ECED525D952D500A612DA /* Gateway.storyboard in Resources */,
 				6EC129241E64624F00B90167 /* Acivity_Question.json in Resources */,
-				6E61BCC41F27262F00C156B9 /* ComprehensionFailure.xib in Resources */,
+				84D3B26325E43B0900780211 /* ComprehensionFailure.xib in Resources */,
 				6EED31A31F1CD7B300A7AF56 /* LatestActive_1B.json in Resources */,
 				6EEB0AFC1FD2811700136EAA /* Labkey_Activity_Latest3.json in Resources */,
 				6EE8E4D91F17459200028853 /* Eligibility_1B.json in Resources */,
@@ -2532,7 +2541,7 @@
 				842ECDDE25D5B07600A612DA /* SignUpPlist.plist in Resources */,
 				842ECDDF25D5B07600A612DA /* ActiveTask.json in Resources */,
 				842ECDE025D5B07600A612DA /* ActivityMetadata TEST1.json in Resources */,
-				842ECDE225D5B07600A612DA /* AppUpdateBlocker.xib in Resources */,
+				8432EBA925DF7FF10088854F /* AppUpdateBlocker.xib in Resources */,
 				842ECEA325D5C01500A612DA /* AppConfiguration.plist in Resources */,
 				842ECDE325D5B07600A612DA /* Gateway.xcassets in Resources */,
 				842ECDE425D5B07600A612DA /* ActivityFilterView.xib in Resources */,
@@ -2550,7 +2559,7 @@
 				842ECDED25D5B07600A612DA /* LatestActive_Taskdocument.json in Resources */,
 				842ECDEE25D5B07600A612DA /* Labkey_Activity_Latest.json in Resources */,
 				842ECDF025D5B07600A612DA /* Resources.plist in Resources */,
-				842ECDF125D5B07600A612DA /* JailbrokeBlocker.xib in Resources */,
+				84D3B27225E43B9C00780211 /* JailbrokeBlocker.xib in Resources */,
 				842ECDF225D5B07600A612DA /* Activitylist.json in Resources */,
 				842ECDF325D5B07600A612DA /* StepProvider.plist in Resources */,
 				842ECDF425D5B07600A612DA /* ProgressView.xib in Resources */,
@@ -2578,7 +2587,7 @@
 				842ECE0A25D5B07600A612DA /* FetalKickTest.json in Resources */,
 				842ECED625D952D600A612DA /* Gateway.storyboard in Resources */,
 				842ECE0C25D5B07600A612DA /* Acivity_Question.json in Resources */,
-				842ECE0D25D5B07600A612DA /* ComprehensionFailure.xib in Resources */,
+				84D3B26425E43B0A00780211 /* ComprehensionFailure.xib in Resources */,
 				842ECE0E25D5B07600A612DA /* LatestActive_1B.json in Resources */,
 				842ECE0F25D5B07600A612DA /* Labkey_Activity_Latest3.json in Resources */,
 				842ECE8525D5BC6100A612DA /* GatewayOverview.plist in Resources */,
@@ -3193,6 +3202,17 @@
 			name = Gateway.storyboard;
 			sourceTree = "<group>";
 		};
+		8432EBAB25DF7FF10088854F /* AppUpdateBlocker.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				8432EBAA25DF7FF10088854F /* Base */,
+				8432EBAD25DF80060088854F /* es */,
+				8432EBAF25DF80150088854F /* es-419 */,
+				8432EBB125DF801C0088854F /* es_MX */,
+			);
+			name = AppUpdateBlocker.xib;
+			sourceTree = "<group>";
+		};
 		843B6A5E25C7E1950022B5E9 /* Branding.plist */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -3400,6 +3420,28 @@
 				843B6A6C25C7E1D10022B5E9 /* es-419 */,
 			);
 			name = Resources.plist;
+			sourceTree = "<group>";
+		};
+		84D3B26625E43B0A00780211 /* ComprehensionFailure.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				84D3B26525E43B0A00780211 /* Base */,
+				84D3B26A25E43B1700780211 /* es */,
+				84D3B26C25E43B1C00780211 /* es-419 */,
+				84D3B26E25E43B2100780211 /* es_MX */,
+			);
+			name = ComprehensionFailure.xib;
+			sourceTree = "<group>";
+		};
+		84D3B27425E43B9C00780211 /* JailbrokeBlocker.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				84D3B27325E43B9C00780211 /* Base */,
+				84D3B27625E43BA300780211 /* es */,
+				84D3B27825E43BAB00780211 /* es-419 */,
+				84D3B27A25E43BAE00780211 /* es_MX */,
+			);
+			name = JailbrokeBlocker.xib;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -3663,7 +3705,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 6;
+				CURRENT_PROJECT_VERSION = 7;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = 3485DDCN2M;
 				ENABLE_BITCODE = NO;
@@ -3699,7 +3741,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 6;
+				CURRENT_PROJECT_VERSION = 7;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 3485DDCN2M;
 				ENABLE_BITCODE = NO;

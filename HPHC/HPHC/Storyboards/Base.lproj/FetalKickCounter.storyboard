@@ -673,6 +673,7 @@
                     </view>
                     <connections>
                         <outlet property="buttonDone" destination="mVr-1X-vKQ" id="UIi-KM-zDv"/>
+                        <outlet property="labelDescription" destination="AzP-hO-NLT" id="6mu-QA-Yeh"/>
                         <segue destination="8uK-ue-bHg" kind="unwind" identifier="unwindStudyHomeSegue" animates="NO" unwindAction="unwindeToStudyHome:" id="J6u-xc-dZy"/>
                     </connections>
                 </viewController>

@@ -1,0 +1,12 @@
+
+/* Class = "UILabel"; text = "Try Again"; ObjectID = "NJC-CA-ro1"; */
+"NJC-CA-ro1.text" = "Try Again";
+
+/* Class = "UIButton"; normalTitle = "Retry"; ObjectID = "b7l-Wh-qpO"; */
+"b7l-Wh-qpO.normalTitle" = "Procesar de nuevo";
+
+/* Class = "UIButton"; normalTitle = "Cancel"; ObjectID = "dcV-56-Hws"; */
+"dcV-56-Hws.normalTitle" = "Cancelar";
+
+/* Class = "UILabel"; text = "You answered one or more questions wrong. We want to make sure you understand what this study is about and what is involved. Review the consent information screens and try again."; ObjectID = "kjL-rf-IRM"; */
+"kjL-rf-IRM.text" = "Respondió una o más preguntas incorrectamente. Queremos asegurarnos de que comprenda de qué se trata este estudio y en qué consiste. Revise las pantallas de información de consentimiento y vuelva a intentarlo.";

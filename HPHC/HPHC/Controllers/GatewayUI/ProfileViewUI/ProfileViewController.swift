@@ -622,6 +622,7 @@ class ProfileViewController: UIViewController, SlideMenuControllerDelegate {
             else{
                 let passcodeViewController = ORKPasscodeViewController.passcodeAuthenticationViewController(withText: "", delegate: self)
                 
+                passcodeViewController.modalPresentationStyle = .fullScreen
                 self.navigationController?.present(passcodeViewController, animated: false, completion: nil)
             }
         }

@@ -1534,14 +1534,14 @@ Below is a list of studies that you are a part of and information on how your re
                                                         <constraint firstAttribute="width" secondItem="jJh-F0-cga" secondAttribute="height" multiplier="1:1" id="b7c-gM-5Vr"/>
                                                     </constraints>
                                                 </imageView>
-                                                <button opaque="NO" tag="11220" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="system" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="b2d-cc-iAX">
-                                                    <rect key="frame" x="17" y="38" width="130" height="29"/>
+                                                <button opaque="NO" tag="11220" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="system" lineBreakMode="clip" translatesAutoresizingMaskIntoConstraints="NO" id="b2d-cc-iAX">
+                                                    <rect key="frame" x="17" y="38" width="138" height="29"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="130" id="YAK-bd-EdX"/>
+                                                        <constraint firstAttribute="width" constant="138" id="LNs-Ny-MJW"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
                                                     <inset key="titleEdgeInsets" minX="33" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                                    <state key="normal" title="Delete My Data">
+                                                    <state key="normal" title="Delete my data">
                                                         <color key="titleColor" red="0.54901960780000003" green="0.58431372550000005" blue="0.63921568630000003" alpha="1" colorSpace="calibratedRGB"/>
                                                     </state>
                                                     <connections>
@@ -1549,19 +1549,16 @@ Below is a list of studies that you are a part of and information on how your re
                                                     </connections>
                                                 </button>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="notChecked" translatesAutoresizingMaskIntoConstraints="NO" id="Xgb-dI-JRf">
-                                                    <rect key="frame" x="164" y="43.5" width="18" height="18"/>
+                                                    <rect key="frame" x="172" y="43.5" width="18" height="18"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" secondItem="Xgb-dI-JRf" secondAttribute="height" multiplier="1:1" id="sF1-rr-bFP"/>
                                                     </constraints>
                                                 </imageView>
-                                                <button opaque="NO" tag="11221" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="system" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="OL5-qf-Lfd">
-                                                    <rect key="frame" x="160" y="38" width="134" height="29"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="134" id="OSm-rl-Hpj"/>
-                                                    </constraints>
+                                                <button opaque="NO" tag="11221" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="system" lineBreakMode="headTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OL5-qf-Lfd">
+                                                    <rect key="frame" x="168" y="38" width="163" height="29"/>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
                                                     <inset key="titleEdgeInsets" minX="33" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                                    <state key="normal" title="Retain My Data">
+                                                    <state key="normal" title="Retain my data">
                                                         <color key="titleColor" red="0.54901960780000003" green="0.58431372550000005" blue="0.63921568630000003" alpha="1" colorSpace="calibratedRGB"/>
                                                     </state>
                                                     <connections>
@@ -1574,7 +1571,9 @@ Below is a list of studies that you are a part of and information on how your re
                                                 <constraint firstItem="OL5-qf-Lfd" firstAttribute="leading" secondItem="b2d-cc-iAX" secondAttribute="trailing" constant="13" id="HNf-ib-ZlM"/>
                                                 <constraint firstItem="jJh-F0-cga" firstAttribute="centerX" secondItem="2S6-Uy-1FW" secondAttribute="centerX" multiplier="0.154667" id="QHj-g7-ywl"/>
                                                 <constraint firstItem="Xgb-dI-JRf" firstAttribute="centerY" secondItem="2S6-Uy-1FW" secondAttribute="centerY" multiplier="1.35065" id="Sev-ac-g6e"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="OL5-qf-Lfd" secondAttribute="trailing" constant="28" id="YsQ-Sx-nZN"/>
                                                 <constraint firstItem="OL5-qf-Lfd" firstAttribute="centerY" secondItem="2S6-Uy-1FW" secondAttribute="centerY" multiplier="1.3506" id="cx7-1M-Dvx"/>
+                                                <constraint firstItem="b2d-cc-iAX" firstAttribute="leading" secondItem="2S6-Uy-1FW" secondAttribute="leadingMargin" constant="1" id="g72-J1-6gB"/>
                                                 <constraint firstItem="OL5-qf-Lfd" firstAttribute="leading" secondItem="Xgb-dI-JRf" secondAttribute="trailing" constant="-22" id="iei-PB-WOr"/>
                                                 <constraint firstItem="e60-ar-C8w" firstAttribute="leading" secondItem="2S6-Uy-1FW" secondAttribute="leading" constant="20" id="jeV-GD-idD"/>
                                                 <constraint firstItem="e60-ar-C8w" firstAttribute="width" secondItem="2S6-Uy-1FW" secondAttribute="width" multiplier="341/375" id="kec-bn-knJ"/>

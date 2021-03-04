@@ -103,7 +103,7 @@ class StudyListCell: UITableViewCell {
             labelStudySponserName?.text =  study.sponserName!
         }
         
-        labelStudyCategoryType?.text =  study.category!.uppercased()
+        labelStudyCategoryType?.text =  categoryReCorrection(study.category!).uppercased()
         
         progressBarCompletion?.layer.cornerRadius = 2
         progressBarCompletion?.layer.masksToBounds = true
@@ -129,6 +129,34 @@ class StudyListCell: UITableViewCell {
         }
     }
   
+    //Category correction for Spanish Language
+    func categoryReCorrection(_ category: String) -> String {
+      switch category {
+      case "1Biologics Safety":
+        return "Seguridad de los productos biológicos"
+      case "1Clinical Trials":
+        return "Ensayos clínicos"
+      case "1Cosmetics Safety":
+        return "Seguridad de los cosméticos"
+      case "1Drug Safety":
+        return "Seguridad de los medicamentos"
+      case "1Food Safety":
+        return "Seguridad alimenticia"
+      case "1Medical Device Safety":
+        return "Seguridad de dispositivos médicos"
+      case "1Observational Studies":
+        return "Estudios observacionales"
+      case "1Public Health":
+        return "Salud pública"
+      case "1Radiation-Emitting Products":
+        return "Productos de radiación"
+      case "1Tobacco Use":
+        return "El consumo de tabaco"
+      default:
+        return category // Category is in English OR category Not recognised
+      }
+    }
+  
     /**
      Used to set the Study Language
      @param study    Access the data from Study Class
@@ -144,7 +172,7 @@ class StudyListCell: UITableViewCell {
      */
     func setStudyStatus(study: Study){
         
-        labelStudyStatus?.text = study.status.rawValue.uppercased()
+        labelStudyStatus?.text = NSLocalizedStrings("\(study.status.rawValue.uppercased())", comment: "")
         
         switch study.status {
         case .Active:
@@ -182,9 +210,7 @@ class StudyListCell: UITableViewCell {
             default:
                 labelStudyUserStatus?.text = NSLocalizedString("\(userStudyStatus.status.description)", comment: "")
             }
-            
-            
-            
+          
             //update completion %
             self.labelCompletionValue?.text = String(userStudyStatus.completion) + "%"
             self.labelAdherenceValue?.text = String(userStudyStatus.adherence)  + "%"

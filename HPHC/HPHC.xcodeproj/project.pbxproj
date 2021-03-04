@@ -142,6 +142,8 @@
 		7878B311221574D80052FC23 /* StandaloneStudy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7878B30E221574D80052FC23 /* StandaloneStudy.swift */; };
 		7878B31D2216C6E20052FC23 /* HPHCTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7878B31C2216C6E20052FC23 /* HPHCTests.swift */; };
 		83E41E58CE40BA32BA0F019B /* Pods_HPHCUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E4CF7BB238C017BF7E2A6346 /* Pods_HPHCUITests.framework */; };
+		842CEF4A25F0C47C00D146A6 /* Study.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 842CEF4D25F0C47C00D146A6 /* Study.storyboard */; };
+		842CEF4B25F0C47C00D146A6 /* Study.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 842CEF4D25F0C47C00D146A6 /* Study.storyboard */; };
 		842ECD2D25D5B07600A612DA /* UIApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94334F861E70055A00755444 /* UIApplication.swift */; };
 		842ECD2E25D5B07600A612DA /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94334F851E70055A00755444 /* UIViewController.swift */; };
 		842ECD2F25D5B07600A612DA /* SignUpTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B3DD361E6ED8E500327AE5 /* SignUpTableViewCell.swift */; };
@@ -304,7 +306,6 @@
 		842ECDCC25D5B07600A612DA /* FetalKickCounterStepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EED7B3A1E65751D002C1FA3 /* FetalKickCounterStepViewController.swift */; };
 		842ECDCE25D5B07600A612DA /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EEBA4791F25FAA100FB0258 /* HealthKit.framework */; };
 		842ECDCF25D5B07600A612DA /* ResearchKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EF0BC3C2223D1D6004F2357 /* ResearchKit.framework */; };
-		842ECDD225D5B07600A612DA /* Study.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 94B3DD3A1E6ED8E500327AE5 /* Study.storyboard */; };
 		842ECDD425D5B07600A612DA /* Labkey_Activity_Latest4.json in Resources */ = {isa = PBXBuildFile; fileRef = 6ED5B05C1FCDBD7C00925352 /* Labkey_Activity_Latest4.json */; };
 		842ECDD525D5B07600A612DA /* LoginAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 94B3DD2D1E6ED8E500327AE5 /* LoginAssets.xcassets */; };
 		842ECDD625D5B07600A612DA /* ConsentLatest.json in Resources */ = {isa = PBXBuildFile; fileRef = 6E93C7E01EE2EC26006788B1 /* ConsentLatest.json */; };
@@ -467,7 +468,6 @@
 		94B3DD591E6ED8E500327AE5 /* SignUpTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B3DD361E6ED8E500327AE5 /* SignUpTableViewCell.swift */; };
 		94B3DD5A1E6ED8E500327AE5 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B3DD371E6ED8E500327AE5 /* SignUpViewController.swift */; };
 		94B3DD5B1E6ED8E500327AE5 /* VerificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B3DD381E6ED8E500327AE5 /* VerificationViewController.swift */; };
-		94B3DD5C1E6ED8E500327AE5 /* Study.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 94B3DD3A1E6ED8E500327AE5 /* Study.storyboard */; };
 		94B3DD5D1E6ED8E500327AE5 /* Study.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 94B3DD3B1E6ED8E500327AE5 /* Study.xcassets */; };
 		94B3DD5E1E6ED8E500327AE5 /* StudyOverviewPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B3DD3D1E6ED8E500327AE5 /* StudyOverviewPageViewController.swift */; };
 		94B3DD5F1E6ED8E500327AE5 /* StudyOverviewPageViewControllerFirst.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B3DD3E1E6ED8E500327AE5 /* StudyOverviewPageViewControllerFirst.swift */; };
@@ -719,6 +719,10 @@
 		7878B31E2216C6E20052FC23 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7BDC002620C7855C409516D3 /* Pods-HPHC.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HPHC.debug.xcconfig"; path = "Pods/Target Support Files/Pods-HPHC/Pods-HPHC.debug.xcconfig"; sourceTree = "<group>"; };
 		80162EB0842AABC6DBF4AC42 /* Pods_FDAMS_HIMSS_App.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FDAMS_HIMSS_App.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		842CEF4C25F0C47C00D146A6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Study.storyboard; sourceTree = "<group>"; };
+		842CEF5325F0C49600D146A6 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Study.strings; sourceTree = "<group>"; };
+		842CEF5525F0C4ED00D146A6 /* es-419 */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-419"; path = "es-419.lproj/Study.strings"; sourceTree = "<group>"; };
+		842CEF5B25F0C59200D146A6 /* es_MX */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es_MX; path = es_MX.lproj/Study.strings; sourceTree = "<group>"; };
 		842ECE1E25D5B07600A612DA /* MyStudies COVID-19.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "MyStudies COVID-19.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		842ECE2925D5B0D700A612DA /* COVID-19.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "COVID-19.xcassets"; sourceTree = "<group>"; };
 		842ECE2C25D5B0D700A612DA /* COVID-19.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "COVID-19.storyboard"; sourceTree = "<group>"; };
@@ -907,7 +911,6 @@
 		94B3DD361E6ED8E500327AE5 /* SignUpTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpTableViewCell.swift; sourceTree = "<group>"; };
 		94B3DD371E6ED8E500327AE5 /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		94B3DD381E6ED8E500327AE5 /* VerificationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VerificationViewController.swift; sourceTree = "<group>"; };
-		94B3DD3A1E6ED8E500327AE5 /* Study.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Study.storyboard; sourceTree = "<group>"; };
 		94B3DD3B1E6ED8E500327AE5 /* Study.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Study.xcassets; sourceTree = "<group>"; };
 		94B3DD3D1E6ED8E500327AE5 /* StudyOverviewPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudyOverviewPageViewController.swift; sourceTree = "<group>"; };
 		94B3DD3E1E6ED8E500327AE5 /* StudyOverviewPageViewControllerFirst.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudyOverviewPageViewControllerFirst.swift; sourceTree = "<group>"; };
@@ -1536,7 +1539,7 @@
 				6E7D2D621E433E8800763D4C /* LaunchScreen.storyboard */,
 				846A275125D96CBF00224B46 /* Login.storyboard */,
 				6E7D2D5D1E433E8800763D4C /* Main.storyboard */,
-				94B3DD3A1E6ED8E500327AE5 /* Study.storyboard */,
+				842CEF4D25F0C47C00D146A6 /* Study.storyboard */,
 			);
 			path = Storyboards;
 			sourceTree = "<group>";
@@ -2441,7 +2444,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				94B3DD5C1E6ED8E500327AE5 /* Study.storyboard in Resources */,
+				842CEF4A25F0C47C00D146A6 /* Study.storyboard in Resources */,
 				846A277825DADD4300224B46 /* SearchBarView.xib in Resources */,
 				6ED5B05D1FCDBD8200925352 /* Labkey_Activity_Latest4.json in Resources */,
 				8923429122B122DF0059F910 /* LoginAssets.xcassets in Resources */,
@@ -2526,7 +2529,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				842ECDD225D5B07600A612DA /* Study.storyboard in Resources */,
+				842CEF4B25F0C47C00D146A6 /* Study.storyboard in Resources */,
 				846A277925DADD4300224B46 /* SearchBarView.xib in Resources */,
 				842ECDD425D5B07600A612DA /* Labkey_Activity_Latest4.json in Resources */,
 				842ECDD525D5B07600A612DA /* LoginAssets.xcassets in Resources */,
@@ -3145,6 +3148,17 @@
 				843B6A6325C7E1C00022B5E9 /* es-419 */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		842CEF4D25F0C47C00D146A6 /* Study.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				842CEF4C25F0C47C00D146A6 /* Base */,
+				842CEF5325F0C49600D146A6 /* es */,
+				842CEF5525F0C4ED00D146A6 /* es-419 */,
+				842CEF5B25F0C59200D146A6 /* es_MX */,
+			);
+			name = Study.storyboard;
 			sourceTree = "<group>";
 		};
 		842ECE7F25D5BB9B00A612DA /* InfoPlist.strings */ = {

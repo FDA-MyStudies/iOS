@@ -25,7 +25,7 @@ import WebKit
 
 let kPdfMimeType = "application/pdf"
 let kUTF8Encoding = "UTF-8"
-let kEmailSubject = "Signed Consent"
+let kEmailSubject = NSLocalizedStrings("Signed Consent", comment: "")
 let kEmailSubjectDashboard = "Dashboard"
 let kEmailSubjectCharts = "Charts"
 let kConsentFileName = "Consent"

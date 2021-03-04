@@ -440,7 +440,7 @@
 "Completed"="Completed";
 "Withdrawn"="Withdrawn";
 "Not Eligible"="Not Eligible";
-"Yet To Join"="Yet To Join";
+"Yet to Join"="Yet to Join";
 "Categories"="Categories";
 "Biologics Safety"="Biologics Safety";
 "Clinical Trials"="Clinical Trials";
@@ -459,7 +459,7 @@
 "The selected study is in the"="The selected study is in the";
 "language"="language";
 "Please change language to"="Please change language to";
-"in your device settings and continue"="in your device settings and continue";
+"in your device settings and continue."="in your device settings and continue.";
 
 "Cosmetics Safety"="Cosmetics Safety";
 
@@ -470,3 +470,7 @@
 
 "Required"="Required";
 "Sorry, you are not eligible for participation in this study. We thank you for your interest and time, and encourage you to explore other studies as they are made available in the app."="Sorry, you are not eligible for participation in this study. We thank you for your interest and time, and encourage you to explore other studies as they are made available in the app.";
+
+"Watch Video"="Watch Video";
+
+"Signed Consent"="Signed Consent";

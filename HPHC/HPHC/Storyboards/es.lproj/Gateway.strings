@@ -72,7 +72,7 @@
 "TmB-Q7-f8P.normalTitle" = "Desconectar";
 
 /* Class = "UILabel"; text = "confirm Password"; ObjectID = "XTf-xa-igQ"; */
-"XTf-xa-igQ.text" = "Confirmar contraseña";
+"XTf-xa-igQ.text" = "Confirma contraseña";
 
 /* Class = "UILabel"; text = "You have chosen to delete your FDA app account. This will result in automatic withdrawl from all Studies.\nBelow is a list of studies that you are a part of and information on how your response data will be handled with each after you withdraw.Please review and confirm."; ObjectID = "Xbh-R9-X5r"; */
 "Xbh-R9-X5r.text" = "You have chosen to delete your FDA app account. This will result in automatic withdrawl from all Studies.\nBelow is a list of studies that you are a part of and information on how your response data will be handled with each after you withdraw.Please review and confirm.";

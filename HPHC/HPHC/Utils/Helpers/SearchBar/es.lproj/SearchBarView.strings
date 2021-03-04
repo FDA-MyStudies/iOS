@@ -3,7 +3,7 @@
 "7Rb-1u-tkt.text" = "Buscar estudio por";
 
 /* Class = "UISegmentedControl"; Hr1-BD-AHJ.segmentTitles[0] = "token"; ObjectID = "Hr1-BD-AHJ"; */
-"Hr1-BD-AHJ.segmentTitles[0]" = "token";
+"Hr1-BD-AHJ.segmentTitles[0]" = "simbolo";
 
 /* Class = "UISegmentedControl"; Hr1-BD-AHJ.segmentTitles[1] = "keyword"; ObjectID = "Hr1-BD-AHJ"; */
 "Hr1-BD-AHJ.segmentTitles[1]" = "palabra clave";

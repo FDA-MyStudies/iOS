@@ -59,15 +59,22 @@ class SignUpTableViewCell: UITableViewCell {
     func populateCellData(data: NSDictionary , securedText: Bool, keyboardType: UIKeyboardType?){
         
         textFieldValue?.isSecureTextEntry = false
-        if securedText == true {
-            textFieldValue?.isSecureTextEntry = true
+      textFieldValue?.textContentType = UITextContentType(rawValue: "")
+      if securedText == true {
+        if #available(iOS 12.0, *) {
+          textFieldValue?.autocorrectionType = .no
+        } else {
+          textFieldValue?.autocorrectionType = .no
         }
+      }
+        
+
         
         labelType?.text = NSLocalizedString((data["helpText"] as? String)!, comment: "")
         textFieldValue?.placeholder = NSLocalizedString((data["placeHolder"] as? String)!, comment: "")
         
         if keyboardType == nil {
-            textFieldValue?.keyboardType = .default
+            textFieldValue?.keyboardType = .emailAddress
         } else {
             textFieldValue?.keyboardType = keyboardType!
         }

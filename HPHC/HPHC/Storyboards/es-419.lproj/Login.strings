@@ -100,3 +100,6 @@
 
 /* Class = "UIButton"; normalTitle = "www.fda.gov"; ObjectID = "zqZ-PQ-IFe"; */
 "zqZ-PQ-IFe.normalTitle" = "www.fda.gov";
+
+/* Class = "UILabel"; text = "Watch Video"; ObjectID = "jrJ-DJ-Dbb"; */
+"jrJ-DJ-Dbb.text" = "Ver video";

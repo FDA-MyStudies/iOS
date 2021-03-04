@@ -31,7 +31,7 @@
 "This feature will be available in the next sprint."="Esta función estará disponible en el próximo sprint.";
 "Are you sure you want to sign out?"="¿Estás segura de que quieres cerrar sesión?";
 
-"Are you sure you want to sign out? Incomplete activities and activities completed while offline must be re-started when you next sign in."="¿Estás segura de que quieres cerrar sesión?";
+"Are you sure you want to sign out? Incomplete activities and activities completed while offline must be re-started when you next sign in."="¿Estás seguro de que quieres cerrar sesión? Las actividades incompletas y las que se completaron sin conexión deben reiniciarse la próxima vez que inicie sesión.";
 
 "Sign Out later"="Cerrar sesión más tarde";
 "Reach Out"="Alcanzar";
@@ -167,7 +167,7 @@
 "Enter keyword(s)"="Inserte palabras claves";
 
 
-"Your enrollment token has been successfully validated. You are eligible to join the Study.\nPlease click Continue to proceed to the Consent section."="Su token de inscripción se ha validado correctamente. Es elegible para unirse al estudio. \ NHaga clic en Continuar para pasar a la sección Consentimiento.";
+"Your enrollment token has been successfully validated. You are eligible to join the Study.\nPlease click Continue to proceed to the Consent section."="Según las respuestas que proporcionó, es elegible para participar en este estudio.\nHaga clic en Continuar para pasar a la sección Consentimiento.";
 
 "You are Eligible!"="¡Eres elegible!";
 
@@ -177,12 +177,12 @@
 "Eligibility Test"="Prueba de elegibilidad";
 "Please answer some quick questions to confirm your eligibility for this study."="Responda algunas preguntas rápidas para confirmar su elegibilidad para este estudio.";
 
-"Based on the answers you provided, you are eligible to participate in this study.\nPlease click Continue to proceed to the Consent section."="Según las respuestas que proporcionó, puede participar en este estudio. \ NHaga clic en Continuar para pasar a la sección Consentimiento.";
+"Based on the answers you provided, you are eligible to participate in this study.\nPlease click Continue to proceed to the Consent section."="Según las respuestas que proporcionó, es elegible para participar en este estudio. Haga clic en Continuar para pasar a la sección Consentimiento.";
 
 "Change server to"="Cambiar servidor a";
 
 
-"TERMS"="Condiciones";
+"TERMS"="CONDICIONES";
 "PRIVACY POLICY"="POLÍTICA DE PRIVACIDAD";
 "Please Enter Valid Value"="Ingrese un valor válido";
 "Important Note"="Nota importante";
@@ -395,7 +395,7 @@
 "Select Time"="Seleccionar hora";
 
 "kicks "="patadas ";
-"please enter "="Por favor ";
+"please enter "="Por favor escribe ";
 "kicks only "="solo patadas ";
 
 "Please select a valid time(Max "="Seleccione una hora válida (máx ";
@@ -404,10 +404,10 @@
 "duration"="duración";
 
 
-"You have chosen to delete your #APPNAME# Account. This will result in automatic withdrawal from all studies.\nBelow is a list of studies that you are a part of and information on how your response data will be handled with each after you withdraw. Please review and confirm."="Ha elegido eliminar su cuenta #APPNAME#. Esto dará como resultado el retiro automático de todos los estudios. \n continuación se muestra una lista de los estudios de los que forma parte e información sobre cómo se manejarán los datos de respuesta con cada uno después de que se retire. Por favor revise y confirme.";
+"You have chosen to delete your #APPNAME# Account. This will result in automatic withdrawal from all studies.\nBelow is a list of studies that you are a part of and information on how your response data will be handled with each after you withdraw. Please review and confirm."="Ha elegido eliminar su cuenta #APPNAME#. Esto dará como resultado el retiro automático de todos los estudios.\ncontinuación se muestra una lista de los estudios de los que forma parte e información sobre cómo se manejarán los datos de respuesta con cada uno después de que se retire. Por favor revise y confirme.";
 
 
-"You have chosen to delete your #APPNAME# Account. This will result in automatic withdrawal from study.\nBelow is the study that you are a part of and information on how your response data will be handled after you withdraw. Please review and confirm."="Ha elegido eliminar su cuenta #APPNAME#. Esto resultará en el retiro automático del estudio. \n continuación se muestra el estudio del que forma parte y la información sobre cómo se manejarán sus datos de respuesta después de que se retire. Por favor revise y confirme.";
+"You have chosen to delete your #APPNAME# Account. This will result in automatic withdrawal from study.\nBelow is the study that you are a part of and information on how your response data will be handled after you withdraw. Please review and confirm."="Ha elegido eliminar su cuenta #APPNAME#. Esto resultará en el retiro automático del estudio.\ncontinuación se muestra el estudio del que forma parte y la información sobre cómo se manejarán sus datos de respuesta después de que se retire. Por favor revise y confirme.";
 
 "Please select an option between Delete Data or Retain Data for all studies."="Seleccione una opción entre Eliminar datos o Retener datos para todos los estudios.";
 
@@ -415,7 +415,7 @@
 "Response data will be retained"="Se conservarán los datos de respuesta";
 "Invalid ParticipantId."="ID de participante no válido.";
 
-"Sorry, no Studies found. Please try different Filter Options"="Lo sentimos, no se encontraron estudios. Pruebe diferentes opciones de filtro";
+"Sorry, no Studies found. Please try different Filter Options"="Lo siento, no se encontraron estudios. Por favor intente un filtro diferente.";
 "Sorry, no Studies found. Please check the spelling or try a different search."="Lo sentimos, no se encontraron estudios. Por favor revise la ortografía o intente una búsqueda diferente.";
 
 "Sorry, no studies available right now. Please remain signed in to get notified when there are new studies available."="Lo siento, no hay estudios disponibles en este momento. Por favor permanezca reistrado para recibir notificaciones cuando haya nuevos estudios disponibles.";
@@ -441,24 +441,23 @@
 "Categories"="Categorías";
 "Biologics Safety"="Seguridad de los productos biológicos";
 "Clinical Trials"="Ensayos clínicos";
+"Cosmetics Safety"="Seguridad de los cosméticos";
 "Drug Safety"="Seguridad de los medicamentos";
 "Food Safety"="Seguridad alimenticia";
 "Medical Device Safety"="Seguridad de dispositivos médicos";
 "Observational Studies"="Estudios observacionales";
 "Public Health"="Salud pública";
-"Radiation-Emitting Products"="Productos emisores de radiación";
+"Radiation-Emitting Products"="Productos de radiación";
 "Tobacco Use"="El consumo de tabaco";
 
 "DELETE ACCOUNT"="BORRAR CUENTA";
 
 "Settings"="Ajustes";
 
-"The selected study is in the"="El estudio seleccionado se encuentra en el";
-"language"="idioma";
-"Please change language to"="Por favor cambie el idioma a";
-"in your device settings and continue"="en la configuración de su dispositivo y continúe";
-
-"Cosmetics Safety"="Seguridad de los cosméticos";
+"The selected study is in the"="El estudio seleccionado está en el idioma";
+"language"=".";
+"Please change language to"="Cambie el idioma a";
+"in your device settings and continue"="en la configuración de su dispositivo y continúe.";
 
 
 "ACTIVE"="ACTIVO";
@@ -468,3 +467,8 @@
 
 "Required"="Necesario";
 "Sorry, you are not eligible for participation in this study. We thank you for your interest and time, and encourage you to explore other studies as they are made available in the app."="Lo sentimos, no eres elegible para participar en este estudio. Le agradecemos su interés y tiempo, y lo alentamos a explorar otros estudios a medida que estén disponibles en la aplicación.";
+
+"Yet to Join"="Aún para unirse";
+"Watch Video"="Ver video";
+
+"Signed Consent"="Consentimiento firmado";

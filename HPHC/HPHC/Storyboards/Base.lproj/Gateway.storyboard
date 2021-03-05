@@ -1644,13 +1644,13 @@ Below is a list of studies that you are a part of and information on how your re
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="confirm Password" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XTf-xa-igQ">
-                                                    <rect key="frame" x="31" y="15.5" width="146" height="21"/>
+                                                    <rect key="frame" x="18" y="15.5" width="146" height="21"/>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="18"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="enter email" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="9O9-Ao-Ceo">
-                                                    <rect key="frame" x="198" y="8" width="151" height="40"/>
+                                                    <rect key="frame" x="172" y="8" width="185" height="40"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="40" id="Nkj-E6-rs8"/>
                                                     </constraints>
@@ -1662,7 +1662,7 @@ Below is a list of studies that you are a part of and information on how your re
                                                     </connections>
                                                 </textField>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="H2D-Wi-E81">
-                                                    <rect key="frame" x="28" y="57" width="321" height="1"/>
+                                                    <rect key="frame" x="19" y="57" width="337" height="1"/>
                                                     <color key="backgroundColor" red="0.84705882349999995" green="0.89019607840000003" blue="0.90196078430000004" alpha="1" colorSpace="calibratedRGB"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="1" id="8Xz-8Z-gMa"/>
@@ -1671,11 +1671,11 @@ Below is a list of studies that you are a part of and information on how your re
                                             </subviews>
                                             <constraints>
                                                 <constraint firstAttribute="bottomMargin" secondItem="XTf-xa-igQ" secondAttribute="bottom" constant="14.5" id="6Jk-Uh-9EM"/>
-                                                <constraint firstItem="XTf-xa-igQ" firstAttribute="leading" secondItem="0Tk-EB-p8c" secondAttribute="leadingMargin" constant="15" id="DfY-Wh-4SH"/>
-                                                <constraint firstItem="H2D-Wi-E81" firstAttribute="leading" secondItem="0Tk-EB-p8c" secondAttribute="leadingMargin" constant="12" id="Hkf-UT-7H7"/>
-                                                <constraint firstItem="9O9-Ao-Ceo" firstAttribute="leading" secondItem="XTf-xa-igQ" secondAttribute="trailing" constant="21" id="LEN-0J-35A"/>
-                                                <constraint firstAttribute="trailingMargin" secondItem="H2D-Wi-E81" secondAttribute="trailing" constant="10" id="f34-2I-qlO"/>
-                                                <constraint firstAttribute="trailingMargin" secondItem="9O9-Ao-Ceo" secondAttribute="trailing" constant="10" id="iFk-vD-KPb"/>
+                                                <constraint firstItem="XTf-xa-igQ" firstAttribute="leading" secondItem="0Tk-EB-p8c" secondAttribute="leadingMargin" constant="2" id="DfY-Wh-4SH"/>
+                                                <constraint firstItem="H2D-Wi-E81" firstAttribute="leading" secondItem="0Tk-EB-p8c" secondAttribute="leadingMargin" constant="3" id="Hkf-UT-7H7"/>
+                                                <constraint firstItem="9O9-Ao-Ceo" firstAttribute="leading" secondItem="XTf-xa-igQ" secondAttribute="trailing" constant="8" id="LEN-0J-35A"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="H2D-Wi-E81" secondAttribute="trailing" constant="3" id="f34-2I-qlO"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="9O9-Ao-Ceo" secondAttribute="trailing" constant="2" id="iFk-vD-KPb"/>
                                                 <constraint firstAttribute="bottomMargin" secondItem="H2D-Wi-E81" secondAttribute="bottom" constant="-7" id="rcR-bH-N6p"/>
                                                 <constraint firstAttribute="bottomMargin" secondItem="9O9-Ao-Ceo" secondAttribute="bottom" constant="3" id="tqC-BF-4eu"/>
                                             </constraints>

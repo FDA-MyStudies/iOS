@@ -172,7 +172,7 @@ class StudyListCell: UITableViewCell {
      */
     func setStudyStatus(study: Study){
         
-        labelStudyStatus?.text = NSLocalizedStrings("\(study.status.rawValue.uppercased())", comment: "")
+        labelStudyStatus?.text = NSLocalizedString("\(study.status.rawValue.uppercased())", comment: "")
         
         switch study.status {
         case .Active:

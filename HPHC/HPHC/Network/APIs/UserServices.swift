@@ -1010,7 +1010,7 @@ extension UserServices: NMWebServiceDelegate{
                 
                 //error.localizedDescription = "Your Session is Expired"
                 
-                let errorInfo = ["NSLocalizedDescription": "Your Session is Expired"]
+                let errorInfo = ["NSLocalizedDescription": NSLocalizedStrings("Your Session is Expired", comment: "")]
                 
                 let localError  = NSError.init(domain: error.domain, code: 403, userInfo: errorInfo)
                 
@@ -1033,12 +1033,12 @@ extension UserServices: NMWebServiceDelegate{
                 var errorInfo = error.userInfo
                 var localError = error
                 if error.code == 403 {
-                    errorInfo = ["NSLocalizedDescription": "Your Session is Expired"]
+                    errorInfo = ["NSLocalizedDescription": NSLocalizedStrings("Your Session is Expired", comment: "")]
                     localError  = NSError.init(domain: error.domain, code: 403, userInfo: errorInfo)
                 } else if error.code == 400,
                     requestName as String == RegistrationMethods.feedback.description
                     || requestName as String == RegistrationMethods.contactUs.description {
-                    errorInfo = ["NSLocalizedDescription": "Sorry, an error occurred and your feedback could not be sent to the organization. Please retry in some time."]
+                    errorInfo = ["NSLocalizedDescription": NSLocalizedStrings("Sorry, an error occurred and your feedback could not be sent to the organization. Please retry in some time.", comment: "")]
                     localError  = NSError.init(domain: error.domain, code: 400, userInfo: errorInfo)
                 }
                 

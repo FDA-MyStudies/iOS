@@ -500,17 +500,24 @@ class ConsentBuilder {
         return step
     }
 
-    func LARBranchingRule() -> ORKStepNavigationRule {
-        let predicate1 = ORKResultPredicate.predicateForChoiceQuestionResult(with: ORKResultSelector(resultIdentifier: kLARConsentStep), expectedAnswerValue: "Choice_1" as NSCoding & NSCopying & NSObjectProtocol)
-
-         //Mutiple Predicates
-         let predicate2 = ORKResultPredicate.predicateForChoiceQuestionResult(with: ORKResultSelector(resultIdentifier: kLARConsentStep), expectedAnswerValue: "Choice_2" as NSCoding & NSCopying & NSObjectProtocol)
-
-         let predi = [predicate2, predicate1]
-         let desti = [kLARConsentParticipantStep, kReviewIdentifier]
-
-         return ORKPredicateStepNavigationRule(resultPredicates: predi, destinationStepIdentifiers: desti, defaultStepIdentifier: kReviewIdentifier, validateArrays: true)
-
+    func LARBranchingRule () -> ORKStepNavigationRule {
+      
+      var defaultIdentifierStr = kReviewIdentifier
+      let sharingConsentStep: ConsentSharingStep? = getConsentSharingStep()
+      if sharingConsentStep != nil, !StudyUpdates.studyConsentUpdated {
+        defaultIdentifierStr = kConsentSharing
+      }
+      
+      let predicate1 = ORKResultPredicate.predicateForChoiceQuestionResult(with: ORKResultSelector(resultIdentifier: kLARConsentStep), expectedAnswerValue: "Choice_1" as NSCoding & NSCopying & NSObjectProtocol)
+      
+      //Mutiple Predicates
+      let predicate2 = ORKResultPredicate.predicateForChoiceQuestionResult(with: ORKResultSelector(resultIdentifier: kLARConsentStep), expectedAnswerValue: "Choice_2" as NSCoding & NSCopying & NSObjectProtocol)
+      
+      let predi = [predicate2, predicate1]
+      let desti = [kLARConsentParticipantStep, defaultIdentifierStr]
+      
+      return ORKPredicateStepNavigationRule(resultPredicates: predi, destinationStepIdentifiers: desti, defaultStepIdentifier: defaultIdentifierStr, validateArrays: true)
+      
     }
 }
 

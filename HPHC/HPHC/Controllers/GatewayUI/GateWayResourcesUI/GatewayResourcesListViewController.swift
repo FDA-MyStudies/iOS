@@ -24,9 +24,13 @@ class GatewayResourcesListViewController: UIViewController {
 
     @IBOutlet var tableView: UITableView?
     
-    func loadResources(){
+    func loadResources() {
         
-        let plistPath = Bundle.main.path(forResource: "Resources", ofType: ".plist", inDirectory: nil)
+        var plistPath = Bundle.main.path(forResource: "Resources", ofType: ".plist", inDirectory: nil)
+        let localeDefault = Locale.preferredLanguages.first ?? "en"
+        if !(localeDefault.hasPrefix("es") || localeDefault.hasPrefix("en")) {
+          plistPath = Bundle.main.path(forResource: "Resources", ofType: ".plist", inDirectory: nil, forLocalization: "Base")
+        }
         let arrayContent = NSMutableArray.init(contentsOfFile: plistPath!)
         
         do {

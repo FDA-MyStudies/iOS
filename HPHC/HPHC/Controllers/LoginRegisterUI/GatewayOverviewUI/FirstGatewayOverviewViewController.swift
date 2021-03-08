@@ -32,6 +32,8 @@ class FirstGatewayOverviewViewController: UIViewController{
     @IBOutlet var buttonGetStarted: UIButton?
     @IBOutlet var labelDescriptionText: UILabel?
     @IBOutlet var labelTitleText: UILabel?
+    @IBOutlet var labelWatchVideo: UILabel?
+    @IBOutlet var imageWatchVideo: UIImageView?
     
     var pageIndex: Int!
     var overviewSectionDetail: OverviewSection!
@@ -47,6 +49,13 @@ class FirstGatewayOverviewViewController: UIViewController{
         
         if overviewSectionDetail.link == nil {
             buttonWatchVideo?.isHidden = true
+            imageWatchVideo?.isHidden = true
+            labelWatchVideo?.isHidden = true
+        }
+        else {
+          buttonWatchVideo?.isHidden = false
+          imageWatchVideo?.isHidden = false
+          labelWatchVideo?.isHidden = false
         }
         
     }

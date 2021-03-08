@@ -37,7 +37,7 @@ class FilterListCollectionViewCell: UICollectionViewCell {
         if filterOptions.title.count == 0 {
             tableView?.tableHeaderView = nil
         } else {
-            labelHeaderTitle?.text = filterOptions.title
+            labelHeaderTitle?.text = NSLocalizedString("\(filterOptions.title ?? "")", comment: "")
             tableView?.tableHeaderView = tableViewHeader
         }
         
@@ -47,9 +47,7 @@ class FilterListCollectionViewCell: UICollectionViewCell {
         self.tableView?.rowHeight = UITableView.automaticDimension
         
         labelHeaderTitle?.sizeToFit()
-        
-        
-        
+         
     }
 }
 

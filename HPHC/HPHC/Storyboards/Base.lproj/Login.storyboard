@@ -411,10 +411,10 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="watchVideoNoTxt" translatesAutoresizingMaskIntoConstraints="NO" id="WOM-DO-6iI">
-                                <rect key="frame" x="136.66666666666666" y="560.66666666666663" width="27" height="27"/>
+                                <rect key="frame" x="146.66666666666666" y="560.66666666666663" width="27" height="27"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Watch Video" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jrJ-DJ-Dbb">
-                                <rect key="frame" x="173.66666666666666" y="565.33333333333337" width="86.999999999999972" height="17.666666666666629"/>
+                                <rect key="frame" x="183.66666666666666" y="565.33333333333337" width="86.999999999999972" height="17.666666666666629"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="jrJ-DJ-Dbb" secondAttribute="height" multiplier="84:17" id="PlH-IW-ts3"/>
                                 </constraints>
@@ -480,7 +480,7 @@
                             <constraint firstItem="PwS-EA-BPG" firstAttribute="trailing" secondItem="WSD-iA-wVk" secondAttribute="trailing" id="StG-m3-LqW"/>
                             <constraint firstItem="LTh-ai-aj2" firstAttribute="leading" secondItem="PwS-EA-BPG" secondAttribute="leading" id="TrC-gW-LiD"/>
                             <constraint firstItem="Mhn-wP-OGh" firstAttribute="width" secondItem="ZuF-Og-5eT" secondAttribute="width" multiplier="0.873333" id="c0k-hK-OaT"/>
-                            <constraint firstItem="WOM-DO-6iI" firstAttribute="leading" secondItem="N7H-ey-5oY" secondAttribute="leading" constant="10" id="cNX-3F-gXJ"/>
+                            <constraint firstItem="WOM-DO-6iI" firstAttribute="leading" secondItem="N7H-ey-5oY" secondAttribute="leading" constant="20" id="cNX-3F-gXJ"/>
                             <constraint firstAttribute="bottom" secondItem="LTh-ai-aj2" secondAttribute="bottom" id="d9X-a9-nLL"/>
                             <constraint firstItem="WSD-iA-wVk" firstAttribute="top" secondItem="ZuF-Og-5eT" secondAttribute="top" id="dbn-Kt-k1q"/>
                             <constraint firstItem="N7H-ey-5oY" firstAttribute="centerY" secondItem="ZuF-Og-5eT" secondAttribute="centerY" multiplier="1.28186" id="dvd-aV-aK9"/>

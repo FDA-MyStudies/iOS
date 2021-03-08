@@ -378,6 +378,58 @@ class Utilities: NSObject {
             return false
         }
     }
+  
+    class func errorMessageDisplayMessage(error: NSError) -> String {
+      var errrorMessage = ""
+      switch error.code {
+      case 401, 561:
+        errrorMessage = NSLocalizedString("Unauthorized exception", comment: "")
+      case 440:
+        errrorMessage = NSLocalizedString("session expired", comment: "")
+      case 504:
+        errrorMessage = NSLocalizedString("timeout", comment: "")
+      case 400:
+        errrorMessage = NSLocalizedString("client error", comment: "")
+      case 520:
+        errrorMessage = NSLocalizedString("Unknown error", comment: "")
+      case 500, 444:
+        errrorMessage = NSLocalizedString("Internal server error", comment: "")
+      default:
+        errrorMessage = ""
+      }
+      if errrorMessage == "" {
+        let message = error.localizedDescription
+        if message.localizedCaseInsensitiveContains("Unable to enroll into the study") {
+          errrorMessage = NSLocalizedString("Unable to enroll into the study", comment: "")
+        }
+        else if message.localizedCaseInsensitiveContains("Try logging in again") {
+          errrorMessage = NSLocalizedString("Try logging in again", comment: "")
+        }
+        else if message.localizedCaseInsensitiveContains("Unable to process") {
+          errrorMessage = NSLocalizedString("Unable to process", comment: "")
+        }
+        else if message.localizedCaseInsensitiveContains("No data found") {
+          errrorMessage = NSLocalizedString("No data found", comment: "")
+        }
+        else if message.localizedCaseInsensitiveContains("Unable to withdraw from the study") {
+          errrorMessage = NSLocalizedString("Unable to withdraw from the study", comment: "")
+        }
+        else if message.localizedCaseInsensitiveContains("server error") {
+          errrorMessage = NSLocalizedString("server error", comment: "")
+        }
+        else if message.localizedCaseInsensitiveContains("No data") {
+          errrorMessage = NSLocalizedString("No data", comment: "")
+        }
+        else if message.localizedCaseInsensitiveContains("is currently not available") {
+          errrorMessage = NSLocalizedString("is currently not available", comment: "")
+        }
+        else {
+          errrorMessage = error.localizedDescription
+        }
+      }
+      return errrorMessage
+    }
+  
     
     public static var _formatterShort: DateFormatter?
     public static var formatterShort: DateFormatter! {

@@ -6,7 +6,7 @@
 		<key>helpText</key>
 		<string>Correo electronico</string>
 		<key>placeHolder</key>
-		<string>ingrese correo electrónico</string>
+		<string>Identificación de correo</string>
 	</dict>
 	<dict>
 		<key>helpText</key>
@@ -18,7 +18,7 @@
 		<key>helpText</key>
 		<string>Confirmar contraseña</string>
 		<key>placeHolder</key>
-		<string>Confirma contraseña</string>
+		<string>confirmar contraseña</string>
 	</dict>
 </array>
 </plist>

@@ -61,10 +61,7 @@
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dcV-56-Hws">
-                            <rect key="frame" x="301" y="20" width="54" height="30"/>
-                            <constraints>
-                                <constraint firstAttribute="width" constant="54" id="4Pb-Va-sCS"/>
-                            </constraints>
+                            <rect key="frame" x="307" y="20" width="48" height="30"/>
                             <state key="normal" title="Cancel">
                                 <color key="titleColor" red="0.0" green="0.48627450979999998" blue="0.72941176470000002" alpha="1" colorSpace="calibratedRGB"/>
                             </state>

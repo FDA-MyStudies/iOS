@@ -230,7 +230,12 @@ extension AppDelegate {
             resource = "FilterData"
         }
         
-        let plistPath = Bundle.main.path(forResource: resource, ofType: ".plist", inDirectory: nil)
+        var plistPath = Bundle.main.path(forResource: resource, ofType: ".plist", inDirectory: nil)
+        let localeDefault = Locale.preferredLanguages.first ?? "en"
+        if !(localeDefault.hasPrefix("es") || localeDefault.hasPrefix("en")) {
+          plistPath = Bundle.main.path(forResource: resource, ofType: ".plist", inDirectory: nil, forLocalization: "Base")
+        }
+      
         filterData = NSMutableArray.init(contentsOfFile: plistPath!)!
         
         StudyFilterHandler.instance.filterOptions = []

@@ -30,8 +30,11 @@ class StudyOverviewViewControllerFirst: UIViewController {
     @IBOutlet var buttonWatchVideo: UIButton?
     @IBOutlet var buttonVisitWebsite: UIButton?
     @IBOutlet var labelTitle: UILabel?
+    @IBOutlet var labelWatchVideo: UILabel?
     @IBOutlet var labelDescription: UILabel?
     @IBOutlet var imageViewStudy: UIImageView?
+    @IBOutlet var imageWatchVideo: UIImageView?
+  
     
     var pageIndex: Int!
     var overViewWebsiteLink: String?
@@ -55,8 +58,12 @@ class StudyOverviewViewControllerFirst: UIViewController {
         
         if overviewSectionDetail.link != nil {
             buttonWatchVideo?.isHidden = false
+            imageWatchVideo?.isHidden = false
+            labelWatchVideo?.isHidden = false
         } else {
              buttonWatchVideo?.isHidden =  true
+            imageWatchVideo?.isHidden = true
+            labelWatchVideo?.isHidden = true
         }
     }
     

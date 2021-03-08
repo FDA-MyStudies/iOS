@@ -474,3 +474,19 @@
 "Watch Video"="Watch Video";
 
 "Signed Consent"="Signed Consent";
+
+"session expired"="session expired";
+"Unauthorized exception"="Unauthorized exception";
+"timeout"="timeout";
+"client error"="client error";
+"Unknown error"="Unknown error";
+"Internal server error"="Internal server error";
+"Unable to enroll into the study"="Unable to enroll into the study";
+"Try logging in again"="Try logging in again";
+"Unable to process"="Unable to process";
+"No data found"="No data found";
+"Unable to withdraw from the study"="Unable to withdraw from the study";
+"Unable to withdraw from the study"="Unable to withdraw from the study";
+"server error"="server error";
+"No data"="No data";
+"is currently not available"="is currently not available";

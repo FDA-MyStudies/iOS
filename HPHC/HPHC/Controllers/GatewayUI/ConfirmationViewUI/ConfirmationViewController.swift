@@ -37,8 +37,6 @@ let kConfirmationTitle = "title"
 let kConfirmationPlaceholder = "placeHolder"
 let kConfirmationPlist = "Confirmation"
 let kConfirmationNavigationTitle = "DELETE ACCOUNT"
-let kPlistFileType = ".plist"
-
 
 
 class StudyToDelete{
@@ -71,7 +69,12 @@ class ConfirmationViewController: UIViewController {
         super.viewDidLoad()
         
         //Load plist info
-        let plistPath = Bundle.main.path(forResource: kConfirmationPlist, ofType: kPlistFileType , inDirectory: nil)
+        var plistPath = Bundle.main.path(forResource: kConfirmationPlist, ofType: ".plist", inDirectory: nil)
+        let localeDefault = Locale.preferredLanguages.first ?? "en"
+        if !(localeDefault.hasPrefix("es") || localeDefault.hasPrefix("en")) {
+          plistPath = Bundle.main.path(forResource: kConfirmationPlist, ofType: ".plist", inDirectory: nil, forLocalization: "Base")
+        }
+      
         tableViewRowDetails = NSMutableArray.init(contentsOfFile: plistPath!)
         
         let navTitle = Branding.productTitle
@@ -333,7 +336,7 @@ extension ConfirmationViewController: NMWebServiceDelegate {
                     
                     self.handleWithdrawnFromStudyResponse()
                     
-                }else {
+                } else {
                     self.removeProgressIndicator()
                 }
             }else {

@@ -813,16 +813,14 @@ extension ResourcesViewController: NMWebServiceDelegate {
                 
                 
             } else if requestName as String == ResponseMethods.withdrawFromStudy.description {
-                
-                if error.localizedDescription.localizedCaseInsensitiveContains("Invalid ParticipantId.") {
-                    
-                    
-                    UserServices().withdrawFromStudy(studyId: (Study.currentStudy?.studyId)!, shouldDeleteData: self.shouldDeleteData!
-                        , delegate: self)
-                } else {
-                    self.removeProgressIndicator()
-                    UIUtilities.showAlertWithTitleAndMessage(title: NSLocalizedString(kErrorTitle, comment: "") as NSString, message: error.localizedDescription as NSString)
-                }
+              
+              if error.localizedDescription.localizedCaseInsensitiveContains("Invalid ParticipantId.") {
+                UserServices().withdrawFromStudy(studyId: (Study.currentStudy?.studyId)!, shouldDeleteData: self.shouldDeleteData!
+                                                 , delegate: self)
+              } else {
+                self.removeProgressIndicator()
+                UIUtilities.showAlertWithTitleAndMessage(title: NSLocalizedString(kErrorTitle, comment: "") as NSString, message: Utilities.errorMessageDisplayMessage(error: error) as NSString)
+              }
             } else {
                 
                 self.removeProgressIndicator()
@@ -836,7 +834,6 @@ extension ResourcesViewController: NMWebServiceDelegate {
     }
 }
 
-
 public extension String {
     /// Decodes string with html encoding.
     var htmlDecoded: String {
@@ -846,7 +843,6 @@ public extension String {
             .documentType: NSAttributedString.DocumentType.html,
             .characterEncoding: String.Encoding.utf8.rawValue
         ]
-        
         
         do {
             let attributedString = try NSAttributedString(data: encodedData,

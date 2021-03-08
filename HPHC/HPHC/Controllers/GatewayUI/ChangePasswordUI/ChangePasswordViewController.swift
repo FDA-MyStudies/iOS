@@ -57,7 +57,11 @@ class ChangePasswordViewController: UIViewController {
         buttonSubmit?.layer.borderColor = kUicolorForButtonBackground
         
         //load plist info
-        let plistPath = Bundle.main.path(forResource: "ChangePasswordData", ofType: ".plist", inDirectory:nil)
+        var plistPath = Bundle.main.path(forResource: "ChangePasswordData", ofType: ".plist", inDirectory: nil)
+        let localeDefault = Locale.preferredLanguages.first ?? "en"
+        if !(localeDefault.hasPrefix("es") || localeDefault.hasPrefix("en")) {
+          plistPath = Bundle.main.path(forResource: "ChangePasswordData", ofType: ".plist", inDirectory: nil, forLocalization: "Base")
+        }
         tableViewRowDetails = NSMutableArray.init(contentsOfFile: plistPath!)
         
         //Automatically takes care  of text field become first responder and scroll of tableview

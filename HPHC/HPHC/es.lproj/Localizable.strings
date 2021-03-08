@@ -472,3 +472,18 @@
 "Watch Video"="Ver video";
 
 "Signed Consent"="Consentimiento firmado";
+
+"session expired"="sesión expirada";
+"Unauthorized exception"="Excepción no autorizada";
+"timeout"="se acabó el tiempo";
+"client error"="error del cliente";
+"Unknown error"="error desconocido";
+"Internal server error"="Error Interno del Servidor";
+"Unable to enroll into the study"="No se puede inscribir en el estudio.";
+"Try logging in again"="Intente iniciar sesión de nuevo";
+"Unable to process"="No se puede procesar";
+"No data found"="Datos no encontrados";
+"Unable to withdraw from the study"="Incapaz de retirarse del estudio.";
+"server error"="error del servidor";
+"No data"="sin datos";
+"is currently not available"="actualmente no está disponible";

@@ -292,7 +292,12 @@ class StudyHomeViewController: UIViewController {
         //        let data = NSData(contentsOfFile: filePath!)
 
         // load plist info
-        let plistPath = Bundle.main.path(forResource: "StudyOverview", ofType: ".plist", inDirectory: nil)
+        var plistPath = Bundle.main.path(forResource: "StudyOverview", ofType: ".plist", inDirectory: nil)
+        let localeDefault = Locale.preferredLanguages.first ?? "en"
+        if !(localeDefault.hasPrefix("es") || localeDefault.hasPrefix("en")) {
+          plistPath = Bundle.main.path(forResource: "StudyOverview", ofType: ".plist", inDirectory: nil, forLocalization: "Base")
+        }
+      
         let arrayContent = NSMutableArray(contentsOfFile: plistPath!)
 
         do {

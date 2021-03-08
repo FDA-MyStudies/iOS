@@ -130,7 +130,7 @@
 
 /* Passcode step */
 "PASSCODE_PROMPT_MESSAGE" = "Introduce el código";
-"PASSCODE_CONFIRM_MESSAGE" = "Confirmar contraseña";
+"PASSCODE_CONFIRM_MESSAGE" = "Confirmar código";
 "PASSCODE_SAVED_MESSAGE" = "Código guardado";
 "PASSCODE_AUTHENTICATED_MESSAGE" = "Autenticado por código";
 "PASSCODE_OLD_ENTRY_MESSAGE" = "Introduce el código antiguo";

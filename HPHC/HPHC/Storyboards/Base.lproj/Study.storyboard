@@ -235,10 +235,10 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="watchVideoNoTxt" translatesAutoresizingMaskIntoConstraints="NO" id="xdd-ep-TfN">
-                                <rect key="frame" x="127" y="486" width="27" height="27"/>
+                                <rect key="frame" x="137" y="486" width="27" height="27"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Watch Video" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AA0-le-tSn">
-                                <rect key="frame" x="164" y="490.66666666666669" width="87.333333333333314" height="17.666666666666686"/>
+                                <rect key="frame" x="170" y="490.66666666666669" width="87.333333333333314" height="17.666666666666686"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="AA0-le-tSn" secondAttribute="height" multiplier="84:17" id="zgF-g8-GhW"/>
                                 </constraints>
@@ -308,7 +308,7 @@
                         <viewLayoutGuide key="safeArea" id="Gay-ct-EKw"/>
                         <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="AA0-le-tSn" firstAttribute="leading" secondItem="xdd-ep-TfN" secondAttribute="trailing" constant="10" id="2vt-dj-7Yy"/>
+                            <constraint firstItem="AA0-le-tSn" firstAttribute="leading" secondItem="xdd-ep-TfN" secondAttribute="trailing" constant="6" id="2vt-dj-7Yy"/>
                             <constraint firstItem="5NQ-r5-mSz" firstAttribute="centerX" secondItem="Gay-ct-EKw" secondAttribute="centerX" id="3k5-sQ-tib"/>
                             <constraint firstItem="5NQ-r5-mSz" firstAttribute="height" secondItem="TSo-a1-wV3" secondAttribute="height" multiplier="43/667" id="5fz-wI-XBv"/>
                             <constraint firstItem="G9Y-IJ-Woi" firstAttribute="centerX" secondItem="Gay-ct-EKw" secondAttribute="centerX" constant="-1" id="9iA-TM-l0T"/>
@@ -322,7 +322,7 @@
                             <constraint firstItem="Gay-ct-EKw" firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="zeM-Up-qJV" secondAttribute="bottom" constant="10" id="P4I-h3-O6w"/>
                             <constraint firstItem="w0M-Dz-kSR" firstAttribute="width" secondItem="TSo-a1-wV3" secondAttribute="width" multiplier="280/375" constant="50" id="S8d-i7-H7o"/>
                             <constraint firstItem="zeM-Up-qJV" firstAttribute="centerY" secondItem="TSo-a1-wV3" secondAttribute="centerY" multiplier="1.85307" priority="900" id="WWb-ZB-Uym"/>
-                            <constraint firstItem="G9Y-IJ-Woi" firstAttribute="leading" secondItem="xdd-ep-TfN" secondAttribute="leading" id="b9z-jZ-UOy"/>
+                            <constraint firstItem="G9Y-IJ-Woi" firstAttribute="leading" secondItem="xdd-ep-TfN" secondAttribute="leading" constant="-10" id="b9z-jZ-UOy"/>
                             <constraint firstItem="d2e-7Y-Ifc" firstAttribute="top" secondItem="TSo-a1-wV3" secondAttribute="top" id="biD-Zi-2wf"/>
                             <constraint firstItem="G9Y-IJ-Woi" firstAttribute="centerY" secondItem="TSo-a1-wV3" secondAttribute="centerY" multiplier="1.28186" constant="-21" id="ddr-h8-28g"/>
                             <constraint firstItem="p79-PH-HnS" firstAttribute="width" secondItem="TSo-a1-wV3" secondAttribute="width" multiplier="345/375" constant="5" id="e3X-T8-lsk"/>

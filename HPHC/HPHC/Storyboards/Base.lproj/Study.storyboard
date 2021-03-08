@@ -349,8 +349,10 @@
                         <outlet property="buttonVisitWebsite" destination="zeM-Up-qJV" id="ATr-Jq-lBc"/>
                         <outlet property="buttonWatchVideo" destination="G9Y-IJ-Woi" id="yK6-5i-uQ8"/>
                         <outlet property="imageViewStudy" destination="d2e-7Y-Ifc" id="47I-kg-kwD"/>
+                        <outlet property="imageWatchVideo" destination="xdd-ep-TfN" id="yA9-1w-6ec"/>
                         <outlet property="labelDescription" destination="p79-PH-HnS" id="y7b-ds-QJQ"/>
                         <outlet property="labelTitle" destination="w0M-Dz-kSR" id="Qkd-Oc-wCb"/>
+                        <outlet property="labelWatchVideo" destination="AA0-le-tSn" id="KJK-HN-8Hf"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="r3M-3Q-4Mx" userLabel="First Responder" sceneMemberID="firstResponder"/>

@@ -910,10 +910,7 @@ extension StudyHomeViewController: NMWebServiceDelegate {
 
             else if requestName as String == ResponseMethods.enroll.description {
                 unHideSubViews()
-                
                 self.studyEnrollmentFailed(error: error)
-                
-               
             }
             else if requestName as String == RegistrationMethods.updateStudyState.method.methodName
                 || requestName as String == RegistrationMethods.updateEligibilityConsentStatus.method.methodName {

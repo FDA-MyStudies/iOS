@@ -219,13 +219,13 @@ extension EligibilityStepViewController: NMWebServiceDelegate {
             
             self.showAlert(message: kMessageInvalidTokenOrIfStudyDoesNotExist) //kMessageForInvalidToken
             
-        }else {
+        } else {
             if error.localizedDescription.localizedCaseInsensitiveContains(kStudyWithStudyId) {
                 
                 self.showAlert(message: kMessageInvalidTokenOrIfStudyDoesNotExist) //kMessageForMissingStudyId
                 
-            }else {
-                self.showAlert(message: error.localizedDescription)
+            } else {
+                self.showAlert(message: Utilities.errorMessageDisplayMessage(error: error))
             }
         }
     }

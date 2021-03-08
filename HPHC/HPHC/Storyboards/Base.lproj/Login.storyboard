@@ -507,8 +507,10 @@
                         <outlet property="buttonGetStarted" destination="vIh-lT-4bl" id="g3V-wq-WIZ"/>
                         <outlet property="buttonWatchVideo" destination="N7H-ey-5oY" id="K5T-yj-KUP"/>
                         <outlet property="imageViewBackgroundImage" destination="WSD-iA-wVk" id="W99-om-0wG"/>
+                        <outlet property="imageWatchVideo" destination="WOM-DO-6iI" id="4Nv-2W-fFM"/>
                         <outlet property="labelDescriptionText" destination="Mhn-wP-OGh" id="055-u0-kQR"/>
                         <outlet property="labelTitleText" destination="Ciy-R8-Rn9" id="a96-so-SQF"/>
+                        <outlet property="labelWatchVideo" destination="jrJ-DJ-Dbb" id="zJj-du-EaC"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pV0-nB-Fl5" userLabel="First Responder" sceneMemberID="firstResponder"/>

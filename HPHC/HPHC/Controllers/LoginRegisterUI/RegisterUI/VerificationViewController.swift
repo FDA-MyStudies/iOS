@@ -23,8 +23,8 @@ import UIKit
 
 let kDefaultEmail = "xyz@gmail.com"
 let kSignupCompletionSegue = "signupCompletionSegue"
-let kAlertMessageVerifyEmail = NSLocalizedString("Please verify your email address.", comment: "")
-let kAlertMessageResendEmail = NSLocalizedString("An email verification code has been sent to your registered email.", comment: "")
+let kAlertMessageVerifyEmail = NSLocalizedStrings("Please verify your email address.", comment: "")
+let kAlertMessageResendEmail = NSLocalizedStrings("An email verification code has been sent to your registered email.", comment: "")
 
 let kChangePasswordViewControllerIdentifier = "ChangePasswordViewController"
 
@@ -58,7 +58,7 @@ class VerificationViewController: UIViewController{
         
         //Used to set border color for bottom view
         buttonContinue?.layer.borderColor = kUicolorForButtonBackground
-        self.title = NSLocalizedString("", comment: "")
+        self.title = NSLocalizedStrings("", comment: "")
         
         if labelMessage != nil {
             labelVerificationMessage?.text = labelMessage
@@ -185,7 +185,7 @@ class VerificationViewController: UIViewController{
      
      */
     func showAlertMessages(textMessage: String){
-        UIUtilities.showAlertMessage("", errorMessage: NSLocalizedString(textMessage, comment: ""), errorAlertActionTitle: kTitleOKCapital, viewControllerUsed: self)
+        UIUtilities.showAlertMessage("", errorMessage: NSLocalizedStrings(textMessage, comment: ""), errorAlertActionTitle: kTitleOKCapital, viewControllerUsed: self)
     }
 
     
@@ -303,8 +303,8 @@ extension VerificationViewController: NMWebServiceDelegate {
                 _ = self.navigationController?.popToRootViewController(animated: true)
             })
         } else {
-            
-            UIUtilities.showAlertWithTitleAndMessage(title: kErrorTitle as NSString, message: error.localizedDescription as NSString)
+            let errorMsg = base64DecodeError(error.localizedDescription)
+            UIUtilities.showAlertWithTitleAndMessage(title: kErrorTitle as NSString, message: errorMsg as NSString)
         }
     }
 }

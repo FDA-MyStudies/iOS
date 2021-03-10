@@ -191,7 +191,7 @@ extension ResourcesDetailViewController: MFMailComposeViewControllerDelegate{
         composeVC.mailComposeDelegate = self
         // Configure the fields of the interface.
         
-        composeVC.setSubject(NSLocalizedString("Resources", comment: ""))
+        composeVC.setSubject(NSLocalizedStrings("Resources", comment: ""))
         
         if resource?.file?.localPath != nil {
             

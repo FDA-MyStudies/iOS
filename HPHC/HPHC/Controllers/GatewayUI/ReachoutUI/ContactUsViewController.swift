@@ -47,7 +47,7 @@ class ContactUsViewController: UIViewController{
     @IBOutlet var tableViewFooter: UIView?
     @IBOutlet var feedbackTextView: UITextView?
     var previousContentHeight: Double = 0.0
-    let kContactUsTitle = NSLocalizedString("CONTACT US", comment: "")
+    let kContactUsTitle = NSLocalizedStrings("CONTACT US", comment: "")
     
     
 // MARK:- ViewController LifeCycle
@@ -334,7 +334,8 @@ extension ContactUsViewController: NMWebServiceDelegate {
         
         self.removeProgressIndicator()
         Logger.sharedInstance.info("requestname : \(requestName)")
-        UIUtilities.showAlertWithTitleAndMessage(title: kTitleError as NSString, message: error.localizedDescription as NSString)
+        let errorMsg = base64DecodeError(error.localizedDescription)
+        UIUtilities.showAlertWithTitleAndMessage(title: kTitleError as NSString, message: errorMsg as NSString)
     }
 }
 

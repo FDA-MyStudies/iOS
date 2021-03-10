@@ -25,28 +25,28 @@ import SlideMenuControllerSwift
 
 let kProfileTableViewCellIdentifier = "ProfileTableViewCell"
 
-let kLeadTimeSelectText = NSLocalizedString("Select Lead Time", comment: "")
-let kActionSheetDoneButtonTitle = NSLocalizedString("Done", comment: "")
+let kLeadTimeSelectText = NSLocalizedStrings("Select Lead Time", comment: "")
+let kActionSheetDoneButtonTitle = NSLocalizedStrings("Done", comment: "")
 
 let kChangePasswordSegueIdentifier = "changePasswordSegue"
 let kErrorTitle = ""
-let kProfileAlertTitleText = NSLocalizedString("Profile", comment: "")
-let kProfileAlertUpdatedText = NSLocalizedString("Profile updated Successfully.", comment: "")
+let kProfileAlertTitleText = NSLocalizedStrings("Profile", comment: "")
+let kProfileAlertUpdatedText = NSLocalizedStrings("Profile updated Successfully.", comment: "")
 
 let signupCellLastIndex = 2
 
-let kProfileTitleText = NSLocalizedString("My Account", comment: "")
+let kProfileTitleText = NSLocalizedStrings("My Account", comment: "")
 
-let kSignOutText = NSLocalizedString("Sign Out", comment: "")
+let kSignOutText = NSLocalizedStrings("Sign Out", comment: "")
 let kLabelName = "LabelName"
 
-let kUseTouchIdOrPasscode = NSLocalizedString("Use Passcode or Touch ID to access app", comment: "")
-let kUseFaceIdOrPasscode = NSLocalizedString("Use Passcode or Face ID to access app", comment: "")
+let kUseTouchIdOrPasscode = NSLocalizedStrings("Use Passcode or Touch ID to access app", comment: "")
+let kUseFaceIdOrPasscode = NSLocalizedStrings("Use Passcode or Face ID to access app", comment: "")
 
-let kUsePasscodeToAccessApp = NSLocalizedString("Use Passcode to access app", comment: "")
-let kSaveText = NSLocalizedString("Save", comment: "")
-let kChangePasscodeText = NSLocalizedString("Change Passcode", comment: "")
-let kEditText = NSLocalizedString("Edit", comment: "")
+let kUsePasscodeToAccessApp = NSLocalizedStrings("Use Passcode to access app", comment: "")
+let kSaveText = NSLocalizedStrings("Save", comment: "")
+let kChangePasscodeText = NSLocalizedStrings("Change Passcode", comment: "")
+let kEditText = NSLocalizedStrings("Edit", comment: "")
 
 let ktouchid = "touchIdEnabled"
 let korkPasscode = "ORKPasscode"
@@ -70,6 +70,9 @@ class ProfileViewController: UIViewController, SlideMenuControllerDelegate {
     var passcodeStateIsEditing: Bool = false
     
     var isProfileEdited = false
+  
+    var valPasscodeSection = 100
+    var valPasscodeRow = 100
     
     @IBOutlet var tableViewProfile: UITableView?
     @IBOutlet var tableViewFooterViewProfile: UIView?
@@ -254,8 +257,8 @@ class ProfileViewController: UIViewController, SlideMenuControllerDelegate {
      */
     @IBAction func buttonActionSignOut(_ sender: UIButton) {
         
-        UIUtilities.showAlertMessageWithTwoActionsAndHandler(kSignOutText, errorMessage: NSLocalizedString(kAlertMessageForSignOut, comment: ""), errorAlertActionTitle: kSignOutText,
-                                                             errorAlertActionTitle2: NSLocalizedString(kTitleCancel, comment: ""), viewControllerUsed: self,
+        UIUtilities.showAlertMessageWithTwoActionsAndHandler(kSignOutText, errorMessage: NSLocalizedStrings(kAlertMessageForSignOut, comment: ""), errorAlertActionTitle: kSignOutText,
+                                                             errorAlertActionTitle2: NSLocalizedStrings(kTitleCancel, comment: ""), viewControllerUsed: self,
                                                              action1: {
                                                                 
                                                                 self.sendRequestToSignOut()
@@ -299,7 +302,7 @@ class ProfileViewController: UIViewController, SlideMenuControllerDelegate {
                 var descriptionText =  kDeleteAccountConfirmationMessage
                 descriptionText = descriptionText.replacingOccurrences(of: "#APPNAME#", with: navTitle)
                 
-                UIUtilities.showAlertMessageWithTwoActionsAndHandler(kTitleDeleteAccount, errorMessage: NSLocalizedString(descriptionText, comment: ""), errorAlertActionTitle: kTitleDeleteAccount,
+                UIUtilities.showAlertMessageWithTwoActionsAndHandler(kTitleDeleteAccount, errorMessage: NSLocalizedStrings(descriptionText, comment: ""), errorAlertActionTitle: kTitleDeleteAccount,
                                                                      errorAlertActionTitle2: kTitleCancel, viewControllerUsed: self,
                                                                      action1: {
 
@@ -496,7 +499,7 @@ class ProfileViewController: UIViewController, SlideMenuControllerDelegate {
             switch ToggelSwitchTags(rawValue: sender.tag)! as ToggelSwitchTags{
             case .usePasscode:
                 user.settings?.passcode = toggle?.isOn
-                
+                valPasscodeRow = sender.tag
                 if toggle?.isOn == true{
                     
                     if ORKPasscodeViewController.isPasscodeStoredInKeychain(){
@@ -598,7 +601,7 @@ class ProfileViewController: UIViewController, SlideMenuControllerDelegate {
      
      */
     func showAlertMessages(textMessage: String){
-        UIUtilities.showAlertMessage("", errorMessage: NSLocalizedString(textMessage, comment: ""), errorAlertActionTitle: kTitleOKCapital, viewControllerUsed: self)
+        UIUtilities.showAlertMessage("", errorMessage: NSLocalizedStrings(textMessage, comment: ""), errorAlertActionTitle: kTitleOKCapital, viewControllerUsed: self)
     }
     
     
@@ -625,6 +628,8 @@ class ProfileViewController: UIViewController, SlideMenuControllerDelegate {
             }
             else{
                 let passcodeViewController = ORKPasscodeViewController.passcodeAuthenticationViewController(withText: "", delegate: self)
+              
+//              passcodeStateIsEditing = true
                 
                 passcodeViewController.modalPresentationStyle = .fullScreen
                 self.navigationController?.present(passcodeViewController, animated: false, completion: nil)
@@ -757,6 +762,9 @@ extension ProfileViewController: UITableViewDataSource {
                 cell.setToggleValue(indexValue: indexPath.row)
             }
             cell.switchToggle?.tag =  indexPath.row
+          
+          valPasscodeSection = indexPath.section
+          
             // Toggle button Action
             cell.switchToggle?.addTarget(self, action: #selector(ProfileViewController.toggleValueChanged), for: .valueChanged)
             
@@ -889,8 +897,8 @@ extension ProfileViewController: NMWebServiceDelegate {
             })
         }
         else {
-            
-            UIUtilities.showAlertWithTitleAndMessage(title: NSLocalizedString(kErrorTitle, comment: "") as NSString, message: error.localizedDescription as NSString)
+            let errorMsg = base64DecodeError(error.localizedDescription)
+            UIUtilities.showAlertWithTitleAndMessage(title: NSLocalizedStrings(kErrorTitle, comment: "") as NSString, message: errorMsg as NSString)
         }
     }
 }
@@ -918,10 +926,30 @@ extension ProfileViewController: ORKPasscodeDelegate {
     
     
     func passcodeViewControllerDidCancel(_ viewController: UIViewController){
-        
+        print("Cancel---\(valPasscodeRow)---\(valPasscodeSection)")
+//      if valPasscodeRow < 99 && valPasscodeSection < 99 {
+//        let indexPath = IndexPath(row: valPasscodeRow, section: valPasscodeSection)
+//        let cell = tableViewProfile?.cellForRow(at: indexPath)  as? ProfileTableViewCell
+//        cell?.switchToggle?.setOn(true, animated: true)
+////        tableViewProfile?.reloadRows(at: [indexPath], with: .automatic)
+//      }
+      
+      
         if passcodeStateIsEditing{
             viewController.dismiss(animated: true, completion: {
                 self.passcodeStateIsEditing = false
+              
+//              self.user.settings?.passcode = true
+              
+              
+//              if self.valPasscodeRow < 99 && self.valPasscodeSection < 99 {
+//                let indexPath = IndexPath(row: self.valPasscodeRow, section: self.valPasscodeSection)
+//                let cell = self.tableViewProfile?.cellForRow(at: indexPath)  as? ProfileTableViewCell
+//                cell?.switchToggle?.setOn(true, animated: true)
+//        //        tableViewProfile?.reloadRows(at: [indexPath], with: .automatic)
+//              }
+              
+//              self.tableViewProfile?.reloadData()
             })
         }
         

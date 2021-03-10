@@ -22,7 +22,7 @@ import Foundation
 import UIKit
 import IQKeyboardManagerSwift
 
-let kVerifyMessageFromSignUp = NSLocalizedString("An email has been sent to xyz@gmail.com. Please type in the Verification Code received in the email to complete the verification step.", comment: "")
+let kVerifyMessageFromSignUp = NSLocalizedStrings("An email has been sent to xyz@gmail.com. Please type in the Verification Code received in the email to complete the verification step.", comment: "")
 
 enum SignUpLoadFrom: Int{
     case gatewayOverview
@@ -88,7 +88,7 @@ class SignUpViewController: UIViewController{
         
         //WCPServices().getTermsPolicy(delegate: self)\
       
-      let main_string = NSLocalizedString("I Agree to the Terms and Privacy Policy", comment: "")
+      let main_string = NSLocalizedStrings("I Agree to the Terms and Privacy Policy", comment: "")
       
       let stringAttributes = [
         NSAttributedString.Key.font : UIFont(name: "HelveticaNeue", size: 16.0)!,
@@ -148,10 +148,10 @@ class SignUpViewController: UIViewController{
         self.termsAndCondition?.delegate = self
         let attributedString =  (termsAndCondition?.attributedText.mutableCopy() as? NSMutableAttributedString)!
         
-        var foundRange = attributedString.mutableString.range(of: NSLocalizedString("Terms", comment: ""))
+        var foundRange = attributedString.mutableString.range(of: NSLocalizedStrings("Terms", comment: ""))
         attributedString.addAttribute(NSAttributedString.Key.link, value:(TermsAndPolicy.currentTermsAndPolicy?.termsURL!)! as String, range: foundRange)
         
-        foundRange = attributedString.mutableString.range(of: NSLocalizedString("Privacy Policy", comment: ""))
+        foundRange = attributedString.mutableString.range(of: NSLocalizedStrings("Privacy Policy", comment: ""))
         attributedString.addAttribute(NSAttributedString.Key.link, value:(TermsAndPolicy.currentTermsAndPolicy?.policyURL!)! as String  , range: foundRange)
         
         termsAndCondition?.attributedText = attributedString
@@ -216,7 +216,7 @@ class SignUpViewController: UIViewController{
      
      */
     func showAlertMessages(textMessage: String){
-        UIUtilities.showAlertMessage("", errorMessage: NSLocalizedString(textMessage, comment: ""), errorAlertActionTitle: kTitleOKCapital, viewControllerUsed: self)
+        UIUtilities.showAlertMessage("", errorMessage: NSLocalizedStrings(textMessage, comment: ""), errorAlertActionTitle: kTitleOKCapital, viewControllerUsed: self)
     }
     
     
@@ -359,7 +359,7 @@ extension SignUpViewController: UITextViewDelegate{
         
         var link: String =   (TermsAndPolicy.currentTermsAndPolicy?.termsURL)! //kTermsAndConditionLink
         var title: String = kNavigationTitleTerms
-        if (URL.absoluteString == TermsAndPolicy.currentTermsAndPolicy?.policyURL  && characterRange.length == String(NSLocalizedString("Privacy Policy", comment: "")).count ) {
+        if (URL.absoluteString == TermsAndPolicy.currentTermsAndPolicy?.policyURL  && characterRange.length == String(NSLocalizedStrings("Privacy Policy", comment: "")).count ) {
             //kPrivacyPolicyLink
             print("terms")
             link =  (TermsAndPolicy.currentTermsAndPolicy?.policyURL)! // kPrivacyPolicyLink
@@ -564,7 +564,8 @@ extension SignUpViewController: NMWebServiceDelegate {
     func failedRequest(_ manager: NetworkManager, requestName: NSString, error: NSError) {
         Logger.sharedInstance.info("requestname : \(requestName)")
         self.removeProgressIndicator()
-        UIUtilities.showAlertWithTitleAndMessage(title: NSLocalizedString(kErrorTitle, comment: "") as NSString, message: error.localizedDescription as NSString)
+        let errorMsg = base64DecodeError(error.localizedDescription)
+        UIUtilities.showAlertWithTitleAndMessage(title: NSLocalizedStrings(kErrorTitle, comment: "") as NSString, message: errorMsg as NSString)
     }
 }
 

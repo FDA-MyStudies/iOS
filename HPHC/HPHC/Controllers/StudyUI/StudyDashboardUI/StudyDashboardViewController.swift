@@ -22,7 +22,7 @@ import Foundation
 import UIKit
 
 
-let kMessageForSharingDashboard = NSLocalizedString("This action will create a shareable image file of the dashboard currently seen in this section. Proceed?", comment: "")
+let kMessageForSharingDashboard = NSLocalizedStrings("This action will create a shareable image file of the dashboard currently seen in this section. Proceed?", comment: "")
 
 enum TableViewCells: Int {
     case welcomeCell = 0

@@ -57,7 +57,7 @@ class GatewayResourcesListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.navigationItem.title =  NSLocalizedString("RESOURCES", comment: "")
+        self.navigationItem.title =  NSLocalizedStrings("RESOURCES", comment: "")
         
         // Do any additional setup after loading the view.
     }

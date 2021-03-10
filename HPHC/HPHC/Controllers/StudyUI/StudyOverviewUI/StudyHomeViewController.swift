@@ -43,7 +43,7 @@ let kConsentTaskIdentifier = "ConsentTask"
 let kStudyDashboardViewControllerIdentifier = "StudyDashboardViewController"
 let kStudyDashboardTabbarControllerIdentifier = "StudyDashboardTabbarViewControllerIdentifier"
 
-let kShareConsentFailureAlert = NSLocalizedString("You can't join study without sharing your data", comment: "")
+let kShareConsentFailureAlert = NSLocalizedStrings("You can't join study without sharing your data", comment: "")
 
 var consentHasLAR: Bool = false
 var isAdditionalSign: Bool = false
@@ -113,7 +113,7 @@ class StudyHomeViewController: UIViewController {
         
         NotificationCenter.default.post(name:NSNotification.Name(rawValue: "NotificationStudyEnrollmentFailed"), object: error)
         //let message = error.localizedDescription
-        //UIUtilities.showAlertWithTitleAndMessage(title: NSLocalizedString(kErrorTitle, comment: "") as NSString, message: message as NSString)
+        //UIUtilities.showAlertWithTitleAndMessage(title: NSLocalizedStrings(kErrorTitle, comment: "") as NSString, message: message as NSString)
     }
     
     func studyEnrollmentStarted(taskViewController:ORKTaskViewController) {
@@ -466,7 +466,7 @@ class StudyHomeViewController: UIViewController {
             }
         }
         
-        let kActivity = NSLocalizedString("Activity", comment: "")
+        let kActivity = NSLocalizedStrings("Activity", comment: "")
         taskViewController?.delegate = self
         taskViewController?.title = kActivity
         taskViewController?.navigationItem.title = nil
@@ -577,7 +577,7 @@ class StudyHomeViewController: UIViewController {
                     if currentStudy.studySettings.enrollingAllowed {
                         WCPServices().getEligibilityConsentMetadata(studyId: (Study.currentStudy?.studyId)!, delegate: self as NMWebServiceDelegate)
                     } else {
-                        UIUtilities.showAlertWithTitleAndMessage(title: "", message: NSLocalizedString(kMessageForStudyEnrollingNotAllowed, comment: "") as NSString)
+                        UIUtilities.showAlertWithTitleAndMessage(title: "", message: NSLocalizedStrings(kMessageForStudyEnrollingNotAllowed, comment: "") as NSString)
                     }
                 } else if participatedStatus == .Withdrawn {
                     // check if rejoining is allowed after withrdrawn from study
@@ -770,10 +770,12 @@ class StudyHomeViewController: UIViewController {
 
 extension StudyHomeViewController: ComprehensionFailureDelegate {
     func didTapOnRetry() {
+      print("createEligibilityConsentTask---")
         createEligibilityConsentTask()
     }
 
     func didTapOnCancel() {
+      print("didTapOnCancel---")
         consentRestorationData = nil
     }
 }
@@ -916,7 +918,7 @@ extension StudyHomeViewController: NMWebServiceDelegate {
                 || requestName as String == RegistrationMethods.updateEligibilityConsentStatus.method.methodName {
                 unHideSubViews()
 
-                let kUnknownErrorOccurred = NSLocalizedString("Unknown error occurred. Please try after some time.", comment: "")
+                let kUnknownErrorOccurred = NSLocalizedStrings("Unknown error occurred. Please try after some time.", comment: "")
                 let message = error.localizedDescription as NSString
                 if message.length != 0 {
                     UIUtilities.showAlertWithTitleAndMessage(title: kErrorTitle as NSString, message: error.localizedDescription as NSString)
@@ -927,7 +929,8 @@ extension StudyHomeViewController: NMWebServiceDelegate {
                 }
             }
             else {
-                 UIUtilities.showAlertWithTitleAndMessage(title: NSLocalizedString(kErrorTitle, comment: "") as NSString, message: error.localizedDescription as NSString)
+                let errorMsg = base64DecodeError(error.localizedDescription)
+                 UIUtilities.showAlertWithTitleAndMessage(title: NSLocalizedStrings(kErrorTitle, comment: "") as NSString, message: errorMsg as NSString)
             }
         }
     }
@@ -963,7 +966,7 @@ extension StudyHomeViewController: ORKTaskViewControllerDelegate {
             print("completed")
             taskResult = taskViewController.result
         case ORKTaskViewControllerFinishReason.failed:
-            print("failed")
+            print("failed1---")
             taskResult = taskViewController.result
         case ORKTaskViewControllerFinishReason.discarded:
             print("discarded")
@@ -1035,9 +1038,20 @@ extension StudyHomeViewController: ORKTaskViewControllerDelegate {
             }
             taskViewController.dismiss(animated: true) {
                 if reason == ORKTaskViewControllerFinishReason.failed {
-                  let kSomethingWentWrong = NSLocalizedString("Something went wrong please try again later.", comment: "")
+                  let kSomethingWentWrong = NSLocalizedStrings("Something went wrong please try again later.", comment: "")
                     let messge = error == nil ? kSomethingWentWrong : error?.localizedDescription
-                    UIUtilities.showAlertWithTitleAndMessage(title: NSLocalizedString(kErrorTitle, comment: "") as NSString, message:messge! as NSString)
+                  var messageVal = messge
+                  if (messge?.containsIgnoringCase("Study with StudyId") ?? false && messge?.containsIgnoringCase("does not exist") ?? false) {
+                    
+                    messageVal = messageVal?.replacingOccurrences(of: "Study with StudyId", with: "")
+                    messageVal = messageVal?.replacingOccurrences(of: "does not exist", with: "")
+                    messageVal = messageVal?.replacingOccurrences(of: " ", with: "")
+                    
+                    messageVal = NSLocalizedStrings("Study with StudyId", comment: "") + " \(messageVal ?? "") " + NSLocalizedStrings("does not exist", comment: "")
+                    print("messageVal---\(messageVal)")
+                  }
+                  
+                    UIUtilities.showAlertWithTitleAndMessage(title: NSLocalizedStrings(kErrorTitle, comment: "") as NSString, message:messageVal! as NSString)
                 }
             }
         }

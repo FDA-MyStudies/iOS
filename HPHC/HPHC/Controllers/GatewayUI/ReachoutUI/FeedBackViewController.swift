@@ -39,8 +39,8 @@ class FeedBackViewController: UIViewController{
     @IBOutlet var buttonSubmit: UIButton?
     @IBOutlet var tableView: UITableView?
     var feedbackText: String = ""
-    let kLeaveFeedbackTitle = NSLocalizedString("LEAVE US YOUR FEEDBACK", comment: "")
-    let kEnterFeedback = NSLocalizedString("Enter your feedback here", comment: "")
+    let kLeaveFeedbackTitle = NSLocalizedStrings("LEAVE US YOUR FEEDBACK", comment: "")
+    let kEnterFeedback = NSLocalizedStrings("Enter your feedback here", comment: "")
     
     
 // MARK:- ViewController Lifecycle
@@ -99,7 +99,7 @@ class FeedBackViewController: UIViewController{
             UIUtilities.showAlertWithMessage(alertMessage: kMessageMessageBlankCheck)
         }
         else if FeedbackDetail.feedback.isEmpty {
-            UIUtilities.showAlertWithMessage(alertMessage: NSLocalizedString("Please provide your feedback", comment: ""))
+            UIUtilities.showAlertWithMessage(alertMessage: NSLocalizedStrings("Please provide your feedback", comment: ""))
         }
         else {
             UserServices().sendUserFeedback(delegate: self)
@@ -239,7 +239,8 @@ extension FeedBackViewController: NMWebServiceDelegate {
         
         self.removeProgressIndicator()
         Logger.sharedInstance.info("requestname : \(requestName)")
-        UIUtilities.showAlertWithTitleAndMessage(title: kTitleError as NSString, message: error.localizedDescription as NSString)
+        let errorMsg = base64DecodeError(error.localizedDescription)
+        UIUtilities.showAlertWithTitleAndMessage(title: kTitleError as NSString, message: errorMsg as NSString)
     }
 }
 

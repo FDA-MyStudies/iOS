@@ -22,7 +22,7 @@ import Foundation
 import UIKit
 
 let kVerifyViewControllerSegue = "VerifyViewControllerSegue"
-let kVerficationMessageFromForgotPassword = NSLocalizedString("Your registered email(xyz@gmail.com) is pending verification. Enter the Verification Code received on this email to complete verification and try the Forgot Password action again.", comment: "")
+let kVerficationMessageFromForgotPassword = NSLocalizedStrings("Your registered email(xyz@gmail.com) is pending verification. Enter the Verification Code received on this email to complete verification and try the Forgot Password action again.", comment: "")
 
 class ForgotPasswordViewController: UIViewController{
     
@@ -94,7 +94,7 @@ class ForgotPasswordViewController: UIViewController{
     
      */
     func showAlertMessages(textMessage: String){
-        UIUtilities.showAlertMessage("", errorMessage: NSLocalizedString(textMessage, comment: ""), errorAlertActionTitle: kTitleOKCapital, viewControllerUsed: self)
+        UIUtilities.showAlertMessage("", errorMessage: NSLocalizedStrings(textMessage, comment: ""), errorAlertActionTitle: kTitleOKCapital, viewControllerUsed: self)
     }
     
     
@@ -163,7 +163,7 @@ extension ForgotPasswordViewController: NMWebServiceDelegate {
         } else {
             // for resend email
             
-              UIUtilities.showAlertWithTitleAndMessage(title: kTitleMessage as NSString, message: NSLocalizedString(kAlertMessageResendEmail, comment: "") as NSString)
+              UIUtilities.showAlertWithTitleAndMessage(title: kTitleMessage as NSString, message: NSLocalizedStrings(kAlertMessageResendEmail, comment: "") as NSString)
             
         }
     }
@@ -178,7 +178,8 @@ extension ForgotPasswordViewController: NMWebServiceDelegate {
             self.navigateToVerifyViewController()
         } else {
             // if resend email fails
-             UIUtilities.showAlertWithTitleAndMessage(title: kTitleError as NSString, message: error.localizedDescription as NSString)
+            let errorMsg = base64DecodeError(error.localizedDescription)
+             UIUtilities.showAlertWithTitleAndMessage(title: kTitleError as NSString, message: errorMsg as NSString)
         }
     }
 }

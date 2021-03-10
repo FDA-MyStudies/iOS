@@ -322,7 +322,7 @@ class TextChoiceQuestionController: ORKQuestionStepViewController {
         
         searchBar.frame = CGRect()
         searchBar.searchBarStyle = UISearchBar.Style.minimal
-        let kSearch = NSLocalizedString(" Search", comment: "")
+        let kSearch = NSLocalizedStrings(" Search", comment: "")
         searchBar.placeholder = kSearch
         searchBar.sizeToFit()
         searchBar.showsCancelButton = false
@@ -470,8 +470,8 @@ class TextChoiceQuestionController: ORKQuestionStepViewController {
         if self.otherChoice.otherChoiceText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty,
             self.isOtherCellSelected {
             
-            let KAnswerRequired = NSLocalizedString("Answer required", comment: "")
-            let kPleaseProvideInput = NSLocalizedString("Please provide an input for the text field too.", comment: "")
+            let KAnswerRequired = NSLocalizedStrings("Answer required", comment: "")
+            let kPleaseProvideInput = NSLocalizedStrings("Please provide an input for the text field too.", comment: "")
             let alertVC = UIAlertController(title: KAnswerRequired, message: kPleaseProvideInput, preferredStyle: .alert)
             
             let okAction = UIAlertAction(title: kTitleOk, style: .default) { [unowned self] (action) in

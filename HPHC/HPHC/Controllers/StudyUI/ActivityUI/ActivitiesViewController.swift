@@ -26,7 +26,7 @@ import IQKeyboardManagerSwift
 let kActivities = "activities"
 
 let kActivityUnwindToStudyListIdentifier = "unwindeToStudyListIdentier"
-let kActivityAbondonedAlertMessage = NSLocalizedString("You missed the previous run of this activity. Please wait till the next run becomes available. Run timings are given on the Activities list screen.", comment: "")
+let kActivityAbondonedAlertMessage = NSLocalizedStrings("You missed the previous run of this activity. Please wait till the next run becomes available. Run timings are given on the Activities list screen.", comment: "")
 
 enum ActivityAvailabilityStatus:Int{
     case current
@@ -73,7 +73,7 @@ class ActivitiesViewController : UIViewController{
         
         self.tabBarController?.delegate = self
         
-        self.navigationItem.title = NSLocalizedString("STUDY ACTIVITIES", comment: "")
+        self.navigationItem.title = NSLocalizedStrings("STUDY ACTIVITIES", comment: "")
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor:Utilities.getUIColorFromHex(0x007CBA)]
         
         self.tableView?.sectionHeaderHeight = 30
@@ -397,7 +397,7 @@ class ActivitiesViewController : UIViewController{
             
             taskViewController?.showsProgressInNavigationBar = true
             
-            let kActivity = NSLocalizedString("Activity", comment: "")
+            let kActivity = NSLocalizedStrings("Activity", comment: "")
             taskViewController?.title = kActivity
             
             //Customize appearance of TaskViewController
@@ -413,7 +413,7 @@ class ActivitiesViewController : UIViewController{
             
         } else {
             //Task creation failed
-            UIUtilities.showAlertMessage(kTitleMessage, errorMessage: NSLocalizedString("Invalid Data!", comment: ""), errorAlertActionTitle: kTitleOKCapital, viewControllerUsed: self)
+            UIUtilities.showAlertMessage(kTitleMessage, errorMessage: NSLocalizedStrings("Invalid Data!", comment: ""), errorAlertActionTitle: kTitleOKCapital, viewControllerUsed: self)
         }
         
     }
@@ -536,9 +536,9 @@ class ActivitiesViewController : UIViewController{
         
         let allTypeCurrentActivities = currentYetToStartAndInProgressActivities + currentOngoingActivities + currentCompletedAndIncompletedActivities
         
-        let currentDetails = ["title": NSLocalizedString("CURRENT", comment: ""),"activities": allTypeCurrentActivities] as [String : Any]
-        let upcomingDetails = ["title": NSLocalizedString("UPCOMING", comment: ""),"activities": upcomingActivities] as [String : Any]
-        let pastDetails = ["title": NSLocalizedString("PAST", comment: ""),"activities": pastActivities] as [String : Any]
+        let currentDetails = ["title": NSLocalizedStrings("CURRENT", comment: ""),"activities": allTypeCurrentActivities] as [String : Any]
+        let upcomingDetails = ["title": NSLocalizedStrings("UPCOMING", comment: ""),"activities": upcomingActivities] as [String : Any]
+        let pastDetails = ["title": NSLocalizedStrings("PAST", comment: ""),"activities": pastActivities] as [String : Any]
         
         allActivityList.append(currentDetails)
         allActivityList.append(upcomingDetails)
@@ -1112,6 +1112,7 @@ extension ActivitiesViewController: NMWebServiceDelegate {
             self.refreshControl?.endRefreshing()
         }
         if error.code == 403 { //unauthorized
+            let errorMsg = base64DecodeError(error.localizedDescription)
             UIUtilities.showAlertMessageWithActionHandler(kErrorTitle, message: error.localizedDescription, buttonTitle: kTitleOk, viewControllerUsed: self, action: {
                 self.fdaSlideMenuController()?.navigateToHomeAfterUnauthorizedAccess()
             })

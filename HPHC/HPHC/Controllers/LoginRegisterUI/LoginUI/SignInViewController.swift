@@ -23,7 +23,7 @@ import UIKit
 import IQKeyboardManagerSwift
 import SlideMenuControllerSwift
 
-let kVerifyMessageFromSignIn = NSLocalizedString("Your registered email is pending verification. Please type in the Verification Code received in the email to complete this step and proceed to using the app.", comment: "")
+let kVerifyMessageFromSignIn = NSLocalizedStrings("Your registered email is pending verification. Please type in the Verification Code received in the email to complete this step and proceed to using the app.", comment: "")
 
 enum SignInLoadFrom: Int{
     case gatewayOverview
@@ -89,16 +89,16 @@ class SignInViewController: UIViewController{
           NSAttributedString.Key.font : UIFont(name: "HelveticaNeue-Medium", size: 14.0)!,
           NSAttributedString.Key.foregroundColor : #colorLiteral(red: 0, green: 0.4862745098, blue: 0.7294117647, alpha: 1)] as [NSAttributedString.Key : Any]
         
-        let attributedString1 = NSMutableAttributedString(string:NSLocalizedString("New User?", comment: ""), attributes:attrs1)
+        let attributedString1 = NSMutableAttributedString(string:NSLocalizedStrings("New User?", comment: ""), attributes:attrs1)
         
-        let attributedString2 = NSMutableAttributedString(string:" " + NSLocalizedString("Sign Up", comment: ""), attributes:attrs2)
+        let attributedString2 = NSMutableAttributedString(string:" " + NSLocalizedStrings("Sign Up", comment: ""), attributes:attrs2)
         
         attributedString1.append(attributedString2)
         
         buttonSignUp?.setAttributedTitle(attributedString1, for: .normal)
       }
       
-      let main_string = NSLocalizedString("By tapping Sign In, you agree to this app's Terms and Privacy Policy", comment: "")
+      let main_string = NSLocalizedStrings("By tapping Sign In, you agree to this app's Terms and Privacy Policy", comment: "")
       
       let stringAttributes = [
         NSAttributedString.Key.font : UIFont(name: "HelveticaNeue-Medium", size: 14.0)!,
@@ -113,6 +113,15 @@ class SignInViewController: UIViewController{
       let terms = Branding.TermsAndConditionURL
       TermsAndPolicy.currentTermsAndPolicy?.initWith(terms: terms, policy: policyURL)
       self.agreeToTermsAndConditions()
+      
+      
+      
+//      let base64 = "RXN0ZSBjb3JyZW8gZWxlY3Ryw71uaWNvIHlhIGhhIHNpZG8gdXRpbGl6YWRvLiBJbnRlbnRlIGNvbiB1bmEgZGlyZWNjacO9biBkZSBjb3JyZW8gZWxlY3Ryw71uaWNvIGRpZmVyZW50ZS4KCg=="
+
+//      print("Base64---\(base64.urlSafeBase64Decoded() ?? "* decoding failed*")")
+
+      
+      
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -246,7 +255,7 @@ class SignInViewController: UIViewController{
      
      */
     func showAlertMessages(textMessage: String){
-        UIUtilities.showAlertMessage("", errorMessage: NSLocalizedString(textMessage, comment: ""), errorAlertActionTitle: kTitleOKCapital, viewControllerUsed: self)
+        UIUtilities.showAlertMessage("", errorMessage: NSLocalizedStrings(textMessage, comment: ""), errorAlertActionTitle: kTitleOKCapital, viewControllerUsed: self)
     }
     
     
@@ -322,11 +331,11 @@ class SignInViewController: UIViewController{
         self.termsAndCondition?.delegate = self
         let attributedString =  (termsAndCondition?.attributedText.mutableCopy() as? NSMutableAttributedString)!
         
-        var foundRange = attributedString.mutableString.range(of: NSLocalizedString("Terms", comment: ""))
+        var foundRange = attributedString.mutableString.range(of: NSLocalizedStrings("Terms", comment: ""))
         attributedString.addAttribute(NSAttributedString.Key.link, value:(TermsAndPolicy.currentTermsAndPolicy?.termsURL!)! as String, range: foundRange)
       
         
-        foundRange = attributedString.mutableString.range(of: NSLocalizedString("Privacy Policy", comment: ""))
+        foundRange = attributedString.mutableString.range(of: NSLocalizedStrings("Privacy Policy", comment: ""))
         attributedString.addAttribute(NSAttributedString.Key.link, value:(TermsAndPolicy.currentTermsAndPolicy?.policyURL!)! as String  , range: foundRange)
         
         termsAndCondition?.attributedText = attributedString
@@ -479,7 +488,7 @@ extension SignInViewController: UITextViewDelegate{
         
         var link: String =   (TermsAndPolicy.currentTermsAndPolicy?.termsURL)! //kTermsAndConditionLink
         var title: String = kNavigationTitleTerms
-        if (URL.absoluteString == TermsAndPolicy.currentTermsAndPolicy?.policyURL && characterRange.length == String(NSLocalizedString("Privacy Policy", comment: "")).count) {
+        if (URL.absoluteString == TermsAndPolicy.currentTermsAndPolicy?.policyURL && characterRange.length == String(NSLocalizedStrings("Privacy Policy", comment: "")).count) {
             //kPrivacyPolicyLink
             print("terms")
             link =  (TermsAndPolicy.currentTermsAndPolicy?.policyURL)! // kPrivacyPolicyLink
@@ -568,8 +577,8 @@ extension SignInViewController: NMWebServiceDelegate {
         Logger.sharedInstance.info("requestname : \(requestName)")
         
         self.removeProgressIndicator()
-        
-        UIUtilities.showAlertWithTitleAndMessage(title: NSLocalizedString(kErrorTitle, comment: "") as NSString, message: error.localizedDescription as NSString)
+        let errorMsg = base64DecodeError(error.localizedDescription)
+        UIUtilities.showAlertWithTitleAndMessage(title: NSLocalizedStrings(kErrorTitle, comment: "") as NSString, message: errorMsg as NSString)
     }
 }
 
@@ -598,4 +607,27 @@ class CustomTextField: UITextField {
         return super.textInputMode
     }
 
+}
+
+extension String {
+    func urlSafeBase64Decoded() -> String? {
+        var st = self
+            .replacingOccurrences(of: "_", with: "/")
+            .replacingOccurrences(of: "-", with: "+")
+        let remainder = self.count % 4
+        if remainder > 0 {
+            st = self.padding(toLength: self.count + 4 - remainder,
+                              withPad: "=",
+                              startingAt: 0)
+        }
+        guard let d = Data(base64Encoded: st, options: .ignoreUnknownCharacters) else{
+            return nil
+        }
+        return String(data: d, encoding: .utf8)
+    }
+}
+
+func base64DecodeError (_ errorDesc : String) -> String {
+  let errorMsg = errorDesc.urlSafeBase64Decoded() ?? errorDesc
+  return errorMsg
 }

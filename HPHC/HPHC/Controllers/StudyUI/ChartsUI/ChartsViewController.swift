@@ -21,14 +21,14 @@ OTHER DEALINGS IN THE SOFTWARE.
 import UIKit
 
 
-let kMessageForSharingCharts = NSLocalizedString("This action will create a shareable image file of the charts currently seen in this section. Proceed?", comment: "")
+let kMessageForSharingCharts = NSLocalizedStrings("This action will create a shareable image file of the charts currently seen in this section. Proceed?", comment: "")
 
 class ChartsViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var backButton: UIButton!
   
-    let kTRENDS = NSLocalizedString("TRENDS", comment: "")
+    let kTRENDS = NSLocalizedStrings("TRENDS", comment: "")
     
     override func viewDidLoad() {
         super.viewDidLoad()

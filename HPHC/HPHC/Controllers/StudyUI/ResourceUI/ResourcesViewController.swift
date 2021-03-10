@@ -38,9 +38,9 @@ class ResourcesViewController: UIViewController{
     var shouldDeleteData: Bool? = false
     
     var leaveStudy: String = "Leave Study"
-    var aboutTheStudy: String = NSLocalizedString("About the Study", comment: "")
+    var aboutTheStudy: String = NSLocalizedStrings("About the Study", comment: "")
     var consentPDF: String = "Consent PDF"
-    var kAreYouSure: String = NSLocalizedString("Are you sure you want to ", comment: "")
+    var kAreYouSure: String = NSLocalizedStrings("Are you sure you want to ", comment: "")
   
     override var preferredStatusBarStyle: UIStatusBarStyle{
         return .default
@@ -59,7 +59,7 @@ class ResourcesViewController: UIViewController{
         //    tableViewRowDetails?.removeLast()
         //}
         
-        self.navigationItem.title = NSLocalizedString("Resources", comment: "")
+        self.navigationItem.title = NSLocalizedStrings("Resources", comment: "")
         //Next Phase
         //WCPServices().getResourcesForStudy(studyId:(Study.currentStudy?.studyId)!, delegate: self)
         
@@ -362,8 +362,8 @@ class ResourcesViewController: UIViewController{
             return
         }
         
-        let kOkConfirm = NSLocalizedString("Are you sure? Tap Ok to confirm.", comment: "")
-        UIUtilities.showAlertMessageWithTwoActionsAndHandler(NSLocalizedString((leaveStudy + " ?"), comment: ""), errorMessage: NSLocalizedString(withdrawalMessage!, comment: ""), errorAlertActionTitle: kProceedTitle,
+        let kOkConfirm = NSLocalizedStrings("Are you sure? Tap Ok to confirm.", comment: "")
+        UIUtilities.showAlertMessageWithTwoActionsAndHandler(NSLocalizedStrings((leaveStudy + " ?"), comment: ""), errorMessage: NSLocalizedStrings(withdrawalMessage!, comment: ""), errorAlertActionTitle: kProceedTitle,
                                                              errorAlertActionTitle2: kTitleCancel, viewControllerUsed: self,
                                                              action1: {
                                                                 
@@ -371,9 +371,9 @@ class ResourcesViewController: UIViewController{
                                                                 switch withdrawalType! as StudyWithdrawalConfigrationType {
                                                                     
                                                                 case .askUser :
-                                                                  let kChoosingLeave  = NSLocalizedString("You are choosing to leave the study. Please choose if your response data can be retained and used for research purposes OR if your response data should be deleted.", comment: "")
-                                                                  let kRetainData = NSLocalizedString("Retain my data", comment: "")
-                                                                  let kDeleteData = NSLocalizedString("Delete my data", comment: "")
+                                                                  let kChoosingLeave  = NSLocalizedStrings("You are choosing to leave the study. Please choose if your response data can be retained and used for research purposes OR if your response data should be deleted.", comment: "")
+                                                                  let kRetainData = NSLocalizedStrings("Retain my data", comment: "")
+                                                                  let kDeleteData = NSLocalizedStrings("Delete my data", comment: "")
                                                                     
                                                                     UIUtilities.showAlertMessageWithThreeActionsAndHandler(kImportantNoteMessage, errorMessage: kChoosingLeave, errorAlertActionTitle: kRetainData, errorAlertActionTitle2: kDeleteData, errorAlertActionTitle3: kTitleCancel, viewControllerUsed: self, action1: {
                                                                         // Retain Action
@@ -396,7 +396,7 @@ class ResourcesViewController: UIViewController{
                                                                     
                                                                 case .deleteData:
                                                                     
-                                                                    UIUtilities.showAlertMessageWithTwoActionsAndHandler(kOkConfirm, errorMessage: NSLocalizedString("", comment: ""), errorAlertActionTitle: kTitleOk,
+                                                                    UIUtilities.showAlertMessageWithTwoActionsAndHandler(kOkConfirm, errorMessage: NSLocalizedStrings("", comment: ""), errorAlertActionTitle: kTitleOk,
                                                                                                                          errorAlertActionTitle2: kTitleCancel, viewControllerUsed: self,
                                                                                                                          action1: {
                                                                                                                             self.shouldDeleteData = true
@@ -408,7 +408,7 @@ class ResourcesViewController: UIViewController{
                                                                     
                                                                 case .noAction :
                                                                     
-                                                                    UIUtilities.showAlertMessageWithTwoActionsAndHandler(kOkConfirm, errorMessage: NSLocalizedString("", comment: ""), errorAlertActionTitle: kTitleOk,
+                                                                    UIUtilities.showAlertMessageWithTwoActionsAndHandler(kOkConfirm, errorMessage: NSLocalizedStrings("", comment: ""), errorAlertActionTitle: kTitleOk,
                                                                                                                          errorAlertActionTitle2: kTitleCancel, viewControllerUsed: self,
                                                                                                                          action1: {
                                                                                                                             self.shouldDeleteData = false
@@ -485,6 +485,7 @@ class ResourcesViewController: UIViewController{
         let consentPath = Study.currentStudy?.signedConsentFilePath
         
         let fullPath = path + "/" + consentPath!
+      print("fullPath---2\(fullPath)")
         
         guard let pdfData = FileDownloadManager.decrytFile(pathURL: URL(string: fullPath))
             else {return}
@@ -819,12 +820,13 @@ extension ResourcesViewController: NMWebServiceDelegate {
                                                  , delegate: self)
               } else {
                 self.removeProgressIndicator()
-                UIUtilities.showAlertWithTitleAndMessage(title: NSLocalizedString(kErrorTitle, comment: "") as NSString, message: Utilities.errorMessageDisplayMessage(error: error) as NSString)
+                UIUtilities.showAlertWithTitleAndMessage(title: NSLocalizedStrings(kErrorTitle, comment: "") as NSString, message: Utilities.errorMessageDisplayMessage(error: error) as NSString)
               }
             } else {
                 
                 self.removeProgressIndicator()
-                UIUtilities.showAlertWithTitleAndMessage(title: NSLocalizedString(kErrorTitle, comment: "") as NSString, message: error.localizedDescription as NSString)
+                let errorMsg = base64DecodeError(error.localizedDescription)
+                UIUtilities.showAlertWithTitleAndMessage(title: NSLocalizedStrings(kErrorTitle, comment: "") as NSString, message: errorMsg as NSString)
                 //-- checkDB if there is resources
                 self.checkForResourceUpdate()
                 //--

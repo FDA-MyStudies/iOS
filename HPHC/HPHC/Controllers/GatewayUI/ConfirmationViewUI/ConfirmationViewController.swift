@@ -21,13 +21,13 @@ OTHER DEALINGS IN THE SOFTWARE.
 import UIKit
 
 let kConfirmationSegueIdentifier = "confirmationSegue"
-let kHeaderDescription = NSLocalizedString("You have chosen to delete your #APPNAME# Account. This will result in automatic withdrawal from all studies.\nBelow is a list of studies that you are a part of and information on how your response data will be handled with each after you withdraw. Please review and confirm.", comment: "")
+let kHeaderDescription = NSLocalizedStrings("You have chosen to delete your #APPNAME# Account. This will result in automatic withdrawal from all studies.\nBelow is a list of studies that you are a part of and information on how your response data will be handled with each after you withdraw. Please review and confirm.", comment: "")
 
-let kHeaderDescriptionStandalone = NSLocalizedString("You have chosen to delete your #APPNAME# Account. This will result in automatic withdrawal from study.\nBelow is the study that you are a part of and information on how your response data will be handled after you withdraw. Please review and confirm.", comment: "")
+let kHeaderDescriptionStandalone = NSLocalizedStrings("You have chosen to delete your #APPNAME# Account. This will result in automatic withdrawal from study.\nBelow is the study that you are a part of and information on how your response data will be handled after you withdraw. Please review and confirm.", comment: "")
 
-let kConfirmWithdrawlSelectOptionsAlert = NSLocalizedString("Please select an option between Delete Data or Retain Data for all studies.", comment: "")
-let kResponseDataDeletedText = NSLocalizedString("Response data will be deleted", comment: "")
-let kResponseDataRetainedText = NSLocalizedString("Response data will be retained", comment: "")
+let kConfirmWithdrawlSelectOptionsAlert = NSLocalizedStrings("Please select an option between Delete Data or Retain Data for all studies.", comment: "")
+let kResponseDataDeletedText = NSLocalizedStrings("Response data will be deleted", comment: "")
+let kResponseDataRetainedText = NSLocalizedStrings("Response data will be retained", comment: "")
 
 let kConfirmationCellType = "type"
 let kConfirmationCellTypeOptional = "Optional"
@@ -91,7 +91,7 @@ class ConfirmationViewController: UIViewController {
         
         self.navigationController?.setNavigationBarHidden(false, animated: true)
         
-        self.title = NSLocalizedString(kConfirmationNavigationTitle, comment: "")
+        self.title = NSLocalizedStrings(kConfirmationNavigationTitle, comment: "")
         
         self.checkWithdrawlConfigurationForNextSuty()
         
@@ -341,7 +341,8 @@ extension ConfirmationViewController: NMWebServiceDelegate {
                 }
             }else {
                 self.removeProgressIndicator()
-                UIUtilities.showAlertWithTitleAndMessage(title: NSLocalizedString(kErrorTitle, comment: "") as NSString, message: error.localizedDescription as NSString)
+                let errorMsg = base64DecodeError(error.localizedDescription)
+                UIUtilities.showAlertWithTitleAndMessage(title: NSLocalizedStrings(kErrorTitle, comment: "") as NSString, message: errorMsg as NSString)
             }
         }
     }

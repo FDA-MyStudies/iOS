@@ -32,7 +32,13 @@ enum AppConfiguration {
     
     private static var appConfig: JSONDictionary {
         var nsDictionary: NSDictionary?
-        if let path = Bundle.main.path(forResource: "AppConfiguration", ofType: "plist") {
+      
+        var plistPath = Bundle.main.path(forResource: "AppConfiguration", ofType: ".plist", inDirectory: nil)
+        let localeDefault = Locale.preferredLanguages.first ?? "en"
+        if !(localeDefault.hasPrefix("es") || localeDefault.hasPrefix("en")) {
+          plistPath = Bundle.main.path(forResource: "AppConfiguration", ofType: ".plist", inDirectory: nil, forLocalization: "Base")
+        }
+        if let path = plistPath {
            nsDictionary = NSDictionary(contentsOfFile: path)
         }
         return nsDictionary as? JSONDictionary ?? [:]

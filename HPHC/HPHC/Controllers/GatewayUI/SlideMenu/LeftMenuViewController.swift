@@ -24,20 +24,20 @@ import SlideMenuControllerSwift
 let kLeftMenuSubtitle = "subTitle"
 let kLeftMenuTitle = "menuTitle"
 let kLeftMenuIconName = "iconName"
-let kLeftMenuCellTitleHome = NSLocalizedString("Home", comment: "")
-let kLeftMenuCellTitleResources = NSLocalizedString("Resources", comment: "")
-let kLeftMenuCellTitleProfile = NSLocalizedString("My Account", comment: "")
-let kLeftMenuCellTitleSignIn = NSLocalizedString("Sign In", comment: "")
-let kLeftMenuCellTitleNewUser = NSLocalizedString("New User?", comment: "")
-let kLeftMenuCellTitleReachOut = NSLocalizedString("Reach Out", comment: "")
-let kLeftMenuCellSubTitleValue = NSLocalizedString("Sign up", comment: "")
+let kLeftMenuCellTitleHome = NSLocalizedStrings("Home", comment: "")
+let kLeftMenuCellTitleResources = NSLocalizedStrings("Resources", comment: "")
+let kLeftMenuCellTitleProfile = NSLocalizedStrings("My Account", comment: "")
+let kLeftMenuCellTitleSignIn = NSLocalizedStrings("Sign In", comment: "")
+let kLeftMenuCellTitleNewUser = NSLocalizedStrings("New User?", comment: "")
+let kLeftMenuCellTitleReachOut = NSLocalizedStrings("Reach Out", comment: "")
+let kLeftMenuCellSubTitleValue = NSLocalizedStrings("Sign up", comment: "")
 
-let kAlertMessageReachoutText = NSLocalizedString("This feature will be available in the next sprint.", comment: "")
+let kAlertMessageReachoutText = NSLocalizedStrings("This feature will be available in the next sprint.", comment: "")
 
-let kAlertMessageForSignOut = NSLocalizedString("Are you sure you want to sign out?", comment: "")
-let kAlertMessageSignOutSync = NSLocalizedString("Are you sure you want to sign out? Incomplete activities and activities completed while offline must be re-started when you next sign in.", comment: "")
+let kAlertMessageForSignOut = NSLocalizedStrings("Are you sure you want to sign out?", comment: "")
+let kAlertMessageSignOutSync = NSLocalizedStrings("Are you sure you want to sign out? Incomplete activities and activities completed while offline must be re-started when you next sign in.", comment: "")
 
-let kAlertSignOutLaterTitle = NSLocalizedString("Sign Out later", comment: "")
+let kAlertSignOutLaterTitle = NSLocalizedStrings("Sign Out later", comment: "")
 
 // MARK:Segue Identifiers
 let kLoginStoryboardIdentifier = "Login"
@@ -428,11 +428,16 @@ class LeftMenuViewController: UIViewController, LeftMenuProtocol {
 extension LeftMenuViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        
+        let dict: Dictionary<String,Any>? = menus[indexPath.row]
         if let menu = LeftMenu(rawValue: indexPath.row) {
             switch menu {
             case .studyList, .resources, .profile_reachOut,.reachOut_signIn, .signup:
+              
+              if dict?["subTitle"] != nil {
                 return 78.0
+              } else {
+                return 70.0
+              }
             }
         }
         return 0
@@ -509,12 +514,17 @@ extension LeftMenuViewController: NMWebServiceDelegate {
             UIUtilities.showAlertMessageWithActionHandler(kErrorTitle, message: error.localizedDescription, buttonTitle: kTitleOk, viewControllerUsed: self, action: {
                 self.fdaSlideMenuController()?.navigateToHomeAfterUnauthorizedAccess()
             })
-        }else {
-            UIUtilities.showAlertWithTitleAndMessage(title: kErrorTitle as NSString, message: error.localizedDescription as NSString)
+        } else {
+            let errorMsg = base64DecodeError(error.localizedDescription)
+            UIUtilities.showAlertWithTitleAndMessage(title: kErrorTitle as NSString, message: errorMsg as NSString)
         }
     }
 }
 
 
 
+
+public func NSLocalizedStrings(_ key: String, comment: String) -> String {
+  return NSLocalizedString(key, tableName: nil, bundle: AppDelegate.selectedLocale() ?? Bundle.main, value: "", comment: "")
+}
 

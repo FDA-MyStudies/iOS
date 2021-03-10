@@ -23,9 +23,9 @@ import UIKit
 class ReachoutOptionsViewController: UIViewController {
 
     @IBOutlet var tableView: UITableView?
-    let kReachOutTitle = NSLocalizedString("REACH OUT", comment: "")
-    let kLeaveAnonymousFeedbackTitle = NSLocalizedString("Leave Anonymous Feedback", comment: "")
-    let kNeedHelpContactUsTitle = NSLocalizedString("Need Help? Contact Us", comment: "")
+    let kReachOutTitle = NSLocalizedStrings("REACH OUT", comment: "")
+    let kLeaveAnonymousFeedbackTitle = NSLocalizedStrings("Leave Anonymous Feedback", comment: "")
+    let kNeedHelpContactUsTitle = NSLocalizedStrings("Need Help? Contact Us", comment: "")
     
 // MARK:- Viewcontroller Lifecycle
     override func viewDidLoad() {

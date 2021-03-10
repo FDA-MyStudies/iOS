@@ -39,8 +39,8 @@ class PDFCreator: NSObject {
     let pageWidth = 612.0
     let pageHeight = 792.0
     let pageRect = CGRect(x: 0, y: 0, width: 612.0, height: 792.0)
-    let kPage = NSLocalizedString("Page", comment: "")
-    let kof = NSLocalizedString("of", comment: "")
+    let kPage = NSLocalizedStrings("Page", comment: "")
+    let kof = NSLocalizedStrings("of", comment: "")
     
     init(title: String, body: String, image: UIImage, relation: String, participantFirstName: String, participantLastName: String, startTime: String, firstName: String, lastName: String, isLAR: Bool, isAdditionalSign: Bool, additionalArrSign: [String], pageCount: Int) { //
         self.title = title
@@ -93,7 +93,7 @@ class PDFCreator: NSObject {
                 body1TextBottom = body1TextBottom + 104.0
             }
             
-            let firstTextBottom = addBody1TextRegular(textTop: body1TextBottom + 22.0, title: isLAR ? firstName : "\(firstName) \(lastName))", xValue: 15)
+            let firstTextBottom = addBody1TextRegular(textTop: body1TextBottom + 22.0, title: isLAR ? firstName : "\(firstName) \(lastName)", xValue: 15)
             drawLine(context, XValueStart: 10, top: firstTextBottom + 5, xValueEnd: (CGFloat(1 * (pageWidth / 4)) + 10))
             _ = addBody1TextRegular(textTop: firstTextBottom + 14.0, title: isLAR ? "(\(LocalizableString.consentLARFirstName.localizedString))" : LocalizableString.consentAddSignParticipantName.localizedString, xValue: 15)
             

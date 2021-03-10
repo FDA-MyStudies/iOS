@@ -21,10 +21,10 @@
 import IQKeyboardManagerSwift
 import UIKit
 
-let kHelperTextForFilteredStudiesNotFound = NSLocalizedString("Sorry, no Studies found. Please try different Filter Options", comment: "")
-let kHelperTextForSearchedStudiesNotFound = NSLocalizedString("Sorry, no Studies found. Please check the spelling or try a different search.", comment: "")
+let kHelperTextForFilteredStudiesNotFound = NSLocalizedStrings("Sorry, no Studies found. Please try different Filter Options", comment: "")
+let kHelperTextForSearchedStudiesNotFound = NSLocalizedStrings("Sorry, no Studies found. Please check the spelling or try a different search.", comment: "")
 
-let kHelperTextForOffline = NSLocalizedString("Sorry, no studies available right now. Please remain signed in to get notified when there are new studies available.", comment: "")
+let kHelperTextForOffline = NSLocalizedStrings("Sorry, no studies available right now. Please remain signed in to get notified when there are new studies available.", comment: "")
 
 let kNotificationViewControllerIdentifier = "NotificationViewControllerIdentifier"
 
@@ -58,7 +58,7 @@ class StudyListViewController: UIViewController {
 
       let navTitle = Branding.NavigationTitleName
         let titleLabel = UILabel()
-        titleLabel.text = NSLocalizedString(navTitle, comment: "")
+        titleLabel.text = NSLocalizedStrings(navTitle, comment: "")
         titleLabel.font = UIFont(name: "HelveticaNeue-Medium", size: 18)
         titleLabel.textAlignment = .left
         titleLabel.textColor = Utilities.getUIColorFromHex(0x007CBA)
@@ -260,7 +260,7 @@ class StudyListViewController: UIViewController {
             }
 
             if daysLastSeen >= 7 { // Notification is disabled for 7 or more Days
-              UIUtilities.showAlertWithTitleAndMessage(title: NSLocalizedString(Branding.productTitle, comment: "") as NSString, message: kMessageAppNotificationOffRemainder as NSString)
+              UIUtilities.showAlertWithTitleAndMessage(title: NSLocalizedStrings(Branding.productTitle, comment: "") as NSString, message: kMessageAppNotificationOffRemainder as NSString)
 
                 ud.set(Date(), forKey: "NotificationRemainder")
                 ud.synchronize()
@@ -776,7 +776,7 @@ extension StudyListViewController: StudyFilterDelegates {
         // filter by study category
         var categoryFilteredStudies: [Study]! = []
         if categories.count > 0 {
-            categoryFilteredStudies = allStudyList.filter { categories.contains($0.category!) }
+            categoryFilteredStudies = allStudyList.filter { categories.contains(replaceFirstString($0.category!)) }
         }
 
         // filter by study status
@@ -802,7 +802,7 @@ extension StudyListViewController: StudyFilterDelegates {
         var searchTextFilteredStudies: [Study]! = []
         if searchText.count > 0 {
             searchTextFilteredStudies = allStudyList.filter {
-                ($0.name?.containsIgnoringCase(searchText))! || ($0.category?.containsIgnoringCase(searchText))! || ($0.description?.containsIgnoringCase(searchText))! || ($0.sponserName?.containsIgnoringCase(searchText))!
+              ($0.name?.containsIgnoringCase(searchText))! || (replaceFirstString($0.category ?? "").containsIgnoringCase(searchText)) || ($0.description?.containsIgnoringCase(searchText))! || ($0.sponserName?.containsIgnoringCase(searchText))!
             }
         }
 
@@ -942,7 +942,11 @@ extension StudyListViewController: UITableViewDelegate {
         let study = studiesList[indexPath.row]
       let studyLanguage = study.studyLanguage.uppercased()
       
-      let locale = Locale.current.languageCode ?? "en"
+      var locale = Locale.preferredLanguages.first ?? "en"
+      if !(locale.hasPrefix("es") || locale.hasPrefix("en")) {
+        locale = "en"
+      }
+      
       if locale.hasPrefix("es") && studyLanguage == "ENGLISH" {
         presentLanguageAlert(studyLanguage: "English", study: study)
       } else if !locale.hasPrefix("es") && studyLanguage == "SPANISH" {
@@ -954,13 +958,13 @@ extension StudyListViewController: UITableViewDelegate {
     }
   
   func presentLanguageAlert(studyLanguage: String, study: Study) {
-    let str1 = NSLocalizedString("The selected study is in the", comment: "")
-    let str2 = NSLocalizedString("language", comment: "")
-    let str3 = NSLocalizedString("Please change language to", comment: "")
-    let str4 = NSLocalizedString("in your device settings and continue", comment: "")
-    let kSettings = NSLocalizedString("Settings", comment: "")
+    let str1 = NSLocalizedStrings("The selected study is in the", comment: "")
+    let str2 = NSLocalizedStrings("language", comment: "")
+    let str3 = NSLocalizedStrings("Please change language to", comment: "")
+    let str4 = NSLocalizedStrings("in your device settings and continue.", comment: "")
+    let kSettings = NSLocalizedStrings("Settings", comment: "")
     
-    UIUtilities.showAlertMessageWithTwoActionsAndHandler("", errorMessage: "\(str1) \(studyLanguage) \(str2). \(str3) \(studyLanguage) \(str4)", errorAlertActionTitle: kTitleCancel,
+    UIUtilities.showAlertMessageWithTwoActionsAndHandler("", errorMessage: "\(str1) \(studyLanguage)\(str2). \(str3) \(studyLanguage) \(str4)", errorAlertActionTitle: kTitleCancel,
                                                          errorAlertActionTitle2: kSettings, viewControllerUsed: self,
           action1: {
             Study.updateCurrentStudy(study: study)
@@ -1074,7 +1078,7 @@ extension StudyListViewController: searchBarDelegate {
                 if studyId.isEmpty {
                     
                     searchTextFilteredStudies = studiesList.filter {
-                        ($0.name?.containsIgnoringCase(text))! || ($0.category?.containsIgnoringCase(text))! || ($0.description?.containsIgnoringCase(text))! || ($0.sponserName?.containsIgnoringCase(text))!
+                      ($0.name?.containsIgnoringCase(text))! || (replaceFirstString($0.category ?? "").containsIgnoringCase(text)) || ($0.description?.containsIgnoringCase(text))! || ($0.sponserName?.containsIgnoringCase(text))!
                     }
                     
                     StudyFilterHandler.instance.searchText = text
@@ -1250,7 +1254,8 @@ extension StudyListViewController: NMWebServiceDelegate {
                 if refreshControl != nil, (refreshControl?.isRefreshing)! {
                     refreshControl?.endRefreshing()
                 }
-                UIUtilities.showAlertWithTitleAndMessage(title: NSLocalizedString(kErrorTitle, comment: "") as NSString, message: error.localizedDescription as NSString)
+                let errorMsg = base64DecodeError(error.localizedDescription)
+                UIUtilities.showAlertWithTitleAndMessage(title: NSLocalizedStrings(kErrorTitle, comment: "") as NSString, message: errorMsg as NSString)
             }
         }
     }
@@ -1308,4 +1313,8 @@ extension StudyListViewController: ORKTaskViewControllerDelegate {
     }
 
     func taskViewController(_: ORKTaskViewController, stepViewControllerWillAppear _: ORKStepViewController) {}
+}
+
+func replaceFirstString (_ catagory: String) -> String {
+  return catagory.replacingOccurrences(of: "1", with: "")
 }

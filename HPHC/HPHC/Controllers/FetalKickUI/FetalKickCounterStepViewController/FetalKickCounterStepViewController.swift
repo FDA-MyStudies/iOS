@@ -28,12 +28,12 @@ import ActionSheetPicker_3_0
 
 
 let kFetalKickCounterStepDefaultIdentifier = "defaultIdentifier"
-let kTapToRecordKick = NSLocalizedString("TAP TO RECORD A KICK", comment: "")
+let kTapToRecordKick = NSLocalizedStrings("TAP TO RECORD A KICK", comment: "")
 
-let kConfirmMessage =  NSLocalizedString("You have recorded ", comment: "")
-let kConfirmMessage2 =  NSLocalizedString(" Proceed to submitting count and time?", comment: "")
+let kConfirmMessage =  NSLocalizedStrings("You have recorded ", comment: "")
+let kConfirmMessage2 =  NSLocalizedStrings(" Proceed to submitting count and time?", comment: "")
 
-let kGreaterValueMessage = NSLocalizedString("This activity records the time it takes to feel ", comment: "")
+let kGreaterValueMessage = NSLocalizedStrings("This activity records the time it takes to feel ", comment: "")
 
 let kFetalKickStartTimeStamp = "FetalKickStartTimeStamp"
 let kFetalKickActivityId = "FetalKickActivityId"
@@ -41,7 +41,7 @@ let kFetalKickActivityId = "FetalKickActivityId"
 let kFetalkickStudyId = "FetalKickStudyId"
 let kFetalKickCounterValue = "FetalKickCounterValue"
 let kFetalKickCounterRunId = "FetalKickCounterRunid"
-let kSelectTimeLabel = NSLocalizedString("Select Time", comment: "")
+let kSelectTimeLabel = NSLocalizedStrings("Select Time", comment: "")
 
 class FetalKickCounterStepViewController:  ORKStepViewController {
     
@@ -301,13 +301,13 @@ class FetalKickCounterStepViewController:  ORKStepViewController {
      Alerts User if Kick counts or time is exceeded
     */
     func showAlertForGreaterValues(){
-        let kPleaseEnter = NSLocalizedString("please enter ", comment: "")
-        let kKicks = NSLocalizedString("kicks ", comment: "")
-        let kKicksOnly = NSLocalizedString("kicks only ", comment: "")
+        let kPleaseEnter = NSLocalizedStrings("please enter ", comment: "")
+        let kKicks = NSLocalizedStrings("kicks ", comment: "")
+        let kKicksOnly = NSLocalizedStrings("kicks only ", comment: "")
       
          let message = kGreaterValueMessage + "\(self.maxKicksAllowed!) \(kKicks), " + kPleaseEnter + "\(self.maxKicksAllowed!) \(kKicksOnly)"
         
-        Utilities.showAlertWithTitleAndMessage(title: NSLocalizedString(kMessage, comment: "") as NSString, message: message as NSString)
+        Utilities.showAlertWithTitleAndMessage(title: NSLocalizedStrings(kMessage, comment: "") as NSString, message: message as NSString)
     }
     
     /**
@@ -373,7 +373,7 @@ class FetalKickCounterStepViewController:  ORKStepViewController {
         let timeConsumed = (self.timerLabel?.text!)
         let message = kConfirmMessage + "\(self.kickCounter!) kicks in " + "\(timeConsumed!)." + kConfirmMessage2
         
-        UIUtilities.showAlertMessageWithTwoActionsAndHandler(kTitleMessage, errorMessage: NSLocalizedString(message, comment: ""), errorAlertActionTitle: kProceedTitle,
+        UIUtilities.showAlertMessageWithTwoActionsAndHandler(kTitleMessage, errorMessage: NSLocalizedStrings(message, comment: ""), errorAlertActionTitle: kProceedTitle,
                                                              errorAlertActionTitle2: kTitleCancel, viewControllerUsed: self,
                                                              action1: {
                                                                 
@@ -476,7 +476,7 @@ class FetalKickCounterStepViewController:  ORKStepViewController {
             
             let value = (hours < 10 ? "0\(hours):" : "\(hours):") + (minutes < 10 ? "0\(minutes):" : "\(minutes):")   + (seconds < 10 ? "0\(seconds)" : "\(seconds)")
             
-            let kSelectTime = NSLocalizedString("Please select a valid time(Max ", comment: "")
+            let kSelectTime = NSLocalizedStrings("Please select a valid time(Max ", comment: "")
             Utilities.showAlertWithTitleAndMessage(title: kMessage as NSString, message: (kSelectTime + value + ")") as NSString)
             
           } else {
@@ -510,8 +510,8 @@ open class FetalKickCounterTaskResult: ORKResult {
     
     open var totalKickCount: Int = 0
     open var duration: Int = 0
-    let kHitCount = NSLocalizedString("hitCount", comment: "")
-    let kDuration = NSLocalizedString("duration", comment: "")
+    let kHitCount = NSLocalizedStrings("hitCount", comment: "")
+    let kDuration = NSLocalizedStrings("duration", comment: "")
     
     override open var description: String {
         get {

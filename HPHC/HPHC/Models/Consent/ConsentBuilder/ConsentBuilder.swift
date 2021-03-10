@@ -76,21 +76,21 @@ let kConsentViewPdfStoryboardId = "ConsentPdfViewerStepViewControllerIdentifier"
 
 // Comprehenion Instruction Step Keys
 
-let kConsentComprehensionTestTitle = NSLocalizedString("Comprehension", comment: "")
-let kConsentComprehensionTestText = NSLocalizedString("Let's do a quick and simple test of your understanding of this Study.", comment: "")
+let kConsentComprehensionTestTitle = NSLocalizedStrings("Comprehension", comment: "")
+let kConsentComprehensionTestText = NSLocalizedStrings("Let's do a quick and simple test of your understanding of this Study.", comment: "")
 let kComprehensionInstructionStepIdentifier = "ComprehensionInstructionStep"
 
 // Comprehension Completion Step Keys
 
-let kComprehensionCompletionTitle = NSLocalizedString("Great Job!", comment: "")
-let kComprehensionCompletionText = NSLocalizedString("You answered all of the questions correctly. Tap on Next to proceed", comment: "")
+let kComprehensionCompletionTitle = NSLocalizedStrings("Great Job!", comment: "")
+let kComprehensionCompletionText = NSLocalizedStrings("You answered all of the questions correctly. Tap on Next to proceed", comment: "")
 let kComprehensionCompletionStepIdentifier = "ComprehensionCompletionStep"
 
 // Consent Completion
 
-let kConsentCompletionMainTitle = NSLocalizedString("Thanks for providing consent for this Study", comment: "")
-let kConsentCompletionSubTitle = NSLocalizedString("You can now start participating in the Study", comment: "")
-let kSignaturePageContentText = NSLocalizedString("I agree to participate in this research study.", comment: "")
+let kConsentCompletionMainTitle = NSLocalizedStrings("Thanks for providing consent for this Study", comment: "")
+let kConsentCompletionSubTitle = NSLocalizedStrings("You can now start participating in the Study", comment: "")
+let kSignaturePageContentText = NSLocalizedStrings("I agree to participate in this research study.", comment: "")
 
 // Signature Page
 
@@ -462,7 +462,7 @@ class ConsentBuilder {
         relationAnswerFormat.maximumLength = 250
         relationAnswerFormat.autocapitalizationType = .words
         
-        let placeHolder = NSLocalizedString("Required", comment: "")
+        let placeHolder = NSLocalizedStrings("Required", comment: "")
         let relationItem = ORKFormItem(identifier: kLARConsentParticipantRelationItem,
                                        text: " ", answerFormat: relationAnswerFormat)
         relationItem.placeholder = placeHolder

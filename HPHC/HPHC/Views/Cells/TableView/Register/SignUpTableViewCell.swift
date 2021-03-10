@@ -70,8 +70,8 @@ class SignUpTableViewCell: UITableViewCell {
         
 
         
-        labelType?.text = NSLocalizedString((data["helpText"] as? String)!, comment: "")
-        textFieldValue?.placeholder = NSLocalizedString((data["placeHolder"] as? String)!, comment: "")
+        labelType?.text = NSLocalizedStrings((data["helpText"] as? String)!, comment: "")
+        textFieldValue?.placeholder = NSLocalizedStrings((data["placeHolder"] as? String)!, comment: "")
         
         if keyboardType == nil {
             textFieldValue?.keyboardType = .emailAddress

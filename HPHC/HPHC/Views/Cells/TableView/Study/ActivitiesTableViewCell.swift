@@ -133,12 +133,12 @@ class ActivitiesTableViewCell: UITableViewCell {
      */
     func updateUserRunStatus(activity: Activity) {
       
-        let kRun = NSLocalizedString("Run: ", comment: "")
-        let kdone = NSLocalizedString(" done", comment: "")
-        let kmissed = NSLocalizedString(" missed", comment: "")
-        let kRuns = NSLocalizedString("Run(s):", comment: "")
-        let kDone = NSLocalizedString("Done", comment: "")
-        let kMore = NSLocalizedString("more", comment: "")
+        let kRun = NSLocalizedStrings("Run: ", comment: "")
+        let kdone = NSLocalizedStrings(" done", comment: "")
+        let kmissed = NSLocalizedStrings(" missed", comment: "")
+        let kRuns = NSLocalizedStrings("Run(s):", comment: "")
+        let kDone = NSLocalizedStrings("Done", comment: "")
+        let kMore = NSLocalizedStrings("more", comment: "")
         
         let currentRunId = (activity.totalRuns != 0) ? String(activity.currentRunId) : "0"
         

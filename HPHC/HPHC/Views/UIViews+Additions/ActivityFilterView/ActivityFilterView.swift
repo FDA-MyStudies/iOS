@@ -83,7 +83,7 @@ class ActivityFilterView: UIView,UITableViewDelegate,UITableViewDataSource{
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
         cell.textLabel?.font = UIFont(name: "HelveticaNeue-Light", size: 15)
        
-        let labelVal = NSLocalizedString(filterArray[indexPath.row], comment: "")
+        let labelVal = NSLocalizedStrings(filterArray[indexPath.row], comment: "")
         cell.textLabel?.text = labelVal
         
         if indexPath.row == self.selectedIndex.rawValue {

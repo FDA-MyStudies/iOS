@@ -57,8 +57,8 @@ class SignInTableViewCell: UITableViewCell {
         if securedText == true {
             textFieldValue?.isSecureTextEntry = true
         }
-        labelType?.text = NSLocalizedString((data["helpText"] as? String)!, comment: "")
-        textFieldValue?.placeholder = NSLocalizedString((data["placeHolder"] as? String)!, comment: "")
+        labelType?.text = NSLocalizedStrings((data["helpText"] as? String)!, comment: "")
+        textFieldValue?.placeholder = NSLocalizedStrings((data["placeHolder"] as? String)!, comment: "")
     }
 }
 

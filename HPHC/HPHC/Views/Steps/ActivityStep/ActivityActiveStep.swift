@@ -115,7 +115,7 @@ let kActiveFetalKickCounterkickCounts = "kickCount"
 
 //Completion Text
 
-let kActiveTaskCompletionStepText = NSLocalizedString("Tap Done to submit responses. Responses cannot be modified after submission.", comment: "")
+let kActiveTaskCompletionStepText = NSLocalizedStrings("Tap Done to submit responses. Responses cannot be modified after submission.", comment: "")
 
 
 

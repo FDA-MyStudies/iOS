@@ -298,7 +298,7 @@ class NetworkWebServiceHandler: NSObject, URLSessionDelegate {
         } else {
             if ((delegate?.failedRequest) != nil) {
         
-                let error1 = NSError(domain: NSURLErrorDomain, code:NoNetworkErrorCode,userInfo:[NSLocalizedDescriptionKey:NSLocalizedString("You seem to be offline. Please connect to a network to proceed with this action.", comment: "")])
+                let error1 = NSError(domain: NSURLErrorDomain, code:NoNetworkErrorCode,userInfo:[NSLocalizedDescriptionKey:NSLocalizedStrings("You seem to be offline. Please connect to a network to proceed with this action.", comment: "")])
                 delegate?.failedRequest(networkManager!, requestName: requestName!,error: error1)
             }
         }
@@ -344,7 +344,7 @@ class NetworkWebServiceHandler: NSObject, URLSessionDelegate {
                         
                     } else {
                         
-                        error1 = NSError(domain: NSURLErrorDomain, code: 300,userInfo:[NSLocalizedDescriptionKey:NSLocalizedString("Could not connect to server. Please try again later.", comment: "")])
+                        error1 = NSError(domain: NSURLErrorDomain, code: 300,userInfo:[NSLocalizedDescriptionKey:NSLocalizedStrings("Could not connect to server. Please try again later.", comment: "")])
                         
                         if ((delegate?.failedRequest) != nil) {
                             delegate?.failedRequest(networkManager!, requestName: requestName!,error:error1!)

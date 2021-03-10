@@ -553,7 +553,7 @@ class ActivityQuestionStep: ActivityStep {
                         placeholderText = formatDict?[kStepQuestionNumericPlaceholder] as? String
                     }
                     
-                    let localizedQuestionStepAnswerFormatUnit = NSLocalizedString((formatDict?[kStepQuestionNumericUnit] as? String)! , comment: "")
+                    let localizedQuestionStepAnswerFormatUnit = NSLocalizedStrings((formatDict?[kStepQuestionNumericUnit] as? String)! , comment: "")
                     
                     let style = ((formatDict?[kStepQuestionNumericStyle] as? String)! == "Decimal") ? 0 : 1
                     

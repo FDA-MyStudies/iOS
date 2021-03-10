@@ -37,7 +37,7 @@ class FilterListTableViewCell: UITableViewCell {
     }
 
     func populateCellWith(filterValue: FilterValues){
-        self.name?.text = NSLocalizedString("\(filterValue.title ?? "")", comment: "")
+        self.name?.text = NSLocalizedStrings("\(filterValue.title ?? "")", comment: "")
         self.name?.sizeToFit()
         
         if filterValue.isSelected{

@@ -29,6 +29,9 @@
                     <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="27"/>
                     <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <nil key="highlightedColor"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="string" keyPath="localizedText" value="xNA-bz-Y9i.text.value"/>
+                    </userDefinedRuntimeAttributes>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="sEi-f6-3pt">
                     <rect key="frame" x="16" y="294.5" width="343" height="133"/>
@@ -55,6 +58,7 @@
                         <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
                             <integer key="value" value="1"/>
                         </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="string" keyPath="localizedText" value="AaU-Or-nbT.normalTitle.value"/>
                     </userDefinedRuntimeAttributes>
                     <connections>
                         <action selector="buttonUpgradeAction" destination="iN0-l3-epB" eventType="touchUpInside" id="3jq-CB-L8P"/>

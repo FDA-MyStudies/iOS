@@ -23,8 +23,8 @@ import ResearchKit
 
 
 let kFetalKickInstructionStepIdentifier = "Instruction"
-let kFetalKickInstructionStepTitle = NSLocalizedString("Fetal Kick Counter", comment: "")
-let kFetalKickInstructionStepText = NSLocalizedString("This task needs you to record the number of times you experience fetal kicks in a given duration of time.Also called as the Fetal Kick Counter task, this will help assess the activity of the baby within.", comment: "")
+let kFetalKickInstructionStepTitle = NSLocalizedStrings("Fetal Kick Counter", comment: "")
+let kFetalKickInstructionStepText = NSLocalizedStrings("This task needs you to record the number of times you experience fetal kicks in a given duration of time.Also called as the Fetal Kick Counter task, this will help assess the activity of the baby within.", comment: "")
 
 
 let kFetalKickIntroductionStepIdentifier = "FetalKickIntroduction"
@@ -100,7 +100,7 @@ class FetalKickCounterTask {
         introStep.introTitle =  kFetalKickInstructionStepTitle
       
       if (self.instructionText?.count)! > 0 {
-        introStep.subTitle = NSLocalizedString(self.instructionText!, comment: "")
+        introStep.subTitle = NSLocalizedStrings(self.instructionText!, comment: "")
        
       } else {
          introStep.subTitle = kFetalKickInstructionStepText
@@ -125,8 +125,8 @@ class FetalKickCounterTask {
         
         //create a Completion Step
         let summaryStep = ORKCompletionStep(identifier: kFetalKickCounterStepCompletionIdentifier)
-        let kActivityCompleted = NSLocalizedString("Activity Completed", comment: "")
-        let kThankYouForTime = NSLocalizedString("Thank you for your time!\n\nTap Done to submit responses. Responses cannot be modified after submission.", comment: "")
+        let kActivityCompleted = NSLocalizedStrings("Activity Completed", comment: "")
+        let kThankYouForTime = NSLocalizedStrings("Thank you for your time!\n\nTap Done to submit responses. Responses cannot be modified after submission.", comment: "")
         summaryStep.title = kActivityCompleted
         summaryStep.image = #imageLiteral(resourceName: "successBlueBig")
         summaryStep.detailText = kThankYouForTime

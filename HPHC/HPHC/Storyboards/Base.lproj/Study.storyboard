@@ -44,6 +44,7 @@
                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
                                         <integer key="value" value="1"/>
                                     </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="localizedText" value="MKo-wh-p4O.normalTitle.value"/>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="buttonActionJoinStudy:" destination="N5Y-rW-mwD" eventType="touchUpInside" id="8Ca-aJ-4bL"/>
@@ -114,6 +115,9 @@
                                         <state key="normal" title="View Consent">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="string" keyPath="localizedText" value="gz3-j6-s6W.normalTitle.value"/>
+                                        </userDefinedRuntimeAttributes>
                                         <connections>
                                             <action selector="visitWebsiteButtonAction:" destination="N5Y-rW-mwD" eventType="touchUpInside" id="DXj-3h-3dB"/>
                                         </connections>
@@ -247,6 +251,7 @@
                                 <nil key="highlightedColor"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="localizedText" value="AA0-le-tSn.text.value"/>
                                 </userDefinedRuntimeAttributes>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="13" translatesAutoresizingMaskIntoConstraints="NO" id="p79-PH-HnS">
@@ -300,6 +305,9 @@
                                 <state key="normal" title="Visit Website">
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="localizedText" value="zeM-Up-qJV.normalTitle.value"/>
+                                </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="visitWebsiteButtonAction:" destination="BSo-U7-UDQ" eventType="touchUpInside" id="yD7-RQ-N3L"/>
                                 </connections>
@@ -411,6 +419,7 @@
                                             <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
                                                 <integer key="value" value="1"/>
                                             </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="string" keyPath="localizedText" value="lIT-J9-U7S.normalTitle.value"/>
                                         </userDefinedRuntimeAttributes>
                                         <connections>
                                             <action selector="buttonActionJoinStudy:" destination="EBl-T5-UoM" eventType="touchUpInside" id="Mhe-Bd-H9K"/>
@@ -435,6 +444,9 @@
                                                 <state key="normal" title="Visit Website">
                                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="string" keyPath="localizedText" value="wIC-kn-yNP.normalTitle.value"/>
+                                                </userDefinedRuntimeAttributes>
                                                 <connections>
                                                     <action selector="visitWebsiteButtonAction:" destination="EBl-T5-UoM" eventType="touchUpInside" id="ZZD-ik-4TQ"/>
                                                 </connections>
@@ -448,6 +460,9 @@
                                                 <state key="normal" title="View Consent">
                                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="string" keyPath="localizedText" value="mud-v9-9iS.normalTitle.value"/>
+                                                </userDefinedRuntimeAttributes>
                                                 <connections>
                                                     <action selector="visitWebsiteButtonAction:" destination="EBl-T5-UoM" eventType="touchUpInside" id="UMT-ST-uyk"/>
                                                 </connections>
@@ -565,6 +580,9 @@
                                                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="string" keyPath="localizedText" value="AW7-ks-icb.text.value"/>
+                                                    </userDefinedRuntimeAttributes>
                                                 </label>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="rightIconGrey" translatesAutoresizingMaskIntoConstraints="NO" id="QQd-sp-B0v">
                                                     <rect key="frame" x="336" y="25.333333333333332" width="8" height="14.333333333333332"/>

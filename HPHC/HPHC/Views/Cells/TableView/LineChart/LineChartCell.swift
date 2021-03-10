@@ -45,7 +45,7 @@ class LineChartCell: GraphChartTableViewCell {
     var xAxisTitles: [Any] = []
     var max: Float = 0.0
     var min: Float = 0.0
-    let kPerRun = NSLocalizedString(" (per run)", comment: "")
+    let kPerRun = NSLocalizedStrings(" (per run)", comment: "")
 
     var currentChart: DashboardCharts! {
       didSet {

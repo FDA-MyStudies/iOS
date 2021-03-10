@@ -58,5 +58,5 @@ enum LocalizableString: String {
     case consentAddSignParticipantName = "Participant's Name (printed)"
     case consentAddSignParticipantSignature = "Participant's Signature"
 
-    var localizedString: String { return NSLocalizedString(rawValue, comment: "") }
+    var localizedString: String { return NSLocalizedStrings(rawValue, comment: "") }
 }

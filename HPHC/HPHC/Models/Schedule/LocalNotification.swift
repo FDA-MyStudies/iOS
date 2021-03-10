@@ -102,8 +102,8 @@ class LocalNotification: NSObject {
                 case .One_Time:
                     
                     if run.endDate != nil {
-                      let kTheActivity = NSLocalizedString("The activity ", comment: "")
-                      let kWillExpire = NSLocalizedString(" will expire in 24 hours. Your participation is important. Please visit the study to complete it now.", comment: "")
+                      let kTheActivity = NSLocalizedStrings("The activity ", comment: "")
+                      let kWillExpire = NSLocalizedStrings(" will expire in 24 hours. Your participation is important. Please visit the study to complete it now.", comment: "")
                         let date = run.endDate.addingTimeInterval(-24*3600) // 24 hours before
                         let message = kTheActivity + activity.name! + kWillExpire
                         
@@ -112,8 +112,8 @@ class LocalNotification: NSObject {
                     
                 case .Daily:
                     if activity.frequencyRuns?.count == 1 {
-                       let kNewRun = NSLocalizedString("A new run of the daily activity ", comment: "")
-                        let kNowAvailable = NSLocalizedString(", is now available. Your participation is important. Please visit the study to complete it now.", comment: "")
+                       let kNewRun = NSLocalizedStrings("A new run of the daily activity ", comment: "")
+                        let kNowAvailable = NSLocalizedStrings(", is now available. Your participation is important. Please visit the study to complete it now.", comment: "")
                         let date = run.startDate! // 24 hours before
                         let message = kNewRun + activity.name! + kNowAvailable
                         //let userInfo = [kStudyId: run.studyId,
@@ -122,9 +122,9 @@ class LocalNotification: NSObject {
                         LocalNotification.composeRunNotification(startDate: date, endDate: run.endDate, message: message, run: run)
                         
                     } else {
-                        let kNewRun = NSLocalizedString("A new run of the daily activity ", comment: "")
-                      let kNowAvailable = NSLocalizedString(", is now available and is valid until ", comment: "")
-                      let kYourParticipation = NSLocalizedString(". Your participation is important. Please visit the study to complete it now.", comment: "")
+                        let kNewRun = NSLocalizedStrings("A new run of the daily activity ", comment: "")
+                      let kNowAvailable = NSLocalizedStrings(", is now available and is valid until ", comment: "")
+                      let kYourParticipation = NSLocalizedStrings(". Your participation is important. Please visit the study to complete it now.", comment: "")
                       
                         let date = run.startDate! // 24 hours before
                         let message1 = kNewRun + activity.name!
@@ -138,10 +138,10 @@ class LocalNotification: NSObject {
                     }
                     
                 case .Weekly:
-                    let kCurrentRun = NSLocalizedString("The current run of the weekly activity ", comment: "")
-                    let kWillExpire = NSLocalizedString(" will expire in 24 hours. Your participation is important. Please visit the study to complete it now.", comment: "")
-                    let kNewRun = NSLocalizedString("A new run of the weekly activity ", comment: "")
-                    let kNowAvailable = NSLocalizedString(", is now available. Please visit the study to complete it now.", comment: "")
+                    let kCurrentRun = NSLocalizedStrings("The current run of the weekly activity ", comment: "")
+                    let kWillExpire = NSLocalizedStrings(" will expire in 24 hours. Your participation is important. Please visit the study to complete it now.", comment: "")
+                    let kNewRun = NSLocalizedStrings("A new run of the weekly activity ", comment: "")
+                    let kNowAvailable = NSLocalizedStrings(", is now available. Please visit the study to complete it now.", comment: "")
                   
                     //expiry notificaiton
                     let date = run.endDate.addingTimeInterval(-24*3600)
@@ -157,10 +157,10 @@ class LocalNotification: NSObject {
                     LocalNotification.composeRunNotification(startDate: run.startDate!, endDate: run.endDate, message: startMessage, run: run)
                     
                 case .Monthly:
-                    let kCurrentRun = NSLocalizedString("The current run of the monthly activity ", comment: "")
-                  let kWillExpire = NSLocalizedString(" will expire in 3 days. Your participation is important. Please visit the study to complete it now.", comment: "")
-                  let kNewRun = NSLocalizedString("A new run of the monthly activity ", comment: "")
-                  let kNowAvailable = NSLocalizedString(", is now available. Please visit the study to complete it now.", comment: "")
+                    let kCurrentRun = NSLocalizedStrings("The current run of the monthly activity ", comment: "")
+                  let kWillExpire = NSLocalizedStrings(" will expire in 3 days. Your participation is important. Please visit the study to complete it now.", comment: "")
+                  let kNewRun = NSLocalizedStrings("A new run of the monthly activity ", comment: "")
+                  let kNowAvailable = NSLocalizedStrings(", is now available. Please visit the study to complete it now.", comment: "")
                   
                     let date = run.endDate.addingTimeInterval(-72*3600)
                     let message = kCurrentRun + activity.name! + kWillExpire
@@ -173,9 +173,9 @@ class LocalNotification: NSObject {
                     LocalNotification.composeRunNotification(startDate: run.startDate!, endDate: run.endDate, message: startMessage, run: run)
                     
                 case .Scheduled:
-                  let kNewRun = NSLocalizedString("A new run of the scheduled activity ", comment: "")
-                  let kNowAvailable = NSLocalizedString(", is now available and is valid until ", comment: "")
-                  let kYourParticipation = NSLocalizedString(". Your participation is important. Please visit the study to complete it now.", comment: "")
+                  let kNewRun = NSLocalizedStrings("A new run of the scheduled activity ", comment: "")
+                  let kNowAvailable = NSLocalizedStrings(", is now available and is valid until ", comment: "")
+                  let kYourParticipation = NSLocalizedStrings(". Your participation is important. Please visit the study to complete it now.", comment: "")
                   
                     let date = run.startDate! // 24 hours before
                     let endDate = LocalNotification.oneTimeFormatter.string(from: run.endDate!)
@@ -314,8 +314,8 @@ class LocalNotification: NSObject {
             infoDict = NSDictionary(contentsOfFile: path)
         }
         let navTitle = infoDict!["ProductTitleName"] as! String
-        let kVisited = NSLocalizedString("It’s been a while since you visited the", comment: "")
-        let kPleaseConsider = NSLocalizedString("app. Please consider continuing your participation in any studies in which you’re enrolled.", comment: "")
+        let kVisited = NSLocalizedStrings("It’s been a while since you visited the", comment: "")
+        let kPleaseConsider = NSLocalizedStrings("app. Please consider continuing your participation in any studies in which you’re enrolled.", comment: "")
         
         let message = "\(kVisited) \(navTitle) \(kPleaseConsider)"
         

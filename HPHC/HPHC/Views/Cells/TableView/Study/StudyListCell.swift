@@ -172,7 +172,7 @@ class StudyListCell: UITableViewCell {
      */
     func setStudyStatus(study: Study){
         
-        labelStudyStatus?.text = NSLocalizedString("\(study.status.rawValue.uppercased())", comment: "")
+        labelStudyStatus?.text = NSLocalizedStrings("\(study.status.rawValue.uppercased())", comment: "")
         
         switch study.status {
         case .Active:
@@ -202,13 +202,13 @@ class StudyListCell: UITableViewCell {
             
             switch study.status {
             case .Active:
-                labelStudyUserStatus?.text = NSLocalizedString("\(userStudyStatus.status.description)", comment: "")
+                labelStudyUserStatus?.text = NSLocalizedStrings("\(userStudyStatus.status.description)", comment: "")
             case .Closed:
-                labelStudyUserStatus?.text = NSLocalizedString("\(userStudyStatus.status.closedStudyDescription)", comment: "")
+                labelStudyUserStatus?.text = NSLocalizedStrings("\(userStudyStatus.status.closedStudyDescription)", comment: "")
             case .Upcoming:
-                labelStudyUserStatus?.text = NSLocalizedString("\(userStudyStatus.status.upcomingStudyDescription)", comment: "")
+                labelStudyUserStatus?.text = NSLocalizedStrings("\(userStudyStatus.status.upcomingStudyDescription)", comment: "")
             default:
-                labelStudyUserStatus?.text = NSLocalizedString("\(userStudyStatus.status.description)", comment: "")
+                labelStudyUserStatus?.text = NSLocalizedStrings("\(userStudyStatus.status.description)", comment: "")
             }
           
             //update completion %

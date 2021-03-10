@@ -33,7 +33,7 @@ class HPHCSettings {
     
     func showSettings(_ presenter:UIViewController, handler:(()->Void)){
         
-      let kChangeServer = NSLocalizedString("Change server to", comment: "")
+      let kChangeServer = NSLocalizedStrings("Change server to", comment: "")
         let alertConrtolelr = UIAlertController.init(title: kChangeServer, message: nil, preferredStyle: .actionSheet)
         
         

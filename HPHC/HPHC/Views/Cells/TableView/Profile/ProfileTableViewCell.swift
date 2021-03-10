@@ -54,7 +54,7 @@ class ProfileTableViewCell: UITableViewCell {
      */
     func setCellData(dict: NSDictionary ){
         
-        self.labelName?.text = NSLocalizedString((dict[kLabelText] as? String)!, comment: "")
+        self.labelName?.text = NSLocalizedStrings((dict[kLabelText] as? String)!, comment: "")
         
     }
     

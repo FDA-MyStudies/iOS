@@ -151,6 +151,7 @@ NS_ASSUME_NONNULL_BEGIN
 NSBundle *ORKAssetsBundle(void);
 NSBundle *ORKBundle(void);
 NSBundle *ORKDefaultLocaleBundle(void);
+NSBundle *ORKBundleEnglish(void);
 
 // Pass 0xcccccc and get color #cccccc
 UIColor *ORKRGB(uint32_t x);
@@ -368,12 +369,13 @@ ORK_INLINE UIColor *ORKOpaqueColorWithReducedAlphaFromBaseColor(UIColor *baseCol
 // Localization
 ORK_EXTERN NSBundle *ORKBundle(void) ORK_AVAILABLE_DECL;
 ORK_EXTERN NSBundle *ORKDefaultLocaleBundle(void);
+ORK_EXTERN NSBundle *ORKBundleEnglish(void);
 
 #define ORKDefaultLocalizedValue(key) \
 [ORKDefaultLocaleBundle() localizedStringForKey:key value:@"" table:@"ResearchKit"]
 
 #define ORKLocalizedString(key, comment) \
-[ORKBundle() localizedStringForKey:(key) value:ORKDefaultLocalizedValue(key) table:@"ResearchKit"]
+[ORKBundleEnglish() localizedStringForKey:(key) value:ORKDefaultLocalizedValue(key) table:@"ResearchKit"]
 
 #define ORKLocalizedStringFromNumber(number) \
 [NSNumberFormatter localizedStringFromNumber:number numberStyle:NSNumberFormatterNoStyle]

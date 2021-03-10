@@ -25,6 +25,9 @@
                             <rect key="frame" x="120" y="114.5" width="135" height="50"/>
                             <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="30"/>
                             <nil key="highlightedColor"/>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="string" keyPath="localizedText" value="NJC-CA-ro1.text.value"/>
+                            </userDefinedRuntimeAttributes>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="kjL-rf-IRM">
                             <rect key="frame" x="37.5" y="194.5" width="300" height="130"/>
@@ -32,6 +35,9 @@
                             <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="18.5"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="string" keyPath="localizedText" value="kjL-rf-IRM.text.value"/>
+                            </userDefinedRuntimeAttributes>
                         </label>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="smile2" translatesAutoresizingMaskIntoConstraints="NO" id="JU5-DE-RKR">
                             <rect key="frame" x="125.5" y="390" width="124" height="120"/>
@@ -55,16 +61,23 @@
                                 <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
                                     <integer key="value" value="1"/>
                                 </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="string" keyPath="localizedText" value="b7l-Wh-qpO.normalTitle.value"/>
                             </userDefinedRuntimeAttributes>
                             <connections>
                                 <action selector="buttonRetryAction" destination="iN0-l3-epB" eventType="touchUpInside" id="gQ2-9K-Spp"/>
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dcV-56-Hws">
-                            <rect key="frame" x="307" y="20" width="48" height="30"/>
+                            <rect key="frame" x="307" y="30" width="48" height="30"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="30" id="xet-Fl-V1O"/>
+                            </constraints>
                             <state key="normal" title="Cancel">
                                 <color key="titleColor" red="0.0" green="0.48627450979999998" blue="0.72941176470000002" alpha="1" colorSpace="calibratedRGB"/>
                             </state>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="string" keyPath="localizedText" value="dcV-56-Hws.normalTitle.value"/>
+                            </userDefinedRuntimeAttributes>
                             <connections>
                                 <action selector="buttonCancelAction" destination="iN0-l3-epB" eventType="touchUpInside" id="GcO-b8-6VH"/>
                             </connections>
@@ -81,7 +94,7 @@
                         <constraint firstItem="b7l-Wh-qpO" firstAttribute="height" secondItem="Vkn-Is-FiS" secondAttribute="height" multiplier="40/667" id="IEx-Wf-pfh"/>
                         <constraint firstAttribute="trailing" secondItem="dcV-56-Hws" secondAttribute="trailing" constant="20" id="IlL-b1-7s4"/>
                         <constraint firstItem="b7l-Wh-qpO" firstAttribute="centerX" secondItem="Vkn-Is-FiS" secondAttribute="centerX" id="KeE-wE-CE2"/>
-                        <constraint firstItem="dcV-56-Hws" firstAttribute="top" secondItem="Vkn-Is-FiS" secondAttribute="top" constant="20" id="OdF-zT-58g"/>
+                        <constraint firstItem="dcV-56-Hws" firstAttribute="top" secondItem="Vkn-Is-FiS" secondAttribute="top" constant="30" id="OdF-zT-58g"/>
                         <constraint firstItem="JU5-DE-RKR" firstAttribute="centerX" secondItem="Vkn-Is-FiS" secondAttribute="centerX" id="UHw-JR-F6X"/>
                         <constraint firstItem="NJC-CA-ro1" firstAttribute="width" secondItem="Vkn-Is-FiS" secondAttribute="width" multiplier="135/375" id="Va6-Ed-B0s"/>
                         <constraint firstItem="kjL-rf-IRM" firstAttribute="width" secondItem="Vkn-Is-FiS" secondAttribute="width" multiplier="300/375" id="Xwr-1H-gkM"/>

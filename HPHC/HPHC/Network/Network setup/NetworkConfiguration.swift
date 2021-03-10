@@ -62,7 +62,7 @@ class NetworkProtocols: NetworkConfigurationProtocol{
       var errorCode = 0
       if let errResponse = errorResponse["error"] as? [String: Any] {
         if let errCD = errResponse["code"] as? Int {
-          let kSomethingError = NSLocalizedString("Something went wrong", comment: "")
+          let kSomethingError = NSLocalizedStrings("Something went wrong", comment: "")
           errorCode = errCD
             let errorDesc = errResponse["message"] as? String ?? kSomethingError
           
@@ -71,7 +71,7 @@ class NetworkProtocols: NetworkConfigurationProtocol{
         }
       }
       
-      let error = NSError(domain: NSURLErrorDomain, code: 101, userInfo: [NSLocalizedDescriptionKey: NSLocalizedString("Your error localized description", comment: "")])
+      let error = NSError(domain: NSURLErrorDomain, code: 101, userInfo: [NSLocalizedDescriptionKey: NSLocalizedStrings("Your error localized description", comment: "")])
       return  error
       
     }

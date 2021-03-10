@@ -96,7 +96,7 @@
 "aiR-9i-QFj.text" = "ACTIVO";
 
 /* Class = "UILabel"; text = "We'd love to hear from you! Please share your thoughts on how we can improve your experience of participating in health studies and contributing to a healthier world! Your feedback will be anonymous."; ObjectID = "b0d-he-JiD"; */
-"b0d-he-JiD.text" = "¡Nos encantaría saber de ti! Comparta sus pensamientos sobre cómo podemos mejorar su experiencia de participar en estudios de salud y contribuir a un mundo más saludable. Sus comentarios serán anónimos.";
+"b0d-he-JiD.text" = "¡Nos encantaría saber de usted! Comparta sus pensamientos sobre cómo podemos mejorar su experiencia de participar en estudios de salud y contribuir a un mundo más saludable. Sus comentarios serán anónimos.";
 
 /* Class = "UIButton"; normalTitle = "Delete My Data"; ObjectID = "b2d-cc-iAX"; */
 "b2d-cc-iAX.normalTitle" = "Borrar mis datos";

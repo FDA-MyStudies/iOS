@@ -29,6 +29,9 @@
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="localizedText" value="sfa-0h-9w7.text.value"/>
+                                </userDefinedRuntimeAttributes>
                             </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="145" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Bq5-vM-CAI">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="623"/>
@@ -70,6 +73,9 @@
                                                     <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="16"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="string" keyPath="localizedText" value="LLs-YR-ZfM.text.value"/>
+                                                    </userDefinedRuntimeAttributes>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="A study for pregnant women" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YLI-bb-qxx">
                                                     <rect key="frame" x="109" y="61.5" width="248" height="14"/>
@@ -268,6 +274,9 @@
                                                     <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="16"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="string" keyPath="localizedText" value="6pR-ur-c4G.text.value"/>
+                                                    </userDefinedRuntimeAttributes>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="A study for pregnant women" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Z1L-Ln-Brn">
                                                     <rect key="frame" x="109" y="64.5" width="248" height="14"/>
@@ -481,6 +490,7 @@
                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
                                         <integer key="value" value="1"/>
                                     </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="localizedText" value="NY2-tY-i1U.normalTitle.value"/>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="applyButtonAction:" destination="lUx-CG-FkH" eventType="touchUpInside" id="TOC-xG-JmG"/>
@@ -692,6 +702,9 @@
                                             <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="12"/>
                                             <color key="textColor" red="0.50196078431372548" green="0.49803921568627452" blue="0.49803921568627452" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="string" keyPath="localizedText" value="gES-c2-7do.value"/>
+                                            </userDefinedRuntimeAttributes>
                                         </label>
                                     </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -719,6 +732,9 @@
                                             <state key="normal" title="Sign Out">
                                                 <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                             </state>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="string" keyPath="localizedText" value="0DE-kF-2Xl.normalTitle.value"/>
+                                            </userDefinedRuntimeAttributes>
                                             <connections>
                                                 <action selector="buttonActionSignOut:" destination="cb4-N4-R1j" eventType="touchUpInside" id="Axm-MB-tjF"/>
                                             </connections>
@@ -1194,6 +1210,9 @@
                                             <state key="highlighted">
                                                 <color key="titleColor" red="0.54901960780000003" green="0.58431372550000005" blue="0.63921568630000003" alpha="1" colorSpace="calibratedRGB"/>
                                             </state>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="string" keyPath="localizedText" value="TmB-Q7-f8P.normalTitle.value"/>
+                                            </userDefinedRuntimeAttributes>
                                             <connections>
                                                 <action selector="buttonActionSignOut:" destination="UWn-lb-vfU" eventType="touchUpInside" id="d4o-ww-Q9i"/>
                                             </connections>
@@ -1204,6 +1223,9 @@
                                             <state key="normal" title="Delete My Account">
                                                 <color key="titleColor" red="0.92835003140000005" green="0.14133504029999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             </state>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="string" keyPath="localizedText" value="1BA-M1-mXf.normalTitle.value"/>
+                                            </userDefinedRuntimeAttributes>
                                             <connections>
                                                 <action selector="buttonActionDeleteAccount:" destination="UWn-lb-vfU" eventType="touchUpInside" id="SUh-4a-7mp"/>
                                             </connections>
@@ -1433,6 +1455,7 @@ Below is a list of studies that you are a part of and information on how your re
                                                 <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
                                                     <integer key="value" value="1"/>
                                                 </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="string" keyPath="localizedText" value="AqF-5D-BJY.normalTitle.value"/>
                                             </userDefinedRuntimeAttributes>
                                             <connections>
                                                 <action selector="deleteAccountAction:" destination="cV9-St-ahQ" eventType="touchUpInside" id="a8D-wm-jR0"/>
@@ -1454,6 +1477,7 @@ Below is a list of studies that you are a part of and information on how your re
                                                 <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
                                                     <integer key="value" value="1"/>
                                                 </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="string" keyPath="localizedText" value="lQD-pA-Zjm.normalTitle.value"/>
                                             </userDefinedRuntimeAttributes>
                                             <connections>
                                                 <action selector="doNotDeleteAccountAction:" destination="cV9-St-ahQ" eventType="touchUpInside" id="CxA-Ks-mIx"/>
@@ -1544,6 +1568,9 @@ Below is a list of studies that you are a part of and information on how your re
                                                     <state key="normal" title="Delete my data">
                                                         <color key="titleColor" red="0.54901960780000003" green="0.58431372550000005" blue="0.63921568630000003" alpha="1" colorSpace="calibratedRGB"/>
                                                     </state>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="string" keyPath="localizedText" value="b2d-cc-iAX.normalTitle.value"/>
+                                                    </userDefinedRuntimeAttributes>
                                                     <connections>
                                                         <action selector="deleteOrRetainDataButtonAction:" destination="OPN-7C-Ufb" eventType="touchUpInside" id="aRq-82-eg4"/>
                                                     </connections>
@@ -1561,6 +1588,9 @@ Below is a list of studies that you are a part of and information on how your re
                                                     <state key="normal" title="Retain my data">
                                                         <color key="titleColor" red="0.54901960780000003" green="0.58431372550000005" blue="0.63921568630000003" alpha="1" colorSpace="calibratedRGB"/>
                                                     </state>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="string" keyPath="localizedText" value="OL5-qf-Lfd.normalTitle.value"/>
+                                                    </userDefinedRuntimeAttributes>
                                                     <connections>
                                                         <action selector="deleteOrRetainDataButtonAction:" destination="OPN-7C-Ufb" eventType="touchUpInside" id="TPV-V0-0ce"/>
                                                     </connections>
@@ -1706,6 +1736,7 @@ Below is a list of studies that you are a part of and information on how your re
                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
                                         <integer key="value" value="1"/>
                                     </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="localizedText" value="uYJ-Jl-iiH.normalTitle.value"/>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="submitButtonAction:" destination="8HM-Dc-eDB" eventType="touchUpInside" id="P2X-iK-FmE"/>
@@ -1863,6 +1894,9 @@ Below is a list of studies that you are a part of and information on how your re
                                                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="string" keyPath="localizedText" value="b0d-he-JiD.text.value"/>
+                                                    </userDefinedRuntimeAttributes>
                                                 </label>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CHt-z3-FvK">
                                                     <rect key="frame" x="8" y="155" width="359" height="2"/>
@@ -1898,11 +1932,17 @@ Below is a list of studies that you are a part of and information on how your re
                                                     <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="16"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="string" keyPath="localizedText" value="CKp-ZC-FCM.text.value"/>
+                                                    </userDefinedRuntimeAttributes>
                                                 </label>
                                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="enter subject" textAlignment="right" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="ZAG-q5-tTH">
                                                     <rect key="frame" x="89.5" y="19" width="267.5" height="23"/>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="16"/>
                                                     <textInputTraits key="textInputTraits"/>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="string" keyPath="localizedText" value="ZAG-q5-tTH.placeholder.value"/>
+                                                    </userDefinedRuntimeAttributes>
                                                     <connections>
                                                         <action selector="reload" destination="MxP-zY-QWs" eventType="editingDidEndOnExit" id="xsf-l8-1un"/>
                                                         <outlet property="delegate" destination="PxL-Ch-CdE" id="o3E-5k-0ux"/>
@@ -1945,6 +1985,9 @@ Below is a list of studies that you are a part of and information on how your re
                                                     <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="16"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="string" keyPath="localizedText" value="GZf-6d-030.text.value"/>
+                                                    </userDefinedRuntimeAttributes>
                                                 </label>
                                                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" tag="100" contentMode="scaleToFill" verticalCompressionResistancePriority="749" scrollEnabled="NO" text="Enter your feedback here" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="8EU-zF-six">
                                                     <rect key="frame" x="12" y="27" width="351" height="35"/>
@@ -1999,6 +2042,7 @@ Below is a list of studies that you are a part of and information on how your re
                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
                                         <integer key="value" value="1"/>
                                     </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="localizedText" value="0mt-Xu-KqK.normalTitle.value"/>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="buttonSubmitAciton:" destination="PxL-Ch-CdE" eventType="touchUpInside" id="cI1-L2-Asc"/>
@@ -2058,6 +2102,9 @@ Below is a list of studies that you are a part of and information on how your re
                                                     <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="16"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="string" keyPath="localizedText" value="pB8-Jw-hq2.text.value"/>
+                                                    </userDefinedRuntimeAttributes>
                                                 </label>
                                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="enter first name" textAlignment="right" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="MNt-de-Zxv">
                                                     <rect key="frame" x="113.5" y="19" width="243.5" height="23"/>
@@ -2105,6 +2152,9 @@ Below is a list of studies that you are a part of and information on how your re
                                                     <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="16"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="string" keyPath="localizedText" value="cTN-Dm-9a6.text.value"/>
+                                                    </userDefinedRuntimeAttributes>
                                                 </label>
                                                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" tag="100" contentMode="scaleToFill" verticalCompressionResistancePriority="749" scrollEnabled="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="vt2-7v-hE4">
                                                     <rect key="frame" x="12" y="27" width="351" height="35"/>
@@ -2159,6 +2209,7 @@ Below is a list of studies that you are a part of and information on how your re
                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
                                         <integer key="value" value="1"/>
                                     </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="localizedText" value="038-eu-Tw1.normalTitle.value"/>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="buttonSubmitAciton:" destination="bsn-SP-kLV" eventType="touchUpInside" id="Tpo-1y-qWG"/>

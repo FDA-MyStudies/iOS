@@ -67,7 +67,7 @@ class StudyDashboardStatisticsCollectionViewCell: UICollectionViewCell {
     @IBOutlet var labelStatisticsCount: UILabel?
     @IBOutlet var labelUnit: UILabel?
     var stats: DashboardStatistics!
-    let kNA = NSLocalizedString("NA", comment: "")
+    let kNA = NSLocalizedStrings("NA", comment: "")
     
     /**
      Display DashboardStats for selected Tab

@@ -383,45 +383,48 @@ class Utilities: NSObject {
       var errrorMessage = ""
       switch error.code {
       case 401, 561:
-        errrorMessage = NSLocalizedString("Unauthorized exception", comment: "")
+        errrorMessage = NSLocalizedStrings("Unauthorized exception", comment: "")
       case 440:
-        errrorMessage = NSLocalizedString("session expired", comment: "")
+        errrorMessage = NSLocalizedStrings("session expired", comment: "")
       case 504:
-        errrorMessage = NSLocalizedString("timeout", comment: "")
+        errrorMessage = NSLocalizedStrings("timeout", comment: "")
       case 400:
-        errrorMessage = NSLocalizedString("client error", comment: "")
+        errrorMessage = NSLocalizedStrings("client error", comment: "")
       case 520:
-        errrorMessage = NSLocalizedString("Unknown error", comment: "")
+        errrorMessage = NSLocalizedStrings("Unknown error", comment: "")
       case 500, 444:
-        errrorMessage = NSLocalizedString("Internal server error", comment: "")
+        errrorMessage = NSLocalizedStrings("Internal server error", comment: "")
       default:
         errrorMessage = ""
       }
       if errrorMessage == "" {
         let message = error.localizedDescription
         if message.localizedCaseInsensitiveContains("Unable to enroll into the study") {
-          errrorMessage = NSLocalizedString("Unable to enroll into the study", comment: "")
+          errrorMessage = NSLocalizedStrings("Unable to enroll into the study", comment: "")
         }
         else if message.localizedCaseInsensitiveContains("Try logging in again") {
-          errrorMessage = NSLocalizedString("Try logging in again", comment: "")
+          errrorMessage = NSLocalizedStrings("Try logging in again", comment: "")
         }
         else if message.localizedCaseInsensitiveContains("Unable to process") {
-          errrorMessage = NSLocalizedString("Unable to process", comment: "")
+          errrorMessage = NSLocalizedStrings("Unable to process", comment: "")
         }
         else if message.localizedCaseInsensitiveContains("No data found") {
-          errrorMessage = NSLocalizedString("No data found", comment: "")
+          errrorMessage = NSLocalizedStrings("No data found", comment: "")
         }
         else if message.localizedCaseInsensitiveContains("Unable to withdraw from the study") {
-          errrorMessage = NSLocalizedString("Unable to withdraw from the study", comment: "")
+          errrorMessage = NSLocalizedStrings("Unable to withdraw from the study", comment: "")
         }
         else if message.localizedCaseInsensitiveContains("server error") {
-          errrorMessage = NSLocalizedString("server error", comment: "")
+          errrorMessage = NSLocalizedStrings("server error", comment: "")
         }
         else if message.localizedCaseInsensitiveContains("No data") {
-          errrorMessage = NSLocalizedString("No data", comment: "")
+          errrorMessage = NSLocalizedStrings("No data", comment: "")
         }
         else if message.localizedCaseInsensitiveContains("is currently not available") {
-          errrorMessage = NSLocalizedString("is currently not available", comment: "")
+          errrorMessage = NSLocalizedStrings("is currently not available", comment: "")
+        }
+        else if message.localizedCaseInsensitiveContains("Token already in use") {
+          errrorMessage = NSLocalizedStrings("Token already in use", comment: "")
         }
         else {
           errrorMessage = error.localizedDescription

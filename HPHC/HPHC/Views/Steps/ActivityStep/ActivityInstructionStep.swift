@@ -55,7 +55,7 @@ class ActivityInstructionStep: ActivityStep {
             
             let instructionStep = ORKInstructionStep(identifier: key!)
             
-            instructionStep.title = NSLocalizedString(title!, comment: "")
+            instructionStep.title = NSLocalizedStrings(title!, comment: "")
             instructionStep.text = text!
             return instructionStep
         } else {

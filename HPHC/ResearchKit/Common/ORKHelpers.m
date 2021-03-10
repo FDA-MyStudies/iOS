@@ -276,6 +276,25 @@ NSDateComponentsFormatter *ORKTimeIntervalLabelFormatter() {
     return durationFormatter;
 }
 
+NSBundle *ORKBundleEnglish() {
+  
+  NSString * localestr = @"en";
+  
+  NSString * localeVal = [[NSLocale preferredLanguages] firstObject];
+  
+  if ([localeVal containsString:@"es"]) {
+    localestr = @"es";
+  }
+  
+    static NSBundle *bundle;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+      NSString *path = [ORKBundle() pathForResource:localestr ofType:@"lproj"];
+      bundle = [NSBundle bundleWithPath:path];
+  });
+    return bundle;
+}
+
 NSDateComponentsFormatter *ORKDurationStringFormatter() {
     static NSDateComponentsFormatter *durationFormatter = nil;
     static dispatch_once_t onceToken;

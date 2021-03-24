@@ -4,6 +4,10 @@
 <dict>
 	<key>ApplicationID</key>
 	<string>$(APPLICATION_ID)</string>
+	<key>USERNAME_KEY</key>
+	<string>$(USERNAME_KEY)</string>
+	<key>PASSWORD_VALUE</key>
+	<string>$(PASSWORD_VALUE)</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>

@@ -46,3 +46,10 @@ ORGANIZATION_ID = XXXXXX
 /// Standalone Study ID from Study builder.
 STANDALONE_STUDY_ID = XXXXXXXXX
 
+/// Username Key for WCP WS Authorization.
+USERNAME_KEY = MMM
+
+/// Passsword Value for WCP WS Authorization.
+PASSWORD_VALUE = NNN
+
+

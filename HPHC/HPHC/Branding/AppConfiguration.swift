@@ -56,4 +56,12 @@ enum AppConfiguration {
     static var studyCompletionMessage: String? {
         return appConfig[JSONKey.studyCompletionMessage] as? String
     }
+  
+    static var usernameKey: String {
+      return (try? Configuration.value(for: "USERNAME_KEY")) ?? ""
+    }
+  
+    static var passwordValue: String {
+      return (try? Configuration.value(for: "PASSWORD_VALUE")) ?? ""
+    }
 }

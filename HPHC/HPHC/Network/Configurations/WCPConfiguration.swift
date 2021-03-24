@@ -72,9 +72,10 @@ class WCPConfiguration: NetworkConfiguration {
       
       let appId = AppDetails.applicationID
       let orgId = AppDetails.organizationID
-        
-        let token = "AvxfEsgX9u" + ":" + "ee91a4f6-d9c4-4ee9-a0e2-5682c5b1c916"
-        //com.hphci.fda.mobilestudies
+      let usernameKey = AppConfiguration.usernameKey
+      let passwordValue = AppConfiguration.passwordValue
+      
+        let token = "\(usernameKey)" + ":" + "\(passwordValue)"
         let base64token = "Basic " + token.toBase64()
        
         let headers = ["Authorization": base64token,

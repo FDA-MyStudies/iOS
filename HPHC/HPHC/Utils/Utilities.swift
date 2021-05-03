@@ -181,18 +181,12 @@ class Utilities: NSObject {
     }
     
     class func isValidEmail(testStr: String) -> Bool {
-      
-      var emailRegEx = "[A-Z0-9a-z._-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}"
-      let locale = Locale.current.languageCode ?? "en"
-      if locale.hasPrefix("es") {
-        print("isValidEmail--\(locale)")
-        emailRegEx = "[A-Z0-9a-z._-zñáéíóúüA-ZÑÁÉÍÓÚÜ-]+@[A-Za-z0-9.-zñáéíóúüA-ZÑÁÉÍÓÚÜ-]+\\.[A-Za-zzñáéíóúüA-ZÑÁÉÍÓÚÜ-]{2,}"
-//        /^[A-Za-z0-9-zñáéíóúüA-ZÑÁÉÍÓÚÜ-]*$/
-      }
-          
-          
-        
-        
+        var emailRegEx = "[A-Z0-9a-z._-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}"
+        let locale = Locale.current.languageCode ?? "en"
+        if locale.hasPrefix("es") {
+            emailRegEx = "[A-Z0-9a-z._-zñáéíóúüA-ZÑÁÉÍÓÚÜ-]+@[A-Za-z0-9.-zñáéíóúüA-ZÑÁÉÍÓÚÜ-]+\\.[A-Za-zzñáéíóúüA-ZÑÁÉÍÓÚÜ-]{2,}"
+            //        /^[A-Za-z0-9-zñáéíóúüA-ZÑÁÉÍÓÚÜ-]*$/ Without Localisation
+        }
         let emailTest = NSPredicate(format: "SELF MATCHES %@", emailRegEx)
         
         if testStr.count > 255 {
@@ -204,6 +198,36 @@ class Utilities: NSObject {
     
     //checks all the validations for password
     class func isPasswordValid( text: String) -> Bool {
+        
+        let locale3 = Locale.preferredLanguages.first ?? "en"
+        if locale3.hasPrefix("es") {
+            let text = text
+            
+            let lowercaseLetterRegEx  = ".*[a-z-ñáéíóúü-]+.*"
+            let lowercaseTextTest = NSPredicate(format: "SELF MATCHES %@", lowercaseLetterRegEx)
+            let lowercaseresult = lowercaseTextTest.evaluate(with: text)
+            
+            let capitalLetterRegEx  = ".*[A-Z-ÑÁÉÍÓÚÜ-]+.*"
+            let texttest = NSPredicate(format: "SELF MATCHES %@", capitalLetterRegEx)
+            let capitalresult = texttest.evaluate(with: text)
+            
+            let numberRegEx  = ".*[0-9]+.*"
+            let texttest1 = NSPredicate(format: "SELF MATCHES %@", numberRegEx)
+            let numberresult = texttest1.evaluate(with: text)
+            
+            let specialCharacterRegEx  = ".*[!#$%&'()*+,-.:;\\[\\]<>=?@^_{}|~]+.*"
+            let texttest2 = NSPredicate(format:"SELF MATCHES %@", specialCharacterRegEx)
+            
+            let specialresult = texttest2.evaluate(with: text)
+            
+            let textCountResult = text.count > 7 && text.count <= 64 ? true : false
+            
+            if capitalresult == false || numberresult == false || specialresult == false || textCountResult ==  false || lowercaseresult == false{
+                return false
+            }
+            
+            return true
+        }
         let text = text
         
         let lowercaseLetterRegEx  = ".*[a-z]+.*"
@@ -213,18 +237,15 @@ class Utilities: NSObject {
         let capitalLetterRegEx  = ".*[A-Z]+.*"
         let texttest = NSPredicate(format: "SELF MATCHES %@", capitalLetterRegEx)
         let capitalresult = texttest.evaluate(with: text)
-        print("\(capitalresult)")
         
         let numberRegEx  = ".*[0-9]+.*"
         let texttest1 = NSPredicate(format: "SELF MATCHES %@", numberRegEx)
         let numberresult = texttest1.evaluate(with: text)
-        print("\(numberresult)")
         
         let specialCharacterRegEx  = ".*[!#$%&'()*+,-.:;\\[\\]<>=?@^_{}|~]+.*"
         let texttest2 = NSPredicate(format:"SELF MATCHES %@", specialCharacterRegEx)
         
         let specialresult = texttest2.evaluate(with: text)
-        print("\(specialresult)")
         
         let textCountResult = text.count > 7 && text.count <= 64 ? true : false
         
@@ -234,7 +255,6 @@ class Utilities: NSObject {
         
         return true
     }
-    
     
     class func formatNumber( mobileNumber: NSString)-> NSString {
         var mobileNumber = mobileNumber
@@ -273,13 +293,9 @@ class Utilities: NSObject {
         let texttest = NSPredicate(format: "SELF MATCHES %@", capitalLetterRegEx)
         let capitalresult = texttest.evaluate(with: password)
         
-        print("\(capitalresult)")
-        
         let numberRegEx  = ".*[a-z0-9A-Z]+.*"
         let texttest1 = NSPredicate(format: "SELF MATCHES %@", numberRegEx)
         let numberresult = texttest1.evaluate(with: password)
-        
-        print("\(numberresult)")
         
         return capitalresult && numberresult
     }

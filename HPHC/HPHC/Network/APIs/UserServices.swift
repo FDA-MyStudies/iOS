@@ -286,7 +286,7 @@ class UserServices: NSObject {
         let token = Utilities.getBundleIdentifier()
         let info = [kAppVersion: version,
                     kOSType: "ios",
-                    kDeviceToken: token
+                    kDeviceToken: "" // Was Changed after Backend Issue 
         ]
         
         let params = [

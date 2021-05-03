@@ -183,9 +183,14 @@ class ViewController: UIViewController {
     
     
     
-    func addResources()  {
+    func addResources() {
+        var plistPath = Bundle.main.path(forResource: "Resources", ofType: ".plist", inDirectory: nil)
+        let localeDefault = Locale.preferredLanguages.first ?? "en"
+        if !(localeDefault.hasPrefix("es") || localeDefault.hasPrefix("en")) {
+          plistPath = Bundle.main.path(forResource: "Resources", ofType: ".plist", inDirectory: nil, forLocalization: "Base")
+        }
         
-        if let path = Bundle.main.path(forResource: "Resources", ofType: "plist") {
+        if let path = plistPath {
             
             if let responseArray = NSArray(contentsOfFile: path) {
                 
@@ -221,8 +226,12 @@ class ViewController: UIViewController {
     
     
     func userProfile()  {
-        
-        if let path = Bundle.main.path(forResource: "UserProfile", ofType: "plist") {
+        var plistPath = Bundle.main.path(forResource: "UserProfile", ofType: ".plist", inDirectory: nil)
+        let localeDefault = Locale.preferredLanguages.first ?? "en"
+        if !(localeDefault.hasPrefix("es") || localeDefault.hasPrefix("en")) {
+          plistPath = Bundle.main.path(forResource: "UserProfile", ofType: ".plist", inDirectory: nil, forLocalization: "Base")
+        }
+        if let path = plistPath {
             if let dict = NSDictionary(contentsOfFile: path) as? [String:Any] {
                 user.setUser(dict:dict as NSDictionary)
                 
@@ -237,8 +246,13 @@ class ViewController: UIViewController {
     }
     
     func setPrefereneces()  {
+        var plistPath = Bundle.main.path(forResource: "UserPreferences", ofType: ".plist", inDirectory: nil)
+        let localeDefault = Locale.preferredLanguages.first ?? "en"
+        if !(localeDefault.hasPrefix("es") || localeDefault.hasPrefix("en")) {
+          plistPath = Bundle.main.path(forResource: "UserPreferences", ofType: ".plist", inDirectory: nil, forLocalization: "Base")
+        }
         
-        if let path = Bundle.main.path(forResource: "UserPreferences", ofType: "plist") {
+        if let path = plistPath {
             if let dict = NSDictionary(contentsOfFile: path) as? [String:Any] {
                 user.setUser(dict:dict as NSDictionary)
                 

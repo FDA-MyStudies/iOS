@@ -27,25 +27,25 @@ import CallKit
 import IQKeyboardManagerSwift
 
 
-let kBlockerScreenLabelText = NSLocalizedString("Please update to the latest version of the app to continue.", comment: "")
-let kAppStoreUpdateText = NSLocalizedString("Please go to AppStore to update to the latest version of the app.", comment: "")
+let kBlockerScreenLabelText = NSLocalizedStrings("Please update to the latest version of the app to continue.", comment: "")
+let kAppStoreUpdateText = NSLocalizedStrings("Please go to AppStore to update to the latest version of the app.", comment: "")
 
-let kConsentUpdatedTitle = NSLocalizedString("Consent Updated", comment: "")
+let kConsentUpdatedTitle = NSLocalizedStrings("Consent Updated", comment: "")
 
-let kMessageConsentUpdatedPartTwo = NSLocalizedString(" Please review the revised Consent terms and provide your Informed Consent, to continue participating in the study.", comment: "")
+let kMessageConsentUpdatedPartTwo = NSLocalizedStrings(" Please review the revised Consent terms and provide your Informed Consent, to continue participating in the study.", comment: "")
 
-let kMessageConsentUpdated = NSLocalizedString("The Consent Document for this study has been updated.", comment: "") + kMessageConsentUpdatedPartTwo
+let kMessageConsentUpdated = NSLocalizedStrings("The Consent Document for this study has been updated.", comment: "") + kMessageConsentUpdatedPartTwo
 
-let kReviewTitleName = NSLocalizedString("Review", comment: "")
+let kReviewTitleName = NSLocalizedStrings("Review", comment: "")
 let kReviewIdentifier = "Review"
 let kPasscodeStepIdentifier = "PasscodeStep"
 let kPasscodeTaskIdentifier = "PassCodeTask"
-let kMessagePasscode = NSLocalizedString("Passcode", comment: "")
-let kMessagePasscodeSignOut = NSLocalizedString("You will be signed out and will need to sign in again. Are you sure you want to proceed?", comment: "")
+let kMessagePasscode = NSLocalizedStrings("Passcode", comment: "")
+let kMessagePasscodeSignOut = NSLocalizedStrings("You will be signed out and will need to sign in again. Are you sure you want to proceed?", comment: "")
 let kNewProgressViewNIB = "NewProgressView"
-let kforgotPasscodeTitle = NSLocalizedString("Forgot Passcode? Sign In Again", comment: "")
+let kforgotPasscodeTitle = NSLocalizedStrings("Forgot Passcode? Sign In Again", comment: "")
 let kStudyStoryboard = "Study"
-let kPasscodeSetUpText = NSLocalizedString("Set up a passcode for the app", comment: "")
+let kPasscodeSetUpText = NSLocalizedStrings("Set up a passcode for the app", comment: "")
 let kIphoneSimulator =  "iPhone Simulator"
 
 let kBundleIdentier = "CFBundleIdentifier"
@@ -57,13 +57,14 @@ let kResultCount = "resultCount"
 let kResultsForAppStore = "results"
 let kAppStoreVersion = "version"
 
-let kContinueButtonTitle =  NSLocalizedString("Continue", comment:"")
+let kContinueButtonTitle =  NSLocalizedStrings("Continue", comment:"")
 let kType = "type"
 
 let kCurrentVersion = "currentVersion"
 let kForceUpdate = "forceUpdate"
 let kMessage = "message"
 let kVisualStepId = "visual"
+var localeBundle: Bundle? = Bundle(path: Bundle.main.path(forResource: "en", ofType: "lproj") ?? "") //"es"
 
 @UIApplicationMain
 
@@ -186,7 +187,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     
     func applicationWillEnterForeground(_ application: UIApplication) {
+        let locale3 = Locale.preferredLanguages.first ?? "en"
         
+        if !(locale3.hasPrefix("es") || locale3.hasPrefix("en")) {
+            Bundle.setLanguage("en")
+            
+            let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
+            UIApplication.shared.keyWindow?.rootViewController = storyboard.instantiateInitialViewController()
+            
+            
+            let path = Bundle.main.path(forResource: "en", ofType: "lproj")
+            
+            if let path = path {
+                localeBundle = Bundle(path: path)
+            }
+            else {
+                let path = Bundle.main.path(forResource: "en", ofType: "lproj") ?? ""
+                localeBundle = Bundle(path: path)
+            }
+        }
         self.checkPasscode(viewController: (application.windows[0].rootViewController)!)
         
         self.checkForStudyUpdates()
@@ -195,7 +214,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if number >= 1 {
             self.updateNotification()
         }
-        
         //Check For Updates
         self.checkForAppUpdate()
         
@@ -217,7 +235,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
            // guard let navigation = (navController as? UINavigationController)?.visibleViewController as? ORKTaskViewController, let navigationTitle = navigation.title else {return}
             
             let navigationTitle = ((navController as? UINavigationController)?.visibleViewController as? ORKTaskViewController)?.title ?? ""
-            let kActivity = NSLocalizedString("Activity", comment: "")
+            let kActivity = NSLocalizedStrings("Activity", comment: "")
             
             if (navController as? UINavigationController) != nil &&  isTaskViewControllerVisible == false {
                 
@@ -1131,7 +1149,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         NotificationCenter.default.post(name:NSNotification.Name(rawValue: "NotificationStudyEnrollmentFailed"), object: error)
         //let message = error.localizedDescription
-        //UIUtilities.showAlertWithTitleAndMessage(title: NSLocalizedString(kErrorTitle, comment: "") as NSString, message: message as NSString)
+        //UIUtilities.showAlertWithTitleAndMessage(title: NSLocalizedStrings(kErrorTitle, comment: "") as NSString, message: message as NSString)
     }
     
     func studyEnrollmentStarted(taskViewController:ORKTaskViewController) {
@@ -1641,7 +1659,7 @@ extension AppDelegate: ORKTaskViewControllerDelegate {
                             self.popViewControllerAfterConsentDisagree()
                             
                             //Alert User
-                          UIUtilities.showAlertWithTitleAndMessage(title: kTitleMessage as NSString, message: NSLocalizedString(kShareConsentFailureAlert, comment: "") as NSString)
+                          UIUtilities.showAlertWithTitleAndMessage(title: kTitleMessage as NSString, message: NSLocalizedStrings(kShareConsentFailureAlert, comment: "") as NSString)
                         })
                         return nil
                     }
@@ -1804,8 +1822,32 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
     }
 }
 
-extension UIWindow{
-    
+// MARK: Localisation
+extension AppDelegate {
+    static func selectedLocale () -> Bundle? {
+        let locale3 = Locale.preferredLanguages.first ?? "en"
+        if !(locale3.hasPrefix("es") || locale3.hasPrefix("en")) {
+            Bundle.setLanguage("en")
+            
+            let path = Bundle.main.path(forResource: "en", ofType: "lproj")
+            
+            if let path = path {
+                localeBundle = Bundle(path: path)
+            }
+            else {
+                let path = Bundle.main.path(forResource: "en", ofType: "lproj") ?? ""
+                localeBundle = Bundle(path: path)
+            }
+        }
+        else if locale3.hasPrefix("es") {
+            let path = Bundle.main.path(forResource: "es", ofType: "lproj") ?? ""
+            localeBundle = Bundle(path: path)
+        }
+        return localeBundle
+    }
+}
+
+extension UIWindow {
     /**
      Adds progress below navigation bar
      */
@@ -1874,9 +1916,3 @@ extension UIApplication {
         return self.keyWindow?.rootViewController?.topMostViewController()
     }
 }
-
-
-
-
-
-

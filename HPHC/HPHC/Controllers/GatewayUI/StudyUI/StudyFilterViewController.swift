@@ -186,7 +186,7 @@ extension StudyFilterViewController: PinterestLayoutDelegate {
         let filterOptions = StudyFilterHandler.instance.filterOptions[indexPath.row]
         var headerHeight = 0
         if filterOptions.title.count > 0 {
-            headerHeight = 60
+            headerHeight = 60 + 50
         }
         let height: CGFloat = CGFloat((filterOptions.filterValues.count * 50) + headerHeight)
         return height

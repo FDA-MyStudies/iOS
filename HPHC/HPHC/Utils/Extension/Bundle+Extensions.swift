@@ -20,16 +20,31 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 import Foundation
 
-extension Data {
-    func toJSONDictionary() -> [String: AnyObject]? {
-        
-        guard let json = try? JSONSerialization.jsonObject(with: self as Data, options: [.allowFragments]) else {
-            return nil
-        }
-        guard let jsonDic = json as? [String: AnyObject] else {
-            return nil
-        }
-        return jsonDic
+class AnyLanguageBundle: Bundle {
+
+override func localizedString(forKey key: String,
+                              value: String?,
+                              table tableName: String?) -> String {
+
+    guard let path = objc_getAssociatedObject(self, &bundleKey) as? String,
+        let bundle = Bundle(path: path) else {
+
+            return super.localizedString(forKey: key, value: value, table: tableName)
     }
+
+    return bundle.localizedString(forKey: key, value: value, table: tableName)
+  }
 }
 
+extension Bundle {
+
+class func setLanguage(_ language: String) {
+
+    defer {
+
+        object_setClass(Bundle.main, AnyLanguageBundle.self)
+    }
+
+    objc_setAssociatedObject(Bundle.main, &bundleKey,    Bundle.main.path(forResource: language, ofType: "lproj"), .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+  }
+}

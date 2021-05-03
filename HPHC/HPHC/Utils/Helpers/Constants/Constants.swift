@@ -39,6 +39,7 @@ let kUIColorForSubmitButtonBackground = UIColor.init(red: 0/255.0, green: 124/25
 
 let NoNetworkErrorCode = -101
 let CouldNotConnectToServerCode = -1001
+var bundleKey: UInt8 = 0
 
 //Display Constants
 let kTitleError = NSLocalizedStrings("Error", comment: "")

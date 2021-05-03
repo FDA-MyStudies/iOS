@@ -403,6 +403,7 @@
 		84D3B26425E43B0A00780211 /* ComprehensionFailure.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84D3B26625E43B0A00780211 /* ComprehensionFailure.xib */; };
 		84D3B27125E43B9C00780211 /* JailbrokeBlocker.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84D3B27425E43B9C00780211 /* JailbrokeBlocker.xib */; };
 		84D3B27225E43B9C00780211 /* JailbrokeBlocker.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84D3B27425E43B9C00780211 /* JailbrokeBlocker.xib */; };
+		84DD0DA926400D560013D8FF /* Bundle+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84DD0DA826400D560013D8FF /* Bundle+Extensions.swift */; };
 		84E8D61724D161B6008C38D5 /* PDFCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E8D61624D161B6008C38D5 /* PDFCreator.swift */; };
 		8905591B230149AD005FB284 /* HPHCUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8905591A230149AD005FB284 /* HPHCUITests.swift */; };
 		890559262301615F005FB284 /* UITestBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 890559232301615F005FB284 /* UITestBase.swift */; };
@@ -812,6 +813,7 @@
 		843B6ADB25C8148E0022B5E9 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = es; path = es.lproj/Confirmation.plist; sourceTree = "<group>"; };
 		843B6ADC25C814900022B5E9 /* es-419 */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "es-419"; path = "es-419.lproj/Confirmation.plist"; sourceTree = "<group>"; };
 		843B6ADF25C814920022B5E9 /* es_MX */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = es_MX; path = es_MX.lproj/Confirmation.plist; sourceTree = "<group>"; };
+		843DD02825F9F38900AE3FDF /* Production.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Production.xcconfig; sourceTree = "<group>"; };
 		846A275025D96CBF00224B46 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Login.storyboard; sourceTree = "<group>"; };
 		846A275725D96CCA00224B46 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Login.strings; sourceTree = "<group>"; };
 		846A275925D96CD200224B46 /* es-419 */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-419"; path = "es-419.lproj/Login.strings"; sourceTree = "<group>"; };
@@ -842,6 +844,7 @@
 		84D3B27625E43BA300780211 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/JailbrokeBlocker.strings; sourceTree = "<group>"; };
 		84D3B27825E43BAB00780211 /* es-419 */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-419"; path = "es-419.lproj/JailbrokeBlocker.strings"; sourceTree = "<group>"; };
 		84D3B27A25E43BAE00780211 /* es_MX */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es_MX; path = es_MX.lproj/JailbrokeBlocker.strings; sourceTree = "<group>"; };
+		84DD0DA826400D560013D8FF /* Bundle+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle+Extensions.swift"; sourceTree = "<group>"; };
 		84E8D61624D161B6008C38D5 /* PDFCreator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFCreator.swift; sourceTree = "<group>"; };
 		87A4F9AAE7A1B8C36C9FBDDF /* Pods_HPHC_QA.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HPHC_QA.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		89055918230149AD005FB284 /* HPHCUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HPHCUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1109,6 +1112,7 @@
 		6E7D2D581E433E8700763D4C /* HPHC */ = {
 			isa = PBXGroup;
 			children = (
+				843DD02825F9F38900AE3FDF /* Production.xcconfig */,
 				846C697D25A86360002B9F42 /* Staging.xcconfig */,
 				846C695A25A83F49002B9F42 /* Environments */,
 				6F10BB15234DDFDA006388E2 /* Branding */,
@@ -2054,6 +2058,7 @@
 				6FB89C27225F416C00420A7B /* Cell.swift */,
 				6FDEFDB123F67E7E0067534C /* Data+Extensions.swift */,
 				6F90AB4924693DD200F4D1BE /* UIView+Extensions.swift */,
+				84DD0DA826400D560013D8FF /* Bundle+Extensions.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -2821,6 +2826,7 @@
 				9487102A1E546C3800246109 /* AppNotification.swift in Sources */,
 				94B3DD421E6ED8E500327AE5 /* NotificationTableViewCell.swift in Sources */,
 				6FB89C1D225F40F400420A7B /* SurveyTask.swift in Sources */,
+				84DD0DA926400D560013D8FF /* Bundle+Extensions.swift in Sources */,
 				484ACBF61F2896A500BCC819 /* FilterListCollectionViewCell.swift in Sources */,
 				6ED8A2E61E447AA2004DEC01 /* Formatter.swift in Sources */,
 				94334F8C1E701EB700755444 /* NavigationBackButton.swift in Sources */,
@@ -3716,12 +3722,12 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = HPHC/FDA.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 7;
+				CURRENT_PROJECT_VERSION = 4;
 				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEVELOPMENT_TEAM = 3485DDCN2M;
+				DEVELOPMENT_TEAM = FWLLYUH7XR;
 				ENABLE_BITCODE = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				INFOPLIST_FILE = "$(SRCROOT)/HPHC/Branding/COVID-19/Info.plist";
@@ -3731,8 +3737,8 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.2;
-				PRODUCT_BUNDLE_IDENTIFIER = com.btc.covid19;
+				MARKETING_VERSION = 1.3;
+				PRODUCT_BUNDLE_IDENTIFIER = com.hphci.fda.mobilestudies.covid19;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "HPHC/Controllers/LoginRegisterUI/FDA-Bridging-Header.h";
@@ -3752,12 +3758,12 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = HPHC/FDA.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 7;
+				CURRENT_PROJECT_VERSION = 4;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = 3485DDCN2M;
+				DEVELOPMENT_TEAM = FWLLYUH7XR;
 				ENABLE_BITCODE = NO;
 				GCC_OPTIMIZATION_LEVEL = s;
 				INFOPLIST_FILE = "$(SRCROOT)/HPHC/Branding/COVID-19/Info.plist";
@@ -3767,8 +3773,8 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.2;
-				PRODUCT_BUNDLE_IDENTIFIER = com.btc.covid19;
+				MARKETING_VERSION = 1.3;
+				PRODUCT_BUNDLE_IDENTIFIER = com.hphci.fda.mobilestudies.covid19;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "HPHC/Controllers/LoginRegisterUI/FDA-Bridging-Header.h";

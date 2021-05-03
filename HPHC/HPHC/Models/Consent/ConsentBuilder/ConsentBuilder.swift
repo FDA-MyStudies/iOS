@@ -95,7 +95,7 @@ let kSignaturePageContentText = NSLocalizedStrings("I agree to participate in th
 // Signature Page
 
 let kConsentSignaturePageContent = "signaturePageContent"
-let kConsentSignaturePageTitle = "Participant"
+let kConsentSignaturePageTitle = NSLocalizedStrings("Participant", comment: "")
 
 enum ConsentStatus: String {
     case pending

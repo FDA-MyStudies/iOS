@@ -1,56 +1,19 @@
 # My Studies
-My Studies is an open-source project to take part in health surveys. ‘My Studies’ is developed using [ResearchKit](https://github.com/ResearchKit/ResearchKit#charts) which is an open-source framework provided by Apple.
+My Studies is an open-source project to take part in health surveys. ‘My Studies’ is developed using [ResearchKit](https://github.com/ResearchKit/ResearchKit) which is an open-source framework provided by Apple.
 My Studies project is FISMA & HIPPA compliant.
+
 # Requirements
-My Studies requires Xcode 9 or newer and can be run on iOS 9,10 & 11.
-# Backend Server Integration
-My Studies fetches all the Studies, Activities, Consent and Resources from the backend, and responses provided by users is stored on the backend.
-#### Registration Server
-Setup guide for Registration Server is provided [here]().
-Registration Server stores user information & user’s status for each study and activity.
-Once you have successfully setup Registration Server, replace registration server URL in RegistrationServerConfiguration.swift
-```swift
-struct RegistrationServerURLConstants {
-//TODO: Set the server end points
+My Studies requires Xcode 11 or newer and can be run on iOS 13 and above.
 
-static let ProductionURL = "Your production server URL"
-static let DevelopmentURL = "Your development server URL"
-
-}
-```
-
-#### WCP Server
-Setup guide for WCP server is provided [here]().
-WCP Server provides the platform to create study, activities, consent, and Resources.
-Once you have successfully setup WCP Server, replace server URL in WCPConfiguration.swift
-```swift
-struct WCPServerURLConstants {
-//TODO: Set the server end points
-
-static let ProductionURL = "Your production server URL"
-static let DevelopmentURL = "Your development server URL"
-}
-```
-#### Response Server
-Setup guide for Response server is provided [here]().
-Response Server stores all user’s response to each study activity.
-Once you have successfully setup WCP Server, replace server URL in ResponseServerConfiguration.swift
-```swift
-struct ResponseServerURLConstants {
-//TODO: Set the server end points
-
-static let ProductionURL = "Your production server URL"
-static let DevelopmentURL = "Your development server URL"
-
-}
-```
+# Setup Instructions
+- [FDA MyStudies: iOS Setup](https://www.labkey.org/FDAMyStudiesHelp/wiki-page.view?name=setupInstructions#iOS)
 
 # Author
-Copyright © 2017-2019 Harvard Pilgrim Health Care Institute (HPHCI) and its Contributors.
+Copyright © 2017-2021 Harvard Pilgrim Health Care Institute (HPHCI) and its Contributors.
 
 # License
 License Agreement for FDA My Studies
-Copyright © 2017-2019 Harvard Pilgrim Health Care Institute (HPHCI) and its Contributors. Permission is
+Copyright © 2017-2021 Harvard Pilgrim Health Care Institute (HPHCI) and its Contributors. Permission is
 hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the &quot;Software&quot;), to deal in the Software without restriction, including without
 limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the

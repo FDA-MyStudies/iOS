@@ -1,0 +1,24 @@
+name: CI
+
+on:
+  push:
+    branches: [ $default-branch ]
+  pull_request:
+    branches: [ $default-branch ]
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: GitHub Action for SwiftLint
+        uses: norio-nomura/action-swiftlint@3.2.1
+
+  test:
+    runs-on: macOS-latest
+    steps:
+      - uses: actions/checkout@v1
+
+      - name: clean
+        run: xcodebuild clean -workspace HPHC/HPHC.xcworkspace -scheme HPHC | xcpretty

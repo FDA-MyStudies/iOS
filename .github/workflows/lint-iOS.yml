@@ -3,7 +3,7 @@ name: SwiftLint
 on:
   pull_request:
     branches:
-      - develop
+      - Develop
     
 jobs:
   SwiftLint:

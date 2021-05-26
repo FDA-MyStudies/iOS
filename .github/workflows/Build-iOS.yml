@@ -16,12 +16,12 @@ jobs:
       - name: Build
         run: |
           cd HPHC
-          xcodebuild clean build -workspace MyStudies.xcworkspace -scheme MyStudies -destination "${destination}" CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO ONLY_ACTIVE_ARCH=YES
+          xcodebuild clean build -workspace HPHC.xcworkspace -scheme HPHC -destination "${destination}" CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO ONLY_ACTIVE_ARCH=YES
         env: 
          destination: ${{ matrix.destination }}
       - name: Test
         run: |
           cd HPHC
-          xcodebuild test -workspace MyStudies.xcworkspace -scheme MyStudies -destination "${destination}"
+          xcodebuild test -workspace HPHC.xcworkspace -scheme HPHC -destination "${destination}"
         env: 
          destination: ${{ matrix.destination }}

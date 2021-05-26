@@ -13,4 +13,4 @@ jobs:
       - name: GitHub Action for SwiftLint
         uses: norio-nomura/action-swiftlint@3.1.0
         with:
-          args: --path HPHC --config .swiftlint.yml
+          args: --path ./HPHC --config ./.swiftlint.yml

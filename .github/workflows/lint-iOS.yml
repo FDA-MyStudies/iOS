@@ -4,7 +4,11 @@ name: SwiftLint
 "on":
   pull_request:
     branches:
-      - Develop
+      - $default-branch
+
+  push:
+    branches:
+      - $default-branch
 
   # Allow actions to be run manually
   workflow_dispatch:

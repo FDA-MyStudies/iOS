@@ -1,6 +1,10 @@
 name: Build-iOS
 on:
   pull_request:
+
+  # Allow actions to be run manually
+  workflow_dispatch:
+
 jobs:
   test:
     name: Build and test

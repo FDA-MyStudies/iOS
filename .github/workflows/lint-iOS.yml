@@ -1,6 +1,7 @@
+---
 name: SwiftLint
 
-on:
+"on":
   pull_request:
     branches:
       - Develop

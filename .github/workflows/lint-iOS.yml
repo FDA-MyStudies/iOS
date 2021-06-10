@@ -5,6 +5,8 @@ name: SwiftLint
   pull_request:
     branches:
       - $default-branch
+    paths:
+      - 'iOS/**'
 
   push:
     branches:

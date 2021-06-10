@@ -11,7 +11,7 @@ name: SwiftLint
       - $default-branch
 
   # Allow actions to be run manually
-  workflow_dispatch:
+  #workflow_dispatch:
 
 jobs:
   SwiftLint:

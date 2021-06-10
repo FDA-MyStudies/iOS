@@ -4,14 +4,14 @@ name: Build-iOS
 "on":
   pull_request:
     branches:
-      - develop
+      - Develop
 
-  #push:
-    #branches:
-      #- $default-branch
+  push:
+    branches:
+      - $default-branch
 
   # Allow actions to be run manually
- # workflow_dispatch:
+  workflow_dispatch:
 
 jobs:
   test:

@@ -4,9 +4,7 @@ name: Build-iOS
 "on":
   pull_request:
     branches:
-      - $default-branch
-    paths:
-      - 'iOS/**'
+      - develop
 
   push:
     branches:

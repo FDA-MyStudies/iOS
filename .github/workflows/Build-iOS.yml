@@ -1,27 +1,50 @@
+---
 name: Build-iOS
-on:
+
+"on":
   pull_request:
+    branches:
+      - $default-branch
+
+  push:
+    branches:
+      - $default-branch
+
+  # Allow actions to be run manually
+  workflow_dispatch:
+
 jobs:
   test:
     name: Build and test
     runs-on: macOS-latest
+
     strategy:
-        matrix:
-          destination: ['platform=iOS Simulator,OS=13.7,name=iPhone 11']
+      matrix:
+        destination: ["platform=iOS Simulator,OS=13.7,name=iPhone 11"]
+
     steps:
       - name: Checkout
         uses: actions/checkout@v2
+
       - name: Force XCode 11.7
         run: sudo xcode-select -switch /Applications/Xcode_11.7.app
+
       - name: Build
         run: |
           cd HPHC
-          xcodebuild clean build -workspace HPHC.xcworkspace -scheme HPHC -destination "${destination}" CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO ONLY_ACTIVE_ARCH=YES
-        env: 
-         destination: ${{ matrix.destination }}
+          xcodebuild clean build \
+            -workspace HPHC.xcworkspace \
+            -scheme HPHC \
+            -destination "${{ matrix.destination }}"
+        env:
+          CODE_SIGN_IDENTITY: ""
+          CODE_SIGNING_REQUIRED: "NO"
+          ONLY_ACTIVE_ARCH: "YES"
+
       - name: Test
         run: |
           cd HPHC
-          xcodebuild test -workspace HPHC.xcworkspace -scheme HPHC -destination "${destination}"
-        env: 
-         destination: ${{ matrix.destination }}
+          xcodebuild test \
+            -workspace HPHC.xcworkspace \
+            -scheme HPHC \
+            -destination "${{ matrix.destination }}"

@@ -1,10 +1,18 @@
+---
 name: SwiftLint
 
-on:
+"on":
   pull_request:
     branches:
-      - Develop
-    
+      - $default-branch
+
+  push:
+    branches:
+      - $default-branch
+
+  # Allow actions to be run manually
+  workflow_dispatch:
+
 jobs:
   SwiftLint:
     runs-on: ubuntu-latest

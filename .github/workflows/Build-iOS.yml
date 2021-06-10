@@ -6,9 +6,9 @@ name: Build-iOS
     branches:
       - develop
 
-  push:
-    branches:
-      - $default-branch
+  #push:
+    #branches:
+      #- $default-branch
 
   # Allow actions to be run manually
  # workflow_dispatch:

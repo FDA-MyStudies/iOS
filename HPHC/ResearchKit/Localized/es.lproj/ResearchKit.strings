@@ -129,13 +129,13 @@
 "FORGOT_PASSWORD_BUTTON_TITLE" = "¿Has olvidado tu contraseña?";
 
 /* Passcode step */
-"PASSCODE_PROMPT_MESSAGE" = "Introduce el código";
+"PASSCODE_PROMPT_MESSAGE" = "Introduzca el código antiguo";
 "PASSCODE_CONFIRM_MESSAGE" = "Confirmar código";
 "PASSCODE_SAVED_MESSAGE" = "Código guardado";
 "PASSCODE_AUTHENTICATED_MESSAGE" = "Autenticado por código";
 "PASSCODE_OLD_ENTRY_MESSAGE" = "Introduce el código antiguo";
 "PASSCODE_NEW_ENTRY_MESSAGE" = "Introduce el código nuevo";
-"PASSCODE_CONFIRM_NEW_ENTRY_MESSAGE" = "Confirma el nuevo código";
+"PASSCODE_CONFIRM_NEW_ENTRY_MESSAGE" = "Confirme el nuevo código";
 "PASSCODE_INVALID_ALERT_TITLE" = "Código incorrecto";
 "PASSCODE_INVALID_ALERT_MESSAGE" = "Los códigos no coinciden. Inténtalo de nuevo.";
 "PASSCODE_TOUCH_ID_MESSAGE" = "Autentícate con Touch ID";
@@ -176,7 +176,7 @@
 
 /* Boolean answer strings */
 "BOOL_NO" = "No";
-"BOOL_YES" = "Sí";
+"BOOL_YES" = "Si";
 
 /* Measuring unit abbreviations */
 "MEASURING_UNIT_CM" = "cm";

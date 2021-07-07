@@ -4,9 +4,9 @@
 <array>
 	<dict>
 		<key>helpText</key>
-		<string>Correo electronico</string>
+		<string>Correo electrónico</string>
 		<key>placeHolder</key>
-		<string>Identificación de correo</string>
+		<string>identificación de correo</string>
 	</dict>
 	<dict>
 		<key>helpText</key>

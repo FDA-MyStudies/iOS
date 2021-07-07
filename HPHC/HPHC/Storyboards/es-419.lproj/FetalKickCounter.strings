@@ -2,7 +2,7 @@
 "1Zu-1M-7Gw.placeholder" = "Ingrese el token de inscripción";
 
 /* Class = "UIBarButtonItem"; title = "Done"; ObjectID = "1qm-qt-0go"; */
-"1qm-qt-0go.title" = "Hecho";
+"1qm-qt-0go.title" = "Aceptar";
 
 /* Class = "UIButton"; normalTitle = "Next"; ObjectID = "2YV-6t-dEM"; */
 "2YV-6t-dEM.normalTitle" = "Siguiente";
@@ -23,7 +23,7 @@
 "KFf-Ee-kF6.normalTitle" = "Ver / PDF de consentimiento por correo electrónico";
 
 /* Class = "UILabel"; text = "Thanks for providing consent for this Study"; ObjectID = "Pfh-Dn-IUH"; */
-"Pfh-Dn-IUH.text" = "Gracias por consento para este estudio";
+"Pfh-Dn-IUH.text" = "Gracias por su consentimiento para este estudio";
 
 /* Class = "UIButton"; normalTitle = "Submit"; ObjectID = "Qzc-1W-fgy"; */
 "Qzc-1W-fgy.normalTitle" = "Enviar";
@@ -41,13 +41,13 @@
 "gPT-6p-tqe.text" = "Elegibilidad";
 
 /* Class = "UIButton"; normalTitle = "Done"; ObjectID = "mVr-1X-vKQ"; */
-"mVr-1X-vKQ.normalTitle" = "Hecho";
+"mVr-1X-vKQ.normalTitle" = "Aceptar";
 
 /* Class = "UILabel"; text = "You can now start using the app to participate in the study."; ObjectID = "oQF-1F-Kvh"; */
 "oQF-1F-Kvh.text" = "Ahora puede comenzar a usar la aplicación para participar en el estudio.";
 
 /* Class = "UIButton"; normalTitle = "Done"; ObjectID = "uIj-lV-uyU"; */
-"uIj-lV-uyU.normalTitle" = "Hecho";
+"uIj-lV-uyU.normalTitle" = "Aceptar";
 
 /* Class = "UITextField"; text = "000"; ObjectID = "upT-lw-erh"; */
 "upT-lw-erh.text" = "000";

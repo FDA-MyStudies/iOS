@@ -11,9 +11,9 @@
 	<key>VisitWebsiteButtonTitle</key>
 	<string>Visita el sito web</string>
 	<key>ConsentPDF</key>
-	<string>Consent PDF</string>
+	<string>PDF de consentimiento</string>
 	<key>LeaveStudy</key>
-	<string>Deja el estudio</string>
+	<string>Abandonar el estudio</string>
 	<key>LeaveStudyConfirmationText</key>
 	<string>Si toca &quot;Continuar&quot;, ya no podrá utilizar esta aplicación para las citas con el oculista y el seguimiento de medicamentos.</string>
 	<key>WebsiteLink</key>

@@ -30,7 +30,7 @@
 "AqF-5D-BJY.normalTitle" = "Estoy de acuerdo, procedo a eliminar mi cuenta";
 
 /* Class = "UILabel"; text = "Subject"; ObjectID = "CKp-ZC-FCM"; */
-"CKp-ZC-FCM.text" = "Sujeto";
+"CKp-ZC-FCM.text" = "Asunto";
 
 /* Class = "UILabel"; text = "HEALTH"; ObjectID = "COw-Ra-frh"; */
 "COw-Ra-frh.text" = "HEALTH";
@@ -45,7 +45,7 @@
 "FHg-Y2-WtR.placeholder" = "ingrese el primer nombre";
 
 /* Class = "UILabel"; text = "Feedback"; ObjectID = "GZf-6d-030"; */
-"GZf-6d-030.text" = "Retroalimentación";
+"GZf-6d-030.text" = "Comentarios";
 
 /* Class = "UILabel"; text = "A study for pregnant women"; ObjectID = "LLs-YR-ZfM"; */
 "LLs-YR-ZfM.text" = "Borrar mi cuenta";
@@ -87,7 +87,7 @@
 "Z1L-Ln-Brn.text" = "Borrar mi cuenta";
 
 /* Class = "UITextField"; placeholder = "enter subject"; ObjectID = "ZAG-q5-tTH"; */
-"ZAG-q5-tTH.placeholder" = "ingrese el asunto";
+"ZAG-q5-tTH.placeholder" = "Ingrese el asunto";
 
 /* Class = "UILabel"; text = "0%"; ObjectID = "Zic-wt-Oqv"; */
 "Zic-wt-Oqv.text" = "0%";
@@ -108,7 +108,7 @@
 "cTN-Dm-9a6.text" = "Mensaje";
 
 /* Class = "UILabel"; text = "Sign up"; ObjectID = "du0-3K-yBm"; */
-"du0-3K-yBm.text" = "Regístrate";
+"du0-3K-yBm.text" = "Regístrese";
 
 /* Class = "UILabel"; text = "Mental health survey"; ObjectID = "e60-ar-C8w"; */
 "e60-ar-C8w.text" = "Mental health survey";
@@ -165,4 +165,4 @@
 "vfp-9Y-Asr.text" = "Use la contraseña para acceder a la aplicación";
 
 /* Class = "UIButton"; normalTitle = "Change Password"; ObjectID = "yrx-fB-aoa"; */
-"yrx-fB-aoa.normalTitle" = "Cambia la contraseña";
+"yrx-fB-aoa.normalTitle" = "Cambiar contraseña";

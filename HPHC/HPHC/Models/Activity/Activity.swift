@@ -78,17 +78,17 @@ enum Frequency: String {
     var description: String {
         switch self {
         case .One_Time:
-            return "One Time"
+            return NSLocalizedStrings("One Time", comment: "")
         case .Daily:
-            return "Daily"
+            return NSLocalizedStrings("Daily", comment: "")
         case .Weekly:
-            return "Weekly"
+            return NSLocalizedStrings("Weekly", comment: "")
         case .Monthly:
-            return "Monthly"
+            return NSLocalizedStrings("Monthly", comment: "")
         case .Scheduled:
-            return "As Scheduled"
+            return NSLocalizedStrings("As Scheduled", comment: "")
         case .Ongoing:
-            return "Ongoing"
+            return NSLocalizedStrings("Ongoing", comment: "")
         }
     }
     

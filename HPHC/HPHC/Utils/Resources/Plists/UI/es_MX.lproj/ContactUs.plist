@@ -10,15 +10,15 @@
 	</dict>
 	<dict>
 		<key>helpText</key>
-		<string>Correo electronico</string>
+		<string>Correo electrónico</string>
 		<key>placeHolder</key>
 		<string>ingrese correo electrónico</string>
 	</dict>
 	<dict>
 		<key>helpText</key>
-		<string>Sujeto</string>
+		<string>Asunto</string>
 		<key>placeHolder</key>
-		<string>ingrese el asunto</string>
+		<string>Ingrese el asunto</string>
 	</dict>
 </array>
 </plist>

@@ -27,7 +27,7 @@
 "Fai-CW-7wU.placeholder" = "ingrese el primer nombre";
 
 /* Class = "UIButton"; normalTitle = "Get Started"; ObjectID = "G1v-Yc-O0B"; */
-"G1v-Yc-O0B.normalTitle" = "Empezar";
+"G1v-Yc-O0B.normalTitle" = "Comenzar";
 
 /* Class = "UIButton"; normalTitle = "New User?"; ObjectID = "Jyn-tg-ixg"; */
 "Jyn-tg-ixg.normalTitle" = "¿Nuevo usuario?";
@@ -57,7 +57,7 @@
 "TVv-OZ-IiD.placeholder" = "ingrese correo electrónico";
 
 /* Class = "UIButton"; normalTitle = "Resend Verification Code"; ObjectID = "Tm3-4k-53S"; */
-"Tm3-4k-53S.normalTitle" = "Vuelva a enviar el código de verificación";
+"Tm3-4k-53S.normalTitle" = "Volver a enviar el código de verificación";
 
 /* Class = "UILabel"; text = "Your Sign Up process is now complete"; ObjectID = "WOM-w4-FBB"; */
 "WOM-w4-FBB.text" = "Su proceso de registro ya está completo";
@@ -81,7 +81,7 @@
 "eRj-pM-e3e.placeholder" = "Ingrese el código de verificación";
 
 /* Class = "UIButton"; normalTitle = "Resend Verification Code"; ObjectID = "gYt-xI-csS"; */
-"gYt-xI-csS.normalTitle" = "Vuelva a enviar el código de verificación";
+"gYt-xI-csS.normalTitle" = "Volver a enviar el código de verificación";
 
 /* Class = "UIButton"; normalTitle = "Continue"; ObjectID = "pzi-7P-kZh"; */
 "pzi-7P-kZh.normalTitle" = "Continuar";
@@ -90,10 +90,10 @@
 "qBm-e0-RzA.text" = "Paso de verificación";
 
 /* Class = "UIButton"; normalTitle = "Get Started"; ObjectID = "qls-nn-uxZ"; */
-"qls-nn-uxZ.normalTitle" = "Empezar";
+"qls-nn-uxZ.normalTitle" = "Comenzar";
 
 /* Class = "UIButton"; normalTitle = "Get Started"; ObjectID = "vIh-lT-4bl"; */
-"vIh-lT-4bl.normalTitle" = "Empezar";
+"vIh-lT-4bl.normalTitle" = "Comenzar";
 
 /* Class = "UIButton"; normalTitle = "Next"; ObjectID = "x7K-bc-LZO"; */
 "x7K-bc-LZO.normalTitle" = "Siguiente";

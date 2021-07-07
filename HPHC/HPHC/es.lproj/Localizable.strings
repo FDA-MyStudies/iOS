@@ -21,45 +21,45 @@
  OTHER DEALINGS IN THE SOFTWARE.
 */
 
-"Home"="Casa";
+"Home"="Inicio";
 "Resources"="Recursos";
 "My Account"="Mi cuenta";
 "Sign In"="Registrarse";
 "New User?"="¿Nuevo usuario?";
-"Sign up"="Regístrate";
-"Sign Up"="Regístrate";
+"Sign up"="Regístrese";
+"Sign Up"="Regístrese";
 "This feature will be available in the next sprint."="Esta función estará disponible en el próximo sprint.";
 "Are you sure you want to sign out?"="¿Estás segura de que quieres cerrar sesión?";
 
 "Are you sure you want to sign out? Incomplete activities and activities completed while offline must be re-started when you next sign in."="¿Estás seguro de que quieres cerrar sesión? Las actividades incompletas y las que se completaron sin conexión deben reiniciarse la próxima vez que inicie sesión.";
 
 "Sign Out later"="Cerrar sesión más tarde";
-"Reach Out"="Alcanzar";
+"Reach Out"="Contactar";
 
 "Please join study to go forward."="Únase al estudio para seguir adelante.";
 
 "Select Lead Time"="Seleccionar plazo de entrega";
-"Done"="Hecho";
+"Done"="Aceptar";
 "Cancel"="Cancelar";
 "Profile"="Perfil";
 "Profile updated Successfully."="Perfil actualizado con éxito.";
 "Sign Out"="Desconectar";
-"Use Passcode or Touch ID to access app"="Utilice el código de acceso o Touch ID para acceder a la aplicación";
+"Use Passcode or Touch ID to access app"="Utilizar el código de acceso o Touch ID para acceder a la aplicación";
 "Use Passcode or Face ID to access app"="Use la contraseña o el Face ID para acceder a la aplicación";
 "Use Passcode to access app"="Use la contraseña para acceder a la aplicación";
 "Save"="Guardar";
-"Change Passcode"="Cambiar contraseña";
+"Change Passcode"="Cambiar código de acceso";
 "Edit"="Editar";
 
-"LEAVE US YOUR FEEDBACK"="DEJANOS TU COMENTARIO";
+"LEAVE US YOUR FEEDBACK"="DÉJENOS SU COMENTARIO";
 "Please enter message"="Por favor ingrese mensaje";
 "Please provide your feedback"="Envíe sus comentarios";
 "Enter your feedback here"="Ingrese sus comentarios aquí";
 
 "CONTACT US"="CONTÁCTENOS";
 "REACH OUT"="ALCANZAR";
-"Leave Anonymous Feedback"="Deja un comentario anónimo";
-"Need Help? Contact Us"="¿Necesitas ayuda? Contáctenos";
+"Leave Anonymous Feedback"="Deje un comentario anónimo";
+"Need Help? Contact Us"="¿Necesita ayuda? Contáctenos";
 
 "Your registered email(xyz@gmail.com) is pending verification. Enter the Verification Code received on this email to complete verification and try the Forgot Password action again."="Su correo electrónico registrado (xyz@gmail.com) está pendiente de verificación. Ingrese el Código de verificación recibido en este correo electrónico para completar la verificación e intente la acción Olvidó la contraseña nuevamente.";
 
@@ -69,7 +69,7 @@
 "Terms"="Condiciones";
 "Privacy Policy"="Política de privacidad";
 
-"An email has been sent to xyz@gmail.com. Please type in the Verification Code received in the email to complete the verification step."="Se ha enviado un correo electrónico a xyz@gmail.com. Por favor ingrese el código de verificación recibido en el correo electrónico para completar el paso de verificación.";
+"An email has been sent to xyz@gmail.com. Please type in the Verification Code received in the email to complete the verification step."="Se ha enviado un correo electrónico a xyz@gmail.com. Por favor, ingrese el código de verificación recibido en el correo electrónico para completar el paso de verificación.";
 
 "Message"="Mensaje";
 "Please verify your email address."="Por favor verifique su dirección de correo electrónico.";
@@ -104,7 +104,7 @@
 
 "You missed the previous run of this activity. Please wait till the next run becomes available. Run timings are given on the Activities list screen."="Te perdiste la ejecución anterior de esta actividad. Espere hasta que la próxima ejecución esté disponible. Los tiempos de ejecución se dan en la pantalla de lista de Actividades.";
 
-"STUDY ACTIVITIES"="Actividades de estudio";
+"STUDY ACTIVITIES"="Actividades del estudio";
 "Pull to refresh"="Tire para actualizar";
 
 
@@ -112,9 +112,9 @@
 
 "Activity"="Actividad";
 "Invalid Data!"="¡Datos inválidos!";
-"CURRENT"="ACTUAL";
+"CURRENT"="EN CURSO";
 "UPCOMING"="PRÓXIMAMENTE";
-"PAST"="PASADO";
+"PAST"="ANTERIORES";
 
 
 "The study "="El estudio ";
@@ -135,7 +135,7 @@
 "Retain my data"="Conservar mis datos";
 "Delete my data"="Borrar mis datos";
 
-"Are you sure? Tap Ok to confirm."="¿Estás seguro? Toque Aceptar para confirmar.";
+"Are you sure? Tap Ok to confirm."="¿Está seguro? Toque Ok para confirmar.";
 
 "Authentication Required"="Autenticacion requerida";
 "Username"="Nombre de usuario";
@@ -172,7 +172,7 @@
 "You are Eligible!"="¡Eres elegible!";
 
 
-"Your token has been validated. You are eligible to join the study. Please tap Get Started to proceed to the consent section."="Tu token ha sido validado. Eres elegible para participar en el estudio. Toque Comenzar para pasar a la sección de consentimiento.";
+"Your token has been validated. You are eligible to join the study. Please tap Get Started to proceed to the consent section."="Su token ha sido validado. Es elegible para participar en el estudio. Toque Empezar para pasar a la sección de consentimiento.";
 
 "Eligibility Test"="Prueba de elegibilidad";
 "Please answer some quick questions to confirm your eligibility for this study."="Responda algunas preguntas rápidas para confirmar su elegibilidad para este estudio.";
@@ -189,7 +189,7 @@
 "Ok"="Ok";
 "Delete Account"="Borrar cuenta";
 
-"Registration (or sign up) for the app  is requested only to provide you with a seamless experience of using the app. Your registration information does not become part of the data collected for any study(ies) housed in the app. Each study has its own consent process and your data for the study will not be collected without you providing your informed consent prior to joining the study."="El registro (o registro) para la aplicación se solicita solo para brindarle una experiencia perfecta de uso de la aplicación. Su información de registro no se convierte en parte de los datos recopilados para ningún estudio alojado en la aplicación. Cada estudio tiene su propio proceso de consentimiento y sus datos para el estudio no se recopilarán sin que usted brinde su consentimiento informado antes de unirse al estudio.";
+"Registration (or sign up) for the app  is requested only to provide you with a seamless experience of using the app. Your registration information does not become part of the data collected for any study(ies) housed in the app. Each study has its own consent process and your data for the study will not be collected without you providing your informed consent prior to joining the study."="Solo se solicita que se registre en la aplicación para brindarle una experiencia de uso perfecta. Su información de registro no se suma a los datos recopilados para ninguno de los estudios alojados en la aplicación. Cada estudio tiene su propio proceso de consentimiento y sus datos para el estudio no se recopilarán sin que brinde su consentimiento informado antes de unirse al estudio.";
 
 "Are you sure you wish to permanently delete your #APPNAME# account? You will need to register again if you wish to join a study."="¿Está seguro de que desea eliminar permanentemente su cuenta #APPNAME#? Deberá registrarse nuevamente si desea unirse a un estudio.";
 
@@ -201,8 +201,8 @@
 "SIGN IN"="Registrarse";
 "PASSWORD HELP"="AYUDA CON CONTRASEÑA";
 "We have sent a temporary password to your registered email. Please login with temporary password and change your password."="Hemos enviado una contraseña temporal a su correo electrónico registrado. Inicie sesión con contraseña temporal y cambie su contraseña.";
-"SIGN UP"="Regístrate";
-"I Agree to the Terms and Privacy Policy"="Acepto los Condiciones y la Política de privacidad";
+"SIGN UP"="Regístrese";
+"I Agree to the Terms and Privacy Policy"="Acepto las Condiciones y la Política de privacidad";
 "NOTIFICATIONS"="NOTIFICACIONES";
 "Please enter your first name."="Por favor, introduzca su nombre de pila.";
 "Please enter your last name."="Por favor ingrese su apellido.";
@@ -212,7 +212,7 @@
 "Please confirm your password."="Por favor, confirme su contraseña.";
 "Please confirm the password."="Confirme la contraseña.";
 "Your password should not match with email id"="Su contraseña no debe coincidir con la identificación de correo electrónico";
-"Please enter valid email address."="Por favor ingrese una dirección de correo electrónico válida.";
+"Please enter valid email address."="Por favor, ingrese una dirección de correo electrónico válida.";
 "The Password and Confirm password fields don't match."="Los campos Contraseña y Confirmar contraseña no coinciden.";
 "New password and confirm password fields don't match."="Los campos de contraseña nueva y contraseña de confirmación no coinciden.";
 "Password should have minimum of 8 characters."="La contraseña debe tener un mínimo de 8 caracteres.";
@@ -220,24 +220,24 @@
 
 "Your password MUST be 8-64 characters and contain each of the following: An uppercase letter, A lower case letter, A number 0-9, a special character: \\ ! # % & ‘ () * + , - . : < > = ? @ [] ^ _ { } | ~ *"="Su contraseña DEBE tener entre 8 y 64 caracteres y contener cada uno de los siguientes elementos: una letra mayúscula, una letra minúscula, un número 0-9, un carácter especial: \\! #% & ‘() * +, -. : <> =? @ [] ^ _ {} | ~ * \"";
 
-"Please agree to terms and conditions."="Por favor Acepta los términos y condiciones.";
+"Please agree to terms and conditions."="Por favor, acepte los términos y condiciones.";
 "Please enter your new password."="Ingrese su nueva contraseña.";
 "New password and old password are same."="La nueva contraseña y la anterior son las mismas.";
 "Please enter your relationship to the participant."="Ingrese su relación con el participante.";
-"CHANGE PASSWORD"="CAMBIA LA CONTRASEÑA";
+"CHANGE PASSWORD"="CAMBIAR CONTRASEÑA";
 "CREATE PASSWORD"="CREAR CONTRASEÑA";
-"Your password has been changed successfully"="tu contraseña ha sido cambiada exitosamente";
+"Your password has been changed successfully"="Su contraseña ha sido cambiada correctamente.";
 "Please enter all the fields"="Por favor ingrese todos los campos";
 "Please enter valid first name. Please use letters(length:1 - 100 characters)."="Introduzca un nombre válido. Utilice letras (longitud: 1 - 100 caracteres).";
 "Please enter valid last name. Please use letters(length:1 - 100 characters)."="Ingrese un apellido válido. Utilice letras (longitud: 1 - 100 caracteres).";
 "Old password and New password should not be same."="La contraseña anterior y la contraseña nueva no deben ser iguales.";
 "Please enter valid Verification Code"="Ingrese un código de verificación válido";
-"Thank you for providing feedback. Your gesture is appreciated."="Gracias por brindarnos sus comentarios. Se agradece tu gesto.";
+"Thank you for providing feedback. Your gesture is appreciated."="Gracias por contactarnos. Nos pondremos en contacto con usted lo antes posible.";
 "Please enter subject"="Por favor ingrese el asunto";
 "Please enter message"="Por favor ingrese mensaje";
 "Thank you for contacting us. We will get back to you on your email address at the earliest."="Gracias por contactarnos. Nos comunicaremos con usted a su dirección de correo electrónico lo antes posible.";
 "  Resume  "="  Continuar  ";
-"  Start  "="  Comienzo  ";
+"  Start  "="  Comenzar  ";
 "  Completed  "="  Terminado  ";
 "  Incompleted  "="  Incompleto  ";
 "  Expired  "="  Caducado  ";
@@ -278,7 +278,7 @@
 
 "I am signing the consent form on behalf of the study participant as their legally authorized representative."="Estoy firmando el formulario de consentimiento en nombre del participante del estudio como su representante legalmente autorizado.";
 
-"The next few steps will capture your informed consent for participation in this study."="Los siguientes pasos capturarán su consentimiento informado para participar en este estudio.";
+"The next few steps will capture your informed consent for participation in this study."="Los siguientes pasos nos permitirán obtener su consentimiento para participar en este estudio.";
 "Please select the appropriate option below"="Seleccione la opción adecuada a continuación";
 "Please specify your relationship to the participant"="Especifique su relación con el participante";
 "Please enter the participant's first and last name below"="Ingrese el nombre y apellido del participante a continuación";
@@ -292,9 +292,9 @@
 "Last name"="Apellido";
 "Relationship to participant"="Relación al participante";
 "Consent by a Legally Authorized Representative"="Consentimiento de un representante legalmente autorizado";
-"Study Staff Signature(s)"="Firma (s) del personal del estudio";
+"Study Staff Signature(s)"="Firma(s) del personal del estudio";
 "- Coordinator"="- Coordinador";
-"Participant's Name (printed)"="Nombre del participante (impreso)";
+"Participant's Name (printed)"="Nombre del participante (en imprenta)";
 "Participant's Signature"="Firma del participante";
 
 
@@ -323,15 +323,15 @@
 "Let's do a quick and simple test of your understanding of this Study."="Hagamos una prueba rápida y sencilla de su comprensión de este Estudio.";
 "Great Job!"="¡Gran trabajo!";
 "You answered all of the questions correctly. Tap on Next to proceed"="Respondiste todas las preguntas correctamente. Toque Siguiente para continuar";
-"Thanks for providing consent for this Study"="Gracias por consento para este estudio";
+"Thanks for providing consent for this Study"="Gracias por su consentimiento para este estudio";
 "You can now start participating in the Study"="Ahora puede comenzar a participar en el estudio";
 "I agree to participate in this research study."="Acepto participar en este estudio de investigación.";
-"Participant"="Partícipe";
+"Participant"="Participante";
 "No"="No";
-"Yes"="Si";
+"Yes"="Sí";
 
 
-"Yet To Join"="Aún para unirse";
+"Yet To Join"="Disponible para unirse";
 "In Progress"="En progreso";
 "Completed"="Terminado";
 "Not Eligible"="No elegible";
@@ -427,7 +427,7 @@
   
 "By tapping Sign In, you agree to this app's Terms and Privacy Policy"="Al tocar Iniciar sesión, acepta los Condiciones y la Política de privacidad de esta aplicación";
 
-"New User? Sign Up"="¿Nuevo Usuario? Regístrate";
+"New User? Sign Up"="¿Nuevo Usuario? Regístrese";
 "RESOURCES"="RECURSOS";
 
 
@@ -435,7 +435,7 @@
 "Active"="Activo";
 "Closed"="Cerrado";
 "Upcoming"="Próximo";
-"Paused"="Pausada";
+"Paused"="Pausado";
 "Bookmarked"="Marcado como favorito";
 "Participation Status"="Estado de participación";
 "Categories"="Categorías";
@@ -468,7 +468,7 @@
 "Required"="Necesario";
 "Sorry, you are not eligible for participation in this study. We thank you for your interest and time, and encourage you to explore other studies as they are made available in the app."="Lo sentimos, no eres elegible para participar en este estudio. Le agradecemos su interés y tiempo, y lo alentamos a explorar otros estudios a medida que estén disponibles en la aplicación.";
 
-"Yet to Join"="Aún para unirse";
+"Yet to Join"="Disponible para unirse";
 "Watch Video"="Ver video";
 
 "Signed Consent"="Consentimiento firmado";
@@ -512,17 +512,17 @@
 "1BA-M1-mXf.normalTitle.value"="Borrar mi cuenta";
 "6pR-ur-c4G.text.value"="Un estudio para mujeres embarazadas";
 "AqF-5D-BJY.normalTitle.value"="Estoy de acuerdo, procedo a eliminar mi cuenta";
-"CKp-ZC-FCM.text.value"="Sujeto";
+"CKp-ZC-FCM.text.value"="Asunto";
 "EmJ-Ca-q92.normalTitle.value"="Cancelar";
-"GZf-6d-030.text.value"="Retroalimentación";
+"GZf-6d-030.text.value"="Comentarios";
 "LLs-YR-ZfM.text.value"="Borrar mi cuenta";
 "NY2-tY-i1U.normalTitle.value"="Aplicar";
 "OL5-qf-Lfd.normalTitle.value"="Conservar mis datos";
 
 
 "TmB-Q7-f8P.normalTitle.value"="Desconectar";
-"ZAG-q5-tTH.placeholder.value"="ingrese el asunto";
-"b0d-he-JiD.text.value"="¡Nos encantaría saber de usted! Comparta sus pensamientos sobre cómo podemos mejorar su experiencia de participar en estudios de salud y contribuir a un mundo más saludable. Sus comentarios serán anónimos.";
+"ZAG-q5-tTH.placeholder.value"="Ingrese el asunto";
+"b0d-he-JiD.text.value"="¡Nos encantaría saber de usted! Comparta su opinión sobre cómo podemos mejorar su experiencia de participar en estudios de salud y contribuir a un mundo más saludable. Sus comentarios serán anónimos.";
 "b2d-cc-iAX.normalTitle.value"="Borrar mis datos";
 "cTN-Dm-9a6.text.value"="Mensaje";
 "gES-c2-7do.text.value"="Desarrollado por FDA MyStudies";
@@ -539,19 +539,19 @@
 "5n7-N7-Pdx.normalTitle.value"="Enviar";
 "867-Vn-0xS.placeholder.value"="ingrese correo electrónico";
 "93M-Fs-drd.normalTitle.value"="Continuar";
-"G1v-Yc-O0B.normalTitle.value"="Empezar";
+"G1v-Yc-O0B.normalTitle.value"="Comenzar";
 "Les-Kl-pFS.normalTitle.value"="Registrarse";
 "QZr-DS-rsL.normalTitle.value"="Enviar";
-"Tm3-4k-53S.normalTitle.value"="Vuelva a enviar el código de verificación";
+"Tm3-4k-53S.normalTitle.value"="Volver a enviar el código de verificación";
 "WOM-w4-FBB.text.value"="Su proceso de registro ya está completo";
 "WsS-eE-w8m.normalTitle.value"="Registrarse";
 "d1G-F1-50Q.text.value"="¡Felicidades!";
 "eRj-pM-e3e.placeholder.value"="Ingrese el código de verificación";
-"gYt-xI-csS.normalTitle.value"="Vuelva a enviar el código de verificación";
+"gYt-xI-csS.normalTitle.value"="Volver a enviar el código de verificación";
 "pzi-7P-kZh.normalTitle.value"="Continuar";
 "qBm-e0-RzA.text.value"="Paso de verificación";
-"qls-nn-uxZ.normalTitle.value"="Empezar";
-"vIh-lT-4bl.normalTitle.value"="Empezar";
+"qls-nn-uxZ.normalTitle.value"="Comenzar";
+"vIh-lT-4bl.normalTitle.value"="Comenzar";
 "x7K-bc-LZO.normalTitle.value"="Siguiente";
 "jrJ-DJ-Dbb.text.value"="Ver video";
 
@@ -568,9 +568,13 @@
 "does not exist"="no existe";
 
 "Consent"="Consentimiento";
-
-
-
+"Ongoing"="En curso";
+"One Time"="Una vez";
+"Daily"="Diario";
+"Weekly"="Semanal";
+"Monthly"="Mensual";
+"As Scheduled"="Como lo planeado";
+"Consent PDF"="PDF de consentimiento";
 
 
 

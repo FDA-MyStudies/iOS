@@ -571,7 +571,13 @@
 
 "Consent"="Consent";
 
-
+"Ongoing"="Ongoing";
+"One Time"="One Time";
+"Daily"="Daily";
+"Weekly"="Weekly";
+"Monthly"="Monthly";
+"As Scheduled"="As Scheduled";
+"Consent PDF"="Consent PDF";
 
 
 

@@ -361,7 +361,10 @@ class ResourcesViewController: UIViewController{
             WCPServices().getStudyInformation(studyId: (Study.currentStudy?.studyId)!, delegate: self)
             return
         }
-        
+        let locale3 = Locale.preferredLanguages.first ?? "en"
+        if locale3.hasPrefix("es") {
+          leaveStudy = "¿"+leaveStudy
+        }
         let kOkConfirm = NSLocalizedStrings("Are you sure? Tap Ok to confirm.", comment: "")
         UIUtilities.showAlertMessageWithTwoActionsAndHandler(NSLocalizedStrings((leaveStudy + " ?"), comment: ""), errorMessage: NSLocalizedStrings(withdrawalMessage!, comment: ""), errorAlertActionTitle: kProceedTitle,
                                                              errorAlertActionTitle2: kTitleCancel, viewControllerUsed: self,

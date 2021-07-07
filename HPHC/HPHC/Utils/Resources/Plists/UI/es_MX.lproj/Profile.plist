@@ -16,7 +16,7 @@
 	</dict>
 	<dict>
 		<key>helpText</key>
-		<string>Contraseña</string>
+		<string>Código de acceso</string>
 		<key>placeHolder</key>
 		<string>agregar contraseña</string>
 	</dict>
@@ -30,7 +30,7 @@
 	</dict>
 	<dict>
 		<key>LabelName</key>
-		<string>¿Recibe recordatorios de actividades de estudio?</string>
+		<string>¿Recibir recordatorios de actividades de estudio?</string>
 	</dict>
 </array>
 </plist>

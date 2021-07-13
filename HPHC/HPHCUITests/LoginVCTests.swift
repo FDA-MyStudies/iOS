@@ -10,66 +10,66 @@ import XCTest
 import Embassy
 import EnvoyAmbassador
 
-class LoginVCTests: UITestBase {
-
-    
-    func testLoginVCFlows() {
-        
-        app.launch()
-        app.buttons["Sign in"].tap()
-        app.buttons["Forgot password?"].tap()
-        app.navigationBars["PASSWORD HELP"].buttons["backIcon"].tap()
-        
-        let textViewsQuery = app.textViews
-        textViewsQuery.links["Terms"].tap()
-        app.navigationBars["TERMS"].buttons["Cancel"].tap()
-        textViewsQuery.links["Privacy Policy"].tap()
-        app.navigationBars["PRIVACY POLICY"].buttons["Cancel"].tap()
-        app.navigationBars["SIGN IN"].buttons["info"].tap()
-        app.alerts["Why Register?"].buttons["OK"].tap()
-        app.buttons["New User? Sign Up"].tap()
-        app.navigationBars["SIGN UP"].buttons["backIcon"].tap()
-        let butttonSignin = app.buttons["Sign In"]
-        XCTAssertTrue(butttonSignin.exists)
-        
-    }
-    
-    func testLogin() {
-        
-        
-        router[DefaultRouter.loginPath] = JSONResponse() { _ -> Any in
-            return [
-                "auth": "573973581",
-                "verified": false,
-                "message": "success",
-                "userId": "b081ad2d-aff4-4f95-9f2c-e7b8541f3431",
-                "refreshToken": "54914753-89eb-4bfd-af07-6a07ba4065e6"
-            ]
-        }
-        
-        app.launch()
-       
-        app.buttons["Sign in"].tap()
-        let tfEmail = app.textFields["enter email"]
-        let passwordtf =  app.secureTextFields["enter password"]
-        let butttonSignin = app.buttons["Sign In"]
-        let toolbarBttonDone =  app.toolbars["Toolbar"].buttons["Done"]
-        
-        tfEmail.tap()
-        tfEmail.typeText("suri@grr.la")
-        
-        passwordtf.tap()
-        passwordtf.typeText("Password@1")
-        toolbarBttonDone.tap()
-        butttonSignin.tap()
-        
-       
-        XCTAssertFalse(butttonSignin.exists)
-        
-        
-    }
-
-}
+//class LoginVCTests: UITestBase {
+//
+//    
+//    func testLoginVCFlows() {
+//        
+//        app.launch()
+//        app.buttons["Sign in"].tap()
+//        app.buttons["Forgot password?"].tap()
+//        app.navigationBars["PASSWORD HELP"].buttons["backIcon"].tap()
+//        
+//        let textViewsQuery = app.textViews
+//        textViewsQuery.links["Terms"].tap()
+//        app.navigationBars["TERMS"].buttons["Cancel"].tap()
+//        textViewsQuery.links["Privacy Policy"].tap()
+//        app.navigationBars["PRIVACY POLICY"].buttons["Cancel"].tap()
+//        app.navigationBars["SIGN IN"].buttons["info"].tap()
+//        app.alerts["Why Register?"].buttons["OK"].tap()
+//        app.buttons["New User? Sign Up"].tap()
+//        app.navigationBars["SIGN UP"].buttons["backIcon"].tap()
+//        let butttonSignin = app.buttons["Sign In"]
+//        XCTAssertTrue(butttonSignin.exists)
+//        
+//    }
+//    
+//    func testLogin() {
+//        
+//        
+//        router[DefaultRouter.loginPath] = JSONResponse() { _ -> Any in
+//            return [
+//                "auth": "573973581",
+//                "verified": false,
+//                "message": "success",
+//                "userId": "b081ad2d-aff4-4f95-9f2c-e7b8541f3431",
+//                "refreshToken": "54914753-89eb-4bfd-af07-6a07ba4065e6"
+//            ]
+//        }
+//        
+//        app.launch()
+//       
+//        app.buttons["Sign in"].tap()
+//        let tfEmail = app.textFields["enter email"]
+//        let passwordtf =  app.secureTextFields["enter password"]
+//        let butttonSignin = app.buttons["Sign In"]
+//        let toolbarBttonDone =  app.toolbars["Toolbar"].buttons["Done"]
+//        
+//        tfEmail.tap()
+//        tfEmail.typeText("suri@grr.la")
+//        
+//        passwordtf.tap()
+//        passwordtf.typeText("Password@1")
+//        toolbarBttonDone.tap()
+//        butttonSignin.tap()
+//        
+//       
+//        XCTAssertFalse(butttonSignin.exists)
+//        
+//        
+//    }
+//
+//}
 extension XCUIElement {
     func clearText(andReplaceWith newText:String? = nil) {
         tap()

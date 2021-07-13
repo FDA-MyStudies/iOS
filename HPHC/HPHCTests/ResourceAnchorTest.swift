@@ -23,132 +23,132 @@ import XCTest
 import Mockingjay
 
 
-class ResourceAnchorTest: XCTestCase {
-
-    var delegate:WCPDelegate!
-    override func setUp() {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-        delegate = WCPDelegate()
-    }
-
-    override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-    }
-
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-    }
-    func testFetchingResourceList() {
-//        let rlist =  DBHandler.resourceListFor(nil, questionKey: nil)
-//        XCTAssertEqual(rlist.count, 1)
-    }
-    
-    func testResourcesLifeTimeWhenAnchorDateIsAvailable() {
-//        DBHandler.updateResourceLifeTime(nil, questionKey: nil, anchorDateValue: Date())
-//        let rlist =  DBHandler.resourceListFor(nil, questionKey: nil)
-//        XCTAssertEqual(rlist.count, 0)
-    }
-    
-    func testResourceIsEmpty() {
-       // let empty = DBHandler.isResourcesEmpty()
-        //XCTAssert(empty)
-    }
-    
-    func testResourcesLifeTimeWhenAnchorDateIsNotAvailable() {
-        
-    }
-    
-    func testWCP_GetStudies_Failure() {
-        
-        //let delegate = WCPDelegate()
-        
-        let expection = expectation(description: "StudyList api call")
-        delegate.asyncExpectation = expection
-        
-        _ = [ "user": "Kyle" ]
-        let url = "https://hpwcp-stage.lkcompliant.net/StudyMetaData/studyList"
-        
-        let error = NSError.init(domain: "mocking", code: 500, userInfo: nil)
-        stub(uri(url), failure(error))
-        
-        let services = WCPServices()
-        services.delegateSource = delegate
-        services.getStudyList(delegate)
-        
-        waitForExpectations(timeout: 3.0) { (error) in
-           
-            if let error = error {
-                XCTFail("waitForExpectationsWithTimeout errored: \(error)")
-            }
-            
-            guard let result = self.delegate.delegateAsyncResult else {
-                XCTFail("Expected delegate to be called")
-                return
-            }
-            let data = self.delegate.apiResponse
-            let error = self.delegate.apiError
-            
-            XCTAssertEqual(error?.code, 500)
-            XCTAssertNotEqual(WCPDelegate.State.none, result)
-            //XCTAssertNotEqual(WCPDelegate.State.start, result)
-            XCTAssertEqual(WCPDelegate.State.failed, result)
-            XCTAssertNil(data)
-           
-        }
-    }
-    
-    func testWCP_GetStudies_Sucess() {
-        
-        let expection = expectation(description: "StudyList api call")
-        delegate.asyncExpectation = expection
-        
-        let path = Bundle(for: type(of: self)).url(forResource: "StudyList", withExtension: "json")!
-        let data = try! Data(contentsOf: path)
-        
-        let url = "https://hpwcp-stage.lkcompliant.net/StudyMetaData/studyList"
-        stub(http(.get,uri: url),jsonData(data))
-        
-        let services = WCPServices()
-        services.delegateSource = delegate
-        services.getStudyList(delegate)
-        
-        waitForExpectations(timeout: 2.0) { (error) in
-            
-            if let error = error {
-                XCTFail("waitForExpectationsWithTimeout errored: \(error)")
-            }
-            
-            guard let result = self.delegate.delegateAsyncResult else {
-                XCTFail("Expected delegate to be called")
-                return
-            }
-            let data = self.delegate.apiResponse
-            let error = self.delegate.apiError
-            
-            
-            XCTAssertNotEqual(WCPDelegate.State.none, result)
-            //XCTAssertNotEqual(WCPDelegate.State.start, result)
-            XCTAssertEqual(WCPDelegate.State.finished, result)
-            XCTAssertNotNil(data)
-            XCTAssertEqual(Gateway.instance.studies?.count, 2)
-            
-        }
-    }
-    
-
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
-        }
-    }
-    
-    let studyResponse = Data("{\n    \"message\": \"SUCCESS\",\n    \"studies\": [\n        {\n            \"studyId\": \"Study02\",\n            \"studyVersion\": \"1.3\",\n            \"title\": \"Food Nutrition\",\n            \"category\": \"Food Safety\",\n            \"sponsorName\": \" FDA\",\n            \"tagline\": \"Path to improved health\",\n            \"status\": \"Closed\",\n            \"logo\": \"https:\\hpwcp-stage.lkcompliant.net/fdaResources/studylogo/STUDY_FS_05282018040302.jpeg?v=1564127523483\",\n            \"settings\": {\n                \"enrolling\": true,\n                \"platform\": \"all\",\n                \"rejoin\": true\n            }\n        }\n   ]\n}".utf8)
-        
-    
-
-}
+//class ResourceAnchorTest: XCTestCase {
+//
+//    var delegate:WCPDelegate!
+//    override func setUp() {
+//        // Put setup code here. This method is called before the invocation of each test method in the class.
+//        delegate = WCPDelegate()
+//    }
+//
+//    override func tearDown() {
+//        // Put teardown code here. This method is called after the invocation of each test method in the class.
+//    }
+//
+//    func testExample() {
+//        // This is an example of a functional test case.
+//        // Use XCTAssert and related functions to verify your tests produce the correct results.
+//    }
+//    func testFetchingResourceList() {
+////        let rlist =  DBHandler.resourceListFor(nil, questionKey: nil)
+////        XCTAssertEqual(rlist.count, 1)
+//    }
+//    
+//    func testResourcesLifeTimeWhenAnchorDateIsAvailable() {
+////        DBHandler.updateResourceLifeTime(nil, questionKey: nil, anchorDateValue: Date())
+////        let rlist =  DBHandler.resourceListFor(nil, questionKey: nil)
+////        XCTAssertEqual(rlist.count, 0)
+//    }
+//    
+//    func testResourceIsEmpty() {
+//       // let empty = DBHandler.isResourcesEmpty()
+//        //XCTAssert(empty)
+//    }
+//    
+//    func testResourcesLifeTimeWhenAnchorDateIsNotAvailable() {
+//        
+//    }
+//    
+//    func testWCP_GetStudies_Failure() {
+//        
+//        //let delegate = WCPDelegate()
+//        
+//        let expection = expectation(description: "StudyList api call")
+//        delegate.asyncExpectation = expection
+//        
+//        _ = [ "user": "Kyle" ]
+//        let url = "https://hpwcp-stage.lkcompliant.net/StudyMetaData/studyList"
+//        
+//        let error = NSError.init(domain: "mocking", code: 500, userInfo: nil)
+//        stub(uri(url), failure(error))
+//        
+//        let services = WCPServices()
+//        services.delegateSource = delegate
+//        services.getStudyList(delegate)
+//        
+//        waitForExpectations(timeout: 3.0) { (error) in
+//           
+//            if let error = error {
+//                XCTFail("waitForExpectationsWithTimeout errored: \(error)")
+//            }
+//            
+//            guard let result = self.delegate.delegateAsyncResult else {
+//                XCTFail("Expected delegate to be called")
+//                return
+//            }
+//            let data = self.delegate.apiResponse
+//            let error = self.delegate.apiError
+//            
+//            XCTAssertEqual(error?.code, 500)
+//            XCTAssertNotEqual(WCPDelegate.State.none, result)
+//            //XCTAssertNotEqual(WCPDelegate.State.start, result)
+//            XCTAssertEqual(WCPDelegate.State.failed, result)
+//            XCTAssertNil(data)
+//           
+//        }
+//    }
+//    
+//    func testWCP_GetStudies_Sucess() {
+//        
+//        let expection = expectation(description: "StudyList api call")
+//        delegate.asyncExpectation = expection
+//        
+//        let path = Bundle(for: type(of: self)).url(forResource: "StudyList", withExtension: "json")!
+//        let data = try! Data(contentsOf: path)
+//        
+//        let url = "https://hpwcp-stage.lkcompliant.net/StudyMetaData/studyList"
+//        stub(http(.get,uri: url),jsonData(data))
+//        
+//        let services = WCPServices()
+//        services.delegateSource = delegate
+//        services.getStudyList(delegate)
+//        
+//        waitForExpectations(timeout: 2.0) { (error) in
+//            
+//            if let error = error {
+//                XCTFail("waitForExpectationsWithTimeout errored: \(error)")
+//            }
+//            
+//            guard let result = self.delegate.delegateAsyncResult else {
+//                XCTFail("Expected delegate to be called")
+//                return
+//            }
+//            let data = self.delegate.apiResponse
+//            let error = self.delegate.apiError
+//            
+//            
+//            XCTAssertNotEqual(WCPDelegate.State.none, result)
+//            //XCTAssertNotEqual(WCPDelegate.State.start, result)
+//            XCTAssertEqual(WCPDelegate.State.finished, result)
+//            XCTAssertNotNil(data)
+//            XCTAssertEqual(Gateway.instance.studies?.count, 2)
+//            
+//        }
+//    }
+//    
+//
+//    func testPerformanceExample() {
+//        // This is an example of a performance test case.
+//        self.measure {
+//            // Put the code you want to measure the time of here.
+//        }
+//    }
+//    
+//    let studyResponse = Data("{\n    \"message\": \"SUCCESS\",\n    \"studies\": [\n        {\n            \"studyId\": \"Study02\",\n            \"studyVersion\": \"1.3\",\n            \"title\": \"Food Nutrition\",\n            \"category\": \"Food Safety\",\n            \"sponsorName\": \" FDA\",\n            \"tagline\": \"Path to improved health\",\n            \"status\": \"Closed\",\n            \"logo\": \"https:\\hpwcp-stage.lkcompliant.net/fdaResources/studylogo/STUDY_FS_05282018040302.jpeg?v=1564127523483\",\n            \"settings\": {\n                \"enrolling\": true,\n                \"platform\": \"all\",\n                \"rejoin\": true\n            }\n        }\n   ]\n}".utf8)
+//        
+//    
+//
+//}
 
 class WCPDelegate:NMWebServiceDelegate {
     

@@ -282,7 +282,19 @@ class SignUpViewController: UIViewController{
      
      */
     @IBAction func buttonInfoAction(_ sender: Any){
-      UIUtilities.showAlertWithTitleAndMessage(title: kWhyRegisterText as NSString, message: kRegistrationInfoMessage as NSString)
+//      UIUtilities.showAlertWithTitleAndMessage(title: kWhyRegisterText as NSString, message: kRegistrationInfoMessage as NSString)
+        
+        let consOk = kTitleOk1.dropLast()
+               print("\(consOk)")
+        var rootViewController = UIApplication.shared.keyWindow?.rootViewController
+        if let navigationController = rootViewController as? UINavigationController {
+            rootViewController = navigationController.viewControllers.first
+        }
+        if let tabBarController = rootViewController as? UITabBarController {
+            rootViewController = tabBarController.selectedViewController
+        }
+        
+        UIUtilities.showAlertMessage((kWhyRegisterText as NSString) as String, errorMessage: (kRegistrationInfoMessage as NSString) as String, errorAlertActionTitle: "\(consOk)", viewControllerUsed: rootViewController)
     }
 
     

@@ -162,7 +162,7 @@
 "uYJ-Jl-iiH.normalTitle" = "Enviar";
 
 /* Class = "UILabel"; text = "Use Passcode to access  app"; ObjectID = "vfp-9Y-Asr"; */
-"vfp-9Y-Asr.text" = "Use la contraseña para acceder a la aplicación";
+"vfp-9Y-Asr.text" = "Utilizar la contraseña para acceder a la aplicación";
 
 /* Class = "UIButton"; normalTitle = "Change Password"; ObjectID = "yrx-fB-aoa"; */
 "yrx-fB-aoa.normalTitle" = "Cambiar contraseña";

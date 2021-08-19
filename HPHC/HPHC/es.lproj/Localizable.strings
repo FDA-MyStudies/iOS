@@ -45,8 +45,8 @@
 "Profile updated Successfully."="Perfil actualizado con éxito.";
 "Sign Out"="Desconectar";
 "Use Passcode or Touch ID to access app"="Utilizar el código de acceso o Touch ID para acceder a la aplicación";
-"Use Passcode or Face ID to access app"="Use la contraseña o el Face ID para acceder a la aplicación";
-"Use Passcode to access app"="Use la contraseña para acceder a la aplicación";
+"Use Passcode or Face ID to access app"="Utilizar la contraseña o el Face ID para acceder a la aplicación";
+"Use Passcode to access app"="Utilizar la contraseña para acceder a la aplicación";
 "Save"="Guardar";
 "Change Passcode"="Cambiar código de acceso";
 "Edit"="Editar";
@@ -163,6 +163,7 @@
 
 "Validated!"="¡Validado!";
 "OK"="Ok";
+"Ok1"="Aceptar1";
 "Enter a token"="Ingrese un token";
 "Enter keyword(s)"="Inserte palabras claves";
 
@@ -294,7 +295,7 @@
 "Consent by a Legally Authorized Representative"="Consentimiento de un representante legalmente autorizado";
 "Study Staff Signature(s)"="Firma(s) del personal del estudio";
 "- Coordinator"="- Coordinador";
-"Participant's Name (printed)"="Nombre del participante (en imprenta)";
+"Participant's Name (printed)"="Nombre del participante \n(en imprenta)";
 "Participant's Signature"="Firma del participante";
 
 

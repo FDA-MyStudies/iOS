@@ -209,7 +209,8 @@ class UIUtilities: NSObject {
     class func showAlertWithTitleAndMessage(title: NSString, message : NSString) -> Void {
         
         let alert = UIAlertController(title: title as String,message: message as String,preferredStyle: UIAlertController.Style.alert)
-        alert.addAction(UIAlertAction(title: kTitleOKCapital, style: .default, handler: nil))
+//        
+            alert.addAction(UIAlertAction(title: kTitleOKCapital , style: .default, handler: nil))
         var rootViewController = UIApplication.shared.keyWindow?.rootViewController
         if let navigationController = rootViewController as? UINavigationController {
             rootViewController = navigationController.viewControllers.first

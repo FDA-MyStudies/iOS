@@ -45,8 +45,8 @@
 "Profile updated Successfully."="Perfil actualizado con éxito.";
 "Sign Out"="Desconectar";
 "Use Passcode or Touch ID to access app"="Utilizar el código de acceso o Touch ID para acceder a la aplicación";
-"Use Passcode or Face ID to access app"="Use la contraseña o el Face ID para acceder a la aplicación";
-"Use Passcode to access app"="Use la contraseña para acceder a la aplicación";
+"Use Passcode or Face ID to access app"="Utilizar la contraseña o el Face ID para acceder a la aplicación";
+"Use Passcode to access app"="Utilizar la contraseña para acceder a la aplicación";
 "Save"="Guardar";
 "Change Passcode"="Cambiar código de acceso";
 "Edit"="Editar";
@@ -186,7 +186,8 @@
 "PRIVACY POLICY"="POLÍTICA DE PRIVACIDAD";
 "Please Enter Valid Value"="Ingrese un valor válido";
 "Important Note"="Nota importante";
-"Ok"="Ok";
+"Ok"="Aceptar";
+"Ok1"="Ok";
 "Delete Account"="Borrar cuenta";
 
 "Registration (or sign up) for the app  is requested only to provide you with a seamless experience of using the app. Your registration information does not become part of the data collected for any study(ies) housed in the app. Each study has its own consent process and your data for the study will not be collected without you providing your informed consent prior to joining the study."="Solo se solicita que se registre en la aplicación para brindarle una experiencia de uso perfecta. Su información de registro no se suma a los datos recopilados para ninguno de los estudios alojados en la aplicación. Cada estudio tiene su propio proceso de consentimiento y sus datos para el estudio no se recopilarán sin que brinde su consentimiento informado antes de unirse al estudio.";
@@ -294,7 +295,7 @@
 "Consent by a Legally Authorized Representative"="Consentimiento de un representante legalmente autorizado";
 "Study Staff Signature(s)"="Firma(s) del personal del estudio";
 "- Coordinator"="- Coordinador";
-"Participant's Name (printed)"="Nombre del participante (en imprenta)";
+"Participant's Name (printed)"="Nombre del participante \n(en imprenta)";
 "Participant's Signature"="Firma del participante";
 
 

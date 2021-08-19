@@ -1824,6 +1824,7 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
 
 // MARK: Localisation
 extension AppDelegate {
+    
     static func selectedLocale () -> Bundle? {
         let locale3 = Locale.preferredLanguages.first ?? "en"
         if !(locale3.hasPrefix("es") || locale3.hasPrefix("en")) {
@@ -1916,3 +1917,5 @@ extension UIApplication {
         return self.keyWindow?.rootViewController?.topMostViewController()
     }
 }
+
+

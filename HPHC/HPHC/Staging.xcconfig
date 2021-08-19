@@ -40,7 +40,7 @@ REGISTRATION_URL = hpreg-stage.lkcompliant.net/fdahpUserRegWS/
 //REGISTRATION_URL = 45.136.113.122:8080/labkey/fdahpUserRegWS/
 
 /// App ID from Study builder.
-APPLICATION_ID = COVFHTEST
+APPLICATION_ID = COVFH001
 
 /// Org ID from Study builder.
 ORGANIZATION_ID = FDAHPH

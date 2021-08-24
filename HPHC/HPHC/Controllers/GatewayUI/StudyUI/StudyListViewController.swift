@@ -22,9 +22,13 @@ import IQKeyboardManagerSwift
 import UIKit
 
 let kHelperTextForFilteredStudiesNotFound = NSLocalizedStrings("Sorry, no Studies found. Please try different Filter Options", comment: "")
-let kHelperTextForSearchedStudiesNotFound = NSLocalizedStrings("Sorry, no Studies found. Please check the spelling or try a different search.", comment: "")
+let kHelperTextForSearchedStudiesNotFound =
+    NSLocalizedStrings("Sorry, no Studies found. Please check the spelling or try a different search.",
+                       comment: "")
 
-let kHelperTextForOffline = NSLocalizedStrings("Sorry, no studies available right now. Please remain signed in to get notified when there are new studies available.", comment: "")
+let kHelperTextForOffline =
+    NSLocalizedStrings("Sorry, no studies available right now. Please remain signed in to get notified when there are new studies available.",
+                       comment: "")
 
 let kNotificationViewControllerIdentifier = "NotificationViewControllerIdentifier"
 
@@ -260,7 +264,8 @@ class StudyListViewController: UIViewController {
             }
 
             if daysLastSeen >= 7 { // Notification is disabled for 7 or more Days
-              UIUtilities.showAlertWithTitleAndMessage(title: NSLocalizedStrings(Branding.productTitle, comment: "") as NSString, message: kMessageAppNotificationOffRemainder as NSString)
+              UIUtilities.showAlertWithTitleAndMessage(title: NSLocalizedStrings(Branding.productTitle, comment: "") as NSString,
+                                                       message: kMessageAppNotificationOffRemainder as NSString)
 
                 ud.set(Date(), forKey: "NotificationRemainder")
                 ud.synchronize()
@@ -325,7 +330,8 @@ class StudyListViewController: UIViewController {
      */
     func navigateToNotifications() {
         let gatewayStoryBoard = UIStoryboard(name: kStoryboardIdentifierGateway, bundle: Bundle.main)
-        let notificationController = (gatewayStoryBoard.instantiateViewController(withIdentifier: kNotificationViewControllerIdentifier) as? NotificationViewController)!
+        let notificationController = (gatewayStoryBoard.instantiateViewController(withIdentifier: kNotificationViewControllerIdentifier)
+                                        as? NotificationViewController)!
         navigationController?.pushViewController(notificationController, animated: true)
     }
 
@@ -334,7 +340,9 @@ class StudyListViewController: UIViewController {
      */
     func navigateToStudyHome() {
         let studyStoryBoard = UIStoryboard(name: kStudyStoryboard, bundle: Bundle.main)
-        let studyHomeController = (studyStoryBoard.instantiateViewController(withIdentifier: String(describing: StudyHomeViewController.classForCoder())) as? StudyHomeViewController)!
+        let studyHomeController =
+            (studyStoryBoard.instantiateViewController(withIdentifier: String(describing: StudyHomeViewController.classForCoder()))
+                as? StudyHomeViewController)!
         studyHomeController.delegate = self
         navigationController?.pushViewController(studyHomeController, animated: true)
     }
@@ -345,7 +353,8 @@ class StudyListViewController: UIViewController {
     func pushToStudyDashboard(animated: Bool = true) {
         let studyStoryBoard = UIStoryboard(name: kStudyStoryboard, bundle: Bundle.main)
 
-        let studyDashboard = (studyStoryBoard.instantiateViewController(withIdentifier: kStudyDashboardTabbarControllerIdentifier) as? StudyDashboardTabbarViewController)!
+        let studyDashboard = (studyStoryBoard.instantiateViewController(withIdentifier: kStudyDashboardTabbarControllerIdentifier)
+                                as? StudyDashboardTabbarViewController)!
 
         navigationController?.navigationBar.isHidden = true
         navigationController?.pushViewController(studyDashboard, animated: animated)
@@ -406,9 +415,17 @@ class StudyListViewController: UIViewController {
                     let previousCollectionData = StudyFilterHandler.instance.previousAppliedFilters
 
                     if User.currentUser.userType == .FDAUser {
-                        self.appliedFilter(studyStatus: previousCollectionData.first!, pariticipationsStatus: previousCollectionData[2], categories: previousCollectionData[3], searchText: "", bookmarked: previousCollectionData[1].count > 0 ? true : false) // TBD: Crashed 
+                        self.appliedFilter(studyStatus: previousCollectionData.first!,
+                                           pariticipationsStatus: previousCollectionData[2],
+                                           categories: previousCollectionData[3],
+                                           searchText: "",
+                                           bookmarked: previousCollectionData[1].count > 0 ? true : false) // TBD: Crashed
                     } else {
-                        self.appliedFilter(studyStatus: previousCollectionData.first!, pariticipationsStatus: [], categories: previousCollectionData[1], searchText: "", bookmarked: false)
+                        self.appliedFilter(studyStatus: previousCollectionData.first!,
+                                           pariticipationsStatus: [],
+                                           categories: previousCollectionData[1],
+                                           searchText: "",
+                                           bookmarked: false)
                     }
                 } else {
                     let appDelegate = (UIApplication.shared.delegate as? AppDelegate)!
@@ -418,7 +435,11 @@ class StudyListViewController: UIViewController {
                     // using default Filters
                     let filterStrings = appDelegate.getDefaultFilterStrings()
 
-                    self.appliedFilter(studyStatus: filterStrings.studyStatus, pariticipationsStatus: filterStrings.pariticipationsStatus, categories: filterStrings.categories, searchText: filterStrings.searchText, bookmarked: filterStrings.bookmark)
+                    self.appliedFilter(studyStatus: filterStrings.studyStatus,
+                                       pariticipationsStatus: filterStrings.pariticipationsStatus,
+                                       categories: filterStrings.categories,
+                                       searchText: filterStrings.searchText,
+                                       bookmarked: filterStrings.bookmark)
                 }
                 self.checkIfFetelKickCountRunning()
             } else {
@@ -802,7 +823,10 @@ extension StudyListViewController: StudyFilterDelegates {
         var searchTextFilteredStudies: [Study]! = []
         if searchText.count > 0 {
             searchTextFilteredStudies = allStudyList.filter {
-              ($0.name?.containsIgnoringCase(searchText))! || (replaceFirstString($0.category ?? "").containsIgnoringCase(searchText)) || ($0.description?.containsIgnoringCase(searchText))! || ($0.sponserName?.containsIgnoringCase(searchText))!
+              ($0.name?.containsIgnoringCase(searchText))! ||
+                (replaceFirstString($0.category ?? "").containsIgnoringCase(searchText)) ||
+                ($0.description?.containsIgnoringCase(searchText))! ||
+                ($0.sponserName?.containsIgnoringCase(searchText))!
             }
         }
 
@@ -850,7 +874,8 @@ extension StudyListViewController: StudyFilterDelegates {
         if statusFilteredSet.count > 0, bookMarkAndCategorySet.count > 0 {
             allFilteredSet = statusFilteredSet.intersection(bookMarkAndCategorySet)
         } else {
-            if (statusFilteredSet.count > 0 && (bookmarked == true || categories.count > 0)) || (bookMarkAndCategorySet.count > 0 && (pariticipationsStatus.count > 0 || studyStatus.count > 0)) {
+            if (statusFilteredSet.count > 0 && (bookmarked == true || categories.count > 0))
+                || (bookMarkAndCategorySet.count > 0 && (pariticipationsStatus.count > 0 || studyStatus.count > 0)) {
                 allFilteredSet = bookMarkAndCategorySet.intersection(statusFilteredSet)
             } else {
                 allFilteredSet = statusFilteredSet.union(bookMarkAndCategorySet)
@@ -1021,9 +1046,16 @@ extension StudyListViewController: searchBarDelegate {
 
                 // Apply Filters
                 if User.currentUser.userType == .FDAUser {
-                    appliedFilter(studyStatus: previousCollectionData.first!, pariticipationsStatus: previousCollectionData[2], categories: previousCollectionData[3], searchText: "", bookmarked: previousCollectionData[1].count > 0 ? true : false)
+                    appliedFilter(studyStatus: previousCollectionData.first!,
+                                  pariticipationsStatus: previousCollectionData[2],
+                                  categories: previousCollectionData[3], searchText: "",
+                                  bookmarked: previousCollectionData[1].count > 0 ? true : false)
                 } else {
-                    appliedFilter(studyStatus: previousCollectionData.first!, pariticipationsStatus: [], categories: previousCollectionData[1], searchText: "", bookmarked: false)
+                    appliedFilter(studyStatus: previousCollectionData.first!,
+                                  pariticipationsStatus: [],
+                                  categories: previousCollectionData[1],
+                                  searchText: "",
+                                  bookmarked: false)
                 }
             } else {
                 let appDelegate = (UIApplication.shared.delegate as? AppDelegate)!
@@ -1031,7 +1063,11 @@ extension StudyListViewController: searchBarDelegate {
                 if StudyFilterHandler.instance.filterOptions.count > 0 {
                     // setting default Filters
                     let filterStrings = appDelegate.getDefaultFilterStrings()
-                    appliedFilter(studyStatus: filterStrings.studyStatus, pariticipationsStatus: filterStrings.pariticipationsStatus, categories: filterStrings.categories, searchText: filterStrings.searchText, bookmarked: filterStrings.bookmark)
+                    appliedFilter(studyStatus: filterStrings.studyStatus,
+                                  pariticipationsStatus: filterStrings.pariticipationsStatus,
+                                  categories: filterStrings.categories,
+                                  searchText: filterStrings.searchText,
+                                  bookmarked: filterStrings.bookmark)
                 }
             }
         }
@@ -1068,7 +1104,11 @@ extension StudyListViewController: searchBarDelegate {
                 if StudyFilterHandler.instance.filterOptions.count > 0 {
                     let filterStrings = appDelegate.getDefaultFilterStrings()
                     
-                    appliedFilter(studyStatus: filterStrings.studyStatus, pariticipationsStatus: filterStrings.pariticipationsStatus, categories: filterStrings.categories, searchText: filterStrings.searchText, bookmarked: filterStrings.bookmark)
+                    appliedFilter(studyStatus: filterStrings.studyStatus,
+                                  pariticipationsStatus: filterStrings.pariticipationsStatus,
+                                  categories: filterStrings.categories,
+                                  searchText: filterStrings.searchText,
+                                  bookmarked: filterStrings.bookmark)
                 }
             }
             
@@ -1078,7 +1118,10 @@ extension StudyListViewController: searchBarDelegate {
                 if studyId.isEmpty {
                     
                     searchTextFilteredStudies = studiesList.filter {
-                      ($0.name?.containsIgnoringCase(text))! || (replaceFirstString($0.category ?? "").containsIgnoringCase(text)) || ($0.description?.containsIgnoringCase(text))! || ($0.sponserName?.containsIgnoringCase(text))!
+                      ($0.name?.containsIgnoringCase(text))! ||
+                        (replaceFirstString($0.category ?? "").containsIgnoringCase(text)) ||
+                        ($0.description?.containsIgnoringCase(text))! ||
+                        ($0.sponserName?.containsIgnoringCase(text))!
                     }
                     
                     StudyFilterHandler.instance.searchText = text
@@ -1115,7 +1158,11 @@ extension StudyListViewController: searchBarDelegate {
             if StudyFilterHandler.instance.filterOptions.count > 0 {
                 let filterStrings = appDelegate.getDefaultFilterStrings()
                 
-                appliedFilter(studyStatus: filterStrings.studyStatus, pariticipationsStatus: filterStrings.pariticipationsStatus, categories: filterStrings.categories, searchText: filterStrings.searchText, bookmarked: filterStrings.bookmark)
+                appliedFilter(studyStatus: filterStrings.studyStatus,
+                              pariticipationsStatus: filterStrings.pariticipationsStatus,
+                              categories: filterStrings.categories,
+                              searchText: filterStrings.searchText,
+                              bookmarked: filterStrings.bookmark)
             }
         }
         
@@ -1224,7 +1271,11 @@ extension StudyListViewController: NMWebServiceDelegate {
         appdelegate.window?.removeProgressIndicatorFromWindow()
 
         if error.code == 403 { // unauthorized Access
-            UIUtilities.showAlertMessageWithActionHandler(kErrorTitle, message: error.localizedDescription, buttonTitle: kTitleOk, viewControllerUsed: self, action: {
+            UIUtilities.showAlertMessageWithActionHandler(kErrorTitle,
+                                                          message: error.localizedDescription,
+                                                          buttonTitle: kTitleOk,
+                                                          viewControllerUsed: self,
+                                                          action: {
                 self.fdaSlideMenuController()?.navigateToHomeAfterUnauthorizedAccess()
             })
         } else {
@@ -1255,7 +1306,8 @@ extension StudyListViewController: NMWebServiceDelegate {
                     refreshControl?.endRefreshing()
                 }
                 let errorMsg = base64DecodeError(error.localizedDescription)
-                UIUtilities.showAlertWithTitleAndMessage(title: NSLocalizedStrings(kErrorTitle, comment: "") as NSString, message: errorMsg as NSString)
+                UIUtilities.showAlertWithTitleAndMessage(title: NSLocalizedStrings(kErrorTitle, comment: "") as NSString,
+                                                         message: errorMsg as NSString)
             }
         }
     }
@@ -1282,7 +1334,9 @@ extension StudyListViewController: ORKTaskViewControllerDelegate {
         return true
     }
 
-    public func taskViewController(_ taskViewController: ORKTaskViewController, didFinishWith reason: ORKTaskViewControllerFinishReason, error _: Error?) {
+    public func taskViewController(_ taskViewController: ORKTaskViewController,
+                                   didFinishWith reason: ORKTaskViewControllerFinishReason,
+                                   error _: Error?) {
         var taskResult: Any?
         switch reason {
         case ORKTaskViewControllerFinishReason.completed:

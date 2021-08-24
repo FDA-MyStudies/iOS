@@ -50,11 +50,21 @@ let kTitleOKCapital = NSLocalizedStrings("OK", comment: "")
 let kTitleOk1 = NSLocalizedStrings("Ok1", comment: "")
 let kTitleCancel = NSLocalizedStrings("Cancel", comment: "")
 let kTitleDeleteAccount = NSLocalizedStrings("Delete Account", comment: "")
-let kRegistrationInfoMessage = NSLocalizedStrings("Registration (or sign up) for the app  is requested only to provide you with a seamless experience of using the app. Your registration information does not become part of the data collected for any study(ies) housed in the app. Each study has its own consent process and your data for the study will not be collected without you providing your informed consent prior to joining the study.", comment: "")
+let valRegMes1 =
+  "Registration (or sign up) for the app  is requested only to provide you with a seamless experience of using the app. Your registration "
+let valRegMes2 =
+  "information does not become part of the data collected for any study(ies) housed in the app. Each study has its own consent process and your data"
+let valRegMes3 =
+  " for the study will not be collected without you providing your informed consent prior to joining the study."
+let kRegistrationInfoMessage = NSLocalizedStrings("\(valRegMes1 + valRegMes2 + valRegMes3)", comment: "")
 
-let kDeleteAccountConfirmationMessage = NSLocalizedStrings("Are you sure you wish to permanently delete your #APPNAME# account? You will need to register again if you wish to join a study.", comment: "")
+let kDeleteAccountConfirmationMessage = NSLocalizedStrings(
+  "Are you sure you wish to permanently delete your #APPNAME# account? You will need to register again if you wish to join a study.",
+                       comment: "")
 let kMessageAccountDeletedSuccess = NSLocalizedStrings("Account has been deleted", comment: "")
-let kMessageAppNotificationOffRemainder = NSLocalizedStrings("Stay up-to-date! Turn ON notifications and reminders in app and phone settings to get notified about study activity in a timely manner.", comment: "")
+let kMessageAppNotificationOffRemainder = NSLocalizedStrings(
+  "Stay up-to-date! Turn ON notifications and reminders in app and phone settings to get notified about study activity in a timely manner.",
+                       comment: "")
 let kAuthenticationRequired = NSLocalizedStrings("Authentication Required", comment: "")
 
 // MARK:- Signin Constants
@@ -65,7 +75,9 @@ let kSignInTableViewCellIdentifier = "DetailsCell"
 
 // MARK:- ForgotPassword Constants
 let kForgotPasswordTitleText = NSLocalizedStrings("PASSWORD HELP", comment: "")
-let kForgotPasswordResponseMessage = NSLocalizedStrings("We have sent a temporary password to your registered email. Please login with temporary password and change your password.", comment: "")
+let kForgotPasswordResponseMessage =
+    NSLocalizedStrings("We have sent a temporary password to your registered email. Please login with temporary password and change your password.",
+                       comment: "")
 
 // MARK:- SignUp Constants
 let kSignUpTitleText = NSLocalizedStrings("SIGN UP", comment: "")
@@ -103,7 +115,11 @@ let kMessageProfileValidatePasswords = NSLocalizedStrings("New password and conf
 
 
 let kMessageValidatePasswordCharacters = NSLocalizedStrings("Password should have minimum of 8 characters.", comment: "")
-let kMessageValidatePasswordComplexity = NSLocalizedStrings("Your password MUST be 8-64 characters and contain each of the following: An uppercase letter, A lower case letter, A number 0-9, a special character: \\ ! # % & ‘ () * + , - . : < > = ? @ [] ^ _ { } | ~ *", comment: "")
+let valPasComplx1 = "Your password MUST be 8-64 characters and contain each of the following: An uppercase letter, A lower case letter,"
+let valPasComplx2 = " A number 0-9, a special character: \\ ! # % & ‘ () * + , - . : < > = ? @ [] ^ _ { } | ~ *"
+let kMessageValidatePasswordComplexity = NSLocalizedStrings(
+  "\(valPasComplx1)\(valPasComplx2)",
+  comment: "")
 let kMessageAgreeToTermsAndConditions = NSLocalizedStrings("Please agree to terms and conditions.", comment: "")
 
 let kMessageNewPasswordBlank = NSLocalizedStrings("Please enter your new password.", comment: "")
@@ -134,7 +150,9 @@ let kMessageFeedbackSubmittedSuccessfuly = NSLocalizedStrings("Thank you for pro
 let kContactUsTableViewCellIdentifier = "ContactUsCell"
 let kMessageSubjectBlankCheck = NSLocalizedStrings("Please enter subject", comment: "")
 let kMessageMessageBlankCheck = NSLocalizedStrings("Please enter message", comment: "")
-let kMessageContactedSuccessfuly = NSLocalizedStrings("Thank you for contacting us. We will get back to you on your email address at the earliest.", comment: "")
+let kMessageContactedSuccessfuly =
+    NSLocalizedStrings("Thank you for contacting us. We will get back to you on your email address at the earliest.",
+                       comment: "")
 let kMessageTextViewPlaceHolder = ""
 
 
@@ -184,7 +202,9 @@ let kPullToRefresh = NSLocalizedStrings("Pull to refresh", comment: "")
 let kTheStudy = NSLocalizedStrings("The study ", comment: "")
 let k100PercentComplete = NSLocalizedStrings(" is 100 percent complete. Thank you for your participation.", comment: "")
 let kNoticedMissedActivity = NSLocalizedStrings("We noticed you missed an activity in ", comment: "")
-let kEncourageCompleteStudy = NSLocalizedStrings(" today. That’s Ok! We know you’re busy, but we encourage you to complete study activities before they expire.", comment: "")
+let kEncourageCompleteStudy =
+    NSLocalizedStrings(" today. That’s Ok! We know you’re busy, but we encourage you to complete study activities before they expire.",
+                       comment: "")
 
 // MARK:- Eligibility constants
 
@@ -193,16 +213,25 @@ let kMessageForInvalidToken = NSLocalizedStrings("Please enter valid enrollment 
 let kMessageValidToken = NSLocalizedStrings("Please enter valid token", comment: "")
 let kMessageForMissingStudyId = NSLocalizedStrings("Unable to Enroll, Please try again later.", comment: "")
 
-let kMessageInvalidTokenOrIfStudyDoesNotExist = NSLocalizedStrings("Sorry, this token is invalid. Please enter a valid token to continue.", comment: "")
+let kMessageInvalidTokenOrIfStudyDoesNotExist =
+    NSLocalizedStrings("Sorry, this token is invalid. Please enter a valid token to continue.",
+                       comment: "")
 
 
 // MARK:- StudyHomeMessages
-let kMessageForStudyUpcomingState = NSLocalizedStrings("This study is an upcoming one and isn't yet open for enrolling participants. Please check back later.", comment: "")
+let kMessageForStudyUpcomingState =
+    NSLocalizedStrings("This study is an upcoming one and isn't yet open for enrolling participants. Please check back later.",
+                       comment: "")
 let kMessageForStudyPausedState = NSLocalizedStrings("This study has been temporarily paused. Please check back later.", comment: "")
-let kMessageForStudyPausedAfterJoiningState = NSLocalizedStrings("The study has been temporarily paused. You can participate in activities once it is resumed. Please check back later.", comment: "")
+let kMessageForStudyPausedAfterJoiningState =
+    NSLocalizedStrings("The study has been temporarily paused. You can participate in activities once it is resumed. Please check back later.",
+                       comment: "")
 let kMessageForStudyClosedState = NSLocalizedStrings("This study has been closed.", comment: "")
-let kMessageForStudyWithdrawnState = NSLocalizedStrings("Sorry, this study currently does not allow previously enrolled participants to rejoin the study after they have withdrawn from the study. Please check back later or explore other studies", comment: "")
-let kMessageForStudyEnrollingNotAllowed = NSLocalizedStrings("Sorry, enrollment for this study has been closed for now. Please check back later or explore other studies you could join.", comment: "")
+let valWithdrawnState1 = "Sorry, this study currently does not allow previously enrolled participants to rejoin the study after they have"
+let valWithdrawnState2 = " withdrawn from the study. Please check back later or explore other studies"
+let kMessageForStudyWithdrawnState = NSLocalizedStrings("\(valWithdrawnState1)\(valWithdrawnState2)", comment: "")
+let kMessageForStudyEnrollingNotAllowed = NSLocalizedStrings(
+  "Sorry, enrollment for this study has been closed for now. Please check back later or explore other studies you could join.", comment: "")
 let kEnterToken =  NSLocalizedStrings("Enter a token", comment: "")
 let kEnterKeyword =  NSLocalizedStrings("Enter keyword(s)", comment: "")
 

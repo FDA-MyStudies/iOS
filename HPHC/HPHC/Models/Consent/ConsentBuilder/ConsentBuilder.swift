@@ -190,8 +190,7 @@ class ConsentBuilder {
                 let valAdditionalSign = reviewConsent?.additionalSignature ?? "No"
                 if valAdditionalSign.caseInsensitiveCompare("yes") == .orderedSame {
                   isAdditionalSign = true
-                }
-                else {
+                } else {
                   isAdditionalSign = false
                 }
                 
@@ -255,7 +254,9 @@ class ConsentBuilder {
                 consentDocument.sections?.append(contentsOf: consentSectionArray)
             }
 
-            let investigatorSignature = ORKConsentSignature(forPersonWithTitle: kConsentSignaturePageTitle, dateFormatString: "MM/dd/YYYY", identifier: "Signature")
+            let investigatorSignature = ORKConsentSignature(forPersonWithTitle: kConsentSignaturePageTitle,
+                                                            dateFormatString: "MM/dd/YYYY",
+                                                            identifier: "Signature")
 
             consentDocument.addSignature(investigatorSignature)
             return consentDocument
@@ -298,7 +299,9 @@ class ConsentBuilder {
             consentDocument?.signaturePageContent = kSignaturePageContentText
 
             // Initialize review Step
-            reviewConsentStep = ConsentReviewStep(identifier: kReviewIdentifier, signature: (getConsentDocument() as ORKConsentDocument).signatures?[0], in: getConsentDocument())
+            reviewConsentStep = ConsentReviewStep(identifier: kReviewIdentifier,
+                                                  signature: (getConsentDocument() as ORKConsentDocument).signatures?[0],
+                                                  in: getConsentDocument())
 
         } else {
             // create Consent Document
@@ -306,7 +309,9 @@ class ConsentBuilder {
             consentDocument?.signaturePageContent = kSignaturePageContentText
 
             // Initialize review Step
-            reviewConsentStep = ConsentReviewStep(identifier: kReviewIdentifier, signature: consentDocument?.signatures?[0], in: consentDocument!)
+            reviewConsentStep = ConsentReviewStep(identifier: kReviewIdentifier,
+                                                  signature: consentDocument?.signatures?[0],
+                                                  in: consentDocument!)
         }
 
         if Utilities.isValidValue(someObject: reviewConsent?.signatureTitle as AnyObject) {
@@ -332,7 +337,10 @@ class ConsentBuilder {
             Utilities.isValidValue(someObject: sharingConsent?.longDesc as AnyObject),
             Utilities.isValidValue(someObject: sharingConsent?.learnMore as AnyObject) {
             // create shareStep
-            let sharingConsentStep = ConsentSharingStep(identifier: kConsentSharing, investigatorShortDescription: (sharingConsent?.shortDesc)!, investigatorLongDescription: (sharingConsent?.longDesc)!, localizedLearnMoreHTMLContent: (sharingConsent?.learnMore)!)
+            let sharingConsentStep = ConsentSharingStep(identifier: kConsentSharing,
+                                                        investigatorShortDescription: (sharingConsent?.shortDesc)!,
+                                                        investigatorLongDescription: (sharingConsent?.longDesc)!,
+                                                        localizedLearnMoreHTMLContent: (sharingConsent?.learnMore)!)
 
             if Utilities.isValidValue(someObject: sharingConsent?.text as AnyObject) {
                 sharingConsentStep.text = sharingConsent?.text
@@ -508,15 +516,22 @@ class ConsentBuilder {
         defaultIdentifierStr = kConsentSharing
       }
       
-      let predicate1 = ORKResultPredicate.predicateForChoiceQuestionResult(with: ORKResultSelector(resultIdentifier: kLARConsentStep), expectedAnswerValue: "Choice_1" as NSCoding & NSCopying & NSObjectProtocol)
+      let predicate1 = ORKResultPredicate.predicateForChoiceQuestionResult(with: ORKResultSelector(resultIdentifier: kLARConsentStep),
+                                                                           expectedAnswerValue: "Choice_1"
+                                                                            as NSCoding & NSCopying & NSObjectProtocol)
       
-      //Mutiple Predicates
-      let predicate2 = ORKResultPredicate.predicateForChoiceQuestionResult(with: ORKResultSelector(resultIdentifier: kLARConsentStep), expectedAnswerValue: "Choice_2" as NSCoding & NSCopying & NSObjectProtocol)
+      // Mutiple Predicates
+      let predicate2 = ORKResultPredicate.predicateForChoiceQuestionResult(with: ORKResultSelector(resultIdentifier: kLARConsentStep),
+                                                                           expectedAnswerValue: "Choice_2"
+                                                                            as NSCoding & NSCopying & NSObjectProtocol)
       
       let predi = [predicate2, predicate1]
       let desti = [kLARConsentParticipantStep, defaultIdentifierStr]
       
-      return ORKPredicateStepNavigationRule(resultPredicates: predi, destinationStepIdentifiers: desti, defaultStepIdentifier: defaultIdentifierStr, validateArrays: true)
+      return ORKPredicateStepNavigationRule(resultPredicates: predi,
+                                            destinationStepIdentifiers: desti,
+                                            defaultStepIdentifier: defaultIdentifierStr,
+                                            validateArrays: true)
       
     }
 }

@@ -120,7 +120,7 @@ class ResourcesDetailViewController: UIViewController {
     func startDownloadingfile() {
         
         if !FileManager.default.fileExists(atPath: resourcesDownloadPath) {
-            try! FileManager.default.createDirectory(atPath: resourcesDownloadPath, withIntermediateDirectories: true, attributes: nil)
+            try? FileManager.default.createDirectory(atPath: resourcesDownloadPath, withIntermediateDirectories: true, attributes: nil)
         }
         debugPrint("custom download path: \(resourcesDownloadPath)")
         

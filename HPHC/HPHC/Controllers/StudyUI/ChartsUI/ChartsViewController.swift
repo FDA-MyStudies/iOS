@@ -21,7 +21,9 @@ OTHER DEALINGS IN THE SOFTWARE.
 import UIKit
 
 
-let kMessageForSharingCharts = NSLocalizedStrings("This action will create a shareable image file of the charts currently seen in this section. Proceed?", comment: "")
+let kMessageForSharingCharts =
+    NSLocalizedStrings("This action will create a shareable image file of the charts currently seen in this section. Proceed?",
+                       comment: "")
 
 class ChartsViewController: UIViewController {
 
@@ -58,8 +60,11 @@ class ChartsViewController: UIViewController {
         
         if StudyDashboard.instance.charts.count > 0{
             
-            UIUtilities.showAlertMessageWithTwoActionsAndHandler(kTitleMessage, errorMessage: kMessageForSharingCharts, errorAlertActionTitle: kTitleOKCapital,
-                                                                 errorAlertActionTitle2: kTitleCancel, viewControllerUsed: self,
+            UIUtilities.showAlertMessageWithTwoActionsAndHandler(kTitleMessage,
+                                                                 errorMessage: kMessageForSharingCharts,
+                                                                 errorAlertActionTitle: kTitleOKCapital,
+                                                                 errorAlertActionTitle2: kTitleCancel,
+                                                                 viewControllerUsed: self,
                                                                  action1: {
                                                                     
                                                                     self.shareScreenShotByMail()
@@ -93,7 +98,9 @@ class ChartsViewController: UIViewController {
         tableView.contentOffset = savedContentOffset
         tableView.frame = savedFrame
         
-        (self.tabBarController as! StudyDashboardTabbarViewController).shareScreenshotByEmail(image: image, subject: kEmailSubjectCharts,fileName: kEmailSubjectCharts)
+        (self.tabBarController as! StudyDashboardTabbarViewController).shareScreenshotByEmail(image: image,
+                                                                                              subject: kEmailSubjectCharts,
+                                                                                              fileName: kEmailSubjectCharts)
     
     }
     

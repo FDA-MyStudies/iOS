@@ -21,11 +21,17 @@ OTHER DEALINGS IN THE SOFTWARE.
 import UIKit
 
 let kConfirmationSegueIdentifier = "confirmationSegue"
-let kHeaderDescription = NSLocalizedStrings("You have chosen to delete your #APPNAME# Account. This will result in automatic withdrawal from all studies.\nBelow is a list of studies that you are a part of and information on how your response data will be handled with each after you withdraw. Please review and confirm.", comment: "")
+let valH1 = "You have chosen to delete your #APPNAME# Account. This will result in automatic withdrawal from all studies"
+let valH2 = ".\nBelow is a list of studies that you are a part of and information on how your response data will "
+let valH3 = "be handled with each after you withdraw. Please review and confirm."
+let kHeaderDescription = NSLocalizedStrings("\(valH1)\(valH2)\(valH3)", comment: "")
 
-let kHeaderDescriptionStandalone = NSLocalizedStrings("You have chosen to delete your #APPNAME# Account. This will result in automatic withdrawal from study.\nBelow is the study that you are a part of and information on how your response data will be handled after you withdraw. Please review and confirm.", comment: "")
+let valHDes1 = "You have chosen to delete your #APPNAME# Account. This will result in automatic withdrawal from study.\nBelow is the study "
+let valHDes2 = "that you are a part of and information on how your response data will be handled after you withdraw. Please review and confirm."
+let kHeaderDescriptionStandalone = NSLocalizedStrings("\(valHDes1)\(valHDes2)", comment: "")
 
-let kConfirmWithdrawlSelectOptionsAlert = NSLocalizedStrings("Please select an option between Delete Data or Retain Data for all studies.", comment: "")
+let kConfirmWithdrawlSelectOptionsAlert =
+    NSLocalizedStrings("Please select an option between Delete Data or Retain Data for all studies.", comment: "")
 let kResponseDataDeletedText = NSLocalizedStrings("Response data will be deleted", comment: "")
 let kResponseDataRetainedText = NSLocalizedStrings("Response data will be retained", comment: "")
 
@@ -223,7 +229,10 @@ class ConfirmationViewController: UIViewController {
         if studiesToWithdrawn.count != 0 {
             
             let studyToWithdrawn = studiesToWithdrawn.first
-            LabKeyServices().withdrawFromStudy(studyId: (studyToWithdrawn?.studyId)!, participantId: (studyToWithdrawn?.participantId)!, deleteResponses: (studyToWithdrawn?.shouldDelete)!, delegate: self)
+            LabKeyServices().withdrawFromStudy(studyId: (studyToWithdrawn?.studyId)!,
+                                               participantId: (studyToWithdrawn?.participantId)!,
+                                               deleteResponses: (studyToWithdrawn?.shouldDelete)!,
+                                               delegate: self)
         }else {
             //call for delete account
             
@@ -254,7 +263,8 @@ extension ConfirmationViewController: UITableViewDataSource {
         let study = studiesToDisplay[indexPath.row]
         if study.withdrawalConfigration?.type == StudyWithdrawalConfigrationType.askUser {
             
-            let  cell = tableView.dequeueReusableCell(withIdentifier: kConfrimationOptionalCellIdentifier, for: indexPath) as! ConfirmationOptionalTableViewCell
+            let  cell = tableView.dequeueReusableCell(withIdentifier: kConfrimationOptionalCellIdentifier, for: indexPath)
+                as! ConfirmationOptionalTableViewCell
             cell.delegate = self
             cell.study = study
             
@@ -323,7 +333,11 @@ extension ConfirmationViewController: NMWebServiceDelegate {
         
         if error.code == 403 { //unauthorized
             self.removeProgressIndicator()
-            UIUtilities.showAlertMessageWithActionHandler(kErrorTitle, message: error.localizedDescription, buttonTitle: kTitleOk, viewControllerUsed: self, action: {
+            UIUtilities.showAlertMessageWithActionHandler(kErrorTitle,
+                                                          message: error.localizedDescription,
+                                                          buttonTitle: kTitleOk,
+                                                          viewControllerUsed: self,
+                                                          action: {
                 self.fdaSlideMenuController()?.navigateToHomeAfterUnauthorizedAccess()
             })
             
@@ -342,11 +356,9 @@ extension ConfirmationViewController: NMWebServiceDelegate {
             }else {
                 self.removeProgressIndicator()
                 let errorMsg = base64DecodeError(error.localizedDescription)
-                UIUtilities.showAlertWithTitleAndMessage(title: NSLocalizedStrings(kErrorTitle, comment: "") as NSString, message: errorMsg as NSString)
+                UIUtilities.showAlertWithTitleAndMessage(title: NSLocalizedStrings(kErrorTitle, comment: "") as NSString,
+                                                         message: errorMsg as NSString)
             }
         }
     }
 }
-
-
-

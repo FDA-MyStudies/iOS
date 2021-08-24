@@ -88,7 +88,9 @@ class ActivityFormStep: ActivityStep {
                     
                     let orkQuestionStep:ORKQuestionStep = (questionStep?.getQuestionStep())!
                     
-                    let formItem01 = ORKFormItem(identifier: orkQuestionStep.identifier, text: orkQuestionStep.question, answerFormat: orkQuestionStep.answerFormat)
+                    let formItem01 = ORKFormItem(identifier: orkQuestionStep.identifier,
+                                                 text: orkQuestionStep.question,
+                                                 answerFormat: orkQuestionStep.answerFormat)
                     formItem01.placeholder = orkQuestionStep.placeholder == nil ? "" :  orkQuestionStep.placeholder
                     formItem01.isOptional = (questionStep?.skippable)!
                     formItemsArray.append(formItem01)

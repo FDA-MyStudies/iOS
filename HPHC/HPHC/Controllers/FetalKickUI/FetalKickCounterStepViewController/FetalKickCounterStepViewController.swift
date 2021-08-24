@@ -117,7 +117,7 @@ class FetalKickCounterStepViewController:  ORKStepViewController {
         
            
                 if differenceInSec >= 0 {
-                    initialTime =   initialTime + differenceInSec
+                    initialTime += differenceInSec
                 }
                 
                 print("difference \(differenceInSec)")
@@ -373,8 +373,11 @@ class FetalKickCounterStepViewController:  ORKStepViewController {
         let timeConsumed = (self.timerLabel?.text!)
         let message = kConfirmMessage + "\(self.kickCounter!) kicks in " + "\(timeConsumed!)." + kConfirmMessage2
         
-        UIUtilities.showAlertMessageWithTwoActionsAndHandler(kTitleMessage, errorMessage: NSLocalizedStrings(message, comment: ""), errorAlertActionTitle: kProceedTitle,
-                                                             errorAlertActionTitle2: kTitleCancel, viewControllerUsed: self,
+        UIUtilities.showAlertMessageWithTwoActionsAndHandler(kTitleMessage,
+                                                             errorMessage: NSLocalizedStrings(message, comment: ""),
+                                                             errorAlertActionTitle: kProceedTitle,
+                                                             errorAlertActionTitle2: kTitleCancel,
+                                                             viewControllerUsed: self,
                                                              action1: {
                                                                 
                                                    self.goForward()
@@ -400,7 +403,11 @@ class FetalKickCounterStepViewController:  ORKStepViewController {
             if self.timer == nil {
                 // first time
                 
-                self.timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(FetalKickCounterStepViewController.setCounter), userInfo: nil, repeats: true)
+                self.timer = Timer.scheduledTimer(timeInterval: 1,
+                                                  target: self,
+                                                  selector: #selector(FetalKickCounterStepViewController.setCounter),
+                                                  userInfo: nil,
+                                                  repeats: true)
                 
                 //save start time stamp
                 let ud = UserDefaults.standard
@@ -570,7 +577,9 @@ extension FetalKickCounterStepViewController: UITextFieldDelegate {
     func textFieldDidEndEditing(_ textField: UITextField) {
         
         
-        if textField == counterTextField! && ( Utilities.isValidValue(someObject: counterTextField?.text as AnyObject?) == false || Int((counterTextField?.text)!)! <= 0) {
+        if textField == counterTextField! &&
+            ( Utilities.isValidValue(someObject: counterTextField?.text as AnyObject?) ==
+                false || Int((counterTextField?.text)!)! <= 0) {
             counterTextField?.resignFirstResponder()
             if textField.text?.count == 0 || (Int((counterTextField?.text)!) != nil) {
                 textField.text = "000"

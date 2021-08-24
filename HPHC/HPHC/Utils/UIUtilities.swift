@@ -183,7 +183,8 @@ class UIUtilities: NSObject {
         
         var jsonString: String!
         do{
-            let jsonData: NSData = try JSONSerialization.data(withJSONObject: mutableDic, options: JSONSerialization.WritingOptions.prettyPrinted) as NSData
+            let jsonData: NSData = try JSONSerialization.data(withJSONObject: mutableDic,
+                                                              options: JSONSerialization.WritingOptions.prettyPrinted) as NSData
             jsonString = NSString(data: jsonData as Data, encoding: String.Encoding.utf8.rawValue)! as String
         }
         catch{
@@ -196,7 +197,8 @@ class UIUtilities: NSObject {
         
         var socialMediaNamesString: String!
         do{
-            let jsonData: NSData = try JSONSerialization.data(withJSONObject: mutableArray, options: JSONSerialization.WritingOptions.prettyPrinted) as NSData
+            let jsonData: NSData = try JSONSerialization.data(withJSONObject: mutableArray,
+                                                              options: JSONSerialization.WritingOptions.prettyPrinted) as NSData
             socialMediaNamesString = NSString(data: jsonData as Data, encoding: String.Encoding.utf8.rawValue)! as String
         }
         catch{
@@ -232,7 +234,12 @@ class UIUtilities: NSObject {
         self.showAlertWithTitleAndMessage(title: "", message: alertMessage as NSString)
     }
     
-    class func showAlertMessageWithTwoActionsAndHandler(_ errorTitle: String,errorMessage : String,errorAlertActionTitle : String ,errorAlertActionTitle2: String?,viewControllerUsed : UIViewController, action1: @escaping AlertAction, action2: @escaping AlertAction){
+    class func showAlertMessageWithTwoActionsAndHandler(_ errorTitle: String,
+                                                        errorMessage : String,errorAlertActionTitle : String ,
+                                                        errorAlertActionTitle2: String?,
+                                                        viewControllerUsed : UIViewController,
+                                                        action1: @escaping AlertAction,
+                                                        action2: @escaping AlertAction){
         let alert = UIAlertController(title: errorTitle, message: errorMessage, preferredStyle:UIAlertController.Style.alert)
         
         alert.addAction(UIAlertAction(title: errorAlertActionTitle, style: UIAlertAction.Style.default, handler: { (action) in
@@ -247,7 +254,15 @@ class UIUtilities: NSObject {
         viewControllerUsed.present(alert, animated: true, completion: nil)
     }
     
-    class func showAlertMessageWithThreeActionsAndHandler(_ errorTitle : String,errorMessage : String,errorAlertActionTitle : String ,errorAlertActionTitle2 : String?,errorAlertActionTitle3 : String?,viewControllerUsed : UIViewController, action1: @escaping AlertAction, action2: @escaping AlertAction,action3: @escaping AlertAction){
+    
+    
+    class func showAlertMessageWithThreeActionsAndHandler(_ errorTitle : String,
+                                                          errorMessage : String,errorAlertActionTitle : String ,
+                                                          errorAlertActionTitle2 : String?,
+                                                          errorAlertActionTitle3 : String?,
+                                                          viewControllerUsed : UIViewController,
+                                                          action1: @escaping AlertAction,
+                                                          action2: @escaping AlertAction){
         let alert = UIAlertController(title: errorTitle, message: errorMessage, preferredStyle:UIAlertController.Style.alert)
         
         alert.addAction(UIAlertAction(title: errorAlertActionTitle, style: UIAlertAction.Style.default, handler: { (action) in
@@ -257,19 +272,36 @@ class UIUtilities: NSObject {
             alert.addAction(UIAlertAction(title: errorAlertActionTitle2, style: UIAlertAction.Style.default, handler: { (action) in
                 action2()
             }))
-        }
-        
-        if errorAlertActionTitle3 != nil {
-            alert.addAction(UIAlertAction(title: errorAlertActionTitle3, style: UIAlertAction.Style.default, handler: { (action) in
-                action3()
-            }))
-        }
-        
-        
+        }    
         viewControllerUsed.present(alert, animated: true, completion: nil)
     }
     
-    class func showAlertMessageWithActionHandler(_ title: String,message: String,buttonTitle : String ,viewControllerUsed: UIViewController, action: @escaping AlertAction){
+//    class func showAlertMessageWithThreeActionsAndHandler(_ errorTitle : String,errorMessage : String,errorAlertActionTitle : String ,errorAlertActionTitle2 : String?,errorAlertActionTitle3 : String?,viewControllerUsed : UIViewController, action1: @escaping AlertAction, action2: @escaping AlertAction,action3: @escaping AlertAction){
+//        let alert = UIAlertController(title: errorTitle, message: errorMessage, preferredStyle:UIAlertController.Style.alert)
+//
+//        alert.addAction(UIAlertAction(title: errorAlertActionTitle, style: UIAlertAction.Style.default, handler: { (action) in
+//            action1()
+//        }))
+//        if errorAlertActionTitle2 != nil {
+//            alert.addAction(UIAlertAction(title: errorAlertActionTitle2, style: UIAlertAction.Style.default, handler: { (action) in
+//                action2()
+//            }))
+//        }
+//
+//        if errorAlertActionTitle3 != nil {
+//            alert.addAction(UIAlertAction(title: errorAlertActionTitle3, style: UIAlertAction.Style.default, handler: { (action) in
+//                action3()
+//            }))
+//        }
+//
+//
+//        viewControllerUsed.present(alert, animated: true, completion: nil)
+//    }
+    
+    class func showAlertMessageWithActionHandler(_ title: String,
+                                                 message: String,
+                                                 buttonTitle : String ,
+                                                 viewControllerUsed: UIViewController, action: @escaping AlertAction){
         
         let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertController.Style.alert)
         

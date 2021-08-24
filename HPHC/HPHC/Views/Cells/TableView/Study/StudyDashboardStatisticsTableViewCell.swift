@@ -19,19 +19,14 @@ OTHER DEALINGS IN THE SOFTWARE.
  */
 
 import UIKit
-
-
-
+ 
 enum SelectedTab: String{
     case Day
     case Week
     case Month
 }
 class StudyDashboardStatisticsTableViewCell: UITableViewCell {
-    
-    
-    
-    
+     
     //Fifth cell Outlets
     @IBOutlet var statisticsCollectionView: UICollectionView?
     @IBOutlet var buttonDay: UIButton?
@@ -73,7 +68,7 @@ class StudyDashboardStatisticsTableViewCell: UITableViewCell {
         }
     }
     
-    func getWeeklyAttributedText()-> NSAttributedString{
+    func getWeeklyAttributedText() -> NSAttributedString{
         
         var startDate = startDateOfWeek
         startDate = startDate?.addingTimeInterval(24*3600)
@@ -193,9 +188,6 @@ class StudyDashboardStatisticsTableViewCell: UITableViewCell {
             let attributedStartDate: NSMutableAttributedString = NSMutableAttributedString(string: stringDate)
             attributedStartDate.addAttribute(NSAttributedString.Key.foregroundColor, value: color, range: NSMakeRange(0, 2))
             labelDateValue?.attributedText = attributedStartDate
-            
-            
-            
             let result = todaysDate.compare(Date())
             if result == .orderedSame || result == .orderedDescending{
                 self.buttonForward?.isEnabled = false
@@ -271,7 +263,7 @@ class StudyDashboardStatisticsTableViewCell: UITableViewCell {
             attributedEndDate.addAttribute(NSAttributedString.Key.foregroundColor, value: color, range: NSMakeRange(0, 2))
             attributedStartDate.append(attributedEndDate)
             
-            labelDateValue?.attributedText = attributedStartDate //stringStartDate + " - " + stringEndDate
+            labelDateValue?.attributedText = attributedStartDate // stringStartDate + " - " + stringEndDate
             
         case .Month:
             
@@ -285,9 +277,6 @@ class StudyDashboardStatisticsTableViewCell: UITableViewCell {
         
         self.statisticsCollectionView?.reloadData()
     }
-    
-    
-    
     // MARK: - FORMATERS
     private static let formatter: DateFormatter = {
         let formatter = DateFormatter()
@@ -318,7 +307,8 @@ extension StudyDashboardStatisticsTableViewCell: UICollectionViewDelegate, UICol
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: kStatisticsCollectionViewCell, for: indexPath) as! StudyDashboardStatisticsCollectionViewCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: kStatisticsCollectionViewCell, for: indexPath)
+            as! StudyDashboardStatisticsCollectionViewCell
         let stats = StudyDashboard.instance.statistics[indexPath.row]
         
         if selectedTab == .Week {
@@ -333,9 +323,5 @@ extension StudyDashboardStatisticsTableViewCell: UICollectionViewDelegate, UICol
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-        
-        
     }
-}
-
-
+} 

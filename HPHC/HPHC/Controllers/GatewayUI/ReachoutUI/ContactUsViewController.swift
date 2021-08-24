@@ -77,7 +77,8 @@ class ContactUsViewController: UIViewController{
         self.tableView?.rowHeight = UITableView.automaticDimension
         
         //Used for background tap dismiss keyboard
-        let tapGestureRecognizer: UITapGestureRecognizer = UITapGestureRecognizer.init(target: self, action: #selector(ContactUsViewController.handleTapGesture))
+        let tapGestureRecognizer: UITapGestureRecognizer =
+            UITapGestureRecognizer.init(target: self, action: #selector(ContactUsViewController.handleTapGesture))
         self.tableView?.addGestureRecognizer(tapGestureRecognizer)
          _ = ContactUsFeilds.init()
     }

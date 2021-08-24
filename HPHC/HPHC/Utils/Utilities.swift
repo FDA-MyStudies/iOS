@@ -71,7 +71,11 @@ class Utilities: NSObject {
         
     }
     
-    class func getAttributedText(plainString pstr: String, boldString bstr: String, fontSize size: CGFloat,plainFontName: String,boldFontName: String) -> NSAttributedString {
+    class func getAttributedText(plainString pstr: String,
+                                 boldString bstr: String,
+                                 fontSize size: CGFloat,
+                                 plainFontName: String,
+                                 boldFontName: String) -> NSAttributedString {
         
         let title: String = pstr + " " + bstr
         let attributedString = NSMutableAttributedString(string: title)
@@ -145,7 +149,9 @@ class Utilities: NSObject {
     class func frameForText(_ text: String, font: UIFont) -> CGSize {
         
         let attrString = NSAttributedString.init(string: text, attributes: [NSAttributedString.Key.font: font])
-        let rect = attrString.boundingRect(with: CGSize(width: MAX_WIDTH,height: MAX_HEIGHT), options: NSStringDrawingOptions.usesLineFragmentOrigin, context: nil)
+        let rect = attrString.boundingRect(with: CGSize(width: MAX_WIDTH,height: MAX_HEIGHT),
+                                           options: NSStringDrawingOptions.usesLineFragmentOrigin,
+                                           context: nil)
         let size = CGSize(width: rect.size.width, height: rect.size.height)
         return size
     }
@@ -326,7 +332,10 @@ class Utilities: NSObject {
             } else if someObject as? Bool != nil && (someObject as! Bool == true || someObject as! Bool == false){
                 return true
                 
-            } else  if someObject as? Double != nil && (someObject as? Double)?.isFinite == true && (someObject as? Double)?.isZero == false && (someObject as? Double)! > 0 {
+            } else  if someObject as? Double != nil &&
+                        (someObject as? Double)?.isFinite == true &&
+                        (someObject as? Double)?.isZero == false &&
+                        (someObject as? Double)! > 0 {
                 return true
                 
             } else if someObject as? Date != nil {
@@ -379,7 +388,9 @@ class Utilities: NSObject {
         }
         
         if (someObject is NSNull) ==  false {
-            if someObject as? Dictionary<String, Any> != nil  && (someObject as? Dictionary<String, Any>)?.isEmpty == false && ((someObject as? Dictionary<String, Any>)?.count)! > 0 {
+            if someObject as? Dictionary<String, Any> != nil  &&
+                (someObject as? Dictionary<String, Any>)?.isEmpty == false &&
+                ((someObject as? Dictionary<String, Any>)?.count)! > 0 {
                 return true
                 
             } else if someObject as? NSArray != nil && ((someObject as? NSArray)?.count)! > 0 {

@@ -25,7 +25,11 @@ import UIKit
 //Used to do filter based on Apply and Cancel actions
 protocol StudyFilterDelegates: class {
     
-    func appliedFilter(studyStatus: Array<String>, pariticipationsStatus: Array<String>, categories: Array<String> , searchText: String,bookmarked: Bool)
+    func appliedFilter(studyStatus: Array<String>,
+                       pariticipationsStatus: Array<String>,
+                       categories: Array<String> ,
+                       searchText: String,
+                       bookmarked: Bool)
     
     func didCancelFilter(_ cancel: Bool)
     
@@ -121,7 +125,7 @@ class StudyFilterViewController: UIViewController {
                     //default: break
                 }
             }
-            i = i + 1
+            i += 1
         }
         
         previousCollectionData = []
@@ -142,7 +146,11 @@ class StudyFilterViewController: UIViewController {
         previousCollectionData.append(pariticipationsStatus)
         previousCollectionData.append(categories.count == 0 ? [] : categories)
         
-        delegate?.appliedFilter(studyStatus: studyStatus, pariticipationsStatus: pariticipationsStatus, categories: categories,searchText: searchText,bookmarked: bookmark)
+        delegate?.appliedFilter(studyStatus: studyStatus,
+                                pariticipationsStatus: pariticipationsStatus,
+                                categories: categories,
+                                searchText: searchText,
+                                bookmarked: bookmark)
         self.dismiss(animated: true, completion: nil)
         
     }
@@ -193,7 +201,9 @@ extension StudyFilterViewController: PinterestLayoutDelegate {
     }
     
     // 2. Returns the annotation size based on the text
-    func collectionView(_ collectionView: UICollectionView, heightForAnnotationAtIndexPath indexPath: IndexPath, withWidth width: CGFloat) -> CGFloat {
+    func collectionView(_ collectionView: UICollectionView,
+                        heightForAnnotationAtIndexPath indexPath: IndexPath,
+                        withWidth width: CGFloat) -> CGFloat {
         return 0
     }
     
@@ -283,7 +293,7 @@ extension AppDelegate {
             filterOptions.filterValues = filterValues
             filterOptionsList.append(filterOptions)
             
-            i = i + 1
+            i += 1
         }
         StudyFilterHandler.instance.filterOptions = filterOptionsList
         
@@ -296,7 +306,11 @@ extension AppDelegate {
      categories: array of categories
      */
     
-    func getDefaultFilterStrings()->(studyStatus: Array<String>,pariticipationsStatus: Array<String>,categories: Array<String>,searchText: String,bookmark: Bool){
+    func getDefaultFilterStrings()->(studyStatus: Array<String>,
+                                     pariticipationsStatus: Array<String>,
+                                     categories: Array<String>,
+                                     searchText: String,
+                                     bookmark: Bool){
         
         var studyStatus: Array<String> = []
         var pariticipationsStatus: Array<String> = []

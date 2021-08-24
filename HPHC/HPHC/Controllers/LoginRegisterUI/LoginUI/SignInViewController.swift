@@ -23,7 +23,9 @@ import UIKit
 import IQKeyboardManagerSwift
 import SlideMenuControllerSwift
 
-let kVerifyMessageFromSignIn = NSLocalizedStrings("Your registered email is pending verification. Please type in the Verification Code received in the email to complete this step and proceed to using the app.", comment: "")
+let kVerify1 = "Your registered email is pending verification. Please type in the "
+let kVerify2 = "Verification Code received in the email to complete this step and proceed to using the app."
+let kVerifyMessageFromSignIn = NSLocalizedStrings("\(kVerify1)\(kVerify2)", comment: "")
 
 enum SignInLoadFrom: Int{
     case gatewayOverview
@@ -66,12 +68,16 @@ class SignInViewController: UIViewController{
         // IQKeyboardManager.sharedManager().enable = true
         
         //Used for background tap dismiss keyboard
-        let gestureRecognizer: UITapGestureRecognizer = UITapGestureRecognizer.init(target: self, action: #selector(SignInViewController.dismissKeyboard))
+        let gestureRecognizer: UITapGestureRecognizer =
+            UITapGestureRecognizer.init(target: self, action: #selector(SignInViewController.dismissKeyboard))
         self.tableView?.addGestureRecognizer(gestureRecognizer)
         
         
         //info button
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(image: UIImage.init(named: "info"), style: .done, target: self, action: #selector(self.buttonInfoAction(_:)))
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(image: UIImage.init(named: "info"),
+                                                                      style: .done,
+                                                                      target: self,
+                                                                      action: #selector(self.buttonInfoAction(_:)))
         
         
         //unhide navigationbar
@@ -255,7 +261,10 @@ class SignInViewController: UIViewController{
      
      */
     func showAlertMessages(textMessage: String){
-        UIUtilities.showAlertMessage("", errorMessage: NSLocalizedStrings(textMessage, comment: ""), errorAlertActionTitle: kTitleOKCapital, viewControllerUsed: self)
+        UIUtilities.showAlertMessage("",
+                                     errorMessage: NSLocalizedStrings(textMessage, comment: ""),
+                                     errorAlertActionTitle: kTitleOKCapital,
+                                     viewControllerUsed: self)
     }
     
     
@@ -332,15 +341,19 @@ class SignInViewController: UIViewController{
         let attributedString =  (termsAndCondition?.attributedText.mutableCopy() as? NSMutableAttributedString)!
         
         var foundRange = attributedString.mutableString.range(of: NSLocalizedStrings("Terms", comment: ""))
-        attributedString.addAttribute(NSAttributedString.Key.link, value:(TermsAndPolicy.currentTermsAndPolicy?.termsURL!)! as String, range: foundRange)
+        attributedString.addAttribute(NSAttributedString.Key.link,
+                                      value:(TermsAndPolicy.currentTermsAndPolicy?.termsURL!)! as String,
+                                      range: foundRange)
       
-        
         foundRange = attributedString.mutableString.range(of: NSLocalizedStrings("Privacy Policy", comment: ""))
-        attributedString.addAttribute(NSAttributedString.Key.link, value:(TermsAndPolicy.currentTermsAndPolicy?.policyURL!)! as String  , range: foundRange)
+        attributedString.addAttribute(NSAttributedString.Key.link,
+                                      value:(TermsAndPolicy.currentTermsAndPolicy?.policyURL!)! as String,
+                                      range: foundRange)
         
         termsAndCondition?.attributedText = attributedString
         
-        termsAndCondition?.linkTextAttributes = convertToOptionalNSAttributedStringKeyDictionary([NSAttributedString.Key.foregroundColor.rawValue: Utilities.getUIColorFromHex(0x007CBA)])
+        termsAndCondition?.linkTextAttributes =
+            convertToOptionalNSAttributedStringKeyDictionary([NSAttributedString.Key.foregroundColor.rawValue: Utilities.getUIColorFromHex(0x007CBA)])
         
     }
     
@@ -488,7 +501,9 @@ extension SignInViewController: UITextViewDelegate{
         
         var link: String =   (TermsAndPolicy.currentTermsAndPolicy?.termsURL)! //kTermsAndConditionLink
         var title: String = kNavigationTitleTerms
-        if (URL.absoluteString == TermsAndPolicy.currentTermsAndPolicy?.policyURL && characterRange.length == String(NSLocalizedStrings("Privacy Policy", comment: "")).count) {
+        if (URL.absoluteString ==
+                TermsAndPolicy.currentTermsAndPolicy?.policyURL &&
+                characterRange.length == String(NSLocalizedStrings("Privacy Policy", comment: "")).count) {
             //kPrivacyPolicyLink
             print("terms")
             link =  (TermsAndPolicy.currentTermsAndPolicy?.policyURL)! // kPrivacyPolicyLink

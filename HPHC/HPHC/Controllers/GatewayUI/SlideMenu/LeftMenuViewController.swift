@@ -35,7 +35,10 @@ let kLeftMenuCellSubTitleValue = NSLocalizedStrings("Sign up", comment: "")
 let kAlertMessageReachoutText = NSLocalizedStrings("This feature will be available in the next sprint.", comment: "")
 
 let kAlertMessageForSignOut = NSLocalizedStrings("Are you sure you want to sign out?", comment: "")
-let kAlertMessageSignOutSync = NSLocalizedStrings("Are you sure you want to sign out? Incomplete activities and activities completed while offline must be re-started when you next sign in.", comment: "")
+let kAlertMessageSignOutSync =
+    NSLocalizedStrings(
+        "Are you sure you want to sign out? Incomplete activities and activities completed while offline must be re-started when you next sign in.",
+                       comment: "")
 
 let kAlertSignOutLaterTitle = NSLocalizedStrings("Sign Out later", comment: "")
 
@@ -130,15 +133,25 @@ class LeftMenuViewController: UIViewController, LeftMenuProtocol {
         
         let storyboard = UIStoryboard(name: kStoryboardIdentifierGateway, bundle: nil)
         
-        self.studyListViewController = (storyboard.instantiateViewController(withIdentifier: String(describing: StudyListViewController.classForCoder())) as? UINavigationController)!
+        self.studyListViewController = (storyboard.instantiateViewController(withIdentifier:
+                                                                                String(describing: StudyListViewController.classForCoder()))
+                                            as? UINavigationController)!
         
-        self.notificationController = (storyboard.instantiateViewController(withIdentifier:  String(describing: NotificationViewController.classForCoder())) as? UINavigationController)!
+        self.notificationController = (storyboard.instantiateViewController(withIdentifier:
+                                                                                String(describing: NotificationViewController.classForCoder()))
+                                        as? UINavigationController)!
         
-        self.resourcesViewController = (storyboard.instantiateViewController(withIdentifier:  String(describing: GatewayResourcesListViewController.classForCoder())) as? UINavigationController)!
+        self.resourcesViewController = (storyboard.instantiateViewController(withIdentifier:
+                                                                        String(describing: GatewayResourcesListViewController.classForCoder()))
+                                            as? UINavigationController)!
         
-        self.profileviewController = (storyboard.instantiateViewController(withIdentifier:  String(describing: ProfileViewController.classForCoder())) as? UINavigationController)!
+        self.profileviewController = (storyboard.instantiateViewController(withIdentifier:
+                                                                            String(describing: ProfileViewController.classForCoder()))
+                                        as? UINavigationController)!
         
-        self.reachoutViewController = (storyboard.instantiateViewController(withIdentifier:  String(describing: ReachoutOptionsViewController.classForCoder())) as? UINavigationController)!
+        self.reachoutViewController = (storyboard.instantiateViewController(withIdentifier:
+                                                                                String(describing: ReachoutOptionsViewController.classForCoder()))
+                                        as? UINavigationController)!
         
     }
     
@@ -146,22 +159,35 @@ class LeftMenuViewController: UIViewController, LeftMenuProtocol {
         
         let studyStoryBoard = UIStoryboard.init(name: kStudyStoryboard, bundle: Bundle.main)
         /*for standalone*/
-        self.studyTabBarController = studyStoryBoard.instantiateViewController(withIdentifier: kStudyDashboardTabbarControllerIdentifier) as! StudyDashboardTabbarViewController
+        self.studyTabBarController = studyStoryBoard.instantiateViewController(withIdentifier: kStudyDashboardTabbarControllerIdentifier)
+            as! StudyDashboardTabbarViewController
         
         let storyboard = UIStoryboard(name: kStoryboardIdentifierGateway, bundle: nil)
         
-        self.studyListViewController = storyboard.instantiateViewController(withIdentifier: String(describing: StudyListViewController.classForCoder())) as? UINavigationController
+        self.studyListViewController = storyboard.instantiateViewController(withIdentifier:
+                                                                                String(describing: StudyListViewController.classForCoder()))
+            as? UINavigationController
         
         
-        self.studyHomeViewController = studyStoryBoard.instantiateViewController(withIdentifier: String(describing: "StudyHomeNavigationController")) as? UINavigationController //for standalone
+        self.studyHomeViewController = studyStoryBoard.instantiateViewController(withIdentifier:
+                                                                                    String(describing: "StudyHomeNavigationController")) as?
+            UINavigationController //for standalone
         
-        self.notificationController = storyboard.instantiateViewController(withIdentifier:  String(describing: NotificationViewController.classForCoder())) as? UINavigationController
+        self.notificationController = storyboard.instantiateViewController(withIdentifier:
+                                                                            String(describing: NotificationViewController.classForCoder())) as?
+            UINavigationController
         
-        self.resourcesViewController = storyboard.instantiateViewController(withIdentifier:  String(describing: GatewayResourcesListViewController.classForCoder())) as? UINavigationController
+        self.resourcesViewController = storyboard.instantiateViewController(withIdentifier:
+                                                                    String(describing: GatewayResourcesListViewController.classForCoder()))
+            as? UINavigationController
         
-        self.profileviewController = storyboard.instantiateViewController(withIdentifier:  String(describing: ProfileViewController.classForCoder())) as? UINavigationController
+        self.profileviewController = storyboard.instantiateViewController(withIdentifier:
+                                                                            String(describing: ProfileViewController.classForCoder()))
+            as? UINavigationController
         
-        self.reachoutViewController = storyboard.instantiateViewController(withIdentifier:  String(describing: ReachoutOptionsViewController.classForCoder())) as? UINavigationController
+        self.reachoutViewController = storyboard.instantiateViewController(withIdentifier:
+                                                                            String(describing: ReachoutOptionsViewController.classForCoder()))
+            as? UINavigationController
         
     }
     
@@ -174,12 +200,16 @@ class LeftMenuViewController: UIViewController, LeftMenuProtocol {
     func createControllersForAnonymousUser(){
         
         let loginStoryBoard = UIStoryboard(name: kLoginStoryboardIdentifier, bundle: nil)
-        let signInController = (loginStoryBoard.instantiateViewController(withIdentifier:  String(describing: SignInViewController.classForCoder())) as? SignInViewController)!
+        let signInController = (loginStoryBoard.instantiateViewController(withIdentifier:
+                                                                            String(describing: SignInViewController.classForCoder()))
+                                    as? SignInViewController)!
         self.signInViewController = UINavigationController(rootViewController: signInController)
         self.signInViewController.navigationBar.barStyle = .default
          self.signInViewController.navigationBar.isTranslucent = false
         
-        let signUpController = (loginStoryBoard.instantiateViewController(withIdentifier:  String(describing: SignUpViewController.classForCoder())) as? SignUpViewController)!
+        let signUpController = (loginStoryBoard.instantiateViewController(withIdentifier:
+                                                                            String(describing: SignUpViewController.classForCoder()))
+                                    as? SignUpViewController)!
         self.signUpViewController = UINavigationController(rootViewController: signUpController)
         self.signUpViewController.navigationBar.barStyle = .default
         self.signUpViewController.navigationBar.isTranslucent = false
@@ -351,8 +381,11 @@ class LeftMenuViewController: UIViewController, LeftMenuProtocol {
         DBHandler.isDataAvailableToSync { (available) in
             if(available){
                 
-                UIUtilities.showAlertMessageWithTwoActionsAndHandler(kSignOutText, errorMessage: kAlertMessageSignOutSync, errorAlertActionTitle: kSignOutText,
-                                                                     errorAlertActionTitle2: kAlertSignOutLaterTitle, viewControllerUsed: self,
+                UIUtilities.showAlertMessageWithTwoActionsAndHandler(kSignOutText,
+                                                                     errorMessage: kAlertMessageSignOutSync,
+                                                                     errorAlertActionTitle: kSignOutText,
+                                                                     errorAlertActionTitle2: kAlertSignOutLaterTitle,
+                                                                     viewControllerUsed: self,
                                                                      action1: {
                                                                         
                                                                         self.sendRequestToSignOut()
@@ -363,8 +396,11 @@ class LeftMenuViewController: UIViewController, LeftMenuProtocol {
             }
             else {
                 
-                UIUtilities.showAlertMessageWithTwoActionsAndHandler(kSignOutText, errorMessage: kAlertMessageForSignOut, errorAlertActionTitle: kSignOutText,
-                                                                     errorAlertActionTitle2: kTitleCancel, viewControllerUsed: self,
+                UIUtilities.showAlertMessageWithTwoActionsAndHandler(kSignOutText,
+                                                                     errorMessage: kAlertMessageForSignOut,
+                                                                     errorAlertActionTitle: kSignOutText,
+                                                                     errorAlertActionTitle2: kTitleCancel,
+                                                                     viewControllerUsed: self,
                                                                      action1: {
                                                                         
                                                                         self.sendRequestToSignOut()
@@ -511,7 +547,11 @@ extension LeftMenuViewController: NMWebServiceDelegate {
         UIApplication.shared.keyWindow?.addProgressIndicatorOnWindowFromTop()
         
         if error.code == 403 { //unauthorized
-            UIUtilities.showAlertMessageWithActionHandler(kErrorTitle, message: error.localizedDescription, buttonTitle: kTitleOk, viewControllerUsed: self, action: {
+            UIUtilities.showAlertMessageWithActionHandler(kErrorTitle,
+                                                          message: error.localizedDescription,
+                                                          buttonTitle: kTitleOk,
+                                                          viewControllerUsed: self,
+                                                          action: {
                 self.fdaSlideMenuController()?.navigateToHomeAfterUnauthorizedAccess()
             })
         } else {

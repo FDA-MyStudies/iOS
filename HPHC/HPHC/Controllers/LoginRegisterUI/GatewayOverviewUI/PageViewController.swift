@@ -194,7 +194,8 @@ class PageViewController: UIPageViewController{
                 let sections = overview.sections.count
                 for section in 1...(sections-1) {
                     
-                    let restControllers = (storyboard.instantiateViewController(withIdentifier: "SecondViewController") as? StudyOverviewViewControllerSecond)!
+                    let restControllers = (storyboard.instantiateViewController(withIdentifier: "SecondViewController")
+                                            as? StudyOverviewViewControllerSecond)!
                     restControllers.overviewSectionDetail = overview.sections[section]
                      restControllers.overViewWebsiteLink = overview.websiteLink
                     restControllers.pageIndex = section
@@ -203,7 +204,8 @@ class PageViewController: UIPageViewController{
             }
         } else {
             //get first overview controller
-            let firstController = (storyboard.instantiateViewController(withIdentifier: "FirstViewController") as? FirstGatewayOverviewViewController)!
+            let firstController = (storyboard.instantiateViewController(withIdentifier: "FirstViewController")
+                                    as? FirstGatewayOverviewViewController)!
             firstController.overviewSectionDetail = overview.sections[0]
             firstController.pageIndex = 0
             controllers.append(firstController)
@@ -212,7 +214,8 @@ class PageViewController: UIPageViewController{
             if sections > 1 {
                 for section in 1...(sections-1) {
                     
-                    let restControllers = (storyboard.instantiateViewController(withIdentifier: "SecondViewController") as? SecondGatewayOverviewViewController)!
+                    let restControllers = (storyboard.instantiateViewController(withIdentifier: "SecondViewController")
+                                            as? SecondGatewayOverviewViewController)!
                     restControllers.overviewSectionDetail = overview.sections[section]
                     restControllers.pageIndex = section
                     controllers.append(restControllers)

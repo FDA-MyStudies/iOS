@@ -57,7 +57,7 @@ class ConsentResult {
     func initWithORKTaskResult(taskResult: ORKTaskResult) {
         for stepResult in taskResult.results! {
             
-            if   ((stepResult as? ORKStepResult)!.results?.count)! > 0 {
+            if ((stepResult as? ORKStepResult)!.results?.count)! > 0 {
                 
                 if stepResult.identifier == kConsentSharing,
                     let stepResult = stepResult as? ORKStepResult,
@@ -73,7 +73,7 @@ class ConsentResult {
                         self.consentPath = "Consent" +  "_" + "\((Study.currentStudy?.studyId)!)" + ".pdf"
                         
                         var fullPath: String!
-                        self.consentDocument?.makePDF(completionHandler: { data,error in
+                        self.consentDocument?.makePDF(completionHandler: { data, error in
                             //                          print("data: \(String(describing: data))    \n  error: \(String(describing: error))")
                             
                             
@@ -87,7 +87,7 @@ class ConsentResult {
                           print("fullPath---\(fullPath)")
                             
                             if !FileManager.default.fileExists(atPath: path) {
-                                try! FileManager.default.createDirectory(atPath: path, withIntermediateDirectories: true, attributes: nil)
+                                try? FileManager.default.createDirectory(atPath: path, withIntermediateDirectories: true, attributes: nil)
                             }
                             
                             self.consentPdfData = data
@@ -97,7 +97,7 @@ class ConsentResult {
                                 try? FileManager.default.removeItem(atPath: fullPath)
                             }
                             
-                            FileManager.default.createFile(atPath: fullPath , contents: data, attributes: [:])
+                            FileManager.default.createFile(atPath: fullPath, contents: data, attributes: [:])
                             
                             let defaultPath = fullPath
                             fullPath = "file://" + "\(fullPath!)"
@@ -106,9 +106,15 @@ class ConsentResult {
                             if isAdditionalSign || consentHasLAR {
                                 var LARSignedPDFPath = path + "/" + "second.pdf"
                                 let participantFormStepResult = taskResult.stepResult(forStepIdentifier: kLARConsentParticipantStep)
-                                let participantRelation = consentHasLAR ? (participantFormStepResult?.result(forIdentifier: kLARConsentParticipantRelationItem) as? ORKTextQuestionResult)?.textAnswer ?? "" : ""
-                                let participantFirstName = consentHasLAR ? (participantFormStepResult?.result(forIdentifier: kLARConsentParticipantFirstName) as? ORKTextQuestionResult)?.textAnswer ?? "" : ""
-                                let participantLastName = consentHasLAR ?  (participantFormStepResult?.result(forIdentifier: kLARConsentParticipantLastName) as? ORKTextQuestionResult)?.textAnswer ?? "" : ""
+                                let participantRelation =
+                                    consentHasLAR ? (participantFormStepResult?.result(forIdentifier: kLARConsentParticipantRelationItem)
+                                                                            as? ORKTextQuestionResult)?.textAnswer ?? "" : ""
+                                let participantFirstName =
+                                    consentHasLAR ? (participantFormStepResult?.result(forIdentifier: kLARConsentParticipantFirstName)
+                                                                                as? ORKTextQuestionResult)?.textAnswer ?? "" : ""
+                                let participantLastName =
+                                    consentHasLAR ?  (participantFormStepResult?.result(forIdentifier: kLARConsentParticipantLastName)
+                                                                                as? ORKTextQuestionResult)?.textAnswer ?? "" : ""
                                 
                                 let title = consentHasLAR ? LocalizableString.consentLARPDFTitle.localizedString : kConsentSignaturePageTitle
                                 let body = consentHasLAR ?  LocalizableString.consentOtherChoice.localizedString : kSignaturePageContentText
@@ -129,13 +135,24 @@ class ConsentResult {
                                     pageCount = rkPDF?.pageCount ?? 0
                                 }
                                 
-                                let pdfCreator = PDFCreator(title: title, body: body, image: image, relation: participantRelation.capitalized, participantFirstName: participantFirstName.capitalized, participantLastName: participantLastName.capitalized, startTime: startDate, firstName: firstName.capitalized, lastName: lastName.capitalized, isLAR: consentHasLAR, isAdditionalSign: isAdditionalSign, additionalArrSign: additionalArrSign, pageCount: pageCount)
+                                let pdfCreator = PDFCreator(title: title,
+                                                            body: body,
+                                                            image: image,
+                                                            relation: participantRelation.capitalized,
+                                                            participantFirstName: participantFirstName.capitalized,
+                                                            participantLastName: participantLastName.capitalized,
+                                                            startTime: startDate, firstName: firstName.capitalized,
+                                                            lastName: lastName.capitalized,
+                                                            isLAR: consentHasLAR,
+                                                            isAdditionalSign: isAdditionalSign,
+                                                            additionalArrSign: additionalArrSign,
+                                                            pageCount: pageCount)
                                 let pdfData = pdfCreator.createFlyer()
                                 
                                 if FileManager.default.fileExists(atPath: LARSignedPDFPath) {
                                     try? FileManager.default.removeItem(atPath: LARSignedPDFPath)
                                 }
-                                FileManager.default.createFile(atPath: LARSignedPDFPath , contents: pdfData, attributes: [:])
+                                FileManager.default.createFile(atPath: LARSignedPDFPath, contents: pdfData, attributes: [:])
                                 
                                 LARSignedPDFPath = "file://" + "\(LARSignedPDFPath)"
                                 print("LARSignedPDFPath---\(LARSignedPDFPath)")
@@ -162,7 +179,7 @@ class ConsentResult {
                         fullPath = path + "/" + fileName
                         
                         if !FileManager.default.fileExists(atPath: path) {
-                            try! FileManager.default.createDirectory(atPath: path, withIntermediateDirectories: true, attributes: nil)
+                            try? FileManager.default.createDirectory(atPath: path, withIntermediateDirectories: true, attributes: nil)
                         }
                         
                         var data: Data? = Data.init()
@@ -174,7 +191,7 @@ class ConsentResult {
                             if FileManager.default.fileExists(atPath: fullPath) {
                                 try FileManager.default.removeItem(atPath: fullPath)
                             }
-                            FileManager.default.createFile(atPath:fullPath , contents: data, attributes: [:])
+                            FileManager.default.createFile(atPath:fullPath, contents: data, attributes: [:])
                             fullPath = "file://" + "\(fullPath!)"
                             
                             try data?.write(to:  URL(string: fullPath!)!)
@@ -184,7 +201,8 @@ class ConsentResult {
                             print(error.localizedDescription)
                         }
                     }
-                } else if let tokenStepResult: EligibilityTokenTaskResult? = (stepResult as? ORKStepResult)!.results?[0] as? EligibilityTokenTaskResult? {
+                } else if let tokenStepResult: EligibilityTokenTaskResult? =
+                            (stepResult as? ORKStepResult)!.results?[0] as? EligibilityTokenTaskResult? {
                     self.token = tokenStepResult?.enrollmentToken
                 }
             }
@@ -208,7 +226,8 @@ class ConsentResult {
             
             if Utilities.isValidValue(someObject: activityDict[kActivityStartTime] as AnyObject ) {
                 
-                if Utilities.isValidValue(someObject: Utilities.getDateFromString(dateString:(activityDict[kActivityStartTime] as? String)!) as AnyObject?) {
+                if Utilities.isValidValue(someObject: Utilities.getDateFromString(dateString:(activityDict[kActivityStartTime] as? String)!)
+                                            as AnyObject?) {
                     self.startTime =  Utilities.getDateFromString(dateString: (activityDict[kActivityStartTime] as? String)!)
                 } else {
                     Logger.sharedInstance.debug("Date Conversion is null:\(activityDict)")
@@ -216,7 +235,8 @@ class ConsentResult {
             }
             if Utilities.isValidValue(someObject: activityDict[kActivityEndTime] as AnyObject ) {
                 
-                if Utilities.isValidValue(someObject: Utilities.getDateFromString(dateString:(activityDict[kActivityEndTime] as? String)!) as AnyObject?) {
+                if Utilities.isValidValue(someObject: Utilities.getDateFromString(dateString:(activityDict[kActivityEndTime] as? String)!)
+                                            as AnyObject?) {
                     self.endTime =  Utilities.getDateFromString(dateString: (activityDict[kActivityEndTime] as? String)!)
                 } else {
                     Logger.sharedInstance.debug("Date Conversion is null:\(activityDict)")
@@ -237,10 +257,10 @@ class ConsentResult {
         return self.result!
     }
     
-    func getResultDictionary() -> Dictionary<String,Any>? {
+    func getResultDictionary() -> Dictionary<String, Any>? {
         
         // method to get the dictionary for Api
-        var activityDict: Dictionary<String,Any>?
+        var activityDict: Dictionary<String, Any>?
         
         if self.startTime != nil && (Utilities.getStringFromDate(date: self.startTime!) != nil){
             
@@ -253,7 +273,7 @@ class ConsentResult {
         
         if Utilities.isValidObject(someObject: result as AnyObject?) {
             
-            var activityResultArray: Array<Dictionary<String,Any>> =  Array<Dictionary<String,Any>>()
+            var activityResultArray: Array<Dictionary<String, Any>> =  Array<Dictionary<String, Any>>()
             for stepResult  in result! {
                 let activityStepResult = stepResult as ActivityStepResult
                 activityResultArray.append( (activityStepResult.getActivityStepResultDict())! as Dictionary<String,Any>)

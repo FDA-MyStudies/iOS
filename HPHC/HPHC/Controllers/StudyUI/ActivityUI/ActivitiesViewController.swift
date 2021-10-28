@@ -1777,7 +1777,6 @@ class ResponseDataFetch: NMWebServiceDelegate{
             //Do Nothing
         }
     }
-    
 }
 
 

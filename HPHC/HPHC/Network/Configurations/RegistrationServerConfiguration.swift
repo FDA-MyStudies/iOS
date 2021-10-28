@@ -101,9 +101,9 @@ class RegistrationServerConfiguration: NetworkConfiguration {
     
     override func getDefaultHeaders() -> [String: String] {
       let localeDefault = Locale.preferredLanguages.first ?? "en"
-      var language = "English"
+      var language = "en"
       if localeDefault.hasPrefix("es") { // true
-        language = "Spanish"
+        language = "es"
       }
         
       let appId = AppDetails.applicationID

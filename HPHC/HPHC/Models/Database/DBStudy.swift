@@ -91,6 +91,7 @@ class DBOverviewSection: Object {
     @objc dynamic  var link: String?
     @objc dynamic var  studyId: String!
     @objc dynamic var  sectionId: String!
+    @objc dynamic var  overviewlang: String! //= "en"
     
     override static func primaryKey() -> String? {
         return "sectionId"

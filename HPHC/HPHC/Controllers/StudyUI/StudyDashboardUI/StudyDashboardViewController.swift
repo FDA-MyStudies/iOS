@@ -94,7 +94,10 @@ class StudyDashboardViewController: UIViewController{
             if statiticsList.count != 0 {
                 StudyDashboard.instance.statistics = statiticsList
                 self.tableView?.reloadData()
-            }
+            } else {
+                StudyDashboard.instance.statistics = []
+                self.tableView?.reloadData()
+              }
         }
         
     }

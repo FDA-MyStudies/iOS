@@ -120,6 +120,7 @@ class StudyListCell: UITableViewCell {
         //study status
         self.setStudyLanguage(study: study)
         
+        
         if User.currentUser.userType == .AnonymousUser {
             // do nothing
         }
@@ -162,7 +163,22 @@ class StudyListCell: UITableViewCell {
      @param study    Access the data from Study Class
      */
     func setStudyLanguage(study: Study){
-      labelStudylanguage?.text = study.studyLanguage.uppercased()
+        
+        let locale3 = Locale.preferredLanguages.first ?? "en"
+        
+        print("study Language \(study.studyLanguage) and locale is \(locale3)")
+        if ((locale3.hasPrefix("es") && study.studyLanguage.containsIgnoringCase("spanish")) || (locale3.hasPrefix("en") && study.studyLanguage.containsIgnoringCase("english"))) {
+            labelStudylanguage?.text = ""
+        }else{
+            if (study.studyLanguage.containsIgnoringCase("english")){
+                labelStudylanguage?.text = NSLocalizedStrings("English", comment: "")
+            }else{
+            labelStudylanguage?.text = NSLocalizedStrings("Spanish", comment: "")
+            }
+            
+        }
+        
+      
     }
     
     

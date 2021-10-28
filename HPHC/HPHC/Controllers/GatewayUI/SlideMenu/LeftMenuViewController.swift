@@ -249,6 +249,7 @@ class LeftMenuViewController: UIViewController, LeftMenuProtocol {
         self.tableView.frame.size = CGSize(width: self.tableView.frame.width, height: UIScreen.main.bounds.size.height  )
         
         self.tableView.reloadData()
+        UIApplication.shared.keyWindow?.removeProgressIndicatorFromWindow()
         
     }
     
@@ -279,6 +280,7 @@ class LeftMenuViewController: UIViewController, LeftMenuProtocol {
         self.tableView.tableFooterView?.frame.size = CGSize(width: self.tableView.tableFooterView!.frame.size.width, height: height)
         self.tableView.frame.size = CGSize(width: self.tableView.frame.width, height: UIScreen.main.bounds.size.height)
         self.tableView.reloadData()
+        UIApplication.shared.keyWindow?.removeProgressIndicatorFromWindow()
     }
     
     

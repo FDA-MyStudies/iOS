@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>ApplicationID</key>
-	<string>COVFH001</string>
+	<string>COVFHTEST</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
@@ -78,7 +78,7 @@
 	<key>RESPONSE_URL</key>
 	<string>$(RESPONSE_URL)</string>
 	<key>StandaloneStudyId</key>
-	<string>appstudy2</string>
+	<string>demo1</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Verdana Italic.ttf</string>

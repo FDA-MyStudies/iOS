@@ -58,7 +58,8 @@ let kUserConsentStatus =  "consentStatus"
 let kUserOldPassword = "currentPassword"
 let kUserNewPassword = "newPassword"
 let kUserIsTempPassword = "resetPassword"
-
+let kUserDeviceLanguage = "userDeviceLanguage"
+let kUserPreviousDeviceLanguage = "userPreviousDeviceLanguage"
 
 let kPasscodeIsPending = "PASSCODESETUP"
 let kShowNotification = "SHOWNOTIFICATION"

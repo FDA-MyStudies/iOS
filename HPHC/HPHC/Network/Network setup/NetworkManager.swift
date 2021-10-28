@@ -122,9 +122,5 @@ class NetworkManager {
         let networkWSHandler = NetworkWebServiceHandler(delegate: delegate, challengeDelegate: UIApplication.shared.delegate as? NMAuthChallengeDelegate)
         networkWSHandler.networkManager = self
         networkWSHandler.composeRequest(configuration, method: method, params: params, headers: headers)
-        
     }
-    
-    
-    
 }

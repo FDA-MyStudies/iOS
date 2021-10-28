@@ -180,10 +180,15 @@ class TextChoiceQuestionController: ORKQuestionStepViewController {
         stepDidChange()
     }
     
+    
+    override func viewWillAppear(_ animated: Bool) {
+      self.tableView?.tableHeaderView = headerViewForAdditionalText()
+    }
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        self.tableView?.tableHeaderView = headerViewForAdditionalText()
+       // self.tableView?.tableHeaderView = headerViewForAdditionalText()
         
         if self.answerFormat?.style == .multipleChoice {
             self.tableView?.allowsMultipleSelection = true

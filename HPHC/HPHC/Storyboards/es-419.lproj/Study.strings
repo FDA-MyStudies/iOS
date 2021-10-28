@@ -3,7 +3,7 @@
 "0BZ-Hr-S5F.text" = "1st Trimester Survey";
 
 /* Class = "UILabel"; text = "DONE WITH THE STUDY"; ObjectID = "1se-Ih-SJx"; */
-"1se-Ih-SJx.text" = "DONE WITH THE STUDY";
+"1se-Ih-SJx.text" = "HECHO CON EL ESTUDIO";
 
 /* Class = "UILabel"; text = "How data will be used?"; ObjectID = "3EU-2E-MZV"; */
 "3EU-2E-MZV.text" = "How data will be used?";
@@ -90,7 +90,7 @@
 "awn-oW-cWh.text" = "Run: 3/10, 4 done , 5 missed";
 
 /* Class = "UILabel"; text = "OF ACTIVITIES SO FAR"; ObjectID = "b43-6R-4Z2"; */
-"b43-6R-4Z2.text" = "OF ACTIVITIES SO FAR";
+"b43-6R-4Z2.text" = "DE ACTIVIDADES A TIEMPO";
 
 /* Class = "UIButton"; normalTitle = "Visit Website"; ObjectID = "bc7-W1-fmy"; */
 "bc7-W1-fmy.normalTitle" = "Visita el sito web";
@@ -126,7 +126,7 @@
 "lIT-J9-U7S.normalTitle" = "Unirse al estudio";
 
 /* Class = "UILabel"; text = "YOU COMPLETED"; ObjectID = "mcT-Pq-7B0"; */
-"mcT-Pq-7B0.text" = "YOU COMPLETED";
+"mcT-Pq-7B0.text" = "ESTAS COMPLETANDO";
 
 /* Class = "UILabel"; text = "In Progress"; ObjectID = "me4-LJ-i7A"; */
 "me4-LJ-i7A.text" = "En progreso";

@@ -65,7 +65,7 @@ let kForceUpdate = "forceUpdate"
 let kMessage = "message"
 let kVisualStepId = "visual"
 var localeBundle: Bundle? = Bundle(path: Bundle.main.path(forResource: "en", ofType: "lproj") ?? "") //"es"
-
+let ud = UserDefaults.standard
 @UIApplicationMain
 
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -117,6 +117,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.customizeNavigationBar()
         Fabric.with([Crashlytics.self])
         
+        if #available(iOS 15, *) {
+              let appearance = UINavigationBarAppearance()
+              let navigationBar = UINavigationBar()
+
+              appearance.configureWithOpaqueBackground()
+              appearance.backgroundColor = .white
+              navigationBar.standardAppearance = appearance
+              UINavigationBar.appearance().standardAppearance.backgroundColor = .white
+              UINavigationBar.appearance().standardAppearance.shadowColor = .white
+              UINavigationBar.appearance().scrollEdgeAppearance = appearance
+              UINavigationBar.appearance().standardAppearance = appearance
+            }
+        
         UIView.appearance(whenContainedInInstancesOf: [ORKTaskViewController.self]).tintColor = kUIColorForSubmitButtonBackground
         
         self.checkForAppUpdate()
@@ -164,12 +177,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 ud.synchronize()
             }
         }
-        
+        let locale3 = Locale.preferredLanguages.first ?? "en"
+        print("onLaunch language \(locale3)")
+        if(locale3.hasPrefix("es")){
+            ud1.set("es", forKey: kUserDeviceLanguage)
+        }else{
+            ud1.set("en", forKey: kUserDeviceLanguage)
+        }
+       
         //self.fireNotiffication(intervel: 10)
         //self.fireNotiffication(intervel: 15)
         
         //Check if Database needs migration
         self.checkForRealmMigration()
+        print("UserLanguage \(ud1.value(forKey: kUserDeviceLanguage))")
         return true
     }
     
@@ -188,7 +209,54 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func applicationWillEnterForeground(_ application: UIApplication) {
         let locale3 = Locale.preferredLanguages.first ?? "en"
+  
+        if(NetworkManager.isNetworkAvailable()){
+            print("network available applicationWillEnterForeground  \(NetworkManager.isNetworkAvailable()) and locale3 is \(locale3)")
+            
+            if(locale3.hasPrefix("es")){
+                ud.set("es", forKey: kUserDeviceLanguage)
+            }else{
+                ud.set("en", forKey: kUserDeviceLanguage)
+            }
+            //ud.set(locale3, forKey: kUserDeviceLanguage)
+            ud.synchronize()
+            self.updateLocale(locale3: locale3)
+        }else{
+            print("network available applicationWillEnterForeground  \(NetworkManager.isNetworkAvailable()) and ud.value is \(ud.value(forKey: kUserDeviceLanguage))")
+            self.updateLocale(locale3: ud.value(forKey: kUserDeviceLanguage)! as! String)
+        }
         
+//        if !(locale3.hasPrefix("es") || locale3.hasPrefix("en")) {
+//            Bundle.setLanguage("en")
+//
+//            let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
+//            UIApplication.shared.keyWindow?.rootViewController = storyboard.instantiateInitialViewController()
+//
+//
+//            let path = Bundle.main.path(forResource: "en", ofType: "lproj")
+//
+//            if let path = path {
+//                localeBundle = Bundle(path: path)
+//            }
+//            else {
+//                let path = Bundle.main.path(forResource: "en", ofType: "lproj") ?? ""
+//                localeBundle = Bundle(path: path)
+//            }
+//        }
+        self.checkPasscode(viewController: (application.windows[0].rootViewController)!)
+        
+        self.checkForStudyUpdates()
+        
+        let number = UIApplication.shared.applicationIconBadgeNumber
+        if number >= 1 {
+            self.updateNotification()
+        }
+        //Check For Updates
+        self.checkForAppUpdate()
+        
+    }
+    
+    func updateLocale(locale3 : String){
         if !(locale3.hasPrefix("es") || locale3.hasPrefix("en")) {
             Bundle.setLanguage("en")
             
@@ -206,19 +274,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 localeBundle = Bundle(path: path)
             }
         }
-        self.checkPasscode(viewController: (application.windows[0].rootViewController)!)
-        
-        self.checkForStudyUpdates()
-        
-        let number = UIApplication.shared.applicationIconBadgeNumber
-        if number >= 1 {
-            self.updateNotification()
+        else if locale3.hasPrefix("es") {
+            let path = Bundle.main.path(forResource: "es", ofType: "lproj") ?? ""
+            localeBundle = Bundle(path: path)
         }
-        //Check For Updates
-        self.checkForAppUpdate()
-        
     }
-    
     func applicationDidBecomeActive(_ application: UIApplication) {
         
         // self.window?.isHidden = false
@@ -993,10 +1053,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             let slideMenuController = (navigationController.viewControllers.last as? FDASlideMenuViewController)!
             
             if !Utilities.isStandaloneApp() {
+                self.addAndRemoveProgress(add: false)
                 let leftController = (slideMenuController.leftViewController as? LeftMenuViewController)!
                 leftController.changeViewController(.reachOut_signIn)
                 leftController.createLeftmenuItems()
-                self.addAndRemoveProgress(add: false)
+                
             }
             else {
                 UIApplication.shared.keyWindow?.removeProgressIndicatorFromWindow()
@@ -1827,6 +1888,7 @@ extension AppDelegate {
     
     static func selectedLocale () -> Bundle? {
         let locale3 = Locale.preferredLanguages.first ?? "en"
+        print("network available  \(NetworkManager.isNetworkAvailable()) and locale3 is \(locale3)")
         if !(locale3.hasPrefix("es") || locale3.hasPrefix("en")) {
             Bundle.setLanguage("en")
             

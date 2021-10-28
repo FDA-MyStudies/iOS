@@ -709,6 +709,8 @@ extension ProfileViewController: UITableViewDataSource {
             case .EmailId:
                 keyBoardType = .emailAddress
                 isSecuredEntry = false
+                cell.textFieldValue?.isHidden = false
+                cell.buttonChangePassword?.isHidden = true
                 
             case .ConfirmPassword: //ChangePasscode
                 

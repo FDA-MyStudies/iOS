@@ -374,11 +374,13 @@ class DBHandler: NSObject {
             let dbOverviewSection = DBOverviewSection()
             dbOverviewSection.title = section.title
             dbOverviewSection.link  = section.link
+            dbOverviewSection.overviewlang  = UserDefaults.standard.value(forKey: kUserDeviceLanguage) as? String ?? ""
             dbOverviewSection.imageURL = section.imageURL
             dbOverviewSection.text = section.text
             dbOverviewSection.type = section.type
             dbOverviewSection.studyId = studyId
             dbOverviewSection.sectionId = studyId + "screen\(sectionIndex)"
+            print("Dbhandl overviewlang \(dbOverviewSection.overviewlang) and UDDLang \(UserDefaults.standard.value(forKey: kUserDeviceLanguage))")
             dbStudies.append(dbOverviewSection)
         }
         
@@ -457,13 +459,21 @@ class DBHandler: NSObject {
         let realm = DBHandler.getRealmObject()!
         let studies =  realm.objects(DBOverviewSection.self).filter("studyId == %@",studyId)
         let study =  realm.objects(DBStudy.self).filter("studyId == %@",studyId).last
-        
+       
         if studies.count > 0 {
-            
+            var secempty = true
             // inilize OverviewSection from database
             var overviewSections: Array<OverviewSection> = []
             for dbSection in studies {
+               
                 let section = OverviewSection()
+                print("overviwe language2 \(dbSection.overviewlang) and kuserdevicelanguage \(UserDefaults.standard.value(forKey: kUserDeviceLanguage))")
+                if dbSection.overviewlang != UserDefaults.standard.value(forKey: kUserDeviceLanguage) as? String ?? ""{
+                    print("overviwe language1 \(dbSection.overviewlang)")
+                    //completionHandler(nil)
+                    secempty = false
+                    break
+                }
                 
                 section.title = dbSection.title
                 section.imageURL = dbSection.imageURL
@@ -473,12 +483,16 @@ class DBHandler: NSObject {
                 overviewSections.append(section)
             }
             
-            //Create Overview object  
+            //Create Overview object
+            if secempty{
             let overview = Overview()
             overview.type = .study
             overview.websiteLink = study?.websiteLink
             overview.sections = overviewSections
             completionHandler(overview)
+            }else{
+                completionHandler(nil)
+            }
             
         }else {
             completionHandler(nil)

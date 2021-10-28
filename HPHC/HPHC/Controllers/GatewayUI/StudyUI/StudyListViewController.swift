@@ -25,7 +25,8 @@ let kHelperTextForFilteredStudiesNotFound = NSLocalizedStrings("Sorry, no Studie
 let kHelperTextForSearchedStudiesNotFound = NSLocalizedStrings("Sorry, no Studies found. Please check the spelling or try a different search.", comment: "")
 
 let kHelperTextForOffline = NSLocalizedStrings("Sorry, no studies available right now. Please remain signed in to get notified when there are new studies available.", comment: "")
-
+let kEStudyLanguage = NSLocalizedStrings("English", comment: "")
+let kSStudyLanguage = NSLocalizedStrings("Spanish", comment: "")
 let kNotificationViewControllerIdentifier = "NotificationViewControllerIdentifier"
 
 class StudyListViewController: UIViewController {
@@ -92,6 +93,9 @@ class StudyListViewController: UIViewController {
             isComingFromFilterScreen = false
             return
         }
+//        if !isComingFromFilterScreen {
+//              self.addProgressIndicator()
+//            }
         addRightNavigationItem()
         let appdelegate = (UIApplication.shared.delegate as? AppDelegate)!
 
@@ -682,6 +686,7 @@ class StudyListViewController: UIViewController {
      navigateBasedOnUserStatus method navigates to StudyDashBoard or StudyHome based on UserParticipationStatus.
      */
     func navigateBasedOnUserStatus() {
+        print("current user type = \(User.currentUser.userType)")
         if User.currentUser.userType == UserType.FDAUser {
             if Study.currentStudy?.status == .Active {
                 // handle accoring to UserStatus
@@ -692,10 +697,14 @@ class StudyListViewController: UIViewController {
                 } else {
                     checkDatabaseForStudyInfo(study: Study.currentStudy!)
                 }
-            } else {
+            } else if User.currentUser.userType == UserType.AnonymousUser{
+                
+            }
+            else {
                 checkDatabaseForStudyInfo(study: Study.currentStudy!)
             }
-        } else {
+        }
+        else {
             checkDatabaseForStudyInfo(study: Study.currentStudy!)
         }
     }

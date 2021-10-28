@@ -237,6 +237,7 @@ class NetworkWebServiceHandler: NSObject, URLSessionDelegate {
         if httpHeaders != nil && (httpHeaders?.count)! > 0{
             request.allHTTPHeaderFields = httpHeaders as? [String : String]
         }
+        print("Header \(httpHeaders) params \(params)")
         self.fireRequest(request, requestName: requestName)
     }
     
@@ -253,7 +254,7 @@ class NetworkWebServiceHandler: NSObject, URLSessionDelegate {
 //      } else {
          httpHeaders = self.getCombinedHeaders(headers, defaultHeaders: defaultheaders)
       //}
-      
+        
         let baseURLString : NSString = self.getBaseURLString(requestName)
         let requestUrl = URL(string: baseURLString as String)
         do{
@@ -269,6 +270,7 @@ class NetworkWebServiceHandler: NSObject, URLSessionDelegate {
             if httpHeaders != nil {
                 request.allHTTPHeaderFields = httpHeaders! as? [String : String]
             }
+            print("Header \(httpHeaders) params \(params)")
             self.fireRequest(request, requestName: requestName)
             
         }catch {

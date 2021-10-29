@@ -378,6 +378,8 @@ struct StudyUpdates {
     static var studyResourcesUpdated = false
     static var studyVersion: String? = nil
     static var studyStatus: String? = nil
+    static var studyLang: String? = ""
+    static var studyOldLang: String? = ""
     
     init() {
     }
@@ -406,6 +408,15 @@ struct StudyUpdates {
                 StudyUpdates.studyStatus = updates["status"] as? String
             }
         }
+        if(UserDefaults.standard.value(forKey: kUserDeviceLanguage)) as? String ?? "" == StudyUpdates.studyLang as? String ?? ""{
+            StudyUpdates.studyOldLang = StudyUpdates.studyLang
+        }else{
+            StudyUpdates.studyResourcesUpdated = true
+            StudyUpdates.studyInfoUpdated  = true
+            StudyUpdates.studyActivitiesUpdated = true
+           
+        }
+        StudyUpdates.studyLang = UserDefaults.standard.value(forKey: kUserDeviceLanguage) as? String ?? ""
         StudyUpdates.studyVersion = detail[kStudyCurrentVersion] as? String
     }
 }

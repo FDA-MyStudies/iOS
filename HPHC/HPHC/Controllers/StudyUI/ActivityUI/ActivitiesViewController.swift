@@ -1089,9 +1089,12 @@ extension ActivitiesViewController: NMWebServiceDelegate {
             
             Logger.sharedInstance.info("Handling response for study updates...")
             self.removeProgressIndicator()
+            self.handleStudyUpdatesResponse()
             if Study.currentStudy?.version == StudyUpdates.studyVersion {
+                print("study version update if")
                 self.checkForActivitiesUpdates()
             } else {
+                print("study version update else")
                 self.handleStudyUpdatesResponse()
             }
             

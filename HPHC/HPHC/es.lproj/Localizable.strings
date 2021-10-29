@@ -238,7 +238,7 @@
 "Please enter message"="Por favor ingrese mensaje";
 "Thank you for contacting us. We will get back to you on your email address at the earliest."="Gracias por contactarnos. Nos comunicaremos con usted a su dirección de correo electrónico lo antes posible.";
 "  Resume  "="  Continuar  ";
-"  Start  "="  Comenzar  ";
+"  Start  "="  Comienzo  ";
 "  Completed  "="  Terminado  ";
 "  Incompleted  "="  Incompleto  ";
 "  Expired  "="  Caducado  ";
@@ -576,7 +576,8 @@
 "Monthly"="Mensual";
 "As Scheduled"="Como lo planeado";
 "Consent PDF"="PDF de consentimiento";
-
+"English"="INGLÉS";
+"Spanish"="ESPAÑOL";
 
 
 

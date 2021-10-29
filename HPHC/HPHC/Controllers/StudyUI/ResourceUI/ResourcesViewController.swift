@@ -38,6 +38,7 @@ class ResourcesViewController: UIViewController{
     var shouldDeleteData: Bool? = false
     
     var leaveStudy: String = "Leave Study"
+    var alertLeaveStudy: String = "Leave Study"
     var aboutTheStudy: String = NSLocalizedStrings("About the Study", comment: "")
     var consentPDF: String = "Consent PDF"
     var kAreYouSure: String = NSLocalizedStrings("Are you sure you want to ", comment: "")
@@ -363,10 +364,10 @@ class ResourcesViewController: UIViewController{
         }
         let locale3 = Locale.preferredLanguages.first ?? "en"
         if locale3.hasPrefix("es") {
-          leaveStudy = "¿"+leaveStudy
+          alertLeaveStudy = "¿"+leaveStudy
         }
         let kOkConfirm = NSLocalizedStrings("Are you sure? Tap Ok to confirm.", comment: "")
-        UIUtilities.showAlertMessageWithTwoActionsAndHandler(NSLocalizedStrings((leaveStudy + " ?"), comment: ""), errorMessage: NSLocalizedStrings(withdrawalMessage!, comment: ""), errorAlertActionTitle: kProceedTitle,
+        UIUtilities.showAlertMessageWithTwoActionsAndHandler(NSLocalizedStrings((alertLeaveStudy + " ?"), comment: ""), errorMessage: NSLocalizedStrings(withdrawalMessage!, comment: ""), errorAlertActionTitle: kProceedTitle,
                                                              errorAlertActionTitle2: kTitleCancel, viewControllerUsed: self,
                                                              action1: {
                                                                 

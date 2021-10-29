@@ -513,15 +513,16 @@ class DBHandler: NSObject {
         try? realm.write({
             
             dbStudy?.updateResources = StudyUpdates.studyResourcesUpdated
-            dbStudy?.updateConsent = StudyUpdates.studyConsentUpdated
+            dbStudy?.updateConsent =  StudyUpdates.studyConsentUpdated
             dbStudy?.updateActivities = StudyUpdates.studyActivitiesUpdated
             dbStudy?.updateInfo = StudyUpdates.studyInfoUpdated
+            print("Db1 metadata dbversion \(dbStudy?.version) updated version \(dbStudy?.updatedVersion) and study update studyversion \(StudyUpdates.studyVersion)")
             if StudyUpdates.studyVersion != nil {
                 dbStudy?.version = StudyUpdates.studyVersion
-                
             }else {
                 dbStudy?.version = dbStudy?.updatedVersion
             }
+            print("Db2 metadata dbversion \(dbStudy?.version) updated version \(dbStudy?.updatedVersion) and study update studyversion \(StudyUpdates.studyVersion)")
         })
     }
     
@@ -608,7 +609,9 @@ class DBHandler: NSObject {
         for activity in activityies {
             
             var dbActivity: DBActivity?
-            if dbActivityArray.count != 0 {
+            print("StudyUpdates.studyLang != StudyUpdates.studyOldLang \(StudyUpdates.studyLang != StudyUpdates.studyOldLang) studylang \(StudyUpdates.studyLang) studyoldlang \(StudyUpdates.studyOldLang)")
+            if dbActivityArray.count != 0 , StudyUpdates.studyLang == StudyUpdates.studyOldLang {
+                print("studyUpdate if studyLang  \(StudyUpdates.studyLang) and studlyold lang \(StudyUpdates.studyOldLang)")
                 dbActivity = dbActivityArray.filter({$0.actvityId == activity.actvityId!}).last
                 
                 if dbActivity == nil { //newly added activity
@@ -643,12 +646,18 @@ class DBHandler: NSObject {
                     }
                 }
                 
-            }else {
+            } else {
+                print("studyUpdate else studyLang  \(StudyUpdates.studyLang) and studlyold lang \(StudyUpdates.studyOldLang)")
+                
                 dbActivity = DBHandler.getDBActivity(activity: activity)
                 dbActivities.append(dbActivity!)
                 activityUpdated = true
             }
         }
+        
+      
+            StudyUpdates.studyOldLang = StudyUpdates.studyLang
+       
         
         //keys for alerts
         if activityUpdated {
@@ -658,7 +667,6 @@ class DBHandler: NSObject {
             ud.set(false, forKey: halfCompletionKey)
             ud.set(false, forKey: fullCompletionKey)
         }
-        
         
         
         if dbActivities.count > 0 {

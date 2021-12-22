@@ -107,7 +107,7 @@ class LineChartCell: GraphChartTableViewCell {
     }
     
     func setupLineChart(chart: DashboardCharts){
-        
+        print("Krishna line chart \(chart.displayName)")
         currentChart = chart
 
         self.graphView.tintColor = UIColor.gray

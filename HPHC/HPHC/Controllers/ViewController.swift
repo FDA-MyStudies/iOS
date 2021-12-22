@@ -185,7 +185,7 @@ class ViewController: UIViewController {
     
     func addResources() {
         var plistPath = Bundle.main.path(forResource: "Resources", ofType: ".plist", inDirectory: nil)
-        let localeDefault = Locale.preferredLanguages.first ?? "en"
+        let localeDefault = getLanguageLocale()
         if !(localeDefault.hasPrefix("es") || localeDefault.hasPrefix("en")) {
           plistPath = Bundle.main.path(forResource: "Resources", ofType: ".plist", inDirectory: nil, forLocalization: "Base")
         }
@@ -227,7 +227,7 @@ class ViewController: UIViewController {
     
     func userProfile()  {
         var plistPath = Bundle.main.path(forResource: "UserProfile", ofType: ".plist", inDirectory: nil)
-        let localeDefault = Locale.preferredLanguages.first ?? "en"
+        let localeDefault = getLanguageLocale()
         if !(localeDefault.hasPrefix("es") || localeDefault.hasPrefix("en")) {
           plistPath = Bundle.main.path(forResource: "UserProfile", ofType: ".plist", inDirectory: nil, forLocalization: "Base")
         }
@@ -247,7 +247,7 @@ class ViewController: UIViewController {
     
     func setPrefereneces()  {
         var plistPath = Bundle.main.path(forResource: "UserPreferences", ofType: ".plist", inDirectory: nil)
-        let localeDefault = Locale.preferredLanguages.first ?? "en"
+        let localeDefault = getLanguageLocale()
         if !(localeDefault.hasPrefix("es") || localeDefault.hasPrefix("en")) {
           plistPath = Bundle.main.path(forResource: "UserPreferences", ofType: ".plist", inDirectory: nil, forLocalization: "Base")
         }

@@ -87,9 +87,13 @@ class HomeViewController: UIViewController{
        
         //load plist info
         var plistPath = Bundle.main.path(forResource: "GatewayOverview", ofType: ".plist", inDirectory: nil)
-        let localeDefault = Locale.preferredLanguages.first ?? "en"
+        let localeDefault = getLanguageLocale()
         if !(localeDefault.hasPrefix("es") || localeDefault.hasPrefix("en")) {
           plistPath = Bundle.main.path(forResource: "GatewayOverview", ofType: ".plist", inDirectory: nil, forLocalization: "Base")
+        }else if localeDefault.hasPrefix("en"){
+            plistPath = Bundle.main.path(forResource: "GatewayOverview", ofType: ".plist", inDirectory: nil, forLocalization: "Base")
+        }else if localeDefault.hasPrefix("es"){
+            plistPath = Bundle.main.path(forResource: "GatewayOverview", ofType: ".plist", inDirectory: nil, forLocalization: "es")
         }
         let arrayContent = NSMutableArray.init(contentsOfFile: plistPath!)
         

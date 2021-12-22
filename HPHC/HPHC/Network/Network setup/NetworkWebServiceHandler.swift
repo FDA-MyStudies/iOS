@@ -297,7 +297,8 @@ class NetworkWebServiceHandler: NSObject, URLSessionDelegate {
                 }
                 }.resume()
             
-        } else {
+        }
+        else {
             if ((delegate?.failedRequest) != nil) {
         
                 let error1 = NSError(domain: NSURLErrorDomain, code:NoNetworkErrorCode,userInfo:[NSLocalizedDescriptionKey:NSLocalizedStrings("You seem to be offline. Please connect to a network to proceed with this action.", comment: "")])
@@ -353,7 +354,8 @@ class NetworkWebServiceHandler: NSObject, URLSessionDelegate {
                         }
                     }
                 }
-            } else {
+            }
+            else {
                 
                 if self.configuration.shouldParseErrorMessage() {
                   

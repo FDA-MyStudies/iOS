@@ -194,6 +194,7 @@ let kMessageValidToken = NSLocalizedStrings("Please enter valid token", comment:
 let kMessageForMissingStudyId = NSLocalizedStrings("Unable to Enroll, Please try again later.", comment: "")
 
 let kMessageInvalidTokenOrIfStudyDoesNotExist = NSLocalizedStrings("Sorry, this token is invalid. Please enter a valid token to continue.", comment: "")
+let kMessageTokenIsRequired = NSLocalizedStrings("Token is required", comment: "")
 
 
 // MARK:- StudyHomeMessages
@@ -225,3 +226,101 @@ let kFailedToConnectAppleMail = NSLocalizedStrings("Failed to connect to Apple M
 let kUsername = NSLocalizedStrings("Username", comment: "")
 let kPassword = NSLocalizedStrings("Password", comment: "")
 let kLogIn = NSLocalizedStrings("Log In", comment: "")
+
+// Set Current language Locale
+func setLanguageLocale() {
+    
+    /*
+    let locale3 = Locale.preferredLanguages.first ?? "en"
+    print("onLaunch language \(locale3)")
+    if(locale3.hasPrefix("es")){
+        ud1.set("es", forKey: kUserDeviceLanguage)
+    }else{
+        ud1.set("en", forKey: kUserDeviceLanguage)
+    }*/
+    
+    var languageLocale = Locale.preferredLanguages.first ?? "en"
+    
+    for lang in Locale.preferredLanguages {
+        print("Krishna language as prioriy \(lang)")
+        if lang.hasPrefix("es") {
+            
+        }
+    }
+    print("Krishna languageLocale in setLanguageLocale  \(languageLocale)")
+    print("Krishna languageLocale in setLanguageLocale current language code  \(Locale.autoupdatingCurrent.languageCode)")
+    print("Krishna preferredLanguage \(Locale.preferredLanguages.first) and other options size \(Locale.preferredLanguages.count)")
+    
+    if !NetworkManager.isNetworkAvailable() {
+        
+        let defaultLanguage = ud.value(forKey: kUserDeviceLanguage)
+        print("Krishna languageLocale in setLanguageLocale  defaultLanguage outside condition userstandard locale is en \(languageLocale)")
+        if (defaultLanguage != nil) {
+            
+            if (defaultLanguage as! String).hasPrefix("es") {
+                languageLocale = "es"
+                print("Krishna languageLocale in setLanguageLocale if locale is es \(languageLocale)")
+            } else {
+                
+                languageLocale = "en"
+                print("Krishna languageLocale in setLanguageLocale else locale is en \(languageLocale)")
+            }
+        }
+    }else{
+        
+    }
+    
+    let ud1 = UserDefaults.standard
+    if(languageLocale.hasPrefix("es")){
+        ud1.set("es", forKey: kUserDeviceLanguage)
+    }else{
+        ud1.set("en", forKey: kUserDeviceLanguage)
+    }
+    ud1.synchronize()
+    print("Krishna languageLocale in setLanguageLocale user defined language is \(ud1.value(forKey: kUserDeviceLanguage))")
+    
+    // set language local for storyboards
+    // AppDelegate.selectedLocale()
+}
+
+// Get Current language Locale
+func getLanguageLocale() -> String {
+    
+    let defaultLanguage = ud.value(forKey: kUserDeviceLanguage)
+    print("Krishna defaultLanguage in getLanguageLocale  \(defaultLanguage)")
+    if (defaultLanguage != nil) {
+        if((defaultLanguage as! String).hasPrefix("es")){
+            return "es"
+        }else{
+            return "en"
+        }
+    } else {
+        
+        let languageLocale = Locale.preferredLanguages.first ?? "en"
+        print("Krishna defaultLanguage in getLanguageLocale else condition  \(languageLocale)")
+        if(languageLocale.hasPrefix("es")){
+            return "es"
+        }else{
+            return "en"
+        }
+
+    }
+}
+
+// Get Path For Resource from Bundle
+//func getPathForResourceFromBundle(resourceName: String) -> String {
+//
+//    var plistPath = Bundle.main.path(forResource: resourceName, ofType: ".plist", inDirectory: nil)
+//    let localeDefault = getLanguageLocale()
+//
+//    if !(localeDefault.hasPrefix("es") || localeDefault.hasPrefix("en")) {
+//        plistPath = Bundle.main.path(forResource: resourceName, ofType: ".plist", inDirectory: nil, forLocalization: "Base") ?? ""
+//    } else if localeDefault.hasPrefix("en") {
+//        plistPath = Bundle.main.path(forResource: resourceName, ofType: ".plist", inDirectory: nil, forLocalization: "Base") ?? ""
+//    } else if localeDefault.hasPrefix("es") {
+//        plistPath = Bundle.main.path(forResource: resourceName, ofType: ".plist", inDirectory: nil, forLocalization: "es") ?? ""
+//    }
+//
+//
+//    return plistPath ?? ""
+//}

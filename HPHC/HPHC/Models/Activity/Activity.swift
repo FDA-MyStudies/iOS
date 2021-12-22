@@ -151,7 +151,7 @@ class Activity {
     var taskSubType: String? = "" //used for active tasks
     var anchorDate: AnchorDate? = nil
     var schedulingType:ActivityScheduleType = .regular
-    
+    var activityLang: String? = ""
      //Default Initializer
     init() {
        
@@ -186,6 +186,7 @@ class Activity {
         
         self.frequencyRuns = Array<Dictionary<String, Any>>() // contains the runs of Activity
         self.frequencyType = .One_Time
+        self.activityLang = ""
     }
     
     // MARK:Initializer Methods
@@ -217,6 +218,7 @@ class Activity {
             if Utilities.isValidValue(someObject: infoDict[kActivityBranching] as AnyObject ) {
                 self.branching = (infoDict[kActivityBranching] as? Bool)!
             }
+            
             if Utilities.isValidValue(someObject: infoDict[kActivityType] as AnyObject) {
                 self.type = ActivityType(rawValue: (infoDict[kActivityType] as? String)!)
             }
@@ -282,7 +284,8 @@ class Activity {
         } else {
             Logger.sharedInstance.debug("infoDict is null:\(infoDict)")
         }
-        
+        self.activityLang = getLanguageLocale()
+        print("0 actlang -- \(getLanguageLocale()) activity langague stu \(Study.currentActivity?.activityLang)")
     }
     
     // MARK: Setter Methods
@@ -331,7 +334,7 @@ class Activity {
             if let lastModified = infoDict[kActivityLastModified] as? String {
                 self.lastModified =  Utilities.getDateFromString(dateString: lastModified)
             }
-            
+          //  self.activityLang = getLanguageLocale()
         } else {
             Logger.sharedInstance.debug("infoDict is null:\(infoDict)")
         }

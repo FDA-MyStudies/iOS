@@ -23,7 +23,7 @@
 	<key>TermsAndConditionURL</key>
 	<string>https://www.fda.gov/AboutFDA/AboutThisWebsite/WebsitePolicies/</string>
 	<key>PrivacyPolicyURL</key>
-	<string>http://45.136.113.122:8082/fdahpStudyDesigner/policyPage.do</string>
+	<string>https://hpwcp-stage.lkcompliant.net/fdahpStudyDesigner/policyPage.do</string>
 	<key>ValidatedTitle</key>
 	<string>¡Validado!</string>
 	<key>AllowFeedback</key>

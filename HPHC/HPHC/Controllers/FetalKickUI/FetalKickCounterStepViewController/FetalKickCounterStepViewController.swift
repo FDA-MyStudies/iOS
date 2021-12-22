@@ -86,7 +86,7 @@ class FetalKickCounterStepViewController:  ORKStepViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        let locale3 = Locale.preferredLanguages.first ?? "en"
+        let locale3 = getLanguageLocale()
         print("local prefix \(locale3)")
         if locale3.hasPrefix("es") {
             startButton?.setImage(#imageLiteral(resourceName: "span_start_buttn1"), for: .normal)

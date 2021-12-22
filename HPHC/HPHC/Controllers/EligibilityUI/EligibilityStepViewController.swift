@@ -24,6 +24,7 @@ import IQKeyboardManagerSwift
 
 
 let kStudyWithStudyId = "Study with StudyId"
+let kTokenRequired = "Token is required"
 
 class EligibilityStep: ORKStep {
     var type: String?
@@ -215,7 +216,10 @@ extension EligibilityStepViewController: NMWebServiceDelegate {
         Logger.sharedInstance.info("requestname : \(requestName)")
         
         self.removeProgressIndicator()
-        if error.localizedDescription.localizedCaseInsensitiveContains(tokenTextField.text!) {
+        print("token in textfield \(tokenTextField.text!)")
+        print("Token response check with error \(error.localizedDescription.localizedCaseInsensitiveContains(tokenTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines)))")
+        
+        if error.localizedDescription.localizedCaseInsensitiveContains(tokenTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines)) {
             
             self.showAlert(message: kMessageInvalidTokenOrIfStudyDoesNotExist) //kMessageForInvalidToken
             
@@ -224,7 +228,10 @@ extension EligibilityStepViewController: NMWebServiceDelegate {
                 
                 self.showAlert(message: kMessageInvalidTokenOrIfStudyDoesNotExist) //kMessageForMissingStudyId
                 
-            } else {
+            }else if error.localizedDescription.localizedCaseInsensitiveContains(kTokenRequired){
+                self.showAlert(message: kMessageInvalidTokenOrIfStudyDoesNotExist)
+            }
+            else {
                 self.showAlert(message: Utilities.errorMessageDisplayMessage(error: error))
             }
         }

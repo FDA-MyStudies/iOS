@@ -34,7 +34,7 @@ enum AppConfiguration {
         var nsDictionary: NSDictionary?
       
         var plistPath = Bundle.main.path(forResource: "AppConfiguration", ofType: ".plist", inDirectory: nil)
-        let localeDefault = Locale.preferredLanguages.first ?? "en"
+        let localeDefault = getLanguageLocale()
         if !(localeDefault.hasPrefix("es") || localeDefault.hasPrefix("en")) {
           plistPath = Bundle.main.path(forResource: "AppConfiguration", ofType: ".plist", inDirectory: nil, forLocalization: "Base")
         }

@@ -52,23 +52,44 @@ class SplashViewController: UIViewController {
        
         self.checkIfAppLaunchedForFirstTime()
         
+        
         // Checks AuthKey, If exists navigate to HomeController else GatewayDashboard
-        if Utilities.isStandaloneApp() {
-            self.initilizeStudyForStandaloneApp()
-        } else {
-            
-            if User.currentUser.authToken != nil {
-                
-                let appDelegate = UIApplication.shared.delegate as! AppDelegate
-                appDelegate.checkPasscode(viewController: self)
-                self.navigateToGatewayDashboard()
-                
-            }else {
-                /*Gateway App*/
-                self.navigateToHomeController()
-                
-            }
-        }
+//        if Utilities.isStandaloneApp() {
+//            self.initilizeStudyForStandaloneApp()
+//        } else {
+//
+//            if User.currentUser.authToken != nil {
+//
+//                let appDelegate = UIApplication.shared.delegate as! AppDelegate
+//                appDelegate.checkPasscode(viewController: self)
+//                self.navigateToGatewayDashboard()
+//
+//            }else {
+//                /*Gateway App*/
+//                self.navigateToHomeController()
+//
+//            }
+//        }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                    
+                    // Checks AuthKey, If exists navigate to HomeController else GatewayDashboard
+                    if Utilities.isStandaloneApp() {
+                        self.initilizeStudyForStandaloneApp()
+                    } else {
+                        
+                        if User.currentUser.authToken != nil {
+                            
+                            let appDelegate = UIApplication.shared.delegate as! AppDelegate
+                            appDelegate.checkPasscode(viewController: self)
+                            self.navigateToGatewayDashboard()
+                            
+                        }else {
+                            //Gateway App/
+                            self.navigateToHomeController()
+                            
+                        }
+                    }
+                }
         
     }
 
@@ -94,9 +115,13 @@ class SplashViewController: UIViewController {
     func initilizeStudyOverview() {
         
         var plistPath = Bundle.main.path(forResource: "StudyOverview", ofType: ".plist", inDirectory: nil)
-        let localeDefault = Locale.preferredLanguages.first ?? "en"
+        let localeDefault = getLanguageLocale()
         if !(localeDefault.hasPrefix("es") || localeDefault.hasPrefix("en")) {
           plistPath = Bundle.main.path(forResource: "StudyOverview", ofType: ".plist", inDirectory: nil, forLocalization: "Base")
+        }else if localeDefault.hasPrefix("en"){
+            plistPath = Bundle.main.path(forResource: "StudyOverview", ofType: ".plist", inDirectory: nil, forLocalization: "Base")
+        }else if localeDefault.hasPrefix("es"){
+            plistPath = Bundle.main.path(forResource: "StudyOverview", ofType: ".plist", inDirectory: nil, forLocalization: "es")
         }
       
         let arrayContent = NSMutableArray.init(contentsOfFile: plistPath!)

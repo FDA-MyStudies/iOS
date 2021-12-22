@@ -60,6 +60,7 @@ let kUserNewPassword = "newPassword"
 let kUserIsTempPassword = "resetPassword"
 let kUserDeviceLanguage = "userDeviceLanguage"
 let kUserPreviousDeviceLanguage = "userPreviousDeviceLanguage"
+let kShowOfflineLanguageAlert = "showOfflineLanguageAlert"
 
 let kPasscodeIsPending = "PASSCODESETUP"
 let kShowNotification = "SHOWNOTIFICATION"

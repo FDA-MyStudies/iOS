@@ -173,13 +173,13 @@ class StudyHomeViewController: UIViewController {
             }
         }
 
-      let joinStudyTitle = Branding.JoinStudyButtonTitle
+      let joinStudyTitle =  NSLocalizedStrings("Join Study", comment: "")
       buttonJoinStudy?.setTitle(joinStudyTitle, for: .normal)
       
-      let visitWebsite = Branding.VisitWebsiteButtonTitle
+      let visitWebsite = NSLocalizedStrings("Visit Website", comment: "")
       buttonVisitWebsite?.setTitle(visitWebsite, for: .normal)
       
-      let viewConsent = Branding.ViewConsentButtonTitle
+      let viewConsent = NSLocalizedStrings("View Consent", comment: "")
       buttonViewConsent?.setTitle(viewConsent, for: .normal)
     }
 
@@ -293,9 +293,13 @@ class StudyHomeViewController: UIViewController {
 
         // load plist info
         var plistPath = Bundle.main.path(forResource: "StudyOverview", ofType: ".plist", inDirectory: nil)
-        let localeDefault = Locale.preferredLanguages.first ?? "en"
+        let localeDefault = getLanguageLocale()
         if !(localeDefault.hasPrefix("es") || localeDefault.hasPrefix("en")) {
           plistPath = Bundle.main.path(forResource: "StudyOverview", ofType: ".plist", inDirectory: nil, forLocalization: "Base")
+        }else if localeDefault.hasPrefix("en"){
+            plistPath = Bundle.main.path(forResource: "StudyOverview", ofType: ".plist", inDirectory: nil, forLocalization: "Base")
+        }else if localeDefault.hasPrefix("es"){
+            plistPath = Bundle.main.path(forResource: "StudyOverview", ofType: ".plist", inDirectory: nil, forLocalization: "es")
         }
       
         let arrayContent = NSMutableArray(contentsOfFile: plistPath!)

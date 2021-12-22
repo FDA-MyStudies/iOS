@@ -90,7 +90,7 @@ class ProfileViewController: UIViewController, SlideMenuControllerDelegate {
         
         //Load plist info
         var plistPath = Bundle.main.path(forResource: "Profile", ofType: ".plist", inDirectory: nil)
-        let localeDefault = Locale.preferredLanguages.first ?? "en"
+        let localeDefault = getLanguageLocale()
         if !(localeDefault.hasPrefix("es") || localeDefault.hasPrefix("en")) {
           plistPath = Bundle.main.path(forResource: "Profile", ofType: ".plist", inDirectory: nil, forLocalization: "Base")
         }

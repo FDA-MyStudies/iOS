@@ -46,6 +46,8 @@ class StudyOverviewViewControllerSecond: UIViewController{
             let url = URL.init(string:overviewSectionDetail.imageURL!)
             imageViewStudy?.sd_setImage(with: url, placeholderImage: nil)
         }
+        let joinStudyTitle =  NSLocalizedStrings("Join Study", comment: "")
+        buttonJoinStudy?.setTitle(joinStudyTitle, for: .normal)
     }
     
     override func viewWillDisappear(_ animated: Bool) {

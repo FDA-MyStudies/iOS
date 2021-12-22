@@ -28,6 +28,7 @@ class WebViewController : UIViewController{
     @IBOutlet weak var webView : WKWebView!
     @IBOutlet var barItemShare : UIBarButtonItem?
     
+    @IBOutlet weak var cancelBtnLabel: UIBarButtonItem!
     var activityIndicator:UIActivityIndicatorView!
     var requestLink:String?
     
@@ -55,7 +56,7 @@ class WebViewController : UIViewController{
         activityIndicator.center = CGPoint(x: self.view.frame.midX, y: self.view.frame.midY-100)
         self.view.addSubview(activityIndicator)
         activityIndicator.startAnimating()
-
+        self.cancelBtnLabel.title = NSLocalizedStrings("Cancel", comment: "")
         if self.isEmailAvailable == false {
             
         barItemShare?.isEnabled = false

@@ -57,7 +57,7 @@
 "Enter your feedback here"="Ingrese sus comentarios aquí";
 
 "CONTACT US"="CONTÁCTENOS";
-"REACH OUT"="ALCANZAR";
+"REACH OUT"="Contactar";
 "Leave Anonymous Feedback"="Deje un comentario anónimo";
 "Need Help? Contact Us"="¿Necesita ayuda? Contáctenos";
 
@@ -84,6 +84,8 @@
 "This action will create a shareable image file of the charts currently seen in this section. Proceed?"="Esta acción creará un archivo de imagen para compartir de los gráficos que se ven actualmente en esta sección. ¿Continuar?";
 
 "TRENDS"="TENDENCIAS";
+
+"7PI-ZW-p9g.text.value"="TENDENCIAS";
 
 "You can't join study without sharing your data"="No puede unirse al estudio sin compartir sus datos";
 "Unknown error occurred. Please try after some time."="Ocurrió un error desconocido. Inténtelo después de un tiempo.";
@@ -434,6 +436,7 @@
 
 "Study Status"="Estado del estudio";
 "Active"="Activo";
+"COMPLETION:"="Terminación:";
 "Closed"="Cerrado";
 "Upcoming"="Próximo";
 "Paused"="Pausado";
@@ -515,11 +518,12 @@
 "AqF-5D-BJY.normalTitle.value"="Estoy de acuerdo, procedo a eliminar mi cuenta";
 "CKp-ZC-FCM.text.value"="Asunto";
 "EmJ-Ca-q92.normalTitle.value"="Cancelar";
+"cae-09-QSH.normalTitle.value"="No hay actividades disponibles";
 "GZf-6d-030.text.value"="Comentarios";
 "LLs-YR-ZfM.text.value"="Borrar mi cuenta";
 "NY2-tY-i1U.normalTitle.value"="Aplicar";
 "OL5-qf-Lfd.normalTitle.value"="Conservar mis datos";
-
+"fuW-0v-Kj3.text.value" = "Terminación:";
 
 "TmB-Q7-f8P.normalTitle.value"="Desconectar";
 "ZAG-q5-tTH.placeholder.value"="Ingrese el asunto";
@@ -559,7 +563,9 @@
 "AA0-le-tSn.text.value"="Ver video";
 "AW7-ks-icb.text.value"="Sobre el estudio";
 "MKo-wh-p4O.normalTitle.value"="Unirse al estudio";
+"5NQ-r5-mSz.normalTitle.value"="Unirse al estudio";
 "gz3-j6-s6W.normalTitle.value"="Ver consentimiento";
+"bc7-W1-fmy.normalTitle.value"="Visita el sito web";
 "lIT-J9-U7S.normalTitle.value"="Unirse al estudio";
 "mud-v9-9iS.normalTitle.value"="Ver consentimiento";
 "wIC-kn-yNP.normalTitle.value"="Visita el sito web";
@@ -569,6 +575,7 @@
 "does not exist"="no existe";
 
 "Consent"="Consentimiento";
+"View Consent"="Ver consentimiento";
 "Ongoing"="En curso";
 "One Time"="Una vez";
 "Daily"="Diario";
@@ -578,6 +585,44 @@
 "Consent PDF"="PDF de consentimiento";
 "English"="INGLÉS";
 "Spanish"="ESPAÑOL";
-
-
-
+"You are offline. New language settings will be applied once you are connected again."="No tienes conexión. Se aplicará la nueva configuración de idioma una vez que te conectes de nuevo";
+"message"="Mensaje";
+"BUTTON_DONE"="Aceptar12";
+"Join Study"="Unirse al estudio";
+"Leave Study"="Abandonar el estudio";
+"RTJ-5j-gHp.text.value"="ESTADO DE ESTUDIO";
+"H3l-1i-Q8b.text.value"="Activo";
+"pju-m4-AKv.text.value"="ESTADO DE PARTICIPACIÓN";
+"me4-LJ-i7A.text.value"="En progreso";
+"XjP-9a-aCO.text.value"="USTED ESTÁ";
+"1se-Ih-SJx.text.value"="HECHO CON EL ESTUDIO";
+"mcT-Pq-7B0.text.value"="ESTAS COMPLETANDO";
+"b43-6R-4Z2.text.value"="DE ACTIVIDADES A TIEMPO";
+"GcS-bY-dZH.text.value"="Estadísticas";
+"kn0-VV-AHj.normalTitle.value"="SEMANA";
+"z17-KH-Jlb.normalTitle.value"="MES";
+"keM-H2-AzW.text.value"="tendencias";
+//"z80-Ua-Nhr.title.value"="Actividades";
+"oT5-OT-1EB.title.value"="Actividades";
+"arR-Sy-PnO.title.value"="Tablero";
+//"e3B-fq-hAL.title"="Recursos";
+"W7D-Iu-sAw.title.value"="Recursos";
+"Activities"="Actividades";
+"Dashboard"="Tablero";
+"Resources"="Recursos";
+"Pfh-Dn-IUH.text.value"="Gracias por su consentimiento para este estudio";
+"oQF-1F-Kvh.text.value"="Ahora puede comenzar a usar la aplicación para participar en el estudio.";
+"KFf-Ee-kF6.normalTitle.value"="Ver / PDF de consentimiento por correo electrónico";
+"uIj-lV-uyU.normalTitle.value"="Aceptar";
+"Hr1-BD-AHJ.segmentTitles[0]"="simbolo";
+"Hr1-BD-AHJ.segmentTitles[1]"="palabra clave";
+"U5e-0P-U9P.title.value"="Cancelar";
+"token"="simbolo";
+"keyword"="palabra clave";
+"6vD-yL-Trh.text.value"="Contador de patadas fetales";
+"1qm-qt-0go.normalTitle.value"="Aceptar";
+"du0-3K-yBm.text.value"="Regístrese";
+"6vD-yL-Trh.text.value"="Contador de patadas fetales";
+"2YV-6t-dEM.normalTitle.value"="Siguiente";
+"yvB-Wf-hYf.text.value"="RECUENTO TOTAL DE PATADAS";
+"Sue-m0-sIi.text.value"="TOQUE PARA INICIAR EL TEMPORIZADOR";

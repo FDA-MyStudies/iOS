@@ -515,7 +515,9 @@ class StudyListViewController: UIViewController {
                         self.searchView?.delegate = self
                         
                         let titleTextAttributesSelected = [NSAttributedString.Key.foregroundColor: UIColor.white]
+                        print("Krishna attributed titleTextAttributesSelected String \(titleTextAttributesSelected)")
                         let titleTextAttributesUnSelected = [NSAttributedString.Key.foregroundColor: UIColor.gray]
+                        print("Krishna attributed String titleTextAttributesUnSelected \( self.searchView?.segementToken?.titleForSegment(at: 0))")
                         self.searchView?.segementToken?.setTitleTextAttributes(titleTextAttributesUnSelected, for: .normal)
                         self.searchView?.segementToken?.setTitleTextAttributes(titleTextAttributesSelected, for: .selected)
                         self.searchView?.segementToken?.layer.borderWidth = 2
@@ -718,13 +720,22 @@ class StudyListViewController: UIViewController {
 
                 if userStudyStatus == .completed || userStudyStatus == .inProgress {
                     // check if study version is udpated
-                    if study?.version != study?.newVersion {
+                 //   if study?.version != study?.newVersion {
+                    if NetworkManager.isNetworkAvailable() {
+                        
+                    
                         WCPServices().getStudyUpdates(study: study!, delegate: self)
-                    } else {
-                        // let appDelegate = (UIApplication.shared.delegate as? AppDelegate)!
+                    }else{
+                       // let appDelegate = (UIApplication.shared.delegate as? AppDelegate)!
                         addProgressIndicator()
                         perform(#selector(loadStudyDetails), with: self, afterDelay: 1)
                     }
+//                    }
+//                    else {
+//                        // let appDelegate = (UIApplication.shared.delegate as? AppDelegate)!
+//                        addProgressIndicator()
+//                        perform(#selector(loadStudyDetails), with: self, afterDelay: 1)
+//                    }
                 } else {
                     checkForStudyUpdate(study: study)
                 }
@@ -951,19 +962,19 @@ extension StudyListViewController: UITableViewDelegate {
         let study = studiesList[indexPath.row]
       let studyLanguage = study.studyLanguage.uppercased()
       
-      var locale = Locale.preferredLanguages.first ?? "en"
+      var locale = getLanguageLocale()
       if !(locale.hasPrefix("es") || locale.hasPrefix("en")) {
         locale = "en"
       }
       
-      if locale.hasPrefix("es") && studyLanguage == "ENGLISH" {
-        presentLanguageAlert(studyLanguage: "English", study: study)
-      } else if !locale.hasPrefix("es") && studyLanguage == "SPANISH" {
-        presentLanguageAlert(studyLanguage: "Spanish", study: study)
-      } else {
+//      if locale.hasPrefix("es") && studyLanguage == "ENGLISH" {
+//        presentLanguageAlert(studyLanguage: "English", study: study)
+//      } else if !locale.hasPrefix("es") && studyLanguage == "SPANISH" {
+//        presentLanguageAlert(studyLanguage: "Spanish", study: study)
+//      } else {
         Study.updateCurrentStudy(study: study)
         performTaskBasedOnStudyStatus()
-      }
+      //}
     }
   
   func presentLanguageAlert(studyLanguage: String, study: Study) {
@@ -1236,7 +1247,8 @@ extension StudyListViewController: NMWebServiceDelegate {
             UIUtilities.showAlertMessageWithActionHandler(kErrorTitle, message: error.localizedDescription, buttonTitle: kTitleOk, viewControllerUsed: self, action: {
                 self.fdaSlideMenuController()?.navigateToHomeAfterUnauthorizedAccess()
             })
-        } else {
+        }
+        else {
             if requestName as String == RegistrationMethods.studyState.description {
                 sendRequestToGetStudyList()
 

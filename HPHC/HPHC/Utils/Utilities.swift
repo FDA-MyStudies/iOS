@@ -199,7 +199,7 @@ class Utilities: NSObject {
     //checks all the validations for password
     class func isPasswordValid( text: String) -> Bool {
         
-        let locale3 = Locale.preferredLanguages.first ?? "en"
+        let locale3 = getLanguageLocale()
         if locale3.hasPrefix("es") {
             let text = text
             

@@ -280,11 +280,13 @@ NSBundle *ORKBundleEnglish() {
   
   NSString * localestr = @"en";
   
-  NSString * localeVal = [[NSLocale preferredLanguages] firstObject];
-  
+  //NSString * localeVal = [[NSLocale preferredLanguages] firstObject];
+    NSString * localeVal = [[NSUserDefaults standardUserDefaults] valueForKey: @"userDeviceLanguage"];
+    NSLog(@"Krishna ORKBundleEnglish localeVal = %@",localeVal);
   if ([localeVal containsString:@"es"]) {
     localestr = @"es";
   }
+    
   
     static NSBundle *bundle;
     static dispatch_once_t onceToken;
@@ -292,6 +294,7 @@ NSBundle *ORKBundleEnglish() {
       NSString *path = [ORKBundle() pathForResource:localestr ofType:@"lproj"];
       bundle = [NSBundle bundleWithPath:path];
   });
+    NSLog(@"Krishna ORKBundleEnglish localeVal bundle = %@",bundle);
     return bundle;
 }
 

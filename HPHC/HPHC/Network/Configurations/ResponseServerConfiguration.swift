@@ -76,7 +76,15 @@ class ResponseServerConfiguration: NetworkConfiguration {
     }
     
     override func getDefaultHeaders() -> [String: String] {
-        return Dictionary()
+        let localeDefault = getLanguageLocale()
+        var language = "en"
+        if localeDefault.hasPrefix("es") { // true
+          language = "es"
+        }
+        let headers = ["language": language]
+
+        return headers
+       // return Dictionary()
     }
     override func getDefaultRequestParameters() -> [String: Any] {
         return Dictionary()

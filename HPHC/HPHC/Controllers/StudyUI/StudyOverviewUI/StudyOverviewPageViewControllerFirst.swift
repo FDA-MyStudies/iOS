@@ -48,7 +48,8 @@ class StudyOverviewViewControllerFirst: UIViewController {
 // MARK:- Viewcontroller Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        let joinStudyTitle =  NSLocalizedStrings("Join Study", comment: "")
+        buttonJoinStudy?.setTitle(joinStudyTitle, for: .normal)
         //Used to set border color for bottom view
         buttonJoinStudy?.layer.borderColor = kUicolorForButtonBackground
         if overviewSectionDetail.imageURL != nil {

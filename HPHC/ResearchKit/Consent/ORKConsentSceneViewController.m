@@ -271,16 +271,29 @@ static NSString *localizedLearnMoreForType(ORKConsentSectionType sectionType) {
 
 - (IBAction)showContent:(id)sender {
     ORKConsentLearnMoreViewController *viewController = nil;
-    
+    NSLog(@"Krishna action section = %@",_section.htmlContent);
+    NSLog(@"Krishna action section title = %@",_section.title);
     if (_section.contentURL) {
         viewController = [[ORKConsentLearnMoreViewController alloc] initWithContentURL:_section.contentURL];
     } else {
         viewController = [[ORKConsentLearnMoreViewController alloc] initWithHTMLContent:((_section.htmlContent.length > 0) ? _section.htmlContent : _section.escapedContent)];
     }
+    
     viewController.title = _section.title ?: ORKLocalizedString(@"CONSENT_LEARN_MORE_TITLE", nil);
+    
     UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:viewController];
     navigationController.navigationBar.prefersLargeTitles = YES;
+    navigationController.navigationItem.backBarButtonItem.title = NSLocalizedString(@"Done", nil);//ORKLocalizedString(@"Done", nil);
     navigationController.modalPresentationStyle = UIModalPresentationFormSheet;
+    navigationController.navigationItem.backBarButtonItem =
+    [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Done", nil)
+                style:UIBarButtonItemStylePlain
+               target:nil
+               action:nil];
+ 
+    NSLog(@"Krishna action right bar section title = %@",navigationController.navigationItem.rightBarButtonItem.title);
+    NSLog(@"Krishna action right bar section title = %@",navigationController.navigationItem.rightBarButtonItem.title);
+    NSLog(@"Krishna action back bar section title = %@",navigationController.navigationItem.backBarButtonItem.title);
     [self presentViewController:navigationController animated:YES completion:nil];
 }
 

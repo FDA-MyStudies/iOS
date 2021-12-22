@@ -132,7 +132,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         UIView.appearance(whenContainedInInstancesOf: [ORKTaskViewController.self]).tintColor = kUIColorForSubmitButtonBackground
         
-        self.checkForAppUpdate()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                    self.checkForAppUpdate()
+                }
         
         if UIApplication.shared.applicationIconBadgeNumber > 0 {
             UIApplication.shared.applicationIconBadgeNumber = 0
@@ -177,13 +179,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 ud.synchronize()
             }
         }
-        let locale3 = Locale.preferredLanguages.first ?? "en"
-        print("onLaunch language \(locale3)")
-        if(locale3.hasPrefix("es")){
-            ud1.set("es", forKey: kUserDeviceLanguage)
-        }else{
-            ud1.set("en", forKey: kUserDeviceLanguage)
-        }
+        
+        /*
+                let locale3 = getLanguageLocale()
+                print("onLaunch language \(locale3)")
+                if(locale3.hasPrefix("es")){
+                    ud1.set("es", forKey: kUserDeviceLanguage)
+                }else{
+                    ud1.set("en", forKey: kUserDeviceLanguage)
+                }*/
        
         //self.fireNotiffication(intervel: 10)
         //self.fireNotiffication(intervel: 15)
@@ -208,23 +212,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     
     func applicationWillEnterForeground(_ application: UIApplication) {
-        let locale3 = Locale.preferredLanguages.first ?? "en"
-  
-        if(NetworkManager.isNetworkAvailable()){
-            print("network available applicationWillEnterForeground  \(NetworkManager.isNetworkAvailable()) and locale3 is \(locale3)")
-            
-            if(locale3.hasPrefix("es")){
-                ud.set("es", forKey: kUserDeviceLanguage)
-            }else{
-                ud.set("en", forKey: kUserDeviceLanguage)
-            }
-            //ud.set(locale3, forKey: kUserDeviceLanguage)
-            ud.synchronize()
-            self.updateLocale(locale3: locale3)
-        }else{
-            print("network available applicationWillEnterForeground  \(NetworkManager.isNetworkAvailable()) and ud.value is \(ud.value(forKey: kUserDeviceLanguage))")
-            self.updateLocale(locale3: ud.value(forKey: kUserDeviceLanguage)! as! String)
-        }
+        /*
+                let locale3 = getLanguageLocale()
+                if(NetworkManager.isNetworkAvailable()){
+                    print("network available applicationWillEnterForeground  \(NetworkManager.isNetworkAvailable()) and locale3 is \(locale3)")
+                    
+                    if(locale3.hasPrefix("es")){
+                        ud.set("es", forKey: kUserDeviceLanguage)
+                    }else{
+                        ud.set("en", forKey: kUserDeviceLanguage)
+                    }
+                    //ud.set(locale3, forKey: kUserDeviceLanguage)
+                    ud.synchronize()
+                    self.updateLocale(locale3: locale3)
+                }else{
+                    print("network available applicationWillEnterForeground  \(NetworkManager.isNetworkAvailable()) and ud.value is \(ud.value(forKey: kUserDeviceLanguage))")
+                    self.updateLocale(locale3: ud.value(forKey: kUserDeviceLanguage)! as! String)
+                }
+                 */
         
 //        if !(locale3.hasPrefix("es") || locale3.hasPrefix("en")) {
 //            Bundle.setLanguage("en")
@@ -256,33 +261,56 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
     }
     
-    func updateLocale(locale3 : String){
-        if !(locale3.hasPrefix("es") || locale3.hasPrefix("en")) {
-            Bundle.setLanguage("en")
+//    func updateLocale(locale3 : String){
+//        if !(locale3.hasPrefix("es") || locale3.hasPrefix("en")) {
+//            Bundle.setLanguage("en")
+//
+//            let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
+//            UIApplication.shared.keyWindow?.rootViewController = storyboard.instantiateInitialViewController()
+//
+//
+//            let path = Bundle.main.path(forResource: "en", ofType: "lproj")
+//
+//            if let path = path {
+//                localeBundle = Bundle(path: path)
+//            }
+//            else {
+//                let path = Bundle.main.path(forResource: "en", ofType: "lproj") ?? ""
+//                localeBundle = Bundle(path: path)
+//            }
+//        }
+//        else if locale3.hasPrefix("es") {
+//            let path = Bundle.main.path(forResource: "es", ofType: "lproj") ?? ""
+//            localeBundle = Bundle(path: path)
+//        }
+//    }
+    
+    func showLocalisationAlert() {
             
-            let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
-            UIApplication.shared.keyWindow?.rootViewController = storyboard.instantiateInitialViewController()
-            
-            
-            let path = Bundle.main.path(forResource: "en", ofType: "lproj")
-            
-            if let path = path {
-                localeBundle = Bundle(path: path)
+            let localeLanguage = getLanguageLocale()
+            if !NetworkManager.isNetworkAvailable() {
+                
+                if (ud.value(forKey: kShowOfflineLanguageAlert) == nil) {
+                    ud.set("1", forKey: kShowOfflineLanguageAlert)
+                }
+                
+                if localeLanguage.prefix(2) != (Locale.preferredLanguages.first ?? "en").prefix(2) && ud.value(forKey: kShowOfflineLanguageAlert) as! String == "1" {
+                    UIUtilities.showAlertWithTitleAndMessage(title: "", message: NSLocalizedStrings("You are offline. New language settings will be applied once you are connected again.", comment: "") as NSString)
+                    ud.set("0", forKey: kShowOfflineLanguageAlert)
+                }
             }
-            else {
-                let path = Bundle.main.path(forResource: "en", ofType: "lproj") ?? ""
-                localeBundle = Bundle(path: path)
+            if localeLanguage.prefix(2) == (Locale.preferredLanguages.first ?? "en").prefix(2) {
+                ud.set("1", forKey: kShowOfflineLanguageAlert)
             }
         }
-        else if locale3.hasPrefix("es") {
-            let path = Bundle.main.path(forResource: "es", ofType: "lproj") ?? ""
-            localeBundle = Bundle(path: path)
-        }
-    }
     func applicationDidBecomeActive(_ application: UIApplication) {
         
         // self.window?.isHidden = false
         
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                    self.showLocalisationAlert()
+                }
         UIApplication.shared.applicationIconBadgeNumber = 0
         
         if self.appIsResignedButDidNotEnteredBackground! {
@@ -1887,27 +1915,39 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
 extension AppDelegate {
     
     static func selectedLocale () -> Bundle? {
-        let locale3 = Locale.preferredLanguages.first ?? "en"
-        print("network available  \(NetworkManager.isNetworkAvailable()) and locale3 is \(locale3)")
-        if !(locale3.hasPrefix("es") || locale3.hasPrefix("en")) {
-            Bundle.setLanguage("en")
-            
-            let path = Bundle.main.path(forResource: "en", ofType: "lproj")
-            
-            if let path = path {
+            let locale3 = getLanguageLocale()
+            print("network available  \(NetworkManager.isNetworkAvailable()) and locale3 is \(locale3)")
+            if !(locale3.hasPrefix("es") || locale3.hasPrefix("en")) {
+                Bundle.setLanguage("en")
+                
+                let path = Bundle.main.path(forResource: "en", ofType: "lproj")
+                
+                if let path = path {
+                    localeBundle = Bundle(path: path)
+                }
+                else {
+                    let path = Bundle.main.path(forResource: "en", ofType: "lproj") ?? ""
+                    localeBundle = Bundle(path: path)
+                }
+                print("Krishna Setting locale in if condition identifier \(localeBundle?.bundleIdentifier)")
+                print("Krishna Setting locale in if condition path \(localeBundle?.bundlePath)")
+                
+            } else if locale3.hasPrefix("es") {
+                let path = Bundle.main.path(forResource: "es", ofType: "lproj") ?? ""
                 localeBundle = Bundle(path: path)
-            }
-            else {
+                print("Krishna Setting locale in elseif es condition identifier \(localeBundle?.bundleIdentifier)")
+                print("Krishna Setting locale in elseif es condition path \(localeBundle?.bundlePath)")
+                
+            } else if locale3.hasPrefix("en") {
                 let path = Bundle.main.path(forResource: "en", ofType: "lproj") ?? ""
                 localeBundle = Bundle(path: path)
+                print("Krishna Setting locale in elseif en condition identifier \(localeBundle?.bundleIdentifier)")
+                print("Krishna Setting locale in elseif en condition path \(localeBundle?.bundlePath)")
             }
+        print("Krishna Setting locale before return \(localeBundle?.bundleIdentifier)")
+        print("Krishna Setting locale before return \(localeBundle?.bundlePath)")
+            return localeBundle
         }
-        else if locale3.hasPrefix("es") {
-            let path = Bundle.main.path(forResource: "es", ofType: "lproj") ?? ""
-            localeBundle = Bundle(path: path)
-        }
-        return localeBundle
-    }
 }
 
 extension UIWindow {

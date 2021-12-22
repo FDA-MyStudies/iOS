@@ -44,11 +44,17 @@ enum Branding {
       var nsDictionary: NSDictionary?
     
       var plistPath = Bundle.main.path(forResource: "Branding", ofType: ".plist", inDirectory: nil)
-      let localeDefault = Locale.preferredLanguages.first ?? "en"
+      let localeDefault = getLanguageLocale()
+    print("Krishna branding plist \(localeDefault)")
       if !(localeDefault.hasPrefix("es") || localeDefault.hasPrefix("en")) {
         plistPath = Bundle.main.path(forResource: "Branding", ofType: ".plist", inDirectory: nil, forLocalization: "Base")
+        print("Krishna branding plist inside if \(Bundle.main.path(forResource: "Branding", ofType: ".plist", inDirectory: nil, forLocalization: "Base"))")
+      }else if localeDefault.hasPrefix("en"){
+        plistPath = Bundle.main.path(forResource: "Branding", ofType: ".plist", inDirectory: nil, forLocalization: "Base")
+      }else if localeDefault.hasPrefix("es"){
+        plistPath = Bundle.main.path(forResource: "Branding", ofType: ".plist", inDirectory: nil, forLocalization: "es")
       }
-    
+      print("Krishna branding plist path : \(plistPath)")
       if let path = plistPath {
          nsDictionary = NSDictionary(contentsOfFile: path)
       }

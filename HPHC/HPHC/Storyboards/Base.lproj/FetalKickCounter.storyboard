@@ -54,6 +54,9 @@
                                 <rect key="frame" x="117.5" y="222.5" width="140.5" height="24"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="20"/>
                                 <nil key="highlightedColor"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="localizedText" value="yvB-Wf-hYf.text.value"/>
+                                </userDefinedRuntimeAttributes>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aSf-6Q-Uq6">
                                 <rect key="frame" x="126" y="430.5" width="123" height="123"/>
@@ -88,6 +91,9 @@
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
                                 <color key="textColor" red="0.54901960780000003" green="0.58431372550000005" blue="0.63921568630000003" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="localizedText" value="Sue-m0-sIi.text.value"/>
+                                </userDefinedRuntimeAttributes>
                             </label>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ykH-Ue-qu3">
                                 <rect key="frame" x="79" y="326" width="218" height="1"/>
@@ -306,6 +312,7 @@
                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
                                         <integer key="value" value="1"/>
                                     </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="localizedText" value="uIj-lV-uyU.normalTitle.value"/>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="buttonActionNextWithSender:" destination="sfa-bd-dzE" eventType="touchUpInside" id="3Xh-qn-Vv2"/>
@@ -317,6 +324,9 @@
                                 <state key="normal" title="View/Email Consent PDF">
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="localizedText" value="KFf-Ee-kF6.normalTitle.value"/>
+                                </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="buttonActionViewPdfWithSender:" destination="sfa-bd-dzE" eventType="touchUpInside" id="sUS-dr-c34"/>
                                 </connections>
@@ -330,6 +340,9 @@
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="30"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="localizedText" value="Pfh-Dn-IUH.text.value"/>
+                                </userDefinedRuntimeAttributes>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You can now start using the app to participate in the study." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oQF-1F-Kvh">
                                 <rect key="frame" x="16" y="200.5" width="343" height="60"/>
@@ -339,6 +352,9 @@
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="localizedText" value="oQF-1F-Kvh.text.value"/>
+                                </userDefinedRuntimeAttributes>
                             </label>
                             <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="DA7-Xo-zwR">
                                 <rect key="frame" x="169" y="315" width="37" height="37"/>
@@ -409,6 +425,7 @@
                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
                                         <integer key="value" value="1"/>
                                     </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="localizedText" value="2YV-6t-dEM.normalTitle.value"/>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="nextButtonAction:" destination="SZX-5w-Qm7" eventType="touchUpInside" id="VGK-ke-qh5"/>
@@ -423,6 +440,9 @@
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="29"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="localizedText" value="6vD-yL-Trh.text.value"/>
+                                </userDefinedRuntimeAttributes>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="8" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Q0N-2J-KWL">
                                 <rect key="frame" x="22" y="251" width="331" height="154"/>
@@ -522,6 +542,9 @@
                                     </barButtonItem>
                                     <barButtonItem title="Done" width="48" id="1qm-qt-0go">
                                         <color key="tintColor" red="0.0" green="0.48627450979999998" blue="0.72941176470000002" alpha="1" colorSpace="calibratedRGB"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="string" keyPath="localizedText" value="1qm-qt-0go.normalTitle.value"/>
+                                        </userDefinedRuntimeAttributes>
                                         <connections>
                                             <action selector="buttonActionNextWithSender:" destination="0WO-Bz-3yZ" id="rPt-xP-vJZ"/>
                                         </connections>

@@ -610,6 +610,8 @@ class DBHandler: NSObject {
             
             var dbActivity: DBActivity?
             print("StudyUpdates.studyLang != StudyUpdates.studyOldLang \(StudyUpdates.studyLang != StudyUpdates.studyOldLang) studylang \(StudyUpdates.studyLang) studyoldlang \(StudyUpdates.studyOldLang)")
+            
+            print("2 save activites actlang -- \(getLanguageLocale()) -- activity language \(Study.currentActivity?.activityLang)")
             if dbActivityArray.count != 0 , StudyUpdates.studyLang == StudyUpdates.studyOldLang {
                 print("studyUpdate if studyLang  \(StudyUpdates.studyLang) and studlyold lang \(StudyUpdates.studyOldLang)")
                 dbActivity = dbActivityArray.filter({$0.actvityId == activity.actvityId!}).last
@@ -646,7 +648,8 @@ class DBHandler: NSObject {
                     }
                 }
                 
-            } else {
+            }
+            else {
                 print("studyUpdate else studyLang  \(StudyUpdates.studyLang) and studlyold lang \(StudyUpdates.studyOldLang)")
                 
                 dbActivity = DBHandler.getDBActivity(activity: activity)
@@ -703,6 +706,7 @@ class DBHandler: NSObject {
         dbActivity.id = activity.studyId! + activity.actvityId!
         dbActivity.taskSubType = activity.taskSubType
         dbActivity.addNewCustomRuns = activity.addNewCustomRuns
+        dbActivity.activityLang = activity.activityLang
         
         let frequencyJSON = ["data": activity.frequencyRuns]
         let frequencyRunsData =  try? JSONSerialization.data(withJSONObject: frequencyJSON, options: JSONSerialization.WritingOptions.prettyPrinted)
@@ -1221,6 +1225,7 @@ class DBHandler: NSObject {
         activity.state = dbActivity.state
         activity.taskSubType = dbActivity.taskSubType
         activity.addNewCustomRuns = dbActivity.addNewCustomRuns
+        activity.activityLang = dbActivity.activityLang
         do {
             let frequencyRuns = try JSONSerialization.jsonObject(with: dbActivity.frequencyRunsData!, options: []) as! [String: Any]
             activity.frequencyRuns = frequencyRuns["data"] as! Array<Dictionary<String, Any>>?
@@ -1632,7 +1637,7 @@ class DBHandler: NSObject {
         
         let realm = DBHandler.getRealmObject()!
         let dbMetaDataList = realm.objects(DBActivityMetaData.self).filter({$0.actvityId == activity.actvityId && $0.studyId == activity.studyId})
-        
+        print("2 actlang -- \(getLanguageLocale()) -- activity language \(Study.currentActivity?.activityLang)")
         if dbMetaDataList.count != 0 {
             let metaData = dbMetaDataList.last
             
@@ -1646,12 +1651,14 @@ class DBHandler: NSObject {
                     ActivityBuilder.currentActivityBuilder = ActivityBuilder()
                     ActivityBuilder.currentActivityBuilder.initWithActivity(activity: Study.currentActivity! )
                 }
+                print("3 actlang -- \(getLanguageLocale()) -- activity language \(Study.currentActivity?.activityLang) -- \(metaData)")
                 completionHandler(true)
                 
             }catch {
                 completionHandler(false)
             }
-        }else {
+        }
+        else {
             completionHandler(false)
         }
     }

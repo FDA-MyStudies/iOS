@@ -41,6 +41,12 @@
 "Select Lead Time"="Select Lead Time";
 "Done"="Done";
 "Cancel"="Cancel";
+"Join Study"="Join Study";
+"Leave Study"="Leave Study";
+
+
+
+
 "Profile"="Profile";
 "Profile updated Successfully."="Profile updated Successfully.";
 "Sign Out"="Sign Out";
@@ -84,7 +90,7 @@
 "This action will create a shareable image file of the charts currently seen in this section. Proceed?"="This action will create a shareable image file of the charts currently seen in this section. Proceed?";
 
 "TRENDS"="TRENDS";
-
+"7PI-ZW-p9g.text.value"="TRENDS";
 "You can't join study without sharing your data"="You can't join study without sharing your data";
 "Unknown error occurred. Please try after some time."="Unknown error occurred. Please try after some time.";
 
@@ -431,6 +437,7 @@
 
 "Study Status"="Study Status";
 "Active"="Active";
+"COMPLETION:"="COMPLETION:";
 "Closed"="Closed";
 "Upcoming"="Upcoming";
 "Paused"="Paused";
@@ -500,6 +507,7 @@
 "xNA-bz-Y9i.text.value"="New Version Avaiable";
 
 "7Rb-1u-tkt.text.value"="Search study by";
+"fuW-0v-Kj3.text.value" = "COMPLETION:";
 "x0y-MY-FMc.placeholder.value"="Enter a token";
 "xyq-ug-M4x.normalTitle.value"="Cancel";
 "NJC-CA-ro1.text.value"="Try Again";
@@ -516,6 +524,7 @@
 "AqF-5D-BJY.normalTitle.value"="I agree, proceed to deleting my account";
 "CKp-ZC-FCM.text.value"="Subject";
 "EmJ-Ca-q92.normalTitle.value"="Cancel";
+"cae-09-QSH.normalTitle.value"="No activities available";
 "GZf-6d-030.text.value"="Feedback";
 "LLs-YR-ZfM.text.value"="A study for pregnant women";
 "NY2-tY-i1U.normalTitle.value"="Apply";
@@ -560,7 +569,9 @@
 "AA0-le-tSn.text.value"="Watch Video";
 "AW7-ks-icb.text.value"="About the Study";
 "MKo-wh-p4O.normalTitle.value"="Join Study";
+"5NQ-r5-mSz.normalTitle.value"="Join Study";
 "gz3-j6-s6W.normalTitle.value"="View Consent";
+"bc7-W1-fmy.normalTitle.value"="Visit Website";
 "lIT-J9-U7S.normalTitle.value"="Join Study";
 "mud-v9-9iS.normalTitle.value"="View Consent";
 "wIC-kn-yNP.normalTitle.value"="Visit Website";
@@ -570,7 +581,7 @@
 "does not exist"="does not exist";
 
 "Consent"="Consent";
-
+"View Consent"="View Consent";
 "Ongoing"="Ongoing";
 "One Time"="One Time";
 "Daily"="Daily";
@@ -580,9 +591,41 @@
 "Consent PDF"="Consent PDF";
 "English"="English";
 "Spanish"="Spanish";
-
-
-
+"You are offline. New language settings will be applied once you are connected again."="You are offline. New language settings will be applied once you are connected again.";
+"message"="Message";
+"BUTTON_DONE"="Done";
+"RTJ-5j-gHp.text.value"="STUDY STATUS";
+"H3l-1i-Q8b.text.value"="Active";
+"pju-m4-AKv.text.value"="PARTICIPATION STATUS";
+"me4-LJ-i7A.text.value"="In Progress";
+"XjP-9a-aCO.text.value"="YOU ARE";
+"1se-Ih-SJx.text.value"="DONE WITH THE STUDY";
+"mcT-Pq-7B0.text.value"="YOU COMPLETED";
+"b43-6R-4Z2.text.value"="OF ACTIVITIES SO FAR";
+"GcS-bY-dZH.text.value"="Statistics";
+"kn0-VV-AHj.normalTitle.value"="WEEK";
+"z17-KH-Jlb.normalTitle.value"="MONTH";
+"keM-H2-AzW.text.value"="Trends";
+//"z80-Ua-Nhr.title.value"="Activities";
+"Activities"="Activities";
+"Dashboard"="Dashboard";
+"Resources"="Resources";
+"Pfh-Dn-IUH.text.value"="Thanks for providing consent for this Study";
+"oQF-1F-Kvh.text.value"="You can now start using the app to participate in the study.";
+"KFf-Ee-kF6.normalTitle.value"="View/Email Consent PDF";
+"uIj-lV-uyU.normalTitle.value"="Done";
+"Hr1-BD-AHJ.segmentTitles[0]"="token";
+"Hr1-BD-AHJ.segmentTitles[1]"="keyword";
+"U5e-0P-U9P.title.value"="Cancel";
+"token"="token";
+"keyword"="keyword";
+"6vD-yL-Trh.text.value"="Fetal Kick Counter";
+"1qm-qt-0go.normalTitle.value"="Done";
+"du0-3K-yBm.text.value"="Sign up";
+"6vD-yL-Trh.text.value"="Fetal Kick Counter";
+"2YV-6t-dEM.normalTitle.value"="Next";
+"yvB-Wf-hYf.text.value"="TOTAL KICK COUNT";
+"Sue-m0-sIi.text.value"="TAP TO START TIMER";
 
 
 

@@ -198,6 +198,16 @@ extension FeedBackViewController: UITextViewDelegate {
             textView.tag = 101
         }
     }
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        if var text = textField.text, range.location == text.count, string == " " {
+                let noBreakSpace: Character = "\u{00a0}"
+                text.append(noBreakSpace)
+                textField.text = text
+                return false
+            }
+            return true
+    }
 }
 
 
@@ -206,11 +216,11 @@ extension FeedBackViewController: UITextFieldDelegate{
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
         
-        
+        print("Krishna Editing text \(textField.text!)")
     }
    
     func textFieldDidEndEditing(_ textField: UITextField) {
-        print(textField.text!)
+        print("Krishna Editing text \(textField.text!)")
         textField.text =  textField.text?.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
         FeedbackDetail.subject = textField.text!
     }

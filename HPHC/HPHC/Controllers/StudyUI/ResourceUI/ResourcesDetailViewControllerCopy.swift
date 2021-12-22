@@ -126,7 +126,8 @@ class ResourcesDetailViewControllerCopy: UIViewController {
                     }
                     
                                       //self.loadWebViewWithPath(path: (self.resource?.file?.localPath)!)
-                } else {
+                }
+                else {
                    //
                     if let link = self.resource?.file?.link,
                         let fileName = URL(string: link)?.lastPathComponent {

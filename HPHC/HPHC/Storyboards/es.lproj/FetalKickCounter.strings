@@ -3,7 +3,7 @@
 "1Zu-1M-7Gw.placeholder" = "Ingrese el token de inscripción";
 
 /* Class = "UIBarButtonItem"; title = "Done"; ObjectID = "1qm-qt-0go"; */
-"1qm-qt-0go.title" = "Aceptar";
+"1qm-qt-0go.normalTitle" = "Aceptar";
 
 /* Class = "UIButton"; normalTitle = "Next"; ObjectID = "2YV-6t-dEM"; */
 "2YV-6t-dEM.normalTitle" = "Siguiente";

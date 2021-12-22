@@ -27,9 +27,14 @@ class GatewayResourcesListViewController: UIViewController {
     func loadResources() {
         
         var plistPath = Bundle.main.path(forResource: "Resources", ofType: ".plist", inDirectory: nil)
-        let localeDefault = Locale.preferredLanguages.first ?? "en"
+        let localeDefault = getLanguageLocale()
+        print("Krishna gatewaystring resource list \(localeDefault)")
         if !(localeDefault.hasPrefix("es") || localeDefault.hasPrefix("en")) {
           plistPath = Bundle.main.path(forResource: "Resources", ofType: ".plist", inDirectory: nil, forLocalization: "Base")
+        }else if(localeDefault.hasPrefix("en")){
+            plistPath = Bundle.main.path(forResource: "Resources", ofType: ".plist", inDirectory: nil, forLocalization: "Base")
+        }else if(localeDefault.hasPrefix("es")){
+            plistPath = Bundle.main.path(forResource: "Resources", ofType: ".plist", inDirectory: nil, forLocalization: "es")
         }
         let arrayContent = NSMutableArray.init(contentsOfFile: plistPath!)
         

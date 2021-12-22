@@ -72,6 +72,20 @@ class ActivitiesViewController : UIViewController{
         self.tableView?.rowHeight = UITableView.automaticDimension
         
         self.tabBarController?.delegate = self
+        print("Krishna tabbar total items \(self.tabBarController?.tabBar.items?.count)")
+        if let activititesTitle = self.tabBarController?.tabBar.items
+                {
+            activititesTitle[0].title = NSLocalizedStrings("Activities", comment: "")
+                }
+        
+        if let dashboardTitle = self.tabBarController?.tabBar.items
+                {
+            dashboardTitle[1].title = NSLocalizedStrings("Dashboard", comment: "")
+                }
+        if let resourcesTitle = self.tabBarController?.tabBar.items
+                {
+            resourcesTitle[2].title = NSLocalizedStrings("Resources", comment: "")
+                }
         
         self.navigationItem.title = NSLocalizedStrings("STUDY ACTIVITIES", comment: "")
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor:Utilities.getUIColorFromHex(0x007CBA)]
@@ -939,10 +953,12 @@ extension ActivitiesViewController: UITableViewDelegate{
                         Logger.sharedInstance.info("Activity Fetching from db")
                         //check in database
                         DBHandler.loadActivityMetaData(activity: activities[indexPath.row], completionHandler: { (found) in
-                            if found {
-                                self.createActivity()
-                            } else {
-                                
+                            print("1 actlang -- \(getLanguageLocale()) -- activity language \(Study.currentActivity?.activityLang)")
+//                            if found {
+//
+//                                self.createActivity()
+//                            } else {
+                          //  if(NetworkManager.isNetworkAvailable()){
                                 if let studyID = Study.currentStudy?.studyId,
                                     let activityID = Study.currentActivity?.actvityId,
                                     let version = Study.currentActivity?.version {
@@ -950,7 +966,10 @@ extension ActivitiesViewController: UITableViewDelegate{
                                                                            activityId: activityID,
                                                                            activityVersion: version,
                                                                            delegate: self)
-                                }
+//                                }else if found{
+//                                    self.createActivity()
+//                                }
+                                    ///  }
                             }
                         })
                         
@@ -1127,6 +1146,12 @@ extension ActivitiesViewController: NMWebServiceDelegate {
                 self.tableView?.isHidden = true
                 self.labelNoNetworkAvailable?.isHidden = false
             }
+        }
+        else{
+            let errorMsg = base64DecodeError(error.localizedDescription)
+            //let errorMsg = base64DecodeError(error.localizedDescription)
+            UIUtilities.showAlertWithTitleAndMessage(title: NSLocalizedStrings(kErrorTitle, comment: "") as NSString, message: errorMsg as NSString)
+        
         }
     }
 }
@@ -1530,6 +1555,8 @@ extension ActivitiesViewController: ORKTaskViewControllerDelegate{
 extension ActivitiesViewController:UITabBarControllerDelegate{
     
     func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
+        print("Krishna tab item title \(tabBarController.tabBarItem.title)")
+        
         let tabBarIndex = tabBarController.selectedIndex
         if tabBarIndex == 0 {
             //do your stuff

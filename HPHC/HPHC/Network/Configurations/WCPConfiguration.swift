@@ -69,7 +69,7 @@ class WCPConfiguration: NetworkConfiguration {
     }
     
     override func getDefaultHeaders() -> [String : String] {
-      let localeDefault = Locale.preferredLanguages.first ?? "en"
+      let localeDefault = getLanguageLocale()
       var language = "en"
       if localeDefault.hasPrefix("es") { // true
         language = "es"

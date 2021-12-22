@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="cD3-IQ-4Md">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="cD3-IQ-4Md">
     <device id="retina5_9" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -96,6 +96,9 @@
                                         <state key="normal" title="Visit Website">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="string" keyPath="localizedText" value="bc7-W1-fmy.normalTitle.value"/>
+                                        </userDefinedRuntimeAttributes>
                                         <connections>
                                             <action selector="visitWebsiteButtonAction:" destination="N5Y-rW-mwD" eventType="touchUpInside" id="C6d-rQ-WtF"/>
                                         </connections>
@@ -281,7 +284,7 @@
                                     <action selector="watchVideoButtonAction:" destination="BSo-U7-UDQ" eventType="touchUpInside" id="jCj-4q-NiI"/>
                                 </connections>
                             </button>
-                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5NQ-r5-mSz">
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5NQ-r5-mSz">
                                 <rect key="frame" x="111.66666666666669" y="647.66666666666663" width="152" height="52.333333333333371"/>
                                 <color key="backgroundColor" red="0.0" green="0.48627450979999998" blue="0.72941176470000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
@@ -294,6 +297,7 @@
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="layer.clipsToBounds" value="YES"/>
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="localizedText" value="5NQ-r5-mSz.normalTitle.value"/>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="buttonActionJoinStudy:" destination="BSo-U7-UDQ" eventType="touchUpInside" id="Mgd-XU-kNX"/>
@@ -569,7 +573,7 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ResourcesCell" rowHeight="65" id="ya3-jM-TXA" customClass="ResourcesTableViewCell" customModule="HPHC" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="44.666666030883789" width="375" height="65"/>
+                                        <rect key="frame" x="0.0" y="28" width="375" height="65"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ya3-jM-TXA" id="TiY-86-u9p">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="65"/>
@@ -710,7 +714,7 @@
                                 <color key="backgroundColor" red="0.84705882349999995" green="0.89019607840000003" blue="0.90196078430000004" alpha="1" colorSpace="calibratedRGB"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="welcomeCell" rowHeight="70" id="lRY-T3-IvM" customClass="StudyDashboardWelcomeTableViewCell" customModule="HPHC" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="49" width="375" height="70"/>
+                                        <rect key="frame" x="0.0" y="55.333332061767578" width="375" height="70"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="lRY-T3-IvM" id="Yu2-RD-Ywx">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="70"/>
@@ -724,12 +728,18 @@
                                                             <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="12"/>
                                                             <color key="textColor" red="0.54901960780000003" green="0.58431372550000005" blue="0.63921568630000003" alpha="1" colorSpace="calibratedRGB"/>
                                                             <nil key="highlightedColor"/>
+                                                            <userDefinedRuntimeAttributes>
+                                                                <userDefinedRuntimeAttribute type="string" keyPath="localizedText" value="RTJ-5j-gHp.text.value"/>
+                                                            </userDefinedRuntimeAttributes>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Active" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="H3l-1i-Q8b">
                                                             <rect key="frame" x="67.666666666666671" y="35" width="44" height="18"/>
                                                             <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="15"/>
                                                             <color key="textColor" red="0.21176470589999999" green="0.58431372550000005" blue="0.16078431369999999" alpha="1" colorSpace="calibratedRGB"/>
                                                             <nil key="highlightedColor"/>
+                                                            <userDefinedRuntimeAttributes>
+                                                                <userDefinedRuntimeAttribute type="string" keyPath="localizedText" value="H3l-1i-Q8b.text.value"/>
+                                                            </userDefinedRuntimeAttributes>
                                                         </label>
                                                     </subviews>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -756,12 +766,18 @@
                                                             <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="12"/>
                                                             <color key="textColor" red="0.54901960780000003" green="0.58431372550000005" blue="0.63921568630000003" alpha="1" colorSpace="calibratedRGB"/>
                                                             <nil key="highlightedColor"/>
+                                                            <userDefinedRuntimeAttributes>
+                                                                <userDefinedRuntimeAttribute type="string" keyPath="localizedText" value="pju-m4-AKv.text.value"/>
+                                                            </userDefinedRuntimeAttributes>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="In Progress" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="me4-LJ-i7A">
                                                             <rect key="frame" x="50" y="35" width="79" height="18"/>
                                                             <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="15"/>
                                                             <color key="textColor" red="0.96078431369999995" green="0.68627450980000004" blue="0.2156862745" alpha="1" colorSpace="calibratedRGB"/>
                                                             <nil key="highlightedColor"/>
+                                                            <userDefinedRuntimeAttributes>
+                                                                <userDefinedRuntimeAttribute type="string" keyPath="localizedText" value="me4-LJ-i7A.text.value"/>
+                                                            </userDefinedRuntimeAttributes>
                                                         </label>
                                                     </subviews>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -791,7 +807,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="percentageCell" rowHeight="200" id="xHx-3T-4Ix" customClass="StudyDashboardStudyPercentageTableViewCell" customModule="HPHC" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="119" width="375" height="200"/>
+                                        <rect key="frame" x="0.0" y="125.33333206176758" width="375" height="200"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="xHx-3T-4Ix" id="prx-D2-EIC">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="200"/>
@@ -808,6 +824,9 @@
                                                             <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="10"/>
                                                             <color key="textColor" red="0.54901960780000003" green="0.58431372550000005" blue="0.63921568630000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
+                                                            <userDefinedRuntimeAttributes>
+                                                                <userDefinedRuntimeAttribute type="string" keyPath="localizedText" value="XjP-9a-aCO.text.value"/>
+                                                            </userDefinedRuntimeAttributes>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="63" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="7z2-GP-epO">
                                                             <rect key="frame" x="72.666666666666671" y="79" width="34" height="36"/>
@@ -830,6 +849,9 @@
                                                             <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="10"/>
                                                             <color key="textColor" red="0.54901960780000003" green="0.58431372550000005" blue="0.63921568630000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
+                                                            <userDefinedRuntimeAttributes>
+                                                                <userDefinedRuntimeAttribute type="string" keyPath="localizedText" value="1se-Ih-SJx.text.value"/>
+                                                            </userDefinedRuntimeAttributes>
                                                         </label>
                                                     </subviews>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -864,6 +886,9 @@
                                                             <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="10"/>
                                                             <color key="textColor" red="0.54901960780000003" green="0.58431372550000005" blue="0.63921568630000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
+                                                            <userDefinedRuntimeAttributes>
+                                                                <userDefinedRuntimeAttribute type="string" keyPath="localizedText" value="mcT-Pq-7B0.text.value"/>
+                                                            </userDefinedRuntimeAttributes>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="36" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="wWz-Hb-ZTO">
                                                             <rect key="frame" x="72.666666666666686" y="77" width="34" height="36"/>
@@ -886,6 +911,9 @@
                                                             <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="10"/>
                                                             <color key="textColor" red="0.54901960780000003" green="0.58431372550000005" blue="0.63921568630000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
+                                                            <userDefinedRuntimeAttributes>
+                                                                <userDefinedRuntimeAttribute type="string" keyPath="localizedText" value="b43-6R-4Z2.text.value"/>
+                                                            </userDefinedRuntimeAttributes>
                                                         </label>
                                                     </subviews>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -922,7 +950,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="StatisticsCell" rowHeight="210" id="CvQ-Hd-eDc" customClass="StudyDashboardStatisticsTableViewCell" customModule="HPHC" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="319" width="375" height="210"/>
+                                        <rect key="frame" x="0.0" y="325.33333206176758" width="375" height="210"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="CvQ-Hd-eDc" id="nM8-jf-Yku">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="210"/>
@@ -964,6 +992,7 @@
                                                         </userDefinedRuntimeAttribute>
                                                         <userDefinedRuntimeAttribute type="boolean" keyPath="layer.clipsToBounds" value="YES"/>
                                                         <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                                        <userDefinedRuntimeAttribute type="string" keyPath="localizedText" value="kn0-VV-AHj.normalTitle.value"/>
                                                     </userDefinedRuntimeAttributes>
                                                     <connections>
                                                         <action selector="dayWeekMonthButtonAction:" destination="CvQ-Hd-eDc" eventType="touchUpInside" id="SS3-Wv-beg"/>
@@ -984,6 +1013,7 @@
                                                         </userDefinedRuntimeAttribute>
                                                         <userDefinedRuntimeAttribute type="boolean" keyPath="layer.clipsToBounds" value="YES"/>
                                                         <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                                        <userDefinedRuntimeAttribute type="string" keyPath="localizedText" value="z17-KH-Jlb.normalTitle.value"/>
                                                     </userDefinedRuntimeAttributes>
                                                     <connections>
                                                         <action selector="dayWeekMonthButtonAction:" destination="CvQ-Hd-eDc" eventType="touchUpInside" id="BK1-0a-Sqa"/>
@@ -1158,6 +1188,9 @@
                                                     <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="14"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="string" keyPath="localizedText" value="GcS-bY-dZH.text.value"/>
+                                                    </userDefinedRuntimeAttributes>
                                                 </label>
                                             </subviews>
                                             <constraints>
@@ -1200,7 +1233,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="trendCell" rowHeight="50" id="C7V-K2-Fb9" customClass="StudyDashboardTrendsTableViewCell" customModule="HPHC" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="529" width="375" height="50"/>
+                                        <rect key="frame" x="0.0" y="535.33333206176758" width="375" height="50"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="C7V-K2-Fb9" id="lHu-ZI-fyS">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
@@ -1211,6 +1244,9 @@
                                                     <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="14"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="string" keyPath="localizedText" value="keM-H2-AzW.text.value"/>
+                                                    </userDefinedRuntimeAttributes>
                                                 </label>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="rightArrowBlue" translatesAutoresizingMaskIntoConstraints="NO" id="Xm9-8M-Ncd">
                                                     <rect key="frame" x="325" y="19" width="23" height="18"/>
@@ -1292,6 +1328,9 @@
                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="18"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="string" keyPath="localizedText" value="7PI-ZW-p9g.text.value"/>
+                                        </userDefinedRuntimeAttributes>
                                     </label>
                                 </subviews>
                                 <color key="backgroundColor" red="0.2196078431372549" green="0.48627450980392156" blue="0.72941176470588232" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1313,7 +1352,7 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="lineChart" rowHeight="260" id="efL-BG-Ieh" customClass="LineChartCell" customModule="HPHC" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="44.666666030883789" width="375" height="260"/>
+                                        <rect key="frame" x="0.0" y="28" width="375" height="260"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="efL-BG-Ieh" id="w0g-yn-hEC">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="260"/>
@@ -1474,7 +1513,7 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ActivitiesCell" rowHeight="108" id="al1-wO-fEL" customClass="ActivitiesTableViewCell" customModule="HPHC" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="44.666666030883789" width="375" height="108"/>
+                                        <rect key="frame" x="0.0" y="28" width="375" height="108"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="al1-wO-fEL" id="Yc6-Fr-m7h">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="108"/>
@@ -1574,7 +1613,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ActivitiesCellScheduled" rowHeight="126" id="gvh-TE-MpO" customClass="ActivitiesTableViewCell" customModule="HPHC" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="152.66666603088379" width="375" height="126"/>
+                                        <rect key="frame" x="0.0" y="136" width="375" height="126"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="gvh-TE-MpO" id="IB6-5t-b9K">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="126"/>
@@ -1706,7 +1745,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="noData" rowHeight="44" id="XNQ-3p-wgg">
-                                        <rect key="frame" x="0.0" y="278.66666603088379" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="262" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="XNQ-3p-wgg" id="wYY-8s-Trk">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
@@ -1717,6 +1756,9 @@
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="string" keyPath="localizedText" value="cae-09-QSH.normalTitle.value"/>
+                                                    </userDefinedRuntimeAttributes>
                                                 </label>
                                             </subviews>
                                             <constraints>
@@ -1805,6 +1847,7 @@
                             <userDefinedRuntimeAttribute type="color" keyPath="tintColor">
                                 <color key="value" red="0.2196078431372549" green="0.48627450980392156" blue="0.72941176470588232" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="string" keyPath="localizedText" value="oT5-OT-1EB.title.value"/>
                         </userDefinedRuntimeAttributes>
                     </tabBarItem>
                     <toolbarItems/>
@@ -1830,6 +1873,7 @@
                             <userDefinedRuntimeAttribute type="color" keyPath="tintColor">
                                 <color key="value" red="0.2196078431372549" green="0.48627450980392156" blue="0.72941176470588232" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="string" keyPath="localizedText" value="W7D-Iu-sAw.title.value"/>
                         </userDefinedRuntimeAttributes>
                     </tabBarItem>
                     <toolbarItems/>
@@ -1855,6 +1899,7 @@
                             <userDefinedRuntimeAttribute type="color" keyPath="tintColor">
                                 <color key="value" red="0.2196078431372549" green="0.48627450980392156" blue="0.72941176470588232" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="string" keyPath="localizedText" value="arR-Sy-PnO.title.value"/>
                         </userDefinedRuntimeAttributes>
                     </tabBarItem>
                     <toolbarItems/>

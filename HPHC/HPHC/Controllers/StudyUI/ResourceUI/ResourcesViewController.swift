@@ -72,7 +72,7 @@ class ResourcesViewController: UIViewController{
         
         
         //Branding
-        leaveStudy = Branding.LeaveStudy
+        leaveStudy = NSLocalizedStrings("Leave Study", comment: "")//Branding.LeaveStudy
         
         consentPDF = Branding.ConsentPDF
         
@@ -362,7 +362,7 @@ class ResourcesViewController: UIViewController{
             WCPServices().getStudyInformation(studyId: (Study.currentStudy?.studyId)!, delegate: self)
             return
         }
-        let locale3 = Locale.preferredLanguages.first ?? "en"
+        let locale3 = getLanguageLocale()
         if locale3.hasPrefix("es") {
           alertLeaveStudy = "¿"+leaveStudy
         }

@@ -49,7 +49,8 @@ class SearchBarView: UIView {
         
         view.viewBackground?.layer.cornerRadius = 3.0
         view.viewBackground?.clipsToBounds = true
-        
+        view.segementToken?.setTitle(NSLocalizedStrings("token", comment: ""),forSegmentAt: 0)
+        view.segementToken?.setTitle(NSLocalizedStrings("keyword", comment: ""), forSegmentAt: 1)
         return view
     }
     

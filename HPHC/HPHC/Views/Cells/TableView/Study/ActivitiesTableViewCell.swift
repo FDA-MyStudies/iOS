@@ -144,7 +144,14 @@ class ActivitiesTableViewCell: UITableViewCell {
         
         var runStatus: String
         if activity.frequencyType != .Ongoing {
-            runStatus = kRun + currentRunId + "/" + String(activity.totalRuns) + ", " + String(activity.compeltedRuns) + kdone + ", " + String(activity.incompletedRuns) + kmissed
+            runStatus = kRun +
+                currentRunId + "/" +
+                String(activity.totalRuns) +
+                ", " +
+                String(activity.compeltedRuns) +
+                kdone + ", " +
+                String(activity.incompletedRuns) +
+                kmissed
         } else {
             runStatus = "\(kRuns) \(activity.compeltedRuns) \(kDone)"
         }
@@ -171,7 +178,10 @@ class ActivitiesTableViewCell: UITableViewCell {
         
         let currentUser = User.currentUser
         
-        if let userActivityStatus = currentUser.participatedActivites.filter({$0.activityId == activity.actvityId && $0.studyId == activity.studyId && $0.activityRunId == String(activity.currentRunId)}).first {
+        if let userActivityStatus = currentUser.participatedActivites.filter({$0.activityId ==
+                                                                                activity.actvityId && $0.studyId ==
+                                                                                activity.studyId && $0.activityRunId ==
+                                                                                String(activity.currentRunId)}).first {
             
             //assign to study
             activity.userParticipationStatus = userActivityStatus

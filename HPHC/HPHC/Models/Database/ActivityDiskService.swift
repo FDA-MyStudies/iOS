@@ -11,11 +11,11 @@ import RealmSwift
 
 enum ActivityDiskService {
     
-    private static var realm: Realm = {
+    private static var realm: Realm? = {
         let key = FDAKeychain.shared[kRealmEncryptionKeychainKey]
         let data = Data.init(base64Encoded: key!)
         let encryptionConfig = Realm.Configuration(encryptionKey: data)
-        return try! Realm()
+        return try? Realm()
     }()
     
     
@@ -138,8 +138,8 @@ enum ActivityDiskService {
                 dbRun = dbActivityRun
             }
             
-            try? realm.write {
-                realm.delete(dbActivity.activityRuns) // Delete old scheduled runs
+          try? realm!.write {
+            realm!.delete(dbActivity.activityRuns) // Delete old scheduled runs
                 if let dbRun = dbRun {
                     dbActivity.activityRuns.append(dbRun)
                 }
@@ -210,8 +210,8 @@ enum ActivityDiskService {
             }
         }
         
-        try? realm.write {
-            realm.delete(dbActivity.activityRuns) // Delete old scheduled runs
+      try? realm!.write {
+          realm!.delete(dbActivity.activityRuns) // Delete old scheduled runs
         }
         
         // Calcuate runs for activity
@@ -236,8 +236,8 @@ enum ActivityDiskService {
                 dbActivityRuns.append(dbActivityRun)
             }
             
-            try? realm.write {
-                realm.delete(dbActivity.activityRuns) // Delete old scheduled runs
+          try? realm!.write {
+            realm!.delete(dbActivity.activityRuns) // Delete old scheduled runs
                 dbActivity.activityRuns.append(objectsIn: dbActivityRuns)
                 dbActivity.startDate = activity.startDate
                 dbActivity.endDate = activity.endDate

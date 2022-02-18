@@ -67,7 +67,10 @@ class InEligibilityStepViewController: ORKStepViewController {
         NSAttributedString.Key.font : UIFont(name: "HelveticaNeue-Light", size: 18.5)!,
         NSAttributedString.Key.foregroundColor : UIColor.black] as [NSAttributedString.Key : Any]
       labelDescription?.textAlignment = .center
-      labelDescription?.attributedText = NSMutableAttributedString(string:NSLocalizedStrings("Sorry, you are not eligible for participation in this study. We thank you for your interest and time, and encourage you to explore other studies as they are made available in the app.", comment: ""), attributes:attrs1)
+      let des1 = "Sorry, you are not eligible for participation in this study."
+      let des2 = " We thank you for your interest and time, and encourage you to explore other studies as they are made available in the app."
+
+      labelDescription?.attributedText = NSMutableAttributedString(string:NSLocalizedStrings("\(des1)\(des2)", comment: ""), attributes:attrs1)
     }
     
     // MARK: Methods and Button Actions

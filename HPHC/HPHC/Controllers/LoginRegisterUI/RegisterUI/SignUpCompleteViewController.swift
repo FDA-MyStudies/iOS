@@ -30,7 +30,10 @@ class SignUpCompleteViewController: UIViewController{
     @IBOutlet var buttonNext: UIButton?
     var shouldCreateMenu: Bool = true
     var viewLoadFrom: CompletionLoadFrom = .signup
-    let kPasscodeDoYouWish = NSLocalizedStrings("Do you wish to set up Passcode or FaceID/TouchID protection for this app? (You can do this later in the My Account area).", comment: "")
+    let kPasscodeDoYouWish =
+        NSLocalizedStrings(
+            "Do you wish to set up Passcode or FaceID/TouchID protection for this app? (You can do this later in the My Account area).",
+            comment: "")
     
     // MARK:- ViewController Lifecycle
     override func viewDidLoad() {

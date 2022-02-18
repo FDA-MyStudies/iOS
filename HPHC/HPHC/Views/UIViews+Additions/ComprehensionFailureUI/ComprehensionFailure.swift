@@ -42,7 +42,9 @@ class ComprehensionFailure: UIView {
     }
     class func instanceFromNib(frame: CGRect,detail: Dictionary<String,Any>?) -> ComprehensionFailure {
         
-        let view = UINib(nibName: kComprehensionFailureViewIdentifier, bundle: nil).instantiate(withOwner: nil, options: nil)[0] as! ComprehensionFailure
+        let view =
+            UINib(nibName: kComprehensionFailureViewIdentifier, bundle: nil).instantiate(withOwner: nil, options: nil)[0]
+            as! ComprehensionFailure
         view.frame = frame
         view.buttonRetry?.layer.borderColor =   kUicolorForButtonBackground
         

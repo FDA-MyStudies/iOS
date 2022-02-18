@@ -71,7 +71,8 @@ class ActivityResult {
                     
                 }
                 
-                activityStepResult?.initWithORKStepResult(stepResult: (stepResult as? ORKStepResult)! , activityType: (self.activity?.type)!)
+                activityStepResult?.initWithORKStepResult(stepResult: (stepResult as? ORKStepResult)! ,
+                                                          activityType: (self.activity?.type)!)
                 
                 //Completion steps results and Instruction step results are ignored
                 if stepResult.identifier != "CompletionStep"
@@ -90,12 +91,11 @@ class ActivityResult {
                         }
                     }
                 }
-                i = i + 1
+                i += 1
             }
         }
     }
-    
-    
+     
     /* Initializer method
      @param activityDict  contains all the activity related data
      */
@@ -113,7 +113,8 @@ class ActivityResult {
             
             if Utilities.isValidValue(someObject: activityDict[kActivityStartTime] as AnyObject ) {
                 
-                if Utilities.isValidValue(someObject: Utilities.getDateFromString(dateString:(activityDict[kActivityStartTime] as? String)!) as AnyObject?) {
+                if Utilities.isValidValue(someObject: Utilities.getDateFromString(dateString:(activityDict[kActivityStartTime] as? String)!)
+                                            as AnyObject?) {
                     self.startTime =  Utilities.getDateFromString(dateString: (activityDict[kActivityStartTime] as? String)!)
                     
                 } else {
@@ -122,7 +123,8 @@ class ActivityResult {
             }
             if Utilities.isValidValue(someObject: activityDict[kActivityEndTime] as AnyObject ) {
                 
-                if Utilities.isValidValue(someObject: Utilities.getDateFromString(dateString:(activityDict[kActivityEndTime] as? String)!) as AnyObject?) {
+                if Utilities.isValidValue(someObject: Utilities.getDateFromString(dateString:(activityDict[kActivityEndTime] as? String)!)
+                                            as AnyObject?) {
                     self.endTime =  Utilities.getDateFromString(dateString: (activityDict[kActivityEndTime] as? String)!)
                 } else {
                     Logger.sharedInstance.debug("Date Conversion is null:\(activityDict)")
@@ -162,9 +164,9 @@ class ActivityResult {
      getResultDictionary creates the dictionary for the step being used
      returns the dictionary of activitysteps
      */
-    func getResultDictionary() -> Dictionary<String,Any>? {
+    func getResultDictionary() -> Dictionary<String, Any>? {
         
-        var activityDict: Dictionary<String,Any>? = Dictionary<String,Any>()
+        var activityDict: Dictionary<String, Any>? = Dictionary<String,Any>()
         
         if  self.type != nil {
             if self.type != .activeTask {
@@ -184,11 +186,11 @@ class ActivityResult {
         
         if Utilities.isValidObject(someObject: result as AnyObject?) {
             
-            var activityResultArray: Array<Dictionary<String,Any>> =  Array<Dictionary<String,Any>>()
+            var activityResultArray: Array<Dictionary<String, Any>> =  Array<Dictionary<String, Any>>()
             for stepResult  in result! {
                 let activityStepResult = stepResult as ActivityStepResult
                 
-                activityResultArray.append( (activityStepResult.getActivityStepResultDict())! as Dictionary<String,Any>)
+                activityResultArray.append( (activityStepResult.getActivityStepResultDict())! as Dictionary<String, Any>)
             }
             
             activityDict?[kActivityResults] = activityResultArray

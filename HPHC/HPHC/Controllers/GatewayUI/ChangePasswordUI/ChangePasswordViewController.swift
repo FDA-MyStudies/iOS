@@ -73,7 +73,8 @@ class ChangePasswordViewController: UIViewController {
         // IQKeyboardManager.sharedManager().enable = true
         
         //Used for background tap dismiss keyboard
-        let tapGesture: UITapGestureRecognizer = UITapGestureRecognizer.init(target: self, action: #selector(ChangePasswordViewController.dismissKeyboard))
+        let tapGesture: UITapGestureRecognizer =
+            UITapGestureRecognizer.init(target: self, action: #selector(ChangePasswordViewController.dismissKeyboard))
         self.tableView?.addGestureRecognizer(tapGesture)
         
         
@@ -120,7 +121,10 @@ class ChangePasswordViewController: UIViewController {
      
      */
     func showAlertMessages(textMessage: String){
-        UIUtilities.showAlertMessage("", errorMessage: NSLocalizedStrings(textMessage, comment: ""), errorAlertActionTitle: kTitleOKCapital, viewControllerUsed: self)
+        UIUtilities.showAlertMessage("",
+                                     errorMessage: NSLocalizedStrings(textMessage, comment: ""),
+                                     errorAlertActionTitle: kTitleOKCapital,
+                                     viewControllerUsed: self)
     }
     
     
@@ -302,7 +306,10 @@ extension ChangePasswordViewController: NMWebServiceDelegate {
         
         if viewLoadFrom == .profile {
             
-            UIUtilities.showAlertMessageWithActionHandler(kTitleMessage, message: kChangePasswordResponseMessage , buttonTitle: kTitleOk, viewControllerUsed: self) {
+            UIUtilities.showAlertMessageWithActionHandler(kTitleMessage,
+                                                          message: kChangePasswordResponseMessage ,
+                                                          buttonTitle: kTitleOk,
+                                                          viewControllerUsed: self) {
                 
                 _ = self.navigationController?.popViewController(animated: true)
                 
@@ -344,7 +351,11 @@ extension ChangePasswordViewController: NMWebServiceDelegate {
         self.removeProgressIndicator()
         
         if error.code == 403 { //unauthorized
-            UIUtilities.showAlertMessageWithActionHandler(kErrorTitle, message: error.localizedDescription, buttonTitle: kTitleOk, viewControllerUsed: self, action: {
+            UIUtilities.showAlertMessageWithActionHandler(kErrorTitle,
+                                                          message: error.localizedDescription,
+                                                          buttonTitle: kTitleOk,
+                                                          viewControllerUsed: self,
+                                                          action: {
                 self.fdaSlideMenuController()?.navigateToHomeAfterUnauthorizedAccess()
             })
         } else {

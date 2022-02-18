@@ -68,16 +68,19 @@ class StudyOverviewViewControllerSecond: UIViewController{
             fontSize = 14.0
         }
         
-        let attrStr = try! NSAttributedString(
+        let attrStr1 = try? NSAttributedString(
             data: (overviewSectionDetail.text?.data(using: String.Encoding.unicode, allowLossyConversion: true)!)!,
             options: [ NSAttributedString.DocumentReadingOptionKey.documentType: NSAttributedString.DocumentType.html],
             documentAttributes: nil)
+      let attrStr = attrStr1!
         
         let attributedText: NSMutableAttributedString = NSMutableAttributedString(attributedString: attrStr)
         attributedText.addAttributes([NSAttributedString.Key.font: UIFont(
             name: "HelveticaNeue",
             size: CGFloat(fontSize))!], range: (attrStr.string as NSString).range(of: attrStr.string))
-        attributedText.addAttribute(NSAttributedString.Key.foregroundColor, value: UIColor.black, range: (attrStr.string as NSString).range(of: attrStr.string))
+        attributedText.addAttribute(NSAttributedString.Key.foregroundColor,
+                                    value: UIColor.black,
+                                    range: (attrStr.string as NSString).range(of: attrStr.string))
         
         if Utilities.isValidValue(someObject: attrStr.string as AnyObject?) {
             self.labelDescription?.attributedText = attributedText
@@ -111,7 +114,8 @@ class StudyOverviewViewControllerSecond: UIViewController{
             leftController.changeViewController(.reachOut_signIn)
         } else {
             //TEMP
-             UIUtilities.showAlertWithTitleAndMessage(title: kTitleMessage as NSString, message: NSLocalizedStrings(kAlertMessageReachoutText, comment: "") as NSString)
+             UIUtilities.showAlertWithTitleAndMessage(title: kTitleMessage as NSString,
+                                                      message: NSLocalizedStrings(kAlertMessageReachoutText, comment: "") as NSString)
         }
     }
     

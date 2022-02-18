@@ -51,7 +51,9 @@ class ActivityInstructionStep: ActivityStep {
      */
     func getInstructionStep() -> ORKInstructionStep? {
         
-        if   Utilities.isValidValue(someObject: title  as AnyObject?) && Utilities.isValidValue(someObject: text  as AnyObject?) && Utilities.isValidValue(someObject: key  as AnyObject?)   {
+        if   Utilities.isValidValue(someObject: title  as AnyObject?) &&
+                Utilities.isValidValue(someObject: text  as AnyObject?) && Utilities.isValidValue(someObject: key
+                                                                                                    as AnyObject?)   {
             
             let instructionStep = ORKInstructionStep(identifier: key!)
             

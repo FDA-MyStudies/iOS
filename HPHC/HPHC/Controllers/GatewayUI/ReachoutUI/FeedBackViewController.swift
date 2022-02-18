@@ -240,7 +240,10 @@ extension FeedBackViewController: NMWebServiceDelegate {
         Logger.sharedInstance.info("requestname : \(requestName)")
         self.removeProgressIndicator()
         
-        UIUtilities.showAlertMessageWithActionHandler("", message: kMessageFeedbackSubmittedSuccessfuly, buttonTitle: kTitleOk, viewControllerUsed: self) {
+        UIUtilities.showAlertMessageWithActionHandler("",
+                                                      message: kMessageFeedbackSubmittedSuccessfuly,
+                                                      buttonTitle: kTitleOk,
+                                                      viewControllerUsed: self) {
             _ = self.navigationController?.popViewController(animated: true)
         }
     }

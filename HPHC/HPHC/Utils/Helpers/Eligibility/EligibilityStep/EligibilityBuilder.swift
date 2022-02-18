@@ -30,20 +30,30 @@ let kEligibilityInEligibleScreen = "InEligibleScreen"
 let kEligibilityInEligibleDescriptionText = "Sorry, You are Ineligible"
 
 let kEligibilityVerifiedScreen = "VerifiedScreen"
-let kEligibilityCompletionDescriptionText = NSLocalizedStrings("Your enrollment token has been successfully validated. You are eligible to join the Study.\nPlease click Continue to proceed to the Consent section.", comment: "")
+let valEligibility1 = "Your enrollment token has been successfully validated. You are eligible to join the Study."
+let valEligibility2 = "\nPlease click Continue to proceed to the Consent section."
+let kEligibilityCompletionDescriptionText = NSLocalizedStrings(
+  "\(valEligibility1)\(valEligibility2)", comment: "")
 let kEligibilityCompletionTitle = NSLocalizedStrings("You are Eligible!", comment: "")
 
 let kEligibilityStep = "steps"
 
 let kEligibilityValidateScreen = "ValidatedScreen"
-let kEligibilityValidationDescriptionText = NSLocalizedStrings("Your token has been validated. You are eligible to join the study. Please tap Get Started to proceed to the consent section.", comment: "")
+let kEligibilityValidationDescriptionText = NSLocalizedStrings(
+  "Your token has been validated. You are eligible to join the study. Please tap Get Started to proceed to the consent section.",
+                       comment: "")
 let kEligibilityValidationTitle = NSLocalizedStrings("Validated!", comment: "")
 
 let kEligibilityTestInstructionStep = "EligibilityTestInstructionStep"
 let kEligibilityTestInstructionTestTitle = NSLocalizedStrings("Eligibility Test", comment: "")
-let kEligibilityInstructionTestText = NSLocalizedStrings("Please answer some quick questions to confirm your eligibility for this study.", comment: "")
+let kEligibilityInstructionTestText =
+    NSLocalizedStrings("Please answer some quick questions to confirm your eligibility for this study.",
+                       comment: "")
 
-let kEligibilityCompletionTestDescriptionText = NSLocalizedStrings("Based on the answers you provided, you are eligible to participate in this study.\nPlease click Continue to proceed to the Consent section.", comment: "")
+let valEligibilityCompletionTestDescriptionText1 = "Based on the answers you provided, you are eligible to participate in this study."
+let valEligibilityCompletionTestDescriptionText2 = "\nPlease click Continue to proceed to the Consent section."
+let kEligibilityCompletionTestDescriptionText =
+    NSLocalizedStrings("\(valEligibilityCompletionTestDescriptionText1)\(valEligibilityCompletionTestDescriptionText2)", comment: "")
 
 let kEligibilityCorrectAnswer = "answer"
 let kEligibilityCorrectAnswerKey = "key"

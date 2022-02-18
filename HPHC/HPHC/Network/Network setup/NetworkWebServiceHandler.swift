@@ -169,7 +169,11 @@ class NetworkWebServiceHandler: NSObject, URLSessionDelegate {
         
     }
     
-    func composeRequestFor(_ requestName: NSString, requestType : RequestType , method : HTTPMethod , params : NSDictionary?, headers : NSDictionary?){
+    func composeRequestFor(_ requestName: NSString,
+                           requestType : RequestType ,
+                           method : HTTPMethod ,
+                           params : NSDictionary?,
+                           headers : NSDictionary?){
         
         if ((delegate?.startedRequest) != nil) {
             delegate?.startedRequest(networkManager!, requestName: requestName)
@@ -232,7 +236,9 @@ class NetworkWebServiceHandler: NSObject, URLSessionDelegate {
         
         let requestUrl = URL(string: requestString as String)!
       print("Request URL:  \(requestUrl)")
-         var request = URLRequest.init(url: requestUrl, cachePolicy: URLRequest.CachePolicy.reloadIgnoringLocalCacheData, timeoutInterval: self.connectionTimeoutInterval)
+         var request = URLRequest.init(url: requestUrl,
+                                       cachePolicy: URLRequest.CachePolicy.reloadIgnoringLocalCacheData,
+                                       timeoutInterval: self.connectionTimeoutInterval)
         request.httpMethod = self.getRequestMethod(method) as String
         if httpHeaders != nil && (httpHeaders?.count)! > 0{
             request.allHTTPHeaderFields = httpHeaders as? [String : String]
@@ -259,7 +265,9 @@ class NetworkWebServiceHandler: NSObject, URLSessionDelegate {
         let requestUrl = URL(string: baseURLString as String)
         do{
             
-            var request = URLRequest.init(url: requestUrl!, cachePolicy: URLRequest.CachePolicy.reloadIgnoringLocalCacheData, timeoutInterval: self.connectionTimeoutInterval)
+            var request = URLRequest.init(url: requestUrl!,
+                                          cachePolicy: URLRequest.CachePolicy.reloadIgnoringLocalCacheData,
+                                          timeoutInterval: self.connectionTimeoutInterval)
           
             if params != nil && (params?.count)! > 0{
                 let data = try JSONSerialization.data(withJSONObject: params!, options: JSONSerialization.WritingOptions.prettyPrinted)
@@ -300,8 +308,10 @@ class NetworkWebServiceHandler: NSObject, URLSessionDelegate {
         }
         else {
             if ((delegate?.failedRequest) != nil) {
-        
-                let error1 = NSError(domain: NSURLErrorDomain, code:NoNetworkErrorCode,userInfo:[NSLocalizedDescriptionKey:NSLocalizedStrings("You seem to be offline. Please connect to a network to proceed with this action.", comment: "")])
+                let errorMsg = "You seem to be offline. Please connect to a network to proceed with this action."
+                let error1 = NSError(domain: NSURLErrorDomain,
+                                     code:NoNetworkErrorCode,
+                                     userInfo:[NSLocalizedDescriptionKey:NSLocalizedStrings(errorMsg,comment: "")])
                 delegate?.failedRequest(networkManager!, requestName: requestName!,error: error1)
             }
         }
@@ -346,8 +356,9 @@ class NetworkWebServiceHandler: NSObject, URLSessionDelegate {
                         delegate?.finishedRequest(networkManager!, requestName: requestName!,response: responseDict!)
                         
                     } else {
-                        
-                        error1 = NSError(domain: NSURLErrorDomain, code: 300,userInfo:[NSLocalizedDescriptionKey:NSLocalizedStrings("Could not connect to server. Please try again later.", comment: "")])
+                        let errorMsg = "Could not connect to server. Please try again later."
+                        error1 = NSError(domain: NSURLErrorDomain,
+                                         code: 300,userInfo:[NSLocalizedDescriptionKey:NSLocalizedStrings(errorMsg, comment: "")])
                         
                         if ((delegate?.failedRequest) != nil) {
                             delegate?.failedRequest(networkManager!, requestName: requestName!,error:error1!)
@@ -382,7 +393,10 @@ class NetworkWebServiceHandler: NSObject, URLSessionDelegate {
         }
     }
     
-    func urlSession(_ session: URLSession, didReceive challenge: URLAuthenticationChallenge, completionHandler: @escaping (URLSession.AuthChallengeDisposition, URLCredential?) -> Void) {
+    func urlSession(_ session: URLSession,
+                    didReceive challenge: URLAuthenticationChallenge,
+                    completionHandler: @escaping (URLSession.AuthChallengeDisposition,
+                                                  URLCredential?) -> Void) {
         var credential : URLCredential!
         
         if (challengeDelegate?.networkCredential) != nil {

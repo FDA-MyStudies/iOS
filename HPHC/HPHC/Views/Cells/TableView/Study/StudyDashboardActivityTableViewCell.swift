@@ -48,7 +48,8 @@ extension StudyDashboardActivityTableViewCell: UICollectionViewDelegate , UIColl
         
         let activityCellData = activityArrayData.object(at: indexPath.row) as! NSDictionary
         
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: kActivityCollectionViewCell, for: indexPath) as! StudyDashboardActivityCollectionViewCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: kActivityCollectionViewCell, for: indexPath)
+            as! StudyDashboardActivityCollectionViewCell
         cell.displayTodaysActivities(data: activityCellData)
         
         return cell

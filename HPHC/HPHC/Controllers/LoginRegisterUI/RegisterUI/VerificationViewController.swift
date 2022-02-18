@@ -131,7 +131,9 @@ class VerificationViewController: UIViewController{
     @IBAction func continueButtonAction(_ sender: Any) {
         
         if (textFieldVerificationCode?.text?.count)! > 0 {
-             UserServices().verifyEmail(emailId: User.currentUser.emailId!,  verificationCode:(self.textFieldVerificationCode?.text)! , delegate: self)
+             UserServices().verifyEmail(emailId: User.currentUser.emailId!,
+                                        verificationCode:(self.textFieldVerificationCode?.text)! ,
+                                        delegate: self)
         } else {
              self.showAlertMessages(textMessage: kMessageVerificationCodeEmpty)
         }
@@ -185,7 +187,10 @@ class VerificationViewController: UIViewController{
      
      */
     func showAlertMessages(textMessage: String){
-        UIUtilities.showAlertMessage("", errorMessage: NSLocalizedStrings(textMessage, comment: ""), errorAlertActionTitle: kTitleOKCapital, viewControllerUsed: self)
+        UIUtilities.showAlertMessage("",
+                                     errorMessage: NSLocalizedStrings(textMessage, comment: ""),
+                                     errorAlertActionTitle: kTitleOKCapital,
+                                     viewControllerUsed: self)
     }
 
     
@@ -299,7 +304,11 @@ extension VerificationViewController: NMWebServiceDelegate {
         
         self.removeProgressIndicator()
         if error.code == 403 { //unauthorized
-            UIUtilities.showAlertMessageWithActionHandler(kErrorTitle, message: error.localizedDescription, buttonTitle: kTitleOk, viewControllerUsed: self, action: {
+            UIUtilities.showAlertMessageWithActionHandler(kErrorTitle,
+                                                          message: error.localizedDescription,
+                                                          buttonTitle: kTitleOk,
+                                                          viewControllerUsed: self,
+                                                          action: {
                 _ = self.navigationController?.popToRootViewController(animated: true)
             })
         } else {
@@ -316,7 +325,9 @@ extension VerificationViewController: ORKTaskViewControllerDelegate{
         return true
     }
     
-    public func taskViewController(_ taskViewController: ORKTaskViewController, didFinishWith reason: ORKTaskViewControllerFinishReason, error: Error?) {
+    public func taskViewController(_ taskViewController: ORKTaskViewController,
+                                   didFinishWith reason: ORKTaskViewControllerFinishReason,
+                                   error: Error?) {
         
         //var taskResult: Any?
         
@@ -344,5 +355,3 @@ extension VerificationViewController: ORKTaskViewControllerDelegate{
         
     }
 }
-
-

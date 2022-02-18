@@ -22,7 +22,9 @@ import Foundation
 import UIKit
 
 let kVerifyViewControllerSegue = "VerifyViewControllerSegue"
-let kVerficationMessageFromForgotPassword = NSLocalizedStrings("Your registered email(xyz@gmail.com) is pending verification. Enter the Verification Code received on this email to complete verification and try the Forgot Password action again.", comment: "")
+let valMsg1 = "Your registered email(xyz@gmail.com) is pending verification. Enter the Verification Code received on "
+let valMsg2 = "this email to complete verification and try the Forgot Password action again."
+let kVerficationMessageFromForgotPassword = NSLocalizedStrings("\(valMsg1)\(valMsg2)", comment: "")
 
 class ForgotPasswordViewController: UIViewController{
     
@@ -41,7 +43,8 @@ class ForgotPasswordViewController: UIViewController{
         self.title = kForgotPasswordTitleText
         
         //Used for background tap dismiss keyboard
-        let gestureRecognizwe: UITapGestureRecognizer = UITapGestureRecognizer.init(target: self, action: #selector(ForgotPasswordViewController.dismissKeyboard))
+        let gestureRecognizwe: UITapGestureRecognizer =
+            UITapGestureRecognizer.init(target: self, action: #selector(ForgotPasswordViewController.dismissKeyboard))
         self.view?.addGestureRecognizer(gestureRecognizwe)
         
         self.addBackBarButton()
@@ -94,7 +97,10 @@ class ForgotPasswordViewController: UIViewController{
     
      */
     func showAlertMessages(textMessage: String){
-        UIUtilities.showAlertMessage("", errorMessage: NSLocalizedStrings(textMessage, comment: ""), errorAlertActionTitle: kTitleOKCapital, viewControllerUsed: self)
+        UIUtilities.showAlertMessage("",
+                                     errorMessage: NSLocalizedStrings(textMessage, comment: ""),
+                                     errorAlertActionTitle: kTitleOKCapital,
+                                     viewControllerUsed: self)
     }
     
     
@@ -155,7 +161,10 @@ extension ForgotPasswordViewController: NMWebServiceDelegate {
         
         
         if requestName as String == RegistrationMethods.forgotPassword.description  {
-            UIUtilities.showAlertMessageWithActionHandler(kTitleMessage, message: kForgotPasswordResponseMessage , buttonTitle: kTitleOk, viewControllerUsed: self) {
+            UIUtilities.showAlertMessageWithActionHandler(kTitleMessage,
+                                                          message: kForgotPasswordResponseMessage ,
+                                                          buttonTitle: kTitleOk,
+                                                          viewControllerUsed: self) {
                 
                 _ = self.navigationController?.popViewController(animated: true)
                 
@@ -163,7 +172,9 @@ extension ForgotPasswordViewController: NMWebServiceDelegate {
         } else {
             // for resend email
             
-              UIUtilities.showAlertWithTitleAndMessage(title: kTitleMessage as NSString, message: NSLocalizedStrings(kAlertMessageResendEmail, comment: "") as NSString)
+              UIUtilities.showAlertWithTitleAndMessage(title: kTitleMessage as NSString,
+                                                       message: NSLocalizedStrings(kAlertMessageResendEmail,
+                                                                                   comment: "") as NSString)
             
         }
     }
@@ -199,4 +210,3 @@ extension ForgotPasswordViewController:UITextFieldDelegate{
         }
     }
 }
-

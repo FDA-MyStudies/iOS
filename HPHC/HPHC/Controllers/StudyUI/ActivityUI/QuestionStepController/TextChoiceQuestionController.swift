@@ -20,7 +20,14 @@ struct OtherChoice {
     let isExclusive: Bool
     let value: String
     
-    init(isShowOtherCell: Bool = false, isShowOtherField: Bool = true, otherTitle: String = "Other", placeholder: String = kEnterHere,isMandatory: Bool = true,isExclusive: Bool = false, detailText: String = "", value: String = "") {
+    init(isShowOtherCell: Bool = false,
+         isShowOtherField: Bool = true,
+         otherTitle: String = "Other",
+         placeholder: String = kEnterHere,
+         isMandatory: Bool = true,
+         isExclusive: Bool = false,
+         detailText: String = "",
+         value: String = "") {
         self.isShowOtherField = isShowOtherField
         self.otherTitle = otherTitle
         self.placeholder = placeholder
@@ -36,7 +43,7 @@ class QuestionStep: ORKQuestionStep {
     
     lazy var otherChoice = OtherChoice()
     
-    init(identifier: String, title: String?, question: String, answer: ORKAnswerFormat,otherChoice: OtherChoice) {
+    init(identifier: String, title: String?, question: String, answer: ORKAnswerFormat, otherChoice: OtherChoice) {
         super.init(identifier: identifier)
         self.title = title
         self.question = question
@@ -721,7 +728,6 @@ extension TextChoiceQuestionController: UISearchBarDelegate {
             self.tableView?.scrollToRow(at: otherCellIndex, at: .bottom, animated: true)
         }
       
-        
         if !self.isOtherCellSelected {
             self.tableView?.setContentOffset(CGPoint(x: 0, y: -1), animated: true)
         } else {
@@ -744,5 +750,3 @@ extension TextChoiceQuestionController: UISearchBarDelegate {
         view.endEditing(true)
     }
 }
-
-

@@ -22,7 +22,11 @@ import Foundation
 import UIKit
 import IQKeyboardManagerSwift
 
-let kVerifyMessageFromSignUp = NSLocalizedStrings("An email has been sent to xyz@gmail.com. Please type in the Verification Code received in the email to complete the verification step.", comment: "")
+let kVerifyMessageFromSignUp =
+    NSLocalizedStrings(
+        "An email has been sent to xyz@gmail.com. Please type in the Verification Code received in the email to complete the verification step.",
+                       comment: ""
+    )
 
 enum SignUpLoadFrom: Int{
     case gatewayOverview
@@ -80,11 +84,13 @@ class SignUpViewController: UIViewController{
         // IQKeyboardManager.sharedManager().enable = true
         
         //info button
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(image: UIImage.init(named: "info"), style: .done, target: self, action: #selector(self.buttonInfoAction(_:)))
+        self.navigationItem.rightBarButtonItem =
+            UIBarButtonItem.init(image: UIImage.init(named: "info"), style: .done, target: self, action: #selector(self.buttonInfoAction(_:)))
        
         
         //Used for background tap dismiss keyboard
-        let tapGestureRecognizer: UITapGestureRecognizer = UITapGestureRecognizer.init(target: self, action: #selector(SignUpViewController.dismissKeyboard))
+        let tapGestureRecognizer: UITapGestureRecognizer =
+            UITapGestureRecognizer.init(target: self, action: #selector(SignUpViewController.dismissKeyboard))
         self.tableView?.addGestureRecognizer(tapGestureRecognizer)
         
         //unhide navigationbar
@@ -153,14 +159,18 @@ class SignUpViewController: UIViewController{
         let attributedString =  (termsAndCondition?.attributedText.mutableCopy() as? NSMutableAttributedString)!
         
         var foundRange = attributedString.mutableString.range(of: NSLocalizedStrings("Terms", comment: ""))
-        attributedString.addAttribute(NSAttributedString.Key.link, value:(TermsAndPolicy.currentTermsAndPolicy?.termsURL!)! as String, range: foundRange)
+        attributedString.addAttribute(NSAttributedString.Key.link,
+                                      value:(TermsAndPolicy.currentTermsAndPolicy?.termsURL!)! as String, range: foundRange)
         
         foundRange = attributedString.mutableString.range(of: NSLocalizedStrings("Privacy Policy", comment: ""))
-        attributedString.addAttribute(NSAttributedString.Key.link, value:(TermsAndPolicy.currentTermsAndPolicy?.policyURL!)! as String  , range: foundRange)
+        attributedString.addAttribute(NSAttributedString.Key.link,
+                                      value:(TermsAndPolicy.currentTermsAndPolicy?.policyURL!)! as String  , range: foundRange)
         
         termsAndCondition?.attributedText = attributedString
         
-      termsAndCondition?.linkTextAttributes = convertToOptionalNSAttributedStringKeyDictionary([NSAttributedString.Key.foregroundColor.rawValue: Utilities.getUIColorFromHex(0x007CBA), NSAttributedString.Key.font.rawValue : "HelveticaNeue-Medium"])
+      termsAndCondition?.linkTextAttributes =
+        convertToOptionalNSAttributedStringKeyDictionary([NSAttributedString.Key.foregroundColor.rawValue: Utilities.getUIColorFromHex(0x007CBA),
+                                                          NSAttributedString.Key.font.rawValue : "HelveticaNeue-Medium"])
         
     }
     
@@ -220,7 +230,10 @@ class SignUpViewController: UIViewController{
      
      */
     func showAlertMessages(textMessage: String){
-        UIUtilities.showAlertMessage("", errorMessage: NSLocalizedStrings(textMessage, comment: ""), errorAlertActionTitle: kTitleOKCapital, viewControllerUsed: self)
+        UIUtilities.showAlertMessage("",
+                                     errorMessage: NSLocalizedStrings(textMessage, comment: ""),
+                                     errorAlertActionTitle: kTitleOKCapital,
+                                     viewControllerUsed: self)
     }
     
     
@@ -375,7 +388,8 @@ extension SignUpViewController: UITextViewDelegate{
         
         var link: String =   (TermsAndPolicy.currentTermsAndPolicy?.termsURL)! //kTermsAndConditionLink
         var title: String = kNavigationTitleTerms
-        if (URL.absoluteString == TermsAndPolicy.currentTermsAndPolicy?.policyURL  && characterRange.length == String(NSLocalizedStrings("Privacy Policy", comment: "")).count ) {
+        if (URL.absoluteString == TermsAndPolicy.currentTermsAndPolicy?.policyURL  &&
+                characterRange.length == String(NSLocalizedStrings("Privacy Policy", comment: "")).count ) {
             //kPrivacyPolicyLink
             print("terms")
             link =  (TermsAndPolicy.currentTermsAndPolicy?.policyURL)! // kPrivacyPolicyLink

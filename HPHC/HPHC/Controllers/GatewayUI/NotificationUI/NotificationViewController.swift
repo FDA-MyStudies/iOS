@@ -147,7 +147,8 @@ class NotificationViewController: UIViewController {
             if participatedStatus == .inProgress {
                 return true
             }else {
-                 UIUtilities.showAlertWithTitleAndMessage(title: "", message: NSLocalizedStrings("Please join study to go forward.", comment: "") as NSString)
+                 UIUtilities.showAlertWithTitleAndMessage(title: "",
+                                                          message: NSLocalizedStrings("Please join study to go forward.", comment: "") as NSString)
             }
         case .Upcoming:
             UIUtilities.showAlertWithTitleAndMessage(title: "", message: kMessageForStudyUpcomingState as NSString)
@@ -210,7 +211,8 @@ class NotificationViewController: UIViewController {
             
             self.navigationController?.setNavigationBarHidden(true, animated: true)
             
-            viewController = storyboard.instantiateViewController(withIdentifier: kStudyDashboardTabbarControllerIdentifier) as? StudyDashboardTabbarViewController
+            viewController = storyboard.instantiateViewController(withIdentifier: kStudyDashboardTabbarControllerIdentifier)
+                as? StudyDashboardTabbarViewController
             
             switch type! as  AppNotification.NotificationSubType{
             case .Study:

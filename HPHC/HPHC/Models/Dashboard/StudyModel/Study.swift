@@ -126,7 +126,7 @@ class Study: Hashable {
         hasher.combine(self.studyId)
     }
     
-    var withdrawalConfigration: StudyWithdrawalConfigration?
+    var withdrawalConfigration: StudyWithdrawalConfig?
     
     static var currentStudy: Study? = nil
     static var currentActivity: Activity? = nil
@@ -340,7 +340,7 @@ class StudyAnchorDate{
 }
 
 // MARK:StudyWithdrawalConfigration
-class StudyWithdrawalConfigration {
+class StudyWithdrawalConfig {
     var message: String? = ""
     var type: StudyWithdrawalConfigrationType? = .notAvailable
     

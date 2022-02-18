@@ -89,7 +89,17 @@ class ActivityStep {
     
     /* initializer method with all params
      */
-     init(activityId: String,type: ActivityStepType,resultType: String,key: String,title: String,text: String,skippable: Bool,groupName: String,repeatable: Bool,repeatableText: String, destinations: Array<Dictionary<String,Any>>) {
+     init(activityId: String,
+          type: ActivityStepType,
+          resultType: String,
+          key: String,
+          title: String,
+          text: String,
+          skippable: Bool,
+          groupName: String,
+          repeatable: Bool,
+          repeatableText: String,
+          destinations: Array<Dictionary<String, Any>>) {
         
         self.activityId = activityId
         self.type = type

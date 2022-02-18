@@ -42,7 +42,19 @@ class PDFCreator: NSObject {
     let kPage = NSLocalizedStrings("Page", comment: "")
     let kof = NSLocalizedStrings("of", comment: "")
     
-    init(title: String, body: String, image: UIImage, relation: String, participantFirstName: String, participantLastName: String, startTime: String, firstName: String, lastName: String, isLAR: Bool, isAdditionalSign: Bool, additionalArrSign: [String], pageCount: Int) { //
+    init(title: String,
+         body: String,
+         image: UIImage,
+         relation: String,
+         participantFirstName: String,
+         participantLastName: String,
+         startTime: String,
+         firstName: String,
+         lastName: String,
+         isLAR: Bool,
+         isAdditionalSign: Bool,
+         additionalArrSign: [String],
+         pageCount: Int) { //
         self.title = title
         self.body = body
         self.image = image
@@ -77,8 +89,12 @@ class PDFCreator: NSObject {
             var body1TextBottom = addBody1TextParagraph(textTop: titleBottom + 24.0)
             
             if isLAR {
-                let body2TextBottom = addBody2TextSideBySide(textTop: body1TextBottom + 24.0, title1: LocalizableString.consentLARParticipantFirstName2.localizedString, title2: participantFirstName)
-                let lastNameBottom = addBody2TextSideBySide(textTop: body2TextBottom + 12.0, title1: LocalizableString.consentLARParticipantLastName2.localizedString, title2: participantLastName)
+                let body2TextBottom = addBody2TextSideBySide(textTop: body1TextBottom + 24.0,
+                                                             title1: LocalizableString.consentLARParticipantFirstName2.localizedString,
+                                                             title2: participantFirstName)
+                let lastNameBottom = addBody2TextSideBySide(textTop: body2TextBottom + 12.0,
+                                                            title1: LocalizableString.consentLARParticipantLastName2.localizedString,
+                                                            title2: participantLastName)
                 
                 let signatureImageBottom = addImage(imageTop: lastNameBottom + 6.0, xValue: 15)
                 
@@ -90,7 +106,7 @@ class PDFCreator: NSObject {
                 _ = addBody1TextRegular(textTop: signatureImageBottom - 16, title: startTime, xValue: 522)
             }
             else {
-                body1TextBottom = body1TextBottom + 104.0
+                body1TextBottom += 104.0
             }
             
             let firstTextBottom = addBody1TextRegular(textTop: body1TextBottom + 22.0, title: isLAR ? firstName : "\(firstName) \(lastName)", xValue: 15)
@@ -103,7 +119,10 @@ class PDFCreator: NSObject {
             else {
                 _ = addImage(imageTop: firstTextBottom - 84.0, xValue: (CGFloat(1.3 * (pageWidth / 4)) + 10))
             }
-            drawLine(context, XValueStart: (CGFloat(1.3 * (pageWidth / 4)) + 10), top: firstTextBottom + 5, xValueEnd: (CGFloat(2.5 * (pageWidth / 4)) + 10))
+            drawLine(context,
+                     XValueStart: (CGFloat(1.3 * (pageWidth / 4)) + 10),
+                     top: firstTextBottom + 5,
+                     xValueEnd: (CGFloat(2.5 * (pageWidth / 4)) + 10))
             _ = addBody1TextRegular(textTop: firstTextBottom + 14.0, title: isLAR ? "(\(LocalizableString.consentLARLastName.localizedString))" : LocalizableString.consentAddSignParticipantSignature.localizedString, xValue: (CGFloat(1.3 * (pageWidth / 4)) + 10))
             
             _ = addBody1TextRegular(textTop: body1TextBottom + 22.0, title: isLAR ? relation : startTime, xValue: 454)
@@ -121,7 +140,8 @@ class PDFCreator: NSObject {
     }
     
     func addSign(top: CGFloat, context: CGContext) {
-        let studyStaffSignatureBottom = addBody1TextBold(textTop: top + 56.0, title: LocalizableString.consentAddSignStudyStaffSignature.localizedString, xValue: 15)
+        let studyStaffSignatureBottom =
+            addBody1TextBold(textTop: top + 56.0, title: LocalizableString.consentAddSignStudyStaffSignature.localizedString, xValue: 15)
         
         var topVal = studyStaffSignatureBottom
         let signatureArr = additionalArrSign

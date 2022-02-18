@@ -450,12 +450,12 @@ class WCPServices: NSObject {
             //WithdrawalConfigration
             if Utilities.isValidObject(someObject: response[kStudyWithdrawalConfigration] as AnyObject?){
                 
-                let studyWithdrawalConfig = StudyWithdrawalConfigration.init(withdrawalConfigration: response[kStudyWithdrawalConfigration] as! Dictionary<String,Any>)
+                let config = StudyWithdrawalConfig.init(withdrawalConfigration: response[kStudyWithdrawalConfigration] as! Dictionary<String,Any>)
                 
                 
                 //update anchorDate to current study
-                Study.currentStudy?.withdrawalConfigration = studyWithdrawalConfig
-                DBHandler.saveWithdrawalConfigration(withdrawalConfigration:studyWithdrawalConfig ,studyId: (Study.currentStudy?.studyId)!)
+                Study.currentStudy?.withdrawalConfigration = config
+                DBHandler.saveWithdrawalConfigration(withdrawalConfigration:config ,studyId: (Study.currentStudy?.studyId)!)
             }
             
             //save in database

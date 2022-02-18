@@ -52,24 +52,44 @@ class SplashViewController: UIViewController {
        
         self.checkIfAppLaunchedForFirstTime()
         
-        // Checks AuthKey, If exists navigate to HomeController else GatewayDashboard
-        if Utilities.isStandaloneApp() {
-            self.initilizeStudyForStandaloneApp()
-        } else {
-            
-            if User.currentUser.authToken != nil {
-                
-                let appDelegate = UIApplication.shared.delegate as! AppDelegate
-                appDelegate.checkPasscode(viewController: self)
-                self.navigateToGatewayDashboard()
-                
-            }else {
-                /*Gateway App*/
-                self.navigateToHomeController()
-                
-            }
-        }
         
+        // Checks AuthKey, If exists navigate to HomeController else GatewayDashboard
+//        if Utilities.isStandaloneApp() {
+//            self.initilizeStudyForStandaloneApp()
+//        } else {
+//
+//            if User.currentUser.authToken != nil {
+//
+//                let appDelegate = UIApplication.shared.delegate as! AppDelegate
+//                appDelegate.checkPasscode(viewController: self)
+//                self.navigateToGatewayDashboard()
+//
+//            }else {
+//                /*Gateway App*/
+//                self.navigateToHomeController()
+//
+//            }
+//        }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                    
+                    // Checks AuthKey, If exists navigate to HomeController else GatewayDashboard
+                    if Utilities.isStandaloneApp() {
+                        self.initilizeStudyForStandaloneApp()
+                    } else {
+                        
+                        if User.currentUser.authToken != nil {
+                            
+                            let appDelegate = UIApplication.shared.delegate as! AppDelegate
+                            appDelegate.checkPasscode(viewController: self)
+                            self.navigateToGatewayDashboard()
+                            
+                        }else {
+                            //Gateway App/
+                            self.navigateToHomeController()
+                            
+                        }
+                    }
+                }
     }
 
     
@@ -85,7 +105,10 @@ class SplashViewController: UIViewController {
     
     func initilizeStudyForStandaloneApp() {
         
-        NotificationCenter.default.addObserver(self, selector: #selector(SplashViewController.studySetupComplete), name: NSNotification.Name(rawValue: "StudySetupCompleted"), object: nil)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(SplashViewController.studySetupComplete),
+                                               name: NSNotification.Name(rawValue: "StudySetupCompleted"),
+                                               object: nil)
         
         StandaloneStudy().setupStandaloneStudy()
         
@@ -93,7 +116,16 @@ class SplashViewController: UIViewController {
     
     func initilizeStudyOverview() {
         
-        let plistPath = Bundle.main.path(forResource: "StudyOverview", ofType: ".plist", inDirectory:nil)
+        var plistPath = Bundle.main.path(forResource: "StudyOverview", ofType: ".plist", inDirectory: nil)
+        let localeDefault = getLanguageLocale()
+        if !(localeDefault.hasPrefix("es") || localeDefault.hasPrefix("en")) {
+          plistPath = Bundle.main.path(forResource: "StudyOverview", ofType: ".plist", inDirectory: nil, forLocalization: "Base")
+        }else if localeDefault.hasPrefix("en"){
+            plistPath = Bundle.main.path(forResource: "StudyOverview", ofType: ".plist", inDirectory: nil, forLocalization: "Base")
+        }else if localeDefault.hasPrefix("es"){
+            plistPath = Bundle.main.path(forResource: "StudyOverview", ofType: ".plist", inDirectory: nil, forLocalization: "es")
+        }
+      
         let arrayContent = NSMutableArray.init(contentsOfFile: plistPath!)
         
         do {
@@ -110,7 +142,7 @@ class SplashViewController: UIViewController {
             overview.sections = listOfOverviews
             
             Study.currentStudy?.overview = overview
-            //assgin to Gateway
+            // assgin to Gateway
             //Gateway.instance.overview = overview
             
             self.navigateToStudyHomeController()
@@ -124,7 +156,9 @@ class SplashViewController: UIViewController {
     func navigateToStudyHomeController() {
         //StudyHomeViewController
         let studyStoryBoard = UIStoryboard.init(name: kStudyStoryboard, bundle: Bundle.main)
-        let studyHomeController = studyStoryBoard.instantiateViewController(withIdentifier: String(describing: StudyHomeViewController.classForCoder())) as! StudyHomeViewController
+        let studyHomeController =
+            studyStoryBoard.instantiateViewController(withIdentifier: String(describing: StudyHomeViewController.classForCoder()))
+            as! StudyHomeViewController
         //studyHomeController.delegate = self
         self.navigationController?.pushViewController(studyHomeController, animated: true)
     }
@@ -162,18 +196,15 @@ class SplashViewController: UIViewController {
 //            else {
 //                self.navigateToStudyHomeController()
 //            }
-        }
-        else {
+        } else {
             
             /*Gateway App*/
-            //self.navigateToHomeController()
+            // self.navigateToHomeController()
             
             /*Standalone App*/
             //self.navigateToStudyHomeController()
             self.createMenuView()
         }
-        
-        
     }
     
     /**
@@ -187,21 +218,17 @@ class SplashViewController: UIViewController {
         self.navigationController?.pushViewController(fda, animated: true)
     }
     
-    //Update Encryption Key & IV on first time launch
+    // Update Encryption Key & IV on first time launch
     func checkIfAppLaunchedForFirstTime() {
         
         if isAppOpenedForFirstTime == false{
-            
-            
+        
             let appDelegate =  UIApplication.shared.delegate as? AppDelegate
             appDelegate?.updateKeyAndInitializationVector()
-            
-            
+         
         }
     }
 }
-
-
 // MARK:- ORKTaskViewController Delegate
 extension SplashViewController:ORKTaskViewControllerDelegate{
     
@@ -209,7 +236,9 @@ extension SplashViewController:ORKTaskViewControllerDelegate{
         return true
     }
     
-    public func taskViewController(_ taskViewController: ORKTaskViewController, didFinishWith reason: ORKTaskViewControllerFinishReason, error: Error?) {
+    public func taskViewController(_ taskViewController: ORKTaskViewController,
+                                   didFinishWith reason: ORKTaskViewControllerFinishReason,
+                                   error: Error?) {
         
         switch reason {
             
@@ -229,9 +258,8 @@ extension SplashViewController:ORKTaskViewControllerDelegate{
         taskViewController.dismiss(animated: true, completion: nil)
     }
     
-    func taskViewController(_ taskViewController: ORKTaskViewController, stepViewControllerWillAppear stepViewController: ORKStepViewController) {
+    func taskViewController(_ taskViewController: ORKTaskViewController,
+                            stepViewControllerWillAppear stepViewController: ORKStepViewController) {
         
     }
 }
-
-

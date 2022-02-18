@@ -24,9 +24,18 @@ class GatewayResourcesListViewController: UIViewController {
 
     @IBOutlet var tableView: UITableView?
     
-    func loadResources(){
+    func loadResources() {
         
-        let plistPath = Bundle.main.path(forResource: "Resources", ofType: ".plist", inDirectory: nil)
+        var plistPath = Bundle.main.path(forResource: "Resources", ofType: ".plist", inDirectory: nil)
+        let localeDefault = getLanguageLocale()
+        print("Krishna gatewaystring resource list \(localeDefault)")
+        if !(localeDefault.hasPrefix("es") || localeDefault.hasPrefix("en")) {
+          plistPath = Bundle.main.path(forResource: "Resources", ofType: ".plist", inDirectory: nil, forLocalization: "Base")
+        }else if(localeDefault.hasPrefix("en")){
+            plistPath = Bundle.main.path(forResource: "Resources", ofType: ".plist", inDirectory: nil, forLocalization: "Base")
+        }else if(localeDefault.hasPrefix("es")){
+            plistPath = Bundle.main.path(forResource: "Resources", ofType: ".plist", inDirectory: nil, forLocalization: "es")
+        }
         let arrayContent = NSMutableArray.init(contentsOfFile: plistPath!)
         
         do {
@@ -53,7 +62,7 @@ class GatewayResourcesListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.navigationItem.title =  NSLocalizedString("RESOURCES", comment: "")
+        self.navigationItem.title =  NSLocalizedStrings("RESOURCES", comment: "")
         
         // Do any additional setup after loading the view.
     }
@@ -115,7 +124,8 @@ extension GatewayResourcesListViewController:  UITableViewDelegate {
         
         let resource = Gateway.instance.resources?[indexPath.row]
         let storyboard = UIStoryboard(name: kStudyStoryboard, bundle: nil)
-        let resourceDetail =   storyboard.instantiateViewController(withIdentifier: "ResourceDetailViewControllerIdentifier") as! ResourcesDetailViewController
+        let resourceDetail =   storyboard.instantiateViewController(withIdentifier: "ResourceDetailViewControllerIdentifier")
+            as! ResourcesDetailViewController
         resourceDetail.resource = resource
         self.navigationController?.pushViewController(resourceDetail, animated: true)
         

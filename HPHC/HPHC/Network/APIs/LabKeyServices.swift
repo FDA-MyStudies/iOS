@@ -96,7 +96,10 @@ class LabKeyServices: NSObject {
         self.sendRequestWith(method: method, params: params, headers: nil)
     }
     
-    func processResponse(metaData: Dictionary<String,Any>,activityType: String,responseData: Dictionary<String,Any>,participantId: String,delegate: NMWebServiceDelegate) {
+    func processResponse(metaData: Dictionary<String,Any>,
+                         activityType: String,
+                         responseData: Dictionary<String,Any>,
+                         participantId: String,delegate: NMWebServiceDelegate) {
         
         self.delegate = delegate
         let method = ResponseMethods.processResponse.method
@@ -354,7 +357,10 @@ extension LabKeyServices: NMWebServiceDelegate{
         if requestName as String == ResponseMethods.processResponse.description {
             if (error.code == NoNetworkErrorCode) {
                 // Save in database
-                DBHandler.saveRequestInformation(params: self.requestParams, headers: self.headerParams, method: requestName as String, server: "response")
+                DBHandler.saveRequestInformation(params: self.requestParams,
+                                                 headers: self.headerParams,
+                                                 method: requestName as String,
+                                                 server: "response")
             }
         }
     }

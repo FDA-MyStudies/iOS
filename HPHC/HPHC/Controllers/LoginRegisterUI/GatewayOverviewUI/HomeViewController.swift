@@ -86,7 +86,15 @@ class HomeViewController: UIViewController{
     func loadGatewayUI(){
        
         //load plist info
-        let plistPath = Bundle.main.path(forResource: "GatewayOverview", ofType: ".plist", inDirectory: nil)
+        var plistPath = Bundle.main.path(forResource: "GatewayOverview", ofType: ".plist", inDirectory: nil)
+        let localeDefault = getLanguageLocale()
+        if !(localeDefault.hasPrefix("es") || localeDefault.hasPrefix("en")) {
+          plistPath = Bundle.main.path(forResource: "GatewayOverview", ofType: ".plist", inDirectory: nil, forLocalization: "Base")
+        }else if localeDefault.hasPrefix("en"){
+            plistPath = Bundle.main.path(forResource: "GatewayOverview", ofType: ".plist", inDirectory: nil, forLocalization: "Base")
+        }else if localeDefault.hasPrefix("es"){
+            plistPath = Bundle.main.path(forResource: "GatewayOverview", ofType: ".plist", inDirectory: nil, forLocalization: "es")
+        }
         let arrayContent = NSMutableArray.init(contentsOfFile: plistPath!)
         
         do {

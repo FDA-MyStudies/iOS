@@ -138,7 +138,9 @@ class ActivityStepResult {
             }
             if Utilities.isValidValue(someObject: stepDict[kActivityStepStartTime] as AnyObject ) {
                 
-                if Utilities.isValidValue(someObject: Utilities.getDateFromString(dateString:(stepDict[kActivityStepStartTime] as? String)!) as AnyObject?) {
+                if Utilities.isValidValue(someObject: Utilities.getDateFromString(dateString:(stepDict[kActivityStepStartTime]
+                                                                                                as? String)!)
+                                            as AnyObject?) {
                     self.startTime =  Utilities.getDateFromString(dateString: (stepDict[kActivityStepStartTime] as? String)!)
                 } else {
                     Logger.sharedInstance.debug("Date Conversion is null:\(stepDict)")
@@ -146,7 +148,9 @@ class ActivityStepResult {
             }
             if Utilities.isValidValue(someObject: stepDict[kActivityStepEndTime] as AnyObject ) {
                 
-                if Utilities.isValidValue(someObject: Utilities.getDateFromString(dateString:(stepDict[kActivityStepEndTime] as? String)!) as AnyObject?) {
+                if Utilities.isValidValue(someObject: Utilities.getDateFromString(dateString:(stepDict[kActivityStepEndTime]
+                                                                                                as? String)!)
+                                            as AnyObject?) {
                     
                     self.endTime =  Utilities.getDateFromString(dateString: (stepDict[kActivityStepEndTime] as? String)!)
                 } else {
@@ -321,7 +325,7 @@ class ActivityStepResult {
                                 }
                             }
                         }
-                        i = i + 1
+                        i += 1
                     }
                     
                     if isAddMore! {
@@ -455,7 +459,8 @@ class ActivityStepResult {
                             
                         } else { // Kick Count
                             resultDict?[kActivityActiveStepKey] = kFetalKickCounterCount
-                            resultDict?[kActivityStepResultValue] = Double((stepTypeResult?.totalKickCount) == nil ? 0 : (stepTypeResult?.totalKickCount)!)
+                            resultDict?[kActivityStepResultValue] =
+                                Double((stepTypeResult?.totalKickCount) == nil ? 0 : (stepTypeResult?.totalKickCount)!)
                         }
                         
                         //Saving Start & End Time of Step
@@ -502,7 +507,9 @@ class ActivityStepResult {
                 
                 if Utilities.isValidValue(someObject: stepTypeResult.scaleAnswer as AnyObject?) {
                     
-                    if self.step != nil && (self.step as? ActivityQuestionStep) != nil && ((self.step as? ActivityQuestionStep)?.resultType as? String)! == "continuousScale" {
+                    if self.step != nil &&
+                        (self.step as? ActivityQuestionStep) != nil &&
+                        ((self.step as? ActivityQuestionStep)?.resultType as? String)! == "continuousScale" {
                         let formatDict: Dictionary<String, Any>
                         
                         formatDict = ((self.step as? ActivityQuestionStep)?.formatDict)!

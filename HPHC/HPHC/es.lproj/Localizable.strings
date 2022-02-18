@@ -1,0 +1,628 @@
+/* 
+  Localizable.strings
+  HPHC
+
+ License Agreement for FDA My Studies
+ Copyright © 2017-2019 Harvard Pilgrim Health Care Institute (HPHCI) and its Contributors. Permission is
+ hereby granted, free of charge, to any person obtaining a copy of this software and associated
+ documentation files (the &quot;Software&quot;), to deal in the Software without restriction, including without
+ limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the
+ Software, and to permit persons to whom the Software is furnished to do so, subject to the following
+ conditions:
+ The above copyright notice and this permission notice shall be included in all copies or substantial
+ portions of the Software.
+ Funding Source: Food and Drug Administration (“Funding Agency”) effective 18 September 2014 as
+ Contract no. HHSF22320140030I/HHSF22301006T (the “Prime Contract”).
+ THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
+ INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR
+ PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
+ LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT
+ OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
+ OTHER DEALINGS IN THE SOFTWARE.
+*/
+
+"Home"="Inicio";
+"Resources"="Recursos";
+"My Account"="Mi cuenta";
+"Sign In"="Registrarse";
+"New User?"="¿Nuevo usuario?";
+"Sign up"="Regístrese";
+"Sign Up"="Regístrese";
+"This feature will be available in the next sprint."="Esta función estará disponible en el próximo sprint.";
+"Are you sure you want to sign out?"="¿Estás segura de que quieres cerrar sesión?";
+
+"Are you sure you want to sign out? Incomplete activities and activities completed while offline must be re-started when you next sign in."="¿Estás seguro de que quieres cerrar sesión? Las actividades incompletas y las que se completaron sin conexión deben reiniciarse la próxima vez que inicie sesión.";
+
+"Sign Out later"="Cerrar sesión más tarde";
+"Reach Out"="Contactar";
+
+"Please join study to go forward."="Únase al estudio para seguir adelante.";
+
+"Select Lead Time"="Seleccionar plazo de entrega";
+"Done"="Aceptar";
+"Cancel"="Cancelar";
+"Profile"="Perfil";
+"Profile updated Successfully."="Perfil actualizado con éxito.";
+"Sign Out"="Desconectar";
+"Use Passcode or Touch ID to access app"="Utilizar el código de acceso o Touch ID para acceder a la aplicación";
+"Use Passcode or Face ID to access app"="Utilizar la contraseña o el Face ID para acceder a la aplicación";
+"Use Passcode to access app"="Utilizar la contraseña para acceder a la aplicación";
+"Save"="Guardar";
+"Change Passcode"="Cambiar código de acceso";
+"Edit"="Editar";
+
+"LEAVE US YOUR FEEDBACK"="DÉJENOS SU COMENTARIO";
+"Please enter message"="Por favor ingrese mensaje";
+"Please provide your feedback"="Envíe sus comentarios";
+"Enter your feedback here"="Ingrese sus comentarios aquí";
+
+"CONTACT US"="CONTÁCTENOS";
+"REACH OUT"="Contactar";
+"Leave Anonymous Feedback"="Deje un comentario anónimo";
+"Need Help? Contact Us"="¿Necesita ayuda? Contáctenos";
+
+"Your registered email(xyz@gmail.com) is pending verification. Enter the Verification Code received on this email to complete verification and try the Forgot Password action again."="Su correo electrónico registrado (xyz@gmail.com) está pendiente de verificación. Ingrese el Código de verificación recibido en este correo electrónico para completar la verificación e intente la acción Olvidó la contraseña nuevamente.";
+
+"Your registered email is pending verification. Please type in the Verification Code received in the email to complete this step and proceed to using the app."="Su correo electrónico registrado está pendiente de verificación. Por favor ingrese el códico de verificación recibido en el correo electrónico para completar este paso y continuar con el uso de la aplicación";
+
+"Why Register?"="¿Por qué registrarse?";
+"Terms"="Condiciones";
+"Privacy Policy"="Política de privacidad";
+
+"An email has been sent to xyz@gmail.com. Please type in the Verification Code received in the email to complete the verification step."="Se ha enviado un correo electrónico a xyz@gmail.com. Por favor, ingrese el código de verificación recibido en el correo electrónico para completar el paso de verificación.";
+
+"Message"="Mensaje";
+"Please verify your email address."="Por favor verifique su dirección de correo electrónico.";
+"An email verification code has been sent to your registered email."="Se ha enviado un código de verificación por correo electrónico a su email registrado";
+
+
+"Do you wish to set up Passcode or FaceID/TouchID protection for this app? (You can do this later in the My Account area)."="¿Desea configurar la protección con código de acceso o FaceID / TouchID para esta aplicación? (Puede hacer esto más tarde en el área Mi cuenta).";
+
+"Page"="Página";
+"of"="de";
+
+"This action will create a shareable image file of the charts currently seen in this section. Proceed?"="Esta acción creará un archivo de imagen para compartir de los gráficos que se ven actualmente en esta sección. ¿Continuar?";
+
+"TRENDS"="TENDENCIAS";
+
+"7PI-ZW-p9g.text.value"="TENDENCIAS";
+
+"You can't join study without sharing your data"="No puede unirse al estudio sin compartir sus datos";
+"Unknown error occurred. Please try after some time."="Ocurrió un error desconocido. Inténtelo después de un tiempo.";
+
+
+"Something went wrong please try again later."="Se produjo un error. Vuelva a intentarlo más tarde.";
+
+"enter here"="entre aquí";
+
+" Search"=" Buscar";
+
+"Answer required"="Respuesta requerida";
+"Please provide an input for the text field too."="Proporcione también una entrada para el campo de texto.";
+
+"This action will create a shareable image file of the dashboard currently seen in this section. Proceed?"="Esta acción creará un archivo de imagen para compartir del panel que se ve actualmente en esta sección. ¿Continuar?";
+
+"  DAY  "="  DIA  ";
+
+"You missed the previous run of this activity. Please wait till the next run becomes available. Run timings are given on the Activities list screen."="Te perdiste la ejecución anterior de esta actividad. Espere hasta que la próxima ejecución esté disponible. Los tiempos de ejecución se dan en la pantalla de lista de Actividades.";
+
+"STUDY ACTIVITIES"="Actividades del estudio";
+"Pull to refresh"="Tire para actualizar";
+
+
+"Sorry, no activities available right now."="Lo sentimos, no hay actividades disponibles en este momento.";
+
+"Activity"="Actividad";
+"Invalid Data!"="¡Datos inválidos!";
+"CURRENT"="EN CURSO";
+"UPCOMING"="PRÓXIMAMENTE";
+"PAST"="ANTERIORES";
+
+
+"The study "="El estudio ";
+" is 100 percent complete. Thank you for your participation."=" está 100 por ciento completo. Gracias por su participación.";
+
+"We noticed you missed an activity in "="Notamos que te perdiste una actividad en ";
+
+" today. That’s Ok! We know you’re busy, but we encourage you to complete study activities before they expire."=" hoy. ¡Está bien! Sabemos que está ocupado, pero le recomendamos que complete las actividades de estudio antes de que caduquen.";
+
+"New Resource Available"="Nuevo recurso disponible";
+
+"Are you sure you want to "="Estás seguro que quieres ";
+"Proceed"="Continuar";
+
+
+"You are choosing to leave the study. Please choose if your response data can be retained and used for research purposes OR if your response data should be deleted."="Está eligiendo dejar el estudio. Elija si sus datos de respuesta se pueden conservar y utilizar con fines de investigación O si se deben eliminar los datos de su respuesta.";
+
+"Retain my data"="Conservar mis datos";
+"Delete my data"="Borrar mis datos";
+
+"Are you sure? Tap Ok to confirm."="¿Está seguro? Toque Ok para confirmar.";
+
+"Authentication Required"="Autenticacion requerida";
+"Username"="Nombre de usuario";
+"Password"="Contraseña";
+"Log In"="Iniciar sesión";
+"Error"="Error";
+
+
+
+"Please update to the latest version of the app to continue."="Actualice a la última versión de la aplicación para continuar.";
+"Please go to AppStore to update to the latest version of the app."="Vaya a AppStore para actualizar a la última versión de la aplicación.";
+"Consent Updated"="Consentimiento actualizado";
+
+" Please review the revised Consent terms and provide your Informed Consent, to continue participating in the study."=" Revise los términos de consentimiento revisados y proporcione su consentimiento informado para continuar participando en el estudio.";
+
+"The Consent Document for this study has been updated."="El documento de consentimiento para este estudio se ha actualizado.";
+"Review"="Revisión";
+"Passcode"="Contraseña";
+"You will be signed out and will need to sign in again. Are you sure you want to proceed?"="Se cerrará su sesión y deberá iniciar sesión nuevamente. ¿Estas seguro que deseas continuar?";
+
+"Forgot Passcode? Sign In Again"="¿Olvidó la contraseña? Iniciar sesión de nuevo";
+"Set up a passcode for the app"="Configurar una contraseña para la aplicación";
+"Continue"="Continuar";
+
+
+"Validated!"="¡Validado!";
+"OK"="Ok";
+"Ok1"="Aceptar1";
+"Enter a token"="Ingrese un token";
+"Enter keyword(s)"="Inserte palabras claves";
+
+
+"Your enrollment token has been successfully validated. You are eligible to join the Study.\nPlease click Continue to proceed to the Consent section."="Según las respuestas que proporcionó, es elegible para participar en este estudio.\nHaga clic en Continuar para pasar a la sección Consentimiento.";
+
+"You are Eligible!"="¡Eres elegible!";
+
+
+"Your token has been validated. You are eligible to join the study. Please tap Get Started to proceed to the consent section."="Su token ha sido validado. Es elegible para participar en el estudio. Toque Empezar para pasar a la sección de consentimiento.";
+
+"Eligibility Test"="Prueba de elegibilidad";
+"Please answer some quick questions to confirm your eligibility for this study."="Responda algunas preguntas rápidas para confirmar su elegibilidad para este estudio.";
+
+"Based on the answers you provided, you are eligible to participate in this study.\nPlease click Continue to proceed to the Consent section."="Según las respuestas que proporcionó, es elegible para participar en este estudio. Haga clic en Continuar para pasar a la sección Consentimiento.";
+
+"Change server to"="Cambiar servidor a";
+
+
+"TERMS"="CONDICIONES";
+"PRIVACY POLICY"="POLÍTICA DE PRIVACIDAD";
+"Please Enter Valid Value"="Ingrese un valor válido";
+"Important Note"="Nota importante";
+"Ok"="Ok";
+"Delete Account"="Borrar cuenta";
+
+"Registration (or sign up) for the app  is requested only to provide you with a seamless experience of using the app. Your registration information does not become part of the data collected for any study(ies) housed in the app. Each study has its own consent process and your data for the study will not be collected without you providing your informed consent prior to joining the study."="Solo se solicita que se registre en la aplicación para brindarle una experiencia de uso perfecta. Su información de registro no se suma a los datos recopilados para ninguno de los estudios alojados en la aplicación. Cada estudio tiene su propio proceso de consentimiento y sus datos para el estudio no se recopilarán sin que brinde su consentimiento informado antes de unirse al estudio.";
+
+"Are you sure you wish to permanently delete your #APPNAME# account? You will need to register again if you wish to join a study."="¿Está seguro de que desea eliminar permanentemente su cuenta #APPNAME#? Deberá registrarse nuevamente si desea unirse a un estudio.";
+
+
+"Account has been deleted"="La cuenta ha sido eliminada";
+
+"Stay up-to-date! Turn ON notifications and reminders in app and phone settings to get notified about study activity in a timely manner."="¡Estar al día! Active las notificaciones y los recordatorios en la configuración de la aplicación y el teléfono para recibir notificaciones sobre la actividad del estudio de manera oportuna.";
+
+"SIGN IN"="Registrarse";
+"PASSWORD HELP"="AYUDA CON CONTRASEÑA";
+"We have sent a temporary password to your registered email. Please login with temporary password and change your password."="Hemos enviado una contraseña temporal a su correo electrónico registrado. Inicie sesión con contraseña temporal y cambie su contraseña.";
+"SIGN UP"="Regístrese";
+"I Agree to the Terms and Privacy Policy"="Acepto las Condiciones y la Política de privacidad";
+"NOTIFICATIONS"="NOTIFICACIONES";
+"Please enter your first name."="Por favor, introduzca su nombre de pila.";
+"Please enter your last name."="Por favor ingrese su apellido.";
+"Please enter your email address."="Por favor, introduzca su dirección de correo electrónico.";
+"Please enter your password."="Por favor, introduzca su contraseña.";
+"Please enter your current password."="Ingrese su contraseña actual.";
+"Please confirm your password."="Por favor, confirme su contraseña.";
+"Please confirm the password."="Confirme la contraseña.";
+"Your password should not match with email id"="Su contraseña no debe coincidir con la identificación de correo electrónico";
+"Please enter valid email address."="Por favor, ingrese una dirección de correo electrónico válida.";
+"The Password and Confirm password fields don't match."="Los campos Contraseña y Confirmar contraseña no coinciden.";
+"New password and confirm password fields don't match."="Los campos de contraseña nueva y contraseña de confirmación no coinciden.";
+"Password should have minimum of 8 characters."="La contraseña debe tener un mínimo de 8 caracteres.";
+
+
+"Your password MUST be 8-64 characters and contain each of the following: An uppercase letter, A lower case letter, A number 0-9, a special character: \\ ! # % & ‘ () * + , - . : < > = ? @ [] ^ _ { } | ~ *"="Su contraseña DEBE tener entre 8 y 64 caracteres y contener cada uno de los siguientes elementos: una letra mayúscula, una letra minúscula, un número 0-9, un carácter especial: \\! #% & ‘() * +, -. : <> =? @ [] ^ _ {} | ~ * \"";
+
+"Please agree to terms and conditions."="Por favor, acepte los términos y condiciones.";
+"Please enter your new password."="Ingrese su nueva contraseña.";
+"New password and old password are same."="La nueva contraseña y la anterior son las mismas.";
+"Please enter your relationship to the participant."="Ingrese su relación con el participante.";
+"CHANGE PASSWORD"="CAMBIAR CONTRASEÑA";
+"CREATE PASSWORD"="CREAR CONTRASEÑA";
+"Your password has been changed successfully"="Su contraseña ha sido cambiada correctamente.";
+"Please enter all the fields"="Por favor ingrese todos los campos";
+"Please enter valid first name. Please use letters(length:1 - 100 characters)."="Introduzca un nombre válido. Utilice letras (longitud: 1 - 100 caracteres).";
+"Please enter valid last name. Please use letters(length:1 - 100 characters)."="Ingrese un apellido válido. Utilice letras (longitud: 1 - 100 caracteres).";
+"Old password and New password should not be same."="La contraseña anterior y la contraseña nueva no deben ser iguales.";
+"Please enter valid Verification Code"="Ingrese un código de verificación válido";
+"Thank you for providing feedback. Your gesture is appreciated."="Gracias por contactarnos. Nos pondremos en contacto con usted lo antes posible.";
+"Please enter subject"="Por favor ingrese el asunto";
+"Please enter message"="Por favor ingrese mensaje";
+"Thank you for contacting us. We will get back to you on your email address at the earliest."="Gracias por contactarnos. Nos comunicaremos con usted a su dirección de correo electrónico lo antes posible.";
+"  Resume  "="  Continuar  ";
+"  Start  "="  Comienzo  ";
+"  Completed  "="  Terminado  ";
+"  Incompleted  "="  Incompleto  ";
+"  Expired  "="  Caducado  ";
+
+"  DAY  "="  DIA  ";
+"Day"="dias";
+"  MONTH  "="  MES  ";
+"MONTH"="MES";
+"  WEEK  "="  SEMANA  ";
+"WEEK"="SEMANA";
+"Please enter valid enrollment token"="Ingrese un token de inscripción válido";
+"Please enter valid token"="Ingrese un token válido";
+"Unable to Enroll, Please try again later."="No se puede inscribir. Vuelva a intentarlo más tarde.";
+"Sorry, this token is invalid. Please enter a valid token to continue."="Lo sentimos, este token no es válido. Ingrese un token válido para continuar.";
+
+
+"This study is an upcoming one and isn't yet open for enrolling participants. Please check back later."="Este estudio es próximo y aún no está abierto para inscribir participantes. Por favor, vuelva más tarde.";
+
+"This study has been temporarily paused. Please check back later."="Este estudio se ha detenido temporalmente. Por favor, vuelva más tarde.";
+
+"The study has been temporarily paused. You can participate in activities once it is resumed. Please check back later."="El estudio se ha detenido temporalmente. Puede participar en las actividades una vez que se reanude. Por favor, vuelva más tarde.";
+
+"This study has been closed."="Este estudio ha sido cerrado.";
+
+"Sorry, this study currently does not allow previously enrolled participants to rejoin the study after they have withdrawn from the study. Please check back later or explore other studies"="Lo sentimos, este estudio actualmente no permite que los participantes inscritos previamente se reincorporen al estudio después de que se hayan retirado del estudio. Vuelva a consultar más tarde o explore otros estudios";
+
+"Sorry, enrollment for this study has been closed for now. Please check back later or explore other studies you could join."="Lo sentimos, la inscripción para este estudio se ha cerrado por ahora. Vuelva a consultar más tarde o explore otros estudios a los que podría unirse.";
+
+"Failed to connect to Apple Mail app"="No se pudo conectar a la aplicación Apple Mail";
+
+
+"Connection error"="Error de conexión";
+"There was a problem, please try again."="Hubo un problema. Vuelve a intentarlo.";
+"This resource is currently unavailable."="Este recurso no está disponible actualmente.";
+"About the Study"="Sobre el estudio";
+"This will also delete your app account."="Esto también eliminará su cuenta de aplicación.";
+"I am signing the consent form on behalf of myself."="Estoy firmando el formulario de consentimiento en mi nombre.";
+
+"I am signing the consent form on behalf of the study participant as their legally authorized representative."="Estoy firmando el formulario de consentimiento en nombre del participante del estudio como su representante legalmente autorizado.";
+
+"The next few steps will capture your informed consent for participation in this study."="Los siguientes pasos nos permitirán obtener su consentimiento para participar en este estudio.";
+"Please select the appropriate option below"="Seleccione la opción adecuada a continuación";
+"Please specify your relationship to the participant"="Especifique su relación con el participante";
+"Please enter the participant's first and last name below"="Ingrese el nombre y apellido del participante a continuación";
+"Participant's First Name           "="Nombre del participante           ";
+"Participant's Last Name"="Apellido del participante";
+"Participant first name: "="Nombre del participante: ";
+"Participant last name: "="Apellido del participante: ";
+"Signature"="Firma";
+"Date"="Fecha";
+"First name"="Primer nombre";
+"Last name"="Apellido";
+"Relationship to participant"="Relación al participante";
+"Consent by a Legally Authorized Representative"="Consentimiento de un representante legalmente autorizado";
+"Study Staff Signature(s)"="Firma(s) del personal del estudio";
+"- Coordinator"="- Coordinador";
+"Participant's Name (printed)"="Nombre del participante \n(en imprenta)";
+"Participant's Signature"="Firma del participante";
+
+
+"Your Session is Expired"="Tu sesión caducó";
+"Sorry, an error occurred and your feedback could not be sent to the organization. Please retry in some time."="Lo sentimos, se produjo un error y sus comentarios no se pudieron enviar a la organización. Vuelva a intentarlo en algún momento.";
+
+"Could not connect to server"="No se pudo conectar al servidor";
+
+"Cellular"="Cellular";
+"WiFi"="WiFi";
+"No Connection"="No Connection";
+"unavailable"="indisponible";
+
+"Something went wrong"="Algo salió mal";
+"Your error localized description"="Su descripción localizada del error";
+
+"You seem to be offline. Please connect to a network to proceed with this action."="Pareces estar desconectado. Conéctese a una red para continuar con esta acción.";
+
+"Could not connect to server. Please try again later."="No se pudo conectar al servidor. Por favor, inténtelo de nuevo más tarde.";
+
+"Activity Completed"="actividad completada";
+"Tap Done to submit responses. Responses cannot be modified after submission"="Toque Listo para enviar respuestas. Las respuestas no se pueden modificar después del envío";
+
+
+"Comprehension"="Comprensión";
+"Let's do a quick and simple test of your understanding of this Study."="Hagamos una prueba rápida y sencilla de su comprensión de este Estudio.";
+"Great Job!"="¡Gran trabajo!";
+"You answered all of the questions correctly. Tap on Next to proceed"="Respondiste todas las preguntas correctamente. Toque Siguiente para continuar";
+"Thanks for providing consent for this Study"="Gracias por su consentimiento para este estudio";
+"You can now start participating in the Study"="Ahora puede comenzar a participar en el estudio";
+"I agree to participate in this research study."="Acepto participar en este estudio de investigación.";
+"Participant"="Participante";
+"No"="No";
+"Yes"="Sí";
+
+
+"Yet To Join"="Disponible para unirse";
+"In Progress"="En progreso";
+"Completed"="Terminado";
+"Not Eligible"="No elegible";
+"Withdrawn"="Retirado";
+"No participation"="Sin participación";
+"Partial Participation"="Participación parcial";
+
+
+
+"The activity "="La actividad ";
+" will expire in 24 hours. Your participation is important. Please visit the study to complete it now."=" caducará en 24 horas. Tu participación es importante. Visite el estudio para completarlo ahora.";
+
+"A new run of the daily activity "="Una nueva ejecución de la actividad diaria ";
+", is now available. Your participation is important. Please visit the study to complete it now."=", Ya está disponible. Tu participación es importante. Visite el estudio para completarlo ahora.";
+
+", is now available and is valid until "=", ya está disponible y es válido hasta ";
+". Your participation is important. Please visit the study to complete it now."=". Tu participación es importante. Visite el estudio para completarlo ahora.";
+
+"The current run of the weekly activity "="La ejecución actual de la actividad semanal ";
+
+"A new run of the weekly activity "="Una nueva ejecución de la actividad semanal ";
+", is now available. Please visit the study to complete it now."=", Ya está disponible. Visite el estudio para completarlo ahora.";
+
+"The current run of the monthly activity "="La ejecución actual de la actividad mensual ";
+" will expire in 3 days. Your participation is important. Please visit the study to complete it now."=" caducará en 3 días. Tu participación es importante. Visite el estudio para completarlo ahora.";
+
+"A new run of the monthly activity "="Una nueva ejecución de la actividad mensual ";
+
+"A new run of the scheduled activity "="Una nueva ejecución de la actividad programada ";
+
+"It’s been a while since you visited the"="Ha pasado un tiempo desde que visitaste la aplicación";
+"app. Please consider continuing your participation in any studies in which you’re enrolled."="Considere continuar su participación en cualquier estudio en el que esté inscrito.";
+
+
+"NA"="NA";
+" (per run)"=" (por carrera)";
+
+"Run: "="Correr: ";
+" done"=" hecho";
+" missed"=" perdido";
+"Run(s):"="Ejecución(s):";
+"more"="más";
+
+"Tap Done to submit responses. Responses cannot be modified after submission."="Toque Listo para enviar respuestas. Las respuestas no se pueden modificar después del envío.";
+
+
+"Fetal Kick Counter"="Contador de patadas fetales";
+
+"This task needs you to record the number of times you experience fetal kicks in a given duration of time.Also called as the Fetal Kick Counter task, this will help assess the activity of the baby within."="Esta tarea necesita que registres la cantidad de veces que experimentas patadas fetales en un período de tiempo determinado. También llamada tarea Contador de patadas fetales, esto ayudará a evaluar la actividad del bebé en su interior.";
+
+"Thank you for your time!\n\nTap Done to submit responses. Responses cannot be modified after submission."="¡Gracias por su tiempo!\n\nToque Listo para enviar respuestas. Las respuestas no se pueden modificar después del envío..";
+
+"All"="Todas";
+"Surveys"="Encuestas";
+"Tasks"="Tareas";
+
+"TAP TO RECORD A KICK"="TOCA PARA GRABAR UNA PATADA";
+"You have recorded "="Has grabado ";
+" Proceed to submitting count and time?"=" ¿Continuar con el envío de recuento y tiempo?";
+"This activity records the time it takes to feel "="Esta actividad registra el tiempo que tarda en sentirse ";
+"Select Time"="Seleccionar hora";
+
+"kicks "="patadas ";
+"please enter "="Por favor escribe ";
+"kicks only "="solo patadas ";
+
+"Please select a valid time(Max "="Seleccione una hora válida (máx ";
+
+"hitCount"="hitCount";
+"duration"="duración";
+
+
+"You have chosen to delete your #APPNAME# Account. This will result in automatic withdrawal from all studies.\nBelow is a list of studies that you are a part of and information on how your response data will be handled with each after you withdraw. Please review and confirm."="Ha elegido eliminar su cuenta #APPNAME#. Esto dará como resultado el retiro automático de todos los estudios.\ncontinuación se muestra una lista de los estudios de los que forma parte e información sobre cómo se manejarán los datos de respuesta con cada uno después de que se retire. Por favor revise y confirme.";
+
+
+"You have chosen to delete your #APPNAME# Account. This will result in automatic withdrawal from study.\nBelow is the study that you are a part of and information on how your response data will be handled after you withdraw. Please review and confirm."="Ha elegido eliminar su cuenta #APPNAME#. Esto resultará en el retiro automático del estudio.\ncontinuación se muestra el estudio del que forma parte y la información sobre cómo se manejarán sus datos de respuesta después de que se retire. Por favor revise y confirme.";
+
+"Please select an option between Delete Data or Retain Data for all studies."="Seleccione una opción entre Eliminar datos o Retener datos para todos los estudios.";
+
+"Response data will be deleted"="Se eliminarán los datos de respuesta";
+"Response data will be retained"="Se conservarán los datos de respuesta";
+"Invalid ParticipantId."="ID de participante no válido.";
+
+"Sorry, no Studies found. Please try different Filter Options"="Lo siento, no se encontraron estudios. Por favor intente un filtro diferente.";
+"Sorry, no Studies found. Please check the spelling or try a different search."="Lo sentimos, no se encontraron estudios. Por favor revise la ortografía o intente una búsqueda diferente.";
+
+"Sorry, no studies available right now. Please remain signed in to get notified when there are new studies available."="Lo siento, no hay estudios disponibles en este momento. Por favor permanezca reistrado para recibir notificaciones cuando haya nuevos estudios disponibles.";
+
+
+
+"App Glossary"="Glosario de aplicaciones";
+"In Progress"="En progreso";
+  
+"By tapping Sign In, you agree to this app's Terms and Privacy Policy"="Al tocar Iniciar sesión, acepta los Condiciones y la Política de privacidad de esta aplicación";
+
+"New User? Sign Up"="¿Nuevo Usuario? Regístrese";
+"RESOURCES"="RECURSOS";
+
+
+"Study Status"="Estado del estudio";
+"Active"="Activo";
+"COMPLETION:"="Terminación:";
+"Closed"="Cerrado";
+"Upcoming"="Próximo";
+"Paused"="Pausado";
+"Bookmarked"="Marcado como favorito";
+"Participation Status"="Estado de participación";
+"Categories"="Categorías";
+"Biologics Safety"="Seguridad de los productos biológicos";
+"Clinical Trials"="Ensayos clínicos";
+"Cosmetics Safety"="Seguridad de los cosméticos";
+"Drug Safety"="Seguridad de los medicamentos";
+"Food Safety"="Seguridad alimenticia";
+"Medical Device Safety"="Seguridad de dispositivos médicos";
+"Observational Studies"="Estudios observacionales";
+"Public Health"="Salud pública";
+"Radiation-Emitting Products"="Productos de radiación";
+"Tobacco Use"="El consumo de tabaco";
+
+"DELETE ACCOUNT"="BORRAR CUENTA";
+
+"Settings"="Ajustes";
+
+"The selected study is in the"="El estudio seleccionado está en el idioma";
+"language"="";
+"Please change language to"="Cambie el idioma a";
+"in your device settings and continue."="en la configuración de su dispositivo y continúe.";
+
+
+"ACTIVE"="ACTIVO";
+"CLOSED"="CERRADO";
+"UPCOMING"="PRÓXIMAMENTE";
+"PAUSED"="PAUSADA";
+
+"Required"="Necesario";
+"Sorry, you are not eligible for participation in this study. We thank you for your interest and time, and encourage you to explore other studies as they are made available in the app."="Lo sentimos, no eres elegible para participar en este estudio. Le agradecemos su interés y tiempo, y lo alentamos a explorar otros estudios a medida que estén disponibles en la aplicación.";
+
+"Yet to Join"="Disponible para unirse";
+"Watch Video"="Ver video";
+
+"Signed Consent"="Consentimiento firmado";
+
+"session expired"="sesión expirada";
+"Unauthorized exception"="Excepción no autorizada";
+"timeout"="se acabó el tiempo";
+"client error"="error del cliente";
+"Unknown error"="error desconocido";
+"Internal server error"="Error Interno del Servidor";
+"Unable to enroll into the study"="No se puede inscribir en el estudio.";
+"Try logging in again"="Intente iniciar sesión de nuevo";
+"Unable to process"="No se puede procesar";
+"No data found"="Datos no encontrados";
+"Unable to withdraw from the study"="Incapaz de retirarse del estudio.";
+"server error"="error del servidor";
+"No data"="sin datos";
+"is currently not available"="actualmente no está disponible";
+"Token already in use"="Token ya en uso";
+"_SignedConsent"="_Consentimiento firmado";
+
+"gES-c2-7do.value"="Desarrollado por FDA MyStudies";
+"Jyn-tg-ixg.normalTitle.value"="¿Nuevo usuario?";
+
+"AaU-Or-nbT.normalTitle.value"="ACTUALIZAR";
+"xNA-bz-Y9i.text.value"="Nueva versión disponible";
+
+
+"7Rb-1u-tkt.text.value"="Buscar estudio por";
+"x0y-MY-FMc.placeholder.value"="Ingrese un token";
+"xyq-ug-M4x.normalTitle.value"="Cancelar";
+"NJC-CA-ro1.text.value"="Inténtalo de nuevo";
+"b7l-Wh-qpO.normalTitle.value"="Procesar de nuevo";
+"dcV-56-Hws.normalTitle.value"="Cancelar";
+"kjL-rf-IRM.text.value"="Respondió una o más preguntas incorrectamente. Queremos asegurarnos de que comprenda de qué se trata este estudio y en qué consiste. Revise las pantallas de información de consentimiento y vuelva a intentarlo.";
+
+
+"038-eu-Tw1.normalTitle.value"="Enviar";
+"0DE-kF-2Xl.normalTitle.value"="Desconectar";
+"0mt-Xu-KqK.normalTitle.value"="Enviar";
+"1BA-M1-mXf.normalTitle.value"="Borrar mi cuenta";
+"6pR-ur-c4G.text.value"="Un estudio para mujeres embarazadas";
+"AqF-5D-BJY.normalTitle.value"="Estoy de acuerdo, procedo a eliminar mi cuenta";
+"CKp-ZC-FCM.text.value"="Asunto";
+"EmJ-Ca-q92.normalTitle.value"="Cancelar";
+"cae-09-QSH.normalTitle.value"="No hay actividades disponibles";
+"GZf-6d-030.text.value"="Comentarios";
+"LLs-YR-ZfM.text.value"="Borrar mi cuenta";
+"NY2-tY-i1U.normalTitle.value"="Aplicar";
+"OL5-qf-Lfd.normalTitle.value"="Conservar mis datos";
+"fuW-0v-Kj3.text.value" = "Terminación:";
+
+"TmB-Q7-f8P.normalTitle.value"="Desconectar";
+"ZAG-q5-tTH.placeholder.value"="Ingrese el asunto";
+"b0d-he-JiD.text.value"="¡Nos encantaría saber de usted! Comparta su opinión sobre cómo podemos mejorar su experiencia de participar en estudios de salud y contribuir a un mundo más saludable. Sus comentarios serán anónimos.";
+"b2d-cc-iAX.normalTitle.value"="Borrar mis datos";
+"cTN-Dm-9a6.text.value"="Mensaje";
+"gES-c2-7do.text.value"="Desarrollado por FDA MyStudies";
+"lQD-pA-Zjm.normalTitle.value"="No deseo borrar mi cuenta";
+"pB8-Jw-hq2.text.value"="Primer nombre";
+"sfa-0h-9w7.text.value"="Lo siento, no hay estudios disponibles en este momento. Por favor permanezca reistrado para recibir notificaciones cuando haya nuevos estudios disponibles.";
+"uYJ-Jl-iiH.normalTitle.value"="Enviar";
+
+
+"0li-V5-aDa.placeholder.value"="Ingrese el código de verificación";
+"229-dc-iON.text.value"="Ingrese su correo electrónico registrado para recibir ayuda con la contraseña.";
+"2Iq-sI-1MG.text.value"="Paso de verificación";
+"3eF-aU-RcQ.normalTitle.value"="¿Se te olvidó tu contraseña?";
+"5n7-N7-Pdx.normalTitle.value"="Enviar";
+"867-Vn-0xS.placeholder.value"="ingrese correo electrónico";
+"93M-Fs-drd.normalTitle.value"="Continuar";
+"G1v-Yc-O0B.normalTitle.value"="Comenzar";
+"Les-Kl-pFS.normalTitle.value"="Registrarse";
+"QZr-DS-rsL.normalTitle.value"="Enviar";
+"Tm3-4k-53S.normalTitle.value"="Volver a enviar el código de verificación";
+"WOM-w4-FBB.text.value"="Su proceso de registro ya está completo";
+"WsS-eE-w8m.normalTitle.value"="Registrarse";
+"d1G-F1-50Q.text.value"="¡Felicidades!";
+"eRj-pM-e3e.placeholder.value"="Ingrese el código de verificación";
+"gYt-xI-csS.normalTitle.value"="Volver a enviar el código de verificación";
+"pzi-7P-kZh.normalTitle.value"="Continuar";
+"qBm-e0-RzA.text.value"="Paso de verificación";
+"qls-nn-uxZ.normalTitle.value"="Comenzar";
+"vIh-lT-4bl.normalTitle.value"="Comenzar";
+"x7K-bc-LZO.normalTitle.value"="Siguiente";
+"jrJ-DJ-Dbb.text.value"="Ver video";
+
+"AA0-le-tSn.text.value"="Ver video";
+"AW7-ks-icb.text.value"="Sobre el estudio";
+"MKo-wh-p4O.normalTitle.value"="Unirse al estudio";
+"5NQ-r5-mSz.normalTitle.value"="Unirse al estudio";
+"gz3-j6-s6W.normalTitle.value"="Ver consentimiento";
+"bc7-W1-fmy.normalTitle.value"="Visita el sito web";
+"lIT-J9-U7S.normalTitle.value"="Unirse al estudio";
+"mud-v9-9iS.normalTitle.value"="Ver consentimiento";
+"wIC-kn-yNP.normalTitle.value"="Visita el sito web";
+"zeM-Up-qJV.normalTitle.value"="Visita el sito web";
+
+"Study with StudyId"="El estudio con StudyId";
+"does not exist"="no existe";
+
+"Consent"="Consentimiento";
+"View Consent"="Ver consentimiento";
+"Ongoing"="En curso";
+"One Time"="Una vez";
+"Daily"="Diario";
+"Weekly"="Semanal";
+"Monthly"="Mensual";
+"As Scheduled"="Como lo planeado";
+"Consent PDF"="PDF de consentimiento";
+"English"="INGLÉS";
+"Spanish"="ESPAÑOL";
+"You are offline. New language settings will be applied once you are connected again."="No tienes conexión. Se aplicará la nueva configuración de idioma una vez que te conectes de nuevo";
+"message"="Mensaje";
+"BUTTON_DONE"="Aceptar12";
+"Join Study"="Unirse al estudio";
+"Leave Study"="Abandonar el estudio";
+"RTJ-5j-gHp.text.value"="ESTADO DE ESTUDIO";
+"H3l-1i-Q8b.text.value"="Activo";
+"pju-m4-AKv.text.value"="ESTADO DE PARTICIPACIÓN";
+"me4-LJ-i7A.text.value"="En progreso";
+"XjP-9a-aCO.text.value"="USTED ESTÁ";
+"1se-Ih-SJx.text.value"="HECHO CON EL ESTUDIO";
+"mcT-Pq-7B0.text.value"="ESTAS COMPLETANDO";
+"b43-6R-4Z2.text.value"="DE ACTIVIDADES A TIEMPO";
+"GcS-bY-dZH.text.value"="Estadísticas";
+"kn0-VV-AHj.normalTitle.value"="SEMANA";
+"z17-KH-Jlb.normalTitle.value"="MES";
+"keM-H2-AzW.text.value"="tendencias";
+//"z80-Ua-Nhr.title.value"="Actividades";
+"oT5-OT-1EB.title.value"="Actividades";
+"arR-Sy-PnO.title.value"="Tablero";
+//"e3B-fq-hAL.title"="Recursos";
+"W7D-Iu-sAw.title.value"="Recursos";
+"Activities"="Actividades";
+"Dashboard"="Tablero";
+"Resources"="Recursos";
+"Pfh-Dn-IUH.text.value"="Gracias por su consentimiento para este estudio";
+"oQF-1F-Kvh.text.value"="Ahora puede comenzar a usar la aplicación para participar en el estudio.";
+"KFf-Ee-kF6.normalTitle.value"="Ver / PDF de consentimiento por correo electrónico";
+"uIj-lV-uyU.normalTitle.value"="Aceptar";
+"Hr1-BD-AHJ.segmentTitles[0]"="simbolo";
+"Hr1-BD-AHJ.segmentTitles[1]"="palabra clave";
+"U5e-0P-U9P.title.value"="Cancelar";
+"token"="simbolo";
+"keyword"="palabra clave";
+"6vD-yL-Trh.text.value"="Contador de patadas fetales";
+"1qm-qt-0go.normalTitle.value"="Aceptar";
+"du0-3K-yBm.text.value"="Regístrese";
+"6vD-yL-Trh.text.value"="Contador de patadas fetales";
+"2YV-6t-dEM.normalTitle.value"="Siguiente";
+"yvB-Wf-hYf.text.value"="RECUENTO TOTAL DE PATADAS";
+"Sue-m0-sIi.text.value"="TOQUE PARA INICIAR EL TEMPORIZADOR";

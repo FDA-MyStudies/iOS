@@ -57,14 +57,24 @@ class ChangePasswordViewController: UIViewController {
         buttonSubmit?.layer.borderColor = kUicolorForButtonBackground
         
         //load plist info
-        let plistPath = Bundle.main.path(forResource: "ChangePasswordData", ofType: ".plist", inDirectory:nil)
+        var plistPath = Bundle.main.path(forResource: "ChangePasswordData", ofType: ".plist", inDirectory: nil)
+        let localeDefault = getLanguageLocale()
+        if !(localeDefault.hasPrefix("es") || localeDefault.hasPrefix("en")) {
+          plistPath = Bundle.main.path(forResource: "ChangePasswordData", ofType: ".plist", inDirectory: nil, forLocalization: "Base")
+        }else if(localeDefault.hasPrefix("en")){
+            plistPath = Bundle.main.path(forResource: "ChangePasswordData", ofType: ".plist", inDirectory: nil, forLocalization: "Base")
+        }else if(localeDefault.hasPrefix("es")){
+            plistPath = Bundle.main.path(forResource: "ChangePasswordData", ofType: ".plist", inDirectory: nil, forLocalization: "es")
+        }
+
         tableViewRowDetails = NSMutableArray.init(contentsOfFile: plistPath!)
         
         //Automatically takes care  of text field become first responder and scroll of tableview
         // IQKeyboardManager.sharedManager().enable = true
         
         //Used for background tap dismiss keyboard
-        let tapGesture: UITapGestureRecognizer = UITapGestureRecognizer.init(target: self, action: #selector(ChangePasswordViewController.dismissKeyboard))
+        let tapGesture: UITapGestureRecognizer =
+            UITapGestureRecognizer.init(target: self, action: #selector(ChangePasswordViewController.dismissKeyboard))
         self.tableView?.addGestureRecognizer(tapGesture)
         
         
@@ -74,9 +84,9 @@ class ChangePasswordViewController: UIViewController {
         if temporaryPassword.count > 0{
             oldPassword = temporaryPassword
             tableViewRowDetails?.removeObject(at: 0)
-            self.title = NSLocalizedString(kCreatePasswordTitleText, comment: "")
+            self.title = kCreatePasswordTitleText
         } else {
-            self.title = NSLocalizedString(kChangePasswordTitleText, comment: "")
+            self.title = kChangePasswordTitleText
         }
     }
     
@@ -111,7 +121,10 @@ class ChangePasswordViewController: UIViewController {
      
      */
     func showAlertMessages(textMessage: String){
-        UIUtilities.showAlertMessage("", errorMessage: NSLocalizedString(textMessage, comment: ""), errorAlertActionTitle: NSLocalizedString("OK", comment: ""), viewControllerUsed: self)
+        UIUtilities.showAlertMessage("",
+                                     errorMessage: NSLocalizedStrings(textMessage, comment: ""),
+                                     errorAlertActionTitle: kTitleOKCapital,
+                                     viewControllerUsed: self)
     }
     
     
@@ -293,7 +306,10 @@ extension ChangePasswordViewController: NMWebServiceDelegate {
         
         if viewLoadFrom == .profile {
             
-            UIUtilities.showAlertMessageWithActionHandler(NSLocalizedString(kTitleMessage, comment: ""), message: NSLocalizedString(kChangePasswordResponseMessage, comment: "") , buttonTitle: NSLocalizedString(kTitleOk, comment: ""), viewControllerUsed: self) {
+            UIUtilities.showAlertMessageWithActionHandler(kTitleMessage,
+                                                          message: kChangePasswordResponseMessage ,
+                                                          buttonTitle: kTitleOk,
+                                                          viewControllerUsed: self) {
                 
                 _ = self.navigationController?.popViewController(animated: true)
                 
@@ -335,11 +351,16 @@ extension ChangePasswordViewController: NMWebServiceDelegate {
         self.removeProgressIndicator()
         
         if error.code == 403 { //unauthorized
-            UIUtilities.showAlertMessageWithActionHandler(kErrorTitle, message: error.localizedDescription, buttonTitle: kTitleOk, viewControllerUsed: self, action: {
+            UIUtilities.showAlertMessageWithActionHandler(kErrorTitle,
+                                                          message: error.localizedDescription,
+                                                          buttonTitle: kTitleOk,
+                                                          viewControllerUsed: self,
+                                                          action: {
                 self.fdaSlideMenuController()?.navigateToHomeAfterUnauthorizedAccess()
             })
         } else {
-          UIUtilities.showAlertWithTitleAndMessage(title: NSLocalizedString(kErrorTitle, comment: "") as NSString, message: error.localizedDescription as NSString)
+          let errorMsg = base64DecodeError(error.localizedDescription)
+          UIUtilities.showAlertWithTitleAndMessage(title: NSLocalizedStrings(kErrorTitle, comment: "") as NSString, message: errorMsg as NSString)
         }
     }
 }

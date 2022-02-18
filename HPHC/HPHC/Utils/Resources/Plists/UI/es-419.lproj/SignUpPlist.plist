@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<dict>
+		<key>helpText</key>
+		<string>Correo electrónico</string>
+		<key>placeHolder</key>
+		<string>identificación de correo</string>
+	</dict>
+	<dict>
+		<key>helpText</key>
+		<string>Contraseña</string>
+		<key>placeHolder</key>
+		<string>agregar contraseña</string>
+	</dict>
+	<dict>
+		<key>helpText</key>
+		<string>Confirmar contraseña</string>
+		<key>placeHolder</key>
+		<string>confirmar contraseña</string>
+	</dict>
+</array>
+</plist>

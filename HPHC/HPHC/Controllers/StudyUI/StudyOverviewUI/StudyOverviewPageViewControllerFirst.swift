@@ -30,8 +30,11 @@ class StudyOverviewViewControllerFirst: UIViewController {
     @IBOutlet var buttonWatchVideo: UIButton?
     @IBOutlet var buttonVisitWebsite: UIButton?
     @IBOutlet var labelTitle: UILabel?
+    @IBOutlet var labelWatchVideo: UILabel?
     @IBOutlet var labelDescription: UILabel?
     @IBOutlet var imageViewStudy: UIImageView?
+    @IBOutlet var imageWatchVideo: UIImageView?
+  
     
     var pageIndex: Int!
     var overViewWebsiteLink: String?
@@ -45,7 +48,8 @@ class StudyOverviewViewControllerFirst: UIViewController {
 // MARK:- Viewcontroller Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        let joinStudyTitle =  NSLocalizedStrings("Join Study", comment: "")
+        buttonJoinStudy?.setTitle(joinStudyTitle, for: .normal)
         //Used to set border color for bottom view
         buttonJoinStudy?.layer.borderColor = kUicolorForButtonBackground
         if overviewSectionDetail.imageURL != nil {
@@ -55,8 +59,12 @@ class StudyOverviewViewControllerFirst: UIViewController {
         
         if overviewSectionDetail.link != nil {
             buttonWatchVideo?.isHidden = false
+            imageWatchVideo?.isHidden = false
+            labelWatchVideo?.isHidden = false
         } else {
              buttonWatchVideo?.isHidden =  true
+            imageWatchVideo?.isHidden = true
+            labelWatchVideo?.isHidden = true
         }
     }
     
@@ -76,16 +84,19 @@ class StudyOverviewViewControllerFirst: UIViewController {
             fontSize = 14.0
         }
         
-        let attrStr = try! NSAttributedString(
+        let attrStr1 = try? NSAttributedString(
             data: (overviewSectionDetail.text?.data(using: String.Encoding.unicode, allowLossyConversion: true)!)!,
             options: [ NSAttributedString.DocumentReadingOptionKey.documentType: NSAttributedString.DocumentType.html],
             documentAttributes: nil)
+      let attrStr = attrStr1!
         
         let attributedText: NSMutableAttributedString = NSMutableAttributedString(attributedString: attrStr)
         attributedText.addAttributes([NSAttributedString.Key.font:UIFont(
             name: "HelveticaNeue",
             size: CGFloat(fontSize))!], range:(attrStr.string as NSString).range(of: attrStr.string))
-        attributedText.addAttribute(NSAttributedString.Key.foregroundColor, value: UIColor.white, range: (attrStr.string as NSString).range(of: attrStr.string))
+        attributedText.addAttribute(NSAttributedString.Key.foregroundColor,
+                                    value: UIColor.white,
+                                    range: (attrStr.string as NSString).range(of: attrStr.string))
         
         if Utilities.isValidValue(someObject: attrStr.string as AnyObject?) {
              self.labelDescription?.attributedText = attributedText

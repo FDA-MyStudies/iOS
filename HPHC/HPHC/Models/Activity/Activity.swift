@@ -78,17 +78,17 @@ enum Frequency: String {
     var description: String {
         switch self {
         case .One_Time:
-            return "One Time"
+            return NSLocalizedStrings("One Time", comment: "")
         case .Daily:
-            return "Daily"
+            return NSLocalizedStrings("Daily", comment: "")
         case .Weekly:
-            return "Weekly"
+            return NSLocalizedStrings("Weekly", comment: "")
         case .Monthly:
-            return "Monthly"
+            return NSLocalizedStrings("Monthly", comment: "")
         case .Scheduled:
-            return "As Scheduled"
+            return NSLocalizedStrings("As Scheduled", comment: "")
         case .Ongoing:
-            return "Ongoing"
+            return NSLocalizedStrings("Ongoing", comment: "")
         }
     }
     
@@ -151,7 +151,7 @@ class Activity {
     var taskSubType: String? = "" //used for active tasks
     var anchorDate: AnchorDate? = nil
     var schedulingType:ActivityScheduleType = .regular
-    
+    var activityLang: String? = ""
      //Default Initializer
     init() {
        
@@ -186,6 +186,7 @@ class Activity {
         
         self.frequencyRuns = Array<Dictionary<String, Any>>() // contains the runs of Activity
         self.frequencyType = .One_Time
+        self.activityLang = ""
     }
     
     // MARK:Initializer Methods
@@ -217,6 +218,7 @@ class Activity {
             if Utilities.isValidValue(someObject: infoDict[kActivityBranching] as AnyObject ) {
                 self.branching = (infoDict[kActivityBranching] as? Bool)!
             }
+            
             if Utilities.isValidValue(someObject: infoDict[kActivityType] as AnyObject) {
                 self.type = ActivityType(rawValue: (infoDict[kActivityType] as? String)!)
             }
@@ -259,7 +261,8 @@ class Activity {
             }
             
             let currentUser = User.currentUser
-            if let userActivityStatus = currentUser.participatedActivites.filter({$0.activityId == self.actvityId && $0.studyId == self.studyId}).first {
+            if let userActivityStatus = currentUser.participatedActivites.filter({$0.activityId == self.actvityId &&
+                                                                                    $0.studyId == self.studyId}).first {
                 self.userParticipationStatus = userActivityStatus
                 
             } else {
@@ -282,7 +285,8 @@ class Activity {
         } else {
             Logger.sharedInstance.debug("infoDict is null:\(infoDict)")
         }
-        
+        self.activityLang = getLanguageLocale()
+        print("0 actlang -- \(getLanguageLocale()) activity langague stu \(Study.currentActivity?.activityLang)")
     }
     
     // MARK: Setter Methods
@@ -331,7 +335,7 @@ class Activity {
             if let lastModified = infoDict[kActivityLastModified] as? String {
                 self.lastModified =  Utilities.getDateFromString(dateString: lastModified)
             }
-            
+          //  self.activityLang = getLanguageLocale()
         } else {
             Logger.sharedInstance.debug("infoDict is null:\(infoDict)")
         }

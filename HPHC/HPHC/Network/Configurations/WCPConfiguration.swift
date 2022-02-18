@@ -69,17 +69,24 @@ class WCPConfiguration: NetworkConfiguration {
     }
     
     override func getDefaultHeaders() -> [String : String] {
+      let localeDefault = getLanguageLocale()
+      var language = "en"
+      if localeDefault.hasPrefix("es") { // true
+        language = "es"
+      }
       
       let appId = AppDetails.applicationID
       let orgId = AppDetails.organizationID
         
         let token = "AvxfEsgX9u" + ":" + "ee91a4f6-d9c4-4ee9-a0e2-5682c5b1c916"
+       // let token = "nrWIy9JtJu" + ":" + "a7296a62-44e8-4a06-8d85-50bc861d6c64"
         //com.hphci.fda.mobilestudies
         let base64token = "Basic " + token.toBase64()
        
         let headers = ["Authorization": base64token,
                        "applicationId": appId,
-                       "orgId": orgId]
+                       "orgId": orgId,
+                       "language": language]
 
         return headers
     }

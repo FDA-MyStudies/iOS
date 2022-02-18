@@ -25,7 +25,6 @@ enum LocalizableString: String {
     // MARK: - Global
     case connectionError = "Connection error"
     case connectionProblem = "There was a problem, please try again."
-    case ok = "Ok"
 
     // MARK: - Resources
     case resourceNotAvailable = "This resource is currently unavailable."
@@ -59,5 +58,5 @@ enum LocalizableString: String {
     case consentAddSignParticipantName = "Participant's Name (printed)"
     case consentAddSignParticipantSignature = "Participant's Signature"
 
-    var localizedString: String { return NSLocalizedString(rawValue, comment: "") }
+    var localizedString: String { return NSLocalizedStrings(rawValue, comment: "") }
 }

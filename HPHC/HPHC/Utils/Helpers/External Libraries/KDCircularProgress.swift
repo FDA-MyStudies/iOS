@@ -52,7 +52,11 @@ public class KDCircularProgress: UIView, CAAnimationDelegate {
             var (r1, g1, b1, a1) = (zero, zero, zero, zero)
             minMax.1.getRed(&r1, green: &g1, blue: &b1, alpha: &a1)
             
-            return UIColor(red: lerp(value: clampedValue, minMax: (r0, r1)), green: lerp(value: clampedValue, minMax: (g0, g1)), blue: lerp(value: clampedValue, minMax: (b0, b1)), alpha: lerp(value: clampedValue, minMax: (a0, a1)))
+            return UIColor(red: lerp(value: clampedValue,
+                                     minMax: (r0, r1)),
+                           green: lerp(value: clampedValue, minMax: (g0, g1)),
+                           blue: lerp(value: clampedValue, minMax: (b0, b1)),
+                           alpha: lerp(value: clampedValue, minMax: (a0, a1)))
         }
         
         static func mod(value: Double, range: Double, minMax: (Double, Double)) -> Double {
@@ -439,7 +443,12 @@ public class KDCircularProgress: UIView, CAAnimationDelegate {
             let fromAngle = Conversion.degreesToRadians(value: CGFloat(-startAngle))
             let toAngle = Conversion.degreesToRadians(value: CGFloat((clockwise == true ? -reducedAngle : reducedAngle) - startAngle))
             
-            imageCtx?.addArc(center: CGPoint(x: width/2.0, y: height/2.0), radius: arcRadius, startAngle: fromAngle, endAngle: toAngle, clockwise: clockwise)
+            imageCtx?.addArc(center: CGPoint(x: width/2.0,
+                                             y: height/2.0),
+                             radius: arcRadius,
+                             startAngle: fromAngle,
+                             endAngle: toAngle,
+                             clockwise: clockwise)
             
             let glowValue = GlowConstants.glowAmount(forAngle: reducedAngle, glowAmount: glowAmount, glowMode: glowMode, size: width)
             if glowValue > 0 {
@@ -519,7 +528,10 @@ public class KDCircularProgress: UIView, CAAnimationDelegate {
             if let cachedGradient = gradientCache {
                 gradient = cachedGradient
             } else {
-                guard let cachedGradient = CGGradient(colorSpace: baseSpace, colorComponents: componentsArray, locations: locations, count: componentsArray.count/4) else {
+                guard let cachedGradient = CGGradient(colorSpace: baseSpace,
+                                                      colorComponents: componentsArray,
+                                                      locations: locations,
+                                                      count: componentsArray.count/4) else {
                     return
                 }
                 

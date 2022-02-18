@@ -39,13 +39,15 @@ class FeedBackViewController: UIViewController{
     @IBOutlet var buttonSubmit: UIButton?
     @IBOutlet var tableView: UITableView?
     var feedbackText: String = ""
+    let kLeaveFeedbackTitle = NSLocalizedStrings("LEAVE US YOUR FEEDBACK", comment: "")
+    let kEnterFeedback = NSLocalizedStrings("Enter your feedback here", comment: "")
     
     
 // MARK:- ViewController Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.navigationItem.title =  NSLocalizedString("LEAVE US YOUR FEEDBACK", comment: "")
+        self.navigationItem.title =  kLeaveFeedbackTitle
         
         //Used to set border color for bottom view
         buttonSubmit?.layer.borderColor = kUicolorForButtonBackground
@@ -91,13 +93,13 @@ class FeedBackViewController: UIViewController{
     @IBAction func buttonSubmitAciton(_ sender: UIButton){
         //print("\(ContactUsFeilds.firstName)")
         if FeedbackDetail.subject.isEmpty && FeedbackDetail.feedback.isEmpty {
-            UIUtilities.showAlertWithMessage(alertMessage: NSLocalizedString(kMessageAllFieldsAreEmpty, comment: ""))
+            UIUtilities.showAlertWithMessage(alertMessage: kMessageAllFieldsAreEmpty)
         }
         else if FeedbackDetail.subject.isEmpty {
-            UIUtilities.showAlertWithMessage(alertMessage: NSLocalizedString("Please enter message", comment: ""))
+            UIUtilities.showAlertWithMessage(alertMessage: kMessageMessageBlankCheck)
         }
         else if FeedbackDetail.feedback.isEmpty {
-            UIUtilities.showAlertWithMessage(alertMessage: NSLocalizedString("Please provide your feedback", comment: ""))
+            UIUtilities.showAlertWithMessage(alertMessage: NSLocalizedStrings("Please provide your feedback", comment: ""))
         }
         else {
             UserServices().sendUserFeedback(delegate: self)
@@ -138,6 +140,15 @@ extension FeedBackViewController: UITableViewDataSource{
         }
         else{
             cell = tableView.dequeueReusableCell(withIdentifier: "textviewCell", for: indexPath) as! TextviewCell
+          
+          let cell = tableView.dequeueReusableCell(withIdentifier: "textviewCell", for: indexPath) as! TextviewCell
+          
+          if cell.textView?.tag == 100 {
+            cell.textView?.text = kEnterFeedback
+            cell.textView?.textColor = UIColor.lightGray
+            cell.textView?.tag = 100
+          }
+          return cell
         
         }
         
@@ -169,7 +180,7 @@ extension FeedBackViewController: UITextViewDelegate {
     func textViewDidEndEditing(_ textView: UITextView) {
         print("textViewDidEndEditing")
         if textView.tag == 101 && textView.text.count == 0 {
-            textView.text = "Enter your feedback here"
+            textView.text = kEnterFeedback
             textView.textColor = UIColor.lightGray
             textView.tag = 100
         }
@@ -187,6 +198,16 @@ extension FeedBackViewController: UITextViewDelegate {
             textView.tag = 101
         }
     }
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        if var text = textField.text, range.location == text.count, string == " " {
+                let noBreakSpace: Character = "\u{00a0}"
+                text.append(noBreakSpace)
+                textField.text = text
+                return false
+            }
+            return true
+    }
 }
 
 
@@ -195,11 +216,11 @@ extension FeedBackViewController: UITextFieldDelegate{
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
         
-        
+        print("Krishna Editing text \(textField.text!)")
     }
    
     func textFieldDidEndEditing(_ textField: UITextField) {
-        print(textField.text!)
+        print("Krishna Editing text \(textField.text!)")
         textField.text =  textField.text?.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
         FeedbackDetail.subject = textField.text!
     }
@@ -219,7 +240,10 @@ extension FeedBackViewController: NMWebServiceDelegate {
         Logger.sharedInstance.info("requestname : \(requestName)")
         self.removeProgressIndicator()
         
-        UIUtilities.showAlertMessageWithActionHandler("", message: NSLocalizedString(kMessageFeedbackSubmittedSuccessfuly, comment: ""), buttonTitle: kTitleOk, viewControllerUsed: self) {
+        UIUtilities.showAlertMessageWithActionHandler("",
+                                                      message: kMessageFeedbackSubmittedSuccessfuly,
+                                                      buttonTitle: kTitleOk,
+                                                      viewControllerUsed: self) {
             _ = self.navigationController?.popViewController(animated: true)
         }
     }
@@ -228,7 +252,8 @@ extension FeedBackViewController: NMWebServiceDelegate {
         
         self.removeProgressIndicator()
         Logger.sharedInstance.info("requestname : \(requestName)")
-        UIUtilities.showAlertWithTitleAndMessage(title: NSLocalizedString("Error", comment: "") as NSString, message: error.localizedDescription as NSString)
+        let errorMsg = base64DecodeError(error.localizedDescription)
+        UIUtilities.showAlertWithTitleAndMessage(title: kTitleError as NSString, message: errorMsg as NSString)
     }
 }
 

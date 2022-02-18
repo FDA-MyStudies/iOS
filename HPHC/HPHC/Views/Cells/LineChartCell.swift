@@ -534,7 +534,8 @@ class LineChartCell: GraphChartTableViewCell {
     
     func handleDaysOfMonthForDate(date: Date){
         
-        let dataList: Array<DBStatisticsData> = currentChart.statList.filter({$0.startDate! >= date.startOfMonth() && $0.startDate! <= date.endOfMonth()})
+        let dataList: Array<DBStatisticsData> =
+            currentChart.statList.filter({$0.startDate! >= date.startOfMonth() && $0.startDate! <= date.endOfMonth()})
         
        // let array = dataList.map{$0.data}
         var points: Array<ORKValueRange> = []
@@ -625,7 +626,9 @@ class LineChartCell: GraphChartTableViewCell {
     
     func handleMonthsOfYearForDate(date: Date){
         
-        let dataList: Array<DBStatisticsData> = currentChart.statList.filter({$0.startDate! >= date.startOfYear() && $0.startDate! <= date.endOfYear()})
+        let dataList: Array<DBStatisticsData> =
+            currentChart.statList.filter({$0.startDate! >= date.startOfYear() &&
+                                            $0.startDate! <= date.endOfYear()})
         
        // let array = dataList.map{$0.data}
         var points: Array<ORKValueRange> = []
@@ -661,7 +664,9 @@ class LineChartCell: GraphChartTableViewCell {
     
     func handleWeeksOfMonthForDate(date: Date){
         
-         let dataList: Array<DBStatisticsData> = currentChart.statList.filter({$0.startDate! >= date.startOfMonth() && $0.startDate! <= date.endOfMonth()})
+         let dataList: Array<DBStatisticsData> =
+            currentChart.statList.filter({$0.startDate! >= date.startOfMonth() &&
+                                            $0.startDate! <= date.endOfMonth()})
         
         //let array = dataList.map{$0.data}
         var points: Array<ORKValueRange> = []
@@ -806,7 +811,7 @@ class LineChartCell: GraphChartTableViewCell {
         
         if charActivity?.type == .activeTask {
             var title = (xAxisTitles[atIndex] as? String)!
-            title = title + "\n" + "\(value)"
+            title += "\n" + "\(value)"
             xAxisTitles[atIndex] = title
         }
        

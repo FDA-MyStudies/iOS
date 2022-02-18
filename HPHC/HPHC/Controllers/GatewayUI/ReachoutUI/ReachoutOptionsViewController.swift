@@ -23,13 +23,15 @@ import UIKit
 class ReachoutOptionsViewController: UIViewController {
 
     @IBOutlet var tableView: UITableView?
-    
+    let kReachOutTitle = NSLocalizedStrings("REACH OUT", comment: "")
+    let kLeaveAnonymousFeedbackTitle = NSLocalizedStrings("Leave Anonymous Feedback", comment: "")
+    let kNeedHelpContactUsTitle = NSLocalizedStrings("Need Help? Contact Us", comment: "")
     
 // MARK:- Viewcontroller Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.navigationItem.title =  NSLocalizedString("REACH OUT", comment: "")
+        self.navigationItem.title = kReachOutTitle
         
         // Do any additional setup after loading the view.
     }
@@ -71,11 +73,11 @@ extension ReachoutOptionsViewController: UITableViewDataSource {
         
         switch indexPath.row {
         case 0:
-            cell.labelTitle?.text = NSLocalizedString("Leave Anonymous Feedback", comment: "")
+            cell.labelTitle?.text = kLeaveAnonymousFeedbackTitle
         case 1:
-            cell.labelTitle?.text = NSLocalizedString("Need Help? Contact Us", comment: "")
+            cell.labelTitle?.text = kNeedHelpContactUsTitle
         default:
-            cell.labelTitle?.text = NSLocalizedString("Need Help? Contact Us", comment: "")
+            cell.labelTitle?.text = kNeedHelpContactUsTitle
         }
         
         

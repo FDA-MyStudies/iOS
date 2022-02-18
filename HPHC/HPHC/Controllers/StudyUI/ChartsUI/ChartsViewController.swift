@@ -21,16 +21,20 @@ OTHER DEALINGS IN THE SOFTWARE.
 import UIKit
 
 
-let kMessageForSharingCharts = "This action will create a shareable image file of the charts currently seen in this section. Proceed?"
+let kMessageForSharingCharts =
+    NSLocalizedStrings("This action will create a shareable image file of the charts currently seen in this section. Proceed?",
+                       comment: "")
 
 class ChartsViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var backButton: UIButton!
+  
+    let kTRENDS = NSLocalizedStrings("TRENDS", comment: "")
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = NSLocalizedString("TRENDS", comment: "")
+        self.title = kTRENDS
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -56,8 +60,11 @@ class ChartsViewController: UIViewController {
         
         if StudyDashboard.instance.charts.count > 0{
             
-            UIUtilities.showAlertMessageWithTwoActionsAndHandler(NSLocalizedString(kTitleMessage, comment: ""), errorMessage: NSLocalizedString(kMessageForSharingCharts, comment: ""), errorAlertActionTitle: NSLocalizedString(kTitleOK, comment: ""),
-                                                                 errorAlertActionTitle2: NSLocalizedString(kTitleCancel, comment: ""), viewControllerUsed: self,
+            UIUtilities.showAlertMessageWithTwoActionsAndHandler(kTitleMessage,
+                                                                 errorMessage: kMessageForSharingCharts,
+                                                                 errorAlertActionTitle: kTitleOKCapital,
+                                                                 errorAlertActionTitle2: kTitleCancel,
+                                                                 viewControllerUsed: self,
                                                                  action1: {
                                                                     
                                                                     self.shareScreenShotByMail()
@@ -91,7 +98,9 @@ class ChartsViewController: UIViewController {
         tableView.contentOffset = savedContentOffset
         tableView.frame = savedFrame
         
-        (self.tabBarController as! StudyDashboardTabbarViewController).shareScreenshotByEmail(image: image, subject: kEmailSubjectCharts,fileName: kEmailSubjectCharts)
+        (self.tabBarController as! StudyDashboardTabbarViewController).shareScreenshotByEmail(image: image,
+                                                                                              subject: kEmailSubjectCharts,
+                                                                                              fileName: kEmailSubjectCharts)
     
     }
     

@@ -25,7 +25,11 @@ import UIKit
 //Used to do filter based on Apply and Cancel actions
 protocol StudyFilterDelegates: class {
     
-    func appliedFilter(studyStatus: Array<String>, pariticipationsStatus: Array<String>, categories: Array<String> , searchText: String,bookmarked: Bool)
+    func appliedFilter(studyStatus: Array<String>,
+                       pariticipationsStatus: Array<String>,
+                       categories: Array<String> ,
+                       searchText: String,
+                       bookmarked: Bool)
     
     func didCancelFilter(_ cancel: Bool)
     
@@ -121,7 +125,7 @@ class StudyFilterViewController: UIViewController {
                     //default: break
                 }
             }
-            i = i + 1
+            i += 1
         }
         
         previousCollectionData = []
@@ -142,7 +146,11 @@ class StudyFilterViewController: UIViewController {
         previousCollectionData.append(pariticipationsStatus)
         previousCollectionData.append(categories.count == 0 ? [] : categories)
         
-        delegate?.appliedFilter(studyStatus: studyStatus, pariticipationsStatus: pariticipationsStatus, categories: categories,searchText: searchText,bookmarked: bookmark)
+        delegate?.appliedFilter(studyStatus: studyStatus,
+                                pariticipationsStatus: pariticipationsStatus,
+                                categories: categories,
+                                searchText: searchText,
+                                bookmarked: bookmark)
         self.dismiss(animated: true, completion: nil)
         
     }
@@ -186,14 +194,16 @@ extension StudyFilterViewController: PinterestLayoutDelegate {
         let filterOptions = StudyFilterHandler.instance.filterOptions[indexPath.row]
         var headerHeight = 0
         if filterOptions.title.count > 0 {
-            headerHeight = 60
+            headerHeight = 60 + 50
         }
         let height: CGFloat = CGFloat((filterOptions.filterValues.count * 50) + headerHeight)
         return height
     }
     
     // 2. Returns the annotation size based on the text
-    func collectionView(_ collectionView: UICollectionView, heightForAnnotationAtIndexPath indexPath: IndexPath, withWidth width: CGFloat) -> CGFloat {
+    func collectionView(_ collectionView: UICollectionView,
+                        heightForAnnotationAtIndexPath indexPath: IndexPath,
+                        withWidth width: CGFloat) -> CGFloat {
         return 0
     }
     
@@ -230,7 +240,16 @@ extension AppDelegate {
             resource = "FilterData"
         }
         
-        let plistPath = Bundle.main.path(forResource: resource, ofType: ".plist", inDirectory: nil)
+        var plistPath = Bundle.main.path(forResource: resource, ofType: ".plist", inDirectory: nil)
+        let localeDefault = getLanguageLocale()
+        if !(localeDefault.hasPrefix("es") || localeDefault.hasPrefix("en")) {
+          plistPath = Bundle.main.path(forResource: resource, ofType: ".plist", inDirectory: nil, forLocalization: "Base")
+        }else if localeDefault.hasPrefix("en"){
+            plistPath = Bundle.main.path(forResource: resource, ofType: ".plist", inDirectory: nil, forLocalization: "Base")
+        }else if localeDefault.hasPrefix("es"){
+            plistPath = Bundle.main.path(forResource: resource, ofType: ".plist", inDirectory: nil, forLocalization: "es")
+        }
+      
         filterData = NSMutableArray.init(contentsOfFile: plistPath!)!
         
         StudyFilterHandler.instance.filterOptions = []
@@ -278,7 +297,7 @@ extension AppDelegate {
             filterOptions.filterValues = filterValues
             filterOptionsList.append(filterOptions)
             
-            i = i + 1
+            i += 1
         }
         StudyFilterHandler.instance.filterOptions = filterOptionsList
         
@@ -291,7 +310,11 @@ extension AppDelegate {
      categories: array of categories
      */
     
-    func getDefaultFilterStrings()->(studyStatus: Array<String>,pariticipationsStatus: Array<String>,categories: Array<String>,searchText: String,bookmark: Bool){
+    func getDefaultFilterStrings()->(studyStatus: Array<String>,
+                                     pariticipationsStatus: Array<String>,
+                                     categories: Array<String>,
+                                     searchText: String,
+                                     bookmark: Bool){
         
         var studyStatus: Array<String> = []
         var pariticipationsStatus: Array<String> = []

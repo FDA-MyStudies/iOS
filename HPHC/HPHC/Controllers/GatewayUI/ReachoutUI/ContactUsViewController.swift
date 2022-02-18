@@ -47,13 +47,14 @@ class ContactUsViewController: UIViewController{
     @IBOutlet var tableViewFooter: UIView?
     @IBOutlet var feedbackTextView: UITextView?
     var previousContentHeight: Double = 0.0
+    let kContactUsTitle = NSLocalizedStrings("CONTACT US", comment: "")
     
     
 // MARK:- ViewController LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.navigationItem.title =  NSLocalizedString("CONTACT US", comment: "")
+        self.navigationItem.title = kContactUsTitle
         
         //Used to set border color for bottom view
         buttonSubmit?.layer.borderColor = kUicolorForButtonBackground
@@ -62,7 +63,16 @@ class ContactUsViewController: UIViewController{
         // IQKeyboardManager.sharedManager().enable = true
         
         //load plist info
-        let plistPath = Bundle.main.path(forResource: "ContactUs", ofType: ".plist", inDirectory: nil)
+        var plistPath = Bundle.main.path(forResource: "ContactUs", ofType: ".plist", inDirectory: nil)
+        let localeDefault = getLanguageLocale()
+        if !(localeDefault.hasPrefix("es") || localeDefault.hasPrefix("en")) {
+          plistPath = Bundle.main.path(forResource: "ContactUs", ofType: ".plist", inDirectory: nil, forLocalization: "Base")
+        }else if localeDefault.hasPrefix("en"){
+            plistPath = Bundle.main.path(forResource: "ContactUs", ofType: ".plist", inDirectory: nil, forLocalization: "Base")
+        }else{
+            plistPath = Bundle.main.path(forResource: "ContactUs", ofType: ".plist", inDirectory: nil, forLocalization: "es")
+        }
+      
         tableViewRowDetails = NSMutableArray.init(contentsOfFile: plistPath!)
         
         self.addBackBarButton()
@@ -71,7 +81,8 @@ class ContactUsViewController: UIViewController{
         self.tableView?.rowHeight = UITableView.automaticDimension
         
         //Used for background tap dismiss keyboard
-        let tapGestureRecognizer: UITapGestureRecognizer = UITapGestureRecognizer.init(target: self, action: #selector(ContactUsViewController.handleTapGesture))
+        let tapGestureRecognizer: UITapGestureRecognizer =
+            UITapGestureRecognizer.init(target: self, action: #selector(ContactUsViewController.handleTapGesture))
         self.tableView?.addGestureRecognizer(tapGestureRecognizer)
          _ = ContactUsFeilds.init()
     }
@@ -118,22 +129,22 @@ class ContactUsViewController: UIViewController{
         
         if (ContactUsFeilds.firstName.isEmpty && ContactUsFeilds.email.isEmpty && ContactUsFeilds.subject.isEmpty && ContactUsFeilds.message.isEmpty){
             
-            UIUtilities.showAlertWithMessage(alertMessage: NSLocalizedString(kMessageAllFieldsAreEmpty, comment: ""))
+            UIUtilities.showAlertWithMessage(alertMessage: kMessageAllFieldsAreEmpty)
         }
         else if ContactUsFeilds.firstName.isEmpty {
-            UIUtilities.showAlertWithMessage(alertMessage: NSLocalizedString(kMessageFirstNameBlank, comment: ""))
+            UIUtilities.showAlertWithMessage(alertMessage: kMessageFirstNameBlank)
         }
         else if ContactUsFeilds.email.isEmpty {
-            UIUtilities.showAlertWithMessage(alertMessage: NSLocalizedString(kMessageEmailBlank,comment:""))
+            UIUtilities.showAlertWithMessage(alertMessage: kMessageEmailBlank)
         }
         else if ContactUsFeilds.subject.isEmpty {
-            UIUtilities.showAlertWithMessage(alertMessage: NSLocalizedString(kMessageSubjectBlankCheck, comment: ""))
+            UIUtilities.showAlertWithMessage(alertMessage: kMessageSubjectBlankCheck)
         }
         else if ContactUsFeilds.message.isEmpty {
-            UIUtilities.showAlertWithMessage(alertMessage: NSLocalizedString(kMessageMessageBlankCheck, comment: ""))
+            UIUtilities.showAlertWithMessage(alertMessage: kMessageMessageBlankCheck)
         }
         else if !(Utilities.isValidEmail(testStr: ContactUsFeilds.email)){
-            UIUtilities.showAlertWithMessage(alertMessage: NSLocalizedString(kMessageValidEmail, comment: ""))
+            UIUtilities.showAlertWithMessage(alertMessage: kMessageValidEmail)
         }
         else {
             UserServices().sendUserContactUsRequest(delegate: self)
@@ -244,19 +255,37 @@ extension ContactUsViewController: UITextFieldDelegate{
         let tag: ContactTextFieldTags = ContactTextFieldTags(rawValue: textField.tag)!
         let finalString = textField.text! + string
       
+        if tag != .Email{
+        if var text = textField.text, range.location == text.count, string == " " {
+            print("Krishna Editing text replace string  \(text)only text")
+                let noBreakSpace: Character = " "
+                text.append(noBreakSpace)
+                textField.text = text
+            
+            print("Krishna Editing text replace string  \(textField.text!)textField.text and break is \(noBreakSpace) is here")
+                return false
+            }
+        }
         
         if string == " " {
+            print("Krishna Editing text replace string is empty \(textField.text!) return false ")
             return false
         }
         
         if  tag == .Email {
             if string == " " || finalString.count > 255{
+                print("Krishna Editing text replace tag is email and string is empty \(textField.text!) return false ")
                 return false
+               
             }
             else{
+                print("Krishna Editing text replace tag is email and string is not empty \(textField.text!) return false ")
                 return true
             }
         }
+        
+        print("Krishna Editing text last return true \(textField.text!) ")
+          
         return true
     }
     
@@ -264,7 +293,7 @@ extension ContactUsViewController: UITextFieldDelegate{
         print(textField.text!)
         
         textField.text =  textField.text?.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
-        
+       
         let tag: ContactTextFieldTags = ContactTextFieldTags(rawValue: textField.tag)!
         
         switch tag {
@@ -278,6 +307,7 @@ extension ContactUsViewController: UITextFieldDelegate{
             break
             
         case .Subject:
+            print("Krishna TextFieldDidEndEditing \(textField.text!)")
             ContactUsFeilds.subject = textField.text!
             break
             
@@ -286,6 +316,8 @@ extension ContactUsViewController: UITextFieldDelegate{
 //            break
         }
     }
+    
+    
 }
 
 
@@ -319,7 +351,7 @@ extension ContactUsViewController: NMWebServiceDelegate {
         Logger.sharedInstance.info("requestname : \(requestName)")
         self.removeProgressIndicator()
         
-        UIUtilities.showAlertMessageWithActionHandler("", message: NSLocalizedString(kMessageContactedSuccessfuly, comment: ""), buttonTitle: kTitleOk, viewControllerUsed: self) {
+        UIUtilities.showAlertMessageWithActionHandler("", message: kMessageContactedSuccessfuly, buttonTitle: kTitleOk, viewControllerUsed: self) {
             _ = self.navigationController?.popViewController(animated: true)
         }
         
@@ -328,7 +360,8 @@ extension ContactUsViewController: NMWebServiceDelegate {
         
         self.removeProgressIndicator()
         Logger.sharedInstance.info("requestname : \(requestName)")
-        UIUtilities.showAlertWithTitleAndMessage(title: NSLocalizedString("Error", comment: "") as NSString, message: error.localizedDescription as NSString)
+        let errorMsg = base64DecodeError(error.localizedDescription)
+        UIUtilities.showAlertWithTitleAndMessage(title: kTitleError as NSString, message: errorMsg as NSString)
     }
 }
 

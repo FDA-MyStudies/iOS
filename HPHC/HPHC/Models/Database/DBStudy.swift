@@ -30,6 +30,7 @@ class DBStudy: Object {
     @objc dynamic var name: String?
     @objc dynamic var version: String?
     @objc dynamic var updatedVersion: String?
+    @objc dynamic var studyLanguage: String?
     @objc dynamic var identifer: String?
     @objc dynamic var category: String?
     @objc dynamic var startDate: String?
@@ -90,6 +91,7 @@ class DBOverviewSection: Object {
     @objc dynamic  var link: String?
     @objc dynamic var  studyId: String!
     @objc dynamic var  sectionId: String!
+    @objc dynamic var  overviewlang: String! //= "en"
     
     override static func primaryKey() -> String? {
         return "sectionId"

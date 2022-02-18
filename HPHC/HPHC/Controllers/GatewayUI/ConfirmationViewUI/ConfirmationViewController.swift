@@ -21,13 +21,19 @@ OTHER DEALINGS IN THE SOFTWARE.
 import UIKit
 
 let kConfirmationSegueIdentifier = "confirmationSegue"
-let kHeaderDescription = "You have chosen to delete your #APPNAME# Account. This will result in automatic withdrawal from all studies.\nBelow is a list of studies that you are a part of and information on how your response data will be handled with each after you withdraw. Please review and confirm."
+let valH1 = "You have chosen to delete your #APPNAME# Account. This will result in automatic withdrawal from all studies"
+let valH2 = ".\nBelow is a list of studies that you are a part of and information on how your response data will "
+let valH3 = "be handled with each after you withdraw. Please review and confirm."
+let kHeaderDescription = NSLocalizedStrings("\(valH1)\(valH2)\(valH3)", comment: "")
 
-let kHeaderDescriptionStandalone = "You have chosen to delete your #APPNAME# Account. This will result in automatic withdrawal from study.\nBelow is the study that you are a part of and information on how your response data will be handled after you withdraw. Please review and confirm."
+let valHDes1 = "You have chosen to delete your #APPNAME# Account. This will result in automatic withdrawal from study.\nBelow is the study "
+let valHDes2 = "that you are a part of and information on how your response data will be handled after you withdraw. Please review and confirm."
+let kHeaderDescriptionStandalone = NSLocalizedStrings("\(valHDes1)\(valHDes2)", comment: "")
 
-let kConfirmWithdrawlSelectOptionsAlert = "Please select an option between Delete Data or Retain Data for all studies."
-let kResponseDataDeletedText = "Response data will be deleted"
-let kResponseDataRetainedText = "Response data will be retained"
+let kConfirmWithdrawlSelectOptionsAlert =
+    NSLocalizedStrings("Please select an option between Delete Data or Retain Data for all studies.", comment: "")
+let kResponseDataDeletedText = NSLocalizedStrings("Response data will be deleted", comment: "")
+let kResponseDataRetainedText = NSLocalizedStrings("Response data will be retained", comment: "")
 
 let kConfirmationCellType = "type"
 let kConfirmationCellTypeOptional = "Optional"
@@ -37,8 +43,6 @@ let kConfirmationTitle = "title"
 let kConfirmationPlaceholder = "placeHolder"
 let kConfirmationPlist = "Confirmation"
 let kConfirmationNavigationTitle = "DELETE ACCOUNT"
-let kPlistFileType = ".plist"
-
 
 
 class StudyToDelete{
@@ -71,7 +75,17 @@ class ConfirmationViewController: UIViewController {
         super.viewDidLoad()
         
         //Load plist info
-        let plistPath = Bundle.main.path(forResource: kConfirmationPlist, ofType: kPlistFileType , inDirectory: nil)
+        var plistPath = Bundle.main.path(forResource: kConfirmationPlist, ofType: ".plist", inDirectory: nil)
+        let localeDefault = getLanguageLocale()
+        if !(localeDefault.hasPrefix("es") || localeDefault.hasPrefix("en")) {
+          plistPath = Bundle.main.path(forResource: kConfirmationPlist, ofType: ".plist", inDirectory: nil, forLocalization: "Base")
+        }else if(localeDefault.hasPrefix("en")){
+            plistPath = Bundle.main.path(forResource: "Resources", ofType: ".plist", inDirectory: nil, forLocalization: "Base")
+        }else if(localeDefault.hasPrefix("es")){
+            plistPath = Bundle.main.path(forResource: "Resources", ofType: ".plist", inDirectory: nil, forLocalization: "es")
+        }
+
+      
         tableViewRowDetails = NSMutableArray.init(contentsOfFile: plistPath!)
         
         let navTitle = Branding.productTitle
@@ -88,7 +102,7 @@ class ConfirmationViewController: UIViewController {
         
         self.navigationController?.setNavigationBarHidden(false, animated: true)
         
-        self.title = NSLocalizedString(kConfirmationNavigationTitle, comment: "")
+        self.title = NSLocalizedStrings(kConfirmationNavigationTitle, comment: "")
         
         self.checkWithdrawlConfigurationForNextSuty()
         
@@ -205,7 +219,7 @@ class ConfirmationViewController: UIViewController {
         for withdrawnStudy in studiesToWithdrawn {
             if withdrawnStudy.shouldDelete == nil {
                 
-                UIUtilities.showAlertWithMessage(alertMessage: NSLocalizedString(kConfirmWithdrawlSelectOptionsAlert, comment: ""))
+                UIUtilities.showAlertWithMessage(alertMessage: kConfirmWithdrawlSelectOptionsAlert)
                 found = true
                 break;
             }
@@ -220,7 +234,10 @@ class ConfirmationViewController: UIViewController {
         if studiesToWithdrawn.count != 0 {
             
             let studyToWithdrawn = studiesToWithdrawn.first
-            LabKeyServices().withdrawFromStudy(studyId: (studyToWithdrawn?.studyId)!, participantId: (studyToWithdrawn?.participantId)!, deleteResponses: (studyToWithdrawn?.shouldDelete)!, delegate: self)
+            LabKeyServices().withdrawFromStudy(studyId: (studyToWithdrawn?.studyId)!,
+                                               participantId: (studyToWithdrawn?.participantId)!,
+                                               deleteResponses: (studyToWithdrawn?.shouldDelete)!,
+                                               delegate: self)
         }else {
             //call for delete account
             
@@ -251,7 +268,8 @@ extension ConfirmationViewController: UITableViewDataSource {
         let study = studiesToDisplay[indexPath.row]
         if study.withdrawalConfigration?.type == StudyWithdrawalConfigrationType.askUser {
             
-            let  cell = tableView.dequeueReusableCell(withIdentifier: kConfrimationOptionalCellIdentifier, for: indexPath) as! ConfirmationOptionalTableViewCell
+            let  cell = tableView.dequeueReusableCell(withIdentifier: kConfrimationOptionalCellIdentifier, for: indexPath)
+                as! ConfirmationOptionalTableViewCell
             cell.delegate = self
             cell.study = study
             
@@ -265,9 +283,9 @@ extension ConfirmationViewController: UITableViewDataSource {
             cell.labelTitle?.text = study.name
             
             if study.withdrawalConfigration?.type == StudyWithdrawalConfigrationType.deleteData {
-                cell.labelTitleDescription?.text = NSLocalizedString(kResponseDataDeletedText, comment: "")
+                cell.labelTitleDescription?.text = kResponseDataDeletedText
             }else {
-                cell.labelTitleDescription?.text = NSLocalizedString(kResponseDataRetainedText, comment: "")
+                cell.labelTitleDescription?.text = kResponseDataRetainedText
             }
             return cell
         }
@@ -320,7 +338,11 @@ extension ConfirmationViewController: NMWebServiceDelegate {
         
         if error.code == 403 { //unauthorized
             self.removeProgressIndicator()
-            UIUtilities.showAlertMessageWithActionHandler(kErrorTitle, message: error.localizedDescription, buttonTitle: kTitleOk, viewControllerUsed: self, action: {
+            UIUtilities.showAlertMessageWithActionHandler(kErrorTitle,
+                                                          message: error.localizedDescription,
+                                                          buttonTitle: kTitleOk,
+                                                          viewControllerUsed: self,
+                                                          action: {
                 self.fdaSlideMenuController()?.navigateToHomeAfterUnauthorizedAccess()
             })
             
@@ -333,16 +355,15 @@ extension ConfirmationViewController: NMWebServiceDelegate {
                     
                     self.handleWithdrawnFromStudyResponse()
                     
-                }else {
+                } else {
                     self.removeProgressIndicator()
                 }
             }else {
                 self.removeProgressIndicator()
-                UIUtilities.showAlertWithTitleAndMessage(title: NSLocalizedString(kErrorTitle, comment: "") as NSString, message: error.localizedDescription as NSString)
+                let errorMsg = base64DecodeError(error.localizedDescription)
+                UIUtilities.showAlertWithTitleAndMessage(title: NSLocalizedStrings(kErrorTitle, comment: "") as NSString,
+                                                         message: errorMsg as NSString)
             }
         }
     }
 }
-
-
-

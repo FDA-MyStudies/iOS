@@ -132,14 +132,28 @@ class ActivitiesTableViewCell: UITableViewCell {
      @param activity    Access the value from Activity class
      */
     func updateUserRunStatus(activity: Activity) {
+      
+        let kRun = NSLocalizedStrings("Run: ", comment: "")
+        let kdone = NSLocalizedStrings(" done", comment: "")
+        let kmissed = NSLocalizedStrings(" missed", comment: "")
+        let kRuns = NSLocalizedStrings("Run(s):", comment: "")
+        let kDone = NSLocalizedStrings("Done", comment: "")
+        let kMore = NSLocalizedStrings("more", comment: "")
         
         let currentRunId = (activity.totalRuns != 0) ? String(activity.currentRunId) : "0"
         
         var runStatus: String
         if activity.frequencyType != .Ongoing {
-            runStatus = "Run: " + currentRunId + "/" + String(activity.totalRuns) + ", " + String(activity.compeltedRuns) + " done" + ", " + String(activity.incompletedRuns) + " missed"
+            runStatus = kRun +
+                currentRunId + "/" +
+                String(activity.totalRuns) +
+                ", " +
+                String(activity.compeltedRuns) +
+                kdone + ", " +
+                String(activity.incompletedRuns) +
+                kmissed
         } else {
-            runStatus = "Run(s): \(activity.compeltedRuns) Done"
+            runStatus = "\(kRuns) \(activity.compeltedRuns) \(kDone)"
         }
         
         self.labelRunStatus?.text = runStatus
@@ -151,7 +165,7 @@ class ActivitiesTableViewCell: UITableViewCell {
         } else {
             self.buttonMoreSchedules?.isHidden = false
             self.buttonMoreSchedulesBottomLine?.isHidden = false
-            let moreSchedulesTitle =  "+" + String(activity.totalRuns - 1) + " more"
+            let moreSchedulesTitle =  "+" + String(activity.totalRuns - 1) + " \(kMore)"
             self.buttonMoreSchedules?.setTitle(moreSchedulesTitle, for: .normal)
         }
     }
@@ -164,7 +178,10 @@ class ActivitiesTableViewCell: UITableViewCell {
         
         let currentUser = User.currentUser
         
-        if let userActivityStatus = currentUser.participatedActivites.filter({$0.activityId == activity.actvityId && $0.studyId == activity.studyId && $0.activityRunId == String(activity.currentRunId)}).first {
+        if let userActivityStatus = currentUser.participatedActivites.filter({$0.activityId ==
+                                                                                activity.actvityId && $0.studyId ==
+                                                                                activity.studyId && $0.activityRunId ==
+                                                                                String(activity.currentRunId)}).first {
             
             //assign to study
             activity.userParticipationStatus = userActivityStatus
@@ -217,20 +234,26 @@ class ActivitiesTableViewCell: UITableViewCell {
         var startDate = activity.startDate//?.utcDate()
         var endDate   = activity.endDate//?.utcDate()
         
+        print("Krishna Startdate \(startDate) and enddate \(endDate)")
+        
         var difference = UserDefaults.standard.value(forKey: "offset") as? Int
+        print("Krishna Startdate difference \(difference)")
         if difference != nil {
             difference = difference! * -1
             startDate = startDate?.addingTimeInterval(TimeInterval(difference!))
             endDate = endDate?.addingTimeInterval(TimeInterval(difference!))
+            print("Krishna Startdate if difference !=nil \(startDate) and enddate \(endDate)")
         }
         
     
         let frequency = activity.frequencyType
         
         let startDateString = ActivitiesTableViewCell.oneTimeFormatter.string(from: startDate!)
+        print("Krishna Startdate \(startDate) and startDateString \(startDateString)")
         var endDateString = ""
         if endDate != nil {
             endDateString = ActivitiesTableViewCell.oneTimeFormatter.string(from: endDate!)
+            print("Krishna Enddate \(endDate) and endDateString \(endDateString)")
         }
         
         if activity.type == ActivityType.activeTask{
@@ -240,6 +263,7 @@ class ActivitiesTableViewCell: UITableViewCell {
             imageIcon?.image = UIImage.init(named: "surveyIcon")
         }
         labelStatusTopConstraint?.constant = 7
+        print("Krishna Startime \(startDateString) end time \(endDateString)")
         switch frequency {
         case .One_Time: // Handle for One Time Frequency
             
@@ -327,41 +351,49 @@ class ActivitiesTableViewCell: UITableViewCell {
     */
     private static let formatter: DateFormatter = {
         let formatter = DateFormatter()
+        formatter.locale = Locale(identifier: "en")
         formatter.dateFormat = "MMM dd YYYY"
         return formatter
     }()
     
     private static let dailyActivityFormatter: DateFormatter = {
         let formatter = DateFormatter()
+        formatter.locale = Locale(identifier: "en")
         formatter.dateFormat = "MMM dd YYYY"
         return formatter
     }()
     
     private static let oneTimeFormatter: DateFormatter = {
         let formatter = DateFormatter()
+        formatter.locale = Locale(identifier: "en")
         formatter.dateFormat = "hh:mma, MMM dd YYYY"
+        print("Krishna Start oneTimeFormatter formatter \(formatter) and locale \(formatter.locale)")
         return formatter
     }()
     
     private static let weeklyformatter: DateFormatter = {
         let formatter = DateFormatter()
+        formatter.locale = Locale(identifier: "en")
         formatter.dateFormat = "hh:mma , EEE MMM dd YYYY"
         return formatter
     }()
 
     private static let monthlyformatter: DateFormatter = {
         let formatter = DateFormatter()
+        formatter.locale = Locale(identifier: "en")
         formatter.dateFormat = "hh:mma , dd ;MMM dd YYYY"
         return formatter
     }()
 
     private static let timeFormatter: DateFormatter = {
         let formatter = DateFormatter()
+        formatter.locale = Locale(identifier: "en")
         formatter.dateFormat = "hh:mma"
         return formatter
     }()
     private static let dailyFormatter: DateFormatter = {
         let formatter = DateFormatter()
+        formatter.locale = Locale(identifier: "en")
         formatter.dateFormat = "HH:mm:ss"
         return formatter
     }()

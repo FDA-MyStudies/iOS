@@ -23,8 +23,9 @@ import UIKit
 import IQKeyboardManagerSwift
 import SlideMenuControllerSwift
 
-let kVerifyMessageFromSignIn = "Your registered email is pending verification. Please type in the Verification Code received in the email to complete this step and proceed to using the app."
-
+let kVerify1 = "Your registered email is pending verification. Please type in the "
+let kVerify2 = "Verification Code received in the email to complete this step and proceed to using the app."
+let kVerifyMessageFromSignIn = NSLocalizedStrings("\(kVerify1)\(kVerify2)", comment: "")
 
 enum SignInLoadFrom: Int{
     case gatewayOverview
@@ -53,22 +54,34 @@ class SignInViewController: UIViewController{
         
         //Used to set border color for bottom view
         buttonSignIn?.layer.borderColor = kUicolorForButtonBackground
-        self.title = NSLocalizedString(kSignInTitleText, comment: "")
+        self.title = kSignInTitleText
         
         //load plist info
-        let plistPath = Bundle.main.path(forResource: "SignInPlist", ofType: ".plist", inDirectory: nil)
+        var plistPath = Bundle.main.path(forResource: "SignInPlist", ofType: ".plist", inDirectory: nil)
+        let localeDefault = getLanguageLocale()
+        if !(localeDefault.hasPrefix("es") || localeDefault.hasPrefix("en")) {
+          plistPath = Bundle.main.path(forResource: "SignInPlist", ofType: ".plist", inDirectory: nil, forLocalization: "Base")
+        }else if localeDefault.hasPrefix("en"){
+            plistPath = Bundle.main.path(forResource: "SignInPlist", ofType: ".plist", inDirectory: nil, forLocalization: "Base")
+        }else if localeDefault.hasPrefix("es"){
+            plistPath = Bundle.main.path(forResource: "SignInPlist", ofType: ".plist", inDirectory: nil, forLocalization: "es")
+        }
         tableViewRowDetails = NSMutableArray.init(contentsOfFile: plistPath!)
         
         //Automatically takes care  of text field become first responder and scroll of tableview
         // IQKeyboardManager.sharedManager().enable = true
         
         //Used for background tap dismiss keyboard
-        let gestureRecognizer: UITapGestureRecognizer = UITapGestureRecognizer.init(target: self, action: #selector(SignInViewController.dismissKeyboard))
+        let gestureRecognizer: UITapGestureRecognizer =
+            UITapGestureRecognizer.init(target: self, action: #selector(SignInViewController.dismissKeyboard))
         self.tableView?.addGestureRecognizer(gestureRecognizer)
         
         
         //info button
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(image: UIImage.init(named: "info"), style: .done, target: self, action: #selector(self.buttonInfoAction(_:)))
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(image: UIImage.init(named: "info"),
+                                                                      style: .done,
+                                                                      target: self,
+                                                                      action: #selector(self.buttonInfoAction(_:)))
         
         
         //unhide navigationbar
@@ -76,23 +89,49 @@ class SignInViewController: UIViewController{
         
         //WCPServices().getTermsPolicy(delegate: self)
         
-        if let attributedTitle = buttonSignUp?.attributedTitle(for: .normal) {
-            let mutableAttributedTitle = NSMutableAttributedString(attributedString: attributedTitle)
-            
-            mutableAttributedTitle.addAttribute(NSAttributedString.Key.foregroundColor, value: #colorLiteral(red: 0, green: 0.4862745098, blue: 0.7294117647, alpha: 1) , range: NSRange(location: 10,length: 7))
-            
-            buttonSignUp?.setAttributedTitle(mutableAttributedTitle, for: .normal)
-        }
+      if let _ = buttonSignUp?.attributedTitle(for: .normal) {
         
-        TermsAndPolicy.currentTermsAndPolicy =  TermsAndPolicy()
+        let attrs1 = [
+          NSAttributedString.Key.font : UIFont(name: "HelveticaNeue-Medium", size: 14.0)!,
+          NSAttributedString.Key.foregroundColor : UIColor.systemGray] as [NSAttributedString.Key : Any]
+        
+        let attrs2 = [
+          NSAttributedString.Key.font : UIFont(name: "HelveticaNeue-Medium", size: 14.0)!,
+          NSAttributedString.Key.foregroundColor : #colorLiteral(red: 0, green: 0.4862745098, blue: 0.7294117647, alpha: 1)] as [NSAttributedString.Key : Any]
+        
+        let attributedString1 = NSMutableAttributedString(string:NSLocalizedStrings("New User?", comment: ""), attributes:attrs1)
+        
+        let attributedString2 = NSMutableAttributedString(string:" " + NSLocalizedStrings("Sign Up", comment: ""), attributes:attrs2)
+        
+        attributedString1.append(attributedString2)
+        
+        buttonSignUp?.setAttributedTitle(attributedString1, for: .normal)
+      }
       
-        let policyURL = Branding.PrivacyPolicyURL
-        let terms = Branding.TermsAndConditionURL
-        TermsAndPolicy.currentTermsAndPolicy?.initWith(terms: terms, policy: policyURL)
-        self.agreeToTermsAndConditions()
-        
-       
-       
+      let main_string = NSLocalizedStrings("By tapping Sign In, you agree to this app's Terms and Privacy Policy", comment: "")
+      
+      let stringAttributes = [
+        NSAttributedString.Key.font : UIFont(name: "HelveticaNeue-Medium", size: 14.0)!,
+        NSAttributedString.Key.foregroundColor : UIColor.systemGray] as [NSAttributedString.Key : Any]
+      let attributedString = NSMutableAttributedString(string: main_string, attributes: stringAttributes)
+      termsAndCondition?.attributedText = attributedString
+      termsAndCondition?.textAlignment = .center
+      
+      TermsAndPolicy.currentTermsAndPolicy =  TermsAndPolicy()
+      
+      let policyURL = Branding.PrivacyPolicyURL
+      let terms = Branding.TermsAndConditionURL
+      TermsAndPolicy.currentTermsAndPolicy?.initWith(terms: terms, policy: policyURL)
+      self.agreeToTermsAndConditions()
+      
+      
+      
+//      let base64 = "RXN0ZSBjb3JyZW8gZWxlY3Ryw71uaWNvIHlhIGhhIHNpZG8gdXRpbGl6YWRvLiBJbnRlbnRlIGNvbiB1bmEgZGlyZWNjacO9biBkZSBjb3JyZW8gZWxlY3Ryw71uaWNvIGRpZmVyZW50ZS4KCg=="
+
+//      print("Base64---\(base64.urlSafeBase64Decoded() ?? "* decoding failed*")")
+
+      
+      
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -185,7 +224,7 @@ class SignInViewController: UIViewController{
 
      */
     @IBAction func buttonInfoAction(_ sender: Any){
-        UIUtilities.showAlertWithTitleAndMessage(title: "Why Register?", message: kRegistrationInfoMessage as NSString)
+      UIUtilities.showAlertWithTitleAndMessage(title: kWhyRegisterText as NSString, message: kRegistrationInfoMessage as NSString)
     }
     
 
@@ -226,7 +265,10 @@ class SignInViewController: UIViewController{
      
      */
     func showAlertMessages(textMessage: String){
-        UIUtilities.showAlertMessage("", errorMessage: NSLocalizedString(textMessage, comment: ""), errorAlertActionTitle: NSLocalizedString("OK", comment: ""), viewControllerUsed: self)
+        UIUtilities.showAlertMessage("",
+                                     errorMessage: NSLocalizedStrings(textMessage, comment: ""),
+                                     errorAlertActionTitle: kTitleOKCapital,
+                                     viewControllerUsed: self)
     }
     
     
@@ -302,15 +344,20 @@ class SignInViewController: UIViewController{
         self.termsAndCondition?.delegate = self
         let attributedString =  (termsAndCondition?.attributedText.mutableCopy() as? NSMutableAttributedString)!
         
-        var foundRange = attributedString.mutableString.range(of: "Terms")
-        attributedString.addAttribute(NSAttributedString.Key.link, value:(TermsAndPolicy.currentTermsAndPolicy?.termsURL!)! as String, range: foundRange)
-        
-        foundRange = attributedString.mutableString.range(of: "Privacy Policy")
-        attributedString.addAttribute(NSAttributedString.Key.link, value:(TermsAndPolicy.currentTermsAndPolicy?.policyURL!)! as String  , range: foundRange)
+        var foundRange = attributedString.mutableString.range(of: NSLocalizedStrings("Terms", comment: ""))
+        attributedString.addAttribute(NSAttributedString.Key.link,
+                                      value:(TermsAndPolicy.currentTermsAndPolicy?.termsURL!)! as String,
+                                      range: foundRange)
+      
+        foundRange = attributedString.mutableString.range(of: NSLocalizedStrings("Privacy Policy", comment: ""))
+        attributedString.addAttribute(NSAttributedString.Key.link,
+                                      value:(TermsAndPolicy.currentTermsAndPolicy?.policyURL!)! as String,
+                                      range: foundRange)
         
         termsAndCondition?.attributedText = attributedString
         
-        termsAndCondition?.linkTextAttributes = convertToOptionalNSAttributedStringKeyDictionary([NSAttributedString.Key.foregroundColor.rawValue: Utilities.getUIColorFromHex(0x007CBA)])
+        termsAndCondition?.linkTextAttributes =
+            convertToOptionalNSAttributedStringKeyDictionary([NSAttributedString.Key.foregroundColor.rawValue: Utilities.getUIColorFromHex(0x007CBA)])
         
     }
     
@@ -458,7 +505,9 @@ extension SignInViewController: UITextViewDelegate{
         
         var link: String =   (TermsAndPolicy.currentTermsAndPolicy?.termsURL)! //kTermsAndConditionLink
         var title: String = kNavigationTitleTerms
-        if (URL.absoluteString == TermsAndPolicy.currentTermsAndPolicy?.policyURL && characterRange.length == String("Privacy Policy").count) {
+        if (URL.absoluteString ==
+                TermsAndPolicy.currentTermsAndPolicy?.policyURL &&
+                characterRange.length == String(NSLocalizedStrings("Privacy Policy", comment: "")).count) {
             //kPrivacyPolicyLink
             print("terms")
             link =  (TermsAndPolicy.currentTermsAndPolicy?.policyURL)! // kPrivacyPolicyLink
@@ -547,8 +596,8 @@ extension SignInViewController: NMWebServiceDelegate {
         Logger.sharedInstance.info("requestname : \(requestName)")
         
         self.removeProgressIndicator()
-        
-        UIUtilities.showAlertWithTitleAndMessage(title: NSLocalizedString(kErrorTitle, comment: "") as NSString, message: error.localizedDescription as NSString)
+        let errorMsg = base64DecodeError(error.localizedDescription)
+        UIUtilities.showAlertWithTitleAndMessage(title: NSLocalizedStrings(kErrorTitle, comment: "") as NSString, message: errorMsg as NSString)
     }
 }
 
@@ -558,4 +607,46 @@ extension SignInViewController: NMWebServiceDelegate {
 fileprivate func convertToOptionalNSAttributedStringKeyDictionary(_ input: [String: Any]?) -> [NSAttributedString.Key: Any]? {
 	guard let input = input else { return nil }
 	return Dictionary(uniqueKeysWithValues: input.map { key, value in (NSAttributedString.Key(rawValue: key), value)})
+}
+
+class CustomTextField: UITextField {
+
+    private func getKeyboardLanguage() -> String? {
+        return "en" // here you can choose keyboard any way you need
+    }
+
+    override var textInputMode: UITextInputMode? {
+        if let language = getKeyboardLanguage() {
+            for tim in UITextInputMode.activeInputModes {
+                if tim.primaryLanguage!.contains(language) {
+                    return tim
+                }
+            }
+        }
+        return super.textInputMode
+    }
+
+}
+
+extension String {
+    func urlSafeBase64Decoded() -> String? {
+        var st = self
+            .replacingOccurrences(of: "_", with: "/")
+            .replacingOccurrences(of: "-", with: "+")
+        let remainder = self.count % 4
+        if remainder > 0 {
+            st = self.padding(toLength: self.count + 4 - remainder,
+                              withPad: "=",
+                              startingAt: 0)
+        }
+        guard let d = Data(base64Encoded: st, options: .ignoreUnknownCharacters) else{
+            return nil
+        }
+        return String(data: d, encoding: .utf8)
+    }
+}
+
+func base64DecodeError (_ errorDesc : String) -> String {
+  let errorMsg = errorDesc.urlSafeBase64Decoded() ?? errorDesc
+  return errorMsg
 }

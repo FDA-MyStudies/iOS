@@ -120,7 +120,7 @@ class ResourcesDetailViewController: UIViewController {
     func startDownloadingfile() {
         
         if !FileManager.default.fileExists(atPath: resourcesDownloadPath) {
-            try! FileManager.default.createDirectory(atPath: resourcesDownloadPath, withIntermediateDirectories: true, attributes: nil)
+            try? FileManager.default.createDirectory(atPath: resourcesDownloadPath, withIntermediateDirectories: true, attributes: nil)
         }
         debugPrint("custom download path: \(resourcesDownloadPath)")
         
@@ -172,10 +172,9 @@ extension ResourcesDetailViewController: WKNavigationDelegate {
         self.activityIndicator.stopAnimating()
         self.activityIndicator.removeFromSuperview()
         
-        let buttonTitleOK = NSLocalizedString("OK", comment: "")
-        let alert = UIAlertController(title: NSLocalizedString(kTitleError, comment: ""),message: error.localizedDescription,preferredStyle: UIAlertController.Style.alert)
+        let alert = UIAlertController(title: kTitleError,message: error.localizedDescription,preferredStyle: UIAlertController.Style.alert)
         
-        alert.addAction(UIAlertAction.init(title: buttonTitleOK, style: .default, handler: { (action) in
+        alert.addAction(UIAlertAction.init(title: kTitleOKCapital, style: .default, handler: { (action) in
             
             self.dismiss(animated: true, completion: nil)
             
@@ -192,7 +191,7 @@ extension ResourcesDetailViewController: MFMailComposeViewControllerDelegate{
         composeVC.mailComposeDelegate = self
         // Configure the fields of the interface.
         
-        composeVC.setSubject("Resources")
+        composeVC.setSubject(NSLocalizedStrings("Resources", comment: ""))
         
         if resource?.file?.localPath != nil {
             
@@ -233,9 +232,9 @@ extension ResourcesDetailViewController: MFMailComposeViewControllerDelegate{
             self.present(composeVC, animated: true, completion: nil)
             
         } else {
-            let alert = UIAlertController(title: NSLocalizedString(kTitleError, comment: ""),message: kFailedToConnectAppleMail, preferredStyle: UIAlertController.Style.alert)
+            let alert = UIAlertController(title: kTitleError,message: kFailedToConnectAppleMail, preferredStyle: UIAlertController.Style.alert)
             
-            alert.addAction(UIAlertAction.init(title: NSLocalizedString("OK", comment: ""), style: .default, handler: { (action) in
+            alert.addAction(UIAlertAction.init(title: kTitleOKCapital, style: .default, handler: { (action) in
                 
 //                self.dismiss(animated: true, completion: nil)
                 

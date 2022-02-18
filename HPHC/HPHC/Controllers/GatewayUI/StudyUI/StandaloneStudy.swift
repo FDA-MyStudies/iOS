@@ -170,8 +170,8 @@ extension StandaloneStudy:NMWebServiceDelegate {
            self.createStudyForStandalone()
         }
         else {
-            
-            UIUtilities.showAlertWithMessage(alertMessage: error.localizedDescription)
+            let errorMsg = base64DecodeError(error.localizedDescription)
+            UIUtilities.showAlertWithMessage(alertMessage: errorMsg)
   
         }
     }

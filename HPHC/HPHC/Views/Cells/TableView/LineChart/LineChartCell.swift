@@ -45,6 +45,7 @@ class LineChartCell: GraphChartTableViewCell {
     var xAxisTitles: [Any] = []
     var max: Float = 0.0
     var min: Float = 0.0
+    let kPerRun = NSLocalizedStrings(" (per run)", comment: "")
 
     var currentChart: DashboardCharts! {
       didSet {
@@ -106,7 +107,7 @@ class LineChartCell: GraphChartTableViewCell {
     }
     
     func setupLineChart(chart: DashboardCharts){
-        
+        print("Krishna line chart \(chart.displayName)")
         currentChart = chart
 
         self.graphView.tintColor = UIColor.gray
@@ -242,15 +243,12 @@ class LineChartCell: GraphChartTableViewCell {
         
             
         case .runs:
-            labelTitle.text = chart.displayName! + " (per run)"
+            labelTitle.text = chart.displayName! + kPerRun
             self.buttonForward.isEnabled = true
             plotForRunsType()
             
         case .hours_of_day:
-            
-            
-            
-             labelTitle.text = chart.displayName! + " (per run)"
+            labelTitle.text = chart.displayName! + kPerRun
             
             //current date
             let stringDate = LineChartCell.formatter.string(from: Date())
@@ -534,7 +532,9 @@ class LineChartCell: GraphChartTableViewCell {
     
     func handleDaysOfMonthForDate(date: Date){
         
-        let dataList: Array<DBStatisticsData> = currentChart.statList.filter({$0.startDate! >= date.startOfMonth() && $0.startDate! <= date.endOfMonth()})
+        let dataList: Array<DBStatisticsData> =
+            currentChart.statList.filter({$0.startDate! >= date.startOfMonth() &&
+                                            $0.startDate! <= date.endOfMonth()})
         
        // let array = dataList.map{$0.data}
         var points: Array<ORKValueRange> = []
@@ -625,7 +625,9 @@ class LineChartCell: GraphChartTableViewCell {
     
     func handleMonthsOfYearForDate(date: Date){
         
-        let dataList: Array<DBStatisticsData> = currentChart.statList.filter({$0.startDate! >= date.startOfYear() && $0.startDate! <= date.endOfYear()})
+        let dataList: Array<DBStatisticsData> =
+            currentChart.statList.filter({$0.startDate! >= date.startOfYear() &&
+                                            $0.startDate! <= date.endOfYear()})
         
        // let array = dataList.map{$0.data}
         var points: Array<ORKValueRange> = []
@@ -661,7 +663,9 @@ class LineChartCell: GraphChartTableViewCell {
     
     func handleWeeksOfMonthForDate(date: Date){
         
-         let dataList: Array<DBStatisticsData> = currentChart.statList.filter({$0.startDate! >= date.startOfMonth() && $0.startDate! <= date.endOfMonth()})
+         let dataList: Array<DBStatisticsData> =
+            currentChart.statList.filter({$0.startDate! >= date.startOfMonth() &&
+                                            $0.startDate! <= date.endOfMonth()})
         
         //let array = dataList.map{$0.data}
         var points: Array<ORKValueRange> = []
@@ -805,9 +809,9 @@ class LineChartCell: GraphChartTableViewCell {
     func replaceXTitleForActiveTask(value: Int,atIndex: Int) {
         
         if charActivity?.type == .activeTask {
-            var title = (xAxisTitles[atIndex] as? String)!
-            title = title + "\n" + "\(value)"
-            xAxisTitles[atIndex] = title
+            let title = (xAxisTitles[atIndex] as? String)!
+            let titleValue = title + "\n" + "\(value)"
+            xAxisTitles[atIndex] = titleValue
         }
        
     }

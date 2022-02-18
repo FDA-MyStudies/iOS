@@ -24,7 +24,7 @@ import IQKeyboardManagerSwift
 
 
 let kStudyWithStudyId = "Study with StudyId"
-let kTitleOK = "OK"
+let kTokenRequired = "Token is required"
 
 class EligibilityStep: ORKStep {
     var type: String?
@@ -135,7 +135,7 @@ class EligibilityStepViewController: ORKStepViewController {
     
     func showAlert(message: String) {
         let alert = UIAlertController(title: kErrorTitle as String,message: message as String,preferredStyle: UIAlertController.Style.alert)
-        alert.addAction(UIAlertAction(title: NSLocalizedString(kTitleOK, comment: ""), style: .default, handler: nil))
+        alert.addAction(UIAlertAction(title: kTitleOKCapital, style: .default, handler: nil))
         
         self.navigationController?.present(alert, animated: true, completion: nil)
     }
@@ -216,17 +216,23 @@ extension EligibilityStepViewController: NMWebServiceDelegate {
         Logger.sharedInstance.info("requestname : \(requestName)")
         
         self.removeProgressIndicator()
-        if error.localizedDescription.localizedCaseInsensitiveContains(tokenTextField.text!) {
+        print("token in textfield \(tokenTextField.text!)")
+        print("Token response check with error \(error.localizedDescription.localizedCaseInsensitiveContains(tokenTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines)))")
+        
+        if error.localizedDescription.localizedCaseInsensitiveContains(tokenTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines)) {
             
             self.showAlert(message: kMessageInvalidTokenOrIfStudyDoesNotExist) //kMessageForInvalidToken
             
-        }else {
+        } else {
             if error.localizedDescription.localizedCaseInsensitiveContains(kStudyWithStudyId) {
                 
                 self.showAlert(message: kMessageInvalidTokenOrIfStudyDoesNotExist) //kMessageForMissingStudyId
                 
-            }else {
-                self.showAlert(message: error.localizedDescription)
+            }else if error.localizedDescription.localizedCaseInsensitiveContains(kTokenRequired){
+                self.showAlert(message: kMessageInvalidTokenOrIfStudyDoesNotExist)
+            }
+            else {
+                self.showAlert(message: Utilities.errorMessageDisplayMessage(error: error))
             }
         }
     }

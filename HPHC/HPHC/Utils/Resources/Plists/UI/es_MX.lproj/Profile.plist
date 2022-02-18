@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<dict>
+		<key>helpText</key>
+		<string>Identificación de correo</string>
+		<key>placeHolder</key>
+		<string>ingrese correo electrónico</string>
+	</dict>
+	<dict>
+		<key>helpText</key>
+		<string>Contraseña</string>
+		<key>placeHolder</key>
+		<string>agregar contraseña</string>
+	</dict>
+	<dict>
+		<key>helpText</key>
+		<string>Código de acceso</string>
+		<key>placeHolder</key>
+		<string>agregar contraseña</string>
+	</dict>
+	<dict>
+		<key>LabelName</key>
+		<string>Utilizar la contraseña para acceder a la aplicación</string>
+	</dict>
+	<dict>
+		<key>LabelName</key>
+		<string>¿Recibir notificaciones automáticas?</string>
+	</dict>
+	<dict>
+		<key>LabelName</key>
+		<string>¿Recibir recordatorios de actividades de estudio?</string>
+	</dict>
+</array>
+</plist>

@@ -376,7 +376,9 @@ class AnchorDateHandler {
             return
         }
         
-        var request = URLRequest(url: requstUrl, cachePolicy: URLRequest.CachePolicy.reloadIgnoringLocalCacheData, timeoutInterval: NetworkConnectionConstants.ConnectionTimeoutInterval)
+        var request = URLRequest(url: requstUrl,
+                                 cachePolicy: URLRequest.CachePolicy.reloadIgnoringLocalCacheData,
+                                 timeoutInterval: NetworkConnectionConstants.ConnectionTimeoutInterval)
         request.httpMethod = method.methodType.methodTypeAsString
         //request.httpBody = data
         

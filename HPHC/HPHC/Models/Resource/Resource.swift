@@ -202,6 +202,8 @@ class Resource {
             }
             
             if (Utilities.isValidValue(someObject: (detail[kResourceTitle]) as AnyObject)) {
+                print("Krishna resource Title: \(detail[kResourceTitle])")
+                print("Krishna resource localised Title: \(NSLocalizedStrings(detail[kResourceTitle] as! String, comment: ""))")
                 self.title = detail[kResourceTitle] as? String
             }
             self.file = File()

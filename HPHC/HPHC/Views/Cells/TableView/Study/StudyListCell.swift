@@ -36,6 +36,7 @@ class StudyListCell: UITableViewCell {
     @IBOutlet var labelCompletionValue: UILabel?
     @IBOutlet var labelAdherenceValue: UILabel?
     @IBOutlet var labelStudyStatus: UILabel?
+    @IBOutlet var labelStudylanguage: UILabel?
     @IBOutlet var buttonBookmark: UIButton?
     @IBOutlet var progressBarCompletion: UIProgressView?
     @IBOutlet var progressBarAdherence: UIProgressView?
@@ -102,7 +103,7 @@ class StudyListCell: UITableViewCell {
             labelStudySponserName?.text =  study.sponserName!
         }
         
-        labelStudyCategoryType?.text =  study.category!.uppercased()
+        labelStudyCategoryType?.text =  categoryReCorrection(study.category!).uppercased()
         
         progressBarCompletion?.layer.cornerRadius = 2
         progressBarCompletion?.layer.masksToBounds = true
@@ -115,6 +116,10 @@ class StudyListCell: UITableViewCell {
         
         //study status
         self.setStudyStatus(study: study)
+      
+        //study status
+        self.setStudyLanguage(study: study)
+        
         
         if User.currentUser.userType == .AnonymousUser {
             // do nothing
@@ -124,6 +129,57 @@ class StudyListCell: UITableViewCell {
             self.setUserStatusForStudy(study: study)
         }
     }
+  
+    //Category correction for Spanish Language
+    func categoryReCorrection(_ category: String) -> String {
+      switch category {
+      case "1Biologics Safety":
+        return "Seguridad de los productos biológicos"
+      case "1Clinical Trials":
+        return "Ensayos clínicos"
+      case "1Cosmetics Safety":
+        return "Seguridad de los cosméticos"
+      case "1Drug Safety":
+        return "Seguridad de los medicamentos"
+      case "1Food Safety":
+        return "Seguridad alimenticia"
+      case "1Medical Device Safety":
+        return "Seguridad de dispositivos médicos"
+      case "1Observational Studies":
+        return "Estudios observacionales"
+      case "1Public Health":
+        return "Salud pública"
+      case "1Radiation-Emitting Products":
+        return "Productos de radiación"
+      case "1Tobacco Use":
+        return "El consumo de tabaco"
+      default:
+        return category // Category is in English OR category Not recognised
+      }
+    }
+  
+    /**
+     Used to set the Study Language
+     @param study    Access the data from Study Class
+     */
+    func setStudyLanguage(study: Study){
+        
+        let locale3 = getLanguageLocale()
+        
+        print("studyId \(study.studyId) study name is \(study.name)study Language \(study.studyLanguage) and locale is \(locale3)")
+        if ((locale3.hasPrefix("es") && study.studyLanguage.containsIgnoringCase("spanish")) || (locale3.hasPrefix("en") && study.studyLanguage.containsIgnoringCase("english"))) {
+            labelStudylanguage?.text = ""
+        }else{
+            if (study.studyLanguage.containsIgnoringCase("english")){
+                labelStudylanguage?.text = NSLocalizedStrings("English", comment: "")
+            }else{
+            labelStudylanguage?.text = NSLocalizedStrings("Spanish", comment: "")
+            }
+            
+        }
+        
+      
+    }
     
     
     /**
@@ -132,7 +188,7 @@ class StudyListCell: UITableViewCell {
      */
     func setStudyStatus(study: Study){
         
-        labelStudyStatus?.text = study.status.rawValue.uppercased()
+        labelStudyStatus?.text = NSLocalizedStrings("\(study.status.rawValue.uppercased())", comment: "")
         
         switch study.status {
         case .Active:
@@ -162,17 +218,15 @@ class StudyListCell: UITableViewCell {
             
             switch study.status {
             case .Active:
-                labelStudyUserStatus?.text = userStudyStatus.status.description
+                labelStudyUserStatus?.text = NSLocalizedStrings("\(userStudyStatus.status.description)", comment: "")
             case .Closed:
-                labelStudyUserStatus?.text = userStudyStatus.status.closedStudyDescription
+                labelStudyUserStatus?.text = NSLocalizedStrings("\(userStudyStatus.status.closedStudyDescription)", comment: "")
             case .Upcoming:
-                labelStudyUserStatus?.text = userStudyStatus.status.upcomingStudyDescription
+                labelStudyUserStatus?.text = NSLocalizedStrings("\(userStudyStatus.status.upcomingStudyDescription)", comment: "")
             default:
-                labelStudyUserStatus?.text = userStudyStatus.status.description
+                labelStudyUserStatus?.text = NSLocalizedStrings("\(userStudyStatus.status.description)", comment: "")
             }
-            
-            
-            
+          
             //update completion %
             self.labelCompletionValue?.text = String(userStudyStatus.completion) + "%"
             self.labelAdherenceValue?.text = String(userStudyStatus.adherence)  + "%"

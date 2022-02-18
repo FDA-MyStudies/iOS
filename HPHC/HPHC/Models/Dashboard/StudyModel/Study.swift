@@ -100,6 +100,7 @@ class Study: Hashable {
     var startDate: String?
     var endEnd: String?
     var status: StudyStatus = .Active //Current Study Status
+    var studyLanguage: String = "ENGLISH"
     var sponserName: String?
     var description: String?
     var brandingConfiguration: String?
@@ -125,7 +126,7 @@ class Study: Hashable {
         hasher.combine(self.studyId)
     }
     
-    var withdrawalConfigration: StudyWithdrawalConfigration?
+    var withdrawalConfigration: StudyWithdrawalConfig?
     
     static var currentStudy: Study? = nil
     static var currentActivity: Activity? = nil
@@ -152,13 +153,16 @@ class Study: Hashable {
             }
             
             if Utilities.isValidValue(someObject: studyDetail[kStudyCategory] as AnyObject ){
-                self.category = studyDetail[kStudyCategory] as? String
+              self.category = categoryCorrection(studyDetail[kStudyCategory] as? String ?? "")
             }
             if Utilities.isValidValue(someObject: studyDetail[kStudySponserName] as AnyObject ){
                 self.sponserName = studyDetail[kStudySponserName] as? String
             }
             if Utilities.isValidValue(someObject: studyDetail[kStudyTagLine] as AnyObject ){
                 self.description = studyDetail[kStudyTagLine] as? String
+            }
+            if Utilities.isValidValue(someObject: studyDetail[kStudyLanguage] as AnyObject ){
+              self.studyLanguage = studyDetail[kStudyLanguage] as? String ?? "ENGLISH"
             }
             if Utilities.isValidValue(someObject: studyDetail[kStudyLogoURL] as AnyObject ) {
                 self.logoURL = studyDetail[kStudyLogoURL] as? String
@@ -180,6 +184,36 @@ class Study: Hashable {
         } else {
             Logger.sharedInstance.debug("Study Dictionary is null:\(studyDetail)")
         }
+    }
+  
+    //Category correction for Spanish Language
+    func categoryCorrection(_ category: String) -> String {
+      switch category {
+      case "Seguridad de los productos biológicos":
+        return "1Biologics Safety"
+      case "Ensayos clínicos":
+        return "1Clinical Trials"
+      case "Seguridad de los cosméticos":
+        return "1Cosmetics Safety"
+      case "Seguridad de los medicamentos":
+        return "1Drug Safety"
+      case "Seguridad alimenticia":
+        return "1Food Safety"
+      case "Seguridad de dispositivos médicos":
+        return "1Medical Device Safety"
+      case "Estudios observacionales":
+        return "1Observational Studies"
+      case "Salud pública":
+        return "1Public Health"
+      case "Productos emisores de radiación":
+        return "1Radiation-Emitting Products"
+      case "Productos de radiación":
+        return "1Radiation-Emitting Products"
+      case "El consumo de tabaco":
+        return "1Tobacco Use"
+      default:
+        return category // Category is in English OR category Not recognised
+      }
     }
     
     static func ==(lhs: Study, rhs: Study) -> Bool {
@@ -306,7 +340,7 @@ class StudyAnchorDate{
 }
 
 // MARK:StudyWithdrawalConfigration
-class StudyWithdrawalConfigration {
+class StudyWithdrawalConfig {
     var message: String? = ""
     var type: StudyWithdrawalConfigrationType? = .notAvailable
     
@@ -344,6 +378,8 @@ struct StudyUpdates {
     static var studyResourcesUpdated = false
     static var studyVersion: String? = nil
     static var studyStatus: String? = nil
+    static var studyLang: String? = ""
+    static var studyOldLang: String? = ""
     
     init() {
     }
@@ -372,6 +408,15 @@ struct StudyUpdates {
                 StudyUpdates.studyStatus = updates["status"] as? String
             }
         }
+        if(UserDefaults.standard.value(forKey: kUserDeviceLanguage)) as? String ?? "" == StudyUpdates.studyLang as? String ?? ""{
+            StudyUpdates.studyOldLang = StudyUpdates.studyLang
+        }else{
+            StudyUpdates.studyResourcesUpdated = true
+            StudyUpdates.studyInfoUpdated  = true
+            StudyUpdates.studyActivitiesUpdated = true
+           
+        }
+        StudyUpdates.studyLang = UserDefaults.standard.value(forKey: kUserDeviceLanguage) as? String ?? ""
         StudyUpdates.studyVersion = detail[kStudyCurrentVersion] as? String
     }
 }

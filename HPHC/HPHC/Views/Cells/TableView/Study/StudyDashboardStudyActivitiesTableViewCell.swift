@@ -36,8 +36,6 @@ class StudyDashboardStudyActivitiesTableViewCell: UITableViewCell {
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
     }
-    
-    
     /**
      Used to display Study Activities cell
      @param data    Accepts data from Dictionary
@@ -47,11 +45,14 @@ class StudyDashboardStudyActivitiesTableViewCell: UITableViewCell {
         labelSurveyNumber?.text = data["surveyNumber"] as? String
         labelTaskNumber?.text = data["taskNumber"] as? String
         
-        labelSurveyList?.text = String(format: "%@ Completed, %@ Pending, %@ Missed",data["surveyCompleted"] as! String , data["surveyPending"] as! String , data["surveyMissed"] as! String)
+        labelSurveyList?.text = String(format: "%@ Completed, %@ Pending, %@ Missed",
+                                       data["surveyCompleted"] as! String ,
+                                       data["surveyPending"] as! String ,
+                                       data["surveyMissed"] as! String)
         
-        labelTaskList?.text = String(format: "%@ Completed, %@ Pending, %@ Missed",data["taskCompleted"] as! String , data["taskPending"] as! String , data["taskMissed"] as! String)
+        labelTaskList?.text = String(format: "%@ Completed, %@ Pending, %@ Missed",
+                                     data["taskCompleted"] as! String,
+                                     data["taskPending"] as! String,
+                                     data["taskMissed"] as! String)
     }
-}
-
-
-
+} 

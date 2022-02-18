@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>ApplicationID</key>
-	<string>COVFH001</string>
+	<string>COVFHTEST</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
@@ -45,9 +45,9 @@
 	<key>NSAppTransportSecurity</key>
 	<dict>
 		<key>NSAllowsArbitraryLoads</key>
-		<false/>
+		<true/>
 		<key>NSAllowsArbitraryLoadsInWebContent</key>
-		<false/>
+		<true/>
 	</dict>
 	<key>NSCameraUsageDescription</key>
 	<string>$(PRODUCT_NAME) would like to access your camera</string>
@@ -70,7 +70,7 @@
 	<key>ProductTitleName</key>
 	<string>FDA MyStudies: COVID-19</string>
 	<key>StandaloneStudyId</key>
-	<string>appstudy2</string>
+	<string>demo1</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Verdana Italic.ttf</string>

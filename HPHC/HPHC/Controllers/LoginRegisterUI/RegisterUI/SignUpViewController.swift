@@ -22,7 +22,11 @@ import Foundation
 import UIKit
 import IQKeyboardManagerSwift
 
-let kVerifyMessageFromSignUp = "An email has been sent to xyz@gmail.com. Please type in the Verification Code received in the email to complete the verification step."
+let kVerifyMessageFromSignUp =
+    NSLocalizedStrings(
+        "An email has been sent to xyz@gmail.com. Please type in the Verification Code received in the email to complete the verification step.",
+                       comment: ""
+    )
 
 enum SignUpLoadFrom: Int{
     case gatewayOverview
@@ -61,27 +65,48 @@ class SignUpViewController: UIViewController{
         //Used to set border color for bottom view
         buttonSubmit?.layer.borderColor = kUicolorForButtonBackground
         
-        self.title = NSLocalizedString(kSignUpTitleText, comment: "")
+        self.title = kSignUpTitleText
         
         //load plist info
-        let plistPath = Bundle.main.path(forResource: "SignUpPlist", ofType: ".plist", inDirectory: nil)
+        var plistPath = Bundle.main.path(forResource: "SignUpPlist", ofType: ".plist", inDirectory: nil)
+        let localeDefault = getLanguageLocale()
+        if !(localeDefault.hasPrefix("es") || localeDefault.hasPrefix("en")) {
+          plistPath = Bundle.main.path(forResource: "SignUpPlist", ofType: ".plist", inDirectory: nil, forLocalization: "Base")
+        }else if localeDefault.hasPrefix("en"){
+            plistPath = Bundle.main.path(forResource: "SignUpPlist", ofType: ".plist", inDirectory: nil, forLocalization: "Base")
+        }else if localeDefault.hasPrefix("es"){
+            plistPath = Bundle.main.path(forResource: "SignUpPlist", ofType: ".plist", inDirectory: nil, forLocalization: "es")
+        }
+      
         tableViewRowDetails = NSMutableArray.init(contentsOfFile: plistPath!)
         
         //Automatically takes care  of text field become first responder and scroll of tableview
         // IQKeyboardManager.sharedManager().enable = true
         
         //info button
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(image: UIImage.init(named: "info"), style: .done, target: self, action: #selector(self.buttonInfoAction(_:)))
+        self.navigationItem.rightBarButtonItem =
+            UIBarButtonItem.init(image: UIImage.init(named: "info"), style: .done, target: self, action: #selector(self.buttonInfoAction(_:)))
        
         
         //Used for background tap dismiss keyboard
-        let tapGestureRecognizer: UITapGestureRecognizer = UITapGestureRecognizer.init(target: self, action: #selector(SignUpViewController.dismissKeyboard))
+        let tapGestureRecognizer: UITapGestureRecognizer =
+            UITapGestureRecognizer.init(target: self, action: #selector(SignUpViewController.dismissKeyboard))
         self.tableView?.addGestureRecognizer(tapGestureRecognizer)
         
         //unhide navigationbar
         self.navigationController?.setNavigationBarHidden(false, animated: true)
         
         //WCPServices().getTermsPolicy(delegate: self)\
+      
+      let main_string = NSLocalizedStrings("I Agree to the Terms and Privacy Policy", comment: "")
+      
+      let stringAttributes = [
+        NSAttributedString.Key.font : UIFont(name: "HelveticaNeue", size: 16.0)!,
+        NSAttributedString.Key.foregroundColor : UIColor.systemGray] as [NSAttributedString.Key : Any]
+      let attributedString = NSMutableAttributedString(string: main_string, attributes: stringAttributes)
+      termsAndCondition?.attributedText = attributedString
+      
+      
       TermsAndPolicy.currentTermsAndPolicy =  TermsAndPolicy()
       let policyURL = Branding.PrivacyPolicyURL
       let terms = Branding.TermsAndConditionURL
@@ -133,15 +158,19 @@ class SignUpViewController: UIViewController{
         self.termsAndCondition?.delegate = self
         let attributedString =  (termsAndCondition?.attributedText.mutableCopy() as? NSMutableAttributedString)!
         
-        var foundRange = attributedString.mutableString.range(of: "Terms")
-        attributedString.addAttribute(NSAttributedString.Key.link, value:(TermsAndPolicy.currentTermsAndPolicy?.termsURL!)! as String, range: foundRange)
+        var foundRange = attributedString.mutableString.range(of: NSLocalizedStrings("Terms", comment: ""))
+        attributedString.addAttribute(NSAttributedString.Key.link,
+                                      value:(TermsAndPolicy.currentTermsAndPolicy?.termsURL!)! as String, range: foundRange)
         
-        foundRange = attributedString.mutableString.range(of: "Privacy Policy")
-        attributedString.addAttribute(NSAttributedString.Key.link, value:(TermsAndPolicy.currentTermsAndPolicy?.policyURL!)! as String  , range: foundRange)
+        foundRange = attributedString.mutableString.range(of: NSLocalizedStrings("Privacy Policy", comment: ""))
+        attributedString.addAttribute(NSAttributedString.Key.link,
+                                      value:(TermsAndPolicy.currentTermsAndPolicy?.policyURL!)! as String  , range: foundRange)
         
         termsAndCondition?.attributedText = attributedString
         
-        termsAndCondition?.linkTextAttributes = convertToOptionalNSAttributedStringKeyDictionary([NSAttributedString.Key.foregroundColor.rawValue: Utilities.getUIColorFromHex(0x007CBA)])
+      termsAndCondition?.linkTextAttributes =
+        convertToOptionalNSAttributedStringKeyDictionary([NSAttributedString.Key.foregroundColor.rawValue: Utilities.getUIColorFromHex(0x007CBA),
+                                                          NSAttributedString.Key.font.rawValue : "HelveticaNeue-Medium"])
         
     }
     
@@ -201,7 +230,10 @@ class SignUpViewController: UIViewController{
      
      */
     func showAlertMessages(textMessage: String){
-        UIUtilities.showAlertMessage("", errorMessage: NSLocalizedString(textMessage, comment: ""), errorAlertActionTitle: NSLocalizedString("OK", comment: ""), viewControllerUsed: self)
+        UIUtilities.showAlertMessage("",
+                                     errorMessage: NSLocalizedStrings(textMessage, comment: ""),
+                                     errorAlertActionTitle: kTitleOKCapital,
+                                     viewControllerUsed: self)
     }
     
     
@@ -267,7 +299,19 @@ class SignUpViewController: UIViewController{
      
      */
     @IBAction func buttonInfoAction(_ sender: Any){
-        UIUtilities.showAlertWithTitleAndMessage(title: "Why Register?", message: kRegistrationInfoMessage as NSString)
+//      UIUtilities.showAlertWithTitleAndMessage(title: kWhyRegisterText as NSString, message: kRegistrationInfoMessage as NSString)
+        
+        let consOk = kTitleOk1.dropLast()
+               print("\(consOk)")
+        var rootViewController = UIApplication.shared.keyWindow?.rootViewController
+        if let navigationController = rootViewController as? UINavigationController {
+            rootViewController = navigationController.viewControllers.first
+        }
+        if let tabBarController = rootViewController as? UITabBarController {
+            rootViewController = tabBarController.selectedViewController
+        }
+        
+        UIUtilities.showAlertMessage((kWhyRegisterText as NSString) as String, errorMessage: (kRegistrationInfoMessage as NSString) as String, errorAlertActionTitle: "\(consOk)", viewControllerUsed: rootViewController)
     }
 
     
@@ -344,7 +388,8 @@ extension SignUpViewController: UITextViewDelegate{
         
         var link: String =   (TermsAndPolicy.currentTermsAndPolicy?.termsURL)! //kTermsAndConditionLink
         var title: String = kNavigationTitleTerms
-        if (URL.absoluteString == TermsAndPolicy.currentTermsAndPolicy?.policyURL  && characterRange.length == String("Privacy Policy").count ) {
+        if (URL.absoluteString == TermsAndPolicy.currentTermsAndPolicy?.policyURL  &&
+                characterRange.length == String(NSLocalizedStrings("Privacy Policy", comment: "")).count ) {
             //kPrivacyPolicyLink
             print("terms")
             link =  (TermsAndPolicy.currentTermsAndPolicy?.policyURL)! // kPrivacyPolicyLink
@@ -443,6 +488,7 @@ extension SignUpViewController: UITextFieldDelegate{
         print(textField.tag)
         if textField.tag == TextFieldTags.EmailId.rawValue{
             textField.keyboardType = .emailAddress
+            textField.isSecureTextEntry = false
         }
     }
     
@@ -462,6 +508,7 @@ extension SignUpViewController: UITextFieldDelegate{
                 return true
             }
         } else if tag == .Password || tag == .ConfirmPassword {
+            textField.isSecureTextEntry = true
             if finalString.count > 64 {
                 return false
             } else {
@@ -496,14 +543,17 @@ extension SignUpViewController: UITextFieldDelegate{
         */
         case .EmailId:
             self.user.emailId = textField.text!
+            textField.isSecureTextEntry = false
             break
             
         case .Password:
             self.user.password = textField.text!
+            textField.isSecureTextEntry = true
             break
             
         case .ConfirmPassword:
             confirmPassword = textField.text!
+            textField.isSecureTextEntry = true
             break
             
 //        default:
@@ -544,7 +594,8 @@ extension SignUpViewController: NMWebServiceDelegate {
     func failedRequest(_ manager: NetworkManager, requestName: NSString, error: NSError) {
         Logger.sharedInstance.info("requestname : \(requestName)")
         self.removeProgressIndicator()
-        UIUtilities.showAlertWithTitleAndMessage(title: NSLocalizedString(kErrorTitle, comment: "") as NSString, message: error.localizedDescription as NSString)
+        let errorMsg = base64DecodeError(error.localizedDescription)
+        UIUtilities.showAlertWithTitleAndMessage(title: NSLocalizedStrings(kErrorTitle, comment: "") as NSString, message: errorMsg as NSString)
     }
 }
 

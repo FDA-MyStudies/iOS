@@ -40,11 +40,15 @@ open class FDASlideMenuViewController: SlideMenuController {
             let studyStoryBoard = UIStoryboard.init(name: kStudyStoryboard, bundle: Bundle.main)
             
             if Study.currentStudy?.userParticipateState.status == .inProgress {
-                let studyTabBarController = studyStoryBoard.instantiateViewController(withIdentifier: kStudyDashboardTabbarControllerIdentifier) as! StudyDashboardTabbarViewController
+                let studyTabBarController =
+                    studyStoryBoard.instantiateViewController(withIdentifier: kStudyDashboardTabbarControllerIdentifier) as!
+                    StudyDashboardTabbarViewController
                 self.mainViewController = studyTabBarController
             }
             else {
-                let studyHomeViewController = studyStoryBoard.instantiateViewController(withIdentifier: String(describing: kStudyHomeViewControllerIdentifier)) as! UINavigationController
+                let studyHomeViewController =
+                    studyStoryBoard.instantiateViewController(withIdentifier: String(describing: kStudyHomeViewControllerIdentifier)) as!
+                    UINavigationController
                 self.mainViewController = studyHomeViewController
             }
             
@@ -168,6 +172,6 @@ extension UIViewController {
             }
             viewController = viewController?.parent
         }
-        return nil;
+        return nil
     }
 }

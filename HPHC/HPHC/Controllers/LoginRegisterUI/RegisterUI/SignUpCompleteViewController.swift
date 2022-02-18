@@ -30,6 +30,10 @@ class SignUpCompleteViewController: UIViewController{
     @IBOutlet var buttonNext: UIButton?
     var shouldCreateMenu: Bool = true
     var viewLoadFrom: CompletionLoadFrom = .signup
+    let kPasscodeDoYouWish =
+        NSLocalizedStrings(
+            "Do you wish to set up Passcode or FaceID/TouchID protection for this app? (You can do this later in the My Account area).",
+            comment: "")
     
     // MARK:- ViewController Lifecycle
     override func viewDidLoad() {
@@ -37,7 +41,7 @@ class SignUpCompleteViewController: UIViewController{
         
         //Used to set border color for bottom view
         buttonNext?.layer.borderColor = kUicolorForButtonBackground
-        self.title = NSLocalizedString("", comment: "")
+        self.title = NSLocalizedStrings("", comment: "")
         
         
         let settings: Settings? = Settings.init()
@@ -49,11 +53,10 @@ class SignUpCompleteViewController: UIViewController{
         
         self.hideViews()
         
-        
         UIUtilities.showAlertMessageWithTwoActionsAndHandler("",
-                                                             errorMessage: "Do you wish to set up Passcode or FaceID/TouchID protection for this app? (You can do this later in the My Account area).",
-                                                             errorAlertActionTitle: "No",
-                                                             errorAlertActionTitle2: "Yes",
+                                                             errorMessage: kPasscodeDoYouWish,
+                                                             errorAlertActionTitle: kNo,
+                                                             errorAlertActionTitle2: kYes,
                                                              viewControllerUsed: self,
                                                              action1: {
                                                                 //No
@@ -209,7 +212,8 @@ extension SignUpCompleteViewController: NMWebServiceDelegate {
         Logger.sharedInstance.info("requestname : \(requestName)")
         self.removeProgressIndicator()
         
-        UIUtilities.showAlertWithTitleAndMessage(title: NSLocalizedString(kErrorTitle, comment: "") as NSString, message: error.localizedDescription as NSString)
+        let errorMsg = base64DecodeError(error.localizedDescription)
+        UIUtilities.showAlertWithTitleAndMessage(title: NSLocalizedStrings(kErrorTitle, comment: "") as NSString, message: errorMsg as NSString)
     }
 }
 

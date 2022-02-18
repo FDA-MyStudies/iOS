@@ -23,9 +23,8 @@ import UIKit
 
 let kDefaultEmail = "xyz@gmail.com"
 let kSignupCompletionSegue = "signupCompletionSegue"
-let kAlertMessageText = "Message"
-let kAlertMessageVerifyEmail = "Please verify your email address."
-let kAlertMessageResendEmail = "An email verification code has been sent to your registered email."
+let kAlertMessageVerifyEmail = NSLocalizedStrings("Please verify your email address.", comment: "")
+let kAlertMessageResendEmail = NSLocalizedStrings("An email verification code has been sent to your registered email.", comment: "")
 
 let kChangePasswordViewControllerIdentifier = "ChangePasswordViewController"
 
@@ -59,7 +58,7 @@ class VerificationViewController: UIViewController{
         
         //Used to set border color for bottom view
         buttonContinue?.layer.borderColor = kUicolorForButtonBackground
-        self.title = NSLocalizedString("", comment: "")
+        self.title = NSLocalizedStrings("", comment: "")
         
         if labelMessage != nil {
             labelVerificationMessage?.text = labelMessage
@@ -132,7 +131,9 @@ class VerificationViewController: UIViewController{
     @IBAction func continueButtonAction(_ sender: Any) {
         
         if (textFieldVerificationCode?.text?.count)! > 0 {
-             UserServices().verifyEmail(emailId: User.currentUser.emailId!,  verificationCode:(self.textFieldVerificationCode?.text)! , delegate: self)
+             UserServices().verifyEmail(emailId: User.currentUser.emailId!,
+                                        verificationCode:(self.textFieldVerificationCode?.text)! ,
+                                        delegate: self)
         } else {
              self.showAlertMessages(textMessage: kMessageVerificationCodeEmpty)
         }
@@ -186,7 +187,10 @@ class VerificationViewController: UIViewController{
      
      */
     func showAlertMessages(textMessage: String){
-        UIUtilities.showAlertMessage("", errorMessage: NSLocalizedString(textMessage, comment: ""), errorAlertActionTitle: NSLocalizedString("OK", comment: ""), viewControllerUsed: self)
+        UIUtilities.showAlertMessage("",
+                                     errorMessage: NSLocalizedStrings(textMessage, comment: ""),
+                                     errorAlertActionTitle: kTitleOKCapital,
+                                     viewControllerUsed: self)
     }
 
     
@@ -288,9 +292,9 @@ extension VerificationViewController: NMWebServiceDelegate {
         } else {
             
             if requestName as String == RegistrationMethods.resendConfirmation.description {
-                UIUtilities.showAlertWithTitleAndMessage(title: NSLocalizedString(kAlertMessageText, comment: "") as NSString, message:NSLocalizedString(kAlertMessageResendEmail, comment: "") as NSString)
+                UIUtilities.showAlertWithTitleAndMessage(title: kTitleMessage as NSString, message:kAlertMessageResendEmail as NSString)
             } else {
-                UIUtilities.showAlertWithTitleAndMessage(title: NSLocalizedString(kAlertMessageText, comment: "") as NSString, message: NSLocalizedString(kAlertMessageVerifyEmail, comment: "") as NSString)
+                UIUtilities.showAlertWithTitleAndMessage(title: kTitleMessage as NSString, message: kAlertMessageVerifyEmail as NSString)
             }
         }
     }
@@ -300,12 +304,16 @@ extension VerificationViewController: NMWebServiceDelegate {
         
         self.removeProgressIndicator()
         if error.code == 403 { //unauthorized
-            UIUtilities.showAlertMessageWithActionHandler(kErrorTitle, message: error.localizedDescription, buttonTitle: kTitleOk, viewControllerUsed: self, action: {
+            UIUtilities.showAlertMessageWithActionHandler(kErrorTitle,
+                                                          message: error.localizedDescription,
+                                                          buttonTitle: kTitleOk,
+                                                          viewControllerUsed: self,
+                                                          action: {
                 _ = self.navigationController?.popToRootViewController(animated: true)
             })
         } else {
-            
-            UIUtilities.showAlertWithTitleAndMessage(title: NSLocalizedString(kErrorTitle, comment: "") as NSString, message: error.localizedDescription as NSString)
+            let errorMsg = base64DecodeError(error.localizedDescription)
+            UIUtilities.showAlertWithTitleAndMessage(title: kErrorTitle as NSString, message: errorMsg as NSString)
         }
     }
 }
@@ -317,7 +325,9 @@ extension VerificationViewController: ORKTaskViewControllerDelegate{
         return true
     }
     
-    public func taskViewController(_ taskViewController: ORKTaskViewController, didFinishWith reason: ORKTaskViewControllerFinishReason, error: Error?) {
+    public func taskViewController(_ taskViewController: ORKTaskViewController,
+                                   didFinishWith reason: ORKTaskViewControllerFinishReason,
+                                   error: Error?) {
         
         //var taskResult: Any?
         
@@ -345,5 +355,3 @@ extension VerificationViewController: ORKTaskViewControllerDelegate{
         
     }
 }
-
-

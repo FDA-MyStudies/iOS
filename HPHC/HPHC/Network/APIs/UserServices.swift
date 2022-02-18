@@ -58,7 +58,9 @@ let kUserConsentStatus =  "consentStatus"
 let kUserOldPassword = "currentPassword"
 let kUserNewPassword = "newPassword"
 let kUserIsTempPassword = "resetPassword"
-
+let kUserDeviceLanguage = "userDeviceLanguage"
+let kUserPreviousDeviceLanguage = "userPreviousDeviceLanguage"
+let kShowOfflineLanguageAlert = "showOfflineLanguageAlert"
 
 let kPasscodeIsPending = "PASSCODESETUP"
 let kShowNotification = "SHOWNOTIFICATION"
@@ -286,7 +288,7 @@ class UserServices: NSObject {
         let token = Utilities.getBundleIdentifier()
         let info = [kAppVersion: version,
                     kOSType: "ios",
-                    kDeviceToken: token
+                    kDeviceToken: "" // Was Changed after Backend Issue 
         ]
         
         let params = [
@@ -904,7 +906,9 @@ class UserServices: NSObject {
         
         let headerParams = self.failedRequestServices.headerParams == nil ? [:] : self.failedRequestServices.headerParams
 //
-        self.sendRequestWith(method: self.failedRequestServices.method, params: (self.requestParams == nil ?  nil : self.requestParams) , headers: headerParams)
+        self.sendRequestWith(method:self.failedRequestServices.method,
+                             params:(self.requestParams==nil ? nil : self.requestParams),
+                             headers: headerParams)
         
     }
     
@@ -1010,7 +1014,7 @@ extension UserServices: NMWebServiceDelegate{
                 
                 //error.localizedDescription = "Your Session is Expired"
                 
-                let errorInfo = ["NSLocalizedDescription": "Your Session is Expired"]
+                let errorInfo = ["NSLocalizedDescription": NSLocalizedStrings("Your Session is Expired", comment: "")]
                 
                 let localError  = NSError.init(domain: error.domain, code: 403, userInfo: errorInfo)
                 
@@ -1032,13 +1036,15 @@ extension UserServices: NMWebServiceDelegate{
                 
                 var errorInfo = error.userInfo
                 var localError = error
+                
                 if error.code == 403 {
-                    errorInfo = ["NSLocalizedDescription": "Your Session is Expired"]
+                    errorInfo = ["NSLocalizedDescription": NSLocalizedStrings("Your Session is Expired", comment: "")]
                     localError  = NSError.init(domain: error.domain, code: 403, userInfo: errorInfo)
                 } else if error.code == 400,
-                    requestName as String == RegistrationMethods.feedback.description
+                          requestName as String == RegistrationMethods.feedback.description
                     || requestName as String == RegistrationMethods.contactUs.description {
-                    errorInfo = ["NSLocalizedDescription": "Sorry, an error occurred and your feedback could not be sent to the organization. Please retry in some time."]
+                    let errorMsg = "Sorry, an error occurred and your feedback could not be sent to the organization. Please retry in some time."
+                    errorInfo = ["NSLocalizedDescription": NSLocalizedStrings(errorMsg, comment: "")]
                     localError  = NSError.init(domain: error.domain, code: 400, userInfo: errorInfo)
                 }
                 
@@ -1052,7 +1058,10 @@ extension UserServices: NMWebServiceDelegate{
                 if (error.code == NoNetworkErrorCode) {
                     //save in database
                     print("save in database")
-                    DBHandler.saveRequestInformation(params: self.requestParams, headers: self.headerParams, method: requestName as String, server: "registration")
+                    DBHandler.saveRequestInformation(params: self.requestParams,
+                                                     headers: self.headerParams,
+                                                     method: requestName as String,
+                                                     server: "registration")
                 }
             }
         }

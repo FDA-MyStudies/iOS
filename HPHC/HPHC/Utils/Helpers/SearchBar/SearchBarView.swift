@@ -49,7 +49,8 @@ class SearchBarView: UIView {
         
         view.viewBackground?.layer.cornerRadius = 3.0
         view.viewBackground?.clipsToBounds = true
-        
+        view.segementToken?.setTitle(NSLocalizedStrings("token", comment: ""),forSegmentAt: 0)
+        view.segementToken?.setTitle(NSLocalizedStrings("keyword", comment: ""), forSegmentAt: 1)
         return view
     }
     
@@ -67,7 +68,7 @@ class SearchBarView: UIView {
         if sender?.selectedSegmentIndex == 0 {
             let text = textFieldSearch?.text
             textFieldSearch?.text = ""
-            textFieldSearch?.placeholder = "Enter a token"
+            textFieldSearch?.placeholder = kEnterToken
             textFieldSearch?.resignFirstResponder()
             textFieldSearch?.becomeFirstResponder()
             textFieldSearch?.text = text
@@ -75,7 +76,7 @@ class SearchBarView: UIView {
         } else if sender?.selectedSegmentIndex == 1 {
             let text = textFieldSearch?.text
             textFieldSearch?.text = ""
-            textFieldSearch?.placeholder = "Enter keyword(s)"
+            textFieldSearch?.placeholder = kEnterKeyword
             textFieldSearch?.resignFirstResponder()
             textFieldSearch?.becomeFirstResponder()
             textFieldSearch?.text = text

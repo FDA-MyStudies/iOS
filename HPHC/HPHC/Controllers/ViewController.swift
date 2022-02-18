@@ -21,7 +21,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 import UIKit
 import ResearchKit
 
-//let user = User()
+// let user = User()
 let activityBuilder:ActivityBuilder? = ActivityBuilder.currentActivityBuilder
 let consentbuilder:ConsentBuilder? = ConsentBuilder()
 //var user = User.currentUser
@@ -41,13 +41,10 @@ class ViewController: UIViewController {
         
         self.buildTask()
        // self.kickCounterTaskTest()
+         
+        // user.bookmarkStudy(studyId: "121")
         
-        
-        
-        
-        //user.bookmarkStudy(studyId: "121")
-        
-        //user.updateStudyStatus(studyId: "121", status:.yetToJoin)
+        // user.updateStudyStatus(studyId: "121", status:.yetToJoin)
         
        // user.bookmarkActivity(studyId: "121", activityId: "151")
         
@@ -56,9 +53,8 @@ class ViewController: UIViewController {
         //not available
 //        let start = "2017-03-01"
 //        let end = "2017-03-05"
-        
-        
-        //run completed
+         
+        // run completed
         let start = "2017-01-26 10:00:00"
         let end = "2017-01-30"
         let runtime = "2017-03-12"
@@ -72,9 +68,7 @@ class ViewController: UIViewController {
         let sdateFormatter = DateFormatter()
         sdateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
         let startDate:Date = sdateFormatter.date(from: start)!
-        
-        
-        
+         
         let rdateFormatter = DateFormatter()
         rdateFormatter.dateFormat = "yyyy-MM-dd"
         let rendDate:Date = rdateFormatter.date(from: runtime)!
@@ -84,19 +78,15 @@ class ViewController: UIViewController {
         schedular.endTime = endDate
         schedular.lastRunTime = rendDate
         
-        //schedular.setDailyRuns()
-        //schedular.setWeeklyRuns()
-        //schedular.setMonthlyRuns()
-        //schedular.setDailyFrequenyRuns()
+        // schedular.setDailyRuns()
+        // schedular.setWeeklyRuns()
+        // schedular.setMonthlyRuns()
+        // schedular.setDailyFrequenyRuns()
         schedular.setScheduledRuns()
         
     }
-    
-    
-    
     // MARK: methods
-    
-    
+     
     func kickCounterTaskTest()   {
         
         let fetalKickCouterTask:FetalKickCounterTask? = FetalKickCounterTask()
@@ -114,27 +104,23 @@ class ViewController: UIViewController {
         taskViewController?.navigationBar.prefersLargeTitles = false
         taskViewController?.modalPresentationStyle = .fullScreen
         present(taskViewController!, animated: true, completion: nil)
-
-        
+ 
     }
-    
-    
-    
     func buildTask()  {
         
         // let filePath  = Bundle.main.path(forResource: "LatestActive_Taskdocument", ofType: "json")
         
-        //let filePath  = Bundle.main.path(forResource: "ActiveTask", ofType: "json")
+        // let filePath  = Bundle.main.path(forResource: "ActiveTask", ofType: "json")
         
          let filePath  = Bundle.main.path(forResource: "TaskSchema", ofType: "json")
         
-        //let filePath  = Bundle.main.path(forResource: "Acivity_Question", ofType: "json")
+        // let filePath  = Bundle.main.path(forResource: "Acivity_Question", ofType: "json")
         
         let data = NSData(contentsOfFile: filePath!)
         
         
         do {
-            let dataDict = try JSONSerialization.jsonObject(with: data! as Data, options: []) as? Dictionary<String,Any>
+            let dataDict = try JSONSerialization.jsonObject(with: data! as Data, options: []) as? Dictionary<String, Any>
             
             if  Utilities.isValidObject(someObject: dataDict as AnyObject?) && (dataDict?.count)! > 0 {
                 
@@ -143,15 +129,11 @@ class ViewController: UIViewController {
                 let taskViewController:ORKTaskViewController?
                 
                 if Utilities.isValidObject(someObject: dataDict?["Result"] as? Dictionary<String, Any> as AnyObject?){
-                    
-                    
+                     
                      activityBuilder?.initActivityWithDict(dict: dataDict?["Result"] as! Dictionary<String, Any>)
-                    
-                   
-                    
+                     
                      task = activityBuilder?.createTask()
-                    
-                
+                     
                    // consentbuilder?.initWithMetaData(metaDataDict:dataDict?["Result"] as! Dictionary<String, Any> )
                    // task = consentbuilder?.createConsentTask()
                     
@@ -174,18 +156,16 @@ class ViewController: UIViewController {
         } catch {
             print("json error: \(error.localizedDescription)")
         }
-        
-      
-        
     }
-    
-    
-    
-    
-    
-    func addResources()  {
+     
+    func addResources() {
+        var plistPath = Bundle.main.path(forResource: "Resources", ofType: ".plist", inDirectory: nil)
+        let localeDefault = getLanguageLocale()
+        if !(localeDefault.hasPrefix("es") || localeDefault.hasPrefix("en")) {
+          plistPath = Bundle.main.path(forResource: "Resources", ofType: ".plist", inDirectory: nil, forLocalization: "Base")
+        }
         
-        if let path = Bundle.main.path(forResource: "Resources", ofType: "plist") {
+        if let path = plistPath {
             
             if let responseArray = NSArray(contentsOfFile: path) {
                 
@@ -217,32 +197,38 @@ class ViewController: UIViewController {
         }
         
     }
-    
-    
-    
+     
     func userProfile()  {
-        
-        if let path = Bundle.main.path(forResource: "UserProfile", ofType: "plist") {
+        var plistPath = Bundle.main.path(forResource: "UserProfile", ofType: ".plist", inDirectory: nil)
+        let localeDefault = getLanguageLocale()
+        if !(localeDefault.hasPrefix("es") || localeDefault.hasPrefix("en")) {
+          plistPath = Bundle.main.path(forResource: "UserProfile", ofType: ".plist", inDirectory: nil, forLocalization: "Base")
+        }
+        if let path = plistPath {
             if let dict = NSDictionary(contentsOfFile: path) as? [String:Any] {
                 user.setUser(dict:dict as NSDictionary)
                 
                 Logger.sharedInstance.debug(dict)
                 Logger.sharedInstance.info(dict)
                 Logger.sharedInstance.error(dict)
-                
-                
+                 
             }
         }
         
     }
     
     func setPrefereneces()  {
+        var plistPath = Bundle.main.path(forResource: "UserPreferences", ofType: ".plist", inDirectory: nil)
+        let localeDefault = getLanguageLocale()
+        if !(localeDefault.hasPrefix("es") || localeDefault.hasPrefix("en")) {
+          plistPath = Bundle.main.path(forResource: "UserPreferences", ofType: ".plist", inDirectory: nil, forLocalization: "Base")
+        }
         
-        if let path = Bundle.main.path(forResource: "UserPreferences", ofType: "plist") {
+        if let path = plistPath {
             if let dict = NSDictionary(contentsOfFile: path) as? [String:Any] {
                 user.setUser(dict:dict as NSDictionary)
                 
-                //studies
+                // studies
                 let studies = dict[kStudies] as! Array<Dictionary<String, Any>>
                 
                 for study in studies {
@@ -250,33 +236,24 @@ class ViewController: UIViewController {
                     user.participatedStudies.append(participatedStudy)
                 }
                 
-                //activities
+                // activities
                 _ = dict[kActivites]  as! Array<Dictionary<String, Any>>
 //                for activity in activites {
 //                   // let participatedActivity = UserActivityStatus(detail: activity)
-//                    //user.participatedActivites.append(participatedActivity)
+//                    // user.participatedActivites.append(participatedActivity)
 //                }
                 
             }
         }
         
     }
-    
-    
-    
-    
-    
-    
-    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-    
+     
 }
-
-
+ 
 extension ViewController:ORKTaskViewControllerDelegate{
     // MARK:ORKTaskViewController Delegate
     
@@ -285,9 +262,10 @@ extension ViewController:ORKTaskViewControllerDelegate{
         return true
     }
     
-    public func taskViewController(_ taskViewController: ORKTaskViewController, didFinishWith reason: ORKTaskViewControllerFinishReason, error: Error?) {
-        
-        
+    public func taskViewController(_ taskViewController: ORKTaskViewController,
+                                   didFinishWith reason: ORKTaskViewControllerFinishReason,
+                                   error: Error?) {
+         
         var taskResult:Any?
         
         switch reason {
@@ -307,40 +285,38 @@ extension ViewController:ORKTaskViewControllerDelegate{
             
             if taskViewController.task?.identifier == "ConsentTask"{
                 
-            }
-            else{
+            } else{
                 activityBuilder?.activity?.restortionData = taskViewController.restorationData
             }
         }
         
         if  taskViewController.task?.identifier == "ConsentTask"{
             consentbuilder?.consentResult?.initWithORKTaskResult(taskResult:taskViewController.result )
-        }
-        else{
+        } else{
             activityBuilder?.actvityResult?.initWithORKTaskResult(taskResult: taskViewController.result)
         }
-        
-        
         taskViewController.dismiss(animated: true, completion: nil)
         
     }
     
-    func taskViewController(_ taskViewController: ORKTaskViewController, stepViewControllerWillAppear stepViewController: ORKStepViewController) {
+    func taskViewController(_ taskViewController: ORKTaskViewController,
+                            stepViewControllerWillAppear stepViewController: ORKStepViewController) {
         
         if (taskViewController.result.results?.count)! > 1{
             
             
             if activityBuilder?.actvityResult?.result?.count == taskViewController.result.results?.count{
                 activityBuilder?.actvityResult?.result?.removeLast()
-            }
-            else{
+            } else{
             
             if (activityBuilder?.actvityResult?.result?.count)! < (taskViewController.result.results?.count)!{
             
-            let orkStepResult:ORKStepResult? = taskViewController.result.results?[(taskViewController.result.results?.count)! - 2] as! ORKStepResult?
+            let orkStepResult:ORKStepResult? = taskViewController.result.results?[(taskViewController.result.results?.count)! - 2]
+                as! ORKStepResult?
             let activityStepResult:ActivityStepResult? = ActivityStepResult()
             
-            activityStepResult?.initWithORKStepResult(stepResult: orkStepResult! as ORKStepResult , activityType:(activityBuilder?.actvityResult?.activity?.type)!)
+            activityStepResult?.initWithORKStepResult(stepResult: orkStepResult! as ORKStepResult,
+                                                      activityType:(activityBuilder?.actvityResult?.activity?.type)!)
             activityBuilder?.actvityResult?.result?.append(activityStepResult!)
            
             }
@@ -349,7 +325,8 @@ extension ViewController:ORKTaskViewControllerDelegate{
     }
     
     // MARK:StepViewController Delegate
-    public func stepViewController(_ stepViewController: ORKStepViewController, didFinishWith direction: ORKStepViewControllerNavigationDirection){
+    public func stepViewController(_ stepViewController: ORKStepViewController,
+                                   didFinishWith direction: ORKStepViewControllerNavigationDirection){
         
     }
     
@@ -363,17 +340,13 @@ extension ViewController:ORKTaskViewControllerDelegate{
         
         if step.identifier == "FetalKickCounter" {
             
-            let ttController = self.storyboard?.instantiateViewController(withIdentifier: "FetalKickCounterStepViewController") as! FetalKickCounterStepViewController
+            let ttController = self.storyboard?.instantiateViewController(withIdentifier: "FetalKickCounterStepViewController")
+                as! FetalKickCounterStepViewController
             ttController.step = step
-            
             
             return ttController
         } else {
             return nil
         }
     }
-    
-    
 }
-
-

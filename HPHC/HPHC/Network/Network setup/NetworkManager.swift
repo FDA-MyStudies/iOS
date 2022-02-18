@@ -77,7 +77,7 @@ protocol NMAuthChallengeDelegate{
 class NetworkManager {
     
     static var instance : NetworkManager? = nil
-    var networkAvailability : Bool = true
+    var networkAvailability : Bool = false
     var reachability : Reachability? = nil
     
     
@@ -86,8 +86,9 @@ class NetworkManager {
     }
     
     init() {
-        
+    
         reachability =  try? Reachability()
+        print("network available init() and reachability \(reachability)")
         NotificationCenter.default.addObserver(self, selector: #selector(reachabilityChanged(_:)),
                                                name: Notification.Name.reachabilityChanged, object: nil)
         try? reachability?.startNotifier()
@@ -99,32 +100,70 @@ class NetworkManager {
     }
     
     @objc func reachabilityChanged(_ notification: Notification) {
-        
-        if self.reachability!.connection == .wifi
-            || self.reachability!.connection == .cellular {
-            networkAvailability = true
-        } else {
-            networkAvailability = false
+            
+            let oldLocale = getLanguageLocale()
+            print("Krishna oldLocale in rechabilityChanged \(oldLocale)")
+          
+            if self.reachability!.connection == .wifi
+                || self.reachability!.connection == .cellular {
+                networkAvailability = true
+                // change local if needed on network connection change
+                setLanguageLocale()
+                if oldLocale != getLanguageLocale() {
+                    resetLanguage()
+                }
+                
+            } else {
+                networkAvailability = false
+                // change local if needed on network connection change
+                setLanguageLocale()
+            }
+            
+            print("Krishna reachabilityChanged networkAvailability set to \(networkAvailability) \n\n")
+            SyncUpdate.currentSyncUpdate.updateData(isReachable: networkAvailability)
         }
-        SyncUpdate.currentSyncUpdate.updateData(isReachable: networkAvailability)
-    }
+
+    func resetLanguage() {
+                    
+            localeBundle = AppDelegate.selectedLocale()
+            
+            // if let name = UIApplication.shared.topMostViewController()?.storyboard?.value(forKey: "name") {
+            if let name = UIApplication.shared.topMostViewController()?.visibViewController?.storyboard?.value(forKey: "name") {
+                
+                print("storyboard in view is \(name)")
+                
+                // Bundle(path: Bundle.main.path(forResource: "es", ofType: "lproj") ?? "en")
+                let sb = UIStoryboard(name: name as! String, bundle:nil)
+                let vc = sb.instantiateInitialViewController()
+                
+                let appdelegate = UIApplication.shared.delegate as! AppDelegate
+                appdelegate.window?.rootViewController = vc
+            }
+        }
     
-    func composeRequest(_ requestName: NSString, requestType : RequestType , method : HTTPMethod , params : NSDictionary?, headers : NSDictionary?, delegate : NMWebServiceDelegate){
+    func composeRequest(_ requestName: NSString,
+                        requestType : RequestType ,
+                        method : HTTPMethod ,
+                        params : NSDictionary?,
+                        headers : NSDictionary?,
+                        delegate : NMWebServiceDelegate){
         
-        let networkWSHandler = NetworkWebServiceHandler(delegate: delegate, challengeDelegate: UIApplication.shared.delegate as? NMAuthChallengeDelegate)
+        let networkWSHandler = NetworkWebServiceHandler(delegate: delegate,
+                                                        challengeDelegate: UIApplication.shared.delegate as? NMAuthChallengeDelegate)
         networkWSHandler.networkManager = self
         networkWSHandler.composeRequestFor(requestName, requestType: requestType, method: method, params: params, headers: headers)
         
     }
     
-    func composeRequest(_ configuration:NetworkConfiguration, method: Method, params : NSDictionary?, headers : NSDictionary?, delegate : NMWebServiceDelegate){
+    func composeRequest(_ configuration:NetworkConfiguration,
+                        method: Method,
+                        params : NSDictionary?,
+                        headers : NSDictionary?,
+                        delegate : NMWebServiceDelegate){
         
-        let networkWSHandler = NetworkWebServiceHandler(delegate: delegate, challengeDelegate: UIApplication.shared.delegate as? NMAuthChallengeDelegate)
+        let networkWSHandler = NetworkWebServiceHandler(delegate: delegate,
+                                                        challengeDelegate: UIApplication.shared.delegate as? NMAuthChallengeDelegate)
         networkWSHandler.networkManager = self
         networkWSHandler.composeRequest(configuration, method: method, params: params, headers: headers)
-        
     }
-    
-    
-    
 }

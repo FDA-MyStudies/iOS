@@ -59,9 +59,9 @@ class StudyDashboardTabbarViewController: UITabBarController {
             self.present(mailComposerVC, animated: true, completion: nil)
         } else {
             
-            let alert = UIAlertController(title: NSLocalizedString(kTitleError, comment: ""),message: "",preferredStyle: UIAlertController.Style.alert)
+            let alert = UIAlertController(title: kTitleError,message: "",preferredStyle: UIAlertController.Style.alert)
             
-            alert.addAction(UIAlertAction.init(title: NSLocalizedString(kTitleOk, comment: ""), style: .default, handler: { (action) in
+            alert.addAction(UIAlertAction.init(title: kTitleOk, style: .default, handler: { (action) in
                 
                 self.dismiss(animated: true, completion: nil)
                 

@@ -23,11 +23,11 @@ import RealmSwift
 
 class DBHandler: NSObject {
     
-    private static var realm: Realm = {
+    private static var realm: Realm? = {
         let key = FDAKeychain.shared[kRealmEncryptionKeychainKey]
         let data = Data.init(base64Encoded: key!)
         let encryptionConfig = Realm.Configuration(encryptionKey: data)
-        return try! Realm(configuration: encryptionConfig)
+      return try? Realm(configuration: encryptionConfig)
     }()
     
     fileprivate class func getRealmObject() -> Realm? {
@@ -153,11 +153,11 @@ class DBHandler: NSObject {
     
     class func resetAuthToken(){
         
-        let realm = try! Realm()
-        let dbUsers = realm.objects(DBUser.self)
-        let dbUser = dbUsers.last
+        let realm = try? Realm()
+        let dbUsers = realm?.objects(DBUser.self)
+        let dbUser = dbUsers?.last
         
-        try! realm.write({
+        try? realm?.write({
             
             dbUser?.authToken = ""
             dbUser?.userType =  UserType.AnonymousUser.rawValue//(user.userType?.rawValue)!
@@ -207,6 +207,7 @@ class DBHandler: NSObject {
                     dbStudy?.logoURL = study.logoURL
                     dbStudy?.startDate = study.startDate
                     dbStudy?.endEnd = study.endEnd
+                    dbStudy?.studyLanguage = study.studyLanguage
                     dbStudy?.status = study.status.rawValue
                     dbStudy?.enrolling = study.studySettings.enrollingAllowed
                     dbStudy?.rejoin = study.studySettings.rejoinStudyAfterWithdrawn
@@ -256,6 +257,7 @@ class DBHandler: NSObject {
         dbStudy.version = study.version
         dbStudy.updatedVersion = study.version
         dbStudy.logoURL = study.logoURL
+        dbStudy.studyLanguage = study.studyLanguage
         dbStudy.startDate = study.startDate
         dbStudy.endEnd = study.endEnd
         dbStudy.enrolling = study.studySettings.enrollingAllowed
@@ -298,6 +300,7 @@ class DBHandler: NSObject {
             study.logoURL = dbStudy.logoURL
             study.startDate = dbStudy.startDate
             study.endEnd = dbStudy.endEnd
+            study.studyLanguage = dbStudy.studyLanguage ?? "ENGLISH"
             study.status = StudyStatus(rawValue: dbStudy.status!)!
             study.signedConsentVersion = dbStudy.signedConsentVersion
             study.signedConsentFilePath = dbStudy.signedConsentFilePath
@@ -338,7 +341,7 @@ class DBHandler: NSObject {
             
             study.anchorDate = anchorDate
             
-            let withdrawalInfo = StudyWithdrawalConfigration()
+            let withdrawalInfo = StudyWithdrawalConfig()
             withdrawalInfo.message = dbStudy.withdrawalConfigrationMessage
             
             
@@ -371,11 +374,13 @@ class DBHandler: NSObject {
             let dbOverviewSection = DBOverviewSection()
             dbOverviewSection.title = section.title
             dbOverviewSection.link  = section.link
+            dbOverviewSection.overviewlang  = UserDefaults.standard.value(forKey: kUserDeviceLanguage) as? String ?? ""
             dbOverviewSection.imageURL = section.imageURL
             dbOverviewSection.text = section.text
             dbOverviewSection.type = section.type
             dbOverviewSection.studyId = studyId
             dbOverviewSection.sectionId = studyId + "screen\(sectionIndex)"
+            print("Dbhandl overviewlang \(dbOverviewSection.overviewlang) and UDDLang \(UserDefaults.standard.value(forKey: kUserDeviceLanguage))")
             dbStudies.append(dbOverviewSection)
         }
         
@@ -393,7 +398,8 @@ class DBHandler: NSObject {
      @param withdrawalConfigration, instance of StudyWithdrawalConfigration
      @param studyId, study for which configrations are to be updated
      */
-    class func saveWithdrawalConfigration(withdrawalConfigration: StudyWithdrawalConfigration, studyId: String){
+    class func saveWithdrawalConfigration(withdrawalConfigration: StudyWithdrawalConfig,
+                                          studyId: String){
         
         let realm = DBHandler.getRealmObject()!
         let studies =  realm.objects(DBStudy.self).filter("studyId == %@",studyId)
@@ -454,13 +460,21 @@ class DBHandler: NSObject {
         let realm = DBHandler.getRealmObject()!
         let studies =  realm.objects(DBOverviewSection.self).filter("studyId == %@",studyId)
         let study =  realm.objects(DBStudy.self).filter("studyId == %@",studyId).last
-        
+       
         if studies.count > 0 {
-            
+            var secempty = true
             // inilize OverviewSection from database
             var overviewSections: Array<OverviewSection> = []
             for dbSection in studies {
+               
                 let section = OverviewSection()
+                print("overviwe language2 \(dbSection.overviewlang) and kuserdevicelanguage \(UserDefaults.standard.value(forKey: kUserDeviceLanguage))")
+                if dbSection.overviewlang != UserDefaults.standard.value(forKey: kUserDeviceLanguage) as? String ?? ""{
+                    print("overviwe language1 \(dbSection.overviewlang)")
+                    //completionHandler(nil)
+                    secempty = false
+                    break
+                }
                 
                 section.title = dbSection.title
                 section.imageURL = dbSection.imageURL
@@ -470,12 +484,16 @@ class DBHandler: NSObject {
                 overviewSections.append(section)
             }
             
-            //Create Overview object  
+            //Create Overview object
+            if secempty{
             let overview = Overview()
             overview.type = .study
             overview.websiteLink = study?.websiteLink
             overview.sections = overviewSections
             completionHandler(overview)
+            }else{
+                completionHandler(nil)
+            }
             
         }else {
             completionHandler(nil)
@@ -496,15 +514,16 @@ class DBHandler: NSObject {
         try? realm.write({
             
             dbStudy?.updateResources = StudyUpdates.studyResourcesUpdated
-            dbStudy?.updateConsent = StudyUpdates.studyConsentUpdated
+            dbStudy?.updateConsent =  StudyUpdates.studyConsentUpdated
             dbStudy?.updateActivities = StudyUpdates.studyActivitiesUpdated
             dbStudy?.updateInfo = StudyUpdates.studyInfoUpdated
+            print("Db1 metadata dbversion \(dbStudy?.version) updated version \(dbStudy?.updatedVersion) and study update studyversion \(StudyUpdates.studyVersion)")
             if StudyUpdates.studyVersion != nil {
                 dbStudy?.version = StudyUpdates.studyVersion
-                
             }else {
                 dbStudy?.version = dbStudy?.updatedVersion
             }
+            print("Db2 metadata dbversion \(dbStudy?.version) updated version \(dbStudy?.updatedVersion) and study update studyversion \(StudyUpdates.studyVersion)")
         })
     }
     
@@ -591,7 +610,11 @@ class DBHandler: NSObject {
         for activity in activityies {
             
             var dbActivity: DBActivity?
-            if dbActivityArray.count != 0 {
+            print("StudyUpdates.studyLang != StudyUpdates.studyOldLang \(StudyUpdates.studyLang != StudyUpdates.studyOldLang) studylang \(StudyUpdates.studyLang) studyoldlang \(StudyUpdates.studyOldLang)")
+            
+            print("2 save activites actlang -- \(getLanguageLocale()) -- activity language \(Study.currentActivity?.activityLang)")
+            if dbActivityArray.count != 0 , StudyUpdates.studyLang == StudyUpdates.studyOldLang {
+                print("studyUpdate if studyLang  \(StudyUpdates.studyLang) and studlyold lang \(StudyUpdates.studyOldLang)")
                 dbActivity = dbActivityArray.filter({$0.actvityId == activity.actvityId!}).last
                 
                 if dbActivity == nil { //newly added activity
@@ -626,12 +649,19 @@ class DBHandler: NSObject {
                     }
                 }
                 
-            }else {
+            }
+            else {
+                print("studyUpdate else studyLang  \(StudyUpdates.studyLang) and studlyold lang \(StudyUpdates.studyOldLang)")
+                
                 dbActivity = DBHandler.getDBActivity(activity: activity)
                 dbActivities.append(dbActivity!)
                 activityUpdated = true
             }
         }
+        
+      
+            StudyUpdates.studyOldLang = StudyUpdates.studyLang
+       
         
         //keys for alerts
         if activityUpdated {
@@ -641,7 +671,6 @@ class DBHandler: NSObject {
             ud.set(false, forKey: halfCompletionKey)
             ud.set(false, forKey: fullCompletionKey)
         }
-        
         
         
         if dbActivities.count > 0 {
@@ -678,6 +707,7 @@ class DBHandler: NSObject {
         dbActivity.id = activity.studyId! + activity.actvityId!
         dbActivity.taskSubType = activity.taskSubType
         dbActivity.addNewCustomRuns = activity.addNewCustomRuns
+        dbActivity.activityLang = activity.activityLang
         
         let frequencyJSON = ["data": activity.frequencyRuns]
         let frequencyRunsData =  try? JSONSerialization.data(withJSONObject: frequencyJSON, options: JSONSerialization.WritingOptions.prettyPrinted)
@@ -739,7 +769,9 @@ class DBHandler: NSObject {
     class func updateActivityRestortionDataFor(activity: Activity,studyId: String,restortionData: Data?){
         
         let realm = DBHandler.getRealmObject()!
-        let dbActivities = realm.objects(DBActivityRun.self).filter({$0.activityId == activity.actvityId && $0.studyId == studyId && $0.runId == activity.currentRun.runId})
+        let dbActivities = realm.objects(DBActivityRun.self).filter({$0.activityId == activity.actvityId &&
+                                                                        $0.studyId == studyId &&
+                                                                        $0.runId == activity.currentRun.runId})
         let dbActivity = dbActivities.last
         
         try? realm.write({
@@ -955,7 +987,8 @@ class DBHandler: NSObject {
                 }
                 
             } else if oldEXPValue == newEXPValue, oldEXPValue != nil,
-                let lastRun = oldRuns.last, dbActivity.addNewCustomRuns { // TODO: Verify the last run completed status is coming from ug based on ID after user logged out and logged in.
+                let lastRun = oldRuns.last, dbActivity.addNewCustomRuns {
+                // TODO: Verify the last run completed status is coming from ug based on ID after user logged out and logged in.
                 
                 guard !lastRun.isCompleted  else {return}
                 
@@ -1095,7 +1128,7 @@ class DBHandler: NSObject {
     }
     
     class func updateAnchorExternalValue(for dbActivity: DBActivity, externalVaue: String) {
-      try? realm.write {
+      try? realm!.write {
         dbActivity.externalPropertyValue = externalVaue
         }
     }
@@ -1196,6 +1229,7 @@ class DBHandler: NSObject {
         activity.state = dbActivity.state
         activity.taskSubType = dbActivity.taskSubType
         activity.addNewCustomRuns = dbActivity.addNewCustomRuns
+        activity.activityLang = dbActivity.activityLang
         do {
             let frequencyRuns = try JSONSerialization.jsonObject(with: dbActivity.frequencyRunsData!, options: []) as! [String: Any]
             activity.frequencyRuns = frequencyRuns["data"] as! Array<Dictionary<String, Any>>?
@@ -1280,21 +1314,23 @@ class DBHandler: NSObject {
         }
         activity.userParticipationStatus = userStatus
         
-        //append to user class participatesStudies also
-        let activityStatus = User.currentUser.participatedActivites.filter({$0.activityId == activity.actvityId && $0.studyId == activity.studyId}).first
-        let index = User.currentUser.participatedActivites.firstIndex(where: {$0.activityId == activity.actvityId && $0.studyId == activity.studyId })
+        // append to user class participatesStudies also
+        let activityStatus = User.currentUser.participatedActivites.filter({$0.activityId == activity.actvityId &&
+                                                                            $0.studyId == activity.studyId}).first
+        let index = User.currentUser.participatedActivites.firstIndex(where: {$0.activityId == activity.actvityId &&
+                                                                        $0.studyId == activity.studyId })
         if activityStatus != nil {
             if activity.schedulingType == .anchorDate,
                 activity.frequencyType == .Scheduled {
                 userStatus.customScheduleRuns = activityStatus?.customScheduleRuns ?? []
             }
             User.currentUser.participatedActivites[index!] = userStatus
-        }else {
+        }else{
             User.currentUser.participatedActivites.append(userStatus)
         }
         
         if activity.schedulingType == .anchorDate {
-            //save anchor date
+            // save anchor date
             let anchorDate = AnchorDate()
             anchorDate.sourceType = dbActivity.sourceType
             anchorDate.sourceActivityId = dbActivity.sourceActivityId
@@ -1322,18 +1358,17 @@ class DBHandler: NSObject {
             activity.anchorDate = anchorDate
         }
         
-        
         return activity
     }
     
     /**
      loads studyRuns and returns completion and adherence for the runs
      */
-    class func loadAllStudyRuns(studyId: String,completionHandler: @escaping (_ completion: Int,_ adherence: Int) -> ()){
+    class func loadAllStudyRuns(studyId: String, completionHandler: @escaping (_ completion: Int,_ adherence: Int) -> ()){
         
         let date = Date()
         let realm = DBHandler.getRealmObject()!
-        let studyRuns = realm.objects(DBActivityRun.self).filter("studyId == %@",studyId)
+        let studyRuns = realm.objects(DBActivityRun.self).filter("studyId == %@", studyId)
         let completedRuns = studyRuns.filter({$0.isCompleted == true})
         let runsBeforeToday = studyRuns.filter({($0.endDate == nil) || ($0.endDate <= date)})
         var incompleteRuns = runsBeforeToday.count - completedRuns.count
@@ -1362,13 +1397,13 @@ class DBHandler: NSObject {
      @param studyId, study which contains activity
      @param runs, contains list of ActvityRun
      */
-    class func saveActivityRuns(activityId: String,studyId: String,runs: Array<ActivityRun>){
+    class func saveActivityRuns(activityId: String, studyId: String, runs: Array<ActivityRun>){
         
         let realm = DBHandler.getRealmObject()!
-        let dbActivities = realm.objects(DBActivity.self).filter("studyId == %@ && actvityId == %@",studyId,activityId)
+        let dbActivities = realm.objects(DBActivity.self).filter("studyId == %@ && actvityId == %@", studyId,activityId)
         let dbActivity = dbActivities.last
         
-        //save overview
+        // save overview
         let dbActivityRuns = List<DBActivityRun>()
         for sectionIndex in 0...(runs.count-1) {
             
@@ -1390,10 +1425,10 @@ class DBHandler: NSObject {
         
     }
     
-    class func updateRunToComplete(runId: Int,activityId: String,studyId: String){
+    class func updateRunToComplete(runId: Int, activityId: String, studyId: String){
         
         let realm = DBHandler.getRealmObject()!
-        let dbRuns = realm.objects(DBActivityRun.self).filter("studyId == %@ && activityId == %@ && runId == %d",studyId,activityId,runId)
+        let dbRuns = realm.objects(DBActivityRun.self).filter("studyId == %@ && activityId == %@ && runId == %d", studyId,activityId, runId)
         let dbRun = dbRuns.last
         
         try? realm.write({
@@ -1402,12 +1437,12 @@ class DBHandler: NSObject {
         
     }
     
-    class func updateOngoingRunOnComplete(with currentRunId: Int,activityId: String,
+    class func updateOngoingRunOnComplete(with currentRunId: Int, activityId: String,
                                           studyId: String) -> ActivityRun? {
         let realm = DBHandler.getRealmObject()!
         guard let onGoingRun = realm.objects(DBActivityRun.self)
             .filter("studyId == %@ && activityId == %@ && runId == %d",
-                    studyId,activityId,currentRunId).last
+                    studyId,activityId, currentRunId).last
             else {return nil}
         try? realm.write {
             onGoingRun.runId = currentRunId + 1
@@ -1436,11 +1471,13 @@ class DBHandler: NSObject {
     /**
      saves response data for activity and sets the flag to be synched with server
      */
-    class func saveResponseDataFor(activity: Activity,toBeSynced: Bool,data: Dictionary<String,Any>){
+    class func saveResponseDataFor(activity: Activity, toBeSynced: Bool, data: Dictionary<String,Any>){
         
         let realm = DBHandler.getRealmObject()!
         let currentRun = activity.currentRun
-        let dbRuns = realm.objects(DBActivityRun.self).filter({$0.studyId == currentRun?.studyId && $0.activityId == activity.actvityId && $0.runId == currentRun?.runId})
+        let dbRuns = realm.objects(DBActivityRun.self).filter({$0.studyId == currentRun?.studyId &&
+                                                                $0.activityId == activity.actvityId &&
+                                                                $0.runId == currentRun?.runId})
         let dbRun = dbRuns.last
         
         try? realm.write({
@@ -1450,7 +1487,7 @@ class DBHandler: NSObject {
                 let json = ["data": data]
                 let jsonData =  try JSONSerialization.data(withJSONObject: json, options: JSONSerialization.WritingOptions.prettyPrinted)
                 dbRun?.responseData = jsonData
-            }catch {
+            }catch{
             }
         })
     }
@@ -1462,7 +1499,7 @@ class DBHandler: NSObject {
      @param method, method type
      @param server, server string
      */
-    class func saveRequestInformation(params: Dictionary<String,Any>?,headers: Dictionary<String,Any>?,method: String,server: String) {
+    class func saveRequestInformation(params: Dictionary<String,Any>?, headers: Dictionary<String,Any>?, method: String, server: String) {
         
         let realm = DBHandler.getRealmObject()!
         let dataSync = DBDataOfflineSync()
@@ -1479,7 +1516,7 @@ class DBHandler: NSObject {
             do {
                 let headerData =  try JSONSerialization.data(withJSONObject: headers!, options: JSONSerialization.WritingOptions.prettyPrinted)
                 dataSync.headerParams = headerData
-            }catch {
+            }catch{
             }
         }
         dataSync.method = method
@@ -1499,7 +1536,7 @@ class DBHandler: NSObject {
         
         if dbRuns.count > 0{
             completionHandler(true)
-        }else {
+        }else{
             completionHandler(false)
         }
     }
@@ -1507,13 +1544,13 @@ class DBHandler: NSObject {
     /**
      fetches completion and adherence for the Study Id from DB
      */
-    class func getCompletion(studyId: String ,completionHandler: @escaping (_ completion: Int,_ adherence: Int) -> ()){
+    class func getCompletion(studyId: String, completionHandler: @escaping (_ completion: Int, _ adherence: Int) -> ()){
         
         let realm = DBHandler.getRealmObject()!
         let dbActivities = realm.objects(DBActivity.self).filter("studyId == %@",studyId)
         
         if dbActivities.count <= 0 {
-            completionHandler(-1,-1)
+            completionHandler(-1, -1)
             return
         }
         
@@ -1522,7 +1559,6 @@ class DBHandler: NSObject {
         if difference != nil {
             date = date.addingTimeInterval(TimeInterval(difference!))
         }
-        
         
         var totalStudyRuns = 0
         var totalCompletedRuns = 0
@@ -1542,7 +1578,7 @@ class DBHandler: NSObject {
                 runsBeforeToday = runs.filter({$0.endDate <= date})
                 let firstRun: [DBActivityRun] = runs.filter({$0.startDate <= date && $0.endDate > date})
                 run = firstRun.first
-                //run = runs.filter({$0.startDate <= date && $0.endDate > date}).first //current run
+                // run = runs.filter({$0.startDate <= date && $0.endDate > date}).first //current run
             }
             
             let currentRunId =  (run != nil) ? (run?.runId)! : runsBeforeToday.count
@@ -1556,7 +1592,6 @@ class DBHandler: NSObject {
                 participationStatus = UserActivityStatus.ActivityStatus(rawValue: dbActivity.participationStatus)!
             }
             
-            
             if participationStatus != UserActivityStatus.ActivityStatus.completed && run != nil {
                 incompleteRuns = currentRunId - completedRuns
                 incompleteRuns -= 1
@@ -1564,14 +1599,14 @@ class DBHandler: NSObject {
             }
             let totalRuns = runs.count
             
-            //update values
+            // update values
             totalStudyRuns += totalRuns
             totalIncompletedRuns += incompleteRuns
             totalCompletedRuns += completedRuns
         }
         
         let completion = ceil( Double(self.divide(lhs: (totalCompletedRuns + totalIncompletedRuns)*100, rhs: totalStudyRuns)) )
-        completionHandler(Int(completion),0)
+        completionHandler(Int(completion), 0)
         
     }
     
@@ -1580,18 +1615,18 @@ class DBHandler: NSObject {
     /**
      saves activity meta data to DB
      */
-    class func saveActivityMetaData(activity: Activity, data: Dictionary<String,Any>){
+    class func saveActivityMetaData(activity: Activity, data: Dictionary<String, Any>){
         
         let realm = DBHandler.getRealmObject()!
         let metaData = DBActivityMetaData()
-        metaData.actvityId = activity.actvityId;
-        metaData.studyId = activity.studyId;
+        metaData.actvityId = activity.actvityId
+        metaData.studyId = activity.studyId
         
         do {
             let json = data
             let data =  try JSONSerialization.data(withJSONObject: json, options: JSONSerialization.WritingOptions.prettyPrinted)
             metaData.metaData = data
-        }catch {
+        }catch{
         }
         
         try? realm.write({
@@ -1603,11 +1638,11 @@ class DBHandler: NSObject {
     /**
      fetches activityMeta data from DB, updates the activityBuilder instance and returns a bool
      */
-    class func loadActivityMetaData(activity: Activity,completionHandler: @escaping (Bool) -> ()) {
+    class func loadActivityMetaData(activity: Activity, completionHandler: @escaping (Bool) -> ()) {
         
         let realm = DBHandler.getRealmObject()!
         let dbMetaDataList = realm.objects(DBActivityMetaData.self).filter({$0.actvityId == activity.actvityId && $0.studyId == activity.studyId})
-        
+        print("2 actlang -- \(getLanguageLocale()) -- activity language \(Study.currentActivity?.activityLang)")
         if dbMetaDataList.count != 0 {
             let metaData = dbMetaDataList.last
             
@@ -1621,12 +1656,13 @@ class DBHandler: NSObject {
                     ActivityBuilder.currentActivityBuilder = ActivityBuilder()
                     ActivityBuilder.currentActivityBuilder.initWithActivity(activity: Study.currentActivity! )
                 }
+                print("3 actlang -- \(getLanguageLocale()) -- activity language \(Study.currentActivity?.activityLang) -- \(metaData)")
                 completionHandler(true)
                 
-            }catch {
+            }catch{
                 completionHandler(false)
             }
-        }else {
+        }else{
             completionHandler(false)
         }
     }
@@ -1655,7 +1691,7 @@ class DBHandler: NSObject {
      @param statistics, array of statistics  which is to be updated
      @param studyId, study which contains activity
      */
-    class func saveDashBoardStatistics(studyId: String,statistics: Array<DashboardStatistics>) {
+    class func saveDashBoardStatistics(studyId: String, statistics: Array<DashboardStatistics>) {
         
         let realm = DBHandler.getRealmObject()!
         let dbStatisticsArray = realm.objects(DBStatistics.self)
@@ -2119,7 +2155,9 @@ class DBHandler: NSObject {
     class func resourceListFor(_ studyId:String, activityId:String?, questionKey:String?) -> Array<DBResources> {
         
         let realm = DBHandler.getRealmObject()!
-        var dbResourceList: Array<DBResources> = realm.objects(DBResources.self).filter({$0.studyId == studyId && $0.povAvailable == true && $0.startDate == nil})
+        var dbResourceList: Array<DBResources> = realm.objects(DBResources.self).filter({$0.studyId == studyId &&
+                                                                                            $0.povAvailable == true &&
+                                                                                            $0.startDate == nil})
         
         if activityId != nil {
             dbResourceList = dbResourceList.filter({$0.sourceActivityId == activityId})
@@ -2193,7 +2231,10 @@ class DBHandler: NSObject {
         
         var anchorDateAvailable = false
         for activity in dbActivities {
-            anchorDateAvailable = DBHandler.updateResourceLifeTime(studyId, activityId: activity.sourceActivityId, questionKey: activity.sourceKey, anchorDateValue: activity.anchorDateValue!)
+            anchorDateAvailable = DBHandler.updateResourceLifeTime(studyId,
+                                                                   activityId: activity.sourceActivityId,
+                                                                   questionKey: activity.sourceKey,
+                                                                   anchorDateValue: activity.anchorDateValue!)
         }
         print("Completed")
         completionHandler(anchorDateAvailable)
@@ -2336,7 +2377,9 @@ class DBHandler: NSObject {
         
         let realm = DBHandler.getRealmObject()!
         let todayDate = Date()
-        let dbNotifications = realm.objects(DBLocalNotification.self).sorted(byKeyPath: "startDate", ascending: false).filter({$0.startDate! <= todayDate && $0.endDate! >= todayDate})
+        let dbNotifications = realm.objects(DBLocalNotification.self).sorted(byKeyPath: "startDate",
+                                                                             ascending: false).filter({$0.startDate! <= todayDate &&
+                                                                                                        $0.endDate! >= todayDate})
         
         var notificationList: Array<AppLocalNotification> = []
         for dbnotification in dbNotifications {
@@ -2369,7 +2412,8 @@ class DBHandler: NSObject {
         
         let realm = DBHandler.getRealmObject()!
         let todayDate = Date()
-        let dbNotifications = realm.objects(DBLocalNotification.self).sorted(byKeyPath: "startDate", ascending: true).filter({$0.startDate! >= todayDate})
+        let dbNotifications = realm.objects(DBLocalNotification.self).sorted(byKeyPath: "startDate",
+                                                                             ascending: true).filter({$0.startDate! >= todayDate})
         
         var notificationList: Array<AppLocalNotification> = []
         

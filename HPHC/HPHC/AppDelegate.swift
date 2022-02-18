@@ -27,24 +27,27 @@ import CallKit
 import IQKeyboardManagerSwift
 
 
-let kBlockerScreenLabelText = "Please update to the latest version of the app to continue."
-let kAppStoreUpdateText = "Please go to AppStore to update to the latest version of the app."
+let kBlockerScreenLabelText = NSLocalizedStrings("Please update to the latest version of the app to continue.", comment: "")
+let kAppStoreUpdateText = NSLocalizedStrings("Please go to AppStore to update to the latest version of the app.", comment: "")
 
-let kConsentUpdatedTitle = "Consent Updated"
+let kConsentUpdatedTitle = NSLocalizedStrings("Consent Updated", comment: "")
 
-let kMessageConsentUpdatedPartTwo = " Please review the revised Consent terms and provide your Informed Consent, to continue participating in the study."
+let kMessageConsentUpdatedPartTwo = NSLocalizedStrings(
+  " Please review the revised Consent terms and provide your Informed Consent, to continue participating in the study.", comment: "")
 
-let kMessageConsentUpdated = "The Consent Document for this study has been updated." + kMessageConsentUpdatedPartTwo
+let kMessageConsentUpdated = NSLocalizedStrings("The Consent Document for this study has been updated.", comment: "") + kMessageConsentUpdatedPartTwo
 
-let kReviewTitle = "Review"
+let kReviewTitleName = NSLocalizedStrings("Review", comment: "")
+let kReviewIdentifier = "Review"
 let kPasscodeStepIdentifier = "PasscodeStep"
 let kPasscodeTaskIdentifier = "PassCodeTask"
-let kMessagePasscode = "Passcode"
-let kMessagePasscodeSignOut = "You will be signed out and will need to sign in again. Are you sure you want to proceed?"
+let kMessagePasscode = NSLocalizedStrings("Passcode", comment: "")
+let kMessagePasscodeSignOut = NSLocalizedStrings(
+  "You will be signed out and will need to sign in again. Are you sure you want to proceed?", comment: "")
 let kNewProgressViewNIB = "NewProgressView"
-let kforgotPasscodeTitle = "Forgot Passcode? Sign In Again"
+let kforgotPasscodeTitle = NSLocalizedStrings("Forgot Passcode? Sign In Again", comment: "")
 let kStudyStoryboard = "Study"
-let kPasscodeSetUpText = "Set up a passcode for the app"
+let kPasscodeSetUpText = NSLocalizedStrings("Set up a passcode for the app", comment: "")
 let kIphoneSimulator =  "iPhone Simulator"
 
 let kBundleIdentier = "CFBundleIdentifier"
@@ -56,16 +59,15 @@ let kResultCount = "resultCount"
 let kResultsForAppStore = "results"
 let kAppStoreVersion = "version"
 
-let kContinueButtonTitle =  NSLocalizedString("Continue", comment:"")
+let kContinueButtonTitle =  NSLocalizedStrings("Continue", comment:"")
 let kType = "type"
 
 let kCurrentVersion = "currentVersion"
 let kForceUpdate = "forceUpdate"
 let kMessage = "message"
 let kVisualStepId = "visual"
-let kMessageString = "Message"
-
-
+var localeBundle: Bundle? = Bundle(path: Bundle.main.path(forResource: "en", ofType: "lproj") ?? "") //"es"
+let ud = UserDefaults.standard
 @UIApplicationMain
 
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -117,9 +119,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.customizeNavigationBar()
         Fabric.with([Crashlytics.self])
         
+        if #available(iOS 15, *) {
+              let appearance = UINavigationBarAppearance()
+              let navigationBar = UINavigationBar()
+
+              appearance.configureWithOpaqueBackground()
+              appearance.backgroundColor = .white
+              navigationBar.standardAppearance = appearance
+              UINavigationBar.appearance().standardAppearance.backgroundColor = .white
+              UINavigationBar.appearance().standardAppearance.shadowColor = .white
+              UINavigationBar.appearance().scrollEdgeAppearance = appearance
+              UINavigationBar.appearance().standardAppearance = appearance
+            }
+        
         UIView.appearance(whenContainedInInstancesOf: [ORKTaskViewController.self]).tintColor = kUIColorForSubmitButtonBackground
         
-        self.checkForAppUpdate()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                    self.checkForAppUpdate()
+                }
         
         if UIApplication.shared.applicationIconBadgeNumber > 0 {
             UIApplication.shared.applicationIconBadgeNumber = 0
@@ -165,11 +182,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         }
         
+        /*
+                let locale3 = getLanguageLocale()
+                print("onLaunch language \(locale3)")
+                if(locale3.hasPrefix("es")){
+                    ud1.set("es", forKey: kUserDeviceLanguage)
+                }else{
+                    ud1.set("en", forKey: kUserDeviceLanguage)
+                }*/
+       
         //self.fireNotiffication(intervel: 10)
         //self.fireNotiffication(intervel: 15)
         
         //Check if Database needs migration
         self.checkForRealmMigration()
+        print("UserLanguage \(ud1.value(forKey: kUserDeviceLanguage))")
         return true
     }
     
@@ -187,7 +214,42 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     
     func applicationWillEnterForeground(_ application: UIApplication) {
+        /*
+                let locale3 = getLanguageLocale()
+                if(NetworkManager.isNetworkAvailable()){
+                    print("network available applicationWillEnterForeground  \(NetworkManager.isNetworkAvailable()) and locale3 is \(locale3)")
+                    
+                    if(locale3.hasPrefix("es")){
+                        ud.set("es", forKey: kUserDeviceLanguage)
+                    }else{
+                        ud.set("en", forKey: kUserDeviceLanguage)
+                    }
+                    //ud.set(locale3, forKey: kUserDeviceLanguage)
+                    ud.synchronize()
+                    self.updateLocale(locale3: locale3)
+                }else{
+                    print("network available applicationWillEnterForeground  \(NetworkManager.isNetworkAvailable()) and ud.value is \(ud.value(forKey: kUserDeviceLanguage))")
+                    self.updateLocale(locale3: ud.value(forKey: kUserDeviceLanguage)! as! String)
+                }
+                 */
         
+//        if !(locale3.hasPrefix("es") || locale3.hasPrefix("en")) {
+//            Bundle.setLanguage("en")
+//
+//            let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
+//            UIApplication.shared.keyWindow?.rootViewController = storyboard.instantiateInitialViewController()
+//
+//
+//            let path = Bundle.main.path(forResource: "en", ofType: "lproj")
+//
+//            if let path = path {
+//                localeBundle = Bundle(path: path)
+//            }
+//            else {
+//                let path = Bundle.main.path(forResource: "en", ofType: "lproj") ?? ""
+//                localeBundle = Bundle(path: path)
+//            }
+//        }
         self.checkPasscode(viewController: (application.windows[0].rootViewController)!)
         
         self.checkForStudyUpdates()
@@ -196,28 +258,74 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if number >= 1 {
             self.updateNotification()
         }
-        
         //Check For Updates
         self.checkForAppUpdate()
         
     }
     
+//    func updateLocale(locale3 : String){
+//        if !(locale3.hasPrefix("es") || locale3.hasPrefix("en")) {
+//            Bundle.setLanguage("en")
+//
+//            let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
+//            UIApplication.shared.keyWindow?.rootViewController = storyboard.instantiateInitialViewController()
+//
+//
+//            let path = Bundle.main.path(forResource: "en", ofType: "lproj")
+//
+//            if let path = path {
+//                localeBundle = Bundle(path: path)
+//            }
+//            else {
+//                let path = Bundle.main.path(forResource: "en", ofType: "lproj") ?? ""
+//                localeBundle = Bundle(path: path)
+//            }
+//        }
+//        else if locale3.hasPrefix("es") {
+//            let path = Bundle.main.path(forResource: "es", ofType: "lproj") ?? ""
+//            localeBundle = Bundle(path: path)
+//        }
+//    }
+    
+    func showLocalisationAlert() {
+            
+            let localeLanguage = getLanguageLocale()
+            if !NetworkManager.isNetworkAvailable() {
+                
+                if (ud.value(forKey: kShowOfflineLanguageAlert) == nil) {
+                    ud.set("1", forKey: kShowOfflineLanguageAlert)
+                }
+                
+                if localeLanguage.prefix(2) != (Locale.preferredLanguages.first ?? "en").prefix(2) && ud.value(forKey: kShowOfflineLanguageAlert) as! String == "1" {
+                    UIUtilities.showAlertWithTitleAndMessage(title: "", message: NSLocalizedStrings("You are offline. New language settings will be applied once you are connected again.", comment: "") as NSString)
+                    ud.set("0", forKey: kShowOfflineLanguageAlert)
+                }
+            }
+            if localeLanguage.prefix(2) == (Locale.preferredLanguages.first ?? "en").prefix(2) {
+                ud.set("1", forKey: kShowOfflineLanguageAlert)
+            }
+        }
     func applicationDidBecomeActive(_ application: UIApplication) {
         
         // self.window?.isHidden = false
         
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                    self.showLocalisationAlert()
+                }
         UIApplication.shared.applicationIconBadgeNumber = 0
         
         if self.appIsResignedButDidNotEnteredBackground! {
             
             let navController = application.windows[0].rootViewController
-            
-            
-            let isTaskViewControllerVisible = (navController as? UINavigationController)?.visibleViewController?.isKind(of: ORKTaskViewController.self)
+                        
+            let isTaskViewControllerVisible = (navController as?
+                                                UINavigationController)?.visibleViewController?.isKind(of: ORKTaskViewController.self)
             
            // guard let navigation = (navController as? UINavigationController)?.visibleViewController as? ORKTaskViewController, let navigationTitle = navigation.title else {return}
             
             let navigationTitle = ((navController as? UINavigationController)?.visibleViewController as? ORKTaskViewController)?.title ?? ""
+            let kActivity = NSLocalizedStrings("Activity", comment: "")
             
             if (navController as? UINavigationController) != nil &&  isTaskViewControllerVisible == false {
                 
@@ -228,7 +336,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 
             } else if(navController as? UINavigationController) != nil
                 &&  isTaskViewControllerVisible == true
-                && navigationTitle == "Activity" {
+                && navigationTitle == kActivity {
                 
                 if (navController as? UINavigationController)?.visibleViewController?.isKind(of: ORKPasscodeViewController.self) == false {
                     //Request for Passcode
@@ -587,12 +695,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 topController = navigationController.viewControllers.first!
             }
             
-            UIUtilities.showAlertMessageWithTwoActionsAndHandler(NSLocalizedString(kConsentUpdatedTitle, comment: ""), errorMessage: NSLocalizedString(kMessageConsentUpdated, comment: ""), errorAlertActionTitle: NSLocalizedString(kReviewTitle, comment: ""),
+            UIUtilities.showAlertMessageWithTwoActionsAndHandler(kConsentUpdatedTitle,
+                                                                 errorMessage: kMessageConsentUpdated, errorAlertActionTitle: kReviewTitleName,
                                                                  errorAlertActionTitle2: nil, viewControllerUsed: topController,
                                                                  action1: {
                                                                     
                                                                     self.addAndRemoveProgress(add: true)
-                                                                    WCPServices().getEligibilityConsentMetadata(studyId:(Study.currentStudy?.studyId)!, delegate: self as NMWebServiceDelegate)
+                                                                    WCPServices().getEligibilityConsentMetadata(
+                                                                      studyId:(Study.currentStudy?.studyId)!, delegate: self as NMWebServiceDelegate)
                                                                     
             },
                                                                  action2: {
@@ -743,12 +853,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                         if !(initialVC is UITabBarController) {
                             //push tabbar and switch to activty tab
                             
-                            self.pushToTabbar(viewController: initialVC!, selectedTab: (notificationSubType! as AppNotification.NotificationSubType == .Activity) ? 0 : 2)
+                            self.pushToTabbar(viewController: initialVC!, selectedTab:
+                                                (notificationSubType! as AppNotification.NotificationSubType == .Activity) ? 0 : 2)
                             
                         }else {
                             //switch to activity tab
                             
-                            (initialVC as? UITabBarController)!.selectedIndex =  (notificationSubType! as AppNotification.NotificationSubType == .Activity) ? 0 : 2
+                            (initialVC as? UITabBarController)!.selectedIndex =
+                              (notificationSubType! as AppNotification.NotificationSubType == .Activity) ? 0 : 2
                         }
                         
                     case .Study,.studyEvent: // Study Notifications
@@ -757,7 +869,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                         
                         if !(initialVC is StudyListViewController) {
                             
-                            if initialVC is ProfileViewController  ||  initialVC is ReachoutOptionsViewController || initialVC is GatewayResourcesListViewController {
+                            if initialVC is ProfileViewController  ||
+                                initialVC is ReachoutOptionsViewController || initialVC is GatewayResourcesListViewController {
                                 
                                 NotificationHandler.instance.appOpenFromNotification = true
                                 NotificationHandler.instance.studyId = studyId
@@ -797,7 +910,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         let studyStoryBoard = UIStoryboard.init(name: kStudyStoryboard, bundle: Bundle.main)
         
-        let studyDashboard = (studyStoryBoard.instantiateViewController(withIdentifier: kStudyDashboardTabbarControllerIdentifier) as? StudyDashboardTabbarViewController)!
+        let studyDashboard = (studyStoryBoard.instantiateViewController(
+                                withIdentifier: kStudyDashboardTabbarControllerIdentifier) as? StudyDashboardTabbarViewController)!
         
         studyDashboard.selectedIndex = selectedTab
         viewController.navigationController?.navigationBar.isHidden = true
@@ -832,8 +946,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     taskViewController.modalPresentationStyle = .fullScreen
                     viewController.present(taskViewController, animated: false, completion: nil)
                     
-                }else {
-                    guard ORKPasscodeViewController.isPasscodeStoredInKeychain() && !(containerViewController?.presentedViewController is ORKPasscodeViewController) else { return }
+                } else {
+                    guard ORKPasscodeViewController.isPasscodeStoredInKeychain() &&
+                            !(containerViewController?.presentedViewController is ORKPasscodeViewController) else { return }
                     window?.makeKeyAndVisible()
                     
                     let passcodeViewController = ORKPasscodeViewController.passcodeAuthenticationViewController(withText: "", delegate: self)
@@ -858,7 +973,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     passcodeParentControllerWhileSetup = nil
                     
                     //PasscodeController or TaskViewController is not presented
-                    if (topVC?.presentedViewController?.isKind(of: ORKPasscodeViewController.self) == false && (topVC?.presentedViewController?.isKind(of: ORKTaskViewController.self))!) || ( topVC != nil && topVC?.isKind(of: ORKPasscodeViewController.self) == false) {
+                    if (topVC?.presentedViewController?.isKind(of: ORKPasscodeViewController.self) == false &&
+                          (topVC?.presentedViewController?.isKind(of: ORKTaskViewController.self))!) ||
+                        ( topVC != nil && topVC?.isKind(of: ORKPasscodeViewController.self) == false) {
                         
                         isPasscodePresented = true
                         blockerScreen?.isHidden = true
@@ -975,10 +1092,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             let slideMenuController = (navigationController.viewControllers.last as? FDASlideMenuViewController)!
             
             if !Utilities.isStandaloneApp() {
+                self.addAndRemoveProgress(add: false)
                 let leftController = (slideMenuController.leftViewController as? LeftMenuViewController)!
                 leftController.changeViewController(.reachOut_signIn)
                 leftController.createLeftmenuItems()
-                self.addAndRemoveProgress(add: false)
+                
             }
             else {
                 UIApplication.shared.keyWindow?.removeProgressIndicatorFromWindow()
@@ -1046,7 +1164,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                         if tabbarVC is StudyDashboardTabbarViewController {
                             let studyTabBar = (tabbarVC as? StudyDashboardTabbarViewController)!
                             //Storing selected tabbar controller
-                            selectedController = ((studyTabBar.viewControllers?[studyTabBar.selectedIndex]) as? UINavigationController)!.viewControllers.last
+                            selectedController = ((studyTabBar.viewControllers?[studyTabBar.selectedIndex])
+                                                    as? UINavigationController)!.viewControllers.last
                         }
                     }
                 }
@@ -1059,19 +1178,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     switch studyStatus {
                         
                     case .Upcoming:
-                        message = NSLocalizedString(kMessageForStudyUpcomingState, comment: "")
+                        message = kMessageForStudyUpcomingState
                         
                     case .Paused:
-                        message = NSLocalizedString(kMessageForStudyPausedState, comment: "")
+                        message = kMessageForStudyPausedState
                         
                     case .Closed:
-                        message = NSLocalizedString(kMessageForStudyClosedState, comment: "")
+                        message = kMessageForStudyClosedState
                         
                     default: break
                     }
                     
                     let alert = UIAlertController(title: "" as String,message: message as String,preferredStyle: UIAlertController.Style.alert)
-                    alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: ""), style: .default, handler: nil))
+                    alert.addAction(UIAlertAction(title: kTitleOKCapital, style: .default, handler: nil))
                 }else {
                     
                     if selectedController != nil {
@@ -1101,7 +1220,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         NotificationCenter.default.removeObserver(self, name: notificationName, object: nil);
         
         //Update Consent status to Server
-        UserServices().updateUserEligibilityConsentStatus(eligibilityStatus: true, consentStatus:(ConsentBuilder.currentConsent?.consentStatus)!  , delegate: self)
+        UserServices().updateUserEligibilityConsentStatus(eligibilityStatus: true,
+                                                          consentStatus:(ConsentBuilder.currentConsent?.consentStatus)!  , delegate: self)
     }
     
     func popViewControllerAfterConsentDisagree() {
@@ -1131,7 +1251,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         NotificationCenter.default.post(name:NSNotification.Name(rawValue: "NotificationStudyEnrollmentFailed"), object: error)
         //let message = error.localizedDescription
-        //UIUtilities.showAlertWithTitleAndMessage(title: NSLocalizedString(kErrorTitle, comment: "") as NSString, message: message as NSString)
+        //UIUtilities.showAlertWithTitleAndMessage(title: NSLocalizedStrings(kErrorTitle, comment: "") as NSString, message: message as NSString)
     }
     
     func studyEnrollmentStarted(taskViewController:ORKTaskViewController) {
@@ -1167,7 +1287,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         } else {
             // Update Consent Status to server
-            UserServices().updateUserEligibilityConsentStatus(eligibilityStatus: true, consentStatus:(ConsentBuilder.currentConsent?.consentStatus)!  , delegate: self)
+            UserServices().updateUserEligibilityConsentStatus(eligibilityStatus: true,
+                                                              consentStatus:(ConsentBuilder.currentConsent?.consentStatus)!  , delegate: self)
             StudyUpdates.studyConsentUpdated  = false
             DBHandler.updateMetaDataToUpdateForStudy(study: Study.currentStudy!, updateDetails: nil)
         }
@@ -1321,7 +1442,8 @@ extension AppDelegate: ORKTaskViewControllerDelegate {
         return true
     }
     
-    public func taskViewController(_ taskViewController: ORKTaskViewController, didFinishWith reason: ORKTaskViewControllerFinishReason, error: Error?) {
+    public func taskViewController(_ taskViewController: ORKTaskViewController,
+                                   didFinishWith reason: ORKTaskViewControllerFinishReason, error: Error?) {
         
         var taskResult: Any?
         
@@ -1434,7 +1556,8 @@ extension AppDelegate: ORKTaskViewControllerDelegate {
                 //Back button is enabled
                 stepViewController.backButtonItem = nil
                 
-                let orkStepResult: ORKStepResult? = taskViewController.result.results?[(taskViewController.result.results?.count)! - 2] as! ORKStepResult?
+                let orkStepResult: ORKStepResult? =
+                  taskViewController.result.results?[(taskViewController.result.results?.count)! - 2] as! ORKStepResult?
                 
                 let consentSignatureResult: ConsentCompletionTaskResult? = orkStepResult?.results?.first as? ConsentCompletionTaskResult
                 
@@ -1474,15 +1597,18 @@ extension AppDelegate: ORKTaskViewControllerDelegate {
             
             
             //CurrentStep is TokenStep
-            if step.identifier != kEligibilityTokenStep && step.identifier != kConsentSharePdfCompletionStep && step.identifier != kConsentViewPdfCompletionStep && step.identifier != kComprehensionCompletionStepIdentifier && step.identifier != kReviewTitle {
+            if step.identifier != kEligibilityTokenStep && step.identifier != kConsentSharePdfCompletionStep &&
+                step.identifier != kConsentViewPdfCompletionStep &&
+                step.identifier != kComprehensionCompletionStepIdentifier && step.identifier != kReviewIdentifier {
                 
                 return nil
                 
-            }else  if step.identifier == kEligibilityTokenStep { //For EligibilityTokenStep
+            } else  if step.identifier == kEligibilityTokenStep { //For EligibilityTokenStep
                 
                 let gatewayStoryboard = UIStoryboard(name: kFetalKickCounterStep, bundle: nil)
                 
-                let ttController = (gatewayStoryboard.instantiateViewController(withIdentifier: kEligibilityStepViewControllerIdentifier) as? EligibilityStepViewController)!
+                let ttController = (gatewayStoryboard.instantiateViewController(
+                                      withIdentifier: kEligibilityStepViewControllerIdentifier) as? EligibilityStepViewController)!
                 ttController.descriptionText = step.text
                 ttController.step = step
                 
@@ -1493,11 +1619,11 @@ extension AppDelegate: ORKTaskViewControllerDelegate {
                 var totalResults =  taskViewController.result.results
                 let reviewStep: ORKStepResult?
                 
-                totalResults = totalResults?.filter({$0.identifier == kReviewTitle})
+                totalResults = totalResults?.filter({$0.identifier == kReviewIdentifier})
                 
                 reviewStep = (totalResults?.first as? ORKStepResult)!
                 
-                if (reviewStep?.identifier)! == kReviewTitle && (reviewStep?.results?.count)! > 0 {
+                if (reviewStep?.identifier)! == kReviewIdentifier && (reviewStep?.results?.count)! > 0 {
                     let consentSignatureResult: ORKConsentSignatureResult? = reviewStep?.results?.first as? ORKConsentSignatureResult
                     
                     if  consentSignatureResult?.consented == false { //Disgreed
@@ -1515,7 +1641,8 @@ extension AppDelegate: ORKTaskViewControllerDelegate {
                         consentSignatureResult?.apply(to: documentCopy)
                         //instantiating ConsentSharePdfStep
                         let gatewayStoryboard = UIStoryboard(name: kFetalKickCounterStep, bundle: nil)
-                        let ttController = (gatewayStoryboard.instantiateViewController(withIdentifier: kConsentSharePdfStoryboardId) as? ConsentSharePdfStepViewController)!
+                        let ttController = (gatewayStoryboard.instantiateViewController(
+                                              withIdentifier: kConsentSharePdfStoryboardId) as? ConsentSharePdfStepViewController)!
                         ttController.step = step
                         ttController.consentDocument =  documentCopy
                         
@@ -1542,7 +1669,8 @@ extension AppDelegate: ORKTaskViewControllerDelegate {
                 if (result?.didTapOnViewPdf)!{
                     let gatewayStoryboard = UIStoryboard(name: kFetalKickCounterStep, bundle: nil)
                     
-                    let ttController = (gatewayStoryboard.instantiateViewController(withIdentifier: kConsentViewPdfStoryboardId) as? ConsentPdfViewerStepViewController)!
+                    let ttController = (gatewayStoryboard.instantiateViewController(
+                                          withIdentifier: kConsentViewPdfStoryboardId) as? ConsentPdfViewerStepViewController)!
                     ttController.step = step
                     //Pdf data is passed to Viewer for display
                     ttController.pdfData = result?.pdfData
@@ -1570,8 +1698,8 @@ extension AppDelegate: ORKTaskViewControllerDelegate {
                         //Pass score Calculation
                         while  i < (taskViewController.result.results?.count)! {
 
-
-                            let textChoiceResult: ORKChoiceQuestionResult = (((taskViewController.result.results?[i] as? ORKStepResult)!.results?.first) as? ORKChoiceQuestionResult)!
+                            let textChoiceResult: ORKChoiceQuestionResult =
+                              (((taskViewController.result.results?[i] as? ORKStepResult)!.results?.first) as? ORKChoiceQuestionResult)!
 
                             let correctAnswerDict: Dictionary<String,Any>? = ConsentBuilder.currentConsent?.comprehension?.correctAnswers?[j]
                             let answerArray: [String] = (correctAnswerDict?[kConsentComprehensionAnswer] as? [String])!
@@ -1584,12 +1712,12 @@ extension AppDelegate: ORKTaskViewControllerDelegate {
                             case .any:
                                 
                                 if answeredSet.isSubset(of: correctAnswerSet) {
-                                    userScore = userScore + 1
+                                    userScore += 1
                                 }
                             case .all:
                                 
                                 if answeredSet == correctAnswerSet {
-                                    userScore = userScore + 1
+                                    userScore += 1
                                 }
                             //default: break
                             }
@@ -1621,14 +1749,15 @@ extension AppDelegate: ORKTaskViewControllerDelegate {
                     return nil
                 }
                 
-            }else if step.identifier == kReviewTitle {
+            }else if step.identifier == kReviewIdentifier {
                 // if sharing step exists && allowWithoutSharing is set
                 
                 let shareStep: ORKStepResult? = taskViewController.result.results?.last as! ORKStepResult?
                 
                 ConsentBuilder.currentConsent?.sharingConsent?.allowWithoutSharing = true
                 
-                if shareStep?.identifier == kConsentSharing && ConsentBuilder.currentConsent?.sharingConsent != nil && (ConsentBuilder.currentConsent?.sharingConsent?.allowWithoutSharing)! == false {
+                if shareStep?.identifier == kConsentSharing && ConsentBuilder.currentConsent?.sharingConsent != nil &&
+                    (ConsentBuilder.currentConsent?.sharingConsent?.allowWithoutSharing)! == false {
                     
                     let result = (shareStep?.results?.first as? ORKChoiceQuestionResult)
                     
@@ -1641,7 +1770,8 @@ extension AppDelegate: ORKTaskViewControllerDelegate {
                             self.popViewControllerAfterConsentDisagree()
                             
                             //Alert User
-                            UIUtilities.showAlertWithTitleAndMessage(title: "Message", message: NSLocalizedString(kShareConsentFailureAlert, comment: "") as NSString)
+                          UIUtilities.showAlertWithTitleAndMessage(title: kTitleMessage as NSString,
+                                                                   message: NSLocalizedStrings(kShareConsentFailureAlert, comment: "") as NSString)
                         })
                         return nil
                     }
@@ -1718,8 +1848,9 @@ extension AppDelegate: ORKPasscodeDelegate {
             topVC = topVC?.presentedViewController
         }
         
-        UIUtilities.showAlertMessageWithTwoActionsAndHandler(NSLocalizedString(kMessagePasscode, comment: ""), errorMessage: NSLocalizedString(kMessagePasscodeSignOut, comment: ""), errorAlertActionTitle: NSLocalizedString(kTitleOK, comment: ""),
-                                                             errorAlertActionTitle2: NSLocalizedString(kTitleCancel, comment: ""), viewControllerUsed: topVC!,
+        UIUtilities.showAlertMessageWithTwoActionsAndHandler(kMessagePasscode,
+                                                             errorMessage: kMessagePasscodeSignOut, errorAlertActionTitle: kTitleOKCapital,
+                                                             errorAlertActionTitle2: kTitleCancel, viewControllerUsed: topVC!,
                                                              action1: {
                                                                 self.window?.addProgressIndicatorOnWindowFromTop()
                                                                 
@@ -1787,7 +1918,8 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
         print("application state \(UIApplication.shared.applicationState.rawValue)")
         UIApplication.shared.applicationIconBadgeNumber = 0
         
-        if (UIApplication.shared.applicationState == UIApplication.State.background || (UIApplication.shared.applicationState == UIApplication.State.inactive)) {
+        if (UIApplication.shared.applicationState == UIApplication.State.background ||
+              (UIApplication.shared.applicationState == UIApplication.State.inactive)) {
             
             self.handleLocalAndRemoteNotification(userInfoDetails: (userInfo as? Dictionary<String, Any>)!)
         }
@@ -1797,15 +1929,54 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
             self.updateNotification()
             
         }else {
-            if (UIApplication.shared.applicationState == UIApplication.State.background || (UIApplication.shared.applicationState == UIApplication.State.inactive)) {
+            if (UIApplication.shared.applicationState == UIApplication.State.background ||
+                  (UIApplication.shared.applicationState == UIApplication.State.inactive)) {
                 self.handleLocalNotification(userInfoDetails: (userInfo as? Dictionary<String, Any>)!)
             }
         }
     }
 }
 
-extension UIWindow{
+// MARK: Localisation
+extension AppDelegate {
     
+    static func selectedLocale () -> Bundle? {
+            let locale3 = getLanguageLocale()
+            print("network available  \(NetworkManager.isNetworkAvailable()) and locale3 is \(locale3)")
+            if !(locale3.hasPrefix("es") || locale3.hasPrefix("en")) {
+                Bundle.setLanguage("en")
+                
+                let path = Bundle.main.path(forResource: "en", ofType: "lproj")
+                
+                if let path = path {
+                    localeBundle = Bundle(path: path)
+                }
+                else {
+                    let path = Bundle.main.path(forResource: "en", ofType: "lproj") ?? ""
+                    localeBundle = Bundle(path: path)
+                }
+                print("Krishna Setting locale in if condition identifier \(localeBundle?.bundleIdentifier)")
+                print("Krishna Setting locale in if condition path \(localeBundle?.bundlePath)")
+                
+            } else if locale3.hasPrefix("es") {
+                let path = Bundle.main.path(forResource: "es", ofType: "lproj") ?? ""
+                localeBundle = Bundle(path: path)
+                print("Krishna Setting locale in elseif es condition identifier \(localeBundle?.bundleIdentifier)")
+                print("Krishna Setting locale in elseif es condition path \(localeBundle?.bundlePath)")
+                
+            } else if locale3.hasPrefix("en") {
+                let path = Bundle.main.path(forResource: "en", ofType: "lproj") ?? ""
+                localeBundle = Bundle(path: path)
+                print("Krishna Setting locale in elseif en condition identifier \(localeBundle?.bundleIdentifier)")
+                print("Krishna Setting locale in elseif en condition path \(localeBundle?.bundlePath)")
+            }
+        print("Krishna Setting locale before return \(localeBundle?.bundleIdentifier)")
+        print("Krishna Setting locale before return \(localeBundle?.bundlePath)")
+            return localeBundle
+        }
+}
+
+extension UIWindow {
     /**
      Adds progress below navigation bar
      */
@@ -1874,9 +2045,5 @@ extension UIApplication {
         return self.keyWindow?.rootViewController?.topMostViewController()
     }
 }
-
-
-
-
 
 

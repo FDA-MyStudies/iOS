@@ -22,8 +22,8 @@ import UIKit
 import ResearchKit
 
 let kConsentCompletionResultIdentifier = "ConsentCompletion"
-let kMainTitle = "Thanks for providing consent for this Study"
-let kSubTitle = "You can now start participating in the Study"
+let kMainTitle = NSLocalizedStrings("Thanks for providing consent for this Study", comment: "")
+let kSubTitle = NSLocalizedStrings("You can now start participating in the Study", comment: "")
 
 
 /* Consent Completion Step
@@ -112,9 +112,15 @@ class ConsentSharePdfStepViewController: ORKStepViewController {
         
         buttonNext?.layer.borderColor =   kUicolorForButtonBackground
         
-        NotificationCenter.default.addObserver(self, selector: #selector(enrollmentCompleted), name: NSNotification.Name(rawValue: "NotificationStudyEnrollmentCompleted"), object: nil)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(enrollmentCompleted),
+                                               name: NSNotification.Name(rawValue: "NotificationStudyEnrollmentCompleted"),
+                                               object: nil)
         
-        NotificationCenter.default.addObserver(self, selector: #selector(enrollmentFailed), name: NSNotification.Name(rawValue: "NotificationStudyEnrollmentFailed"), object: nil)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(enrollmentFailed),
+                                               name: NSNotification.Name(rawValue: "NotificationStudyEnrollmentFailed"),
+                                               object: nil)
 
             activityIndicator.startAnimating()
             //hide views until enrollment completed
@@ -147,8 +153,6 @@ class ConsentSharePdfStepViewController: ORKStepViewController {
     }
     
 }
-
-
 //Overrriding the ORKTaskResult to get customized results
 open class ConsentCompletionTaskResult: ORKResult {
     
@@ -168,5 +172,3 @@ open class ConsentCompletionTaskResult: ORKResult {
         }
     }
 }
-
-

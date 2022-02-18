@@ -67,6 +67,7 @@ class StudyDashboardStatisticsCollectionViewCell: UICollectionViewCell {
     @IBOutlet var labelStatisticsCount: UILabel?
     @IBOutlet var labelUnit: UILabel?
     var stats: DashboardStatistics!
+    let kNA = NSLocalizedStrings("NA", comment: "")
     
     /**
      Display DashboardStats for selected Tab
@@ -162,7 +163,7 @@ class StudyDashboardStatisticsCollectionViewCell: UICollectionViewCell {
         let array = dataList.map{$0.data}
         
         if array.count == 0 {
-            labelStatisticsCount?.text = "NA"
+            labelStatisticsCount?.text = kNA
         } else {
             self.calculate(array: array)
         }
@@ -174,7 +175,7 @@ class StudyDashboardStatisticsCollectionViewCell: UICollectionViewCell {
         let array = dataList.map{$0.data}
         
         if array.count == 0 {
-            labelStatisticsCount?.text = "NA"
+            labelStatisticsCount?.text = kNA
         } else {
             self.calculate(array: array)
         }
@@ -187,7 +188,7 @@ class StudyDashboardStatisticsCollectionViewCell: UICollectionViewCell {
         let array = dataList.map{$0.data}
         
         if array.count == 0 {
-            labelStatisticsCount?.text = "NA"
+            labelStatisticsCount?.text = kNA
         } else {
             self.calculate(array: array)
         }

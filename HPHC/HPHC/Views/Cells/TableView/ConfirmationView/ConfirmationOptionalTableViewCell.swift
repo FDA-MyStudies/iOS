@@ -43,21 +43,26 @@ class ConfirmationOptionalTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+      imageViewDeleteCheckBox?.image = #imageLiteral(resourceName: "notChecked")
+      imageViewRetainCheckBox?.image = #imageLiteral(resourceName: "notChecked")
     }
 
 // MARK:IBActions
     
     @IBAction func deleteOrRetainDataButtonAction(_ sender: UIButton?){
         
+      let valImageViewDeleteCheckBox = imageViewDeleteCheckBox?.image?.isEqual(#imageLiteral(resourceName: "notChecked")) ?? false
+      let valImageViewRetainCheckBox = imageViewRetainCheckBox?.image?.isEqual(#imageLiteral(resourceName: "notChecked")) ?? false
+      
         var deleteData = false
         if sender?.tag == kDeleteButtonTag {
-            if (imageViewDeleteCheckBox?.image?.isEqual(#imageLiteral(resourceName: "notChecked")))! {
+          if valImageViewDeleteCheckBox {
                 imageViewDeleteCheckBox?.image = #imageLiteral(resourceName: "checked")
                 imageViewRetainCheckBox?.image = #imageLiteral(resourceName: "notChecked")
                 deleteData = true;
             }
-        }else {
-            if (imageViewRetainCheckBox?.image?.isEqual(#imageLiteral(resourceName: "notChecked")))! {
+        } else {
+            if valImageViewRetainCheckBox {
                 imageViewRetainCheckBox?.image = #imageLiteral(resourceName: "checked")
                 imageViewDeleteCheckBox?.image = #imageLiteral(resourceName: "notChecked")
                 deleteData = false;

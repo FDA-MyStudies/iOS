@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-//#import <Mockingjay/Mockingjay-Swift.h>
+#import <Mockingjay/Mockingjay-Swift.h>
 
 
 @interface MockingjayURLConfiguration : NSObject
@@ -17,7 +17,7 @@
 @implementation MockingjayURLConfiguration
 
 + (void)load {
-//    [NSURLSessionConfiguration mockingjaySwizzleDefaultSessionConfiguration];
+    [NSURLSessionConfiguration mockingjaySwizzleDefaultSessionConfiguration];
 }
 
 @end

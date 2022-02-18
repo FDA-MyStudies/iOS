@@ -337,7 +337,6 @@ class ResourcesViewController: UIViewController{
     func handleLeaveStudy() {
         
         var withdrawalMessage = Study.currentStudy?.withdrawalConfigration?.message
-        
         var withdrawalType = Study.currentStudy?.withdrawalConfigration?.type
         
         if withdrawalMessage == nil {

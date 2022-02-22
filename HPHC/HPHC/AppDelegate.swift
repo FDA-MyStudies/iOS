@@ -288,23 +288,27 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //    }
     
     func showLocalisationAlert() {
+        
+        let localeLanguage = getLanguageLocale()
+        if !NetworkManager.isNetworkAvailable() {
             
-            let localeLanguage = getLanguageLocale()
-            if !NetworkManager.isNetworkAvailable() {
-                
-                if (ud.value(forKey: kShowOfflineLanguageAlert) == nil) {
-                    ud.set("1", forKey: kShowOfflineLanguageAlert)
-                }
-                
-                if localeLanguage.prefix(2) != (Locale.preferredLanguages.first ?? "en").prefix(2) && ud.value(forKey: kShowOfflineLanguageAlert) as! String == "1" {
-                    UIUtilities.showAlertWithTitleAndMessage(title: "", message: NSLocalizedStrings("You are offline. New language settings will be applied once you are connected again.", comment: "") as NSString)
-                    ud.set("0", forKey: kShowOfflineLanguageAlert)
-                }
-            }
-            if localeLanguage.prefix(2) == (Locale.preferredLanguages.first ?? "en").prefix(2) {
+            if (ud.value(forKey: kShowOfflineLanguageAlert) == nil) {
                 ud.set("1", forKey: kShowOfflineLanguageAlert)
             }
+            
+            if localeLanguage.prefix(2) != (Locale.preferredLanguages.first ?? "en").prefix(2) &&
+                ud.value(forKey: kShowOfflineLanguageAlert) as! String == "1" {
+                UIUtilities.showAlertWithTitleAndMessage(title: "",
+                    message: NSLocalizedStrings("You are offline. New language settings will be applied once you are connected again.",
+                    comment: "") as NSString)
+                ud.set("0", forKey: kShowOfflineLanguageAlert)
+            }
         }
+        if localeLanguage.prefix(2) == (Locale.preferredLanguages.first ?? "en").prefix(2) {
+            ud.set("1", forKey: kShowOfflineLanguageAlert)
+        }
+    }
+    
     func applicationDidBecomeActive(_ application: UIApplication) {
         
         // self.window?.isHidden = false

@@ -213,7 +213,8 @@ let kMessageForInvalidToken = NSLocalizedStrings("Please enter valid enrollment 
 let kMessageValidToken = NSLocalizedStrings("Please enter valid token", comment: "")
 let kMessageForMissingStudyId = NSLocalizedStrings("Unable to Enroll, Please try again later.", comment: "")
 
-let kMessageInvalidTokenOrIfStudyDoesNotExist = NSLocalizedStrings("Sorry, this token is invalid. Please enter a valid token to continue.", comment: "")
+let kMessageInvalidTokenOrIfStudyDoesNotExist =
+                            NSLocalizedStrings("Sorry, this token is invalid. Please enter a valid token to continue.", comment: "")
 let kMessageTokenIsRequired = NSLocalizedStrings("Token is required", comment: "")
 
 // MARK:- StudyHomeMessages

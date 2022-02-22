@@ -352,71 +352,81 @@ class ResourcesViewController: UIViewController{
         }
         let locale3 = getLanguageLocale()
         if locale3.hasPrefix("es") {
-          alertLeaveStudy = "¿"+leaveStudy
+            alertLeaveStudy = "¿"+leaveStudy
         }
         let kOkConfirm = NSLocalizedStrings("Are you sure? Tap Ok to confirm.", comment: "")
-        UIUtilities.showAlertMessageWithTwoActionsAndHandler(NSLocalizedStrings((alertLeaveStudy + " ?"), comment: ""), errorMessage: NSLocalizedStrings(withdrawalMessage!, comment: ""), errorAlertActionTitle: kProceedTitle,
+        
+        UIUtilities.showAlertMessageWithTwoActionsAndHandler(NSLocalizedStrings(
+            (alertLeaveStudy + " ?"), comment: ""), errorMessage: NSLocalizedStrings(withdrawalMessage!, comment: ""),
+                                                             errorAlertActionTitle: kProceedTitle,
                                                              errorAlertActionTitle2: kTitleCancel, viewControllerUsed: self,
                                                              action1: {
-                                                                
-                                                                
-                                                                switch withdrawalType! as StudyWithdrawalConfigrationType {
-                                                                    
-                                                                    case .askUser :
-                                                                      let kChoosingLeave  = NSLocalizedStrings("You are choosing to leave the study. Please choose if your response data can be retained and used for research purposes OR if your response data should be deleted.", comment: "")
-                                                                      let kRetainData = NSLocalizedStrings("Retain my data", comment: "")
-                                                                      let kDeleteData = NSLocalizedStrings("Delete my data", comment: "")
-                                    
-                                                                        UIUtilities.showAlertMessageWithThreeActionsAndHandler(kImportantNoteMessage, errorMessage: kChoosingLeave, errorAlertActionTitle: kRetainData, errorAlertActionTitle2: kDeleteData, errorAlertActionTitle3: kTitleCancel, viewControllerUsed: self, action1: {
-                                                                            // Retain Action
-
-                                                                            self.shouldDeleteData = false
-                                                                            self.withdrawalFromStudy(deleteResponse: false)
-
-
-
-                                                                        }, action2: {
-
-                                                                            // Delete action
-                                                                            self.shouldDeleteData = true
-                                                                            self.withdrawalFromStudy(deleteResponse: true)
-
-                                                                        }, action3: {
-                                                                            // Cancel Action
-                                                                        })
-                                                                    
-                                                                    
-                                                                case .deleteData:
-                                                                    
-                                                                    UIUtilities.showAlertMessageWithTwoActionsAndHandler(kOkConfirm, errorMessage: NSLocalizedStrings("", comment: ""), errorAlertActionTitle: kTitleOk,
-                                                                                                                         errorAlertActionTitle2: kTitleCancel, viewControllerUsed: self,
-                                                                                                                         action1: {
-                                                                                                                            self.shouldDeleteData = true
-                                                                                                                            self.withdrawalFromStudy(deleteResponse: true)
-                                                                    },
-                                                                                                                         action2: {
-                                                                                                                            
-                                                                    })
-                                                                    
-                                                                case .noAction :
-                                                                    
-                                                                    UIUtilities.showAlertMessageWithTwoActionsAndHandler(kOkConfirm, errorMessage: NSLocalizedStrings("", comment: ""), errorAlertActionTitle: kTitleOk,
-                                                                                                                         errorAlertActionTitle2: kTitleCancel, viewControllerUsed: self,
-                                                                                                                         action1: {
-                                                                                                                            self.shouldDeleteData = false
-                                                                                                                            self.withdrawalFromStudy(deleteResponse: false)
-                                                                    },
-                                                                                                                         action2: {
-                                                                                                                            
-                                                                    })
-                                                                    
-                                                                default : break
-                                                                }
-                                                                
-                                                                
+            
+            
+            switch withdrawalType! as StudyWithdrawalConfigrationType {
+                
+            case .askUser :
+                let kChoosingLeaveText1 = "You are choosing to leave the study. Please choose if your response data can be retained"
+                let kChoosingLeaveText2 = "and used for research purposes OR if your response data should be deleted."
+                let kChoosingLeave  = NSLocalizedStrings("\(kChoosingLeaveText1) \(kChoosingLeaveText2)", comment: "")
+                let kRetainData = NSLocalizedStrings("Retain my data", comment: "")
+                let kDeleteData = NSLocalizedStrings("Delete my data", comment: "")
+                let errorAlertActionTitles = [kRetainData, kDeleteData, kTitleCancel]
+                UIUtilities.showAlertMessageWithThreeActionsAndHandler(kImportantNoteMessage,
+                                                                       errorMessage: kChoosingLeave,
+                                                                       errorAlertActionTitles: errorAlertActionTitles,
+                                                                       viewControllerUsed: self, action1: {
+                    // Retain Action
+                    
+                    self.shouldDeleteData = false
+                    self.withdrawalFromStudy(deleteResponse: false)
+                    
+                    
+                    
+                }, action2: {
+                    
+                    // Delete action
+                    self.shouldDeleteData = true
+                    self.withdrawalFromStudy(deleteResponse: true)
+                    
+                }, action3: {
+                    // Cancel Action
+                })
+                
+                
+            case .deleteData:
+                
+                UIUtilities.showAlertMessageWithTwoActionsAndHandler(kOkConfirm,
+                                                                  errorMessage: NSLocalizedStrings("", comment: ""), errorAlertActionTitle: kTitleOk,
+                                                                     errorAlertActionTitle2: kTitleCancel, viewControllerUsed: self,
+                                                                     action1: {
+                    self.shouldDeleteData = true
+                    self.withdrawalFromStudy(deleteResponse: true)
+                },
+                                                                     action2: {
+                    
+                })
+                
+            case .noAction :
+                
+                UIUtilities.showAlertMessageWithTwoActionsAndHandler(kOkConfirm,
+                                                                  errorMessage: NSLocalizedStrings("", comment: ""), errorAlertActionTitle: kTitleOk,
+                                                                     errorAlertActionTitle2: kTitleCancel, viewControllerUsed: self,
+                                                                     action1: {
+                    self.shouldDeleteData = false
+                    self.withdrawalFromStudy(deleteResponse: false)
+                },
+                                                                     action2: {
+                    
+                })
+                
+            default : break
+            }
+            
+            
         },
                                                              action2: {
-                                                                
+            
         })
     }
     

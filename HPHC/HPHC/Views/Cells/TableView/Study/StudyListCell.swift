@@ -167,20 +167,18 @@ class StudyListCell: UITableViewCell {
         let locale3 = getLanguageLocale()
         
         print("studyId \(study.studyId) study name is \(study.name)study Language \(study.studyLanguage) and locale is \(locale3)")
-        if ((locale3.hasPrefix("es") && study.studyLanguage.containsIgnoringCase("spanish")) || (locale3.hasPrefix("en") && study.studyLanguage.containsIgnoringCase("english"))) {
+        if ((locale3.hasPrefix("es") &&
+             study.studyLanguage.containsIgnoringCase("spanish")) ||
+            (locale3.hasPrefix("en") && study.studyLanguage.containsIgnoringCase("english"))) {
             labelStudylanguage?.text = ""
         }else{
             if (study.studyLanguage.containsIgnoringCase("english")){
                 labelStudylanguage?.text = NSLocalizedStrings("English", comment: "")
             }else{
-            labelStudylanguage?.text = NSLocalizedStrings("Spanish", comment: "")
+                labelStudylanguage?.text = NSLocalizedStrings("Spanish", comment: "")
             }
-            
         }
-        
-      
     }
-    
     
     /**
      Used to set the Study State

@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0AC749DEEBB80752CF6DA249 /* (null) in Frameworks */ = {isa = PBXBuildFile; };
+		0AC749DEEBB80752CF6DA249 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; };
 		37F19856010496916F51BEAB /* Pods_MyStudies_COVID_19.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E99EF4C4C9BC14DB219CE1D /* Pods_MyStudies_COVID_19.framework */; };
 		481DFA4C1E6EEB70004C39EF /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 481DFA4B1E6EEB70004C39EF /* WebViewController.swift */; };
 		482062521E68532300C7A7AF /* UIUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 482062511E68532300C7A7AF /* UIUtilities.swift */; };
@@ -952,7 +952,7 @@
 			files = (
 				6EEBA47A1F25FAA100FB0258 /* HealthKit.framework in Frameworks */,
 				89EDB46C2271EFDF0070F16C /* ResearchKit.framework in Frameworks */,
-				0AC749DEEBB80752CF6DA249 /* (null) in Frameworks */,
+				0AC749DEEBB80752CF6DA249 /* BuildFile in Frameworks */,
 				4FA10541EF036A40BB15F338 /* Pods_HPHC.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

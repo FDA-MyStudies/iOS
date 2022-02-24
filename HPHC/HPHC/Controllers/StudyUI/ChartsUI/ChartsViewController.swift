@@ -20,7 +20,6 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 import UIKit
 
-
 let kMessageForSharingCharts =
     NSLocalizedStrings("This action will create a shareable image file of the charts currently seen in this section. Proceed?",
                        comment: "")
@@ -71,29 +70,24 @@ class ChartsViewController: UIViewController {
             },
                                                                  
                                                                  action2: {
-                                                                    
-                                                                    
             })
             
         }
-        
-        
     }
 
     func shareScreenShotByMail() {
         
-        //Create the UIImage
+        // Create the UIImage
         
         let savedContentOffset = self.tableView.contentOffset
         let savedFrame = tableView.frame
-        
         
         UIGraphicsBeginImageContextWithOptions(tableView.contentSize, self.view.isOpaque, 0.0)
         tableView.contentOffset = .zero
         tableView.frame = CGRect(x: 0, y: 0, width: tableView.contentSize.width, height: tableView.contentSize.height)
         tableView.layer.render(in: UIGraphicsGetCurrentContext()!)
         let image = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext();
+        UIGraphicsEndImageContext()
         
         tableView.contentOffset = savedContentOffset
         tableView.frame = savedFrame

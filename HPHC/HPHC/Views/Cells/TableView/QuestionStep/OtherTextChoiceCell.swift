@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol OtherTextChoiceCellDelegate : class {
+protocol OtherTextChoiceCellDelegate: class {
     func didEndEditing(with text: String?)
 }
 
@@ -40,7 +40,7 @@ class OtherTextChoiceCell: UITableViewCell {
         super.awakeFromNib()
         self.mainView.clipsToBounds = true
         self.mainView.layer.cornerRadius = 10
-        self.mainView.layer.maskedCorners = [.layerMinXMaxYCorner,.layerMaxXMaxYCorner]
+        self.mainView.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
         self.otherField?.delegate = self
     }
     

@@ -32,7 +32,7 @@ class FilterListCollectionViewCell: UICollectionViewCell {
     
     func displayCollectionData(data: FilterOptions) {
     
-        //studyData = data["studyData"] as! NSMutableArray
+        // studyData = data["studyData"] as! NSMutableArray
         filterOptions = data
         if filterOptions.title.count == 0 {
             tableView?.tableHeaderView = nil
@@ -52,12 +52,10 @@ class FilterListCollectionViewCell: UICollectionViewCell {
 }
 
 
-extension FilterListCollectionViewCell: UITableViewDelegate , UITableViewDataSource{
+extension FilterListCollectionViewCell: UITableViewDelegate, UITableViewDataSource {
 
-    
-    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return filterOptions.filterValues.count //studyData.count
+        return filterOptions.filterValues.count // studyData.count
     }
     /*
     
@@ -82,7 +80,7 @@ extension FilterListCollectionViewCell: UITableViewDelegate , UITableViewDataSou
             NSLayoutConstraint(item: label, attribute: NSLayoutAttribute.centerX, relatedBy: NSLayoutRelation.equal, toItem: view, attribute: NSLayoutAttribute.centerX, multiplier: 1, constant: 0).isActive = true
             NSLayoutConstraint(item: label, attribute: NSLayoutAttribute.centerY, relatedBy: NSLayoutRelation.equal, toItem: view, attribute: NSLayoutAttribute.centerY, multiplier: 1, constant: 0).isActive = true
             
-        }else{
+        } else {
         
         
         }
@@ -110,7 +108,4 @@ extension FilterListCollectionViewCell: UITableViewDelegate , UITableViewDataSou
         tableView.reloadData()
         
     }
-
-
-
 }

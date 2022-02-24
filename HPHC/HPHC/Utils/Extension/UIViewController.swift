@@ -75,9 +75,9 @@ extension UIViewController {
         self.slideMenuController()?.removeRightGestures()
     }
     
-    func showAlert(title: String,message: String){
+    func showAlert(title: String, message: String){
         
-          let alert = UIAlertController(title: title,message: message,preferredStyle: UIAlertController.Style.alert)
+          let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertController.Style.alert)
           alert.addAction(UIAlertAction(title: kTitleOKCapital, style: .default, handler: nil))
          
           self.present(alert, animated: true, completion: nil)
@@ -138,7 +138,7 @@ extension UIViewController {
 
         self.navigationController?.navigationBar.isUserInteractionEnabled = true
 
-        let view = self.view.viewWithTag(5000)  //as UIView
+        let view = self.view.viewWithTag(5000)  // as UIView
 
         slideMenuController()?.view.isUserInteractionEnabled = true
         slideMenuController()?.addLeftGestures()
@@ -148,9 +148,8 @@ extension UIViewController {
             animations: {
                 view?.alpha = 0
             }
-        ) { (completed) in
+        ) { (_) in
             view?.removeFromSuperview()
         }
     }
 }
-

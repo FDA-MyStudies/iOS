@@ -28,7 +28,6 @@ let kFetal1 = "This task needs you to record the number of times you experience 
 let kFetal2 = " of time.Also called as the Fetal Kick Counter task, this will help assess the activity of the baby within."
 let kFetalKickInstructionStepText = NSLocalizedStrings("\(kFetal1)\(kFetal2)", comment: "")
 
-
 let kFetalKickIntroductionStepIdentifier = "FetalKickIntroduction"
 let kFetalKickIntroductionStepTitle = ""
 
@@ -38,7 +37,6 @@ let kFetalKickCounterStepCompletionIdentifier = "CompletionStep"
 let kFetalKickCounterStepCompletionText = "Thank you for your time!"
 
 let kFetalKickCounterTaskIdentifier = "FetalKickCounterTask"
-
 
 class FetalKickCounterTask {
     
@@ -58,12 +56,11 @@ class FetalKickCounterTask {
         self.maxKickCounts = 0
     }
     
-    
     /*
      Initalizer method to create instance
      @param duration    is task run time in hours
      */
-    func initWithFormat(duration: Float,identifier: String,instructionText: String?)  {
+    func initWithFormat(duration: Float, identifier: String, instructionText: String?)  {
         
         self.identifier = identifier
         self.steps =  [ORKStep]()
@@ -90,14 +87,13 @@ class FetalKickCounterTask {
         self.maxKickCounts = maxKicks
     }
     
-    
     /*
      Getter method to create fetalKickTask
      @returns OrkorderedTask    containing steps
      */
     func getTask() -> ORKOrderedTask {
         
-        //create a Intro step
+        // create a Intro step
         let introStep = FetalKickIntroStep(identifier: kFetalKickIntroductionStepIdentifier)
         introStep.introTitle =  kFetalKickInstructionStepTitle
       
@@ -112,7 +108,7 @@ class FetalKickCounterTask {
         
         steps?.append(introStep)
       
-        //create a Fetal Kick Counter Step
+        // create a Fetal Kick Counter Step
         let kickStep = FetalKickCounterStep(identifier: self.identifier!)
         kickStep.counDownTimer = Int(self.duration! )
         
@@ -125,7 +121,7 @@ class FetalKickCounterTask {
         
         steps?.append(kickStep)
         
-        //create a Completion Step
+        // create a Completion Step
         let summaryStep = ORKCompletionStep(identifier: kFetalKickCounterStepCompletionIdentifier)
         let kActivityCompleted = NSLocalizedStrings("Activity Completed", comment: "")
         let kThankYouForTime =

@@ -34,12 +34,12 @@ class Overview {
 
 class OverviewSection {
     
-    var title: String?           //title of overview
-    var type: String?            //type of overview video/image
-    var imageURL: String?        //download url of image
-    var text: String?            //short description
-    var link: String?            //used for media link
-    var websiteLink: String?     //used for Website link
+    var title: String?           // title of overview
+    var type: String?            // type of overview video/image
+    var imageURL: String?        // download url of image
+    var text: String?            // short description
+    var link: String?            // used for media link
+    var websiteLink: String?     // used for Website link
     var overviewlang: String?
     
     init(){
@@ -74,7 +74,7 @@ class OverviewSection {
                 self.link = detail[kOverviewMediaLink] as? String
             }
             self.overviewlang = UserDefaults.standard.value(forKey: kUserDeviceLanguage) as? String ?? ""
-            print("Overview overviewlang \(self.overviewlang) and UDDLang \(UserDefaults.standard.value(forKey: kUserDeviceLanguage))")
+            print("Overview overviewlang \(self.overviewlang ?? "") and UDDLang \(UserDefaults.standard.value(forKey: kUserDeviceLanguage))")
             /* Checks the WebsiteLink value (Null, Nil, empty etc) is valid or not */
             if Utilities.isValidValue(someObject: detail[kOverviewWebsiteLink] as AnyObject ) {
                 self.websiteLink = detail[kOverviewWebsiteLink] as? String

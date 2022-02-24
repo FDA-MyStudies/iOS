@@ -26,7 +26,6 @@ let resourcesDownloadPath = AKUtility.baseFilePath + "/Resources"
 
 class ResourcesDetailViewController: UIViewController {
     
-    
     @IBOutlet weak var webView: WKWebView!
     
     var activityIndicator: UIActivityIndicatorView!
@@ -51,13 +50,11 @@ class ResourcesDetailViewController: UIViewController {
         UIApplication.shared.statusBarStyle = .default
         
         if self.isEmailComposerPresented == false{
-            
-            
+                
             if self.resource?.file?.link != nil {
                 
                 activityIndicator = UIActivityIndicatorView(style: .gray)
                 activityIndicator.center = CGPoint(x: self.view.frame.midX, y: self.view.frame.midY-100)
-                
                 
                 self.view.addSubview(activityIndicator)
                 
@@ -79,14 +76,13 @@ class ResourcesDetailViewController: UIViewController {
                             
                         }
                         
-                        //self.loadWebViewWithPath(path: (self.resource?.file?.localPath)!)
+                        // self.loadWebViewWithPath(path: (self.resource?.file?.localPath)!)
                     } else {
-                        //let path = resourcesDownloadPath + "/PDF_linking.pdf"
+                        // let path = resourcesDownloadPath + "/PDF_linking.pdf"
                         self.startDownloadingfile()
-                        //let pdfData = FileDownloadManager.decrytFile(pathURL:URL(string:path))
-                        //self.loadWebViewWithData(data: pdfData!)
+                        // let pdfData = FileDownloadManager.decrytFile(pathURL:URL(string:path))
+                        // self.loadWebViewWithData(data: pdfData!)
                     }
-                    
                     
                 } else {
                     webView?.loadHTMLString(self.requestLink!, baseURL: nil)
@@ -124,8 +120,6 @@ class ResourcesDetailViewController: UIViewController {
         }
         debugPrint("custom download path: \(resourcesDownloadPath)")
         
-       
-        
         let fileURL =  (self.resource?.file?.link)!
         
         let url = URL(string: fileURL)
@@ -140,11 +134,10 @@ class ResourcesDetailViewController: UIViewController {
             return
         } // Tush
         
-        fdm.downloadFile(fileName as String, fileURL: encodedUrl , destinationPath: resourcesDownloadPath)
+        fdm.downloadFile(fileName as String, fileURL: encodedUrl, destinationPath: resourcesDownloadPath)
     }
     
-    
-    // MARK:Button Actions
+    // MARK: Button Actions
     
     @IBAction func cancelButtonClicked(_ sender: Any){
         self.dismiss(animated: true, completion: nil)
@@ -172,9 +165,11 @@ extension ResourcesDetailViewController: WKNavigationDelegate {
         self.activityIndicator.stopAnimating()
         self.activityIndicator.removeFromSuperview()
         
-        let alert = UIAlertController(title: kTitleError,message: error.localizedDescription,preferredStyle: UIAlertController.Style.alert)
+        let alert = UIAlertController(title: kTitleError,
+                                      message: error.localizedDescription,
+                                      preferredStyle: UIAlertController.Style.alert)
         
-        alert.addAction(UIAlertAction.init(title: kTitleOKCapital, style: .default, handler: { (action) in
+        alert.addAction(UIAlertAction.init(title: kTitleOKCapital, style: .default, handler: { (_) in
             
             self.dismiss(animated: true, completion: nil)
             
@@ -201,8 +196,7 @@ extension ResourcesDetailViewController: MFMailComposeViewControllerDelegate{
                     let file = Bundle.main.url(forResource: self.resource?.file?.link!, withExtension: "pdf")
                     let data = try Data(contentsOf: file!)
                     composeVC.addAttachmentData(data, mimeType: "application/pdf", fileName: (resource?.file?.name)!)
-                }
-                catch{
+                } catch {
                     
                 }
             } else {
@@ -214,27 +208,25 @@ extension ResourcesDetailViewController: MFMailComposeViewControllerDelegate{
                     let data = FileDownloadManager.decrytFile(pathURL: URL.init(string: fullPath))
                     
                     composeVC.addAttachmentData(data!, mimeType: "application/pdf", fileName: (resource?.file?.name)!)
-                }
-                catch let error as NSError{
+                } catch let error as NSError{
                     print("error \(error)")
                 }
             }
-            
-            
             
         } else {
             composeVC.setMessageBody((resource?.file?.link)!, isHTML: true)
         }
         
-        
-        if MFMailComposeViewController.canSendMail()
-        {
+        if MFMailComposeViewController.canSendMail() {
             self.present(composeVC, animated: true, completion: nil)
             
         } else {
-            let alert = UIAlertController(title: kTitleError,message: kFailedToConnectAppleMail, preferredStyle: UIAlertController.Style.alert)
+            let alert = UIAlertController(title: kTitleError,
+                                          message: kFailedToConnectAppleMail,
+                                          preferredStyle: UIAlertController.Style.alert)
             
-            alert.addAction(UIAlertAction.init(title: kTitleOKCapital, style: .default, handler: { (action) in
+            alert.addAction(UIAlertAction.init(title: kTitleOKCapital,
+                                               style: .default, handler: { (_) in
                 
 //                self.dismiss(animated: true, completion: nil)
                 
@@ -253,7 +245,6 @@ extension ResourcesDetailViewController: MFMailComposeViewControllerDelegate{
     }
     
 }
-
 
 extension ResourcesDetailViewController: FileDownloadManagerDelegates {
     

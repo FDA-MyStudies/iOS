@@ -183,8 +183,7 @@ class ConsentBuilder {
                 let valLAR = reviewConsent?.consentByLAR ?? "No"
               if valLAR.caseInsensitiveCompare("yes") == .orderedSame {
                 consentHasLAR = true
-              }
-              else {
+              } else {
                 consentHasLAR = false
               }
                 let valAdditionalSign = reviewConsent?.additionalSignature ?? "No"

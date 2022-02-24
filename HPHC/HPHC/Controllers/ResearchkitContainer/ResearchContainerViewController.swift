@@ -52,8 +52,7 @@ class ResearchContainerViewController: UIViewController, HealthClientType {
         
         if ORKPasscodeViewController.isPasscodeStoredInKeychain() {
             toStudy()
-        }
-        else {
+        } else {
             toOnboarding()
         }
     }
@@ -93,7 +92,6 @@ class ResearchContainerViewController: UIViewController, HealthClientType {
       //  present(viewController, animated: true, completion: nil)
     }
 }
-
 
 extension ResearchContainerViewController: ORKTaskViewControllerDelegate {
 

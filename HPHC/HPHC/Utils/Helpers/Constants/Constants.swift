@@ -20,7 +20,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 import Foundation
 
-// MARK:- Alert Constants
+// MARK: - Alert Constants
 
 let kTermsAndConditionLink = "http://www.google.com"
 let kPrivacyPolicyLink = "http://www.facebook.com"
@@ -30,7 +30,7 @@ let kProceedTitle = NSLocalizedStrings("Proceed", comment: "")
 
 let kAlertPleaseEnterValidValue = NSLocalizedStrings("Please Enter Valid Value", comment: "")
 
-//Used for corner radius Color for sign in , sign up , forgot password etc screens
+// Used for corner radius Color for sign in , sign up , forgot password etc screens
 let kUicolorForButtonBackground = UIColor.init(red: 0/255.0, green: 124/255.0, blue: 186/255.0, alpha: 1.0).cgColor
 
 let kUicolorForCancelBackground = UIColor.init(red: 140/255.0, green: 149/255.0, blue: 163/255.0, alpha: 1.0).cgColor
@@ -41,7 +41,7 @@ let NoNetworkErrorCode = -101
 let CouldNotConnectToServerCode = -1001
 var bundleKey: UInt8 = 0
 
-//Display Constants
+// Display Constants
 let kTitleError = NSLocalizedStrings("Error", comment: "")
 let kTitleMessage = NSLocalizedStrings("Message", comment: "")
 let kImportantNoteMessage = NSLocalizedStrings("Important Note", comment: "")
@@ -67,19 +67,18 @@ let kMessageAppNotificationOffRemainder = NSLocalizedStrings(
                        comment: "")
 let kAuthenticationRequired = NSLocalizedStrings("Authentication Required", comment: "")
 
-// MARK:- Signin Constants
+// MARK: - Signin Constants
 let kSignInTitleText = NSLocalizedStrings("SIGN IN", comment: "")
 let kWhyRegisterText = NSLocalizedStrings("Why Register?", comment: "")
 let kSignInTableViewCellIdentifier = "DetailsCell"
 
-
-// MARK:- ForgotPassword Constants
+// MARK: - ForgotPassword Constants
 let kForgotPasswordTitleText = NSLocalizedStrings("PASSWORD HELP", comment: "")
 let kForgotPasswordResponseMessage =
     NSLocalizedStrings("We have sent a temporary password to your registered email. Please login with temporary password and change your password.",
                        comment: "")
 
-// MARK:- SignUp Constants
+// MARK: - SignUp Constants
 let kSignUpTitleText = NSLocalizedStrings("SIGN UP", comment: "")
 let kAgreeToTermsAndConditionsText = NSLocalizedStrings("I Agree to the Terms and Privacy Policy", comment: "")
 let kTermsText = NSLocalizedStrings("Terms", comment: "")
@@ -88,12 +87,11 @@ let kSignUpTableViewCellIdentifier = "CommonDetailsCell"
 let kNo = NSLocalizedStrings("No", comment: "")
 let kYes = NSLocalizedStrings("Yes", comment: "")
 
-// MARK:- NOTIFICATIONS Constants
+// MARK: - NOTIFICATIONS Constants
 let kNotificationsTitleText = NSLocalizedStrings("NOTIFICATIONS", comment: "")
 let kNotificationTableViewCellIdentifier = "NotificationCell"
 
-
-// MARK:- Validations Message during signup and sign in process
+// MARK: - Validations Message during signup and sign in process
 
 let kMessageFirstNameBlank = NSLocalizedStrings("Please enter your first name.", comment: "")
 let kMessageLastNameBlank = NSLocalizedStrings("Please enter your last name.", comment: "")
@@ -107,12 +105,10 @@ let kMessageConfirmPasswordBlank = NSLocalizedStrings("Please confirm the passwo
 
 let kMessagePasswordMatchingToOtherFeilds = NSLocalizedStrings("Your password should not match with email id", comment: "")
 
-
 let kMessageValidEmail = NSLocalizedStrings("Please enter valid email address.", comment: "")
 
 let kMessageValidatePasswords = NSLocalizedStrings("The Password and Confirm password fields don't match.", comment: "")
 let kMessageProfileValidatePasswords = NSLocalizedStrings("New password and confirm password fields don't match.", comment: "")
-
 
 let kMessageValidatePasswordCharacters = NSLocalizedStrings("Password should have minimum of 8 characters.", comment: "")
 let valPasComplx1 = "Your password MUST be 8-64 characters and contain each of the following: An uppercase letter, A lower case letter,"
@@ -126,27 +122,28 @@ let kMessageNewPasswordBlank = NSLocalizedStrings("Please enter your new passwor
 let kMessageValidateChangePassword = NSLocalizedStrings("New password and old password are same.", comment: "")
 let kMessageRelationship = NSLocalizedStrings("Please enter your relationship to the participant.", comment: "")
 
-// MARK:- ChangePassword Constants
+// MARK: - ChangePassword Constants
 let kChangePasswordTitleText = NSLocalizedStrings("CHANGE PASSWORD", comment: "")
 let kCreatePasswordTitleText = NSLocalizedStrings("CREATE PASSWORD", comment: "")
 let kChangePawwordCellIdentifer = "changePasswordCell"
 let kChangePasswordResponseMessage = NSLocalizedStrings("Your password has been changed successfully", comment: "")
 
 let kMessageAllFieldsAreEmpty = NSLocalizedStrings("Please enter all the fields", comment: "")
-let kMessageValidFirstName = NSLocalizedStrings("Please enter valid first name. Please use letters(length:1 - 100 characters).", comment: "")
+let kMessageValidFirstName = NSLocalizedStrings("Please enter valid first name. Please use letters(length:1 - 100 characters).",
+                                                comment: "")
 let kMessageValidLastName = NSLocalizedStrings("Please enter valid last name. Please use letters(length:1 - 100 characters).", comment: "")
 
 let kMessageValidateOldAndNewPasswords = NSLocalizedStrings("Old password and New password should not be same.", comment: "")
 
-// MARK:-VerificationController
+// MARK: - VerificationController
 let kMessageVerificationCodeEmpty = NSLocalizedStrings("Please enter valid Verification Code", comment: "")
 
-// MARK:- FeedbackviewController constants
+// MARK: - FeedbackviewController constants
 let kFeedbackTableViewCellIdentifier1 = "FeedbackCellFirst"
 let kFeedbackTableViewCellIdentifier2 = "FeedbackCellSecond"
 let kMessageFeedbackSubmittedSuccessfuly = NSLocalizedStrings("Thank you for providing feedback. Your gesture is appreciated.", comment: "")
 
-// MARK:- ContactUsviewController constants
+// MARK: - ContactUsviewController constants
 let kContactUsTableViewCellIdentifier = "ContactUsCell"
 let kMessageSubjectBlankCheck = NSLocalizedStrings("Please enter subject", comment: "")
 let kMessageMessageBlankCheck = NSLocalizedStrings("Please enter message", comment: "")
@@ -155,8 +152,7 @@ let kMessageContactedSuccessfuly =
                        comment: "")
 let kMessageTextViewPlaceHolder = ""
 
-
-// MARK:- ActivitiesViewController constants
+// MARK: - ActivitiesViewController constants
 let kBackgroundTableViewColor = UIColor.init(red: 216/255.0, green: 227/255.0, blue: 230/255.0, alpha: 1)
 let kActivitiesTableViewCell = "ActivitiesCell"
 let kActivitiesTableViewScheduledCell = "ActivitiesCellScheduled"
@@ -165,7 +161,6 @@ let kYellowColor = UIColor.init(red: 245/255.0, green: 175/255.0, blue: 55/255.0
 let kBlueColor = UIColor.init(red: 0/255.0, green: 124/255.0, blue: 186/255.0, alpha: 1.0)
 let kGreenColor = UIColor.init(red: 76/255.0, green: 175/255.0, blue: 80/255.0, alpha: 1.0)
 
-
 let kResumeSpaces = NSLocalizedStrings("  Resume  ", comment: "")
 let kStartSpaces = NSLocalizedStrings("  Start  ", comment: "")
 let kCompletedSpaces = NSLocalizedStrings("  Completed  ", comment: "")
@@ -173,11 +168,11 @@ let kInCompletedSpaces = NSLocalizedStrings("  Incompleted  ", comment: "")
 let kExpiredSpaces = NSLocalizedStrings("  Expired  ", comment: "")
 let kEnterHere = NSLocalizedStrings("enter here", comment: "")
 
-// MARK:- ResourcesViewController constants
+// MARK: - ResourcesViewController constants
 let kResourcesTableViewCell = "ResourcesCell"
 var kNewResourceAvailable: String = NSLocalizedStrings("New Resource Available", comment: "")
 
-// MARK:- StudyDashboardViewController constants
+// MARK: - StudyDashboardViewController constants
 let kWelcomeTableViewCell = "welcomeCell"
 let kStudyActivityTableViewCell = "studyActivityCell"
 let kPercentageTableViewCell = "percentageCell"
@@ -206,7 +201,7 @@ let kEncourageCompleteStudy =
     NSLocalizedStrings(" today. That’s Ok! We know you’re busy, but we encourage you to complete study activities before they expire.",
                        comment: "")
 
-// MARK:- Eligibility constants
+// MARK: - Eligibility constants
 
 let kMessageForInvalidToken = NSLocalizedStrings("Please enter valid enrollment token", comment: "")
 
@@ -217,7 +212,7 @@ let kMessageInvalidTokenOrIfStudyDoesNotExist =
                             NSLocalizedStrings("Sorry, this token is invalid. Please enter a valid token to continue.", comment: "")
 let kMessageTokenIsRequired = NSLocalizedStrings("Token is required", comment: "")
 
-// MARK:- StudyHomeMessages
+// MARK: - StudyHomeMessages
 let kMessageForStudyUpcomingState =
     NSLocalizedStrings("This study is an upcoming one and isn't yet open for enrolling participants. Please check back later.",
                        comment: "")
@@ -234,21 +229,19 @@ let kMessageForStudyEnrollingNotAllowed = NSLocalizedStrings(
 let kEnterToken =  NSLocalizedStrings("Enter a token", comment: "")
 let kEnterKeyword =  NSLocalizedStrings("Enter keyword(s)", comment: "")
 
-
-// MARK:- StudyDashboardViewController segues
+// MARK: - StudyDashboardViewController segues
 let unwindToStudyListDashboard = "unwindToStudyListDashboardIdentifier"
 
-
-// MARK:- FilterListViewController Segue
+// MARK: - FilterListViewController Segue
 let filterListSegue = "filterscreenSegue"
 
-// MARK:- Staging User Details
+// MARK: - Staging User Details
 
 let kStagingUserEmailId = "aqibm@boston-technology.com"
 let kIsStagingUser = "StagingUser"
 let kFailedToConnectAppleMail = NSLocalizedStrings("Failed to connect to Apple Mail app", comment: "")
 
-// MARK:- Web View
+// MARK: - Web View
 
 let kUsername = NSLocalizedStrings("Username", comment: "")
 let kPassword = NSLocalizedStrings("Password", comment: "")
@@ -259,10 +252,10 @@ func setLanguageLocale() {
     
     /*
     let locale3 = Locale.preferredLanguages.first ?? "en"
-    print("onLaunch language \(locale3)")
-    if(locale3.hasPrefix("es")){
+    // debugPrint("onLaunch language \(locale3)")
+    if (locale3.hasPrefix("es")){
         ud1.set("es", forKey: kUserDeviceLanguage)
-    }else{
+    } else {
         ud1.set("en", forKey: kUserDeviceLanguage)
     }*/
     
@@ -274,15 +267,15 @@ func setLanguageLocale() {
             
         }
     }
-    print("Krishna languageLocale in setLanguageLocale  \(languageLocale)")
-    print("Krishna languageLocale in setLanguageLocale current language code  \(Locale.autoupdatingCurrent.languageCode)")
-    print("Krishna preferredLanguage \(Locale.preferredLanguages.first) and other options size \(Locale.preferredLanguages.count)")
+    // debugPrint("Krishna languageLocale in setLanguageLocale  \(languageLocale)")
+    // debugPrint("Krishna languageLocale in setLanguageLocale current language code  \(Locale.autoupdatingCurrent.languageCode)")
+    // debugPrint("Krishna preferredLanguage \(Locale.preferredLanguages.first) and other options size \(Locale.preferredLanguages.count)")
     
     if !NetworkManager.isNetworkAvailable() {
         
         let defaultLanguage = ud.value(forKey: kUserDeviceLanguage)
         print("Krishna languageLocale in setLanguageLocale  defaultLanguage outside condition userstandard locale is en \(languageLocale)")
-        if (defaultLanguage != nil) {
+        if defaultLanguage != nil {
             
             if (defaultLanguage as! String).hasPrefix("es") {
                 languageLocale = "es"
@@ -293,18 +286,18 @@ func setLanguageLocale() {
                 print("Krishna languageLocale in setLanguageLocale else locale is en \(languageLocale)")
             }
         }
-    }else{
+    } else {
         
     }
     
     let ud1 = UserDefaults.standard
-    if(languageLocale.hasPrefix("es")){
+    if languageLocale.hasPrefix("es") {
         ud1.set("es", forKey: kUserDeviceLanguage)
-    }else{
+    } else {
         ud1.set("en", forKey: kUserDeviceLanguage)
     }
     ud1.synchronize()
-    print("Krishna languageLocale in setLanguageLocale user defined language is \(ud1.value(forKey: kUserDeviceLanguage))")
+    // debugPrint("Krishna languageLocale in setLanguageLocale user defined language is \(ud1.value(forKey: kUserDeviceLanguage))")
     
     // set language local for storyboards
     // AppDelegate.selectedLocale()
@@ -314,20 +307,20 @@ func setLanguageLocale() {
 func getLanguageLocale() -> String {
     
     let defaultLanguage = ud.value(forKey: kUserDeviceLanguage)
-    print("Krishna defaultLanguage in getLanguageLocale  \(defaultLanguage)")
-    if (defaultLanguage != nil) {
-        if((defaultLanguage as! String).hasPrefix("es")){
+    // debugPrint("Krishna defaultLanguage in getLanguageLocale  \(defaultLanguage)")
+    if defaultLanguage != nil {
+        if (defaultLanguage as! String).hasPrefix("es") {
             return "es"
-        }else{
+        } else {
             return "en"
         }
     } else {
         
         let languageLocale = Locale.preferredLanguages.first ?? "en"
         print("Krishna defaultLanguage in getLanguageLocale else condition  \(languageLocale)")
-        if(languageLocale.hasPrefix("es")){
+        if languageLocale.hasPrefix("es") {
             return "es"
-        }else{
+        } else {
             return "en"
         }
 
@@ -335,7 +328,7 @@ func getLanguageLocale() -> String {
 }
 
 // Get Path For Resource from Bundle
-//func getPathForResourceFromBundle(resourceName: String) -> String {
+// func getPathForResourceFromBundle(resourceName: String) -> String {
 //
 //    var plistPath = Bundle.main.path(forResource: resourceName, ofType: ".plist", inDirectory: nil)
 //    let localeDefault = getLanguageLocale()
@@ -350,4 +343,4 @@ func getLanguageLocale() -> String {
 //
 //
 //    return plistPath ?? ""
-//}
+// }

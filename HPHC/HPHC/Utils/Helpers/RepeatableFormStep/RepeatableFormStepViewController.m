@@ -58,7 +58,6 @@ OTHER DEALINGS IN THE SOFTWARE.
     }
     _originalFormItems = items;
     
-    
 }
 
 - (void) viewDidAppear:(BOOL)animated {
@@ -94,7 +93,7 @@ OTHER DEALINGS IN THE SOFTWARE.
         }
         UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
         
-        //button.frame = view.bounds;
+        // button.frame = view.bounds;
         
         
         [button setTitle:[self formStep].repeatableText forState:UIControlStateNormal];
@@ -150,8 +149,7 @@ OTHER DEALINGS IN THE SOFTWARE.
         if (item.answerFormat != nil) {
             mItem = [[ORKFormItem alloc] initWithIdentifier:identifier text:item.text answerFormat:[item.answerFormat copy] optional:item.optional];
             mItem.placeholder = item.placeholder;
-        }
-        else {
+        } else {
             mItem = [[ORKFormItem alloc] initWithSectionTitle:item.text];
         }
         [mItems addObject:mItem];
@@ -175,7 +173,7 @@ OTHER DEALINGS IN THE SOFTWARE.
             
             if (self.lastSectionRowCount <= previousLastSectionRowCount) {
                 scrollToIndexPath = [NSIndexPath indexPathForRow:previousLastSectionRowCount - 1 inSection:self.repeatableTextSection - 1];
-            }else {
+            } else {
                 scrollToIndexPath = [NSIndexPath indexPathForRow:0 inSection:self.repeatableTextSection];
             }
             

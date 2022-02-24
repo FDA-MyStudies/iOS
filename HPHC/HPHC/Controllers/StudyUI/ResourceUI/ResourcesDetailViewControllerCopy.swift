@@ -22,7 +22,7 @@ import UIKit
 import MessageUI
 import WebKit
 import SafariServices
-//let resourcesDownloadPath = AKUtility.baseFilePath + "/Resources"
+// let resourcesDownloadPath = AKUtility.baseFilePath + "/Resources"
 
 class ResourcesDetailViewControllerCopy: UIViewController {
     
@@ -31,7 +31,6 @@ class ResourcesDetailViewControllerCopy: UIViewController {
     
     @IBOutlet var progressBar: UIProgressView?
     @IBOutlet var bottomToolBar: UIToolbar?
-    
     
     var activityIndicator: UIActivityIndicatorView!
     var requestLink: String?
@@ -68,12 +67,13 @@ class ResourcesDetailViewControllerCopy: UIViewController {
         
         wkWebConfig.userContentController = wkUController
         
-        
-        let webViewFrame = CGRect.init(x: 0, y: 0, width: (webViewContainer?.frame.width)!, height: (webViewContainer?.frame.height)! - 44.0)
+        let webViewFrame = CGRect(x: 0,
+                                  y: 0,
+                                  width: (webViewContainer?.frame.width)!,
+                                  height: (webViewContainer?.frame.height)! - 44.0)
         
         webView = WKWebView.init(frame: webViewFrame, configuration: wkWebConfig)
-        
-       
+    
         webViewContainer?.addSubview(webView!)
        
     }
@@ -123,16 +123,13 @@ class ResourcesDetailViewControllerCopy: UIViewController {
         
         if self.isEmailComposerPresented == false{
         
-        
         if self.resource?.file?.link != nil {
             
             activityIndicator = UIActivityIndicatorView(style: .gray)
             activityIndicator.center = CGPoint(x: self.view.frame.midX, y: self.view.frame.midY-100)
             
-           
             self.view.addSubview(activityIndicator)
-            
-            
+                
             activityIndicator.startAnimating()
              self.activityIndicator.hidesWhenStopped = true
             if self.resource?.file?.mimeType == .pdf {
@@ -150,9 +147,8 @@ class ResourcesDetailViewControllerCopy: UIViewController {
 
                     }
                     
-                                      //self.loadWebViewWithPath(path: (self.resource?.file?.localPath)!)
-                }
-                else {
+                                      // self.loadWebViewWithPath(path: (self.resource?.file?.localPath)!)
+                } else {
                    //
                     if let link = self.resource?.file?.link,
                         let fileName = URL(string: link)?.lastPathComponent {
@@ -226,8 +222,7 @@ class ResourcesDetailViewControllerCopy: UIViewController {
         fdm.downloadFile(fileName as String, fileURL: encodedURL, destinationPath: resourcesDownloadPath)
     }
     
-    
-    // MARK:Button Actions
+    // MARK: Button Actions
     
     @IBAction func cancelButtonClicked(_ sender : Any) {
         self.dismiss(animated: true, completion: nil)
@@ -277,7 +272,7 @@ extension ResourcesDetailViewControllerCopy:UIWebViewDelegate {
         
         alert.addAction(UIAlertAction.init(title:kTitleOKCapital,
                                            style: .default,
-                                           handler: { (action) in
+                                           handler: { (_) in
             
             self.dismiss(animated: true, completion: nil)
             
@@ -289,7 +284,6 @@ extension ResourcesDetailViewControllerCopy:UIWebViewDelegate {
 }
 
 extension ResourcesDetailViewControllerCopy:WKUIDelegate, WKNavigationDelegate{
-    
     
     func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation) {
         print("webView:\(webView) didStartProvisionalNavigation:\(navigation)")
@@ -330,7 +324,7 @@ extension ResourcesDetailViewControllerCopy:WKUIDelegate, WKNavigationDelegate{
                                                URLCredential?) -> Void) {
         print("webView:\(webView) didReceiveAuthenticationChallenge:\(challenge) completionHandler:\(completionHandler)")
         
-        switch (challenge.protectionSpace.authenticationMethod) {
+        switch challenge.protectionSpace.authenticationMethod {
         case NSURLAuthenticationMethodHTTPBasic:
             let alertController = UIAlertController(title: kAuthenticationRequired, message: webView.url?.host, preferredStyle: .alert)
             weak var usernameTextField: UITextField!
@@ -344,10 +338,10 @@ extension ResourcesDetailViewControllerCopy:WKUIDelegate, WKNavigationDelegate{
                 textField.isSecureTextEntry = true
                 passwordTextField = textField
             }
-            alertController.addAction(UIAlertAction(title: kTitleCancel, style: .cancel, handler: { action in
+            alertController.addAction(UIAlertAction(title: kTitleCancel, style: .cancel, handler: { _ in
                 completionHandler(.cancelAuthenticationChallenge, nil)
             }))
-            alertController.addAction(UIAlertAction(title: kLogIn, style: .default, handler: { action in
+            alertController.addAction(UIAlertAction(title: kLogIn, style: .default, handler: { _ in
                 guard let username = usernameTextField.text, let password = passwordTextField.text else {
                     completionHandler(.rejectProtectionSpace, nil)
                     return
@@ -393,7 +387,7 @@ extension ResourcesDetailViewControllerCopy:WKUIDelegate, WKNavigationDelegate{
         print("webView:\(webView) runJavaScriptAlertPanelWithMessage:\(message) initiatedByFrame:\(frame) completionHandler:\(completionHandler)")
         
         let alertController = UIAlertController(title: frame.request.url?.host, message: message, preferredStyle: .alert)
-        alertController.addAction(UIAlertAction(title: kTitleOKCapital, style: .default, handler: { action in
+        alertController.addAction(UIAlertAction(title: kTitleOKCapital, style: .default, handler: { _ in
             completionHandler()
         }))
         present(alertController, animated: true, completion: nil)
@@ -406,10 +400,10 @@ extension ResourcesDetailViewControllerCopy:WKUIDelegate, WKNavigationDelegate{
         print("webView:\(webView) runJavaScriptConfirmPanelWithMessage:\(message) initiatedByFrame:\(frame) completionHandler:\(completionHandler)")
         
         let alertController = UIAlertController(title: frame.request.url?.host, message: message, preferredStyle: .alert)
-        alertController.addAction(UIAlertAction(title: kTitleCancel, style: .cancel, handler: { action in
+        alertController.addAction(UIAlertAction(title: kTitleCancel, style: .cancel, handler: { _ in
             completionHandler(false)
         }))
-        alertController.addAction(UIAlertAction(title: kTitleOKCapital, style: .default, handler: { action in
+        alertController.addAction(UIAlertAction(title: kTitleOKCapital, style: .default, handler: { _ in
             completionHandler(true)
         }))
         present(alertController, animated: true, completion: nil)
@@ -427,10 +421,10 @@ extension ResourcesDetailViewControllerCopy:WKUIDelegate, WKNavigationDelegate{
             textField.text = defaultText
             alertTextField = textField
         }
-        alertController.addAction(UIAlertAction(title: kTitleCancel, style: .cancel, handler: { action in
+        alertController.addAction(UIAlertAction(title: kTitleCancel, style: .cancel, handler: { _ in
             completionHandler(nil)
         }))
-        alertController.addAction(UIAlertAction(title: kTitleOKCapital, style: .default, handler: { action in
+        alertController.addAction(UIAlertAction(title: kTitleOKCapital, style: .default, handler: { _ in
             completionHandler(alertTextField.text)
         }))
         present(alertController, animated: true, completion: nil)
@@ -454,7 +448,7 @@ extension ResourcesDetailViewControllerCopy:MFMailComposeViewControllerDelegate{
                     let file = Bundle.main.url(forResource: self.resource?.file?.link!, withExtension: "pdf")
                     let data = try Data(contentsOf: file!)
                     composeVC.addAttachmentData(data, mimeType: "application/pdf", fileName: (resource?.file?.name)!)
-                } catch{
+                } catch {
                     
                 }
             } else {
@@ -466,22 +460,21 @@ extension ResourcesDetailViewControllerCopy:MFMailComposeViewControllerDelegate{
                     let data = FileDownloadManager.decrytFile(pathURL: URL.init(string: fullPath))
                     
                     composeVC.addAttachmentData(data!, mimeType: "application/pdf", fileName: (resource?.file?.name)!)
-                } catch _ as NSError{
-                    //print("error \(error)")
+                } catch _ as NSError {
+                    // print("error \(error)")
                 }
             }
         } else {
             composeVC.setMessageBody((resource?.file?.link)!, isHTML: true)
         }
         
-        if MFMailComposeViewController.canSendMail()
-        {
+        if MFMailComposeViewController.canSendMail() {
             self.present(composeVC, animated: true, completion: nil)
             
         } else {
-            let alert = UIAlertController(title:kTitleError,message:"",preferredStyle: UIAlertController.Style.alert)
+            let alert = UIAlertController(title:kTitleError, message: "", preferredStyle: UIAlertController.Style.alert)
             
-            alert.addAction(UIAlertAction.init(title:kTitleOKCapital, style: .default, handler: { (action) in
+            alert.addAction(UIAlertAction.init(title:kTitleOKCapital, style: .default, handler: { (_) in
                 
                 self.dismiss(animated: true, completion: nil)
                 
@@ -520,7 +513,6 @@ extension ResourcesDetailViewControllerCopy:FileDownloadManagerDelegates{
                 self.webView?.load(data!, mimeType: mimeType, characterEncodingName: mimeType, baseURL: URL.init(fileURLWithPath: "") )
             }
            
-            
             // self.webView?.load(data!, mimeType: mimeType, textEncodingName: mimeType, baseURL:URL.init(fileURLWithPath: "") )
         }
         

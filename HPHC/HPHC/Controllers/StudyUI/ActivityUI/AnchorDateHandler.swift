@@ -20,7 +20,6 @@
 
 import UIKit
 
-
 class PropertyMetaData {
     
     lazy var propertyId: String = ""
@@ -86,8 +85,8 @@ class AnchorDateQueryMetaData {
         // Date of entry
         if let dateOfEntryDict = jsonDict[ppMetaData.dateOfEntryId] as? JSONDictionary,
             let dateOfEntry = dateOfEntryDict["value"] as? String {
-            //let date = ResponseDataFetch.labkeyDateFormatter.date(from: dateOfEntry)
-            self.participantPropertyMetaData?.dateOfEntryValue = dateOfEntry //as? String
+            // let date = ResponseDataFetch.labkeyDateFormatter.date(from: dateOfEntry)
+            self.participantPropertyMetaData?.dateOfEntryValue = dateOfEntry // as? String
         }
     }
     
@@ -247,10 +246,10 @@ class AnchorDateHandler {
 
     }
     
-    ///Participant Property values received from Response Server saved in Database.
-    ///Saved value will be used to compare from the values Saved on UR Server.
-    ///In case DB Saved values is most recent then liftime of that activity has to be calculated again.
-    ///Newly calculated then saved UR Server.
+    /// Participant Property values received from Response Server saved in Database.
+    /// Saved value will be used to compare from the values Saved on UR Server.
+    /// In case DB Saved values is most recent then liftime of that activity has to be calculated again.
+    /// Newly calculated then saved UR Server.
     func queryParticipantPropertiesForResources(_ completionHandler: @escaping AnchordDateFetchCompletionHandler) {
         
         handler = completionHandler
@@ -297,8 +296,9 @@ class AnchorDateHandler {
         
     }
         
-    func requestAnchorDateForParticipantProperty(for emptyAnchorDateDetail: AnchorDateQueryMetaData,
-                                               completion:  @escaping () -> Void) {
+    func requestAnchorDateForParticipantProperty(
+        for emptyAnchorDateDetail: AnchorDateQueryMetaData,
+        completion:  @escaping () -> Void) {
     
         guard let ppMetaData = emptyAnchorDateDetail.participantPropertyMetaData
             else {
@@ -311,8 +311,9 @@ class AnchorDateHandler {
         let tableName = "ParticipantProperties"
         let method = ResponseMethods.executeSQL.method
         let query: String = "SELECT " + keys + " FROM " + tableName
-        let participantId: String = (study.userParticipateState.participantId)! //"214b3c8b672c735988df8c139fed8abe"
-        var urlString = ResponseServerURLConstants.DevelopmentURL + method.methodName + "?" + kParticipantId + "=" + participantId + "&sql=" + query
+        let participantId: String = (study.userParticipateState.participantId)! // "214b3c8b672c735988df8c139fed8abe"
+        var urlString =
+            ResponseServerURLConstants.DevelopmentURL + method.methodName + "?" + kParticipantId + "=" + participantId + "&sql=" + query
         urlString = urlString.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)!
         
         guard let requstUrl = URL(string: urlString) else {
@@ -322,12 +323,12 @@ class AnchorDateHandler {
         var request = URLRequest(url: requstUrl, cachePolicy: .reloadIgnoringLocalCacheData,
                                  timeoutInterval: NetworkConnectionConstants.ConnectionTimeoutInterval)
         request.httpMethod = method.methodType.methodTypeAsString
-        //request.httpBody = data
+        // request.httpBody = data
         
         let session = URLSession.shared
         let dataTask = session.dataTask(with: request, completionHandler: { (data, response, error) -> Void in
             
-            if (error != nil) {
+            if error != nil {
                 print(error as Any)
                 completion()
             } else if let response = response, let data = data {
@@ -355,20 +356,20 @@ class AnchorDateHandler {
         dataTask.resume()
     }
     
-    func requestAnchorDateForActivityResponse(for emptyAnchorDateDetail: AnchorDateQueryMetaData,
-    completion:  @escaping () -> Void) {
+    func requestAnchorDateForActivityResponse(
+        for emptyAnchorDateDetail: AnchorDateQueryMetaData,
+        completion:  @escaping () -> Void) {
         
         let keys = emptyAnchorDateDetail.sourceKey ?? ""
         let formKey: String = emptyAnchorDateDetail.sourceFormKey ?? ""
         let tableName = emptyAnchorDateDetail.sourceActivityId + formKey
         
-        
         let method = ResponseMethods.executeSQL.method
         let query:String = "SELECT " + keys + ",Created" + " FROM " + tableName
         
-        
-        let participantId: String = (self.study.userParticipateState.participantId)! //"214b3c8b672c735988df8c139fed8abe"
-        var urlString = ResponseServerURLConstants.DevelopmentURL + method.methodName + "?" + kParticipantId + "=" + participantId + "&sql=" + query
+        let participantId: String = (self.study.userParticipateState.participantId)! // "214b3c8b672c735988df8c139fed8abe"
+        var urlString =
+            ResponseServerURLConstants.DevelopmentURL + method.methodName + "?" + kParticipantId + "=" + participantId + "&sql=" + query
         urlString = urlString.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)!
         
         guard let requstUrl = URL(string: urlString) else {
@@ -380,12 +381,12 @@ class AnchorDateHandler {
                                  cachePolicy: URLRequest.CachePolicy.reloadIgnoringLocalCacheData,
                                  timeoutInterval: NetworkConnectionConstants.ConnectionTimeoutInterval)
         request.httpMethod = method.methodType.methodTypeAsString
-        //request.httpBody = data
+        // request.httpBody = data
         
         let session = URLSession.shared
         let dataTask = session.dataTask(with: request as URLRequest, completionHandler: { (data, response, error) -> Void in
             
-            if (error != nil) {
+            if error != nil {
                 print(error as Any)
                 completion()
             } else if let response = response, let data = data {
@@ -400,7 +401,7 @@ class AnchorDateHandler {
                         return
                     }
                     for rowDetail in rows {
-                        if let data =  rowDetail["data"] as? Dictionary<String,Any>{
+                        if let data =  rowDetail["data"] as? Dictionary<String, Any>{
                             
                             let anchorDateObject = data[emptyAnchorDateDetail.sourceKey] as? [String:String]
                             let anchorDateString = anchorDateObject?["value"]// as! String
@@ -485,5 +486,3 @@ class AnchorDateHandler {
     }
     
 }
-
-

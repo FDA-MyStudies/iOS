@@ -73,9 +73,8 @@ class ConsentResult {
                         self.consentPath = "Consent" +  "_" + "\((Study.currentStudy?.studyId)!)" + ".pdf"
                         
                         var fullPath: String!
-                        self.consentDocument?.makePDF(completionHandler: { data, error in
-                            //                          print("data: \(String(describing: data))    \n  error: \(String(describing: error))")
-                            
+                        self.consentDocument?.makePDF(completionHandler: { data, _ in
+                            // print("data: \(String(describing: data))    \n  error: \(String(describing: error))")
                             
                             let path =  AKUtility.baseFilePath + "/study"
                             let fileName: String = "Consent" +  "_" + "\((Study.currentStudy?.studyId)!)" + ".pdf"
@@ -84,7 +83,7 @@ class ConsentResult {
                             
                             fullPath = path + "/" + fileName
                           
-                          print("fullPath---\(fullPath)")
+                            print("fullPath---\(fullPath ?? "")")
                             
                             if !FileManager.default.fileExists(atPath: path) {
                                 try? FileManager.default.createDirectory(atPath: path, withIntermediateDirectories: true, attributes: nil)
@@ -210,18 +209,18 @@ class ConsentResult {
     }
     
     func setConsentDocument(consentDocument: ORKConsentDocument)  {
-        self.consentDocument = consentDocument;
+        self.consentDocument = consentDocument
     }
     
     func getConsentDocument() -> ORKConsentDocument {
         return self.consentDocument!
     }
     
-    func initWithDict(activityDict: Dictionary<String, Any>){
+    func initWithDict(activityDict: Dictionary<String, Any>) {
         
         // setter method with Dictionary
         
-        //Here the dictionary is assumed to have only type,startTime,endTime
+        // Here the dictionary is assumed to have only type,startTime,endTime
         if Utilities.isValidObject(someObject: activityDict as AnyObject?){
             
             if Utilities.isValidValue(someObject: activityDict[kActivityStartTime] as AnyObject ) {
@@ -246,7 +245,6 @@ class ConsentResult {
             Logger.sharedInstance.debug("activityDict Result Dictionary is null:\(activityDict)")
         }
     }
-    
     
     // MARK: Setter & getter methods for ActivityResult
     func setActivityResult(activityStepResult: ActivityStepResult)  {
@@ -276,7 +274,7 @@ class ConsentResult {
             var activityResultArray: Array<Dictionary<String, Any>> =  Array<Dictionary<String, Any>>()
             for stepResult  in result! {
                 let activityStepResult = stepResult as ActivityStepResult
-                activityResultArray.append( (activityStepResult.getActivityStepResultDict())! as Dictionary<String,Any>)
+                activityResultArray.append( (activityStepResult.getActivityStepResultDict())! as Dictionary<String, Any>)
             }
             
             activityDict?[kActivityResult] = activityResultArray

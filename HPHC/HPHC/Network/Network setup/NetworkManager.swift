@@ -21,8 +21,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 import Foundation
 import UIKit
 
-
-protocol NMWebServiceDelegate: class{
+protocol NMWebServiceDelegate: class {
     /**
      *  Called when request is fired.Use this to show any activity indicator
      *
@@ -51,7 +50,6 @@ protocol NMWebServiceDelegate: class{
     
 }
 
-
 protocol NMAuthChallengeDelegate{
     /**
      *  Called when server throws for authentacation challenge
@@ -71,15 +69,15 @@ protocol NMAuthChallengeDelegate{
      *
      *  @return NSURLSessionAuthChallengeDisposition
      */
-    func networkChallengeDisposition(_ manager : NetworkManager, challenge : URLAuthenticationChallenge) -> URLSession.AuthChallengeDisposition
+    func networkChallengeDisposition(_ manager: NetworkManager,
+                                     challenge : URLAuthenticationChallenge) -> URLSession.AuthChallengeDisposition
 }
 
 class NetworkManager {
     
-    static var instance : NetworkManager? = nil
+    static var instance : NetworkManager?
     var networkAvailability : Bool = false
-    var reachability : Reachability? = nil
-    
+    var reachability : Reachability?
     
     class func isNetworkAvailable() -> Bool{
         return self.sharedInstance().networkAvailability
@@ -88,7 +86,7 @@ class NetworkManager {
     init() {
     
         reachability =  try? Reachability()
-        print("network available init() and reachability \(reachability)")
+        // debugPrint("network available init() and reachability \(reachability)")
         NotificationCenter.default.addObserver(self, selector: #selector(reachabilityChanged(_:)),
                                                name: Notification.Name.reachabilityChanged, object: nil)
         try? reachability?.startNotifier()

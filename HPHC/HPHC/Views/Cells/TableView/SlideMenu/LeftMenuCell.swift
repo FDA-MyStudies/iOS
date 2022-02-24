@@ -26,7 +26,6 @@ class LeftMenuCell: UITableViewCell {
     @IBOutlet var labelTitle: UILabel?
     @IBOutlet var labelSubTitle: UILabel?
     
-    
     override func awakeFromNib() {
         super.awakeFromNib()
     }
@@ -36,12 +35,11 @@ class LeftMenuCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-    
     /**
      Used to populate Cell Data
      @param data    contains dictionary of type string(key and value)
      */
-    func populateCellData(data: Dictionary<String,Any>){
+    func populateCellData(data: Dictionary<String, Any>){
         menuIcon?.image = UIImage(named: data["iconName"] as! String)
         labelTitle?.text = data["menuTitle"] as? String
     }

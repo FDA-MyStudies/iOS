@@ -30,7 +30,6 @@ let kConsentStepHTML = "html"
 let kConsentStepURL = "url"
 let kConsentStepVisualStep = "visualStep"
 
-
 enum ConsentStepSectionType: String{
     case overview = "overview"
     case dataGathering = "dataGathering"
@@ -42,40 +41,36 @@ enum ConsentStepSectionType: String{
     case withdrawing = "withdrawing"
     case custom = "custom"
     
-    
     /*
      method to get IntegerValue for the Enum
      returns Integer specific to ORKconsent
      
     */
     
-    
-    func getIntValue()-> Int!{
+    func getIntValue() -> Int! {
         switch self {
         case .overview:
-            return 0;
+            return 0
         case .dataGathering:
-            return 1;
+            return 1
         case .privacy:
-            return 2;
+            return 2
         case .dataUse :
-            return 3;
+            return 3
         case .timeCommitment:
-            return 4;
+            return 4
         case .studySurvey:
-            return 5;
+            return 5
         case .studyTasks:
-            return 6;
+            return 6
         case .withdrawing:
-            return 7;
+            return 7
         case .custom:
-            return 8;
+            return 8
         default:
             return -1
         }
     }
-
-    
 }
 
 class ConsentSectionStep {
@@ -90,7 +85,6 @@ class ConsentSectionStep {
     var url: String?
     
     var visualStep: Bool?
-    
     
     init() {
         /* default Intalizer method */
@@ -146,7 +140,7 @@ class ConsentSectionStep {
     /**
      createConsentSection method returns a ORKConsentSection instance based on the properties
     */
-    func createConsentSection() ->ORKConsentSection {
+    func createConsentSection() -> ORKConsentSection {
         
         let consentType: Int? = (self.type?.getIntValue())! >= 0 ? (self.type?.getIntValue()) : -1
         
@@ -176,9 +170,4 @@ class ConsentSectionStep {
         
         return consentSection
     }
-    
-    
-    
-   
-    
 }

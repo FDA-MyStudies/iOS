@@ -60,7 +60,6 @@ class QuestionStep: ORKQuestionStep {
 
 class TextChoiceQuestionController: ORKQuestionStepViewController {
     
-    
     ///  Table View ref from the Super class
     var tableView: UITableView?
     
@@ -90,9 +89,9 @@ class TextChoiceQuestionController: ORKQuestionStepViewController {
         if self.isOtherCellSelected {
             var otherChoiceDict: [String:Any]!
             if self.otherChoice.isShowOtherField {
-                otherChoiceDict = ["other": otherChoice.otherTitle,"text":otherChoice.otherChoiceText,"otherValue": otherChoice.value]
+                otherChoiceDict = ["other": otherChoice.otherTitle, "text":otherChoice.otherChoiceText, "otherValue": otherChoice.value]
             } else {
-                otherChoiceDict = ["other": otherChoice.otherTitle,"otherValue": otherChoice.value]
+                otherChoiceDict = ["other": otherChoice.otherTitle, "otherValue": otherChoice.value]
             }
             choices.append(otherChoiceDict  as  Any)
             choices.append(otherChoice.value)
@@ -110,7 +109,6 @@ class TextChoiceQuestionController: ORKQuestionStepViewController {
         
     }
     
-    
     /// Data sources
     lazy var textChoices: [ORKTextChoice]! = []
     lazy private(set) var selectedChoices: [ORKTextChoice] = []
@@ -119,7 +117,7 @@ class TextChoiceQuestionController: ORKQuestionStepViewController {
     
     private(set) var isOtherCellSelected = false
     
-    //MARK:- UI
+    // MARK: - UI
     
     /// Search bar
     private var searchBar: UISearchBar?
@@ -167,7 +165,6 @@ class TextChoiceQuestionController: ORKQuestionStepViewController {
         }
     }
     
-    
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
     }
@@ -180,13 +177,12 @@ class TextChoiceQuestionController: ORKQuestionStepViewController {
         self.otherChoice = otherChoice
     }
     
-    // MARK:- Lifycycle
+    // MARK: - Lifycycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         stepDidChange()
     }
-    
     
     override func viewWillAppear(_ animated: Bool) {
       self.tableView?.tableHeaderView = headerViewForAdditionalText()
@@ -208,7 +204,6 @@ class TextChoiceQuestionController: ORKQuestionStepViewController {
         self.updateNextOrContinueBtnState()
         
     }
-    
     
     /// Ready the view
     func stepDidChange() {
@@ -237,7 +232,7 @@ class TextChoiceQuestionController: ORKQuestionStepViewController {
             self.answers = nil
         }
         
-        print(self.result as Any,"Result")
+        print(self.result as Any, "Result")
         
         // Get the ref of the super class table view
         if let tableView = self.view.allSubViewsOf(type: UITableView.self).first {
@@ -261,7 +256,7 @@ class TextChoiceQuestionController: ORKQuestionStepViewController {
         }
     }
     
-    //MARK:- UI
+    // MARK: - UI
     
     private func getQuestionHeaderView() -> UIView {
         let newHeaderView = UIView()
@@ -274,7 +269,7 @@ class TextChoiceQuestionController: ORKQuestionStepViewController {
             questionLbl.textAlignment = .left
             questionLbl.numberOfLines = 0
             newHeaderView.backgroundColor = .white
-            newHeaderView.layer.maskedCorners = [.layerMinXMinYCorner,.layerMaxXMinYCorner]
+            newHeaderView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
             newHeaderView.layer.cornerRadius = 10
             newHeaderView.clipsToBounds = true
         }
@@ -302,7 +297,7 @@ class TextChoiceQuestionController: ORKQuestionStepViewController {
     
     private func headerViewForAdditionalText() -> UIView? {
         
-        guard let text = self.questionStep?.text,let tableView = self.tableView else {return nil}
+        guard let text = self.questionStep?.text, let tableView = self.tableView else { return nil }
         
         let headerView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: 60))
         
@@ -357,7 +352,7 @@ class TextChoiceQuestionController: ORKQuestionStepViewController {
         
     }
     
-    //MARK:- Utils
+    // MARK: - Utils
     
     /**
      Inform if it's last cell of tableView, Other option cell.
@@ -463,7 +458,7 @@ class TextChoiceQuestionController: ORKQuestionStepViewController {
     }
     
     override func goBackward() {
-        //super.delegate?.stepViewControllerResultDidChange(self)
+        // super.delegate?.stepViewControllerResultDidChange(self)
         print("User did pressed on back button")
         super.goBackward()
         
@@ -486,9 +481,10 @@ class TextChoiceQuestionController: ORKQuestionStepViewController {
             let kPleaseProvideInput = NSLocalizedStrings("Please provide an input for the text field too.", comment: "")
             let alertVC = UIAlertController(title: KAnswerRequired, message: kPleaseProvideInput, preferredStyle: .alert)
             
-            let okAction = UIAlertAction(title: kTitleOk, style: .default) { [unowned self] (action) in
+            let okAction = UIAlertAction(title: kTitleOk, style: .default) { [unowned self] (_) in
                 alertVC.dismiss(animated: true, completion: nil)
-                if let otherCell = self.tableView?.cellForRow(at: IndexPath(row: self.textChoices.count, section: 0)) as? OtherTextChoiceCell {
+                if let otherCell = self.tableView?.cellForRow(
+                    at: IndexPath(row: self.textChoices.count, section: 0)) as? OtherTextChoiceCell {
                     otherCell.otherField.becomeFirstResponder()
                 }
                 self.updateNextOrContinueBtnState()
@@ -504,13 +500,9 @@ class TextChoiceQuestionController: ORKQuestionStepViewController {
         
     }
     
-    
-    
     @objc func didTapOnDoneOrNextBtn(_ sender: UIButton ) {
         print("next or done button pressed")
     }
-    
-    
     
     private func didTapOnOtherCell(didSelect: Bool) {
         
@@ -549,9 +541,7 @@ class TextChoiceQuestionController: ORKQuestionStepViewController {
         
     }
     
-    
 }
-
 
 extension TextChoiceQuestionController: UITableViewDataSource, UITableViewDelegate {
     
@@ -566,10 +556,11 @@ extension TextChoiceQuestionController: UITableViewDataSource, UITableViewDelega
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        
         // If it's last cell, return other cell : Perhaps, other option
         if isLastCell(indexPath: indexPath) {
-            let cell = tableView.dequeueReusableCell(withIdentifier: OtherTextChoiceCell.reuseIdentifier, for: indexPath) as! OtherTextChoiceCell
+            let cell = tableView.dequeueReusableCell(
+                withIdentifier: OtherTextChoiceCell.reuseIdentifier,
+                for: indexPath) as! OtherTextChoiceCell
             
             cell.delegate = self
             cell.otherField.text = self.otherChoice.otherChoiceText
@@ -665,7 +656,9 @@ extension TextChoiceQuestionController: UITableViewDataSource, UITableViewDelega
         let verticalPadding: CGFloat = (self.isShowSearchBar) ? 80 : 24
         let horPadding: CGFloat = 24
         if let question = self.questionStep?.question {
-            height = question.estimatedLabelHeight(labelWidth: tableView.frame.width - horPadding, font: self.questionFont) + verticalPadding
+            height = question.estimatedLabelHeight(
+                labelWidth: tableView.frame.width - horPadding,
+                font: self.questionFont) + verticalPadding
         }
         
         return height
@@ -685,7 +678,7 @@ extension TextChoiceQuestionController: OtherTextChoiceCellDelegate {
     }
 }
 
-// MARK:- Search Bar Delegate
+// MARK: - Search Bar Delegate
 extension TextChoiceQuestionController: UISearchBarDelegate {
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
@@ -697,10 +690,10 @@ extension TextChoiceQuestionController: UISearchBarDelegate {
         } else {
             self.searchChoices = textChoices.filter({$0.text.localizedLowercase.contains(searchText.localizedLowercase)})
         }
-        ///let offset = tableView?.contentOffset
+        /// let offset = tableView?.contentOffset
         self.tableView?.reloadData()
-        //tableView?.layoutIfNeeded() // Force layout so things are updated before resetting the contentOffset.
-        //tableView?.setContentOffset(offset!, animated: false)
+        // tableView?.layoutIfNeeded() // Force layout so things are updated before resetting the contentOffset.
+        // tableView?.setContentOffset(offset!, animated: false)
     }
     
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {

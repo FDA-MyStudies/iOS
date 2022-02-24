@@ -91,7 +91,7 @@ class SyncUpdate {
     
 }
 
-// MARK:- Webservices Delegates
+// MARK: - Webservices Delegates
 extension SyncUpdate: NMWebServiceDelegate {
     
     func startedRequest(_ manager: NetworkManager, requestName: NSString) {

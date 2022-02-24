@@ -19,11 +19,9 @@ OTHER DEALINGS IN THE SOFTWARE.
  */
 
 import UIKit
-
-
 enum WCPMethods: String {
     
-    //TODO : Write exact name for request method
+    // TODO : Write exact name for request method
     case study
     case gatewayInfo
     case studyList
@@ -48,7 +46,6 @@ enum WCPMethods: String {
     }
 }
 
-
 struct WCPServerURLConstants {
 
     static let ProductionURL = API.wcpURL
@@ -60,7 +57,7 @@ class WCPConfiguration: NetworkConfiguration {
     
     static let configuration = WCPConfiguration()
     
-    // MARK:  Delegates
+    // MARK: Delegates
     override func getProductionURL() -> String {
         return WCPServerURLConstants.ProductionURL
     }
@@ -80,7 +77,7 @@ class WCPConfiguration: NetworkConfiguration {
         
         let token = "AvxfEsgX9u" + ":" + "ee91a4f6-d9c4-4ee9-a0e2-5682c5b1c916"
        // let token = "nrWIy9JtJu" + ":" + "a7296a62-44e8-4a06-8d85-50bc861d6c64"
-        //com.hphci.fda.mobilestudies
+        // com.hphci.fda.mobilestudies
         let base64token = "Basic " + token.toBase64()
        
         let headers = ["Authorization": base64token,
@@ -96,6 +93,4 @@ class WCPConfiguration: NetworkConfiguration {
     override func shouldParseErrorMessage() -> Bool {
         return false
     }
-    
 }
-

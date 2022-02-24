@@ -19,7 +19,7 @@ OTHER DEALINGS IN THE SOFTWARE.
  */
 
 import Foundation
-fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+private func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
   switch (lhs, rhs) {
   case let (l?, r?):
     return l < r
@@ -30,7 +30,7 @@ fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
   }
 }
 
-fileprivate func > <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+private func > <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
   switch (lhs, rhs) {
   case let (l?, r?):
     return l > r
@@ -39,13 +39,8 @@ fileprivate func > <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
   }
 }
 
-
-
 // MARK: WebRequestMethods
-//let kSM
-
-
-
+// let kSM
 
 struct NetworkConnectionConstants {
     static let ConnectionTimeoutInterval = 30.0
@@ -69,7 +64,7 @@ struct HTTPHeaderValues {
 }
 
 struct NetworkURLConstants {
-    //TODO: Set the server end points
+    // TODO: Set the server end points
     
     static let ProductionURL = ""
     static let DevelopmentURL = ""
@@ -77,13 +72,13 @@ struct NetworkURLConstants {
 }
 
 class NetworkConstants: NSObject {
-    //TODO: Configure common parameters for requests here.
-    class func getCommonRequestParameters()-> NSDictionary? {
+    // TODO: Configure common parameters for requests here.
+    class func getCommonRequestParameters() -> NSDictionary? {
         return nil
     }
     
     class func getCommonHeaderParameters() -> NSDictionary? {
-        //let cookie = UserDefaults.standard.value(forKey: "cookies")
+        // let cookie = UserDefaults.standard.value(forKey: "cookies")
         let headers : NSDictionary? =  nil
         /*
         if (cookie != nil && (cookie as AnyObject).length > 0){
@@ -93,12 +88,12 @@ class NetworkConstants: NSObject {
         return headers
     }
     
-    fileprivate func getTrustedHosts()-> NSArray{
-        let array = [TrustedHosts.TrustedHost1,TrustedHosts.TrustedHost2,TrustedHosts.TrustedHost3]
+    fileprivate func getTrustedHosts() -> NSArray{
+        let array = [TrustedHosts.TrustedHost1, TrustedHosts.TrustedHost2, TrustedHosts.TrustedHost3]
         return array as NSArray
     }
     
-    class func checkResponseHeaders(_ response : URLResponse)-> (NSInteger,String){
+    class func checkResponseHeaders(_ response : URLResponse) -> (NSInteger, String){
         let httpResponse = response as? HTTPURLResponse
        
         let headers = httpResponse!.allHeaderFields as NSDictionary
@@ -110,7 +105,6 @@ class NetworkConstants: NSObject {
             statusMessage = message as! String
         }
         
-        return (statusCode,statusMessage)
+        return (statusCode, statusMessage)
     }
 }
-

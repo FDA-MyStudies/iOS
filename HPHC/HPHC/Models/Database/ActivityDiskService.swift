@@ -18,12 +18,11 @@ enum ActivityDiskService {
         return try? Realm()
     }()
     
-    
     static func scheduleRunsFor(oneTime dbActivity: DBActivity,
-                                             anchorDate: Date ,
-                                             externalIdValue: String? = nil,
-                                             dateOfEntryValue: String? = nil,
-                                             frequency: Frequency) {
+                                anchorDate: Date,
+                                externalIdValue: String? = nil,
+                                dateOfEntryValue: String? = nil,
+                                frequency: Frequency) {
         
         guard frequency == .One_Time,
             let updatedAnchorDate = DateHelper.updateTime(of: anchorDate) else {
@@ -152,10 +151,10 @@ enum ActivityDiskService {
     
     /// This will schedule runs for Daily, Weekly and Monthly frequency activities.
     static func scheduleRunsFor(other dbActivity: DBActivity,
-                                             anchorDate: Date ,
-                                             externalIdValue: String? = nil,
-                                             dateOfEntryValue: String? = nil,
-                                             frequency: Frequency) {
+                                anchorDate: Date ,
+                                externalIdValue: String? = nil,
+                                dateOfEntryValue: String? = nil,
+                                frequency: Frequency) {
         
         guard frequency == .Daily || frequency == .Weekly || frequency == .Monthly,
             let updatedAnchorDate = DateHelper.updateTime(of: anchorDate) else {

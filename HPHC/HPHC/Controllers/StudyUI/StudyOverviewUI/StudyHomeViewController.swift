@@ -112,8 +112,8 @@ class StudyHomeViewController: UIViewController {
     func studyEnrollmentFailed(error:NSError?) {
         
         NotificationCenter.default.post(name:NSNotification.Name(rawValue: "NotificationStudyEnrollmentFailed"), object: error)
-        //let message = error.localizedDescription
-        //UIUtilities.showAlertWithTitleAndMessage(title: NSLocalizedStrings(kErrorTitle, comment: "") as NSString, message: message as NSString)
+        // let message = error.localizedDescription
+        // UIUtilities.showAlertWithTitleAndMessage(title: NSLocalizedStrings(kErrorTitle, comment: "") as NSString, message: message as NSString)
     }
     
     func studyEnrollmentStarted(taskViewController:ORKTaskViewController) {
@@ -131,7 +131,7 @@ class StudyHomeViewController: UIViewController {
         // save also in DB
         DBHandler.saveConsentInformation(study: Study.currentStudy!)
         
-        //addProgressIndicator()
+        // addProgressIndicator()
         
         // restoring token in case of ineligibility
         if (consentResult?.token) == nil || (consentResult?.token)?.isEmpty == true {
@@ -208,7 +208,6 @@ class StudyHomeViewController: UIViewController {
             viewSeperater?.isHidden = true
             visitConsentButtonTrailingConstraint?.constant = -(buttonViewConsent!.bounds.size.width + 6)
         }
-
 
         // If coming from Activity Resources
         if hideViewConsentAfterJoining == true {
@@ -298,18 +297,18 @@ class StudyHomeViewController: UIViewController {
         let localeDefault = getLanguageLocale()
         if !(localeDefault.hasPrefix("es") || localeDefault.hasPrefix("en")) {
           plistPath = Bundle.main.path(forResource: "StudyOverview", ofType: ".plist", inDirectory: nil, forLocalization: "Base")
-        }else if localeDefault.hasPrefix("en"){
+        } else if localeDefault.hasPrefix("en"){
             plistPath = Bundle.main.path(forResource: "StudyOverview", ofType: ".plist", inDirectory: nil, forLocalization: "Base")
-        }else if localeDefault.hasPrefix("es"){
+        } else if localeDefault.hasPrefix("es"){
             plistPath = Bundle.main.path(forResource: "StudyOverview", ofType: ".plist", inDirectory: nil, forLocalization: "es")
         }
       
         let arrayContent = NSMutableArray(contentsOfFile: plistPath!)
 
         do {
-            // let response = try JSONSerialization.jsonObject(with: data! as Data, options: []) as? Dictionary<String,Any>
+            // let response = try JSONSerialization.jsonObject(with: data! as Data, options: []) as? Dictionary<String, Any>
 
-            // let overviewList = response[kOverViewInfo] as! Array<Dictionary<String,Any>>
+            // let overviewList = response[kOverViewInfo] as! Array<Dictionary<String, Any>>
             var listOfOverviews: [OverviewSection] = []
             for overview in arrayContent! {
                 let overviewObj = OverviewSection(detail: (overview as? [String: Any])!)
@@ -340,13 +339,13 @@ class StudyHomeViewController: UIViewController {
         let taskViewController: ORKTaskViewController?
         
         let consentTask: ORKOrderedTask? = ConsentBuilder.currentConsent?.createConsentTask() as! ORKOrderedTask?
-        var LARIdentifier1 = "Review" //FinalStep
+        // var LARIdentifier1 = "Review" // FinalStep
         if consentHasLAR {
             let index = consentTask?.index(of: ORKStep(identifier: kLARConsentStep)) ?? 0
             let val : Int = Int(index) + 2
             let LARNextStep = consentTask?.steps[val].identifier ?? ""
             print("LARNextStep---\(LARNextStep)")
-            LARIdentifier1 = LARNextStep
+            // LARIdentifier1 = LARNextStep
         }
         for stepDict in (consentTask?.steps)! {
             eligibilitySteps?.append(stepDict)
@@ -404,8 +403,9 @@ class StudyHomeViewController: UIViewController {
                                                                                                             expectedAnswer: choiceA)
                             let inverseChoiceB = (correctAnswerDict?[kEligibilityCorrectAnswer] as? Bool) == true ? false : true
                             
-                            let predicateQuestionChoiceB = ORKResultPredicate.predicateForBooleanQuestionResult(with: resultSelector!,
-                                                                                                                expectedAnswer: inverseChoiceB)
+                            let predicateQuestionChoiceB = ORKResultPredicate.predicateForBooleanQuestionResult(
+                                with: resultSelector!,
+                                expectedAnswer: inverseChoiceB)
                             
                             destination?.append(kInEligibilityStep) // inEligible completion step
                             choicePredicate.append(predicateQuestionChoiceB)
@@ -433,8 +433,9 @@ class StudyHomeViewController: UIViewController {
                                 
                                 let directRule: ORKDirectStepNavigationRule!
                                 directRule = ORKDirectStepNavigationRule(destinationStepIdentifier: kEligibilityVerifiedScreen)
-                                (orkOrderedTask as? ORKNavigableOrderedTask)!.setNavigationRule(directRule!,
-                                                                                                forTriggerStepIdentifier: orkstep.identifier)
+                                (orkOrderedTask as? ORKNavigableOrderedTask)!.setNavigationRule(
+                                    directRule!,
+                                    forTriggerStepIdentifier: orkstep.identifier)
                             } else {
                                 // do nothing assuming that next step is some question step
                             }
@@ -450,7 +451,8 @@ class StudyHomeViewController: UIViewController {
                                                                        defaultStepIdentifier: defaultStepIdentifier,
                                                                        validateArrays: true)
                         
-                        (orkOrderedTask as? ORKNavigableOrderedTask)!.setNavigationRule(predicateRule!, forTriggerStepIdentifier: orkstep.identifier)
+                        (orkOrderedTask as? ORKNavigableOrderedTask)!.setNavigationRule(predicateRule!,
+                                                                                        forTriggerStepIdentifier: orkstep.identifier)
                     }
                 }
                 i = i! + 1
@@ -458,7 +460,7 @@ class StudyHomeViewController: UIViewController {
         }
         
         if orkOrderedTask is ORKNavigableOrderedTask {
-            if consentHasLAR, let rule = LARRule {//LAR
+            if consentHasLAR, let rule = LARRule {// LAR
                 (orkOrderedTask as? ORKNavigableOrderedTask)!.setNavigationRule(rule, forTriggerStepIdentifier: kLARConsentStep)
             }
             
@@ -575,9 +577,9 @@ class StudyHomeViewController: UIViewController {
             // leftController.changeViewController(.reachOut_signIn)
 
             let loginStoryBoard = UIStoryboard(name: kLoginStoryboardIdentifier, bundle: nil)
-            let signInController = (loginStoryBoard.instantiateViewController(withIdentifier:
-                                                                                String(describing: SignInViewController.classForCoder())) as?
-                                        SignInViewController)!
+            let signInController =
+            (loginStoryBoard.instantiateViewController(withIdentifier:
+                                                        String(describing: SignInViewController.classForCoder())) as? SignInViewController)!
             signInController.viewLoadFrom = .joinStudy
             navigationController?.pushViewController(signInController, animated: true)
 
@@ -595,7 +597,9 @@ class StudyHomeViewController: UIViewController {
                 if participatedStatus == .yetToJoin || participatedStatus == .notEligible {
                     // check if enrolling is allowed
                     if currentStudy.studySettings.enrollingAllowed {
-                        WCPServices().getEligibilityConsentMetadata(studyId: (Study.currentStudy?.studyId)!, delegate: self as NMWebServiceDelegate)
+                        WCPServices().getEligibilityConsentMetadata(
+                            studyId: (Study.currentStudy?.studyId)!,
+                            delegate: self as NMWebServiceDelegate)
                     } else {
                         UIUtilities.showAlertWithTitleAndMessage(title: "",
                                                                  message: NSLocalizedStrings(kMessageForStudyEnrollingNotAllowed,
@@ -604,7 +608,9 @@ class StudyHomeViewController: UIViewController {
                 } else if participatedStatus == .Withdrawn {
                     // check if rejoining is allowed after withrdrawn from study
                     if currentStudy.studySettings.rejoinStudyAfterWithdrawn {
-                        WCPServices().getEligibilityConsentMetadata(studyId: (Study.currentStudy?.studyId)!, delegate: self as NMWebServiceDelegate)
+                        WCPServices().getEligibilityConsentMetadata(
+                            studyId: (Study.currentStudy?.studyId)!,
+                            delegate: self as NMWebServiceDelegate)
                     } else {
                         UIUtilities.showAlertWithTitleAndMessage(title: "", message: kMessageForStudyWithdrawnState as NSString)
                     }
@@ -704,7 +710,9 @@ class StudyHomeViewController: UIViewController {
                 } else if studyStatus.status == .yetToJoin {
                     // check if enrolling is allowed
                     if study.studySettings.enrollingAllowed {
-                        WCPServices().getEligibilityConsentMetadata(studyId: (Study.currentStudy?.studyId)!, delegate: self as NMWebServiceDelegate)
+                        WCPServices().getEligibilityConsentMetadata(
+                            studyId: (Study.currentStudy?.studyId)!,
+                            delegate: self as NMWebServiceDelegate)
                     } else {
                         // unhide view
                         removeProgressIndicator()
@@ -729,7 +737,9 @@ class StudyHomeViewController: UIViewController {
         } else {
             if study.status == .Active {
                 if study.studySettings.enrollingAllowed {
-                    WCPServices().getEligibilityConsentMetadata(studyId: (Study.currentStudy?.studyId)!, delegate: self as NMWebServiceDelegate)
+                    WCPServices().getEligibilityConsentMetadata(
+                        studyId: (Study.currentStudy?.studyId)!,
+                        delegate: self as NMWebServiceDelegate)
                 } else {
                     removeProgressIndicator()
                     unHideSubViews()
@@ -903,10 +913,10 @@ extension StudyHomeViewController: NMWebServiceDelegate {
                 if let userStudyStatus = currentUser.participatedStudies.filter({ $0.studyId == Study.currentStudy?.studyId }).last {
                     Study.currentStudy?.userParticipateState = userStudyStatus
                 }
-                //pushToStudyDashboard()
+                // pushToStudyDashboard()
                 isGettingJoiningDate = false
                 self.studyEnrollmentFinished()
-                //removeProgressIndicator()
+                // removeProgressIndicator()
                 
             } else {
                 handleResponseForStudyState()
@@ -939,20 +949,19 @@ extension StudyHomeViewController: NMWebServiceDelegate {
         } else {
             if requestName as String == WCPMethods.consentDocument.method.methodName {
                 // self.removeProgressIndicator()
-            }
-
-            else if requestName as String == ResponseMethods.enroll.description {
+            } else if requestName as String == ResponseMethods.enroll.description {
                 unHideSubViews()
                 self.studyEnrollmentFailed(error: error)
-            }
-            else if requestName as String == RegistrationMethods.updateStudyState.method.methodName
+            } else if requestName as String == RegistrationMethods.updateStudyState.method.methodName
                 || requestName as String == RegistrationMethods.updateEligibilityConsentStatus.method.methodName {
                 unHideSubViews()
 
                 let kUnknownErrorOccurred = NSLocalizedStrings("Unknown error occurred. Please try after some time.", comment: "")
                 let message = error.localizedDescription as NSString
                 if message.length != 0 {
-                    UIUtilities.showAlertWithTitleAndMessage(title: kErrorTitle as NSString, message: error.localizedDescription as NSString)
+                    UIUtilities.showAlertWithTitleAndMessage(
+                        title: kErrorTitle as NSString,
+                        message: error.localizedDescription as NSString)
                 } else {
                     UIUtilities.showAlertMessageWithActionHandler(kErrorTitle,
                                                                   message: kUnknownErrorOccurred,
@@ -962,8 +971,7 @@ extension StudyHomeViewController: NMWebServiceDelegate {
                         self.navigationController?.popViewController(animated: true)
                     })
                 }
-            }
-            else {
+            } else {
                 let errorMsg = base64DecodeError(error.localizedDescription)
                  UIUtilities.showAlertWithTitleAndMessage(title: NSLocalizedStrings(kErrorTitle, comment: "") as NSString,
                                                           message: errorMsg as NSString)
@@ -996,22 +1004,20 @@ extension StudyHomeViewController: ORKTaskViewControllerDelegate {
             return
         }
         
-        
-
-        var taskResult: Any?
+        // var taskResult: Any?
         switch reason {
         case ORKTaskViewControllerFinishReason.completed:
             print("completed")
-            taskResult = taskViewController.result
+            // taskResult = taskViewController.result
         case ORKTaskViewControllerFinishReason.failed:
             print("failed1---")
-            taskResult = taskViewController.result
+            // taskResult = taskViewController.result
         case ORKTaskViewControllerFinishReason.discarded:
             print("discarded")
-            taskResult = taskViewController.result
+            // taskResult = taskViewController.result
         case ORKTaskViewControllerFinishReason.saved:
             print("saved")
-            taskResult = taskViewController.restorationData
+            // taskResult = taskViewController.restorationData
         }
 
         let lastStepResultIdentifier: String?
@@ -1044,7 +1050,7 @@ extension StudyHomeViewController: ORKTaskViewControllerDelegate {
 //                consentResult?.token = appdelegate.consentToken
 //            }
 
-            //LabKeyServices().enrollForStudy(studyId: (Study.currentStudy?.studyId)!, token: (ConsentBuilder.currentConsent?.consentResult?.token)!, delegate: self)
+            // LabKeyServices().enrollForStudy(studyId: (Study.currentStudy?.studyId)!, token: (ConsentBuilder.currentConsent?.consentResult?.token)!, delegate: self)
             addProgressIndicator()
             taskViewController.dismiss(animated: true) {
                 self.pushToStudyDashboard()
@@ -1067,7 +1073,9 @@ extension StudyHomeViewController: ORKTaskViewControllerDelegate {
                     })
 
                     if results! {
-                        let currentUserStudyStatus = User.currentUser.updateStudyStatus(studyId: (Study.currentStudy?.studyId)!, status: .yetToJoin)
+                        let currentUserStudyStatus = User.currentUser.updateStudyStatus(
+                            studyId: (Study.currentStudy?.studyId)!,
+                            status: .yetToJoin)
 
                         Study.currentStudy?.userParticipateState = currentUserStudyStatus
 
@@ -1084,14 +1092,15 @@ extension StudyHomeViewController: ORKTaskViewControllerDelegate {
                   let kSomethingWentWrong = NSLocalizedStrings("Something went wrong please try again later.", comment: "")
                     let messge = error == nil ? kSomethingWentWrong : error?.localizedDescription
                   var messageVal = messge
-                  if (messge?.containsIgnoringCase("Study with StudyId") ?? false && messge?.containsIgnoringCase("does not exist") ?? false) {
+                  if messge?.containsIgnoringCase("Study with StudyId") ?? false &&
+                        messge?.containsIgnoringCase("does not exist") ?? false {
                     
                     messageVal = messageVal?.replacingOccurrences(of: "Study with StudyId", with: "")
                     messageVal = messageVal?.replacingOccurrences(of: "does not exist", with: "")
                     messageVal = messageVal?.replacingOccurrences(of: " ", with: "")
                     
                     messageVal = NSLocalizedStrings("Study with StudyId", comment: "") + " \(messageVal ?? "") " + NSLocalizedStrings("does not exist", comment: "")
-                    print("messageVal---\(messageVal)")
+                      print("messageVal---\(messageVal ?? "")")
                   }
                   
                     UIUtilities.showAlertWithTitleAndMessage(title: NSLocalizedStrings(kErrorTitle, comment: "") as NSString,
@@ -1101,7 +1110,8 @@ extension StudyHomeViewController: ORKTaskViewControllerDelegate {
         }
     }
 
-    func taskViewController(_ taskViewController: ORKTaskViewController, stepViewControllerWillAppear stepViewController: ORKStepViewController) {
+    func taskViewController(_ taskViewController: ORKTaskViewController,
+                            stepViewControllerWillAppear stepViewController: ORKStepViewController) {
         if (taskViewController.result.results?.count)! > 1 {
             if activityBuilder?.actvityResult?.result?.count == taskViewController.result.results?.count {
                 // Removing the dummy result:Currentstep result which not presented yet
@@ -1109,7 +1119,6 @@ extension StudyHomeViewController: ORKTaskViewControllerDelegate {
             } else {}
         }
 
-        
         // For Verified Step , Completion Step, Visual Step, Review Step, Share Pdf Step
         let stepIndentifer = stepViewController.step?.identifier
         if stepIndentifer == kEligibilityVerifiedScreen
@@ -1121,8 +1130,6 @@ extension StudyHomeViewController: ORKTaskViewControllerDelegate {
             || stepIndentifer == kConsentSharing
             || stepIndentifer == kReviewIdentifier
             || stepIndentifer == kComprehensionInstructionStepIdentifier {
-            
-            
 
             if stepIndentifer == kEligibilityVerifiedScreen {
                 stepViewController.continueButtonTitle = kContinueButtonTitle
@@ -1155,7 +1162,8 @@ extension StudyHomeViewController: ORKTaskViewControllerDelegate {
             // Back button is enabled
              stepViewController.backButtonItem = nil
 
-            let orkStepResult: ORKStepResult? = taskViewController.result.results?[(taskViewController.result.results?.count)! - 2] as! ORKStepResult?
+            let orkStepResult: ORKStepResult? =
+            taskViewController.result.results?[(taskViewController.result.results?.count)! - 2] as! ORKStepResult?
 
             let consentSignatureResult: ConsentCompletionTaskResult? = orkStepResult?.results?.first as? ConsentCompletionTaskResult
 
@@ -1169,8 +1177,7 @@ extension StudyHomeViewController: ORKTaskViewControllerDelegate {
         } else if stepIndentifer == kLARConsentParticipantStep {
             stepViewController.backButtonItem?.isEnabled = true
             stepViewController.cancelButtonItem?.isEnabled = true
-        }
-        else {
+        } else {
             // Back button is enabled
 
             if taskViewController.task?.identifier == kEligibilityConsentTask {
@@ -1198,8 +1205,6 @@ extension StudyHomeViewController: ORKTaskViewControllerDelegate {
 
     func taskViewController(_ taskViewController: ORKTaskViewController, viewControllerFor step: ORKStep) -> ORKStepViewController? {
         
-        
-        
         // CurrentStep is TokenStep
 print("6---\(step.identifier)")
         if step.identifier == kEligibilityTokenStep {
@@ -1221,7 +1226,7 @@ print("6---\(step.identifier)")
             reviewStep = totalResults?.first as! ORKStepResult?
             
 //            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-//                //self.studyEnrollmentFailed(error: nil)
+//                // self.studyEnrollmentFailed(error: nil)
 //                self.studyEnrollmentFinished()
 //            }
            
@@ -1235,7 +1240,8 @@ print("6---\(step.identifier)")
                     return nil
 
                 } else {
-                    let documentCopy: ORKConsentDocument = ((ConsentBuilder.currentConsent?.consentDocument)!.copy() as? ORKConsentDocument)!
+                    let documentCopy: ORKConsentDocument =
+                    ((ConsentBuilder.currentConsent?.consentDocument)!.copy() as? ORKConsentDocument)!
                     consentSignatureResult?.apply(to: documentCopy)
 
                     let gatewayStoryboard = UIStoryboard(name: kFetalKickCounterStep, bundle: nil)
@@ -1244,7 +1250,7 @@ print("6---\(step.identifier)")
                     ttController.step = step
                     ttController.consentDocument = documentCopy
                     
-                    //start enrollment process
+                    // start enrollment process
                     let currentStatus = Study.currentStudy?.userParticipateState.status
                     if  currentStatus == .yetToJoin
                       || currentStatus == .notEligible
@@ -1275,7 +1281,7 @@ print("6---\(step.identifier)")
 
                 return ttController
             } else {
-                //taskViewController.goForward()
+                // taskViewController.goForward()
                 return nil
             }
         } else if step.identifier == kInEligibilityStep {
@@ -1292,7 +1298,9 @@ print("6---\(step.identifier)")
             lastStepResultIdentifier = (taskViewController.result.results?.last as? ORKStepResult)!.identifier
 
             if lastStepResultIdentifier == kInEligibilityStep {
-                let currentUserStudyStatus = User.currentUser.updateStudyStatus(studyId: (Study.currentStudy?.studyId)!, status: .notEligible)
+                let currentUserStudyStatus = User.currentUser.updateStudyStatus(
+                    studyId: (Study.currentStudy?.studyId)!,
+                    status: .notEligible)
 
                 Study.currentStudy?.userParticipateState = currentUserStudyStatus
 
@@ -1331,7 +1339,8 @@ print("6---\(step.identifier)")
 
                         let answerArray: [String] = (correctAnswerDict?[kConsentComprehensionAnswer] as? [String])!
 
-                        let evaluationType: Evaluation? = Evaluation(rawValue: (correctAnswerDict?[kConsentComprehensionEvaluation] as? String)!)
+                        let evaluationType: Evaluation? =
+                        Evaluation(rawValue: (correctAnswerDict?[kConsentComprehensionEvaluation] as? String)!)
 
                         let answeredSet = Set((textChoiceResult.choiceAnswers! as? [String])!)
 
@@ -1396,7 +1405,9 @@ print("6---\(step.identifier)")
                     dismiss(animated: true, completion: {
                         self.navigationController?.popViewController(animated: true)
 
-                      UIUtilities.showAlertWithTitleAndMessage(title: kTitleMessage as NSString, message: kShareConsentFailureAlert as NSString)
+                      UIUtilities.showAlertWithTitleAndMessage(
+                        title: kTitleMessage as NSString,
+                        message: kShareConsentFailureAlert as NSString)
                     })
                     return nil
                 }
@@ -1415,7 +1426,8 @@ print("6---\(step.identifier)")
         if result.results?.last?.identifier == kLARConsentStep {
             if let val = result.stepResult(forStepIdentifier: kLARConsentStep) {
 
-                let participantRelation = (val.result(forIdentifier: kLARConsentStep) as? ORKChoiceQuestionResult)?.choiceAnswers?.first as? String
+                let participantRelation =
+                (val.result(forIdentifier: kLARConsentStep) as? ORKChoiceQuestionResult)?.choiceAnswers?.first as? String
 
                 if let selectedChoice = participantRelation,
                     selectedChoice == "Choice_1" {
@@ -1439,7 +1451,7 @@ print("6---\(step.identifier)")
 //    let step = stepViewController.step!
 //    if step.identifier == kLARConsentStep {
 //        print("5---\(step.identifier)")
-//        taskViewController.delegate?.taskViewController?(taskViewController, shouldPresent: ORKStep(identifier: "ConsentSharingStep")) //sharing MobileTesting
+//        taskViewController.delegate?.taskViewController?(taskViewController, shouldPresent: ORKStep(identifier: "ConsentSharingStep")) // sharing MobileTesting
 //    }
   }
   

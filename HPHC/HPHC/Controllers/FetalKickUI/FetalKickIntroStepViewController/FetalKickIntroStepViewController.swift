@@ -19,7 +19,6 @@ OTHER DEALINGS IN THE SOFTWARE.
  */
 
 import Foundation
-import Foundation
 import ResearchKit
 
 let kFetalKickIntroStepDefaultIdentifier = "FetalIntroStepIdentifier"
@@ -32,14 +31,13 @@ class FetalKickCounterIntroStepType: ORKStep {
 
 class FetalKickIntroStep: ORKStep {
     var introTitle: String? // MainTitle for the Task
-    var subTitle: String? //Subtitle for Task
+    var subTitle: String? // Subtitle for Task
     var displayImage: UIImage?
 }
 
 class FetalKickIntroStepViewController:  ORKStepViewController {
     
-
-    var titleLabel: UILabel? //Custom Title Label
+    var titleLabel: UILabel? // Custom Title Label
     @IBOutlet weak var descriptionLabel: UILabel?
     var iconImage: UIImage?
     
@@ -82,13 +80,10 @@ class FetalKickIntroStepViewController:  ORKStepViewController {
         super.goForward()
     }
     
-    // MARK:IBActions
+    // MARK: IBActions
     
     @IBAction func nextButtonAction(_ sender: UIButton){
         self.goForward()
     }
     
 }
-
-
-

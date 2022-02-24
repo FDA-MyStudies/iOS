@@ -24,8 +24,7 @@ import ResearchKit
 // let user = User()
 let activityBuilder:ActivityBuilder? = ActivityBuilder.currentActivityBuilder
 let consentbuilder:ConsentBuilder? = ConsentBuilder()
-//var user = User.currentUser
-
+// var user = User.currentUser
 
 let resourceArray : Array<Any>? = nil
 class ViewController: UIViewController {
@@ -50,7 +49,7 @@ class ViewController: UIViewController {
         
        // print(user.getStudyStatus(studyId: "121").description)
         
-        //not available
+        // not available
 //        let start = "2017-03-01"
 //        let end = "2017-03-05"
          
@@ -59,11 +58,9 @@ class ViewController: UIViewController {
         let end = "2017-01-30"
         let runtime = "2017-03-12"
         
-        
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd"
         let endDate:Date = dateFormatter.date(from: end)!
-        
         
         let sdateFormatter = DateFormatter()
         sdateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
@@ -97,8 +94,7 @@ class ViewController: UIViewController {
         taskViewController = ORKTaskViewController(task:task, taskRun: nil)
         taskViewController?.delegate = self
         taskViewController?.outputDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
-         UIApplication.shared.statusBarStyle = .default
-        
+        UIApplication.shared.statusBarStyle = .default
         
         UIView.appearance(whenContainedInInstancesOf: [ORKTaskViewController.self]).tintColor = kUIColorForSubmitButtonBackground
         taskViewController?.navigationBar.prefersLargeTitles = false
@@ -118,12 +114,10 @@ class ViewController: UIViewController {
         
         let data = NSData(contentsOfFile: filePath!)
         
-        
         do {
             let dataDict = try JSONSerialization.jsonObject(with: data! as Data, options: []) as? Dictionary<String, Any>
             
             if  Utilities.isValidObject(someObject: dataDict as AnyObject?) && (dataDict?.count)! > 0 {
-                
                 
                 let task:ORKTask?
                 let taskViewController:ORKTaskViewController?
@@ -192,7 +186,6 @@ class ViewController: UIViewController {
                 Logger.sharedInstance.info(dict)
                 Logger.sharedInstance.error(dict)
                 
-                
             }
         }
         
@@ -255,8 +248,7 @@ class ViewController: UIViewController {
 }
  
 extension ViewController:ORKTaskViewControllerDelegate{
-    // MARK:ORKTaskViewController Delegate
-    
+    // MARK: ORKTaskViewController Delegate
     
     func taskViewControllerSupportsSaveAndRestore(_ taskViewController: ORKTaskViewController) -> Bool {
         return true
@@ -266,33 +258,33 @@ extension ViewController:ORKTaskViewControllerDelegate{
                                    didFinishWith reason: ORKTaskViewControllerFinishReason,
                                    error: Error?) {
          
-        var taskResult:Any?
+        // var taskResult: Any?
         
         switch reason {
             
         case ORKTaskViewControllerFinishReason.completed:
             print("completed")
-            taskResult = taskViewController.result
+            // taskResult = taskViewController.result
         case ORKTaskViewControllerFinishReason.failed:
             print("failed")
-            taskResult = taskViewController.result
+            // taskResult = taskViewController.result
         case ORKTaskViewControllerFinishReason.discarded:
             print("discarded")
-            taskResult = taskViewController.result
+            // taskResult = taskViewController.result
         case ORKTaskViewControllerFinishReason.saved:
             print("saved")
-            taskResult = taskViewController.restorationData
+            // taskResult = taskViewController.restorationData
             
             if taskViewController.task?.identifier == "ConsentTask"{
                 
-            } else{
+            } else {
                 activityBuilder?.activity?.restortionData = taskViewController.restorationData
             }
         }
         
         if  taskViewController.task?.identifier == "ConsentTask"{
             consentbuilder?.consentResult?.initWithORKTaskResult(taskResult:taskViewController.result )
-        } else{
+        } else {
             activityBuilder?.actvityResult?.initWithORKTaskResult(taskResult: taskViewController.result)
         }
         taskViewController.dismiss(animated: true, completion: nil)
@@ -302,12 +294,11 @@ extension ViewController:ORKTaskViewControllerDelegate{
     func taskViewController(_ taskViewController: ORKTaskViewController,
                             stepViewControllerWillAppear stepViewController: ORKStepViewController) {
         
-        if (taskViewController.result.results?.count)! > 1{
-            
-            
+        if (taskViewController.result.results?.count)! > 1 {
+                
             if activityBuilder?.actvityResult?.result?.count == taskViewController.result.results?.count{
                 activityBuilder?.actvityResult?.result?.removeLast()
-            } else{
+            } else {
             
             if (activityBuilder?.actvityResult?.result?.count)! < (taskViewController.result.results?.count)!{
             
@@ -324,7 +315,7 @@ extension ViewController:ORKTaskViewControllerDelegate{
         }
     }
     
-    // MARK:StepViewController Delegate
+    // MARK: StepViewController Delegate
     public func stepViewController(_ stepViewController: ORKStepViewController,
                                    didFinishWith direction: ORKStepViewControllerNavigationDirection){
         

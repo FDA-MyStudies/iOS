@@ -39,7 +39,6 @@ class DBActivity: Object {
     @objc dynamic var branching: Bool = false
     @objc dynamic var randomization: Bool = false
     
-    
     @objc dynamic var frequencyRunsData: Data?
     @objc dynamic var anchorRunsData: Data?
     @objc dynamic var frequencyType: String?
@@ -104,5 +103,3 @@ class DBActivityRun: Object {
     @objc dynamic  var responseData: Data?
  
 }
-
-

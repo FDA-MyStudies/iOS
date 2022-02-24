@@ -53,14 +53,14 @@ class DBStudy: Object {
     @objc dynamic var signedConsentVersion: String?
     @objc dynamic var signedConsentFilePath: String?
     
-    //study state info
+    // study state info
     @objc dynamic var participatedStatus: Int = 0
     @objc dynamic var participatedId: String?
     @objc dynamic var joiningDate: Date?
     @objc dynamic var completion: Int = 0
     @objc dynamic var adherence: Int = 0
     
-    //anchor date values
+    // anchor date values
     @objc dynamic var anchorDate: Date?
     @objc dynamic var anchorDateType: String?
     @objc dynamic var anchorDateActivityId: String?
@@ -68,8 +68,7 @@ class DBStudy: Object {
     @objc dynamic var anchorDateQuestionKey: String?
     @objc dynamic var activitiesLocalNotificationUpdated = false
     
-    
-    //withdrawalConfigration
+    // withdrawalConfigration
     
     @objc dynamic var withdrawalConfigrationMessage: String?
     @objc dynamic var withdrawalConfigrationType: String?
@@ -91,7 +90,7 @@ class DBOverviewSection: Object {
     @objc dynamic  var link: String?
     @objc dynamic var  studyId: String!
     @objc dynamic var  sectionId: String!
-    @objc dynamic var  overviewlang: String! //= "en"
+    @objc dynamic var  overviewlang: String! // = "en"
     
     override static func primaryKey() -> String? {
         return "sectionId"
@@ -120,7 +119,7 @@ class DBStatistics : Object {
 }
 class DBCharts :Object {
     
-    //basic
+    // basic
     @objc dynamic  var chartId: String?
     @objc dynamic var studyId: String?
     @objc dynamic var title: String?
@@ -128,7 +127,7 @@ class DBCharts :Object {
     @objc dynamic var chartType: String?
     @objc dynamic var scrollable: Bool = true
     
-    //datasource
+    // datasource
     @objc dynamic var activityId: String?
     @objc dynamic var activityVersion: String?
     @objc dynamic var dataSourceType: String?
@@ -137,8 +136,7 @@ class DBCharts :Object {
     @objc dynamic var startTime: Date?
     @objc dynamic var endTime: Date?
     
-    
-    //settings
+    // settings
     @objc dynamic var barColor: String?
     @objc dynamic var numberOfPoints: Int = 0
     @objc dynamic var chartSubType: String?
@@ -189,7 +187,6 @@ class DBResources: Object {
         return "resourceId"
     }
 }
-
 
 class DBDataOfflineSync:Object{
     

@@ -23,15 +23,15 @@ import Foundation
 import CryptoSwift
 
 protocol FileDownloadManagerDelegates {
-    func download(manager: FileDownloadManager,didUpdateProgress progress: Float)
-    func download(manager: FileDownloadManager,didFinishDownloadingAtPath path: String)
-    func download(manager: FileDownloadManager,didFailedWithError error: Error)
+    func download(manager: FileDownloadManager, didUpdateProgress progress: Float)
+    func download(manager: FileDownloadManager, didFinishDownloadingAtPath path: String)
+    func download(manager: FileDownloadManager, didFailedWithError error: Error)
 }
 
 let kdefaultKeyForEncrytion = "passwordpasswordpasswordpassword"
 let kdefaultIVForEncryption = "drowssapdrowssap"
 
-class FileDownloadManager: NSObject,URLSessionDelegate,URLSessionDownloadDelegate {
+class FileDownloadManager: NSObject, URLSessionDelegate, URLSessionDownloadDelegate {
     
     var sessionManager: Foundation.URLSession!
     open var downloadingArray: [FileDownloadModel] = []
@@ -42,12 +42,11 @@ class FileDownloadManager: NSObject,URLSessionDelegate,URLSessionDownloadDelegat
         let url = URL(string: fileURL as String)!
         let request = URLRequest(url: url)
         let config = URLSessionConfiguration.default
-        sessionManager = Foundation.URLSession.init(configuration: config, delegate: self , delegateQueue: nil)
+        sessionManager = Foundation.URLSession.init(configuration: config, delegate: self, delegateQueue: nil)
         let downloadTask = sessionManager.downloadTask(with: request)
         
         downloadTask.taskDescription = [fileName, fileURL, destinationPath].joined(separator: ",")
         downloadTask.resume()
-        
         
         let downloadModel = FileDownloadModel.init(fileName: fileName, fileURL: fileURL, destinationPath: destinationPath)
         downloadModel.startTime = Date()
@@ -57,10 +56,7 @@ class FileDownloadManager: NSObject,URLSessionDelegate,URLSessionDownloadDelegat
         downloadingArray.append(downloadModel)
     }
 
-
-
-
-//extension FileDownloadManager: URLSessionDelegate{
+// extension FileDownloadManager: URLSessionDelegate{
 
     func urlSession(_ session: Foundation.URLSession,
                     downloadTask: URLSessionDownloadTask,
@@ -89,8 +85,8 @@ class FileDownloadManager: NSObject,URLSessionDelegate,URLSessionDownloadDelegat
                 
                 let fileManager: FileManager = FileManager.default
                 
-                //If all set just move downloaded file to the destination
-                //if fileManager.fileExists(atPath: basePath) {
+                // If all set just move downloaded file to the destination
+                // if fileManager.fileExists(atPath: basePath) {
                 let fileURL = URL(fileURLWithPath: destinationPath as String)
                 debugPrint("directory path = \(destinationPath)")
                 
@@ -139,25 +135,23 @@ class FileDownloadManager: NSObject,URLSessionDelegate,URLSessionDownloadDelegat
         
         do {
             
-            let ud = UserDefaults.standard
+            // let ud = UserDefaults.standard
             
             var key = ""
             var initializationVector = ""
             
             if let ekey = FDAKeychain.shared[kEncryptionKey] {
-                key = ekey//ud.value(forKey: kEncryptionKey) as! String
-            }
-            else{
+                key = ekey// ud.value(forKey: kEncryptionKey) as! String
+            } else {
                 key = kdefaultKeyForEncrytion
             }
             if let ekey = FDAKeychain.shared[kEncryptionIV] {
-                initializationVector = ekey//ud.value(forKey: kEncryptionIV) as! String
-            }
-            else{
+                initializationVector = ekey// ud.value(forKey: kEncryptionIV) as! String
+            } else {
                 initializationVector = kdefaultIVForEncryption
             }
             // key = kdefaultKeyForEncrytion
-            //initializationVector = kdefaultIVForEncryption
+            // initializationVector = kdefaultIVForEncryption
             
             let data = try Data.init(contentsOf: URL.init(string: pathString)!)
             let aes = try AES(key: key, iv: initializationVector)
@@ -165,7 +159,7 @@ class FileDownloadManager: NSObject,URLSessionDelegate,URLSessionDownloadDelegat
             let deCryptedData = Data(deCipherText)
             return deCryptedData
             
-        }catch let error as NSError {
+        } catch let error as NSError {
             
              debugPrint("Decrypting data failed \(error.localizedDescription)")
             print(error)
@@ -173,7 +167,7 @@ class FileDownloadManager: NSObject,URLSessionDelegate,URLSessionDownloadDelegat
             return nil
         }
            
-        }else {
+        } else {
             return nil
         }
     }
@@ -190,25 +184,23 @@ class FileDownloadManager: NSObject,URLSessionDelegate,URLSessionDownloadDelegat
         if !FileManager.default.fileExists(atPath: pathString) {
             
             do{
-                //let ud = UserDefaults.standard
+                // let ud = UserDefaults.standard
                 
                 var key = ""
                 var initializationVector = ""
                 
                 if let ekey = FDAKeychain.shared[kEncryptionKey] {
-                    key = ekey//ud.value(forKey: kEncryptionKey) as! String
-                }
-                else{
+                    key = ekey// ud.value(forKey: kEncryptionKey) as! String
+                } else {
                     key = kdefaultKeyForEncrytion
                 }
                 if let ekey = FDAKeychain.shared[kEncryptionIV] {
-                    initializationVector = ekey//ud.value(forKey: kEncryptionIV) as! String
-                }
-                else{
+                    initializationVector = ekey// ud.value(forKey: kEncryptionIV) as! String
+                } else {
                     initializationVector = kdefaultIVForEncryption
                 }
-                 //key = kdefaultKeyForEncrytion
-                //initializationVector = kdefaultIVForEncryption
+                 // key = kdefaultKeyForEncrytion
+                // initializationVector = kdefaultIVForEncryption
                 let data = try Data.init(contentsOf: URL.init(string: pathString)!)
                 let aes = try AES(key: key, iv: initializationVector) // aes128
                 
@@ -219,11 +211,11 @@ class FileDownloadManager: NSObject,URLSessionDelegate,URLSessionDownloadDelegat
                 do{
                     try encryptedData.write(to: URL.init(string: pathString)!, options: Data.WritingOptions.atomic)
                     
-                }catch let error as NSError{
+                } catch let error as NSError{
                     print(error)
                     debugPrint("Writing encrypted data to path failed \(error.localizedDescription)")
                 }
-            }catch let error as NSError {
+            } catch let error as NSError {
                 print(error)
                 debugPrint("Encryting data failed \(error.localizedDescription)")
             }

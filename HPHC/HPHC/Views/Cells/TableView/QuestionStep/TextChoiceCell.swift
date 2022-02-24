@@ -14,7 +14,6 @@ class TextChoiceCell: UITableViewCell {
     @IBOutlet weak var checkmarkView: UIImageView!
     @IBOutlet weak var detailedTextLbl: UILabel!
     
-    
     var didSelected: Bool = false {
         didSet {
             if didSelected {
@@ -26,7 +25,6 @@ class TextChoiceCell: UITableViewCell {
             }
         }
     }
-    
     
     override func awakeFromNib() {
         super.awakeFromNib()

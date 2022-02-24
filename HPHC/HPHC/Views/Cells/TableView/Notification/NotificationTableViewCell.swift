@@ -49,10 +49,10 @@ class NotificationTableViewCell: UITableViewCell {
                 if appNotification.message != nil{
                     labelNotificationText?.text =  appNotification.message!
                     
-                }else {
+                } else {
                     labelNotificationText?.text = ""
                 }
-            }else {
+            } else {
                 
                 let appNotification = notification as! AppLocalNotification
                 self.labelNotificationTime?.text = NotificationTableViewCell.formatter.string(from: (appNotification.startDate)!)
@@ -60,19 +60,19 @@ class NotificationTableViewCell: UITableViewCell {
                 if appNotification.message != nil{
                     labelNotificationText?.text =  appNotification.message!
                     
-                }else {
+                } else {
                     labelNotificationText?.text = ""
                 }
             }
             
-        }else {
+        } else {
             let appNotification = notification as! AppLocalNotification
             self.labelNotificationTime?.text = NotificationTableViewCell.formatter.string(from: (appNotification.startDate)!)
             
             if Utilities.isValidValue(someObject: appNotification.message! as AnyObject?){
                 labelNotificationText?.text =  appNotification.message!
                 
-            }else {
+            } else {
                 labelNotificationText?.text = ""
             }
         }

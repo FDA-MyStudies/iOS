@@ -15,7 +15,6 @@ let kRealmEncryptionDefaultKey = "tatu8uopi8qwec7"
 let kEncryptionKey = "EncryptionKey"
 let kEncryptionIV =  "EncryptionIV"
 
-
 open class FDAKeychain {
     
     open var loggingEnabled = false

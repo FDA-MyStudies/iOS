@@ -65,15 +65,14 @@ enum EligibilityStepType: String {
     case both = "combined"
 }
 
-
 class EligibilityBuilder{
     
     var type: EligibilityStepType? // type specifies Eligibility Type which can be token, test or both
     var tokenTitle: String? // Custom token for Eligibility Token step title
     
     var testArray: Array<Any>? // contains array of Dictionary of steps for the test
-    static var currentEligibility: EligibilityBuilder? = nil
-    var correctAnswers: Array<Dictionary<String,Any>>? // array of Dictionary of step Results
+    static var currentEligibility: EligibilityBuilder?
+    var correctAnswers: Array<Dictionary<String, Any>>? // array of Dictionary of step Results
     
     /**
      default Intalizer method
@@ -83,7 +82,7 @@ class EligibilityBuilder{
         self.type = .token
         self.tokenTitle = ""
         self.testArray = Array()
-        self.correctAnswers = Array<Dictionary<String,Any>>()
+        self.correctAnswers = Array<Dictionary<String, Any>>()
     }
     
     /**
@@ -115,7 +114,7 @@ class EligibilityBuilder{
             
             var stepsArray: [ORKStep]? = [ORKStep]()
             
-            if self.type == EligibilityStepType.token { //Token Step
+            if self.type == EligibilityStepType.token { // Token Step
                 
                 // creating Eligibility Token Step
                 let eligibilityStep: EligibilityStep? = EligibilityStep(identifier: kEligibilityTokenStep)
@@ -131,13 +130,13 @@ class EligibilityBuilder{
                 let eligibilityValidationStep = customInstructionStep(identifier: kEligibilityValidateScreen)
                 eligibilityValidationStep.text = kEligibilityValidationDescriptionText
                 
-                //Branding
+                // Branding
                 eligibilityValidationStep.title = Branding.ValidatedTitle
               
                 eligibilityValidationStep.image =  #imageLiteral(resourceName: "successBlueBig")
                 stepsArray?.append(eligibilityValidationStep)
                 
-            } else if self.type == EligibilityStepType.test { //Eligibility Test
+            } else if self.type == EligibilityStepType.test { // Eligibility Test
                 // for only test
                 
                 // add the Instruction step for eligibility Test
@@ -148,8 +147,7 @@ class EligibilityBuilder{
                 eligibilityTestInstructionStep.title = kEligibilityTestInstructionTestTitle
                 stepsArray?.append(eligibilityTestInstructionStep)
                 
-                
-                //test array will hold the questions, correct answers will hold the answers
+                // test array will hold the questions, correct answers will hold the answers
                 
                 for stepDict in self.testArray!{
                     let questionStep: ActivityQuestionStep? = ActivityQuestionStep()
@@ -181,7 +179,6 @@ class EligibilityBuilder{
                 
                 eligibilityTestInstructionStep.title = kEligibilityTestInstructionTestTitle
                 stepsArray?.append(eligibilityTestInstructionStep)
-                
                 
                 // creating Test Questions
                 for stepDict in self.testArray!{
@@ -229,4 +226,3 @@ class customInstructionStep: ORKInstructionStep{
         return false
     }
 }
-

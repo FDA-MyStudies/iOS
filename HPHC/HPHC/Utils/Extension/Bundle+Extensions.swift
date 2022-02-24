@@ -45,6 +45,9 @@ class func setLanguage(_ language: String) {
         object_setClass(Bundle.main, AnyLanguageBundle.self)
     }
 
-    objc_setAssociatedObject(Bundle.main, &bundleKey,    Bundle.main.path(forResource: language, ofType: "lproj"), .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+    objc_setAssociatedObject(
+        Bundle.main, &bundleKey,
+        Bundle.main.path(forResource: language, ofType: "lproj"),
+            .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
   }
 }

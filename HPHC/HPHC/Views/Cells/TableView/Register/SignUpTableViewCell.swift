@@ -46,7 +46,6 @@ class SignUpTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-    
     /**
      
      Populate cell data coming in dictionary
@@ -56,7 +55,7 @@ class SignUpTableViewCell: UITableViewCell {
      @param keyboardType    allows which kind of keyboard to use
      
      */
-    func populateCellData(data: NSDictionary , securedText: Bool, keyboardType: UIKeyboardType?){
+    func populateCellData(data: NSDictionary, securedText: Bool, keyboardType: UIKeyboardType?) {
         
         textFieldValue?.isSecureTextEntry = false
       textFieldValue?.textContentType = UITextContentType(rawValue: "")
@@ -68,8 +67,6 @@ class SignUpTableViewCell: UITableViewCell {
         }
       }
         
-
-        
         labelType?.text = NSLocalizedStrings((data["helpText"] as? String)!, comment: "")
         textFieldValue?.placeholder = NSLocalizedStrings((data["placeHolder"] as? String)!, comment: "")
         
@@ -79,7 +76,6 @@ class SignUpTableViewCell: UITableViewCell {
             textFieldValue?.keyboardType = keyboardType!
         }
     }
-    
     
     /**
      
@@ -111,6 +107,3 @@ class SignUpTableViewCell: UITableViewCell {
         }
     }    
 }
-
-
-

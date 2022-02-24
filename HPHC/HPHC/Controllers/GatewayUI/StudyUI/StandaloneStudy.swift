@@ -22,11 +22,9 @@ import UIKit
 
 class StandaloneStudy: NSObject {
     
-    
-    
     func createStudyForStandalone() {
         
-        WCPServices().getStudyBasicInfo(self)//.getStudyList(self)
+        WCPServices().getStudyBasicInfo(self) // .getStudyList(self)
         
 //        let studyDetail = ["category":"Drug Safety",
 //                           "logo":"https://hphci-fdama-st-wcp-01.labkey.com/fdaResources/studylogo/STUDY_HT_06072017020809.jpeg?v=1513764405945",
@@ -49,7 +47,7 @@ class StandaloneStudy: NSObject {
 //        Gateway.instance.studies = studylist
 //
 //        Logger.sharedInstance.info("Studies Saving in DB")
-//        //save in database
+//        // save in database
 //        DBHandler().saveStudies(studies: studylist)
 //
 //        self.fetchStudyDashboardInfo()
@@ -58,8 +56,7 @@ class StandaloneStudy: NSObject {
     func setupStandaloneStudy() {
         if User.currentUser.authToken != nil && User.currentUser.authToken.count > 0{
             self.getStudyStates()
-        }
-        else {
+        } else {
             self.createStudyForStandalone()
         }
        
@@ -75,14 +72,12 @@ class StandaloneStudy: NSObject {
     
     func fetchStudyDashboardInfo() {
         
-    
         DBHandler.loadStudyOverview(studyId: (Study.currentStudy?.studyId)!) { (overview) in
             if overview != nil {
                 Study.currentStudy?.overview = overview
-                //NotificationCenter.default.post(name: NSNotification.Name(rawValue: "StudySetupCompleted"), object: nil)
+                // NotificationCenter.default.post(name: NSNotification.Name(rawValue: "StudySetupCompleted"), object: nil)
                 self.getStudyUpdates()
-            }
-            else {
+            } else {
                 self.getStudyDashboardInfo()
             }
         }
@@ -90,11 +85,11 @@ class StandaloneStudy: NSObject {
     func getStudyUpdates(){
         
         let study = Study.currentStudy
-        DBHandler.loadStudyDetailsToUpdate(studyId: (study?.studyId)!, completionHandler: { (success) in
+        DBHandler.loadStudyDetailsToUpdate(studyId: (study?.studyId)!, completionHandler: { (_) in
           NotificationCenter.default.post(name: NSNotification.Name(rawValue: "StudySetupCompleted"), object: nil)
-            //self.pushToStudyDashboard()
-            //self.removeProgressIndicator()
-            //self.checkDatabaseForStudyInfo(study: study!)
+            // self.pushToStudyDashboard()
+            // self.removeProgressIndicator()
+            // self.checkDatabaseForStudyInfo(study: study!)
         })
     }
     func handleStudyListResponse(){
@@ -110,8 +105,7 @@ class StandaloneStudy: NSObject {
                     Gateway.instance.studies = studies
                     Study.updateCurrentStudy(study:study.last!)
                     self.getStudyDashboardInfo()
-                }
-                else {
+                } else {
                     // no study found send controler back from here
                 }
             }
@@ -121,55 +115,48 @@ class StandaloneStudy: NSObject {
     }
 }
 
-//MARK:- Webservices Delegates
+// MARK: - Webservices Delegates
 extension StandaloneStudy:NMWebServiceDelegate {
     
     func startedRequest(_ manager: NetworkManager, requestName: NSString) {
         Logger.sharedInstance.info("requestname START : \(requestName)")
         
-        //let appdelegate = UIApplication.shared.delegate as! AppDelegate
-        //appdelegate.window?.addProgressIndicatorOnWindowFromTop()
+        // let appdelegate = UIApplication.shared.delegate as! AppDelegate
+        // appdelegate.window?.addProgressIndicatorOnWindowFromTop()
         
     }
     
     func finishedRequest(_ manager: NetworkManager, requestName: NSString, response: AnyObject?) {
         Logger.sharedInstance.info("requestname FINISH: \(requestName) : \(String(describing:response))")
+    
+        // let appdelegate = UIApplication.shared.delegate as! AppDelegate
         
-        
-        //let appdelegate = UIApplication.shared.delegate as! AppDelegate
-        
-        
-        if(requestName as String == WCPMethods.study.rawValue){
+        if requestName as String == WCPMethods.study.rawValue {
             self.handleStudyListResponse()
         }
         
-        if(requestName as String == WCPMethods.studyInfo.rawValue){
+        if requestName as String == WCPMethods.studyInfo.rawValue {
         
             self.fetchStudyDashboardInfo()
-        }
-        else if (requestName as String == RegistrationMethods.studyState.description){
+        } else if requestName as String == RegistrationMethods.studyState.description {
         
             self.createStudyForStandalone()
         }
-        
-        
-        
     }
     
     func failedRequest(_ manager: NetworkManager, requestName: NSString, error: NSError) {
         Logger.sharedInstance.info("requestname Failed: \(requestName)")
         
-        //--
-        //self.removeProgressIndicator()
-        //--
+        // --
+        // self.removeProgressIndicator()
+        // --
         let appdelegate = UIApplication.shared.delegate as! AppDelegate
         
         appdelegate.window?.removeProgressIndicatorFromWindow()
         
-        if error.code == 403 { //unauthorized
+        if error.code == 403 { // unauthorized
            self.createStudyForStandalone()
-        }
-        else {
+        } else {
             let errorMsg = base64DecodeError(error.localizedDescription)
             UIUtilities.showAlertWithMessage(alertMessage: errorMsg)
   

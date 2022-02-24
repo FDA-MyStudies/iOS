@@ -22,7 +22,7 @@ import UIKit
 
 class StudyDashboardStudyPercentageTableViewCell: UITableViewCell {
     
-    //Third cell Outlets
+    // Third cell Outlets
     @IBOutlet var labelStudyCompletion: UILabel?
     @IBOutlet var labelStudyAdherence: UILabel?
     
@@ -32,7 +32,6 @@ class StudyDashboardStudyPercentageTableViewCell: UITableViewCell {
     let blueColor = UIColor.init(red: 56/255, green: 124/255, blue: 186/255, alpha: 1)
     let greyColor = UIColor.init(red: 216/255, green: 227/255, blue: 230/255, alpha: 1)
     
-    
     override func awakeFromNib() {
         super.awakeFromNib()
     }
@@ -41,7 +40,6 @@ class StudyDashboardStudyPercentageTableViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
         
     }
-    
     
     /**
      Used to display Study Percentage cell
@@ -74,10 +72,10 @@ class StudyDashboardStudyPercentageTableViewCell: UITableViewCell {
         completedPercentagePie?.set(colors: blueColor)
         
         if let userStudyStatus = currentUser.participatedStudies.filter({$0.studyId == study?.studyId}).first {
-            //update completion %
+            // update completion %
             
-            if ( Study.currentStudy?.totalIncompleteRuns == 0
-                && Study.currentStudy?.totalCompleteRuns ==  0){
+            if Study.currentStudy?.totalIncompleteRuns == 0
+                && Study.currentStudy?.totalCompleteRuns ==  0 {
                 
                 self.labelStudyCompletion?.text = "--"
                 self.labelStudyAdherence?.text = "--"
@@ -93,7 +91,7 @@ class StudyDashboardStudyPercentageTableViewCell: UITableViewCell {
                 completedPercentagePie?.angle = Double(userStudyStatus.adherence)/0.27777778
             }
             
-        }else {
+        } else {
             self.labelStudyCompletion?.text = "0"
             self.labelStudyAdherence?.text = "0"
             
@@ -102,6 +100,3 @@ class StudyDashboardStudyPercentageTableViewCell: UITableViewCell {
         }
     }
 }
-
-
-

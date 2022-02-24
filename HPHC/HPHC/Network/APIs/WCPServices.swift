@@ -20,12 +20,12 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 import UIKit
 
-//Api constants
+// Api constants
 let kNotificationSkip = "skip"
 
 let kActivity = "activity"
 
-//study
+// study
 let kStudyTitle = "title"
 let kStudyCategory = "category"
 let kStudySponserName = "sponsorName"
@@ -44,11 +44,10 @@ let kStudyRejoin = "rejoin"
 let kStudyParticipantId = "participantId"
 let kStudyEnrolledDate = "enrolledDate"
 
-//resources
+// resources
 let kResources = "resources"
 
-
-//overview
+// overview
 let kOverViewInfo = "info"
 let kOverviewType = "type"
 let kOverviewImageLink = "image"
@@ -57,7 +56,7 @@ let kOverviewText = "text"
 let kOverviewMediaLink = "videoLink" // link
 let kOverviewWebsiteLink = "website"
 
-//notification
+// notification
 let kNotifications = "notifications"
 let kNotificationId = "notificationId"
 let kNotificationType = "type"
@@ -68,16 +67,15 @@ let kNotificationMessage = "message"
 let kNotificationStudyId = "studyId"
 let kNotificationActivityId = "activityId"
 
-
-//feedback
+// feedback
 let kFeedbackSubject = "subject"
 let kFeedbackBody = "body"
 
-//contactus
+// contactus
 let kContactusEmail = "email"
 let kContactusFirstname = "firstName"
 
-//studyupdates
+// studyupdates
 let kStudyUpdates = "updates"
 let kStudyCurrentVersion = "currentVersion"
 let kStudyConsent = "consent"
@@ -85,13 +83,12 @@ let kStudyActivities = "activities"
 let kStudyResources = "resources"
 let kStudyInfo = "info"
 
-
-//StudyWithdrawalConfigration
+// StudyWithdrawalConfigration
 let kStudyWithdrawalConfigration = "withdrawalConfig"
 let kStudyWithdrawalMessage = "message"
 let kStudyWithdrawalType = "type"
 
-//study AnchorDate
+// study AnchorDate
 
 let kStudyAnchorDate = "anchorDate"
 let kStudyAnchorDateType = "type"
@@ -100,14 +97,12 @@ let kStudyAnchorDateActivityVersion = "activityVersion"
 let kStudyAnchorDateQuestionKey = "key"
 let kStudyAnchorDateQuestionInfo = "questionInfo"
 
-
-
 class WCPServices: NSObject {
     let networkManager = NetworkManager.sharedInstance()
     weak var delegate: NMWebServiceDelegate?
     var delegateSource: NMWebServiceDelegate?
     
-    // MARK:Requests
+    // MARK: Requests
     
     func checkForAppUpdates(delegate: NMWebServiceDelegate){
         
@@ -121,7 +116,7 @@ class WCPServices: NSObject {
         self.delegate = delegate
         
         let method = WCPMethods.study.method
-        let params:Dictionary<String, String> = ["studyId":AppDetails.standaloneStudyId]
+        let params:Dictionary<String, String> = ["studyId": AppDetails.standaloneStudyId]
         self.sendRequestWith(method: method, params: params, headers: nil)
     }
     func getStudyList(_ delegate: NMWebServiceDelegate){
@@ -138,7 +133,7 @@ class WCPServices: NSObject {
         
         self.delegate = delegate
         
-        let header = [kStudyId: studyId,"consentVersion": ""]
+        let header = [kStudyId: studyId, "consentVersion": ""]
         let method = WCPMethods.consentDocument.method
         
         self.sendRequestWith(method: method, params: header, headers: nil)
@@ -187,10 +182,9 @@ class WCPServices: NSObject {
         self.sendRequestWith(method: method, params: headerParams, headers: nil)
     }
     
-    func getStudyActivityMetadata(studyId: String, activityId: String,activityVersion: String, delegate: NMWebServiceDelegate){
+    func getStudyActivityMetadata(studyId: String, activityId: String, activityVersion: String, delegate: NMWebServiceDelegate) {
         
         self.delegate = delegate
-        
         
         let method = WCPMethods.activity.method
         let headerParams = [kStudyId: studyId,
@@ -232,7 +226,7 @@ class WCPServices: NSObject {
         
     }
     
-    func getStudyUpdates(study: Study,delegate: NMWebServiceDelegate){
+    func getStudyUpdates(study: Study, delegate: NMWebServiceDelegate){
         self.delegate = delegate
         
         let method = WCPMethods.studyUpdates.method
@@ -253,22 +247,22 @@ class WCPServices: NSObject {
     }
      */
     
-    // MARK:Parsers
+    // MARK: - Parsers
     func handleStudyBasicInfo(response: Dictionary<String, Any>){
         print("handleStudyBasicInfo")
         
-        let studies = response[kStudies] as! Array<Dictionary<String,Any>>
+        let studies = response[kStudies] as! Array<Dictionary<String, Any>>
         var listOfStudies: Array<Study> = []
         for study in studies{
             let studyModelObj = Study(studyDetail: study)
             listOfStudies.append(studyModelObj)
         }
         Logger.sharedInstance.info("Studies Parsing Finished")
-        //assgin to Gateway
+        // assgin to Gateway
         Gateway.instance.studies = listOfStudies
         
         Logger.sharedInstance.info("Studies Saving in DB")
-        //save in database
+        // save in database
         DBHandler().saveStudies(studies: listOfStudies)
     }
     func handleStudyList(response: Dictionary<String, Any>){
@@ -276,7 +270,7 @@ class WCPServices: NSObject {
         print("StudyList Parsing Start \(Date().timeIntervalSince1970)")
         Logger.sharedInstance.info("Studies Parsing Start")
         
-        let studies = response[kStudies] as! Array<Dictionary<String,Any>>
+        let studies = response[kStudies] as! Array<Dictionary<String, Any>>
         var listOfStudies: Array<Study> = []
         for study in studies{
             let studyModelObj = Study(studyDetail: study)
@@ -305,37 +299,36 @@ class WCPServices: NSObject {
         
     }
     
-    
     func handleResourceListForGateway(response: Dictionary<String, Any>) {
         
-        let resources = response[kResources] as! Array<Dictionary<String,Any>>
+        let resources = response[kResources] as! Array<Dictionary<String, Any>>
         var listOfResources: [Resource] = []
         for resource in resources{
             let resourceObj = Resource(detail: resource)
             listOfResources.append(resourceObj)
         }
         
-        //assgin to Gateway
+        // assgin to Gateway
         Gateway.instance.resources = listOfResources
     }
     
-    func handleResourceForStudy(response: Dictionary<String, Any>){
+    func handleResourceForStudy(response: Dictionary<String, Any>) {
         
-        //Testing
+        // Testing
 //        let filePath  = Bundle.main.path(forResource: "ResourceList", ofType: "json")
 //        let data = NSData(contentsOfFile: filePath!)
 //
-//        var resources:Array<Dictionary<String,Any>> = []
+//        var resources:Array<Dictionary<String, Any>> = []
 //        do {
-//            let res = try JSONSerialization.jsonObject(with: data! as Data, options: []) as? Dictionary<String,Any>
+//            let res = try JSONSerialization.jsonObject(with: data! as Data, options: []) as? Dictionary<String, Any>
 //
-//            resources = res?[kResources] as! Array<Dictionary<String,Any>>
+//            resources = res?[kResources] as! Array<Dictionary<String, Any>>
 //        }
 //        catch {
 //            print("json error: \(error.localizedDescription)")
 //        }
         
-        //Actual
+        // Actual
         let resources = response[kResources] as! [JSONDictionary]
         var listOfResources: [Resource] = []
         for resource in resources {
@@ -344,14 +337,13 @@ class WCPServices: NSObject {
             listOfResources.append(resourceObj)
         }
 
-        //save in database
+        // save in database
         if let studyID = Study.currentStudy?.studyId {
             DBHandler.saveResourcesForStudy(studyId: studyID,
                                             resources: listOfResources)
         }
 
-        
-        //assign to Gateway
+        // assign to Gateway
         Study.currentStudy?.resources = listOfResources
         
     }
@@ -364,8 +356,8 @@ class WCPServices: NSObject {
             
             if Study.currentStudy != nil {
                 
-                //stats
-                let statsList = dashboard["statistics"] as! Array<Dictionary<String,Any>>
+                // stats
+                let statsList = dashboard["statistics"] as! Array<Dictionary<String, Any>>
                 var listOfStats: Array<DashboardStatistics>! = []
                 for stat in statsList{
                     
@@ -374,11 +366,11 @@ class WCPServices: NSObject {
                 }
                 
                 StudyDashboard.instance.statistics = listOfStats
-                //save stats in database
+                // save stats in database
                 DBHandler.saveDashBoardStatistics(studyId: (Study.currentStudy?.studyId)!, statistics: listOfStats)
                 
-                //charts
-                let chartList = dashboard["charts"] as! Array<Dictionary<String,Any>>
+                // charts
+                let chartList = dashboard["charts"] as! Array<Dictionary<String, Any>>
                 var listOfCharts: Array<DashboardCharts>! = []
                 for chart in chartList{
                     
@@ -388,7 +380,7 @@ class WCPServices: NSObject {
                 
                 StudyDashboard.instance.charts = listOfCharts
                 
-                //save charts in database
+                // save charts in database
                 DBHandler.saveDashBoardCharts(studyId: (Study.currentStudy?.studyId)!, charts: listOfCharts)
             }
         }
@@ -406,7 +398,6 @@ class WCPServices: NSObject {
         
     }
     
-    
     func handleTermsAndPolicy(response: Dictionary<String, Any>){
         
         TermsAndPolicy.currentTermsAndPolicy =  TermsAndPolicy()
@@ -414,51 +405,48 @@ class WCPServices: NSObject {
         
     }
     
-    
     func handleStudyInfo(response: Dictionary<String, Any>){
         
         if Study.currentStudy != nil {
             
-            let overviewList = response[kOverViewInfo] as! Array<Dictionary<String,Any>>
+            let overviewList = response[kOverViewInfo] as! Array<Dictionary<String, Any>>
             var listOfOverviews: Array<OverviewSection> = []
             for overview in overviewList{
                 let overviewObj = OverviewSection(detail: overview)
                 listOfOverviews.append(overviewObj)
             }
             
-            //create new Overview object
+            // create new Overview object
             let overview = Overview()
             overview.type = .study
             overview.sections = listOfOverviews
             overview.websiteLink = response[kOverViewWebsiteLink] as? String
             
-            
-            //update overview object to current study
+            // update overview object to current study
             Study.currentStudy?.overview = overview
             
-            //anchorDate
+            // anchorDate
             if Utilities.isValidObject(someObject: response[kStudyAnchorDate] as AnyObject?){
                 
-                let studyAndhorDate = StudyAnchorDate.init(detail: response[kStudyAnchorDate] as! Dictionary<String,Any>)
+                let studyAndhorDate = StudyAnchorDate.init(detail: response[kStudyAnchorDate] as! Dictionary<String, Any>)
                 
-                //update anchorDate to current study
+                // update anchorDate to current study
                 Study.currentStudy?.anchorDate = studyAndhorDate
                 
                 DBHandler.saveAnchorDateDetail(anchorDate: studyAndhorDate, studyId: (Study.currentStudy?.studyId)!)
             }
             
-            //WithdrawalConfigration
+            // WithdrawalConfigration
             if Utilities.isValidObject(someObject: response[kStudyWithdrawalConfigration] as AnyObject?){
                 
-                let config = StudyWithdrawalConfig.init(withdrawalConfigration: response[kStudyWithdrawalConfigration] as! Dictionary<String,Any>)
+                let config = StudyWithdrawalConfig(withdrawalConfigration: response[kStudyWithdrawalConfigration] as! Dictionary<String, Any>)
                 
-                
-                //update anchorDate to current study
+                // update anchorDate to current study
                 Study.currentStudy?.withdrawalConfigration = config
                 DBHandler.saveWithdrawalConfigration(withdrawalConfigration:config ,studyId: (Study.currentStudy?.studyId)!)
             }
             
-            //save in database
+            // save in database
             DBHandler.saveStudyOverview(overview: overview, studyId: (Study.currentStudy?.studyId)!)
         }
         
@@ -468,13 +456,13 @@ class WCPServices: NSObject {
         
         Logger.sharedInstance.info("Activities Parsing Start")
         
-//        //Testing
+//        // Testing
 //        let filePath  = Bundle.main.path(forResource: "Activitylist", ofType: "json")
 //        let data = NSData(contentsOfFile: filePath!)
 //
-//        var activities:Array<Dictionary<String,Any>> = []
+//        var activities:Array<Dictionary<String, Any>> = []
 //        do {
-//            let res = try JSONSerialization.jsonObject(with: data! as Data, options: []) as? Dictionary<String,Any>
+//            let res = try JSONSerialization.jsonObject(with: data! as Data, options: []) as? Dictionary<String, Any>
 //
 //            activities = res?[kActivites] as! Array<Dictionary<String, Any>>
 //        }
@@ -482,8 +470,8 @@ class WCPServices: NSObject {
 //            print("json error: \(error.localizedDescription)")
 //        }
         
-        //Actual
-         let activities = response[kActivites] as! Array<Dictionary<String,Any>>
+        // Actual
+         let activities = response[kActivites] as! Array<Dictionary<String, Any>>
         
         if Utilities.isValidObject(someObject: activities as AnyObject? ) {
             
@@ -496,10 +484,10 @@ class WCPServices: NSObject {
                 }
                 
                 Logger.sharedInstance.info("Activities Parsing Finished")
-                //save to current study object
+                // save to current study object
                 Study.currentStudy?.activities = activityList
                 Logger.sharedInstance.info("Activities Saving in DB")
-                //save in database
+                // save in database
                 DBHandler.saveActivities(activityies: (Study.currentStudy?.activities)!)
             }
         } else {
@@ -510,16 +498,16 @@ class WCPServices: NSObject {
     
     func handleGetStudyActivityMetadata(response: Dictionary<String, Any>){
         
-//        let filePath  = Bundle.main.path(forResource: "ActivityMetadata TEST1", ofType: "json") //Activity_Metadata_Other
+//        let filePath  = Bundle.main.path(forResource: "ActivityMetadata TEST1", ofType: "json") // Activity_Metadata_Other
 //        let data = NSData(contentsOfFile: filePath!)
 //
 //        var activities: [String:Any] = [:]
 //
 //        do {
-//            let res = try JSONSerialization.jsonObject(with: data! as Data, options: []) as? Dictionary<String,Any>
+//            let res = try JSONSerialization.jsonObject(with: data! as Data, options: []) as? Dictionary<String, Any>
 //
 //            activities = res?[kActivity] as! [String: Any]
-////            print("1---\(activities)")
+//            print("1---\(activities)")
 //        }
 //        catch {
 //            print("json error: \(error.localizedDescription)")
@@ -535,7 +523,7 @@ class WCPServices: NSObject {
             ActivityBuilder.currentActivityBuilder.initWithActivity(activity:Study.currentActivity! )
         }
         
-        //Save and Update activity meta data
+        // Save and Update activity meta data
         DBHandler.saveActivityMetaData(activity: Study.currentActivity!, data: response)
         DBHandler.updateActivityMetaData(activity: Study.currentActivity!)
         
@@ -543,7 +531,7 @@ class WCPServices: NSObject {
     
     func handleGetNotification(response: Dictionary<String, Any>){
         
-        let notifications = response[kNotifications] as! Array<Dictionary<String,Any>>
+        let notifications = response[kNotifications] as! Array<Dictionary<String, Any>>
         var listOfNotifications: Array<AppNotification>! = []
         for notification in notifications{
             let overviewObj = AppNotification(detail: notification)
@@ -552,7 +540,7 @@ class WCPServices: NSObject {
         
         Gateway.instance.notification = listOfNotifications
         
-        //save in database
+        // save in database
         DBHandler().saveNotifications(notifications: listOfNotifications )
         
     }
@@ -568,7 +556,7 @@ class WCPServices: NSObject {
         }
     }
     
-    private func sendRequestWith(method: Method, params: Dictionary<String, Any>?,headers: Dictionary<String, String>?){
+    private func sendRequestWith(method: Method, params: Dictionary<String, Any>?, headers: Dictionary<String, String>?){
         
         networkManager.composeRequest(WCPConfiguration.configuration,
                                       method: method,
@@ -576,7 +564,6 @@ class WCPServices: NSObject {
                                       headers: headers as NSDictionary?,
                                       delegate: delegateSource != nil ? delegateSource! : self)
     }
-    
     
 }
 extension WCPServices:NMWebServiceDelegate{
@@ -624,10 +611,7 @@ extension WCPServices:NMWebServiceDelegate{
         default: break
         }
         
-      
         delegate?.finishedRequest(manager, requestName: requestName, response: response)
-        
-        
     }
     
     func failedRequest(_ manager: NetworkManager, requestName: NSString, error: NSError) {

@@ -32,7 +32,6 @@ open class FDASlideMenuViewController: SlideMenuController {
     }
     override open func awakeFromNib() {
         
-       
         SlideMenuOptions.leftViewWidth = UIScreen.main.bounds.size.width * 0.81
         let storyboard = UIStoryboard(name: kStoryboardIdentifierGateway, bundle: nil)
         
@@ -44,8 +43,7 @@ open class FDASlideMenuViewController: SlideMenuController {
                     studyStoryBoard.instantiateViewController(withIdentifier: kStudyDashboardTabbarControllerIdentifier) as!
                     StudyDashboardTabbarViewController
                 self.mainViewController = studyTabBarController
-            }
-            else {
+            } else {
                 let studyHomeViewController =
                     studyStoryBoard.instantiateViewController(withIdentifier: String(describing: kStudyHomeViewControllerIdentifier)) as!
                     UINavigationController
@@ -54,7 +52,7 @@ open class FDASlideMenuViewController: SlideMenuController {
             
         } else {
             
-            //Gateway- Studylist
+            // Gateway- Studylist
             let controller = storyboard.instantiateViewController(withIdentifier: kStudyListViewControllerIdentifier)
             self.mainViewController = controller
         }
@@ -88,7 +86,6 @@ open class FDASlideMenuViewController: SlideMenuController {
         return false
     }
     
-    
     override open func track(_ trackAction: TrackAction) {
         switch trackAction {
         case .leftTapOpen:
@@ -115,7 +112,6 @@ open class FDASlideMenuViewController: SlideMenuController {
         self.leftViewController?.view.isHidden = true
         _ = self.navigationController?.popToRootViewController(animated: true)
         
-    
         let navVC: UINavigationController = UIApplication.shared.keyWindow?.rootViewController as! UINavigationController
         
         if navVC.viewControllers.count > 0 {
@@ -129,14 +125,14 @@ open class FDASlideMenuViewController: SlideMenuController {
         
         User.resetCurrentUser()
         
-        //Delete from database
+        // Delete from database
         DBHandler.deleteAll()
         
         if ORKPasscodeViewController.isPasscodeStoredInKeychain() {
             ORKPasscodeViewController.removePasscodeFromKeychain()
         }
         
-        //cancel all local notification
+        // cancel all local notification
         LocalNotification.cancelAllLocalNotification()
 
         let ud = UserDefaults.standard

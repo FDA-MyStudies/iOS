@@ -52,6 +52,3 @@ public var textChoiceQuestionTask: ORKOrderedTask = {
     return ORKOrderedTask(identifier: "textChoiceQuestionTask", steps: [questionStep, thirdQuestionStep, newQuestionStep, forthQuestionStep])
 }()
 */
-
-
-

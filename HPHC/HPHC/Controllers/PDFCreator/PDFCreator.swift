@@ -104,8 +104,7 @@ class PDFCreator: NSObject {
                 drawLine(context, XValueStart: 454, top: signatureImageBottom + 5, xValueEnd: CGFloat(pageWidth - 20))
                 body1TextBottom = addBody1TextRegular(textTop: signatureImageBottom + 14.0, title: "(\(LocalizableString.consentLARParticipantDate.localizedString))", xValue: 556)
                 _ = addBody1TextRegular(textTop: signatureImageBottom - 16, title: startTime, xValue: 522)
-            }
-            else {
+            } else {
                 body1TextBottom += 104.0
             }
             
@@ -115,8 +114,7 @@ class PDFCreator: NSObject {
             
             if isLAR {
                 _ = addBody1TextRegular(textTop: body1TextBottom + 22.0, title: lastName, xValue: (CGFloat(1.3 * (pageWidth / 4)) + 10))
-            }
-            else {
+            } else {
                 _ = addImage(imageTop: firstTextBottom - 84.0, xValue: (CGFloat(1.3 * (pageWidth / 4)) + 10))
             }
             drawLine(context,
@@ -200,7 +198,7 @@ class PDFCreator: NSObject {
         
         let titleStringSize = attributedText.size()
         let titleStringRect = CGRect(x: 10,
-                                     y: textTop , width: titleStringSize.width,
+                                     y: textTop, width: titleStringSize.width,
                                      height: titleStringSize.height)
         
         return titleStringRect.origin.y + titleStringRect.size.height
@@ -226,7 +224,7 @@ class PDFCreator: NSObject {
         
         let titleStringSize = attributedTitle.size()
         let titleStringRect = CGRect(x: 15,
-                                     y: textTop , width: titleStringSize.width,
+                                     y: textTop, width: titleStringSize.width,
                                      height: titleStringSize.height)
         
         return titleStringRect.origin.y + titleStringRect.size.height
@@ -244,7 +242,7 @@ class PDFCreator: NSObject {
         
         let titleStringSize = attributedTitle.size()
         let titleStringRect = CGRect(x: xValue,
-                                     y: textTop , width: titleStringSize.width,
+                                     y: textTop, width: titleStringSize.width,
                                      height: titleStringSize.height)
         
         return titleStringRect.origin.y + titleStringRect.size.height
@@ -262,7 +260,7 @@ class PDFCreator: NSObject {
         
         let titleStringSize = attributedTitle.size()
         let titleStringRect = CGRect(x: xValue,
-                                     y: textTop , width: titleStringSize.width,
+                                     y: textTop, width: titleStringSize.width,
                                      height: titleStringSize.height)
         
         return titleStringRect.origin.y + titleStringRect.size.height

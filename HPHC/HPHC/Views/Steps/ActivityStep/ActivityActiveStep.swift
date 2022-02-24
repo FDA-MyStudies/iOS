@@ -27,32 +27,30 @@ let kActivityStepActiveFormat = "format"
 let kActivityStepActiveType = "type"
 let kActivityStepActiveResultType = "resultType"
  
-//Active task Api constants
+// Active task Api constants
 
-//FitnessCheckFormat
+// FitnessCheckFormat
 
 let kActiveFitnessCheckWalkDuration = "walkDuration"
 let kActiveFitnessCheckRestDuration = "restDuration"
 
-
-
-//ShortWalkFormat
+// ShortWalkFormat
 
 let kActiveShortWalkNumberOfStepsPerLeg = "numberOfStepsPerLeg"
 let kActiveShortWalkRestDuration = "restDuration"
  
-//AudioFormat
+// AudioFormat
 
 let kActiveAudioSpeechInstruction = "speechInstruction"
 let kActiveAudioShortSpeechInstruction = "shortSpeechInstruction"
 let kActiveAudioDuration  = "duration"
 
-//TwoFingerTappingIntervalFormat
+// TwoFingerTappingIntervalFormat
 
 let kActiveTwoFingerTappingIntervalDuration = "duration"
 let kActiveTwoFingerTappingIntervalHandOptions = "handOptions"
 
-//SpatialSpanMemoryFormat
+// SpatialSpanMemoryFormat
 
 let kActiveSpatialSpanMemoryInitialSpan = "initialSpan"
 let kActiveSpatialSpanMemoryMinimumSpan = "minimumSpan"
@@ -64,17 +62,15 @@ let kActiveSpatialSpanMemoryCustomTargetImage = "customTargetImage"
 let kActiveSpatialSpanMemoryCustomTargetPluralName = "customTargetPluralName"
 let kActiveSpatialSpanMemoryRequireReversal = "requireReversal"
 
-
-//ToneAudiometryFormat
+// ToneAudiometryFormat
 let kActiveToneAudiometrySpeechInstruction = "speechInstruction"
 let kActiveToneAudiometryShortSpeechInstruction = "shortSpeechInstruction"
 let kActiveToneAudiometryToneDuration = "toneDuration"
 
-//TowerOfHanoiFormat
+// TowerOfHanoiFormat
 let kActiveTowerOfHanoiNumberOfDisks = "numberOfDisks"
 
-
-//TimedWalkFormat
+// TimedWalkFormat
 
 let kActiveTimedWalkTistanceInMeters = "distanceInMeters"
 let kActiveTimedWalkTimeLimit = "timeLimit"
@@ -87,21 +83,19 @@ let kActivePSATInterStimulusInterval = "interStimulusInterval"
 let kActivePSATStimulusDuration = "stimulusDuration"
 let kActivePSATSeriesLength = "seriesLength"
 
-//TremorTestFormat
+// TremorTestFormat
 
 let kActiveTremorTestActiveStepDuration = "activeStepDuration"
 let kActiveTremorTestActiveTaskOptions = "activeTaskOptions"
 let kActiveTremorTestHandOptions = "handOptions"
 
-
-//HolePegTestFormat
+// HolePegTestFormat
 
 let kActiveHolePegTestDominantHand = "dominantHand"
 let kActiveHolePegTestNumberOfPegs = "numberOfPegs"
 let kActiveHolePegTestThreshold = "threshold"
 let kActiveHolePegTestRotated = "rotated"
 let kActiveHolePegTestTimeLimit = "timeLimit"
-
 
 // FetalKickCounterFormat
 let kActiveFetalKickCounterDuration = "duration"
@@ -256,8 +250,6 @@ class ActivityActiveStep: ActivityStep {
                                             stimulusDuration: (formatDict?[kActivePSATStimulusDuration] as? TimeInterval)!,
                                             seriesLength: (formatDict?[kActivePSATSeriesLength]  as? Int)!,
                                             options: self.options!)
-                    
-                    
                 } else {
                     Logger.sharedInstance.debug("psatStep:formatDict has null values:\(String(describing: formatDict))")
                     return nil
@@ -451,7 +443,7 @@ class ActivityActiveStep: ActivityStep {
                     
                     let fetalKickTask:FetalKickCounterTask? = FetalKickCounterTask()
                     fetalKickTask?.initWithFormat(duration: Float((formatDict?[kActiveFetalKickCounterDuration] as? Int)!),
-                                                  identifier: self.key!, instructionText: instructionText as? String)
+                                                  identifier: self.key!, instructionText: instructionText)
                     
                     if Utilities.isValidValue(someObject: formatDict?[kActiveFetalKickCounterkickCounts] as AnyObject ) {
                         fetalKickTask?.maxKickCounts =  (formatDict?[kActiveFetalKickCounterkickCounts] as? Int)!

@@ -47,47 +47,45 @@ class SignInViewController: UIViewController{
         return .default
     }
     
-// MARK:- ViewController Lifecycle
+// MARK: - ViewController Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //Used to set border color for bottom view
+        // Used to set border color for bottom view
         buttonSignIn?.layer.borderColor = kUicolorForButtonBackground
         self.title = kSignInTitleText
         
-        //load plist info
+        // load plist info
         var plistPath = Bundle.main.path(forResource: "SignInPlist", ofType: ".plist", inDirectory: nil)
         let localeDefault = getLanguageLocale()
         if !(localeDefault.hasPrefix("es") || localeDefault.hasPrefix("en")) {
           plistPath = Bundle.main.path(forResource: "SignInPlist", ofType: ".plist", inDirectory: nil, forLocalization: "Base")
-        }else if localeDefault.hasPrefix("en"){
+        } else if localeDefault.hasPrefix("en"){
             plistPath = Bundle.main.path(forResource: "SignInPlist", ofType: ".plist", inDirectory: nil, forLocalization: "Base")
-        }else if localeDefault.hasPrefix("es"){
+        } else if localeDefault.hasPrefix("es"){
             plistPath = Bundle.main.path(forResource: "SignInPlist", ofType: ".plist", inDirectory: nil, forLocalization: "es")
         }
         tableViewRowDetails = NSMutableArray.init(contentsOfFile: plistPath!)
         
-        //Automatically takes care  of text field become first responder and scroll of tableview
+        // Automatically takes care  of text field become first responder and scroll of tableview
         // IQKeyboardManager.sharedManager().enable = true
         
-        //Used for background tap dismiss keyboard
+        // Used for background tap dismiss keyboard
         let gestureRecognizer: UITapGestureRecognizer =
             UITapGestureRecognizer.init(target: self, action: #selector(SignInViewController.dismissKeyboard))
         self.tableView?.addGestureRecognizer(gestureRecognizer)
         
-        
-        //info button
+        // info button
         self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(image: UIImage.init(named: "info"),
                                                                       style: .done,
                                                                       target: self,
                                                                       action: #selector(self.buttonInfoAction(_:)))
         
-        
-        //unhide navigationbar
+        // unhide navigationbar
         self.navigationController?.setNavigationBarHidden(false, animated: true)
         
-        //WCPServices().getTermsPolicy(delegate: self)
+        // WCPServices().getTermsPolicy(delegate: self)
         
       if let _ = buttonSignUp?.attributedTitle(for: .normal) {
         
@@ -125,19 +123,16 @@ class SignInViewController: UIViewController{
       self.agreeToTermsAndConditions()
       
       
-      
 //      let base64 = "RXN0ZSBjb3JyZW8gZWxlY3Ryw71uaWNvIHlhIGhhIHNpZG8gdXRpbGl6YWRvLiBJbnRlbnRlIGNvbiB1bmEgZGlyZWNjacO9biBkZSBjb3JyZW8gZWxlY3Ryw71uaWNvIGRpZmVyZW50ZS4KCg=="
 
 //      print("Base64---\(base64.urlSafeBase64Decoded() ?? "* decoding failed*")")
 
-      
-      
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        //unhide navigationbar
+        // unhide navigationbar
        
         self.navigationController?.setNavigationBarHidden(false, animated: true)
         
@@ -150,17 +145,15 @@ class SignInViewController: UIViewController{
             self.setNavigationBarItem()
         }
         
-        
         if termsPageOpened {
             termsPageOpened = false
         }
-        
         
        // self.perform(#selector(SignInViewController.setInitialDate), with: self, afterDelay: 1)
         
         self.tableView?.reloadData()
         
-        //UIApplication.shared.statusBarStyle = .default
+        // UIApplication.shared.statusBarStyle = .default
         setNeedsStatusBarAppearanceUpdate()
     }
     
@@ -170,14 +163,13 @@ class SignInViewController: UIViewController{
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-        //hide navigationbar
+        // hide navigationbar
         if viewLoadFrom == .gatewayOverview || Utilities.isStandaloneApp(){
             self.navigationController?.setNavigationBarHidden(true, animated: true)
         }
     }
     
-    
-// MARK:- Button Action
+// MARK: - Button Action
     
     /**
      
@@ -215,7 +207,6 @@ class SignInViewController: UIViewController{
         }
     }
     
-    
     /**
      
      To Display registration information
@@ -227,8 +218,7 @@ class SignInViewController: UIViewController{
       UIUtilities.showAlertWithTitleAndMessage(title: kWhyRegisterText as NSString, message: kRegistrationInfoMessage as NSString)
     }
     
-
-// MARK:-
+// MARK: -
     
     /**
      
@@ -246,7 +236,6 @@ class SignInViewController: UIViewController{
         
         let passwordTextFieldValue = selectedCell.textFieldValue?.text
         
-        
         if emailTextFieldValue?.isEmpty == false &&  (emailTextFieldValue?.count)! > 0{
             user.emailId = emailTextFieldValue
         }
@@ -255,7 +244,6 @@ class SignInViewController: UIViewController{
         }
         self.tableView?.reloadData()
     }
-    
     
     /**
      
@@ -271,7 +259,6 @@ class SignInViewController: UIViewController{
                                      viewControllerUsed: self)
     }
     
-    
     /**
      
      Dismiss key board when clicked on Background
@@ -280,7 +267,6 @@ class SignInViewController: UIViewController{
     @objc func dismissKeyboard(){
         self.view.endEditing(true)
     }
-    
     
     /**
      
@@ -291,7 +277,6 @@ class SignInViewController: UIViewController{
         self.createMenuView()
     }
     
-    
     /**
      
      Used to Naviagate Changepassword view controller using gateway storyboard
@@ -301,7 +286,8 @@ class SignInViewController: UIViewController{
         
         let storyboard = UIStoryboard(name: kStoryboardIdentifierGateway, bundle: nil)
         
-        let changePassword = (storyboard.instantiateViewController(withIdentifier: "ChangePasswordViewController") as? ChangePasswordViewController)!
+        let changePassword = (storyboard.instantiateViewController(
+            withIdentifier: "ChangePasswordViewController") as? ChangePasswordViewController)!
         if viewLoadFrom == .menu {
             changePassword.viewLoadFrom = .menu_login
         } else if viewLoadFrom == .joinStudy {
@@ -313,7 +299,6 @@ class SignInViewController: UIViewController{
         self.navigationController?.pushViewController(changePassword, animated: true)
     }
     
-    
     /**
      
      Used to navigate to Verification controller
@@ -322,7 +307,6 @@ class SignInViewController: UIViewController{
     func navigateToVerifyController(){
         self.performSegue(withIdentifier: "verificationSegue", sender: nil)
     }
-    
     
     /**
      
@@ -337,7 +321,6 @@ class SignInViewController: UIViewController{
         fda.automaticallyAdjustsScrollViewInsets = true
         self.navigationController?.pushViewController(fda, animated: true)
     }
-    
     
     func agreeToTermsAndConditions(){
         
@@ -357,12 +340,12 @@ class SignInViewController: UIViewController{
         termsAndCondition?.attributedText = attributedString
         
         termsAndCondition?.linkTextAttributes =
-            convertToOptionalNSAttributedStringKeyDictionary([NSAttributedString.Key.foregroundColor.rawValue: Utilities.getUIColorFromHex(0x007CBA)])
+            convertToOptionalNSAttributedStringKeyDictionary(
+                [NSAttributedString.Key.foregroundColor.rawValue: Utilities.getUIColorFromHex(0x007CBA)])
         
     }
     
-    
-// MARK:- Segue Methods
+// MARK: - Segue Methods
     
     @IBAction func unwindFromVerification(_ segue: UIStoryboardSegue){
         
@@ -373,7 +356,7 @@ class SignInViewController: UIViewController{
         if let signUpController = segue.destination as? SignUpViewController {
             if viewLoadFrom == .menu {
                 signUpController.viewLoadFrom = .menu_login
-            } else if(viewLoadFrom == .joinStudy) {
+            } else if viewLoadFrom == .joinStudy {
                 signUpController.viewLoadFrom = .joinStudy_login
             } else {
                 signUpController.viewLoadFrom = .login
@@ -399,8 +382,7 @@ class SignInViewController: UIViewController{
     }
 }
 
-
-// MARK:- TableView Data source
+// MARK: - TableView Data source
 extension SignInViewController : UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -427,8 +409,7 @@ extension SignInViewController : UITableViewDataSource {
     }
 }
 
-
-// MARK:- TableView Delegates
+// MARK: - TableView Delegates
 extension SignInViewController:  UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -437,8 +418,7 @@ extension SignInViewController:  UITableViewDelegate {
     }
 }
 
-
-// MARK:- Textfield Delegate
+// MARK: - Textfield Delegate
 extension SignInViewController: UITextFieldDelegate{
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
@@ -457,7 +437,7 @@ extension SignInViewController: UITextFieldDelegate{
                 return true
             }
         } else {
-            if (range.location == textField.text?.count && string == " ") {
+            if range.location == textField.text?.count && string == " " {
                 
                 textField.text = textField.text?.appending("\u{00a0}")
                 return false
@@ -471,15 +451,12 @@ extension SignInViewController: UITextFieldDelegate{
         switch textField.tag {
         case SignInTableViewTags.EmailId.rawValue:
             user.emailId = textField.text
-            break
             
         case SignInTableViewTags.Password.rawValue:
             user.password = textField.text
-            break
             
         default:
             print("No Matching data Found")
-            break
         }
     }
 }
@@ -495,20 +472,18 @@ extension SignInViewController: UIGestureRecognizerDelegate{
     }
 }
 
-
-
 extension SignInViewController: UITextViewDelegate{
     
     func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange) -> Bool {
         
         print(characterRange.description)
         
-        var link: String =   (TermsAndPolicy.currentTermsAndPolicy?.termsURL)! //kTermsAndConditionLink
+        var link: String =   (TermsAndPolicy.currentTermsAndPolicy?.termsURL)! // kTermsAndConditionLink
         var title: String = kNavigationTitleTerms
-        if (URL.absoluteString ==
+        if URL.absoluteString ==
                 TermsAndPolicy.currentTermsAndPolicy?.policyURL &&
-                characterRange.length == String(NSLocalizedStrings("Privacy Policy", comment: "")).count) {
-            //kPrivacyPolicyLink
+                characterRange.length == String(NSLocalizedStrings("Privacy Policy", comment: "")).count {
+            // kPrivacyPolicyLink
             print("terms")
             link =  (TermsAndPolicy.currentTermsAndPolicy?.policyURL)! // kPrivacyPolicyLink
             title = kNavigationTitlePrivacyPolicy
@@ -531,16 +506,13 @@ extension SignInViewController: UITextViewDelegate{
     }
     
     func textViewDidChangeSelection(_ textView: UITextView) {
-        if(!NSEqualRanges(textView.selectedRange, NSMakeRange(0, 0))) {
-            textView.selectedRange = NSMakeRange(0, 0);
+        if !NSEqualRanges(textView.selectedRange, NSMakeRange(0, 0)) {
+            textView.selectedRange = NSMakeRange(0, 0)
         }
     }
 }
 
-
-
-
-// MARK:- Webservices Delegate
+// MARK: - Webservices Delegate
 extension SignInViewController: NMWebServiceDelegate {
     
     func startedRequest(_ manager: NetworkManager, requestName: NSString) {
@@ -597,14 +569,14 @@ extension SignInViewController: NMWebServiceDelegate {
         
         self.removeProgressIndicator()
         let errorMsg = base64DecodeError(error.localizedDescription)
-        UIUtilities.showAlertWithTitleAndMessage(title: NSLocalizedStrings(kErrorTitle, comment: "") as NSString, message: errorMsg as NSString)
+        UIUtilities.showAlertWithTitleAndMessage(
+            title: NSLocalizedStrings(kErrorTitle, comment: "") as NSString,
+            message: errorMsg as NSString)
     }
 }
 
-
-
 // Helper function inserted by Swift 4.2 migrator.
-fileprivate func convertToOptionalNSAttributedStringKeyDictionary(_ input: [String: Any]?) -> [NSAttributedString.Key: Any]? {
+private func convertToOptionalNSAttributedStringKeyDictionary(_ input: [String: Any]?) -> [NSAttributedString.Key: Any]? {
 	guard let input = input else { return nil }
 	return Dictionary(uniqueKeysWithValues: input.map { key, value in (NSAttributedString.Key(rawValue: key), value)})
 }
@@ -639,7 +611,7 @@ extension String {
                               withPad: "=",
                               startingAt: 0)
         }
-        guard let d = Data(base64Encoded: st, options: .ignoreUnknownCharacters) else{
+        guard let d = Data(base64Encoded: st, options: .ignoreUnknownCharacters) else {
             return nil
         }
         return String(data: d, encoding: .utf8)

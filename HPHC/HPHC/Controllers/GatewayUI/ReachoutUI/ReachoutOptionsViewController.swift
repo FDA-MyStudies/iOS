@@ -27,7 +27,7 @@ class ReachoutOptionsViewController: UIViewController {
     let kLeaveAnonymousFeedbackTitle = NSLocalizedStrings("Leave Anonymous Feedback", comment: "")
     let kNeedHelpContactUsTitle = NSLocalizedStrings("Need Help? Contact Us", comment: "")
     
-// MARK:- Viewcontroller Lifecycle
+// MARK: - Viewcontroller Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -44,7 +44,6 @@ class ReachoutOptionsViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    
     /*
      // MARK: - Navigation
      
@@ -57,7 +56,7 @@ class ReachoutOptionsViewController: UIViewController {
     
 }
 
-// MARK:- TableView Datasource
+// MARK: - TableView Datasource
 extension ReachoutOptionsViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -66,10 +65,9 @@ extension ReachoutOptionsViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        //let tableViewData = tableViewRowDetails?.object(at: indexPath.row) as! NSDictionary
+        // let tableViewData = tableViewRowDetails?.object(at: indexPath.row) as! NSDictionary
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "reachoutCell", for: indexPath) as! ReachoutOptionCell
-        
         
         switch indexPath.row {
         case 0:
@@ -80,12 +78,11 @@ extension ReachoutOptionsViewController: UITableViewDataSource {
             cell.labelTitle?.text = kNeedHelpContactUsTitle
         }
         
-        
         return cell
     }
 }
 
-// MARK:- TableView Delegates
+// MARK: - TableView Delegates
 extension ReachoutOptionsViewController:  UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -101,6 +98,3 @@ extension ReachoutOptionsViewController:  UITableViewDelegate {
         }
     }
 }
-
-
-

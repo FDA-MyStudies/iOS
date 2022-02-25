@@ -21,7 +21,6 @@
 import Foundation
 import UIKit
 
-
 let kConsentPdfKey = "consent"
 
 let kUnwindToStudyListIdentifier = "unwindeToStudyListResourcesIdentifier"
@@ -72,7 +71,6 @@ class ResourcesViewController: UIViewController{
         
     }
     
-    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
@@ -85,7 +83,7 @@ class ResourcesViewController: UIViewController{
             self.addHomeButton()
         }
         setNeedsStatusBarAppearanceUpdate()
-        //UIApplication.shared.statusBarStyle = .default
+        // UIApplication.shared.statusBarStyle = .default
         self.navigationController?.setNavigationBarHidden(false, animated: true)
         
         self.tabBarController?.tabBar.isHidden = false
@@ -258,18 +256,17 @@ class ResourcesViewController: UIViewController{
                 let endDateResult = (end?.compare(todayDate))! as ComparisonResult
                 
                 // compare lifetime
-                if ((startDateResult == .orderedAscending ||
+                if (startDateResult == .orderedAscending ||
                         startDateResult == .orderedSame) &&
                         (endDateResult == .orderedDescending ||
-                            endDateResult == .orderedSame)){
-                    print("current")
-                    
+                            endDateResult == .orderedSame) {
+                                        
                     tableViewRowDetails?.append(resource)
                     
                     // compare for today
                     let endOfToday = resource.startDate// .endOfDay
                     
-                    if (todayDate >= start! && todayDate <= endOfToday!){
+                    if todayDate >= start! && todayDate <= endOfToday! {
                         resource.availableToday = true
                     }
                     
@@ -361,8 +358,7 @@ class ResourcesViewController: UIViewController{
                                                              errorAlertActionTitle: kProceedTitle,
                                                              errorAlertActionTitle2: kTitleCancel, viewControllerUsed: self,
                                                              action1: {
-            
-            
+                
             switch withdrawalType! as StudyWithdrawalConfigrationType {
                 
             case .askUser :
@@ -381,8 +377,6 @@ class ResourcesViewController: UIViewController{
                     self.shouldDeleteData = false
                     self.withdrawalFromStudy(deleteResponse: false)
                     
-                    
-                    
                 }, action2: {
                     
                     // Delete action
@@ -393,11 +387,11 @@ class ResourcesViewController: UIViewController{
                     // Cancel Action
                 })
                 
-                
             case .deleteData:
                 
                 UIUtilities.showAlertMessageWithTwoActionsAndHandler(kOkConfirm,
-                                                                  errorMessage: NSLocalizedStrings("", comment: ""), errorAlertActionTitle: kTitleOk,
+                                                                     errorMessage: NSLocalizedStrings("", comment: ""),
+                                                                     errorAlertActionTitle: kTitleOk,
                                                                      errorAlertActionTitle2: kTitleCancel, viewControllerUsed: self,
                                                                      action1: {
                     self.shouldDeleteData = true
@@ -409,21 +403,22 @@ class ResourcesViewController: UIViewController{
                 
             case .noAction :
                 
-                UIUtilities.showAlertMessageWithTwoActionsAndHandler(kOkConfirm,
-                                                                  errorMessage: NSLocalizedStrings("", comment: ""), errorAlertActionTitle: kTitleOk,
-                                                                     errorAlertActionTitle2: kTitleCancel, viewControllerUsed: self,
-                                                                     action1: {
+                UIUtilities.showAlertMessageWithTwoActionsAndHandler(
+                    kOkConfirm,
+                    errorMessage: NSLocalizedStrings("", comment: ""),
+                    errorAlertActionTitle: kTitleOk,
+                    errorAlertActionTitle2: kTitleCancel,
+                    viewControllerUsed: self,
+                    action1: {
                     self.shouldDeleteData = false
                     self.withdrawalFromStudy(deleteResponse: false)
                 },
-                                                                     action2: {
-                    
+                    action2: {
                 })
                 
             default : break
             }
-            
-            
+                
         },
                                                              action2: {
             
@@ -480,8 +475,7 @@ class ResourcesViewController: UIViewController{
         let consentPath = Study.currentStudy?.signedConsentFilePath
         
         let fullPath = path + "/" + consentPath!
-      print("fullPath---2\(fullPath)")
-        
+              
         guard let pdfData = FileDownloadManager.decrytFile(pathURL: URL(string: fullPath))
             else {return}
         
@@ -498,10 +492,10 @@ class ResourcesViewController: UIViewController{
             if foundRange != nil && (foundRange?.count)! > 0
             {
                 isPDF = true
-                print("pdf")
+                
             } else {
+                
                 isPDF = false
-                print("not pdf")
                 UserServices().getConsentPDFForStudy(studyId: (Study.currentStudy?.studyId)!, delegate: self)
             }
         }
@@ -545,9 +539,8 @@ class ResourcesViewController: UIViewController{
             DBHandler.saveConsentInformation(study: Study.currentStudy!)
             
             self.pushToResourceDetails()
-        } catch let error as NSError {
-            print("error writing to url \(String(describing: fullPath))")
-            print(error.localizedDescription)
+        } catch _ as NSError {
+            
         }
         
     }
@@ -572,7 +565,7 @@ class ResourcesViewController: UIViewController{
         for activityStatus in userActivityStatusList {
             let index =  currentUser.participatedActivites.firstIndex(where: {$0.activityId == activityStatus.activityId})
             currentUser.participatedActivites.remove(at: index!)
-            //currentUser.participatedActivites.remove
+            // currentUser.participatedActivites.remove
             
         }
         
@@ -775,8 +768,6 @@ extension ResourcesViewController: NMWebServiceDelegate {
             
         default:
             self.removeProgressIndicator()
-            break
-            
         }
     }
     func failedRequest(_ manager: NetworkManager, requestName: NSString, error: NSError) {
@@ -843,7 +834,7 @@ public extension String {
                                                           documentAttributes: nil)
             return attributedString.string
         } catch {
-            print("Error: \(error)")
+            
             return ""
         }
     }

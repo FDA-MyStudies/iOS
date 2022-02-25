@@ -22,7 +22,7 @@ import Foundation
 import UIKit
 
 
-//Used to do filter based on Apply and Cancel actions
+// Used to do filter based on Apply and Cancel actions
 protocol StudyFilterDelegates: class {
     
     func appliedFilter(studyStatus: Array<String>,
@@ -44,16 +44,15 @@ enum FilterType: Int {
     
 }
 
-
 class StudyFilterViewController: UIViewController {
     
-    // MARK:- Outlets
+    // MARK: - Outlets
     
     @IBOutlet weak var collectionView: UICollectionView?
     @IBOutlet weak var cancelButton: UIButton?
     @IBOutlet weak var applyButton: UIButton?
     
-    // MARK:- Properties
+    // MARK: - Properties
     
     weak var delegate: StudyFilterDelegates?
     
@@ -65,7 +64,7 @@ class StudyFilterViewController: UIViewController {
     
     lazy var previousCollectionData: [[String]] = []
     
-    // MARK:- Viewcontroller lifecycle
+    // MARK: - Viewcontroller lifecycle
     override func viewDidLoad() {
         
         super.viewDidLoad()
@@ -84,8 +83,7 @@ class StudyFilterViewController: UIViewController {
         self.collectionView?.reloadData()
     }
     
-  
-    // MARK:- Button Actions
+    // MARK: - Button Actions
     
     /**
      Navigate to Studylist screen on Apply button clicked
@@ -94,8 +92,8 @@ class StudyFilterViewController: UIViewController {
     
     @IBAction func applyButtonAction(_ sender: AnyObject){
         
-        //categories = ["Food Safety","Observational Studies","Cosmetics Safety"]
-        //pariticipationsStatus = ["Food Safety","Observational Studies"]
+        // categories = ["Food Safety","Observational Studies","Cosmetics Safety"]
+        // pariticipationsStatus = ["Food Safety","Observational Studies"]
         
         var i: Int = 0
         var isbookmarked = false
@@ -105,7 +103,7 @@ class StudyFilterViewController: UIViewController {
             let filterType = FilterType.init(rawValue: i)
             let filterValues = (filterOptions.filterValues.filter({$0.isSelected == true}))
             for value in filterValues {
-                switch (filterType!) {
+                switch filterType! {
                     
                 case .studyStatus:
                     studyStatus.append(value.title)
@@ -122,7 +120,7 @@ class StudyFilterViewController: UIViewController {
                     
                 case .category:
                     categories.append(value.title)
-                    //default: break
+                    // default: break
                 }
             }
             i += 1
@@ -155,7 +153,6 @@ class StudyFilterViewController: UIViewController {
         
     }
     
-    
     /**
      Navigate to Studylist screen on Cancel button clicked
      @param sender    accepts Anyobject in sender
@@ -166,11 +163,11 @@ class StudyFilterViewController: UIViewController {
     }
 }
 
-//// MARK:- Collection Data source & Delegate
-extension StudyFilterViewController: UICollectionViewDataSource {//,UICollectionViewDelegate {
+// MARK: - Collection Data source & Delegate
+extension StudyFilterViewController: UICollectionViewDataSource { // ,UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return StudyFilterHandler.instance.filterOptions.count //filterData!.count
+        return StudyFilterHandler.instance.filterOptions.count // filterData!.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -185,11 +182,12 @@ extension StudyFilterViewController: UICollectionViewDataSource {//,UICollection
     
 }
 
-
 extension StudyFilterViewController: PinterestLayoutDelegate {
     
     // 1. Returns the photo height
-    func collectionView(_ collectionView: UICollectionView, heightForPhotoAtIndexPath indexPath: IndexPath , withWidth width: CGFloat) -> CGFloat {
+    func collectionView(_ collectionView: UICollectionView,
+                        heightForPhotoAtIndexPath indexPath: IndexPath,
+                        withWidth width: CGFloat) -> CGFloat {
         
         let filterOptions = StudyFilterHandler.instance.filterOptions[indexPath.row]
         var headerHeight = 0
@@ -244,9 +242,9 @@ extension AppDelegate {
         let localeDefault = getLanguageLocale()
         if !(localeDefault.hasPrefix("es") || localeDefault.hasPrefix("en")) {
           plistPath = Bundle.main.path(forResource: resource, ofType: ".plist", inDirectory: nil, forLocalization: "Base")
-        }else if localeDefault.hasPrefix("en"){
+        } else if localeDefault.hasPrefix("en"){
             plistPath = Bundle.main.path(forResource: resource, ofType: ".plist", inDirectory: nil, forLocalization: "Base")
-        }else if localeDefault.hasPrefix("es"){
+        } else if localeDefault.hasPrefix("es"){
             plistPath = Bundle.main.path(forResource: resource, ofType: ".plist", inDirectory: nil, forLocalization: "es")
         }
       
@@ -257,9 +255,9 @@ extension AppDelegate {
         var i = 0
         
         for options in filterData! {
-            let values = ((options as? Dictionary<String,Any>)!["studyData"] as? Array<Dictionary<String,Any>>)!
+            let values = ((options as? Dictionary<String, Any>)!["studyData"] as? Array<Dictionary<String, Any>>)!
             let filterOptions = FilterOptions()
-            filterOptions.title = ((options as? Dictionary<String,Any>)!["headerText"] as? String)!
+            filterOptions.title = ((options as? Dictionary<String, Any>)!["headerText"] as? String)!
             
             var selectedValues: Array<String> = []
             if previousCollectionData.count > 0 {
@@ -310,7 +308,7 @@ extension AppDelegate {
      categories: array of categories
      */
     
-    func getDefaultFilterStrings()->(studyStatus: Array<String>,
+    func getDefaultFilterStrings() -> (studyStatus: Array<String>,
                                      pariticipationsStatus: Array<String>,
                                      categories: Array<String>,
                                      searchText: String,
@@ -321,13 +319,13 @@ extension AppDelegate {
         var categories: Array<String> = []
         var bookmark = true
 
-        //Parsing the filter options
-        for (index,filterOptions) in StudyFilterHandler.instance.filterOptions.enumerated() {
+        // Parsing the filter options
+        for (index, filterOptions) in StudyFilterHandler.instance.filterOptions.enumerated() {
             
             let filterType = FilterType.init(rawValue: index)
             let filterValues = (filterOptions.filterValues.filter({$0.isSelected == true}))
             for value in filterValues {
-                switch (filterType!) {
+                switch filterType! {
                     
                 case .studyStatus:
                     studyStatus.append(value.title)
@@ -344,7 +342,7 @@ extension AppDelegate {
                     
                 case .category:
                     categories.append(value.title)
-                    //default: break
+                    // default: break
                 }
             }
         }
@@ -355,10 +353,10 @@ extension AppDelegate {
             bookmark = false
         }
         
-        return(studyStatus: studyStatus,pariticipationsStatus : pariticipationsStatus,categories: categories,searchText: "",bookmark: bookmark)
+        return (studyStatus: studyStatus,
+                pariticipationsStatus: pariticipationsStatus,
+                categories: categories, searchText: "",
+                bookmark: bookmark)
     }
     
-    
 }
-
-

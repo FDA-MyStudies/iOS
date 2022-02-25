@@ -21,8 +21,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 import Foundation
 import UIKit
 
-
-protocol NMWebServiceDelegate: class{
+protocol NMWebServiceDelegate: class {
     /**
      *  Called when request is fired.Use this to show any activity indicator
      *
@@ -51,7 +50,6 @@ protocol NMWebServiceDelegate: class{
     
 }
 
-
 protocol NMAuthChallengeDelegate{
     /**
      *  Called when server throws for authentacation challenge
@@ -71,15 +69,15 @@ protocol NMAuthChallengeDelegate{
      *
      *  @return NSURLSessionAuthChallengeDisposition
      */
-    func networkChallengeDisposition(_ manager : NetworkManager, challenge : URLAuthenticationChallenge) -> URLSession.AuthChallengeDisposition
+    func networkChallengeDisposition(_ manager: NetworkManager,
+                                     challenge : URLAuthenticationChallenge) -> URLSession.AuthChallengeDisposition
 }
 
 class NetworkManager {
     
-    static var instance : NetworkManager? = nil
+    static var instance : NetworkManager?
     var networkAvailability : Bool = false
-    var reachability : Reachability? = nil
-    
+    var reachability : Reachability?
     
     class func isNetworkAvailable() -> Bool{
         return self.sharedInstance().networkAvailability
@@ -88,7 +86,7 @@ class NetworkManager {
     init() {
     
         reachability =  try? Reachability()
-        print("network available init() and reachability \(reachability)")
+        
         NotificationCenter.default.addObserver(self, selector: #selector(reachabilityChanged(_:)),
                                                name: Notification.Name.reachabilityChanged, object: nil)
         try? reachability?.startNotifier()
@@ -102,8 +100,7 @@ class NetworkManager {
     @objc func reachabilityChanged(_ notification: Notification) {
             
             let oldLocale = getLanguageLocale()
-            print("Krishna oldLocale in rechabilityChanged \(oldLocale)")
-          
+                      
             if self.reachability!.connection == .wifi
                 || self.reachability!.connection == .cellular {
                 networkAvailability = true
@@ -119,7 +116,6 @@ class NetworkManager {
                 setLanguageLocale()
             }
             
-            print("Krishna reachabilityChanged networkAvailability set to \(networkAvailability) \n\n")
             SyncUpdate.currentSyncUpdate.updateData(isReachable: networkAvailability)
         }
 
@@ -129,9 +125,7 @@ class NetworkManager {
             
             // if let name = UIApplication.shared.topMostViewController()?.storyboard?.value(forKey: "name") {
             if let name = UIApplication.shared.topMostViewController()?.visibViewController?.storyboard?.value(forKey: "name") {
-                
-                print("storyboard in view is \(name)")
-                
+                                
                 // Bundle(path: Bundle.main.path(forResource: "es", ofType: "lproj") ?? "en")
                 let sb = UIStoryboard(name: name as! String, bundle:nil)
                 let vc = sb.instantiateInitialViewController()

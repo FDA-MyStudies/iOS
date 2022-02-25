@@ -21,9 +21,13 @@ OTHER DEALINGS IN THE SOFTWARE.
 import UIKit
 protocol PinterestLayoutDelegate {
   // 1. Method to ask the delegate for the height of the image
-  func collectionView(_ collectionView: UICollectionView, heightForPhotoAtIndexPath indexPath: IndexPath , withWidth: CGFloat) -> CGFloat
+  func collectionView(_ collectionView: UICollectionView,
+                      heightForPhotoAtIndexPath indexPath: IndexPath,
+                      withWidth: CGFloat) -> CGFloat
   // 2. Method to ask the delegate for the height of the annotation text
-  func collectionView(_ collectionView: UICollectionView, heightForAnnotationAtIndexPath indexPath: IndexPath, withWidth width: CGFloat) -> CGFloat
+  func collectionView(_ collectionView: UICollectionView,
+                      heightForAnnotationAtIndexPath indexPath: IndexPath,
+                      withWidth width: CGFloat) -> CGFloat
   
 }
 
@@ -42,7 +46,7 @@ class PinterestLayoutAttributes: UICollectionViewLayoutAttributes {
   // 3. Override isEqual
   override func isEqual(_ object: Any?) -> Bool {
     if let attributtes = object as? PinterestLayoutAttributes {
-      if( attributtes.photoHeight == photoHeight  ) {
+      if attributtes.photoHeight == photoHeight {
         return super.isEqual(object)
       }
     }
@@ -50,19 +54,18 @@ class PinterestLayoutAttributes: UICollectionViewLayoutAttributes {
   }
 }
 
-
 class PinterestLayout: UICollectionViewLayout {
-  //1. Pinterest Layout Delegate
+  // 1. Pinterest Layout Delegate
   var delegate: PinterestLayoutDelegate!
   
-  //2. Configurable properties
+  // 2. Configurable properties
   var numberOfColumns = 2
   var cellPadding: CGFloat = 3.0
   
-  //3. Array to keep a cache of attributes.
+  // 3. Array to keep a cache of attributes.
   fileprivate var cache = [PinterestLayoutAttributes]()
   
-  //4. Content height and size
+  // 4. Content height and size
   fileprivate var contentHeight: CGFloat  = 0.0
   fileprivate var contentWidth: CGFloat {
     let insets = collectionView!.contentInset
@@ -93,7 +96,7 @@ class PinterestLayout: UICollectionViewLayout {
         
         // 4. Asks the delegate for the height of the picture and the annotation and calculates the cell frame.
         let width = columnWidth - cellPadding*2
-        let photoHeight = delegate.collectionView(collectionView!, heightForPhotoAtIndexPath: indexPath , withWidth: width)
+        let photoHeight = delegate.collectionView(collectionView!, heightForPhotoAtIndexPath: indexPath, withWidth: width)
         let annotationHeight = delegate.collectionView(collectionView!, heightForAnnotationAtIndexPath: indexPath, withWidth: width)
         let height = cellPadding +  photoHeight + annotationHeight + cellPadding
         let frame = CGRect(x: xOffset[column], y: yOffset[column], width: columnWidth, height: height)
@@ -131,5 +134,3 @@ class PinterestLayout: UICollectionViewLayout {
     return layoutAttributes
   }
 }
-
-

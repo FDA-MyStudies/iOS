@@ -41,7 +41,6 @@ class ContactUsTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
 
-    
     /**
      
      Populate cell data coming in dictionary
@@ -58,5 +57,3 @@ class ContactUsTableViewCell: UITableViewCell {
         textFieldValue?.keyboardType = keyboardType!
     }
 }
-
-

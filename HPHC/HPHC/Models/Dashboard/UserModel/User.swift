@@ -61,7 +61,6 @@ enum DayValue: String{
     }
 }
 
-
 let kUserValueForOS = "ios"
 
 let kCFBundleShortVersionString = "CFBundleShortVersionString"
@@ -86,7 +85,7 @@ class User {
     var participatedActivites: Array<UserActivityStatus>! = []
     var logoutReason: LogoutReason = .user_action
     var isLoginWithTempPassword: Bool = false
-    //sharedInstance
+    // sharedInstance
     private static var _currentUser: User?
     
     static var currentUser: User {
@@ -97,7 +96,6 @@ class User {
     static func resetCurrentUser() {
         _currentUser = nil
     }
-    
     
     init() {
         self.firstName = ""
@@ -110,7 +108,7 @@ class User {
         self.refreshToken = ""
     }
     
-    init(firstName: String?,lastName: String?,emailId: String?,userType: UserType?,userId: String?){
+    init(firstName: String?, lastName: String?, emailId: String?, userType: UserType?, userId: String?) {
         self.firstName = firstName
         self.lastName = lastName
         self.emailId = emailId
@@ -163,7 +161,7 @@ class User {
             if Utilities.isValidValue(someObject: dict[kRefreshToken] as AnyObject) {
                 self.refreshToken = dict[kRefreshToken] as? String
             }
-        }else{
+        } else {
             Logger.sharedInstance.debug("User Dictionary is null:\(dict)")
         }
     }
@@ -182,17 +180,16 @@ class User {
             }
             let profileDict = NSMutableDictionary()
             
-            
             if self.firstName != nil{
                 profileDict.setValue(self.firstName, forKey: ((kUserFirstName as NSCopying) as? String)!)
                 
-            }else {
+            } else {
                 profileDict.setValue("", forKey: ((kUserFirstName as NSCopying) as? String)!)
             }
             if self.lastName != nil{
                 profileDict.setValue(self.lastName, forKey: ((kUserLastName as NSCopying) as? String)!)
                 
-            }else {
+            } else {
                 profileDict.setValue("", forKey: ((kUserLastName as NSCopying) as? String)!)
             }
             
@@ -209,18 +206,17 @@ class User {
         return dataDict
     }
     
-    func udpateCompletionAndAdherence(studyId: String,completion: Int,adherence: Int) -> UserStudyStatus{
+    func udpateCompletionAndAdherence(studyId: String, completion: Int, adherence: Int) -> UserStudyStatus {
         
-        let studies = self.participatedStudies as Array<UserStudyStatus>
-        if let study =   studies.filter({$0.studyId == studyId}).first {
+        let studies = self.participatedStudies
+        if let study = studies?.filter({$0.studyId == studyId}).first {
             
             study.adherence = adherence
             study.completion = completion
             
-            
             return study
             
-        }else {
+        } else {
             let studyStatus = UserStudyStatus()
             
             studyStatus.studyId = studyId
@@ -232,12 +228,12 @@ class User {
         }
     }
     
-    // MARK:Study Bookmark
+    // MARK: Study Bookmark
     
     func isStudyBookmarked(studyId: String) -> Bool{
         
-        let studies = self.participatedStudies as Array<UserStudyStatus>
-        if let study =   studies.filter({$0.studyId == studyId}).first {
+        let studies = self.participatedStudies
+        if let study =   studies?.filter({$0.studyId == studyId}).first {
             return study.bookmarked
         }
         return false
@@ -246,14 +242,13 @@ class User {
     
     func bookmarkStudy(studyId: String) -> UserStudyStatus{
         
-        let studies = self.participatedStudies as Array<UserStudyStatus>
-        if let study =   studies.filter({$0.studyId == studyId}).first {
+        let studies = self.participatedStudies
+        if let study =   studies?.filter({$0.studyId == studyId}).first {
             study.bookmarked = true
             Logger.sharedInstance.info("Bookmark: study is bookmarked : \(studyId)")
             
             return study
-        }
-        else {
+        } else {
             Logger.sharedInstance.info("Bookmark: study not found : \(studyId)")
             
             let studyStatus = UserStudyStatus()
@@ -271,8 +266,8 @@ class User {
     
     func removeBookbarkStudy(studyId: String) -> UserStudyStatus?{
         
-        let studies = self.participatedStudies as Array<UserStudyStatus>
-        if let study =   studies.filter({$0.studyId == studyId}).first {
+        let studies = self.participatedStudies
+        if let study = studies?.filter({$0.studyId == studyId}).first {
             study.bookmarked = false
             Logger.sharedInstance.info("Bookmark: study is removed from bookmark : \(studyId)")
             return study
@@ -280,30 +275,25 @@ class User {
         return nil
     }
     
-    
-    
-    
-    // MARK:Activity Bookmark
+    // MARK: Activity Bookmark
     func isActivityBookmarked(studyId: String,activityId: String) -> Bool{
         
-        let activityes = self.participatedActivites as Array<UserActivityStatus>
-        if let activity =   activityes.filter({$0.studyId == studyId && $0.activityId == activityId}).first {
+        let activityes = self.participatedActivites
+        if let activity = activityes?.filter({$0.studyId == studyId && $0.activityId == activityId}).first {
             return activity.bookmarked
         }
         return false
         
     }
     
-    
     func bookmarkActivity(studyId: String,activityId: String) -> UserActivityStatus {
         
-        let activityes = self.participatedActivites as Array<UserActivityStatus>
-        if let activity =   activityes.filter({$0.studyId == studyId && $0.activityId == activityId}).first {
+        let activityes = self.participatedActivites
+        if let activity = activityes?.filter({$0.studyId == studyId && $0.activityId == activityId}).first {
             activity.bookmarked = true
             Logger.sharedInstance.info("Bookmark: activity is bookmarked : \(studyId)")
             return activity
-        }
-        else {
+        } else {
             Logger.sharedInstance.info("Bookmark: activity not found : \(studyId)")
             
             let activityStatus = UserActivityStatus()
@@ -320,23 +310,22 @@ class User {
     
     func removeBookbarkActivity(studyId: String,activityId: String) {
         
-        let activityes = self.participatedActivites as Array<UserActivityStatus>
-        if let activity =   activityes.filter({$0.studyId == studyId && $0.activityId == activityId}).first {
+        let activityes = self.participatedActivites
+        if let activity = activityes?.filter({$0.studyId == studyId && $0.activityId == activityId}).first {
             activity.bookmarked = true
             Logger.sharedInstance.info("Bookmark: activity is removed from bookmarked : \(studyId)")
         }
     }
     
     // MARK:Study Status
-    func updateStudyStatus(studyId: String,status: UserStudyStatus.StudyStatus)->UserStudyStatus {
+    func updateStudyStatus(studyId: String,status: UserStudyStatus.StudyStatus) -> UserStudyStatus {
         
-        let studies = self.participatedStudies as Array<UserStudyStatus>
-        if let study =   studies.filter({$0.studyId == studyId}).first {
+        let studies = self.participatedStudies
+        if let study = studies?.filter({$0.studyId == studyId}).first {
             study.status = status
             Logger.sharedInstance.info("User Study Status: study is updated : \(studyId)")
             return study
-        }
-        else {
+        } else {
             Logger.sharedInstance.info("User Study Status: study not found : \(studyId)")
             
             let studyStatus = UserStudyStatus()
@@ -349,15 +338,15 @@ class User {
         }
     }
     
-    func updateParticipantId(studyId: String,participantId: String)->UserStudyStatus {
+    func updateParticipantId(studyId: String,participantId: String) -> UserStudyStatus {
         
-        let studies = self.participatedStudies as Array<UserStudyStatus>
-        if let study =   studies.filter({$0.studyId == studyId}).first {
+        let studies = self.participatedStudies
+        if let study = studies?.filter({$0.studyId == studyId}).first {
             study.participantId = participantId
             Logger.sharedInstance.info("User Study Status: study is updated : \(studyId)")
             return study
             
-        }else {
+        } else {
             Logger.sharedInstance.info("User Study Status: study not found : \(studyId)")
             
             let studyStatus = UserStudyStatus()
@@ -372,8 +361,8 @@ class User {
     
     func getStudyStatus(studyId: String) -> UserStudyStatus.StudyStatus{
         
-        let studies = self.participatedStudies as Array<UserStudyStatus>
-        if let study =   studies.filter({$0.studyId == studyId}).first {
+        let studies = self.participatedStudies
+        if let study = studies?.filter({$0.studyId == studyId}).first {
             return study.status
         }
         return .yetToJoin
@@ -382,13 +371,12 @@ class User {
     // MARK:Activity Status
     func updateActivityStatus(studyId: String,activityId: String,runId: String,status: UserActivityStatus.ActivityStatus) -> UserActivityStatus{
         
-        let activityes = self.participatedActivites as Array<UserActivityStatus>
-        if let activity =   activityes.filter({$0.activityId == activityId && $0.activityRunId == runId}).first {
+        let activityes = self.participatedActivites
+        if let activity = activityes?.filter({$0.activityId == activityId && $0.activityRunId == runId}).first {
             activity.status = status
             Logger.sharedInstance.info("User Activity Status: activity is updated : \(studyId)")
             return activity
-        }
-        else {
+        } else {
             Logger.sharedInstance.info("User Activity Status: activity not found : \(studyId)")
             
             let activityStatus = UserActivityStatus()
@@ -399,19 +387,18 @@ class User {
             self.participatedActivites.append(activityStatus)
             return activityStatus
             
-            //Logger.sharedInstance.info("User Activity Status: activity is updated : \(studyId)")
+            // Logger.sharedInstance.info("User Activity Status: activity is updated : \(studyId)")
         }
     }
     
     func getActivityStatus(studyId: String,activityId: String) -> UserActivityStatus.ActivityStatus?{
         
-        let activityes = self.participatedActivites as Array<UserActivityStatus>
-        if let activity =   activityes.filter({$0.activityId == activityId}).first {
+        let activityes = self.participatedActivites
+        if let activity = activityes?.filter({$0.activityId == activityId}).first {
             return activity.status
         }
         return .yetToJoin
     }
-    
     
 }
 
@@ -434,7 +421,7 @@ class Settings{
         self.locale = ""
     }
     
-    init(remoteNotifications: Bool?,localNotifications: Bool?,touchId: Bool?,passcode: Bool?){
+    init(remoteNotifications: Bool?, localNotifications: Bool?, touchId: Bool?, passcode: Bool?) {
         self.remoteNotifications = remoteNotifications
         self.localNotifications = localNotifications
         self.touchId = touchId
@@ -456,7 +443,6 @@ class Settings{
     func setLeadTime(value: String) {
         self.leadTime = value
     }
-    
     
     func setSettings(dict: NSDictionary) {
         
@@ -481,7 +467,7 @@ class Settings{
                 self.locale = dict[kLocale] as? String
             }
             
-        }else{
+        } else {
             Logger.sharedInstance.debug("Settings Dictionary is null:\(dict)")
         }
         
@@ -573,7 +559,7 @@ class UserStudyStatus{
     var studyId: String! = ""
     var status: StudyStatus = .yetToJoin
     var consent: String! = ""
-    var joiningDate: Date!//User joined Date for study
+    var joiningDate: Date!// User joined Date for study
     var completion: Int = 0
     var adherence: Int = 0
     var participantId: String?
@@ -614,30 +600,29 @@ class UserStudyStatus{
                 if (StudyStatus.inProgress.paramValue == statusValue) {
                     self.status = .inProgress
                     
-                }else if (StudyStatus.notEligible.paramValue == statusValue) {
+                } else if (StudyStatus.notEligible.paramValue == statusValue) {
                     self.status = .notEligible
                     
-                }else if (StudyStatus.completed.paramValue == statusValue) {
+                } else if (StudyStatus.completed.paramValue == statusValue) {
                     self.status = .completed
                     
-                }else if (StudyStatus.Withdrawn.paramValue == statusValue) {
+                } else if (StudyStatus.Withdrawn.paramValue == statusValue) {
                     self.status = .Withdrawn
                 }
             }
-        }else {
+        } else {
             Logger.sharedInstance.debug("UserStudyStatus Dictionary is null:\(detail)")
         }
     }
     
-    
-    func getBookmarkUserStudyStatus() -> Dictionary<String,Any>{
+    func getBookmarkUserStudyStatus() -> Dictionary<String, Any>{
         
         let studyDetail = [kStudyId: self.studyId,
                            kBookmarked: self.bookmarked] as [String : Any]
         return studyDetail
     }
     
-    func getParticipatedUserStudyStatus() -> Dictionary<String,Any>{
+    func getParticipatedUserStudyStatus() -> Dictionary<String, Any>{
         
         var id = ""
         if self.participantId != nil {
@@ -650,7 +635,7 @@ class UserStudyStatus{
         return studyDetail
     }
     
-    func getCompletionAdherence() -> Dictionary<String,Any>{
+    func getCompletionAdherence() -> Dictionary<String, Any>{
         let studyDetail = [kStudyId: self.studyId!,
                            "completion": completion,
                            "adherence":adherence] as [String : Any]
@@ -669,33 +654,30 @@ class TermsAndPolicy {
         self.policyURL = ""
     }
     
-    
     func initWith(terms:String, policy:String) {
          self.termsURL = terms
         self.policyURL = policy
     }
     
-    //Initializer
-    func initWithDict(dict: Dictionary<String,Any>) {
+    // Initializer
+    func initWithDict(dict: Dictionary<String, Any>) {
         if Utilities.isValidObject(someObject: dict as AnyObject) {
             
             if Utilities.isValidValue(someObject: dict[kTerms] as AnyObject?)  {
                 
                 self.termsURL = (dict[kTerms] as! String?)?.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
-            }
-            else{
+            } else {
                 self.termsURL = ""
             }
             
             if Utilities.isValidValue(someObject: dict[kPolicy] as AnyObject?) {
                 self.policyURL = (dict[kPolicy] as! String?)?.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
                 
-            }else{
+            } else {
                 self.policyURL = ""
             }
         }
     }
-    
     
 }
 
@@ -812,7 +794,7 @@ class UserActivityStatus{
                 self.activityRunId = (detail[kActivityRunId] as? String)!
             }
             
-            let runDetail = (detail["activityRun"] as? Dictionary<String,Any>)!
+            let runDetail = (detail["activityRun"] as? Dictionary<String, Any>)!
             if Utilities.isValidValue(someObject: runDetail["completed"] as AnyObject){
                 self.compeltedRuns = (runDetail["completed"] as? Int)!
             }
@@ -826,13 +808,13 @@ class UserActivityStatus{
                 if (ActivityStatus.inProgress.paramValue == statusValue) {
                     self.status = .inProgress
                     
-                }else if (ActivityStatus.yetToJoin.paramValue == statusValue) {
+                } else if (ActivityStatus.yetToJoin.paramValue == statusValue) {
                     self.status = .yetToJoin
                     
-                }else if (ActivityStatus.completed.paramValue == statusValue) {
+                } else if (ActivityStatus.completed.paramValue == statusValue) {
                     self.status = .completed
                     
-                }else if (ActivityStatus.abandoned.paramValue == statusValue) {
+                } else if (ActivityStatus.abandoned.paramValue == statusValue) {
                     self.status = .abandoned
                 }
             }
@@ -849,14 +831,13 @@ class UserActivityStatus{
                 }
             }
   
-        }else{
+        } else {
             Logger.sharedInstance.debug("UserStudyStatus Dictionary is null:\(detail)")
         }
         
-        
     }
     
-    func getBookmarkUserActivityStatus() -> Dictionary<String,Any>{
+    func getBookmarkUserActivityStatus() -> Dictionary<String, Any>{
         
         let studyDetail = [kStudyId: self.studyId,
                            kActivityId: self.activityId,
@@ -864,7 +845,7 @@ class UserActivityStatus{
         return studyDetail
     }
     
-    func getParticipatedUserActivityStatus() -> Dictionary<String,Any>{
+    func getParticipatedUserActivityStatus() -> Dictionary<String, Any>{
         
         let runDetail = [	"total": self.totalRuns,
                              "completed": self.compeltedRuns,

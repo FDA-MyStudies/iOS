@@ -28,17 +28,21 @@ extension UISegmentedControl {
     func removeBorders() {
         setBackgroundImage(imageWithColor(color: backgroundColor!), for: .normal, barMetrics: .default)
         setBackgroundImage(imageWithColor(color: tintColor!), for: .selected, barMetrics: .default)
-        setDividerImage(imageWithColor(color: UIColor.clear), forLeftSegmentState: .normal, rightSegmentState: .normal, barMetrics: .default)
+        setDividerImage(
+            imageWithColor(color: UIColor.clear),
+            forLeftSegmentState: .normal,
+            rightSegmentState: .normal,
+            barMetrics: .default)
     }
 
     private func imageWithColor(color: UIColor) -> UIImage {
         let rect = CGRect(x: 0.0, y: 0.0, width: 1.0, height: 1.0)
         UIGraphicsBeginImageContext(rect.size)
         let context = UIGraphicsGetCurrentContext()
-        context!.setFillColor(color.cgColor);
-        context!.fill(rect);
-        let image = UIGraphicsGetImageFromCurrentImageContext();
-        UIGraphicsEndImageContext();
+        context!.setFillColor(color.cgColor)
+        context!.fill(rect)
+        let image = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
         return image!
     }
 }
@@ -83,7 +87,7 @@ class TapAndCopyLabel: UILabel {
   
   override func awakeFromNib() {
     super.awakeFromNib()
-    //1.Adding UILongPressGestureRecognizer by which copy popup will Appears
+    // 1.Adding UILongPressGestureRecognizer by which copy popup will Appears
     let gestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPressGesture(_:)))
     self.addGestureRecognizer(gestureRecognizer)
     self.isUserInteractionEnabled = true
@@ -101,18 +105,18 @@ class TapAndCopyLabel: UILabel {
       menuController.setMenuVisible(true, animated:true)
     }
   }
-  //2.Returns a Boolean value indicating whether this object can become the first responder
+  // 2.Returns a Boolean value indicating whether this object can become the first responder
   override var canBecomeFirstResponder: Bool {
     return true
   }
-  //3. Enabling copy action
+  // 3. Enabling copy action
   override func canPerformAction(_ action: Selector, withSender sender: Any?) -> Bool {
     return (action == #selector(UIResponderStandardEditActions.copy(_:)))
     
   }
   // MARK: - UIResponderStandardEditActions
   override func copy(_ sender: Any?) {
-    //4.copy current Text to the paste board
+    // 4.copy current Text to the paste board
     UIPasteboard.general.string = text
   }
 }

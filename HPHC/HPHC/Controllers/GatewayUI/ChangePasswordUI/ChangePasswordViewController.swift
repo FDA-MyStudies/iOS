@@ -49,36 +49,35 @@ class ChangePasswordViewController: UIViewController {
         return .default
     }
     
-// MARK:- ViewController Lifecycle
+// MARK: - ViewController Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //Used to set border color for bottom view
+        // Used to set border color for bottom view
         buttonSubmit?.layer.borderColor = kUicolorForButtonBackground
         
-        //load plist info
+        // load plist info
         var plistPath = Bundle.main.path(forResource: "ChangePasswordData", ofType: ".plist", inDirectory: nil)
         let localeDefault = getLanguageLocale()
         if !(localeDefault.hasPrefix("es") || localeDefault.hasPrefix("en")) {
           plistPath = Bundle.main.path(forResource: "ChangePasswordData", ofType: ".plist", inDirectory: nil, forLocalization: "Base")
-        }else if(localeDefault.hasPrefix("en")){
+        } else if localeDefault.hasPrefix("en") {
             plistPath = Bundle.main.path(forResource: "ChangePasswordData", ofType: ".plist", inDirectory: nil, forLocalization: "Base")
-        }else if(localeDefault.hasPrefix("es")){
+        } else if localeDefault.hasPrefix("es") {
             plistPath = Bundle.main.path(forResource: "ChangePasswordData", ofType: ".plist", inDirectory: nil, forLocalization: "es")
         }
 
         tableViewRowDetails = NSMutableArray.init(contentsOfFile: plistPath!)
         
-        //Automatically takes care  of text field become first responder and scroll of tableview
+        // Automatically takes care  of text field become first responder and scroll of tableview
         // IQKeyboardManager.sharedManager().enable = true
         
-        //Used for background tap dismiss keyboard
+        // Used for background tap dismiss keyboard
         let tapGesture: UITapGestureRecognizer =
             UITapGestureRecognizer.init(target: self, action: #selector(ChangePasswordViewController.dismissKeyboard))
         self.tableView?.addGestureRecognizer(tapGesture)
         
-        
-        //unhide navigationbar
+        // unhide navigationbar
         self.navigationController?.setNavigationBarHidden(false, animated: true)
         
         if temporaryPassword.count > 0{
@@ -95,24 +94,21 @@ class ChangePasswordViewController: UIViewController {
         
         self.addBackBarButton()
         
-        //UIApplication.shared.statusBarStyle = .default
+        // UIApplication.shared.statusBarStyle = .default
     }
-    
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
-        
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-        //hide navigationbar
+        // hide navigationbar
         if viewLoadFrom == .login {
             self.navigationController?.setNavigationBarHidden(true, animated: true)
         }
     }
 
-// MARK:- Utility Methods
+// MARK: - Utility Methods
     /**
      
      Used to show the alert using Utility
@@ -127,7 +123,6 @@ class ChangePasswordViewController: UIViewController {
                                      viewControllerUsed: self)
     }
     
-    
     /**
      
      Dismiss key board when clicked on Background
@@ -137,7 +132,6 @@ class ChangePasswordViewController: UIViewController {
         self.view.endEditing(true)
     }
     
-    
     /**
      
      Api Call to Change Password 
@@ -146,7 +140,6 @@ class ChangePasswordViewController: UIViewController {
     func requestToChangePassword() {
          UserServices().changePassword(oldPassword: self.oldPassword, newPassword: self.newPassword, delegate: self)
     }
-    
     
     /**
      
@@ -162,8 +155,7 @@ class ChangePasswordViewController: UIViewController {
         self.navigationController?.pushViewController(fda, animated: true)
     }
     
-    
-// MARK:- Button Actions
+// MARK: - Button Actions
     
     /**
      
@@ -198,7 +190,7 @@ class ChangePasswordViewController: UIViewController {
     }
 }
 
-// MARK:- TableView Data source
+// MARK: - TableView Data source
 extension ChangePasswordViewController : UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -225,8 +217,7 @@ extension ChangePasswordViewController : UITableViewDataSource {
     }
 }
 
-
-// MARK:- TableView Delegates
+// MARK: - TableView Delegates
 extension ChangePasswordViewController:  UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -235,13 +226,11 @@ extension ChangePasswordViewController:  UITableViewDelegate {
     }
 }
 
-
-// MARK:- Textfield Delegate
+// MARK: - Textfield Delegate
 extension ChangePasswordViewController: UITextFieldDelegate{
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        print(textField.tag)
-        
+                
     }
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
@@ -249,12 +238,11 @@ extension ChangePasswordViewController: UITextFieldDelegate{
         let tag:CPTextFeildTags = CPTextFeildTags(rawValue: textField.tag)!
         let finalString = textField.text! + string
         
-        
         if tag == .newPassword || tag == .confirmPassword {
             if finalString.count > 64 {
                 return false
             } else {
-                if (range.location == textField.text?.count && string == " ") {
+                if range.location == textField.text?.count && string == " " {
                     
                     textField.text = textField.text?.appending("\u{00a0}")
                     return false
@@ -263,7 +251,7 @@ extension ChangePasswordViewController: UITextFieldDelegate{
             }
         } else {
             
-            if (range.location == textField.text?.count && string == " ") {
+            if range.location == textField.text?.count && string == " " {
                 
                 textField.text = textField.text?.appending("\u{00a0}")
                 return false
@@ -273,7 +261,7 @@ extension ChangePasswordViewController: UITextFieldDelegate{
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
-        print(textField.text!)
+        
         textField.text =  textField.text?.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
         
         let tag = CPTextFeildTags(rawValue: textField.tag)!
@@ -285,14 +273,12 @@ extension ChangePasswordViewController: UITextFieldDelegate{
             self.newPassword = textField.text!
         case .confirmPassword:
             self.confirmPassword = textField.text!
-            break
-        //default: break
+        // default: break
         }
     }
 }
 
-
-// MARK:- Webservice delegates
+// MARK: - Webservice delegates
 extension ChangePasswordViewController: NMWebServiceDelegate {
     
     func startedRequest(_ manager: NetworkManager, requestName: NSString) {
@@ -316,11 +302,11 @@ extension ChangePasswordViewController: NMWebServiceDelegate {
             }
         } else if viewLoadFrom == .menu_login {
           
-          //Updating Key & Vector
+          // Updating Key & Vector
           let appDelegate = (UIApplication.shared.delegate as? AppDelegate)!
           appDelegate.updateKeyAndInitializationVector()
           
-          //TEMP : Need to save these values in Realm
+          // TEMP : Need to save these values in Realm
           let ud = UserDefaults.standard
           
           ud.set(true, forKey: kPasscodeIsPending)
@@ -334,7 +320,7 @@ extension ChangePasswordViewController: NMWebServiceDelegate {
             leftController.changeViewController(.studyList)
           
         } else if viewLoadFrom == .login {
-            //create menu
+            // create menu
             
             self.createMenuView()
         } else if viewLoadFrom == .joinStudy {
@@ -350,7 +336,7 @@ extension ChangePasswordViewController: NMWebServiceDelegate {
         
         self.removeProgressIndicator()
         
-        if error.code == 403 { //unauthorized
+        if error.code == 403 { // unauthorized
             UIUtilities.showAlertMessageWithActionHandler(kErrorTitle,
                                                           message: error.localizedDescription,
                                                           buttonTitle: kTitleOk,
@@ -360,8 +346,8 @@ extension ChangePasswordViewController: NMWebServiceDelegate {
             })
         } else {
           let errorMsg = base64DecodeError(error.localizedDescription)
-          UIUtilities.showAlertWithTitleAndMessage(title: NSLocalizedStrings(kErrorTitle, comment: "") as NSString, message: errorMsg as NSString)
+          UIUtilities.showAlertWithTitleAndMessage(title: NSLocalizedStrings(kErrorTitle, comment: "") as NSString,
+                                                   message: errorMsg as NSString)
         }
     }
 }
-

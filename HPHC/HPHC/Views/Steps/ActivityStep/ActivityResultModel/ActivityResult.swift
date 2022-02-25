@@ -47,7 +47,6 @@ class ActivityResult {
         self.result = Array()
     }
     
-    
     /* Initializer method for the instance: it assigns the final set of result dictionary to result
      @param taskResult  is the task Result
      
@@ -74,7 +73,7 @@ class ActivityResult {
                 activityStepResult?.initWithORKStepResult(stepResult: (stepResult as? ORKStepResult)! ,
                                                           activityType: (self.activity?.type)!)
                 
-                //Completion steps results and Instruction step results are ignored
+                // Completion steps results and Instruction step results are ignored
                 if stepResult.identifier != "CompletionStep"
                     && stepResult.identifier !=  kFetalKickInstructionStepIdentifier
                     && stepResult.identifier != kFetalKickIntroductionStepIdentifier
@@ -104,7 +103,7 @@ class ActivityResult {
         
         // setter method with Dictionary
         
-        //Here the dictionary is assumed to have only type,startTime,endTime
+        // Here the dictionary is assumed to have only type,startTime,endTime
         if Utilities.isValidObject(someObject: activityDict as AnyObject?){
            
             if Utilities.isValidValue(someObject: activityDict[kActivityType] as AnyObject ){
@@ -135,7 +134,6 @@ class ActivityResult {
         }
     }
     
-    
     // MARK: Setter & getter methods for Activity
     func setActivity(activity: Activity)  {
         
@@ -143,22 +141,18 @@ class ActivityResult {
         self.type = activity.type
     }
     
-    
     func getActivity() -> Activity {
         return self.activity!
     }
-    
     
     // MARK: Setter & getter methods for ActivityResult
     func setActivityResult(activityStepResult: ActivityStepResult)  {
         self.result?.append(activityStepResult)
     }
     
-    
     func getActivityResult() -> [ActivityStepResult] {
         return self.result!
     }
-    
     
     /*
      getResultDictionary creates the dictionary for the step being used
@@ -166,7 +160,7 @@ class ActivityResult {
      */
     func getResultDictionary() -> Dictionary<String, Any>? {
         
-        var activityDict: Dictionary<String, Any>? = Dictionary<String,Any>()
+        var activityDict: Dictionary<String, Any>? = Dictionary<String, Any>()
         
         if  self.type != nil {
             if self.type != .activeTask {

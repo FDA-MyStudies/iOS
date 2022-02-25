@@ -43,7 +43,7 @@ class FirstGatewayOverviewViewController: UIViewController{
         return .lightContent
     }
     
-// MARK:- View Controller Lifecycle
+// MARK: - View Controller Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -51,8 +51,7 @@ class FirstGatewayOverviewViewController: UIViewController{
             buttonWatchVideo?.isHidden = true
             imageWatchVideo?.isHidden = true
             labelWatchVideo?.isHidden = true
-        }
-        else {
+        } else {
           buttonWatchVideo?.isHidden = false
           imageWatchVideo?.isHidden = false
           labelWatchVideo?.isHidden = false
@@ -67,7 +66,7 @@ class FirstGatewayOverviewViewController: UIViewController{
         labelDescriptionText?.text = overviewSectionDetail.text
         imageViewBackgroundImage?.image = UIImage.init(named: overviewSectionDetail.imageURL!)
         
-        //UIApplication.shared.statusBarStyle = .lightContent
+        // UIApplication.shared.statusBarStyle = .lightContent
         setNeedsStatusBarAppearanceUpdate()
 
     }
@@ -78,11 +77,9 @@ class FirstGatewayOverviewViewController: UIViewController{
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
-        
     }
     
-// MARK:- Movie Player methods
+// MARK: - Movie Player methods
     
     /**
      
@@ -102,8 +99,7 @@ class FirstGatewayOverviewViewController: UIViewController{
         self.playerViewController.dismiss(animated: true, completion: nil)
     }
     
-    
-// MARK:- Button Action
+// MARK: - Button Action
     
     /**
      
@@ -132,7 +128,6 @@ class FirstGatewayOverviewViewController: UIViewController{
         }
     }
     
-    
     /**
      
      This method is used to create FDASlideMenuViewController and Gateway storyboard
@@ -143,7 +138,6 @@ class FirstGatewayOverviewViewController: UIViewController{
     @IBAction func getStartedButtonClicked(_ sender: Any){
         self.createMenuView()
     }
-    
     
     /**
      
@@ -160,4 +154,3 @@ class FirstGatewayOverviewViewController: UIViewController{
 
     }
 }
-

@@ -133,7 +133,7 @@ public class KDCircularProgress: UIView, CAAnimationDelegate {
         }
     }
     
-    @IBInspectable public var glowAmount: CGFloat = 1.0 {//Between 0 and 1
+    @IBInspectable public var glowAmount: CGFloat = 1.0 {// Between 0 and 1
         didSet {
             glowAmount = Utility.clamp(value: glowAmount, minMax: (0, 1))
             progressLayer.glowAmount = glowAmount
@@ -146,14 +146,14 @@ public class KDCircularProgress: UIView, CAAnimationDelegate {
         }
     }
     
-    @IBInspectable public var progressThickness: CGFloat = 0.4 {//Between 0 and 1
+    @IBInspectable public var progressThickness: CGFloat = 0.4 {// Between 0 and 1
         didSet {
             progressThickness = Utility.clamp(value: progressThickness, minMax: (0, 1))
             progressLayer.progressThickness = progressThickness/2
         }
     }
     
-    @IBInspectable public var trackThickness: CGFloat = 0.5 {//Between 0 and 1
+    @IBInspectable public var trackThickness: CGFloat = 0.5 {// Between 0 and 1
         didSet {
             trackThickness = Utility.clamp(value: trackThickness, minMax: (0, 1))
             progressLayer.trackThickness = trackThickness/2
@@ -167,7 +167,7 @@ public class KDCircularProgress: UIView, CAAnimationDelegate {
         }
     }
     
-    @IBInspectable public var progressInsideFillColor: UIColor? = nil {
+    @IBInspectable public var progressInsideFillColor: UIColor? {
         didSet {
             progressLayer.progressInsideFillColor = progressInsideFillColor ?? .clear
         }
@@ -183,11 +183,11 @@ public class KDCircularProgress: UIView, CAAnimationDelegate {
         }
     }
     
-    //These are used only from the Interface-Builder. Changing these from code will have no effect.
-    //Also IB colors are limited to 3, whereas programatically we can have an arbitrary number of them.
-    @objc @IBInspectable private var IBColor1: UIColor?
-    @objc @IBInspectable private var IBColor2: UIColor?
-    @objc @IBInspectable private var IBColor3: UIColor?
+    // These are used only from the Interface-Builder. Changing these from code will have no effect.
+    // Also IB colors are limited to 3, whereas programatically we can have an arbitrary number of them.
+    @IBInspectable private var IBColor1: UIColor?
+    @IBInspectable private var IBColor2: UIColor?
+    @IBInspectable private var IBColor3: UIColor?
     
     private var animationCompletionBlock: ((Bool) -> Void)?
     
@@ -224,7 +224,7 @@ public class KDCircularProgress: UIView, CAAnimationDelegate {
     }
     
     private func setInitialValues() {
-        radius = (frame.size.width/2.0) * 0.8 //We always apply a 20% padding, stopping glows from being clipped
+        radius = (frame.size.width/2.0) * 0.8 // We always apply a 20% padding, stopping glows from being clipped
         backgroundColor = .clear
         set(colors: .white, .cyan)
     }
@@ -259,7 +259,11 @@ public class KDCircularProgress: UIView, CAAnimationDelegate {
         progressLayer.setNeedsDisplay()
     }
     
-    public func animate(fromAngle: Double, toAngle: Double, duration: TimeInterval, relativeDuration: Bool = true, completion: ((Bool) -> Void)?) {
+    public func animate(fromAngle: Double,
+                        toAngle: Double,
+                        duration: TimeInterval,
+                        relativeDuration: Bool = true,
+                        completion: ((Bool) -> Void)?) {
         if isAnimating() {
             pauseAnimation()
         }
@@ -373,7 +377,10 @@ public class KDCircularProgress: UIView, CAAnimationDelegate {
         
         private enum GlowConstants {
             private static let sizeToGlowRatio: CGFloat = 0.00015
-            static func glowAmount(forAngle angle: Double, glowAmount: CGFloat, glowMode: KDCircularProgressGlowMode, size: CGFloat) -> CGFloat {
+            static func glowAmount(forAngle angle: Double,
+                                   glowAmount: CGFloat,
+                                   glowMode: KDCircularProgressGlowMode,
+                                   size: CGFloat) -> CGFloat {
                 switch glowMode {
                 case .forward:
                     return CGFloat(angle) * size * sizeToGlowRatio * glowAmount
@@ -428,7 +435,11 @@ public class KDCircularProgress: UIView, CAAnimationDelegate {
             let trackLineWidth = radius * trackThickness
             let progressLineWidth = radius * progressThickness
             let arcRadius = max(radius - trackLineWidth/2, radius - progressLineWidth/2)
-            ctx.addArc(center: CGPoint(x: width/2.0, y: height/2.0), radius: arcRadius, startAngle: 0, endAngle: CGFloat.pi * 2, clockwise: false)
+            ctx.addArc(center: CGPoint(x: width/2.0, y: height/2.0),
+                       radius: arcRadius,
+                       startAngle: 0,
+                       endAngle: CGFloat.pi * 2,
+                       clockwise: false)
             trackColor.set()
             ctx.setStrokeColor(trackColor.cgColor)
             ctx.setFillColor(progressInsideFillColor.cgColor)
@@ -466,7 +477,7 @@ public class KDCircularProgress: UIView, CAAnimationDelegate {
             ctx.saveGState()
             ctx.clip(to: bounds, mask: drawMask)
             
-            //Gradient - Fill
+            // Gradient - Fill
             if !lerpColorMode && colorsArray.count > 1 {
                 let rgbColorsArray: [UIColor] = colorsArray.map { color in // Make sure every color in colors array is in RGB color space
                     if color.cgColor.numberOfComponents == 2 {
@@ -499,7 +510,7 @@ public class KDCircularProgress: UIView, CAAnimationDelegate {
                     let step = 1 / CGFloat(steps)
                     for i in 1...steps {
                         let fi = CGFloat(i)
-                        if (t <= fi * step || i == steps) {
+                        if t <= fi * step || i == steps {
                             let colorT = Utility.inverseLerp(value: t, minMax: ((fi - 1) * step, fi * step))
                             color = Utility.colorLerp(value: colorT, minMax: (colorsArray[i - 1], colorsArray[i]))
                             break

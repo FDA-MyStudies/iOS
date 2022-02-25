@@ -149,8 +149,6 @@ class ConsentBuilder {
         consentStatus = .pending
         consentHasVisualStep = false
       
-      print("metaDataDict---\(metaDataDict)")
-
         if Utilities.isValidObject(someObject: metaDataDict as AnyObject?) {
             if Utilities.isValidValue(someObject: metaDataDict[kConsentVersion] as AnyObject?) {
                 version = (metaDataDict[kConsentVersion] as? String)!
@@ -183,8 +181,7 @@ class ConsentBuilder {
                 let valLAR = reviewConsent?.consentByLAR ?? "No"
               if valLAR.caseInsensitiveCompare("yes") == .orderedSame {
                 consentHasLAR = true
-              }
-              else {
+              } else {
                 consentHasLAR = false
               }
                 let valAdditionalSign = reviewConsent?.additionalSignature ?? "No"

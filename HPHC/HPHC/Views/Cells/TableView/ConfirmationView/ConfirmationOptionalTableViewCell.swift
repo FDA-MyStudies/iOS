@@ -27,9 +27,8 @@ let kRetainButtonTag = 11221
 let kConfirmationOptionalDefaultTypeRetain = "retain"
 let kConfirmationOptionalDefaultTypeDelete = "delete"
 
-
 protocol ConfirmationOptionalDelegate {
-    func confirmationCell(cell: ConfirmationOptionalTableViewCell , forStudy study: Study, deleteData: Bool)
+    func confirmationCell(cell: ConfirmationOptionalTableViewCell, forStudy study: Study, deleteData: Bool)
 }
 class ConfirmationOptionalTableViewCell: UITableViewCell {
 
@@ -39,7 +38,7 @@ class ConfirmationOptionalTableViewCell: UITableViewCell {
     @IBOutlet var imageViewDeleteCheckBox: UIImageView?
     @IBOutlet var imageViewRetainCheckBox: UIImageView?
     var study: Study!
-    var delegate: ConfirmationOptionalDelegate? = nil
+    var delegate: ConfirmationOptionalDelegate?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -47,7 +46,7 @@ class ConfirmationOptionalTableViewCell: UITableViewCell {
       imageViewRetainCheckBox?.image = #imageLiteral(resourceName: "notChecked")
     }
 
-// MARK:IBActions
+// MARK: IBActions
     
     @IBAction func deleteOrRetainDataButtonAction(_ sender: UIButton?){
         
@@ -59,26 +58,26 @@ class ConfirmationOptionalTableViewCell: UITableViewCell {
           if valImageViewDeleteCheckBox {
                 imageViewDeleteCheckBox?.image = #imageLiteral(resourceName: "checked")
                 imageViewRetainCheckBox?.image = #imageLiteral(resourceName: "notChecked")
-                deleteData = true;
+                deleteData = true
             }
         } else {
             if valImageViewRetainCheckBox {
                 imageViewRetainCheckBox?.image = #imageLiteral(resourceName: "checked")
                 imageViewDeleteCheckBox?.image = #imageLiteral(resourceName: "notChecked")
-                deleteData = false;
+                deleteData = false
             }
         }
         self.delegate?.confirmationCell(cell: self, forStudy: study, deleteData: deleteData)
     }
    
-    // MARK:Utility methods
+    // MARK: Utility methods
     
     func setDefaultDeleteAction(defaultValue: String){
         if defaultValue == kConfirmationOptionalDefaultTypeRetain {
             imageViewRetainCheckBox?.image = #imageLiteral(resourceName: "notChecked")
             imageViewDeleteCheckBox?.image = #imageLiteral(resourceName: "checked")
 
-        }else{
+        } else {
             imageViewDeleteCheckBox?.image = #imageLiteral(resourceName: "checked")
             imageViewRetainCheckBox?.image = #imageLiteral(resourceName: "notChecked")
         }

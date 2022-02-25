@@ -28,7 +28,7 @@ let kMessageForSharingDashboard =
 
 enum TableViewCells: Int {
     case welcomeCell = 0
-    //case studyActivityCell
+    // case studyActivityCell
     case percentageCell
 }
 
@@ -38,7 +38,7 @@ class StudyDashboardViewController: UIViewController{
     @IBOutlet var labelStudyTitle: UILabel?
     @IBOutlet var buttonHome:UIButton!
     
-    var dataSourceKeysForLabkey: Array<Dictionary<String,String>> = []
+    var dataSourceKeysForLabkey: Array<Dictionary<String, String>> = []
     
     var tableViewRowDetails = NSMutableArray()
     var todayActivitiesArray = NSMutableArray()
@@ -47,11 +47,11 @@ class StudyDashboardViewController: UIViewController{
         return .lightContent
     }
     
-    // MARK:- ViewController Lifecycle
+    // MARK: - ViewController Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //load plist info
+        // load plist info
         let plistPath = Bundle.main.path(forResource: "StudyDashboard", ofType: ".plist", inDirectory: nil)
         let tableViewRowDetailsdat = NSMutableArray.init(contentsOfFile: plistPath!)
         
@@ -63,7 +63,7 @@ class StudyDashboardViewController: UIViewController{
         
         labelStudyTitle?.text = Study.currentStudy?.name
         
-        //check if consent is udpated
+        // check if consent is udpated
         if StudyUpdates.studyConsentUpdated {
             let appDelegate = (UIApplication.shared.delegate as? AppDelegate)!
             appDelegate.checkConsentStatus(controller: self)
@@ -77,8 +77,7 @@ class StudyDashboardViewController: UIViewController{
         
         setNeedsStatusBarAppearanceUpdate()
         
-        
-        //Standalone App Settings
+        // Standalone App Settings
         if Utilities.isStandaloneApp() {
             buttonHome.setImage(UIImage(named: "menu_icn"), for: .normal)
             buttonHome.tag = 200
@@ -86,7 +85,7 @@ class StudyDashboardViewController: UIViewController{
             self.slideMenuController()?.removeRightGestures()
         }
         
-        //show navigationbar
+        // show navigationbar
         self.navigationController?.setNavigationBarHidden(true, animated: true)
         
         self.tableView?.reloadData()
@@ -109,8 +108,7 @@ class StudyDashboardViewController: UIViewController{
         
     }
     
-    
-    // MARK:- Helper Methods
+    // MARK: - Helper Methods
     
     /**
      Used to Create Eligibility Consent Task
@@ -139,7 +137,7 @@ class StudyDashboardViewController: UIViewController{
     func getDataKeysForCurrentStudy() {
         
         DBHandler.getDataSourceKeyForActivity(studyId: Study.currentStudy?.studyId ?? "") { (activityKeys) in
-            print(activityKeys)
+            
             if activityKeys.count > 0 {
                 self.dataSourceKeysForLabkey = activityKeys
                 self.sendRequestToGetDashboardResponse()
@@ -147,7 +145,6 @@ class StudyDashboardViewController: UIViewController{
         }
         
     }
-    
     
     /**
      Used to send Request To Get Dashboard Info
@@ -191,7 +188,7 @@ class StudyDashboardViewController: UIViewController{
         } else {
             self.removeProgressIndicator()
             
-            //save response in database
+            // save response in database
             let responses = StudyDashboard.instance.dashboardResponse
             for  response in responses{
                 
@@ -219,14 +216,12 @@ class StudyDashboardViewController: UIViewController{
                                                     fkDuration: Int(count),
                                                     date: localDate!)
                 }
-                
-                
+                                
             }
             let key = "LabKeyResponse" + (Study.currentStudy?.studyId)!
             UserDefaults.standard.set(true, forKey: key)
         }
     }
-    
     
     func handleExecuteSQLResponse(){
         
@@ -234,7 +229,7 @@ class StudyDashboardViewController: UIViewController{
         self.sendRequestToGetDashboardResponse()
     }
     
-    // MARK:- Button Actions
+    // MARK: - Button Actions
     
     /**
      Home button clicked
@@ -249,14 +244,12 @@ class StudyDashboardViewController: UIViewController{
         }
     }
     
-    
     /**
      Share to others button clicked
      @param sender    Accepts any kind of object
      */
     @IBAction func shareButtonAction(_ sender: AnyObject){
-        
-        
+                
         UIUtilities.showAlertMessageWithTwoActionsAndHandler(kTitleMessage,
                                                              errorMessage: kMessageForSharingDashboard,
                                                              errorAlertActionTitle: kTitleOKCapital,
@@ -268,8 +261,7 @@ class StudyDashboardViewController: UIViewController{
         },
                                                              
                                                              action2: {
-                                                                
-                                                                
+                                                                                                                                
         })
         
     }
@@ -285,10 +277,7 @@ class StudyDashboardViewController: UIViewController{
         (self.tabBarController as? StudyDashboardTabbarViewController)!.shareScreenshotByEmail(image: image,
                                                                                                subject: kEmailSubjectDashboard,
                                                                                                fileName: kEmailSubjectDashboard)
-        
-        
     }
-    
     
     private static let labkeyDateFormatter: DateFormatter = {
         // 2017/06/13 18:12:13
@@ -309,8 +298,7 @@ class StudyDashboardViewController: UIViewController{
     }()
 }
 
-
-// MARK:- TableView Datasource
+// MARK: - TableView Datasource
 extension StudyDashboardViewController : UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -323,7 +311,7 @@ extension StudyDashboardViewController : UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
-        //Used for the last cell Height (trends cell)
+        // Used for the last cell Height (trends cell)
         if indexPath.section == tableViewRowDetails.count{
             return 50
         }
@@ -344,7 +332,7 @@ extension StudyDashboardViewController : UITableViewDataSource {
             }
             
         } else {
-            //Used for Collection View Height in a cell
+            // Used for Collection View Height in a cell
             if (data["isStudy"] as? String)! == "YES" {
                 heightValue = 130
             } else {
@@ -396,7 +384,7 @@ extension StudyDashboardViewController : UITableViewDataSource {
         return cell!
     }
 }
-// MARK:- TableView Delegates
+// MARK: - TableView Delegates
 extension StudyDashboardViewController : UITableViewDelegate{
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
@@ -407,7 +395,7 @@ extension StudyDashboardViewController : UITableViewDelegate{
         }
     }
 }
-// MARK:- Webservice Delegates
+// MARK: - Webservice Delegates
 extension StudyDashboardViewController:NMWebServiceDelegate {
     
     func startedRequest(_ manager: NetworkManager, requestName: NSString) {
@@ -431,7 +419,6 @@ extension StudyDashboardViewController:NMWebServiceDelegate {
     func failedRequest(_ manager: NetworkManager, requestName: NSString, error: NSError) {
         Logger.sharedInstance.info("requestname : \(requestName)")
         
-        
         if requestName as String == WCPMethods.consentDocument.method.methodName {
             self.removeProgressIndicator()
         } else if requestName as String == ResponseMethods.executeSQL.description{
@@ -441,7 +428,7 @@ extension StudyDashboardViewController:NMWebServiceDelegate {
         }
     }
 }
-// MARK:- ORKTaskViewController Delegate
+// MARK: - ORKTaskViewController Delegate
 extension StudyDashboardViewController: ORKTaskViewControllerDelegate{
     
     func taskViewControllerSupportsSaveAndRestore(_ taskViewController: ORKTaskViewController) -> Bool {
@@ -452,27 +439,27 @@ extension StudyDashboardViewController: ORKTaskViewControllerDelegate{
                                    didFinishWith reason: ORKTaskViewControllerFinishReason,
                                    error: Error?) {
         
-        var taskResult:Any?
+        // var taskResult:Any?
         switch reason {
             
         case ORKTaskViewControllerFinishReason.completed:
-            print("completed")
-            taskResult = taskViewController.result
+            
+            // taskResult = taskViewController.result
             
             ConsentBuilder.currentConsent?.consentResult?.consentDocument =   ConsentBuilder.currentConsent?.consentDocument
             ConsentBuilder.currentConsent?.consentResult?.initWithORKTaskResult(taskResult: taskViewController.result )
             
-        case ORKTaskViewControllerFinishReason.failed:
-            print("failed")
-            taskResult = taskViewController.result
+        case ORKTaskViewControllerFinishReason.failed: break
             
-        case ORKTaskViewControllerFinishReason.discarded:
-            print("discarded")
-            taskResult = taskViewController.result
+            // taskResult = taskViewController.result
             
-        case ORKTaskViewControllerFinishReason.saved:
-            print("saved")
-            taskResult = taskViewController.restorationData
+        case ORKTaskViewControllerFinishReason.discarded: break
+            
+            // taskResult = taskViewController.result
+            
+        case ORKTaskViewControllerFinishReason.saved: break
+            
+            // taskResult = taskViewController.restorationData
         }
         taskViewController.dismiss(animated: true, completion: nil)
     }
@@ -483,7 +470,7 @@ extension StudyDashboardViewController: ORKTaskViewControllerDelegate{
         if (taskViewController.result.results?.count)! > 1{
             
             if activityBuilder?.actvityResult?.result?.count == taskViewController.result.results?.count{
-                //Removing the dummy result:Currentstep result which not presented yet
+                // Removing the dummy result:Currentstep result which not presented yet
                 activityBuilder?.actvityResult?.result?.removeLast()
                 
             } else {
@@ -532,7 +519,7 @@ extension StudyDashboardViewController: ORKTaskViewControllerDelegate{
         }
     }
     
-    //MARK:- StepViewController Delegate
+    // MARK: - StepViewController Delegate
     
     public func stepViewController(_ stepViewController: ORKStepViewController,
                                    didFinishWith direction: ORKStepViewControllerNavigationDirection){

@@ -47,7 +47,6 @@ class ActivitiesTableViewCell: UITableViewCell {
         // Initialization code
     }
 
-    
     /**
      Used to change the cell background color
      @param selected    checks if particular cell is selected
@@ -57,11 +56,10 @@ class ActivitiesTableViewCell: UITableViewCell {
         let color = labelStatus?.backgroundColor
         super.setSelected(selected, animated: animated)
         // Configure the view for the selected state
-        if(selected) {
+        if selected {
             labelStatus?.backgroundColor = color
         }
     }
-    
     
     /**
      Used to set the cell state ie Highlighted
@@ -71,18 +69,17 @@ class ActivitiesTableViewCell: UITableViewCell {
     override func setHighlighted(_ highlighted: Bool, animated: Bool) {
         let color = labelStatus?.backgroundColor
         super.setHighlighted(highlighted, animated: animated)
-        if(highlighted) {
+        if highlighted {
             labelStatus?.backgroundColor = color
         }
     }
-    
     
     /**
      Populate the cell data with Activity
      @param activity    Access the value from Activity class
      @param availablityStatus Access the value from ActivityAvailabilityStatus enum
      */
-    func populateCellDataWithActivity(activity: Activity ,availablityStatus: ActivityAvailabilityStatus){
+    func populateCellDataWithActivity(activity: Activity, availablityStatus: ActivityAvailabilityStatus) {
         
         self.availabilityStatus = availablityStatus
         self.currentActivity = activity
@@ -107,7 +104,7 @@ class ActivitiesTableViewCell: UITableViewCell {
         self.calculateActivityTimings(activity: activity)
         self.setUserStatusForActivity(activity: activity)
         
-        //update activity run details as compelted and missed
+        // update activity run details as compelted and missed
         self.updateUserRunStatus(activity: activity)
         
         if availablityStatus == .past{
@@ -119,13 +116,12 @@ class ActivitiesTableViewCell: UITableViewCell {
             } else  if activity.totalRuns == 0 {
                 self.labelStatus?.backgroundColor =  UIColor.gray
                 self.labelStatus?.text = UserActivityStatus.ActivityStatus.expired.description
-            }else {
+            } else {
                 self.labelStatus?.backgroundColor =  kGreenColor
                 self.labelStatus?.text = UserActivityStatus.ActivityStatus.completed.description
             }
         }
     }
-    
     
     /**
      Used to update User Run Status
@@ -183,10 +179,10 @@ class ActivitiesTableViewCell: UITableViewCell {
                                                                                 activity.studyId && $0.activityRunId ==
                                                                                 String(activity.currentRunId)}).first {
             
-            //assign to study
+            // assign to study
             activity.userParticipationStatus = userActivityStatus
             
-            //user study status
+            // user study status
             labelStatus?.text = userActivityStatus.status.description
             
             switch userActivityStatus.status {
@@ -205,8 +201,8 @@ class ActivitiesTableViewCell: UITableViewCell {
             
             self.labelStatus?.backgroundColor = kBlueColor
             
-            //if in database their is no staus update for past activities 
-            //assigning abandoned status by default
+            // if in database their is no staus update for past activities 
+            // assigning abandoned status by default
             if self.availabilityStatus == .past {
                 
                 self.labelStatus?.backgroundColor =  UIColor.red
@@ -224,36 +220,32 @@ class ActivitiesTableViewCell: UITableViewCell {
         }
     }
     
-    
     /**
      Used to calculate Activity Timings
      @param activity    Access the value from Activity class
      */
     func calculateActivityTimings(activity: Activity){
         
-        var startDate = activity.startDate//?.utcDate()
-        var endDate   = activity.endDate//?.utcDate()
-        
-        print("Krishna Startdate \(startDate) and enddate \(endDate)")
+        var startDate = activity.startDate // ?.utcDate()
+        var endDate   = activity.endDate // ?.utcDate()
         
         var difference = UserDefaults.standard.value(forKey: "offset") as? Int
-        print("Krishna Startdate difference \(difference)")
+        
         if difference != nil {
             difference = difference! * -1
             startDate = startDate?.addingTimeInterval(TimeInterval(difference!))
             endDate = endDate?.addingTimeInterval(TimeInterval(difference!))
-            print("Krishna Startdate if difference !=nil \(startDate) and enddate \(endDate)")
+            
         }
         
-    
         let frequency = activity.frequencyType
         
         let startDateString = ActivitiesTableViewCell.oneTimeFormatter.string(from: startDate!)
-        print("Krishna Startdate \(startDate) and startDateString \(startDateString)")
+        
         var endDateString = ""
         if endDate != nil {
             endDateString = ActivitiesTableViewCell.oneTimeFormatter.string(from: endDate!)
-            print("Krishna Enddate \(endDate) and endDateString \(endDateString)")
+        
         }
         
         if activity.type == ActivityType.activeTask{
@@ -263,7 +255,7 @@ class ActivitiesTableViewCell: UITableViewCell {
             imageIcon?.image = UIImage.init(named: "surveyIcon")
         }
         labelStatusTopConstraint?.constant = 7
-        print("Krishna Startime \(startDateString) end time \(endDateString)")
+        
         switch frequency {
         case .One_Time: // Handle for One Time Frequency
             
@@ -335,8 +327,7 @@ class ActivitiesTableViewCell: UITableViewCell {
         }
     }
     
-    
-// MARK:- Button Action
+// MARK: - Button Action
     
     /**
      Clicked on  MoreSchedules
@@ -367,7 +358,7 @@ class ActivitiesTableViewCell: UITableViewCell {
         let formatter = DateFormatter()
         formatter.locale = Locale(identifier: "en")
         formatter.dateFormat = "hh:mma, MMM dd YYYY"
-        print("Krishna Start oneTimeFormatter formatter \(formatter) and locale \(formatter.locale)")
+        
         return formatter
     }()
     
@@ -398,5 +389,3 @@ class ActivitiesTableViewCell: UITableViewCell {
         return formatter
     }()
 }
-
-

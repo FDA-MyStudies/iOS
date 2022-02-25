@@ -23,7 +23,7 @@ import ImageIO
 
 // FIXME: comparison operators with optionals were removed from the Swift Standard Libary.
 // Consider refactoring the code to use the non-optional operators.
-fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+private func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
   switch (lhs, rhs) {
   case let (l?, r?):
     return l < r
@@ -34,13 +34,11 @@ fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
   }
 }
 
-
-
 extension UIImage {
     
     public class func gifImageWithData(_ data: Data) -> UIImage? {
         guard let source = CGImageSourceCreateWithData(data as CFData, nil) else {
-            print("image doesn't exist")
+            
             return nil
         }
         
@@ -48,13 +46,13 @@ extension UIImage {
     }
     
     public class func gifImageWithURL(_ gifUrl:String) -> UIImage? {
-        guard let bundleURL:URL? = URL(string: gifUrl)
+        guard let bundleURL:URL = URL(string: gifUrl)
             else {
-                print("image named \"\(gifUrl)\" doesn't exist")
+                
                 return nil
         }
-        guard let imageData = try? Data(contentsOf: bundleURL!) else {
-            print("image named \"\(gifUrl)\" into NSData")
+        guard let imageData = try? Data(contentsOf: bundleURL) else {
+            
             return nil
         }
         
@@ -64,11 +62,11 @@ extension UIImage {
     public class func gifImageWithName(_ name: String) -> UIImage? {
         guard let bundleURL = Bundle.main
             .url(forResource: name, withExtension: "gif") else {
-                print("SwiftGif: This image named \"\(name)\" does not exist")
+                
                 return nil
         }
         guard let imageData = try? Data(contentsOf: bundleURL) else {
-            print("SwiftGif: Cannot turn image named \"\(name)\" into NSData")
+            
             return nil
         }
         
@@ -134,7 +132,7 @@ extension UIImage {
         }
     }
     
-    class func gcdForArray(_ array: Array<Int>) -> Int {
+    class func gcdForArray(_ array: [Int]) -> Int {
         if array.isEmpty {
             return 1
         }

@@ -29,7 +29,7 @@ class SplashViewController: UIViewController {
     
     var isAppOpenedForFirstTime:Bool? = false
     
-    // MARK:- Viewcontroller Lifecycle
+    // MARK: - Viewcontroller Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,7 +37,7 @@ class SplashViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         
-        //self.generateRealmKeys()
+        // self.generateRealmKeys()
         
         if DBHandler().initilizeCurrentUser() {
             
@@ -49,9 +49,7 @@ class SplashViewController: UIViewController {
             }
         }
         
-       
         self.checkIfAppLaunchedForFirstTime()
-        
         
         // Checks AuthKey, If exists navigate to HomeController else GatewayDashboard
 //        if Utilities.isStandaloneApp() {
@@ -64,7 +62,7 @@ class SplashViewController: UIViewController {
 //                appDelegate.checkPasscode(viewController: self)
 //                self.navigateToGatewayDashboard()
 //
-//            }else {
+//            } else {
 //                /*Gateway App*/
 //                self.navigateToHomeController()
 //
@@ -83,8 +81,8 @@ class SplashViewController: UIViewController {
                             appDelegate.checkPasscode(viewController: self)
                             self.navigateToGatewayDashboard()
                             
-                        }else {
-                            //Gateway App/
+                        } else {
+                            // Gateway App/
                             self.navigateToHomeController()
                             
                         }
@@ -92,7 +90,6 @@ class SplashViewController: UIViewController {
                 }
     }
 
-    
     /**
      Navigating to Home Screen and load HomeViewController from Login Storyboard
      */
@@ -120,9 +117,9 @@ class SplashViewController: UIViewController {
         let localeDefault = getLanguageLocale()
         if !(localeDefault.hasPrefix("es") || localeDefault.hasPrefix("en")) {
           plistPath = Bundle.main.path(forResource: "StudyOverview", ofType: ".plist", inDirectory: nil, forLocalization: "Base")
-        }else if localeDefault.hasPrefix("en"){
+        } else if localeDefault.hasPrefix("en"){
             plistPath = Bundle.main.path(forResource: "StudyOverview", ofType: ".plist", inDirectory: nil, forLocalization: "Base")
-        }else if localeDefault.hasPrefix("es"){
+        } else if localeDefault.hasPrefix("es"){
             plistPath = Bundle.main.path(forResource: "StudyOverview", ofType: ".plist", inDirectory: nil, forLocalization: "es")
         }
       
@@ -136,30 +133,28 @@ class SplashViewController: UIViewController {
                 listOfOverviews.append(overviewObj)
             }
             
-            //create new Overview object
+            // create new Overview object
             let overview = Overview()
             overview.type = .study
             overview.sections = listOfOverviews
             
             Study.currentStudy?.overview = overview
             // assgin to Gateway
-            //Gateway.instance.overview = overview
+            // Gateway.instance.overview = overview
             
             self.navigateToStudyHomeController()
             
-            
         } catch {
-            print("json error: \(error.localizedDescription)")
         }
     }
     
     func navigateToStudyHomeController() {
-        //StudyHomeViewController
+        // StudyHomeViewController
         let studyStoryBoard = UIStoryboard.init(name: kStudyStoryboard, bundle: Bundle.main)
         let studyHomeController =
             studyStoryBoard.instantiateViewController(withIdentifier: String(describing: StudyHomeViewController.classForCoder()))
             as! StudyHomeViewController
-        //studyHomeController.delegate = self
+        // studyHomeController.delegate = self
         self.navigationController?.pushViewController(studyHomeController, animated: true)
     }
     
@@ -174,8 +169,8 @@ class SplashViewController: UIViewController {
     }
     
     @objc func studySetupComplete(){
-        print("studySetupComplete")
-        //self.navigateToGatewayDashboard()
+        
+        // self.navigateToGatewayDashboard()
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue:"StudySetupCompleted"), object: nil)
         
         if User.currentUser.authToken != nil && User.currentUser.authToken.count > 0{
@@ -183,7 +178,7 @@ class SplashViewController: UIViewController {
             let appDelegate = UIApplication.shared.delegate as! AppDelegate
             appDelegate.checkPasscode(viewController: self)
             
-            //self.navigateToGatewayDashboard()
+            // self.navigateToGatewayDashboard()
             
             self.createMenuView()
 //            let userStudyStatus =  (Study.currentStudy?.userParticipateState.status)!
@@ -202,7 +197,7 @@ class SplashViewController: UIViewController {
             // self.navigateToHomeController()
             
             /*Standalone App*/
-            //self.navigateToStudyHomeController()
+            // self.navigateToStudyHomeController()
             self.createMenuView()
         }
     }
@@ -229,7 +224,7 @@ class SplashViewController: UIViewController {
         }
     }
 }
-// MARK:- ORKTaskViewController Delegate
+// MARK: - ORKTaskViewController Delegate
 extension SplashViewController:ORKTaskViewControllerDelegate{
     
     func taskViewControllerSupportsSaveAndRestore(_ taskViewController: ORKTaskViewController) -> Bool {
@@ -242,17 +237,13 @@ extension SplashViewController:ORKTaskViewControllerDelegate{
         
         switch reason {
             
-        case ORKTaskViewControllerFinishReason.completed:
-            print("completed")
+        case ORKTaskViewControllerFinishReason.completed: break
            
-        case ORKTaskViewControllerFinishReason.failed:
-            print("failed")
+        case ORKTaskViewControllerFinishReason.failed: break
         
-        case ORKTaskViewControllerFinishReason.discarded:
-            print("discarded")
+        case ORKTaskViewControllerFinishReason.discarded: break
             
-        case ORKTaskViewControllerFinishReason.saved:
-            print("saved")
+        case ORKTaskViewControllerFinishReason.saved: break
             
         }
         taskViewController.dismiss(animated: true, completion: nil)

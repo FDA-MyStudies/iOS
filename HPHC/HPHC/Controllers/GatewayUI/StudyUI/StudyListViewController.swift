@@ -36,7 +36,7 @@ let kNotificationViewControllerIdentifier = "NotificationViewControllerIdentifie
 
 class StudyListViewController: UIViewController {
     
-    // MARK:- Outlets
+    // MARK: - Outlets
     
     @IBOutlet var tableView: UITableView?
     @IBOutlet var labelHelperText: UILabel!
@@ -76,12 +76,11 @@ class StudyListViewController: UIViewController {
         // get Profile data to check for passcode
         // Condition missing
 
-        let appDelegate = (UIApplication.shared.delegate as? AppDelegate)!
+        // let appDelegate = (UIApplication.shared.delegate as? AppDelegate)!
 
-        
         if User.currentUser.userType == .FDAUser, User.currentUser.settings?.localNotifications == true {
             /* Will come next next phase */
-            //appDelegate.checkForAppReopenNotification()
+            // appDelegate.checkForAppReopenNotification()
         }
 
         isComingFromFilterScreen = false
@@ -249,9 +248,9 @@ class StudyListViewController: UIViewController {
         // checking the app settings
         let notificationType = UIApplication.shared.currentUserNotificationSettings!.types
         if notificationType == [] {
-            print("notifications are NOT enabled")
+            
         } else {
-            print("notifications are enabled")
+            
             notificationEnabledFromAppSettings = true
         }
 
@@ -299,7 +298,7 @@ class StudyListViewController: UIViewController {
             Gateway.instance.studies = listOfStudies
 
         } catch {
-            print("json error: \(error.localizedDescription)")
+            
         }
     }
 
@@ -398,7 +397,6 @@ class StudyListViewController: UIViewController {
                 
 //                var sortedstudies2 = studies.sorted(by: { $0.name!.lowercased() < $1.name!.lowercased() })
             
-                
 //               Logger.sharedInstance.info("Sorting Studies")
 //                sortedstudies2 = sortedstudies2.sorted(by: { (study1: Study, study2: Study) -> Bool in
 //                    // sorting based on UserParticipation status
@@ -537,9 +535,9 @@ class StudyListViewController: UIViewController {
                         self.searchView?.delegate = self
                         
                         let titleTextAttributesSelected = [NSAttributedString.Key.foregroundColor: UIColor.white]
-                        print("Krishna attributed titleTextAttributesSelected String \(titleTextAttributesSelected)")
+                        
                         let titleTextAttributesUnSelected = [NSAttributedString.Key.foregroundColor: UIColor.gray]
-                        print("Krishna attributed String titleTextAttributesUnSelected \( self.searchView?.segementToken?.titleForSegment(at: 0))")
+                        
                         self.searchView?.segementToken?.setTitleTextAttributes(titleTextAttributesUnSelected, for: .normal)
                         self.searchView?.segementToken?.setTitleTextAttributes(titleTextAttributesSelected, for: .selected)
                         self.searchView?.segementToken?.layer.borderWidth = 2
@@ -710,7 +708,7 @@ class StudyListViewController: UIViewController {
      navigateBasedOnUserStatus method navigates to StudyDashBoard or StudyHome based on UserParticipationStatus.
      */
     func navigateBasedOnUserStatus() {
-        print("current user type = \(User.currentUser.userType)")
+        
         if User.currentUser.userType == UserType.FDAUser {
             if Study.currentStudy?.status == .Active {
                 // handle accoring to UserStatus
@@ -723,12 +721,10 @@ class StudyListViewController: UIViewController {
                 }
             } else if User.currentUser.userType == UserType.AnonymousUser{
                 
-            }
-            else {
+            } else {
                 checkDatabaseForStudyInfo(study: Study.currentStudy!)
             }
-        }
-        else {
+        } else {
             checkDatabaseForStudyInfo(study: Study.currentStudy!)
         }
     }
@@ -745,9 +741,8 @@ class StudyListViewController: UIViewController {
                  //   if study?.version != study?.newVersion {
                     if NetworkManager.isNetworkAvailable() {
                         
-                    
                         WCPServices().getStudyUpdates(study: study!, delegate: self)
-                    }else{
+                    } else {
                        // let appDelegate = (UIApplication.shared.delegate as? AppDelegate)!
                         addProgressIndicator()
                         perform(#selector(loadStudyDetails), with: self, afterDelay: 1)
@@ -830,7 +825,8 @@ extension StudyListViewController: StudyFilterDelegates {
         // filter by study status
         var pariticipationsStatusFilteredStudies: [Study]! = []
         if pariticipationsStatus.count > 0 {
-            pariticipationsStatusFilteredStudies = allStudyList.filter { pariticipationsStatus.contains($0.userParticipateState.status.description) }
+            pariticipationsStatusFilteredStudies = allStudyList.filter {
+                pariticipationsStatus.contains($0.userParticipateState.status.description) }
         }
 
         // filter by bookmark
@@ -986,7 +982,7 @@ extension StudyListViewController: UITableViewDelegate {
         }
 
         let study = studiesList[indexPath.row]
-      let studyLanguage = study.studyLanguage.uppercased()
+      // let studyLanguage = study.studyLanguage.uppercased()
       
       var locale = getLanguageLocale()
       if !(locale.hasPrefix("es") || locale.hasPrefix("en")) {
@@ -1000,7 +996,7 @@ extension StudyListViewController: UITableViewDelegate {
 //      } else {
         Study.updateCurrentStudy(study: study)
         performTaskBasedOnStudyStatus()
-      //}
+      // }
     }
   
   func presentLanguageAlert(studyLanguage: String, study: Study) {
@@ -1024,7 +1020,7 @@ extension StudyListViewController: UITableViewDelegate {
             
             if UIApplication.shared.canOpenURL(settingsUrl) {
               UIApplication.shared.open(settingsUrl, completionHandler: { (success) in
-                print("Settings opened: \(success)") // Prints true
+                
               })
             }
             
@@ -1035,7 +1031,6 @@ extension StudyListViewController: UITableViewDelegate {
     
   }
 }
-
 
 // MARK: - StudyList Delegates
 
@@ -1115,13 +1110,11 @@ extension StudyListViewController: searchBarDelegate {
     func search(text: String, studyId: String) {
         if !studyId.isEmpty {
             StudyFilterHandler.instance.searchText = text
-            LabKeyServices().searchStudy(studyId: studyId, delegate: self) //"BGYRPKLDG"
-        }
-        else {
+            LabKeyServices().searchStudy(studyId: studyId, delegate: self) // "BGYRPKLDG"
+        } else {
             if studiesList.count == 0 {
                 let appDelegate = (UIApplication.shared.delegate as? AppDelegate)!
-                
-            
+                    
                 if StudyFilterHandler.instance.filterOptions.count > 0 {
                     let filterStrings = appDelegate.getDefaultFilterStrings()
                     
@@ -1220,9 +1213,9 @@ extension StudyListViewController: searchBarDelegate {
     }
     
     func handleResolveEnrollmentToken(response: Dictionary<String, Any>){
-        print(response)
+        
         if let studyId = response["studyId"] as? String {
-            print("rows \(studyId)")
+        
             if !studyId.isEmpty {
                 tokenSearch(studyId: studyId)
             }
@@ -1279,8 +1272,7 @@ extension StudyListViewController: NMWebServiceDelegate {
 
         } else if requestName as String == RegistrationMethods.updateStudyState.description {
             appdelegate.window?.removeProgressIndicatorFromWindow()
-        }
-        else if requestName as String == ResponseMethods.resolveEnrollmentToken.description {
+        } else if requestName as String == ResponseMethods.resolveEnrollmentToken.description {
         self.handleResolveEnrollmentToken(response: response as! Dictionary<String, Any>)
             appdelegate.window?.removeProgressIndicatorFromWindow()
         }
@@ -1299,8 +1291,7 @@ extension StudyListViewController: NMWebServiceDelegate {
                                                           action: {
                 self.fdaSlideMenuController()?.navigateToHomeAfterUnauthorizedAccess()
             })
-        }
-        else {
+        } else {
             if requestName as String == RegistrationMethods.studyState.description {
                 sendRequestToGetStudyList()
 
@@ -1359,26 +1350,26 @@ extension StudyListViewController: ORKTaskViewControllerDelegate {
     public func taskViewController(_ taskViewController: ORKTaskViewController,
                                    didFinishWith reason: ORKTaskViewControllerFinishReason,
                                    error _: Error?) {
-        var taskResult: Any?
+        // var taskResult: Any?
         switch reason {
         case ORKTaskViewControllerFinishReason.completed:
-            print("completed")
-            taskResult = taskViewController.result
+            
+            // taskResult = taskViewController.result
             let ud = UserDefaults.standard
             ud.set(false, forKey: kPasscodeIsPending)
             ud.synchronize()
 
-        case ORKTaskViewControllerFinishReason.failed:
-            print("failed")
-            taskResult = taskViewController.result
+        case ORKTaskViewControllerFinishReason.failed: break
+            
+            // taskResult = taskViewController.result
 
-        case ORKTaskViewControllerFinishReason.discarded:
-            print("discarded")
-            taskResult = taskViewController.result
+        case ORKTaskViewControllerFinishReason.discarded: break
+            
+            // taskResult = taskViewController.result
 
-        case ORKTaskViewControllerFinishReason.saved:
-            print("saved")
-            taskResult = taskViewController.restorationData
+        case ORKTaskViewControllerFinishReason.saved: break
+            
+            // taskResult = taskViewController.restorationData
         }
 
         perform(#selector(dismisscontroller), with: self, afterDelay: 1.5)

@@ -42,7 +42,6 @@ class SignInTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
 
-    
     /**
      
      Populate cell data coming from dictionary
@@ -61,5 +60,3 @@ class SignInTableViewCell: UITableViewCell {
         textFieldValue?.placeholder = NSLocalizedStrings((data["placeHolder"] as? String)!, comment: "")
     }
 }
-
-

@@ -76,16 +76,16 @@ class ActivityStepResult {
     */
     var value: Any?
     
-    var subTypeForForm: String? //Exclusively used for form step to store the formItem type
+    var subTypeForForm: String? // Exclusively used for form step to store the formItem type
     
     var questionStep: ActivityQuestionStep?
     
     /* default initializer method
      */
     init() {
-        self.step = ActivityStep() //instance of ActivityStep
-        self.type = .question //specifies the step type
-        self.key = "" //stores the identifier of step
+        self.step = ActivityStep() // instance of ActivityStep
+        self.type = .question // specifies the step type
+        self.key = "" // stores the identifier of step
         self.startTime = Date.init(timeIntervalSinceNow: 0)
         self.endTime = Date.init(timeIntervalSinceNow: 0)
         self.skipped = false
@@ -102,7 +102,7 @@ class ActivityStepResult {
      @param activityType    holds the activity type
      
      */
-    func initWithORKStepResult(stepResult: ORKStepResult,activityType: ActivityType) {
+    func initWithORKStepResult(stepResult: ORKStepResult, activityType: ActivityType) {
         
         if Utilities.isValidValue(someObject: stepResult.identifier as AnyObject?) {
             self.key = stepResult.identifier
@@ -118,10 +118,9 @@ class ActivityStepResult {
                 self.type =  .active
             }
         }
-        self.setResultValue(stepResult: stepResult ,activityType: activityType )
+        self.setResultValue(stepResult: stepResult, activityType: activityType )
         
     }
-    
     
     /* method create ActivityStepResult by initializing params
      @stepDict:contains all ActivityResultStep properties
@@ -173,7 +172,7 @@ class ActivityStepResult {
      */
     func getActivityStepResultDict() -> Dictionary<String, Any>? {
         
-        var stepDict:Dictionary<String,Any>? = Dictionary<String,Any>()
+        var stepDict:Dictionary<String, Any>? = Dictionary<String, Any>()
         
         switch self.type! as ActivityStepType {
             
@@ -187,7 +186,7 @@ class ActivityStepResult {
             
             if self.step?.resultType != nil {
             
-            stepDict?[kActivityStepResultType] =  (self.step?.resultType as? String)! == "fetalKickCounter" ? "grouped" : (self.step?.resultType)
+            stepDict?[kActivityStepResultType] = (self.step?.resultType as? String)! == "fetalKickCounter" ? "grouped" : (self.step?.resultType)
                 
             } else {
               stepDict?[kActivityStepResultType] = "grouped"
@@ -240,7 +239,7 @@ class ActivityStepResult {
      */
     func setResultValue(stepResult: ORKStepResult, activityType: ActivityType)  {
         
-        if((stepResult.results?.count)! > 0) {
+        if (stepResult.results?.count)! > 0 {
             
             if  activityType == .Questionnaire {
                 // for question Step
@@ -254,7 +253,7 @@ class ActivityStepResult {
                         
                         // for consent step result we are storing the ORKConsentSignatureResult
                         let consentStepResult: ORKConsentSignatureResult? = (stepResult.results?.first as? ORKConsentSignatureResult?)!
-                        self.value = consentStepResult;
+                        self.value = consentStepResult
                         
                     }
                 } else {
@@ -265,12 +264,11 @@ class ActivityStepResult {
                     var i: Int! = 0
                     var j: Int! = 0
                     var isAddMore: Bool? =  false
-                    
-
+    
                     if (stepResult.results?.count)! > (self.step as? ActivityFormStep)!.itemsArray.count {
                         isAddMore = true
                     }
-                    var localArray: [Dictionary< String,Any>] = [Dictionary< String,Any>]()
+                    var localArray: [Dictionary<String, Any>] = [Dictionary<String, Any>]()
                     
                     for result in stepResult.results! {
                         
@@ -284,14 +282,14 @@ class ActivityStepResult {
                         
                         j = (i == 0 ? 0 : i % (self.step as? ActivityFormStep)!.itemsArray.count)
                         
-                        //Checking if formStep is RepeatableFormStep
+                        // Checking if formStep is RepeatableFormStep
                         if isAddMore! {
                             if j  == 0 {
                                 localArray.removeAll()
-                                localArray = [Dictionary< String,Any>]()
+                                localArray = [Dictionary<String, Any>]()
                             }
                             
-                            let stepDict = (((self.step as? ActivityFormStep)!.itemsArray) as [Dictionary<String,Any>])[j]
+                            let stepDict = (((self.step as? ActivityFormStep)!.itemsArray) as [Dictionary<String, Any>])[j]
                             
                              activityStepResult?.key = stepDict["key"] as! String?
                             
@@ -300,7 +298,7 @@ class ActivityStepResult {
                         }
                         let itemDict = (self.step as? ActivityFormStep)!.itemsArray[j] as Dictionary<String, Any>
                         activityStepResult?.step?.resultType = (itemDict["resultType"] as? String)!
-                        if ((result as? ORKQuestionResult) != nil) {
+                        if (result as? ORKQuestionResult) != nil {
                             
                             let questionResult: ORKQuestionResult? = (result as? ORKQuestionResult)
                             
@@ -316,7 +314,7 @@ class ActivityStepResult {
                             activityStepResult?.value = self.value
                             localArray.append((activityStepResult?.getActivityStepResultDict()!)!)
                             
-                            //checking if more steps added in RepeatableFormStep
+                            // checking if more steps added in RepeatableFormStep
                             if isAddMore! {
                                 if j + 1 == (self.step as? ActivityFormStep)!.itemsArray.count {
                                     if localArray.count > 0 {
@@ -339,7 +337,7 @@ class ActivityStepResult {
                     }
                 }
                 
-            } else if (activityType == .activeTask) { //For Active task like Fetal Kick, Spatial Span Memory & Towers of Honoi
+            } else if activityType == .activeTask { // For Active task like Fetal Kick, Spatial Span Memory & Towers of Honoi
                 
                 let activityResult: ORKResult? = stepResult.results?.first
                 var resultArray: Array<Dictionary<String, Any>>? =  Array()
@@ -362,7 +360,7 @@ class ActivityStepResult {
                                 resultDict?[kActivityActiveStepKey] = kSpatialSpanMemoryKeyScore
                                 resultDict?[kActivityStepResultValue] = stepTypeResult?.score
                                 
-                            case .numberOfGames: //numberOfGames
+                            case .numberOfGames: // numberOfGames
                                 resultDict?[kActivityActiveStepKey] = kSpatialSpanMemoryKeyNumberOfGames
                                 resultDict?[kActivityStepResultValue] = stepTypeResult?.numberOfGames
                                 
@@ -396,14 +394,13 @@ class ActivityStepResult {
                     } else {
                         self.value = 0
                     }
-                }
-                else if (activityResult as? ORKTowerOfHanoiResult) != nil { //Result Handling for Towers of Honoi
+                } else if (activityResult as? ORKTowerOfHanoiResult) != nil { // Result Handling for Towers of Honoi
                     let stepTypeResult:ORKTowerOfHanoiResult? = activityResult as? ORKTowerOfHanoiResult
                     
                     for i in 0..<2 {
                         var resultDict: Dictionary<String, Any>? =  Dictionary()
-                        //Saving puzzleWasSolved & numberOfMoves
-                        if  TowerOfHanoiResultType(rawValue: i) == .puzzleWasSolved { //puzzleWasSolved
+                        // Saving puzzleWasSolved & numberOfMoves
+                        if  TowerOfHanoiResultType(rawValue: i) == .puzzleWasSolved { // puzzleWasSolved
                             
                             resultDict?[kActivityActiveStepKey] = kTowerOfHanoiKeyPuzzleWasSolved
                             resultDict?[kActivityStepResultValue] = stepTypeResult?.puzzleWasSolved
@@ -425,7 +422,7 @@ class ActivityStepResult {
                             resultDict?[kActivityStepStartTime] = dateString
                         }
                         
-                        //Saving Start & End Time of Step
+                        // Saving Start & End Time of Step
                         if self.endTime != nil && (Utilities.getStringFromDate(date: self.endTime!) != nil) {
                             
                             resultDict?[kActivityStepEndTime] = Utilities.getStringFromDate(date: self.endTime!)
@@ -443,8 +440,7 @@ class ActivityStepResult {
                     self.key = Study.currentActivity?.actvityId
                     self.value = resultArray
                     
-                }
-                else if (activityResult as? FetalKickCounterTaskResult) != nil { //Result handling for FetalKickCounter
+                } else if (activityResult as? FetalKickCounterTaskResult) != nil { // Result handling for FetalKickCounter
                     let stepTypeResult: FetalKickCounterTaskResult? = activityResult as? FetalKickCounterTaskResult
                     
                     for i in 0..<2 {
@@ -452,8 +448,8 @@ class ActivityStepResult {
                         
                         resultDict?[kActivityActiveKeyResultType] = ActiveStepResultType.numeric.rawValue
                         
-                        //Saving Duration & Kick Counts
-                        if i == 0 { //Duration
+                        // Saving Duration & Kick Counts
+                        if i == 0 { // Duration
                             resultDict?[kActivityActiveStepKey] = kFetalKickCounterDuration
                             resultDict?[kActivityStepResultValue] = Double((stepTypeResult?.duration) == nil ? 0 : (stepTypeResult?.duration)!)
                             
@@ -463,7 +459,7 @@ class ActivityStepResult {
                                 Double((stepTypeResult?.totalKickCount) == nil ? 0 : (stepTypeResult?.totalKickCount)!)
                         }
                         
-                        //Saving Start & End Time of Step
+                        // Saving Start & End Time of Step
                         if self.startTime != nil && (Utilities.getStringFromDate(date: self.startTime!) != nil) {
                              resultDict?[kActivityStepStartTime] = Utilities.getStringFromDate(date: self.startTime!)
                         } else {
@@ -489,7 +485,7 @@ class ActivityStepResult {
                 // Do Nothing
             }
         } else {
-           //Do Nothing
+           // Do Nothing
         }
     }
     
@@ -500,9 +496,9 @@ class ActivityStepResult {
     func setValue(questionstepResult: ORKQuestionResult) {
         switch questionstepResult.questionType.rawValue {
             
-        case  ORKQuestionType.scale.rawValue : //scale and continuos scale
+        case  ORKQuestionType.scale.rawValue : // scale and continuos scale
             
-            if ((questionstepResult as? ORKScaleQuestionResult) != nil) {
+            if (questionstepResult as? ORKScaleQuestionResult) != nil {
                 let stepTypeResult = (questionstepResult as? ORKScaleQuestionResult)!
                 
                 if Utilities.isValidValue(someObject: stepTypeResult.scaleAnswer as AnyObject?) {
@@ -558,7 +554,7 @@ class ActivityStepResult {
                 }
             }
             
-        case ORKQuestionType.singleChoice.rawValue: //textchoice + value picker + imageChoice
+        case ORKQuestionType.singleChoice.rawValue: // textchoice + value picker + imageChoice
             
             let stepTypeResult = (questionstepResult as? ORKChoiceQuestionResult)!
             var resultType: String? = (self.step?.resultType as? String)!
@@ -573,7 +569,7 @@ class ActivityStepResult {
                     
                     if resultType ==  QuestionStepType.imageChoice.rawValue ||  resultType == QuestionStepType.valuePicker.rawValue {
                         
-                        //for image choice and valuepicker
+                        // for image choice and valuepicker
                         
                         let resultValue: String! = "\(stepTypeResult.choiceAnswers!.first!)"
                         
@@ -611,7 +607,7 @@ class ActivityStepResult {
                     self.value = []
                 }
             }
-        case ORKQuestionType.multipleChoice.rawValue: //textchoice + imageChoice
+        case ORKQuestionType.multipleChoice.rawValue: // textchoice + imageChoice
             
             let stepTypeResult = (questionstepResult as? ORKChoiceQuestionResult)!
             
@@ -766,7 +762,6 @@ class ActivityStepResult {
         }
     }
     
-    
     // MARK: Setter & Getter methods for Step
     
     /* Method to Initialize step
@@ -775,7 +770,6 @@ class ActivityStepResult {
     
     func setStep(step: ActivityStep)  {
         
-        
         self.step = step
     }
     
@@ -783,8 +777,7 @@ class ActivityStepResult {
      returns current step
      */
     
-    func getStep()-> ActivityStep {
+    func getStep() -> ActivityStep {
         return self.step!
     }
 }
-

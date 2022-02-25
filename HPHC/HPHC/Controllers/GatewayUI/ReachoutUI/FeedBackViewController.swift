@@ -22,7 +22,6 @@ import Foundation
 import UIKit
 import IQKeyboardManagerSwift
 
-
 struct FeedbackDetail {
     
     static var feedback: String = ""
@@ -42,20 +41,18 @@ class FeedBackViewController: UIViewController{
     let kLeaveFeedbackTitle = NSLocalizedStrings("LEAVE US YOUR FEEDBACK", comment: "")
     let kEnterFeedback = NSLocalizedStrings("Enter your feedback here", comment: "")
     
-    
-// MARK:- ViewController Lifecycle
+// MARK: - ViewController Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.navigationItem.title =  kLeaveFeedbackTitle
         
-        //Used to set border color for bottom view
+        // Used to set border color for bottom view
         buttonSubmit?.layer.borderColor = kUicolorForButtonBackground
         
-        //Automatically takes care  of text field become first responder and scroll of tableview
+        // Automatically takes care  of text field become first responder and scroll of tableview
         // IQKeyboardManager.sharedManager().enable = true
 
-        
         self.tableView?.estimatedRowHeight = 123
         self.tableView?.rowHeight = UITableView.automaticDimension
         
@@ -79,8 +76,7 @@ class FeedBackViewController: UIViewController{
         
     }
     
-    
-// MARK:- Button Actions
+// MARK: - Button Actions
     
     /**
      
@@ -91,24 +87,20 @@ class FeedBackViewController: UIViewController{
      
      */
     @IBAction func buttonSubmitAciton(_ sender: UIButton){
-        //print("\(ContactUsFeilds.firstName)")
+        
         if FeedbackDetail.subject.isEmpty && FeedbackDetail.feedback.isEmpty {
             UIUtilities.showAlertWithMessage(alertMessage: kMessageAllFieldsAreEmpty)
-        }
-        else if FeedbackDetail.subject.isEmpty {
+        } else if FeedbackDetail.subject.isEmpty {
             UIUtilities.showAlertWithMessage(alertMessage: kMessageMessageBlankCheck)
-        }
-        else if FeedbackDetail.feedback.isEmpty {
+        } else if FeedbackDetail.feedback.isEmpty {
             UIUtilities.showAlertWithMessage(alertMessage: NSLocalizedStrings("Please provide your feedback", comment: ""))
-        }
-        else {
+        } else {
             UserServices().sendUserFeedback(delegate: self)
         }
     }
 }
 
-
-// MARK:- TableView Datasource
+// MARK: - TableView Datasource
 extension FeedBackViewController: UITableViewDataSource{
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -116,17 +108,17 @@ extension FeedBackViewController: UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        //let tableViewData = tableViewRowDetails?.object(at: indexPath.row) as! NSDictionary
+        // let tableViewData = tableViewRowDetails?.object(at: indexPath.row) as! NSDictionary
         
         var cell: UITableViewCell?
         
         if indexPath.row == 0{
-            cell = tableView.dequeueReusableCell(withIdentifier: kFeedbackTableViewCellIdentifier1, for: indexPath) as! FeedBackTableViewCell
+            cell = tableView.dequeueReusableCell(withIdentifier: kFeedbackTableViewCellIdentifier1,
+                                                 for: indexPath) as! FeedBackTableViewCell
            
-        
-        }
-        else if indexPath.row == 1{
-           let cell = tableView.dequeueReusableCell(withIdentifier: kContactUsTableViewCellIdentifier, for: indexPath) as! ContactUsTableViewCell
+        } else if indexPath.row == 1{
+           let cell = tableView.dequeueReusableCell(withIdentifier: kContactUsTableViewCellIdentifier,
+                                                    for: indexPath) as! ContactUsTableViewCell
             cell.textFieldValue?.tag = indexPath.row
             
 //            var keyBoardType : UIKeyboardType? =  UIKeyboardType.default
@@ -134,11 +126,10 @@ extension FeedBackViewController: UITableViewDataSource{
 //            cell.textFieldValue?.keyboardType = keyBoardType
 //            cell.placeholderText
 //            
-//            //Cell Data Setup
-//            //cell.populateCellData(data: tableViewData,keyboardType: keyBoardType)
+//            // Cell Data Setup
+//            // cell.populateCellData(data: tableViewData,keyboardType: keyBoardType)
             return cell
-        }
-        else{
+        } else {
             cell = tableView.dequeueReusableCell(withIdentifier: "textviewCell", for: indexPath) as! TextviewCell
           
           let cell = tableView.dequeueReusableCell(withIdentifier: "textviewCell", for: indexPath) as! TextviewCell
@@ -156,8 +147,7 @@ extension FeedBackViewController: UITableViewDataSource{
     }
 }
 
-
-// MARK:- TableView Delegates
+// MARK: - TableView Delegates
 extension FeedBackViewController : UITableViewDelegate{
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -165,8 +155,7 @@ extension FeedBackViewController : UITableViewDelegate{
     }
 }
 
-
-// MARK:- UITextview Delegate
+// MARK: - UITextview Delegate
 extension FeedBackViewController: UITextViewDelegate {
     
     func textViewDidChange(_ textView: UITextView) {
@@ -178,20 +167,18 @@ extension FeedBackViewController: UITextViewDelegate {
         tableView?.setContentOffset(currentOffset!, animated: false)
     }
     func textViewDidEndEditing(_ textView: UITextView) {
-        print("textViewDidEndEditing")
+        
         if textView.tag == 101 && textView.text.count == 0 {
             textView.text = kEnterFeedback
             textView.textColor = UIColor.lightGray
             textView.tag = 100
-        }
-        else {
-            //self.feedbackText = textView.text!
+        } else {
+            // self.feedbackText = textView.text!
             FeedbackDetail.feedback = textView.text!
         }
     }
     func textViewDidBeginEditing(_ textView: UITextView) {
-        print("textViewDidBeginEditing")
-        
+                
         if textView.tag == 100 {
             textView.text = ""
             textView.textColor = UIColor.black
@@ -210,24 +197,21 @@ extension FeedBackViewController: UITextViewDelegate {
     }
 }
 
-
-// MARK:- Textfield Delegate
+// MARK: - Textfield Delegate
 extension FeedBackViewController: UITextFieldDelegate{
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
         
-        print("Krishna Editing text \(textField.text!)")
     }
    
     func textFieldDidEndEditing(_ textField: UITextField) {
-        print("Krishna Editing text \(textField.text!)")
+        
         textField.text =  textField.text?.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
         FeedbackDetail.subject = textField.text!
     }
 }
 
-
-// MARK- Webservice Delegates
+// MARK: - Webservice Delegates
 extension FeedBackViewController: NMWebServiceDelegate {
     
     func startedRequest(_ manager: NetworkManager, requestName: NSString) {
@@ -256,5 +240,3 @@ extension FeedBackViewController: NMWebServiceDelegate {
         UIUtilities.showAlertWithTitleAndMessage(title: kTitleError as NSString, message: errorMsg as NSString)
     }
 }
-
-

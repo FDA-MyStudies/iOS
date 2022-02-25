@@ -267,7 +267,6 @@ fileprivate extension Reachability {
         }
     }
     
-
     func notifyReachabilityChanged() {
         let notify = { [weak self] in
             guard let self = self else { return }

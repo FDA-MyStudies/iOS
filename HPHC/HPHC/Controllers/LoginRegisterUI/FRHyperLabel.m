@@ -74,7 +74,7 @@ static UIColor *FRHyperLabelLinkColorHighlight;
     [self.handlerDictionary removeAllObjects];
 }
 
-//designated setter
+// designated setter
 - (void)setLinkForRange:(NSRange)range withAttributes:(NSDictionary *)attributes andLinkHandler:(void (^)(FRHyperLabel *label, NSRange selectedRange))handler {
 	NSMutableAttributedString *mutableAttributedString = [[NSMutableAttributedString alloc]initWithAttributedString:self.attributedText];
 	

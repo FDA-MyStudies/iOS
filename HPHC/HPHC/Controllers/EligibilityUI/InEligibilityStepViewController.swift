@@ -29,9 +29,7 @@ class InEligibilityStep: ORKStep {
     }
 }
 
-
 class InEligibilityStepViewController: ORKStepViewController {
-    
     
     @IBOutlet weak var buttonDone: UIButton?
     @IBOutlet weak var labelDescription: UILabel?
@@ -76,9 +74,10 @@ class InEligibilityStepViewController: ORKStepViewController {
     // MARK: Methods and Button Actions
     
     func showAlert(message: String){
-        let alert = UIAlertController(title: kErrorTitle as String,message: message as String,preferredStyle: UIAlertController.Style.alert)
+        let alert = UIAlertController(title: kErrorTitle as String,
+                                      message: message as String,
+                                      preferredStyle: UIAlertController.Style.alert)
         alert.addAction(UIAlertAction(title: kTitleOKCapital, style: .default, handler: nil))
-        
         
         self.navigationController?.present(alert, animated: true, completion: nil)
         
@@ -94,5 +93,3 @@ class InEligibilityStepViewController: ORKStepViewController {
         // Dispose of any resources that can be recreated.
     }
 }
-
-

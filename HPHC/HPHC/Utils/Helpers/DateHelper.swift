@@ -262,7 +262,7 @@ enum DateHelper {
 
         let calendar = Calendar.current
         let comp = calendar.dateComponents(
-            [Calendar.Component.hour, Calendar.Component.minute, Calendar.Component.second,],
+            [Calendar.Component.hour, Calendar.Component.minute, Calendar.Component.second],
             from: date
         )
 
@@ -280,12 +280,12 @@ enum DateHelper {
         let calendar = Calendar.current
         
         let firstComp = calendar.dateComponents(
-            [Calendar.Component.year, Calendar.Component.month, Calendar.Component.day,],
+            [Calendar.Component.year, Calendar.Component.month, Calendar.Component.day],
             from: firstDate
         )
         
         let secondComp = calendar.dateComponents(
-            [Calendar.Component.hour, Calendar.Component.minute, Calendar.Component.second,],
+            [Calendar.Component.hour, Calendar.Component.minute, Calendar.Component.second],
             from: secondDate
         )
 
@@ -306,7 +306,7 @@ enum DateHelper {
         }
         
         let firstComp = calendar.dateComponents(
-            [Calendar.Component.year, Calendar.Component.month, Calendar.Component.day,],
+            [Calendar.Component.year, Calendar.Component.month, Calendar.Component.day],
             from: firstDate
         )
         
@@ -323,12 +323,11 @@ enum DateHelper {
         return createDate(year: year, month: month, day: day, hour: hour, min: minute, sec: sec)
     }
     
-    
     static func getFormattedQuickTagDuration(date: Date) -> String? {
 
         let calendar = Calendar.current
         let comp = calendar.dateComponents(
-            [Calendar.Component.hour, Calendar.Component.minute, Calendar.Component.second,],
+            [Calendar.Component.hour, Calendar.Component.minute, Calendar.Component.second],
             from: date
         )
 
@@ -394,7 +393,7 @@ enum DateHelper {
         } else if calendar.isDateInTomorrow(from) { dateStr = "Tomorrow " }
 
         if dateStr.isEmpty { dateStr = formattedDayStringFromDate(date: from) } else {
-            dateStr += "\(formattedStringFromLeaveDate(date: from,dateType: .time))"
+            dateStr += "\(formattedStringFromLeaveDate(date: from, dateType: .time))"
         }
 
         return dateStr
@@ -409,7 +408,7 @@ extension Date {
         let cal = Calendar.current
         var components = cal.dateComponents(x, from: self)
 
-        //components.timeZone = TimeZone(abbreviation: timeZoneAbbrev)
+        // components.timeZone = TimeZone(abbreviation: timeZoneAbbrev)
         components.hour = hour
         components.minute = min
         components.second = sec

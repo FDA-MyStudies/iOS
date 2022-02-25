@@ -20,7 +20,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 import UIKit
 
-//api keys
+// api keys
 let kEnrollmentToken        = "token"
 let kParticipantId          = "participantId"
 let kEnrollmentTokenValid   = "valid"
@@ -30,13 +30,12 @@ class LabKeyServices: NSObject {
     
     let networkManager = NetworkManager.sharedInstance()
     weak var delegate: NMWebServiceDelegate?
-    var activityId: String!  //Temp: replace with request parameters
-    var keys: String!  //Temp: replace with request parameters
-    var requestParams: Dictionary<String,Any>? = [:]
-    var headerParams: Dictionary<String,String>? = [:]
+    var activityId: String!  // Temp: replace with request parameters
+    var keys: String!  // Temp: replace with request parameters
+    var requestParams: Dictionary<String, Any>? = [:]
+    var headerParams: Dictionary<String, String>? = [:]
     
-    
-    // MARK:Requests
+    // MARK: Requests
   func searchStudy(studyId: String, delegate: NMWebServiceDelegate) {
       self.delegate = delegate
       let method = ResponseMethods.resolveEnrollmentToken.method
@@ -48,7 +47,7 @@ class LabKeyServices: NSObject {
       self.sendRequestWith(method: method, params: params, headers: nil)
   }
   
-    func enrollForStudy(studyId: String, token: String , delegate: NMWebServiceDelegate) {
+    func enrollForStudy(studyId: String, token: String, delegate: NMWebServiceDelegate) {
         self.delegate = delegate
         let method = ResponseMethods.enroll.method
         
@@ -71,7 +70,7 @@ class LabKeyServices: NSObject {
         self.sendRequestWith(method: method, params: params, headers: nil)
     }
     
-    func verifyEnrollmentToken(studyId: String,token: String, delegate: NMWebServiceDelegate) {
+    func verifyEnrollmentToken(studyId: String, token: String, delegate: NMWebServiceDelegate) {
         
         self.delegate = delegate
         
@@ -84,7 +83,7 @@ class LabKeyServices: NSObject {
         self.sendRequestWith(method:method, params: params, headers: nil)
     }
     
-    func withdrawFromStudy(studyId: String,participantId: String,deleteResponses: Bool,delegate: NMWebServiceDelegate){
+    func withdrawFromStudy(studyId: String,participantId: String, deleteResponses: Bool,delegate: NMWebServiceDelegate){
         self.delegate = delegate
         let method = ResponseMethods.withdrawFromStudy.method
         
@@ -96,10 +95,11 @@ class LabKeyServices: NSObject {
         self.sendRequestWith(method: method, params: params, headers: nil)
     }
     
-    func processResponse(metaData: Dictionary<String,Any>,
+    func processResponse(metaData: Dictionary<String, Any>,
                          activityType: String,
-                         responseData: Dictionary<String,Any>,
-                         participantId: String,delegate: NMWebServiceDelegate) {
+                         responseData: Dictionary<String, Any>,
+                         participantId: String,
+                         delegate: NMWebServiceDelegate) {
         
         self.delegate = delegate
         let method = ResponseMethods.processResponse.method
@@ -110,12 +110,11 @@ class LabKeyServices: NSObject {
                       kActivityResponseData: responseData
             ] as [String : Any]
         
-        print("processresponse \(params.preetyJSON())")
         self.sendRequestWith(method:method, params: params, headers: nil)
         
     }
     
-    func processResponse(responseData: Dictionary<String,Any>, delegate: NMWebServiceDelegate) {
+    func processResponse(responseData: Dictionary<String, Any>, delegate: NMWebServiceDelegate) {
         self.delegate = delegate
         
         let method = ResponseMethods.processResponse.method
@@ -123,21 +122,18 @@ class LabKeyServices: NSObject {
         let currentUser = User.currentUser
         if let userStudyStatus = currentUser.participatedStudies.filter({$0.studyId == Study.currentStudy?.studyId!}).first {
             
-            
             let studyId =  Study.currentStudy?.studyId!
             let activiyId =  Study.currentActivity?.actvityId!
             let activityName =  Study.currentActivity?.shortName!
             let activityVersion = Study.currentActivity?.version!
             let currentRunId = Study.currentActivity?.currentRunId
             
-            
-            
             let info =  [kStudyId: studyId! ,
                          kActivityId: activiyId! ,
                          kActivityName: activityName! ,
                          "version": activityVersion! ,
                          kActivityRunId: "\(currentRunId!)"
-                ] as? [String: String]
+                ]
             
             let ActivityType = Study.currentActivity?.type?.rawValue
             
@@ -147,12 +143,11 @@ class LabKeyServices: NSObject {
                           kActivityResponseData: responseData
                 ] as [String: Any]
             
-            print("processresponse : \(params.preetyJSON())")
             self.sendRequestWith(method: method, params: params, headers: nil)
         }
     }
     
-    func getParticipantResponse(tableName: String,activityId: String,keys: String,participantId: String,delegate: NMWebServiceDelegate){
+    func getParticipantResponse(tableName: String, activityId: String, keys: String,participantId: String, delegate: NMWebServiceDelegate){
         
         self.delegate = delegate
         self.activityId = activityId
@@ -179,30 +174,33 @@ class LabKeyServices: NSObject {
         self.sendRequestWith(method: method, params: params, headers: nil)
     }
     
-    func syncOfflineSavedData(method: Method, params: Dictionary<String, Any>?,headers: Dictionary<String, String>? , delegate: NMWebServiceDelegate){
+    func syncOfflineSavedData(method: Method,
+                              params: Dictionary<String, Any>?,
+                              headers: Dictionary<String, String>?,
+                              delegate: NMWebServiceDelegate) {
         
         self.delegate = delegate
         self.sendRequestWith(method: method, params: params!, headers: headers)
     }
     
-    // MARK:Parsers
-    func handleEnrollForStudy(response: Dictionary<String, Any>){
+    // MARK: Parsers
+    func handleEnrollForStudy(response: Dictionary<String, Any>) {
     }
     
-    func handleVerifyEnrollmentToken(response: Dictionary<String, Any>){
+    func handleVerifyEnrollmentToken(response: Dictionary<String, Any>) {
     }
     
-    func handleWithdrawFromStudy(response: Dictionary<String, Any>){
+    func handleWithdrawFromStudy(response: Dictionary<String, Any>) {
     }
     
-    func handleProcessResponse(response: Dictionary<String, Any>){
+    func handleProcessResponse(response: Dictionary<String, Any>) {
     }
     
-    func handleGetParticipantResponse1(response: Dictionary<String, Any>){
-        print(response)
+    func handleGetParticipantResponse1(response: Dictionary<String, Any>) {
+        
     }
   
-    func handleGetParticipantResponse(response: Dictionary<String, Any>){
+    func handleGetParticipantResponse(response: Dictionary<String, Any>) {
         
         var dashBoardResponse: Array<DashboardResponse> = []
         let keysArray = self.keys.components(separatedBy: ",")
@@ -218,67 +216,65 @@ class LabKeyServices: NSObject {
             dashBoardResponse.append(responseData)
         }
         
-        if let rows = response["rows"] as? Array<Dictionary<String,Any>> {
-            print("rows \(rows)")
-            
+        if let rows = response["rows"] as? Array<Dictionary<String, Any>> {
+                        
             for rowDetail in rows {
-                if let data =  rowDetail["data"] as? Dictionary<String,Any>{
-                    //created date
-                    let dateDetail = data["Created"]  as? Dictionary<String,Any>
+                if let data =  rowDetail["data"] as? Dictionary<String, Any>{
+                    // created date
+                    let dateDetail = data["Created"]  as? Dictionary<String, Any>
                     let date = (dateDetail?["value"] as? String)!
                     
-                    
-                    //FetalKick
+                    // FetalKick
                     if  data["count"] != nil && data["duration"] != nil  {
                         
-                        //for responseData in dashBoardResponse{
+                        // for responseData in dashBoardResponse{
                         let responseData = dashBoardResponse.first
-                        //count
-                        let countDetail = data["count"]  as? Dictionary<String,Any>
+                        // count
+                        let countDetail = data["count"]  as? Dictionary<String, Any>
                         let count = (countDetail?["value"] as? Float)!
                         
-                        //duration
-                        let durationDetail = data["duration"]  as? Dictionary<String,Any>
+                        // duration
+                        let durationDetail = data["duration"]  as? Dictionary<String, Any>
                         let duration = (durationDetail?["value"] as? Float)!
                         
                         let valueDetail = ["value": duration,
                                            "count": count,
-                                           "date": date] as Dictionary<String,Any>
+                                           "date": date] as Dictionary<String, Any>
                         
                         responseData?.values.append(valueDetail)
                         
-                    } //Speatial Memory
+                    } // Speatial Memory
                     else if data["NumberofFailures"] != nil && data["NumberofGames"] != nil   &&   data["Score"] != nil {
                         
                         for  responseData in dashBoardResponse {
                             if responseData.key == "NumberofFailures" {
-                                //numberOfFailuresDetail
-                                let numberOfFailuresDetail = data["NumberofFailures"]  as? Dictionary<String,Any>
+                                // numberOfFailuresDetail
+                                let numberOfFailuresDetail = data["NumberofFailures"]  as? Dictionary<String, Any>
                                 let numberOfFailures = (numberOfFailuresDetail?["value"] as? Float)!
                                 
                                 let valueDetail1 = ["value": numberOfFailures,
                                                     "count": Float(0.0),
-                                                    "date": date] as Dictionary<String,Any>
+                                                    "date": date] as Dictionary<String, Any>
                                 responseData.values.append(valueDetail1)
                                 
                             } else if responseData.key == "NumberofGames" {
-                                //numberOfGames
-                                let numberOfGamesDetail = data["NumberofGames"]  as? Dictionary<String,Any>
+                                // numberOfGames
+                                let numberOfGamesDetail = data["NumberofGames"]  as? Dictionary<String, Any>
                                 let numberOfGames = (numberOfGamesDetail?["value"] as? Float)!
                                 
                                 let valueDetail3 = ["value": numberOfGames,
                                                     "count": Float(0.0),
-                                                    "date": date] as Dictionary<String,Any>
+                                                    "date": date] as Dictionary<String, Any>
                                 
                                 responseData.values.append(valueDetail3)
                             } else if responseData.key == "Score" {
-                                //score
-                                let scoreDetail = data["Score"]  as? Dictionary<String,Any>
+                                // score
+                                let scoreDetail = data["Score"]  as? Dictionary<String, Any>
                                 let score = (scoreDetail?["value"] as? Float)!
                                 
                                 let valueDetail2 = ["value": score,
                                                     "count": Float(0.0),
-                                                    "date": date] as Dictionary<String,Any>
+                                                    "date": date] as Dictionary<String, Any>
                                 
                                 responseData.values.append(valueDetail2)
                             }
@@ -287,17 +283,17 @@ class LabKeyServices: NSObject {
                     } else {
                         for responseData in dashBoardResponse {
                             
-                            if let keyValue = data[responseData.key!] as? Dictionary<String,Any> {
+                            if let keyValue = data[responseData.key!] as? Dictionary<String, Any> {
                                 
                                 if Utilities.isValidValue(someObject: keyValue["value"] as AnyObject?) {
                                     var value:Float = 0.0
                                     if let n = keyValue["value"] as? NSNumber {
                                         value = n.floatValue
                                     }
-                                    //let value = keyValue["value"] as! Float
+                                    // let value = keyValue["value"] as! Float
                                     let valueDetail = ["value": value,
                                                        "count": Float(0.0),
-                                                       "date": date] as Dictionary<String,Any>
+                                                       "date": date] as Dictionary<String, Any>
                                     
                                     responseData.values.append(valueDetail)
                                 }
@@ -311,7 +307,7 @@ class LabKeyServices: NSObject {
         StudyDashboard.instance.saveDashboardResponse(responseList: dashBoardResponse)
     }
     
-    private func sendRequestWith(method: Method, params: Dictionary<String, Any>,headers: Dictionary<String, String>?){
+    private func sendRequestWith(method: Method, params: Dictionary<String, Any>, headers: Dictionary<String, String>?) {
         
         self.requestParams = params
         self.headerParams = headers
@@ -340,22 +336,20 @@ extension LabKeyServices: NMWebServiceDelegate{
             self.handleGetParticipantResponse(response: response as! Dictionary<String, Any>)
         case ResponseMethods.processResponse.description as String: break
         case ResponseMethods.withdrawFromStudy.description as String: break
-        default:
-            print("Request was not sent with proper method name")
+        default: break
+            
         }
-        
-    
+            
         delegate?.finishedRequest(manager, requestName: requestName, response: response)
     
     }
     
     func failedRequest(_ manager: NetworkManager, requestName: NSString, error: NSError) {
         
-        
         delegate?.failedRequest(manager, requestName: requestName, error: error)
         
         if requestName as String == ResponseMethods.processResponse.description {
-            if (error.code == NoNetworkErrorCode) {
+            if error.code == NoNetworkErrorCode {
                 // Save in database
                 DBHandler.saveRequestInformation(params: self.requestParams,
                                                  headers: self.headerParams,

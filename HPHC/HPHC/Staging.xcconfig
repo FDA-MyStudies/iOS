@@ -27,7 +27,7 @@
 
 // URL of study metadata server.
 // e.g. mystudiesdeployment.com/StudyMetaData/
-//WCP_URL = hpwcp-stage.lkcompliant.net/StudyMetaData/
+// WCP_URL = hpwcp-stage.lkcompliant.net/StudyMetaData/
 WCP_URL = 45.136.113.122:8082/StudyMetaData/
 
 // URL of response datastore.
@@ -36,11 +36,11 @@ RESPONSE_URL = hpresp-stage.lkcompliant.net/mobileappstudy-
 
 // URL of different service bundles within participant datastore.
 // e.g. mystudiesdeployment.com/myStudiesUserMgmtWS/
-//REGISTRATION_URL = hpreg-stage.lkcompliant.net/fdahpUserRegWS/
+// REGISTRATION_URL = hpreg-stage.lkcompliant.net/fdahpUserRegWS/
 REGISTRATION_URL = 45.136.113.122:8080/labkey/fdahpUserRegWS/
 
 /// App ID from Study builder.
-//APPLICATION_ID = COVFH001
+// APPLICATION_ID = COVFH001
 APPLICATION_ID = COVFHTEST
 
 /// Org ID from Study builder.

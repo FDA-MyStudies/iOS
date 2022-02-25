@@ -20,7 +20,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 import UIKit
 enum RegistrationMethods: String {
-    //TODO : Write exact name for request method
+    // TODO : Write exact name for request method
     case login
     case register
     case confirmRegistration
@@ -60,13 +60,13 @@ enum RegistrationMethods: String {
         switch self {
             
         case .activityState, .consentPDF, .deleteAccount, .confirmRegistration, .userProfile, .userPreferences, .studyState, .versionInfo:
-            //GET Methods
+            // GET Methods
             return Method(methodName: (self.rawValue+".api"), methodType: .httpMethodGet, requestType: .requestTypeHTTP)
-        case .withdraw,.logout, .deactivate:
-            //DELETE Methods
+        case .withdraw, .logout, .deactivate:
+            // DELETE Methods
             return Method(methodName: (self.rawValue+".api"), methodType: .httpMethodDELETE, requestType: .requestTypeJSON)
         default:
-            //POST Methods
+            // POST Methods
             return Method(methodName: (self.rawValue+".api"), methodType: .httpMethodPOST, requestType: .requestTypeJSON)
         }
     }
@@ -77,11 +77,11 @@ struct RegistrationServerURLConstants {
 //  static let ProductionURL = "https://35.222.67.4:8082/myStudiesUserMgmtWS/"
 //  static let DevelopmentURL = "https://35.222.67.4:8082/myStudiesUserMgmtWS/"
   
-    //Staging server
+    // Staging server
     static let ProductionURL = API.registrationURL
     static let DevelopmentURL = API.registrationURL
     
-    //Demo server
+    // Demo server
     //    static let ProductionURL = "https://reg.demo.mystudiesapp.org/fdahpUserRegWS/"
     //    static let DevelopmentURL = "https://reg.demo.mystudiesapp.org/fdahpUserRegWS/"
 
@@ -90,8 +90,7 @@ struct RegistrationServerURLConstants {
 class RegistrationServerConfiguration: NetworkConfiguration {
     static let configuration = RegistrationServerConfiguration()
     
-    
-    // MARK:  Delegates
+    // MARK: Delegates
     override func getProductionURL() -> String {
         return RegistrationServerURLConstants.ProductionURL
     }
@@ -109,15 +108,14 @@ class RegistrationServerConfiguration: NetworkConfiguration {
       let appId = AppDetails.applicationID
       let orgId = AppDetails.organizationID
         
-        //let ud = UserDefaults.standard
+        // let ud = UserDefaults.standard
         if User.currentUser.authToken != nil {
             return [kUserAuthToken: User.currentUser.authToken,
                     "applicationId": appId,
                     "orgId": orgId,
                     "language": language
             ]
-        }
-        else {
+        } else {
             return [
                 "applicationId": appId,
                 "orgId": orgId,
@@ -132,6 +130,4 @@ class RegistrationServerConfiguration: NetworkConfiguration {
     override func shouldParseErrorMessage() -> Bool {
         return false
     }
-    
-    
 }

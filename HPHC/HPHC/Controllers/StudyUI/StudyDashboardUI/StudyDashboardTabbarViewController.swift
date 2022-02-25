@@ -39,8 +39,7 @@ class StudyDashboardTabbarViewController: UITabBarController {
         // Dispose of any resources that can be recreated.
     }
     
-    
-    public func shareScreenshotByEmail(image: UIImage!, subject: String!,fileName: String!){
+    public func shareScreenshotByEmail(image: UIImage!, subject: String!, fileName: String!) {
         
         let imageData = image.pngData()
         let mailComposerVC = MFMailComposeViewController()
@@ -59,9 +58,9 @@ class StudyDashboardTabbarViewController: UITabBarController {
             self.present(mailComposerVC, animated: true, completion: nil)
         } else {
             
-            let alert = UIAlertController(title: kTitleError,message: "",preferredStyle: UIAlertController.Style.alert)
+            let alert = UIAlertController(title: kTitleError, message: "", preferredStyle: UIAlertController.Style.alert)
             
-            alert.addAction(UIAlertAction.init(title: kTitleOk, style: .default, handler: { (action) in
+            alert.addAction(UIAlertAction.init(title: kTitleOk, style: .default, handler: { (_) in
                 
                 self.dismiss(animated: true, completion: nil)
                 
@@ -75,4 +74,3 @@ extension StudyDashboardTabbarViewController: MFMailComposeViewControllerDelegat
         controller.dismiss(animated: true, completion: nil)
     }
 }
-

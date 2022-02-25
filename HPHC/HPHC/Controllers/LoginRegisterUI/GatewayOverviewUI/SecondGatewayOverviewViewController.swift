@@ -31,11 +31,11 @@ class SecondGatewayOverviewViewController: UIViewController{
     var overviewSectionDetail: OverviewSection!
     var pageIndex: Int!
     
-// MARK:- ViewController Lifecycle
+// MARK: - ViewController Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //Used to set border color for bottom view
+        // Used to set border color for bottom view
         buttonGetStarted?.layer.borderColor = kUicolorForButtonBackground
         
     }
@@ -49,8 +49,6 @@ class SecondGatewayOverviewViewController: UIViewController{
         super.viewWillAppear(animated)
         labelHeadingText?.text = overviewSectionDetail.title
        
-        
-        
         labelDescriptionText?.text = overviewSectionDetail.text
         imageViewBackgroundImage?.image = UIImage.init(named: overviewSectionDetail.imageURL!)
          UIApplication.shared.statusBarStyle = .lightContent
@@ -58,12 +56,9 @@ class SecondGatewayOverviewViewController: UIViewController{
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
-        
     }
     
-    
-// MARK:-
+// MARK: -
     
     /**
      
@@ -79,8 +74,7 @@ class SecondGatewayOverviewViewController: UIViewController{
         self.navigationController?.pushViewController(fda, animated: true)
     }
 
-    
-// MARK:- Button Actions
+// MARK: - Button Actions
     
     /**
      
@@ -93,4 +87,3 @@ class SecondGatewayOverviewViewController: UIViewController{
         self.createMenuView()
     }
 }
-

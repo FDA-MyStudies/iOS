@@ -27,7 +27,7 @@ enum SelectedTab: String{
 }
 class StudyDashboardStatisticsTableViewCell: UITableViewCell {
      
-    //Fifth cell Outlets
+    // Fifth cell Outlets
     @IBOutlet var statisticsCollectionView: UICollectionView?
     @IBOutlet var buttonDay: UIButton?
     @IBOutlet var buttonWeek: UIButton?
@@ -89,7 +89,7 @@ class StudyDashboardStatisticsTableViewCell: UITableViewCell {
         return attributedStartDate
     }
     
-    // MARK:- Button action
+    // MARK: - Button action
     
     /**
      Day, Week and Month Button clicked
@@ -98,7 +98,7 @@ class StudyDashboardStatisticsTableViewCell: UITableViewCell {
     @IBAction func dayWeekMonthButtonAction(_ sender: AnyObject){
         
         if sender.tag == 11{
-            //Day clicked
+            // Day clicked
             buttonDay?.setTitle(kDaySpaces, for: UIControl.State.normal)
             buttonWeek?.setTitle(kWeek, for: UIControl.State.normal)
             buttonMonth?.setTitle(kMonth, for: UIControl.State.normal)
@@ -123,7 +123,7 @@ class StudyDashboardStatisticsTableViewCell: UITableViewCell {
             self.buttonForward?.isEnabled = false
             
         } else if sender.tag == 12 {
-            //Week clicked
+            // Week clicked
             buttonWeek?.setTitle(kWeekSpaces, for: UIControl.State.normal)
             buttonDay?.setTitle(kDay, for: UIControl.State.normal)
             buttonMonth?.setTitle(kMonth, for: UIControl.State.normal)
@@ -143,12 +143,12 @@ class StudyDashboardStatisticsTableViewCell: UITableViewCell {
             endDateOfWeek = todaysDate.endOfWeek
             
             let attributedText = self.getWeeklyAttributedText()
-            labelDateValue?.attributedText = attributedText//stringStartDate + " - " + stringEndDate
+            labelDateValue?.attributedText = attributedText// stringStartDate + " - " + stringEndDate
             self.buttonForward?.isEnabled = false
             
         } else if sender.tag == 13 {
             
-            //Months clicked
+            // Months clicked
             buttonMonth?.setTitle(kMonthSpaces, for: UIControl.State.normal)
             buttonDay?.setTitle(kDay, for: UIControl.State.normal)
             buttonWeek?.setTitle(kWeek, for: UIControl.State.normal)
@@ -202,7 +202,7 @@ class StudyDashboardStatisticsTableViewCell: UITableViewCell {
             endDateOfWeek = calendar.date(byAdding: .day, value: 7, to: endDateOfWeek!)
             
             let attributedText = self.getWeeklyAttributedText()
-            labelDateValue?.attributedText = attributedText//stringStartDate + " - " + stringEndDate
+            labelDateValue?.attributedText = attributedText// stringStartDate + " - " + stringEndDate
             
             let result = todaysDate.compare(Date())
             if result == .orderedSame || result == .orderedDescending{
@@ -252,8 +252,7 @@ class StudyDashboardStatisticsTableViewCell: UITableViewCell {
             endDateOfWeek = calendar.date(byAdding: .day, value: -7, to: endDateOfWeek!)
             let stringStartDate = StudyDashboardStatisticsTableViewCell.formatter.string(from: startDateOfWeek!) + " - "
             let stringEndDate = StudyDashboardStatisticsTableViewCell.formatter.string(from: endDateOfWeek!)
-            
-            
+                
             let color = Utilities.getUIColorFromHex(0x007CBA)
             
             let attributedStartDate:NSMutableAttributedString = NSMutableAttributedString(string: stringStartDate)
@@ -298,7 +297,7 @@ class StudyDashboardStatisticsTableViewCell: UITableViewCell {
     }()
 }
 
-// MARK:- Collection delegates
+// MARK: - Collection delegates
 extension StudyDashboardStatisticsTableViewCell: UICollectionViewDelegate, UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {

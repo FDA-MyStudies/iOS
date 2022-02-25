@@ -35,12 +35,11 @@ class StudyOverviewViewControllerSecond: UIViewController{
     var overViewWebsiteLink: String?
     var overviewSectionDetail: OverviewSection!
     
-    
-// MARK:- Viewcontroller lifecycle
+// MARK: - Viewcontroller lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //Used to set border color for bottom view
+        // Used to set border color for bottom view
         buttonJoinStudy?.layer.borderColor = kUicolorForButtonBackground
         if overviewSectionDetail.imageURL != nil {
             let url = URL.init(string:overviewSectionDetail.imageURL!)
@@ -90,18 +89,15 @@ class StudyOverviewViewControllerSecond: UIViewController{
         }
         self.labelDescription?.textAlignment = .center
 
-        
-        //UIApplication.shared.statusBarStyle = .lightContent
+        // UIApplication.shared.statusBarStyle = .lightContent
         
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
-        
     }
     
-// MARK:- Button Actions 
+// MARK: - Button Actions 
     
     /**
      This method is used to Join Study
@@ -113,12 +109,11 @@ class StudyOverviewViewControllerSecond: UIViewController{
             let leftController = slideMenuController()?.leftViewController as! LeftMenuViewController
             leftController.changeViewController(.reachOut_signIn)
         } else {
-            //TEMP
+            // TEMP
              UIUtilities.showAlertWithTitleAndMessage(title: kTitleMessage as NSString,
                                                       message: NSLocalizedStrings(kAlertMessageReachoutText, comment: "") as NSString)
         }
     }
-    
     
     /**
      This method is used to Visit website
@@ -129,18 +124,17 @@ class StudyOverviewViewControllerSecond: UIViewController{
         let loginStoryboard = UIStoryboard.init(name: "Main", bundle: Bundle.main)
         let webViewController = loginStoryboard.instantiateViewController(withIdentifier: "WebViewController") as! UINavigationController
         let webView = webViewController.viewControllers[0] as! WebViewController
-        //webView.requestLink = "http://www.fda.gov"
+        // webView.requestLink = "http://www.fda.gov"
         
         if sender.tag == 1188 {
-            //Visit Website
+            // Visit Website
             webView.requestLink = overViewWebsiteLink
             
         } else {
-            //View Consent
+            // View Consent
             webView.htmlString = (Study.currentStudy?.consentDocument?.htmlString)
         }
         
         self.navigationController?.present(webViewController, animated: true, completion: nil)
     }
 }
-

@@ -22,7 +22,7 @@ import UIKit
 
 class StudyDashboardWelcomeTableViewCell: UITableViewCell {
     
-    //First cell Outlets
+    // First cell Outlets
     @IBOutlet var labelName: UILabel?
     @IBOutlet var labelStatus: UILabel?
     
@@ -34,7 +34,6 @@ class StudyDashboardWelcomeTableViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
     }
     
-    
     /**
      Used to display Welcome cell
      @param data    Accepts data from Dictionary
@@ -44,6 +43,3 @@ class StudyDashboardWelcomeTableViewCell: UITableViewCell {
     }
     
 }
-
-
-

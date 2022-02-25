@@ -21,12 +21,11 @@ OTHER DEALINGS IN THE SOFTWARE.
 import Foundation
 import ResearchKit
 
-
 let kStepFormSteps = "steps"
 
 class ActivityFormStep: ActivityStep {
     
-    var itemsArray: [Dictionary<String,Any>] //itemsArray stores the step details
+    var itemsArray: [Dictionary<String, Any>] // itemsArray stores the step details
     
     override init() {
         self.itemsArray = Array()
@@ -41,7 +40,7 @@ class ActivityFormStep: ActivityStep {
             
             super.initWithDict(stepDict: stepDict)
             if Utilities.isValidObject(someObject: stepDict[kStepFormSteps] as AnyObject ){
-                self.itemsArray = (stepDict[kStepFormSteps] as? [Dictionary<String,Any>])!
+                self.itemsArray = (stepDict[kStepFormSteps] as? [Dictionary<String, Any>])!
             }
         } else {
             Logger.sharedInstance.debug("Instruction Step Dictionary is null:\(stepDict)")

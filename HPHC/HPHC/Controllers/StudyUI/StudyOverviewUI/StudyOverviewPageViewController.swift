@@ -23,7 +23,7 @@ import UIKit
 
 class StudyOverviewPageViewController: UIPageViewController {
     
-// MARK:- Viewcontroller Lifecycle
+// MARK: - Viewcontroller Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -39,17 +39,13 @@ class StudyOverviewPageViewController: UIPageViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
-        
     }
     
-// MARK:-
+// MARK: -
     
     /**
      
@@ -60,7 +56,6 @@ class StudyOverviewPageViewController: UIPageViewController {
         return [self.newColoredViewController(ViewController: "First"),
                 self.newColoredViewController(ViewController: "Second")]
     }()
-    
     
     /** 
      
@@ -78,8 +73,7 @@ class StudyOverviewPageViewController: UIPageViewController {
     }
 }
 
-
-// MARK:- Page View Controller delegates
+// MARK: - Page View Controller delegates
 extension StudyOverviewPageViewController: UIPageViewControllerDataSource {
     
     func pageViewController(_ pageViewController: UIPageViewController,

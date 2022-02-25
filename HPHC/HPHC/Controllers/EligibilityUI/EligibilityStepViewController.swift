@@ -22,7 +22,6 @@ import UIKit
 import ResearchKit
 import IQKeyboardManagerSwift
 
-
 let kStudyWithStudyId = "Study with StudyId"
 let kTokenRequired = "Token is required"
 
@@ -33,7 +32,6 @@ class EligibilityStep: ORKStep {
         return false
     }
 }
-
 
 class EligibilityStepViewController: ORKStepViewController {
     
@@ -86,8 +84,8 @@ class EligibilityStepViewController: ORKStepViewController {
             step.type = "token"
         }
         
-       //Delete this
-        //tokenTextField.text = "YGELWVCCX"
+       // Delete this
+        // tokenTextField.text = "YGELWVCCX"
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -134,7 +132,9 @@ class EligibilityStepViewController: ORKStepViewController {
     // MARK: Methods and Button Actions
     
     func showAlert(message: String) {
-        let alert = UIAlertController(title: kErrorTitle as String,message: message as String,preferredStyle: UIAlertController.Style.alert)
+        let alert = UIAlertController(title: kErrorTitle as String,
+                                      message: message as String,
+                                      preferredStyle: UIAlertController.Style.alert)
         alert.addAction(UIAlertAction(title: kTitleOKCapital, style: .default, handler: nil))
         
         self.navigationController?.present(alert, animated: true, completion: nil)
@@ -148,7 +148,7 @@ class EligibilityStepViewController: ORKStepViewController {
         if (token?.isEmpty) == false {
             
             LabKeyServices().verifyEnrollmentToken(studyId: (Study.currentStudy?.studyId)!, token: token!, delegate: self)
-        }else {
+        } else {
             self.showAlert(title: kTitleMessage, message: kMessageValidToken )
             
         }
@@ -173,7 +173,7 @@ extension EligibilityStepViewController: UITextFieldDelegate {
         if string == " "{
             return false
             
-        }else {
+        } else {
             return true
         }
     }
@@ -200,14 +200,13 @@ extension EligibilityStepViewController: NMWebServiceDelegate {
         
         if (tokenTextField.text?.isEmpty) == false {
             self.taskResult.enrollmentToken = tokenTextField.text!
-            //Storing token so that it can be used in case of ineligibility
+            // Storing token so that it can be used in case of ineligibility
             let appdelegate = UIApplication.shared.delegate as! AppDelegate
             appdelegate.consentToken = tokenTextField.text!
             
-        }else {
+        } else {
             self.taskResult.enrollmentToken = ""
         }
-        
         
         self.goForward()
     }
@@ -216,22 +215,20 @@ extension EligibilityStepViewController: NMWebServiceDelegate {
         Logger.sharedInstance.info("requestname : \(requestName)")
         
         self.removeProgressIndicator()
-        print("token in textfield \(tokenTextField.text!)")
-        print("Token response check with error \(error.localizedDescription.localizedCaseInsensitiveContains(tokenTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines)))")
-        
-        if error.localizedDescription.localizedCaseInsensitiveContains(tokenTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines)) {
+                
+        if error.localizedDescription.localizedCaseInsensitiveContains(
+            tokenTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines)) {
             
-            self.showAlert(message: kMessageInvalidTokenOrIfStudyDoesNotExist) //kMessageForInvalidToken
+            self.showAlert(message: kMessageInvalidTokenOrIfStudyDoesNotExist) // kMessageForInvalidToken
             
         } else {
             if error.localizedDescription.localizedCaseInsensitiveContains(kStudyWithStudyId) {
                 
-                self.showAlert(message: kMessageInvalidTokenOrIfStudyDoesNotExist) //kMessageForMissingStudyId
+                self.showAlert(message: kMessageInvalidTokenOrIfStudyDoesNotExist) // kMessageForMissingStudyId
                 
-            }else if error.localizedDescription.localizedCaseInsensitiveContains(kTokenRequired){
+            } else if error.localizedDescription.localizedCaseInsensitiveContains(kTokenRequired){
                 self.showAlert(message: kMessageInvalidTokenOrIfStudyDoesNotExist)
-            }
-            else {
+            } else {
                 self.showAlert(message: Utilities.errorMessageDisplayMessage(error: error))
             }
         }
@@ -255,4 +252,3 @@ open class EligibilityTokenTaskResult: ORKResult {
         }
     }
 }
-

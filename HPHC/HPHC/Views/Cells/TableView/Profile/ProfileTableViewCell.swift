@@ -31,13 +31,11 @@ enum ProfileTableViewCellType: Int {
     case receiveStudyActivityReminder = 5
 }
 
-
 class ProfileTableViewCell: UITableViewCell {
     
     @IBOutlet var labelName: UILabel?
     @IBOutlet var switchToggle: UISwitch?
    
-    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -46,7 +44,6 @@ class ProfileTableViewCell: UITableViewCell {
     @IBAction func switchValueChanged(sender: UISwitch) {
         
     }
-    
     
     /**
      Used to set default values
@@ -58,7 +55,6 @@ class ProfileTableViewCell: UITableViewCell {
         
     }
     
-
     /**
      Used to set toggle value for switch
      @param toggleValue    switch Value
@@ -71,30 +67,26 @@ class ProfileTableViewCell: UITableViewCell {
             if Utilities.isValidValue(someObject: user.settings?.passcode as AnyObject?){
                 self.switchToggle?.isOn = (user.settings?.passcode)!
                 
-            }
-            else{
+            } else {
                  self.switchToggle?.isOn =  false
                 
             }
         case .useTouchId:
             if Utilities.isValidValue(someObject: user.settings?.touchId as AnyObject?){
                 self.switchToggle?.isOn = (user.settings?.touchId)!
-            }
-            else{
+            } else {
                 self.switchToggle?.isOn =  false
             }
         case .receivePushNotifications:
             if Utilities.isValidValue(someObject: user.settings?.remoteNotifications as AnyObject?){
                 self.switchToggle?.isOn = (user.settings?.remoteNotifications)!
-            }
-            else{
+            } else {
                 self.switchToggle?.isOn =  false
             }
         case .receiveStudyActivityReminder:
             if Utilities.isValidValue(someObject: user.settings?.localNotifications as AnyObject?){
                 self.switchToggle?.isOn = (user.settings?.localNotifications)!
-            }
-            else{
+            } else {
                 self.switchToggle?.isOn =  false
             }
         }
@@ -105,5 +97,3 @@ class ProfileTableViewCell: UITableViewCell {
         
     }
 }
-
-

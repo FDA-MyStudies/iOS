@@ -80,12 +80,11 @@ class ProfileViewController: UIViewController, SlideMenuControllerDelegate {
     @IBOutlet var editBarButtonItem: UIBarButtonItem?
     @IBOutlet var tableTopConstraint: NSLayoutConstraint?
     
-    
-// MARK:- ViewController Lifecycle
+// MARK: - ViewController Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //First responder handler for textfields
+        // First responder handler for textfields
         // IQKeyboardManager.sharedManager().enable = true
         
         // Load plist info
@@ -128,8 +127,7 @@ class ProfileViewController: UIViewController, SlideMenuControllerDelegate {
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-        print("Profile View will disapper")
-        
+                
         if isProfileEdited {
             isProfileEdited = false
             UserServices().updateUserProfile(self)
@@ -137,10 +135,10 @@ class ProfileViewController: UIViewController, SlideMenuControllerDelegate {
     }
     
     func leftDidClose() {
-        print("Left menu is closed")
+        
     }
     
-// MARK:- Button Actions
+// MARK: - Button Actions
     
     /**
      
@@ -174,7 +172,7 @@ class ProfileViewController: UIViewController, SlideMenuControllerDelegate {
             
             self.editBarButtonItem?.title = kSaveText
             self.editBarButtonItem?.tintColor = UIColor.black
-        } else{
+        } else {
             self.view.endEditing(true)
             
             if self.validateAllFields() {
@@ -201,7 +199,6 @@ class ProfileViewController: UIViewController, SlideMenuControllerDelegate {
         
         datePickerView?.datePickerMode = .countDownTimer
         
-        
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "HH:mm"
         
@@ -210,7 +207,7 @@ class ProfileViewController: UIViewController, SlideMenuControllerDelegate {
         alertView.view.addSubview(datePickerView!)
         
         let action =   UIAlertAction(title: kActionSheetDoneButtonTitle, style: UIAlertAction.Style.default, handler: {
-            action in
+            _ in
             
             let calender:Calendar? = Calendar.current
             
@@ -231,7 +228,7 @@ class ProfileViewController: UIViewController, SlideMenuControllerDelegate {
             
         })
         let actionCancel =   UIAlertAction(title: kTitleCancel, style: UIAlertAction.Style.default, handler: {
-            action in
+            _ in
             
         })
         
@@ -282,7 +279,9 @@ class ProfileViewController: UIViewController, SlideMenuControllerDelegate {
                                                     $0.userParticipateState.status == .completed) &&
                                                     ($0.studyId == standaloneStudyId)}) ?? []
             } else {
-                joinedStudies = studies?.filter({$0.userParticipateState.status == .inProgress || $0.userParticipateState.status == .completed}) ?? []
+                joinedStudies = studies?.filter(
+                    {$0.userParticipateState.status == .inProgress ||
+                        $0.userParticipateState.status == .completed}) ?? []
             }
 
             if joinedStudies.count != 0 {
@@ -311,7 +310,7 @@ class ProfileViewController: UIViewController, SlideMenuControllerDelegate {
         
     }
      
-// MARK:- Utility Methods
+// MARK: - Utility Methods
     
     /**
      
@@ -344,8 +343,7 @@ class ProfileViewController: UIViewController, SlideMenuControllerDelegate {
      
      */
     func handleSignoutResponse(){
-        debugPrint("singout")
-        
+                
         if ORKPasscodeViewController.isPasscodeStoredInKeychain(){
             ORKPasscodeViewController.removePasscodeFromKeychain()
         }
@@ -407,7 +405,7 @@ class ProfileViewController: UIViewController, SlideMenuControllerDelegate {
         
         if user.settings != nil &&  Utilities.isValidValue(someObject: user.settings?.leadTime as AnyObject?) {
             self.buttonLeadTime?.setTitle(user.settings?.leadTime, for: .normal)
-        } else{
+        } else {
             Logger.sharedInstance.debug("settings/LeadTime is null")
         }
         self.title = kProfileTitleText
@@ -415,7 +413,7 @@ class ProfileViewController: UIViewController, SlideMenuControllerDelegate {
         
         self.buttonLeadTime?.isUserInteractionEnabled =  false
         
-        var touchIdEnabled: Bool? = true
+        // var touchIdEnabled: Bool? = true
         
         // 1. Create a authentication context
         let authenticationContext = LAContext()
@@ -424,7 +422,7 @@ class ProfileViewController: UIViewController, SlideMenuControllerDelegate {
         // 2. Check if the device has a fingerprint sensor
         // If not, show the user an alert view and bail out!
         guard authenticationContext.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error) else {
-            touchIdEnabled = false
+            // touchIdEnabled = false
             return
         }
         
@@ -489,19 +487,19 @@ class ProfileViewController: UIViewController, SlideMenuControllerDelegate {
                 
                 if (user.settings?.localNotifications)! {
                     // on
-                    print("on")
+                    
                   self.addProgressIndicator()
                       
                   self.perform(#selector(self.registerLocalNotification), with: self, afterDelay: 1.0)
                 } else {
-                    print("false")
+                    
                    self.addProgressIndicator()
                   self.perform(#selector(self.cancelAllLocalNotifications), with: self, afterDelay: 1.0)
                   
                 }
             }
             self.editBarButtonItem?.tintColor = UIColor.black
-        } else{
+        } else {
             Logger.sharedInstance.debug("settings is null")
         }
     }
@@ -511,9 +509,9 @@ class ProfileViewController: UIViewController, SlideMenuControllerDelegate {
     UIApplication.shared.cancelAllLocalNotifications()
     let application = UIApplication.shared
     let scheduledNotifications = application.scheduledLocalNotifications!
-    print("notification  \(scheduledNotifications)")
     
-     self.removeProgressIndicator()
+    
+      self.removeProgressIndicator()
   }
   
   @objc func registerLocalNotification(){
@@ -587,7 +585,7 @@ class ProfileViewController: UIViewController, SlideMenuControllerDelegate {
                 taskViewController.navigationBar.prefersLargeTitles = false
                 taskViewController.modalPresentationStyle = .fullScreen
                 self.navigationController?.present(taskViewController, animated: false, completion: nil)
-            } else{
+            } else {
                 let passcodeViewController = ORKPasscodeViewController.passcodeAuthenticationViewController(withText: "", delegate: self)
               
 //              passcodeStateIsEditing = true
@@ -595,7 +593,7 @@ class ProfileViewController: UIViewController, SlideMenuControllerDelegate {
                 passcodeViewController.modalPresentationStyle = .fullScreen
                 self.navigationController?.present(passcodeViewController, animated: false, completion: nil)
             }
-        } else{
+        } else {
             // Anonomous user
             // ORKPasscodeViewController.removePasscodeFromKeychain()
         }
@@ -605,7 +603,7 @@ class ProfileViewController: UIViewController, SlideMenuControllerDelegate {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-// MARK:- Segue Method
+// MARK: - Segue Method
     
     /**
      
@@ -623,7 +621,7 @@ class ProfileViewController: UIViewController, SlideMenuControllerDelegate {
         }
     }
 }
-// MARK:- TableView Data source
+// MARK: - TableView Data source
 extension ProfileViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -679,7 +677,7 @@ extension ProfileViewController: UITableViewDataSource {
                     cell.buttonChangePassword?.setTitleColor(kUIColorForSubmitButtonBackground, for: .normal)
                     
                     cell.isUserInteractionEnabled = true
-                } else{
+                } else {
                     cell.buttonChangePassword?.isUserInteractionEnabled =  false
                     cell.buttonChangePassword?.setTitleColor(UIColor.gray, for: .normal)
                     
@@ -694,17 +692,15 @@ extension ProfileViewController: UITableViewDataSource {
             cell.populateCellData(data: tableViewData, securedText: isSecuredEntry, keyboardType: keyBoardType)
             
             cell.backgroundColor = UIColor.clear
-            
-            
+                
             cell.setCellData(tag: TextFieldTags(rawValue: indexPath.row)!)
-            
-            
+                
             if TextFieldTags(rawValue: indexPath.row) ==  .EmailId{
                 cell.textFieldValue?.isUserInteractionEnabled = false
             }
             
             return cell
-        } else{
+        } else {
             // for ProfileTableViewCell data
             
             let cell = (tableView.dequeueReusableCell(withIdentifier: kProfileTableViewCellIdentifier,
@@ -713,7 +709,7 @@ extension ProfileViewController: UITableViewDataSource {
              
             // TODO: handle toggle Value based on user settings
             
-            if (user.settings != nil) {
+            if user.settings != nil {
                 cell.setToggleValue(indexValue: indexPath.row)
             }
             cell.switchToggle?.tag =  indexPath.row
@@ -724,29 +720,27 @@ extension ProfileViewController: UITableViewDataSource {
             cell.switchToggle?.addTarget(self, action: #selector(ProfileViewController.toggleValueChanged), for: .valueChanged)
             
             cell.isUserInteractionEnabled = self.isCellEditable!
-            
-            
+                
             return cell
         }
         
     }
 }
 
-// MARK:- TableView Delegates
+// MARK: - TableView Delegates
 extension ProfileViewController: UITableViewDelegate{
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        // print(indexPath.row)
+        
     }
 }
 
-// MARK:- Textfield Delegate
+// MARK: - Textfield Delegate
 extension ProfileViewController: UITextFieldDelegate{
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        print(textField.tag)
-         
+                 
     }
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
@@ -759,18 +753,17 @@ extension ProfileViewController: UITextFieldDelegate{
         if  tag == .EmailId {
             if string == " " || finalString.count > 255{
                 return false
-            } else{
+            } else {
                 return true
             }
-        } else{
+        } else {
             return true
         }
         
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
-        print(textField.text!)
-        
+                
         // trimming white spaces
         textField.text =  textField.text?.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
         
@@ -778,24 +771,19 @@ extension ProfileViewController: UITextFieldDelegate{
            
         case TextFieldTags.EmailId.rawValue:
             user.emailId! = textField.text!
-            
-            break
-            
+                        
         case TextFieldTags.Password.rawValue:
             
             user.password! = textField.text!
-            break
+                        
+        default: break
             
-        default:
-            print("No Matching data Found")
-            break
         }
         
     }
 }
 
-
-// MARK:- UserService Response handler
+// MARK: - UserService Response handler
 extension ProfileViewController: NMWebServiceDelegate {
     
     func startedRequest(_ manager: NetworkManager, requestName: NSString) {
@@ -854,7 +842,7 @@ extension ProfileViewController: NMWebServiceDelegate {
         }
     }
 }
-// MARK:- ORKPasscode Delegate
+// MARK: - ORKPasscode Delegate
 extension ProfileViewController: ORKPasscodeDelegate {
     
     func passcodeViewControllerDidFinish(withSuccess viewController: UIViewController) {
@@ -874,7 +862,7 @@ extension ProfileViewController: ORKPasscodeDelegate {
         
     }
     func passcodeViewControllerDidCancel(_ viewController: UIViewController){
-        print("Cancel---\(valPasscodeRow)---\(valPasscodeSection)")
+        
 //      if valPasscodeRow < 99 && valPasscodeSection < 99 {
 //        let indexPath = IndexPath(row: valPasscodeRow, section: valPasscodeSection)
 //        let cell = tableViewProfile?.cellForRow(at: indexPath)  as? ProfileTableViewCell
@@ -902,7 +890,7 @@ extension ProfileViewController: ORKPasscodeDelegate {
     }
     
 }
-// MARK:- ORKTaskViewController Delegate
+// MARK: - ORKTaskViewController Delegate
 extension ProfileViewController: ORKTaskViewControllerDelegate{
     
     func taskViewControllerSupportsSaveAndRestore(_ taskViewController: ORKTaskViewController) -> Bool {
@@ -913,19 +901,19 @@ extension ProfileViewController: ORKTaskViewControllerDelegate{
                                    didFinishWith reason: ORKTaskViewControllerFinishReason,
                                    error: Error?) {
         
-        var taskResult: Any?
+        // var taskResult: Any?
         
         switch reason {
             
         case ORKTaskViewControllerFinishReason.completed:
-            print("completed")
-            taskResult = taskViewController.result
+            
+            // taskResult = taskViewController.result
             
          //   let passcodeDict:NSDictionary? =  ORKKeychainWrapper.object(forKey: "ORKPasscode", error:nil) as? NSDictionary
             
          //   ORKPasscodeViewController.forcePasscode(passcodeDict?.object(forKey: "passcode") as! String, withTouchIdEnabled: false)
              
-            //Following will be executed only when passcode is setted for first time
+            // Following will be executed only when passcode is setted for first time
             
             if taskViewController.task?.identifier != "ChangePassCodeTask"{
                 UserServices().updateUserProfile(self)
@@ -936,20 +924,20 @@ extension ProfileViewController: ORKTaskViewControllerDelegate{
             ud.set(false, forKey: kPasscodeIsPending)
             ud.synchronize()
             
-        case ORKTaskViewControllerFinishReason.failed:
-            print("failed")
-            taskResult = taskViewController.result
+        case ORKTaskViewControllerFinishReason.failed: break
+            
+            // taskResult = taskViewController.result
         case ORKTaskViewControllerFinishReason.discarded:
-            print("discarded")
+            
             
             if taskViewController.task?.identifier != "ChangePassCodeTask"{
                 user.settings?.passcode = user.settings?.passcode == true ? false: true
             }
             
-            taskResult = taskViewController.result
-        case ORKTaskViewControllerFinishReason.saved:
-            print("saved")
-            taskResult = taskViewController.restorationData
+            // taskResult = taskViewController.result
+        case ORKTaskViewControllerFinishReason.saved: break
+            
+            // taskResult = taskViewController.restorationData
             
         }
         

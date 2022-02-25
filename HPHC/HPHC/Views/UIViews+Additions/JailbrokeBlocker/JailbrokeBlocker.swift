@@ -30,10 +30,10 @@ class JailbrokeBlocker: UIView {
         
         super.init(coder: aDecoder)
         
-        //Used to set border color for bottom view
+        // Used to set border color for bottom view
         buttonUpgrade?.layer.borderColor = UIColor.white.cgColor
     }
-    class func instanceFromNib(frame:CGRect,detail:Dictionary<String,Any>?) -> JailbrokeBlocker {
+    class func instanceFromNib(frame:CGRect, detail:Dictionary<String, Any>?) -> JailbrokeBlocker {
         
         let view = UINib(nibName: "JailbrokeBlocker", bundle: nil).instantiate(withOwner: nil, options: nil)[0] as! JailbrokeBlocker
         view.frame = frame
